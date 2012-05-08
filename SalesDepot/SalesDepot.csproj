@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{91A63D2B-BEE3-44D7-A100-CEBF5501B795}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SalesDepot</RootNamespace>
+    <AssemblyName>SalesDepot</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>SalesDepotIcon.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\FormLinkPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessClasses\FormLinkPreview.Designer.cs">
+      <DependentUpon>FormLinkPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessClasses\IFileViewer.cs" />
+    <Compile Include="BusinessClasses\FormPowerPointQuickViewOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessClasses\FormPowerPointQuickViewOld.Designer.cs">
+      <DependentUpon>FormPowerPointQuickViewOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessClasses\FormPowerPointQuickView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessClasses\FormPowerPointQuickView.Designer.cs">
+      <DependentUpon>FormPowerPointQuickView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessClasses\HelpManager.cs" />
+    <Compile Include="BusinessClasses\MasterWizardManager.cs" />
+    <Compile Include="ConfigurationClasses\FormEmailSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConfigurationClasses\FormEmailSettings.Designer.cs">
+      <DependentUpon>FormEmailSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationClasses\ListManager.cs" />
+    <Compile Include="ConfigurationClasses\RegistryHelper.cs" />
+    <Compile Include="CustomControls\ClassicViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ClassicViewControl.Designer.cs">
+      <DependentUpon>ClassicViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\ColumnTitleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\ColumnTitleControl.Designer.cs">
+      <DependentUpon>ColumnTitleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\MultitabLibraryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\MultitabLibraryControl.Designer.cs">
+      <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\NavigationPaneView.cs" />
+    <Compile Include="CustomControls\Viewers\QuickTimeViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\QuickTimeViewer.Designer.cs">
+      <DependentUpon>QuickTimeViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\WebViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\WebViewer.Designer.cs">
+      <DependentUpon>WebViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\VideoViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\VideoViewer.Designer.cs">
+      <DependentUpon>VideoViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\ExcelViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\ExcelViewer.Designer.cs">
+      <DependentUpon>ExcelViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\WordViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\WordViewer.Designer.cs">
+      <DependentUpon>WordViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\PDFViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\PDFViewer.Designer.cs">
+      <DependentUpon>PDFViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\DefaultViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\DefaultViewer.Designer.cs">
+      <DependentUpon>DefaultViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\PowerPointViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\Viewers\PowerPointViewer.Designer.cs">
+      <DependentUpon>PowerPointViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\SolutionViewControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\SolutionViewControl.Designer.cs">
+      <DependentUpon>SolutionViewControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InteropClasses\ExcelHelper.cs" />
+    <Compile Include="InteropClasses\WordHelper.cs" />
+    <Compile Include="BusinessClasses\LibraryDecorator.cs" />
+    <Compile Include="BusinessClasses\LibraryObjects.cs" />
+    <Compile Include="BusinessClasses\PageDecorator.cs" />
+    <Compile Include="ToolClasses\ActivityHelper.cs" />
+    <Compile Include="ToolClasses\ExceptionManager.cs" />
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormEmailLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormEmailLink.Designer.cs">
+      <DependentUpon>FormEmailLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormVideoOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormVideoOutput.designer.cs">
+      <DependentUpon>FormVideoOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormZipFileName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormZipFileName.designer.cs">
+      <DependentUpon>FormZipFileName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormEmailPresentation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormEmailPresentation.Designer.cs">
+      <DependentUpon>FormEmailPresentation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormProgress.Designer.cs">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InteropClasses\OfficeHelper.cs" />
+    <Compile Include="InteropClasses\OutlookHelper.cs" />
+    <Compile Include="InteropClasses\PowerPointHelper.cs" />
+    <Compile Include="InteropClasses\WinAPIHelper.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolForms\FormSaveAsPDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormSaveAsPDF.Designer.cs">
+      <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormSlideOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormSlideOutput.designer.cs">
+      <DependentUpon>FormSlideOutput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormViewOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormViewOptions.Designer.cs">
+      <DependentUpon>FormViewOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormSelectSlideWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormSelectSlideWarning.Designer.cs">
+      <DependentUpon>FormSelectSlideWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormVideoViewOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormVideoViewOptions.Designer.cs">
+      <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BusinessClasses\FormLinkPreview.resx">
+      <DependentUpon>FormLinkPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessClasses\FormPowerPointQuickViewOld.resx">
+      <DependentUpon>FormPowerPointQuickViewOld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessClasses\FormPowerPointQuickView.resx">
+      <DependentUpon>FormPowerPointQuickView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConfigurationClasses\FormEmailSettings.resx">
+      <DependentUpon>FormEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\ClassicViewControl.resx">
+      <DependentUpon>ClassicViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\ColumnTitleControl.resx">
+      <DependentUpon>ColumnTitleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\MultitabLibraryControl.resx">
+      <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\QuickTimeViewer.resx">
+      <DependentUpon>QuickTimeViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\WebViewer.resx">
+      <DependentUpon>WebViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\VideoViewer.resx">
+      <DependentUpon>VideoViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\ExcelViewer.resx">
+      <DependentUpon>ExcelViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\WordViewer.resx">
+      <DependentUpon>WordViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\PDFViewer.resx">
+      <DependentUpon>PDFViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\DefaultViewer.resx">
+      <DependentUpon>DefaultViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\Viewers\PowerPointViewer.resx">
+      <DependentUpon>PowerPointViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\SolutionViewControl.resx">
+      <DependentUpon>SolutionViewControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="ToolForms\FormEmailLink.resx">
+      <DependentUpon>FormEmailLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormVideoOutput.resx">
+      <DependentUpon>FormVideoOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormZipFileName.resx">
+      <DependentUpon>FormZipFileName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormEmailPresentation.resx">
+      <DependentUpon>FormEmailPresentation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormProgress.resx">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\FolderBoxControl.resx">
+      <DependentUpon>FolderBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="ToolForms\FormSaveAsPDF.resx">
+      <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormSlideOutput.resx">
+      <DependentUpon>FormSlideOutput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormViewOptions.resx">
+      <DependentUpon>FormViewOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormSelectSlideWarning.resx">
+      <DependentUpon>FormSelectSlideWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormVideoViewOptions.resx">
+      <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ConfigurationClasses\SettingsManager.cs" />
+    <Compile Include="CustomControls\ColumnPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomControls\FolderBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControls\FolderBoxControl.designer.cs">
+      <DependentUpon>FolderBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomControls\RichTextBoxPrinter.cs" />
+    <Compile Include="BusinessClasses\PackageDecorator.cs" />
+    <Compile Include="BusinessClasses\LibraryManager.cs" />
+    <Compile Include="BusinessClasses\LinkManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PackageLogo.png" />
+    <None Include="Resources\Format Font Smaller.png" />
+    <None Include="Resources\Format Font Larger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxAcroPDFLib">
+      <Guid>{05BFD3F1-6319-4F30-B752-C7A22889BCC4}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.PowerPoint">
+      <Guid>{91493440-5A91-11CF-8700-00AA0060263B}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>10</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <Private>True</Private>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MicrosoftOfficeOutlook.png" />
+    <None Include="Resources\Cancel.png" />
+    <None Include="Resources\InsertAllSlides.png" />
+    <None Include="Resources\InsertSlide.png" />
+    <None Include="Resources\OpenFile.png" />
+    <None Include="Resources\Print.png" />
+    <None Include="Resources\SaveCopy.png" />
+    <None Include="Resources\Arrow.png" />
+    <None Include="Resources\Slides.png" />
+    <None Include="Resources\Help.png" />
+    <None Include="Resources\Acrobat.png" />
+    <None Include="Resources\ClassicView.png" />
+    <None Include="Resources\SolutionView.png" />
+    <None Include="Resources\Search.png" />
+    <None Include="Resources\Send.png" />
+    <None Include="Resources\OpenQuickView.png" />
+    <None Include="Resources\ArrowRightGreen.png" />
+    <None Include="Resources\ArrowLeftGreen.png" />
+    <None Include="Resources\Output.png" />
+    <None Include="Resources\SavePDF.png" />
+    <None Include="Resources\OpenFileBig.png" />
+    <None Include="Resources\SaveCopyBig.png" />
+    <None Include="Resources\SavePDFBig.png" />
+    <None Include="Resources\PrintBig.png" />
+    <None Include="Resources\EmptyImage.png" />
+    <None Include="Resources\ChangeEmailName.png" />
+    <None Include="Resources\ArrowDownGreen.png" />
+    <None Include="Resources\Delete.png" />
+    <None Include="Resources\SearchTags.png" />
+    <None Include="Resources\SearchRecentFiles.png" />
+    <None Include="Resources\SearchLinkName.png" />
+    <None Include="Resources\CalendarEditButton.png" />
+    <None Include="Resources\ListView.png" />
+    <None Include="Resources\ClearSolutionView.png" />
+    <None Include="Resources\Email.png" />
+    <None Include="Resources\InsertVideo.png" />
+    <None Include="Resources\Video.png" />
+    <None Include="Resources\zip.png" />
+    <Content Include="SalesDepotIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
+      <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
+      <Name>OldFormatLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharpZLib\SharpZLib.csproj">
+      <Project>{0E7413FF-EB9E-4714-ACF2-BE3A6A7B2FFD}</Project>
+      <Name>SharpZLib</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\signtool.exe" sign /f d:\temp\NewBizWiz\NLDCertificate.pfx /t http://timestamp.verisign.com/scripts/timstamp.dll  /p bubbadude SalesDepot.exe</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

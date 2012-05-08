@@ -1,0 +1,523 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5EC861C6-F389-4F99-9B01-0EE84D7645DF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FileManager</RootNamespace>
+    <AssemblyName>FileManager</AssemblyName>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\FormAddUrl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessClasses\FormAddUrl.Designer.cs">
+      <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
+    <Compile Include="PresentationClasses\Decorators\DecoratorManager.cs" />
+    <Compile Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.Designer.cs">
+      <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\ColumnTitleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\ColumnTitleControl.Designer.cs">
+      <DependentUpon>ColumnTitleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\ClipartTreeListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\ClipartTreeListControl.Designer.cs">
+      <DependentUpon>ClipartTreeListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\ClientLogosControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\ClientLogosControl.Designer.cs">
+      <DependentUpon>ClientLogosControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\WebArtControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\WebArtControl.Designer.cs">
+      <DependentUpon>WebArtControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\MultitabLibraryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\MultitabLibraryControl.Designer.cs">
+      <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\SalesGalleryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Cliparts\SalesGalleryControl.Designer.cs">
+      <DependentUpon>SalesGalleryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InteropClasses\OutlookHelper.cs" />
+    <Compile Include="InteropClasses\PowerPointHelper.cs" />
+    <Compile Include="SettingsForms\FormAutoWidgets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormAutoWidgets.Designer.cs">
+      <DependentUpon>FormAutoWidgets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForms\FormEmailList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormEmailList.Designer.cs">
+      <DependentUpon>FormEmailList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForms\FormBranding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormBranding.Designer.cs">
+      <DependentUpon>FormBranding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForms\FormPaths.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormPaths.Designer.cs">
+      <DependentUpon>FormPaths.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationClasses\ListManager.cs" />
+    <Compile Include="ConfigurationClasses\SettingsManager.cs" />
+    <Compile Include="BusinessClasses\FolderCopier.cs" />
+    <Compile Include="PresentationClasses\Decorators\LibraryDecorator.cs" />
+    <Compile Include="SettingsForms\FormPages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormPages.Designer.cs">
+      <DependentUpon>FormPages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForms\FormColumns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormColumns.Designer.cs">
+      <DependentUpon>FormColumns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForms\FormDeadLinks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormDeadLinks.Designer.cs">
+      <DependentUpon>FormDeadLinks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsForms\FormSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForms\FormSync.Designer.cs">
+      <DependentUpon>FormSync.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabOvernightsCalendarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabOvernightsCalendarControl.Designer.cs">
+      <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabClipartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabClipartControl.Designer.cs">
+      <DependentUpon>TabClipartControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabHomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabHomeControl.Designer.cs">
+      <DependentUpon>TabHomeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolClasses\ImageHelper.cs" />
+    <Compile Include="ToolClasses\SyncManager.cs" />
+    <Compile Include="ToolForms\FormDeleteIncorrectLinks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormDeleteIncorrectLinks.Designer.cs">
+      <DependentUpon>FormDeleteIncorrectLinks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormIncorrectLinksNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormIncorrectLinksNotification.Designer.cs">
+      <DependentUpon>FormIncorrectLinksNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessClasses\FormAddNetworkFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessClasses\FormAddNetworkFolder.Designer.cs">
+      <DependentUpon>FormAddNetworkFolder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\ColumnPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Decorators\PageDecorator.cs" />
+    <Compile Include="BusinessClasses\FormLinkProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessClasses\FormLinkProperties.Designer.cs">
+      <DependentUpon>FormLinkProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.Designer.cs">
+      <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\FolderBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\FolderBoxControl.designer.cs">
+      <DependentUpon>FolderBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\RichTextBoxPrinter.cs" />
+    <Compile Include="BusinessClasses\LibraryObjects.cs" />
+    <Compile Include="InteropClasses\WinAPIHelper.cs" />
+    <Compile Include="ToolForms\FormSelectWidget.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormSelectWidget.Designer.cs">
+      <DependentUpon>FormSelectWidget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\FormProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormProgress.designer.cs">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessClasses\LibraryManager.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BusinessClasses\FormAddUrl.resx">
+      <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.resx">
+      <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\ColumnTitleControl.resx">
+      <DependentUpon>ColumnTitleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Cliparts\ClipartTreeListControl.resx">
+      <DependentUpon>ClipartTreeListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Cliparts\ClientLogosControl.resx">
+      <DependentUpon>ClientLogosControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Cliparts\WebArtControl.resx">
+      <DependentUpon>WebArtControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\MultitabLibraryControl.resx">
+      <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Cliparts\SalesGalleryControl.resx">
+      <DependentUpon>SalesGalleryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormAutoWidgets.resx">
+      <DependentUpon>FormAutoWidgets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormEmailList.resx">
+      <DependentUpon>FormEmailList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormBranding.resx">
+      <DependentUpon>FormBranding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormPaths.resx">
+      <DependentUpon>FormPaths.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="SettingsForms\FormPages.resx">
+      <DependentUpon>FormPages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormColumns.resx">
+      <DependentUpon>FormColumns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormDeadLinks.resx">
+      <DependentUpon>FormDeadLinks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingsForms\FormSync.resx">
+      <DependentUpon>FormSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabOvernightsCalendarControl.resx">
+      <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabClipartControl.resx">
+      <DependentUpon>TabClipartControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabHomeControl.resx">
+      <DependentUpon>TabHomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormSelectWidget.resx">
+      <DependentUpon>FormSelectWidget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormProgress.resx">
+      <DependentUpon>FormProgress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessClasses\FormAddNetworkFolder.resx">
+      <DependentUpon>FormAddNetworkFolder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormDeleteIncorrectLinks.resx">
+      <DependentUpon>FormDeleteIncorrectLinks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormIncorrectLinksNotification.resx">
+      <DependentUpon>FormIncorrectLinksNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessClasses\FormLinkProperties.resx">
+      <DependentUpon>FormLinkProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
+      <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\FolderBoxControl.resx">
+      <DependentUpon>FolderBoxControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paths.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+    <None Include="Resources\WebArt.png" />
+    <None Include="Resources\SalesGallery.png" />
+    <None Include="Resources\ClientLogos.png" />
+    <None Include="Resources\AutoWidgetsSmall.png" />
+    <None Include="Resources\AutoWidgets.png" />
+    <None Include="Resources\EmptyImage.png" />
+    <None Include="Resources\LinkProperties.png" />
+    <None Include="Resources\AddUrl.png" />
+    <None Include="Resources\AddNetworkShare.png" />
+    <None Include="Resources\Delete.png" />
+    <None Include="Resources\LineBreak.png" />
+    <None Include="Resources\NetworkShare.png" />
+    <None Include="Resources\Url.png" />
+    <None Include="Resources\DownLink.png" />
+    <None Include="Resources\UpLink.png" />
+    <None Include="Resources\ExpiredLinks.png" />
+    <None Include="Resources\EmailList.png" />
+    <None Include="Resources\DeadLinks.png" />
+    <None Include="Resources\Columns.png" />
+    <None Include="Resources\Pages.png" />
+    <None Include="Resources\SyncSettings.png" />
+    <None Include="Resources\Branding.png" />
+    <None Include="Resources\FormatFontLarger.png" />
+    <None Include="Resources\FormatFontSmaller.png" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\PackageLogo.png" />
+    <None Include="app.config" />
+    <None Include="Resources\Green_Plus.png" />
+    <None Include="Resources\Red_Minus.png" />
+    <None Include="Resources\DownArrow.png" />
+    <None Include="Resources\GreenRightArrow.png" />
+    <None Include="Resources\ArrowLeftGreen.png" />
+    <None Include="Resources\text_tree.png" />
+    <None Include="Resources\settings.png" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\OpenFile.png" />
+    <None Include="Resources\InActiveLinksWarning.png" />
+    <None Include="Resources\UpArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ImageListView\ImageListView.csproj">
+      <Project>{0C295FB8-C6C6-4A40-9F19-05A43F353A04}</Project>
+      <Name>ImageListView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
+      <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
+      <Name>OldFormatLoader</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.PowerPoint">
+      <Guid>{91493440-5A91-11CF-8700-00AA0060263B}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>10</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rem "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\signtool.exe" sign /f d:\temp\NewBizWiz\NLDCertificate.pfx /t http://timestamp.verisign.com/scripts/timstamp.dll  /p bubbadude FileManager.exe</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
