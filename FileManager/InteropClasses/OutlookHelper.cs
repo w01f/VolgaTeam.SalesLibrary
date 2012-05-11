@@ -64,7 +64,7 @@ namespace FileManager.InteropClasses
                 foreach (string adress in adresses)
                     mi.Recipients.Add(adress);
                 mi.Body = "Below are the Sales Library Links that are Currently Expired:" + Environment.NewLine + Environment.NewLine + body;
-                if (PresentationClasses.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SendEmail)
+                if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SendEmail)
                     (mi as Outlook._MailItem).Send();
                 else
                     mi.Display(new object());

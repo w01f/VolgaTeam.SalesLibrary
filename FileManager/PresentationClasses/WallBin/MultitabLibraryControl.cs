@@ -7,7 +7,7 @@ namespace FileManager.PresentationClasses.WallBin
     [System.ComponentModel.ToolboxItem(false)]
     public partial class MultitabLibraryControl : UserControl
     {
-        private List<PresentationClasses.Decorators.PageDecorator> _pages = new List<PresentationClasses.Decorators.PageDecorator>();
+        private List<PresentationClasses.WallBin.Decorators.PageDecorator> _pages = new List<PresentationClasses.WallBin.Decorators.PageDecorator>();
 
         public MultitabLibraryControl()
         {
@@ -29,10 +29,10 @@ namespace FileManager.PresentationClasses.WallBin
 
             if (xtraTabControl.SelectedTabPage != null)
             {
-                PresentationClasses.Decorators.PageDecorator pageDecorator = xtraTabControl.SelectedTabPage.Tag as PresentationClasses.Decorators.PageDecorator;
+                PresentationClasses.WallBin.Decorators.PageDecorator pageDecorator = xtraTabControl.SelectedTabPage.Tag as PresentationClasses.WallBin.Decorators.PageDecorator;
                 if (pageDecorator != null)
                 {
-                    PresentationClasses.Decorators.DecoratorManager.Instance.ActiveDecorator.ActivePage = pageDecorator;
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ActivePage = pageDecorator;
                 }
             }
             pnEmpty.SendToBack();
@@ -47,17 +47,17 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (e.Page != null)
             {
-                PresentationClasses.Decorators.PageDecorator pageDecorator = e.Page.Tag as PresentationClasses.Decorators.PageDecorator;
+                PresentationClasses.WallBin.Decorators.PageDecorator pageDecorator = e.Page.Tag as PresentationClasses.WallBin.Decorators.PageDecorator;
                 if (pageDecorator != null)
                 {
-                    PresentationClasses.Decorators.DecoratorManager.Instance.ActiveDecorator.ActivePage = pageDecorator;
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ActivePage = pageDecorator;
                     ConfigurationClasses.SettingsManager.Instance.SelectedPage = pageDecorator.Page.Name;
                     ConfigurationClasses.SettingsManager.Instance.Save();
                 }
             }
         }
 
-        public void AddPages(PresentationClasses.Decorators.PageDecorator[] pages)
+        public void AddPages(PresentationClasses.WallBin.Decorators.PageDecorator[] pages)
         {
             _pages.Clear();
             _pages.AddRange(pages);

@@ -96,19 +96,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
-    <Compile Include="BusinessClasses\FormAddUrl.cs">
+    <Compile Include="ToolForms\WallBin\FormAddUrl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessClasses\FormAddUrl.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormAddUrl.Designer.cs">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
-    <Compile Include="PresentationClasses\Decorators\DecoratorManager.cs" />
+    <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
+    <Compile Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.Designer.cs">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.Designer.cs">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\MonthControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\MonthControl.Designer.cs">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.Designer.cs">
       <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\YearControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\YearControl.Designer.cs">
+      <DependentUpon>YearControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\ColumnTitleControl.cs">
       <SubType>UserControl</SubType>
@@ -148,56 +172,62 @@
     </Compile>
     <Compile Include="InteropClasses\OutlookHelper.cs" />
     <Compile Include="InteropClasses\PowerPointHelper.cs" />
-    <Compile Include="SettingsForms\FormAutoWidgets.cs">
+    <Compile Include="ToolForms\Settings\FormCalendarSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormAutoWidgets.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormCalendarSettings.Designer.cs">
+      <DependentUpon>FormCalendarSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormAutoWidgets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormAutoWidgets.Designer.cs">
       <DependentUpon>FormAutoWidgets.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForms\FormEmailList.cs">
+    <Compile Include="ToolForms\Settings\FormEmailList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormEmailList.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormEmailList.Designer.cs">
       <DependentUpon>FormEmailList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForms\FormBranding.cs">
+    <Compile Include="ToolForms\Settings\FormBranding.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormBranding.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormBranding.Designer.cs">
       <DependentUpon>FormBranding.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForms\FormPaths.cs">
+    <Compile Include="ToolForms\Settings\FormPaths.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormPaths.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormPaths.Designer.cs">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigurationClasses\ListManager.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="BusinessClasses\FolderCopier.cs" />
-    <Compile Include="PresentationClasses\Decorators\LibraryDecorator.cs" />
-    <Compile Include="SettingsForms\FormPages.cs">
+    <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
+    <Compile Include="ToolForms\Settings\FormPages.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormPages.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormPages.Designer.cs">
       <DependentUpon>FormPages.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForms\FormColumns.cs">
+    <Compile Include="ToolForms\Settings\FormColumns.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormColumns.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormColumns.Designer.cs">
       <DependentUpon>FormColumns.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForms\FormDeadLinks.cs">
+    <Compile Include="ToolForms\Settings\FormDeadLinks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormDeadLinks.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormDeadLinks.Designer.cs">
       <DependentUpon>FormDeadLinks.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForms\FormSync.cs">
+    <Compile Include="ToolForms\Settings\FormSync.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForms\FormSync.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormSync.Designer.cs">
       <DependentUpon>FormSync.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\TabOvernightsCalendarControl.cs">
@@ -220,22 +250,22 @@
     </Compile>
     <Compile Include="ToolClasses\ImageHelper.cs" />
     <Compile Include="ToolClasses\SyncManager.cs" />
-    <Compile Include="ToolForms\FormDeleteIncorrectLinks.cs">
+    <Compile Include="ToolForms\WallBin\FormDeleteIncorrectLinks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormDeleteIncorrectLinks.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormDeleteIncorrectLinks.Designer.cs">
       <DependentUpon>FormDeleteIncorrectLinks.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormIncorrectLinksNotification.cs">
+    <Compile Include="ToolForms\WallBin\FormIncorrectLinksNotification.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormIncorrectLinksNotification.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormIncorrectLinksNotification.Designer.cs">
       <DependentUpon>FormIncorrectLinksNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessClasses\FormAddNetworkFolder.cs">
+    <Compile Include="ToolForms\WallBin\FormAddNetworkFolder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessClasses\FormAddNetworkFolder.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormAddNetworkFolder.Designer.cs">
       <DependentUpon>FormAddNetworkFolder.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\ColumnPanel.cs">
@@ -247,11 +277,11 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Decorators\PageDecorator.cs" />
-    <Compile Include="BusinessClasses\FormLinkProperties.cs">
+    <Compile Include="PresentationClasses\WallBin\Decorators\PageDecorator.cs" />
+    <Compile Include="ToolForms\WallBin\FormLinkProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessClasses\FormLinkProperties.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormLinkProperties.Designer.cs">
       <DependentUpon>FormLinkProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.cs">
@@ -269,10 +299,10 @@
     <Compile Include="PresentationClasses\WallBin\RichTextBoxPrinter.cs" />
     <Compile Include="BusinessClasses\LibraryObjects.cs" />
     <Compile Include="InteropClasses\WinAPIHelper.cs" />
-    <Compile Include="ToolForms\FormSelectWidget.cs">
+    <Compile Include="ToolForms\WallBin\FormSelectWidget.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormSelectWidget.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormSelectWidget.Designer.cs">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\FormProgress.cs">
@@ -284,11 +314,23 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BusinessClasses\FormAddUrl.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormAddUrl.resx">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.resx">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\DayControl.resx">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\MonthControl.resx">
+      <DependentUpon>MonthControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.resx">
       <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\YearControl.resx">
+      <DependentUpon>YearControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\ColumnTitleControl.resx">
       <DependentUpon>ColumnTitleControl.cs</DependentUpon>
@@ -308,29 +350,32 @@
     <EmbeddedResource Include="PresentationClasses\Cliparts\SalesGalleryControl.resx">
       <DependentUpon>SalesGalleryControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormAutoWidgets.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormCalendarSettings.resx">
+      <DependentUpon>FormCalendarSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\Settings\FormAutoWidgets.resx">
       <DependentUpon>FormAutoWidgets.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormEmailList.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormEmailList.resx">
       <DependentUpon>FormEmailList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormBranding.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormBranding.resx">
       <DependentUpon>FormBranding.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormPaths.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormPaths.resx">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="SettingsForms\FormPages.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormPages.resx">
       <DependentUpon>FormPages.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormColumns.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormColumns.resx">
       <DependentUpon>FormColumns.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormDeadLinks.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormDeadLinks.resx">
       <DependentUpon>FormDeadLinks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForms\FormSync.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormSync.resx">
       <DependentUpon>FormSync.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabOvernightsCalendarControl.resx">
@@ -342,25 +387,25 @@
     <EmbeddedResource Include="TabPages\TabHomeControl.resx">
       <DependentUpon>TabHomeControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormSelectWidget.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormSelectWidget.resx">
       <DependentUpon>FormSelectWidget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BusinessClasses\FormAddNetworkFolder.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormAddNetworkFolder.resx">
       <DependentUpon>FormAddNetworkFolder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormDeleteIncorrectLinks.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormDeleteIncorrectLinks.resx">
       <DependentUpon>FormDeleteIncorrectLinks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormIncorrectLinksNotification.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormIncorrectLinksNotification.resx">
       <DependentUpon>FormIncorrectLinksNotification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BusinessClasses\FormLinkProperties.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormLinkProperties.resx">
       <DependentUpon>FormLinkProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
@@ -394,6 +439,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Colors.png" />
     <None Include="Resources\WebArt.png" />
     <None Include="Resources\SalesGallery.png" />
     <None Include="Resources\ClientLogos.png" />

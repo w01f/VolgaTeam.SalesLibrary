@@ -31,7 +31,7 @@ namespace FileManager
             if (string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath))
             {
                 AppManager.Instance.ShowWarning("Primary Backup Root is not set.\nYou need to configure application");
-                using (SettingsForms.FormPaths form = new SettingsForms.FormPaths())
+                using (ToolForms.Settings.FormPaths form = new ToolForms.Settings.FormPaths())
                 {
                     if (form.ShowDialog() == DialogResult.Cancel)
                     {

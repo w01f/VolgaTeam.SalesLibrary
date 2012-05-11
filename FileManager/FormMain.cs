@@ -57,6 +57,9 @@ namespace FileManager
             buttonItemCalendarSyncStatusEnabled.CheckedChanged += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarSyncStatus_CheckedChanged);
             buttonEditCalendarLocation.EditValueChanged += new EventHandler(this.TabOvernightsCalendar.buttonEditCalendarLocation_EditValueChanged);
             buttonEditCalendarLocation.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.TabOvernightsCalendar.buttonEditCalendarLocation_ButtonClick);
+            buttonItemCalendarSettings.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarSettings_Click);
+            buttonItemCalendarFontUp.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontUp_Click);
+            buttonItemCalendarFontDown.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontDown_Click);
         }
 
         public static FormMain Instance

@@ -16,6 +16,7 @@ namespace FileManager.ConfigurationClasses
         public const string OldPreviewFolderPrefix = @"!PNG_";
         public const string LibraryLogoFolder = @"!SD-Graphics";
         public const string OvernightsCalendarRootFolderName = @"!OC";
+        public const string SweepPeriodsFileName = @"SweepPeriods.xml";
 
         private static SettingsManager _instance = new SettingsManager();
 
@@ -33,6 +34,7 @@ namespace FileManager.ConfigurationClasses
         public string SelectedLibrary { get; set; }
         public string SelectedPage { get; set; }
         public int FontSize { get; set; }
+        public int CalendarFontSize { get; set; }
         public bool TreeViewVisible { get; set; }
         public bool TreeViewDocked { get; set; }
         public bool MultitabView { get; set; }
@@ -74,6 +76,7 @@ namespace FileManager.ConfigurationClasses
             this.SelectedLibrary = string.Empty;
             this.SelectedPage = string.Empty;
             this.FontSize = 12;
+            this.CalendarFontSize = 10;
             this.TreeViewVisible = false;
             this.TreeViewDocked = true;
             this.MultitabView = true;
@@ -112,6 +115,10 @@ namespace FileManager.ConfigurationClasses
                 if (node != null)
                     if (int.TryParse(node.InnerText, out tempInt))
                         this.FontSize = tempInt;
+                node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
+                if (node != null)
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.CalendarFontSize = tempInt;
                 node = document.SelectSingleNode(@"/LocalSettings/TreeViewVisible");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
@@ -138,6 +145,7 @@ namespace FileManager.ConfigurationClasses
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
             xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
             xml.AppendLine(@"<FontSize>" + this.FontSize.ToString() + @"</FontSize>");
+            xml.AppendLine(@"<CalendarFontSize>" + this.CalendarFontSize.ToString() + @"</CalendarFontSize>");
             xml.AppendLine(@"<TreeViewVisible>" + this.TreeViewVisible.ToString() + @"</TreeViewVisible>");
             xml.AppendLine(@"<TreeViewDocked>" + this.TreeViewDocked.ToString() + @"</TreeViewDocked>");
             xml.AppendLine(@"<MultitabView>" + this.MultitabView.ToString() + @"</MultitabView>");

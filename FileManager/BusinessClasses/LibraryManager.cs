@@ -137,10 +137,8 @@ namespace FileManager.BusinessClasses
                     AddFolderForSync(subFolder, filesWhiteList);
                 foreach (FileInfo file in folder.GetFiles())
                     if (!file.Name.ToLower().Equals("thumbs.db"))
-                    {
                         if (!filesWhiteList.Contains(file.FullName))
                             filesWhiteList.Add(file.FullName);
-                    }
             }
         }
     }
