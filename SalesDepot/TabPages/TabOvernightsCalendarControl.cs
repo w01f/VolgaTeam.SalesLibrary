@@ -1,0 +1,36 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace SalesDepot.TabPages
+{
+    [System.ComponentModel.ToolboxItem(false)]
+    public partial class TabOvernightsCalendarControl : UserControl
+    {
+        public TabOvernightsCalendarControl()
+        {
+            InitializeComponent();
+            this.Dock = DockStyle.Fill;
+        }
+
+        public void buttonItemCalendarFontLarger_Click(object sender, EventArgs e)
+        {
+            ConfigurationClasses.SettingsManager.Instance.CalendarFontSize++;
+            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.FormatCalendar();
+        }
+
+        public void buttonItemCalendarFontSmaller_Click(object sender, EventArgs e)
+        {
+            ConfigurationClasses.SettingsManager.Instance.CalendarFontSize--;
+            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.FormatCalendar();
+        }
+
+        public void buttonItemHelp_Click(object sender, EventArgs e)
+        {
+            BusinessClasses.HelpManager.Instance.OpenHelpLink("oc");
+        }
+    }
+}

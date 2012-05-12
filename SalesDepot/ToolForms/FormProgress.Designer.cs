@@ -36,23 +36,26 @@
             // 
             // gbMain
             // 
+            this.gbMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbMain.Controls.Add(this.prbProgress);
             this.gbMain.Controls.Add(this.laProgress);
             this.gbMain.Location = new System.Drawing.Point(7, 3);
             this.gbMain.Name = "gbMain";
-            this.gbMain.Size = new System.Drawing.Size(269, 66);
+            this.gbMain.Size = new System.Drawing.Size(386, 83);
             this.gbMain.TabIndex = 3;
             this.gbMain.TabStop = false;
             this.gbMain.UseWaitCursor = true;
             // 
             // prbProgress
             // 
-            this.prbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.prbProgress.Location = new System.Drawing.Point(6, 35);
+            this.prbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.prbProgress.Location = new System.Drawing.Point(6, 52);
             this.prbProgress.Maximum = 12;
             this.prbProgress.Name = "prbProgress";
-            this.prbProgress.Size = new System.Drawing.Size(256, 23);
+            this.prbProgress.Size = new System.Drawing.Size(373, 23);
             this.prbProgress.Step = 1;
             this.prbProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.prbProgress.TabIndex = 3;
@@ -60,10 +63,13 @@
             // 
             // laProgress
             // 
+            this.laProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.laProgress.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laProgress.Location = new System.Drawing.Point(6, 12);
             this.laProgress.Name = "laProgress";
-            this.laProgress.Size = new System.Drawing.Size(256, 19);
+            this.laProgress.Size = new System.Drawing.Size(373, 36);
             this.laProgress.TabIndex = 2;
             this.laProgress.Text = "Loading data...";
             this.laProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -72,7 +78,7 @@
             // FormProgress
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(283, 79);
+            this.ClientSize = new System.Drawing.Size(400, 96);
             this.ControlBox = false;
             this.Controls.Add(this.gbMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

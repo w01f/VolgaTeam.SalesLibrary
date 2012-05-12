@@ -34,6 +34,8 @@ namespace SalesDepot.ConfigurationClasses
         public const string PreviewFolderPrefix = @"!PNG_";
         public const string ContentsSlideName = @"WizContents.ppt";
         public const string PreviewContainersRootFolderName = @"!QV";
+        public const string OvernightsCalendarRootFolderName = @"!OC";
+        public const string SweepPeriodsFileName = @"SweepPeriods.xml";
         public const string NoLogoFileName = @"no_logo.png";
         public const string PageLogoFileTemplate = @"page{0}.*";
 
@@ -58,6 +60,7 @@ namespace SalesDepot.ConfigurationClasses
         public string SelectedLibrary { get; set; }
         public string SelectedPage { get; set; }
         public int FontSize { get; set; }
+        public int CalendarFontSize { get; set; }
         public bool ShowEmailBin { get; set; }
         public bool EmailBinSendAsPdf { get; set; }
         public bool EmailBinSendAsZip { get; set; }
@@ -219,6 +222,7 @@ namespace SalesDepot.ConfigurationClasses
             this.SelectedLibrary = string.Empty;
             this.SelectedPage = string.Empty;
             this.FontSize = 12;
+            this.CalendarFontSize = 10;
             this.EmailBinSendAsPdf = false;
             this.EmailBinSendAsZip = false;
             this.EnablePdfConverting = true;
@@ -260,6 +264,10 @@ namespace SalesDepot.ConfigurationClasses
                 if (node != null)
                     if (int.TryParse(node.InnerText, out tempInt))
                         this.FontSize = tempInt;
+                node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
+                if (node != null)
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.CalendarFontSize = tempInt;
                 node = document.SelectSingleNode(@"/LocalSettings/ShowEmailBin");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
@@ -358,6 +366,7 @@ namespace SalesDepot.ConfigurationClasses
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
             xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
             xml.AppendLine(@"<FontSize>" + this.FontSize.ToString() + @"</FontSize>");
+            xml.AppendLine(@"<CalendarFontSize>" + this.CalendarFontSize.ToString() + @"</CalendarFontSize>");
             xml.AppendLine(@"<ShowEmailBin>" + this.ShowEmailBin.ToString() + @"</ShowEmailBin>");
             xml.AppendLine(@"<EmailBinSendAsZip>" + this.EmailBinSendAsZip.ToString() + @"</EmailBinSendAsZip>");
             xml.AppendLine(@"<OldStyleQuickView>" + this.OldStyleQuickView.ToString() + @"</OldStyleQuickView>");

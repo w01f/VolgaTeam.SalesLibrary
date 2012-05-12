@@ -34,21 +34,21 @@ namespace SalesDepot.BusinessClasses
                     switch (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
-                            using (ToolForms.FormViewOptions formViewOptions = new ToolForms.FormViewOptions())
+                            using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
                             {
                                 formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Open)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
                                         OpenCopyOfFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Save)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
                                         SaveFile("Save copy of the file as", sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Print)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
                                         PrintFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Email)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
                                     {
                                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.FullPath));
-                                        using (ToolForms.FormEmailPresentation form = new ToolForms.FormEmailPresentation())
+                                        using (ToolForms.WallBin.FormEmailPresentation form = new ToolForms.WallBin.FormEmailPresentation())
                                         {
                                             form.SelectedFile = link;
                                             form.ActiveSlide = 1;
@@ -84,19 +84,19 @@ namespace SalesDepot.BusinessClasses
                             OpenCopyOfFile(sourceFile);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
-                            using (ToolForms.FormViewOptions formViewOptions = new ToolForms.FormViewOptions())
+                            using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
                             {
                                 formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Open)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
                                         OpenCopyOfFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Save)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
                                         SaveFile("Save copy of the file as", sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Print)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
                                         PrintFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Email)
-                                        using (ToolForms.FormEmailLink form = new ToolForms.FormEmailLink())
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
+                                        using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
                                         {
                                             form.SelectedFile = link;
                                             form.ShowDialog();
@@ -117,19 +117,19 @@ namespace SalesDepot.BusinessClasses
                             OpenCopyOfFile(sourceFile);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
-                            using (ToolForms.FormViewOptions formViewOptions = new ToolForms.FormViewOptions())
+                            using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
                             {
                                 formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Open)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
                                         OpenCopyOfFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Save)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
                                         SaveFile("Save copy of the file as", sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Print)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
                                         PrintFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Email)
-                                        using (ToolForms.FormEmailLink form = new ToolForms.FormEmailLink())
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
+                                        using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
                                         {
                                             form.SelectedFile = link;
                                             form.ShowDialog();
@@ -150,19 +150,19 @@ namespace SalesDepot.BusinessClasses
                             OpenCopyOfFile(sourceFile);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
-                            using (ToolForms.FormViewOptions formViewOptions = new ToolForms.FormViewOptions())
+                            using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
                             {
                                 formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Open)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
                                         OpenCopyOfFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Save)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
                                         SaveFile("Save copy of the file as", sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Print)
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
                                         PrintFile(sourceFile);
-                                    if (formViewOptions.SelectedOption == ToolForms.ViewOptions.Email)
-                                        using (ToolForms.FormEmailLink form = new ToolForms.FormEmailLink())
+                                    if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
+                                        using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
                                         {
                                             form.SelectedFile = link;
                                             form.ShowDialog();
@@ -183,7 +183,7 @@ namespace SalesDepot.BusinessClasses
                             OpenVideo(sourceFile);
                             break;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
-                            using (ToolForms.FormVideoViewOptions formVideoOptions = new ToolForms.FormVideoViewOptions())
+                            using (ToolForms.WallBin.FormVideoViewOptions formVideoOptions = new ToolForms.WallBin.FormVideoViewOptions())
                             {
                                 formVideoOptions.Text = string.Format(formVideoOptions.Text, sourceFile.Name);
                                 if (formVideoOptions.ShowDialog() == DialogResult.OK)
@@ -226,7 +226,7 @@ namespace SalesDepot.BusinessClasses
         public static void PreviewFile(LibraryFile selectedFile)
         {
             string presentationFile = selectedFile.FullPath;
-            using (FormLinkPreview form = new FormLinkPreview())
+            using (ToolForms.WallBin.FormLinkPreview form = new ToolForms.WallBin.FormLinkPreview())
             {
                 FileInfo file = new FileInfo(presentationFile);
                 if (file.Exists)
@@ -388,7 +388,7 @@ namespace SalesDepot.BusinessClasses
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;
-            using (FormPowerPointQuickView form = new FormPowerPointQuickView())
+            using (ToolForms.WallBin.FormPowerPointQuickView form = new ToolForms.WallBin.FormPowerPointQuickView())
             {
                 FileInfo file = new FileInfo(presentationFile);
                 if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
@@ -425,7 +425,7 @@ namespace SalesDepot.BusinessClasses
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;
-            using (FormPowerPointQuickViewOld form = new FormPowerPointQuickViewOld())
+            using (ToolForms.WallBin.FormPowerPointQuickViewOld form = new ToolForms.WallBin.FormPowerPointQuickViewOld())
             {
                 FileInfo file = new FileInfo(selectedFile.FullPath);
                 if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
@@ -473,7 +473,7 @@ namespace SalesDepot.BusinessClasses
                         Application.DoEvents();
                     form.Close();
                     if (result)
-                        using (ToolForms.FormVideoOutput formOutput = new ToolForms.FormVideoOutput())
+                        using (ToolForms.WallBin.FormVideoOutput formOutput = new ToolForms.WallBin.FormVideoOutput())
                         {
                             DialogResult formResult = formOutput.ShowDialog();
                             switch (formResult)

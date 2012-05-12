@@ -98,113 +98,157 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
-    <Compile Include="BusinessClasses\FormLinkPreview.cs">
+    <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
+    <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.designer.cs">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\MonthControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\MonthControl.designer.cs">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.designer.cs">
+      <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.designer.cs">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\YearControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\YearControl.designer.cs">
+      <DependentUpon>YearControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
+    <Compile Include="TabPages\TabHomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabHomeControl.Designer.cs">
+      <DependentUpon>TabHomeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabOvernightsCalendarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabOvernightsCalendarControl.Designer.cs">
+      <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormLinkPreview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessClasses\FormLinkPreview.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormLinkPreview.Designer.cs">
       <DependentUpon>FormLinkPreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessClasses\IFileViewer.cs" />
-    <Compile Include="BusinessClasses\FormPowerPointQuickViewOld.cs">
+    <Compile Include="PresentationClasses\Viewers\IFileViewer.cs" />
+    <Compile Include="ToolForms\WallBin\FormPowerPointQuickViewOld.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessClasses\FormPowerPointQuickViewOld.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormPowerPointQuickViewOld.Designer.cs">
       <DependentUpon>FormPowerPointQuickViewOld.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessClasses\FormPowerPointQuickView.cs">
+    <Compile Include="ToolForms\WallBin\FormPowerPointQuickView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BusinessClasses\FormPowerPointQuickView.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormPowerPointQuickView.Designer.cs">
       <DependentUpon>FormPowerPointQuickView.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessClasses\HelpManager.cs" />
     <Compile Include="BusinessClasses\MasterWizardManager.cs" />
-    <Compile Include="ConfigurationClasses\FormEmailSettings.cs">
+    <Compile Include="ToolForms\Settings\FormEmailSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ConfigurationClasses\FormEmailSettings.Designer.cs">
+    <Compile Include="ToolForms\Settings\FormEmailSettings.Designer.cs">
       <DependentUpon>FormEmailSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="ConfigurationClasses\ListManager.cs" />
     <Compile Include="ConfigurationClasses\RegistryHelper.cs" />
-    <Compile Include="CustomControls\ClassicViewControl.cs">
+    <Compile Include="PresentationClasses\WallBin\ClassicViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\ClassicViewControl.Designer.cs">
+    <Compile Include="PresentationClasses\WallBin\ClassicViewControl.Designer.cs">
       <DependentUpon>ClassicViewControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\ColumnTitleControl.cs">
+    <Compile Include="PresentationClasses\WallBin\ColumnTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\ColumnTitleControl.Designer.cs">
+    <Compile Include="PresentationClasses\WallBin\ColumnTitleControl.Designer.cs">
       <DependentUpon>ColumnTitleControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\MultitabLibraryControl.cs">
+    <Compile Include="PresentationClasses\WallBin\MultitabLibraryControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\MultitabLibraryControl.Designer.cs">
+    <Compile Include="PresentationClasses\WallBin\MultitabLibraryControl.Designer.cs">
       <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\NavigationPaneView.cs" />
-    <Compile Include="CustomControls\Viewers\QuickTimeViewer.cs">
+    <Compile Include="PresentationClasses\WallBin\NavigationPaneView.cs" />
+    <Compile Include="PresentationClasses\Viewers\QuickTimeViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\QuickTimeViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\QuickTimeViewer.Designer.cs">
       <DependentUpon>QuickTimeViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\WebViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\WebViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\WebViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\WebViewer.Designer.cs">
       <DependentUpon>WebViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\VideoViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\VideoViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\VideoViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\VideoViewer.Designer.cs">
       <DependentUpon>VideoViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\ExcelViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\ExcelViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\ExcelViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\ExcelViewer.Designer.cs">
       <DependentUpon>ExcelViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\WordViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\WordViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\WordViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\WordViewer.Designer.cs">
       <DependentUpon>WordViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\PDFViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\PDFViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\PDFViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\PDFViewer.Designer.cs">
       <DependentUpon>PDFViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\DefaultViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\DefaultViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\DefaultViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\DefaultViewer.Designer.cs">
       <DependentUpon>DefaultViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\Viewers\PowerPointViewer.cs">
+    <Compile Include="PresentationClasses\Viewers\PowerPointViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\Viewers\PowerPointViewer.Designer.cs">
+    <Compile Include="PresentationClasses\Viewers\PowerPointViewer.Designer.cs">
       <DependentUpon>PowerPointViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\SolutionViewControl.cs">
+    <Compile Include="PresentationClasses\WallBin\SolutionViewControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\SolutionViewControl.Designer.cs">
+    <Compile Include="PresentationClasses\WallBin\SolutionViewControl.Designer.cs">
       <DependentUpon>SolutionViewControl.cs</DependentUpon>
     </Compile>
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
-    <Compile Include="BusinessClasses\LibraryDecorator.cs" />
+    <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
     <Compile Include="BusinessClasses\LibraryObjects.cs" />
-    <Compile Include="BusinessClasses\PageDecorator.cs" />
+    <Compile Include="PresentationClasses\WallBin\Decorators\PageDecorator.cs" />
     <Compile Include="ToolClasses\ActivityHelper.cs" />
     <Compile Include="ToolClasses\ExceptionManager.cs" />
     <Compile Include="FormMain.cs">
@@ -213,28 +257,28 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormEmailLink.cs">
+    <Compile Include="ToolForms\WallBin\FormEmailLink.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormEmailLink.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormEmailLink.Designer.cs">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormVideoOutput.cs">
+    <Compile Include="ToolForms\WallBin\FormVideoOutput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormVideoOutput.designer.cs">
+    <Compile Include="ToolForms\WallBin\FormVideoOutput.designer.cs">
       <DependentUpon>FormVideoOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormZipFileName.cs">
+    <Compile Include="ToolForms\WallBin\FormZipFileName.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormZipFileName.designer.cs">
+    <Compile Include="ToolForms\WallBin\FormZipFileName.designer.cs">
       <DependentUpon>FormZipFileName.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormEmailPresentation.cs">
+    <Compile Include="ToolForms\WallBin\FormEmailPresentation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormEmailPresentation.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormEmailPresentation.Designer.cs">
       <DependentUpon>FormEmailPresentation.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\FormProgress.cs">
@@ -249,98 +293,119 @@
     <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToolForms\FormSaveAsPDF.cs">
+    <Compile Include="ToolForms\WallBin\FormSaveAsPDF.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormSaveAsPDF.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormSaveAsPDF.Designer.cs">
       <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormSlideOutput.cs">
+    <Compile Include="ToolForms\WallBin\FormSlideOutput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormSlideOutput.designer.cs">
+    <Compile Include="ToolForms\WallBin\FormSlideOutput.designer.cs">
       <DependentUpon>FormSlideOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormViewOptions.cs">
+    <Compile Include="ToolForms\WallBin\FormViewOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormViewOptions.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormViewOptions.Designer.cs">
       <DependentUpon>FormViewOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormSelectSlideWarning.cs">
+    <Compile Include="ToolForms\WallBin\FormSelectSlideWarning.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormSelectSlideWarning.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormSelectSlideWarning.Designer.cs">
       <DependentUpon>FormSelectSlideWarning.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\FormVideoViewOptions.cs">
+    <Compile Include="ToolForms\WallBin\FormVideoViewOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\FormVideoViewOptions.Designer.cs">
+    <Compile Include="ToolForms\WallBin\FormVideoViewOptions.Designer.cs">
       <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BusinessClasses\FormLinkPreview.resx">
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\DayControl.resx">
+      <DependentUpon>DayControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\MonthControl.resx">
+      <DependentUpon>MonthControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\OvernightsCalendarControl.resx">
+      <DependentUpon>OvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.resx">
+      <DependentUpon>WeekDayHeaderControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\YearControl.resx">
+      <DependentUpon>YearControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabHomeControl.resx">
+      <DependentUpon>TabHomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabOvernightsCalendarControl.resx">
+      <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WallBin\FormLinkPreview.resx">
       <DependentUpon>FormLinkPreview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BusinessClasses\FormPowerPointQuickViewOld.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormPowerPointQuickViewOld.resx">
       <DependentUpon>FormPowerPointQuickViewOld.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BusinessClasses\FormPowerPointQuickView.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormPowerPointQuickView.resx">
       <DependentUpon>FormPowerPointQuickView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ConfigurationClasses\FormEmailSettings.resx">
+    <EmbeddedResource Include="ToolForms\Settings\FormEmailSettings.resx">
       <DependentUpon>FormEmailSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\ClassicViewControl.resx">
+    <EmbeddedResource Include="PresentationClasses\WallBin\ClassicViewControl.resx">
       <DependentUpon>ClassicViewControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\ColumnTitleControl.resx">
+    <EmbeddedResource Include="PresentationClasses\WallBin\ColumnTitleControl.resx">
       <DependentUpon>ColumnTitleControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\MultitabLibraryControl.resx">
+    <EmbeddedResource Include="PresentationClasses\WallBin\MultitabLibraryControl.resx">
       <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\QuickTimeViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\QuickTimeViewer.resx">
       <DependentUpon>QuickTimeViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\WebViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\WebViewer.resx">
       <DependentUpon>WebViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\VideoViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\VideoViewer.resx">
       <DependentUpon>VideoViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\ExcelViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\ExcelViewer.resx">
       <DependentUpon>ExcelViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\WordViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\WordViewer.resx">
       <DependentUpon>WordViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\PDFViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\PDFViewer.resx">
       <DependentUpon>PDFViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\DefaultViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\DefaultViewer.resx">
       <DependentUpon>DefaultViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\Viewers\PowerPointViewer.resx">
+    <EmbeddedResource Include="PresentationClasses\Viewers\PowerPointViewer.resx">
       <DependentUpon>PowerPointViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\SolutionViewControl.resx">
+    <EmbeddedResource Include="PresentationClasses\WallBin\SolutionViewControl.resx">
       <DependentUpon>SolutionViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
-    <EmbeddedResource Include="ToolForms\FormEmailLink.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormEmailLink.resx">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormVideoOutput.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormVideoOutput.resx">
       <DependentUpon>FormVideoOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormZipFileName.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormZipFileName.resx">
       <DependentUpon>FormZipFileName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormEmailPresentation.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormEmailPresentation.resx">
       <DependentUpon>FormEmailPresentation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormProgress.resx">
@@ -351,7 +416,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="CustomControls\FolderBoxControl.resx">
+    <EmbeddedResource Include="PresentationClasses\WallBin\FolderBoxControl.resx">
       <DependentUpon>FolderBoxControl.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -359,20 +424,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ToolForms\FormSaveAsPDF.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormSaveAsPDF.resx">
       <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormSlideOutput.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormSlideOutput.resx">
       <DependentUpon>FormSlideOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormViewOptions.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormViewOptions.resx">
       <DependentUpon>FormViewOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormSelectSlideWarning.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormSelectSlideWarning.resx">
       <DependentUpon>FormSelectSlideWarning.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\FormVideoViewOptions.resx">
+    <EmbeddedResource Include="ToolForms\WallBin\FormVideoViewOptions.resx">
       <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -387,17 +452,17 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
-    <Compile Include="CustomControls\ColumnPanel.cs">
+    <Compile Include="PresentationClasses\WallBin\ColumnPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CustomControls\FolderBoxControl.cs">
+    <Compile Include="PresentationClasses\WallBin\FolderBoxControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CustomControls\FolderBoxControl.designer.cs">
+    <Compile Include="PresentationClasses\WallBin\FolderBoxControl.designer.cs">
       <DependentUpon>FolderBoxControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomControls\RichTextBoxPrinter.cs" />
-    <Compile Include="BusinessClasses\PackageDecorator.cs" />
+    <Compile Include="PresentationClasses\WallBin\RichTextBoxPrinter.cs" />
+    <Compile Include="PresentationClasses\WallBin\Decorators\PackageDecorator.cs" />
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="BusinessClasses\LinkManager.cs" />
   </ItemGroup>

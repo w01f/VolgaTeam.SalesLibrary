@@ -112,6 +112,8 @@ namespace SalesDepot.BusinessClasses
         public List<string> EmailList { get; set; }
         public List<AutoWidget> AutoWidgets { get; set; }
 
+        public OvernightsCalendar OvernightsCalendar { get; set; }
+
         public Library(string name, DirectoryInfo folder)
         {
             this.Identifier = Guid.NewGuid();
@@ -121,6 +123,7 @@ namespace SalesDepot.BusinessClasses
             this.Pages = new List<LibraryPage>();
             this.EmailList = new List<string>();
             this.AutoWidgets = new List<AutoWidget>();
+            this.OvernightsCalendar = new OvernightsCalendar(this);
             Load();
         }
 
@@ -233,6 +236,10 @@ namespace SalesDepot.BusinessClasses
                         autoWidget.Deserialize(childNode);
                         this.AutoWidgets.Add(autoWidget);
                     }
+
+                node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
+                if (node != null)
+                    this.OvernightsCalendar.Deserialize(node);
                 this.IsConfigured = true;
             }
             if (this.Pages.Count == 0)
