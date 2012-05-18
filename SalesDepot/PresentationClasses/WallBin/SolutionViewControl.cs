@@ -633,6 +633,73 @@ namespace SalesDepot.PresentationClasses.WallBin
         #endregion
 
         #region Other GUI Event Handlers
+        private void SolutionViewControl_Load(object sender, EventArgs e)
+        {
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 0)
+            {
+                navBarGroup1.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0];
+                navBarGroup1.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Description;
+                navBarGroup1.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Logo;
+                checkedListBoxControlGroup1.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Tags.ToArray());
+            }
+            else
+                navBarGroup1.Visible = false;
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 1)
+            {
+                navBarGroup2.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1];
+                navBarGroup2.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Description;
+                navBarGroup2.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Logo;
+                checkedListBoxControlGroup2.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Tags.ToArray());
+            }
+            else
+                navBarGroup2.Visible = false;
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 2)
+            {
+                navBarGroup3.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2];
+                navBarGroup3.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Description;
+                navBarGroup3.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Logo;
+                checkedListBoxControlGroup3.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Tags.ToArray());
+            }
+            else
+                navBarGroup3.Visible = false;
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 3)
+            {
+                navBarGroup4.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3];
+                navBarGroup4.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Description;
+                navBarGroup4.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Logo;
+                checkedListBoxControlGroup4.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Tags.ToArray());
+            }
+            else
+                navBarGroup4.Visible = false;
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 4)
+            {
+                navBarGroup5.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4];
+                navBarGroup5.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Description;
+                navBarGroup5.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Logo;
+                checkedListBoxControlGroup5.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Tags.ToArray());
+            }
+            else
+                navBarGroup5.Visible = false;
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 5)
+            {
+                navBarGroup6.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5];
+                navBarGroup6.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Description;
+                navBarGroup6.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Logo;
+                checkedListBoxControlGroup6.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Tags.ToArray());
+            }
+            else
+                navBarGroup6.Visible = false;
+            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 6)
+            {
+                navBarGroup7.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6];
+                navBarGroup7.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Description;
+                navBarGroup7.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Logo;
+                checkedListBoxControlGroup7.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Tags.ToArray());
+            }
+            else
+                navBarGroup7.Visible = false;
+        }
+
         private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
         {
             UpdateSearchButtonStatus();

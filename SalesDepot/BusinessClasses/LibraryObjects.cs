@@ -48,17 +48,24 @@ namespace SalesDepot.BusinessClasses
 
         private void LoadSalesDepots()
         {
+            Library library = null;
             if (this.Folder.GetFiles("*.xml").Length > 0 && !this.Folder.Name.ToLower().Equals("_gsdata_"))
-                _libraryCollection.Add(new Library(this.Folder.Name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage) ? this.Folder.Parent.Name : this.Folder.Name, this.Folder));
+            {
+                library = new Library(this, this.Folder.Name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage) ? this.Folder.Parent.Name : this.Folder.Name, this.Folder);
+                if (library != null && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
+                    _libraryCollection.Add(library);
+            }
             else
                 foreach (DirectoryInfo subFolder in this.Folder.GetDirectories())
                     if (!subFolder.Name.StartsWith("!") && !subFolder.Name.ToLower().Equals("_gsdata_"))
                     {
                         DirectoryInfo primaryRootFolder = new DirectoryInfo(Path.Combine(subFolder.FullName, ConfigurationClasses.SettingsManager.WholeDriveFilesStorage));
                         if (primaryRootFolder.Exists)
-                            _libraryCollection.Add(new Library(primaryRootFolder.Parent.Name, primaryRootFolder));
+                            library = new Library(this,primaryRootFolder.Parent.Name, primaryRootFolder);
                         else
-                            _libraryCollection.Add(new Library(subFolder.Name, subFolder));
+                            library = new Library(this, subFolder.Name, subFolder);
+                        if (library != null && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
+                            _libraryCollection.Add(library);
                     }
         }
 
@@ -89,8 +96,10 @@ namespace SalesDepot.BusinessClasses
 
     public class Library
     {
+        private string _name;
+
+        public LibraryPackage Parent { get; private set; }
         public Guid Identifier { get; set; }
-        public string Name { get; set; }
         public DirectoryInfo Folder { get; set; }
         public string BrandingText { get; set; }
         public DateTime SyncDate { get; set; }
@@ -114,11 +123,23 @@ namespace SalesDepot.BusinessClasses
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
-        public Library(string name, DirectoryInfo folder)
+        public string Name 
         {
+            get
+            {
+                if (_name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage))
+                    return this.Parent.Name;
+                else
+                    return _name;
+            } 
+        }
+
+        public Library(LibraryPackage parent,string name, DirectoryInfo folder)
+        {
+            this.Parent = parent;
             this.Identifier = Guid.NewGuid();
             this.Folder = folder;
-            this.Name = name;
+            _name = name;
             this.IsConfigured = false;
             this.Pages = new List<LibraryPage>();
             this.EmailList = new List<string>();
@@ -156,7 +177,7 @@ namespace SalesDepot.BusinessClasses
                 XmlNode node = document.SelectSingleNode(@"/Cache");
                 if (node != null)
                 {
-                    FileManager.BusinessClasses.OldFormatLibrary oldFormatLibrary = new FileManager.BusinessClasses.OldFormatLibrary(this.Name, this.Folder);
+                    FileManager.BusinessClasses.OldFormatLibrary oldFormatLibrary = new FileManager.BusinessClasses.OldFormatLibrary(_name, this.Folder);
                     document.LoadXml(oldFormatLibrary.SerializeInNewFormat());
                     LibraryManager.Instance.OldFormatDetected = true;
                 }
@@ -164,7 +185,7 @@ namespace SalesDepot.BusinessClasses
                     LibraryManager.Instance.OldFormatDetected = false;
                 node = document.SelectSingleNode(@"/Library/Name");
                 if (node != null)
-                    this.Name = node.InnerText;
+                    _name = node.InnerText;
                 node = document.SelectSingleNode(@"/Library/BrandingText");
                 if (node != null)
                     this.BrandingText = node.InnerText;

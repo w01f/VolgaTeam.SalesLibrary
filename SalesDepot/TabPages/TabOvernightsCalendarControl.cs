@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 
 namespace SalesDepot.TabPages
@@ -10,6 +12,12 @@ namespace SalesDepot.TabPages
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+        }
+
+        public void buttonItemCalendarDisclaimer_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.DisclaimerPath))
+                Process.Start(ConfigurationClasses.SettingsManager.Instance.DisclaimerPath);
         }
 
         public void buttonItemCalendarFontLarger_Click(object sender, EventArgs e)

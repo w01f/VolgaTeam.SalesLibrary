@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -32,7 +34,8 @@ namespace SalesDepot.BusinessClasses
                     if (!subFolder.Name.StartsWith("!") && !subFolder.Name.ToLower().Equals("_gsdata_"))
                     {
                         LibraryPackage package = new LibraryPackage(subFolder.Name, subFolder);
-                        this.LibraryPackageCollection.Add(package);
+                        if (package.SalesDepotCollection.Count > 0)
+                            this.LibraryPackageCollection.Add(package);
                     }
                 }
             }

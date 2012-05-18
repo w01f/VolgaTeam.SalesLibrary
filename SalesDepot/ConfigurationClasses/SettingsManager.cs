@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -43,6 +44,8 @@ namespace SalesDepot.ConfigurationClasses
         private string _defaultSettingsFilePath = string.Empty;
         private string _defaultViewPath = string.Empty;
         private string _viewButtonsPath = string.Empty;
+        private string _appIDFile = string.Empty;
+        private string _approvedLibrariesFile = string.Empty;
 
         public bool IsConfigured { get; set; }
 
@@ -55,10 +58,13 @@ namespace SalesDepot.ConfigurationClasses
         public string SalesDepotName { get; set; }
         public string IconPath { get; set; }
         public string LibraryLogoFolder { get; set; }
+        public string CalendarLogoPath { get; set; }
+        public string DisclaimerPath { get; set; }
 
         public string SelectedPackage { get; set; }
         public string SelectedLibrary { get; set; }
         public string SelectedPage { get; set; }
+        public int SelectedCalendarYear { get; set; }
         public int FontSize { get; set; }
         public int CalendarFontSize { get; set; }
         public bool ShowEmailBin { get; set; }
@@ -86,6 +92,8 @@ namespace SalesDepot.ConfigurationClasses
         public string SolutionTitle { get; set; }
         public KeyWordFileFilters KeyWordFilters { get; private set; }
 
+        public Guid AppID { get; set; }
+        public List<string> ApprovedLibraries { get; private set; }
 
         public bool SolutionView
         {
@@ -110,6 +118,8 @@ namespace SalesDepot.ConfigurationClasses
             _defaultSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ResetSettings.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             _defaultViewPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\defaultview.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             _viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            _appIDFile = string.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            _approvedLibrariesFile = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApprovedLibraries.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
 
             this.DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.SalesDepotRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
@@ -118,9 +128,15 @@ namespace SalesDepot.ConfigurationClasses
             this.TempPath = string.Format(@"{0}\newlocaldirect.com\Sync\Temp", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.LibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DefaultWizard = string.Empty;
             this.SalesDepotName = string.Empty;
             this.KeyWordFilters = new KeyWordFileFilters();
+
+            this.ApprovedLibraries = new List<string>();
+            LoadAppID();
+            LoadApprovedLibraries();
         }
 
         private void LoadDefaultViewSettings()
@@ -221,6 +237,7 @@ namespace SalesDepot.ConfigurationClasses
             this.SelectedPackage = string.Empty;
             this.SelectedLibrary = string.Empty;
             this.SelectedPage = string.Empty;
+            this.SelectedCalendarYear = 0;
             this.FontSize = 12;
             this.CalendarFontSize = 10;
             this.EmailBinSendAsPdf = false;
@@ -260,6 +277,10 @@ namespace SalesDepot.ConfigurationClasses
                 node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
                 if (node != null)
                     this.SelectedPage = node.InnerText;
+                node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
+                if (node != null)
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.SelectedCalendarYear = tempInt;
                 node = document.SelectSingleNode(@"/LocalSettings/FontSize");
                 if (node != null)
                     if (int.TryParse(node.InnerText, out tempInt))
@@ -304,7 +325,6 @@ namespace SalesDepot.ConfigurationClasses
                         this.KeyWordFilters.Deserialize(node);
                 }
 
-
                 if (File.Exists(_defaultSettingsFilePath))
                 {
                     XmlDocument defaultDocument = new XmlDocument();
@@ -315,7 +335,7 @@ namespace SalesDepot.ConfigurationClasses
                     }
                     catch
                     {
-                    } 
+                    }
                 }
 
                 node = document.SelectSingleNode(@"/LocalSettings/OldStyleQuickView");
@@ -365,6 +385,7 @@ namespace SalesDepot.ConfigurationClasses
             xml.AppendLine(@"<SelectedPackage>" + this.SelectedPackage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPackage>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
             xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
+            xml.AppendLine(@"<SelectedCalendarYear>" + this.SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
             xml.AppendLine(@"<FontSize>" + this.FontSize.ToString() + @"</FontSize>");
             xml.AppendLine(@"<CalendarFontSize>" + this.CalendarFontSize.ToString() + @"</CalendarFontSize>");
             xml.AppendLine(@"<ShowEmailBin>" + this.ShowEmailBin.ToString() + @"</ShowEmailBin>");
@@ -450,6 +471,59 @@ namespace SalesDepot.ConfigurationClasses
             catch
             {
             }
+        }
+
+        private void LoadAppID()
+        {
+            this.AppID = Guid.Empty;
+            string appIDPath = Path.Combine(Application.StartupPath, _appIDFile);
+            if (File.Exists(appIDPath))
+            {
+                XmlDocument document = new XmlDocument();
+                document.Load(appIDPath);
+
+                XmlNode node = document.SelectSingleNode(@"/AppID");
+                if (node != null)
+                    if (!string.IsNullOrEmpty(node.InnerText))
+                        this.AppID = new Guid(node.InnerText);
+            }
+        }
+
+        private void LoadApprovedLibraries()
+        {
+            bool userExisted = false;
+            this.ApprovedLibraries.Clear();
+            if (File.Exists(_approvedLibrariesFile))
+            {
+                XmlDocument document = new XmlDocument();
+                document.Load(_approvedLibrariesFile);
+
+                XmlNode node = document.SelectSingleNode(@"/ApprovedLibraries");
+                if (node != null)
+                    foreach (XmlNode userNode in node.ChildNodes)
+                        if (userNode.Name.Equals("User"))
+                        {
+                            string userName = string.Empty;
+                            foreach (XmlAttribute attribute in userNode.Attributes)
+                            {
+                                switch (attribute.Name)
+                                {
+                                    case "Name":
+                                        userName = attribute.Value;
+                                        break;
+                                }
+                            }
+                            if (userName.Equals(Environment.UserName))
+                            {
+                                userExisted = true;
+                                foreach (XmlNode libraryNode in userNode.ChildNodes)
+                                    if (libraryNode.Name.Equals("Library"))
+                                        this.ApprovedLibraries.Add(libraryNode.InnerText.ToLower());
+                            }
+                        }
+            }
+            if (this.ApprovedLibraries.Count == 0 && userExisted)
+                this.ApprovedLibraries.Add("None");
         }
     }
 

@@ -615,6 +615,8 @@
     <None Include="Resources\InsertVideo.png" />
     <None Include="Resources\Video.png" />
     <None Include="Resources\zip.png" />
+    <None Include="Resources\CalendarDisclaimerLogo.png" />
+    <None Include="Resources\CalendarLogo.png" />
     <Content Include="SalesDepotIcon.ico" />
   </ItemGroup>
   <ItemGroup>

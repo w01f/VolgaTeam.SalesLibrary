@@ -77,6 +77,7 @@ namespace SalesDepot
             buttonItemSettingsEmail.Click += new EventHandler(this.TabHome.buttonItemSettingsEmail_Click);
             buttonItemSettingsHelp.Click += new EventHandler(this.TabHome.buttonItemSettingsHelp_Click);
 
+            labelItemCalendarDisclaimerLogo.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarDisclaimer_Click);
             buttonItemCalendarFontSizeLarger.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontLarger_Click);
             buttonItemCalendarFontSizeSmaler.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontSmaller_Click);
             buttonItemCalendarHelp.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemHelp_Click);
@@ -120,6 +121,8 @@ namespace SalesDepot
             SDRecorder.Instance.StartRecording();
             if (File.Exists(ConfigurationClasses.SettingsManager.Instance.IconPath))
                 this.Icon = new Icon(ConfigurationClasses.SettingsManager.Instance.IconPath);
+            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath))
+                labelItemCalendarLogo.Image = new Bitmap(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath);
         }
 
         private void FormMain_Shown(object sender, EventArgs e)

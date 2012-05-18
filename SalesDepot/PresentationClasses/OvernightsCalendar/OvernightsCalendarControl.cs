@@ -33,9 +33,12 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
                     this.Years.Add(new YearControl(year));
                 xtraTabControl.TabPages.AddRange(this.Years.ToArray());
 
-                YearControl firstTab = this.Years.FirstOrDefault();
-                if (firstTab != null)
-                    firstTab.BuildControls();
+                YearControl selectedTab = this.Years.Where(x=>x.Data.Year.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear)).FirstOrDefault();
+                if (selectedTab == null)
+                    selectedTab = this.Years.FirstOrDefault();
+                if (selectedTab != null)
+                    selectedTab.BuildControls();
+                xtraTabControl.SelectedTabPage = selectedTab;
 
                 _buildInProgress = false;
             }
@@ -61,6 +64,8 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
                 YearControl selectedYear = e.Page as YearControl;
                 if (selectedYear != null && !selectedYear.ViewBuilded)
                 {
+                    ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear = selectedYear.Data.Year;
+                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
                     using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
                     {
                         FormMain.Instance.ribbonControl.Enabled = false;

@@ -165,8 +165,8 @@ namespace SalesDepot.TabPages
             {
                 form.laProgress.Text = "Loading Sales Libraries...";
                 form.TopMost = true;
-                pnEmpty.BringToFront();
-                this.Enabled = false;
+                //pnEmpty.BringToFront();
+                //this.Enabled = false;
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
                     ConfigurationClasses.SettingsManager.Instance.GetSalesDepotName();
@@ -189,13 +189,12 @@ namespace SalesDepot.TabPages
                 this.ClassicViewControl = new PresentationClasses.WallBin.ClassicViewControl();
                 Application.DoEvents();
                 this.SolutionViewControl = new PresentationClasses.WallBin.SolutionViewControl();
-                this.SolutionViewControl.Load += new EventHandler(SolutionViewControl_Load);
                 Application.DoEvents();
                 thread.Start();
                 while (thread.ThreadState == System.Threading.ThreadState.Running)
                     Application.DoEvents();
-                this.Enabled = true;
-                pnEmpty.SendToBack();
+                //this.Enabled = true;
+                //pnEmpty.SendToBack();
                 form.Close();
             }
 
@@ -593,7 +592,6 @@ namespace SalesDepot.TabPages
         #endregion
         #endregion
 
-        #region Other GUI Event Handlers
         #region Comboboxes Event Handlers
         public void comboBoxItemPackages_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -622,76 +620,6 @@ namespace SalesDepot.TabPages
         {
             PageChanged(sender);
         }
-        #endregion
-
-        #region Solution View Event Handlers
-        private void SolutionViewControl_Load(object sender, EventArgs e)
-        {
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 0)
-            {
-                this.SolutionViewControl.navBarGroup1.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0];
-                this.SolutionViewControl.navBarGroup1.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Description;
-                this.SolutionViewControl.navBarGroup1.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup1.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup1.Visible = false;
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 1)
-            {
-                this.SolutionViewControl.navBarGroup2.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1];
-                this.SolutionViewControl.navBarGroup2.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Description;
-                this.SolutionViewControl.navBarGroup2.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup2.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup2.Visible = false;
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 2)
-            {
-                this.SolutionViewControl.navBarGroup3.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2];
-                this.SolutionViewControl.navBarGroup3.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Description;
-                this.SolutionViewControl.navBarGroup3.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup3.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup3.Visible = false;
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 3)
-            {
-                this.SolutionViewControl.navBarGroup4.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3];
-                this.SolutionViewControl.navBarGroup4.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Description;
-                this.SolutionViewControl.navBarGroup4.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup4.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup4.Visible = false;
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 4)
-            {
-                this.SolutionViewControl.navBarGroup5.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4];
-                this.SolutionViewControl.navBarGroup5.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Description;
-                this.SolutionViewControl.navBarGroup5.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup5.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup5.Visible = false;
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 5)
-            {
-                this.SolutionViewControl.navBarGroup6.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5];
-                this.SolutionViewControl.navBarGroup6.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Description;
-                this.SolutionViewControl.navBarGroup6.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup6.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup6.Visible = false;
-            if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 6)
-            {
-                this.SolutionViewControl.navBarGroup7.Tag = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6];
-                this.SolutionViewControl.navBarGroup7.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Description;
-                this.SolutionViewControl.navBarGroup7.SmallImage = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Logo;
-                this.SolutionViewControl.checkedListBoxControlGroup7.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Tags.ToArray());
-            }
-            else
-                this.SolutionViewControl.navBarGroup7.Visible = false;
-        }
-        #endregion
         #endregion
     }
 }

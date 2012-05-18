@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolutionViewControl));
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
@@ -52,16 +55,14 @@
             DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SolutionViewControl));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.splitContainerControlMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.xtraTabControlSolutionModes = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPageKeyWords = new DevExpress.XtraTab.XtraTabPage();
-            this.pnSearchByFilesMatchType = new System.Windows.Forms.Panel();
-            this.checkEditSearchByFilesExactMatch = new DevExpress.XtraEditors.CheckEdit();
-            this.barManager = new DevExpress.XtraBars.BarManager();
+            this.xtraTabPageAddDate = new DevExpress.XtraTab.XtraTabPage();
+            this.laDateRangeEnd = new System.Windows.Forms.Label();
+            this.dateEditDateRangeEnd = new DevExpress.XtraEditors.DateEdit();
+            this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.barLinksOperations = new DevExpress.XtraBars.Bar();
             this.barButtonItemOpenLink = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
@@ -83,21 +84,16 @@
             this.gridColumnWidget = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.gridColumnDisplayName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.toolTipController = new DevExpress.Utils.ToolTipController();
-            this.styleController = new DevExpress.XtraEditors.StyleController();
-            this.checkEditSearchByFilesAnyWord = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditFolders = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditNetwork = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditWeb = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditVideo = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditExcel = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditWord = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditPDF = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditPowerPoint = new DevExpress.XtraEditors.CheckEdit();
-            this.checkEditAllFiles = new DevExpress.XtraEditors.CheckEdit();
-            this.textEditSearchByFiles = new DevExpress.XtraEditors.TextEdit();
-            this.laSearchByTitles = new System.Windows.Forms.Label();
-            this.pbSearchByFiles = new System.Windows.Forms.PictureBox();
+            this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+            this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+            this.laDateRangeStart = new System.Windows.Forms.Label();
+            this.dateEditDateRangeStart = new DevExpress.XtraEditors.DateEdit();
+            this.rbDateRange = new System.Windows.Forms.RadioButton();
+            this.rbLastMonth = new System.Windows.Forms.RadioButton();
+            this.rbLastHalfMonth = new System.Windows.Forms.RadioButton();
+            this.rbLastDay = new System.Windows.Forms.RadioButton();
+            this.laSearchAddDate = new System.Windows.Forms.Label();
+            this.pbSearchAddDate = new System.Windows.Forms.PictureBox();
             this.xtraTabPageSearchTags = new DevExpress.XtraTab.XtraTabPage();
             this.navBarControlSearchTags = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
@@ -121,17 +117,22 @@
             this.navBarGroup5 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarGroup6 = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarGroup7 = new DevExpress.XtraNavBar.NavBarGroup();
-            this.xtraTabPageAddDate = new DevExpress.XtraTab.XtraTabPage();
-            this.laDateRangeEnd = new System.Windows.Forms.Label();
-            this.dateEditDateRangeEnd = new DevExpress.XtraEditors.DateEdit();
-            this.laDateRangeStart = new System.Windows.Forms.Label();
-            this.dateEditDateRangeStart = new DevExpress.XtraEditors.DateEdit();
-            this.rbDateRange = new System.Windows.Forms.RadioButton();
-            this.rbLastMonth = new System.Windows.Forms.RadioButton();
-            this.rbLastHalfMonth = new System.Windows.Forms.RadioButton();
-            this.rbLastDay = new System.Windows.Forms.RadioButton();
-            this.laSearchAddDate = new System.Windows.Forms.Label();
-            this.pbSearchAddDate = new System.Windows.Forms.PictureBox();
+            this.xtraTabPageKeyWords = new DevExpress.XtraTab.XtraTabPage();
+            this.pnSearchByFilesMatchType = new System.Windows.Forms.Panel();
+            this.checkEditSearchByFilesExactMatch = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditSearchByFilesAnyWord = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditFolders = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditNetwork = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditWeb = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditVideo = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditExcel = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditWord = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditPDF = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditPowerPoint = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditAllFiles = new DevExpress.XtraEditors.CheckEdit();
+            this.textEditSearchByFiles = new DevExpress.XtraEditors.TextEdit();
+            this.laSearchByTitles = new System.Windows.Forms.Label();
+            this.pbSearchByFiles = new System.Windows.Forms.PictureBox();
             this.splitContainerControlSerachResults = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnEmptyPreview = new System.Windows.Forms.Panel();
             this.pnPreviewArea = new System.Windows.Forms.Panel();
@@ -140,27 +141,18 @@
             this.splitContainerControlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSolutionModes)).BeginInit();
             this.xtraTabControlSolutionModes.SuspendLayout();
-            this.xtraTabPageKeyWords.SuspendLayout();
-            this.pnSearchByFilesMatchType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesExactMatch.Properties)).BeginInit();
+            this.xtraTabPageAddDate.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             this.pnLins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesAnyWord.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditFolders.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditNetwork.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditWeb.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditVideo.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditPDF.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditSearchByFiles.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearchByFiles)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties.VistaTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearchAddDate)).BeginInit();
             this.xtraTabPageSearchTags.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlSearchTags)).BeginInit();
             this.navBarControlSearchTags.SuspendLayout();
@@ -178,12 +170,21 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup2)).BeginInit();
             this.navBarGroupControlContainer7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup7)).BeginInit();
-            this.xtraTabPageAddDate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties.VistaTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearchAddDate)).BeginInit();
+            this.xtraTabPageKeyWords.SuspendLayout();
+            this.pnSearchByFilesMatchType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesExactMatch.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesAnyWord.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditFolders.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditNetwork.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditWeb.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditVideo.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditPDF.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSearchByFiles.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearchByFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSerachResults)).BeginInit();
             this.splitContainerControlSerachResults.SuspendLayout();
             this.SuspendLayout();
@@ -221,47 +222,53 @@
             this.xtraTabPageAddDate,
             this.xtraTabPageKeyWords});
             // 
-            // xtraTabPageKeyWords
+            // xtraTabPageAddDate
             // 
-            this.xtraTabPageKeyWords.Controls.Add(this.pnSearchByFilesMatchType);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditFolders);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditNetwork);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditWeb);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditVideo);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditExcel);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditWord);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditPDF);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditPowerPoint);
-            this.xtraTabPageKeyWords.Controls.Add(this.checkEditAllFiles);
-            this.xtraTabPageKeyWords.Controls.Add(this.textEditSearchByFiles);
-            this.xtraTabPageKeyWords.Controls.Add(this.laSearchByTitles);
-            this.xtraTabPageKeyWords.Controls.Add(this.pbSearchByFiles);
-            this.xtraTabPageKeyWords.Name = "xtraTabPageKeyWords";
-            this.xtraTabPageKeyWords.Size = new System.Drawing.Size(289, 650);
-            this.xtraTabPageKeyWords.Text = "xtraTabPage1";
+            this.xtraTabPageAddDate.Controls.Add(this.laDateRangeEnd);
+            this.xtraTabPageAddDate.Controls.Add(this.dateEditDateRangeEnd);
+            this.xtraTabPageAddDate.Controls.Add(this.laDateRangeStart);
+            this.xtraTabPageAddDate.Controls.Add(this.dateEditDateRangeStart);
+            this.xtraTabPageAddDate.Controls.Add(this.rbDateRange);
+            this.xtraTabPageAddDate.Controls.Add(this.rbLastMonth);
+            this.xtraTabPageAddDate.Controls.Add(this.rbLastHalfMonth);
+            this.xtraTabPageAddDate.Controls.Add(this.rbLastDay);
+            this.xtraTabPageAddDate.Controls.Add(this.laSearchAddDate);
+            this.xtraTabPageAddDate.Controls.Add(this.pbSearchAddDate);
+            this.xtraTabPageAddDate.Name = "xtraTabPageAddDate";
+            this.xtraTabPageAddDate.Size = new System.Drawing.Size(289, 650);
+            this.xtraTabPageAddDate.Text = "xtraTabPage2";
             // 
-            // pnSearchByFilesMatchType
+            // laDateRangeEnd
             // 
-            this.pnSearchByFilesMatchType.Controls.Add(this.checkEditSearchByFilesExactMatch);
-            this.pnSearchByFilesMatchType.Controls.Add(this.checkEditSearchByFilesAnyWord);
-            this.pnSearchByFilesMatchType.Location = new System.Drawing.Point(3, 128);
-            this.pnSearchByFilesMatchType.Name = "pnSearchByFilesMatchType";
-            this.pnSearchByFilesMatchType.Size = new System.Drawing.Size(283, 29);
-            this.pnSearchByFilesMatchType.TabIndex = 14;
+            this.laDateRangeEnd.AutoSize = true;
+            this.laDateRangeEnd.Enabled = false;
+            this.laDateRangeEnd.Location = new System.Drawing.Point(32, 280);
+            this.laDateRangeEnd.Name = "laDateRangeEnd";
+            this.laDateRangeEnd.Size = new System.Drawing.Size(66, 16);
+            this.laDateRangeEnd.TabIndex = 9;
+            this.laDateRangeEnd.Text = "End Date:";
             // 
-            // checkEditSearchByFilesExactMatch
+            // dateEditDateRangeEnd
             // 
-            this.checkEditSearchByFilesExactMatch.Location = new System.Drawing.Point(135, 5);
-            this.checkEditSearchByFilesExactMatch.MenuManager = this.barManager;
-            this.checkEditSearchByFilesExactMatch.Name = "checkEditSearchByFilesExactMatch";
-            this.checkEditSearchByFilesExactMatch.Properties.AutoWidth = true;
-            this.checkEditSearchByFilesExactMatch.Properties.Caption = "EXACT MATCH";
-            this.checkEditSearchByFilesExactMatch.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-            this.checkEditSearchByFilesExactMatch.Properties.RadioGroupIndex = 1;
-            this.checkEditSearchByFilesExactMatch.Size = new System.Drawing.Size(113, 21);
-            this.checkEditSearchByFilesExactMatch.StyleController = this.styleController;
-            this.checkEditSearchByFilesExactMatch.TabIndex = 11;
-            this.checkEditSearchByFilesExactMatch.TabStop = false;
+            this.dateEditDateRangeEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateEditDateRangeEnd.EditValue = null;
+            this.dateEditDateRangeEnd.Enabled = false;
+            this.dateEditDateRangeEnd.Location = new System.Drawing.Point(136, 277);
+            this.dateEditDateRangeEnd.MenuManager = this.barManager;
+            this.dateEditDateRangeEnd.Name = "dateEditDateRangeEnd";
+            this.dateEditDateRangeEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditDateRangeEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            this.dateEditDateRangeEnd.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
+            this.dateEditDateRangeEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.dateEditDateRangeEnd.Properties.EditFormat.FormatString = "MM/dd/yyyy";
+            this.dateEditDateRangeEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.dateEditDateRangeEnd.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dateEditDateRangeEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateEditDateRangeEnd.Size = new System.Drawing.Size(142, 22);
+            this.dateEditDateRangeEnd.StyleController = this.styleController;
+            this.dateEditDateRangeEnd.TabIndex = 8;
             // 
             // barManager
             // 
@@ -586,169 +593,102 @@
             this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
             this.styleController.AppearanceReadOnly.Options.UseFont = true;
             // 
-            // checkEditSearchByFilesAnyWord
+            // laDateRangeStart
             // 
-            this.checkEditSearchByFilesAnyWord.EditValue = true;
-            this.checkEditSearchByFilesAnyWord.Location = new System.Drawing.Point(8, 5);
-            this.checkEditSearchByFilesAnyWord.MenuManager = this.barManager;
-            this.checkEditSearchByFilesAnyWord.Name = "checkEditSearchByFilesAnyWord";
-            this.checkEditSearchByFilesAnyWord.Properties.AutoWidth = true;
-            this.checkEditSearchByFilesAnyWord.Properties.Caption = "Any Word";
-            this.checkEditSearchByFilesAnyWord.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-            this.checkEditSearchByFilesAnyWord.Properties.RadioGroupIndex = 1;
-            this.checkEditSearchByFilesAnyWord.Size = new System.Drawing.Size(81, 21);
-            this.checkEditSearchByFilesAnyWord.StyleController = this.styleController;
-            this.checkEditSearchByFilesAnyWord.TabIndex = 10;
+            this.laDateRangeStart.AutoSize = true;
+            this.laDateRangeStart.Enabled = false;
+            this.laDateRangeStart.Location = new System.Drawing.Point(32, 244);
+            this.laDateRangeStart.Name = "laDateRangeStart";
+            this.laDateRangeStart.Size = new System.Drawing.Size(71, 16);
+            this.laDateRangeStart.TabIndex = 7;
+            this.laDateRangeStart.Text = "Start Date:";
             // 
-            // checkEditFolders
+            // dateEditDateRangeStart
             // 
-            this.checkEditFolders.EditValue = true;
-            this.checkEditFolders.Enabled = false;
-            this.checkEditFolders.Location = new System.Drawing.Point(33, 501);
-            this.checkEditFolders.MenuManager = this.barManager;
-            this.checkEditFolders.Name = "checkEditFolders";
-            this.checkEditFolders.Properties.Caption = "Folders";
-            this.checkEditFolders.Size = new System.Drawing.Size(253, 21);
-            this.checkEditFolders.StyleController = this.styleController;
-            this.checkEditFolders.TabIndex = 13;
-            this.checkEditFolders.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditNetwork
-            // 
-            this.checkEditNetwork.EditValue = true;
-            this.checkEditNetwork.Enabled = false;
-            this.checkEditNetwork.Location = new System.Drawing.Point(33, 458);
-            this.checkEditNetwork.MenuManager = this.barManager;
-            this.checkEditNetwork.Name = "checkEditNetwork";
-            this.checkEditNetwork.Properties.Caption = "Network Links";
-            this.checkEditNetwork.Size = new System.Drawing.Size(253, 21);
-            this.checkEditNetwork.StyleController = this.styleController;
-            this.checkEditNetwork.TabIndex = 12;
-            this.checkEditNetwork.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditWeb
-            // 
-            this.checkEditWeb.EditValue = true;
-            this.checkEditWeb.Enabled = false;
-            this.checkEditWeb.Location = new System.Drawing.Point(33, 415);
-            this.checkEditWeb.MenuManager = this.barManager;
-            this.checkEditWeb.Name = "checkEditWeb";
-            this.checkEditWeb.Properties.Caption = "Web Links";
-            this.checkEditWeb.Size = new System.Drawing.Size(253, 21);
-            this.checkEditWeb.StyleController = this.styleController;
-            this.checkEditWeb.TabIndex = 11;
-            this.checkEditWeb.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditVideo
-            // 
-            this.checkEditVideo.EditValue = true;
-            this.checkEditVideo.Enabled = false;
-            this.checkEditVideo.Location = new System.Drawing.Point(33, 372);
-            this.checkEditVideo.MenuManager = this.barManager;
-            this.checkEditVideo.Name = "checkEditVideo";
-            this.checkEditVideo.Properties.Caption = "Video";
-            this.checkEditVideo.Size = new System.Drawing.Size(253, 21);
-            this.checkEditVideo.StyleController = this.styleController;
-            this.checkEditVideo.TabIndex = 10;
-            this.checkEditVideo.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditExcel
-            // 
-            this.checkEditExcel.EditValue = true;
-            this.checkEditExcel.Enabled = false;
-            this.checkEditExcel.Location = new System.Drawing.Point(33, 286);
-            this.checkEditExcel.MenuManager = this.barManager;
-            this.checkEditExcel.Name = "checkEditExcel";
-            this.checkEditExcel.Properties.Caption = "Excel";
-            this.checkEditExcel.Size = new System.Drawing.Size(253, 21);
-            this.checkEditExcel.StyleController = this.styleController;
-            this.checkEditExcel.TabIndex = 9;
-            this.checkEditExcel.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditWord
-            // 
-            this.checkEditWord.EditValue = true;
-            this.checkEditWord.Enabled = false;
-            this.checkEditWord.Location = new System.Drawing.Point(33, 329);
-            this.checkEditWord.MenuManager = this.barManager;
-            this.checkEditWord.Name = "checkEditWord";
-            this.checkEditWord.Properties.Caption = "Word";
-            this.checkEditWord.Size = new System.Drawing.Size(253, 21);
-            this.checkEditWord.StyleController = this.styleController;
-            this.checkEditWord.TabIndex = 8;
-            this.checkEditWord.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditPDF
-            // 
-            this.checkEditPDF.EditValue = true;
-            this.checkEditPDF.Enabled = false;
-            this.checkEditPDF.Location = new System.Drawing.Point(33, 243);
-            this.checkEditPDF.MenuManager = this.barManager;
-            this.checkEditPDF.Name = "checkEditPDF";
-            this.checkEditPDF.Properties.Caption = "PDF";
-            this.checkEditPDF.Size = new System.Drawing.Size(253, 21);
-            this.checkEditPDF.StyleController = this.styleController;
-            this.checkEditPDF.TabIndex = 7;
-            this.checkEditPDF.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditPowerPoint
-            // 
-            this.checkEditPowerPoint.EditValue = true;
-            this.checkEditPowerPoint.Enabled = false;
-            this.checkEditPowerPoint.Location = new System.Drawing.Point(33, 200);
-            this.checkEditPowerPoint.MenuManager = this.barManager;
-            this.checkEditPowerPoint.Name = "checkEditPowerPoint";
-            this.checkEditPowerPoint.Properties.Caption = "PowerPoint";
-            this.checkEditPowerPoint.Size = new System.Drawing.Size(253, 21);
-            this.checkEditPowerPoint.StyleController = this.styleController;
-            this.checkEditPowerPoint.TabIndex = 6;
-            this.checkEditPowerPoint.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
-            // 
-            // checkEditAllFiles
-            // 
-            this.checkEditAllFiles.EditValue = true;
-            this.checkEditAllFiles.Location = new System.Drawing.Point(11, 163);
-            this.checkEditAllFiles.MenuManager = this.barManager;
-            this.checkEditAllFiles.Name = "checkEditAllFiles";
-            this.checkEditAllFiles.Properties.Caption = "All file types";
-            this.checkEditAllFiles.Size = new System.Drawing.Size(266, 21);
-            this.checkEditAllFiles.StyleController = this.styleController;
-            this.checkEditAllFiles.TabIndex = 5;
-            this.checkEditAllFiles.CheckedChanged += new System.EventHandler(this.checkEditAllFiles_CheckedChanged);
-            // 
-            // textEditSearchByFiles
-            // 
-            this.textEditSearchByFiles.Location = new System.Drawing.Point(13, 100);
-            this.textEditSearchByFiles.MenuManager = this.barManager;
-            this.textEditSearchByFiles.Name = "textEditSearchByFiles";
-            this.textEditSearchByFiles.Properties.NullText = "Type the full name or part of name here...";
-            this.textEditSearchByFiles.Size = new System.Drawing.Size(264, 22);
-            this.textEditSearchByFiles.StyleController = this.styleController;
-            this.textEditSearchByFiles.TabIndex = 4;
-            this.textEditSearchByFiles.EditValueChanged += new System.EventHandler(this.textEditSearchByFiles_EditValueChanged);
-            this.textEditSearchByFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditSearchByFiles_KeyDown);
-            // 
-            // laSearchByTitles
-            // 
-            this.laSearchByTitles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dateEditDateRangeStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.laSearchByTitles.Location = new System.Drawing.Point(83, 14);
-            this.laSearchByTitles.Name = "laSearchByTitles";
-            this.laSearchByTitles.Size = new System.Drawing.Size(203, 64);
-            this.laSearchByTitles.TabIndex = 3;
-            this.laSearchByTitles.Text = "What file are you looking for?";
-            this.laSearchByTitles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dateEditDateRangeStart.EditValue = null;
+            this.dateEditDateRangeStart.Enabled = false;
+            this.dateEditDateRangeStart.Location = new System.Drawing.Point(136, 241);
+            this.dateEditDateRangeStart.MenuManager = this.barManager;
+            this.dateEditDateRangeStart.Name = "dateEditDateRangeStart";
+            this.dateEditDateRangeStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditDateRangeStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            this.dateEditDateRangeStart.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
+            this.dateEditDateRangeStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.dateEditDateRangeStart.Properties.EditFormat.FormatString = "MM/dd/yyyy";
+            this.dateEditDateRangeStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            this.dateEditDateRangeStart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.dateEditDateRangeStart.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.dateEditDateRangeStart.Size = new System.Drawing.Size(142, 22);
+            this.dateEditDateRangeStart.StyleController = this.styleController;
+            this.dateEditDateRangeStart.TabIndex = 6;
             // 
-            // pbSearchByFiles
+            // rbDateRange
             // 
-            this.pbSearchByFiles.Image = global::SalesDepot.Properties.Resources.SearchLinkName;
-            this.pbSearchByFiles.Location = new System.Drawing.Point(13, 14);
-            this.pbSearchByFiles.Name = "pbSearchByFiles";
-            this.pbSearchByFiles.Size = new System.Drawing.Size(64, 64);
-            this.pbSearchByFiles.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearchByFiles.TabIndex = 2;
-            this.pbSearchByFiles.TabStop = false;
-            this.pbSearchByFiles.Click += new System.EventHandler(this.pbSearchByFiles_Click);
+            this.rbDateRange.AutoSize = true;
+            this.rbDateRange.Location = new System.Drawing.Point(13, 212);
+            this.rbDateRange.Name = "rbDateRange";
+            this.rbDateRange.Size = new System.Drawing.Size(94, 20);
+            this.rbDateRange.TabIndex = 5;
+            this.rbDateRange.Text = "Date Range";
+            this.rbDateRange.UseVisualStyleBackColor = true;
+            this.rbDateRange.CheckedChanged += new System.EventHandler(this.radioButtonDateRange_CheckedChanged);
+            // 
+            // rbLastMonth
+            // 
+            this.rbLastMonth.AutoSize = true;
+            this.rbLastMonth.Location = new System.Drawing.Point(13, 174);
+            this.rbLastMonth.Name = "rbLastMonth";
+            this.rbLastMonth.Size = new System.Drawing.Size(137, 20);
+            this.rbLastMonth.TabIndex = 4;
+            this.rbLastMonth.Text = "In the past 30 days";
+            this.rbLastMonth.UseVisualStyleBackColor = true;
+            // 
+            // rbLastHalfMonth
+            // 
+            this.rbLastHalfMonth.AutoSize = true;
+            this.rbLastHalfMonth.Location = new System.Drawing.Point(13, 136);
+            this.rbLastHalfMonth.Name = "rbLastHalfMonth";
+            this.rbLastHalfMonth.Size = new System.Drawing.Size(137, 20);
+            this.rbLastHalfMonth.TabIndex = 3;
+            this.rbLastHalfMonth.Text = "In the past 15 days";
+            this.rbLastHalfMonth.UseVisualStyleBackColor = true;
+            // 
+            // rbLastDay
+            // 
+            this.rbLastDay.AutoSize = true;
+            this.rbLastDay.Checked = true;
+            this.rbLastDay.Location = new System.Drawing.Point(13, 97);
+            this.rbLastDay.Name = "rbLastDay";
+            this.rbLastDay.Size = new System.Drawing.Size(141, 20);
+            this.rbLastDay.TabIndex = 2;
+            this.rbLastDay.TabStop = true;
+            this.rbLastDay.Text = "In the past 24 hours";
+            this.rbLastDay.UseVisualStyleBackColor = true;
+            // 
+            // laSearchAddDate
+            // 
+            this.laSearchAddDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.laSearchAddDate.Location = new System.Drawing.Point(83, 14);
+            this.laSearchAddDate.Name = "laSearchAddDate";
+            this.laSearchAddDate.Size = new System.Drawing.Size(203, 64);
+            this.laSearchAddDate.TabIndex = 1;
+            this.laSearchAddDate.Text = "How far back do you want to look?";
+            this.laSearchAddDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pbSearchAddDate
+            // 
+            this.pbSearchAddDate.Image = global::SalesDepot.Properties.Resources.SearchRecentFiles;
+            this.pbSearchAddDate.Location = new System.Drawing.Point(13, 14);
+            this.pbSearchAddDate.Name = "pbSearchAddDate";
+            this.pbSearchAddDate.Size = new System.Drawing.Size(64, 64);
+            this.pbSearchAddDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearchAddDate.TabIndex = 0;
+            this.pbSearchAddDate.TabStop = false;
+            this.pbSearchAddDate.Click += new System.EventHandler(this.pbSearchByFiles_Click);
             // 
             // xtraTabPageSearchTags
             // 
@@ -1045,150 +985,211 @@
             this.navBarGroup7.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
             this.navBarGroup7.Name = "navBarGroup7";
             // 
-            // xtraTabPageAddDate
+            // xtraTabPageKeyWords
             // 
-            this.xtraTabPageAddDate.Controls.Add(this.laDateRangeEnd);
-            this.xtraTabPageAddDate.Controls.Add(this.dateEditDateRangeEnd);
-            this.xtraTabPageAddDate.Controls.Add(this.laDateRangeStart);
-            this.xtraTabPageAddDate.Controls.Add(this.dateEditDateRangeStart);
-            this.xtraTabPageAddDate.Controls.Add(this.rbDateRange);
-            this.xtraTabPageAddDate.Controls.Add(this.rbLastMonth);
-            this.xtraTabPageAddDate.Controls.Add(this.rbLastHalfMonth);
-            this.xtraTabPageAddDate.Controls.Add(this.rbLastDay);
-            this.xtraTabPageAddDate.Controls.Add(this.laSearchAddDate);
-            this.xtraTabPageAddDate.Controls.Add(this.pbSearchAddDate);
-            this.xtraTabPageAddDate.Name = "xtraTabPageAddDate";
-            this.xtraTabPageAddDate.Size = new System.Drawing.Size(289, 650);
-            this.xtraTabPageAddDate.Text = "xtraTabPage2";
+            this.xtraTabPageKeyWords.Controls.Add(this.pnSearchByFilesMatchType);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditFolders);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditNetwork);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditWeb);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditVideo);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditExcel);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditWord);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditPDF);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditPowerPoint);
+            this.xtraTabPageKeyWords.Controls.Add(this.checkEditAllFiles);
+            this.xtraTabPageKeyWords.Controls.Add(this.textEditSearchByFiles);
+            this.xtraTabPageKeyWords.Controls.Add(this.laSearchByTitles);
+            this.xtraTabPageKeyWords.Controls.Add(this.pbSearchByFiles);
+            this.xtraTabPageKeyWords.Name = "xtraTabPageKeyWords";
+            this.xtraTabPageKeyWords.Size = new System.Drawing.Size(289, 650);
+            this.xtraTabPageKeyWords.Text = "xtraTabPage1";
             // 
-            // laDateRangeEnd
+            // pnSearchByFilesMatchType
             // 
-            this.laDateRangeEnd.AutoSize = true;
-            this.laDateRangeEnd.Enabled = false;
-            this.laDateRangeEnd.Location = new System.Drawing.Point(32, 280);
-            this.laDateRangeEnd.Name = "laDateRangeEnd";
-            this.laDateRangeEnd.Size = new System.Drawing.Size(66, 16);
-            this.laDateRangeEnd.TabIndex = 9;
-            this.laDateRangeEnd.Text = "End Date:";
+            this.pnSearchByFilesMatchType.Controls.Add(this.checkEditSearchByFilesExactMatch);
+            this.pnSearchByFilesMatchType.Controls.Add(this.checkEditSearchByFilesAnyWord);
+            this.pnSearchByFilesMatchType.Location = new System.Drawing.Point(3, 128);
+            this.pnSearchByFilesMatchType.Name = "pnSearchByFilesMatchType";
+            this.pnSearchByFilesMatchType.Size = new System.Drawing.Size(283, 29);
+            this.pnSearchByFilesMatchType.TabIndex = 14;
             // 
-            // dateEditDateRangeEnd
+            // checkEditSearchByFilesExactMatch
             // 
-            this.dateEditDateRangeEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.checkEditSearchByFilesExactMatch.Location = new System.Drawing.Point(135, 5);
+            this.checkEditSearchByFilesExactMatch.MenuManager = this.barManager;
+            this.checkEditSearchByFilesExactMatch.Name = "checkEditSearchByFilesExactMatch";
+            this.checkEditSearchByFilesExactMatch.Properties.AutoWidth = true;
+            this.checkEditSearchByFilesExactMatch.Properties.Caption = "EXACT MATCH";
+            this.checkEditSearchByFilesExactMatch.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+            this.checkEditSearchByFilesExactMatch.Properties.RadioGroupIndex = 1;
+            this.checkEditSearchByFilesExactMatch.Size = new System.Drawing.Size(113, 21);
+            this.checkEditSearchByFilesExactMatch.StyleController = this.styleController;
+            this.checkEditSearchByFilesExactMatch.TabIndex = 11;
+            this.checkEditSearchByFilesExactMatch.TabStop = false;
+            // 
+            // checkEditSearchByFilesAnyWord
+            // 
+            this.checkEditSearchByFilesAnyWord.EditValue = true;
+            this.checkEditSearchByFilesAnyWord.Location = new System.Drawing.Point(8, 5);
+            this.checkEditSearchByFilesAnyWord.MenuManager = this.barManager;
+            this.checkEditSearchByFilesAnyWord.Name = "checkEditSearchByFilesAnyWord";
+            this.checkEditSearchByFilesAnyWord.Properties.AutoWidth = true;
+            this.checkEditSearchByFilesAnyWord.Properties.Caption = "Any Word";
+            this.checkEditSearchByFilesAnyWord.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+            this.checkEditSearchByFilesAnyWord.Properties.RadioGroupIndex = 1;
+            this.checkEditSearchByFilesAnyWord.Size = new System.Drawing.Size(81, 21);
+            this.checkEditSearchByFilesAnyWord.StyleController = this.styleController;
+            this.checkEditSearchByFilesAnyWord.TabIndex = 10;
+            // 
+            // checkEditFolders
+            // 
+            this.checkEditFolders.EditValue = true;
+            this.checkEditFolders.Enabled = false;
+            this.checkEditFolders.Location = new System.Drawing.Point(33, 501);
+            this.checkEditFolders.MenuManager = this.barManager;
+            this.checkEditFolders.Name = "checkEditFolders";
+            this.checkEditFolders.Properties.Caption = "Folders";
+            this.checkEditFolders.Size = new System.Drawing.Size(253, 21);
+            this.checkEditFolders.StyleController = this.styleController;
+            this.checkEditFolders.TabIndex = 13;
+            this.checkEditFolders.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditNetwork
+            // 
+            this.checkEditNetwork.EditValue = true;
+            this.checkEditNetwork.Enabled = false;
+            this.checkEditNetwork.Location = new System.Drawing.Point(33, 458);
+            this.checkEditNetwork.MenuManager = this.barManager;
+            this.checkEditNetwork.Name = "checkEditNetwork";
+            this.checkEditNetwork.Properties.Caption = "Network Links";
+            this.checkEditNetwork.Size = new System.Drawing.Size(253, 21);
+            this.checkEditNetwork.StyleController = this.styleController;
+            this.checkEditNetwork.TabIndex = 12;
+            this.checkEditNetwork.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditWeb
+            // 
+            this.checkEditWeb.EditValue = true;
+            this.checkEditWeb.Enabled = false;
+            this.checkEditWeb.Location = new System.Drawing.Point(33, 415);
+            this.checkEditWeb.MenuManager = this.barManager;
+            this.checkEditWeb.Name = "checkEditWeb";
+            this.checkEditWeb.Properties.Caption = "Web Links";
+            this.checkEditWeb.Size = new System.Drawing.Size(253, 21);
+            this.checkEditWeb.StyleController = this.styleController;
+            this.checkEditWeb.TabIndex = 11;
+            this.checkEditWeb.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditVideo
+            // 
+            this.checkEditVideo.EditValue = true;
+            this.checkEditVideo.Enabled = false;
+            this.checkEditVideo.Location = new System.Drawing.Point(33, 372);
+            this.checkEditVideo.MenuManager = this.barManager;
+            this.checkEditVideo.Name = "checkEditVideo";
+            this.checkEditVideo.Properties.Caption = "Video";
+            this.checkEditVideo.Size = new System.Drawing.Size(253, 21);
+            this.checkEditVideo.StyleController = this.styleController;
+            this.checkEditVideo.TabIndex = 10;
+            this.checkEditVideo.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditExcel
+            // 
+            this.checkEditExcel.EditValue = true;
+            this.checkEditExcel.Enabled = false;
+            this.checkEditExcel.Location = new System.Drawing.Point(33, 286);
+            this.checkEditExcel.MenuManager = this.barManager;
+            this.checkEditExcel.Name = "checkEditExcel";
+            this.checkEditExcel.Properties.Caption = "Excel";
+            this.checkEditExcel.Size = new System.Drawing.Size(253, 21);
+            this.checkEditExcel.StyleController = this.styleController;
+            this.checkEditExcel.TabIndex = 9;
+            this.checkEditExcel.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditWord
+            // 
+            this.checkEditWord.EditValue = true;
+            this.checkEditWord.Enabled = false;
+            this.checkEditWord.Location = new System.Drawing.Point(33, 329);
+            this.checkEditWord.MenuManager = this.barManager;
+            this.checkEditWord.Name = "checkEditWord";
+            this.checkEditWord.Properties.Caption = "Word";
+            this.checkEditWord.Size = new System.Drawing.Size(253, 21);
+            this.checkEditWord.StyleController = this.styleController;
+            this.checkEditWord.TabIndex = 8;
+            this.checkEditWord.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditPDF
+            // 
+            this.checkEditPDF.EditValue = true;
+            this.checkEditPDF.Enabled = false;
+            this.checkEditPDF.Location = new System.Drawing.Point(33, 243);
+            this.checkEditPDF.MenuManager = this.barManager;
+            this.checkEditPDF.Name = "checkEditPDF";
+            this.checkEditPDF.Properties.Caption = "PDF";
+            this.checkEditPDF.Size = new System.Drawing.Size(253, 21);
+            this.checkEditPDF.StyleController = this.styleController;
+            this.checkEditPDF.TabIndex = 7;
+            this.checkEditPDF.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditPowerPoint
+            // 
+            this.checkEditPowerPoint.EditValue = true;
+            this.checkEditPowerPoint.Enabled = false;
+            this.checkEditPowerPoint.Location = new System.Drawing.Point(33, 200);
+            this.checkEditPowerPoint.MenuManager = this.barManager;
+            this.checkEditPowerPoint.Name = "checkEditPowerPoint";
+            this.checkEditPowerPoint.Properties.Caption = "PowerPoint";
+            this.checkEditPowerPoint.Size = new System.Drawing.Size(253, 21);
+            this.checkEditPowerPoint.StyleController = this.styleController;
+            this.checkEditPowerPoint.TabIndex = 6;
+            this.checkEditPowerPoint.CheckedChanged += new System.EventHandler(this.checkEditKeyWord_CheckedChanged);
+            // 
+            // checkEditAllFiles
+            // 
+            this.checkEditAllFiles.EditValue = true;
+            this.checkEditAllFiles.Location = new System.Drawing.Point(11, 163);
+            this.checkEditAllFiles.MenuManager = this.barManager;
+            this.checkEditAllFiles.Name = "checkEditAllFiles";
+            this.checkEditAllFiles.Properties.Caption = "All file types";
+            this.checkEditAllFiles.Size = new System.Drawing.Size(266, 21);
+            this.checkEditAllFiles.StyleController = this.styleController;
+            this.checkEditAllFiles.TabIndex = 5;
+            this.checkEditAllFiles.CheckedChanged += new System.EventHandler(this.checkEditAllFiles_CheckedChanged);
+            // 
+            // textEditSearchByFiles
+            // 
+            this.textEditSearchByFiles.Location = new System.Drawing.Point(13, 100);
+            this.textEditSearchByFiles.MenuManager = this.barManager;
+            this.textEditSearchByFiles.Name = "textEditSearchByFiles";
+            this.textEditSearchByFiles.Properties.NullText = "Type the full name or part of name here...";
+            this.textEditSearchByFiles.Size = new System.Drawing.Size(264, 22);
+            this.textEditSearchByFiles.StyleController = this.styleController;
+            this.textEditSearchByFiles.TabIndex = 4;
+            this.textEditSearchByFiles.EditValueChanged += new System.EventHandler(this.textEditSearchByFiles_EditValueChanged);
+            this.textEditSearchByFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textEditSearchByFiles_KeyDown);
+            // 
+            // laSearchByTitles
+            // 
+            this.laSearchByTitles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateEditDateRangeEnd.EditValue = null;
-            this.dateEditDateRangeEnd.Enabled = false;
-            this.dateEditDateRangeEnd.Location = new System.Drawing.Point(136, 277);
-            this.dateEditDateRangeEnd.MenuManager = this.barManager;
-            this.dateEditDateRangeEnd.Name = "dateEditDateRangeEnd";
-            this.dateEditDateRangeEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditDateRangeEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
-            this.dateEditDateRangeEnd.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
-            this.dateEditDateRangeEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.dateEditDateRangeEnd.Properties.EditFormat.FormatString = "MM/dd/yyyy";
-            this.dateEditDateRangeEnd.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.dateEditDateRangeEnd.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dateEditDateRangeEnd.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEditDateRangeEnd.Size = new System.Drawing.Size(142, 22);
-            this.dateEditDateRangeEnd.StyleController = this.styleController;
-            this.dateEditDateRangeEnd.TabIndex = 8;
+            this.laSearchByTitles.Location = new System.Drawing.Point(83, 14);
+            this.laSearchByTitles.Name = "laSearchByTitles";
+            this.laSearchByTitles.Size = new System.Drawing.Size(203, 64);
+            this.laSearchByTitles.TabIndex = 3;
+            this.laSearchByTitles.Text = "What file are you looking for?";
+            this.laSearchByTitles.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // laDateRangeStart
+            // pbSearchByFiles
             // 
-            this.laDateRangeStart.AutoSize = true;
-            this.laDateRangeStart.Enabled = false;
-            this.laDateRangeStart.Location = new System.Drawing.Point(32, 244);
-            this.laDateRangeStart.Name = "laDateRangeStart";
-            this.laDateRangeStart.Size = new System.Drawing.Size(71, 16);
-            this.laDateRangeStart.TabIndex = 7;
-            this.laDateRangeStart.Text = "Start Date:";
-            // 
-            // dateEditDateRangeStart
-            // 
-            this.dateEditDateRangeStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateEditDateRangeStart.EditValue = null;
-            this.dateEditDateRangeStart.Enabled = false;
-            this.dateEditDateRangeStart.Location = new System.Drawing.Point(136, 241);
-            this.dateEditDateRangeStart.MenuManager = this.barManager;
-            this.dateEditDateRangeStart.Name = "dateEditDateRangeStart";
-            this.dateEditDateRangeStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditDateRangeStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
-            this.dateEditDateRangeStart.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
-            this.dateEditDateRangeStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.dateEditDateRangeStart.Properties.EditFormat.FormatString = "MM/dd/yyyy";
-            this.dateEditDateRangeStart.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            this.dateEditDateRangeStart.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.dateEditDateRangeStart.Properties.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.dateEditDateRangeStart.Size = new System.Drawing.Size(142, 22);
-            this.dateEditDateRangeStart.StyleController = this.styleController;
-            this.dateEditDateRangeStart.TabIndex = 6;
-            // 
-            // rbDateRange
-            // 
-            this.rbDateRange.AutoSize = true;
-            this.rbDateRange.Location = new System.Drawing.Point(13, 212);
-            this.rbDateRange.Name = "rbDateRange";
-            this.rbDateRange.Size = new System.Drawing.Size(94, 20);
-            this.rbDateRange.TabIndex = 5;
-            this.rbDateRange.Text = "Date Range";
-            this.rbDateRange.UseVisualStyleBackColor = true;
-            this.rbDateRange.CheckedChanged += new System.EventHandler(this.radioButtonDateRange_CheckedChanged);
-            // 
-            // rbLastMonth
-            // 
-            this.rbLastMonth.AutoSize = true;
-            this.rbLastMonth.Location = new System.Drawing.Point(13, 174);
-            this.rbLastMonth.Name = "rbLastMonth";
-            this.rbLastMonth.Size = new System.Drawing.Size(137, 20);
-            this.rbLastMonth.TabIndex = 4;
-            this.rbLastMonth.Text = "In the past 30 days";
-            this.rbLastMonth.UseVisualStyleBackColor = true;
-            // 
-            // rbLastHalfMonth
-            // 
-            this.rbLastHalfMonth.AutoSize = true;
-            this.rbLastHalfMonth.Location = new System.Drawing.Point(13, 136);
-            this.rbLastHalfMonth.Name = "rbLastHalfMonth";
-            this.rbLastHalfMonth.Size = new System.Drawing.Size(137, 20);
-            this.rbLastHalfMonth.TabIndex = 3;
-            this.rbLastHalfMonth.Text = "In the past 15 days";
-            this.rbLastHalfMonth.UseVisualStyleBackColor = true;
-            // 
-            // rbLastDay
-            // 
-            this.rbLastDay.AutoSize = true;
-            this.rbLastDay.Checked = true;
-            this.rbLastDay.Location = new System.Drawing.Point(13, 97);
-            this.rbLastDay.Name = "rbLastDay";
-            this.rbLastDay.Size = new System.Drawing.Size(141, 20);
-            this.rbLastDay.TabIndex = 2;
-            this.rbLastDay.TabStop = true;
-            this.rbLastDay.Text = "In the past 24 hours";
-            this.rbLastDay.UseVisualStyleBackColor = true;
-            // 
-            // laSearchAddDate
-            // 
-            this.laSearchAddDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.laSearchAddDate.Location = new System.Drawing.Point(83, 14);
-            this.laSearchAddDate.Name = "laSearchAddDate";
-            this.laSearchAddDate.Size = new System.Drawing.Size(203, 64);
-            this.laSearchAddDate.TabIndex = 1;
-            this.laSearchAddDate.Text = "How far back do you want to look?";
-            this.laSearchAddDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pbSearchAddDate
-            // 
-            this.pbSearchAddDate.Image = global::SalesDepot.Properties.Resources.SearchRecentFiles;
-            this.pbSearchAddDate.Location = new System.Drawing.Point(13, 14);
-            this.pbSearchAddDate.Name = "pbSearchAddDate";
-            this.pbSearchAddDate.Size = new System.Drawing.Size(64, 64);
-            this.pbSearchAddDate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbSearchAddDate.TabIndex = 0;
-            this.pbSearchAddDate.TabStop = false;
-            this.pbSearchAddDate.Click += new System.EventHandler(this.pbSearchByFiles_Click);
+            this.pbSearchByFiles.Image = global::SalesDepot.Properties.Resources.SearchLinkName;
+            this.pbSearchByFiles.Location = new System.Drawing.Point(13, 14);
+            this.pbSearchByFiles.Name = "pbSearchByFiles";
+            this.pbSearchByFiles.Size = new System.Drawing.Size(64, 64);
+            this.pbSearchByFiles.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbSearchByFiles.TabIndex = 2;
+            this.pbSearchByFiles.TabStop = false;
+            this.pbSearchByFiles.Click += new System.EventHandler(this.pbSearchByFiles_Click);
             // 
             // splitContainerControlSerachResults
             // 
@@ -1243,32 +1244,24 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "SolutionViewControl";
             this.Size = new System.Drawing.Size(982, 652);
+            this.Load += new System.EventHandler(this.SolutionViewControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlMain)).EndInit();
             this.splitContainerControlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSolutionModes)).EndInit();
             this.xtraTabControlSolutionModes.ResumeLayout(false);
-            this.xtraTabPageKeyWords.ResumeLayout(false);
-            this.pnSearchByFilesMatchType.ResumeLayout(false);
-            this.pnSearchByFilesMatchType.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesExactMatch.Properties)).EndInit();
+            this.xtraTabPageAddDate.ResumeLayout(false);
+            this.xtraTabPageAddDate.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             this.pnLins.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesAnyWord.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditFolders.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditNetwork.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditWeb.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditVideo.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditPDF.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditSearchByFiles.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearchByFiles)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties.VistaTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearchAddDate)).EndInit();
             this.xtraTabPageSearchTags.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControlSearchTags)).EndInit();
             this.navBarControlSearchTags.ResumeLayout(false);
@@ -1286,13 +1279,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup2)).EndInit();
             this.navBarGroupControlContainer7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup7)).EndInit();
-            this.xtraTabPageAddDate.ResumeLayout(false);
-            this.xtraTabPageAddDate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeEnd.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties.VistaTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEditDateRangeStart.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSearchAddDate)).EndInit();
+            this.xtraTabPageKeyWords.ResumeLayout(false);
+            this.pnSearchByFilesMatchType.ResumeLayout(false);
+            this.pnSearchByFilesMatchType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesExactMatch.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditSearchByFilesAnyWord.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditFolders.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditNetwork.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditWeb.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditVideo.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditExcel.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditWord.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditPDF.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditPowerPoint.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditAllFiles.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSearchByFiles.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSearchByFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSerachResults)).EndInit();
             this.splitContainerControlSerachResults.ResumeLayout(false);
             this.ResumeLayout(false);

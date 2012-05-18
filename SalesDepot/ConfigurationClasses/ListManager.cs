@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Drawing;
 using System.IO;
 using System.Xml;
@@ -10,6 +12,7 @@ namespace SalesDepot.ConfigurationClasses
         private static ListManager _instance = new ListManager();
 
         public string ListsFolder { get; set; }
+        public string AccessRightsFolderFolder { get; set; }
         public string SearchGroupsLogoFolder { get; set; }
 
         public SearchTags SearchTags { get; set; }
