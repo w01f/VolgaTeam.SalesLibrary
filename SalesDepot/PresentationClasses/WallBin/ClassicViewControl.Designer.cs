@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ClassicViewControl));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlFiles = new DevExpress.XtraGrid.GridControl();
             this.gridViewFiles = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -42,7 +42,6 @@
             this.buttonXZip = new DevComponents.DotNetBar.ButtonX();
             this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
             this.buttonXCreateEmail = new DevComponents.DotNetBar.ButtonX();
-            this.pnEmpty = new System.Windows.Forms.Panel();
             this.pnSalesDepotContainer = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
@@ -66,7 +65,6 @@
             this.splitContainerControl.Panel1.Controls.Add(this.pnTop);
             this.splitContainerControl.Panel1.Controls.Add(this.pnBottom);
             this.splitContainerControl.Panel1.Text = "Panel1";
-            this.splitContainerControl.Panel2.Controls.Add(this.pnEmpty);
             this.splitContainerControl.Panel2.Controls.Add(this.pnSalesDepotContainer);
             this.splitContainerControl.Panel2.Text = "Panel2";
             this.splitContainerControl.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
@@ -133,7 +131,7 @@
             // repositoryItemButtonEdit
             // 
             this.repositoryItemButtonEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.repositoryItemButtonEdit.Name = "repositoryItemButtonEdit";
             this.repositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.repositoryItemButtonEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEdit_ButtonClick);
@@ -240,14 +238,6 @@
             this.buttonXCreateEmail.TextColor = System.Drawing.Color.Black;
             this.buttonXCreateEmail.Click += new System.EventHandler(this.buttonXCreateEmail_Click);
             // 
-            // pnEmpty
-            // 
-            this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnEmpty.Location = new System.Drawing.Point(0, 0);
-            this.pnEmpty.Name = "pnEmpty";
-            this.pnEmpty.Size = new System.Drawing.Size(678, 434);
-            this.pnEmpty.TabIndex = 4;
-            // 
             // pnSalesDepotContainer
             // 
             this.pnSalesDepotContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -279,7 +269,6 @@
 
         #endregion
 
-        public System.Windows.Forms.Panel pnEmpty;
         public System.Windows.Forms.Panel pnSalesDepotContainer;
         public DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
         private System.Windows.Forms.Panel pnTop;

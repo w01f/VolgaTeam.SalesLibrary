@@ -37,13 +37,15 @@
             // 
             // xtraTabControl
             // 
+            this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControl.Appearance.Options.UseBackColor = true;
             this.xtraTabControl.Appearance.Options.UseFont = true;
             this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
             this.xtraTabControl.AppearancePage.Header.Options.UseTextOptions = true;
             this.xtraTabControl.AppearancePage.Header.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-            this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
             this.xtraTabControl.AppearancePage.HeaderActive.Options.UseTextOptions = true;
             this.xtraTabControl.AppearancePage.HeaderActive.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;

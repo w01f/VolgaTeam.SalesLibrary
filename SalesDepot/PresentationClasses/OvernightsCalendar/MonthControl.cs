@@ -22,6 +22,7 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
             laMonthName.Text = this.Data.Name;
             this.Resize += new EventHandler(MonthControl_Resize);
             BuildControls();
+            RefreshFont();
         }
 
         private void BuildControls()

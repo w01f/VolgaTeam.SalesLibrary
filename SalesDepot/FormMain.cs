@@ -26,16 +26,19 @@ namespace SalesDepot
             buttonItemHomeClassicView.Click += new EventHandler(this.TabHome.ChangeView_Click);
             buttonItemHomeListView.Click += new EventHandler(this.TabHome.ChangeView_Click);
             buttonItemHomeSolutionView.Click += new EventHandler(this.TabHome.ChangeView_Click);
-            buttonItemLargerText.Click += new EventHandler(this.TabHome.buttonItemLargerText_Click);
-            buttonItemSmallerText.Click += new EventHandler(this.TabHome.buttonItemSmallerText_Click);
-            buttonItemEmailBin.CheckedChanged += new EventHandler(this.TabHome.buttonItemEmailBin_CheckedChanged);
-            buttonItemHomeSearchByTags.Click += new EventHandler(this.TabHome.buttonItemHomeSearchMode_Click);
-            buttonItemHomeSearchByFileName.Click += new EventHandler(this.TabHome.buttonItemHomeSearchMode_Click);
-            buttonItemHomeSearchRecentFiles.Click += new EventHandler(this.TabHome.buttonItemHomeSearchMode_Click);
-            buttonItemHomeSearchByTags.CheckedChanged += new EventHandler(this.TabHome.buttonItemHomeSearchMode_CheckedChanged);
-            buttonItemHomeSearchByFileName.CheckedChanged += new EventHandler(this.TabHome.buttonItemHomeSearchMode_CheckedChanged);
-            buttonItemHomeSearchRecentFiles.CheckedChanged += new EventHandler(this.TabHome.buttonItemHomeSearchMode_CheckedChanged);
-            buttonItemHomeAddSlide.Click += new EventHandler(this.TabHome.buttonItemHomeAddSlide_Click);
+            buttonItemHomeClassicView.CheckedChanged += new EventHandler(this.TabHome.ChangeView_CheckedChanged);
+            buttonItemHomeSolutionView.CheckedChanged += new EventHandler(this.TabHome.ChangeView_CheckedChanged);
+            buttonItemHomeListView.CheckedChanged += new EventHandler(this.TabHome.ChangeView_CheckedChanged);
+            buttonItemLargerText.Click += new EventHandler(this.TabHome.ClassicViewControl.buttonItemLargerText_Click);
+            buttonItemSmallerText.Click += new EventHandler(this.TabHome.ClassicViewControl.buttonItemSmallerText_Click);
+            buttonItemEmailBin.CheckedChanged += new EventHandler(this.TabHome.ClassicViewControl.buttonItemEmailBin_CheckedChanged);
+            buttonItemHomeSearchByTags.Click += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_Click);
+            buttonItemHomeSearchByFileName.Click += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_Click);
+            buttonItemHomeSearchRecentFiles.Click += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_Click);
+            buttonItemHomeSearchByTags.CheckedChanged += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_CheckedChanged);
+            buttonItemHomeSearchByFileName.CheckedChanged += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_CheckedChanged);
+            buttonItemHomeSearchRecentFiles.CheckedChanged += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_CheckedChanged);
+            buttonItemHomeAddSlide.Click += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeAddSlide_Click);
             buttonItemHomeHelp.Click += new EventHandler(this.TabHome.buttonItemHomeHelp_Click);
 
             buttonItemSettingsLaunchPowerPoint.CheckedChanged += new EventHandler(this.TabHome.buttonItemSettingsLaunchPowerPoint_CheckedChanged);
@@ -93,6 +96,19 @@ namespace SalesDepot
             }
         }
 
+        private void LoadApplicationSettings()
+        {
+            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.IconPath))
+                this.Icon = new Icon(ConfigurationClasses.SettingsManager.Instance.IconPath);
+            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath))
+                labelItemCalendarLogo.Image = new Bitmap(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath);
+            this.Text = ConfigurationClasses.SettingsManager.Instance.SalesDepotName;
+
+            ribbonBarHomeClassicView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ClassicTitle) ? ConfigurationClasses.SettingsManager.Instance.ClassicTitle : FormMain.Instance.ribbonBarHomeClassicView.Text;
+            ribbonBarHomeListView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ListTitle) ? ConfigurationClasses.SettingsManager.Instance.ListTitle : FormMain.Instance.ribbonBarHomeListView.Text;
+            ribbonBarHomeSolutionView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.SolutionTitle) ? ConfigurationClasses.SettingsManager.Instance.SolutionTitle : FormMain.Instance.ribbonBarHomeSolutionView.Text;
+        }
+
         private void buttonItemExit_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -117,20 +133,45 @@ namespace SalesDepot
         #region Form Event Handlers
         private void FormMain_Load(object sender, EventArgs e)
         {
-            ActivityRecorder.Instance.StartRecording();
-            SDRecorder.Instance.StartRecording();
-            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.IconPath))
-                this.Icon = new Icon(ConfigurationClasses.SettingsManager.Instance.IconPath);
-            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath))
-                labelItemCalendarLogo.Image = new Bitmap(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath);
+            LoadApplicationSettings();
         }
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            ribbonControl.Enabled = false;
-            this.TabHome.InitPage();
-            ribbonControl_SelectedRibbonTabChanged(null, null);
-            ribbonControl.Enabled = true;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                form.laProgress.Text = "Loading Sales Libraries...";
+                form.TopMost = true;
+                ribbonControl.Visible = false;
+                pnEmpty.BringToFront();
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    BusinessClasses.LibraryManager.Instance.LoadSalesDepotsPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.SalesDepotRootFolder));
+                    this.Invoke((MethodInvoker)delegate()
+                    {
+                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildPackageViewers();
+                        Application.DoEvents();
+                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
+                        Application.DoEvents();
+                        this.TabHome.LoadPage();
+                        Application.DoEvents();
+                        ribbonControl_SelectedRibbonTabChanged(null, null);
+                        Application.DoEvents();
+                    });
+                }));
+                form.Show();
+                Application.DoEvents();
+                thread.Start();
+                while (thread.IsAlive)
+                    Application.DoEvents();
+                ribbonControl.Visible = true;
+                pnContainer.BringToFront();
+                form.Close();
+            }
+            AppManager.Instance.ActivatePowerPoint();
+            AppManager.Instance.ActivateMainForm();
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)

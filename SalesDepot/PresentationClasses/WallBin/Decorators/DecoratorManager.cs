@@ -31,15 +31,18 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         {
             this.PackageViewers.Clear();
             foreach (BusinessClasses.LibraryPackage package in BusinessClasses.LibraryManager.Instance.LibraryPackageCollection)
+            {
                 this.PackageViewers.Add(new Decorators.PackageDecorator(package));
+                Application.DoEvents();
+            }
         }
 
         public void BuildOvernightsCalendars()
         {
             foreach (PackageDecorator packageViwer in this.PackageViewers)
             {
-                Application.DoEvents();
                 packageViwer.BuildOvernightsCalendar();
+                Application.DoEvents();
             }
         }
     }

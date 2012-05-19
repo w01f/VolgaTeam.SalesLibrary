@@ -45,7 +45,7 @@ namespace SalesDepot.ToolForms.WallBin
 
                     form.Show();
 
-                    while (thread.ThreadState == System.Threading.ThreadState.Running)
+                    while (thread.IsAlive)
                         Application.DoEvents();
 
                     form.Close();

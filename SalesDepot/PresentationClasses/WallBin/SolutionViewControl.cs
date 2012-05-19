@@ -9,11 +9,15 @@ using System.Windows.Forms;
 
 namespace SalesDepot.PresentationClasses.WallBin
 {
-    public partial class SolutionViewControl : UserControl
+    public partial class SolutionViewControl : UserControl, IWallBinView
     {
         private List<Viewers.IFileViewer> _fileViewers = new List<Viewers.IFileViewer>();
         private Viewers.IFileViewer _selectedFileViewer = null;
         private bool _searchSplitterPositionChanged = false;
+
+        private DevComponents.DotNetBar.SuperTooltipInfo _targetToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Help me search for files by qualified target criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+        private DevComponents.DotNetBar.SuperTooltipInfo _titleToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Help me search for files by title or file name", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+        private DevComponents.DotNetBar.SuperTooltipInfo _dateToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Help me search for files by date range", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
 
         public SolutionViewControl()
         {
@@ -24,7 +28,34 @@ namespace SalesDepot.PresentationClasses.WallBin
             LoadKeyWordFilterSet();
         }
 
-        #region Logic
+        #region Methods
+        public void ApplyView()
+        {
+            FormMain.Instance.ribbonBarEmailBin.Visible = false;
+            FormMain.Instance.ribbonBarViewSettings.Visible = false;
+
+            FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
+            FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
+            FormMain.Instance.ribbonBarHomeAddSlide.Visible = true;
+            FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
+
+            FormMain.Instance.comboBoxItemStations.Visible = false;
+            FormMain.Instance.comboBoxItemPages.Visible = false;
+            FormMain.Instance.ribbonBarStations.RecalcLayout();
+
+            FormMain.Instance.ribbonBarHomeHelp.Visible = true;
+            FormMain.Instance.ribbonBarHomeHelp.BringToFront();
+            FormMain.Instance.ribbonBarExit.Visible = true;
+            FormMain.Instance.ribbonBarExit.BringToFront();
+
+            if (ConfigurationClasses.SettingsManager.Instance.SolutionTitleView)
+                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
+            else if (ConfigurationClasses.SettingsManager.Instance.SolutionTagsView)
+                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _targetToolTip);
+            else if (ConfigurationClasses.SettingsManager.Instance.SolutionDateView)
+                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
+        }
+
         public void ApplySearchCriteria(BusinessClasses.LibraryFile[] files)
         {
             _selectedFileViewer = null;
@@ -33,7 +64,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             {
                 form.laProgress.Text = "Searching Library...";
                 form.TopMost = true;
-                FormMain.Instance.Enabled = false;
+                if (files.Length > 0)
+                    FormMain.Instance.Enabled = false;
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
 
@@ -106,7 +138,8 @@ namespace SalesDepot.PresentationClasses.WallBin
                     }
                 }));
 
-                form.Show();
+                if (files.Length > 0)
+                    form.Show();
                 Application.DoEvents();
 
                 thread.Start();
@@ -355,76 +388,6 @@ namespace SalesDepot.PresentationClasses.WallBin
             navBarControlSearchTags.View = new CustomNavPaneViewInfoRegistrator();
         }
 
-        private BusinessClasses.LibraryFileSearchTags GetSearhTags()
-        {
-            BusinessClasses.LibraryFileSearchTags searchTags = new BusinessClasses.LibraryFileSearchTags();
-
-            if (checkedListBoxControlGroup1.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup1.Tag as ConfigurationClasses.SearchGroup).Name;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            if (checkedListBoxControlGroup2.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup2.Tag as ConfigurationClasses.SearchGroup).Name; group.Name = navBarGroup2.Caption;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            if (checkedListBoxControlGroup3.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup3.Tag as ConfigurationClasses.SearchGroup).Name;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            if (checkedListBoxControlGroup4.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup4.Tag as ConfigurationClasses.SearchGroup).Name;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            if (checkedListBoxControlGroup5.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup5.Tag as ConfigurationClasses.SearchGroup).Name;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            if (checkedListBoxControlGroup6.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup6.Tag as ConfigurationClasses.SearchGroup).Name;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            if (checkedListBoxControlGroup7.CheckedItemsCount > 0)
-            {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup7.Tag as ConfigurationClasses.SearchGroup).Name;
-                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
-                    if (item.CheckState == CheckState.Checked)
-                        group.Tags.Add(item.Value.ToString());
-                searchTags.SearchGroups.Add(group);
-            }
-            return searchTags;
-        }
-
         public void UpdateSearchButtonStatus()
         {
             bool enableButton = false;
@@ -495,145 +458,8 @@ namespace SalesDepot.PresentationClasses.WallBin
         }
         #endregion
 
-        #region Key Word Filters Methods
-        private bool _allowToSaveKeyWordFilters = false;
-        private void LoadKeyWordFilterSet()
-        {
-            _allowToSaveKeyWordFilters = false;
-            checkEditAllFiles.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.AllFiles;
-            checkEditPowerPoint.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PowerPoint;
-            checkEditPDF.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PDF;
-            checkEditExcel.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Excel;
-            checkEditWord.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Word;
-            checkEditVideo.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Video;
-            checkEditWeb.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Url;
-            checkEditNetwork.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Network;
-            checkEditFolders.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Folder;
-            _allowToSaveKeyWordFilters = true;
-        }
-
-        private void SaveKeyWordFilterSet()
-        {
-            if (ConfigurationClasses.SettingsManager.Instance.LastViewed)
-            {
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.AllFiles = checkEditAllFiles.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PowerPoint = checkEditPowerPoint.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PDF = checkEditPDF.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Excel = checkEditExcel.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Word = checkEditWord.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Video = checkEditVideo.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Url = checkEditWeb.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Network = checkEditNetwork.Checked;
-                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Folder = checkEditFolders.Checked;
-                ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-            }
-        }
-        #endregion
-
-        #region Grid event Handlers
-        private void gridViewFiles_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
-        {
-            if (e.RowHandle >= 0 && _fileViewers.Count > e.RowHandle)
-            {
-                BusinessClasses.LibraryFile file = _fileViewers[gridViewFiles.GetDataSourceRowIndex(e.RowHandle)].File;
-                switch (file.CriteriaOverlap)
-                {
-                    case "meet ALL of your Search Criteria":
-                        e.Appearance.BackColor = Color.FromArgb(223, 253, 234);
-                        break;
-                    case "meet SOME of your Search Criteria":
-                        e.Appearance.BackColor = Color.FromArgb(255, 223, 217);
-                        break;
-                }
-            }
-        }
-
-        private void gridViewFiles_MouseMove(object sender, MouseEventArgs e)
-        {
-            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hi = gridViewFiles.CalcHitInfo(e.X, e.Y);
-            if (hi.InRowCell)
-                this.Cursor = Cursors.Hand;
-            else
-                this.Cursor = Cursors.Default;
-        }
-
-        private void gridViewFiles_MouseLeave(object sender, System.EventArgs e)
-        {
-            this.Cursor = Cursors.Default;
-        }
-
-        private void gridViewFiles_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            int rowHandele = e.FocusedRowHandle;
-            UpdatePreviewArea(rowHandele);
-        }
-
-        private void gridViewFiles_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
-        {
-            if (_selectedFileViewer != null && e.Clicks == 2)
-            {
-                _selectedFileViewer.Open();
-            }
-        }
-        #endregion
-
-        #region Toolbar Buttons Clicks
-        private void barButtonItemOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (_selectedFileViewer != null)
-                _selectedFileViewer.Open();
-        }
-
-        private void barButtonItemSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (_selectedFileViewer != null)
-                _selectedFileViewer.Save();
-        }
-
-        private void barButtonItemSaveAsPDF_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Viewers.PowerPointViewer viewer = _selectedFileViewer as Viewers.PowerPointViewer;
-            if (viewer != null)
-                viewer.SaveAsPDF();
-        }
-
-        private void barButtonItemEmailLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (_selectedFileViewer != null)
-                _selectedFileViewer.Email();
-        }
-
-        private void barButtonItemPrintLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (_selectedFileViewer != null)
-                _selectedFileViewer.Print();
-        }
-
-        private void barButtonItemOpenQuickView_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Viewers.PowerPointViewer viewer = _selectedFileViewer as Viewers.PowerPointViewer;
-            if (viewer != null)
-                viewer.OpenInQuickView();
-        }
-
-        private void barButtonItemSearch_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            Search();
-        }
-
-        private void pbSearchByFiles_Click(object sender, EventArgs e)
-        {
-            Search();
-        }
-
-        private void barButtonItemClear_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            ClearSolutionControl();
-        }
-        #endregion
-
-        #region Other GUI Event Handlers
-        private void SolutionViewControl_Load(object sender, EventArgs e)
+        #region Search Tags Methods and Event Handlers
+        private void InitSearchTagsGroups()
         {
             if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 0)
             {
@@ -700,26 +526,120 @@ namespace SalesDepot.PresentationClasses.WallBin
                 navBarGroup7.Visible = false;
         }
 
+        private BusinessClasses.LibraryFileSearchTags GetSearhTags()
+        {
+            BusinessClasses.LibraryFileSearchTags searchTags = new BusinessClasses.LibraryFileSearchTags();
+
+            if (checkedListBoxControlGroup1.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup1.Tag as ConfigurationClasses.SearchGroup).Name;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            if (checkedListBoxControlGroup2.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup2.Tag as ConfigurationClasses.SearchGroup).Name; group.Name = navBarGroup2.Caption;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            if (checkedListBoxControlGroup3.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup3.Tag as ConfigurationClasses.SearchGroup).Name;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            if (checkedListBoxControlGroup4.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup4.Tag as ConfigurationClasses.SearchGroup).Name;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            if (checkedListBoxControlGroup5.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup5.Tag as ConfigurationClasses.SearchGroup).Name;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            if (checkedListBoxControlGroup6.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup6.Tag as ConfigurationClasses.SearchGroup).Name;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            if (checkedListBoxControlGroup7.CheckedItemsCount > 0)
+            {
+                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                group.Name = (navBarGroup7.Tag as ConfigurationClasses.SearchGroup).Name;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
+                    if (item.CheckState == CheckState.Checked)
+                        group.Tags.Add(item.Value.ToString());
+                searchTags.SearchGroups.Add(group);
+            }
+            return searchTags;
+        }
+
         private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
         {
             UpdateSearchButtonStatus();
         }
+        #endregion
 
-        private void radioButtonDateRange_CheckedChanged(object sender, EventArgs e)
+        #region Key Word Methods and Event Handlers
+        private bool _allowToSaveKeyWordFilters = false;
+        private void LoadKeyWordFilterSet()
         {
-            dateEditDateRangeStart.Enabled = rbDateRange.Checked;
-            dateEditDateRangeEnd.Enabled = rbDateRange.Checked;
+            _allowToSaveKeyWordFilters = false;
+            checkEditAllFiles.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.AllFiles;
+            checkEditPowerPoint.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PowerPoint;
+            checkEditPDF.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PDF;
+            checkEditExcel.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Excel;
+            checkEditWord.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Word;
+            checkEditVideo.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Video;
+            checkEditWeb.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Url;
+            checkEditNetwork.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Network;
+            checkEditFolders.Checked = ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Folder;
+            _allowToSaveKeyWordFilters = true;
         }
 
-        private void textEditSearchByFiles_EditValueChanged(object sender, EventArgs e)
+        private void SaveKeyWordFilterSet()
         {
-            UpdateSearchButtonStatus();
+            if (ConfigurationClasses.SettingsManager.Instance.LastViewed)
+            {
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.AllFiles = checkEditAllFiles.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PowerPoint = checkEditPowerPoint.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.PDF = checkEditPDF.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Excel = checkEditExcel.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Word = checkEditWord.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Video = checkEditVideo.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Url = checkEditWeb.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Network = checkEditNetwork.Checked;
+                ConfigurationClasses.SettingsManager.Instance.KeyWordFilters.Folder = checkEditFolders.Checked;
+                ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+            }
         }
 
-        private void textEditSearchByFiles_KeyDown(object sender, KeyEventArgs e)
+        private void checkEditKeyWord_CheckedChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && textEditSearchByFiles.EditValue != null)
-                Search();
+            if (_allowToSaveKeyWordFilters)
+                SaveKeyWordFilterSet();
         }
 
         private void checkEditAllFiles_CheckedChanged(object sender, EventArgs e)
@@ -760,10 +680,135 @@ namespace SalesDepot.PresentationClasses.WallBin
             checkEditKeyWord_CheckedChanged(null, null);
         }
 
-        private void checkEditKeyWord_CheckedChanged(object sender, EventArgs e)
+        private void textEditSearchByFiles_EditValueChanged(object sender, EventArgs e)
         {
-            if (_allowToSaveKeyWordFilters)
-                SaveKeyWordFilterSet();
+            UpdateSearchButtonStatus();
+        }
+
+        private void textEditSearchByFiles_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && textEditSearchByFiles.EditValue != null)
+                Search();
+        }
+        #endregion
+
+        #region Date Range Methods and Event Handlers
+        private void radioButtonDateRange_CheckedChanged(object sender, EventArgs e)
+        {
+            dateEditDateRangeStart.Enabled = rbDateRange.Checked;
+            dateEditDateRangeEnd.Enabled = rbDateRange.Checked;
+        }
+        #endregion
+
+        #region Preview Area Methods and Event Handlers
+        #region Toolbar Buttons Clicks
+        private void barButtonItemOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (_selectedFileViewer != null)
+                _selectedFileViewer.Open();
+        }
+
+        private void barButtonItemSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (_selectedFileViewer != null)
+                _selectedFileViewer.Save();
+        }
+
+        private void barButtonItemSaveAsPDF_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Viewers.PowerPointViewer viewer = _selectedFileViewer as Viewers.PowerPointViewer;
+            if (viewer != null)
+                viewer.SaveAsPDF();
+        }
+
+        private void barButtonItemEmailLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (_selectedFileViewer != null)
+                _selectedFileViewer.Email();
+        }
+
+        private void barButtonItemPrintLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (_selectedFileViewer != null)
+                _selectedFileViewer.Print();
+        }
+
+        private void barButtonItemOpenQuickView_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Viewers.PowerPointViewer viewer = _selectedFileViewer as Viewers.PowerPointViewer;
+            if (viewer != null)
+                viewer.OpenInQuickView();
+        }
+
+        private void barButtonItemSearch_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Search();
+        }
+
+        private void pbSearchByFiles_Click(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void barButtonItemClear_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ClearSolutionControl();
+        }
+        #endregion
+
+        #region Grid Event Handlers
+        private void gridViewFiles_RowStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowStyleEventArgs e)
+        {
+            if (e.RowHandle >= 0 && _fileViewers.Count > e.RowHandle)
+            {
+                BusinessClasses.LibraryFile file = _fileViewers[gridViewFiles.GetDataSourceRowIndex(e.RowHandle)].File;
+                switch (file.CriteriaOverlap)
+                {
+                    case "meet ALL of your Search Criteria":
+                        e.Appearance.BackColor = Color.FromArgb(223, 253, 234);
+                        break;
+                    case "meet SOME of your Search Criteria":
+                        e.Appearance.BackColor = Color.FromArgb(255, 223, 217);
+                        break;
+                }
+            }
+        }
+
+        private void gridViewFiles_MouseMove(object sender, MouseEventArgs e)
+        {
+            DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hi = gridViewFiles.CalcHitInfo(e.X, e.Y);
+            if (hi.InRowCell)
+                this.Cursor = Cursors.Hand;
+            else
+                this.Cursor = Cursors.Default;
+        }
+
+        private void gridViewFiles_MouseLeave(object sender, System.EventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+
+        private void gridViewFiles_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            int rowHandele = e.FocusedRowHandle;
+            UpdatePreviewArea(rowHandele);
+        }
+
+        private void gridViewFiles_RowCellClick(object sender, DevExpress.XtraGrid.Views.Grid.RowCellClickEventArgs e)
+        {
+            if (_selectedFileViewer != null && e.Clicks == 2)
+            {
+                _selectedFileViewer.Open();
+            }
+        }
+
+        #endregion
+        #endregion
+
+        #region Control Event Handlers
+        private void SolutionViewControl_Load(object sender, EventArgs e)
+        {
+            InitSearchTagsGroups();
         }
 
         private void toolTipController_GetActiveObjectInfo(object sender, DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs e)
@@ -800,6 +845,54 @@ namespace SalesDepot.PresentationClasses.WallBin
             {
                 e.Info = info;
             }
+        }
+
+        public void buttonItemHomeSearchMode_Click(object sender, EventArgs e)
+        {
+            DevComponents.DotNetBar.ButtonItem buttonItem = sender as DevComponents.DotNetBar.ButtonItem;
+            if (buttonItem != null)
+            {
+                FormMain.Instance.buttonItemHomeSearchByTags.Checked = false;
+                FormMain.Instance.buttonItemHomeSearchByFileName.Checked = false;
+                FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked = false;
+                buttonItem.Checked = true;
+            }
+        }
+
+        public void buttonItemHomeSearchMode_CheckedChanged(object sender, EventArgs e)
+        {
+            DevComponents.DotNetBar.ButtonItem buttonItem = sender as DevComponents.DotNetBar.ButtonItem;
+            if (buttonItem != null)
+            {
+                if (buttonItem.Checked)
+                {
+                    ClearSolutionControl();
+                    if (buttonItem == FormMain.Instance.buttonItemHomeSearchByTags)
+                    {
+                        xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageSearchTags;
+                        FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _targetToolTip);
+                    }
+                    else if (buttonItem == FormMain.Instance.buttonItemHomeSearchByFileName)
+                    {
+                        xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageKeyWords;
+                        FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
+                    }
+                    else if (buttonItem == FormMain.Instance.buttonItemHomeSearchRecentFiles)
+                    {
+                        xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageAddDate;
+                        FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
+                    }
+                    ConfigurationClasses.SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+                }
+            }
+        }
+
+        public void buttonItemHomeAddSlide_Click(object sender, EventArgs e)
+        {
+            InsertSlide();
         }
         #endregion
     }

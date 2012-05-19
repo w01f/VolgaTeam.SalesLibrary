@@ -43,6 +43,11 @@ namespace SalesDepot
 
         public void RunForm()
         {
+            ActivityRecorder.Instance.StartRecording();
+            SDRecorder.Instance.StartRecording();
+            ConfigurationClasses.SettingsManager.Instance.GetSalesDepotName();
+            ConfigurationClasses.SettingsManager.Instance.GetDefaultWizard();
+            ConfigurationClasses.ListManager.Instance.Init();
             ShowMainForm();
         }
 
@@ -67,27 +72,18 @@ namespace SalesDepot
 
         public void ActivateMainForm()
         {
-            IntPtr handle = FormMain.Instance.Handle;
+            IntPtr handle = ConfigurationClasses.RegistryHelper.SalesDepotHandle;
             if (handle.Equals(IntPtr.Zero))
             {
-                handle = ConfigurationClasses.RegistryHelper.SalesDepotHandle;
+                handle = FormMain.Instance.Handle;
                 if (handle.Equals(IntPtr.Zero))
                 {
                     Process[] proc = Process.GetProcessesByName("SalesDepot");
                     if (proc.Length > 0)
                         handle = proc[0].MainWindowHandle;
                 }
-                InteropClasses.WinAPIHelper.ShowWindow(handle, ConfigurationClasses.RegistryHelper.MaximizeSalesDepot ? InteropClasses.WindowShowStyle.ShowMaximized : InteropClasses.WindowShowStyle.ShowNormal);
-                InteropClasses.WinAPIHelper.MakeTopMost(handle);
-                InteropClasses.WinAPIHelper.MakeNormal(handle);
             }
-            else
-                InteropClasses.WinAPIHelper.ShowWindow(handle, InteropClasses.WindowShowStyle.ShowMaximized);
-            uint lpdwProcessId = 0;
-            InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-            InteropClasses.WinAPIHelper.SetForegroundWindow(handle);
-            InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-            ActivateMiniBar();
+            ActivateForm(handle, ConfigurationClasses.RegistryHelper.MaximizeSalesDepot, false);
         }
 
         public void ActivatePowerPoint()

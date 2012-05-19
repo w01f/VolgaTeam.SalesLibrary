@@ -14,30 +14,54 @@ namespace SalesDepot.TabPages
         public AppManager.SingleParamDelegate StationChanged;
         public AppManager.SingleParamDelegate PageChanged;
 
+        public PresentationClasses.WallBin.IWallBinView SelectedView { get; private set; }
         public PresentationClasses.WallBin.ClassicViewControl ClassicViewControl { get; private set; }
-        private DevComponents.DotNetBar.SuperTooltipInfo _classicToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Column View", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-        private DevComponents.DotNetBar.SuperTooltipInfo _listToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Learn more about the Sales Library List View", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-        private DevComponents.DotNetBar.SuperTooltipInfo _emailToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Learn more about how to EMAIL files from this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-
         public PresentationClasses.WallBin.SolutionViewControl SolutionViewControl { get; private set; }
-        private DevComponents.DotNetBar.SuperTooltipInfo _targetToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Help me search for files by qualified target criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-        private DevComponents.DotNetBar.SuperTooltipInfo _titleToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Help me search for files by title or file name", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-        private DevComponents.DotNetBar.SuperTooltipInfo _dateToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Help me search for files by date range", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
 
         public TabHomeControl()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            this.ClassicViewControl = new PresentationClasses.WallBin.ClassicViewControl();
+            this.SolutionViewControl = new PresentationClasses.WallBin.SolutionViewControl();
         }
 
         #region Methods
-        public void InitPage()
+        public void LoadPage()
         {
-            FormMain.Instance.ribbonBarHomeClassicView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ClassicTitle) ? ConfigurationClasses.SettingsManager.Instance.ClassicTitle :FormMain.Instance.ribbonBarHomeClassicView.Text;
-            FormMain.Instance.ribbonBarHomeListView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ListTitle) ? ConfigurationClasses.SettingsManager.Instance.ListTitle : FormMain.Instance.ribbonBarHomeListView.Text;
-            FormMain.Instance.ribbonBarHomeSolutionView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.SolutionTitle) ? ConfigurationClasses.SettingsManager.Instance.SolutionTitle : FormMain.Instance.ribbonBarHomeSolutionView.Text;
-
             _allowToSave = false;
+            LoadWallBinSettings();
+            LoadPackages();
+            this.ClassicViewControl.UpdateFontButtonStatus();
+            ApplySelectedView();
+            ApplySelectedDecorator();
+            _allowToSave = true;
+        }
+
+        private void LoadWallBinSettings()
+        {
+            #region Wall Bin Last Saved State
+            FormMain.Instance.buttonItemHomeSolutionView.Enabled = !BusinessClasses.LibraryManager.Instance.OldFormatDetected;
+
+            FormMain.Instance.buttonItemHomeClassicView.Checked = ConfigurationClasses.SettingsManager.Instance.ClassicView;
+            FormMain.Instance.buttonItemHomeListView.Checked = ConfigurationClasses.SettingsManager.Instance.ListView;
+            FormMain.Instance.buttonItemHomeSolutionView.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionView;
+            if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
+            {
+                FormMain.Instance.buttonItemHomeSearchByFileName.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionTitleView;
+                FormMain.Instance.buttonItemHomeSearchByTags.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionTagsView;
+                FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionDateView;
+            }
+            else
+                FormMain.Instance.buttonItemHomeSearchByTags.Checked = true;
+
+            if (ConfigurationClasses.SettingsManager.Instance.ClassicView || ConfigurationClasses.SettingsManager.Instance.ListView || BusinessClasses.LibraryManager.Instance.OldFormatDetected)
+                this.SelectedView = this.ClassicViewControl;
+            else if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
+                this.SelectedView = this.SolutionViewControl;
+            #endregion
+
+            #region Wall Bin Configuration
             FormMain.Instance.buttonItemSettingsLaunchPowerPoint.Checked = ConfigurationClasses.SettingsManager.Instance.LaunchPPT;
             FormMain.Instance.buttonItemSettingsMultitab.Checked = ConfigurationClasses.SettingsManager.Instance.MultitabView;
             switch (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions)
@@ -102,29 +126,10 @@ namespace SalesDepot.TabPages
             }
             FormMain.Instance.buttonItemSettingsQuickViewImages.Checked = !ConfigurationClasses.SettingsManager.Instance.OldStyleQuickView;
             FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked = ConfigurationClasses.SettingsManager.Instance.OldStyleQuickView;
-            _allowToSave = true;
-
-            UpdateSalesDepot();
-            FormMain.Instance.buttonItemHomeSolutionView.Enabled = !BusinessClasses.LibraryManager.Instance.OldFormatDetected;
-            FormMain.Instance.buttonItemHomeClassicView.Checked = ConfigurationClasses.SettingsManager.Instance.ClassicView;
-            FormMain.Instance.buttonItemHomeListView.Checked = ConfigurationClasses.SettingsManager.Instance.ListView;
-            FormMain.Instance.buttonItemHomeSolutionView.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionView;
-            if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
-            {
-                FormMain.Instance.buttonItemHomeSearchByFileName.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionTitleView;
-                FormMain.Instance.buttonItemHomeSearchByTags.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionTagsView;
-                FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionDateView;
-            }
-            else
-                FormMain.Instance.buttonItemHomeSearchByTags.Checked = true;
-            UpdateView();
-            FormMain.Instance.buttonItemHomeClassicView.CheckedChanged += new EventHandler(ChangeView_CheckedChanged);
-            FormMain.Instance.buttonItemHomeSolutionView.CheckedChanged += new EventHandler(ChangeView_CheckedChanged);
-            FormMain.Instance.buttonItemHomeListView.CheckedChanged += new EventHandler(ChangeView_CheckedChanged);
+            #endregion
         }
 
-        #region Load Sales Depot Methods
-        private void FillPackages()
+        private void LoadPackages()
         {
             FormMain.Instance.comboBoxItemPackages.Items.Clear();
             foreach (BusinessClasses.LibraryPackage salesDepot in BusinessClasses.LibraryManager.Instance.LibraryPackageCollection)
@@ -149,6 +154,7 @@ namespace SalesDepot.TabPages
                 else
                     FormMain.Instance.comboBoxItemPackages.SelectedIndex = 0;
                 FormMain.Instance.comboBoxItemPackages.Enabled = FormMain.Instance.comboBoxItemPackages.Items.Count > 1;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex];
             }
             else
             {
@@ -158,136 +164,69 @@ namespace SalesDepot.TabPages
             }
         }
 
-        public void UpdateSalesDepot()
+        private void PrepareRibbonToChangeView()
         {
-            IntPtr handle = this.Handle;
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-            {
-                form.laProgress.Text = "Loading Sales Libraries...";
-                form.TopMost = true;
-                //pnEmpty.BringToFront();
-                //this.Enabled = false;
-                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                {
-                    ConfigurationClasses.SettingsManager.Instance.GetSalesDepotName();
-                    ConfigurationClasses.SettingsManager.Instance.GetDefaultWizard();
-                    ConfigurationClasses.ListManager.Instance.Init();
-                    BusinessClasses.LibraryManager.Instance.LoadSalesDepotsPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.SalesDepotRootFolder));
-                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildPackageViewers();
-                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
-                    this.Invoke((MethodInvoker)delegate()
-                    {
-                        pnMain.Controls.Add(this.ClassicViewControl);
-                        pnMain.Controls.Add(this.SolutionViewControl);
-                        FillPackages();
-                    });
-                }));
-                thread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-                thread.CurrentUICulture = new System.Globalization.CultureInfo("en");
-                form.Show();
-                Application.DoEvents();
-                this.ClassicViewControl = new PresentationClasses.WallBin.ClassicViewControl();
-                Application.DoEvents();
-                this.SolutionViewControl = new PresentationClasses.WallBin.SolutionViewControl();
-                Application.DoEvents();
-                thread.Start();
-                while (thread.ThreadState == System.Threading.ThreadState.Running)
-                    Application.DoEvents();
-                //this.Enabled = true;
-                //pnEmpty.SendToBack();
-                form.Close();
-            }
+            FormMain.Instance.comboBoxItemPages.Visible = true;
 
-            UpdateFontButtonStatus();
+            FormMain.Instance.ribbonBarExit.Visible = true;
+            FormMain.Instance.ribbonBarHomeHelp.Visible = true;
+            FormMain.Instance.ribbonBarViewSettings.Visible = true;
+            FormMain.Instance.ribbonBarEmailBin.Visible = true;
+            FormMain.Instance.ribbonBarHomeAddSlide.Visible = true;
+            FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
+            FormMain.Instance.ribbonBarEmailBin.BringToFront();
+            FormMain.Instance.ribbonBarViewSettings.BringToFront();
+            FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
+            FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
+            FormMain.Instance.ribbonBarHomeHelp.BringToFront();
+            FormMain.Instance.ribbonBarExit.BringToFront();
 
-            AppManager.Instance.ActivatePowerPoint();
-            AppManager.Instance.ActivateMainForm();
-            ConfigurationClasses.RegistryHelper.SalesDepotHandle = handle;
-            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+            FormMain.Instance.ribbonBarHomeHelp.Visible = false;
+            FormMain.Instance.ribbonBarExit.Visible = false;
+            FormMain.Instance.ribbonBarViewSettings.Visible = false;
+            FormMain.Instance.ribbonBarEmailBin.Visible = false;
+            FormMain.Instance.ribbonBarHomeAddSlide.Visible = false;
+            FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
         }
 
-        private void UpdateView()
+        private void ApplySelectedView()
         {
             pnEmpty.BringToFront();
-            FormMain.Instance.buttonItemHomeSolutionView.Enabled = !BusinessClasses.LibraryManager.Instance.OldFormatDetected;
-            this.ClassicViewControl.Visible = ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView;
-            FormMain.Instance.comboBoxItemPages.Visible = true;
-            if (!BusinessClasses.LibraryManager.Instance.OldFormatDetected)
-            {
-                this.SolutionViewControl.Visible = FormMain.Instance.buttonItemHomeSolutionView.Checked;
-
-                FormMain.Instance.ribbonBarExit.Visible = true;
-                FormMain.Instance.ribbonBarHomeHelp.Visible = true;
-                FormMain.Instance.ribbonBarViewSettings.Visible = true;
-                FormMain.Instance.ribbonBarEmailBin.Visible = true;
-                FormMain.Instance.ribbonBarHomeAddSlide.Visible = true;
-                FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
-                FormMain.Instance.ribbonBarEmailBin.BringToFront();
-                FormMain.Instance.ribbonBarViewSettings.BringToFront();
-                FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
-                FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
-                FormMain.Instance.ribbonBarHomeHelp.BringToFront();
-                FormMain.Instance.ribbonBarExit.BringToFront();
-
-                FormMain.Instance.ribbonBarHomeHelp.Visible = false;
-                FormMain.Instance.ribbonBarExit.Visible = false;
-                FormMain.Instance.ribbonBarViewSettings.Visible = false;
-                FormMain.Instance.ribbonBarEmailBin.Visible = false;
-                FormMain.Instance.ribbonBarHomeAddSlide.Visible = false;
-                FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
-
-                FormMain.Instance.ribbonBarEmailBin.Visible = (ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView) & (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
-                FormMain.Instance.ribbonBarEmailBin.BringToFront();
-                FormMain.Instance.buttonItemEmailBin.Checked = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin ? ConfigurationClasses.SettingsManager.Instance.ShowEmailBin : false;
-                FormMain.Instance.ribbonBarViewSettings.Visible = ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView;
-                FormMain.Instance.ribbonBarViewSettings.BringToFront();
-
-                FormMain.Instance.ribbonBarHomeSearchMode.Visible = FormMain.Instance.buttonItemHomeSolutionView.Checked;
-                FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
-                FormMain.Instance.ribbonBarHomeAddSlide.Visible = FormMain.Instance.buttonItemHomeSolutionView.Checked;
-                FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
-
-                FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1 & (ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView);
-                FormMain.Instance.comboBoxItemPages.Visible = ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView;
-                FormMain.Instance.ribbonBarStations.RecalcLayout();
-
-                FormMain.Instance.ribbonBarHomeHelp.Visible = true;
-                FormMain.Instance.ribbonBarHomeHelp.BringToFront();
-                FormMain.Instance.ribbonBarExit.Visible = true;
-                FormMain.Instance.ribbonBarExit.BringToFront();
-            }
-
-            if (ConfigurationClasses.SettingsManager.Instance.ClassicView)
-                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _classicToolTip);
-            else if (ConfigurationClasses.SettingsManager.Instance.ListView)
-                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _listToolTip);
-            else
-            {
-                if (FormMain.Instance.buttonItemHomeSearchByFileName.Checked)
-                    FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
-                else if (FormMain.Instance.buttonItemHomeSearchByTags.Checked)
-                    FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _targetToolTip);
-                else if (FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked)
-                    FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
-            }
-
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.UpdateView();
+            Application.DoEvents();
+            PrepareRibbonToChangeView();
+            this.SelectedView.ApplyView();
+            if (!pnMain.Controls.Contains(this.SelectedView as Control))
+                pnMain.Controls.Add(this.SelectedView as Control);
+            (this.SelectedView as Control).BringToFront();
+            Application.DoEvents();
             pnMain.BringToFront();
+            Application.DoEvents();
         }
-        #endregion
 
-        #region Classic View Methods
-        private void UpdateFontButtonStatus()
+        private void ApplySelectedDecorator()
         {
-            FormMain.Instance.buttonItemLargerText.Enabled = ConfigurationClasses.SettingsManager.Instance.FontSize < 20;
-            FormMain.Instance.buttonItemSmallerText.Enabled = ConfigurationClasses.SettingsManager.Instance.FontSize > 8;
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
+            {
+                FormMain.Instance.ribbonBarStations.Text = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Name;
+                FormMain.Instance.ribbonBarStations.RecalcLayout();
+                FormMain.Instance.ribbonPanelHome.PerformLayout();
+
+                pnEmpty.BringToFront();
+                Application.DoEvents();
+                if (!this.ClassicViewControl.pnSalesDepotContainer.Controls.Contains(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container))
+                    this.ClassicViewControl.pnSalesDepotContainer.Controls.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container);
+                pnEmpty.BringToFront();
+                Application.DoEvents();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Apply();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container.BringToFront();
+                pnMain.BringToFront();
+                Application.DoEvents();
+            }
         }
-        #endregion
         #endregion
 
         #region Button's Click Event Handlers
-        #region Base View Button's Click Event Handlers
+        #region Wall Bin Button's Click Event Handlers
         public void ChangeView_Click(object sender, EventArgs e)
         {
             FormMain.Instance.buttonItemHomeClassicView.Checked = false;
@@ -296,17 +235,26 @@ namespace SalesDepot.TabPages
             (sender as DevComponents.DotNetBar.ButtonItem).Checked = true;
         }
 
-        private void ChangeView_CheckedChanged(object sender, EventArgs e)
+        public void ChangeView_CheckedChanged(object sender, EventArgs e)
         {
-            if ((sender as DevComponents.DotNetBar.ButtonItem).Checked)
+            if (_allowToSave)
             {
-                ConfigurationClasses.SettingsManager.Instance.ClassicView = FormMain.Instance.buttonItemHomeClassicView.Checked;
-                ConfigurationClasses.SettingsManager.Instance.ListView = FormMain.Instance.buttonItemHomeListView.Checked;
-                ConfigurationClasses.SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
-                ConfigurationClasses.SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
-                ConfigurationClasses.SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
-                ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-                UpdateView();
+                if ((sender as DevComponents.DotNetBar.ButtonItem).Checked)
+                {
+                    ConfigurationClasses.SettingsManager.Instance.ClassicView = FormMain.Instance.buttonItemHomeClassicView.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.ListView = FormMain.Instance.buttonItemHomeListView.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
+                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+
+                    if (ConfigurationClasses.SettingsManager.Instance.ClassicView || ConfigurationClasses.SettingsManager.Instance.ListView || BusinessClasses.LibraryManager.Instance.OldFormatDetected)
+                        this.SelectedView = this.ClassicViewControl;
+                    else if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
+                        this.SelectedView = this.SolutionViewControl;
+
+                    ApplySelectedView();
+                }
             }
         }
 
@@ -338,85 +286,6 @@ namespace SalesDepot.TabPages
         }
         #endregion
 
-        #region Classic View Button's Click Event Handlers
-        public void buttonItemLargerText_Click(object sender, EventArgs e)
-        {
-            ConfigurationClasses.SettingsManager.Instance.FontSize += 2;
-            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-            UpdateFontButtonStatus();
-            if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
-        }
-
-        public void buttonItemSmallerText_Click(object sender, EventArgs e)
-        {
-            ConfigurationClasses.SettingsManager.Instance.FontSize -= 2;
-            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-            UpdateFontButtonStatus();
-            if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
-        }
-
-        public void buttonItemEmailBin_CheckedChanged(object sender, EventArgs e)
-        {
-            this.ClassicViewControl.splitContainerControl.PanelVisibility = FormMain.Instance.buttonItemEmailBin.Checked ? DevExpress.XtraEditors.SplitPanelVisibility.Both : DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
-            FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : (FormMain.Instance.buttonItemHomeClassicView.Checked ? _classicToolTip : _listToolTip));
-            ConfigurationClasses.SettingsManager.Instance.ShowEmailBin = FormMain.Instance.buttonItemEmailBin.Checked;
-            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-
-        }
-        #endregion
-
-        #region Solution View Button's Click Event Handlers
-        public void buttonItemHomeSearchMode_Click(object sender, EventArgs e)
-        {
-            DevComponents.DotNetBar.ButtonItem buttonItem = sender as DevComponents.DotNetBar.ButtonItem;
-            if (buttonItem != null)
-            {
-                FormMain.Instance.buttonItemHomeSearchByTags.Checked = false;
-                FormMain.Instance.buttonItemHomeSearchByFileName.Checked = false;
-                FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked = false;
-                buttonItem.Checked = true;
-            }
-        }
-
-        public void buttonItemHomeSearchMode_CheckedChanged(object sender, EventArgs e)
-        {
-            DevComponents.DotNetBar.ButtonItem buttonItem = sender as DevComponents.DotNetBar.ButtonItem;
-            if (buttonItem != null)
-            {
-                if (buttonItem.Checked)
-                {
-                    this.SolutionViewControl.ClearSolutionControl();
-                    if (buttonItem == FormMain.Instance.buttonItemHomeSearchByTags)
-                    {
-                        this.SolutionViewControl.xtraTabControlSolutionModes.SelectedTabPage = this.SolutionViewControl.xtraTabPageSearchTags;
-                        FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _targetToolTip);
-                    }
-                    else if (buttonItem == FormMain.Instance.buttonItemHomeSearchByFileName)
-                    {
-                        this.SolutionViewControl.xtraTabControlSolutionModes.SelectedTabPage = this.SolutionViewControl.xtraTabPageKeyWords;
-                        FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
-                    }
-                    else if (buttonItem == FormMain.Instance.buttonItemHomeSearchRecentFiles)
-                    {
-                        this.SolutionViewControl.xtraTabControlSolutionModes.SelectedTabPage = this.SolutionViewControl.xtraTabPageAddDate;
-                        FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
-                    }
-                    ConfigurationClasses.SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-                }
-            }
-        }
-
-        public void buttonItemHomeAddSlide_Click(object sender, EventArgs e)
-        {
-            this.SolutionViewControl.InsertSlide();
-        }
-        #endregion
-
         #region Settings Button's Click Event Handlers
         public void buttonItemSettingsLaunchPowerPoint_CheckedChanged(object sender, EventArgs e)
         {
@@ -433,7 +302,9 @@ namespace SalesDepot.TabPages
             {
                 ConfigurationClasses.SettingsManager.Instance.MultitabView = FormMain.Instance.buttonItemSettingsMultitab.Checked;
                 ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+                pnEmpty.BringToFront();
                 StationChanged(FormMain.Instance.comboBoxItemStations);
+                pnMain.BringToFront();
             }
         }
 
@@ -582,7 +453,7 @@ namespace SalesDepot.TabPages
                 form.ShowDialog();
                 this.ClassicViewControl.LoadOptions();
             }
-            UpdateView();
+            ApplySelectedView();
         }
 
         public void buttonItemSettingsHelp_Click(object sender, EventArgs e)
@@ -595,30 +466,39 @@ namespace SalesDepot.TabPages
         #region Comboboxes Event Handlers
         public void comboBoxItemPackages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
+            if (_allowToSave)
             {
-                this.SolutionViewControl.ClearSolutionControl();
-                ConfigurationClasses.SettingsManager.Instance.SelectedPackage = FormMain.Instance.comboBoxItemPackages.SelectedItem.ToString();
-                ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex];
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Apply();
-                this.Text = ConfigurationClasses.SettingsManager.Instance.SalesDepotName;
-                FormMain.Instance.ribbonBarStations.Text = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].Name;
-                FormMain.Instance.ribbonBarStations.RecalcLayout();
-                FormMain.Instance.ribbonPanelHome.PerformLayout();
+                if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
+                {
+                    ConfigurationClasses.SettingsManager.Instance.SelectedPackage = FormMain.Instance.comboBoxItemPackages.SelectedItem.ToString();
+                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex];
+                    ApplySelectedDecorator();
+                    this.SolutionViewControl.ClearSolutionControl();
+                }
+                else
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = null;
             }
-            else
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = null;
         }
 
         public void comboBoxItemStations_SelectedIndexChanged(object sender, EventArgs e)
         {
+            pnEmpty.BringToFront();
+            Application.DoEvents();
             StationChanged(sender);
+            Application.DoEvents();
+            pnMain.BringToFront();
+            Application.DoEvents();
         }
 
         public void comboBoxItemPages_SelectedIndexChanged(object sender, EventArgs e)
         {
+            pnEmpty.BringToFront();
+            Application.DoEvents();
             PageChanged(sender);
+            Application.DoEvents();
+            pnMain.BringToFront();
+            Application.DoEvents();
         }
         #endregion
     }

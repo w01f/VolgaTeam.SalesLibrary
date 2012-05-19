@@ -30,7 +30,10 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
                 xtraTabControl.TabPages.Clear();
                 this.Years.Clear();
                 foreach (BusinessClasses.CalendarYear year in this.ParentDecorator.Library.OvernightsCalendar.Years)
+                {
                     this.Years.Add(new YearControl(year));
+                    Application.DoEvents();
+                }
                 xtraTabControl.TabPages.AddRange(this.Years.ToArray());
 
                 YearControl selectedTab = this.Years.Where(x=>x.Data.Year.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear)).FirstOrDefault();

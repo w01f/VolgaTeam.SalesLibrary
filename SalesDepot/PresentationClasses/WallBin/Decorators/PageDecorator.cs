@@ -23,6 +23,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             this.Page = page;
             this.Parent = parent;
             this.Container = new DevExpress.XtraEditors.XtraScrollableControl();
+            this.Container.Resize+=new EventHandler(WallBin_Resize);
             this.TabPage = new DevExpress.XtraTab.XtraTabPage();
             this.TabPage.Tag = this;
             this.TabPage.Text = page.Name.Replace("&","&&");
@@ -78,7 +79,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 _headerPanel.Dock = DockStyle.Top;
                 this.Container.Controls.Add(_headerPanel);
                 _headerPanel.BringToFront();
-                _headerPanel.Resize += new EventHandler(ColumnTitles_Resize);
 
                 foreach (BusinessClasses.ColumnTitle columnTitle in this.Page.ColumnTitles)
                 {
@@ -102,7 +102,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             _parentPanel.Dock = DockStyle.Top;
             this.Container.Controls.Add(_parentPanel);
             _parentPanel.BringToFront();
-            _parentPanel.Resize += new EventHandler(WallBin_Resize);
 
             PresentationClasses.WallBin.ColumnPanel panel = new PresentationClasses.WallBin.ColumnPanel();
             panel.AllowDrop = true;
@@ -139,17 +138,14 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         private void WallBin_Resize(object sender, EventArgs e)
         {
-            FitObjectsToPage();
-        }
-
-        private void ColumnTitles_Resize(object sender, EventArgs e)
-        {
+            this.Parent.EmptyPanel.BringToFront();
             FitColumnsToPage();
+            FitObjectsToPage();
+            this.Parent.EmptyPanel.SendToBack();
         }
 
         private void RefreshPanelHeight()
         {
-            _parentPanel.Resize -= new EventHandler(WallBin_Resize);
             int maxHeight = this.Container.Height - (_headerPanel != null ? _headerPanel.Height : 0);
 
             int realHeight = 0;
@@ -167,7 +163,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 realHeight = maxHeight;
 
             _parentPanel.Height = realHeight;
-            _parentPanel.Resize += new EventHandler(WallBin_Resize);
         }
 
         private void UpdateView()
@@ -240,8 +235,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         public void Apply()
         {
-            this.Container.Parent = null;
-            FormMain.Instance.TabHome.ClassicViewControl.pnSalesDepotContainer.Controls.Add(this.Container);
             FitPage();
             ApplyPageLogo();
         }

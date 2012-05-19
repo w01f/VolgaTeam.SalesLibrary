@@ -10,6 +10,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
     public class PackageDecorator
     {
         public BusinessClasses.LibraryPackage Package { get; set; }
+        public Panel Container { get; private set; }
         public Bitmap Logo { get; private set; }
         private int _selectedLibrary = -1;
         private List<LibraryDecorator> _decorators = new List<LibraryDecorator>();
@@ -24,6 +25,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         public PackageDecorator(BusinessClasses.LibraryPackage package)
         {
+            this.Container = new Panel();
+            this.Container.Dock = DockStyle.Fill;
             this.Package = package;
             LoadLogo();
             BuildDecorators();
@@ -47,13 +50,19 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         private void BuildDecorators()
         {
             foreach (BusinessClasses.Library salesDepot in this.Package.SalesDepotCollection)
-                _decorators.Add(new LibraryDecorator(this,salesDepot));
+            {
+                _decorators.Add(new LibraryDecorator(this, salesDepot));
+                Application.DoEvents();
+            }
         }
 
         public void BuildOvernightsCalendar()
         {
             foreach (LibraryDecorator decorator in _decorators)
+            {
                 decorator.BuildOvernightsCalendar();
+                Application.DoEvents();
+            }
         }
 
         private void ApplyDecorator()
@@ -121,17 +130,14 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         public void UpdateView()
         {
             if (_selectedLibrary >= 0 && _selectedLibrary < _decorators.Count)
-                foreach (PageDecorator page in _decorators[_selectedLibrary].Pages)
-                    page.FitPage();
+                _decorators[_selectedLibrary].UpdateView();
         }
 
         public void Apply()
         {
-            FormMain.Instance.TabHome.ClassicViewControl.pnEmpty.BringToFront();
-            FormMain.Instance.TabHome.ClassicViewControl.pnSalesDepotContainer.Controls.Clear();
             FillLogo();
             FillStations();
-            FormMain.Instance.TabHome.ClassicViewControl.pnEmpty.SendToBack();
+            UpdateView();
         }
 
         public void ReleaseResources()

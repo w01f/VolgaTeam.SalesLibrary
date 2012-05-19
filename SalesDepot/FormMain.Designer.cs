@@ -33,31 +33,57 @@
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarExit = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemExit = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHomeHelp = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemHomeHelp = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarViewSettings = new DevComponents.DotNetBar.RibbonBar();
             this.itemContainerViewSettings = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemLargerText = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemSmallerText = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarEmailBin = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemEmailBin = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHomeAddSlide = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemHomeAddSlide = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHomeSearchMode = new DevComponents.DotNetBar.RibbonBar();
             this.itemContainerHomeSearchMode = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemHomeSearchByTags = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemHomeSearchByFileName = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemHomeSearchRecentFiles = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHomeSolutionView = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemHomeSolutionView = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHomeListView = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemHomeListView = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarHomeClassicView = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemHomeClassicView = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarStations = new DevComponents.DotNetBar.RibbonBar();
             this.itemContainerHomeBrandLogo = new DevComponents.DotNetBar.ItemContainer();
+            this.labelItemPackageLogo = new DevComponents.DotNetBar.LabelItem();
             this.itemContainerStations = new DevComponents.DotNetBar.ItemContainer();
             this.comboBoxItemPackages = new DevComponents.DotNetBar.ComboBoxItem();
             this.comboBoxItemStations = new DevComponents.DotNetBar.ComboBoxItem();
             this.comboBoxItemPages = new DevComponents.DotNetBar.ComboBoxItem();
             this.ribbonPanelCalendar = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarCalendarExit = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemCalendarExit = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarCalendarHelp = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemCalendarHelp = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarCalendarFontSize = new DevComponents.DotNetBar.RibbonBar();
             this.itemContainerCalendarFontSize = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemCalendarFontSizeLarger = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemCalendarFontSizeSmaler = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarCalendarDisclaimer = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainerCalendarDisclaimer = new DevComponents.DotNetBar.ItemContainer();
+            this.labelItemCalendarDisclaimerLogo = new DevComponents.DotNetBar.LabelItem();
+            this.ribbonBarCalendarLogo = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainerCalendarLogo = new DevComponents.DotNetBar.ItemContainer();
+            this.labelItemCalendarLogo = new DevComponents.DotNetBar.LabelItem();
             this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarSettingsExit = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemSettingsExit = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarSettingsHelp = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemSettingsHelp = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarSettingsEmail = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemSettingsEmail = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarSettingsQuickView = new DevComponents.DotNetBar.RibbonBar();
             this.itemContainerSettingsQuickView = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemSettingsQuickViewImages = new DevComponents.DotNetBar.ButtonItem();
@@ -98,32 +124,7 @@
             this.galleryGroup = new DevComponents.DotNetBar.GalleryGroup();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.pnContainer = new System.Windows.Forms.Panel();
-            this.ribbonBarCalendarLogo = new DevComponents.DotNetBar.RibbonBar();
-            this.itemContainerCalendarLogo = new DevComponents.DotNetBar.ItemContainer();
-            this.ribbonBarCalendarDisclaimer = new DevComponents.DotNetBar.RibbonBar();
-            this.itemContainerCalendarDisclaimer = new DevComponents.DotNetBar.ItemContainer();
-            this.buttonItemCalendarExit = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemCalendarHelp = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemCalendarFontSizeLarger = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemCalendarFontSizeSmaler = new DevComponents.DotNetBar.ButtonItem();
-            this.labelItemCalendarDisclaimerLogo = new DevComponents.DotNetBar.LabelItem();
-            this.labelItemCalendarLogo = new DevComponents.DotNetBar.LabelItem();
-            this.buttonItemExit = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeHelp = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemLargerText = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemSmallerText = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemEmailBin = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeAddSlide = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeSearchByTags = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeSearchByFileName = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeSearchRecentFiles = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeSolutionView = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeListView = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemHomeClassicView = new DevComponents.DotNetBar.ButtonItem();
-            this.labelItemPackageLogo = new DevComponents.DotNetBar.LabelItem();
-            this.buttonItemSettingsExit = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemSettingsHelp = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItemSettingsEmail = new DevComponents.DotNetBar.ButtonItem();
+            this.pnEmpty = new System.Windows.Forms.Panel();
             this.ribbonControl.SuspendLayout();
             this.ribbonPanelHome.SuspendLayout();
             this.ribbonPanelCalendar.SuspendLayout();
@@ -236,6 +237,14 @@
             // 
             this.ribbonBarExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemExit
+            // 
+            this.buttonItemExit.Image = global::SalesDepot.Properties.Resources.Cancel;
+            this.buttonItemExit.Name = "buttonItemExit";
+            this.buttonItemExit.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+            // 
             // ribbonBarHomeHelp
             // 
             this.ribbonBarHomeHelp.AutoOverflowEnabled = true;
@@ -266,6 +275,13 @@
             // 
             // 
             this.ribbonBarHomeHelp.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemHomeHelp
+            // 
+            this.buttonItemHomeHelp.Image = global::SalesDepot.Properties.Resources.Help;
+            this.buttonItemHomeHelp.Name = "buttonItemHomeHelp";
+            this.buttonItemHomeHelp.SubItemsExpandWidth = 14;
+            this.buttonItemHomeHelp.Text = "buttonItem1";
             // 
             // ribbonBarViewSettings
             // 
@@ -312,6 +328,20 @@
             this.buttonItemSmallerText});
             this.itemContainerViewSettings.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
             // 
+            // buttonItemLargerText
+            // 
+            this.buttonItemLargerText.Image = global::SalesDepot.Properties.Resources.Format_Font_Larger;
+            this.buttonItemLargerText.Name = "buttonItemLargerText";
+            this.superTooltip.SetSuperTooltip(this.buttonItemLargerText, new DevComponents.DotNetBar.SuperTooltipInfo("Increase Font Size", "", "Click to make the font larger", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemLargerText.Text = "Large Text";
+            // 
+            // buttonItemSmallerText
+            // 
+            this.buttonItemSmallerText.Image = global::SalesDepot.Properties.Resources.Format_Font_Smaller;
+            this.buttonItemSmallerText.Name = "buttonItemSmallerText";
+            this.superTooltip.SetSuperTooltip(this.buttonItemSmallerText, new DevComponents.DotNetBar.SuperTooltipInfo("Decrease Font Size", "", "Click to make the font smaller", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemSmallerText.Text = "Small Text";
+            // 
             // ribbonBarEmailBin
             // 
             this.ribbonBarEmailBin.AutoOverflowEnabled = true;
@@ -344,6 +374,13 @@
             // 
             this.ribbonBarEmailBin.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemEmailBin
+            // 
+            this.buttonItemEmailBin.AutoCheckOnClick = true;
+            this.buttonItemEmailBin.Image = global::SalesDepot.Properties.Resources.MicrosoftOfficeOutlook;
+            this.buttonItemEmailBin.Name = "buttonItemEmailBin";
+            this.superTooltip.SetSuperTooltip(this.buttonItemEmailBin, new DevComponents.DotNetBar.SuperTooltipInfo("Email Files", "", "Open the Email Panel and send files to your clients", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
+            // 
             // ribbonBarHomeAddSlide
             // 
             this.ribbonBarHomeAddSlide.AutoOverflowEnabled = true;
@@ -375,6 +412,15 @@
             // 
             this.ribbonBarHomeAddSlide.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonBarHomeAddSlide.Visible = false;
+            // 
+            // buttonItemHomeAddSlide
+            // 
+            this.buttonItemHomeAddSlide.Enabled = false;
+            this.buttonItemHomeAddSlide.Image = global::SalesDepot.Properties.Resources.InsertSlide;
+            this.buttonItemHomeAddSlide.Name = "buttonItemHomeAddSlide";
+            this.buttonItemHomeAddSlide.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddSlide, new DevComponents.DotNetBar.SuperTooltipInfo("Add Slide", "", "Add the Visible Slide to your active presentation ", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeAddSlide.Text = "buttonItem1";
             // 
             // ribbonBarHomeSearchMode
             // 
@@ -421,6 +467,36 @@
             this.buttonItemHomeSearchByFileName,
             this.buttonItemHomeSearchRecentFiles});
             // 
+            // buttonItemHomeSearchByTags
+            // 
+            this.buttonItemHomeSearchByTags.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemHomeSearchByTags.ForeColor = System.Drawing.Color.Black;
+            this.buttonItemHomeSearchByTags.Image = global::SalesDepot.Properties.Resources.SearchTags;
+            this.buttonItemHomeSearchByTags.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonItemHomeSearchByTags.Name = "buttonItemHomeSearchByTags";
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchByTags, new DevComponents.DotNetBar.SuperTooltipInfo("Target", "", "Search for files by target criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeSearchByTags.Text = "Target";
+            // 
+            // buttonItemHomeSearchByFileName
+            // 
+            this.buttonItemHomeSearchByFileName.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemHomeSearchByFileName.ForeColor = System.Drawing.Color.Black;
+            this.buttonItemHomeSearchByFileName.Image = global::SalesDepot.Properties.Resources.SearchLinkName;
+            this.buttonItemHomeSearchByFileName.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonItemHomeSearchByFileName.Name = "buttonItemHomeSearchByFileName";
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchByFileName, new DevComponents.DotNetBar.SuperTooltipInfo("Title", "", "Search for files by title or filename", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeSearchByFileName.Text = "Title";
+            // 
+            // buttonItemHomeSearchRecentFiles
+            // 
+            this.buttonItemHomeSearchRecentFiles.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItemHomeSearchRecentFiles.ForeColor = System.Drawing.Color.Black;
+            this.buttonItemHomeSearchRecentFiles.Image = global::SalesDepot.Properties.Resources.SearchRecentFiles;
+            this.buttonItemHomeSearchRecentFiles.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonItemHomeSearchRecentFiles.Name = "buttonItemHomeSearchRecentFiles";
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchRecentFiles, new DevComponents.DotNetBar.SuperTooltipInfo("Date", "", "Search for files by date added to the library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeSearchRecentFiles.Text = "Date";
+            // 
             // ribbonBarHomeSolutionView
             // 
             this.ribbonBarHomeSolutionView.AutoOverflowEnabled = true;
@@ -451,6 +527,14 @@
             // 
             // 
             this.ribbonBarHomeSolutionView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemHomeSolutionView
+            // 
+            this.buttonItemHomeSolutionView.Image = global::SalesDepot.Properties.Resources.SolutionView;
+            this.buttonItemHomeSolutionView.Name = "buttonItemHomeSolutionView";
+            this.buttonItemHomeSolutionView.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSolutionView, new DevComponents.DotNetBar.SuperTooltipInfo("Solution View", "", "Search for slides using qualified solution focused criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeSolutionView.Text = "buttonItem1";
             // 
             // ribbonBarHomeListView
             // 
@@ -483,6 +567,14 @@
             // 
             this.ribbonBarHomeListView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemHomeListView
+            // 
+            this.buttonItemHomeListView.Image = global::SalesDepot.Properties.Resources.ListView;
+            this.buttonItemHomeListView.Name = "buttonItemHomeListView";
+            this.buttonItemHomeListView.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeListView, new DevComponents.DotNetBar.SuperTooltipInfo("List View", "", "Browse for slides and files in a scrolling list format", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeListView.Text = "buttonItem1";
+            // 
             // ribbonBarHomeClassicView
             // 
             this.ribbonBarHomeClassicView.AutoOverflowEnabled = true;
@@ -513,6 +605,14 @@
             // 
             // 
             this.ribbonBarHomeClassicView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemHomeClassicView
+            // 
+            this.buttonItemHomeClassicView.Image = global::SalesDepot.Properties.Resources.ClassicView;
+            this.buttonItemHomeClassicView.Name = "buttonItemHomeClassicView";
+            this.buttonItemHomeClassicView.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemHomeClassicView, new DevComponents.DotNetBar.SuperTooltipInfo("Classic View", "", "Browse for slides and important files", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemHomeClassicView.Text = "buttonItem1";
             // 
             // ribbonBarStations
             // 
@@ -558,6 +658,11 @@
             this.itemContainerHomeBrandLogo.Name = "itemContainerHomeBrandLogo";
             this.itemContainerHomeBrandLogo.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemPackageLogo});
+            // 
+            // labelItemPackageLogo
+            // 
+            this.labelItemPackageLogo.Image = global::SalesDepot.Properties.Resources.PackageLogo;
+            this.labelItemPackageLogo.Name = "labelItemPackageLogo";
             // 
             // itemContainerStations
             // 
@@ -657,6 +762,14 @@
             // 
             this.ribbonBarCalendarExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemCalendarExit
+            // 
+            this.buttonItemCalendarExit.Image = global::SalesDepot.Properties.Resources.Cancel;
+            this.buttonItemCalendarExit.Name = "buttonItemCalendarExit";
+            this.buttonItemCalendarExit.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemCalendarExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+            // 
             // ribbonBarCalendarHelp
             // 
             this.ribbonBarCalendarHelp.AutoOverflowEnabled = false;
@@ -690,6 +803,13 @@
             // 
             // 
             this.ribbonBarCalendarHelp.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemCalendarHelp
+            // 
+            this.buttonItemCalendarHelp.Image = global::SalesDepot.Properties.Resources.Help;
+            this.buttonItemCalendarHelp.Name = "buttonItemCalendarHelp";
+            this.buttonItemCalendarHelp.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarHelp, new DevComponents.DotNetBar.SuperTooltipInfo("Settings Help", "", "Help me understand how to\r\nConfigure my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
             // 
             // ribbonBarCalendarFontSize
             // 
@@ -735,6 +855,118 @@
             this.buttonItemCalendarFontSizeLarger,
             this.buttonItemCalendarFontSizeSmaler});
             this.itemContainerCalendarFontSize.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+            // 
+            // buttonItemCalendarFontSizeLarger
+            // 
+            this.buttonItemCalendarFontSizeLarger.Image = global::SalesDepot.Properties.Resources.Format_Font_Larger;
+            this.buttonItemCalendarFontSizeLarger.Name = "buttonItemCalendarFontSizeLarger";
+            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontSizeLarger, new DevComponents.DotNetBar.SuperTooltipInfo("Increase Font Size", "", "Click to make the font larger", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemCalendarFontSizeLarger.Text = "Large Text";
+            // 
+            // buttonItemCalendarFontSizeSmaler
+            // 
+            this.buttonItemCalendarFontSizeSmaler.Image = global::SalesDepot.Properties.Resources.Format_Font_Smaller;
+            this.buttonItemCalendarFontSizeSmaler.Name = "buttonItemCalendarFontSizeSmaler";
+            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontSizeSmaler, new DevComponents.DotNetBar.SuperTooltipInfo("Decrease Font Size", "", "Click to make the font smaller", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemCalendarFontSizeSmaler.Text = "Small Text";
+            // 
+            // ribbonBarCalendarDisclaimer
+            // 
+            this.ribbonBarCalendarDisclaimer.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarDisclaimer.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarDisclaimer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarCalendarDisclaimer.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCalendarDisclaimer.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCalendarDisclaimer.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerCalendarDisclaimer});
+            this.ribbonBarCalendarDisclaimer.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarCalendarDisclaimer.Location = new System.Drawing.Point(216, 0);
+            this.ribbonBarCalendarDisclaimer.Name = "ribbonBarCalendarDisclaimer";
+            this.ribbonBarCalendarDisclaimer.Size = new System.Drawing.Size(153, 113);
+            this.ribbonBarCalendarDisclaimer.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.ribbonBarCalendarDisclaimer.TabIndex = 18;
+            this.ribbonBarCalendarDisclaimer.Text = "Disclaimer";
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarDisclaimer.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarDisclaimer.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainerCalendarDisclaimer
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerCalendarDisclaimer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerCalendarDisclaimer.BackgroundStyle.MarginTop = 5;
+            this.itemContainerCalendarDisclaimer.ItemSpacing = 3;
+            this.itemContainerCalendarDisclaimer.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerCalendarDisclaimer.Name = "itemContainerCalendarDisclaimer";
+            this.itemContainerCalendarDisclaimer.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemCalendarDisclaimerLogo});
+            // 
+            // labelItemCalendarDisclaimerLogo
+            // 
+            this.labelItemCalendarDisclaimerLogo.Image = global::SalesDepot.Properties.Resources.CalendarDisclaimerLogo;
+            this.labelItemCalendarDisclaimerLogo.Name = "labelItemCalendarDisclaimerLogo";
+            // 
+            // ribbonBarCalendarLogo
+            // 
+            this.ribbonBarCalendarLogo.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarLogo.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarLogo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarCalendarLogo.ContainerControlProcessDialogKey = true;
+            this.ribbonBarCalendarLogo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarCalendarLogo.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerCalendarLogo});
+            this.ribbonBarCalendarLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarCalendarLogo.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarCalendarLogo.Name = "ribbonBarCalendarLogo";
+            this.ribbonBarCalendarLogo.Size = new System.Drawing.Size(213, 113);
+            this.ribbonBarCalendarLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
+            this.ribbonBarCalendarLogo.TabIndex = 17;
+            this.ribbonBarCalendarLogo.Text = "Overnights Calendar";
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarCalendarLogo.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainerCalendarLogo
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerCalendarLogo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerCalendarLogo.BackgroundStyle.MarginTop = 5;
+            this.itemContainerCalendarLogo.ItemSpacing = 3;
+            this.itemContainerCalendarLogo.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerCalendarLogo.Name = "itemContainerCalendarLogo";
+            this.itemContainerCalendarLogo.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.labelItemCalendarLogo});
+            // 
+            // labelItemCalendarLogo
+            // 
+            this.labelItemCalendarLogo.Image = global::SalesDepot.Properties.Resources.CalendarLogo;
+            this.labelItemCalendarLogo.Name = "labelItemCalendarLogo";
             // 
             // ribbonPanelSettings
             // 
@@ -803,6 +1035,14 @@
             // 
             this.ribbonBarSettingsExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemSettingsExit
+            // 
+            this.buttonItemSettingsExit.Image = global::SalesDepot.Properties.Resources.Cancel;
+            this.buttonItemSettingsExit.Name = "buttonItemSettingsExit";
+            this.buttonItemSettingsExit.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemSettingsExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            this.buttonItemSettingsExit.Click += new System.EventHandler(this.buttonItemExit_Click);
+            // 
             // ribbonBarSettingsHelp
             // 
             this.ribbonBarSettingsHelp.AutoOverflowEnabled = false;
@@ -837,6 +1077,13 @@
             // 
             this.ribbonBarSettingsHelp.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
+            // buttonItemSettingsHelp
+            // 
+            this.buttonItemSettingsHelp.Image = global::SalesDepot.Properties.Resources.Help;
+            this.buttonItemSettingsHelp.Name = "buttonItemSettingsHelp";
+            this.buttonItemSettingsHelp.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemSettingsHelp, new DevComponents.DotNetBar.SuperTooltipInfo("Settings Help", "", "Help me understand how to\r\nConfigure my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            // 
             // ribbonBarSettingsEmail
             // 
             this.ribbonBarSettingsEmail.AutoOverflowEnabled = false;
@@ -870,6 +1117,13 @@
             // 
             // 
             this.ribbonBarSettingsEmail.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemSettingsEmail
+            // 
+            this.buttonItemSettingsEmail.Image = global::SalesDepot.Properties.Resources.MicrosoftOfficeOutlook;
+            this.buttonItemSettingsEmail.Name = "buttonItemSettingsEmail";
+            this.buttonItemSettingsEmail.SubItemsExpandWidth = 14;
+            this.superTooltip.SetSuperTooltip(this.buttonItemSettingsEmail, new DevComponents.DotNetBar.SuperTooltipInfo("Email Settings", "", "Do you want to change the way your Sales Library sends emails with attachments?", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
             // 
             // ribbonBarSettingsQuickView
             // 
@@ -1387,258 +1641,13 @@
             this.pnContainer.Size = new System.Drawing.Size(1008, 568);
             this.pnContainer.TabIndex = 1;
             // 
-            // ribbonBarCalendarLogo
-            // 
-            this.ribbonBarCalendarLogo.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarLogo.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarLogo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonBarCalendarLogo.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCalendarLogo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCalendarLogo.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerCalendarLogo});
-            this.ribbonBarCalendarLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarCalendarLogo.Location = new System.Drawing.Point(3, 0);
-            this.ribbonBarCalendarLogo.Name = "ribbonBarCalendarLogo";
-            this.ribbonBarCalendarLogo.Size = new System.Drawing.Size(213, 113);
-            this.ribbonBarCalendarLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.ribbonBarCalendarLogo.TabIndex = 17;
-            this.ribbonBarCalendarLogo.Text = "Overnights Calendar";
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarLogo.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // itemContainerCalendarLogo
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerCalendarLogo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainerCalendarLogo.BackgroundStyle.MarginTop = 5;
-            this.itemContainerCalendarLogo.ItemSpacing = 3;
-            this.itemContainerCalendarLogo.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerCalendarLogo.Name = "itemContainerCalendarLogo";
-            this.itemContainerCalendarLogo.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.labelItemCalendarLogo});
-            // 
-            // ribbonBarCalendarDisclaimer
-            // 
-            this.ribbonBarCalendarDisclaimer.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarDisclaimer.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarDisclaimer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonBarCalendarDisclaimer.ContainerControlProcessDialogKey = true;
-            this.ribbonBarCalendarDisclaimer.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarCalendarDisclaimer.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerCalendarDisclaimer});
-            this.ribbonBarCalendarDisclaimer.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarCalendarDisclaimer.Location = new System.Drawing.Point(216, 0);
-            this.ribbonBarCalendarDisclaimer.Name = "ribbonBarCalendarDisclaimer";
-            this.ribbonBarCalendarDisclaimer.Size = new System.Drawing.Size(153, 113);
-            this.ribbonBarCalendarDisclaimer.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
-            this.ribbonBarCalendarDisclaimer.TabIndex = 18;
-            this.ribbonBarCalendarDisclaimer.Text = "Disclaimer";
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarDisclaimer.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonBarCalendarDisclaimer.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // itemContainerCalendarDisclaimer
-            // 
-            // 
-            // 
-            // 
-            this.itemContainerCalendarDisclaimer.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainerCalendarDisclaimer.BackgroundStyle.MarginTop = 5;
-            this.itemContainerCalendarDisclaimer.ItemSpacing = 3;
-            this.itemContainerCalendarDisclaimer.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-            this.itemContainerCalendarDisclaimer.Name = "itemContainerCalendarDisclaimer";
-            this.itemContainerCalendarDisclaimer.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.labelItemCalendarDisclaimerLogo});
-            // 
-            // buttonItemCalendarExit
-            // 
-            this.buttonItemCalendarExit.Image = global::SalesDepot.Properties.Resources.Cancel;
-            this.buttonItemCalendarExit.Name = "buttonItemCalendarExit";
-            this.buttonItemCalendarExit.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemCalendarExit.Click += new System.EventHandler(this.buttonItemExit_Click);
-            // 
-            // buttonItemCalendarHelp
-            // 
-            this.buttonItemCalendarHelp.Image = global::SalesDepot.Properties.Resources.Help;
-            this.buttonItemCalendarHelp.Name = "buttonItemCalendarHelp";
-            this.buttonItemCalendarHelp.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarHelp, new DevComponents.DotNetBar.SuperTooltipInfo("Settings Help", "", "Help me understand how to\r\nConfigure my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            // 
-            // buttonItemCalendarFontSizeLarger
-            // 
-            this.buttonItemCalendarFontSizeLarger.Image = global::SalesDepot.Properties.Resources.Format_Font_Larger;
-            this.buttonItemCalendarFontSizeLarger.Name = "buttonItemCalendarFontSizeLarger";
-            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontSizeLarger, new DevComponents.DotNetBar.SuperTooltipInfo("Increase Font Size", "", "Click to make the font larger", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemCalendarFontSizeLarger.Text = "Large Text";
-            // 
-            // buttonItemCalendarFontSizeSmaler
-            // 
-            this.buttonItemCalendarFontSizeSmaler.Image = global::SalesDepot.Properties.Resources.Format_Font_Smaller;
-            this.buttonItemCalendarFontSizeSmaler.Name = "buttonItemCalendarFontSizeSmaler";
-            this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontSizeSmaler, new DevComponents.DotNetBar.SuperTooltipInfo("Decrease Font Size", "", "Click to make the font smaller", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemCalendarFontSizeSmaler.Text = "Small Text";
-            // 
-            // labelItemCalendarDisclaimerLogo
-            // 
-            this.labelItemCalendarDisclaimerLogo.Image = global::SalesDepot.Properties.Resources.CalendarDisclaimerLogo;
-            this.labelItemCalendarDisclaimerLogo.Name = "labelItemCalendarDisclaimerLogo";
-            // 
-            // labelItemCalendarLogo
-            // 
-            this.labelItemCalendarLogo.Image = global::SalesDepot.Properties.Resources.CalendarLogo;
-            this.labelItemCalendarLogo.Name = "labelItemCalendarLogo";
-            // 
-            // buttonItemExit
-            // 
-            this.buttonItemExit.Image = global::SalesDepot.Properties.Resources.Cancel;
-            this.buttonItemExit.Name = "buttonItemExit";
-            this.buttonItemExit.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemExit.Click += new System.EventHandler(this.buttonItemExit_Click);
-            // 
-            // buttonItemHomeHelp
-            // 
-            this.buttonItemHomeHelp.Image = global::SalesDepot.Properties.Resources.Help;
-            this.buttonItemHomeHelp.Name = "buttonItemHomeHelp";
-            this.buttonItemHomeHelp.SubItemsExpandWidth = 14;
-            this.buttonItemHomeHelp.Text = "buttonItem1";
-            // 
-            // buttonItemLargerText
-            // 
-            this.buttonItemLargerText.Image = global::SalesDepot.Properties.Resources.Format_Font_Larger;
-            this.buttonItemLargerText.Name = "buttonItemLargerText";
-            this.superTooltip.SetSuperTooltip(this.buttonItemLargerText, new DevComponents.DotNetBar.SuperTooltipInfo("Increase Font Size", "", "Click to make the font larger", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemLargerText.Text = "Large Text";
-            // 
-            // buttonItemSmallerText
-            // 
-            this.buttonItemSmallerText.Image = global::SalesDepot.Properties.Resources.Format_Font_Smaller;
-            this.buttonItemSmallerText.Name = "buttonItemSmallerText";
-            this.superTooltip.SetSuperTooltip(this.buttonItemSmallerText, new DevComponents.DotNetBar.SuperTooltipInfo("Decrease Font Size", "", "Click to make the font smaller", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemSmallerText.Text = "Small Text";
-            // 
-            // buttonItemEmailBin
-            // 
-            this.buttonItemEmailBin.AutoCheckOnClick = true;
-            this.buttonItemEmailBin.Image = global::SalesDepot.Properties.Resources.MicrosoftOfficeOutlook;
-            this.buttonItemEmailBin.Name = "buttonItemEmailBin";
-            this.superTooltip.SetSuperTooltip(this.buttonItemEmailBin, new DevComponents.DotNetBar.SuperTooltipInfo("Email Files", "", "Open the Email Panel and send files to your clients", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-            // 
-            // buttonItemHomeAddSlide
-            // 
-            this.buttonItemHomeAddSlide.Enabled = false;
-            this.buttonItemHomeAddSlide.Image = global::SalesDepot.Properties.Resources.InsertSlide;
-            this.buttonItemHomeAddSlide.Name = "buttonItemHomeAddSlide";
-            this.buttonItemHomeAddSlide.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddSlide, new DevComponents.DotNetBar.SuperTooltipInfo("Add Slide", "", "Add the Visible Slide to your active presentation ", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeAddSlide.Text = "buttonItem1";
-            // 
-            // buttonItemHomeSearchByTags
-            // 
-            this.buttonItemHomeSearchByTags.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemHomeSearchByTags.ForeColor = System.Drawing.Color.Black;
-            this.buttonItemHomeSearchByTags.Image = global::SalesDepot.Properties.Resources.SearchTags;
-            this.buttonItemHomeSearchByTags.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonItemHomeSearchByTags.Name = "buttonItemHomeSearchByTags";
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchByTags, new DevComponents.DotNetBar.SuperTooltipInfo("Target", "", "Search for files by target criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeSearchByTags.Text = "Target";
-            // 
-            // buttonItemHomeSearchByFileName
-            // 
-            this.buttonItemHomeSearchByFileName.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemHomeSearchByFileName.ForeColor = System.Drawing.Color.Black;
-            this.buttonItemHomeSearchByFileName.Image = global::SalesDepot.Properties.Resources.SearchLinkName;
-            this.buttonItemHomeSearchByFileName.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonItemHomeSearchByFileName.Name = "buttonItemHomeSearchByFileName";
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchByFileName, new DevComponents.DotNetBar.SuperTooltipInfo("Title", "", "Search for files by title or filename", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeSearchByFileName.Text = "Title";
-            // 
-            // buttonItemHomeSearchRecentFiles
-            // 
-            this.buttonItemHomeSearchRecentFiles.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItemHomeSearchRecentFiles.ForeColor = System.Drawing.Color.Black;
-            this.buttonItemHomeSearchRecentFiles.Image = global::SalesDepot.Properties.Resources.SearchRecentFiles;
-            this.buttonItemHomeSearchRecentFiles.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonItemHomeSearchRecentFiles.Name = "buttonItemHomeSearchRecentFiles";
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchRecentFiles, new DevComponents.DotNetBar.SuperTooltipInfo("Date", "", "Search for files by date added to the library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeSearchRecentFiles.Text = "Date";
-            // 
-            // buttonItemHomeSolutionView
-            // 
-            this.buttonItemHomeSolutionView.Image = global::SalesDepot.Properties.Resources.SolutionView;
-            this.buttonItemHomeSolutionView.Name = "buttonItemHomeSolutionView";
-            this.buttonItemHomeSolutionView.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeSolutionView, new DevComponents.DotNetBar.SuperTooltipInfo("Solution View", "", "Search for slides using qualified solution focused criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeSolutionView.Text = "buttonItem1";
-            // 
-            // buttonItemHomeListView
-            // 
-            this.buttonItemHomeListView.Image = global::SalesDepot.Properties.Resources.ListView;
-            this.buttonItemHomeListView.Name = "buttonItemHomeListView";
-            this.buttonItemHomeListView.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeListView, new DevComponents.DotNetBar.SuperTooltipInfo("List View", "", "Browse for slides and files in a scrolling list format", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeListView.Text = "buttonItem1";
-            // 
-            // buttonItemHomeClassicView
-            // 
-            this.buttonItemHomeClassicView.Image = global::SalesDepot.Properties.Resources.ClassicView;
-            this.buttonItemHomeClassicView.Name = "buttonItemHomeClassicView";
-            this.buttonItemHomeClassicView.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemHomeClassicView, new DevComponents.DotNetBar.SuperTooltipInfo("Classic View", "", "Browse for slides and important files", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemHomeClassicView.Text = "buttonItem1";
-            // 
-            // labelItemPackageLogo
-            // 
-            this.labelItemPackageLogo.Image = global::SalesDepot.Properties.Resources.PackageLogo;
-            this.labelItemPackageLogo.Name = "labelItemPackageLogo";
-            // 
-            // buttonItemSettingsExit
-            // 
-            this.buttonItemSettingsExit.Image = global::SalesDepot.Properties.Resources.Cancel;
-            this.buttonItemSettingsExit.Name = "buttonItemSettingsExit";
-            this.buttonItemSettingsExit.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemSettingsExit, new DevComponents.DotNetBar.SuperTooltipInfo("EXIT", "", "Close my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            this.buttonItemSettingsExit.Click += new System.EventHandler(this.buttonItemExit_Click);
-            // 
-            // buttonItemSettingsHelp
-            // 
-            this.buttonItemSettingsHelp.Image = global::SalesDepot.Properties.Resources.Help;
-            this.buttonItemSettingsHelp.Name = "buttonItemSettingsHelp";
-            this.buttonItemSettingsHelp.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemSettingsHelp, new DevComponents.DotNetBar.SuperTooltipInfo("Settings Help", "", "Help me understand how to\r\nConfigure my Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-            // 
-            // buttonItemSettingsEmail
-            // 
-            this.buttonItemSettingsEmail.Image = global::SalesDepot.Properties.Resources.MicrosoftOfficeOutlook;
-            this.buttonItemSettingsEmail.Name = "buttonItemSettingsEmail";
-            this.buttonItemSettingsEmail.SubItemsExpandWidth = 14;
-            this.superTooltip.SetSuperTooltip(this.buttonItemSettingsEmail, new DevComponents.DotNetBar.SuperTooltipInfo("Email Settings", "", "Do you want to change the way your Sales Library sends emails with attachments?", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+            // pnEmpty
+            // 
+            this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnEmpty.Location = new System.Drawing.Point(0, 0);
+            this.pnEmpty.Name = "pnEmpty";
+            this.pnEmpty.Size = new System.Drawing.Size(1008, 712);
+            this.pnEmpty.TabIndex = 2;
             // 
             // FormMain
             // 
@@ -1647,6 +1656,7 @@
             this.ClientSize = new System.Drawing.Size(1008, 712);
             this.Controls.Add(this.pnContainer);
             this.Controls.Add(this.ribbonControl);
+            this.Controls.Add(this.pnEmpty);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1024, 750);
             this.Name = "FormMain";
@@ -1761,5 +1771,6 @@
         public DevComponents.DotNetBar.RibbonBar ribbonBarCalendarLogo;
         private DevComponents.DotNetBar.ItemContainer itemContainerCalendarLogo;
         public DevComponents.DotNetBar.LabelItem labelItemCalendarLogo;
+        private System.Windows.Forms.Panel pnEmpty;
     }
 }

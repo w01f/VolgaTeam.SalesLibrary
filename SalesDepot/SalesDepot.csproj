@@ -130,6 +130,7 @@
       <DependentUpon>YearControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
+    <Compile Include="PresentationClasses\WallBin\IWallBinView.cs" />
     <Compile Include="TabPages\TabHomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

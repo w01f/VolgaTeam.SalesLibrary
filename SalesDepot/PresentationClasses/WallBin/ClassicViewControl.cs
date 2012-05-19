@@ -10,10 +10,14 @@ using System.Xml;
 
 namespace SalesDepot.PresentationClasses.WallBin
 {
-    public partial class ClassicViewControl : UserControl
+    public partial class ClassicViewControl : UserControl, IWallBinView
     {
         private string _emailBinFileName = string.Empty;
         private Dictionary<BusinessClasses.LibraryFile, string> _emailLinks = new Dictionary<BusinessClasses.LibraryFile, string>();
+
+        private DevComponents.DotNetBar.SuperTooltipInfo _classicToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Column View", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+        private DevComponents.DotNetBar.SuperTooltipInfo _listToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Learn more about the Sales Library List View", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+        private DevComponents.DotNetBar.SuperTooltipInfo _emailToolTip = new DevComponents.DotNetBar.SuperTooltipInfo("HELP", "", "Learn more about how to EMAIL files from this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
 
         public ClassicViewControl()
         {
@@ -30,6 +34,77 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
         }
 
+        public void ApplyView()
+        {
+            FormMain.Instance.ribbonBarEmailBin.Visible = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
+            FormMain.Instance.ribbonBarEmailBin.BringToFront();
+            FormMain.Instance.buttonItemEmailBin.Checked = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin ? ConfigurationClasses.SettingsManager.Instance.ShowEmailBin : false;
+            FormMain.Instance.ribbonBarViewSettings.Visible = true;
+            FormMain.Instance.ribbonBarViewSettings.BringToFront();
+
+            FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
+            FormMain.Instance.ribbonBarHomeAddSlide.Visible = false;
+
+            FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1;
+            FormMain.Instance.comboBoxItemPages.Visible = true;
+            FormMain.Instance.ribbonBarStations.RecalcLayout();
+
+            FormMain.Instance.ribbonBarHomeHelp.Visible = true;
+            FormMain.Instance.ribbonBarHomeHelp.BringToFront();
+            FormMain.Instance.ribbonBarExit.Visible = true;
+            FormMain.Instance.ribbonBarExit.BringToFront();
+
+            if (ConfigurationClasses.SettingsManager.Instance.ClassicView)
+                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _classicToolTip);
+            else if (ConfigurationClasses.SettingsManager.Instance.ListView)
+                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _listToolTip);
+
+            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.UpdateView();
+        }
+
+        private void ClassicViewControl_Load(object sender, System.EventArgs e)
+        {
+            LoadEmailBin();
+            gridControlFiles.DataSource = new BindingList<BusinessClasses.LibraryFile>(_emailLinks.Keys.ToArray());
+            LoadOptions();
+        }
+
+        #region Wall Bin Methods and Event Handlers
+        public void UpdateFontButtonStatus()
+        {
+            FormMain.Instance.buttonItemLargerText.Enabled = ConfigurationClasses.SettingsManager.Instance.FontSize < 20;
+            FormMain.Instance.buttonItemSmallerText.Enabled = ConfigurationClasses.SettingsManager.Instance.FontSize > 8;
+        }
+
+        public void buttonItemLargerText_Click(object sender, EventArgs e)
+        {
+            ConfigurationClasses.SettingsManager.Instance.FontSize += 2;
+            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+            UpdateFontButtonStatus();
+            if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
+        }
+
+        public void buttonItemSmallerText_Click(object sender, EventArgs e)
+        {
+            ConfigurationClasses.SettingsManager.Instance.FontSize -= 2;
+            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+            UpdateFontButtonStatus();
+            if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
+        }
+
+        public void buttonItemEmailBin_CheckedChanged(object sender, EventArgs e)
+        {
+            splitContainerControl.PanelVisibility = FormMain.Instance.buttonItemEmailBin.Checked ? DevExpress.XtraEditors.SplitPanelVisibility.Both : DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
+            FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : (FormMain.Instance.buttonItemHomeClassicView.Checked ? _classicToolTip : _listToolTip));
+            ConfigurationClasses.SettingsManager.Instance.ShowEmailBin = FormMain.Instance.buttonItemEmailBin.Checked;
+            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+
+        }
+        #endregion
+
+        #region Email Bin Methods and Event Handlers
         private void LoadEmailBin()
         {
             _emailLinks.Clear();
@@ -95,13 +170,6 @@ namespace SalesDepot.PresentationClasses.WallBin
                 sw.Write(xml.ToString());
                 sw.Flush();
             }
-        }
-
-        private void ClassicViewControl_Load(object sender, System.EventArgs e)
-        {
-            LoadEmailBin();
-            gridControlFiles.DataSource = new BindingList<BusinessClasses.LibraryFile>(_emailLinks.Keys.ToArray());
-            LoadOptions();
         }
 
         private void ckConvertPDF_CheckedChanged(object sender, System.EventArgs e)
@@ -240,5 +308,6 @@ namespace SalesDepot.PresentationClasses.WallBin
             if (closePowerPoint)
                 InteropClasses.PowerPointHelper.Instance.Disconnect();
         }
+        #endregion
     }
 }
