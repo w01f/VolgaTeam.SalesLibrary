@@ -34,12 +34,9 @@ namespace SalesDepot
 
                 ConfigurationClasses.SettingsManager.Instance.CheckStaticFolders();
                 ConfigurationClasses.SettingsManager.Instance.LoadSettings();
-                bool canContinue = true;
                 if (ConfigurationClasses.SettingsManager.Instance.LaunchPPT)
-                    if (!AppManager.Instance.RunPowerPoint())
-                        canContinue = false;
-                if (canContinue)
-                    AppManager.Instance.RunForm();
+                    AppManager.Instance.RunPowerPointLoader();
+                AppManager.Instance.RunForm();
             }
             else
             {

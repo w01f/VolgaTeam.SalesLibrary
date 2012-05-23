@@ -90,7 +90,6 @@ namespace SalesDepot.ToolForms.WallBin
                     }
                     catch
                     {
-                        InteropClasses.PowerPointHelper.Instance.GetActivePresentation();
                         differentOrientations = InteropClasses.PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation !=
                             InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideOrientation;
                     }

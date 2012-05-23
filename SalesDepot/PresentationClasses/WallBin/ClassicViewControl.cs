@@ -143,7 +143,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
         public void LoadOptions()
         {
-            buttonXPDF.Enabled = ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting;
+            buttonXPDF.Enabled = InteropClasses.PowerPointHelper.Instance.PowerPointObject != null ? ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting : false;
             buttonXPDF.CheckedChanged -= new EventHandler(ckConvertPDF_CheckedChanged);
             buttonXPDF.Checked = ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting ? ConfigurationClasses.SettingsManager.Instance.EmailBinSendAsPdf : false;
             buttonXPDF.CheckedChanged += new EventHandler(ckConvertPDF_CheckedChanged);
@@ -248,7 +248,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             bool closePowerPoint = false;
             if (ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting && !InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
             {
-                AppManager.Instance.RunPowerPoint(true);
+                InteropClasses.PowerPointHelper.Instance.Connect(true);
                 closePowerPoint = true;
             }
 

@@ -51,12 +51,6 @@ namespace SalesDepot
             ShowMainForm();
         }
 
-        public bool RunPowerPoint(bool background = false)
-        {
-            bool result = InteropClasses.PowerPointHelper.Instance.Connect(background);
-            return result;
-        }
-
         public void ActivateForm(IntPtr handle, bool maximized, bool topMost)
         {
             InteropClasses.WinAPIHelper.ShowWindow(handle, maximized ? InteropClasses.WindowShowStyle.ShowMaximized : InteropClasses.WindowShowStyle.ShowNormal);
@@ -123,6 +117,18 @@ namespace SalesDepot
                 InteropClasses.WinAPIHelper.SetForegroundWindow(minibarHandle);
                 InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
             }
+        }
+
+        public void RunPowerPointLoader()
+        {
+            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.PowerPointLoaderPath))
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = ConfigurationClasses.SettingsManager.Instance.PowerPointLoaderPath;
+                process.Start();
+            }
+            else
+                ShowWarning("Couldn't find PowerPointLoader app");
         }
 
         public void ShowInfo(string text)

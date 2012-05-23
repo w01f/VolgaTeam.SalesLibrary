@@ -384,7 +384,7 @@ namespace SalesDepot.BusinessClasses
             string presentationFile = selectedFile.FullPath;
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
-                AppManager.Instance.RunPowerPoint();
+                AppManager.Instance.RunPowerPointLoader();
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;
@@ -421,7 +421,7 @@ namespace SalesDepot.BusinessClasses
         {
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
-                AppManager.Instance.RunPowerPoint();
+                AppManager.Instance.RunPowerPointLoader();
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;

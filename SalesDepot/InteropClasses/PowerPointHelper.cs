@@ -11,7 +11,7 @@ namespace SalesDepot.InteropClasses
     {
         private static PowerPointHelper instance = new PowerPointHelper();
 
-        private PowerPoint.Application _powerPointObject;
+        private PowerPoint.Application _powerPointObject = null;
         private int _powerPointProcessId = 0;
         private PowerPoint.Presentation _activePresentation;
         private PowerPoint.Presentation _slideSourcePresentationObject;
@@ -38,6 +38,8 @@ namespace SalesDepot.InteropClasses
         {
             get
             {
+                if (_powerPointObject == null)
+                    Connect();
                 return _powerPointObject;
             }
         }
@@ -46,6 +48,7 @@ namespace SalesDepot.InteropClasses
         {
             get
             {
+                GetActivePresentation();
                 return _activePresentation;
             }
         }
@@ -98,7 +101,7 @@ namespace SalesDepot.InteropClasses
             {
                 try
                 {
-                    _powerPointObject.Visible = value ? Microsoft.Office.Core.MsoTriState.msoTrue : Microsoft.Office.Core.MsoTriState.msoFalse;
+                    this.PowerPointObject.Visible = value ? Microsoft.Office.Core.MsoTriState.msoTrue : Microsoft.Office.Core.MsoTriState.msoFalse;
                 }
                 catch
                 {
@@ -140,8 +143,6 @@ namespace SalesDepot.InteropClasses
                     }
                     catch
                     {
-                        _powerPointObject = new Microsoft.Office.Interop.PowerPoint.Application();
-                        _powerPointObject.Visible = Microsoft.Office.Core.MsoTriState.msoCTrue;
                     }
                 }
                 uint lpdwProcessId = 0;
@@ -149,8 +150,6 @@ namespace SalesDepot.InteropClasses
                 _powerPointProcessId = (int)lpdwProcessId;
 
                 _powerPointObject.DisplayAlerts = Microsoft.Office.Interop.PowerPoint.PpAlertLevel.ppAlertsNone;
-                if (!background)
-                    GetActivePresentation();
 
                 ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting = !this.Is2003;
                 _isOpened = true;
@@ -158,6 +157,7 @@ namespace SalesDepot.InteropClasses
             }
             catch
             {
+                _powerPointObject = null;
                 result = false;
             }
             finally
@@ -167,42 +167,24 @@ namespace SalesDepot.InteropClasses
             return result;
         }
 
-        public void Close()
-        {
-            try
-            {
-                Process.GetProcessById(_powerPointProcessId).CloseMainWindow();
-            }
-            catch
-            {
-            }
-        }
-
         public void Disconnect()
         {
             AppManager.Instance.ReleaseComObject(_powerPointObject);
             GC.Collect();
+            _powerPointObject = null;
         }
 
         public void GetActivePresentation()
         {
             try
             {
-                _activePresentation = _powerPointObject.ActivePresentation;
+                _activePresentation = this.PowerPointObject.ActivePresentation;
             }
             catch
             {
                 try
                 {
-                    if (_powerPointObject.Presentations.Count == 0)
-                    {
-                        _activePresentation = _powerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoCTrue);
-                        _activePresentation.Slides.Add(1, Microsoft.Office.Interop.PowerPoint.PpSlideLayout.ppLayoutTitle);
-                    }
-                    else
-                    {
-                        _activePresentation = _powerPointObject.Presentations[1];
-                    }
+                    _activePresentation = this.PowerPointObject.Presentations[1];
                 }
                 catch
                 {
@@ -219,10 +201,10 @@ namespace SalesDepot.InteropClasses
                 if (!string.IsNullOrEmpty(originalFileName))
                 {
 
-                    if (_powerPointObject != null)
+                    if (this.PowerPointObject != null)
                     {
                         MessageFilter.Register();
-                        PowerPoint.Presentation presentationObject = _powerPointObject.Presentations.Open(originalFileName, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoFalse);
+                        PowerPoint.Presentation presentationObject = this.PowerPointObject.Presentations.Open(originalFileName, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoFalse, Microsoft.Office.Core.MsoTriState.msoFalse);
                         presentationObject.SaveAs(pdfFileName, Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF, Microsoft.Office.Core.MsoTriState.msoCTrue);
                     }
                 }
@@ -263,7 +245,7 @@ namespace SalesDepot.InteropClasses
             try
             {
                 CloseSlideSourcePresentation();
-                _slideSourcePresentationObject = _powerPointObject.Presentations.Open(FileName: presentationFile.FullName, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
+                _slideSourcePresentationObject = this.PowerPointObject.Presentations.Open(FileName: presentationFile.FullName, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
             }
             catch
             {
@@ -339,21 +321,21 @@ namespace SalesDepot.InteropClasses
 
         public void ChangeAspect()
         {
-            if (_activePresentation.PageSetup.SlideOrientation == Microsoft.Office.Core.MsoOrientation.msoOrientationHorizontal)
-                _activePresentation.PageSetup.SlideOrientation = Microsoft.Office.Core.MsoOrientation.msoOrientationVertical;
-            else if (_activePresentation.PageSetup.SlideOrientation == Microsoft.Office.Core.MsoOrientation.msoOrientationVertical)
-                _activePresentation.PageSetup.SlideOrientation = Microsoft.Office.Core.MsoOrientation.msoOrientationHorizontal;
+            if (this.ActivePresentation.PageSetup.SlideOrientation == Microsoft.Office.Core.MsoOrientation.msoOrientationHorizontal)
+                this.ActivePresentation.PageSetup.SlideOrientation = Microsoft.Office.Core.MsoOrientation.msoOrientationVertical;
+            else if (this.ActivePresentation.PageSetup.SlideOrientation == Microsoft.Office.Core.MsoOrientation.msoOrientationVertical)
+                this.ActivePresentation.PageSetup.SlideOrientation = Microsoft.Office.Core.MsoOrientation.msoOrientationHorizontal;
         }
 
         public PowerPoint.Slide GetActiveSlide()
         {
-            if (_powerPointObject.Windows.Count > 0)
+            if (this.PowerPointObject.Windows.Count > 0)
             {
-                _powerPointObject.Activate();
-                if (_powerPointObject.ActiveWindow != null)
+                this.PowerPointObject.Activate();
+                if (this.PowerPointObject.ActiveWindow != null)
                 {
-                    _powerPointObject.ActiveWindow.ViewType = Microsoft.Office.Interop.PowerPoint.PpViewType.ppViewNormal;
-                    return (PowerPoint.Slide)_powerPointObject.ActiveWindow.View.Slide;
+                    this.PowerPointObject.ActiveWindow.ViewType = Microsoft.Office.Interop.PowerPoint.PpViewType.ppViewNormal;
+                    return (PowerPoint.Slide)this.PowerPointObject.ActiveWindow.View.Slide;
                 }
             }
             return null;
@@ -364,12 +346,12 @@ namespace SalesDepot.InteropClasses
             int slideIndex = -1;
             try
             {
-                if (_powerPointObject.Windows.Count > 0)
+                if (this.PowerPointObject.Windows.Count > 0)
                 {
-                    _powerPointObject.Activate();
-                    if (_powerPointObject.ActiveWindow != null)
+                    this.PowerPointObject.Activate();
+                    if (this.PowerPointObject.ActiveWindow != null)
                     {
-                        slideIndex = ((PowerPoint.Slide)_powerPointObject.ActiveWindow.View.Slide).SlideIndex;
+                        slideIndex = ((PowerPoint.Slide)this.PowerPointObject.ActiveWindow.View.Slide).SlideIndex;
                     }
                 }
             }
@@ -379,7 +361,7 @@ namespace SalesDepot.InteropClasses
             if (this.Is2003 && slideIndex == -1)
             {
                 RefreshContents();
-                _powerPointObject.ActiveWindow.Selection.Unselect();
+                this.PowerPointObject.ActiveWindow.Selection.Unselect();
             }
             return slideIndex;
         }
@@ -408,9 +390,9 @@ namespace SalesDepot.InteropClasses
                         {
                             slide = _slideSourcePresentationObject.Slides[i];
                             slide.Copy();
-                            pastedRange = _activePresentation.Slides.Paste(indexToPaste);
+                            pastedRange = this.ActivePresentation.Slides.Paste(indexToPaste);
                             indexToPaste++;
-                            design = GetDesignFromSlide(slide, _activePresentation);
+                            design = GetDesignFromSlide(slide, this.ActivePresentation);
                             if (design != null)
                                 pastedRange.Design = design;
                             else
@@ -471,7 +453,7 @@ namespace SalesDepot.InteropClasses
                                 }
                             }
                             MakeDesignUnique(slide, pastedRange.Design);
-                            _activePresentation.Slides[indexToPaste - 1].Select();
+                            this.ActivePresentation.Slides[indexToPaste - 1].Select();
                             currentSlideIndex = indexToPaste - 1;
                         }
                     }
@@ -479,7 +461,7 @@ namespace SalesDepot.InteropClasses
                 if (this.Is2003 && currentSlideIndex != 0)
                 {
                     RefreshContents();
-                    _activePresentation.Slides[currentSlideIndex].Select();
+                    this.ActivePresentation.Slides[currentSlideIndex].Select();
                 }
             }
             catch
@@ -505,7 +487,7 @@ namespace SalesDepot.InteropClasses
             int contentSlideIndex = 0;
             int contentSlideIndexCount = 0;
             int i = 1;
-            foreach (PowerPoint.Slide slide in _activePresentation.Slides)
+            foreach (PowerPoint.Slide slide in this.ActivePresentation.Slides)
             {
                 foreach (PowerPoint.Shape shape in slide.Shapes)
                     if (shape.Tags["CONTENT_HEADER"] != "")
@@ -525,14 +507,14 @@ namespace SalesDepot.InteropClasses
             }
             if (contentSlideIndexCount > 0 && File.Exists(Path.Combine(ConfigurationClasses.SettingsManager.Instance.ContentsSlidePath, ConfigurationClasses.SettingsManager.Instance.DefaultWizard, ConfigurationClasses.SettingsManager.ContentsSlideName)))
             {
-                PowerPoint.Design design = _activePresentation.Slides[contentSlideIndex].Design;
+                PowerPoint.Design design = this.ActivePresentation.Slides[contentSlideIndex].Design;
                 for (int j = 0; j < contentSlideIndexCount; j++)
-                    _activePresentation.Slides[contentSlideIndex].Delete();
+                    this.ActivePresentation.Slides[contentSlideIndex].Delete();
                 for (int j = 0; j < contentSlideIndexCount; j++)
-                    _activePresentation.Slides.InsertFromFile(Path.Combine(ConfigurationClasses.SettingsManager.Instance.ContentsSlidePath, ConfigurationClasses.SettingsManager.Instance.DefaultWizard, ConfigurationClasses.SettingsManager.ContentsSlideName), contentSlideIndex - 1 + j, 1, 1);
+                    this.ActivePresentation.Slides.InsertFromFile(Path.Combine(ConfigurationClasses.SettingsManager.Instance.ContentsSlidePath, ConfigurationClasses.SettingsManager.Instance.DefaultWizard, ConfigurationClasses.SettingsManager.ContentsSlideName), contentSlideIndex - 1 + j, 1, 1);
 
                 for (int j = 0; j < contentSlideIndexCount; j++)
-                    _activePresentation.Slides[contentSlideIndex + j].Design = design;
+                    this.ActivePresentation.Slides[contentSlideIndex + j].Design = design;
             }
         }
 
@@ -553,7 +535,7 @@ namespace SalesDepot.InteropClasses
             try
             {
                 MessageFilter.Register();
-                FileInfo presentationFile = new FileInfo(_activePresentation.FullName);
+                FileInfo presentationFile = new FileInfo(this.ActivePresentation.FullName);
                 videoFile = videoFile.CopyTo(Path.Combine(presentationFile.DirectoryName, videoFile.Name), true);
                 PowerPoint.Slide slide = GetActiveSlide();
                 if (slide != null)
@@ -642,7 +624,7 @@ namespace SalesDepot.InteropClasses
                 {
                     string presentationName = Path.GetTempFileName();
                     SaveSingleSlide(slideIndex, presentationName);
-                    PowerPoint.Presentation singleSlidePresentation = _powerPointObject.Presentations.Open(FileName: presentationName, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
+                    PowerPoint.Presentation singleSlidePresentation = this.PowerPointObject.Presentations.Open(FileName: presentationName, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
                     singleSlidePresentation.SaveAs(FileName: destinationFileName, FileFormat: Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
                     singleSlidePresentation.Close();
                 }
@@ -658,7 +640,7 @@ namespace SalesDepot.InteropClasses
 
         public void SaveSingleSlide(int slideIndex, string destinationFileName)
         {
-            PowerPoint.Presentation singleSlidePresentation = _powerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoFalse);
+            PowerPoint.Presentation singleSlidePresentation = this.PowerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoFalse);
             singleSlidePresentation.PageSetup.SlideOrientation = _slideSourcePresentationObject.PageSetup.SlideOrientation;
             PowerPoint.Slide singleSlide = _slideSourcePresentationObject.Slides[slideIndex];
             singleSlide.Copy();

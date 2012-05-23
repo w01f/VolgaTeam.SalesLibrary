@@ -170,7 +170,6 @@ namespace SalesDepot
                 pnContainer.BringToFront();
                 form.Close();
             }
-            AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMainForm();
         }
 

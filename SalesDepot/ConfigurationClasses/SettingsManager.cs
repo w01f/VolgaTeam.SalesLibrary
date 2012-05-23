@@ -60,6 +60,7 @@ namespace SalesDepot.ConfigurationClasses
         public string LibraryLogoFolder { get; set; }
         public string CalendarLogoPath { get; set; }
         public string DisclaimerPath { get; set; }
+        public string PowerPointLoaderPath { get; set; }
 
         public string SelectedPackage { get; set; }
         public string SelectedLibrary { get; set; }
@@ -130,6 +131,7 @@ namespace SalesDepot.ConfigurationClasses
             this.LibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DefaultWizard = string.Empty;
             this.SalesDepotName = string.Empty;
             this.KeyWordFilters = new KeyWordFileFilters();
