@@ -12,7 +12,7 @@
     <AssemblyName>SalesDepot</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ApplicationIcon>SalesDepotIcon.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -618,7 +618,7 @@
     <None Include="Resources\zip.png" />
     <None Include="Resources\CalendarDisclaimerLogo.png" />
     <None Include="Resources\CalendarLogo.png" />
-    <Content Include="SalesDepotIcon.ico" />
+    <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">

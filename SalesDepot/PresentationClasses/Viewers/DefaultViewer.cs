@@ -55,16 +55,16 @@ namespace SalesDepot.PresentationClasses.Viewers
             {
                 case BusinessClasses.FileTypes.Other:
                 case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.OpenCopyOfFile(new FileInfo(this.File.FullPath));
+                    BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.File.LocalPath));
                     break;
                 case BusinessClasses.FileTypes.Folder:
-                    BusinessClasses.LinkManager.OpenFolder(this.File.FullPath);
+                    BusinessClasses.LinkManager.Instance.OpenFolder(this.File.LocalPath);
                     break;
                 case BusinessClasses.FileTypes.Url:
-                    BusinessClasses.LinkManager.StartProcess(this.File.FullPath);
+                    BusinessClasses.LinkManager.Instance.StartProcess(this.File.LocalPath);
                     break;
                 case BusinessClasses.FileTypes.Network:
-                    BusinessClasses.LinkManager.StartProcess(this.File.FullPath);
+                    BusinessClasses.LinkManager.Instance.StartProcess(this.File.LocalPath);
                     break;
                 default:
                     break;
@@ -73,12 +73,12 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Save()
         {
-            ActivityRecorder.Instance.WriteActivity();
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             switch (this.File.Type)
             {
                 case BusinessClasses.FileTypes.Other:
                 case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.SaveFile("Save copy of the file as", new FileInfo(this.File.FullPath));
+                    BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
                     break;
                 default:
                     break;
@@ -87,12 +87,12 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Email()
         {
-            ActivityRecorder.Instance.WriteActivity();
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             switch (this.File.Type)
             {
                 case BusinessClasses.FileTypes.Other:
                 case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.EmailFile(this.File.FullPath);
+                    BusinessClasses.LinkManager.Instance.EmailFile(this.File.LocalPath);
                     break;
                 default:
                     break;
@@ -101,12 +101,12 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Print()
         {
-            ActivityRecorder.Instance.WriteActivity();
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             switch (this.File.Type)
             {
                 case BusinessClasses.FileTypes.Other:
                 case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.PrintFile(new FileInfo(this.File.FullPath));
+                    BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
                     break;
                 default:
                     break;

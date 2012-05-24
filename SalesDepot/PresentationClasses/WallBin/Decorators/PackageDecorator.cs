@@ -49,7 +49,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         private void BuildDecorators()
         {
-            foreach (BusinessClasses.Library salesDepot in this.Package.SalesDepotCollection)
+            foreach (BusinessClasses.Library salesDepot in this.Package.LibraryCollection)
             {
                 _decorators.Add(new LibraryDecorator(this, salesDepot));
                 Application.DoEvents();
@@ -82,7 +82,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         {
             FormMain.Instance.TabHome.StationChanged = StationChanged;
             FormMain.Instance.comboBoxItemStations.Items.Clear();
-            FormMain.Instance.comboBoxItemStations.Items.AddRange(this.Package.SalesDepotCollection.Select(x => x.Name).ToArray());
+            FormMain.Instance.comboBoxItemStations.Items.AddRange(this.Package.LibraryCollection.Select(x => x.Name).ToArray());
 
             if (FormMain.Instance.comboBoxItemStations.Items.Count > 1)
                 FormMain.Instance.comboBoxItemStations.Visible = (ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView) & true;

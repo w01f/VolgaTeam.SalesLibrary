@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
             this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
@@ -122,7 +121,7 @@
             this.ribbonTabItemSettings = new DevComponents.DotNetBar.RibbonTabItem();
             this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
             this.galleryGroup = new DevComponents.DotNetBar.GalleryGroup();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.pnContainer = new System.Windows.Forms.Panel();
             this.pnEmpty = new System.Windows.Forms.Panel();
             this.ribbonControl.SuspendLayout();

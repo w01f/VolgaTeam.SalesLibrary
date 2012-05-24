@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -15,7 +16,7 @@ namespace SalesDepot.BusinessClasses
         public DirectoryInfo Folder { get; set; }
         private List<Library> _libraryCollection = new List<Library>();
 
-        public List<Library> SalesDepotCollection
+        public List<Library> LibraryCollection
         {
             get
             {
@@ -61,7 +62,7 @@ namespace SalesDepot.BusinessClasses
                     {
                         DirectoryInfo primaryRootFolder = new DirectoryInfo(Path.Combine(subFolder.FullName, ConfigurationClasses.SettingsManager.WholeDriveFilesStorage));
                         if (primaryRootFolder.Exists)
-                            library = new Library(this,primaryRootFolder.Parent.Name, primaryRootFolder);
+                            library = new Library(this, primaryRootFolder.Parent.Name, primaryRootFolder);
                         else
                             library = new Library(this, subFolder.Name, subFolder);
                         if (library != null && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
@@ -123,7 +124,7 @@ namespace SalesDepot.BusinessClasses
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
-        public string Name 
+        public string Name
         {
             get
             {
@@ -131,10 +132,10 @@ namespace SalesDepot.BusinessClasses
                     return this.Parent.Name;
                 else
                     return _name;
-            } 
+            }
         }
 
-        public Library(LibraryPackage parent,string name, DirectoryInfo folder)
+        public Library(LibraryPackage parent, string name, DirectoryInfo folder)
         {
             this.Parent = parent;
             this.Identifier = Guid.NewGuid();
@@ -724,6 +725,12 @@ namespace SalesDepot.BusinessClasses
         private string _note = string.Empty;
         private Image _widget = null;
 
+        private bool _linkAvailabilityChecked = false;
+        private bool _linkAvailabel = false;
+
+        private string _linkRemotePath = string.Empty;
+        private string _linkLocalPath = string.Empty;
+
         public string Name { get; set; }
         public LibraryFolder Parent { get; set; }
         public Guid Identifier { get; set; }
@@ -744,6 +751,70 @@ namespace SalesDepot.BusinessClasses
         public PresentationPreviewContainer PreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
+
+        public string RemotePath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_linkRemotePath))
+                {
+                    if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
+                        return this.RelativePath;
+                    else if (this.Type == FileTypes.LineBreak)
+                        return string.Empty;
+                    else
+                        return ((this.Parent != null ? this.Parent.Parent.Parent.Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
+                }
+                else
+                    return _linkRemotePath;
+            }
+            set
+            {
+                _linkRemotePath = value;
+            }
+        }
+
+        public string LocalPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_linkLocalPath) && this.LinkAvailable)
+                    GetLocalCopy();
+                return _linkLocalPath;
+            }
+        }
+
+        public bool LinkAvailable
+        {
+            get
+            {
+                if (!_linkAvailabilityChecked)
+                {
+                    switch (this.Type)
+                    {
+                        case FileTypes.BuggyPresentation:
+                        case FileTypes.Excel:
+                        case FileTypes.FriendlyPresentation:
+                        case FileTypes.MediaPlayerVideo:
+                        case FileTypes.Other:
+                        case FileTypes.OtherPresentation:
+                        case FileTypes.PDF:
+                        case FileTypes.QuickTimeVideo:
+                        case FileTypes.Word:
+                            _linkAvailabel = File.Exists(this.RemotePath);
+                            break;
+                        case FileTypes.Folder:
+                            _linkAvailabel = Directory.Exists(this.RemotePath);
+                            break;
+                        default:
+                            _linkAvailabel = true;
+                            break;
+                    }
+                    _linkAvailabilityChecked = true;
+                }
+                return _linkAvailabel;
+            }
+        }
 
         public string DisplayName
         {
@@ -774,7 +845,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public string PropertiesName
+        public string NameWithExtension
         {
             get
             {
@@ -783,7 +854,7 @@ namespace SalesDepot.BusinessClasses
                 else if (this.Type == FileTypes.LineBreak)
                     return string.Empty;
                 else
-                    return Path.GetFileName(this.FullPath);
+                    return Path.GetFileName(this.RemotePath);
             }
         }
 
@@ -797,25 +868,12 @@ namespace SalesDepot.BusinessClasses
                     return string.Empty;
                 else
                 {
-                    return Path.GetFileNameWithoutExtension(this.FullPath);
+                    return Path.GetFileNameWithoutExtension(this.RemotePath);
                 }
             }
         }
 
-        public string FullPath
-        {
-            get
-            {
-                if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
-                    return this.RelativePath;
-                else if (this.Type == FileTypes.LineBreak)
-                    return string.Empty;
-                else
-                    return ((this.Parent != null ? this.Parent.Parent.Parent.Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
-            }
-        }
-
-        private string Extension
+        public string Extension
         {
             get
             {
@@ -830,7 +888,7 @@ namespace SalesDepot.BusinessClasses
                     case FileTypes.Excel:
                     case FileTypes.PDF:
                     case FileTypes.Word:
-                        return Path.GetExtension(this.FullPath);
+                        return Path.GetExtension(this.RemotePath);
                     default:
                         return string.Empty;
                 }
@@ -1072,29 +1130,11 @@ namespace SalesDepot.BusinessClasses
                 case ".OGX":
                     this.Type = FileTypes.QuickTimeVideo;
                     break;
+                case ".URL":
+                    this.Type = FileTypes.Url;
+                    break;
                 default:
                     this.Type = FileTypes.Other;
-                    break;
-            }
-        }
-
-        public void CheckIfDead()
-        {
-            switch (this.Type)
-            {
-                case FileTypes.MediaPlayerVideo:
-                case FileTypes.Other:
-                case FileTypes.OtherPresentation:
-                    if (!File.Exists(this.FullPath))
-                        this.IsDead = true;
-                    else
-                        this.IsDead = false;
-                    break;
-                case FileTypes.Folder:
-                    if (!Directory.Exists(this.FullPath))
-                        this.IsDead = true;
-                    else
-                        this.IsDead = false;
                     break;
             }
         }
@@ -1102,6 +1142,56 @@ namespace SalesDepot.BusinessClasses
         public void RemoveFromCollection()
         {
             this.Parent.Files.Remove(this);
+        }
+
+        private void GetLocalCopy()
+        {
+            if (this.LinkAvailable)
+            {
+                if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                {
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                    {
+                        switch (this.Type)
+                        {
+                            case FileTypes.BuggyPresentation:
+                            case FileTypes.Excel:
+                            case FileTypes.FriendlyPresentation:
+                            case FileTypes.MediaPlayerVideo:
+                            case FileTypes.Other:
+                            case FileTypes.OtherPresentation:
+                            case FileTypes.PDF:
+                            case FileTypes.QuickTimeVideo:
+                            case FileTypes.Word:
+                                _linkLocalPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, this.NameWithExtension);
+                                try
+                                {
+                                    File.Copy(this.RemotePath, _linkLocalPath, true);
+                                }
+                                catch
+                                {
+                                    _linkLocalPath = string.Empty;
+                                }
+                                break;
+                            case FileTypes.Folder:
+                                _linkLocalPath = this.RemotePath;
+                                break;
+                            default:
+                                _linkLocalPath = string.Empty;
+                                break;
+                        }
+
+                    }));
+                    thread.Start();
+                    Application.DoEvents();
+                    while (thread.IsAlive)
+                        Application.DoEvents();
+                }
+                else
+                    _linkLocalPath = this.RemotePath;
+            }
+            else
+                _linkLocalPath = string.Empty;
         }
     }
 
@@ -1250,7 +1340,8 @@ namespace SalesDepot.BusinessClasses
     {
         private LibraryFile _parent = null;
         private string _folderName = Guid.NewGuid().ToString();
-        public string PreviewStorageFolder { get; set; }
+        private string _remotePreviewStorageFolder = string.Empty;
+        private string LocalPreviewStorageFolder { get; set; }
         public List<PresentationPreviewSlide> Slides { get; set; }
         public int SelectedIndex { get; set; }
 
@@ -1258,7 +1349,13 @@ namespace SalesDepot.BusinessClasses
         {
             _parent = parent;
             if (_parent.Parent != null)
-                this.PreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName, _folderName);
+            {
+                _remotePreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName, _folderName);
+                if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                    this.LocalPreviewStorageFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, _folderName);
+                else
+                    this.LocalPreviewStorageFolder = _remotePreviewStorageFolder;
+            }
             Slides = new List<PresentationPreviewSlide>();
         }
 
@@ -1278,7 +1375,13 @@ namespace SalesDepot.BusinessClasses
                     case "FolderName":
                         _folderName = childNode.InnerText;
                         if (_parent.Parent != null)
-                            this.PreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName, _folderName);
+                        {
+                            _remotePreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName, _folderName);
+                            if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                                this.LocalPreviewStorageFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, _folderName);
+                            else
+                                this.LocalPreviewStorageFolder = _remotePreviewStorageFolder;
+                        }
                         break;
                 }
             }
@@ -1304,16 +1407,34 @@ namespace SalesDepot.BusinessClasses
 
         public void GetPreviewImages()
         {
-            if (Directory.Exists(this.PreviewStorageFolder))
+            if (Directory.Exists(_remotePreviewStorageFolder))
             {
                 this.Slides.Clear();
-                string[] previewImages = Directory.GetFiles(this.PreviewStorageFolder, "*.png");
-                Array.Sort(previewImages, (x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x, y));
-                for (int i = 0; i < previewImages.Length; i++)
+                List<string> localPreviewImages = new List<string>();
+                if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                {
+                    if (!Directory.Exists(this.LocalPreviewStorageFolder))
+                    {
+                        Directory.CreateDirectory(this.LocalPreviewStorageFolder);
+                        foreach (string imagePath in Directory.GetFiles(_remotePreviewStorageFolder, "*.png"))
+                        {
+                            try
+                            {
+                                File.Copy(imagePath, Path.Combine(this.LocalPreviewStorageFolder, Path.GetFileName(imagePath)), true);
+                            }
+                            catch
+                            {
+                            }
+                        }
+                    }
+                }
+                localPreviewImages.AddRange(Directory.GetFiles(this.LocalPreviewStorageFolder, "*.png"));
+                localPreviewImages.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x, y));
+                for (int i = 0; i < localPreviewImages.Count; i++)
                 {
                     PresentationPreviewSlide slide = new PresentationPreviewSlide();
                     slide.Index = i;
-                    slide.PreviewImage = new System.Drawing.Bitmap(previewImages[i], true);
+                    slide.PreviewImage = new System.Drawing.Bitmap(localPreviewImages[i], true);
                     this.Slides.Add(slide);
                 }
             }
@@ -1322,8 +1443,8 @@ namespace SalesDepot.BusinessClasses
         public bool CheckPreviewImages()
         {
             bool result = false;
-            if (Directory.Exists(this.PreviewStorageFolder))
-                result = Directory.GetFiles(this.PreviewStorageFolder, "*.png").Length > 0;
+            if (Directory.Exists(_remotePreviewStorageFolder))
+                result = Directory.GetFiles(_remotePreviewStorageFolder, "*.png").Length > 0;
             return result;
         }
     }

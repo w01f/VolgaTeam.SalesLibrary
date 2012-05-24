@@ -7,30 +7,49 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace SalesDepot.BusinessClasses
 {
-    public static class LinkManager
+    public class LinkManager
     {
-        public static void OpenLink(LibraryFile link)
+        private static LinkManager _instance = null;
+
+        private ToolForms.WallBin.FormPowerPointQuickView _formPowerPointQuickView = null;
+        private ToolForms.WallBin.FormPowerPointQuickViewOld _formPowerPointQuickViewOld = null;
+        private ToolForms.WallBin.FormLinkPreview _formLinkPreview = null;
+
+        public static LinkManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new LinkManager();
+                return _instance;
+            }
+        }
+
+        private LinkManager()
+        {
+            _formLinkPreview = new ToolForms.WallBin.FormLinkPreview();
+            _formPowerPointQuickView = new ToolForms.WallBin.FormPowerPointQuickView();
+            _formPowerPointQuickViewOld = new ToolForms.WallBin.FormPowerPointQuickViewOld();
+        }
+
+        public void OpenLink(LibraryFile link)
         {
             FileInfo sourceFile = null;
             if (link.Type != FileTypes.LineBreak && link.Type != FileTypes.Folder && link.Type != FileTypes.Url && link.Type != FileTypes.Network)
             {
-                sourceFile = RequestFile(link.FullPath);
-
+                sourceFile = RequestFile(link);
                 if (sourceFile == null)
                 {
                     AppManager.Instance.ShowWarning("File or Link is Not Active");
                     return;
                 }
-
-                if (sourceFile.Extension.ToLower().Equals(".url"))
-                    link.Type = FileTypes.Url;
             }
             switch (link.Type)
             {
                 case FileTypes.BuggyPresentation:
                 case FileTypes.FriendlyPresentation:
                 case FileTypes.OtherPresentation:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
@@ -47,7 +66,7 @@ namespace SalesDepot.BusinessClasses
                                         PrintFile(sourceFile);
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
                                     {
-                                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.FullPath));
+                                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.LocalPath));
                                         using (ToolForms.WallBin.FormEmailPresentation form = new ToolForms.WallBin.FormEmailPresentation())
                                         {
                                             form.SelectedFile = link;
@@ -74,7 +93,7 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.PDF:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.PDFLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -107,7 +126,7 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.Word:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.WordLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -140,7 +159,7 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.Excel:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.ExcelLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -173,7 +192,7 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.MediaPlayerVideo:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.VideoLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -198,21 +217,21 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.QuickTimeVideo:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     OpenVideo(sourceFile);
                     break;
                 case FileTypes.Other:
-                    SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     OpenCopyOfFile(sourceFile);
                     break;
                 case FileTypes.Folder:
-                    OpenFolder(link.FullPath);
+                    OpenFolder(link.LocalPath);
                     break;
                 case FileTypes.Url:
-                    StartProcess(link.FullPath);
+                    StartProcess(link.LocalPath);
                     break;
                 case FileTypes.Network:
-                    StartProcess(link.FullPath);
+                    StartProcess(link.LocalPath);
                     break;
                 case FileTypes.LineBreak:
                     if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
@@ -223,23 +242,18 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public static void PreviewFile(LibraryFile selectedFile)
+        public void PreviewFile(LibraryFile selectedFile)
         {
-            string presentationFile = selectedFile.FullPath;
-            using (ToolForms.WallBin.FormLinkPreview form = new ToolForms.WallBin.FormLinkPreview())
+            if (selectedFile.LinkAvailable)
             {
-                FileInfo file = new FileInfo(presentationFile);
-                if (file.Exists)
-                {
-                    form.SelectedFile = selectedFile;
-                    form.ShowDialog();
-                }
+                _formLinkPreview.SelectedFile = selectedFile;
+                _formLinkPreview.ShowDialog();
             }
-            ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = FormMain.Instance.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
         }
 
-        public static void OpenFile(FileInfo file)
+        public void OpenFile(FileInfo file)
         {
             try
             {
@@ -251,7 +265,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public static void OpenCopyOfFile(FileInfo file)
+        public void OpenCopyOfFile(FileInfo file)
         {
             try
             {
@@ -264,7 +278,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public static void OpenFolder(string folderName)
+        public void OpenFolder(string folderName)
         {
             if (Directory.Exists(folderName))
                 Process.Start(folderName);
@@ -272,7 +286,7 @@ namespace SalesDepot.BusinessClasses
                 AppManager.Instance.ShowWarning("Folder is Not Active");
         }
 
-        public static void StartProcess(string processName)
+        public void StartProcess(string processName)
         {
             try
             {
@@ -284,7 +298,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public static void SaveFile(string dialogTitle, FileInfo file, bool isCopy = true)
+        public void SaveFile(string dialogTitle, FileInfo file, bool isCopy = true)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Title = dialogTitle;
@@ -305,7 +319,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public static void PrintFile(FileInfo file)
+        public void PrintFile(FileInfo file)
         {
             Process printProcess = new Process();
             switch (file.Extension.Substring(1).ToUpper())
@@ -348,7 +362,8 @@ namespace SalesDepot.BusinessClasses
                     break;
             }
         }
-        public static void EmailFile(string filePath)
+
+        public void EmailFile(string filePath)
         {
             if (InteropClasses.OutlookHelper.Instance.Open())
             {
@@ -359,7 +374,7 @@ namespace SalesDepot.BusinessClasses
                 AppManager.Instance.ShowWarning("Cannot open Outlook");
         }
 
-        public static void EmailFile(string[] filePaths)
+        public void EmailFile(string[] filePaths)
         {
             if (InteropClasses.OutlookHelper.Instance.Open())
             {
@@ -370,54 +385,85 @@ namespace SalesDepot.BusinessClasses
                 AppManager.Instance.ShowWarning("Cannot open Outlook");
         }
 
-        private static FileInfo RequestFile(string fileName)
+        public FileInfo RequestFile(LibraryFile link)
         {
-            FileInfo sourceFile = new FileInfo(fileName);
-            if (sourceFile.Exists)
-                return sourceFile;
-            else
-                return null;
+            FileInfo sourceFile = null;
+            if (link.LinkAvailable)
+            {
+                if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                {
+                    using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                    {
+                        form.laProgress.Text = string.Format("Downloading {0}...", link.NameWithExtension);
+                        form.TopMost = true;
+                        FormMain.Instance.ribbonControl.Enabled = false;
+                        form.Show();
+                        Application.DoEvents();
+                        try
+                        {
+                            sourceFile = new FileInfo(link.LocalPath);
+                        }
+                        catch
+                        {
+                            sourceFile = null;
+                        }
+                        FormMain.Instance.UseWaitCursor = false;
+                        FormMain.Instance.ribbonControl.Enabled = true;
+                        form.Close();
+                        Application.DoEvents();
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        sourceFile = new FileInfo(link.LocalPath);
+                    }
+                    catch
+                    {
+                        sourceFile = null;
+                    }
+                }
+            }
+            return sourceFile;
         }
 
-        public static void ViewPresentation(LibraryFile selectedFile)
+        public void ViewPresentation(LibraryFile selectedFile)
         {
-            string presentationFile = selectedFile.FullPath;
+            string presentationFile = selectedFile.LocalPath;
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
                 AppManager.Instance.RunPowerPointLoader();
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;
-            using (ToolForms.WallBin.FormPowerPointQuickView form = new ToolForms.WallBin.FormPowerPointQuickView())
+            FileInfo file = new FileInfo(presentationFile);
+            if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
             {
-                FileInfo file = new FileInfo(presentationFile);
-                if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
+                if (!ConfigurationClasses.RegistryHelper.Office2007CompatibilityPackInstalled)
                 {
-                    if (!ConfigurationClasses.RegistryHelper.Office2007CompatibilityPackInstalled)
-                    {
-                        AppManager.Instance.ShowWarning("This File was created in a Newer Version of Microsoft Office." + Environment.NewLine + Environment.NewLine + "In the FUTURE, if you want to open this file, ASK your I.T. Manager to INSTALL the Office 2007 Compatibility Pack.");
-                        return;
-                    }
-                    else if (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions == ConfigurationClasses.LinkLaunchOptions.Viewer)
-                    {
-                        if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
-                            OpenCopyOfFile(file);
-                        return;
-                    }
+                    AppManager.Instance.ShowWarning("This File was created in a Newer Version of Microsoft Office." + Environment.NewLine + Environment.NewLine + "In the FUTURE, if you want to open this file, ASK your I.T. Manager to INSTALL the Office 2007 Compatibility Pack.");
+                    return;
                 }
-                if (file.Exists)
+                else if (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions == ConfigurationClasses.LinkLaunchOptions.Viewer)
                 {
-                    form.SelectedFile = selectedFile;
-                    int temp = selectedFile.PreviewContainer.SelectedIndex;
-                    form.ShowDialog();
-                    selectedFile.PreviewContainer.SelectedIndex = temp;
+                    if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
+                        OpenCopyOfFile(file);
+                    return;
                 }
             }
-            ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+            if (file.Exists)
+            {
+                _formPowerPointQuickView.SelectedFile = selectedFile;
+                int temp = selectedFile.PreviewContainer.SelectedIndex;
+                _formPowerPointQuickView.ShowDialog();
+                selectedFile.PreviewContainer.SelectedIndex = temp;
+            }
+            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = FormMain.Instance.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
         }
 
-        public static void ViewPresentationOld(LibraryFile selectedFile)
+        public void ViewPresentationOld(LibraryFile selectedFile)
         {
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
@@ -425,34 +471,31 @@ namespace SalesDepot.BusinessClasses
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;
-            using (ToolForms.WallBin.FormPowerPointQuickViewOld form = new ToolForms.WallBin.FormPowerPointQuickViewOld())
+            FileInfo file = new FileInfo(selectedFile.LocalPath);
+            if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
             {
-                FileInfo file = new FileInfo(selectedFile.FullPath);
-                if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
+                if (!ConfigurationClasses.RegistryHelper.Office2007CompatibilityPackInstalled)
                 {
-                    if (!ConfigurationClasses.RegistryHelper.Office2007CompatibilityPackInstalled)
-                    {
-                        AppManager.Instance.ShowWarning("This File was created in a Newer Version of Microsoft Office." + Environment.NewLine + Environment.NewLine + "In the FUTURE, if you want to open this file, ASK your I.T. Manager to INSTALL the Office 2007 Compatibility Pack.");
-                        return;
-                    }
-                    else if (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions == ConfigurationClasses.LinkLaunchOptions.Viewer)
-                    {
-                        if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
-                            OpenCopyOfFile(file);
-                        return;
-                    }
+                    AppManager.Instance.ShowWarning("This File was created in a Newer Version of Microsoft Office." + Environment.NewLine + Environment.NewLine + "In the FUTURE, if you want to open this file, ASK your I.T. Manager to INSTALL the Office 2007 Compatibility Pack.");
+                    return;
                 }
-                if (file.Exists)
+                else if (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions == ConfigurationClasses.LinkLaunchOptions.Viewer)
                 {
-                    form.SelectedFile = selectedFile;
-                    form.ShowDialog();
+                    if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
+                        OpenCopyOfFile(file);
+                    return;
                 }
             }
-            ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+            if (file.Exists)
+            {
+                _formPowerPointQuickViewOld.SelectedFile = selectedFile;
+                _formPowerPointQuickViewOld.ShowDialog();
+            }
+            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = FormMain.Instance.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
         }
 
-        public static void AddVideoIntoPresentation(FileInfo file)
+        public void AddVideoIntoPresentation(FileInfo file)
         {
             if (File.Exists(InteropClasses.PowerPointHelper.Instance.ActivePresentation.FullName))
             {
@@ -497,8 +540,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-
-        public static void OpenVideo(FileInfo file)
+        public void OpenVideo(FileInfo file)
         {
             file = file.CopyTo(Path.Combine(AppManager.Instance.TempFolder.FullName, file.Name), true);
             ProcessStartInfo videoPlay = new ProcessStartInfo(file.FullName);
@@ -515,7 +557,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public static void CompressFiles(string[] filesPaths, string compressedFilePath)
+        public void CompressFiles(string[] filesPaths, string compressedFilePath)
         {
             using (ZipOutputStream s = new ZipOutputStream(File.Create(compressedFilePath)))
             {

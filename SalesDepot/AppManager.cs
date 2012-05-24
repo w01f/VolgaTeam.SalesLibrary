@@ -26,6 +26,10 @@ namespace SalesDepot
             DeleteFolder(this.TempFolder);
             if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.TempPath))
                 Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.TempPath);
+
+            DeleteFolder(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder));
+            if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder))
+                Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder);
         }
 
         public static AppManager Instance
@@ -43,10 +47,8 @@ namespace SalesDepot
 
         public void RunForm()
         {
-            ActivityRecorder.Instance.StartRecording();
-            SDRecorder.Instance.StartRecording();
-            ConfigurationClasses.SettingsManager.Instance.GetSalesDepotName();
-            ConfigurationClasses.SettingsManager.Instance.GetDefaultWizard();
+            ToolClasses.ActivityRecorder.Instance.StartRecording();
+            ToolClasses.SDRecorder.Instance.StartRecording();
             ConfigurationClasses.ListManager.Instance.Init();
             ShowMainForm();
         }
@@ -66,18 +68,18 @@ namespace SalesDepot
 
         public void ActivateMainForm()
         {
-            IntPtr handle = ConfigurationClasses.RegistryHelper.SalesDepotHandle;
+            IntPtr handle = ConfigurationClasses.RegistryHelper.RemoteLibraryHandle;
             if (handle.Equals(IntPtr.Zero))
             {
                 handle = FormMain.Instance.Handle;
                 if (handle.Equals(IntPtr.Zero))
                 {
-                    Process[] proc = Process.GetProcessesByName("SalesDepot");
+                    Process[] proc = Process.GetProcessesByName("RemoteLibrary");
                     if (proc.Length > 0)
                         handle = proc[0].MainWindowHandle;
                 }
             }
-            ActivateForm(handle, ConfigurationClasses.RegistryHelper.MaximizeSalesDepot, false);
+            ActivateForm(handle, ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary, false);
         }
 
         public void ActivatePowerPoint()

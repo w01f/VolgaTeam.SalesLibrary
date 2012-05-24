@@ -42,7 +42,7 @@
             this.buttonXZip = new DevComponents.DotNetBar.ButtonX();
             this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
             this.buttonXCreateEmail = new DevComponents.DotNetBar.ButtonX();
-            this.pnSalesDepotContainer = new System.Windows.Forms.Panel();
+            this.pnRemoteLibraryContainer = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlFiles)).BeginInit();
@@ -65,7 +65,7 @@
             this.splitContainerControl.Panel1.Controls.Add(this.pnTop);
             this.splitContainerControl.Panel1.Controls.Add(this.pnBottom);
             this.splitContainerControl.Panel1.Text = "Panel1";
-            this.splitContainerControl.Panel2.Controls.Add(this.pnSalesDepotContainer);
+            this.splitContainerControl.Panel2.Controls.Add(this.pnRemoteLibraryContainer);
             this.splitContainerControl.Panel2.Text = "Panel2";
             this.splitContainerControl.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
             this.splitContainerControl.Size = new System.Drawing.Size(678, 434);
@@ -122,7 +122,7 @@
             // 
             this.gridColumnName.Caption = "gridColumnName";
             this.gridColumnName.ColumnEdit = this.repositoryItemButtonEdit;
-            this.gridColumnName.FieldName = "PropertiesName";
+            this.gridColumnName.FieldName = "NameWithExtension";
             this.gridColumnName.Name = "gridColumnName";
             this.gridColumnName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
             this.gridColumnName.Visible = true;
@@ -238,13 +238,13 @@
             this.buttonXCreateEmail.TextColor = System.Drawing.Color.Black;
             this.buttonXCreateEmail.Click += new System.EventHandler(this.buttonXCreateEmail_Click);
             // 
-            // pnSalesDepotContainer
+            // pnRemoteLibraryContainer
             // 
-            this.pnSalesDepotContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnSalesDepotContainer.Location = new System.Drawing.Point(0, 0);
-            this.pnSalesDepotContainer.Name = "pnSalesDepotContainer";
-            this.pnSalesDepotContainer.Size = new System.Drawing.Size(678, 434);
-            this.pnSalesDepotContainer.TabIndex = 3;
+            this.pnRemoteLibraryContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnRemoteLibraryContainer.Location = new System.Drawing.Point(0, 0);
+            this.pnRemoteLibraryContainer.Name = "pnRemoteLibraryContainer";
+            this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(678, 434);
+            this.pnRemoteLibraryContainer.TabIndex = 3;
             // 
             // ClassicViewControl
             // 
@@ -269,7 +269,7 @@
 
         #endregion
 
-        public System.Windows.Forms.Panel pnSalesDepotContainer;
+        public System.Windows.Forms.Panel pnRemoteLibraryContainer;
         public DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
         private System.Windows.Forms.Panel pnTop;
         private System.Windows.Forms.Panel pnBottom;

@@ -141,8 +141,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             if (grFiles.Rows[e.RowIndex].Tag != null)
             {
                 BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
-                ActivityRecorder.Instance.WriteActivity();
-                BusinessClasses.LinkManager.OpenLink(file);
+                ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                BusinessClasses.LinkManager.Instance.OpenLink(file);
             }
         }
 
@@ -172,16 +172,16 @@ namespace SalesDepot.PresentationClasses.WallBin
                 if (file != null)
                 {
                     List<string> toolTipText = new List<string>();
-                    if (!string.IsNullOrEmpty(file.FullPath))
+                    if (file.Type != BusinessClasses.FileTypes.LineBreak)
                     {
-                        toolTipText.Add(file.PropertiesName);
+                        toolTipText.Add(file.NameWithExtension);
                         toolTipText.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
                         if (file.ExpirationDateOptions.EnableExpirationDate && file.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
                             toolTipText.Add("Expires: " + file.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt"));
                         else
                             toolTipText.Add("Expires: No Expiration Date");
                     }
-                    else if (file.Type == BusinessClasses.FileTypes.LineBreak)
+                    else
                     {
                         if (!string.IsNullOrEmpty(file.LineBreakProperties.Note))
                             toolTipText.Add(file.LineBreakProperties.Note);

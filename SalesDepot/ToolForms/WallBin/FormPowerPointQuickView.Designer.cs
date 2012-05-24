@@ -464,7 +464,7 @@
             // checkEditChangeSlideTemplate
             // 
             this.checkEditChangeSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(487, 7);
+            this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(455, 7);
             this.checkEditChangeSlideTemplate.MenuManager = this.barManager;
             this.checkEditChangeSlideTemplate.Name = "checkEditChangeSlideTemplate";
             this.checkEditChangeSlideTemplate.Properties.AllowHtmlString = true;
@@ -500,6 +500,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuickView";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormPowerPointQuickView_FormClosed);
             this.Shown += new System.EventHandler(this.FormQuickView_Shown);
             this.Resize += new System.EventHandler(this.FormQuickView_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();

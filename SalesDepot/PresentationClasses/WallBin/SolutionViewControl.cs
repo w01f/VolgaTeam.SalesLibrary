@@ -34,8 +34,14 @@ namespace SalesDepot.PresentationClasses.WallBin
             FormMain.Instance.ribbonBarEmailBin.Visible = false;
             FormMain.Instance.ribbonBarViewSettings.Visible = false;
 
-            FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
-            FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
+            if (!ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+            {
+                FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
+                FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
+            }
+            else
+                FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
+            
             FormMain.Instance.ribbonBarHomeAddSlide.Visible = true;
             FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
 
@@ -65,7 +71,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 form.laProgress.Text = "Searching Library...";
                 form.TopMost = true;
                 if (files.Length > 0)
-                    FormMain.Instance.Enabled = false;
+                    FormMain.Instance.ribbonControl.Enabled = false;
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
 
@@ -147,7 +153,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 while (thread.IsAlive)
                     Application.DoEvents();
 
-                FormMain.Instance.Enabled = true;
+                FormMain.Instance.ribbonControl.Enabled = true;
                 form.Close();
             }
             pnPreviewArea.Controls.AddRange(_fileViewers.Select(x => x as Control).ToArray());
@@ -830,7 +836,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         if (file != null)
                         {
                             List<string> toolTip = new List<string>();
-                            toolTip.Add(file.PropertiesName);
+                            toolTip.Add(file.NameWithExtension);
                             toolTip.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
                             if (file.ExpirationDateOptions.EnableExpirationDate && file.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
                                 toolTip.Add("Expires: " + file.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt"));

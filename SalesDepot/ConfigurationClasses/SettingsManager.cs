@@ -44,19 +44,28 @@ namespace SalesDepot.ConfigurationClasses
         private string _defaultSettingsFilePath = string.Empty;
         private string _defaultViewPath = string.Empty;
         private string _viewButtonsPath = string.Empty;
+        private string _configurationPath = string.Empty;
+
+        private string _localLibraryRootFolder = string.Empty;
+        private string _remoteLibraryRootFolder = string.Empty;
+
+        private string _localLibraryLogoFolder = string.Empty;
+        private string _remoteLibraryLogoFolder = string.Empty;
+
         private string _appIDFile = string.Empty;
         private string _approvedLibrariesFile = string.Empty;
 
         public bool IsConfigured { get; set; }
+        public bool UseRemoteConnection { get; set; }
 
         public string DefaultWizardFileName { get; set; }
-        public string SalesDepotRootFolder { get; set; }
+        public string LocalLibraryCacheFolder { get; set; }
         public string ContentsSlidePath { get; set; }
-        public string HelpFile { get; set; }
         public string TempPath { get; set; }
         public string DefaultWizard { get; set; }
         public string SalesDepotName { get; set; }
         public string IconPath { get; set; }
+        public string LibraryRootFolder { get; set; }
         public string LibraryLogoFolder { get; set; }
         public string CalendarLogoPath { get; set; }
         public string DisclaimerPath { get; set; }
@@ -121,14 +130,16 @@ namespace SalesDepot.ConfigurationClasses
             _viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             _appIDFile = string.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             _approvedLibrariesFile = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApprovedLibraries.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            _configurationPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Config.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
 
+            _localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            _localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-            this.SalesDepotRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-            this.HelpFile = string.Format(@"{0}\newlocaldirect.com\01. File Sync\Master Wizards\!Help Files\Sales Depot.wmv", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.TempPath = string.Format(@"{0}\newlocaldirect.com\Sync\Temp", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-            this.LibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.LibraryLogoFolder = string.Empty;
             this.CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
@@ -138,7 +149,6 @@ namespace SalesDepot.ConfigurationClasses
 
             this.ApprovedLibraries = new List<string>();
             LoadAppID();
-            LoadApprovedLibraries();
         }
 
         private void LoadDefaultViewSettings()
@@ -219,6 +229,47 @@ namespace SalesDepot.ConfigurationClasses
             }
         }
 
+        private void LoadConfiguration()
+        {
+            if (this.UseRemoteConnection)
+            {
+                XmlNode node;
+
+                if (File.Exists(_configurationPath))
+                {
+                    XmlDocument document = new XmlDocument();
+                    try
+                    {
+                        document.Load(_configurationPath);
+                    }
+                    catch
+                    {
+                    }
+                    node = document.SelectSingleNode(@"/Config/Connection/Path");
+                    if (node != null)
+                        if (Directory.Exists(node.InnerText))
+                        {
+                            _remoteLibraryRootFolder = Path.Combine(node.InnerText, "Libraries");
+                            _remoteLibraryLogoFolder = Path.Combine(node.InnerText, "Graphics");
+                        }
+                }
+                if (!Directory.Exists(this.LocalLibraryCacheFolder))
+                    Directory.CreateDirectory(this.LocalLibraryCacheFolder);
+            }
+        }
+
+        public void UpdateSetingsAccordingConfiguration()
+        {
+            this.LibraryRootFolder = this.UseRemoteConnection ? _remoteLibraryRootFolder : _localLibraryRootFolder;
+            this.LibraryLogoFolder = this.UseRemoteConnection ? _remoteLibraryLogoFolder : _localLibraryLogoFolder;
+
+            this.SolutionTagsView &= !this.UseRemoteConnection;
+            this.SolutionDateView &= !this.UseRemoteConnection;
+            this.SolutionTitleView |= (this.UseRemoteConnection & !this.ClassicView & !this.ListView);
+
+            this.SalesDepotName = this.UseRemoteConnection ? " Remote Sales Libraries" : this.SalesDepotName;
+        }
+
         public void LoadSettings()
         {
             XmlNode node;
@@ -257,6 +308,8 @@ namespace SalesDepot.ConfigurationClasses
 
             LoadDefaultViewSettings();
             LoadViewButtonsSettings();
+            LoadConfiguration();
+            LoadApprovedLibraries();
 
             if (File.Exists(_settingsFilePath))
             {
@@ -377,6 +430,8 @@ namespace SalesDepot.ConfigurationClasses
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.MultitabView = tempBool;
             }
+
+            UpdateSetingsAccordingConfiguration();
         }
 
         public void SaveSettings()
@@ -432,7 +487,7 @@ namespace SalesDepot.ConfigurationClasses
 
         public void GetSalesDepotName()
         {
-            this.SalesDepotName = "Sales Depot";
+            this.SalesDepotName = "Sales Libraries";
             XmlNode node;
             string filePath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\SDName.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             if (File.Exists(filePath))
@@ -449,8 +504,8 @@ namespace SalesDepot.ConfigurationClasses
         public bool CheckLibraries()
         {
             bool result = false;
-            if (Directory.Exists(this.SalesDepotRootFolder))
-                result = ((new DirectoryInfo(this.SalesDepotRootFolder)).GetDirectories()).Length > 0;
+            if (Directory.Exists(this.LibraryRootFolder))
+                result = ((new DirectoryInfo(this.LibraryRootFolder)).GetDirectories()).Length > 0;
             return result;
         }
 
@@ -461,10 +516,6 @@ namespace SalesDepot.ConfigurationClasses
                 string localSettingsFolder = string.Format(@"{0}\newlocaldirect.com\xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
                 if (!Directory.Exists(localSettingsFolder))
                     Directory.CreateDirectory(localSettingsFolder);
-                if (!Directory.Exists(Path.Combine(localSettingsFolder, "app")))
-                    Directory.CreateDirectory(Path.Combine(localSettingsFolder, "app"));
-                if (!Directory.Exists(Path.Combine(localSettingsFolder, "app_one_domain")))
-                    Directory.CreateDirectory(Path.Combine(localSettingsFolder, "app_one_domain"));
                 if (!Directory.Exists(Path.Combine(localSettingsFolder, "sales depot")))
                     Directory.CreateDirectory(Path.Combine(localSettingsFolder, "sales depot"));
                 if (!Directory.Exists(Path.Combine(localSettingsFolder, "sales depot", "Settings")))
@@ -506,6 +557,7 @@ namespace SalesDepot.ConfigurationClasses
                         if (userNode.Name.Equals("User"))
                         {
                             string userName = string.Empty;
+                            bool useRemoteLibraries = false;
                             foreach (XmlAttribute attribute in userNode.Attributes)
                             {
                                 switch (attribute.Name)
@@ -513,13 +565,16 @@ namespace SalesDepot.ConfigurationClasses
                                     case "Name":
                                         userName = attribute.Value;
                                         break;
+                                    case "UseRemoteLibraries":
+                                        bool.TryParse(attribute.Value, out useRemoteLibraries);
+                                        break;
                                 }
                             }
-                            if (userName.Equals(Environment.UserName))
+                            if (userName.Equals(Environment.UserName) && ((this.UseRemoteConnection & useRemoteLibraries) || (!this.UseRemoteConnection)))
                             {
                                 userExisted = true;
                                 foreach (XmlNode libraryNode in userNode.ChildNodes)
-                                    if (libraryNode.Name.Equals("Library"))
+                                    if (libraryNode.Name.Equals(this.UseRemoteConnection ? "RemoteLibrary" : "LocalLibrary"))
                                         this.ApprovedLibraries.Add(libraryNode.InnerText.ToLower());
                             }
                         }

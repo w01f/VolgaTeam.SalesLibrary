@@ -26,18 +26,18 @@ namespace SalesDepot.ToolForms.WallBin
 
         private void FormEmailPresentation_Load(object sender, EventArgs e)
         {
-            this.Text = string.Format(this.Text, this.SelectedFile.PropertiesName);
+            this.Text = string.Format(this.Text, this.SelectedFile.NameWithExtension);
         }
 
         private void FormEmailPresentation_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                string selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : this.SelectedFile.PropertiesName;
-                string destinationFilePath = Path.Combine(Path.GetTempPath(), (selectedName + Path.GetExtension(this.SelectedFile.FullPath)));
-                File.Copy(this.SelectedFile.FullPath, destinationFilePath, true);
+                string selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : this.SelectedFile.NameWithExtension;
+                string destinationFilePath = Path.Combine(Path.GetTempPath(), (selectedName + this.SelectedFile.Extension));
+                File.Copy(this.SelectedFile.LocalPath, destinationFilePath, true);
                 if (File.Exists(destinationFilePath))
-                    BusinessClasses.LinkManager.EmailFile(destinationFilePath);
+                    BusinessClasses.LinkManager.Instance.EmailFile(destinationFilePath);
             }
         }
     }

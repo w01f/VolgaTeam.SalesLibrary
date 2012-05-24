@@ -43,7 +43,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
             this.File = file;
 
-            axAcroPDF.LoadFile(this.File.FullPath);
+            axAcroPDF.LoadFile(this.File.LocalPath);
             axAcroPDF.setView("Fit");
         }
 
@@ -55,18 +55,18 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.OpenCopyOfFile(new FileInfo(this.File.FullPath));
+            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.File.LocalPath));
         }
 
         public void Save()
         {
-            ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.SaveFile("Save copy of the file as", new FileInfo(this.File.FullPath));
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
         }
 
         public void Email()
         {
-            ActivityRecorder.Instance.WriteActivity();
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
             {
                 form.SelectedFile = this.File;
@@ -76,8 +76,8 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Print()
         {
-            ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.PrintFile(new FileInfo(this.File.FullPath));
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
         }
         #endregion
     }

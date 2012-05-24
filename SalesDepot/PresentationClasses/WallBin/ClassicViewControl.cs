@@ -132,7 +132,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                                         path = emailLinkNode.InnerText;
                                         break;
                                 }
-                                if (!string.IsNullOrEmpty(path))
+                                if (!string.IsNullOrEmpty(path) && File.Exists(path))
                                     _emailLinks.Add(link, path);
                             }
                         }
@@ -206,9 +206,10 @@ namespace SalesDepot.PresentationClasses.WallBin
                     {
                         if (!_emailLinks.Keys.Contains(link))
                         {
-                            if (File.Exists(link.FullPath))
+                            if (link.LinkAvailable)
                             {
-                                _emailLinks.Add(link, link.FullPath);
+                                BusinessClasses.LinkManager.Instance.RequestFile(link);
+                                _emailLinks.Add(link, link.LocalPath);
                                 SaveEmailBin();
                                 gridControlFiles.DataSource = new BindingList<BusinessClasses.LibraryFile>(_emailLinks.Keys.ToArray());
                             }
@@ -295,7 +296,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         string compressedFilesPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.TempPath, form.FileName + ".zip");
-                        BusinessClasses.LinkManager.CompressFiles(emailFiles.ToArray(), compressedFilesPath);
+                        BusinessClasses.LinkManager.Instance.CompressFiles(emailFiles.ToArray(), compressedFilesPath);
                         emailFiles.Clear();
                         emailFiles.Add(compressedFilesPath);
                     }
@@ -304,7 +305,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 }
             }
             if (emailFiles.Count > 0)
-                BusinessClasses.LinkManager.EmailFile(emailFiles.ToArray());
+                BusinessClasses.LinkManager.Instance.EmailFile(emailFiles.ToArray());
             if (closePowerPoint)
                 InteropClasses.PowerPointHelper.Instance.Disconnect();
         }

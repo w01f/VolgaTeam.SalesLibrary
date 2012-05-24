@@ -27,7 +27,7 @@ namespace SalesDepot.ConfigurationClasses
             }
         }
 
-        public static IntPtr SalesDepotHandle
+        public static IntPtr RemoteLibraryHandle
         {
             get
             {
@@ -35,7 +35,7 @@ namespace SalesDepot.ConfigurationClasses
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\NewBizWiz", RegistryKeyPermissionCheck.ReadSubTree);
                 if (key != null)
                 {
-                    object value = key.GetValue("SalesDepotHandle", false);
+                    object value = key.GetValue("RemoteLibraryHandle", false);
                     if (value != null)
                         int.TryParse(value.ToString(), out result);
                 }
@@ -45,11 +45,11 @@ namespace SalesDepot.ConfigurationClasses
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software", RegistryKeyPermissionCheck.ReadWriteSubTree).CreateSubKey("NewBizWiz", RegistryKeyPermissionCheck.ReadWriteSubTree);
                 if (key != null)
-                    key.SetValue("SalesDepotHandle", value.ToInt32(), RegistryValueKind.DWord);
+                    key.SetValue("RemoteLibraryHandle", value.ToInt32(), RegistryValueKind.DWord);
             }
         }
 
-        public static bool MaximizeSalesDepot
+        public static bool MaximizeRemoteLibrary
         {
             get
             {
@@ -57,7 +57,7 @@ namespace SalesDepot.ConfigurationClasses
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\NewBizWiz", RegistryKeyPermissionCheck.ReadSubTree);
                 if (key != null)
                 {
-                    object value = key.GetValue("MaximizeSalesDepot", false);
+                    object value = key.GetValue("MaximizeRemoteLibrary", false);
                     if (value != null)
                     {
                         int tempInt = 0;
@@ -71,7 +71,7 @@ namespace SalesDepot.ConfigurationClasses
             {
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software", RegistryKeyPermissionCheck.ReadWriteSubTree).CreateSubKey("NewBizWiz", RegistryKeyPermissionCheck.ReadWriteSubTree);
                 if (key != null)
-                    key.SetValue("MaximizeSalesDepot", value, RegistryValueKind.DWord);
+                    key.SetValue("MaximizeRemoteLibrary", value, RegistryValueKind.DWord);
             }
         }
 

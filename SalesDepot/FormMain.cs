@@ -138,8 +138,8 @@ namespace SalesDepot
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = this.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
             using (ToolForms.FormProgress form = new ToolForms.FormProgress())
             {
                 form.laProgress.Text = "Loading Sales Libraries...";
@@ -148,7 +148,7 @@ namespace SalesDepot
                 pnEmpty.BringToFront();
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
-                    BusinessClasses.LibraryManager.Instance.LoadSalesDepotsPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.SalesDepotRootFolder));
+                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
                     this.Invoke((MethodInvoker)delegate()
                     {
                         PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildPackageViewers();
@@ -175,8 +175,8 @@ namespace SalesDepot
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ActivityRecorder.Instance.StopRecording();
-            SDRecorder.Instance.StopRecording();
+            ToolClasses.ActivityRecorder.Instance.StopRecording();
+            ToolClasses.SDRecorder.Instance.StopRecording();
             InteropClasses.PowerPointHelper.Instance.Disconnect();
             InteropClasses.ExcelHelper.Instance.Close();
             InteropClasses.WordHelper.Instance.Close();

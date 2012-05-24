@@ -279,6 +279,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QuickView";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLinkPreview_FormClosed);
             this.Shown += new System.EventHandler(this.FormQuickView_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).EndInit();

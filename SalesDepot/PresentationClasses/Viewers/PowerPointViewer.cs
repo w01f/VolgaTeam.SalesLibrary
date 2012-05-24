@@ -53,7 +53,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
             if (this.File.PreviewContainer != null)
             {
-                laFileInfo.Text = this.File.PropertiesName + Environment.NewLine + "Added: " + this.File.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (this.File.ExpirationDateOptions.EnableExpirationDate && this.File.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + this.File.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
+                laFileInfo.Text = this.File.NameWithExtension + Environment.NewLine + "Added: " + this.File.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (this.File.ExpirationDateOptions.EnableExpirationDate && this.File.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + this.File.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
                 if (this.File.PresentationProperties != null)
                     laSlideSize.Text = string.Format("{0} {1} x {2}", new object[] { this.File.PresentationProperties.Orientation, this.File.PresentationProperties.Width.ToString("#.##"), this.File.PresentationProperties.Height.ToString("#.##") });
                 comboBoxEditSlides.SelectedIndexChanged -= new EventHandler(comboBoxEditSlides_SelectedIndexChanged);
@@ -76,17 +76,17 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.OpenCopyOfFile(new FileInfo(this.File.FullPath));
+            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.File.LocalPath));
         }
 
         public void Save()
         {
-            BusinessClasses.LinkManager.SaveFile("Save copy of the presentation as", new FileInfo(this.File.FullPath));
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the presentation as", new FileInfo(this.File.LocalPath));
         }
 
         public void Email()
         {
-            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.FullPath));
+            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
             using (ToolForms.WallBin.FormEmailPresentation form = new ToolForms.WallBin.FormEmailPresentation())
             {
                 form.SelectedFile = this.File;
@@ -97,8 +97,8 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Print()
         {
-            ActivityRecorder.Instance.WriteActivity();
-            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.FullPath));
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
             InteropClasses.PowerPointHelper.Instance.PrintPresentation(this.File.PreviewContainer.SelectedIndex + 1);
         }
         #endregion
@@ -122,8 +122,8 @@ namespace SalesDepot.PresentationClasses.Viewers
                     form.TopMost = true;
                     Thread thread = new Thread(delegate()
                     {
-                        ActivityRecorder.Instance.WriteActivity();
-                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.FullPath));
+                        ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
                         InteropClasses.PowerPointHelper.Instance.AppendSlide(this.File.PreviewContainer.SelectedIndex + 1);
                     });
                     thread.Start();
@@ -170,8 +170,8 @@ namespace SalesDepot.PresentationClasses.Viewers
                         progressForm.TopMost = true;
                         Thread thread = new Thread(delegate()
                         {
-                            ActivityRecorder.Instance.WriteActivity();
-                            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.FullPath));
+                            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
                             InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (this.File.PreviewContainer.SelectedIndex + 1), destinationFileName);
                         });
                         thread.Start();
@@ -182,7 +182,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
                         progressForm.Close();
 
-                        BusinessClasses.LinkManager.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
+                        BusinessClasses.LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
                     }
                 }
             }
@@ -191,9 +191,9 @@ namespace SalesDepot.PresentationClasses.Viewers
         public void OpenInQuickView()
         {
             if (ConfigurationClasses.SettingsManager.Instance.OldStyleQuickView)
-                BusinessClasses.LinkManager.ViewPresentationOld(this.File);
+                BusinessClasses.LinkManager.Instance.ViewPresentationOld(this.File);
             else
-                BusinessClasses.LinkManager.ViewPresentation(this.File);
+                BusinessClasses.LinkManager.Instance.ViewPresentation(this.File);
         }
         #endregion
 

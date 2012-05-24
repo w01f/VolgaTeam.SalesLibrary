@@ -48,7 +48,7 @@ namespace SalesDepot.PresentationClasses.Viewers
             {
                 Guid g = Guid.NewGuid();
                 string newFileName = Path.Combine(ConfigurationClasses.SettingsManager.Instance.TempPath, g.ToString() + ".html");
-                InteropClasses.ExcelHelper.Instance.ConvertToHtml(this.File.FullPath, newFileName);
+                InteropClasses.ExcelHelper.Instance.ConvertToHtml(this.File.LocalPath, newFileName);
                 InteropClasses.ExcelHelper.Instance.Close();
                 webBrowser.Url = new Uri(newFileName);
             }
@@ -62,18 +62,18 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.OpenCopyOfFile(new FileInfo(this.File.FullPath));
+            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.File.LocalPath));
         }
 
         public void Save()
         {
-            ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.SaveFile("Save copy of the file as", new FileInfo(this.File.FullPath));
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
         }
 
         public void Email()
         {
-            ActivityRecorder.Instance.WriteActivity();
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
             {
                 form.SelectedFile = this.File;
@@ -83,8 +83,8 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Print()
         {
-            ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.PrintFile(new FileInfo(this.File.FullPath));
+            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
         }
         #endregion
     }

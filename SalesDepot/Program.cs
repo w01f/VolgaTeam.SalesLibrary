@@ -13,11 +13,17 @@ namespace SalesDepot
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             bool firstInstance;
-            mutex = new Mutex(false, "Local\\SalesDepotApplication", out firstInstance);
+            mutex = new Mutex(false, "Local\\RemoteLibraryApplication", out firstInstance);
 
+            ConfigurationClasses.SettingsManager.Instance.CheckStaticFolders();
+            if (args != null && args.Length > 0)
+                ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection = args[0].ToLower().Equals("-remote"); ;
+            ConfigurationClasses.SettingsManager.Instance.GetSalesDepotName();
+            ConfigurationClasses.SettingsManager.Instance.GetDefaultWizard();
+            ConfigurationClasses.SettingsManager.Instance.LoadSettings();
             if (!ConfigurationClasses.SettingsManager.Instance.CheckLibraries())
             {
                 AppManager.Instance.ShowWarning("Sales Depot Unavailable: You do not have libraries in source folder....");
@@ -32,8 +38,6 @@ namespace SalesDepot
                 System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern = @"MM/dd/yyyy";
                 System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
-                ConfigurationClasses.SettingsManager.Instance.CheckStaticFolders();
-                ConfigurationClasses.SettingsManager.Instance.LoadSettings();
                 if (ConfigurationClasses.SettingsManager.Instance.LaunchPPT)
                     AppManager.Instance.RunPowerPointLoader();
                 AppManager.Instance.RunForm();

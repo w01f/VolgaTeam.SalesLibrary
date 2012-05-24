@@ -24,7 +24,7 @@ namespace SalesDepot.BusinessClasses
                 return _instance;
             }
         }
-        public void LoadSalesDepotsPackages(DirectoryInfo rootFolder)
+        public void LoadLibraryPackages(DirectoryInfo rootFolder)
         {
             this.LibraryPackageCollection.Clear();
             if (rootFolder.Exists)
@@ -34,7 +34,7 @@ namespace SalesDepot.BusinessClasses
                     if (!subFolder.Name.StartsWith("!") && !subFolder.Name.ToLower().Equals("_gsdata_"))
                     {
                         LibraryPackage package = new LibraryPackage(subFolder.Name, subFolder);
-                        if (package.SalesDepotCollection.Count > 0)
+                        if (package.LibraryCollection.Count > 0)
                             this.LibraryPackageCollection.Add(package);
                     }
                 }

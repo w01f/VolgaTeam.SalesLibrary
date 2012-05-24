@@ -48,7 +48,7 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
         private void DayControl_Click(object sender, System.EventArgs e)
         {
             if (this.Data.LinkedFile != null)
-                System.Diagnostics.Process.Start(this.Data.LinkedFile.FullName);
+                BusinessClasses.LinkManager.Instance.OpenLink(this.Data.LinkedFile);
         }
 
         private void DayControl_MouseEnter(object sender, System.EventArgs e)

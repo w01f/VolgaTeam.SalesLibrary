@@ -30,7 +30,7 @@ namespace SalesDepot.ToolForms.WallBin
 
         private void FormEmailPresentation_Load(object sender, EventArgs e)
         {
-            this.Text = string.Format(this.Text, this.SelectedFile.PropertiesName);
+            this.Text = string.Format(this.Text, this.SelectedFile.NameWithExtension);
             ckConvertToPDF.Enabled = ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting;
             ckConvertToPDF.Checked = ConfigurationClasses.SettingsManager.Instance.EnablePdfConverting & ConfigurationClasses.SettingsManager.Instance.EmailBinSendAsPdf;
         }
@@ -40,7 +40,7 @@ namespace SalesDepot.ToolForms.WallBin
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 string selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : this.SelectedFile.NameWithoutExtesion;
-                string destinationFilePath = Path.Combine(Path.GetTempPath(), ckConvertToPDF.Checked ? ((string.IsNullOrEmpty(selectedName) ? Path.GetFileNameWithoutExtension(this.SelectedFile.FullPath) : selectedName) + ".pdf") : (string.IsNullOrEmpty(selectedName) ? Path.GetFileName(this.SelectedFile.FullPath) : (selectedName + Path.GetExtension(this.SelectedFile.FullPath))));
+                string destinationFilePath = Path.Combine(Path.GetTempPath(), ckConvertToPDF.Checked ? ((string.IsNullOrEmpty(selectedName) ? this.SelectedFile.NameWithoutExtesion : selectedName) + ".pdf") : (string.IsNullOrEmpty(selectedName) ? this.SelectedFile.NameWithExtension : (selectedName + this.SelectedFile.Extension)));
                 if (ckConvertToPDF.Checked)
                 {
                     InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(rbActiveSlide.Checked ? this.ActiveSlide : -1, destinationFilePath);
@@ -49,9 +49,9 @@ namespace SalesDepot.ToolForms.WallBin
                     if (rbActiveSlide.Checked)
                         InteropClasses.PowerPointHelper.Instance.SaveSingleSlide(this.ActiveSlide, destinationFilePath);
                     else
-                        File.Copy(this.SelectedFile.FullPath, destinationFilePath, true);
+                        File.Copy(this.SelectedFile.LocalPath, destinationFilePath, true);
                 if (File.Exists(destinationFilePath))
-                    BusinessClasses.LinkManager.EmailFile(destinationFilePath);
+                    BusinessClasses.LinkManager.Instance.EmailFile(destinationFilePath);
             }
         }
     }

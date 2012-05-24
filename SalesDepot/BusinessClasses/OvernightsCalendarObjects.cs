@@ -274,7 +274,7 @@ namespace SalesDepot.BusinessClasses
 
     public class CalendarDay
     {
-        private FileInfo _linkedFile = null;
+        private LibraryFile _linkedFile = null;
         private bool _linkedFileReady = false;
 
         public CalendarMonth Parent { get; private set; }
@@ -287,14 +287,20 @@ namespace SalesDepot.BusinessClasses
             this.Parent = parent;
         }
 
-        public FileInfo LinkedFile
+        public LibraryFile LinkedFile
         {
             get
             {
                 if (!_linkedFileReady)
                 {
                     _linkedFileReady = true;
-                    _linkedFile = this.Parent.Parent.Parent.Files.Where(x => x.Name.Contains(this.Date.ToString("MMddyy"))).FirstOrDefault();
+                    FileInfo file = this.Parent.Parent.Parent.Files.Where(x => x.Name.Contains(this.Date.ToString("MMddyy"))).FirstOrDefault();
+                    if (file != null)
+                    {
+                        _linkedFile = new LibraryFile(null);
+                        _linkedFile.RemotePath = file.FullName;
+                        _linkedFile.SetProperties();
+                    }
                 }
                 return _linkedFile;
             }

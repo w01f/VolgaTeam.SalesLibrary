@@ -52,6 +52,8 @@ namespace SalesDepot.TabPages
                 FormMain.Instance.buttonItemHomeSearchByTags.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionTagsView;
                 FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked = ConfigurationClasses.SettingsManager.Instance.SolutionDateView;
             }
+            else if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                FormMain.Instance.buttonItemHomeSearchByFileName.Checked = true;
             else
                 FormMain.Instance.buttonItemHomeSearchByTags.Checked = true;
 
@@ -213,8 +215,8 @@ namespace SalesDepot.TabPages
 
                 pnEmpty.BringToFront();
                 Application.DoEvents();
-                if (!this.ClassicViewControl.pnSalesDepotContainer.Controls.Contains(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container))
-                    this.ClassicViewControl.pnSalesDepotContainer.Controls.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container);
+                if (!this.ClassicViewControl.pnRemoteLibraryContainer.Controls.Contains(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container))
+                    this.ClassicViewControl.pnRemoteLibraryContainer.Controls.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container);
                 pnEmpty.BringToFront();
                 Application.DoEvents();
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Apply();

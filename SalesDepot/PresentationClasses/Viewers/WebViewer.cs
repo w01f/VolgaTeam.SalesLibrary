@@ -42,7 +42,7 @@ namespace SalesDepot.PresentationClasses.Viewers
             this.Visible = false;
 
             this.File = file;
-            webBrowser.Navigate(this.File.FullPath);
+            webBrowser.Navigate(this.File.LocalPath);
         }
 
         #region IFileViewer Methods
@@ -53,7 +53,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.StartProcess(this.File.FullPath);
+            BusinessClasses.LinkManager.Instance.StartProcess(this.File.LocalPath);
         }
 
         public void Save()

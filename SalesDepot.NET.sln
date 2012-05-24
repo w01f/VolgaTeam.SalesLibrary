@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageListView", "ImageListV
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSynchronizer", "AutoSynchronizer\AutoSynchronizer.csproj", "{0D217B17-07FC-4753-A229-0D781A7D2B1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteLibrary", "RemoteLibrary\RemoteLibrary.csproj", "{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,16 +95,6 @@ Global
 		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|x86.ActiveCfg = Release|x86
 		{0D217B17-07FC-4753-A229-0D781A7D2B1D}.Release|x86.Build.0 = Release|x86
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{4FAF52B1-9923-44FC-AE83-C4D7D29AAEEF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
