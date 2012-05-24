@@ -22,9 +22,9 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
             xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
         }
 
-        public void Build()
+        public void Build(bool forceBuild)
         {
-            if (!this.ViewBuilded)
+            if (!this.ViewBuilded || forceBuild)
             {
                 _buildInProgress = true;
                 xtraTabControl.TabPages.Clear();

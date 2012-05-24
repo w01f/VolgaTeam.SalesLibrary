@@ -1,4 +1,4 @@
-﻿namespace FileManager.ToolForm.WallBin
+﻿namespace FileManager.ToolForms.WallBin
 {
     partial class FormDeleteIncorrectLinks
     {

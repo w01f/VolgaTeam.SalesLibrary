@@ -51,6 +51,7 @@ namespace FileManager.BusinessClasses
         public void SynchronizeLibraries()
         {
             HashSet<string> filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            List<string> existedLibraryFolderNames = new List<string>();
             string foldera = ConfigurationClasses.SettingsManager.Instance.BackupPath;
             string folderb = ConfigurationClasses.SettingsManager.Instance.NetworkPath;
             if (!String.IsNullOrEmpty(foldera) && Directory.Exists(foldera) && !String.IsNullOrEmpty(folderb) && Directory.Exists(folderb))
@@ -60,9 +61,10 @@ namespace FileManager.BusinessClasses
                     {
                         salesDepot.PrepareForSynchronize();
 
-                        string salesDepotFoldername = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : salesDepotFoldername = salesDepot.Folder.Name;
+                        string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : salesDepotFolderName = salesDepot.Folder.Name;
+                        existedLibraryFolderNames.Add(salesDepotFolderName);
 
-                        DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFoldername));
+                        DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFolderName));
                         if (!destinationFolder.Exists)
                             destinationFolder.Create();
                         filesWhiteList.Clear();
@@ -126,6 +128,11 @@ namespace FileManager.BusinessClasses
                         foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
                             ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
                     }
+
+                DirectoryInfo networkFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.NetworkPath);
+                foreach(DirectoryInfo folder in networkFolder.GetDirectories())
+                    if(!existedLibraryFolderNames.Contains(folder.Name))
+                        ToolClasses.SyncManager.Instance.DeleteFolder(folder);
             }
         }
 

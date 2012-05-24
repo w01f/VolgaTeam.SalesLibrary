@@ -29,6 +29,7 @@ namespace FileManager.ConfigurationClasses
         public string AdSpecsSamplesRootPath { get; set; }
         public string ScreenshotLibraryRootPath { get; set; }
 
+        #region FM Settings
         public string BackupPath { get; set; }
         public string NetworkPath { get; set; }
         public string SelectedLibrary { get; set; }
@@ -38,6 +39,7 @@ namespace FileManager.ConfigurationClasses
         public bool TreeViewVisible { get; set; }
         public bool TreeViewDocked { get; set; }
         public bool MultitabView { get; set; }
+        #endregion
 
         public int DestinationPathLength { get; private set; }
 
@@ -64,13 +66,14 @@ namespace FileManager.ConfigurationClasses
             if (Directory.Exists(this.ArhivePath))
                 Directory.CreateDirectory(this.ArhivePath);
             _syncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-            
+
             this.ClientLogosRootPath = string.Empty;
             this.SalesGalleryRootPath = string.Empty;
             this.WebArtRootPath = string.Empty;
             this.AdSpecsSamplesRootPath = string.Empty;
             this.ScreenshotLibraryRootPath = string.Empty;
 
+            #region FM Settings
             this.BackupPath = string.Empty;
             this.NetworkPath = string.Empty;
             this.SelectedLibrary = string.Empty;
@@ -80,6 +83,7 @@ namespace FileManager.ConfigurationClasses
             this.TreeViewVisible = false;
             this.TreeViewDocked = true;
             this.MultitabView = true;
+            #endregion
 
             this.HiddenFolders = new List<string>();
             this.HiddenFolders.Add(LibraryLogoFolder);
@@ -99,6 +103,7 @@ namespace FileManager.ConfigurationClasses
                 XmlDocument document = new XmlDocument();
                 document.Load(_settingsFilePath);
 
+                #region FM Settings
                 node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
                 if (node != null)
                     this.BackupPath = node.InnerText;
@@ -131,6 +136,7 @@ namespace FileManager.ConfigurationClasses
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.MultitabView = tempBool;
+                #endregion
             }
             LoadClipartPath();
         }
@@ -140,6 +146,8 @@ namespace FileManager.ConfigurationClasses
             StringBuilder xml = new StringBuilder();
 
             xml.AppendLine(@"<LocalSettings>");
+
+            #region FM Settings
             xml.AppendLine(@"<BackupPath>" + this.BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
             xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
@@ -149,6 +157,8 @@ namespace FileManager.ConfigurationClasses
             xml.AppendLine(@"<TreeViewVisible>" + this.TreeViewVisible.ToString() + @"</TreeViewVisible>");
             xml.AppendLine(@"<TreeViewDocked>" + this.TreeViewDocked.ToString() + @"</TreeViewDocked>");
             xml.AppendLine(@"<MultitabView>" + this.MultitabView.ToString() + @"</MultitabView>");
+            #endregion
+
             xml.AppendLine(@"</LocalSettings>");
 
             using (StreamWriter sw = new StreamWriter(_settingsFilePath, false))
@@ -176,8 +186,7 @@ namespace FileManager.ConfigurationClasses
                     this.AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
                     this.ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
                 }
-            } 
+            }
         }
-
     }
 }

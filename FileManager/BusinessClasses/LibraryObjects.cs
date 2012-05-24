@@ -49,6 +49,11 @@ namespace FileManager.BusinessClasses
         public List<LibraryFile> ExpiredLinks { get; set; }
         public List<AutoWidget> AutoWidgets { get; set; }
 
+        #region Auto Sync Settings
+        public bool EnableAutoSync { get; set; }
+        public List<TimePoint> SyncTimes { get; private set; }
+        #endregion
+
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
         public Library(string name, DirectoryInfo folder)
@@ -62,7 +67,18 @@ namespace FileManager.BusinessClasses
             this.DeadLinks = new List<LibraryFile>();
             this.ExpiredLinks = new List<LibraryFile>();
             this.AutoWidgets = new List<AutoWidget>();
+
+            #region Auto Sync Settings
+            this.SyncTimes = new List<TimePoint>();
+            #endregion
+
             this.OvernightsCalendar = new OvernightsCalendar(this);
+
+            Init();
+        }
+
+        public void Init()
+        {
             CheckIfOldFormat();
             Load();
             ProceedDeadLinks();
@@ -112,6 +128,8 @@ namespace FileManager.BusinessClasses
             this.Pages.Clear();
             this.EmailList.Clear();
             this.AutoWidgets.Clear();
+            this.EnableAutoSync = false;
+            this.SyncTimes.Clear();
 
             string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
             if (File.Exists(file))
@@ -189,6 +207,26 @@ namespace FileManager.BusinessClasses
                         autoWidget.Deserialize(childNode);
                         this.AutoWidgets.Add(autoWidget);
                     }
+
+                #region Auto Sync Settings
+                node = document.SelectSingleNode(@"/Library/EnableAutoSync");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.EnableAutoSync = tempBool;
+                node = document.SelectSingleNode(@"/Library/AutoSyncTimes");
+                if (node != null)
+                    foreach (XmlNode syncTimeNode in node.ChildNodes)
+                    {
+                        if (syncTimeNode.Name.Equals("SyncTime"))
+                        {
+                            TimePoint synctTime = new TimePoint();
+                            synctTime.Deserialize(syncTimeNode);
+                            this.SyncTimes.Add(synctTime);
+                        }
+                    }
+                #endregion
+
+
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
                 if (node != null)
                     this.OvernightsCalendar.Deserialize(node);
@@ -226,6 +264,15 @@ namespace FileManager.BusinessClasses
             foreach (AutoWidget autoWidget in this.AutoWidgets)
                 xml.AppendLine(@"<AutoWidget>" + autoWidget.Serialize() + @"</AutoWidget>");
             xml.AppendLine("</AutoWidgets>");
+
+            #region Auto Sync Settings
+            xml.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
+            xml.AppendLine(@"<AutoSyncTimes>");
+            foreach (TimePoint syncTime in this.SyncTimes)
+                xml.AppendLine(@"<SyncTime>" + syncTime.Serialize() + @"</SyncTime>");
+            xml.AppendLine(@"</AutoSyncTimes>");
+            #endregion
+
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
             xml.AppendLine(@"</Library>");
 
@@ -1407,6 +1454,97 @@ namespace FileManager.BusinessClasses
                             this.Widget = null;
                         else
                             this.Widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                }
+            }
+        }
+    }
+
+    public class TimePoint
+    {
+        public DayOfWeek Day { get; set; }
+        public DateTime Time { get; set; }
+
+        public string DayString
+        {
+            get
+            {
+                switch (this.Day)
+                {
+                    case DayOfWeek.Sunday:
+                        return "Sunday";
+                    case DayOfWeek.Monday:
+                        return "Monday";
+                    case DayOfWeek.Tuesday:
+                        return "Tuesday";
+                    case DayOfWeek.Wednesday:
+                        return "Wednesday";
+                    case DayOfWeek.Thursday:
+                        return "Thursday";
+                    case DayOfWeek.Friday:
+                        return "Friday";
+                    case DayOfWeek.Saturday:
+                        return "Saturday";
+                    default:
+                        return "Sunday";
+                }
+            }
+            set
+            {
+                switch (value)
+                {
+                    case "Sunday":
+                        this.Day = DayOfWeek.Sunday;
+                        break;
+                    case "Monday":
+                        this.Day = DayOfWeek.Monday;
+                        break;
+                    case "Tuesday":
+                        this.Day = DayOfWeek.Tuesday;
+                        break;
+                    case "Wednesday":
+                        this.Day = DayOfWeek.Wednesday;
+                        break;
+                    case "Thursday":
+                        this.Day = DayOfWeek.Thursday;
+                        break;
+                    case "Friday":
+                        this.Day = DayOfWeek.Friday;
+                        break;
+                    case "Saturday":
+                        this.Day = DayOfWeek.Saturday;
+                        break;
+                    default:
+                        this.Day = DayOfWeek.Sunday;
+                        break;
+                }
+            }
+        }
+
+        public string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Day>" + ((int)this.Day).ToString() + @"</Day>");
+            result.AppendLine(@"<Time>" + this.Time.ToString() + @"</Time>");
+            return result.ToString();
+        }
+
+        public void Deserialize(XmlNode node)
+        {
+            int tempInt;
+            DateTime tempDateTime;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "Day":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.Day = (DayOfWeek)tempInt;
+                        break;
+                    case "Time":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
+                            this.Time = tempDateTime;
                         break;
                 }
             }

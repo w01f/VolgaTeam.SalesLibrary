@@ -7,12 +7,19 @@ namespace FileManager.TabPages
     [System.ComponentModel.ToolboxItem(false)]
     public partial class TabOvernightsCalendarControl : UserControl
     {
-        private ToolForms.Settings.FormCalendarSettings _formSettings = new ToolForms.Settings.FormCalendarSettings();
+        private ToolForms.Settings.FormCalendarSettings _formSettings = null;
+        private ToolForms.Settings.FormEmailGrabber _formEmailGrabber = null;
 
         public TabOvernightsCalendarControl()
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+        }
+
+        private void TabOvernightsCalendarControl_Load(object sender, EventArgs e)
+        {
+            _formSettings = new ToolForms.Settings.FormCalendarSettings();
+            _formEmailGrabber = new ToolForms.Settings.FormEmailGrabber();
         }
 
         public void buttonItemCalendarSyncStatus_Click(object sender, EventArgs e)
@@ -27,9 +34,11 @@ namespace FileManager.TabPages
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null && PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.AllowToSave)
             {
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled = FormMain.Instance.buttonItemCalendarSyncStatusEnabled.Checked;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.EnableEmailGrabber &= PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 FormMain.Instance.ribbonBarCalendarLocation.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 FormMain.Instance.ribbonBarCalendarSettings.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 FormMain.Instance.ribbonBarCalendarFont.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
+                FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 this.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled)
                     using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -39,10 +48,9 @@ namespace FileManager.TabPages
                         formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
                         System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                         {
-                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.LoadYears();
                             this.Invoke((MethodInvoker)delegate()
                             {
-                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.BuildOvernightsCalendar();
+                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
                             });
                         }));
                         formProgress.Show();
@@ -53,7 +61,7 @@ namespace FileManager.TabPages
                         formProgress.Close();
                         FormMain.Instance.ribbonControl.Enabled = true;
                     }
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.StateChanged = true;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Save();
             }
         }
 
@@ -72,10 +80,9 @@ namespace FileManager.TabPages
                         formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
                         System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                         {
-                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.LoadYears();
                             this.Invoke((MethodInvoker)delegate()
                             {
-                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.BuildOvernightsCalendar();
+                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
                             });
                         }));
                         formProgress.Show();
@@ -132,6 +139,14 @@ namespace FileManager.TabPages
             {
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.UpdateCalendarFontButtonsStatus();
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.OvernightsCalendar.RefreshFont();
+            }
+        }
+
+        public void buttonItemCalendarEmailGrabber_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                _formEmailGrabber.ShowDialog();
             }
         }
     }

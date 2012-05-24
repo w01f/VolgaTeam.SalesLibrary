@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.styleController = new DevExpress.XtraEditors.StyleController();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
-            this.dockManager = new DevExpress.XtraBars.Docking.DockManager();
+            this.components = new System.ComponentModel.Container();
+            this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
             this.dockPanelTreeView = new DevExpress.XtraBars.Docking.DockPanel();
             this.dockPanelTreeView_Container = new DevExpress.XtraBars.Docking.ControlContainer();
             this.pnEmpty = new System.Windows.Forms.Panel();
@@ -110,8 +111,8 @@
             // 
             // btSetupWallBin
             // 
-            this.btSetupWallBin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSetupWallBin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btSetupWallBin.BackColor = System.Drawing.Color.White;
             this.btSetupWallBin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btSetupWallBin.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -138,6 +139,7 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "TabHomeControl";
             this.Size = new System.Drawing.Size(900, 317);
+            this.Load += new System.EventHandler(this.TabHomeControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dockManager)).EndInit();
             this.dockPanelTreeView.ResumeLayout(false);

@@ -36,16 +36,16 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             }
         }
 
-        public void BuildOvernightsCalendar()
+        public void BuildOvernightsCalendar(bool forceBuild = false)
         {
             this.Library.OvernightsCalendar.LoadYears();
             if (this.Library.OvernightsCalendar.Enabled)
-                this.OvernightsCalendar.Build();
+                this.OvernightsCalendar.Build(forceBuild);
         }
 
         private void DeleteDeadLinks()
         {
-            using (ToolForm.WallBin.FormDeleteIncorrectLinks form = new ToolForm.WallBin.FormDeleteIncorrectLinks())
+            using (ToolForms.WallBin.FormDeleteIncorrectLinks form = new ToolForms.WallBin.FormDeleteIncorrectLinks())
             {
                 form.Text = string.Format(form.Text, "Dead");
                 form.ExpiredLinks = false;
@@ -61,7 +61,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
         private void DeleteExpiredLinks()
         {
-            using (ToolForm.WallBin.FormDeleteIncorrectLinks form = new ToolForm.WallBin.FormDeleteIncorrectLinks())
+            using (ToolForms.WallBin.FormDeleteIncorrectLinks form = new ToolForms.WallBin.FormDeleteIncorrectLinks())
             {
                 form.Text = string.Format(form.Text, "Expired");
                 form.ExpiredLinks = true;
@@ -96,7 +96,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             FormMain.Instance.TabHome.pnEmpty.BringToFront();
             DialogResult result = DialogResult.Cancel;
             if (this.Library.DeadLinks.Count > 0 && this.Library.EnableInactiveLinks && this.Library.InactiveLinksMessageAtStartup && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
-                using (ToolForm.WallBin.FormIncorrectLinksNotification form = new ToolForm.WallBin.FormIncorrectLinksNotification())
+                using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
                 {
                     form.pbLogo.Image = Properties.Resources.DeadLinks;
                     form.Text = string.Format(form.Text, "INACTIVE");
@@ -106,7 +106,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                         DeleteDeadLinks();
                 }
             if (this.Library.ExpiredLinks.Count > 0 && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
-                using (ToolForm.WallBin.FormIncorrectLinksNotification form = new ToolForm.WallBin.FormIncorrectLinksNotification())
+                using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
                 {
                     form.pbLogo.Image = Properties.Resources.ExpiredLinks;
                     form.Text = string.Format(form.Text, "EXPIRED");
@@ -152,6 +152,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             FormMain.Instance.ribbonBarCalendarLocation.Enabled = this.Library.OvernightsCalendar.Enabled;
             FormMain.Instance.ribbonBarCalendarSettings.Enabled = this.Library.OvernightsCalendar.Enabled;
             FormMain.Instance.ribbonBarCalendarFont.Enabled = this.Library.OvernightsCalendar.Enabled;
+            FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = this.Library.OvernightsCalendar.Enabled;
             FormMain.Instance.TabOvernightsCalendar.Enabled = this.Library.OvernightsCalendar.Enabled;
             this.AllowToSave = true;
 

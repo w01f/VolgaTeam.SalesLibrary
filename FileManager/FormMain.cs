@@ -28,6 +28,7 @@ namespace FileManager
             buttonItemSettingsAutoWidgets.Click += new EventHandler(this.TabHome.buttonItemSettingsAutoWidgets_Click);
             buttonItemSettingsDeadLinks.Click += new EventHandler(this.TabHome.buttonItemSettingsDeadLinks_Click);
             buttonItemSettingsEmailList.Click += new EventHandler(this.TabHome.buttonItemSettingsEmailList_Click);
+            buttonItemSettingsAutoSync.Click += new EventHandler(this.TabHome.buttonItemSettingsAutoSync_Click);
             buttonItemHomeAddLineBreak.Click += new EventHandler(this.TabHome.btLineBreak_Click);
             buttonItemHomeAddNetworkShare.Click += new EventHandler(this.TabHome.btAddNeworkShare_Click);
             buttonItemHomeAddUrl.Click += new EventHandler(this.TabHome.btAddUrl_Click);
@@ -60,6 +61,7 @@ namespace FileManager
             buttonItemCalendarSettings.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarSettings_Click);
             buttonItemCalendarFontUp.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontUp_Click);
             buttonItemCalendarFontDown.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontDown_Click);
+            buttonItemCalendarEmailGrabber.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarEmailGrabber_Click);
         }
 
         public static FormMain Instance
@@ -168,6 +170,35 @@ namespace FileManager
             }
             pnContainer.Parent = parent;
             pnContainer.BringToFront();
+        }
+        #endregion
+
+        #region Select All in Editor Handlers
+        private bool enter = false;
+        private bool needSelect = false;
+
+        public void Editor_Enter(object sender, EventArgs e)
+        {
+            enter = true;
+            BeginInvoke(new MethodInvoker(ResetEnterFlag));
+        }
+
+        public void Editor_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (needSelect)
+            {
+                (sender as DevExpress.XtraEditors.BaseEdit).SelectAll();
+            }
+        }
+
+        public void Editor_MouseDown(object sender, MouseEventArgs e)
+        {
+            needSelect = enter;
+        }
+
+        private void ResetEnterFlag()
+        {
+            enter = false;
         }
         #endregion
     }

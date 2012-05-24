@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace FileManager.ToolForm.WallBin
+namespace FileManager.ToolForms.WallBin
 {
     public partial class FormLinkProperties : Form
     {

@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace FileManager.ToolForm.WallBin
+namespace FileManager.ToolForms.WallBin
 {
     public partial class FormIncorrectLinksNotification : Form
     {

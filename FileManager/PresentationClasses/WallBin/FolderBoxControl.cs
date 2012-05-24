@@ -511,7 +511,7 @@ namespace FileManager.PresentationClasses.WallBin
         #region Button Click's Methods
         public void AddUrl()
         {
-            using (ToolForm.WallBin.FormAddUrl form = new ToolForm.WallBin.FormAddUrl())
+            using (ToolForms.WallBin.FormAddUrl form = new ToolForms.WallBin.FormAddUrl())
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -548,7 +548,7 @@ namespace FileManager.PresentationClasses.WallBin
 
         public void AddNetworkFolder()
         {
-            using (ToolForm.WallBin.FormAddNetworkFolder form = new ToolForm.WallBin.FormAddNetworkFolder())
+            using (ToolForms.WallBin.FormAddNetworkFolder form = new ToolForms.WallBin.FormAddNetworkFolder())
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
@@ -659,7 +659,7 @@ namespace FileManager.PresentationClasses.WallBin
                 BusinessClasses.LibraryFile file = grFiles.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
                 if (file != null)
                 {
-                    using (ToolForm.WallBin.FormLinkProperties form = new ToolForm.WallBin.FormLinkProperties())
+                    using (ToolForms.WallBin.FormLinkProperties form = new ToolForms.WallBin.FormLinkProperties())
                     {
                         form.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == BusinessClasses.FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
                         form.IsBold = file.IsBold;

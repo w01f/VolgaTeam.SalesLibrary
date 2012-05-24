@@ -14,6 +14,16 @@ namespace FileManager.TabPages
         private string _currentPage = string.Empty;
         private bool _firstRun = true;
 
+        private ToolForms.Settings.FormPaths _formPath = null;
+        private ToolForms.Settings.FormBranding _formBranding = null;
+        private ToolForms.Settings.FormSync _formSync = null;
+        private ToolForms.Settings.FormPages _formPages = null;
+        private ToolForms.Settings.FormColumns _formColumns = null;
+        private ToolForms.Settings.FormAutoWidgets _formAutoWidgets = null;
+        private ToolForms.Settings.FormDeadLinks _formDeadLinks = null;
+        private ToolForms.Settings.FormEmailList _formEmailList = null;
+        private ToolForms.Settings.FormAutoSync _formAutoSync = null;
+
         public TabHomeControl()
         {
             InitializeComponent();
@@ -21,6 +31,19 @@ namespace FileManager.TabPages
         }
 
         #region GUI Event Handlers
+        private void TabHomeControl_Load(object sender, EventArgs e)
+        {
+            _formPath = new ToolForms.Settings.FormPaths();
+            _formBranding = new ToolForms.Settings.FormBranding();
+            _formSync = new ToolForms.Settings.FormSync();
+            _formPages = new ToolForms.Settings.FormPages();
+            _formColumns = new ToolForms.Settings.FormColumns();
+            _formAutoWidgets = new ToolForms.Settings.FormAutoWidgets();
+            _formDeadLinks = new ToolForms.Settings.FormDeadLinks();
+            _formEmailList = new ToolForms.Settings.FormEmailList();
+            _formAutoSync = new ToolForms.Settings.FormAutoSync();
+        }
+
         public void FormClosing(object sender, FormClosingEventArgs e)
         {
             if (SaveLibraryWarning())
@@ -106,29 +129,88 @@ namespace FileManager.TabPages
         {
             if (SaveLibraryWarning())
             {
-                using (ToolForms.Settings.FormPaths form = new ToolForms.Settings.FormPaths())
+                if (_formPath.ShowDialog() == DialogResult.OK)
                 {
-                    if (form.ShowDialog() == DialogResult.OK)
+                    BusinessClasses.LibraryManager.Instance.LoadLibraries(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.BackupPath));
+                    using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
                     {
-                        BusinessClasses.LibraryManager.Instance.LoadLibraries(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.BackupPath));
+                        FormMain.Instance.ribbonControl.Enabled = false;
+                        formProgress.TopMost = true;
+
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                        {
+                            this.Invoke((MethodInvoker)delegate()
+                            {
+                                formProgress.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Converting Your Sales Library to the Latest Version…" : "Load Libraries...";
+                                formProgress.Refresh();
+                                Application.DoEvents();
+                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildDecorators();
+
+                                formProgress.laProgress.Text = "Loading Overnights Calendar...";
+                                formProgress.Refresh();
+                                Application.DoEvents();
+                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
+                            });
+                        }));
+
+                        formProgress.Show();
+
+                        thread.Start();
+
+                        while (thread.IsAlive)
+                            System.Windows.Forms.Application.DoEvents();
+
+                        formProgress.Close();
+                        FormMain.Instance.ribbonControl.Enabled = true;
+                    }
+                    FillLibraries();
+                    BusinessClasses.LibraryManager.Instance.OldStyleProceed = false;
+                }
+            }
+        }
+
+        public void buttonItemSettingsBranding_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                _formBranding.ShowDialog();
+            }
+        }
+
+        public void buttonItemSettingsSync_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                _formSync.ShowDialog();
+            }
+        }
+
+        public void buttonItemSettingsPages_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                if (SaveLibraryWarning())
+                {
+                    _formPages.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    if (_formPages.ShowDialog() == DialogResult.OK)
+                    {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
                         {
                             FormMain.Instance.ribbonControl.Enabled = false;
+                            formProgress.laProgress.Text = "Apply Settings...";
                             formProgress.TopMost = true;
 
                             System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                             {
                                 this.Invoke((MethodInvoker)delegate()
                                 {
-                                    formProgress.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Converting Your Sales Library to the Latest Version…" : "Load Libraries...";
-                                    formProgress.Refresh();
-                                    Application.DoEvents();
-                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildDecorators();
+                                    int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formPages.Library);
 
-                                    formProgress.laProgress.Text = "Loading Overnights Calendar...";
-                                    formProgress.Refresh();
-                                    Application.DoEvents();
-                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(_formPages.Library);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
                                 });
                             }));
 
@@ -142,80 +224,9 @@ namespace FileManager.TabPages
                             formProgress.Close();
                             FormMain.Instance.ribbonControl.Enabled = true;
                         }
-                        FillLibraries();
-                        BusinessClasses.LibraryManager.Instance.OldStyleProceed = false;
-                    }
-                }
-            }
-        }
 
-        public void buttonItemSettingsBranding_Click(object sender, EventArgs e)
-        {
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-            {
-                using (ToolForms.Settings.FormBranding form = new ToolForms.Settings.FormBranding())
-                {
-                    form.ShowDialog();
-                }
-            }
-        }
-
-        public void buttonItemSettingsSync_Click(object sender, EventArgs e)
-        {
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-            {
-                using (ToolForms.Settings.FormSync form = new ToolForms.Settings.FormSync())
-                {
-                    form.ShowDialog();
-                }
-            }
-        }
-
-        public void buttonItemSettingsPages_Click(object sender, EventArgs e)
-        {
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-            {
-                if (SaveLibraryWarning())
-                {
-                    using (ToolForms.Settings.FormPages form = new ToolForms.Settings.FormPages())
-                    {
-                        form.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
-                        if (form.ShowDialog() == DialogResult.OK)
-                        {
-                            using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
-                            {
-                                FormMain.Instance.ribbonControl.Enabled = false;
-                                formProgress.laProgress.Text = "Apply Settings...";
-                                formProgress.TopMost = true;
-
-                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                                {
-                                    this.Invoke((MethodInvoker)delegate()
-                                    {
-                                        int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, form.Library);
-
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(form.Library);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                    });
-                                }));
-
-                                formProgress.Show();
-
-                                thread.Start();
-
-                                while (thread.IsAlive)
-                                    System.Windows.Forms.Application.DoEvents();
-
-                                formProgress.Close();
-                                FormMain.Instance.ribbonControl.Enabled = true;
-                            }
-
-                            _firstRun = false;
-                            comboBoxEditLibraries_EditValueChanged(null, null);
-                        }
+                        _firstRun = false;
+                        comboBoxEditLibraries_EditValueChanged(null, null);
                     }
                 }
             }
@@ -227,44 +238,41 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    using (ToolForms.Settings.FormColumns form = new ToolForms.Settings.FormColumns())
+                    _formColumns.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    if (_formColumns.ShowDialog() == DialogResult.OK)
                     {
-                        form.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
-                        if (form.ShowDialog() == DialogResult.OK)
+                        using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
                         {
-                            using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
+                            FormMain.Instance.ribbonControl.Enabled = false;
+                            formProgress.laProgress.Text = "Apply Settings...";
+                            formProgress.TopMost = true;
+
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                             {
-                                FormMain.Instance.ribbonControl.Enabled = false;
-                                formProgress.laProgress.Text = "Apply Settings...";
-                                formProgress.TopMost = true;
-
-                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                                this.Invoke((MethodInvoker)delegate()
                                 {
-                                    this.Invoke((MethodInvoker)delegate()
-                                    {
-                                        int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, form.Library);
+                                    int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formColumns.Library);
 
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(form.Library);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                    });
-                                }));
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(_formColumns.Library);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                });
+                            }));
 
-                                formProgress.Show();
+                            formProgress.Show();
 
-                                thread.Start();
+                            thread.Start();
 
-                                while (thread.IsAlive)
-                                    System.Windows.Forms.Application.DoEvents();
+                            while (thread.IsAlive)
+                                System.Windows.Forms.Application.DoEvents();
 
-                                formProgress.Close();
-                                FormMain.Instance.ribbonControl.Enabled = true;
-                            }
-                            _firstRun = false;
-                            comboBoxEditLibraries_EditValueChanged(null, null);
+                            formProgress.Close();
+                            FormMain.Instance.ribbonControl.Enabled = true;
                         }
+                        _firstRun = false;
+                        comboBoxEditLibraries_EditValueChanged(null, null);
                     }
                 }
             }
@@ -276,44 +284,41 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    using (ToolForms.Settings.FormAutoWidgets form = new ToolForms.Settings.FormAutoWidgets())
+                    _formAutoWidgets.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    if (_formAutoWidgets.ShowDialog() == DialogResult.OK)
                     {
-                        form.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
-                        if (form.ShowDialog() == DialogResult.OK)
+                        using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
                         {
-                            using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
+                            FormMain.Instance.ribbonControl.Enabled = false;
+                            formProgress.laProgress.Text = "Apply Settings...";
+                            formProgress.TopMost = true;
+
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                             {
-                                FormMain.Instance.ribbonControl.Enabled = false;
-                                formProgress.laProgress.Text = "Apply Settings...";
-                                formProgress.TopMost = true;
-
-                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                                this.Invoke((MethodInvoker)delegate()
                                 {
-                                    this.Invoke((MethodInvoker)delegate()
-                                    {
-                                        int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, form.Library);
+                                    int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formAutoWidgets.Library);
 
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(form.Library);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                    });
-                                }));
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(_formAutoWidgets.Library);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                });
+                            }));
 
-                                formProgress.Show();
+                            formProgress.Show();
 
-                                thread.Start();
+                            thread.Start();
 
-                                while (thread.IsAlive)
-                                    System.Windows.Forms.Application.DoEvents();
+                            while (thread.IsAlive)
+                                System.Windows.Forms.Application.DoEvents();
 
-                                formProgress.Close();
-                                FormMain.Instance.ribbonControl.Enabled = true;
-                            }
-                            _firstRun = false;
-                            comboBoxEditLibraries_EditValueChanged(null, null);
+                            formProgress.Close();
+                            FormMain.Instance.ribbonControl.Enabled = true;
                         }
+                        _firstRun = false;
+                        comboBoxEditLibraries_EditValueChanged(null, null);
                     }
                 }
             }
@@ -325,44 +330,41 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    using (ToolForms.Settings.FormDeadLinks form = new ToolForms.Settings.FormDeadLinks())
+                    _formDeadLinks.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    if (_formDeadLinks.ShowDialog() == DialogResult.OK)
                     {
-                        form.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
-                        if (form.ShowDialog() == DialogResult.OK)
+                        using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
                         {
-                            using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
+                            FormMain.Instance.ribbonControl.Enabled = false;
+                            formProgress.laProgress.Text = "Apply Settings...";
+                            formProgress.TopMost = true;
+
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                             {
-                                FormMain.Instance.ribbonControl.Enabled = false;
-                                formProgress.laProgress.Text = "Apply Settings...";
-                                formProgress.TopMost = true;
-
-                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                                this.Invoke((MethodInvoker)delegate()
                                 {
-                                    this.Invoke((MethodInvoker)delegate()
-                                    {
-                                        int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
-                                        BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, form.Library);
+                                    int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formDeadLinks.Library);
 
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(form.Library);
-                                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
-                                    });
-                                }));
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(_formDeadLinks.Library);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                });
+                            }));
 
-                                formProgress.Show();
+                            formProgress.Show();
 
-                                thread.Start();
+                            thread.Start();
 
-                                while (thread.IsAlive)
-                                    System.Windows.Forms.Application.DoEvents();
+                            while (thread.IsAlive)
+                                System.Windows.Forms.Application.DoEvents();
 
-                                formProgress.Close();
-                                FormMain.Instance.ribbonControl.Enabled = true;
-                            }
-                            _firstRun = false;
-                            comboBoxEditLibraries_EditValueChanged(null, null);
+                            formProgress.Close();
+                            FormMain.Instance.ribbonControl.Enabled = true;
                         }
+                        _firstRun = false;
+                        comboBoxEditLibraries_EditValueChanged(null, null);
                     }
                 }
             }
@@ -372,10 +374,15 @@ namespace FileManager.TabPages
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
-                using (ToolForms.Settings.FormEmailList form = new ToolForms.Settings.FormEmailList())
-                {
-                    form.ShowDialog();
-                }
+                _formEmailList.ShowDialog();
+            }
+        }
+
+        public void buttonItemSettingsAutoSync_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                _formAutoSync.ShowDialog();
             }
         }
 

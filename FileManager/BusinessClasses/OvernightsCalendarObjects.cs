@@ -4,8 +4,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Xml;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace FileManager.BusinessClasses
 {
@@ -31,6 +31,12 @@ namespace FileManager.BusinessClasses
         public Color DeadLinksForeColor { get; set; }
         #endregion
 
+        #region Email Grabber Settings
+        public bool EnableEmailGrabber { get; set; }
+        public int GrabInterval { get; set; }
+        public string InboxSubFolder { get; set; }
+        #endregion
+
         public OvernightsCalendar(Library parent)
         {
             this.Parent = parent;
@@ -38,6 +44,12 @@ namespace FileManager.BusinessClasses
             this.RootFolder = new DirectoryInfo(@"z:\");
             this.Years = new List<CalendarYear>();
             this.Files = new List<FileInfo>();
+
+            #region Email Grabber Settings
+            this.EnableEmailGrabber = false;
+            this.GrabInterval = 10;
+            this.InboxSubFolder = "Inbox";
+            #endregion
 
             ResetColors();
         }
@@ -47,6 +59,8 @@ namespace FileManager.BusinessClasses
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Enabled>" + this.Enabled.ToString() + @"</Enabled>");
             result.AppendLine(@"<RootFolder>" + this.RootFolder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
+
+            #region Color Settings
             result.AppendLine(@"<CalendarBackColor>" + this.CalendarBackColor.ToArgb().ToString() + @"</CalendarBackColor>");
             result.AppendLine(@"<CalendarBorderColor>" + this.CalendarBorderColor.ToArgb().ToString() + @"</CalendarBorderColor>");
             result.AppendLine(@"<CalendarHeaderBackColor>" + this.CalendarHeaderBackColor.ToArgb().ToString() + @"</CalendarHeaderBackColor>");
@@ -58,6 +72,14 @@ namespace FileManager.BusinessClasses
             result.AppendLine(@"<SweepBackColor>" + this.SweepBackColor.ToArgb().ToString() + @"</SweepBackColor>");
             result.AppendLine(@"<SweepForeColor>" + this.SweepForeColor.ToArgb().ToString() + @"</SweepForeColor>");
             result.AppendLine(@"<DeadLinksForeColor>" + this.DeadLinksForeColor.ToArgb().ToString() + @"</DeadLinksForeColor>");
+            #endregion
+
+            #region Email Grabber Settings
+            result.AppendLine(@"<EnableEmailGrabber>" + this.EnableEmailGrabber.ToString() + @"</EnableEmailGrabber>");
+            result.AppendLine(@"<GrabInterval>" + this.GrabInterval.ToString() + @"</GrabInterval>");
+            result.AppendLine(@"<InboxSubFolder>" + this.InboxSubFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</InboxSubFolder>");
+            #endregion
+
             return result.ToString();
         }
 
@@ -77,6 +99,7 @@ namespace FileManager.BusinessClasses
                         if (Directory.Exists(childNode.InnerText))
                             this.RootFolder = new DirectoryInfo(childNode.InnerText);
                         break;
+                    #region Color Settings
                     case "CalendarBackColor":
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.CalendarBackColor = Color.FromArgb(tempInt);
@@ -121,6 +144,21 @@ namespace FileManager.BusinessClasses
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.DeadLinksForeColor = Color.FromArgb(tempInt);
                         break;
+                    #endregion
+
+                    #region Email Grabber Settings
+                    case "EnableEmailGrabber":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableEmailGrabber = tempBool;
+                        break;
+                    case "GrabInterval":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.GrabInterval = tempInt;
+                        break;
+                    case "InboxSubFolder":
+                        this.InboxSubFolder = childNode.InnerText;
+                        break;
+                    #endregion
                 }
             }
         }
@@ -171,6 +209,8 @@ namespace FileManager.BusinessClasses
 
     public class CalendarYear
     {
+        private FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
+
         public OvernightsCalendar Parent { get; private set; }
         public DirectoryInfo RootFolder { get; set; }
         public int Year { get; set; }
@@ -195,6 +235,21 @@ namespace FileManager.BusinessClasses
                 this.Months.Add(month);
                 Application.DoEvents();
             }
+
+            _libraryStorageWatcher.Path = this.RootFolder.FullName;
+            _libraryStorageWatcher.Created += new FileSystemEventHandler((sender, e) =>
+            {
+                try
+                {
+                    _libraryStorageWatcher.EnableRaisingEvents = false;
+                    this.Parent.Files.Add(new FileInfo(e.FullPath));
+                }
+                finally
+                {
+                    _libraryStorageWatcher.EnableRaisingEvents = true;
+                }
+            });
+            _libraryStorageWatcher.EnableRaisingEvents = true;
         }
 
         public void LoadSweepPeriods()
@@ -308,6 +363,11 @@ namespace FileManager.BusinessClasses
         public CalendarDay(CalendarMonth parent)
         {
             this.Parent = parent;
+        }
+
+        public void Reset()
+        {
+            _linkedFileReady = false;
         }
 
         public FileInfo LinkedFile

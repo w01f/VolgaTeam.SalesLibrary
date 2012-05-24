@@ -47,8 +47,11 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
 
         private void DayControl_Click(object sender, System.EventArgs e)
         {
+            this.Data.Reset();
             if (this.Data.LinkedFile != null)
+            {
                 System.Diagnostics.Process.Start(this.Data.LinkedFile.FullName);
+            }
         }
 
         private void DayControl_MouseEnter(object sender, System.EventArgs e)

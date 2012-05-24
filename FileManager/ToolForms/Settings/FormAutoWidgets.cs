@@ -38,7 +38,7 @@ namespace FileManager.ToolForms.Settings
                 }
                 else if (e.Button.Index == 1)
                 {
-                    using (ToolForm.WallBin.FormSelectWidget form = new ToolForm.WallBin.FormSelectWidget())
+                    using (ToolForms.WallBin.FormSelectWidget form = new ToolForms.WallBin.FormSelectWidget())
                     {
                         BusinessClasses.AutoWidget autoWidget = this.Library.AutoWidgets[gridViewAutoWidgets.GetDataSourceRowIndex(gridViewAutoWidgets.FocusedRowHandle)];
                         form.pbSelectedWidget.Image = autoWidget.Widget;

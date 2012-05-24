@@ -81,6 +81,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AutoSync {
+            get {
+                object obj = ResourceManager.GetObject("AutoSync", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap AutoWidgets {
             get {
                 object obj = ResourceManager.GetObject("AutoWidgets", resourceCulture);
@@ -147,6 +154,13 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap DownLink {
             get {
                 object obj = ResourceManager.GetObject("DownLink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap EmailGrabber {
+            get {
+                object obj = ResourceManager.GetObject("EmailGrabber", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -224,6 +238,13 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap LinkProperties {
             get {
                 object obj = ResourceManager.GetObject("LinkProperties", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MultiTabs {
+            get {
+                object obj = ResourceManager.GetObject("MultiTabs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace FileManager.ToolForm.WallBin
+namespace FileManager.ToolForms.WallBin
 {
     public partial class FormDeleteIncorrectLinks : Form
     {
@@ -51,7 +51,7 @@ namespace FileManager.ToolForm.WallBin
                 BusinessClasses.LibraryFile file = grIncorrectLinks.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
                 if (file != null)
                 {
-                    using (ToolForm.WallBin.FormLinkProperties form = new ToolForm.WallBin.FormLinkProperties())
+                    using (ToolForms.WallBin.FormLinkProperties form = new ToolForms.WallBin.FormLinkProperties())
                     {
                         form.CaptionName = file.PropertiesName;
                         form.Note = file.Note;
