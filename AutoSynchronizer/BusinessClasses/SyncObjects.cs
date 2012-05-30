@@ -150,7 +150,7 @@ namespace AutoSynchronizer.BusinessClasses
                 }
             }
             finally
-            { 
+            {
                 this.SyncInProgress = false;
             }
         }
@@ -211,8 +211,9 @@ namespace AutoSynchronizer.BusinessClasses
             {
                 _timer = new System.Threading.Timer(delegate(object state)
                 {
-                    _nextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.GrabInterval);
                     GrabEmail();
+
+                    _nextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.EmailGrabInterval);
                     ScheduleNextGrab();
                 }, null, GetMillisecondsForNextGrab(), System.Threading.Timeout.Infinite);
             }

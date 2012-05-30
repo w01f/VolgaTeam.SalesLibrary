@@ -30,6 +30,8 @@ namespace AutoSynchronizer.InteropClasses
 
         public void Disconnect()
         {
+            if (_outlookObject != null)
+                _outlookObject.Quit();
             AppManager.Instance.ReleaseComObject(_outlookObject);
             GC.WaitForPendingFinalizers();
             GC.Collect();
@@ -56,15 +58,22 @@ namespace AutoSynchronizer.InteropClasses
                                     if (message.UnRead)
                                     {
                                         DateTime messageSentDate = message.SentOn;
-                                        BusinessClasses.CalendarYear year = _calendar.Years.Where(x => x.Year.Equals(messageSentDate.Year)).FirstOrDefault();
-                                        if (year != null && year.RootFolder.Exists)
+                                        foreach (Outlook.Attachment attachment in message.Attachments)
                                         {
-                                            foreach (Outlook.Attachment attachment in message.Attachments)
+                                            string attachmentExtension = Path.GetExtension(attachment.FileName).ToLower();
+                                            string tempPath = Path.GetTempFileName();
+                                            attachment.SaveAsFile(tempPath);
+                                            if (attachmentExtension.Equals(".xls") || attachmentExtension.Equals(".xlsx"))
                                             {
-                                                string filePath = Path.Combine(year.RootFolder.FullName, string.Format("{0}f{1}", new string[] { messageSentDate.ToString("MMddyy"), Path.GetExtension(attachment.FileName) }));
-                                                if (File.Exists(filePath))
-                                                    File.Delete(filePath);
-                                                attachment.SaveAsFile(filePath);
+                                                ExcelHelper excelHelper = new ExcelHelper();
+                                                messageSentDate = excelHelper.GetOvernightsDate(tempPath);
+                                            }
+                                            BusinessClasses.CalendarYear year = _calendar.Years.Where(x => x.Year.Equals(messageSentDate.Year)).FirstOrDefault();
+                                            if (year != null && year.RootFolder.Exists)
+                                            {
+                                                string filePath = Path.Combine(year.RootFolder.FullName, string.Format("{0}f{1}", new string[] { messageSentDate.ToString("MMddyy"), attachmentExtension }));
+                                                File.Copy(tempPath, filePath, true);
+                                                File.Delete(tempPath);
                                                 message.UnRead = false;
                                                 break;
                                             }
@@ -75,6 +84,7 @@ namespace AutoSynchronizer.InteropClasses
                             }
                         }
                     }
+                    Disconnect();
                 }
             }
             finally
