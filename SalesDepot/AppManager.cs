@@ -135,22 +135,22 @@ namespace SalesDepot
 
         public void ShowInfo(string text)
         {
-            MessageBox.Show(text, "Sales Depot", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void ShowWarning(string text)
         {
-            MessageBox.Show(text, "Sales Depot", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         public DialogResult ShowWarningQuestion(string text)
         {
-            return MessageBox.Show(text, "Sales Depot", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+            return MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
         }
 
         public DialogResult ShowInfoQuestion(string text)
         {
-            return MessageBox.Show(text, "Sales Depot", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         public void ReleaseComObject(object o)

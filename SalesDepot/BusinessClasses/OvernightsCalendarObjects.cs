@@ -299,7 +299,7 @@ namespace SalesDepot.BusinessClasses
                     {
                         _linkedFile = new LibraryFile(null);
                         _linkedFile.RemotePath = file.FullName;
-                        _linkedFile.SetProperties();
+                        _linkedFile.Type = FileTypes.OvernightsLink;
                     }
                 }
                 return _linkedFile;

@@ -801,6 +801,7 @@ namespace SalesDepot.BusinessClasses
                         case FileTypes.PDF:
                         case FileTypes.QuickTimeVideo:
                         case FileTypes.Word:
+                        case FileTypes.OvernightsLink:
                             _linkAvailabel = File.Exists(this.RemotePath);
                             break;
                         case FileTypes.Folder:
@@ -888,6 +889,7 @@ namespace SalesDepot.BusinessClasses
                     case FileTypes.Excel:
                     case FileTypes.PDF:
                     case FileTypes.Word:
+                    case FileTypes.OvernightsLink:
                         return Path.GetExtension(this.RemotePath);
                     default:
                         return string.Empty;
@@ -1163,6 +1165,7 @@ namespace SalesDepot.BusinessClasses
                             case FileTypes.PDF:
                             case FileTypes.QuickTimeVideo:
                             case FileTypes.Word:
+                            case FileTypes.OvernightsLink:
                                 _linkLocalPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, this.NameWithExtension);
                                 try
                                 {
@@ -1626,6 +1629,7 @@ namespace SalesDepot.BusinessClasses
         Network,
         PDF,
         Excel,
-        Word
+        Word,
+        OvernightsLink
     }
 }

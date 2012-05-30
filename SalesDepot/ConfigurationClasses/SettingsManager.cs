@@ -40,7 +40,8 @@ namespace SalesDepot.ConfigurationClasses
         public const string NoLogoFileName = @"no_logo.png";
         public const string PageLogoFileTemplate = @"page{0}.*";
 
-        private string _settingsFilePath = string.Empty;
+        private string _localSettingsFilePath = string.Empty;
+        private string _remoteSettingsFilePath = string.Empty;
         private string _defaultSettingsFilePath = string.Empty;
         private string _defaultViewPath = string.Empty;
         private string _viewButtonsPath = string.Empty;
@@ -96,6 +97,7 @@ namespace SalesDepot.ConfigurationClasses
         public bool SolutionTitleView { get; set; }
         public bool SolutionDateView { get; set; }
         public bool SolutionTagsView { get; set; }
+        public bool CalendarView { get; set; }
         public bool LastViewed { get; set; }
         public string ClassicTitle { get; set; }
         public string ListTitle { get; set; }
@@ -124,7 +126,8 @@ namespace SalesDepot.ConfigurationClasses
         private SettingsManager()
         {
             string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\sales depot\Settings", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-            _settingsFilePath = Path.Combine(settingsFolderPath, "ApplicationSettings.xml");
+            _localSettingsFilePath = Path.Combine(settingsFolderPath, "ApplicationSettings.xml");
+            _remoteSettingsFilePath = Path.Combine(settingsFolderPath, "RemoteApplicationSettings.xml");
             _defaultSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ResetSettings.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             _defaultViewPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\defaultview.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             _viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
@@ -311,12 +314,13 @@ namespace SalesDepot.ConfigurationClasses
             LoadConfiguration();
             LoadApprovedLibraries();
 
-            if (File.Exists(_settingsFilePath))
+            string settingsPath = this.UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;
+            if (File.Exists(settingsPath))
             {
                 XmlDocument document = new XmlDocument();
                 try
                 {
-                    document.Load(_settingsFilePath);
+                    document.Load(settingsPath);
                     this.IsConfigured = true;
                 }
                 catch
@@ -352,8 +356,12 @@ namespace SalesDepot.ConfigurationClasses
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.EmailBinSendAsZip = tempBool;
+                node = document.SelectSingleNode(@"/LocalSettings/CalendarView");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.CalendarView= tempBool;
 
-                if (this.LastViewed)
+                if (this.LastViewed || this.UseRemoteConnection)
                 {
                     node = document.SelectSingleNode(@"/LocalSettings/ClassicView");
                     if (node != null)
@@ -456,7 +464,8 @@ namespace SalesDepot.ConfigurationClasses
             xml.AppendLine(@"<VideoLaunchOptions>" + this.VideoLaunchOptions.ToString() + @"</VideoLaunchOptions>");
             xml.AppendLine(@"<EmailButtons>" + this.EmailButtons.ToString() + @"</EmailButtons>");
             xml.AppendLine(@"<MultitabView>" + this.MultitabView.ToString() + @"</MultitabView>");
-            if (this.LastViewed)
+            xml.AppendLine(@"<CalendarView>" + this.CalendarView.ToString() + @"</CalendarView>");
+            if (this.LastViewed || this.UseRemoteConnection)
             {
                 xml.AppendLine(@"<ClassicView>" + this.ClassicView.ToString() + @"</ClassicView>");
                 xml.AppendLine(@"<ListView>" + this.ListView.ToString() + @"</ListView>");
@@ -467,7 +476,8 @@ namespace SalesDepot.ConfigurationClasses
             }
             xml.AppendLine(@"</LocalSettings>");
 
-            using (StreamWriter sw = new StreamWriter(_settingsFilePath, false))
+            string settingsPath = this.UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;
+            using (StreamWriter sw = new StreamWriter(settingsPath, false))
             {
                 sw.Write(xml);
                 sw.Flush();

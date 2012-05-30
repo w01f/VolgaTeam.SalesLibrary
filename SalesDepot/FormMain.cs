@@ -11,6 +11,8 @@ namespace SalesDepot
     {
         private static FormMain _instance = null;
 
+        private bool _alowToSave = false;
+
         public TabPages.TabHomeControl TabHome { get; set; }
         public TabPages.TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
 
@@ -116,17 +118,23 @@ namespace SalesDepot
 
         private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
         {
-            if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+            if (_alowToSave)
             {
-                if (!pnContainer.Controls.Contains(this.TabHome))
-                    pnContainer.Controls.Add(this.TabHome);
-                this.TabHome.BringToFront();
-            }
-            else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
-            {
-                if (!pnContainer.Controls.Contains(this.TabOvernightsCalendar))
-                    pnContainer.Controls.Add(this.TabOvernightsCalendar);
-                this.TabOvernightsCalendar.BringToFront();
+                if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+                {
+                    if (!pnContainer.Controls.Contains(this.TabHome))
+                        pnContainer.Controls.Add(this.TabHome);
+                    this.TabHome.BringToFront();
+                }
+                else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
+                {
+                    if (!pnContainer.Controls.Contains(this.TabOvernightsCalendar))
+                        pnContainer.Controls.Add(this.TabOvernightsCalendar);
+                    this.TabOvernightsCalendar.BringToFront();
+                }
+
+                ConfigurationClasses.SettingsManager.Instance.CalendarView = ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar;
+                ConfigurationClasses.SettingsManager.Instance.SaveSettings();
             }
         }
 
@@ -142,7 +150,7 @@ namespace SalesDepot
             ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
             using (ToolForms.FormProgress form = new ToolForms.FormProgress())
             {
-                form.laProgress.Text = "Loading Sales Libraries...";
+                form.laProgress.Text = ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Loading Remote Sales Libraries..." : "Loading Sales Libraries...";
                 form.TopMost = true;
                 ribbonControl.Visible = false;
                 pnEmpty.BringToFront();
@@ -157,7 +165,11 @@ namespace SalesDepot
                         Application.DoEvents();
                         this.TabHome.LoadPage();
                         Application.DoEvents();
-                        ribbonControl_SelectedRibbonTabChanged(null, null);
+                        _alowToSave = true;
+                        if (ConfigurationClasses.SettingsManager.Instance.CalendarView)
+                            ribbonTabItemCalendar.Select();
+                        else
+                            ribbonControl_SelectedRibbonTabChanged(null, null);
                         Application.DoEvents();
                     });
                 }));

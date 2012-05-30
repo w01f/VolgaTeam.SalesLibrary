@@ -233,6 +233,9 @@ namespace SalesDepot.BusinessClasses
                 case FileTypes.Network:
                     StartProcess(link.LocalPath);
                     break;
+                case FileTypes.OvernightsLink:
+                    StartProcess(link.LocalPath);
+                    break;
                 case FileTypes.LineBreak:
                     if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
                         AppManager.Instance.ShowInfo(link.LineBreakProperties.Note);
