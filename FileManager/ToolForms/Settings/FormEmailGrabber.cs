@@ -23,9 +23,9 @@ namespace FileManager.ToolForms.Settings
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.EnableEmailGrabber = buttonXEnable.Checked;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.GrabInterval = (int)spinEditGrabInterval.Value;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.EmailGrabInterval = (int)spinEditGrabInterval.Value;
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.InboxSubFolder = textEditInboxSubFolder.EditValue != null ? textEditInboxSubFolder.EditValue.ToString() : string.Empty;
-                ConfigurationClasses.SettingsManager.Instance.Save();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Save();
             }
         }
 
@@ -33,7 +33,7 @@ namespace FileManager.ToolForms.Settings
         {
             buttonXEnable.Checked = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.EnableEmailGrabber;
             buttonXDisable.Checked = !PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.EnableEmailGrabber;
-            spinEditGrabInterval.Value = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.GrabInterval;
+            spinEditGrabInterval.Value = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.EmailGrabInterval;
             textEditInboxSubFolder.EditValue = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.InboxSubFolder;
         }
 

@@ -193,6 +193,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap FileGrabber {
+            get {
+                object obj = ResourceManager.GetObject("FileGrabber", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap FormatFontLarger {
             get {
                 object obj = ResourceManager.GetObject("FormatFontLarger", resourceCulture);

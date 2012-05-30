@@ -33,8 +33,13 @@ namespace FileManager.BusinessClasses
 
         #region Email Grabber Settings
         public bool EnableEmailGrabber { get; set; }
-        public int GrabInterval { get; set; }
+        public int EmailGrabInterval { get; set; }
         public string InboxSubFolder { get; set; }
+        #endregion
+
+        #region File Grabber Settings
+        public bool EnableFileGrabber { get; set; }
+        public string FileGrabSourceFolder { get; set; }
         #endregion
 
         public OvernightsCalendar(Library parent)
@@ -47,8 +52,13 @@ namespace FileManager.BusinessClasses
 
             #region Email Grabber Settings
             this.EnableEmailGrabber = false;
-            this.GrabInterval = 10;
+            this.EmailGrabInterval = 10;
             this.InboxSubFolder = "Inbox";
+            #endregion
+
+            #region File Grabber Settings
+            this.EnableFileGrabber = false;
+            this.FileGrabSourceFolder = @"c:\Overnights Source";
             #endregion
 
             ResetColors();
@@ -76,8 +86,13 @@ namespace FileManager.BusinessClasses
 
             #region Email Grabber Settings
             result.AppendLine(@"<EnableEmailGrabber>" + this.EnableEmailGrabber.ToString() + @"</EnableEmailGrabber>");
-            result.AppendLine(@"<GrabInterval>" + this.GrabInterval.ToString() + @"</GrabInterval>");
+            result.AppendLine(@"<EmailGrabInterval>" + this.EmailGrabInterval.ToString() + @"</EmailGrabInterval>");
             result.AppendLine(@"<InboxSubFolder>" + this.InboxSubFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</InboxSubFolder>");
+            #endregion
+
+            #region File Grabber Settings
+            result.AppendLine(@"<EnableFileGrabber>" + this.EnableFileGrabber.ToString() + @"</EnableFileGrabber>");
+            result.AppendLine(@"<FileGrabSourceFolder>" + this.FileGrabSourceFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FileGrabSourceFolder>");
             #endregion
 
             return result.ToString();
@@ -151,12 +166,22 @@ namespace FileManager.BusinessClasses
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.EnableEmailGrabber = tempBool;
                         break;
-                    case "GrabInterval":
+                    case "EmailGrabInterval":
                         if (int.TryParse(childNode.InnerText, out tempInt))
-                            this.GrabInterval = tempInt;
+                            this.EmailGrabInterval = tempInt;
                         break;
                     case "InboxSubFolder":
                         this.InboxSubFolder = childNode.InnerText;
+                        break;
+                    #endregion
+
+                    #region File Grabber Settings
+                    case "EnableFileGrabber":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableFileGrabber = tempBool;
+                        break;
+                    case "FileGrabSourceFolder":
+                        this.FileGrabSourceFolder = childNode.InnerText;
                         break;
                     #endregion
                 }
@@ -239,15 +264,8 @@ namespace FileManager.BusinessClasses
             _libraryStorageWatcher.Path = this.RootFolder.FullName;
             _libraryStorageWatcher.Created += new FileSystemEventHandler((sender, e) =>
             {
-                try
-                {
-                    _libraryStorageWatcher.EnableRaisingEvents = false;
+                if (!this.Parent.Files.Select(x => x.FullName).Contains(e.FullPath))
                     this.Parent.Files.Add(new FileInfo(e.FullPath));
-                }
-                finally
-                {
-                    _libraryStorageWatcher.EnableRaisingEvents = true;
-                }
             });
             _libraryStorageWatcher.EnableRaisingEvents = true;
         }

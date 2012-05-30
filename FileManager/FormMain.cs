@@ -62,6 +62,7 @@ namespace FileManager
             buttonItemCalendarFontUp.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontUp_Click);
             buttonItemCalendarFontDown.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontDown_Click);
             buttonItemCalendarEmailGrabber.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarEmailGrabber_Click);
+            buttonItemCalendarFileGrabber.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFileGrabber_Click);
         }
 
         public static FormMain Instance

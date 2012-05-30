@@ -9,6 +9,7 @@ namespace FileManager.TabPages
     {
         private ToolForms.Settings.FormCalendarSettings _formSettings = null;
         private ToolForms.Settings.FormEmailGrabber _formEmailGrabber = null;
+        private ToolForms.Settings.FormFileGrabber _formFileGrabber = null;
 
         public TabOvernightsCalendarControl()
         {
@@ -20,6 +21,7 @@ namespace FileManager.TabPages
         {
             _formSettings = new ToolForms.Settings.FormCalendarSettings();
             _formEmailGrabber = new ToolForms.Settings.FormEmailGrabber();
+            _formFileGrabber = new ToolForms.Settings.FormFileGrabber();
         }
 
         public void buttonItemCalendarSyncStatus_Click(object sender, EventArgs e)
@@ -147,6 +149,14 @@ namespace FileManager.TabPages
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
                 _formEmailGrabber.ShowDialog();
+            }
+        }
+
+        public void buttonItemCalendarFileGrabber_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                _formFileGrabber.ShowDialog();
             }
         }
     }

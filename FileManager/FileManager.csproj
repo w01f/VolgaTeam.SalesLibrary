@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="ToolForms\Settings\FormFileGrabber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormFileGrabber.Designer.cs">
+      <DependentUpon>FormFileGrabber.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\Settings\FormEmailGrabber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -326,6 +332,9 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ToolForms\Settings\FormFileGrabber.resx">
+      <DependentUpon>FormFileGrabber.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormEmailGrabber.resx">
       <DependentUpon>FormEmailGrabber.cs</DependentUpon>
     </EmbeddedResource>
@@ -457,6 +466,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\FileGrabber.png" />
     <None Include="Resources\EmailGrabber.png" />
     <None Include="Resources\AutoSync.png" />
     <None Include="Resources\MultiTabs.png" />
