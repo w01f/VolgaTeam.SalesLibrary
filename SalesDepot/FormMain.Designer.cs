@@ -304,7 +304,7 @@
             this.ribbonBarViewSettings.Size = new System.Drawing.Size(54, 113);
             this.ribbonBarViewSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarViewSettings.TabIndex = 7;
-            this.ribbonBarViewSettings.Text = "Font Size";
+            this.ribbonBarViewSettings.Text = "Text";
             // 
             // 
             // 
@@ -832,7 +832,7 @@
             this.ribbonBarCalendarFontSize.Size = new System.Drawing.Size(54, 113);
             this.ribbonBarCalendarFontSize.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarCalendarFontSize.TabIndex = 16;
-            this.ribbonBarCalendarFontSize.Text = "Font Size";
+            this.ribbonBarCalendarFontSize.Text = "Text";
             // 
             // 
             // 
@@ -981,10 +981,10 @@
             this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsPowerPointLaunchOptions);
             this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsStartup);
             this.ribbonPanelSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelSettings.Location = new System.Drawing.Point(0, 0);
+            this.ribbonPanelSettings.Location = new System.Drawing.Point(0, 26);
             this.ribbonPanelSettings.Name = "ribbonPanelSettings";
             this.ribbonPanelSettings.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelSettings.Size = new System.Drawing.Size(1008, 142);
+            this.ribbonPanelSettings.Size = new System.Drawing.Size(1008, 116);
             // 
             // 
             // 
@@ -1021,7 +1021,7 @@
             this.ribbonBarSettingsExit.Location = new System.Drawing.Point(650, 0);
             this.ribbonBarSettingsExit.Name = "ribbonBarSettingsExit";
             this.ribbonBarSettingsExit.ResizeItemsToFit = false;
-            this.ribbonBarSettingsExit.Size = new System.Drawing.Size(80, 139);
+            this.ribbonBarSettingsExit.Size = new System.Drawing.Size(80, 113);
             this.ribbonBarSettingsExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsExit.TabIndex = 13;
             this.ribbonBarSettingsExit.Text = "EXIT";
@@ -1063,7 +1063,7 @@
             this.ribbonBarSettingsHelp.Location = new System.Drawing.Point(565, 0);
             this.ribbonBarSettingsHelp.Name = "ribbonBarSettingsHelp";
             this.ribbonBarSettingsHelp.ResizeItemsToFit = false;
-            this.ribbonBarSettingsHelp.Size = new System.Drawing.Size(85, 139);
+            this.ribbonBarSettingsHelp.Size = new System.Drawing.Size(85, 113);
             this.ribbonBarSettingsHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsHelp.TabIndex = 11;
             this.ribbonBarSettingsHelp.Text = "HELP";
@@ -1104,7 +1104,7 @@
             this.ribbonBarSettingsEmail.Location = new System.Drawing.Point(480, 0);
             this.ribbonBarSettingsEmail.Name = "ribbonBarSettingsEmail";
             this.ribbonBarSettingsEmail.ResizeItemsToFit = false;
-            this.ribbonBarSettingsEmail.Size = new System.Drawing.Size(85, 139);
+            this.ribbonBarSettingsEmail.Size = new System.Drawing.Size(85, 113);
             this.ribbonBarSettingsEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsEmail.TabIndex = 9;
             this.ribbonBarSettingsEmail.Text = "Email";
@@ -1142,7 +1142,7 @@
             this.ribbonBarSettingsQuickView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.ribbonBarSettingsQuickView.Location = new System.Drawing.Point(411, 0);
             this.ribbonBarSettingsQuickView.Name = "ribbonBarSettingsQuickView";
-            this.ribbonBarSettingsQuickView.Size = new System.Drawing.Size(69, 139);
+            this.ribbonBarSettingsQuickView.Size = new System.Drawing.Size(69, 113);
             this.ribbonBarSettingsQuickView.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsQuickView.TabIndex = 19;
             this.ribbonBarSettingsQuickView.Text = "Quick View";
@@ -1206,7 +1206,7 @@
             this.ribbonBarSettingsVideoLaunchOptions.Location = new System.Drawing.Point(343, 0);
             this.ribbonBarSettingsVideoLaunchOptions.Name = "ribbonBarSettingsVideoLaunchOptions";
             this.ribbonBarSettingsVideoLaunchOptions.ResizeItemsToFit = false;
-            this.ribbonBarSettingsVideoLaunchOptions.Size = new System.Drawing.Size(68, 139);
+            this.ribbonBarSettingsVideoLaunchOptions.Size = new System.Drawing.Size(68, 113);
             this.ribbonBarSettingsVideoLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsVideoLaunchOptions.TabIndex = 18;
             this.ribbonBarSettingsVideoLaunchOptions.Text = "Video";
@@ -1277,7 +1277,7 @@
             this.ribbonBarSettingsExcelLaunchOptions.Location = new System.Drawing.Point(275, 0);
             this.ribbonBarSettingsExcelLaunchOptions.Name = "ribbonBarSettingsExcelLaunchOptions";
             this.ribbonBarSettingsExcelLaunchOptions.ResizeItemsToFit = false;
-            this.ribbonBarSettingsExcelLaunchOptions.Size = new System.Drawing.Size(68, 139);
+            this.ribbonBarSettingsExcelLaunchOptions.Size = new System.Drawing.Size(68, 113);
             this.ribbonBarSettingsExcelLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsExcelLaunchOptions.TabIndex = 17;
             this.ribbonBarSettingsExcelLaunchOptions.Text = "Excel";
@@ -1348,7 +1348,7 @@
             this.ribbonBarSettingsWordLaunchOptions.Location = new System.Drawing.Point(207, 0);
             this.ribbonBarSettingsWordLaunchOptions.Name = "ribbonBarSettingsWordLaunchOptions";
             this.ribbonBarSettingsWordLaunchOptions.ResizeItemsToFit = false;
-            this.ribbonBarSettingsWordLaunchOptions.Size = new System.Drawing.Size(68, 139);
+            this.ribbonBarSettingsWordLaunchOptions.Size = new System.Drawing.Size(68, 113);
             this.ribbonBarSettingsWordLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsWordLaunchOptions.TabIndex = 16;
             this.ribbonBarSettingsWordLaunchOptions.Text = "Word";
@@ -1419,7 +1419,7 @@
             this.ribbonBarSettingsPDFLaunchOptions.Location = new System.Drawing.Point(139, 0);
             this.ribbonBarSettingsPDFLaunchOptions.Name = "ribbonBarSettingsPDFLaunchOptions";
             this.ribbonBarSettingsPDFLaunchOptions.ResizeItemsToFit = false;
-            this.ribbonBarSettingsPDFLaunchOptions.Size = new System.Drawing.Size(68, 139);
+            this.ribbonBarSettingsPDFLaunchOptions.Size = new System.Drawing.Size(68, 113);
             this.ribbonBarSettingsPDFLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsPDFLaunchOptions.TabIndex = 15;
             this.ribbonBarSettingsPDFLaunchOptions.Text = "PDF";
@@ -1490,7 +1490,7 @@
             this.ribbonBarSettingsPowerPointLaunchOptions.Location = new System.Drawing.Point(71, 0);
             this.ribbonBarSettingsPowerPointLaunchOptions.Name = "ribbonBarSettingsPowerPointLaunchOptions";
             this.ribbonBarSettingsPowerPointLaunchOptions.ResizeItemsToFit = false;
-            this.ribbonBarSettingsPowerPointLaunchOptions.Size = new System.Drawing.Size(68, 139);
+            this.ribbonBarSettingsPowerPointLaunchOptions.Size = new System.Drawing.Size(68, 113);
             this.ribbonBarSettingsPowerPointLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsPowerPointLaunchOptions.TabIndex = 7;
             this.ribbonBarSettingsPowerPointLaunchOptions.Text = "PowerPoint";
@@ -1558,7 +1558,7 @@
             this.ribbonBarSettingsStartup.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.ribbonBarSettingsStartup.Location = new System.Drawing.Point(3, 0);
             this.ribbonBarSettingsStartup.Name = "ribbonBarSettingsStartup";
-            this.ribbonBarSettingsStartup.Size = new System.Drawing.Size(68, 139);
+            this.ribbonBarSettingsStartup.Size = new System.Drawing.Size(68, 113);
             this.ribbonBarSettingsStartup.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2007;
             this.ribbonBarSettingsStartup.TabIndex = 14;
             this.ribbonBarSettingsStartup.Text = "Startup";
@@ -1577,7 +1577,7 @@
             // 
             // 
             this.itemContainerSettingsStartup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.itemContainerSettingsStartup.ItemSpacing = 28;
+            this.itemContainerSettingsStartup.ItemSpacing = 15;
             this.itemContainerSettingsStartup.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.itemContainerSettingsStartup.Name = "itemContainerSettingsStartup";
             this.itemContainerSettingsStartup.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {

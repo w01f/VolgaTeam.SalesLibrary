@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
@@ -59,7 +58,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPowerPointQuickViewOld));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            this.barManager = new DevExpress.XtraBars.BarManager(this.components);
+            this.barManager = new DevExpress.XtraBars.BarManager();
             this.barOperations = new DevExpress.XtraBars.Bar();
             this.barLargeButtonItemOpen = new DevExpress.XtraBars.BarLargeButtonItem();
             this.barLargeButtonItemSave = new DevExpress.XtraBars.BarLargeButtonItem();
@@ -80,21 +79,21 @@
             this.laSlideNumber = new System.Windows.Forms.Label();
             this.comboBoxEditSlides = new DevExpress.XtraEditors.ComboBoxEdit();
             this.pnPreview = new System.Windows.Forms.Panel();
-            this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.styleController = new DevExpress.XtraEditors.StyleController();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.pnSlideTemplate = new System.Windows.Forms.Panel();
-            this.labelControlSlideTemplate = new DevExpress.XtraEditors.LabelControl();
-            this.checkEditKeepSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
             this.comboBoxEditSlideTemplate = new DevExpress.XtraEditors.ComboBoxEdit();
             this.checkEditChangeSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditKeepSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
+            this.labelControlSlideTemplate = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
             this.pnNavigationArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlides.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             this.pnSlideTemplate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditKeepSlideTemplate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlideTemplate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditChangeSlideTemplate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditKeepSlideTemplate.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // barManager
@@ -409,43 +408,15 @@
             // pnSlideTemplate
             // 
             this.pnSlideTemplate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnSlideTemplate.Controls.Add(this.labelControlSlideTemplate);
-            this.pnSlideTemplate.Controls.Add(this.checkEditKeepSlideTemplate);
             this.pnSlideTemplate.Controls.Add(this.comboBoxEditSlideTemplate);
             this.pnSlideTemplate.Controls.Add(this.checkEditChangeSlideTemplate);
+            this.pnSlideTemplate.Controls.Add(this.checkEditKeepSlideTemplate);
+            this.pnSlideTemplate.Controls.Add(this.labelControlSlideTemplate);
             this.pnSlideTemplate.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnSlideTemplate.Location = new System.Drawing.Point(0, 96);
             this.pnSlideTemplate.Name = "pnSlideTemplate";
             this.pnSlideTemplate.Size = new System.Drawing.Size(934, 39);
             this.pnSlideTemplate.TabIndex = 20;
-            // 
-            // labelControlSlideTemplate
-            // 
-            this.labelControlSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelControlSlideTemplate.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelControlSlideTemplate.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.labelControlSlideTemplate.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControlSlideTemplate.Location = new System.Drawing.Point(333, 4);
-            this.labelControlSlideTemplate.Name = "labelControlSlideTemplate";
-            this.labelControlSlideTemplate.Size = new System.Drawing.Size(81, 27);
-            this.labelControlSlideTemplate.TabIndex = 3;
-            this.labelControlSlideTemplate.Text = "-or-";
-            // 
-            // checkEditKeepSlideTemplate
-            // 
-            this.checkEditKeepSlideTemplate.EditValue = true;
-            this.checkEditKeepSlideTemplate.Location = new System.Drawing.Point(3, 7);
-            this.checkEditKeepSlideTemplate.MenuManager = this.barManager;
-            this.checkEditKeepSlideTemplate.Name = "checkEditKeepSlideTemplate";
-            this.checkEditKeepSlideTemplate.Properties.AllowHtmlString = true;
-            this.checkEditKeepSlideTemplate.Properties.AutoWidth = true;
-            this.checkEditKeepSlideTemplate.Properties.Caption = "<b>KEEP</b> the current PowerPoint slide background";
-            this.checkEditKeepSlideTemplate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
-            this.checkEditKeepSlideTemplate.Properties.RadioGroupIndex = 1;
-            this.checkEditKeepSlideTemplate.Size = new System.Drawing.Size(294, 20);
-            this.checkEditKeepSlideTemplate.StyleController = this.styleController;
-            this.checkEditKeepSlideTemplate.TabIndex = 2;
             // 
             // comboBoxEditSlideTemplate
             // 
@@ -465,19 +436,45 @@
             // checkEditChangeSlideTemplate
             // 
             this.checkEditChangeSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(457, 7);
+            this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(421, 7);
             this.checkEditChangeSlideTemplate.MenuManager = this.barManager;
             this.checkEditChangeSlideTemplate.Name = "checkEditChangeSlideTemplate";
             this.checkEditChangeSlideTemplate.Properties.AllowHtmlString = true;
-            this.checkEditChangeSlideTemplate.Properties.AutoWidth = true;
             this.checkEditChangeSlideTemplate.Properties.Caption = "<b>CHANGE</b> the slide background:";
             this.checkEditChangeSlideTemplate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
             this.checkEditChangeSlideTemplate.Properties.RadioGroupIndex = 1;
-            this.checkEditChangeSlideTemplate.Size = new System.Drawing.Size(204, 20);
+            this.checkEditChangeSlideTemplate.Size = new System.Drawing.Size(266, 20);
             this.checkEditChangeSlideTemplate.StyleController = this.styleController;
             this.checkEditChangeSlideTemplate.TabIndex = 0;
             this.checkEditChangeSlideTemplate.TabStop = false;
             this.checkEditChangeSlideTemplate.CheckedChanged += new System.EventHandler(this.checkEditSlideTemplate_CheckedChanged);
+            // 
+            // checkEditKeepSlideTemplate
+            // 
+            this.checkEditKeepSlideTemplate.EditValue = true;
+            this.checkEditKeepSlideTemplate.Location = new System.Drawing.Point(3, 7);
+            this.checkEditKeepSlideTemplate.MenuManager = this.barManager;
+            this.checkEditKeepSlideTemplate.Name = "checkEditKeepSlideTemplate";
+            this.checkEditKeepSlideTemplate.Properties.AllowHtmlString = true;
+            this.checkEditKeepSlideTemplate.Properties.Caption = "<b>KEEP</b> the current PowerPoint slide background";
+            this.checkEditKeepSlideTemplate.Properties.CheckStyle = DevExpress.XtraEditors.Controls.CheckStyles.Radio;
+            this.checkEditKeepSlideTemplate.Properties.RadioGroupIndex = 1;
+            this.checkEditKeepSlideTemplate.Size = new System.Drawing.Size(307, 20);
+            this.checkEditKeepSlideTemplate.StyleController = this.styleController;
+            this.checkEditKeepSlideTemplate.TabIndex = 2;
+            // 
+            // labelControlSlideTemplate
+            // 
+            this.labelControlSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelControlSlideTemplate.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelControlSlideTemplate.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControlSlideTemplate.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControlSlideTemplate.Location = new System.Drawing.Point(316, 3);
+            this.labelControlSlideTemplate.Name = "labelControlSlideTemplate";
+            this.labelControlSlideTemplate.Size = new System.Drawing.Size(81, 27);
+            this.labelControlSlideTemplate.TabIndex = 3;
+            this.labelControlSlideTemplate.Text = "-or-";
             // 
             // FormPowerPointQuickViewOld
             // 
@@ -505,10 +502,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlides.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             this.pnSlideTemplate.ResumeLayout(false);
-            this.pnSlideTemplate.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEditKeepSlideTemplate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlideTemplate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditChangeSlideTemplate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditKeepSlideTemplate.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

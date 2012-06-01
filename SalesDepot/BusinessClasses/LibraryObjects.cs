@@ -725,6 +725,11 @@ namespace SalesDepot.BusinessClasses
         private string _note = string.Empty;
         private Image _widget = null;
 
+        #region Compatibility with old versions
+        private bool _oldEnableBanner;
+        private Image _oldBanner;
+        #endregion
+
         private bool _linkAvailabilityChecked = false;
         private bool _linkAvailabel = false;
 
@@ -742,8 +747,6 @@ namespace SalesDepot.BusinessClasses
         public bool IsDead { get; set; }
         public DateTime AddDate { get; set; }
         public bool EnableWidget { get; set; }
-        public bool EnableBanner { get; set; }
-        public Image Banner { get; set; }
         public string CriteriaOverlap { get; set; }
 
         public LibraryFileSearchTags SearchTags { get; set; }
@@ -751,6 +754,7 @@ namespace SalesDepot.BusinessClasses
         public PresentationPreviewContainer PreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
+        public BannerProperties BannerProperties { get; set; }
 
         public string RemotePath
         {
@@ -989,8 +993,6 @@ namespace SalesDepot.BusinessClasses
             result.AppendLine(@"<AddDate>" + this.AddDate + @"</AddDate>");
             result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-            result.AppendLine(@"<EnableBanner>" + this.EnableBanner + @"</EnableBanner>");
-            result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.Banner, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
             result.AppendLine(this.SearchTags.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
             if (this.PreviewContainer != null)
@@ -999,6 +1001,8 @@ namespace SalesDepot.BusinessClasses
                 result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
             if (this.LineBreakProperties != null)
                 result.AppendLine(@"<LineBreakProperties>" + this.LineBreakProperties.Serialize() + @"</LineBreakProperties>");
+            if (this.BannerProperties != null && this.BannerProperties.Configured)
+                result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
             return result.ToString();
         }
 
@@ -1058,16 +1062,6 @@ namespace SalesDepot.BusinessClasses
                         else if (!string.IsNullOrEmpty(childNode.InnerText))
                             _widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
-                    case "EnableBanner":
-                        if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.EnableBanner = tempBool;
-                        break;
-                    case "Banner":
-                        if (string.IsNullOrEmpty(childNode.InnerText))
-                            this.Banner = null;
-                        else
-                            this.Banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
-                        break;
                     case "SearchTags":
                         this.SearchTags.Deserialize(childNode);
                         break;
@@ -1086,14 +1080,48 @@ namespace SalesDepot.BusinessClasses
                         this.LineBreakProperties = new LineBreakProperties();
                         this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
                         this.LineBreakProperties.Deserialize(childNode);
-                        this.EnableBanner |= this.LineBreakProperties.EnableBanner;
-                        if (this.LineBreakProperties.Banner != null)
-                            this.Banner = this.LineBreakProperties.Banner;
                         break;
+                    case "BannerProperties":
+                        this.BannerProperties = new BannerProperties();
+                        this.BannerProperties.Deserialize(childNode);
+                        break;
+                    #region Compatibility with old versions
+                    case "EnableBanner":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            _oldEnableBanner = tempBool;
+                        break;
+                    case "Banner":
+                        if (string.IsNullOrEmpty(childNode.InnerText))
+                            _oldBanner = null;
+                        else
+                            _oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    #endregion
                 }
             }
+
+            if (this.BannerProperties == null)
+                InitBannerProperties();
+
             if (this.Type == FileTypes.Other || this.Type == FileTypes.MediaPlayerVideo || this.Type == FileTypes.QuickTimeVideo)
                 SetProperties();
+        }
+
+        public void InitBannerProperties()
+        {
+            this.BannerProperties = new BannerProperties();
+            this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
+            this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
+            this.BannerProperties.Text = this.DisplayName;
+
+            this.BannerProperties.Enable = _oldEnableBanner;
+            this.BannerProperties.Image = _oldBanner;
+            if (this.LineBreakProperties != null)
+            {
+                this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
+                if (this.LineBreakProperties.Banner != null)
+                    this.BannerProperties.Image = this.LineBreakProperties.Banner;
+            }
         }
 
         public void SetProperties()
@@ -1558,6 +1586,11 @@ namespace SalesDepot.BusinessClasses
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.ForeColor = Color.FromArgb(tempInt);
                         break;
+                    case "Note":
+                        this.Note = childNode.InnerText;
+                        break;
+
+                    #region Compatibility with old versions
                     case "EnableBanner":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.EnableBanner = tempBool;
@@ -1568,11 +1601,92 @@ namespace SalesDepot.BusinessClasses
                         else
                             this.Banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
-                    case "Note":
-                        this.Note = childNode.InnerText;
+                    #endregion
+                }
+            }
+        }
+    }
+
+    public class BannerProperties
+    {
+        public bool Configured { get; set; }
+
+        public bool Enable { get; set; }
+        public Image Image { get; set; }
+        public bool ShowText { get; set; }
+        public Alignment ImageAligement { get; set; }
+        public string Text { get; set; }
+        public Color ForeColor { get; set; }
+        public Font Font { get; set; }
+
+        public BannerProperties()
+        {
+            this.ForeColor = Color.Black;
+            this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            this.Text = string.Empty;
+        }
+
+        public string Serialize()
+        {
+            FontConverter fontConverter = new FontConverter();
+            TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
+            result.AppendLine(@"<Image>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Image>");
+            result.AppendLine(@"<ImageAligement>" + ((int)this.ImageAligement).ToString() + @"</ImageAligement>");
+            result.AppendLine(@"<ShowText>" + this.ShowText.ToString() + @"</ShowText>");
+            result.AppendLine(@"<Text>" + this.Text.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Text>");
+            result.AppendLine(@"<Font>" + fontConverter.ConvertToString(this.Font) + @"</Font>");
+            result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
+            return result.ToString();
+        }
+
+        public void Deserialize(XmlNode node)
+        {
+            FontConverter converter = new FontConverter();
+            int tempInt = 0;
+            bool tempBool = false;
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "Enable":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Enable = tempBool;
+                        break;
+                    case "Image":
+                        if (string.IsNullOrEmpty(childNode.InnerText))
+                            this.Image = null;
+                        else
+                            this.Image = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    case "ImageAligement":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.ImageAligement = (Alignment)tempInt;
+                        break;
+                    case "ShowText":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.ShowText = tempBool;
+                        break;
+                    case "Text":
+                        this.Text = childNode.InnerText;
+                        break;
+                    case "Font":
+                        try
+                        {
+                            this.Font = converter.ConvertFromString(childNode.InnerText) as Font;
+                        }
+                        catch
+                        {
+                        }
+                        break;
+                    case "ForeColor":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.ForeColor = Color.FromArgb(tempInt);
                         break;
                 }
             }
+            this.Configured = true;
         }
     }
 
@@ -1631,5 +1745,12 @@ namespace SalesDepot.BusinessClasses
         Excel,
         Word,
         OvernightsLink
+    }
+
+    public enum Alignment
+    {
+        Left = 0,
+        Center,
+        Right
     }
 }

@@ -9,10 +9,10 @@ namespace SalesDepot.PresentationClasses.WallBin
     [System.ComponentModel.ToolboxItem(false)]
     public partial class FolderBoxControl : UserControl
     {
-        private const int imageWidthMargin = 6;
-        private const int imageHeightMargin = 6;
-        private const int defaultImageWidth = 26;
-        private const int defaultImageHeight = 26;
+        private const int ImageWidthMargin = 6;
+        private const int ImageHeightMargin = 6;
+        private const int DefaultImageWidth = 26;
+        private const int DefaultImageHeight = 26;
 
         private Cursor storedCursor;
         private BusinessClasses.LibraryFolder _folder;
@@ -191,7 +191,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
         }
 
-        void grFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        private void grFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.ColumnIndex == 0)
             {
@@ -199,69 +199,93 @@ namespace SalesDepot.PresentationClasses.WallBin
                 if (file != null)
                 {
                     e.PaintBackground(e.CellBounds, true);
-                    _richTextControl.Text = string.Empty;
-                    _richTextControl.Font = file.Type == BusinessClasses.FileTypes.LineBreak ? file.LineBreakProperties.Font : (file.DisplayAsBold ? _noteFont : _textFont);
-                    if (!string.IsNullOrEmpty(file.Name))
-                    {
-                        _richTextControl.Text = file.DisplayName + file.Note;
-                        Size textSize = new Size(Int32.MaxValue, Int32.MaxValue);
-                        textSize = TextRenderer.MeasureText(_richTextControl.Text, file.Type == BusinessClasses.FileTypes.LineBreak ? file.LineBreakProperties.Font : _noteFont, textSize, TextFormatFlags.SingleLine);
-                        int columnWidth = textSize.Width + (_containsWidgets && (file.Type != BusinessClasses.FileTypes.LineBreak || file.Widget != null) ? ((file.Widget == null ? defaultImageWidth : file.Widget.Width) + imageWidthMargin) : 0);
-                        if (columnWidth > colDisplayName.Width)
-                        {
-                            SetGridSize();
-                            return;
-                        }
-                        _richTextControl.Height = textSize.Height;
-                        _richTextControl.Width = textSize.Width + 10;
 
-                        if (!string.IsNullOrEmpty(file.Note))
+                    #region Calculate Options
+                    Image image = null;
+                    int imageLeft = 0;
+                    int imageTop = 0;
+                    int imageWidth = 0;
+                    int imageHeight = 0;
+                    string text = string.Empty;
+                    int textLeft = 0;
+                    int textTop = 0;
+                    int textWidth = 0;
+                    int textHeight = 0;
+                    int columnWidth = 0;
+                    int rowHeight = 0;
+                    Color foreColor = Color.Black;
+                    Font font = null;
+
+                    GetLinkGUIValues(file
+                        , ref image
+                        , ref imageLeft
+                        , ref imageTop
+                        , ref imageWidth
+                        , ref imageHeight
+                        , ref text
+                        , ref textLeft
+                        , ref textTop
+                        , ref textWidth
+                        , ref textHeight
+                        , ref columnWidth
+                        , ref rowHeight
+                        , ref foreColor
+                        , ref font);
+
+                    if (columnWidth > colDisplayName.Width)
+                        colDisplayName.Width = columnWidth;
+
+                    if (rowHeight > grFiles.Rows[e.RowIndex].Height)
+                    {
+                        grFiles.Rows[e.RowIndex].Height = rowHeight;
+                        SetGridSize();
+                        if (this.Parent != null)
                         {
-                            _richTextControl.SelectionStart = file.DisplayName.Length;
-                            _richTextControl.SelectionLength = file.Note.Length;
-                            _richTextControl.SelectionFont = _noteFont;
+                            ((ColumnPanel)this.Parent).ResizePanel();
                         }
-                        if (grFiles.SelectedRows.Count > 0)
+                    }
+                    #endregion
+
+                    #region Build RichTextControl
+                    _richTextControl.Text = text;
+                    _richTextControl.Font = font;
+                    _richTextControl.Height = textHeight;
+                    _richTextControl.Width = textWidth;
+
+                    if (!string.IsNullOrEmpty(file.Note))
+                    {
+                        _richTextControl.SelectionStart = file.DisplayName.Length;
+                        _richTextControl.SelectionLength = file.Note.Length;
+                        _richTextControl.SelectionFont = _noteFont;
+                    }
+                    if (grFiles.SelectedRows.Count > 0)
+                    {
+                        if (grFiles.SelectedRows[0].Index == e.RowIndex)
                         {
-                            if (grFiles.SelectedRows[0].Index == e.RowIndex)
-                            {
-                                _richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
-                                _richTextControl.ForeColor = file.Type == BusinessClasses.FileTypes.LineBreak ? file.LineBreakProperties.ForeColor : grFiles.DefaultCellStyle.SelectionForeColor;
-                            }
-                            else
-                            {
-                                _richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-                                _richTextControl.ForeColor = file.Type == BusinessClasses.FileTypes.LineBreak ? file.LineBreakProperties.ForeColor : _richTextControl.ForeColor = grFiles.DefaultCellStyle.ForeColor;
-                            }
+                            _richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
+                            _richTextControl.ForeColor = grFiles.DefaultCellStyle.SelectionForeColor;
                         }
                         else
                         {
                             _richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-                            _richTextControl.ForeColor = file.Type == BusinessClasses.FileTypes.LineBreak ? file.LineBreakProperties.ForeColor : _richTextControl.ForeColor = grFiles.DefaultCellStyle.ForeColor;
+                            _richTextControl.ForeColor = foreColor;
                         }
-                    }
-
-                    if (file.EnableBanner && file.Banner != null)
-                    {
-                        e.Graphics.DrawImage(file.Banner,
-                        new Rectangle(e.CellBounds.X, e.CellBounds.Y + ((e.CellBounds.Height - file.Banner.Height) / 2), file.Banner.Width, file.Banner.Height));
                     }
                     else
                     {
-                        if (file.Widget != null)
-                        {
-                            e.Graphics.DrawImage(file.Widget,
-                            new Rectangle(e.CellBounds.X, e.CellBounds.Y + ((e.CellBounds.Height - file.Widget.Height) / 2), file.Widget.Width, file.Widget.Height));
-                        }
-                        int textLeftCoordinate = e.CellBounds.X + (file.Type == BusinessClasses.FileTypes.LineBreak ?
-                                (file.Widget != null ? file.Widget.Width + imageWidthMargin : 0) :
-                                (_containsWidgets ? ((file.Widget == null ? defaultImageWidth : file.Widget.Width) + imageWidthMargin) : 0));
-                        e.Graphics.DrawImage(RichTextBoxPrinter.Print(
-                            _richTextControl, _richTextControl.Width, _richTextControl.Height),
-                            new Rectangle(textLeftCoordinate, e.CellBounds.Y + ((e.CellBounds.Height - _richTextControl.Height) / 2), _richTextControl.Width, _richTextControl.Height));
+                        _richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
+                        _richTextControl.ForeColor = foreColor;
                     }
-                    e.Handled = true;
+                    #endregion
+
+                    #region Custom Draw
+                    if (image != null)
+                        e.Graphics.DrawImage(image, new Rectangle(e.CellBounds.X + imageLeft, e.CellBounds.Y + imageTop, imageWidth, imageHeight));
+                    if (!string.IsNullOrEmpty(text))
+                        e.Graphics.DrawImage(RichTextBoxPrinter.Print(_richTextControl, textWidth, textHeight), new Rectangle(e.CellBounds.X + textLeft, e.CellBounds.Y + textTop, textWidth, textHeight));
+                    #endregion
                 }
+                e.Handled = true;
             }
         }
         #endregion
@@ -279,57 +303,220 @@ namespace SalesDepot.PresentationClasses.WallBin
             grFiles.ScrollBars = ScrollBars.Horizontal;
         }
 
+        private void GetLinkGUIValues(BusinessClasses.LibraryFile file
+    , ref Image image
+    , ref int imageLeft
+    , ref int imageTop
+    , ref int imageWidth
+    , ref int imageHeight
+    , ref string text
+    , ref int textLeft
+    , ref int textTop
+    , ref int textWidth
+    , ref int textHeight
+    , ref int columnWidth
+    , ref int columnHeight
+    , ref Color foreColor
+    , ref Font font)
+        {
+
+            #region Image
+            if (file.BannerProperties.Enable && file.BannerProperties.Image != null)
+                image = file.BannerProperties.Image;
+            else if (file.Widget != null)
+                image = file.Widget;
+            else
+                image = null;
+            #endregion
+
+            #region Image Size and Coordinates
+            imageLeft = 0;
+            imageTop = 0;
+            imageHeight = 0;
+            imageWidth = 0;
+            if (file.BannerProperties.Enable && file.BannerProperties.Image != null)
+            {
+                if (file.BannerProperties.ShowText)
+                {
+                    imageLeft = 0;
+                }
+                else
+                {
+                    switch (file.BannerProperties.ImageAligement)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            imageLeft = 0;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            imageLeft = (grFiles.Width - file.BannerProperties.Image.Width) / 2;
+                            if (imageLeft < 0)
+                                imageLeft = 0;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            imageLeft = grFiles.Width - file.BannerProperties.Image.Width;
+                            if (imageLeft < 0)
+                                imageLeft = 0;
+                            break;
+                        default:
+                            imageLeft = 0;
+                            break;
+                    }
+                }
+                imageWidth = file.BannerProperties.Image.Width > DefaultImageWidth ? file.BannerProperties.Image.Width : DefaultImageWidth;
+                imageHeight = file.BannerProperties.Image.Height > DefaultImageHeight ? file.BannerProperties.Image.Height : DefaultImageHeight;
+            }
+            else if (file.Widget != null)
+            {
+                imageLeft = 0;
+                imageWidth = file.Widget.Width > DefaultImageWidth ? file.Widget.Width : DefaultImageWidth;
+                imageHeight = file.Widget.Height > DefaultImageHeight ? file.Widget.Height : DefaultImageHeight;
+            }
+            else
+            {
+                imageLeft = 0;
+                imageWidth = file.Type == BusinessClasses.FileTypes.LineBreak || !_containsWidgets ? 0 : DefaultImageWidth;
+                imageHeight = DefaultImageHeight;
+            }
+            #endregion
+
+            #region Text
+            text = string.Empty;
+            if (file.BannerProperties.Enable)
+            {
+                if (file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
+                    text = file.BannerProperties.Text;
+            }
+            else
+                text = file.DisplayName + file.Note;
+            #endregion
+
+            #region Font
+            if (file.BannerProperties.Enable && file.BannerProperties.ShowText)
+                font = file.BannerProperties.Font;
+            else if (file.Type == BusinessClasses.FileTypes.LineBreak)
+                font = file.LineBreakProperties.Font;
+            else
+                font = file.DisplayAsBold ? _noteFont : _textFont;
+            #endregion
+
+            #region Text Size and Coordinates
+            Size textSize;
+            if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
+            {
+                textSize = new Size(Int32.MaxValue, Int32.MaxValue);
+                textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.Default);
+            }
+            else
+            {
+                textSize = new Size(Int32.MaxValue, Int32.MaxValue);
+                textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.SingleLine | TextFormatFlags.NoPrefix);
+            }
+
+            if (file.BannerProperties.Enable)
+            {
+                textLeft = imageLeft + imageWidth;
+                textWidth = textSize.Width;
+                textHeight = textSize.Height;
+            }
+            else if (file.Type == BusinessClasses.FileTypes.LineBreak)
+            {
+                textLeft = imageLeft + imageWidth + ImageWidthMargin;
+                textWidth = textSize.Width;
+                textHeight = textSize.Height + ImageWidthMargin;
+            }
+            else
+            {
+                textLeft = imageLeft + imageWidth + (_containsWidgets ? ImageWidthMargin : 0);
+                textWidth = textSize.Width;
+                textHeight = textSize.Height + ImageWidthMargin;
+            }
+
+            columnWidth = textLeft + textWidth + 10;
+            #endregion
+
+            #region Fore Color
+            if (file.BannerProperties.Enable && file.BannerProperties.ShowText)
+                foreColor = file.BannerProperties.ForeColor;
+            else if (file.Type == BusinessClasses.FileTypes.LineBreak)
+                foreColor = file.LineBreakProperties.ForeColor;
+            else
+                foreColor = grFiles.DefaultCellStyle.ForeColor;
+            #endregion
+
+            #region Correct Image and text coordinates
+            if (textHeight > imageHeight)
+            {
+                textTop = 0;
+                imageTop = (textHeight - imageHeight) / 2;
+            }
+            else if (textHeight == imageHeight)
+            {
+                textTop = 0;
+                imageTop = 0;
+            }
+            else
+            {
+                textTop = (imageHeight - textHeight) / 2;
+                imageTop = 0;
+            }
+            columnHeight = textHeight > imageHeight ? textHeight : imageHeight;
+            #endregion
+        }
+
         private void SetGridSize()
         {
+            pnMain.BorderStyle = System.Windows.Forms.BorderStyle.None;
             int height = 0;
             int maxColumnWidth = 0;
-
-            pnMain.BorderStyle = System.Windows.Forms.BorderStyle.None;
-
-            Size labelSize = new Size(laFolderName.Width, Int32.MaxValue);
-            laFolderName.Height = TextRenderer.MeasureText(laFolderName.Text, laFolderName.Font, labelSize, TextFormatFlags.WordBreak).Height + 10;
-            laIndex.Height = laFolderName.Height;
-
             foreach (DataGridViewRow row in grFiles.Rows)
             {
                 BusinessClasses.LibraryFile file = row.Tag as BusinessClasses.LibraryFile;
                 if (file != null)
                 {
-                    string text = file.DisplayName + file.Note;
-                    Size textSize = new Size(Int32.MaxValue, Int32.MaxValue);
-                    textSize = TextRenderer.MeasureText(text, file.Type == BusinessClasses.FileTypes.LineBreak ? file.LineBreakProperties.Font : _noteFont, textSize, TextFormatFlags.SingleLine);
-                    int columnWidth = textSize.Width + (_containsWidgets && (file.Type != BusinessClasses.FileTypes.LineBreak || file.Widget != null) ? ((file.Widget == null ? defaultImageWidth : file.Widget.Width) + imageWidthMargin) : 0);
+                    Image image = null;
+                    int imageLeft = 0;
+                    int imageTop = 0;
+                    int imageWidth = 0;
+                    int imageHeight = 0;
+                    string text = string.Empty;
+                    int textLeft = 0;
+                    int textTop = 0;
+                    int textWidth = 0;
+                    int textHeight = 0;
+                    int columnWidth = 0;
                     int rowHeight = 0;
-                    if (file.EnableBanner && file.Banner != null)
-                        rowHeight = file.Banner.Height > (defaultImageHeight + imageHeightMargin) ? file.Banner.Height : (defaultImageHeight + imageHeightMargin);
-                    else if (file.Type != BusinessClasses.FileTypes.LineBreak)
-                    {
-                        rowHeight = (textSize.Height > (defaultImageHeight + imageHeightMargin) ? textSize.Height : (defaultImageHeight + imageHeightMargin));
-                    }
-                    else
-                    {
-                        if (file.Widget != null)
-                        {
-                            rowHeight = file.Widget.Height > (defaultImageHeight + imageHeightMargin) ? file.Widget.Height : (defaultImageHeight + imageHeightMargin);
-                            rowHeight = rowHeight > textSize.Height ? rowHeight : textSize.Height;
-                        }
-                        else
-                            rowHeight = textSize.Height > (defaultImageHeight + imageHeightMargin) ? textSize.Height : (defaultImageHeight + imageHeightMargin);
-                    }
+                    Color foreColor = Color.Black;
+                    Font font = null;
+
+                    GetLinkGUIValues(file
+                        , ref image
+                        , ref imageLeft
+                        , ref imageTop
+                        , ref imageWidth
+                        , ref imageHeight
+                        , ref text
+                        , ref textLeft
+                        , ref textTop
+                        , ref textWidth
+                        , ref textHeight
+                        , ref columnWidth
+                        , ref rowHeight
+                        , ref foreColor
+                        , ref font);
+
                     row.Height = rowHeight;
                     if (maxColumnWidth < columnWidth)
                         maxColumnWidth = columnWidth;
                 }
-                height += row.Height;
+                height = height + row.Height;
             }
             height += +(int)(_noteFont.Size + 5);
             if (height < 90)
                 height = 90;
             height = height + laFolderName.Height;
 
-            this.Height = height + (ConfigurationClasses.SettingsManager.Instance.ListView ? (pnBottom.Height + pnTop.Height) : 0);
-            colDisplayName.Width = maxColumnWidth > (grFiles.Width - 20) ? maxColumnWidth : (grFiles.Width - 20);
-
+            this.Height = height;
+            colDisplayName.Width = maxColumnWidth > (grFiles.Width - 10) ? maxColumnWidth : (grFiles.Width - 10);
             pnMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
 

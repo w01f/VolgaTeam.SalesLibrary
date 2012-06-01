@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -13,6 +14,12 @@ namespace SalesDepot.ToolForms.WallBin
         public FormPowerPointQuickView()
         {
             InitializeComponent();
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                checkEditChangeSlideTemplate.Font = new System.Drawing.Font(checkEditChangeSlideTemplate.Font.FontFamily, checkEditChangeSlideTemplate.Font.Size - 1, checkEditChangeSlideTemplate.Font.Style);
+                checkEditKeepSlideTemplate.Font = new System.Drawing.Font(checkEditKeepSlideTemplate.Font.FontFamily, checkEditKeepSlideTemplate.Font.Size - 1, checkEditKeepSlideTemplate.Font.Style);
+                labelControlSlideTemplate.Font = new System.Drawing.Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
+            }
         }
 
         #region Form GUI Event Habdlers
