@@ -33,6 +33,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                 PageDecorator pageDecorator = new PageDecorator(page);
                 pageDecorator.Parent = this;
                 this.Pages.Add(pageDecorator);
+                Application.DoEvents();
             }
         }
 

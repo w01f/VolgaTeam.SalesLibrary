@@ -31,7 +31,10 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         {
             this.Decorators.Clear();
             foreach (BusinessClasses.Library library in BusinessClasses.LibraryManager.Instance.LibraryCollection)
+            {
+                Application.DoEvents();
                 this.Decorators.Add(new PresentationClasses.WallBin.Decorators.LibraryDecorator(library));
+            }
         }
 
         public void BuildOvernightsCalendars()

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WallBinTreeListControl));
             this.tcSalesDepotFiles = new System.Windows.Forms.TabControl();
             this.tpDefault = new System.Windows.Forms.TabPage();
@@ -35,7 +36,7 @@
             this.treeListAllFiles = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumnPath = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.imageListFiles = new System.Windows.Forms.ImageList();
+            this.imageListFiles = new System.Windows.Forms.ImageList(this.components);
             this.tpSearch = new System.Windows.Forms.TabPage();
             this.pnFilesByKeyWord = new System.Windows.Forms.Panel();
             this.treeListSearchFiles = new DevExpress.XtraTreeList.TreeList();
@@ -58,7 +59,7 @@
             this.gbTreeViewOptions = new System.Windows.Forms.GroupBox();
             this.laDoubleClick = new System.Windows.Forms.Label();
             this.btRefresh = new System.Windows.Forms.Button();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.tcSalesDepotFiles.SuspendLayout();
             this.tpDefault.SuspendLayout();
@@ -264,8 +265,8 @@
             // 
             // gbDateRange
             // 
-            this.gbDateRange.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDateRange.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDateRange.Controls.Add(this.laEndDate);
             this.gbDateRange.Controls.Add(this.dtEndDate);
             this.gbDateRange.Controls.Add(this.laStartDate);
@@ -331,8 +332,8 @@
             // 
             // edKeyWord
             // 
-            this.edKeyWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.edKeyWord.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.edKeyWord.Location = new System.Drawing.Point(1, 4);
             this.edKeyWord.Name = "edKeyWord";
             this.edKeyWord.Size = new System.Drawing.Size(254, 22);
@@ -362,9 +363,9 @@
             // 
             // gbTreeViewProgress
             // 
-            this.gbTreeViewProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbTreeViewProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbTreeViewProgress.Controls.Add(this.pgTreeViewProgress);
             this.gbTreeViewProgress.Controls.Add(this.laTreeViewProgressLable);
             this.gbTreeViewProgress.Location = new System.Drawing.Point(6, 3);
@@ -375,8 +376,8 @@
             // 
             // pgTreeViewProgress
             // 
-            this.pgTreeViewProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pgTreeViewProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pgTreeViewProgress.Location = new System.Drawing.Point(8, 34);
             this.pgTreeViewProgress.Name = "pgTreeViewProgress";
             this.pgTreeViewProgress.Size = new System.Drawing.Size(242, 19);
@@ -385,8 +386,8 @@
             // 
             // laTreeViewProgressLable
             // 
-            this.laTreeViewProgressLable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.laTreeViewProgressLable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.laTreeViewProgressLable.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laTreeViewProgressLable.Location = new System.Drawing.Point(8, 12);
             this.laTreeViewProgressLable.Name = "laTreeViewProgressLable";
@@ -405,9 +406,9 @@
             // 
             // gbTreeViewOptions
             // 
-            this.gbTreeViewOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbTreeViewOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbTreeViewOptions.Controls.Add(this.laDoubleClick);
             this.gbTreeViewOptions.Controls.Add(this.btRefresh);
             this.gbTreeViewOptions.Location = new System.Drawing.Point(5, 2);
@@ -418,14 +419,15 @@
             // 
             // laDoubleClick
             // 
-            this.laDoubleClick.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.laDoubleClick.AutoSize = true;
+            this.laDoubleClick.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.laDoubleClick.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laDoubleClick.Location = new System.Drawing.Point(103, 14);
+            this.laDoubleClick.Location = new System.Drawing.Point(82, 11);
             this.laDoubleClick.Name = "laDoubleClick";
-            this.laDoubleClick.Size = new System.Drawing.Size(146, 17);
+            this.laDoubleClick.Size = new System.Drawing.Size(167, 23);
             this.laDoubleClick.TabIndex = 3;
             this.laDoubleClick.Text = "Double Click to Open";
+            this.laDoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btRefresh
             // 
@@ -479,7 +481,6 @@
             this.gbTreeViewProgress.ResumeLayout(false);
             this.pnTreeViewOptions.ResumeLayout(false);
             this.gbTreeViewOptions.ResumeLayout(false);
-            this.gbTreeViewOptions.PerformLayout();
             this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 

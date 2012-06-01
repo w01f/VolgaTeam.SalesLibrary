@@ -9,6 +9,13 @@ namespace FileManager.ToolForms.Settings
         public FormEmailList()
         {
             InitializeComponent();
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laDescription.Font = new System.Drawing.Font(laDescription.Font.FontFamily, laDescription.Font.Size - 2, laDescription.Font.Style);
+                laTitle.Font = new System.Drawing.Font(laTitle.Font.FontFamily, laTitle.Font.Size - 2, laTitle.Font.Style);
+                radioButtonCreateEmail.Font = new System.Drawing.Font(radioButtonCreateEmail.Font.FontFamily, radioButtonCreateEmail.Font.Size - 2, radioButtonCreateEmail.Font.Style);
+                radioButtonSendEmail.Font = new System.Drawing.Font(radioButtonSendEmail.Font.FontFamily, radioButtonSendEmail.Font.Size - 2, radioButtonSendEmail.Font.Style);
+            }
         }
 
         private void Form_Load(object sender, EventArgs e)

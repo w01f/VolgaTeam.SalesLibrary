@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLinkProperties));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.gbNotes = new System.Windows.Forms.GroupBox();
             this.edCustomNote = new System.Windows.Forms.TextBox();
             this.rbCustomNote = new System.Windows.Forms.RadioButton();
@@ -43,7 +44,7 @@
             this.groupBoxNotes = new System.Windows.Forms.GroupBox();
             this.rbBold = new System.Windows.Forms.RadioButton();
             this.rbRegular = new System.Windows.Forms.RadioButton();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageNotes = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPageSearchTags = new DevExpress.XtraTab.XtraTabPage();
@@ -82,11 +83,11 @@
             this.checkBoxEnableExpiredLinks = new System.Windows.Forms.CheckBox();
             this.xtraTabPageLineBrealProperties = new DevExpress.XtraTab.XtraTabPage();
             this.memoEditNote = new DevExpress.XtraEditors.MemoEdit();
-            this.styleController = new DevExpress.XtraEditors.StyleController();
+            this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
             this.laNote = new System.Windows.Forms.Label();
             this.laFont = new System.Windows.Forms.Label();
-            this.buttonEditFont = new DevExpress.XtraEditors.ButtonEdit();
-            this.colorEditFont = new DevExpress.XtraEditors.ColorEdit();
+            this.buttonEditLineBreakFont = new DevExpress.XtraEditors.ButtonEdit();
+            this.colorEditLineBreakFontColor = new DevExpress.XtraEditors.ColorEdit();
             this.laFontColor = new System.Windows.Forms.Label();
             this.xtraTabPageWidgets = new DevExpress.XtraTab.XtraTabPage();
             this.groupBoxWidgets = new System.Windows.Forms.GroupBox();
@@ -96,13 +97,21 @@
             this.repositoryItemPictureEditImage = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             this.layoutViewField_gridColumnImage_1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
-            this.toolTipController = new DevExpress.Utils.ToolTipController();
+            this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
             this.pbSelectedWidget = new System.Windows.Forms.PictureBox();
             this.laAvailableWidgets = new System.Windows.Forms.Label();
             this.laSelectedWidget = new System.Windows.Forms.Label();
             this.checkBoxEnableWidget = new System.Windows.Forms.CheckBox();
             this.xtraTabPageBanner = new DevExpress.XtraTab.XtraTabPage();
             this.groupBoxBanners = new System.Windows.Forms.GroupBox();
+            this.colorEditBannerTextColor = new DevExpress.XtraEditors.ColorEdit();
+            this.buttonEditBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
+            this.memoEditBannerText = new DevExpress.XtraEditors.MemoEdit();
+            this.checkBoxBannerShowText = new System.Windows.Forms.CheckBox();
+            this.rbBannerAligmentRight = new System.Windows.Forms.RadioButton();
+            this.rbBannerAligmentCenter = new System.Windows.Forms.RadioButton();
+            this.rbBannerAligmentLeft = new System.Windows.Forms.RadioButton();
+            this.laBannerAligment = new System.Windows.Forms.Label();
             this.gridControlBanners = new DevExpress.XtraGrid.GridControl();
             this.gridViewBanners = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnBanner = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -142,8 +151,8 @@
             this.xtraTabPageLineBrealProperties.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoEditNote.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEditFont.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditFont.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditLineBreakFont.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditLineBreakFontColor.Properties)).BeginInit();
             this.xtraTabPageWidgets.SuspendLayout();
             this.groupBoxWidgets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlWidgets)).BeginInit();
@@ -154,6 +163,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSelectedWidget)).BeginInit();
             this.xtraTabPageBanner.SuspendLayout();
             this.groupBoxBanners.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlBanners)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBanners)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditBanner)).BeginInit();
@@ -162,6 +174,8 @@
             // 
             // gbNotes
             // 
+            this.gbNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbNotes.Controls.Add(this.edCustomNote);
             this.gbNotes.Controls.Add(this.rbCustomNote);
             this.gbNotes.Controls.Add(this.rbNone);
@@ -171,18 +185,18 @@
             this.gbNotes.Controls.Add(this.rbNew);
             this.gbNotes.Location = new System.Drawing.Point(3, 3);
             this.gbNotes.Name = "gbNotes";
-            this.gbNotes.Size = new System.Drawing.Size(340, 264);
+            this.gbNotes.Size = new System.Drawing.Size(383, 264);
             this.gbNotes.TabIndex = 0;
             this.gbNotes.TabStop = false;
             // 
             // edCustomNote
             // 
-            this.edCustomNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.edCustomNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.edCustomNote.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.edCustomNote.Location = new System.Drawing.Point(25, 225);
             this.edCustomNote.Name = "edCustomNote";
-            this.edCustomNote.Size = new System.Drawing.Size(309, 26);
+            this.edCustomNote.Size = new System.Drawing.Size(352, 26);
             this.edCustomNote.TabIndex = 6;
             // 
             // rbCustomNote
@@ -268,7 +282,7 @@
             this.btOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btOK.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btOK.Location = new System.Drawing.Point(11, 370);
+            this.btOK.Location = new System.Drawing.Point(11, 554);
             this.btOK.Name = "btOK";
             this.btOK.Size = new System.Drawing.Size(75, 30);
             this.btOK.TabIndex = 1;
@@ -281,7 +295,7 @@
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btCancel.Location = new System.Drawing.Point(269, 370);
+            this.btCancel.Location = new System.Drawing.Point(312, 554);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(75, 30);
             this.btCancel.TabIndex = 2;
@@ -290,13 +304,15 @@
             // 
             // groupBoxNotes
             // 
+            this.groupBoxNotes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxNotes.Controls.Add(this.rbBold);
             this.groupBoxNotes.Controls.Add(this.rbRegular);
             this.groupBoxNotes.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxNotes.ForeColor = System.Drawing.Color.Black;
             this.groupBoxNotes.Location = new System.Drawing.Point(3, 273);
             this.groupBoxNotes.Name = "groupBoxNotes";
-            this.groupBoxNotes.Size = new System.Drawing.Size(340, 47);
+            this.groupBoxNotes.Size = new System.Drawing.Size(383, 47);
             this.groupBoxNotes.TabIndex = 3;
             this.groupBoxNotes.TabStop = false;
             this.groupBoxNotes.Text = "Line Text Format";
@@ -306,7 +322,7 @@
             this.rbBold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rbBold.AutoSize = true;
             this.rbBold.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rbBold.Location = new System.Drawing.Point(272, 21);
+            this.rbBold.Location = new System.Drawing.Point(315, 21);
             this.rbBold.Name = "rbBold";
             this.rbBold.Size = new System.Drawing.Size(62, 20);
             this.rbBold.TabIndex = 1;
@@ -347,7 +363,7 @@
             this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl.Name = "xtraTabControl";
             this.xtraTabControl.SelectedTabPage = this.xtraTabPageNotes;
-            this.xtraTabControl.Size = new System.Drawing.Size(356, 365);
+            this.xtraTabControl.Size = new System.Drawing.Size(399, 546);
             this.xtraTabControl.TabIndex = 4;
             this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageNotes,
@@ -362,14 +378,14 @@
             this.xtraTabPageNotes.Controls.Add(this.gbNotes);
             this.xtraTabPageNotes.Controls.Add(this.groupBoxNotes);
             this.xtraTabPageNotes.Name = "xtraTabPageNotes";
-            this.xtraTabPageNotes.Size = new System.Drawing.Size(354, 339);
+            this.xtraTabPageNotes.Size = new System.Drawing.Size(397, 520);
             this.xtraTabPageNotes.Text = "Notes";
             // 
             // xtraTabPageSearchTags
             // 
             this.xtraTabPageSearchTags.Controls.Add(this.navBarControlSearchTags);
             this.xtraTabPageSearchTags.Name = "xtraTabPageSearchTags";
-            this.xtraTabPageSearchTags.Size = new System.Drawing.Size(354, 339);
+            this.xtraTabPageSearchTags.Size = new System.Drawing.Size(397, 520);
             this.xtraTabPageSearchTags.Text = "Search Tags";
             // 
             // navBarControlSearchTags
@@ -404,7 +420,7 @@
             this.navBarControlSearchTags.Location = new System.Drawing.Point(0, 0);
             this.navBarControlSearchTags.Name = "navBarControlSearchTags";
             this.navBarControlSearchTags.OptionsNavPane.ExpandedWidth = 200;
-            this.navBarControlSearchTags.Size = new System.Drawing.Size(354, 339);
+            this.navBarControlSearchTags.Size = new System.Drawing.Size(397, 520);
             this.navBarControlSearchTags.TabIndex = 0;
             this.navBarControlSearchTags.Text = "navBarControl1";
             // 
@@ -610,11 +626,14 @@
             this.xtraTabPageExpiredLinks.Controls.Add(this.checkBoxEnableExpiredLinks);
             this.xtraTabPageExpiredLinks.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.xtraTabPageExpiredLinks.Name = "xtraTabPageExpiredLinks";
-            this.xtraTabPageExpiredLinks.Size = new System.Drawing.Size(354, 339);
+            this.xtraTabPageExpiredLinks.Size = new System.Drawing.Size(397, 520);
             this.xtraTabPageExpiredLinks.Text = "Expiration Date";
             // 
             // gbExpiredLinks
             // 
+            this.gbExpiredLinks.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbExpiredLinks.Controls.Add(this.checkBoxLabelLink);
             this.gbExpiredLinks.Controls.Add(this.timeEditExpirationTime);
             this.gbExpiredLinks.Controls.Add(this.checkBoxSendEmailWhenDelete);
@@ -626,7 +645,7 @@
             this.gbExpiredLinks.Enabled = false;
             this.gbExpiredLinks.Location = new System.Drawing.Point(11, 37);
             this.gbExpiredLinks.Name = "gbExpiredLinks";
-            this.gbExpiredLinks.Size = new System.Drawing.Size(332, 290);
+            this.gbExpiredLinks.Size = new System.Drawing.Size(375, 471);
             this.gbExpiredLinks.TabIndex = 1;
             this.gbExpiredLinks.TabStop = false;
             // 
@@ -676,7 +695,6 @@
             // 
             // dateEditExpirationDate
             // 
-            this.dateEditExpirationDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateEditExpirationDate.EditValue = null;
             this.dateEditExpirationDate.Location = new System.Drawing.Point(9, 93);
             this.dateEditExpirationDate.Name = "dateEditExpirationDate";
@@ -684,7 +702,7 @@
             this.dateEditExpirationDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dateEditExpirationDate.Properties.Appearance.Options.UseFont = true;
             this.dateEditExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditExpirationDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditExpirationDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.dateEditExpirationDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
             this.dateEditExpirationDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
             this.dateEditExpirationDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
@@ -747,18 +765,21 @@
             this.xtraTabPageLineBrealProperties.Controls.Add(this.memoEditNote);
             this.xtraTabPageLineBrealProperties.Controls.Add(this.laNote);
             this.xtraTabPageLineBrealProperties.Controls.Add(this.laFont);
-            this.xtraTabPageLineBrealProperties.Controls.Add(this.buttonEditFont);
-            this.xtraTabPageLineBrealProperties.Controls.Add(this.colorEditFont);
+            this.xtraTabPageLineBrealProperties.Controls.Add(this.buttonEditLineBreakFont);
+            this.xtraTabPageLineBrealProperties.Controls.Add(this.colorEditLineBreakFontColor);
             this.xtraTabPageLineBrealProperties.Controls.Add(this.laFontColor);
             this.xtraTabPageLineBrealProperties.Name = "xtraTabPageLineBrealProperties";
-            this.xtraTabPageLineBrealProperties.Size = new System.Drawing.Size(354, 339);
+            this.xtraTabPageLineBrealProperties.Size = new System.Drawing.Size(397, 520);
             this.xtraTabPageLineBrealProperties.Text = "Info";
             // 
             // memoEditNote
             // 
+            this.memoEditNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.memoEditNote.Location = new System.Drawing.Point(98, 94);
             this.memoEditNote.Name = "memoEditNote";
-            this.memoEditNote.Size = new System.Drawing.Size(245, 231);
+            this.memoEditNote.Size = new System.Drawing.Size(288, 412);
             this.memoEditNote.StyleController = this.styleController;
             this.memoEditNote.TabIndex = 33;
             // 
@@ -797,31 +818,32 @@
             this.laFont.TabIndex = 30;
             this.laFont.Text = "Font";
             // 
-            // buttonEditFont
+            // buttonEditLineBreakFont
             // 
-            this.buttonEditFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEditFont.Location = new System.Drawing.Point(98, 15);
-            this.buttonEditFont.Name = "buttonEditFont";
-            this.buttonEditFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.buttonEditLineBreakFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditLineBreakFont.Location = new System.Drawing.Point(98, 15);
+            this.buttonEditLineBreakFont.Name = "buttonEditLineBreakFont";
+            this.buttonEditLineBreakFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEditFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.buttonEditFont.Size = new System.Drawing.Size(252, 22);
-            this.buttonEditFont.StyleController = this.styleController;
-            this.buttonEditFont.TabIndex = 29;
-            this.buttonEditFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
-            this.buttonEditFont.Click += new System.EventHandler(this.FontEdit_Click);
+            this.buttonEditLineBreakFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEditLineBreakFont.Size = new System.Drawing.Size(288, 22);
+            this.buttonEditLineBreakFont.StyleController = this.styleController;
+            this.buttonEditLineBreakFont.TabIndex = 29;
+            this.buttonEditLineBreakFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
+            this.buttonEditLineBreakFont.Click += new System.EventHandler(this.FontEdit_Click);
             // 
-            // colorEditFont
+            // colorEditLineBreakFontColor
             // 
-            this.colorEditFont.EditValue = System.Drawing.Color.Empty;
-            this.colorEditFont.Location = new System.Drawing.Point(98, 55);
-            this.colorEditFont.Name = "colorEditFont";
-            this.colorEditFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.colorEditLineBreakFontColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditLineBreakFontColor.Location = new System.Drawing.Point(98, 54);
+            this.colorEditLineBreakFontColor.Name = "colorEditLineBreakFontColor";
+            this.colorEditLineBreakFontColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorEditFont.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colorEditFont.Size = new System.Drawing.Size(105, 20);
-            this.colorEditFont.TabIndex = 26;
+            this.colorEditLineBreakFontColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditLineBreakFontColor.Size = new System.Drawing.Size(105, 22);
+            this.colorEditLineBreakFontColor.StyleController = this.styleController;
+            this.colorEditLineBreakFontColor.TabIndex = 26;
             // 
             // laFontColor
             // 
@@ -838,11 +860,14 @@
             this.xtraTabPageWidgets.Controls.Add(this.groupBoxWidgets);
             this.xtraTabPageWidgets.Controls.Add(this.checkBoxEnableWidget);
             this.xtraTabPageWidgets.Name = "xtraTabPageWidgets";
-            this.xtraTabPageWidgets.Size = new System.Drawing.Size(354, 339);
+            this.xtraTabPageWidgets.Size = new System.Drawing.Size(397, 520);
             this.xtraTabPageWidgets.Text = "Widget";
             // 
             // groupBoxWidgets
             // 
+            this.groupBoxWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxWidgets.Controls.Add(this.gridControlWidgets);
             this.groupBoxWidgets.Controls.Add(this.pbSelectedWidget);
             this.groupBoxWidgets.Controls.Add(this.laAvailableWidgets);
@@ -850,18 +875,21 @@
             this.groupBoxWidgets.Enabled = false;
             this.groupBoxWidgets.Location = new System.Drawing.Point(11, 37);
             this.groupBoxWidgets.Name = "groupBoxWidgets";
-            this.groupBoxWidgets.Size = new System.Drawing.Size(332, 290);
+            this.groupBoxWidgets.Size = new System.Drawing.Size(375, 467);
             this.groupBoxWidgets.TabIndex = 3;
             this.groupBoxWidgets.TabStop = false;
             // 
             // gridControlWidgets
             // 
+            this.gridControlWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gridControlWidgets.Location = new System.Drawing.Point(9, 79);
             this.gridControlWidgets.MainView = this.layoutViewWidgets;
             this.gridControlWidgets.Name = "gridControlWidgets";
             this.gridControlWidgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditImage});
-            this.gridControlWidgets.Size = new System.Drawing.Size(317, 205);
+            this.gridControlWidgets.Size = new System.Drawing.Size(360, 382);
             this.gridControlWidgets.TabIndex = 4;
             this.gridControlWidgets.ToolTipController = this.toolTipController;
             this.gridControlWidgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -1014,11 +1042,22 @@
             this.xtraTabPageBanner.Controls.Add(this.groupBoxBanners);
             this.xtraTabPageBanner.Controls.Add(this.checkBoxEnableBanner);
             this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-            this.xtraTabPageBanner.Size = new System.Drawing.Size(354, 339);
+            this.xtraTabPageBanner.Size = new System.Drawing.Size(397, 520);
             this.xtraTabPageBanner.Text = "Banner";
             // 
             // groupBoxBanners
             // 
+            this.groupBoxBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxBanners.Controls.Add(this.colorEditBannerTextColor);
+            this.groupBoxBanners.Controls.Add(this.buttonEditBannerTextFont);
+            this.groupBoxBanners.Controls.Add(this.memoEditBannerText);
+            this.groupBoxBanners.Controls.Add(this.checkBoxBannerShowText);
+            this.groupBoxBanners.Controls.Add(this.rbBannerAligmentRight);
+            this.groupBoxBanners.Controls.Add(this.rbBannerAligmentCenter);
+            this.groupBoxBanners.Controls.Add(this.rbBannerAligmentLeft);
+            this.groupBoxBanners.Controls.Add(this.laBannerAligment);
             this.groupBoxBanners.Controls.Add(this.gridControlBanners);
             this.groupBoxBanners.Controls.Add(this.pbSelectedBanner);
             this.groupBoxBanners.Controls.Add(this.laAvailableBanners);
@@ -1026,9 +1065,99 @@
             this.groupBoxBanners.Enabled = false;
             this.groupBoxBanners.Location = new System.Drawing.Point(11, 37);
             this.groupBoxBanners.Name = "groupBoxBanners";
-            this.groupBoxBanners.Size = new System.Drawing.Size(332, 290);
+            this.groupBoxBanners.Size = new System.Drawing.Size(375, 468);
             this.groupBoxBanners.TabIndex = 5;
             this.groupBoxBanners.TabStop = false;
+            // 
+            // colorEditBannerTextColor
+            // 
+            this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditBannerTextColor.Enabled = false;
+            this.colorEditBannerTextColor.Location = new System.Drawing.Point(264, 432);
+            this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
+            this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEditBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditBannerTextColor.Size = new System.Drawing.Size(105, 22);
+            this.colorEditBannerTextColor.StyleController = this.styleController;
+            this.colorEditBannerTextColor.TabIndex = 32;
+            // 
+            // buttonEditBannerTextFont
+            // 
+            this.buttonEditBannerTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditBannerTextFont.Enabled = false;
+            this.buttonEditBannerTextFont.Location = new System.Drawing.Point(10, 432);
+            this.buttonEditBannerTextFont.Name = "buttonEditBannerTextFont";
+            this.buttonEditBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.buttonEditBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEditBannerTextFont.Size = new System.Drawing.Size(238, 22);
+            this.buttonEditBannerTextFont.StyleController = this.styleController;
+            this.buttonEditBannerTextFont.TabIndex = 31;
+            this.buttonEditBannerTextFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
+            this.buttonEditBannerTextFont.Click += new System.EventHandler(this.FontEdit_Click);
+            // 
+            // memoEditBannerText
+            // 
+            this.memoEditBannerText.Enabled = false;
+            this.memoEditBannerText.Location = new System.Drawing.Point(9, 377);
+            this.memoEditBannerText.Name = "memoEditBannerText";
+            this.memoEditBannerText.Size = new System.Drawing.Size(360, 49);
+            this.memoEditBannerText.StyleController = this.styleController;
+            this.memoEditBannerText.TabIndex = 10;
+            // 
+            // checkBoxBannerShowText
+            // 
+            this.checkBoxBannerShowText.AutoSize = true;
+            this.checkBoxBannerShowText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+            this.checkBoxBannerShowText.Location = new System.Drawing.Point(9, 351);
+            this.checkBoxBannerShowText.Name = "checkBoxBannerShowText";
+            this.checkBoxBannerShowText.Size = new System.Drawing.Size(134, 20);
+            this.checkBoxBannerShowText.TabIndex = 9;
+            this.checkBoxBannerShowText.Text = "Show Link Label";
+            this.checkBoxBannerShowText.UseVisualStyleBackColor = true;
+            this.checkBoxBannerShowText.CheckedChanged += new System.EventHandler(this.checkBoxBannerShowText_CheckedChanged);
+            // 
+            // rbBannerAligmentRight
+            // 
+            this.rbBannerAligmentRight.Location = new System.Drawing.Point(206, 316);
+            this.rbBannerAligmentRight.Name = "rbBannerAligmentRight";
+            this.rbBannerAligmentRight.Size = new System.Drawing.Size(86, 20);
+            this.rbBannerAligmentRight.TabIndex = 8;
+            this.rbBannerAligmentRight.TabStop = true;
+            this.rbBannerAligmentRight.Text = "Right";
+            this.rbBannerAligmentRight.UseVisualStyleBackColor = true;
+            // 
+            // rbBannerAligmentCenter
+            // 
+            this.rbBannerAligmentCenter.Location = new System.Drawing.Point(107, 316);
+            this.rbBannerAligmentCenter.Name = "rbBannerAligmentCenter";
+            this.rbBannerAligmentCenter.Size = new System.Drawing.Size(94, 20);
+            this.rbBannerAligmentCenter.TabIndex = 7;
+            this.rbBannerAligmentCenter.TabStop = true;
+            this.rbBannerAligmentCenter.Text = "Center";
+            this.rbBannerAligmentCenter.UseVisualStyleBackColor = true;
+            // 
+            // rbBannerAligmentLeft
+            // 
+            this.rbBannerAligmentLeft.Location = new System.Drawing.Point(9, 316);
+            this.rbBannerAligmentLeft.Name = "rbBannerAligmentLeft";
+            this.rbBannerAligmentLeft.Size = new System.Drawing.Size(77, 20);
+            this.rbBannerAligmentLeft.TabIndex = 6;
+            this.rbBannerAligmentLeft.TabStop = true;
+            this.rbBannerAligmentLeft.Text = "Left";
+            this.rbBannerAligmentLeft.UseVisualStyleBackColor = true;
+            // 
+            // laBannerAligment
+            // 
+            this.laBannerAligment.AutoSize = true;
+            this.laBannerAligment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laBannerAligment.Location = new System.Drawing.Point(6, 297);
+            this.laBannerAligment.Name = "laBannerAligment";
+            this.laBannerAligment.Size = new System.Drawing.Size(127, 16);
+            this.laBannerAligment.TabIndex = 5;
+            this.laBannerAligment.Text = "Banner Alignment:";
             // 
             // gridControlBanners
             // 
@@ -1037,7 +1166,7 @@
             this.gridControlBanners.Name = "gridControlBanners";
             this.gridControlBanners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditBanner});
-            this.gridControlBanners.Size = new System.Drawing.Size(317, 194);
+            this.gridControlBanners.Size = new System.Drawing.Size(360, 194);
             this.gridControlBanners.TabIndex = 4;
             this.gridControlBanners.ToolTipController = this.toolTipController;
             this.gridControlBanners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -1102,7 +1231,7 @@
             // 
             this.pbSelectedBanner.Location = new System.Drawing.Point(129, 9);
             this.pbSelectedBanner.Name = "pbSelectedBanner";
-            this.pbSelectedBanner.Size = new System.Drawing.Size(197, 59);
+            this.pbSelectedBanner.Size = new System.Drawing.Size(240, 59);
             this.pbSelectedBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbSelectedBanner.TabIndex = 3;
             this.pbSelectedBanner.TabStop = false;
@@ -1143,10 +1272,11 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(356, 403);
+            this.ClientSize = new System.Drawing.Size(399, 587);
             this.Controls.Add(this.xtraTabControl);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btOK);
+            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -1191,8 +1321,8 @@
             this.xtraTabPageLineBrealProperties.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.memoEditNote.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEditFont.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditFont.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditLineBreakFont.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditLineBreakFontColor.Properties)).EndInit();
             this.xtraTabPageWidgets.ResumeLayout(false);
             this.xtraTabPageWidgets.PerformLayout();
             this.groupBoxWidgets.ResumeLayout(false);
@@ -1207,6 +1337,9 @@
             this.xtraTabPageBanner.PerformLayout();
             this.groupBoxBanners.ResumeLayout(false);
             this.groupBoxBanners.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditBannerTextColor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditBannerTextFont.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEditBannerText.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlBanners)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBanners)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditBanner)).EndInit();
@@ -1279,7 +1412,7 @@
         private DevExpress.XtraNavBar.NavBarGroup navBarGroup7;
         private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup7;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageLineBrealProperties;
-        private DevExpress.XtraEditors.ColorEdit colorEditFont;
+        private DevExpress.XtraEditors.ColorEdit colorEditLineBreakFontColor;
         private System.Windows.Forms.Label laFontColor;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageBanner;
         private System.Windows.Forms.GroupBox groupBoxBanners;
@@ -1295,9 +1428,17 @@
         private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
         private System.Windows.Forms.FontDialog dlgFont;
         private System.Windows.Forms.Label laFont;
-        private DevExpress.XtraEditors.ButtonEdit buttonEditFont;
+        private DevExpress.XtraEditors.ButtonEdit buttonEditLineBreakFont;
         private System.Windows.Forms.Label laNote;
         private DevExpress.XtraEditors.StyleController styleController;
         private DevExpress.XtraEditors.MemoEdit memoEditNote;
+        private System.Windows.Forms.RadioButton rbBannerAligmentRight;
+        private System.Windows.Forms.RadioButton rbBannerAligmentCenter;
+        private System.Windows.Forms.RadioButton rbBannerAligmentLeft;
+        private System.Windows.Forms.Label laBannerAligment;
+        private DevExpress.XtraEditors.MemoEdit memoEditBannerText;
+        private System.Windows.Forms.CheckBox checkBoxBannerShowText;
+        private DevExpress.XtraEditors.ColorEdit colorEditBannerTextColor;
+        private DevExpress.XtraEditors.ButtonEdit buttonEditBannerTextFont;
     }
 }

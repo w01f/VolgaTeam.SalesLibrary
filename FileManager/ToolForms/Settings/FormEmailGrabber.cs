@@ -16,6 +16,12 @@ namespace FileManager.ToolForms.Settings
             textEditInboxSubFolder.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
             textEditInboxSubFolder.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
             textEditInboxSubFolder.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
+
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laGrabInterval.Font = new System.Drawing.Font(laGrabInterval.Font.FontFamily, laGrabInterval.Font.Size - 2, laGrabInterval.Font.Style);
+                laInboxSubFolder.Font = new System.Drawing.Font(laInboxSubFolder.Font.FontFamily, laInboxSubFolder.Font.Size - 2, laInboxSubFolder.Font.Style);
+            }
         }
 
         private void FormApplicationSettings_FormClosing(object sender, FormClosingEventArgs e)

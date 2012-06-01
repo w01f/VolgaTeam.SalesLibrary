@@ -8,6 +8,20 @@ namespace FileManager.ToolForms.Settings
         public FormCalendarSettings()
         {
             InitializeComponent();
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laCalendarBackColor.Font = new System.Drawing.Font(laCalendarBackColor.Font.FontFamily, laCalendarBackColor.Font.Size - 2, laCalendarBackColor.Font.Style);
+                laCalendarBorderColor.Font = new System.Drawing.Font(laCalendarBorderColor.Font.FontFamily, laCalendarBorderColor.Font.Size - 2, laCalendarBorderColor.Font.Style);
+                laCalendarHeaderColor.Font = new System.Drawing.Font(laCalendarHeaderColor.Font.FontFamily, laCalendarHeaderColor.Font.Size - 2, laCalendarHeaderColor.Font.Style);
+                laCalendarHeaderForeColor.Font = new System.Drawing.Font(laCalendarHeaderForeColor.Font.FontFamily, laCalendarHeaderForeColor.Font.Size - 2, laCalendarHeaderForeColor.Font.Style);
+                laDeadLinksForeColor.Font = new System.Drawing.Font(laDeadLinksForeColor.Font.FontFamily, laDeadLinksForeColor.Font.Size - 2, laDeadLinksForeColor.Font.Style);
+                laMonthBodyBackColor.Font = new System.Drawing.Font(laMonthBodyBackColor.Font.FontFamily, laMonthBodyBackColor.Font.Size - 2, laMonthBodyBackColor.Font.Style);
+                laMonthBodyForeColor.Font = new System.Drawing.Font(laMonthBodyForeColor.Font.FontFamily, laMonthBodyForeColor.Font.Size - 2, laMonthBodyForeColor.Font.Style);
+                laMonthHeaderBackColor.Font = new System.Drawing.Font(laMonthHeaderBackColor.Font.FontFamily, laMonthHeaderBackColor.Font.Size - 2, laMonthHeaderBackColor.Font.Style);
+                laMonthHeaderForeColor.Font = new System.Drawing.Font(laMonthHeaderForeColor.Font.FontFamily, laMonthHeaderForeColor.Font.Size - 2, laMonthHeaderForeColor.Font.Style);
+                laSweepBackColor.Font = new System.Drawing.Font(laSweepBackColor.Font.FontFamily, laSweepBackColor.Font.Size - 2, laSweepBackColor.Font.Style);
+                laSweepForeColor.Font = new System.Drawing.Font(laSweepForeColor.Font.FontFamily, laSweepForeColor.Font.Size - 2, laSweepForeColor.Font.Style);
+            }
         }
 
         private void Form_FormClosing(object sender, FormClosingEventArgs e)

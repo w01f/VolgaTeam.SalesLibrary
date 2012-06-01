@@ -58,7 +58,7 @@
             this.colorEditHeaderBack = new DevExpress.XtraEditors.ColorEdit();
             this.laHeaderFont = new System.Windows.Forms.Label();
             this.laWindowFore = new System.Windows.Forms.Label();
-            this.laWindowback = new System.Windows.Forms.Label();
+            this.laWindowBack = new System.Windows.Forms.Label();
             this.laHeaderFore = new System.Windows.Forms.Label();
             this.laHeaderBack = new System.Windows.Forms.Label();
             this.ckApllyForAllWindows = new System.Windows.Forms.CheckBox();
@@ -397,7 +397,7 @@
             this.gbWindowAppearance.Controls.Add(this.colorEditHeaderBack);
             this.gbWindowAppearance.Controls.Add(this.laHeaderFont);
             this.gbWindowAppearance.Controls.Add(this.laWindowFore);
-            this.gbWindowAppearance.Controls.Add(this.laWindowback);
+            this.gbWindowAppearance.Controls.Add(this.laWindowBack);
             this.gbWindowAppearance.Controls.Add(this.laHeaderFore);
             this.gbWindowAppearance.Controls.Add(this.laHeaderBack);
             this.gbWindowAppearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -498,14 +498,14 @@
             // 
             // laWindowback
             // 
-            this.laWindowback.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.laWindowback.AutoSize = true;
-            this.laWindowback.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laWindowback.Location = new System.Drawing.Point(239, 24);
-            this.laWindowback.Name = "laWindowback";
-            this.laWindowback.Size = new System.Drawing.Size(125, 16);
-            this.laWindowback.TabIndex = 9;
-            this.laWindowback.Text = "Window Back Color";
+            this.laWindowBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.laWindowBack.AutoSize = true;
+            this.laWindowBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowBack.Location = new System.Drawing.Point(239, 24);
+            this.laWindowBack.Name = "laWindowback";
+            this.laWindowBack.Size = new System.Drawing.Size(125, 16);
+            this.laWindowBack.TabIndex = 9;
+            this.laWindowBack.Text = "Window Back Color";
             // 
             // laHeaderFore
             // 
@@ -1288,7 +1288,7 @@
         private System.Windows.Forms.Label laHeaderFont;
         private System.Windows.Forms.CheckBox ckApllyForAllWindows;
         private System.Windows.Forms.Label laWindowFore;
-        private System.Windows.Forms.Label laWindowback;
+        private System.Windows.Forms.Label laWindowBack;
         private System.Windows.Forms.Label laHeaderFore;
         private System.Windows.Forms.Label laHeaderBack;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlSettings;

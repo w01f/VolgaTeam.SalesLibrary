@@ -21,6 +21,33 @@ namespace FileManager.ToolForms.Settings
         public FormColumns()
         {
             InitializeComponent();
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laColumn1.Font = new System.Drawing.Font(laColumn1.Font.FontFamily, laColumn1.Font.Size - 2, laColumn1.Font.Style);
+                laColumn1Back.Font = new System.Drawing.Font(laColumn1Back.Font.FontFamily, laColumn1Back.Font.Size - 2, laColumn1Back.Font.Style);
+                laColumn1Fore.Font = new System.Drawing.Font(laColumn1Fore.Font.FontFamily, laColumn1Fore.Font.Size - 2, laColumn1Fore.Font.Style);
+                laColumn1HeaderFont.Font = new System.Drawing.Font(laColumn1HeaderFont.Font.FontFamily, laColumn1HeaderFont.Font.Size - 2, laColumn1HeaderFont.Font.Style);
+                laColumn2.Font = new System.Drawing.Font(laColumn2.Font.FontFamily, laColumn2.Font.Size - 2, laColumn2.Font.Style);
+                laColumn2Back.Font = new System.Drawing.Font(laColumn2Back.Font.FontFamily, laColumn2Back.Font.Size - 2, laColumn2Back.Font.Style);
+                laColumn2Fore.Font = new System.Drawing.Font(laColumn2Fore.Font.FontFamily, laColumn2Fore.Font.Size - 2, laColumn2Fore.Font.Style);
+                laColumn2HeaderFont.Font = new System.Drawing.Font(laColumn2HeaderFont.Font.FontFamily, laColumn2HeaderFont.Font.Size - 2, laColumn2HeaderFont.Font.Style);
+                laColumn3.Font = new System.Drawing.Font(laColumn3.Font.FontFamily, laColumn3.Font.Size - 2, laColumn3.Font.Style);
+                laColumn3Back.Font = new System.Drawing.Font(laColumn3Back.Font.FontFamily, laColumn3Back.Font.Size - 2, laColumn3Back.Font.Style);
+                laColumn3Fore.Font = new System.Drawing.Font(laColumn3Fore.Font.FontFamily, laColumn3Fore.Font.Size - 2, laColumn3Fore.Font.Style);
+                laColumn3HeaderFont.Font = new System.Drawing.Font(laColumn3HeaderFont.Font.FontFamily, laColumn3HeaderFont.Font.Size - 2, laColumn3HeaderFont.Font.Style);
+                laHeaderBack.Font = new System.Drawing.Font(laHeaderBack.Font.FontFamily, laHeaderBack.Font.Size - 2, laHeaderBack.Font.Style);
+                laHeaderFont.Font = new System.Drawing.Font(laHeaderFont.Font.FontFamily, laHeaderFont.Font.Size - 2, laHeaderFont.Font.Style);
+                laHeaderFore.Font = new System.Drawing.Font(laHeaderFore.Font.FontFamily, laHeaderFore.Font.Size - 2, laHeaderFore.Font.Style);
+                laLocationHeader.Font = new System.Drawing.Font(laLocationHeader.Font.FontFamily, laLocationHeader.Font.Size - 2, laLocationHeader.Font.Style);
+                laLocationValue.Font = new System.Drawing.Font(laLocationValue.Font.FontFamily, laLocationValue.Font.Size - 2, laLocationValue.Font.Style);
+                laPages.Font = new System.Drawing.Font(laPages.Font.FontFamily, laPages.Font.Size - 2, laPages.Font.Style);
+                laWindow.Font = new System.Drawing.Font(laWindow.Font.FontFamily, laWindow.Font.Size - 2, laWindow.Font.Style);
+                laWindowBack.Font = new System.Drawing.Font(laWindowBack.Font.FontFamily, laWindowBack.Font.Size - 2, laWindowBack.Font.Style);
+                laWindowFore.Font = new System.Drawing.Font(laWindowFore.Font.FontFamily, laWindowFore.Font.Size - 2, laWindowFore.Font.Style);
+                ckApllyForAllWindows.Font = new System.Drawing.Font(ckApllyForAllWindows.Font.FontFamily, ckApllyForAllWindows.Font.Size - 2, ckApllyForAllWindows.Font.Style);
+                ckApplyForAllColumnTitles.Font = new System.Drawing.Font(ckApplyForAllColumnTitles.Font.FontFamily, ckApplyForAllColumnTitles.Font.Size - 2, ckApplyForAllColumnTitles.Font.Style);
+                ckEnableColumnTitles.Font = new System.Drawing.Font(ckEnableColumnTitles.Font.FontFamily, ckEnableColumnTitles.Font.Size - 2, ckEnableColumnTitles.Font.Style);
+            }
         }
 
         #region Base Methods
@@ -818,7 +845,7 @@ namespace FileManager.ToolForms.Settings
             gbColumnTitle1.Enabled = ckEnableColumnTitles.Checked;
             gbColumnTitle2.Enabled = ckEnableColumnTitles.Checked;
             gbColumnTitle3.Enabled = ckEnableColumnTitles.Checked;
-            ckApllyForAllWindows.Enabled = ckEnableColumnTitles.Checked;
+            ckApplyForAllColumnTitles.Enabled = ckEnableColumnTitles.Checked;
             _stateChanges = true;
         }
 

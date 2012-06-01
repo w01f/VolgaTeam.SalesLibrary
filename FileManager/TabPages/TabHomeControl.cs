@@ -141,7 +141,7 @@ namespace FileManager.TabPages
                         {
                             this.Invoke((MethodInvoker)delegate()
                             {
-                                formProgress.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Converting Your Sales Library to the Latest Version…" : "Load Libraries...";
+                                formProgress.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Converting Your Sales Library to the Latest Version…" : "Loading Libraries...";
                                 formProgress.Refresh();
                                 Application.DoEvents();
                                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildDecorators();
@@ -537,7 +537,7 @@ namespace FileManager.TabPages
                     BusinessClasses.LibraryManager.Instance.LoadLibraries(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.BackupPath));
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
-                        form.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Upgrading your Sales Library to Version 6..." : "Load Libraries...";
+                        form.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Upgrading your Sales Library to Version 6..." : "Loading Libraries...";
                         PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildDecorators();
                         form.Refresh();
                         Application.DoEvents();

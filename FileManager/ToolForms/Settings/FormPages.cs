@@ -12,6 +12,10 @@ namespace FileManager.ToolForms.Settings
         public FormPages()
         {
             InitializeComponent();
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laDeletePageWarning.Font = new System.Drawing.Font(laDeletePageWarning.Font.FontFamily, laDeletePageWarning.Font.Size - 2, laDeletePageWarning.Font.Style);
+            }
         }
 
         private void Form_Load(object sender, EventArgs e)

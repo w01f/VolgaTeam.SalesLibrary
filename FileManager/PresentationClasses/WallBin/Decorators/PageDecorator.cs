@@ -28,7 +28,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             _scrooTimer.Stop();
             _scrooTimer.Interval = 5;
             _scrooTimer.Tick += new EventHandler(scrooTimer_Tick);
-            
+
             BuildPage();
             BuildDisplayBoxes();
         }
@@ -46,6 +46,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                 box.Folder = folder;
                 box.Decorator = this;
                 _boxes.Add(box);
+                Application.DoEvents();
             }
         }
 
@@ -79,6 +80,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                     columnTitleControl.Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left;
                     _headerPanel.Controls.Add(columnTitleControl);
                     columnTitleControl.BringToFront();
+                    Application.DoEvents();
                 }
             }
         }
@@ -131,6 +133,8 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             panel.DragDrop += new DragEventHandler(Column_DragDrop);
             _parentPanel.Controls.Add(panel);
             panel.BringToFront();
+
+            Application.DoEvents();
         }
 
         private void LinkBoxesToColumns()
@@ -211,6 +215,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         {
             foreach (PresentationClasses.WallBin.FolderBoxControl box in _boxes)
                 box.SetGridFont(ConfigurationClasses.SettingsManager.Instance.FontSize);
+
 
             RefreshPanelHeight();
 

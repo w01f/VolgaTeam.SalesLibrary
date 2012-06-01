@@ -34,6 +34,7 @@ namespace FileManager.ConfigurationClasses
         public string NetworkPath { get; set; }
         public string SelectedLibrary { get; set; }
         public string SelectedPage { get; set; }
+        public int SelectedCalendarYear { get; set; }
         public int FontSize { get; set; }
         public int CalendarFontSize { get; set; }
         public bool TreeViewVisible { get; set; }
@@ -116,6 +117,10 @@ namespace FileManager.ConfigurationClasses
                 node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
                 if (node != null)
                     this.SelectedPage = node.InnerText;
+                node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
+                if (node != null)
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.SelectedCalendarYear = tempInt;
                 node = document.SelectSingleNode(@"/LocalSettings/FontSize");
                 if (node != null)
                     if (int.TryParse(node.InnerText, out tempInt))
@@ -152,6 +157,7 @@ namespace FileManager.ConfigurationClasses
             xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
             xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
+            xml.AppendLine(@"<SelectedCalendarYear>" + this.SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
             xml.AppendLine(@"<FontSize>" + this.FontSize.ToString() + @"</FontSize>");
             xml.AppendLine(@"<CalendarFontSize>" + this.CalendarFontSize.ToString() + @"</CalendarFontSize>");
             xml.AppendLine(@"<TreeViewVisible>" + this.TreeViewVisible.ToString() + @"</TreeViewVisible>");

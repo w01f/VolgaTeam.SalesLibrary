@@ -17,10 +17,10 @@ namespace FileManager.ToolForms.WallBin
         public BusinessClasses.LibraryFileSearchTags SearchTags { get; set; }
         public BusinessClasses.ExpirationDateOptions ExpirationDateOptions { get; set; }
         public BusinessClasses.LineBreakProperties LineBreakProperties { get; set; }
+        public BusinessClasses.BannerProperties BannerProperties { get; set; }
         public bool EnableWidget { get; set; }
         public Image Widget { get; set; }
-        public bool EnableBanner { get; set; }
-        public Image Banner { get; set; }
+
 
         public FormLinkProperties()
         {
@@ -28,6 +28,12 @@ namespace FileManager.ToolForms.WallBin
 
             if ((base.CreateGraphics()).DpiX > 96)
             {
+                Font styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
+                styleController.AppearanceDisabled.Font = styleControllerFont;
+                styleController.AppearanceDropDown.Font = styleControllerFont;
+                styleController.AppearanceDropDownHeader.Font = styleControllerFont;
+                styleController.AppearanceFocused.Font = styleControllerFont;
+                styleController.AppearanceReadOnly.Font = styleControllerFont;
                 laAddDateTitle.Font = new Font(laAddDateTitle.Font.FontFamily, laAddDateTitle.Font.Size - 2, laAddDateTitle.Font.Style);
                 laAddDateValue.Font = new Font(laAddDateValue.Font.FontFamily, laAddDateValue.Font.Size - 2, laAddDateValue.Font.Style);
                 laAvailableWidgets.Font = new Font(laAvailableWidgets.Font.FontFamily, laAvailableWidgets.Font.Size - 2, laAvailableWidgets.Font.Style);
@@ -36,11 +42,13 @@ namespace FileManager.ToolForms.WallBin
                 laExpireddateActions.Font = new Font(laExpireddateActions.Font.FontFamily, laExpireddateActions.Font.Size - 2, laExpireddateActions.Font.Style);
                 laSelectedWidget.Font = new Font(laSelectedWidget.Font.FontFamily, laSelectedWidget.Font.Size - 2, laSelectedWidget.Font.Style);
                 laSelectedBanner.Font = new Font(laSelectedBanner.Font.FontFamily, laSelectedBanner.Font.Size - 2, laSelectedBanner.Font.Style);
+                laBannerAligment.Font = new Font(laBannerAligment.Font.FontFamily, laBannerAligment.Font.Size - 2, laBannerAligment.Font.Style);
                 checkBoxEnableExpiredLinks.Font = new Font(checkBoxEnableExpiredLinks.Font.FontFamily, checkBoxEnableExpiredLinks.Font.Size - 2, checkBoxEnableExpiredLinks.Font.Style);
                 checkBoxEnableWidget.Font = new Font(checkBoxEnableWidget.Font.FontFamily, checkBoxEnableWidget.Font.Size - 2, checkBoxEnableWidget.Font.Style);
                 checkBoxEnableBanner.Font = new Font(checkBoxEnableBanner.Font.FontFamily, checkBoxEnableBanner.Font.Size - 2, checkBoxEnableBanner.Font.Style);
                 checkBoxLabelLink.Font = new Font(checkBoxLabelLink.Font.FontFamily, checkBoxLabelLink.Font.Size - 2, checkBoxLabelLink.Font.Style);
                 checkBoxSendEmailWhenDelete.Font = new Font(checkBoxSendEmailWhenDelete.Font.FontFamily, checkBoxSendEmailWhenDelete.Font.Size - 2, checkBoxSendEmailWhenDelete.Font.Style);
+                checkBoxBannerShowText.Font = new Font(checkBoxBannerShowText.Font.FontFamily, checkBoxBannerShowText.Font.Size - 2, checkBoxBannerShowText.Font.Style);
                 rbAttention.Font = new Font(rbAttention.Font.FontFamily, rbAttention.Font.Size - 2, rbAttention.Font.Style);
                 rbBold.Font = new Font(rbBold.Font.FontFamily, rbBold.Font.Size - 2, rbBold.Font.Style);
                 rbCustomNote.Font = new Font(rbCustomNote.Font.FontFamily, rbCustomNote.Font.Size - 2, rbCustomNote.Font.Style);
@@ -49,6 +57,13 @@ namespace FileManager.ToolForms.WallBin
                 rbRegular.Font = new Font(rbRegular.Font.FontFamily, rbRegular.Font.Size - 2, rbRegular.Font.Style);
                 rbSell.Font = new Font(rbSell.Font.FontFamily, rbSell.Font.Size - 2, rbSell.Font.Style);
                 rbUpdated.Font = new Font(rbUpdated.Font.FontFamily, rbUpdated.Font.Size - 2, rbUpdated.Font.Style);
+                rbBannerAligmentCenter.Font = new Font(rbBannerAligmentCenter.Font.FontFamily, rbBannerAligmentCenter.Font.Size - 2, rbBannerAligmentCenter.Font.Style);
+                rbBannerAligmentLeft.Font = new Font(rbBannerAligmentLeft.Font.FontFamily, rbBannerAligmentLeft.Font.Size - 2, rbBannerAligmentLeft.Font.Style);
+                rbBannerAligmentRight.Font = new Font(rbBannerAligmentRight.Font.FontFamily, rbBannerAligmentRight.Font.Size - 2, rbBannerAligmentRight.Font.Style);
+                xtraTabControl.AppearancePage.HeaderActive.Font = new Font(xtraTabControl.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControl.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControl.AppearancePage.HeaderActive.Font.Style);
+                xtraTabControl.AppearancePage.Header.Font = new Font(xtraTabControl.AppearancePage.Header.Font.FontFamily, xtraTabControl.AppearancePage.Header.Font.Size - 2, xtraTabControl.AppearancePage.Header.Font.Style);
+                xtraTabControl.AppearancePage.HeaderDisabled.Font = new Font(xtraTabControl.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControl.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControl.AppearancePage.HeaderDisabled.Font.Style);
+                xtraTabControl.AppearancePage.HeaderHotTracked.Font = new Font(xtraTabControl.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControl.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControl.AppearancePage.HeaderHotTracked.Font.Style);
             }
 
             if (!this.IsLineBreak)
@@ -267,15 +282,27 @@ namespace FileManager.ToolForms.WallBin
             }
             else
             {
-                this.LineBreakProperties.Font = buttonEditFont.Tag as Font;
-                this.LineBreakProperties.ForeColor = colorEditFont.Color;
+                this.LineBreakProperties.Font = buttonEditLineBreakFont.Tag as Font;
+                this.LineBreakProperties.ForeColor = colorEditLineBreakFontColor.Color;
                 this.LineBreakProperties.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
             }
 
             this.EnableWidget = checkBoxEnableWidget.Checked;
             this.Widget = pbSelectedWidget.Image;
-            this.EnableBanner = checkBoxEnableBanner.Checked;
-            this.Banner = pbSelectedBanner.Image;
+
+            this.BannerProperties.Enable = checkBoxEnableBanner.Checked;
+            this.BannerProperties.Image = pbSelectedBanner.Image;
+            if (rbBannerAligmentLeft.Checked)
+                this.BannerProperties.ImageAligement = BusinessClasses.Alignment.Left;
+            else if (rbBannerAligmentCenter.Checked)
+                this.BannerProperties.ImageAligement = BusinessClasses.Alignment.Center;
+            else if (rbBannerAligmentRight.Checked)
+                this.BannerProperties.ImageAligement = BusinessClasses.Alignment.Right;
+            this.BannerProperties.ShowText = checkBoxBannerShowText.Checked;
+            this.BannerProperties.Text = memoEditBannerText.EditValue != null ? memoEditBannerText.EditValue.ToString() : string.Empty;
+            this.BannerProperties.Font = buttonEditBannerTextFont.Tag as Font;
+            this.BannerProperties.ForeColor = colorEditBannerTextColor.Color;
+            this.BannerProperties.Configured = true;
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
@@ -361,15 +388,39 @@ namespace FileManager.ToolForms.WallBin
             else
             {
                 xtraTabPageBanner.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.BannerFolder);
-                buttonEditFont.Tag = this.LineBreakProperties.Font;
-                buttonEditFont.EditValue = FontToString(this.LineBreakProperties.Font);
-                colorEditFont.Color = this.LineBreakProperties.ForeColor;
+                buttonEditLineBreakFont.Tag = this.LineBreakProperties.Font;
+                buttonEditLineBreakFont.EditValue = FontToString(this.LineBreakProperties.Font);
+                colorEditLineBreakFontColor.Color = this.LineBreakProperties.ForeColor;
                 memoEditNote.EditValue = this.LineBreakProperties.Note;
             }
             pbSelectedWidget.Image = this.EnableWidget ? this.Widget : null;
             checkBoxEnableWidget.Checked = this.EnableWidget;
-            pbSelectedBanner.Image = this.EnableBanner ? this.Banner : null;
-            checkBoxEnableBanner.Checked = this.EnableBanner;
+
+            checkBoxEnableBanner.Checked = this.BannerProperties.Enable;
+            pbSelectedBanner.Image = this.BannerProperties.Enable ? this.BannerProperties.Image : null;
+            switch (this.BannerProperties.ImageAligement)
+            {
+                case BusinessClasses.Alignment.Left:
+                    rbBannerAligmentLeft.Checked = true;
+                    rbBannerAligmentCenter.Checked = false;
+                    rbBannerAligmentRight.Checked = false;
+                    break;
+                case BusinessClasses.Alignment.Center:
+                    rbBannerAligmentLeft.Checked = false;
+                    rbBannerAligmentCenter.Checked = true;
+                    rbBannerAligmentRight.Checked = false;
+                    break;
+                case BusinessClasses.Alignment.Right:
+                    rbBannerAligmentLeft.Checked = false;
+                    rbBannerAligmentCenter.Checked = false;
+                    rbBannerAligmentRight.Checked = true;
+                    break;
+            }
+            checkBoxBannerShowText.Checked = this.BannerProperties.ShowText;
+            memoEditBannerText.EditValue = this.BannerProperties.Text;
+            buttonEditBannerTextFont.Tag = this.BannerProperties.Font;
+            buttonEditBannerTextFont.EditValue = FontToString(this.BannerProperties.Font);
+            colorEditBannerTextColor.Color = this.BannerProperties.ForeColor;
         }
 
         private void checkBoxEnableExpiredLinks_CheckedChanged(object sender, EventArgs e)
@@ -506,6 +557,13 @@ namespace FileManager.ToolForms.WallBin
         private void FontEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             FontEdit_Click(this, null);
+        }
+
+        private void checkBoxBannerShowText_CheckedChanged(object sender, EventArgs e)
+        {
+            memoEditBannerText.Enabled = checkBoxBannerShowText.Checked;
+            buttonEditBannerTextFont.Enabled = checkBoxBannerShowText.Checked;
+            colorEditBannerTextColor.Enabled = checkBoxBannerShowText.Checked;
         }
     }
 }

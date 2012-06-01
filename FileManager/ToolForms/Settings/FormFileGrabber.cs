@@ -10,6 +10,10 @@ namespace FileManager.ToolForms.Settings
         public FormFileGrabber()
         {
             InitializeComponent();
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laSourceFolder.Font = new System.Drawing.Font(laSourceFolder.Font.FontFamily, laSourceFolder.Font.Size - 2, laSourceFolder.Font.Style);
+            }
         }
 
         private void FormApplicationSettings_FormClosing(object sender, FormClosingEventArgs e)

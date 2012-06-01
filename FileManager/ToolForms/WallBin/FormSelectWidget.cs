@@ -11,6 +11,11 @@ namespace FileManager.ToolForms.WallBin
         {
             InitializeComponent();
             gridControlWidgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
+            if ((base.CreateGraphics()).DpiX > 96)
+            {
+                laAvailableWidgets.Font = new System.Drawing.Font(laAvailableWidgets.Font.FontFamily, laAvailableWidgets.Font.Size - 2, laAvailableWidgets.Font.Style);
+                laSelectedWidget.Font = new System.Drawing.Font(laSelectedWidget.Font.FontFamily, laSelectedWidget.Font.Size - 2, laSelectedWidget.Font.Style);
+            }
         }
 
         private void layoutViewWidgets_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
