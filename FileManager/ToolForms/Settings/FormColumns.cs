@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace FileManager.ToolForms.Settings
         private BusinessClasses.LibraryFolder _currentFolder;
         private bool _stateChanges = false;
         private bool _changesDone = false;
+        private bool _allowToSave = false;
 
         bool _column1FirstSelect = true;
         bool _column2FirstSelect = true;
@@ -35,25 +37,48 @@ namespace FileManager.ToolForms.Settings
                 laColumn3Back.Font = new System.Drawing.Font(laColumn3Back.Font.FontFamily, laColumn3Back.Font.Size - 2, laColumn3Back.Font.Style);
                 laColumn3Fore.Font = new System.Drawing.Font(laColumn3Fore.Font.FontFamily, laColumn3Fore.Font.Size - 2, laColumn3Fore.Font.Style);
                 laColumn3HeaderFont.Font = new System.Drawing.Font(laColumn3HeaderFont.Font.FontFamily, laColumn3HeaderFont.Font.Size - 2, laColumn3HeaderFont.Font.Style);
-                laHeaderBack.Font = new System.Drawing.Font(laHeaderBack.Font.FontFamily, laHeaderBack.Font.Size - 2, laHeaderBack.Font.Style);
-                laHeaderFont.Font = new System.Drawing.Font(laHeaderFont.Font.FontFamily, laHeaderFont.Font.Size - 2, laHeaderFont.Font.Style);
-                laHeaderFore.Font = new System.Drawing.Font(laHeaderFore.Font.FontFamily, laHeaderFore.Font.Size - 2, laHeaderFore.Font.Style);
+                laWindowHeaderBackColor.Font = new System.Drawing.Font(laWindowHeaderBackColor.Font.FontFamily, laWindowHeaderBackColor.Font.Size - 2, laWindowHeaderBackColor.Font.Style);
+                laWindowHeaderFont.Font = new System.Drawing.Font(laWindowHeaderFont.Font.FontFamily, laWindowHeaderFont.Font.Size - 2, laWindowHeaderFont.Font.Style);
+                laWindowHeaderForeColor.Font = new System.Drawing.Font(laWindowHeaderForeColor.Font.FontFamily, laWindowHeaderForeColor.Font.Size - 2, laWindowHeaderForeColor.Font.Style);
                 laLocationHeader.Font = new System.Drawing.Font(laLocationHeader.Font.FontFamily, laLocationHeader.Font.Size - 2, laLocationHeader.Font.Style);
                 laLocationValue.Font = new System.Drawing.Font(laLocationValue.Font.FontFamily, laLocationValue.Font.Size - 2, laLocationValue.Font.Style);
+                laWindowBorderColor.Font = new System.Drawing.Font(laWindowBorderColor.Font.FontFamily, laWindowBorderColor.Font.Size - 2, laWindowBorderColor.Font.Style);
                 laPages.Font = new System.Drawing.Font(laPages.Font.FontFamily, laPages.Font.Size - 2, laPages.Font.Style);
                 laWindow.Font = new System.Drawing.Font(laWindow.Font.FontFamily, laWindow.Font.Size - 2, laWindow.Font.Style);
-                laWindowBack.Font = new System.Drawing.Font(laWindowBack.Font.FontFamily, laWindowBack.Font.Size - 2, laWindowBack.Font.Style);
-                laWindowFore.Font = new System.Drawing.Font(laWindowFore.Font.FontFamily, laWindowFore.Font.Size - 2, laWindowFore.Font.Style);
-                ckApllyForAllWindows.Font = new System.Drawing.Font(ckApllyForAllWindows.Font.FontFamily, ckApllyForAllWindows.Font.Size - 2, ckApllyForAllWindows.Font.Style);
+                laWindowBackColor.Font = new System.Drawing.Font(laWindowBackColor.Font.FontFamily, laWindowBackColor.Font.Size - 2, laWindowBackColor.Font.Style);
+                laWindowForeColor.Font = new System.Drawing.Font(laWindowForeColor.Font.FontFamily, laWindowForeColor.Font.Size - 2, laWindowForeColor.Font.Style);
+                laWindowHeaderAlignment.Font = new System.Drawing.Font(laWindowHeaderAlignment.Font.FontFamily, laWindowHeaderAlignment.Font.Size - 2, laWindowHeaderAlignment.Font.Style);
+                laWindowAvailableBanners.Font = new System.Drawing.Font(laWindowAvailableBanners.Font.FontFamily, laWindowAvailableBanners.Font.Size - 2, laWindowAvailableBanners.Font.Style);
+                laWindowBannerAligment.Font = new System.Drawing.Font(laWindowBannerAligment.Font.FontFamily, laWindowBannerAligment.Font.Size - 2, laWindowBannerAligment.Font.Style);
+                laWindowSelectedBanner.Font = new System.Drawing.Font(laWindowSelectedBanner.Font.FontFamily, laWindowSelectedBanner.Font.Size - 2, laWindowSelectedBanner.Font.Style);
+                laWindowAvailableWidgets.Font = new System.Drawing.Font(laWindowAvailableWidgets.Font.FontFamily, laWindowAvailableWidgets.Font.Size - 2, laWindowAvailableWidgets.Font.Style);
+                laWindowSelectedWidget.Font = new System.Drawing.Font(laWindowSelectedWidget.Font.FontFamily, laWindowSelectedWidget.Font.Size - 2, laWindowSelectedWidget.Font.Style);
+                ckApllyForAllWindowsAppearance.Font = new System.Drawing.Font(ckApllyForAllWindowsAppearance.Font.FontFamily, ckApllyForAllWindowsAppearance.Font.Size - 2, ckApllyForAllWindowsAppearance.Font.Style);
                 ckApplyForAllColumnTitles.Font = new System.Drawing.Font(ckApplyForAllColumnTitles.Font.FontFamily, ckApplyForAllColumnTitles.Font.Size - 2, ckApplyForAllColumnTitles.Font.Style);
+                ckApllyForAllWindowsBanner.Font = new System.Drawing.Font(ckApllyForAllWindowsBanner.Font.FontFamily, ckApllyForAllWindowsBanner.Font.Size - 2, ckApllyForAllWindowsBanner.Font.Style);
+                ckWindowEnableBanner.Font = new System.Drawing.Font(ckWindowEnableBanner.Font.FontFamily, ckWindowEnableBanner.Font.Size - 2, ckWindowEnableBanner.Font.Style);
+                ckWindowBannerShowText.Font = new System.Drawing.Font(ckWindowBannerShowText.Font.FontFamily, ckWindowBannerShowText.Font.Size - 2, ckWindowBannerShowText.Font.Style);
+                ckApllyForAllWindowsWidget.Font = new System.Drawing.Font(ckApllyForAllWindowsWidget.Font.FontFamily, ckApllyForAllWindowsWidget.Font.Size - 2, ckApllyForAllWindowsWidget.Font.Style);
+                ckWindowEnableWidget.Font = new System.Drawing.Font(ckWindowEnableWidget.Font.FontFamily, ckWindowEnableWidget.Font.Size - 2, ckWindowEnableWidget.Font.Style);
+                rbWindowHeaderAlignmentCenter.Font = new System.Drawing.Font(rbWindowHeaderAlignmentCenter.Font.FontFamily, rbWindowHeaderAlignmentCenter.Font.Size - 2, rbWindowHeaderAlignmentCenter.Font.Style);
+                rbWindowHeaderAlignmentLeft.Font = new System.Drawing.Font(rbWindowHeaderAlignmentLeft.Font.FontFamily, rbWindowHeaderAlignmentLeft.Font.Size - 2, rbWindowHeaderAlignmentLeft.Font.Style);
+                rbWindowHeaderAlignmentRight.Font = new System.Drawing.Font(rbWindowHeaderAlignmentRight.Font.FontFamily, rbWindowHeaderAlignmentRight.Font.Size - 2, rbWindowHeaderAlignmentRight.Font.Style);
+                rbWindowBannerAlignmentCenter.Font = new System.Drawing.Font(rbWindowBannerAlignmentCenter.Font.FontFamily, rbWindowBannerAlignmentCenter.Font.Size - 2, rbWindowBannerAlignmentCenter.Font.Style);
+                rbWindowBannerAlignmentLeft.Font = new System.Drawing.Font(rbWindowBannerAlignmentLeft.Font.FontFamily, rbWindowBannerAlignmentLeft.Font.Size - 2, rbWindowBannerAlignmentLeft.Font.Style);
+                rbWindowBannerAlignmentRight.Font = new System.Drawing.Font(rbWindowBannerAlignmentRight.Font.FontFamily, rbWindowBannerAlignmentRight.Font.Size - 2, rbWindowBannerAlignmentRight.Font.Style);
                 ckEnableColumnTitles.Font = new System.Drawing.Font(ckEnableColumnTitles.Font.FontFamily, ckEnableColumnTitles.Font.Size - 2, ckEnableColumnTitles.Font.Style);
+                xtraTabControlWindowProperties.Appearance.Font = new System.Drawing.Font(xtraTabControlWindowProperties.Appearance.Font.FontFamily, xtraTabControlWindowProperties.Appearance.Font.Size - 2, xtraTabControlWindowProperties.Appearance.Font.Style);
+                xtraTabControlWindowProperties.AppearancePage.Header.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.Header.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.Header.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.Header.Font.Style);
+                xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Style);
+                xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Style);
+                xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Style);
             }
         }
 
         #region Base Methods
         private string FontToString(Font font)
         {
-            string str = font.Name + ", " + ((int)font.Size).ToString();
+            string str = font.Name + ", " + font.Size.ToString("#0");
             if (font.Bold)
                 str = str + ", Bold";
             if (font.Italic)
@@ -67,6 +92,7 @@ namespace FileManager.ToolForms.Settings
 
         private void GetColumnSettings()
         {
+            _allowToSave = false;
             grColumn1.Rows.Clear();
             grColumn2.Rows.Clear();
             grColumn3.Rows.Clear();
@@ -92,6 +118,7 @@ namespace FileManager.ToolForms.Settings
                 grColumn2.ClearSelection();
                 grColumn3.ClearSelection();
             }
+            _allowToSave = true;
         }
 
         private void SaveColumnSettings()
@@ -101,7 +128,7 @@ namespace FileManager.ToolForms.Settings
                 List<Guid> existedFolderIDs = new List<Guid>();
                 BusinessClasses.LibraryFolder templateFolder = null;
 
-                if (this.Library.ApplyForAllWindows)
+                if (this.Library.ApplyAppearanceForAllWindows)
                     templateFolder = _currentPage.Folders.FirstOrDefault();
 
                 foreach (DataGridViewRow row in grColumn1.Rows)
@@ -185,80 +212,271 @@ namespace FileManager.ToolForms.Settings
             {
                 pnWindows.Enabled = true;
                 laLocationValue.Text = "Window " + (_currentFolder.RowOrder + 1).ToString() + " - Column " + (_currentFolder.ColumnOrder + 1).ToString();
-
-                if (ckApllyForAllWindows.Checked)
+                _allowToSave = false;
+                BusinessClasses.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
+                if (ckApllyForAllWindowsAppearance.Checked)
                 {
-                    BusinessClasses.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
                     if (currentPageFolder != null)
                     {
-                        colorEditHeaderBack.Color = currentPageFolder.BackgroundHeaderColor;
-                        colorEditHeaderFont.Color = currentPageFolder.ForeHeaderColor;
-                        colorEditWindowBack.Color = currentPageFolder.BackgroundWindowColor;
-                        colorEditWindowFont.Color = currentPageFolder.ForeWindowColor;
+                        colorEditWindowHeaderBackColor.Color = currentPageFolder.BackgroundHeaderColor;
+                        colorEditWindowHeaderForeColor.Color = currentPageFolder.ForeHeaderColor;
+                        colorEditWindowBackColor.Color = currentPageFolder.BackgroundWindowColor;
+                        colorEditWindowForeColor.Color = currentPageFolder.ForeWindowColor;
+                        colorEditWindowBorderColor.Color = currentPageFolder.BorderColor;
                         if (currentPageFolder.HeaderFont != null)
                         {
-                            buttonEditHeaderFont.Tag = currentPageFolder.HeaderFont;
-                            buttonEditHeaderFont.EditValue = FontToString(currentPageFolder.HeaderFont);
+                            buttonEditWindowHeaderFont.Tag = currentPageFolder.HeaderFont;
+                            buttonEditWindowHeaderFont.EditValue = FontToString(currentPageFolder.HeaderFont);
                         }
                         else
-                            buttonEditHeaderFont.EditValue = string.Empty;
+                            buttonEditWindowHeaderFont.EditValue = string.Empty;
+                        switch (currentPageFolder.HeaderAlignment)
+                        {
+                            case BusinessClasses.Alignment.Left:
+                                rbWindowHeaderAlignmentLeft.Checked = true;
+                                rbWindowHeaderAlignmentCenter.Checked = false;
+                                rbWindowHeaderAlignmentRight.Checked = false;
+                                break;
+                            case BusinessClasses.Alignment.Center:
+                                rbWindowHeaderAlignmentLeft.Checked = false;
+                                rbWindowHeaderAlignmentCenter.Checked = true;
+                                rbWindowHeaderAlignmentRight.Checked = false;
+                                break;
+                            case BusinessClasses.Alignment.Right:
+                                rbWindowHeaderAlignmentLeft.Checked = false;
+                                rbWindowHeaderAlignmentCenter.Checked = false;
+                                rbWindowHeaderAlignmentRight.Checked = true;
+                                break;
+                        }
                     }
                 }
                 else
                 {
-                    colorEditHeaderBack.Color = _currentFolder.BackgroundHeaderColor;
-                    colorEditHeaderFont.Color = _currentFolder.ForeHeaderColor;
-                    colorEditWindowBack.Color = _currentFolder.BackgroundWindowColor;
-                    colorEditWindowFont.Color = _currentFolder.ForeWindowColor;
+                    colorEditWindowHeaderBackColor.Color = _currentFolder.BackgroundHeaderColor;
+                    colorEditWindowHeaderForeColor.Color = _currentFolder.ForeHeaderColor;
+                    colorEditWindowBackColor.Color = _currentFolder.BackgroundWindowColor;
+                    colorEditWindowForeColor.Color = _currentFolder.ForeWindowColor;
+                    colorEditWindowBorderColor.Color = _currentFolder.BorderColor;
                     if (_currentFolder.HeaderFont != null)
                     {
-                        buttonEditHeaderFont.Tag = _currentFolder.HeaderFont;
-                        buttonEditHeaderFont.EditValue = FontToString(_currentFolder.HeaderFont);
+                        buttonEditWindowHeaderFont.Tag = _currentFolder.HeaderFont;
+                        buttonEditWindowHeaderFont.EditValue = FontToString(_currentFolder.HeaderFont);
                     }
                     else
-                        buttonEditHeaderFont.EditValue = string.Empty;
+                        buttonEditWindowHeaderFont.EditValue = string.Empty;
+                    switch (_currentFolder.HeaderAlignment)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            rbWindowHeaderAlignmentLeft.Checked = true;
+                            rbWindowHeaderAlignmentCenter.Checked = false;
+                            rbWindowHeaderAlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            rbWindowHeaderAlignmentLeft.Checked = false;
+                            rbWindowHeaderAlignmentCenter.Checked = true;
+                            rbWindowHeaderAlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            rbWindowHeaderAlignmentLeft.Checked = false;
+                            rbWindowHeaderAlignmentCenter.Checked = false;
+                            rbWindowHeaderAlignmentRight.Checked = true;
+                            break;
+                    }
                 }
+
+                if (ckApllyForAllWindowsWidget.Checked)
+                {
+                    if (currentPageFolder != null)
+                    {
+                        pbWindowSelectedWidget.Image = currentPageFolder.EnableWidget ? currentPageFolder.Widget : null;
+                        ckWindowEnableWidget.Checked = currentPageFolder.EnableWidget;
+                    }
+                }
+                else
+                {
+                    pbWindowSelectedWidget.Image = _currentFolder.EnableWidget ? _currentFolder.Widget : null;
+                    ckWindowEnableWidget.Checked = _currentFolder.EnableWidget;
+                }
+
+                if (ckApllyForAllWindowsBanner.Checked)
+                {
+                    if (currentPageFolder != null)
+                    {
+                        ckWindowEnableBanner.Checked = currentPageFolder.BannerProperties.Enable;
+                        pbWindowSelectedBanner.Image = currentPageFolder.BannerProperties.Enable ? currentPageFolder.BannerProperties.Image : null;
+                        switch (currentPageFolder.BannerProperties.ImageAlignement)
+                        {
+                            case BusinessClasses.Alignment.Left:
+                                rbWindowBannerAlignmentLeft.Checked = true;
+                                rbWindowBannerAlignmentCenter.Checked = false;
+                                rbWindowBannerAlignmentRight.Checked = false;
+                                break;
+                            case BusinessClasses.Alignment.Center:
+                                rbWindowBannerAlignmentLeft.Checked = false;
+                                rbWindowBannerAlignmentCenter.Checked = true;
+                                rbWindowBannerAlignmentRight.Checked = false;
+                                break;
+                            case BusinessClasses.Alignment.Right:
+                                rbWindowBannerAlignmentLeft.Checked = false;
+                                rbWindowBannerAlignmentCenter.Checked = false;
+                                rbWindowBannerAlignmentRight.Checked = true;
+                                break;
+                        }
+                        ckWindowBannerShowText.Checked = currentPageFolder.BannerProperties.ShowText;
+                        memoEditWindowBannerText.EditValue = currentPageFolder.BannerProperties.Text;
+                        buttonEditWindowBannerTextFont.Tag = currentPageFolder.BannerProperties.Font;
+                        buttonEditWindowBannerTextFont.EditValue = FontToString(currentPageFolder.BannerProperties.Font);
+                        colorEditWindowBannerTextColor.Color = currentPageFolder.BannerProperties.ForeColor;
+                    }
+                }
+                else
+                {
+                    ckWindowEnableBanner.Checked = _currentFolder.BannerProperties.Enable;
+                    pbWindowSelectedBanner.Image = _currentFolder.BannerProperties.Enable ? _currentFolder.BannerProperties.Image : null;
+                    switch (_currentFolder.BannerProperties.ImageAlignement)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            rbWindowBannerAlignmentLeft.Checked = true;
+                            rbWindowBannerAlignmentCenter.Checked = false;
+                            rbWindowBannerAlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            rbWindowBannerAlignmentLeft.Checked = false;
+                            rbWindowBannerAlignmentCenter.Checked = true;
+                            rbWindowBannerAlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            rbWindowBannerAlignmentLeft.Checked = false;
+                            rbWindowBannerAlignmentCenter.Checked = false;
+                            rbWindowBannerAlignmentRight.Checked = true;
+                            break;
+                    }
+                    ckWindowBannerShowText.Checked = _currentFolder.BannerProperties.ShowText;
+                    memoEditWindowBannerText.EditValue = _currentFolder.BannerProperties.Text;
+                    buttonEditWindowBannerTextFont.Tag = _currentFolder.BannerProperties.Font;
+                    buttonEditWindowBannerTextFont.EditValue = FontToString(_currentFolder.BannerProperties.Font);
+                    colorEditWindowBannerTextColor.Color = _currentFolder.BannerProperties.ForeColor;
+                }
+                memoEditWindowBannerText.ForeColor = colorEditWindowBannerTextColor.Color;
+                memoEditWindowBannerText.Font = buttonEditWindowBannerTextFont.Tag as Font;
+                _allowToSave = true;
             }
         }
 
         private void ClearWindowSettings()
         {
+            _allowToSave = false;
             pnWindows.Enabled = false;
             laLocationValue.Text = string.Empty;
-            colorEditHeaderBack.Color = Color.White;
-            colorEditHeaderFont.Color = Color.White;
-            colorEditWindowBack.Color = Color.White;
-            colorEditWindowFont.Color = Color.White;
-            buttonEditHeaderFont.EditValue = string.Empty;
+            colorEditWindowBorderColor.Color = Color.Black;
+            colorEditWindowHeaderBackColor.Color = Color.White;
+            colorEditWindowHeaderForeColor.Color = Color.White;
+            colorEditWindowBackColor.Color = Color.White;
+            colorEditWindowForeColor.Color = Color.White;
+            buttonEditWindowHeaderFont.EditValue = string.Empty;
             _currentFolder = null;
+            _allowToSave = true;
         }
 
         private void SaveWindowSettings()
         {
             if (_currentFolder != null)
             {
-                if (ckApllyForAllWindows.Checked)
+                if (ckApllyForAllWindowsAppearance.Checked && _currentPage.Folders.FirstOrDefault() == _currentFolder)
                 {
                     foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
                     {
-                        folder.BackgroundHeaderColor = colorEditHeaderBack.Color;
-                        folder.ForeHeaderColor = colorEditHeaderFont.Color;
-                        folder.BackgroundWindowColor = colorEditWindowBack.Color;
-                        folder.ForeWindowColor = colorEditWindowFont.Color;
-                        folder.HeaderFont = buttonEditHeaderFont.Tag as Font;
+                        folder.BackgroundHeaderColor = colorEditWindowHeaderBackColor.Color;
+                        folder.ForeHeaderColor = colorEditWindowHeaderForeColor.Color;
+                        folder.BackgroundWindowColor = colorEditWindowBackColor.Color;
+                        folder.ForeWindowColor = colorEditWindowForeColor.Color;
+                        folder.BorderColor = colorEditWindowBorderColor.Color;
+                        folder.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
+                        if (rbWindowHeaderAlignmentLeft.Checked)
+                            folder.HeaderAlignment = BusinessClasses.Alignment.Left;
+                        else if (rbWindowHeaderAlignmentCenter.Checked)
+                            folder.HeaderAlignment = BusinessClasses.Alignment.Center;
+                        else if (rbWindowHeaderAlignmentRight.Checked)
+                            folder.HeaderAlignment = BusinessClasses.Alignment.Right;
                     }
-                    this.Library.ApplyForAllWindows = true;
+                    this.Library.ApplyAppearanceForAllWindows = true;
                 }
                 else
                 {
                     if (_currentFolder != null)
                     {
-                        _currentFolder.BackgroundHeaderColor = colorEditHeaderBack.Color;
-                        _currentFolder.ForeHeaderColor = colorEditHeaderFont.Color;
-                        _currentFolder.BackgroundWindowColor = colorEditWindowBack.Color;
-                        _currentFolder.ForeWindowColor = colorEditWindowFont.Color;
-                        _currentFolder.HeaderFont = buttonEditHeaderFont.Tag as Font;
-                        this.Library.ApplyForAllWindows = false;
+                        _currentFolder.BackgroundHeaderColor = colorEditWindowHeaderBackColor.Color;
+                        _currentFolder.ForeHeaderColor = colorEditWindowHeaderForeColor.Color;
+                        _currentFolder.BackgroundWindowColor = colorEditWindowBackColor.Color;
+                        _currentFolder.ForeWindowColor = colorEditWindowForeColor.Color;
+                        _currentFolder.BorderColor = colorEditWindowBorderColor.Color;
+                        _currentFolder.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
+                        if (rbWindowHeaderAlignmentLeft.Checked)
+                            _currentFolder.HeaderAlignment = BusinessClasses.Alignment.Left;
+                        else if (rbWindowHeaderAlignmentCenter.Checked)
+                            _currentFolder.HeaderAlignment = BusinessClasses.Alignment.Center;
+                        else if (rbWindowHeaderAlignmentRight.Checked)
+                            _currentFolder.HeaderAlignment = BusinessClasses.Alignment.Right;
+                        this.Library.ApplyAppearanceForAllWindows = false;
+                    }
+                }
+
+                if (ckApllyForAllWindowsWidget.Checked && _currentPage.Folders.FirstOrDefault() == _currentFolder)
+                {
+                    foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
+                    {
+                        folder.EnableWidget = ckWindowEnableWidget.Checked;
+                        folder.Widget = pbWindowSelectedWidget.Image;
+                    }
+                    this.Library.ApplyWidgetForAllWindows = true;
+                }
+                else
+                {
+                    if (_currentFolder != null)
+                    {
+                        _currentFolder.EnableWidget = ckWindowEnableWidget.Checked;
+                        _currentFolder.Widget = pbWindowSelectedWidget.Image;
+                    }
+                }
+
+                if (ckApllyForAllWindowsBanner.Checked && _currentPage.Folders.FirstOrDefault() == _currentFolder)
+                {
+                    foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
+                    {
+                        folder.BannerProperties.Enable = ckWindowEnableBanner.Checked;
+                        folder.BannerProperties.Image = pbWindowSelectedBanner.Image;
+                        if (rbWindowBannerAlignmentLeft.Checked)
+                            folder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Left;
+                        else if (rbWindowBannerAlignmentCenter.Checked)
+                            folder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Center;
+                        else if (rbWindowBannerAlignmentRight.Checked)
+                            folder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Right;
+                        folder.BannerProperties.ShowText = ckWindowBannerShowText.Checked;
+                        folder.BannerProperties.Text = memoEditWindowBannerText.EditValue != null ? memoEditWindowBannerText.EditValue.ToString() : string.Empty;
+                        folder.BannerProperties.Font = buttonEditWindowBannerTextFont.Tag as Font;
+                        folder.BannerProperties.ForeColor = colorEditWindowBannerTextColor.Color;
+                        folder.BannerProperties.Configured = true;
+                    }
+                    this.Library.ApplyBannerForAllWindows = true;
+                }
+                else
+                {
+                    if (_currentFolder != null)
+                    {
+                        _currentFolder.BannerProperties.Enable = ckWindowEnableBanner.Checked;
+                        _currentFolder.BannerProperties.Image = pbWindowSelectedBanner.Image;
+                        if (rbWindowBannerAlignmentLeft.Checked)
+                            _currentFolder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Left;
+                        else if (rbWindowBannerAlignmentCenter.Checked)
+                            _currentFolder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Center;
+                        else if (rbWindowBannerAlignmentRight.Checked)
+                            _currentFolder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Right;
+                        _currentFolder.BannerProperties.ShowText = ckWindowBannerShowText.Checked;
+                        _currentFolder.BannerProperties.Text = memoEditWindowBannerText.EditValue != null ? memoEditWindowBannerText.EditValue.ToString() : string.Empty;
+                        _currentFolder.BannerProperties.Font = buttonEditWindowBannerTextFont.Tag as Font;
+                        _currentFolder.BannerProperties.ForeColor = colorEditWindowBannerTextColor.Color;
+                        _currentFolder.BannerProperties.Configured = true;
+                        this.Library.ApplyBannerForAllWindows = false;
                     }
                 }
             }
@@ -298,7 +516,7 @@ namespace FileManager.ToolForms.Settings
             if (_currentPage != null)
             {
                 _currentPage.ColumnTitles.Clear();
-                
+
                 BusinessClasses.ColumnTitle column = new BusinessClasses.ColumnTitle(_currentPage);
                 column.ColumnOrder = 0;
                 column.Name = tbColumn1.Text;
@@ -336,6 +554,7 @@ namespace FileManager.ToolForms.Settings
 
         private void PopulatePagesList()
         {
+            _allowToSave = false;
             comboBoxEditPages.Properties.Items.Clear();
 
             comboBoxEditPages.Properties.Items.AddRange(this.Library.Pages.Select(y => y.Name).ToArray());
@@ -345,6 +564,7 @@ namespace FileManager.ToolForms.Settings
                 pnPages.Visible = true;
             else
                 pnPages.Visible = false;
+            _allowToSave = true;
         }
 
         private void PopulateWindowsList()
@@ -359,29 +579,42 @@ namespace FileManager.ToolForms.Settings
                     comboBoxEditWindows.SelectedIndex = 0;
             }
         }
-
         #endregion
 
         #region Base GUI
         private void Form_Load(object sender, EventArgs e)
         {
+            _currentFolder = null;
+            _currentPage = null;
             grColumn1.DefaultCellStyle.SelectionBackColor = SystemColors.Window;
             grColumn2.DefaultCellStyle.SelectionBackColor = SystemColors.Window;
             grColumn3.DefaultCellStyle.SelectionBackColor = SystemColors.Window;
-            ckApllyForAllWindows.Checked = this.Library.ApplyForAllWindows;
+            xtraTabControlSettings.SelectedTabPage = xtraTabPageColumns;
+            xtraTabControlWindows.SelectedTabPage = xtraTabPageColumn1;
+            xtraTabControlWindowProperties.SelectedTabPage = xtraTabPageWindowPropertiesAppearance;
+            ckApllyForAllWindowsAppearance.Checked = this.Library.ApplyAppearanceForAllWindows;
+            ckApllyForAllWindowsWidget.Checked = this.Library.ApplyWidgetForAllWindows;
+            ckApllyForAllWindowsBanner.Checked = this.Library.ApplyBannerForAllWindows;
+            xtraTabPageWindowPropertiesBanner.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.BannerFolder);
+            gridControlWindowBanners.DataSource = new BindingList<ConfigurationClasses.Banner>(ConfigurationClasses.ListManager.Instance.Banners);
+            xtraTabPageWindowPropertiesWidget.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.WidgetFolder);
+            gridControlWindowWidgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
             PopulatePagesList();
+            comboBoxEditPages_SelectedIndexChanged(null, null);
             _stateChanges = false;
         }
 
 
         private void StateChanges_TextChanged(object sender, EventArgs e)
         {
-            _stateChanges = true;
+            if (_allowToSave)
+                _stateChanges = true;
         }
 
         private void StateChanges_CheckedChanged(object sender, EventArgs e)
         {
-            _stateChanges = true;
+            if (_allowToSave)
+                _stateChanges = true;
         }
 
         private void btSave_Click(object sender, EventArgs e)
@@ -390,7 +623,7 @@ namespace FileManager.ToolForms.Settings
             SaveColumnTitles();
             if (_currentFolder == null)
             {
-                if (this.Library.ApplyForAllWindows)
+                if (this.Library.ApplyAppearanceForAllWindows)
                 {
                     BusinessClasses.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
                     if (currentPageFolder != null)
@@ -441,17 +674,20 @@ namespace FileManager.ToolForms.Settings
         #region Columns Tab GUI
         private void comboBoxEditPages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BusinessClasses.FolderCopier.PasteReady = false;
-            SaveWindowSettings();
-            SaveColumnSettings();
-            SaveColumnTitles();
-            _currentFolder = null;
-            if (comboBoxEditPages.EditValue != null)
+            if (_allowToSave)
             {
-                _currentPage = this.Library.Pages.Where(x => x.Name.Equals(comboBoxEditPages.EditValue.ToString())).FirstOrDefault();
-                GetColumnSettings();
-                GetColumnTitles();
-                PopulateWindowsList();
+                BusinessClasses.FolderCopier.PasteReady = false;
+                SaveWindowSettings();
+                SaveColumnSettings();
+                SaveColumnTitles();
+                _currentFolder = null;
+                if (comboBoxEditPages.EditValue != null)
+                {
+                    _currentPage = this.Library.Pages.Where(x => x.Name.Equals(comboBoxEditPages.EditValue.ToString())).FirstOrDefault();
+                    GetColumnSettings();
+                    GetColumnTitles();
+                    PopulateWindowsList();
+                }
             }
         }
 
@@ -800,21 +1036,43 @@ namespace FileManager.ToolForms.Settings
             GetWindowSettings();
             if (comboBoxEditWindows.SelectedIndex == 0)
             {
-                ckApllyForAllWindows.Visible = true;
-                colorEditHeaderBack.Enabled = true;
-                colorEditHeaderFont.Enabled = true;
-                colorEditWindowBack.Enabled = true;
-                colorEditWindowFont.Enabled = true;
-                buttonEditHeaderFont.Enabled = true;
+                ckApllyForAllWindowsAppearance.Visible = true;
+                colorEditWindowHeaderBackColor.Enabled = true;
+                colorEditWindowHeaderForeColor.Enabled = true;
+                colorEditWindowBackColor.Enabled = true;
+                colorEditWindowForeColor.Enabled = true;
+                buttonEditWindowHeaderFont.Enabled = true;
+                rbWindowHeaderAlignmentCenter.Enabled = true;
+                rbWindowHeaderAlignmentLeft.Enabled = true;
+                rbWindowHeaderAlignmentRight.Enabled = true;
+
+                ckApllyForAllWindowsBanner.Visible = true;
+                ckWindowEnableBanner.Enabled = true;
+                gbWindowBanners.Enabled = ckWindowEnableBanner.Checked;
+
+                ckApllyForAllWindowsWidget.Visible = true;
+                ckWindowEnableWidget.Enabled = true;
+                gbWindowWidgets.Enabled = ckWindowEnableWidget.Checked;
             }
             else
             {
-                ckApllyForAllWindows.Visible = false;
-                colorEditHeaderBack.Enabled = !ckApllyForAllWindows.Checked;
-                colorEditHeaderFont.Enabled = !ckApllyForAllWindows.Checked;
-                colorEditWindowBack.Enabled = !ckApllyForAllWindows.Checked; ;
-                colorEditWindowFont.Enabled = !ckApllyForAllWindows.Checked;
-                buttonEditHeaderFont.Enabled = !ckApllyForAllWindows.Checked;
+                ckApllyForAllWindowsAppearance.Visible = false;
+                colorEditWindowHeaderBackColor.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                colorEditWindowHeaderForeColor.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                colorEditWindowBackColor.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                colorEditWindowForeColor.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                buttonEditWindowHeaderFont.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                rbWindowHeaderAlignmentCenter.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                rbWindowHeaderAlignmentLeft.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+                rbWindowHeaderAlignmentRight.Enabled = !ckApllyForAllWindowsAppearance.Checked;
+
+                ckApllyForAllWindowsBanner.Visible = false;
+                ckWindowEnableBanner.Enabled = !ckApllyForAllWindowsBanner.Checked;
+                gbWindowBanners.Enabled = !ckApllyForAllWindowsBanner.Checked & ckWindowEnableBanner.Checked;
+
+                ckApllyForAllWindowsWidget.Visible = false;
+                ckWindowEnableWidget.Enabled = !ckApllyForAllWindowsWidget.Checked;
+                gbWindowWidgets.Enabled = !ckApllyForAllWindowsWidget.Checked & ckWindowEnableWidget.Checked;
             }
         }
 
@@ -828,7 +1086,8 @@ namespace FileManager.ToolForms.Settings
                 {
                     fontEdit.Tag = dlgFont.Font;
                     fontEdit.EditValue = FontToString(dlgFont.Font);
-                    _stateChanges = true;
+                    if (_allowToSave)
+                        _stateChanges = true;
                 }
             }
         }
@@ -837,6 +1096,87 @@ namespace FileManager.ToolForms.Settings
         {
             FontEdit_Click(this, null);
         }
+
+        #region Window Banner
+        private void ckWindowEnableBanner_CheckedChanged(object sender, EventArgs e)
+        {
+            gbWindowBanners.Enabled = ckWindowEnableBanner.Checked;
+            if (ckWindowEnableBanner.Checked)
+                ckWindowEnableWidget.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void ckWindowBannerShowText_CheckedChanged(object sender, EventArgs e)
+        {
+            memoEditWindowBannerText.Enabled = ckWindowBannerShowText.Checked;
+            buttonEditWindowBannerTextFont.Enabled = ckWindowBannerShowText.Checked;
+            colorEditWindowBannerTextColor.Enabled = ckWindowBannerShowText.Checked;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewBanners_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Banner selectedBanner = null;
+            if (gridViewWindowBanners.FocusedRowHandle >= 0)
+                selectedBanner = ConfigurationClasses.ListManager.Instance.Banners[gridViewWindowBanners.GetDataSourceRowIndex(gridViewWindowBanners.FocusedRowHandle)];
+            pbWindowSelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+        }
+
+        private void gridViewBanners_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlWindowBanners.PointToClient(Control.MousePosition);
+
+            if (gridViewWindowBanners.CalcHitInfo(pt).RowHandle == gridViewWindowBanners.FocusedRowHandle)
+                gridViewBanners_FocusedRowChanged(null, null);
+        }
+
+        private void colorEditWindowBannerTextColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditWindowBannerText.ForeColor = colorEditWindowBannerTextColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void buttonEditWindowBannerTextFont_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditWindowBannerText.Font = buttonEditWindowBannerTextFont.Tag as Font; ;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+        #endregion
+
+        #region Window Widget
+        private void ckWindowEnableWidget_CheckedChanged(object sender, EventArgs e)
+        {
+            gbWindowWidgets.Enabled = ckWindowEnableWidget.Checked;
+            if (ckWindowEnableWidget.Checked)
+                ckWindowEnableBanner.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewWindowWidgets_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Widget selectedWidget = null;
+            if (layoutViewWindowWidgets.FocusedRowHandle >= 0)
+            {
+                selectedWidget = ConfigurationClasses.ListManager.Instance.Widgets[layoutViewWindowWidgets.GetDataSourceRowIndex(layoutViewWindowWidgets.FocusedRowHandle)];
+            }
+            pbWindowSelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewWindowWidgets_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlWindowWidgets.PointToClient(Control.MousePosition);
+
+            if (layoutViewWindowWidgets.CalcHitInfo(pt).RowHandle == layoutViewWindowWidgets.FocusedRowHandle)
+                layoutViewWindowWidgets_FocusedRowChanged(null, null);
+        }
+        #endregion
         #endregion
 
         #region Column Titles Tab GUI

@@ -1081,6 +1081,7 @@
             this.colorEditBannerTextColor.Size = new System.Drawing.Size(105, 22);
             this.colorEditBannerTextColor.StyleController = this.styleController;
             this.colorEditBannerTextColor.TabIndex = 32;
+            this.colorEditBannerTextColor.EditValueChanged += new System.EventHandler(this.colorEditBannerTextColor_EditValueChanged);
             // 
             // buttonEditBannerTextFont
             // 
@@ -1096,6 +1097,7 @@
             this.buttonEditBannerTextFont.StyleController = this.styleController;
             this.buttonEditBannerTextFont.TabIndex = 31;
             this.buttonEditBannerTextFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
+            this.buttonEditBannerTextFont.EditValueChanged += new System.EventHandler(this.buttonEditBannerTextFont_EditValueChanged);
             this.buttonEditBannerTextFont.Click += new System.EventHandler(this.FontEdit_Click);
             // 
             // memoEditBannerText

@@ -15,7 +15,7 @@ namespace FileManager.PresentationClasses.WallBin
         public int GetHeight()
         {
             Size labelSize = new Size(this.Width, Int32.MaxValue);
-            return TextRenderer.MeasureText(laColumnTitle.Text, laColumnTitle.Font, labelSize, TextFormatFlags.WordBreak).Height + 10;
+            return TextRenderer.MeasureText(laColumnTitle.Text, laColumnTitle.Font, labelSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height + 10;
         }
     }
 }

@@ -140,7 +140,7 @@ namespace FileManager
             using (ToolForms.FormProgress form = new ToolForms.FormProgress())
             {
                 ribbonControl.Enabled = false;
-                form.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Upgrading your Sales Library to Version 6..." : "Load Libraries...";
+                form.laProgress.Text = BusinessClasses.LibraryManager.Instance.OldStyleProceed ? "Upgrading your Sales Library to Version 6..." : "Loading Libraries...";
                 form.TopMost = true;
 
                 ribbonControl_SelectedRibbonTabChanged(null, null);

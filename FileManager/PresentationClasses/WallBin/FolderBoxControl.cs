@@ -46,14 +46,85 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 _folder = value;
 
-                laFolderName.Text = _folder.Name;
+                if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
+                {
+                    pbImage.Visible = true;
+                    pbImage.Image = _folder.BannerProperties.Image;
+                    if (_folder.BannerProperties.ShowText && !string.IsNullOrEmpty(_folder.BannerProperties.Text))
+                    {
+                        laFolderName.Visible = true;
+                        pbImage.Dock = DockStyle.Left;
+                        pbImage.SizeMode = PictureBoxSizeMode.Normal;
+                        laFolderName.Text = _folder.BannerProperties.Text;
+                        laFolderName.Font = _folder.BannerProperties.Font;
+                        laFolderName.ForeColor = _folder.BannerProperties.ForeColor;
+                        switch (_folder.HeaderAlignment)
+                        {
+                            case BusinessClasses.Alignment.Left:
+                                laFolderName.TextAlign = ContentAlignment.MiddleLeft;
+                                break;
+                            case BusinessClasses.Alignment.Center:
+                                laFolderName.TextAlign = ContentAlignment.MiddleCenter;
+                                break;
+                            case BusinessClasses.Alignment.Right:
+                                laFolderName.TextAlign = ContentAlignment.MiddleRight;
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        laFolderName.Visible = false;
+                        switch (_folder.BannerProperties.ImageAlignement)
+                        {
+                            case BusinessClasses.Alignment.Left:
+                                pbImage.Dock = DockStyle.Left;
+                                pbImage.SizeMode = PictureBoxSizeMode.Normal;
+                                break;
+                            case BusinessClasses.Alignment.Center:
+                                pbImage.Dock = DockStyle.Fill;
+                                pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
+                                break;
+                            case BusinessClasses.Alignment.Right:
+                                pbImage.Dock = DockStyle.Right;
+                                pbImage.SizeMode = PictureBoxSizeMode.Normal;
+                                break;
+                        }
+                        pnHeader.Height = _folder.BannerProperties.Image.Height;
+                    }
+                }
+                else
+                {
+                    if (_folder.EnableWidget && _folder.Widget != null)
+                    {
+                        pbImage.Visible = true;
+                        pbImage.Dock = DockStyle.Left;
+                        pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
+                        pbImage.Image = _folder.Widget;
+                    }
+                    else
+                    {
+                        pbImage.Visible = false;
+                    }
+                    laFolderName.Text = _folder.Name;
+                    laFolderName.Font = _folder.HeaderFont;
+                    laFolderName.ForeColor = _folder.ForeHeaderColor;
+                    switch (_folder.HeaderAlignment)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            laFolderName.TextAlign = ContentAlignment.MiddleLeft;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            laFolderName.TextAlign = ContentAlignment.MiddleCenter;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            laFolderName.TextAlign = ContentAlignment.MiddleRight;
+                            break;
+                    }
+                }
 
-                laFolderName.Font = _folder.HeaderFont;
-
-                laFolderName.Left = 0;
+                pnHeader.BackColor = _folder.BackgroundHeaderColor;
+                pbImage.BackColor = _folder.BackgroundHeaderColor;
                 laFolderName.BackColor = _folder.BackgroundHeaderColor;
-
-                laFolderName.ForeColor = _folder.ForeHeaderColor;
 
                 grFiles.BackgroundColor = _folder.BackgroundWindowColor;
                 grFiles.DefaultCellStyle.BackColor = _folder.BackgroundWindowColor;
@@ -62,8 +133,7 @@ namespace FileManager.PresentationClasses.WallBin
                 grFiles.DefaultCellStyle.ForeColor = _folder.ForeWindowColor;
                 grFiles.DefaultCellStyle.SelectionForeColor = _folder.ForeWindowColor;
 
-                Size labelSize = new Size(laFolderName.Width, Int32.MaxValue);
-                laFolderName.Height = TextRenderer.MeasureText(laFolderName.Text, laFolderName.Font, labelSize, TextFormatFlags.WordBreak).Height + 10;
+                SetHeaderSize();
 
                 UpdateDataSource();
 
@@ -142,6 +212,23 @@ namespace FileManager.PresentationClasses.WallBin
             }
             if (_underlineBox)
                 e.Graphics.DrawLine(_boxDropHintPen, 0, 0, this.Width, 0);
+        }
+
+        private void ControlBorders_Paint(object sender, PaintEventArgs e)
+        {
+            Rectangle rect;
+            if (e.ClipRectangle.Top == 0)
+                rect = new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, this.Height);
+            else
+                rect = new Rectangle(e.ClipRectangle.Left, 0, e.ClipRectangle.Width, e.ClipRectangle.Bottom);
+            for (int i = 0; i < 1; i++)
+            {
+                ControlPaint.DrawBorder(e.Graphics, rect, _folder.BorderColor, ButtonBorderStyle.Solid);
+                rect.X = rect.X + 1;
+                rect.Y = rect.Y + 1;
+                rect.Width = rect.Width - 2;
+                rect.Height = rect.Height - 2;
+            }
         }
 
         private void grFiles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -250,7 +337,7 @@ namespace FileManager.PresentationClasses.WallBin
                         if (grFiles.SelectedRows[0].Index == e.RowIndex)
                         {
                             _richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
-                            _richTextControl.ForeColor = grFiles.DefaultCellStyle.SelectionForeColor;
+                            _richTextControl.ForeColor = foreColor;
                         }
                         else
                         {
@@ -833,8 +920,7 @@ namespace FileManager.PresentationClasses.WallBin
 
         private void FolderBoxControl_Resize(object sender, EventArgs e)
         {
-            Size labelSize = new Size(laFolderName.Width, Int32.MaxValue);
-            laFolderName.Height = TextRenderer.MeasureText(laFolderName.Text, laFolderName.Font, labelSize, TextFormatFlags.WordBreak).Height + 10;
+            SetHeaderSize();
             SetGridSize();
         }
 
@@ -877,7 +963,7 @@ namespace FileManager.PresentationClasses.WallBin
                 }
                 else
                 {
-                    switch (file.BannerProperties.ImageAligement)
+                    switch (file.BannerProperties.ImageAlignement)
                     {
                         case BusinessClasses.Alignment.Left:
                             imageLeft = 0;
@@ -939,13 +1025,15 @@ namespace FileManager.PresentationClasses.WallBin
             if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
             {
                 textSize = new Size(Int32.MaxValue, Int32.MaxValue);
-                textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.Default);
+                textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
             }
             else
             {
                 textSize = new Size(Int32.MaxValue, Int32.MaxValue);
                 textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.SingleLine | TextFormatFlags.NoPrefix);
             }
+
+            textSize = new Size(textSize.Width, textSize.Height + 1);
 
             if (file.BannerProperties.Enable)
             {
@@ -957,13 +1045,13 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 textLeft = imageLeft + imageWidth + ImageWidthMargin;
                 textWidth = textSize.Width;
-                textHeight = textSize.Height + ImageWidthMargin;
+                textHeight = textSize.Height;
             }
             else
             {
                 textLeft = imageLeft + imageWidth + (_containsWidgets ? ImageWidthMargin : 0);
                 textWidth = textSize.Width;
-                textHeight = textSize.Height + ImageWidthMargin;
+                textHeight = textSize.Height;
             }
 
             columnWidth = textLeft + textWidth + 10;
@@ -996,6 +1084,42 @@ namespace FileManager.PresentationClasses.WallBin
             }
             columnHeight = textHeight > imageHeight ? textHeight : imageHeight;
             #endregion
+        }
+
+        private void SetHeaderSize()
+        {
+            Size labelSize;
+            int textHeight;
+            if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
+            {
+                pbImage.Width = _folder.BannerProperties.Image.Width;
+                if (_folder.BannerProperties.ShowText && !string.IsNullOrEmpty(_folder.BannerProperties.Text))
+                {
+                    labelSize = new Size(laFolderName.Width, Int32.MaxValue);
+                    textHeight = TextRenderer.MeasureText(laFolderName.Text, laFolderName.Font, labelSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height + 10;
+                    pnHeader.Height = _folder.BannerProperties.Image.Height > textHeight ? _folder.BannerProperties.Image.Height : textHeight;
+                }
+                else
+                {
+                    pnHeader.Height = _folder.BannerProperties.Image.Height;
+                }
+            }
+            else
+            {
+                if (_folder.EnableWidget)
+                {
+                    pbImage.Width = _folder.Widget.Width > DefaultImageWidth ? _folder.Widget.Width : DefaultImageWidth;
+                    labelSize = new Size(laFolderName.Width, Int32.MaxValue);
+                    textHeight = TextRenderer.MeasureText(laFolderName.Text, laFolderName.Font, labelSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height + 10;
+                    pnHeader.Height = _folder.Widget.Height > textHeight ? _folder.Widget.Height : (textHeight > DefaultImageHeight ? textHeight : DefaultImageHeight);
+                }
+                else
+                {
+                    labelSize = new Size(laFolderName.Width, Int32.MaxValue);
+                    textHeight = TextRenderer.MeasureText(laFolderName.Text, laFolderName.Font, labelSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height + 10;
+                    pnHeader.Height = textHeight > DefaultImageHeight ? textHeight : DefaultImageHeight;
+                }
+            }
         }
 
         private void SetGridSize()
@@ -1048,7 +1172,7 @@ namespace FileManager.PresentationClasses.WallBin
             height += +(int)(_noteFont.Size + 5);
             if (height < 90)
                 height = 90;
-            height = height + laFolderName.Height;
+            height = height + pnHeader.Height;
 
             this.Height = height;
             colDisplayName.Width = maxColumnWidth > (grFiles.Width - 10) ? maxColumnWidth : (grFiles.Width - 10);

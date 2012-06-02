@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.ttCellInfo = new System.Windows.Forms.ToolTip();
+            this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
             this.laFolderName = new System.Windows.Forms.Label();
             this.pnGrid = new System.Windows.Forms.Panel();
             this.grFiles = new System.Windows.Forms.DataGridView();
             this.colDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnHeader = new System.Windows.Forms.Panel();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.pnGrid.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
+            this.pnHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.SuspendLayout();
             // 
             // ttCellInfo
@@ -48,13 +53,12 @@
             // laFolderName
             // 
             this.laFolderName.BackColor = System.Drawing.Color.Black;
-            this.laFolderName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.laFolderName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.laFolderName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laFolderName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laFolderName.ForeColor = System.Drawing.Color.White;
-            this.laFolderName.Location = new System.Drawing.Point(0, 0);
+            this.laFolderName.Location = new System.Drawing.Point(43, 0);
             this.laFolderName.Name = "laFolderName";
-            this.laFolderName.Size = new System.Drawing.Size(311, 39);
+            this.laFolderName.Size = new System.Drawing.Size(266, 38);
             this.laFolderName.TabIndex = 1;
             this.laFolderName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.laFolderName.UseMnemonic = false;
@@ -65,12 +69,14 @@
             // pnGrid
             // 
             this.pnGrid.Controls.Add(this.grFiles);
-            this.pnGrid.Controls.Add(this.laFolderName);
+            this.pnGrid.Controls.Add(this.pnHeader);
             this.pnGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnGrid.Location = new System.Drawing.Point(0, 0);
             this.pnGrid.Name = "pnGrid";
+            this.pnGrid.Padding = new System.Windows.Forms.Padding(1);
             this.pnGrid.Size = new System.Drawing.Size(311, 308);
             this.pnGrid.TabIndex = 3;
+            this.pnGrid.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlBorders_Paint);
             // 
             // grFiles
             // 
@@ -80,6 +86,7 @@
             this.grFiles.AllowUserToResizeColumns = false;
             this.grFiles.AllowUserToResizeRows = false;
             this.grFiles.BackgroundColor = System.Drawing.Color.White;
+            this.grFiles.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grFiles.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.grFiles.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.grFiles.ColumnHeadersVisible = false;
@@ -94,7 +101,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grFiles.DefaultCellStyle = dataGridViewCellStyle2;
             this.grFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grFiles.Location = new System.Drawing.Point(0, 39);
+            this.grFiles.Location = new System.Drawing.Point(1, 40);
             this.grFiles.MultiSelect = false;
             this.grFiles.Name = "grFiles";
             this.grFiles.ReadOnly = true;
@@ -104,7 +111,7 @@
             this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grFiles.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.grFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grFiles.Size = new System.Drawing.Size(311, 269);
+            this.grFiles.Size = new System.Drawing.Size(309, 267);
             this.grFiles.TabIndex = 3;
             this.grFiles.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.grWindowFiles_CellBeginEdit);
             this.grFiles.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.grWindowFiles_CellEndEdit);
@@ -132,6 +139,31 @@
             this.colDisplayName.ReadOnly = true;
             this.colDisplayName.Width = 5;
             // 
+            // pnHeader
+            // 
+            this.pnHeader.Controls.Add(this.laFolderName);
+            this.pnHeader.Controls.Add(this.pbImage);
+            this.pnHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnHeader.Location = new System.Drawing.Point(1, 1);
+            this.pnHeader.Name = "pnHeader";
+            this.pnHeader.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.pnHeader.Size = new System.Drawing.Size(309, 39);
+            this.pnHeader.TabIndex = 4;
+            this.pnHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlBorders_Paint);
+            // 
+            // pbImage
+            // 
+            this.pbImage.BackColor = System.Drawing.Color.Black;
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pbImage.Location = new System.Drawing.Point(0, 0);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(43, 38);
+            this.pbImage.TabIndex = 0;
+            this.pbImage.TabStop = false;
+            this.pbImage.Click += new System.EventHandler(this.laFolderName_Click);
+            this.pbImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.laFolderName_MouseDown);
+            this.pbImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.laFolderName_MouseMove);
+            // 
             // FolderBoxControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -141,6 +173,8 @@
             this.Load += new System.EventHandler(this.FileBoxControl_Load);
             this.pnGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grFiles)).EndInit();
+            this.pnHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -152,5 +186,7 @@
         protected System.Windows.Forms.Panel pnGrid;
         private System.Windows.Forms.DataGridView grFiles;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDisplayName;
+        private System.Windows.Forms.Panel pnHeader;
+        private System.Windows.Forms.PictureBox pbImage;
     }
 }

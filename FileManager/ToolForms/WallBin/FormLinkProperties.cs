@@ -178,7 +178,7 @@ namespace FileManager.ToolForms.WallBin
 
         private string FontToString(Font font)
         {
-            string str = font.Name + ", " + ((int)font.Size).ToString();
+            string str = font.Name + ", " + font.Size.ToString("#0");
             if (font.Bold)
                 str = str + ", Bold";
             if (font.Italic)
@@ -293,11 +293,11 @@ namespace FileManager.ToolForms.WallBin
             this.BannerProperties.Enable = checkBoxEnableBanner.Checked;
             this.BannerProperties.Image = pbSelectedBanner.Image;
             if (rbBannerAligmentLeft.Checked)
-                this.BannerProperties.ImageAligement = BusinessClasses.Alignment.Left;
+                this.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Left;
             else if (rbBannerAligmentCenter.Checked)
-                this.BannerProperties.ImageAligement = BusinessClasses.Alignment.Center;
+                this.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Center;
             else if (rbBannerAligmentRight.Checked)
-                this.BannerProperties.ImageAligement = BusinessClasses.Alignment.Right;
+                this.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Right;
             this.BannerProperties.ShowText = checkBoxBannerShowText.Checked;
             this.BannerProperties.Text = memoEditBannerText.EditValue != null ? memoEditBannerText.EditValue.ToString() : string.Empty;
             this.BannerProperties.Font = buttonEditBannerTextFont.Tag as Font;
@@ -387,7 +387,6 @@ namespace FileManager.ToolForms.WallBin
             }
             else
             {
-                xtraTabPageBanner.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.BannerFolder);
                 buttonEditLineBreakFont.Tag = this.LineBreakProperties.Font;
                 buttonEditLineBreakFont.EditValue = FontToString(this.LineBreakProperties.Font);
                 colorEditLineBreakFontColor.Color = this.LineBreakProperties.ForeColor;
@@ -396,9 +395,10 @@ namespace FileManager.ToolForms.WallBin
             pbSelectedWidget.Image = this.EnableWidget ? this.Widget : null;
             checkBoxEnableWidget.Checked = this.EnableWidget;
 
+            xtraTabPageBanner.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.BannerFolder);
             checkBoxEnableBanner.Checked = this.BannerProperties.Enable;
             pbSelectedBanner.Image = this.BannerProperties.Enable ? this.BannerProperties.Image : null;
-            switch (this.BannerProperties.ImageAligement)
+            switch (this.BannerProperties.ImageAlignement)
             {
                 case BusinessClasses.Alignment.Left:
                     rbBannerAligmentLeft.Checked = true;
@@ -417,10 +417,13 @@ namespace FileManager.ToolForms.WallBin
                     break;
             }
             checkBoxBannerShowText.Checked = this.BannerProperties.ShowText;
-            memoEditBannerText.EditValue = this.BannerProperties.Text;
             buttonEditBannerTextFont.Tag = this.BannerProperties.Font;
             buttonEditBannerTextFont.EditValue = FontToString(this.BannerProperties.Font);
             colorEditBannerTextColor.Color = this.BannerProperties.ForeColor;
+            memoEditBannerText.EditValue = this.BannerProperties.Text;
+            memoEditBannerText.Font = this.BannerProperties.Font;
+            memoEditBannerText.ForeColor = this.BannerProperties.ForeColor;
+
         }
 
         private void checkBoxEnableExpiredLinks_CheckedChanged(object sender, EventArgs e)
@@ -564,6 +567,16 @@ namespace FileManager.ToolForms.WallBin
             memoEditBannerText.Enabled = checkBoxBannerShowText.Checked;
             buttonEditBannerTextFont.Enabled = checkBoxBannerShowText.Checked;
             colorEditBannerTextColor.Enabled = checkBoxBannerShowText.Checked;
+        }
+
+        private void colorEditBannerTextColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditBannerText.ForeColor = colorEditBannerTextColor.Color;
+        }
+
+        private void buttonEditBannerTextFont_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditBannerText.Font = buttonEditBannerTextFont.Tag as Font; ;
         }
     }
 }

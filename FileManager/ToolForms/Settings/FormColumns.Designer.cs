@@ -45,23 +45,62 @@
             this.colDWBColumn3WindowName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDWBColumn3OldWindowName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnWindows = new System.Windows.Forms.Panel();
-            this.comboBoxEditWindows = new DevExpress.XtraEditors.ComboBoxEdit();
+            this.xtraTabControlWindowProperties = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPageWindowPropertiesAppearance = new DevExpress.XtraTab.XtraTabPage();
+            this.colorEditWindowBorderColor = new DevExpress.XtraEditors.ColorEdit();
             this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+            this.laWindowBorderColor = new System.Windows.Forms.Label();
+            this.rbWindowHeaderAlignmentRight = new System.Windows.Forms.RadioButton();
+            this.rbWindowHeaderAlignmentCenter = new System.Windows.Forms.RadioButton();
+            this.rbWindowHeaderAlignmentLeft = new System.Windows.Forms.RadioButton();
+            this.laWindowHeaderAlignment = new System.Windows.Forms.Label();
+            this.buttonEditWindowHeaderFont = new DevExpress.XtraEditors.ButtonEdit();
+            this.laWindowHeaderFont = new System.Windows.Forms.Label();
+            this.colorEditWindowForeColor = new DevExpress.XtraEditors.ColorEdit();
+            this.laWindowHeaderBackColor = new System.Windows.Forms.Label();
+            this.colorEditWindowBackColor = new DevExpress.XtraEditors.ColorEdit();
+            this.ckApllyForAllWindowsAppearance = new System.Windows.Forms.CheckBox();
+            this.laWindowForeColor = new System.Windows.Forms.Label();
+            this.colorEditWindowHeaderBackColor = new DevExpress.XtraEditors.ColorEdit();
+            this.laWindowBackColor = new System.Windows.Forms.Label();
+            this.colorEditWindowHeaderForeColor = new DevExpress.XtraEditors.ColorEdit();
+            this.laWindowHeaderForeColor = new System.Windows.Forms.Label();
+            this.xtraTabPageWindowPropertiesWidget = new DevExpress.XtraTab.XtraTabPage();
+            this.ckApllyForAllWindowsWidget = new System.Windows.Forms.CheckBox();
+            this.gbWindowWidgets = new System.Windows.Forms.GroupBox();
+            this.gridControlWindowWidgets = new DevExpress.XtraGrid.GridControl();
+            this.layoutViewWindowWidgets = new DevExpress.XtraGrid.Views.Layout.LayoutView();
+            this.gridColumnWindowWidget = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            this.repositoryItemPictureEditWindowWidget = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.layoutViewField_gridColumnImage_1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
+            this.pbWindowSelectedWidget = new System.Windows.Forms.PictureBox();
+            this.laWindowAvailableWidgets = new System.Windows.Forms.Label();
+            this.laWindowSelectedWidget = new System.Windows.Forms.Label();
+            this.ckWindowEnableWidget = new System.Windows.Forms.CheckBox();
+            this.xtraTabPageWindowPropertiesBanner = new DevExpress.XtraTab.XtraTabPage();
+            this.ckApllyForAllWindowsBanner = new System.Windows.Forms.CheckBox();
+            this.gbWindowBanners = new System.Windows.Forms.GroupBox();
+            this.colorEditWindowBannerTextColor = new DevExpress.XtraEditors.ColorEdit();
+            this.buttonEditWindowBannerTextFont = new DevExpress.XtraEditors.ButtonEdit();
+            this.memoEditWindowBannerText = new DevExpress.XtraEditors.MemoEdit();
+            this.ckWindowBannerShowText = new System.Windows.Forms.CheckBox();
+            this.rbWindowBannerAlignmentRight = new System.Windows.Forms.RadioButton();
+            this.rbWindowBannerAlignmentCenter = new System.Windows.Forms.RadioButton();
+            this.rbWindowBannerAlignmentLeft = new System.Windows.Forms.RadioButton();
+            this.laWindowBannerAligment = new System.Windows.Forms.Label();
+            this.gridControlWindowBanners = new DevExpress.XtraGrid.GridControl();
+            this.gridViewWindowBanners = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnWindowBanner = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemPictureEditWindowBanner = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.pbWindowSelectedBanner = new System.Windows.Forms.PictureBox();
+            this.laWindowAvailableBanners = new System.Windows.Forms.Label();
+            this.laWindowSelectedBanner = new System.Windows.Forms.Label();
+            this.ckWindowEnableBanner = new System.Windows.Forms.CheckBox();
+            this.comboBoxEditWindows = new DevExpress.XtraEditors.ComboBoxEdit();
             this.laLocationValue = new System.Windows.Forms.Label();
             this.laWindow = new System.Windows.Forms.Label();
             this.laLocationHeader = new System.Windows.Forms.Label();
-            this.gbWindowAppearance = new System.Windows.Forms.GroupBox();
-            this.buttonEditHeaderFont = new DevExpress.XtraEditors.ButtonEdit();
-            this.colorEditWindowFont = new DevExpress.XtraEditors.ColorEdit();
-            this.colorEditWindowBack = new DevExpress.XtraEditors.ColorEdit();
-            this.colorEditHeaderFont = new DevExpress.XtraEditors.ColorEdit();
-            this.colorEditHeaderBack = new DevExpress.XtraEditors.ColorEdit();
-            this.laHeaderFont = new System.Windows.Forms.Label();
-            this.laWindowFore = new System.Windows.Forms.Label();
-            this.laWindowBack = new System.Windows.Forms.Label();
-            this.laHeaderFore = new System.Windows.Forms.Label();
-            this.laHeaderBack = new System.Windows.Forms.Label();
-            this.ckApllyForAllWindows = new System.Windows.Forms.CheckBox();
             this.toolTipSalesDepotSettings = new System.Windows.Forms.ToolTip(this.components);
             this.dlgFont = new System.Windows.Forms.FontDialog();
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -121,14 +160,34 @@
             ((System.ComponentModel.ISupportInitialize)(this.grColumn2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grColumn3)).BeginInit();
             this.pnWindows.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditWindows.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWindowProperties)).BeginInit();
+            this.xtraTabControlWindowProperties.SuspendLayout();
+            this.xtraTabPageWindowPropertiesAppearance.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBorderColor.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
-            this.gbWindowAppearance.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEditHeaderFont.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowFont.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBack.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditHeaderFont.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditHeaderBack.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditWindowHeaderFont.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowForeColor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBackColor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).BeginInit();
+            this.xtraTabPageWindowPropertiesWidget.SuspendLayout();
+            this.gbWindowWidgets.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlWindowWidgets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewWindowWidgets)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditWindowWidget)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumnImage_1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWindowSelectedWidget)).BeginInit();
+            this.xtraTabPageWindowPropertiesBanner.SuspendLayout();
+            this.gbWindowBanners.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBannerTextColor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditWindowBannerTextFont.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEditWindowBannerText.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlWindowBanners)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewWindowBanners)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditWindowBanner)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWindowSelectedBanner)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditWindows.Properties)).BeginInit();
             this.contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSettings)).BeginInit();
             this.xtraTabControlSettings.SuspendLayout();
@@ -189,7 +248,7 @@
             this.grColumn1.RowHeadersVisible = false;
             this.grColumn1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grColumn1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grColumn1.Size = new System.Drawing.Size(439, 331);
+            this.grColumn1.Size = new System.Drawing.Size(507, 409);
             this.grColumn1.TabIndex = 1;
             this.grColumn1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grColumn_CellMouseClick);
             this.grColumn1.SelectionChanged += new System.EventHandler(this.grColumn1_SelectionChanged);
@@ -242,7 +301,7 @@
             this.grColumn2.RowHeadersVisible = false;
             this.grColumn2.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grColumn2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grColumn2.Size = new System.Drawing.Size(439, 331);
+            this.grColumn2.Size = new System.Drawing.Size(507, 409);
             this.grColumn2.TabIndex = 2;
             this.grColumn2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grColumn_CellMouseClick);
             this.grColumn2.SelectionChanged += new System.EventHandler(this.grColumn2_SelectionChanged);
@@ -295,7 +354,7 @@
             this.grColumn3.RowHeadersVisible = false;
             this.grColumn3.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grColumn3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grColumn3.Size = new System.Drawing.Size(439, 331);
+            this.grColumn3.Size = new System.Drawing.Size(507, 409);
             this.grColumn3.TabIndex = 2;
             this.grColumn3.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.grColumn_CellMouseClick);
             this.grColumn3.SelectionChanged += new System.EventHandler(this.grColumn3_SelectionChanged);
@@ -318,29 +377,78 @@
             // 
             // pnWindows
             // 
+            this.pnWindows.Controls.Add(this.xtraTabControlWindowProperties);
             this.pnWindows.Controls.Add(this.comboBoxEditWindows);
             this.pnWindows.Controls.Add(this.laLocationValue);
             this.pnWindows.Controls.Add(this.laWindow);
             this.pnWindows.Controls.Add(this.laLocationHeader);
-            this.pnWindows.Controls.Add(this.gbWindowAppearance);
-            this.pnWindows.Controls.Add(this.ckApllyForAllWindows);
             this.pnWindows.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnWindows.Location = new System.Drawing.Point(0, 0);
             this.pnWindows.Name = "pnWindows";
-            this.pnWindows.Size = new System.Drawing.Size(500, 371);
+            this.pnWindows.Size = new System.Drawing.Size(568, 449);
             this.pnWindows.TabIndex = 19;
             // 
-            // comboBoxEditWindows
+            // xtraTabControlWindowProperties
             // 
-            this.comboBoxEditWindows.Location = new System.Drawing.Point(10, 31);
-            this.comboBoxEditWindows.Name = "comboBoxEditWindows";
-            this.comboBoxEditWindows.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.xtraTabControlWindowProperties.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.xtraTabControlWindowProperties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.xtraTabControlWindowProperties.Appearance.Options.UseFont = true;
+            this.xtraTabControlWindowProperties.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControlWindowProperties.AppearancePage.Header.Options.UseFont = true;
+            this.xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.xtraTabControlWindowProperties.AppearancePage.HeaderActive.Options.UseFont = true;
+            this.xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Options.UseFont = true;
+            this.xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Options.UseFont = true;
+            this.xtraTabControlWindowProperties.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControlWindowProperties.AppearancePage.PageClient.Options.UseFont = true;
+            this.xtraTabControlWindowProperties.Location = new System.Drawing.Point(10, 94);
+            this.xtraTabControlWindowProperties.Name = "xtraTabControlWindowProperties";
+            this.xtraTabControlWindowProperties.SelectedTabPage = this.xtraTabPageWindowPropertiesAppearance;
+            this.xtraTabControlWindowProperties.Size = new System.Drawing.Size(547, 341);
+            this.xtraTabControlWindowProperties.TabIndex = 24;
+            this.xtraTabControlWindowProperties.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPageWindowPropertiesAppearance,
+            this.xtraTabPageWindowPropertiesWidget,
+            this.xtraTabPageWindowPropertiesBanner});
+            // 
+            // xtraTabPageWindowPropertiesAppearance
+            // 
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.colorEditWindowBorderColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowBorderColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.rbWindowHeaderAlignmentRight);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.rbWindowHeaderAlignmentCenter);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.rbWindowHeaderAlignmentLeft);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowHeaderAlignment);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.buttonEditWindowHeaderFont);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowHeaderFont);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.colorEditWindowForeColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowHeaderBackColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.colorEditWindowBackColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.ckApllyForAllWindowsAppearance);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowForeColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.colorEditWindowHeaderBackColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowBackColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.colorEditWindowHeaderForeColor);
+            this.xtraTabPageWindowPropertiesAppearance.Controls.Add(this.laWindowHeaderForeColor);
+            this.xtraTabPageWindowPropertiesAppearance.Name = "xtraTabPageWindowPropertiesAppearance";
+            this.xtraTabPageWindowPropertiesAppearance.Size = new System.Drawing.Size(545, 315);
+            this.xtraTabPageWindowPropertiesAppearance.Text = "Appearance";
+            // 
+            // colorEditWindowBorderColor
+            // 
+            this.colorEditWindowBorderColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditWindowBorderColor.Location = new System.Drawing.Point(153, 82);
+            this.colorEditWindowBorderColor.Name = "colorEditWindowBorderColor";
+            this.colorEditWindowBorderColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.comboBoxEditWindows.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditWindows.Size = new System.Drawing.Size(475, 22);
-            this.comboBoxEditWindows.StyleController = this.styleController;
-            this.comboBoxEditWindows.TabIndex = 23;
-            this.comboBoxEditWindows.SelectedIndexChanged += new System.EventHandler(this.cbWindows_SelectedIndexChanged);
+            this.colorEditWindowBorderColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditWindowBorderColor.Size = new System.Drawing.Size(100, 22);
+            this.colorEditWindowBorderColor.StyleController = this.styleController;
+            this.colorEditWindowBorderColor.TabIndex = 34;
             // 
             // styleController
             // 
@@ -356,6 +464,657 @@
             this.styleController.AppearanceFocused.Options.UseFont = true;
             this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
             this.styleController.AppearanceReadOnly.Options.UseFont = true;
+            // 
+            // laWindowBorderColor
+            // 
+            this.laWindowBorderColor.AutoSize = true;
+            this.laWindowBorderColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowBorderColor.Location = new System.Drawing.Point(3, 85);
+            this.laWindowBorderColor.Name = "laWindowBorderColor";
+            this.laWindowBorderColor.Size = new System.Drawing.Size(84, 16);
+            this.laWindowBorderColor.TabIndex = 33;
+            this.laWindowBorderColor.Text = "Border Color";
+            // 
+            // rbWindowHeaderAlignmentRight
+            // 
+            this.rbWindowHeaderAlignmentRight.AutoSize = true;
+            this.rbWindowHeaderAlignmentRight.Location = new System.Drawing.Point(365, 157);
+            this.rbWindowHeaderAlignmentRight.Name = "rbWindowHeaderAlignmentRight";
+            this.rbWindowHeaderAlignmentRight.Size = new System.Drawing.Size(56, 20);
+            this.rbWindowHeaderAlignmentRight.TabIndex = 32;
+            this.rbWindowHeaderAlignmentRight.TabStop = true;
+            this.rbWindowHeaderAlignmentRight.Text = "Right";
+            this.rbWindowHeaderAlignmentRight.UseVisualStyleBackColor = true;
+            this.rbWindowHeaderAlignmentRight.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // rbWindowHeaderAlignmentCenter
+            // 
+            this.rbWindowHeaderAlignmentCenter.AutoSize = true;
+            this.rbWindowHeaderAlignmentCenter.Location = new System.Drawing.Point(260, 157);
+            this.rbWindowHeaderAlignmentCenter.Name = "rbWindowHeaderAlignmentCenter";
+            this.rbWindowHeaderAlignmentCenter.Size = new System.Drawing.Size(64, 20);
+            this.rbWindowHeaderAlignmentCenter.TabIndex = 31;
+            this.rbWindowHeaderAlignmentCenter.TabStop = true;
+            this.rbWindowHeaderAlignmentCenter.Text = "Center";
+            this.rbWindowHeaderAlignmentCenter.UseVisualStyleBackColor = true;
+            this.rbWindowHeaderAlignmentCenter.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // rbWindowHeaderAlignmentLeft
+            // 
+            this.rbWindowHeaderAlignmentLeft.AutoSize = true;
+            this.rbWindowHeaderAlignmentLeft.Location = new System.Drawing.Point(153, 157);
+            this.rbWindowHeaderAlignmentLeft.Name = "rbWindowHeaderAlignmentLeft";
+            this.rbWindowHeaderAlignmentLeft.Size = new System.Drawing.Size(47, 20);
+            this.rbWindowHeaderAlignmentLeft.TabIndex = 30;
+            this.rbWindowHeaderAlignmentLeft.TabStop = true;
+            this.rbWindowHeaderAlignmentLeft.Text = "Left";
+            this.rbWindowHeaderAlignmentLeft.UseVisualStyleBackColor = true;
+            this.rbWindowHeaderAlignmentLeft.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // laWindowHeaderAlignment
+            // 
+            this.laWindowHeaderAlignment.AutoSize = true;
+            this.laWindowHeaderAlignment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowHeaderAlignment.Location = new System.Drawing.Point(3, 159);
+            this.laWindowHeaderAlignment.Name = "laWindowHeaderAlignment";
+            this.laWindowHeaderAlignment.Size = new System.Drawing.Size(109, 16);
+            this.laWindowHeaderAlignment.TabIndex = 29;
+            this.laWindowHeaderAlignment.Text = "Header Aligment";
+            // 
+            // buttonEditWindowHeaderFont
+            // 
+            this.buttonEditWindowHeaderFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditWindowHeaderFont.Location = new System.Drawing.Point(153, 120);
+            this.buttonEditWindowHeaderFont.Name = "buttonEditWindowHeaderFont";
+            this.buttonEditWindowHeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.buttonEditWindowHeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEditWindowHeaderFont.Size = new System.Drawing.Size(379, 22);
+            this.buttonEditWindowHeaderFont.StyleController = this.styleController;
+            this.buttonEditWindowHeaderFont.TabIndex = 28;
+            this.buttonEditWindowHeaderFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
+            this.buttonEditWindowHeaderFont.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            this.buttonEditWindowHeaderFont.Click += new System.EventHandler(this.FontEdit_Click);
+            // 
+            // laWindowHeaderFont
+            // 
+            this.laWindowHeaderFont.AutoSize = true;
+            this.laWindowHeaderFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowHeaderFont.Location = new System.Drawing.Point(3, 123);
+            this.laWindowHeaderFont.Name = "laWindowHeaderFont";
+            this.laWindowHeaderFont.Size = new System.Drawing.Size(83, 16);
+            this.laWindowHeaderFont.TabIndex = 16;
+            this.laWindowHeaderFont.Text = "Header Font";
+            // 
+            // colorEditWindowForeColor
+            // 
+            this.colorEditWindowForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.colorEditWindowForeColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditWindowForeColor.Location = new System.Drawing.Point(432, 45);
+            this.colorEditWindowForeColor.Name = "colorEditWindowForeColor";
+            this.colorEditWindowForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEditWindowForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditWindowForeColor.Size = new System.Drawing.Size(100, 22);
+            this.colorEditWindowForeColor.StyleController = this.styleController;
+            this.colorEditWindowForeColor.TabIndex = 27;
+            this.colorEditWindowForeColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            // 
+            // laWindowHeaderBackColor
+            // 
+            this.laWindowHeaderBackColor.AutoSize = true;
+            this.laWindowHeaderBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowHeaderBackColor.Location = new System.Drawing.Point(3, 14);
+            this.laWindowHeaderBackColor.Name = "laWindowHeaderBackColor";
+            this.laWindowHeaderBackColor.Size = new System.Drawing.Size(123, 16);
+            this.laWindowHeaderBackColor.TabIndex = 0;
+            this.laWindowHeaderBackColor.Text = "Header Back Color";
+            // 
+            // colorEditWindowBackColor
+            // 
+            this.colorEditWindowBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.colorEditWindowBackColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditWindowBackColor.Location = new System.Drawing.Point(432, 11);
+            this.colorEditWindowBackColor.Name = "colorEditWindowBackColor";
+            this.colorEditWindowBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEditWindowBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditWindowBackColor.Size = new System.Drawing.Size(100, 22);
+            this.colorEditWindowBackColor.StyleController = this.styleController;
+            this.colorEditWindowBackColor.TabIndex = 26;
+            this.colorEditWindowBackColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            // 
+            // ckApllyForAllWindowsAppearance
+            // 
+            this.ckApllyForAllWindowsAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ckApllyForAllWindowsAppearance.AutoSize = true;
+            this.ckApllyForAllWindowsAppearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.ckApllyForAllWindowsAppearance.Location = new System.Drawing.Point(6, 292);
+            this.ckApllyForAllWindowsAppearance.Name = "ckApllyForAllWindowsAppearance";
+            this.ckApllyForAllWindowsAppearance.Size = new System.Drawing.Size(230, 20);
+            this.ckApllyForAllWindowsAppearance.TabIndex = 15;
+            this.ckApllyForAllWindowsAppearance.Text = "Apply Appearance to All Windows";
+            this.ckApllyForAllWindowsAppearance.UseVisualStyleBackColor = true;
+            this.ckApllyForAllWindowsAppearance.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // laWindowForeColor
+            // 
+            this.laWindowForeColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.laWindowForeColor.AutoSize = true;
+            this.laWindowForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowForeColor.Location = new System.Drawing.Point(286, 48);
+            this.laWindowForeColor.Name = "laWindowForeColor";
+            this.laWindowForeColor.Size = new System.Drawing.Size(120, 16);
+            this.laWindowForeColor.TabIndex = 12;
+            this.laWindowForeColor.Text = "Window Font Color";
+            // 
+            // colorEditWindowHeaderBackColor
+            // 
+            this.colorEditWindowHeaderBackColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditWindowHeaderBackColor.Location = new System.Drawing.Point(153, 11);
+            this.colorEditWindowHeaderBackColor.Name = "colorEditWindowHeaderBackColor";
+            this.colorEditWindowHeaderBackColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEditWindowHeaderBackColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditWindowHeaderBackColor.Size = new System.Drawing.Size(100, 22);
+            this.colorEditWindowHeaderBackColor.StyleController = this.styleController;
+            this.colorEditWindowHeaderBackColor.TabIndex = 24;
+            this.colorEditWindowHeaderBackColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            // 
+            // laWindowBackColor
+            // 
+            this.laWindowBackColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.laWindowBackColor.AutoSize = true;
+            this.laWindowBackColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowBackColor.Location = new System.Drawing.Point(286, 14);
+            this.laWindowBackColor.Name = "laWindowBackColor";
+            this.laWindowBackColor.Size = new System.Drawing.Size(125, 16);
+            this.laWindowBackColor.TabIndex = 9;
+            this.laWindowBackColor.Text = "Window Back Color";
+            // 
+            // colorEditWindowHeaderForeColor
+            // 
+            this.colorEditWindowHeaderForeColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditWindowHeaderForeColor.Location = new System.Drawing.Point(153, 45);
+            this.colorEditWindowHeaderForeColor.Name = "colorEditWindowHeaderForeColor";
+            this.colorEditWindowHeaderForeColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEditWindowHeaderForeColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditWindowHeaderForeColor.Size = new System.Drawing.Size(100, 22);
+            this.colorEditWindowHeaderForeColor.StyleController = this.styleController;
+            this.colorEditWindowHeaderForeColor.TabIndex = 25;
+            this.colorEditWindowHeaderForeColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            // 
+            // laWindowHeaderForeColor
+            // 
+            this.laWindowHeaderForeColor.AutoSize = true;
+            this.laWindowHeaderForeColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowHeaderForeColor.Location = new System.Drawing.Point(3, 48);
+            this.laWindowHeaderForeColor.Name = "laWindowHeaderForeColor";
+            this.laWindowHeaderForeColor.Size = new System.Drawing.Size(118, 16);
+            this.laWindowHeaderForeColor.TabIndex = 6;
+            this.laWindowHeaderForeColor.Text = "Header Font Color";
+            // 
+            // xtraTabPageWindowPropertiesWidget
+            // 
+            this.xtraTabPageWindowPropertiesWidget.Controls.Add(this.ckApllyForAllWindowsWidget);
+            this.xtraTabPageWindowPropertiesWidget.Controls.Add(this.gbWindowWidgets);
+            this.xtraTabPageWindowPropertiesWidget.Controls.Add(this.ckWindowEnableWidget);
+            this.xtraTabPageWindowPropertiesWidget.Name = "xtraTabPageWindowPropertiesWidget";
+            this.xtraTabPageWindowPropertiesWidget.Size = new System.Drawing.Size(545, 315);
+            this.xtraTabPageWindowPropertiesWidget.Text = "Widget";
+            // 
+            // ckApllyForAllWindowsWidget
+            // 
+            this.ckApllyForAllWindowsWidget.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ckApllyForAllWindowsWidget.AutoSize = true;
+            this.ckApllyForAllWindowsWidget.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.ckApllyForAllWindowsWidget.Location = new System.Drawing.Point(3, 292);
+            this.ckApllyForAllWindowsWidget.Name = "ckApllyForAllWindowsWidget";
+            this.ckApllyForAllWindowsWidget.Size = new System.Drawing.Size(198, 20);
+            this.ckApllyForAllWindowsWidget.TabIndex = 34;
+            this.ckApllyForAllWindowsWidget.Text = "Apply Widget to All Windows";
+            this.ckApllyForAllWindowsWidget.UseVisualStyleBackColor = true;
+            this.ckApllyForAllWindowsWidget.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // gbWindowWidgets
+            // 
+            this.gbWindowWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbWindowWidgets.Controls.Add(this.gridControlWindowWidgets);
+            this.gbWindowWidgets.Controls.Add(this.pbWindowSelectedWidget);
+            this.gbWindowWidgets.Controls.Add(this.laWindowAvailableWidgets);
+            this.gbWindowWidgets.Controls.Add(this.laWindowSelectedWidget);
+            this.gbWindowWidgets.Enabled = false;
+            this.gbWindowWidgets.Location = new System.Drawing.Point(3, 23);
+            this.gbWindowWidgets.Name = "gbWindowWidgets";
+            this.gbWindowWidgets.Size = new System.Drawing.Size(539, 263);
+            this.gbWindowWidgets.TabIndex = 5;
+            this.gbWindowWidgets.TabStop = false;
+            // 
+            // gridControlWindowWidgets
+            // 
+            this.gridControlWindowWidgets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridControlWindowWidgets.Location = new System.Drawing.Point(9, 79);
+            this.gridControlWindowWidgets.MainView = this.layoutViewWindowWidgets;
+            this.gridControlWindowWidgets.Name = "gridControlWindowWidgets";
+            this.gridControlWindowWidgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemPictureEditWindowWidget});
+            this.gridControlWindowWidgets.Size = new System.Drawing.Size(524, 178);
+            this.gridControlWindowWidgets.TabIndex = 4;
+            this.gridControlWindowWidgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.layoutViewWindowWidgets});
+            // 
+            // layoutViewWindowWidgets
+            // 
+            this.layoutViewWindowWidgets.CardMinSize = new System.Drawing.Size(42, 39);
+            this.layoutViewWindowWidgets.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] {
+            this.gridColumnWindowWidget});
+            this.layoutViewWindowWidgets.GridControl = this.gridControlWindowWidgets;
+            this.layoutViewWindowWidgets.Name = "layoutViewWindowWidgets";
+            this.layoutViewWindowWidgets.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.layoutViewWindowWidgets.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.layoutViewWindowWidgets.OptionsBehavior.AllowExpandCollapse = false;
+            this.layoutViewWindowWidgets.OptionsBehavior.AllowRuntimeCustomization = false;
+            this.layoutViewWindowWidgets.OptionsBehavior.AutoSelectAllInEditor = false;
+            this.layoutViewWindowWidgets.OptionsBehavior.Editable = false;
+            this.layoutViewWindowWidgets.OptionsBehavior.ReadOnly = true;
+            this.layoutViewWindowWidgets.OptionsCustomization.AllowFilter = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.AllowSort = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupCardCaptions = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupCardIndents = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupCards = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupFields = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupHiddenItems = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupLayout = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupLayoutTreeView = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowGroupView = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowResetShrinkButtons = false;
+            this.layoutViewWindowWidgets.OptionsCustomization.ShowSaveLoadLayoutButtons = false;
+            this.layoutViewWindowWidgets.OptionsFind.AllowFindPanel = false;
+            this.layoutViewWindowWidgets.OptionsFind.ClearFindOnClose = false;
+            this.layoutViewWindowWidgets.OptionsFind.ShowCloseButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableCarouselModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableColumnModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableCustomizeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableMultiColumnModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableMultiRowModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnablePanButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableRowModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.EnableSingleModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowCarouselModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowColumnModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowCustomizeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowMultiColumnModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowMultiRowModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowPanButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowRowModeButton = false;
+            this.layoutViewWindowWidgets.OptionsHeaderPanel.ShowSingleModeButton = false;
+            this.layoutViewWindowWidgets.OptionsItemText.TextToControlDistance = 2;
+            this.layoutViewWindowWidgets.OptionsMultiRecordMode.MultiRowScrollBarOrientation = DevExpress.XtraGrid.Views.Layout.ScrollBarOrientation.Vertical;
+            this.layoutViewWindowWidgets.OptionsView.ShowCardCaption = false;
+            this.layoutViewWindowWidgets.OptionsView.ShowCardExpandButton = false;
+            this.layoutViewWindowWidgets.OptionsView.ShowCardLines = false;
+            this.layoutViewWindowWidgets.OptionsView.ShowFieldHints = false;
+            this.layoutViewWindowWidgets.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
+            this.layoutViewWindowWidgets.OptionsView.ShowHeaderPanel = false;
+            this.layoutViewWindowWidgets.OptionsView.ViewMode = DevExpress.XtraGrid.Views.Layout.LayoutViewMode.MultiRow;
+            this.layoutViewWindowWidgets.TemplateCard = this.layoutViewCard1;
+            this.layoutViewWindowWidgets.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.layoutViewWindowWidgets_FocusedRowChanged);
+            this.layoutViewWindowWidgets.Click += new System.EventHandler(this.layoutViewWindowWidgets_Click);
+            // 
+            // gridColumnWindowWidget
+            // 
+            this.gridColumnWindowWidget.Caption = "Image";
+            this.gridColumnWindowWidget.ColumnEdit = this.repositoryItemPictureEditWindowWidget;
+            this.gridColumnWindowWidget.FieldName = "Image";
+            this.gridColumnWindowWidget.LayoutViewField = this.layoutViewField_gridColumnImage_1;
+            this.gridColumnWindowWidget.Name = "gridColumnWindowWidget";
+            // 
+            // repositoryItemPictureEditWindowWidget
+            // 
+            this.repositoryItemPictureEditWindowWidget.Name = "repositoryItemPictureEditWindowWidget";
+            this.repositoryItemPictureEditWindowWidget.ReadOnly = true;
+            this.repositoryItemPictureEditWindowWidget.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Squeeze;
+            // 
+            // layoutViewField_gridColumnImage_1
+            // 
+            this.layoutViewField_gridColumnImage_1.EditorPreferredWidth = 36;
+            this.layoutViewField_gridColumnImage_1.Location = new System.Drawing.Point(0, 0);
+            this.layoutViewField_gridColumnImage_1.Name = "layoutViewField_gridColumnImage_1";
+            this.layoutViewField_gridColumnImage_1.Size = new System.Drawing.Size(42, 28);
+            this.layoutViewField_gridColumnImage_1.Spacing = new DevExpress.XtraLayout.Utils.Padding(1, 1, 1, 1);
+            this.layoutViewField_gridColumnImage_1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutViewField_gridColumnImage_1.TextToControlDistance = 0;
+            this.layoutViewField_gridColumnImage_1.TextVisible = false;
+            // 
+            // layoutViewCard1
+            // 
+            this.layoutViewCard1.CustomizationFormText = "TemplateCard";
+            this.layoutViewCard1.ExpandButtonLocation = DevExpress.Utils.GroupElementLocation.AfterText;
+            this.layoutViewCard1.GroupBordersVisible = false;
+            this.layoutViewCard1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutViewField_gridColumnImage_1});
+            this.layoutViewCard1.Name = "layoutViewCard1";
+            this.layoutViewCard1.OptionsItemText.TextToControlDistance = 2;
+            this.layoutViewCard1.Text = "TemplateCard";
+            // 
+            // pbWindowSelectedWidget
+            // 
+            this.pbWindowSelectedWidget.Location = new System.Drawing.Point(129, 9);
+            this.pbWindowSelectedWidget.Name = "pbWindowSelectedWidget";
+            this.pbWindowSelectedWidget.Size = new System.Drawing.Size(36, 36);
+            this.pbWindowSelectedWidget.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pbWindowSelectedWidget.TabIndex = 3;
+            this.pbWindowSelectedWidget.TabStop = false;
+            // 
+            // laWindowAvailableWidgets
+            // 
+            this.laWindowAvailableWidgets.AutoSize = true;
+            this.laWindowAvailableWidgets.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowAvailableWidgets.Location = new System.Drawing.Point(6, 60);
+            this.laWindowAvailableWidgets.Name = "laWindowAvailableWidgets";
+            this.laWindowAvailableWidgets.Size = new System.Drawing.Size(254, 16);
+            this.laWindowAvailableWidgets.TabIndex = 2;
+            this.laWindowAvailableWidgets.Text = "Click on image below to select widget:";
+            // 
+            // laWindowSelectedWidget
+            // 
+            this.laWindowSelectedWidget.AutoSize = true;
+            this.laWindowSelectedWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowSelectedWidget.Location = new System.Drawing.Point(6, 19);
+            this.laWindowSelectedWidget.Name = "laWindowSelectedWidget";
+            this.laWindowSelectedWidget.Size = new System.Drawing.Size(117, 16);
+            this.laWindowSelectedWidget.TabIndex = 0;
+            this.laWindowSelectedWidget.Text = "Selected Widget:";
+            // 
+            // ckWindowEnableWidget
+            // 
+            this.ckWindowEnableWidget.AutoSize = true;
+            this.ckWindowEnableWidget.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ckWindowEnableWidget.Location = new System.Drawing.Point(3, 6);
+            this.ckWindowEnableWidget.Name = "ckWindowEnableWidget";
+            this.ckWindowEnableWidget.Size = new System.Drawing.Size(120, 20);
+            this.ckWindowEnableWidget.TabIndex = 4;
+            this.ckWindowEnableWidget.Text = "Enable Widget";
+            this.ckWindowEnableWidget.UseVisualStyleBackColor = true;
+            this.ckWindowEnableWidget.CheckedChanged += new System.EventHandler(this.ckWindowEnableWidget_CheckedChanged);
+            // 
+            // xtraTabPageWindowPropertiesBanner
+            // 
+            this.xtraTabPageWindowPropertiesBanner.Controls.Add(this.ckApllyForAllWindowsBanner);
+            this.xtraTabPageWindowPropertiesBanner.Controls.Add(this.gbWindowBanners);
+            this.xtraTabPageWindowPropertiesBanner.Controls.Add(this.ckWindowEnableBanner);
+            this.xtraTabPageWindowPropertiesBanner.Name = "xtraTabPageWindowPropertiesBanner";
+            this.xtraTabPageWindowPropertiesBanner.Size = new System.Drawing.Size(545, 315);
+            this.xtraTabPageWindowPropertiesBanner.Text = "Banner";
+            // 
+            // ckApllyForAllWindowsBanner
+            // 
+            this.ckApllyForAllWindowsBanner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ckApllyForAllWindowsBanner.AutoSize = true;
+            this.ckApllyForAllWindowsBanner.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.ckApllyForAllWindowsBanner.Location = new System.Drawing.Point(3, 292);
+            this.ckApllyForAllWindowsBanner.Name = "ckApllyForAllWindowsBanner";
+            this.ckApllyForAllWindowsBanner.Size = new System.Drawing.Size(198, 20);
+            this.ckApllyForAllWindowsBanner.TabIndex = 33;
+            this.ckApllyForAllWindowsBanner.Text = "Apply Banner to All Windows";
+            this.ckApllyForAllWindowsBanner.UseVisualStyleBackColor = true;
+            this.ckApllyForAllWindowsBanner.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // gbWindowBanners
+            // 
+            this.gbWindowBanners.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbWindowBanners.Controls.Add(this.colorEditWindowBannerTextColor);
+            this.gbWindowBanners.Controls.Add(this.buttonEditWindowBannerTextFont);
+            this.gbWindowBanners.Controls.Add(this.memoEditWindowBannerText);
+            this.gbWindowBanners.Controls.Add(this.ckWindowBannerShowText);
+            this.gbWindowBanners.Controls.Add(this.rbWindowBannerAlignmentRight);
+            this.gbWindowBanners.Controls.Add(this.rbWindowBannerAlignmentCenter);
+            this.gbWindowBanners.Controls.Add(this.rbWindowBannerAlignmentLeft);
+            this.gbWindowBanners.Controls.Add(this.laWindowBannerAligment);
+            this.gbWindowBanners.Controls.Add(this.gridControlWindowBanners);
+            this.gbWindowBanners.Controls.Add(this.pbWindowSelectedBanner);
+            this.gbWindowBanners.Controls.Add(this.laWindowAvailableBanners);
+            this.gbWindowBanners.Controls.Add(this.laWindowSelectedBanner);
+            this.gbWindowBanners.Enabled = false;
+            this.gbWindowBanners.Location = new System.Drawing.Point(3, 23);
+            this.gbWindowBanners.Name = "gbWindowBanners";
+            this.gbWindowBanners.Size = new System.Drawing.Size(539, 263);
+            this.gbWindowBanners.TabIndex = 7;
+            this.gbWindowBanners.TabStop = false;
+            // 
+            // colorEditWindowBannerTextColor
+            // 
+            this.colorEditWindowBannerTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.colorEditWindowBannerTextColor.EditValue = System.Drawing.Color.Empty;
+            this.colorEditWindowBannerTextColor.Enabled = false;
+            this.colorEditWindowBannerTextColor.Location = new System.Drawing.Point(310, 235);
+            this.colorEditWindowBannerTextColor.Name = "colorEditWindowBannerTextColor";
+            this.colorEditWindowBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.colorEditWindowBannerTextColor.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.colorEditWindowBannerTextColor.Size = new System.Drawing.Size(223, 22);
+            this.colorEditWindowBannerTextColor.StyleController = this.styleController;
+            this.colorEditWindowBannerTextColor.TabIndex = 32;
+            this.colorEditWindowBannerTextColor.EditValueChanged += new System.EventHandler(this.colorEditWindowBannerTextColor_EditValueChanged);
+            // 
+            // buttonEditWindowBannerTextFont
+            // 
+            this.buttonEditWindowBannerTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditWindowBannerTextFont.Enabled = false;
+            this.buttonEditWindowBannerTextFont.Location = new System.Drawing.Point(310, 207);
+            this.buttonEditWindowBannerTextFont.Name = "buttonEditWindowBannerTextFont";
+            this.buttonEditWindowBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.buttonEditWindowBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.buttonEditWindowBannerTextFont.Size = new System.Drawing.Size(223, 22);
+            this.buttonEditWindowBannerTextFont.StyleController = this.styleController;
+            this.buttonEditWindowBannerTextFont.TabIndex = 31;
+            this.buttonEditWindowBannerTextFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
+            this.buttonEditWindowBannerTextFont.EditValueChanged += new System.EventHandler(this.buttonEditWindowBannerTextFont_EditValueChanged);
+            this.buttonEditWindowBannerTextFont.Click += new System.EventHandler(this.FontEdit_Click);
+            // 
+            // memoEditWindowBannerText
+            // 
+            this.memoEditWindowBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.memoEditWindowBannerText.Enabled = false;
+            this.memoEditWindowBannerText.Location = new System.Drawing.Point(310, 115);
+            this.memoEditWindowBannerText.Name = "memoEditWindowBannerText";
+            this.memoEditWindowBannerText.Size = new System.Drawing.Size(223, 86);
+            this.memoEditWindowBannerText.StyleController = this.styleController;
+            this.memoEditWindowBannerText.TabIndex = 10;
+            this.memoEditWindowBannerText.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            // 
+            // ckWindowBannerShowText
+            // 
+            this.ckWindowBannerShowText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ckWindowBannerShowText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
+            this.ckWindowBannerShowText.Location = new System.Drawing.Point(310, 94);
+            this.ckWindowBannerShowText.Name = "ckWindowBannerShowText";
+            this.ckWindowBannerShowText.Size = new System.Drawing.Size(223, 20);
+            this.ckWindowBannerShowText.TabIndex = 9;
+            this.ckWindowBannerShowText.Text = "Show Label";
+            this.ckWindowBannerShowText.UseVisualStyleBackColor = true;
+            this.ckWindowBannerShowText.CheckedChanged += new System.EventHandler(this.ckWindowBannerShowText_CheckedChanged);
+            // 
+            // rbWindowBannerAlignmentRight
+            // 
+            this.rbWindowBannerAlignmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbWindowBannerAlignmentRight.Location = new System.Drawing.Point(462, 38);
+            this.rbWindowBannerAlignmentRight.Name = "rbWindowBannerAlignmentRight";
+            this.rbWindowBannerAlignmentRight.Size = new System.Drawing.Size(77, 20);
+            this.rbWindowBannerAlignmentRight.TabIndex = 8;
+            this.rbWindowBannerAlignmentRight.TabStop = true;
+            this.rbWindowBannerAlignmentRight.Text = "Right";
+            this.rbWindowBannerAlignmentRight.UseVisualStyleBackColor = true;
+            this.rbWindowBannerAlignmentRight.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // rbWindowBannerAlignmentCenter
+            // 
+            this.rbWindowBannerAlignmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbWindowBannerAlignmentCenter.Location = new System.Drawing.Point(381, 38);
+            this.rbWindowBannerAlignmentCenter.Name = "rbWindowBannerAlignmentCenter";
+            this.rbWindowBannerAlignmentCenter.Size = new System.Drawing.Size(70, 20);
+            this.rbWindowBannerAlignmentCenter.TabIndex = 7;
+            this.rbWindowBannerAlignmentCenter.TabStop = true;
+            this.rbWindowBannerAlignmentCenter.Text = "Center";
+            this.rbWindowBannerAlignmentCenter.UseVisualStyleBackColor = true;
+            this.rbWindowBannerAlignmentCenter.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // rbWindowBannerAlignmentLeft
+            // 
+            this.rbWindowBannerAlignmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.rbWindowBannerAlignmentLeft.Location = new System.Drawing.Point(310, 38);
+            this.rbWindowBannerAlignmentLeft.Name = "rbWindowBannerAlignmentLeft";
+            this.rbWindowBannerAlignmentLeft.Size = new System.Drawing.Size(55, 20);
+            this.rbWindowBannerAlignmentLeft.TabIndex = 6;
+            this.rbWindowBannerAlignmentLeft.TabStop = true;
+            this.rbWindowBannerAlignmentLeft.Text = "Left";
+            this.rbWindowBannerAlignmentLeft.UseVisualStyleBackColor = true;
+            this.rbWindowBannerAlignmentLeft.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            // 
+            // laWindowBannerAligment
+            // 
+            this.laWindowBannerAligment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.laWindowBannerAligment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowBannerAligment.Location = new System.Drawing.Point(307, 19);
+            this.laWindowBannerAligment.Name = "laWindowBannerAligment";
+            this.laWindowBannerAligment.Size = new System.Drawing.Size(226, 16);
+            this.laWindowBannerAligment.TabIndex = 5;
+            this.laWindowBannerAligment.Text = "Banner Alignment:";
+            // 
+            // gridControlWindowBanners
+            // 
+            this.gridControlWindowBanners.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.gridControlWindowBanners.Location = new System.Drawing.Point(9, 117);
+            this.gridControlWindowBanners.MainView = this.gridViewWindowBanners;
+            this.gridControlWindowBanners.Name = "gridControlWindowBanners";
+            this.gridControlWindowBanners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemPictureEditWindowBanner});
+            this.gridControlWindowBanners.Size = new System.Drawing.Size(283, 140);
+            this.gridControlWindowBanners.TabIndex = 4;
+            this.gridControlWindowBanners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewWindowBanners});
+            // 
+            // gridViewWindowBanners
+            // 
+            this.gridViewWindowBanners.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnWindowBanner});
+            this.gridViewWindowBanners.GridControl = this.gridControlWindowBanners;
+            this.gridViewWindowBanners.Name = "gridViewWindowBanners";
+            this.gridViewWindowBanners.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewWindowBanners.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewWindowBanners.OptionsBehavior.AutoPopulateColumns = false;
+            this.gridViewWindowBanners.OptionsBehavior.AutoSelectAllInEditor = false;
+            this.gridViewWindowBanners.OptionsBehavior.AutoUpdateTotalSummary = false;
+            this.gridViewWindowBanners.OptionsBehavior.CopyToClipboardWithColumnHeaders = false;
+            this.gridViewWindowBanners.OptionsBehavior.Editable = false;
+            this.gridViewWindowBanners.OptionsBehavior.ImmediateUpdateRowPosition = false;
+            this.gridViewWindowBanners.OptionsBehavior.KeepFocusedRowOnUpdate = false;
+            this.gridViewWindowBanners.OptionsCustomization.AllowColumnMoving = false;
+            this.gridViewWindowBanners.OptionsCustomization.AllowColumnResizing = false;
+            this.gridViewWindowBanners.OptionsCustomization.AllowFilter = false;
+            this.gridViewWindowBanners.OptionsCustomization.AllowGroup = false;
+            this.gridViewWindowBanners.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gridViewWindowBanners.OptionsCustomization.AllowSort = false;
+            this.gridViewWindowBanners.OptionsFilter.AllowColumnMRUFilterList = false;
+            this.gridViewWindowBanners.OptionsFilter.AllowFilterEditor = false;
+            this.gridViewWindowBanners.OptionsFilter.AllowMRUFilterList = false;
+            this.gridViewWindowBanners.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridViewWindowBanners.OptionsSelection.EnableAppearanceHideSelection = false;
+            this.gridViewWindowBanners.OptionsSelection.UseIndicatorForSelection = false;
+            this.gridViewWindowBanners.OptionsView.AllowCellMerge = true;
+            this.gridViewWindowBanners.OptionsView.RowAutoHeight = true;
+            this.gridViewWindowBanners.OptionsView.ShowColumnHeaders = false;
+            this.gridViewWindowBanners.OptionsView.ShowDetailButtons = false;
+            this.gridViewWindowBanners.OptionsView.ShowGroupExpandCollapseButtons = false;
+            this.gridViewWindowBanners.OptionsView.ShowGroupPanel = false;
+            this.gridViewWindowBanners.OptionsView.ShowIndicator = false;
+            this.gridViewWindowBanners.OptionsView.ShowPreviewLines = false;
+            this.gridViewWindowBanners.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewBanners_FocusedRowChanged);
+            this.gridViewWindowBanners.Click += new System.EventHandler(this.gridViewBanners_Click);
+            // 
+            // gridColumnWindowBanner
+            // 
+            this.gridColumnWindowBanner.Caption = "Image";
+            this.gridColumnWindowBanner.ColumnEdit = this.repositoryItemPictureEditWindowBanner;
+            this.gridColumnWindowBanner.FieldName = "Image";
+            this.gridColumnWindowBanner.Name = "gridColumnWindowBanner";
+            this.gridColumnWindowBanner.Visible = true;
+            this.gridColumnWindowBanner.VisibleIndex = 0;
+            // 
+            // repositoryItemPictureEditWindowBanner
+            // 
+            this.repositoryItemPictureEditWindowBanner.Name = "repositoryItemPictureEditWindowBanner";
+            this.repositoryItemPictureEditWindowBanner.PictureStoreMode = DevExpress.XtraEditors.Controls.PictureStoreMode.Image;
+            this.repositoryItemPictureEditWindowBanner.ReadOnly = true;
+            this.repositoryItemPictureEditWindowBanner.ShowMenu = false;
+            // 
+            // pbWindowSelectedBanner
+            // 
+            this.pbWindowSelectedBanner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbWindowSelectedBanner.Location = new System.Drawing.Point(129, 19);
+            this.pbWindowSelectedBanner.Name = "pbWindowSelectedBanner";
+            this.pbWindowSelectedBanner.Size = new System.Drawing.Size(163, 59);
+            this.pbWindowSelectedBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbWindowSelectedBanner.TabIndex = 3;
+            this.pbWindowSelectedBanner.TabStop = false;
+            // 
+            // laWindowAvailableBanners
+            // 
+            this.laWindowAvailableBanners.AutoSize = true;
+            this.laWindowAvailableBanners.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowAvailableBanners.Location = new System.Drawing.Point(6, 94);
+            this.laWindowAvailableBanners.Name = "laWindowAvailableBanners";
+            this.laWindowAvailableBanners.Size = new System.Drawing.Size(256, 16);
+            this.laWindowAvailableBanners.TabIndex = 2;
+            this.laWindowAvailableBanners.Text = "Click on image below to select banner:";
+            // 
+            // laWindowSelectedBanner
+            // 
+            this.laWindowSelectedBanner.AutoSize = true;
+            this.laWindowSelectedBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laWindowSelectedBanner.Location = new System.Drawing.Point(6, 19);
+            this.laWindowSelectedBanner.Name = "laWindowSelectedBanner";
+            this.laWindowSelectedBanner.Size = new System.Drawing.Size(118, 16);
+            this.laWindowSelectedBanner.TabIndex = 0;
+            this.laWindowSelectedBanner.Text = "Selected Banner:";
+            // 
+            // ckWindowEnableBanner
+            // 
+            this.ckWindowEnableBanner.AutoSize = true;
+            this.ckWindowEnableBanner.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ckWindowEnableBanner.Location = new System.Drawing.Point(3, 6);
+            this.ckWindowEnableBanner.Name = "ckWindowEnableBanner";
+            this.ckWindowEnableBanner.Size = new System.Drawing.Size(121, 20);
+            this.ckWindowEnableBanner.TabIndex = 6;
+            this.ckWindowEnableBanner.Text = "Enable Banner";
+            this.ckWindowEnableBanner.UseVisualStyleBackColor = true;
+            this.ckWindowEnableBanner.CheckedChanged += new System.EventHandler(this.ckWindowEnableBanner_CheckedChanged);
+            // 
+            // comboBoxEditWindows
+            // 
+            this.comboBoxEditWindows.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxEditWindows.Location = new System.Drawing.Point(10, 31);
+            this.comboBoxEditWindows.Name = "comboBoxEditWindows";
+            this.comboBoxEditWindows.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.comboBoxEditWindows.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.comboBoxEditWindows.Size = new System.Drawing.Size(547, 22);
+            this.comboBoxEditWindows.StyleController = this.styleController;
+            this.comboBoxEditWindows.TabIndex = 23;
+            this.comboBoxEditWindows.SelectedIndexChanged += new System.EventHandler(this.cbWindows_SelectedIndexChanged);
             // 
             // laLocationValue
             // 
@@ -385,159 +1144,6 @@
             this.laLocationHeader.Size = new System.Drawing.Size(62, 16);
             this.laLocationHeader.TabIndex = 21;
             this.laLocationHeader.Text = "Location:";
-            // 
-            // gbWindowAppearance
-            // 
-            this.gbWindowAppearance.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbWindowAppearance.Controls.Add(this.buttonEditHeaderFont);
-            this.gbWindowAppearance.Controls.Add(this.colorEditWindowFont);
-            this.gbWindowAppearance.Controls.Add(this.colorEditWindowBack);
-            this.gbWindowAppearance.Controls.Add(this.colorEditHeaderFont);
-            this.gbWindowAppearance.Controls.Add(this.colorEditHeaderBack);
-            this.gbWindowAppearance.Controls.Add(this.laHeaderFont);
-            this.gbWindowAppearance.Controls.Add(this.laWindowFore);
-            this.gbWindowAppearance.Controls.Add(this.laWindowBack);
-            this.gbWindowAppearance.Controls.Add(this.laHeaderFore);
-            this.gbWindowAppearance.Controls.Add(this.laHeaderBack);
-            this.gbWindowAppearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.gbWindowAppearance.ForeColor = System.Drawing.Color.Black;
-            this.gbWindowAppearance.Location = new System.Drawing.Point(10, 97);
-            this.gbWindowAppearance.Name = "gbWindowAppearance";
-            this.gbWindowAppearance.Size = new System.Drawing.Size(481, 130);
-            this.gbWindowAppearance.TabIndex = 20;
-            this.gbWindowAppearance.TabStop = false;
-            this.gbWindowAppearance.Text = "Window Appearance";
-            // 
-            // buttonEditHeaderFont
-            // 
-            this.buttonEditHeaderFont.Location = new System.Drawing.Point(130, 97);
-            this.buttonEditHeaderFont.Name = "buttonEditHeaderFont";
-            this.buttonEditHeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-            this.buttonEditHeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.buttonEditHeaderFont.Size = new System.Drawing.Size(345, 22);
-            this.buttonEditHeaderFont.StyleController = this.styleController;
-            this.buttonEditHeaderFont.TabIndex = 28;
-            this.buttonEditHeaderFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
-            this.buttonEditHeaderFont.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
-            this.buttonEditHeaderFont.Click += new System.EventHandler(this.FontEdit_Click);
-            // 
-            // colorEditWindowFont
-            // 
-            this.colorEditWindowFont.EditValue = System.Drawing.Color.Empty;
-            this.colorEditWindowFont.Location = new System.Drawing.Point(375, 59);
-            this.colorEditWindowFont.Name = "colorEditWindowFont";
-            this.colorEditWindowFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorEditWindowFont.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colorEditWindowFont.Size = new System.Drawing.Size(100, 22);
-            this.colorEditWindowFont.StyleController = this.styleController;
-            this.colorEditWindowFont.TabIndex = 27;
-            this.colorEditWindowFont.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
-            // 
-            // colorEditWindowBack
-            // 
-            this.colorEditWindowBack.EditValue = System.Drawing.Color.Empty;
-            this.colorEditWindowBack.Location = new System.Drawing.Point(375, 21);
-            this.colorEditWindowBack.Name = "colorEditWindowBack";
-            this.colorEditWindowBack.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorEditWindowBack.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colorEditWindowBack.Size = new System.Drawing.Size(100, 22);
-            this.colorEditWindowBack.StyleController = this.styleController;
-            this.colorEditWindowBack.TabIndex = 26;
-            this.colorEditWindowBack.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
-            // 
-            // colorEditHeaderFont
-            // 
-            this.colorEditHeaderFont.EditValue = System.Drawing.Color.Empty;
-            this.colorEditHeaderFont.Location = new System.Drawing.Point(130, 59);
-            this.colorEditHeaderFont.Name = "colorEditHeaderFont";
-            this.colorEditHeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorEditHeaderFont.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colorEditHeaderFont.Size = new System.Drawing.Size(100, 22);
-            this.colorEditHeaderFont.StyleController = this.styleController;
-            this.colorEditHeaderFont.TabIndex = 25;
-            this.colorEditHeaderFont.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
-            // 
-            // colorEditHeaderBack
-            // 
-            this.colorEditHeaderBack.EditValue = System.Drawing.Color.Empty;
-            this.colorEditHeaderBack.Location = new System.Drawing.Point(130, 21);
-            this.colorEditHeaderBack.Name = "colorEditHeaderBack";
-            this.colorEditHeaderBack.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.colorEditHeaderBack.Properties.ColorAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.colorEditHeaderBack.Size = new System.Drawing.Size(100, 22);
-            this.colorEditHeaderBack.StyleController = this.styleController;
-            this.colorEditHeaderBack.TabIndex = 24;
-            this.colorEditHeaderBack.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
-            // 
-            // laHeaderFont
-            // 
-            this.laHeaderFont.AutoSize = true;
-            this.laHeaderFont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laHeaderFont.Location = new System.Drawing.Point(6, 100);
-            this.laHeaderFont.Name = "laHeaderFont";
-            this.laHeaderFont.Size = new System.Drawing.Size(83, 16);
-            this.laHeaderFont.TabIndex = 16;
-            this.laHeaderFont.Text = "Header Font";
-            // 
-            // laWindowFore
-            // 
-            this.laWindowFore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.laWindowFore.AutoSize = true;
-            this.laWindowFore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laWindowFore.Location = new System.Drawing.Point(244, 62);
-            this.laWindowFore.Name = "laWindowFore";
-            this.laWindowFore.Size = new System.Drawing.Size(120, 16);
-            this.laWindowFore.TabIndex = 12;
-            this.laWindowFore.Text = "Window Font Color";
-            // 
-            // laWindowback
-            // 
-            this.laWindowBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.laWindowBack.AutoSize = true;
-            this.laWindowBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laWindowBack.Location = new System.Drawing.Point(239, 24);
-            this.laWindowBack.Name = "laWindowback";
-            this.laWindowBack.Size = new System.Drawing.Size(125, 16);
-            this.laWindowBack.TabIndex = 9;
-            this.laWindowBack.Text = "Window Back Color";
-            // 
-            // laHeaderFore
-            // 
-            this.laHeaderFore.AutoSize = true;
-            this.laHeaderFore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laHeaderFore.Location = new System.Drawing.Point(4, 62);
-            this.laHeaderFore.Name = "laHeaderFore";
-            this.laHeaderFore.Size = new System.Drawing.Size(118, 16);
-            this.laHeaderFore.TabIndex = 6;
-            this.laHeaderFore.Text = "Header Font Color";
-            // 
-            // laHeaderBack
-            // 
-            this.laHeaderBack.AutoSize = true;
-            this.laHeaderBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laHeaderBack.Location = new System.Drawing.Point(4, 24);
-            this.laHeaderBack.Name = "laHeaderBack";
-            this.laHeaderBack.Size = new System.Drawing.Size(123, 16);
-            this.laHeaderBack.TabIndex = 0;
-            this.laHeaderBack.Text = "Header Back Color";
-            // 
-            // ckApllyForAllWindows
-            // 
-            this.ckApllyForAllWindows.AutoSize = true;
-            this.ckApllyForAllWindows.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.ckApllyForAllWindows.Location = new System.Drawing.Point(10, 233);
-            this.ckApllyForAllWindows.Name = "ckApllyForAllWindows";
-            this.ckApllyForAllWindows.Size = new System.Drawing.Size(152, 20);
-            this.ckApllyForAllWindows.TabIndex = 15;
-            this.ckApllyForAllWindows.Text = "Apply to All Windows";
-            this.ckApllyForAllWindows.UseVisualStyleBackColor = true;
-            this.ckApllyForAllWindows.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
             // 
             // toolTipSalesDepotSettings
             // 
@@ -574,11 +1180,14 @@
             // 
             // xtraTabControlSettings
             // 
+            this.xtraTabControlSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.xtraTabControlSettings.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.xtraTabControlSettings.Appearance.Options.UseFont = true;
             this.xtraTabControlSettings.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F);
             this.xtraTabControlSettings.AppearancePage.Header.Options.UseFont = true;
-            this.xtraTabControlSettings.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControlSettings.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.xtraTabControlSettings.AppearancePage.HeaderActive.Options.UseFont = true;
             this.xtraTabControlSettings.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
             this.xtraTabControlSettings.AppearancePage.HeaderDisabled.Options.UseFont = true;
@@ -586,11 +1195,10 @@
             this.xtraTabControlSettings.AppearancePage.HeaderHotTracked.Options.UseFont = true;
             this.xtraTabControlSettings.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
             this.xtraTabControlSettings.AppearancePage.PageClient.Options.UseFont = true;
-            this.xtraTabControlSettings.Dock = System.Windows.Forms.DockStyle.Top;
             this.xtraTabControlSettings.Location = new System.Drawing.Point(0, 46);
             this.xtraTabControlSettings.Name = "xtraTabControlSettings";
             this.xtraTabControlSettings.SelectedTabPage = this.xtraTabPageColumns;
-            this.xtraTabControlSettings.Size = new System.Drawing.Size(502, 397);
+            this.xtraTabControlSettings.Size = new System.Drawing.Size(570, 475);
             this.xtraTabControlSettings.TabIndex = 3;
             this.xtraTabControlSettings.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageColumns,
@@ -602,7 +1210,7 @@
             // 
             this.xtraTabPageColumns.Controls.Add(this.pnColumns);
             this.xtraTabPageColumns.Name = "xtraTabPageColumns";
-            this.xtraTabPageColumns.Size = new System.Drawing.Size(500, 371);
+            this.xtraTabPageColumns.Size = new System.Drawing.Size(568, 449);
             this.xtraTabPageColumns.Text = "Columns";
             // 
             // pnColumns
@@ -617,7 +1225,7 @@
             this.pnColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnColumns.Location = new System.Drawing.Point(0, 0);
             this.pnColumns.Name = "pnColumns";
-            this.pnColumns.Size = new System.Drawing.Size(500, 371);
+            this.pnColumns.Size = new System.Drawing.Size(568, 449);
             this.pnColumns.TabIndex = 16;
             // 
             // buttonXLeft
@@ -628,7 +1236,7 @@
             this.buttonXLeft.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonXLeft.Image = global::FileManager.Properties.Resources.ArrowLeftGreen;
             this.buttonXLeft.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonXLeft.Location = new System.Drawing.Point(453, 256);
+            this.buttonXLeft.Location = new System.Drawing.Point(521, 256);
             this.buttonXLeft.Name = "buttonXLeft";
             this.buttonXLeft.Size = new System.Drawing.Size(37, 37);
             this.buttonXLeft.TabIndex = 25;
@@ -642,7 +1250,7 @@
             this.buttonXDown.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonXDown.Image = global::FileManager.Properties.Resources.DownArrow;
             this.buttonXDown.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonXDown.Location = new System.Drawing.Point(453, 166);
+            this.buttonXDown.Location = new System.Drawing.Point(521, 166);
             this.buttonXDown.Name = "buttonXDown";
             this.buttonXDown.Size = new System.Drawing.Size(37, 37);
             this.buttonXDown.TabIndex = 23;
@@ -656,7 +1264,7 @@
             this.buttonXRight.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonXRight.Image = global::FileManager.Properties.Resources.GreenRightArrow;
             this.buttonXRight.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonXRight.Location = new System.Drawing.Point(453, 211);
+            this.buttonXRight.Location = new System.Drawing.Point(521, 211);
             this.buttonXRight.Name = "buttonXRight";
             this.buttonXRight.Size = new System.Drawing.Size(37, 37);
             this.buttonXRight.TabIndex = 24;
@@ -670,7 +1278,7 @@
             this.buttonXRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonXRemove.Image = global::FileManager.Properties.Resources.Red_Minus;
             this.buttonXRemove.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonXRemove.Location = new System.Drawing.Point(453, 76);
+            this.buttonXRemove.Location = new System.Drawing.Point(521, 76);
             this.buttonXRemove.Name = "buttonXRemove";
             this.buttonXRemove.Size = new System.Drawing.Size(37, 37);
             this.buttonXRemove.TabIndex = 21;
@@ -684,7 +1292,7 @@
             this.buttonXUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonXUp.Image = global::FileManager.Properties.Resources.UpArrow;
             this.buttonXUp.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonXUp.Location = new System.Drawing.Point(453, 121);
+            this.buttonXUp.Location = new System.Drawing.Point(521, 121);
             this.buttonXUp.Name = "buttonXUp";
             this.buttonXUp.Size = new System.Drawing.Size(37, 37);
             this.buttonXUp.TabIndex = 22;
@@ -697,7 +1305,7 @@
             this.buttonXAdd.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonXAdd.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonXAdd.Image = global::FileManager.Properties.Resources.Green_Plus;
-            this.buttonXAdd.Location = new System.Drawing.Point(453, 31);
+            this.buttonXAdd.Location = new System.Drawing.Point(521, 31);
             this.buttonXAdd.Name = "buttonXAdd";
             this.buttonXAdd.Size = new System.Drawing.Size(37, 37);
             this.buttonXAdd.TabIndex = 19;
@@ -723,7 +1331,7 @@
             this.xtraTabControlWindows.Location = new System.Drawing.Point(6, 6);
             this.xtraTabControlWindows.Name = "xtraTabControlWindows";
             this.xtraTabControlWindows.SelectedTabPage = this.xtraTabPageColumn1;
-            this.xtraTabControlWindows.Size = new System.Drawing.Size(441, 357);
+            this.xtraTabControlWindows.Size = new System.Drawing.Size(509, 435);
             this.xtraTabControlWindows.TabIndex = 4;
             this.xtraTabControlWindows.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageColumn1,
@@ -735,28 +1343,28 @@
             // 
             this.xtraTabPageColumn1.Controls.Add(this.grColumn1);
             this.xtraTabPageColumn1.Name = "xtraTabPageColumn1";
-            this.xtraTabPageColumn1.Size = new System.Drawing.Size(439, 331);
+            this.xtraTabPageColumn1.Size = new System.Drawing.Size(507, 409);
             this.xtraTabPageColumn1.Text = "Column 1";
             // 
             // xtraTabPageColumn2
             // 
             this.xtraTabPageColumn2.Controls.Add(this.grColumn2);
             this.xtraTabPageColumn2.Name = "xtraTabPageColumn2";
-            this.xtraTabPageColumn2.Size = new System.Drawing.Size(439, 331);
+            this.xtraTabPageColumn2.Size = new System.Drawing.Size(507, 409);
             this.xtraTabPageColumn2.Text = "Column 2";
             // 
             // xtraTabPageColumn3
             // 
             this.xtraTabPageColumn3.Controls.Add(this.grColumn3);
             this.xtraTabPageColumn3.Name = "xtraTabPageColumn3";
-            this.xtraTabPageColumn3.Size = new System.Drawing.Size(439, 331);
+            this.xtraTabPageColumn3.Size = new System.Drawing.Size(507, 409);
             this.xtraTabPageColumn3.Text = "Column 3";
             // 
             // xtraTabPageWindows
             // 
             this.xtraTabPageWindows.Controls.Add(this.pnWindows);
             this.xtraTabPageWindows.Name = "xtraTabPageWindows";
-            this.xtraTabPageWindows.Size = new System.Drawing.Size(500, 371);
+            this.xtraTabPageWindows.Size = new System.Drawing.Size(568, 449);
             this.xtraTabPageWindows.Text = "Windows";
             // 
             // xtraTabPageColumnTitles
@@ -767,7 +1375,7 @@
             this.xtraTabPageColumnTitles.Controls.Add(this.gbColumnTitle1);
             this.xtraTabPageColumnTitles.Controls.Add(this.ckEnableColumnTitles);
             this.xtraTabPageColumnTitles.Name = "xtraTabPageColumnTitles";
-            this.xtraTabPageColumnTitles.Size = new System.Drawing.Size(500, 371);
+            this.xtraTabPageColumnTitles.Size = new System.Drawing.Size(568, 449);
             this.xtraTabPageColumnTitles.Text = "Column Titles";
             // 
             // ckApplyForAllColumnTitles
@@ -775,7 +1383,7 @@
             this.ckApplyForAllColumnTitles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ckApplyForAllColumnTitles.AutoSize = true;
             this.ckApplyForAllColumnTitles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(314, 7);
+            this.ckApplyForAllColumnTitles.Location = new System.Drawing.Point(382, 7);
             this.ckApplyForAllColumnTitles.Name = "ckApplyForAllColumnTitles";
             this.ckApplyForAllColumnTitles.Size = new System.Drawing.Size(178, 20);
             this.ckApplyForAllColumnTitles.TabIndex = 20;
@@ -797,7 +1405,7 @@
             this.gbColumnTitle3.Controls.Add(this.laColumn3HeaderFont);
             this.gbColumnTitle3.Location = new System.Drawing.Point(10, 252);
             this.gbColumnTitle3.Name = "gbColumnTitle3";
-            this.gbColumnTitle3.Size = new System.Drawing.Size(482, 111);
+            this.gbColumnTitle3.Size = new System.Drawing.Size(550, 111);
             this.gbColumnTitle3.TabIndex = 19;
             this.gbColumnTitle3.TabStop = false;
             // 
@@ -820,7 +1428,7 @@
             this.buttonEditColumn3HeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.buttonEditColumn3HeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.buttonEditColumn3HeaderFont.Size = new System.Drawing.Size(372, 22);
+            this.buttonEditColumn3HeaderFont.Size = new System.Drawing.Size(440, 22);
             this.buttonEditColumn3HeaderFont.StyleController = this.styleController;
             this.buttonEditColumn3HeaderFont.TabIndex = 34;
             this.buttonEditColumn3HeaderFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
@@ -831,7 +1439,7 @@
             // 
             this.colorEditColumn3Fore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.colorEditColumn3Fore.EditValue = System.Drawing.Color.Empty;
-            this.colorEditColumn3Fore.Location = new System.Drawing.Point(376, 49);
+            this.colorEditColumn3Fore.Location = new System.Drawing.Point(444, 49);
             this.colorEditColumn3Fore.Name = "colorEditColumn3Fore";
             this.colorEditColumn3Fore.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -847,7 +1455,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbColumn3.Location = new System.Drawing.Point(104, 21);
             this.tbColumn3.Name = "tbColumn3";
-            this.tbColumn3.Size = new System.Drawing.Size(372, 22);
+            this.tbColumn3.Size = new System.Drawing.Size(440, 22);
             this.tbColumn3.TabIndex = 0;
             this.tbColumn3.TextChanged += new System.EventHandler(this.StateChanges_TextChanged);
             // 
@@ -856,7 +1464,7 @@
             this.laColumn3Fore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.laColumn3Fore.AutoSize = true;
             this.laColumn3Fore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laColumn3Fore.Location = new System.Drawing.Point(293, 52);
+            this.laColumn3Fore.Location = new System.Drawing.Point(361, 52);
             this.laColumn3Fore.Name = "laColumn3Fore";
             this.laColumn3Fore.Size = new System.Drawing.Size(69, 16);
             this.laColumn3Fore.TabIndex = 30;
@@ -909,7 +1517,7 @@
             this.gbColumnTitle2.Controls.Add(this.laColumn2HeaderFont);
             this.gbColumnTitle2.Location = new System.Drawing.Point(10, 135);
             this.gbColumnTitle2.Name = "gbColumnTitle2";
-            this.gbColumnTitle2.Size = new System.Drawing.Size(482, 111);
+            this.gbColumnTitle2.Size = new System.Drawing.Size(550, 111);
             this.gbColumnTitle2.TabIndex = 18;
             this.gbColumnTitle2.TabStop = false;
             // 
@@ -932,7 +1540,7 @@
             this.buttonEditColumn2HeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.buttonEditColumn2HeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.buttonEditColumn2HeaderFont.Size = new System.Drawing.Size(372, 22);
+            this.buttonEditColumn2HeaderFont.Size = new System.Drawing.Size(440, 22);
             this.buttonEditColumn2HeaderFont.StyleController = this.styleController;
             this.buttonEditColumn2HeaderFont.TabIndex = 34;
             this.buttonEditColumn2HeaderFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
@@ -943,7 +1551,7 @@
             // 
             this.colorEditColumn2Fore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.colorEditColumn2Fore.EditValue = System.Drawing.Color.Empty;
-            this.colorEditColumn2Fore.Location = new System.Drawing.Point(376, 49);
+            this.colorEditColumn2Fore.Location = new System.Drawing.Point(444, 49);
             this.colorEditColumn2Fore.Name = "colorEditColumn2Fore";
             this.colorEditColumn2Fore.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -959,7 +1567,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbColumn2.Location = new System.Drawing.Point(104, 21);
             this.tbColumn2.Name = "tbColumn2";
-            this.tbColumn2.Size = new System.Drawing.Size(372, 22);
+            this.tbColumn2.Size = new System.Drawing.Size(440, 22);
             this.tbColumn2.TabIndex = 0;
             this.tbColumn2.TextChanged += new System.EventHandler(this.StateChanges_TextChanged);
             // 
@@ -968,7 +1576,7 @@
             this.laColumn2Fore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.laColumn2Fore.AutoSize = true;
             this.laColumn2Fore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laColumn2Fore.Location = new System.Drawing.Point(293, 52);
+            this.laColumn2Fore.Location = new System.Drawing.Point(361, 52);
             this.laColumn2Fore.Name = "laColumn2Fore";
             this.laColumn2Fore.Size = new System.Drawing.Size(69, 16);
             this.laColumn2Fore.TabIndex = 30;
@@ -1021,7 +1629,7 @@
             this.gbColumnTitle1.Controls.Add(this.laColumn1HeaderFont);
             this.gbColumnTitle1.Location = new System.Drawing.Point(10, 26);
             this.gbColumnTitle1.Name = "gbColumnTitle1";
-            this.gbColumnTitle1.Size = new System.Drawing.Size(482, 103);
+            this.gbColumnTitle1.Size = new System.Drawing.Size(550, 103);
             this.gbColumnTitle1.TabIndex = 17;
             this.gbColumnTitle1.TabStop = false;
             // 
@@ -1044,7 +1652,7 @@
             this.buttonEditColumn1HeaderFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.buttonEditColumn1HeaderFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.buttonEditColumn1HeaderFont.Size = new System.Drawing.Size(372, 22);
+            this.buttonEditColumn1HeaderFont.Size = new System.Drawing.Size(440, 22);
             this.buttonEditColumn1HeaderFont.StyleController = this.styleController;
             this.buttonEditColumn1HeaderFont.TabIndex = 34;
             this.buttonEditColumn1HeaderFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
@@ -1055,7 +1663,7 @@
             // 
             this.colorEditColumn1Fore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.colorEditColumn1Fore.EditValue = System.Drawing.Color.Empty;
-            this.colorEditColumn1Fore.Location = new System.Drawing.Point(376, 43);
+            this.colorEditColumn1Fore.Location = new System.Drawing.Point(444, 43);
             this.colorEditColumn1Fore.Name = "colorEditColumn1Fore";
             this.colorEditColumn1Fore.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1071,7 +1679,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbColumn1.Location = new System.Drawing.Point(104, 15);
             this.tbColumn1.Name = "tbColumn1";
-            this.tbColumn1.Size = new System.Drawing.Size(372, 22);
+            this.tbColumn1.Size = new System.Drawing.Size(440, 22);
             this.tbColumn1.TabIndex = 0;
             this.tbColumn1.TextChanged += new System.EventHandler(this.StateChanges_TextChanged);
             // 
@@ -1080,7 +1688,7 @@
             this.laColumn1Fore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.laColumn1Fore.AutoSize = true;
             this.laColumn1Fore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laColumn1Fore.Location = new System.Drawing.Point(293, 46);
+            this.laColumn1Fore.Location = new System.Drawing.Point(361, 46);
             this.laColumn1Fore.Name = "laColumn1Fore";
             this.laColumn1Fore.Size = new System.Drawing.Size(69, 16);
             this.laColumn1Fore.TabIndex = 30;
@@ -1144,17 +1752,19 @@
             this.pnPages.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnPages.Location = new System.Drawing.Point(0, 0);
             this.pnPages.Name = "pnPages";
-            this.pnPages.Size = new System.Drawing.Size(502, 46);
+            this.pnPages.Size = new System.Drawing.Size(570, 46);
             this.pnPages.TabIndex = 16;
             // 
             // comboBoxEditPages
             // 
+            this.comboBoxEditPages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxEditPages.Location = new System.Drawing.Point(133, 12);
             this.comboBoxEditPages.Name = "comboBoxEditPages";
             this.comboBoxEditPages.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.comboBoxEditPages.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.comboBoxEditPages.Size = new System.Drawing.Size(353, 22);
+            this.comboBoxEditPages.Size = new System.Drawing.Size(425, 22);
             this.comboBoxEditPages.StyleController = this.styleController;
             this.comboBoxEditPages.TabIndex = 3;
             this.comboBoxEditPages.SelectedIndexChanged += new System.EventHandler(this.comboBoxEditPages_SelectedIndexChanged);
@@ -1174,7 +1784,7 @@
             this.buttonXClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonXClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonXClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonXClose.Location = new System.Drawing.Point(273, 449);
+            this.buttonXClose.Location = new System.Drawing.Point(307, 529);
             this.buttonXClose.Name = "buttonXClose";
             this.buttonXClose.Size = new System.Drawing.Size(93, 32);
             this.buttonXClose.TabIndex = 18;
@@ -1187,7 +1797,7 @@
             this.buttonXSave.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonXSave.Location = new System.Drawing.Point(136, 449);
+            this.buttonXSave.Location = new System.Drawing.Point(170, 529);
             this.buttonXSave.Name = "buttonXSave";
             this.buttonXSave.Size = new System.Drawing.Size(93, 32);
             this.buttonXSave.TabIndex = 17;
@@ -1199,7 +1809,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(502, 488);
+            this.ClientSize = new System.Drawing.Size(570, 568);
             this.Controls.Add(this.buttonXClose);
             this.Controls.Add(this.buttonXSave);
             this.Controls.Add(this.xtraTabControlSettings);
@@ -1220,15 +1830,39 @@
             ((System.ComponentModel.ISupportInitialize)(this.grColumn3)).EndInit();
             this.pnWindows.ResumeLayout(false);
             this.pnWindows.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditWindows.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlWindowProperties)).EndInit();
+            this.xtraTabControlWindowProperties.ResumeLayout(false);
+            this.xtraTabPageWindowPropertiesAppearance.ResumeLayout(false);
+            this.xtraTabPageWindowPropertiesAppearance.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBorderColor.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
-            this.gbWindowAppearance.ResumeLayout(false);
-            this.gbWindowAppearance.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonEditHeaderFont.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowFont.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBack.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditHeaderFont.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.colorEditHeaderBack.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditWindowHeaderFont.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowForeColor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBackColor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderBackColor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowHeaderForeColor.Properties)).EndInit();
+            this.xtraTabPageWindowPropertiesWidget.ResumeLayout(false);
+            this.xtraTabPageWindowPropertiesWidget.PerformLayout();
+            this.gbWindowWidgets.ResumeLayout(false);
+            this.gbWindowWidgets.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlWindowWidgets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewWindowWidgets)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditWindowWidget)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewField_gridColumnImage_1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWindowSelectedWidget)).EndInit();
+            this.xtraTabPageWindowPropertiesBanner.ResumeLayout(false);
+            this.xtraTabPageWindowPropertiesBanner.PerformLayout();
+            this.gbWindowBanners.ResumeLayout(false);
+            this.gbWindowBanners.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.colorEditWindowBannerTextColor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonEditWindowBannerTextFont.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEditWindowBannerText.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlWindowBanners)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewWindowBanners)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditWindowBanner)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbWindowSelectedBanner)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.comboBoxEditWindows.Properties)).EndInit();
             this.contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSettings)).EndInit();
             this.xtraTabControlSettings.ResumeLayout(false);
@@ -1284,13 +1918,12 @@
         private System.Windows.Forms.Label laLocationValue;
         private System.Windows.Forms.Label laWindow;
         private System.Windows.Forms.Label laLocationHeader;
-        private System.Windows.Forms.GroupBox gbWindowAppearance;
-        private System.Windows.Forms.Label laHeaderFont;
-        private System.Windows.Forms.CheckBox ckApllyForAllWindows;
-        private System.Windows.Forms.Label laWindowFore;
-        private System.Windows.Forms.Label laWindowBack;
-        private System.Windows.Forms.Label laHeaderFore;
-        private System.Windows.Forms.Label laHeaderBack;
+        private System.Windows.Forms.Label laWindowHeaderFont;
+        private System.Windows.Forms.CheckBox ckApllyForAllWindowsAppearance;
+        private System.Windows.Forms.Label laWindowForeColor;
+        private System.Windows.Forms.Label laWindowBackColor;
+        private System.Windows.Forms.Label laWindowHeaderForeColor;
+        private System.Windows.Forms.Label laWindowHeaderBackColor;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlSettings;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageColumns;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageWindows;
@@ -1305,13 +1938,13 @@
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditPages;
         private System.Windows.Forms.Label laPages;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditWindows;
-        private DevExpress.XtraEditors.ColorEdit colorEditHeaderBack;
-        private DevExpress.XtraEditors.ColorEdit colorEditWindowFont;
-        private DevExpress.XtraEditors.ColorEdit colorEditWindowBack;
-        private DevExpress.XtraEditors.ColorEdit colorEditHeaderFont;
+        private DevExpress.XtraEditors.ColorEdit colorEditWindowHeaderBackColor;
+        private DevExpress.XtraEditors.ColorEdit colorEditWindowForeColor;
+        private DevExpress.XtraEditors.ColorEdit colorEditWindowBackColor;
+        private DevExpress.XtraEditors.ColorEdit colorEditWindowHeaderForeColor;
         private DevComponents.DotNetBar.ButtonX buttonXClose;
         private DevComponents.DotNetBar.ButtonX buttonXSave;
-        private DevExpress.XtraEditors.ButtonEdit buttonEditHeaderFont;
+        private DevExpress.XtraEditors.ButtonEdit buttonEditWindowHeaderFont;
         private DevComponents.DotNetBar.ButtonX buttonXLeft;
         private DevComponents.DotNetBar.ButtonX buttonXDown;
         private DevComponents.DotNetBar.ButtonX buttonXRight;
@@ -1348,5 +1981,45 @@
         private System.Windows.Forms.Label laColumn1;
         private System.Windows.Forms.Label laColumn2;
         private System.Windows.Forms.Label laColumn3;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControlWindowProperties;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageWindowPropertiesAppearance;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageWindowPropertiesWidget;
+        private System.Windows.Forms.Label laWindowHeaderAlignment;
+        private System.Windows.Forms.RadioButton rbWindowHeaderAlignmentLeft;
+        private System.Windows.Forms.RadioButton rbWindowHeaderAlignmentRight;
+        private System.Windows.Forms.RadioButton rbWindowHeaderAlignmentCenter;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageWindowPropertiesBanner;
+        private System.Windows.Forms.GroupBox gbWindowBanners;
+        private DevExpress.XtraEditors.ColorEdit colorEditWindowBannerTextColor;
+        private DevExpress.XtraEditors.ButtonEdit buttonEditWindowBannerTextFont;
+        private DevExpress.XtraEditors.MemoEdit memoEditWindowBannerText;
+        private System.Windows.Forms.CheckBox ckWindowBannerShowText;
+        private System.Windows.Forms.RadioButton rbWindowBannerAlignmentRight;
+        private System.Windows.Forms.RadioButton rbWindowBannerAlignmentCenter;
+        private System.Windows.Forms.RadioButton rbWindowBannerAlignmentLeft;
+        private System.Windows.Forms.Label laWindowBannerAligment;
+        private DevExpress.XtraGrid.GridControl gridControlWindowBanners;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewWindowBanners;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnWindowBanner;
+        private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEditWindowBanner;
+        private System.Windows.Forms.PictureBox pbWindowSelectedBanner;
+        private System.Windows.Forms.Label laWindowAvailableBanners;
+        private System.Windows.Forms.Label laWindowSelectedBanner;
+        private System.Windows.Forms.CheckBox ckWindowEnableBanner;
+        private System.Windows.Forms.CheckBox ckApllyForAllWindowsBanner;
+        private System.Windows.Forms.CheckBox ckApllyForAllWindowsWidget;
+        private System.Windows.Forms.GroupBox gbWindowWidgets;
+        private DevExpress.XtraGrid.GridControl gridControlWindowWidgets;
+        private DevExpress.XtraGrid.Views.Layout.LayoutView layoutViewWindowWidgets;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumnWindowWidget;
+        private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEditWindowWidget;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_gridColumnImage_1;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
+        private System.Windows.Forms.PictureBox pbWindowSelectedWidget;
+        private System.Windows.Forms.Label laWindowAvailableWidgets;
+        private System.Windows.Forms.Label laWindowSelectedWidget;
+        private System.Windows.Forms.CheckBox ckWindowEnableWidget;
+        private DevExpress.XtraEditors.ColorEdit colorEditWindowBorderColor;
+        private System.Windows.Forms.Label laWindowBorderColor;
     }
 }
