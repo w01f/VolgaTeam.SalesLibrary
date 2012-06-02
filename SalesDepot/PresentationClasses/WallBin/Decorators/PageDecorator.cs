@@ -11,7 +11,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         private List<PresentationClasses.WallBin.FolderBoxControl> _boxes = new List<PresentationClasses.WallBin.FolderBoxControl>();
         private Panel _headerPanel = null;
         private Panel _parentPanel = null;
-        private Panel _emptyPanel = null;
         private Image _logo = null;
         public BusinessClasses.LibraryPage Page { get; private set; }
         public DevExpress.XtraEditors.XtraScrollableControl Container { get; private set; }
@@ -28,9 +27,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             this.TabPage = new DevExpress.XtraTab.XtraTabPage();
             this.TabPage.Tag = this;
             this.TabPage.Text = page.Name.Replace("&","&&");
-            _emptyPanel = new Panel();
-            _emptyPanel.Dock = DockStyle.Fill;
-            this.TabPage.Controls.Add(_emptyPanel);
 
             GetPageLogo();
             BuildPage();
@@ -225,11 +221,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         public void FitPage()
         {
-            _emptyPanel.BringToFront();
             LinkBoxesToColumns();
             FitColumnsToPage();
             FitObjectsToPage();
-            _emptyPanel.SendToBack();
         }
 
         public void ApplyPageLogo()

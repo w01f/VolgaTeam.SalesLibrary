@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grFiles = new System.Windows.Forms.DataGridView();
             this.colDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
-            this.laFolderName = new System.Windows.Forms.Label();
+            this.ttCellInfo = new System.Windows.Forms.ToolTip();
             this.pnMain = new System.Windows.Forms.Panel();
+            this.pnHeader = new System.Windows.Forms.Panel();
+            this.laFolderName = new System.Windows.Forms.Label();
+            this.pbImage = new System.Windows.Forms.PictureBox();
             this.pnRight = new System.Windows.Forms.Panel();
             this.pnIndex = new System.Windows.Forms.Panel();
             this.laIndex = new System.Windows.Forms.Label();
@@ -44,6 +45,8 @@
             this.pnTop = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
             this.pnMain.SuspendLayout();
+            this.pnHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
             this.pnIndex.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +74,7 @@
             this.grFiles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grFiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.grFiles.GridColor = System.Drawing.Color.White;
-            this.grFiles.Location = new System.Drawing.Point(0, 39);
+            this.grFiles.Location = new System.Drawing.Point(1, 40);
             this.grFiles.MultiSelect = false;
             this.grFiles.Name = "grFiles";
             this.grFiles.ReadOnly = true;
@@ -108,30 +111,53 @@
             this.ttCellInfo.IsBalloon = true;
             this.ttCellInfo.ToolTipTitle = "Information About File";
             // 
+            // pnMain
+            // 
+            this.pnMain.Controls.Add(this.grFiles);
+            this.pnMain.Controls.Add(this.pnHeader);
+            this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnMain.Location = new System.Drawing.Point(50, 20);
+            this.pnMain.Name = "pnMain";
+            this.pnMain.Padding = new System.Windows.Forms.Padding(1);
+            this.pnMain.Size = new System.Drawing.Size(211, 268);
+            this.pnMain.TabIndex = 4;
+            this.pnMain.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlBorders_Paint);
+            // 
+            // pnHeader
+            // 
+            this.pnHeader.Controls.Add(this.laFolderName);
+            this.pnHeader.Controls.Add(this.pbImage);
+            this.pnHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnHeader.Location = new System.Drawing.Point(1, 1);
+            this.pnHeader.Name = "pnHeader";
+            this.pnHeader.Padding = new System.Windows.Forms.Padding(0, 0, 0, 1);
+            this.pnHeader.Size = new System.Drawing.Size(209, 39);
+            this.pnHeader.TabIndex = 5;
+            this.pnHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.ControlBorders_Paint);
+            // 
             // laFolderName
             // 
             this.laFolderName.BackColor = System.Drawing.Color.Black;
-            this.laFolderName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.laFolderName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.laFolderName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laFolderName.ForeColor = System.Drawing.Color.White;
-            this.laFolderName.Location = new System.Drawing.Point(0, 0);
+            this.laFolderName.Location = new System.Drawing.Point(43, 0);
             this.laFolderName.Name = "laFolderName";
-            this.laFolderName.Size = new System.Drawing.Size(209, 39);
+            this.laFolderName.Size = new System.Drawing.Size(166, 38);
             this.laFolderName.TabIndex = 1;
             this.laFolderName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.laFolderName.UseMnemonic = false;
             this.laFolderName.Click += new System.EventHandler(this.laFolderName_Click);
             // 
-            // pnMain
+            // pbImage
             // 
-            this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnMain.Controls.Add(this.grFiles);
-            this.pnMain.Controls.Add(this.laFolderName);
-            this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnMain.Location = new System.Drawing.Point(50, 20);
-            this.pnMain.Name = "pnMain";
-            this.pnMain.Size = new System.Drawing.Size(211, 268);
-            this.pnMain.TabIndex = 4;
+            this.pbImage.BackColor = System.Drawing.Color.Black;
+            this.pbImage.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pbImage.Location = new System.Drawing.Point(0, 0);
+            this.pbImage.Name = "pbImage";
+            this.pbImage.Size = new System.Drawing.Size(43, 38);
+            this.pbImage.TabIndex = 0;
+            this.pbImage.TabStop = false;
             // 
             // pnRight
             // 
@@ -194,6 +220,8 @@
             this.Load += new System.EventHandler(this.FileBoxControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grFiles)).EndInit();
             this.pnMain.ResumeLayout(false);
+            this.pnHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.pnIndex.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -203,7 +231,6 @@
 
         protected System.Windows.Forms.DataGridView grFiles;
         protected System.Windows.Forms.ToolTip ttCellInfo;
-        protected System.Windows.Forms.Label laFolderName;
         private System.Windows.Forms.Panel pnMain;
         private System.Windows.Forms.Panel pnIndex;
         private System.Windows.Forms.Label laIndex;
@@ -211,5 +238,8 @@
         private System.Windows.Forms.Panel pnRight;
         private System.Windows.Forms.Panel pnTop;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDisplayName;
+        private System.Windows.Forms.Panel pnHeader;
+        protected System.Windows.Forms.Label laFolderName;
+        private System.Windows.Forms.PictureBox pbImage;
     }
 }

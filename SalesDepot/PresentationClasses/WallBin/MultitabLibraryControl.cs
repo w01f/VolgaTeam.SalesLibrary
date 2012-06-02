@@ -26,6 +26,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             DevExpress.XtraTab.XtraTabPage selectedPage = xtraTabControl.TabPages.Where(x => x.Text.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedPage.Replace("&", "&&"))).FirstOrDefault();
             if (selectedPage != null)
                 xtraTabControl.SelectedTabPage = selectedPage;
+            foreach (Decorators.PageDecorator page in _pages)
+                page.FitPage();
             pnEmpty.SendToBack();
         }
 
@@ -47,7 +49,6 @@ namespace SalesDepot.PresentationClasses.WallBin
                 if (pageDecorator != null)
                 {
                     pageDecorator.ApplyPageLogo();
-                    pageDecorator.FitPage();
                     ConfigurationClasses.SettingsManager.Instance.SelectedPage = pageDecorator.Page.Name;
                     ConfigurationClasses.SettingsManager.Instance.SaveSettings();
                 }
