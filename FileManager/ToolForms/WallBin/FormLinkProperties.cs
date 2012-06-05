@@ -10,6 +10,7 @@ namespace FileManager.ToolForms.WallBin
     {
         private string _note = string.Empty;
         private bool _isBold = false;
+        private bool _closeEventAssigned = false;
 
         public bool IsLineBreak { get; set; }
 
@@ -188,6 +189,37 @@ namespace FileManager.ToolForms.WallBin
             if (font.Strikeout)
                 str = str + ", Strikeout";
             return str;
+        }
+
+        private void AssignCloseActiveEditorsonOutSideClick(Control control)
+        {
+            Type controlType = control.GetType();
+            if (controlType != typeof(CheckBox)
+                && controlType != typeof(RadioButton)
+                && controlType != typeof(TextBox)
+                && controlType != typeof(DataGridView)
+                && controlType != typeof(DevExpress.XtraGrid.GridControl)
+                && controlType != typeof(DevExpress.XtraEditors.ButtonEdit)
+                && controlType != typeof(DevExpress.XtraEditors.CheckEdit)
+                && controlType != typeof(DevExpress.XtraEditors.CheckedListBoxControl)
+                && controlType != typeof(DevExpress.XtraEditors.ColorEdit)
+                && controlType != typeof(DevExpress.XtraEditors.ComboBoxEdit)
+                && controlType != typeof(DevExpress.XtraEditors.DateEdit)
+                && controlType != typeof(DevExpress.XtraEditors.TimeEdit)
+                && controlType != typeof(DevExpress.XtraEditors.MemoEdit))
+            {
+                control.Click += new EventHandler(CloseActiveEditorsonOutSideClick);
+                foreach (Control childControl in control.Controls)
+                {
+                    Application.DoEvents();
+                    AssignCloseActiveEditorsonOutSideClick(childControl);
+                }
+            }
+        }
+
+        private void CloseActiveEditorsonOutSideClick(object sender, EventArgs e)
+        {
+            xtraTabControl.Focus();
         }
 
         private void btOK_Click(object sender, EventArgs e)
@@ -422,8 +454,17 @@ namespace FileManager.ToolForms.WallBin
             colorEditBannerTextColor.Color = this.BannerProperties.ForeColor;
             memoEditBannerText.EditValue = this.BannerProperties.Text;
             memoEditBannerText.Font = this.BannerProperties.Font;
+            memoEditBannerText.Properties.Appearance.Font = this.BannerProperties.Font;
+            memoEditBannerText.Properties.AppearanceDisabled.Font = this.BannerProperties.Font;
+            memoEditBannerText.Properties.AppearanceFocused.Font = this.BannerProperties.Font;
+            memoEditBannerText.Properties.AppearanceReadOnly.Font = this.BannerProperties.Font;
             memoEditBannerText.ForeColor = this.BannerProperties.ForeColor;
 
+            if (!_closeEventAssigned)
+            {
+                AssignCloseActiveEditorsonOutSideClick(this);
+                _closeEventAssigned = true;
+            }
         }
 
         private void checkBoxEnableExpiredLinks_CheckedChanged(object sender, EventArgs e)
@@ -577,6 +618,10 @@ namespace FileManager.ToolForms.WallBin
         private void buttonEditBannerTextFont_EditValueChanged(object sender, EventArgs e)
         {
             memoEditBannerText.Font = buttonEditBannerTextFont.Tag as Font; ;
+            memoEditBannerText.Properties.Appearance.Font = memoEditBannerText.Font;
+            memoEditBannerText.Properties.AppearanceDisabled.Font = memoEditBannerText.Font;
+            memoEditBannerText.Properties.AppearanceFocused.Font = memoEditBannerText.Font;
+            memoEditBannerText.Properties.AppearanceReadOnly.Font = memoEditBannerText.Font;
         }
     }
 }

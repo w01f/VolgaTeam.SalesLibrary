@@ -25,18 +25,6 @@ namespace FileManager.ToolForms.Settings
             InitializeComponent();
             if ((base.CreateGraphics()).DpiX > 96)
             {
-                laColumn1.Font = new System.Drawing.Font(laColumn1.Font.FontFamily, laColumn1.Font.Size - 2, laColumn1.Font.Style);
-                laColumn1Back.Font = new System.Drawing.Font(laColumn1Back.Font.FontFamily, laColumn1Back.Font.Size - 2, laColumn1Back.Font.Style);
-                laColumn1Fore.Font = new System.Drawing.Font(laColumn1Fore.Font.FontFamily, laColumn1Fore.Font.Size - 2, laColumn1Fore.Font.Style);
-                laColumn1HeaderFont.Font = new System.Drawing.Font(laColumn1HeaderFont.Font.FontFamily, laColumn1HeaderFont.Font.Size - 2, laColumn1HeaderFont.Font.Style);
-                laColumn2.Font = new System.Drawing.Font(laColumn2.Font.FontFamily, laColumn2.Font.Size - 2, laColumn2.Font.Style);
-                laColumn2Back.Font = new System.Drawing.Font(laColumn2Back.Font.FontFamily, laColumn2Back.Font.Size - 2, laColumn2Back.Font.Style);
-                laColumn2Fore.Font = new System.Drawing.Font(laColumn2Fore.Font.FontFamily, laColumn2Fore.Font.Size - 2, laColumn2Fore.Font.Style);
-                laColumn2HeaderFont.Font = new System.Drawing.Font(laColumn2HeaderFont.Font.FontFamily, laColumn2HeaderFont.Font.Size - 2, laColumn2HeaderFont.Font.Style);
-                laColumn3.Font = new System.Drawing.Font(laColumn3.Font.FontFamily, laColumn3.Font.Size - 2, laColumn3.Font.Style);
-                laColumn3Back.Font = new System.Drawing.Font(laColumn3Back.Font.FontFamily, laColumn3Back.Font.Size - 2, laColumn3Back.Font.Style);
-                laColumn3Fore.Font = new System.Drawing.Font(laColumn3Fore.Font.FontFamily, laColumn3Fore.Font.Size - 2, laColumn3Fore.Font.Style);
-                laColumn3HeaderFont.Font = new System.Drawing.Font(laColumn3HeaderFont.Font.FontFamily, laColumn3HeaderFont.Font.Size - 2, laColumn3HeaderFont.Font.Style);
                 laWindowHeaderBackColor.Font = new System.Drawing.Font(laWindowHeaderBackColor.Font.FontFamily, laWindowHeaderBackColor.Font.Size - 2, laWindowHeaderBackColor.Font.Style);
                 laWindowHeaderFont.Font = new System.Drawing.Font(laWindowHeaderFont.Font.FontFamily, laWindowHeaderFont.Font.Size - 2, laWindowHeaderFont.Font.Style);
                 laWindowHeaderForeColor.Font = new System.Drawing.Font(laWindowHeaderForeColor.Font.FontFamily, laWindowHeaderForeColor.Font.Size - 2, laWindowHeaderForeColor.Font.Style);
@@ -72,10 +60,80 @@ namespace FileManager.ToolForms.Settings
                 xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderActive.Font.Style);
                 xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderDisabled.Font.Style);
                 xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font(xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControlWindowProperties.AppearancePage.HeaderHotTracked.Font.Style);
+                xtraTabControlColumnTitles.Appearance.Font = new System.Drawing.Font(xtraTabControlColumnTitles.Appearance.Font.FontFamily, xtraTabControlColumnTitles.Appearance.Font.Size - 2, xtraTabControlColumnTitles.Appearance.Font.Style);
+                xtraTabControlColumnTitles.AppearancePage.Header.Font = new System.Drawing.Font(xtraTabControlColumnTitles.AppearancePage.Header.Font.FontFamily, xtraTabControlColumnTitles.AppearancePage.Header.Font.Size - 2, xtraTabControlColumnTitles.AppearancePage.Header.Font.Style);
+                xtraTabControlColumnTitles.AppearancePage.HeaderActive.Font = new System.Drawing.Font(xtraTabControlColumnTitles.AppearancePage.HeaderActive.Font.FontFamily, xtraTabControlColumnTitles.AppearancePage.HeaderActive.Font.Size - 2, xtraTabControlColumnTitles.AppearancePage.HeaderActive.Font.Style);
+                xtraTabControlColumnTitles.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font(xtraTabControlColumnTitles.AppearancePage.HeaderDisabled.Font.FontFamily, xtraTabControlColumnTitles.AppearancePage.HeaderDisabled.Font.Size - 2, xtraTabControlColumnTitles.AppearancePage.HeaderDisabled.Font.Style);
+                xtraTabControlColumnTitles.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font(xtraTabControlColumnTitles.AppearancePage.HeaderHotTracked.Font.FontFamily, xtraTabControlColumnTitles.AppearancePage.HeaderHotTracked.Font.Size - 2, xtraTabControlColumnTitles.AppearancePage.HeaderHotTracked.Font.Style);
+
+                laColumn1BackColor.Font = new System.Drawing.Font(laColumn1BackColor.Font.FontFamily, laColumn1BackColor.Font.Size - 2, laColumn1BackColor.Font.Style);
+                laColumn1ForeColor.Font = new System.Drawing.Font(laColumn1ForeColor.Font.FontFamily, laColumn1ForeColor.Font.Size - 2, laColumn1ForeColor.Font.Style);
+                laColumn1Font.Font = new System.Drawing.Font(laColumn1Font.Font.FontFamily, laColumn1Font.Font.Size - 2, laColumn1Font.Font.Style);
+                laColumn1Alignment.Font = new System.Drawing.Font(laColumn1Alignment.Font.FontFamily, laColumn1Alignment.Font.Size - 2, laColumn1Alignment.Font.Style);
+                ckColumn1EnableText.Font = new System.Drawing.Font(ckColumn1EnableText.Font.FontFamily, ckColumn1EnableText.Font.Size - 2, ckColumn1EnableText.Font.Style);
+                ckColumn1EnableBanner.Font = new System.Drawing.Font(ckColumn1EnableBanner.Font.FontFamily, ckColumn1EnableBanner.Font.Size - 2, ckColumn1EnableBanner.Font.Style);
+                ckColumn1EnableWidget.Font = new System.Drawing.Font(ckColumn1EnableWidget.Font.FontFamily, ckColumn1EnableWidget.Font.Size - 2, ckColumn1EnableWidget.Font.Style);
+                rbColumn1AlignmentCenter.Font = new System.Drawing.Font(rbColumn1AlignmentCenter.Font.FontFamily, rbColumn1AlignmentCenter.Font.Size - 2, rbColumn1AlignmentCenter.Font.Style);
+                rbColumn1AlignmentLeft.Font = new System.Drawing.Font(rbColumn1AlignmentLeft.Font.FontFamily, rbColumn1AlignmentLeft.Font.Size - 2, rbColumn1AlignmentLeft.Font.Style);
+                rbColumn1AlignmentRight.Font = new System.Drawing.Font(rbColumn1AlignmentRight.Font.FontFamily, rbColumn1AlignmentRight.Font.Size - 2, rbColumn1AlignmentRight.Font.Style);
+
+                laColumn2BackColor.Font = new System.Drawing.Font(laColumn2BackColor.Font.FontFamily, laColumn2BackColor.Font.Size - 2, laColumn2BackColor.Font.Style);
+                laColumn2ForeColor.Font = new System.Drawing.Font(laColumn2ForeColor.Font.FontFamily, laColumn2ForeColor.Font.Size - 2, laColumn2ForeColor.Font.Style);
+                laColumn2Font.Font = new System.Drawing.Font(laColumn2Font.Font.FontFamily, laColumn2Font.Font.Size - 2, laColumn2Font.Font.Style);
+                laColumn2Alignment.Font = new System.Drawing.Font(laColumn2Alignment.Font.FontFamily, laColumn2Alignment.Font.Size - 2, laColumn2Alignment.Font.Style);
+                ckColumn2EnableBanner.Font = new System.Drawing.Font(ckColumn2EnableBanner.Font.FontFamily, ckColumn2EnableBanner.Font.Size - 2, ckColumn2EnableBanner.Font.Style);
+                ckColumn2EnableWidget.Font = new System.Drawing.Font(ckColumn2EnableWidget.Font.FontFamily, ckColumn2EnableWidget.Font.Size - 2, ckColumn2EnableWidget.Font.Style);
+                ckColumn2EnableText.Font = new System.Drawing.Font(ckColumn2EnableText.Font.FontFamily, ckColumn2EnableText.Font.Size - 2, ckColumn2EnableText.Font.Style);
+                rbColumn2AlignmentCenter.Font = new System.Drawing.Font(rbColumn2AlignmentCenter.Font.FontFamily, rbColumn2AlignmentCenter.Font.Size - 2, rbColumn2AlignmentCenter.Font.Style);
+                rbColumn2AlignmentLeft.Font = new System.Drawing.Font(rbColumn2AlignmentLeft.Font.FontFamily, rbColumn2AlignmentLeft.Font.Size - 2, rbColumn2AlignmentLeft.Font.Style);
+                rbColumn2AlignmentRight.Font = new System.Drawing.Font(rbColumn2AlignmentRight.Font.FontFamily, rbColumn2AlignmentRight.Font.Size - 2, rbColumn2AlignmentRight.Font.Style);
+
+                laColumn3BackColor.Font = new System.Drawing.Font(laColumn3BackColor.Font.FontFamily, laColumn3BackColor.Font.Size - 2, laColumn3BackColor.Font.Style);
+                laColumn3ForeColor.Font = new System.Drawing.Font(laColumn3ForeColor.Font.FontFamily, laColumn3ForeColor.Font.Size - 2, laColumn3ForeColor.Font.Style);
+                laColumn3Font.Font = new System.Drawing.Font(laColumn3Font.Font.FontFamily, laColumn3Font.Font.Size - 2, laColumn3Font.Font.Style);
+                laColumn3Alignment.Font = new System.Drawing.Font(laColumn3Alignment.Font.FontFamily, laColumn3Alignment.Font.Size - 2, laColumn3Alignment.Font.Style);
+                ckColumn3EnableBanner.Font = new System.Drawing.Font(ckColumn3EnableBanner.Font.FontFamily, ckColumn3EnableBanner.Font.Size - 2, ckColumn3EnableBanner.Font.Style);
+                ckColumn3EnableWidget.Font = new System.Drawing.Font(ckColumn3EnableWidget.Font.FontFamily, ckColumn3EnableWidget.Font.Size - 2, ckColumn3EnableWidget.Font.Style);
+                ckColumn3EnableText.Font = new System.Drawing.Font(ckColumn3EnableText.Font.FontFamily, ckColumn3EnableText.Font.Size - 2, ckColumn3EnableText.Font.Style);
+                rbColumn3AlignmentCenter.Font = new System.Drawing.Font(rbColumn3AlignmentCenter.Font.FontFamily, rbColumn3AlignmentCenter.Font.Size - 2, rbColumn3AlignmentCenter.Font.Style);
+                rbColumn3AlignmentLeft.Font = new System.Drawing.Font(rbColumn3AlignmentLeft.Font.FontFamily, rbColumn3AlignmentLeft.Font.Size - 2, rbColumn3AlignmentLeft.Font.Style);
+                rbColumn3AlignmentRight.Font = new System.Drawing.Font(rbColumn3AlignmentRight.Font.FontFamily, rbColumn3AlignmentRight.Font.Size - 2, rbColumn3AlignmentRight.Font.Style);
             }
+            AssignCloseActiveEditorsonOutSideClick(this);
         }
 
         #region Base Methods
+        private void AssignCloseActiveEditorsonOutSideClick(Control control)
+        {
+            Type controlType = control.GetType();
+            if (controlType != typeof(CheckBox)
+                && controlType != typeof(RadioButton)
+                && controlType != typeof(TextBox)
+                && controlType != typeof(DataGridView)
+                && controlType != typeof(DevExpress.XtraGrid.GridControl)
+                && controlType != typeof(DevExpress.XtraEditors.ButtonEdit)
+                && controlType != typeof(DevExpress.XtraEditors.CheckEdit)
+                && controlType != typeof(DevExpress.XtraEditors.CheckedListBoxControl)
+                && controlType != typeof(DevExpress.XtraEditors.ColorEdit)
+                && controlType != typeof(DevExpress.XtraEditors.ComboBoxEdit)
+                && controlType != typeof(DevExpress.XtraEditors.DateEdit)
+                && controlType != typeof(DevExpress.XtraEditors.TimeEdit)
+                && controlType != typeof(DevExpress.XtraEditors.MemoEdit))
+            {
+                control.Click += new EventHandler(CloseActiveEditorsonOutSideClick);
+                foreach (Control childControl in control.Controls)
+                {
+                    Application.DoEvents();
+                    AssignCloseActiveEditorsonOutSideClick(childControl);
+                }
+            }
+        }
+
+        private void CloseActiveEditorsonOutSideClick(object sender, EventArgs e)
+        {
+            laPages.Focus();
+        }
+
         private string FontToString(Font font)
         {
             string str = font.Name + ", " + font.Size.ToString("#0");
@@ -359,6 +417,10 @@ namespace FileManager.ToolForms.Settings
                 }
                 memoEditWindowBannerText.ForeColor = colorEditWindowBannerTextColor.Color;
                 memoEditWindowBannerText.Font = buttonEditWindowBannerTextFont.Tag as Font;
+                memoEditWindowBannerText.Properties.Appearance.Font = memoEditWindowBannerText.Font;
+                memoEditWindowBannerText.Properties.AppearanceDisabled.Font = memoEditWindowBannerText.Font;
+                memoEditWindowBannerText.Properties.AppearanceFocused.Font = memoEditWindowBannerText.Font;
+                memoEditWindowBannerText.Properties.AppearanceReadOnly.Font = memoEditWindowBannerText.Font;
                 _allowToSave = true;
             }
         }
@@ -488,25 +550,116 @@ namespace FileManager.ToolForms.Settings
             {
                 if (_currentPage.ColumnTitles.Count == 3)
                 {
-                    bool temp = _stateChanges;
-                    tbColumn1.Text = _currentPage.ColumnTitles[0].Name;
-                    colorEditColumn1Back.Color = _currentPage.ColumnTitles[0].BackgroundColor;
-                    colorEditColumn1Fore.Color = _currentPage.ColumnTitles[0].ForeColor;
-                    buttonEditColumn1HeaderFont.Tag = _currentPage.ColumnTitles[0].HeaderFont;
-                    buttonEditColumn1HeaderFont.EditValue = FontToString(_currentPage.ColumnTitles[0].HeaderFont);
-                    tbColumn2.Text = _currentPage.ColumnTitles[1].Name;
-                    colorEditColumn2Back.Color = _currentPage.ColumnTitles[1].BackgroundColor;
-                    colorEditColumn2Fore.Color = _currentPage.ColumnTitles[1].ForeColor;
-                    buttonEditColumn2HeaderFont.Tag = _currentPage.ColumnTitles[1].HeaderFont;
-                    buttonEditColumn2HeaderFont.EditValue = FontToString(_currentPage.ColumnTitles[1].HeaderFont);
-                    tbColumn3.Text = _currentPage.ColumnTitles[2].Name;
-                    colorEditColumn3Back.Color = _currentPage.ColumnTitles[2].BackgroundColor;
-                    colorEditColumn3Fore.Color = _currentPage.ColumnTitles[2].ForeColor;
-                    buttonEditColumn3HeaderFont.Tag = _currentPage.ColumnTitles[2].HeaderFont;
-                    buttonEditColumn3HeaderFont.EditValue = FontToString(_currentPage.ColumnTitles[2].HeaderFont);
+                    _allowToSave = false;
                     ckEnableColumnTitles.Checked = _currentPage.EnableColumnTitles;
                     ckApplyForAllColumnTitles.Checked = _currentPage.ApplyForAllColumnTitles;
-                    _stateChanges = temp;
+
+                    colorEditColumn1BackColor.Color = _currentPage.ColumnTitles[0].BackgroundColor;
+                    switch (_currentPage.ColumnTitles[0].HeaderAlignment)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            rbColumn1AlignmentLeft.Checked = true;
+                            rbColumn1AlignmentCenter.Checked = false;
+                            rbColumn1AlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            rbColumn1AlignmentLeft.Checked = false;
+                            rbColumn1AlignmentCenter.Checked = true;
+                            rbColumn1AlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            rbColumn1AlignmentLeft.Checked = false;
+                            rbColumn1AlignmentCenter.Checked = false;
+                            rbColumn1AlignmentRight.Checked = true;
+                            break;
+                    }
+                    ckColumn1EnableText.Checked = _currentPage.ColumnTitles[0].EnableText;
+                    memoEditColumn1Title.EditValue = _currentPage.ColumnTitles[0].Name;
+                    colorEditColumn1ForeColor.Color = _currentPage.ColumnTitles[0].ForeColor;
+                    buttonEditColumn1Font.Tag = _currentPage.ColumnTitles[0].HeaderFont;
+                    buttonEditColumn1Font.EditValue = FontToString(_currentPage.ColumnTitles[0].HeaderFont);
+                    memoEditColumn1Title.ForeColor = colorEditColumn1ForeColor.Color;
+                    memoEditColumn1Title.Font = buttonEditColumn1Font.Tag as Font; ;
+                    memoEditColumn1Title.Properties.Appearance.Font = memoEditColumn1Title.Font;
+                    memoEditColumn1Title.Properties.AppearanceDisabled.Font = memoEditColumn1Title.Font;
+                    memoEditColumn1Title.Properties.AppearanceFocused.Font = memoEditColumn1Title.Font;
+                    memoEditColumn1Title.Properties.AppearanceReadOnly.Font = memoEditColumn1Title.Font;
+                    ckColumn1EnableBanner.Checked = _currentPage.ColumnTitles[0].BannerProperties.Enable;
+                    pbColumn1SelectedBanner.Image = _currentPage.ColumnTitles[0].BannerProperties.Enable ? _currentPage.ColumnTitles[0].BannerProperties.Image : null;
+                    ckColumn1EnableWidget.Checked = _currentPage.ColumnTitles[0].EnableWidget;
+                    pbColumn1SelectedWidget.Image = _currentPage.ColumnTitles[0].EnableWidget ? _currentPage.ColumnTitles[0].Widget : null;
+
+                    colorEditColumn2BackColor.Color = _currentPage.ColumnTitles[1].BackgroundColor;
+                    switch (_currentPage.ColumnTitles[1].HeaderAlignment)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            rbColumn2AlignmentLeft.Checked = true;
+                            rbColumn2AlignmentCenter.Checked = false;
+                            rbColumn2AlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            rbColumn2AlignmentLeft.Checked = false;
+                            rbColumn2AlignmentCenter.Checked = true;
+                            rbColumn2AlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            rbColumn2AlignmentLeft.Checked = false;
+                            rbColumn2AlignmentCenter.Checked = false;
+                            rbColumn2AlignmentRight.Checked = true;
+                            break;
+                    }
+                    ckColumn2EnableText.Checked = _currentPage.ColumnTitles[1].EnableText;
+                    memoEditColumn2Title.EditValue = _currentPage.ColumnTitles[1].Name;
+                    colorEditColumn2ForeColor.Color = _currentPage.ColumnTitles[1].ForeColor;
+                    buttonEditColumn2Font.Tag = _currentPage.ColumnTitles[1].HeaderFont;
+                    buttonEditColumn2Font.EditValue = FontToString(_currentPage.ColumnTitles[1].HeaderFont);
+                    memoEditColumn2Title.ForeColor = colorEditColumn2ForeColor.Color;
+                    memoEditColumn2Title.Font = buttonEditColumn2Font.Tag as Font; ;
+                    memoEditColumn2Title.Properties.Appearance.Font = memoEditColumn2Title.Font;
+                    memoEditColumn2Title.Properties.AppearanceDisabled.Font = memoEditColumn2Title.Font;
+                    memoEditColumn2Title.Properties.AppearanceFocused.Font = memoEditColumn2Title.Font;
+                    memoEditColumn2Title.Properties.AppearanceReadOnly.Font = memoEditColumn2Title.Font;
+                    ckColumn2EnableBanner.Checked = _currentPage.ColumnTitles[1].BannerProperties.Enable;
+                    pbColumn2SelectedBanner.Image = _currentPage.ColumnTitles[1].BannerProperties.Enable ? _currentPage.ColumnTitles[1].BannerProperties.Image : null;
+                    ckColumn2EnableWidget.Checked = _currentPage.ColumnTitles[1].EnableWidget;
+                    pbColumn2SelectedWidget.Image = _currentPage.ColumnTitles[1].EnableWidget ? _currentPage.ColumnTitles[1].Widget : null;
+
+                    colorEditColumn3BackColor.Color = _currentPage.ColumnTitles[2].BackgroundColor;
+                    switch (_currentPage.ColumnTitles[2].HeaderAlignment)
+                    {
+                        case BusinessClasses.Alignment.Left:
+                            rbColumn3AlignmentLeft.Checked = true;
+                            rbColumn3AlignmentCenter.Checked = false;
+                            rbColumn3AlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Center:
+                            rbColumn3AlignmentLeft.Checked = false;
+                            rbColumn3AlignmentCenter.Checked = true;
+                            rbColumn3AlignmentRight.Checked = false;
+                            break;
+                        case BusinessClasses.Alignment.Right:
+                            rbColumn3AlignmentLeft.Checked = false;
+                            rbColumn3AlignmentCenter.Checked = false;
+                            rbColumn3AlignmentRight.Checked = true;
+                            break;
+                    }
+                    ckColumn3EnableText.Checked = _currentPage.ColumnTitles[2].EnableText;
+                    memoEditColumn3Title.EditValue = _currentPage.ColumnTitles[2].Name;
+                    colorEditColumn3ForeColor.Color = _currentPage.ColumnTitles[2].ForeColor;
+                    buttonEditColumn3Font.Tag = _currentPage.ColumnTitles[2].HeaderFont;
+                    buttonEditColumn3Font.EditValue = FontToString(_currentPage.ColumnTitles[2].HeaderFont);
+                    memoEditColumn3Title.ForeColor = colorEditColumn3ForeColor.Color;
+                    memoEditColumn3Title.Font = buttonEditColumn3Font.Tag as Font; ;
+                    memoEditColumn3Title.Properties.Appearance.Font = memoEditColumn3Title.Font;
+                    memoEditColumn3Title.Properties.AppearanceDisabled.Font = memoEditColumn3Title.Font;
+                    memoEditColumn3Title.Properties.AppearanceFocused.Font = memoEditColumn3Title.Font;
+                    memoEditColumn3Title.Properties.AppearanceReadOnly.Font = memoEditColumn3Title.Font;
+                    ckColumn3EnableBanner.Checked = _currentPage.ColumnTitles[2].BannerProperties.Enable;
+                    pbColumn3SelectedBanner.Image = _currentPage.ColumnTitles[2].BannerProperties.Enable ? _currentPage.ColumnTitles[2].BannerProperties.Image : null;
+                    ckColumn3EnableWidget.Checked = _currentPage.ColumnTitles[2].EnableWidget;
+                    pbColumn3SelectedWidget.Image = _currentPage.ColumnTitles[2].EnableWidget ? _currentPage.ColumnTitles[2].Widget : null;
+
+                    _allowToSave = true;
                 }
             }
         }
@@ -519,34 +672,105 @@ namespace FileManager.ToolForms.Settings
 
                 BusinessClasses.ColumnTitle column = new BusinessClasses.ColumnTitle(_currentPage);
                 column.ColumnOrder = 0;
-                column.Name = tbColumn1.Text;
-                column.BackgroundColor = colorEditColumn1Back.Color;
-                column.ForeColor = colorEditColumn1Fore.Color;
-                column.HeaderFont = buttonEditColumn1HeaderFont.Tag as Font;
+                column.BackgroundColor = colorEditColumn1BackColor.Color;
+                if (rbColumn1AlignmentLeft.Checked)
+                    column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                else if (rbColumn1AlignmentCenter.Checked)
+                    column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                else if (rbColumn1AlignmentRight.Checked)
+                    column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
+                column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+                column.ForeColor = colorEditColumn1ForeColor.Color;
+                column.HeaderFont = buttonEditColumn1Font.Tag as Font;
+                column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
+                column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
+                column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
+                column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
                 _currentPage.ColumnTitles.Add(column);
 
-                column = new BusinessClasses.ColumnTitle(_currentPage);
-                column.ColumnOrder = 1;
-                column.Name = tbColumn2.Text;
-                column.BackgroundColor = colorEditColumn2Back.Color;
-                column.ForeColor = colorEditColumn2Fore.Color;
-                column.HeaderFont = buttonEditColumn2HeaderFont.Tag as Font;
-                _currentPage.ColumnTitles.Add(column);
-
-                column = new BusinessClasses.ColumnTitle(_currentPage);
-                column.ColumnOrder = 2;
-                column.Name = tbColumn3.Text;
-                column.BackgroundColor = colorEditColumn3Back.Color;
-                column.ForeColor = colorEditColumn3Fore.Color;
-                column.HeaderFont = buttonEditColumn3HeaderFont.Tag as Font;
-                _currentPage.ColumnTitles.Add(column);
-
-
-                if (ckEnableColumnTitles.Checked && (string.IsNullOrEmpty(tbColumn1.Text.Trim()) || string.IsNullOrEmpty(tbColumn2.Text.Trim()) || string.IsNullOrEmpty(tbColumn3.Text.Trim())))
+                if (ckApplyForAllColumnTitles.Checked)
                 {
-                    AppManager.Instance.ShowWarning("You did not set all column titles and they will be disabled");
-                    ckEnableColumnTitles.Checked = false;
+                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column.ColumnOrder = 1;
+                    column.BackgroundColor = colorEditColumn1BackColor.Color;
+                    if (rbColumn1AlignmentLeft.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                    else if (rbColumn1AlignmentCenter.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                    else if (rbColumn1AlignmentRight.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                    column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
+                    column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+                    column.ForeColor = colorEditColumn1ForeColor.Color;
+                    column.HeaderFont = buttonEditColumn1Font.Tag as Font;
+                    column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
+                    column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
+                    column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
+                    column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
+                    _currentPage.ColumnTitles.Add(column);
+
+
+                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column.ColumnOrder = 2;
+                    column.BackgroundColor = colorEditColumn1BackColor.Color;
+                    if (rbColumn1AlignmentLeft.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                    else if (rbColumn1AlignmentCenter.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                    else if (rbColumn1AlignmentRight.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                    column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
+                    column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+                    column.ForeColor = colorEditColumn1ForeColor.Color;
+                    column.HeaderFont = buttonEditColumn1Font.Tag as Font;
+                    column.BannerProperties.Enable = ckColumn1EnableBanner.Checked & pbColumn1SelectedBanner.Image != null;
+                    column.BannerProperties.Image = ckColumn1EnableBanner.Checked ? pbColumn1SelectedBanner.Image : null;
+                    column.EnableWidget = ckColumn1EnableWidget.Checked & pbColumn1SelectedWidget.Image != null;
+                    column.Widget = ckColumn1EnableWidget.Checked ? pbColumn1SelectedWidget.Image : null;
+                    _currentPage.ColumnTitles.Add(column);
                 }
+                else
+                {
+                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column.ColumnOrder = 1;
+                    column.BackgroundColor = colorEditColumn2BackColor.Color;
+                    if (rbColumn2AlignmentLeft.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                    else if (rbColumn2AlignmentCenter.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                    else if (rbColumn2AlignmentRight.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                    column.Name = ckColumn2EnableText.Checked & memoEditColumn2Title.EditValue != null ? memoEditColumn2Title.EditValue.ToString() : string.Empty;
+                    column.EnableText = ckColumn2EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+                    column.ForeColor = colorEditColumn2ForeColor.Color;
+                    column.HeaderFont = buttonEditColumn2Font.Tag as Font;
+                    column.BannerProperties.Enable = ckColumn2EnableBanner.Checked & pbColumn2SelectedBanner.Image != null;
+                    column.BannerProperties.Image = ckColumn2EnableBanner.Checked ? pbColumn2SelectedBanner.Image : null;
+                    column.EnableWidget = ckColumn2EnableWidget.Checked & pbColumn2SelectedWidget.Image != null;
+                    column.Widget = ckColumn2EnableWidget.Checked ? pbColumn2SelectedWidget.Image : null;
+                    _currentPage.ColumnTitles.Add(column);
+
+                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column.ColumnOrder = 2;
+                    column.BackgroundColor = colorEditColumn3BackColor.Color;
+                    if (rbColumn3AlignmentLeft.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                    else if (rbColumn3AlignmentCenter.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                    else if (rbColumn3AlignmentRight.Checked)
+                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                    column.Name = ckColumn3EnableText.Checked & memoEditColumn3Title.EditValue != null ? memoEditColumn3Title.EditValue.ToString() : string.Empty;
+                    column.EnableText = ckColumn3EnableText.Checked & !string.IsNullOrEmpty(column.Name);
+                    column.ForeColor = colorEditColumn3ForeColor.Color;
+                    column.HeaderFont = buttonEditColumn3Font.Tag as Font;
+                    column.BannerProperties.Enable = ckColumn3EnableBanner.Checked & pbColumn3SelectedBanner.Image != null;
+                    column.BannerProperties.Image = ckColumn3EnableBanner.Checked ? pbColumn3SelectedBanner.Image : null;
+                    column.EnableWidget = ckColumn3EnableWidget.Checked & pbColumn3SelectedWidget.Image != null;
+                    column.Widget = ckColumn3EnableWidget.Checked ? pbColumn3SelectedWidget.Image : null;
+                    _currentPage.ColumnTitles.Add(column);
+                }
+
                 _currentPage.EnableColumnTitles = ckEnableColumnTitles.Checked;
                 _currentPage.ApplyForAllColumnTitles = ckApplyForAllColumnTitles.Checked;
             }
@@ -592,6 +816,7 @@ namespace FileManager.ToolForms.Settings
             xtraTabControlSettings.SelectedTabPage = xtraTabPageColumns;
             xtraTabControlWindows.SelectedTabPage = xtraTabPageColumn1;
             xtraTabControlWindowProperties.SelectedTabPage = xtraTabPageWindowPropertiesAppearance;
+            xtraTabControlColumnTitles.SelectedTabPage = xtraTabPageColumnTitles1;
             ckApllyForAllWindowsAppearance.Checked = this.Library.ApplyAppearanceForAllWindows;
             ckApllyForAllWindowsWidget.Checked = this.Library.ApplyWidgetForAllWindows;
             ckApllyForAllWindowsBanner.Checked = this.Library.ApplyBannerForAllWindows;
@@ -599,6 +824,12 @@ namespace FileManager.ToolForms.Settings
             gridControlWindowBanners.DataSource = new BindingList<ConfigurationClasses.Banner>(ConfigurationClasses.ListManager.Instance.Banners);
             xtraTabPageWindowPropertiesWidget.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.WidgetFolder);
             gridControlWindowWidgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
+            gridControlColumn1Banners.DataSource = new BindingList<ConfigurationClasses.Banner>(ConfigurationClasses.ListManager.Instance.Banners);
+            gridControlColumn2Banners.DataSource = new BindingList<ConfigurationClasses.Banner>(ConfigurationClasses.ListManager.Instance.Banners);
+            gridControlColumn3Banners.DataSource = new BindingList<ConfigurationClasses.Banner>(ConfigurationClasses.ListManager.Instance.Banners);
+            gridControlColumn1Widgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
+            gridControlColumn2Widgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
+            gridControlColumn3Widgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
             PopulatePagesList();
             comboBoxEditPages_SelectedIndexChanged(null, null);
             _stateChanges = false;
@@ -949,7 +1180,7 @@ namespace FileManager.ToolForms.Settings
                     destGrid = grColumn2;
                     break;
                 case 1:
-                    sourceGrid = grColumn2;
+                    sourceGrid = grColumn3;
                     destGrid = grColumn3;
                     break;
             }
@@ -1142,6 +1373,10 @@ namespace FileManager.ToolForms.Settings
         private void buttonEditWindowBannerTextFont_EditValueChanged(object sender, EventArgs e)
         {
             memoEditWindowBannerText.Font = buttonEditWindowBannerTextFont.Tag as Font; ;
+            memoEditWindowBannerText.Properties.Appearance.Font = memoEditWindowBannerText.Font;
+            memoEditWindowBannerText.Properties.AppearanceDisabled.Font = memoEditWindowBannerText.Font;
+            memoEditWindowBannerText.Properties.AppearanceFocused.Font = memoEditWindowBannerText.Font;
+            memoEditWindowBannerText.Properties.AppearanceReadOnly.Font = memoEditWindowBannerText.Font;
             if (_allowToSave)
                 _stateChanges = true;
         }
@@ -1182,62 +1417,294 @@ namespace FileManager.ToolForms.Settings
         #region Column Titles Tab GUI
         private void ckEnableColumnTitles_CheckedChanged(object sender, EventArgs e)
         {
-            gbColumnTitle1.Enabled = ckEnableColumnTitles.Checked;
-            gbColumnTitle2.Enabled = ckEnableColumnTitles.Checked;
-            gbColumnTitle3.Enabled = ckEnableColumnTitles.Checked;
+            xtraTabControlColumnTitles.Enabled = ckEnableColumnTitles.Checked;
             ckApplyForAllColumnTitles.Enabled = ckEnableColumnTitles.Checked;
-            _stateChanges = true;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void xtraTabControlColumnTitles_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            if (xtraTabControlColumnTitles.SelectedTabPageIndex == 0)
+                ckApplyForAllColumnTitles.Visible = true;
+            else
+                ckApplyForAllColumnTitles.Visible = false;
         }
 
         private void ckApplyForAllColumnTitles_CheckedChanged(object sender, EventArgs e)
         {
-            colorEditColumn2Back.Enabled = !ckApplyForAllColumnTitles.Checked;
-            colorEditColumn2Fore.Enabled = !ckApplyForAllColumnTitles.Checked;
-            buttonEditColumn2HeaderFont.Enabled = !ckApplyForAllColumnTitles.Checked;
-            colorEditColumn3Back.Enabled = !ckApplyForAllColumnTitles.Checked;
-            colorEditColumn3Fore.Enabled = !ckApplyForAllColumnTitles.Checked;
-            buttonEditColumn3HeaderFont.Enabled = !ckApplyForAllColumnTitles.Checked;
-            if (ckApplyForAllColumnTitles.Checked)
-            {
-                colorEditColumn2Back.Color = colorEditColumn1Back.Color;
-                colorEditColumn2Fore.Color = colorEditColumn2Fore.Color;
-                buttonEditColumn2HeaderFont.EditValue = buttonEditColumn1HeaderFont.EditValue;
-                colorEditColumn3Back.Color = colorEditColumn1Back.Color;
-                colorEditColumn3Fore.Color = colorEditColumn2Fore.Color;
-                buttonEditColumn3HeaderFont.EditValue = buttonEditColumn1HeaderFont.EditValue;
-            }
-            _stateChanges = true;
+            xtraTabPageColumnTitles2.PageEnabled = !ckApplyForAllColumnTitles.Checked;
+            xtraTabPageColumnTitles3.PageEnabled = !ckApplyForAllColumnTitles.Checked;
+            if (_allowToSave)
+                _stateChanges = true;
         }
 
-        private void colorEditColumn1Back_EditValueChanged(object sender, EventArgs e)
+        #region Column 1
+        private void ckColumn1EnableText_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckApplyForAllColumnTitles.Checked)
-            {
-                colorEditColumn2Back.Color = colorEditColumn1Back.Color;
-                colorEditColumn3Back.Color = colorEditColumn1Back.Color;
-            }
-            _stateChanges = true;
+            laColumn1Font.Enabled = ckColumn1EnableText.Checked;
+            laColumn1ForeColor.Enabled = ckColumn1EnableText.Checked;
+            memoEditColumn1Title.Enabled = ckColumn1EnableText.Checked;
+            colorEditColumn1ForeColor.Enabled = ckColumn1EnableText.Checked;
+            buttonEditColumn1Font.Enabled = ckColumn1EnableText.Checked;
+            if (_allowToSave)
+                _stateChanges = true;
         }
 
-        private void colorEditColumn1Fore_EditValueChanged(object sender, EventArgs e)
+        private void colorEditColumn1ForeColor_EditValueChanged(object sender, EventArgs e)
         {
-            if (ckApplyForAllColumnTitles.Checked)
-            {
-                colorEditColumn2Fore.Color = colorEditColumn1Fore.Color;
-                colorEditColumn3Fore.Color = colorEditColumn1Fore.Color;
-            }
-            _stateChanges = true;
+            memoEditColumn1Title.ForeColor = colorEditColumn1ForeColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
         }
 
-        private void buttonEditColumn1HeaderFont_EditValueChanged(object sender, EventArgs e)
+        private void buttonEditColumn1Font_EditValueChanged(object sender, EventArgs e)
         {
-            if (ckApplyForAllColumnTitles.Checked)
-            {
-                buttonEditColumn2HeaderFont.EditValue = buttonEditColumn1HeaderFont.EditValue;
-                buttonEditColumn3HeaderFont.EditValue = buttonEditColumn1HeaderFont.EditValue;
-            }
-            _stateChanges = true;
+            memoEditColumn1Title.Font = buttonEditColumn1Font.Tag as Font; ;
+            memoEditColumn1Title.Properties.Appearance.Font = memoEditColumn1Title.Font;
+            memoEditColumn1Title.Properties.AppearanceDisabled.Font = memoEditColumn1Title.Font;
+            memoEditColumn1Title.Properties.AppearanceFocused.Font = memoEditColumn1Title.Font;
+            memoEditColumn1Title.Properties.AppearanceReadOnly.Font = memoEditColumn1Title.Font;
+            if (_allowToSave)
+                _stateChanges = true;
         }
+
+        private void ckColumn1EnableBanner_CheckedChanged(object sender, EventArgs e)
+        {
+            pbColumn1SelectedBanner.Enabled = ckColumn1EnableBanner.Checked;
+            gridControlColumn1Banners.Enabled = ckColumn1EnableBanner.Checked;
+            if (ckColumn1EnableBanner.Checked)
+                ckColumn1EnableWidget.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewColumn1Banners_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Banner selectedBanner = null;
+            if (gridViewColumn1Banners.FocusedRowHandle >= 0)
+                selectedBanner = ConfigurationClasses.ListManager.Instance.Banners[gridViewColumn1Banners.GetDataSourceRowIndex(gridViewColumn1Banners.FocusedRowHandle)];
+            pbColumn1SelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewColumn1Banners_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlColumn1Banners.PointToClient(Control.MousePosition);
+
+            if (gridViewColumn1Banners.CalcHitInfo(pt).RowHandle == gridViewColumn1Banners.FocusedRowHandle)
+                gridViewColumn1Banners_FocusedRowChanged(null, null);
+        }
+
+        private void ckColumn1EnableWidget_CheckedChanged(object sender, EventArgs e)
+        {
+            pbColumn1SelectedWidget.Enabled = ckColumn1EnableWidget.Checked;
+            gridControlColumn1Widgets.Enabled = ckColumn1EnableWidget.Checked;
+            if (ckColumn1EnableWidget.Checked)
+                ckColumn1EnableBanner.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewColumn1Widgets_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Widget selectedWidget = null;
+            if (layoutViewColumn1Widgets.FocusedRowHandle >= 0)
+            {
+                selectedWidget = ConfigurationClasses.ListManager.Instance.Widgets[layoutViewColumn1Widgets.GetDataSourceRowIndex(layoutViewColumn1Widgets.FocusedRowHandle)];
+            }
+            pbColumn1SelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewColumn1Widgets_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlColumn1Widgets.PointToClient(Control.MousePosition);
+
+            if (layoutViewColumn1Widgets.CalcHitInfo(pt).RowHandle == layoutViewColumn1Widgets.FocusedRowHandle)
+                layoutViewColumn1Widgets_FocusedRowChanged(null, null);
+        }
+        #endregion
+
+        #region Column 2
+        private void ckColumn2EnableText_CheckedChanged(object sender, EventArgs e)
+        {
+            laColumn2Font.Enabled = ckColumn2EnableText.Checked;
+            laColumn2ForeColor.Enabled = ckColumn2EnableText.Checked;
+            memoEditColumn2Title.Enabled = ckColumn2EnableText.Checked;
+            colorEditColumn2ForeColor.Enabled = ckColumn2EnableText.Checked;
+            buttonEditColumn2Font.Enabled = ckColumn2EnableText.Checked;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void buttonEditColumn2Font_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn2Title.Font = buttonEditColumn2Font.Tag as Font; ;
+            memoEditColumn2Title.Properties.Appearance.Font = memoEditColumn2Title.Font;
+            memoEditColumn2Title.Properties.AppearanceDisabled.Font = memoEditColumn2Title.Font;
+            memoEditColumn2Title.Properties.AppearanceFocused.Font = memoEditColumn2Title.Font;
+            memoEditColumn2Title.Properties.AppearanceReadOnly.Font = memoEditColumn2Title.Font;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void colorEditColumn2ForeColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn2Title.ForeColor = colorEditColumn2ForeColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void ckColumn2EnableBanner_CheckedChanged(object sender, EventArgs e)
+        {
+            pbColumn2SelectedBanner.Enabled = ckColumn2EnableBanner.Checked;
+            gridControlColumn2Banners.Enabled = ckColumn2EnableBanner.Checked;
+            if (ckColumn2EnableBanner.Checked)
+                ckColumn2EnableWidget.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewColumn2Banners_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Banner selectedBanner = null;
+            if (gridViewColumn2Banners.FocusedRowHandle >= 0)
+                selectedBanner = ConfigurationClasses.ListManager.Instance.Banners[gridViewColumn2Banners.GetDataSourceRowIndex(gridViewColumn2Banners.FocusedRowHandle)];
+            pbColumn2SelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewColumn2Banners_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlColumn2Banners.PointToClient(Control.MousePosition);
+
+            if (gridViewColumn2Banners.CalcHitInfo(pt).RowHandle == gridViewColumn2Banners.FocusedRowHandle)
+                gridViewColumn2Banners_FocusedRowChanged(null, null);
+        }
+
+        private void ckColumn2EnableWidget_CheckedChanged(object sender, EventArgs e)
+        {
+            pbColumn2SelectedWidget.Enabled = ckColumn2EnableWidget.Checked;
+            gridControlColumn2Widgets.Enabled = ckColumn2EnableWidget.Checked;
+            if (ckColumn2EnableWidget.Checked)
+                ckColumn2EnableBanner.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewColumn2Widgets_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Widget selectedWidget = null;
+            if (layoutViewColumn2Widgets.FocusedRowHandle >= 0)
+            {
+                selectedWidget = ConfigurationClasses.ListManager.Instance.Widgets[layoutViewColumn2Widgets.GetDataSourceRowIndex(layoutViewColumn2Widgets.FocusedRowHandle)];
+            }
+            pbColumn2SelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewColumn2Widgets_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlColumn2Widgets.PointToClient(Control.MousePosition);
+
+            if (layoutViewColumn2Widgets.CalcHitInfo(pt).RowHandle == layoutViewColumn2Widgets.FocusedRowHandle)
+                layoutViewColumn2Widgets_FocusedRowChanged(null, null);
+        }
+        #endregion
+
+        #region Column 3
+        private void ckColumn3EnableText_CheckedChanged(object sender, EventArgs e)
+        {
+            laColumn3Font.Enabled = ckColumn3EnableText.Checked;
+            laColumn3ForeColor.Enabled = ckColumn3EnableText.Checked;
+            memoEditColumn3Title.Enabled = ckColumn3EnableText.Checked;
+            colorEditColumn3ForeColor.Enabled = ckColumn3EnableText.Checked;
+            buttonEditColumn3Font.Enabled = ckColumn3EnableText.Checked;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void colorEditColumn3ForeColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn3Title.Font = buttonEditColumn3Font.Tag as Font; ;
+            memoEditColumn3Title.Properties.Appearance.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.Properties.AppearanceDisabled.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.Properties.AppearanceFocused.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.Properties.AppearanceReadOnly.Font = memoEditColumn3Title.Font;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void buttonEditColumn3Font_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn3Title.ForeColor = colorEditColumn3ForeColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void ckColumn3EnableBanner_CheckedChanged(object sender, EventArgs e)
+        {
+            pbColumn3SelectedBanner.Enabled = ckColumn3EnableBanner.Checked;
+            gridControlColumn3Banners.Enabled = ckColumn3EnableBanner.Checked;
+            if (ckColumn3EnableBanner.Checked)
+                ckColumn3EnableWidget.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewColumn3Banners_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Banner selectedBanner = null;
+            if (gridViewColumn3Banners.FocusedRowHandle >= 0)
+                selectedBanner = ConfigurationClasses.ListManager.Instance.Banners[gridViewColumn3Banners.GetDataSourceRowIndex(gridViewColumn3Banners.FocusedRowHandle)];
+            pbColumn3SelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void gridViewColumn3Banners_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlColumn3Banners.PointToClient(Control.MousePosition);
+
+            if (gridViewColumn3Banners.CalcHitInfo(pt).RowHandle == gridViewColumn3Banners.FocusedRowHandle)
+                gridViewColumn3Banners_FocusedRowChanged(null, null);
+        }
+
+        private void ckColumn3EnableWidget_CheckedChanged(object sender, EventArgs e)
+        {
+            pbColumn3SelectedWidget.Enabled = ckColumn3EnableWidget.Checked;
+            gridControlColumn3Widgets.Enabled = ckColumn3EnableWidget.Checked;
+            if (ckColumn3EnableWidget.Checked)
+                ckColumn3EnableBanner.Checked = false;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewColumn3Widgets_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            ConfigurationClasses.Widget selectedWidget = null;
+            if (layoutViewColumn3Widgets.FocusedRowHandle >= 0)
+            {
+                selectedWidget = ConfigurationClasses.ListManager.Instance.Widgets[layoutViewColumn3Widgets.GetDataSourceRowIndex(layoutViewColumn3Widgets.FocusedRowHandle)];
+            }
+            pbColumn3SelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void layoutViewColumn3Widgets_Click(object sender, EventArgs e)
+        {
+            Point pt = gridControlColumn3Widgets.PointToClient(Control.MousePosition);
+
+            if (layoutViewColumn3Widgets.CalcHitInfo(pt).RowHandle == layoutViewColumn3Widgets.FocusedRowHandle)
+                layoutViewColumn3Widgets_FocusedRowChanged(null, null);
+        }
+        #endregion
         #endregion
     }
 }

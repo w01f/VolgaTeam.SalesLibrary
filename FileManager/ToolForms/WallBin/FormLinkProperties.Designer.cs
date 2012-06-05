@@ -456,7 +456,7 @@
             // 
             this.navBarGroupControlContainer1.Controls.Add(this.checkedListBoxControlGroup1);
             this.navBarGroupControlContainer1.Name = "navBarGroupControlContainer1";
-            this.navBarGroupControlContainer1.Size = new System.Drawing.Size(350, 78);
+            this.navBarGroupControlContainer1.Size = new System.Drawing.Size(393, 78);
             this.navBarGroupControlContainer1.TabIndex = 0;
             // 
             // checkedListBoxControlGroup1
@@ -469,7 +469,7 @@
             this.checkedListBoxControlGroup1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBoxControlGroup1.Name = "checkedListBoxControlGroup1";
             this.checkedListBoxControlGroup1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.checkedListBoxControlGroup1.Size = new System.Drawing.Size(350, 78);
+            this.checkedListBoxControlGroup1.Size = new System.Drawing.Size(393, 78);
             this.checkedListBoxControlGroup1.TabIndex = 0;
             // 
             // navBarGroupControlContainer3

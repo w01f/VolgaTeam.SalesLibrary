@@ -554,6 +554,11 @@ namespace FileManager.BusinessClasses
         public Color BackgroundColor { get; set; }
         public Color ForeColor { get; set; }
         public Font HeaderFont { get; set; }
+        public bool EnableText { get; set; }
+        public Alignment HeaderAlignment { get; set; }
+        public bool EnableWidget { get; set; }
+        public Image Widget { get; set; }
+        public BannerProperties BannerProperties { get; set; }
 
         public ColumnTitle(LibraryPage parent)
         {
@@ -563,23 +568,32 @@ namespace FileManager.BusinessClasses
             this.BackgroundColor = Color.White;
             this.ForeColor = Color.Black;
             this.HeaderFont = new Font("Arial", 14, FontStyle.Bold, GraphicsUnit.Pixel);
+            this.HeaderAlignment = Alignment.Center;
+            this.BannerProperties = new BannerProperties();
         }
 
         public string Serialize()
         {
             FontConverter converter = new FontConverter();
+            TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
             result.AppendLine(@"<ColumnOrder>" + this.ColumnOrder + @"</ColumnOrder>");
             result.AppendLine(@"<BackgroundColor>" + this.BackgroundColor.ToArgb() + @"</BackgroundColor>");
             result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
             result.AppendLine(@"<HeaderFont>" + converter.ConvertToString(this.HeaderFont) + @"</HeaderFont>");
+            result.AppendLine(@"<EnableText>" + this.EnableText + @"</EnableText>");
+            result.AppendLine(@"<HeaderAligment>" + ((int)this.HeaderAlignment).ToString() + @"</HeaderAligment>");
+            result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
+            result.AppendLine(@"<Widget>" + Convert.ToBase64String((byte[])imageConverter.ConvertTo(this.Widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
+            result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
             return result.ToString();
         }
 
         public void Deserialize(XmlNode node)
         {
             int tempInt = 0;
+            bool tempBool;
             FontConverter converter = new FontConverter();
 
             foreach (XmlNode childNode in node.ChildNodes)
@@ -609,6 +623,25 @@ namespace FileManager.BusinessClasses
                         catch
                         {
                         }
+                        break;
+                    case "EnableText":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableText = tempBool;
+                        break;
+                    case "HeaderAligment":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.HeaderAlignment = (Alignment)tempInt;
+                        break;
+                    case "EnableWidget":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableWidget = tempBool;
+                        break;
+                    case "Widget":
+                        if (!string.IsNullOrEmpty(childNode.InnerText))
+                            this.Widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    case "BannerProperties":
+                        this.BannerProperties.Deserialize(childNode);
                         break;
                 }
             }

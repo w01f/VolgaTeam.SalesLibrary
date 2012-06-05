@@ -72,11 +72,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             {
                 foreach (BusinessClasses.ColumnTitle columnTitle in this.Page.ColumnTitles)
                 {
-                    PresentationClasses.WallBin.ColumnTitleControl columnTitleControl = new PresentationClasses.WallBin.ColumnTitleControl();
-                    columnTitleControl.laColumnTitle.Text = columnTitle.Name;
-                    columnTitleControl.laColumnTitle.Font = columnTitle.HeaderFont;
-                    columnTitleControl.laColumnTitle.BackColor = columnTitle.BackgroundColor;
-                    columnTitleControl.laColumnTitle.ForeColor = columnTitle.ForeColor;
+                    PresentationClasses.WallBin.ColumnTitleControl columnTitleControl = new PresentationClasses.WallBin.ColumnTitleControl(columnTitle);
                     columnTitleControl.Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left;
                     _headerPanel.Controls.Add(columnTitleControl);
                     columnTitleControl.BringToFront();
