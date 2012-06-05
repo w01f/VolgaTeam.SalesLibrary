@@ -411,7 +411,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 , ref int textWidth
                 , ref int textHeight
                 , ref int columnWidth
-                , ref int columnHeight
+                , ref int rowHeight
                 , ref Color foreColor
                 , ref Font font)
         {
@@ -557,7 +557,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 textTop = (imageHeight - textHeight) / 2;
                 imageTop = 0;
             }
-            columnHeight = textHeight > imageHeight ? textHeight : imageHeight;
+            rowHeight = textHeight > (imageHeight + ImageHeightMargin) ? textHeight : (imageHeight + ImageHeightMargin);
             #endregion
         }
 
@@ -641,9 +641,9 @@ namespace SalesDepot.PresentationClasses.WallBin
                     if (maxColumnWidth < columnWidth)
                         maxColumnWidth = columnWidth;
                 }
-                height = height + row.Height;
+                height += row.Height;
             }
-            height += +(int)(_noteFont.Size + 5);
+            height += (int)(_noteFont.Size + 5);
             if (height < 90)
                 height = 90;
             height = height + pnHeader.Height;
