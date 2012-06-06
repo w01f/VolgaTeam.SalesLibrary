@@ -27,6 +27,7 @@ namespace SalesDepot.ConfigurationClasses
     {
         private static SettingsManager _instance = new SettingsManager();
 
+        private const string DefaultUserName = "Default";
         public const string UserSettingsFileName = @"SalesDepotUserSettings.xml";
         public const string StorageFileName = @"SalesDepotCache.xml";
         public const string StyleFileName = @"SalesDepotStyle.xml";
@@ -359,7 +360,7 @@ namespace SalesDepot.ConfigurationClasses
                 node = document.SelectSingleNode(@"/LocalSettings/CalendarView");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
-                        this.CalendarView= tempBool;
+                        this.CalendarView = tempBool;
 
                 if (this.LastViewed || this.UseRemoteConnection)
                 {
@@ -556,6 +557,7 @@ namespace SalesDepot.ConfigurationClasses
         {
             bool userExisted = false;
             this.ApprovedLibraries.Clear();
+            List<string> defaultApprovedLibraries = new List<string>();
             if (File.Exists(_approvedLibrariesFile))
             {
                 XmlDocument document = new XmlDocument();
@@ -587,10 +589,21 @@ namespace SalesDepot.ConfigurationClasses
                                     if (libraryNode.Name.Equals(this.UseRemoteConnection ? "RemoteLibrary" : "LocalLibrary"))
                                         this.ApprovedLibraries.Add(libraryNode.InnerText.ToLower());
                             }
+                            else if (userName.Equals(DefaultUserName) && ((this.UseRemoteConnection & useRemoteLibraries) || (!this.UseRemoteConnection)))
+                            {
+                                foreach (XmlNode libraryNode in userNode.ChildNodes)
+                                    if (libraryNode.Name.Equals(this.UseRemoteConnection ? "RemoteLibrary" : "LocalLibrary"))
+                                        defaultApprovedLibraries.Add(libraryNode.InnerText.ToLower());
+                            }
                         }
+                if (this.ApprovedLibraries.Count == 0)
+                {
+                    if (defaultApprovedLibraries.Count > 0 && !userExisted)
+                        this.ApprovedLibraries.AddRange(defaultApprovedLibraries);
+                    else
+                        this.ApprovedLibraries.Add("None");
+                }
             }
-            if (this.ApprovedLibraries.Count == 0 && userExisted)
-                this.ApprovedLibraries.Add("None");
         }
     }
 
