@@ -579,6 +579,7 @@ namespace FileManager.ToolForms.Settings
                     buttonEditColumn1Font.Tag = _currentPage.ColumnTitles[0].HeaderFont;
                     buttonEditColumn1Font.EditValue = FontToString(_currentPage.ColumnTitles[0].HeaderFont);
                     memoEditColumn1Title.ForeColor = colorEditColumn1ForeColor.Color;
+                    memoEditColumn1Title.BackColor = colorEditColumn1BackColor.Color;
                     memoEditColumn1Title.Font = buttonEditColumn1Font.Tag as Font; ;
                     memoEditColumn1Title.Properties.Appearance.Font = memoEditColumn1Title.Font;
                     memoEditColumn1Title.Properties.AppearanceDisabled.Font = memoEditColumn1Title.Font;
@@ -614,6 +615,7 @@ namespace FileManager.ToolForms.Settings
                     buttonEditColumn2Font.Tag = _currentPage.ColumnTitles[1].HeaderFont;
                     buttonEditColumn2Font.EditValue = FontToString(_currentPage.ColumnTitles[1].HeaderFont);
                     memoEditColumn2Title.ForeColor = colorEditColumn2ForeColor.Color;
+                    memoEditColumn2Title.BackColor = colorEditColumn2BackColor.Color;
                     memoEditColumn2Title.Font = buttonEditColumn2Font.Tag as Font; ;
                     memoEditColumn2Title.Properties.Appearance.Font = memoEditColumn2Title.Font;
                     memoEditColumn2Title.Properties.AppearanceDisabled.Font = memoEditColumn2Title.Font;
@@ -649,6 +651,7 @@ namespace FileManager.ToolForms.Settings
                     buttonEditColumn3Font.Tag = _currentPage.ColumnTitles[2].HeaderFont;
                     buttonEditColumn3Font.EditValue = FontToString(_currentPage.ColumnTitles[2].HeaderFont);
                     memoEditColumn3Title.ForeColor = colorEditColumn3ForeColor.Color;
+                    memoEditColumn2Title.BackColor = colorEditColumn2BackColor.Color;
                     memoEditColumn3Title.Font = buttonEditColumn3Font.Tag as Font; ;
                     memoEditColumn3Title.Properties.Appearance.Font = memoEditColumn3Title.Font;
                     memoEditColumn3Title.Properties.AppearanceDisabled.Font = memoEditColumn3Title.Font;
@@ -1451,6 +1454,13 @@ namespace FileManager.ToolForms.Settings
                 _stateChanges = true;
         }
 
+        private void colorEditColumn1BackColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn1Title.BackColor = colorEditColumn1BackColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
         private void colorEditColumn1ForeColor_EditValueChanged(object sender, EventArgs e)
         {
             memoEditColumn1Title.ForeColor = colorEditColumn1ForeColor.Color;
@@ -1551,6 +1561,13 @@ namespace FileManager.ToolForms.Settings
                 _stateChanges = true;
         }
 
+        private void colorEditColumn2BackColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn2Title.BackColor = colorEditColumn2BackColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
         private void colorEditColumn2ForeColor_EditValueChanged(object sender, EventArgs e)
         {
             memoEditColumn2Title.ForeColor = colorEditColumn2ForeColor.Color;
@@ -1631,18 +1648,25 @@ namespace FileManager.ToolForms.Settings
 
         private void colorEditColumn3ForeColor_EditValueChanged(object sender, EventArgs e)
         {
-            memoEditColumn3Title.Font = buttonEditColumn3Font.Tag as Font; ;
-            memoEditColumn3Title.Properties.Appearance.Font = memoEditColumn3Title.Font;
-            memoEditColumn3Title.Properties.AppearanceDisabled.Font = memoEditColumn3Title.Font;
-            memoEditColumn3Title.Properties.AppearanceFocused.Font = memoEditColumn3Title.Font;
-            memoEditColumn3Title.Properties.AppearanceReadOnly.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.ForeColor = colorEditColumn3ForeColor.Color;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void colorEditColumn3BackColor_EditValueChanged(object sender, EventArgs e)
+        {
+            memoEditColumn3Title.BackColor = colorEditColumn3BackColor.Color;
             if (_allowToSave)
                 _stateChanges = true;
         }
 
         private void buttonEditColumn3Font_EditValueChanged(object sender, EventArgs e)
         {
-            memoEditColumn3Title.ForeColor = colorEditColumn3ForeColor.Color;
+            memoEditColumn3Title.Font = buttonEditColumn3Font.Tag as Font; ;
+            memoEditColumn3Title.Properties.Appearance.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.Properties.AppearanceDisabled.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.Properties.AppearanceFocused.Font = memoEditColumn3Title.Font;
+            memoEditColumn3Title.Properties.AppearanceReadOnly.Font = memoEditColumn3Title.Font;
             if (_allowToSave)
                 _stateChanges = true;
         }

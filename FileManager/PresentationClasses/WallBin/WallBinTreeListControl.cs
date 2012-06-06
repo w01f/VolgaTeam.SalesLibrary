@@ -42,6 +42,7 @@ namespace FileManager.PresentationClasses.WallBin
             DevExpress.XtraTreeList.Nodes.TreeListNode expandNode = treeListAllFiles.AppendNode(new object[] { "Expand All" }, null);
             expandNode.StateImageIndex = 0;
 
+            //TODO: Fix to allow use several roots in Tree View
             DirectoryInfo rootFolder = _treeViewFolder;
             DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
             rootNode.StateImageIndex = 0;

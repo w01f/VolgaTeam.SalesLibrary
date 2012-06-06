@@ -1247,6 +1247,7 @@ namespace FileManager.PresentationClasses.WallBin
 
         private void AddFile(FileInfo file, int rowIndex)
         {
+            //TODO: Fix to allow add files from several library roots
             bool isExisted = false;
             foreach (DataGridViewRow row in grFiles.Rows)
             {
@@ -1331,6 +1332,7 @@ namespace FileManager.PresentationClasses.WallBin
 
         private void AddFolder(DirectoryInfo folder, int rowIndex)
         {
+            //TODO: Fix to allow add folders from several roots
             bool isExisted = false;
             foreach (DataGridViewRow row in grFiles.Rows)
             {

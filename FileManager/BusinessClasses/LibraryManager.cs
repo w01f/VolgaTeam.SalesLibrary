@@ -104,6 +104,7 @@ namespace FileManager.BusinessClasses
 
                         List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                         List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
+                        //TODO: Fix to allow sync subfolder from secondary roots
                         sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
                         foreach (DirectoryInfo subFolder in sourceSubFolders)
                         {

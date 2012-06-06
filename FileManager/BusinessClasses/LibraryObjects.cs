@@ -68,6 +68,7 @@ namespace FileManager.BusinessClasses
         public Library(string name, DirectoryInfo folder)
         {
             this.Identifier = Guid.NewGuid();
+            //TODO: Fix to allow to have several source folders
             this.Folder = folder;
             this.Name = name;
             this.IsConfigured = false;
@@ -568,6 +569,7 @@ namespace FileManager.BusinessClasses
             this.BackgroundColor = Color.White;
             this.ForeColor = Color.Black;
             this.HeaderFont = new Font("Arial", 14, FontStyle.Bold, GraphicsUnit.Pixel);
+            this.EnableText = true;
             this.HeaderAlignment = Alignment.Center;
             this.BannerProperties = new BannerProperties();
         }
@@ -901,6 +903,7 @@ namespace FileManager.BusinessClasses
         {
             get
             {
+                //TODO: Fix to define file paths from several library roots
                 if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
                     return this.RelativePath;
                 else if (this.Type == FileTypes.LineBreak)

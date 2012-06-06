@@ -1869,7 +1869,7 @@
             this.colorEditColumn1BackColor.Size = new System.Drawing.Size(100, 22);
             this.colorEditColumn1BackColor.StyleController = this.styleController;
             this.colorEditColumn1BackColor.TabIndex = 32;
-            this.colorEditColumn1BackColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            this.colorEditColumn1BackColor.EditValueChanged += new System.EventHandler(this.colorEditColumn1BackColor_EditValueChanged);
             // 
             // ckColumn1EnableText
             // 
@@ -2269,7 +2269,7 @@
             this.colorEditColumn2BackColor.Size = new System.Drawing.Size(100, 22);
             this.colorEditColumn2BackColor.StyleController = this.styleController;
             this.colorEditColumn2BackColor.TabIndex = 52;
-            this.colorEditColumn2BackColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            this.colorEditColumn2BackColor.EditValueChanged += new System.EventHandler(this.colorEditColumn2BackColor_EditValueChanged);
             // 
             // xtraTabPageColumnTitles3
             // 
@@ -2657,7 +2657,7 @@
             this.colorEditColumn3BackColor.Size = new System.Drawing.Size(100, 22);
             this.colorEditColumn3BackColor.StyleController = this.styleController;
             this.colorEditColumn3BackColor.TabIndex = 70;
-            this.colorEditColumn3BackColor.EditValueChanged += new System.EventHandler(this.StateChanges_TextChanged);
+            this.colorEditColumn3BackColor.EditValueChanged += new System.EventHandler(this.colorEditColumn3BackColor_EditValueChanged);
             // 
             // ckApplyForAllColumnTitles
             // 
