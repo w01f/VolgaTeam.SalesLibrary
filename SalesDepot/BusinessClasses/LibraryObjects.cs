@@ -98,6 +98,7 @@ namespace SalesDepot.BusinessClasses
     public class Library
     {
         private string _name;
+        private RootFolder _rootFolder = null;
 
         public LibraryPackage Parent { get; private set; }
         public Guid Identifier { get; set; }
@@ -120,6 +121,7 @@ namespace SalesDepot.BusinessClasses
 
         public bool IsConfigured { get; set; }
 
+        public List<RootFolder> ExtraFolders { get; private set; }
         public List<LibraryPage> Pages { get; set; }
         public List<string> EmailList { get; set; }
         public List<AutoWidget> AutoWidgets { get; set; }
@@ -137,6 +139,20 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
+        public RootFolder RootFolder
+        {
+            get
+            {
+                if (_rootFolder == null)
+                {
+                    _rootFolder = new RootFolder(this);
+                    _rootFolder.RootId = Guid.Empty;
+                    _rootFolder.Folder = this.Folder;
+                }
+                return _rootFolder;
+            }
+        }
+
         public Library(LibraryPackage parent, string name, DirectoryInfo folder)
         {
             this.Parent = parent;
@@ -144,6 +160,7 @@ namespace SalesDepot.BusinessClasses
             this.Folder = folder;
             _name = name;
             this.IsConfigured = false;
+            this.ExtraFolders = new List<RootFolder>();
             this.Pages = new List<LibraryPage>();
             this.EmailList = new List<string>();
             this.AutoWidgets = new List<AutoWidget>();
@@ -244,6 +261,14 @@ namespace SalesDepot.BusinessClasses
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.SendEmail = tempBool;
 
+                node = document.SelectSingleNode(@"/Library/ExtraRoots");
+                if (node != null)
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        RootFolder folder = new RootFolder(this);
+                        folder.Deserialize(childNode);
+                        this.ExtraFolders.Add(folder);
+                    }
                 node = document.SelectSingleNode(@"/Library/Pages");
                 if (node != null)
                     foreach (XmlNode childNode in node.ChildNodes)
@@ -275,6 +300,15 @@ namespace SalesDepot.BusinessClasses
             }
             if (this.Pages.Count == 0)
                 this.Pages.Add(new LibraryPage(this, true));
+        }
+
+        public RootFolder GetRootFolder(Guid folderId)
+        {
+            RootFolder folder = this.ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+            if (folder != null)
+                return folder;
+            else
+                return this.RootFolder;
         }
 
         public LibraryFile[] SearchByTags(LibraryFileSearchTags searchCriteria)
@@ -825,6 +859,7 @@ namespace SalesDepot.BusinessClasses
 
         public string Name { get; set; }
         public LibraryFolder Parent { get; set; }
+        public Guid RootId { get; set; }
         public Guid Identifier { get; set; }
         public string RelativePath { get; set; }
         public FileTypes Type { get; set; }
@@ -854,7 +889,7 @@ namespace SalesDepot.BusinessClasses
                     else if (this.Type == FileTypes.LineBreak)
                         return string.Empty;
                     else
-                        return ((this.Parent != null ? this.Parent.Parent.Parent.Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
+                        return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
                 }
                 else
                     return _linkRemotePath;
@@ -1050,6 +1085,7 @@ namespace SalesDepot.BusinessClasses
         {
             this.Name = string.Empty;
             this.Parent = parent;
+            this.RootId = Guid.Empty;
             this.Identifier = Guid.NewGuid();
             this.RelativePath = string.Empty;
             this.Type = FileTypes.Other;
@@ -1073,6 +1109,7 @@ namespace SalesDepot.BusinessClasses
             result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
             result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
             result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
+            result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
             result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
@@ -1098,6 +1135,7 @@ namespace SalesDepot.BusinessClasses
             bool tempBool = false;
             int tempInt = 0;
             DateTime tempDate = DateTime.Now;
+            Guid tempGuid;
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
@@ -1116,6 +1154,10 @@ namespace SalesDepot.BusinessClasses
                     case "IsDead":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.IsDead = tempBool;
+                        break;
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
                         break;
                     case "RelativePath":
                         this.RelativePath = childNode.InnerText;
@@ -1810,6 +1852,164 @@ namespace SalesDepot.BusinessClasses
                             this.Widget = null;
                         else
                             this.Widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                }
+            }
+        }
+    }
+
+    public class FolderLink
+    {
+        public Guid RootId { get; set; }
+        public DirectoryInfo Folder { get; set; }
+
+        public FolderLink()
+        {
+            this.RootId = Guid.Empty;
+        }
+
+        public bool IsDrive
+        {
+            get
+            {
+                return this.Folder.FullName.Equals(this.Folder.Root.FullName);
+            }
+        }
+
+        public virtual string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.Folder != null)
+            {
+                result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+                result.AppendLine(@"<Folder>" + this.Folder.FullName.ToString() + @"</Folder>");
+            }
+            return result.ToString();
+        }
+
+        public virtual void Deserialize(XmlNode node)
+        {
+            Guid tempGuid = Guid.Empty;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
+                        break;
+                    case "Folder":
+                        this.Folder = new DirectoryInfo(childNode.InnerText);
+                        break;
+                }
+            }
+        }
+    }
+
+    public class RootFolder : FolderLink
+    {
+        public Library Parent { get; private set; }
+        public int Order { get; set; }
+
+        public int Index
+        {
+            get
+            {
+                return this.Order + 1;
+            }
+        }
+
+        public string Path
+        {
+            get
+            {
+                return this.Folder != null ? this.Folder.FullName : null;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value) && Directory.Exists(value))
+                    this.Folder = new DirectoryInfo(value);
+            }
+        }
+
+        public RootFolder(Library parent)
+        {
+            this.Parent = parent;
+            this.Order = 0;
+            this.Folder = parent.Folder;
+        }
+
+        public override string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.Folder != null)
+            {
+                result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+                result.AppendLine(@"<Order>" + this.Order.ToString() + @"</Order>");
+                result.AppendLine(@"<Folder>" + this.Folder.FullName.ToString() + @"</Folder>");
+            }
+            return result.ToString();
+        }
+
+        public override void Deserialize(XmlNode node)
+        {
+            Guid tempGuid = Guid.Empty;
+            int tempInt;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
+                        break;
+                    case "Order":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.Order = tempInt;
+                        break;
+                }
+            }
+            this.Folder = new DirectoryInfo(System.IO.Path.Combine(this.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName, this.RootId.ToString()));
+        }
+    }
+
+    public class FileLink
+    {
+        public Guid RootId { get; set; }
+        public FileInfo File { get; set; }
+
+        public FileLink()
+        {
+            this.RootId = Guid.Empty;
+        }
+
+        public string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.File != null)
+            {
+                result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+                result.AppendLine(@"<File>" + this.File.FullName.ToString() + @"</File>");
+            }
+            return result.ToString();
+        }
+
+        public void Deserialize(XmlNode node)
+        {
+            Guid tempGuid = Guid.Empty;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
+                        break;
+                    case "File":
+                        this.File = new FileInfo(childNode.InnerText);
                         break;
                 }
             }

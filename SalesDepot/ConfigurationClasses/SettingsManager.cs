@@ -37,6 +37,7 @@ namespace SalesDepot.ConfigurationClasses
         public const string ContentsSlideName = @"WizContents.ppt";
         public const string PreviewContainersRootFolderName = @"!QV";
         public const string OvernightsCalendarRootFolderName = @"!OC";
+        public const string ExtraFoldersRootFolderName = @"!Extra Roots";
         public const string SweepPeriodsFileName = @"SweepPeriods.xml";
         public const string NoLogoFileName = @"no_logo.png";
         public const string PageLogoFileTemplate = @"page{0}.*";
