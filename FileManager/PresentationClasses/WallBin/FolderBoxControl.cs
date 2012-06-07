@@ -430,21 +430,21 @@ namespace FileManager.PresentationClasses.WallBin
                             MoveFile((DataGridViewRow)data, ht.RowIndex);
                         else
                         {
-                            List<FileInfo> files = new List<FileInfo>();
-                            List<DirectoryInfo> folders = new List<DirectoryInfo>();
+                            List<BusinessClasses.FileLink> files = new List<BusinessClasses.FileLink>();
+                            List<BusinessClasses.FolderLink> folders = new List<BusinessClasses.FolderLink>();
                             foreach (object dragItem in (object[])data)
                                 if (dragItem != null)
                                 {
-                                    if (dragItem.GetType() == typeof(FileInfo))
-                                        files.Add((FileInfo)dragItem);
-                                    else if (dragItem.GetType() == typeof(DirectoryInfo))
-                                        folders.Add((DirectoryInfo)dragItem);
+                                    if (dragItem.GetType() == typeof(BusinessClasses.FileLink))
+                                        files.Add((BusinessClasses.FileLink)dragItem);
+                                    else if (dragItem.GetType() == typeof(BusinessClasses.FolderLink))
+                                        folders.Add((BusinessClasses.FolderLink)dragItem);
                                 }
-                            folders.Sort((x, y) => x.Name.CompareTo(y.Name));
-                            files.Sort((x, y) => x.Name.CompareTo(y.Name));
-                            foreach (DirectoryInfo folder in folders)
+                            folders.Sort((x, y) => x.Folder.Name.CompareTo(y.Folder.Name));
+                            files.Sort((x, y) => x.File.Name.CompareTo(y.File.Name));
+                            foreach (BusinessClasses.FolderLink folder in folders)
                                 AddFolder(folder, ht.RowIndex);
-                            foreach (FileInfo file in files)
+                            foreach (BusinessClasses.FileLink file in files)
                                 AddFile(file, ht.RowIndex);
                         }
                         _containFiles = true;
@@ -1236,16 +1236,15 @@ namespace FileManager.PresentationClasses.WallBin
             return control.Top + (control.Parent != null ? GetTop(control.Parent) : 0);
         }
 
-        private void AddFile(FileInfo file, int rowIndex)
+        private void AddFile(BusinessClasses.FileLink file, int rowIndex)
         {
-            //TODO: Fix to allow add files from several library roots
             bool isExisted = false;
             foreach (DataGridViewRow row in grFiles.Rows)
             {
                 BusinessClasses.LibraryFile libraryFile = row.Tag as BusinessClasses.LibraryFile;
                 if (libraryFile != null)
                 {
-                    if (file.FullName.Equals(libraryFile.FullPath))
+                    if (file.File.FullName.Equals(libraryFile.FullPath))
                     {
                         isExisted = true;
                         break;
@@ -1256,8 +1255,12 @@ namespace FileManager.PresentationClasses.WallBin
             if (!isExisted)
             {
                 BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(_folder);
-                libraryFile.Name = file.Name.Replace(file.Extension, string.Empty);
-                libraryFile.RelativePath = (_folder.Parent.Parent.Name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage) ? @"\" : string.Empty) + file.FullName.Replace(_folder.Parent.Parent.Folder.FullName, string.Empty);
+                libraryFile.Name = file.File.Name.Replace(file.File.Extension, string.Empty);
+                libraryFile.RootId = file.RootId;
+
+                BusinessClasses.RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
+                libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.File.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+                
                 libraryFile.SetProperties();
                 libraryFile.InitBannerProperties();
 
@@ -1318,19 +1321,18 @@ namespace FileManager.PresentationClasses.WallBin
                     AppManager.Instance.ShowInfo("This file path is too long.\nTry changing the file name to a shorter name, or move this file up a level in your network folders");
             }
             else
-                AppManager.Instance.ShowInfo("The file " + file.Name + " is already in a window");
+                AppManager.Instance.ShowInfo("The file " + file.File.Name + " is already in a window");
         }
 
-        private void AddFolder(DirectoryInfo folder, int rowIndex)
+        private void AddFolder(BusinessClasses.FolderLink folder, int rowIndex)
         {
-            //TODO: Fix to allow add folders from several roots
             bool isExisted = false;
             foreach (DataGridViewRow row in grFiles.Rows)
             {
                 BusinessClasses.LibraryFile libraryFile = row.Tag as BusinessClasses.LibraryFile;
                 if (libraryFile != null)
                 {
-                    if (folder.FullName.Equals(libraryFile.FullPath))
+                    if (folder.Folder.FullName.Equals(libraryFile.FullPath))
                     {
                         isExisted = true;
                         break;
@@ -1340,8 +1342,12 @@ namespace FileManager.PresentationClasses.WallBin
             if (!isExisted)
             {
                 BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(_folder);
-                libraryFile.Name = folder.Name;
-                libraryFile.RelativePath = (_folder.Parent.Parent.Name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage) ? @"\" : string.Empty) + folder.FullName.Replace(_folder.Parent.Parent.Folder.FullName, string.Empty);
+                libraryFile.Name = folder.Folder.Name;
+                libraryFile.RootId = folder.RootId;
+
+                BusinessClasses.RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(folder.RootId);
+                libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.Folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+                
                 libraryFile.Type = BusinessClasses.FileTypes.Folder;
                 libraryFile.InitBannerProperties();
 
@@ -1367,7 +1373,7 @@ namespace FileManager.PresentationClasses.WallBin
                     AppManager.Instance.ShowInfo("This folder path is too long.\nTry changing the file name to a shorter name, or move this file up a level in your network folders");
             }
             else
-                AppManager.Instance.ShowInfo("The folder " + folder.Name + " is already in a window");
+                AppManager.Instance.ShowInfo("The folder " + folder.Folder.Name + " is already in a window");
         }
 
         private void MoveFile(DataGridViewRow row, int rowIndex)

@@ -15,6 +15,7 @@ namespace FileManager.TabPages
         private bool _firstRun = true;
 
         private ToolForms.Settings.FormPaths _formPath = null;
+        private ToolForms.Settings.FormExtraRoots _formExtraRoots = null;
         private ToolForms.Settings.FormBranding _formBranding = null;
         private ToolForms.Settings.FormSync _formSync = null;
         private ToolForms.Settings.FormPages _formPages = null;
@@ -34,6 +35,7 @@ namespace FileManager.TabPages
         private void TabHomeControl_Load(object sender, EventArgs e)
         {
             _formPath = new ToolForms.Settings.FormPaths();
+            _formExtraRoots = new ToolForms.Settings.FormExtraRoots();
             _formBranding = new ToolForms.Settings.FormBranding();
             _formSync = new ToolForms.Settings.FormSync();
             _formPages = new ToolForms.Settings.FormPages();
@@ -168,6 +170,54 @@ namespace FileManager.TabPages
                 }
             }
         }
+
+        public void btExtraRoot_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                if (SaveLibraryWarning())
+                {
+                    _formExtraRoots.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    if (_formExtraRoots.ShowDialog() == DialogResult.OK)
+                    {
+                        using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
+                        {
+                            FormMain.Instance.ribbonControl.Enabled = false;
+                            formProgress.laProgress.Text = "Apply Settings...";
+                            formProgress.TopMost = true;
+
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                            {
+                                this.Invoke((MethodInvoker)delegate()
+                                {
+                                    int libraryIndex = BusinessClasses.LibraryManager.Instance.LibraryCollection.IndexOf(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                                    BusinessClasses.LibraryManager.Instance.LibraryCollection.Insert(libraryIndex, _formExtraRoots.Library);
+
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Remove(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = new PresentationClasses.WallBin.Decorators.LibraryDecorator(_formExtraRoots.Library);
+                                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.Decorators.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator);
+                                });
+                            }));
+
+                            formProgress.Show();
+
+                            thread.Start();
+
+                            while (thread.IsAlive)
+                                System.Windows.Forms.Application.DoEvents();
+
+                            formProgress.Close();
+                            FormMain.Instance.ribbonControl.Enabled = true;
+                        }
+
+                        _firstRun = false;
+                        comboBoxEditLibraries_EditValueChanged(null, null);
+                    }
+                }
+            }
+        }
+
 
         public void buttonItemSettingsBranding_Click(object sender, EventArgs e)
         {
@@ -628,7 +678,14 @@ namespace FileManager.TabPages
                 _treeList.Dispose();
             _treeList = new PresentationClasses.WallBin.WallBinTreeListControl();
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-                _treeList.Init(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+            {
+                List<BusinessClasses.FolderLink> rootFolders = new List<BusinessClasses.FolderLink>();
+                rootFolders.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ExtraFolders);
+                rootFolders.Sort((x, y) => (x as BusinessClasses.RootFolder).Order.CompareTo((y as BusinessClasses.RootFolder).Order));
+                rootFolders.Insert(0, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.RootFolder);
+                _treeList.Init(rootFolders.ToArray());
+            }
+
             dockPanelTreeView_Container.Controls.Add(_treeList);
         }
 

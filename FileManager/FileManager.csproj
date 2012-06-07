@@ -96,6 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="ToolForms\Settings\FormExtraRoots.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormExtraRoots.Designer.cs">
+      <DependentUpon>FormExtraRoots.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\Settings\FormFileGrabber.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -332,6 +338,9 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ToolForms\Settings\FormExtraRoots.resx">
+      <DependentUpon>FormExtraRoots.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormFileGrabber.resx">
       <DependentUpon>FormFileGrabber.cs</DependentUpon>
     </EmbeddedResource>
@@ -466,6 +475,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\DeleteButton.png" />
     <None Include="Resources\FileGrabber.png" />
     <None Include="Resources\EmailGrabber.png" />
     <None Include="Resources\AutoSync.png" />

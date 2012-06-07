@@ -21,6 +21,7 @@ namespace FileManager
             comboBoxEditPages.SelectedIndexChanged += new EventHandler(this.TabHome.comboBoxEditPages_SelectedIndexChanged);
             buttonItemHomeFileTreeView.CheckedChanged += new EventHandler(this.TabHome.buttonItemHomeFileTreeView_CheckedChanged);
             buttonItemSettingsPaths.Click += new EventHandler(this.TabHome.btPathSettings_Click);
+            buttonItemSettingsExtraRoots.Click += new EventHandler(this.TabHome.btExtraRoot_Click);
             buttonItemSettingsBranding.Click += new EventHandler(this.TabHome.buttonItemSettingsBranding_Click);
             buttonItemSettingsSync.Click += new EventHandler(this.TabHome.buttonItemSettingsSync_Click);
             buttonItemSettingsPages.Click += new EventHandler(this.TabHome.buttonItemSettingsPages_Click);

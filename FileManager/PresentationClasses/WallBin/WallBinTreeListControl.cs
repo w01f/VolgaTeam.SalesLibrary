@@ -11,7 +11,7 @@ namespace FileManager.PresentationClasses.WallBin
 {
     public partial class WallBinTreeListControl : UserControl
     {
-        private DirectoryInfo _treeViewFolder;
+        private List<BusinessClasses.FolderLink> _rootFolders = new List<BusinessClasses.FolderLink>();
         private DevExpress.XtraTreeList.TreeListHitInfo dragStartHitInfo;
 
         public WallBinTreeListControl()
@@ -42,15 +42,17 @@ namespace FileManager.PresentationClasses.WallBin
             DevExpress.XtraTreeList.Nodes.TreeListNode expandNode = treeListAllFiles.AppendNode(new object[] { "Expand All" }, null);
             expandNode.StateImageIndex = 0;
 
-            //TODO: Fix to allow use several roots in Tree View
-            DirectoryInfo rootFolder = _treeViewFolder;
-            DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
-            rootNode.StateImageIndex = 0;
             Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
             {
                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                 {
-                    FillNode(rootNode, true);
+                    foreach (BusinessClasses.FolderLink rootFolder in _rootFolders)
+                    {
+                        DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
+                        rootNode.StateImageIndex = 0;
+                        FillNode(rootNode, true);
+                        Application.DoEvents();
+                    }
                 });
             }));
             thread.Start();
@@ -75,7 +77,7 @@ namespace FileManager.PresentationClasses.WallBin
                     DevExpress.XtraTreeList.TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
                     if (hitInfo.Node != null)
                         if (hitInfo.Node.Tag != null)
-                            if (hitInfo.Node.Tag.GetType() == typeof(FileInfo))
+                            if (hitInfo.Node.Tag.GetType() == typeof(BusinessClasses.FileLink))
                             {
                                 treeListAllFiles.Selection.Clear();
                                 hitInfo.Node.Selected = true;
@@ -99,20 +101,27 @@ namespace FileManager.PresentationClasses.WallBin
                         treeList.SuspendLayout();
                         if (hitInfo.Node.GetValue(treeListColumnName).Equals("Expand All"))
                         {
-                            treeList.Nodes.RemoveAt(1);
+                            List<DevExpress.XtraTreeList.Nodes.TreeListNode> nodesToDelete = new List<DevExpress.XtraTreeList.Nodes.TreeListNode>();
+                            for (int i = 1; i < treeList.Nodes.Count; i++)
+                                nodesToDelete.Add(treeList.Nodes[i]);
+                            foreach (DevExpress.XtraTreeList.Nodes.TreeListNode node in nodesToDelete)
+                                treeList.Nodes.Remove(node);
+
                             laTreeViewProgressLable.Text = "Loading Tree View...";
                             pnTreeViewProgress.Visible = true;
                             treeList.Enabled = false;
 
-                            DirectoryInfo rootFolder = _treeViewFolder;
-                            DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Name }, null, rootFolder);
-                            rootNode.StateImageIndex = 0;
                             Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
                             {
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
-                                    FillNode(rootNode, true);
-                                    ExpandAll(rootNode);
+                                    foreach (BusinessClasses.FolderLink rootFolder in _rootFolders)
+                                    {
+                                        DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
+                                        rootNode.StateImageIndex = 0;
+                                        FillNode(rootNode, true);
+                                        Application.DoEvents();
+                                    }
                                 });
                             }));
                             thread.Start();
@@ -140,10 +149,10 @@ namespace FileManager.PresentationClasses.WallBin
                         }
                         else if (hitInfo.Node.Tag != null)
                         {
-                            if (hitInfo.Node.Tag.GetType() == typeof(DirectoryInfo))
+                            if (hitInfo.Node.Tag.GetType() == typeof(BusinessClasses.FolderLink))
                                 FillNode(hitInfo.Node, true);
-                            else if (hitInfo.Node.Tag.GetType() == typeof(FileInfo))
-                                ViewItem(hitInfo.Node.Tag as FileInfo);
+                            else if (hitInfo.Node.Tag.GetType() == typeof(BusinessClasses.FileLink))
+                                ViewItem(hitInfo.Node.Tag as BusinessClasses.FileLink);
                         }
                         treeList.ResumeLayout();
                     }
@@ -153,25 +162,20 @@ namespace FileManager.PresentationClasses.WallBin
 
         private void tmiOpen_Click(object sender, EventArgs e)
         {
+            BusinessClasses.FileLink fileLink = null;
             switch (tcSalesDepotFiles.SelectedIndex)
             {
                 case 0:
                     if (treeListAllFiles.Selection.Count > 0)
-                    {
-                        FileInfo file = treeListAllFiles.Selection[0].Tag as FileInfo;
-                        if (file != null)
-                            ViewItem(file);
-                    }
+                        fileLink = treeListAllFiles.Selection[0].Tag as BusinessClasses.FileLink;
                     break;
                 case 1:
                     if (treeListSearchFiles.Selection.Count > 0)
-                    {
-                        FileInfo file = treeListSearchFiles.Selection[0].Tag as FileInfo;
-                        if (file != null)
-                            ViewItem(file);
-                    }
+                        fileLink = treeListSearchFiles.Selection[0].Tag as BusinessClasses.FileLink;
                     break;
             }
+            if (fileLink != null)
+                ViewItem(fileLink);
         }
 
         private void ExpandAll(DevExpress.XtraTreeList.Nodes.TreeListNode node)
@@ -215,46 +219,49 @@ namespace FileManager.PresentationClasses.WallBin
             DevExpress.XtraTreeList.Nodes.TreeListNode childNode;
             if (node.Tag != null)
             {
-                if (node.Tag.GetType() == typeof(DirectoryInfo))
+                BusinessClasses.FolderLink folderLink = node.Tag as BusinessClasses.FolderLink;
+                if (folderLink != null && node.Nodes.Count == 0)
                 {
-                    if (node.Nodes.Count == 0)
+                    try
                     {
-                        DirectoryInfo folder = (DirectoryInfo)node.Tag;
-                        try
                         {
+                            List<DirectoryInfo> folders = new List<DirectoryInfo>();
+                            folders.AddRange(folderLink.Folder.GetDirectories());
+                            folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                            foreach (DirectoryInfo subFolder in folders)
                             {
-                                List<DirectoryInfo> folders = new List<DirectoryInfo>();
-                                folders.AddRange(folder.GetDirectories());
-                                folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-                                foreach (DirectoryInfo subFolder in folders)
+                                if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
                                 {
-                                    if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
-                                    {
-                                        childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
-                                        childNode.StateImageIndex = 0;
-                                    }
+                                    BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
+                                    subFolderLink.RootId = folderLink.RootId;
+                                    subFolderLink.Folder = subFolder;
+                                    childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
+                                    childNode.StateImageIndex = 0;
                                 }
                             }
-                            if (showFiles)
+                        }
+                        if (showFiles)
+                        {
+                            List<FileInfo> files = new List<FileInfo>();
+                            files.AddRange(folderLink.Folder.GetFiles());
+                            files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                            foreach (FileInfo file in files)
                             {
-                                List<FileInfo> files = new List<FileInfo>();
-                                files.AddRange(folder.GetFiles());
-                                files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-                                foreach (FileInfo file in files)
+                                if (!file.Name.ToLower().Equals("thumbs.db"))
                                 {
-                                    if (!file.Name.ToLower().Equals("thumbs.db"))
-                                    {
-                                        childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, file);
-                                        childNode.StateImageIndex = GetImageindex(file);
-                                    }
+                                    BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
+                                    fileLink.RootId = folderLink.RootId;
+                                    fileLink.File = file;
+                                    childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, fileLink);
+                                    childNode.StateImageIndex = GetImageindex(file);
                                 }
                             }
-                            node.StateImageIndex = 1;
-                            node.Expanded = true;
                         }
-                        catch
-                        {
-                        }
+                        node.StateImageIndex = 1;
+                        node.Expanded = true;
+                    }
+                    catch
+                    {
                     }
                 }
             }
@@ -368,7 +375,7 @@ namespace FileManager.PresentationClasses.WallBin
                         List<object> dragData = new List<object>();
                         foreach (DevExpress.XtraTreeList.Nodes.TreeListNode node in treeList.Selection)
                             if (!node.GetValue(treeListColumnName).Equals("Expand All") && !node.GetValue(treeListColumnName).Equals("Collapse All"))
-                                if (node.Tag.GetType() == typeof(FileInfo) || node.Tag.GetType() == typeof(DirectoryInfo))
+                                if (node.Tag.GetType() == typeof(BusinessClasses.FileLink) || node.Tag.GetType() == typeof(BusinessClasses.FolderLink))
                                     dragData.Add(node.Tag);
                         if (dragData.Count > 0)
                             treeList.DoDragDrop(new DataObject(DataFormats.Serializable, (object)dragData.ToArray()), DragDropEffects.Copy);
@@ -386,17 +393,27 @@ namespace FileManager.PresentationClasses.WallBin
         #endregion
 
         #region Kew Word Files Tree View
-        private void SearchFileInFolder(DirectoryInfo folder, string keyWord, List<FileInfo> files)
+        private void SearchFileInFolder(BusinessClasses.FolderLink folderLink, string keyWord, List<BusinessClasses.FileLink> files)
         {
             try
             {
-                foreach (DirectoryInfo subFolder in folder.GetDirectories())
+                foreach (DirectoryInfo subFolder in folderLink.Folder.GetDirectories())
                     if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
-                        SearchFileInFolder(subFolder, keyWord, files);
-                foreach (FileInfo file in folder.GetFiles("*" + keyWord + "*.*"))
+                    {
+                        BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
+                        subFolderLink.RootId = folderLink.RootId;
+                        subFolderLink.Folder = subFolder;
+                        SearchFileInFolder(subFolderLink, keyWord, files);
+                    }
+                foreach (FileInfo file in folderLink.Folder.GetFiles("*" + keyWord + "*.*"))
                 {
                     if ((file.LastWriteTime >= dtStartDate.Value && file.LastWriteTime <= dtEndDate.Value) || !ckDateRange.Checked)
-                        files.Add(file);
+                    {
+                        BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
+                        fileLink.RootId = folderLink.RootId;
+                        fileLink.File = file;
+                        files.Add(fileLink);
+                    }
                 }
             }
             catch { }
@@ -410,19 +427,20 @@ namespace FileManager.PresentationClasses.WallBin
             pnTreeViewProgress.Visible = true;
             tcSalesDepotFiles.Enabled = false;
 
-            List<FileInfo> files = new List<FileInfo>();
+            List<BusinessClasses.FileLink> files = new List<BusinessClasses.FileLink>();
             Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
             {
-                SearchFileInFolder(_treeViewFolder, edKeyWord.Text, files);
+                foreach (BusinessClasses.FolderLink folder in _rootFolders)
+                    SearchFileInFolder(folder, edKeyWord.Text, files);
                 if (files.Count > 0)
                 {
-                    files.Sort((x, y) => x.Name.CompareTo(y.Name));
+                    files.Sort((x, y) => x.File.Name.CompareTo(y.File.Name));
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
-                        foreach (FileInfo file in files)
+                        foreach (BusinessClasses.FileLink file in files)
                         {
-                            DevExpress.XtraTreeList.Nodes.TreeListNode childNode = treeListSearchFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, null, file);
-                            childNode.StateImageIndex = GetImageindex(file);
+                            DevExpress.XtraTreeList.Nodes.TreeListNode childNode = treeListSearchFiles.AppendNode(new object[] { file.File.Name + " (" + file.File.LastWriteTime.ToShortDateString() + " " + file.File.LastWriteTime.ToShortTimeString() + ")" }, null, file);
+                            childNode.StateImageIndex = GetImageindex(file.File);
                         }
                     });
                 }
@@ -470,18 +488,19 @@ namespace FileManager.PresentationClasses.WallBin
         #endregion
 
         #region Common Methods
-        public void Init(DirectoryInfo rootFolder)
+        public void Init(BusinessClasses.FolderLink[] rootFolders)
         {
-            _treeViewFolder = rootFolder;
+            _rootFolders.Clear();
+            _rootFolders.AddRange(rootFolders);
             Refresh_Click(null, null);
             ckDateRange_CheckedChanged(null, null);
         }
 
-        private void ViewItem(FileInfo file)
+        private void ViewItem(BusinessClasses.FileLink file)
         {
             try
             {
-                Process.Start(file.FullName);
+                Process.Start(file.File.FullName);
             }
             catch { }
         }

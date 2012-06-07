@@ -87,7 +87,7 @@ namespace FileManager.ToolForms.Settings
                 if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected page?") == DialogResult.Yes)
                 {
                     gridViewPages.DeleteSelectedRows();
-                    this.Library.RebuildPagesIndexes();
+                    this.Library.RebuildPagesOrder();
                 }
             }
         }
