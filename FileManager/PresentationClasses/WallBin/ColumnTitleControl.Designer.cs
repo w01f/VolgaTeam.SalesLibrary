@@ -28,21 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.laColumnTitle = new System.Windows.Forms.Label();
             this.pbLogo = new System.Windows.Forms.PictureBox();
+            this.labelControlText = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
-            // 
-            // laColumnTitle
-            // 
-            this.laColumnTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.laColumnTitle.Location = new System.Drawing.Point(100, 0);
-            this.laColumnTitle.Name = "laColumnTitle";
-            this.laColumnTitle.Size = new System.Drawing.Size(148, 109);
-            this.laColumnTitle.TabIndex = 0;
-            this.laColumnTitle.Text = "label1";
-            this.laColumnTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.laColumnTitle.UseMnemonic = false;
             // 
             // pbLogo
             // 
@@ -54,10 +43,22 @@
             this.pbLogo.TabIndex = 1;
             this.pbLogo.TabStop = false;
             // 
+            // labelControlText
+            // 
+            this.labelControlText.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.labelControlText.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControlText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelControlText.ImageAlignToText = DevExpress.XtraEditors.ImageAlignToText.LeftCenter;
+            this.labelControlText.Location = new System.Drawing.Point(100, 0);
+            this.labelControlText.Name = "labelControlText";
+            this.labelControlText.Size = new System.Drawing.Size(148, 109);
+            this.labelControlText.TabIndex = 2;
+            this.labelControlText.UseMnemonic = false;
+            // 
             // ColumnTitleControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.laColumnTitle);
+            this.Controls.Add(this.labelControlText);
             this.Controls.Add(this.pbLogo);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -70,7 +71,7 @@
 
         #endregion
 
-        public System.Windows.Forms.Label laColumnTitle;
         private System.Windows.Forms.PictureBox pbLogo;
+        private DevExpress.XtraEditors.LabelControl labelControlText;
     }
 }

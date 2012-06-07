@@ -200,7 +200,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             foreach (Control panel in _headerPanel.Controls)
             {
                 panel.Width = panelWidth;
-                int controlHeight = (panel as PresentationClasses.WallBin.ColumnTitleControl).GetHeight();
+                int controlHeight = (panel as ColumnTitleControl).GetHeight();
                 if (panelHeight < controlHeight)
                     panelHeight = controlHeight;
             }

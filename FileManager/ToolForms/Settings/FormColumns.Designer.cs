@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormColumns));
             this.grColumn1 = new System.Windows.Forms.DataGridView();
             this.colDWBColumn1WindowName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -324,14 +324,14 @@
             this.grColumn1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDWBColumn1WindowName,
             this.colDWBColumn1OldWindowName});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grColumn1.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grColumn1.DefaultCellStyle = dataGridViewCellStyle26;
             this.grColumn1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grColumn1.Location = new System.Drawing.Point(0, 0);
             this.grColumn1.MultiSelect = false;
@@ -349,8 +349,8 @@
             // colDWBColumn1WindowName
             // 
             this.colDWBColumn1WindowName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colDWBColumn1WindowName.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colDWBColumn1WindowName.DefaultCellStyle = dataGridViewCellStyle25;
             this.colDWBColumn1WindowName.HeaderText = "Window Name";
             this.colDWBColumn1WindowName.Name = "colDWBColumn1WindowName";
             // 
@@ -377,14 +377,14 @@
             this.grColumn2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDWBColumn2WindowName,
             this.colDWBColumn2OldWindowName});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grColumn2.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grColumn2.DefaultCellStyle = dataGridViewCellStyle28;
             this.grColumn2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grColumn2.Location = new System.Drawing.Point(0, 0);
             this.grColumn2.MultiSelect = false;
@@ -402,8 +402,8 @@
             // colDWBColumn2WindowName
             // 
             this.colDWBColumn2WindowName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colDWBColumn2WindowName.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colDWBColumn2WindowName.DefaultCellStyle = dataGridViewCellStyle27;
             this.colDWBColumn2WindowName.HeaderText = "Window Name";
             this.colDWBColumn2WindowName.Name = "colDWBColumn2WindowName";
             // 
@@ -430,14 +430,14 @@
             this.grColumn3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDWBColumn3WindowName,
             this.colDWBColumn3OldWindowName});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grColumn3.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle30.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle30.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle30.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle30.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle30.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grColumn3.DefaultCellStyle = dataGridViewCellStyle30;
             this.grColumn3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grColumn3.Location = new System.Drawing.Point(0, 0);
             this.grColumn3.MultiSelect = false;
@@ -455,8 +455,8 @@
             // colDWBColumn3WindowName
             // 
             this.colDWBColumn3WindowName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colDWBColumn3WindowName.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.colDWBColumn3WindowName.DefaultCellStyle = dataGridViewCellStyle29;
             this.colDWBColumn3WindowName.HeaderText = "Window Name";
             this.colDWBColumn3WindowName.Name = "colDWBColumn3WindowName";
             // 
@@ -1759,7 +1759,7 @@
             this.rbColumn1AlignmentRight.TabStop = true;
             this.rbColumn1AlignmentRight.Text = "Right";
             this.rbColumn1AlignmentRight.UseVisualStyleBackColor = true;
-            this.rbColumn1AlignmentRight.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn1AlignmentRight.CheckedChanged += new System.EventHandler(this.rbColumn1AlignmentRight_CheckedChanged);
             // 
             // rbColumn1AlignmentCenter
             // 
@@ -1770,7 +1770,7 @@
             this.rbColumn1AlignmentCenter.TabStop = true;
             this.rbColumn1AlignmentCenter.Text = "Center";
             this.rbColumn1AlignmentCenter.UseVisualStyleBackColor = true;
-            this.rbColumn1AlignmentCenter.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn1AlignmentCenter.CheckedChanged += new System.EventHandler(this.rbColumn1AlignmentCenter_CheckedChanged);
             // 
             // rbColumn1AlignmentLeft
             // 
@@ -1781,7 +1781,7 @@
             this.rbColumn1AlignmentLeft.TabStop = true;
             this.rbColumn1AlignmentLeft.Text = "Left";
             this.rbColumn1AlignmentLeft.UseVisualStyleBackColor = true;
-            this.rbColumn1AlignmentLeft.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn1AlignmentLeft.CheckedChanged += new System.EventHandler(this.rbColumn1AlignmentLeft_CheckedChanged);
             // 
             // buttonEditColumn1Font
             // 
@@ -2159,7 +2159,7 @@
             this.rbColumn2AlignmentRight.TabStop = true;
             this.rbColumn2AlignmentRight.Text = "Right";
             this.rbColumn2AlignmentRight.UseVisualStyleBackColor = true;
-            this.rbColumn2AlignmentRight.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn2AlignmentRight.CheckedChanged += new System.EventHandler(this.rbColumn2AlignmentRight_CheckedChanged);
             // 
             // rbColumn2AlignmentCenter
             // 
@@ -2170,7 +2170,7 @@
             this.rbColumn2AlignmentCenter.TabStop = true;
             this.rbColumn2AlignmentCenter.Text = "Center";
             this.rbColumn2AlignmentCenter.UseVisualStyleBackColor = true;
-            this.rbColumn2AlignmentCenter.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn2AlignmentCenter.CheckedChanged += new System.EventHandler(this.rbColumn2AlignmentCenter_CheckedChanged);
             // 
             // rbColumn2AlignmentLeft
             // 
@@ -2181,7 +2181,7 @@
             this.rbColumn2AlignmentLeft.TabStop = true;
             this.rbColumn2AlignmentLeft.Text = "Left";
             this.rbColumn2AlignmentLeft.UseVisualStyleBackColor = true;
-            this.rbColumn2AlignmentLeft.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn2AlignmentLeft.CheckedChanged += new System.EventHandler(this.rbColumn2AlignmentLeft_CheckedChanged);
             // 
             // buttonEditColumn2Font
             // 
@@ -2547,7 +2547,7 @@
             this.rbColumn3AlignmentRight.TabStop = true;
             this.rbColumn3AlignmentRight.Text = "Right";
             this.rbColumn3AlignmentRight.UseVisualStyleBackColor = true;
-            this.rbColumn3AlignmentRight.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn3AlignmentRight.CheckedChanged += new System.EventHandler(this.rbColumn3AlignmentRight_CheckedChanged);
             // 
             // rbColumn3AlignmentCenter
             // 
@@ -2558,7 +2558,7 @@
             this.rbColumn3AlignmentCenter.TabStop = true;
             this.rbColumn3AlignmentCenter.Text = "Center";
             this.rbColumn3AlignmentCenter.UseVisualStyleBackColor = true;
-            this.rbColumn3AlignmentCenter.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn3AlignmentCenter.CheckedChanged += new System.EventHandler(this.rbColumn3AlignmentCenter_CheckedChanged);
             // 
             // rbColumn3AlignmentLeft
             // 
@@ -2569,7 +2569,7 @@
             this.rbColumn3AlignmentLeft.TabStop = true;
             this.rbColumn3AlignmentLeft.Text = "Left";
             this.rbColumn3AlignmentLeft.UseVisualStyleBackColor = true;
-            this.rbColumn3AlignmentLeft.CheckedChanged += new System.EventHandler(this.StateChanges_CheckedChanged);
+            this.rbColumn3AlignmentLeft.CheckedChanged += new System.EventHandler(this.rbColumn3AlignmentLeft_CheckedChanged);
             // 
             // buttonEditColumn3Font
             // 

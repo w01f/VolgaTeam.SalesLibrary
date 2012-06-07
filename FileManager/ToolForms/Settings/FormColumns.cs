@@ -1479,6 +1479,45 @@ namespace FileManager.ToolForms.Settings
                 _stateChanges = true;
         }
 
+        private void rbColumn1AlignmentLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn1AlignmentLeft.Checked)
+            {
+                memoEditColumn1Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn1Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn1Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn1Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn1AlignmentCenter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn1AlignmentCenter.Checked)
+            {
+                memoEditColumn1Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn1Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn1Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn1Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn1AlignmentRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn1AlignmentRight.Checked)
+            {
+                memoEditColumn1Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn1Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn1Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn1Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
         private void ckColumn1EnableBanner_CheckedChanged(object sender, EventArgs e)
         {
             pbColumn1SelectedBanner.Enabled = ckColumn1EnableBanner.Checked;
@@ -1575,6 +1614,45 @@ namespace FileManager.ToolForms.Settings
                 _stateChanges = true;
         }
 
+        private void rbColumn2AlignmentLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn2AlignmentLeft.Checked)
+            {
+                memoEditColumn2Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn2Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn2Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn2Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn2AlignmentCenter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn2AlignmentCenter.Checked)
+            {
+                memoEditColumn2Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn2Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn2Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn2Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn2AlignmentRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn2AlignmentRight.Checked)
+            {
+                memoEditColumn2Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn2Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn2Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn2Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
         private void ckColumn2EnableBanner_CheckedChanged(object sender, EventArgs e)
         {
             pbColumn2SelectedBanner.Enabled = ckColumn2EnableBanner.Checked;
@@ -1667,6 +1745,45 @@ namespace FileManager.ToolForms.Settings
             memoEditColumn3Title.Properties.AppearanceDisabled.Font = memoEditColumn3Title.Font;
             memoEditColumn3Title.Properties.AppearanceFocused.Font = memoEditColumn3Title.Font;
             memoEditColumn3Title.Properties.AppearanceReadOnly.Font = memoEditColumn3Title.Font;
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn3AlignmentLeft_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn3AlignmentLeft.Checked)
+            {
+                memoEditColumn3Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn3Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn3Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+                memoEditColumn3Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn3AlignmentCenter_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn3AlignmentCenter.Checked)
+            {
+                memoEditColumn3Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn3Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn3Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                memoEditColumn3Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            }
+            if (_allowToSave)
+                _stateChanges = true;
+        }
+
+        private void rbColumn3AlignmentRight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbColumn3AlignmentRight.Checked)
+            {
+                memoEditColumn3Title.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn3Title.Properties.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn3Title.Properties.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                memoEditColumn3Title.Properties.AppearanceReadOnly.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            }
             if (_allowToSave)
                 _stateChanges = true;
         }
