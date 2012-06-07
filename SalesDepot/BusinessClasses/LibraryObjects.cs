@@ -456,6 +456,7 @@ namespace SalesDepot.BusinessClasses
             this.HeaderFont = new Font("Arial", 14, FontStyle.Bold, GraphicsUnit.Pixel);
             this.HeaderAlignment = Alignment.Center;
             this.BannerProperties = new BannerProperties();
+            this.EnableText = true;
         }
 
         public string Serialize()

@@ -16,23 +16,23 @@ namespace SalesDepot.PresentationClasses.WallBin
 
             this.BackColor = this.Data.BackgroundColor;
             pbLogo.BackColor = this.Data.BackgroundColor;
-            laColumnTitle.BackColor = this.Data.BackgroundColor;
+            labelControlText.BackColor = this.Data.BackgroundColor;
             if (this.Data.EnableText && !string.IsNullOrEmpty(this.Data.Name.Trim()))
             {
-                laColumnTitle.Visible = true;
-                laColumnTitle.Text = this.Data.Name;
-                laColumnTitle.Font = this.Data.HeaderFont;
-                laColumnTitle.ForeColor = this.Data.ForeColor;
+                labelControlText.Visible = true;
+                labelControlText.Text = this.Data.Name;
+                labelControlText.Font = this.Data.HeaderFont;
+                labelControlText.ForeColor = this.Data.ForeColor;
                 switch (this.Data.HeaderAlignment)
                 {
                     case BusinessClasses.Alignment.Left:
-                        laColumnTitle.TextAlign = ContentAlignment.MiddleLeft;
+                        labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                         break;
                     case BusinessClasses.Alignment.Center:
-                        laColumnTitle.TextAlign = ContentAlignment.MiddleCenter;
+                        labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                         break;
                     case BusinessClasses.Alignment.Right:
-                        laColumnTitle.TextAlign = ContentAlignment.MiddleRight;
+                        labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                         break;
                 }
                 pbLogo.Dock = DockStyle.Left;
@@ -44,14 +44,15 @@ namespace SalesDepot.PresentationClasses.WallBin
                 }
                 else if (this.Data.EnableWidget && this.Data.Widget != null)
                 {
-                    pbLogo.Visible = true;
-                    pbLogo.Image = this.Data.Widget;
-                    pbLogo.Width = this.Data.Widget.Width;
+                    pbLogo.Visible = false;
+                    labelControlText.Appearance.Image = this.Data.Widget;
                 }
+                else
+                    pbLogo.Visible = false;
             }
             else if (this.Data.BannerProperties.Enable && this.Data.BannerProperties.Image != null)
             {
-                laColumnTitle.Visible = false;
+                labelControlText.Visible = false;
                 pbLogo.Visible = true;
                 switch (this.Data.HeaderAlignment)
                 {
@@ -70,7 +71,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             else if (this.Data.EnableWidget && this.Data.Widget != null)
             {
-                laColumnTitle.Visible = false;
+                labelControlText.Visible = false;
                 pbLogo.Visible = true;
                 switch (this.Data.HeaderAlignment)
                 {
@@ -94,10 +95,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             int textHeight = 0;
             int imageHeight = 0;
             if (this.Data.EnableText && !string.IsNullOrEmpty(this.Data.Name.Trim()))
-            {
-                Size labelSize = new Size(this.Width, Int32.MaxValue);
-                textHeight = TextRenderer.MeasureText(this.Data.Name, this.Data.HeaderFont, labelSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix).Height;
-            }
+                using (Graphics g = labelControlText.CreateGraphics())
+                    textHeight = (int)g.MeasureString(this.Data.Name, this.Data.HeaderFont, new Size(labelControlText.Width - (this.Data.EnableWidget && this.Data.Widget != null ? this.Data.Widget.Width : 0), Int32.MaxValue)).Height;
 
             if (this.Data.BannerProperties.Enable && this.Data.BannerProperties.Image != null)
                 imageHeight = this.Data.BannerProperties.Image.Height;

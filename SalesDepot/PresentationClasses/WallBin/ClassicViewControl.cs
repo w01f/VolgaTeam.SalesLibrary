@@ -59,7 +59,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             else if (ConfigurationClasses.SettingsManager.Instance.ListView)
                 FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _listToolTip);
 
-            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.UpdateView();
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.UpdateView();
         }
 
         private void ClassicViewControl_Load(object sender, System.EventArgs e)
