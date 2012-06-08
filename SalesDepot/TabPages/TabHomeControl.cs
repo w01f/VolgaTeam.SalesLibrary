@@ -255,7 +255,25 @@ namespace SalesDepot.TabPages
                     else if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
                         this.SelectedView = this.SolutionViewControl;
 
-                    ApplySelectedView();
+                    using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                    {
+                        form.laProgress.Text = "Loading Page...";
+                        form.TopMost = true;
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                        {
+                            BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
+                            FormMain.Instance.Invoke((MethodInvoker)delegate()
+                            {
+                                ApplySelectedView();
+                            });
+                        }));
+                        form.Show();
+                        Application.DoEvents();
+                        thread.Start();
+                        while (thread.IsAlive)
+                            Application.DoEvents();
+                        form.Close();
+                    }
                 }
             }
         }
@@ -455,7 +473,25 @@ namespace SalesDepot.TabPages
                 form.ShowDialog();
                 this.ClassicViewControl.LoadOptions();
             }
-            ApplySelectedView();
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                form.laProgress.Text = "Loading Page...";
+                form.TopMost = true;
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
+                    FormMain.Instance.Invoke((MethodInvoker)delegate()
+                    {
+                        ApplySelectedView();
+                    });
+                }));
+                form.Show();
+                Application.DoEvents();
+                thread.Start();
+                while (thread.IsAlive)
+                    Application.DoEvents();
+                form.Close();
+            }
         }
 
         public void buttonItemSettingsHelp_Click(object sender, EventArgs e)
@@ -485,22 +521,58 @@ namespace SalesDepot.TabPages
 
         public void comboBoxItemStations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnEmpty.BringToFront();
-            Application.DoEvents();
-            StationChanged(sender);
-            Application.DoEvents();
-            pnMain.BringToFront();
-            Application.DoEvents();
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                form.laProgress.Text = string.Format("Loading {0}...", PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null ? PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
+                form.TopMost = true;
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
+                    FormMain.Instance.Invoke((MethodInvoker)delegate()
+                    {
+                        pnEmpty.BringToFront();
+                        Application.DoEvents();
+                        StationChanged(sender);
+                        Application.DoEvents();
+                        pnMain.BringToFront();
+                        Application.DoEvents();
+                    });
+                }));
+                form.Show();
+                Application.DoEvents();
+                thread.Start();
+                while (thread.IsAlive)
+                    Application.DoEvents();
+                form.Close();
+            }
         }
 
         public void comboBoxItemPages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pnEmpty.BringToFront();
-            Application.DoEvents();
-            PageChanged(sender);
-            Application.DoEvents();
-            pnMain.BringToFront();
-            Application.DoEvents();
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                form.laProgress.Text = "Loading Page...";
+                form.TopMost = true;
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
+                    FormMain.Instance.Invoke((MethodInvoker)delegate()
+                    {
+                        pnEmpty.BringToFront();
+                        Application.DoEvents();
+                        PageChanged(sender);
+                        Application.DoEvents();
+                        pnMain.BringToFront();
+                        Application.DoEvents();
+                    });
+                }));
+                form.Show();
+                Application.DoEvents();
+                thread.Start();
+                while (thread.IsAlive)
+                    Application.DoEvents();
+                form.Close();
+            }
         }
         #endregion
     }

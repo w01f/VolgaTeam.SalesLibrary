@@ -163,6 +163,20 @@ namespace SalesDepot
                         Application.DoEvents();
                         PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
                         Application.DoEvents();
+                    });
+                }));
+                form.Show();
+                Application.DoEvents();
+                thread.Start();
+                while (thread.IsAlive)
+                    Application.DoEvents();
+                form.Close();
+
+                thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
+                    this.Invoke((MethodInvoker)delegate()
+                    {
                         this.TabHome.LoadPage();
                         Application.DoEvents();
                         _alowToSave = true;
@@ -173,14 +187,12 @@ namespace SalesDepot
                         Application.DoEvents();
                     });
                 }));
-                form.Show();
-                Application.DoEvents();
                 thread.Start();
                 while (thread.IsAlive)
                     Application.DoEvents();
+
                 ribbonControl.Visible = true;
                 pnContainer.BringToFront();
-                form.Close();
             }
             AppManager.Instance.ActivateMainForm();
         }
