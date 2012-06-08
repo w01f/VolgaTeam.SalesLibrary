@@ -30,8 +30,6 @@ namespace AutoSynchronizer.InteropClasses
 
         public void Disconnect()
         {
-            if (_outlookObject != null)
-                _outlookObject.Quit();
             AppManager.Instance.ReleaseComObject(_outlookObject);
             GC.WaitForPendingFinalizers();
             GC.Collect();
