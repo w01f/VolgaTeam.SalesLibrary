@@ -543,7 +543,8 @@ namespace FileManager.TabPages
                 using (ToolForms.FormProgress form = new ToolForms.FormProgress())
                 {
                     FormMain.Instance.ribbonControl.Enabled = false;
-                    pnMain.Enabled = false;
+                    pnEmpty.BringToFront();
+                    System.Windows.Forms.Application.DoEvents();
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
                         PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
                     form.laProgress.Text = "Updating your Sales Library on the network…" + Environment.NewLine + "Chill out and relax for a few minutes…";
@@ -562,7 +563,8 @@ namespace FileManager.TabPages
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
                         form.Close();
                     FormMain.Instance.ribbonControl.Enabled = true;
-                    pnMain.Enabled = true;
+                    pnMain.BringToFront();
+                    System.Windows.Forms.Application.DoEvents();
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync)
                         Application.Exit();
                 }

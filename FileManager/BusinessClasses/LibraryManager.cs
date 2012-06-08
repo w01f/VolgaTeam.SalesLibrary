@@ -61,7 +61,7 @@ namespace FileManager.BusinessClasses
                     {
                         salesDepot.PrepareForSynchronize();
 
-                        string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : salesDepotFolderName = salesDepot.Folder.Name;
+                        string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : salesDepot.Folder.Name;
                         existedLibraryFolderNames.Add(salesDepotFolderName);
 
                         DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFolderName));

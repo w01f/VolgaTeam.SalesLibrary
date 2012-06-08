@@ -43,6 +43,7 @@
             this.gridColumnPath = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEditPath = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.laDeletePageWarning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlFolders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewFolders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditOrder)).BeginInit();
@@ -84,13 +85,13 @@
             this.gridControlFolders.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gridControlFolders.Location = new System.Drawing.Point(12, 50);
+            this.gridControlFolders.Location = new System.Drawing.Point(12, 101);
             this.gridControlFolders.MainView = this.gridViewFolders;
             this.gridControlFolders.Name = "gridControlFolders";
             this.gridControlFolders.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditOrder,
             this.repositoryItemButtonEditPath});
-            this.gridControlFolders.Size = new System.Drawing.Size(424, 335);
+            this.gridControlFolders.Size = new System.Drawing.Size(424, 284);
             this.gridControlFolders.TabIndex = 36;
             this.gridControlFolders.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFolders});
@@ -213,7 +214,7 @@
             this.buttonX1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(12, 11);
+            this.buttonX1.Location = new System.Drawing.Point(12, 63);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(424, 32);
             this.buttonX1.TabIndex = 37;
@@ -221,11 +222,25 @@
             this.buttonX1.TextColor = System.Drawing.Color.Black;
             this.buttonX1.Click += new System.EventHandler(this.buttonXAdd_Click);
             // 
+            // laDeletePageWarning
+            // 
+            this.laDeletePageWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.laDeletePageWarning.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laDeletePageWarning.ForeColor = System.Drawing.Color.Red;
+            this.laDeletePageWarning.Location = new System.Drawing.Point(12, 5);
+            this.laDeletePageWarning.Name = "laDeletePageWarning";
+            this.laDeletePageWarning.Size = new System.Drawing.Size(424, 55);
+            this.laDeletePageWarning.TabIndex = 38;
+            this.laDeletePageWarning.Text = "WARNING!\r\nTalk to Billy BEFORE Adding more Root Folders...";
+            this.laDeletePageWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormExtraRoots
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(448, 433);
+            this.Controls.Add(this.laDeletePageWarning);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.gridControlFolders);
             this.Controls.Add(this.buttonXCancel);
@@ -262,5 +277,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnPath;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditPath;
+        private System.Windows.Forms.Label laDeletePageWarning;
     }
 }
