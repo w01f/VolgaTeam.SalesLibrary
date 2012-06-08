@@ -80,9 +80,11 @@ namespace AutoSynchronizer.BusinessClasses
                 if (this.Manager.Library.IsConfigured && !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath) && Directory.Exists(ConfigurationClasses.SettingsManager.Instance.BackupPath) && !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.NetworkPath) && Directory.Exists(ConfigurationClasses.SettingsManager.Instance.NetworkPath))
                 {
                     HashSet<string> filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    List<string> existedLibraryFolderNames = new List<string>();
                     this.Manager.Library.PrepareForSynchronize();
 
                     string libraryFolderName = this.Manager.Library.Folder.FullName.Equals(this.Manager.Library.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : this.Manager.Library.Folder.Name;
+                    existedLibraryFolderNames.Add(libraryFolderName);
 
                     DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(ConfigurationClasses.SettingsManager.Instance.NetworkPath, libraryFolderName));
                     if (!destinationFolder.Exists)
@@ -124,6 +126,9 @@ namespace AutoSynchronizer.BusinessClasses
 
                     List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                     List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
+
+                    #region Sync Primary Root
+                    sourceSubFolders.Clear();
                     sourceSubFolders.AddRange(this.Manager.Library.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
                     foreach (DirectoryInfo subFolder in sourceSubFolders)
                     {
@@ -134,7 +139,37 @@ namespace AutoSynchronizer.BusinessClasses
                         destinationSubFolders.Add(destinationSubFolder);
                         ToolClasses.SyncManager.Instance.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
                     }
+                    #endregion
 
+                    #region Sync Extra Roots
+                    if (this.Manager.Library.ExtraFolders.Count > 0)
+                    {
+                        string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName);
+                        if (!Directory.Exists(extraFoldersDestinationRootPath))
+                            Directory.CreateDirectory(extraFoldersDestinationRootPath);
+                        DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
+                        destinationSubFolders.Add(extraFoldersDestinationRoot);
+                        List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
+                        foreach (RootFolder extraRootFolder in this.Manager.Library.ExtraFolders)
+                        {
+                            sourceSubFolders.Clear();
+                            sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                            if (sourceSubFolders.Count > 0)
+                            {
+                                string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+                                if (!Directory.Exists(extraFolderDestinationPath))
+                                    Directory.CreateDirectory(extraFolderDestinationPath);
+                                DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+                                extraFolderDestinations.Add(extraFolderDestination);
+                                ToolClasses.SyncManager.Instance.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                            }
+                        }
+                        foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+                            ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
+                    }
+                    #endregion
+
+                    #region Sync Overnights Calendar
                     if (this.Manager.Library.OvernightsCalendar.Enabled)
                     {
                         string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.OvernightsCalendarRootFolderName);
@@ -144,6 +179,7 @@ namespace AutoSynchronizer.BusinessClasses
                         destinationSubFolders.Add(overnightsCalendarDestinationFolder);
                         ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
                     }
+                    #endregion
 
                     foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
                         ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);

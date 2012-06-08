@@ -23,15 +23,26 @@ namespace AutoSynchronizer.BusinessClasses
         Network
     }
 
+    public enum Alignment
+    {
+        Left = 0,
+        Center,
+        Right
+    }
+
     public class Library
     {
+        private RootFolder _rootFolder = null;
+
         public Guid Identifier { get; set; }
         public string Name { get; set; }
         public DirectoryInfo Folder { get; set; }
         public string BrandingText { get; set; }
         public DateTime SyncDate { get; set; }
 
-        public bool ApplyForAllWindows { get; set; }
+        public bool ApplyAppearanceForAllWindows { get; set; }
+        public bool ApplyWidgetForAllWindows { get; set; }
+        public bool ApplyBannerForAllWindows { get; set; }
         public bool MinimizeOnSync { get; set; }
         public bool CloseAfterSync { get; set; }
         public bool ShowProgressDuringSync { get; set; }
@@ -43,11 +54,12 @@ namespace AutoSynchronizer.BusinessClasses
 
         public bool IsConfigured { get; set; }
 
-        public List<LibraryPage> Pages { get; set; }
-        public List<string> EmailList { get; set; }
-        public List<LibraryFile> DeadLinks { get; set; }
-        public List<LibraryFile> ExpiredLinks { get; set; }
-        public List<AutoWidget> AutoWidgets { get; set; }
+        public List<RootFolder> ExtraFolders { get; private set; }
+        public List<LibraryPage> Pages { get; private set; }
+        public List<string> EmailList { get; private set; }
+        public List<LibraryFile> DeadLinks { get; private set; }
+        public List<LibraryFile> ExpiredLinks { get; private set; }
+        public List<AutoWidget> AutoWidgets { get; private set; }
 
         #region Auto Sync Settings
         public bool EnableAutoSync { get; set; }
@@ -56,12 +68,27 @@ namespace AutoSynchronizer.BusinessClasses
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
+        public RootFolder RootFolder
+        {
+            get
+            {
+                if (_rootFolder == null)
+                {
+                    _rootFolder = new RootFolder(this);
+                    _rootFolder.RootId = Guid.Empty;
+                    _rootFolder.Folder = this.Folder;
+                }
+                return _rootFolder;
+            }
+        }
+
         public Library(string name, DirectoryInfo folder)
         {
             this.Identifier = Guid.NewGuid();
             this.Folder = folder;
             this.Name = name;
             this.IsConfigured = false;
+            this.ExtraFolders = new List<RootFolder>();
             this.Pages = new List<LibraryPage>();
             this.EmailList = new List<string>();
             this.DeadLinks = new List<LibraryFile>();
@@ -91,7 +118,6 @@ namespace AutoSynchronizer.BusinessClasses
 
             this.BrandingText = string.Empty;
             this.SyncDate = DateTime.Now;
-            this.ApplyForAllWindows = false;
             this.MinimizeOnSync = true;
             this.CloseAfterSync = true;
             this.ShowProgressDuringSync = true;
@@ -110,20 +136,8 @@ namespace AutoSynchronizer.BusinessClasses
             if (File.Exists(file))
             {
                 XmlDocument document = new XmlDocument();
-                bool fileBusy = true;
-                do
-                {
-                    try
-                    {
-                        document.Load(file);
-                        fileBusy = false;
-                    }
-                    catch
-                    {
-                        fileBusy = true;
-                    }
-                }
-                while (fileBusy);
+                document.Load(file);
+
                 XmlNode node = document.SelectSingleNode(@"/Library/Name");
                 if (node != null)
                     this.Name = node.InnerText;
@@ -134,10 +148,18 @@ namespace AutoSynchronizer.BusinessClasses
                 if (node != null)
                     if (DateTime.TryParse(node.InnerText, out tempDate))
                         this.SyncDate = tempDate;
-                node = document.SelectSingleNode(@"/Library/ApplyForAllWindows");
+                node = document.SelectSingleNode(@"/Library/ApplyAppearanceForAllWindows");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
-                        this.ApplyForAllWindows = tempBool;
+                        this.ApplyAppearanceForAllWindows = tempBool;
+                node = document.SelectSingleNode(@"/Library/ApplyWidgetForAllWindows");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.ApplyWidgetForAllWindows = tempBool;
+                node = document.SelectSingleNode(@"/Library/ApplyBannerForAllWindows");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.ApplyBannerForAllWindows = tempBool;
                 node = document.SelectSingleNode(@"/Library/MinimizeOnSync");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
@@ -171,6 +193,14 @@ namespace AutoSynchronizer.BusinessClasses
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.SendEmail = tempBool;
 
+                node = document.SelectSingleNode(@"/Library/ExtraRoots");
+                if (node != null)
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        RootFolder folder = new RootFolder(this);
+                        folder.Deserialize(childNode);
+                        this.ExtraFolders.Add(folder);
+                    }
                 node = document.SelectSingleNode(@"/Library/Pages");
                 if (node != null)
                     foreach (XmlNode childNode in node.ChildNodes)
@@ -213,6 +243,7 @@ namespace AutoSynchronizer.BusinessClasses
                     }
                 #endregion
 
+
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
                 if (node != null)
                     this.OvernightsCalendar.Deserialize(node);
@@ -229,7 +260,9 @@ namespace AutoSynchronizer.BusinessClasses
             xml.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
             xml.AppendLine(@"<BrandingText>" + this.BrandingText.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</BrandingText>");
             xml.AppendLine(@"<SyncDate>" + this.SyncDate + @"</SyncDate>");
-            xml.AppendLine(@"<ApplyForAllWindows>" + this.ApplyForAllWindows + @"</ApplyForAllWindows>");
+            xml.AppendLine(@"<ApplyAppearanceForAllWindows>" + this.ApplyAppearanceForAllWindows + @"</ApplyAppearanceForAllWindows>");
+            xml.AppendLine(@"<ApplyWidgetForAllWindows>" + this.ApplyWidgetForAllWindows + @"</ApplyWidgetForAllWindows>");
+            xml.AppendLine(@"<ApplyBannerForAllWindows>" + this.ApplyBannerForAllWindows + @"</ApplyBannerForAllWindows>");
             xml.AppendLine(@"<MinimizeOnSync>" + this.MinimizeOnSync + @"</MinimizeOnSync>");
             xml.AppendLine(@"<CloseAfterSync>" + this.CloseAfterSync + @"</CloseAfterSync>");
             xml.AppendLine(@"<ShowProgressDuringSync>" + this.ShowProgressDuringSync + @"</ShowProgressDuringSync>");
@@ -238,6 +271,10 @@ namespace AutoSynchronizer.BusinessClasses
             xml.AppendLine(@"<ReplaceInactiveLinksWithLineBreak>" + this.ReplaceInactiveLinksWithLineBreak + @"</ReplaceInactiveLinksWithLineBreak>");
             xml.AppendLine(@"<InactiveLinksMessageAtStartup>" + this.InactiveLinksMessageAtStartup + @"</InactiveLinksMessageAtStartup>");
             xml.AppendLine(@"<SendEmail>" + this.SendEmail + @"</SendEmail>");
+            xml.AppendLine("<ExtraRoots>");
+            foreach (RootFolder folder in this.ExtraFolders)
+                xml.AppendLine(@"<ExtraRoot>" + folder.Serialize() + @"</ExtraRoot>");
+            xml.AppendLine("</ExtraRoots>");
             xml.AppendLine("<Pages>");
             foreach (LibraryPage page in this.Pages)
                 xml.AppendLine(@"<Page>" + page.Serialize() + @"</Page>");
@@ -351,6 +388,8 @@ namespace AutoSynchronizer.BusinessClasses
             //        InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.FullPath)));
             //        InteropClasses.OutlookHelper.Instance.Disconnect();
             //    }
+            //    else
+            //        AppManager.Instance.ShowWarning("Cannot open Outlook");
             //}
         }
 
@@ -398,10 +437,54 @@ namespace AutoSynchronizer.BusinessClasses
             }
         }
 
-        public void RebuildPagesIndexes()
+        public void RebuildPagesOrder()
         {
             for (int i = 0; i < this.Pages.Count; i++)
                 this.Pages[i].Order = i;
+        }
+
+        public RootFolder GetRootFolder(Guid folderId)
+        {
+            RootFolder folder = this.ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+            if (folder != null)
+                return folder;
+            else
+                return this.RootFolder;
+        }
+
+        public void AddExtraRoot()
+        {
+            RootFolder folder = new RootFolder(this);
+            folder.RootId = Guid.NewGuid();
+            folder.Order = this.ExtraFolders.Count;
+            this.ExtraFolders.Add(folder);
+        }
+
+
+        public void UpExtraRoot(int position)
+        {
+            if (position > 0)
+            {
+                this.ExtraFolders[position].Order--;
+                this.ExtraFolders[position - 1].Order++;
+                this.ExtraFolders.Sort((x, y) => x.Order.CompareTo(y.Order));
+            }
+        }
+
+        public void DownExtraRoot(int position)
+        {
+            if (position < this.ExtraFolders.Count - 1)
+            {
+                this.ExtraFolders[position].Order++;
+                this.ExtraFolders[position + 1].Order--;
+                this.ExtraFolders.Sort((x, y) => x.Order.CompareTo(y.Order));
+            }
+        }
+
+        public void RebuildExtraFoldersOrder()
+        {
+            for (int i = 0; i < this.ExtraFolders.Count; i++)
+                this.ExtraFolders[i].Order = i;
         }
     }
 
@@ -520,6 +603,11 @@ namespace AutoSynchronizer.BusinessClasses
         public Color BackgroundColor { get; set; }
         public Color ForeColor { get; set; }
         public Font HeaderFont { get; set; }
+        public bool EnableText { get; set; }
+        public Alignment HeaderAlignment { get; set; }
+        public bool EnableWidget { get; set; }
+        public Image Widget { get; set; }
+        public BannerProperties BannerProperties { get; set; }
 
         public ColumnTitle(LibraryPage parent)
         {
@@ -529,23 +617,33 @@ namespace AutoSynchronizer.BusinessClasses
             this.BackgroundColor = Color.White;
             this.ForeColor = Color.Black;
             this.HeaderFont = new Font("Arial", 14, FontStyle.Bold, GraphicsUnit.Pixel);
+            this.EnableText = true;
+            this.HeaderAlignment = Alignment.Center;
+            this.BannerProperties = new BannerProperties();
         }
 
         public string Serialize()
         {
             FontConverter converter = new FontConverter();
+            TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
             result.AppendLine(@"<ColumnOrder>" + this.ColumnOrder + @"</ColumnOrder>");
             result.AppendLine(@"<BackgroundColor>" + this.BackgroundColor.ToArgb() + @"</BackgroundColor>");
             result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
             result.AppendLine(@"<HeaderFont>" + converter.ConvertToString(this.HeaderFont) + @"</HeaderFont>");
+            result.AppendLine(@"<EnableText>" + this.EnableText + @"</EnableText>");
+            result.AppendLine(@"<HeaderAligment>" + ((int)this.HeaderAlignment).ToString() + @"</HeaderAligment>");
+            result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
+            result.AppendLine(@"<Widget>" + Convert.ToBase64String((byte[])imageConverter.ConvertTo(this.Widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
+            result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
             return result.ToString();
         }
 
         public void Deserialize(XmlNode node)
         {
             int tempInt = 0;
+            bool tempBool;
             FontConverter converter = new FontConverter();
 
             foreach (XmlNode childNode in node.ChildNodes)
@@ -576,6 +674,25 @@ namespace AutoSynchronizer.BusinessClasses
                         {
                         }
                         break;
+                    case "EnableText":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableText = tempBool;
+                        break;
+                    case "HeaderAligment":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.HeaderAlignment = (Alignment)tempInt;
+                        break;
+                    case "EnableWidget":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableWidget = tempBool;
+                        break;
+                    case "Widget":
+                        if (!string.IsNullOrEmpty(childNode.InnerText))
+                            this.Widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    case "BannerProperties":
+                        this.BannerProperties.Deserialize(childNode);
+                        break;
                 }
             }
         }
@@ -588,12 +705,17 @@ namespace AutoSynchronizer.BusinessClasses
         public string Name { get; set; }
         public double RowOrder { get; set; }
         public int ColumnOrder { get; set; }
+        public Color BorderColor { get; set; }
         public Color BackgroundWindowColor { get; set; }
         public Color ForeWindowColor { get; set; }
         public Color BackgroundHeaderColor { get; set; }
         public Color ForeHeaderColor { get; set; }
         public Font WindowFont { get; set; }
         public Font HeaderFont { get; set; }
+        public Alignment HeaderAlignment { get; set; }
+        public bool EnableWidget { get; set; }
+        public Image Widget { get; set; }
+        public BannerProperties BannerProperties { get; set; }
 
         public List<LibraryFile> Files { get; set; }
 
@@ -604,28 +726,41 @@ namespace AutoSynchronizer.BusinessClasses
             this.Name = string.Empty;
             this.RowOrder = 0;
             this.ColumnOrder = 0;
+            this.BorderColor = Color.Black;
             this.BackgroundWindowColor = Color.White;
             this.ForeWindowColor = Color.Black;
             this.BackgroundHeaderColor = Color.White;
             this.ForeHeaderColor = Color.Black;
             this.WindowFont = new Font("Arial", 14, FontStyle.Regular, GraphicsUnit.Pixel);
             this.HeaderFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            this.HeaderAlignment = Alignment.Center;
+
+            this.BannerProperties = new BannerProperties();
+            this.BannerProperties.Font = this.HeaderFont;
+            this.BannerProperties.ForeColor = this.ForeHeaderColor;
+
             this.Files = new List<LibraryFile>();
         }
 
         public string Serialize()
         {
             FontConverter converter = new FontConverter();
+            TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
             result.AppendLine(@"<RowOrder>" + this.RowOrder + @"</RowOrder>");
             result.AppendLine(@"<ColumnOrder>" + this.ColumnOrder + @"</ColumnOrder>");
+            result.AppendLine(@"<BorderColor>" + this.BorderColor.ToArgb() + @"</BorderColor>");
             result.AppendLine(@"<BackgroundWindowColor>" + this.BackgroundWindowColor.ToArgb() + @"</BackgroundWindowColor>");
             result.AppendLine(@"<ForeWindowColor>" + this.ForeWindowColor.ToArgb() + @"</ForeWindowColor>");
             result.AppendLine(@"<BackgroundHeaderColor>" + this.BackgroundHeaderColor.ToArgb() + @"</BackgroundHeaderColor>");
             result.AppendLine(@"<ForeHeaderColor>" + this.ForeHeaderColor.ToArgb() + @"</ForeHeaderColor>");
             result.AppendLine(@"<WindowFont>" + converter.ConvertToString(this.WindowFont) + @"</WindowFont>");
             result.AppendLine(@"<HeaderFont>" + converter.ConvertToString(this.HeaderFont) + @"</HeaderFont>");
+            result.AppendLine(@"<HeaderAligment>" + ((int)this.HeaderAlignment).ToString() + @"</HeaderAligment>");
+            result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
+            result.AppendLine(@"<Widget>" + Convert.ToBase64String((byte[])imageConverter.ConvertTo(this.Widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
+            result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
             result.AppendLine("<Files>");
             foreach (LibraryFile file in this.Files)
                 result.AppendLine(@"<File>" + file.Serialize() + @"</File>");
@@ -636,6 +771,7 @@ namespace AutoSynchronizer.BusinessClasses
         public void Deserialize(XmlNode node)
         {
             int tempInt = 0;
+            bool tempBool;
             FontConverter converter = new FontConverter();
 
             foreach (XmlNode childNode in node.ChildNodes)
@@ -652,6 +788,10 @@ namespace AutoSynchronizer.BusinessClasses
                     case "ColumnOrder":
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.ColumnOrder = tempInt;
+                        break;
+                    case "BorderColor":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.BorderColor = Color.FromArgb(tempInt);
                         break;
                     case "BackgroundWindowColor":
                         if (int.TryParse(childNode.InnerText, out tempInt))
@@ -687,6 +827,21 @@ namespace AutoSynchronizer.BusinessClasses
                         {
                         }
                         break;
+                    case "HeaderAligment":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.HeaderAlignment = (Alignment)tempInt;
+                        break;
+                    case "EnableWidget":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.EnableWidget = tempBool;
+                        break;
+                    case "Widget":
+                        if (!string.IsNullOrEmpty(childNode.InnerText))
+                            this.Widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    case "BannerProperties":
+                        this.BannerProperties.Deserialize(childNode);
+                        break;
                     case "Files":
                         this.Files.Clear();
                         foreach (XmlNode fileNode in childNode.ChildNodes)
@@ -697,6 +852,12 @@ namespace AutoSynchronizer.BusinessClasses
                         }
                         break;
                 }
+            }
+            if (!this.BannerProperties.Configured)
+            {
+                this.BannerProperties.Text = this.Name;
+                this.BannerProperties.Font = this.HeaderFont;
+                this.BannerProperties.ForeColor = this.ForeHeaderColor;
             }
         }
 
@@ -711,8 +872,14 @@ namespace AutoSynchronizer.BusinessClasses
         private string _note = string.Empty;
         private Image _widget = null;
 
+        #region Compatibility with old versions
+        private bool _oldEnableBanner;
+        private Image _oldBanner;
+        #endregion
+
         public string Name { get; set; }
         public LibraryFolder Parent { get; set; }
+        public Guid RootId { get; set; }
         public Guid Identifier { get; set; }
         public string RelativePath { get; set; }
         public FileTypes Type { get; set; }
@@ -722,14 +889,13 @@ namespace AutoSynchronizer.BusinessClasses
         public bool IsDead { get; set; }
         public DateTime AddDate { get; set; }
         public bool EnableWidget { get; set; }
-        public bool EnableBanner { get; set; }
-        public Image Banner { get; set; }
 
         public LibraryFileSearchTags SearchTags { get; set; }
         public ExpirationDateOptions ExpirationDateOptions { get; set; }
         public PresentationPreviewContainer PreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
+        public BannerProperties BannerProperties { get; set; }
 
         public string DisplayName
         {
@@ -791,7 +957,7 @@ namespace AutoSynchronizer.BusinessClasses
                 else if (this.Type == FileTypes.LineBreak)
                     return string.Empty;
                 else
-                    return ((this.Parent != null ? this.Parent.Parent.Parent.Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
+                    return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
             }
         }
 
@@ -877,6 +1043,7 @@ namespace AutoSynchronizer.BusinessClasses
         {
             this.Name = string.Empty;
             this.Parent = parent;
+            this.RootId = Guid.Empty;
             this.Identifier = Guid.NewGuid();
             this.RelativePath = string.Empty;
             this.Type = FileTypes.Other;
@@ -898,6 +1065,7 @@ namespace AutoSynchronizer.BusinessClasses
             result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
             result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
             result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
+            result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
             result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
@@ -905,8 +1073,6 @@ namespace AutoSynchronizer.BusinessClasses
             result.AppendLine(@"<AddDate>" + this.AddDate + @"</AddDate>");
             result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-            result.AppendLine(@"<EnableBanner>" + this.EnableBanner + @"</EnableBanner>");
-            result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.Banner, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
             result.Append(this.SearchTags.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
             if (this.PreviewContainer != null)
@@ -915,6 +1081,21 @@ namespace AutoSynchronizer.BusinessClasses
                 result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
             if (this.LineBreakProperties != null)
                 result.AppendLine(@"<LineBreakProperties>" + this.LineBreakProperties.Serialize() + @"</LineBreakProperties>");
+            if (this.BannerProperties != null && this.BannerProperties.Configured)
+            {
+                result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
+                #region Compatibility with old versions
+                result.AppendLine(@"<EnableBanner>" + this.BannerProperties.Enable.ToString() + @"</EnableBanner>");
+                result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.BannerProperties.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
+                #endregion
+            }
+            else
+            {
+                #region Compatibility with old versions
+                result.AppendLine(@"<EnableBanner>" + _oldEnableBanner.ToString() + @"</EnableBanner>");
+                result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(_oldBanner, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
+                #endregion
+            }
             return result.ToString();
         }
 
@@ -923,6 +1104,7 @@ namespace AutoSynchronizer.BusinessClasses
             bool tempBool = false;
             int tempInt = 0;
             DateTime tempDate = DateTime.Now;
+            Guid tempGuid;
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
@@ -937,6 +1119,10 @@ namespace AutoSynchronizer.BusinessClasses
                     case "IsBold":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.IsBold = tempBool;
+                        break;
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
                         break;
                     case "RelativePath":
                         this.RelativePath = childNode.InnerText;
@@ -970,16 +1156,6 @@ namespace AutoSynchronizer.BusinessClasses
                         else if (!string.IsNullOrEmpty(childNode.InnerText))
                             _widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
-                    case "EnableBanner":
-                        if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.EnableBanner = tempBool;
-                        break;
-                    case "Banner":
-                        if (string.IsNullOrEmpty(childNode.InnerText))
-                            this.Banner = null;
-                        else
-                            this.Banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
-                        break;
                     case "SearchTags":
                         this.SearchTags.Deserialize(childNode);
                         break;
@@ -998,11 +1174,44 @@ namespace AutoSynchronizer.BusinessClasses
                         this.LineBreakProperties = new LineBreakProperties();
                         this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
                         this.LineBreakProperties.Deserialize(childNode);
-                        this.EnableBanner |= this.LineBreakProperties.EnableBanner;
-                        if (this.LineBreakProperties.Banner != null)
-                            this.Banner = this.LineBreakProperties.Banner;
                         break;
+                    case "BannerProperties":
+                        this.BannerProperties = new BannerProperties();
+                        this.BannerProperties.Deserialize(childNode);
+                        break;
+                    #region Compatibility with old versions
+                    case "EnableBanner":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            _oldEnableBanner = tempBool;
+                        break;
+                    case "Banner":
+                        if (string.IsNullOrEmpty(childNode.InnerText))
+                            _oldBanner = null;
+                        else
+                            _oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    #endregion
                 }
+            }
+
+            if (this.BannerProperties == null)
+                InitBannerProperties();
+        }
+
+        public void InitBannerProperties()
+        {
+            this.BannerProperties = new BannerProperties();
+            this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
+            this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
+            this.BannerProperties.Text = this.DisplayName;
+
+            this.BannerProperties.Enable = _oldEnableBanner;
+            this.BannerProperties.Image = _oldBanner;
+            if (this.LineBreakProperties != null)
+            {
+                this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
+                if (this.LineBreakProperties.Banner != null)
+                    this.BannerProperties.Image = this.LineBreakProperties.Banner;
             }
         }
 
@@ -1405,6 +1614,89 @@ namespace AutoSynchronizer.BusinessClasses
         }
     }
 
+    public class BannerProperties
+    {
+        public bool Configured { get; set; }
+
+        public bool Enable { get; set; }
+        public Image Image { get; set; }
+        public bool ShowText { get; set; }
+        public Alignment ImageAlignement { get; set; }
+        public string Text { get; set; }
+        public Color ForeColor { get; set; }
+        public Font Font { get; set; }
+
+        public BannerProperties()
+        {
+            this.ForeColor = Color.Black;
+            this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            this.Text = string.Empty;
+        }
+
+        public string Serialize()
+        {
+            FontConverter fontConverter = new FontConverter();
+            TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
+            result.AppendLine(@"<Image>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Image>");
+            result.AppendLine(@"<ImageAligement>" + ((int)this.ImageAlignement).ToString() + @"</ImageAligement>");
+            result.AppendLine(@"<ShowText>" + this.ShowText.ToString() + @"</ShowText>");
+            result.AppendLine(@"<Text>" + this.Text.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Text>");
+            result.AppendLine(@"<Font>" + fontConverter.ConvertToString(this.Font) + @"</Font>");
+            result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
+            return result.ToString();
+        }
+
+        public void Deserialize(XmlNode node)
+        {
+            FontConverter converter = new FontConverter();
+            int tempInt = 0;
+            bool tempBool = false;
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "Enable":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Enable = tempBool;
+                        break;
+                    case "Image":
+                        if (string.IsNullOrEmpty(childNode.InnerText))
+                            this.Image = null;
+                        else
+                            this.Image = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                        break;
+                    case "ImageAligement":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.ImageAlignement = (Alignment)tempInt;
+                        break;
+                    case "ShowText":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.ShowText = tempBool;
+                        break;
+                    case "Text":
+                        this.Text = childNode.InnerText;
+                        break;
+                    case "Font":
+                        try
+                        {
+                            this.Font = converter.ConvertFromString(childNode.InnerText) as Font;
+                        }
+                        catch
+                        {
+                        }
+                        break;
+                    case "ForeColor":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.ForeColor = Color.FromArgb(tempInt);
+                        break;
+                }
+            }
+            this.Configured = true;
+        }
+    }
+
     public class AutoWidget
     {
         public string Extension { get; set; }
@@ -1529,6 +1821,165 @@ namespace AutoSynchronizer.BusinessClasses
                     case "Time":
                         if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
                             this.Time = tempDateTime;
+                        break;
+                }
+            }
+        }
+    }
+
+    public class FolderLink
+    {
+        public Guid RootId { get; set; }
+        public DirectoryInfo Folder { get; set; }
+
+        public FolderLink()
+        {
+            this.RootId = Guid.Empty;
+        }
+
+        public bool IsDrive
+        {
+            get
+            {
+                return this.Folder.FullName.Equals(this.Folder.Root.FullName);
+            }
+        }
+
+        public virtual string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.Folder != null)
+            {
+                result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+                result.AppendLine(@"<Folder>" + this.Folder.FullName.ToString() + @"</Folder>");
+            }
+            return result.ToString();
+        }
+
+        public virtual void Deserialize(XmlNode node)
+        {
+            Guid tempGuid = Guid.Empty;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
+                        break;
+                    case "Folder":
+                        this.Folder = new DirectoryInfo(childNode.InnerText);
+                        break;
+                }
+            }
+        }
+    }
+
+    public class RootFolder : FolderLink
+    {
+        public Library Parent { get; private set; }
+        public int Order { get; set; }
+
+        public int Index
+        {
+            get
+            {
+                return this.Order + 1;
+            }
+        }
+
+        public string Path
+        {
+            get
+            {
+                return this.Folder != null ? this.Folder.FullName : null;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value) && Directory.Exists(value))
+                    this.Folder = new DirectoryInfo(value);
+            }
+        }
+
+        public RootFolder(Library parent)
+        {
+            this.Parent = parent;
+            this.Order = 0;
+        }
+
+        public override string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.Folder != null)
+            {
+                result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+                result.AppendLine(@"<Order>" + this.Order.ToString() + @"</Order>");
+                result.AppendLine(@"<Folder>" + this.Folder.FullName.ToString() + @"</Folder>");
+            }
+            return result.ToString();
+        }
+
+        public override void Deserialize(XmlNode node)
+        {
+            Guid tempGuid = Guid.Empty;
+            int tempInt;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
+                        break;
+                    case "Order":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.Order = tempInt;
+                        break;
+                    case "Folder":
+                        this.Folder = new DirectoryInfo(childNode.InnerText);
+                        break;
+                }
+            }
+        }
+    }
+
+    public class FileLink
+    {
+        public Guid RootId { get; set; }
+        public FileInfo File { get; set; }
+
+        public FileLink()
+        {
+            this.RootId = Guid.Empty;
+        }
+
+        public string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            if (this.File != null)
+            {
+                result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+                result.AppendLine(@"<File>" + this.File.FullName.ToString() + @"</File>");
+            }
+            return result.ToString();
+        }
+
+        public void Deserialize(XmlNode node)
+        {
+            Guid tempGuid = Guid.Empty;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "RootId":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.RootId = tempGuid;
+                        break;
+                    case "File":
+                        this.File = new FileInfo(childNode.InnerText);
                         break;
                 }
             }

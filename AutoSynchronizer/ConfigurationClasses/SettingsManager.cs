@@ -16,6 +16,7 @@ namespace AutoSynchronizer.ConfigurationClasses
         public const string OldPreviewFolderPrefix = @"!PNG_";
         public const string LibraryLogoFolder = @"!SD-Graphics";
         public const string OvernightsCalendarRootFolderName = @"!OC";
+        public const string ExtraFoldersRootFolderName = @"!Extra Roots";
         public const string SweepPeriodsFileName = @"SweepPeriods.xml";
 
         private static SettingsManager _instance = new SettingsManager();
