@@ -165,6 +165,13 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Floater {
+            get {
+                object obj = ResourceManager.GetObject("Floater", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Format_Font_Larger {
             get {
                 object obj = ResourceManager.GetObject("Format_Font_Larger", resourceCulture);

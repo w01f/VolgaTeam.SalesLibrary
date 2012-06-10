@@ -109,8 +109,8 @@ namespace SalesDepot.ToolForms.WallBin
                 FormMain.Instance.TopMost = false;
                 AppManager.Instance.ActivateMiniBar();
             }
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = this.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = false;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = false;
         }
 
         private void FormQuickView_FormClosed(object sender, FormClosedEventArgs e)

@@ -252,8 +252,8 @@ namespace SalesDepot.BusinessClasses
                 _formLinkPreview.SelectedFile = selectedFile;
                 _formLinkPreview.ShowDialog();
             }
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = FormMain.Instance.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
         public void OpenFile(FileInfo file)
@@ -462,8 +462,8 @@ namespace SalesDepot.BusinessClasses
                 _formPowerPointQuickView.ShowDialog();
                 selectedFile.PreviewContainer.SelectedIndex = temp;
             }
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = FormMain.Instance.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
         public void ViewPresentationOld(LibraryFile selectedFile)
@@ -494,8 +494,8 @@ namespace SalesDepot.BusinessClasses
                 _formPowerPointQuickViewOld.SelectedFile = selectedFile;
                 _formPowerPointQuickViewOld.ShowDialog();
             }
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = FormMain.Instance.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
         public void AddVideoIntoPresentation(FileInfo file)

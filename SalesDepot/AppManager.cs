@@ -68,7 +68,7 @@ namespace SalesDepot
 
         public void ActivateMainForm()
         {
-            IntPtr handle = ConfigurationClasses.RegistryHelper.RemoteLibraryHandle;
+            IntPtr handle = ConfigurationClasses.RegistryHelper.SalesDepotHandle;
             if (handle.Equals(IntPtr.Zero))
             {
                 handle = FormMain.Instance.Handle;
@@ -79,7 +79,7 @@ namespace SalesDepot
                         handle = proc[0].MainWindowHandle;
                 }
             }
-            ActivateForm(handle, ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary, false);
+            ActivateForm(handle, ConfigurationClasses.RegistryHelper.MaximizeSalesDepot, false);
         }
 
         public void ActivatePowerPoint()

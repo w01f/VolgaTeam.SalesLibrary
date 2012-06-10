@@ -92,8 +92,8 @@ namespace SalesDepot.ToolForms.WallBin
                 barLargeButtonItemEmail.Visibility = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView && (this.SelectedFile.Type == BusinessClasses.FileTypes.Word || this.SelectedFile.Type == BusinessClasses.FileTypes.Excel || this.SelectedFile.Type == BusinessClasses.FileTypes.PDF) ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
                 barLargeButtonItemPrint.Visibility = this.SelectedFile.Type == BusinessClasses.FileTypes.Word || this.SelectedFile.Type == BusinessClasses.FileTypes.Excel || this.SelectedFile.Type == BusinessClasses.FileTypes.PDF ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             }
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = this.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = false;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = false;
         }
 
         private void FormLinkPreview_FormClosed(object sender, FormClosedEventArgs e)

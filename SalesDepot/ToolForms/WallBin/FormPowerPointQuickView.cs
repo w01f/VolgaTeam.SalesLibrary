@@ -70,8 +70,8 @@ namespace SalesDepot.ToolForms.WallBin
                 barLargeButtonItemPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003;
                 barLargeButtonItemEmail.Enabled = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView;
             }
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = this.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = false;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = false;
         }
 
         private void FormPowerPointQuickView_FormClosed(object sender, FormClosedEventArgs e)

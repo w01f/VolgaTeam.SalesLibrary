@@ -16,7 +16,7 @@ namespace SalesDepot
         static void Main(string[] args)
         {
             bool firstInstance;
-            mutex = new Mutex(false, "Local\\RemoteLibraryApplication", out firstInstance);
+            mutex = new Mutex(false, "Local\\SalesDepotApplication", out firstInstance);
 
             ConfigurationClasses.SettingsManager.Instance.CheckStaticFolders();
             if (args != null && args.Length > 0)

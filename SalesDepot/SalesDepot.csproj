@@ -99,6 +99,12 @@
   <ItemGroup>
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
+    <Compile Include="FormFloater.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFloater.designer.cs">
+      <DependentUpon>FormFloater.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -324,6 +330,9 @@
     <Compile Include="ToolForms\WallBin\FormVideoViewOptions.Designer.cs">
       <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FormFloater.resx">
+      <DependentUpon>FormFloater.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\DayControl.resx">
       <DependentUpon>DayControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -578,6 +587,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Floater.png" />
     <None Include="Resources\MicrosoftOfficeOutlook.png" />
     <None Include="Resources\Cancel.png" />
     <None Include="Resources\InsertAllSlides.png" />

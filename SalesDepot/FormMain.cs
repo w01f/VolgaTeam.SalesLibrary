@@ -13,6 +13,9 @@ namespace SalesDepot
 
         private bool _alowToSave = false;
 
+        private int _floaterPositionX = int.MinValue;
+        private int _floaterPositionY = int.MinValue;
+
         public TabPages.TabHomeControl TabHome { get; set; }
         public TabPages.TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
 
@@ -40,7 +43,6 @@ namespace SalesDepot
             buttonItemHomeSearchByTags.CheckedChanged += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_CheckedChanged);
             buttonItemHomeSearchByFileName.CheckedChanged += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_CheckedChanged);
             buttonItemHomeSearchRecentFiles.CheckedChanged += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeSearchMode_CheckedChanged);
-            buttonItemHomeAddSlide.Click += new EventHandler(this.TabHome.SolutionViewControl.buttonItemHomeAddSlide_Click);
             buttonItemHomeHelp.Click += new EventHandler(this.TabHome.buttonItemHomeHelp_Click);
 
             buttonItemSettingsLaunchPowerPoint.CheckedChanged += new EventHandler(this.TabHome.buttonItemSettingsLaunchPowerPoint_CheckedChanged);
@@ -106,9 +108,30 @@ namespace SalesDepot
                 labelItemCalendarLogo.Image = new Bitmap(ConfigurationClasses.SettingsManager.Instance.CalendarLogoPath);
             this.Text = ConfigurationClasses.SettingsManager.Instance.SalesDepotName;
 
-            ribbonBarHomeClassicView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ClassicTitle) ? ConfigurationClasses.SettingsManager.Instance.ClassicTitle : FormMain.Instance.ribbonBarHomeClassicView.Text;
-            ribbonBarHomeListView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ListTitle) ? ConfigurationClasses.SettingsManager.Instance.ListTitle : FormMain.Instance.ribbonBarHomeListView.Text;
-            ribbonBarHomeSolutionView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.SolutionTitle) ? ConfigurationClasses.SettingsManager.Instance.SolutionTitle : FormMain.Instance.ribbonBarHomeSolutionView.Text;
+            buttonItemHomeClassicView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ClassicTitle) ? ConfigurationClasses.SettingsManager.Instance.ClassicTitle : FormMain.Instance.buttonItemHomeClassicView.Text;
+            buttonItemHomeListView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ListTitle) ? ConfigurationClasses.SettingsManager.Instance.ListTitle : FormMain.Instance.buttonItemHomeListView.Text;
+            buttonItemHomeSolutionView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.SolutionTitle) ? ConfigurationClasses.SettingsManager.Instance.SolutionTitle : FormMain.Instance.buttonItemHomeSolutionView.Text;
+            ribbonBarHomeView.RecalcLayout();
+        }
+
+        private void buttonItemFloater_Click(object sender, EventArgs e)
+        {
+            FormMain.Instance.Opacity = 0;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = false;
+            using (FormFloater form = new FormFloater(this.Left + this.Width - 50, this.Top + 50, _floaterPositionX, _floaterPositionY, labelItemPackageLogo.Image, ribbonBarStations.Text))
+            {
+                if (form.ShowDialog() != System.Windows.Forms.DialogResult.No)
+                {
+                    _floaterPositionY = form.Top;
+                    _floaterPositionX = form.Left;
+                    FormMain.Instance.Opacity = 1;
+                    ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
+                    ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
+                    AppManager.Instance.ActivateMainForm();
+                }
+                else
+                    this.Close();
+            }
         }
 
         private void buttonItemExit_Click(object sender, EventArgs e)
@@ -146,8 +169,8 @@ namespace SalesDepot
 
         private void FormMain_Shown(object sender, EventArgs e)
         {
-            ConfigurationClasses.RegistryHelper.RemoteLibraryHandle = this.Handle;
-            ConfigurationClasses.RegistryHelper.MaximizeRemoteLibrary = true;
+            ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
+            ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
             using (ToolForms.FormProgress form = new ToolForms.FormProgress())
             {
                 form.laProgress.Text = ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Loading Remote Sales Libraries..." : "Loading Sales Libraries...";
