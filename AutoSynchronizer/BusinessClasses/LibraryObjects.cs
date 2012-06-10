@@ -136,7 +136,21 @@ namespace AutoSynchronizer.BusinessClasses
             if (File.Exists(file))
             {
                 XmlDocument document = new XmlDocument();
-                document.Load(file);
+                bool fileBusy = true;
+                do
+                {
+                    try
+                    {
+                        document.Load(file);
+                        fileBusy = false;
+                    }
+                    catch
+                    {
+                        fileBusy = true;
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                }
+                while (fileBusy);
 
                 XmlNode node = document.SelectSingleNode(@"/Library/Name");
                 if (node != null)

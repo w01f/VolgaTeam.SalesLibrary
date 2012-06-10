@@ -209,23 +209,23 @@ namespace AutoSynchronizer.BusinessClasses
     public class OvernightsEmailGrabber
     {
         private System.Threading.Timer _timer = null;
-        private DateTime _nextGrabTime = DateTime.MinValue;
         private InteropClasses.OutlookHelper _outlook = null;
 
+        public DateTime NextGrabTime { get; set; }
         public LibraryWrapper Manager { get; private set; }
 
         public OvernightsEmailGrabber(LibraryWrapper manager)
         {
+            this.NextGrabTime = DateTime.MinValue;
             this.Manager = manager;
             _outlook = new InteropClasses.OutlookHelper(this.Manager.Library.OvernightsCalendar);
-            ScheduleNextGrab();
         }
 
         #region Schedule Methods
         private long GetMillisecondsForNextGrab()
         {
             DateTime nowTime = DateTime.Now;
-            DateTime nextTime = _nextGrabTime.Equals(DateTime.MinValue) ? nowTime : _nextGrabTime;
+            DateTime nextTime = this.NextGrabTime.Equals(DateTime.MinValue) ? nowTime : this.NextGrabTime;
             TimeSpan difference = nextTime.Subtract(nowTime);
             long totalMilliseconds = (long)difference.TotalMilliseconds;
             return totalMilliseconds;
@@ -240,7 +240,7 @@ namespace AutoSynchronizer.BusinessClasses
             }
         }
 
-        private void ScheduleNextGrab()
+        public void ScheduleNextGrab()
         {
             StopBackgroundGrab();
             if (this.Manager.Library.OvernightsCalendar.EnableEmailGrabber)
@@ -249,7 +249,7 @@ namespace AutoSynchronizer.BusinessClasses
                 {
                     GrabEmail();
 
-                    _nextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.EmailGrabInterval);
+                    this.NextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.EmailGrabInterval);
                     ScheduleNextGrab();
                 }, null, GetMillisecondsForNextGrab(), System.Threading.Timeout.Infinite);
             }

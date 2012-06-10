@@ -85,9 +85,16 @@ namespace AutoSynchronizer.BusinessClasses
                 this.Syncer.StopBackgroundSync();
             this.Syncer = new LibrarySynchronizer(this);
 
+            DateTime savedGrabTime = DateTime.MinValue;
             if (this.EmailGrabber != null)
+            {
+
                 this.EmailGrabber.StopBackgroundGrab();
+                savedGrabTime = this.EmailGrabber.NextGrabTime;
+            }
             this.EmailGrabber = new OvernightsEmailGrabber(this);
+            this.EmailGrabber.NextGrabTime = savedGrabTime;
+            this.EmailGrabber.ScheduleNextGrab();
 
             if (_fileGrabberWatcher != null)
             {
