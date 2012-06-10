@@ -31,28 +31,13 @@ namespace SalesDepot.PresentationClasses.WallBin
         #region Methods
         public void ApplyView()
         {
-            FormMain.Instance.ribbonBarEmailBin.Visible = false;
-            FormMain.Instance.ribbonBarViewSettings.Visible = false;
-
-            if (!ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
-            {
-                FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
-                FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
-            }
-            else
-                FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
-            
-            FormMain.Instance.ribbonBarHomeAddSlide.Visible = true;
-            FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
+            FormMain.Instance.ribbonBarEmailBin.Enabled = false;
+            FormMain.Instance.ribbonBarViewSettings.Enabled = false;
+            FormMain.Instance.ribbonBarHomeSearchMode.Enabled = !ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection;
 
             FormMain.Instance.comboBoxItemStations.Visible = false;
             FormMain.Instance.comboBoxItemPages.Visible = false;
             FormMain.Instance.ribbonBarStations.RecalcLayout();
-
-            FormMain.Instance.ribbonBarHomeHelp.Visible = true;
-            FormMain.Instance.ribbonBarHomeHelp.BringToFront();
-            FormMain.Instance.ribbonBarExit.Visible = true;
-            FormMain.Instance.ribbonBarExit.BringToFront();
 
             if (ConfigurationClasses.SettingsManager.Instance.SolutionTitleView)
                 FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
@@ -180,7 +165,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             barButtonItemSave.Enabled = false;
             barButtonItemSaveAsPDF.Enabled = false;
             barButtonItemEmailLink.Enabled = false;
-            FormMain.Instance.buttonItemHomeAddSlide.Enabled = false;
+            barButtonItemAddSlide.Enabled = false;
             barButtonItemOpenQuickView.Enabled = false;
             barButtonItemPrintLink.Enabled = false;
             splitContainerControlSerachResults.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel1;
@@ -195,7 +180,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         barButtonItemSave.Enabled = true;
                         barButtonItemSaveAsPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003 & true;
                         barButtonItemEmailLink.Enabled = true;
-                        FormMain.Instance.buttonItemHomeAddSlide.Enabled = true;
+                        barButtonItemAddSlide.Enabled = true;
                         barButtonItemOpenQuickView.Enabled = true;
                         barButtonItemPrintLink.Enabled = true;
                         if (file.PreviewContainer != null)
@@ -739,6 +724,11 @@ namespace SalesDepot.PresentationClasses.WallBin
                 _selectedFileViewer.Print();
         }
 
+        private void barButtonItemAddSlide_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            InsertSlide();
+        }
+
         private void barButtonItemOpenQuickView_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             Viewers.PowerPointViewer viewer = _selectedFileViewer as Viewers.PowerPointViewer;
@@ -894,11 +884,6 @@ namespace SalesDepot.PresentationClasses.WallBin
                     ConfigurationClasses.SettingsManager.Instance.SaveSettings();
                 }
             }
-        }
-
-        public void buttonItemHomeAddSlide_Click(object sender, EventArgs e)
-        {
-            InsertSlide();
         }
         #endregion
     }

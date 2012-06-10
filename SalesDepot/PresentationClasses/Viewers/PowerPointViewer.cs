@@ -122,6 +122,8 @@ namespace SalesDepot.PresentationClasses.Viewers
                     form.TopMost = true;
                     Thread thread = new Thread(delegate()
                     {
+                        AppManager.Instance.ActivatePowerPoint();
+                        AppManager.Instance.ActivateMiniBar();
                         ToolClasses.ActivityRecorder.Instance.WriteActivity();
                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
                         InteropClasses.PowerPointHelper.Instance.AppendSlide(this.File.PreviewContainer.SelectedIndex + 1);

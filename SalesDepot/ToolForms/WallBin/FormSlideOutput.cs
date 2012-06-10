@@ -20,6 +20,7 @@ namespace SalesDepot.ToolForms.WallBin
         private void FormSlideOutput_Load(object sender, System.EventArgs e)
         {
             buttonXBackToForm.Text = string.Format(buttonXBackToForm.Text, ConfigurationClasses.SettingsManager.Instance.SalesDepotName);
+            AppManager.Instance.ActivateForm(this.Handle, false, false);
         }
     }
 }

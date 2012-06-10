@@ -478,37 +478,31 @@ namespace SalesDepot.PresentationClasses.WallBin
             #endregion
 
             #region Text Size and Coordinates
-            Size textSize;
+            SizeF textSize = new SizeF();
             if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
-            {
-                textSize = new Size(Int32.MaxValue, Int32.MaxValue);
-                textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix);
-            }
+                using (Graphics g = labelControlText.CreateGraphics())
+                    textSize = g.MeasureString(text, font, Int32.MaxValue);
             else
-            {
-                textSize = new Size(Int32.MaxValue, Int32.MaxValue);
-                textSize = TextRenderer.MeasureText(text, font, textSize, TextFormatFlags.SingleLine | TextFormatFlags.NoPrefix);
-            }
-
-            textSize = new Size(textSize.Width, textSize.Height + 1);
+                using (Graphics g = labelControlText.CreateGraphics())
+                    textSize = g.MeasureString(text, font, Int32.MaxValue);
 
             if (file.BannerProperties.Enable)
             {
                 textLeft = imageLeft + imageWidth;
-                textWidth = textSize.Width;
-                textHeight = textSize.Height;
+                textWidth = (int)textSize.Width;
+                textHeight = (int)textSize.Height;
             }
             else if (file.Type == BusinessClasses.FileTypes.LineBreak)
             {
                 textLeft = imageLeft + imageWidth + ImageWidthMargin;
-                textWidth = textSize.Width;
-                textHeight = textSize.Height;
+                textWidth = (int)textSize.Width;
+                textHeight = (int)textSize.Height;
             }
             else
             {
                 textLeft = imageLeft + imageWidth + (_containsWidgets ? ImageWidthMargin : 0);
-                textWidth = textSize.Width;
-                textHeight = textSize.Height;
+                textWidth = (int)textSize.Width;
+                textHeight = (int)textSize.Height;
             }
 
             columnWidth = textLeft + textWidth + 10;

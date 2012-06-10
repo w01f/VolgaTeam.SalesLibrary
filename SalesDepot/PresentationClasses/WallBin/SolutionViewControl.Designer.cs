@@ -55,6 +55,9 @@
             DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
             DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
             DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.splitContainerControlMain = new DevExpress.XtraEditors.SplitContainerControl();
@@ -69,6 +72,7 @@
             this.barButtonItemSaveAsPDF = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemEmailLink = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemPrintLink = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemAddSlide = new DevExpress.XtraBars.BarLargeButtonItem();
             this.barButtonItemOpenQuickView = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSearch = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemClear = new DevExpress.XtraBars.BarButtonItem();
@@ -288,8 +292,9 @@
             this.barButtonItemSaveAsPDF,
             this.barButtonItemSearch,
             this.barButtonItemClear,
-            this.barStaticItemFileNumber});
-            this.barManager.MaxItemId = 12;
+            this.barStaticItemFileNumber,
+            this.barButtonItemAddSlide});
+            this.barManager.MaxItemId = 13;
             // 
             // barLinksOperations
             // 
@@ -303,6 +308,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSaveAsPDF),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemEmailLink),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPrintLink),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAddSlide),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemOpenQuickView),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSearch),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemClear),
@@ -386,6 +392,21 @@
             this.barButtonItemPrintLink.SuperTip = superToolTip5;
             this.barButtonItemPrintLink.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPrintLink_ItemClick);
             // 
+            // barButtonItemAddSlide
+            // 
+            this.barButtonItemAddSlide.Caption = "Add Slide";
+            this.barButtonItemAddSlide.Enabled = false;
+            this.barButtonItemAddSlide.Glyph = global::SalesDepot.Properties.Resources.InsertSlide;
+            this.barButtonItemAddSlide.Id = 12;
+            this.barButtonItemAddSlide.Name = "barButtonItemAddSlide";
+            toolTipTitleItem6.Text = "Add Slide";
+            toolTipItem6.LeftIndent = 6;
+            toolTipItem6.Text = "Add the Visible Slide to your active presentation ";
+            superToolTip6.Items.Add(toolTipTitleItem6);
+            superToolTip6.Items.Add(toolTipItem6);
+            this.barButtonItemAddSlide.SuperTip = superToolTip6;
+            this.barButtonItemAddSlide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemAddSlide_ItemClick);
+            // 
             // barButtonItemOpenQuickView
             // 
             this.barButtonItemOpenQuickView.Caption = "Open in Quick View";
@@ -393,12 +414,12 @@
             this.barButtonItemOpenQuickView.Glyph = global::SalesDepot.Properties.Resources.OpenQuickView;
             this.barButtonItemOpenQuickView.Id = 5;
             this.barButtonItemOpenQuickView.Name = "barButtonItemOpenQuickView";
-            toolTipTitleItem6.Text = "QuickView";
-            toolTipItem6.LeftIndent = 6;
-            toolTipItem6.Text = "Open the selected PowerPoint file in QuickView";
-            superToolTip6.Items.Add(toolTipTitleItem6);
-            superToolTip6.Items.Add(toolTipItem6);
-            this.barButtonItemOpenQuickView.SuperTip = superToolTip6;
+            toolTipTitleItem7.Text = "QuickView";
+            toolTipItem7.LeftIndent = 6;
+            toolTipItem7.Text = "Open the selected PowerPoint file in QuickView";
+            superToolTip7.Items.Add(toolTipTitleItem7);
+            superToolTip7.Items.Add(toolTipItem7);
+            this.barButtonItemOpenQuickView.SuperTip = superToolTip7;
             this.barButtonItemOpenQuickView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemOpenQuickView_ItemClick);
             // 
             // barButtonItemSearch
@@ -407,12 +428,12 @@
             this.barButtonItemSearch.Glyph = global::SalesDepot.Properties.Resources.Search;
             this.barButtonItemSearch.Id = 8;
             this.barButtonItemSearch.Name = "barButtonItemSearch";
-            toolTipTitleItem7.Text = "File Search";
-            toolTipItem7.LeftIndent = 6;
-            toolTipItem7.Text = "Search for Files Now";
-            superToolTip7.Items.Add(toolTipTitleItem7);
-            superToolTip7.Items.Add(toolTipItem7);
-            this.barButtonItemSearch.SuperTip = superToolTip7;
+            toolTipTitleItem8.Text = "File Search";
+            toolTipItem8.LeftIndent = 6;
+            toolTipItem8.Text = "Search for Files Now";
+            superToolTip8.Items.Add(toolTipTitleItem8);
+            superToolTip8.Items.Add(toolTipItem8);
+            this.barButtonItemSearch.SuperTip = superToolTip8;
             this.barButtonItemSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSearch_ItemClick);
             // 
             // barButtonItemClear
@@ -421,12 +442,12 @@
             this.barButtonItemClear.Glyph = global::SalesDepot.Properties.Resources.ClearSolutionView;
             this.barButtonItemClear.Id = 9;
             this.barButtonItemClear.Name = "barButtonItemClear";
-            toolTipTitleItem8.Text = "Reset";
-            toolTipItem8.LeftIndent = 6;
-            toolTipItem8.Text = "Wipe all Search Categories and start a New Search";
-            superToolTip8.Items.Add(toolTipTitleItem8);
-            superToolTip8.Items.Add(toolTipItem8);
-            this.barButtonItemClear.SuperTip = superToolTip8;
+            toolTipTitleItem9.Text = "Reset";
+            toolTipItem9.LeftIndent = 6;
+            toolTipItem9.Text = "Wipe all Search Categories and start a New Search";
+            superToolTip9.Items.Add(toolTipTitleItem9);
+            superToolTip9.Items.Add(toolTipItem9);
+            this.barButtonItemClear.SuperTip = superToolTip9;
             this.barButtonItemClear.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemClear_ItemClick);
             // 
             // barStaticItemFileNumber
@@ -1384,6 +1405,7 @@
         private DevExpress.XtraEditors.CheckEdit checkEditSearchByFilesExactMatch;
         private DevExpress.XtraEditors.CheckEdit checkEditSearchByFilesAnyWord;
         private DevExpress.XtraBars.BarStaticItem barStaticItemFileNumber;
+        private DevExpress.XtraBars.BarLargeButtonItem barButtonItemAddSlide;
 
 
     }

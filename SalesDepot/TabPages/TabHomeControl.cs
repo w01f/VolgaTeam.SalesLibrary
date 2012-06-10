@@ -166,36 +166,10 @@ namespace SalesDepot.TabPages
             }
         }
 
-        private void PrepareRibbonToChangeView()
-        {
-            FormMain.Instance.comboBoxItemPages.Visible = true;
-
-            FormMain.Instance.ribbonBarExit.Visible = true;
-            FormMain.Instance.ribbonBarHomeHelp.Visible = true;
-            FormMain.Instance.ribbonBarViewSettings.Visible = true;
-            FormMain.Instance.ribbonBarEmailBin.Visible = true;
-            FormMain.Instance.ribbonBarHomeAddSlide.Visible = true;
-            FormMain.Instance.ribbonBarHomeSearchMode.Visible = true;
-            FormMain.Instance.ribbonBarEmailBin.BringToFront();
-            FormMain.Instance.ribbonBarViewSettings.BringToFront();
-            FormMain.Instance.ribbonBarHomeSearchMode.BringToFront();
-            FormMain.Instance.ribbonBarHomeAddSlide.BringToFront();
-            FormMain.Instance.ribbonBarHomeHelp.BringToFront();
-            FormMain.Instance.ribbonBarExit.BringToFront();
-
-            FormMain.Instance.ribbonBarHomeHelp.Visible = false;
-            FormMain.Instance.ribbonBarExit.Visible = false;
-            FormMain.Instance.ribbonBarViewSettings.Visible = false;
-            FormMain.Instance.ribbonBarEmailBin.Visible = false;
-            FormMain.Instance.ribbonBarHomeAddSlide.Visible = false;
-            FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
-        }
-
         private void ApplySelectedView()
         {
             pnEmpty.BringToFront();
             Application.DoEvents();
-            PrepareRibbonToChangeView();
             this.SelectedView.ApplyView();
             if (!pnMain.Controls.Contains(this.SelectedView as Control))
                 pnMain.Controls.Add(this.SelectedView as Control);

@@ -36,23 +36,15 @@ namespace SalesDepot.PresentationClasses.WallBin
 
         public void ApplyView()
         {
-            FormMain.Instance.ribbonBarEmailBin.Visible = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
-            FormMain.Instance.ribbonBarEmailBin.BringToFront();
+            FormMain.Instance.ribbonBarEmailBin.Enabled = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
             FormMain.Instance.buttonItemEmailBin.Checked = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin ? ConfigurationClasses.SettingsManager.Instance.ShowEmailBin : false;
-            FormMain.Instance.ribbonBarViewSettings.Visible = true;
-            FormMain.Instance.ribbonBarViewSettings.BringToFront();
+            FormMain.Instance.ribbonBarViewSettings.Enabled = true;
 
-            FormMain.Instance.ribbonBarHomeSearchMode.Visible = false;
-            FormMain.Instance.ribbonBarHomeAddSlide.Visible = false;
+            FormMain.Instance.ribbonBarHomeSearchMode.Enabled = false;
 
             FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1;
             FormMain.Instance.comboBoxItemPages.Visible = true;
             FormMain.Instance.ribbonBarStations.RecalcLayout();
-
-            FormMain.Instance.ribbonBarHomeHelp.Visible = true;
-            FormMain.Instance.ribbonBarHomeHelp.BringToFront();
-            FormMain.Instance.ribbonBarExit.Visible = true;
-            FormMain.Instance.ribbonBarExit.BringToFront();
 
             if (ConfigurationClasses.SettingsManager.Instance.ClassicView)
                 FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _classicToolTip);
