@@ -132,137 +132,137 @@ namespace AutoSynchronizer.BusinessClasses
             this.EnableAutoSync = false;
             this.SyncTimes.Clear();
 
+            bool fileBusy = true;
             string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
-            if (File.Exists(file))
+            do
             {
-                XmlDocument document = new XmlDocument();
-                bool fileBusy = true;
-                do
+                try
                 {
-                    try
+                    if (File.Exists(file))
                     {
+                        XmlDocument document = new XmlDocument();
                         document.Load(file);
                         fileBusy = false;
-                    }
-                    catch
-                    {
-                        fileBusy = true;
-                        System.Threading.Thread.Sleep(1000);
+
+                        XmlNode node = document.SelectSingleNode(@"/Library/Name");
+                        if (node != null)
+                            this.Name = node.InnerText;
+                        node = document.SelectSingleNode(@"/Library/BrandingText");
+                        if (node != null)
+                            this.BrandingText = node.InnerText;
+                        node = document.SelectSingleNode(@"/Library/SyncDate");
+                        if (node != null)
+                            if (DateTime.TryParse(node.InnerText, out tempDate))
+                                this.SyncDate = tempDate;
+                        node = document.SelectSingleNode(@"/Library/ApplyAppearanceForAllWindows");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.ApplyAppearanceForAllWindows = tempBool;
+                        node = document.SelectSingleNode(@"/Library/ApplyWidgetForAllWindows");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.ApplyWidgetForAllWindows = tempBool;
+                        node = document.SelectSingleNode(@"/Library/ApplyBannerForAllWindows");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.ApplyBannerForAllWindows = tempBool;
+                        node = document.SelectSingleNode(@"/Library/MinimizeOnSync");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.MinimizeOnSync = tempBool;
+                        node = document.SelectSingleNode(@"/Library/CloseAfterSync");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.CloseAfterSync = tempBool;
+                        node = document.SelectSingleNode(@"/Library/ShowProgressDuringSync");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.ShowProgressDuringSync = tempBool;
+                        node = document.SelectSingleNode(@"/Library/EnableInactiveLinks");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.EnableInactiveLinks = tempBool;
+                        node = document.SelectSingleNode(@"/Library/InactiveLinksBoldWarning");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.InactiveLinksBoldWarning = tempBool;
+                        node = document.SelectSingleNode(@"/Library/ReplaceInactiveLinksWithLineBreak");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.ReplaceInactiveLinksWithLineBreak = tempBool;
+                        node = document.SelectSingleNode(@"/Library/InactiveLinksMessageAtStartup");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.InactiveLinksMessageAtStartup = tempBool;
+                        node = document.SelectSingleNode(@"/Library/SendEmail");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.SendEmail = tempBool;
+
+                        node = document.SelectSingleNode(@"/Library/ExtraRoots");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                RootFolder folder = new RootFolder(this);
+                                folder.Deserialize(childNode);
+                                this.ExtraFolders.Add(folder);
+                            }
+                        node = document.SelectSingleNode(@"/Library/Pages");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                LibraryPage page = new LibraryPage(this);
+                                page.Deserialize(childNode);
+                                this.Pages.Add(page);
+                            }
+                        node = document.SelectSingleNode(@"/Library/EmailList");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                if (childNode.Name.Equals("Email"))
+                                    this.EmailList.Add(childNode.InnerText);
+                            }
+                        node = document.SelectSingleNode(@"/Library/AutoWidgets");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                AutoWidget autoWidget = new AutoWidget();
+                                autoWidget.Deserialize(childNode);
+                                this.AutoWidgets.Add(autoWidget);
+                            }
+
+                        #region Auto Sync Settings
+                        node = document.SelectSingleNode(@"/Library/EnableAutoSync");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.EnableAutoSync = tempBool;
+                        node = document.SelectSingleNode(@"/Library/AutoSyncTimes");
+                        if (node != null)
+                            foreach (XmlNode syncTimeNode in node.ChildNodes)
+                            {
+                                if (syncTimeNode.Name.Equals("SyncTime"))
+                                {
+                                    TimePoint synctTime = new TimePoint();
+                                    synctTime.Deserialize(syncTimeNode);
+                                    this.SyncTimes.Add(synctTime);
+                                }
+                            }
+                        #endregion
+
+                        node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
+                        if (node != null)
+                            this.OvernightsCalendar.Deserialize(node);
+                        this.IsConfigured = true;
                     }
                 }
-                while (fileBusy);
-
-                XmlNode node = document.SelectSingleNode(@"/Library/Name");
-                if (node != null)
-                    this.Name = node.InnerText;
-                node = document.SelectSingleNode(@"/Library/BrandingText");
-                if (node != null)
-                    this.BrandingText = node.InnerText;
-                node = document.SelectSingleNode(@"/Library/SyncDate");
-                if (node != null)
-                    if (DateTime.TryParse(node.InnerText, out tempDate))
-                        this.SyncDate = tempDate;
-                node = document.SelectSingleNode(@"/Library/ApplyAppearanceForAllWindows");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.ApplyAppearanceForAllWindows = tempBool;
-                node = document.SelectSingleNode(@"/Library/ApplyWidgetForAllWindows");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.ApplyWidgetForAllWindows = tempBool;
-                node = document.SelectSingleNode(@"/Library/ApplyBannerForAllWindows");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.ApplyBannerForAllWindows = tempBool;
-                node = document.SelectSingleNode(@"/Library/MinimizeOnSync");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.MinimizeOnSync = tempBool;
-                node = document.SelectSingleNode(@"/Library/CloseAfterSync");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.CloseAfterSync = tempBool;
-                node = document.SelectSingleNode(@"/Library/ShowProgressDuringSync");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.ShowProgressDuringSync = tempBool;
-                node = document.SelectSingleNode(@"/Library/EnableInactiveLinks");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.EnableInactiveLinks = tempBool;
-                node = document.SelectSingleNode(@"/Library/InactiveLinksBoldWarning");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.InactiveLinksBoldWarning = tempBool;
-                node = document.SelectSingleNode(@"/Library/ReplaceInactiveLinksWithLineBreak");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.ReplaceInactiveLinksWithLineBreak = tempBool;
-                node = document.SelectSingleNode(@"/Library/InactiveLinksMessageAtStartup");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.InactiveLinksMessageAtStartup = tempBool;
-                node = document.SelectSingleNode(@"/Library/SendEmail");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.SendEmail = tempBool;
-
-                node = document.SelectSingleNode(@"/Library/ExtraRoots");
-                if (node != null)
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        RootFolder folder = new RootFolder(this);
-                        folder.Deserialize(childNode);
-                        this.ExtraFolders.Add(folder);
-                    }
-                node = document.SelectSingleNode(@"/Library/Pages");
-                if (node != null)
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        LibraryPage page = new LibraryPage(this);
-                        page.Deserialize(childNode);
-                        this.Pages.Add(page);
-                    }
-                node = document.SelectSingleNode(@"/Library/EmailList");
-                if (node != null)
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        if (childNode.Name.Equals("Email"))
-                            this.EmailList.Add(childNode.InnerText);
-                    }
-                node = document.SelectSingleNode(@"/Library/AutoWidgets");
-                if (node != null)
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        AutoWidget autoWidget = new AutoWidget();
-                        autoWidget.Deserialize(childNode);
-                        this.AutoWidgets.Add(autoWidget);
-                    }
-
-                #region Auto Sync Settings
-                node = document.SelectSingleNode(@"/Library/EnableAutoSync");
-                if (node != null)
-                    if (bool.TryParse(node.InnerText, out tempBool))
-                        this.EnableAutoSync = tempBool;
-                node = document.SelectSingleNode(@"/Library/AutoSyncTimes");
-                if (node != null)
-                    foreach (XmlNode syncTimeNode in node.ChildNodes)
-                    {
-                        if (syncTimeNode.Name.Equals("SyncTime"))
-                        {
-                            TimePoint synctTime = new TimePoint();
-                            synctTime.Deserialize(syncTimeNode);
-                            this.SyncTimes.Add(synctTime);
-                        }
-                    }
-                #endregion
-
-
-                node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
-                if (node != null)
-                    this.OvernightsCalendar.Deserialize(node);
-                this.IsConfigured = true;
+                catch
+                {
+                    fileBusy = true;
+                    System.Threading.Thread.Sleep(1000);
+                }
             }
+            while (fileBusy);
+
             if (this.Pages.Count == 0)
                 this.Pages.Add(new LibraryPage(this));
         }
