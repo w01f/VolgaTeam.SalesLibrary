@@ -197,7 +197,6 @@ namespace SalesDepot
 
                 thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
-                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
                     this.Invoke((MethodInvoker)delegate()
                     {
                         this.TabHome.LoadPage();

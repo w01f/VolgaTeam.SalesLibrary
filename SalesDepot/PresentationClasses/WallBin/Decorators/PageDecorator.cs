@@ -18,15 +18,15 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         public LibraryDecorator Parent { get; private set; }
         public PresentationClasses.WallBin.FolderBoxControl ActiveBox { get; set; }
 
-        public PageDecorator(LibraryDecorator parent,BusinessClasses.LibraryPage page)
+        public PageDecorator(LibraryDecorator parent, BusinessClasses.LibraryPage page)
         {
             this.Page = page;
             this.Parent = parent;
             this.Container = new DevExpress.XtraEditors.XtraScrollableControl();
-            this.Container.Resize+=new EventHandler(WallBin_Resize);
+            this.Container.Resize += new EventHandler(WallBin_Resize);
             this.TabPage = new DevExpress.XtraTab.XtraTabPage();
             this.TabPage.Tag = this;
-            this.TabPage.Text = page.Name.Replace("&","&&");
+            this.TabPage.Text = page.Name.Replace("&", "&&");
 
             GetPageLogo();
             BuildPage();
@@ -38,7 +38,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             DirectoryInfo dir = new DirectoryInfo(Path.Combine(ConfigurationClasses.SettingsManager.Instance.LibraryLogoFolder, this.Parent.Parent.Package.Folder.Name));
             if (dir.Exists)
             {
-                FileInfo[] files = dir.GetFiles(string.Format(ConfigurationClasses.SettingsManager.PageLogoFileTemplate,(this.Page.Order + 1).ToString()));
+                FileInfo[] files = dir.GetFiles(string.Format(ConfigurationClasses.SettingsManager.PageLogoFileTemplate, (this.Page.Order + 1).ToString()));
                 if (files.Length > 0)
                     _logo = new Bitmap(files[0].FullName);
             }
@@ -142,8 +142,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         private void RefreshPanelHeight()
         {
-            int maxHeight = this.Container.Height - (_headerPanel != null ? _headerPanel.Height : 0);
-
             int realHeight = 0;
             for (int i = 0; i < 3; i++)
             {
@@ -154,10 +152,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 if (realHeight < columnHeight)
                     realHeight = columnHeight;
             }
-
-            if (realHeight < maxHeight)
-                realHeight = maxHeight;
-
             _parentPanel.Height = realHeight;
         }
 
@@ -174,7 +168,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 _headerPanel.Visible = ConfigurationClasses.SettingsManager.Instance.ClassicView;
         }
 
-        private void FitColumnsToPage()
+        public void FitColumnsToPage()
         {
             if (_headerPanel != null)
             {

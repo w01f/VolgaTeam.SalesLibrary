@@ -22,12 +22,13 @@ namespace SalesDepot.PresentationClasses.WallBin
             xtraTabControl.SelectedPageChanged -= new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
             xtraTabControl.TabPages.Clear();
             xtraTabControl.TabPages.AddRange(_pages.Select(x => x.TabPage).ToArray());
-            xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
+            foreach (Decorators.PageDecorator page in _pages)
+                page.FitPage();
             DevExpress.XtraTab.XtraTabPage selectedPage = xtraTabControl.TabPages.Where(x => x.Text.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedPage.Replace("&", "&&"))).FirstOrDefault();
             if (selectedPage != null)
                 xtraTabControl.SelectedTabPage = selectedPage;
-            foreach (Decorators.PageDecorator page in _pages)
-                page.FitPage();
+            xtraTabControl_SelectedPageChanged(null, new DevExpress.XtraTab.TabPageChangedEventArgs(null, xtraTabControl.SelectedTabPage));
+            xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
             pnEmpty.SendToBack();
         }
 
@@ -49,6 +50,8 @@ namespace SalesDepot.PresentationClasses.WallBin
                 if (pageDecorator != null)
                 {
                     pageDecorator.ApplyPageLogo();
+                    pageDecorator.FitColumnsToPage();
+                    pageDecorator.FitObjectsToPage();
                     ConfigurationClasses.SettingsManager.Instance.SelectedPage = pageDecorator.Page.Name;
                     ConfigurationClasses.SettingsManager.Instance.SaveSettings();
                 }

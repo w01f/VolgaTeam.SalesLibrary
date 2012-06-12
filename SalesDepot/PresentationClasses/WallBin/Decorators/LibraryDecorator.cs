@@ -136,9 +136,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 page.Container.Parent = null;
                 page.TabPage.Controls.Add(page.Container);
             }
-            this.TabControl.AddPages(this.Pages.ToArray());
             if (!this.Container.Controls.Contains(this.TabControl))
                 this.Container.Controls.Add(this.TabControl);
+            this.TabControl.AddPages(this.Pages.ToArray());
             this.TabControl.BringToFront();
         }
 

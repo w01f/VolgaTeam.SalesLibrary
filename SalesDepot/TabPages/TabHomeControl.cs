@@ -235,7 +235,6 @@ namespace SalesDepot.TabPages
                         form.TopMost = true;
                         System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                         {
-                            BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
                             FormMain.Instance.Invoke((MethodInvoker)delegate()
                             {
                                 ApplySelectedView();
@@ -453,7 +452,6 @@ namespace SalesDepot.TabPages
                 form.TopMost = true;
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
-                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
                         ApplySelectedView();
@@ -501,7 +499,6 @@ namespace SalesDepot.TabPages
                 form.TopMost = true;
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
-                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
                         pnEmpty.BringToFront();
@@ -529,7 +526,6 @@ namespace SalesDepot.TabPages
                 form.TopMost = true;
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
-                    BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
                         pnEmpty.BringToFront();

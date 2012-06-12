@@ -30,6 +30,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             set
             {
                 _folder = value;
+                laIndex.Text = (_folder.AbsoluteRowOrder + 1).ToString();
 
                 if (_folder.BannerProperties.Enable && _folder.BannerProperties.Image != null)
                 {
@@ -226,6 +227,23 @@ namespace SalesDepot.PresentationClasses.WallBin
         }
 
         private void ControlBorders_Paint(object sender, PaintEventArgs e)
+        {
+            Rectangle rect;
+            if (e.ClipRectangle.Top == 0)
+                rect = new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, this.Height);
+            else
+                rect = new Rectangle(e.ClipRectangle.Left, 0, e.ClipRectangle.Width, e.ClipRectangle.Bottom);
+            for (int i = 0; i < 1; i++)
+            {
+                ControlPaint.DrawBorder(e.Graphics, rect, _folder.BorderColor, ButtonBorderStyle.Solid);
+                rect.X = rect.X + 2;
+                rect.Y = rect.Y + 2;
+                rect.Width = rect.Width - 4;
+                rect.Height = rect.Height - 4;
+            }
+        }
+
+        private void pnBottom_Paint(object sender, PaintEventArgs e)
         {
             Rectangle rect;
             if (e.ClipRectangle.Top == 0)
@@ -639,6 +657,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
         public void UpdateView()
         {
+            pnMain.Padding = ConfigurationClasses.SettingsManager.Instance.ListView ? new Padding(1, 1, 1, 0) : new Padding(1, 1, 1, 1);
             pnTop.Visible = ConfigurationClasses.SettingsManager.Instance.ListView;
             pnBottom.Visible = ConfigurationClasses.SettingsManager.Instance.ListView;
             pnRight.Visible = ConfigurationClasses.SettingsManager.Instance.ListView;

@@ -37,7 +37,7 @@
             // 
             // xtraTabControl
             // 
-            this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.xtraTabControl.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(241)))), ((int)(((byte)(254)))));
             this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
             this.xtraTabControl.Appearance.Options.UseBackColor = true;
             this.xtraTabControl.Appearance.Options.UseFont = true;
@@ -57,7 +57,9 @@
             this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
             this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseTextOptions = true;
             this.xtraTabControl.AppearancePage.HeaderHotTracked.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
+            this.xtraTabControl.AppearancePage.PageClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(241)))), ((int)(((byte)(254)))));
             this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.xtraTabControl.AppearancePage.PageClient.Options.UseBackColor = true;
             this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
             this.xtraTabControl.AppearancePage.PageClient.Options.UseTextOptions = true;
             this.xtraTabControl.AppearancePage.PageClient.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
@@ -82,7 +84,7 @@
             // MultitabLibraryControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(241)))), ((int)(((byte)(254)))));
             this.Controls.Add(this.xtraTabControl);
             this.Controls.Add(this.pnEmpty);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
