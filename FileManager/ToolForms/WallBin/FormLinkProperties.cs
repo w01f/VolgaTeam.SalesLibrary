@@ -206,7 +206,8 @@ namespace FileManager.ToolForms.WallBin
                 && controlType != typeof(DevExpress.XtraEditors.ComboBoxEdit)
                 && controlType != typeof(DevExpress.XtraEditors.DateEdit)
                 && controlType != typeof(DevExpress.XtraEditors.TimeEdit)
-                && controlType != typeof(DevExpress.XtraEditors.MemoEdit))
+                && controlType != typeof(DevExpress.XtraEditors.MemoEdit)
+                && controlType != typeof(DevExpress.XtraNavBar.NavBarControl))
             {
                 control.Click += new EventHandler(CloseActiveEditorsonOutSideClick);
                 foreach (Control childControl in control.Controls)
