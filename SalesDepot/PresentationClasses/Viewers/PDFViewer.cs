@@ -43,7 +43,9 @@ namespace SalesDepot.PresentationClasses.Viewers
 
             this.File = file;
 
-            axAcroPDF.LoadFile(this.File.LocalPath);
+            string tempName = Path.Combine(ConfigurationClasses.SettingsManager.Instance.TempPath, file.Name);
+            System.IO.File.Copy(this.File.LocalPath, tempName, true);
+            axAcroPDF.LoadFile(tempName);
             axAcroPDF.setView("Fit");
         }
 

@@ -109,6 +109,8 @@ namespace SalesDepot.ConfigurationClasses
         public Guid AppID { get; set; }
         public List<string> ApprovedLibraries { get; private set; }
 
+        public List<string> HiddenObjects { get; private set; }
+
         public bool SolutionView
         {
             get
@@ -154,6 +156,14 @@ namespace SalesDepot.ConfigurationClasses
 
             this.ApprovedLibraries = new List<string>();
             LoadAppID();
+
+            this.HiddenObjects = new List<string>();
+            this.HiddenObjects.Add("!Old");
+            this.HiddenObjects.Add(PreviewContainersRootFolderName);
+            this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(ExtraFoldersRootFolderName);
+            this.HiddenObjects.Add("thumbs.db");
+            this.HiddenObjects.Add("SalesDepotCache.xml");
         }
 
         private void LoadDefaultViewSettings()

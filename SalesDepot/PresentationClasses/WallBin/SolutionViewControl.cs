@@ -31,6 +31,9 @@ namespace SalesDepot.PresentationClasses.WallBin
         #region Methods
         public void ApplyView()
         {
+            FormMain.Instance.ribbonBarHomeView.Enabled = true;
+            FormMain.Instance.buttonItemSettingsMultitab.Enabled = true;
+
             FormMain.Instance.ribbonBarEmailBin.Enabled = false;
             FormMain.Instance.ribbonBarViewSettings.Enabled = false;
             FormMain.Instance.ribbonBarHomeSearchMode.Enabled = !ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection;

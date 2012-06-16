@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -36,23 +35,44 @@ namespace SalesDepot.PresentationClasses.WallBin
 
         public void ApplyView()
         {
-            FormMain.Instance.ribbonBarEmailBin.Enabled = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
-            FormMain.Instance.buttonItemEmailBin.Checked = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin ? ConfigurationClasses.SettingsManager.Instance.ShowEmailBin : false;
-            FormMain.Instance.ribbonBarViewSettings.Enabled = true;
-
-            FormMain.Instance.ribbonBarHomeSearchMode.Enabled = false;
-
-            FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1;
-            FormMain.Instance.comboBoxItemPages.Visible = true;
-            FormMain.Instance.ribbonBarStations.RecalcLayout();
-
-            if (ConfigurationClasses.SettingsManager.Instance.ClassicView)
-                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _classicToolTip);
-            else if (ConfigurationClasses.SettingsManager.Instance.ListView)
-                FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _listToolTip);
-
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.UpdateView();
+            {
+                if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary != null && !PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.UseDirectAccess)
+                {
+                    FormMain.Instance.ribbonBarHomeView.Enabled = true;
+                    FormMain.Instance.buttonItemSettingsMultitab.Enabled = true;
+
+                    FormMain.Instance.ribbonBarEmailBin.Enabled = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
+                    FormMain.Instance.buttonItemEmailBin.Checked = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin ? ConfigurationClasses.SettingsManager.Instance.ShowEmailBin : false;
+                    FormMain.Instance.ribbonBarViewSettings.Enabled = true;
+
+                    FormMain.Instance.ribbonBarHomeSearchMode.Enabled = false;
+
+                    FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1;
+                    FormMain.Instance.comboBoxItemPages.Visible = true;
+                    FormMain.Instance.ribbonBarStations.RecalcLayout();
+                }
+                else
+                {
+                    FormMain.Instance.ribbonBarHomeView.Enabled = false;
+                    FormMain.Instance.buttonItemSettingsMultitab.Enabled = false;
+                    FormMain.Instance.buttonItemSettingsMultitab.Checked = false;
+
+                    FormMain.Instance.ribbonBarEmailBin.Enabled = false;
+                    FormMain.Instance.buttonItemEmailBin.Checked = false;
+                    FormMain.Instance.ribbonBarViewSettings.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeSearchMode.Enabled = false;
+                    FormMain.Instance.comboBoxItemStations.Visible = FormMain.Instance.comboBoxItemStations.Items.Count > 1;
+                    FormMain.Instance.comboBoxItemPages.Visible = false;
+                    FormMain.Instance.ribbonBarStations.RecalcLayout();
+                }
+                if (ConfigurationClasses.SettingsManager.Instance.ClassicView)
+                    FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _classicToolTip);
+                else if (ConfigurationClasses.SettingsManager.Instance.ListView)
+                    FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _listToolTip);
+                else
+                    FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _classicToolTip);
+            }
         }
 
         private void ClassicViewControl_Load(object sender, System.EventArgs e)

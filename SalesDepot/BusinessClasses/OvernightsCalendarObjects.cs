@@ -104,7 +104,7 @@ namespace SalesDepot.BusinessClasses
         {
             this.Years.Clear();
             this.Files.Clear();
-            string rootFolderPath = Path.Combine(this.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.OvernightsCalendarRootFolderName);
+            string rootFolderPath = Path.Combine(this.Parent.StorageFolder.FullName, ConfigurationClasses.SettingsManager.OvernightsCalendarRootFolderName);
             if (Directory.Exists(rootFolderPath) && this.Enabled)
             {
                 DirectoryInfo rootFolder = new DirectoryInfo(rootFolderPath);
@@ -297,7 +297,7 @@ namespace SalesDepot.BusinessClasses
                     FileInfo file = this.Parent.Parent.Parent.Files.Where(x => x.Name.Contains(this.Date.ToString("MMddyy"))).FirstOrDefault();
                     if (file != null)
                     {
-                        _linkedFile = new LibraryFile(null);
+                        _linkedFile = new LibraryFile(new LibraryFolder(new LibraryPage(this.Parent.Parent.Parent.Parent)));
                         _linkedFile.RemotePath = file.FullName;
                         _linkedFile.Type = FileTypes.OvernightsLink;
                     }

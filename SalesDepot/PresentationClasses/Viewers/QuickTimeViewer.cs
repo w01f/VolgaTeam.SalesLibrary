@@ -7,6 +7,8 @@ namespace SalesDepot.PresentationClasses.Viewers
     [System.ComponentModel.ToolboxItem(false)]
     public partial class QuickTimeViewer : UserControl, IFileViewer
     {
+        private FileInfo _tempCopy = null;
+
         #region Properties
         public BusinessClasses.LibraryFile File { get; private set; }
 
@@ -42,7 +44,12 @@ namespace SalesDepot.PresentationClasses.Viewers
             this.Visible = false;
 
             this.File = file;
-
+            if (System.IO.File.Exists(this.File.LocalPath))
+            {
+                string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileName(this.File.LocalPath));
+                System.IO.File.Copy(this.File.LocalPath, tempPath, true);
+                _tempCopy = new FileInfo(tempPath);
+            }
             //axWindowsMediaPlayer.URL = this.File.FullPath;
         }
 
@@ -64,8 +71,8 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void InsertIntoPresentation()
         {
-            if(this.File.Type == BusinessClasses.FileTypes.MediaPlayerVideo)
-                BusinessClasses.LinkManager.Instance.AddVideoIntoPresentation(new FileInfo(this.File.LocalPath));
+            if (this.File.Type == BusinessClasses.FileTypes.MediaPlayerVideo)
+                BusinessClasses.LinkManager.Instance.AddVideoIntoPresentation(_tempCopy);
         }
         #endregion
 

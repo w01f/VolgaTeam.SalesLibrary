@@ -325,6 +325,12 @@ namespace SalesDepot.BusinessClasses
         public void PrintFile(FileInfo file)
         {
             Process printProcess = new Process();
+            string tempPath = string.Empty;
+            if (file.Exists)
+            {
+                tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + file.Extension);
+                file.CopyTo(tempPath, true);
+            }
             switch (file.Extension.Substring(1).ToUpper())
             {
                 case "PPT":
@@ -335,7 +341,7 @@ namespace SalesDepot.BusinessClasses
                     try
                     {
                         printProcess.StartInfo.FileName = "winword.exe";
-                        printProcess.StartInfo.Arguments = '"' + file.FullName + '"' + " /mFilePrint";
+                        printProcess.StartInfo.Arguments = '"' + tempPath + '"' + " /mFilePrint";
                         printProcess.Start();
                     }
                     catch
@@ -346,13 +352,13 @@ namespace SalesDepot.BusinessClasses
                 case "XLS":
                 case "XLSX":
                     if (InteropClasses.ExcelHelper.Instance.Open())
-                        InteropClasses.ExcelHelper.Instance.Print(file);
+                        InteropClasses.ExcelHelper.Instance.Print(new FileInfo(tempPath));
                     break;
                 case "PDF":
                     try
                     {
                         printProcess.StartInfo.FileName = "AcroRd32.exe";
-                        printProcess.StartInfo.Arguments = " /p " + '"' + file.FullName + '"';
+                        printProcess.StartInfo.Arguments = " /p " + '"' + tempPath + '"';
                         printProcess.Start();
                     }
                     catch

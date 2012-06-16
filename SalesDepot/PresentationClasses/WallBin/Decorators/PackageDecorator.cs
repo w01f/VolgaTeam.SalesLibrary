@@ -23,6 +23,17 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             }
         }
 
+        public LibraryDecorator SelectedLibrary
+        {
+            get
+            {
+                if (_selectedLibrary >= 0 && _selectedLibrary < _decorators.Count)
+                    return _decorators[_selectedLibrary];
+                else
+                    return null;
+            }
+        }
+
         public PackageDecorator(BusinessClasses.LibraryPackage package)
         {
             this.Container = new Panel();
@@ -67,8 +78,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         private void ApplyDecorator()
         {
-            if (_selectedLibrary >= 0 && _selectedLibrary < _decorators.Count)
-                _decorators[_selectedLibrary].ApplyDecorator();
+            if (this.SelectedLibrary != null)
+                this.SelectedLibrary.ApplyDecorator();
         }
 
         private void FillLogo()
@@ -97,6 +108,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 else
                     FormMain.Instance.comboBoxItemStations.SelectedIndex = 0;
             }
+            StationChanged(FormMain.Instance.comboBoxItemStations);
         }
 
         private void StationChanged(object sender)
@@ -113,24 +125,24 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         public void FormatWallBin()
         {
-            if (_selectedLibrary >= 0 && _selectedLibrary < _decorators.Count)
-                foreach (PageDecorator page in _decorators[_selectedLibrary].Pages)
+            if (this.SelectedLibrary != null)
+                foreach (PageDecorator page in this.SelectedLibrary.Pages)
                     page.FitObjectsToPage();
         }
 
         public void FormatCalendar()
         {
-            if (_selectedLibrary >= 0 && _selectedLibrary < _decorators.Count)
+            if (this.SelectedLibrary != null)
             {
-                _decorators[_selectedLibrary].UpdateCalendarFontButtonsStatus();
-                _decorators[_selectedLibrary].OvernightsCalendar.RefreshFont();
+                this.SelectedLibrary.UpdateCalendarFontButtonsStatus();
+                this.SelectedLibrary.OvernightsCalendar.RefreshFont();
             }
         }
 
         public void UpdateView()
         {
-            if (_selectedLibrary >= 0 && _selectedLibrary < _decorators.Count)
-                _decorators[_selectedLibrary].UpdateView();
+            if (this.SelectedLibrary != null)
+                this.SelectedLibrary.UpdateView();
         }
 
         public void Apply()

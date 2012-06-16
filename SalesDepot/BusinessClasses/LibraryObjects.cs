@@ -30,7 +30,7 @@ namespace SalesDepot.BusinessClasses
             {
                 if (_name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage))
                 {
-                    if (_libraryCollection.Count > 0)
+                    if (_libraryCollection.Count > 0 && !string.IsNullOrEmpty(_libraryCollection[0].BrandingText))
                         return _libraryCollection[0].BrandingText;
                     else
                         return ConfigurationClasses.SettingsManager.Instance.SalesDepotName;
@@ -102,7 +102,9 @@ namespace SalesDepot.BusinessClasses
 
         public LibraryPackage Parent { get; private set; }
         public Guid Identifier { get; set; }
+        public DirectoryInfo StorageFolder { get; set; }
         public DirectoryInfo Folder { get; set; }
+        public bool UseDirectAccess { get; set; }
         public string BrandingText { get; set; }
         public DateTime SyncDate { get; set; }
 
@@ -125,6 +127,7 @@ namespace SalesDepot.BusinessClasses
         public List<LibraryPage> Pages { get; set; }
         public List<string> EmailList { get; set; }
         public List<AutoWidget> AutoWidgets { get; set; }
+        public List<LibraryFile> DirectAccessLinks { get; private set; }
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
@@ -157,6 +160,7 @@ namespace SalesDepot.BusinessClasses
         {
             this.Parent = parent;
             this.Identifier = Guid.NewGuid();
+            this.StorageFolder = folder;
             this.Folder = folder;
             _name = name;
             this.IsConfigured = false;
@@ -165,6 +169,7 @@ namespace SalesDepot.BusinessClasses
             this.EmailList = new List<string>();
             this.AutoWidgets = new List<AutoWidget>();
             this.OvernightsCalendar = new OvernightsCalendar(this);
+            this.DirectAccessLinks = new List<LibraryFile>();
             Load();
         }
 
@@ -174,6 +179,7 @@ namespace SalesDepot.BusinessClasses
             bool tempBool = false;
 
             this.BrandingText = string.Empty;
+            this.UseDirectAccess = false;
             this.SyncDate = DateTime.Now;
             this.SyncLinkedFiles = true;
             this.MinimizeOnSync = true;
@@ -187,8 +193,9 @@ namespace SalesDepot.BusinessClasses
             this.Pages.Clear();
             this.EmailList.Clear();
             this.AutoWidgets.Clear();
+            this.DirectAccessLinks.Clear();
 
-            string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
+            string file = Path.Combine(this.StorageFolder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
             if (File.Exists(file))
             {
                 XmlDocument document = new XmlDocument();
@@ -205,6 +212,16 @@ namespace SalesDepot.BusinessClasses
                 node = document.SelectSingleNode(@"/Library/Name");
                 if (node != null)
                     _name = node.InnerText;
+                node = document.SelectSingleNode(@"/Library/UseDirectAccess");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.UseDirectAccess = tempBool;
+                if (this.UseDirectAccess)
+                {
+                    node = document.SelectSingleNode(@"/Library/RootFolder");
+                    if (node != null)
+                        this.Folder = new DirectoryInfo(node.InnerText);
+                }
                 node = document.SelectSingleNode(@"/Library/BrandingText");
                 if (node != null)
                     this.BrandingText = node.InnerText;
@@ -291,6 +308,14 @@ namespace SalesDepot.BusinessClasses
                         AutoWidget autoWidget = new AutoWidget();
                         autoWidget.Deserialize(childNode);
                         this.AutoWidgets.Add(autoWidget);
+                    }
+                node = document.SelectSingleNode(@"/Library/DirectAccessFiles");
+                if (node != null)
+                    foreach (XmlNode childNode in node.ChildNodes)
+                    {
+                        LibraryFile libraryFile = new LibraryFile(new LibraryFolder(new LibraryPage(this)));
+                        libraryFile.Deserialize(childNode);
+                        this.DirectAccessLinks.Add(libraryFile);
                     }
 
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
@@ -1110,6 +1135,7 @@ namespace SalesDepot.BusinessClasses
             result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
             result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
             result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+            result.AppendLine(@"<LocalPath>" + _linkRemotePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
             result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
@@ -1158,6 +1184,9 @@ namespace SalesDepot.BusinessClasses
                     case "RootId":
                         if (Guid.TryParse(childNode.InnerText, out tempGuid))
                             this.RootId = tempGuid;
+                        break;
+                    case "LocalPath":
+                        _linkRemotePath = childNode.InnerText;
                         break;
                     case "RelativePath":
                         this.RelativePath = childNode.InnerText;
@@ -1969,9 +1998,13 @@ namespace SalesDepot.BusinessClasses
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.Order = tempInt;
                         break;
+                    case "Folder":
+                        this.Folder = new DirectoryInfo(childNode.InnerText);
+                        break;
                 }
             }
-            this.Folder = new DirectoryInfo(System.IO.Path.Combine(this.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName, this.RootId.ToString()));
+            if (!this.Parent.UseDirectAccess)
+                this.Folder = new DirectoryInfo(System.IO.Path.Combine(this.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName, this.RootId.ToString()));
         }
     }
 

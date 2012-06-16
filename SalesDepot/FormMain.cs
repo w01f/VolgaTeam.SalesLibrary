@@ -31,9 +31,6 @@ namespace SalesDepot
             buttonItemHomeClassicView.Click += new EventHandler(this.TabHome.ChangeView_Click);
             buttonItemHomeListView.Click += new EventHandler(this.TabHome.ChangeView_Click);
             buttonItemHomeSolutionView.Click += new EventHandler(this.TabHome.ChangeView_Click);
-            buttonItemHomeClassicView.CheckedChanged += new EventHandler(this.TabHome.ChangeView_CheckedChanged);
-            buttonItemHomeSolutionView.CheckedChanged += new EventHandler(this.TabHome.ChangeView_CheckedChanged);
-            buttonItemHomeListView.CheckedChanged += new EventHandler(this.TabHome.ChangeView_CheckedChanged);
             buttonItemLargerText.Click += new EventHandler(this.TabHome.ClassicViewControl.buttonItemLargerText_Click);
             buttonItemSmallerText.Click += new EventHandler(this.TabHome.ClassicViewControl.buttonItemSmallerText_Click);
             buttonItemEmailBin.CheckedChanged += new EventHandler(this.TabHome.ClassicViewControl.buttonItemEmailBin_CheckedChanged);

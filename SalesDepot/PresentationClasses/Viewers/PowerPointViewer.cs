@@ -10,6 +10,8 @@ namespace SalesDepot.PresentationClasses.Viewers
     [System.ComponentModel.ToolboxItem(false)]
     public partial class PowerPointViewer : UserControl, IFileViewer
     {
+        private FileInfo _tempCopy = null;
+
         #region Properties
         public BusinessClasses.LibraryFile File { get; private set; }
 
@@ -45,6 +47,12 @@ namespace SalesDepot.PresentationClasses.Viewers
             this.Visible = false;
 
             this.File = file;
+            if(System.IO.File.Exists( this.File.LocalPath))
+            {
+                string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(this.File.LocalPath));
+                System.IO.File.Copy(this.File.LocalPath,tempPath,true);
+                _tempCopy = new FileInfo(tempPath);
+            }
 
             laFileInfo.Text = string.Empty;
             laSlideSize.Text = string.Empty;
@@ -86,7 +94,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Email()
         {
-            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
+            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
             using (ToolForms.WallBin.FormEmailPresentation form = new ToolForms.WallBin.FormEmailPresentation())
             {
                 form.SelectedFile = this.File;
@@ -98,7 +106,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         public void Print()
         {
             ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
+            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
             InteropClasses.PowerPointHelper.Instance.PrintPresentation(this.File.PreviewContainer.SelectedIndex + 1);
         }
         #endregion
@@ -125,7 +133,7 @@ namespace SalesDepot.PresentationClasses.Viewers
                         AppManager.Instance.ActivatePowerPoint();
                         AppManager.Instance.ActivateMiniBar();
                         ToolClasses.ActivityRecorder.Instance.WriteActivity();
-                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
+                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                         InteropClasses.PowerPointHelper.Instance.AppendSlide(this.File.PreviewContainer.SelectedIndex + 1);
                     });
                     thread.Start();
@@ -173,7 +181,7 @@ namespace SalesDepot.PresentationClasses.Viewers
                         Thread thread = new Thread(delegate()
                         {
                             ToolClasses.ActivityRecorder.Instance.WriteActivity();
-                            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.File.LocalPath));
+                            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                             InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (this.File.PreviewContainer.SelectedIndex + 1), destinationFileName);
                         });
                         thread.Start();

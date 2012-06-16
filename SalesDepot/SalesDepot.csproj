@@ -80,6 +80,9 @@
     <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -135,8 +138,20 @@
     <Compile Include="PresentationClasses\OvernightsCalendar\YearControl.designer.cs">
       <DependentUpon>YearControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Viewers\EmptyViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Viewers\EmptyViewer.Designer.cs">
+      <DependentUpon>EmptyViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
     <Compile Include="PresentationClasses\WallBin\IWallBinView.cs" />
+    <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.Designer.cs">
+      <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\TabHomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -347,6 +362,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\YearControl.resx">
       <DependentUpon>YearControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Viewers\EmptyViewer.resx">
+      <DependentUpon>EmptyViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
+      <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabHomeControl.resx">
       <DependentUpon>TabHomeControl.cs</DependentUpon>

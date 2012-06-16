@@ -19,6 +19,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         public Panel EmptyPanel { get; private set; }
 
         public PresentationClasses.WallBin.MultitabLibraryControl TabControl { get; private set; }
+        public PresentationClasses.WallBin.WallBinTreeListControl TreeListControl { get; private set; }
         public PresentationClasses.OvernightsCalendar.OvernightsCalendarControl OvernightsCalendar { get; private set; }
         public bool StateChanged { get; set; }
 
@@ -28,6 +29,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             this.Pages = new List<PageDecorator>();
             this.Library = library;
             this.TabControl = new PresentationClasses.WallBin.MultitabLibraryControl();
+            this.TreeListControl = new WallBinTreeListControl();
             this.OvernightsCalendar = new OvernightsCalendar.OvernightsCalendarControl(this);
             this.Container = new Panel();
             this.Container.Dock = DockStyle.Fill;
@@ -35,6 +37,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             this.EmptyPanel.Dock = DockStyle.Fill;
             this.Container.Controls.Add(this.EmptyPanel);
             BuildPages();
+            BuildTreeList();
         }
 
         private void BuildPages()
@@ -44,6 +47,14 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             {
                 this.Pages.Add(new PageDecorator(this, page));
                 Application.DoEvents();
+            }
+        }
+
+        private void BuildTreeList()
+        {
+            if (this.Library.UseDirectAccess)
+            {
+                this.TreeListControl.Init(this.Library);
             }
         }
 
@@ -91,16 +102,21 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
         private void ApplyWallBin()
         {
-            this.Container.Controls.Clear();
-            this.Container.Controls.Add(this.EmptyPanel);
-            if (ConfigurationClasses.SettingsManager.Instance.MultitabView)
-                FillTabControlWithPages();
+            if (!this.Library.UseDirectAccess)
+            {
+                if (ConfigurationClasses.SettingsManager.Instance.MultitabView)
+                    FillTabControlWithPages();
+                else
+                    FillDropdownWithPages();
+            }
             else
-                FillDropdownWithPages();
+            {
+                FillTreeListControl();
+            }
             if (!this.Parent.Container.Controls.Contains(this.Container))
                 this.Parent.Container.Controls.Add(this.Container);
             this.Container.BringToFront();
-            UpdateView();
+
         }
 
         private void ApplyOvernightsCalebdar()
@@ -124,6 +140,14 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         {
             FormMain.Instance.buttonItemCalendarFontSizeLarger.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize < 14;
             FormMain.Instance.buttonItemCalendarFontSizeSmaler.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize > 10;
+        }
+
+        private void FillTreeListControl()
+        {
+            FormMain.Instance.TabHome.PageChanged = null;
+            if (!this.Container.Controls.Contains(this.TreeListControl))
+                this.Container.Controls.Add(this.TreeListControl);
+            this.TreeListControl.BringToFront();
         }
 
         private void FillTabControlWithPages()

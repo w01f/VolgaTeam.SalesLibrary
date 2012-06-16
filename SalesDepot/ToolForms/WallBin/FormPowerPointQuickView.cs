@@ -9,6 +9,7 @@ namespace SalesDepot.ToolForms.WallBin
 {
     public partial class FormPowerPointQuickView : Form
     {
+        private FileInfo _tempCopy = null;
         public BusinessClasses.LibraryFile SelectedFile { get; set; }
 
         public FormPowerPointQuickView()
@@ -27,6 +28,13 @@ namespace SalesDepot.ToolForms.WallBin
         {
             if (this.SelectedFile != null)
             {
+                if (System.IO.File.Exists(this.SelectedFile.LocalPath))
+                {
+                    string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(this.SelectedFile.LocalPath));
+                    System.IO.File.Copy(this.SelectedFile.LocalPath, tempPath, true);
+                    _tempCopy = new FileInfo(tempPath);
+                }
+
                 this.Text = "QuickView - " + this.SelectedFile.NameWithExtension;
                 laFileInfo.Text = "Added: " + this.SelectedFile.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (this.SelectedFile.ExpirationDateOptions.EnableExpirationDate && this.SelectedFile.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + this.SelectedFile.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
                 if (this.SelectedFile.PresentationProperties != null)
@@ -122,7 +130,7 @@ namespace SalesDepot.ToolForms.WallBin
                             Thread thread = new Thread(delegate()
                             {
                                 ToolClasses.ActivityRecorder.Instance.WriteActivity();
-                                InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.SelectedFile.LocalPath));
+                                InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                                 InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (this.SelectedFile.PreviewContainer.SelectedIndex + 1), destinationFileName);
                             });
                             thread.Start();
@@ -144,7 +152,7 @@ namespace SalesDepot.ToolForms.WallBin
         {
             if (this.SelectedFile != null)
             {
-                InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.SelectedFile.LocalPath));
+                InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                 using (ToolForms.WallBin.FormEmailPresentation form = new ToolForms.WallBin.FormEmailPresentation())
                 {
                     form.SelectedFile = this.SelectedFile;
@@ -159,7 +167,7 @@ namespace SalesDepot.ToolForms.WallBin
             if (this.SelectedFile != null)
             {
                 ToolClasses.ActivityRecorder.Instance.WriteActivity();
-                InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.SelectedFile.LocalPath));
+                InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                 InteropClasses.PowerPointHelper.Instance.PrintPresentation(this.SelectedFile.PreviewContainer.SelectedIndex + 1);
             }
         }
@@ -252,7 +260,7 @@ namespace SalesDepot.ToolForms.WallBin
                         Thread thread = new Thread(delegate()
                         {
                             ToolClasses.ActivityRecorder.Instance.WriteActivity();
-                            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(this.SelectedFile.LocalPath));
+                            InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                             InteropClasses.PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (this.SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? BusinessClasses.MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
                         });
                         thread.Start();

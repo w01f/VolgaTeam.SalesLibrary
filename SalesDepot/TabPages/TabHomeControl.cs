@@ -33,8 +33,8 @@ namespace SalesDepot.TabPages
             LoadWallBinSettings();
             LoadPackages();
             this.ClassicViewControl.UpdateFontButtonStatus();
-            ApplySelectedView();
             ApplySelectedDecorator();
+            ApplySelectedView();
             _allowToSave = true;
         }
 
@@ -61,6 +61,10 @@ namespace SalesDepot.TabPages
                 this.SelectedView = this.ClassicViewControl;
             else if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
                 this.SelectedView = this.SolutionViewControl;
+
+            FormMain.Instance.buttonItemHomeClassicView.CheckedChanged += new EventHandler(ChangeView_CheckedChanged);
+            FormMain.Instance.buttonItemHomeSolutionView.CheckedChanged += new EventHandler(ChangeView_CheckedChanged);
+            FormMain.Instance.buttonItemHomeListView.CheckedChanged += new EventHandler(ChangeView_CheckedChanged);
             #endregion
 
             #region Wall Bin Configuration
@@ -168,15 +172,10 @@ namespace SalesDepot.TabPages
 
         private void ApplySelectedView()
         {
-            pnEmpty.BringToFront();
-            Application.DoEvents();
             this.SelectedView.ApplyView();
             if (!pnMain.Controls.Contains(this.SelectedView as Control))
                 pnMain.Controls.Add(this.SelectedView as Control);
             (this.SelectedView as Control).BringToFront();
-            Application.DoEvents();
-            pnMain.BringToFront();
-            Application.DoEvents();
         }
 
         private void ApplySelectedDecorator()
@@ -189,11 +188,9 @@ namespace SalesDepot.TabPages
 
                 pnEmpty.BringToFront();
                 Application.DoEvents();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Apply();
                 if (!this.ClassicViewControl.pnRemoteLibraryContainer.Controls.Contains(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container))
                     this.ClassicViewControl.pnRemoteLibraryContainer.Controls.Add(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container);
-                pnEmpty.BringToFront();
-                Application.DoEvents();
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Apply();
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Container.BringToFront();
                 pnMain.BringToFront();
                 Application.DoEvents();
@@ -209,45 +206,54 @@ namespace SalesDepot.TabPages
             FormMain.Instance.buttonItemHomeListView.Checked = false;
             FormMain.Instance.buttonItemHomeSolutionView.Checked = false;
             (sender as DevComponents.DotNetBar.ButtonItem).Checked = true;
+
+            if (_allowToSave)
+            {
+                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                {
+                    form.laProgress.Text = "Loading Page...";
+                    form.TopMost = true;
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                    {
+                        FormMain.Instance.Invoke((MethodInvoker)delegate()
+                        {
+                            pnEmpty.BringToFront();
+                            Application.DoEvents();
+                            ApplySelectedView();
+                            Application.DoEvents();
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.UpdateView();
+                            Application.DoEvents();
+                            pnMain.BringToFront();
+                            Application.DoEvents();
+                        });
+                    }));
+                    form.Show();
+                    Application.DoEvents();
+                    thread.Start();
+                    while (thread.IsAlive)
+                        Application.DoEvents();
+                    form.Close();
+                }
+            }
+            else
+                ApplySelectedView();
         }
 
         public void ChangeView_CheckedChanged(object sender, EventArgs e)
         {
-            if (_allowToSave)
+            if ((sender as DevComponents.DotNetBar.ButtonItem).Checked)
             {
-                if ((sender as DevComponents.DotNetBar.ButtonItem).Checked)
-                {
-                    ConfigurationClasses.SettingsManager.Instance.ClassicView = FormMain.Instance.buttonItemHomeClassicView.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.ListView = FormMain.Instance.buttonItemHomeListView.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
-                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
+                ConfigurationClasses.SettingsManager.Instance.ClassicView = FormMain.Instance.buttonItemHomeClassicView.Checked;
+                ConfigurationClasses.SettingsManager.Instance.ListView = FormMain.Instance.buttonItemHomeListView.Checked;
+                ConfigurationClasses.SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
+                ConfigurationClasses.SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
+                ConfigurationClasses.SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
+                ConfigurationClasses.SettingsManager.Instance.SaveSettings();
 
-                    if (ConfigurationClasses.SettingsManager.Instance.ClassicView || ConfigurationClasses.SettingsManager.Instance.ListView || BusinessClasses.LibraryManager.Instance.OldFormatDetected)
-                        this.SelectedView = this.ClassicViewControl;
-                    else if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
-                        this.SelectedView = this.SolutionViewControl;
-
-                    using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-                    {
-                        form.laProgress.Text = "Loading Page...";
-                        form.TopMost = true;
-                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                        {
-                            FormMain.Instance.Invoke((MethodInvoker)delegate()
-                            {
-                                ApplySelectedView();
-                            });
-                        }));
-                        form.Show();
-                        Application.DoEvents();
-                        thread.Start();
-                        while (thread.IsAlive)
-                            Application.DoEvents();
-                        form.Close();
-                    }
-                }
+                if (ConfigurationClasses.SettingsManager.Instance.ClassicView || ConfigurationClasses.SettingsManager.Instance.ListView || BusinessClasses.LibraryManager.Instance.OldFormatDetected)
+                    this.SelectedView = this.ClassicViewControl;
+                else if (ConfigurationClasses.SettingsManager.Instance.SolutionView)
+                    this.SelectedView = this.SolutionViewControl;
             }
         }
 
@@ -480,11 +486,35 @@ namespace SalesDepot.TabPages
             {
                 if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers.Count)
                 {
+                    _allowToSave = false;
                     ConfigurationClasses.SettingsManager.Instance.SelectedPackage = FormMain.Instance.comboBoxItemPackages.SelectedItem.ToString();
                     ConfigurationClasses.SettingsManager.Instance.SaveSettings();
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex];
-                    ApplySelectedDecorator();
-                    this.SolutionViewControl.ClearSolutionControl();
+
+                    using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                    {
+                        form.laProgress.Text = string.Format("Loading {0}...", PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null ? PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
+                        form.TopMost = true;
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                        {
+                            FormMain.Instance.Invoke((MethodInvoker)delegate()
+                            {
+                                this.SolutionViewControl.ClearSolutionControl();
+                                Application.DoEvents();
+                                ApplySelectedDecorator();
+                                Application.DoEvents();
+                                FormMain.Instance.TabHome.ChangeView_Click(FormMain.Instance.buttonItemHomeClassicView, null);
+                                Application.DoEvents();
+                            });
+                        }));
+                        form.Show();
+                        Application.DoEvents();
+                        thread.Start();
+                        while (thread.IsAlive)
+                            Application.DoEvents();
+                        form.Close();
+                    }
+                    _allowToSave = true;
                 }
                 else
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer = null;
@@ -493,28 +523,31 @@ namespace SalesDepot.TabPages
 
         public void comboBoxItemStations_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            if (_allowToSave)
             {
-                form.laProgress.Text = string.Format("Loading {0}...", PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null ? PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
-                form.TopMost = true;
-                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
                 {
-                    FormMain.Instance.Invoke((MethodInvoker)delegate()
+                    form.laProgress.Text = string.Format("Loading {0}...", PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null ? PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
+                    form.TopMost = true;
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        pnEmpty.BringToFront();
-                        Application.DoEvents();
-                        StationChanged(sender);
-                        Application.DoEvents();
-                        pnMain.BringToFront();
-                        Application.DoEvents();
-                    });
-                }));
-                form.Show();
-                Application.DoEvents();
-                thread.Start();
-                while (thread.IsAlive)
+                        FormMain.Instance.Invoke((MethodInvoker)delegate()
+                        {
+                            pnEmpty.BringToFront();
+                            Application.DoEvents();
+                            StationChanged(sender);
+                            Application.DoEvents();
+                            pnMain.BringToFront();
+                            Application.DoEvents();
+                        });
+                    }));
+                    form.Show();
                     Application.DoEvents();
-                form.Close();
+                    thread.Start();
+                    while (thread.IsAlive)
+                        Application.DoEvents();
+                    form.Close();
+                }
             }
         }
 
