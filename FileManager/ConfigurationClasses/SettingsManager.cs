@@ -33,6 +33,7 @@ namespace FileManager.ConfigurationClasses
         #region FM Settings
         public string BackupPath { get; set; }
         public string NetworkPath { get; set; }
+        public bool UseDirectAccessToFiles { get; set; }
         public string SelectedLibrary { get; set; }
         public string SelectedPage { get; set; }
         public int SelectedCalendarYear { get; set; }
@@ -78,6 +79,7 @@ namespace FileManager.ConfigurationClasses
             #region FM Settings
             this.BackupPath = string.Empty;
             this.NetworkPath = string.Empty;
+            this.UseDirectAccessToFiles = false;
             this.SelectedLibrary = string.Empty;
             this.SelectedPage = string.Empty;
             this.FontSize = 12;
@@ -113,6 +115,10 @@ namespace FileManager.ConfigurationClasses
                 node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
                 if (node != null)
                     this.NetworkPath = node.InnerText;
+                node = document.SelectSingleNode(@"/LocalSettings/UseDirectAccessToFiles");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.UseDirectAccessToFiles = tempBool;
                 node = document.SelectSingleNode(@"/LocalSettings/SelectedLibrary");
                 if (node != null)
                     this.SelectedLibrary = node.InnerText;
@@ -157,6 +163,7 @@ namespace FileManager.ConfigurationClasses
             #region FM Settings
             xml.AppendLine(@"<BackupPath>" + this.BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
             xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
+            xml.AppendLine(@"<UseDirectAccessToFiles>" + this.UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
             xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
             xml.AppendLine(@"<SelectedCalendarYear>" + this.SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");

@@ -14,7 +14,7 @@ namespace FileManager.ToolForms.Settings
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
             {
-                if(buttonEditBackupFolder.EditValue!= null)
+                if (buttonEditBackupFolder.EditValue != null)
                     dialog.SelectedPath = buttonEditBackupFolder.EditValue.ToString();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
@@ -28,7 +28,7 @@ namespace FileManager.ToolForms.Settings
         {
             using (FolderBrowserDialog dialog = new FolderBrowserDialog())
             {
-                if(buttonEditNetworkSyncFolder.EditValue!= null)
+                if (buttonEditNetworkSyncFolder.EditValue != null)
                     dialog.SelectedPath = buttonEditNetworkSyncFolder.EditValue.ToString();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
@@ -66,7 +66,8 @@ namespace FileManager.ToolForms.Settings
                 }
                 e.Cancel = false;
                 ConfigurationClasses.SettingsManager.Instance.BackupPath = buttonEditBackupFolder.EditValue.ToString();
-                ConfigurationClasses.SettingsManager.Instance.NetworkPath = buttonEditNetworkSyncFolder.EditValue.ToString();
+                ConfigurationClasses.SettingsManager.Instance.NetworkPath = buttonEditNetworkSyncFolder.EditValue != null ? buttonEditNetworkSyncFolder.EditValue.ToString() : string.Empty;
+                ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles = checkEditDirectAccess.Checked;
                 ConfigurationClasses.SettingsManager.Instance.Save();
             }
         }
@@ -75,6 +76,7 @@ namespace FileManager.ToolForms.Settings
         {
             buttonEditBackupFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.BackupPath;
             buttonEditNetworkSyncFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.NetworkPath;
+            checkEditDirectAccess.Checked = ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles;
         }
     }
 }

@@ -50,19 +50,20 @@ namespace FileManager.InteropClasses
             GC.WaitForPendingFinalizers();
         }
 
-        public bool ExportPresentationAsImages(string sourceFilePath, string destinationFolderPath)
+        public bool ExportPresentationAsImages(string sourceFilePath, string destinationFolderPath, bool connect = true)
         {
             bool result = false;
             try
             {
                 MessageFilter.Register();
-                if (Connect())
+                if (Connect() || !connect)
                 {
                     PowerPoint.Presentation presentation = _powerPointObject.Presentations.Open(FileName: sourceFilePath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
                     presentation.Export(Path: destinationFolderPath, FilterName: "PNG");
                     presentation.Close();
                     AppManager.Instance.ReleaseComObject(presentation);
-                    Disconnect();
+                    if (connect)
+                        Disconnect();
                     result = true;
                 }
             }

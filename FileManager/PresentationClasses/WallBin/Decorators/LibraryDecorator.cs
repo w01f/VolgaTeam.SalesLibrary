@@ -85,13 +85,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                 this.ActivePage.FitObjectsToPage();
         }
 
-        public void ApplyDecorator(bool firstRun = false)
-        {
-            ApplyWallBin(firstRun);
-            ApplyOvernightsCalebdar();
-        }
-
-        private void ApplyWallBin(bool firstRun)
+        public void ApplyWallBin(bool firstRun)
         {
             FormMain.Instance.TabHome.pnEmpty.Visible = true;
             FormMain.Instance.TabHome.pnEmpty.BringToFront();
@@ -136,7 +130,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             FormMain.Instance.TabHome.pnEmpty.SendToBack();
         }
 
-        private void ApplyOvernightsCalebdar()
+        public void ApplyOvernightsCalebdar()
         {
             LoadOvernightsCalebdarSettings();
             if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(this.OvernightsCalendar))

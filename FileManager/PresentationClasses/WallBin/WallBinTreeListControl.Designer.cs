@@ -379,6 +379,7 @@
             this.pgTreeViewProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pgTreeViewProgress.Location = new System.Drawing.Point(8, 34);
+            this.pgTreeViewProgress.MarqueeAnimationSpeed = 50;
             this.pgTreeViewProgress.Name = "pgTreeViewProgress";
             this.pgTreeViewProgress.Size = new System.Drawing.Size(242, 19);
             this.pgTreeViewProgress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -427,7 +428,7 @@
             this.laDoubleClick.Size = new System.Drawing.Size(167, 23);
             this.laDoubleClick.TabIndex = 3;
             this.laDoubleClick.Text = "Double Click to Open";
-            this.laDoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.laDoubleClick.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btRefresh
             // 

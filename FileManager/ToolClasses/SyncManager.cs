@@ -21,7 +21,7 @@ namespace FileManager.ToolClasses
             }
         }
 
-        public void SynchronizeFolders(DirectoryInfo A, DirectoryInfo B, HashSet<string> filesWhiteList)
+        public void SynchronizeFolders(DirectoryInfo A, DirectoryInfo B, HashSet<string> filesWhiteList, bool includeSubFolders = true)
         {
             FileInfo[] a_files = A.GetFiles().Where(x => filesWhiteList.Contains(x.FullName) || filesWhiteList.Count == 0).ToArray();
             Dictionary<string, DirectoryInfo> a_dirs = new Dictionary<string, DirectoryInfo>();
@@ -64,27 +64,30 @@ namespace FileManager.ToolClasses
                 }
             }
 
-            foreach (DirectoryInfo adi in a_dirs.Values)
+            if (includeSubFolders)
             {
-                if (b_dirs.ContainsKey(adi.Name))
+                foreach (DirectoryInfo adi in a_dirs.Values)
                 {
-                    DirectoryInfo bdi = b_dirs[adi.Name];
-                    SynchronizeFolders(adi, bdi, filesWhiteList);
-                }
-                else
-                {
-                    DirectoryInfo bdi = B.CreateSubdirectory(adi.Name);
-                    SynchronizeFolders(adi, bdi, filesWhiteList);
-                }
-                Application.DoEvents();
-            }
-
-            foreach (DirectoryInfo bdi in b_dirs.Values)
-            {
-                if (!a_dirs.ContainsKey(bdi.Name))
-                {
-                    DeleteFolder(bdi);
+                    if (b_dirs.ContainsKey(adi.Name))
+                    {
+                        DirectoryInfo bdi = b_dirs[adi.Name];
+                        SynchronizeFolders(adi, bdi, filesWhiteList);
+                    }
+                    else
+                    {
+                        DirectoryInfo bdi = B.CreateSubdirectory(adi.Name);
+                        SynchronizeFolders(adi, bdi, filesWhiteList);
+                    }
                     Application.DoEvents();
+                }
+
+                foreach (DirectoryInfo bdi in b_dirs.Values)
+                {
+                    if (!a_dirs.ContainsKey(bdi.Name))
+                    {
+                        DeleteFolder(bdi);
+                        Application.DoEvents();
+                    }
                 }
             }
         }

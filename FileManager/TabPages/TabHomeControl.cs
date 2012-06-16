@@ -75,16 +75,71 @@ namespace FileManager.TabPages
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator = null;
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
-                BusinessClasses.LibraryManager.Instance.SelectedLibrary = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library;
+                pnEmpty.Visible = true;
+                pnEmpty.BringToFront();
                 Cursor cursor = this.Cursor;
                 this.Cursor = Cursors.WaitCursor;
+
+                BusinessClasses.LibraryManager.Instance.SelectedLibrary = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library;
+
                 BuildTreeView();
-                ApplyDecorator();
-                FillPages();
+
+                if (!BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess)
+                {
+                    dockPanelTreeView_Container.Controls.Add(_treeList);
+                    ApplyDecorator();
+                    FillPages();
+
+                    FormMain.Instance.ribbonBarHomeAddLink.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeDelete.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeFontSize.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeLibraries.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeNudge.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeOpen.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeProperties.Enabled = true;
+                    FormMain.Instance.ribbonBarHomeSave.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsAutoWidgets.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsBranding.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsColumns.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsDeadLinks.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsEmailList.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsMultitab.Enabled = true;
+                    FormMain.Instance.ribbonBarSettingsPages.Enabled = true;
+                }
+                else
+                {
+                    if (!pnMain.Controls.Contains(_treeList))
+                        pnMain.Controls.Add(_treeList);
+                    _treeList.BringToFront();
+
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyOvernightsCalebdar();
+
+                    btSetupWallBin.Visible = false;
+                    FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeDelete.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeFontSize.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeLibraries.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeNudge.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeOpen.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeProperties.Enabled = false;
+                    FormMain.Instance.ribbonBarHomeSave.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsAutoWidgets.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsBranding.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsColumns.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsDeadLinks.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsEmailList.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsMultitab.Enabled = false;
+                    FormMain.Instance.ribbonBarSettingsPages.Enabled = false;
+                }
                 this.Cursor = cursor;
+
+                pnEmpty.Visible = false;
             }
+            FormMain.Instance.buttonItemHomeFileTreeView.Checked = ConfigurationClasses.SettingsManager.Instance.TreeViewVisible & !BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess;
+            ShowTreeView(ConfigurationClasses.SettingsManager.Instance.TreeViewVisible & !BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess);
             FormMain.Instance.buttonItemHomeFileTreeView.CheckedChanged += new EventHandler(buttonItemHomeFileTreeView_CheckedChanged);
-            FormMain.Instance.buttonItemHomeFileTreeView.Checked = ConfigurationClasses.SettingsManager.Instance.TreeViewVisible;
         }
 
         public void comboBoxEditPages_SelectedIndexChanged(object sender, EventArgs e)
@@ -177,7 +232,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formExtraRoots.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    _formExtraRoots.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
                     if (_formExtraRoots.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -241,7 +296,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formPages.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    _formPages.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
                     if (_formPages.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -288,7 +343,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formColumns.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    _formColumns.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
                     if (_formColumns.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -334,7 +389,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formAutoWidgets.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    _formAutoWidgets.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
                     if (_formAutoWidgets.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -380,7 +435,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formDeadLinks.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder);
+                    _formDeadLinks.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
                     if (_formDeadLinks.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -687,27 +742,24 @@ namespace FileManager.TabPages
                 rootFolders.Insert(0, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.RootFolder);
                 _treeList.Init(rootFolders.ToArray());
             }
-
-            dockPanelTreeView_Container.Controls.Add(_treeList);
         }
 
         private void ApplyDecorator()
         {
-            pnEmpty.Visible = true;
-            pnEmpty.BringToFront();
             foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
                 control.Parent = null;
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IsConfigured)
             {
                 btSetupWallBin.Visible = false;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyDecorator(_firstRun);
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyWallBin(_firstRun);
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyOvernightsCalebdar();
             }
+
             else
             {
                 btSetupWallBin.Visible = true;
                 btSetupWallBin.BringToFront();
             }
-            pnEmpty.Visible = false;
         }
 
         private bool SaveLibraryWarning()

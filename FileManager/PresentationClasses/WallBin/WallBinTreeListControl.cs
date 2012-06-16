@@ -50,7 +50,7 @@ namespace FileManager.PresentationClasses.WallBin
                     {
                         DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
                         rootNode.StateImageIndex = 0;
-                        FillNode(rootNode, true);
+                        FillNode(rootNode, false);
                         Application.DoEvents();
                     }
                 });
@@ -95,7 +95,7 @@ namespace FileManager.PresentationClasses.WallBin
                 if (treeList != null)
                 {
                     Point hitPoint = new Point(e.X, e.Y);
-                    DevExpress.XtraTreeList.TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
+                    DevExpress.XtraTreeList.TreeListHitInfo hitInfo = treeList.CalcHitInfo(hitPoint);
                     if (hitInfo.Node != null)
                     {
                         treeList.SuspendLayout();
@@ -117,9 +117,9 @@ namespace FileManager.PresentationClasses.WallBin
                                 {
                                     foreach (BusinessClasses.FolderLink rootFolder in _rootFolders)
                                     {
-                                        DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
+                                        DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeList.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
                                         rootNode.StateImageIndex = 0;
-                                        FillNode(rootNode, true);
+                                        FillNode(rootNode, false);
                                         Application.DoEvents();
                                     }
                                 });
@@ -150,7 +150,7 @@ namespace FileManager.PresentationClasses.WallBin
                         else if (hitInfo.Node.Tag != null)
                         {
                             if (hitInfo.Node.Tag.GetType() == typeof(BusinessClasses.FolderLink))
-                                FillNode(hitInfo.Node, true);
+                                FillNode(hitInfo.Node, false);
                             else if (hitInfo.Node.Tag.GetType() == typeof(BusinessClasses.FileLink))
                                 ViewItem(hitInfo.Node.Tag as BusinessClasses.FileLink);
                         }
@@ -178,43 +178,7 @@ namespace FileManager.PresentationClasses.WallBin
                 ViewItem(fileLink);
         }
 
-        private void ExpandAll(DevExpress.XtraTreeList.Nodes.TreeListNode node)
-        {
-            foreach (DevExpress.XtraTreeList.Nodes.TreeListNode childNode in node.Nodes)
-            {
-                if (childNode.Nodes.Count > 0)
-                {
-                    Application.DoEvents();
-                    ExpandAll(childNode);
-                    Application.DoEvents();
-                    childNode.Expanded = true;
-                }
-                else if (!node.GetValue(treeListColumnName).Equals("Expand All") && !node.GetValue(treeListColumnName).Equals("Collapse All"))
-                {
-                    FillNode(childNode, true);
-                    if (node.Nodes.Count > 0)
-                    {
-                        Application.DoEvents();
-                        ExpandAll(childNode);
-                        Application.DoEvents();
-                        childNode.Expanded = true;
-                    }
-                }
-            }
-        }
-
-        private void Expand(DevExpress.XtraTreeList.Nodes.TreeListNode node)
-        {
-            foreach (DevExpress.XtraTreeList.Nodes.TreeListNode childNode in node.Nodes)
-            {
-                if (childNode.Nodes.Count > 0)
-                    childNode.Expanded = true;
-                else if (!node.GetValue(treeListColumnName).Equals("Expand All") && !node.GetValue(treeListColumnName).Equals("Collapse All"))
-                    FillNode(childNode, true);
-            }
-        }
-
-        private void FillNode(DevExpress.XtraTreeList.Nodes.TreeListNode node, bool showFiles)
+        private void FillNode(DevExpress.XtraTreeList.Nodes.TreeListNode node, bool showSubItems)
         {
             DevExpress.XtraTreeList.Nodes.TreeListNode childNode;
             if (node.Tag != null)
@@ -224,38 +188,38 @@ namespace FileManager.PresentationClasses.WallBin
                 {
                     try
                     {
+                        List<DirectoryInfo> folders = new List<DirectoryInfo>();
+                        folders.AddRange(folderLink.Folder.GetDirectories());
+                        folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                        foreach (DirectoryInfo subFolder in folders)
                         {
-                            List<DirectoryInfo> folders = new List<DirectoryInfo>();
-                            folders.AddRange(folderLink.Folder.GetDirectories());
-                            folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-                            foreach (DirectoryInfo subFolder in folders)
+                            if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
                             {
-                                if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
-                                {
-                                    BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
-                                    subFolderLink.RootId = folderLink.RootId;
-                                    subFolderLink.Folder = subFolder;
-                                    childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
-                                    childNode.StateImageIndex = 0;
-                                }
+                                BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
+                                subFolderLink.RootId = folderLink.RootId;
+                                subFolderLink.Folder = subFolder;
+                                childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
+                                childNode.StateImageIndex = 0;
+
+                                if (showSubItems)
+                                    FillNode(childNode, showSubItems);
                             }
+                            Application.DoEvents();
                         }
-                        if (showFiles)
+                        List<FileInfo> files = new List<FileInfo>();
+                        files.AddRange(folderLink.Folder.GetFiles());
+                        files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                        foreach (FileInfo file in files)
                         {
-                            List<FileInfo> files = new List<FileInfo>();
-                            files.AddRange(folderLink.Folder.GetFiles());
-                            files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-                            foreach (FileInfo file in files)
+                            if (!file.Name.ToLower().Equals("thumbs.db"))
                             {
-                                if (!file.Name.ToLower().Equals("thumbs.db"))
-                                {
-                                    BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
-                                    fileLink.RootId = folderLink.RootId;
-                                    fileLink.File = file;
-                                    childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, fileLink);
-                                    childNode.StateImageIndex = GetImageindex(file);
-                                }
+                                BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
+                                fileLink.RootId = folderLink.RootId;
+                                fileLink.File = file;
+                                childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, fileLink);
+                                childNode.StateImageIndex = GetImageindex(file);
                             }
+                            Application.DoEvents();
                         }
                         node.StateImageIndex = 1;
                         node.Expanded = true;

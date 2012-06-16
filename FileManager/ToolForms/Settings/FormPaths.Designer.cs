@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.laBackup = new System.Windows.Forms.Label();
             this.laNetwork = new System.Windows.Forms.Label();
             this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
             this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
             this.buttonEditNetworkSyncFolder = new DevExpress.XtraEditors.ButtonEdit();
-            this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+            this.styleController = new DevExpress.XtraEditors.StyleController();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.buttonEditBackupFolder = new DevExpress.XtraEditors.ButtonEdit();
+            this.checkEditDirectAccess = new DevExpress.XtraEditors.CheckEdit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditNetworkSyncFolder.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditDirectAccess.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // laBackup
@@ -53,8 +54,9 @@
             // 
             // laNetwork
             // 
+            this.laNetwork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.laNetwork.AutoSize = true;
-            this.laNetwork.Location = new System.Drawing.Point(12, 63);
+            this.laNetwork.Location = new System.Drawing.Point(12, 104);
             this.laNetwork.Name = "laNetwork";
             this.laNetwork.Size = new System.Drawing.Size(133, 16);
             this.laNetwork.TabIndex = 3;
@@ -66,7 +68,7 @@
             this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonXOK.Location = new System.Drawing.Point(67, 113);
+            this.buttonXOK.Location = new System.Drawing.Point(67, 154);
             this.buttonXOK.Name = "buttonXOK";
             this.buttonXOK.Size = new System.Drawing.Size(93, 32);
             this.buttonXOK.TabIndex = 8;
@@ -79,7 +81,7 @@
             this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonXCancel.Location = new System.Drawing.Point(204, 113);
+            this.buttonXCancel.Location = new System.Drawing.Point(204, 154);
             this.buttonXCancel.Name = "buttonXCancel";
             this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
             this.buttonXCancel.TabIndex = 9;
@@ -88,7 +90,8 @@
             // 
             // buttonEditNetworkSyncFolder
             // 
-            this.buttonEditNetworkSyncFolder.Location = new System.Drawing.Point(12, 82);
+            this.buttonEditNetworkSyncFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonEditNetworkSyncFolder.Location = new System.Drawing.Point(12, 123);
             this.buttonEditNetworkSyncFolder.Name = "buttonEditNetworkSyncFolder";
             this.buttonEditNetworkSyncFolder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -127,11 +130,22 @@
             this.buttonEditBackupFolder.TabIndex = 11;
             this.buttonEditBackupFolder.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditBackupFolder_ButtonClick);
             // 
+            // checkEditDirectAccess
+            // 
+            this.checkEditDirectAccess.Location = new System.Drawing.Point(10, 67);
+            this.checkEditDirectAccess.Name = "checkEditDirectAccess";
+            this.checkEditDirectAccess.Properties.AutoWidth = true;
+            this.checkEditDirectAccess.Properties.Caption = "Use Direct Access to Files";
+            this.checkEditDirectAccess.Size = new System.Drawing.Size(179, 21);
+            this.checkEditDirectAccess.StyleController = this.styleController;
+            this.checkEditDirectAccess.TabIndex = 12;
+            // 
             // FormPaths
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(365, 154);
+            this.ClientSize = new System.Drawing.Size(365, 195);
+            this.Controls.Add(this.checkEditDirectAccess);
             this.Controls.Add(this.buttonEditBackupFolder);
             this.Controls.Add(this.buttonEditNetworkSyncFolder);
             this.Controls.Add(this.buttonXCancel);
@@ -152,6 +166,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditNetworkSyncFolder.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditDirectAccess.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +182,6 @@
         private DevExpress.XtraEditors.StyleController styleController;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private DevExpress.XtraEditors.ButtonEdit buttonEditBackupFolder;
+        private DevExpress.XtraEditors.CheckEdit checkEditDirectAccess;
     }
 }
