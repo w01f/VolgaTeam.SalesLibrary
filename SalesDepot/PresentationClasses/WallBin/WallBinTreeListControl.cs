@@ -204,11 +204,13 @@ namespace SalesDepot.PresentationClasses.WallBin
                                 subFolderLink.Folder = subFolder;
                                 childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
                                 childNode.StateImageIndex = 0;
-                                
+
                                 Application.DoEvents();
 
                                 if (showSubItems)
                                     FillNode(childNode, showSubItems);
+                                if (showSubItems && childNode.Nodes.Count == 0)
+                                    node.Nodes.Remove(childNode);
                             }
                             Application.DoEvents();
                         }
@@ -217,12 +219,12 @@ namespace SalesDepot.PresentationClasses.WallBin
                         files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
                         foreach (FileInfo file in files)
                         {
-                            if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.Name.ToLower().Contains(x.ToLower())).Count() == 0)
+                            if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.Name.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
                             {
                                 BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
                                 fileLink.RootId = folderLink.RootId;
                                 fileLink.File = file;
-                                childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToShortDateString() + " " + file.LastWriteTime.ToShortTimeString() + ")" }, node, fileLink);
+                                childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToString("MM/dd/yy hh:mm tt") + ")" }, node, fileLink);
                                 childNode.StateImageIndex = GetImageindex(file);
                             }
                             Application.DoEvents();
@@ -328,7 +330,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             try
             {
                 foreach (DirectoryInfo subFolder in folderLink.Folder.GetDirectories())
-                    if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
+                    if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
                     {
                         BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
                         subFolderLink.RootId = folderLink.RootId;
@@ -337,7 +339,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     }
                 foreach (FileInfo file in folderLink.Folder.GetFiles("*" + keyWord + "*.*"))
                 {
-                    if ((file.LastWriteTime >= dateEditStartDate.DateTime && file.LastWriteTime <= dateEditEndDate.DateTime) || !checkEditDateRange.Checked)
+                    if (((file.LastWriteTime >= dateEditStartDate.DateTime && file.LastWriteTime <= dateEditEndDate.DateTime) || !checkEditDateRange.Checked) && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.FullName.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
                     {
                         BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
                         fileLink.RootId = folderLink.RootId;

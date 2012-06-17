@@ -105,6 +105,7 @@ namespace SalesDepot.BusinessClasses
         public DirectoryInfo StorageFolder { get; set; }
         public DirectoryInfo Folder { get; set; }
         public bool UseDirectAccess { get; set; }
+        public DateTime DirectAccessFileBottomDate { get; set; }
         public string BrandingText { get; set; }
         public DateTime SyncDate { get; set; }
 
@@ -221,6 +222,10 @@ namespace SalesDepot.BusinessClasses
                     node = document.SelectSingleNode(@"/Library/RootFolder");
                     if (node != null)
                         this.Folder = new DirectoryInfo(node.InnerText);
+                    node = document.SelectSingleNode(@"/Library/DirectAccessFileBottomDate");
+                    if (node != null)
+                        if (DateTime.TryParse(node.InnerText, out tempDate))
+                            this.DirectAccessFileBottomDate = tempDate;
                 }
                 node = document.SelectSingleNode(@"/Library/BrandingText");
                 if (node != null)
@@ -315,7 +320,8 @@ namespace SalesDepot.BusinessClasses
                     {
                         LibraryFile libraryFile = new LibraryFile(new LibraryFolder(new LibraryPage(this)));
                         libraryFile.Deserialize(childNode);
-                        this.DirectAccessLinks.Add(libraryFile);
+                        if (File.Exists(libraryFile.RemotePath) && File.GetLastWriteTime(libraryFile.RemotePath) > this.DirectAccessFileBottomDate)
+                            this.DirectAccessLinks.Add(libraryFile);
                     }
 
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
