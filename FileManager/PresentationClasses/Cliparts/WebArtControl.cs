@@ -85,7 +85,7 @@ namespace FileManager.PresentationClasses.Cliparts
                         {
                             foreach (DirectoryInfo subFolder in folder.GetDirectories())
                             {
-                                if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
+                                if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
                                 {
                                     childNode = treeListFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
                                     childNode.StateImageIndex = 0;

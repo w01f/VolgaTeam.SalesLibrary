@@ -68,6 +68,7 @@ namespace FileManager.ToolForms.Settings
                 ConfigurationClasses.SettingsManager.Instance.BackupPath = buttonEditBackupFolder.EditValue.ToString();
                 ConfigurationClasses.SettingsManager.Instance.NetworkPath = buttonEditNetworkSyncFolder.EditValue != null ? buttonEditNetworkSyncFolder.EditValue.ToString() : string.Empty;
                 ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles = checkEditDirectAccess.Checked;
+                ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit = (int)spinEditFileAgeLimil.Value;
                 ConfigurationClasses.SettingsManager.Instance.Save();
             }
         }
@@ -77,6 +78,23 @@ namespace FileManager.ToolForms.Settings
             buttonEditBackupFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.BackupPath;
             buttonEditNetworkSyncFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.NetworkPath;
             checkEditDirectAccess.Checked = ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles;
+            checkEditFileAgeLimit.Checked = ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit > 0;
+            spinEditFileAgeLimil.Value = ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit;
+        }
+
+        private void checkEditDirectAccess_CheckedChanged(object sender, EventArgs e)
+        {
+            checkEditFileAgeLimit.Enabled = checkEditDirectAccess.Checked;
+            if (!checkEditDirectAccess.Checked)
+                checkEditFileAgeLimit.Checked = false;
+        }
+
+        private void checkEditFileAgeLimit_CheckedChanged(object sender, EventArgs e)
+        {
+            spinEditFileAgeLimil.Enabled = checkEditFileAgeLimit.Checked;
+            laFileAgeLimit.Enabled = checkEditFileAgeLimit.Checked;
+            if (!checkEditFileAgeLimit.Checked)
+                spinEditFileAgeLimil.Value = 0;
         }
     }
 }

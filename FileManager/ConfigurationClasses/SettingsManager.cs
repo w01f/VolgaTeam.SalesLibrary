@@ -34,6 +34,7 @@ namespace FileManager.ConfigurationClasses
         public string BackupPath { get; set; }
         public string NetworkPath { get; set; }
         public bool UseDirectAccessToFiles { get; set; }
+        public int DirectAccessFileAgeLimit { get; set; }
         public string SelectedLibrary { get; set; }
         public string SelectedPage { get; set; }
         public int SelectedCalendarYear { get; set; }
@@ -46,7 +47,7 @@ namespace FileManager.ConfigurationClasses
 
         public int DestinationPathLength { get; private set; }
 
-        public List<string> HiddenFolders { get; private set; }
+        public List<string> HiddenObjects { get; private set; }
 
         public static SettingsManager Instance
         {
@@ -89,13 +90,13 @@ namespace FileManager.ConfigurationClasses
             this.MultitabView = true;
             #endregion
 
-            this.HiddenFolders = new List<string>();
-            this.HiddenFolders.Add(LibraryLogoFolder);
-            this.HiddenFolders.Add(OldPreviewFolderPrefix);
-            this.HiddenFolders.Add("!Old");
-            this.HiddenFolders.Add(PreviewContainersRootFolderName);
-            this.HiddenFolders.Add(OvernightsCalendarRootFolderName);
-            this.HiddenFolders.Add(ExtraFoldersRootFolderName);
+            this.HiddenObjects = new List<string>();
+            this.HiddenObjects.Add("!Old");
+            this.HiddenObjects.Add(PreviewContainersRootFolderName);
+            this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(ExtraFoldersRootFolderName);
+            this.HiddenObjects.Add("thumbs.db");
+            this.HiddenObjects.Add("SalesDepotCache.xml");
         }
 
         public void Load()
@@ -119,6 +120,10 @@ namespace FileManager.ConfigurationClasses
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.UseDirectAccessToFiles = tempBool;
+                node = document.SelectSingleNode(@"/LocalSettings/DirectAccessFileAgeLimit");
+                if (node != null)
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.DirectAccessFileAgeLimit = tempInt;
                 node = document.SelectSingleNode(@"/LocalSettings/SelectedLibrary");
                 if (node != null)
                     this.SelectedLibrary = node.InnerText;
@@ -164,6 +169,7 @@ namespace FileManager.ConfigurationClasses
             xml.AppendLine(@"<BackupPath>" + this.BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
             xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
             xml.AppendLine(@"<UseDirectAccessToFiles>" + this.UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
+            xml.AppendLine(@"<DirectAccessFileAgeLimit>" + this.DirectAccessFileAgeLimit.ToString() + @"</DirectAccessFileAgeLimit>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
             xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
             xml.AppendLine(@"<SelectedCalendarYear>" + this.SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");

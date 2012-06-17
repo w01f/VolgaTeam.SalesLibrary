@@ -34,13 +34,13 @@ namespace FileManager.BusinessClasses
                 this.LibraryCollection.Clear();
                 if (rootFolder.Root.FullName.Equals(rootFolder.FullName))
                 {
-                    this.LibraryCollection.Add(new Library(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage, rootFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles));
+                    this.LibraryCollection.Add(new Library(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage, rootFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit));
                     this.SelectedLibrary = this.LibraryCollection[0];
                 }
                 else
                 {
                     foreach (DirectoryInfo subFolder in rootFolder.GetDirectories())
-                        this.LibraryCollection.Add(new Library(subFolder.Name, subFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles));
+                        this.LibraryCollection.Add(new Library(subFolder.Name, subFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit));
                     this.SelectedLibrary = this.LibraryCollection.Where(x => x.Name.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedLibrary)).FirstOrDefault();
                     if (this.SelectedLibrary == null && this.LibraryCollection.Count > 0)
                         this.SelectedLibrary = this.LibraryCollection[0];
@@ -76,12 +76,11 @@ namespace FileManager.BusinessClasses
                         List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
 
                         DirectoryInfo previewSourceFolder = new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
-                        
+
                         if (!Directory.Exists(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)))
                             Directory.CreateDirectory(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
                         DirectoryInfo previewDestinationFolder = new DirectoryInfo(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
 
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
                         if (!salesDepot.UseDirectAccess)
                         {
                             foreach (LibraryPage page in salesDepot.Pages)
@@ -119,6 +118,8 @@ namespace FileManager.BusinessClasses
                                                 break;
                                         }
                                     }
+
+                            ToolClasses.SyncManager.Instance.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
 
                             #region Sync Primary Root
                             sourceSubFolders.Clear();
@@ -164,6 +165,7 @@ namespace FileManager.BusinessClasses
                         }
                         else
                         {
+                            ToolClasses.SyncManager.Instance.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
                             foreach (LibraryFile file in salesDepot.DirectAccessLinks)
                                 if (File.Exists(file.FullPath) && file.PreviewContainer != null)
                                     AddFolderForSync(new DirectoryInfo(file.PreviewContainer.PreviewStorageFolder), filesWhiteList);

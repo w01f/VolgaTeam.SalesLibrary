@@ -232,7 +232,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formExtraRoots.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
+                    _formExtraRoots.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit);
                     if (_formExtraRoots.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -296,7 +296,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formPages.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
+                    _formPages.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit);
                     if (_formPages.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -343,7 +343,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formColumns.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
+                    _formColumns.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit);
                     if (_formColumns.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -389,7 +389,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formAutoWidgets.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
+                    _formAutoWidgets.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit);
                     if (_formAutoWidgets.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -435,7 +435,7 @@ namespace FileManager.TabPages
             {
                 if (SaveLibraryWarning())
                 {
-                    _formDeadLinks.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess);
+                    _formDeadLinks.Library = new BusinessClasses.Library(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Name, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Folder, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.UseDirectAccess, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit);
                     if (_formDeadLinks.ShowDialog() == DialogResult.OK)
                     {
                         using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
@@ -736,11 +736,7 @@ namespace FileManager.TabPages
             _treeList = new PresentationClasses.WallBin.WallBinTreeListControl();
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
-                List<BusinessClasses.FolderLink> rootFolders = new List<BusinessClasses.FolderLink>();
-                rootFolders.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ExtraFolders);
-                rootFolders.Sort((x, y) => (x as BusinessClasses.RootFolder).Order.CompareTo((y as BusinessClasses.RootFolder).Order));
-                rootFolders.Insert(0, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.RootFolder);
-                _treeList.Init(rootFolders.ToArray());
+                _treeList.Init(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
             }
         }
 

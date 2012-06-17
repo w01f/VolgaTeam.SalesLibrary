@@ -73,7 +73,7 @@ namespace FileManager.PresentationClasses.Cliparts
                                 folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
                                 foreach (DirectoryInfo subFolder in folders)
                                 {
-                                    if (ConfigurationClasses.SettingsManager.Instance.HiddenFolders.Where(x => subFolder.FullName.Contains(x)).Count() == 0)
+                                    if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
                                     {
                                         childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolder);
                                         childNode.StateImageIndex = 0;

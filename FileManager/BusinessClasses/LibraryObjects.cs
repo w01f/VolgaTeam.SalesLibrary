@@ -38,6 +38,7 @@ namespace FileManager.BusinessClasses
         public string Name { get; set; }
         public DirectoryInfo Folder { get; set; }
         public bool UseDirectAccess { get; set; }
+        public DateTime DirectAccessFileBottomDate { get; set; }
         public string BrandingText { get; set; }
         public DateTime SyncDate { get; set; }
 
@@ -84,11 +85,12 @@ namespace FileManager.BusinessClasses
             }
         }
 
-        public Library(string name, DirectoryInfo folder, bool useDirectAccess)
+        public Library(string name, DirectoryInfo folder, bool useDirectAccess, int directAccessFileAgeLimit)
         {
             this.Identifier = Guid.NewGuid();
             this.Folder = folder;
             this.UseDirectAccess = useDirectAccess;
+            this.DirectAccessFileBottomDate = directAccessFileAgeLimit > 0 ? DateTime.Now.AddDays(-directAccessFileAgeLimit) : DateTime.MinValue;
             this.Name = name;
             this.IsConfigured = false;
             this.ExtraFolders = new List<RootFolder>();
@@ -161,6 +163,7 @@ namespace FileManager.BusinessClasses
             this.EnableAutoSync = false;
             this.SyncTimes.Clear();
             this.DirectAccessLinks.Clear();
+            this.ExtraFolders.Clear();
 
             string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
             if (File.Exists(file))
@@ -266,7 +269,8 @@ namespace FileManager.BusinessClasses
                     {
                         LibraryFile libraryFile = new LibraryFile(new LibraryFolder(new LibraryPage(this)));
                         libraryFile.Deserialize(childNode);
-                        this.DirectAccessLinks.Add(libraryFile);
+                        if (File.Exists(libraryFile.FullPath) && File.GetLastWriteTime(libraryFile.FullPath) > this.DirectAccessFileBottomDate)
+                            this.DirectAccessLinks.Add(libraryFile);
                     }
 
                 #region Auto Sync Settings
@@ -302,6 +306,7 @@ namespace FileManager.BusinessClasses
             xml.AppendLine("<Library>");
             xml.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
             xml.AppendLine(@"<UseDirectAccess>" + this.UseDirectAccess + @"</UseDirectAccess>");
+            xml.AppendLine(@"<DirectAccessFileBottomDate>" + this.DirectAccessFileBottomDate.ToString() + @"</DirectAccessFileBottomDate>");
             xml.AppendLine(@"<RootFolder>" + this.Folder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
             xml.AppendLine(@"<BrandingText>" + this.BrandingText.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</BrandingText>");
             xml.AppendLine(@"<SyncDate>" + this.SyncDate + @"</SyncDate>");
@@ -457,7 +462,7 @@ namespace FileManager.BusinessClasses
             List<FileInfo> files = new List<FileInfo>();
             foreach (DirectoryInfo subFolder in folder.GetDirectories())
                 files.AddRange(GetFiles(subFolder));
-            files.AddRange(folder.GetFiles("*.ppt*"));
+            files.AddRange(folder.GetFiles("*.ppt*").Where(x => x.LastWriteTime > this.DirectAccessFileBottomDate));
             return files.ToArray();
         }
 

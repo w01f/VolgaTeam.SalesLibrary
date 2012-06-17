@@ -37,10 +37,15 @@
             this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
             this.buttonEditBackupFolder = new DevExpress.XtraEditors.ButtonEdit();
             this.checkEditDirectAccess = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditFileAgeLimit = new DevExpress.XtraEditors.CheckEdit();
+            this.spinEditFileAgeLimil = new DevExpress.XtraEditors.SpinEdit();
+            this.laFileAgeLimit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditNetworkSyncFolder.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditDirectAccess.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditFileAgeLimit.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEditFileAgeLimil.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // laBackup
@@ -54,9 +59,8 @@
             // 
             // laNetwork
             // 
-            this.laNetwork.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.laNetwork.AutoSize = true;
-            this.laNetwork.Location = new System.Drawing.Point(12, 104);
+            this.laNetwork.Location = new System.Drawing.Point(12, 63);
             this.laNetwork.Name = "laNetwork";
             this.laNetwork.Size = new System.Drawing.Size(133, 16);
             this.laNetwork.TabIndex = 3;
@@ -68,7 +72,7 @@
             this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonXOK.Location = new System.Drawing.Point(67, 154);
+            this.buttonXOK.Location = new System.Drawing.Point(67, 196);
             this.buttonXOK.Name = "buttonXOK";
             this.buttonXOK.Size = new System.Drawing.Size(93, 32);
             this.buttonXOK.TabIndex = 8;
@@ -81,7 +85,7 @@
             this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonXCancel.Location = new System.Drawing.Point(204, 154);
+            this.buttonXCancel.Location = new System.Drawing.Point(204, 196);
             this.buttonXCancel.Name = "buttonXCancel";
             this.buttonXCancel.Size = new System.Drawing.Size(93, 32);
             this.buttonXCancel.TabIndex = 9;
@@ -90,8 +94,9 @@
             // 
             // buttonEditNetworkSyncFolder
             // 
-            this.buttonEditNetworkSyncFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonEditNetworkSyncFolder.Location = new System.Drawing.Point(12, 123);
+            this.buttonEditNetworkSyncFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEditNetworkSyncFolder.Location = new System.Drawing.Point(12, 82);
             this.buttonEditNetworkSyncFolder.Name = "buttonEditNetworkSyncFolder";
             this.buttonEditNetworkSyncFolder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -121,6 +126,8 @@
             // 
             // buttonEditBackupFolder
             // 
+            this.buttonEditBackupFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEditBackupFolder.Location = new System.Drawing.Point(12, 28);
             this.buttonEditBackupFolder.Name = "buttonEditBackupFolder";
             this.buttonEditBackupFolder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -132,19 +139,68 @@
             // 
             // checkEditDirectAccess
             // 
-            this.checkEditDirectAccess.Location = new System.Drawing.Point(10, 67);
+            this.checkEditDirectAccess.Location = new System.Drawing.Point(13, 120);
             this.checkEditDirectAccess.Name = "checkEditDirectAccess";
             this.checkEditDirectAccess.Properties.AutoWidth = true;
             this.checkEditDirectAccess.Properties.Caption = "Use Direct Access to Files";
             this.checkEditDirectAccess.Size = new System.Drawing.Size(179, 21);
             this.checkEditDirectAccess.StyleController = this.styleController;
             this.checkEditDirectAccess.TabIndex = 12;
+            this.checkEditDirectAccess.CheckedChanged += new System.EventHandler(this.checkEditDirectAccess_CheckedChanged);
+            // 
+            // checkEditFileAgeLimit
+            // 
+            this.checkEditFileAgeLimit.Enabled = false;
+            this.checkEditFileAgeLimit.Location = new System.Drawing.Point(13, 152);
+            this.checkEditFileAgeLimit.Name = "checkEditFileAgeLimit";
+            this.checkEditFileAgeLimit.Properties.AutoWidth = true;
+            this.checkEditFileAgeLimit.Properties.Caption = "Sync only last";
+            this.checkEditFileAgeLimit.Size = new System.Drawing.Size(106, 21);
+            this.checkEditFileAgeLimit.StyleController = this.styleController;
+            this.checkEditFileAgeLimit.TabIndex = 13;
+            this.checkEditFileAgeLimit.CheckedChanged += new System.EventHandler(this.checkEditFileAgeLimit_CheckedChanged);
+            // 
+            // spinEditFileAgeLimil
+            // 
+            this.spinEditFileAgeLimil.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEditFileAgeLimil.Enabled = false;
+            this.spinEditFileAgeLimil.Location = new System.Drawing.Point(144, 151);
+            this.spinEditFileAgeLimil.Name = "spinEditFileAgeLimil";
+            this.spinEditFileAgeLimil.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.spinEditFileAgeLimil.Properties.IsFloatValue = false;
+            this.spinEditFileAgeLimil.Properties.Mask.EditMask = "N00";
+            this.spinEditFileAgeLimil.Properties.MaxValue = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.spinEditFileAgeLimil.Size = new System.Drawing.Size(70, 22);
+            this.spinEditFileAgeLimil.StyleController = this.styleController;
+            this.spinEditFileAgeLimil.TabIndex = 14;
+            // 
+            // laFileAgeLimit
+            // 
+            this.laFileAgeLimit.AutoSize = true;
+            this.laFileAgeLimit.Enabled = false;
+            this.laFileAgeLimit.Location = new System.Drawing.Point(220, 155);
+            this.laFileAgeLimit.Name = "laFileAgeLimit";
+            this.laFileAgeLimit.Size = new System.Drawing.Size(36, 16);
+            this.laFileAgeLimit.TabIndex = 15;
+            this.laFileAgeLimit.Text = "days";
             // 
             // FormPaths
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(365, 195);
+            this.ClientSize = new System.Drawing.Size(365, 237);
+            this.Controls.Add(this.laFileAgeLimit);
+            this.Controls.Add(this.spinEditFileAgeLimil);
+            this.Controls.Add(this.checkEditFileAgeLimit);
             this.Controls.Add(this.checkEditDirectAccess);
             this.Controls.Add(this.buttonEditBackupFolder);
             this.Controls.Add(this.buttonEditNetworkSyncFolder);
@@ -167,6 +223,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonEditBackupFolder.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkEditDirectAccess.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditFileAgeLimit.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEditFileAgeLimil.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -183,5 +241,8 @@
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private DevExpress.XtraEditors.ButtonEdit buttonEditBackupFolder;
         private DevExpress.XtraEditors.CheckEdit checkEditDirectAccess;
+        private DevExpress.XtraEditors.CheckEdit checkEditFileAgeLimit;
+        private DevExpress.XtraEditors.SpinEdit spinEditFileAgeLimil;
+        private System.Windows.Forms.Label laFileAgeLimit;
     }
 }
