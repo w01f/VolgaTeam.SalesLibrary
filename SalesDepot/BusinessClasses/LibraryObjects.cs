@@ -53,7 +53,7 @@ namespace SalesDepot.BusinessClasses
             if (this.Folder.GetFiles("*.xml").Length > 0 && !this.Folder.Name.ToLower().Equals("_gsdata_"))
             {
                 library = new Library(this, this.Folder.Name.Equals(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage) ? this.Folder.Parent.Name : this.Folder.Name, this.Folder);
-                if (library != null && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
+                if (library != null && library.IsConfigured && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
                     _libraryCollection.Add(library);
             }
             else
@@ -65,7 +65,7 @@ namespace SalesDepot.BusinessClasses
                             library = new Library(this, primaryRootFolder.Parent.Name, primaryRootFolder);
                         else
                             library = new Library(this, subFolder.Name, subFolder);
-                        if (library != null && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
+                        if (library != null && library.IsConfigured && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
                             _libraryCollection.Add(library);
                     }
         }
@@ -321,7 +321,11 @@ namespace SalesDepot.BusinessClasses
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
                 if (node != null)
                     this.OvernightsCalendar.Deserialize(node);
-                this.IsConfigured = true;
+
+                if (this.UseDirectAccess && !this.Folder.Exists)
+                    this.IsConfigured = false;
+                else
+                    this.IsConfigured = true;
             }
             if (this.Pages.Count == 0)
                 this.Pages.Add(new LibraryPage(this, true));
@@ -1305,12 +1309,12 @@ namespace SalesDepot.BusinessClasses
                 case ".WMV":
                 case ".AVI":
                 case ".WMZ":
+                case ".MPG":
                     this.Type = FileTypes.MediaPlayerVideo;
                     break;
                 case ".ASF":
                 case ".MOV":
                 case ".MP4":
-                case ".MPG":
                 case ".M4V":
                 case ".FLV":
                 case ".OGV":

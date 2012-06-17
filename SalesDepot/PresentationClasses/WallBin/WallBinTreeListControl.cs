@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -112,6 +111,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
                             laTreeViewProgressLable.Text = "Loading Tree View...";
                             pnTreeViewProgress.Visible = true;
+                            circularProgress.IsRunning = true;
                             treeList.Enabled = false;
 
                             Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
@@ -122,7 +122,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                                     {
                                         DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeList.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
                                         rootNode.StateImageIndex = 0;
-                                        FillNode(rootNode, false);
+                                        FillNode(rootNode, true);
                                         Application.DoEvents();
                                     }
                                 });
@@ -132,6 +132,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                             while (thread.IsAlive)
                                 Application.DoEvents();
                             pnTreeViewProgress.Visible = false;
+                            circularProgress.IsRunning = false;
                             treeList.ResumeLayout();
                             treeList.Enabled = true;
                             hitInfo.Node.SetValue(treeListColumnName, "Collapse All");
@@ -203,6 +204,8 @@ namespace SalesDepot.PresentationClasses.WallBin
                                 subFolderLink.Folder = subFolder;
                                 childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
                                 childNode.StateImageIndex = 0;
+                                
+                                Application.DoEvents();
 
                                 if (showSubItems)
                                     FillNode(childNode, showSubItems);

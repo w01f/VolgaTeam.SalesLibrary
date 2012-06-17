@@ -177,13 +177,16 @@ namespace SalesDepot
                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
                     BusinessClasses.LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LibraryRootFolder));
-                    this.Invoke((MethodInvoker)delegate()
+                    if (BusinessClasses.LibraryManager.Instance.LibraryPackageCollection.Count > 0)
                     {
-                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildPackageViewers();
-                        Application.DoEvents();
-                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
-                        Application.DoEvents();
-                    });
+                        this.Invoke((MethodInvoker)delegate()
+                        {
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildPackageViewers();
+                            Application.DoEvents();
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
+                            Application.DoEvents();
+                        });
+                    }
                 }));
                 form.Show();
                 Application.DoEvents();
@@ -192,28 +195,38 @@ namespace SalesDepot
                     Application.DoEvents();
                 form.Close();
 
-                thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                if (BusinessClasses.LibraryManager.Instance.LibraryPackageCollection.Count > 0)
                 {
-                    this.Invoke((MethodInvoker)delegate()
+                    thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        this.TabHome.LoadPage();
+                        this.Invoke((MethodInvoker)delegate()
+                        {
+                            this.TabHome.LoadPage();
+                            Application.DoEvents();
+                            _alowToSave = true;
+                            if (ConfigurationClasses.SettingsManager.Instance.CalendarView)
+                                ribbonTabItemCalendar.Select();
+                            else
+                                ribbonControl_SelectedRibbonTabChanged(null, null);
+                            Application.DoEvents();
+                        });
+                    }));
+                    thread.Start();
+                    while (thread.IsAlive)
                         Application.DoEvents();
-                        _alowToSave = true;
-                        if (ConfigurationClasses.SettingsManager.Instance.CalendarView)
-                            ribbonTabItemCalendar.Select();
-                        else
-                            ribbonControl_SelectedRibbonTabChanged(null, null);
-                        Application.DoEvents();
-                    });
-                }));
-                thread.Start();
-                while (thread.IsAlive)
-                    Application.DoEvents();
+                }
 
                 ribbonControl.Visible = true;
                 pnContainer.BringToFront();
             }
             AppManager.Instance.ActivateMainForm();
+            if (BusinessClasses.LibraryManager.Instance.LibraryPackageCollection.Count == 0)
+            {
+                ribbonBarStations.Enabled = false;
+                ribbonBarHomeView.Enabled = false;
+                ribbonTabItemSettings.Enabled = false;
+                AppManager.Instance.ShowWarning("Library is not available...\nCheck your network connections....");
+            }
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
