@@ -24,29 +24,36 @@ namespace FileManager
             }
         }
 
-        private void Init()
+        private bool Init()
         {
+            bool result = false;
             ConfigurationClasses.SettingsManager.Instance.Load();
             ConfigurationClasses.ListManager.Instance.Init();
-            if (string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath))
+            if (string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath) || !Directory.Exists(ConfigurationClasses.SettingsManager.Instance.BackupPath))
             {
-                AppManager.Instance.ShowWarning("Primary Backup Root is not set.\nYou need to configure application");
+                AppManager.Instance.ShowWarning("Primary Backup Root is not set or unavailable.\nYou need to configure application");
                 using (ToolForms.Settings.FormPaths form = new ToolForms.Settings.FormPaths())
                 {
                     if (form.ShowDialog() == DialogResult.Cancel)
                     {
                         AppManager.Instance.ShowWarning("Application is not configured and will be closed");
-                        return;
                     }
+                    else
+                        result = true;
                 }
             }
+            else
+                result = true;
+            return result;
         }
 
         public void RunForm()
         {
-            Init();
-            FormMain.Instance.ShowInTaskbar = true;
-            Application.Run(FormMain.Instance);
+            if (Init())
+            {
+                FormMain.Instance.ShowInTaskbar = true;
+                Application.Run(FormMain.Instance);
+            }
         }
 
         public void ActivateMainForm()

@@ -137,8 +137,8 @@ namespace FileManager.TabPages
 
                 pnEmpty.Visible = false;
             }
-            FormMain.Instance.buttonItemHomeFileTreeView.Checked = ConfigurationClasses.SettingsManager.Instance.TreeViewVisible & !BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess;
-            ShowTreeView(ConfigurationClasses.SettingsManager.Instance.TreeViewVisible & !BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess);
+            FormMain.Instance.buttonItemHomeFileTreeView.Checked = ConfigurationClasses.SettingsManager.Instance.TreeViewVisible & (BusinessClasses.LibraryManager.Instance.SelectedLibrary == null || !BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess);
+            ShowTreeView(ConfigurationClasses.SettingsManager.Instance.TreeViewVisible & (BusinessClasses.LibraryManager.Instance.SelectedLibrary == null || !BusinessClasses.LibraryManager.Instance.SelectedLibrary.UseDirectAccess));
             FormMain.Instance.buttonItemHomeFileTreeView.CheckedChanged += new EventHandler(buttonItemHomeFileTreeView_CheckedChanged);
         }
 

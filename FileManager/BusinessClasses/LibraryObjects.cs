@@ -424,8 +424,8 @@ namespace FileManager.BusinessClasses
             if (this.UseDirectAccess)
             {
                 List<BusinessClasses.FolderLink> rootFolders = new List<BusinessClasses.FolderLink>();
-                rootFolders.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ExtraFolders);
-                rootFolders.Insert(0, PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.RootFolder);
+                rootFolders.AddRange(this.ExtraFolders);
+                rootFolders.Insert(0, this.RootFolder);
                 foreach (FolderLink folder in rootFolders)
                 {
                     foreach (FileInfo file in GetFiles(folder.Folder))

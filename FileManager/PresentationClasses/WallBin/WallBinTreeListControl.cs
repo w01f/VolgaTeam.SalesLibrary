@@ -119,7 +119,7 @@ namespace FileManager.PresentationClasses.WallBin
                                     {
                                         DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeList.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
                                         rootNode.StateImageIndex = 0;
-                                        FillNode(rootNode, false);
+                                        FillNode(rootNode, true);
                                         Application.DoEvents();
                                     }
                                 });
