@@ -39,6 +39,7 @@ namespace AutoSynchronizer.BusinessClasses
 
         #region File Grabber Settings
         public bool EnableFileGrabber { get; set; }
+        public int FileGrabInterval { get; set; }
         public string FileGrabSourceFolder { get; set; }
         #endregion
 
@@ -58,6 +59,7 @@ namespace AutoSynchronizer.BusinessClasses
 
             #region File Grabber Settings
             this.EnableFileGrabber = false;
+            this.FileGrabInterval = 10;
             this.FileGrabSourceFolder = @"c:\Overnights Source";
             #endregion
 
@@ -92,6 +94,7 @@ namespace AutoSynchronizer.BusinessClasses
 
             #region File Grabber Settings
             result.AppendLine(@"<EnableFileGrabber>" + this.EnableFileGrabber.ToString() + @"</EnableFileGrabber>");
+            result.AppendLine(@"<FileGrabInterval>" + this.FileGrabInterval.ToString() + @"</FileGrabInterval>");
             result.AppendLine(@"<FileGrabSourceFolder>" + this.FileGrabSourceFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FileGrabSourceFolder>");
             #endregion
 
@@ -180,6 +183,10 @@ namespace AutoSynchronizer.BusinessClasses
                     case "EnableFileGrabber":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.EnableFileGrabber = tempBool;
+                        break;
+                    case "FileGrabInterval":
+                        if (int.TryParse(childNode.InnerText, out tempInt))
+                            this.FileGrabInterval = tempInt;
                         break;
                     case "FileGrabSourceFolder":
                         this.FileGrabSourceFolder = childNode.InnerText;

@@ -91,83 +91,109 @@ namespace AutoSynchronizer.BusinessClasses
                         destinationFolder.Create();
                     filesWhiteList.Clear();
 
-                    AddFolderForSync(new DirectoryInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)), filesWhiteList);
                     AddFolderForSync(new DirectoryInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.LibraryLogoFolder)), filesWhiteList);
-
-                    foreach (LibraryPage page in this.Manager.Library.Pages)
-                        foreach (LibraryFolder folder in page.Folders)
-                            foreach (LibraryFile file in folder.Files)
-                            {
-                                switch (file.Type)
-                                {
-                                    case FileTypes.Folder:
-                                        AddFolderForSync(new DirectoryInfo(file.FullPath), filesWhiteList);
-                                        break;
-                                    case FileTypes.BuggyPresentation:
-                                    case FileTypes.FriendlyPresentation:
-                                    case FileTypes.OtherPresentation:
-                                    case FileTypes.MediaPlayerVideo:
-                                    case FileTypes.QuickTimeVideo:
-                                    case FileTypes.Other:
-                                        if (File.Exists(file.FullPath))
-                                        {
-                                            if (!filesWhiteList.Contains(file.FullPath))
-                                                filesWhiteList.Add(file.FullPath);
-                                        }
-                                        break;
-                                    case FileTypes.LineBreak:
-                                        break;
-                                }
-                            }
-
-                    FileInfo cacheFile = new FileInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName));
-                    if (cacheFile.Exists)
-                        cacheFile.CopyTo(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.StorageFileName), true);
+                    filesWhiteList.Add(new FileInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName)).FullName);
 
                     List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                     List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
 
-                    #region Sync Primary Root
-                    sourceSubFolders.Clear();
-                    sourceSubFolders.AddRange(this.Manager.Library.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-                    foreach (DirectoryInfo subFolder in sourceSubFolders)
-                    {
-                        string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
-                        if (!Directory.Exists(destinationSubFolderPath))
-                            Directory.CreateDirectory(destinationSubFolderPath);
-                        DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
-                        destinationSubFolders.Add(destinationSubFolder);
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
-                    }
-                    #endregion
+                    DirectoryInfo previewSourceFolder = new DirectoryInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
 
-                    #region Sync Extra Roots
-                    if (this.Manager.Library.ExtraFolders.Count > 0)
+                    if (!Directory.Exists(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)))
+                        Directory.CreateDirectory(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
+                    DirectoryInfo previewDestinationFolder = new DirectoryInfo(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
+
+                    if (!this.Manager.Library.UseDirectAccess)
                     {
-                        string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName);
-                        if (!Directory.Exists(extraFoldersDestinationRootPath))
-                            Directory.CreateDirectory(extraFoldersDestinationRootPath);
-                        DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
-                        destinationSubFolders.Add(extraFoldersDestinationRoot);
-                        List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
-                        foreach (RootFolder extraRootFolder in this.Manager.Library.ExtraFolders)
+                        foreach (LibraryPage page in this.Manager.Library.Pages)
+                            foreach (LibraryFolder folder in page.Folders)
+                                foreach (LibraryFile file in folder.Files)
+                                {
+                                    switch (file.Type)
+                                    {
+                                        case FileTypes.Folder:
+                                            AddFolderForSync(new DirectoryInfo(file.FullPath), filesWhiteList);
+                                            break;
+                                        case FileTypes.BuggyPresentation:
+                                        case FileTypes.FriendlyPresentation:
+                                        case FileTypes.OtherPresentation:
+                                            if (File.Exists(file.FullPath))
+                                            {
+                                                if (!filesWhiteList.Contains(file.FullPath))
+                                                {
+                                                    filesWhiteList.Add(file.FullPath);
+                                                    if (file.PreviewContainer != null)
+                                                        AddFolderForSync(new DirectoryInfo(file.PreviewContainer.PreviewStorageFolder), filesWhiteList);
+                                                }
+                                            }
+                                            break;
+                                        case FileTypes.MediaPlayerVideo:
+                                        case FileTypes.QuickTimeVideo:
+                                        case FileTypes.Other:
+                                            if (File.Exists(file.FullPath))
+                                            {
+                                                if (!filesWhiteList.Contains(file.FullPath))
+                                                    filesWhiteList.Add(file.FullPath);
+                                            }
+                                            break;
+                                        case FileTypes.LineBreak:
+                                            break;
+                                    }
+                                }
+
+                        ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
+
+                        #region Sync Primary Root
+                        sourceSubFolders.Clear();
+                        sourceSubFolders.AddRange(this.Manager.Library.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                        foreach (DirectoryInfo subFolder in sourceSubFolders)
                         {
-                            sourceSubFolders.Clear();
-                            sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-                            if (sourceSubFolders.Count > 0)
-                            {
-                                string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-                                if (!Directory.Exists(extraFolderDestinationPath))
-                                    Directory.CreateDirectory(extraFolderDestinationPath);
-                                DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-                                extraFolderDestinations.Add(extraFolderDestination);
-                                ToolClasses.SyncManager.Instance.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-                            }
+                            string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
+                            if (!Directory.Exists(destinationSubFolderPath))
+                                Directory.CreateDirectory(destinationSubFolderPath);
+                            DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
+                            destinationSubFolders.Add(destinationSubFolder);
+                            ToolClasses.SyncManager.Instance.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
                         }
-                        foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
-                            ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
+                        #endregion
+
+                        #region Sync Extra Roots
+                        if (this.Manager.Library.ExtraFolders.Count > 0)
+                        {
+                            string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName);
+                            if (!Directory.Exists(extraFoldersDestinationRootPath))
+                                Directory.CreateDirectory(extraFoldersDestinationRootPath);
+                            DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
+                            destinationSubFolders.Add(extraFoldersDestinationRoot);
+                            List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
+                            foreach (RootFolder extraRootFolder in this.Manager.Library.ExtraFolders)
+                            {
+                                sourceSubFolders.Clear();
+                                sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                                if (sourceSubFolders.Count > 0)
+                                {
+                                    string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+                                    if (!Directory.Exists(extraFolderDestinationPath))
+                                        Directory.CreateDirectory(extraFolderDestinationPath);
+                                    DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+                                    extraFolderDestinations.Add(extraFolderDestination);
+                                    ToolClasses.SyncManager.Instance.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                                }
+                            }
+                            foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+                                ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
+                        }
+                        #endregion
                     }
-                    #endregion
+                    else
+                    {
+                        ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
+                        foreach (LibraryFile file in this.Manager.Library.DirectAccessLinks)
+                            if (File.Exists(file.FullPath) && file.PreviewContainer != null)
+                                AddFolderForSync(new DirectoryInfo(file.PreviewContainer.PreviewStorageFolder), filesWhiteList);
+                        destinationSubFolders.Add(previewDestinationFolder);
+                        ToolClasses.SyncManager.Instance.SynchronizeFolders(previewSourceFolder, previewDestinationFolder, filesWhiteList);
+                    }
 
                     #region Sync Overnights Calendar
                     if (this.Manager.Library.OvernightsCalendar.Enabled)
@@ -227,7 +253,7 @@ namespace AutoSynchronizer.BusinessClasses
             DateTime nowTime = DateTime.Now;
             DateTime nextTime = this.NextGrabTime.Equals(DateTime.MinValue) ? nowTime : this.NextGrabTime;
             TimeSpan difference = nextTime.Subtract(nowTime);
-            long totalMilliseconds = (long)difference.TotalMilliseconds;
+            long totalMilliseconds = (long)difference.TotalMilliseconds > 0 ? (long)difference.TotalMilliseconds : 0;
             return totalMilliseconds;
         }
 
@@ -266,4 +292,109 @@ namespace AutoSynchronizer.BusinessClasses
         }
         #endregion
     }
+
+    public class OvernightsFileGrabber
+    {
+        private System.Threading.Timer _timer = null;
+        private InteropClasses.ExcelHelper _excel = null;
+        private List<FileInfo> _files = new List<FileInfo>();
+
+        public DateTime NextGrabTime { get; set; }
+        public LibraryWrapper Manager { get; private set; }
+
+        public OvernightsFileGrabber(LibraryWrapper manager)
+        {
+            this.NextGrabTime = DateTime.MinValue;
+            this.Manager = manager;
+            _excel = new InteropClasses.ExcelHelper();
+        }
+
+        #region Schedule Methods
+        private long GetMillisecondsForNextGrab()
+        {
+            DateTime nowTime = DateTime.Now;
+            DateTime nextTime = this.NextGrabTime.Equals(DateTime.MinValue) ? nowTime : this.NextGrabTime;
+            TimeSpan difference = nextTime.Subtract(nowTime);
+            long totalMilliseconds = (long)difference.TotalMilliseconds > 0 ? (long)difference.TotalMilliseconds : 0;
+            return totalMilliseconds;
+        }
+
+        public void StopBackgroundGrab()
+        {
+            if (_timer != null)
+            {
+                _timer.Dispose();
+                _timer = null;
+            }
+        }
+
+        public void ScheduleNextGrab()
+        {
+            StopBackgroundGrab();
+            if (this.Manager.Library.OvernightsCalendar.EnableFileGrabber)
+            {
+                _timer = new System.Threading.Timer(delegate(object state)
+                {
+                    GrabFiles();
+
+                    this.NextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.FileGrabInterval);
+                    ScheduleNextGrab();
+                }, null, GetMillisecondsForNextGrab(), System.Threading.Timeout.Infinite);
+            }
+        }
+        #endregion
+
+        #region Grab Methods
+        private void GrabFiles()
+        {
+            List<FileInfo> newFiles = new List<FileInfo>(GetLatestFiles(new DirectoryInfo(this.Manager.Library.OvernightsCalendar.FileGrabSourceFolder)));
+            FileInfo[] changedFiles = newFiles.Where(x => !_files.Select(y => y.FullName).Contains(x.FullName) || _files.Where(y => y.FullName.Equals(x.FullName) && y.LastWriteTime < x.LastWriteTime).Count() > 0).ToArray();
+            foreach (FileInfo file in changedFiles)
+                GrabFile(file);
+            _files.Clear();
+            _files.AddRange(newFiles);
+        }
+
+        private void GrabFile(FileInfo file)
+        {
+            DateTime fileDate = file.LastWriteTime;
+            string fileExtension = file.Extension;
+            if (fileExtension.Equals(".xls") || fileExtension.Equals(".xlsx"))
+            {
+                string tempFile = Path.GetTempFileName();
+                file.CopyTo(tempFile, true);
+                InteropClasses.ExcelHelper excelHelper = new InteropClasses.ExcelHelper();
+                fileDate = excelHelper.GetOvernightsDate(tempFile);
+                if (File.Exists(tempFile))
+                    File.Delete(tempFile);
+            }
+            BusinessClasses.CalendarYear year = this.Manager.Library.OvernightsCalendar.Years.Where(x => x.Year.Equals(fileDate.Year)).FirstOrDefault();
+            if (year != null && year.RootFolder.Exists)
+            {
+                string destinationPath = Path.Combine(year.RootFolder.FullName, string.Format("{0}f{1}", new string[] { fileDate.ToString("MMddyy"), fileExtension }));
+                if (File.Exists(destinationPath))
+                {
+                    if (File.GetLastWriteTime(destinationPath) < file.LastWriteTime)
+                        file.CopyTo(destinationPath, true);
+                }
+                else
+                    file.CopyTo(destinationPath, true);
+            }
+        }
+
+        private FileInfo[] GetLatestFiles(DirectoryInfo sourceFolder)
+        {
+            List<FileInfo> result = new List<FileInfo>();
+
+            foreach (DirectoryInfo subFolder in sourceFolder.GetDirectories())
+                result.AddRange(GetLatestFiles(subFolder));
+
+            foreach (FileInfo file in sourceFolder.GetFiles())
+                result.Add(file);
+
+            return result.ToArray();
+        }
+        #endregion
+    }
 }
+

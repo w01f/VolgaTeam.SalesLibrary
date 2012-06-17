@@ -42,11 +42,11 @@ namespace AutoSynchronizer.BusinessClasses
     public class LibraryWrapper
     {
         private FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
-        private FileSystemWatcher _fileGrabberWatcher = null;
 
         public Library Library { get; private set; }
         public LibrarySynchronizer Syncer { get; private set; }
         public OvernightsEmailGrabber EmailGrabber { get; private set; }
+        public OvernightsFileGrabber FileGrabber { get; private set; }
 
         public LibraryWrapper(Library library)
         {
@@ -85,77 +85,17 @@ namespace AutoSynchronizer.BusinessClasses
                 this.Syncer.StopBackgroundSync();
             this.Syncer = new LibrarySynchronizer(this);
 
-            DateTime savedGrabTime = DateTime.MinValue;
             if (this.EmailGrabber != null)
-            {
-
                 this.EmailGrabber.StopBackgroundGrab();
-                savedGrabTime = this.EmailGrabber.NextGrabTime;
-            }
-            this.EmailGrabber = new OvernightsEmailGrabber(this);
-            this.EmailGrabber.NextGrabTime = savedGrabTime;
+            else
+                this.EmailGrabber = new OvernightsEmailGrabber(this);
             this.EmailGrabber.ScheduleNextGrab();
 
-            if (_fileGrabberWatcher != null)
-            {
-                _fileGrabberWatcher.EnableRaisingEvents = false;
-                _fileGrabberWatcher = null;
-            }
-            if (this.Library.OvernightsCalendar.EnableFileGrabber && Directory.Exists(this.Library.OvernightsCalendar.FileGrabSourceFolder))
-            {
-                foreach (FileInfo file in GetLatestFiles(new DirectoryInfo(this.Library.OvernightsCalendar.FileGrabSourceFolder)))
-                    GrabFile(file);
-
-                _fileGrabberWatcher = new FileSystemWatcher();
-                _fileGrabberWatcher.Path = this.Library.OvernightsCalendar.FileGrabSourceFolder;
-                _fileGrabberWatcher.IncludeSubdirectories = true;
-                _fileGrabberWatcher.NotifyFilter = NotifyFilters.LastWrite;
-                _fileGrabberWatcher.Changed += new FileSystemEventHandler((sender, e) =>
-                {
-                    GrabFile(new FileInfo(e.FullPath));
-                });
-                _fileGrabberWatcher.EnableRaisingEvents = true;
-            }
-        }
-
-        private void GrabFile(FileInfo file)
-        {
-            DateTime fileDate = file.LastWriteTime;
-            string fileExtension = file.Extension;
-            if (fileExtension.Equals(".xls") || fileExtension.Equals(".xlsx"))
-            {
-                string tempFile = Path.GetTempFileName();
-                file.CopyTo(tempFile, true);
-                InteropClasses.ExcelHelper excelHelper = new InteropClasses.ExcelHelper();
-                fileDate = excelHelper.GetOvernightsDate(tempFile);
-                if (File.Exists(tempFile))
-                    File.Delete(tempFile);
-            }
-            BusinessClasses.CalendarYear year = this.Library.OvernightsCalendar.Years.Where(x => x.Year.Equals(fileDate.Year)).FirstOrDefault();
-            if (year != null && year.RootFolder.Exists)
-            {
-                string destinationPath = Path.Combine(year.RootFolder.FullName, string.Format("{0}f{1}", new string[] { fileDate.ToString("MMddyy"), fileExtension }));
-                if (File.Exists(destinationPath))
-                { 
-                    if(File.GetLastWriteTime(destinationPath) < file.LastWriteTime)
-                        file.CopyTo(destinationPath, true);
-                }
-                else
-                    file.CopyTo(destinationPath, true);
-            }
-        }
-
-        private FileInfo[] GetLatestFiles(DirectoryInfo sourceFolder)
-        {
-            List<FileInfo> result = new List<FileInfo>();
-
-            foreach (DirectoryInfo subFolder in sourceFolder.GetDirectories())
-                result.AddRange(GetLatestFiles(subFolder));
-
-            foreach (FileInfo file in sourceFolder.GetFiles())
-                result.Add(file);
-
-            return result.ToArray();
+            if (this.FileGrabber != null)
+                this.FileGrabber.StopBackgroundGrab();
+            else
+                this.FileGrabber = new OvernightsFileGrabber(this);
+            this.FileGrabber.ScheduleNextGrab();
         }
     }
 }

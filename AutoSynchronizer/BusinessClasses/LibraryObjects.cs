@@ -37,6 +37,8 @@ namespace AutoSynchronizer.BusinessClasses
         public Guid Identifier { get; set; }
         public string Name { get; set; }
         public DirectoryInfo Folder { get; set; }
+        public bool UseDirectAccess { get; set; }
+        public DateTime DirectAccessFileBottomDate { get; set; }
         public string BrandingText { get; set; }
         public DateTime SyncDate { get; set; }
 
@@ -60,6 +62,7 @@ namespace AutoSynchronizer.BusinessClasses
         public List<LibraryFile> DeadLinks { get; private set; }
         public List<LibraryFile> ExpiredLinks { get; private set; }
         public List<AutoWidget> AutoWidgets { get; private set; }
+        public List<LibraryFile> DirectAccessLinks { get; private set; }
 
         #region Auto Sync Settings
         public bool EnableAutoSync { get; set; }
@@ -94,6 +97,7 @@ namespace AutoSynchronizer.BusinessClasses
             this.DeadLinks = new List<LibraryFile>();
             this.ExpiredLinks = new List<LibraryFile>();
             this.AutoWidgets = new List<AutoWidget>();
+            this.DirectAccessLinks = new List<LibraryFile>();
 
             #region Auto Sync Settings
             this.SyncTimes = new List<TimePoint>();
@@ -131,6 +135,8 @@ namespace AutoSynchronizer.BusinessClasses
             this.AutoWidgets.Clear();
             this.EnableAutoSync = false;
             this.SyncTimes.Clear();
+            this.DirectAccessLinks.Clear();
+            this.ExtraFolders.Clear();
 
             bool fileBusy = true;
             string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
@@ -147,6 +153,20 @@ namespace AutoSynchronizer.BusinessClasses
                         XmlNode node = document.SelectSingleNode(@"/Library/Name");
                         if (node != null)
                             this.Name = node.InnerText;
+                        node = document.SelectSingleNode(@"/Library/UseDirectAccess");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.UseDirectAccess = tempBool;
+                        if (this.UseDirectAccess)
+                        {
+                            node = document.SelectSingleNode(@"/Library/RootFolder");
+                            if (node != null)
+                                this.Folder = new DirectoryInfo(node.InnerText);
+                            node = document.SelectSingleNode(@"/Library/DirectAccessFileBottomDate");
+                            if (node != null)
+                                if (DateTime.TryParse(node.InnerText, out tempDate))
+                                    this.DirectAccessFileBottomDate = tempDate;
+                        }
                         node = document.SelectSingleNode(@"/Library/BrandingText");
                         if (node != null)
                             this.BrandingText = node.InnerText;
@@ -230,6 +250,15 @@ namespace AutoSynchronizer.BusinessClasses
                                 autoWidget.Deserialize(childNode);
                                 this.AutoWidgets.Add(autoWidget);
                             }
+                        node = document.SelectSingleNode(@"/Library/DirectAccessFiles");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                LibraryFile libraryFile = new LibraryFile(new LibraryFolder(new LibraryPage(this)));
+                                libraryFile.Deserialize(childNode);
+                                if (File.Exists(libraryFile.FullPath) && File.GetLastWriteTime(libraryFile.FullPath) > this.DirectAccessFileBottomDate)
+                                    this.DirectAccessLinks.Add(libraryFile);
+                            }
 
                         #region Auto Sync Settings
                         node = document.SelectSingleNode(@"/Library/EnableAutoSync");
@@ -272,6 +301,9 @@ namespace AutoSynchronizer.BusinessClasses
             StringBuilder xml = new StringBuilder();
             xml.AppendLine("<Library>");
             xml.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
+            xml.AppendLine(@"<UseDirectAccess>" + this.UseDirectAccess + @"</UseDirectAccess>");
+            xml.AppendLine(@"<DirectAccessFileBottomDate>" + this.DirectAccessFileBottomDate.ToString() + @"</DirectAccessFileBottomDate>");
+            xml.AppendLine(@"<RootFolder>" + this.Folder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
             xml.AppendLine(@"<BrandingText>" + this.BrandingText.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</BrandingText>");
             xml.AppendLine(@"<SyncDate>" + this.SyncDate + @"</SyncDate>");
             xml.AppendLine(@"<ApplyAppearanceForAllWindows>" + this.ApplyAppearanceForAllWindows + @"</ApplyAppearanceForAllWindows>");
@@ -301,6 +333,10 @@ namespace AutoSynchronizer.BusinessClasses
             foreach (AutoWidget autoWidget in this.AutoWidgets)
                 xml.AppendLine(@"<AutoWidget>" + autoWidget.Serialize() + @"</AutoWidget>");
             xml.AppendLine("</AutoWidgets>");
+            xml.AppendLine("<DirectAccessFiles>");
+            foreach (LibraryFile libraryFile in this.DirectAccessLinks)
+                xml.AppendLine(@"<DirectAccessFile>" + libraryFile.Serialize() + @"</DirectAccessFile>");
+            xml.AppendLine("</DirectAccessFiles>");
 
             #region Auto Sync Settings
             xml.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
@@ -325,8 +361,13 @@ namespace AutoSynchronizer.BusinessClasses
             this.SyncDate = DateTime.Now;
             if (this.IsConfigured)
                 Save();
-            ProceedPresentationLinks();
-            NotifyAboutExpiredLinks();
+            if (!this.UseDirectAccess)
+            {
+                ProceedPresentationLinks();
+                NotifyAboutExpiredLinks();
+            }
+            else
+                ProceedDirectAccessFiles();
             Archive();
         }
 
@@ -378,6 +419,48 @@ namespace AutoSynchronizer.BusinessClasses
             this.Save();
         }
 
+        public void ProceedDirectAccessFiles()
+        {
+            if (this.UseDirectAccess)
+            {
+                List<BusinessClasses.FolderLink> rootFolders = new List<BusinessClasses.FolderLink>();
+                rootFolders.AddRange(this.ExtraFolders);
+                rootFolders.Insert(0, this.RootFolder);
+                foreach (FolderLink folder in rootFolders)
+                {
+                    foreach (FileInfo file in GetFiles(folder.Folder))
+                    {
+                        LibraryFile link = this.DirectAccessLinks.Where(x => x.FullPath.Equals(file.FullName)).FirstOrDefault();
+                        if (link == null)
+                        {
+                            link = new LibraryFile(new LibraryFolder(new LibraryPage(this)));
+                            link.FullPath = file.FullName;
+                            link.SetProperties();
+                            if (InteropClasses.PowerPointHelper.Instance.Connect())
+                            {
+                                link.GetPresentationPrperties();
+                                InteropClasses.PowerPointHelper.Instance.Disconnect();
+                            }
+                            this.DirectAccessLinks.Add(link);
+                        }
+                        if (link.PreviewContainer == null)
+                            link.PreviewContainer = new PresentationPreviewContainer(link);
+                        link.PreviewContainer.UpdatePreviewImages();
+                    }
+                }
+                this.Save();
+            }
+        }
+
+        private FileInfo[] GetFiles(DirectoryInfo folder)
+        {
+            List<FileInfo> files = new List<FileInfo>();
+            foreach (DirectoryInfo subFolder in folder.GetDirectories())
+                files.AddRange(GetFiles(subFolder));
+            files.AddRange(folder.GetFiles("*.ppt*").Where(x => x.LastWriteTime > this.DirectAccessFileBottomDate));
+            return files.ToArray();
+        }
+
         public void DeleteDeadLinks(Guid[] deadLinkIdentifiers)
         {
             foreach (LibraryFile link in this.DeadLinks.Where(x => deadLinkIdentifiers.Contains(x.Identifier)))
@@ -407,7 +490,7 @@ namespace AutoSynchronizer.BusinessClasses
             //}
         }
 
-        private void Archive()
+        public void Archive()
         {
             DateTime archiveDateTime = DateTime.Now;
             string archiveFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
@@ -891,6 +974,8 @@ namespace AutoSynchronizer.BusinessClasses
         private Image _oldBanner;
         #endregion
 
+        private string _linkLocalPath = string.Empty;
+
         public string Name { get; set; }
         public LibraryFolder Parent { get; set; }
         public Guid RootId { get; set; }
@@ -910,6 +995,28 @@ namespace AutoSynchronizer.BusinessClasses
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
         public BannerProperties BannerProperties { get; set; }
+
+        public string FullPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_linkLocalPath))
+                {
+                    if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
+                        return this.RelativePath;
+                    else if (this.Type == FileTypes.LineBreak)
+                        return string.Empty;
+                    else
+                        return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
+                }
+                else
+                    return _linkLocalPath;
+            }
+            set
+            {
+                _linkLocalPath = value;
+            }
+        }
 
         public string DisplayName
         {
@@ -959,19 +1066,6 @@ namespace AutoSynchronizer.BusinessClasses
                 {
                     return Path.GetFileNameWithoutExtension(this.FullPath);
                 }
-            }
-        }
-
-        public string FullPath
-        {
-            get
-            {
-                if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
-                    return this.RelativePath;
-                else if (this.Type == FileTypes.LineBreak)
-                    return string.Empty;
-                else
-                    return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
             }
         }
 
@@ -1080,6 +1174,7 @@ namespace AutoSynchronizer.BusinessClasses
             result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
             result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
             result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+            result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
             result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
@@ -1137,6 +1232,9 @@ namespace AutoSynchronizer.BusinessClasses
                     case "RootId":
                         if (Guid.TryParse(childNode.InnerText, out tempGuid))
                             this.RootId = tempGuid;
+                        break;
+                    case "LocalPath":
+                        _linkLocalPath = childNode.InnerText;
                         break;
                     case "RelativePath":
                         this.RelativePath = childNode.InnerText;
