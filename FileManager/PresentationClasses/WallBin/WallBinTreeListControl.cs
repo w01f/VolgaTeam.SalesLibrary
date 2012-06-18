@@ -507,17 +507,17 @@ namespace FileManager.PresentationClasses.WallBin
                 }
                 files.AddRange(GetFiles(folder));
             }
-            laTotalFolders.Text = string.Format("Total folders: {0}", folders.Count.ToString("# ##0"));
+            labelControlTotalFolders.Text = string.Format("Total folders: {0}", folders.Count.ToString("# ##0"));
 
             files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Extension, y.Extension));
-            laTotalFiles.Text = string.Empty;
+            labelControlFiles.Text = string.Empty;
             StringBuilder text = new StringBuilder();
             foreach (string extension in files.Select(x => x.Extension.ToLower()).Distinct())
             {
                 text.AppendLine(string.Format("{0}: {1}", new string[] { extension.Replace(".", string.Empty), files.Where(x => x.Extension.ToLower().Equals(extension)).Count().ToString("# ##0") }));
                 text.AppendLine(string.Empty);
             }
-            laTotalFiles.Text = text.ToString();
+            labelControlFiles.Text = text.ToString();
         }
 
         private FileInfo[] GetFiles(DirectoryInfo folder)

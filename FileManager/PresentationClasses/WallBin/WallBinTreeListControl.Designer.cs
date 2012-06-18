@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WallBinTreeListControl));
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             this.treeListAllFiles = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumnName = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumnPath = new DevExpress.XtraTreeList.Columns.TreeListColumn();
-            this.imageListFiles = new System.Windows.Forms.ImageList();
+            this.imageListFiles = new System.Windows.Forms.ImageList(this.components);
             this.treeListSearchFiles = new DevExpress.XtraTreeList.TreeList();
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.pnKeyWord = new System.Windows.Forms.Panel();
             this.simpleButtonSearch = new DevExpress.XtraEditors.SimpleButton();
             this.checkEditDateRange = new DevExpress.XtraEditors.CheckEdit();
-            this.styleController = new DevExpress.XtraEditors.StyleController();
+            this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
             this.textEditKeyWord = new DevExpress.XtraEditors.TextEdit();
             this.gbDateRange = new System.Windows.Forms.GroupBox();
             this.dateEditEndDate = new DevExpress.XtraEditors.DateEdit();
@@ -56,18 +57,19 @@
             this.panelExRefresh = new DevComponents.DotNetBar.PanelEx();
             this.simpleButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
             this.laDoubleClick = new System.Windows.Forms.Label();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tmiOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabControlFiles = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageRegular = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPageSearch = new DevExpress.XtraTab.XtraTabPage();
-            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+            this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
             this.pnLeft = new System.Windows.Forms.Panel();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnRight = new System.Windows.Forms.Panel();
             this.pnPreview = new System.Windows.Forms.Panel();
-            this.laTotalFiles = new System.Windows.Forms.Label();
-            this.laTotalFolders = new System.Windows.Forms.Label();
+            this.xtraScrollableControlStatistic = new DevExpress.XtraEditors.XtraScrollableControl();
+            this.labelControlFiles = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlTotalFolders = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.treeListAllFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.treeListSearchFiles)).BeginInit();
             this.pnKeyWord.SuspendLayout();
@@ -93,6 +95,7 @@
             this.splitContainerControl.SuspendLayout();
             this.pnRight.SuspendLayout();
             this.pnPreview.SuspendLayout();
+            this.xtraScrollableControlStatistic.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeListAllFiles
@@ -192,7 +195,7 @@
             this.treeListSearchFiles.OptionsView.ShowIndicator = false;
             this.treeListSearchFiles.OptionsView.ShowVertLines = false;
             this.treeListSearchFiles.ShowButtonMode = DevExpress.XtraTreeList.ShowButtonModeEnum.ShowForFocusedRow;
-            this.treeListSearchFiles.Size = new System.Drawing.Size(489, 225);
+            this.treeListSearchFiles.Size = new System.Drawing.Size(589, 225);
             this.treeListSearchFiles.StateImageList = this.imageListFiles;
             this.treeListSearchFiles.TabIndex = 2;
             this.treeListSearchFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.treeListAllFiles_MouseClick);
@@ -223,7 +226,7 @@
             this.pnKeyWord.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnKeyWord.Location = new System.Drawing.Point(0, 0);
             this.pnKeyWord.Name = "pnKeyWord";
-            this.pnKeyWord.Size = new System.Drawing.Size(489, 146);
+            this.pnKeyWord.Size = new System.Drawing.Size(589, 146);
             this.pnKeyWord.TabIndex = 0;
             // 
             // simpleButtonSearch
@@ -235,7 +238,7 @@
             this.simpleButtonSearch.Appearance.Options.UseFont = true;
             this.simpleButtonSearch.Appearance.Options.UseForeColor = true;
             this.simpleButtonSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.simpleButtonSearch.Location = new System.Drawing.Point(380, 35);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(480, 35);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
             this.simpleButtonSearch.Size = new System.Drawing.Size(100, 27);
             this.simpleButtonSearch.TabIndex = 5;
@@ -265,7 +268,7 @@
             this.textEditKeyWord.Location = new System.Drawing.Point(8, 7);
             this.textEditKeyWord.Name = "textEditKeyWord";
             this.textEditKeyWord.Properties.NullText = "Type keyword here...";
-            this.textEditKeyWord.Size = new System.Drawing.Size(472, 22);
+            this.textEditKeyWord.Size = new System.Drawing.Size(572, 22);
             this.textEditKeyWord.StyleController = this.styleController;
             this.textEditKeyWord.TabIndex = 3;
             this.textEditKeyWord.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edKeyWord_KeyDown);
@@ -280,7 +283,7 @@
             this.gbDateRange.Controls.Add(this.laStartDate);
             this.gbDateRange.Location = new System.Drawing.Point(8, 64);
             this.gbDateRange.Name = "gbDateRange";
-            this.gbDateRange.Size = new System.Drawing.Size(472, 71);
+            this.gbDateRange.Size = new System.Drawing.Size(572, 71);
             this.gbDateRange.TabIndex = 2;
             this.gbDateRange.TabStop = false;
             // 
@@ -288,7 +291,7 @@
             // 
             this.dateEditEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateEditEndDate.EditValue = null;
-            this.dateEditEndDate.Location = new System.Drawing.Point(346, 42);
+            this.dateEditEndDate.Location = new System.Drawing.Point(446, 42);
             this.dateEditEndDate.Name = "dateEditEndDate";
             this.dateEditEndDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditEndDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -314,7 +317,7 @@
             // 
             this.dateEditStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateEditStartDate.EditValue = null;
-            this.dateEditStartDate.Location = new System.Drawing.Point(346, 14);
+            this.dateEditStartDate.Location = new System.Drawing.Point(446, 14);
             this.dateEditStartDate.Name = "dateEditStartDate";
             this.dateEditStartDate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.dateEditStartDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -523,7 +526,7 @@
             this.xtraTabPageSearch.Controls.Add(this.treeListSearchFiles);
             this.xtraTabPageSearch.Controls.Add(this.pnKeyWord);
             this.xtraTabPageSearch.Name = "xtraTabPageSearch";
-            this.xtraTabPageSearch.Size = new System.Drawing.Size(489, 371);
+            this.xtraTabPageSearch.Size = new System.Drawing.Size(589, 371);
             this.xtraTabPageSearch.Text = "Search";
             // 
             // defaultLookAndFeel
@@ -569,35 +572,47 @@
             // 
             // pnPreview
             // 
-            this.pnPreview.Controls.Add(this.laTotalFiles);
-            this.pnPreview.Controls.Add(this.laTotalFolders);
+            this.pnPreview.Controls.Add(this.xtraScrollableControlStatistic);
             this.pnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnPreview.Location = new System.Drawing.Point(0, 0);
             this.pnPreview.Name = "pnPreview";
             this.pnPreview.Size = new System.Drawing.Size(200, 500);
             this.pnPreview.TabIndex = 4;
             // 
-            // laTotalFiles
+            // xtraScrollableControlStatistic
             // 
-            this.laTotalFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.laTotalFiles.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laTotalFiles.ForeColor = System.Drawing.Color.White;
-            this.laTotalFiles.Location = new System.Drawing.Point(0, 50);
-            this.laTotalFiles.Name = "laTotalFiles";
-            this.laTotalFiles.Size = new System.Drawing.Size(200, 450);
-            this.laTotalFiles.TabIndex = 1;
-            this.laTotalFiles.Text = "Total Files:";
+            this.xtraScrollableControlStatistic.Controls.Add(this.labelControlFiles);
+            this.xtraScrollableControlStatistic.Controls.Add(this.labelControlTotalFolders);
+            this.xtraScrollableControlStatistic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraScrollableControlStatistic.Location = new System.Drawing.Point(0, 0);
+            this.xtraScrollableControlStatistic.Name = "xtraScrollableControlStatistic";
+            this.xtraScrollableControlStatistic.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.xtraScrollableControlStatistic.Size = new System.Drawing.Size(200, 500);
+            this.xtraScrollableControlStatistic.TabIndex = 2;
             // 
-            // laTotalFolders
+            // labelControlFiles
             // 
-            this.laTotalFolders.Dock = System.Windows.Forms.DockStyle.Top;
-            this.laTotalFolders.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laTotalFolders.Location = new System.Drawing.Point(0, 0);
-            this.laTotalFolders.Name = "laTotalFolders";
-            this.laTotalFolders.Size = new System.Drawing.Size(200, 50);
-            this.laTotalFolders.TabIndex = 0;
-            this.laTotalFolders.Text = "Total Folders:";
-            this.laTotalFolders.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelControlFiles.Appearance.Font = new System.Drawing.Font("Arial", 12F);
+            this.labelControlFiles.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelControlFiles.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+            this.labelControlFiles.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelControlFiles.Location = new System.Drawing.Point(5, 50);
+            this.labelControlFiles.Name = "labelControlFiles";
+            this.labelControlFiles.Size = new System.Drawing.Size(195, 18);
+            this.labelControlFiles.TabIndex = 2;
+            this.labelControlFiles.Text = "Total Files:";
+            // 
+            // labelControlTotalFolders
+            // 
+            this.labelControlTotalFolders.Appearance.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelControlTotalFolders.Appearance.ForeColor = System.Drawing.Color.Black;
+            this.labelControlTotalFolders.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControlTotalFolders.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelControlTotalFolders.Location = new System.Drawing.Point(5, 0);
+            this.labelControlTotalFolders.Name = "labelControlTotalFolders";
+            this.labelControlTotalFolders.Size = new System.Drawing.Size(195, 50);
+            this.labelControlTotalFolders.TabIndex = 3;
+            this.labelControlTotalFolders.Text = "Total Folders:";
             // 
             // WallBinTreeListControl
             // 
@@ -634,6 +649,7 @@
             this.splitContainerControl.ResumeLayout(false);
             this.pnRight.ResumeLayout(false);
             this.pnPreview.ResumeLayout(false);
+            this.xtraScrollableControlStatistic.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -675,7 +691,8 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
         private System.Windows.Forms.Panel pnRight;
         private System.Windows.Forms.Panel pnPreview;
-        private System.Windows.Forms.Label laTotalFiles;
-        private System.Windows.Forms.Label laTotalFolders;
+        private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControlStatistic;
+        private DevExpress.XtraEditors.LabelControl labelControlFiles;
+        private DevExpress.XtraEditors.LabelControl labelControlTotalFolders;
     }
 }
