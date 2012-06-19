@@ -30,7 +30,7 @@ namespace AutoSynchronizer.BusinessClasses
             if (rootFolder.Exists)
             {
                 this.LibraryCollection.Clear();
-                if (rootFolder.Root.FullName.Equals(rootFolder.FullName))
+                if (rootFolder.Root.FullName.Equals(rootFolder.FullName) || ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles)
                     this.LibraryCollection.Add(new LibraryWrapper(new Library(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage, rootFolder)));
                 else
                     foreach (DirectoryInfo subFolder in rootFolder.GetDirectories())
@@ -67,6 +67,7 @@ namespace AutoSynchronizer.BusinessClasses
                         lock (AppManager.Locker)
                         {
                             this.Library.Init();
+                            this.Library.OvernightsCalendar.LoadYears();
                             InitServiceObjects();
                         }
                     }

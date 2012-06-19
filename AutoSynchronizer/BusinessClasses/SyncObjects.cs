@@ -97,12 +97,6 @@ namespace AutoSynchronizer.BusinessClasses
                     List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                     List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
 
-                    DirectoryInfo previewSourceFolder = new DirectoryInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
-
-                    if (!Directory.Exists(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)))
-                        Directory.CreateDirectory(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
-                    DirectoryInfo previewDestinationFolder = new DirectoryInfo(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
-
                     if (!this.Manager.Library.UseDirectAccess)
                     {
                         foreach (LibraryPage page in this.Manager.Library.Pages)
@@ -188,11 +182,6 @@ namespace AutoSynchronizer.BusinessClasses
                     else
                     {
                         ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
-                        foreach (LibraryFile file in this.Manager.Library.DirectAccessLinks)
-                            if (File.Exists(file.FullPath) && file.PreviewContainer != null)
-                                AddFolderForSync(new DirectoryInfo(file.PreviewContainer.PreviewStorageFolder), filesWhiteList);
-                        destinationSubFolders.Add(previewDestinationFolder);
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(previewSourceFolder, previewDestinationFolder, filesWhiteList);
                     }
 
                     #region Sync Overnights Calendar

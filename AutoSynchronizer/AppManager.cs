@@ -22,16 +22,14 @@ namespace AutoSynchronizer
             }
         }
 
-        private void Init()
-        {
-            ConfigurationClasses.SettingsManager.Instance.Load();
-            BusinessClasses.LibraryManager.Instance.LoadLibraries();
-        }
-
         public void RunForm()
         {
-            Init();
-            Application.Run(new FormHidden());
+            ConfigurationClasses.SettingsManager.Instance.Load();
+            if (!string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath) && System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.BackupPath))
+            {
+                BusinessClasses.LibraryManager.Instance.LoadLibraries();
+                Application.Run(new FormHidden());
+            }
         }
 
         public void ReleaseComObject(object o)
