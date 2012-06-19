@@ -50,9 +50,9 @@
             this.laEndDate = new System.Windows.Forms.Label();
             this.laStartDate = new System.Windows.Forms.Label();
             this.pnTreeViewProgress = new System.Windows.Forms.Panel();
-            this.panelExProgress = new DevComponents.DotNetBar.PanelEx();
-            this.laTreeViewProgressLable = new System.Windows.Forms.Label();
-            this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
+            this.panelExProgressTreeView = new DevComponents.DotNetBar.PanelEx();
+            this.laTreeViewTreeViewProgressLable = new System.Windows.Forms.Label();
+            this.circularProgressTreeView = new DevComponents.DotNetBar.Controls.CircularProgress();
             this.pnRefresh = new System.Windows.Forms.Panel();
             this.panelExRefresh = new DevComponents.DotNetBar.PanelEx();
             this.simpleButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
@@ -67,6 +67,10 @@
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.pnRight = new System.Windows.Forms.Panel();
             this.pnPreview = new System.Windows.Forms.Panel();
+            this.pnStatisticProgress = new System.Windows.Forms.Panel();
+            this.panelExProgressStatistic = new DevComponents.DotNetBar.PanelEx();
+            this.laStatisticProgressLable = new System.Windows.Forms.Label();
+            this.circularProgressStatistic = new DevComponents.DotNetBar.Controls.CircularProgress();
             this.xtraScrollableControlStatistic = new DevExpress.XtraEditors.XtraScrollableControl();
             this.labelControlFiles = new DevExpress.XtraEditors.LabelControl();
             this.labelControlTotalFolders = new DevExpress.XtraEditors.LabelControl();
@@ -82,7 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.VistaTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties)).BeginInit();
             this.pnTreeViewProgress.SuspendLayout();
-            this.panelExProgress.SuspendLayout();
+            this.panelExProgressTreeView.SuspendLayout();
             this.pnRefresh.SuspendLayout();
             this.panelExRefresh.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
@@ -95,6 +99,8 @@
             this.splitContainerControl.SuspendLayout();
             this.pnRight.SuspendLayout();
             this.pnPreview.SuspendLayout();
+            this.pnStatisticProgress.SuspendLayout();
+            this.panelExProgressStatistic.SuspendLayout();
             this.xtraScrollableControlStatistic.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -361,7 +367,7 @@
             // 
             // pnTreeViewProgress
             // 
-            this.pnTreeViewProgress.Controls.Add(this.panelExProgress);
+            this.pnTreeViewProgress.Controls.Add(this.panelExProgressTreeView);
             this.pnTreeViewProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnTreeViewProgress.Location = new System.Drawing.Point(0, 447);
             this.pnTreeViewProgress.Name = "pnTreeViewProgress";
@@ -369,53 +375,53 @@
             this.pnTreeViewProgress.Size = new System.Drawing.Size(591, 53);
             this.pnTreeViewProgress.TabIndex = 5;
             // 
-            // panelExProgress
+            // panelExProgressTreeView
             // 
-            this.panelExProgress.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelExProgress.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelExProgress.Controls.Add(this.laTreeViewProgressLable);
-            this.panelExProgress.Controls.Add(this.circularProgress);
-            this.panelExProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelExProgress.Location = new System.Drawing.Point(5, 5);
-            this.panelExProgress.Name = "panelExProgress";
-            this.panelExProgress.Padding = new System.Windows.Forms.Padding(5);
-            this.panelExProgress.Size = new System.Drawing.Size(581, 43);
-            this.panelExProgress.Style.Alignment = System.Drawing.StringAlignment.Center;
-            this.panelExProgress.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.panelExProgress.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
-            this.panelExProgress.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
-            this.panelExProgress.Style.BorderColor.Color = System.Drawing.Color.White;
-            this.panelExProgress.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
-            this.panelExProgress.Style.GradientAngle = 90;
-            this.panelExProgress.TabIndex = 0;
+            this.panelExProgressTreeView.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelExProgressTreeView.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelExProgressTreeView.Controls.Add(this.laTreeViewTreeViewProgressLable);
+            this.panelExProgressTreeView.Controls.Add(this.circularProgressTreeView);
+            this.panelExProgressTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelExProgressTreeView.Location = new System.Drawing.Point(5, 5);
+            this.panelExProgressTreeView.Name = "panelExProgressTreeView";
+            this.panelExProgressTreeView.Padding = new System.Windows.Forms.Padding(5);
+            this.panelExProgressTreeView.Size = new System.Drawing.Size(581, 43);
+            this.panelExProgressTreeView.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelExProgressTreeView.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.panelExProgressTreeView.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelExProgressTreeView.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelExProgressTreeView.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.panelExProgressTreeView.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelExProgressTreeView.Style.GradientAngle = 90;
+            this.panelExProgressTreeView.TabIndex = 0;
             // 
-            // laTreeViewProgressLable
+            // laTreeViewTreeViewProgressLable
             // 
-            this.laTreeViewProgressLable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.laTreeViewProgressLable.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.laTreeViewProgressLable.Location = new System.Drawing.Point(68, 5);
-            this.laTreeViewProgressLable.Name = "laTreeViewProgressLable";
-            this.laTreeViewProgressLable.Size = new System.Drawing.Size(508, 33);
-            this.laTreeViewProgressLable.TabIndex = 0;
-            this.laTreeViewProgressLable.Text = "label1";
-            this.laTreeViewProgressLable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.laTreeViewTreeViewProgressLable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.laTreeViewTreeViewProgressLable.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laTreeViewTreeViewProgressLable.Location = new System.Drawing.Point(68, 5);
+            this.laTreeViewTreeViewProgressLable.Name = "laTreeViewTreeViewProgressLable";
+            this.laTreeViewTreeViewProgressLable.Size = new System.Drawing.Size(508, 33);
+            this.laTreeViewTreeViewProgressLable.TabIndex = 0;
+            this.laTreeViewTreeViewProgressLable.Text = "label1";
+            this.laTreeViewTreeViewProgressLable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // circularProgress
+            // circularProgressTreeView
             // 
-            this.circularProgress.AnimationSpeed = 50;
+            this.circularProgressTreeView.AnimationSpeed = 50;
             // 
             // 
             // 
-            this.circularProgress.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.circularProgress.Dock = System.Windows.Forms.DockStyle.Left;
-            this.circularProgress.FocusCuesEnabled = false;
-            this.circularProgress.Location = new System.Drawing.Point(5, 5);
-            this.circularProgress.Name = "circularProgress";
-            this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
-            this.circularProgress.ProgressTextFormat = "";
-            this.circularProgress.Size = new System.Drawing.Size(63, 33);
-            this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
-            this.circularProgress.TabIndex = 1;
+            this.circularProgressTreeView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.circularProgressTreeView.Dock = System.Windows.Forms.DockStyle.Left;
+            this.circularProgressTreeView.FocusCuesEnabled = false;
+            this.circularProgressTreeView.Location = new System.Drawing.Point(5, 5);
+            this.circularProgressTreeView.Name = "circularProgressTreeView";
+            this.circularProgressTreeView.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
+            this.circularProgressTreeView.ProgressTextFormat = "";
+            this.circularProgressTreeView.Size = new System.Drawing.Size(63, 33);
+            this.circularProgressTreeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+            this.circularProgressTreeView.TabIndex = 1;
             // 
             // pnRefresh
             // 
@@ -573,11 +579,70 @@
             // pnPreview
             // 
             this.pnPreview.Controls.Add(this.xtraScrollableControlStatistic);
+            this.pnPreview.Controls.Add(this.pnStatisticProgress);
             this.pnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnPreview.Location = new System.Drawing.Point(0, 0);
             this.pnPreview.Name = "pnPreview";
             this.pnPreview.Size = new System.Drawing.Size(200, 500);
             this.pnPreview.TabIndex = 4;
+            // 
+            // pnStatisticProgress
+            // 
+            this.pnStatisticProgress.Controls.Add(this.panelExProgressStatistic);
+            this.pnStatisticProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnStatisticProgress.Location = new System.Drawing.Point(0, 447);
+            this.pnStatisticProgress.Name = "pnStatisticProgress";
+            this.pnStatisticProgress.Padding = new System.Windows.Forms.Padding(5);
+            this.pnStatisticProgress.Size = new System.Drawing.Size(200, 53);
+            this.pnStatisticProgress.TabIndex = 6;
+            // 
+            // panelExProgressStatistic
+            // 
+            this.panelExProgressStatistic.CanvasColor = System.Drawing.SystemColors.Control;
+            this.panelExProgressStatistic.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelExProgressStatistic.Controls.Add(this.laStatisticProgressLable);
+            this.panelExProgressStatistic.Controls.Add(this.circularProgressStatistic);
+            this.panelExProgressStatistic.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelExProgressStatistic.Location = new System.Drawing.Point(5, 5);
+            this.panelExProgressStatistic.Name = "panelExProgressStatistic";
+            this.panelExProgressStatistic.Padding = new System.Windows.Forms.Padding(5);
+            this.panelExProgressStatistic.Size = new System.Drawing.Size(190, 43);
+            this.panelExProgressStatistic.Style.Alignment = System.Drawing.StringAlignment.Center;
+            this.panelExProgressStatistic.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.panelExProgressStatistic.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
+            this.panelExProgressStatistic.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
+            this.panelExProgressStatistic.Style.BorderColor.Color = System.Drawing.Color.White;
+            this.panelExProgressStatistic.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
+            this.panelExProgressStatistic.Style.GradientAngle = 90;
+            this.panelExProgressStatistic.TabIndex = 0;
+            // 
+            // laStatisticProgressLable
+            // 
+            this.laStatisticProgressLable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.laStatisticProgressLable.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.laStatisticProgressLable.Location = new System.Drawing.Point(68, 5);
+            this.laStatisticProgressLable.Name = "laStatisticProgressLable";
+            this.laStatisticProgressLable.Size = new System.Drawing.Size(117, 33);
+            this.laStatisticProgressLable.TabIndex = 0;
+            this.laStatisticProgressLable.Text = "label1";
+            this.laStatisticProgressLable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // circularProgressStatistic
+            // 
+            this.circularProgressStatistic.AnimationSpeed = 50;
+            // 
+            // 
+            // 
+            this.circularProgressStatistic.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.circularProgressStatistic.Dock = System.Windows.Forms.DockStyle.Left;
+            this.circularProgressStatistic.FocusCuesEnabled = false;
+            this.circularProgressStatistic.Location = new System.Drawing.Point(5, 5);
+            this.circularProgressStatistic.Name = "circularProgressStatistic";
+            this.circularProgressStatistic.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
+            this.circularProgressStatistic.ProgressTextFormat = "";
+            this.circularProgressStatistic.Size = new System.Drawing.Size(63, 33);
+            this.circularProgressStatistic.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
+            this.circularProgressStatistic.TabIndex = 1;
             // 
             // xtraScrollableControlStatistic
             // 
@@ -587,7 +652,7 @@
             this.xtraScrollableControlStatistic.Location = new System.Drawing.Point(0, 0);
             this.xtraScrollableControlStatistic.Name = "xtraScrollableControlStatistic";
             this.xtraScrollableControlStatistic.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-            this.xtraScrollableControlStatistic.Size = new System.Drawing.Size(200, 500);
+            this.xtraScrollableControlStatistic.Size = new System.Drawing.Size(200, 447);
             this.xtraScrollableControlStatistic.TabIndex = 2;
             // 
             // labelControlFiles
@@ -636,7 +701,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties.VistaTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditStartDate.Properties)).EndInit();
             this.pnTreeViewProgress.ResumeLayout(false);
-            this.panelExProgress.ResumeLayout(false);
+            this.panelExProgressTreeView.ResumeLayout(false);
             this.pnRefresh.ResumeLayout(false);
             this.panelExRefresh.ResumeLayout(false);
             this.contextMenuStrip.ResumeLayout(false);
@@ -649,6 +714,8 @@
             this.splitContainerControl.ResumeLayout(false);
             this.pnRight.ResumeLayout(false);
             this.pnPreview.ResumeLayout(false);
+            this.pnStatisticProgress.ResumeLayout(false);
+            this.panelExProgressStatistic.ResumeLayout(false);
             this.xtraScrollableControlStatistic.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -658,7 +725,7 @@
 
         private System.Windows.Forms.Panel pnKeyWord;
         private System.Windows.Forms.Panel pnTreeViewProgress;
-        private System.Windows.Forms.Label laTreeViewProgressLable;
+        private System.Windows.Forms.Label laTreeViewTreeViewProgressLable;
         private System.Windows.Forms.Panel pnRefresh;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem tmiOpen;
@@ -678,8 +745,8 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPageSearch;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private System.Windows.Forms.Panel pnLeft;
-        private DevComponents.DotNetBar.PanelEx panelExProgress;
-        private DevComponents.DotNetBar.Controls.CircularProgress circularProgress;
+        private DevComponents.DotNetBar.PanelEx panelExProgressTreeView;
+        private DevComponents.DotNetBar.Controls.CircularProgress circularProgressTreeView;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearch;
         private DevExpress.XtraEditors.StyleController styleController;
         private DevExpress.XtraEditors.CheckEdit checkEditDateRange;
@@ -694,5 +761,9 @@
         private DevExpress.XtraEditors.XtraScrollableControl xtraScrollableControlStatistic;
         private DevExpress.XtraEditors.LabelControl labelControlFiles;
         private DevExpress.XtraEditors.LabelControl labelControlTotalFolders;
+        private System.Windows.Forms.Panel pnStatisticProgress;
+        private DevComponents.DotNetBar.PanelEx panelExProgressStatistic;
+        private System.Windows.Forms.Label laStatisticProgressLable;
+        private DevComponents.DotNetBar.Controls.CircularProgress circularProgressStatistic;
     }
 }

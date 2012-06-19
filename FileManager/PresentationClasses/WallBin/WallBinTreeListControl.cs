@@ -26,7 +26,7 @@ namespace FileManager.PresentationClasses.WallBin
                 laDoubleClick.Font = new Font(laDoubleClick.Font.FontFamily, laDoubleClick.Font.Size - 3, laDoubleClick.Font.Style);
                 laEndDate.Font = new Font(laEndDate.Font.FontFamily, laEndDate.Font.Size - 2, laEndDate.Font.Style);
                 laStartDate.Font = new Font(laStartDate.Font.FontFamily, laStartDate.Font.Size - 2, laStartDate.Font.Style);
-                laTreeViewProgressLable.Font = new Font(laTreeViewProgressLable.Font.FontFamily, laTreeViewProgressLable.Font.Size - 3, laTreeViewProgressLable.Font.Style);
+                laTreeViewTreeViewProgressLable.Font = new Font(laTreeViewTreeViewProgressLable.Font.FontFamily, laTreeViewTreeViewProgressLable.Font.Size - 3, laTreeViewTreeViewProgressLable.Font.Style);
                 checkEditDateRange.Font = new Font(checkEditDateRange.Font.FontFamily, checkEditDateRange.Font.Size - 2, checkEditDateRange.Font.Style);
                 simpleButtonRefresh.Font = new Font(simpleButtonRefresh.Font.FontFamily, simpleButtonRefresh.Font.Size - 2, simpleButtonRefresh.Font.Style);
                 simpleButtonSearch.Font = new Font(simpleButtonSearch.Font.FontFamily, simpleButtonSearch.Font.Size - 2, simpleButtonSearch.Font.Style);
@@ -37,9 +37,9 @@ namespace FileManager.PresentationClasses.WallBin
         private void Refresh_Click(object sender, EventArgs e)
         {
             treeListAllFiles.SuspendLayout();
-            laTreeViewProgressLable.Text = "Loading Tree View...";
+            laTreeViewTreeViewProgressLable.Text = "Loading Tree View...";
             pnTreeViewProgress.Visible = true;
-            circularProgress.IsRunning = true;
+            circularProgressTreeView.IsRunning = true;
             xtraTabControlFiles.Enabled = false;
 
             treeListAllFiles.Nodes.Clear();
@@ -65,7 +65,7 @@ namespace FileManager.PresentationClasses.WallBin
                 Application.DoEvents();
 
             xtraTabControlFiles.Enabled = true;
-            circularProgress.IsRunning = false;
+            circularProgressTreeView.IsRunning = false;
             pnTreeViewProgress.Visible = false;
             treeListAllFiles.ResumeLayout();
             treeListAllFiles.Enabled = true;
@@ -112,9 +112,9 @@ namespace FileManager.PresentationClasses.WallBin
                             foreach (DevExpress.XtraTreeList.Nodes.TreeListNode node in nodesToDelete)
                                 treeList.Nodes.Remove(node);
 
-                            laTreeViewProgressLable.Text = "Loading Tree View...";
+                            laTreeViewTreeViewProgressLable.Text = "Loading Tree View...";
                             pnTreeViewProgress.Visible = true;
-                            circularProgress.IsRunning = true;
+                            circularProgressTreeView.IsRunning = true;
                             treeList.Enabled = false;
 
                             Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
@@ -135,7 +135,7 @@ namespace FileManager.PresentationClasses.WallBin
                             while (thread.IsAlive)
                                 Application.DoEvents();
                             pnTreeViewProgress.Visible = false;
-                            circularProgress.IsRunning = false;
+                            circularProgressTreeView.IsRunning = false;
                             treeList.ResumeLayout();
                             treeList.Enabled = true;
                             hitInfo.Node.SetValue(treeListColumnName, "Collapse All");
@@ -195,43 +195,52 @@ namespace FileManager.PresentationClasses.WallBin
                 {
                     try
                     {
-                        List<DirectoryInfo> folders = new List<DirectoryInfo>();
-                        folders.AddRange(folderLink.Folder.GetDirectories());
-                        folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-                        foreach (DirectoryInfo subFolder in folders)
+                        try
                         {
-                            if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
+                            List<DirectoryInfo> folders = new List<DirectoryInfo>();
+                            folders.AddRange(folderLink.Folder.GetDirectories());
+                            folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                            foreach (DirectoryInfo subFolder in folders)
                             {
-                                BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
-                                subFolderLink.RootId = folderLink.RootId;
-                                subFolderLink.Folder = subFolder;
-                                childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
-                                childNode.StateImageIndex = 0;
+                                if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
+                                {
+                                    BusinessClasses.FolderLink subFolderLink = new BusinessClasses.FolderLink();
+                                    subFolderLink.RootId = folderLink.RootId;
+                                    subFolderLink.Folder = subFolder;
+                                    childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
+                                    childNode.StateImageIndex = 0;
 
+                                    Application.DoEvents();
+
+                                    if (showSubItems)
+                                        FillNode(childNode, showSubItems);
+                                    if (showSubItems && childNode.Nodes.Count == 0)
+                                        node.Nodes.Remove(childNode);
+
+                                }
                                 Application.DoEvents();
-
-                                if (showSubItems)
-                                    FillNode(childNode, showSubItems);
-                                if (showSubItems && childNode.Nodes.Count == 0)
-                                    node.Nodes.Remove(childNode);
                             }
-                            Application.DoEvents();
                         }
-                        List<FileInfo> files = new List<FileInfo>();
-                        files.AddRange(folderLink.Folder.GetFiles());
-                        files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
-                        foreach (FileInfo file in files)
+                        catch { }
+                        try
                         {
-                            if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.Name.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
+                            List<FileInfo> files = new List<FileInfo>();
+                            files.AddRange(folderLink.Folder.GetFiles());
+                            files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                            foreach (FileInfo file in files)
                             {
-                                BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
-                                fileLink.RootId = folderLink.RootId;
-                                fileLink.File = file;
-                                childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToString("MM/dd/yy hh:mm tt") + ")" }, node, fileLink);
-                                childNode.StateImageIndex = GetImageindex(file);
+                                if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.Name.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
+                                {
+                                    BusinessClasses.FileLink fileLink = new BusinessClasses.FileLink();
+                                    fileLink.RootId = folderLink.RootId;
+                                    fileLink.File = file;
+                                    childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToString("MM/dd/yy hh:mm tt") + ")" }, node, fileLink);
+                                    childNode.StateImageIndex = GetImageindex(file);
+                                }
+                                Application.DoEvents();
                             }
-                            Application.DoEvents();
                         }
+                        catch { }
                         node.StateImageIndex = 1;
                         node.Expanded = true;
                     }
@@ -380,6 +389,10 @@ namespace FileManager.PresentationClasses.WallBin
                         subFolderLink.Folder = subFolder;
                         SearchFileInFolder(subFolderLink, keyWord, files);
                     }
+            }
+            catch { }
+            try
+            {
                 foreach (FileInfo file in folderLink.Folder.GetFiles("*" + keyWord + "*.*"))
                 {
                     if (((file.LastWriteTime >= dateEditStartDate.DateTime && file.LastWriteTime <= dateEditEndDate.DateTime) || !checkEditDateRange.Checked) && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.FullName.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
@@ -398,9 +411,9 @@ namespace FileManager.PresentationClasses.WallBin
         {
             treeListSearchFiles.SuspendLayout();
             treeListSearchFiles.Nodes.Clear();
-            laTreeViewProgressLable.Text = "Searching Files...";
+            laTreeViewTreeViewProgressLable.Text = "Searching Files...";
             pnTreeViewProgress.Visible = true;
-            circularProgress.IsRunning = true;
+            circularProgressTreeView.IsRunning = true;
             xtraTabControlFiles.Enabled = false;
 
             List<BusinessClasses.FileLink> files = new List<BusinessClasses.FileLink>();
@@ -428,7 +441,7 @@ namespace FileManager.PresentationClasses.WallBin
                 Application.DoEvents();
 
             pnTreeViewProgress.Visible = false;
-            circularProgress.IsRunning = false;
+            circularProgressTreeView.IsRunning = false;
             treeListSearchFiles.ResumeLayout();
             xtraTabControlFiles.Enabled = true;
             if (files.Count == 0)
@@ -478,7 +491,8 @@ namespace FileManager.PresentationClasses.WallBin
             _rootFolders.Sort((x, y) => (x as BusinessClasses.RootFolder).Order.CompareTo((y as BusinessClasses.RootFolder).Order));
             _rootFolders.Insert(0, _parentLibrary.RootFolder);
 
-            UpdateStatistic();
+            if (_parentLibrary.UseDirectAccess)
+                UpdateStatistic();
 
             Refresh_Click(null, null);
             ckDateRange_CheckedChanged(null, null);
@@ -497,54 +511,86 @@ namespace FileManager.PresentationClasses.WallBin
         {
             List<DirectoryInfo> folders = new List<DirectoryInfo>();
             List<FileInfo> files = new List<FileInfo>();
-            foreach (DirectoryInfo folder in _rootFolders.Select(x => x.Folder))
-            {
-                DirectoryInfo[] childFolder = GetFolders(folder);
-                if (childFolder.Length > 0 || folder.GetFiles().Where(x => x.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate).Count() > 0)
-                {
-                    folders.AddRange(childFolder);
-                    folders.Add(folder);
-                }
-                files.AddRange(GetFiles(folder));
-            }
-            labelControlTotalFolders.Text = string.Format("Total folders: {0}", folders.Count.ToString("# ##0"));
 
-            files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Extension, y.Extension));
+            labelControlTotalFolders.Text = string.Empty;
             labelControlFiles.Text = string.Empty;
-            StringBuilder text = new StringBuilder();
-            foreach (string extension in files.Select(x => x.Extension.ToLower()).Distinct())
+
+            laStatisticProgressLable.Text = "Loading statistic...";
+            pnStatisticProgress.Visible = true;
+            circularProgressStatistic.IsRunning = true;
+            Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
             {
-                text.AppendLine(string.Format("{0}: {1}", new string[] { extension.Replace(".", string.Empty), files.Where(x => x.Extension.ToLower().Equals(extension)).Count().ToString("# ##0") }));
-                text.AppendLine(string.Empty);
-            }
-            labelControlFiles.Text = text.ToString();
+                foreach (DirectoryInfo folder in _rootFolders.Select(x => x.Folder))
+                {
+                    DirectoryInfo[] childFolder = GetFolders(folder);
+                    if (childFolder.Length > 0 || folder.GetFiles().Where(x => x.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate).Count() > 0)
+                    {
+                        folders.AddRange(childFolder);
+                        folders.Add(folder);
+                    }
+                    files.AddRange(GetFiles(folder));
+                }
+                files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Extension, y.Extension));
+                StringBuilder filesStatistic = new StringBuilder();
+                foreach (string extension in files.Select(x => x.Extension.ToLower()).Distinct())
+                {
+                    filesStatistic.AppendLine(string.Format("{0}: {1}", new string[] { extension.Replace(".", string.Empty), files.Where(x => x.Extension.ToLower().Equals(extension)).Count().ToString("# ##0") }));
+                    filesStatistic.AppendLine(string.Empty);
+                }
+                FormMain.Instance.Invoke((MethodInvoker)delegate()
+                {
+                    labelControlTotalFolders.Text = string.Format("Total folders: {0}", folders.Count.ToString("# ##0"));
+                    labelControlFiles.Text = filesStatistic.ToString();
+                    circularProgressStatistic.IsRunning = false;
+                    pnStatisticProgress.Visible = false;
+
+                });
+            }));
+            thread.Start();
         }
 
         private FileInfo[] GetFiles(DirectoryInfo folder)
         {
             List<FileInfo> files = new List<FileInfo>();
-            foreach (DirectoryInfo subFolder in folder.GetDirectories())
-                if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
-                    files.AddRange(GetFiles(subFolder));
-            files.AddRange(folder.GetFiles().Where(x => x.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(y => x.FullName.ToLower().Contains(y.ToLower())).Count() == 0));
+            try
+            {
+                foreach (DirectoryInfo subFolder in folder.GetDirectories())
+                    if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
+                        files.AddRange(GetFiles(subFolder));
+            }
+            catch { }
+            try
+            {
+                files.AddRange(folder.GetFiles().Where(x => x.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(y => x.FullName.ToLower().Contains(y.ToLower())).Count() == 0));
+            }
+            catch { }
             return files.ToArray();
+
         }
 
         private DirectoryInfo[] GetFolders(DirectoryInfo folder)
         {
             List<DirectoryInfo> folders = new List<DirectoryInfo>();
-            foreach (DirectoryInfo subFolder in folder.GetDirectories())
+            try
             {
-                if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
+                foreach (DirectoryInfo subFolder in folder.GetDirectories())
                 {
-                    DirectoryInfo[] childFolder = GetFolders(subFolder);
-                    if (childFolder.Length > 0 || subFolder.GetFiles().Where(x => x.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(y => x.FullName.ToLower().Contains(y.ToLower())).Count() == 0).Count() > 0)
+                    if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
                     {
-                        folders.AddRange(childFolder);
-                        folders.Add(subFolder);
+                        DirectoryInfo[] childFolder = GetFolders(subFolder);
+                        try
+                        {
+                            if (childFolder.Length > 0 || subFolder.GetFiles().Where(x => x.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(y => x.FullName.ToLower().Contains(y.ToLower())).Count() == 0).Count() > 0)
+                            {
+                                folders.AddRange(childFolder);
+                                folders.Add(subFolder);
+                            }
+                        }
+                        catch { }
                     }
                 }
             }
+            catch { }
             return folders.ToArray();
         }
         #endregion

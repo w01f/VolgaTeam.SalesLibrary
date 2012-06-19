@@ -148,6 +148,8 @@ namespace FileManager
 
                 this.TabHome.InitPage(form);
 
+                ribbonTabItemClipart.Enabled = System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath);
+
                 ribbonControl.Enabled = true;
             }
         }

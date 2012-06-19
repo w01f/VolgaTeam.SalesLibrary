@@ -32,7 +32,7 @@ namespace FileManager.BusinessClasses
             if (rootFolder.Exists)
             {
                 this.LibraryCollection.Clear();
-                if (rootFolder.Root.FullName.Equals(rootFolder.FullName))
+                if (rootFolder.Root.FullName.Equals(rootFolder.FullName) || ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles)
                 {
                     this.LibraryCollection.Add(new Library(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage, rootFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit));
                     this.SelectedLibrary = this.LibraryCollection[0];
@@ -74,12 +74,6 @@ namespace FileManager.BusinessClasses
 
                         List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                         List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
-
-                        DirectoryInfo previewSourceFolder = new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
-
-                        if (!Directory.Exists(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)))
-                            Directory.CreateDirectory(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
-                        DirectoryInfo previewDestinationFolder = new DirectoryInfo(Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
 
                         if (!salesDepot.UseDirectAccess)
                         {
@@ -166,11 +160,6 @@ namespace FileManager.BusinessClasses
                         else
                         {
                             ToolClasses.SyncManager.Instance.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
-                            foreach (LibraryFile file in salesDepot.DirectAccessLinks)
-                                if (File.Exists(file.FullPath) && file.PreviewContainer != null)
-                                    AddFolderForSync(new DirectoryInfo(file.PreviewContainer.PreviewStorageFolder), filesWhiteList);
-                            destinationSubFolders.Add(previewDestinationFolder);
-                            ToolClasses.SyncManager.Instance.SynchronizeFolders(previewSourceFolder, previewDestinationFolder, filesWhiteList);
                         }
 
                         #region Sync Overnights Calendar
