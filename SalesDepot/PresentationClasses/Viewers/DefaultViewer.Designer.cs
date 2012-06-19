@@ -44,6 +44,7 @@
             this.laMessage.Size = new System.Drawing.Size(407, 332);
             this.laMessage.TabIndex = 0;
             this.laMessage.Text = "Couldn\'t load the file for preview";
+            this.laMessage.DoubleClick += new System.EventHandler(this.laMessage_DoubleClick);
             // 
             // DefaultViewer
             // 

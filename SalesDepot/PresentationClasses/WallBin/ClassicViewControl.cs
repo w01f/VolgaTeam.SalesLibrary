@@ -41,6 +41,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 {
                     FormMain.Instance.ribbonBarHomeView.Enabled = true;
                     FormMain.Instance.buttonItemSettingsMultitab.Enabled = true;
+                    FormMain.Instance.buttonItemSettingsQuickViewImages.Enabled = true;
 
                     FormMain.Instance.ribbonBarEmailBin.Enabled = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin;
                     FormMain.Instance.buttonItemEmailBin.Checked = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayEmailBin ? ConfigurationClasses.SettingsManager.Instance.ShowEmailBin : false;
@@ -57,6 +58,11 @@ namespace SalesDepot.PresentationClasses.WallBin
                     FormMain.Instance.ribbonBarHomeView.Enabled = false;
                     FormMain.Instance.buttonItemSettingsMultitab.Enabled = false;
                     FormMain.Instance.buttonItemSettingsMultitab.Checked = false;
+                    FormMain.Instance.buttonItemSettingsQuickViewImages.Enabled = false;
+                    FormMain.Instance.buttonItemSettingsQuickViewImages.Checked = false;
+                    FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked = true;
+                    ConfigurationClasses.SettingsManager.Instance.OldStyleQuickView = true;
+                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
 
                     FormMain.Instance.ribbonBarEmailBin.Enabled = false;
                     FormMain.Instance.buttonItemEmailBin.Checked = false;
@@ -133,7 +139,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         if (childNode.Name.Equals("EmailLink"))
                         {
                             string path = string.Empty;
-                            BusinessClasses.LibraryFile link = new BusinessClasses.LibraryFile(null);
+                            BusinessClasses.LibraryFile link = new BusinessClasses.LibraryFile(new BusinessClasses.LibraryFolder(new BusinessClasses.LibraryPage(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library)));
                             foreach (XmlNode emailLinkNode in childNode.ChildNodes)
                             {
                                 switch (emailLinkNode.Name)

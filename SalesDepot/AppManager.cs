@@ -28,7 +28,7 @@ namespace SalesDepot
                 Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.TempPath);
 
             DeleteFolder(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder));
-            if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder))
+            if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder) && ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
                 Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder);
         }
 

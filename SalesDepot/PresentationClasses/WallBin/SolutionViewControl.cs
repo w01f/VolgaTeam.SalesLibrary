@@ -33,6 +33,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             FormMain.Instance.ribbonBarHomeView.Enabled = true;
             FormMain.Instance.buttonItemSettingsMultitab.Enabled = true;
+            FormMain.Instance.buttonItemSettingsQuickViewImages.Enabled = true;
 
             FormMain.Instance.ribbonBarEmailBin.Enabled = false;
             FormMain.Instance.ribbonBarViewSettings.Enabled = false;

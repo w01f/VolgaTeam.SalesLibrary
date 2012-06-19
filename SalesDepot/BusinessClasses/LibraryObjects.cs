@@ -128,7 +128,6 @@ namespace SalesDepot.BusinessClasses
         public List<LibraryPage> Pages { get; set; }
         public List<string> EmailList { get; set; }
         public List<AutoWidget> AutoWidgets { get; set; }
-        public List<LibraryFile> DirectAccessLinks { get; private set; }
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
@@ -170,7 +169,6 @@ namespace SalesDepot.BusinessClasses
             this.EmailList = new List<string>();
             this.AutoWidgets = new List<AutoWidget>();
             this.OvernightsCalendar = new OvernightsCalendar(this);
-            this.DirectAccessLinks = new List<LibraryFile>();
             Load();
         }
 
@@ -194,7 +192,6 @@ namespace SalesDepot.BusinessClasses
             this.Pages.Clear();
             this.EmailList.Clear();
             this.AutoWidgets.Clear();
-            this.DirectAccessLinks.Clear();
 
             string file = Path.Combine(this.StorageFolder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
             if (File.Exists(file))
@@ -313,15 +310,6 @@ namespace SalesDepot.BusinessClasses
                         AutoWidget autoWidget = new AutoWidget();
                         autoWidget.Deserialize(childNode);
                         this.AutoWidgets.Add(autoWidget);
-                    }
-                node = document.SelectSingleNode(@"/Library/DirectAccessFiles");
-                if (node != null)
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        LibraryFile libraryFile = new LibraryFile(new LibraryFolder(new LibraryPage(this)));
-                        libraryFile.Deserialize(childNode);
-                        if (File.Exists(libraryFile.RemotePath) && File.GetLastWriteTime(libraryFile.RemotePath) > this.DirectAccessFileBottomDate)
-                            this.DirectAccessLinks.Add(libraryFile);
                     }
 
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
@@ -1278,18 +1266,22 @@ namespace SalesDepot.BusinessClasses
         public void InitBannerProperties()
         {
             this.BannerProperties = new BannerProperties();
-            this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-            this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
-            this.BannerProperties.Text = this.DisplayName;
-
-            this.BannerProperties.Enable = _oldEnableBanner;
-            this.BannerProperties.Image = _oldBanner;
-            if (this.LineBreakProperties != null)
+            try
             {
-                this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
-                if (this.LineBreakProperties.Banner != null)
-                    this.BannerProperties.Image = this.LineBreakProperties.Banner;
+                this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
+                this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
+                this.BannerProperties.Text = this.DisplayName;
+
+                this.BannerProperties.Enable = _oldEnableBanner;
+                this.BannerProperties.Image = _oldBanner;
+                if (this.LineBreakProperties != null)
+                {
+                    this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
+                    if (this.LineBreakProperties.Banner != null)
+                        this.BannerProperties.Image = this.LineBreakProperties.Banner;
+                }
             }
+            catch { }
         }
 
         public void SetProperties()

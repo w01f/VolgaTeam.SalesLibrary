@@ -37,16 +37,7 @@ namespace SalesDepot.ToolForms.WallBin
 
                 this.Text = "QuickView - " + this.SelectedFile.NameWithExtension;
                 laFileInfo.Text = "Added: " + this.SelectedFile.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (this.SelectedFile.ExpirationDateOptions.EnableExpirationDate && this.SelectedFile.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + this.SelectedFile.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
-                if (this.SelectedFile.PresentationProperties != null)
-                    laSlideSize.Text = string.Format("{0} {1} x {2}", new object[] { this.SelectedFile.PresentationProperties.Orientation, this.SelectedFile.PresentationProperties.Width.ToString("#.##"), this.SelectedFile.PresentationProperties.Height.ToString("#.##") });
-                if (this.SelectedFile.PresentationProperties.Width == 10 && this.SelectedFile.PresentationProperties.Height == 7.5 && this.SelectedFile.PresentationProperties.Orientation.Equals("Landscape") && BusinessClasses.MasterWizardManager.Instance.MasterWizards.Count > 1)
-                {
-                    pnSlideTemplate.Visible = true;
-                    comboBoxEditSlideTemplate.Properties.Items.AddRange(BusinessClasses.MasterWizardManager.Instance.MasterWizards.Keys);
-                    comboBoxEditSlideTemplate.SelectedIndex = 0;
-                }
-                else
-                    pnSlideTemplate.Visible = false;
+
 
                 FormMain.Instance.TopMost = true;
                 InteropClasses.PowerPointHelper.Instance.PowerPointVisible = true;
@@ -67,7 +58,35 @@ namespace SalesDepot.ToolForms.WallBin
 
                     Thread thread = new Thread(delegate()
                     {
-                        InteropClasses.PowerPointHelper.Instance.ViewSlideShow(_viewedFile);
+                        InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_viewedFile);
+                        if (this.SelectedFile.PresentationProperties == null && InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation != null)
+                        {
+                            this.SelectedFile.PresentationProperties = new BusinessClasses.PresentationProperties();
+                            this.SelectedFile.PresentationProperties.Height = InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideHeight / 72;
+                            this.SelectedFile.PresentationProperties.Width = InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideWidth / 72; ;
+                            this.SelectedFile.PresentationProperties.LastUpdate = DateTime.Now;
+                        }
+                        FormMain.Instance.Invoke((MethodInvoker)delegate()
+                        {
+                            if (this.SelectedFile.PresentationProperties != null)
+                            {
+                                laSlideSize.Text = string.Format("{0} {1} x {2}", new object[] { this.SelectedFile.PresentationProperties.Orientation, this.SelectedFile.PresentationProperties.Width.ToString("#.##"), this.SelectedFile.PresentationProperties.Height.ToString("#.##") });
+                                if (this.SelectedFile.PresentationProperties.Width == 10 && this.SelectedFile.PresentationProperties.Height == 7.5 && this.SelectedFile.PresentationProperties.Orientation.Equals("Landscape") && BusinessClasses.MasterWizardManager.Instance.MasterWizards.Count > 1)
+                                {
+                                    pnSlideTemplate.Visible = true;
+                                    comboBoxEditSlideTemplate.Properties.Items.AddRange(BusinessClasses.MasterWizardManager.Instance.MasterWizards.Keys);
+                                    comboBoxEditSlideTemplate.SelectedIndex = 0;
+                                }
+                                else
+                                    pnSlideTemplate.Visible = false;
+                            }
+                            else
+                            {
+                                laSlideSize.Text = string.Empty;
+                                pnSlideTemplate.Visible = false;
+                            }
+                        });
+                        InteropClasses.PowerPointHelper.Instance.ViewSlideShow();
                         InteropClasses.PowerPointHelper.Instance.ResizeSlideShow(containerHandle, (int)(containerHeight / _scaleK), (int)(containerWidth / _scaleK));
                     });
                     thread.Start();

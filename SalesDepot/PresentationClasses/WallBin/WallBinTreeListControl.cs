@@ -214,6 +214,10 @@ namespace SalesDepot.PresentationClasses.WallBin
                             }
                             Application.DoEvents();
                         }
+                    }
+                    catch { }
+                    try
+                    {
                         List<FileInfo> files = new List<FileInfo>();
                         files.AddRange(folderLink.Folder.GetFiles());
                         files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
@@ -229,12 +233,10 @@ namespace SalesDepot.PresentationClasses.WallBin
                             }
                             Application.DoEvents();
                         }
-                        node.StateImageIndex = 1;
-                        node.Expanded = true;
                     }
-                    catch
-                    {
-                    }
+                    catch { }
+                    node.StateImageIndex = 1;
+                    node.Expanded = true;
                 }
             }
         }
@@ -337,6 +339,10 @@ namespace SalesDepot.PresentationClasses.WallBin
                         subFolderLink.Folder = subFolder;
                         SearchFileInFolder(subFolderLink, keyWord, files);
                     }
+            }
+            catch { }
+            try
+            {
                 foreach (FileInfo file in folderLink.Folder.GetFiles("*" + keyWord + "*.*"))
                 {
                     if (((file.LastWriteTime >= dateEditStartDate.DateTime && file.LastWriteTime <= dateEditEndDate.DateTime) || !checkEditDateRange.Checked) && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.FullName.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
@@ -428,6 +434,8 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             _parentLibrary = library;
 
+            xtraTabPageRegular.Text = _parentLibrary.Parent.Name;
+
             _rootFolders.Clear();
             _rootFolders.AddRange(_parentLibrary.ExtraFolders);
             _rootFolders.Sort((x, y) => (x as BusinessClasses.RootFolder).Order.CompareTo((y as BusinessClasses.RootFolder).Order));
@@ -441,14 +449,9 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             try
             {
-                BusinessClasses.LibraryFile link = _parentLibrary.DirectAccessLinks.Where(x => x.RemotePath.Equals(file.File.FullName)).FirstOrDefault();
-                if (link == null)
-                {
-                    link = new BusinessClasses.LibraryFile(new BusinessClasses.LibraryFolder(new BusinessClasses.LibraryPage(_parentLibrary)));
-                    link.RemotePath = file.File.FullName;
-                    link.SetProperties();
-                    _parentLibrary.DirectAccessLinks.Add(link);
-                }
+                BusinessClasses.LibraryFile link = new BusinessClasses.LibraryFile(new BusinessClasses.LibraryFolder(new BusinessClasses.LibraryPage(_parentLibrary)));
+                link.RemotePath = file.File.FullName;
+                link.SetProperties();
                 BusinessClasses.LinkManager.Instance.OpenLink(link);
             }
             catch { }
@@ -462,10 +465,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             barButtonItemOpenLink.Enabled = false;
             barButtonItemSave.Enabled = false;
-            barButtonItemSaveAsPDF.Enabled = false;
             barButtonItemEmailLink.Enabled = false;
-            barButtonItemAddSlide.Enabled = false;
-            barButtonItemOpenQuickView.Enabled = false;
             barButtonItemPrintLink.Enabled = false;
             if (file != null)
             {
@@ -476,10 +476,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     case BusinessClasses.FileTypes.FriendlyPresentation:
                     case BusinessClasses.FileTypes.OtherPresentation:
                         barButtonItemSave.Enabled = true;
-                        barButtonItemSaveAsPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003 & true;
                         barButtonItemEmailLink.Enabled = true;
-                        barButtonItemAddSlide.Enabled = true;
-                        barButtonItemOpenQuickView.Enabled = true;
                         barButtonItemPrintLink.Enabled = true;
                         break;
                     case BusinessClasses.FileTypes.Excel:
@@ -521,14 +518,10 @@ namespace SalesDepot.PresentationClasses.WallBin
                     BusinessClasses.FileLink file = node.Tag as BusinessClasses.FileLink;
                     if (file != null)
                     {
-                        BusinessClasses.LibraryFile libraryFile = _parentLibrary.DirectAccessLinks.Where(x => x.RemotePath.Equals(file.File.FullName)).FirstOrDefault();
-                        if (libraryFile == null)
-                        {
-                            libraryFile = new BusinessClasses.LibraryFile(new BusinessClasses.LibraryFolder(new BusinessClasses.LibraryPage(_parentLibrary)));
-                            libraryFile.RemotePath = file.File.FullName;
-                            libraryFile.SetProperties();
-                            _parentLibrary.DirectAccessLinks.Add(libraryFile);
-                        }
+                        BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(new BusinessClasses.LibraryFolder(new BusinessClasses.LibraryPage(_parentLibrary)));
+                        libraryFile.RemotePath = file.File.FullName;
+                        libraryFile.SetProperties();
+
                         using (ToolForms.FormProgress form = new ToolForms.FormProgress())
                         {
                             form.laProgress.Text = "Loading preview...";
@@ -538,13 +531,6 @@ namespace SalesDepot.PresentationClasses.WallBin
 
                                 switch (libraryFile.Type)
                                 {
-                                    case BusinessClasses.FileTypes.BuggyPresentation:
-                                    case BusinessClasses.FileTypes.FriendlyPresentation:
-                                    case BusinessClasses.FileTypes.OtherPresentation:
-                                        if (libraryFile.PreviewContainer != null)
-                                            libraryFile.PreviewContainer.GetPreviewImages();
-                                        FormMain.Instance.Invoke((MethodInvoker)delegate() { _selectedFileViewer = new Viewers.PowerPointViewer(libraryFile); });
-                                        break;
                                     case BusinessClasses.FileTypes.Excel:
                                         FormMain.Instance.Invoke((MethodInvoker)delegate()
                                         {

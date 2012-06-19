@@ -42,6 +42,18 @@ namespace SalesDepot.PresentationClasses.Viewers
             this.Visible = false;
 
             this.File = file;
+
+            switch (this.File.Type)
+            {
+                case BusinessClasses.FileTypes.BuggyPresentation:
+                case BusinessClasses.FileTypes.FriendlyPresentation:
+                case BusinessClasses.FileTypes.OtherPresentation:
+                    laMessage.Text = "Double-Click PowerPoint files to preview";
+                    break;
+                default:
+                    laMessage.Text = "Double-Click File to preview...";
+                    break;
+            }
         }
 
         #region IFileViewer Methods
@@ -67,6 +79,7 @@ namespace SalesDepot.PresentationClasses.Viewers
                     BusinessClasses.LinkManager.Instance.StartProcess(this.File.LocalPath);
                     break;
                 default:
+                    BusinessClasses.LinkManager.Instance.OpenLink(this.File);
                     break;
             }
         }
@@ -74,44 +87,25 @@ namespace SalesDepot.PresentationClasses.Viewers
         public void Save()
         {
             ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            switch (this.File.Type)
-            {
-                case BusinessClasses.FileTypes.Other:
-                case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
-                    break;
-                default:
-                    break;
-            }
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
         }
 
         public void Email()
         {
             ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            switch (this.File.Type)
-            {
-                case BusinessClasses.FileTypes.Other:
-                case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.Instance.EmailFile(this.File.LocalPath);
-                    break;
-                default:
-                    break;
-            }
+            BusinessClasses.LinkManager.Instance.EmailFile(this.File.LocalPath);
         }
 
         public void Print()
         {
             ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            switch (this.File.Type)
-            {
-                case BusinessClasses.FileTypes.Other:
-                case BusinessClasses.FileTypes.QuickTimeVideo:
-                    BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
-                    break;
-                default:
-                    break;
-            }
+            BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
         }
         #endregion
+
+        private void laMessage_DoubleClick(object sender, System.EventArgs e)
+        {
+            BusinessClasses.LinkManager.Instance.OpenLink(this.File);
+        }
     }
 }

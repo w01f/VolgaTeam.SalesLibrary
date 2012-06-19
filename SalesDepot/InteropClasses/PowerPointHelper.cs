@@ -257,13 +257,12 @@ namespace SalesDepot.InteropClasses
             }
         }
 
-        public void ViewSlideShow(FileInfo presentationFile)
+        public void ViewSlideShow()
         {
 
             MessageFilter.Register();
             try
             {
-                OpenSlideSourcePresentation(presentationFile);
                 _slideSourcePresentationObject.SlideShowSettings.ShowType = Microsoft.Office.Interop.PowerPoint.PpSlideShowType.ppShowTypeKiosk;
                 _slideSourcePresentationObject.SlideShowSettings.ShowWithAnimation = Microsoft.Office.Core.MsoTriState.msoFalse;
                 _slideSourcePresentationObject.SlideShowSettings.LoopUntilStopped = Microsoft.Office.Core.MsoTriState.msoTrue;
