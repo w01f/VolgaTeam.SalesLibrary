@@ -1703,6 +1703,7 @@ namespace SalesDepot.BusinessClasses
     {
         public Color ForeColor { get; set; }
         public Font Font { get; set; }
+        public Font BoldFont { get; set; }
         public bool EnableBanner { get; set; }
         public Image Banner { get; set; }
         public string Note { get; set; }
@@ -1711,6 +1712,7 @@ namespace SalesDepot.BusinessClasses
         {
             this.ForeColor = Color.Black;
             this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+            this.BoldFont = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Pixel);
             this.Note = string.Empty;
         }
 
@@ -1737,6 +1739,7 @@ namespace SalesDepot.BusinessClasses
                         try
                         {
                             this.Font = converter.ConvertFromString(childNode.InnerText) as Font;
+                            this.BoldFont = new Font(this.Font.Name, this.Font.Size, FontStyle.Bold);
                         }
                         catch
                         {

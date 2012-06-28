@@ -487,22 +487,32 @@ namespace SalesDepot.PresentationClasses.WallBin
             #endregion
 
             #region Font
+            Font fontForSizeCalculation;
             if (file.BannerProperties.Enable && file.BannerProperties.ShowText)
+            {
                 font = file.BannerProperties.Font;
+                fontForSizeCalculation = font;
+            }
             else if (file.Type == BusinessClasses.FileTypes.LineBreak)
-                font = file.LineBreakProperties.Font;
+            {
+                font = file.DisplayAsBold ? file.LineBreakProperties.BoldFont : file.LineBreakProperties.Font;
+                fontForSizeCalculation = file.LineBreakProperties.BoldFont;
+            }
             else
+            {
                 font = file.DisplayAsBold ? _noteFont : _textFont;
+                fontForSizeCalculation = _noteFont;
+            }
             #endregion
 
             #region Text Size and Coordinates
             SizeF textSize = new SizeF();
             if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
                 using (Graphics g = labelControlText.CreateGraphics())
-                    textSize = g.MeasureString(text, font, Int32.MaxValue);
+                    textSize = g.MeasureString(text, fontForSizeCalculation, Int32.MaxValue);
             else
                 using (Graphics g = labelControlText.CreateGraphics())
-                    textSize = g.MeasureString(text, font, Int32.MaxValue);
+                    textSize = g.MeasureString(text, fontForSizeCalculation, Int32.MaxValue);
 
             if (file.BannerProperties.Enable)
             {
