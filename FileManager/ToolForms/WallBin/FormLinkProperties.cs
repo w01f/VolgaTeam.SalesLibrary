@@ -316,6 +316,7 @@ namespace FileManager.ToolForms.WallBin
             else
             {
                 this.LineBreakProperties.Font = buttonEditLineBreakFont.Tag as Font;
+                this.LineBreakProperties.BoldFont = new Font(this.LineBreakProperties.Font.Name, this.LineBreakProperties.Font.Size,FontStyle.Bold);
                 this.LineBreakProperties.ForeColor = colorEditLineBreakFontColor.Color;
                 this.LineBreakProperties.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
             }
