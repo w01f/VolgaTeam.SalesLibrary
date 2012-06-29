@@ -100,6 +100,18 @@ namespace FileManager
             return MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
         }
 
+        public void KillAutoFM()
+        {
+            foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName.ToUpper().Contains("AUTOFMSYNC")))
+                process.Kill();
+        }
+
+        public void RunAutoFM()
+        {
+            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.AutoFMSyncShorcutPath))
+                Process.Start(ConfigurationClasses.SettingsManager.Instance.AutoFMSyncShorcutPath);
+        }
+
         public void ReleaseComObject(object o)
         {
             try

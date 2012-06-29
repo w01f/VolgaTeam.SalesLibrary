@@ -50,6 +50,9 @@ namespace FileManager.BusinessClasses
 
         public void SynchronizeLibraries()
         {
+            AppManager.Instance.KillAutoFM();
+
+
             HashSet<string> filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             List<string> existedLibraryFolderNames = new List<string>();
             string foldera = ConfigurationClasses.SettingsManager.Instance.BackupPath;
@@ -183,6 +186,8 @@ namespace FileManager.BusinessClasses
                     if (!existedLibraryFolderNames.Contains(folder.Name))
                         ToolClasses.SyncManager.Instance.DeleteFolder(folder);
             }
+
+            AppManager.Instance.RunAutoFM();
         }
 
         private void AddFolderForSync(DirectoryInfo folder, HashSet<string> filesWhiteList)

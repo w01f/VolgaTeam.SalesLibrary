@@ -7,6 +7,8 @@ namespace FileManager.ToolForms.Settings
 {
     public partial class FormAutoSync : Form
     {
+        private FormAutoSyncEdit _formEdit;
+
         public FormAutoSync()
         {
             InitializeComponent();
@@ -25,23 +27,44 @@ namespace FileManager.ToolForms.Settings
         {
             buttonXEnable.Checked = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableAutoSync;
             buttonXDisable.Checked = !PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableAutoSync;
-            gridControlSyncTimes.DataSource = new BindingList<BusinessClasses.TimePoint>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncTimes);
+            gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
         }
 
         private void buttonXAddSyncTime_Click(object sender, EventArgs e)
         {
-            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncTimes.Add(new BusinessClasses.TimePoint());
-            gridControlSyncTimes.DataSource = new BindingList<BusinessClasses.TimePoint>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncTimes);
-            if (gridViewSyncTimes.RowCount > 0)
-                gridViewSyncTimes.FocusedRowHandle = gridViewSyncTimes.RowCount - 1;
-        }
-
-        private void repositoryItemTimeEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            if (e.Button.Index == 1)
+            BusinessClasses.SyncScheduleRecord syncScheduleRecord = new BusinessClasses.SyncScheduleRecord();
+            syncScheduleRecord.Time = DateTime.Now;
+            switch (syncScheduleRecord.Time.DayOfWeek)
             {
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncTimes.RemoveAt(gridViewSyncTimes.GetDataSourceRowIndex(gridViewSyncTimes.FocusedRowHandle));
-                gridControlSyncTimes.DataSource = new BindingList<BusinessClasses.TimePoint>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncTimes);
+                case DayOfWeek.Monday:
+                    syncScheduleRecord.Monday = true;
+                    break;
+                case DayOfWeek.Tuesday:
+                    syncScheduleRecord.Tuesday = true;
+                    break;
+                case DayOfWeek.Wednesday:
+                    syncScheduleRecord.Wednesday = true;
+                    break;
+                case DayOfWeek.Thursday:
+                    syncScheduleRecord.Thursday = true;
+                    break;
+                case DayOfWeek.Friday:
+                    syncScheduleRecord.Friday = true;
+                    break;
+                case DayOfWeek.Saturday:
+                    syncScheduleRecord.Saturday = true;
+                    break;
+                case DayOfWeek.Sunday:
+                    syncScheduleRecord.Sunday = true;
+                    break;
+            }
+            _formEdit = new FormAutoSyncEdit(syncScheduleRecord);
+            if (_formEdit.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords.Add(syncScheduleRecord);
+                gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
+                if (gridViewSyncSchedule.RowCount > 0)
+                    gridViewSyncSchedule.FocusedRowHandle = gridViewSyncSchedule.RowCount - 1;
             }
         }
 
@@ -59,7 +82,25 @@ namespace FileManager.ToolForms.Settings
         private void buttonXEnable_CheckedChanged(object sender, EventArgs e)
         {
             buttonXAddSyncTime.Enabled = buttonXEnable.Checked;
-            gridControlSyncTimes.Enabled = buttonXEnable.Checked;
+            gridControlSyncSchedule.Enabled = buttonXEnable.Checked;
+            laHint.Enabled = buttonXEnable.Checked;
+        }
+
+        private void gridViewSyncSchedule_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            if (e.Clicks == 2)
+            {
+                BusinessClasses.SyncScheduleRecord syncScheduleRecord = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords[gridViewSyncSchedule.GetDataSourceRowIndex(e.RowHandle)];
+                _formEdit = new FormAutoSyncEdit(syncScheduleRecord);
+                if (_formEdit.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
+            }
+        }
+
+        private void repositoryItemButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords.RemoveAt(gridViewSyncSchedule.GetDataSourceRowIndex(gridViewSyncSchedule.FocusedRowHandle));
+            gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
         }
     }
 }

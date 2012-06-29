@@ -29,6 +29,7 @@ namespace FileManager.ConfigurationClasses
         public string WebArtRootPath { get; set; }
         public string AdSpecsSamplesRootPath { get; set; }
         public string ScreenshotLibraryRootPath { get; set; }
+        public string AutoFMSyncShorcutPath { get; set; }
 
         #region FM Settings
         public string BackupPath { get; set; }
@@ -76,6 +77,8 @@ namespace FileManager.ConfigurationClasses
             this.WebArtRootPath = string.Empty;
             this.AdSpecsSamplesRootPath = string.Empty;
             this.ScreenshotLibraryRootPath = string.Empty;
+
+            this.AutoFMSyncShorcutPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Startup), "AutoFMSync.exe - Shortcut.lnk");
 
             #region FM Settings
             this.BackupPath = string.Empty;

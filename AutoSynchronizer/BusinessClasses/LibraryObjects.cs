@@ -65,6 +65,9 @@ namespace AutoSynchronizer.BusinessClasses
 
         #region Auto Sync Settings
         public bool EnableAutoSync { get; set; }
+        public List<SyncScheduleRecord> SyncScheduleRecords { get; private set; }
+
+        //Obsolte, using for compatibility with old versions
         public List<TimePoint> SyncTimes { get; private set; }
         #endregion
 
@@ -98,6 +101,9 @@ namespace AutoSynchronizer.BusinessClasses
             this.AutoWidgets = new List<AutoWidget>();
 
             #region Auto Sync Settings
+            this.SyncScheduleRecords = new List<SyncScheduleRecord>();
+
+            //Obsolte, using for compatibility with old versions
             this.SyncTimes = new List<TimePoint>();
             #endregion
 
@@ -132,7 +138,7 @@ namespace AutoSynchronizer.BusinessClasses
             this.EmailList.Clear();
             this.AutoWidgets.Clear();
             this.EnableAutoSync = false;
-            this.SyncTimes.Clear();
+            this.SyncScheduleRecords.Clear();
             this.ExtraFolders.Clear();
 
             bool fileBusy = true;
@@ -253,8 +259,21 @@ namespace AutoSynchronizer.BusinessClasses
                         if (node != null)
                             if (bool.TryParse(node.InnerText, out tempBool))
                                 this.EnableAutoSync = tempBool;
+                        node = document.SelectSingleNode(@"/Library/SyncSchedule");
+                        if (node != null)
+                            foreach (XmlNode syncTimeNode in node.ChildNodes)
+                            {
+                                if (syncTimeNode.Name.Equals("SyncScheduleRecord"))
+                                {
+                                    SyncScheduleRecord synctTime = new SyncScheduleRecord();
+                                    synctTime.Deserialize(syncTimeNode);
+                                    this.SyncScheduleRecords.Add(synctTime);
+                                }
+                            }
+                        //Obsolte, using for compatibility with old versions
                         node = document.SelectSingleNode(@"/Library/AutoSyncTimes");
                         if (node != null)
+                        {
                             foreach (XmlNode syncTimeNode in node.ChildNodes)
                             {
                                 if (syncTimeNode.Name.Equals("SyncTime"))
@@ -264,6 +283,46 @@ namespace AutoSynchronizer.BusinessClasses
                                     this.SyncTimes.Add(synctTime);
                                 }
                             }
+                            if (this.SyncTimes.Count > 0)
+                            {
+                                DateTime[] syncTimes = this.SyncTimes.Select(x => new DateTime(1, 1, 1, x.Time.Hour, x.Time.Minute, 0)).Distinct().ToArray();
+                                foreach (DateTime syncTime in syncTimes)
+                                {
+                                    SyncScheduleRecord syncScheduleRecord = new SyncScheduleRecord();
+                                    syncScheduleRecord.Time = syncTime;
+
+                                    DayOfWeek[] days = this.SyncTimes.Where(x => x.Time.Hour.Equals(syncTime.Hour) && x.Time.Minute.Equals(syncTime.Minute)).Select(x => x.Day).ToArray();
+                                    foreach (DayOfWeek day in days)
+                                    {
+                                        switch (day)
+                                        {
+                                            case DayOfWeek.Monday:
+                                                syncScheduleRecord.Monday = true;
+                                                break;
+                                            case DayOfWeek.Tuesday:
+                                                syncScheduleRecord.Tuesday = true;
+                                                break;
+                                            case DayOfWeek.Wednesday:
+                                                syncScheduleRecord.Wednesday = true;
+                                                break;
+                                            case DayOfWeek.Thursday:
+                                                syncScheduleRecord.Thursday = true;
+                                                break;
+                                            case DayOfWeek.Friday:
+                                                syncScheduleRecord.Friday = true;
+                                                break;
+                                            case DayOfWeek.Saturday:
+                                                syncScheduleRecord.Saturday = true;
+                                                break;
+                                            case DayOfWeek.Sunday:
+                                                syncScheduleRecord.Sunday = true;
+                                                break;
+                                        }
+                                    }
+                                    this.SyncScheduleRecords.Add(syncScheduleRecord);
+                                }
+                            }
+                        }
                         #endregion
 
                         node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
@@ -324,10 +383,10 @@ namespace AutoSynchronizer.BusinessClasses
 
             #region Auto Sync Settings
             xml.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
-            xml.AppendLine(@"<AutoSyncTimes>");
-            foreach (TimePoint syncTime in this.SyncTimes)
-                xml.AppendLine(@"<SyncTime>" + syncTime.Serialize() + @"</SyncTime>");
-            xml.AppendLine(@"</AutoSyncTimes>");
+            xml.AppendLine(@"<SyncSchedule>");
+            foreach (SyncScheduleRecord syncTime in this.SyncScheduleRecords)
+                xml.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
+            xml.AppendLine(@"</SyncSchedule>");
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
@@ -1788,6 +1847,102 @@ namespace AutoSynchronizer.BusinessClasses
         }
     }
 
+    public class SyncScheduleRecord
+    {
+        public DateTime Time { get; set; }
+        public bool Monday { get; set; }
+        public bool Tuesday { get; set; }
+        public bool Wednesday { get; set; }
+        public bool Thursday { get; set; }
+        public bool Friday { get; set; }
+        public bool Saturday { get; set; }
+        public bool Sunday { get; set; }
+
+        public string DayString
+        {
+            get
+            {
+                List<string> result = new List<string>();
+                if (this.Monday)
+                    result.Add("Mo");
+                if (this.Tuesday)
+                    result.Add("Tu");
+                if (this.Wednesday)
+                    result.Add("We");
+                if (this.Thursday)
+                    result.Add("Th");
+                if (this.Friday)
+                    result.Add("Fr");
+                if (this.Saturday)
+                    result.Add("Sa");
+                if (this.Sunday)
+                    result.Add("Su");
+
+                return string.Join(",", result.ToArray());
+            }
+        }
+
+        public string Serialize()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Time>" + this.Time.ToString() + @"</Time>");
+            result.AppendLine(@"<Monday>" + this.Monday.ToString() + @"</Monday>");
+            result.AppendLine(@"<Tuesday>" + this.Tuesday.ToString() + @"</Tuesday>");
+            result.AppendLine(@"<Wednesday>" + this.Wednesday.ToString() + @"</Wednesday>");
+            result.AppendLine(@"<Thursday>" + this.Thursday.ToString() + @"</Thursday>");
+            result.AppendLine(@"<Friday>" + this.Friday.ToString() + @"</Friday>");
+            result.AppendLine(@"<Saturday>" + this.Saturday.ToString() + @"</Saturday>");
+            result.AppendLine(@"<Sunday>" + this.Sunday.ToString() + @"</Sunday>");
+            return result.ToString();
+        }
+
+        public void Deserialize(XmlNode node)
+        {
+            bool tempBool;
+            DateTime tempDateTime;
+
+            foreach (XmlNode childNode in node.ChildNodes)
+            {
+                switch (childNode.Name)
+                {
+                    case "Time":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
+                            this.Time = tempDateTime;
+                        break;
+                    case "Monday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Monday = tempBool;
+                        break;
+                    case "Tuesday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Tuesday = tempBool;
+                        break;
+                    case "Wednesday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Wednesday = tempBool;
+                        break;
+                    case "Thursday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Thursday = tempBool;
+                        break;
+                    case "Friday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Friday = tempBool;
+                        break;
+                    case "Saturday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Saturday = tempBool;
+                        break;
+                    case "Sunday":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Sunday = tempBool;
+                        break;
+                }
+            }
+        }
+    }
+
+    #region Obsolete, Using for compatibility with old versions
     public class TimePoint
     {
         public DayOfWeek Day { get; set; }
@@ -1878,6 +2033,7 @@ namespace AutoSynchronizer.BusinessClasses
             }
         }
     }
+    #endregion
 
     public class FolderLink
     {

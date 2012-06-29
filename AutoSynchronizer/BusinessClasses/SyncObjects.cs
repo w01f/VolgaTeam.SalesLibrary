@@ -24,12 +24,19 @@ namespace AutoSynchronizer.BusinessClasses
         {
             List<DateTime> result = new List<DateTime>();
 
-            foreach (TimePoint sheduledTime in this.Manager.Library.SyncTimes)
+            foreach (SyncScheduleRecord sheduleRecord in this.Manager.Library.SyncScheduleRecords)
             {
-                DateTime syncDate = new DateTime(now.Year, now.Month, now.Day, sheduledTime.Time.Hour, sheduledTime.Time.Minute, sheduledTime.Time.Second);
+                DateTime syncDate = new DateTime(now.Year, now.Month, now.Day, sheduleRecord.Time.Hour, sheduleRecord.Time.Minute, 0);
 
-                while (syncDate.DayOfWeek != sheduledTime.Day)
+                while (!((syncDate.DayOfWeek == DayOfWeek.Monday & sheduleRecord.Monday) ||
+                         (syncDate.DayOfWeek == DayOfWeek.Tuesday & sheduleRecord.Tuesday) ||
+                         (syncDate.DayOfWeek == DayOfWeek.Wednesday & sheduleRecord.Wednesday) ||
+                         (syncDate.DayOfWeek == DayOfWeek.Thursday & sheduleRecord.Thursday) ||
+                         (syncDate.DayOfWeek == DayOfWeek.Friday & sheduleRecord.Friday) ||
+                         (syncDate.DayOfWeek == DayOfWeek.Saturday & sheduleRecord.Saturday) ||
+                         (syncDate.DayOfWeek == DayOfWeek.Sunday & sheduleRecord.Sunday)))
                     syncDate = syncDate.AddDays(1);
+
                 if (syncDate < now)
                     syncDate = syncDate.AddDays(7);
                 result.Add(syncDate);
@@ -59,7 +66,7 @@ namespace AutoSynchronizer.BusinessClasses
         private void ScheduleNextSync()
         {
             StopBackgroundSync();
-            if (this.Manager.Library.EnableAutoSync && this.Manager.Library.SyncTimes.Count > 0)
+            if (this.Manager.Library.EnableAutoSync && this.Manager.Library.SyncScheduleRecords.Count > 0)
             {
                 _timer = new System.Threading.Timer(delegate(object state)
                 {
@@ -262,7 +269,8 @@ namespace AutoSynchronizer.BusinessClasses
             {
                 _timer = new System.Threading.Timer(delegate(object state)
                 {
-                    GrabEmail();
+                    if (!AppManager.Instance.FileManagerActive())
+                        GrabEmail();
 
                     this.NextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.EmailGrabInterval);
                     ScheduleNextGrab();
@@ -287,6 +295,7 @@ namespace AutoSynchronizer.BusinessClasses
         private System.Threading.Timer _timer = null;
         private InteropClasses.ExcelHelper _excel = null;
         private List<FileInfo> _files = new List<FileInfo>();
+        private GrabCacheManager _grabCacheManager;
 
         public DateTime NextGrabTime { get; set; }
         public LibraryWrapper Manager { get; private set; }
@@ -324,7 +333,8 @@ namespace AutoSynchronizer.BusinessClasses
             {
                 _timer = new System.Threading.Timer(delegate(object state)
                 {
-                    GrabFiles();
+                    if (!AppManager.Instance.FileManagerActive())
+                        GrabFiles();
 
                     this.NextGrabTime = DateTime.Now.AddMinutes(this.Manager.Library.OvernightsCalendar.FileGrabInterval);
                     ScheduleNextGrab();
@@ -336,12 +346,15 @@ namespace AutoSynchronizer.BusinessClasses
         #region Grab Methods
         private void GrabFiles()
         {
+            _grabCacheManager = new GrabCacheManager(this.Manager.Library.OvernightsCalendar.FileGrabSourceFolder);
             List<FileInfo> newFiles = new List<FileInfo>(GetLatestFiles(new DirectoryInfo(this.Manager.Library.OvernightsCalendar.FileGrabSourceFolder)));
             FileInfo[] changedFiles = newFiles.Where(x => !_files.Select(y => y.FullName).Contains(x.FullName) || _files.Where(y => y.FullName.Equals(x.FullName) && y.LastWriteTime < x.LastWriteTime).Count() > 0).ToArray();
             foreach (FileInfo file in changedFiles)
-                GrabFile(file);
+                if (!file.FullName.Equals(_grabCacheManager.GrabCacheFilePath))
+                    GrabFile(file);
             _files.Clear();
             _files.AddRange(newFiles);
+            _grabCacheManager.SaveCache();
         }
 
         private void GrabFile(FileInfo file)
@@ -350,12 +363,30 @@ namespace AutoSynchronizer.BusinessClasses
             string fileExtension = file.Extension;
             if (fileExtension.Equals(".xls") || fileExtension.Equals(".xlsx"))
             {
-                string tempFile = Path.GetTempFileName();
-                file.CopyTo(tempFile, true);
-                InteropClasses.ExcelHelper excelHelper = new InteropClasses.ExcelHelper();
-                fileDate = excelHelper.GetOvernightsDate(tempFile);
-                if (File.Exists(tempFile))
-                    File.Delete(tempFile);
+                GrabFileInfo cachedInfo = _grabCacheManager.GrabbedFiles.Where(x => x.FilePath.Equals(file.FullName)).FirstOrDefault();
+                if (cachedInfo == null)
+                {
+                    cachedInfo = new GrabFileInfo();
+                    cachedInfo.FilePath = file.FullName;
+                    _grabCacheManager.GrabbedFiles.Add(cachedInfo);
+                }
+
+                DateTime fileLastWrite = new DateTime(file.LastWriteTime.Year, file.LastWriteTime.Month, file.LastWriteTime.Day, file.LastWriteTime.Hour, file.LastWriteTime.Minute, file.LastWriteTime.Second);
+                DateTime cacheLastWrite = new DateTime(cachedInfo.LastModified.Year, cachedInfo.LastModified.Month, cachedInfo.LastModified.Day, cachedInfo.LastModified.Hour, cachedInfo.LastModified.Minute, cachedInfo.LastModified.Second);
+                if (fileLastWrite > cacheLastWrite)
+                {
+                    string tempFile = Path.GetTempFileName();
+                    file.CopyTo(tempFile, true);
+                    InteropClasses.ExcelHelper excelHelper = new InteropClasses.ExcelHelper();
+                    fileDate = excelHelper.GetOvernightsDate(tempFile);
+                    if (File.Exists(tempFile))
+                        File.Delete(tempFile);
+
+                    cachedInfo.FileDate = fileDate;
+                    cachedInfo.LastModified = file.LastWriteTime;
+                }
+                else
+                    fileDate = cachedInfo.FileDate;
             }
             BusinessClasses.CalendarYear year = this.Manager.Library.OvernightsCalendar.Years.Where(x => x.Year.Equals(fileDate.Year)).FirstOrDefault();
             if (year != null && year.RootFolder.Exists)

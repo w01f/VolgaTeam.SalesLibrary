@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\GrabCacheManager.cs" />
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="BusinessClasses\LibraryObjects.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
