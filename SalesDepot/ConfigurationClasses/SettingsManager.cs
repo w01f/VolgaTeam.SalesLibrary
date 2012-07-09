@@ -23,6 +23,13 @@ namespace SalesDepot.ConfigurationClasses
         DisplayViewOptions = 0x08
     }
 
+    public enum BrowseType
+    {
+        Day = 0,
+        Week,
+        Month
+    }
+
     public class SettingsManager
     {
         private static SettingsManager _instance = new SettingsManager();
@@ -37,6 +44,7 @@ namespace SalesDepot.ConfigurationClasses
         public const string ContentsSlideName = @"WizContents.ppt";
         public const string PreviewContainersRootFolderName = @"!QV";
         public const string OvernightsCalendarRootFolderName = @"!OC";
+        public const string ProgramManagerRootFolderName = @"!PM";
         public const string ExtraFoldersRootFolderName = @"!Extra Roots";
         public const string SweepPeriodsFileName = @"SweepPeriods.xml";
         public const string NoLogoFileName = @"no_logo.png";
@@ -73,6 +81,7 @@ namespace SalesDepot.ConfigurationClasses
         public string CalendarLogoPath { get; set; }
         public string DisclaimerPath { get; set; }
         public string PowerPointLoaderPath { get; set; }
+        public string LogFilePath { get; private set; }
 
         public string SelectedPackage { get; set; }
         public string SelectedLibrary { get; set; }
@@ -105,6 +114,14 @@ namespace SalesDepot.ConfigurationClasses
         public string ListTitle { get; set; }
         public string SolutionTitle { get; set; }
         public KeyWordFileFilters KeyWordFilters { get; private set; }
+
+        #region Program Schedule Settings
+        public string ProgramScheduleSelectedStation { get; set; }
+        public BrowseType ProgramScheduleBrowseType { get; set; }
+        public bool ProgramScheduleShowInfo { get; set; }
+        public ProgramOutputSettings ProgramScheduleOutputSettings { get; private set; }
+        public string OutputCache { get; private set; }
+        #endregion
 
         public Guid AppID { get; set; }
         public List<string> ApprovedLibraries { get; private set; }
@@ -150,6 +167,7 @@ namespace SalesDepot.ConfigurationClasses
             this.CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicatonLog.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DefaultWizard = string.Empty;
             this.SalesDepotName = string.Empty;
             this.KeyWordFilters = new KeyWordFileFilters();
@@ -157,10 +175,17 @@ namespace SalesDepot.ConfigurationClasses
             this.ApprovedLibraries = new List<string>();
             LoadAppID();
 
+            #region Program Manager Settings
+            this.ProgramScheduleShowInfo = true;
+            this.ProgramScheduleOutputSettings = new ConfigurationClasses.ProgramOutputSettings();
+            this.OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
+            #endregion
+
             this.HiddenObjects = new List<string>();
             this.HiddenObjects.Add("!Old");
             this.HiddenObjects.Add(PreviewContainersRootFolderName);
             this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(ProgramManagerRootFolderName);
             this.HiddenObjects.Add(ExtraFoldersRootFolderName);
             this.HiddenObjects.Add("thumbs.db");
             this.HiddenObjects.Add("SalesDepotCache.xml");
@@ -373,6 +398,34 @@ namespace SalesDepot.ConfigurationClasses
                     if (bool.TryParse(node.InnerText, out tempBool))
                         this.CalendarView = tempBool;
 
+                #region Program Shedule Settings
+                node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleSelectedStation");
+                if (node != null)
+                {
+                    this.ProgramScheduleSelectedStation = node.InnerText;
+                }
+
+                node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleShowInfo");
+                if (node != null)
+                {
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.ProgramScheduleShowInfo = tempBool;
+                }
+
+                node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleBrowseType");
+                if (node != null)
+                {
+                    if (int.TryParse(node.InnerText, out tempInt))
+                        this.ProgramScheduleBrowseType = (BrowseType)tempInt;
+                }
+
+                node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleOutputSettings");
+                if (node != null)
+                {
+                    this.ProgramScheduleOutputSettings.Deserialize(node);
+                }
+                #endregion
+
                 if (this.LastViewed || this.UseRemoteConnection)
                 {
                     node = document.SelectSingleNode(@"/LocalSettings/ClassicView");
@@ -486,6 +539,15 @@ namespace SalesDepot.ConfigurationClasses
                 xml.AppendLine(@"<SolutionTitleView>" + this.SolutionTitleView.ToString() + @"</SolutionTitleView>");
                 xml.AppendLine(@"<KeyWordFilters>" + this.KeyWordFilters.Serialize() + @"</KeyWordFilters>");
             }
+
+            #region Program Schedule Settings
+            if (!string.IsNullOrEmpty(this.ProgramScheduleSelectedStation))
+                xml.AppendLine(@"<ProgramScheduleSelectedStation>" + this.ProgramScheduleSelectedStation.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</ProgramScheduleSelectedStation>");
+            xml.AppendLine(@"<ProgramScheduleShowInfo>" + this.ProgramScheduleShowInfo.ToString() + @"</ProgramScheduleShowInfo>");
+            xml.AppendLine(@"<ProgramScheduleBrowseType>" + ((int)this.ProgramScheduleBrowseType).ToString() + @"</ProgramScheduleBrowseType>");
+            xml.AppendLine(@"<ProgramScheduleOutputSettings>" + this.ProgramScheduleOutputSettings.Serialize() + @"</ProgramScheduleOutputSettings>");
+            #endregion
+
             xml.AppendLine(@"</LocalSettings>");
 
             string settingsPath = this.UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;

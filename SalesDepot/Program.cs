@@ -21,6 +21,8 @@ namespace SalesDepot
             ConfigurationClasses.SettingsManager.Instance.CheckStaticFolders();
             if (args != null && args.Length > 0)
                 ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection = args[0].ToLower().Equals("-remote");
+            else
+                ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection = false;
             ConfigurationClasses.SettingsManager.Instance.GetSalesDepotName();
             ConfigurationClasses.SettingsManager.Instance.GetDefaultWizard();
             ConfigurationClasses.SettingsManager.Instance.LoadSettings();

@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -21,6 +20,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         public PresentationClasses.WallBin.MultitabLibraryControl TabControl { get; private set; }
         public PresentationClasses.WallBin.WallBinTreeListControl TreeListControl { get; private set; }
         public PresentationClasses.OvernightsCalendar.OvernightsCalendarControl OvernightsCalendar { get; private set; }
+        public PresentationClasses.ProgramManager.ProgramScheduleControl ProgramSchedule { get; private set; }
+        public PresentationClasses.ProgramManager.ProgramSearchControl ProgramSearch { get; private set; }
         public bool StateChanged { get; set; }
 
         public LibraryDecorator(PackageDecorator parent, BusinessClasses.Library library)
@@ -31,6 +32,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             this.TabControl = new PresentationClasses.WallBin.MultitabLibraryControl();
             this.TreeListControl = new WallBinTreeListControl();
             this.OvernightsCalendar = new OvernightsCalendar.OvernightsCalendarControl(this);
+            this.ProgramSchedule = new ProgramManager.ProgramScheduleControl(this);
+            this.ProgramSearch = new ProgramManager.ProgramSearchControl(this);
             this.Container = new Panel();
             this.Container.Dock = DockStyle.Fill;
             this.EmptyPanel = new Panel();
@@ -55,17 +58,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             if (this.Library.UseDirectAccess)
             {
                 this.TreeListControl.Init(this.Library);
-            }
-        }
-
-        public void BuildOvernightsCalendar()
-        {
-            this.Library.OvernightsCalendar.LoadYears();
-            Application.DoEvents();
-            if (this.Library.OvernightsCalendar.Enabled)
-            {
-                this.OvernightsCalendar.Build();
-                Application.DoEvents();
             }
         }
 
@@ -98,6 +90,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         {
             ApplyWallBin();
             ApplyOvernightsCalebdar();
+            ApplyProgramManager();
         }
 
         private void ApplyWallBin()
@@ -117,29 +110,6 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 this.Parent.Container.Controls.Add(this.Container);
             this.Container.BringToFront();
 
-        }
-
-        private void ApplyOvernightsCalebdar()
-        {
-            if (this.Library.OvernightsCalendar.Enabled)
-            {
-                FormMain.Instance.ribbonTabItemCalendar.Visible = true;
-                UpdateCalendarFontButtonsStatus();
-                if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(this.OvernightsCalendar))
-                    FormMain.Instance.TabOvernightsCalendar.Controls.Add(this.OvernightsCalendar);
-                this.OvernightsCalendar.BringToFront();
-            }
-            else
-            {
-                FormMain.Instance.ribbonTabItemCalendar.Visible = false;
-            }
-            FormMain.Instance.ribbonControl.RecalcLayout();
-        }
-
-        public void UpdateCalendarFontButtonsStatus()
-        {
-            FormMain.Instance.buttonItemCalendarFontSizeLarger.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize < 14;
-            FormMain.Instance.buttonItemCalendarFontSizeSmaler.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize > 10;
         }
 
         private void FillTreeListControl()
@@ -191,5 +161,117 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             foreach (PageDecorator page in this.Pages)
                 page.FitPage();
         }
+
+        #region Overnights Calendar Stuff
+        public void BuildOvernightsCalendar()
+        {
+            this.Library.OvernightsCalendar.LoadYears();
+            Application.DoEvents();
+            if (this.Library.OvernightsCalendar.Enabled)
+            {
+                this.OvernightsCalendar.Build();
+                Application.DoEvents();
+            }
+        }
+
+        private void ApplyOvernightsCalebdar()
+        {
+            if (this.Library.OvernightsCalendar.Enabled)
+            {
+                FormMain.Instance.ribbonTabItemCalendar.Visible = true;
+                UpdateCalendarFontButtonsStatus();
+                if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(this.OvernightsCalendar))
+                    FormMain.Instance.TabOvernightsCalendar.Controls.Add(this.OvernightsCalendar);
+                this.OvernightsCalendar.BringToFront();
+            }
+            else
+            {
+                FormMain.Instance.ribbonTabItemCalendar.Visible = false;
+            }
+            FormMain.Instance.ribbonControl.RecalcLayout();
+        }
+
+        public void UpdateCalendarFontButtonsStatus()
+        {
+            FormMain.Instance.buttonItemCalendarFontSizeLarger.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize < 14;
+            FormMain.Instance.buttonItemCalendarFontSizeSmaler.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize > 10;
+        }
+        #endregion
+
+        #region Program Manager Stuff
+        public void BuildProgramManager()
+        {
+            this.Library.ProgramManager.LoadData();
+            Application.DoEvents();
+        }
+
+        private void ApplyProgramManager()
+        {
+            if (this.Library.ProgramManager.Enabled)
+            {
+                FormMain.Instance.TabProgramSchedule.AllowToSave = false;
+                FormMain.Instance.TabProgramSearch.AllowToSave = false;
+
+                FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Clear();
+                FormMain.Instance.comboBoxEditProgramSearchStation.Properties.Items.Clear();
+                FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.AddRange(this.Library.ProgramManager.GetStationList());
+                FormMain.Instance.comboBoxEditProgramSearchStation.Properties.Items.AddRange(this.Library.ProgramManager.GetStationList());
+                if (FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Contains(ConfigurationClasses.SettingsManager.Instance.ProgramScheduleSelectedStation))
+                {
+                    FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex = FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.IndexOf(ConfigurationClasses.SettingsManager.Instance.ProgramScheduleSelectedStation);
+                    FormMain.Instance.comboBoxEditProgramSearchStation.SelectedIndex = FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex;
+                }
+                else if (FormMain.Instance.comboBoxEditProgramScheduleStation.Properties.Items.Count > 0)
+                {
+                    FormMain.Instance.comboBoxEditProgramScheduleStation.SelectedIndex = 0;
+                    FormMain.Instance.comboBoxEditProgramSearchStation.SelectedIndex = 0;
+                }
+
+                DateTime nowDate = DateTime.Now;
+                FormMain.Instance.dateEditProgramScheduleDay.DateTime = new DateTime(nowDate.Year, nowDate.Month, nowDate.Day);
+
+                FormMain.Instance.buttonItemProgramScheduleInfo.Checked = ConfigurationClasses.SettingsManager.Instance.ProgramScheduleShowInfo;
+
+                this.ProgramSchedule.gridViewPrograms.OptionsView.ShowPreview = ConfigurationClasses.SettingsManager.Instance.ProgramScheduleShowInfo;
+
+                switch (ConfigurationClasses.SettingsManager.Instance.ProgramScheduleBrowseType)
+                {
+                    case ConfigurationClasses.BrowseType.Day:
+                        FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseDay, null);
+                        break;
+                    case ConfigurationClasses.BrowseType.Week:
+                        FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseWeek, null);
+                        break;
+                    case ConfigurationClasses.BrowseType.Month:
+                        FormMain.Instance.TabProgramSchedule.buttonItemScheduleBrowseType_Click(FormMain.Instance.buttonItemProgramScheduleBrowseMonth, null);
+                        break;
+                }
+
+                this.ProgramSchedule.LoadStation();
+                this.ProgramSchedule.LoadDay();
+
+                this.ProgramSearch.ClearSearchParameters();
+                this.ProgramSearch.LoadStation();
+                this.ProgramSearch.LoadProgramsList();
+
+                FormMain.Instance.TabProgramSchedule.AllowToSave = true;
+                FormMain.Instance.TabProgramSearch.AllowToSave = true;
+
+                if (!FormMain.Instance.TabProgramSchedule.Controls.Contains(this.ProgramSchedule))
+                    FormMain.Instance.TabProgramSchedule.Controls.Add(this.ProgramSchedule);
+                this.ProgramSchedule.BringToFront();
+
+                if (!FormMain.Instance.TabProgramSearch.Controls.Contains(this.ProgramSearch))
+                    FormMain.Instance.TabProgramSearch.Controls.Add(this.ProgramSearch);
+                this.ProgramSearch.BringToFront();
+            }
+            else
+            {
+                FormMain.Instance.ribbonTabItemProgramSchedule.Visible = false;
+                FormMain.Instance.ribbonTabItemProgramSearch.Visible = false;
+            }
+            FormMain.Instance.ribbonControl.RecalcLayout();
+        }
+        #endregion
     }
 }

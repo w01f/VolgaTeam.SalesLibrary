@@ -45,5 +45,14 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
                 Application.DoEvents();
             }
         }
+
+        public void BuildProgramManagers()
+        {
+            foreach (PackageDecorator packageViwer in this.PackageViewers)
+            {
+                packageViwer.BuildProgramManager();
+                Application.DoEvents();
+            }
+        }
     }
 }

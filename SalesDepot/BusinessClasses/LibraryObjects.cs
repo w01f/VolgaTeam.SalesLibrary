@@ -130,6 +130,7 @@ namespace SalesDepot.BusinessClasses
         public List<AutoWidget> AutoWidgets { get; set; }
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
+        public ProgramScheduleManager ProgramManager { get; set; }
 
         public string Name
         {
@@ -169,6 +170,7 @@ namespace SalesDepot.BusinessClasses
             this.EmailList = new List<string>();
             this.AutoWidgets = new List<AutoWidget>();
             this.OvernightsCalendar = new OvernightsCalendar(this);
+            this.ProgramManager = new BusinessClasses.ProgramScheduleManager(this);
             Load();
         }
 

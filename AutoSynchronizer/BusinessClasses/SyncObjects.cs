@@ -203,6 +203,19 @@ namespace AutoSynchronizer.BusinessClasses
                     }
                     #endregion
 
+                    #region Sync Program Manager
+                    if (this.Manager.Library.EnableProgramManagerSync && !string.IsNullOrEmpty(this.Manager.Library.ProgramManagerLocation) && Directory.Exists(this.Manager.Library.ProgramManagerLocation))
+                    {
+                        string programManagerDestinationFolderPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ProgramManagerRootFolderName);
+                        if (!Directory.Exists(programManagerDestinationFolderPath))
+                            Directory.CreateDirectory(programManagerDestinationFolderPath);
+                        DirectoryInfo programManagerSourceFolder = new DirectoryInfo(this.Manager.Library.ProgramManagerLocation);
+                        DirectoryInfo programManagerDestinationFolder = new DirectoryInfo(programManagerDestinationFolderPath);
+                        destinationSubFolders.Add(programManagerDestinationFolder);
+                        ToolClasses.SyncManager.Instance.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
+                    }
+                    #endregion
+
                     foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
                         ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
                 }

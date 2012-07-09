@@ -71,6 +71,11 @@ namespace FileManager.BusinessClasses
         public List<TimePoint> SyncTimes { get; private set; }
         #endregion
 
+        #region Program Manager Settings
+        public bool EnableProgramManagerSync { get; set; }
+        public string ProgramManagerLocation { get; set; }
+        #endregion
+
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
         public RootFolder RootFolder
@@ -302,7 +307,7 @@ namespace FileManager.BusinessClasses
                             foreach (DayOfWeek day in days)
                             {
                                 switch (day)
-                                { 
+                                {
                                     case DayOfWeek.Monday:
                                         syncScheduleRecord.Monday = true;
                                         break;
@@ -336,6 +341,17 @@ namespace FileManager.BusinessClasses
                 if (node != null)
                     this.OvernightsCalendar.Deserialize(node);
                 this.IsConfigured = true;
+
+                #region Program Manager Settings
+                node = document.SelectSingleNode(@"/Library/EnableProgramManagerSync");
+                if (node != null)
+                    if (bool.TryParse(node.InnerText, out tempBool))
+                        this.EnableProgramManagerSync = tempBool;
+
+                node = document.SelectSingleNode(@"/Library/ProgramManagerLocation");
+                if (node != null)
+                    this.ProgramManagerLocation = node.InnerText;
+                #endregion
             }
             if (this.Pages.Count == 0)
                 this.Pages.Add(new LibraryPage(this));
@@ -388,6 +404,13 @@ namespace FileManager.BusinessClasses
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
+
+            #region Program Manager Settings
+            xml.AppendLine(@"<EnableProgramManagerSync>" + this.EnableProgramManagerSync.ToString() + @"</EnableProgramManagerSync>");
+            if (!string.IsNullOrEmpty(this.ProgramManagerLocation))
+                xml.AppendLine(@"<ProgramManagerLocation>" + this.ProgramManagerLocation.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</ProgramManagerLocation>");
+            #endregion
+
             xml.AppendLine(@"</Library>");
 
             using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName), false))

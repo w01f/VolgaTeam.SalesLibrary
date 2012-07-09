@@ -71,6 +71,11 @@ namespace AutoSynchronizer.BusinessClasses
         public List<TimePoint> SyncTimes { get; private set; }
         #endregion
 
+        #region Program Manager Settings
+        public bool EnableProgramManagerSync { get; set; }
+        public string ProgramManagerLocation { get; set; }
+        #endregion
+
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
         public RootFolder RootFolder
@@ -328,6 +333,18 @@ namespace AutoSynchronizer.BusinessClasses
                         node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
                         if (node != null)
                             this.OvernightsCalendar.Deserialize(node);
+
+                        #region Program Manager Settings
+                        node = document.SelectSingleNode(@"/Library/EnableProgramManagerSync");
+                        if (node != null)
+                            if (bool.TryParse(node.InnerText, out tempBool))
+                                this.EnableProgramManagerSync = tempBool;
+
+                        node = document.SelectSingleNode(@"/Library/ProgramManagerLocation");
+                        if (node != null)
+                            this.ProgramManagerLocation = node.InnerText;
+                        #endregion
+
                         this.IsConfigured = true;
                     }
                 }
@@ -390,6 +407,13 @@ namespace AutoSynchronizer.BusinessClasses
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
+
+            #region Program Manager Settings
+            xml.AppendLine(@"<EnableProgramManagerSync>" + this.EnableProgramManagerSync.ToString() + @"</EnableProgramManagerSync>");
+            if (!string.IsNullOrEmpty(this.ProgramManagerLocation))
+                xml.AppendLine(@"<ProgramManagerLocation>" + this.ProgramManagerLocation.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</ProgramManagerLocation>");
+            #endregion
+
             xml.AppendLine(@"</Library>");
 
             using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName), false))

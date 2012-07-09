@@ -138,6 +138,17 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             this.OvernightsCalendar.BringToFront();
         }
 
+        public void ApplyProgramManager()
+        {
+            this.AllowToSave = false;
+            FormMain.Instance.buttonItemProgramManagerSyncDisabled.Checked = !this.Library.EnableProgramManagerSync;
+            FormMain.Instance.buttonItemProgramManagerSyncEnabled.Checked = this.Library.EnableProgramManagerSync;
+            FormMain.Instance.buttonEditProgramManagerLocation.EditValue = this.Library.ProgramManagerLocation;
+            FormMain.Instance.ribbonBarProgramManagerLocation.Enabled = this.Library.EnableProgramManagerSync; 
+            this.AllowToSave = true;
+
+        }
+
         private void LoadOvernightsCalebdarSettings()
         {
             this.AllowToSave = false;
@@ -148,6 +159,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             FormMain.Instance.ribbonBarCalendarSettings.Enabled = this.Library.OvernightsCalendar.Enabled;
             FormMain.Instance.ribbonBarCalendarFont.Enabled = this.Library.OvernightsCalendar.Enabled;
             FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = this.Library.OvernightsCalendar.Enabled;
+            FormMain.Instance.ribbonBarCalendarFileGrabber.Enabled = this.Library.OvernightsCalendar.Enabled;
             FormMain.Instance.TabOvernightsCalendar.Enabled = this.Library.OvernightsCalendar.Enabled;
             this.AllowToSave = true;
 

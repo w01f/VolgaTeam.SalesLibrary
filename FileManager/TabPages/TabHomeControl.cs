@@ -114,6 +114,7 @@ namespace FileManager.TabPages
                     _treeList.BringToFront();
 
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyOvernightsCalebdar();
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyProgramManager();
 
                     btSetupWallBin.Visible = false;
                     FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
@@ -749,6 +750,7 @@ namespace FileManager.TabPages
                 btSetupWallBin.Visible = false;
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyWallBin(_firstRun);
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyOvernightsCalebdar();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyProgramManager();
             }
 
             else
@@ -803,6 +805,50 @@ namespace FileManager.TabPages
         {
             FormMain.Instance.buttonItemHomeFontUp.Enabled = ConfigurationClasses.SettingsManager.Instance.FontSize < 20;
             FormMain.Instance.buttonItemHomeFontDown.Enabled = ConfigurationClasses.SettingsManager.Instance.FontSize > 8;
+        }
+        #endregion
+
+        #region Program Manager Stuff
+        public void buttonItemProgramManagerSync_Click(object sender, EventArgs e)
+        {
+            FormMain.Instance.buttonItemProgramManagerSyncDisabled.Checked = false;
+            FormMain.Instance.buttonItemProgramManagerSyncEnabled.Checked = false;
+            (sender as DevComponents.DotNetBar.ButtonItem).Checked = true;
+        }
+
+        public void buttonItemProgramManagerSync_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null && PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.AllowToSave)
+            {
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableProgramManagerSync = FormMain.Instance.buttonItemProgramManagerSyncEnabled.Checked;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Save();
+
+                FormMain.Instance.ribbonBarProgramManagerLocation.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableProgramManagerSync;
+
+                if (!PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableProgramManagerSync)
+                {
+                    FormMain.Instance.buttonEditProgramManagerLocation.EditValue = null;
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ProgramManagerLocation = null;
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Save();
+                }
+            }
+        }
+
+        public void buttonEditProgramManagerLocation_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                dialog.SelectedPath = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ProgramManagerLocation;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (System.IO.Directory.Exists(dialog.SelectedPath))
+                    {
+                        FormMain.Instance.buttonEditProgramManagerLocation.EditValue = dialog.SelectedPath;
+                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ProgramManagerLocation = dialog.SelectedPath;
+                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Save();
+                    }
+                }
+            }
         }
         #endregion
     }

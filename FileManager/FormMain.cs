@@ -44,6 +44,12 @@ namespace FileManager
             buttonItemHomeSync.Click += new EventHandler(this.TabHome.btSync_Click);
             buttonItemHomeExit.Click += new EventHandler(this.TabHome.btExit_Click);
 
+            buttonItemProgramManagerSyncDisabled.Click += new EventHandler(this.TabHome.buttonItemProgramManagerSync_Click);
+            buttonItemProgramManagerSyncEnabled.Click += new EventHandler(this.TabHome.buttonItemProgramManagerSync_Click);
+            buttonItemProgramManagerSyncDisabled.CheckedChanged += new EventHandler(this.TabHome.buttonItemProgramManagerSync_CheckedChanged);
+            buttonItemProgramManagerSyncEnabled.CheckedChanged += new EventHandler(this.TabHome.buttonItemProgramManagerSync_CheckedChanged);
+            buttonEditProgramManagerLocation.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.TabHome.buttonEditProgramManagerLocation_ButtonClick);
+
             this.TabClipart = new TabPages.TabClipartControl();
             buttonItemClipartClientLogos.Click += new EventHandler(this.TabClipart.buttonItemClipart_Click);
             buttonItemClipartSalesGallery.Click += new EventHandler(this.TabClipart.buttonItemClipart_Click);
@@ -159,7 +165,7 @@ namespace FileManager
             Control parent = pnContainer.Parent;
             pnContainer.Parent = null;
             pnContainer.Controls.Clear();
-            if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+            if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramManager)
             {
                 pnContainer.Controls.Add(this.TabHome);
             }

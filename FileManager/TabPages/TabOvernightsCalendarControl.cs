@@ -41,6 +41,7 @@ namespace FileManager.TabPages
                 FormMain.Instance.ribbonBarCalendarSettings.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 FormMain.Instance.ribbonBarCalendarFont.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
+                FormMain.Instance.ribbonBarCalendarFileGrabber.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 this.Enabled = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
                 if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled)
                     using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())

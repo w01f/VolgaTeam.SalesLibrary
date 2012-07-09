@@ -124,8 +124,8 @@
   <data name="SavePDFBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SavePDFBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ClearSolutionView" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ClearSolutionView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProgramSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramSearch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PackageLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PackageLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,14 +142,14 @@
   <data name="InsertAllSlides" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InsertAllSlides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PrintBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PrintBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ChangeEmailName" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChangeEmailName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SolutionView" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SolutionView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ListView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ListView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Floater" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Floater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ClassicView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ClassicView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,11 +169,17 @@
   <data name="InsertVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InsertVideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SolutionView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SolutionView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SaveCopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SaveCopy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Acrobat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Acrobat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ListView" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ListView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="PrintBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PrintBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArrowLeftGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowLeftGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,8 +196,8 @@
   <data name="SearchLinkName" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchLinkName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EmptyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EmptyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenFileBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenFileBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -202,8 +208,8 @@
   <data name="Send" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Send.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ArrowRightGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ArrowRightGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProgramOutputExcel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramOutputExcel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CalendarLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,20 +223,29 @@
   <data name="CalendarDisclaimerLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarDisclaimerLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmptyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmptyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ClearSolutionView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ClearSolutionView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SaveCopy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SaveCopy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ArrowRightGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ArrowRightGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenFile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgramOutputPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramOutputPDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SaveCopyBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SaveCopyBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Format_Font_Smaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Format Font Smaller.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgramBrowseForward" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramBrowseForward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SavePDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SavePDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -247,7 +262,13 @@
   <data name="ArrowDownGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowDownGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Floater" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Floater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProgramBrowseBackward" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramBrowseBackward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgramShowInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramShowInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="AddWeek" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddWeek.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

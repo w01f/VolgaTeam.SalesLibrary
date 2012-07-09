@@ -18,13 +18,14 @@ namespace SalesDepot
 
         public TabPages.TabHomeControl TabHome { get; set; }
         public TabPages.TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
+        public TabPages.TabProgramSchedule TabProgramSchedule { get; set; }
+        public TabPages.TabProgramSearch TabProgramSearch { get; set; }
 
         private FormMain()
         {
-            this.TabHome = new TabPages.TabHomeControl();
-            this.TabOvernightsCalendar = new TabPages.TabOvernightsCalendarControl();
             InitializeComponent();
 
+            this.TabHome = new TabPages.TabHomeControl();
             comboBoxItemPackages.SelectedIndexChanged += new System.EventHandler(this.TabHome.comboBoxItemPackages_SelectedIndexChanged);
             comboBoxItemStations.SelectedIndexChanged += new System.EventHandler(this.TabHome.comboBoxItemStations_SelectedIndexChanged);
             comboBoxItemPages.SelectedIndexChanged += new System.EventHandler(this.TabHome.comboBoxItemPages_SelectedIndexChanged);
@@ -81,10 +82,35 @@ namespace SalesDepot
             buttonItemSettingsEmail.Click += new EventHandler(this.TabHome.buttonItemSettingsEmail_Click);
             buttonItemSettingsHelp.Click += new EventHandler(this.TabHome.buttonItemSettingsHelp_Click);
 
+            this.TabOvernightsCalendar = new TabPages.TabOvernightsCalendarControl();
             labelItemCalendarDisclaimerLogo.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarDisclaimer_Click);
             buttonItemCalendarFontSizeLarger.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontLarger_Click);
             buttonItemCalendarFontSizeSmaler.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontSmaller_Click);
             buttonItemCalendarHelp.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemHelp_Click);
+
+            this.TabProgramSchedule = new TabPages.TabProgramSchedule();
+            comboBoxEditProgramScheduleStation.EditValueChanged+=new EventHandler(this.TabProgramSchedule.comboBoxEditScheduleStation_EditValueChanged);
+            dateEditProgramScheduleDay.EditValueChanged+=new EventHandler(this.TabProgramSchedule.dateEditScheduleDay_EditValueChanged);
+            buttonItemProgramScheduleInfo.CheckedChanged+=new EventHandler(this.TabProgramSchedule.buttonItemScheduleInfo_CheckedChanged);
+            buttonItemProgramScheduleBrowseDay.Click+=new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseType_Click);
+            buttonItemProgramScheduleBrowseMonth.Click += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseType_Click);
+            buttonItemProgramScheduleBrowseWeek.Click += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseType_Click);
+            buttonItemProgramScheduleBrowseDay.CheckedChanged += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseType_CheckedChanged);
+            buttonItemProgramScheduleBrowseMonth.CheckedChanged += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseType_CheckedChanged);
+            buttonItemProgramScheduleBrowseWeek.CheckedChanged += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseType_CheckedChanged);
+            buttonItemProgramScheduleBrowseForward.Click+=new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseButton_Click);
+            buttonItemProgramScheduleBrowseBackward.Click += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseButton_Click);
+            buttonItemProgramScheduleOutputExcel.Click+=new EventHandler(this.TabProgramSchedule.buttonItemScheduleOutputExcel_Click);
+            buttonItemProgramScheduleOutputPDF.Click += new EventHandler(this.TabProgramSchedule.buttonItemScheduleOutputPDF_Click);
+
+            this.TabProgramSearch = new TabPages.TabProgramSearch();
+            comboBoxEditProgramSearchStation.EditValueChanged += new EventHandler(this.TabProgramSearch.comboBoxEditSearchStation_EditValueChanged);
+            comboBoxEditProgramSearchPrograms.KeyDown += new KeyEventHandler(this.TabProgramSearch.comboBoxEditProgramSearchPrograms_KeyDown);
+            dateEditProgramSearchDateStart.EditValueChanged += new EventHandler(this.TabProgramSearch.dateEditProgramSearchDate_EditValueChanged);
+            dateEditProgramSearchDateEnd.EditValueChanged += new EventHandler(this.TabProgramSearch.dateEditProgramSearchDate_EditValueChanged);
+            buttonItemProgramSearchRun.Click+=new EventHandler(this.TabProgramSearch.buttonItemSearchRun_Click);
+            buttonItemProgramSearchOutputExcel.Click += new EventHandler(this.TabProgramSearch.buttonItemSearchOutputExcel_Click);
+            buttonItemProgramSearchOutputPDF.Click += new EventHandler(this.TabProgramSearch.buttonItemSearchOutputPDF_Click);
         }
 
         public static FormMain Instance
@@ -109,13 +135,25 @@ namespace SalesDepot
             buttonItemHomeListView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.ListTitle) ? ConfigurationClasses.SettingsManager.Instance.ListTitle : FormMain.Instance.buttonItemHomeListView.Text;
             buttonItemHomeSolutionView.Text = !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.SolutionTitle) ? ConfigurationClasses.SettingsManager.Instance.SolutionTitle : FormMain.Instance.buttonItemHomeSolutionView.Text;
             ribbonBarHomeView.RecalcLayout();
+
+            buttonItemProgramScheduleOutputPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003;
+            buttonItemProgramSearchOutputPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003;
         }
 
         private void buttonItemFloater_Click(object sender, EventArgs e)
         {
             FormMain.Instance.Opacity = 0;
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = false;
-            using (FormFloater form = new FormFloater(this.Left + this.Width - 50, this.Top + 50, _floaterPositionX, _floaterPositionY, labelItemPackageLogo.Image, ribbonBarStations.Text))
+
+            Image floaterLogo = null;
+            if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
+                floaterLogo = labelItemPackageLogo.Image;
+            else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
+                floaterLogo = labelItemCalendarLogo.Image;
+            else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
+                floaterLogo = labelItemProgramScheduleStationLogo.Image;
+
+            using (FormFloater form = new FormFloater(this.Left + this.Width - 50, this.Top + 50, _floaterPositionX, _floaterPositionY, floaterLogo, ribbonBarStations.Text))
             {
                 if (form.ShowDialog() != System.Windows.Forms.DialogResult.No)
                 {
@@ -152,7 +190,20 @@ namespace SalesDepot
                         pnContainer.Controls.Add(this.TabOvernightsCalendar);
                     this.TabOvernightsCalendar.BringToFront();
                 }
-
+                else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule)
+                {
+                    if (!pnContainer.Controls.Contains(this.TabProgramSchedule))
+                        pnContainer.Controls.Add(this.TabProgramSchedule);
+                    this.TabProgramSchedule.BringToFront();
+                    this.TabProgramSchedule.Focus();
+                }
+                else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
+                {
+                    if (!pnContainer.Controls.Contains(this.TabProgramSearch))
+                        pnContainer.Controls.Add(this.TabProgramSearch);
+                    this.TabProgramSearch.BringToFront();
+                    this.TabProgramSearch.Focus();
+                }
                 ConfigurationClasses.SettingsManager.Instance.CalendarView = ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar;
                 ConfigurationClasses.SettingsManager.Instance.SaveSettings();
             }
@@ -184,6 +235,8 @@ namespace SalesDepot
                             PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildPackageViewers();
                             Application.DoEvents();
                             PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildOvernightsCalendars();
+                            Application.DoEvents();
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.BuildProgramManagers();
                             Application.DoEvents();
                         });
                     }
@@ -234,7 +287,6 @@ namespace SalesDepot
             ToolClasses.ActivityRecorder.Instance.StopRecording();
             ToolClasses.SDRecorder.Instance.StopRecording();
             InteropClasses.PowerPointHelper.Instance.Disconnect();
-            InteropClasses.ExcelHelper.Instance.Close();
             InteropClasses.WordHelper.Instance.Close();
         }
         #endregion

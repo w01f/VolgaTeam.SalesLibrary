@@ -12,6 +12,7 @@ namespace SalesDepot
         private static AppManager _instance = new AppManager();
         public delegate void NoParamDelegate();
         public delegate void SingleParamDelegate(object parameter);
+        public ProgramManager.CoreObjects.ApplicationLog Log { get; private set; }
         public DirectoryInfo TempFolder { get; set; }
 
         private AppManager()
@@ -19,6 +20,7 @@ namespace SalesDepot
             if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.TempPath))
                 Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.TempPath);
             this.TempFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.TempPath);
+            this.Log = new ProgramManager.CoreObjects.ApplicationLog(ConfigurationClasses.SettingsManager.Instance.LogFilePath);
         }
 
         ~AppManager()

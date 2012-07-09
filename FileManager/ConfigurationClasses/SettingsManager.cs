@@ -16,6 +16,7 @@ namespace FileManager.ConfigurationClasses
         public const string OldPreviewFolderPrefix = @"!PNG_";
         public const string LibraryLogoFolder = @"!SD-Graphics";
         public const string OvernightsCalendarRootFolderName = @"!OC";
+        public const string ProgramManagerRootFolderName = @"!PM";
         public const string ExtraFoldersRootFolderName = @"!Extra Roots";
         public const string SweepPeriodsFileName = @"SweepPeriods.xml";
 
@@ -97,6 +98,7 @@ namespace FileManager.ConfigurationClasses
             this.HiddenObjects.Add("!Old");
             this.HiddenObjects.Add(PreviewContainersRootFolderName);
             this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(ProgramManagerRootFolderName);
             this.HiddenObjects.Add(ExtraFoldersRootFolderName);
             this.HiddenObjects.Add("thumbs.db");
             this.HiddenObjects.Add("SalesDepotCache.xml");

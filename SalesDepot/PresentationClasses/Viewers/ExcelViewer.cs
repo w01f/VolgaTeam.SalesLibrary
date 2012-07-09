@@ -44,12 +44,12 @@ namespace SalesDepot.PresentationClasses.Viewers
 
             this.File = file;
 
-            if (InteropClasses.ExcelHelper.Instance.Open())
+            if (InteropClasses.ExcelHelper.Instance.Connect())
             {
                 Guid g = Guid.NewGuid();
                 string newFileName = Path.Combine(ConfigurationClasses.SettingsManager.Instance.TempPath, g.ToString() + ".html");
                 InteropClasses.ExcelHelper.Instance.ConvertToHtml(this.File.LocalPath, newFileName);
-                InteropClasses.ExcelHelper.Instance.Close();
+                InteropClasses.ExcelHelper.Instance.Disconnect();
                 webBrowser.Url = new Uri(newFileName);
             }
         }

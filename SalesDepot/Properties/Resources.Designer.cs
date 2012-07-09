@@ -67,6 +67,13 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AddWeek {
+            get {
+                object obj = ResourceManager.GetObject("AddWeek", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Arrow {
             get {
                 object obj = ResourceManager.GetObject("Arrow", resourceCulture);
@@ -273,6 +280,48 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap PrintBig {
             get {
                 object obj = ResourceManager.GetObject("PrintBig", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ProgramBrowseBackward {
+            get {
+                object obj = ResourceManager.GetObject("ProgramBrowseBackward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ProgramBrowseForward {
+            get {
+                object obj = ResourceManager.GetObject("ProgramBrowseForward", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ProgramOutputExcel {
+            get {
+                object obj = ResourceManager.GetObject("ProgramOutputExcel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ProgramOutputPDF {
+            get {
+                object obj = ResourceManager.GetObject("ProgramOutputPDF", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ProgramSearch {
+            get {
+                object obj = ResourceManager.GetObject("ProgramSearch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ProgramShowInfo {
+            get {
+                object obj = ResourceManager.GetObject("ProgramShowInfo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

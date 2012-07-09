@@ -351,8 +351,11 @@ namespace SalesDepot.BusinessClasses
                     break;
                 case "XLS":
                 case "XLSX":
-                    if (InteropClasses.ExcelHelper.Instance.Open())
+                    if (InteropClasses.ExcelHelper.Instance.Connect())
+                    {
                         InteropClasses.ExcelHelper.Instance.Print(new FileInfo(tempPath));
+                        InteropClasses.ExcelHelper.Instance.Disconnect();
+                    }
                     break;
                 case "PDF":
                     try

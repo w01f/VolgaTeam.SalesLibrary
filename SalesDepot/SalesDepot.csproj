@@ -84,6 +84,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="ProgramManager.CoreObjects">
+      <HintPath>..\..\ProgramManager\ProgramManager.CoreObjects\bin\Release\ProgramManager.CoreObjects.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -102,6 +105,8 @@
   <ItemGroup>
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
+    <Compile Include="BusinessClasses\ProgramScheduleManager.cs" />
+    <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
     <Compile Include="FormFloater.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +143,18 @@
     <Compile Include="PresentationClasses\OvernightsCalendar\YearControl.designer.cs">
       <DependentUpon>YearControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\ProgramManager\ProgramScheduleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\ProgramManager\ProgramScheduleControl.Designer.cs">
+      <DependentUpon>ProgramScheduleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\ProgramManager\ProgramSearchControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\ProgramManager\ProgramSearchControl.Designer.cs">
+      <DependentUpon>ProgramSearchControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Viewers\EmptyViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +169,12 @@
     <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.Designer.cs">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\TabProgramSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabProgramSearch.designer.cs">
+      <DependentUpon>TabProgramSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\TabHomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -163,6 +186,18 @@
     </Compile>
     <Compile Include="TabPages\TabOvernightsCalendarControl.Designer.cs">
       <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabProgramSchedule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabProgramSchedule.designer.cs">
+      <DependentUpon>TabProgramSchedule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\ProgramManager\FormOutputParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\ProgramManager\FormOutputParameters.designer.cs">
+      <DependentUpon>FormOutputParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormLinkPreview.cs">
       <SubType>Form</SubType>
@@ -363,17 +398,32 @@
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\YearControl.resx">
       <DependentUpon>YearControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\ProgramManager\ProgramScheduleControl.resx">
+      <DependentUpon>ProgramScheduleControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\ProgramManager\ProgramSearchControl.resx">
+      <DependentUpon>ProgramSearchControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Viewers\EmptyViewer.resx">
       <DependentUpon>EmptyViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabProgramSearch.resx">
+      <DependentUpon>TabProgramSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabHomeControl.resx">
       <DependentUpon>TabHomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabOvernightsCalendarControl.resx">
       <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabProgramSchedule.resx">
+      <DependentUpon>TabProgramSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\ProgramManager\FormOutputParameters.resx">
+      <DependentUpon>FormOutputParameters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormLinkPreview.resx">
       <DependentUpon>FormLinkPreview.cs</DependentUpon>
@@ -608,6 +658,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AddWeek.png" />
+    <None Include="Resources\ProgramShowInfo.png" />
+    <None Include="Resources\ProgramBrowseBackward.png" />
+    <None Include="Resources\ProgramBrowseForward.png" />
+    <None Include="Resources\ProgramSearch.png" />
+    <None Include="Resources\ProgramOutputPDF.png" />
+    <None Include="Resources\ProgramOutputExcel.png" />
     <None Include="Resources\Floater.png" />
     <None Include="Resources\MicrosoftOfficeOutlook.png" />
     <None Include="Resources\Cancel.png" />
