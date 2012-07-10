@@ -102,6 +102,7 @@ namespace SalesDepot
             buttonItemProgramScheduleBrowseBackward.Click += new EventHandler(this.TabProgramSchedule.buttonItemScheduleBrowseButton_Click);
             buttonItemProgramScheduleOutputExcel.Click+=new EventHandler(this.TabProgramSchedule.buttonItemScheduleOutputExcel_Click);
             buttonItemProgramScheduleOutputPDF.Click += new EventHandler(this.TabProgramSchedule.buttonItemScheduleOutputPDF_Click);
+            buttonItemProgramScheduleHelp.Click += new EventHandler(this.TabProgramSchedule.buttonItemHelp_Click);
 
             this.TabProgramSearch = new TabPages.TabProgramSearch();
             comboBoxEditProgramSearchStation.EditValueChanged += new EventHandler(this.TabProgramSearch.comboBoxEditSearchStation_EditValueChanged);
@@ -111,6 +112,7 @@ namespace SalesDepot
             buttonItemProgramSearchRun.Click+=new EventHandler(this.TabProgramSearch.buttonItemSearchRun_Click);
             buttonItemProgramSearchOutputExcel.Click += new EventHandler(this.TabProgramSearch.buttonItemSearchOutputExcel_Click);
             buttonItemProgramSearchOutputPDF.Click += new EventHandler(this.TabProgramSearch.buttonItemSearchOutputPDF_Click);
+            buttonItemProgramSearchHelp.Click += new EventHandler(this.TabProgramSearch.buttonItemHelp_Click);
         }
 
         public static FormMain Instance

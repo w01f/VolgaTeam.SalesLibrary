@@ -57,6 +57,11 @@ namespace SalesDepot.TabPages
         {
             PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library.ProgramManager.ReportActivityList(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.ProgramSearch.SearchResult, true);
         }
+
+        public void buttonItemHelp_Click(object sender, EventArgs e)
+        {
+            BusinessClasses.HelpManager.Instance.OpenHelpLink("programsearch");
+        }
         #endregion
     }
 }

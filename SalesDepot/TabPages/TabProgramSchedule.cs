@@ -127,6 +127,11 @@ namespace SalesDepot.TabPages
                 }
             }
         }
+
+        public void buttonItemHelp_Click(object sender, EventArgs e)
+        {
+            BusinessClasses.HelpManager.Instance.OpenHelpLink("programschedule");
+        }
         #endregion
     }
 }
