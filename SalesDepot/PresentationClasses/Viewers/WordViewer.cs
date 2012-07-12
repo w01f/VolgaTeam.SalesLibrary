@@ -62,30 +62,26 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(this.File);
         }
 
         public void Save()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
-
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", this.File);
         }
 
         public void Email()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
             {
-                form.SelectedFile = this.File;
+                form.link = this.File;
                 form.ShowDialog();
             }
         }
 
         public void Print()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.PrintFile(this.File);
         }
         #endregion
     }

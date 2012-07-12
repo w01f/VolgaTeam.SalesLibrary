@@ -189,13 +189,12 @@ namespace SalesDepot.ToolForms.WallBin
         #region Button Clicks
         private void barButtonItemOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(_originalFile);
+            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(this.SelectedFile);
         }
 
         private void barButtonItemSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the presentation as", _originalFile);
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the presentation as", this.SelectedFile);
         }
 
         private void barButtonItemSaveAsPDF_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -215,7 +214,6 @@ namespace SalesDepot.ToolForms.WallBin
                         progressForm.TopMost = true;
                         Thread thread = new Thread(delegate()
                         {
-                            ToolClasses.ActivityRecorder.Instance.WriteActivity();
                             InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : selectedIndex, destinationFileName);
                         });
                         thread.Start();
@@ -226,6 +224,7 @@ namespace SalesDepot.ToolForms.WallBin
 
                         progressForm.Close();
 
+                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                         BusinessClasses.LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
                     }
                 }
@@ -247,7 +246,7 @@ namespace SalesDepot.ToolForms.WallBin
 
         private void barButtonItemPrintLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
             InteropClasses.PowerPointHelper.Instance.PrintPresentation(comboBoxEditSlides.SelectedIndex + 1);
         }
 
@@ -329,7 +328,7 @@ namespace SalesDepot.ToolForms.WallBin
                         int selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
                         Thread thread = new Thread(delegate()
                         {
-                            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                             InteropClasses.PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : selectedIndex, checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? BusinessClasses.MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
                         });
                         thread.Start();

@@ -82,6 +82,7 @@ namespace SalesDepot.ConfigurationClasses
         public string DisclaimerPath { get; set; }
         public string PowerPointLoaderPath { get; set; }
         public string LogFilePath { get; private set; }
+        public string ActivityFolder { get; private set; }
 
         public string SelectedPackage { get; set; }
         public string SelectedLibrary { get; set; }
@@ -167,13 +168,18 @@ namespace SalesDepot.ConfigurationClasses
             this.CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
             this.PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-            this.LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicatonLog.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+
             this.DefaultWizard = string.Empty;
             this.SalesDepotName = string.Empty;
             this.KeyWordFilters = new KeyWordFileFilters();
 
             this.ApprovedLibraries = new List<string>();
             LoadAppID();
+
+            this.ActivityFolder = string.Format(@"{0}\newlocaldirect.com\sync\outgoing\AppID-{1}\user_data\sales_library", new string[] { System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles), this.AppID.ToString() });
+            if (!Directory.Exists(this.ActivityFolder))
+                Directory.CreateDirectory(this.ActivityFolder);
 
             #region Program Manager Settings
             this.ProgramScheduleShowInfo = true;
@@ -613,7 +619,7 @@ namespace SalesDepot.ConfigurationClasses
         private void LoadAppID()
         {
             this.AppID = Guid.Empty;
-            string appIDPath = Path.Combine(Application.StartupPath, _appIDFile);
+            string appIDPath = _appIDFile;
             if (File.Exists(appIDPath))
             {
                 XmlDocument document = new XmlDocument();

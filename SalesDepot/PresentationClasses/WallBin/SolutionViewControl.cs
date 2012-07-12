@@ -78,7 +78,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         {
                             case BusinessClasses.FileTypes.BuggyPresentation:
                             case BusinessClasses.FileTypes.FriendlyPresentation:
-                            case BusinessClasses.FileTypes.OtherPresentation:
+                            case BusinessClasses.FileTypes.Presentation:
                                 if (file.PreviewContainer != null)
                                     file.PreviewContainer.GetPreviewImages();
                                 FormMain.Instance.Invoke((MethodInvoker)delegate() { viewer = new Viewers.PowerPointViewer(file); });
@@ -180,7 +180,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 {
                     case BusinessClasses.FileTypes.BuggyPresentation:
                     case BusinessClasses.FileTypes.FriendlyPresentation:
-                    case BusinessClasses.FileTypes.OtherPresentation:
+                    case BusinessClasses.FileTypes.Presentation:
                         barButtonItemSave.Enabled = true;
                         barButtonItemSaveAsPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003 & true;
                         barButtonItemEmailLink.Enabled = true;
@@ -252,7 +252,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 if (FormMain.Instance.buttonItemHomeSearchByTags.Checked)
                 {
                     files = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByTags(GetSearhTags());
-                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.OtherPresentation).Count() > 25)
+                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.Presentation).Count() > 25)
                     {
                         AppManager.Instance.ShowWarning("Only the first 25 Results will be displayed.\nNarrow your Search Criteria to display a more qualified list of files...");
                         files = files.Take(25).ToArray();
@@ -280,7 +280,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         {
                             filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.BuggyPresentation));
                             filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.FriendlyPresentation));
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.OtherPresentation));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Presentation));
                         }
                         if (checkEditVideo.Checked)
                         {
@@ -293,7 +293,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                             filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Word));
                         files = filesByName.ToArray();
                     }
-                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.OtherPresentation).Count() > 25)
+                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.Presentation).Count() > 25)
                     {
                         AppManager.Instance.ShowWarning("Only the first 25 Results will be displayed.\nNarrow your Search Criteria to display a more qualified list of files...");
                         files = files.Take(25).ToArray();
@@ -336,7 +336,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         messageText = "There are many new files added for this date range.\nOnly the first 25 results will be displayed...";
                     }
                     files = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByDate(startDate, endDate);
-                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.OtherPresentation).Count() > 25)
+                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.Presentation).Count() > 25)
                     {
                         AppManager.Instance.ShowWarning(messageText);
                         files = files.Take(25).ToArray();

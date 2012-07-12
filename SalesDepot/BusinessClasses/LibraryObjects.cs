@@ -948,7 +948,7 @@ namespace SalesDepot.BusinessClasses
                         case FileTypes.FriendlyPresentation:
                         case FileTypes.MediaPlayerVideo:
                         case FileTypes.Other:
-                        case FileTypes.OtherPresentation:
+                        case FileTypes.Presentation:
                         case FileTypes.PDF:
                         case FileTypes.QuickTimeVideo:
                         case FileTypes.Word:
@@ -1035,7 +1035,7 @@ namespace SalesDepot.BusinessClasses
                     case FileTypes.FriendlyPresentation:
                     case FileTypes.MediaPlayerVideo:
                     case FileTypes.Other:
-                    case FileTypes.OtherPresentation:
+                    case FileTypes.Presentation:
                     case FileTypes.QuickTimeVideo:
                     case FileTypes.Excel:
                     case FileTypes.PDF:
@@ -1292,7 +1292,7 @@ namespace SalesDepot.BusinessClasses
             {
                 case ".PPT":
                 case ".PPTX":
-                    this.Type = FileTypes.OtherPresentation;
+                    this.Type = FileTypes.Presentation;
                     break;
                 case ".DOC":
                 case ".DOCX":
@@ -1351,7 +1351,7 @@ namespace SalesDepot.BusinessClasses
                             case FileTypes.FriendlyPresentation:
                             case FileTypes.MediaPlayerVideo:
                             case FileTypes.Other:
-                            case FileTypes.OtherPresentation:
+                            case FileTypes.Presentation:
                             case FileTypes.PDF:
                             case FileTypes.QuickTimeVideo:
                             case FileTypes.Word:
@@ -2059,7 +2059,7 @@ namespace SalesDepot.BusinessClasses
     public enum FileTypes
     {
         FriendlyPresentation = 0,
-        OtherPresentation,
+        Presentation,
         BuggyPresentation,
         MediaPlayerVideo,
         QuickTimeVideo,

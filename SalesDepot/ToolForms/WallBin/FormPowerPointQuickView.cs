@@ -98,14 +98,14 @@ namespace SalesDepot.ToolForms.WallBin
         private void barButtonItemOpenLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (this.SelectedFile != null)
-                BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.SelectedFile.LocalPath));
+                BusinessClasses.LinkManager.Instance.OpenCopyOfFile(this.SelectedFile);
         }
 
         private void barButtonItemSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             if (this.SelectedFile != null)
             {
-                ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                 BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the presentation as", new FileInfo(this.SelectedFile.LocalPath));
             }
         }
@@ -129,7 +129,6 @@ namespace SalesDepot.ToolForms.WallBin
                             progressForm.TopMost = true;
                             Thread thread = new Thread(delegate()
                             {
-                                ToolClasses.ActivityRecorder.Instance.WriteActivity();
                                 InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                                 InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (this.SelectedFile.PreviewContainer.SelectedIndex + 1), destinationFileName);
                             });
@@ -141,6 +140,7 @@ namespace SalesDepot.ToolForms.WallBin
 
                             progressForm.Close();
 
+                            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                             BusinessClasses.LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
                         }
                     }
@@ -166,7 +166,7 @@ namespace SalesDepot.ToolForms.WallBin
         {
             if (this.SelectedFile != null)
             {
-                ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                 InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                 InteropClasses.PowerPointHelper.Instance.PrintPresentation(this.SelectedFile.PreviewContainer.SelectedIndex + 1);
             }
@@ -259,7 +259,7 @@ namespace SalesDepot.ToolForms.WallBin
                         form.TopMost = true;
                         Thread thread = new Thread(delegate()
                         {
-                            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                             InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                             InteropClasses.PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (this.SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? BusinessClasses.MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
                         });

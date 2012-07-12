@@ -71,8 +71,6 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void InsertIntoPresentation()
         {
-            if (this.File.Type == BusinessClasses.FileTypes.MediaPlayerVideo)
-                BusinessClasses.LinkManager.Instance.AddVideoIntoPresentation(_tempCopy);
         }
         #endregion
 
@@ -83,25 +81,22 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.Instance.OpenVideo(new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.OpenVideo(this.File);
         }
 
         public void Save()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", this.File);
         }
 
         public void Email()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
             BusinessClasses.LinkManager.Instance.EmailFile(this.File.LocalPath);
         }
 
         public void Print()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
-            BusinessClasses.LinkManager.Instance.PrintFile(new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.PrintFile(this.File);
         }
         #endregion
     }

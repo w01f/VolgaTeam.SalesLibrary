@@ -193,6 +193,7 @@
     <Compile Include="TabPages\TabProgramSchedule.designer.cs">
       <DependentUpon>TabProgramSchedule.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolClasses\ActivityManager.cs" />
     <Compile Include="ToolForms\ProgramManager\FormOutputParameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,7 +307,6 @@
     <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
     <Compile Include="BusinessClasses\LibraryObjects.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\PageDecorator.cs" />
-    <Compile Include="ToolClasses\ActivityHelper.cs" />
     <Compile Include="ToolClasses\ExceptionManager.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -744,7 +744,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\signtool.exe" sign /f d:\temp\NewBizWiz\NLDCertificate.pfx /t http://timestamp.verisign.com/scripts/timstamp.dll  /p bubbadude SalesDepot.exe</PostBuildEvent>
+    <PostBuildEvent>rem "C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\signtool.exe" sign /f d:\temp\NewBizWiz\NLDCertificate.pfx /t http://timestamp.verisign.com/scripts/timstamp.dll  /p bubbadude SalesDepot.exe</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -29,6 +29,7 @@ namespace SalesDepot
             if (!ConfigurationClasses.SettingsManager.Instance.CheckLibraries())
             {
                 AppManager.Instance.ShowWarning("Sales Depot Unavailable: You do not have libraries in source folder....");
+                AppManager.Instance.ActivityManager.AddUserActivity("Application not started");
                 return;
             }
             if (firstInstance)

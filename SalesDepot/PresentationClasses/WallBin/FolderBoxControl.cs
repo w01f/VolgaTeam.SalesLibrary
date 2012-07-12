@@ -191,7 +191,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     case BusinessClasses.FileTypes.Excel:
                     case BusinessClasses.FileTypes.PDF:
                     case BusinessClasses.FileTypes.Word:
-                    case BusinessClasses.FileTypes.OtherPresentation:
+                    case BusinessClasses.FileTypes.Presentation:
                     case BusinessClasses.FileTypes.QuickTimeVideo:
                         grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, file), DragDropEffects.Copy);
                         break;
@@ -203,7 +203,6 @@ namespace SalesDepot.PresentationClasses.WallBin
             if (grFiles.Rows[e.RowIndex].Tag != null)
             {
                 BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
-                ToolClasses.ActivityRecorder.Instance.WriteActivity();
                 BusinessClasses.LinkManager.Instance.OpenLink(file);
             }
         }

@@ -528,18 +528,19 @@ namespace SalesDepot.InteropClasses
             }
         }
 
-        public bool InsertVideoIntoActivePresentation(FileInfo videoFile, float left, float top, float width, float height)
+        public bool InsertVideoIntoActivePresentation(string videoFile, float left, float top, float width, float height)
         {
             bool result = false;
             try
             {
                 MessageFilter.Register();
                 FileInfo presentationFile = new FileInfo(this.ActivePresentation.FullName);
-                videoFile = videoFile.CopyTo(Path.Combine(presentationFile.DirectoryName, videoFile.Name), true);
+                string newFile = Path.Combine(presentationFile.DirectoryName, Path.GetFileName(videoFile));
+                File.Copy(videoFile, newFile, true);
                 PowerPoint.Slide slide = GetActiveSlide();
                 if (slide != null)
                 {
-                    PowerPoint.Shape shape = slide.Shapes.AddMediaObject(videoFile.FullName, left, top, width, height);
+                    PowerPoint.Shape shape = slide.Shapes.AddMediaObject(newFile, left, top, width, height);
                     shape.AnimationSettings.PlaySettings.PlayOnEntry = Microsoft.Office.Core.MsoTriState.msoTrue;
                     shape.AnimationSettings.AdvanceTime = 0;
                 }

@@ -47,10 +47,10 @@ namespace SalesDepot.PresentationClasses.Viewers
             this.Visible = false;
 
             this.File = file;
-            if(System.IO.File.Exists( this.File.LocalPath))
+            if (System.IO.File.Exists(this.File.LocalPath))
             {
                 string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(this.File.LocalPath));
-                System.IO.File.Copy(this.File.LocalPath,tempPath,true);
+                System.IO.File.Copy(this.File.LocalPath, tempPath, true);
                 _tempCopy = new FileInfo(tempPath);
             }
 
@@ -84,12 +84,12 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(this.File);
         }
 
         public void Save()
         {
-            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the presentation as", new FileInfo(this.File.LocalPath));
+            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the presentation as", this.File);
         }
 
         public void Email()
@@ -105,7 +105,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Print()
         {
-            ToolClasses.ActivityRecorder.Instance.WriteActivity();
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.File.Name, this.File.Type.ToString(), this.File.RemotePath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
             InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
             InteropClasses.PowerPointHelper.Instance.PrintPresentation(this.File.PreviewContainer.SelectedIndex + 1);
         }
@@ -132,7 +132,7 @@ namespace SalesDepot.PresentationClasses.Viewers
                     {
                         AppManager.Instance.ActivatePowerPoint();
                         AppManager.Instance.ActivateMiniBar();
-                        ToolClasses.ActivityRecorder.Instance.WriteActivity();
+                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.File.Name, this.File.Type.ToString(), this.File.RemotePath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                         InteropClasses.PowerPointHelper.Instance.AppendSlide(this.File.PreviewContainer.SelectedIndex + 1);
                     });
@@ -180,7 +180,6 @@ namespace SalesDepot.PresentationClasses.Viewers
                         progressForm.TopMost = true;
                         Thread thread = new Thread(delegate()
                         {
-                            ToolClasses.ActivityRecorder.Instance.WriteActivity();
                             InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                             InteropClasses.PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (this.File.PreviewContainer.SelectedIndex + 1), destinationFileName);
                         });
@@ -192,6 +191,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
                         progressForm.Close();
 
+                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.File.Name, this.File.Type.ToString(), this.File.RemotePath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
                         BusinessClasses.LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
                     }
                 }

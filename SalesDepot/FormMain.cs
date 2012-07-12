@@ -185,12 +185,14 @@ namespace SalesDepot
                     if (!pnContainer.Controls.Contains(this.TabHome))
                         pnContainer.Controls.Add(this.TabHome);
                     this.TabHome.BringToFront();
+                    AppManager.Instance.ActivityManager.AddUserActivity("Wall Bin selected");
                 }
                 else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
                 {
                     if (!pnContainer.Controls.Contains(this.TabOvernightsCalendar))
                         pnContainer.Controls.Add(this.TabOvernightsCalendar);
                     this.TabOvernightsCalendar.BringToFront();
+                    AppManager.Instance.ActivityManager.AddUserActivity("Overnights Calendar selected");
                 }
                 else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule)
                 {
@@ -198,6 +200,7 @@ namespace SalesDepot
                         pnContainer.Controls.Add(this.TabProgramSchedule);
                     this.TabProgramSchedule.BringToFront();
                     this.TabProgramSchedule.Focus();
+                    AppManager.Instance.ActivityManager.AddUserActivity("Program Schedule selected");
                 }
                 else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
                 {
@@ -205,6 +208,7 @@ namespace SalesDepot
                         pnContainer.Controls.Add(this.TabProgramSearch);
                     this.TabProgramSearch.BringToFront();
                     this.TabProgramSearch.Focus();
+                    AppManager.Instance.ActivityManager.AddUserActivity("Program Search selected");
                 }
                 ConfigurationClasses.SettingsManager.Instance.CalendarView = ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar;
                 ConfigurationClasses.SettingsManager.Instance.SaveSettings();
@@ -286,8 +290,6 @@ namespace SalesDepot
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ToolClasses.ActivityRecorder.Instance.StopRecording();
-            ToolClasses.SDRecorder.Instance.StopRecording();
             InteropClasses.PowerPointHelper.Instance.Disconnect();
             InteropClasses.WordHelper.Instance.Close();
         }

@@ -41,15 +41,18 @@ namespace SalesDepot.BusinessClasses
                 if (sourceFile == null)
                 {
                     AppManager.Instance.ShowWarning("File or Link is Not Active");
+                    AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link not active", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
                     return;
                 }
             }
+
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+
             switch (link.Type)
             {
                 case FileTypes.BuggyPresentation:
                 case FileTypes.FriendlyPresentation:
-                case FileTypes.OtherPresentation:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
+                case FileTypes.Presentation:
                     switch (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
@@ -59,11 +62,17 @@ namespace SalesDepot.BusinessClasses
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
-                                        OpenCopyOfFile(sourceFile);
+                                    {
+                                        OpenCopyOfFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
-                                        SaveFile("Save copy of the file as", sourceFile);
+                                    {
+                                        SaveFile("Save copy of the file as", link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
-                                        PrintFile(sourceFile);
+                                    {
+                                        PrintFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
                                     {
                                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.LocalPath));
@@ -79,7 +88,7 @@ namespace SalesDepot.BusinessClasses
                             }
                             break;
                         case ConfigurationClasses.LinkLaunchOptions.Launch:
-                            OpenCopyOfFile(sourceFile);
+                            OpenCopyOfFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
                             if (link.PreviewContainer != null && link.PreviewContainer.CheckPreviewImages() && !ConfigurationClasses.SettingsManager.Instance.OldStyleQuickView)
@@ -93,14 +102,13 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.PDF:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.PDFLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
                             PreviewFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Launch:
-                            OpenCopyOfFile(sourceFile);
+                            OpenCopyOfFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
                             using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
@@ -109,15 +117,21 @@ namespace SalesDepot.BusinessClasses
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
-                                        OpenCopyOfFile(sourceFile);
+                                    {
+                                        OpenCopyOfFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
-                                        SaveFile("Save copy of the file as", sourceFile);
+                                    {
+                                        SaveFile("Save copy of the file as", link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
-                                        PrintFile(sourceFile);
+                                    {
+                                        PrintFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
                                         using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
                                         {
-                                            form.SelectedFile = link;
+                                            form.link = link;
                                             form.ShowDialog();
                                         }
                                 }
@@ -126,14 +140,13 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.Word:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.WordLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
                             PreviewFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Launch:
-                            OpenCopyOfFile(sourceFile);
+                            OpenCopyOfFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
                             using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
@@ -142,15 +155,21 @@ namespace SalesDepot.BusinessClasses
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
-                                        OpenCopyOfFile(sourceFile);
+                                    {
+                                        OpenCopyOfFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
-                                        SaveFile("Save copy of the file as", sourceFile);
+                                    {
+                                        SaveFile("Save copy of the file as", link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
-                                        PrintFile(sourceFile);
+                                    {
+                                        PrintFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
                                         using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
                                         {
-                                            form.SelectedFile = link;
+                                            form.link = link;
                                             form.ShowDialog();
                                         }
                                 }
@@ -159,14 +178,13 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.Excel:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.ExcelLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
                             PreviewFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Launch:
-                            OpenCopyOfFile(sourceFile);
+                            OpenCopyOfFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
                             using (ToolForms.WallBin.FormViewOptions formViewOptions = new ToolForms.WallBin.FormViewOptions())
@@ -175,15 +193,21 @@ namespace SalesDepot.BusinessClasses
                                 if (formViewOptions.ShowDialog() == DialogResult.OK)
                                 {
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Open)
-                                        OpenCopyOfFile(sourceFile);
+                                    {
+                                        OpenCopyOfFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Save)
-                                        SaveFile("Save copy of the file as", sourceFile);
+                                    {
+                                        SaveFile("Save copy of the file as", link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Print)
-                                        PrintFile(sourceFile);
+                                    {
+                                        PrintFile(link);
+                                    }
                                     if (formViewOptions.SelectedOption == ToolForms.WallBin.ViewOptions.Email)
                                         using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
                                         {
-                                            form.SelectedFile = link;
+                                            form.link = link;
                                             form.ShowDialog();
                                         }
                                 }
@@ -192,14 +216,13 @@ namespace SalesDepot.BusinessClasses
                     }
                     break;
                 case FileTypes.MediaPlayerVideo:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
                     switch (ConfigurationClasses.SettingsManager.Instance.VideoLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
                             PreviewFile(link);
                             return;
                         case ConfigurationClasses.LinkLaunchOptions.Launch:
-                            OpenVideo(sourceFile);
+                            OpenVideo(link);
                             break;
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
                             using (ToolForms.WallBin.FormVideoViewOptions formVideoOptions = new ToolForms.WallBin.FormVideoViewOptions())
@@ -208,33 +231,35 @@ namespace SalesDepot.BusinessClasses
                                 if (formVideoOptions.ShowDialog() == DialogResult.OK)
                                 {
                                     if (formVideoOptions.IsAdd)
-                                        AddVideoIntoPresentation(sourceFile);
+                                    {
+                                        AddVideoIntoPresentation(link);
+                                    }
                                     else
-                                        OpenVideo(sourceFile);
+                                    {
+                                        OpenVideo(link);
+                                    }
                                 }
                             }
                             break;
                     }
                     break;
                 case FileTypes.QuickTimeVideo:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
-                    OpenVideo(sourceFile);
+                    OpenVideo(link);
                     break;
                 case FileTypes.Other:
-                    ToolClasses.SDRecorder.Instance.WriteSDEvent(sourceFile.Name);
-                    OpenCopyOfFile(sourceFile);
+                    OpenCopyOfFile(link);
                     break;
                 case FileTypes.Folder:
-                    OpenFolder(link.LocalPath);
+                    OpenFolder(link);
                     break;
                 case FileTypes.Url:
-                    StartProcess(link.LocalPath);
+                    StartProcess(link);
                     break;
                 case FileTypes.Network:
-                    StartProcess(link.LocalPath);
+                    StartProcess(link);
                     break;
                 case FileTypes.OvernightsLink:
-                    StartProcess(link.LocalPath);
+                    StartProcess(link);
                     break;
                 case FileTypes.LineBreak:
                     if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
@@ -245,26 +270,32 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void PreviewFile(LibraryFile selectedFile)
+        private void PreviewFile(LibraryFile link)
         {
-            if (selectedFile.LinkAvailable)
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+
+            if (link.LinkAvailable)
             {
-                _formLinkPreview.SelectedFile = selectedFile;
+                _formLinkPreview.SelectedFile = link;
                 _formLinkPreview.ShowDialog();
             }
             ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
-        public void OpenFile(FileInfo file)
+        public void OpenCopyOfFile(LibraryFile link)
         {
             try
             {
-                Process.Start(file.FullName);
+                string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
+                File.Copy(link.LocalPath, newFile, true);
+                Process.Start(newFile);
+
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
             }
             catch
             {
-                AppManager.Instance.ShowWarning(string.Format("Could not open {0} ", file.Name));
+                AppManager.Instance.ShowWarning(string.Format("Could not create copy of {0} in a temp folder.", Path.GetFileName(link.LocalPath)));
             }
         }
 
@@ -281,23 +312,51 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void OpenFolder(string folderName)
+        public void OpenFolder(LibraryFile link)
         {
-            if (Directory.Exists(folderName))
-                Process.Start(folderName);
+            if (Directory.Exists(link.LocalPath))
+            {
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Folder", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                Process.Start(link.LocalPath);
+            }
             else
                 AppManager.Instance.ShowWarning("Folder is Not Active");
         }
 
-        public void StartProcess(string processName)
+        public void StartProcess(LibraryFile link)
         {
             try
             {
-                Process.Start(processName);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                Process.Start(link.LocalPath);
             }
             catch
             {
                 AppManager.Instance.ShowWarning("This Link is not active");
+            }
+        }
+
+        public void SaveFile(string dialogTitle, LibraryFile link, bool isCopy = true)
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Title = dialogTitle;
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            dialog.FileName = (isCopy ? "Copy of " : string.Empty) + Path.GetFileName(link.LocalPath);
+            dialog.OverwritePrompt = true;
+            dialog.Filter = (Path.GetExtension(link.LocalPath).Substring(1)).ToUpper() + " Files|*" + Path.GetExtension(link.LocalPath);
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+
+                string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
+                File.Copy(link.LocalPath, newFile, true);
+                if (File.Exists(newFile))
+                {
+                    if (AppManager.Instance.ShowInfoQuestion(string.Format("The {0} file has been saved as\n{1}\nDo you want to open it?", new object[] { isCopy ? "copy of the" : string.Empty, link.RemotePath })) == DialogResult.Yes)
+                        OpenCopyOfFile(new FileInfo(newFile));
+                }
+                else
+                    AppManager.Instance.ShowWarning("File has not been saved successfully.");
             }
         }
 
@@ -322,16 +381,13 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void PrintFile(FileInfo file)
+        public void PrintFile(LibraryFile link)
         {
             Process printProcess = new Process();
             string tempPath = string.Empty;
-            if (file.Exists)
-            {
-                tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + file.Extension);
-                file.CopyTo(tempPath, true);
-            }
-            switch (file.Extension.Substring(1).ToUpper())
+            string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
+            File.Copy(link.LocalPath, newFile, true);
+            switch (Path.GetExtension(link.LocalPath).Substring(1).ToUpper())
             {
                 case "PPT":
                 case "PPTX":
@@ -373,6 +429,20 @@ namespace SalesDepot.BusinessClasses
                     AppManager.Instance.ShowWarning("Cannot print files of this type");
                     break;
             }
+
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+        }
+
+        public void EmailFile(LibraryFile link)
+        {
+            if (InteropClasses.OutlookHelper.Instance.Open())
+            {
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                InteropClasses.OutlookHelper.Instance.CreateMessage(string.Empty, link.LocalPath);
+                InteropClasses.OutlookHelper.Instance.Close();
+            }
+            else
+                AppManager.Instance.ShowWarning("Cannot open Outlook");
         }
 
         public void EmailFile(string filePath)
@@ -440,9 +510,9 @@ namespace SalesDepot.BusinessClasses
             return sourceFile;
         }
 
-        public void ViewPresentation(LibraryFile selectedFile)
+        public void ViewPresentation(LibraryFile link)
         {
-            string presentationFile = selectedFile.LocalPath;
+            string presentationFile = link.LocalPath;
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
                 AppManager.Instance.RunPowerPointLoader();
@@ -460,22 +530,25 @@ namespace SalesDepot.BusinessClasses
                 else if (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions == ConfigurationClasses.LinkLaunchOptions.Viewer)
                 {
                     if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
-                        OpenCopyOfFile(file);
+                        OpenCopyOfFile(link);
                     return;
                 }
             }
             if (file.Exists)
             {
-                _formPowerPointQuickView.SelectedFile = selectedFile;
-                int temp = selectedFile.PreviewContainer.SelectedIndex;
+                _formPowerPointQuickView.SelectedFile = link;
+                int temp = link.PreviewContainer.SelectedIndex;
+
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+
                 _formPowerPointQuickView.ShowDialog();
-                selectedFile.PreviewContainer.SelectedIndex = temp;
+                link.PreviewContainer.SelectedIndex = temp;
             }
             ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
-        public void ViewPresentationOld(LibraryFile selectedFile)
+        public void ViewPresentationOld(LibraryFile link)
         {
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
@@ -483,7 +556,7 @@ namespace SalesDepot.BusinessClasses
             AppManager.Instance.ActivatePowerPoint();
             AppManager.Instance.ActivateMiniBar();
             FormMain.Instance.TopMost = false;
-            FileInfo file = new FileInfo(selectedFile.LocalPath);
+            FileInfo file = new FileInfo(link.LocalPath);
             if (file.Extension.ToLower().Equals(".pptx") && InteropClasses.PowerPointHelper.Instance.Is2003)
             {
                 if (!ConfigurationClasses.RegistryHelper.Office2007CompatibilityPackInstalled)
@@ -494,23 +567,28 @@ namespace SalesDepot.BusinessClasses
                 else if (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions == ConfigurationClasses.LinkLaunchOptions.Viewer)
                 {
                     if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
-                        OpenCopyOfFile(file);
+                        OpenCopyOfFile(link);
                     return;
                 }
             }
             if (file.Exists)
             {
-                _formPowerPointQuickViewOld.SelectedFile = selectedFile;
+                _formPowerPointQuickViewOld.SelectedFile = link;
+
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+
                 _formPowerPointQuickViewOld.ShowDialog();
             }
             ConfigurationClasses.RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
-        public void AddVideoIntoPresentation(FileInfo file)
+        public void AddVideoIntoPresentation(LibraryFile link)
         {
             if (File.Exists(InteropClasses.PowerPointHelper.Instance.ActivePresentation.FullName))
             {
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert video", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+
                 AppManager.Instance.ActivatePowerPoint();
                 AppManager.Instance.ActivateMainForm();
                 using (ToolForms.FormProgress form = new ToolForms.FormProgress())
@@ -520,7 +598,7 @@ namespace SalesDepot.BusinessClasses
                     bool result = false;
                     Thread thread = new Thread(delegate()
                     {
-                        result = InteropClasses.PowerPointHelper.Instance.InsertVideoIntoActivePresentation(file, 100, 100, 400, 400);
+                        result = InteropClasses.PowerPointHelper.Instance.InsertVideoIntoActivePresentation(link.LocalPath, 100, 100, 400, 400);
                     });
                     thread.Start();
                     form.Show();
@@ -552,16 +630,19 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void OpenVideo(FileInfo file)
+        public void OpenVideo(LibraryFile link)
         {
-            file = file.CopyTo(Path.Combine(AppManager.Instance.TempFolder.FullName, file.Name), true);
-            ProcessStartInfo videoPlay = new ProcessStartInfo(file.FullName);
+            string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileName(link.LocalPath));
+            File.Copy(link.LocalPath, newFile, true);
+            ProcessStartInfo videoPlay = new ProcessStartInfo(newFile);
             try
             {
                 Process process = new Process();
                 process.StartInfo = videoPlay;
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                 process.Start();
+
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Video", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
             }
             catch
             {

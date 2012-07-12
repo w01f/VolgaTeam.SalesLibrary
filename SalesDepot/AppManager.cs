@@ -14,6 +14,7 @@ namespace SalesDepot
         public delegate void SingleParamDelegate(object parameter);
         public ProgramManager.CoreObjects.ApplicationLog Log { get; private set; }
         public DirectoryInfo TempFolder { get; set; }
+        public ToolClasses.ActivityManager ActivityManager { get; private set; }
 
         private AppManager()
         {
@@ -21,6 +22,7 @@ namespace SalesDepot
                 Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.TempPath);
             this.TempFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.TempPath);
             this.Log = new ProgramManager.CoreObjects.ApplicationLog(ConfigurationClasses.SettingsManager.Instance.LogFilePath);
+            this.ActivityManager = new ToolClasses.ActivityManager();
         }
 
         ~AppManager()
@@ -49,8 +51,7 @@ namespace SalesDepot
 
         public void RunForm()
         {
-            ToolClasses.ActivityRecorder.Instance.StartRecording();
-            ToolClasses.SDRecorder.Instance.StartRecording();
+            AppManager.Instance.ActivityManager.AddUserActivity("Application run");
             ConfigurationClasses.ListManager.Instance.Init();
             ShowMainForm();
         }

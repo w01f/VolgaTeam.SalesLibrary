@@ -53,7 +53,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Open()
         {
-            BusinessClasses.LinkManager.Instance.StartProcess(this.File.LocalPath);
+            BusinessClasses.LinkManager.Instance.StartProcess(this.File);
         }
 
         public void Save()

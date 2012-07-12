@@ -474,7 +474,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 {
                     case BusinessClasses.FileTypes.BuggyPresentation:
                     case BusinessClasses.FileTypes.FriendlyPresentation:
-                    case BusinessClasses.FileTypes.OtherPresentation:
+                    case BusinessClasses.FileTypes.Presentation:
                         barButtonItemSave.Enabled = true;
                         barButtonItemEmailLink.Enabled = true;
                         barButtonItemPrintLink.Enabled = true;

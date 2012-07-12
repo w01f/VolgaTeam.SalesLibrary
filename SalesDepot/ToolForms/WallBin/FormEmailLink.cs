@@ -6,7 +6,7 @@ namespace SalesDepot.ToolForms.WallBin
 {
     public partial class FormEmailLink : Form
     {
-        public BusinessClasses.LibraryFile SelectedFile { get; set; }
+        public BusinessClasses.LibraryFile link { get; set; }
 
         public FormEmailLink()
         {
@@ -26,16 +26,17 @@ namespace SalesDepot.ToolForms.WallBin
 
         private void FormEmailPresentation_Load(object sender, EventArgs e)
         {
-            this.Text = string.Format(this.Text, this.SelectedFile.NameWithExtension);
+            this.Text = string.Format(this.Text, this.link.NameWithExtension);
         }
 
         private void FormEmailPresentation_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                string selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : this.SelectedFile.NameWithExtension;
-                string destinationFilePath = Path.Combine(Path.GetTempPath(), (selectedName + this.SelectedFile.Extension));
-                File.Copy(this.SelectedFile.LocalPath, destinationFilePath, true);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                string selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : this.link.NameWithExtension;
+                string destinationFilePath = Path.Combine(Path.GetTempPath(), (selectedName + this.link.Extension));
+                File.Copy(this.link.LocalPath, destinationFilePath, true);
                 if (File.Exists(destinationFilePath))
                     BusinessClasses.LinkManager.Instance.EmailFile(destinationFilePath);
             }

@@ -283,7 +283,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     {
                         case BusinessClasses.FileTypes.BuggyPresentation:
                         case BusinessClasses.FileTypes.FriendlyPresentation:
-                        case BusinessClasses.FileTypes.OtherPresentation:
+                        case BusinessClasses.FileTypes.Presentation:
                             string pdfFileName = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileNameWithoutExtension(item.Value) + ".pdf");
                             if (InteropClasses.PowerPointHelper.Instance.ConvertToPDF(item.Value, pdfFileName))
                             {
