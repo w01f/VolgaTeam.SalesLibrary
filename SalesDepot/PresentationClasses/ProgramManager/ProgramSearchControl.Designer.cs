@@ -381,7 +381,7 @@
             this.gridColumnProgram.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.gridColumnProgram.Caption = "Program";
             this.gridColumnProgram.ColumnEdit = this.repositoryItemTextEditProgram;
-            this.gridColumnProgram.FieldName = "Program";
+            this.gridColumnProgram.FieldName = "ProgramExtended";
             this.gridColumnProgram.Name = "gridColumnProgram";
             this.gridColumnProgram.Visible = true;
             this.gridColumnProgram.VisibleIndex = 4;

@@ -361,7 +361,7 @@
             this.gridColumnProgram.AppearanceCell.Options.UseTextOptions = true;
             this.gridColumnProgram.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.gridColumnProgram.Caption = "Program";
-            this.gridColumnProgram.FieldName = "Program";
+            this.gridColumnProgram.FieldName = "ProgramExtended";
             this.gridColumnProgram.Name = "gridColumnProgram";
             this.gridColumnProgram.Visible = true;
             this.gridColumnProgram.VisibleIndex = 4;
@@ -467,13 +467,13 @@
             this.gridColumnHouseNumber.VisibleIndex = 5;
             this.gridColumnHouseNumber.Width = 107;
             // 
-            // ScheduleControl
+            // ProgramScheduleControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.Controls.Add(this.gridControlPrograms);
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "ScheduleControl";
+            this.Name = "ProgramScheduleControl";
             this.Size = new System.Drawing.Size(561, 395);
             ((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPrograms)).EndInit();
