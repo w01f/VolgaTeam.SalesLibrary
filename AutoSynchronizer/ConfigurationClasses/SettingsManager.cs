@@ -24,12 +24,7 @@ namespace AutoSynchronizer.ConfigurationClasses
 
         private string _settingsFilePath = string.Empty;
         public string ArhivePath { get; set; }
-        private string _syncSettingsFilePath = string.Empty;
-        public string ClientLogosRootPath { get; set; }
-        public string SalesGalleryRootPath { get; set; }
-        public string WebArtRootPath { get; set; }
-        public string AdSpecsSamplesRootPath { get; set; }
-        public string ScreenshotLibraryRootPath { get; set; }
+        public string LogRootPath { get; set; }
 
         #region FM Settings
         public string BackupPath { get; set; }
@@ -65,17 +60,13 @@ namespace AutoSynchronizer.ConfigurationClasses
             if (!Directory.Exists(settingsFolderPath))
                 Directory.CreateDirectory(settingsFolderPath);
             _settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
-
             this.ArhivePath = Path.Combine(settingsFolderPath, "Archives");
             if (Directory.Exists(this.ArhivePath))
                 Directory.CreateDirectory(this.ArhivePath);
-            _syncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+            this.LogRootPath = Path.Combine(settingsFolderPath, "Log");
+            if (!Directory.Exists(this.LogRootPath))
+                Directory.CreateDirectory(this.LogRootPath);
 
-            this.ClientLogosRootPath = string.Empty;
-            this.SalesGalleryRootPath = string.Empty;
-            this.WebArtRootPath = string.Empty;
-            this.AdSpecsSamplesRootPath = string.Empty;
-            this.ScreenshotLibraryRootPath = string.Empty;
 
             #region FM Settings
             this.BackupPath = string.Empty;
@@ -151,7 +142,6 @@ namespace AutoSynchronizer.ConfigurationClasses
                         this.MultitabView = tempBool;
                 #endregion
             }
-            LoadClipartPath();
         }
 
         public void Save()
@@ -180,27 +170,6 @@ namespace AutoSynchronizer.ConfigurationClasses
             {
                 sw.Write(xml);
                 sw.Flush();
-            }
-        }
-
-        private void LoadClipartPath()
-        {
-            XmlNode node;
-            if (File.Exists(_syncSettingsFilePath))
-            {
-                XmlDocument document = new XmlDocument();
-                document.Load(_syncSettingsFilePath);
-
-                node = document.SelectSingleNode(@"/Settings/MediaProperty/Path");
-                if (node != null)
-                {
-                    string path = node.InnerText.Replace("\"", string.Empty).Trim();
-                    this.ClientLogosRootPath = Path.Combine(path, @"outgoing\gallery\client logos");
-                    this.SalesGalleryRootPath = Path.Combine(path, @"outgoing\gallery\sales gallery");
-                    this.WebArtRootPath = Path.Combine(path, @"outgoing\gallery\web art");
-                    this.AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
-                    this.ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
-                }
             }
         }
     }

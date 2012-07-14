@@ -220,7 +220,7 @@ namespace FileManager.PresentationClasses.Cliparts
                 {
                     try
                     {
-                        ToolClasses.SyncManager.Instance.MakeFolderAvailable(oldFolder);
+                        ToolClasses.SyncManager.MakeFolderAvailable(oldFolder);
                         string parentFolderPath = oldFolder.Parent.FullName;
                         string oldFoldeName = oldFolder.Name;
                         string newFoldeName = node.GetValue(treeListColumnName).ToString();
@@ -438,7 +438,7 @@ namespace FileManager.PresentationClasses.Cliparts
                     if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected folder?") == DialogResult.Yes)
                     {
                         ClearViewArea();
-                        ToolClasses.SyncManager.Instance.DeleteFolder(node.Tag as DirectoryInfo);
+                        ToolClasses.SyncManager.DeleteFolder(node.Tag as DirectoryInfo);
                         node.ParentNode.Nodes.Remove(node);
                     }
                 }

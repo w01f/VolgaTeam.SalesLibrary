@@ -396,11 +396,21 @@ namespace FileManager.BusinessClasses
             xml.AppendLine("</AutoWidgets>");
 
             #region Auto Sync Settings
+            StringBuilder autoSyncSettings = new StringBuilder();
+            autoSyncSettings.AppendLine("<AutoSyncSettings>");
             xml.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
+            autoSyncSettings.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
             xml.AppendLine(@"<SyncSchedule>");
+            autoSyncSettings.AppendLine(@"<SyncSchedule>");
             foreach (SyncScheduleRecord syncTime in this.SyncScheduleRecords)
+            {
                 xml.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
+                autoSyncSettings.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
+            }
             xml.AppendLine(@"</SyncSchedule>");
+            autoSyncSettings.AppendLine(@"</SyncSchedule>");
+            autoSyncSettings.AppendLine("</AutoSyncSettings>");
+            ConfigurationClasses.SettingsManager.Instance.SaveAutoSyncSettings(autoSyncSettings.ToString());
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
@@ -1606,7 +1616,7 @@ namespace FileManager.BusinessClasses
                 if (!Directory.Exists(Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)))
                     Directory.CreateDirectory(Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
                 if (previewFolder.Exists)
-                    ToolClasses.SyncManager.Instance.DeleteFolder(previewFolder);
+                    ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 Directory.CreateDirectory(this.PreviewStorageFolder);
                 InteropClasses.PowerPointHelper.Instance.ExportPresentationAsImages(_parent.FullPath, this.PreviewStorageFolder, connect);
             }
@@ -1618,7 +1628,7 @@ namespace FileManager.BusinessClasses
             {
                 DirectoryInfo folder = new FileInfo(_parent.FullPath).Directory;
                 if (folder.Exists && folder.GetDirectories("*" + ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix + "*").Length > 0)
-                    ToolClasses.SyncManager.Instance.DeleteFolder(folder, ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix);
+                    ToolClasses.SyncManager.DeleteFolder(folder, ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix);
             }
         }
 
@@ -1626,7 +1636,7 @@ namespace FileManager.BusinessClasses
         {
             DirectoryInfo previewFolder = new DirectoryInfo(this.PreviewStorageFolder);
             if (previewFolder.Exists)
-                ToolClasses.SyncManager.Instance.DeleteFolder(previewFolder);
+                ToolClasses.SyncManager.DeleteFolder(previewFolder);
         }
     }
 

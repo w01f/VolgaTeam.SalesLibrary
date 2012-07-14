@@ -23,7 +23,9 @@ namespace FileManager.ConfigurationClasses
         private static SettingsManager _instance = new SettingsManager();
 
         private string _settingsFilePath = string.Empty;
+        private string _autoSyncSettingsPath = string.Empty;
         public string ArhivePath { get; set; }
+        public string LogRootPath { get; set; }
         private string _syncSettingsFilePath = string.Empty;
         public string ClientLogosRootPath { get; set; }
         public string SalesGalleryRootPath { get; set; }
@@ -67,11 +69,16 @@ namespace FileManager.ConfigurationClasses
             if (!Directory.Exists(settingsFolderPath))
                 Directory.CreateDirectory(settingsFolderPath);
             _settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
+            _autoSyncSettingsPath = Path.Combine(settingsFolderPath, "AutoSyncSchedule.xml");
 
             this.ArhivePath = Path.Combine(settingsFolderPath, "Archives");
             if (Directory.Exists(this.ArhivePath))
                 Directory.CreateDirectory(this.ArhivePath);
             _syncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+
+            this.LogRootPath = Path.Combine(settingsFolderPath, "Log");
+            if (!Directory.Exists(this.LogRootPath))
+                Directory.CreateDirectory(this.LogRootPath);
 
             this.ClientLogosRootPath = string.Empty;
             this.SalesGalleryRootPath = string.Empty;
@@ -212,6 +219,15 @@ namespace FileManager.ConfigurationClasses
                     this.AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
                     this.ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
                 }
+            }
+        }
+
+        public void SaveAutoSyncSettings(string settings)
+        {
+            using (StreamWriter sw = new StreamWriter(_autoSyncSettingsPath, false))
+            {
+                sw.Write(settings.ToString());
+                sw.Flush();
             }
         }
     }

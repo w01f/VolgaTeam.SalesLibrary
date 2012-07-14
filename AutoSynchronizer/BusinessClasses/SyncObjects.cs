@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace AutoSynchronizer.BusinessClasses
 {
@@ -86,6 +87,43 @@ namespace AutoSynchronizer.BusinessClasses
                 this.SyncInProgress = true;
                 if (this.Manager.Library.IsConfigured && !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath) && Directory.Exists(ConfigurationClasses.SettingsManager.Instance.BackupPath) && !string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.NetworkPath) && Directory.Exists(ConfigurationClasses.SettingsManager.Instance.NetworkPath))
                 {
+
+                    StringBuilder syncLog = new StringBuilder();
+                    int filesCreated = 0;
+                    int filesUpdated = 0;
+                    int filesDeleted = 0;
+                    int foldersCreated = 0;
+                    int foldersDeleted = 0;
+                    ToolClasses.SyncManager syncManager = new ToolClasses.SyncManager();
+                    syncManager.FileCreated += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
+                    {
+                        syncLog.AppendLine(string.Format("File created: {0}", new string[] { e.Destination }));
+                        filesCreated++;
+                    });
+                    syncManager.FileUpdated += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
+                    {
+                        syncLog.AppendLine(string.Format("File updated: {0}", new string[] { e.Destination }));
+                        filesUpdated++;
+                    });
+                    syncManager.FileDeleted += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
+                    {
+                        syncLog.AppendLine(string.Format("File deleted: {0}", new string[] { e.Destination }));
+                        filesDeleted++;
+                    });
+                    syncManager.FolderCreated += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
+                    {
+                        syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { e.Destination }));
+                        foldersCreated++;
+                    });
+                    syncManager.FolderDeleted += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
+                    {
+                        syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { e.Destination }));
+                        foldersDeleted++;
+                    });
+
+                    syncLog.AppendLine(string.Format("Sync started: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
+                    syncLog.AppendLine(string.Format("Sync {0}", new string[] { this.Manager.Library.Name }));
+
                     HashSet<string> filesWhiteList = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                     List<string> existedLibraryFolderNames = new List<string>();
                     this.Manager.Library.PrepareForSynchronize();
@@ -95,7 +133,11 @@ namespace AutoSynchronizer.BusinessClasses
 
                     DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(ConfigurationClasses.SettingsManager.Instance.NetworkPath, libraryFolderName));
                     if (!destinationFolder.Exists)
+                    {
                         destinationFolder.Create();
+                        syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationFolder.FullName }));
+                        foldersCreated++;
+                    }
                     filesWhiteList.Clear();
 
                     AddFolderForSync(new DirectoryInfo(Path.Combine(this.Manager.Library.Folder.FullName, ConfigurationClasses.SettingsManager.LibraryLogoFolder)), filesWhiteList);
@@ -142,7 +184,7 @@ namespace AutoSynchronizer.BusinessClasses
                                     }
                                 }
 
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
+                        syncManager.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
 
                         #region Sync Primary Root
                         sourceSubFolders.Clear();
@@ -151,10 +193,14 @@ namespace AutoSynchronizer.BusinessClasses
                         {
                             string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
                             if (!Directory.Exists(destinationSubFolderPath))
+                            {
                                 Directory.CreateDirectory(destinationSubFolderPath);
+                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationSubFolderPath }));
+                                foldersCreated++;
+                            }
                             DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
                             destinationSubFolders.Add(destinationSubFolder);
-                            ToolClasses.SyncManager.Instance.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
+                            syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
                         }
                         #endregion
 
@@ -163,7 +209,11 @@ namespace AutoSynchronizer.BusinessClasses
                         {
                             string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName);
                             if (!Directory.Exists(extraFoldersDestinationRootPath))
+                            {
                                 Directory.CreateDirectory(extraFoldersDestinationRootPath);
+                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFoldersDestinationRootPath }));
+                                foldersCreated++;
+                            }
                             DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
                             destinationSubFolders.Add(extraFoldersDestinationRoot);
                             List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
@@ -175,20 +225,28 @@ namespace AutoSynchronizer.BusinessClasses
                                 {
                                     string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
                                     if (!Directory.Exists(extraFolderDestinationPath))
+                                    {
                                         Directory.CreateDirectory(extraFolderDestinationPath);
+                                        syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
+                                        foldersCreated++;
+                                    }
                                     DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
                                     extraFolderDestinations.Add(extraFolderDestination);
-                                    ToolClasses.SyncManager.Instance.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                                    syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
                                 }
                             }
                             foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
-                                ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
+                            {
+                                ToolClasses.SyncManager.DeleteFolder(subFolder);
+                                syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
+                                foldersDeleted++;
+                            }
                         }
                         #endregion
                     }
                     else
                     {
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
+                        syncManager.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
                     }
 
                     #region Sync Overnights Calendar
@@ -196,10 +254,14 @@ namespace AutoSynchronizer.BusinessClasses
                     {
                         string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.OvernightsCalendarRootFolderName);
                         if (!Directory.Exists(overnightsCalendarDestinationFolderPath))
+                        {
                             Directory.CreateDirectory(overnightsCalendarDestinationFolderPath);
+                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { overnightsCalendarDestinationFolderPath }));
+                            foldersCreated++;
+                        }
                         DirectoryInfo overnightsCalendarDestinationFolder = new DirectoryInfo(overnightsCalendarDestinationFolderPath);
                         destinationSubFolders.Add(overnightsCalendarDestinationFolder);
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(this.Manager.Library.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
+                        syncManager.SynchronizeFolders(this.Manager.Library.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
                     }
                     #endregion
 
@@ -208,16 +270,45 @@ namespace AutoSynchronizer.BusinessClasses
                     {
                         string programManagerDestinationFolderPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ProgramManagerRootFolderName);
                         if (!Directory.Exists(programManagerDestinationFolderPath))
+                        {
                             Directory.CreateDirectory(programManagerDestinationFolderPath);
+                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { programManagerDestinationFolderPath }));
+                            foldersCreated++;
+                        }
                         DirectoryInfo programManagerSourceFolder = new DirectoryInfo(this.Manager.Library.ProgramManagerLocation);
                         DirectoryInfo programManagerDestinationFolder = new DirectoryInfo(programManagerDestinationFolderPath);
                         destinationSubFolders.Add(programManagerDestinationFolder);
-                        ToolClasses.SyncManager.Instance.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
+                        syncManager.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
                     }
                     #endregion
 
                     foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
-                        ToolClasses.SyncManager.Instance.DeleteFolder(subFolder);
+                    {
+                        ToolClasses.SyncManager.DeleteFolder(subFolder);
+                        syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
+                        foldersDeleted++;
+                    }
+
+                    syncLog.AppendLine(string.Format("Total files created: {0}", new string[] { filesCreated.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total files updated: {0}", new string[] { filesUpdated.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total files deleted: {0}", new string[] { filesDeleted.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total folders created: {0}", new string[] { foldersCreated.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total folders deleted: {0}", new string[] { foldersDeleted.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Sync completed: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
+
+                    try
+                    {
+                        string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Auto Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                        using (StreamWriter sw = new StreamWriter(logPath, false))
+                        {
+                            sw.Write(syncLog.ToString());
+                            sw.Flush();
+                            sw.Close();
+                        }
+                    }
+                    catch
+                    {
+                    }
                 }
             }
             finally

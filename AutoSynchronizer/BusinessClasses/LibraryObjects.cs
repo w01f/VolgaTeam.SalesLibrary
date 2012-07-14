@@ -1608,7 +1608,7 @@ namespace AutoSynchronizer.BusinessClasses
                 if (!Directory.Exists(Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName)))
                     Directory.CreateDirectory(Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.PreviewContainersRootFolderName));
                 if (previewFolder.Exists)
-                    ToolClasses.SyncManager.Instance.DeleteFolder(previewFolder);
+                    ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 Directory.CreateDirectory(this.PreviewStorageFolder);
                 InteropClasses.PowerPointHelper.Instance.ExportPresentationAsImages(_parent.FullPath, this.PreviewStorageFolder);
             }
@@ -1620,7 +1620,7 @@ namespace AutoSynchronizer.BusinessClasses
             {
                 DirectoryInfo folder = new FileInfo(_parent.FullPath).Directory;
                 if (folder.Exists && folder.GetDirectories("*" + ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix + "*").Length > 0)
-                    ToolClasses.SyncManager.Instance.DeleteFolder(folder, ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix);
+                    ToolClasses.SyncManager.DeleteFolder(folder, ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix);
             }
         }
 
@@ -1628,7 +1628,7 @@ namespace AutoSynchronizer.BusinessClasses
         {
             DirectoryInfo previewFolder = new DirectoryInfo(this.PreviewStorageFolder);
             if (previewFolder.Exists)
-                ToolClasses.SyncManager.Instance.DeleteFolder(previewFolder);
+                ToolClasses.SyncManager.DeleteFolder(previewFolder);
         }
     }
 

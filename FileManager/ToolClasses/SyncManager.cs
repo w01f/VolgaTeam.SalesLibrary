@@ -1,25 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace FileManager.ToolClasses
 {
-    class SyncManager
+    public class SyncManager
     {
-        private static SyncManager _instance = new SyncManager();
+        public event EventHandler<SyncEventArgs> FileCreated;
+        public event EventHandler<SyncEventArgs> FileUpdated;
+        public event EventHandler<SyncEventArgs> FileDeleted;
 
-        private SyncManager()
-        {
-        }
-
-        public static SyncManager Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+        public event EventHandler<SyncEventArgs> FolderCreated;
+        public event EventHandler<SyncEventArgs> FolderDeleted;
 
         public void SynchronizeFolders(DirectoryInfo A, DirectoryInfo B, HashSet<string> filesWhiteList, bool includeSubFolders = true)
         {
@@ -45,11 +39,15 @@ namespace FileManager.ToolClasses
                     if (afi.LastWriteTime > bfi.LastWriteTime)
                     {
                         afi.CopyTo(Path.Combine(B.FullName, afi.Name), true);
+                        if (this.FileUpdated != null)
+                            this.FileUpdated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
                     }
                 }
                 else
                 {
-                    afi.CopyTo(Path.Combine(B.FullName, afi.Name), true);
+                    bfi = afi.CopyTo(Path.Combine(B.FullName, afi.Name), true);
+                    if (this.FileCreated != null)
+                        this.FileCreated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
                 }
                 Application.DoEvents();
             }
@@ -60,10 +58,11 @@ namespace FileManager.ToolClasses
                 {
                     bfi.Attributes = FileAttributes.Normal;
                     bfi.Delete();
+                    if (this.FileDeleted != null)
+                        this.FileDeleted(this, new SyncEventArgs("empty", bfi.FullName));
                     Application.DoEvents();
                 }
             }
-
             if (includeSubFolders)
             {
                 foreach (DirectoryInfo adi in a_dirs.Values)
@@ -77,6 +76,8 @@ namespace FileManager.ToolClasses
                     {
                         DirectoryInfo bdi = B.CreateSubdirectory(adi.Name);
                         SynchronizeFolders(adi, bdi, filesWhiteList);
+                        if (this.FolderCreated != null)
+                            this.FolderCreated(this, new SyncEventArgs(adi.FullName, bdi.FullName));
                     }
                     Application.DoEvents();
                 }
@@ -86,13 +87,15 @@ namespace FileManager.ToolClasses
                     if (!a_dirs.ContainsKey(bdi.Name))
                     {
                         DeleteFolder(bdi);
+                        if (this.FolderDeleted != null)
+                            this.FolderDeleted(this, new SyncEventArgs("empty", bdi.FullName));
                         Application.DoEvents();
                     }
                 }
             }
         }
 
-        public void MakeFolderAvailable(DirectoryInfo folder)
+        public static void MakeFolderAvailable(DirectoryInfo folder)
         {
             try
             {
@@ -107,7 +110,7 @@ namespace FileManager.ToolClasses
             }
         }
 
-        public void DeleteFolder(DirectoryInfo folder, string filter = "")
+        public static void DeleteFolder(DirectoryInfo folder, string filter = "")
         {
             try
             {
@@ -155,6 +158,18 @@ namespace FileManager.ToolClasses
             catch
             {
             }
+        }
+    }
+
+    public class SyncEventArgs : EventArgs
+    {
+        public string Source { get; private set; }
+        public string Destination { get; private set; }
+
+        public SyncEventArgs(string source, string destination)
+        {
+            this.Source = source;
+            this.Destination = destination;
         }
     }
 }
