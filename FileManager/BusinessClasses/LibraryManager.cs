@@ -63,6 +63,7 @@ namespace FileManager.BusinessClasses
                 int filesCreated = 0;
                 int filesUpdated = 0;
                 int filesDeleted = 0;
+                int filesDeclined = 0;
                 int foldersCreated = 0;
                 int foldersDeleted = 0;
                 ToolClasses.SyncManager syncManager = new ToolClasses.SyncManager();
@@ -80,6 +81,11 @@ namespace FileManager.BusinessClasses
                 {
                     syncLog.AppendLine(string.Format("File deleted: {0}", new string[] { e.Destination }));
                     filesDeleted++;
+                });
+                syncManager.FileDeclined += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
+                {
+                    syncLog.AppendLine(string.Format("File declined: {0}", new string[] { e.Destination }));
+                    filesDeclined++;
                 });
                 syncManager.FolderCreated += new EventHandler<ToolClasses.SyncEventArgs>((sender, e) =>
                 {
@@ -275,6 +281,7 @@ namespace FileManager.BusinessClasses
                 syncLog.AppendLine(string.Format("Total files created: {0}", new string[] { filesCreated.ToString("#,##0") }));
                 syncLog.AppendLine(string.Format("Total files updated: {0}", new string[] { filesUpdated.ToString("#,##0") }));
                 syncLog.AppendLine(string.Format("Total files deleted: {0}", new string[] { filesDeleted.ToString("#,##0") }));
+                syncLog.AppendLine(string.Format("Total files declined: {0}", new string[] { filesDeclined.ToString("#,##0") }));
                 syncLog.AppendLine(string.Format("Total folders created: {0}", new string[] { foldersCreated.ToString("#,##0") }));
                 syncLog.AppendLine(string.Format("Total folders deleted: {0}", new string[] { foldersDeleted.ToString("#,##0") }));
 

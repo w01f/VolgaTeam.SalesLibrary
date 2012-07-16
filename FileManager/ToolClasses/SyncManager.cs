@@ -11,6 +11,7 @@ namespace FileManager.ToolClasses
         public event EventHandler<SyncEventArgs> FileCreated;
         public event EventHandler<SyncEventArgs> FileUpdated;
         public event EventHandler<SyncEventArgs> FileDeleted;
+        public event EventHandler<SyncEventArgs> FileDeclined;
 
         public event EventHandler<SyncEventArgs> FolderCreated;
         public event EventHandler<SyncEventArgs> FolderDeleted;
@@ -33,22 +34,29 @@ namespace FileManager.ToolClasses
 
             foreach (FileInfo afi in a_files)
             {
-                FileInfo bfi = b_files.Where(x => x.Name.Equals(afi.Name)).FirstOrDefault();
-                if (bfi != null)
+                string destinationPath = Path.Combine(B.FullName, afi.Name);
+                if (destinationPath.Length < InteropClasses.WinAPIHelper.MAX_PATH)
                 {
-                    if (afi.LastWriteTime > bfi.LastWriteTime)
+                    FileInfo bfi = b_files.Where(x => x.Name.Equals(afi.Name)).FirstOrDefault();
+                    if (bfi != null)
                     {
-                        afi.CopyTo(Path.Combine(B.FullName, afi.Name), true);
-                        if (this.FileUpdated != null)
-                            this.FileUpdated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
+                        if (afi.LastWriteTime > bfi.LastWriteTime)
+                        {
+                            afi.CopyTo(destinationPath, true);
+                            if (this.FileUpdated != null)
+                                this.FileUpdated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
+                        }
+                    }
+                    else
+                    {
+                        bfi = afi.CopyTo(destinationPath, true);
+                        if (this.FileCreated != null)
+                            this.FileCreated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
                     }
                 }
                 else
-                {
-                    bfi = afi.CopyTo(Path.Combine(B.FullName, afi.Name), true);
-                    if (this.FileCreated != null)
-                        this.FileCreated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
-                }
+                    if (this.FileDeclined != null)
+                        this.FileDeclined(this, new SyncEventArgs(afi.FullName, destinationPath));
                 Application.DoEvents();
             }
 

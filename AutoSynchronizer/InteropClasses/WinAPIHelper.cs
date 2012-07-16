@@ -99,6 +99,8 @@ namespace AutoSynchronizer
         const UInt32 SWP_NOSENDCHANGING = 0x0400;  /* Don't send WM_WINDOWPOSCHANGING */
 
         public const UInt32 TOPMOST_FLAGS = SWP_NOMOVE | SWP_NOSIZE;
+
+        public const int MAX_PATH = 260;
         #endregion
 
         #region API imports
