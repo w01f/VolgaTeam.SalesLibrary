@@ -81,6 +81,8 @@ namespace SalesDepot.PresentationClasses.Viewers
         #region IFileViewer Methods
         public void ReleaseResources()
         {
+            axWindowsMediaPlayer.Ctlcontrols.stop();
+            axWindowsMediaPlayer.close();
         }
 
         public void Open()

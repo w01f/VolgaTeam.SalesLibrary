@@ -348,11 +348,11 @@ namespace SalesDepot.BusinessClasses
             {
                 AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
-                string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
+                string newFile = dialog.FileName;
                 File.Copy(link.LocalPath, newFile, true);
                 if (File.Exists(newFile))
                 {
-                    if (AppManager.Instance.ShowInfoQuestion(string.Format("The {0} file has been saved as\n{1}\nDo you want to open it?", new object[] { isCopy ? "copy of the" : string.Empty, link.RemotePath })) == DialogResult.Yes)
+                    if (AppManager.Instance.ShowInfoQuestion(string.Format("The {0} file has been saved as\n{1}\nDo you want to open it?", new object[] { isCopy ? "copy of the" : string.Empty, newFile })) == DialogResult.Yes)
                         OpenCopyOfFile(new FileInfo(newFile));
                 }
                 else

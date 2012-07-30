@@ -143,6 +143,7 @@ namespace SalesDepot.ToolForms.WallBin
 
         private void barLargeButtonItemExit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            _selectedFileViewer.ReleaseResources();
             this.Close();
         }
         #endregion
