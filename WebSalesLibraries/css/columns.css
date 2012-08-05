@@ -1,0 +1,117 @@
+#pageHeaderContainer
+{
+    display: table;    
+}
+
+#pageContentContainer
+{
+}
+
+.pageColumn{
+    width:330px;
+    float:left;
+    border:0px solid #fff;
+    margin-top:0px;
+    margin-left: -1px;
+    vertical-align: top;
+}
+
+.columnHeaderContainer{
+    display: table-cell;    
+    vertical-align: middle;
+}
+
+.columnWidget{
+    vertical-align: middle;
+}
+
+.columnHeader{
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+
+.folderBody{
+    margin-top:-1px;
+    border-width:1px;
+    border-style: solid;
+    min-height:80px;
+}
+
+.folderHeaderContainer{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.folderWidget{
+    vertical-align: middle;
+}
+
+.folderHeader{
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+.folderLinksScrollArea{
+    min-height:160px;
+    overflow-x:auto;
+}
+
+.folderLinksContainer{
+    margin: 5px;
+}
+
+.linkContainer{
+    vertical-align: middle;
+    margin-bottom: 9px;
+    min-height: 26px;
+    width: 100%;
+}
+
+.linkText {
+    font-size: 12pt;
+    white-space: nowrap;
+    line-height: 26px;
+}
+
+.linkLineBreak {
+    white-space: nowrap;
+}
+
+.linkNote{
+    font-weight: bold;
+}
+
+.widget {
+    padding-left: 32px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+.bannerContainer{
+    display: table;
+}
+
+.bannerImage{
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.bannerText,.bannerTextLink{
+    vertical-align: middle;
+    display: table-cell;
+    padding-left: 5px;
+}
+
+.bannerTextLink{
+    white-space: nowrap;
+}
+
+.viewDialogContent{
+    display: none;
+}
+
+.clickable
+{
+    cursor: pointer;
+}

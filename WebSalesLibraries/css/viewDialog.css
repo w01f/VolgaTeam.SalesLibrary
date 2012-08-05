@@ -1,0 +1,59 @@
+.viewDialogBody 
+{ 
+}
+
+.viewDialogTitle
+{ 
+}
+
+.viewDialogLinkName
+{ 
+    text-align: left;
+    font-family: 'Arial';
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.viewDialogDescription
+{ 
+    text-align: left;
+    font-family: 'Arial';
+    font-size: 12pt;
+    color: #C0C0C0;
+    font-weight: normal;
+}
+
+.viewDialogFormatList
+{ 
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.viewDialogFormatListRow
+{ 
+    display: table-cell;
+    white-space:nowrap;
+}
+
+.viewDialogFormatItem
+{ 
+    display:inline;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.viewDialogFormatImage
+{ 
+    height: 96px;
+    width: 96px;
+    border: none;
+    cursor: pointer;
+}
+
+.viewDialogFormatServiceData
+{ 
+    display: none;
+}
+
