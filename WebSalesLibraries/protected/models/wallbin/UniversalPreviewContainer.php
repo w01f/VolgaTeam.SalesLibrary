@@ -8,6 +8,9 @@ class UniversalPreviewContainer
     public $videoLinks;
     public $oldOfficeFormatLinks;
     public $newOfficeFormatLinks;
+    public $thumbsLinks;
+    public $thumbsWidth;
+    public $thumbsHeight;
     public function __construct($libraryLink)
     {
         $this->parent = $libraryLink;
@@ -53,22 +56,36 @@ class UniversalPreviewContainer
                                     case 'pptx':
                                         $this->newOfficeFormatLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . $file->getBasename();
                                         break;
+                                    case 'thumbs':
+                                        $this->thumbsLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . $file->getBasename();
+                                        if (!isset($this->thumbsWidth) && !isset($this->thumbsHeight))
+                                        {
+                                            $imageData = getimagesize($file->getPathname());
+                                            if (isset($imageData))
+                                            {
+                                                $this->thumbsWidth = $imageData[0];
+                                                $this->thumbsHeight = $imageData[1];
+                                            }
+                                        }
+                                        break;
                                 }
                             }
                     }
+                    if (isset($this->pngLinks))
+                        natsort($this->pngLinks);
+                    if (isset($this->pdfLinks))
+                        natsort($this->pdfLinks);
+                    if (isset($this->jpegLinks))
+                        natsort($this->jpegLinks);
+                    if (isset($this->videoLinks))
+                        natsort($this->videoLinks);
+                    if (isset($this->oldOfficeFormatLinks))
+                        natsort($this->oldOfficeFormatLinks);
+                    if (isset($this->newOfficeFormatLinks))
+                        natsort($this->newOfficeFormatLinks);
+                    if (isset($this->thumbsLinks))
+                        natsort($this->thumbsLinks);
                 }
-                if (isset($this->pngLinks))
-                    natsort($this->pngLinks);
-                if (isset($this->pdfLinks))
-                    natsort($this->pdfLinks);
-                if (isset($this->jpegLinks))
-                    natsort($this->jpegLinks);
-                if (isset($this->videoLinks))
-                    natsort($this->videoLinks);
-                if (isset($this->oldOfficeFormatLinks))
-                    natsort($this->oldOfficeFormatLinks);
-                if (isset($this->newOfficeFormatLinks))
-                    natsort($this->newOfficeFormatLinks);
             }
         }
     }

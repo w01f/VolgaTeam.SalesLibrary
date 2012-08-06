@@ -187,15 +187,18 @@
     
     var viewSelectedFormat = function()
     {
-        $.fancybox.close();
-        
-        var selectedFileType = $(this).find('.viewDialogFormatServiceDataFileType').html()
-        var selectedViewType = $(this).find('.viewDialogFormatServiceDataViewType').html()
-        var selectedLinks = $(this).find('.viewDialogFormatServiceDataLinks').html()
+        var selectedFileType = $(this).find('.viewDialogFormatServiceDataFileType').html();
+        var selectedViewType = $(this).find('.viewDialogFormatServiceDataViewType').html();
+        var selectedLinks = $(this).find('.viewDialogFormatServiceDataLinks').html();
+        var selectedThumbs = $(this).find('.viewDialogFormatServiceDataThumbs').html()
 
         if(selectedFileType != ''&& selectedViewType != '' && selectedLinks != '')
         {
             selectedLinks = $.parseJSON(selectedLinks);
+            selectedThumbs = $.parseJSON(selectedThumbs);
+            var thumbLinks = [];
+            for ( var item in selectedThumbs )
+                thumbLinks.push(selectedThumbs[item].href);
             switch(selectedFileType)
             {
                 case 'ppt':
@@ -211,6 +214,11 @@
                                         css : {
                                             'background-color' : '#eee'
                                         }
+                                    },
+                                    thumbs : {
+                                        height: selectedThumbs[0].height,
+                                        width: selectedThumbs[0].width,
+                                        source: thumbLinks
                                     }
                                 },
                                 openEffect  : 'none',
@@ -240,6 +248,8 @@
                         closeEffect	: 'none'            
                     });
                     break;
+                case 'mp4':
+                    break;                    
             }
         }
     }

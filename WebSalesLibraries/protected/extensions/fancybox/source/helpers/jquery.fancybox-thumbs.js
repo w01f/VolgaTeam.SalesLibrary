@@ -96,7 +96,8 @@
 
 					$(this).hide().appendTo(parent).fadeIn(300);
 
-				}).attr('src', thumbSource( F.group[ i ] ));
+                //}).attr('src', thumbSource( F.group[ i ] ));
+				}).attr('src', thumbSource[ i ]);
 			});
 
 			//Set initial width

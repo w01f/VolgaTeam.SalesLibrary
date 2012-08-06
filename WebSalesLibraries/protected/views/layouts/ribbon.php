@@ -4,12 +4,14 @@
         <?php
         $cs = Yii::app()->clientScript;
         $cs->registerCssFile(Yii::app()->baseUrl . '/protected/extensions/fancybox/source/jquery.fancybox.css');
+        $cs->registerCssFile(Yii::app()->baseUrl . '/protected/extensions/fancybox/source/helpers/jquery.fancybox-thumbs.css');
         $cs->registerCssFile(Yii::app()->baseUrl . '/css/ribbon.css');
         $cs->registerCssFile(Yii::app()->baseUrl . '/css/ajaxLoader.css');
         $cs->registerCoreScript('jquery');
         $cs->registerCoreScript('cookie');
         $cs->registerScriptFile(Yii::app()->baseUrl . '/protected/extensions/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->baseUrl . '/protected/extensions/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
+        $cs->registerScriptFile(Yii::app()->baseUrl . '/protected/extensions/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->baseUrl . '/js/ribbon.js', CClientScript::POS_HEAD);
         ?>
     </head>

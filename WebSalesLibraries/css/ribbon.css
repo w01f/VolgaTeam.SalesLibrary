@@ -410,7 +410,6 @@ body
     left: 0;
     overflow: hidden;
     display: none;
-    z-index: 8011;
     opacity: 0.8;
     background: #eee;
 }

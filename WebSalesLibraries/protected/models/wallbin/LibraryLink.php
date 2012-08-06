@@ -232,9 +232,10 @@ class LibraryLink
                             if (isset($this->universalPreview->pngLinks))
                             {
                                 $i = 1;
+                                $count = count($this->universalPreview->pngLinks);
                                 foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -243,9 +244,10 @@ class LibraryLink
                             if (isset($this->presentationPreview->links))
                             {
                                 $i = 1;
+                                $count = count($this->presentationPreview->links);
                                 foreach ($this->presentationPreview->links as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -255,9 +257,10 @@ class LibraryLink
                             if (isset($this->universalPreview->jpegLinks))
                             {
                                 $i = 1;
+                                $count = count($this->universalPreview->jpegLinks);
                                 foreach ($this->universalPreview->jpegLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -273,6 +276,12 @@ class LibraryLink
                                     $i++;
                                 }
                             }
+                        break;
+                    case 'thumbs':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
+                                foreach ($this->universalPreview->thumbsLinks as $link)
+                                    $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
                         break;
                 }
                 break;
@@ -287,9 +296,10 @@ class LibraryLink
                             if (isset($this->universalPreview->pngLinks))
                             {
                                 $i = 1;
+                                $count = count($this->universalPreview->pngLinks);
                                 foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -299,9 +309,10 @@ class LibraryLink
                             if (isset($this->universalPreview->jpegLinks))
                             {
                                 $i = 1;
+                                $count = count($this->universalPreview->jpegLinks);
                                 foreach ($this->universalPreview->jpegLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -317,6 +328,12 @@ class LibraryLink
                                     $i++;
                                 }
                             }
+                        break;
+                    case 'thumbs':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
+                                foreach ($this->universalPreview->thumbsLinks as $link)
+                                    $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
                         break;
                 }
                 break;
@@ -339,9 +356,10 @@ class LibraryLink
                             if (isset($this->universalPreview->pngLinks))
                             {
                                 $i = 1;
+                                $count = count($this->universalPreview->pngLinks);
                                 foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -351,12 +369,19 @@ class LibraryLink
                             if (isset($this->universalPreview->jpegLinks))
                             {
                                 $i = 1;
+                                $count = count($this->universalPreview->jpegLinks);
                                 foreach ($this->universalPreview->jpegLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
+                        break;
+                    case 'thumbs':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
+                                foreach ($this->universalPreview->thumbsLinks as $link)
+                                    $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
                         break;
                 }
                 break;
@@ -366,6 +391,10 @@ class LibraryLink
                 $viewSources[] = array('href' => $this->fileLink);
                 break;
             case 'mp4':
+                if (isset($this->universalPreview))
+                    if (isset($this->universalPreview->videoLinks))
+                        foreach ($this->universalPreview->videoLinks as $link)
+                            $viewSources[] = array('href' => $link);
                 break;
         }
         if (isset($viewSources))

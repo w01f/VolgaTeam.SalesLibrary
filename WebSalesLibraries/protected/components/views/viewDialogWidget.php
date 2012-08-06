@@ -93,6 +93,16 @@ echo CHtml::openTag('div', array(
                                     echo json_encode($viewLinks);
                                     echo CHtml::closeTag('div');
                                 }
+                                if ($format == 'png' || $format == 'jpeg')
+                                {
+                                    $thumbsLinks = $link->getViewSource('thumbs');
+                                    if (isset($thumbsLinks))
+                                    {
+                                        echo CHtml::openTag('div', array('class' => 'viewDialogFormatServiceDataThumbs'));
+                                        echo json_encode($thumbsLinks);
+                                        echo CHtml::closeTag('div');
+                                    }
+                                }
                             }
                             echo CHtml::closeTag('div'); //viewDialogFormatServiceData
                         }
