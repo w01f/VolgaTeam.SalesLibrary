@@ -12,7 +12,8 @@ namespace AutoSynchronizer.ConfigurationClasses
         public const string StorageFileName = @"SalesDepotCache.xml";
         public const string StyleFileName = @"SalesDepotStyle.xml";
         public const string WholeDriveFilesStorage = @"Primary Root";
-        public const string PreviewContainersRootFolderName = @"!QV";
+        public const string RegularPreviewContainersRootFolderName = @"!QV";
+        public const string FtpPreviewContainersRootFolderName = @"!WV";
         public const string OldPreviewFolderPrefix = @"!PNG_";
         public const string LibraryLogoFolder = @"!SD-Graphics";
         public const string OvernightsCalendarRootFolderName = @"!OC";
@@ -85,7 +86,8 @@ namespace AutoSynchronizer.ConfigurationClasses
             this.HiddenFolders.Add(LibraryLogoFolder);
             this.HiddenFolders.Add(OldPreviewFolderPrefix);
             this.HiddenFolders.Add("!Old");
-            this.HiddenFolders.Add(PreviewContainersRootFolderName);
+            this.HiddenFolders.Add(RegularPreviewContainersRootFolderName);
+            this.HiddenFolders.Add(FtpPreviewContainersRootFolderName);
             this.HiddenFolders.Add(OvernightsCalendarRootFolderName);
         }
 

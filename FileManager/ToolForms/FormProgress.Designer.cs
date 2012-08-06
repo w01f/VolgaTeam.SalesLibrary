@@ -42,7 +42,7 @@
             this.laProgress.ForeColor = System.Drawing.Color.Black;
             this.laProgress.Location = new System.Drawing.Point(0, 0);
             this.laProgress.Name = "laProgress";
-            this.laProgress.Size = new System.Drawing.Size(305, 49);
+            this.laProgress.Size = new System.Drawing.Size(314, 49);
             this.laProgress.TabIndex = 2;
             this.laProgress.Text = "Loading data...";
             this.laProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -64,7 +64,7 @@
             this.circularProgress.ProgressBarType = DevComponents.DotNetBar.eCircularProgressType.Dot;
             this.circularProgress.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.circularProgress.ProgressTextFormat = "";
-            this.circularProgress.Size = new System.Drawing.Size(305, 39);
+            this.circularProgress.Size = new System.Drawing.Size(314, 39);
             this.circularProgress.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
             this.circularProgress.TabIndex = 3;
             // 
@@ -78,7 +78,7 @@
             this.panelEx.Location = new System.Drawing.Point(2, 2);
             this.panelEx.Name = "panelEx";
             this.panelEx.Padding = new System.Windows.Forms.Padding(0, 0, 0, 10);
-            this.panelEx.Size = new System.Drawing.Size(305, 98);
+            this.panelEx.Size = new System.Drawing.Size(314, 98);
             this.panelEx.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx.Style.BackColor1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.panelEx.Style.BackColor2.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2;
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(309, 102);
+            this.ClientSize = new System.Drawing.Size(318, 102);
             this.ControlBox = false;
             this.Controls.Add(this.panelEx);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

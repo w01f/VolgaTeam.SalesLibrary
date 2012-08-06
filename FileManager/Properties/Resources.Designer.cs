@@ -333,6 +333,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap SyncFtp {
+            get {
+                object obj = ResourceManager.GetObject("SyncFtp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap SyncSettings {
             get {
                 object obj = ResourceManager.GetObject("SyncSettings", resourceCulture);

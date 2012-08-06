@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace FileManager.TabPages
 {
@@ -607,7 +608,7 @@ namespace FileManager.TabPages
                     form.TopMost = true;
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        BusinessClasses.LibraryManager.Instance.SynchronizeLibraries();
+                        BusinessClasses.LibraryManager.Instance.RegularSyncWrapper();
                     }));
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
                         form.Show();
@@ -615,7 +616,48 @@ namespace FileManager.TabPages
                         FormMain.Instance.WindowState = FormWindowState.Minimized;
                     thread.Start();
                     while (thread.IsAlive)
+                    {
+                        Thread.Sleep(100);
                         System.Windows.Forms.Application.DoEvents();
+                    }
+                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
+                        form.Close();
+                    FormMain.Instance.ribbonControl.Enabled = true;
+                    pnMain.BringToFront();
+                    System.Windows.Forms.Application.DoEvents();
+                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync)
+                        Application.Exit();
+                }
+            }
+        }
+
+        public void btFtp_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                {
+                    FormMain.Instance.ribbonControl.Enabled = false;
+                    pnEmpty.BringToFront();
+                    System.Windows.Forms.Application.DoEvents();
+                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                    form.laProgress.Text = "Updating Library for the iPad..." + Environment.NewLine + "This might take a few minutes...";
+                    form.TopMost = true;
+                    Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                    {
+                        BusinessClasses.LibraryManager.Instance.FtpSyncWrapper();
+                    }));
+                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
+                        form.Show();
+                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.MinimizeOnSync)
+                        FormMain.Instance.WindowState = FormWindowState.Minimized;
+                    thread.Start();
+                    while (thread.IsAlive)
+                    {
+                        Thread.Sleep(100);
+                        System.Windows.Forms.Application.DoEvents();
+                    }
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
                         form.Close();
                     FormMain.Instance.ribbonControl.Enabled = true;

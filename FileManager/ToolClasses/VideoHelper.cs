@@ -1,0 +1,95 @@
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Threading;
+
+namespace FileManager.ToolClasses
+{
+    class VideoHelper
+    {
+        private static VideoHelper _instance;
+
+        public static VideoHelper Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new VideoHelper();
+                return _instance;
+            }
+        }
+
+        private VideoHelper()
+        {
+        }
+
+        public void ExportVideo(string sourceFilePath, string destinationPath)
+        {
+            bool allowToExit = false;
+            string analizerPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffprobe.exe");
+            string converterPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffmpeg.exe");
+            if (File.Exists(sourceFilePath) && File.Exists(analizerPath) && File.Exists(converterPath))
+            {
+                Process videoAnalyzer = new Process()
+                {
+                    StartInfo = new ProcessStartInfo(analizerPath, String.Format("\"{0}\"", sourceFilePath)) { UseShellExecute = false, RedirectStandardError = true, RedirectStandardOutput = true, CreateNoWindow = true },
+                    EnableRaisingEvents = true
+                };
+                videoAnalyzer.Exited += new EventHandler((analyzerSender, analyzerE) =>
+                {
+                    var b = videoAnalyzer.StandardOutput.ReadToEnd();
+
+                    if (!b.Contains("bitrate:"))
+                        b = videoAnalyzer.StandardError.ReadToEnd();
+
+                    int kBitRate = ExtractBitrate(b, 8000);
+
+                    Process videoConverter = new Process()
+                    {
+                        StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -xerror -b {1}k \"{2}\"", sourceFilePath,
+                            Math.Ceiling(kBitRate * 1.5), Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
+                        {
+                            UseShellExecute = false,
+                            RedirectStandardError = false,
+                            RedirectStandardOutput = false,
+                            CreateNoWindow = true,
+                            //UseShellExecute = true,
+                            //RedirectStandardError = false,
+                            //RedirectStandardOutput = false,
+                            //CreateNoWindow = false
+                        },
+                        EnableRaisingEvents = true
+                    };
+                    videoConverter.Exited += new EventHandler((converterSender, converterE) =>
+                    {
+                        allowToExit = true;
+                    });
+                    videoConverter.Start();
+                });
+                videoAnalyzer.Start();
+                while (!allowToExit)
+                    Thread.Sleep(2000);
+            }
+        }
+
+        private int ExtractBitrate(string b, int defaultValue)
+        {
+            try
+            {
+                var r = new Regex(@"bitrate: (?<bitrate>\d{1,10}) kb/s", RegexOptions.IgnoreCase);
+
+                if (r.IsMatch(b))
+                {
+                    int bitrate;
+                    if (Int32.TryParse(r.Match(b).Groups["bitrate"].Value, out bitrate))
+                        return bitrate;
+                }
+            }
+            catch
+            {
+            }
+            return defaultValue;
+        }
+    }
+}

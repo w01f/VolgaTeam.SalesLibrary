@@ -65,11 +65,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\AutoWidget.cs" />
+    <Compile Include="BusinessClasses\Banner.cs" />
+    <Compile Include="BusinessClasses\ColumnTitle.cs" />
+    <Compile Include="BusinessClasses\CommonObjects.cs" />
+    <Compile Include="BusinessClasses\ExpirationDateOptions.cs" />
+    <Compile Include="BusinessClasses\FileLink.cs" />
+    <Compile Include="BusinessClasses\FolderLink.cs" />
     <Compile Include="BusinessClasses\GrabCacheManager.cs" />
+    <Compile Include="BusinessClasses\Library.cs" />
+    <Compile Include="BusinessClasses\LibraryFile.cs" />
+    <Compile Include="BusinessClasses\LibraryFolder.cs" />
     <Compile Include="BusinessClasses\LibraryManager.cs" />
-    <Compile Include="BusinessClasses\LibraryObjects.cs" />
+    <Compile Include="BusinessClasses\LibraryPage.cs" />
+    <Compile Include="BusinessClasses\LineBreak.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
+    <Compile Include="BusinessClasses\PresentationProperties.cs" />
+    <Compile Include="BusinessClasses\PreviewContainer.cs" />
+    <Compile Include="BusinessClasses\PreviewGenerator.cs" />
+    <Compile Include="BusinessClasses\SearchTags.cs" />
     <Compile Include="BusinessClasses\SyncObjects.cs" />
+    <Compile Include="BusinessClasses\SyncScheduleRecord.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="FormHidden.cs">
       <SubType>Form</SubType>

@@ -42,6 +42,7 @@ namespace FileManager
             buttonItemHomeProperties.Click += new EventHandler(this.TabHome.buttonItemHomeProperties_Click);
             buttonItemHomeSave.Click += new EventHandler(this.TabHome.btSave_Click);
             buttonItemHomeSync.Click += new EventHandler(this.TabHome.btSync_Click);
+            buttonItemHomeFtp.Click += new EventHandler(this.TabHome.btFtp_Click);
             buttonItemHomeExit.Click += new EventHandler(this.TabHome.btExit_Click);
 
             buttonItemProgramManagerSyncDisabled.Click += new EventHandler(this.TabHome.buttonItemProgramManagerSync_Click);

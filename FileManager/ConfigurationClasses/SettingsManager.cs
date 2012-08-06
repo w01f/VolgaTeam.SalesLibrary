@@ -12,7 +12,8 @@ namespace FileManager.ConfigurationClasses
         public const string StorageFileName = @"SalesDepotCache.xml";
         public const string StyleFileName = @"SalesDepotStyle.xml";
         public const string WholeDriveFilesStorage = @"Primary Root";
-        public const string PreviewContainersRootFolderName = @"!QV";
+        public const string RegularPreviewContainersRootFolderName = @"!QV";
+        public const string FtpPreviewContainersRootFolderName = @"!WV";
         public const string OldPreviewFolderPrefix = @"!PNG_";
         public const string LibraryLogoFolder = @"!SD-Graphics";
         public const string OvernightsCalendarRootFolderName = @"!OC";
@@ -24,6 +25,7 @@ namespace FileManager.ConfigurationClasses
 
         private string _settingsFilePath = string.Empty;
         private string _autoSyncSettingsPath = string.Empty;
+        public string ApplicationRootsPath { get; private set; }
         public string ArhivePath { get; set; }
         public string LogRootPath { get; set; }
         private string _syncSettingsFilePath = string.Empty;
@@ -33,10 +35,12 @@ namespace FileManager.ConfigurationClasses
         public string AdSpecsSamplesRootPath { get; set; }
         public string ScreenshotLibraryRootPath { get; set; }
         public string AutoFMSyncShorcutPath { get; set; }
+        public string VideoConverterPath { get; set; }
 
         #region FM Settings
         public string BackupPath { get; set; }
         public string NetworkPath { get; set; }
+        public string FtpPath { get; set; }
         public bool UseDirectAccessToFiles { get; set; }
         public int DirectAccessFileAgeLimit { get; set; }
         public string SelectedLibrary { get; set; }
@@ -63,6 +67,8 @@ namespace FileManager.ConfigurationClasses
 
         private SettingsManager()
         {
+            this.ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
+
             this.DestinationPathLength = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries\Primary Root", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles)).Length;
 
             string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\file_manager", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
@@ -87,10 +93,12 @@ namespace FileManager.ConfigurationClasses
             this.ScreenshotLibraryRootPath = string.Empty;
 
             this.AutoFMSyncShorcutPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Startup), "AutoFMSync.exe - Shortcut.lnk");
+            this.VideoConverterPath = Path.Combine(this.ApplicationRootsPath, "video converter");
 
             #region FM Settings
             this.BackupPath = string.Empty;
             this.NetworkPath = string.Empty;
+            this.FtpPath = string.Empty;
             this.UseDirectAccessToFiles = false;
             this.SelectedLibrary = string.Empty;
             this.SelectedPage = string.Empty;
@@ -103,7 +111,8 @@ namespace FileManager.ConfigurationClasses
 
             this.HiddenObjects = new List<string>();
             this.HiddenObjects.Add("!Old");
-            this.HiddenObjects.Add(PreviewContainersRootFolderName);
+            this.HiddenObjects.Add(RegularPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(FtpPreviewContainersRootFolderName);
             this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
             this.HiddenObjects.Add(ProgramManagerRootFolderName);
             this.HiddenObjects.Add(ExtraFoldersRootFolderName);
@@ -128,6 +137,9 @@ namespace FileManager.ConfigurationClasses
                 node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
                 if (node != null)
                     this.NetworkPath = node.InnerText;
+                node = document.SelectSingleNode(@"/LocalSettings/FtpPath");
+                if (node != null)
+                    this.FtpPath = node.InnerText;
                 node = document.SelectSingleNode(@"/LocalSettings/UseDirectAccessToFiles");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
@@ -180,6 +192,7 @@ namespace FileManager.ConfigurationClasses
             #region FM Settings
             xml.AppendLine(@"<BackupPath>" + this.BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
             xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
+            xml.AppendLine(@"<FtpPath>" + this.FtpPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FtpPath>");
             xml.AppendLine(@"<UseDirectAccessToFiles>" + this.UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
             xml.AppendLine(@"<DirectAccessFileAgeLimit>" + this.DirectAccessFileAgeLimit.ToString() + @"</DirectAccessFileAgeLimit>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");

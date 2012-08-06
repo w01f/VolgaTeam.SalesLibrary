@@ -863,8 +863,11 @@ namespace FileManager.PresentationClasses.WallBin
                         {
                             if (file.PreviewContainer == null)
                                 file.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(file);
-                            file.PreviewContainer.ClearPreviewImages();
+                            file.PreviewContainer.ClearContent();
                         }
+
+                        if (file.UniversalPreviewContainer != null)
+                            file.UniversalPreviewContainer.ClearContent();
                     }
                     grFiles.Rows.Remove(grFiles.SelectedRows[0]);
                 }
@@ -1265,11 +1268,12 @@ namespace FileManager.PresentationClasses.WallBin
 
                 BusinessClasses.RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
                 libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.File.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
-                
+
                 libraryFile.SetProperties();
                 libraryFile.InitBannerProperties();
 
                 int pathLength = libraryFile.RelativePath.Length;
+
                 switch (libraryFile.Type)
                 {
                     case BusinessClasses.FileTypes.BuggyPresentation:
@@ -1286,8 +1290,6 @@ namespace FileManager.PresentationClasses.WallBin
                                 if (InteropClasses.PowerPointHelper.Instance.Connect())
                                 {
                                     libraryFile.GetPresentationPrperties();
-                                    if (libraryFile.PreviewContainer == null)
-                                        libraryFile.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(libraryFile);
                                     InteropClasses.PowerPointHelper.Instance.Disconnect();
                                 }
                             }));
@@ -1302,8 +1304,24 @@ namespace FileManager.PresentationClasses.WallBin
                             form.Close();
                             FormMain.Instance.ribbonControl.Enabled = true;
                         }
+                        #region Compatibility with Desktop Sales Depot
+                        if (libraryFile.PreviewContainer == null)
+                            libraryFile.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(libraryFile);
+                        #endregion
+                        if (libraryFile.UniversalPreviewContainer == null)
+                            libraryFile.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(libraryFile);
+                        break;
+                    case BusinessClasses.FileTypes.Other:
+                    case BusinessClasses.FileTypes.MediaPlayerVideo:
+                    case BusinessClasses.FileTypes.QuickTimeVideo:
+                        if (libraryFile.UniversalPreviewContainer == null)
+                            libraryFile.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(libraryFile);
                         break;
                 }
+
+                if (libraryFile.UniversalPreviewContainer == null)
+                    libraryFile.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(libraryFile);
+
 
                 if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < InteropClasses.WinAPIHelper.MAX_PATH)
                 {
@@ -1352,7 +1370,7 @@ namespace FileManager.PresentationClasses.WallBin
 
                 BusinessClasses.RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(folder.RootId);
                 libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.Folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
-                
+
                 libraryFile.Type = BusinessClasses.FileTypes.Folder;
                 libraryFile.InitBannerProperties();
 

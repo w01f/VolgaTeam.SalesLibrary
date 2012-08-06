@@ -55,6 +55,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.20524, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86" />
     <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -96,6 +97,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\AutoWidget.cs" />
+    <Compile Include="BusinessClasses\Banner.cs" />
+    <Compile Include="BusinessClasses\ColumnTitle.cs" />
+    <Compile Include="BusinessClasses\ExpirationDateOptions.cs" />
+    <Compile Include="BusinessClasses\FileLink.cs" />
+    <Compile Include="BusinessClasses\FolderLink.cs" />
+    <Compile Include="BusinessClasses\Library.cs" />
+    <Compile Include="BusinessClasses\LibraryFile.cs" />
+    <Compile Include="BusinessClasses\LibraryFolder.cs" />
+    <Compile Include="BusinessClasses\LibraryPage.cs" />
+    <Compile Include="BusinessClasses\LineBreak.cs" />
+    <Compile Include="BusinessClasses\PresentationProperties.cs" />
+    <Compile Include="BusinessClasses\PreviewContainer.cs" />
+    <Compile Include="BusinessClasses\PreviewGenerator.cs" />
+    <Compile Include="BusinessClasses\SearchTags.cs" />
+    <Compile Include="BusinessClasses\SyncScheduleRecord.cs" />
+    <Compile Include="InteropClasses\WordHelper.cs" />
+    <Compile Include="ToolClasses\PdfHelper.cs" />
+    <Compile Include="ToolClasses\VideoHelper.cs" />
     <Compile Include="ToolForms\Settings\FormAutoSyncEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,7 +347,7 @@
       <DependentUpon>FolderBoxControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\RichTextBoxPrinter.cs" />
-    <Compile Include="BusinessClasses\LibraryObjects.cs" />
+    <Compile Include="BusinessClasses\CommonObjects.cs" />
     <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="ToolForms\WallBin\FormSelectWidget.cs">
       <SubType>Form</SubType>
@@ -484,6 +504,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\SyncFtp.png" />
+    <Content Include="ToolClasses\PdfRasterizer\ceTe.DynamicPDF.Rasterizer.40.x86.dll" />
     <None Include="Resources\DeleteButton.png" />
     <None Include="Resources\FileGrabber.png" />
     <None Include="Resources\EmailGrabber.png" />
@@ -580,6 +602,15 @@
       <Guid>{91493440-5A91-11CF-8700-00AA0060263B}</Guid>
       <VersionMajor>2</VersionMajor>
       <VersionMinor>10</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>5</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>

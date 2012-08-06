@@ -38,6 +38,20 @@ namespace FileManager.ToolForms.Settings
             }
         }
 
+        private void buttonEditFtpSyncFolder_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            using (FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                if (buttonEditFtpSyncFolder.EditValue != null)
+                    dialog.SelectedPath = buttonEditFtpSyncFolder.EditValue.ToString();
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    if (System.IO.Directory.Exists(dialog.SelectedPath))
+                        buttonEditFtpSyncFolder.EditValue = dialog.SelectedPath;
+                }
+            }
+        }
+
         private void FormApplicationSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = false;
@@ -64,9 +78,20 @@ namespace FileManager.ToolForms.Settings
                     AppManager.Instance.ShowWarning("Network Sync Folder is Incorrect");
                     return;
                 }
+                if (buttonEditFtpSyncFolder.EditValue == null)
+                {
+                    AppManager.Instance.ShowWarning("FTP Sync Folder is Incorrect");
+                    return;
+                }
+                else if (!System.IO.Directory.Exists(buttonEditFtpSyncFolder.EditValue.ToString()))
+                {
+                    AppManager.Instance.ShowWarning("FTP Sync Folder is Incorrect");
+                    return;
+                }
                 e.Cancel = false;
                 ConfigurationClasses.SettingsManager.Instance.BackupPath = buttonEditBackupFolder.EditValue.ToString();
                 ConfigurationClasses.SettingsManager.Instance.NetworkPath = buttonEditNetworkSyncFolder.EditValue != null ? buttonEditNetworkSyncFolder.EditValue.ToString() : string.Empty;
+                ConfigurationClasses.SettingsManager.Instance.FtpPath = buttonEditFtpSyncFolder.EditValue != null ? buttonEditFtpSyncFolder.EditValue.ToString() : string.Empty;
                 ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles = checkEditDirectAccess.Checked;
                 ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit = (int)spinEditFileAgeLimil.Value;
                 ConfigurationClasses.SettingsManager.Instance.Save();
@@ -77,6 +102,7 @@ namespace FileManager.ToolForms.Settings
         {
             buttonEditBackupFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.BackupPath;
             buttonEditNetworkSyncFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.NetworkPath;
+            buttonEditFtpSyncFolder.EditValue = ConfigurationClasses.SettingsManager.Instance.FtpPath;
             checkEditDirectAccess.Checked = ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles;
             checkEditFileAgeLimit.Checked = ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit > 0;
             spinEditFileAgeLimil.Value = ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit;

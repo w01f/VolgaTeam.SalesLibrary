@@ -173,7 +173,7 @@ namespace AutoSynchronizer.BusinessClasses
                                                 {
                                                     filesWhiteList.Add(file.FullPath);
                                                     if (file.PreviewContainer != null)
-                                                        AddFolderForSync(new DirectoryInfo(file.PreviewContainer.PreviewStorageFolder), filesWhiteList);
+                                                        AddFolderForSync(new DirectoryInfo(file.PreviewContainer.ContainerPath), filesWhiteList);
                                                 }
                                             }
                                             break;
