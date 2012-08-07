@@ -193,7 +193,8 @@ class LibraryLink
                 case 'ogv':
                 case 'ogm':
                 case 'ogx':
-                    $this->originalFormat = 'mp4';
+                    $this->originalFormat = 'video';
+                    $this->availableFormats[] = 'video';
                     $this->availableFormats[] = 'mp4';
                     break;
                 case 'png':
@@ -390,11 +391,19 @@ class LibraryLink
             case 'url':
                 $viewSources[] = array('href' => $this->fileLink);
                 break;
-            case 'mp4':
-                if (isset($this->universalPreview))
-                    if (isset($this->universalPreview->videoLinks))
-                        foreach ($this->universalPreview->videoLinks as $link)
-                            $viewSources[] = array('href' => $link);
+            case 'video':
+                switch ($format)
+                {
+                    case 'video':
+                        $viewSources[] = array('href' => $this->fileLink);
+                        break;
+                    case 'mp4':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->videoLinks))
+                                foreach ($this->universalPreview->videoLinks as $link)
+                                    $viewSources[] = array('href' => $link);
+                        break;
+                }
                 break;
         }
         if (isset($viewSources))
