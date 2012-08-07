@@ -1,7 +1,4 @@
 <?php
-$cs = Yii::app()->clientScript;
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/columns.css');
-
 echo CHtml::openTag('div', array('id' => 'pageHeaderContainer'));
 for ($i = 0; $i < 3; $i++)
 {

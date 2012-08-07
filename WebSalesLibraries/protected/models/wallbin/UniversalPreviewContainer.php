@@ -43,10 +43,10 @@ class UniversalPreviewContainer
                                         $this->jpegLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . $file->getBasename();
                                         break;
                                     case 'pdf':
-                                        $this->pdfLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . $file->getBasename();
+                                        $this->pdfLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . str_replace('&', '%26', $file->getBasename());
                                         break;
                                     case 'video':
-                                        $this->videoLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . $file->getBasename();
+                                        $this->videoLinks[] = $this->parent->parent->parent->parent->universalPreviewContainerLink . '/' . $node->nodeValue . '/' . $previewFolderName . '/' . str_replace('&', '%26', $file->getBasename());
                                         break;
                                     case 'ppt':
                                     case 'doc':

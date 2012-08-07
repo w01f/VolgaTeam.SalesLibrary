@@ -20,10 +20,12 @@
                 closeEffect	: 'none'            
             });
             $(this).find('.viewDialogContent').html(viewDialogContent);
-            $(this).find('.viewDialogFormatItem').on('click',viewSelectedFormat);        
+            $(this).find('.viewDialogFormatItem').on('click',$.viewSelectedFormat);        
         }
         else
-            viewSelectedFormat.call(formatItems);
+        {
+            $.viewSelectedFormat.call(formatItems);
+        }
     }
     
     $.viewSelectedFormat = function()
@@ -32,6 +34,8 @@
         var selectedViewType = $(this).find('.viewDialogFormatServiceDataViewType').html();
         var selectedLinks = $(this).find('.viewDialogFormatServiceDataLinks').html();
         var selectedThumbs = $(this).find('.viewDialogFormatServiceDataThumbs').html()
+
+        $.fancybox.close();
 
         if(selectedFileType != ''&& selectedViewType != '' && selectedLinks != '')
         {
@@ -89,8 +93,43 @@
                         closeEffect	: 'none'            
                     });
                     break;
-                case 'mp4':
-                    break;                    
+                case 'mp4':                    
+                case 'video':
+                    switch(selectedViewType)
+                    {
+                        case 'video':
+                        case 'tab':                            
+                            window.open(selectedLinks[0].href);                            
+                            break;                        
+                        case 'mp4':
+                            VideoJS.players = {};
+                            $.fancybox({
+                                content: $('<video id="videoPlayer" class="video-js vjs-default-skin" width="640" height="480"></video>'),
+                                helpers: {
+                                    overlay : {
+                                        css : {
+                                            'background-color' : '#eee'
+                                        }
+                                    }
+                                },
+                                openEffect  : 'none',
+                                closeEffect	: 'none',
+                                afterClose: function(){
+                                    $('#videoPlayer').remove();
+                                }
+                            });
+                            var myPlayer = _V_("videoPlayer",{
+                                controls: true, 
+                                autoplay: true, 
+                                preload: 'auto'
+                            });
+                            myPlayer.src({
+                                type: "video/mp4", 
+                                src: selectedLinks[0].href
+                            });
+                            break;                    
+                    }
+                    break;
             }
         }
     }

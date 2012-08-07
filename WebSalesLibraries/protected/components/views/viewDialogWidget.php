@@ -68,10 +68,13 @@ echo CHtml::openTag('div', array(
                             break;
                         case 'video':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/wmv.png';
-                            break;                        
+                            break;
                         case 'mp4':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/mp4.png';
                             break;
+                        case 'tab':
+                            $imageSource = Yii::app()->baseUrl . '/images/fileFormats/tab.png';
+                            break;                        
                         case 'url':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/url.png';
                             break;
@@ -89,29 +92,22 @@ echo CHtml::openTag('div', array(
                                 echo CHtml::openTag('div', array('class' => 'viewDialogFormatServiceDataViewType'));
                                 echo $format;
                                 echo CHtml::closeTag('div');
-                                if ($format != 'mp4')
+                                $viewLinks = $link->getViewSource($format);
+                                if (isset($viewLinks))
                                 {
-                                    $viewLinks = $link->getViewSource($format);
-                                    if (isset($viewLinks))
+                                    echo CHtml::openTag('div', array('class' => 'viewDialogFormatServiceDataLinks'));
+                                    echo json_encode($viewLinks);
+                                    echo CHtml::closeTag('div');
+                                }
+                                if ($format == 'png' || $format == 'jpeg')
+                                {
+                                    $thumbsLinks = $link->getViewSource('thumbs');
+                                    if (isset($thumbsLinks))
                                     {
-                                        echo CHtml::openTag('div', array('class' => 'viewDialogFormatServiceDataLinks'));
-                                        echo json_encode($viewLinks);
+                                        echo CHtml::openTag('div', array('class' => 'viewDialogFormatServiceDataThumbs'));
+                                        echo json_encode($thumbsLinks);
                                         echo CHtml::closeTag('div');
                                     }
-                                    if ($format == 'png' || $format == 'jpeg')
-                                    {
-                                        $thumbsLinks = $link->getViewSource('thumbs');
-                                        if (isset($thumbsLinks))
-                                        {
-                                            echo CHtml::openTag('div', array('class' => 'viewDialogFormatServiceDataThumbs'));
-                                            echo json_encode($thumbsLinks);
-                                            echo CHtml::closeTag('div');
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    
                                 }
                             }
                             echo CHtml::closeTag('div'); //viewDialogFormatServiceData

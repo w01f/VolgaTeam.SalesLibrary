@@ -187,7 +187,6 @@ class LibraryLink
                 case 'mpg':
                 case 'asf':
                 case 'mov':
-                case 'mp4':
                 case 'm4v':
                 case 'flv':
                 case 'ogv':
@@ -196,7 +195,13 @@ class LibraryLink
                     $this->originalFormat = 'video';
                     $this->availableFormats[] = 'video';
                     $this->availableFormats[] = 'mp4';
+                    $this->availableFormats[] = 'tab';
                     break;
+                case 'mp4':
+                    $this->originalFormat = 'mp4';
+                    $this->availableFormats[] = 'mp4';
+                    $this->availableFormats[] = 'tab';
+                    break;                
                 case 'png':
                     $this->originalFormat = 'png';
                     $this->availableFormats[] = 'png';
@@ -398,6 +403,7 @@ class LibraryLink
                         $viewSources[] = array('href' => $this->fileLink);
                         break;
                     case 'mp4':
+                    case 'tab':                        
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->videoLinks))
                                 foreach ($this->universalPreview->videoLinks as $link)
@@ -405,6 +411,9 @@ class LibraryLink
                         break;
                 }
                 break;
+            case 'mp4':
+                $viewSources[] = array('href' => $this->fileLink);
+                break;                
         }
         if (isset($viewSources))
             return $viewSources;
