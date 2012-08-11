@@ -99,6 +99,7 @@
                     {
                         case 'video':
                         case 'tab':                            
+                        case 'ogv':
                             window.open(selectedLinks[0].href);                            
                             break;                        
                         case 'mp4':

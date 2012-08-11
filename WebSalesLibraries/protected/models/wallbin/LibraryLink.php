@@ -195,6 +195,7 @@ class LibraryLink
                     $this->originalFormat = 'video';
                     $this->availableFormats[] = 'video';
                     $this->availableFormats[] = 'mp4';
+                    $this->availableFormats[] = 'ogv';
                     $this->availableFormats[] = 'tab';
                     break;
                 case 'mp4':
@@ -405,10 +406,16 @@ class LibraryLink
                     case 'mp4':
                     case 'tab':                        
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->videoLinks))
-                                foreach ($this->universalPreview->videoLinks as $link)
+                            if (isset($this->universalPreview->mp4Links))
+                                foreach ($this->universalPreview->mp4Links as $link)
                                     $viewSources[] = array('href' => $link);
                         break;
+                    case 'ogv':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->ogvLinks))
+                                foreach ($this->universalPreview->ogvLinks as $link)
+                                    $viewSources[] = array('href' => $link);
+                        break;                        
                 }
                 break;
             case 'mp4':

@@ -72,6 +72,9 @@ echo CHtml::openTag('div', array(
                         case 'mp4':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/mp4.png';
                             break;
+                        case 'ogv':
+                            $imageSource = Yii::app()->baseUrl . '/images/fileFormats/ogv.png';
+                            break;                        
                         case 'tab':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/tab.png';
                             break;                        
