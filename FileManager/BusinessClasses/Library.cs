@@ -55,6 +55,8 @@ namespace FileManager.BusinessClasses
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
 
+        public IPadManager IPadManager { get; private set; }
+
         public RootFolder RootFolder
         {
             get
@@ -92,6 +94,7 @@ namespace FileManager.BusinessClasses
             #endregion
 
             this.OvernightsCalendar = new OvernightsCalendar(this);
+            this.IPadManager = new BusinessClasses.IPadManager(this);
 
             Init();
         }
@@ -317,6 +320,11 @@ namespace FileManager.BusinessClasses
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
                 if (node != null)
                     this.OvernightsCalendar.Deserialize(node);
+
+                node = document.SelectSingleNode(@"/Library/IPadManager");
+                if (node != null)
+                    this.IPadManager.Deserialize(node);
+
                 this.IsConfigured = true;
 
                 #region Program Manager Settings
@@ -391,6 +399,7 @@ namespace FileManager.BusinessClasses
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
+            xml.AppendLine(@"<IPadManager>" + this.IPadManager.Serialize() + @"</IPadManager>");
 
             #region Program Manager Settings
             xml.AppendLine(@"<EnableProgramManagerSync>" + this.EnableProgramManagerSync.ToString() + @"</EnableProgramManagerSync>");
@@ -420,7 +429,7 @@ namespace FileManager.BusinessClasses
             Archive();
         }
 
-        public void PrepareForFtpSynchronize()
+        public void PrepareForIPadSynchronize()
         {
             if (!this.UseDirectAccess)
                 GenerateExtendedPreviewFiles();
@@ -480,7 +489,22 @@ namespace FileManager.BusinessClasses
             foreach (LibraryPage page in this.Pages)
                 foreach (LibraryFolder folder in page.Folders)
                 {
-                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation || x.Type == FileTypes.Other || x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation || x.Type == FileTypes.Other))
+                    {
+                        if (file.UniversalPreviewContainer == null)
+                            file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
+                        file.UniversalPreviewContainer.UpdateContent();
+                    }
+                }
+            this.Save();
+        }
+
+        public void GenerateVideoPreviewFiles()
+        {
+            foreach (LibraryPage page in this.Pages)
+                foreach (LibraryFolder folder in page.Folders)
+                {
+                    foreach (LibraryFile file in folder.Files.Where(x =>x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
                     {
                         if (file.UniversalPreviewContainer == null)
                             file.UniversalPreviewContainer = new UniversalPreviewContainer(file);

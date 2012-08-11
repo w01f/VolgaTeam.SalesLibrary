@@ -24,7 +24,7 @@ namespace FileManager.ToolClasses
         {
         }
 
-        public void ExportVideo(string sourceFilePath, string destinationPath)
+        public void ExportMp4(string sourceFilePath, string destinationPath)
         {
             bool allowToExit = false;
             string analizerPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffprobe.exe");
@@ -73,6 +73,55 @@ namespace FileManager.ToolClasses
             }
         }
 
+        public void ExportOgv(string sourceFilePath, string destinationPath)
+        {
+            bool allowToExit = false;
+            string analizerPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffprobe.exe");
+            string converterPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffmpeg.exe");
+            if (File.Exists(sourceFilePath) && File.Exists(analizerPath) && File.Exists(converterPath))
+            {
+                Process videoAnalyzer = new Process()
+                {
+                    StartInfo = new ProcessStartInfo(analizerPath, String.Format("\"{0}\"", sourceFilePath)) { UseShellExecute = false, RedirectStandardError = true, RedirectStandardOutput = true, CreateNoWindow = true },
+                    EnableRaisingEvents = true
+                };
+                videoAnalyzer.Exited += new EventHandler((analyzerSender, analyzerE) =>
+                {
+                    var b = videoAnalyzer.StandardOutput.ReadToEnd();
+
+                    if (!b.Contains("bitrate:"))
+                        b = videoAnalyzer.StandardError.ReadToEnd();
+
+                    int kBitRate = ExtractBitrate(b, 8000);
+
+                    Process videoConverter = new Process()
+                    {
+                        StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -acodec libvorbis -xerror -b {1}k \"{2}\"", sourceFilePath,
+                            Math.Ceiling(kBitRate * 1.5), Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".ogv"))))
+                        {
+                            UseShellExecute = false,
+                            RedirectStandardError = false,
+                            RedirectStandardOutput = false,
+                            CreateNoWindow = true,
+                            //UseShellExecute = true,
+                            //RedirectStandardError = false,
+                            //RedirectStandardOutput = false,
+                            //CreateNoWindow = false
+                        },
+                        EnableRaisingEvents = true
+                    };
+                    videoConverter.Exited += new EventHandler((converterSender, converterE) =>
+                    {
+                        allowToExit = true;
+                    });
+                    videoConverter.Start();
+                });
+                videoAnalyzer.Start();
+                while (!allowToExit)
+                    Thread.Sleep(2000);
+            }
+        }
+
         private int ExtractBitrate(string b, int defaultValue)
         {
             try
@@ -90,6 +139,51 @@ namespace FileManager.ToolClasses
             {
             }
             return defaultValue;
+        }
+
+        public void OpenMediaPlayer(string filePath)
+        {
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "wmplayer.exe";
+                process.StartInfo.Arguments = string.Format("\"{0}\"", filePath);
+                process.Start();
+            }
+            catch
+            {
+                AppManager.Instance.ShowWarning("Couldn't open video file");
+            }
+        }
+
+        public void OpenQuickTime(string filePath)
+        {
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "QuickTimePlayer.exe";
+                process.StartInfo.Arguments = string.Format("\"{0}\"", filePath);
+                process.Start();
+            }
+            catch
+            {
+                AppManager.Instance.ShowWarning("Couldn't open video file");
+            }
+        }
+
+        public void OpenFirefox(string filePath)
+        {
+            try
+            {
+                Process process = new Process();
+                process.StartInfo.FileName = "firefox.exe";
+                process.StartInfo.Arguments = string.Format("file://{0}", filePath.Replace(" ", "%20").Replace("&", "%26"));
+                process.Start();
+            }
+            catch
+            {
+                AppManager.Instance.ShowWarning("Couldn't open video file");
+            }
         }
     }
 }

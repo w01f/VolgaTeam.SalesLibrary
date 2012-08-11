@@ -368,6 +368,8 @@ namespace FileManager.BusinessClasses
 
             if (this.BannerProperties == null)
                 InitBannerProperties();
+
+            SetProperties();
         }
 
         public void InitBannerProperties()
@@ -430,6 +432,9 @@ namespace FileManager.BusinessClasses
         {
             switch (this.Type)
             {
+                case FileTypes.BuggyPresentation:
+                case FileTypes.FriendlyPresentation:
+                case FileTypes.QuickTimeVideo:
                 case FileTypes.MediaPlayerVideo:
                 case FileTypes.Other:
                 case FileTypes.OtherPresentation:

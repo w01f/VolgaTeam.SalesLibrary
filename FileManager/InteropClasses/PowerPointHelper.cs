@@ -80,59 +80,83 @@ namespace FileManager.InteropClasses
 
         public void ExportPresentationAllFormats(string sourceFilePath, string destinationFolderPath)
         {
-            try
+            string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
+            bool updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
+            if (!Directory.Exists(pdfDestination))
+                Directory.CreateDirectory(pdfDestination);
+            string pngDestination = Path.Combine(destinationFolderPath, "png");
+            bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
+            if (!Directory.Exists(pngDestination))
+                Directory.CreateDirectory(pngDestination);
+            string jpgDestination = Path.Combine(destinationFolderPath, "jpg");
+            bool updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
+            if (!Directory.Exists(jpgDestination))
+                Directory.CreateDirectory(jpgDestination);
+            string thumbDestination = Path.Combine(destinationFolderPath, "thumbs");
+            bool updateThumbs = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination, "*.png").Length > 0);
+            if (!Directory.Exists(thumbDestination))
+                Directory.CreateDirectory(thumbDestination);
+            string pptDestination = Path.Combine(destinationFolderPath, "ppt");
+            bool updatePpt = !(Directory.Exists(pptDestination) && Directory.GetFiles(pptDestination, "*.ppt").Length > 0);
+            if (!Directory.Exists(pptDestination))
+                Directory.CreateDirectory(pptDestination);
+            string pptxDestination = Path.Combine(destinationFolderPath, "pptx");
+            bool updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination, "*.pptx").Length > 0);
+            if (!Directory.Exists(pptxDestination))
+                Directory.CreateDirectory(pptxDestination);
+
+            if (updatePdf || updatePng || updateJpg || updateThumbs || updatePpt || updatePptx)
             {
-                MessageFilter.Register();
-                PowerPoint.Presentation presentation = _powerPointObject.Presentations.Open(FileName: sourceFilePath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
-
-                string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-                if (!Directory.Exists(pdfDestination))
-                    Directory.CreateDirectory(pdfDestination);
-                presentation.SaveCopyAs(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
-
-
-                string pngDestination = Path.Combine(destinationFolderPath, "png");
-                if (!Directory.Exists(pngDestination))
-                    Directory.CreateDirectory(pngDestination);
-                string jpgDestination = Path.Combine(destinationFolderPath, "jpg");
-                if (!Directory.Exists(jpgDestination))
-                    Directory.CreateDirectory(jpgDestination);
-                string thumbDestination = Path.Combine(destinationFolderPath, "thumbs");
-                if (!Directory.Exists(thumbDestination))
-                    Directory.CreateDirectory(thumbDestination);
-                string pptDestination = Path.Combine(destinationFolderPath, "ppt");
-                if (!Directory.Exists(pptDestination))
-                    Directory.CreateDirectory(pptDestination);
-                string pptxDestination = Path.Combine(destinationFolderPath, "pptx");
-                if (!Directory.Exists(pptxDestination))
-                    Directory.CreateDirectory(pptxDestination);
-
-                int i = 1;
-                int thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
-                int thumbWidth = (int)presentation.PageSetup.SlideWidth / 10;
-                foreach (PowerPoint.Slide slide in presentation.Slides)
+                try
                 {
-                    slide.Export(Path.Combine(pngDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG");
-                    slide.Export(Path.Combine(jpgDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "jpg" })), "JPG");
-                    slide.Export(Path.Combine(thumbDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", thumbWidth, thumbHeight);
+                    if (Connect())
+                    {
+                        MessageFilter.Register();
+                        PowerPoint.Presentation presentation = _powerPointObject.Presentations.Open(FileName: sourceFilePath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
 
-                    PowerPoint.Presentation singleSlidePresentation = _powerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoFalse);
-                    CopyPasteSlide(slide, singleSlidePresentation);
-                    singleSlidePresentation.SaveCopyAs(Path.Combine(pptDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "ppt" })), PowerPoint.PpSaveAsFileType.ppSaveAsPresentation);
-                    singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "pptx" })), PowerPoint.PpSaveAsFileType.ppSaveAsDefault);
-                    singleSlidePresentation.Close();
-                    AppManager.Instance.ReleaseComObject(singleSlidePresentation);
-                    i++;
+                        if (updatePdf)
+                            presentation.SaveCopyAs(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
+
+                        if (updatePng || updateJpg || updateThumbs || updatePpt || updatePptx)
+                        {
+                            int i = 1;
+                            int thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
+                            int thumbWidth = (int)presentation.PageSetup.SlideWidth / 10;
+                            foreach (PowerPoint.Slide slide in presentation.Slides)
+                            {
+                                if (updatePng)
+                                    slide.Export(Path.Combine(pngDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG");
+                                if (updateJpg)
+                                    slide.Export(Path.Combine(jpgDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "jpg" })), "JPG");
+                                if (updateThumbs)
+                                    slide.Export(Path.Combine(thumbDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", thumbWidth, thumbHeight);
+
+                                if (updatePpt || updatePptx)
+                                {
+                                    PowerPoint.Presentation singleSlidePresentation = _powerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoFalse);
+                                    CopyPasteSlide(slide, singleSlidePresentation);
+                                    if (updatePpt)
+                                        singleSlidePresentation.SaveCopyAs(Path.Combine(pptDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "ppt" })), PowerPoint.PpSaveAsFileType.ppSaveAsPresentation);
+                                    if (updatePptx)
+                                        singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "pptx" })), PowerPoint.PpSaveAsFileType.ppSaveAsDefault);
+                                    singleSlidePresentation.Close();
+                                    AppManager.Instance.ReleaseComObject(singleSlidePresentation);
+                                }
+                                i++;
+                            }
+                        }
+                        presentation.Close();
+                        AppManager.Instance.ReleaseComObject(presentation);
+                    }
                 }
-                presentation.Close();
-                AppManager.Instance.ReleaseComObject(presentation);
-            }
-            catch
-            {
-            }
-            finally
-            {
-                MessageFilter.Revoke();
+                catch
+                {
+                }
+                finally
+                {
+                    MessageFilter.Revoke();
+                    Disconnect();
+                }
             }
         }
 

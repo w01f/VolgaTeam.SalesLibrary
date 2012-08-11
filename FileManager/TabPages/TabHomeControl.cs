@@ -116,6 +116,7 @@ namespace FileManager.TabPages
 
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyOvernightsCalebdar();
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyProgramManager();
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyIPadManager();
 
                     btSetupWallBin.Visible = false;
                     FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
@@ -602,51 +603,12 @@ namespace FileManager.TabPages
                     FormMain.Instance.ribbonControl.Enabled = false;
                     pnEmpty.BringToFront();
                     System.Windows.Forms.Application.DoEvents();
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
                     form.laProgress.Text = "Updating your Sales Library on the network…" + Environment.NewLine + "Chill out and relax for a few minutes…";
                     form.TopMost = true;
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        BusinessClasses.LibraryManager.Instance.RegularSyncWrapper();
-                    }));
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
-                        form.Show();
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.MinimizeOnSync)
-                        FormMain.Instance.WindowState = FormWindowState.Minimized;
-                    thread.Start();
-                    while (thread.IsAlive)
-                    {
-                        Thread.Sleep(100);
-                        System.Windows.Forms.Application.DoEvents();
-                    }
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
-                        form.Close();
-                    FormMain.Instance.ribbonControl.Enabled = true;
-                    pnMain.BringToFront();
-                    System.Windows.Forms.Application.DoEvents();
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync)
-                        Application.Exit();
-                }
-            }
-        }
-
-        public void btFtp_Click(object sender, EventArgs e)
-        {
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-            {
-                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-                {
-                    FormMain.Instance.ribbonControl.Enabled = false;
-                    pnEmpty.BringToFront();
-                    System.Windows.Forms.Application.DoEvents();
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
-                    form.laProgress.Text = "Updating Library for the iPad..." + Environment.NewLine + "This might take a few minutes...";
-                    form.TopMost = true;
-                    Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                    {
-                        BusinessClasses.LibraryManager.Instance.FtpSyncWrapper();
+                        BusinessClasses.LibraryManager.Instance.SynchronizeLibraries();
                     }));
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
                         form.Show();
@@ -790,9 +752,10 @@ namespace FileManager.TabPages
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IsConfigured)
             {
                 btSetupWallBin.Visible = false;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyWallBin(_firstRun);
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyWallbin(_firstRun);
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyOvernightsCalebdar();
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyProgramManager();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyIPadManager();
             }
 
             else
@@ -802,20 +765,20 @@ namespace FileManager.TabPages
             }
         }
 
-        private bool SaveLibraryWarning()
+        public bool SaveLibraryWarning()
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
                 if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.StateChanged)
                 {
-                    if (AppManager.Instance.ShowQuestion("Before you EXIT, do you want to save the changes you made?") == DialogResult.Yes)
+                    if (AppManager.Instance.ShowQuestion("Before you leave, do you want to save the changes you made?") == DialogResult.Yes)
                     {
                         PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
                     }
                     else
                     {
                         if (MessageBox.Show("You are about to lose your changes.\nThe changes will be LOST FOREVER & EVER & EVER!", "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.Cancel)
-                            return false;
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.ApplyWallbin(false, true);
                     }
                 }
             }

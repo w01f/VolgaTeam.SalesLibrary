@@ -22,7 +22,33 @@ namespace FileManager.BusinessClasses
         {
             this.Parent = parent;
             this.ContainerID = Guid.NewGuid().ToString();
-            this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, this.ContainerID);
+            switch (Path.GetExtension(this.Parent.FullPath).ToUpper())
+            {
+                case ".PPT":
+                case ".PPTX":
+                case ".DOC":
+                case ".DOCX":
+                case ".XLS":
+                case ".XLSX":
+                case ".PDF":
+                    this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
+                    break;
+                case ".MPEG":
+                case ".WMV":
+                case ".AVI":
+                case ".WMZ":
+                case ".MPG":
+                case ".ASF":
+                case ".MOV":
+                case ".MP4":
+                case ".M4V":
+                case ".FLV":
+                case ".OGV":
+                case ".OGM":
+                case ".OGX":
+                    this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
+                    break;
+            }
         }
 
         #region IPreviewContainer Members
@@ -45,7 +71,33 @@ namespace FileManager.BusinessClasses
                 {
                     case "FolderName":
                         this.ContainerID = childNode.InnerText;
-                        this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, this.ContainerID);
+                        switch (Path.GetExtension(this.Parent.FullPath).ToUpper())
+                        {
+                            case ".PPT":
+                            case ".PPTX":
+                            case ".DOC":
+                            case ".DOCX":
+                            case ".XLS":
+                            case ".XLSX":
+                            case ".PDF":
+                                this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
+                                break;
+                            case ".MPEG":
+                            case ".WMV":
+                            case ".AVI":
+                            case ".WMZ":
+                            case ".MPG":
+                            case ".ASF":
+                            case ".MOV":
+                            case ".MP4":
+                            case ".M4V":
+                            case ".FLV":
+                            case ".OGV":
+                            case ".OGM":
+                            case ".OGX":
+                                this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
+                                break;
+                        }
                         break;
                 }
             }
@@ -55,17 +107,19 @@ namespace FileManager.BusinessClasses
         {
             FileInfo parentFile = new FileInfo(this.Parent.FullPath);
             DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
-            bool needToUpdate = false;
+            bool update = false;
             if (!previewFolder.Exists)
-                needToUpdate = true;
+                update = true;
             else if (parentFile.LastWriteTime > previewFolder.CreationTime)
-                needToUpdate = true;
+                update = true;
+            else if (!parentFile.Exists)
+                update = true;
             else
-                needToUpdate = false;
-            if (needToUpdate)
+                update = false;
+            if (previewFolder.Exists && update)
+                ToolClasses.SyncManager.DeleteFolder(previewFolder);
+            if (parentFile.Exists)
             {
-                if (previewFolder.Exists)
-                    ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 IPreviewGenerator previewGenerator = null;
                 switch (parentFile.Extension.ToUpper())
                 {

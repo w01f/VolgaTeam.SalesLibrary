@@ -12,6 +12,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         public List<PageDecorator> Pages { get; set; }
         public PresentationClasses.WallBin.MultitabLibraryControl TabControl { get; private set; }
         public PresentationClasses.OvernightsCalendar.OvernightsCalendarControl OvernightsCalendar { get; private set; }
+        public PresentationClasses.IPad.IPadManagerControl IPadManager { get; private set; }
 
         public bool AllowToSave { get; set; }
         public bool StateChanged { get; set; }
@@ -21,11 +22,13 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             this.Pages = new List<PageDecorator>();
             this.TabControl = new PresentationClasses.WallBin.MultitabLibraryControl();
             this.OvernightsCalendar = new OvernightsCalendar.OvernightsCalendarControl(this);
+            this.IPadManager = new IPad.IPadManagerControl(this);
             this.Library = library;
-            BuildPages();
+            BuildWallbin();
         }
 
-        private void BuildPages()
+        #region Wallbin Part
+        private void BuildWallbin()
         {
             this.Pages.Clear();
             foreach (BusinessClasses.LibraryPage page in this.Library.Pages)
@@ -35,13 +38,52 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                 this.Pages.Add(pageDecorator);
                 Application.DoEvents();
             }
+            this.StateChanged = false;
         }
 
-        public void BuildOvernightsCalendar(bool forceBuild = false)
+        public void ApplyWallbin(bool firstRun, bool reload = false)
         {
-            this.Library.OvernightsCalendar.LoadYears();
-            if (this.Library.OvernightsCalendar.Enabled)
-                this.OvernightsCalendar.Build(forceBuild);
+            FormMain.Instance.TabHome.pnEmpty.Visible = true;
+            FormMain.Instance.TabHome.pnEmpty.BringToFront();
+            DialogResult result = DialogResult.Cancel;
+            if (this.Library.DeadLinks.Count > 0 && this.Library.EnableInactiveLinks && this.Library.InactiveLinksMessageAtStartup && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
+                using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
+                {
+                    form.pbLogo.Image = Properties.Resources.DeadLinks;
+                    form.Text = string.Format(form.Text, "INACTIVE");
+                    form.laTitle.Text = string.Format(form.laTitle.Text, "DEAD");
+                    result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                        DeleteDeadLinks();
+                }
+            if (this.Library.ExpiredLinks.Count > 0 && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
+                using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
+                {
+                    form.pbLogo.Image = Properties.Resources.ExpiredLinks;
+                    form.Text = string.Format(form.Text, "EXPIRED");
+                    form.laTitle.Text = string.Format(form.laTitle.Text, "EXPIRED");
+                    result = form.ShowDialog();
+                    if (result == DialogResult.OK)
+                        DeleteExpiredLinks();
+                }
+
+            if (result == DialogResult.OK || reload)
+                BuildWallbin();
+
+            if (ConfigurationClasses.SettingsManager.Instance.MultitabView)
+            {
+                foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
+                    control.Parent = null;
+                foreach (PageDecorator page in this.Pages)
+                {
+                    page.Container.Parent = null;
+                    page.TabPage.Controls.Add(page.Container);
+                    page.FitPage();
+                }
+                this.TabControl.AddPages(this.Pages.ToArray());
+                FormMain.Instance.TabHome.pnMain.Controls.Add(this.TabControl);
+            }
+            FormMain.Instance.TabHome.pnEmpty.SendToBack();
         }
 
         private void DeleteDeadLinks()
@@ -85,49 +127,36 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
                 this.ActivePage.FitObjectsToPage();
         }
 
-        public void ApplyWallBin(bool firstRun)
+        public void Save()
+        {
+            foreach (PageDecorator page in this.Pages)
+                page.Save();
+            this.Library.Save();
+            this.StateChanged = false;
+            this.IPadManager.UpdateVideoFiles();
+        }
+
+        public void SelectPage(int pageIndex)
         {
             FormMain.Instance.TabHome.pnEmpty.Visible = true;
             FormMain.Instance.TabHome.pnEmpty.BringToFront();
-            DialogResult result = DialogResult.Cancel;
-            if (this.Library.DeadLinks.Count > 0 && this.Library.EnableInactiveLinks && this.Library.InactiveLinksMessageAtStartup && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
-                using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
-                {
-                    form.pbLogo.Image = Properties.Resources.DeadLinks;
-                    form.Text = string.Format(form.Text, "INACTIVE");
-                    form.laTitle.Text = string.Format(form.laTitle.Text, "DEAD");
-                    result = form.ShowDialog();
-                    if (result == DialogResult.OK)
-                        DeleteDeadLinks();
-                }
-            if (this.Library.ExpiredLinks.Count > 0 && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
-                using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
-                {
-                    form.pbLogo.Image = Properties.Resources.ExpiredLinks;
-                    form.Text = string.Format(form.Text, "EXPIRED");
-                    form.laTitle.Text = string.Format(form.laTitle.Text, "EXPIRED");
-                    result = form.ShowDialog();
-                    if (result == DialogResult.OK)
-                        DeleteExpiredLinks();
-                }
-
-            if (result == DialogResult.OK)
-                BuildPages();
-
-            if (ConfigurationClasses.SettingsManager.Instance.MultitabView)
+            foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
+                control.Parent = null;
+            if (pageIndex < this.Pages.Count)
             {
-                foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
-                    control.Parent = null;
-                foreach (PageDecorator page in this.Pages)
-                {
-                    page.Container.Parent = null;
-                    page.TabPage.Controls.Add(page.Container);
-                    page.FitPage();
-                }
-                this.TabControl.AddPages(this.Pages.ToArray());
-                FormMain.Instance.TabHome.pnMain.Controls.Add(this.TabControl);
+                this.ActivePage = this.Pages[pageIndex];
+                this.ActivePage.Apply();
             }
             FormMain.Instance.TabHome.pnEmpty.SendToBack();
+        }
+        #endregion
+
+        #region Overnights Calendar Part
+        public void BuildOvernightsCalendar(bool forceBuild = false)
+        {
+            this.Library.OvernightsCalendar.LoadYears();
+            if (this.Library.OvernightsCalendar.Enabled)
+                this.OvernightsCalendar.Build(forceBuild);
         }
 
         public void ApplyOvernightsCalebdar()
@@ -136,17 +165,6 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(this.OvernightsCalendar))
                 FormMain.Instance.TabOvernightsCalendar.Controls.Add(this.OvernightsCalendar);
             this.OvernightsCalendar.BringToFront();
-        }
-
-        public void ApplyProgramManager()
-        {
-            this.AllowToSave = false;
-            FormMain.Instance.buttonItemProgramManagerSyncDisabled.Checked = !this.Library.EnableProgramManagerSync;
-            FormMain.Instance.buttonItemProgramManagerSyncEnabled.Checked = this.Library.EnableProgramManagerSync;
-            FormMain.Instance.buttonEditProgramManagerLocation.EditValue = this.Library.ProgramManagerLocation;
-            FormMain.Instance.ribbonBarProgramManagerLocation.Enabled = this.Library.EnableProgramManagerSync; 
-            this.AllowToSave = true;
-
         }
 
         private void LoadOvernightsCalebdarSettings()
@@ -171,27 +189,32 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             FormMain.Instance.buttonItemCalendarFontUp.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize < 14;
             FormMain.Instance.buttonItemCalendarFontDown.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize > 10;
         }
+        #endregion
 
-        public void Save()
+        #region ProgramManager Part
+        public void ApplyProgramManager()
         {
-            foreach (PageDecorator page in this.Pages)
-                page.Save();
-            this.Library.Save();
-            this.StateChanged = false;
+            this.AllowToSave = false;
+            FormMain.Instance.buttonItemProgramManagerSyncDisabled.Checked = !this.Library.EnableProgramManagerSync;
+            FormMain.Instance.buttonItemProgramManagerSyncEnabled.Checked = this.Library.EnableProgramManagerSync;
+            FormMain.Instance.buttonEditProgramManagerLocation.EditValue = this.Library.ProgramManagerLocation;
+            FormMain.Instance.ribbonBarProgramManagerLocation.Enabled = this.Library.EnableProgramManagerSync;
+            this.AllowToSave = true;
         }
+        #endregion
 
-        public void SelectPage(int pageIndex)
+        #region IPad Part
+        public void ApplyIPadManager()
         {
-            FormMain.Instance.TabHome.pnEmpty.Visible = true;
-            FormMain.Instance.TabHome.pnEmpty.BringToFront();
-            foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
-                control.Parent = null;
-            if (pageIndex < this.Pages.Count)
-            {
-                this.ActivePage = this.Pages[pageIndex];
-                this.ActivePage.Apply();
-            }
-            FormMain.Instance.TabHome.pnEmpty.SendToBack();
+            this.AllowToSave = false;
+            FormMain.Instance.buttonEditIPadLocation.EditValue = this.Library.IPadManager.SyncDestinationPath;
+            FormMain.Instance.buttonEditIPadSite.EditValue = this.Library.IPadManager.Website;
+            this.IPadManager.UpdateVideoFiles();
+            if (!FormMain.Instance.TabIPadManager.Controls.Contains(this.IPadManager))
+                FormMain.Instance.TabIPadManager.Controls.Add(this.IPadManager);
+            this.IPadManager.BringToFront();
+            this.AllowToSave = true;
         }
+        #endregion
     }
 }

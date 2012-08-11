@@ -10,7 +10,6 @@ namespace FileManager.InteropClasses
         private static WordHelper _instance = new WordHelper();
 
         private Word.Application _wordObject;
-        private bool _isFirstLaunch = false;
 
         private WordHelper()
         {
@@ -60,63 +59,84 @@ namespace FileManager.InteropClasses
 
         public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath)
         {
-            try
+            string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
+            bool updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
+            if (!Directory.Exists(pdfDestination))
+                Directory.CreateDirectory(pdfDestination);
+            string pngDestination = Path.Combine(destinationFolderPath, "png");
+            bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
+            if (!Directory.Exists(pngDestination))
+                Directory.CreateDirectory(pngDestination);
+            string jpgDestination = Path.Combine(destinationFolderPath, "jpg");
+            bool updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
+            if (!Directory.Exists(jpgDestination))
+                Directory.CreateDirectory(jpgDestination);
+            string thumbsDestination = Path.Combine(destinationFolderPath, "thumbs");
+            bool updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0);
+            if (!Directory.Exists(thumbsDestination))
+                Directory.CreateDirectory(thumbsDestination);
+            string docDestination = Path.Combine(destinationFolderPath, "doc");
+            bool updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0);
+            if (!Directory.Exists(docDestination))
+                Directory.CreateDirectory(docDestination);
+            string docxDestination = Path.Combine(destinationFolderPath, "docx");
+            bool updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0);
+            if (!Directory.Exists(docxDestination))
+                Directory.CreateDirectory(docxDestination);
+
+            if (updatePdf || updatePng || updateJpg || updateThumbs || updateDoc || updateDocx)
             {
-                MessageFilter.Register();
-                Word.Document document = _wordObject.Documents.Open(FileName: sourceFilePath);
-
-                string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-                if (!Directory.Exists(pdfDestination))
-                    Directory.CreateDirectory(pdfDestination);
-                string pngDestination = Path.Combine(destinationFolderPath, "png");
-                if (!Directory.Exists(pngDestination))
-                    Directory.CreateDirectory(pngDestination);
-                string jpgDestination = Path.Combine(destinationFolderPath, "jpg");
-                if (!Directory.Exists(jpgDestination))
-                    Directory.CreateDirectory(jpgDestination);
-                string thumbsDestination = Path.Combine(destinationFolderPath, "thumbs");
-                if (!Directory.Exists(thumbsDestination))
-                    Directory.CreateDirectory(thumbsDestination);
-                string docDestination = Path.Combine(destinationFolderPath, "doc");
-                if (!Directory.Exists(docDestination))
-                    Directory.CreateDirectory(docDestination);
-                string docxDestination = Path.Combine(destinationFolderPath, "docx");
-                if (!Directory.Exists(docxDestination))
-                    Directory.CreateDirectory(docxDestination);
-
-                string pdfFileName = Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf"));
-                document.ExportAsFixedFormat(OutputFileName: pdfFileName, ExportFormat: Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
-
-                ToolClasses.PdfHelper.Instance.ExportPdf(pdfFileName, pngDestination, jpgDestination, thumbsDestination);
-
-                _wordObject.Browser.Target = Word.WdBrowseTarget.wdBrowsePage;
-                for (int i = 1; i <= document.ComputeStatistics(Word.WdStatistic.wdStatisticPages); i++)
+                try
                 {
-                    document.Bookmarks["\\page"].Range.Copy();
+                    if (Connect())
+                    {
+                        MessageFilter.Register();
 
-                    Word.Document singlePageDocument = _wordObject.Documents.Add();
-                    singlePageDocument.Activate();
-                    _wordObject.Selection.Paste();
-                    _wordObject.Selection.TypeBackspace();
+                        Word.Document document = _wordObject.Documents.Open(FileName: sourceFilePath);
 
-                    singlePageDocument.SaveAs(Path.Combine(docDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "doc" })), Word.WdSaveFormat.wdFormatDocument);
-                    singlePageDocument.SaveAs(Path.Combine(docxDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "docx" })), Word.WdSaveFormat.wdFormatXMLDocument);
+                        string pdfFileName = Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf"));
+                        if (updatePdf)
+                            document.ExportAsFixedFormat(OutputFileName: pdfFileName, ExportFormat: Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
 
-                    ((Word._Document)singlePageDocument).Close();
-                    AppManager.Instance.ReleaseComObject(singlePageDocument);
-                    document.Activate();
-                    _wordObject.Browser.Next();
+                        if (updateJpg || updatePng || updateThumbs)
+                            ToolClasses.PdfHelper.Instance.ExportPdf(pdfFileName, pngDestination, jpgDestination, thumbsDestination);
+
+                        if (updateDoc || updateDocx)
+                        {
+                            _wordObject.Browser.Target = Word.WdBrowseTarget.wdBrowsePage;
+                            for (int i = 1; i <= document.ComputeStatistics(Word.WdStatistic.wdStatisticPages); i++)
+                            {
+                                document.Bookmarks["\\page"].Range.Copy();
+
+                                Word.Document singlePageDocument = _wordObject.Documents.Add();
+                                singlePageDocument.Activate();
+                                _wordObject.Selection.Paste();
+                                _wordObject.Selection.TypeBackspace();
+
+                                if (updateDoc)
+                                    singlePageDocument.SaveAs(Path.Combine(docDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "doc" })), Word.WdSaveFormat.wdFormatDocument);
+                                if (updateDocx)
+                                    singlePageDocument.SaveAs(Path.Combine(docxDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "docx" })), Word.WdSaveFormat.wdFormatXMLDocument);
+
+                                ((Word._Document)singlePageDocument).Close();
+                                AppManager.Instance.ReleaseComObject(singlePageDocument);
+                                document.Activate();
+                                _wordObject.Browser.Next();
+                            }
+                        }
+
+                        ((Word._Document)document).Close(false);
+                        AppManager.Instance.ReleaseComObject(document);
+                    }
                 }
-
-                ((Word._Document)document).Close(false);
-                AppManager.Instance.ReleaseComObject(document);
-            }
-            catch
-            {
-            }
-            finally
-            {
-                MessageFilter.Revoke();
+                catch
+                {
+                }
+                finally
+                {
+                    MessageFilter.Revoke();
+                    Disconnect();
+                }
             }
         }
     }

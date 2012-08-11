@@ -109,6 +109,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Chrome {
+            get {
+                object obj = ResourceManager.GetObject("Chrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap ClientLogos {
             get {
                 object obj = ResourceManager.GetObject("ClientLogos", resourceCulture);
@@ -126,6 +133,20 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap Columns {
             get {
                 object obj = ResourceManager.GetObject("Columns", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ConvertVideo {
+            get {
+                object obj = ResourceManager.GetObject("ConvertVideo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ConvertVideoSmall {
+            get {
+                object obj = ResourceManager.GetObject("ConvertVideoSmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -207,6 +228,20 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Firefox {
+            get {
+                object obj = ResourceManager.GetObject("Firefox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FirefoxSmall {
+            get {
+                object obj = ResourceManager.GetObject("FirefoxSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap FormatFontLarger {
             get {
                 object obj = ResourceManager.GetObject("FormatFontLarger", resourceCulture);
@@ -242,6 +277,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap InternetExplorer {
+            get {
+                object obj = ResourceManager.GetObject("InternetExplorer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap LineBreak {
             get {
                 object obj = ResourceManager.GetObject("LineBreak", resourceCulture);
@@ -252,6 +294,13 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap LinkProperties {
             get {
                 object obj = ResourceManager.GetObject("LinkProperties", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MediaPlayerSmall {
+            get {
+                object obj = ResourceManager.GetObject("MediaPlayerSmall", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -277,6 +326,20 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap OpenVideoSmall {
+            get {
+                object obj = ResourceManager.GetObject("OpenVideoSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Opera {
+            get {
+                object obj = ResourceManager.GetObject("Opera", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap PackageLogo {
             get {
                 object obj = ResourceManager.GetObject("PackageLogo", resourceCulture);
@@ -298,6 +361,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap QuickTimeSmall {
+            get {
+                object obj = ResourceManager.GetObject("QuickTimeSmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Red_Minus {
             get {
                 object obj = ResourceManager.GetObject("Red_Minus", resourceCulture);
@@ -308,6 +378,13 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap Refresh {
             get {
                 object obj = ResourceManager.GetObject("Refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Safari {
+            get {
+                object obj = ResourceManager.GetObject("Safari", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +410,9 @@ namespace FileManager.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap SyncFtp {
+        internal static System.Drawing.Bitmap SyncIPad {
             get {
-                object obj = ResourceManager.GetObject("SyncFtp", resourceCulture);
+                object obj = ResourceManager.GetObject("SyncIPad", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

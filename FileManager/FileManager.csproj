@@ -103,6 +103,7 @@
     <Compile Include="BusinessClasses\ExpirationDateOptions.cs" />
     <Compile Include="BusinessClasses\FileLink.cs" />
     <Compile Include="BusinessClasses\FolderLink.cs" />
+    <Compile Include="BusinessClasses\IPadManager.cs" />
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\LibraryFolder.cs" />
@@ -114,6 +115,18 @@
     <Compile Include="BusinessClasses\SearchTags.cs" />
     <Compile Include="BusinessClasses\SyncScheduleRecord.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
+    <Compile Include="PresentationClasses\IPad\IPadManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\IPad\IPadManagerControl.Designer.cs">
+      <DependentUpon>IPadManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabIPadManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabIPadManagerControl.Designer.cs">
+      <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolClasses\PdfHelper.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
     <Compile Include="ToolForms\Settings\FormAutoSyncEdit.cs">
@@ -364,6 +377,12 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PresentationClasses\IPad\IPadManagerControl.resx">
+      <DependentUpon>IPadManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabIPadManagerControl.resx">
+      <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormAutoSyncEdit.resx">
       <DependentUpon>FormAutoSyncEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -504,7 +523,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <None Include="Resources\SyncFtp.png" />
+    <None Include="Resources\ConvertVideo.png" />
+    <None Include="Resources\SyncIPad.png" />
+    <None Include="Resources\QuickTimeSmall.png" />
+    <None Include="Resources\FirefoxSmall.png" />
+    <None Include="Resources\OpenVideoSmall.png" />
+    <None Include="Resources\ConvertVideoSmall.png" />
+    <None Include="Resources\MediaPlayerSmall.png" />
+    <None Include="Resources\InternetExplorer.png" />
+    <None Include="Resources\Chrome.png" />
+    <None Include="Resources\Firefox.png" />
+    <None Include="Resources\Safari.png" />
+    <None Include="Resources\Opera.png" />
     <Content Include="ToolClasses\PdfRasterizer\ceTe.DynamicPDF.Rasterizer.40.x86.dll" />
     <None Include="Resources\DeleteButton.png" />
     <None Include="Resources\FileGrabber.png" />

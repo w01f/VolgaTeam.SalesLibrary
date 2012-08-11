@@ -40,7 +40,6 @@ namespace FileManager.ConfigurationClasses
         #region FM Settings
         public string BackupPath { get; set; }
         public string NetworkPath { get; set; }
-        public string FtpPath { get; set; }
         public bool UseDirectAccessToFiles { get; set; }
         public int DirectAccessFileAgeLimit { get; set; }
         public string SelectedLibrary { get; set; }
@@ -98,7 +97,6 @@ namespace FileManager.ConfigurationClasses
             #region FM Settings
             this.BackupPath = string.Empty;
             this.NetworkPath = string.Empty;
-            this.FtpPath = string.Empty;
             this.UseDirectAccessToFiles = false;
             this.SelectedLibrary = string.Empty;
             this.SelectedPage = string.Empty;
@@ -137,9 +135,6 @@ namespace FileManager.ConfigurationClasses
                 node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
                 if (node != null)
                     this.NetworkPath = node.InnerText;
-                node = document.SelectSingleNode(@"/LocalSettings/FtpPath");
-                if (node != null)
-                    this.FtpPath = node.InnerText;
                 node = document.SelectSingleNode(@"/LocalSettings/UseDirectAccessToFiles");
                 if (node != null)
                     if (bool.TryParse(node.InnerText, out tempBool))
@@ -192,7 +187,6 @@ namespace FileManager.ConfigurationClasses
             #region FM Settings
             xml.AppendLine(@"<BackupPath>" + this.BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
             xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
-            xml.AppendLine(@"<FtpPath>" + this.FtpPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FtpPath>");
             xml.AppendLine(@"<UseDirectAccessToFiles>" + this.UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
             xml.AppendLine(@"<DirectAccessFileAgeLimit>" + this.DirectAccessFileAgeLimit.ToString() + @"</DirectAccessFileAgeLimit>");
             xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");

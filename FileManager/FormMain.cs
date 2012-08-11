@@ -10,6 +10,8 @@ namespace FileManager
         public TabPages.TabHomeControl TabHome { get; set; }
         public TabPages.TabClipartControl TabClipart { get; set; }
         public TabPages.TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
+        public TabPages.TabIPadManagerControl TabIPadManager { get; set; }
+        private Control _currentTab = null;
 
         private FormMain()
         {
@@ -42,7 +44,6 @@ namespace FileManager
             buttonItemHomeProperties.Click += new EventHandler(this.TabHome.buttonItemHomeProperties_Click);
             buttonItemHomeSave.Click += new EventHandler(this.TabHome.btSave_Click);
             buttonItemHomeSync.Click += new EventHandler(this.TabHome.btSync_Click);
-            buttonItemHomeFtp.Click += new EventHandler(this.TabHome.btFtp_Click);
             buttonItemHomeExit.Click += new EventHandler(this.TabHome.btExit_Click);
 
             buttonItemProgramManagerSyncDisabled.Click += new EventHandler(this.TabHome.buttonItemProgramManagerSync_Click);
@@ -71,6 +72,13 @@ namespace FileManager
             buttonItemCalendarFontDown.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFontDown_Click);
             buttonItemCalendarEmailGrabber.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarEmailGrabber_Click);
             buttonItemCalendarFileGrabber.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFileGrabber_Click);
+
+            this.TabIPadManager = new TabPages.TabIPadManagerControl();
+            buttonEditIPadLocation.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadLocation_EditValueChanged);
+            buttonEditIPadLocation.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.TabIPadManager.buttonEditIPadLocation_ButtonClick);
+            buttonEditIPadSite.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadSite_EditValueChanged);
+            buttonItemIPadVideoConvert.Click += new EventHandler(this.TabIPadManager.buttonItemIPadVideo_Click);
+            buttonItemIPadSync.Click += new EventHandler(this.TabIPadManager.buttonItemIPadSync_Click);
         }
 
         public static FormMain Instance
@@ -158,29 +166,47 @@ namespace FileManager
                 ribbonTabItemClipart.Enabled = System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath);
 
                 ribbonControl.Enabled = true;
+
+                ribbonControl.SelectedRibbonTabChanged += new System.EventHandler(ribbonControl_SelectedRibbonTabChanged);
             }
         }
 
         private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
         {
-            Control parent = pnContainer.Parent;
-            pnContainer.Parent = null;
-            pnContainer.Controls.Clear();
             if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramManager)
             {
-                pnContainer.Controls.Add(this.TabHome);
+                if (!pnContainer.Controls.Contains(this.TabHome))
+                    pnContainer.Controls.Add(this.TabHome);
+                this.TabHome.BringToFront();
+                _currentTab = this.TabHome;
             }
-            else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemClipart)
+            else
             {
-                pnContainer.Controls.Add(this.TabClipart);
-                this.TabClipart.UpdateView();
+                if (_currentTab == this.TabHome)
+                    this.TabHome.SaveLibraryWarning();
+                if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemClipart)
+                {
+
+                    if (!pnContainer.Controls.Contains(this.TabClipart))
+                        pnContainer.Controls.Add(this.TabClipart);
+                    this.TabClipart.BringToFront();
+                    _currentTab = this.TabClipart;
+                }
+                else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
+                {
+                    if (!pnContainer.Controls.Contains(this.TabOvernightsCalendar))
+                        pnContainer.Controls.Add(this.TabOvernightsCalendar);
+                    this.TabOvernightsCalendar.BringToFront();
+                    _currentTab = this.TabOvernightsCalendar;
+                }
+                else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemIPad)
+                {
+                    if (!pnContainer.Controls.Contains(this.TabIPadManager))
+                        pnContainer.Controls.Add(this.TabIPadManager);
+                    this.TabIPadManager.BringToFront();
+                    _currentTab = this.TabIPadManager;
+                }
             }
-            else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
-            {
-                pnContainer.Controls.Add(this.TabOvernightsCalendar);
-            }
-            pnContainer.Parent = parent;
-            pnContainer.BringToFront();
         }
         #endregion
 
