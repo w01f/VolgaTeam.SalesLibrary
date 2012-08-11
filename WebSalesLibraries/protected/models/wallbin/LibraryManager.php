@@ -17,10 +17,22 @@ class LibraryManager
                     //{
                     $library = new Library();
                     $library->name = $libraryName;
-                    $library->storagePath = realpath($libraryFolder->getPathname() . DIRECTORY_SEPARATOR . "Primary Root");
+
+                    $storagePath = realpath($libraryFolder->getPathname() . DIRECTORY_SEPARATOR . "Primary Root");
+                    if (file_exists($storagePath))
+                    {
+                        $library->storagePath = $storagePath;
+                        $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename() . '/' . "Primary Root";
+                    }
+                    else
+                    {
+                        $library->storagePath = realpath($libraryFolder->getPathname());
+                        $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename();
+                    }
+
                     $library->presentationPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!QV';
                     $library->universalPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!WV';
-                    $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename() . '/' . "Primary Root";
+
                     $library->presentationPreviewContainerLink = $library->storageLink . '/!QV';
                     $library->universalPreviewContainerLink = $library->storageLink . '/!WV';
                     $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
