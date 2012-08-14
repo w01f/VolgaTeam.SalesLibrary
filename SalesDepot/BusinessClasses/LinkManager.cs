@@ -384,7 +384,6 @@ namespace SalesDepot.BusinessClasses
         public void PrintFile(LibraryFile link)
         {
             Process printProcess = new Process();
-            string tempPath = string.Empty;
             string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
             File.Copy(link.LocalPath, newFile, true);
             switch (Path.GetExtension(link.LocalPath).Substring(1).ToUpper())
@@ -397,7 +396,7 @@ namespace SalesDepot.BusinessClasses
                     try
                     {
                         printProcess.StartInfo.FileName = "winword.exe";
-                        printProcess.StartInfo.Arguments = '"' + tempPath + '"' + " /mFilePrint";
+                        printProcess.StartInfo.Arguments = '"' + newFile + '"' + " /mFilePrint";
                         printProcess.Start();
                     }
                     catch
@@ -409,7 +408,7 @@ namespace SalesDepot.BusinessClasses
                 case "XLSX":
                     if (InteropClasses.ExcelHelper.Instance.Connect())
                     {
-                        InteropClasses.ExcelHelper.Instance.Print(new FileInfo(tempPath));
+                        InteropClasses.ExcelHelper.Instance.Print(new FileInfo(newFile));
                         InteropClasses.ExcelHelper.Instance.Disconnect();
                     }
                     break;
@@ -417,7 +416,7 @@ namespace SalesDepot.BusinessClasses
                     try
                     {
                         printProcess.StartInfo.FileName = "AcroRd32.exe";
-                        printProcess.StartInfo.Arguments = " /p " + '"' + tempPath + '"';
+                        printProcess.StartInfo.Arguments = " /p " + '"' + newFile + '"';
                         printProcess.Start();
                     }
                     catch

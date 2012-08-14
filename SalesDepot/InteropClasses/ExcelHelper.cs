@@ -78,6 +78,11 @@ namespace SalesDepot.InteropClasses
         {
             Excel.Workbook workBook = _excelObject.Workbooks.Open(Filename: file.FullName);
             _excelObject.Visible = true;
+            IntPtr handle = IntPtr.Zero;
+            Process[] processList = Process.GetProcesses();
+            foreach (Process process in processList.Where(x => x.ProcessName.ToLower().Contains("excel")))
+                if (process.MainWindowHandle.ToInt32() != 0)
+                    AppManager.Instance.ActivateForm(process.MainWindowHandle, true, false);
             workBook.Application.Dialogs[Excel.XlBuiltInDialog.xlDialogPrint].Show();
         }
 
