@@ -193,16 +193,48 @@ class LibraryLink
                 case 'ogm':
                 case 'ogx':
                     $this->originalFormat = 'video';
-                    $this->availableFormats[] = 'video';
-                    $this->availableFormats[] = 'mp4';
-                    $this->availableFormats[] = 'ogv';
-                    $this->availableFormats[] = 'tab';
+                    if (Yii::app()->browser->isMobile())
+                    {
+                        $this->availableFormats[] = 'mp4';
+                        $this->availableFormats[] = 'tab';
+                    }
+                    else
+                    {
+                        $browser = Yii::app()->browser->getBrowser();
+                        switch ($browser)
+                        {
+                            case 'Internet Explorer':
+                                $this->availableFormats[] = 'mp4';
+                                $this->availableFormats[] = 'video';
+                                break;
+                            case 'Chrome':
+                            case 'Safari':
+                                $this->availableFormats[] = 'mp4';
+                                $this->availableFormats[] = 'tab';
+                                break;
+                            case 'Firefox':
+                                $this->availableFormats[] = 'mp4';
+                                $this->availableFormats[] = 'ogv';
+                                break;
+                            case 'Opera':
+                                $this->availableFormats[] = 'mp4';
+                                $this->availableFormats[] = 'tab';
+                                $this->availableFormats[] = 'ogv';
+                                break;
+                            default:
+                                $this->availableFormats[] = 'video';
+                                $this->availableFormats[] = 'mp4';
+                                $this->availableFormats[] = 'ogv';
+                                $this->availableFormats[] = 'tab';
+                                break;
+                        }
+                    }
                     break;
                 case 'mp4':
                     $this->originalFormat = 'mp4';
                     $this->availableFormats[] = 'mp4';
                     $this->availableFormats[] = 'tab';
-                    break;                
+                    break;
                 case 'png':
                     $this->originalFormat = 'png';
                     $this->availableFormats[] = 'png';
@@ -401,26 +433,35 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'video':
-                        $viewSources[] = array('href' => $this->fileLink);
+                        $viewSources[] = array('src' => $this->fileLink);
                         break;
                     case 'mp4':
-                    case 'tab':                        
+                        if (isset($this->universalPreview))
+                        {
+                            if (isset($this->universalPreview->mp4Links))
+                                foreach ($this->universalPreview->mp4Links as $link)
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                            if (isset($this->universalPreview->ogvLinks))
+                                foreach ($this->universalPreview->ogvLinks as $link)
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                        }
+                    case 'tab':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->mp4Links))
                                 foreach ($this->universalPreview->mp4Links as $link)
-                                    $viewSources[] = array('href' => $link);
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
                         break;
                     case 'ogv':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->ogvLinks))
                                 foreach ($this->universalPreview->ogvLinks as $link)
-                                    $viewSources[] = array('href' => $link);
-                        break;                        
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                        break;
                 }
                 break;
             case 'mp4':
-                $viewSources[] = array('href' => $this->fileLink);
-                break;                
+                $viewSources[] = array('src' => $this->fileLink, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                break;
         }
         if (isset($viewSources))
             return $viewSources;

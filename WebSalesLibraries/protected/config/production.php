@@ -58,6 +58,8 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             )
         ),
+        'browser' => array(
+            'class' => 'application.extensions.browser.CBrowserComponent',)
     ),
     'params' => require(dirname(__FILE__) . '/params.php'),
 );

@@ -81,7 +81,7 @@ class LibraryManager
     public function setSelectedLibraryName($libraryName)
     {
         $cookie = new CHttpCookie('selectedLibraryName', $libraryName);
-        $cookie->expire = time() + 60 * 60 * 24 * 7;
+        $cookie->expire = time() + (60 * 60 * 24 * 7);
         Yii::app()->request->cookies['selectedLibraryName'] = $cookie;
     }
 
@@ -111,7 +111,7 @@ class LibraryManager
     public function setSelectedPageName($pageName)
     {
         $cookie = new CHttpCookie('selectedPageName', $pageName);
-        $cookie->expire = time() + 60 * 60 * 24 * 7;
+        $cookie->expire = time() + (60 * 60 * 24 * 7);
         Yii::app()->request->cookies['selectedPageName'] = $cookie;
     }
 

@@ -10,10 +10,8 @@
     var libraryChanged = function(){
         var selectedLibraryName = $("#selectLibrary :selected").text();
         $.cookie("selectedLibraryName", selectedLibraryName, {
-            path: "/", 
-            expires: "60 * 60 * 24 * 7"
+            expires: 60 * 60 * 24 * 7
         });
-        $.cookie("selectedPageName", null);        
         $.ajax({
             type: "POST",
             url: "wallbin/getPageDropDownList",
@@ -44,7 +42,7 @@
         var selectedPageName = $("#selectPage :selected").text();
         $.cookie("selectedPageName", selectedPageName, {
             path: "/", 
-            expires: "60 * 60 * 24 * 7"
+            expires: 60 * 60 * 24 * 7
         });
         $("#pagelogo").attr('src', $("#selectPage").val());
         loadColumns();

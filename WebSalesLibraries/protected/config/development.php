@@ -58,6 +58,8 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             )
         ),
+        'browser' => array(
+            'class' => 'application.extensions.browser.CBrowserComponent',)
 //        'cache' => array(
 //            'class' => 'system.caching.CMemCache',
 //            'servers' => array(

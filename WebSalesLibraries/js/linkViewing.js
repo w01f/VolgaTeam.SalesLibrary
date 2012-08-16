@@ -100,12 +100,12 @@
                         case 'video':
                         case 'tab':                            
                         case 'ogv':
-                            window.open(selectedLinks[0].href);                            
+                            window.open(selectedLinks[0].src);                            
                             break;                        
                         case 'mp4':
                             VideoJS.players = {};
                             $.fancybox({
-                                content: $('<video id="videoPlayer" class="video-js vjs-default-skin" width="640" height="480"></video>'),
+                                content: $('<div style="height:480px; width:640px;"><video id="videoPlayer" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
                                 helpers: {
                                     overlay : {
                                         css : {
@@ -119,15 +119,15 @@
                                     $('#videoPlayer').remove();
                                 }
                             });
+                            _V_.options.flash.swf = selectedLinks[0].swf;
                             var myPlayer = _V_("videoPlayer",{
                                 controls: true, 
                                 autoplay: true, 
-                                preload: 'auto'
+                                preload: 'auto',
+                                width: 640,
+                                height:480
                             });
-                            myPlayer.src({
-                                type: "video/mp4", 
-                                src: selectedLinks[0].href
-                            });
+                            myPlayer.src(selectedLinks);
                             break;                    
                     }
                     break;

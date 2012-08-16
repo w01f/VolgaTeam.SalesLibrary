@@ -1,7 +1,4 @@
 <?php
-$cs = Yii::app()->clientScript;
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/viewDialog.css');
-
 echo CHtml::openTag('div', array(
     'class' => 'viewDialogBody'
 ));
