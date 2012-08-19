@@ -12,33 +12,37 @@ class LibraryManager
                 if ($libraryFolder->isDir() && !$libraryFolder->isDot())
                 {
                     $libraryName = $libraryFolder->getBasename();
-                    //$library = Yii::app()->cache->get($libraryName);
-                    //if ($library === false)
-                    //{
-                    $library = new Library();
-                    $library->name = $libraryName;
-
-                    $storagePath = realpath($libraryFolder->getPathname() . DIRECTORY_SEPARATOR . "Primary Root");
-                    if (file_exists($storagePath))
+                    $library = Yii::app()->cacheFile->get($libraryName);
+                    if ($library === false)
                     {
-                        $library->storagePath = $storagePath;
-                        $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename() . '/' . "Primary Root";
-                    }
-                    else
-                    {
-                        $library->storagePath = realpath($libraryFolder->getPathname());
-                        $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename();
-                    }
+                        $library = new Library();
+                        $library->name = $libraryName;
 
-                    $library->presentationPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!QV';
-                    $library->universalPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!WV';
+                        $storagePath = realpath($libraryFolder->getPathname() . DIRECTORY_SEPARATOR . "Primary Root");
+                        if (file_exists($storagePath))
+                        {
+                            $library->storagePath = $storagePath;
+                            $library->storageFile = $library->storagePath . DIRECTORY_SEPARATOR . "SalesDepotCache.xml";
+                            $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename() . '/' . "Primary Root";
+                        }
+                        else
+                        {
+                            $library->storagePath = realpath($libraryFolder->getPathname());
+                            $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename();
+                        }
+                        $library->storageFile = realpath($library->storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.xml');
 
-                    $library->presentationPreviewContainerLink = $library->storageLink . '/!QV';
-                    $library->universalPreviewContainerLink = $library->storageLink . '/!WV';
-                    $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
-                    $library->load();
-                    //Yii::app()->cache->set($libraryName, $library, time() + 60 * 60 * 24 * 7, new CFileCacheDependency($library->storageFile));
-                    //}
+                        $library->presentationPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!QV';
+                        $library->universalPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!WV';
+
+                        $library->presentationPreviewContainerLink = $library->storageLink . '/!QV';
+                        $library->universalPreviewContainerLink = $library->storageLink . '/!WV';
+                        $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+                        $library->load();
+
+                        $dependency = new CFileCacheDependency($library->storageFile);
+                        Yii::app()->cacheFile->set($libraryName, $library, (60 * 60 * 24 * 7), $dependency);
+                    }
                     $libraries[] = $library;
                 }
             }

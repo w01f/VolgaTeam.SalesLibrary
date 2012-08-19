@@ -11,8 +11,7 @@
         }
         
         $.cookie("textSpace", textSpace, {
-            path: "/", 
-            expires: "60 * 60 * 24 * 7"
+            expires: (60 * 60 * 24 * 7)
         });
     }
     
@@ -20,8 +19,7 @@
         $('.linkText').css('font-size',textSize+'pt');
         
         $.cookie("textSize", textSize, {
-            path: "/", 
-            expires: "60 * 60 * 24 * 7"
+            expires: (60 * 60 * 24 * 7)
         });
     }  
 })( jQuery );    

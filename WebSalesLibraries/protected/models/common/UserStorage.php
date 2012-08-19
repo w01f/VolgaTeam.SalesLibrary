@@ -1,5 +1,5 @@
 <?php
-class User extends CActiveRecord
+class UserStorage extends CActiveRecord
 {
     public static function model($className = __CLASS__)
     {

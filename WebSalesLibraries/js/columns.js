@@ -41,7 +41,6 @@
     var pageChanged = function(){
         var selectedPageName = $("#selectPage :selected").text();
         $.cookie("selectedPageName", selectedPageName, {
-            path: "/", 
             expires: 60 * 60 * 24 * 7
         });
         $("#pagelogo").attr('src', $("#selectPage").val());

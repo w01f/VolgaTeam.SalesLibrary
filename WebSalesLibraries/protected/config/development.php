@@ -59,16 +59,15 @@ return array(
             )
         ),
         'browser' => array(
-            'class' => 'application.extensions.browser.CBrowserComponent',)
-//        'cache' => array(
-//            'class' => 'system.caching.CMemCache',
-//            'servers' => array(
-//                array(
-//                    'host' => 'localhost',
-//                    'port' => 11211,
-//                ),
-//            ),
-//        ),
+            'class' => 'application.extensions.browser.CBrowserComponent',
+        ),
+        'cacheFile' => array(
+            'class' => 'system.caching.CFileCache',
+        ),
+        'email' => array(
+            'class' => 'application.extensions.email.Email',
+            'delivery' => 'php',
+        ),
     ),
     'params' => require(dirname(__FILE__) . '/params.php'),
 );

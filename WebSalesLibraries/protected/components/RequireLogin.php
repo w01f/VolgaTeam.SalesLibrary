@@ -8,7 +8,7 @@ class RequireLogin extends CBehavior
 
     public function handleBeginRequest($event)
     {
-        if (Yii::app()->user->isGuest && !strstr(Yii::app()->request->getUrl(),'site/login')&& !strstr(Yii::app()->request->getUrl(),'service/'))
+        if (Yii::app()->user->isGuest && !strstr(Yii::app()->request->getUrl(),'site/login')&& !strstr(Yii::app()->request->getUrl(),'admin/'))
         {
             Yii::app()->user->loginRequired();
         }

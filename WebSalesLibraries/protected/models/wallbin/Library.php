@@ -14,7 +14,6 @@ class Library
     public $autoWidgets;
     public function load()
     {
-        $this->storageFile = $this->storagePath . DIRECTORY_SEPARATOR . "SalesDepotCache.xml";
         if (file_exists($this->storageFile))
         {
             $doc = new DOMDocument();
