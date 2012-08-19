@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.ServiceModel;
+using System.ServiceModel.Description;
 
 namespace FileManager.BusinessClasses
 {
@@ -12,12 +15,16 @@ namespace FileManager.BusinessClasses
         public Library Parent { get; private set; }
         public string SyncDestinationPath { get; set; }
         public string Website { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
 
         public IPadManager(Library parent)
         {
             this.Parent = parent;
             this.SyncDestinationPath = string.Empty;
             this.Website = string.Empty;
+            this.Login = string.Empty;
+            this.Password = string.Empty;
         }
 
         public string Serialize()
@@ -25,6 +32,8 @@ namespace FileManager.BusinessClasses
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<SyncDestinationPath>" + this.SyncDestinationPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SyncDestinationPath>");
             result.AppendLine(@"<Website>" + this.Website.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Website>");
+            result.AppendLine(@"<User>" + this.Login.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</User>");
+            result.AppendLine(@"<Password>" + this.Password.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Password>");
             return result.ToString();
         }
 
@@ -40,10 +49,104 @@ namespace FileManager.BusinessClasses
                     case "Website":
                         this.Website = childNode.InnerText;
                         break;
+                    case "User":
+                        this.Login = childNode.InnerText;
+                        break;
+                    case "Password":
+                        this.Password = childNode.InnerText;
+                        break;
                 }
             }
         }
 
+        #region User Management
+        private IPadAdminService.AdminControllerService GetClient()
+        {
+            try
+            {
+                IPadAdminService.AdminControllerService client = new IPadAdminService.AdminControllerService();
+                client.Url = string.Format("{0}/admin/quote?ws=1", this.Website);
+                return client;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public IPadAdminService.UserRecord[] GetUsers(out string message)
+        {
+            message = string.Empty;
+            List<IPadAdminService.UserRecord> users = new List<IPadAdminService.UserRecord>();
+            IPadAdminService.AdminControllerService client = GetClient();
+            if (client != null)
+            {
+                try
+                {
+                    string sessionKey = client.getSessionKey(this.Login, this.Password);
+                    if (!string.IsNullOrEmpty(sessionKey))
+                        users.AddRange(client.getUsers(sessionKey));
+                    else
+                        message = "Couldn't complete operation.\nLogin or password are not correct.";
+                }
+                catch (Exception ex)
+                {
+                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+                }
+            }
+            else
+                message = "Couldn't complete operation.\nServer is unavailable.";
+            return users.ToArray();
+        }
+
+        public void SetUser(string login, string password, string firstName, string lastName, string email,out string message)
+        {
+            message = string.Empty;
+            IPadAdminService.AdminControllerService client = GetClient();
+            if (client != null)
+            {
+                try
+                {
+                    string sessionKey = client.getSessionKey(this.Login, this.Password);
+                    if (!string.IsNullOrEmpty(sessionKey))
+                        client.setUser(sessionKey, login, password, firstName, lastName, email);
+                    else
+                        message = "Couldn't complete operation.\nLogin or password are not correct.";
+                }
+                catch (Exception ex)
+                {
+                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+                }
+            }
+            else
+                message = "Couldn't complete operation.\nServer is unavailable.";
+        }
+
+        public void DeleteUser(string login, out string message)
+        {
+            message = string.Empty;
+            IPadAdminService.AdminControllerService client = GetClient();
+            if (client != null)
+            {
+                try
+                {
+                    string sessionKey = client.getSessionKey(this.Login, this.Password);
+                    if (!string.IsNullOrEmpty(sessionKey))
+                        client.deleteUser(sessionKey, login);
+                    else
+                        message = "Couldn't complete operation.\nLogin or password are not correct.";
+                }
+                catch(Exception ex)
+                {
+                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+                }
+            }
+            else
+                message = "Couldn't complete operation.\nServer is unavailable.";
+        }
+        #endregion
+
+        #region Video Management
         public VideoInfo[] VideoFiles
         {
             get
@@ -102,12 +205,14 @@ namespace FileManager.BusinessClasses
                 return videoFiles.ToArray();
             }
         }
+        #endregion
     }
 
     public class VideoInfo
     {
         public LibraryFile Parent { get; private set; }
         public string Index { get; set; }
+        public bool Selected { get; set; }
         public string SourceFileName { get; set; }
         public string SourceFilePath { get; set; }
         public string IPadFolderPath { get; set; }

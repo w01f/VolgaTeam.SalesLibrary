@@ -76,7 +76,21 @@ namespace FileManager
             this.TabIPadManager = new TabPages.TabIPadManagerControl();
             buttonEditIPadLocation.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadLocation_EditValueChanged);
             buttonEditIPadLocation.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.TabIPadManager.buttonEditIPadLocation_ButtonClick);
+            buttonEditIPadLocation.Enter+=new EventHandler(Editor_Enter);
+            buttonEditIPadLocation.MouseUp +=new MouseEventHandler(Editor_MouseUp);
+            buttonEditIPadLocation.MouseDown += new MouseEventHandler(Editor_MouseDown);
             buttonEditIPadSite.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadSite_EditValueChanged);
+            buttonEditIPadSite.Enter += new EventHandler(Editor_Enter);
+            buttonEditIPadSite.MouseUp += new MouseEventHandler(Editor_MouseUp);
+            buttonEditIPadSite.MouseDown += new MouseEventHandler(Editor_MouseDown);
+            buttonEditIPadLogin.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadSite_EditValueChanged);
+            buttonEditIPadLogin.Enter += new EventHandler(Editor_Enter);
+            buttonEditIPadLogin.MouseUp += new MouseEventHandler(Editor_MouseUp);
+            buttonEditIPadLogin.MouseDown += new MouseEventHandler(Editor_MouseDown);
+            buttonEditIPadPassword.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadSite_EditValueChanged);
+            buttonEditIPadPassword.Enter += new EventHandler(Editor_Enter);
+            buttonEditIPadPassword.MouseUp += new MouseEventHandler(Editor_MouseUp);
+            buttonEditIPadPassword.MouseDown += new MouseEventHandler(Editor_MouseDown);
             buttonItemIPadVideoConvert.Click += new EventHandler(this.TabIPadManager.buttonItemIPadVideo_Click);
             buttonItemIPadSync.Click += new EventHandler(this.TabIPadManager.buttonItemIPadSync_Click);
         }
@@ -175,6 +189,8 @@ namespace FileManager
         {
             if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramManager)
             {
+                if (_currentTab == this.TabIPadManager)
+                    this.TabIPadManager.SaveIPadSettings();
                 if (!pnContainer.Controls.Contains(this.TabHome))
                     pnContainer.Controls.Add(this.TabHome);
                 this.TabHome.BringToFront();

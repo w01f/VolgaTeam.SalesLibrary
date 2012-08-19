@@ -385,7 +385,7 @@ namespace FileManager.BusinessClasses
                                     {
                                         if (!filesWhiteList.Contains(file.FullPath))
                                             filesWhiteList.Add(file.FullPath);
-                                        if (file.UniversalPreviewContainer != null)
+                                        if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
                                             AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
                                     }
                                     break;
@@ -396,7 +396,7 @@ namespace FileManager.BusinessClasses
                                     {
                                         if (!filesWhiteList.Contains(file.FullPath))
                                             filesWhiteList.Add(file.FullPath);
-                                        if (file.UniversalPreviewContainer != null)
+                                        if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
                                             AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
                                     }
                                     break;
@@ -463,7 +463,7 @@ namespace FileManager.BusinessClasses
                     }
                 }
                 #endregion
-                foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
+                foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName) && !x.FullName.Contains("_gsdata_")))
                 {
                     ToolClasses.SyncManager.DeleteFolder(subFolder);
                     syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));

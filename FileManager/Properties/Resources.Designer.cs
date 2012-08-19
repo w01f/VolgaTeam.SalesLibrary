@@ -186,6 +186,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap EditUser {
+            get {
+                object obj = ResourceManager.GetObject("EditUser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap EmailGrabber {
             get {
                 object obj = ResourceManager.GetObject("EmailGrabber", resourceCulture);

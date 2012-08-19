@@ -106,67 +106,73 @@ namespace FileManager.BusinessClasses
         public void UpdateContent()
         {
             FileInfo parentFile = new FileInfo(this.Parent.FullPath);
-            DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
-            bool update = false;
-            if (!previewFolder.Exists)
-                update = true;
-            else if (parentFile.LastWriteTime > previewFolder.CreationTime)
-                update = true;
-            else if (!parentFile.Exists)
-                update = true;
-            else
-                update = false;
-            if (previewFolder.Exists && update)
-                ToolClasses.SyncManager.DeleteFolder(previewFolder);
-            if (parentFile.Exists)
+            if (!string.IsNullOrEmpty(this.ContainerPath))
             {
-                IPreviewGenerator previewGenerator = null;
-                switch (parentFile.Extension.ToUpper())
+                DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
+                bool update = false;
+                if (!previewFolder.Exists)
+                    update = true;
+                else if (parentFile.LastWriteTime > previewFolder.CreationTime)
+                    update = true;
+                else if (!parentFile.Exists)
+                    update = true;
+                else
+                    update = false;
+                if (previewFolder.Exists && update)
+                    ToolClasses.SyncManager.DeleteFolder(previewFolder);
+                if (parentFile.Exists)
                 {
-                    case ".PPT":
-                    case ".PPTX":
-                        previewGenerator = new PowerPointPreviewGenerator();
-                        break;
-                    case ".DOC":
-                    case ".DOCX":
-                        previewGenerator = new WordPreviewGenerator();
-                        break;
-                    case ".XLS":
-                    case ".XLSX":
-                        break;
-                    case ".PDF":
-                        previewGenerator = new PdfPreviewGenerator();
-                        break;
-                    case ".MPEG":
-                    case ".WMV":
-                    case ".AVI":
-                    case ".WMZ":
-                    case ".MPG":
-                    case ".ASF":
-                    case ".MOV":
-                    case ".MP4":
-                    case ".M4V":
-                    case ".FLV":
-                    case ".OGV":
-                    case ".OGM":
-                    case ".OGX":
-                        previewGenerator = new VideoPreviewGenerator();
-                        break;
-                }
-                if (previewGenerator != null)
-                {
-                    previewGenerator.SourceFile = this.Parent.FullPath;
-                    previewGenerator.ContainerPath = this.ContainerPath;
-                    previewGenerator.GeneratePreview();
+                    IPreviewGenerator previewGenerator = null;
+                    switch (parentFile.Extension.ToUpper())
+                    {
+                        case ".PPT":
+                        case ".PPTX":
+                            previewGenerator = new PowerPointPreviewGenerator();
+                            break;
+                        case ".DOC":
+                        case ".DOCX":
+                            previewGenerator = new WordPreviewGenerator();
+                            break;
+                        case ".XLS":
+                        case ".XLSX":
+                            break;
+                        case ".PDF":
+                            previewGenerator = new PdfPreviewGenerator();
+                            break;
+                        case ".MPEG":
+                        case ".WMV":
+                        case ".AVI":
+                        case ".WMZ":
+                        case ".MPG":
+                        case ".ASF":
+                        case ".MOV":
+                        case ".MP4":
+                        case ".M4V":
+                        case ".FLV":
+                        case ".OGV":
+                        case ".OGM":
+                        case ".OGX":
+                            previewGenerator = new VideoPreviewGenerator();
+                            break;
+                    }
+                    if (previewGenerator != null)
+                    {
+                        previewGenerator.SourceFile = this.Parent.FullPath;
+                        previewGenerator.ContainerPath = this.ContainerPath;
+                        previewGenerator.GeneratePreview();
+                    }
                 }
             }
         }
 
         public void ClearContent()
         {
-            DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
-            if (previewFolder.Exists)
-                ToolClasses.SyncManager.DeleteFolder(previewFolder);
+            if (!string.IsNullOrEmpty(this.ContainerPath))
+            {
+                DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
+                if (previewFolder.Exists)
+                    ToolClasses.SyncManager.DeleteFolder(previewFolder);
+            }
         }
         #endregion
     }

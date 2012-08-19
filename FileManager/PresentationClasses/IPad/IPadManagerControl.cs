@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace FileManager.PresentationClasses.IPad
 {
@@ -12,6 +15,7 @@ namespace FileManager.PresentationClasses.IPad
     public partial class IPadManagerControl : UserControl
     {
         private List<BusinessClasses.VideoInfo> _videoFiles = new List<BusinessClasses.VideoInfo>();
+        private List<IPadAdminService.UserRecord> _users = new List<IPadAdminService.UserRecord>();
 
         public WallBin.Decorators.LibraryDecorator ParentDecorator { get; private set; }
 
@@ -22,6 +26,14 @@ namespace FileManager.PresentationClasses.IPad
             this.Dock = DockStyle.Fill;
         }
 
+        public void UpdateControlsState()
+        {
+            xtraTabControl.Enabled = !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
+            FormMain.Instance.buttonItemIPadVideoConvert.Enabled = xtraTabControl.Enabled;
+            FormMain.Instance.buttonItemIPadSync.Enabled = xtraTabControl.Enabled;
+        }
+
+        #region Video Tab
         public void UpdateVideoFiles()
         {
             int focussedRow = gridViewVideo.FocusedRowHandle;
@@ -30,11 +42,54 @@ namespace FileManager.PresentationClasses.IPad
             _videoFiles.Clear();
 
             _videoFiles.AddRange(this.ParentDecorator.Library.IPadManager.VideoFiles);
-            gridControlVideo.DataSource = _videoFiles;
+            gridControlVideo.DataSource = new BindingList<BusinessClasses.VideoInfo>(_videoFiles.ToArray());
             laVideoTitle.Text = string.Format("Your Library has {0} Video File{1}", _videoFiles.Count.ToString(), (_videoFiles.Count > 1 ? "s" : string.Empty));
 
             if (focussedRow >= 0 && focussedRow < gridViewVideo.RowCount)
                 gridViewVideo.FocusedRowHandle = focussedRow;
+        }
+
+        public void ConvertSelectedVideoFiles()
+        {
+            BusinessClasses.VideoInfo[] videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
+            if (videoFiles.Length > 0)
+                ConvertVideoFiles(videoFiles);
+            else
+                AppManager.Instance.ShowWarning("Please select one or several videos in the list below");
+        }
+
+        private void ConvertVideoFiles(BusinessClasses.VideoInfo[] videoFiles)
+        {
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                FormMain.Instance.ribbonControl.Enabled = false;
+                this.Enabled = false;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                form.laProgress.Text = "Converting Video for the iPad..." + Environment.NewLine + "This might take a few minutes...";
+                form.TopMost = true;
+                Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    foreach (BusinessClasses.VideoInfo videoFile in videoFiles)
+                    {
+                        if (videoFile.Parent.UniversalPreviewContainer == null)
+                            videoFile.Parent.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(videoFile.Parent);
+                        videoFile.Parent.UniversalPreviewContainer.UpdateContent();
+                    }
+                    this.ParentDecorator.Library.Save();
+                }));
+                form.Show();
+                thread.Start();
+                while (thread.IsAlive)
+                {
+                    Thread.Sleep(100);
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                form.Close();
+                this.Enabled = true;
+                FormMain.Instance.ribbonControl.Enabled = true;
+            }
+
+            UpdateVideoFiles();
         }
 
         private void gridViewVideo_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -64,6 +119,11 @@ namespace FileManager.PresentationClasses.IPad
                     else
                         e.Appearance.ForeColor = Color.Green;
                 }
+
+                if (videoInfo.Selected)
+                    e.Appearance.BackColor = Color.LightGreen;
+                else
+                    e.Appearance.BackColor = Color.White;
             }
         }
 
@@ -80,7 +140,6 @@ namespace FileManager.PresentationClasses.IPad
                     AppManager.Instance.ShowWarning("You need to convert this video first!");
             }
         }
-
 
         private void repositoryItemButtonEditVideoMp4_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -129,32 +188,7 @@ namespace FileManager.PresentationClasses.IPad
                 }
                 else if (e.Button.Index == 1)
                 {
-                    using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-                    {
-                        FormMain.Instance.ribbonControl.Enabled = false;
-                        this.Enabled = false;
-                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
-                        form.laProgress.Text = "Converting Video for the iPad..." + Environment.NewLine + "This might take a few minutes...";
-                        form.TopMost = true;
-                        Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                        {
-                            if (videoInfo.Parent.UniversalPreviewContainer == null)
-                                videoInfo.Parent.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(videoInfo.Parent);
-                            videoInfo.Parent.UniversalPreviewContainer.UpdateContent();
-                            this.ParentDecorator.Library.Save();
-                        }));
-                        form.Show();
-                        thread.Start();
-                        while (thread.IsAlive)
-                        {
-                            Thread.Sleep(100);
-                            System.Windows.Forms.Application.DoEvents();
-                        }
-                        form.Close();
-                        this.Enabled = true;
-                        FormMain.Instance.ribbonControl.Enabled = true;
-                    }
-                    UpdateVideoFiles();
+                    ConvertVideoFiles(new BusinessClasses.VideoInfo[] { videoInfo });
                 }
             }
         }
@@ -171,6 +205,208 @@ namespace FileManager.PresentationClasses.IPad
             }
         }
 
+        private void gridViewVideo_CustomRowCellEditForEditing(object sender, DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventArgs e)
+        {
+            GridViewInfo vi = gridViewVideo.GetViewInfo() as GridViewInfo;
+            GridDataRowInfo ri = vi.RowsInfo.GetInfoByHandle(e.RowHandle) as GridDataRowInfo;
+            if (ri == null)
+                return;
+            e.RepositoryItem.Appearance.ForeColor = ri.Cells[e.Column].Appearance.ForeColor;
+            e.RepositoryItem.Appearance.BackColor = ri.Cells[e.Column].Appearance.BackColor;
+        }
+
+        private void buttonXSelectAll_Click(object sender, EventArgs e)
+        {
+            foreach (BusinessClasses.VideoInfo videoInfo in _videoFiles)
+                videoInfo.Selected = true;
+            gridViewVideo.RefreshData();
+        }
+
+        private void buttonXClearAll_Click(object sender, EventArgs e)
+        {
+            foreach (BusinessClasses.VideoInfo videoInfo in _videoFiles)
+                videoInfo.Selected = false;
+            gridViewVideo.RefreshData();
+        }
+
+        private void repositoryItemButtonEditVideoWmv_EditValueChanged(object sender, EventArgs e)
+        {
+            gridViewVideo.CloseEditor();
+        }
+        #endregion
+
+        #region Users Tab
+        public void UpdateUsers(bool showMessages)
+        {
+            gridControlUsers.DataSource = null;
+            _users.Clear();
+
+            string message = string.Empty;
+            if (showMessages)
+            {
+                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                {
+                    FormMain.Instance.ribbonControl.Enabled = false;
+                    this.Enabled = false;
+                    PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                    form.laProgress.Text = "Loading user list...";
+                    form.TopMost = true;
+                    Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                    {
+                        _users.AddRange(this.ParentDecorator.Library.IPadManager.GetUsers(out message));
+                    }));
+                    form.Show();
+                    thread.Start();
+                    while (thread.IsAlive)
+                    {
+                        Thread.Sleep(100);
+                        System.Windows.Forms.Application.DoEvents();
+                    }
+                    form.Close();
+                    this.Enabled = true;
+                    FormMain.Instance.ribbonControl.Enabled = true;
+                }
+                if (!string.IsNullOrEmpty(message))
+                    AppManager.Instance.ShowWarning(message);
+            }
+            else
+                _users.AddRange(this.ParentDecorator.Library.IPadManager.GetUsers(out message));
+
+            gridControlUsers.DataSource = new BindingList<IPadAdminService.UserRecord>(_users.ToArray());
+        }
+
+        private void repositoryItemButtonEditUsersActions_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            if (gridViewUsers.FocusedRowHandle >= 0 && gridViewUsers.FocusedRowHandle < gridViewUsers.RowCount)
+            {
+                IPadAdminService.UserRecord userRecord = _users[gridViewUsers.GetDataSourceRowIndex(gridViewUsers.FocusedRowHandle)];
+                if (e.Button.Index == 0)
+                {
+                    string message = string.Empty;
+                    using (ToolForms.IPad.FormEditUser formEdit = new ToolForms.IPad.FormEditUser(false, _users.Select(x => x.login).ToArray()))
+                    {
+                        formEdit.textEditLogin.EditValue = userRecord.login;
+                        formEdit.textEditFirstName.EditValue = userRecord.firstName;
+                        formEdit.textEditLastName.EditValue = userRecord.lastName;
+                        formEdit.textEditEmail.EditValue = userRecord.email;
+                        if (formEdit.ShowDialog() == DialogResult.OK)
+                        {
+                            string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
+                            string password = formEdit.textEditPassword.EditValue != null ? formEdit.textEditPassword.EditValue.ToString() : string.Empty;
+                            string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
+                            string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
+                            string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+                            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                            {
+                                FormMain.Instance.ribbonControl.Enabled = false;
+                                this.Enabled = false;
+                                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                                form.laProgress.Text = "Updating user...";
+                                form.TopMost = true;
+                                Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                                {
+                                    this.ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, out message);
+                                }));
+                                form.Show();
+                                thread.Start();
+                                while (thread.IsAlive)
+                                {
+                                    Thread.Sleep(100);
+                                    System.Windows.Forms.Application.DoEvents();
+                                }
+                                form.Close();
+                                this.Enabled = true;
+                                FormMain.Instance.ribbonControl.Enabled = true;
+                            }
+                            UpdateUsers(true);
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(message))
+                        AppManager.Instance.ShowWarning(message);
+                }
+                else if (e.Button.Index == 1)
+                {
+                    if (AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) == DialogResult.Yes)
+                    {
+                        string message = string.Empty;
+                        using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                        {
+                            FormMain.Instance.ribbonControl.Enabled = false;
+                            this.Enabled = false;
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                            form.laProgress.Text = "Deleting user...";
+                            form.TopMost = true;
+                            Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                            {
+                                this.ParentDecorator.Library.IPadManager.DeleteUser(userRecord.login, out message);
+                            }));
+                            form.Show();
+                            thread.Start();
+                            while (thread.IsAlive)
+                            {
+                                Thread.Sleep(100);
+                                System.Windows.Forms.Application.DoEvents();
+                            }
+                            form.Close();
+                            this.Enabled = true;
+                            FormMain.Instance.ribbonControl.Enabled = true;
+                        }
+                        UpdateUsers(true);
+                        if (!string.IsNullOrEmpty(message))
+                            AppManager.Instance.ShowWarning(message);
+                    }
+                }
+            }
+        }
+
+        private void buttonXUsersRefresh_Click(object sender, EventArgs e)
+        {
+            UpdateUsers(true);
+        }
+
+        private void buttonXAddUser_Click(object sender, EventArgs e)
+        {
+            string message = string.Empty;
+            using (ToolForms.IPad.FormEditUser formEdit = new ToolForms.IPad.FormEditUser(true, _users.Select(x => x.login).ToArray()))
+            {
+                if (formEdit.ShowDialog() == DialogResult.OK)
+                {
+                    string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
+                    string password = formEdit.textEditPassword.EditValue != null ? formEdit.textEditPassword.EditValue.ToString() : string.Empty;
+                    string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
+                    string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
+                    string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+                    using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                    {
+                        FormMain.Instance.ribbonControl.Enabled = false;
+                        this.Enabled = false;
+                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                        form.laProgress.Text = "Adding user...";
+                        form.TopMost = true;
+                        Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                        {
+                            this.ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, out message);
+                        }));
+                        form.Show();
+                        thread.Start();
+                        while (thread.IsAlive)
+                        {
+                            Thread.Sleep(100);
+                            System.Windows.Forms.Application.DoEvents();
+                        }
+                        form.Close();
+                        this.Enabled = true;
+                        FormMain.Instance.ribbonControl.Enabled = true;
+                    }
+                    UpdateUsers(true);
+                }
+            }
+            if (!string.IsNullOrEmpty(message))
+                AppManager.Instance.ShowWarning(message);
+        }
+        #endregion
+
+        #region Site Tab
         private void pbIE_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website))
@@ -272,6 +508,7 @@ namespace FileManager.PresentationClasses.IPad
                 AppManager.Instance.ShowWarning("Website is no set");
 
         }
+        #endregion
 
         #region Picture Box Clicks Habdlers
         /// <summary>
@@ -291,5 +528,7 @@ namespace FileManager.PresentationClasses.IPad
             pic.Top -= 1;
         }
         #endregion
+
+
     }
 }

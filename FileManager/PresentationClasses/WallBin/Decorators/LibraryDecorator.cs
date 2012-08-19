@@ -207,9 +207,13 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         public void ApplyIPadManager()
         {
             this.AllowToSave = false;
-            FormMain.Instance.buttonEditIPadLocation.EditValue = this.Library.IPadManager.SyncDestinationPath;
-            FormMain.Instance.buttonEditIPadSite.EditValue = this.Library.IPadManager.Website;
+            FormMain.Instance.buttonEditIPadLocation.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.SyncDestinationPath) ? this.Library.IPadManager.SyncDestinationPath : null;
+            FormMain.Instance.buttonEditIPadSite.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Website) ? this.Library.IPadManager.Website : null;
+            FormMain.Instance.buttonEditIPadLogin.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Login) ? this.Library.IPadManager.Login : null;
+            FormMain.Instance.buttonEditIPadPassword.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Password) ? this.Library.IPadManager.Password : null;
             this.IPadManager.UpdateVideoFiles();
+            this.IPadManager.UpdateUsers(false);
+            this.IPadManager.UpdateControlsState();
             if (!FormMain.Instance.TabIPadManager.Controls.Contains(this.IPadManager))
                 FormMain.Instance.TabIPadManager.Controls.Add(this.IPadManager);
             this.IPadManager.BringToFront();

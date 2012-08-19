@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using ceTe.DynamicPDF.Rasterizer;
-using System.IO;
 
 namespace FileManager.ToolClasses
 {
@@ -29,7 +25,6 @@ namespace FileManager.ToolClasses
         public void ExportPdf(string sourceFilePath, string destinationPngPath, string destinationJpgPath, string destinationThumbsPath)
         {
             var rasterizer = new PdfRasterizer(sourceFilePath);
-
             // Save the image.
             var pngImageFormat = new PngImageFormat(PngColorFormat.Rgb);
             var jpgImageFormat = new JpegImageFormat(90);

@@ -43,12 +43,12 @@ namespace FileManager.ToolClasses
                     if (!b.Contains("bitrate:"))
                         b = videoAnalyzer.StandardError.ReadToEnd();
 
-                    int kBitRate = ExtractBitrate(b, 8000);
+                    int kBitRate = ExtractBitrate(b, 0);
 
                     Process videoConverter = new Process()
                     {
-                        StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -xerror -b {1}k \"{2}\"", sourceFilePath,
-                            Math.Ceiling(kBitRate * 1.5), Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
+                        StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -moov_size 524288 -xerror -b {1}k \"{2}\"", sourceFilePath,
+                            kBitRate, Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
                         {
                             UseShellExecute = false,
                             RedirectStandardError = false,
@@ -92,12 +92,12 @@ namespace FileManager.ToolClasses
                     if (!b.Contains("bitrate:"))
                         b = videoAnalyzer.StandardError.ReadToEnd();
 
-                    int kBitRate = ExtractBitrate(b, 8000);
+                    int kBitRate = ExtractBitrate(b, 0);
 
                     Process videoConverter = new Process()
                     {
                         StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -acodec libvorbis -xerror -b {1}k \"{2}\"", sourceFilePath,
-                            Math.Ceiling(kBitRate * 1.5), Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".ogv"))))
+                            kBitRate, Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".ogv"))))
                         {
                             UseShellExecute = false,
                             RedirectStandardError = false,
