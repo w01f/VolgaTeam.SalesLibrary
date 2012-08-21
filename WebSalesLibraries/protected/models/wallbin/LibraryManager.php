@@ -3,16 +3,30 @@ class LibraryManager
 {
     public function getLibraries()
     {
-        if (!isset(Yii::app()->session['libraries']))
+        $librariesCache = Yii::app()->cacheDB->get('libraries');
+        if ($librariesCache !== FALSE)
+        {
+            if (isset(Yii::app()->session['libraries']))
+                $libraries = Yii::app()->session['libraries'];
+        }
+        else
+            Yii::app()->cacheDB->flush();
+
+        if (!isset($libraries))
         {
             $rootFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries');
             $rootFolder = new DirectoryIterator($rootFolderPath);
+
+            $librariesDependency = new CDirectoryCacheDependency();
+            $librariesDependency->directory = $rootFolderPath;
+            $librariesDependency->recursiveLevel = 3;
+
             foreach ($rootFolder as $libraryFolder)
             {
                 if ($libraryFolder->isDir() && !$libraryFolder->isDot())
                 {
                     $libraryName = $libraryFolder->getBasename();
-                    $library = Yii::app()->cacheFile->get($libraryName);
+                    $library = Yii::app()->cacheDB->get($libraryName);
                     if ($library === false)
                     {
                         $library = new Library();
@@ -41,7 +55,7 @@ class LibraryManager
                         $library->load();
 
                         $dependency = new CFileCacheDependency($library->storageFile);
-                        Yii::app()->cacheFile->set($libraryName, $library, (60 * 60 * 24 * 7), $dependency);
+                        Yii::app()->cacheDB->set($libraryName, $library, (60 * 60 * 24 * 7), $dependency);
                     }
                     $libraries[] = $library;
                 }
@@ -49,6 +63,7 @@ class LibraryManager
             if (isset($libraries))
             {
                 Yii::app()->session['libraries'] = $libraries;
+                Yii::app()->cacheDB->set('libraries', 'libraries', (60 * 60 * 24 * 7), $librariesDependency);
             }
         }
         else
@@ -84,9 +99,12 @@ class LibraryManager
 
     public function setSelectedLibraryName($libraryName)
     {
-        $cookie = new CHttpCookie('selectedLibraryName', $libraryName);
-        $cookie->expire = time() + (60 * 60 * 24 * 7);
-        Yii::app()->request->cookies['selectedLibraryName'] = $cookie;
+        if (isset($libraryName))
+        {
+            $cookie = new CHttpCookie('selectedLibraryName', $libraryName);
+            $cookie->expire = time() + (60 * 60 * 24 * 7);
+            Yii::app()->request->cookies['selectedLibraryName'] = $cookie;
+        }
     }
 
     public function getSelectedPage()
@@ -114,9 +132,12 @@ class LibraryManager
 
     public function setSelectedPageName($pageName)
     {
-        $cookie = new CHttpCookie('selectedPageName', $pageName);
-        $cookie->expire = time() + (60 * 60 * 24 * 7);
-        Yii::app()->request->cookies['selectedPageName'] = $cookie;
+        if (isset($pageName))
+        {
+            $cookie = new CHttpCookie('selectedPageName', $pageName);
+            $cookie->expire = time() + (60 * 60 * 24 * 7);
+            Yii::app()->request->cookies['selectedPageName'] = $cookie;
+        }
     }
 
 }

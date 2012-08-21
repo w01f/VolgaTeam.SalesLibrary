@@ -5,12 +5,14 @@ class SiteController extends CController
     {
         $model = new LoginForm;
 
-        if (isset($_POST['LoginForm']))
+        $attributes = Yii::app()->request->getPost('LoginForm');
+        if (isset($attributes))
         {
-            $model->attributes = $_POST['LoginForm'];
+            $model->attributes = $attributes;
             if ($model->validate() && $model->login())
                 $this->redirect(Yii::app()->user->returnUrl);
         }
+
         $this->render('loginPage', array('loginData' => $model));
     }
 

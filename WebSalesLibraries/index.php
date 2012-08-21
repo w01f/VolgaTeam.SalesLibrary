@@ -1,13 +1,16 @@
 <?php
-// change the following paths if necessary
-$yii=dirname(__FILE__).'/yii/framework/yii.php';
-
-$config=dirname(__FILE__).'/protected/config/development.php';
-//$config=dirname(__FILE__).'/protected/config/production.php';
-
-// remove the following line when in production mode
-defined('YII_DEBUG') or define('YII_DEBUG',true);
-
-require_once($yii);
-Yii::createWebApplication($config)->run();
+$webRoot = dirname(__FILE__);
+if ($_SERVER['HTTP_HOST'] == 'localhost')
+{
+    define('YII_DEBUG', true);
+    require_once($webRoot . '/yii/framework/yii.php');
+    $configFile = $webRoot . '/protected/config/development.php';
+}
+else
+{
+    define('YII_DEBUG', false);
+    require_once($webRoot . '/yii/framework/yii.php');
+    $configFile = $webRoot . '/protected/config/production.php';
+}
+$app = Yii::createWebApplication($configFile)->run();
 ?>

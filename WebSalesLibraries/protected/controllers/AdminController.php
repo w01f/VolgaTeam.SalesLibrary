@@ -15,7 +15,7 @@ class AdminController extends CController
 
     protected function authenticateBySession($sessionKey)
     {
-        $data = Yii::app()->cacheFile->get($sessionKey);
+        $data = Yii::app()->cacheDB->get($sessionKey);
         if ($data !== FALSE)
             return TRUE;
         else
@@ -35,7 +35,7 @@ class AdminController extends CController
         if ($identity->errorCode === UserIdentity::ERROR_NONE)
         {
             $sessionKey = strval(md5(mt_rand()));
-            Yii::app()->cacheFile->set($sessionKey, $login, (60 * 60 * 24 * 7));
+            Yii::app()->cacheDB->set($sessionKey, $login, (60 * 60 * 24 * 7));
             return $sessionKey;
         }
         else
@@ -75,10 +75,10 @@ class AdminController extends CController
             {
                 $message = Yii::app()->email;
                 $message->to = $email;
-                $message->subject = 'Access to ' . Yii::app()->params['title'];
+                $message->subject = 'Access to ' . Yii::app()->name;
                 $message->from = Yii::app()->params['adminEmail'];
                 $message->view = 'newUser';
-                $message->viewVars = array('fullName' => ($firstName . ' ' . $lastName), 'login' => $login, 'password' => $password, 'site'=>Yii::app()->params['title']);
+                $message->viewVars = array('fullName' => ($firstName . ' ' . $lastName), 'login' => $login, 'password' => $password, 'site'=>Yii::app()->name);
                 $message->send();
             }
         }

@@ -11,13 +11,15 @@ class WallbinController extends CController
     public function actionGetColumnsViewAjax()
     {
         $libraryManager = new LibraryManager();
-        if (isset($_POST['selectedLibrary']))
-            if ($_POST['selectedLibrary'] != '')
-                $libraryManager->setSelectedLibraryName($_POST['selectedLibrary']);
-        if (isset($_POST['selectedPage']))
-            if ($_POST['selectedPage'] != '')
-                $libraryManager->setSelectedPageName($_POST['selectedPage']);
-        $this->renderPartial('columnsViewAjax', array('selectedPage' => $libraryManager->getSelectedPage()), false, true);
+
+        $libraryManager->setSelectedLibraryName(Yii::app()->request->getPost('selectedLibrary'));
+        $libraryManager->setSelectedPageName(Yii::app()->request->getPost('selectedPage'));
+
+        $selectedPage = $libraryManager->getSelectedPage();
+        $cacheKey = $selectedPage->parent->name . '\\' . $selectedPage->name;
+        $cache = Yii::app()->cacheDB->get($cacheKey);
+
+        $this->renderPartial('columnsViewAjax', array('selectedPage' => $selectedPage, 'cacheKey' => $cacheKey, 'cache' => $cache), false, true);
     }
 
     public function actionGetListView()
@@ -38,6 +40,7 @@ class WallbinController extends CController
         $this->renderPartial('pageDropDownList', array('selectedLibrary' => $libraryManager->getSelectedLibrary(),
             'selectedPage' => $libraryManager->getSelectedPage()), false, true);
     }
+
 }
 
 ?>
