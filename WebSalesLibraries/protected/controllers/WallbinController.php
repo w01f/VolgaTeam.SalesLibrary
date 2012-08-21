@@ -2,6 +2,7 @@
 class WallbinController extends CController
 {
     public $defaultAction = 'getColumnsViewRegular';
+
     public function actionGetColumnsViewRegular()
     {
         $this->layout = '/layouts/ribbon';
@@ -16,7 +17,7 @@ class WallbinController extends CController
         $libraryManager->setSelectedPageName(Yii::app()->request->getPost('selectedPage'));
 
         $selectedPage = $libraryManager->getSelectedPage();
-        $cacheKey = $selectedPage->parent->name . '\\' . $selectedPage->name;
+        $cacheKey = $selectedPage->parent->name . '\\' . $selectedPage->name.'\\'.Yii::app()->browser->getBrowser();
         $cache = Yii::app()->cacheDB->get($cacheKey);
 
         $this->renderPartial('columnsViewAjax', array('selectedPage' => $selectedPage, 'cacheKey' => $cacheKey, 'cache' => $cache), false, true);
