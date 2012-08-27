@@ -1,4 +1,6 @@
 <?php
+$cacheKey = $selectedPage->parent->name . '\\' . $selectedPage->name . '\\' . Yii::app()->browser->getBrowser();
+$cache = Yii::app()->cacheDB->get($cacheKey);
 if ($cache === FALSE)
 {
     $cache .=CHtml::openTag('div', array('id' => 'pageHeaderContainer'));

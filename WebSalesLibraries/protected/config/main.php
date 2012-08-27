@@ -30,6 +30,15 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             )
         ),
+        'log' => array(
+            'class' => 'CLogRouter',
+            'routes' => array(
+                array(
+                    'class' => 'CFileLogRoute',
+                    'levels' => 'error, warning',
+                ),
+            ),
+        ),
         'browser' => array(
             'class' => 'application.extensions.browser.CBrowserComponent',
         ),

@@ -1,6 +1,6 @@
 Hello <?php echo $fullName ?>:
 <br><br>
-You have been granted access to <?php echo $site ?>
+<?php echo Yii::app()->params['email']['new_user']['body'] ?>
 <br><br>
 Your login: <?php echo $login ?><br>
 <br>

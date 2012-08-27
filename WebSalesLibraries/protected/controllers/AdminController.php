@@ -75,8 +75,8 @@ class AdminController extends CController
             {
                 $message = Yii::app()->email;
                 $message->to = $email;
-                $message->subject = 'Access to ' . Yii::app()->name;
-                $message->from = Yii::app()->params['adminEmail'];
+                $message->subject = Yii::app()->params['email']['new_user']['subject'];
+                $message->from = Yii::app()->params['email']['from'];
                 $message->view = 'newUser';
                 $message->viewVars = array('fullName' => ($firstName . ' ' . $lastName), 'login' => $login, 'password' => $password, 'site'=>Yii::app()->name);
                 $message->send();

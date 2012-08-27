@@ -10,17 +10,18 @@
     left:370px;
 }
 
-#imageLogo
-{
-    margin-left:5px;
-}
-
 #fieldLogin,#fieldPassword
 {
-    margin-left:5px;
     width:295px; 
     height:24px; 
     font-size:14px;
+}
+
+#rememberMeContainer
+{
+    display: table-cell;
+    height: 25px;
+    vertical-align: middle;
 }
 
 #fieldRemember,#lableRemember
@@ -30,23 +31,22 @@
 #buttonLogin
 {
     font-size:14px;
-    margin-left:86px;
     height:30px; 
-    width:80px
-}
-
-#linkRecoverPasswordContainer
-{
-    width:300px; 
-    text-align: center;
+    width: 80px;
+    float:right;
 }
 
 #linkRecoverPassword
 {
-    width:300px; 
+    display: table-cell;
     text-align: center;
 }
 
+.row
+{
+    width:300px;
+    display: table;
+}
 
 .errorMessage
 {

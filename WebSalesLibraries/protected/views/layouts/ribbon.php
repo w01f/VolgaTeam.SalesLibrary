@@ -19,8 +19,8 @@
     <body >
         <div id="ribbon">
             <div class="ribbon-window-title" ></div>
-            <div class="ribbon-tab" id="format-tab">
-                <span class="ribbon-title">Home</span>
+            <div class="ribbon-tab sel" id="home-tab">
+                <span class="ribbon-title"><?php echo Yii::app()->params['home_tab']['name'] ?></span>
                 <div class="ribbon-section" >
                     <span class="section-title" id="librariesSelectorTitle">Sales Library</span>
                     <div id ="librariesSelectorContainer">
@@ -33,37 +33,45 @@
                         </div>  
                     </div>  
                 </div>
-                <div class="ribbon-section">
-                    <span class="section-title">Page Style</span>
-                    <div class="ribbon-button sel ribbon-button-large" id="openColumns">
-                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/columns.png' ?>"/>
-                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/columns.png' ?>" />
-                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/columns.png' ?>" />
-                        <span class="button-title">Columns</span>
-                        <span class="button-help">This button will show you the columns view.</span>
+                <?php if (Yii::app()->params['home_tab']['list_button']['visible'] || Yii::app()->params['home_tab']['buttons_button']['visible'] || Yii::app()->params['home_tab']['search_button']['visible']): ?>                                    
+                    <div class="ribbon-section">
+                        <span class="section-title">Page Style</span>
+                        <div class="ribbon-button sel ribbon-button-large" id="openColumns">
+                            <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/columns.png' ?>"/>
+                            <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/columns.png' ?>" />
+                            <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/columns.png' ?>" />
+                            <span class="button-title">Columns</span>
+                            <span class="button-help">This button will show you the columns view.</span>
+                        </div>
+                        <?php if (Yii::app()->params['home_tab']['list_button']['visible']): ?>                    
+                            <div class="ribbon-button ribbon-button-large disabled" ontouchstart="void(0);" onclick="void(0);" id="openList">
+                                <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/list.png' ?>"/>
+                                <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/list.png' ?>" />
+                                <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/list.png' ?>" />
+                                <span class="button-title">List</span>
+                                <span class="button-help">This button will show you the list view.</span>
+                            </div>
+                        <?php endif; ?>                    
+                        <?php if (Yii::app()->params['home_tab']['buttons_button']['visible']): ?>                                        
+                            <div class="ribbon-button ribbon-button-large disabled" ontouchstart="void(0);" onclick="void(0);" id="openButtons">
+                                <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/buttons.png' ?>"/>
+                                <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/buttons.png' ?>" />
+                                <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/buttons.png' ?>" />
+                                <span class="button-title">Buttons</span>
+                                <span class="button-help">This button will show you the buttons view.</span>
+                            </div>                    
+                        <?php endif; ?>                                        
+                        <?php if (Yii::app()->params['home_tab']['search_button']['visible']): ?>                                                            
+                            <div class="ribbon-button ribbon-button-large disabled" ontouchstart="void(0);" onclick="void(0);" id="openSearch">
+                                <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/search.png' ?>"/>
+                                <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/search.png' ?>" />
+                                <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/search.png' ?>" />
+                                <span class="button-title">Search</span>
+                                <span class="button-help">This button will show you the search view.</span>
+                            </div>                                        
+                        <?php endif; ?>                                                            
                     </div>
-                    <div class="ribbon-button ribbon-button-large disabled" ontouchstart="void(0);" onclick="void(0);" id="openList">
-                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/list.png' ?>"/>
-                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/list.png' ?>" />
-                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/list.png' ?>" />
-                        <span class="button-title">List</span>
-                        <span class="button-help">This button will show you the list view.</span>
-                    </div>
-                    <div class="ribbon-button ribbon-button-large disabled" ontouchstart="void(0);" onclick="void(0);" id="openButtons">
-                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/buttons.png' ?>"/>
-                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/buttons.png' ?>" />
-                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/buttons.png' ?>" />
-                        <span class="button-title">Buttons</span>
-                        <span class="button-help">This button will show you the buttons view.</span>
-                    </div>                    
-                    <div class="ribbon-button ribbon-button-large disabled" ontouchstart="void(0);" onclick="void(0);" id="openSearch">
-                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/search.png' ?>"/>
-                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/hot/search.png' ?>" />
-                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/disabled/search.png' ?>" />
-                        <span class="button-title">Search</span>
-                        <span class="button-help">This button will show you the search view.</span>
-                    </div>                                        
-                </div>
+                <?php endif; ?>                                                        
                 <div class="ribbon-section">
                     <span class="section-title">Text Size</span>
                     <div class="ribbon-button ribbon-button-large" id="increaseTextSize">
@@ -91,6 +99,11 @@
                     </div>
                 </div>
             </div>
+            <?php if (Yii::app()->params['search_tab']['visible']): ?>
+                <div class="ribbon-tab" id="search-tab">
+                    <span class="ribbon-title"><?php echo Yii::app()->params['search_tab']['name'] ?></span>
+                </div>            
+            <?php endif; ?>
         </div>
         <div id="content">
             <?php echo $content; ?>
