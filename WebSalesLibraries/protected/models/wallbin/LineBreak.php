@@ -2,8 +2,30 @@
 class LineBreak
 {
     public $parent;
+    /**
+     * @var string
+     * @soap
+     */
+    public $id;
+    /**
+     * @var string
+     * @soap
+     */
+    public $libraryId;    
+    /**
+     * @var Font
+     * @soap
+     */    
     public $font;
+    /**
+     * @var string
+     * @soap
+     */    
     public $foreColor;
+    /**
+     * @var string
+     * @soap
+     */    
     public $note;
     
     public function __construct($link)

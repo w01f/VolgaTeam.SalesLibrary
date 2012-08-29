@@ -19,13 +19,18 @@
 
 #rememberMeContainer
 {
-    display: table-cell;
     height: 25px;
     vertical-align: middle;
+    display: block;
 }
 
 #fieldRemember,#lableRemember
 {
+}
+
+#buttonLoginContainer
+{
+    text-align: right;
 }
 
 #buttonLogin
@@ -33,19 +38,21 @@
     font-size:14px;
     height:30px; 
     width: 80px;
-    float:right;
+}
+
+#linkRecoverPasswordContainer
+{
+    text-align: center;    
 }
 
 #linkRecoverPassword
 {
-    display: table-cell;
-    text-align: center;
+    text-align: center;    
 }
 
 .row
 {
     width:300px;
-    display: table;
 }
 
 .errorMessage

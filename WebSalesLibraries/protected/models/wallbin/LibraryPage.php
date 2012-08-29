@@ -2,12 +2,43 @@
 class LibraryPage
 {
     public $parent;
+    /**
+     * @var string name
+     * @soap
+     */
+    public $id;
+    /**
+     * @var string name
+     * @soap
+     */
+    public $libraryId;
+    /**
+     * @var string name
+     * @soap
+     */
     public $name;
+    /**
+     * @var int order
+     * @soap
+     */
     public $order;
     public $logoPath;
+    /**
+     * @var LibraryFolder[]
+     * @soap
+     */
     public $folders;
+    /**
+     * @var boolean enableColumns
+     * @soap
+     */
     public $enableColumns;
+    /**
+     * @var Column[]
+     * @soap
+     */
     public $columns;
+    public $cachedColumnsView;
     public function __construct($library)
     {
         $this->parent = $library;

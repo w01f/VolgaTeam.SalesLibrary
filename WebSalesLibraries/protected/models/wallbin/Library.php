@@ -1,6 +1,15 @@
 <?php
 class Library
 {
+     /**
+     * @var string id
+     * @soap
+     */
+    public $id;
+    /**
+     * @var string name
+     * @soap
+     */    
     public $name;
     public $storagePath;
     public $storageFile;
@@ -10,7 +19,15 @@ class Library
     public $presentationPreviewContainerPath;
     public $universalPreviewContainerPath;
     public $logoPath;
+    /**
+     * @var LibraryPage[]
+     * @soap
+     */        
     public $pages;
+    /**
+     * @var AutoWidget[] 
+     * @soap
+     */            
     public $autoWidgets;
     public function load()
     {

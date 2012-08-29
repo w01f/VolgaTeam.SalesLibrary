@@ -19,7 +19,7 @@ class LibraryManager
 
             $librariesDependency = new CDirectoryCacheDependency();
             $librariesDependency->directory = $rootFolderPath;
-            $librariesDependency->recursiveLevel = 3;
+            $librariesDependency->recursiveLevel = 2;
 
             foreach ($rootFolder as $libraryFolder)
             {

@@ -2,15 +2,65 @@
 class UniversalPreviewContainer
 {
     public $parent;
+    /**
+     * @var string
+     * @soap
+     */
+    public $linkId;
+    /**
+     * @var string
+     * @soap
+     */
+    public $libraryId;
+    /**
+     * @var string[]
+     * @soap
+     */
     public $pngLinks;
+    /**
+     * @var string[]
+     * @soap
+     */
     public $jpegLinks;
+    /**
+     * @var string[]
+     * @soap
+     */
     public $pdfLinks;
+    /**
+     * @var string[]
+     * @soap
+     */
     public $mp4Links;
+    /**
+     * @var string[]
+     * @soap
+     */
     public $ogvLinks;
+    /**
+     * @var string[]
+     * @soap
+     */        
     public $oldOfficeFormatLinks;
+    /**
+     * @var string[]
+     * @soap
+     */        
     public $newOfficeFormatLinks;
+    /**
+     * @var string[]
+     * @soap
+     */        
     public $thumbsLinks;
+    /**
+     * @var int
+     * @soap
+     */            
     public $thumbsWidth;
+    /**
+     * @var int
+     * @soap
+     */            
     public $thumbsHeight;
     public function __construct($libraryLink)
     {

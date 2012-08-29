@@ -49,11 +49,12 @@ echo CHtml::openTag('div', array(
         echo CHtml::tag('br');
         echo CHtml::tag('br');
 
-        echo CHtml::openTag('div', array(
+        echo CHtml::openTag('table', array(
             'class' => 'row'
         ));
+        echo CHtml::openTag('tr');
         {
-            echo CHtml::openTag('div', array(
+            echo CHtml::openTag('td', array(
                 'id' => 'rememberMeContainer'
             ));
             {
@@ -65,20 +66,29 @@ echo CHtml::openTag('div', array(
                     , array('id' => 'lableRemember')
                 );
             }
-            echo CHtml::closeTag('div'); //row
+            echo CHtml::closeTag('td'); //rememberMeContainer
+            echo CHtml::openTag('td', array(
+                'id' => 'buttonLoginContainer')
+            );
             echo CHtml::submitButton('Log In'
                 , array('id' => 'buttonLogin')
             );
+            echo CHtml::closeTag('td');
         }
-        echo CHtml::closeTag('div'); //row
+        echo CHtml::closeTag('tr'); //row
+        echo CHtml::closeTag('table'); //row
 
         echo CHtml::tag('br');
         echo CHtml::tag('br');
         echo CHtml::tag('br');
 
-        echo CHtml::openTag('div', array(
+        echo CHtml::openTag('table', array(
             'class' => 'row'
         ));
+        echo CHtml::openTag('tr');
+        echo CHtml::openTag('td', array(
+            'id' => 'linkRecoverPasswordContainer')
+        );
         {
             echo CHtml::ajaxLink('Forgot Password?'
                 , array('site/passwordRecover')
@@ -87,7 +97,9 @@ echo CHtml::openTag('div', array(
                 'id' => 'linkRecoverPassword')
             );
         }
-        echo CHtml::closeTag('div'); //row
+        echo CHtml::closeTag('td');
+        echo CHtml::closeTag('tr'); //row
+        echo CHtml::closeTag('table'); //row
     }
     $this->endWidget();
 }

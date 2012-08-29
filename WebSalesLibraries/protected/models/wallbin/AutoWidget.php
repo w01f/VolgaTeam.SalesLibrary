@@ -2,7 +2,20 @@
 
 class AutoWidget
 {
+    /**
+     * @var string name
+     * @soap
+     */
+    public $libraryId;    
+    /**
+     * @var string name
+     * @soap
+     */    
     public $extension;
+    /**
+     * @var string name
+     * @soap
+     */    
     public $widget;
 
     public function load($widgetNode)

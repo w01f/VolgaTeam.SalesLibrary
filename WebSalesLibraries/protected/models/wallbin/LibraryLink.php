@@ -1,29 +1,90 @@
 <?php
 class LibraryLink
 {
-    private $_enableWidget;
-    private $_widget;
     public $parent;
+    /**
+     * @var string
+     * @soap
+     */
+    public $id;
+    /**
+     * @var string
+     * @soap
+     */
+    public $libraryId;
+    /**
+     * @var string
+     * @soap
+     */
     public $name;
-    public $identifier;
+    /**
+     * @var string
+     * @soap
+     */
     public $fileRelativePath;
+    /**
+     * @var string
+     * @soap
+     */
     public $fileName;
     public $fileLink;
+    /**
+     * @var string
+     * @soap
+     */
     public $fileExtension;
+    /**
+     * @var string
+     * @soap
+     */
     public $note;
+    /**
+     * @var boolean
+     * @soap
+     */
     public $isBold;
+    /**
+     * @var int
+     * @soap
+     */
     public $order;
+    /**
+     * @var int
+     * @soap
+     */
     public $type;
-    public $originalFormat;
-    public $availableFormats;
+    /**
+     * @var LineBreak
+     * @soap
+     */    
     public $lineBreakProperties;
+    /**
+     * @var boolean
+     * @soap
+     */
+    public $enableWidget;
+    /**
+     * @var string
+     * @soap
+     */
+    public $widget;
+    /**
+     * @var Banner
+     * @soap
+     */
     public $banner;
     public $presentationPreview;
+    /**
+     * @var UniversalPreviewContainer
+     * @soap
+     */
     public $universalPreview;
+    public $originalFormat;
+    public $availableFormats;
     public function __construct($folder)
     {
         $this->parent = $folder;
-        $this->identifier = uniqid();
+        $this->id = uniqid();
     }
 
     public function load($fileXMLNode)
@@ -83,12 +144,12 @@ class LibraryLink
 
         $node = $fileXMLNode->getElementsByTagName("EnableWidget")->item(0);
         if (isset($node))
-            $this->_enableWidget = filter_var($node->nodeValue, FILTER_VALIDATE_BOOLEAN);
+            $this->enableWidget = filter_var($node->nodeValue, FILTER_VALIDATE_BOOLEAN);
 
 
         $node = $fileXMLNode->getElementsByTagName("Widget")->item(0);
         if (isset($node))
-            $this->_widget = $node->nodeValue;
+            $this->widget = $node->nodeValue;
 
         $node = $fileXMLNode->getElementsByTagName("LineBreakProperties")->item(0);
         if (isset($node))
@@ -136,9 +197,9 @@ class LibraryLink
 
     public function getWidget()
     {
-        if (isset($this->_enableWidget))
-            if (isset($this->_widget))
-                return $this->_widget;
+        if (isset($this->enableWidget))
+            if (isset($this->widget))
+                return $this->widget;
         return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
     }
 
