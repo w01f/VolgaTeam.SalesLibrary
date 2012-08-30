@@ -15,6 +15,7 @@ class FolderStorage extends CActiveRecord
     {
         $folderRecord = new FolderStorage();
         $folderRecord->id = $folder->id;
+        $folderRecord->id_page = $folder->pageId;
         $folderRecord->id_library = $folder->libraryId;
         $folderRecord->name = $folder->name;
         $folderRecord->column_order = $folder->columnOrder;

@@ -1,7 +1,7 @@
 <?php
 class Library
 {
-     /**
+    /**
      * @var string id
      * @soap
      */
@@ -9,50 +9,44 @@ class Library
     /**
      * @var string name
      * @soap
-     */    
+     */
     public $name;
     public $storagePath;
-    public $storageFile;
     public $storageLink;
-    public $presentationPreviewContainerLink;
-    public $universalPreviewContainerLink;
-    public $presentationPreviewContainerPath;
-    public $universalPreviewContainerPath;
     public $logoPath;
     /**
      * @var LibraryPage[]
      * @soap
-     */        
+     */
     public $pages;
     /**
      * @var AutoWidget[] 
      * @soap
-     */            
+     */
     public $autoWidgets;
     public function load()
     {
-        if (file_exists($this->storageFile))
+        foreach (LibraryPageStorage::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
         {
-            $doc = new DOMDocument();
-            $doc->load($this->storageFile);
-
-            $pageNodes = $doc->getElementsByTagName("Page");
-            foreach ($pageNodes as $pageNode)
-            {
-                $page = new LibraryPage($this);
-                $page->load($pageNode);
-                $this->pages[] = $page;
-            }
+            $page = new LibraryPage($this);
+            $page->load($pageRecord);
+            $this->pages[] = $page;
+        }
+        if (isset($this->pages))
             usort($this->pages, "LibraryPage::libraryPageComparer");
 
-            $autoWidgetNodes = $doc->getElementsByTagName("AutoWidget");
-            foreach ($autoWidgetNodes as $autoWidgetNode)
-            {
-                $autoWidget = new AutoWidget();
-                $autoWidget->load($autoWidgetNode);
-                $this->autoWidgets[] = $autoWidget;
-            }
+        foreach (AutoWidgetStorage::model()->findAll('id_library=?', array($this->id)) as $autoWidgetRecord)
+        {
+            $autoWidget = new AutoWidget();
+            $autoWidget->load($autoWidgetRecord);
+            $this->autoWidgets[] = $autoWidget;
         }
+    }
+
+    public function buildCache()
+    {
+        foreach ($this->pages as $page)
+            $page->buildCache();
     }
 
     public function getAutoWidget($extension)

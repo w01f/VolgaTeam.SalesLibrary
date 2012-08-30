@@ -20,7 +20,6 @@
 .columnHeaderContainer{
     display: table-cell;    
     vertical-align: middle;
-    behavior: url(./css/PIE.htc);
 }
 
 .columnWidget{
@@ -92,20 +91,17 @@
 
 .bannerContainer{
     display: table;
-    behavior: url(./css/PIE.htc);
 }
 
 .bannerImage{
     vertical-align: middle;
     display: table-cell;
-    behavior: url(./css/PIE.htc);
 }
 
 .bannerText,.bannerTextLink{
     vertical-align: middle;
     display: table-cell;
     padding-left: 5px;
-    behavior: url(./css/PIE.htc);
 }
 
 .bannerTextLink{
@@ -114,7 +110,6 @@
 
 .viewDialogContent{
     display: none;
-    behavior: url(./css/PIE.htc);
 }
 
 .clickable

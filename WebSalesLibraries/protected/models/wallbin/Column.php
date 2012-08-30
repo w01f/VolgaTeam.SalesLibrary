@@ -6,6 +6,11 @@ class Column
      * @var string
      * @soap
      */
+    public $pageId;
+    /**
+     * @var string
+     * @soap
+     */
     public $libraryId;
     /**
      * @var string
@@ -74,65 +79,29 @@ class Column
         $this->enableWidget = FALSE;
     }
 
-    public function load($columnXMLNode)
+    public function load($columnRecord)
     {
-        $this->name = $columnXMLNode->getElementsByTagName("Name")->item(0)->nodeValue;
+        $this->pageId = $columnRecord->id_page;
+        $this->libraryId = $columnRecord->id_library;
+        $this->name = $columnRecord->name;
+        $this->order = $columnRecord->order;
+        $this->backColor = $columnRecord->back_color;
+        $this->foreColor = $columnRecord->fore_color;
+        $this->font = new Font();
+        $this->font->name = $columnRecord->font_name;
+        $this->font->size = $columnRecord->font_size;
+        $this->font->isBold = $columnRecord->font_bold;
+        $this->font->isItalic = $columnRecord->font_italic;
+        $this->showText = $columnRecord->show_text;
+        $this->alignment = $columnRecord->alignment;
+        $this->enableWidget = $columnRecord->enable_widget;
+        $this->widget = $columnRecord->widget;
 
-        $node = $columnXMLNode->getElementsByTagName("ColumnOrder")->item(0);
-        if (isset($node))
-            $this->order = intval($node->nodeValue);
-
-        $node = $columnXMLNode->getElementsByTagName("BackgroundColor")->item(0);
-        if (isset($node))
-            $this->backColor = str_pad(dechex(intval($node->nodeValue) + 16777216), 6, "0", STR_PAD_LEFT);
-
-        $node = $columnXMLNode->getElementsByTagName("ForeColor")->item(0);
-        if (isset($node))
-            $this->foreColor = str_pad(dechex(intval($node->nodeValue) + 16777216), 6, "0", STR_PAD_LEFT);
-
-        $node = $columnXMLNode->getElementsByTagName("HeaderFont")->item(0);
-        if (isset($node))
-            $this->font = Utils::parseFont($node->nodeValue);
-
-        $node = $columnXMLNode->getElementsByTagName("EnableText")->item(0);
-        if (isset($node))
-            $this->showText = filter_var($node->nodeValue, FILTER_VALIDATE_BOOLEAN);
-
-        $node = $columnXMLNode->getElementsByTagName("HeaderAligment")->item(0);
-        if (isset($node))
+        $bannerRecord = BannerStorage::model()->findByPk($columnRecord->id_banner);
+        if ($bannerRecord !== null)
         {
-            $alignmentValue = intval($node->nodeValue);
-            switch ($alignmentValue)
-            {
-                case 0:
-                    $this->alignment = "left";
-                    break;
-                case 1:
-                    $this->alignment = "center";
-                    break;
-                case 2:
-                    $this->alignment = "right";
-                    break;
-                default :
-                    $this->alignment = "center";
-                    break;
-            }
-        }
-
-        $node = $columnXMLNode->getElementsByTagName("EnableWidget")->item(0);
-        if (isset($node))
-            $this->enableWidget = filter_var($node->nodeValue, FILTER_VALIDATE_BOOLEAN);
-
-
-        $node = $columnXMLNode->getElementsByTagName("Widget")->item(0);
-        if (isset($node))
-            $this->widget = $node->nodeValue;
-
-        $node = $columnXMLNode->getElementsByTagName("BannerProperties")->item(0);
-        if (isset($node))
-        {
-            $this->banner = new Banner($this);
-            $this->banner->load($node);
+            $this->banner = new Banner();
+            $this->banner->load($bannerRecord);
         }
     }
 

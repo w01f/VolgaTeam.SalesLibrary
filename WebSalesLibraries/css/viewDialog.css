@@ -28,14 +28,12 @@
     display: table;
     margin-left: auto;
     margin-right: auto;
-    behavior: url(./css/PIE.htc);
 }
 
 .viewDialogFormatListRow
 { 
     display: table-cell;
     white-space:nowrap;
-    behavior: url(./css/PIE.htc);
 }
 
 .viewDialogFormatItem
@@ -44,20 +42,17 @@
     vertical-align: middle;
     margin-left: 10px;
     margin-right: 10px;
-    behavior: url(./css/PIE.htc);
 }
 
 .viewDialogFormatImage
 { 
     border: none;
     cursor: pointer;
-    behavior: url(./css/PIE.htc);
 }
 
 .viewDialogFormatServiceData
 { 
     display: none;
     visibility: hidden;
-    behavior: url(./css/PIE.htc);
 }
 

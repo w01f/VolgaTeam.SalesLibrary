@@ -1,5 +1,5 @@
 <?php
-class DataController extends CController
+class ContentController extends CController
 {
     public function actions()
     {
@@ -61,6 +61,8 @@ class DataController extends CController
         if ($this->authenticateBySession($sessionKey))
         {
             LibraryStorage::ClearData($library->id);
+            Yii::app()->cacheDB->flush();
+
             LibraryStorage::UpdateData($library);
         }
     }
@@ -75,6 +77,25 @@ class DataController extends CController
     {
         if ($this->authenticateBySession($sessionKey))
             LinkStorage::UpdateContent($linkId, $content);
+    }
+
+    /**
+     * @param string Session Key
+     * @param string Library Id
+     * @soap
+     */
+    public function buildCache($sessionKey, $libraryId)
+    {
+        if ($this->authenticateBySession($sessionKey))
+        {
+            $libraryManager = new LibraryManager();
+            if (isset($libraryManager))
+            {
+                $library = $libraryManager->getLibraryById($libraryId);
+                if (isset($library))
+                    $library->buildCache();
+            }
+        }
     }
 
 }

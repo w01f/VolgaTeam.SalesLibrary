@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `tbl_folder`;
 CREATE TABLE IF NOT EXISTS `tbl_folder` (
   `id` varchar(36) NOT NULL,
+  `id_page` varchar(36) NOT NULL,
   `id_library` varchar(36) NOT NULL,
   `name` varchar(256) NOT NULL,
   `column_order` int(11) NOT NULL,
@@ -23,5 +24,6 @@ CREATE TABLE IF NOT EXISTS `tbl_folder` (
   `widget` mediumblob,
   `id_banner` varchar(36) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `id_page` (`id_page`),
   KEY `id_library` (`id_library`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=55 ;

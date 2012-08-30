@@ -25,6 +25,26 @@ class LibraryStorage extends CActiveRecord
             AutoWidgetStorage::UpdateData($autoWidget);
     }
 
+    public static function UpdateCache($libraryId)
+    {
+        $pageRecord = LinkStorage::model()->findAll('id_library=?', array($libraryId));
+        if ($pageRecord !== false)
+        {
+            
+        }        
+        
+        $libraryRecord = new LibraryStorage();
+        $libraryRecord->id = $library->id;
+        $libraryRecord->name = $library->name;
+        $libraryRecord->save();
+
+        foreach ($library->pages as $page)
+            LibraryPageStorage::UpdateData($page);
+
+        foreach ($library->autoWidgets as $autoWidget)
+            AutoWidgetStorage::UpdateData($autoWidget);
+    }
+
     public static function ClearData($libraryId)
     {
         PreviewStorage::ClearData($libraryId);

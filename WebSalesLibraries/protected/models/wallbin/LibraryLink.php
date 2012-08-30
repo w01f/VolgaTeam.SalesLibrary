@@ -11,6 +11,11 @@ class LibraryLink
      * @var string
      * @soap
      */
+    public $folderId;
+    /**
+     * @var string
+     * @soap
+     */
     public $libraryId;
     /**
      * @var string
@@ -56,7 +61,7 @@ class LibraryLink
     /**
      * @var LineBreak
      * @soap
-     */    
+     */
     public $lineBreakProperties;
     /**
      * @var boolean
@@ -73,12 +78,12 @@ class LibraryLink
      * @soap
      */
     public $banner;
-    public $presentationPreview;
     /**
      * @var UniversalPreviewContainer
      * @soap
      */
     public $universalPreview;
+    public $browser;
     public $originalFormat;
     public $availableFormats;
     public function __construct($folder)
@@ -87,111 +92,64 @@ class LibraryLink
         $this->id = uniqid();
     }
 
-    public function load($fileXMLNode)
+    public function load($linkRecord)
     {
-        $node = $fileXMLNode->getElementsByTagName("DisplayName")->item(0);
-        if (isset($node))
-            $this->name = $node->nodeValue;
+        $this->id = $linkRecord->id;
+        $this->folderId = $linkRecord->id_folder;
+        $this->libraryId = $linkRecord->id_library;
+        $this->name = $linkRecord->name;
+        $this->fileRelativePath = $linkRecord->file_relative_path;
+        $this->fileName = $linkRecord->file_name;
+        $this->fileExtension = $linkRecord->file_extension;
+        $this->note = $linkRecord->note;
+        $this->isBold = $linkRecord->is_bold;
+        $this->order = $linkRecord->order;
+        $this->type = $linkRecord->type;
+        $this->enableWidget = $linkRecord->enable_widget;
+        $this->widget = $linkRecord->widget;
 
-        $node = $fileXMLNode->getElementsByTagName("Type")->item(0);
-        if (isset($node))
-            $this->type = intval($node->nodeValue);
-
-        $node = $fileXMLNode->getElementsByTagName("RelativePath")->item(0);
-        if (isset($node))
+        $lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
+        if ($lineBreakRecord !== null)
         {
-            $this->fileRelativePath = $node->nodeValue;
-            if (isset($this->type) && ($this->type == 5))
-            {
-                $this->fileName = $this->fileRelativePath;
-            }
-            else if (isset($this->type) && ($this->type == 6))
-            {
-                
-            }
-            else if (isset($this->type) && ($this->type == 8))
-            {
-                $this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
-                $this->fileName = $this->fileRelativePath;
-                $this->fileLink = $this->fileRelativePath;
-                $this->originalFormat = 'url';
-                $this->availableFormats[] = 'url';
-            }
-            else
-            {
-                $this->fileRelativePath = str_replace('\\', '/', $node->nodeValue);
-                $fileFullPath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
-                $this->fileName = basename($fileFullPath);
-                $this->fileExtension = strtolower(pathinfo($fileFullPath, PATHINFO_EXTENSION));
-                $this->fileLink = str_replace('&', '%26', $this->parent->parent->parent->storageLink . $this->fileRelativePath);
-                $this->getFormats();
-            }
+            $this->lineBreakProperties = new LineBreak();
+            $this->lineBreakProperties->load($lineBreakRecord);
         }
 
-        $node = $fileXMLNode->getElementsByTagName("Note")->item(0);
-        if (isset($node))
-            $this->note = $node->nodeValue;
-
-        $node = $fileXMLNode->getElementsByTagName("IsBold")->item(0);
-        if (isset($node))
-            $this->isBold = filter_var($node->nodeValue, FILTER_VALIDATE_BOOLEAN);
-        else
-            $this->isBold = FALSE;
-
-        $node = $fileXMLNode->getElementsByTagName("Order")->item(0);
-        if (isset($node))
-            $this->order = intval($node->nodeValue);
-
-        $node = $fileXMLNode->getElementsByTagName("EnableWidget")->item(0);
-        if (isset($node))
-            $this->enableWidget = filter_var($node->nodeValue, FILTER_VALIDATE_BOOLEAN);
-
-
-        $node = $fileXMLNode->getElementsByTagName("Widget")->item(0);
-        if (isset($node))
-            $this->widget = $node->nodeValue;
-
-        $node = $fileXMLNode->getElementsByTagName("LineBreakProperties")->item(0);
-        if (isset($node))
+        $bannerRecord = BannerStorage::model()->findByPk($linkRecord->id_banner);
+        if ($bannerRecord !== null)
         {
-            $this->lineBreakProperties = new LineBreak($this);
-            $this->lineBreakProperties->load($node);
+            $this->banner = new Banner();
+            $this->banner->load($bannerRecord);
         }
 
-        $node = $fileXMLNode->getElementsByTagName("BannerProperties")->item(0);
-        if (isset($node))
-        {
-            $this->banner = new Banner($this);
-            $this->banner->load($node);
-        }
-        else
-        //Compatibility with old versios of Cache
-        {
-            $enableBannerNode = $fileXMLNode->getElementsByTagName("EnableBanner")->item(0);
-            $bannerNode = $fileXMLNode->getElementsByTagName("Banner")->item(0);
-            if (isset($enableBannerNode) && isset($bannerNode))
-            {
-                $this->banner = new Banner($this);
-                $this->banner->isEnabled = filter_var($enableBannerNode->nodeValue, FILTER_VALIDATE_BOOLEAN);
-                if ($this->banner->isEnabled)
-                    $this->banner->image = $bannerNode->nodeValue;
-            }
-        }
-
-        $node = $fileXMLNode->getElementsByTagName("UniversalPreviewContainer")->item(0);
-        if (isset($node))
+        $previewRecords = PreviewStorage::model()->findAll('id_link=?', array($this->id));
+        if ($previewRecords !== null)
         {
             $this->universalPreview = new UniversalPreviewContainer($this);
-            $this->universalPreview->load($node);
+            $this->universalPreview->load($previewRecords);
+        }
+
+        if ($this->type == 5)
+        {
+            $this->fileName = $this->fileRelativePath;
+        }
+        else if ($this->type == 6)
+        {
+            
+        }
+        else if ($this->type == 8)
+        {
+            $this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
+            $this->fileName = $this->fileRelativePath;
+            $this->fileLink = $this->fileRelativePath;
+            $this->originalFormat = 'url';
+            $this->availableFormats[] = 'url';
         }
         else
         {
-            $node = $fileXMLNode->getElementsByTagName("PreviewContainer")->item(0);
-            if (isset($node))
-            {
-                $this->presentationPreview = new PresentationPreviewContainer($this);
-                $this->presentationPreview->load($node);
-            }
+            $this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
+            $this->fileLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath));
+            $this->getFormats();
         }
     }
 
@@ -254,41 +212,35 @@ class LibraryLink
                 case 'ogm':
                 case 'ogx':
                     $this->originalFormat = 'video';
-                    if (Yii::app()->browser->isMobile())
+                    switch ($this->browser)
                     {
-                        $this->availableFormats[] = 'mp4';
-                        $this->availableFormats[] = 'tab';
-                    }
-                    else
-                    {
-                        $browser = Yii::app()->browser->getBrowser();
-                        switch ($browser)
-                        {
-                            case 'Internet Explorer':
-                                $this->availableFormats[] = 'mp4';
-                                $this->availableFormats[] = 'video';
-                                break;
-                            case 'Chrome':
-                            case 'Safari':
-                                $this->availableFormats[] = 'mp4';
-                                $this->availableFormats[] = 'tab';
-                                break;
-                            case 'Firefox':
-                                $this->availableFormats[] = 'mp4';
-                                $this->availableFormats[] = 'ogv';
-                                break;
-                            case 'Opera':
-                                $this->availableFormats[] = 'mp4';
-                                $this->availableFormats[] = 'tab';
-                                $this->availableFormats[] = 'ogv';
-                                break;
-                            default:
-                                $this->availableFormats[] = 'video';
-                                $this->availableFormats[] = 'mp4';
-                                $this->availableFormats[] = 'ogv';
-                                $this->availableFormats[] = 'tab';
-                                break;
-                        }
+                        case 'mobile':
+                            $this->availableFormats[] = 'mp4';
+                            $this->availableFormats[] = 'tab';
+                            break;
+                        case 'ie':
+                            $this->availableFormats[] = 'mp4';
+                            $this->availableFormats[] = 'video';
+                            break;
+                        case 'webkit':
+                            $this->availableFormats[] = 'mp4';
+                            $this->availableFormats[] = 'tab';
+                            break;
+                        case 'firefox':
+                            $this->availableFormats[] = 'mp4';
+                            $this->availableFormats[] = 'ogv';
+                            break;
+                        case 'opera':
+                            $this->availableFormats[] = 'mp4';
+                            $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'ogv';
+                            break;
+                        default:
+                            $this->availableFormats[] = 'video';
+                            $this->availableFormats[] = 'mp4';
+                            $this->availableFormats[] = 'ogv';
+                            $this->availableFormats[] = 'tab';
+                            break;
                     }
                     break;
                 case 'mp4':
@@ -340,17 +292,6 @@ class LibraryLink
                                 }
                             }
                         }
-                        else if (isset($this->presentationPreview))
-                            if (isset($this->presentationPreview->links))
-                            {
-                                $i = 1;
-                                $count = count($this->presentationPreview->links);
-                                foreach ($this->presentationPreview->links as $link)
-                                {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
-                                    $i++;
-                                }
-                            }
                         break;
                     case 'jpeg':
                         if (isset($this->universalPreview))

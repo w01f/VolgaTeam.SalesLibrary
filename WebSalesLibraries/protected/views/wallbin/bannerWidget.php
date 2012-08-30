@@ -14,7 +14,7 @@ if ($banner->showText)
         . 'font-size: ' . $banner->font->size . 'pt; '
         . 'font-weight: ' . ($banner->font->isBold ? ' bold' : ' normal') . '; '
         . 'font-style: ' . ($banner->font->isItalic ? ' italic' : ' normal') . '; '
-        . 'color: #' . $banner->foreColor . '; '
+        . 'color: ' . $banner->foreColor . '; '
     ));
     echo $banner->text;
     echo CHtml::closeTag('span'); //bannerText                                

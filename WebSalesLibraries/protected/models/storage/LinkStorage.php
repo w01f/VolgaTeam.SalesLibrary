@@ -15,6 +15,7 @@ class LinkStorage extends CActiveRecord
     {
         $linkRecord = new LinkStorage();
         $linkRecord->id = $link->id;
+        $linkRecord->id_folder = $link->folderId;
         $linkRecord->id_library = $link->libraryId;
         $linkRecord->name = $link->name;
         $linkRecord->file_relative_path = $link->fileRelativePath;

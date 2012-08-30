@@ -3,67 +3,63 @@ class LibraryManager
 {
     public function getLibraries()
     {
-        $librariesCache = Yii::app()->cacheDB->get('libraries' . '\\' . Yii::app()->browser->getBrowser());
+        if (!isset(Yii::app()->session['sessionKey']))
+            Yii::app()->session['sessionKey'] = uniqid();
+        $librariesCache = Yii::app()->cacheDB->get(Yii::app()->session['sessionKey']);
         if ($librariesCache !== FALSE)
         {
             if (isset(Yii::app()->session['libraries']))
                 $libraries = Yii::app()->session['libraries'];
         }
-        else
-            Yii::app()->cacheDB->flush();
 
         if (!isset($libraries))
         {
             $rootFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries');
             $rootFolder = new DirectoryIterator($rootFolderPath);
 
-            $librariesDependency = new CDirectoryCacheDependency();
-            $librariesDependency->directory = $rootFolderPath;
-            $librariesDependency->recursiveLevel = 2;
-
             foreach ($rootFolder as $libraryFolder)
             {
                 if ($libraryFolder->isDir() && !$libraryFolder->isDot())
                 {
                     $libraryName = $libraryFolder->getBasename();
-                    $library = Yii::app()->cacheDB->get($libraryName . '\\' . Yii::app()->browser->getBrowser());
-                    if ($library === false)
+                    $storagePath = $libraryFolder->getPathname();
+                    $storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
+                    $storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
+                    if (!file_exists($storageFile))
                     {
-                        $library = new Library();
-                        $library->name = $libraryName;
-
-                        $storagePath = realpath($libraryFolder->getPathname() . DIRECTORY_SEPARATOR . "Primary Root");
-                        if (file_exists($storagePath))
-                        {
-                            $library->storagePath = $storagePath;
-                            $library->storageFile = $library->storagePath . DIRECTORY_SEPARATOR . "SalesDepotCache.xml";
-                            $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename() . '/' . "Primary Root";
-                        }
-                        else
-                        {
-                            $library->storagePath = realpath($libraryFolder->getPathname());
-                            $library->storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/' . "Libraries" . '/' . $libraryFolder->getBasename();
-                        }
-                        $library->storageFile = realpath($library->storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.xml');
-
-                        $library->presentationPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!QV';
-                        $library->universalPreviewContainerPath = $library->storagePath . DIRECTORY_SEPARATOR . '!WV';
-
-                        $library->presentationPreviewContainerLink = $library->storageLink . '/!QV';
-                        $library->universalPreviewContainerLink = $library->storageLink . '/!WV';
-                        $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
-                        $library->load();
-
-                        $dependency = new CFileCacheDependency($library->storageFile);
-                        Yii::app()->cacheDB->set($libraryName . '\\' . Yii::app()->browser->getBrowser(), $library, (60 * 60 * 24 * 7), $dependency);
+                        $storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
+                        $storageLink .= '/Primary Root';
+                        $storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
                     }
-                    $libraries[] = $library;
+                    if (file_exists($storageFile))
+                    {
+                        $doc = new DOMDocument();
+                        $doc->load($storageFile);
+                        $libraryId = trim($doc->getElementsByTagName("Identifier")->item(0)->nodeValue);
+                        $libraryRecord = LibraryStorage::model()->findByPk($libraryId);
+                        if ($libraryRecord !== null)
+                        {
+                            $library = Yii::app()->cacheDB->get($libraryId);
+                            if ($library === false)
+                            {
+                                $library = new Library();
+                                $library->name = $libraryName;
+                                $library->id = $libraryId;
+                                $library->storagePath = $storagePath;
+                                $library->storageLink = $storageLink;
+                                $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+                                $library->load();
+                                Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
+                            }
+                            $libraries[] = $library;
+                        }
+                    }
                 }
             }
             if (isset($libraries))
             {
                 Yii::app()->session['libraries'] = $libraries;
-                Yii::app()->cacheDB->set('libraries' . '\\' . Yii::app()->browser->getBrowser(), 'libraries', (60 * 60 * 24 * 7), $librariesDependency);
+                Yii::app()->cacheDB->set(Yii::app()->session['sessionKey'], 'libraries', (60 * 60 * 24 * 7));
             }
         }
         else
@@ -71,6 +67,24 @@ class LibraryManager
             $libraries = Yii::app()->session['libraries'];
         }
         return $libraries;
+    }
+
+    public function getLibraryById($libraryId)
+    {
+        $libraries = $this->getLibraries();
+        if (isset($libraries))
+        {
+            foreach ($libraries as $library)
+            {
+                if ($library->id == $libraryId)
+                {
+                    $selectedLibrary = $library;
+                    break;
+                }
+            }
+        }
+        if (isset($selectedLibrary))
+            return $selectedLibrary;
     }
 
     public function getSelectedLibrary()
@@ -90,7 +104,7 @@ class LibraryManager
         }
         if (!isset($selectedLibrary))
         {
-            $libraries = LibraryManager::getLibraries();
+            $libraries = $this->getLibraries();
             $selectedLibrary = $libraries[0];
             $this->setSelectedLibraryName($selectedLibrary->name);
         }

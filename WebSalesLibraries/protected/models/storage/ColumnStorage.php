@@ -14,6 +14,7 @@ class ColumnStorage extends CActiveRecord
     public static function UpdateData($column)
     {
         $columnRecord = new ColumnStorage();
+        $columnRecord->id_page = $column->pageId;
         $columnRecord->id_library = $column->libraryId;
         $columnRecord->name = $column->name;
         $columnRecord->order = $column->order;

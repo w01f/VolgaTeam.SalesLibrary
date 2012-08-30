@@ -1,32 +1,28 @@
 <?php
-
 class AutoWidget
 {
     /**
      * @var string name
      * @soap
      */
-    public $libraryId;    
+    public $libraryId;
     /**
      * @var string name
      * @soap
-     */    
+     */
     public $extension;
     /**
      * @var string name
      * @soap
-     */    
+     */
     public $widget;
-
-    public function load($widgetNode)
+    public function load($autoWidgetRecord)
     {
-        $node = $widgetNode->getElementsByTagName("Extension")->item(0);
-        if (isset($node))
-            $this->extension = $node->nodeValue;
-
-        $node = $widgetNode->getElementsByTagName("Widget")->item(0);
-        if (isset($node))
-            $this->widget = $node->nodeValue;
+        $this->libraryId = $autoWidgetRecord->id_library;
+        $this->extension = $autoWidgetRecord->extension;
+        $this->widget = $autoWidgetRecord->widget;
     }
+
 }
+
 ?>

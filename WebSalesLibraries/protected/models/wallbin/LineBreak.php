@@ -1,7 +1,6 @@
 <?php
 class LineBreak
 {
-    public $parent;
     /**
      * @var string
      * @soap
@@ -28,39 +27,17 @@ class LineBreak
      */    
     public $note;
     
-    public function __construct($link)
+    public function load($lineBreakRecord)
     {
-        $this->parent = $link;
-    }
-
-    public function load($lineBreakXMLNode)
-    {
-
-        $node = $lineBreakXMLNode->getElementsByTagName("Font")->item(0);
-        if (isset($node))
-        {
-            $this->font = Utils::parseFont($node->nodeValue);
-        }
-        else
-        {
-            $this->font = new Font();
-            $this->font->name = "Arial";
-            $this->font->size = "12";
-            $this->font->isBold = FALSE;
-            $this->font->isItalic = FALSE;
-        }
-
-        $node = $lineBreakXMLNode->getElementsByTagName("ForeColor")->item(0);
-        if (isset($node))
-            $this->foreColor = str_pad(dechex(intval($node->nodeValue) + 16777216), 6, "0", STR_PAD_LEFT);
-        else
-            $this->foreColor = "000000";
-
-        $node = $lineBreakXMLNode->getElementsByTagName("Note")->item(0);
-        if (isset($node))
-            $this->note = $node->nodeValue;
-        else
-            $this->note = '';
+        $this->id = $lineBreakRecord->id;
+        $this->libraryId = $lineBreakRecord->id_library;        
+        $this->note = $lineBreakRecord->note;
+        $this->foreColor = $lineBreakRecord->fore_color;
+        $this->font = new Font();
+        $this->font->name = $lineBreakRecord->font_name;
+        $this->font->size = $lineBreakRecord->font_size;
+        $this->font->isBold = $lineBreakRecord->font_bold;
+        $this->font->isItalic = $lineBreakRecord->font_italic;        
     }
 }
 
