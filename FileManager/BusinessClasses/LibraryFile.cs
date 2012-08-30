@@ -196,6 +196,17 @@ namespace FileManager.BusinessClasses
             }
         }
 
+        public string Content
+        {
+            get
+            {
+                if (this.UniversalPreviewContainer != null)
+                    return this.UniversalPreviewContainer.GetTextContent();
+                else
+                    return string.Empty;
+            }
+        }
+
         public LibraryFile(LibraryFolder parent)
         {
             this.Name = string.Empty;
@@ -218,6 +229,7 @@ namespace FileManager.BusinessClasses
         {
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<DisplayName>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
             result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
             result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
@@ -272,6 +284,10 @@ namespace FileManager.BusinessClasses
             {
                 switch (childNode.Name)
                 {
+                    case "Identifier":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.Identifier = tempGuid;
+                        break;
                     case "DisplayName":
                         this.Name = childNode.InnerText;
                         break;

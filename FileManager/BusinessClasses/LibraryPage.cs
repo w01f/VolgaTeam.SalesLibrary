@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
@@ -8,6 +9,7 @@ namespace FileManager.BusinessClasses
     {
         public Library Parent { get; set; }
         public string Name { get; set; }
+        public Guid Identifier { get; set; }
         public int Order { get; set; }
         public bool EnableColumnTitles { get; set; }
         public bool ApplyForAllColumnTitles { get; set; }
@@ -26,6 +28,7 @@ namespace FileManager.BusinessClasses
         {
             this.Parent = parent;
             this.Name = string.Format("Page {0}", this.Parent.Pages.Count + 1);
+            this.Identifier = Guid.NewGuid();
             this.Order = 0;
             this.EnableColumnTitles = false;
             this.ApplyForAllColumnTitles = false;
@@ -50,6 +53,7 @@ namespace FileManager.BusinessClasses
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
+            result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<Order>" + this.Order + @"</Order>");
             result.AppendLine(@"<EnableColumnTitles>" + this.EnableColumnTitles + @"</EnableColumnTitles>");
             result.AppendLine(@"<ApplyForAllColumnTitles>" + this.ApplyForAllColumnTitles + @"</ApplyForAllColumnTitles>");
@@ -68,6 +72,7 @@ namespace FileManager.BusinessClasses
         {
             bool tempBool = false;
             int tempInt = 0;
+            Guid tempGuid;
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
@@ -75,6 +80,10 @@ namespace FileManager.BusinessClasses
                 {
                     case "Name":
                         this.Name = childNode.InnerText;
+                        break;
+                    case "Identifier":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.Identifier = tempGuid;
                         break;
                     case "Order":
                         if (int.TryParse(childNode.InnerText, out tempInt))

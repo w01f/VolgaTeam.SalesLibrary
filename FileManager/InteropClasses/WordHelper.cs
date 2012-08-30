@@ -83,8 +83,12 @@ namespace FileManager.InteropClasses
             bool updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0);
             if (!Directory.Exists(docxDestination))
                 Directory.CreateDirectory(docxDestination);
+            string txtDestination = Path.Combine(destinationFolderPath, "txt");
+            bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
+            if (!Directory.Exists(txtDestination))
+                Directory.CreateDirectory(txtDestination);
 
-            if (updatePdf || updatePng || updateJpg || updateThumbs || updateDoc || updateDocx)
+            if (updatePdf || updatePng || updateJpg || updateThumbs || updateDoc || updateDocx || updateTxt)
             {
                 try
                 {
@@ -100,6 +104,16 @@ namespace FileManager.InteropClasses
 
                         if (updateJpg || updatePng || updateThumbs)
                             ToolClasses.PdfHelper.Instance.ExportPdf(pdfFileName, pngDestination, jpgDestination, thumbsDestination);
+
+                        string txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt"));
+                        if (updateTxt)
+                        {
+                            using (StreamWriter sw = new StreamWriter(txtFileName, false))
+                            {
+                                sw.Write(document.Content.Text);
+                                sw.Flush();
+                            }
+                        }
 
                         if (updateDoc || updateDocx)
                         {

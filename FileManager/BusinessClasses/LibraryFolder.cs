@@ -58,6 +58,7 @@ namespace FileManager.BusinessClasses
             TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
+            result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<RowOrder>" + this.RowOrder + @"</RowOrder>");
             result.AppendLine(@"<ColumnOrder>" + this.ColumnOrder + @"</ColumnOrder>");
             result.AppendLine(@"<BorderColor>" + this.BorderColor.ToArgb() + @"</BorderColor>");
@@ -83,6 +84,7 @@ namespace FileManager.BusinessClasses
             int tempInt = 0;
             bool tempBool;
             FontConverter converter = new FontConverter();
+            Guid tempGuid;
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
@@ -90,6 +92,10 @@ namespace FileManager.BusinessClasses
                 {
                     case "Name":
                         this.Name = childNode.InnerText;
+                        break;
+                    case "Identifier":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.Identifier = tempGuid;
                         break;
                     case "RowOrder":
                         if (int.TryParse(childNode.InnerText, out tempInt))

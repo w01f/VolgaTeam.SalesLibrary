@@ -8,6 +8,7 @@ namespace FileManager.BusinessClasses
 {
     public class LineBreakProperties
     {
+        public Guid Identifier { get; set; }
         public Color ForeColor { get; set; }
         public Font Font { get; set; }
         public Font BoldFont { get; set; }
@@ -17,6 +18,7 @@ namespace FileManager.BusinessClasses
 
         public LineBreakProperties()
         {
+            this.Identifier = Guid.NewGuid();
             this.ForeColor = Color.Black;
             this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
             this.BoldFont = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -27,6 +29,7 @@ namespace FileManager.BusinessClasses
         {
             FontConverter fontConverter = new FontConverter();
             StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<Font>" + fontConverter.ConvertToString(this.Font) + @"</Font>");
             result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
             result.AppendLine(@"<Note>" + this.Note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
@@ -38,10 +41,15 @@ namespace FileManager.BusinessClasses
             FontConverter converter = new FontConverter();
             int tempInt = 0;
             bool tempBool = false;
+            Guid tempGuid;
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 switch (childNode.Name)
                 {
+                    case "Identifier":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.Identifier = tempGuid;
+                        break;
                     case "Font":
                         try
                         {

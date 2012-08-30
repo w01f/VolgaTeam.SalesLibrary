@@ -73,7 +73,6 @@
             this.itemContainerHomePage = new DevComponents.DotNetBar.ItemContainer();
             this.labelItemHomePages = new DevComponents.DotNetBar.LabelItem();
             this.controlContainerItemHomePages = new DevComponents.DotNetBar.ControlContainerItem();
-            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonPanelIPad = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarIPadSync = new DevComponents.DotNetBar.RibbonBar();
             this.buttonItemIPadSync = new DevComponents.DotNetBar.ButtonItem();
@@ -109,6 +108,7 @@
             this.itemContainerProgramManagerSync = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemProgramManagerSyncEnabled = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemProgramManagerSyncDisabled = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonPanelCalendar = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarCalendarFileGrabber = new DevComponents.DotNetBar.RibbonBar();
             this.buttonItemCalendarFileGrabber = new DevComponents.DotNetBar.ButtonItem();
@@ -214,9 +214,9 @@
             this.ribbonControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonControl.CanCustomize = false;
             this.ribbonControl.Controls.Add(this.ribbonPanelHome);
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelIPad);
             this.ribbonControl.Controls.Add(this.ribbonPanelProgramManager);
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
             this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
             this.ribbonControl.Controls.Add(this.ribbonPanelClipart);
@@ -863,29 +863,6 @@
             this.controlContainerItemHomePages.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
             this.controlContainerItemHomePages.Name = "controlContainerItemHomePages";
             // 
-            // ribbonPanelHelp
-            // 
-            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 26);
-            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
-            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelHelp.Size = new System.Drawing.Size(1008, 126);
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonPanelHelp.TabIndex = 4;
-            this.ribbonPanelHelp.Visible = false;
-            // 
             // ribbonPanelIPad
             // 
             this.ribbonPanelIPad.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1031,7 +1008,7 @@
             // 
             // buttonEditIPadSite
             // 
-            this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 31);
+            this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 30);
             this.buttonEditIPadSite.Name = "buttonEditIPadSite";
             this.buttonEditIPadSite.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
@@ -1045,7 +1022,7 @@
             // 
             // buttonEditIPadLogin
             // 
-            this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 73);
+            this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 72);
             this.buttonEditIPadLogin.Name = "buttonEditIPadLogin";
             this.buttonEditIPadLogin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
@@ -1056,7 +1033,7 @@
             // 
             // buttonEditIPadPassword
             // 
-            this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 73);
+            this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 72);
             this.buttonEditIPadPassword.Name = "buttonEditIPadPassword";
             this.buttonEditIPadPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
@@ -1201,7 +1178,7 @@
             // 
             // buttonEditIPadLocation
             // 
-            this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 61);
+            this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 60);
             this.buttonEditIPadLocation.Name = "buttonEditIPadLocation";
             this.buttonEditIPadLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -1296,7 +1273,7 @@
             // 
             // buttonEditProgramManagerLocation
             // 
-            this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(6, 61);
+            this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(6, 60);
             this.buttonEditProgramManagerLocation.Name = "buttonEditProgramManagerLocation";
             this.buttonEditProgramManagerLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -1386,6 +1363,29 @@
             this.buttonItemProgramManagerSyncDisabled.ForeColor = System.Drawing.Color.Black;
             this.buttonItemProgramManagerSyncDisabled.Name = "buttonItemProgramManagerSyncDisabled";
             this.buttonItemProgramManagerSyncDisabled.Text = "   Disabled";
+            // 
+            // ribbonPanelHelp
+            // 
+            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 26);
+            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
+            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelHelp.Size = new System.Drawing.Size(1008, 126);
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonPanelHelp.TabIndex = 4;
+            this.ribbonPanelHelp.Visible = false;
             // 
             // ribbonPanelCalendar
             // 

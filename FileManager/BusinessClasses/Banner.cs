@@ -10,7 +10,7 @@ namespace FileManager.BusinessClasses
     public class BannerProperties
     {
         public bool Configured { get; set; }
-
+        public Guid Identifier { get; set; }
         public bool Enable { get; set; }
         public Image Image { get; set; }
         public bool ShowText { get; set; }
@@ -21,6 +21,7 @@ namespace FileManager.BusinessClasses
 
         public BannerProperties()
         {
+            this.Identifier = Guid.NewGuid();
             this.ForeColor = Color.Black;
             this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
             this.Text = string.Empty;
@@ -31,6 +32,7 @@ namespace FileManager.BusinessClasses
             FontConverter fontConverter = new FontConverter();
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
+            result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
             result.AppendLine(@"<Image>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Image>");
             result.AppendLine(@"<ImageAligement>" + ((int)this.ImageAlignement).ToString() + @"</ImageAligement>");
@@ -46,10 +48,15 @@ namespace FileManager.BusinessClasses
             FontConverter converter = new FontConverter();
             int tempInt = 0;
             bool tempBool = false;
+            Guid tempGuid;
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 switch (childNode.Name)
                 {
+                    case "Identifier":
+                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
+                            this.Identifier = tempGuid;
+                        break;
                     case "Enable":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.Enable = tempBool;

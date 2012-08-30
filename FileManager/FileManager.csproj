@@ -83,7 +83,13 @@
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>ToolClasses\PdfToText\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SharpZipLib">
+      <HintPath>ToolClasses\PdfToText\SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -115,6 +121,7 @@
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
     <Compile Include="BusinessClasses\SearchTags.cs" />
     <Compile Include="BusinessClasses\SyncScheduleRecord.cs" />
+    <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
     <Compile Include="PresentationClasses\IPad\IPadManagerControl.cs">
       <SubType>UserControl</SubType>
@@ -129,6 +136,7 @@
       <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\PdfHelper.cs" />
+    <Compile Include="ToolClasses\PDFParser.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
     <Compile Include="ToolForms\IPad\FormEditUser.cs">
       <SubType>Form</SubType>
@@ -384,6 +392,11 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web References\ContentManagmentService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\IPadAdminService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -533,6 +546,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Web References\ContentManagmentService\ContentController.wsdl" />
+    <None Include="Web References\ContentManagmentService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\IPadAdminService\AdminController.wsdl" />
     <None Include="Web References\IPadAdminService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -643,6 +661,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Outlook">
       <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>9</VersionMajor>
@@ -704,6 +731,20 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>FileManager_IPadAdminService_AdminControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/content/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ContentManagmentService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/content/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>FileManager_ContentManagmentService_ContentControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

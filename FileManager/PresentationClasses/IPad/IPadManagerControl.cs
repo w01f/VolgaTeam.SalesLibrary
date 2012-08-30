@@ -407,6 +407,35 @@ namespace FileManager.PresentationClasses.IPad
         #endregion
 
         #region Site Tab
+        public void UpdateLibraryOnServer()
+        {
+            string message = string.Empty;
+            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            {
+                FormMain.Instance.ribbonControl.Enabled = false;
+                this.Enabled = false;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+                form.laProgress.Text = string.Format("Updating {0}...{1}This might take a few minutes...", this.ParentDecorator.Library.IPadManager.Website, Environment.NewLine);
+                form.TopMost = true;
+                Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                {
+                    this.ParentDecorator.Library.IPadManager.UpdateLibraryOnServer(out message);
+                }));
+                form.Show();
+                thread.Start();
+                while (thread.IsAlive)
+                {
+                    Thread.Sleep(100);
+                    System.Windows.Forms.Application.DoEvents();
+                }
+                form.Close();
+                this.Enabled = true;
+                FormMain.Instance.ribbonControl.Enabled = true;
+            }
+            if (!string.IsNullOrEmpty(message))
+                AppManager.Instance.ShowWarning(message);
+        }
+
         private void pbIE_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website))
@@ -528,7 +557,5 @@ namespace FileManager.PresentationClasses.IPad
             pic.Top -= 1;
         }
         #endregion
-
-
     }
 }

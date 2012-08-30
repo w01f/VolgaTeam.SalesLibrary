@@ -35,6 +35,19 @@ namespace FileManager.BusinessClasses
         #endregion
     }
 
+    public class ExcelPreviewGenerator : IPreviewGenerator
+    {
+        #region IPreviewGenerator Members
+        public string SourceFile { get; set; }
+        public string ContainerPath { get; set; }
+
+        public void GeneratePreview()
+        {
+            InteropClasses.ExcelHelper.Instance.ExportBookAllFormats(this.SourceFile, this.ContainerPath);
+        }
+        #endregion
+    }
+
     public class PdfPreviewGenerator : IPreviewGenerator
     {
         #region IPreviewGenerator Members
@@ -58,6 +71,13 @@ namespace FileManager.BusinessClasses
                 Directory.CreateDirectory(thumbsDestination);
             if (updatePng || updateJpg || updateThumbs)
                 ToolClasses.PdfHelper.Instance.ExportPdf(this.SourceFile, pngDestination, jpgDestination, thumbsDestination);
+
+            string txtDestination = Path.Combine(this.ContainerPath, "txt");
+            bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
+            if (!Directory.Exists(txtDestination))
+                Directory.CreateDirectory(txtDestination);
+            if (updateTxt)
+                ToolClasses.PdfHelper.Instance.ExtractText(this.SourceFile, txtDestination);
         }
         #endregion
     }

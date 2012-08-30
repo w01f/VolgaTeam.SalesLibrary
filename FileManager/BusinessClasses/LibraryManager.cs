@@ -364,7 +364,7 @@ namespace FileManager.BusinessClasses
                 filesWhiteList.Clear();
 
                 AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.LibraryLogoFolder)), filesWhiteList);
-                filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName)).FullName);
+                filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.StorageLightFileName)).FullName);
 
                 List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                 List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();

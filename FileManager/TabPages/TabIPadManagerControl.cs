@@ -67,7 +67,7 @@ namespace FileManager.TabPages
             }
         }
 
-        public void buttonItemIPadSync_Click(object sender, EventArgs e)
+        public void buttonItemIPadSyncFiles_Click(object sender, EventArgs e)
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
@@ -76,7 +76,7 @@ namespace FileManager.TabPages
                     FormMain.Instance.ribbonControl.Enabled = false;
                     this.Enabled = false;
                     SaveIPadSettings();
-                    form.laProgress.Text = "Updating Library for the iPad..." + Environment.NewLine + "This might take a few minutes...";
+                    form.laProgress.Text = "Updating Files for the iPad..." + Environment.NewLine + "This might take a few minutes...";
                     form.TopMost = true;
                     Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
@@ -96,6 +96,8 @@ namespace FileManager.TabPages
                     this.Enabled = true;
                     FormMain.Instance.ribbonControl.Enabled = true;
                 }
+
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateLibraryOnServer();
             }
         }
 

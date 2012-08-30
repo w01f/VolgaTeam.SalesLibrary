@@ -135,6 +135,7 @@ namespace FileManager.BusinessClasses
         {
             DateTime tempDate = DateTime.Now;
             bool tempBool = false;
+            Guid tempGuid;
 
             this.BrandingText = string.Empty;
             this.SyncDate = DateTime.Now;
@@ -162,6 +163,10 @@ namespace FileManager.BusinessClasses
                 XmlNode node = document.SelectSingleNode(@"/Library/Name");
                 if (node != null)
                     this.Name = node.InnerText;
+                node = document.SelectSingleNode(@"/Library/Identifier");
+                if (node != null)
+                    if (Guid.TryParse(node.InnerText, out tempGuid))
+                        this.Identifier = tempGuid;
                 node = document.SelectSingleNode(@"/Library/BrandingText");
                 if (node != null)
                     this.BrandingText = node.InnerText;
@@ -347,6 +352,7 @@ namespace FileManager.BusinessClasses
             StringBuilder xml = new StringBuilder();
             xml.AppendLine("<Library>");
             xml.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
+            xml.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             xml.AppendLine(@"<UseDirectAccess>" + this.UseDirectAccess + @"</UseDirectAccess>");
             xml.AppendLine(@"<DirectAccessFileBottomDate>" + this.DirectAccessFileBottomDate.ToString() + @"</DirectAccessFileBottomDate>");
             xml.AppendLine(@"<RootFolder>" + this.Folder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
@@ -416,6 +422,20 @@ namespace FileManager.BusinessClasses
             }
         }
 
+        public void SaveLight()
+        {
+            StringBuilder xml = new StringBuilder();
+            xml.AppendLine("<Library>");
+            xml.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
+            xml.AppendLine(@"</Library>");
+
+            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageLightFileName), false))
+            {
+                sw.Write(xml.ToString());
+                sw.Flush();
+            }
+        }
+
         public void PrepareForRegularSynchronize()
         {
             this.SyncDate = DateTime.Now;
@@ -433,6 +453,7 @@ namespace FileManager.BusinessClasses
         {
             if (!this.UseDirectAccess)
                 GenerateExtendedPreviewFiles();
+            this.SaveLight();
             Archive();
         }
 
@@ -504,7 +525,7 @@ namespace FileManager.BusinessClasses
             foreach (LibraryPage page in this.Pages)
                 foreach (LibraryFolder folder in page.Folders)
                 {
-                    foreach (LibraryFile file in folder.Files.Where(x =>x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
                     {
                         if (file.UniversalPreviewContainer == null)
                             file.UniversalPreviewContainer = new UniversalPreviewContainer(file);

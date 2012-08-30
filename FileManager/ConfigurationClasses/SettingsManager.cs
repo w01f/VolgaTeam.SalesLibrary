@@ -10,6 +10,7 @@ namespace FileManager.ConfigurationClasses
     {
         public const string UserSettingsFileName = @"SalesDepotUserSettings.xml";
         public const string StorageFileName = @"SalesDepotCache.xml";
+        public const string StorageLightFileName = @"SalesDepotCacheLight.xml";
         public const string StyleFileName = @"SalesDepotStyle.xml";
         public const string WholeDriveFilesStorage = @"Primary Root";
         public const string RegularPreviewContainersRootFolderName = @"!QV";

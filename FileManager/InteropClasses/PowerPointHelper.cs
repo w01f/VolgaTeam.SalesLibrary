@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using System.IO;
+using System.Text;
 
 namespace FileManager.InteropClasses
 {
@@ -104,8 +105,12 @@ namespace FileManager.InteropClasses
             bool updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination, "*.pptx").Length > 0);
             if (!Directory.Exists(pptxDestination))
                 Directory.CreateDirectory(pptxDestination);
+            string txtDestination = Path.Combine(destinationFolderPath, "txt");
+            bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
+            if (!Directory.Exists(txtDestination))
+                Directory.CreateDirectory(txtDestination);
 
-            if (updatePdf || updatePng || updateJpg || updateThumbs || updatePpt || updatePptx)
+            if (updatePdf || updatePng || updateJpg || updateThumbs || updatePpt || updatePptx || updateTxt)
             {
                 try
                 {
@@ -117,7 +122,9 @@ namespace FileManager.InteropClasses
                         if (updatePdf)
                             presentation.SaveCopyAs(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
 
-                        if (updatePng || updateJpg || updateThumbs || updatePpt || updatePptx)
+                        StringBuilder content = new StringBuilder();
+
+                        if (updatePng || updateJpg || updateThumbs || updatePpt || updatePptx || updateTxt)
                         {
                             int i = 1;
                             int thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
@@ -142,9 +149,25 @@ namespace FileManager.InteropClasses
                                     singleSlidePresentation.Close();
                                     AppManager.Instance.ReleaseComObject(singleSlidePresentation);
                                 }
+                                if (updateTxt)
+                                {
+                                    foreach (PowerPoint.Shape shape in slide.Shapes)
+                                        if (shape.HasTextFrame == Microsoft.Office.Core.MsoTriState.msoTrue)
+                                            content.AppendLine(shape.TextFrame.TextRange.Text.Trim());
+
+                                }
                                 i++;
                             }
                         }
+
+                        if (updateTxt && content.Length > 0)
+                            using (StreamWriter sw = new StreamWriter(Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt")), false))
+                            {
+                                sw.Write(content.ToString());
+                                sw.Flush();
+                            }
+
+
                         presentation.Close();
                         AppManager.Instance.ReleaseComObject(presentation);
                     }
