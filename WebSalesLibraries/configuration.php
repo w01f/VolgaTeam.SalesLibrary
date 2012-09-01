@@ -22,7 +22,7 @@ return CMap::mergeArray(
                 ),
             ),
             'search_tab' => array(
-                'visible' => false,
+                'visible' => true,
                 'name' => 'Search',
             ),
             'email' => array(

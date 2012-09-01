@@ -4,7 +4,7 @@
             'width':$(window).width()+'px'
         });
         $('#content').css({
-            'height':($(window).height() - $('#ribbon').height())+'px'
+            'height':($(window).height() - $('#ribbon').height()-5)+'px'
         });
     }
     

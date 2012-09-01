@@ -1,6 +1,14 @@
 <?php
 class SiteController extends CController
 {
+    public $defaultAction = 'index';
+    
+    public function actionIndex()
+    {
+        $this->layout = '/layouts/ribbon';
+        $this->render('index');
+    }
+
     public function actionLogin()
     {
         $model = new LoginForm;

@@ -1,13 +1,13 @@
 <?php
 class SearchController extends CController
 {
-    public $defaultAction = 'getSearchRegular';
-
-    public function actionGetSearchRegular()
+    public $defaultAction = 'getSearchView';
+    
+    public function actionGetSearchView()
     {
-        $this->layout = '/layouts/ribbon';
-        $this->render('empty');
+        $this->renderPartial('searchView', array(), false, true);
     }
+
 }
 
 ?>

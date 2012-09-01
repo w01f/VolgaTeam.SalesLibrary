@@ -115,7 +115,21 @@
 
                 $('#ribbon .ribbon-tab').hide();
                 $('#ribbon #'+tabNames[index]).show();
+                
+                that.switchToPageByIndex(index);
             }
+            
+            that.switchToPageByIndex = function(index) {
+                switch(index)
+                {
+                    case 0:
+                        $.initColumnsView();                            
+                        break;
+                    case 1:
+                        $.initSearchView();
+                        break;                        
+                }
+            }            
 		
             $.fn.enable = function() {
                 if (this.hasClass('ribbon-button')) {

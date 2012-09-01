@@ -7,7 +7,7 @@
     if(storedTextSpace==null)
         storedTextSpace = 2;
     
-    var libraryChanged = function(){
+    $.libraryChanged = function(){
         var selectedLibraryName = $("#selectLibrary :selected").text();
         $.cookie("selectedLibraryName", selectedLibraryName, {
             expires: 60 * 60 * 24 * 7
@@ -29,7 +29,7 @@
             },
             success: function(msg){
                 $('#selectPage').html(msg);
-                pageChanged();
+                $.pageChanged();
                 $("#pagelogo").attr('src', $("#selectLibrary").val());
                 $('#librariesSelectorTitle').html(selectedLibraryName);                                    
             },
@@ -38,20 +38,20 @@
         });     
     }
     
-    var pageChanged = function(){
+    $.pageChanged = function(){
         var selectedPageName = $("#selectPage :selected").text();
         $.cookie("selectedPageName", selectedPageName, {
             expires: 60 * 60 * 24 * 7
         });
         $("#pagelogo").attr('src', $("#selectPage").val());
-        loadColumns();
+        $.loadColumns();
     }
     
-    var loadColumns = function(){
+    $.loadColumns = function(){
         var savedState = null;
         $.ajax({
             type: "POST",
-            url: "wallbin/getColumnsViewAjax",
+            url: "wallbin/getColumnsView",
             data:savedState,
             beforeSend: function(){
                 $.showOverlay();
@@ -77,12 +77,12 @@
         });     
     }
     
-    $(document).ready(function() 
-    {
+    $.initColumnsView = function(){
         $.ajax({
             type: "POST",
             url: "wallbin/getLibraryDropDownList",
             beforeSend: function(){
+                $('#content').html('');
                 $.showOverlay();
                 $('#librariesSelectorContainer').css({
                     'visibility':'hidden'
@@ -96,18 +96,20 @@
             },
             success: function(msg){
                 $('#selectLibrary').html(msg);
-                libraryChanged();
+                $.libraryChanged();
             },
             async: true,
             dataType: 'html'                        
         });
-        
-        
+    }
+    
+    $(document).ready(function() 
+    {
         $('#selectLibrary').on('change',function(){
-            libraryChanged();
+            $.libraryChanged();
         });
         $('#selectPage').on('change',function(){
-            pageChanged();
+            $.pageChanged();
         });
         
         $(window).on('resize',$.updateContentAreaWidth);         
@@ -137,6 +139,6 @@
             if(storedTextSize>8)
                 storedTextSize--;
             $.updateTextSize(storedTextSize);
-        });            
+        });                    
     });
 })( jQuery );    

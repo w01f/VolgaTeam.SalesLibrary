@@ -2,7 +2,7 @@
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Sales Libraries',
-    'defaultController' => 'wallbin',
+    'defaultController' => 'site',
     'preload' => array('log'),
     'import' => array(
         'application.models.*',
