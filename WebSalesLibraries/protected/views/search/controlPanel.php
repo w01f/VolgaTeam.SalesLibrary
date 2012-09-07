@@ -1,5 +1,5 @@
+<br>
 <div class ="group-panel">
-    <div class ="group-title">File Types</div>
     <div id ="file-types">
         <input type="checkbox" id="search-file-type-powerpoint" checked="checked"/><label for="search-file-type-powerpoint">Power Point</label>
         <input type="checkbox" id="search-file-type-word" checked="checked"/><label for="search-file-type-word">Word</label>
@@ -8,7 +8,7 @@
         <input type="checkbox" id="search-file-type-video" checked="checked"/><label for="search-file-type-video">Video</label>
     </div>
 </div>
-
+<br>
 <div class ="group-panel">
     <div class ="group-title">Search Condition</div>
     <div id="condition-type">

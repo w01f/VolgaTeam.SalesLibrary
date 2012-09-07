@@ -36,6 +36,7 @@
                     },
                     success: function(msg){
                         $('#search-result').html(msg);
+                        $.updateContentAreaWidth();
                     },
                     error: function(){
                         $('#search-result').html('');
@@ -83,6 +84,12 @@
         $( "#condition-type" ).tabs();
         
         $( "#content-compare-type").buttonset();
+        
+        $('#condition-content-value').keypress(function (e) {
+            if (e.which == 13) {
+                $.runSearch();
+            }
+        });
     }
     
     $.initSearchView = function(){
@@ -99,6 +106,7 @@
             },
             success: function(msg){
                 $('#content').html(msg);
+                $.updateContentAreaWidth();
             },
             error: function(){
                 $('#content').html('');
@@ -110,5 +118,5 @@
     
     $(document).ready(function() 
     {
-    });
+        });
 })( jQuery );    

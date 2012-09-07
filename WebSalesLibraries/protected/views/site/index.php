@@ -6,7 +6,7 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/js/video-js/video-js.min.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/ribbon.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/columns.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/search.css');
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/viewDialog.css');
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/view-dialog.css');
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('jquery.ui');

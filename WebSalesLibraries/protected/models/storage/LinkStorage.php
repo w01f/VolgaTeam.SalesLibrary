@@ -60,59 +60,31 @@ class LinkStorage extends CActiveRecord
 
     public static function searchByContent($condition)
     {
-        return Yii::app()->db->createCommand()
-                ->select('id,name,file_name')
-                ->from('tbl_link')
-                ->where('match(name,file_name,content) against(:condition in boolean mode)', array(':condition' => $condition))
-                ->queryAll();
-//        $libraryManager = new LibraryManager();
-//        foreach (Yii::app()->db->createCommand()
-//            ->select('id,name,file_name')
-//            ->from('tbl_link')
-//            ->where('match(name,file_name,content) against(:condition in boolean mode)', array(':condition' => $condition))
-//            ->queryAll() as $linkRow)
-//        {
-//            $linkRecord = LinkStorage::model()->findByPk($linkRow['id']);
-//            if ($linkRecord !== null)
-//            {
-//                $library = $libraryManager->getLibraryById($linkRecord->id_library);
-//                if ($library !== null)
-//                {
-//                    $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-//                    if (Yii::app()->browser->isMobile())
-//                    {
-//                        $link->browser = 'mobile';
-//                    }
-//                    else
-//                    {
-//                        $browser = Yii::app()->browser->getBrowser();
-//                        switch ($browser)
-//                        {
-//                            case 'Internet Explorer':
-//                                $link->browser = 'ie';
-//                                break;
-//                            case 'Chrome':
-//                            case 'Safari':
-//                                $link->browser = 'webkit';
-//                                break;
-//                            case 'Firefox':
-//                                $link->browser = 'firefox';
-//                                break;
-//                            case 'Opera':
-//                                $link->browser = 'opera';
-//                                break;
-//                            default:
-//                                $link->browser = 'ie';
-//                                break;
-//                        }
-//                    }
-//                    $link->load($linkRecord);
-//                    $links[] = $link;
-//                }
-//            }
-//        }
-//        if (isset($links))
-//            return $links;
+        $linkRecords = Yii::app()->db->createCommand()
+            ->select('id,id_library,name,file_name')
+            ->from('tbl_link')
+            ->where('match(name,file_name,content) against(:condition in boolean mode)', array(':condition' => $condition))
+            ->queryAll();
+
+        if (isset($linkRecords))
+        {
+            $libraryManager = new LibraryManager();
+            foreach ($linkRecords as $linkRecord)
+            {
+                $link['id'] = $linkRecord['id'];
+                $link['name'] = $linkRecord['name'];
+                $link['file_name'] = $linkRecord['file_name'];
+
+                $library = $libraryManager->getLibraryById($linkRecord['id_library']);
+                if (isset($library))
+                    $link['library'] = $library->name;
+                else
+                    $link['library'] = '';
+                $links[] = $link;
+            }
+        }
+        if (isset($links))
+            return $links;
     }
 
 }

@@ -21,7 +21,7 @@ class SearchController extends CController
                         'id' => 'id',
                         'sort' => array(
                             'attributes' => array(
-                                'name', 'file_name',
+                                'id', 'name', 'file_name', 'library'
                             ),
                         ),
                         'pagination' => array(

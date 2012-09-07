@@ -1,7 +1,11 @@
 (function( $ ) {
     $.updateContentAreaWidth = function(){
+        var height = $(window).height() - $('#ribbon').height()-10;
         $('#content').css({
-            'height':($(window).height() - $('#ribbon').height()-8)+'px'
+            'height':height+'px'
+        });
+        $('#search-grid').css({
+            'height':height+'px'
         });
     }
     
