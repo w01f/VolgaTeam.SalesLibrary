@@ -9,7 +9,7 @@
 }
 
 .page-column{
-    width:330px;
+    width: 33%;
     float:left;
     border:0px solid #fff;
     margin-top:0px;
@@ -17,9 +17,19 @@
     vertical-align: top;
 }
 
+#column2
+{
+    width: 34%;
+}
+
 .column-header-container{
     display: table-cell;    
     vertical-align: middle;
+    width: 33%;
+}
+
+#column-header-container-2{
+    width: 34%;
 }
 
 .column-widget{

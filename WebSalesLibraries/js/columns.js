@@ -65,7 +65,6 @@
                 $.updateTextSize(storedTextSize);
                 $.updateTextSpace(storedTextSpace);
                 $.updateContentAreaWidth();            
-                $.updateColumnsWidth(); 
                 $('.clickable').on('click',$.openViewDialog);        
                 $('.view-dialog-content .format-list .item').on('click',$.viewSelectedFormat);        
             },
@@ -113,7 +112,6 @@
         });
         
         $(window).on('resize',$.updateContentAreaWidth);         
-        $(window).on('resize',$.updateColumnsWidth);
         
         $('#increase-text-space').on('click',function(){
             if(storedTextSpace < 3)
