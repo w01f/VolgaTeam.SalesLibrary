@@ -58,7 +58,7 @@ class LibraryPage
         else
             $this->logoPath = $this->parent->logoPath;
     }
-
+    
     public function buildCache()
     {
         $i = 0;
@@ -106,7 +106,7 @@ class LibraryPage
         if (isset($this->columns))
             usort($this->columns, "Column::columnComparer");
 
-        $content = Yii::app()->controller->widget('application.components.ColumnsPageWidget', array('libraryPage' => $this), true);
+        $content = Yii::app()->controller->widget('application.components.widgets.ColumnsPageWidget', array('libraryPage' => $this), true);
         if (isset($content))
         {
             if ($content != '')

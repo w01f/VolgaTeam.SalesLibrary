@@ -1,12 +1,12 @@
 (function( $ ) {
     $.openViewDialog = function(){
-        var formatItems = $(this).find('.viewDialogFormatItem');
-        var selectedFileType = formatItems.find('.viewDialogFormatServiceDataFileType').first().html();
+        var formatItems = $(this).find('.view-dialog-body .format-list .item');
+        var selectedFileType = formatItems.find('.service-data .file-type').first().html();
         if(formatItems.length > 1 || selectedFileType == 'xls')
         {
-            var viewDialogContent = $(this).find('.viewDialogContent').html();
+            var viewDialogContent = $(this).find('.view-dialog-content').html();
             $.fancybox({
-                content: $(this).find('.viewDialogBody'),
+                content: $(this).find('.view-dialog-body'),
                 title: 'How Do you want to Open this File?',
                 minWidth: 300,
                 helpers: {
@@ -19,8 +19,8 @@
                 openEffect  : 'none',
                 closeEffect	: 'none'            
             });
-            $(this).find('.viewDialogContent').html(viewDialogContent);
-            $(this).find('.viewDialogFormatItem').on('click',$.viewSelectedFormat);        
+            $(this).find('.view-dialog-content').html(viewDialogContent);
+            $(this).find('.view-dialog-body .format-list .item').on('click',$.viewSelectedFormat);        
         }
         else
         {
@@ -30,10 +30,10 @@
     
     $.viewSelectedFormat = function()
     {
-        var selectedFileType = $(this).find('.viewDialogFormatServiceDataFileType').html();
-        var selectedViewType = $(this).find('.viewDialogFormatServiceDataViewType').html();
-        var selectedLinks = $(this).find('.viewDialogFormatServiceDataLinks').html();
-        var selectedThumbs = $(this).find('.viewDialogFormatServiceDataThumbs').html()
+        var selectedFileType = $(this).find('.service-data .file-type').html();
+        var selectedViewType = $(this).find('.service-data .view-type').html();
+        var selectedLinks = $(this).find('.service-data .links').html();
+        var selectedThumbs = $(this).find('.service-data .thumbs').html()
 
         $.fancybox.close();
 
@@ -105,7 +105,7 @@
                         case 'mp4':
                             VideoJS.players = {};
                             $.fancybox({
-                                content: $('<div style="height:480px; width:640px;"><video id="videoPlayer" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
+                                content: $('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
                                 helpers: {
                                     overlay : {
                                         css : {
@@ -116,11 +116,11 @@
                                 openEffect  : 'none',
                                 closeEffect	: 'none',
                                 afterClose: function(){
-                                    $('#videoPlayer').remove();
+                                    $('#video-player').remove();
                                 }
                             });
                             _V_.options.flash.swf = selectedLinks[0].swf;
-                            var myPlayer = _V_("videoPlayer",{
+                            var myPlayer = _V_("video-player",{
                                 controls: true, 
                                 autoplay: true, 
                                 preload: 'auto',

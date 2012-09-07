@@ -3,13 +3,13 @@ if ($banner->showText)
 {
     echo CHtml::openTag('div'
         , array(
-        'class' => 'bannerContainer'
+        'class' => 'banner-container'
     ));
 
-    echo CHtml::tag('img', array('class' => 'bannerImage'
+    echo CHtml::tag('img', array('class' => 'banner-image'
         , 'src' => 'data:image/png;base64,' . $banner->image
     ));
-    echo CHtml::openTag('span', array('class' => ($isLinkBanner ? 'bannerTextLink' : 'bannerText')
+    echo CHtml::openTag('span', array('class' => ($isLinkBanner ? 'banner-text-link' : 'banner-text')
         , 'style' => 'font-family: ' . $banner->font->name . '; '
         . 'font-size: ' . $banner->font->size . 'pt; '
         . 'font-weight: ' . ($banner->font->isBold ? ' bold' : ' normal') . '; '
@@ -17,8 +17,8 @@ if ($banner->showText)
         . 'color: ' . $banner->foreColor . '; '
     ));
     echo $banner->text;
-    echo CHtml::closeTag('span'); //bannerText                                
-    echo CHtml::closeTag('div'); //bannerContainer
+    echo CHtml::closeTag('span'); //banner-text                                
+    echo CHtml::closeTag('div'); //banner-container
 }
 else
 {
@@ -39,7 +39,7 @@ else
         $bannerMarginLeft = 'auto';
         $bannerMarginRight = '0px';
     }
-    echo CHtml::tag('img', array('class' => 'bannerImage'
+    echo CHtml::tag('img', array('class' => 'banner-image'
         , 'src' => 'data:image/png;base64,' . $banner->image
         , 'style' => 'margin-left: ' . $bannerMarginLeft . '; '
         . 'margin-right: ' . $bannerMarginRight . '; '

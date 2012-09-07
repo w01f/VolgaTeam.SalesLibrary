@@ -11,7 +11,7 @@ class PreviewStorage extends CActiveRecord
         return '{{preview}}';
     }
 
-    public static function UpdateData($previewContainer)
+    public static function updateData($previewContainer)
     {
         if (isset($previewContainer->pngLinks))
             foreach ($previewContainer->pngLinks as $link)
@@ -106,7 +106,7 @@ class PreviewStorage extends CActiveRecord
             }
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         PreviewStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

@@ -11,7 +11,7 @@ class LibraryStorage extends CActiveRecord
         return '{{library}}';
     }
 
-    public static function UpdateData($library)
+    public static function updateData($library)
     {
         $libraryRecord = new LibraryStorage();
         $libraryRecord->id = $library->id;
@@ -19,42 +19,41 @@ class LibraryStorage extends CActiveRecord
         $libraryRecord->save();
 
         foreach ($library->pages as $page)
-            LibraryPageStorage::UpdateData($page);
+            LibraryPageStorage::updateData($page);
 
         foreach ($library->autoWidgets as $autoWidget)
-            AutoWidgetStorage::UpdateData($autoWidget);
+            AutoWidgetStorage::updateData($autoWidget);
     }
 
-    public static function UpdateCache($libraryId)
+    public static function updateCache($libraryId)
     {
         $pageRecord = LinkStorage::model()->findAll('id_library=?', array($libraryId));
         if ($pageRecord !== false)
         {
             
         }        
-        
         $libraryRecord = new LibraryStorage();
         $libraryRecord->id = $library->id;
         $libraryRecord->name = $library->name;
         $libraryRecord->save();
 
         foreach ($library->pages as $page)
-            LibraryPageStorage::UpdateData($page);
+            LibraryPageStorage::updateData($page);
 
         foreach ($library->autoWidgets as $autoWidget)
-            AutoWidgetStorage::UpdateData($autoWidget);
+            AutoWidgetStorage::updateData($autoWidget);
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
-        PreviewStorage::ClearData($libraryId);
-        LineBreakStorage::ClearData($libraryId);
-        LinkStorage::ClearData($libraryId);
-        FolderStorage::ClearData($libraryId);
-        BannerStorage::ClearData($libraryId);
-        ColumnStorage::ClearData($libraryId);
-        LibraryPageStorage::ClearData($libraryId);
-        AutoWidgetStorage::ClearData($libraryId);
+        PreviewStorage::clearData($libraryId);
+        LineBreakStorage::clearData($libraryId);
+        LinkStorage::clearData($libraryId);
+        FolderStorage::clearData($libraryId);
+        BannerStorage::clearData($libraryId);
+        ColumnStorage::clearData($libraryId);
+        LibraryPageStorage::clearData($libraryId);
+        AutoWidgetStorage::clearData($libraryId);
         LibraryStorage::model()->deleteByPk($libraryId);
     }
 

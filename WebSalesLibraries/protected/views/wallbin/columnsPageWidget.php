@@ -1,6 +1,6 @@
 <?php
 $cache = '';
-$cache .=CHtml::openTag('div', array('id' => 'pageHeaderContainer'));
+$cache .=CHtml::openTag('div', array('id' => 'page-header-container'));
 for ($i = 0; $i < 3; $i++)
 {
     if (isset($libraryPage->columns) && $libraryPage->enableColumns)
@@ -9,8 +9,8 @@ for ($i = 0; $i < 3; $i++)
             $column = $libraryPage->columns[$i];
             $cache .=CHtml::openTag('div'
                     , array(
-                    'class' => 'columnHeaderContainer'
-                    , 'id' => 'columnHeaderContainer' . $i
+                    'class' => 'column-header-container'
+                    , 'id' => 'column-header-container-' . $i
                     , 'style' => 'font-family: ' . $column->font->name . '; '
                     . 'font-size: ' . $column->font->size . 'pt; '
                     . 'font-weight: ' . ($column->font->isBold ? ' bold' : ' normal') . '; '
@@ -21,48 +21,48 @@ for ($i = 0; $i < 3; $i++)
                 ));
             if (isset($column->banner) && $column->banner->isEnabled)
             {
-                $this->widget('application.components.BannerWidget', array('banner' => $column->banner, 'isLinkBanner' => false), true);
+                $this->widget('application.components.widgets.BannerWidget', array('banner' => $column->banner, 'isLinkBanner' => false), true);
             }
             else
             {
                 $widget = $column->getWidget();
                 if (isset($widget))
                 {
-                    $cache .=CHtml::tag('img', array('class' => 'columnWidget', 'src' => 'data:image/png;base64,' . $widget));
+                    $cache .=CHtml::tag('img', array('class' => 'column-widget', 'src' => 'data:image/png;base64,' . $widget));
                 }
                 if ($column->showText)
                 {
-                    $cache .=CHtml::openTag('span', array('class' => 'columnHeader'));
+                    $cache .=CHtml::openTag('span', array('class' => 'column-header'));
                     $cache .=$column->name;
-                    $cache .=CHtml::closeTag('span'); //columnHeader
+                    $cache .=CHtml::closeTag('span'); //column-header
                 }
             }
-            $cache .=CHtml::closeTag('div'); //columnHeaderContainer
+            $cache .=CHtml::closeTag('div'); //column-header-container
         }
         else
         {
-            $cache .=CHtml::tag('div', array('class' => 'columnHeaderContainer'));
+            $cache .=CHtml::tag('div', array('class' => 'column-header-container'));
         }
 }
-$cache .=CHtml::closeTag('div'); //pageHeaderContainer
-$cache .=CHtml::openTag('div', array('id' => 'pageContentContainer'));
+$cache .=CHtml::closeTag('div'); //page-header-container
+$cache .=CHtml::openTag('div', array('id' => 'page-content-container'));
 for ($i = 0; $i < 3; $i++)
 {
     $folders = $libraryPage->getFoldersByColumn($i);
     if (isset($folders))
     {
-        $cache .=CHtml::openTag('div', array('class' => 'pageColumn', 'id' => 'column' . $i));
+        $cache .=CHtml::openTag('div', array('class' => 'page-column', 'id' => 'column' . $i));
         foreach ($folders as $folder)
         {
             $cache .=CHtml::openTag('div'
                     , array(
-                    'class' => 'folderBody'
+                    'class' => 'folder-body'
                     , 'style' => 'background-color: ' . $folder->windowBackColor . '; '
                     . 'border-color: ' . $folder->borderColor . '; '
                 ));
             $cache .=CHtml::openTag('div'
                     , array(
-                    'class' => 'folderHeaderContainer'
+                    'class' => 'folder-header-container'
                     , 'style' => 'font-family: ' . $folder->headerFont->name . '; '
                     . 'font-size: ' . $folder->headerFont->size . 'pt; '
                     . 'font-weight: ' . ($folder->headerFont->isBold ? ' bold' : ' normal') . '; '
@@ -74,36 +74,36 @@ for ($i = 0; $i < 3; $i++)
                 ));
             if (isset($folder->banner) && $folder->banner->isEnabled)
             {
-                $cache .=$this->widget('application.components.BannerWidget', array('banner' => $folder->banner, 'isLinkBanner' => false), true);
+                $cache .=$this->widget('application.components.widgets.BannerWidget', array('banner' => $folder->banner, 'isLinkBanner' => false), true);
             }
             else
             {
                 $widget = $folder->getWidget();
                 if (isset($widget))
                 {
-                    $cache .=CHtml::tag('img', array('class' => 'folderWidget', 'src' => 'data:image/png;base64,' . $widget));
+                    $cache .=CHtml::tag('img', array('class' => 'folder-widget', 'src' => 'data:image/png;base64,' . $widget));
                 }
-                $cache .=CHtml::openTag('span', array('class' => 'folderHeader'));
+                $cache .=CHtml::openTag('span', array('class' => 'folder-header'));
                 $cache .=$folder->name;
-                $cache .=CHtml::closeTag('span'); //folderHeader
+                $cache .=CHtml::closeTag('span'); //folder-header
             }
-            $cache .=CHtml::closeTag('div'); //folderHeaderContainer
+            $cache .=CHtml::closeTag('div'); //folder-header-container
 
             if (isset($folder->files))
             {
                 $cache .=CHtml::openTag('div'
                         , array(
-                        'class' => 'folderLinksScrollArea'));
+                        'class' => 'folder-links-scroll-area'));
 
-                $cache .=CHtml::openTag('div', array('class' => 'folderLinksContainer'));
+                $cache .=CHtml::openTag('div', array('class' => 'folder-links-container'));
                 foreach ($folder->files as $link)
                 {
-                    $linkContainerClass = (isset($link->originalFormat) && isset($link->availableFormats) ? 'linkContainer clickable' : 'linkContainer');
+                    $linkContainerClass = (isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container');
                     $cache .=CHtml::openTag('div', array('class' => $linkContainerClass));
                     {
                         if (isset($link->banner) && $link->banner->isEnabled)
                         {
-                            $cache .=$this->widget('application.components.BannerWidget', array('banner' => $link->banner, 'isLinkBanner' => true), true);
+                            $cache .=$this->widget('application.components.widgets.BannerWidget', array('banner' => $link->banner, 'isLinkBanner' => true), true);
                         }
                         else
                         {
@@ -112,7 +112,7 @@ for ($i = 0; $i < 3; $i++)
                             if ($link->getIsLineBreak())
                             {
                                 $displayWidget = isset($widget) && $widget != '';
-                                $linkClass = 'linkLineBreak' . ($displayWidget ? ' widget' : '');
+                                $linkClass = 'link-line-break' . ($displayWidget ? ' widget' : '');
                                 $linkFontProperties = 'font-family: ' . $link->lineBreakProperties->font->name . '; '
                                     . 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
                                     . 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
@@ -122,7 +122,7 @@ for ($i = 0; $i < 3; $i++)
                             else
                             {
                                 $displayWidget = $folder->displayLinkWidgets;
-                                $linkClass = 'linkText' . ($displayWidget ? ' widget' : '');
+                                $linkClass = 'link-text' . ($displayWidget ? ' widget' : '');
                                 $linkFontProperties = 'font-family: ' . $folder->windowFont->name . '; '
                                     . 'font-size: ' . $folder->windowFont->size . 'pt; '
                                     . 'font-weight: ' . ($link->isBold ? 'bold' : ($folder->windowFont->isBold ? ' bold' : ' normal')) . '; '
@@ -136,31 +136,31 @@ for ($i = 0; $i < 3; $i++)
                                 $cache .=$link->name;
                                 if (isset($link->note) && $link->note != "")
                                 {
-                                    $cache .=CHtml::openTag('span', array('class' => 'linkNote'));
+                                    $cache .=CHtml::openTag('span', array('class' => 'link-note'));
                                     $cache .=$link->note;
-                                    $cache .=CHtml::closeTag('span'); //linkNote                                    
+                                    $cache .=CHtml::closeTag('span'); //link-note                                    
                                 }
                             }
-                            $cache .=CHtml::closeTag('div'); //linkText                                                                    
+                            $cache .=CHtml::closeTag('div'); //link-text                                                                    
                         }
                         $cache .=CHtml::openTag('div', array(
-                                'class' => 'viewDialogContent'
+                                'class' => 'view-dialog-content'
                             ));
                         {
-                            $cache .=$this->widget('application.components.ViewDialogWidget', array('link' => $link), true);
+                            $cache .=$this->widget('application.components.widgets.ViewDialogWidget', array('link' => $link), true);
                         }
-                        $cache .=CHtml::closeTag('div'); //viewDialog
+                        $cache .=CHtml::closeTag('div'); //view-dialog-content
                     }
-                    $cache .=CHtml::closeTag('div'); //linkContainer
+                    $cache .=CHtml::closeTag('div'); //link-container
                 }
-                $cache .=CHtml::closeTag('div'); //folderLinksContainer                      
-                $cache .=CHtml::closeTag('div'); //folderLinksScrollArea
+                $cache .=CHtml::closeTag('div'); //folder-links-container                      
+                $cache .=CHtml::closeTag('div'); //folder-links-scroll-area
             }
-            $cache .=CHtml::closeTag('div'); //folderBody            
+            $cache .=CHtml::closeTag('div'); //folder-body            
         }
-        $cache .=CHtml::closeTag('div'); //pageColumn
+        $cache .=CHtml::closeTag('div'); //page-column
     }
 }
-$cache .=CHtml::closeTag('div'); //pageContentContainer
+$cache .=CHtml::closeTag('div'); //page-content-container
 echo $cache;
 ?>

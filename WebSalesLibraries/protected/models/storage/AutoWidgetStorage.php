@@ -11,7 +11,7 @@ class AutoWidgetStorage extends CActiveRecord
         return '{{autowidget}}';
     }
 
-    public static function UpdateData($autoWidget)
+    public static function updateData($autoWidget)
     {
         $autoWidgetRecord = new AutoWidgetStorage();
         $autoWidgetRecord->id_library = $autoWidget->libraryId;
@@ -20,7 +20,7 @@ class AutoWidgetStorage extends CActiveRecord
         $autoWidgetRecord->save();
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         AutoWidgetStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

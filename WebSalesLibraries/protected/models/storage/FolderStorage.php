@@ -11,7 +11,7 @@ class FolderStorage extends CActiveRecord
         return '{{folder}}';
     }
 
-    public static function UpdateData($folder)
+    public static function updateData($folder)
     {
         $folderRecord = new FolderStorage();
         $folderRecord->id = $folder->id;
@@ -38,15 +38,15 @@ class FolderStorage extends CActiveRecord
         $folderRecord->widget = $folder->widget;
 
         $folderRecord->id_banner = $folder->banner->id;
-        BannerStorage::UpdateData($folder->banner);
+        BannerStorage::updateData($folder->banner);
 
         foreach ($folder->files as $link)
-            LinkStorage::UpdateData($link);
+            LinkStorage::updateData($link);
 
         $folderRecord->save();
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         FolderStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

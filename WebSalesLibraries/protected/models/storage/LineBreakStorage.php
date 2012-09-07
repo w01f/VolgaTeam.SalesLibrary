@@ -11,7 +11,7 @@ class LineBreakStorage extends CActiveRecord
         return '{{line_break}}';
     }
 
-    public static function UpdateData($lineBreak)
+    public static function updateData($lineBreak)
     {
         $lineBreakRecord = new LineBreakStorage();
         $lineBreakRecord->id = $lineBreak->id;
@@ -25,7 +25,7 @@ class LineBreakStorage extends CActiveRecord
         $lineBreakRecord->save();
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         LineBreakStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

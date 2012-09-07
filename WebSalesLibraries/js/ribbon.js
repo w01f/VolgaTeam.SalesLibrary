@@ -173,6 +173,6 @@
         $(document).ready(function() 
         {
             $('#ribbon').ribbon();  
-            $('a#viewDialogLink').fancybox();
+            $('a#view-dialog-link').fancybox();
         });
     })( jQuery );

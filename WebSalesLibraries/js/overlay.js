@@ -1,18 +1,18 @@
 (function( $ ) {
     $.showOverlay = function(){
-        $('#contentOverlay').css({
+        $('#content-overlay').css({
             'width':$(window).width()+'px'
         });
-        $('#contentOverlay').css({
+        $('#content-overlay').css({
             'height':$(window).height()+'px'
         });            
-        $('#contentOverlay').fadeIn(0);
+        $('#content-overlay').fadeIn(0);
         $('#content').fadeOut(0);
         $('<div id="fancybox-loading"><div></div></div>').appendTo('body'); 
     }  
     $.hideOverlay = function(){
         $('#fancybox-loading').remove(); 
-        $('#contentOverlay').fadeOut(0);
+        $('#content-overlay').fadeOut(0);
         $('#ribbon').fadeIn(0);
         $('#content').fadeIn(0);
     }      

@@ -3,7 +3,7 @@ return CMap::mergeArray(
         require(dirname(__FILE__) . '/main.php'), array(
         'behaviors' => array(
             'onBeginRequest' => array(
-                'class' => 'application.components.RequireLogin'
+                'class' => 'application.components.core.RequireLogin'
             )
         ),
         'components' => array(

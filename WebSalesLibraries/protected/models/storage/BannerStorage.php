@@ -11,7 +11,7 @@ class BannerStorage extends CActiveRecord
         return '{{banner}}';
     }
 
-    public static function UpdateData($banner)
+    public static function updateData($banner)
     {
         $bannerRecord = new BannerStorage();
         $bannerRecord->id = $banner->id;
@@ -29,7 +29,7 @@ class BannerStorage extends CActiveRecord
         $bannerRecord->save();
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         BannerStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

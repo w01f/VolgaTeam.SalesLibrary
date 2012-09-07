@@ -1,6 +1,7 @@
 body
 {
-    padding-top: 135px;
+    padding-top: 138px;
+    margin: 0px;
 }
 
 .page
@@ -16,7 +17,6 @@ body
 #ribbon
 {
     font-family: "Segoe UI" , Verdana, Tahoma, Helvetica, sans-serif;
-
     cursor: default;
     font-size: 8pt;
     padding-top: 10px;
@@ -400,10 +400,10 @@ body
 
 #content
 {
-    margin-left: -5px;
+    width: 100%;
 }
 
-#contentOverlay
+#content-overlay
 {
     position: absolute;
     top: 0;
@@ -414,26 +414,26 @@ body
     background: #eee;
 }
 
-#librariesSelectorContainer
+#libraries-selector-container
 {
     display: table;
     z-index: 999; 
 }
 
-#librariesSelector
+#libraries-selector
 {
     display:table-cell; 
     vertical-align: middle;
 }
 
-#pagelogo
+#page-logo
 {
     border:none; 
     display: table-cell; 
     vertical-align: middle;
 }
 
-#selectLibrary,#selectPage
+#select-library,#select-page
 {
     display: block;
     width: 170px;
@@ -441,12 +441,12 @@ body
     vertical-align: middle;
 }
 
-#selectLibrary
+#select-library
 {
     margin-bottom: 25px;
 }
 
-#viewDialogWrapper,#viewDialogLink
+#view-dialog-wrapper,#view-dialog-link
 {
     display: none;
 }

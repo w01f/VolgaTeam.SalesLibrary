@@ -10,6 +10,8 @@ return array(
         'application.models.common.*',
         'application.models.wallbin.*',
         'application.components.*',
+        'application.components.widgets.*',
+        'application.components.core.*',
     ),
     'components' => array(
         'session' => array(

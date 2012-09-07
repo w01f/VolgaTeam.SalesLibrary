@@ -153,7 +153,6 @@ class LibraryManager
             Yii::app()->request->cookies['selectedPageName'] = $cookie;
         }
     }
-
 }
 
 ?>

@@ -60,10 +60,10 @@ class ContentController extends CController
     {
         if ($this->authenticateBySession($sessionKey))
         {
-            LibraryStorage::ClearData($library->id);
+            LibraryStorage::clearData($library->id);
             Yii::app()->cacheDB->flush();
 
-            LibraryStorage::UpdateData($library);
+            LibraryStorage::updateData($library);
         }
     }
 
@@ -76,7 +76,7 @@ class ContentController extends CController
     public function setContent($sessionKey, $linkId, $content)
     {
         if ($this->authenticateBySession($sessionKey))
-            LinkStorage::UpdateContent($linkId, $content);
+            LinkStorage::updateContent($linkId, $content);
     }
 
     /**

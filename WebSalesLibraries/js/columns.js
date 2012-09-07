@@ -8,7 +8,7 @@
         storedTextSpace = 2;
     
     $.libraryChanged = function(){
-        var selectedLibraryName = $("#selectLibrary :selected").text();
+        var selectedLibraryName = $("#select-library :selected").text();
         $.cookie("selectedLibraryName", selectedLibraryName, {
             expires: 60 * 60 * 24 * 7
         });
@@ -16,22 +16,22 @@
             type: "POST",
             url: "wallbin/getPageDropDownList",
             beforeSend: function(){
-                $('#librariesSelectorContainer').css({
+                $('#libraries-selector-container').css({
                     'visibility':'hidden'
                 });
                 $.showOverlay();
             },
             complete: function(){
                 $.hideOverlay();
-                $('#librariesSelectorContainer').css({
+                $('#libraries-selector-container').css({
                     'visibility':'visible'
                 });
             },
             success: function(msg){
-                $('#selectPage').html(msg);
+                $('#select-page').html(msg);
                 $.pageChanged();
-                $("#pagelogo").attr('src', $("#selectLibrary").val());
-                $('#librariesSelectorTitle').html(selectedLibraryName);                                    
+                $("#page-logo").attr('src', $("#select-library").val());
+                $('#libraries-selector-title').html(selectedLibraryName);                                    
             },
             async: true,
             dataType: 'html'            
@@ -39,11 +39,11 @@
     }
     
     $.pageChanged = function(){
-        var selectedPageName = $("#selectPage :selected").text();
+        var selectedPageName = $("#select-page :selected").text();
         $.cookie("selectedPageName", selectedPageName, {
             expires: 60 * 60 * 24 * 7
         });
-        $("#pagelogo").attr('src', $("#selectPage").val());
+        $("#page-logo").attr('src', $("#select-page").val());
         $.loadColumns();
     }
     
@@ -67,7 +67,7 @@
                 $.updateContentAreaWidth();            
                 $.updateColumnsWidth(); 
                 $('.clickable').on('click',$.openViewDialog);        
-                $('.viewDialogFormatItem').on('click',$.viewSelectedFormat);        
+                $('.view-dialog-content .format-list .item').on('click',$.viewSelectedFormat);        
             },
             error: function(){
                 $('#content').html('');
@@ -84,18 +84,18 @@
             beforeSend: function(){
                 $('#content').html('');
                 $.showOverlay();
-                $('#librariesSelectorContainer').css({
+                $('#libraries-selector-container').css({
                     'visibility':'hidden'
                 });
             },
             complete: function(){
-                $('#librariesSelectorContainer').css({
+                $('#libraries-selector-container').css({
                     'visibility':'visible'
                 });
                 $.hideOverlay();
             },
             success: function(msg){
-                $('#selectLibrary').html(msg);
+                $('#select-library').html(msg);
                 $.libraryChanged();
             },
             async: true,
@@ -105,24 +105,24 @@
     
     $(document).ready(function() 
     {
-        $('#selectLibrary').on('change',function(){
+        $('#select-library').on('change',function(){
             $.libraryChanged();
         });
-        $('#selectPage').on('change',function(){
+        $('#select-page').on('change',function(){
             $.pageChanged();
         });
         
         $(window).on('resize',$.updateContentAreaWidth);         
         $(window).on('resize',$.updateColumnsWidth);
         
-        $('#increaseTextSpace').on('click',function(){
+        $('#increase-text-space').on('click',function(){
             if(storedTextSpace < 3)
             {
                 storedTextSpace++;
                 $.updateTextSpace(storedTextSpace);
             }
         });
-        $('#decreaseTextSpace').on('click',function(){
+        $('#decrease-text-space').on('click',function(){
             if(storedTextSpace > 1)
             {
                 storedTextSpace--;
@@ -130,12 +130,12 @@
             }
         });
         
-        $('#increaseTextSize').on('click',function(){
+        $('#increase-text-size').on('click',function(){
             if(storedTextSize<22)
                 storedTextSize++;
             $.updateTextSize(storedTextSize);
         });
-        $('#decreaseTextSize').on('click',function(){
+        $('#decrease-text-size').on('click',function(){
             if(storedTextSize>8)
                 storedTextSize--;
             $.updateTextSize(storedTextSize);

@@ -1,11 +1,11 @@
 (function( $ )    {
     var updateLoginBodyPosition = function(){
-        var top = ($(window).height() - $('#formLogin').height())/2;
-        var left = ($(window).width() - $('#formLogin').width())/2;
-        $('#formLogin').css({
+        var top = ($(window).height() - $('#form-login').height())/2;
+        var left = ($(window).width() - $('#form-login').width())/2;
+        $('#form-login').css({
             'left':left+'px'
         });
-        $('#formLogin').css({
+        $('#form-login').css({
             'top':top+'px'
         });
     }
@@ -16,19 +16,19 @@
         
         $(window).on('resize',updateLoginBodyPosition); 
             
-        $('#fieldLogin').on('click',function(){
+        $('#field-login').on('click',function(){
             if(this.value == 'Username')
                 this.value='';
         }); 
-        $('#fieldLogin').on('blur',function(){
+        $('#field-login').on('blur',function(){
             if(this.value == '')
                 this.value='Username';
         });         
-        $('#fieldPassword').on('click',function(){
+        $('#field-password').on('click',function(){
             if(this.value == 'Password')
                 this.value='';
         }); 
-        $('#fieldPassword').on('blur',function(){
+        $('#field-password').on('blur',function(){
             if(this.value == '')
                 this.value='Password';
         });                 

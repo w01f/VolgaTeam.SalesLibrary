@@ -11,7 +11,7 @@ class LibraryPageStorage extends CActiveRecord
         return '{{page}}';
     }
 
-    public static function UpdateData($page)
+    public static function updateData($page)
     {
         $pageRecord = new LibraryPageStorage();
         $pageRecord->id = $page->id;
@@ -21,15 +21,15 @@ class LibraryPageStorage extends CActiveRecord
         $pageRecord->has_columns = $page->enableColumns;
 
         foreach ($page->columns as $column)
-            ColumnStorage::UpdateData($column);
+            ColumnStorage::updateData($column);
 
         foreach ($page->folders as $folder)
-            FolderStorage::UpdateData($folder);
+            FolderStorage::updateData($folder);
 
         $pageRecord->save();
     }
 
-    public static function UpdateCache($page)
+    public static function updateCache($page)
     {
         $pageRecord = LibraryPage::model()->findByPk($page->id);
         if ($pageRecord !== null)
@@ -39,7 +39,7 @@ class LibraryPageStorage extends CActiveRecord
         }
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         LibraryPageStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

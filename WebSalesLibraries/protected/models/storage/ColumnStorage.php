@@ -11,7 +11,7 @@ class ColumnStorage extends CActiveRecord
         return '{{column}}';
     }
 
-    public static function UpdateData($column)
+    public static function updateData($column)
     {
         $columnRecord = new ColumnStorage();
         $columnRecord->id_page = $column->pageId;
@@ -30,12 +30,12 @@ class ColumnStorage extends CActiveRecord
         $columnRecord->widget = $column->widget;
         
         $columnRecord->id_banner = $column->banner->id;
-        BannerStorage::UpdateData($column->banner);
+        BannerStorage::updateData($column->banner);
         
         $columnRecord->save();
     }
 
-    public static function ClearData($libraryId)
+    public static function clearData($libraryId)
     {
         ColumnStorage::model()->deleteAll('id_library=?', array($libraryId));
     }

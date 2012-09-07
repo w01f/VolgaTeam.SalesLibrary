@@ -1,4 +1,4 @@
-#formLogin
+#form-login
 {
     height:400px; 
     width:300px;
@@ -10,42 +10,42 @@
     left:370px;
 }
 
-#fieldLogin,#fieldPassword
+#field-login,#field-password
 {
     width:295px; 
     height:24px; 
     font-size:14px;
 }
 
-#rememberMeContainer
+#remember-me-container
 {
     height: 25px;
     vertical-align: middle;
     display: block;
 }
 
-#fieldRemember,#lableRemember
+#field-remember,#lable-remember
 {
 }
 
-#buttonLoginContainer
+#button-login-container
 {
     text-align: right;
 }
 
-#buttonLogin
+#button-login
 {
     font-size:14px;
     height:30px; 
     width: 80px;
 }
 
-#linkRecoverPasswordContainer
+#recover-password-container
 {
     text-align: center;    
 }
 
-#linkRecoverPassword
+#recover-password-link
 {
     text-align: center;    
 }
@@ -55,7 +55,7 @@
     width:300px;
 }
 
-.errorMessage
+.error-message
 {
     width:300px; 
     text-align: center;

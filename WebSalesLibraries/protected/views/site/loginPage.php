@@ -7,12 +7,12 @@ echo CHtml::openTag('div', array(
     'class' => 'form'
 ));
 {
-    $form = $this->beginWidget('CActiveForm', array('id' => 'formLogin'));
+    $form = $this->beginWidget('CActiveForm', array('id' => 'form-login'));
     {
         echo CHtml::image(Yii::app()->baseUrl . '/images/logo.png', ''
             , array(
             'class' => 'row',
-            'id' => 'imageLogo')
+            'id' => 'image-logo')
         );
 
         echo CHtml::tag('br');
@@ -21,7 +21,7 @@ echo CHtml::openTag('div', array(
         echo $form->textField($loginData, 'login'
             , array(
             'class' => 'row',
-            'id' => 'fieldLogin')
+            'id' => 'field-login')
         );
 
         echo CHtml::tag('br');
@@ -30,7 +30,7 @@ echo CHtml::openTag('div', array(
         echo $form->textField($loginData, 'password'
             , array(
             'class' => 'row',
-            'id' => 'fieldPassword')
+            'id' => 'field-password')
         );
 
         echo CHtml::openTag('div', array(
@@ -38,10 +38,10 @@ echo CHtml::openTag('div', array(
         ));
         {
             echo $form->error($loginData, 'login'
-                , array('class' => 'errorMessage')
+                , array('class' => 'error-message')
             );
             echo $form->error($loginData, 'password'
-                , array('class' => 'errorMessage')
+                , array('class' => 'error-message')
             );
         }
         echo CHtml::closeTag('div'); //row        
@@ -55,23 +55,23 @@ echo CHtml::openTag('div', array(
         echo CHtml::openTag('tr');
         {
             echo CHtml::openTag('td', array(
-                'id' => 'rememberMeContainer'
+                'id' => 'remember-me-container'
             ));
             {
                 echo $form->checkBox($loginData, 'rememberMe'
                     , array(
-                    'id' => 'fieldRemember')
+                    'id' => 'field-remember')
                 );
                 echo $form->label($loginData, 'rememberMe'
-                    , array('id' => 'lableRemember')
+                    , array('id' => 'lable-remember')
                 );
             }
             echo CHtml::closeTag('td'); //rememberMeContainer
             echo CHtml::openTag('td', array(
-                'id' => 'buttonLoginContainer')
+                'id' => 'button-login-container')
             );
             echo CHtml::submitButton('Log In'
-                , array('id' => 'buttonLogin')
+                , array('id' => 'button-login')
             );
             echo CHtml::closeTag('td');
         }
@@ -87,14 +87,14 @@ echo CHtml::openTag('div', array(
         ));
         echo CHtml::openTag('tr');
         echo CHtml::openTag('td', array(
-            'id' => 'linkRecoverPasswordContainer')
+            'id' => 'recover-password-container')
         );
         {
             echo CHtml::ajaxLink('Forgot Password?'
                 , array('site/passwordRecover')
                 , array('method' => 'POST')
                 , array(
-                'id' => 'linkRecoverPassword')
+                'id' => 'recover-password-link')
             );
         }
         echo CHtml::closeTag('td');
