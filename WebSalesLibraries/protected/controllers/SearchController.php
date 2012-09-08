@@ -35,7 +35,6 @@ class SearchController extends CController
         if (!$searched)
             $this->renderPartial('empty', array(), false, true);
     }
-
 }
 
 ?>

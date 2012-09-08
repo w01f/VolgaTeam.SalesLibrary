@@ -47,6 +47,7 @@
                 break;
         }
     }
+    
     $.initControlPanel = function(){
         $( "#run-search" ).on('click',$.runSearch);        
         

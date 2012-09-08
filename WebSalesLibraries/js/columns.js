@@ -65,7 +65,7 @@
                 $.updateTextSize(storedTextSize);
                 $.updateTextSpace(storedTextSpace);
                 $.updateContentAreaWidth();            
-                $('.clickable').on('click',$.openViewDialog);        
+                $('.clickable').on('click',$.openViewDialogEmbedded);        
                 $('.view-dialog-content .format-list .item').on('click',$.viewSelectedFormat);        
             },
             error: function(){

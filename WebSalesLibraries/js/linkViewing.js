@@ -1,5 +1,6 @@
 (function( $ ) {
-    $.openViewDialog = function(){
+    $.openViewDialogEmbedded = function(){
+        $(this).find('.view-dialog-body .format-list .item').on('click',$.viewSelectedFormat);        
         var formatItems = $(this).find('.view-dialog-body .format-list .item');
         var selectedFileType = formatItems.find('.service-data .file-type').first().html();
         if(formatItems.length > 1 || selectedFileType == 'xls')
@@ -26,6 +27,39 @@
         {
             $.viewSelectedFormat.call(formatItems);
         }
+    }
+    
+    $.openViewDialogAjax = function(linkId){
+        if(linkId!='')
+            $.cookie("lastLinkId", linkId, {
+                expires: (60 * 60 * 24 * 7)
+            });
+        else
+            linkId = $.cookie("lastLinkId");
+        $.ajax({
+            type: "POST",
+            url: "wallbin/viewLink",
+            data: {
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $.showOverlay();
+            },
+            complete: function(){
+            },
+            success: function(msg){
+                $.viewDilogContent = $('<div>'+msg+'<div>');
+                $.viewDilogContent.on('click',$.viewSelectedFormat);
+                $.openViewDialogEmbedded.call($.viewDilogContent);
+                $.hideOverlay();
+            },
+            error: function(){
+                $('#search-result').html('');
+                $.hideOverlay();
+            },            
+            async: true,
+            dataType: 'html'                        
+        });                        
     }
     
     $.viewSelectedFormat = function()

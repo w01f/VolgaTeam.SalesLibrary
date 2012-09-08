@@ -86,6 +86,13 @@ class LinkStorage extends CActiveRecord
         if (isset($links))
             return $links;
     }
+    
+    public static function getLinkById($linkId)
+    {
+        $linkRecord = LinkStorage::model()->findByPk($linkId);
+        if ($linkRecord !== false)
+            return $linkRecord;
+    }
 
 }
 
