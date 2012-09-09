@@ -43,6 +43,12 @@
     vertical-align: middle;
 }
 
+#file-types,#content-compare-type
+{
+    width: 100%;
+    text-align: center;
+}
+
 #condition-type
 { 
     padding: 0;
@@ -53,7 +59,7 @@
 
 #condition-content-value
 {
-    width: 225px;
+    width: 100%;
 }
 
 .ui-button .ui-icon.button-search-powerpoint 

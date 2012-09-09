@@ -58,10 +58,10 @@ class LinkStorage extends CActiveRecord
         LinkStorage::model()->deleteAll('id_library=?', array($libraryId));
     }
 
-    public static function searchByContent($condition)
+    public static function searchByContent($condition, $fileTypes)
     {
         $linkRecords = Yii::app()->db->createCommand()
-            ->select('id,id_library,name,file_name')
+            ->select('*')
             ->from('tbl_link')
             ->where('match(name,file_name,content) against(:condition in boolean mode)', array(':condition' => $condition))
             ->queryAll();
@@ -77,16 +77,19 @@ class LinkStorage extends CActiveRecord
 
                 $library = $libraryManager->getLibraryById($linkRecord['id_library']);
                 if (isset($library))
+                {
                     $link['library'] = $library->name;
-                else
-                    $link['library'] = '';
-                $links[] = $link;
+                    $linkObject = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                    $linkObject->load(LinkStorage::getLinkById($link['id']));
+                    if (in_array($linkObject->originalFormat, $fileTypes))
+                        $links[] = $link;
+                }
             }
         }
         if (isset($links))
             return $links;
     }
-    
+
     public static function getLinkById($linkId)
     {
         $linkRecord = LinkStorage::model()->findByPk($linkId);

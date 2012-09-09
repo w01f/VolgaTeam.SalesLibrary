@@ -1,6 +1,6 @@
 .grid-view-loading
 {
-    background:url(loading.gif) no-repeat;
+    background:url(../images/search/grid-loading.gif) no-repeat;
 }
 
 .grid-view
@@ -33,7 +33,7 @@
     font-weight: normal;
     background: #dcdcdc;
     text-align: left;
-    cursor: default;
+    cursor: n-resize;
 }
 
 .grid-view table.items th a
@@ -43,7 +43,7 @@
     font-weight: normal;
     background: #dcdcdc;
     text-decoration: none;
-    cursor: default;
+    cursor: n-resize;
 }
 
 .grid-view table.items th a:hover
@@ -53,13 +53,13 @@
 
 .grid-view table.items th a.asc
 {
-    background:url(up.gif) right center no-repeat;
+    background:url(../images/search/sort-asc.gif) right center no-repeat;
     padding-right: 10px;
 }
 
 .grid-view table.items th a.desc
 {
-    background:url(down.gif) right center no-repeat;
+    background:url(../images/search/sort-desc.gif) right center no-repeat;
     padding-right: 10px;
 }
 

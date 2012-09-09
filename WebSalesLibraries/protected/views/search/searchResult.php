@@ -15,26 +15,31 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'cssFile' => Yii::app()->baseUrl . '/css/custom-grid.css',
     'columns' => array(
         array(
-            'name' => 'Library',
+            'name' => 'library',
+            'header' => 'Library',
             'type' => 'raw',
             'value' => '$data["library"]',
         ),
         array(
-            'name' => 'Name',
+            'name' => 'name',
+            'header' => 'Name',
             'type' => 'raw',
             'value' => '$data["name"]',
         ),
         array(
-            'name' => 'File',
+            'name' => 'file_name',
+            'header' => 'File',
             'type' => 'raw',
             'value' => '$data["file_name"]',
         ),
         array(
-            'name' => 'Date Modified',
+            'name' => 'date',
+            'header' => 'Date Modified',
             'type' => 'raw',
             'value' => null,
         ),
     ),
+    'enableSorting' => true,
     'selectableRows' => 1,
     'selectionChanged' => 'function(){$.openViewDialogAjax($.fn.yiiGridView.getSelection("search-grid"));}',
     )

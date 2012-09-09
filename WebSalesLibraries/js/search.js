@@ -10,7 +10,7 @@
         if($('#search-file-type-pdf').is(':checked'))
             selectedFileTypes.push("pdf");                        
         if($('#search-file-type-video').is(':checked'))
-            selectedFileTypes.push("pdf");     
+            selectedFileTypes.push("video");     
         
         var selectedConditionType = $( "#condition-type" ).tabs( "option", "selected" );
         switch(selectedConditionType)
@@ -48,49 +48,142 @@
         }
     }
     
+    $.fileTypeButtonClick = function(){
+        $.cookie("fileTypePpt", $('#search-file-type-powerpoint').is(':checked'), {
+            expires: (60 * 60 * 24 * 7)
+        });
+        $.cookie("fileTypeDoc", $('#search-file-type-word').is(':checked'), {
+            expires: (60 * 60 * 24 * 7)
+        });        
+        $.cookie("fileTypeXls", $('#search-file-type-excel').is(':checked'), {
+            expires: (60 * 60 * 24 * 7)
+        });                
+        $.cookie("fileTypePdf", $('#search-file-type-pdf').is(':checked'), {
+            expires: (60 * 60 * 24 * 7)
+        });                
+        $.cookie("fileTypeVideo", $('#search-file-type-video').is(':checked'), {
+            expires: (60 * 60 * 24 * 7)
+        });                        
+    }
+    
+    $.conditionTypeChanged = function(event, ui){
+        $.cookie("conditionType", ui.index, {
+            expires: (60 * 60 * 24 * 7)
+        });
+    }
+    
+    $.contentMatchButtonClick = function(){
+        $.cookie("exactMatch", $('#content-compare-exact').is(':checked'), {
+            expires: (60 * 60 * 24 * 7)
+        });
+    }
+    
     $.initControlPanel = function(){
         $( "#run-search" ).on('click',$.runSearch);        
-        
+        $('#condition-content-value').keypress(function (e) {
+            if (e.which == 13) {
+                $.runSearch();
+            }
+        });        
+
+        if($.cookie("fileTypePpt")!=null)
+        {
+            if($.cookie("fileTypePpt")==  "true")
+                $( "#search-file-type-powerpoint" ).prop('checked', true);
+        }
+        else
+            $( "#search-file-type-powerpoint" ).prop('checked',true);
         $( "#search-file-type-powerpoint" ).button({
             text: false,
             icons: {
                 primary: "button-search-powerpoint"
             }
         });
+        $( "#search-file-type-powerpoint" ).on('click',$.fileTypeButtonClick);
+        
+        
+        if($.cookie("fileTypeDoc")!=null)
+        {
+            if($.cookie("fileTypeDoc")==  "true")
+                $( "#search-file-type-word" ).prop('checked', true);
+        }
+        else
+            $( "#search-file-type-word" ).prop('checked',true);
         $( "#search-file-type-word" ).button({
             text: false,
             icons: {
                 primary: "button-search-word"
             }
         });
+        $( "#search-file-type-word" ).on('click',$.fileTypeButtonClick);
+        
+        
+        if($.cookie("fileTypeXls")!=null)
+        {
+            if($.cookie("fileTypeXls")==  "true")
+                $( "#search-file-type-excel" ).prop('checked', true);
+        }
+        else
+            $( "#search-file-type-excel" ).prop('checked',true);
         $( "#search-file-type-excel" ).button({
             text: false,
             icons: {
                 primary: "button-search-excel"
             }
         });        
+        $( "#search-file-type-excel" ).on('click',$.fileTypeButtonClick);
+        
+        
+        if($.cookie("fileTypePdf")!=null)
+        {
+            if($.cookie("fileTypePdf")==  "true")
+                $( "#search-file-type-pdf" ).prop('checked', true);
+        }
+        else
+            $( "#search-file-type-powerpoint" ).prop('checked',true);
         $( "#search-file-type-pdf" ).button({
             text: false,
             icons: {
                 primary: "button-search-pdf"
             }
         });                
+        $( "#search-file-type-pdf" ).on('click',$.fileTypeButtonClick);
+        
+        
+        if($.cookie("fileTypeVideo")!=null)
+        {
+            if($.cookie("fileTypeVideo") ==  "true")
+                $( "#search-file-type-video" ).prop('checked', true);
+        }
+        else
+            $( "#search-file-type-video" ).prop('checked',true);
         $( "#search-file-type-video" ).button({
             text: false,
             icons: {
                 primary: "button-search-video"
             }
         });                        
+        $( "#search-file-type-video" ).on('click',$.fileTypeButtonClick);
         
-        $( "#condition-type" ).tabs();
-        
+
+        var conditionType  = 0;
+        if($.cookie("conditionType")!=null)
+            conditionType = $.cookie("conditionType");
+        $( "#condition-type" ).tabs({selected: conditionType});        
+        $( "#condition-type" ).on('tabsselect',$.conditionTypeChanged)
+
+        if($.cookie("exactMatch")!=null)
+        {
+            if($.cookie("exactMatch")==  "true")
+                $( "#content-compare-exact" ).prop('checked', true);
+            else
+                $( "#content-compare-partial" ).prop('checked', true);
+        }
+        else
+            $( "#content-compare-exact" ).prop('checked', true);
         $( "#content-compare-type").buttonset();
-        
-        $('#condition-content-value').keypress(function (e) {
-            if (e.which == 13) {
-                $.runSearch();
-            }
-        });
+        $( "#content-compare-exact" ).on('click',$.contentMatchButtonClick);
+        $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
     }
     
     $.initSearchView = function(){
