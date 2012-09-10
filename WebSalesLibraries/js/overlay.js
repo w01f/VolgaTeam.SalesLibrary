@@ -16,6 +16,12 @@
         $('#ribbon').fadeIn(0);
         $('#content').fadeIn(0);
     }      
+    $.showOverlayLight = function(){
+        $('<div id="fancybox-loading"><div></div></div>').appendTo('body'); 
+    }  
+    $.hideOverlayLight = function(){
+        $('#fancybox-loading').remove(); 
+    }          
 })( jQuery );    
 
 

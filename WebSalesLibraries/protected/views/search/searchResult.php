@@ -7,6 +7,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/fancybox/source/helpers/jquer
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/video-js/video.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/overlay.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/linkViewing.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/scaling.js', CClientScript::POS_HEAD);
 
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'search-grid',
@@ -42,6 +43,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'enableSorting' => true,
     'selectableRows' => 1,
     'selectionChanged' => 'function(){$.openViewDialogAjax($.fn.yiiGridView.getSelection("search-grid"));}',
+    'beforeAjaxUpdate' => 'function(){$.showOverlayLight();}',
+    'afterAjaxUpdate' => 'function(){
+                            $.hideOverlayLight(); 
+                            $.updateContentAreaWidth();
+                            }',
     )
 );
 ?>
