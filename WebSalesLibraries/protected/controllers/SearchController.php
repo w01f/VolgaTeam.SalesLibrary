@@ -41,7 +41,7 @@ class SearchController extends CController
             $links = LinkStorage::searchByContent($condition, $fileTypes);
             if (isset($links))
             {
-                $dataProvider = new CArrayDataProvider($links, array(
+                $dataProvider = new CLowerCaseArrayDataProvider($links, array(
                         'id' => 'id',
                         'sort' => array(
                             'defaultOrder'=>'name',
