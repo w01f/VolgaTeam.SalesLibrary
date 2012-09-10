@@ -1,4 +1,3 @@
-<br>
 <div class ="group-panel">
     <table id ="file-types">
         <tr>
@@ -10,7 +9,6 @@
         </tr>
     </table>
 </div>
-<br>
 <div class ="group-panel">
     <div class ="group-title">Search Condition</div>
     <div id="condition-type">

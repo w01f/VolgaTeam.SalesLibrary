@@ -38,7 +38,7 @@ class SearchController extends CController
                         'sort' => array(
                             'defaultOrder' => 'name',
                             'attributes' => array(
-                                'library', 'name', 'file_name'
+                                'library', 'name',
                             ),
                         ),
                         'pagination' => array(

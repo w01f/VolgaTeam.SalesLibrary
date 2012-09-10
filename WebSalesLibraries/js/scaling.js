@@ -5,7 +5,7 @@
             'height':height+'px'
         });
         $('#search-grid').css({
-            'height':height+'px'
-        });
+            'height':(height-5)+'px'
+        });        
     }
 })( jQuery );    

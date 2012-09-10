@@ -33,7 +33,6 @@
     font-weight: normal;
     background: #dcdcdc;
     text-align: left;
-    cursor: n-resize;
 }
 
 .grid-view table.items th a
@@ -43,7 +42,6 @@
     font-weight: normal;
     background: #dcdcdc;
     text-decoration: none;
-    cursor: n-resize;
 }
 
 .grid-view table.items th a:hover
@@ -121,4 +119,16 @@
 {
     width: 100%;
     border: 1px solid #ccc;
+}
+
+.link-grid-column .link-name, .link-grid-column .file-name
+{
+    border: none !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.link-grid-column .file-name
+{
+    color: #b0b0b0;
 }

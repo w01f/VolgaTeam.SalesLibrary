@@ -23,15 +23,9 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'name',
-            'header' => 'Name',
-            'type' => 'raw',
-            'value' => '$data["name"]',
-        ),
-        array(
-            'name' => 'file_name',
-            'header' => 'File',
-            'type' => 'raw',
-            'value' => '$data["file_name"]',
+            'header' => 'Link',
+            'type' => 'html',
+            'value' => 'Yii::app()->controller->widget("application.components.widgets.LinkGridColumnWidget", array("linkName" => $data["name"], "fileName" => $data["file_name"]),true)',
         ),
         array(
             'name' => 'date',
