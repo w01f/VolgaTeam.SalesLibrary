@@ -6,7 +6,7 @@ class LinkGridColumnWidget extends CWidget
     
     public function run()
     {
-        $this->render('application.views.search.linkGridColumnWidget', array('linkName' => $this->linkName,'fileName' => $this->fileName));
+        $this->render('application.views.widgets.linkGridColumnWidget', array('linkName' => $this->linkName,'fileName' => $this->fileName));
     }
 
 }

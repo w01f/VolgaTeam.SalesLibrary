@@ -54,7 +54,7 @@
         {
             $.ajax({
                 type: "POST",
-                url: "wallbin/viewLink",
+                url: "search/viewLink",
                 data: {
                     linkId: linkId
                 },

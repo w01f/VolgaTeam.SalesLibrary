@@ -12,11 +12,10 @@
         if($('#search-file-type-video').is(':checked'))
             selectedFileTypes.push("video");     
         
-        var selectedConditionType = $( "#condition-type" ).tabs( "option", "selected" );
+        var selectedConditionType = parseInt($( "#condition-type" ).tabs( "option", "selected" ));
         switch(selectedConditionType)
         {
             case 0:
-            case "0":                
                 var selectedCondition = $('#condition-content-value').val();
                 if($('#content-compare-exact').is(':checked'))
                     selectedCondition = '"' + selectedCondition + '"';
@@ -141,7 +140,7 @@
                 $( "#search-file-type-pdf" ).prop('checked', true);
         }
         else
-            $( "#search-file-type-powerpoint" ).prop('checked',true);
+            $( "#search-file-type-pdf" ).prop('checked', true);
         $( "#search-file-type-pdf" ).button({
             text: false,
             icons: {

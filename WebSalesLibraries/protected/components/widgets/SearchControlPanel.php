@@ -3,7 +3,7 @@ class SearchControlPanel extends CWidget
 {
     public function run()
     {
-        $this->render('application.views.search.controlPanel', array());
+        $this->render('application.views.widgets.controlPanel', array());
     }
 }
 ?>

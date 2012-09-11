@@ -5,7 +5,7 @@ class BannerWidget extends CWidget
     public $isLinkBanner;
     public function run()
     {
-        $this->render('application.views.wallbin.bannerWidget', array('banner' => $this->banner, 'isLinkBanner' => $this->isLinkBanner));
+        $this->render('application.views.widgets.bannerWidget', array('banner' => $this->banner, 'isLinkBanner' => $this->isLinkBanner));
     }
 
 }

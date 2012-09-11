@@ -14,7 +14,7 @@ if (Yii::app()->browser->isMobile())
 else
     $selectionChanged = 'function(){$.openViewDialogSearchGrid($.fn.yiiGridView.getSelection("search-grid"),false);}';
 
-$this->widget('zii.widgets.grid.CGridView', array(
+echo $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'search-grid',
     'dataProvider' => $dataProvider,
     'template' => '{items}',
@@ -54,6 +54,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
                             $.hideOverlayLight(); 
                             $.updateContentAreaWidth();
                             }',
-    )
+    ),true
 );
 ?>
