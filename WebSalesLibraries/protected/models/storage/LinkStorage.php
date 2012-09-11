@@ -82,7 +82,30 @@ class LinkStorage extends CActiveRecord
                     $linkObject = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
                     $linkObject->load(LinkStorage::getLinkById($link['id']));
                     if (in_array($linkObject->originalFormat, $fileTypes))
+                    {
+                        switch ($linkObject->originalFormat)
+                        {
+                            case 'ppt':
+                                $link['file_type'] = 'images/search/search-powerpoint.png';
+                                break;
+                            case 'doc':
+                                $link['file_type'] = 'images/search/search-word.png';
+                                break;
+                            case 'xls':
+                                $link['file_type'] = 'images/search/search-excel.png';
+                                break;
+                            case 'pdf':
+                                $link['file_type'] = 'images/search/search-pdf.png';
+                                break;
+                            case 'video':
+                                $link['file_type'] = 'images/search/search-video.png';
+                                break;
+                            default:
+                                $link['file_type'] = 'undefined';
+                                break;
+                        }
                         $links[] = $link;
+                    }
                 }
             }
         }

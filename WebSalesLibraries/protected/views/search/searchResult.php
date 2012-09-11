@@ -9,6 +9,11 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/overlay.js', CClientScript::P
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/linkViewing.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/scaling.js', CClientScript::POS_HEAD);
 
+if (Yii::app()->browser->isMobile())
+    $selectionChanged = 'function(){$.openViewDialogSearchGrid($.fn.yiiGridView.getSelection("search-grid"),true);}';
+else
+    $selectionChanged = 'function(){$.openViewDialogSearchGrid($.fn.yiiGridView.getSelection("search-grid"),false);}';
+
 $this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'search-grid',
     'dataProvider' => $dataProvider,
@@ -17,10 +22,17 @@ $this->widget('zii.widgets.grid.CGridView', array(
     'columns' => array(
         array(
             'name' => 'library',
-            'header' => 'Library',
+            'header' => 'Station',
             'type' => 'raw',
             'value' => '$data["library"]',
         ),
+        array(
+            'name' => 'file_type',
+            'header' => 'Type',
+            'type' => 'image',
+            'value' => '$data["file_type"]',
+            'htmlOptions'=>array('width'=>'40px'),
+        ),        
         array(
             'name' => 'name',
             'header' => 'Link',
@@ -29,14 +41,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'date',
-            'header' => 'Date Modified',
+            'header' => 'Date',
             'type' => 'raw',
             'value' => null,
         ),
     ),
     'enableSorting' => true,
     'selectableRows' => 1,
-    'selectionChanged' => 'function(){$.openViewDialogAjax($.fn.yiiGridView.getSelection("search-grid"));}',
+    'selectionChanged' => $selectionChanged,
     'beforeAjaxUpdate' => 'function(){$.showOverlayLight();}',
     'afterAjaxUpdate' => 'function(){
                             $.hideOverlayLight(); 

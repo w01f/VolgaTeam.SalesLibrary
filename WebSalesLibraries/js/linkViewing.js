@@ -29,37 +29,54 @@
         }
     }
     
-    $.openViewDialogAjax = function(linkId){
+    $.openViewDialogSearchGrid = function(linkId, isMobileBrowser){
+        var proceed = false;
         if(linkId!='')
             $.cookie("lastLinkId", linkId, {
                 expires: (60 * 60 * 24 * 7)
             });
         else
             linkId = $.cookie("lastLinkId");
-        $.ajax({
-            type: "POST",
-            url: "wallbin/viewLink",
-            data: {
-                linkId: linkId
-            },
-            beforeSend: function(){
-                $.showOverlay();
-            },
-            complete: function(){
-            },
-            success: function(msg){
-                $.viewDilogContent = $('<div>'+msg+'<div>');
-                $.viewDilogContent.on('click',$.viewSelectedFormat);
-                $.openViewDialogEmbedded.call($.viewDilogContent);
-                $.hideOverlay();
-            },
-            error: function(){
-                $('#search-result').html('');
-                $.hideOverlay();
-            },            
-            async: true,
-            dataType: 'html'                        
-        });                        
+        if($.searchGridClickNumber!= null)
+            $.searchGridClickNumber = $.searchGridClickNumber + 1;
+        if($.searchGridClickNumber == 2 && linkId == $.searchGridLastId)
+        {
+            $.searchGridClickNumber = null;
+            $.searchGridLastId = null;
+            proceed = true;
+        }   
+        else
+        {
+            $.searchGridClickNumber = 1;
+            $.searchGridLastId = linkId;
+        }
+        if(proceed || isMobileBrowser != true)
+        {
+            $.ajax({
+                type: "POST",
+                url: "wallbin/viewLink",
+                data: {
+                    linkId: linkId
+                },
+                beforeSend: function(){
+                    $.showOverlay();
+                },
+                complete: function(){
+                },
+                success: function(msg){
+                    $.viewDilogContent = $('<div>'+msg+'<div>');
+                    $.viewDilogContent.on('click',$.viewSelectedFormat);
+                    $.openViewDialogEmbedded.call($.viewDilogContent);
+                    $.hideOverlay();
+                },
+                error: function(){
+                    $('#search-result').html('');
+                    $.hideOverlay();
+                },            
+                async: true,
+                dataType: 'html'                        
+            });  
+        }
     }
     
     $.viewSelectedFormat = function()

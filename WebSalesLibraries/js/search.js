@@ -16,6 +16,7 @@
         switch(selectedConditionType)
         {
             case 0:
+            case "0":                
                 var selectedCondition = $('#condition-content-value').val();
                 if($('#content-compare-exact').is(':checked'))
                     selectedCondition = '"' + selectedCondition + '"';

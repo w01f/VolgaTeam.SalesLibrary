@@ -76,49 +76,55 @@
     width: 100%;
 }
 
+#file-types .ui-button 
+{
+    width: 52px !important; 
+    height: 52px !important;
+}
+
 .ui-button .ui-icon.button-search-powerpoint 
 {
     background-image: url(../images/search/search-powerpoint.png);
-    width: 22px;
-    height: 22px;
-    margin-left: -11px;
-    margin-top: -11px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
 }
 
 .ui-button .ui-icon.button-search-word 
 {
     background-image: url(../images/search/search-word.png);
-    width: 22px;
-    height: 22px;
-    margin-left: -11px;
-    margin-top: -11px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
 }
 
 .ui-button .ui-icon.button-search-excel 
 {
     background-image: url(../images/search/search-excel.png);
-    width: 22px;
-    height: 22px;
-    margin-left: -11px;
-    margin-top: -11px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
 }
 
 .ui-button .ui-icon.button-search-pdf 
 {
     background-image: url(../images/search/search-pdf.png);
-    width: 22px;
-    height: 22px;
-    margin-left: -11px;
-    margin-top: -11px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
 }
 
 .ui-button .ui-icon.button-search-video 
 {
     background-image: url(../images/search/search-video.png);
-    width: 22px;
-    height: 22px;
-    margin-left: -11px;
-    margin-top: -11px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    margin-top: -20px;
 }
 
 .ui-button.ui-state-active
