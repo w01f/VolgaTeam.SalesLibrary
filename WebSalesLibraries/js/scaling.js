@@ -7,5 +7,8 @@
         $('#search-grid').css({
             'height':(height-5)+'px'
         });        
+        $('#right-navbar > div').css({
+            'height':(height-6)+'px'
+        });                
     }
 })( jQuery );    

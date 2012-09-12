@@ -35,7 +35,7 @@
                         $.hideOverlay();
                     },
                     success: function(msg){
-                        $('#search-result').html(msg);
+                        $('#search-result').append(msg);
                         $.updateContentAreaWidth();
                     },
                     error: function(){
@@ -165,11 +165,16 @@
         });                        
         $( "#search-file-type-video" ).on('click',$.fileTypeButtonClick);
         
+        $.getSelectedLibraries();
+        $("#library-select").button();
+        $("#library-select").on('click',$.selectLibraries);
 
         var conditionType  = 0;
         if($.cookie("conditionType")!=null)
-            conditionType = $.cookie("conditionType");
-        $( "#condition-type" ).tabs({selected: conditionType});        
+            conditionType = parseInt($.cookie("conditionType"));
+        $( "#condition-type" ).tabs({
+            selected: conditionType
+        });        
         $( "#condition-type" ).on('tabsselect',$.conditionTypeChanged)
 
         if($.cookie("exactMatch")!=null)

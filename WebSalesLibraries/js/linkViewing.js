@@ -62,16 +62,15 @@
                     $.showOverlay();
                 },
                 complete: function(){
+                    $.hideOverlay();
                 },
                 success: function(msg){
                     $.viewDilogContent = $('<div>'+msg+'<div>');
                     $.viewDilogContent.on('click',$.viewSelectedFormat);
                     $.openViewDialogEmbedded.call($.viewDilogContent);
-                    $.hideOverlay();
                 },
                 error: function(){
                     $('#search-result').html('');
-                    $.hideOverlay();
                 },            
                 async: true,
                 dataType: 'html'                        

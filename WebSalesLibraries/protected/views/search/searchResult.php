@@ -19,6 +19,7 @@ echo $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider' => $dataProvider,
     'template' => '{items}',
     'cssFile' => Yii::app()->baseUrl . '/css/custom-grid.css',
+    'showTableOnEmpty' => true,
     'columns' => array(
         array(
             'name' => 'library',
@@ -31,8 +32,8 @@ echo $this->widget('zii.widgets.grid.CGridView', array(
             'header' => 'Type',
             'type' => 'image',
             'value' => '$data["file_type"]',
-            'htmlOptions'=>array('width'=>'40px'),
-        ),        
+            'htmlOptions' => array('width' => '40px'),
+        ),
         array(
             'name' => 'name',
             'header' => 'Link',
@@ -54,6 +55,6 @@ echo $this->widget('zii.widgets.grid.CGridView', array(
                             $.hideOverlayLight(); 
                             $.updateContentAreaWidth();
                             }',
-    ),true
+    ), true
 );
 ?>

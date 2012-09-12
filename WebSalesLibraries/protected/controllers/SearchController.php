@@ -28,26 +28,37 @@ class SearchController extends CController
             if (isset($condition))
                 Yii::app()->session['lastContentCondition'] = $condition;
         }
+
+        if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
+            $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+        else
+            $checkedLibraryIds = array();
+
         if (isset($fileTypes) && isset($condition))
         {
-            $links = LinkStorage::searchByContent($condition, $fileTypes);
-            if (isset($links))
+            $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds);
+            if (!isset($links))
             {
-                $dataProvider = new CLowerCaseArrayDataProvider($links, array(
-                        'id' => 'id',
-                        'sort' => array(
-                            'defaultOrder' => 'name',
-                            'attributes' => array(
-                                'library', 'file_type', 'name',
-                            ),
-                        ),
-                        'pagination' => array(
-                            'pageSize' => 1000000,
-                        ),
-                    ));
-                $searched = true;
-                $this->renderPartial('searchResult', array('dataProvider' => $dataProvider), false, true);
+                $links['id'] = null;
+                $links['name'] = null;
+                $links['file_name'] = null;
+                $links['file_type'] = null;
+                $links['library'] = null;
             }
+            $dataProvider = new CLowerCaseArrayDataProvider($links, array(
+                    'id' => 'id',
+                    'sort' => array(
+                        'defaultOrder' => 'name',
+                        'attributes' => array(
+                            'library', 'file_type', 'name',
+                        ),
+                    ),
+                    'pagination' => array(
+                        'pageSize' => 1000000,
+                    ),
+                ));
+            $searched = true;
+            $this->renderPartial('searchResult', array('dataProvider' => $dataProvider), false, true);
         }
         if (!$searched)
             $this->renderPartial('empty', array(), false, true);
@@ -99,6 +110,55 @@ class SearchController extends CController
         }
         if (!$rendered)
             $this->renderPartial('empty', array(), false, true);
+    }
+
+    public function actionGetLibraryCheckboxList()
+    {
+        $libraryManager = new LibraryManager();
+        $libraryObjects = $libraryManager->getLibraries();
+
+        if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
+            $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+        foreach ($libraryObjects as $libraryObject)
+        {
+            $library['id'] = $libraryObject->id;
+            $library['name'] = $libraryObject->name;
+            if (isset($checkedLibraryIds))
+                $library['selected'] = in_array($libraryObject->id, $checkedLibraryIds);
+            else
+                $library['selected'] = true;
+            $libraries[] = $library;
+        }
+        if (isset($libraries))
+            $this->renderPartial('application.views.search.librarySelector', array('libraries' => $libraries), false, true);
+    }
+
+    public function actionGetSelectedLibraries()
+    {
+        $libraryManager = new LibraryManager();
+        $libraryObjects = $libraryManager->getLibraries();
+        if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
+            $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+        foreach ($libraryObjects as $libraryObject)
+        {
+            if (isset($checkedLibraryIds))
+            {
+                if (in_array($libraryObject->id, $checkedLibraryIds))
+                    $libraries[] = $libraryObject->name;
+            }
+            else
+                $libraries[] = $libraryObject->name;
+        }
+        if (isset($libraries))
+        {
+            if (count($libraries) == count($libraryObjects))
+                echo 'All';
+            else
+                echo implode(', ', $libraries);
+        }
+        else
+            echo 'None';
+        Yii::app()->end();
     }
 
 }
