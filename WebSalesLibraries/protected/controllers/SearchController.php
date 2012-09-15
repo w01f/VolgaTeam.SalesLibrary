@@ -10,55 +10,66 @@ class SearchController extends CController
     public function actionSearchByContent()
     {
         $searched = false;
-        $sortFlag = Yii::app()->request->getQuery('id_sort');
-        if (isset($sortFlag))
-        {
-            if (isset(Yii::app()->session['lastFyleTypes']))
-                $fileTypes = Yii::app()->session['lastFyleTypes'];
-            if (isset(Yii::app()->session['lastContentCondition']))
-                $condition = Yii::app()->session['lastContentCondition'];
-        }
-        else
-        {
-            $fileTypes = Yii::app()->request->getPost('fileTypes');
-            if (isset($fileTypes))
-                Yii::app()->session['lastFyleTypes'] = $fileTypes;
-
-            $condition = Yii::app()->request->getPost('condition');
-            if (isset($condition))
-                Yii::app()->session['lastContentCondition'] = $condition;
-        }
+        $fileTypes = Yii::app()->request->getPost('fileTypes');
+        $condition = Yii::app()->request->getPost('condition');
 
         if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
             $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
         else
             $checkedLibraryIds = array();
 
+        if (isset(Yii::app()->request->cookies['sortColumn']->value))
+        {
+            switch (Yii::app()->request->cookies['sortColumn']->value)
+            {
+                case 'library':
+                    $sortColumn = 'library';
+                    break;
+                case 'link-type':
+                    $sortColumn = 'file_type';
+                    break;
+                case 'link-name':
+                    $sortColumn = 'name';
+                    break;
+                case 'link-date':
+                    break;
+            }
+        }
+        else
+            $sortColumn = 'name';
+
+        if (isset(Yii::app()->request->cookies['sortDirection']->value))
+            $sortDirection = Yii::app()->request->cookies['sortDirection']->value;
+        else
+            $sortDirection = 'asc';
+
         if (isset($fileTypes) && isset($condition))
         {
             $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds);
             if (!isset($links))
             {
-                $links['id'] = null;
-                $links['name'] = null;
-                $links['file_name'] = null;
-                $links['file_type'] = null;
-                $links['library'] = null;
+                $link['id'] = null;
+                $link['name'] = null;
+                $link['file_name'] = null;
+                $link['file_type'] = null;
+                $link['library'] = null;
+                $links[] = $link;
             }
-            $dataProvider = new CLowerCaseArrayDataProvider($links, array(
-                    'id' => 'id',
-                    'sort' => array(
-                        'defaultOrder' => 'name',
-                        'attributes' => array(
-                            'library', 'file_type', 'name',
-                        ),
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 1000000,
-                    ),
-                ));
+            else
+            {
+                if (isset($sortColumn) && isset($sortDirection))
+                {
+                    usort($links, function($a, $b) use($sortColumn, $sortDirection)
+                        {
+                            if ($sortDirection == 'asc')
+                                return strnatcmp($a[$sortColumn], $b[$sortColumn]);
+                            else
+                                return strnatcmp($b[$sortColumn], $a[$sortColumn]);
+                        });
+                }
+            }
             $searched = true;
-            $this->renderPartial('searchResult', array('dataProvider' => $dataProvider), false, true);
+            $this->renderPartial('searchResult', array('links' => $links), false, true);
         }
         if (!$searched)
             $this->renderPartial('empty', array(), false, true);

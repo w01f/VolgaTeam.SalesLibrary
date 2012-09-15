@@ -64,7 +64,7 @@
                 $('#content').html(msg);
                 $.updateTextSize(storedTextSize);
                 $.updateTextSpace(storedTextSpace);
-                $.updateContentAreaWidth();            
+                $.updateContentAreaDimensions();            
                 $('.clickable').on('click',$.openViewDialogEmbedded);        
                 $('.view-dialog-content .format-list .item').on('click',$.viewSelectedFormat);        
             },
@@ -111,7 +111,7 @@
             $.pageChanged();
         });
         
-        $(window).on('resize',$.updateContentAreaWidth);         
+        $(window).on('resize',$.updateContentAreaDimensions);         
         
         $('#increase-text-space').on('click',function(){
             if(storedTextSpace < 3)

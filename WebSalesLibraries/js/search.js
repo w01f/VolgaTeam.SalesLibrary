@@ -13,6 +13,7 @@
             selectedFileTypes.push("video");     
         
         var selectedConditionType = parseInt($( "#condition-type" ).tabs( "option", "selected" ));
+        
         switch(selectedConditionType)
         {
             case 0:
@@ -28,18 +29,19 @@
                         condition: selectedCondition
                     },
                     beforeSend: function(){
-                        $('#search-result').html('');
-                        $.showOverlay();
+                        $.showOverlayLight();
                     },
                     complete: function(){
-                        $.hideOverlay();
+                        $.hideOverlayLight();
+                        $.updateContentAreaDimensions();
+                        $.initSearchGrid();
                     },
                     success: function(msg){
-                        $('#search-result').append(msg);
-                        $.updateContentAreaWidth();
+                        $('#search-result>div').html('');
+                        $('#search-result>div').append(msg);
                     },
                     error: function(){
-                        $('#search-result').html('');
+                        $('#search-result>div').html('');
                     },            
                     async: true,
                     dataType: 'html'                        
@@ -77,6 +79,19 @@
             expires: (60 * 60 * 24 * 7)
         });
     }
+    
+    $.updateSearchAreaDimensions = function(){
+        var height = $('#content').height();
+        $('#right-navbar > div').css({
+            'height':height+'px'
+        });        
+        $('#search-result > div').css({
+            'height':height+'px'
+        });        
+        
+        $.updateSearchGridDimensions();
+    }
+
     
     $.initControlPanel = function(){
         $( "#run-search" ).on('click',$.runSearch);        
@@ -200,12 +215,13 @@
                 $.showOverlay();
             },
             complete: function(){
-                $.initControlPanel();
                 $.hideOverlay();
+                $.initControlPanel();
+                $.updateContentAreaDimensions();
+                $.initSearchGrid();
             },
             success: function(msg){
                 $('#content').html(msg);
-                $.updateContentAreaWidth();
             },
             error: function(){
                 $('#content').html('');

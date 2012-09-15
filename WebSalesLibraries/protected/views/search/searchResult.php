@@ -1,60 +1,73 @@
-<?php
-$cs = Yii::app()->clientScript;
-$cs->registerCoreScript('cookie');
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/video-js/video.min.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/overlay.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/linkViewing.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/scaling.js', CClientScript::POS_HEAD);
+<table id ="search-grid-header">
+    <tr>
+        
+        <td class = "library-column"><span>Station</span></td>
+        <td class = "link-type-column"><span>Type</span></td>
+        <td class = "link-name-column"><span>Link</span></td>
+        <td class = "link-date-column"><span>Date</span></td>
+    </tr>
+</table>
+<div id ="search-grid-body-container">
+    <table id ="search-grid-body">
+        <?php
+        if (isset($links))
+        {
+            $recordNumber = 1;
+            foreach ($links as $link)
+            {
+                $rowClass = (($recordNumber % 2) ? 'odd' : 'even');
+                echo CHtml::openTag('tr', array('class' => $rowClass));
+                {
+                    echo CHtml::openTag('td', array('class' => 'library-column'));
+                    {
+                        echo $link['library'];
+                    }
+                    echo CHtml::closeTag('td');
 
-if (Yii::app()->browser->isMobile())
-    $selectionChanged = 'function(){$.openViewDialogSearchGrid($.fn.yiiGridView.getSelection("search-grid"),true);}';
-else
-    $selectionChanged = 'function(){$.openViewDialogSearchGrid($.fn.yiiGridView.getSelection("search-grid"),false);}';
+                    echo CHtml::openTag('td', array('class' => 'link-type-column'));
+                    {
+                        echo CHtml::tag('img', array('src' => $link['file_type'], 'alt' => ''));
+                    }
+                    echo CHtml::closeTag('td');
 
-echo $this->widget('zii.widgets.grid.CGridView', array(
-    'id' => 'search-grid',
-    'dataProvider' => $dataProvider,
-    'template' => '{items}',
-    'cssFile' => Yii::app()->baseUrl . '/css/custom-grid.css',
-    'showTableOnEmpty' => true,
-    'columns' => array(
-        array(
-            'name' => 'library',
-            'header' => 'Station',
-            'type' => 'raw',
-            'value' => '$data["library"]',
-        ),
-        array(
-            'name' => 'file_type',
-            'header' => 'Type',
-            'type' => 'image',
-            'value' => '$data["file_type"]',
-            'htmlOptions' => array('width' => '40px'),
-        ),
-        array(
-            'name' => 'name',
-            'header' => 'Link',
-            'type' => 'html',
-            'value' => 'Yii::app()->controller->widget("application.components.widgets.LinkGridColumnWidget", array("linkName" => $data["name"], "fileName" => $data["file_name"]),true)',
-        ),
-        array(
-            'name' => 'date',
-            'header' => 'Date',
-            'type' => 'raw',
-            'value' => null,
-        ),
-    ),
-    'enableSorting' => true,
-    'selectableRows' => 1,
-    'selectionChanged' => $selectionChanged,
-    'beforeAjaxUpdate' => 'function(){$.showOverlayLight();}',
-    'afterAjaxUpdate' => 'function(){
-                            $.hideOverlayLight(); 
-                            $.updateContentAreaWidth();
-                            }',
-    ), true
-);
-?>
+                    echo CHtml::openTag('td', array('class' => 'link-name-column'));
+                    {
+                        echo CHtml::openTag('table', array('class' => 'link-container'));
+                        {
+                            echo CHtml::openTag('tr');
+                            {
+                                echo CHtml::openTag('td', array('class' => 'link-name'));
+                                {
+                                    echo $link['name'];
+                                }
+                                echo CHtml::closeTag('td');
+                            }
+                            echo CHtml::closeTag('tr');
+
+                            echo CHtml::openTag('tr');
+                            {
+                                echo CHtml::openTag('td', array('class' => 'file-name'));
+                                {
+                                    echo $link['file_name'];
+                                }
+                                echo CHtml::closeTag('td');
+                            }
+                            echo CHtml::closeTag('tr');
+                        }
+                        echo CHtml::closeTag('table');
+                    }
+                    echo CHtml::closeTag('td');
+
+                    echo CHtml::openTag('td', array('class' => 'link-date-column'));
+                    {
+                        echo '';
+                    }
+                    echo CHtml::closeTag('td');
+                }
+                echo CHtml::closeTag('tr');
+                $recordNumber++;
+            }
+        }
+        ?>
+    </table>
+</div>

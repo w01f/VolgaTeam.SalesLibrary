@@ -1,25 +1,25 @@
 #search-container { 
     width: 100%;
-    height: 100%;
     padding: 0px;
     margin: 0px;
-    border: 0px;
+    border: none;
+    border-collapse: collapse;
 }
+
+#search-container>tr>td
+{
+    padding: 0;
+}
+
 #right-navbar 
 { 
     width: 25%;
-    height: 100%;
     min-width: 330px;
     background: #eee;
     padding: 0px;
     margin: 0px;
-    border-right: solid #999;
     vertical-align: top;
-}
-
-#right-navbar > div 
-{ 
-    overflow-y:hidden;
+    border-right: 2px #999 solid;
 }
 
 #search-result{ 
@@ -27,15 +27,17 @@
     width: 75%;
     padding: 0px;
     margin: 0px;
-    border: none;
 }
 
-#search-grid
-{
-    padding: 0px;
-    margin-left: -2px;
-    border: none;
-    overflow-y: auto;
+#right-navbar>div
+{ 
+    overflow: hidden;
+}
+
+#search-result>div
+{ 
+    vertical-align: top;
+    overflow: hidden;
 }
 
 #right-navbar .group-panel
