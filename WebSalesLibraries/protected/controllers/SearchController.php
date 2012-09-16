@@ -21,10 +21,9 @@ class SearchController extends CController
         if (isset($fileTypes) && isset($condition) && isset($isSort))
             $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds, $isSort);
 
-        if (isset($links))
-            $this->renderPartial('searchResult', array('links' => $links), false, true);
-        else
-            $this->renderPartial('empty', array(), false, true);
+        if (!isset($links))
+            $links = null;
+        $this->renderPartial('searchResult', array('links' => $links), false, true);
     }
 
     public function actionViewLink()

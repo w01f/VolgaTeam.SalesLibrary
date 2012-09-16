@@ -101,10 +101,19 @@
             $.sortByColumn('link-name');
         });                
         
-        $( "#search-grid-body td.single-click" ).off('click');
-        $( "#search-grid-body td.single-click" ).on('click',$.searchGridViewDetails);                
-        $( "#search-grid-body td.double-click" ).off('dblclick');
-        $( "#search-grid-body td.double-click" ).on('dblclick',$.searchGridViewDetails);
+        $( "#search-grid-body td.click-no-mobile" ).off('click');
+        $( "#search-grid-body td.click-no-mobile" ).on('click',function(){
+            $.searchGridViewDetails.call($(this));
+        });
+        $( "#search-grid-body td.click-mobile" ).off('touchstart').off('touchmove').off('touchend');
+        $( "#search-grid-body td.click-mobile" ).on('touchstart',function(){
+            isScrolling = false;
+        }).on('touchmove',function(){
+            isScrolling = true;
+        }).on('touchend',function(){
+            if(!isScrolling)
+                $.searchGridViewDetails.call($(this));
+        });
     }
     
 })( jQuery );    

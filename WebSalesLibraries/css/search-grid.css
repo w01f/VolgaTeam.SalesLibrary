@@ -105,7 +105,7 @@
     display: none;
 }
 
-#search-grid-body td.single-click, #search-grid-body td.double-click
+#search-grid-body td.click-mobile, #search-grid-body td.click-no-mobile
 {
     cursor: pointer;    
 }

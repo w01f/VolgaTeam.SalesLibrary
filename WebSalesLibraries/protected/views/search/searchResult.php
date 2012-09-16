@@ -13,9 +13,9 @@
         if (isset($links))
         {
             if (Yii::app()->browser->isMobile())
-                $clickClass = ' double-click';
+                $clickClass = ' click-mobile';
             else
-                $clickClass = ' single-click';
+                $clickClass = ' click-no-mobile';
 
             $recordNumber = 1;
             foreach ($links as $link)
@@ -27,21 +27,21 @@
                     {
                         echo $link['id'];
                     }
-                    echo CHtml::closeTag('td');                    
-                    
+                    echo CHtml::closeTag('td');
+
                     echo CHtml::openTag('td', array('class' => 'library-column'));
                     {
                         echo $link['library'];
                     }
                     echo CHtml::closeTag('td');
 
-                    echo CHtml::openTag('td', array('class' => 'link-type-column'.$clickClass));
+                    echo CHtml::openTag('td', array('class' => 'link-type-column' . $clickClass));
                     {
                         echo CHtml::tag('img', array('src' => $link['file_type'], 'alt' => ''));
                     }
                     echo CHtml::closeTag('td');
 
-                    echo CHtml::openTag('td', array('class' => 'link-name-column'.$clickClass));
+                    echo CHtml::openTag('td', array('class' => 'link-name-column' . $clickClass));
                     {
                         echo CHtml::openTag('table', array('class' => 'link-container'));
                         {
