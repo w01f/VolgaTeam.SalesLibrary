@@ -65,7 +65,9 @@
                 $.updateTextSize(storedTextSize);
                 $.updateTextSpace(storedTextSpace);
                 $.updateContentAreaDimensions();            
+                $('.clickable').off('click');        
                 $('.clickable').on('click',$.openViewDialogEmbedded);        
+                $('.view-dialog-content .format-list .item').off('click'); 
                 $('.view-dialog-content .format-list .item').on('click',$.viewSelectedFormat);        
             },
             error: function(){
@@ -113,6 +115,7 @@
         
         $(window).on('resize',$.updateContentAreaDimensions);         
         
+        $('#increase-text-space').off('click'); 
         $('#increase-text-space').on('click',function(){
             if(storedTextSpace < 3)
             {
@@ -120,6 +123,7 @@
                 $.updateTextSpace(storedTextSpace);
             }
         });
+        $('#decrease-text-space').off('click'); 
         $('#decrease-text-space').on('click',function(){
             if(storedTextSpace > 1)
             {
@@ -128,11 +132,14 @@
             }
         });
         
+        $('#increase-text-size').off('click'); 
         $('#increase-text-size').on('click',function(){
             if(storedTextSize<22)
                 storedTextSize++;
             $.updateTextSize(storedTextSize);
         });
+        
+        $('#decrease-text-size').off('click'); 
         $('#decrease-text-size').on('click',function(){
             if(storedTextSize>8)
                 storedTextSize--;

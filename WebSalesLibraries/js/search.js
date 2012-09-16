@@ -94,13 +94,6 @@
 
     
     $.initControlPanel = function(){
-        $( "#run-search" ).on('click',$.runSearch);        
-        $('#condition-content-value').keypress(function (e) {
-            if (e.which == 13) {
-                $.runSearch();
-            }
-        });        
-
         if($.cookie("fileTypePpt")!=null)
         {
             if($.cookie("fileTypePpt")==  "true")
@@ -114,6 +107,8 @@
                 primary: "button-search-powerpoint"
             }
         });
+
+        $( "#search-file-type-powerpoint" ).off('click');        
         $( "#search-file-type-powerpoint" ).on('click',$.fileTypeButtonClick);
         
         
@@ -130,6 +125,8 @@
                 primary: "button-search-word"
             }
         });
+        
+        $( "#search-file-type-word" ).off('click');        
         $( "#search-file-type-word" ).on('click',$.fileTypeButtonClick);
         
         
@@ -146,6 +143,7 @@
                 primary: "button-search-excel"
             }
         });        
+        $( "#search-file-type-excel" ).off('click');        
         $( "#search-file-type-excel" ).on('click',$.fileTypeButtonClick);
         
         
@@ -162,6 +160,7 @@
                 primary: "button-search-pdf"
             }
         });                
+        $( "#search-file-type-pdf" ).off('click');        
         $( "#search-file-type-pdf" ).on('click',$.fileTypeButtonClick);
         
         
@@ -178,12 +177,14 @@
                 primary: "button-search-video"
             }
         });                        
+        $( "#search-file-type-video" ).off('click');        
         $( "#search-file-type-video" ).on('click',$.fileTypeButtonClick);
         
         $.getSelectedLibraries();
         $("#library-select").button();
+        $("#library-select").off('click');        
         $("#library-select").on('click',$.selectLibraries);
-
+        
         var conditionType  = 0;
         if($.cookie("conditionType")!=null)
             conditionType = parseInt($.cookie("conditionType"));
@@ -202,8 +203,23 @@
         else
             $( "#content-compare-exact" ).prop('checked', true);
         $( "#content-compare-type").buttonset();
+        $( "#content-compare-exact" ).off('click');        
         $( "#content-compare-exact" ).on('click',$.contentMatchButtonClick);
+        $( "#content-compare-partial" ).off('click');        
         $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
+        
+        
+        $( "#run-search" ).one('click',$.runSearch);        
+        $("#right-navbar input").keypress(function (e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });        
+        $('#condition-content-value').keypress(function (e) {
+            if (e.which == 13) {
+                $.runSearch();
+            }
+        });        
     }
     
     $.initSearchView = function(){

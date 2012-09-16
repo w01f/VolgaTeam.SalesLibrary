@@ -5,7 +5,7 @@
     <body >
         <div id="ribbon">
             <div class="ribbon-window-title" ></div>
-            <div class="ribbon-tab sel" id="home-tab">
+            <div class="ribbon-tab" id="home-tab">
                 <span class="ribbon-title"><?php echo Yii::app()->params['home_tab']['name'] ?></span>
                 <div class="ribbon-section" >
                     <span class="section-title" id="libraries-selector-title">Sales Library</span>

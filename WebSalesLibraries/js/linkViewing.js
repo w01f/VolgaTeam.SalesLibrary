@@ -1,5 +1,6 @@
 (function( $ ) {
     $.openViewDialogEmbedded = function(){
+        $(this).find('.view-dialog-body .format-list .item').off('click');        
         $(this).find('.view-dialog-body .format-list .item').on('click',$.viewSelectedFormat);        
         var formatItems = $(this).find('.view-dialog-body .format-list .item');
         var selectedFileType = formatItems.find('.service-data .file-type').first().html();
@@ -21,6 +22,7 @@
                 closeEffect	: 'none'            
             });
             $(this).find('.view-dialog-content').html(viewDialogContent);
+            $(this).find('.view-dialog-body .format-list .item').off('click');        
             $(this).find('.view-dialog-body .format-list .item').on('click',$.viewSelectedFormat);        
         }
         else
@@ -29,53 +31,31 @@
         }
     }
     
-    $.openViewDialogSearchGrid = function(linkId, isMobileBrowser){
-        var proceed = false;
-        if(linkId!='')
-            $.cookie("lastLinkId", linkId, {
-                expires: (60 * 60 * 24 * 7)
-            });
-        else
-            linkId = $.cookie("lastLinkId");
-        if($.searchGridClickNumber!= null)
-            $.searchGridClickNumber = $.searchGridClickNumber + 1;
-        if($.searchGridClickNumber == 2 && linkId == $.searchGridLastId)
-        {
-            $.searchGridClickNumber = null;
-            $.searchGridLastId = null;
-            proceed = true;
-        }   
-        else
-        {
-            $.searchGridClickNumber = 1;
-            $.searchGridLastId = linkId;
-        }
-        if(proceed || isMobileBrowser != true)
-        {
-            $.ajax({
-                type: "POST",
-                url: "search/viewLink",
-                data: {
-                    linkId: linkId
-                },
-                beforeSend: function(){
-                    $.showOverlay();
-                },
-                complete: function(){
-                    $.hideOverlay();
-                },
-                success: function(msg){
-                    $.viewDilogContent = $('<div>'+msg+'<div>');
-                    $.viewDilogContent.on('click',$.viewSelectedFormat);
-                    $.openViewDialogEmbedded.call($.viewDilogContent);
-                },
-                error: function(){
-                    $('#search-result').html('');
-                },            
-                async: true,
-                dataType: 'html'                        
-            });  
-        }
+    $.openViewDialogSearchGrid = function(linkId){
+        $.ajax({
+            type: "POST",
+            url: "search/viewLink",
+            data: {
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $.showOverlayLight();
+            },
+            complete: function(){
+                $.hideOverlayLight();
+            },
+            success: function(msg){
+                $.viewDilogContent = $('<div>'+msg+'<div>');
+                $.viewDilogContent.off('click');
+                $.viewDilogContent.on('click',$.viewSelectedFormat);
+                $.openViewDialogEmbedded.call($.viewDilogContent);
+            },
+            error: function(){
+                $('#search-result').html('');
+            },            
+            async: true,
+            dataType: 'html'                        
+        });  
     }
     
     $.viewSelectedFormat = function()

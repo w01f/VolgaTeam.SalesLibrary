@@ -16,6 +16,7 @@
         
         $(window).on('resize',updateLoginBodyPosition); 
             
+        $('#field-login').off('click');
         $('#field-login').on('click',function(){
             if(this.value == 'Username')
                 this.value='';
@@ -24,6 +25,7 @@
             if(this.value == '')
                 this.value='Username';
         });         
+        $('#field-password').off('click');
         $('#field-password').on('click',function(){
             if(this.value == 'Password')
                 this.value='';

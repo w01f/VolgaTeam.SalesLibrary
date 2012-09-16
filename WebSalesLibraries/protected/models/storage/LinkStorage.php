@@ -128,7 +128,10 @@ class LinkStorage extends CActiveRecord
         }
         if (isset($links))
             if (count($links) > 0)
+            {
+                usort($links, 'LinkStorage::sortLinks');
                 return $links;
+            }
     }
 
     public static function getLinkById($linkId)
@@ -136,6 +139,44 @@ class LinkStorage extends CActiveRecord
         $linkRecord = LinkStorage::model()->findByPk($linkId);
         if ($linkRecord !== false)
             return $linkRecord;
+    }
+
+    private static function sortLinks($a, $b)
+    {
+        if (isset(Yii::app()->request->cookies['sortColumn']->value))
+        {
+            switch (Yii::app()->request->cookies['sortColumn']->value)
+            {
+                case 'library':
+                    $sortColumn = 'library';
+                    break;
+                case 'link-type':
+                    $sortColumn = 'file_type';
+                    break;
+                case 'link-name':
+                    $sortColumn = 'name';
+                    break;
+                case 'link-date':
+                    break;
+            }
+        }
+        else
+            $sortColumn = 'name';
+
+        if (isset(Yii::app()->request->cookies['sortDirection']->value))
+            $sortDirection = Yii::app()->request->cookies['sortDirection']->value;
+        else
+            $sortDirection = 'asc';
+
+        if (isset($sortColumn) && isset($sortDirection))
+        {
+            if ($sortDirection == 'asc')
+                return strnatcmp($a[$sortColumn], $b[$sortColumn]);
+            else
+                return strnatcmp($b[$sortColumn], $a[$sortColumn]);
+        }
+        else
+            return 0;
     }
 
 }

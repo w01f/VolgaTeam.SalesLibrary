@@ -96,3 +96,17 @@
     width: 50px;
 }
 
+#search-grid-header td.link-name-column, #search-grid-body td.link-name-column
+{
+}
+
+#search-grid-header td.link-id-column, #search-grid-body td.link-id-column
+{
+    display: none;
+}
+
+#search-grid-body td.single-click, #search-grid-body td.double-click
+{
+    cursor: pointer;    
+}
+

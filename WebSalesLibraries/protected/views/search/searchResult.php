@@ -1,6 +1,6 @@
 <table id ="search-grid-header">
     <tr>
-        
+        <td class = "link-id-column"><span>Id</span></td>
         <td class = "library-column"><span>Station</span></td>
         <td class = "link-type-column"><span>Type</span></td>
         <td class = "link-name-column"><span>Link</span></td>
@@ -12,25 +12,36 @@
         <?php
         if (isset($links))
         {
+            if (Yii::app()->browser->isMobile())
+                $clickClass = ' double-click';
+            else
+                $clickClass = ' single-click';
+
             $recordNumber = 1;
             foreach ($links as $link)
             {
                 $rowClass = (($recordNumber % 2) ? 'odd' : 'even');
                 echo CHtml::openTag('tr', array('class' => $rowClass));
                 {
+                    echo CHtml::openTag('td', array('class' => 'link-id-column'));
+                    {
+                        echo $link['id'];
+                    }
+                    echo CHtml::closeTag('td');                    
+                    
                     echo CHtml::openTag('td', array('class' => 'library-column'));
                     {
                         echo $link['library'];
                     }
                     echo CHtml::closeTag('td');
 
-                    echo CHtml::openTag('td', array('class' => 'link-type-column'));
+                    echo CHtml::openTag('td', array('class' => 'link-type-column'.$clickClass));
                     {
                         echo CHtml::tag('img', array('src' => $link['file_type'], 'alt' => ''));
                     }
                     echo CHtml::closeTag('td');
 
-                    echo CHtml::openTag('td', array('class' => 'link-name-column'));
+                    echo CHtml::openTag('td', array('class' => 'link-name-column'.$clickClass));
                     {
                         echo CHtml::openTag('table', array('class' => 'link-container'));
                         {

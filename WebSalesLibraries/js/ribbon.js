@@ -13,7 +13,10 @@
 		
             var thatRet = that;
 		
-            that.selectedTabIndex = -1;
+            if($.cookie("selectedRibbonTab")!=null)
+                that.selectedTabIndex = parseInt($.cookie("selectedRibbonTab"));
+            else
+                that.selectedTabIndex = -1;
 		
             var tabNames = [];
 		
@@ -120,6 +123,9 @@
             }
             
             that.switchToPageByIndex = function(index) {
+                $.cookie("selectedRibbonTab", index, {
+                    expires: (60 * 60 * 24 * 7)
+                });        
                 switch(index)
                 {
                     case 0:

@@ -34,10 +34,12 @@
 
     $.selectAllLibraries = function(){
         $('#library-checkbox-list input[type="checkbox"]').attr('checked', true);
+        $('#library-checkbox-list input[type="checkbox"]').button('refresh');
     }    
 
     $.clearAllLibraries = function(){
         $('#library-checkbox-list input[type="checkbox"]').attr('checked', false);
+        $('#library-checkbox-list input[type="checkbox"]').button('refresh');
     }    
     
     $.saveSelectedLibraries = function(){
@@ -66,9 +68,14 @@
     
     $.initLibrarySelector = function(){
         $("#library-select-all, #library-clear-all, #library-select-save, #library-select-cancel").button();                
+        $('#library-checkbox-list input[type="checkbox"]').button();
+        $("#library-select-all").off('click'); 
         $("#library-select-all").on('click',$.selectAllLibraries);
+        $("#library-clear-all").off('click'); 
         $("#library-clear-all").on('click',$.clearAllLibraries);
+        $("#library-select-save").off('click'); 
         $("#library-select-save").on('click',$.saveSelectedLibraries);
+        $("#library-select-cancel").off('click'); 
         $("#library-select-cancel").on('click',$.fancybox.close);
     }    
     

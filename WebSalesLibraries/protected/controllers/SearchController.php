@@ -18,31 +18,6 @@ class SearchController extends CController
         else
             $checkedLibraryIds = array();
 
-        if (isset(Yii::app()->request->cookies['sortColumn']->value))
-        {
-            switch (Yii::app()->request->cookies['sortColumn']->value)
-            {
-                case 'library':
-                    $sortColumn = 'library';
-                    break;
-                case 'link-type':
-                    $sortColumn = 'file_type';
-                    break;
-                case 'link-name':
-                    $sortColumn = 'name';
-                    break;
-                case 'link-date':
-                    break;
-            }
-        }
-        else
-            $sortColumn = 'name';
-
-        if (isset(Yii::app()->request->cookies['sortDirection']->value))
-            $sortDirection = Yii::app()->request->cookies['sortDirection']->value;
-        else
-            $sortDirection = 'asc';
-
         if (isset($fileTypes) && isset($condition))
         {
             $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds);
@@ -55,19 +30,7 @@ class SearchController extends CController
                 $link['library'] = null;
                 $links[] = $link;
             }
-            else
-            {
-                if (isset($sortColumn) && isset($sortDirection))
-                {
-                    usort($links, function($a, $b) use($sortColumn, $sortDirection)
-                        {
-                            if ($sortDirection == 'asc')
-                                return strnatcmp($a[$sortColumn], $b[$sortColumn]);
-                            else
-                                return strnatcmp($b[$sortColumn], $a[$sortColumn]);
-                        });
-                }
-            }
+
             $searched = true;
             $this->renderPartial('searchResult', array('links' => $links), false, true);
         }
