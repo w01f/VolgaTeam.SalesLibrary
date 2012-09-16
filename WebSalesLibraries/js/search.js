@@ -1,5 +1,5 @@
 (function( $ ) {
-    $.runSearch = function(){
+    $.runSearch = function(isSort){
         var selectedFileTypes = [];
         if($('#search-file-type-powerpoint').is(':checked'))
             selectedFileTypes.push("ppt");
@@ -26,7 +26,8 @@
                     url: "search/searchByContent",
                     data: {
                         fileTypes: selectedFileTypes,
-                        condition: selectedCondition
+                        condition: selectedCondition,
+                        isSort: isSort
                     },
                     beforeSend: function(){
                         $.showOverlayLight();
@@ -208,8 +209,10 @@
         $( "#content-compare-partial" ).off('click');        
         $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
         
-        
-        $( "#run-search" ).one('click',$.runSearch);        
+        $( "#run-search" ).off('click');
+        $( "#run-search" ).on('click',function () {
+            $.runSearch(0);
+        });        
         $("#right-navbar input").keypress(function (e) {
             if (e.which == 13) {
                 return false;
@@ -217,7 +220,7 @@
         });        
         $('#condition-content-value').keypress(function (e) {
             if (e.which == 13) {
-                $.runSearch();
+                $.runSearch(0);
             }
         });        
     }

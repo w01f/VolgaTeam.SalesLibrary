@@ -9,32 +9,21 @@ class SearchController extends CController
 
     public function actionSearchByContent()
     {
-        $searched = false;
         $fileTypes = Yii::app()->request->getPost('fileTypes');
         $condition = Yii::app()->request->getPost('condition');
+        $isSort = intval(Yii::app()->request->getPost('isSort'));
 
         if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
             $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
         else
             $checkedLibraryIds = array();
 
-        if (isset($fileTypes) && isset($condition))
-        {
-            $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds);
-            if (!isset($links))
-            {
-                $link['id'] = null;
-                $link['name'] = null;
-                $link['file_name'] = null;
-                $link['file_type'] = null;
-                $link['library'] = null;
-                $links[] = $link;
-            }
+        if (isset($fileTypes) && isset($condition) && isset($isSort))
+            $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds, $isSort);
 
-            $searched = true;
+        if (isset($links))
             $this->renderPartial('searchResult', array('links' => $links), false, true);
-        }
-        if (!$searched)
+        else
             $this->renderPartial('empty', array(), false, true);
     }
 

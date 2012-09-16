@@ -1,5 +1,5 @@
 <?php
-$version = '2.0';
+$version = '3.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/js/fancybox/source/jquery.fancybox.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/js/fancybox/source/helpers/jquery.fancybox-thumbs.css?'.$version);

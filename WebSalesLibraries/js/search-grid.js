@@ -66,7 +66,7 @@
         $.cookie("searchGridScrollPosition", scrollPosition, {
             expires: (60 * 60 * 24 * 7)
         });        
-        $.runSearch();
+        $.runSearch(1);
     }
     
     $.searchGridViewDetails = function(){

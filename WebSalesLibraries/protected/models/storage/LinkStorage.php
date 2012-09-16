@@ -58,73 +58,80 @@ class LinkStorage extends CActiveRecord
         LinkStorage::model()->deleteAll('id_library=?', array($libraryId));
     }
 
-    public static function searchByContent($contentCondition, $fileTypes, $checkedLibraryIds)
+    public static function searchByContent($contentCondition, $fileTypes, $checkedLibraryIds, $isSort)
     {
-        $libraryCondition = '1 = 1';
-        if (isset($checkedLibraryIds))
+        if ($isSort==1)
         {
-            $count = count($checkedLibraryIds);
-            switch ($count)
-            {
-                case 0:
-                    $libraryCondition = '1 = 1';
-                    break;
-                default:
-                    $libraryCondition = "id_library in ('" . implode("','", $checkedLibraryIds) . "')";
-                    break;
-            }
+            $links = Yii::app()->session['searchedLinks'];
         }
-
-        $linkRecords = Yii::app()->db->createCommand()
-            ->select('*')
-            ->from('tbl_link')
-            ->where("(match(name,file_name,content) against('" . $contentCondition . "' in boolean mode)) and (" . $libraryCondition . ")")
-            ->queryAll();
-        if (isset($linkRecords))
+        else
         {
-            if (count($linkRecords) > 0)
+            $libraryCondition = '1 = 1';
+            if (isset($checkedLibraryIds))
             {
-                $libraryManager = new LibraryManager();
-                foreach ($linkRecords as $linkRecord)
+                $count = count($checkedLibraryIds);
+                switch ($count)
                 {
-                    $link['id'] = $linkRecord['id'];
-                    $link['name'] = $linkRecord['name'];
-                    $link['file_name'] = $linkRecord['file_name'];
-
-                    $library = $libraryManager->getLibraryById($linkRecord['id_library']);
-                    if (isset($library))
+                    case 0:
+                        $libraryCondition = '1 = 1';
+                        break;
+                    default:
+                        $libraryCondition = "id_library in ('" . implode("','", $checkedLibraryIds) . "')";
+                        break;
+                }
+            }
+            $linkRecords = Yii::app()->db->createCommand()
+                ->select('*')
+                ->from('tbl_link')
+                ->where("(match(name,file_name,content) against('" . $contentCondition . "' in boolean mode)) and (" . $libraryCondition . ")")
+                ->queryAll();
+            if (isset($linkRecords))
+            {
+                if (count($linkRecords) > 0)
+                {
+                    $libraryManager = new LibraryManager();
+                    foreach ($linkRecords as $linkRecord)
                     {
-                        $link['library'] = $library->name;
-                        $linkObject = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-                        $linkObject->load(LinkStorage::getLinkById($link['id']));
-                        if (in_array($linkObject->originalFormat, $fileTypes))
+                        $link['id'] = $linkRecord['id'];
+                        $link['name'] = $linkRecord['name'];
+                        $link['file_name'] = $linkRecord['file_name'];
+
+                        $library = $libraryManager->getLibraryById($linkRecord['id_library']);
+                        if (isset($library))
                         {
-                            switch ($linkObject->originalFormat)
+                            $link['library'] = $library->name;
+                            $linkObject = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                            $linkObject->load(LinkStorage::getLinkById($link['id']));
+                            if (in_array($linkObject->originalFormat, $fileTypes))
                             {
-                                case 'ppt':
-                                    $link['file_type'] = 'images/search/search-powerpoint.png';
-                                    break;
-                                case 'doc':
-                                    $link['file_type'] = 'images/search/search-word.png';
-                                    break;
-                                case 'xls':
-                                    $link['file_type'] = 'images/search/search-excel.png';
-                                    break;
-                                case 'pdf':
-                                    $link['file_type'] = 'images/search/search-pdf.png';
-                                    break;
-                                case 'video':
-                                    $link['file_type'] = 'images/search/search-video.png';
-                                    break;
-                                default:
-                                    $link['file_type'] = 'undefined';
-                                    break;
+                                switch ($linkObject->originalFormat)
+                                {
+                                    case 'ppt':
+                                        $link['file_type'] = 'images/search/search-powerpoint.png';
+                                        break;
+                                    case 'doc':
+                                        $link['file_type'] = 'images/search/search-word.png';
+                                        break;
+                                    case 'xls':
+                                        $link['file_type'] = 'images/search/search-excel.png';
+                                        break;
+                                    case 'pdf':
+                                        $link['file_type'] = 'images/search/search-pdf.png';
+                                        break;
+                                    case 'video':
+                                        $link['file_type'] = 'images/search/search-video.png';
+                                        break;
+                                    default:
+                                        $link['file_type'] = 'undefined';
+                                        break;
+                                }
+                                $links[] = $link;
                             }
-                            $links[] = $link;
                         }
                     }
                 }
             }
+            Yii::app()->session['searchedLinks'] = $links;
         }
         if (isset($links))
             if (count($links) > 0)
