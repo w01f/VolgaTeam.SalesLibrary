@@ -598,20 +598,27 @@ namespace FileManager.TabPages
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
-                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                using (ToolForms.FormProgressSyncFilesRegular form = new ToolForms.FormProgressSyncFilesRegular())
                 {
+                    form.CloseAfterSync = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync;
+                    form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
+                    {
+                        AppManager.Instance.ThreadAborted = true;
+                    });
                     FormMain.Instance.ribbonControl.Enabled = false;
                     pnEmpty.BringToFront();
                     System.Windows.Forms.Application.DoEvents();
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
-                    form.laProgress.Text = "Updating your Sales Library on the network…" + Environment.NewLine + "Chill out and relax for a few minutes…";
-                    form.TopMost = true;
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        BusinessClasses.LibraryManager.Instance.SynchronizeLibraries();
+                        AppManager.Instance.ThreadActive = true;
+                        AppManager.Instance.ThreadAborted = false;
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                            BusinessClasses.LibraryManager.Instance.SynchronizeLibraries();
                     }));
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
                         form.Show();
+                    FormWindowState savedState = FormMain.Instance.WindowState;
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.MinimizeOnSync)
                         FormMain.Instance.WindowState = FormWindowState.Minimized;
                     thread.Start();
@@ -620,13 +627,17 @@ namespace FileManager.TabPages
                         Thread.Sleep(100);
                         System.Windows.Forms.Application.DoEvents();
                     }
+                    AppManager.Instance.ThreadActive = false;
+                    AppManager.Instance.ThreadAborted = false;
                     if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
                         form.Close();
                     FormMain.Instance.ribbonControl.Enabled = true;
                     pnMain.BringToFront();
                     System.Windows.Forms.Application.DoEvents();
-                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync)
+                    if (form.CloseAfterSync)
                         Application.Exit();
+                    else
+                        FormMain.Instance.WindowState = savedState;
                 }
             }
         }

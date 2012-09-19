@@ -2,18 +2,18 @@
 using System.Text;
 using System.Xml;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects
 {
     public class LibraryFileSearchTags
     {
-        public List<ConfigurationClasses.SearchGroup> SearchGroups { get; set; }
+        public List<SearchGroup> SearchGroups { get; set; }
 
         public string AllTags
         {
             get
             {
                 List<string> allTags = new List<string>();
-                foreach (ConfigurationClasses.SearchGroup group in this.SearchGroups)
+                foreach (SearchGroup group in this.SearchGroups)
                     allTags.AddRange(group.Tags);
                 return string.Join(", ", allTags.ToArray());
             }
@@ -21,14 +21,14 @@ namespace FileManager.BusinessClasses
 
         public LibraryFileSearchTags()
         {
-            this.SearchGroups = new List<ConfigurationClasses.SearchGroup>();
+            this.SearchGroups = new List<SearchGroup>();
         }
 
         public string Serialize()
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<SearchTags>");
-            foreach (ConfigurationClasses.SearchGroup group in this.SearchGroups)
+            foreach (SearchGroup group in this.SearchGroups)
             {
                 result.Append(@"<Category ");
                 result.Append("Name = \"" + group.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
@@ -54,7 +54,7 @@ namespace FileManager.BusinessClasses
                 switch (childNode.Name)
                 {
                     case "Category":
-                        ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                        SearchGroup group = new SearchGroup();
                         foreach (XmlAttribute attribute in childNode.Attributes)
                         {
                             switch (attribute.Name)

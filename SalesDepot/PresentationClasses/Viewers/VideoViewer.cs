@@ -73,7 +73,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         public void InsertIntoPresentation()
         {
 
-            if (this.File.Type == BusinessClasses.FileTypes.MediaPlayerVideo)
+            if (this.File.Type == CoreObjects.FileTypes.MediaPlayerVideo)
                 BusinessClasses.LinkManager.Instance.AddVideoIntoPresentation(this.File);
         }
         #endregion

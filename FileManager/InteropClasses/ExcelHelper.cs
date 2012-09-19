@@ -64,7 +64,7 @@ namespace FileManager.InteropClasses
                     if (Connect())
                     {
                         MessageFilter.Register();
-                        Excel.Workbook workbook = _excelObject.Workbooks.Open(Filename: sourceFilePath);
+                        Excel.Workbook workbook = _excelObject.Workbooks.Open(Filename: sourceFilePath,ReadOnly: true);
                         string txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt"));
                         workbook.SaveAs(Filename: txtFileName, FileFormat: Excel.XlFileFormat.xlTextWindows);
                         workbook.Close();

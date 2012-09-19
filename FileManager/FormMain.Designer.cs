@@ -74,8 +74,10 @@
             this.labelItemHomePages = new DevComponents.DotNetBar.LabelItem();
             this.controlContainerItemHomePages = new DevComponents.DotNetBar.ControlContainerItem();
             this.ribbonPanelIPad = new DevComponents.DotNetBar.RibbonPanel();
-            this.ribbonBarIPadSync = new DevComponents.DotNetBar.RibbonBar();
-            this.buttonItemIPadSync = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarIPadSyncData = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemIPadSyncData = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonBarIPadSyncFiles = new DevComponents.DotNetBar.RibbonBar();
+            this.buttonItemIPadSyncFiles = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarIPadVideoConvert = new DevComponents.DotNetBar.RibbonBar();
             this.buttonItemIPadVideoConvert = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonBarIPadSite = new DevComponents.DotNetBar.RibbonBar();
@@ -866,7 +868,8 @@
             // ribbonPanelIPad
             // 
             this.ribbonPanelIPad.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSync);
+            this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSyncData);
+            this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSyncFiles);
             this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadVideoConvert);
             this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSite);
             this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadLocation);
@@ -890,44 +893,83 @@
             this.ribbonPanelIPad.TabIndex = 7;
             this.ribbonPanelIPad.Visible = false;
             // 
-            // ribbonBarIPadSync
+            // ribbonBarIPadSyncData
             // 
-            this.ribbonBarIPadSync.AutoOverflowEnabled = true;
-            // 
-            // 
-            // 
-            this.ribbonBarIPadSync.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarIPadSyncData.AutoOverflowEnabled = true;
             // 
             // 
             // 
-            this.ribbonBarIPadSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonBarIPadSync.ContainerControlProcessDialogKey = true;
-            this.ribbonBarIPadSync.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ribbonBarIPadSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemIPadSync});
-            this.ribbonBarIPadSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarIPadSync.Location = new System.Drawing.Point(717, 0);
-            this.ribbonBarIPadSync.Name = "ribbonBarIPadSync";
-            this.ribbonBarIPadSync.Size = new System.Drawing.Size(103, 123);
-            this.ribbonBarIPadSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonBarIPadSync.TabIndex = 12;
-            this.ribbonBarIPadSync.Text = "Sync";
+            this.ribbonBarIPadSyncData.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
             // 
             // 
-            this.ribbonBarIPadSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarIPadSyncData.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarIPadSyncData.ContainerControlProcessDialogKey = true;
+            this.ribbonBarIPadSyncData.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarIPadSyncData.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemIPadSyncData});
+            this.ribbonBarIPadSyncData.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarIPadSyncData.Location = new System.Drawing.Point(820, 0);
+            this.ribbonBarIPadSyncData.Name = "ribbonBarIPadSyncData";
+            this.ribbonBarIPadSyncData.Size = new System.Drawing.Size(103, 123);
+            this.ribbonBarIPadSyncData.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarIPadSyncData.TabIndex = 13;
+            this.ribbonBarIPadSyncData.Text = "2.  Sync Data";
             // 
             // 
             // 
-            this.ribbonBarIPadSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarIPadSyncData.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             // 
-            // buttonItemIPadSync
             // 
-            this.buttonItemIPadSync.FixedSize = new System.Drawing.Size(90, 72);
-            this.buttonItemIPadSync.Image = global::FileManager.Properties.Resources.SyncIPad;
-            this.buttonItemIPadSync.Name = "buttonItemIPadSync";
-            this.buttonItemIPadSync.SubItemsExpandWidth = 14;
-            this.buttonItemIPadSync.Text = "buttonItem1";
+            // 
+            this.ribbonBarIPadSyncData.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemIPadSyncData
+            // 
+            this.buttonItemIPadSyncData.FixedSize = new System.Drawing.Size(90, 72);
+            this.buttonItemIPadSyncData.Image = global::FileManager.Properties.Resources.SyncIPad;
+            this.buttonItemIPadSyncData.Name = "buttonItemIPadSyncData";
+            this.buttonItemIPadSyncData.SubItemsExpandWidth = 14;
+            this.buttonItemIPadSyncData.Text = "buttonItem1";
+            // 
+            // ribbonBarIPadSyncFiles
+            // 
+            this.ribbonBarIPadSyncFiles.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSyncFiles.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSyncFiles.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarIPadSyncFiles.ContainerControlProcessDialogKey = true;
+            this.ribbonBarIPadSyncFiles.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarIPadSyncFiles.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemIPadSyncFiles});
+            this.ribbonBarIPadSyncFiles.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarIPadSyncFiles.Location = new System.Drawing.Point(717, 0);
+            this.ribbonBarIPadSyncFiles.Name = "ribbonBarIPadSyncFiles";
+            this.ribbonBarIPadSyncFiles.Size = new System.Drawing.Size(103, 123);
+            this.ribbonBarIPadSyncFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarIPadSyncFiles.TabIndex = 12;
+            this.ribbonBarIPadSyncFiles.Text = "1.  Sync Files";
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSyncFiles.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSyncFiles.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // buttonItemIPadSyncFiles
+            // 
+            this.buttonItemIPadSyncFiles.FixedSize = new System.Drawing.Size(90, 72);
+            this.buttonItemIPadSyncFiles.Image = global::FileManager.Properties.Resources.SyncIPad;
+            this.buttonItemIPadSyncFiles.Name = "buttonItemIPadSyncFiles";
+            this.buttonItemIPadSyncFiles.SubItemsExpandWidth = 14;
+            this.buttonItemIPadSyncFiles.Text = "buttonItem1";
             // 
             // ribbonBarIPadVideoConvert
             // 
@@ -1008,7 +1050,7 @@
             // 
             // buttonEditIPadSite
             // 
-            this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 30);
+            this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 31);
             this.buttonEditIPadSite.Name = "buttonEditIPadSite";
             this.buttonEditIPadSite.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
@@ -1022,7 +1064,7 @@
             // 
             // buttonEditIPadLogin
             // 
-            this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 72);
+            this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 73);
             this.buttonEditIPadLogin.Name = "buttonEditIPadLogin";
             this.buttonEditIPadLogin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
@@ -1033,7 +1075,7 @@
             // 
             // buttonEditIPadPassword
             // 
-            this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 72);
+            this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 73);
             this.buttonEditIPadPassword.Name = "buttonEditIPadPassword";
             this.buttonEditIPadPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
@@ -1178,7 +1220,7 @@
             // 
             // buttonEditIPadLocation
             // 
-            this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 60);
+            this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 61);
             this.buttonEditIPadLocation.Name = "buttonEditIPadLocation";
             this.buttonEditIPadLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -1273,7 +1315,7 @@
             // 
             // buttonEditProgramManagerLocation
             // 
-            this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(6, 60);
+            this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(6, 61);
             this.buttonEditProgramManagerLocation.Name = "buttonEditProgramManagerLocation";
             this.buttonEditProgramManagerLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2562,8 +2604,8 @@
         private DevComponents.DotNetBar.ControlContainerItem controlContainerItemIPadSite;
         public DevComponents.DotNetBar.RibbonBar ribbonBarIPadVideoConvert;
         public DevComponents.DotNetBar.ButtonItem buttonItemIPadVideoConvert;
-        public DevComponents.DotNetBar.RibbonBar ribbonBarIPadSync;
-        public DevComponents.DotNetBar.ButtonItem buttonItemIPadSync;
+        public DevComponents.DotNetBar.RibbonBar ribbonBarIPadSyncFiles;
+        public DevComponents.DotNetBar.ButtonItem buttonItemIPadSyncFiles;
         private DevComponents.DotNetBar.ItemContainer itemContainerIPadSite;
         private DevComponents.DotNetBar.ItemContainer itemContainerIPadLogin;
         private DevComponents.DotNetBar.LabelItem labelItemIPadLogin;
@@ -2574,5 +2616,7 @@
         private DevComponents.DotNetBar.ItemContainer itemContainerIPadPassword;
         private DevComponents.DotNetBar.LabelItem labelItemIPadPassword;
         private DevComponents.DotNetBar.ControlContainerItem controlContainerItem3;
+        public DevComponents.DotNetBar.RibbonBar ribbonBarIPadSyncData;
+        public DevComponents.DotNetBar.ButtonItem buttonItemIPadSyncData;
     }
 }

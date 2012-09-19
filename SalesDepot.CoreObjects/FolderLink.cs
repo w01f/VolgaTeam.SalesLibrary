@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects
 {
     public class FolderLink
     {
@@ -56,7 +56,7 @@ namespace FileManager.BusinessClasses
 
     public class RootFolder : FolderLink
     {
-        public Library Parent { get; private set; }
+        public ILibrary Parent { get; private set; }
         public int Order { get; set; }
 
         public int Index
@@ -80,7 +80,7 @@ namespace FileManager.BusinessClasses
             }
         }
 
-        public RootFolder(Library parent)
+        public RootFolder(ILibrary parent)
         {
             this.Parent = parent;
             this.Order = 0;

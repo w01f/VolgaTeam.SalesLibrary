@@ -5,16 +5,16 @@ namespace FileManager.ToolForms.Settings
 {
     public partial class FormAutoSyncEdit : Form
     {
-        private BusinessClasses.SyncScheduleRecord _syncScheduleRecord = null;
+        private SalesDepot.CoreObjects.SyncScheduleRecord _syncScheduleRecord = null;
 
-        public FormAutoSyncEdit(BusinessClasses.SyncScheduleRecord syncScheduleRecord)
+        public FormAutoSyncEdit(SalesDepot.CoreObjects.SyncScheduleRecord syncScheduleRecord)
         {
             InitializeComponent();
 
             _syncScheduleRecord = syncScheduleRecord;
             if (_syncScheduleRecord == null)
             {
-                _syncScheduleRecord = new BusinessClasses.SyncScheduleRecord();
+                _syncScheduleRecord = new SalesDepot.CoreObjects.SyncScheduleRecord();
                 _syncScheduleRecord.Time = DateTime.Now;
             }
 

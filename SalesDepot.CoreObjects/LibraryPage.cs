@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects
 {
     public class LibraryPage
     {
-        public Library Parent { get; set; }
+        public ILibrary Parent { get; set; }
         public string Name { get; set; }
+        public bool Enable { get; set; }
         public Guid Identifier { get; set; }
         public int Order { get; set; }
         public bool EnableColumnTitles { get; set; }
@@ -24,10 +25,11 @@ namespace FileManager.BusinessClasses
             }
         }
 
-        public LibraryPage(Library parent)
+        public LibraryPage(ILibrary parent, bool isHome = false)
         {
             this.Parent = parent;
-            this.Name = string.Format("Page {0}", this.Parent.Pages.Count + 1);
+            this.Name = isHome ? "Page 1" : string.Format("Page {0}", this.Parent.Pages.Count + 1);
+            this.Enable = isHome;
             this.Identifier = Guid.NewGuid();
             this.Order = 0;
             this.EnableColumnTitles = false;
@@ -85,6 +87,10 @@ namespace FileManager.BusinessClasses
                         if (Guid.TryParse(childNode.InnerText, out tempGuid))
                             this.Identifier = tempGuid;
                         break;
+                    case "Enable":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.Enable = tempBool;
+                        break;
                     case "Order":
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.Order = tempInt;
@@ -117,6 +123,30 @@ namespace FileManager.BusinessClasses
                         break;
                 }
             }
+        }
+
+        public ILibraryFile[] SearchByTags(LibraryFileSearchTags searchCriteria)
+        {
+            List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+            foreach (LibraryFolder folder in this.Folders)
+                searchFiles.AddRange(folder.SearchByTags(searchCriteria));
+            return searchFiles.ToArray();
+        }
+
+        public ILibraryFile[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
+        {
+            List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+            foreach (LibraryFolder folder in this.Folders)
+                searchFiles.AddRange(folder.SearchByName(template, fullMatchOnly, type));
+            return searchFiles.ToArray();
+        }
+
+        public ILibraryFile[] SearchByDate(DateTime startDate, DateTime endDate)
+        {
+            List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+            foreach (LibraryFolder folder in this.Folders)
+                searchFiles.AddRange(folder.SearchByDate(startDate, endDate));
+            return searchFiles.ToArray();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace FileManager.PresentationClasses.IPad
         {
             xtraTabControl.Enabled = !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
             FormMain.Instance.buttonItemIPadVideoConvert.Enabled = xtraTabControl.Enabled;
-            FormMain.Instance.buttonItemIPadSync.Enabled = xtraTabControl.Enabled;
+            FormMain.Instance.buttonItemIPadSyncFiles.Enabled = xtraTabControl.Enabled;
         }
 
         #region Video Tab
@@ -60,33 +60,53 @@ namespace FileManager.PresentationClasses.IPad
 
         private void ConvertVideoFiles(BusinessClasses.VideoInfo[] videoFiles)
         {
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            using (ToolForms.FormProgressConverVideo form = new ToolForms.FormProgressConverVideo())
             {
+                form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
+                {
+                    AppManager.Instance.ThreadAborted = true;
+                });
                 FormMain.Instance.ribbonControl.Enabled = false;
                 this.Enabled = false;
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
-                form.laProgress.Text = "Converting Video for the iPad..." + Environment.NewLine + "This might take a few minutes...";
-                form.TopMost = true;
                 Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
+                    AppManager.Instance.ThreadActive = true;
+                    AppManager.Instance.ThreadAborted = false;
                     foreach (BusinessClasses.VideoInfo videoFile in videoFiles)
                     {
-                        if (videoFile.Parent.UniversalPreviewContainer == null)
-                            videoFile.Parent.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(videoFile.Parent);
-                        videoFile.Parent.UniversalPreviewContainer.UpdateContent();
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        {
+                            if (videoFile.Parent.UniversalPreviewContainer == null)
+                                videoFile.Parent.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(videoFile.Parent);
+                            videoFile.Parent.UniversalPreviewContainer.UpdateContent();
+                        }
+                        else
+                            break;
                     }
-                    this.ParentDecorator.Library.Save();
+                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        this.ParentDecorator.Library.Save();
                 }));
                 form.Show();
+                FormWindowState savedState = FormMain.Instance.WindowState;
+                if (this.ParentDecorator.Library.MinimizeOnSync)
+                    FormMain.Instance.WindowState = FormWindowState.Minimized;
                 thread.Start();
                 while (thread.IsAlive)
                 {
                     Thread.Sleep(100);
                     System.Windows.Forms.Application.DoEvents();
                 }
+                AppManager.Instance.ThreadActive = false;
+                AppManager.Instance.ThreadAborted = false;
                 form.Close();
                 this.Enabled = true;
                 FormMain.Instance.ribbonControl.Enabled = true;
+
+                if (form.CloseAfterSync)
+                    Application.Exit();
+                else
+                    FormMain.Instance.WindowState = savedState;
             }
 
             UpdateVideoFiles();
@@ -198,7 +218,7 @@ namespace FileManager.PresentationClasses.IPad
             if (e.Column == gridColumnVideoSourceFileName)
             {
                 BusinessClasses.VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
-                if (videoInfo.Parent.Type == BusinessClasses.FileTypes.QuickTimeVideo)
+                if (videoInfo.Parent.Type == SalesDepot.CoreObjects.FileTypes.QuickTimeVideo)
                     e.RepositoryItem = repositoryItemButtonEditVideoMp4;
                 else
                     e.RepositoryItem = repositoryItemButtonEditVideoWmv;
@@ -410,30 +430,50 @@ namespace FileManager.PresentationClasses.IPad
         public void UpdateLibraryOnServer()
         {
             string message = string.Empty;
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+            using (ToolForms.FormProgressSyncData form = new ToolForms.FormProgressSyncData())
             {
+                form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
+                {
+                    AppManager.Instance.ThreadAborted = true;
+                });
                 FormMain.Instance.ribbonControl.Enabled = false;
                 this.Enabled = false;
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
-                form.laProgress.Text = string.Format("Updating {0}...{1}This might take a few minutes...", this.ParentDecorator.Library.IPadManager.Website, Environment.NewLine);
-                form.TopMost = true;
                 Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
+                    AppManager.Instance.ThreadActive = true;
+                    AppManager.Instance.ThreadAborted = false;
                     this.ParentDecorator.Library.IPadManager.UpdateLibraryOnServer(out message);
                 }));
                 form.Show();
+                FormWindowState savedState = FormMain.Instance.WindowState;
+                if (this.ParentDecorator.Library.MinimizeOnSync)
+                    FormMain.Instance.WindowState = FormWindowState.Minimized;
                 thread.Start();
                 while (thread.IsAlive)
                 {
-                    Thread.Sleep(100);
-                    System.Windows.Forms.Application.DoEvents();
+                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                    {
+                        Thread.Sleep(100);
+                        System.Windows.Forms.Application.DoEvents();
+                    }
+                    else
+                        thread.Abort();
                 }
+                AppManager.Instance.ThreadActive = false;
+                AppManager.Instance.ThreadAborted = false;
                 form.Close();
                 this.Enabled = true;
                 FormMain.Instance.ribbonControl.Enabled = true;
+
+                if (!form.CloseAfterSync)
+                    FormMain.Instance.WindowState = savedState;
+
+                if (!string.IsNullOrEmpty(message))
+                    AppManager.Instance.ShowWarning(message);
+                else if (form.CloseAfterSync)
+                    Application.Exit();
             }
-            if (!string.IsNullOrEmpty(message))
-                AppManager.Instance.ShowWarning(message);
         }
 
         private void pbIE_Click(object sender, EventArgs e)

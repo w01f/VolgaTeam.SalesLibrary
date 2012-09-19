@@ -4,12 +4,13 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
 using SalesDepot.CoreObjects;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.BusinessClasses
 {
-    public class LibraryFile:ILibraryFile
+    public class LibraryFile : ILibraryFile
     {
         private string _note = string.Empty;
         private Image _widget = null;
@@ -19,6 +20,10 @@ namespace FileManager.BusinessClasses
         private Image _oldBanner;
         #endregion
 
+        private bool _linkAvailabilityChecked = false;
+        private bool _linkAvailabel = false;
+
+        private string _linkRemotePath = string.Empty;
         private string _linkLocalPath = string.Empty;
 
         public string Name { get; set; }
@@ -37,20 +42,16 @@ namespace FileManager.BusinessClasses
 
         public LibraryFileSearchTags SearchTags { get; set; }
         public ExpirationDateOptions ExpirationDateOptions { get; set; }
+        public PresentationPreviewContainer PreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
         public BannerProperties BannerProperties { get; set; }
-
-        public IPreviewContainer UniversalPreviewContainer { get; set; }
-        #region Compatibility with desktop version of Sales Depot
-        public PresentationPreviewContainer PreviewContainer { get; set; }
-        #endregion
 
         public string OriginalPath
         {
             get
             {
-                if (string.IsNullOrEmpty(_linkLocalPath))
+                if (string.IsNullOrEmpty(_linkRemotePath))
                 {
                     if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
                         return this.RelativePath;
@@ -60,11 +61,54 @@ namespace FileManager.BusinessClasses
                         return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
                 }
                 else
-                    return _linkLocalPath;
+                    return _linkRemotePath;
             }
             set
             {
-                _linkLocalPath = value;
+                _linkRemotePath = value;
+            }
+        }
+
+        public string LocalPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_linkLocalPath) && this.LinkAvailable)
+                    GetLocalCopy();
+                return _linkLocalPath;
+            }
+        }
+
+        public bool LinkAvailable
+        {
+            get
+            {
+                if (!_linkAvailabilityChecked)
+                {
+                    switch (this.Type)
+                    {
+                        case FileTypes.BuggyPresentation:
+                        case FileTypes.Excel:
+                        case FileTypes.FriendlyPresentation:
+                        case FileTypes.MediaPlayerVideo:
+                        case FileTypes.Other:
+                        case FileTypes.Presentation:
+                        case FileTypes.PDF:
+                        case FileTypes.QuickTimeVideo:
+                        case FileTypes.Word:
+                        case FileTypes.OvernightsLink:
+                            _linkAvailabel = File.Exists(this.OriginalPath);
+                            break;
+                        case FileTypes.Folder:
+                            _linkAvailabel = Directory.Exists(this.OriginalPath);
+                            break;
+                        default:
+                            _linkAvailabel = true;
+                            break;
+                    }
+                    _linkAvailabilityChecked = true;
+                }
+                return _linkAvailabel;
             }
         }
 
@@ -91,16 +135,9 @@ namespace FileManager.BusinessClasses
                 else
                     return this.Name;
             }
-        }
-
-        public string PropertiesName
-        {
-            get
+            set
             {
-                if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder || this.Type == FileTypes.LineBreak)
-                    return this.Name;
-                else
-                    return Path.GetFileName(this.OriginalPath);
+                this.Name = value;
             }
         }
 
@@ -138,19 +175,22 @@ namespace FileManager.BusinessClasses
             {
                 switch (this.Type)
                 {
-                    case FileTypes.Presentation:
                     case FileTypes.BuggyPresentation:
                     case FileTypes.FriendlyPresentation:
                     case FileTypes.MediaPlayerVideo:
                     case FileTypes.Other:
+                    case FileTypes.Presentation:
                     case FileTypes.QuickTimeVideo:
+                    case FileTypes.Excel:
+                    case FileTypes.PDF:
+                    case FileTypes.Word:
+                    case FileTypes.OvernightsLink:
                         return Path.GetExtension(this.OriginalPath);
                     default:
                         return string.Empty;
                 }
             }
         }
-
 
         public string Note
         {
@@ -210,17 +250,6 @@ namespace FileManager.BusinessClasses
             }
         }
 
-        public string Content
-        {
-            get
-            {
-                if (this.UniversalPreviewContainer != null)
-                    return this.UniversalPreviewContainer.GetTextContent();
-                else
-                    return string.Empty;
-            }
-        }
-
         public LibraryFile(LibraryFolder parent)
         {
             this.Name = string.Empty;
@@ -234,8 +263,10 @@ namespace FileManager.BusinessClasses
             this.IsBold = false;
             this.IsDead = false;
             this.AddDate = DateTime.Now;
+            this.CriteriaOverlap = string.Empty;
             this.SearchTags = new LibraryFileSearchTags();
             this.ExpirationDateOptions = new ExpirationDateOptions();
+            this.PreviewContainer = null;
             SetProperties();
         }
 
@@ -243,13 +274,12 @@ namespace FileManager.BusinessClasses
         {
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
-            result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<DisplayName>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
             result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
-            result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
             result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
+            result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
             result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
-            result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
+            result.AppendLine(@"<LocalPath>" + _linkRemotePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
             result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
@@ -257,33 +287,16 @@ namespace FileManager.BusinessClasses
             result.AppendLine(@"<AddDate>" + this.AddDate + @"</AddDate>");
             result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-            result.Append(this.SearchTags.Serialize());
+            result.AppendLine(this.SearchTags.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
-            #region Compatibility with desktop version of Sales Depot
             if (this.PreviewContainer != null)
                 result.AppendLine(@"<PreviewContainer>" + this.PreviewContainer.Serialize() + @"</PreviewContainer>");
-            #endregion
-            if (this.UniversalPreviewContainer != null)
-                result.AppendLine(@"<UniversalPreviewContainer>" + this.UniversalPreviewContainer.Serialize() + @"</UniversalPreviewContainer>");
             if (this.PresentationProperties != null)
                 result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
             if (this.LineBreakProperties != null)
                 result.AppendLine(@"<LineBreakProperties>" + this.LineBreakProperties.Serialize() + @"</LineBreakProperties>");
             if (this.BannerProperties != null && this.BannerProperties.Configured)
-            {
                 result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
-                #region Compatibility with old versions
-                result.AppendLine(@"<EnableBanner>" + this.BannerProperties.Enable.ToString() + @"</EnableBanner>");
-                result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.BannerProperties.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
-                #endregion
-            }
-            else
-            {
-                #region Compatibility with old versions
-                result.AppendLine(@"<EnableBanner>" + _oldEnableBanner.ToString() + @"</EnableBanner>");
-                result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(_oldBanner, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
-                #endregion
-            }
             return result.ToString();
         }
 
@@ -298,10 +311,6 @@ namespace FileManager.BusinessClasses
             {
                 switch (childNode.Name)
                 {
-                    case "Identifier":
-                        if (Guid.TryParse(childNode.InnerText, out tempGuid))
-                            this.Identifier = tempGuid;
-                        break;
                     case "DisplayName":
                         this.Name = childNode.InnerText;
                         break;
@@ -312,12 +321,16 @@ namespace FileManager.BusinessClasses
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.IsBold = tempBool;
                         break;
+                    case "IsDead":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            this.IsDead = tempBool;
+                        break;
                     case "RootId":
                         if (Guid.TryParse(childNode.InnerText, out tempGuid))
                             this.RootId = tempGuid;
                         break;
                     case "LocalPath":
-                        _linkLocalPath = childNode.InnerText;
+                        _linkRemotePath = childNode.InnerText;
                         break;
                     case "RelativePath":
                         this.RelativePath = childNode.InnerText;
@@ -357,15 +370,9 @@ namespace FileManager.BusinessClasses
                     case "ExpirationDateOptions":
                         this.ExpirationDateOptions.Deserialize(childNode);
                         break;
-                    #region Compatibility with desktop version of Sales Depot
                     case "PreviewContainer":
                         this.PreviewContainer = new PresentationPreviewContainer(this);
                         this.PreviewContainer.Deserialize(childNode);
-                        break;
-                    #endregion
-                    case "UniversalPreviewContainer":
-                        this.UniversalPreviewContainer = new UniversalPreviewContainer(this);
-                        this.UniversalPreviewContainer.Deserialize(childNode);
                         break;
                     case "PresentationProperties":
                         this.PresentationProperties = new PresentationProperties();
@@ -374,7 +381,6 @@ namespace FileManager.BusinessClasses
                     case "LineBreakProperties":
                         this.LineBreakProperties = new LineBreakProperties();
                         this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-                        this.LineBreakProperties.BoldFont = new Font(this.Parent.WindowFont, FontStyle.Bold);
                         this.LineBreakProperties.Deserialize(childNode);
                         break;
                     case "BannerProperties":
@@ -399,85 +405,72 @@ namespace FileManager.BusinessClasses
             if (this.BannerProperties == null)
                 InitBannerProperties();
 
-            SetProperties();
+            if (this.Type == FileTypes.Other || this.Type == FileTypes.MediaPlayerVideo || this.Type == FileTypes.QuickTimeVideo)
+                SetProperties();
         }
 
         public void InitBannerProperties()
         {
             this.BannerProperties = new BannerProperties();
-            this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-            this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
-            this.BannerProperties.Text = this.DisplayName;
-
-            this.BannerProperties.Enable = _oldEnableBanner;
-            this.BannerProperties.Image = _oldBanner;
-            if (this.LineBreakProperties != null)
+            try
             {
-                this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
-                if (this.LineBreakProperties.Banner != null)
-                    this.BannerProperties.Image = this.LineBreakProperties.Banner;
+                this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
+                this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
+                this.BannerProperties.Text = this.DisplayName;
+
+                this.BannerProperties.Enable = _oldEnableBanner;
+                this.BannerProperties.Image = _oldBanner;
+                if (this.LineBreakProperties != null)
+                {
+                    this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
+                    if (this.LineBreakProperties.Banner != null)
+                        this.BannerProperties.Image = this.LineBreakProperties.Banner;
+                }
             }
+            catch { }
         }
 
         public void SetProperties()
         {
-            if (this.Type != FileTypes.Folder && this.Type != FileTypes.LineBreak && this.Type != FileTypes.Url && this.Type != FileTypes.Network)
+            switch (this.Extension.ToUpper())
             {
-                switch (this.Extension.ToUpper())
-                {
-                    case ".PPT":
-                    case ".PPTX":
-                        this.Type = FileTypes.Presentation;
-                        break;
-                    case ".MPEG":
-                    case ".WMV":
-                    case ".AVI":
-                    case ".WMZ":
-                        this.Type = FileTypes.MediaPlayerVideo;
-                        break;
-                    case ".ASF":
-                    case ".MOV":
-                    case ".MP4":
-                    case ".MPG":
-                    case ".M4V":
-                    case ".FLV":
-                    case ".OGV":
-                    case ".OGM":
-                    case ".OGX":
-                        this.Type = FileTypes.QuickTimeVideo;
-                        break;
-                    default:
-                        this.Type = FileTypes.Other;
-                        break;
-                }
-            }
-        }
-
-        public void GetPresentationPrperties()
-        {
-            InteropClasses.PowerPointHelper.Instance.GetPresentationProperties(this);
-        }
-
-        public void CheckIfDead()
-        {
-            switch (this.Type)
-            {
-                case FileTypes.BuggyPresentation:
-                case FileTypes.FriendlyPresentation:
-                case FileTypes.Presentation:
-                case FileTypes.QuickTimeVideo:
-                case FileTypes.MediaPlayerVideo:
-                case FileTypes.Other:
-                    if (!File.Exists(this.OriginalPath))
-                        this.IsDead = true;
-                    else
-                        this.IsDead = false;
+                case ".PPT":
+                case ".PPTX":
+                    this.Type = FileTypes.Presentation;
                     break;
-                case FileTypes.Folder:
-                    if (!Directory.Exists(this.OriginalPath))
-                        this.IsDead = true;
-                    else
-                        this.IsDead = false;
+                case ".DOC":
+                case ".DOCX":
+                    this.Type = FileTypes.Word;
+                    break;
+                case ".XLS":
+                case ".XLSX":
+                    this.Type = FileTypes.Excel;
+                    break;
+                case ".PDF":
+                    this.Type = FileTypes.PDF;
+                    break;
+                case ".MPEG":
+                case ".WMV":
+                case ".AVI":
+                case ".WMZ":
+                case ".MPG":
+                    this.Type = FileTypes.MediaPlayerVideo;
+                    break;
+                case ".ASF":
+                case ".MOV":
+                case ".MP4":
+                case ".M4V":
+                case ".FLV":
+                case ".OGV":
+                case ".OGM":
+                case ".OGX":
+                    this.Type = FileTypes.QuickTimeVideo;
+                    break;
+                case ".URL":
+                    this.Type = FileTypes.Url;
+                    break;
+                default:
+                    this.Type = FileTypes.Other;
                     break;
             }
         }
@@ -485,6 +478,57 @@ namespace FileManager.BusinessClasses
         public void RemoveFromCollection()
         {
             this.Parent.Files.Remove(this);
+        }
+
+        private void GetLocalCopy()
+        {
+            if (this.LinkAvailable)
+            {
+                if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+                {
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
+                    {
+                        switch (this.Type)
+                        {
+                            case FileTypes.BuggyPresentation:
+                            case FileTypes.Excel:
+                            case FileTypes.FriendlyPresentation:
+                            case FileTypes.MediaPlayerVideo:
+                            case FileTypes.Other:
+                            case FileTypes.Presentation:
+                            case FileTypes.PDF:
+                            case FileTypes.QuickTimeVideo:
+                            case FileTypes.Word:
+                            case FileTypes.OvernightsLink:
+                                _linkLocalPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, this.NameWithExtension);
+                                try
+                                {
+                                    File.Copy(this.OriginalPath, _linkLocalPath, true);
+                                }
+                                catch
+                                {
+                                    _linkLocalPath = string.Empty;
+                                }
+                                break;
+                            case FileTypes.Folder:
+                                _linkLocalPath = this.OriginalPath;
+                                break;
+                            default:
+                                _linkLocalPath = string.Empty;
+                                break;
+                        }
+
+                    }));
+                    thread.Start();
+                    Application.DoEvents();
+                    while (thread.IsAlive)
+                        Application.DoEvents();
+                }
+                else
+                    _linkLocalPath = this.OriginalPath;
+            }
+            else
+                _linkLocalPath = string.Empty;
         }
     }
 }

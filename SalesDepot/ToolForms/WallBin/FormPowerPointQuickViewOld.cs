@@ -38,7 +38,6 @@ namespace SalesDepot.ToolForms.WallBin
                 this.Text = "QuickView - " + this.SelectedFile.NameWithExtension;
                 laFileInfo.Text = "Added: " + this.SelectedFile.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (this.SelectedFile.ExpirationDateOptions.EnableExpirationDate && this.SelectedFile.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + this.SelectedFile.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
 
-
                 FormMain.Instance.TopMost = true;
                 InteropClasses.PowerPointHelper.Instance.PowerPointVisible = true;
 
@@ -61,7 +60,7 @@ namespace SalesDepot.ToolForms.WallBin
                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_viewedFile);
                         if (this.SelectedFile.PresentationProperties == null && InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation != null)
                         {
-                            this.SelectedFile.PresentationProperties = new BusinessClasses.PresentationProperties();
+                            this.SelectedFile.PresentationProperties = new CoreObjects.PresentationProperties();
                             this.SelectedFile.PresentationProperties.Height = InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideHeight / 72;
                             this.SelectedFile.PresentationProperties.Width = InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideWidth / 72; ;
                             this.SelectedFile.PresentationProperties.LastUpdate = DateTime.Now;
@@ -224,7 +223,7 @@ namespace SalesDepot.ToolForms.WallBin
 
                         progressForm.Close();
 
-                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
+                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.OriginalPath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                         BusinessClasses.LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
                     }
                 }
@@ -246,7 +245,7 @@ namespace SalesDepot.ToolForms.WallBin
 
         private void barButtonItemPrintLink_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.OriginalPath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
             InteropClasses.PowerPointHelper.Instance.PrintPresentation(comboBoxEditSlides.SelectedIndex + 1);
         }
 
@@ -328,7 +327,7 @@ namespace SalesDepot.ToolForms.WallBin
                         int selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
                         Thread thread = new Thread(delegate()
                         {
-                            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.RemotePath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
+                            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.SelectedFile.Name, this.SelectedFile.Type.ToString(), this.SelectedFile.OriginalPath, this.SelectedFile.Parent.Parent.Parent.Name, this.SelectedFile.Parent.Parent.Name);
                             InteropClasses.PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : selectedIndex, checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? BusinessClasses.MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
                         });
                         thread.Start();

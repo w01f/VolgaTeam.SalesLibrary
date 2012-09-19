@@ -33,7 +33,7 @@ namespace SalesDepot.ToolForms.WallBin
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
                 string selectedName = ckChangeEmailName.Checked && textEditEmailName.EditValue != null ? textEditEmailName.EditValue.ToString() : this.link.NameWithExtension;
                 string destinationFilePath = Path.Combine(Path.GetTempPath(), (selectedName + this.link.Extension));
                 File.Copy(this.link.LocalPath, destinationFilePath, true);

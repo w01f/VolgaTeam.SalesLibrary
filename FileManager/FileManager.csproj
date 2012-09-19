@@ -104,23 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
-    <Compile Include="BusinessClasses\AutoWidget.cs" />
-    <Compile Include="BusinessClasses\Banner.cs" />
-    <Compile Include="BusinessClasses\ColumnTitle.cs" />
-    <Compile Include="BusinessClasses\ExpirationDateOptions.cs" />
-    <Compile Include="BusinessClasses\FileLink.cs" />
-    <Compile Include="BusinessClasses\FolderLink.cs" />
     <Compile Include="BusinessClasses\IPadManager.cs" />
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
-    <Compile Include="BusinessClasses\LibraryFolder.cs" />
-    <Compile Include="BusinessClasses\LibraryPage.cs" />
-    <Compile Include="BusinessClasses\LineBreak.cs" />
-    <Compile Include="BusinessClasses\PresentationProperties.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
-    <Compile Include="BusinessClasses\SearchTags.cs" />
-    <Compile Include="BusinessClasses\SyncScheduleRecord.cs" />
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
     <Compile Include="PresentationClasses\IPad\IPadManagerControl.cs">
@@ -138,6 +126,12 @@
     <Compile Include="ToolClasses\PdfHelper.cs" />
     <Compile Include="ToolClasses\PDFParser.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
+    <Compile Include="ToolForms\FormProgressSync.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormProgressSync.designer.cs">
+      <DependentUpon>FormProgressSync.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\IPad\FormEditUser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,7 +369,6 @@
       <DependentUpon>FolderBoxControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\RichTextBoxPrinter.cs" />
-    <Compile Include="BusinessClasses\CommonObjects.cs" />
     <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="ToolForms\WallBin\FormSelectWidget.cs">
       <SubType>Form</SubType>
@@ -408,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabIPadManagerControl.resx">
       <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
+      <DependentUpon>FormProgressSync.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\IPad\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
@@ -565,6 +561,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\CancelSync.png" />
     <None Include="Resources\EditUser.png" />
     <None Include="Resources\ConvertVideo.png" />
     <None Include="Resources\SyncIPad.png" />
@@ -632,6 +629,10 @@
     <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
       <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
       <Name>OldFormatLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
+      <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
+      <Name>SalesDepot.CoreObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

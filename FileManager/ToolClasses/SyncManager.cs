@@ -34,70 +34,89 @@ namespace FileManager.ToolClasses
 
             foreach (FileInfo afi in a_files)
             {
-                string destinationPath = Path.Combine(B.FullName, afi.Name);
-                if (destinationPath.Length < InteropClasses.WinAPIHelper.MAX_PATH)
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 {
-                    FileInfo bfi = b_files.Where(x => x.Name.Equals(afi.Name)).FirstOrDefault();
-                    if (bfi != null)
+                    string destinationPath = Path.Combine(B.FullName, afi.Name);
+                    if (destinationPath.Length < InteropClasses.WinAPIHelper.MAX_PATH)
                     {
-                        if (afi.LastWriteTime > bfi.LastWriteTime)
+                        FileInfo bfi = b_files.Where(x => x.Name.Equals(afi.Name)).FirstOrDefault();
+                        if (bfi != null)
                         {
-                            afi.CopyTo(destinationPath, true);
-                            if (this.FileUpdated != null)
-                                this.FileUpdated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
+                            if (afi.LastWriteTime > bfi.LastWriteTime)
+                            {
+                                afi.CopyTo(destinationPath, true);
+                                if (this.FileUpdated != null)
+                                    this.FileUpdated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
+                            }
+                        }
+                        else
+                        {
+                            bfi = afi.CopyTo(destinationPath, true);
+                            if (this.FileCreated != null)
+                                this.FileCreated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
                         }
                     }
                     else
-                    {
-                        bfi = afi.CopyTo(destinationPath, true);
-                        if (this.FileCreated != null)
-                            this.FileCreated(this, new SyncEventArgs(afi.FullName, bfi.FullName));
-                    }
+                        if (this.FileDeclined != null)
+                            this.FileDeclined(this, new SyncEventArgs(afi.FullName, destinationPath));
+                    Application.DoEvents();
                 }
                 else
-                    if (this.FileDeclined != null)
-                        this.FileDeclined(this, new SyncEventArgs(afi.FullName, destinationPath));
-                Application.DoEvents();
+                    break;
             }
 
             foreach (FileInfo bfi in b_files)
             {
-                if ((!filesWhiteList.Contains(Path.Combine(A.FullName, bfi.Name)) && filesWhiteList.Count > 0) || (!a_files.Select(x => x.Name).Contains(bfi.Name) && filesWhiteList.Count == 0))
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 {
-                    bfi.Attributes = FileAttributes.Normal;
-                    bfi.Delete();
-                    if (this.FileDeleted != null)
-                        this.FileDeleted(this, new SyncEventArgs("empty", bfi.FullName));
-                    Application.DoEvents();
+                    if ((!filesWhiteList.Contains(Path.Combine(A.FullName, bfi.Name)) && filesWhiteList.Count > 0) || (!a_files.Select(x => x.Name).Contains(bfi.Name) && filesWhiteList.Count == 0))
+                    {
+                        bfi.Attributes = FileAttributes.Normal;
+                        bfi.Delete();
+                        if (this.FileDeleted != null)
+                            this.FileDeleted(this, new SyncEventArgs("empty", bfi.FullName));
+                        Application.DoEvents();
+                    }
                 }
+                else
+                    break;
             }
+
             if (includeSubFolders)
             {
                 foreach (DirectoryInfo adi in a_dirs.Values)
                 {
-                    if (b_dirs.ContainsKey(adi.Name))
+                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                     {
-                        DirectoryInfo bdi = b_dirs[adi.Name];
-                        SynchronizeFolders(adi, bdi, filesWhiteList);
+                        if (b_dirs.ContainsKey(adi.Name))
+                        {
+                            DirectoryInfo bdi = b_dirs[adi.Name];
+                            SynchronizeFolders(adi, bdi, filesWhiteList);
+                        }
+                        else
+                        {
+                            DirectoryInfo bdi = B.CreateSubdirectory(adi.Name);
+                            SynchronizeFolders(adi, bdi, filesWhiteList);
+                            if (this.FolderCreated != null)
+                                this.FolderCreated(this, new SyncEventArgs(adi.FullName, bdi.FullName));
+                        }
+                        Application.DoEvents();
                     }
                     else
-                    {
-                        DirectoryInfo bdi = B.CreateSubdirectory(adi.Name);
-                        SynchronizeFolders(adi, bdi, filesWhiteList);
-                        if (this.FolderCreated != null)
-                            this.FolderCreated(this, new SyncEventArgs(adi.FullName, bdi.FullName));
-                    }
-                    Application.DoEvents();
+                        break;
                 }
 
-                foreach (DirectoryInfo bdi in b_dirs.Values)
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 {
-                    if (!a_dirs.ContainsKey(bdi.Name))
+                    foreach (DirectoryInfo bdi in b_dirs.Values)
                     {
-                        DeleteFolder(bdi);
-                        if (this.FolderDeleted != null)
-                            this.FolderDeleted(this, new SyncEventArgs("empty", bdi.FullName));
-                        Application.DoEvents();
+                        if (!a_dirs.ContainsKey(bdi.Name))
+                        {
+                            DeleteFolder(bdi);
+                            if (this.FolderDeleted != null)
+                                this.FolderDeleted(this, new SyncEventArgs("empty", bdi.FullName));
+                            Application.DoEvents();
+                        }
                     }
                 }
             }

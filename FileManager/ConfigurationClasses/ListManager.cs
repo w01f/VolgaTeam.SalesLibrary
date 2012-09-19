@@ -78,12 +78,12 @@ namespace FileManager.ConfigurationClasses
     public class SearchTags
     {
         private string _listsFileName;
-        public List<SearchGroup> SearchGroups { get; set; }
+        public List<SalesDepot.CoreObjects.SearchGroup> SearchGroups { get; set; }
 
         public SearchTags()
         {
             _listsFileName = Path.Combine(ListManager.Instance.ListsFolder, "SDSearch.xml");
-            this.SearchGroups = new List<SearchGroup>();
+            this.SearchGroups = new List<SalesDepot.CoreObjects.SearchGroup>();
             Load();
         }
 
@@ -103,7 +103,7 @@ namespace FileManager.ConfigurationClasses
                         switch (childNode.Name)
                         {
                             case "Category":
-                                SearchGroup group = new SearchGroup();
+                                SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                                 foreach (XmlAttribute attribute in childNode.Attributes)
                                 {
                                     switch (attribute.Name)
@@ -141,21 +141,6 @@ namespace FileManager.ConfigurationClasses
                     }
                 }
             }
-        }
-    }
-
-    public class SearchGroup
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Image Logo { get; set; }
-        public List<string> Tags { get; set; }
-
-        public SearchGroup()
-        {
-            this.Name = string.Empty;
-            this.Description = string.Empty;
-            this.Tags = new List<string>();
         }
     }
 

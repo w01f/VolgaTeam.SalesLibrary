@@ -12,6 +12,9 @@ namespace FileManager
 
         private static AppManager instance = new AppManager();
 
+        public bool ThreadActive { get; set; }
+        public bool ThreadAborted { get; set; }
+
         private AppManager()
         {
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -8,20 +7,6 @@ namespace FileManager.ConfigurationClasses
 {
     public class SettingsManager
     {
-        public const string UserSettingsFileName = @"SalesDepotUserSettings.xml";
-        public const string StorageFileName = @"SalesDepotCache.xml";
-        public const string StorageLightFileName = @"SalesDepotCacheLight.xml";
-        public const string StyleFileName = @"SalesDepotStyle.xml";
-        public const string WholeDriveFilesStorage = @"Primary Root";
-        public const string RegularPreviewContainersRootFolderName = @"!QV";
-        public const string FtpPreviewContainersRootFolderName = @"!WV";
-        public const string OldPreviewFolderPrefix = @"!PNG_";
-        public const string LibraryLogoFolder = @"!SD-Graphics";
-        public const string OvernightsCalendarRootFolderName = @"!OC";
-        public const string ProgramManagerRootFolderName = @"!PM";
-        public const string ExtraFoldersRootFolderName = @"!Extra Roots";
-        public const string SweepPeriodsFileName = @"SweepPeriods.xml";
-
         private static SettingsManager _instance = new SettingsManager();
 
         private string _settingsFilePath = string.Empty;
@@ -110,11 +95,11 @@ namespace FileManager.ConfigurationClasses
 
             this.HiddenObjects = new List<string>();
             this.HiddenObjects.Add("!Old");
-            this.HiddenObjects.Add(RegularPreviewContainersRootFolderName);
-            this.HiddenObjects.Add(FtpPreviewContainersRootFolderName);
-            this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
-            this.HiddenObjects.Add(ProgramManagerRootFolderName);
-            this.HiddenObjects.Add(ExtraFoldersRootFolderName);
+            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.RegularPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.FtpPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.ProgramManagerRootFolderName);
+            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.ExtraFoldersRootFolderName);
             this.HiddenObjects.Add("thumbs.db");
             this.HiddenObjects.Add("SalesDepotCache.xml");
         }

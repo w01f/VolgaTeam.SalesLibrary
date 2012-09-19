@@ -109,6 +109,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CancelSync {
+            get {
+                object obj = ResourceManager.GetObject("CancelSync", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Chrome {
             get {
                 object obj = ResourceManager.GetObject("Chrome", resourceCulture);

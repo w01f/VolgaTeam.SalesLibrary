@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects
 {
     public class LineBreakProperties
     {
@@ -64,6 +64,11 @@ namespace FileManager.BusinessClasses
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.ForeColor = Color.FromArgb(tempInt);
                         break;
+                    case "Note":
+                        this.Note = childNode.InnerText;
+                        break;
+
+                    #region Compatibility with old versions
                     case "EnableBanner":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.EnableBanner = tempBool;
@@ -74,9 +79,7 @@ namespace FileManager.BusinessClasses
                         else
                             this.Banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
-                    case "Note":
-                        this.Note = childNode.InnerText;
-                        break;
+                    #endregion
                 }
             }
         }

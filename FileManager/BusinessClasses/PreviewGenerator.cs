@@ -90,19 +90,30 @@ namespace FileManager.BusinessClasses
 
         public void GeneratePreview()
         {
-            string mp4Destination = Path.Combine(this.ContainerPath, "mp4");
-            bool updateMp4 = !(Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0);
-            if (!Directory.Exists(mp4Destination))
-                Directory.CreateDirectory(mp4Destination);
-            if (updateMp4)
-                ToolClasses.VideoHelper.Instance.ExportMp4(this.SourceFile, mp4Destination);
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            {
+                string mp4Destination = Path.Combine(this.ContainerPath, "mp4");
+                bool updateMp4 = !(Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0);
+                if (!Directory.Exists(mp4Destination))
+                    Directory.CreateDirectory(mp4Destination);
+                if (updateMp4)
+                    ToolClasses.VideoHelper.Instance.ExportMp4(this.SourceFile, mp4Destination);
+                if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    ToolClasses.SyncManager.DeleteFolder(new DirectoryInfo(mp4Destination));
+            }
 
-            string ogvDestination = Path.Combine(this.ContainerPath, "ogv");
-            bool updateOgv = !(Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-            if (!Directory.Exists(ogvDestination))
-                Directory.CreateDirectory(ogvDestination);
-            if (updateOgv)
-                ToolClasses.VideoHelper.Instance.ExportOgv(this.SourceFile, ogvDestination);
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            {
+                string ogvDestination = Path.Combine(this.ContainerPath, "ogv");
+                bool updateOgv = !(Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
+                if (!Directory.Exists(ogvDestination))
+                    Directory.CreateDirectory(ogvDestination);
+                if (updateOgv)
+                    ToolClasses.VideoHelper.Instance.ExportOgv(this.SourceFile, ogvDestination);
+                if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    ToolClasses.SyncManager.DeleteFolder(new DirectoryInfo(ogvDestination));
+
+            }
         }
         #endregion
     }

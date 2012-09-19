@@ -27,12 +27,12 @@ namespace FileManager.ToolForms.Settings
         {
             buttonXEnable.Checked = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableAutoSync;
             buttonXDisable.Checked = !PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.EnableAutoSync;
-            gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
+            gridControlSyncSchedule.DataSource = new BindingList<SalesDepot.CoreObjects.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
         }
 
         private void buttonXAddSyncTime_Click(object sender, EventArgs e)
         {
-            BusinessClasses.SyncScheduleRecord syncScheduleRecord = new BusinessClasses.SyncScheduleRecord();
+            SalesDepot.CoreObjects.SyncScheduleRecord syncScheduleRecord = new SalesDepot.CoreObjects.SyncScheduleRecord();
             syncScheduleRecord.Time = DateTime.Now;
             switch (syncScheduleRecord.Time.DayOfWeek)
             {
@@ -62,7 +62,7 @@ namespace FileManager.ToolForms.Settings
             if (_formEdit.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords.Add(syncScheduleRecord);
-                gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
+                gridControlSyncSchedule.DataSource = new BindingList<SalesDepot.CoreObjects.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
                 if (gridViewSyncSchedule.RowCount > 0)
                     gridViewSyncSchedule.FocusedRowHandle = gridViewSyncSchedule.RowCount - 1;
             }
@@ -90,17 +90,17 @@ namespace FileManager.ToolForms.Settings
         {
             if (e.Clicks == 2)
             {
-                BusinessClasses.SyncScheduleRecord syncScheduleRecord = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords[gridViewSyncSchedule.GetDataSourceRowIndex(e.RowHandle)];
+                SalesDepot.CoreObjects.SyncScheduleRecord syncScheduleRecord = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords[gridViewSyncSchedule.GetDataSourceRowIndex(e.RowHandle)];
                 _formEdit = new FormAutoSyncEdit(syncScheduleRecord);
                 if (_formEdit.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
+                    gridControlSyncSchedule.DataSource = new BindingList<SalesDepot.CoreObjects.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
             }
         }
 
         private void repositoryItemButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords.RemoveAt(gridViewSyncSchedule.GetDataSourceRowIndex(gridViewSyncSchedule.FocusedRowHandle));
-            gridControlSyncSchedule.DataSource = new BindingList<BusinessClasses.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
+            gridControlSyncSchedule.DataSource = new BindingList<SalesDepot.CoreObjects.SyncScheduleRecord>(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.SyncScheduleRecords);
         }
     }
 }

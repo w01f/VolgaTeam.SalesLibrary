@@ -31,7 +31,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         private void BuildWallbin()
         {
             this.Pages.Clear();
-            foreach (BusinessClasses.LibraryPage page in this.Library.Pages)
+            foreach (SalesDepot.CoreObjects.LibraryPage page in this.Library.Pages)
             {
                 PageDecorator pageDecorator = new PageDecorator(page);
                 pageDecorator.Parent = this;

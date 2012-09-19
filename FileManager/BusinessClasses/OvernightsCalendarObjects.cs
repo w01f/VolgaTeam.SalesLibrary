@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
+using SalesDepot.CoreObjects;
 
 namespace FileManager.BusinessClasses
 {
@@ -282,7 +283,7 @@ namespace FileManager.BusinessClasses
             this.SweepDays.Clear();
             if (this.RootFolder.Exists)
             {
-                string sweepPeriodsConnfigFile = Path.Combine(this.RootFolder.FullName, ConfigurationClasses.SettingsManager.SweepPeriodsFileName);
+                string sweepPeriodsConnfigFile = Path.Combine(this.RootFolder.FullName, Constants.SweepPeriodsFileName);
                 if (File.Exists(sweepPeriodsConnfigFile))
                 {
                     try

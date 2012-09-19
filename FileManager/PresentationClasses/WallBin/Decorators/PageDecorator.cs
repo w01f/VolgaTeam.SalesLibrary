@@ -7,7 +7,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 {
     public class PageDecorator
     {
-        public BusinessClasses.LibraryPage Page { get; private set; }
+        public SalesDepot.CoreObjects.LibraryPage Page { get; private set; }
         private List<PresentationClasses.WallBin.FolderBoxControl> _boxes = new List<PresentationClasses.WallBin.FolderBoxControl>();
         private Panel _headerPanel = null;
         private Panel _parentPanel = null;
@@ -18,7 +18,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         public LibraryDecorator Parent { get; set; }
         public PresentationClasses.WallBin.FolderBoxControl ActiveBox { get; set; }
 
-        public PageDecorator(BusinessClasses.LibraryPage page)
+        public PageDecorator(SalesDepot.CoreObjects.LibraryPage page)
         {
             this.Page = page;
             this.Container = new DevExpress.XtraEditors.XtraScrollableControl();
@@ -40,7 +40,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
             _boxes.Clear();
 
             this.Page.Folders.Sort((x, y) => x.ColumnOrder.CompareTo(y.ColumnOrder) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.ColumnOrder.CompareTo(y.ColumnOrder));
-            foreach (BusinessClasses.LibraryFolder folder in this.Page.Folders)
+            foreach (SalesDepot.CoreObjects.LibraryFolder folder in this.Page.Folders)
             {
                 PresentationClasses.WallBin.FolderBoxControl box = new PresentationClasses.WallBin.FolderBoxControl();
                 box.Folder = folder;
@@ -70,7 +70,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
             if (this.Page.EnableColumnTitles)
             {
-                foreach (BusinessClasses.ColumnTitle columnTitle in this.Page.ColumnTitles)
+                foreach (SalesDepot.CoreObjects.ColumnTitle columnTitle in this.Page.ColumnTitles)
                 {
                     PresentationClasses.WallBin.ColumnTitleControl columnTitleControl = new PresentationClasses.WallBin.ColumnTitleControl(columnTitle);
                     columnTitleControl.Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left;

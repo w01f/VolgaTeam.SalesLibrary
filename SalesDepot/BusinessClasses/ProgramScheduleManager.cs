@@ -24,7 +24,7 @@ namespace SalesDepot.BusinessClasses
         {
             get
             {
-                return Path.Combine(this.Parent.StorageFolder.FullName, ConfigurationClasses.SettingsManager.ProgramManagerRootFolderName);
+                return Path.Combine(this.Parent.StorageFolder.FullName, CoreObjects.Constants.ProgramManagerRootFolderName);
             }
         }
 

@@ -51,7 +51,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
         }
 
-        public void ApplySearchCriteria(BusinessClasses.LibraryFile[] files)
+        public void ApplySearchCriteria(CoreObjects.ILibraryFile[] files)
         {
             _selectedFileViewer = null;
             pnPreviewArea.Controls.Clear();
@@ -76,14 +76,14 @@ namespace SalesDepot.PresentationClasses.WallBin
                         Viewers.IFileViewer viewer = null;
                         switch (file.Type)
                         {
-                            case BusinessClasses.FileTypes.BuggyPresentation:
-                            case BusinessClasses.FileTypes.FriendlyPresentation:
-                            case BusinessClasses.FileTypes.Presentation:
+                            case CoreObjects.FileTypes.BuggyPresentation:
+                            case CoreObjects.FileTypes.FriendlyPresentation:
+                            case CoreObjects.FileTypes.Presentation:
                                 if (file.PreviewContainer != null)
                                     file.PreviewContainer.GetPreviewImages();
                                 FormMain.Instance.Invoke((MethodInvoker)delegate() { viewer = new Viewers.PowerPointViewer(file); });
                                 break;
-                            case BusinessClasses.FileTypes.Excel:
+                            case CoreObjects.FileTypes.Excel:
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -91,7 +91,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                                     catch { viewer = new Viewers.DefaultViewer(file); }
                                 });
                                 break;
-                            case BusinessClasses.FileTypes.Word:
+                            case CoreObjects.FileTypes.Word:
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -99,7 +99,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                                     catch { viewer = new Viewers.DefaultViewer(file); }
                                 });
                                 break;
-                            case BusinessClasses.FileTypes.PDF:
+                            case CoreObjects.FileTypes.PDF:
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -107,7 +107,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                                     catch { viewer = new Viewers.DefaultViewer(file); }
                                 });
                                 break;
-                            case BusinessClasses.FileTypes.MediaPlayerVideo:
+                            case CoreObjects.FileTypes.MediaPlayerVideo:
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -115,7 +115,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                                     catch { viewer = new Viewers.DefaultViewer(file); }
                                 });
                                 break;
-                            case BusinessClasses.FileTypes.Url:
+                            case CoreObjects.FileTypes.Url:
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -178,9 +178,9 @@ namespace SalesDepot.PresentationClasses.WallBin
                 barButtonItemOpenLink.Enabled = true;
                 switch (file.Type)
                 {
-                    case BusinessClasses.FileTypes.BuggyPresentation:
-                    case BusinessClasses.FileTypes.FriendlyPresentation:
-                    case BusinessClasses.FileTypes.Presentation:
+                    case CoreObjects.FileTypes.BuggyPresentation:
+                    case CoreObjects.FileTypes.FriendlyPresentation:
+                    case CoreObjects.FileTypes.Presentation:
                         barButtonItemSave.Enabled = true;
                         barButtonItemSaveAsPDF.Enabled = !InteropClasses.PowerPointHelper.Instance.Is2003 & true;
                         barButtonItemEmailLink.Enabled = true;
@@ -191,25 +191,25 @@ namespace SalesDepot.PresentationClasses.WallBin
                             if (file.PreviewContainer.Slides.Count > 0)
                                 splitContainerControlSerachResults.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Both;
                         break;
-                    case BusinessClasses.FileTypes.Excel:
-                    case BusinessClasses.FileTypes.PDF:
-                    case BusinessClasses.FileTypes.Word:
+                    case CoreObjects.FileTypes.Excel:
+                    case CoreObjects.FileTypes.PDF:
+                    case CoreObjects.FileTypes.Word:
                         barButtonItemSave.Enabled = true;
                         barButtonItemEmailLink.Enabled = true;
                         barButtonItemPrintLink.Enabled = true;
                         splitContainerControlSerachResults.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Both;
                         break;
-                    case BusinessClasses.FileTypes.Other:
+                    case CoreObjects.FileTypes.Other:
                         barButtonItemSave.Enabled = true;
                         barButtonItemEmailLink.Enabled = true;
                         barButtonItemPrintLink.Enabled = true;
                         break;
-                    case BusinessClasses.FileTypes.MediaPlayerVideo:
-                    case BusinessClasses.FileTypes.QuickTimeVideo:
+                    case CoreObjects.FileTypes.MediaPlayerVideo:
+                    case CoreObjects.FileTypes.QuickTimeVideo:
                         barButtonItemEmailLink.Enabled = true;
                         splitContainerControlSerachResults.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Both;
                         break;
-                    case BusinessClasses.FileTypes.Url:
+                    case CoreObjects.FileTypes.Url:
                         splitContainerControlSerachResults.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Both;
                         break;
                 }
@@ -248,11 +248,11 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
             {
-                BusinessClasses.LibraryFile[] files = new BusinessClasses.LibraryFile[] { };
+                CoreObjects.ILibraryFile[] files = new CoreObjects.ILibraryFile[] { };
                 if (FormMain.Instance.buttonItemHomeSearchByTags.Checked)
                 {
                     files = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByTags(GetSearhTags());
-                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.Presentation).Count() > 25)
+                    if (files.Where(x => x.Type == CoreObjects.FileTypes.BuggyPresentation || x.Type == CoreObjects.FileTypes.FriendlyPresentation || x.Type == CoreObjects.FileTypes.Presentation).Count() > 25)
                     {
                         AppManager.Instance.ShowWarning("Only the first 25 Results will be displayed.\nNarrow your Search Criteria to display a more qualified list of files...");
                         files = files.Take(25).ToArray();
@@ -263,37 +263,37 @@ namespace SalesDepot.PresentationClasses.WallBin
                     string criteria = textEditSearchByFiles.EditValue != null ? textEditSearchByFiles.EditValue.ToString().ToLower() : string.Empty;
                     if (checkEditAllFiles.Checked)
                     {
-                        files = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Other);
+                        files = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Other);
                     }
                     else
                     {
-                        List<BusinessClasses.LibraryFile> filesByName = new List<BusinessClasses.LibraryFile>();
+                        List<CoreObjects.ILibraryFile> filesByName = new List<CoreObjects.ILibraryFile>();
                         if (checkEditExcel.Checked)
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Excel));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Excel));
                         if (checkEditFolders.Checked)
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Folder));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Folder));
                         if (checkEditNetwork.Checked)
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Network));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Network));
                         if (checkEditPDF.Checked)
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.PDF));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.PDF));
                         if (checkEditPowerPoint.Checked)
                         {
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.BuggyPresentation));
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.FriendlyPresentation));
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Presentation));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.BuggyPresentation));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.FriendlyPresentation));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Presentation));
                         }
                         if (checkEditVideo.Checked)
                         {
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.MediaPlayerVideo));
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.QuickTimeVideo));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.MediaPlayerVideo));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.QuickTimeVideo));
                         }
                         if (checkEditWeb.Checked)
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Url));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Url));
                         if (checkEditWord.Checked)
-                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, BusinessClasses.FileTypes.Word));
+                            filesByName.AddRange(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, CoreObjects.FileTypes.Word));
                         files = filesByName.ToArray();
                     }
-                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.Presentation).Count() > 25)
+                    if (files.Where(x => x.Type == CoreObjects.FileTypes.BuggyPresentation || x.Type == CoreObjects.FileTypes.FriendlyPresentation || x.Type == CoreObjects.FileTypes.Presentation).Count() > 25)
                     {
                         AppManager.Instance.ShowWarning("Only the first 25 Results will be displayed.\nNarrow your Search Criteria to display a more qualified list of files...");
                         files = files.Take(25).ToArray();
@@ -336,7 +336,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         messageText = "There are many new files added for this date range.\nOnly the first 25 results will be displayed...";
                     }
                     files = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.Package.SearchByDate(startDate, endDate);
-                    if (files.Where(x => x.Type == BusinessClasses.FileTypes.BuggyPresentation || x.Type == BusinessClasses.FileTypes.FriendlyPresentation || x.Type == BusinessClasses.FileTypes.Presentation).Count() > 25)
+                    if (files.Where(x => x.Type == CoreObjects.FileTypes.BuggyPresentation || x.Type == CoreObjects.FileTypes.FriendlyPresentation || x.Type == CoreObjects.FileTypes.Presentation).Count() > 25)
                     {
                         AppManager.Instance.ShowWarning(messageText);
                         files = files.Take(25).ToArray();
@@ -378,7 +378,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
             LoadKeyWordFilterSet();
 
-            ApplySearchCriteria(new BusinessClasses.LibraryFile[] { });
+            ApplySearchCriteria(new CoreObjects.ILibraryFile[] { });
             UpdateSearchButtonStatus();
             navBarControlSearchTags.View = new CustomNavPaneViewInfoRegistrator();
         }
@@ -521,14 +521,14 @@ namespace SalesDepot.PresentationClasses.WallBin
                 navBarGroup7.Visible = false;
         }
 
-        private BusinessClasses.LibraryFileSearchTags GetSearhTags()
+        private CoreObjects.LibraryFileSearchTags GetSearhTags()
         {
-            BusinessClasses.LibraryFileSearchTags searchTags = new BusinessClasses.LibraryFileSearchTags();
+            CoreObjects.LibraryFileSearchTags searchTags = new CoreObjects.LibraryFileSearchTags();
 
             if (checkedListBoxControlGroup1.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup1.Tag as ConfigurationClasses.SearchGroup).Name;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup1.Tag as CoreObjects.SearchGroup).Name;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());
@@ -536,8 +536,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             if (checkedListBoxControlGroup2.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup2.Tag as ConfigurationClasses.SearchGroup).Name; group.Name = navBarGroup2.Caption;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup2.Tag as CoreObjects.SearchGroup).Name; group.Name = navBarGroup2.Caption;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());
@@ -545,8 +545,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             if (checkedListBoxControlGroup3.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup3.Tag as ConfigurationClasses.SearchGroup).Name;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup3.Tag as CoreObjects.SearchGroup).Name;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());
@@ -554,8 +554,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             if (checkedListBoxControlGroup4.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup4.Tag as ConfigurationClasses.SearchGroup).Name;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup4.Tag as CoreObjects.SearchGroup).Name;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());
@@ -563,8 +563,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             if (checkedListBoxControlGroup5.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup5.Tag as ConfigurationClasses.SearchGroup).Name;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup5.Tag as CoreObjects.SearchGroup).Name;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());
@@ -572,8 +572,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             if (checkedListBoxControlGroup6.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup6.Tag as ConfigurationClasses.SearchGroup).Name;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup6.Tag as CoreObjects.SearchGroup).Name;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());
@@ -581,8 +581,8 @@ namespace SalesDepot.PresentationClasses.WallBin
             }
             if (checkedListBoxControlGroup7.CheckedItemsCount > 0)
             {
-                ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
-                group.Name = (navBarGroup7.Tag as ConfigurationClasses.SearchGroup).Name;
+                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                group.Name = (navBarGroup7.Tag as CoreObjects.SearchGroup).Name;
                 foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
                     if (item.CheckState == CheckState.Checked)
                         group.Tags.Add(item.Value.ToString());

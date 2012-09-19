@@ -35,24 +35,24 @@ namespace SalesDepot.BusinessClasses
         public void OpenLink(LibraryFile link)
         {
             FileInfo sourceFile = null;
-            if (link.Type != FileTypes.LineBreak && link.Type != FileTypes.Folder && link.Type != FileTypes.Url && link.Type != FileTypes.Network)
+            if (link.Type != CoreObjects.FileTypes.LineBreak && link.Type != CoreObjects.FileTypes.Folder && link.Type != CoreObjects.FileTypes.Url && link.Type != CoreObjects.FileTypes.Network)
             {
                 sourceFile = RequestFile(link);
                 if (sourceFile == null)
                 {
                     AppManager.Instance.ShowWarning("File or Link is Not Active");
-                    AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link not active", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                    AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link not active", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
                     return;
                 }
             }
 
-            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
             switch (link.Type)
             {
-                case FileTypes.BuggyPresentation:
-                case FileTypes.FriendlyPresentation:
-                case FileTypes.Presentation:
+                case CoreObjects.FileTypes.BuggyPresentation:
+                case CoreObjects.FileTypes.FriendlyPresentation:
+                case CoreObjects.FileTypes.Presentation:
                     switch (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
@@ -101,7 +101,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case FileTypes.PDF:
+                case CoreObjects.FileTypes.PDF:
                     switch (ConfigurationClasses.SettingsManager.Instance.PDFLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -139,7 +139,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case FileTypes.Word:
+                case CoreObjects.FileTypes.Word:
                     switch (ConfigurationClasses.SettingsManager.Instance.WordLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -177,7 +177,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case FileTypes.Excel:
+                case CoreObjects.FileTypes.Excel:
                     switch (ConfigurationClasses.SettingsManager.Instance.ExcelLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -215,7 +215,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case FileTypes.MediaPlayerVideo:
+                case CoreObjects.FileTypes.MediaPlayerVideo:
                     switch (ConfigurationClasses.SettingsManager.Instance.VideoLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -243,25 +243,25 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case FileTypes.QuickTimeVideo:
+                case CoreObjects.FileTypes.QuickTimeVideo:
                     OpenVideo(link);
                     break;
-                case FileTypes.Other:
+                case CoreObjects.FileTypes.Other:
                     OpenCopyOfFile(link);
                     break;
-                case FileTypes.Folder:
+                case CoreObjects.FileTypes.Folder:
                     OpenFolder(link);
                     break;
-                case FileTypes.Url:
+                case CoreObjects.FileTypes.Url:
                     StartProcess(link);
                     break;
-                case FileTypes.Network:
+                case CoreObjects.FileTypes.Network:
                     StartProcess(link);
                     break;
-                case FileTypes.OvernightsLink:
+                case CoreObjects.FileTypes.OvernightsLink:
                     StartProcess(link);
                     break;
-                case FileTypes.LineBreak:
+                case CoreObjects.FileTypes.LineBreak:
                     if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
                         AppManager.Instance.ShowInfo(link.LineBreakProperties.Note);
                     break;
@@ -272,7 +272,7 @@ namespace SalesDepot.BusinessClasses
 
         private void PreviewFile(LibraryFile link)
         {
-            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
             if (link.LinkAvailable)
             {
@@ -291,7 +291,7 @@ namespace SalesDepot.BusinessClasses
                 File.Copy(link.LocalPath, newFile, true);
                 Process.Start(newFile);
 
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
             }
             catch
             {
@@ -316,7 +316,7 @@ namespace SalesDepot.BusinessClasses
         {
             if (Directory.Exists(link.LocalPath))
             {
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Folder", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Folder", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
                 Process.Start(link.LocalPath);
             }
             else
@@ -327,7 +327,7 @@ namespace SalesDepot.BusinessClasses
         {
             try
             {
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
                 Process.Start(link.LocalPath);
             }
             catch
@@ -346,7 +346,7 @@ namespace SalesDepot.BusinessClasses
             dialog.Filter = (Path.GetExtension(link.LocalPath).Substring(1)).ToUpper() + " Files|*" + Path.GetExtension(link.LocalPath);
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
                 string newFile = dialog.FileName;
                 File.Copy(link.LocalPath, newFile, true);
@@ -429,14 +429,14 @@ namespace SalesDepot.BusinessClasses
                     break;
             }
 
-            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
         }
 
         public void EmailFile(LibraryFile link)
         {
             if (InteropClasses.OutlookHelper.Instance.Open())
             {
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
                 InteropClasses.OutlookHelper.Instance.CreateMessage(string.Empty, link.LocalPath);
                 InteropClasses.OutlookHelper.Instance.Close();
             }
@@ -538,7 +538,7 @@ namespace SalesDepot.BusinessClasses
                 _formPowerPointQuickView.SelectedFile = link;
                 int temp = link.PreviewContainer.SelectedIndex;
 
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
                 _formPowerPointQuickView.ShowDialog();
                 link.PreviewContainer.SelectedIndex = temp;
@@ -574,7 +574,7 @@ namespace SalesDepot.BusinessClasses
             {
                 _formPowerPointQuickViewOld.SelectedFile = link;
 
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
                 _formPowerPointQuickViewOld.ShowDialog();
             }
@@ -586,7 +586,7 @@ namespace SalesDepot.BusinessClasses
         {
             if (File.Exists(InteropClasses.PowerPointHelper.Instance.ActivePresentation.FullName))
             {
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert video", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert video", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
                 AppManager.Instance.ActivatePowerPoint();
                 AppManager.Instance.ActivateMainForm();
@@ -641,7 +641,7 @@ namespace SalesDepot.BusinessClasses
                 process.StartInfo.WindowStyle = ProcessWindowStyle.Maximized;
                 process.Start();
 
-                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Video", link.Name, link.Type.ToString(), link.RemotePath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+                AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Video", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
             }
             catch
             {

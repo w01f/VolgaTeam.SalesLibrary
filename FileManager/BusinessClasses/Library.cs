@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SalesDepot.CoreObjects;
 
 namespace FileManager.BusinessClasses
 {
-    public class Library
+    public class Library: ILibrary
     {
         private RootFolder _rootFolder = null;
 
@@ -36,8 +37,8 @@ namespace FileManager.BusinessClasses
         public List<RootFolder> ExtraFolders { get; private set; }
         public List<LibraryPage> Pages { get; private set; }
         public List<string> EmailList { get; private set; }
-        public List<LibraryFile> DeadLinks { get; private set; }
-        public List<LibraryFile> ExpiredLinks { get; private set; }
+        public List<ILibraryFile> DeadLinks { get; private set; }
+        public List<ILibraryFile> ExpiredLinks { get; private set; }
         public List<AutoWidget> AutoWidgets { get; private set; }
 
         #region Auto Sync Settings
@@ -82,8 +83,8 @@ namespace FileManager.BusinessClasses
             this.ExtraFolders = new List<RootFolder>();
             this.Pages = new List<LibraryPage>();
             this.EmailList = new List<string>();
-            this.DeadLinks = new List<LibraryFile>();
-            this.ExpiredLinks = new List<LibraryFile>();
+            this.DeadLinks = new List<ILibraryFile>();
+            this.ExpiredLinks = new List<ILibraryFile>();
             this.AutoWidgets = new List<AutoWidget>();
 
             #region Auto Sync Settings
@@ -109,7 +110,7 @@ namespace FileManager.BusinessClasses
 
         private void CheckIfOldFormat()
         {
-            string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
+            string file = Path.Combine(this.Folder.FullName, Constants.StorageFileName);
             if (File.Exists(file))
             {
                 XmlDocument document = new XmlDocument();
@@ -154,7 +155,7 @@ namespace FileManager.BusinessClasses
             this.SyncScheduleRecords.Clear();
             this.ExtraFolders.Clear();
 
-            string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
+            string file = Path.Combine(this.Folder.FullName, Constants.StorageFileName);
             if (File.Exists(file))
             {
                 XmlDocument document = new XmlDocument();
@@ -415,7 +416,7 @@ namespace FileManager.BusinessClasses
 
             xml.AppendLine(@"</Library>");
 
-            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName), false))
+            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, Constants.StorageFileName), false))
             {
                 sw.Write(xml.ToString());
                 sw.Flush();
@@ -429,32 +430,46 @@ namespace FileManager.BusinessClasses
             xml.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             xml.AppendLine(@"</Library>");
 
-            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageLightFileName), false))
+            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, Constants.StorageLightFileName), false))
             {
                 sw.Write(xml.ToString());
                 sw.Flush();
             }
         }
 
+        public ILibraryFile GetLinkInstance(LibraryFolder parentFolder)
+        {
+            return new LibraryFile(parentFolder);
+        }
+
         public void PrepareForRegularSynchronize()
         {
-            this.SyncDate = DateTime.Now;
-            if (this.IsConfigured)
-                Save();
-            if (!this.UseDirectAccess)
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
             {
-                GeneratePresentationPreviewFiles();
-                NotifyAboutExpiredLinks();
+                this.SyncDate = DateTime.Now;
+                if (this.IsConfigured)
+                    Save();
+                if (!this.UseDirectAccess)
+                {
+                    GeneratePresentationPreviewFiles();
+                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        NotifyAboutExpiredLinks();
+                }
             }
-            Archive();
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                Archive();
         }
 
         public void PrepareForIPadSynchronize()
         {
-            if (!this.UseDirectAccess)
-                GenerateExtendedPreviewFiles();
-            this.SaveLight();
-            Archive();
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                if (!this.UseDirectAccess)
+                    GenerateExtendedPreviewFiles();
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            {
+                this.SaveLight();
+                Archive();
+            }
         }
 
         private void ProceedDeadLinks()
@@ -483,7 +498,7 @@ namespace FileManager.BusinessClasses
             {
                 foreach (LibraryPage page in this.Pages)
                     foreach (LibraryFolder folder in page.Folders)
-                        foreach (LibraryFile file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.FullPath) > x.PresentationProperties.LastUpdate)))
+                        foreach (LibraryFile file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
                             file.GetPresentationPrperties();
                 InteropClasses.PowerPointHelper.Instance.Disconnect();
                 this.Save();
@@ -493,31 +508,55 @@ namespace FileManager.BusinessClasses
         private void GeneratePresentationPreviewFiles()
         {
             foreach (LibraryPage page in this.Pages)
+            {
                 foreach (LibraryFolder folder in page.Folders)
                 {
-                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation))
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
                     {
-                        if (file.PreviewContainer == null)
-                            file.PreviewContainer = new PresentationPreviewContainer(file);
-                        file.PreviewContainer.UpdateContent();
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        {
+                            if (file.PreviewContainer == null)
+                                file.PreviewContainer = new PresentationPreviewContainer(file);
+                            file.PreviewContainer.UpdateContent();
+                        }
+                        else
+                            break;
                     }
+                    if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                        break;
                 }
-            this.Save();
+                if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    break;
+            }
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                this.Save();
         }
 
         private void GenerateExtendedPreviewFiles()
         {
             foreach (LibraryPage page in this.Pages)
+            {
                 foreach (LibraryFolder folder in page.Folders)
                 {
-                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation || x.Type == FileTypes.Other))
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
                     {
-                        if (file.UniversalPreviewContainer == null)
-                            file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
-                        file.UniversalPreviewContainer.UpdateContent();
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        {
+                            if (file.UniversalPreviewContainer == null)
+                                file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
+                            file.UniversalPreviewContainer.UpdateContent();
+                        }
+                        else
+                            break;
                     }
+                    if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                        break;
                 }
-            this.Save();
+                if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    break;
+            }
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                this.Save();
         }
 
         public void GenerateVideoPreviewFiles()
@@ -556,7 +595,7 @@ namespace FileManager.BusinessClasses
             {
                 if (InteropClasses.OutlookHelper.Instance.Connect())
                 {
-                    InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.FullPath)));
+                    InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)));
                     InteropClasses.OutlookHelper.Instance.Disconnect();
                 }
                 else

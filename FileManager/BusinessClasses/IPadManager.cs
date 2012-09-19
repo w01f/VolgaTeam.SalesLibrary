@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SalesDepot.CoreObjects;
 
 namespace FileManager.BusinessClasses
 {
@@ -16,6 +17,7 @@ namespace FileManager.BusinessClasses
         public string Website { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
+        public DateTime LastSync { get; set; }
 
         public IPadManager(Library parent)
         {
@@ -33,11 +35,13 @@ namespace FileManager.BusinessClasses
             result.AppendLine(@"<Website>" + this.Website.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Website>");
             result.AppendLine(@"<User>" + this.Login.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</User>");
             result.AppendLine(@"<Password>" + this.Password.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Password>");
+            result.AppendLine(@"<LastSync>" + this.LastSync.ToString() + @"</LastSync>");
             return result.ToString();
         }
 
         public void Deserialize(XmlNode node)
         {
+            DateTime tempDateTime;
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 switch (childNode.Name)
@@ -54,6 +58,10 @@ namespace FileManager.BusinessClasses
                     case "Password":
                         this.Password = childNode.InnerText;
                         break;
+                    case "LastSync":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
+                            this.LastSync = tempDateTime;
+                        break;
                 }
             }
         }
@@ -64,6 +72,7 @@ namespace FileManager.BusinessClasses
             try
             {
                 ContentManagmentService.ContentControllerService client = new ContentManagmentService.ContentControllerService();
+                client.Timeout = 30000;
                 client.Url = string.Format("{0}/content/quote?ws=1", this.Website);
                 return client;
             }
@@ -76,32 +85,24 @@ namespace FileManager.BusinessClasses
         public void UpdateLibraryOnServer(out string message)
         {
             message = string.Empty;
+            ContentManagmentService.Library library = PrepareServerLibrary();
+
+            #region Fill Data
             ContentManagmentService.ContentControllerService client = GetDataManagmentClient();
             if (client != null)
             {
                 try
                 {
-                    ContentManagmentService.Library library = PrepareServerLibrary();
-
                     string sessionKey = client.getSessionKey(this.Login, this.Password);
                     if (!string.IsNullOrEmpty(sessionKey))
-                        client.setLibrary(sessionKey, library);
-                    else
-                        message = "Couldn't complete operation.\nLogin or password are not correct.";
-
-                    sessionKey = client.getSessionKey(this.Login, this.Password);
-                    if (!string.IsNullOrEmpty(sessionKey))
                     {
-                        foreach (LibraryPage page in this.Parent.Pages)
-                            foreach (LibraryFolder folder in page.Folders)
-                                foreach (LibraryFile file in folder.Files)
-                                {
-                                    string content = file.Content;
-                                    if (!string.IsNullOrEmpty(content))
-                                        client.setContent(sessionKey, file.Identifier.ToString(), content);
-                                }
-
-                        client.buildCache(sessionKey, this.Parent.Identifier.ToString());
+                        client = GetDataManagmentClient();
+                        if (client != null)
+                        {
+                            client.setLibrary(sessionKey, library);
+                        }
+                        else
+                            message = "Couldn't complete operation.\nServer is unavailable.";
                     }
                     else
                         message = "Couldn't complete operation.\nLogin or password are not correct.";
@@ -113,6 +114,81 @@ namespace FileManager.BusinessClasses
             }
             else
                 message = "Couldn't complete operation.\nServer is unavailable.";
+            #endregion
+
+            #region Fill Text Content
+            if (string.IsNullOrEmpty(message))
+            {
+                try
+                {
+                    client = GetDataManagmentClient();
+                    if (client != null)
+                    {
+                        string sessionKey = client.getSessionKey(this.Login, this.Password);
+                        if (!string.IsNullOrEmpty(sessionKey))
+                        {
+                            foreach (LibraryPage page in this.Parent.Pages)
+                                foreach (LibraryFolder folder in page.Folders)
+                                    foreach (LibraryFile file in folder.Files)
+                                    {
+                                        string content = file.Content;
+                                        if (!string.IsNullOrEmpty(content))
+                                        {
+                                            client = GetDataManagmentClient();
+                                            if (client != null)
+                                            {
+                                                client.setContent(sessionKey, file.Identifier.ToString(), content);
+                                            }
+                                            else
+                                                message = "Couldn't complete operation.\nServer is unavailable.";
+                                        }
+                                    }
+                        }
+                        else
+                            message = "Couldn't complete operation.\nLogin or password are not correct.";
+                    }
+                    else
+                        message = "Couldn't complete operation.\nServer is unavailable.";
+                }
+                catch (Exception ex)
+                {
+                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+                }
+            }
+            #endregion
+
+            #region Build Cache
+            if (string.IsNullOrEmpty(message))
+            {
+                try
+                {
+                    client = GetDataManagmentClient();
+                    if (client != null)
+                    {
+                        string sessionKey = client.getSessionKey(this.Login, this.Password);
+                        if (!string.IsNullOrEmpty(sessionKey))
+                        {
+                            client = GetDataManagmentClient();
+                            if (client != null)
+                            {
+                                client.buildCache(sessionKey, this.Parent.Identifier.ToString());
+                            }
+                            else
+                                message = "Couldn't complete operation.\nServer is unavailable.";
+                        }
+                        else
+                            message = "Couldn't complete operation.\nLogin or password are not correct.";
+
+                    }
+                    else
+                        message = "Couldn't complete operation.\nServer is unavailable.";
+                }
+                catch (Exception ex)
+                {
+                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+                }
+            }
+            #endregion
         }
 
         private ContentManagmentService.Library PrepareServerLibrary()
@@ -234,10 +310,10 @@ namespace FileManager.BusinessClasses
                         link.libraryId = this.Parent.Identifier.ToString();
                         link.name = libraryFile.Name;
                         link.fileRelativePath = libraryFile.RelativePath;
-                        if (File.Exists(libraryFile.FullPath))
+                        if (File.Exists(libraryFile.OriginalPath))
                         {
-                            link.fileName = Path.GetFileName(libraryFile.FullPath);
-                            link.fileExtension = Path.GetExtension(libraryFile.FullPath).Replace(".", string.Empty).ToLower();
+                            link.fileName = Path.GetFileName(libraryFile.OriginalPath);
+                            link.fileExtension = Path.GetExtension(libraryFile.OriginalPath).Replace(".", string.Empty).ToLower();
                         }
                         else
                         {
@@ -453,11 +529,11 @@ namespace FileManager.BusinessClasses
         {
             get
             {
-                List<LibraryFile> videoLinks = new List<LibraryFile>();
+                List<ILibraryFile> videoLinks = new List<ILibraryFile>();
                 foreach (LibraryPage page in this.Parent.Pages)
                     foreach (LibraryFolder folder in page.Folders)
                         videoLinks.AddRange(folder.Files.Where(x => x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo));
-                videoLinks.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(Path.GetFileName(x.FullPath), Path.GetFileName(y.FullPath)));
+                videoLinks.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(Path.GetFileName(x.OriginalPath), Path.GetFileName(y.OriginalPath)));
 
                 List<VideoInfo> videoFiles = new List<VideoInfo>();
                 int i = 1;
@@ -465,8 +541,8 @@ namespace FileManager.BusinessClasses
                 {
                     VideoInfo videoFile = new VideoInfo(videoLink);
                     videoFile.Index = i.ToString();
-                    videoFile.SourceFileName = Path.GetFileName(videoLink.FullPath);
-                    videoFile.SourceFilePath = videoLink.FullPath;
+                    videoFile.SourceFileName = Path.GetFileName(videoLink.OriginalPath);
+                    videoFile.SourceFilePath = videoLink.OriginalPath;
                     if (videoLink.UniversalPreviewContainer != null)
                     {
                         if (Directory.Exists(videoLink.UniversalPreviewContainer.ContainerPath))
@@ -474,7 +550,7 @@ namespace FileManager.BusinessClasses
                         else
                             videoFile.IPadFolderPath = null;
 
-                        string mp4Path = Path.Combine(videoLink.UniversalPreviewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(videoLink.FullPath, ".mp4")));
+                        string mp4Path = Path.Combine(videoLink.UniversalPreviewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(videoLink.OriginalPath, ".mp4")));
                         if (File.Exists(mp4Path))
                         {
                             videoFile.Mp4FileName = Path.GetFileName(mp4Path);
@@ -487,7 +563,7 @@ namespace FileManager.BusinessClasses
                             videoFile.Mp4FilePath = null;
                             videoFile.IPadCompatible = "NO!";
                         }
-                        string ogvPath = Path.Combine(videoLink.UniversalPreviewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(videoLink.FullPath, ".ogv")));
+                        string ogvPath = Path.Combine(videoLink.UniversalPreviewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(videoLink.OriginalPath, ".ogv")));
                         if (File.Exists(ogvPath))
                         {
                             videoFile.OgvFileName = Path.GetFileName(ogvPath);

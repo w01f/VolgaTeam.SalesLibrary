@@ -28,7 +28,7 @@ namespace FileManager.BusinessClasses
         {
             this.Parent = parent;
             this.ContainerID = Guid.NewGuid().ToString();
-            switch (Path.GetExtension(this.Parent.FullPath).ToUpper())
+            switch (Path.GetExtension(this.Parent.OriginalPath).ToUpper())
             {
                 case ".PPT":
                 case ".PPTX":
@@ -37,7 +37,7 @@ namespace FileManager.BusinessClasses
                 case ".XLS":
                 case ".XLSX":
                 case ".PDF":
-                    this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
+                    this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
                     break;
                 case ".MPEG":
                 case ".WMV":
@@ -52,7 +52,7 @@ namespace FileManager.BusinessClasses
                 case ".OGV":
                 case ".OGM":
                 case ".OGX":
-                    this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
+                    this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
                     break;
             }
         }
@@ -77,7 +77,7 @@ namespace FileManager.BusinessClasses
                 {
                     case "FolderName":
                         this.ContainerID = childNode.InnerText;
-                        switch (Path.GetExtension(this.Parent.FullPath).ToUpper())
+                        switch (Path.GetExtension(this.Parent.OriginalPath).ToUpper())
                         {
                             case ".PPT":
                             case ".PPTX":
@@ -86,7 +86,7 @@ namespace FileManager.BusinessClasses
                             case ".XLS":
                             case ".XLSX":
                             case ".PDF":
-                                this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
+                                this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
                                 break;
                             case ".MPEG":
                             case ".WMV":
@@ -101,7 +101,7 @@ namespace FileManager.BusinessClasses
                             case ".OGV":
                             case ".OGM":
                             case ".OGX":
-                                this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
+                                this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
                                 break;
                         }
                         break;
@@ -142,10 +142,10 @@ namespace FileManager.BusinessClasses
                     foreach (string thumbFile in Directory.GetFiles(thumbsFolder, "*.png"))
                     {
                         try
-                        { 
+                        {
                             size = Image.FromFile(thumbFile).Size;
                         }
-                        catch{}
+                        catch { }
                     }
             }
             return size;
@@ -181,19 +181,23 @@ namespace FileManager.BusinessClasses
 
         public void UpdateContent()
         {
-            FileInfo parentFile = new FileInfo(this.Parent.FullPath);
+            FileInfo parentFile = new FileInfo(this.Parent.OriginalPath);
             if (!string.IsNullOrEmpty(this.ContainerPath))
             {
                 DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
                 bool update = false;
                 if (!previewFolder.Exists)
                     update = true;
-                else if (parentFile.LastWriteTime > previewFolder.CreationTime)
-                    update = true;
-                else if (!parentFile.Exists)
-                    update = true;
                 else
-                    update = false;
+                {
+                    TimeSpan time = parentFile.LastWriteTime.Subtract(previewFolder.CreationTime);
+                    if (time.Minutes > 0)
+                        update = true;
+                    else if (!parentFile.Exists)
+                        update = true;
+                    else
+                        update = false;
+                }
                 if (previewFolder.Exists && update)
                     ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 if (parentFile.Exists)
@@ -234,7 +238,7 @@ namespace FileManager.BusinessClasses
                     }
                     if (previewGenerator != null)
                     {
-                        previewGenerator.SourceFile = this.Parent.FullPath;
+                        previewGenerator.SourceFile = this.Parent.OriginalPath;
                         previewGenerator.ContainerPath = this.ContainerPath;
                         previewGenerator.GeneratePreview();
                     }
@@ -261,7 +265,7 @@ namespace FileManager.BusinessClasses
         {
             this.Parent = parent;
             this.ContainerID = Guid.NewGuid().ToString();
-            this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.RegularPreviewContainersRootFolderName, this.ContainerID);
+            this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.RegularPreviewContainersRootFolderName, this.ContainerID);
         }
 
         #region PreviewContainer Members
@@ -284,7 +288,7 @@ namespace FileManager.BusinessClasses
                 {
                     case "FolderName":
                         this.ContainerID = childNode.InnerText;
-                        this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.RegularPreviewContainersRootFolderName, this.ContainerID);
+                        this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.RegularPreviewContainersRootFolderName, this.ContainerID);
                         break;
                 }
             }
@@ -305,7 +309,7 @@ namespace FileManager.BusinessClasses
         {
             ClearOldPreviewImages();
 
-            FileInfo parentFile = new FileInfo(this.Parent.FullPath);
+            FileInfo parentFile = new FileInfo(this.Parent.OriginalPath);
             DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
             bool needToUpdate = false;
             if (!previewFolder.Exists)
@@ -316,12 +320,12 @@ namespace FileManager.BusinessClasses
                 needToUpdate = false;
             if (needToUpdate)
             {
-                if (!Directory.Exists(Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.RegularPreviewContainersRootFolderName)))
-                    Directory.CreateDirectory(Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, ConfigurationClasses.SettingsManager.RegularPreviewContainersRootFolderName));
+                if (!Directory.Exists(Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.RegularPreviewContainersRootFolderName)))
+                    Directory.CreateDirectory(Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, SalesDepot.CoreObjects.Constants.RegularPreviewContainersRootFolderName));
                 if (previewFolder.Exists)
                     ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 Directory.CreateDirectory(this.ContainerPath);
-                InteropClasses.PowerPointHelper.Instance.ExportPresentationAsImages(this.Parent.FullPath, this.ContainerPath);
+                InteropClasses.PowerPointHelper.Instance.ExportPresentationAsImages(this.Parent.OriginalPath, this.ContainerPath);
             }
         }
 
@@ -342,9 +346,9 @@ namespace FileManager.BusinessClasses
         {
             if (this.Parent.Parent != null)
             {
-                DirectoryInfo folder = new FileInfo(this.Parent.FullPath).Directory;
-                if (folder.Exists && folder.GetDirectories("*" + ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix + "*").Length > 0)
-                    ToolClasses.SyncManager.DeleteFolder(folder, ConfigurationClasses.SettingsManager.OldPreviewFolderPrefix);
+                DirectoryInfo folder = new FileInfo(this.Parent.OriginalPath).Directory;
+                if (folder.Exists && folder.GetDirectories("*" + SalesDepot.CoreObjects.Constants.OldPreviewFolderPrefix + "*").Length > 0)
+                    ToolClasses.SyncManager.DeleteFolder(folder, SalesDepot.CoreObjects.Constants.OldPreviewFolderPrefix);
             }
         }
     }

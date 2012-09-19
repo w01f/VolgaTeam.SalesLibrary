@@ -67,37 +67,60 @@ namespace FileManager.TabPages
             }
         }
 
+        public void buttonItemIPadSyncData_Click(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
+            {
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateLibraryOnServer();
+            }
+        }
+
         public void buttonItemIPadSyncFiles_Click(object sender, EventArgs e)
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
             {
-                using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+                using (ToolForms.FormProgressSyncFilesIPad form = new ToolForms.FormProgressSyncFilesIPad())
                 {
+                    form.CloseAfterSync = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync;
+                    form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
+                    {
+                        AppManager.Instance.ThreadAborted = true;
+                    });
                     FormMain.Instance.ribbonControl.Enabled = false;
                     this.Enabled = false;
                     SaveIPadSettings();
-                    form.laProgress.Text = "Updating Files for the iPad..." + Environment.NewLine + "This might take a few minutes...";
-                    form.TopMost = true;
                     Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
+                        AppManager.Instance.ThreadActive = true;
+                        AppManager.Instance.ThreadAborted = false;
                         AppManager.Instance.KillAutoFM();
-                        PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.PrepareForIPadSynchronize();
-                        BusinessClasses.LibraryManager.Instance.SynchronizeLibraryForIpad(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                            PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.PrepareForIPadSynchronize();
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                            BusinessClasses.LibraryManager.Instance.SynchronizeLibraryForIpad(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
                         AppManager.Instance.RunAutoFM();
                     }));
                     form.Show();
+                    FormWindowState savedState = FormMain.Instance.WindowState;
+                    if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.MinimizeOnSync)
+                        FormMain.Instance.WindowState = FormWindowState.Minimized;
                     thread.Start();
                     while (thread.IsAlive)
                     {
                         Thread.Sleep(100);
                         System.Windows.Forms.Application.DoEvents();
                     }
+                    AppManager.Instance.ThreadActive = false;
+                    AppManager.Instance.ThreadAborted = false;
                     form.Close();
                     this.Enabled = true;
                     FormMain.Instance.ribbonControl.Enabled = true;
-                }
 
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateLibraryOnServer();
+                    if (form.CloseAfterSync)
+                        Application.Exit();
+                    else
+                        FormMain.Instance.WindowState = savedState;
+                }
             }
         }
 

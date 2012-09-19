@@ -35,18 +35,7 @@ namespace SalesDepot.ConfigurationClasses
         private static SettingsManager _instance = new SettingsManager();
 
         private const string DefaultUserName = "Default";
-        public const string UserSettingsFileName = @"SalesDepotUserSettings.xml";
-        public const string StorageFileName = @"SalesDepotCache.xml";
-        public const string StyleFileName = @"SalesDepotStyle.xml";
-        public const string WholeDriveFilesStorage = @"Primary Root";
-        public const string UserSettingsFile = @"ViewSettings.xml";
-        public const string PreviewFolderPrefix = @"!PNG_";
         public const string ContentsSlideName = @"WizContents.ppt";
-        public const string PreviewContainersRootFolderName = @"!QV";
-        public const string OvernightsCalendarRootFolderName = @"!OC";
-        public const string ProgramManagerRootFolderName = @"!PM";
-        public const string ExtraFoldersRootFolderName = @"!Extra Roots";
-        public const string SweepPeriodsFileName = @"SweepPeriods.xml";
         public const string NoLogoFileName = @"no_logo.png";
         public const string PageLogoFileTemplate = @"page{0}.*";
 
@@ -189,10 +178,10 @@ namespace SalesDepot.ConfigurationClasses
 
             this.HiddenObjects = new List<string>();
             this.HiddenObjects.Add("!Old");
-            this.HiddenObjects.Add(PreviewContainersRootFolderName);
-            this.HiddenObjects.Add(OvernightsCalendarRootFolderName);
-            this.HiddenObjects.Add(ProgramManagerRootFolderName);
-            this.HiddenObjects.Add(ExtraFoldersRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.Constants.RegularPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.Constants.OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.Constants.ProgramManagerRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.Constants.ExtraFoldersRootFolderName);
             this.HiddenObjects.Add("thumbs.db");
             this.HiddenObjects.Add("SalesDepotCache.xml");
         }

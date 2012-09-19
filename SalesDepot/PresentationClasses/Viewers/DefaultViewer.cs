@@ -45,9 +45,9 @@ namespace SalesDepot.PresentationClasses.Viewers
 
             switch (this.File.Type)
             {
-                case BusinessClasses.FileTypes.BuggyPresentation:
-                case BusinessClasses.FileTypes.FriendlyPresentation:
-                case BusinessClasses.FileTypes.Presentation:
+                case CoreObjects.FileTypes.BuggyPresentation:
+                case CoreObjects.FileTypes.FriendlyPresentation:
+                case CoreObjects.FileTypes.Presentation:
                     laMessage.Text = "Double-Click PowerPoint files to preview";
                     break;
                 default:
@@ -65,17 +65,17 @@ namespace SalesDepot.PresentationClasses.Viewers
         {
             switch (this.File.Type)
             {
-                case BusinessClasses.FileTypes.Other:
-                case BusinessClasses.FileTypes.QuickTimeVideo:
+                case CoreObjects.FileTypes.Other:
+                case CoreObjects.FileTypes.QuickTimeVideo:
                     BusinessClasses.LinkManager.Instance.OpenCopyOfFile(this.File);
                     break;
-                case BusinessClasses.FileTypes.Folder:
+                case CoreObjects.FileTypes.Folder:
                     BusinessClasses.LinkManager.Instance.OpenFolder(this.File);
                     break;
-                case BusinessClasses.FileTypes.Url:
+                case CoreObjects.FileTypes.Url:
                     BusinessClasses.LinkManager.Instance.StartProcess(this.File);
                     break;
-                case BusinessClasses.FileTypes.Network:
+                case CoreObjects.FileTypes.Network:
                     BusinessClasses.LinkManager.Instance.StartProcess(this.File);
                     break;
                 default:

@@ -105,7 +105,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
         public void Print()
         {
-            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.File.Name, this.File.Type.ToString(), this.File.RemotePath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
+            AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", this.File.Name, this.File.Type.ToString(), this.File.OriginalPath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
             InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
             InteropClasses.PowerPointHelper.Instance.PrintPresentation(this.File.PreviewContainer.SelectedIndex + 1);
         }
@@ -132,7 +132,7 @@ namespace SalesDepot.PresentationClasses.Viewers
                     {
                         AppManager.Instance.ActivatePowerPoint();
                         AppManager.Instance.ActivateMiniBar();
-                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.File.Name, this.File.Type.ToString(), this.File.RemotePath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
+                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", this.File.Name, this.File.Type.ToString(), this.File.OriginalPath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
                         InteropClasses.PowerPointHelper.Instance.AppendSlide(this.File.PreviewContainer.SelectedIndex + 1);
                     });
@@ -191,7 +191,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 
                         progressForm.Close();
 
-                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.File.Name, this.File.Type.ToString(), this.File.RemotePath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
+                        AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", this.File.Name, this.File.Type.ToString(), this.File.OriginalPath, this.File.Parent.Parent.Parent.Name, this.File.Parent.Parent.Name);
                         BusinessClasses.LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
                     }
                 }

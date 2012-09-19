@@ -10,7 +10,8 @@
 
 #pragma warning disable 1591
 
-namespace FileManager.BusinessClasses {
+namespace SalesDepot.CoreObjects
+{
     
     
     /// <summary>

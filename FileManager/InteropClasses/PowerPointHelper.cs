@@ -282,9 +282,9 @@ namespace FileManager.InteropClasses
             try
             {
                 MessageFilter.Register();
-                PowerPoint.Presentation presentation = _powerPointObject.Presentations.Open(FileName: file.FullPath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
+                PowerPoint.Presentation presentation = _powerPointObject.Presentations.Open(FileName: file.OriginalPath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
                 if (file.PresentationProperties == null)
-                    file.PresentationProperties = new BusinessClasses.PresentationProperties();
+                    file.PresentationProperties = new SalesDepot.CoreObjects.PresentationProperties();
                 file.PresentationProperties.Height = presentation.PageSetup.SlideHeight / 72;
                 file.PresentationProperties.Width = presentation.PageSetup.SlideWidth / 72;
                 file.PresentationProperties.LastUpdate = DateTime.Now;

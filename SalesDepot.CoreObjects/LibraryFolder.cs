@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects
 {
     public class LibraryFolder
     {
@@ -27,7 +28,15 @@ namespace FileManager.BusinessClasses
         public Image Widget { get; set; }
         public BannerProperties BannerProperties { get; set; }
 
-        public List<LibraryFile> Files { get; set; }
+        public List<ILibraryFile> Files { get; set; }
+
+        public double AbsoluteRowOrder
+        {
+            get
+            {
+                return this.Parent.Folders.Where(x => x.ColumnOrder < this.ColumnOrder).Count() + this.Parent.Folders.Where(x => x.ColumnOrder == this.ColumnOrder).ToList().IndexOf(this);
+            }
+        }
 
         public LibraryFolder(LibraryPage parent)
         {
@@ -49,7 +58,7 @@ namespace FileManager.BusinessClasses
             this.BannerProperties.Font = this.HeaderFont;
             this.BannerProperties.ForeColor = this.ForeHeaderColor;
 
-            this.Files = new List<LibraryFile>();
+            this.Files = new List<ILibraryFile>();
         }
 
         public string Serialize()
@@ -73,7 +82,7 @@ namespace FileManager.BusinessClasses
             result.AppendLine(@"<Widget>" + Convert.ToBase64String((byte[])imageConverter.ConvertTo(this.Widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
             result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
             result.AppendLine("<Files>");
-            foreach (LibraryFile file in this.Files)
+            foreach (ILibraryFile file in this.Files)
                 result.AppendLine(@"<File>" + file.Serialize() + @"</File>");
             result.AppendLine("</Files>");
             return result.ToString();
@@ -162,7 +171,7 @@ namespace FileManager.BusinessClasses
                         this.Files.Clear();
                         foreach (XmlNode fileNode in childNode.ChildNodes)
                         {
-                            LibraryFile file = new LibraryFile(this);
+                            ILibraryFile file = this.Parent.Parent.GetLinkInstance(this);
                             file.Deserialize(fileNode);
                             this.Files.Add(file);
                         }
@@ -180,6 +189,106 @@ namespace FileManager.BusinessClasses
         public void RemoveFromParent()
         {
             this.Parent.Folders.Remove(this);
+        }
+
+        public ILibraryFile[] SearchByTags(LibraryFileSearchTags searchCriteria)
+        {
+            List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+            foreach (ILibraryFile file in this.Files.Where(x => x.Type != FileTypes.LineBreak))
+            {
+                bool fullMatch = true;
+                bool partialMatch = false;
+                foreach (SearchGroup group in searchCriteria.SearchGroups)
+                {
+                    SearchGroup fileSearchGroup = file.SearchTags.SearchGroups.Where(x => x.Name.Equals(group.Name)).FirstOrDefault();
+                    if (fileSearchGroup != null)
+                    {
+                        foreach (string tag in group.Tags)
+                            if (fileSearchGroup.Tags.Contains(tag))
+                            {
+                                partialMatch = true;
+                                fullMatch = fullMatch & true;
+                            }
+                            else
+                            {
+                                fullMatch = fullMatch & false;
+                            }
+                    }
+                    else
+                        fullMatch = fullMatch & false;
+                }
+                if (partialMatch)
+                {
+                    file.CriteriaOverlap = fullMatch ? "meet ALL of your Search Criteria" : "meet SOME of your Search Criteria";
+                    searchFiles.Add(file);
+                }
+                else
+                    file.CriteriaOverlap = string.Empty;
+            }
+            return searchFiles.ToArray();
+        }
+
+        public ILibraryFile[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
+        {
+            string[] templateParts = template.Split(' ');
+            List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+            foreach (ILibraryFile file in this.Files.Where(x => x.Type != FileTypes.LineBreak))
+            {
+                bool fullMatch = false;
+                bool partialMatch = false;
+
+                if (file.Name.ToLower().Equals(template) && !string.IsNullOrEmpty(template) && ((type == file.Type) || (type == FileTypes.Other)))
+                {
+                    fullMatch = true;
+                    partialMatch = true;
+                }
+                else if (!string.IsNullOrEmpty(template) && ((type == file.Type) || (type == FileTypes.Other)))
+                {
+                    if (templateParts.Length > 1)
+                    {
+                        foreach (string templatePart in templateParts)
+                            if (file.Name.ToLower().Contains(templatePart.Trim().ToLower()))
+                            {
+                                fullMatch = false;
+                                partialMatch = true;
+                                break;
+                            }
+                    }
+                    else if (file.Name.ToLower().Contains(template))
+                    {
+                        fullMatch = false;
+                        partialMatch = true;
+                    }
+                }
+
+                if ((partialMatch && !fullMatchOnly) || fullMatch)
+                {
+                    file.CriteriaOverlap = fullMatch ? "meet ALL of your Search Criteria" : "meet SOME of your Search Criteria";
+                    searchFiles.Add(file);
+                }
+            }
+            return searchFiles.ToArray();
+        }
+
+        public ILibraryFile[] SearchByDate(DateTime startDate, DateTime endDate)
+        {
+            List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+            foreach (ILibraryFile file in this.Files.Where(x => x.Type != FileTypes.LineBreak))
+            {
+                bool fullMatch = false;
+
+                if (file.AddDate >= startDate && file.AddDate <= endDate)
+                    fullMatch = true;
+
+                if (fullMatch)
+                {
+                    file.CriteriaOverlap = "meet ALL of your Search Criteria";
+                    searchFiles.Add(file);
+                }
+                else
+                    file.CriteriaOverlap = string.Empty;
+            }
+            return searchFiles.ToArray();
         }
     }
 }

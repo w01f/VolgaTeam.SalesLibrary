@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects
 {
     public enum OldFormatLibraryStyles
     {

@@ -25,7 +25,7 @@ namespace FileManager.ToolForms.Settings
 
         private void LoadPages()
         {
-            gridControlPages.DataSource = new BindingList<BusinessClasses.LibraryPage>(this.Library.Pages);
+            gridControlPages.DataSource = new BindingList<SalesDepot.CoreObjects.LibraryPage>(this.Library.Pages);
         }
 
         private void FormPages_FormClosing(object sender, FormClosingEventArgs e)
@@ -76,7 +76,7 @@ namespace FileManager.ToolForms.Settings
         private void buttonXAdd_Click(object sender, EventArgs e)
         {
             this.Library.AddPage();
-            ((BindingList<BusinessClasses.LibraryPage>)gridControlPages.DataSource).ResetBindings();
+            ((BindingList<SalesDepot.CoreObjects.LibraryPage>)gridControlPages.DataSource).ResetBindings();
             gridViewPages.FocusedRowHandle = gridViewPages.RowCount - 1;
         }
 

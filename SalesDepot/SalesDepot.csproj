@@ -104,7 +104,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\Library.cs" />
+    <Compile Include="BusinessClasses\LibraryFile.cs" />
+    <Compile Include="BusinessClasses\LibraryPackage.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
+    <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\ProgramScheduleManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
     <Compile Include="FormFloater.cs">
@@ -305,7 +309,6 @@
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\LibraryDecorator.cs" />
-    <Compile Include="BusinessClasses\LibraryObjects.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\PageDecorator.cs" />
     <Compile Include="ToolClasses\ExceptionManager.cs" />
     <Compile Include="FormMain.cs">
@@ -712,6 +715,10 @@
     <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
       <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
       <Name>OldFormatLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
+      <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
+      <Name>SalesDepot.CoreObjects</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharpZLib\SharpZLib.csproj">
       <Project>{0E7413FF-EB9E-4714-ACF2-BE3A6A7B2FFD}</Project>

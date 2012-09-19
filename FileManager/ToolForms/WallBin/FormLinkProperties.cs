@@ -15,10 +15,10 @@ namespace FileManager.ToolForms.WallBin
         public bool IsLineBreak { get; set; }
 
         public DateTime AddDate { get; set; }
-        public BusinessClasses.LibraryFileSearchTags SearchTags { get; set; }
-        public BusinessClasses.ExpirationDateOptions ExpirationDateOptions { get; set; }
-        public BusinessClasses.LineBreakProperties LineBreakProperties { get; set; }
-        public BusinessClasses.BannerProperties BannerProperties { get; set; }
+        public SalesDepot.CoreObjects.LibraryFileSearchTags SearchTags { get; set; }
+        public SalesDepot.CoreObjects.ExpirationDateOptions ExpirationDateOptions { get; set; }
+        public SalesDepot.CoreObjects.LineBreakProperties LineBreakProperties { get; set; }
+        public SalesDepot.CoreObjects.BannerProperties BannerProperties { get; set; }
         public bool EnableWidget { get; set; }
         public Image Widget { get; set; }
 
@@ -69,8 +69,8 @@ namespace FileManager.ToolForms.WallBin
 
             if (!this.IsLineBreak)
             {
-                this.SearchTags = new BusinessClasses.LibraryFileSearchTags();
-                this.ExpirationDateOptions = new BusinessClasses.ExpirationDateOptions();
+                this.SearchTags = new SalesDepot.CoreObjects.LibraryFileSearchTags();
+                this.ExpirationDateOptions = new SalesDepot.CoreObjects.ExpirationDateOptions();
                 dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
 
                 if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 0)
@@ -246,7 +246,7 @@ namespace FileManager.ToolForms.WallBin
 
                 if (checkedListBoxControlGroup1.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup1.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -255,7 +255,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (checkedListBoxControlGroup2.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup2.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -264,7 +264,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (checkedListBoxControlGroup3.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup3.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -273,7 +273,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (checkedListBoxControlGroup4.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup4.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -282,7 +282,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (checkedListBoxControlGroup5.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup5.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -291,7 +291,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (checkedListBoxControlGroup6.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup6.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -300,7 +300,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (checkedListBoxControlGroup7.CheckedItemsCount > 0)
                 {
-                    ConfigurationClasses.SearchGroup group = new ConfigurationClasses.SearchGroup();
+                    SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
                     group.Name = navBarGroup7.Caption;
                     foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
                         if (item.CheckState == CheckState.Checked)
@@ -327,11 +327,11 @@ namespace FileManager.ToolForms.WallBin
             this.BannerProperties.Enable = checkBoxEnableBanner.Checked;
             this.BannerProperties.Image = pbSelectedBanner.Image;
             if (rbBannerAligmentLeft.Checked)
-                this.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Left;
+                this.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Left;
             else if (rbBannerAligmentCenter.Checked)
-                this.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Center;
+                this.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Center;
             else if (rbBannerAligmentRight.Checked)
-                this.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Right;
+                this.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Right;
             this.BannerProperties.ShowText = checkBoxBannerShowText.Checked;
             this.BannerProperties.Text = memoEditBannerText.EditValue != null ? memoEditBannerText.EditValue.ToString() : string.Empty;
             this.BannerProperties.Font = buttonEditBannerTextFont.Tag as Font;
@@ -357,7 +357,7 @@ namespace FileManager.ToolForms.WallBin
             {
                 if (navBarGroup1.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup1.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup1.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -365,7 +365,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (navBarGroup2.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup2.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup2.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -373,7 +373,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (navBarGroup3.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup3.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup3.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -381,7 +381,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (navBarGroup4.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup4.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup4.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -389,7 +389,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (navBarGroup5.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup5.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup5.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -397,7 +397,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (navBarGroup6.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup6.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup6.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -405,7 +405,7 @@ namespace FileManager.ToolForms.WallBin
                 }
                 if (navBarGroup7.Visible)
                 {
-                    ConfigurationClasses.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup7.Caption)).FirstOrDefault();
+                    SalesDepot.CoreObjects.SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup7.Caption)).FirstOrDefault();
                     if (group != null)
                         foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
                             if (group.Tags.Contains(item.Value.ToString()))
@@ -434,17 +434,17 @@ namespace FileManager.ToolForms.WallBin
             pbSelectedBanner.Image = this.BannerProperties.Enable ? this.BannerProperties.Image : null;
             switch (this.BannerProperties.ImageAlignement)
             {
-                case BusinessClasses.Alignment.Left:
+                case SalesDepot.CoreObjects.Alignment.Left:
                     rbBannerAligmentLeft.Checked = true;
                     rbBannerAligmentCenter.Checked = false;
                     rbBannerAligmentRight.Checked = false;
                     break;
-                case BusinessClasses.Alignment.Center:
+                case SalesDepot.CoreObjects.Alignment.Center:
                     rbBannerAligmentLeft.Checked = false;
                     rbBannerAligmentCenter.Checked = true;
                     rbBannerAligmentRight.Checked = false;
                     break;
-                case BusinessClasses.Alignment.Right:
+                case SalesDepot.CoreObjects.Alignment.Right:
                     rbBannerAligmentLeft.Checked = false;
                     rbBannerAligmentCenter.Checked = false;
                     rbBannerAligmentRight.Checked = true;

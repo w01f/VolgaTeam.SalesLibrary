@@ -104,7 +104,7 @@ namespace SalesDepot.BusinessClasses
         {
             this.Years.Clear();
             this.Files.Clear();
-            string rootFolderPath = Path.Combine(this.Parent.StorageFolder.FullName, ConfigurationClasses.SettingsManager.OvernightsCalendarRootFolderName);
+            string rootFolderPath = Path.Combine(this.Parent.StorageFolder.FullName, CoreObjects.Constants.OvernightsCalendarRootFolderName);
             if (Directory.Exists(rootFolderPath) && this.Enabled)
             {
                 DirectoryInfo rootFolder = new DirectoryInfo(rootFolderPath);
@@ -179,7 +179,7 @@ namespace SalesDepot.BusinessClasses
             this.SweepDays.Clear();
             if (this.RootFolder.Exists)
             {
-                string sweepPeriodsConnfigFile = Path.Combine(this.RootFolder.FullName, ConfigurationClasses.SettingsManager.SweepPeriodsFileName);
+                string sweepPeriodsConnfigFile = Path.Combine(this.RootFolder.FullName, CoreObjects.Constants.SweepPeriodsFileName);
                 if (File.Exists(sweepPeriodsConnfigFile))
                 {
                     try
@@ -297,9 +297,9 @@ namespace SalesDepot.BusinessClasses
                     FileInfo file = this.Parent.Parent.Parent.Files.Where(x => x.Name.Contains(this.Date.ToString("MMddyy"))).FirstOrDefault();
                     if (file != null)
                     {
-                        _linkedFile = new LibraryFile(new LibraryFolder(new LibraryPage(this.Parent.Parent.Parent.Parent)));
-                        _linkedFile.RemotePath = file.FullName;
-                        _linkedFile.Type = FileTypes.OvernightsLink;
+                        _linkedFile = new LibraryFile(new CoreObjects.LibraryFolder(new CoreObjects.LibraryPage(this.Parent.Parent.Parent.Parent)));
+                        _linkedFile.OriginalPath = file.FullName;
+                        _linkedFile.Type = CoreObjects.FileTypes.OvernightsLink;
                     }
                 }
                 return _linkedFile;

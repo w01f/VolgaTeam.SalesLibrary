@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using SalesDepot.CoreObjects;
 
 namespace FileManager.BusinessClasses
 {
@@ -35,7 +36,7 @@ namespace FileManager.BusinessClasses
                 this.LibraryCollection.Clear();
                 if (rootFolder.Root.FullName.Equals(rootFolder.FullName) || ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles)
                 {
-                    this.LibraryCollection.Add(new Library(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage, rootFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit));
+                    this.LibraryCollection.Add(new Library(SalesDepot.CoreObjects.Constants.WholeDriveFilesStorage, rootFolder, ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles, ConfigurationClasses.SettingsManager.Instance.DirectAccessFileAgeLimit));
                     this.SelectedLibrary = this.LibraryCollection[0];
                 }
                 else
@@ -101,200 +102,259 @@ namespace FileManager.BusinessClasses
                 syncLog.AppendLine(string.Format("Sync started: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
 
                 foreach (Library salesDepot in this.LibraryCollection)
+                {
                     if (salesDepot.IsConfigured)
                     {
-                        salesDepot.PrepareForRegularSynchronize();
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                            salesDepot.PrepareForRegularSynchronize();
 
-                        syncLog.AppendLine(string.Format("Sync {0}", new string[] { salesDepot.Name }));
-
-                        string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : salesDepot.Folder.Name;
-                        existedLibraryFolderNames.Add(salesDepotFolderName);
-
-                        DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFolderName));
-                        if (!destinationFolder.Exists)
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                         {
-                            destinationFolder.Create();
-                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationFolder.FullName }));
-                            foldersCreated++;
-                        }
-                        filesWhiteList.Clear();
+                            syncLog.AppendLine(string.Format("Sync {0}", new string[] { salesDepot.Name }));
 
-                        AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.LibraryLogoFolder)), filesWhiteList);
-                        filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName)).FullName);
+                            string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? Constants.WholeDriveFilesStorage : salesDepot.Folder.Name;
+                            existedLibraryFolderNames.Add(salesDepotFolderName);
 
-                        List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
-                        List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
+                            DirectoryInfo destinationFolder = new DirectoryInfo(Path.Combine(folderb, salesDepotFolderName));
+                            if (!destinationFolder.Exists)
+                            {
+                                destinationFolder.Create();
+                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationFolder.FullName }));
+                                foldersCreated++;
+                            }
+                            filesWhiteList.Clear();
 
-                        if (!salesDepot.UseDirectAccess)
-                        {
-                            foreach (LibraryPage page in salesDepot.Pages)
-                                foreach (LibraryFolder folder in page.Folders)
-                                    foreach (LibraryFile file in folder.Files)
+                            AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
+                            filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, Constants.StorageFileName)).FullName);
+
+                            List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
+                            List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
+
+                            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                            {
+                                if (!salesDepot.UseDirectAccess)
+                                {
+                                    foreach (LibraryPage page in salesDepot.Pages)
                                     {
-                                        switch (file.Type)
+                                        foreach (LibraryFolder folder in page.Folders)
                                         {
-                                            case FileTypes.Folder:
-                                                AddFolderForSync(new DirectoryInfo(file.FullPath), filesWhiteList);
-                                                break;
-                                            case FileTypes.BuggyPresentation:
-                                            case FileTypes.FriendlyPresentation:
-                                            case FileTypes.OtherPresentation:
-                                                if (File.Exists(file.FullPath))
+                                            foreach (LibraryFile file in folder.Files)
+                                            {
+                                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                                                 {
-                                                    if (!filesWhiteList.Contains(file.FullPath))
-                                                        filesWhiteList.Add(file.FullPath);
-                                                    if (file.PreviewContainer != null)
-                                                        AddFolderForSync(new DirectoryInfo(file.PreviewContainer.ContainerPath), filesWhiteList);
+                                                    switch (file.Type)
+                                                    {
+                                                        case FileTypes.Folder:
+                                                            AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
+                                                            break;
+                                                        case FileTypes.BuggyPresentation:
+                                                        case FileTypes.FriendlyPresentation:
+                                                        case FileTypes.Presentation:
+                                                            if (File.Exists(file.OriginalPath))
+                                                            {
+                                                                if (!filesWhiteList.Contains(file.OriginalPath))
+                                                                    filesWhiteList.Add(file.OriginalPath);
+                                                                if (file.PreviewContainer != null)
+                                                                    AddFolderForSync(new DirectoryInfo(file.PreviewContainer.ContainerPath), filesWhiteList);
+                                                            }
+                                                            break;
+                                                        case FileTypes.MediaPlayerVideo:
+                                                        case FileTypes.QuickTimeVideo:
+                                                        case FileTypes.Other:
+                                                            if (File.Exists(file.OriginalPath))
+                                                            {
+                                                                if (!filesWhiteList.Contains(file.OriginalPath))
+                                                                    filesWhiteList.Add(file.OriginalPath);
+                                                            }
+                                                            break;
+                                                        case FileTypes.LineBreak:
+                                                            break;
+                                                    }
                                                 }
+                                                else
+                                                    break;
+                                            }
+                                            if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
                                                 break;
-                                            case FileTypes.MediaPlayerVideo:
-                                            case FileTypes.QuickTimeVideo:
-                                            case FileTypes.Other:
-                                                if (File.Exists(file.FullPath))
+                                        }
+                                        if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                                            break;
+                                    }
+                                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                        syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
+
+                                    #region Sync Primary Root
+                                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                    {
+                                        sourceSubFolders.Clear();
+                                        sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                                        foreach (DirectoryInfo subFolder in sourceSubFolders)
+                                        {
+                                            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                            {
+                                                string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
+                                                if (!Directory.Exists(destinationSubFolderPath))
                                                 {
-                                                    if (!filesWhiteList.Contains(file.FullPath))
-                                                        filesWhiteList.Add(file.FullPath);
+                                                    Directory.CreateDirectory(destinationSubFolderPath);
+                                                    syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationSubFolderPath }));
+                                                    foldersCreated++;
                                                 }
-                                                break;
-                                            case FileTypes.LineBreak:
+                                                DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
+                                                destinationSubFolders.Add(destinationSubFolder);
+                                                syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
+                                            }
+                                            else
                                                 break;
                                         }
                                     }
-                            syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
+                                    #endregion
 
-                            #region Sync Primary Root
-                            sourceSubFolders.Clear();
-                            sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-                            foreach (DirectoryInfo subFolder in sourceSubFolders)
-                            {
-                                string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
-                                if (!Directory.Exists(destinationSubFolderPath))
-                                {
-                                    Directory.CreateDirectory(destinationSubFolderPath);
-                                    syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationSubFolderPath }));
-                                    foldersCreated++;
-                                }
-                                DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
-                                destinationSubFolders.Add(destinationSubFolder);
-                                syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
-                            }
-                            #endregion
-
-                            #region Sync Extra Roots
-                            if (salesDepot.ExtraFolders.Count > 0)
-                            {
-                                string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName);
-                                if (!Directory.Exists(extraFoldersDestinationRootPath))
-                                {
-                                    Directory.CreateDirectory(extraFoldersDestinationRootPath);
-                                    syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFoldersDestinationRootPath }));
-                                    foldersCreated++;
-                                }
-                                DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
-                                destinationSubFolders.Add(extraFoldersDestinationRoot);
-                                List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
-                                foreach (RootFolder extraRootFolder in salesDepot.ExtraFolders)
-                                {
-                                    sourceSubFolders.Clear();
-                                    sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-                                    if (sourceSubFolders.Count > 0)
+                                    #region Sync Extra Roots
+                                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                                     {
-                                        string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-                                        if (!Directory.Exists(extraFolderDestinationPath))
+                                        if (salesDepot.ExtraFolders.Count > 0)
                                         {
-                                            Directory.CreateDirectory(extraFolderDestinationPath);
-                                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
+                                            string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, Constants.ExtraFoldersRootFolderName);
+                                            if (!Directory.Exists(extraFoldersDestinationRootPath))
+                                            {
+                                                Directory.CreateDirectory(extraFoldersDestinationRootPath);
+                                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFoldersDestinationRootPath }));
+                                                foldersCreated++;
+                                            }
+                                            DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
+                                            destinationSubFolders.Add(extraFoldersDestinationRoot);
+                                            List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
+                                            foreach (RootFolder extraRootFolder in salesDepot.ExtraFolders)
+                                            {
+                                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                                {
+                                                    sourceSubFolders.Clear();
+                                                    sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                                                    if (sourceSubFolders.Count > 0)
+                                                    {
+                                                        string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+                                                        if (!Directory.Exists(extraFolderDestinationPath))
+                                                        {
+                                                            Directory.CreateDirectory(extraFolderDestinationPath);
+                                                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
+                                                            foldersCreated++;
+                                                        }
+                                                        DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+                                                        extraFolderDestinations.Add(extraFolderDestination);
+                                                        syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                                                    }
+                                                }
+                                                else
+                                                    break;
+                                            }
+                                            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                            {
+                                                foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+                                                {
+                                                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                                    {
+                                                        ToolClasses.SyncManager.DeleteFolder(subFolder);
+                                                        syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
+                                                        foldersDeleted++;
+                                                    }
+                                                    else
+                                                        break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    #endregion
+                                }
+                                else
+                                {
+                                    syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
+                                }
+
+                                #region Sync Overnights Calendar
+                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                {
+                                    if (salesDepot.OvernightsCalendar.Enabled)
+                                    {
+                                        string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.OvernightsCalendarRootFolderName);
+                                        if (!Directory.Exists(overnightsCalendarDestinationFolderPath))
+                                        {
+                                            Directory.CreateDirectory(overnightsCalendarDestinationFolderPath);
+                                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { overnightsCalendarDestinationFolderPath }));
                                             foldersCreated++;
                                         }
-                                        DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-                                        extraFolderDestinations.Add(extraFolderDestination);
-                                        syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                                        DirectoryInfo overnightsCalendarDestinationFolder = new DirectoryInfo(overnightsCalendarDestinationFolderPath);
+                                        destinationSubFolders.Add(overnightsCalendarDestinationFolder);
+                                        syncManager.SynchronizeFolders(salesDepot.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
                                     }
                                 }
-                                foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+                                #endregion
+
+                                #region Sync Program Manager
+                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                                 {
-                                    ToolClasses.SyncManager.DeleteFolder(subFolder);
-                                    syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
-                                    foldersDeleted++;
+                                    if (salesDepot.EnableProgramManagerSync && !string.IsNullOrEmpty(salesDepot.ProgramManagerLocation) && Directory.Exists(salesDepot.ProgramManagerLocation))
+                                    {
+                                        string programManagerDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.ProgramManagerRootFolderName);
+                                        if (!Directory.Exists(programManagerDestinationFolderPath))
+                                        {
+                                            Directory.CreateDirectory(programManagerDestinationFolderPath);
+                                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { programManagerDestinationFolderPath }));
+                                            foldersCreated++;
+                                        }
+                                        DirectoryInfo programManagerSourceFolder = new DirectoryInfo(salesDepot.ProgramManagerLocation);
+                                        DirectoryInfo programManagerDestinationFolder = new DirectoryInfo(programManagerDestinationFolderPath);
+                                        destinationSubFolders.Add(programManagerDestinationFolder);
+                                        syncManager.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
+                                    }
+                                }
+                                #endregion
+
+                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                {
+                                    foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
+                                    {
+                                        ToolClasses.SyncManager.DeleteFolder(subFolder);
+                                        syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
+                                        foldersDeleted++;
+                                    }
                                 }
                             }
-                            #endregion
                         }
-                        else
-                        {
-                            syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
-                        }
-
-                        #region Sync Overnights Calendar
-                        if (salesDepot.OvernightsCalendar.Enabled)
-                        {
-                            string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.OvernightsCalendarRootFolderName);
-                            if (!Directory.Exists(overnightsCalendarDestinationFolderPath))
-                            {
-                                Directory.CreateDirectory(overnightsCalendarDestinationFolderPath);
-                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { overnightsCalendarDestinationFolderPath }));
-                                foldersCreated++;
-                            }
-                            DirectoryInfo overnightsCalendarDestinationFolder = new DirectoryInfo(overnightsCalendarDestinationFolderPath);
-                            destinationSubFolders.Add(overnightsCalendarDestinationFolder);
-                            syncManager.SynchronizeFolders(salesDepot.OvernightsCalendar.RootFolder, overnightsCalendarDestinationFolder, new HashSet<string>());
-                        }
-                        #endregion
-
-                        #region Sync Program Manager
-                        if (salesDepot.EnableProgramManagerSync && !string.IsNullOrEmpty(salesDepot.ProgramManagerLocation) && Directory.Exists(salesDepot.ProgramManagerLocation))
-                        {
-                            string programManagerDestinationFolderPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ProgramManagerRootFolderName);
-                            if (!Directory.Exists(programManagerDestinationFolderPath))
-                            {
-                                Directory.CreateDirectory(programManagerDestinationFolderPath);
-                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { programManagerDestinationFolderPath }));
-                                foldersCreated++;
-                            }
-                            DirectoryInfo programManagerSourceFolder = new DirectoryInfo(salesDepot.ProgramManagerLocation);
-                            DirectoryInfo programManagerDestinationFolder = new DirectoryInfo(programManagerDestinationFolderPath);
-                            destinationSubFolders.Add(programManagerDestinationFolder);
-                            syncManager.SynchronizeFolders(programManagerSourceFolder, programManagerDestinationFolder, new HashSet<string>());
-                        }
-                        #endregion
-
-                        foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName)))
-                        {
-                            ToolClasses.SyncManager.DeleteFolder(subFolder);
-                            syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
-                            foldersDeleted++;
-                        }
-                    }
-
-                DirectoryInfo networkFolder = new DirectoryInfo(folderb);
-                foreach (DirectoryInfo folder in networkFolder.GetDirectories())
-                    if (!existedLibraryFolderNames.Contains(folder.Name))
-                    {
-                        ToolClasses.SyncManager.DeleteFolder(folder);
-                        syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { folder.FullName }));
-                        foldersDeleted++;
-                    }
-
-                syncLog.AppendLine(string.Format("Sync completed: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
-                syncLog.AppendLine(string.Format("Total files created: {0}", new string[] { filesCreated.ToString("#,##0") }));
-                syncLog.AppendLine(string.Format("Total files updated: {0}", new string[] { filesUpdated.ToString("#,##0") }));
-                syncLog.AppendLine(string.Format("Total files deleted: {0}", new string[] { filesDeleted.ToString("#,##0") }));
-                syncLog.AppendLine(string.Format("Total files declined: {0}", new string[] { filesDeclined.ToString("#,##0") }));
-                syncLog.AppendLine(string.Format("Total folders created: {0}", new string[] { foldersCreated.ToString("#,##0") }));
-                syncLog.AppendLine(string.Format("Total folders deleted: {0}", new string[] { foldersDeleted.ToString("#,##0") }));
-
-                try
-                {
-                    string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Manual Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
-                    using (StreamWriter sw = new StreamWriter(logPath, false))
-                    {
-                        sw.Write(syncLog.ToString());
-                        sw.Flush();
-                        sw.Close();
                     }
                 }
-                catch
+
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 {
+                    DirectoryInfo networkFolder = new DirectoryInfo(folderb);
+                    foreach (DirectoryInfo folder in networkFolder.GetDirectories())
+                        if (!existedLibraryFolderNames.Contains(folder.Name))
+                        {
+                            ToolClasses.SyncManager.DeleteFolder(folder);
+                            syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { folder.FullName }));
+                            foldersDeleted++;
+                        }
+
+                    syncLog.AppendLine(string.Format("Sync completed: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
+                    syncLog.AppendLine(string.Format("Total files created: {0}", new string[] { filesCreated.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total files updated: {0}", new string[] { filesUpdated.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total files deleted: {0}", new string[] { filesDeleted.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total files declined: {0}", new string[] { filesDeclined.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total folders created: {0}", new string[] { foldersCreated.ToString("#,##0") }));
+                    syncLog.AppendLine(string.Format("Total folders deleted: {0}", new string[] { foldersDeleted.ToString("#,##0") }));
+
+                    try
+                    {
+                        string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Manual Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                        using (StreamWriter sw = new StreamWriter(logPath, false))
+                        {
+                            sw.Write(syncLog.ToString());
+                            sw.Flush();
+                            sw.Close();
+                        }
+                    }
+                    catch
+                    {
+                    }
                 }
             }
 
@@ -351,7 +411,7 @@ namespace FileManager.BusinessClasses
             {
                 syncLog.AppendLine(string.Format("Sync {0}", new string[] { salesDepot.Name }));
 
-                string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? ConfigurationClasses.SettingsManager.WholeDriveFilesStorage : salesDepot.Folder.Name;
+                string salesDepotFolderName = salesDepot.Folder.FullName.Equals(salesDepot.Folder.Root.FullName) ? Constants.WholeDriveFilesStorage : salesDepot.Folder.Name;
                 existedLibraryFolderNames.Add(salesDepotFolderName);
 
                 DirectoryInfo destinationFolder = new DirectoryInfo(salesDepot.IPadManager.SyncDestinationPath);
@@ -363,134 +423,180 @@ namespace FileManager.BusinessClasses
                 }
                 filesWhiteList.Clear();
 
-                AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.LibraryLogoFolder)), filesWhiteList);
-                filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, ConfigurationClasses.SettingsManager.StorageLightFileName)).FullName);
+                AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
+                filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, Constants.StorageLightFileName)).FullName);
 
                 List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                 List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();
 
-                foreach (LibraryPage page in salesDepot.Pages)
-                    foreach (LibraryFolder folder in page.Folders)
-                        foreach (LibraryFile file in folder.Files)
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                {
+                    foreach (LibraryPage page in salesDepot.Pages)
+                    {
+                        foreach (LibraryFolder folder in page.Folders)
                         {
-                            switch (file.Type)
+                            foreach (LibraryFile file in folder.Files)
                             {
-                                case FileTypes.Folder:
-                                    AddFolderForSync(new DirectoryInfo(file.FullPath), filesWhiteList);
-                                    break;
-                                case FileTypes.BuggyPresentation:
-                                case FileTypes.FriendlyPresentation:
-                                case FileTypes.OtherPresentation:
-                                    if (File.Exists(file.FullPath))
+                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                {
+                                    switch (file.Type)
                                     {
-                                        if (!filesWhiteList.Contains(file.FullPath))
-                                            filesWhiteList.Add(file.FullPath);
-                                        if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
-                                            AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                        case FileTypes.Folder:
+                                            AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
+                                            break;
+                                        case FileTypes.BuggyPresentation:
+                                        case FileTypes.FriendlyPresentation:
+                                        case FileTypes.Presentation:
+                                            if (File.Exists(file.OriginalPath))
+                                            {
+                                                if (!filesWhiteList.Contains(file.OriginalPath))
+                                                    filesWhiteList.Add(file.OriginalPath);
+                                                if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
+                                                    AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                            }
+                                            break;
+                                        case FileTypes.MediaPlayerVideo:
+                                        case FileTypes.QuickTimeVideo:
+                                        case FileTypes.Other:
+                                            if (File.Exists(file.OriginalPath))
+                                            {
+                                                if (!filesWhiteList.Contains(file.OriginalPath))
+                                                    filesWhiteList.Add(file.OriginalPath);
+                                                if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
+                                                    AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                            }
+                                            break;
+                                        case FileTypes.LineBreak:
+                                            break;
                                     }
-                                    break;
-                                case FileTypes.MediaPlayerVideo:
-                                case FileTypes.QuickTimeVideo:
-                                case FileTypes.Other:
-                                    if (File.Exists(file.FullPath))
-                                    {
-                                        if (!filesWhiteList.Contains(file.FullPath))
-                                            filesWhiteList.Add(file.FullPath);
-                                        if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
-                                            AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
-                                    }
-                                    break;
-                                case FileTypes.LineBreak:
+                                }
+                                else
                                     break;
                             }
+                            if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                                break;
                         }
-                syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
+                        if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                            break;
+                    }
+                }
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                    syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
 
                 #region Sync Primary Root
-                sourceSubFolders.Clear();
-                sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-                foreach (DirectoryInfo subFolder in sourceSubFolders)
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 {
-                    string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
-                    if (!Directory.Exists(destinationSubFolderPath))
+                    sourceSubFolders.Clear();
+                    sourceSubFolders.AddRange(salesDepot.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                    foreach (DirectoryInfo subFolder in sourceSubFolders)
                     {
-                        Directory.CreateDirectory(destinationSubFolderPath);
-                        syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationSubFolderPath }));
-                        foldersCreated++;
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        {
+                            string destinationSubFolderPath = Path.Combine(destinationFolder.FullName, subFolder.Name);
+                            if (!Directory.Exists(destinationSubFolderPath))
+                            {
+                                Directory.CreateDirectory(destinationSubFolderPath);
+                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { destinationSubFolderPath }));
+                                foldersCreated++;
+                            }
+                            DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
+                            destinationSubFolders.Add(destinationSubFolder);
+                            syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
+                        }
+                        else
+                            break;
                     }
-                    DirectoryInfo destinationSubFolder = new DirectoryInfo(destinationSubFolderPath);
-                    destinationSubFolders.Add(destinationSubFolder);
-                    syncManager.SynchronizeFolders(subFolder, destinationSubFolder, filesWhiteList);
                 }
                 #endregion
 
                 #region Sync Extra Roots
-                if (salesDepot.ExtraFolders.Count > 0)
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 {
-                    string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, ConfigurationClasses.SettingsManager.ExtraFoldersRootFolderName);
-                    if (!Directory.Exists(extraFoldersDestinationRootPath))
+                    if (salesDepot.ExtraFolders.Count > 0)
                     {
-                        Directory.CreateDirectory(extraFoldersDestinationRootPath);
-                        syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFoldersDestinationRootPath }));
-                        foldersCreated++;
-                    }
-                    DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
-                    destinationSubFolders.Add(extraFoldersDestinationRoot);
-                    List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
-                    foreach (RootFolder extraRootFolder in salesDepot.ExtraFolders)
-                    {
-                        sourceSubFolders.Clear();
-                        sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-                        if (sourceSubFolders.Count > 0)
+                        string extraFoldersDestinationRootPath = Path.Combine(destinationFolder.FullName, Constants.ExtraFoldersRootFolderName);
+                        if (!Directory.Exists(extraFoldersDestinationRootPath))
                         {
-                            string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-                            if (!Directory.Exists(extraFolderDestinationPath))
+                            Directory.CreateDirectory(extraFoldersDestinationRootPath);
+                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFoldersDestinationRootPath }));
+                            foldersCreated++;
+                        }
+                        DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
+                        destinationSubFolders.Add(extraFoldersDestinationRoot);
+                        List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        {
+                            foreach (RootFolder extraRootFolder in salesDepot.ExtraFolders)
                             {
-                                Directory.CreateDirectory(extraFolderDestinationPath);
-                                syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
-                                foldersCreated++;
+                                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                                {
+                                    sourceSubFolders.Clear();
+                                    sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+                                    if (sourceSubFolders.Count > 0)
+                                    {
+                                        string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+                                        if (!Directory.Exists(extraFolderDestinationPath))
+                                        {
+                                            Directory.CreateDirectory(extraFolderDestinationPath);
+                                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
+                                            foldersCreated++;
+                                        }
+                                        DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+                                        extraFolderDestinations.Add(extraFolderDestination);
+                                        syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                                    }
+                                }
+                                else
+                                    break;
                             }
-                            DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-                            extraFolderDestinations.Add(extraFolderDestination);
-                            syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+                        }
+                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        {
+                            foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+                            {
+                                ToolClasses.SyncManager.DeleteFolder(subFolder);
+                                syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
+                                foldersDeleted++;
+                            }
                         }
                     }
-                    foreach (DirectoryInfo subFolder in extraFoldersDestinationRoot.GetDirectories().Where(x => !extraFolderDestinations.Select(y => y.FullName).Contains(x.FullName)))
+                }
+                #endregion
+                if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                {
+                    foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName) && !x.FullName.Contains("_gsdata_")))
                     {
                         ToolClasses.SyncManager.DeleteFolder(subFolder);
                         syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
                         foldersDeleted++;
                     }
                 }
-                #endregion
-                foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName) && !x.FullName.Contains("_gsdata_")))
-                {
-                    ToolClasses.SyncManager.DeleteFolder(subFolder);
-                    syncLog.AppendLine(string.Format("Folder deleted: {0}", new string[] { subFolder.FullName }));
-                    foldersDeleted++;
-                }
             }
 
-            syncLog.AppendLine(string.Format("Sync completed: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
-            syncLog.AppendLine(string.Format("Total files created: {0}", new string[] { filesCreated.ToString("#,##0") }));
-            syncLog.AppendLine(string.Format("Total files updated: {0}", new string[] { filesUpdated.ToString("#,##0") }));
-            syncLog.AppendLine(string.Format("Total files deleted: {0}", new string[] { filesDeleted.ToString("#,##0") }));
-            syncLog.AppendLine(string.Format("Total files declined: {0}", new string[] { filesDeclined.ToString("#,##0") }));
-            syncLog.AppendLine(string.Format("Total folders created: {0}", new string[] { foldersCreated.ToString("#,##0") }));
-            syncLog.AppendLine(string.Format("Total folders deleted: {0}", new string[] { foldersDeleted.ToString("#,##0") }));
 
-            try
+            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
             {
-                string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("iPad Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
-                using (StreamWriter sw = new StreamWriter(logPath, false))
+                syncLog.AppendLine(string.Format("Sync completed: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));
+                syncLog.AppendLine(string.Format("Total files created: {0}", new string[] { filesCreated.ToString("#,##0") }));
+                syncLog.AppendLine(string.Format("Total files updated: {0}", new string[] { filesUpdated.ToString("#,##0") }));
+                syncLog.AppendLine(string.Format("Total files deleted: {0}", new string[] { filesDeleted.ToString("#,##0") }));
+                syncLog.AppendLine(string.Format("Total files declined: {0}", new string[] { filesDeclined.ToString("#,##0") }));
+                syncLog.AppendLine(string.Format("Total folders created: {0}", new string[] { foldersCreated.ToString("#,##0") }));
+                syncLog.AppendLine(string.Format("Total folders deleted: {0}", new string[] { foldersDeleted.ToString("#,##0") }));
+
+                try
                 {
-                    sw.Write(syncLog.ToString());
-                    sw.Flush();
-                    sw.Close();
+                    string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("iPad Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                    using (StreamWriter sw = new StreamWriter(logPath, false))
+                    {
+                        sw.Write(syncLog.ToString());
+                        sw.Flush();
+                        sw.Close();
+                    }
                 }
-            }
-            catch
-            {
+                catch
+                {
+                }
             }
         }
 
@@ -504,6 +610,71 @@ namespace FileManager.BusinessClasses
                     if (!file.Name.ToLower().Equals("thumbs.db"))
                         if (!filesWhiteList.Contains(file.FullName))
                             filesWhiteList.Add(file.FullName);
+            }
+        }
+
+        public static void MakeFolderAvailable(DirectoryInfo folder)
+        {
+            try
+            {
+                foreach (DirectoryInfo subFolder in folder.GetDirectories())
+                    MakeFolderAvailable(subFolder);
+                foreach (FileInfo file in folder.GetFiles())
+                    if (File.Exists(file.FullName))
+                        File.SetAttributes(file.FullName, FileAttributes.Normal);
+            }
+            catch
+            {
+            }
+        }
+
+        public static void DeleteFolder(DirectoryInfo folder, string filter = "")
+        {
+            try
+            {
+                MakeFolderAvailable(folder);
+                foreach (DirectoryInfo subFolder in folder.GetDirectories())
+                    DeleteFolder(subFolder, filter);
+                foreach (FileInfo file in folder.GetFiles())
+                {
+                    try
+                    {
+                        if (File.Exists(file.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+                            File.Delete(file.FullName);
+                    }
+                    catch
+                    {
+                        try
+                        {
+                            System.Threading.Thread.Sleep(100);
+                            if (File.Exists(file.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+                                File.Delete(file.FullName);
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+                try
+                {
+                    if (Directory.Exists(folder.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+                        Directory.Delete(folder.FullName, false);
+                }
+                catch
+                {
+                    try
+                    {
+                        System.Threading.Thread.Sleep(100);
+                        if (Directory.Exists(folder.FullName) && (folder.Name.Contains(filter) || string.IsNullOrEmpty(filter)))
+                            Directory.Delete(folder.FullName, false);
+                    }
+                    catch
+                    {
+                    }
+                }
+            }
+            catch
+            {
             }
         }
     }

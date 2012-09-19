@@ -10,8 +10,8 @@ namespace FileManager.ToolForms.Settings
     public partial class FormColumns : Form
     {
         public BusinessClasses.Library Library { get; set; }
-        private BusinessClasses.LibraryPage _currentPage;
-        private BusinessClasses.LibraryFolder _currentFolder;
+        private SalesDepot.CoreObjects.LibraryPage _currentPage;
+        private SalesDepot.CoreObjects.LibraryFolder _currentFolder;
         private bool _stateChanges = false;
         private bool _changesDone = false;
         private bool _allowToSave = false;
@@ -157,7 +157,7 @@ namespace FileManager.ToolForms.Settings
 
             if (_currentPage != null)
             {
-                foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders.OrderBy(x => x.RowOrder))
+                foreach (SalesDepot.CoreObjects.LibraryFolder folder in _currentPage.Folders.OrderBy(x => x.RowOrder))
                 {
                     switch (folder.ColumnOrder)
                     {
@@ -184,7 +184,7 @@ namespace FileManager.ToolForms.Settings
             if (_currentPage != null)
             {
                 List<Guid> existedFolderIDs = new List<Guid>();
-                BusinessClasses.LibraryFolder templateFolder = null;
+                SalesDepot.CoreObjects.LibraryFolder templateFolder = null;
 
                 if (this.Library.ApplyAppearanceForAllWindows)
                     templateFolder = _currentPage.Folders.FirstOrDefault();
@@ -196,15 +196,15 @@ namespace FileManager.ToolForms.Settings
                 foreach (DataGridViewRow row in grColumn3.Rows)
                     existedFolderIDs.Add((Guid)row.Cells[1].Value);
 
-                foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders.Where(x => !existedFolderIDs.Contains(x.Identifier)).ToArray())
+                foreach (SalesDepot.CoreObjects.LibraryFolder folder in _currentPage.Folders.Where(x => !existedFolderIDs.Contains(x.Identifier)).ToArray())
                     folder.RemoveFromParent();
 
                 foreach (DataGridViewRow row in grColumn1.Rows)
                 {
-                    BusinessClasses.LibraryFolder folder = _currentPage.Folders.Where(x => x.Identifier.Equals(row.Cells[1].Value)).FirstOrDefault();
+                    SalesDepot.CoreObjects.LibraryFolder folder = _currentPage.Folders.Where(x => x.Identifier.Equals(row.Cells[1].Value)).FirstOrDefault();
                     if (folder == null)
                     {
-                        folder = new BusinessClasses.LibraryFolder(_currentPage);
+                        folder = new SalesDepot.CoreObjects.LibraryFolder(_currentPage);
                         folder.Identifier = (Guid)row.Cells[1].Value;
                         _currentPage.Folders.Add(folder);
                     }
@@ -222,10 +222,10 @@ namespace FileManager.ToolForms.Settings
 
                 foreach (DataGridViewRow row in grColumn2.Rows)
                 {
-                    BusinessClasses.LibraryFolder folder = _currentPage.Folders.Where(x => x.Identifier.Equals(row.Cells[1].Value)).FirstOrDefault();
+                    SalesDepot.CoreObjects.LibraryFolder folder = _currentPage.Folders.Where(x => x.Identifier.Equals(row.Cells[1].Value)).FirstOrDefault();
                     if (folder == null)
                     {
-                        folder = new BusinessClasses.LibraryFolder(_currentPage);
+                        folder = new SalesDepot.CoreObjects.LibraryFolder(_currentPage);
                         folder.Identifier = (Guid)row.Cells[1].Value;
                         _currentPage.Folders.Add(folder);
                     }
@@ -243,10 +243,10 @@ namespace FileManager.ToolForms.Settings
 
                 foreach (DataGridViewRow row in grColumn3.Rows)
                 {
-                    BusinessClasses.LibraryFolder folder = _currentPage.Folders.Where(x => x.Identifier.Equals(row.Cells[1].Value)).FirstOrDefault();
+                    SalesDepot.CoreObjects.LibraryFolder folder = _currentPage.Folders.Where(x => x.Identifier.Equals(row.Cells[1].Value)).FirstOrDefault();
                     if (folder == null)
                     {
-                        folder = new BusinessClasses.LibraryFolder(_currentPage);
+                        folder = new SalesDepot.CoreObjects.LibraryFolder(_currentPage);
                         folder.Identifier = (Guid)row.Cells[1].Value;
                         _currentPage.Folders.Add(folder);
                     }
@@ -271,7 +271,7 @@ namespace FileManager.ToolForms.Settings
                 pnWindows.Enabled = true;
                 laLocationValue.Text = "Window " + (_currentFolder.RowOrder + 1).ToString() + " - Column " + (_currentFolder.ColumnOrder + 1).ToString();
                 _allowToSave = false;
-                BusinessClasses.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
+                SalesDepot.CoreObjects.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
                 if (ckApllyForAllWindowsAppearance.Checked)
                 {
                     if (currentPageFolder != null)
@@ -290,17 +290,17 @@ namespace FileManager.ToolForms.Settings
                             buttonEditWindowHeaderFont.EditValue = string.Empty;
                         switch (currentPageFolder.HeaderAlignment)
                         {
-                            case BusinessClasses.Alignment.Left:
+                            case SalesDepot.CoreObjects.Alignment.Left:
                                 rbWindowHeaderAlignmentLeft.Checked = true;
                                 rbWindowHeaderAlignmentCenter.Checked = false;
                                 rbWindowHeaderAlignmentRight.Checked = false;
                                 break;
-                            case BusinessClasses.Alignment.Center:
+                            case SalesDepot.CoreObjects.Alignment.Center:
                                 rbWindowHeaderAlignmentLeft.Checked = false;
                                 rbWindowHeaderAlignmentCenter.Checked = true;
                                 rbWindowHeaderAlignmentRight.Checked = false;
                                 break;
-                            case BusinessClasses.Alignment.Right:
+                            case SalesDepot.CoreObjects.Alignment.Right:
                                 rbWindowHeaderAlignmentLeft.Checked = false;
                                 rbWindowHeaderAlignmentCenter.Checked = false;
                                 rbWindowHeaderAlignmentRight.Checked = true;
@@ -324,17 +324,17 @@ namespace FileManager.ToolForms.Settings
                         buttonEditWindowHeaderFont.EditValue = string.Empty;
                     switch (_currentFolder.HeaderAlignment)
                     {
-                        case BusinessClasses.Alignment.Left:
+                        case SalesDepot.CoreObjects.Alignment.Left:
                             rbWindowHeaderAlignmentLeft.Checked = true;
                             rbWindowHeaderAlignmentCenter.Checked = false;
                             rbWindowHeaderAlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Center:
+                        case SalesDepot.CoreObjects.Alignment.Center:
                             rbWindowHeaderAlignmentLeft.Checked = false;
                             rbWindowHeaderAlignmentCenter.Checked = true;
                             rbWindowHeaderAlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Right:
+                        case SalesDepot.CoreObjects.Alignment.Right:
                             rbWindowHeaderAlignmentLeft.Checked = false;
                             rbWindowHeaderAlignmentCenter.Checked = false;
                             rbWindowHeaderAlignmentRight.Checked = true;
@@ -364,17 +364,17 @@ namespace FileManager.ToolForms.Settings
                         pbWindowSelectedBanner.Image = currentPageFolder.BannerProperties.Enable ? currentPageFolder.BannerProperties.Image : null;
                         switch (currentPageFolder.BannerProperties.ImageAlignement)
                         {
-                            case BusinessClasses.Alignment.Left:
+                            case SalesDepot.CoreObjects.Alignment.Left:
                                 rbWindowBannerAlignmentLeft.Checked = true;
                                 rbWindowBannerAlignmentCenter.Checked = false;
                                 rbWindowBannerAlignmentRight.Checked = false;
                                 break;
-                            case BusinessClasses.Alignment.Center:
+                            case SalesDepot.CoreObjects.Alignment.Center:
                                 rbWindowBannerAlignmentLeft.Checked = false;
                                 rbWindowBannerAlignmentCenter.Checked = true;
                                 rbWindowBannerAlignmentRight.Checked = false;
                                 break;
-                            case BusinessClasses.Alignment.Right:
+                            case SalesDepot.CoreObjects.Alignment.Right:
                                 rbWindowBannerAlignmentLeft.Checked = false;
                                 rbWindowBannerAlignmentCenter.Checked = false;
                                 rbWindowBannerAlignmentRight.Checked = true;
@@ -393,17 +393,17 @@ namespace FileManager.ToolForms.Settings
                     pbWindowSelectedBanner.Image = _currentFolder.BannerProperties.Enable ? _currentFolder.BannerProperties.Image : null;
                     switch (_currentFolder.BannerProperties.ImageAlignement)
                     {
-                        case BusinessClasses.Alignment.Left:
+                        case SalesDepot.CoreObjects.Alignment.Left:
                             rbWindowBannerAlignmentLeft.Checked = true;
                             rbWindowBannerAlignmentCenter.Checked = false;
                             rbWindowBannerAlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Center:
+                        case SalesDepot.CoreObjects.Alignment.Center:
                             rbWindowBannerAlignmentLeft.Checked = false;
                             rbWindowBannerAlignmentCenter.Checked = true;
                             rbWindowBannerAlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Right:
+                        case SalesDepot.CoreObjects.Alignment.Right:
                             rbWindowBannerAlignmentLeft.Checked = false;
                             rbWindowBannerAlignmentCenter.Checked = false;
                             rbWindowBannerAlignmentRight.Checked = true;
@@ -446,7 +446,7 @@ namespace FileManager.ToolForms.Settings
             {
                 if (ckApllyForAllWindowsAppearance.Checked && _currentPage.Folders.FirstOrDefault() == _currentFolder)
                 {
-                    foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
+                    foreach (SalesDepot.CoreObjects.LibraryFolder folder in _currentPage.Folders)
                     {
                         folder.BackgroundHeaderColor = colorEditWindowHeaderBackColor.Color;
                         folder.ForeHeaderColor = colorEditWindowHeaderForeColor.Color;
@@ -455,11 +455,11 @@ namespace FileManager.ToolForms.Settings
                         folder.BorderColor = colorEditWindowBorderColor.Color;
                         folder.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
                         if (rbWindowHeaderAlignmentLeft.Checked)
-                            folder.HeaderAlignment = BusinessClasses.Alignment.Left;
+                            folder.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                         else if (rbWindowHeaderAlignmentCenter.Checked)
-                            folder.HeaderAlignment = BusinessClasses.Alignment.Center;
+                            folder.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                         else if (rbWindowHeaderAlignmentRight.Checked)
-                            folder.HeaderAlignment = BusinessClasses.Alignment.Right;
+                            folder.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                     }
                     this.Library.ApplyAppearanceForAllWindows = true;
                 }
@@ -474,18 +474,18 @@ namespace FileManager.ToolForms.Settings
                         _currentFolder.BorderColor = colorEditWindowBorderColor.Color;
                         _currentFolder.HeaderFont = buttonEditWindowHeaderFont.Tag as Font;
                         if (rbWindowHeaderAlignmentLeft.Checked)
-                            _currentFolder.HeaderAlignment = BusinessClasses.Alignment.Left;
+                            _currentFolder.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                         else if (rbWindowHeaderAlignmentCenter.Checked)
-                            _currentFolder.HeaderAlignment = BusinessClasses.Alignment.Center;
+                            _currentFolder.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                         else if (rbWindowHeaderAlignmentRight.Checked)
-                            _currentFolder.HeaderAlignment = BusinessClasses.Alignment.Right;
+                            _currentFolder.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                         this.Library.ApplyAppearanceForAllWindows = false;
                     }
                 }
 
                 if (ckApllyForAllWindowsWidget.Checked && _currentPage.Folders.FirstOrDefault() == _currentFolder)
                 {
-                    foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
+                    foreach (SalesDepot.CoreObjects.LibraryFolder folder in _currentPage.Folders)
                     {
                         folder.EnableWidget = ckWindowEnableWidget.Checked;
                         folder.Widget = pbWindowSelectedWidget.Image;
@@ -503,16 +503,16 @@ namespace FileManager.ToolForms.Settings
 
                 if (ckApllyForAllWindowsBanner.Checked && _currentPage.Folders.FirstOrDefault() == _currentFolder)
                 {
-                    foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
+                    foreach (SalesDepot.CoreObjects.LibraryFolder folder in _currentPage.Folders)
                     {
                         folder.BannerProperties.Enable = ckWindowEnableBanner.Checked;
                         folder.BannerProperties.Image = pbWindowSelectedBanner.Image;
                         if (rbWindowBannerAlignmentLeft.Checked)
-                            folder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Left;
+                            folder.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Left;
                         else if (rbWindowBannerAlignmentCenter.Checked)
-                            folder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Center;
+                            folder.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Center;
                         else if (rbWindowBannerAlignmentRight.Checked)
-                            folder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Right;
+                            folder.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Right;
                         folder.BannerProperties.ShowText = ckWindowBannerShowText.Checked;
                         folder.BannerProperties.Text = memoEditWindowBannerText.EditValue != null ? memoEditWindowBannerText.EditValue.ToString() : string.Empty;
                         folder.BannerProperties.Font = buttonEditWindowBannerTextFont.Tag as Font;
@@ -528,11 +528,11 @@ namespace FileManager.ToolForms.Settings
                         _currentFolder.BannerProperties.Enable = ckWindowEnableBanner.Checked;
                         _currentFolder.BannerProperties.Image = pbWindowSelectedBanner.Image;
                         if (rbWindowBannerAlignmentLeft.Checked)
-                            _currentFolder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Left;
+                            _currentFolder.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Left;
                         else if (rbWindowBannerAlignmentCenter.Checked)
-                            _currentFolder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Center;
+                            _currentFolder.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Center;
                         else if (rbWindowBannerAlignmentRight.Checked)
-                            _currentFolder.BannerProperties.ImageAlignement = BusinessClasses.Alignment.Right;
+                            _currentFolder.BannerProperties.ImageAlignement = SalesDepot.CoreObjects.Alignment.Right;
                         _currentFolder.BannerProperties.ShowText = ckWindowBannerShowText.Checked;
                         _currentFolder.BannerProperties.Text = memoEditWindowBannerText.EditValue != null ? memoEditWindowBannerText.EditValue.ToString() : string.Empty;
                         _currentFolder.BannerProperties.Font = buttonEditWindowBannerTextFont.Tag as Font;
@@ -557,17 +557,17 @@ namespace FileManager.ToolForms.Settings
                     colorEditColumn1BackColor.Color = _currentPage.ColumnTitles[0].BackgroundColor;
                     switch (_currentPage.ColumnTitles[0].HeaderAlignment)
                     {
-                        case BusinessClasses.Alignment.Left:
+                        case SalesDepot.CoreObjects.Alignment.Left:
                             rbColumn1AlignmentLeft.Checked = true;
                             rbColumn1AlignmentCenter.Checked = false;
                             rbColumn1AlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Center:
+                        case SalesDepot.CoreObjects.Alignment.Center:
                             rbColumn1AlignmentLeft.Checked = false;
                             rbColumn1AlignmentCenter.Checked = true;
                             rbColumn1AlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Right:
+                        case SalesDepot.CoreObjects.Alignment.Right:
                             rbColumn1AlignmentLeft.Checked = false;
                             rbColumn1AlignmentCenter.Checked = false;
                             rbColumn1AlignmentRight.Checked = true;
@@ -593,17 +593,17 @@ namespace FileManager.ToolForms.Settings
                     colorEditColumn2BackColor.Color = _currentPage.ColumnTitles[1].BackgroundColor;
                     switch (_currentPage.ColumnTitles[1].HeaderAlignment)
                     {
-                        case BusinessClasses.Alignment.Left:
+                        case SalesDepot.CoreObjects.Alignment.Left:
                             rbColumn2AlignmentLeft.Checked = true;
                             rbColumn2AlignmentCenter.Checked = false;
                             rbColumn2AlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Center:
+                        case SalesDepot.CoreObjects.Alignment.Center:
                             rbColumn2AlignmentLeft.Checked = false;
                             rbColumn2AlignmentCenter.Checked = true;
                             rbColumn2AlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Right:
+                        case SalesDepot.CoreObjects.Alignment.Right:
                             rbColumn2AlignmentLeft.Checked = false;
                             rbColumn2AlignmentCenter.Checked = false;
                             rbColumn2AlignmentRight.Checked = true;
@@ -629,17 +629,17 @@ namespace FileManager.ToolForms.Settings
                     colorEditColumn3BackColor.Color = _currentPage.ColumnTitles[2].BackgroundColor;
                     switch (_currentPage.ColumnTitles[2].HeaderAlignment)
                     {
-                        case BusinessClasses.Alignment.Left:
+                        case SalesDepot.CoreObjects.Alignment.Left:
                             rbColumn3AlignmentLeft.Checked = true;
                             rbColumn3AlignmentCenter.Checked = false;
                             rbColumn3AlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Center:
+                        case SalesDepot.CoreObjects.Alignment.Center:
                             rbColumn3AlignmentLeft.Checked = false;
                             rbColumn3AlignmentCenter.Checked = true;
                             rbColumn3AlignmentRight.Checked = false;
                             break;
-                        case BusinessClasses.Alignment.Right:
+                        case SalesDepot.CoreObjects.Alignment.Right:
                             rbColumn3AlignmentLeft.Checked = false;
                             rbColumn3AlignmentCenter.Checked = false;
                             rbColumn3AlignmentRight.Checked = true;
@@ -673,15 +673,15 @@ namespace FileManager.ToolForms.Settings
             {
                 _currentPage.ColumnTitles.Clear();
 
-                BusinessClasses.ColumnTitle column = new BusinessClasses.ColumnTitle(_currentPage);
+                SalesDepot.CoreObjects.ColumnTitle column = new SalesDepot.CoreObjects.ColumnTitle(_currentPage);
                 column.ColumnOrder = 0;
                 column.BackgroundColor = colorEditColumn1BackColor.Color;
                 if (rbColumn1AlignmentLeft.Checked)
-                    column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                    column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                 else if (rbColumn1AlignmentCenter.Checked)
-                    column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                    column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                 else if (rbColumn1AlignmentRight.Checked)
-                    column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                    column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                 column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
                 column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
                 column.ForeColor = colorEditColumn1ForeColor.Color;
@@ -694,15 +694,15 @@ namespace FileManager.ToolForms.Settings
 
                 if (ckApplyForAllColumnTitles.Checked)
                 {
-                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column = new SalesDepot.CoreObjects.ColumnTitle(_currentPage);
                     column.ColumnOrder = 1;
                     column.BackgroundColor = colorEditColumn1BackColor.Color;
                     if (rbColumn1AlignmentLeft.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                     else if (rbColumn1AlignmentCenter.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                     else if (rbColumn1AlignmentRight.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                     column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
                     column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
                     column.ForeColor = colorEditColumn1ForeColor.Color;
@@ -714,15 +714,15 @@ namespace FileManager.ToolForms.Settings
                     _currentPage.ColumnTitles.Add(column);
 
 
-                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column = new SalesDepot.CoreObjects.ColumnTitle(_currentPage);
                     column.ColumnOrder = 2;
                     column.BackgroundColor = colorEditColumn1BackColor.Color;
                     if (rbColumn1AlignmentLeft.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                     else if (rbColumn1AlignmentCenter.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                     else if (rbColumn1AlignmentRight.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                     column.Name = ckColumn1EnableText.Checked & memoEditColumn1Title.EditValue != null ? memoEditColumn1Title.EditValue.ToString() : string.Empty;
                     column.EnableText = ckColumn1EnableText.Checked & !string.IsNullOrEmpty(column.Name);
                     column.ForeColor = colorEditColumn1ForeColor.Color;
@@ -735,15 +735,15 @@ namespace FileManager.ToolForms.Settings
                 }
                 else
                 {
-                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column = new SalesDepot.CoreObjects.ColumnTitle(_currentPage);
                     column.ColumnOrder = 1;
                     column.BackgroundColor = colorEditColumn2BackColor.Color;
                     if (rbColumn2AlignmentLeft.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                     else if (rbColumn2AlignmentCenter.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                     else if (rbColumn2AlignmentRight.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                     column.Name = ckColumn2EnableText.Checked & memoEditColumn2Title.EditValue != null ? memoEditColumn2Title.EditValue.ToString() : string.Empty;
                     column.EnableText = ckColumn2EnableText.Checked & !string.IsNullOrEmpty(column.Name);
                     column.ForeColor = colorEditColumn2ForeColor.Color;
@@ -754,15 +754,15 @@ namespace FileManager.ToolForms.Settings
                     column.Widget = ckColumn2EnableWidget.Checked ? pbColumn2SelectedWidget.Image : null;
                     _currentPage.ColumnTitles.Add(column);
 
-                    column = new BusinessClasses.ColumnTitle(_currentPage);
+                    column = new SalesDepot.CoreObjects.ColumnTitle(_currentPage);
                     column.ColumnOrder = 2;
                     column.BackgroundColor = colorEditColumn3BackColor.Color;
                     if (rbColumn3AlignmentLeft.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Left;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Left;
                     else if (rbColumn3AlignmentCenter.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Center;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Center;
                     else if (rbColumn3AlignmentRight.Checked)
-                        column.HeaderAlignment = BusinessClasses.Alignment.Right;
+                        column.HeaderAlignment = SalesDepot.CoreObjects.Alignment.Right;
                     column.Name = ckColumn3EnableText.Checked & memoEditColumn3Title.EditValue != null ? memoEditColumn3Title.EditValue.ToString() : string.Empty;
                     column.EnableText = ckColumn3EnableText.Checked & !string.IsNullOrEmpty(column.Name);
                     column.ForeColor = colorEditColumn3ForeColor.Color;
@@ -859,10 +859,10 @@ namespace FileManager.ToolForms.Settings
             {
                 if (this.Library.ApplyAppearanceForAllWindows)
                 {
-                    BusinessClasses.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
+                    SalesDepot.CoreObjects.LibraryFolder currentPageFolder = _currentPage.Folders.FirstOrDefault();
                     if (currentPageFolder != null)
                     {
-                        foreach (BusinessClasses.LibraryFolder folder in _currentPage.Folders)
+                        foreach (SalesDepot.CoreObjects.LibraryFolder folder in _currentPage.Folders)
                         {
                             folder.BackgroundHeaderColor = currentPageFolder.BackgroundHeaderColor;
                             folder.ForeHeaderColor = currentPageFolder.ForeHeaderColor;
@@ -1014,7 +1014,7 @@ namespace FileManager.ToolForms.Settings
                     break;
             }
 
-            BusinessClasses.LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(workingGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
+            SalesDepot.CoreObjects.LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(workingGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
             if (selectedFolder != null)
             {
                 BusinessClasses.FolderCopier.CopiedFolder = selectedFolder;
@@ -1189,7 +1189,7 @@ namespace FileManager.ToolForms.Settings
             }
             if (sourceGrid.SelectedRows.Count > 0)
             {
-                BusinessClasses.LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(sourceGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
+                SalesDepot.CoreObjects.LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(sourceGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
                 if (selectedFolder != null)
                 {
                     BusinessClasses.FolderCopier.CopiedFolder = selectedFolder;
@@ -1218,7 +1218,7 @@ namespace FileManager.ToolForms.Settings
             }
             if (sourceGrid.SelectedRows.Count > 0)
             {
-                BusinessClasses.LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(sourceGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
+                SalesDepot.CoreObjects.LibraryFolder selectedFolder = _currentPage.Folders.Where(x => x.Identifier.Equals(sourceGrid.SelectedRows[0].Cells[1].Value)).FirstOrDefault();
                 if (selectedFolder != null)
                 {
                     BusinessClasses.FolderCopier.CopiedFolder = selectedFolder;

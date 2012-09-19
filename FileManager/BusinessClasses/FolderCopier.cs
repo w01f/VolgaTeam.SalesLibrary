@@ -8,7 +8,7 @@ namespace FileManager.BusinessClasses
 {
     class FolderCopier
     {
-        public static LibraryFolder CopiedFolder { get; set; }
+        public static SalesDepot.CoreObjects.LibraryFolder CopiedFolder { get; set; }
         public static bool PasteReady { get; set; }
         public static DataGridView CopiedGrid { get; set; }
         public static int SourceRowIndex { get; set; }

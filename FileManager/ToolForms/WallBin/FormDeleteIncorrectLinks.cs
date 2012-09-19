@@ -7,13 +7,13 @@ namespace FileManager.ToolForms.WallBin
     public partial class FormDeleteIncorrectLinks : Form
     {
         public bool ExpiredLinks { get; set; }
-        public List<BusinessClasses.LibraryFile> IncorrectLinks { get; set; }
+        public List<SalesDepot.CoreObjects.ILibraryFile> IncorrectLinks { get; set; }
         public List<Guid> LinksForDelete { get; set; }
 
         public FormDeleteIncorrectLinks()
         {
             InitializeComponent();
-            this.IncorrectLinks = new List<BusinessClasses.LibraryFile>();
+            this.IncorrectLinks = new List<SalesDepot.CoreObjects.ILibraryFile>();
             this.LinksForDelete = new List<Guid>();
         }
 
@@ -23,7 +23,7 @@ namespace FileManager.ToolForms.WallBin
             grIncorrectLinks.Rows.Clear();
             foreach (BusinessClasses.LibraryFile incorrectLink in this.IncorrectLinks)
             {
-                DataGridViewRow row = grIncorrectLinks.Rows[grIncorrectLinks.Rows.Add(incorrectLink.Identifier, incorrectLink.Parent.Name, incorrectLink.Name, incorrectLink.FullPath)];
+                DataGridViewRow row = grIncorrectLinks.Rows[grIncorrectLinks.Rows.Add(incorrectLink.Identifier, incorrectLink.Parent.Name, incorrectLink.Name, incorrectLink.OriginalPath)];
                 row.Tag = incorrectLink;
             }
         }
