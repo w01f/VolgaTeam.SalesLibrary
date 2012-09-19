@@ -61,7 +61,7 @@
                 $.hideOverlay(); 
             },
             success: function(msg){
-                $('#content').html(msg);
+                $('#content').html('<div>'+msg+'</div>');
                 $.updateTextSize(storedTextSize);
                 $.updateTextSpace(storedTextSpace);
                 $.updateContentAreaDimensions();            

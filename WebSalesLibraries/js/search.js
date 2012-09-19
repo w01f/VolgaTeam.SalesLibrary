@@ -92,7 +92,6 @@
         
         $.updateSearchGridDimensions();
     }
-
     
     $.initControlPanel = function(){
         if($.cookie("fileTypePpt")!=null)
@@ -102,17 +101,7 @@
         }
         else
             $( "#search-file-type-powerpoint" ).prop('checked',true);
-        $( "#search-file-type-powerpoint" ).button({
-            text: false,
-            icons: {
-                primary: "button-search-powerpoint"
-            }
-        });
 
-        $( "#search-file-type-powerpoint" ).off('click');        
-        $( "#search-file-type-powerpoint" ).on('click',$.fileTypeButtonClick);
-        
-        
         if($.cookie("fileTypeDoc")!=null)
         {
             if($.cookie("fileTypeDoc")==  "true")
@@ -120,17 +109,7 @@
         }
         else
             $( "#search-file-type-word" ).prop('checked',true);
-        $( "#search-file-type-word" ).button({
-            text: false,
-            icons: {
-                primary: "button-search-word"
-            }
-        });
-        
-        $( "#search-file-type-word" ).off('click');        
-        $( "#search-file-type-word" ).on('click',$.fileTypeButtonClick);
-        
-        
+
         if($.cookie("fileTypeXls")!=null)
         {
             if($.cookie("fileTypeXls")==  "true")
@@ -138,16 +117,7 @@
         }
         else
             $( "#search-file-type-excel" ).prop('checked',true);
-        $( "#search-file-type-excel" ).button({
-            text: false,
-            icons: {
-                primary: "button-search-excel"
-            }
-        });        
-        $( "#search-file-type-excel" ).off('click');        
-        $( "#search-file-type-excel" ).on('click',$.fileTypeButtonClick);
-        
-        
+
         if($.cookie("fileTypePdf")!=null)
         {
             if($.cookie("fileTypePdf")==  "true")
@@ -155,15 +125,6 @@
         }
         else
             $( "#search-file-type-pdf" ).prop('checked', true);
-        $( "#search-file-type-pdf" ).button({
-            text: false,
-            icons: {
-                primary: "button-search-pdf"
-            }
-        });                
-        $( "#search-file-type-pdf" ).off('click');        
-        $( "#search-file-type-pdf" ).on('click',$.fileTypeButtonClick);
-        
         
         if($.cookie("fileTypeVideo")!=null)
         {
@@ -172,15 +133,29 @@
         }
         else
             $( "#search-file-type-video" ).prop('checked',true);
-        $( "#search-file-type-video" ).button({
-            text: false,
-            icons: {
-                primary: "button-search-video"
-            }
-        });                        
-        $( "#search-file-type-video" ).off('click');        
-        $( "#search-file-type-video" ).on('click',$.fileTypeButtonClick);
+
+        $('#file-types input[type="checkbox"]').button({
+            text: false
+        });
+        $( '#file-types input[type="checkbox"]').off('click');
+        $( '#file-types input[type="checkbox"]').on('click',$.fileTypeButtonClick);
         
+        $( "#search-file-type-powerpoint" ).button("option", "icons",{
+            primary: "button-search-powerpoint"
+        });        
+        $( "#search-file-type-word" ).button("option", "icons",{
+            primary: "button-search-word"
+        });        
+        $( "#search-file-type-excel" ).button("option", "icons",{
+            primary: "button-search-excel"
+        });        
+        $( "#search-file-type-pdf" ).button("option", "icons",{
+            primary: "button-search-pdf"
+        });                
+        $( "#search-file-type-video" ).button("option", "icons",{
+            primary: "button-search-video"
+        });
+
         $.getSelectedLibraries();
         $("#library-select").button();
         $("#library-select").off('click');        

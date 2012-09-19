@@ -4,6 +4,9 @@
         $('#content').css({
             'height':height+'px'
         });
+        $('#content>div').css({
+            'height':height+'px'
+        });        
         $.updateSearchAreaDimensions();
     }
     

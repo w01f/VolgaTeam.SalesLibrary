@@ -3,11 +3,11 @@
     <div class ="group-body">
         <table id ="file-types">
             <tr>
-                <td><input type="checkbox" class ="search-file-type" id="search-file-type-powerpoint"/><label for="search-file-type-powerpoint">Power Point</label></td>
-                <td><input type="checkbox" class ="search-file-type" id="search-file-type-word" /><label for="search-file-type-word">Word</label></td>
-                <td><input type="checkbox" class ="search-file-type" id="search-file-type-excel" /><label for="search-file-type-excel">Excel</label></td>
-                <td><input type="checkbox" class ="search-file-type" id="search-file-type-pdf" /><label for="search-file-type-pdf">PDF</label></td>
-                <td><input type="checkbox" class ="search-file-type" id="search-file-type-video" /><label for="search-file-type-video">Video</label></td>
+                <td><input type="checkbox" class ="search-file-type" id="search-file-type-powerpoint" name="checkbox"/><label for="search-file-type-powerpoint">Power Point</label></td>
+                <td><input type="checkbox" class ="search-file-type" id="search-file-type-word" name="checkbox" /><label for="search-file-type-word">Word</label></td>
+                <td><input type="checkbox" class ="search-file-type" id="search-file-type-excel" name="checkbox" /><label for="search-file-type-excel">Excel</label></td>
+                <td><input type="checkbox" class ="search-file-type" id="search-file-type-pdf" name="checkbox" /><label for="search-file-type-pdf">PDF</label></td>
+                <td><input type="checkbox" class ="search-file-type" id="search-file-type-video" name="checkbox" /><label for="search-file-type-video">Video</label></td>
             </tr>
         </table>
     </div>
