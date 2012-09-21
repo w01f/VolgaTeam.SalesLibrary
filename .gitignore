@@ -56,7 +56,6 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 SharpZLib/ICSharpCode.SharpZipLib.dll
-WebSalesLibraries/nbproject/*
 WebSalesLibraries/sd_cache/*
 WebSalesLibraries/yii/*
 WebSalesLibraries/assets/*
