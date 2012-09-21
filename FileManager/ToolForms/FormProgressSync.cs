@@ -51,9 +51,9 @@ namespace FileManager.ToolForms
             timer.Tick += new EventHandler((timerSender, timerE) =>
             {
                 ticks++;
-                int hours = ticks / 360;
-                int minutes = (ticks - (hours * 360)) / 60;
-                int seconds = ticks - (hours * 360) - (minutes * 60);
+                int hours = ticks / 3600;
+                int minutes = (ticks - (hours * 3600)) / 60;
+                int seconds = ticks - (hours * 3600) - (minutes * 60);
                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                 {
                     laTime.Text = string.Format("{0}:{1}:{2}", hours.ToString("00"), minutes.ToString("00"), seconds.ToString("00"));
@@ -99,18 +99,6 @@ namespace FileManager.ToolForms
             panelEx.Style.BackColor2.Color = Color.Black;
             panelExCancel.Style.BackColor1.Color = Color.Black;
             panelExCancel.Style.BackColor2.Color = Color.Black;
-        }
-    }
-
-    public class FormProgressSyncData : FormProgressSync
-    {
-        protected override void InitForm()
-        {
-            laProgress.Text = "Syncing Database...";
-            panelEx.Style.BackColor1.Color = Color.Red;
-            panelEx.Style.BackColor2.Color = Color.Red;
-            panelExCancel.Style.BackColor1.Color = Color.Red;
-            panelExCancel.Style.BackColor2.Color = Color.Red;
         }
     }
 

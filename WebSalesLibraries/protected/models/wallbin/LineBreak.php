@@ -26,6 +26,11 @@ class LineBreak
      * @soap
      */    
     public $note;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateModify;     
     
     public function load($lineBreakRecord)
     {

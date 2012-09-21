@@ -67,14 +67,6 @@ namespace FileManager.TabPages
             }
         }
 
-        public void buttonItemIPadSyncData_Click(object sender, EventArgs e)
-        {
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-            {
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateLibraryOnServer();
-            }
-        }
-
         public void buttonItemIPadSyncFiles_Click(object sender, EventArgs e)
         {
             if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)

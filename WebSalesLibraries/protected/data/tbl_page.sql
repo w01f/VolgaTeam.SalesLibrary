@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `tbl_page` (
   `name` varchar(256) NOT NULL,
   `order` int(11) NOT NULL,
   `has_columns` tinyint(1) NOT NULL,
+  `date_modify` datetime NULL,
   `cached_col_view_ie` longblob,
   `cached_col_view_firefox` longblob,
   `cached_col_view_webkit` longblob,

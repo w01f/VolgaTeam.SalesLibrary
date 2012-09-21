@@ -8,21 +8,118 @@ namespace SalesDepot.CoreObjects
 {
     public class LineBreakProperties
     {
-        public Guid Identifier { get; set; }
-        public Color ForeColor { get; set; }
-        public Font Font { get; set; }
-        public Font BoldFont { get; set; }
-        public bool EnableBanner { get; set; }
-        public Image Banner { get; set; }
-        public string Note { get; set; }
+        private DateTime _lastChanged = DateTime.Now;
 
-        public LineBreakProperties()
+        public ILibraryFile Parent { get; private set; }
+        public Guid Identifier { get; set; }
+        private Color _foreColor = Color.Black;
+        private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+        private Font _boldFont = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Pixel);
+        private bool _enableBanner = false;
+        private Image _banner = null;
+        private string _note = string.Empty;
+
+        public Color ForeColor
         {
+            get
+            {
+                return _foreColor;
+            }
+            set
+            {
+                if (_foreColor != value)
+                    this.LastChanged = DateTime.Now;
+                _foreColor = value;
+            }
+        }
+
+        public Font Font
+        {
+            get
+            {
+                return _font;
+            }
+            set
+            {
+                if (_font != value)
+                    this.LastChanged = DateTime.Now;
+                _font = value;
+            }
+        }
+
+        public Font BoldFont
+        {
+            get
+            {
+                return _boldFont;
+            }
+            set
+            {
+                if (_boldFont != value)
+                    this.LastChanged = DateTime.Now;
+                _boldFont = value;
+            }
+        }
+
+        public bool EnableBanner
+        {
+            get
+            {
+                return _enableBanner;
+            }
+            set
+            {
+                if (_enableBanner != value)
+                    this.LastChanged = DateTime.Now;
+                _enableBanner = value;
+            }
+        }
+
+        public Image Banner
+        {
+            get
+            {
+                return _banner;
+            }
+            set
+            {
+                if (_banner != value)
+                    this.LastChanged = DateTime.Now;
+                _banner = value;
+            }
+        }
+
+        public string Note
+        {
+            get
+            {
+                return _note;
+            }
+            set
+            {
+                if (_note != value)
+                    this.LastChanged = DateTime.Now;
+                _note = value;
+            }
+        }
+
+        public DateTime LastChanged
+        {
+            get
+            {
+                return _lastChanged;
+            }
+            set
+            {
+                _lastChanged = value;
+                this.Parent.LastChanged = _lastChanged;
+            }
+        }
+
+        public LineBreakProperties(ILibraryFile parent)
+        {
+            this.Parent = parent;
             this.Identifier = Guid.NewGuid();
-            this.ForeColor = Color.Black;
-            this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.BoldFont = new Font("Arial", 12, FontStyle.Bold, GraphicsUnit.Pixel);
-            this.Note = string.Empty;
         }
 
         public string Serialize()
@@ -30,9 +127,9 @@ namespace SalesDepot.CoreObjects
             FontConverter fontConverter = new FontConverter();
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-            result.AppendLine(@"<Font>" + fontConverter.ConvertToString(this.Font) + @"</Font>");
-            result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
-            result.AppendLine(@"<Note>" + this.Note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
+            result.AppendLine(@"<Font>" + fontConverter.ConvertToString(_font) + @"</Font>");
+            result.AppendLine(@"<ForeColor>" + _foreColor.ToArgb() + @"</ForeColor>");
+            result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
             return result.ToString();
         }
 
@@ -53,8 +150,8 @@ namespace SalesDepot.CoreObjects
                     case "Font":
                         try
                         {
-                            this.Font = converter.ConvertFromString(childNode.InnerText) as Font;
-                            this.BoldFont = new Font(this.Font.Name, this.Font.Size, FontStyle.Bold);
+                            _font = converter.ConvertFromString(childNode.InnerText) as Font;
+                            _boldFont = new Font(_font.Name, _font.Size, FontStyle.Bold);
                         }
                         catch
                         {
@@ -62,22 +159,22 @@ namespace SalesDepot.CoreObjects
                         break;
                     case "ForeColor":
                         if (int.TryParse(childNode.InnerText, out tempInt))
-                            this.ForeColor = Color.FromArgb(tempInt);
+                            _foreColor = Color.FromArgb(tempInt);
                         break;
                     case "Note":
-                        this.Note = childNode.InnerText;
+                        _note = childNode.InnerText;
                         break;
 
                     #region Compatibility with old versions
                     case "EnableBanner":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.EnableBanner = tempBool;
+                            _enableBanner = tempBool;
                         break;
                     case "Banner":
                         if (string.IsNullOrEmpty(childNode.InnerText))
-                            this.Banner = null;
+                            _banner = null;
                         else
-                            this.Banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                            _banner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
                     #endregion
                 }

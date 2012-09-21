@@ -9,22 +9,135 @@ namespace SalesDepot.CoreObjects
 {
     public class BannerProperties
     {
+        private DateTime _lastChanged = DateTime.Now;
+
+        public ISyncObject Parent { get; private set; }
         public bool Configured { get; set; }
         public Guid Identifier { get; set; }
-        public bool Enable { get; set; }
-        public Image Image { get; set; }
-        public bool ShowText { get; set; }
-        public Alignment ImageAlignement { get; set; }
-        public string Text { get; set; }
-        public Color ForeColor { get; set; }
-        public Font Font { get; set; }
 
-        public BannerProperties()
+        private bool _enable = false;
+        private Image _image = null;
+        private bool _showText = false;
+        private Alignment _imageAlignement = Alignment.Left;
+        private string _text = string.Empty;
+        private Color _foreColor = Color.Black;
+        private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+
+        public bool Enable
         {
+            get
+            {
+                return _enable;
+            }
+            set
+            {
+                if (_enable != value)
+                    this.LastChanged = DateTime.Now;
+                _enable = value;
+            }
+        }
+
+        public Image Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                if (_image != value)
+                    this.LastChanged = DateTime.Now;
+                _image = value;
+            }
+        }
+
+        public bool ShowText
+        {
+            get
+            {
+                return _showText;
+            }
+            set
+            {
+                if (_showText != value)
+                    this.LastChanged = DateTime.Now;
+                _showText = value;
+            }
+        }
+
+        public Alignment ImageAlignement
+        {
+            get
+            {
+                return _imageAlignement;
+            }
+            set
+            {
+                if (_imageAlignement != value)
+                    this.LastChanged = DateTime.Now;
+                _imageAlignement = value;
+            }
+        }
+
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                if (_text != value)
+                    this.LastChanged = DateTime.Now;
+                _text = value;
+            }
+        }
+
+        public Color ForeColor
+        {
+            get
+            {
+                return _foreColor;
+            }
+            set
+            {
+                if (_foreColor != value)
+                    this.LastChanged = DateTime.Now;
+                _foreColor = value;
+            }
+        }
+
+        public Font Font
+        {
+            get
+            {
+                return _font;
+            }
+            set
+            {
+                if (_font != value)
+                    this.LastChanged = DateTime.Now;
+                _font = value;
+            }
+        }
+
+        public DateTime LastChanged
+        {
+            get
+            {
+                return _lastChanged;
+            }
+            set
+            {
+                _lastChanged = value;
+                this.Parent.LastChanged = _lastChanged;
+            }
+        }
+
+        public BannerProperties(ISyncObject parent)
+        {
+            this.Parent = parent;
             this.Identifier = Guid.NewGuid();
-            this.ForeColor = Color.Black;
-            this.Font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-            this.Text = string.Empty;
         }
 
         public string Serialize()
@@ -33,13 +146,14 @@ namespace SalesDepot.CoreObjects
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-            result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
-            result.AppendLine(@"<Image>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Image>");
-            result.AppendLine(@"<ImageAligement>" + ((int)this.ImageAlignement).ToString() + @"</ImageAligement>");
-            result.AppendLine(@"<ShowText>" + this.ShowText.ToString() + @"</ShowText>");
-            result.AppendLine(@"<Text>" + this.Text.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Text>");
-            result.AppendLine(@"<Font>" + fontConverter.ConvertToString(this.Font) + @"</Font>");
-            result.AppendLine(@"<ForeColor>" + this.ForeColor.ToArgb() + @"</ForeColor>");
+            result.AppendLine(@"<Enable>" + _enable.ToString() + @"</Enable>");
+            result.AppendLine(@"<Image>" + Convert.ToBase64String((byte[])converter.ConvertTo(_image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Image>");
+            result.AppendLine(@"<ImageAligement>" + ((int)_imageAlignement).ToString() + @"</ImageAligement>");
+            result.AppendLine(@"<ShowText>" + _showText.ToString() + @"</ShowText>");
+            result.AppendLine(@"<Text>" + _text.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Text>");
+            result.AppendLine(@"<Font>" + fontConverter.ConvertToString(_font) + @"</Font>");
+            result.AppendLine(@"<ForeColor>" + _foreColor.ToArgb() + @"</ForeColor>");
+            result.AppendLine(@"<LastChanged>" + _lastChanged.ToString() + @"</LastChanged>");
             return result.ToString();
         }
 
@@ -49,6 +163,7 @@ namespace SalesDepot.CoreObjects
             int tempInt = 0;
             bool tempBool = false;
             Guid tempGuid;
+            DateTime tempDateTime;
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 switch (childNode.Name)
@@ -59,29 +174,29 @@ namespace SalesDepot.CoreObjects
                         break;
                     case "Enable":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.Enable = tempBool;
+                            _enable = tempBool;
                         break;
                     case "Image":
                         if (string.IsNullOrEmpty(childNode.InnerText))
-                            this.Image = null;
+                            _image = null;
                         else
-                            this.Image = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                            _image = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
                     case "ImageAligement":
                         if (int.TryParse(childNode.InnerText, out tempInt))
-                            this.ImageAlignement = (Alignment)tempInt;
+                            _imageAlignement = (Alignment)tempInt;
                         break;
                     case "ShowText":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.ShowText = tempBool;
+                            _showText = tempBool;
                         break;
                     case "Text":
-                        this.Text = childNode.InnerText;
+                        _text = childNode.InnerText;
                         break;
                     case "Font":
                         try
                         {
-                            this.Font = converter.ConvertFromString(childNode.InnerText) as Font;
+                            _font = converter.ConvertFromString(childNode.InnerText) as Font;
                         }
                         catch
                         {
@@ -89,7 +204,11 @@ namespace SalesDepot.CoreObjects
                         break;
                     case "ForeColor":
                         if (int.TryParse(childNode.InnerText, out tempInt))
-                            this.ForeColor = Color.FromArgb(tempInt);
+                            _foreColor = Color.FromArgb(tempInt);
+                        break;
+                    case "LastChanged":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
+                            _lastChanged = tempDateTime;
                         break;
                 }
             }

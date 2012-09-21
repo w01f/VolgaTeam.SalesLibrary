@@ -14,23 +14,24 @@ class ColumnStorage extends CActiveRecord
     public static function updateData($column)
     {
         $columnRecord = new ColumnStorage();
-        $columnRecord->id_page = $column->pageId;
-        $columnRecord->id_library = $column->libraryId;
-        $columnRecord->name = $column->name;
-        $columnRecord->order = $column->order;
-        $columnRecord->back_color = $column->backColor;
-        $columnRecord->fore_color = $column->foreColor;
-        $columnRecord->font_name = $column->font->name;
-        $columnRecord->font_size = $column->font->size;
-        $columnRecord->font_bold = $column->font->isBold;
-        $columnRecord->font_italic = $column->font->isItalic;
-        $columnRecord->show_text = $column->showText;
-        $columnRecord->alignment = $column->alignment;
-        $columnRecord->enable_widget = $column->enableWidget;
-        $columnRecord->widget = $column->widget;
+        $columnRecord->id_page = $column['pageId'];
+        $columnRecord->id_library = $column['libraryId'];
+        $columnRecord->name = $column['name'];
+        $columnRecord->order = $column['order'];
+        $columnRecord->back_color = $column['backColor'];
+        $columnRecord->fore_color = $column['foreColor'];
+        $columnRecord->font_name = $column['font']['name'];
+        $columnRecord->font_size = $column['font']['size'];
+        $columnRecord->font_bold = $column['font']['isBold'];
+        $columnRecord->font_italic = $column['font']['isItalic'];
+        $columnRecord->show_text = $column['showText'];
+        $columnRecord->alignment = $column['alignment'];
+        $columnRecord->enable_widget = $column['enableWidget'];
+        $columnRecord->widget = $column['widget'];
+        $columnRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($column['dateModify']));;
         
-        $columnRecord->id_banner = $column->banner->id;
-        BannerStorage::updateData($column->banner);
+        $columnRecord->id_banner = $column['banner']['id'];
+        BannerStorage::updateData($column['banner']);
         
         $columnRecord->save();
     }

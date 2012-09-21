@@ -62,6 +62,11 @@ class Column
      * @soap
      */
     public $banner;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateModify;     
     public function __construct($page)
     {
         $this->parent = $page;

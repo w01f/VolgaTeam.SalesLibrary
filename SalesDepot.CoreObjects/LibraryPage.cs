@@ -5,35 +5,104 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects
 {
-    public class LibraryPage
+    public class LibraryPage : ISyncObject
     {
+        private string _name = string.Empty;
+        private bool _enable = false;
+        private int _order = 0;
+        private bool _enableColumnTitles = false;
+        private bool _applyForAllColumnTitles = false;
+
         public ILibrary Parent { get; set; }
-        public string Name { get; set; }
-        public bool Enable { get; set; }
         public Guid Identifier { get; set; }
-        public int Order { get; set; }
-        public bool EnableColumnTitles { get; set; }
-        public bool ApplyForAllColumnTitles { get; set; }
         public List<LibraryFolder> Folders { get; set; }
         public List<ColumnTitle> ColumnTitles { get; set; }
+        public DateTime LastChanged { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (_name != value)
+                    this.LastChanged = DateTime.Now;
+                _name = value;
+            }
+        }
+
+        public bool Enable
+        {
+            get
+            {
+                return _enable;
+            }
+            set
+            {
+                if (_enable != value)
+                    this.LastChanged = DateTime.Now;
+                _enable = value;
+            }
+        }
+
+        public int Order
+        {
+            get
+            {
+                return _order;
+            }
+            set
+            {
+                if (_order != value)
+                    this.LastChanged = DateTime.Now;
+                _order = value;
+            }
+        }
+
+        public bool EnableColumnTitles
+        {
+            get
+            {
+                return _enableColumnTitles;
+            }
+            set
+            {
+                if (_enableColumnTitles != value)
+                    this.LastChanged = DateTime.Now;
+                _enableColumnTitles = value;
+            }
+        }
+
+        public bool ApplyForAllColumnTitles
+        {
+            get
+            {
+                return _applyForAllColumnTitles;
+            }
+            set
+            {
+                if (_applyForAllColumnTitles != value)
+                    this.LastChanged = DateTime.Now;
+                _applyForAllColumnTitles = value;
+            }
+        }
 
         public int Index
         {
             get
             {
-                return this.Order + 1;
+                return _order + 1;
             }
         }
 
         public LibraryPage(ILibrary parent, bool isHome = false)
         {
             this.Parent = parent;
-            this.Name = isHome ? "Page 1" : string.Format("Page {0}", this.Parent.Pages.Count + 1);
-            this.Enable = isHome;
+            _name = isHome ? "Page 1" : string.Format("Page {0}", this.Parent.Pages.Count + 1);
+            _enable = isHome;
             this.Identifier = Guid.NewGuid();
-            this.Order = 0;
-            this.EnableColumnTitles = false;
-            this.ApplyForAllColumnTitles = false;
             this.Folders = new List<LibraryFolder>();
             this.ColumnTitles = new List<ColumnTitle>();
 
@@ -54,11 +123,12 @@ namespace SalesDepot.CoreObjects
         public string Serialize()
         {
             StringBuilder result = new StringBuilder();
-            result.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
+            result.AppendLine(@"<Name>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
             result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-            result.AppendLine(@"<Order>" + this.Order + @"</Order>");
-            result.AppendLine(@"<EnableColumnTitles>" + this.EnableColumnTitles + @"</EnableColumnTitles>");
-            result.AppendLine(@"<ApplyForAllColumnTitles>" + this.ApplyForAllColumnTitles + @"</ApplyForAllColumnTitles>");
+            result.AppendLine(@"<Order>" + _order + @"</Order>");
+            result.AppendLine(@"<EnableColumnTitles>" + _enableColumnTitles + @"</EnableColumnTitles>");
+            result.AppendLine(@"<ApplyForAllColumnTitles>" + _applyForAllColumnTitles + @"</ApplyForAllColumnTitles>");
+            result.AppendLine(@"<LastChanged>" + this.LastChanged.ToString() + @"</LastChanged>");
             result.AppendLine("<Folders>");
             foreach (LibraryFolder folder in this.Folders)
                 result.AppendLine(@"<Folder>" + folder.Serialize() + @"</Folder>");
@@ -75,13 +145,14 @@ namespace SalesDepot.CoreObjects
             bool tempBool = false;
             int tempInt = 0;
             Guid tempGuid;
+            DateTime tempDateTime;
 
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 switch (childNode.Name)
                 {
                     case "Name":
-                        this.Name = childNode.InnerText;
+                        _name = childNode.InnerText;
                         break;
                     case "Identifier":
                         if (Guid.TryParse(childNode.InnerText, out tempGuid))
@@ -89,19 +160,23 @@ namespace SalesDepot.CoreObjects
                         break;
                     case "Enable":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.Enable = tempBool;
+                            _enable = tempBool;
                         break;
                     case "Order":
                         if (int.TryParse(childNode.InnerText, out tempInt))
-                            this.Order = tempInt;
+                            _order = tempInt;
                         break;
                     case "EnableColumnTitles":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.EnableColumnTitles = tempBool;
+                            _enableColumnTitles = tempBool;
                         break;
                     case "ApplyForAllColumnTitles":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.ApplyForAllColumnTitles = tempBool;
+                            _applyForAllColumnTitles = tempBool;
+                        break;
+                    case "LastChanged":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
+                            this.LastChanged = tempDateTime;
                         break;
                     case "Folders":
                         this.Folders.Clear();

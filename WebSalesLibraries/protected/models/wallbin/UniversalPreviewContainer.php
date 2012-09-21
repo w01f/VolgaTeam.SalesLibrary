@@ -53,9 +53,14 @@ class UniversalPreviewContainer
      */
     public $thumbsLinks;
     /**
-     * @var int
+     * @var string[]
      * @soap
      */
+    public $txtLinks;
+    /**
+     * @var int
+     * @soap
+     */    
     public $thumbsWidth;
     /**
      * @var int

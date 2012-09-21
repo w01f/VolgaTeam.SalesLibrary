@@ -46,6 +46,11 @@ class Banner
      * @soap
      */
     public $foreColor;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateModify; 
 
     public function load($bannerRecord)
     {

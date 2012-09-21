@@ -43,10 +43,10 @@ class Library
         }
     }
 
-    public function buildCache()
+    public function buildCache($controller)
     {
         foreach ($this->pages as $page)
-            $page->buildCache();
+            $page->buildCache($controller);
     }
 
     public function getAutoWidget($extension)

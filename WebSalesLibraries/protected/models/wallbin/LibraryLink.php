@@ -42,6 +42,11 @@ class LibraryLink
      * @var string
      * @soap
      */
+    public $fileDate;
+    /**
+     * @var string
+     * @soap
+     */
     public $note;
     /**
      * @var boolean
@@ -83,6 +88,21 @@ class LibraryLink
      * @soap
      */
     public $universalPreview;
+    /**
+     * @var string
+     * @soap
+     */
+    public $tags;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateAdd;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateModify;
     public $browser;
     public $originalFormat;
     public $availableFormats;
@@ -467,6 +487,14 @@ class LibraryLink
         }
         if (isset($viewSources))
             return $viewSources;
+    }
+
+    public static function libraryLinkComparer($x, $y)
+    {
+        if ($x->order == $y->order)
+            return 0;
+        else
+            return ($x->order < $y->order) ? -1 : 1;
     }
 
 }

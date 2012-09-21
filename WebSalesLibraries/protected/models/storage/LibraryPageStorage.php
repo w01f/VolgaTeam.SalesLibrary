@@ -11,22 +11,47 @@ class LibraryPageStorage extends CActiveRecord
         return '{{page}}';
     }
 
-    public static function updateData($page)
+    public static function updateData($page, $libraryRootPath)
     {
-        $pageRecord = new LibraryPageStorage();
-        $pageRecord->id = $page->id;
-        $pageRecord->id_library = $page->libraryId;
-        $pageRecord->name = $page->name;
-        $pageRecord->order = $page->order;
-        $pageRecord->has_columns = $page->enableColumns;
+        $needToUpdate = false;
+        $needToCreate = false;
+        $pageRecord = LibraryPageStorage::model()->findByPk($page['id']);
+        $pageDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($page['dateModify']));
+        if ($pageRecord !== null)
+        {
+            if ($pageRecord->date_modify != null)
+                if ($pageRecord->date_modify != $pageDate)
+                    $needToUpdate = true;
+        }
+        else
+        {
+            $pageRecord = new LibraryPageStorage();
+            $needToCreate = true;
+        }
+        if ($needToCreate || $needToUpdate)
+        {
+            $pageRecord->id = $page['id'];
+            $pageRecord->id_library = $page['libraryId'];
+            $pageRecord->name = $page['name'];
+            $pageRecord->order = $page['order'];
+            $pageRecord->has_columns = $page['enableColumns'];
+            $pageRecord->date_modify = $pageDate;
+            $pageRecord->save();
 
-        foreach ($page->columns as $column)
+            echo 'Page ' . ($needToCreate ? 'created' : 'updated') . ': ' . $page['name'] . "\n";
+        }
+
+        foreach ($page['folders'] as $folder)
+        {
+            FolderStorage::updateData($folder, $libraryRootPath);
+            $folderIds[] = $folder['id'];
+        }
+        if (isset($folderIds))
+            FolderStorage::clearByIds($page['id'], $folderIds);
+
+        ColumnStorage::clearData($page['libraryId']);
+        foreach ($page['columns'] as $column)
             ColumnStorage::updateData($column);
-
-        foreach ($page->folders as $folder)
-            FolderStorage::updateData($folder);
-
-        $pageRecord->save();
     }
 
     public static function updateCache($page)
@@ -39,9 +64,14 @@ class LibraryPageStorage extends CActiveRecord
         }
     }
 
-    public static function clearData($libraryId)
+    public static function clearByLibrary($libraryId)
     {
         LibraryPageStorage::model()->deleteAll('id_library=?', array($libraryId));
+    }
+
+    public static function clearByIds($libraryId, $pageIds)
+    {
+        Yii::app()->db->createCommand()->delete('tbl_page', "id_library = '" . $libraryId . "' and id not in ('" . implode("','", $pageIds) . "')");
     }
 
 }

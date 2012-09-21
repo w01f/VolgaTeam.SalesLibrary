@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `tbl_column` (
   `enable_widget` tinyint(1) NOT NULL,
   `widget` mediumblob,
   `id_banner` varchar(36) NOT NULL,
+  `date_modify` datetime NULL,
   PRIMARY KEY (`id`),
   KEY `id_page` (`id_page`),
   KEY `id_library` (`id_library`)

@@ -14,18 +14,19 @@ class BannerStorage extends CActiveRecord
     public static function updateData($banner)
     {
         $bannerRecord = new BannerStorage();
-        $bannerRecord->id = $banner->id;
-        $bannerRecord->id_library = $banner->libraryId;
-        $bannerRecord->enabled = $banner->isEnabled;
-        $bannerRecord->image = $banner->image;
-        $bannerRecord->show_text = $banner->showText;
-        $bannerRecord->image_alignment = $banner->imageAlignment;
-        $bannerRecord->text = $banner->text;
-        $bannerRecord->fore_color = $banner->foreColor;
-        $bannerRecord->font_name = $banner->font->name;
-        $bannerRecord->font_size = $banner->font->size;
-        $bannerRecord->font_bold = $banner->font->isBold;
-        $bannerRecord->font_italic = $banner->font->isItalic;
+        $bannerRecord->id = $banner['id'];
+        $bannerRecord->id_library = $banner['libraryId'];
+        $bannerRecord->enabled = $banner['isEnabled'];
+        $bannerRecord->image = $banner['image'];
+        $bannerRecord->show_text = $banner['showText'];
+        $bannerRecord->image_alignment = $banner['imageAlignment'];
+        $bannerRecord->text = $banner['text'];
+        $bannerRecord->fore_color = $banner['foreColor'];
+        $bannerRecord->font_name = $banner['font']['name'];
+        $bannerRecord->font_size = $banner['font']['size'];
+        $bannerRecord->font_bold = $banner['font']['isBold'];
+        $bannerRecord->font_italic = $banner['font']['isItalic'];
+        $bannerRecord->date_modify = date(Yii::app()->params['mysqlDateFormat'], strtotime($banner['dateModify']));
         $bannerRecord->save();
     }
 

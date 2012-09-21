@@ -14,9 +14,9 @@ class AutoWidgetStorage extends CActiveRecord
     public static function updateData($autoWidget)
     {
         $autoWidgetRecord = new AutoWidgetStorage();
-        $autoWidgetRecord->id_library = $autoWidget->libraryId;
-        $autoWidgetRecord->extension = $autoWidget->extension;
-        $autoWidgetRecord->widget = $autoWidget->widget;
+        $autoWidgetRecord->id_library = $autoWidget['libraryId'];
+        $autoWidgetRecord->extension = $autoWidget['extension'];
+        $autoWidgetRecord->widget = $autoWidget['widget'];
         $autoWidgetRecord->save();
     }
 

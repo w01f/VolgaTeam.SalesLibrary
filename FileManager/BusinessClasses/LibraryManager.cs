@@ -425,6 +425,7 @@ namespace FileManager.BusinessClasses
 
                 AddFolderForSync(new DirectoryInfo(Path.Combine(salesDepot.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
                 filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, Constants.StorageLightFileName)).FullName);
+                filesWhiteList.Add(new FileInfo(Path.Combine(salesDepot.Folder.FullName, Constants.JsonFileName)).FullName);
 
                 List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
                 List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();

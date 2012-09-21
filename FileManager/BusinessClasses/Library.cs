@@ -465,8 +465,10 @@ namespace FileManager.BusinessClasses
             if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
                 if (!this.UseDirectAccess)
                     GenerateExtendedPreviewFiles();
+            
             if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
             {
+                this.IPadManager.SaveJson();
                 this.SaveLight();
                 Archive();
             }

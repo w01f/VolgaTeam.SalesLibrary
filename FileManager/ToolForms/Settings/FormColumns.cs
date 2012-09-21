@@ -207,6 +207,7 @@ namespace FileManager.ToolForms.Settings
                         folder = new SalesDepot.CoreObjects.LibraryFolder(_currentPage);
                         folder.Identifier = (Guid)row.Cells[1].Value;
                         _currentPage.Folders.Add(folder);
+                        _currentPage.LastChanged = DateTime.Now;
                     }
                     folder.Name = row.Cells[0].Value.ToString();
                     folder.ColumnOrder = 0;
@@ -228,6 +229,7 @@ namespace FileManager.ToolForms.Settings
                         folder = new SalesDepot.CoreObjects.LibraryFolder(_currentPage);
                         folder.Identifier = (Guid)row.Cells[1].Value;
                         _currentPage.Folders.Add(folder);
+                        _currentPage.LastChanged = DateTime.Now;
                     }
                     folder.Name = row.Cells[0].Value.ToString();
                     folder.ColumnOrder = 1;
@@ -249,6 +251,7 @@ namespace FileManager.ToolForms.Settings
                         folder = new SalesDepot.CoreObjects.LibraryFolder(_currentPage);
                         folder.Identifier = (Guid)row.Cells[1].Value;
                         _currentPage.Folders.Add(folder);
+                        _currentPage.LastChanged = DateTime.Now;
                     }
                     folder.Name = row.Cells[0].Value.ToString();
                     folder.ColumnOrder = 2;

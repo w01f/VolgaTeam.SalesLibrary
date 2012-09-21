@@ -64,6 +64,7 @@
     <Compile Include="ExpirationDateOptions.cs" />
     <Compile Include="FileLink.cs" />
     <Compile Include="FolderLink.cs" />
+    <Compile Include="ISyncObject.cs" />
     <Compile Include="Library.cs" />
     <Compile Include="LibraryFile.cs" />
     <Compile Include="LibraryFolder.cs" />

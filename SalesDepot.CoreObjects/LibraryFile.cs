@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects
 {
-    public interface ILibraryFile
+    public interface ILibraryFile: ISyncObject
     {
         string Name { get; set; }
         LibraryFolder Parent { get; set; }
@@ -12,7 +12,6 @@ namespace SalesDepot.CoreObjects
         Guid Identifier { get; set; }
         string RelativePath { get; set; }
         FileTypes Type { get; set; }
-        string Format { get; set; }
         int Order { get; set; }
         bool IsBold { get; set; }
         bool IsDead { get; set; }

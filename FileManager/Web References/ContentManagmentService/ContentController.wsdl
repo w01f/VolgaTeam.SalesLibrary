@@ -26,6 +26,7 @@
           <xsd:element name="folders" type="tns:LibraryFolderArray" />
           <xsd:element name="enableColumns" type="xsd:boolean" />
           <xsd:element name="columns" type="tns:ColumnArray" />
+          <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryFolderArray">
@@ -55,6 +56,8 @@
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
           <xsd:element name="files" type="tns:LibraryLinkArray" />
+          <xsd:element name="dateAdd" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="Font">
@@ -76,6 +79,7 @@
           <xsd:element name="text" type="xsd:string" />
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="foreColor" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryLinkArray">
@@ -94,6 +98,7 @@
           <xsd:element name="fileRelativePath" type="xsd:string" />
           <xsd:element name="fileName" type="xsd:string" />
           <xsd:element name="fileExtension" type="xsd:string" />
+          <xsd:element name="fileDate" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="order" type="xsd:int" />
@@ -103,6 +108,9 @@
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
           <xsd:element name="universalPreview" type="tns:UniversalPreviewContainer" />
+          <xsd:element name="tags" type="xsd:string" />
+          <xsd:element name="dateAdd" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -112,6 +120,7 @@
           <xsd:element name="font" type="tns:Font" />
           <xsd:element name="foreColor" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
+          <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="UniversalPreviewContainer">
@@ -126,6 +135,7 @@
           <xsd:element name="oldOfficeFormatLinks" type="tns:stringArray" />
           <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
           <xsd:element name="thumbsLinks" type="tns:stringArray" />
+          <xsd:element name="txtLinks" type="tns:stringArray" />
           <xsd:element name="thumbsWidth" type="xsd:int" />
           <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
@@ -158,6 +168,7 @@
           <xsd:element name="enableWidget" type="xsd:boolean" />
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
+          <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="AutoWidgetArray">

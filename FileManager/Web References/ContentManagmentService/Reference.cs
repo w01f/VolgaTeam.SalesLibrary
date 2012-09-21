@@ -314,6 +314,8 @@ namespace FileManager.ContentManagmentService {
         
         private Column[] columnsField;
         
+        private string dateModifyField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -383,6 +385,16 @@ namespace FileManager.ContentManagmentService {
                 this.columnsField = value;
             }
         }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -428,6 +440,10 @@ namespace FileManager.ContentManagmentService {
         private Banner bannerField;
         
         private LibraryLink[] filesField;
+        
+        private string dateAddField;
+        
+        private string dateModifyField;
         
         /// <remarks/>
         public string id {
@@ -608,6 +624,26 @@ namespace FileManager.ContentManagmentService {
                 this.filesField = value;
             }
         }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -744,6 +780,8 @@ namespace FileManager.ContentManagmentService {
         
         private Banner bannerField;
         
+        private string dateModifyField;
+        
         /// <remarks/>
         public string pageId {
             get {
@@ -863,6 +901,16 @@ namespace FileManager.ContentManagmentService {
                 this.bannerField = value;
             }
         }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -890,6 +938,8 @@ namespace FileManager.ContentManagmentService {
         private Font fontField;
         
         private string foreColorField;
+        
+        private string dateModifyField;
         
         /// <remarks/>
         public string id {
@@ -980,6 +1030,16 @@ namespace FileManager.ContentManagmentService {
                 this.foreColorField = value;
             }
         }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1009,6 +1069,8 @@ namespace FileManager.ContentManagmentService {
         private string[] newOfficeFormatLinksField;
         
         private string[] thumbsLinksField;
+        
+        private string[] txtLinksField;
         
         private int thumbsWidthField;
         
@@ -1115,6 +1177,16 @@ namespace FileManager.ContentManagmentService {
         }
         
         /// <remarks/>
+        public string[] txtLinks {
+            get {
+                return this.txtLinksField;
+            }
+            set {
+                this.txtLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
         public int thumbsWidth {
             get {
                 return this.thumbsWidthField;
@@ -1152,6 +1224,8 @@ namespace FileManager.ContentManagmentService {
         private string foreColorField;
         
         private string noteField;
+        
+        private string dateModifyField;
         
         /// <remarks/>
         public string id {
@@ -1202,6 +1276,16 @@ namespace FileManager.ContentManagmentService {
                 this.noteField = value;
             }
         }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1226,6 +1310,8 @@ namespace FileManager.ContentManagmentService {
         
         private string fileExtensionField;
         
+        private string fileDateField;
+        
         private string noteField;
         
         private bool isBoldField;
@@ -1243,6 +1329,12 @@ namespace FileManager.ContentManagmentService {
         private Banner bannerField;
         
         private UniversalPreviewContainer universalPreviewField;
+        
+        private string tagsField;
+        
+        private string dateAddField;
+        
+        private string dateModifyField;
         
         /// <remarks/>
         public string id {
@@ -1311,6 +1403,16 @@ namespace FileManager.ContentManagmentService {
             }
             set {
                 this.fileExtensionField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileDate {
+            get {
+                return this.fileDateField;
+            }
+            set {
+                this.fileDateField = value;
             }
         }
         
@@ -1401,6 +1503,36 @@ namespace FileManager.ContentManagmentService {
             }
             set {
                 this.universalPreviewField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string tags {
+            get {
+                return this.tagsField;
+            }
+            set {
+                this.tagsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateAdd {
+            get {
+                return this.dateAddField;
+            }
+            set {
+                this.dateAddField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string dateModify {
+            get {
+                return this.dateModifyField;
+            }
+            set {
+                this.dateModifyField = value;
             }
         }
     }

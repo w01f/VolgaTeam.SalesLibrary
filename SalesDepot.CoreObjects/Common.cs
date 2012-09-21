@@ -7,6 +7,7 @@ namespace SalesDepot.CoreObjects
     {
         public const string UserSettingsFileName = @"SalesDepotUserSettings.xml";
         public const string StorageFileName = @"SalesDepotCache.xml";
+        public const string JsonFileName = @"SalesDepotCache.json";
         public const string StorageLightFileName = @"SalesDepotCacheLight.xml";
         public const string StyleFileName = @"SalesDepotStyle.xml";
         public const string WholeDriveFilesStorage = @"Primary Root";

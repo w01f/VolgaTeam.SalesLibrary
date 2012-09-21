@@ -427,55 +427,6 @@ namespace FileManager.PresentationClasses.IPad
         #endregion
 
         #region Site Tab
-        public void UpdateLibraryOnServer()
-        {
-            string message = string.Empty;
-            using (ToolForms.FormProgressSyncData form = new ToolForms.FormProgressSyncData())
-            {
-                form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
-                {
-                    AppManager.Instance.ThreadAborted = true;
-                });
-                FormMain.Instance.ribbonControl.Enabled = false;
-                this.Enabled = false;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
-                Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                {
-                    AppManager.Instance.ThreadActive = true;
-                    AppManager.Instance.ThreadAborted = false;
-                    this.ParentDecorator.Library.IPadManager.UpdateLibraryOnServer(out message);
-                }));
-                form.Show();
-                FormWindowState savedState = FormMain.Instance.WindowState;
-                if (this.ParentDecorator.Library.MinimizeOnSync)
-                    FormMain.Instance.WindowState = FormWindowState.Minimized;
-                thread.Start();
-                while (thread.IsAlive)
-                {
-                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
-                    {
-                        Thread.Sleep(100);
-                        System.Windows.Forms.Application.DoEvents();
-                    }
-                    else
-                        thread.Abort();
-                }
-                AppManager.Instance.ThreadActive = false;
-                AppManager.Instance.ThreadAborted = false;
-                form.Close();
-                this.Enabled = true;
-                FormMain.Instance.ribbonControl.Enabled = true;
-
-                if (!form.CloseAfterSync)
-                    FormMain.Instance.WindowState = savedState;
-
-                if (!string.IsNullOrEmpty(message))
-                    AppManager.Instance.ShowWarning(message);
-                else if (form.CloseAfterSync)
-                    Application.Exit();
-            }
-        }
-
         private void pbIE_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website))

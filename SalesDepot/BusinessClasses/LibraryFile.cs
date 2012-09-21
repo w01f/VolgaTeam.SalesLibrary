@@ -32,13 +32,13 @@ namespace SalesDepot.BusinessClasses
         public Guid Identifier { get; set; }
         public string RelativePath { get; set; }
         public FileTypes Type { get; set; }
-        public string Format { get; set; }
         public int Order { get; set; }
         public bool IsBold { get; set; }
         public bool IsDead { get; set; }
-        public DateTime AddDate { get; set; }
         public bool EnableWidget { get; set; }
         public string CriteriaOverlap { get; set; }
+        public DateTime AddDate { get; set; }
+        public DateTime LastChanged { get; set; }
 
         public LibraryFileSearchTags SearchTags { get; set; }
         public ExpirationDateOptions ExpirationDateOptions { get; set; }
@@ -258,11 +258,9 @@ namespace SalesDepot.BusinessClasses
             this.Identifier = Guid.NewGuid();
             this.RelativePath = string.Empty;
             this.Type = FileTypes.Other;
-            this.Format = string.Empty;
             this.Order = 0;
             this.IsBold = false;
             this.IsDead = false;
-            this.AddDate = DateTime.Now;
             this.CriteriaOverlap = string.Empty;
             this.SearchTags = new LibraryFileSearchTags();
             this.ExpirationDateOptions = new ExpirationDateOptions();
@@ -282,9 +280,7 @@ namespace SalesDepot.BusinessClasses
             result.AppendLine(@"<LocalPath>" + _linkRemotePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
-            result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
             result.AppendLine(@"<Order>" + this.Order + @"</Order>");
-            result.AppendLine(@"<AddDate>" + this.AddDate + @"</AddDate>");
             result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
             result.AppendLine(this.SearchTags.Serialize());
@@ -340,19 +336,12 @@ namespace SalesDepot.BusinessClasses
                         {
                             this.Type = (FileTypes)tempInt;
                             if (this.Type == FileTypes.LineBreak)
-                                this.LineBreakProperties = new LineBreakProperties();
+                                this.LineBreakProperties = new LineBreakProperties(this);
                         }
-                        break;
-                    case "Format":
-                        this.Format = childNode.InnerText;
                         break;
                     case "Order":
                         if (int.TryParse(childNode.InnerText, out tempInt))
                             this.Order = tempInt;
-                        break;
-                    case "AddDate":
-                        if (DateTime.TryParse(childNode.InnerText, out tempDate))
-                            this.AddDate = tempDate;
                         break;
                     case "EnableWidget":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
@@ -379,12 +368,12 @@ namespace SalesDepot.BusinessClasses
                         this.PresentationProperties.Deserialize(childNode);
                         break;
                     case "LineBreakProperties":
-                        this.LineBreakProperties = new LineBreakProperties();
+                        this.LineBreakProperties = new LineBreakProperties(this);
                         this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
                         this.LineBreakProperties.Deserialize(childNode);
                         break;
                     case "BannerProperties":
-                        this.BannerProperties = new BannerProperties();
+                        this.BannerProperties = new BannerProperties(this);
                         this.BannerProperties.Deserialize(childNode);
                         break;
                     #region Compatibility with old versions
@@ -411,7 +400,7 @@ namespace SalesDepot.BusinessClasses
 
         public void InitBannerProperties()
         {
-            this.BannerProperties = new BannerProperties();
+            this.BannerProperties = new BannerProperties(this);
             try
             {
                 this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);

@@ -9,9 +9,15 @@ using SalesDepot.CoreObjects;
 
 namespace FileManager.BusinessClasses
 {
-    public class LibraryFile:ILibraryFile
+    public class LibraryFile : ILibraryFile
     {
+        private string _linkLocalPath = string.Empty;
+        private string _name = string.Empty;
         private string _note = string.Empty;
+        private int _order = 0;
+        private bool _isBold = false;
+        private bool _isDead = false;
+        private bool _enableWidget = false;
         private Image _widget = null;
 
         #region Compatibility with old versions
@@ -19,20 +25,14 @@ namespace FileManager.BusinessClasses
         private Image _oldBanner;
         #endregion
 
-        private string _linkLocalPath = string.Empty;
+        private DateTime _lastChanged =DateTime.MinValue;
 
-        public string Name { get; set; }
         public LibraryFolder Parent { get; set; }
         public Guid RootId { get; set; }
         public Guid Identifier { get; set; }
         public string RelativePath { get; set; }
         public FileTypes Type { get; set; }
-        public string Format { get; set; }
-        public int Order { get; set; }
-        public bool IsBold { get; set; }
-        public bool IsDead { get; set; }
         public DateTime AddDate { get; set; }
-        public bool EnableWidget { get; set; }
         public string CriteriaOverlap { get; set; }
 
         public LibraryFileSearchTags SearchTags { get; set; }
@@ -45,6 +45,126 @@ namespace FileManager.BusinessClasses
         #region Compatibility with desktop version of Sales Depot
         public PresentationPreviewContainer PreviewContainer { get; set; }
         #endregion
+
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                if (_name != value)
+                    this.LastChanged = DateTime.Now;
+                _name = value;
+            }
+        }
+
+        public string Note
+        {
+            get
+            {
+                if (_isDead && this.Parent.Parent.Parent.EnableInactiveLinks && (this.Parent.Parent.Parent.InactiveLinksBoldWarning || this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
+                    return string.Empty;
+                else
+                    return _note;
+
+            }
+            set
+            {
+                if (_note != value)
+                    this.LastChanged = DateTime.Now;
+                _note = value;
+            }
+        }
+
+        public int Order
+        {
+            get
+            {
+                return _order;
+            }
+            set
+            {
+                if (_order != value)
+                    this.LastChanged = DateTime.Now;
+                _order = value;
+            }
+        }
+
+        public bool IsBold
+        {
+            get
+            {
+                return _isBold;
+            }
+            set
+            {
+                if (_isBold != value)
+                    this.LastChanged = DateTime.Now;
+                _isBold = value;
+            }
+        }
+
+        public bool IsDead
+        {
+            get
+            {
+                return _isDead;
+            }
+            set
+            {
+                if (_isDead != value)
+                    this.LastChanged = DateTime.Now;
+                _isDead = value;
+            }
+        }
+
+        public bool EnableWidget
+        {
+            get
+            {
+                return _enableWidget;
+            }
+            set
+            {
+                if (_enableWidget != value)
+                    this.LastChanged = DateTime.Now;
+                _enableWidget = value;
+            }
+        }
+
+        public Image Widget
+        {
+            get
+            {
+                if (_enableWidget && _widget != null)
+                    return _widget;
+                else if (this.Parent != null)
+                    return this.Parent.Parent.Parent.AutoWidgets.Where(x => x.Extension.ToLower().Equals(!string.IsNullOrEmpty(this.Extension) ? this.Extension.Substring(1).ToLower() : string.Empty)).Select(y => y.Widget).FirstOrDefault();
+                else
+                    return null;
+            }
+            set
+            {
+                if (_widget != value)
+                    this.LastChanged = DateTime.Now;
+                _widget = value;
+            }
+        }
+
+        public DateTime LastChanged
+        {
+            get
+            {
+                return _lastChanged;
+            }
+            set
+            {
+                _lastChanged = value;
+                this.Parent.LastChanged = _lastChanged;
+            }
+        }
 
         public string OriginalPath
         {
@@ -72,24 +192,24 @@ namespace FileManager.BusinessClasses
         {
             get
             {
-                if (this.IsDead && this.Parent.Parent.Parent.EnableInactiveLinks)
+                if (_isDead && this.Parent.Parent.Parent.EnableInactiveLinks)
                 {
                     if (this.Parent.Parent.Parent.InactiveLinksBoldWarning)
                     {
-                        if (!this.Name.Contains("INACTIVE!"))
-                            return "INACTIVE! " + this.Name;
+                        if (!_name.Contains("INACTIVE!"))
+                            return "INACTIVE! " + _name;
                         else
-                            return this.Name;
+                            return _name;
                     }
                     else if (this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak)
                         return string.Empty;
                     else
-                        return this.Name;
+                        return _name;
                 }
                 else if (this.ExpirationDateOptions.EnableExpirationDate && this.ExpirationDateOptions.LabelLinkWhenExpired && this.IsExpired)
-                    return "EXPIRED! " + this.Name;
+                    return "EXPIRED! " + _name;
                 else
-                    return this.Name;
+                    return _name;
             }
         }
 
@@ -98,7 +218,7 @@ namespace FileManager.BusinessClasses
             get
             {
                 if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder || this.Type == FileTypes.LineBreak)
-                    return this.Name;
+                    return _name;
                 else
                     return Path.GetFileName(this.OriginalPath);
             }
@@ -109,7 +229,7 @@ namespace FileManager.BusinessClasses
             get
             {
                 if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder)
-                    return this.Name;
+                    return _name;
                 else if (this.Type == FileTypes.LineBreak)
                     return string.Empty;
                 else
@@ -122,7 +242,7 @@ namespace FileManager.BusinessClasses
             get
             {
                 if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder)
-                    return this.Name;
+                    return _name;
                 else if (this.Type == FileTypes.LineBreak)
                     return string.Empty;
                 else
@@ -151,33 +271,16 @@ namespace FileManager.BusinessClasses
             }
         }
 
-
-        public string Note
-        {
-            get
-            {
-                if (this.IsDead && this.Parent.Parent.Parent.EnableInactiveLinks && (this.Parent.Parent.Parent.InactiveLinksBoldWarning || this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
-                    return string.Empty;
-                else
-                    return _note;
-
-            }
-            set
-            {
-                _note = value;
-            }
-        }
-
         public bool DisplayAsBold
         {
             get
             {
-                if (this.IsDead && this.Parent.Parent.Parent.EnableInactiveLinks && this.Parent.Parent.Parent.InactiveLinksBoldWarning)
+                if (_isDead && this.Parent.Parent.Parent.EnableInactiveLinks && this.Parent.Parent.Parent.InactiveLinksBoldWarning)
                     return true;
                 else if (this.ExpirationDateOptions.EnableExpirationDate && this.IsExpired && this.ExpirationDateOptions.LabelLinkWhenExpired)
                     return true;
                 else
-                    return this.IsBold;
+                    return _isBold;
             }
         }
 
@@ -193,23 +296,6 @@ namespace FileManager.BusinessClasses
 
         }
 
-        public Image Widget
-        {
-            get
-            {
-                if (this.EnableWidget && _widget != null)
-                    return _widget;
-                else if (this.Parent != null)
-                    return this.Parent.Parent.Parent.AutoWidgets.Where(x => x.Extension.ToLower().Equals(!string.IsNullOrEmpty(this.Extension) ? this.Extension.Substring(1).ToLower() : string.Empty)).Select(y => y.Widget).FirstOrDefault();
-                else
-                    return null;
-            }
-            set
-            {
-                _widget = value;
-            }
-        }
-
         public string Content
         {
             get
@@ -223,16 +309,11 @@ namespace FileManager.BusinessClasses
 
         public LibraryFile(LibraryFolder parent)
         {
-            this.Name = string.Empty;
             this.Parent = parent;
             this.RootId = Guid.Empty;
             this.Identifier = Guid.NewGuid();
             this.RelativePath = string.Empty;
             this.Type = FileTypes.Other;
-            this.Format = string.Empty;
-            this.Order = 0;
-            this.IsBold = false;
-            this.IsDead = false;
             this.AddDate = DateTime.Now;
             this.SearchTags = new LibraryFileSearchTags();
             this.ExpirationDateOptions = new ExpirationDateOptions();
@@ -244,19 +325,19 @@ namespace FileManager.BusinessClasses
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-            result.AppendLine(@"<DisplayName>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
+            result.AppendLine(@"<DisplayName>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
             result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
-            result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
-            result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
+            result.AppendLine(@"<IsBold>" + _isBold + @"</IsBold>");
+            result.AppendLine(@"<IsDead>" + _isDead + @"</IsDead>");
             result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
             result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
             result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
-            result.AppendLine(@"<Format>" + this.Format.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Format>");
-            result.AppendLine(@"<Order>" + this.Order + @"</Order>");
-            result.AppendLine(@"<AddDate>" + this.AddDate + @"</AddDate>");
-            result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
+            result.AppendLine(@"<Order>" + _order + @"</Order>");
+            result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
+            result.AppendLine(@"<AddDate>" + this.AddDate.ToString() + @"</AddDate>");
+            result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
             result.Append(this.SearchTags.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
             #region Compatibility with desktop version of Sales Depot
@@ -303,14 +384,14 @@ namespace FileManager.BusinessClasses
                             this.Identifier = tempGuid;
                         break;
                     case "DisplayName":
-                        this.Name = childNode.InnerText;
+                        _name = childNode.InnerText;
                         break;
                     case "Note":
                         _note = childNode.InnerText;
                         break;
                     case "IsBold":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.IsBold = tempBool;
+                            _isBold = tempBool;
                         break;
                     case "RootId":
                         if (Guid.TryParse(childNode.InnerText, out tempGuid))
@@ -327,29 +408,30 @@ namespace FileManager.BusinessClasses
                         {
                             this.Type = (FileTypes)tempInt;
                             if (this.Type == FileTypes.LineBreak)
-                                this.LineBreakProperties = new LineBreakProperties();
+                                this.LineBreakProperties = new LineBreakProperties(this);
                         }
-                        break;
-                    case "Format":
-                        this.Format = childNode.InnerText;
                         break;
                     case "Order":
                         if (int.TryParse(childNode.InnerText, out tempInt))
-                            this.Order = tempInt;
+                            _order = tempInt;
+                        break;
+                    case "EnableWidget":
+                        if (bool.TryParse(childNode.InnerText, out tempBool))
+                            _enableWidget = tempBool;
+                        break;
+                    case "Widget":
+                        if (string.IsNullOrEmpty(childNode.InnerText) && _enableWidget)
+                            _widget = null;
+                        else if (!string.IsNullOrEmpty(childNode.InnerText))
+                            _widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
                     case "AddDate":
                         if (DateTime.TryParse(childNode.InnerText, out tempDate))
                             this.AddDate = tempDate;
                         break;
-                    case "EnableWidget":
-                        if (bool.TryParse(childNode.InnerText, out tempBool))
-                            this.EnableWidget = tempBool;
-                        break;
-                    case "Widget":
-                        if (string.IsNullOrEmpty(childNode.InnerText) && this.EnableWidget)
-                            _widget = null;
-                        else if (!string.IsNullOrEmpty(childNode.InnerText))
-                            _widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+                    case "LastChanged":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDate))
+                            _lastChanged = tempDate;
                         break;
                     case "SearchTags":
                         this.SearchTags.Deserialize(childNode);
@@ -372,13 +454,13 @@ namespace FileManager.BusinessClasses
                         this.PresentationProperties.Deserialize(childNode);
                         break;
                     case "LineBreakProperties":
-                        this.LineBreakProperties = new LineBreakProperties();
+                        this.LineBreakProperties = new LineBreakProperties(this);
                         this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
                         this.LineBreakProperties.BoldFont = new Font(this.Parent.WindowFont, FontStyle.Bold);
                         this.LineBreakProperties.Deserialize(childNode);
                         break;
                     case "BannerProperties":
-                        this.BannerProperties = new BannerProperties();
+                        this.BannerProperties = new BannerProperties(this);
                         this.BannerProperties.Deserialize(childNode);
                         break;
                     #region Compatibility with old versions
@@ -404,7 +486,7 @@ namespace FileManager.BusinessClasses
 
         public void InitBannerProperties()
         {
-            this.BannerProperties = new BannerProperties();
+            this.BannerProperties = new BannerProperties(this);
             this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
             this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
             this.BannerProperties.Text = this.DisplayName;
@@ -485,6 +567,7 @@ namespace FileManager.BusinessClasses
         public void RemoveFromCollection()
         {
             this.Parent.Files.Remove(this);
+            this.Parent.LastChanged = DateTime.Now;
         }
     }
 }

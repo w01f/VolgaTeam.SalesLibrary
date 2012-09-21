@@ -92,7 +92,6 @@ namespace FileManager
             buttonEditIPadPassword.MouseUp += new MouseEventHandler(Editor_MouseUp);
             buttonEditIPadPassword.MouseDown += new MouseEventHandler(Editor_MouseDown);
             buttonItemIPadVideoConvert.Click += new EventHandler(this.TabIPadManager.buttonItemIPadVideo_Click);
-            buttonItemIPadSyncData.Click += new EventHandler(this.TabIPadManager.buttonItemIPadSyncData_Click);
             buttonItemIPadSyncFiles.Click += new EventHandler(this.TabIPadManager.buttonItemIPadSyncFiles_Click);
         }
 

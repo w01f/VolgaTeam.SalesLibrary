@@ -18,6 +18,8 @@ namespace FileManager.ToolForms.Settings
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
+                foreach (SalesDepot.CoreObjects.LibraryPage page in this.Library.Pages)
+                    page.LastChanged = DateTime.Now;
                 this.Library.Save();
             }
         }

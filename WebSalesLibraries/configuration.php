@@ -1,14 +1,20 @@
 <?php
 $webRoot = dirname(__FILE__);
-if ($_SERVER['HTTP_HOST'] == 'localhost')
-    $internalConfig = $webRoot . '/protected/config/development.php';
+if (array_key_exists('HTTP_HOST', $_SERVER))
+{
+    if ($_SERVER['HTTP_HOST'] == 'localhost')
+        $internalConfig = $webRoot . '/protected/config/development.php';
+    else
+        $internalConfig = $webRoot . '/protected/config/production.php';
+}
 else
-    $internalConfig = $webRoot . '/protected/config/production.php';
+    $internalConfig = $webRoot . '/protected/config/console.php';
 
 return CMap::mergeArray(
         require($internalConfig), array(
         'name' => 'Sales Libraries',
         'params' => array(
+            'appRoot' => dirname(__FILE__),
             'home_tab' => array(
                 'name' => 'Home',
                 'list_button' => array(

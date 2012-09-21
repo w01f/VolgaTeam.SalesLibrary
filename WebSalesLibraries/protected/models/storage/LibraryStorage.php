@@ -11,50 +11,59 @@ class LibraryStorage extends CActiveRecord
         return '{{library}}';
     }
 
-    public static function updateData($library)
+    public static function updateData($library, $sourceDate, $libraryRootPath)
     {
-        $libraryRecord = new LibraryStorage();
-        $libraryRecord->id = $library->id;
-        $libraryRecord->name = $library->name;
-        $libraryRecord->save();
-
-        foreach ($library->pages as $page)
-            LibraryPageStorage::updateData($page);
-
-        foreach ($library->autoWidgets as $autoWidget)
-            AutoWidgetStorage::updateData($autoWidget);
-    }
-
-    public static function updateCache($libraryId)
-    {
-        $pageRecord = LinkStorage::model()->findAll('id_library=?', array($libraryId));
-        if ($pageRecord !== false)
+        $needToUpdate = false;
+        $needToCreate = false;
+        $libraryRecord = LibraryStorage::model()->findByPk($library['id']);
+        if ($libraryRecord !== null)
         {
-            
-        }        
-        $libraryRecord = new LibraryStorage();
-        $libraryRecord->id = $library->id;
-        $libraryRecord->name = $library->name;
-        $libraryRecord->save();
+            if ($libraryRecord->last_update != null)
+                if ($libraryRecord->last_update != date(Yii::app()->params['mysqlDateFormat'], $sourceDate))
+                    $needToUpdate = true;
+        }
+        else
+        {
+            $libraryRecord = new LibraryStorage();
+            $needToCreate = true;
+        }
 
-        foreach ($library->pages as $page)
-            LibraryPageStorage::updateData($page);
+        if ($needToCreate || $needToUpdate)
+        {
+            Yii::app()->cacheDB->flush();
+            self::clearData($library['id']);
 
-        foreach ($library->autoWidgets as $autoWidget)
-            AutoWidgetStorage::updateData($autoWidget);
+            $libraryRecord->id = $library['id'];
+            $libraryRecord->name = $library['name'];
+            $libraryRecord->last_update = date(Yii::app()->params['mysqlDateFormat'], $sourceDate);
+            $libraryRecord->save();
+
+            foreach ($library['autoWidgets'] as $autoWidget)
+                AutoWidgetStorage::updateData($autoWidget);
+
+            foreach ($library['pages'] as $page)
+            {
+                LibraryPageStorage::updateData($page, $libraryRootPath);
+                $pageIds[] = $page['id'];
+            }
+            if (isset($pageIds))
+                LibraryPageStorage::clearByIds($library['id'], $pageIds);
+
+            echo 'Library ' . ($needToCreate ? 'created' : 'updated') . ': ' . $library['name'] . "\n";
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public static function clearData($libraryId)
     {
-        PreviewStorage::clearData($libraryId);
+        AutoWidgetStorage::clearData($libraryId);
         LineBreakStorage::clearData($libraryId);
-        LinkStorage::clearData($libraryId);
-        FolderStorage::clearData($libraryId);
         BannerStorage::clearData($libraryId);
         ColumnStorage::clearData($libraryId);
-        LibraryPageStorage::clearData($libraryId);
-        AutoWidgetStorage::clearData($libraryId);
-        LibraryStorage::model()->deleteByPk($libraryId);
     }
 
 }

@@ -698,7 +698,7 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 BusinessClasses.LibraryFile file = new BusinessClasses.LibraryFile(_folder);
                 file.Type = SalesDepot.CoreObjects.FileTypes.LineBreak;
-                file.LineBreakProperties = new SalesDepot.CoreObjects.LineBreakProperties();
+                file.LineBreakProperties = new SalesDepot.CoreObjects.LineBreakProperties(file);
                 file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
                 file.LineBreakProperties.BoldFont = new Font(_textFont, FontStyle.Bold);
                 file.IsBold = true;
@@ -790,6 +790,7 @@ namespace FileManager.PresentationClasses.WallBin
                     _formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
                     if (_formLinkProperties.ShowDialog() == DialogResult.OK)
                     {
+                        file.LastChanged = DateTime.Now;
                         file.Widget = _formLinkProperties.EnableWidget ? _formLinkProperties.Widget : null;
                         file.EnableWidget = _formLinkProperties.EnableWidget;
                         file.BannerProperties = _formLinkProperties.BannerProperties;
@@ -898,7 +899,12 @@ namespace FileManager.PresentationClasses.WallBin
                 {
                     BusinessClasses.LibraryFile file = row.Tag as BusinessClasses.LibraryFile;
                     if (file != null)
+                    {
+                        if (file.LastChanged == DateTime.MinValue)
+                            _folder.LastChanged = DateTime.Now;
+                        file.Order = row.Index;
                         _folder.Files.Add(file);
+                    }
                 }
             }
         }

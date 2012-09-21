@@ -92,6 +92,16 @@ class LibraryFolder
      * @soap
      */
     public $files;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateAdd;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateModify;
     public $displayLinkWidgets;
     public $browser;
     public function __construct($page)
@@ -140,6 +150,9 @@ class LibraryFolder
             $link->load($linkRecord);
             $this->files[] = $link;
         }
+
+        if (isset($this->files))
+            usort($this->files, "LibraryLink::libraryLinkComparer");
 
         $this->displayLinkWidgets = false;
         if (isset($this->files))

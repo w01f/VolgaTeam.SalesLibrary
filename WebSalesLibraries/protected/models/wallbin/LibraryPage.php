@@ -38,6 +38,11 @@ class LibraryPage
      * @soap
      */
     public $columns;
+    /**
+     * @var string
+     * @soap
+     */
+    public $dateModify;
     public $cachedColumnsView;
     public function __construct($library)
     {
@@ -58,31 +63,31 @@ class LibraryPage
         else
             $this->logoPath = $this->parent->logoPath;
     }
-    
-    public function buildCache()
+
+    public function buildCache($controller)
     {
         $i = 0;
-        while (!$this->buildCacheForBrowser('ie') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller,'ie') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser('firefox') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller,'firefox') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser('webkit') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller,'webkit') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser('opera') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller,'opera') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser('mobile') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller,'mobile') && $i < 1000)
             $i++;
     }
 
-    private function buildCacheForBrowser($browser)
+    private function buildCacheForBrowser($controller,$browser)
     {
         unset($this->folders);
         foreach (FolderStorage::model()->findAll('id_page=?', array($this->id)) as $folderRecord)
@@ -106,7 +111,9 @@ class LibraryPage
         if (isset($this->columns))
             usort($this->columns, "Column::columnComparer");
 
-        $content = Yii::app()->controller->widget('application.components.widgets.ColumnsPageWidget', array('libraryPage' => $this), true);
+        $path = Yii::getPathOfAlias('application.views.wallbin').'/columnsPage.php';
+        $content = $controller->renderFile($path, array('libraryPage' => $this), true);
+        
         if (isset($content))
         {
             if ($content != '')
@@ -179,11 +186,12 @@ class LibraryPage
 
     public function getFoldersByColumn($columnOrder)
     {
-        foreach ($this->folders as $folder)
-        {
-            if ($folder->columnOrder == $columnOrder)
-                $columnFolders[] = $folder;
-        }
+        if (isset($this->folders))
+            foreach ($this->folders as $folder)
+            {
+                if ($folder->columnOrder == $columnOrder)
+                    $columnFolders[] = $folder;
+            }
         if (isset($columnFolders))
             return $columnFolders;
         else

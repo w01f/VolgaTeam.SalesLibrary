@@ -11,34 +11,71 @@ class LinkStorage extends CActiveRecord
         return '{{link}}';
     }
 
-    public static function updateData($link)
+    public static function updateData($link, $libraryRootPath)
     {
-        $linkRecord = new LinkStorage();
-        $linkRecord->id = $link->id;
-        $linkRecord->id_folder = $link->folderId;
-        $linkRecord->id_library = $link->libraryId;
-        $linkRecord->name = $link->name;
-        $linkRecord->file_relative_path = $link->fileRelativePath;
-        $linkRecord->file_name = $link->fileName;
-        $linkRecord->file_extension = $link->fileExtension;
-        $linkRecord->note = $link->note;
-        $linkRecord->is_bold = $link->isBold;
-        $linkRecord->order = $link->order;
-        $linkRecord->type = $link->type;
-        $linkRecord->enable_widget = $link->enableWidget;
-        $linkRecord->widget = $link->widget;
-
-        $linkRecord->id_banner = $link->banner->id;
-        BannerStorage::updateData($link->banner);
-
-        if (isset($link->lineBreakProperties))
+        $needToUpdate = false;
+        $needToCreate = false;
+        $linkRecord = LinkStorage::model()->findByPk($link['id']);
+        $linkDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateModify']));
+        if ($linkRecord !== null)
         {
-            $linkRecord->id_line_break = $link->lineBreakProperties->id;
-            LineBreakStorage::updateData($link->lineBreakProperties);
+            if ($linkRecord->date_modify != null)
+                if ($linkRecord->date_modify != $linkDate)
+                    $needToUpdate = true;
+        }
+        else
+        {
+            $linkRecord = new LinkStorage();
+            $needToCreate = true;
+        }
+        if ($needToCreate || $needToUpdate)
+        {
+            $linkRecord->id = $link['id'];
+            $linkRecord->id_folder = $link['folderId'];
+            $linkRecord->id_library = $link['libraryId'];
+            $linkRecord->name = $link['name'];
+            $linkRecord->file_relative_path = $link['fileRelativePath'];
+            $linkRecord->file_name = $link['fileName'];
+            $linkRecord->file_extension = $link['fileExtension'];
+            $linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+            $linkRecord->note = $link['note'];
+            $linkRecord->is_bold = $link['isBold'];
+            $linkRecord->order = $link['order'];
+            $linkRecord->type = $link['type'];
+            $linkRecord->enable_widget = $link['enableWidget'];
+            $linkRecord->widget = $link['widget'];
+            $linkRecord->tags = $link['tags'];
+            $linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
+            $linkRecord->date_modify = $linkDate;
+
+            PreviewStorage::clearByLink($link['id']);
+            if (array_key_exists('universalPreview', $link))
+                if (isset($link['universalPreview']))
+                {
+                    PreviewStorage::updateData($link['universalPreview']);
+
+                    if (array_key_exists('txtLinks', $link['universalPreview']))
+                        if (isset($link['universalPreview']['txtLinks']))
+                            foreach ($link['universalPreview']['txtLinks'] as $contentLink)
+                            {
+                                $contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $contentLink);
+                                if (file_exists($contentPath))
+                                    $linkRecord->content = file_get_contents($contentPath);
+                                break;
+                            }
+                }
+            echo 'Link ' . ($needToCreate ? 'created' : 'updated') . ': ' . $link['name'] . ' (' . $link['fileName'] . ')' . "\n";
         }
 
-        if (isset($link->universalPreview))
-            PreviewStorage::updateData($link->universalPreview);
+        $linkRecord->id_banner = $link['banner']['id'];
+        BannerStorage::updateData($link['banner']);
+
+        if (array_key_exists('lineBreakProperties', $link))
+            if (isset($link['lineBreakProperties']))
+            {
+                $linkRecord->id_line_break = $link['lineBreakProperties']['id'];
+                LineBreakStorage::updateData($link['lineBreakProperties']);
+            }
 
         $linkRecord->save();
     }
@@ -53,14 +90,19 @@ class LinkStorage extends CActiveRecord
         }
     }
 
-    public static function clearData($libraryId)
+    public static function clearByLibrary($libraryId)
     {
         LinkStorage::model()->deleteAll('id_library=?', array($libraryId));
     }
 
+    public static function clearByIds($folderId, $linkIds)
+    {
+        Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
+    }
+
     public static function searchByContent($contentCondition, $fileTypes, $checkedLibraryIds, $isSort)
     {
-        if ($isSort==1)
+        if ($isSort == 1)
         {
             $links = Yii::app()->session['searchedLinks'];
         }

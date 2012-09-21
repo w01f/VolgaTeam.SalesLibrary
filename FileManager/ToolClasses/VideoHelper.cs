@@ -50,7 +50,7 @@ namespace FileManager.ToolClasses
 
                         videoConverter = new Process()
                         {
-                            StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -moov_size 524288 -xerror -b {1}k \"{2}\"", sourceFilePath,
+                            StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -moov_size {1} -xerror -b {2}k \"{3}\"", sourceFilePath, CalculateMoovSize(sourceFilePath, 524288),
                                 kBitRate, Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
                             {
                                 UseShellExecute = false,
@@ -154,6 +154,20 @@ namespace FileManager.ToolClasses
                     }
                 }
             }
+        }
+
+
+        private string CalculateMoovSize(string inputFile, int defaultMoov)
+        {
+            int moov = defaultMoov;
+            try
+            {
+                moov = (int)(Math.Max((((((new FileInfo(inputFile)).Length) / 1024.0) * 4254.6) - 15262.0) / 1024.0, 0));
+            }
+            catch
+            {
+            }
+            return moov.ToString();
         }
 
         private int ExtractBitrate(string b, int defaultValue)

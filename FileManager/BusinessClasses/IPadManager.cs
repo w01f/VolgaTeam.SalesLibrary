@@ -17,7 +17,6 @@ namespace FileManager.BusinessClasses
         public string Website { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public DateTime LastSync { get; set; }
 
         public IPadManager(Library parent)
         {
@@ -35,13 +34,11 @@ namespace FileManager.BusinessClasses
             result.AppendLine(@"<Website>" + this.Website.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Website>");
             result.AppendLine(@"<User>" + this.Login.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</User>");
             result.AppendLine(@"<Password>" + this.Password.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Password>");
-            result.AppendLine(@"<LastSync>" + this.LastSync.ToString() + @"</LastSync>");
             return result.ToString();
         }
 
         public void Deserialize(XmlNode node)
         {
-            DateTime tempDateTime;
             foreach (XmlNode childNode in node.ChildNodes)
             {
                 switch (childNode.Name)
@@ -58,137 +55,20 @@ namespace FileManager.BusinessClasses
                     case "Password":
                         this.Password = childNode.InnerText;
                         break;
-                    case "LastSync":
-                        if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
-                            this.LastSync = tempDateTime;
-                        break;
                 }
             }
         }
 
         #region Data Managment
-        private ContentManagmentService.ContentControllerService GetDataManagmentClient()
+        public void SaveJson()
         {
-            try
+            ContentManagmentService.Library serverLibrary = PrepareServerLibrary();
+            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(serverLibrary);
+            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Parent.Folder.FullName, Constants.JsonFileName), false))
             {
-                ContentManagmentService.ContentControllerService client = new ContentManagmentService.ContentControllerService();
-                client.Timeout = 30000;
-                client.Url = string.Format("{0}/content/quote?ws=1", this.Website);
-                return client;
+                sw.Write(jsonString);
+                sw.Flush();
             }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public void UpdateLibraryOnServer(out string message)
-        {
-            message = string.Empty;
-            ContentManagmentService.Library library = PrepareServerLibrary();
-
-            #region Fill Data
-            ContentManagmentService.ContentControllerService client = GetDataManagmentClient();
-            if (client != null)
-            {
-                try
-                {
-                    string sessionKey = client.getSessionKey(this.Login, this.Password);
-                    if (!string.IsNullOrEmpty(sessionKey))
-                    {
-                        client = GetDataManagmentClient();
-                        if (client != null)
-                        {
-                            client.setLibrary(sessionKey, library);
-                        }
-                        else
-                            message = "Couldn't complete operation.\nServer is unavailable.";
-                    }
-                    else
-                        message = "Couldn't complete operation.\nLogin or password are not correct.";
-                }
-                catch (Exception ex)
-                {
-                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-                }
-            }
-            else
-                message = "Couldn't complete operation.\nServer is unavailable.";
-            #endregion
-
-            #region Fill Text Content
-            if (string.IsNullOrEmpty(message))
-            {
-                try
-                {
-                    client = GetDataManagmentClient();
-                    if (client != null)
-                    {
-                        string sessionKey = client.getSessionKey(this.Login, this.Password);
-                        if (!string.IsNullOrEmpty(sessionKey))
-                        {
-                            foreach (LibraryPage page in this.Parent.Pages)
-                                foreach (LibraryFolder folder in page.Folders)
-                                    foreach (LibraryFile file in folder.Files)
-                                    {
-                                        string content = file.Content;
-                                        if (!string.IsNullOrEmpty(content))
-                                        {
-                                            client = GetDataManagmentClient();
-                                            if (client != null)
-                                            {
-                                                client.setContent(sessionKey, file.Identifier.ToString(), content);
-                                            }
-                                            else
-                                                message = "Couldn't complete operation.\nServer is unavailable.";
-                                        }
-                                    }
-                        }
-                        else
-                            message = "Couldn't complete operation.\nLogin or password are not correct.";
-                    }
-                    else
-                        message = "Couldn't complete operation.\nServer is unavailable.";
-                }
-                catch (Exception ex)
-                {
-                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-                }
-            }
-            #endregion
-
-            #region Build Cache
-            if (string.IsNullOrEmpty(message))
-            {
-                try
-                {
-                    client = GetDataManagmentClient();
-                    if (client != null)
-                    {
-                        string sessionKey = client.getSessionKey(this.Login, this.Password);
-                        if (!string.IsNullOrEmpty(sessionKey))
-                        {
-                            client = GetDataManagmentClient();
-                            if (client != null)
-                            {
-                                client.buildCache(sessionKey, this.Parent.Identifier.ToString());
-                            }
-                            else
-                                message = "Couldn't complete operation.\nServer is unavailable.";
-                        }
-                        else
-                            message = "Couldn't complete operation.\nLogin or password are not correct.";
-
-                    }
-                    else
-                        message = "Couldn't complete operation.\nServer is unavailable.";
-                }
-                catch (Exception ex)
-                {
-                    message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-                }
-            }
-            #endregion
         }
 
         private ContentManagmentService.Library PrepareServerLibrary()
@@ -209,6 +89,7 @@ namespace FileManager.BusinessClasses
                 page.name = libraryPage.Name;
                 page.order = libraryPage.Order;
                 page.enableColumns = libraryPage.EnableColumnTitles;
+                page.dateModify = libraryPage.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
                 #region Columns
                 List<ContentManagmentService.Column> columns = new List<ContentManagmentService.Column>();
@@ -230,6 +111,7 @@ namespace FileManager.BusinessClasses
                     column.font.size = (int)Math.Round(columnTitle.HeaderFont.Size, 0);
                     column.font.isBold = columnTitle.HeaderFont.Bold;
                     column.font.isItalic = columnTitle.HeaderFont.Italic;
+                    column.dateModify = columnTitle.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
                     #region Banner
                     column.banner = new ContentManagmentService.Banner();
@@ -246,6 +128,7 @@ namespace FileManager.BusinessClasses
                     column.banner.font.size = (int)Math.Round(columnTitle.BannerProperties.Font.Size, 0);
                     column.banner.font.isBold = columnTitle.BannerProperties.Font.Bold;
                     column.banner.font.isItalic = columnTitle.BannerProperties.Font.Italic;
+                    column.banner.dateModify = columnTitle.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
                     #endregion
 
                     columns.Add(column);
@@ -282,6 +165,8 @@ namespace FileManager.BusinessClasses
                     folder.headerFont.size = (int)Math.Round(libraryFolder.HeaderFont.Size, 0);
                     folder.headerFont.isBold = libraryFolder.HeaderFont.Bold;
                     folder.headerFont.isItalic = libraryFolder.HeaderFont.Italic;
+                    folder.dateAdd = libraryFolder.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
+                    folder.dateModify = libraryFolder.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
                     #region Banner
                     folder.banner = new ContentManagmentService.Banner();
@@ -298,6 +183,7 @@ namespace FileManager.BusinessClasses
                     folder.banner.font.size = (int)Math.Round(libraryFolder.BannerProperties.Font.Size, 0);
                     folder.banner.font.isBold = libraryFolder.BannerProperties.Font.Bold;
                     folder.banner.font.isItalic = libraryFolder.BannerProperties.Font.Italic;
+                    folder.banner.dateModify = libraryFolder.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
                     #endregion
 
                     #region Files
@@ -314,6 +200,7 @@ namespace FileManager.BusinessClasses
                         {
                             link.fileName = Path.GetFileName(libraryFile.OriginalPath);
                             link.fileExtension = Path.GetExtension(libraryFile.OriginalPath).Replace(".", string.Empty).ToLower();
+                            link.fileDate = File.GetLastWriteTime(libraryFile.OriginalPath).ToString("MM/dd/yyyy hh:mm:ss tt");
                         }
                         else
                         {
@@ -326,6 +213,9 @@ namespace FileManager.BusinessClasses
                         link.type = (int)libraryFile.Type;
                         link.enableWidget = libraryFile.EnableWidget;
                         link.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
+                        link.tags = string.Empty;
+                        link.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
+                        link.dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
                         #region Line Break
                         if (libraryFile.LineBreakProperties != null)
@@ -340,6 +230,7 @@ namespace FileManager.BusinessClasses
                             link.lineBreakProperties.font.size = (int)Math.Round(libraryFile.LineBreakProperties.Font.Size, 0);
                             link.lineBreakProperties.font.isBold = libraryFile.LineBreakProperties.Font.Bold;
                             link.lineBreakProperties.font.isItalic = libraryFile.LineBreakProperties.Font.Italic;
+                            link.lineBreakProperties.dateModify = libraryFile.LineBreakProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
                         }
                         #endregion
 
@@ -358,6 +249,7 @@ namespace FileManager.BusinessClasses
                         link.banner.font.size = (int)Math.Round(libraryFile.BannerProperties.Font.Size, 0);
                         link.banner.font.isBold = libraryFile.BannerProperties.Font.Bold;
                         link.banner.font.isItalic = libraryFile.BannerProperties.Font.Italic;
+                        link.banner.dateModify = libraryFile.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
                         #endregion
 
                         #region Preview Links
@@ -398,6 +290,10 @@ namespace FileManager.BusinessClasses
                             string[] newOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("new office");
                             if (newOfficeLinks != null && newOfficeLinks.Length > 0)
                                 link.universalPreview.newOfficeFormatLinks = newOfficeLinks;
+
+                            string[] txtLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("txt");
+                            if (txtLinks != null && txtLinks.Length > 0)
+                                link.universalPreview.txtLinks = txtLinks;
 
                             string[] thumbsLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("thumbs");
                             if (thumbsLinks != null && thumbsLinks.Length > 0)
