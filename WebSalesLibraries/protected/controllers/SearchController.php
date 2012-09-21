@@ -66,7 +66,7 @@ class SearchController extends CController
                     }
                 }
                 $link->load($linkRecord);
-                $this->renderPartial('application.views.widgets.viewDialogWidget', array('link' => $link), false, true);
+                $this->renderPartial('application.views.wallbin.viewDialog', array('link' => $link), false, true);
                 $rendered = true;
             }
         }
