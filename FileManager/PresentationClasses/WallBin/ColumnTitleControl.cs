@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
     [System.ComponentModel.ToolboxItem(false)]
     public partial class ColumnTitleControl : UserControl
     {
-        public SalesDepot.CoreObjects.ColumnTitle Data { get; private set; }
+        public ColumnTitle Data { get; private set; }
 
-        public ColumnTitleControl(SalesDepot.CoreObjects.ColumnTitle data)
+        public ColumnTitleControl(ColumnTitle data)
         {
             InitializeComponent();
             this.Data = data;
@@ -25,13 +26,13 @@ namespace FileManager.PresentationClasses.WallBin
                 labelControlText.ForeColor = this.Data.ForeColor;
                 switch (this.Data.HeaderAlignment)
                 {
-                    case SalesDepot.CoreObjects.Alignment.Left:
+                    case Alignment.Left:
                         labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                         break;
-                    case SalesDepot.CoreObjects.Alignment.Center:
+                    case Alignment.Center:
                         labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                         break;
-                    case SalesDepot.CoreObjects.Alignment.Right:
+                    case Alignment.Right:
                         labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                         break;
                 }
@@ -56,13 +57,13 @@ namespace FileManager.PresentationClasses.WallBin
                 pbLogo.Visible = true;
                 switch (this.Data.HeaderAlignment)
                 {
-                    case SalesDepot.CoreObjects.Alignment.Left:
+                    case Alignment.Left:
                         pbLogo.Dock = DockStyle.Left;
                         break;
-                    case SalesDepot.CoreObjects.Alignment.Center:
+                    case Alignment.Center:
                         pbLogo.Dock = DockStyle.Fill;
                         break;
-                    case SalesDepot.CoreObjects.Alignment.Right:
+                    case Alignment.Right:
                         pbLogo.Dock = DockStyle.Right;
                         break;
                 }
@@ -75,13 +76,13 @@ namespace FileManager.PresentationClasses.WallBin
                 pbLogo.Visible = true;
                 switch (this.Data.HeaderAlignment)
                 {
-                    case SalesDepot.CoreObjects.Alignment.Left:
+                    case Alignment.Left:
                         pbLogo.Dock = DockStyle.Left;
                         break;
-                    case SalesDepot.CoreObjects.Alignment.Center:
+                    case Alignment.Center:
                         pbLogo.Dock = DockStyle.Fill;
                         break;
-                    case SalesDepot.CoreObjects.Alignment.Right:
+                    case Alignment.Right:
                         pbLogo.Dock = DockStyle.Right;
                         break;
                 }

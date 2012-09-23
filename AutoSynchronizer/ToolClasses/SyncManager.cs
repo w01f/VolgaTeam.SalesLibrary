@@ -35,7 +35,7 @@ namespace AutoSynchronizer.ToolClasses
             foreach (FileInfo afi in a_files)
             {
                 string destinationPath = Path.Combine(B.FullName, afi.Name);
-                if (destinationPath.Length < WinAPIHelper.MAX_PATH)
+                if (destinationPath.Length < SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MAX_PATH)
                 {
                     FileInfo bfi = b_files.Where(x => x.Name.Equals(afi.Name)).FirstOrDefault();
                     if (bfi != null)

@@ -3,24 +3,12 @@ using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Xml;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace AutoSynchronizer.ConfigurationClasses
 {
     public class SettingsManager
     {
-        public const string UserSettingsFileName = @"SalesDepotUserSettings.xml";
-        public const string StorageFileName = @"SalesDepotCache.xml";
-        public const string StyleFileName = @"SalesDepotStyle.xml";
-        public const string WholeDriveFilesStorage = @"Primary Root";
-        public const string RegularPreviewContainersRootFolderName = @"!QV";
-        public const string FtpPreviewContainersRootFolderName = @"!WV";
-        public const string OldPreviewFolderPrefix = @"!PNG_";
-        public const string LibraryLogoFolder = @"!SD-Graphics";
-        public const string OvernightsCalendarRootFolderName = @"!OC";
-        public const string ProgramManagerRootFolderName = @"!PM";
-        public const string ExtraFoldersRootFolderName = @"!Extra Roots";
-        public const string SweepPeriodsFileName = @"SweepPeriods.xml";
-
         private static SettingsManager _instance = new SettingsManager();
 
         private string _settingsFilePath = string.Empty;
@@ -83,12 +71,12 @@ namespace AutoSynchronizer.ConfigurationClasses
             #endregion
 
             this.HiddenFolders = new List<string>();
-            this.HiddenFolders.Add(LibraryLogoFolder);
-            this.HiddenFolders.Add(OldPreviewFolderPrefix);
             this.HiddenFolders.Add("!Old");
-            this.HiddenFolders.Add(RegularPreviewContainersRootFolderName);
-            this.HiddenFolders.Add(FtpPreviewContainersRootFolderName);
-            this.HiddenFolders.Add(OvernightsCalendarRootFolderName);
+            this.HiddenFolders.Add(Constants.RegularPreviewContainersRootFolderName);
+            this.HiddenFolders.Add(Constants.FtpPreviewContainersRootFolderName);
+            this.HiddenFolders.Add(Constants.OvernightsCalendarRootFolderName);
+            this.HiddenFolders.Add(Constants.ProgramManagerRootFolderName);
+            this.HiddenFolders.Add(Constants.ExtraFoldersRootFolderName);
         }
 
         public void Load()

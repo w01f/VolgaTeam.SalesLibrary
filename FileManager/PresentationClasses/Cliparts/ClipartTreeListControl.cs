@@ -70,7 +70,7 @@ namespace FileManager.PresentationClasses.Cliparts
                             {
                                 List<DirectoryInfo> folders = new List<DirectoryInfo>();
                                 folders.AddRange(folder.GetDirectories());
-                                folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                                folders.Sort((x, y) => SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
                                 foreach (DirectoryInfo subFolder in folders)
                                 {
                                     if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
@@ -84,7 +84,7 @@ namespace FileManager.PresentationClasses.Cliparts
                             {
                                 List<FileInfo> files = new List<FileInfo>();
                                 files.AddRange(folder.GetFiles());
-                                files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                                files.Sort((x, y) => SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
                                 foreach (FileInfo file in files)
                                 {
                                     switch (file.Extension.ToLower())

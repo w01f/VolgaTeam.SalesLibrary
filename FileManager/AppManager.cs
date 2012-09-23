@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects;
 
 namespace FileManager
 {
@@ -11,9 +12,6 @@ namespace FileManager
         private delegate void NoParamsDelegate();
 
         private static AppManager instance = new AppManager();
-
-        public bool ThreadActive { get; set; }
-        public bool ThreadAborted { get; set; }
 
         private AppManager()
         {
@@ -73,13 +71,13 @@ namespace FileManager
             }
             if (mainFormHandle.ToInt32() != 0)
             {
-                InteropClasses.WinAPIHelper.ShowWindow(mainFormHandle, InteropClasses.WindowShowStyle.ShowMaximized);
-                InteropClasses.WinAPIHelper.MakeTopMost(mainFormHandle);
-                InteropClasses.WinAPIHelper.MakeNormal(mainFormHandle);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.ShowWindow(mainFormHandle, SalesDepot.CoreObjects.InteropClasses.WindowShowStyle.ShowMaximized);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MakeTopMost(mainFormHandle);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MakeNormal(mainFormHandle);
                 uint lpdwProcessId = 0;
-                InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-                InteropClasses.WinAPIHelper.SetForegroundWindow(mainFormHandle);
-                InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.AttachThreadInput(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetCurrentThreadId(), SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.SetForegroundWindow(mainFormHandle);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.AttachThreadInput(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetCurrentThreadId(), SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
             }
         }
 
@@ -113,21 +111,6 @@ namespace FileManager
         {
             if (File.Exists(ConfigurationClasses.SettingsManager.Instance.AutoFMSyncShorcutPath))
                 Process.Start(ConfigurationClasses.SettingsManager.Instance.AutoFMSyncShorcutPath);
-        }
-
-        public void ReleaseComObject(object o)
-        {
-            try
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(o);
-            }
-            catch
-            {
-            }
-            finally
-            {
-                o = null;
-            }
         }
     }
 }

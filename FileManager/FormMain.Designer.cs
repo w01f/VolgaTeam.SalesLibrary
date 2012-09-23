@@ -73,7 +73,6 @@
             this.itemContainerHomePage = new DevComponents.DotNetBar.ItemContainer();
             this.labelItemHomePages = new DevComponents.DotNetBar.LabelItem();
             this.controlContainerItemHomePages = new DevComponents.DotNetBar.ControlContainerItem();
-            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonPanelIPad = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarIPadSyncFiles = new DevComponents.DotNetBar.RibbonBar();
             this.buttonItemIPadSyncFiles = new DevComponents.DotNetBar.ButtonItem();
@@ -99,6 +98,10 @@
             this.labelItemIPadLocationTitle = new DevComponents.DotNetBar.LabelItem();
             this.itemContainerIPadLocation = new DevComponents.DotNetBar.ItemContainer();
             this.controlContainerItemIPadLocation = new DevComponents.DotNetBar.ControlContainerItem();
+            this.ribbonBarIPadSync = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainerIPadSync = new DevComponents.DotNetBar.ItemContainer();
+            this.buttonItemIPadSyncEnabled = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItemIPadSyncDisabled = new DevComponents.DotNetBar.ButtonItem();
             this.ribbonPanelProgramManager = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarProgramManagerLocation = new DevComponents.DotNetBar.RibbonBar();
             this.buttonEditProgramManagerLocation = new DevExpress.XtraEditors.ButtonEdit();
@@ -129,6 +132,7 @@
             this.itemContainerSyncStatus = new DevComponents.DotNetBar.ItemContainer();
             this.buttonItemCalendarSyncStatusEnabled = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItemCalendarSyncStatusDisabled = new DevComponents.DotNetBar.ButtonItem();
+            this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
             this.ribbonBarSettingsAutoSync = new DevComponents.DotNetBar.RibbonBar();
             this.buttonItemSettingsAutoSync = new DevComponents.DotNetBar.ButtonItem();
@@ -196,7 +200,7 @@
             // 
             // comboBoxEditPages
             // 
-            this.comboBoxEditPages.Location = new System.Drawing.Point(6, 74);
+            this.comboBoxEditPages.Location = new System.Drawing.Point(6, 73);
             this.comboBoxEditPages.Name = "comboBoxEditPages";
             this.comboBoxEditPages.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -214,10 +218,10 @@
             this.ribbonControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonControl.CanCustomize = false;
             this.ribbonControl.Controls.Add(this.ribbonPanelHome);
-            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelIPad);
             this.ribbonControl.Controls.Add(this.ribbonPanelProgramManager);
             this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
+            this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
             this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
             this.ribbonControl.Controls.Add(this.ribbonPanelClipart);
             this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
@@ -790,7 +794,7 @@
             // 
             // comboBoxEditLibraries
             // 
-            this.comboBoxEditLibraries.Location = new System.Drawing.Point(6, 28);
+            this.comboBoxEditLibraries.Location = new System.Drawing.Point(6, 27);
             this.comboBoxEditLibraries.Name = "comboBoxEditLibraries";
             this.comboBoxEditLibraries.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -863,29 +867,6 @@
             this.controlContainerItemHomePages.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
             this.controlContainerItemHomePages.Name = "controlContainerItemHomePages";
             // 
-            // ribbonPanelHelp
-            // 
-            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 26);
-            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
-            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-            this.ribbonPanelHelp.Size = new System.Drawing.Size(1008, 126);
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            // 
-            // 
-            // 
-            this.ribbonPanelHelp.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.ribbonPanelHelp.TabIndex = 4;
-            this.ribbonPanelHelp.Visible = false;
-            // 
             // ribbonPanelIPad
             // 
             this.ribbonPanelIPad.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -893,6 +874,7 @@
             this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadVideoConvert);
             this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSite);
             this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadLocation);
+            this.ribbonPanelIPad.Controls.Add(this.ribbonBarIPadSync);
             this.ribbonPanelIPad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ribbonPanelIPad.Location = new System.Drawing.Point(0, 26);
             this.ribbonPanelIPad.Name = "ribbonPanelIPad";
@@ -929,7 +911,7 @@
             this.ribbonBarIPadSyncFiles.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemIPadSyncFiles});
             this.ribbonBarIPadSyncFiles.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarIPadSyncFiles.Location = new System.Drawing.Point(717, 0);
+            this.ribbonBarIPadSyncFiles.Location = new System.Drawing.Point(803, 0);
             this.ribbonBarIPadSyncFiles.Name = "ribbonBarIPadSyncFiles";
             this.ribbonBarIPadSyncFiles.Size = new System.Drawing.Size(103, 123);
             this.ribbonBarIPadSyncFiles.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -968,7 +950,7 @@
             this.ribbonBarIPadVideoConvert.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemIPadVideoConvert});
             this.ribbonBarIPadVideoConvert.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarIPadVideoConvert.Location = new System.Drawing.Point(619, 0);
+            this.ribbonBarIPadVideoConvert.Location = new System.Drawing.Point(705, 0);
             this.ribbonBarIPadVideoConvert.Name = "ribbonBarIPadVideoConvert";
             this.ribbonBarIPadVideoConvert.Size = new System.Drawing.Size(98, 123);
             this.ribbonBarIPadVideoConvert.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1013,7 +995,7 @@
             this.ribbonBarIPadSite.ItemSpacing = 20;
             this.ribbonBarIPadSite.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.ribbonBarIPadSite.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarIPadSite.Location = new System.Drawing.Point(311, 0);
+            this.ribbonBarIPadSite.Location = new System.Drawing.Point(397, 0);
             this.ribbonBarIPadSite.Name = "ribbonBarIPadSite";
             this.ribbonBarIPadSite.Size = new System.Drawing.Size(308, 123);
             this.ribbonBarIPadSite.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1183,7 +1165,7 @@
             this.ribbonBarIPadLocation.ItemSpacing = 20;
             this.ribbonBarIPadLocation.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
             this.ribbonBarIPadLocation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.ribbonBarIPadLocation.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarIPadLocation.Location = new System.Drawing.Point(89, 0);
             this.ribbonBarIPadLocation.Name = "ribbonBarIPadLocation";
             this.ribbonBarIPadLocation.Size = new System.Drawing.Size(308, 123);
             this.ribbonBarIPadLocation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1232,6 +1214,64 @@
             this.controlContainerItemIPadLocation.Control = this.buttonEditIPadLocation;
             this.controlContainerItemIPadLocation.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
             this.controlContainerItemIPadLocation.Name = "controlContainerItemIPadLocation";
+            // 
+            // ribbonBarIPadSync
+            // 
+            this.ribbonBarIPadSync.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSync.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBarIPadSync.ContainerControlProcessDialogKey = true;
+            this.ribbonBarIPadSync.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBarIPadSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerIPadSync});
+            this.ribbonBarIPadSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.ribbonBarIPadSync.Location = new System.Drawing.Point(3, 0);
+            this.ribbonBarIPadSync.Name = "ribbonBarIPadSync";
+            this.ribbonBarIPadSync.Size = new System.Drawing.Size(86, 123);
+            this.ribbonBarIPadSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBarIPadSync.TabIndex = 13;
+            this.ribbonBarIPadSync.Text = "Sync";
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBarIPadSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainerIPadSync
+            // 
+            // 
+            // 
+            // 
+            this.itemContainerIPadSync.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainerIPadSync.ItemSpacing = 5;
+            this.itemContainerIPadSync.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainerIPadSync.Name = "itemContainerIPadSync";
+            this.itemContainerIPadSync.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemIPadSyncEnabled,
+            this.buttonItemIPadSyncDisabled});
+            // 
+            // buttonItemIPadSyncEnabled
+            // 
+            this.buttonItemIPadSyncEnabled.FixedSize = new System.Drawing.Size(72, 48);
+            this.buttonItemIPadSyncEnabled.ForeColor = System.Drawing.Color.Black;
+            this.buttonItemIPadSyncEnabled.Name = "buttonItemIPadSyncEnabled";
+            this.buttonItemIPadSyncEnabled.Text = "    Enabled";
+            // 
+            // buttonItemIPadSyncDisabled
+            // 
+            this.buttonItemIPadSyncDisabled.FixedSize = new System.Drawing.Size(72, 48);
+            this.buttonItemIPadSyncDisabled.ForeColor = System.Drawing.Color.Black;
+            this.buttonItemIPadSyncDisabled.Name = "buttonItemIPadSyncDisabled";
+            this.buttonItemIPadSyncDisabled.Text = "   Disabled";
             // 
             // ribbonPanelProgramManager
             // 
@@ -1718,6 +1758,29 @@
             this.buttonItemCalendarSyncStatusDisabled.ForeColor = System.Drawing.Color.Black;
             this.buttonItemCalendarSyncStatusDisabled.Name = "buttonItemCalendarSyncStatusDisabled";
             this.buttonItemCalendarSyncStatusDisabled.Text = "   Disabled";
+            // 
+            // ribbonPanelHelp
+            // 
+            this.ribbonPanelHelp.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanelHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ribbonPanelHelp.Location = new System.Drawing.Point(0, 26);
+            this.ribbonPanelHelp.Name = "ribbonPanelHelp";
+            this.ribbonPanelHelp.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.ribbonPanelHelp.Size = new System.Drawing.Size(1008, 126);
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonPanelHelp.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonPanelHelp.TabIndex = 4;
+            this.ribbonPanelHelp.Visible = false;
             // 
             // ribbonPanelSettings
             // 
@@ -2574,5 +2637,9 @@
         private DevComponents.DotNetBar.ItemContainer itemContainerIPadPassword;
         private DevComponents.DotNetBar.LabelItem labelItemIPadPassword;
         private DevComponents.DotNetBar.ControlContainerItem controlContainerItem3;
+        private DevComponents.DotNetBar.RibbonBar ribbonBarIPadSync;
+        private DevComponents.DotNetBar.ItemContainer itemContainerIPadSync;
+        public DevComponents.DotNetBar.ButtonItem buttonItemIPadSyncEnabled;
+        public DevComponents.DotNetBar.ButtonItem buttonItemIPadSyncDisabled;
     }
 }

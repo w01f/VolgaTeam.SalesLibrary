@@ -2,15 +2,17 @@
 using System.IO;
 using System.Linq;
 using Outlook = Microsoft.Office.Interop.Outlook;
+using SalesDepot.CoreObjects.InteropClasses;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace AutoSynchronizer.InteropClasses
 {
     public class OutlookHelper
     {
-        private BusinessClasses.OvernightsCalendar _calendar;
+        private OvernightsCalendar _calendar;
         private Outlook.Application _outlookObject;
 
-        public OutlookHelper(BusinessClasses.OvernightsCalendar calendar)
+        public OutlookHelper(OvernightsCalendar calendar)
         {
             _calendar = calendar;
         }
@@ -66,7 +68,7 @@ namespace AutoSynchronizer.InteropClasses
                                                 ExcelHelper excelHelper = new ExcelHelper();
                                                 messageSentDate = excelHelper.GetOvernightsDate(tempPath);
                                             }
-                                            BusinessClasses.CalendarYear year = _calendar.Years.Where(x => x.Year.Equals(messageSentDate.Year)).FirstOrDefault();
+                                            CalendarYear year = _calendar.Years.Where(x => x.Year.Equals(messageSentDate.Year)).FirstOrDefault();
                                             if (year != null && year.RootFolder.Exists)
                                             {
                                                 string filePath = Path.Combine(year.RootFolder.FullName, string.Format("{0}f{1}", new string[] { messageSentDate.ToString("MMddyy"), attachmentExtension }));

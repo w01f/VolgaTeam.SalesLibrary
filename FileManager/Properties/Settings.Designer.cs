@@ -22,25 +22,5 @@ namespace FileManager.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/admin/quote?ws=1")]
-        public string FileManager_IPadAdminService_AdminControllerService {
-            get {
-                return ((string)(this["FileManager_IPadAdminService_AdminControllerService"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/content/quote?ws=1")]
-        public string FileManager_ContentManagmentService_ContentControllerService {
-            get {
-                return ((string)(this["FileManager_ContentManagmentService_ContentControllerService"]));
-            }
-        }
     }
 }

@@ -7,14 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
     [System.ComponentModel.ToolboxItem(false)]
     public partial class WallBinTreeListControl : UserControl
     {
-        private BusinessClasses.Library _parentLibrary = null;
-        private List<SalesDepot.CoreObjects.FolderLink> _rootFolders = new List<SalesDepot.CoreObjects.FolderLink>();
+        private Library _parentLibrary = null;
+        private List<FolderLink> _rootFolders = new List<FolderLink>();
         private DevExpress.XtraTreeList.TreeListHitInfo _dragStartHitInfo;
 
         public WallBinTreeListControl()
@@ -50,7 +51,7 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                 {
-                    foreach (SalesDepot.CoreObjects.FolderLink rootFolder in _rootFolders)
+                    foreach (FolderLink rootFolder in _rootFolders)
                     {
                         DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeListAllFiles.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
                         rootNode.StateImageIndex = 0;
@@ -82,7 +83,7 @@ namespace FileManager.PresentationClasses.WallBin
                     DevExpress.XtraTreeList.TreeListHitInfo hitInfo = treeListAllFiles.CalcHitInfo(hitPoint);
                     if (hitInfo.Node != null)
                         if (hitInfo.Node.Tag != null)
-                            if (hitInfo.Node.Tag.GetType() == typeof(SalesDepot.CoreObjects.FileLink))
+                            if (hitInfo.Node.Tag.GetType() == typeof(FileLink))
                             {
                                 treeListAllFiles.Selection.Clear();
                                 hitInfo.Node.Selected = true;
@@ -121,7 +122,7 @@ namespace FileManager.PresentationClasses.WallBin
                             {
                                 FormMain.Instance.Invoke((MethodInvoker)delegate()
                                 {
-                                    foreach (SalesDepot.CoreObjects.FolderLink rootFolder in _rootFolders)
+                                    foreach (FolderLink rootFolder in _rootFolders)
                                     {
                                         DevExpress.XtraTreeList.Nodes.TreeListNode rootNode = treeList.AppendNode(new object[] { rootFolder.Folder.Name }, null, rootFolder);
                                         rootNode.StateImageIndex = 0;
@@ -156,10 +157,10 @@ namespace FileManager.PresentationClasses.WallBin
                         }
                         else if (hitInfo.Node.Tag != null)
                         {
-                            if (hitInfo.Node.Tag.GetType() == typeof(SalesDepot.CoreObjects.FolderLink))
+                            if (hitInfo.Node.Tag.GetType() == typeof(FolderLink))
                                 FillNode(hitInfo.Node, false);
-                            else if (hitInfo.Node.Tag.GetType() == typeof(SalesDepot.CoreObjects.FileLink))
-                                ViewItem(hitInfo.Node.Tag as SalesDepot.CoreObjects.FileLink);
+                            else if (hitInfo.Node.Tag.GetType() == typeof(FileLink))
+                                ViewItem(hitInfo.Node.Tag as FileLink);
                         }
                         treeList.ResumeLayout();
                     }
@@ -169,16 +170,16 @@ namespace FileManager.PresentationClasses.WallBin
 
         private void tmiOpen_Click(object sender, EventArgs e)
         {
-            SalesDepot.CoreObjects.FileLink fileLink = null;
+            FileLink fileLink = null;
             switch (xtraTabControlFiles.SelectedTabPageIndex)
             {
                 case 0:
                     if (treeListAllFiles.Selection.Count > 0)
-                        fileLink = treeListAllFiles.Selection[0].Tag as SalesDepot.CoreObjects.FileLink;
+                        fileLink = treeListAllFiles.Selection[0].Tag as FileLink;
                     break;
                 case 1:
                     if (treeListSearchFiles.Selection.Count > 0)
-                        fileLink = treeListSearchFiles.Selection[0].Tag as SalesDepot.CoreObjects.FileLink;
+                        fileLink = treeListSearchFiles.Selection[0].Tag as FileLink;
                     break;
             }
             if (fileLink != null)
@@ -190,7 +191,7 @@ namespace FileManager.PresentationClasses.WallBin
             DevExpress.XtraTreeList.Nodes.TreeListNode childNode;
             if (node.Tag != null)
             {
-                SalesDepot.CoreObjects.FolderLink folderLink = node.Tag as SalesDepot.CoreObjects.FolderLink;
+                FolderLink folderLink = node.Tag as FolderLink;
                 if (folderLink != null && node.Nodes.Count == 0)
                 {
                     try
@@ -199,12 +200,12 @@ namespace FileManager.PresentationClasses.WallBin
                         {
                             List<DirectoryInfo> folders = new List<DirectoryInfo>();
                             folders.AddRange(folderLink.Folder.GetDirectories());
-                            folders.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                            folders.Sort((x, y) => SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
                             foreach (DirectoryInfo subFolder in folders)
                             {
                                 if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
                                 {
-                                    SalesDepot.CoreObjects.FolderLink subFolderLink = new SalesDepot.CoreObjects.FolderLink();
+                                    FolderLink subFolderLink = new FolderLink();
                                     subFolderLink.RootId = folderLink.RootId;
                                     subFolderLink.Folder = subFolder;
                                     childNode = treeListAllFiles.AppendNode(new object[] { subFolder.Name }, node, subFolderLink);
@@ -226,12 +227,12 @@ namespace FileManager.PresentationClasses.WallBin
                         {
                             List<FileInfo> files = new List<FileInfo>();
                             files.AddRange(folderLink.Folder.GetFiles());
-                            files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
+                            files.Sort((x, y) => SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Name, y.Name));
                             foreach (FileInfo file in files)
                             {
                                 if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.Name.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
                                 {
-                                    SalesDepot.CoreObjects.FileLink fileLink = new SalesDepot.CoreObjects.FileLink();
+                                    FileLink fileLink = new FileLink();
                                     fileLink.RootId = folderLink.RootId;
                                     fileLink.File = file;
                                     childNode = treeListAllFiles.AppendNode(new object[] { file.Name + " (" + file.LastWriteTime.ToString("MM/dd/yy hh:mm tt") + ")" }, node, fileLink);
@@ -359,7 +360,7 @@ namespace FileManager.PresentationClasses.WallBin
                         List<object> dragData = new List<object>();
                         foreach (DevExpress.XtraTreeList.Nodes.TreeListNode node in treeList.Selection)
                             if (!node.GetValue(treeListColumnName).Equals("Expand All") && !node.GetValue(treeListColumnName).Equals("Collapse All"))
-                                if (node.Tag.GetType() == typeof(SalesDepot.CoreObjects.FileLink) || node.Tag.GetType() == typeof(SalesDepot.CoreObjects.FolderLink))
+                                if (node.Tag.GetType() == typeof(FileLink) || node.Tag.GetType() == typeof(FolderLink))
                                     dragData.Add(node.Tag);
                         if (dragData.Count > 0)
                             treeList.DoDragDrop(new DataObject(DataFormats.Serializable, (object)dragData.ToArray()), DragDropEffects.Copy);
@@ -377,14 +378,14 @@ namespace FileManager.PresentationClasses.WallBin
         #endregion
 
         #region Kew Word Files Tree View
-        private void SearchFileInFolder(SalesDepot.CoreObjects.FolderLink folderLink, string keyWord, List<SalesDepot.CoreObjects.FileLink> files)
+        private void SearchFileInFolder(FolderLink folderLink, string keyWord, List<FileLink> files)
         {
             try
             {
                 foreach (DirectoryInfo subFolder in folderLink.Folder.GetDirectories())
                     if (ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => subFolder.FullName.ToLower().Contains(x.ToLower())).Count() == 0)
                     {
-                        SalesDepot.CoreObjects.FolderLink subFolderLink = new SalesDepot.CoreObjects.FolderLink();
+                        FolderLink subFolderLink = new FolderLink();
                         subFolderLink.RootId = folderLink.RootId;
                         subFolderLink.Folder = subFolder;
                         SearchFileInFolder(subFolderLink, keyWord, files);
@@ -397,7 +398,7 @@ namespace FileManager.PresentationClasses.WallBin
                 {
                     if (((file.LastWriteTime >= dateEditStartDate.DateTime && file.LastWriteTime <= dateEditEndDate.DateTime) || !checkEditDateRange.Checked) && ConfigurationClasses.SettingsManager.Instance.HiddenObjects.Where(x => file.FullName.ToLower().Contains(x.ToLower())).Count() == 0 && file.LastWriteTime > _parentLibrary.DirectAccessFileBottomDate)
                     {
-                        SalesDepot.CoreObjects.FileLink fileLink = new SalesDepot.CoreObjects.FileLink();
+                        FileLink fileLink = new FileLink();
                         fileLink.RootId = folderLink.RootId;
                         fileLink.File = file;
                         files.Add(fileLink);
@@ -416,17 +417,17 @@ namespace FileManager.PresentationClasses.WallBin
             circularProgressTreeView.IsRunning = true;
             xtraTabControlFiles.Enabled = false;
 
-            List<SalesDepot.CoreObjects.FileLink> files = new List<SalesDepot.CoreObjects.FileLink>();
+            List<FileLink> files = new List<FileLink>();
             Thread thread = new Thread(new System.Threading.ThreadStart(delegate()
             {
-                foreach (SalesDepot.CoreObjects.FolderLink folder in _rootFolders)
+                foreach (FolderLink folder in _rootFolders)
                     SearchFileInFolder(folder, textEditKeyWord.EditValue != null ? textEditKeyWord.EditValue.ToString() : string.Empty, files);
                 if (files.Count > 0)
                 {
                     files.Sort((x, y) => x.File.Name.CompareTo(y.File.Name));
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {
-                        foreach (SalesDepot.CoreObjects.FileLink file in files)
+                        foreach (FileLink file in files)
                         {
                             DevExpress.XtraTreeList.Nodes.TreeListNode childNode = treeListSearchFiles.AppendNode(new object[] { file.File.Name + " (" + file.File.LastWriteTime.ToShortDateString() + " " + file.File.LastWriteTime.ToShortTimeString() + ")" }, null, file);
                             childNode.StateImageIndex = GetImageindex(file.File);
@@ -480,7 +481,7 @@ namespace FileManager.PresentationClasses.WallBin
         #endregion
 
         #region Common Methods
-        public void Init(BusinessClasses.Library library)
+        public void Init(Library library)
         {
             _parentLibrary = library;
 
@@ -488,7 +489,7 @@ namespace FileManager.PresentationClasses.WallBin
 
             _rootFolders.Clear();
             _rootFolders.AddRange(_parentLibrary.ExtraFolders);
-            _rootFolders.Sort((x, y) => (x as SalesDepot.CoreObjects.RootFolder).Order.CompareTo((y as SalesDepot.CoreObjects.RootFolder).Order));
+            _rootFolders.Sort((x, y) => (x as RootFolder).Order.CompareTo((y as RootFolder).Order));
             _rootFolders.Insert(0, _parentLibrary.RootFolder);
 
             if (_parentLibrary.UseDirectAccess)
@@ -498,7 +499,7 @@ namespace FileManager.PresentationClasses.WallBin
             ckDateRange_CheckedChanged(null, null);
         }
 
-        private void ViewItem(SalesDepot.CoreObjects.FileLink file)
+        private void ViewItem(FileLink file)
         {
             try
             {
@@ -530,7 +531,7 @@ namespace FileManager.PresentationClasses.WallBin
                     }
                     files.AddRange(GetFiles(folder));
                 }
-                files.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Extension, y.Extension));
+                files.Sort((x, y) => SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.StrCmpLogicalW(x.Extension, y.Extension));
                 StringBuilder filesStatistic = new StringBuilder();
                 foreach (string extension in files.Select(x => x.Extension.ToLower()).Distinct())
                 {

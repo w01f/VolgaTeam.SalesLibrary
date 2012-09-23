@@ -2,12 +2,13 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
     public partial class FormAutoWidgets : Form
     {
-        public BusinessClasses.Library Library { get; set; }
+        public Library Library { get; set; }
 
         public FormAutoWidgets()
         {
@@ -18,7 +19,7 @@ namespace FileManager.ToolForms.Settings
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                foreach (SalesDepot.CoreObjects.LibraryPage page in this.Library.Pages)
+                foreach (LibraryPage page in this.Library.Pages)
                     page.LastChanged = DateTime.Now;
                 this.Library.Save();
             }
@@ -26,7 +27,7 @@ namespace FileManager.ToolForms.Settings
 
         private void FormApplicationSettings_Load(object sender, EventArgs e)
         {
-            gridControlAutoWidgets.DataSource = new BindingList<SalesDepot.CoreObjects.AutoWidget>(this.Library.AutoWidgets);
+            gridControlAutoWidgets.DataSource = new BindingList<AutoWidget>(this.Library.AutoWidgets);
         }
 
         private void repositoryItemButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
@@ -36,18 +37,18 @@ namespace FileManager.ToolForms.Settings
                 if (e.Button.Index == 0)
                 {
                     this.Library.AutoWidgets.RemoveAt(gridViewAutoWidgets.GetDataSourceRowIndex(gridViewAutoWidgets.FocusedRowHandle));
-                    (gridControlAutoWidgets.DataSource as BindingList<SalesDepot.CoreObjects.AutoWidget>).ResetBindings();
+                    (gridControlAutoWidgets.DataSource as BindingList<AutoWidget>).ResetBindings();
                 }
                 else if (e.Button.Index == 1)
                 {
                     using (ToolForms.WallBin.FormSelectWidget form = new ToolForms.WallBin.FormSelectWidget())
                     {
-                        SalesDepot.CoreObjects.AutoWidget autoWidget = this.Library.AutoWidgets[gridViewAutoWidgets.GetDataSourceRowIndex(gridViewAutoWidgets.FocusedRowHandle)];
+                        AutoWidget autoWidget = this.Library.AutoWidgets[gridViewAutoWidgets.GetDataSourceRowIndex(gridViewAutoWidgets.FocusedRowHandle)];
                         form.pbSelectedWidget.Image = autoWidget.Widget;
                         if (form.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                         {
                             autoWidget.Widget = form.pbSelectedWidget.Image;
-                            (gridControlAutoWidgets.DataSource as BindingList<SalesDepot.CoreObjects.AutoWidget>).ResetBindings();
+                            (gridControlAutoWidgets.DataSource as BindingList<AutoWidget>).ResetBindings();
                         }
                     }
                 }
@@ -66,10 +67,10 @@ namespace FileManager.ToolForms.Settings
             {
                 if (this.Library.AutoWidgets.Where(x => x.Extension.ToLower().Equals(buttonEditNewExtension.EditValue.ToString().ToLower())).Count() == 0)
                 {
-                    SalesDepot.CoreObjects.AutoWidget autoWidget = new SalesDepot.CoreObjects.AutoWidget();
+                    AutoWidget autoWidget = new AutoWidget();
                     autoWidget.Extension = buttonEditNewExtension.EditValue.ToString().ToLower();
                     this.Library.AutoWidgets.Add(autoWidget);
-                    (gridControlAutoWidgets.DataSource as BindingList<SalesDepot.CoreObjects.AutoWidget>).ResetBindings();
+                    (gridControlAutoWidgets.DataSource as BindingList<AutoWidget>).ResetBindings();
                     buttonEditNewExtension.EditValue = null;
                     gridViewAutoWidgets.Focus();
                 }

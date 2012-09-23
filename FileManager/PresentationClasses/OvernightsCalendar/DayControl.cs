@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.OvernightsCalendar
 {
@@ -8,9 +9,9 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
     {
         private Cursor _storedCursor;
 
-        public BusinessClasses.CalendarDay Data { get; private set; }
+        public CalendarDay Data { get; private set; }
 
-        public DayControl(BusinessClasses.CalendarDay data)
+        public DayControl(CalendarDay data)
         {
             InitializeComponent();
             this.Data = data;

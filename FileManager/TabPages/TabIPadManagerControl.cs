@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Threading;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.TabPages
 {
@@ -22,6 +23,23 @@ namespace FileManager.TabPages
                 {
                     PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
                 }
+            }
+        }
+
+        public void buttonItemIPadSyncStatus_Click(object sender, EventArgs e)
+        {
+            FormMain.Instance.buttonItemIPadSyncEnabled.Checked = false;
+            FormMain.Instance.buttonItemIPadSyncDisabled.Checked = false;
+            (sender as DevComponents.DotNetBar.ButtonItem).Checked = true;
+        }
+
+        public void buttonItemIPadSyncStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null && PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.AllowToSave)
+            {
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IPadManager.Enabled = FormMain.Instance.buttonItemIPadSyncEnabled.Checked;
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateControlsState();
+                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.StateChanged = true;
             }
         }
 
@@ -76,19 +94,19 @@ namespace FileManager.TabPages
                     form.CloseAfterSync = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync;
                     form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
                     {
-                        AppManager.Instance.ThreadAborted = true;
+                        Globals.ThreadAborted = true;
                     });
                     FormMain.Instance.ribbonControl.Enabled = false;
                     this.Enabled = false;
                     SaveIPadSettings();
                     Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
-                        AppManager.Instance.ThreadActive = true;
-                        AppManager.Instance.ThreadAborted = false;
+                        Globals.ThreadActive = true;
+                        Globals.ThreadAborted = false;
                         AppManager.Instance.KillAutoFM();
-                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                             PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.PrepareForIPadSynchronize();
-                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                             BusinessClasses.LibraryManager.Instance.SynchronizeLibraryForIpad(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library);
                         AppManager.Instance.RunAutoFM();
                     }));
@@ -102,8 +120,8 @@ namespace FileManager.TabPages
                         Thread.Sleep(100);
                         System.Windows.Forms.Application.DoEvents();
                     }
-                    AppManager.Instance.ThreadActive = false;
-                    AppManager.Instance.ThreadAborted = false;
+                    Globals.ThreadActive = false;
+                    Globals.ThreadAborted = false;
                     form.Close();
                     this.Enabled = true;
                     FormMain.Instance.ribbonControl.Enabled = true;

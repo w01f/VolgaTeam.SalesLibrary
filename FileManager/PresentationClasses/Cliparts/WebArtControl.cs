@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.PresentationClasses.Cliparts
 {
@@ -184,7 +185,7 @@ namespace FileManager.PresentationClasses.Cliparts
             double imageHeight = img.Height;
             double imageWidth = img.Width > pbPicture.Width ? pbPicture.Width : img.Width;
             if (img.Width > pbPicture.Width)
-                img = ToolClasses.ImageHelper.GetThumbnail(img, (int)(imageHeight * (imageWidth / (double)img.Width)), (int)imageWidth);
+                img = ImageHelper.GetThumbnail(img, (int)(imageHeight * (imageWidth / (double)img.Width)), (int)imageWidth);
 
             if (img.Height > xtraScrollableControlPicture.Height)
                 pbPicture.Height = img.Height;
@@ -220,7 +221,7 @@ namespace FileManager.PresentationClasses.Cliparts
                 {
                     try
                     {
-                        ToolClasses.SyncManager.MakeFolderAvailable(oldFolder);
+                        SyncManager.MakeFolderAvailable(oldFolder);
                         string parentFolderPath = oldFolder.Parent.FullName;
                         string oldFoldeName = oldFolder.Name;
                         string newFoldeName = node.GetValue(treeListColumnName).ToString();
@@ -438,7 +439,7 @@ namespace FileManager.PresentationClasses.Cliparts
                     if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to delete selected folder?") == DialogResult.Yes)
                     {
                         ClearViewArea();
-                        ToolClasses.SyncManager.DeleteFolder(node.Tag as DirectoryInfo);
+                        SyncManager.DeleteFolder(node.Tag as DirectoryInfo);
                         node.ParentNode.Nodes.Remove(node);
                     }
                 }

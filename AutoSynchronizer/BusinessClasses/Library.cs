@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace AutoSynchronizer.BusinessClasses
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public class Library
+    public class Library : ILibrary
     {
         private RootFolder _rootFolder = null;
 
@@ -36,8 +36,8 @@ namespace AutoSynchronizer.BusinessClasses
         public List<RootFolder> ExtraFolders { get; private set; }
         public List<LibraryPage> Pages { get; private set; }
         public List<string> EmailList { get; private set; }
-        public List<LibraryFile> DeadLinks { get; private set; }
-        public List<LibraryFile> ExpiredLinks { get; private set; }
+        public List<ILibraryFile> DeadLinks { get; private set; }
+        public List<ILibraryFile> ExpiredLinks { get; private set; }
         public List<AutoWidget> AutoWidgets { get; private set; }
 
         #region Auto Sync Settings
@@ -54,6 +54,8 @@ namespace AutoSynchronizer.BusinessClasses
         #endregion
 
         public OvernightsCalendar OvernightsCalendar { get; set; }
+
+        public IPadManager IPadManager { get; private set; }
 
         public RootFolder RootFolder
         {
@@ -78,8 +80,8 @@ namespace AutoSynchronizer.BusinessClasses
             this.ExtraFolders = new List<RootFolder>();
             this.Pages = new List<LibraryPage>();
             this.EmailList = new List<string>();
-            this.DeadLinks = new List<LibraryFile>();
-            this.ExpiredLinks = new List<LibraryFile>();
+            this.DeadLinks = new List<ILibraryFile>();
+            this.ExpiredLinks = new List<ILibraryFile>();
             this.AutoWidgets = new List<AutoWidget>();
 
             #region Auto Sync Settings
@@ -90,6 +92,7 @@ namespace AutoSynchronizer.BusinessClasses
             #endregion
 
             this.OvernightsCalendar = new OvernightsCalendar(this);
+            this.IPadManager = new IPadManager(this);
 
             Init();
         }
@@ -105,6 +108,7 @@ namespace AutoSynchronizer.BusinessClasses
         {
             DateTime tempDate = DateTime.Now;
             bool tempBool = false;
+            Guid tempGuid;
 
             this.BrandingText = string.Empty;
             this.SyncDate = DateTime.Now;
@@ -123,8 +127,9 @@ namespace AutoSynchronizer.BusinessClasses
             this.SyncScheduleRecords.Clear();
             this.ExtraFolders.Clear();
 
-            bool fileBusy = true;
-            string file = Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName);
+            bool fileBusy = false;
+            string file = Path.Combine(this.Folder.FullName, Constants.StorageFileName);
+            int counter = 0;
             do
             {
                 try
@@ -133,25 +138,14 @@ namespace AutoSynchronizer.BusinessClasses
                     {
                         XmlDocument document = new XmlDocument();
                         document.Load(file);
-                        fileBusy = false;
 
                         XmlNode node = document.SelectSingleNode(@"/Library/Name");
                         if (node != null)
                             this.Name = node.InnerText;
-                        node = document.SelectSingleNode(@"/Library/UseDirectAccess");
+                        node = document.SelectSingleNode(@"/Library/Identifier");
                         if (node != null)
-                            if (bool.TryParse(node.InnerText, out tempBool))
-                                this.UseDirectAccess = tempBool;
-                        if (this.UseDirectAccess)
-                        {
-                            node = document.SelectSingleNode(@"/Library/RootFolder");
-                            if (node != null)
-                                this.Folder = new DirectoryInfo(node.InnerText);
-                            node = document.SelectSingleNode(@"/Library/DirectAccessFileBottomDate");
-                            if (node != null)
-                                if (DateTime.TryParse(node.InnerText, out tempDate))
-                                    this.DirectAccessFileBottomDate = tempDate;
-                        }
+                            if (Guid.TryParse(node.InnerText, out tempGuid))
+                                this.Identifier = tempGuid;
                         node = document.SelectSingleNode(@"/Library/BrandingText");
                         if (node != null)
                             this.BrandingText = node.InnerText;
@@ -311,6 +305,10 @@ namespace AutoSynchronizer.BusinessClasses
                         if (node != null)
                             this.OvernightsCalendar.Deserialize(node);
 
+                        node = document.SelectSingleNode(@"/Library/IPadManager");
+                        if (node != null)
+                            this.IPadManager.Deserialize(node);
+
                         #region Program Manager Settings
                         node = document.SelectSingleNode(@"/Library/EnableProgramManagerSync");
                         if (node != null)
@@ -324,17 +322,19 @@ namespace AutoSynchronizer.BusinessClasses
 
                         this.IsConfigured = true;
                     }
+                    if (this.Pages.Count == 0)
+                        this.Pages.Add(new LibraryPage(this));
+
+                    fileBusy = false;
                 }
                 catch
                 {
+                    counter++;
                     fileBusy = true;
                     System.Threading.Thread.Sleep(1000);
                 }
             }
-            while (fileBusy);
-
-            if (this.Pages.Count == 0)
-                this.Pages.Add(new LibraryPage(this));
+            while (fileBusy && counter < 5);
         }
 
         public void Save()
@@ -342,6 +342,7 @@ namespace AutoSynchronizer.BusinessClasses
             StringBuilder xml = new StringBuilder();
             xml.AppendLine("<Library>");
             xml.AppendLine(@"<Name>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
+            xml.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             xml.AppendLine(@"<UseDirectAccess>" + this.UseDirectAccess + @"</UseDirectAccess>");
             xml.AppendLine(@"<DirectAccessFileBottomDate>" + this.DirectAccessFileBottomDate.ToString() + @"</DirectAccessFileBottomDate>");
             xml.AppendLine(@"<RootFolder>" + this.Folder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
@@ -376,14 +377,24 @@ namespace AutoSynchronizer.BusinessClasses
             xml.AppendLine("</AutoWidgets>");
 
             #region Auto Sync Settings
+            StringBuilder autoSyncSettings = new StringBuilder();
+            autoSyncSettings.AppendLine("<AutoSyncSettings>");
             xml.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
+            autoSyncSettings.AppendLine(@"<EnableAutoSync>" + this.EnableAutoSync.ToString() + @"</EnableAutoSync>");
             xml.AppendLine(@"<SyncSchedule>");
+            autoSyncSettings.AppendLine(@"<SyncSchedule>");
             foreach (SyncScheduleRecord syncTime in this.SyncScheduleRecords)
+            {
                 xml.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
+                autoSyncSettings.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
+            }
             xml.AppendLine(@"</SyncSchedule>");
+            autoSyncSettings.AppendLine(@"</SyncSchedule>");
+            autoSyncSettings.AppendLine("</AutoSyncSettings>");
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
+            xml.AppendLine(@"<IPadManager>" + this.IPadManager.Serialize() + @"</IPadManager>");
 
             #region Program Manager Settings
             xml.AppendLine(@"<EnableProgramManagerSync>" + this.EnableProgramManagerSync.ToString() + @"</EnableProgramManagerSync>");
@@ -393,24 +404,62 @@ namespace AutoSynchronizer.BusinessClasses
 
             xml.AppendLine(@"</Library>");
 
-            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, ConfigurationClasses.SettingsManager.StorageFileName), false))
+            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, Constants.StorageFileName), false))
             {
                 sw.Write(xml.ToString());
                 sw.Flush();
             }
         }
 
-        public void PrepareForSynchronize()
+        public void SaveLight()
         {
-            this.SyncDate = DateTime.Now;
-            if (this.IsConfigured)
-                Save();
-            if (!this.UseDirectAccess)
+            StringBuilder xml = new StringBuilder();
+            xml.AppendLine("<Library>");
+            xml.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
+            xml.AppendLine(@"</Library>");
+
+            using (StreamWriter sw = new StreamWriter(Path.Combine(this.Folder.FullName, Constants.StorageLightFileName), false))
             {
-                ProceedPresentationLinks();
-                NotifyAboutExpiredLinks();
+                sw.Write(xml.ToString());
+                sw.Flush();
             }
-            Archive();
+        }
+
+        public ILibraryFile GetLinkInstance(LibraryFolder parentFolder)
+        {
+            return new LibraryFile(parentFolder);
+        }
+
+        public void PrepareForRegularSynchronize()
+        {
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+            {
+                this.SyncDate = DateTime.Now;
+                if (this.IsConfigured)
+                    Save();
+                if (!this.UseDirectAccess)
+                {
+                    GeneratePresentationPreviewFiles();
+                    if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                        NotifyAboutExpiredLinks();
+                }
+            }
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                Archive();
+        }
+
+        public void PrepareForIPadSynchronize()
+        {
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                if (!this.UseDirectAccess)
+                    GenerateExtendedPreviewFiles();
+
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+            {
+                this.IPadManager.SaveJson();
+                this.SaveLight();
+                Archive();
+            }
         }
 
         private void ProceedDeadLinks()
@@ -439,23 +488,77 @@ namespace AutoSynchronizer.BusinessClasses
             {
                 foreach (LibraryPage page in this.Pages)
                     foreach (LibraryFolder folder in page.Folders)
-                        foreach (LibraryFile file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.FullPath) > x.PresentationProperties.LastUpdate)))
+                        foreach (LibraryFile file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
                             file.GetPresentationPrperties();
                 InteropClasses.PowerPointHelper.Instance.Disconnect();
                 this.Save();
             }
         }
 
-        private void ProceedPresentationLinks()
+        private void GeneratePresentationPreviewFiles()
+        {
+            foreach (LibraryPage page in this.Pages)
+            {
+                foreach (LibraryFolder folder in page.Folders)
+                {
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
+                    {
+                        if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                        {
+                            if (file.PreviewContainer == null)
+                                file.PreviewContainer = new PresentationPreviewContainer(file);
+                            file.PreviewContainer.UpdateContent();
+                        }
+                        else
+                            break;
+                    }
+                    if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                        break;
+                }
+                if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                    break;
+            }
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                this.Save();
+        }
+
+        private void GenerateExtendedPreviewFiles()
+        {
+            foreach (LibraryPage page in this.Pages)
+            {
+                foreach (LibraryFolder folder in page.Folders)
+                {
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
+                    {
+                        if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                        {
+                            if (file.UniversalPreviewContainer == null)
+                                file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
+                            file.UniversalPreviewContainer.UpdateContent();
+                        }
+                        else
+                            break;
+                    }
+                    if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                        break;
+                }
+                if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                    break;
+            }
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                this.Save();
+        }
+
+        public void GenerateVideoPreviewFiles()
         {
             foreach (LibraryPage page in this.Pages)
                 foreach (LibraryFolder folder in page.Folders)
                 {
-                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.OtherPresentation))
+                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
                     {
-                        if (file.PreviewContainer == null)
-                            file.PreviewContainer = new PresentationPreviewContainer(file);
-                        file.PreviewContainer.UpdateContent();
+                        if (file.UniversalPreviewContainer == null)
+                            file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
+                        file.UniversalPreviewContainer.UpdateContent();
                     }
                 }
             this.Save();
@@ -482,18 +585,18 @@ namespace AutoSynchronizer.BusinessClasses
             //{
             //    if (InteropClasses.OutlookHelper.Instance.Connect())
             //    {
-            //        InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.FullPath)));
+            //        InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)), this.SendEmail);
             //        InteropClasses.OutlookHelper.Instance.Disconnect();
             //    }
             //    else
-            //        AppManager.Instance.ShowWarning("Cannot open Outlook");
+            //        FileManager.AppManager.Instance.ShowWarning("Cannot open Outlook");
             //}
         }
 
-        public void Archive()
+        private void Archive()
         {
             DateTime archiveDateTime = DateTime.Now;
-            string archiveFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
+            string archiveFolder = Path.Combine(AutoSynchronizer.ConfigurationClasses.SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
             try
             {
                 if (!Directory.Exists(archiveFolder))

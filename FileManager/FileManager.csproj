@@ -55,7 +55,6 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.20524, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86" />
     <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -83,16 +82,7 @@
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="itextsharp">
-      <HintPath>ToolClasses\PdfToText\itextsharp.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>ToolClasses\Json\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpZipLib">
-      <HintPath>ToolClasses\PdfToText\SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -107,13 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
-    <Compile Include="BusinessClasses\IPadManager.cs" />
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
-    <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
-    <Compile Include="InteropClasses\ExcelHelper.cs" />
-    <Compile Include="InteropClasses\WordHelper.cs" />
     <Compile Include="PresentationClasses\IPad\IPadManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,8 +112,6 @@
     <Compile Include="TabPages\TabIPadManagerControl.Designer.cs">
       <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolClasses\PdfHelper.cs" />
-    <Compile Include="ToolClasses\PDFParser.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
     <Compile Include="ToolForms\FormProgressSync.cs">
       <SubType>Form</SubType>
@@ -177,7 +161,6 @@
     <Compile Include="ToolForms\WallBin\FormAddUrl.Designer.cs">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
     <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
     <Compile Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.cs">
       <SubType>Component</SubType>
@@ -245,8 +228,6 @@
     <Compile Include="PresentationClasses\Cliparts\SalesGalleryControl.Designer.cs">
       <DependentUpon>SalesGalleryControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="InteropClasses\OutlookHelper.cs" />
-    <Compile Include="InteropClasses\PowerPointHelper.cs" />
     <Compile Include="ToolForms\Settings\FormCalendarSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -323,8 +304,6 @@
     <Compile Include="TabPages\TabHomeControl.Designer.cs">
       <DependentUpon>TabHomeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolClasses\ImageHelper.cs" />
-    <Compile Include="ToolClasses\SyncManager.cs" />
     <Compile Include="ToolForms\WallBin\FormDeleteIncorrectLinks.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -372,7 +351,6 @@
       <DependentUpon>FolderBoxControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\RichTextBoxPrinter.cs" />
-    <Compile Include="InteropClasses\WinAPIHelper.cs" />
     <Compile Include="ToolForms\WallBin\FormSelectWidget.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -388,16 +366,6 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web References\ContentManagmentService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\IPadAdminService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="PresentationClasses\IPad\IPadManagerControl.resx">
       <DependentUpon>IPadManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -545,19 +513,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Web References\ContentManagmentService\ContentController.wsdl" />
-    <None Include="Web References\ContentManagmentService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\IPadAdminService\AdminController.wsdl" />
-    <None Include="Web References\IPadAdminService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\IPadAdminService\UserRecord.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\paths.png" />
@@ -722,33 +677,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/admin/quote">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\IPadAdminService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/admin/quote</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>FileManager_IPadAdminService_AdminControllerService</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/content/quote">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ContentManagmentService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/content/quote</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>FileManager_ContentManagmentService_ContentControllerService</CachedSettingsPropName>
-    </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

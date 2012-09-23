@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Xml;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ConfigurationClasses
 {
@@ -95,11 +96,11 @@ namespace FileManager.ConfigurationClasses
 
             this.HiddenObjects = new List<string>();
             this.HiddenObjects.Add("!Old");
-            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.RegularPreviewContainersRootFolderName);
-            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.FtpPreviewContainersRootFolderName);
-            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.OvernightsCalendarRootFolderName);
-            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.ProgramManagerRootFolderName);
-            this.HiddenObjects.Add(SalesDepot.CoreObjects.Constants.ExtraFoldersRootFolderName);
+            this.HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(Constants.FtpPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
+            this.HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
             this.HiddenObjects.Add("thumbs.db");
             this.HiddenObjects.Add("SalesDepotCache.xml");
         }

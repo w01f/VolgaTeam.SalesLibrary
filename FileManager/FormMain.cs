@@ -74,10 +74,14 @@ namespace FileManager
             buttonItemCalendarFileGrabber.Click += new EventHandler(this.TabOvernightsCalendar.buttonItemCalendarFileGrabber_Click);
 
             this.TabIPadManager = new TabPages.TabIPadManagerControl();
+            buttonItemIPadSyncDisabled.Click += new EventHandler(this.TabIPadManager.buttonItemIPadSyncStatus_Click);
+            buttonItemIPadSyncEnabled.Click += new EventHandler(this.TabIPadManager.buttonItemIPadSyncStatus_Click);
+            buttonItemIPadSyncDisabled.CheckedChanged += new EventHandler(this.TabIPadManager.buttonItemIPadSyncStatus_CheckedChanged);
+            buttonItemIPadSyncEnabled.CheckedChanged += new EventHandler(this.TabIPadManager.buttonItemIPadSyncStatus_CheckedChanged);
             buttonEditIPadLocation.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadLocation_EditValueChanged);
             buttonEditIPadLocation.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.TabIPadManager.buttonEditIPadLocation_ButtonClick);
-            buttonEditIPadLocation.Enter+=new EventHandler(Editor_Enter);
-            buttonEditIPadLocation.MouseUp +=new MouseEventHandler(Editor_MouseUp);
+            buttonEditIPadLocation.Enter += new EventHandler(Editor_Enter);
+            buttonEditIPadLocation.MouseUp += new MouseEventHandler(Editor_MouseUp);
             buttonEditIPadLocation.MouseDown += new MouseEventHandler(Editor_MouseDown);
             buttonEditIPadSite.EditValueChanged += new EventHandler(this.TabIPadManager.buttonEditIPadSite_EditValueChanged);
             buttonEditIPadSite.Enter += new EventHandler(Editor_Enter);

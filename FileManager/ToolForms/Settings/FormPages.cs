@@ -2,12 +2,13 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
     public partial class FormPages : Form
     {
-        public BusinessClasses.Library Library { get; set; }
+        public Library Library { get; set; }
 
         public FormPages()
         {
@@ -25,7 +26,7 @@ namespace FileManager.ToolForms.Settings
 
         private void LoadPages()
         {
-            gridControlPages.DataSource = new BindingList<SalesDepot.CoreObjects.LibraryPage>(this.Library.Pages);
+            gridControlPages.DataSource = new BindingList<LibraryPage>(this.Library.Pages);
         }
 
         private void FormPages_FormClosing(object sender, FormClosingEventArgs e)
@@ -76,7 +77,7 @@ namespace FileManager.ToolForms.Settings
         private void buttonXAdd_Click(object sender, EventArgs e)
         {
             this.Library.AddPage();
-            ((BindingList<SalesDepot.CoreObjects.LibraryPage>)gridControlPages.DataSource).ResetBindings();
+            ((BindingList<LibraryPage>)gridControlPages.DataSource).ResetBindings();
             gridViewPages.FocusedRowHandle = gridViewPages.RowCount - 1;
         }
 

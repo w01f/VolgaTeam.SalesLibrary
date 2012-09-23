@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Xml;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ConfigurationClasses
 {
@@ -78,12 +79,12 @@ namespace FileManager.ConfigurationClasses
     public class SearchTags
     {
         private string _listsFileName;
-        public List<SalesDepot.CoreObjects.SearchGroup> SearchGroups { get; set; }
+        public List<SearchGroup> SearchGroups { get; set; }
 
         public SearchTags()
         {
             _listsFileName = Path.Combine(ListManager.Instance.ListsFolder, "SDSearch.xml");
-            this.SearchGroups = new List<SalesDepot.CoreObjects.SearchGroup>();
+            this.SearchGroups = new List<SearchGroup>();
             Load();
         }
 
@@ -103,7 +104,7 @@ namespace FileManager.ConfigurationClasses
                         switch (childNode.Name)
                         {
                             case "Category":
-                                SalesDepot.CoreObjects.SearchGroup group = new SalesDepot.CoreObjects.SearchGroup();
+                                SearchGroup group = new SearchGroup();
                                 foreach (XmlAttribute attribute in childNode.Attributes)
                                 {
                                     switch (attribute.Name)

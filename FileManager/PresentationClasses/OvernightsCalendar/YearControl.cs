@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.OvernightsCalendar
 {
@@ -12,12 +13,12 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
         private const int ColumnsCount = 4;
         private const int DaysInWeek = 7;
 
-        public BusinessClasses.CalendarYear Data { get; private set; }
+        public CalendarYear Data { get; private set; }
         public List<MonthControl> Months { get; private set; }
         public List<Panel> WeekDaysPanels { get; private set; }
         public bool ViewBuilded { get; set; }
 
-        public YearControl(BusinessClasses.CalendarYear data)
+        public YearControl(CalendarYear data)
         {
             InitializeComponent();
             this.Data = data;
@@ -33,7 +34,7 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
 
             pnMonths.Controls.Clear();
             this.Months.Clear();
-            foreach (BusinessClasses.CalendarMonth month in this.Data.Months)
+            foreach (CalendarMonth month in this.Data.Months)
             {
                 MonthControl monthControl = new MonthControl(month);
                 this.Months.Add(monthControl);

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace AutoSynchronizer.BusinessClasses
 {
@@ -31,7 +30,7 @@ namespace AutoSynchronizer.BusinessClasses
             {
                 this.LibraryCollection.Clear();
                 if (rootFolder.Root.FullName.Equals(rootFolder.FullName) || ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles)
-                    this.LibraryCollection.Add(new LibraryWrapper(new Library(ConfigurationClasses.SettingsManager.WholeDriveFilesStorage, rootFolder)));
+                    this.LibraryCollection.Add(new LibraryWrapper(new Library(Constants.WholeDriveFilesStorage, rootFolder)));
                 else
                     foreach (DirectoryInfo subFolder in rootFolder.GetDirectories())
                         this.LibraryCollection.Add(new LibraryWrapper(new Library(subFolder.Name, subFolder)));
@@ -55,26 +54,28 @@ namespace AutoSynchronizer.BusinessClasses
             InitServiceObjects();
 
             _libraryStorageWatcher.Path = this.Library.Folder.FullName;
-            _libraryStorageWatcher.Filter = ConfigurationClasses.SettingsManager.StorageFileName;
-            _libraryStorageWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            _libraryStorageWatcher.Filter = Constants.StorageFileName;
             _libraryStorageWatcher.Changed += new FileSystemEventHandler((sender, e) =>
             {
-                try
+                if (e.ChangeType == WatcherChangeTypes.Changed)
                 {
-                    if (!this.Syncer.SyncInProgress)
+                    try
                     {
-                        _libraryStorageWatcher.EnableRaisingEvents = false;
-                        lock (AppManager.Locker)
+                        if (!this.Syncer.SyncInProgress)
                         {
-                            this.Library.Init();
-                            this.Library.OvernightsCalendar.LoadYears();
-                            InitServiceObjects();
+                            _libraryStorageWatcher.EnableRaisingEvents = false;
+                            lock (AppManager.Locker)
+                            {
+                                this.Library.Init();
+                                this.Library.OvernightsCalendar.LoadYears();
+                                InitServiceObjects();
+                            }
                         }
                     }
-                }
-                finally
-                {
-                    _libraryStorageWatcher.EnableRaisingEvents = true;
+                    finally
+                    {
+                        _libraryStorageWatcher.EnableRaisingEvents = true;
+                    }
                 }
             });
             _libraryStorageWatcher.EnableRaisingEvents = true;

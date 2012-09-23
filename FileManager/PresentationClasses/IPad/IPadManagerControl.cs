@@ -8,14 +8,16 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.PresentationClasses.IPad
 {
     [System.ComponentModel.ToolboxItem(false)]
     public partial class IPadManagerControl : UserControl
     {
-        private List<BusinessClasses.VideoInfo> _videoFiles = new List<BusinessClasses.VideoInfo>();
-        private List<IPadAdminService.UserRecord> _users = new List<IPadAdminService.UserRecord>();
+        private List<VideoInfo> _videoFiles = new List<VideoInfo>();
+        private List<SalesDepot.CoreObjects.IPadAdminService.UserRecord> _users = new List<SalesDepot.CoreObjects.IPadAdminService.UserRecord>();
 
         public WallBin.Decorators.LibraryDecorator ParentDecorator { get; private set; }
 
@@ -28,7 +30,9 @@ namespace FileManager.PresentationClasses.IPad
 
         public void UpdateControlsState()
         {
-            xtraTabControl.Enabled = !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
+            xtraTabControl.Enabled = this.ParentDecorator.Library.IPadManager.Enabled && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
+            FormMain.Instance.ribbonBarIPadLocation.Enabled = xtraTabControl.Enabled;
+            FormMain.Instance.ribbonBarIPadSite.Enabled = xtraTabControl.Enabled;
             FormMain.Instance.buttonItemIPadVideoConvert.Enabled = xtraTabControl.Enabled;
             FormMain.Instance.buttonItemIPadSyncFiles.Enabled = xtraTabControl.Enabled;
         }
@@ -42,7 +46,7 @@ namespace FileManager.PresentationClasses.IPad
             _videoFiles.Clear();
 
             _videoFiles.AddRange(this.ParentDecorator.Library.IPadManager.VideoFiles);
-            gridControlVideo.DataSource = new BindingList<BusinessClasses.VideoInfo>(_videoFiles.ToArray());
+            gridControlVideo.DataSource = new BindingList<VideoInfo>(_videoFiles.ToArray());
             laVideoTitle.Text = string.Format("Your Library has {0} Video File{1}", _videoFiles.Count.ToString(), (_videoFiles.Count > 1 ? "s" : string.Empty));
 
             if (focussedRow >= 0 && focussedRow < gridViewVideo.RowCount)
@@ -51,40 +55,40 @@ namespace FileManager.PresentationClasses.IPad
 
         public void ConvertSelectedVideoFiles()
         {
-            BusinessClasses.VideoInfo[] videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
+            VideoInfo[] videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
             if (videoFiles.Length > 0)
                 ConvertVideoFiles(videoFiles);
             else
                 AppManager.Instance.ShowWarning("Please select one or several videos in the list below");
         }
 
-        private void ConvertVideoFiles(BusinessClasses.VideoInfo[] videoFiles)
+        private void ConvertVideoFiles(VideoInfo[] videoFiles)
         {
             using (ToolForms.FormProgressConverVideo form = new ToolForms.FormProgressConverVideo())
             {
                 form.ProcessAborted += new EventHandler<EventArgs>((progressSender, progressE) =>
                 {
-                    AppManager.Instance.ThreadAborted = true;
+                    Globals.ThreadAborted = true;
                 });
                 FormMain.Instance.ribbonControl.Enabled = false;
                 this.Enabled = false;
                 PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
                 Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                 {
-                    AppManager.Instance.ThreadActive = true;
-                    AppManager.Instance.ThreadAborted = false;
-                    foreach (BusinessClasses.VideoInfo videoFile in videoFiles)
+                    Globals.ThreadActive = true;
+                    Globals.ThreadAborted = false;
+                    foreach (VideoInfo videoFile in videoFiles)
                     {
-                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                         {
                             if (videoFile.Parent.UniversalPreviewContainer == null)
-                                videoFile.Parent.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(videoFile.Parent);
+                                videoFile.Parent.UniversalPreviewContainer = new UniversalPreviewContainer(videoFile.Parent);
                             videoFile.Parent.UniversalPreviewContainer.UpdateContent();
                         }
                         else
                             break;
                     }
-                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                    if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                         this.ParentDecorator.Library.Save();
                 }));
                 form.Show();
@@ -97,8 +101,8 @@ namespace FileManager.PresentationClasses.IPad
                     Thread.Sleep(100);
                     System.Windows.Forms.Application.DoEvents();
                 }
-                AppManager.Instance.ThreadActive = false;
-                AppManager.Instance.ThreadAborted = false;
+                Globals.ThreadActive = false;
+                Globals.ThreadAborted = false;
                 form.Close();
                 this.Enabled = true;
                 FormMain.Instance.ribbonControl.Enabled = true;
@@ -117,7 +121,7 @@ namespace FileManager.PresentationClasses.IPad
             int videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
             if (videoIndex >= 0 && videoIndex < _videoFiles.Count)
             {
-                BusinessClasses.VideoInfo videoInfo = _videoFiles[videoIndex];
+                VideoInfo videoInfo = _videoFiles[videoIndex];
                 if (e.Column == gridColumnVideoMp4FileName)
                 {
                     if (string.IsNullOrEmpty(videoInfo.Mp4FilePath))
@@ -151,7 +155,7 @@ namespace FileManager.PresentationClasses.IPad
         {
             if (gridViewVideo.FocusedRowHandle >= 0)
             {
-                BusinessClasses.VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+                VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
                 if (File.Exists(videoInfo.SourceFilePath))
                 {
                     ToolClasses.VideoHelper.Instance.OpenMediaPlayer(videoInfo.SourceFilePath);
@@ -165,7 +169,7 @@ namespace FileManager.PresentationClasses.IPad
         {
             if (gridViewVideo.FocusedRowHandle >= 0)
             {
-                BusinessClasses.VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+                VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
                 string filePath = string.Empty;
                 if (gridViewVideo.FocusedColumn == gridColumnVideoMp4FileName)
                     filePath = videoInfo.Mp4FilePath;
@@ -184,7 +188,7 @@ namespace FileManager.PresentationClasses.IPad
         {
             if (gridViewVideo.FocusedRowHandle >= 0)
             {
-                BusinessClasses.VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+                VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
                 if (File.Exists(videoInfo.OgvFilePath))
                 {
                     ToolClasses.VideoHelper.Instance.OpenFirefox(videoInfo.OgvFilePath);
@@ -198,7 +202,7 @@ namespace FileManager.PresentationClasses.IPad
         {
             if (gridViewVideo.FocusedRowHandle >= 0)
             {
-                BusinessClasses.VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+                VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
                 if (e.Button.Index == 0)
                 {
                     if (Directory.Exists(videoInfo.IPadFolderPath))
@@ -208,7 +212,7 @@ namespace FileManager.PresentationClasses.IPad
                 }
                 else if (e.Button.Index == 1)
                 {
-                    ConvertVideoFiles(new BusinessClasses.VideoInfo[] { videoInfo });
+                    ConvertVideoFiles(new VideoInfo[] { videoInfo });
                 }
             }
         }
@@ -217,8 +221,8 @@ namespace FileManager.PresentationClasses.IPad
         {
             if (e.Column == gridColumnVideoSourceFileName)
             {
-                BusinessClasses.VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
-                if (videoInfo.Parent.Type == SalesDepot.CoreObjects.FileTypes.QuickTimeVideo)
+                VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
+                if (videoInfo.Parent.Type == FileTypes.QuickTimeVideo)
                     e.RepositoryItem = repositoryItemButtonEditVideoMp4;
                 else
                     e.RepositoryItem = repositoryItemButtonEditVideoWmv;
@@ -237,14 +241,14 @@ namespace FileManager.PresentationClasses.IPad
 
         private void buttonXSelectAll_Click(object sender, EventArgs e)
         {
-            foreach (BusinessClasses.VideoInfo videoInfo in _videoFiles)
+            foreach (VideoInfo videoInfo in _videoFiles)
                 videoInfo.Selected = true;
             gridViewVideo.RefreshData();
         }
 
         private void buttonXClearAll_Click(object sender, EventArgs e)
         {
-            foreach (BusinessClasses.VideoInfo videoInfo in _videoFiles)
+            foreach (VideoInfo videoInfo in _videoFiles)
                 videoInfo.Selected = false;
             gridViewVideo.RefreshData();
         }
@@ -292,14 +296,14 @@ namespace FileManager.PresentationClasses.IPad
             else
                 _users.AddRange(this.ParentDecorator.Library.IPadManager.GetUsers(out message));
 
-            gridControlUsers.DataSource = new BindingList<IPadAdminService.UserRecord>(_users.ToArray());
+            gridControlUsers.DataSource = new BindingList<SalesDepot.CoreObjects.IPadAdminService.UserRecord>(_users.ToArray());
         }
 
         private void repositoryItemButtonEditUsersActions_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
             if (gridViewUsers.FocusedRowHandle >= 0 && gridViewUsers.FocusedRowHandle < gridViewUsers.RowCount)
             {
-                IPadAdminService.UserRecord userRecord = _users[gridViewUsers.GetDataSourceRowIndex(gridViewUsers.FocusedRowHandle)];
+                SalesDepot.CoreObjects.IPadAdminService.UserRecord userRecord = _users[gridViewUsers.GetDataSourceRowIndex(gridViewUsers.FocusedRowHandle)];
                 if (e.Button.Index == 0)
                 {
                     string message = string.Empty;

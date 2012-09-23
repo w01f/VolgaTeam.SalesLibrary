@@ -1,6 +1,6 @@
-﻿namespace FileManager.ToolForms
+﻿namespace AutoSynchronizer
 {
-    partial class FormProgressSync
+    partial class FormProgress
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,6 @@
             this.laProgress = new System.Windows.Forms.Label();
             this.circularProgress = new DevComponents.DotNetBar.Controls.CircularProgress();
             this.panelEx = new DevComponents.DotNetBar.PanelEx();
-            this.ckCloseAfterSync = new System.Windows.Forms.CheckBox();
             this.panelExCancel = new DevComponents.DotNetBar.PanelEx();
             this.pbCancel = new System.Windows.Forms.PictureBox();
             this.laTime = new System.Windows.Forms.Label();
@@ -48,7 +47,7 @@
             this.laProgress.ForeColor = System.Drawing.Color.White;
             this.laProgress.Location = new System.Drawing.Point(62, 4);
             this.laProgress.Name = "laProgress";
-            this.laProgress.Size = new System.Drawing.Size(155, 36);
+            this.laProgress.Size = new System.Drawing.Size(155, 47);
             this.laProgress.TabIndex = 2;
             this.laProgress.Text = "Loading data...";
             this.laProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -78,7 +77,6 @@
             // 
             this.panelEx.CanvasColor = System.Drawing.SystemColors.Control;
             this.panelEx.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.panelEx.Controls.Add(this.ckCloseAfterSync);
             this.panelEx.Controls.Add(this.panelExCancel);
             this.panelEx.Controls.Add(this.laTime);
             this.panelEx.Controls.Add(this.laProgress);
@@ -95,19 +93,6 @@
             this.panelEx.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText;
             this.panelEx.Style.GradientAngle = 90;
             this.panelEx.TabIndex = 4;
-            // 
-            // ckCloseAfterSync
-            // 
-            this.ckCloseAfterSync.AutoSize = true;
-            this.ckCloseAfterSync.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.ckCloseAfterSync.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckCloseAfterSync.ForeColor = System.Drawing.Color.White;
-            this.ckCloseAfterSync.Location = new System.Drawing.Point(71, 60);
-            this.ckCloseAfterSync.Name = "ckCloseAfterSync";
-            this.ckCloseAfterSync.Size = new System.Drawing.Size(135, 20);
-            this.ckCloseAfterSync.TabIndex = 20;
-            this.ckCloseAfterSync.Text = "Close on complete";
-            this.ckCloseAfterSync.UseVisualStyleBackColor = true;
             // 
             // panelExCancel
             // 
@@ -134,7 +119,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pbCancel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pbCancel.Image = global::FileManager.Properties.Resources.CancelSync;
+            this.pbCancel.Image = global::AutoSynchronizer.Properties.Resources.CancelSync;
             this.pbCancel.Location = new System.Drawing.Point(4, 4);
             this.pbCancel.Name = "pbCancel";
             this.pbCancel.Size = new System.Drawing.Size(46, 76);
@@ -152,15 +137,15 @@
             this.laTime.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.laTime.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.laTime.ForeColor = System.Drawing.Color.White;
-            this.laTime.Location = new System.Drawing.Point(62, 40);
+            this.laTime.Location = new System.Drawing.Point(62, 51);
             this.laTime.Name = "laTime";
-            this.laTime.Size = new System.Drawing.Size(155, 17);
+            this.laTime.Size = new System.Drawing.Size(155, 29);
             this.laTime.TabIndex = 4;
             this.laTime.Text = "0:00:00";
             this.laTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.laTime.UseMnemonic = false;
             // 
-            // FormProgressSync
+            // FormProgress
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -169,7 +154,7 @@
             this.Controls.Add(this.panelEx);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormProgressSync";
+            this.Name = "FormProgress";
             this.Opacity = 0.85D;
             this.Padding = new System.Windows.Forms.Padding(2);
             this.ShowIcon = false;
@@ -179,7 +164,6 @@
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.FormProgress_Shown);
             this.panelEx.ResumeLayout(false);
-            this.panelEx.PerformLayout();
             this.panelExCancel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbCancel)).EndInit();
             this.ResumeLayout(false);
@@ -194,6 +178,5 @@
         private System.Windows.Forms.PictureBox pbCancel;
         protected DevComponents.DotNetBar.PanelEx panelEx;
         protected DevComponents.DotNetBar.PanelEx panelExCancel;
-        protected System.Windows.Forms.CheckBox ckCloseAfterSync;
     }
 }

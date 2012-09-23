@@ -7,7 +7,7 @@ namespace FileManager.ToolForms.Settings
 {
     public partial class FormExtraRoots : Form
     {
-        public BusinessClasses.Library Library { get; set; }
+        public SalesDepot.CoreObjects.BusinessClasses.Library Library { get; set; }
 
         public FormExtraRoots()
         {
@@ -24,7 +24,7 @@ namespace FileManager.ToolForms.Settings
 
         private void LoadExtraRoots()
         {
-            gridControlFolders.DataSource = new BindingList<SalesDepot.CoreObjects.RootFolder>(this.Library.ExtraFolders);
+            gridControlFolders.DataSource = new BindingList<SalesDepot.CoreObjects.BusinessClasses.RootFolder>(this.Library.ExtraFolders);
         }
 
         private void FormPages_FormClosing(object sender, FormClosingEventArgs e)
@@ -60,7 +60,7 @@ namespace FileManager.ToolForms.Settings
         private void buttonXAdd_Click(object sender, EventArgs e)
         {
             this.Library.AddExtraRoot();
-            ((BindingList<SalesDepot.CoreObjects.RootFolder>)gridControlFolders.DataSource).ResetBindings();
+            ((BindingList<SalesDepot.CoreObjects.BusinessClasses.RootFolder>)gridControlFolders.DataSource).ResetBindings();
             gridViewFolders.FocusedRowHandle = gridViewFolders.RowCount - 1;
         }
 

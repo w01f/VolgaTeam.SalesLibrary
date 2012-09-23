@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.ToolClasses
 {
@@ -39,7 +40,7 @@ namespace FileManager.ToolClasses
                 };
                 videoAnalyzer.Exited += new EventHandler((analyzerSender, analyzerE) =>
                 {
-                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                    if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                     {
                         var b = videoAnalyzer.StandardOutput.ReadToEnd();
 
@@ -71,7 +72,7 @@ namespace FileManager.ToolClasses
                 while (!allowToExit)
                 {
                     Thread.Sleep(2000);
-                    if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
                     {
                         try
                         {
@@ -105,7 +106,7 @@ namespace FileManager.ToolClasses
                 };
                 videoAnalyzer.Exited += new EventHandler((analyzerSender, analyzerE) =>
                 {
-                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                    if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                     {
                         var b = videoAnalyzer.StandardOutput.ReadToEnd();
 
@@ -137,7 +138,7 @@ namespace FileManager.ToolClasses
                 while (!allowToExit)
                 {
                     Thread.Sleep(2000);
-                    if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
                     {
                         try
                         {

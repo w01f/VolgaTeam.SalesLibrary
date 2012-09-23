@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
     public partial class FormDeadLinks : Form
     {
-        public BusinessClasses.Library Library { get; set; }
+        public Library Library { get; set; }
         
         public FormDeadLinks()
         {

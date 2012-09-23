@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
@@ -17,7 +18,7 @@ namespace FileManager.PresentationClasses.WallBin
         private const int DefaultImageWidth = 26;
         private const int DefaultImageHeight = 26;
 
-        private SalesDepot.CoreObjects.LibraryFolder _folder;
+        private LibraryFolder _folder;
         private Font _noteFont;
         private Font _textFont;
         private Pen _rowDropHintPen = new Pen(Color.Black, 2);
@@ -40,7 +41,7 @@ namespace FileManager.PresentationClasses.WallBin
         public Decorators.PageDecorator Decorator { get; set; }
         public bool IsActive { get; set; }
 
-        public SalesDepot.CoreObjects.LibraryFolder Folder
+        public LibraryFolder Folder
         {
             set
             {
@@ -60,13 +61,13 @@ namespace FileManager.PresentationClasses.WallBin
                         labelControlText.ForeColor = _folder.BannerProperties.ForeColor;
                         switch (_folder.HeaderAlignment)
                         {
-                            case SalesDepot.CoreObjects.Alignment.Left:
+                            case Alignment.Left:
                                 labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                                 break;
-                            case SalesDepot.CoreObjects.Alignment.Center:
+                            case Alignment.Center:
                                 labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                                 break;
-                            case SalesDepot.CoreObjects.Alignment.Right:
+                            case Alignment.Right:
                                 labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                                 break;
                         }
@@ -76,15 +77,15 @@ namespace FileManager.PresentationClasses.WallBin
                         labelControlText.Visible = false;
                         switch (_folder.BannerProperties.ImageAlignement)
                         {
-                            case SalesDepot.CoreObjects.Alignment.Left:
+                            case Alignment.Left:
                                 pbImage.Dock = DockStyle.Left;
                                 pbImage.SizeMode = PictureBoxSizeMode.Normal;
                                 break;
-                            case SalesDepot.CoreObjects.Alignment.Center:
+                            case Alignment.Center:
                                 pbImage.Dock = DockStyle.Fill;
                                 pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
                                 break;
-                            case SalesDepot.CoreObjects.Alignment.Right:
+                            case Alignment.Right:
                                 pbImage.Dock = DockStyle.Right;
                                 pbImage.SizeMode = PictureBoxSizeMode.Normal;
                                 break;
@@ -102,13 +103,13 @@ namespace FileManager.PresentationClasses.WallBin
                     labelControlText.ForeColor = _folder.ForeHeaderColor;
                     switch (_folder.HeaderAlignment)
                     {
-                        case SalesDepot.CoreObjects.Alignment.Left:
+                        case Alignment.Left:
                             labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                             break;
-                        case SalesDepot.CoreObjects.Alignment.Center:
+                        case Alignment.Center:
                             labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                             break;
-                        case SalesDepot.CoreObjects.Alignment.Right:
+                        case Alignment.Right:
                             labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                             break;
                     }
@@ -228,7 +229,7 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (grFiles.Rows[e.RowIndex].Tag != null)
             {
-                BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
                 if (file != null)
                 {
                     List<string> toolTipText = new List<string>();
@@ -247,7 +248,7 @@ namespace FileManager.PresentationClasses.WallBin
                         else
                             toolTipText.Add("No Search Tags Assigned");
                     }
-                    else if (file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak)
+                    else if (file.Type == FileTypes.LineBreak)
                     {
                         if (!string.IsNullOrEmpty(file.LineBreakProperties.Note))
                             toolTipText.Add(file.LineBreakProperties.Note);
@@ -261,7 +262,7 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (e.ColumnIndex == 0)
             {
-                BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
                 if (file != null)
                 {
                     e.PaintBackground(e.CellBounds, true);
@@ -430,21 +431,21 @@ namespace FileManager.PresentationClasses.WallBin
                             MoveFile((DataGridViewRow)data, ht.RowIndex);
                         else
                         {
-                            List<SalesDepot.CoreObjects.FileLink> files = new List<SalesDepot.CoreObjects.FileLink>();
-                            List<SalesDepot.CoreObjects.FolderLink> folders = new List<SalesDepot.CoreObjects.FolderLink>();
+                            List<FileLink> files = new List<FileLink>();
+                            List<FolderLink> folders = new List<FolderLink>();
                             foreach (object dragItem in (object[])data)
                                 if (dragItem != null)
                                 {
-                                    if (dragItem.GetType() == typeof(SalesDepot.CoreObjects.FileLink))
-                                        files.Add((SalesDepot.CoreObjects.FileLink)dragItem);
-                                    else if (dragItem.GetType() == typeof(SalesDepot.CoreObjects.FolderLink))
-                                        folders.Add((SalesDepot.CoreObjects.FolderLink)dragItem);
+                                    if (dragItem.GetType() == typeof(FileLink))
+                                        files.Add((FileLink)dragItem);
+                                    else if (dragItem.GetType() == typeof(FolderLink))
+                                        folders.Add((FolderLink)dragItem);
                                 }
                             folders.Sort((x, y) => x.Folder.Name.CompareTo(y.Folder.Name));
                             files.Sort((x, y) => x.File.Name.CompareTo(y.File.Name));
-                            foreach (SalesDepot.CoreObjects.FolderLink folder in folders)
+                            foreach (FolderLink folder in folders)
                                 AddFolder(folder, ht.RowIndex);
-                            foreach (SalesDepot.CoreObjects.FileLink file in files)
+                            foreach (FileLink file in files)
                                 AddFile(file, ht.RowIndex);
                         }
                         _containFiles = true;
@@ -553,13 +554,13 @@ namespace FileManager.PresentationClasses.WallBin
             e.Cancel = true;
             if (e.ColumnIndex == 0)
             {
-                BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
                 if (file != null)
                 {
                     if (file.BannerProperties.Enable)
                         return;
                     _displayCellFont = grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font;
-                    grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak ? _noteFont : _editCellFont;
+                    grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = file.Type == FileTypes.LineBreak ? _noteFont : _editCellFont;
                     grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.Name;
                     e.Cancel = false;
                 }
@@ -570,7 +571,7 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (e.ColumnIndex == 0)
             {
-                BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
                 if (file != null)
                 {
                     if (file.BannerProperties.Enable)
@@ -622,10 +623,10 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    BusinessClasses.LibraryFile file = new BusinessClasses.LibraryFile(_folder);
+                    LibraryFile file = new LibraryFile(_folder);
                     file.Name = form.LinkName;
                     file.RelativePath = form.LinkPath;
-                    file.Type = SalesDepot.CoreObjects.FileTypes.Url;
+                    file.Type = FileTypes.Url;
                     file.InitBannerProperties();
                     if (grFiles.SelectedRows.Count > 0)
                     {
@@ -660,10 +661,10 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    BusinessClasses.LibraryFile file = new BusinessClasses.LibraryFile(_folder);
+                    LibraryFile file = new LibraryFile(_folder);
                     file.Name = form.LinkName;
                     file.RelativePath = form.LinkPath;
-                    file.Type = SalesDepot.CoreObjects.FileTypes.Network;
+                    file.Type = FileTypes.Network;
                     file.InitBannerProperties();
                     if (grFiles.SelectedRows.Count > 0)
                     {
@@ -696,9 +697,9 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (grFiles.SelectedRows.Count > 0)
             {
-                BusinessClasses.LibraryFile file = new BusinessClasses.LibraryFile(_folder);
-                file.Type = SalesDepot.CoreObjects.FileTypes.LineBreak;
-                file.LineBreakProperties = new SalesDepot.CoreObjects.LineBreakProperties(file);
+                LibraryFile file = new LibraryFile(_folder);
+                file.Type = FileTypes.LineBreak;
+                file.LineBreakProperties = new LineBreakProperties(file);
                 file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
                 file.LineBreakProperties.BoldFont = new Font(_textFont, FontStyle.Bold);
                 file.IsBold = true;
@@ -723,7 +724,7 @@ namespace FileManager.PresentationClasses.WallBin
 
         public void DownLink()
         {
-            BusinessClasses.LibraryFile file = grFiles.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
+            LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
             string tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
 
             grFiles.SuspendLayout();
@@ -744,7 +745,7 @@ namespace FileManager.PresentationClasses.WallBin
 
         public void UpLink()
         {
-            BusinessClasses.LibraryFile file = grFiles.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
+            LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
             string tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
 
             grFiles.SuspendLayout();
@@ -767,16 +768,16 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (grFiles.SelectedRows.Count > 0)
             {
-                BusinessClasses.LibraryFile file = grFiles.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
                 if (file != null)
                 {
-                    _formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
+                    _formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
                     _formLinkProperties.IsBold = file.IsBold;
                     _formLinkProperties.EnableWidget = file.EnableWidget;
                     _formLinkProperties.Widget = file.EnableWidget ? file.Widget : null;
                     _formLinkProperties.BannerProperties = file.BannerProperties;
-                    _formLinkProperties.IsLineBreak = file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak;
-                    if (file.Type != SalesDepot.CoreObjects.FileTypes.LineBreak)
+                    _formLinkProperties.IsLineBreak = file.Type == FileTypes.LineBreak;
+                    if (file.Type != FileTypes.LineBreak)
                     {
                         _formLinkProperties.Note = file.Note;
                         _formLinkProperties.AddDate = file.AddDate;
@@ -794,7 +795,7 @@ namespace FileManager.PresentationClasses.WallBin
                         file.Widget = _formLinkProperties.EnableWidget ? _formLinkProperties.Widget : null;
                         file.EnableWidget = _formLinkProperties.EnableWidget;
                         file.BannerProperties = _formLinkProperties.BannerProperties;
-                        if (file.Type != SalesDepot.CoreObjects.FileTypes.LineBreak)
+                        if (file.Type != FileTypes.LineBreak)
                         {
                             file.IsBold = _formLinkProperties.IsBold;
                             file.Note = _formLinkProperties.Note;
@@ -810,7 +811,7 @@ namespace FileManager.PresentationClasses.WallBin
                         bool widgetColumnVisible = false;
                         foreach (DataGridViewRow row in grFiles.Rows)
                         {
-                            BusinessClasses.LibraryFile libraryfile = row.Tag as BusinessClasses.LibraryFile;
+                            LibraryFile libraryfile = row.Tag as LibraryFile;
                             if (libraryfile.Widget != null)
                             {
                                 widgetColumnVisible = true;
@@ -836,7 +837,7 @@ namespace FileManager.PresentationClasses.WallBin
         {
             if (grFiles.SelectedRows.Count > 0)
             {
-                BusinessClasses.LibraryFile file = grFiles.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
                 if (file != null)
                 {
                     try
@@ -857,13 +858,13 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 if (grFiles.SelectedRows.Count > 0)
                 {
-                    BusinessClasses.LibraryFile file = grFiles.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
+                    LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
                     if (file != null)
                     {
-                        if (file.Type == SalesDepot.CoreObjects.FileTypes.BuggyPresentation || file.Type == SalesDepot.CoreObjects.FileTypes.FriendlyPresentation || file.Type == SalesDepot.CoreObjects.FileTypes.Presentation)
+                        if (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation)
                         {
                             if (file.PreviewContainer == null)
-                                file.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(file);
+                                file.PreviewContainer = new PresentationPreviewContainer(file);
                             file.PreviewContainer.ClearContent();
                         }
 
@@ -897,7 +898,7 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 foreach (DataGridViewRow row in grFiles.Rows)
                 {
-                    BusinessClasses.LibraryFile file = row.Tag as BusinessClasses.LibraryFile;
+                    LibraryFile file = row.Tag as LibraryFile;
                     if (file != null)
                     {
                         if (file.LastChanged == DateTime.MinValue)
@@ -927,7 +928,7 @@ namespace FileManager.PresentationClasses.WallBin
             SetGridSize();
         }
 
-        private void GetLinkGUIValues(BusinessClasses.LibraryFile file
+        private void GetLinkGUIValues(LibraryFile file
             , ref Image image
             , ref int imageLeft
             , ref int imageTop
@@ -968,15 +969,15 @@ namespace FileManager.PresentationClasses.WallBin
                 {
                     switch (file.BannerProperties.ImageAlignement)
                     {
-                        case SalesDepot.CoreObjects.Alignment.Left:
+                        case Alignment.Left:
                             imageLeft = 0;
                             break;
-                        case SalesDepot.CoreObjects.Alignment.Center:
+                        case Alignment.Center:
                             imageLeft = (grFiles.Width - file.BannerProperties.Image.Width) / 2;
                             if (imageLeft < 0)
                                 imageLeft = 0;
                             break;
-                        case SalesDepot.CoreObjects.Alignment.Right:
+                        case Alignment.Right:
                             imageLeft = grFiles.Width - file.BannerProperties.Image.Width;
                             if (imageLeft < 0)
                                 imageLeft = 0;
@@ -998,7 +999,7 @@ namespace FileManager.PresentationClasses.WallBin
             else
             {
                 imageLeft = 0;
-                imageWidth = file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak || !_containsWidgets ? 0 : DefaultImageWidth;
+                imageWidth = file.Type == FileTypes.LineBreak || !_containsWidgets ? 0 : DefaultImageWidth;
                 imageHeight = DefaultImageHeight;
             }
             #endregion
@@ -1021,7 +1022,7 @@ namespace FileManager.PresentationClasses.WallBin
                 font = file.BannerProperties.Font;
                 fontForSizeCalculation = font;
             }
-            else if (file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak)
+            else if (file.Type == FileTypes.LineBreak)
             {
                 font = file.DisplayAsBold ? file.LineBreakProperties.BoldFont : file.LineBreakProperties.Font;
                 fontForSizeCalculation = file.LineBreakProperties.BoldFont;
@@ -1046,9 +1047,9 @@ namespace FileManager.PresentationClasses.WallBin
             {
                 textLeft = imageLeft + imageWidth;
                 textWidth = (int)textSize.Width;
-                textHeight = (int)textSize.Height;
+                textHeight = (int)textSize.Height + 2;
             }
-            else if (file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak)
+            else if (file.Type == FileTypes.LineBreak)
             {
                 textLeft = imageLeft + imageWidth + ImageWidthMargin;
                 textWidth = (int)textSize.Width;
@@ -1067,7 +1068,7 @@ namespace FileManager.PresentationClasses.WallBin
             #region Fore Color
             if (file.BannerProperties.Enable && file.BannerProperties.ShowText)
                 foreColor = file.BannerProperties.ForeColor;
-            else if (file.Type == SalesDepot.CoreObjects.FileTypes.LineBreak)
+            else if (file.Type == FileTypes.LineBreak)
                 foreColor = file.LineBreakProperties.ForeColor;
             else
                 foreColor = grFiles.DefaultCellStyle.ForeColor;
@@ -1133,7 +1134,7 @@ namespace FileManager.PresentationClasses.WallBin
             int maxColumnWidth = 0;
             foreach (DataGridViewRow row in grFiles.Rows)
             {
-                BusinessClasses.LibraryFile file = row.Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = row.Tag as LibraryFile;
                 if (file != null)
                 {
                     Image image = null;
@@ -1200,7 +1201,7 @@ namespace FileManager.PresentationClasses.WallBin
             if (_folder.Files.Count > 0)
             {
                 _containFiles = true;
-                foreach (BusinessClasses.LibraryFile libraryFile in _folder.Files)
+                foreach (LibraryFile libraryFile in _folder.Files)
                 {
                     DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
                     row.Tag = libraryFile;
@@ -1250,12 +1251,12 @@ namespace FileManager.PresentationClasses.WallBin
             return control.Top + (control.Parent != null ? GetTop(control.Parent) : 0);
         }
 
-        private void AddFile(SalesDepot.CoreObjects.FileLink file, int rowIndex)
+        private void AddFile(FileLink file, int rowIndex)
         {
             bool isExisted = false;
             foreach (DataGridViewRow row in grFiles.Rows)
             {
-                BusinessClasses.LibraryFile libraryFile = row.Tag as BusinessClasses.LibraryFile;
+                LibraryFile libraryFile = row.Tag as LibraryFile;
                 if (libraryFile != null)
                 {
                     if (file.File.FullName.Equals(libraryFile.OriginalPath))
@@ -1268,11 +1269,11 @@ namespace FileManager.PresentationClasses.WallBin
 
             if (!isExisted)
             {
-                BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(_folder);
+                LibraryFile libraryFile = new LibraryFile(_folder);
                 libraryFile.Name = file.File.Name.Replace(file.File.Extension, string.Empty);
                 libraryFile.RootId = file.RootId;
 
-                SalesDepot.CoreObjects.RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
+                RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
                 libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.File.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
 
                 libraryFile.SetProperties();
@@ -1282,9 +1283,9 @@ namespace FileManager.PresentationClasses.WallBin
 
                 switch (libraryFile.Type)
                 {
-                    case SalesDepot.CoreObjects.FileTypes.BuggyPresentation:
-                    case SalesDepot.CoreObjects.FileTypes.FriendlyPresentation:
-                    case SalesDepot.CoreObjects.FileTypes.Presentation:
+                    case FileTypes.BuggyPresentation:
+                    case FileTypes.FriendlyPresentation:
+                    case FileTypes.Presentation:
                         using (ToolForms.FormProgress form = new ToolForms.FormProgress())
                         {
                             FormMain.Instance.ribbonControl.Enabled = false;
@@ -1293,10 +1294,10 @@ namespace FileManager.PresentationClasses.WallBin
 
                             System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                             {
-                                if (InteropClasses.PowerPointHelper.Instance.Connect())
+                                if (SalesDepot.CoreObjects.InteropClasses.PowerPointHelper.Instance.Connect())
                                 {
                                     libraryFile.GetPresentationPrperties();
-                                    InteropClasses.PowerPointHelper.Instance.Disconnect();
+                                    SalesDepot.CoreObjects.InteropClasses.PowerPointHelper.Instance.Disconnect();
                                 }
                             }));
 
@@ -1312,24 +1313,24 @@ namespace FileManager.PresentationClasses.WallBin
                         }
                         #region Compatibility with Desktop Sales Depot
                         if (libraryFile.PreviewContainer == null)
-                            libraryFile.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(libraryFile);
+                            libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
                         #endregion
                         if (libraryFile.UniversalPreviewContainer == null)
-                            libraryFile.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(libraryFile);
+                            libraryFile.UniversalPreviewContainer = new UniversalPreviewContainer(libraryFile);
                         break;
-                    case SalesDepot.CoreObjects.FileTypes.Other:
-                    case SalesDepot.CoreObjects.FileTypes.MediaPlayerVideo:
-                    case SalesDepot.CoreObjects.FileTypes.QuickTimeVideo:
+                    case FileTypes.Other:
+                    case FileTypes.MediaPlayerVideo:
+                    case FileTypes.QuickTimeVideo:
                         if (libraryFile.UniversalPreviewContainer == null)
-                            libraryFile.UniversalPreviewContainer = new BusinessClasses.UniversalPreviewContainer(libraryFile);
+                            libraryFile.UniversalPreviewContainer = new UniversalPreviewContainer(libraryFile);
                         break;
                 }
 
                 if (libraryFile.UniversalPreviewContainer == null)
-                    libraryFile.PreviewContainer = new BusinessClasses.PresentationPreviewContainer(libraryFile);
+                    libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
 
 
-                if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < InteropClasses.WinAPIHelper.MAX_PATH)
+                if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MAX_PATH)
                 {
                     if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
                     {
@@ -1353,12 +1354,12 @@ namespace FileManager.PresentationClasses.WallBin
                 AppManager.Instance.ShowInfo("The file " + file.File.Name + " is already in a window");
         }
 
-        private void AddFolder(SalesDepot.CoreObjects.FolderLink folder, int rowIndex)
+        private void AddFolder(FolderLink folder, int rowIndex)
         {
             bool isExisted = false;
             foreach (DataGridViewRow row in grFiles.Rows)
             {
-                BusinessClasses.LibraryFile libraryFile = row.Tag as BusinessClasses.LibraryFile;
+                LibraryFile libraryFile = row.Tag as LibraryFile;
                 if (libraryFile != null)
                 {
                     if (folder.Folder.FullName.Equals(libraryFile.OriginalPath))
@@ -1370,18 +1371,18 @@ namespace FileManager.PresentationClasses.WallBin
             }
             if (!isExisted)
             {
-                BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(_folder);
+                LibraryFile libraryFile = new LibraryFile(_folder);
                 libraryFile.Name = folder.Folder.Name;
                 libraryFile.RootId = folder.RootId;
 
-                SalesDepot.CoreObjects.RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(folder.RootId);
+                RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(folder.RootId);
                 libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.Folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
 
-                libraryFile.Type = SalesDepot.CoreObjects.FileTypes.Folder;
+                libraryFile.Type = FileTypes.Folder;
                 libraryFile.InitBannerProperties();
 
                 int pathLength = libraryFile.RelativePath.Length;
-                if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < InteropClasses.WinAPIHelper.MAX_PATH)
+                if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MAX_PATH)
                 {
                     if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
                     {

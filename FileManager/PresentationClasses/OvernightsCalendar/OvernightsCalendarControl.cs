@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.OvernightsCalendar
 {
@@ -29,7 +30,7 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
                 _buildInProgress = true;
                 xtraTabControl.TabPages.Clear();
                 this.Years.Clear();
-                foreach (BusinessClasses.CalendarYear year in this.ParentDecorator.Library.OvernightsCalendar.Years)
+                foreach (CalendarYear year in this.ParentDecorator.Library.OvernightsCalendar.Years)
                 {
                     this.Years.Add(new YearControl(year));
                     Application.DoEvents();

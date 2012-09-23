@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     class FolderCopier
     {
-        public static SalesDepot.CoreObjects.LibraryFolder CopiedFolder { get; set; }
+        public static LibraryFolder CopiedFolder { get; set; }
         public static bool PasteReady { get; set; }
         public static DataGridView CopiedGrid { get; set; }
         public static int SourceRowIndex { get; set; }

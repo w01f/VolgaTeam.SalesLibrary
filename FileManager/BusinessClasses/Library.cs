@@ -4,9 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using SalesDepot.CoreObjects;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public class Library: ILibrary
     {
@@ -95,7 +94,7 @@ namespace FileManager.BusinessClasses
             #endregion
 
             this.OvernightsCalendar = new OvernightsCalendar(this);
-            this.IPadManager = new BusinessClasses.IPadManager(this);
+            this.IPadManager = new IPadManager(this);
 
             Init();
         }
@@ -118,7 +117,7 @@ namespace FileManager.BusinessClasses
                 XmlNode node = document.SelectSingleNode(@"/Cache");
                 if (node != null)
                 {
-                    LibraryManager.Instance.OldStyleProceed = true;
+                    FileManager.BusinessClasses.LibraryManager.Instance.OldStyleProceed = true;
                     OldFormatLibrary oldFormatLibrary = new OldFormatLibrary(this.Name, this.Folder);
                     try
                     {
@@ -126,7 +125,7 @@ namespace FileManager.BusinessClasses
                     }
                     catch (Exception ex)
                     {
-                        AppManager.Instance.ShowWarning(ex.Message + Environment.NewLine + ex.Data.Values.ToString());
+                        FileManager.AppManager.Instance.ShowWarning(ex.Message + Environment.NewLine + ex.Data.Values.ToString());
                     }
                 }
             }
@@ -331,8 +330,6 @@ namespace FileManager.BusinessClasses
                 if (node != null)
                     this.IPadManager.Deserialize(node);
 
-                this.IsConfigured = true;
-
                 #region Program Manager Settings
                 node = document.SelectSingleNode(@"/Library/EnableProgramManagerSync");
                 if (node != null)
@@ -343,6 +340,8 @@ namespace FileManager.BusinessClasses
                 if (node != null)
                     this.ProgramManagerLocation = node.InnerText;
                 #endregion
+
+                this.IsConfigured = true;
             }
             if (this.Pages.Count == 0)
                 this.Pages.Add(new LibraryPage(this));
@@ -402,7 +401,7 @@ namespace FileManager.BusinessClasses
             xml.AppendLine(@"</SyncSchedule>");
             autoSyncSettings.AppendLine(@"</SyncSchedule>");
             autoSyncSettings.AppendLine("</AutoSyncSettings>");
-            ConfigurationClasses.SettingsManager.Instance.SaveAutoSyncSettings(autoSyncSettings.ToString());
+            FileManager.ConfigurationClasses.SettingsManager.Instance.SaveAutoSyncSettings(autoSyncSettings.ToString());
             #endregion
 
             xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
@@ -444,7 +443,7 @@ namespace FileManager.BusinessClasses
 
         public void PrepareForRegularSynchronize()
         {
-            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
             {
                 this.SyncDate = DateTime.Now;
                 if (this.IsConfigured)
@@ -452,21 +451,21 @@ namespace FileManager.BusinessClasses
                 if (!this.UseDirectAccess)
                 {
                     GeneratePresentationPreviewFiles();
-                    if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                    if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                         NotifyAboutExpiredLinks();
                 }
             }
-            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 Archive();
         }
 
         public void PrepareForIPadSynchronize()
         {
-            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 if (!this.UseDirectAccess)
                     GenerateExtendedPreviewFiles();
             
-            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
             {
                 this.IPadManager.SaveJson();
                 this.SaveLight();
@@ -515,7 +514,7 @@ namespace FileManager.BusinessClasses
                 {
                     foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
                     {
-                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                         {
                             if (file.PreviewContainer == null)
                                 file.PreviewContainer = new PresentationPreviewContainer(file);
@@ -524,13 +523,13 @@ namespace FileManager.BusinessClasses
                         else
                             break;
                     }
-                    if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
                         break;
                 }
-                if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
                     break;
             }
-            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 this.Save();
         }
 
@@ -542,7 +541,7 @@ namespace FileManager.BusinessClasses
                 {
                     foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
                     {
-                        if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+                        if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                         {
                             if (file.UniversalPreviewContainer == null)
                                 file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
@@ -551,13 +550,13 @@ namespace FileManager.BusinessClasses
                         else
                             break;
                     }
-                    if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                    if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
                         break;
                 }
-                if (!((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive))
+                if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
                     break;
             }
-            if ((AppManager.Instance.ThreadActive && !AppManager.Instance.ThreadAborted) || !AppManager.Instance.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 this.Save();
         }
 
@@ -597,18 +596,18 @@ namespace FileManager.BusinessClasses
             {
                 if (InteropClasses.OutlookHelper.Instance.Connect())
                 {
-                    InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)));
+                    InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)),this.SendEmail);
                     InteropClasses.OutlookHelper.Instance.Disconnect();
                 }
                 else
-                    AppManager.Instance.ShowWarning("Cannot open Outlook");
+                    FileManager.AppManager.Instance.ShowWarning("Cannot open Outlook");
             }
         }
 
         private void Archive()
         {
             DateTime archiveDateTime = DateTime.Now;
-            string archiveFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
+            string archiveFolder = Path.Combine(FileManager.ConfigurationClasses.SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
             try
             {
                 if (!Directory.Exists(archiveFolder))

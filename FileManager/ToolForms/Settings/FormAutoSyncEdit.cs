@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.Settings
 {
     public partial class FormAutoSyncEdit : Form
     {
-        private SalesDepot.CoreObjects.SyncScheduleRecord _syncScheduleRecord = null;
+        private SyncScheduleRecord _syncScheduleRecord = null;
 
-        public FormAutoSyncEdit(SalesDepot.CoreObjects.SyncScheduleRecord syncScheduleRecord)
+        public FormAutoSyncEdit(SyncScheduleRecord syncScheduleRecord)
         {
             InitializeComponent();
 
             _syncScheduleRecord = syncScheduleRecord;
             if (_syncScheduleRecord == null)
             {
-                _syncScheduleRecord = new SalesDepot.CoreObjects.SyncScheduleRecord();
+                _syncScheduleRecord = new SyncScheduleRecord();
                 _syncScheduleRecord.Time = DateTime.Now;
             }
 

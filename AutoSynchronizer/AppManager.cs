@@ -28,7 +28,7 @@ namespace AutoSynchronizer
             if (!string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath) && System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.BackupPath))
             {
                 BusinessClasses.LibraryManager.Instance.LoadLibraries();
-                Application.Run(new FormHidden());
+                Application.Run(FormHidden.Instance);
             }
         }
 

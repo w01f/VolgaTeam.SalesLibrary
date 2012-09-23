@@ -30,7 +30,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         public void BuildDecorators()
         {
             this.Decorators.Clear();
-            foreach (BusinessClasses.Library library in BusinessClasses.LibraryManager.Instance.LibraryCollection)
+            foreach (SalesDepot.CoreObjects.BusinessClasses.Library library in BusinessClasses.LibraryManager.Instance.LibraryCollection)
             {
                 Application.DoEvents();
                 this.Decorators.Add(new PresentationClasses.WallBin.Decorators.LibraryDecorator(library));

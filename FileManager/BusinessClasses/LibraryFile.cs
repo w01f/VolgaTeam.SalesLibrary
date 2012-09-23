@@ -7,7 +7,7 @@ using System.Text;
 using System.Xml;
 using SalesDepot.CoreObjects;
 
-namespace FileManager.BusinessClasses
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public class LibraryFile : ILibraryFile
     {
@@ -568,6 +568,45 @@ namespace FileManager.BusinessClasses
         {
             this.Parent.Files.Remove(this);
             this.Parent.LastChanged = DateTime.Now;
+        }
+
+        public SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator GetPreviewGenerator()
+        {
+            SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
+            switch (this.Extension.ToUpper())
+            {
+                case ".PPT":
+                case ".PPTX":
+                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.PowerPointPreviewGenerator();
+                    break;
+                case ".DOC":
+                case ".DOCX":
+                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.WordPreviewGenerator();
+                    break;
+                case ".XLS":
+                case ".XLSX":
+                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.ExcelPreviewGenerator();
+                    break;
+                case ".PDF":
+                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.PdfPreviewGenerator();
+                    break;
+                case ".MPEG":
+                case ".WMV":
+                case ".AVI":
+                case ".WMZ":
+                case ".MPG":
+                case ".ASF":
+                case ".MOV":
+                case ".MP4":
+                case ".M4V":
+                case ".FLV":
+                case ".OGV":
+                case ".OGM":
+                case ".OGX":
+                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.VideoPreviewGenerator();
+                    break;
+            }
+            return previewGenerator;
         }
     }
 }

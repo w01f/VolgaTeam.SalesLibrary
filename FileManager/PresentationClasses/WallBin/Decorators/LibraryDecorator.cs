@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin.Decorators
 {
     public class LibraryDecorator
     {
-        public BusinessClasses.Library Library { get; set; }
+        public Library Library { get; set; }
         public PageDecorator ActivePage { get; set; }
         public List<PageDecorator> Pages { get; set; }
         public PresentationClasses.WallBin.MultitabLibraryControl TabControl { get; private set; }
@@ -17,7 +16,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         public bool AllowToSave { get; set; }
         public bool StateChanged { get; set; }
 
-        public LibraryDecorator(BusinessClasses.Library library)
+        public LibraryDecorator(Library library)
         {
             this.Pages = new List<PageDecorator>();
             this.TabControl = new PresentationClasses.WallBin.MultitabLibraryControl();
@@ -31,7 +30,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         private void BuildWallbin()
         {
             this.Pages.Clear();
-            foreach (SalesDepot.CoreObjects.LibraryPage page in this.Library.Pages)
+            foreach (LibraryPage page in this.Library.Pages)
             {
                 PageDecorator pageDecorator = new PageDecorator(page);
                 pageDecorator.Parent = this;
@@ -207,6 +206,8 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
         public void ApplyIPadManager()
         {
             this.AllowToSave = false;
+            FormMain.Instance.buttonItemIPadSyncDisabled.Checked = !this.Library.IPadManager.Enabled;
+            FormMain.Instance.buttonItemIPadSyncEnabled.Checked = this.Library.IPadManager.Enabled;
             FormMain.Instance.buttonEditIPadLocation.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.SyncDestinationPath) ? this.Library.IPadManager.SyncDestinationPath : null;
             FormMain.Instance.buttonEditIPadSite.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Website) ? this.Library.IPadManager.Website : null;
             FormMain.Instance.buttonEditIPadLogin.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Login) ? this.Library.IPadManager.Login : null;

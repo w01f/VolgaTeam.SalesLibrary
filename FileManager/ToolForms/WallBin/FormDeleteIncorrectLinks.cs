@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.WallBin
 {
     public partial class FormDeleteIncorrectLinks : Form
     {
         public bool ExpiredLinks { get; set; }
-        public List<SalesDepot.CoreObjects.ILibraryFile> IncorrectLinks { get; set; }
+        public List<ILibraryFile> IncorrectLinks { get; set; }
         public List<Guid> LinksForDelete { get; set; }
 
         public FormDeleteIncorrectLinks()
         {
             InitializeComponent();
-            this.IncorrectLinks = new List<SalesDepot.CoreObjects.ILibraryFile>();
+            this.IncorrectLinks = new List<ILibraryFile>();
             this.LinksForDelete = new List<Guid>();
         }
 
@@ -21,7 +22,7 @@ namespace FileManager.ToolForms.WallBin
         {
             btExpiredDate.Visible = this.ExpiredLinks;
             grIncorrectLinks.Rows.Clear();
-            foreach (BusinessClasses.LibraryFile incorrectLink in this.IncorrectLinks)
+            foreach (LibraryFile incorrectLink in this.IncorrectLinks)
             {
                 DataGridViewRow row = grIncorrectLinks.Rows[grIncorrectLinks.Rows.Add(incorrectLink.Identifier, incorrectLink.Parent.Name, incorrectLink.Name, incorrectLink.OriginalPath)];
                 row.Tag = incorrectLink;
@@ -34,7 +35,7 @@ namespace FileManager.ToolForms.WallBin
             {
                 if (AppManager.Instance.ShowQuestion("Are you Sure you want to REMOVE this Link from the Library?") == System.Windows.Forms.DialogResult.Yes)
                 {
-                    this.LinksForDelete.Add((grIncorrectLinks.SelectedRows[0].Tag as BusinessClasses.LibraryFile).Identifier);
+                    this.LinksForDelete.Add((grIncorrectLinks.SelectedRows[0].Tag as LibraryFile).Identifier);
                     grIncorrectLinks.Rows.Remove(grIncorrectLinks.SelectedRows[0]);
                 }
             }
@@ -48,7 +49,7 @@ namespace FileManager.ToolForms.WallBin
         {
             if (grIncorrectLinks.SelectedRows.Count > 0)
             {
-                BusinessClasses.LibraryFile file = grIncorrectLinks.SelectedRows[0].Tag as BusinessClasses.LibraryFile;
+                LibraryFile file = grIncorrectLinks.SelectedRows[0].Tag as LibraryFile;
                 if (file != null)
                 {
                     using (ToolForms.WallBin.FormLinkProperties form = new ToolForms.WallBin.FormLinkProperties())

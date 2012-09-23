@@ -43,7 +43,7 @@ namespace AutoSynchronizer.InteropClasses
                 foreach (Excel.Workbook workbook in _excelObject.Workbooks)
                     workbook.Close();
                 uint processId = 0;
-                WinAPIHelper.GetWindowThreadProcessId(new IntPtr(_excelObject.Hwnd), out processId);
+                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(new IntPtr(_excelObject.Hwnd), out processId);
                 Process.GetProcessById((int)processId).Kill();
             }
             AppManager.Instance.ReleaseComObject(_excelObject);
