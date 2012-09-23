@@ -164,9 +164,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
                             }
 
                         if (updatePdf)
-                            presentation.SaveAs(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), Microsoft.Office.Interop.PowerPoint.PpSaveAsFileType.ppSaveAsPDF);
-
-                        presentation.Close();
+                            presentation.ExportAsFixedFormat(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF);
                         ToolClasses.Utils.ReleaseComObject(presentation);
                     }
                 }
