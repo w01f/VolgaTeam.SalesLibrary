@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using SalesDepot.CoreObjects;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -43,6 +43,7 @@ namespace SalesDepot.BusinessClasses
         public LibraryFileSearchTags SearchTags { get; set; }
         public ExpirationDateOptions ExpirationDateOptions { get; set; }
         public PresentationPreviewContainer PreviewContainer { get; set; }
+        public IPreviewContainer UniversalPreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
         public BannerProperties BannerProperties { get; set; }
@@ -518,6 +519,11 @@ namespace SalesDepot.BusinessClasses
             }
             else
                 _linkLocalPath = string.Empty;
+        }
+
+        public IPreviewGenerator GetPreviewGenerator()
+        {
+            return null;
         }
     }
 }

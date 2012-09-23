@@ -60,7 +60,7 @@ namespace SalesDepot.ToolForms.WallBin
                         InteropClasses.PowerPointHelper.Instance.OpenSlideSourcePresentation(_viewedFile);
                         if (this.SelectedFile.PresentationProperties == null && InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation != null)
                         {
-                            this.SelectedFile.PresentationProperties = new CoreObjects.PresentationProperties();
+                            this.SelectedFile.PresentationProperties = new CoreObjects.BusinessClasses.PresentationProperties();
                             this.SelectedFile.PresentationProperties.Height = InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideHeight / 72;
                             this.SelectedFile.PresentationProperties.Width = InteropClasses.PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideWidth / 72; ;
                             this.SelectedFile.PresentationProperties.LastUpdate = DateTime.Now;

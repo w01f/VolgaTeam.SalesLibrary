@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.PresentationClasses.OvernightsCalendar
 {
@@ -8,9 +9,9 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
     {
         private Cursor _storedCursor;
 
-        public BusinessClasses.CalendarDay Data { get; private set; }
+        public CalendarDay Data { get; private set; }
 
-        public DayControl(BusinessClasses.CalendarDay data)
+        public DayControl(CalendarDay data)
         {
             InitializeComponent();
             this.Data = data;
@@ -48,7 +49,12 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
         private void DayControl_Click(object sender, System.EventArgs e)
         {
             if (this.Data.LinkedFile != null)
-                BusinessClasses.LinkManager.Instance.OpenLink(this.Data.LinkedFile);
+            {
+                BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(new LibraryFolder(new LibraryPage(this.Data.Parent.Parent.Parent.Parent)));
+                libraryFile.OriginalPath = this.Data.LinkedFile.FullName;
+                libraryFile.Type = FileTypes.OvernightsLink;
+                BusinessClasses.LinkManager.Instance.OpenLink(libraryFile);
+            }
         }
 
         private void DayControl_MouseEnter(object sender, System.EventArgs e)

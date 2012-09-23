@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using SalesDepot.CoreObjects;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -23,7 +23,7 @@ namespace SalesDepot.BusinessClasses
         {
             get
             {
-                if (_name.Equals(CoreObjects.Constants.WholeDriveFilesStorage))
+                if (_name.Equals(CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage))
                 {
                     if (_libraryCollection.Count > 0 && !string.IsNullOrEmpty(_libraryCollection[0].BrandingText))
                         return _libraryCollection[0].BrandingText;
@@ -47,7 +47,7 @@ namespace SalesDepot.BusinessClasses
             Library library = null;
             if (this.Folder.GetFiles("*.xml").Length > 0 && !this.Folder.Name.ToLower().Equals("_gsdata_"))
             {
-                library = new Library(this, this.Folder.Name.Equals(CoreObjects.Constants.WholeDriveFilesStorage) ? this.Folder.Parent.Name : this.Folder.Name, this.Folder);
+                library = new Library(this, this.Folder.Name.Equals(CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage) ? this.Folder.Parent.Name : this.Folder.Name, this.Folder);
                 if (library != null && library.IsConfigured && (ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Count == 0 || ConfigurationClasses.SettingsManager.Instance.ApprovedLibraries.Contains(library.Name.ToLower())))
                     _libraryCollection.Add(library);
             }
@@ -55,7 +55,7 @@ namespace SalesDepot.BusinessClasses
                 foreach (DirectoryInfo subFolder in this.Folder.GetDirectories())
                     if (!subFolder.Name.StartsWith("!") && !subFolder.Name.ToLower().Equals("_gsdata_"))
                     {
-                        DirectoryInfo primaryRootFolder = new DirectoryInfo(Path.Combine(subFolder.FullName, CoreObjects.Constants.WholeDriveFilesStorage));
+                        DirectoryInfo primaryRootFolder = new DirectoryInfo(Path.Combine(subFolder.FullName, CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage));
                         if (primaryRootFolder.Exists)
                             library = new Library(this, primaryRootFolder.Parent.Name, primaryRootFolder);
                         else

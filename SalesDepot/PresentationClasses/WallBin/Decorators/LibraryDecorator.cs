@@ -46,7 +46,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         private void BuildPages()
         {
             this.Pages.Clear();
-            foreach (CoreObjects.LibraryPage page in this.Library.Pages)
+            foreach (CoreObjects.BusinessClasses.LibraryPage page in this.Library.Pages)
             {
                 this.Pages.Add(new PageDecorator(this, page));
                 Application.DoEvents();

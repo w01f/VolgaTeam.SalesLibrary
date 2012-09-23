@@ -139,7 +139,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                         if (childNode.Name.Equals("EmailLink"))
                         {
                             string path = string.Empty;
-                            BusinessClasses.LibraryFile link = new BusinessClasses.LibraryFile(new CoreObjects.LibraryFolder(new CoreObjects.LibraryPage(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library)));
+                            BusinessClasses.LibraryFile link = new BusinessClasses.LibraryFile(new CoreObjects.BusinessClasses.LibraryFolder(new CoreObjects.BusinessClasses.LibraryPage(PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library)));
                             foreach (XmlNode emailLinkNode in childNode.ChildNodes)
                             {
                                 switch (emailLinkNode.Name)
@@ -281,9 +281,9 @@ namespace SalesDepot.PresentationClasses.WallBin
                     Application.DoEvents();
                     switch (item.Key.Type)
                     {
-                        case CoreObjects.FileTypes.BuggyPresentation:
-                        case CoreObjects.FileTypes.FriendlyPresentation:
-                        case CoreObjects.FileTypes.Presentation:
+                        case CoreObjects.BusinessClasses.FileTypes.BuggyPresentation:
+                        case CoreObjects.BusinessClasses.FileTypes.FriendlyPresentation:
+                        case CoreObjects.BusinessClasses.FileTypes.Presentation:
                             string pdfFileName = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileNameWithoutExtension(item.Value) + ".pdf");
                             if (InteropClasses.PowerPointHelper.Instance.ConvertToPDF(item.Value, pdfFileName))
                             {

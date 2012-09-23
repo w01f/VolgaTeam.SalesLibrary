@@ -29,11 +29,11 @@ namespace SalesDepot.ToolForms.WallBin
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
                     {
                         _selectedFileViewer = null;
-                        if (this.SelectedFile.Type != CoreObjects.FileTypes.MediaPlayerVideo)
+                        if (this.SelectedFile.Type != CoreObjects.BusinessClasses.FileTypes.MediaPlayerVideo)
                             barManager.Items.Remove(barLargeButtonItemInsert);
                         switch (this.SelectedFile.Type)
                         {
-                            case CoreObjects.FileTypes.Excel:
+                            case CoreObjects.BusinessClasses.FileTypes.Excel:
                                 this.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -41,7 +41,7 @@ namespace SalesDepot.ToolForms.WallBin
                                     catch { _selectedFileViewer = new PresentationClasses.Viewers.DefaultViewer(this.SelectedFile); }
                                 });
                                 break;
-                            case CoreObjects.FileTypes.Word:
+                            case CoreObjects.BusinessClasses.FileTypes.Word:
                                 this.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -49,7 +49,7 @@ namespace SalesDepot.ToolForms.WallBin
                                     catch { _selectedFileViewer = new PresentationClasses.Viewers.DefaultViewer(this.SelectedFile); }
                                 });
                                 break;
-                            case CoreObjects.FileTypes.PDF:
+                            case CoreObjects.BusinessClasses.FileTypes.PDF:
                                 this.Invoke((MethodInvoker)delegate()
                                 {
                                     try
@@ -57,7 +57,7 @@ namespace SalesDepot.ToolForms.WallBin
                                     catch { _selectedFileViewer = new PresentationClasses.Viewers.DefaultViewer(this.SelectedFile); }
                                 });
                                 break;
-                            case CoreObjects.FileTypes.MediaPlayerVideo:
+                            case CoreObjects.BusinessClasses.FileTypes.MediaPlayerVideo:
                                 this.Invoke((MethodInvoker)delegate()
                                 {
                                     barManager.Items.Add(barLargeButtonItemInsert);
@@ -89,8 +89,8 @@ namespace SalesDepot.ToolForms.WallBin
 
                     form.Close();
                 }
-                barLargeButtonItemEmail.Visibility = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView && (this.SelectedFile.Type == CoreObjects.FileTypes.Word || this.SelectedFile.Type == CoreObjects.FileTypes.Excel || this.SelectedFile.Type == CoreObjects.FileTypes.PDF) ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
-                barLargeButtonItemPrint.Visibility = this.SelectedFile.Type == CoreObjects.FileTypes.Word || this.SelectedFile.Type == CoreObjects.FileTypes.Excel || this.SelectedFile.Type == CoreObjects.FileTypes.PDF ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+                barLargeButtonItemEmail.Visibility = (ConfigurationClasses.SettingsManager.Instance.EmailButtons & ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView) == ConfigurationClasses.EmailButtonsDisplayOptions.DisplayQuickView && (this.SelectedFile.Type == CoreObjects.BusinessClasses.FileTypes.Word || this.SelectedFile.Type == CoreObjects.BusinessClasses.FileTypes.Excel || this.SelectedFile.Type == CoreObjects.BusinessClasses.FileTypes.PDF) ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
+                barLargeButtonItemPrint.Visibility = this.SelectedFile.Type == CoreObjects.BusinessClasses.FileTypes.Word || this.SelectedFile.Type == CoreObjects.BusinessClasses.FileTypes.Excel || this.SelectedFile.Type == CoreObjects.BusinessClasses.FileTypes.PDF ? DevExpress.XtraBars.BarItemVisibility.Always : DevExpress.XtraBars.BarItemVisibility.Never;
             }
             ConfigurationClasses.RegistryHelper.SalesDepotHandle = this.Handle;
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = false;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.PresentationClasses.OvernightsCalendar
 {
@@ -11,10 +12,10 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
         private const int WeeksCount = 5;
         private const int DaysInWeek = 7;
 
-        public BusinessClasses.CalendarMonth Data { get; private set; }
+        public CalendarMonth Data { get; private set; }
         public List<DayControl> Days { get; private set; }
 
-        public MonthControl(BusinessClasses.CalendarMonth data)
+        public MonthControl(CalendarMonth data)
         {
             InitializeComponent();
             this.Data = data;
@@ -29,7 +30,7 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
         {
             pnDaysInternalContainer.Controls.Clear();
             this.Days.Clear();
-            foreach (BusinessClasses.CalendarDay day in this.Data.Days)
+            foreach (CalendarDay day in this.Data.Days)
             {
                 DayControl dayControl = new DayControl(day);
                 this.Days.Add(dayControl);

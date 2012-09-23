@@ -35,7 +35,7 @@ namespace SalesDepot.BusinessClasses
         public void OpenLink(LibraryFile link)
         {
             FileInfo sourceFile = null;
-            if (link.Type != CoreObjects.FileTypes.LineBreak && link.Type != CoreObjects.FileTypes.Folder && link.Type != CoreObjects.FileTypes.Url && link.Type != CoreObjects.FileTypes.Network)
+            if (link.Type != CoreObjects.BusinessClasses.FileTypes.LineBreak && link.Type != CoreObjects.BusinessClasses.FileTypes.Folder && link.Type != CoreObjects.BusinessClasses.FileTypes.Url && link.Type != CoreObjects.BusinessClasses.FileTypes.Network)
             {
                 sourceFile = RequestFile(link);
                 if (sourceFile == null)
@@ -50,9 +50,9 @@ namespace SalesDepot.BusinessClasses
 
             switch (link.Type)
             {
-                case CoreObjects.FileTypes.BuggyPresentation:
-                case CoreObjects.FileTypes.FriendlyPresentation:
-                case CoreObjects.FileTypes.Presentation:
+                case CoreObjects.BusinessClasses.FileTypes.BuggyPresentation:
+                case CoreObjects.BusinessClasses.FileTypes.FriendlyPresentation:
+                case CoreObjects.BusinessClasses.FileTypes.Presentation:
                     switch (ConfigurationClasses.SettingsManager.Instance.PowerPointLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Menu:
@@ -101,7 +101,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case CoreObjects.FileTypes.PDF:
+                case CoreObjects.BusinessClasses.FileTypes.PDF:
                     switch (ConfigurationClasses.SettingsManager.Instance.PDFLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -139,7 +139,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case CoreObjects.FileTypes.Word:
+                case CoreObjects.BusinessClasses.FileTypes.Word:
                     switch (ConfigurationClasses.SettingsManager.Instance.WordLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -177,7 +177,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case CoreObjects.FileTypes.Excel:
+                case CoreObjects.BusinessClasses.FileTypes.Excel:
                     switch (ConfigurationClasses.SettingsManager.Instance.ExcelLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -215,7 +215,7 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case CoreObjects.FileTypes.MediaPlayerVideo:
+                case CoreObjects.BusinessClasses.FileTypes.MediaPlayerVideo:
                     switch (ConfigurationClasses.SettingsManager.Instance.VideoLaunchOptions)
                     {
                         case ConfigurationClasses.LinkLaunchOptions.Viewer:
@@ -243,25 +243,25 @@ namespace SalesDepot.BusinessClasses
                             break;
                     }
                     break;
-                case CoreObjects.FileTypes.QuickTimeVideo:
+                case CoreObjects.BusinessClasses.FileTypes.QuickTimeVideo:
                     OpenVideo(link);
                     break;
-                case CoreObjects.FileTypes.Other:
+                case CoreObjects.BusinessClasses.FileTypes.Other:
                     OpenCopyOfFile(link);
                     break;
-                case CoreObjects.FileTypes.Folder:
+                case CoreObjects.BusinessClasses.FileTypes.Folder:
                     OpenFolder(link);
                     break;
-                case CoreObjects.FileTypes.Url:
+                case CoreObjects.BusinessClasses.FileTypes.Url:
                     StartProcess(link);
                     break;
-                case CoreObjects.FileTypes.Network:
+                case CoreObjects.BusinessClasses.FileTypes.Network:
                     StartProcess(link);
                     break;
-                case CoreObjects.FileTypes.OvernightsLink:
+                case CoreObjects.BusinessClasses.FileTypes.OvernightsLink:
                     StartProcess(link);
                     break;
-                case CoreObjects.FileTypes.LineBreak:
+                case CoreObjects.BusinessClasses.FileTypes.LineBreak:
                     if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
                         AppManager.Instance.ShowInfo(link.LineBreakProperties.Note);
                     break;

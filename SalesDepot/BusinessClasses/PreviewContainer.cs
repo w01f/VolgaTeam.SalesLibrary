@@ -21,7 +21,7 @@ namespace SalesDepot.BusinessClasses
             _parent = parent;
             if (_parent.Parent != null)
             {
-                _remotePreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, CoreObjects.Constants.RegularPreviewContainersRootFolderName, _folderName);
+                _remotePreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, CoreObjects.BusinessClasses.Constants.RegularPreviewContainersRootFolderName, _folderName);
                 if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
                     this.LocalPreviewStorageFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, _folderName);
                 else
@@ -47,7 +47,7 @@ namespace SalesDepot.BusinessClasses
                         _folderName = childNode.InnerText;
                         if (_parent.Parent != null)
                         {
-                            _remotePreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, CoreObjects.Constants.RegularPreviewContainersRootFolderName, _folderName);
+                            _remotePreviewStorageFolder = Path.Combine(_parent.Parent.Parent.Parent.Folder.FullName, CoreObjects.BusinessClasses.Constants.RegularPreviewContainersRootFolderName, _folderName);
                             if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
                                 this.LocalPreviewStorageFolder = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, _folderName);
                             else

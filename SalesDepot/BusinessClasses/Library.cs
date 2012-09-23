@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using SalesDepot.CoreObjects;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -14,7 +15,6 @@ namespace SalesDepot.BusinessClasses
 
         public LibraryPackage Parent { get; private set; }
         public Guid Identifier { get; set; }
-        public DirectoryInfo StorageFolder { get; set; }
         public DirectoryInfo Folder { get; set; }
         public bool UseDirectAccess { get; set; }
         public DateTime DirectAccessFileBottomDate { get; set; }
@@ -48,7 +48,7 @@ namespace SalesDepot.BusinessClasses
         {
             get
             {
-                if (_name.Equals(CoreObjects.Constants.WholeDriveFilesStorage))
+                if (_name.Equals(CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage))
                     return this.Parent.Name;
                 else
                     return _name;
@@ -73,7 +73,6 @@ namespace SalesDepot.BusinessClasses
         {
             this.Parent = parent;
             this.Identifier = Guid.NewGuid();
-            this.StorageFolder = folder;
             this.Folder = folder;
             _name = name;
             this.IsConfigured = false;
@@ -107,7 +106,7 @@ namespace SalesDepot.BusinessClasses
             this.EmailList.Clear();
             this.AutoWidgets.Clear();
 
-            string file = Path.Combine(this.StorageFolder.FullName, CoreObjects.Constants.StorageFileName);
+            string file = Path.Combine(this.Folder.FullName, CoreObjects.BusinessClasses.Constants.StorageFileName);
             if (File.Exists(file))
             {
                 XmlDocument document = new XmlDocument();
@@ -228,7 +227,10 @@ namespace SalesDepot.BusinessClasses
 
                 node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
                 if (node != null)
+                {
                     this.OvernightsCalendar.Deserialize(node);
+                    this.OvernightsCalendar.RootFolder = new DirectoryInfo(Path.Combine(this.Folder.FullName, CoreObjects.BusinessClasses.Constants.OvernightsCalendarRootFolderName));
+                }
 
                 if (this.UseDirectAccess && !this.Folder.Exists)
                     this.IsConfigured = false;

@@ -71,12 +71,12 @@ namespace SalesDepot.ConfigurationClasses
     {
         private string _listsFileName;
         private List<string> _groupLogoFilePaths = new List<string>();
-        public List<CoreObjects.SearchGroup> SearchGroups { get; set; }
+        public List<CoreObjects.BusinessClasses.SearchGroup> SearchGroups { get; set; }
 
         public SearchTags()
         {
             _listsFileName = Path.Combine(ListManager.Instance.ListsFolder, "SDSearch.xml");
-            this.SearchGroups = new List<CoreObjects.SearchGroup>();
+            this.SearchGroups = new List<CoreObjects.BusinessClasses.SearchGroup>();
             LoadLogoFiles();
             Load();
         }
@@ -105,7 +105,7 @@ namespace SalesDepot.ConfigurationClasses
                         switch (childNode.Name)
                         {
                             case "Category":
-                                CoreObjects.SearchGroup group = new CoreObjects.SearchGroup();
+                                CoreObjects.BusinessClasses.SearchGroup group = new CoreObjects.BusinessClasses.SearchGroup();
                                 if (_groupLogoFilePaths.Count > i)
                                     group.Logo = new Bitmap(_groupLogoFilePaths[i]);
                                 foreach (XmlAttribute attribute in childNode.Attributes)

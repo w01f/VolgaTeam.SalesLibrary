@@ -178,10 +178,10 @@ namespace SalesDepot.ConfigurationClasses
 
             this.HiddenObjects = new List<string>();
             this.HiddenObjects.Add("!Old");
-            this.HiddenObjects.Add(CoreObjects.Constants.RegularPreviewContainersRootFolderName);
-            this.HiddenObjects.Add(CoreObjects.Constants.OvernightsCalendarRootFolderName);
-            this.HiddenObjects.Add(CoreObjects.Constants.ProgramManagerRootFolderName);
-            this.HiddenObjects.Add(CoreObjects.Constants.ExtraFoldersRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.RegularPreviewContainersRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.OvernightsCalendarRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.ProgramManagerRootFolderName);
+            this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.ExtraFoldersRootFolderName);
             this.HiddenObjects.Add("thumbs.db");
             this.HiddenObjects.Add("SalesDepotCache.xml");
         }

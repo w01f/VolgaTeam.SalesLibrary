@@ -107,7 +107,6 @@
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\LibraryPackage.cs" />
-    <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\ProgramScheduleManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
