@@ -719,11 +719,6 @@
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
       <Name>SalesDepot.CoreObjects</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharpZLib\SharpZLib.csproj">
-      <Project>{0E7413FF-EB9E-4714-ACF2-BE3A6A7B2FFD}</Project>
-      <Name>SharpZLib</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

@@ -315,7 +315,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     if (form.ShowDialog() == DialogResult.OK)
                     {
                         string compressedFilesPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.TempPath, form.FileName + ".zip");
-                        BusinessClasses.LinkManager.Instance.CompressFiles(emailFiles.ToArray(), compressedFilesPath);
+                        SalesDepot.CoreObjects.ToolClasses.Utils.CompressFiles(emailFiles.ToArray(), compressedFilesPath);
                         emailFiles.Clear();
                         emailFiles.Add(compressedFilesPath);
                     }
