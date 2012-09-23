@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public interface ILibrary
     {

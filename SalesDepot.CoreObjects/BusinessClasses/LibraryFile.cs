@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Xml;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public interface ILibraryFile: ISyncObject
     {
@@ -33,8 +33,10 @@ namespace SalesDepot.CoreObjects
         PresentationProperties PresentationProperties { get; set; }
         LineBreakProperties LineBreakProperties { get; set; }
         BannerProperties BannerProperties { get; set; }
+        IPreviewContainer UniversalPreviewContainer { get; set; }
 
         string Serialize();
         void Deserialize(XmlNode fileNode);
+        IPreviewGenerator GetPreviewGenerator();
     }
 }

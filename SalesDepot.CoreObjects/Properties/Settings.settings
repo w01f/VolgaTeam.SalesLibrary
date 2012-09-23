@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SalesDepot.CoreObjects.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SalesDepot_CoreObjects_ContentManagmentService_ContentControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/content/quote?ws=1</Value>
+    </Setting>
+    <Setting Name="SalesDepot_CoreObjects_IPadAdminService_AdminControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/admin/quote?ws=1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public class LineBreakProperties
     {
@@ -41,8 +41,6 @@ namespace SalesDepot.CoreObjects
             }
             set
             {
-                if (_font != value)
-                    this.LastChanged = DateTime.Now;
                 _font = value;
             }
         }
@@ -55,8 +53,6 @@ namespace SalesDepot.CoreObjects
             }
             set
             {
-                if (_boldFont != value)
-                    this.LastChanged = DateTime.Now;
                 _boldFont = value;
             }
         }
@@ -83,8 +79,6 @@ namespace SalesDepot.CoreObjects
             }
             set
             {
-                if (_banner != value)
-                    this.LastChanged = DateTime.Now;
                 _banner = value;
             }
         }

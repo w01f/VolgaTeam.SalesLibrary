@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public interface ISyncObject
     {

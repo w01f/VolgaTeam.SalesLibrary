@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public class BannerProperties
     {
@@ -115,8 +115,6 @@ namespace SalesDepot.CoreObjects
             }
             set
             {
-                if (_font != value)
-                    this.LastChanged = DateTime.Now;
                 _font = value;
             }
         }
@@ -130,7 +128,6 @@ namespace SalesDepot.CoreObjects
             set
             {
                 _lastChanged = value;
-                this.Parent.LastChanged = _lastChanged;
             }
         }
 

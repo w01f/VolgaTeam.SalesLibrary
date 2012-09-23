@@ -5,7 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public class ColumnTitle : ISyncObject
     {
@@ -87,8 +87,6 @@ namespace SalesDepot.CoreObjects
             }
             set
             {
-                if (_headerFont != value)
-                    this.LastChanged = DateTime.Now;
                 _headerFont = value;
             }
         }
@@ -143,8 +141,6 @@ namespace SalesDepot.CoreObjects
             }
             set
             {
-                if (_widget != value)
-                    this.LastChanged = DateTime.Now;
                 _widget = value;
             }
         }

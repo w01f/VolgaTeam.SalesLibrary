@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 
-namespace SalesDepot.CoreObjects
+namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public class LibraryFolder : ISyncObject
     {
@@ -374,6 +374,12 @@ namespace SalesDepot.CoreObjects
                             file.Deserialize(fileNode);
                             this.Files.Add(file);
                         }
+                        #region Order Bug Fix
+                        this.Files.Sort((x, y) => x.Order.CompareTo(y.Order));
+                        for (int i = 0; i < this.Files.Count; i++)
+                            if (this.Files[i].Order != i)
+                                this.Files[i].Order = i;
+                        #endregion
                         break;
                 }
             }
