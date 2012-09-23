@@ -15,7 +15,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         private const int DefaultImageHeight = 26;
 
         private Cursor storedCursor;
-        private CoreObjects.LibraryFolder _folder;
+        private CoreObjects.BusinessClasses.LibraryFolder _folder;
         private DataGridView.HitTestInfo _hitTest;
         private Point _hitTestPoint;
         private Rectangle _dragBox;
@@ -25,7 +25,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         private bool _containsWidgets = false;
 
         #region Public Properties
-        public CoreObjects.LibraryFolder Folder
+        public CoreObjects.BusinessClasses.LibraryFolder Folder
         {
             set
             {
@@ -46,13 +46,13 @@ namespace SalesDepot.PresentationClasses.WallBin
                         labelControlText.ForeColor = _folder.BannerProperties.ForeColor;
                         switch (_folder.HeaderAlignment)
                         {
-                            case CoreObjects.Alignment.Left:
+                            case CoreObjects.BusinessClasses.Alignment.Left:
                                 labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                                 break;
-                            case CoreObjects.Alignment.Center:
+                            case CoreObjects.BusinessClasses.Alignment.Center:
                                 labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                                 break;
-                            case CoreObjects.Alignment.Right:
+                            case CoreObjects.BusinessClasses.Alignment.Right:
                                 labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                                 break;
                         }
@@ -62,15 +62,15 @@ namespace SalesDepot.PresentationClasses.WallBin
                         labelControlText.Visible = false;
                         switch (_folder.BannerProperties.ImageAlignement)
                         {
-                            case CoreObjects.Alignment.Left:
+                            case CoreObjects.BusinessClasses.Alignment.Left:
                                 pbImage.Dock = DockStyle.Left;
                                 pbImage.SizeMode = PictureBoxSizeMode.Normal;
                                 break;
-                            case CoreObjects.Alignment.Center:
+                            case CoreObjects.BusinessClasses.Alignment.Center:
                                 pbImage.Dock = DockStyle.Fill;
                                 pbImage.SizeMode = PictureBoxSizeMode.CenterImage;
                                 break;
-                            case CoreObjects.Alignment.Right:
+                            case CoreObjects.BusinessClasses.Alignment.Right:
                                 pbImage.Dock = DockStyle.Right;
                                 pbImage.SizeMode = PictureBoxSizeMode.Normal;
                                 break;
@@ -88,13 +88,13 @@ namespace SalesDepot.PresentationClasses.WallBin
                     labelControlText.ForeColor = _folder.ForeHeaderColor;
                     switch (_folder.HeaderAlignment)
                     {
-                        case CoreObjects.Alignment.Left:
+                        case CoreObjects.BusinessClasses.Alignment.Left:
                             labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
                             break;
-                        case CoreObjects.Alignment.Center:
+                        case CoreObjects.BusinessClasses.Alignment.Center:
                             labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                             break;
-                        case CoreObjects.Alignment.Right:
+                        case CoreObjects.BusinessClasses.Alignment.Right:
                             labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                             break;
                     }
@@ -184,15 +184,15 @@ namespace SalesDepot.PresentationClasses.WallBin
             if (file != null)
                 switch (file.Type)
                 {
-                    case CoreObjects.FileTypes.BuggyPresentation:
-                    case CoreObjects.FileTypes.FriendlyPresentation:
-                    case CoreObjects.FileTypes.MediaPlayerVideo:
-                    case CoreObjects.FileTypes.Other:
-                    case CoreObjects.FileTypes.Excel:
-                    case CoreObjects.FileTypes.PDF:
-                    case CoreObjects.FileTypes.Word:
-                    case CoreObjects.FileTypes.Presentation:
-                    case CoreObjects.FileTypes.QuickTimeVideo:
+                    case CoreObjects.BusinessClasses.FileTypes.BuggyPresentation:
+                    case CoreObjects.BusinessClasses.FileTypes.FriendlyPresentation:
+                    case CoreObjects.BusinessClasses.FileTypes.MediaPlayerVideo:
+                    case CoreObjects.BusinessClasses.FileTypes.Other:
+                    case CoreObjects.BusinessClasses.FileTypes.Excel:
+                    case CoreObjects.BusinessClasses.FileTypes.PDF:
+                    case CoreObjects.BusinessClasses.FileTypes.Word:
+                    case CoreObjects.BusinessClasses.FileTypes.Presentation:
+                    case CoreObjects.BusinessClasses.FileTypes.QuickTimeVideo:
                         grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, file), DragDropEffects.Copy);
                         break;
                 }
@@ -216,7 +216,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             BusinessClasses.LibraryFile file = grFiles.Rows[e.RowIndex].Tag as BusinessClasses.LibraryFile;
             if (file != null)
-                if (file.Type != CoreObjects.FileTypes.LineBreak)
+                if (file.Type != CoreObjects.BusinessClasses.FileTypes.LineBreak)
                     this.Cursor = Cursors.Hand;
         }
 
@@ -267,7 +267,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 if (file != null)
                 {
                     List<string> toolTipText = new List<string>();
-                    if (file.Type != CoreObjects.FileTypes.LineBreak)
+                    if (file.Type != CoreObjects.BusinessClasses.FileTypes.LineBreak)
                     {
                         toolTipText.Add(file.NameWithExtension);
                         toolTipText.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
@@ -353,24 +353,8 @@ namespace SalesDepot.PresentationClasses.WallBin
                         _richTextControl.SelectionLength = file.Note.Length;
                         _richTextControl.SelectionFont = _noteFont;
                     }
-                    if (grFiles.SelectedRows.Count > 0)
-                    {
-                        if (grFiles.SelectedRows[0].Index == e.RowIndex)
-                        {
-                            _richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
-                            _richTextControl.ForeColor = grFiles.DefaultCellStyle.SelectionForeColor;
-                        }
-                        else
-                        {
-                            _richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-                            _richTextControl.ForeColor = foreColor;
-                        }
-                    }
-                    else
-                    {
-                        _richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-                        _richTextControl.ForeColor = foreColor;
-                    }
+                    _richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
+                    _richTextControl.ForeColor = foreColor;
                     #endregion
 
                     #region Custom Draw
@@ -439,15 +423,15 @@ namespace SalesDepot.PresentationClasses.WallBin
                 {
                     switch (file.BannerProperties.ImageAlignement)
                     {
-                        case CoreObjects.Alignment.Left:
+                        case CoreObjects.BusinessClasses.Alignment.Left:
                             imageLeft = 0;
                             break;
-                        case CoreObjects.Alignment.Center:
+                        case CoreObjects.BusinessClasses.Alignment.Center:
                             imageLeft = (grFiles.Width - file.BannerProperties.Image.Width) / 2;
                             if (imageLeft < 0)
                                 imageLeft = 0;
                             break;
-                        case CoreObjects.Alignment.Right:
+                        case CoreObjects.BusinessClasses.Alignment.Right:
                             imageLeft = grFiles.Width - file.BannerProperties.Image.Width;
                             if (imageLeft < 0)
                                 imageLeft = 0;
@@ -469,7 +453,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             else
             {
                 imageLeft = 0;
-                imageWidth = file.Type == CoreObjects.FileTypes.LineBreak || !_containsWidgets ? 0 : DefaultImageWidth;
+                imageWidth = file.Type == CoreObjects.BusinessClasses.FileTypes.LineBreak || !_containsWidgets ? 0 : DefaultImageWidth;
                 imageHeight = DefaultImageHeight;
             }
             #endregion
@@ -492,7 +476,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 font = file.BannerProperties.Font;
                 fontForSizeCalculation = font;
             }
-            else if (file.Type == CoreObjects.FileTypes.LineBreak)
+            else if (file.Type == CoreObjects.BusinessClasses.FileTypes.LineBreak)
             {
                 font = file.DisplayAsBold ? file.LineBreakProperties.BoldFont : file.LineBreakProperties.Font;
                 fontForSizeCalculation = file.LineBreakProperties.BoldFont;
@@ -517,9 +501,9 @@ namespace SalesDepot.PresentationClasses.WallBin
             {
                 textLeft = imageLeft + imageWidth;
                 textWidth = (int)textSize.Width;
-                textHeight = (int)textSize.Height;
+                textHeight = (int)textSize.Height + 2;
             }
-            else if (file.Type == CoreObjects.FileTypes.LineBreak)
+            else if (file.Type == CoreObjects.BusinessClasses.FileTypes.LineBreak)
             {
                 textLeft = imageLeft + imageWidth + ImageWidthMargin;
                 textWidth = (int)textSize.Width;
@@ -538,7 +522,7 @@ namespace SalesDepot.PresentationClasses.WallBin
             #region Fore Color
             if (file.BannerProperties.Enable && file.BannerProperties.ShowText)
                 foreColor = file.BannerProperties.ForeColor;
-            else if (file.Type == CoreObjects.FileTypes.LineBreak)
+            else if (file.Type == CoreObjects.BusinessClasses.FileTypes.LineBreak)
                 foreColor = file.LineBreakProperties.ForeColor;
             else
                 foreColor = grFiles.DefaultCellStyle.ForeColor;
