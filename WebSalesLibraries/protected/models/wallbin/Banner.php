@@ -60,7 +60,7 @@ class Banner
         $this->image = $bannerRecord->image;
         $this->showText = $bannerRecord->show_text;
         $this->imageAlignment = $bannerRecord->image_alignment;
-        $this->text = $bannerRecord->text;
+        $this->text = nl2br($bannerRecord->text);
         $this->foreColor = $bannerRecord->fore_color;
         $this->font = new Font();
         $this->font->name = $bannerRecord->font_name;
