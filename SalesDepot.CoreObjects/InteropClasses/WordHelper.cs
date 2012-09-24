@@ -57,7 +57,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
             GC.WaitForPendingFinalizers();
         }
 
-        public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath)
+        public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
         {
             string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
             bool updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
@@ -88,8 +88,10 @@ namespace SalesDepot.CoreObjects.InteropClasses
             if (!Directory.Exists(txtDestination))
                 Directory.CreateDirectory(txtDestination);
 
+            update = false;
             if (updatePdf || updatePng || updateJpg || updateThumbs || updateDoc || updateDocx || updateTxt)
             {
+                update = true;
                 try
                 {
                     if (Connect())

@@ -207,7 +207,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     {
                         previewGenerator.SourceFile = this.Parent.OriginalPath;
                         previewGenerator.ContainerPath = this.ContainerPath;
-                        previewGenerator.GeneratePreview();
+                        previewGenerator.GeneratePreview(this);
                     }
                 }
             }

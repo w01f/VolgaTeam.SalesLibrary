@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -6,7 +7,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
     {
         string SourceFile { get; set; }
         string ContainerPath { get; set; }
-        void GeneratePreview();
+        void GeneratePreview(IPreviewContainer parent);
     }
 
     public class PowerPointPreviewGenerator : IPreviewGenerator
@@ -15,9 +16,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string SourceFile { get; set; }
         public string ContainerPath { get; set; }
 
-        public void GeneratePreview()
+        public void GeneratePreview(IPreviewContainer parent)
         {
-            InteropClasses.PowerPointHelper.Instance.ExportPresentationAllFormats(this.SourceFile, this.ContainerPath);
+            bool update = false;
+            InteropClasses.PowerPointHelper.Instance.ExportPresentationAllFormats(this.SourceFile, this.ContainerPath, out update);
+            if (update)
+                parent.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
@@ -28,9 +32,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string SourceFile { get; set; }
         public string ContainerPath { get; set; }
 
-        public void GeneratePreview()
+        public void GeneratePreview(IPreviewContainer parent)
         {
-            InteropClasses.WordHelper.Instance.ExportDocumentAllFormats(this.SourceFile, this.ContainerPath);
+            bool update = false;
+            InteropClasses.WordHelper.Instance.ExportDocumentAllFormats(this.SourceFile, this.ContainerPath, out update);
+            if (update)
+                parent.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
@@ -41,9 +48,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string SourceFile { get; set; }
         public string ContainerPath { get; set; }
 
-        public void GeneratePreview()
+        public void GeneratePreview(IPreviewContainer parent)
         {
-            InteropClasses.ExcelHelper.Instance.ExportBookAllFormats(this.SourceFile, this.ContainerPath);
+            bool update = false;
+            InteropClasses.ExcelHelper.Instance.ExportBookAllFormats(this.SourceFile, this.ContainerPath, out update);
+            if(update)
+                parent.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
@@ -55,7 +65,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string ContainerPath { get; set; }
         public bool Update { get; set; }
 
-        public void GeneratePreview()
+        public void GeneratePreview(IPreviewContainer parent)
         {
             string pngDestination = Path.Combine(this.ContainerPath, "png");
             bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
@@ -78,6 +88,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 Directory.CreateDirectory(txtDestination);
             if (updateTxt)
                 ToolClasses.PdfHelper.Instance.ExtractText(this.SourceFile, txtDestination);
+
+            if (updatePng || updateJpg || updateThumbs || updateTxt)
+                parent.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }

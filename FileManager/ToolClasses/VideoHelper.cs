@@ -48,11 +48,14 @@ namespace FileManager.ToolClasses
                             b = videoAnalyzer.StandardError.ReadToEnd();
 
                         int kBitRate = ExtractBitrate(b, 0);
-
+                        var fsize = (new FileInfo(sourceFilePath)).Length;
                         videoConverter = new Process()
                         {
-                            StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -moov_size {1} -xerror -b {2}k \"{3}\"", sourceFilePath, CalculateMoovSize(sourceFilePath, 524288),
-                                kBitRate, Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
+                            StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 {1} -xerror -b {2}k \"{3}\"",
+                                sourceFilePath,
+                                (fsize > 4 * 1024 * 1024 ? ("-moov_size " + CalculateMoovSize(sourceFilePath, fsize, 512 * 1024).ToString()) : string.Empty),
+                                kBitRate,
+                                Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
                             {
                                 UseShellExecute = false,
                                 RedirectStandardError = false,
@@ -158,12 +161,12 @@ namespace FileManager.ToolClasses
         }
 
 
-        private string CalculateMoovSize(string inputFile, int defaultMoov)
+        private string CalculateMoovSize(string inputFile, long fileSize, int defaultMoov)
         {
             int moov = defaultMoov;
             try
             {
-                moov = (int)(Math.Max((((((new FileInfo(inputFile)).Length) / 1024.0) * 4254.6) - 15262.0) / 1024.0, 0));
+                moov = (int)(Math.Max(((((fileSize) / 1024.0) * 4254.6) - 15262.0) / 1024.0, 0));
             }
             catch
             {

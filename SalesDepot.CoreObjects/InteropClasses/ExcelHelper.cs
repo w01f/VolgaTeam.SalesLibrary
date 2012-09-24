@@ -50,15 +50,17 @@ namespace SalesDepot.CoreObjects.InteropClasses
             GC.WaitForPendingFinalizers();
         }
 
-        public void ExportBookAllFormats(string sourceFilePath, string destinationFolderPath)
+        public void ExportBookAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
         {
             string txtDestination = Path.Combine(destinationFolderPath, "txt");
             bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
             if (!Directory.Exists(txtDestination))
                 Directory.CreateDirectory(txtDestination);
 
+            update = false;
             if (updateTxt)
             {
+                update = true;
                 try
                 {
                     if (Connect())

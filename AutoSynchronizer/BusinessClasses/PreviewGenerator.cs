@@ -9,7 +9,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string ContainerPath { get; set; }
 
         //Mockup
-        public void GeneratePreview()
+        public void GeneratePreview(IPreviewContainer parent)
         {
         }
         #endregion

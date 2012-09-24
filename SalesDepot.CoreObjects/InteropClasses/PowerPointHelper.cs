@@ -78,7 +78,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
             return result;
         }
 
-        public void ExportPresentationAllFormats(string sourceFilePath, string destinationFolderPath)
+        public void ExportPresentationAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
         {
             string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
             bool updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
@@ -109,8 +109,10 @@ namespace SalesDepot.CoreObjects.InteropClasses
             if (!Directory.Exists(txtDestination))
                 Directory.CreateDirectory(txtDestination);
 
+            update = false;
             if (updatePdf || updatePng || updateJpg || updateThumbs || updatePpt || updatePptx || updateTxt)
             {
+                update = true;
                 try
                 {
                     if (Connect())

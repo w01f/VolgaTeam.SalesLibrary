@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -8,8 +9,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string SourceFile { get; set; }
         public string ContainerPath { get; set; }
 
-        public void GeneratePreview()
+        public void GeneratePreview(IPreviewContainer parent)
         {
+            bool update = false;
             if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
             {
                 string mp4Destination = Path.Combine(this.ContainerPath, "mp4");
@@ -20,9 +22,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     FileManager.ToolClasses.VideoHelper.Instance.ExportMp4(this.SourceFile, mp4Destination);
                 if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
                     ToolClasses.SyncManager.DeleteFolder(new DirectoryInfo(mp4Destination));
+                update |= updateMp4;
             }
 
-            if ((ToolClasses.Globals.ThreadActive && ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
             {
                 string ogvDestination = Path.Combine(this.ContainerPath, "ogv");
                 bool updateOgv = !(Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
@@ -32,8 +35,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     FileManager.ToolClasses.VideoHelper.Instance.ExportOgv(this.SourceFile, ogvDestination);
                 if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
                     ToolClasses.SyncManager.DeleteFolder(new DirectoryInfo(ogvDestination));
+                update |= updateOgv;
 
             }
+            if (update)
+                parent.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
