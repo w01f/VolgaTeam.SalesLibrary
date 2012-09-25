@@ -30,9 +30,13 @@ namespace FileManager.ToolClasses
             bool allowToExit = false;
             string analizerPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffprobe.exe");
             string converterPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "ffmpeg.exe");
-            if (File.Exists(sourceFilePath) && File.Exists(analizerPath) && File.Exists(converterPath))
+            string postProcessorPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.VideoConverterPath, "qt-faststart.exe");
+            string tmpVideoFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(Path.GetTempFileName()), ".mp4"));
+            string destinationVideoFilePath = Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"));
+            if (File.Exists(sourceFilePath) && File.Exists(analizerPath) && File.Exists(converterPath) && File.Exists(postProcessorPath))
             {
                 Process videoConverter = null;
+                Process videoPostProcessor = null;
                 Process videoAnalyzer = new Process()
                 {
                     StartInfo = new ProcessStartInfo(analizerPath, String.Format("\"{0}\"", sourceFilePath)) { UseShellExecute = false, RedirectStandardError = true, RedirectStandardOutput = true, CreateNoWindow = true },
@@ -51,11 +55,8 @@ namespace FileManager.ToolClasses
                         var fsize = (new FileInfo(sourceFilePath)).Length;
                         videoConverter = new Process()
                         {
-                            StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 {1} -xerror -b {2}k \"{3}\"",
-                                sourceFilePath,
-                                (fsize > 4 * 1024 * 1024 ? ("-moov_size " + CalculateMoovSize(sourceFilePath, fsize, 512 * 1024).ToString()) : string.Empty),
-                                kBitRate,
-                                Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".mp4"))))
+                            StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec libx264 -xerror -b {1}k \"{2}\"", sourceFilePath,
+                                kBitRate, tmpVideoFilePath))
                             {
                                 UseShellExecute = false,
                                 RedirectStandardError = false,
@@ -66,6 +67,34 @@ namespace FileManager.ToolClasses
                         };
                         videoConverter.Exited += new EventHandler((converterSender, converterE) =>
                         {
+                            videoPostProcessor = new Process()
+                            {
+                                StartInfo = new ProcessStartInfo(postProcessorPath, String.Format("{0} {1}", tmpVideoFilePath, destinationVideoFilePath))
+                                {
+                                    UseShellExecute = false,
+                                    RedirectStandardError = false,
+                                    RedirectStandardOutput = false,
+                                    CreateNoWindow = true,
+                                },
+                                EnableRaisingEvents = true
+                            };
+                            videoPostProcessor.Exited += new EventHandler((postProcessorSender, postProcessorE) =>
+                            {
+                                if (!File.Exists(destinationVideoFilePath))
+                                    if (File.Exists(tmpVideoFilePath))
+                                        File.Copy(tmpVideoFilePath, destinationVideoFilePath, true);
+
+                                if (File.Exists(tmpVideoFilePath))
+                                    try
+                                    {
+                                        File.Delete(tmpVideoFilePath);
+                                    }
+                                    catch
+                                    {
+                                    }
+                                allowToExit = true;
+                            });
+                            videoPostProcessor.Start();
                             allowToExit = true;
                         });
                         videoConverter.Start();
@@ -158,20 +187,6 @@ namespace FileManager.ToolClasses
                     }
                 }
             }
-        }
-
-
-        private string CalculateMoovSize(string inputFile, long fileSize, int defaultMoov)
-        {
-            int moov = defaultMoov;
-            try
-            {
-                moov = (int)(Math.Max(((((fileSize) / 1024.0) * 4254.6) - 15262.0) / 1024.0, 0));
-            }
-            catch
-            {
-            }
-            return moov.ToString();
         }
 
         private int ExtractBitrate(string b, int defaultValue)
