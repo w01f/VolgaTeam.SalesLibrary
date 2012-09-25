@@ -374,12 +374,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                             file.Deserialize(fileNode);
                             this.Files.Add(file);
                         }
+
                         #region Order Bug Fix
-                        this.Files.Sort((x, y) => x.Order.CompareTo(y.Order));
-                        for (int i = 0; i < this.Files.Count; i++)
-                            if (this.Files[i].Order != i)
-                                this.Files[i].Order = i;
+                        if (this.Files.Count > 0)
+                        {
+                            int maxOrder = this.Files.Select(x => x.Order).Max();
+                            if (maxOrder == 0)
+                                for (int i = 0; i < this.Files.Count; i++)
+                                    if (this.Files[i].Order != i)
+                                        this.Files[i].Order = i;
+                        }
                         #endregion
+
+                        this.Files.Sort((x, y) => x.Order.CompareTo(y.Order));
                         break;
                 }
             }
