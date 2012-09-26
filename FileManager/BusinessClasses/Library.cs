@@ -615,6 +615,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
                 foreach (FileInfo file in this.Folder.GetFiles("*.xml"))
                     file.CopyTo(Path.Combine(archiveFolder, file.Name), true);
+
+                foreach (FileInfo file in this.Folder.GetFiles("*.json"))
+                    file.CopyTo(Path.Combine(archiveFolder, file.Name), true);
             }
             catch
             {
