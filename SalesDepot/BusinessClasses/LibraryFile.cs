@@ -354,6 +354,14 @@ namespace SalesDepot.BusinessClasses
                         else if (!string.IsNullOrEmpty(childNode.InnerText))
                             _widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
+                    case "AddDate":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDate))
+                            this.AddDate = tempDate;
+                        break;
+                    case "LastChanged":
+                        if (DateTime.TryParse(childNode.InnerText, out tempDate))
+                            this.LastChanged = tempDate;
+                        break;
                     case "SearchTags":
                         this.SearchTags.Deserialize(childNode);
                         break;
