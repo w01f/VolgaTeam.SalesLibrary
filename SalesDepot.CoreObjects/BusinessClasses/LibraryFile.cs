@@ -4,12 +4,13 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public interface ILibraryFile: IPreviewable
+    public interface ILibraryFile: ISyncObject
     {
         string Name { get; set; }
         LibraryFolder Parent { get; set; }
         Guid RootId { get; set; }
         Guid Identifier { get; set; }
+        string OriginalPath { get; }
         string RelativePath { get; set; }
         FileTypes Type { get; set; }
         string Format { get; }

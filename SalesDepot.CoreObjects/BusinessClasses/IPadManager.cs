@@ -259,54 +259,54 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         #endregion
 
                         #region Preview Links
-                        if (libraryFile.UniversalPreviewContainer != null)
-                        {
-                            link.universalPreview = new ContentManagmentService.UniversalPreviewContainer();
-                            link.universalPreview.linkId = libraryFile.Identifier.ToString();
-                            link.universalPreview.libraryId = this.Parent.Identifier.ToString();
+                        //if (libraryFile.UniversalPreviewContainer != null)
+                        //{
+                        //    link.universalPreview = new ContentManagmentService.UniversalPreviewContainer();
+                        //    link.universalPreview.linkId = libraryFile.Identifier.ToString();
+                        //    link.universalPreview.libraryId = this.Parent.Identifier.ToString();
 
-                            Size thumbSize = libraryFile.UniversalPreviewContainer.GetThumbSize();
-                            link.universalPreview.thumbsWidth = thumbSize.Width;
-                            link.universalPreview.thumbsHeight = thumbSize.Height;
+                        //    Size thumbSize = libraryFile.UniversalPreviewContainer.GetThumbSize();
+                        //    link.universalPreview.thumbsWidth = thumbSize.Width;
+                        //    link.universalPreview.thumbsHeight = thumbSize.Height;
 
-                            string[] pngLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("png");
-                            if (pngLinks != null && pngLinks.Length > 0)
-                                link.universalPreview.pngLinks = pngLinks;
+                        //    string[] pngLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("png");
+                        //    if (pngLinks != null && pngLinks.Length > 0)
+                        //        link.universalPreview.pngLinks = pngLinks;
 
-                            string[] jpegLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("jpg");
-                            if (jpegLinks != null && jpegLinks.Length > 0)
-                                link.universalPreview.jpegLinks = jpegLinks;
+                        //    string[] jpegLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("jpg");
+                        //    if (jpegLinks != null && jpegLinks.Length > 0)
+                        //        link.universalPreview.jpegLinks = jpegLinks;
 
-                            string[] pdfLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("pdf");
-                            if (pdfLinks != null && pdfLinks.Length > 0)
-                                link.universalPreview.pdfLinks = pdfLinks;
+                        //    string[] pdfLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("pdf");
+                        //    if (pdfLinks != null && pdfLinks.Length > 0)
+                        //        link.universalPreview.pdfLinks = pdfLinks;
 
-                            string[] mp4Links = libraryFile.UniversalPreviewContainer.GetPreviewLinks("mp4");
-                            if (mp4Links != null && mp4Links.Length > 0)
-                                link.universalPreview.mp4Links = mp4Links;
+                        //    string[] mp4Links = libraryFile.UniversalPreviewContainer.GetPreviewLinks("mp4");
+                        //    if (mp4Links != null && mp4Links.Length > 0)
+                        //        link.universalPreview.mp4Links = mp4Links;
 
-                            string[] ogvLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("ogv");
-                            if (ogvLinks != null && ogvLinks.Length > 0)
-                                link.universalPreview.ogvLinks = ogvLinks;
+                        //    string[] ogvLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("ogv");
+                        //    if (ogvLinks != null && ogvLinks.Length > 0)
+                        //        link.universalPreview.ogvLinks = ogvLinks;
 
-                            string[] oldOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("old office");
-                            if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
-                                link.universalPreview.oldOfficeFormatLinks = oldOfficeLinks;
+                        //    string[] oldOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("old office");
+                        //    if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
+                        //        link.universalPreview.oldOfficeFormatLinks = oldOfficeLinks;
 
-                            string[] newOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("new office");
-                            if (newOfficeLinks != null && newOfficeLinks.Length > 0)
-                                link.universalPreview.newOfficeFormatLinks = newOfficeLinks;
+                        //    string[] newOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("new office");
+                        //    if (newOfficeLinks != null && newOfficeLinks.Length > 0)
+                        //        link.universalPreview.newOfficeFormatLinks = newOfficeLinks;
 
-                            string[] txtLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("txt");
-                            if (txtLinks != null && txtLinks.Length > 0)
-                                link.universalPreview.txtLinks = txtLinks;
+                        //    string[] txtLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("txt");
+                        //    if (txtLinks != null && txtLinks.Length > 0)
+                        //        link.universalPreview.txtLinks = txtLinks;
 
-                            string[] thumbsLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("thumbs");
-                            if (thumbsLinks != null && thumbsLinks.Length > 0)
-                            {
-                                link.universalPreview.thumbsLinks = thumbsLinks;
-                            }
-                        }
+                        //    string[] thumbsLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("thumbs");
+                        //    if (thumbsLinks != null && thumbsLinks.Length > 0)
+                        //    {
+                        //        link.universalPreview.thumbsLinks = thumbsLinks;
+                        //    }
+                        //}
                         #endregion
 
                         links.Add(link);
@@ -431,60 +431,43 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             get
             {
-                List<IPreviewable> videoLinks = new List<IPreviewable>();
-                foreach (LibraryPage page in this.Parent.Pages)
-                    foreach (LibraryFolder folder in page.Folders)
-                        foreach (ILibraryFile file in folder.Files)
-                        {
-                            if (file.Type == FileTypes.MediaPlayerVideo || file.Type == FileTypes.QuickTimeVideo)
-                                videoLinks.Add(file);
-                            if (file.AttachmentProperties.Enable)
-                                videoLinks.AddRange(file.AttachmentProperties.FilesAttachments.Where(x => x.Format.Equals("video")));
-                        }
-                videoLinks.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(Path.GetFileName(x.OriginalPath), Path.GetFileName(y.OriginalPath)));
-
                 List<VideoInfo> videoFiles = new List<VideoInfo>();
                 int i = 1;
-                foreach (IPreviewable videoLink in videoLinks)
+                foreach (IPreviewContainer previewContainer in this.Parent.PreviewContainers.Where(x => this.Parent.IsPreviewAlive(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
                 {
-                    VideoInfo videoFile = new VideoInfo(videoLink);
+                    VideoInfo videoFile = new VideoInfo(previewContainer);
                     videoFile.Index = i.ToString();
-                    videoFile.SourceFileName = Path.GetFileName(videoLink.OriginalPath);
-                    videoFile.SourceFilePath = videoLink.OriginalPath;
-                    if (videoLink.UniversalPreviewContainer != null)
-                    {
-                        if (Directory.Exists(videoLink.UniversalPreviewContainer.ContainerPath))
-                            videoFile.IPadFolderPath = videoLink.UniversalPreviewContainer.ContainerPath;
-                        else
-                            videoFile.IPadFolderPath = null;
+                    videoFile.SourceFileName = Path.GetFileName(previewContainer.OriginalPath);
+                    videoFile.SourceFilePath = previewContainer.OriginalPath;
+                    if (Directory.Exists(previewContainer.ContainerPath))
+                        videoFile.IPadFolderPath = previewContainer.ContainerPath;
+                    else
+                        videoFile.IPadFolderPath = null;
 
-                        string mp4Path = Path.Combine(videoLink.UniversalPreviewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(videoLink.OriginalPath, ".mp4")));
-                        if (File.Exists(mp4Path))
-                        {
-                            videoFile.Mp4FileName = Path.GetFileName(mp4Path);
-                            videoFile.Mp4FilePath = mp4Path;
-                            videoFile.IPadCompatible = "YES!";
-                        }
-                        else
-                        {
-                            videoFile.Mp4FileName = null;
-                            videoFile.Mp4FilePath = null;
-                            videoFile.IPadCompatible = "NO!";
-                        }
-                        string ogvPath = Path.Combine(videoLink.UniversalPreviewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(videoLink.OriginalPath, ".ogv")));
-                        if (File.Exists(ogvPath))
-                        {
-                            videoFile.OgvFileName = Path.GetFileName(ogvPath);
-                            videoFile.OgvFilePath = ogvPath;
-                        }
-                        else
-                        {
-                            videoFile.OgvFileName = null;
-                            videoFile.OgvFilePath = null;
-                        }
+                    string mp4Path = Path.Combine(previewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".mp4")));
+                    if (File.Exists(mp4Path))
+                    {
+                        videoFile.Mp4FileName = Path.GetFileName(mp4Path);
+                        videoFile.Mp4FilePath = mp4Path;
+                        videoFile.IPadCompatible = "YES!";
                     }
                     else
+                    {
+                        videoFile.Mp4FileName = null;
+                        videoFile.Mp4FilePath = null;
                         videoFile.IPadCompatible = "NO!";
+                    }
+                    string ogvPath = Path.Combine(previewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".ogv")));
+                    if (File.Exists(ogvPath))
+                    {
+                        videoFile.OgvFileName = Path.GetFileName(ogvPath);
+                        videoFile.OgvFilePath = ogvPath;
+                    }
+                    else
+                    {
+                        videoFile.OgvFileName = null;
+                        videoFile.OgvFilePath = null;
+                    }
                     videoFiles.Add(videoFile);
                     i++;
                 }
@@ -496,7 +479,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
     public class VideoInfo
     {
-        public IPreviewable Parent { get; private set; }
+        public IPreviewContainer Parent { get; private set; }
         public string Index { get; set; }
         public bool Selected { get; set; }
         public string SourceFileName { get; set; }
@@ -508,7 +491,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string OgvFileName { get; set; }
         public string OgvFilePath { get; set; }
 
-        public VideoInfo(IPreviewable parent)
+        public VideoInfo(IPreviewContainer parent)
         {
             this.Parent = parent;
         }

@@ -5,11 +5,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
     public class VideoPreviewGenerator : SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator
     {
         #region IPreviewGenerator Members
-        public string SourceFile { get; set; }
-        public string ContainerPath { get; set; }
+        public IPreviewContainer Parent { get; private set; }
 
-        //Mockup
-        public void GeneratePreview(IPreviewContainer parent)
+        public VideoPreviewGenerator(IPreviewContainer parent)
+        {
+            this.Parent = parent;
+        }
+
+        public void GeneratePreview()
         {
         }
         #endregion

@@ -5,23 +5,26 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
     public interface IPreviewGenerator
     {
-        string SourceFile { get; set; }
-        string ContainerPath { get; set; }
-        void GeneratePreview(IPreviewContainer parent);
+        IPreviewContainer Parent { get; }
+        void GeneratePreview();
     }
 
     public class PowerPointPreviewGenerator : IPreviewGenerator
     {
         #region IPreviewGenerator Members
-        public string SourceFile { get; set; }
-        public string ContainerPath { get; set; }
+        public IPreviewContainer Parent { get; private set; }
 
-        public void GeneratePreview(IPreviewContainer parent)
+        public PowerPointPreviewGenerator(IPreviewContainer parent)
+        {
+            this.Parent = parent;
+        }
+
+        public void GeneratePreview()
         {
             bool update = false;
-            InteropClasses.PowerPointHelper.Instance.ExportPresentationAllFormats(this.SourceFile, this.ContainerPath, out update);
+            InteropClasses.PowerPointHelper.Instance.ExportPresentationAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, out update);
             if (update)
-                parent.Parent.LastChanged = DateTime.Now;
+                this.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
@@ -29,15 +32,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
     public class WordPreviewGenerator : IPreviewGenerator
     {
         #region IPreviewGenerator Members
-        public string SourceFile { get; set; }
-        public string ContainerPath { get; set; }
+        public IPreviewContainer Parent { get; private set; }
 
-        public void GeneratePreview(IPreviewContainer parent)
+        public WordPreviewGenerator(IPreviewContainer parent)
+        {
+            this.Parent = parent;
+        }
+
+        public void GeneratePreview()
         {
             bool update = false;
-            InteropClasses.WordHelper.Instance.ExportDocumentAllFormats(this.SourceFile, this.ContainerPath, out update);
+            InteropClasses.WordHelper.Instance.ExportDocumentAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, out update);
             if (update)
-                parent.Parent.LastChanged = DateTime.Now;
+                this.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
@@ -45,15 +52,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
     public class ExcelPreviewGenerator : IPreviewGenerator
     {
         #region IPreviewGenerator Members
-        public string SourceFile { get; set; }
-        public string ContainerPath { get; set; }
+        public IPreviewContainer Parent { get; private set; }
 
-        public void GeneratePreview(IPreviewContainer parent)
+        public ExcelPreviewGenerator(IPreviewContainer parent)
+        {
+            this.Parent = parent;
+        }
+
+        public void GeneratePreview()
         {
             bool update = false;
-            InteropClasses.ExcelHelper.Instance.ExportBookAllFormats(this.SourceFile, this.ContainerPath, out update);
-            if(update)
-                parent.Parent.LastChanged = DateTime.Now;
+            InteropClasses.ExcelHelper.Instance.ExportBookAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, out update);
+            if (update)
+                this.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }
@@ -61,36 +72,40 @@ namespace SalesDepot.CoreObjects.BusinessClasses
     public class PdfPreviewGenerator : IPreviewGenerator
     {
         #region IPreviewGenerator Members
-        public string SourceFile { get; set; }
-        public string ContainerPath { get; set; }
+        public IPreviewContainer Parent { get; private set; }
         public bool Update { get; set; }
 
-        public void GeneratePreview(IPreviewContainer parent)
+        public PdfPreviewGenerator(IPreviewContainer parent)
         {
-            string pngDestination = Path.Combine(this.ContainerPath, "png");
+            this.Parent = parent;
+        }
+
+        public void GeneratePreview()
+        {
+            string pngDestination = Path.Combine(this.Parent.ContainerPath, "png");
             bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
             if (!Directory.Exists(pngDestination))
                 Directory.CreateDirectory(pngDestination);
-            string jpgDestination = Path.Combine(this.ContainerPath, "jpg");
+            string jpgDestination = Path.Combine(this.Parent.ContainerPath, "jpg");
             bool updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
             if (!Directory.Exists(jpgDestination))
                 Directory.CreateDirectory(jpgDestination);
-            string thumbsDestination = Path.Combine(this.ContainerPath, "thumbs");
+            string thumbsDestination = Path.Combine(this.Parent.ContainerPath, "thumbs");
             bool updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0);
             if (!Directory.Exists(thumbsDestination))
                 Directory.CreateDirectory(thumbsDestination);
             if (updatePng || updateJpg || updateThumbs)
-                ToolClasses.PdfHelper.Instance.ExportPdf(this.SourceFile, pngDestination, jpgDestination, thumbsDestination);
+                ToolClasses.PdfHelper.Instance.ExportPdf(this.Parent.OriginalPath, pngDestination, jpgDestination, thumbsDestination);
 
-            string txtDestination = Path.Combine(this.ContainerPath, "txt");
+            string txtDestination = Path.Combine(this.Parent.ContainerPath, "txt");
             bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
             if (!Directory.Exists(txtDestination))
                 Directory.CreateDirectory(txtDestination);
             if (updateTxt)
-                ToolClasses.PdfHelper.Instance.ExtractText(this.SourceFile, txtDestination);
+                ToolClasses.PdfHelper.Instance.ExtractText(this.Parent.OriginalPath, txtDestination);
 
             if (updatePng || updateJpg || updateThumbs || updateTxt)
-                parent.Parent.LastChanged = DateTime.Now;
+                this.Parent.LastChanged = DateTime.Now;
         }
         #endregion
     }

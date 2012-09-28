@@ -8,18 +8,24 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public interface IPreviewable : ISyncObject
+    public interface IPreviewStorage
     {
-        string OriginalPath { get; }
-        string PreviewStoragePath { get; }
-        IPreviewContainer UniversalPreviewContainer { get; set; }
-        IPreviewGenerator GetPreviewGenerator(string extension = "");
+        string StoragePath { get; }
+        List<IPreviewContainer> PreviewContainers { get; }
+        IPreviewContainer GetPreviewContainer(string originalPath);
+        IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer);
+        void UpdatePreviewableObject(string originalPath, DateTime lastChanged);
+        bool IsPreviewAlive(string originalPath);
     }
 
     public interface IPreviewContainer
     {
-        IPreviewable Parent { get; }
-        string ContainerID { get; }
+        IPreviewStorage Parent { get; }
+        string Identifier { get; }
+        string OriginalPath { get; set; }
+        FileTypes Type { get; set; }
+        string Extension { get; }
+        DateTime LastChanged { set; }
         string ContainerPath { get; }
         string Serialize();
         void Deserialize(XmlNode node);
@@ -32,48 +38,94 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
     public class UniversalPreviewContainer : IPreviewContainer
     {
-        public UniversalPreviewContainer(IPreviewable parent)
+        private string _originalPath = string.Empty;
+
+        public UniversalPreviewContainer(IPreviewStorage parent)
         {
             this.Parent = parent;
-            this.ContainerID = Guid.NewGuid().ToString();
-            switch (Path.GetExtension(this.Parent.OriginalPath).ToUpper())
-            {
-                case ".PPT":
-                case ".PPTX":
-                case ".DOC":
-                case ".DOCX":
-                case ".XLS":
-                case ".XLSX":
-                case ".PDF":
-                    this.ContainerPath = Path.Combine(this.Parent.PreviewStoragePath, Constants.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
-                    break;
-                case ".MPEG":
-                case ".WMV":
-                case ".AVI":
-                case ".WMZ":
-                case ".MPG":
-                case ".ASF":
-                case ".MOV":
-                case ".MP4":
-                case ".M4V":
-                case ".FLV":
-                case ".OGV":
-                case ".OGM":
-                case ".OGX":
-                    this.ContainerPath = Path.Combine(this.Parent.PreviewStoragePath, Constants.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
-                    break;
-            }
+            this.Identifier = Guid.NewGuid().ToString();
+
         }
 
         #region IPreviewContainer Members
-        public IPreviewable Parent { get; private set; }
-        public string ContainerID { get; private set; }
+        public IPreviewStorage Parent { get; private set; }
+        public string Identifier { get; private set; }
         public string ContainerPath { get; private set; }
+        public FileTypes Type { get; set; }
+
+        public string OriginalPath
+        {
+            get
+            {
+                return _originalPath;
+            }
+            set
+            {
+                _originalPath = value;
+                switch (this.Extension.ToUpper())
+                {
+                    case ".PPT":
+                    case ".PPTX":
+                        this.ContainerPath = Path.Combine(this.Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "files", this.Identifier);
+                        this.Type = FileTypes.Presentation;
+                        break;
+                    case ".DOC":
+                    case ".DOCX":
+                    case ".XLS":
+                    case ".XLSX":
+                    case ".PDF":
+                        this.Type = FileTypes.Other;
+                        this.ContainerPath = Path.Combine(this.Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "files", this.Identifier);
+                        break;
+                    case ".MPEG":
+                    case ".WMV":
+                    case ".AVI":
+                    case ".WMZ":
+                        this.Type = FileTypes.MediaPlayerVideo;
+                        this.ContainerPath = Path.Combine(this.Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "video", this.Identifier);
+                        break;
+                    case ".MPG":
+                    case ".ASF":
+                    case ".MOV":
+                    case ".MP4":
+                    case ".M4V":
+                    case ".FLV":
+                    case ".OGV":
+                    case ".OGM":
+                    case ".OGX":
+                        this.Type = FileTypes.QuickTimeVideo;
+                        this.ContainerPath = Path.Combine(this.Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "video", this.Identifier);
+                        break;
+
+
+                    default:
+                        this.Type = FileTypes.Other;
+                        break;
+                }
+            }
+        }
+
+        public string Extension
+        {
+            get
+            {
+                return Path.GetExtension(_originalPath);
+            }
+        }
+
+        public DateTime LastChanged
+        {
+            set
+            {
+                this.Parent.UpdatePreviewableObject(this.OriginalPath, value);
+            }
+        }
 
         public string Serialize()
         {
             StringBuilder result = new StringBuilder();
-            result.AppendLine(@"<FolderName>" + this.ContainerID + @"</FolderName>");
+            result.AppendLine(@"<Identifier>" + this.Identifier + @"</Identifier>");
+            result.AppendLine(@"<OriginalPath>" + this.OriginalPath + @"</OriginalPath>");
             return result.ToString();
         }
 
@@ -84,35 +136,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 switch (childNode.Name)
                 {
                     case "FolderName":
-                        this.ContainerID = childNode.InnerText;
-                        switch (Path.GetExtension(this.Parent.OriginalPath).ToUpper())
-                        {
-                            case ".PPT":
-                            case ".PPTX":
-                            case ".DOC":
-                            case ".DOCX":
-                            case ".XLS":
-                            case ".XLSX":
-                            case ".PDF":
-                                this.ContainerPath = Path.Combine(this.Parent.PreviewStoragePath, Constants.FtpPreviewContainersRootFolderName, "files", this.ContainerID);
-                                break;
-                            case ".MPEG":
-                            case ".WMV":
-                            case ".AVI":
-                            case ".WMZ":
-                            case ".MPG":
-                            case ".ASF":
-                            case ".MOV":
-                            case ".MP4":
-                            case ".M4V":
-                            case ".FLV":
-                            case ".OGV":
-                            case ".OGM":
-                            case ".OGX":
-                                this.ContainerPath = Path.Combine(this.Parent.PreviewStoragePath, Constants.FtpPreviewContainersRootFolderName, "video", this.ContainerID);
-                                break;
-                        }
+                    case "Identifier":
+                        this.Identifier = childNode.InnerText;
                         break;
+                    case "OriginalPath":
+                        this.OriginalPath = childNode.InnerText;
+                        break;
+
                 }
             }
         }
@@ -133,7 +163,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 {
                     string previewFolder = Path.Combine(this.ContainerPath, format);
                     if (Directory.Exists(previewFolder))
-                        result.AddRange(Directory.GetFiles(previewFolder).Select(x => x.Replace(this.Parent.PreviewStoragePath, string.Empty)));
+                        result.AddRange(Directory.GetFiles(previewFolder).Select(x => x.Replace(this.Parent.StoragePath, string.Empty)));
                 }
             }
 
@@ -189,7 +219,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public void UpdateContent()
         {
-            FileInfo parentFile = new FileInfo(this.Parent.OriginalPath);
+            FileInfo parentFile = new FileInfo(this.OriginalPath);
             if (!string.IsNullOrEmpty(this.ContainerPath))
             {
                 DirectoryInfo previewFolder = new DirectoryInfo(this.ContainerPath);
@@ -210,13 +240,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 if (parentFile.Exists)
                 {
-                    IPreviewGenerator previewGenerator = this.Parent.GetPreviewGenerator();
+                    IPreviewGenerator previewGenerator = this.Parent.GetPreviewGenerator(this);
                     if (previewGenerator != null)
-                    {
-                        previewGenerator.SourceFile = this.Parent.OriginalPath;
-                        previewGenerator.ContainerPath = this.ContainerPath;
-                        previewGenerator.GeneratePreview(this);
-                    }
+                        previewGenerator.GeneratePreview();
                 }
             }
         }
@@ -234,24 +260,24 @@ namespace SalesDepot.CoreObjects.BusinessClasses
     }
 
     #region Compatibility with desktop version of Sales Depot
-    public class PresentationPreviewContainer : IPreviewContainer
+    public class PresentationPreviewContainer
     {
-        public PresentationPreviewContainer(IPreviewable parent)
+        public PresentationPreviewContainer(ILibraryFile parent)
         {
             this.Parent = parent;
-            this.ContainerID = Guid.NewGuid().ToString();
-            this.ContainerPath = Path.Combine(this.Parent.PreviewStoragePath, Constants.RegularPreviewContainersRootFolderName, this.ContainerID);
+            this.Identifier = Guid.NewGuid().ToString();
+            this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName, this.Identifier);
         }
 
         #region PreviewContainer Members
-        public IPreviewable Parent { get; private set; }
-        public string ContainerID { get; private set; }
+        public ILibraryFile Parent { get; private set; }
+        public string Identifier { get; private set; }
         public string ContainerPath { get; private set; }
 
         public string Serialize()
         {
             StringBuilder result = new StringBuilder();
-            result.AppendLine(@"<FolderName>" + this.ContainerID + @"</FolderName>");
+            result.AppendLine(@"<FolderName>" + this.Identifier + @"</FolderName>");
             return result.ToString();
         }
 
@@ -262,8 +288,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 switch (childNode.Name)
                 {
                     case "FolderName":
-                        this.ContainerID = childNode.InnerText;
-                        this.ContainerPath = Path.Combine(this.Parent.PreviewStoragePath, Constants.RegularPreviewContainersRootFolderName, this.ContainerID);
+                        this.Identifier = childNode.InnerText;
+                        this.ContainerPath = Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName, this.Identifier);
                         break;
                 }
             }
@@ -293,8 +319,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 needToUpdate = false;
             if (needToUpdate)
             {
-                if (!Directory.Exists(Path.Combine(this.Parent.PreviewStoragePath, Constants.RegularPreviewContainersRootFolderName)))
-                    Directory.CreateDirectory(Path.Combine(this.Parent.PreviewStoragePath, Constants.RegularPreviewContainersRootFolderName));
+                if (!Directory.Exists(Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName)))
+                    Directory.CreateDirectory(Path.Combine(this.Parent.Parent.Parent.Parent.Folder.FullName, Constants.RegularPreviewContainersRootFolderName));
                 if (previewFolder.Exists)
                     ToolClasses.SyncManager.DeleteFolder(previewFolder);
                 Directory.CreateDirectory(this.ContainerPath);

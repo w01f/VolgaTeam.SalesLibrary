@@ -820,6 +820,8 @@ namespace FileManager.PresentationClasses.WallBin
                             file.FileCard.Notes.AddRange(_formLinkProperties.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
 
                             file.AttachmentProperties = _formLinkProperties.AttachmentProperties;
+                            foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+                                file.Parent.Parent.Parent.GetPreviewContainer(attachment.OriginalPath);
                         }
                         else
                         {
@@ -886,9 +888,6 @@ namespace FileManager.PresentationClasses.WallBin
                                 file.PreviewContainer = new PresentationPreviewContainer(file);
                             file.PreviewContainer.ClearContent();
                         }
-
-                        if (file.UniversalPreviewContainer != null)
-                            file.UniversalPreviewContainer.ClearContent();
                     }
                     grFiles.Rows.Remove(grFiles.SelectedRows[0]);
                 }
@@ -1330,23 +1329,19 @@ namespace FileManager.PresentationClasses.WallBin
                             form.Close();
                             FormMain.Instance.ribbonControl.Enabled = true;
                         }
+
                         #region Compatibility with Desktop Sales Depot
                         if (libraryFile.PreviewContainer == null)
                             libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
                         #endregion
-                        if (libraryFile.UniversalPreviewContainer == null)
-                            libraryFile.UniversalPreviewContainer = new UniversalPreviewContainer(libraryFile);
                         break;
                     case FileTypes.Other:
                     case FileTypes.MediaPlayerVideo:
                     case FileTypes.QuickTimeVideo:
-                        if (libraryFile.UniversalPreviewContainer == null)
-                            libraryFile.UniversalPreviewContainer = new UniversalPreviewContainer(libraryFile);
                         break;
                 }
 
-                if (libraryFile.UniversalPreviewContainer == null)
-                    libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
+                libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
 
 
                 if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MAX_PATH)

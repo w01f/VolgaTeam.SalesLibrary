@@ -178,11 +178,7 @@ namespace FileManager.BusinessClasses
                                                             if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                                                             {
                                                                 if (attachment.IsSourceAvailable)
-                                                                {
                                                                     filesWhiteList.Add(attachment.DestinationPath);
-                                                                    if (attachment.UniversalPreviewContainer != null && !string.IsNullOrEmpty(attachment.UniversalPreviewContainer.ContainerPath))
-                                                                        AddFolderForSync(new DirectoryInfo(attachment.UniversalPreviewContainer.ContainerPath), filesWhiteList);
-                                                                }
                                                             }
                                                             else
                                                                 break;
@@ -199,9 +195,19 @@ namespace FileManager.BusinessClasses
                                             break;
                                     }
                                     if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                                        syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
-
+                                    {
+                                        foreach (IPreviewContainer previewContainer in salesDepot.PreviewContainers)
+                                            if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                                            {
+                                                if (!string.IsNullOrEmpty(previewContainer.ContainerPath))
+                                                    AddFolderForSync(new DirectoryInfo(previewContainer.ContainerPath), filesWhiteList);
+                                            }
+                                            else
+                                                break;
+                                    }
                                     #region Sync Primary Root
+                                    if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                                        syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
                                     if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                                     {
                                         sourceSubFolders.Clear();
@@ -470,8 +476,6 @@ namespace FileManager.BusinessClasses
                                             {
                                                 if (!filesWhiteList.Contains(file.OriginalPath))
                                                     filesWhiteList.Add(file.OriginalPath);
-                                                if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
-                                                    AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
                                             }
                                             break;
                                         case FileTypes.MediaPlayerVideo:
@@ -481,8 +485,6 @@ namespace FileManager.BusinessClasses
                                             {
                                                 if (!filesWhiteList.Contains(file.OriginalPath))
                                                     filesWhiteList.Add(file.OriginalPath);
-                                                if (file.UniversalPreviewContainer != null && !string.IsNullOrEmpty(file.UniversalPreviewContainer.ContainerPath))
-                                                    AddFolderForSync(new DirectoryInfo(file.UniversalPreviewContainer.ContainerPath), filesWhiteList);
                                             }
                                             break;
                                         case FileTypes.LineBreak:
@@ -495,11 +497,7 @@ namespace FileManager.BusinessClasses
                                             if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                                             {
                                                 if (attachment.IsSourceAvailable)
-                                                {
                                                     filesWhiteList.Add(attachment.DestinationPath);
-                                                    if (attachment.UniversalPreviewContainer != null && !string.IsNullOrEmpty(attachment.UniversalPreviewContainer.ContainerPath))
-                                                        AddFolderForSync(new DirectoryInfo(attachment.UniversalPreviewContainer.ContainerPath), filesWhiteList);
-                                                }
                                             }
                                             else
                                                 break;
@@ -515,6 +513,18 @@ namespace FileManager.BusinessClasses
                         if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
                             break;
                     }
+                }
+
+                if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                {
+                    foreach (IPreviewContainer previewContainer in salesDepot.PreviewContainers)
+                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                        {
+                            if (!string.IsNullOrEmpty(previewContainer.ContainerPath))
+                                AddFolderForSync(new DirectoryInfo(previewContainer.ContainerPath), filesWhiteList);
+                        }
+                        else
+                            break;
                 }
 
                 #region Sync Primary Root

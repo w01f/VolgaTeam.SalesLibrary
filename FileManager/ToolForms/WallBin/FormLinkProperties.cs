@@ -868,7 +868,7 @@ namespace FileManager.ToolForms.WallBin
                 dialog.Title = "Attach file";
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (!this.AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.Equals(dialog.FileName)))
+                    if (!this.AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.ToLower().Equals(dialog.FileName.ToLower())))
                     {
                         LinkAttachment attachment = new LinkAttachment(this.AttachmentProperties);
                         attachment.Type = AttachmentType.File;

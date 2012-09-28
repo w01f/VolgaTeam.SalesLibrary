@@ -83,6 +83,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             this.DeadLinks = new List<ILibraryFile>();
             this.ExpiredLinks = new List<ILibraryFile>();
             this.AutoWidgets = new List<AutoWidget>();
+            this.PreviewContainers = new List<IPreviewContainer>();
 
             #region Auto Sync Settings
             this.SyncScheduleRecords = new List<SyncScheduleRecord>();
@@ -228,6 +229,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                                 AutoWidget autoWidget = new AutoWidget();
                                 autoWidget.Deserialize(childNode);
                                 this.AutoWidgets.Add(autoWidget);
+                            }
+                        node = document.SelectSingleNode(@"/Library/PreviewContainers");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                UniversalPreviewContainer previewContainer = new UniversalPreviewContainer(this);
+                                previewContainer.Deserialize(childNode);
+                                this.PreviewContainers.Add(previewContainer);
                             }
 
                         #region Auto Sync Settings
@@ -375,6 +384,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             foreach (AutoWidget autoWidget in this.AutoWidgets)
                 xml.AppendLine(@"<AutoWidget>" + autoWidget.Serialize() + @"</AutoWidget>");
             xml.AppendLine("</AutoWidgets>");
+            xml.AppendLine("<PreviewContainers>");
+            foreach (IPreviewContainer previewContainer in this.PreviewContainers)
+                xml.AppendLine(@"<PreviewContainer>" + previewContainer.Serialize() + @"</PreviewContainer>");
+            xml.AppendLine("</PreviewContainers>");
 
             #region Auto Sync Settings
             StringBuilder autoSyncSettings = new StringBuilder();
@@ -536,11 +549,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                                                 File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
                                             }
                                             catch { }
-
-                                        if (attachment.UniversalPreviewContainer == null)
-                                            attachment.UniversalPreviewContainer = new UniversalPreviewContainer(attachment);
-                                        if (!attachment.Format.Equals("video"))
-                                            attachment.UniversalPreviewContainer.UpdateContent();
                                         actualAttachmentIds.Add(attachment.Identifier);
                                     }
                                 }
@@ -597,44 +605,27 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         private void GenerateExtendedPreviewFiles()
         {
-            foreach (LibraryPage page in this.Pages)
+            foreach (IPreviewContainer previewContainer in this.PreviewContainers.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
             {
-                foreach (LibraryFolder folder in page.Folders)
+                if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 {
-                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
+                    if (IsPreviewAlive(previewContainer.OriginalPath))
+                        previewContainer.UpdateContent();
+                    else
                     {
-                        if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
-                        {
-                            if (file.UniversalPreviewContainer == null)
-                                file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
-                            file.UniversalPreviewContainer.UpdateContent();
-                        }
-                        else
-                            break;
+                        previewContainer.ClearContent();
+                        previewContainer.OriginalPath = string.Empty;
                     }
-                    if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
-                        break;
                 }
-                if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                else
                     break;
             }
-            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
-                this.Save();
-        }
 
-        public void GenerateVideoPreviewFiles()
-        {
-            foreach (LibraryPage page in this.Pages)
-                foreach (LibraryFolder folder in page.Folders)
-                {
-                    foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
-                    {
-                        if (file.UniversalPreviewContainer == null)
-                            file.UniversalPreviewContainer = new UniversalPreviewContainer(file);
-                        file.UniversalPreviewContainer.UpdateContent();
-                    }
-                }
-            this.Save();
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+            {
+                this.PreviewContainers.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
+                this.Save();
+            }
         }
 
         public void DeleteDeadLinks(Guid[] deadLinkIdentifiers)
@@ -762,5 +753,105 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             for (int i = 0; i < this.ExtraFolders.Count; i++)
                 this.ExtraFolders[i].Order = i;
         }
+
+        #region IPreviewStorage Members
+        public List<IPreviewContainer> PreviewContainers { get; private set; }
+        public string StoragePath
+        {
+            get
+            {
+                return this.Folder.FullName;
+            }
+        }
+
+        public IPreviewContainer GetPreviewContainer(string originalPath)
+        {
+            IPreviewContainer previewContainer = this.PreviewContainers.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault();
+            if (previewContainer == null)
+            {
+                previewContainer = new UniversalPreviewContainer(this);
+                previewContainer.OriginalPath = originalPath;
+                this.PreviewContainers.Add(previewContainer);
+            }
+            return previewContainer;
+        }
+
+        public IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer)
+        {
+            SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
+            switch (previewContainer.Extension.ToUpper())
+            {
+                case ".PPT":
+                case ".PPTX":
+                    previewGenerator = new PowerPointPreviewGenerator(previewContainer);
+                    break;
+                case ".DOC":
+                case ".DOCX":
+                    previewGenerator = new WordPreviewGenerator(previewContainer);
+                    break;
+                case ".XLS":
+                case ".XLSX":
+                    previewGenerator = new ExcelPreviewGenerator(previewContainer);
+                    break;
+                case ".PDF":
+                    previewGenerator = new PdfPreviewGenerator(previewContainer);
+                    break;
+                case ".MPEG":
+                case ".WMV":
+                case ".AVI":
+                case ".WMZ":
+                case ".MPG":
+                case ".ASF":
+                case ".MOV":
+                case ".MP4":
+                case ".M4V":
+                case ".FLV":
+                case ".OGV":
+                case ".OGM":
+                case ".OGX":
+                    previewGenerator = new VideoPreviewGenerator(previewContainer);
+                    break;
+            }
+            return previewGenerator;
+        }
+
+        public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
+        {
+            foreach (LibraryPage page in this.Pages)
+                foreach (LibraryFolder folder in page.Folders)
+                    foreach (LibraryFile file in folder.Files)
+                    {
+                        if (file.OriginalPath.Equals(originalPath))
+                            file.LastChanged = lastChanged;
+                        LinkAttachment attachment = file.AttachmentProperties.FilesAttachments.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault();
+                        if (attachment != null)
+                            attachment.LastChanged = lastChanged;
+                    }
+        }
+
+        public bool IsPreviewAlive(string originalPath)
+        {
+            bool alive = false;
+            foreach (LibraryPage page in this.Pages)
+            {
+                foreach (LibraryFolder folder in page.Folders)
+                {
+                    foreach (LibraryFile file in folder.Files)
+                    {
+                        alive = file.OriginalPath.Equals(originalPath);
+                        if (!alive)
+                            alive = file.AttachmentProperties.FilesAttachments.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault() != null;
+                        if (alive)
+                            break;
+                    }
+                    if (alive)
+                        break;
+                }
+                if (alive)
+                    break;
+            }
+            return alive;
+        }
+        #endregion
     }
 }

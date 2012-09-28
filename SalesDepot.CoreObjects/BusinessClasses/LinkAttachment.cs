@@ -1,17 +1,17 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public class LinkAttachment : IPreviewable
+    public class LinkAttachment
     {
         public AttachmentProperties Parent { get; private set; }
         public Guid Identifier { get; set; }
         public AttachmentType Type { get; set; }
         public string OriginalPath { get; set; }
-        public IPreviewContainer UniversalPreviewContainer { get; set; }
 
         public string DestinationPath
         {
@@ -78,14 +78,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             set
             {
                 this.Parent.Parent.LastChanged = value;
-            }
-        }
-
-        public string PreviewStoragePath
-        {
-            get
-            {
-                return this.Parent.Parent.PreviewStoragePath;
             }
         }
 
@@ -162,8 +154,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
             if (!string.IsNullOrEmpty(this.OriginalPath))
                 result.AppendLine(@"<OriginalPath>" + this.OriginalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</OriginalPath>");
-            if (this.UniversalPreviewContainer != null)
-                result.AppendLine(@"<UniversalPreviewContainer>" + this.UniversalPreviewContainer.Serialize() + @"</UniversalPreviewContainer>");
             return result.ToString();
         }
 
@@ -186,22 +176,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     case "OriginalPath":
                         this.OriginalPath = childNode.InnerText;
                         break;
+                    #region Compatibility with old version of Sales Depot
                     case "UniversalPreviewContainer":
-                        this.UniversalPreviewContainer = new UniversalPreviewContainer(this);
-                        this.UniversalPreviewContainer.Deserialize(childNode);
+                        UniversalPreviewContainer universalPreviewContainer = new UniversalPreviewContainer(this.Parent.Parent.Parent.Parent.Parent);
+                        universalPreviewContainer.Deserialize(childNode);
+                        universalPreviewContainer.OriginalPath = this.OriginalPath;
+                        if (!this.Parent.Parent.Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.Equals(this.OriginalPath)))
+                            this.Parent.Parent.Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
                         break;
+                    #endregion
                 }
             }
-        }
-
-        public SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator GetPreviewGenerator(string extension = "")
-        {
-            if (this.IsSourceAvailable)
-            {
-                return this.Parent.Parent.GetPreviewGenerator(Path.GetExtension(this.OriginalPath));
-            }
-            else
-                return null;
         }
     }
 }

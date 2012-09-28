@@ -80,11 +80,7 @@ namespace FileManager.PresentationClasses.IPad
                     foreach (VideoInfo videoFile in videoFiles)
                     {
                         if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                        {
-                            if (videoFile.Parent.UniversalPreviewContainer == null)
-                                videoFile.Parent.UniversalPreviewContainer = new UniversalPreviewContainer(videoFile.Parent);
-                            videoFile.Parent.UniversalPreviewContainer.UpdateContent();
-                        }
+                            videoFile.Parent.UpdateContent();
                         else
                             break;
                     }

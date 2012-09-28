@@ -4,12 +4,11 @@ using System.IO;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public interface ILibrary
+    public interface ILibrary : IPreviewStorage
     {
+        Guid Identifier { get; }
         string Name { get; }
         RootFolder RootFolder { get; }
-
-        Guid Identifier { get; set; }
         DirectoryInfo Folder { get; set; }
         bool UseDirectAccess { get; set; }
         DateTime DirectAccessFileBottomDate { get; set; }

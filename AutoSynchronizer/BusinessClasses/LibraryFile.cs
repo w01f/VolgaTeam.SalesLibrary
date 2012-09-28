@@ -43,7 +43,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public BannerProperties BannerProperties { get; set; }
         public FileCard FileCard { get; set; }
 
-        public IPreviewContainer UniversalPreviewContainer { get; set; }
         #region Compatibility with desktop version of Sales Depot
         public PresentationPreviewContainer PreviewContainer { get; set; }
         #endregion
@@ -302,8 +301,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             get
             {
-                if (this.UniversalPreviewContainer != null)
-                    return this.UniversalPreviewContainer.GetTextContent();
+                IPreviewContainer previewContainer = this.Parent.Parent.Parent.GetPreviewContainer(this.OriginalPath);
+                if (previewContainer != null)
+                    return previewContainer.GetTextContent();
                 else
                     return string.Empty;
             }
@@ -413,8 +413,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             if (this.PreviewContainer != null)
                 result.AppendLine(@"<PreviewContainer>" + this.PreviewContainer.Serialize() + @"</PreviewContainer>");
             #endregion
-            if (this.UniversalPreviewContainer != null)
-                result.AppendLine(@"<UniversalPreviewContainer>" + this.UniversalPreviewContainer.Serialize() + @"</UniversalPreviewContainer>");
             if (this.PresentationProperties != null)
                 result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
             if (this.LineBreakProperties != null)
@@ -511,16 +509,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     case "FileCard":
                         this.FileCard.Deserialize(childNode);
                         break;
-                    #region Compatibility with desktop version of Sales Depot
+                    #region Compatibility with old version of Sales Depot
                     case "PreviewContainer":
                         this.PreviewContainer = new PresentationPreviewContainer(this);
                         this.PreviewContainer.Deserialize(childNode);
                         break;
-                    #endregion
                     case "UniversalPreviewContainer":
-                        this.UniversalPreviewContainer = new UniversalPreviewContainer(this);
-                        this.UniversalPreviewContainer.Deserialize(childNode);
+                        UniversalPreviewContainer universalPreviewContainer = new UniversalPreviewContainer(this.Parent.Parent.Parent);
+                        universalPreviewContainer.Deserialize(childNode);
+                        universalPreviewContainer.OriginalPath = this.OriginalPath;
+                        if (!this.Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.ToLower().Equals(this.OriginalPath.ToLower())))
+                            this.Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
                         break;
+                    #endregion
                     case "PresentationProperties":
                         this.PresentationProperties = new PresentationProperties();
                         this.PresentationProperties.Deserialize(childNode);
@@ -640,47 +641,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             this.Parent.Files.Remove(this);
             this.Parent.LastChanged = DateTime.Now;
-        }
-
-        public SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator GetPreviewGenerator(string extension = "")
-        {
-            if (string.IsNullOrEmpty(extension))
-                extension = this.Extension;
-            SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
-            switch (extension.ToUpper())
-            {
-                case ".PPT":
-                case ".PPTX":
-                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.PowerPointPreviewGenerator();
-                    break;
-                case ".DOC":
-                case ".DOCX":
-                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.WordPreviewGenerator();
-                    break;
-                case ".XLS":
-                case ".XLSX":
-                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.ExcelPreviewGenerator();
-                    break;
-                case ".PDF":
-                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.PdfPreviewGenerator();
-                    break;
-                case ".MPEG":
-                case ".WMV":
-                case ".AVI":
-                case ".WMZ":
-                case ".MPG":
-                case ".ASF":
-                case ".MOV":
-                case ".MP4":
-                case ".M4V":
-                case ".FLV":
-                case ".OGV":
-                case ".OGM":
-                case ".OGX":
-                    previewGenerator = new SalesDepot.CoreObjects.BusinessClasses.VideoPreviewGenerator();
-                    break;
-            }
-            return previewGenerator;
         }
     }
 }

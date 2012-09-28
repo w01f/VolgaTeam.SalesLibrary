@@ -44,7 +44,6 @@ namespace SalesDepot.BusinessClasses
         public SearchGroup CustomKeywords { get; private set; }
         public ExpirationDateOptions ExpirationDateOptions { get; set; }
         public PresentationPreviewContainer PreviewContainer { get; set; }
-        public IPreviewContainer UniversalPreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
         public AttachmentProperties AttachmentProperties { get; set; }
@@ -600,11 +599,6 @@ namespace SalesDepot.BusinessClasses
             }
             else
                 _linkLocalPath = string.Empty;
-        }
-
-        public SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator GetPreviewGenerator(string extension = "")
-        {
-            return null;
         }
     }
 }

@@ -278,5 +278,45 @@ namespace SalesDepot.BusinessClasses
                 searchFiles.AddRange(page.SearchByDate(startDate, endDate));
             return searchFiles.ToArray();
         }
+
+        #region IPreviewStorage Members
+        public List<IPreviewContainer> PreviewContainers { get; private set; }
+        public string StoragePath
+        {
+            get
+            {
+                return this.Folder.FullName;
+            }
+        }
+
+        public IPreviewContainer GetPreviewContainer(string originalPath)
+        {
+            IPreviewContainer previewContainer = this.PreviewContainers.Where(x => x.OriginalPath.Equals(originalPath)).FirstOrDefault();
+            if (previewContainer == null)
+            {
+                previewContainer = new UniversalPreviewContainer(this);
+                previewContainer.OriginalPath = originalPath;
+                this.PreviewContainers.Add(previewContainer);
+            }
+            return previewContainer;
+        }
+
+        public IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer)
+        {
+            SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
+            return previewGenerator;
+        }
+
+        public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
+        {
+        }
+
+        public bool IsPreviewAlive(string originalPath)
+        {
+            bool alive = false;
+            return alive;
+        }
+
+        #endregion
     }
 }
