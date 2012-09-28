@@ -29,18 +29,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<SearchTags>");
             foreach (SearchGroup group in this.SearchGroups)
-            {
-                result.Append(@"<Category ");
-                result.Append("Name = \"" + group.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
-                result.AppendLine(@">");
-                foreach (string tag in group.Tags)
-                {
-                    result.Append(@"<Tag ");
-                    result.Append("Value = \"" + tag.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
-                    result.AppendLine(@"/>");
-                }
-                result.AppendLine(@"</Category>");
-            }
+                result.Append(group.Serialize());
             result.AppendLine(@"</SearchTags>");
             return result.ToString();
         }
@@ -53,35 +42,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             {
                 switch (childNode.Name)
                 {
-                    case "Category":
+                    case SearchGroup.TagName:
                         SearchGroup group = new SearchGroup();
-                        foreach (XmlAttribute attribute in childNode.Attributes)
-                        {
-                            switch (attribute.Name)
-                            {
-                                case "Name":
-                                    group.Name = attribute.Value;
-                                    break;
-                            }
-                        }
-                        foreach (XmlNode tagNode in childNode.ChildNodes)
-                        {
-                            switch (tagNode.Name)
-                            {
-                                case "Tag":
-                                    foreach (XmlAttribute attribute in tagNode.Attributes)
-                                    {
-                                        switch (attribute.Name)
-                                        {
-                                            case "Value":
-                                                if (!string.IsNullOrEmpty(attribute.Value))
-                                                    group.Tags.Add(attribute.Value);
-                                                break;
-                                        }
-                                    }
-                                    break;
-                            }
-                        }
+                        group.Deserialize(childNode);
                         if (!string.IsNullOrEmpty(group.Name) && group.Tags.Count > 0)
                             this.SearchGroups.Add(group);
                         break;

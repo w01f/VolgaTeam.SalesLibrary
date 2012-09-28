@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public interface ILibraryFile: ISyncObject
+    public interface ILibraryFile: IPreviewable
     {
         string Name { get; set; }
         LibraryFolder Parent { get; set; }
@@ -12,13 +12,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         Guid Identifier { get; set; }
         string RelativePath { get; set; }
         FileTypes Type { get; set; }
+        string Format { get; }
         int Order { get; set; }
         bool IsBold { get; set; }
         bool IsDead { get; set; }
         DateTime AddDate { get; set; }
         bool EnableWidget { get; set; }
         string CriteriaOverlap { get; set; }
-        string OriginalPath { get; }
         string DisplayName { get; }
         string NameWithExtension { get; }
         string NameWithoutExtesion { get; }
@@ -29,14 +29,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         Image Widget { get; }
 
         LibraryFileSearchTags SearchTags { get; set; }
-        ExpirationDateOptions ExpirationDateOptions { get; set; }
+        SearchGroup CustomKeywords { get;}
+        ExpirationDateOptions ExpirationDateOptions { get;}
         PresentationProperties PresentationProperties { get; set; }
-        LineBreakProperties LineBreakProperties { get; set; }
-        BannerProperties BannerProperties { get; set; }
-        IPreviewContainer UniversalPreviewContainer { get; set; }
+        LineBreakProperties LineBreakProperties { get;}
+        AttachmentProperties AttachmentProperties { get; }
+        BannerProperties BannerProperties { get;}
+        FileCard FileCard { get; set; }
 
         string Serialize();
         void Deserialize(XmlNode fileNode);
-        IPreviewGenerator GetPreviewGenerator();
     }
 }

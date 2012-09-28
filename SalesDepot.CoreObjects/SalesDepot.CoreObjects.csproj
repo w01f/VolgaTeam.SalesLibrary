@@ -69,10 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessClasses\AttachmentProperties.cs" />
     <Compile Include="BusinessClasses\AutoWidget.cs" />
     <Compile Include="BusinessClasses\Banner.cs" />
     <Compile Include="BusinessClasses\ColumnTitle.cs" />
     <Compile Include="BusinessClasses\Common.cs" />
+    <Compile Include="BusinessClasses\FileCard.cs" />
     <Compile Include="BusinessClasses\ExpirationDateOptions.cs" />
     <Compile Include="BusinessClasses\FileLink.cs" />
     <Compile Include="BusinessClasses\FolderLink.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="BusinessClasses\LibraryFolder.cs" />
     <Compile Include="BusinessClasses\LibraryPage.cs" />
     <Compile Include="BusinessClasses\LineBreak.cs" />
+    <Compile Include="BusinessClasses\LinkAttachment.cs" />
     <Compile Include="BusinessClasses\OvernightsCalendarObjects.cs" />
     <Compile Include="BusinessClasses\PresentationProperties.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />

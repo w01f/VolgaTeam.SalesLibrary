@@ -431,15 +431,21 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             get
             {
-                List<ILibraryFile> videoLinks = new List<ILibraryFile>();
+                List<IPreviewable> videoLinks = new List<IPreviewable>();
                 foreach (LibraryPage page in this.Parent.Pages)
                     foreach (LibraryFolder folder in page.Folders)
-                        videoLinks.AddRange(folder.Files.Where(x => x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo));
+                        foreach (ILibraryFile file in folder.Files)
+                        {
+                            if (file.Type == FileTypes.MediaPlayerVideo || file.Type == FileTypes.QuickTimeVideo)
+                                videoLinks.Add(file);
+                            if (file.AttachmentProperties.Enable)
+                                videoLinks.AddRange(file.AttachmentProperties.FilesAttachments.Where(x => x.Format.Equals("video")));
+                        }
                 videoLinks.Sort((x, y) => InteropClasses.WinAPIHelper.StrCmpLogicalW(Path.GetFileName(x.OriginalPath), Path.GetFileName(y.OriginalPath)));
 
                 List<VideoInfo> videoFiles = new List<VideoInfo>();
                 int i = 1;
-                foreach (ILibraryFile videoLink in videoLinks)
+                foreach (IPreviewable videoLink in videoLinks)
                 {
                     VideoInfo videoFile = new VideoInfo(videoLink);
                     videoFile.Index = i.ToString();
@@ -490,7 +496,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
     public class VideoInfo
     {
-        public ILibraryFile Parent { get; private set; }
+        public IPreviewable Parent { get; private set; }
         public string Index { get; set; }
         public bool Selected { get; set; }
         public string SourceFileName { get; set; }
@@ -502,7 +508,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public string OgvFileName { get; set; }
         public string OgvFilePath { get; set; }
 
-        public VideoInfo(ILibraryFile parent)
+        public VideoInfo(IPreviewable parent)
         {
             this.Parent = parent;
         }

@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public class Library: ILibrary
+    public class Library : ILibrary
     {
         private RootFolder _rootFolder = null;
 
@@ -103,8 +103,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             CheckIfOldFormat();
             Load();
-            ProceedDeadLinks();
-            ProceedExpiredLinks();
+            ProcessDeadLinks();
+            ProcessExpiredLinks();
         }
 
         private void CheckIfOldFormat()
@@ -451,6 +451,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 if (!this.UseDirectAccess)
                 {
                     GeneratePresentationPreviewFiles();
+                    ProcessAttachments();
                     if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                         NotifyAboutExpiredLinks();
                 }
@@ -463,8 +464,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 if (!this.UseDirectAccess)
+                {
                     GenerateExtendedPreviewFiles();
-            
+                    ProcessAttachments();
+                }
+
             if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
             {
                 this.IPadManager.SaveJson();
@@ -473,7 +477,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             }
         }
 
-        private void ProceedDeadLinks()
+        private void ProcessDeadLinks()
         {
             this.DeadLinks.Clear();
             foreach (LibraryPage page in this.Pages)
@@ -485,7 +489,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 }
         }
 
-        private void ProceedExpiredLinks()
+        private void ProcessExpiredLinks()
         {
             this.ExpiredLinks.Clear();
             foreach (LibraryPage page in this.Pages)
@@ -493,7 +497,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     this.ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
         }
 
-        public void ProceedPresentationProperties()
+        public void ProcessPresentationProperties()
         {
             if (InteropClasses.PowerPointHelper.Instance.Connect())
             {
@@ -503,6 +507,75 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                             file.GetPresentationPrperties();
                 InteropClasses.PowerPointHelper.Instance.Disconnect();
                 this.Save();
+            }
+        }
+
+        public void ProcessAttachments()
+        {
+            List<Guid> actualAttachmentIds = new List<Guid>();
+
+            foreach (LibraryPage page in this.Pages)
+            {
+                foreach (LibraryFolder folder in page.Folders)
+                {
+                    foreach (LibraryFile file in folder.Files.Where(x => x.AttachmentProperties.Enable))
+                    {
+                        if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                        {
+                            foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+                            {
+                                if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                                {
+                                    if (attachment.IsSourceAvailable)
+                                    {
+                                        bool copy = true;
+                                        if (attachment.IsDestinationAvailable)
+                                        {
+                                            DateTime sourceTimeStamp = File.GetLastWriteTime(attachment.OriginalPath);
+                                            DateTime destinationTimeStamp = File.GetLastWriteTime(attachment.DestinationPath);
+                                            if (sourceTimeStamp == destinationTimeStamp)
+                                                copy = false;
+                                        }
+                                        else
+                                        {
+                                            if (!Directory.Exists(Path.GetDirectoryName(attachment.DestinationPath)))
+                                                Directory.CreateDirectory(Path.GetDirectoryName(attachment.DestinationPath));
+                                        }
+                                        if (copy)
+                                            try
+                                            {
+                                                File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
+                                            }
+                                            catch { }
+
+                                        if (attachment.UniversalPreviewContainer == null)
+                                            attachment.UniversalPreviewContainer = new UniversalPreviewContainer(attachment);
+                                        if (!attachment.Format.Equals("video"))
+                                            attachment.UniversalPreviewContainer.UpdateContent();
+                                        actualAttachmentIds.Add(attachment.Identifier);
+                                    }
+                                }
+                                else
+                                    break;
+                            }
+                        }
+                        else
+                            break;
+                    }
+                    if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                        break;
+                }
+                if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+                    break;
+            }
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+                this.Save();
+
+            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+            {
+                DirectoryInfo attachmentRootFolder = new DirectoryInfo(Path.Combine(this.Folder.FullName, Constants.AttachmentsRootFolderName));
+                foreach (DirectoryInfo subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
+                    ToolClasses.SyncManager.DeleteFolder(subFolder);
             }
         }
 
@@ -579,24 +652,24 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             foreach (LibraryFile link in this.DeadLinks.Where(x => deadLinkIdentifiers.Contains(x.Identifier)))
                 link.RemoveFromCollection();
-            ProceedDeadLinks();
+            ProcessDeadLinks();
         }
 
         public void DeleteExpiredLinks(Guid[] expiredLinkIdentifiers)
         {
             foreach (LibraryFile link in this.ExpiredLinks.Where(x => expiredLinkIdentifiers.Contains(x.Identifier)))
                 link.RemoveFromCollection();
-            ProceedExpiredLinks();
+            ProcessExpiredLinks();
         }
 
         public void NotifyAboutExpiredLinks()
         {
-            ProceedExpiredLinks();
+            ProcessExpiredLinks();
             if (this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Count() > 0)
             {
                 if (InteropClasses.OutlookHelper.Instance.Connect())
                 {
-                    InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)),this.SendEmail);
+                    InteropClasses.OutlookHelper.Instance.CreateMessage(this.EmailList.ToArray(), string.Join(Environment.NewLine, this.ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)), this.SendEmail);
                     InteropClasses.OutlookHelper.Instance.Disconnect();
                 }
                 else

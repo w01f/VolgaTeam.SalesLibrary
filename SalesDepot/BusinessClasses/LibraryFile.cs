@@ -41,12 +41,15 @@ namespace SalesDepot.BusinessClasses
         public DateTime LastChanged { get; set; }
 
         public LibraryFileSearchTags SearchTags { get; set; }
+        public SearchGroup CustomKeywords { get; private set; }
         public ExpirationDateOptions ExpirationDateOptions { get; set; }
         public PresentationPreviewContainer PreviewContainer { get; set; }
         public IPreviewContainer UniversalPreviewContainer { get; set; }
         public PresentationProperties PresentationProperties { get; set; }
         public LineBreakProperties LineBreakProperties { get; set; }
+        public AttachmentProperties AttachmentProperties { get; set; }
         public BannerProperties BannerProperties { get; set; }
+        public FileCard FileCard { get; set; }
 
         public string OriginalPath
         {
@@ -251,6 +254,71 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
+        public string PreviewStoragePath
+        {
+            get
+            {
+                return this.Parent.Parent.Parent.Folder.FullName;
+            }
+        }
+
+        public string Format
+        {
+            get
+            {
+                string format = string.Empty;
+                switch (this.Extension.Replace(".", string.Empty).ToLower())
+                {
+                    case "ppt":
+                    case "pptx":
+                        format = "ppt";
+                        break;
+                    case "doc":
+                    case "docx":
+                        format = "doc";
+                        break;
+                    case "xls":
+                    case "xlsx":
+                        format = "xls";
+                        break;
+                    case "pdf":
+                        format = "pdf";
+                        break;
+                    case "mpeg":
+                    case "wmv":
+                    case "avi":
+                    case "wmz":
+                    case "mpg":
+                    case "asf":
+                    case "mov":
+                    case "m4v":
+                    case "flv":
+                    case "ogv":
+                    case "ogm":
+                    case "ogx":
+                        format = "video";
+                        break;
+                    case "mp4":
+                        format = "mp4";
+                        break;
+                    case "png":
+                        format = "png";
+                        break;
+                    case "jpg":
+                    case "jpeg":
+                        format = "jpeg";
+                        break;
+                    case "url":
+                        format = "url";
+                        break;
+                    default:
+                        format = "other";
+                        break;
+                }
+                return format;
+            }
+        }
+
         public LibraryFile(LibraryFolder parent)
         {
             this.Name = string.Empty;
@@ -265,6 +333,7 @@ namespace SalesDepot.BusinessClasses
             this.CriteriaOverlap = string.Empty;
             this.SearchTags = new LibraryFileSearchTags();
             this.ExpirationDateOptions = new ExpirationDateOptions();
+            this.FileCard = new FileCard(this);
             this.PreviewContainer = null;
             SetProperties();
         }
@@ -286,6 +355,7 @@ namespace SalesDepot.BusinessClasses
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
             result.AppendLine(this.SearchTags.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
+            result.AppendLine(@"<FileCard>" + this.FileCard.Serialize() + @"</FileCard>");
             if (this.PreviewContainer != null)
                 result.AppendLine(@"<PreviewContainer>" + this.PreviewContainer.Serialize() + @"</PreviewContainer>");
             if (this.PresentationProperties != null)
@@ -367,6 +437,9 @@ namespace SalesDepot.BusinessClasses
                         break;
                     case "ExpirationDateOptions":
                         this.ExpirationDateOptions.Deserialize(childNode);
+                        break;
+                    case "FileCard":
+                        this.FileCard.Deserialize(childNode);
                         break;
                     case "PreviewContainer":
                         this.PreviewContainer = new PresentationPreviewContainer(this);
@@ -529,7 +602,7 @@ namespace SalesDepot.BusinessClasses
                 _linkLocalPath = string.Empty;
         }
 
-        public IPreviewGenerator GetPreviewGenerator()
+        public SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator GetPreviewGenerator(string extension = "")
         {
             return null;
         }

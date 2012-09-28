@@ -17,6 +17,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public const string LibraryLogoFolder = @"!SD-Graphics";
         public const string OvernightsCalendarRootFolderName = @"!OC";
         public const string ProgramManagerRootFolderName = @"!PM";
+        public const string AttachmentsRootFolderName = @"!Attachments";
         public const string ExtraFoldersRootFolderName = @"!Extra Roots";
         public const string SweepPeriodsFileName = @"SweepPeriods.xml";
     }
@@ -44,5 +45,26 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         Left = 0,
         Center,
         Right
+    }
+
+    public enum AttachmentType
+    { 
+        File,
+        Url,
+        Network
+    }
+
+    public class StringDataSourceWrapper
+    {
+        public string Value { get; set; }
+
+        public StringDataSourceWrapper()
+        {
+        }
+
+        public StringDataSourceWrapper(string value)
+        {
+            this.Value = value;
+        }
     }
 }

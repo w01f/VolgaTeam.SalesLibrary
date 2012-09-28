@@ -222,7 +222,7 @@ namespace FileManager.PresentationClasses.IPad
             if (e.Column == gridColumnVideoSourceFileName)
             {
                 VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
-                if (videoInfo.Parent.Type == FileTypes.QuickTimeVideo)
+                if (Path.GetExtension(videoInfo.Parent.OriginalPath).ToLower().Contains("mp4"))
                     e.RepositoryItem = repositoryItemButtonEditVideoMp4;
                 else
                     e.RepositoryItem = repositoryItemButtonEditVideoWmv;

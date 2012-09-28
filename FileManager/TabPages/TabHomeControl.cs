@@ -668,7 +668,7 @@ namespace FileManager.TabPages
                     });
 
                     foreach (Library library in BusinessClasses.LibraryManager.Instance.LibraryCollection)
-                        library.ProceedPresentationProperties();
+                        library.ProcessPresentationProperties();
 
                     FormMain.Instance.Invoke((MethodInvoker)delegate()
                     {

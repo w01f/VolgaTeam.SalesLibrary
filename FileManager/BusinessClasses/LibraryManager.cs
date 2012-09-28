@@ -171,6 +171,23 @@ namespace FileManager.BusinessClasses
                                                         case FileTypes.LineBreak:
                                                             break;
                                                     }
+                                                    if (file.AttachmentProperties.Enable)
+                                                    {
+                                                        foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+                                                        {
+                                                            if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                                                            {
+                                                                if (attachment.IsSourceAvailable)
+                                                                {
+                                                                    filesWhiteList.Add(attachment.DestinationPath);
+                                                                    if (attachment.UniversalPreviewContainer != null && !string.IsNullOrEmpty(attachment.UniversalPreviewContainer.ContainerPath))
+                                                                        AddFolderForSync(new DirectoryInfo(attachment.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                                                }
+                                                            }
+                                                            else
+                                                                break;
+                                                        }
+                                                    }
                                                 }
                                                 else
                                                     break;
@@ -471,6 +488,23 @@ namespace FileManager.BusinessClasses
                                         case FileTypes.LineBreak:
                                             break;
                                     }
+                                    if (file.AttachmentProperties.Enable)
+                                    {
+                                        foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+                                        {
+                                            if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                                            {
+                                                if (attachment.IsSourceAvailable)
+                                                {
+                                                    filesWhiteList.Add(attachment.DestinationPath);
+                                                    if (attachment.UniversalPreviewContainer != null && !string.IsNullOrEmpty(attachment.UniversalPreviewContainer.ContainerPath))
+                                                        AddFolderForSync(new DirectoryInfo(attachment.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                                }
+                                            }
+                                            else
+                                                break;
+                                        }
+                                    }
                                 }
                                 else
                                     break;
@@ -482,10 +516,11 @@ namespace FileManager.BusinessClasses
                             break;
                     }
                 }
+
+                #region Sync Primary Root
                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                     syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
 
-                #region Sync Primary Root
                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                 {
                     sourceSubFolders.Clear();
@@ -564,6 +599,7 @@ namespace FileManager.BusinessClasses
                     }
                 }
                 #endregion
+
                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                 {
                     foreach (DirectoryInfo subFolder in destinationFolder.GetDirectories().Where(x => !destinationSubFolders.Select(y => y.FullName).Contains(x.FullName) && !x.FullName.Contains("_gsdata_")))

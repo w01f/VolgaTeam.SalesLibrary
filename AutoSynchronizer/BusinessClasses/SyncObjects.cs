@@ -232,6 +232,23 @@ namespace AutoSynchronizer.BusinessClasses
                                                     case FileTypes.LineBreak:
                                                         break;
                                                 }
+                                                if (file.AttachmentProperties.Enable)
+                                                {
+                                                    foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+                                                    {
+                                                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                                                        {
+                                                            if (attachment.IsSourceAvailable)
+                                                            {
+                                                                filesWhiteList.Add(attachment.DestinationPath);
+                                                                if (attachment.UniversalPreviewContainer != null && !string.IsNullOrEmpty(attachment.UniversalPreviewContainer.ContainerPath))
+                                                                    AddFolderForSync(new DirectoryInfo(attachment.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                                            }
+                                                        }
+                                                        else
+                                                            break;
+                                                    }
+                                                }
                                             }
                                             else
                                                 break;
@@ -530,6 +547,23 @@ namespace AutoSynchronizer.BusinessClasses
                                             break;
                                         case FileTypes.LineBreak:
                                             break;
+                                    }
+                                    if (file.AttachmentProperties.Enable)
+                                    {
+                                        foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+                                        {
+                                            if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                                            {
+                                                if (attachment.IsSourceAvailable)
+                                                {
+                                                    filesWhiteList.Add(attachment.DestinationPath);
+                                                    if (attachment.UniversalPreviewContainer != null && !string.IsNullOrEmpty(attachment.UniversalPreviewContainer.ContainerPath))
+                                                        AddFolderForSync(new DirectoryInfo(attachment.UniversalPreviewContainer.ContainerPath), filesWhiteList);
+                                                }
+                                            }
+                                            else
+                                                break;
+                                        }
                                     }
                                 }
                                 else

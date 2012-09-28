@@ -783,6 +783,15 @@ namespace FileManager.PresentationClasses.WallBin
                         _formLinkProperties.AddDate = file.AddDate;
                         _formLinkProperties.ExpirationDateOptions = file.ExpirationDateOptions;
                         _formLinkProperties.SearchTags = file.SearchTags;
+
+                        _formLinkProperties.Keywords.Clear();
+                        _formLinkProperties.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x)));
+
+                        _formLinkProperties.FileCard = file.FileCard;
+                        _formLinkProperties.FileCardImportantInfo.Clear();
+                        _formLinkProperties.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
+
+                        _formLinkProperties.AttachmentProperties = file.AttachmentProperties;
                     }
                     else
                     {
@@ -800,7 +809,17 @@ namespace FileManager.PresentationClasses.WallBin
                             file.IsBold = _formLinkProperties.IsBold;
                             file.Note = _formLinkProperties.Note;
                             file.SearchTags = _formLinkProperties.SearchTags;
+
+                            file.CustomKeywords.Tags.Clear();
+                            file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
+
                             file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
+
+                            file.FileCard = _formLinkProperties.FileCard;
+                            file.FileCard.Notes.Clear();
+                            file.FileCard.Notes.AddRange(_formLinkProperties.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
+
+                            file.AttachmentProperties = _formLinkProperties.AttachmentProperties;
                         }
                         else
                         {

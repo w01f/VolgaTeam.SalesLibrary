@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
@@ -57,19 +58,37 @@ namespace FileManager.ToolForms.WallBin
                         form.CaptionName = file.PropertiesName;
                         form.Note = file.Note;
                         form.IsBold = file.IsBold;
+                        form.EnableWidget = file.EnableWidget;
+                        form.Widget = file.EnableWidget ? file.Widget : null;
+                        form.BannerProperties = file.BannerProperties;
                         form.AddDate = file.AddDate;
                         form.ExpirationDateOptions = file.ExpirationDateOptions;
                         form.xtraTabPageNotes.PageVisible = false;
                         form.xtraTabPageSearchTags.PageVisible = false;
                         form.SearchTags = file.SearchTags;
+                        form.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x)));
+                        form.FileCard = file.FileCard;
+                        form.FileCardImportantInfo.Clear();
+                        form.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
+                        form.AttachmentProperties = file.AttachmentProperties;
                         form.StartPosition = FormStartPosition.CenterScreen;
 
                         if (form.ShowDialog() == DialogResult.OK)
                         {
+                            file.LastChanged = DateTime.Now;
+                            file.Widget = form.EnableWidget ? form.Widget : null;
+                            file.EnableWidget = form.EnableWidget;
+                            file.BannerProperties = form.BannerProperties;
                             file.Note = form.Note;
                             file.IsBold = form.IsBold;
                             file.SearchTags = form.SearchTags;
                             file.ExpirationDateOptions = form.ExpirationDateOptions;
+                            file.FileCard = form.FileCard;
+                            file.FileCard.Notes.Clear();
+                            file.FileCard.Notes.AddRange(form.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
+                            file.AttachmentProperties = form.AttachmentProperties;
+                            file.CustomKeywords.Tags.Clear();
+                            file.CustomKeywords.Tags.AddRange(form.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
                         }
                     }
                 }

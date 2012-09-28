@@ -91,7 +91,6 @@
     <Compile Include="InteropClasses\OutlookHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ToolClasses\SyncManager.cs" />
     <EmbeddedResource Include="FormHidden.resx">
       <DependentUpon>FormHidden.cs</DependentUpon>
     </EmbeddedResource>

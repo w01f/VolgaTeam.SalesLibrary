@@ -1013,7 +1013,7 @@
             // 
             // buttonEditIPadSite
             // 
-            this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 31);
+            this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 30);
             this.buttonEditIPadSite.Name = "buttonEditIPadSite";
             this.buttonEditIPadSite.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
@@ -1027,7 +1027,7 @@
             // 
             // buttonEditIPadLogin
             // 
-            this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 73);
+            this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 72);
             this.buttonEditIPadLogin.Name = "buttonEditIPadLogin";
             this.buttonEditIPadLogin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
@@ -1038,7 +1038,7 @@
             // 
             // buttonEditIPadPassword
             // 
-            this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 73);
+            this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 72);
             this.buttonEditIPadPassword.Name = "buttonEditIPadPassword";
             this.buttonEditIPadPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
@@ -1183,7 +1183,7 @@
             // 
             // buttonEditIPadLocation
             // 
-            this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 61);
+            this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 60);
             this.buttonEditIPadLocation.Name = "buttonEditIPadLocation";
             this.buttonEditIPadLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
