@@ -1,12 +1,37 @@
 AddDefaultCharset UTF-8
 
+AddType text/x-component .htc
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/mp4 .mov
+AddType video/webm .webm
+
+<FilesMatch mp4>
+Satisfy any
+order allow,deny
+allow from all
+</FilesMatch>
+
 RewriteEngine on
 
 # if a directory or a file exists, use it directly
+# otherwise forward it to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# otherwise forward it to index.php
 RewriteRule . index.php
 
-AddType text/x-component .htc
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?localhost [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?localhost.*$ [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?isalesdepot.com [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?isalesdepot.com.*$ [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?wplgipad.com [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?wplgipad.com.*$ [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?raycomsales.com [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?raycomsales.com.*$ [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?wuddupdog.com [NC] 
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?wuddupdog.com.*$ [NC] 
+RewriteRule \.(gif|jpg|jpeg|png|pdf|ppt|pptx|doc|docx|xls|xlsx|ogv|wmv)$ - [F]
+
+
+
+
