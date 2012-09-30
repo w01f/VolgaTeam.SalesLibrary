@@ -214,14 +214,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                             link.fileExtension = string.Empty;
                         }
                         link.note = libraryFile.Note;
+                        link.originalFormat = libraryFile.Format;
                         link.isBold = libraryFile.IsBold;
                         link.order = libraryFile.Order;
                         link.type = (int)libraryFile.Type;
                         link.enableWidget = libraryFile.EnableWidget;
                         link.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
-                        link.tags = string.Empty;
+                        if (libraryFile.CustomKeywords.Tags.Count > 0)
+                            link.tags = string.Join(" ", libraryFile.CustomKeywords.Tags.ToArray());
                         link.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
                         link.dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
+
+                        IPreviewContainer previewContainer = this.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+                        if (previewContainer != null)
+                        {
+                            link.previewId = previewContainer.Identifier;
+                            string[] txtLinks = previewContainer.GetPreviewLinks("txt");
+                            if (txtLinks != null && txtLinks.Length > 0)
+                                link.contentPath = txtLinks[0];
+                        }
 
                         #region Line Break
                         if (libraryFile.LineBreakProperties != null)
@@ -258,55 +269,71 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         link.banner.dateModify = libraryFile.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
                         #endregion
 
-                        #region Preview Links
-                        //if (libraryFile.UniversalPreviewContainer != null)
-                        //{
-                        //    link.universalPreview = new ContentManagmentService.UniversalPreviewContainer();
-                        //    link.universalPreview.linkId = libraryFile.Identifier.ToString();
-                        //    link.universalPreview.libraryId = this.Parent.Identifier.ToString();
+                        #region Categories
+                        List<ContentManagmentService.LinkCategory> categories = new List<ContentManagmentService.LinkCategory>();
+                        foreach (SearchGroup searchGroup in libraryFile.SearchTags.SearchGroups)
+                            foreach (string tag in searchGroup.Tags)
+                            {
+                                ContentManagmentService.LinkCategory category = new ContentManagmentService.LinkCategory();
+                                category.libraryId = this.Parent.Identifier.ToString();
+                                category.linkId = libraryFile.Identifier.ToString();
+                                category.category = searchGroup.Name;
+                                category.tag = tag;
+                                categories.Add(category);
+                            }
+                        if (categories.Count > 0)
+                            link.categories = categories.ToArray();
+                        #endregion
 
-                        //    Size thumbSize = libraryFile.UniversalPreviewContainer.GetThumbSize();
-                        //    link.universalPreview.thumbsWidth = thumbSize.Width;
-                        //    link.universalPreview.thumbsHeight = thumbSize.Height;
+                        #region File Card
+                        link.enableFileCard = libraryFile.FileCard.Enable;
+                        link.fileCard = new ContentManagmentService.FileCard();
+                        link.fileCard.id = libraryFile.FileCard.Identifier.ToString();
+                        link.fileCard.libraryId = this.Parent.Identifier.ToString();
+                        link.fileCard.advertiser = libraryFile.FileCard.Advertiser;
+                        link.fileCard.dateSold = libraryFile.FileCard.DateSold.HasValue ? libraryFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
+                        link.fileCard.broadcastClosed = libraryFile.FileCard.BroadcastClosed.HasValue ? (float)libraryFile.FileCard.BroadcastClosed.Value : 0;
+                        link.fileCard.digitalClosed = libraryFile.FileCard.DigitalClosed.HasValue ? (float)libraryFile.FileCard.DigitalClosed.Value : 0;
+                        link.fileCard.publishingClosed = libraryFile.FileCard.PublishingClosed.HasValue ? (float)libraryFile.FileCard.PublishingClosed.Value : 0;
+                        link.fileCard.salesName = libraryFile.FileCard.SalesName;
+                        link.fileCard.salesEmail = libraryFile.FileCard.SalesEmail;
+                        link.fileCard.salesPhone = libraryFile.FileCard.SalesPhone;
+                        link.fileCard.salesStation = libraryFile.FileCard.SalesStation;
+                        if (libraryFile.FileCard.Notes.Count > 0)
+                            link.fileCard.notes = libraryFile.FileCard.Notes.ToArray();
+                        #endregion
 
-                        //    string[] pngLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("png");
-                        //    if (pngLinks != null && pngLinks.Length > 0)
-                        //        link.universalPreview.pngLinks = pngLinks;
+                        #region Attachments
+                        link.enableAttachments = libraryFile.AttachmentProperties.Enable;
+                        List<ContentManagmentService.Attachment> attachments = new List<ContentManagmentService.Attachment>();
+                        foreach (LinkAttachment linkAttachment in libraryFile.AttachmentProperties.FilesAttachments)
+                        {
+                            ContentManagmentService.Attachment attachment = new ContentManagmentService.Attachment();
+                            attachment.linkId = libraryFile.Identifier.ToString();
+                            attachment.libraryId = this.Parent.Identifier.ToString();
+                            attachment.name = linkAttachment.Name;
+                            attachment.originalFormat = linkAttachment.Format;
+                            attachment.path = linkAttachment.DestinationRelativePath;
 
-                        //    string[] jpegLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("jpg");
-                        //    if (jpegLinks != null && jpegLinks.Length > 0)
-                        //        link.universalPreview.jpegLinks = jpegLinks;
+                            previewContainer = this.Parent.GetPreviewContainer(linkAttachment.OriginalPath);
+                            if (previewContainer != null)
+                                attachment.previewId = previewContainer.Identifier;
 
-                        //    string[] pdfLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("pdf");
-                        //    if (pdfLinks != null && pdfLinks.Length > 0)
-                        //        link.universalPreview.pdfLinks = pdfLinks;
+                            attachments.Add(attachment);
+                        }
+                        foreach (LinkAttachment linkAttachment in libraryFile.AttachmentProperties.WebAttachments)
+                        {
+                            ContentManagmentService.Attachment attachment = new ContentManagmentService.Attachment();
+                            attachment.linkId = libraryFile.Identifier.ToString();
+                            attachment.libraryId = this.Parent.Identifier.ToString();
+                            attachment.name = linkAttachment.Name;
+                            attachment.originalFormat = "url";
+                            attachment.path = linkAttachment.DestinationRelativePath;
 
-                        //    string[] mp4Links = libraryFile.UniversalPreviewContainer.GetPreviewLinks("mp4");
-                        //    if (mp4Links != null && mp4Links.Length > 0)
-                        //        link.universalPreview.mp4Links = mp4Links;
-
-                        //    string[] ogvLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("ogv");
-                        //    if (ogvLinks != null && ogvLinks.Length > 0)
-                        //        link.universalPreview.ogvLinks = ogvLinks;
-
-                        //    string[] oldOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("old office");
-                        //    if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
-                        //        link.universalPreview.oldOfficeFormatLinks = oldOfficeLinks;
-
-                        //    string[] newOfficeLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("new office");
-                        //    if (newOfficeLinks != null && newOfficeLinks.Length > 0)
-                        //        link.universalPreview.newOfficeFormatLinks = newOfficeLinks;
-
-                        //    string[] txtLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("txt");
-                        //    if (txtLinks != null && txtLinks.Length > 0)
-                        //        link.universalPreview.txtLinks = txtLinks;
-
-                        //    string[] thumbsLinks = libraryFile.UniversalPreviewContainer.GetPreviewLinks("thumbs");
-                        //    if (thumbsLinks != null && thumbsLinks.Length > 0)
-                        //    {
-                        //        link.universalPreview.thumbsLinks = thumbsLinks;
-                        //    }
-                        //}
+                            attachments.Add(attachment);
+                        }
+                        if (attachments.Count > 0)
+                            link.attachments = attachments.ToArray();
                         #endregion
 
                         links.Add(link);
@@ -334,6 +361,53 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 autoWidgets.Add(autoWidget);
             }
             library.autoWidgets = autoWidgets.ToArray();
+
+            List<ContentManagmentService.UniversalPreviewContainer> previewContainers = new List<ContentManagmentService.UniversalPreviewContainer>();
+            foreach (IPreviewContainer libraryPreviewContainer in this.Parent.PreviewContainers)
+            {
+                ContentManagmentService.UniversalPreviewContainer previewContainer = new ContentManagmentService.UniversalPreviewContainer();
+                previewContainer.id = libraryPreviewContainer.Identifier;
+                previewContainer.libraryId = this.Parent.Identifier.ToString();
+
+                Size thumbSize = libraryPreviewContainer.GetThumbSize();
+                previewContainer.thumbsWidth = thumbSize.Width;
+                previewContainer.thumbsHeight = thumbSize.Height;
+
+                string[] pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
+                if (pngLinks != null && pngLinks.Length > 0)
+                    previewContainer.pngLinks = pngLinks;
+
+                string[] jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
+                if (jpegLinks != null && jpegLinks.Length > 0)
+                    previewContainer.jpegLinks = jpegLinks;
+
+                string[] pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
+                if (pdfLinks != null && pdfLinks.Length > 0)
+                    previewContainer.pdfLinks = pdfLinks;
+
+                string[] mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
+                if (mp4Links != null && mp4Links.Length > 0)
+                    previewContainer.mp4Links = mp4Links;
+
+                string[] ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
+                if (ogvLinks != null && ogvLinks.Length > 0)
+                    previewContainer.ogvLinks = ogvLinks;
+
+                string[] oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
+                if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
+                    previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
+
+                string[] newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
+                if (newOfficeLinks != null && newOfficeLinks.Length > 0)
+                    previewContainer.newOfficeFormatLinks = newOfficeLinks;
+
+                string[] thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
+                if (thumbsLinks != null && thumbsLinks.Length > 0)
+                    previewContainer.thumbsLinks = thumbsLinks;
+
+                previewContainers.Add(previewContainer);
+            }
+            library.previewContainers = previewContainers.ToArray();
 
             return library;
         }

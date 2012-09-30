@@ -27,8 +27,11 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ContentControllerBinding", Namespace="urn:ContentControllerwsdl")]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Attachment))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryLink))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryFolder))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryPage))]
@@ -140,6 +143,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private AutoWidget[] autoWidgetsField;
         
+        private UniversalPreviewContainer[] previewContainersField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -177,6 +182,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.autoWidgetsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UniversalPreviewContainer[] previewContainers {
+            get {
+                return this.previewContainersField;
+            }
+            set {
+                this.previewContainersField = value;
             }
         }
     }
@@ -598,6 +613,159 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class UniversalPreviewContainer {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string[] pngLinksField;
+        
+        private string[] jpegLinksField;
+        
+        private string[] pdfLinksField;
+        
+        private string[] mp4LinksField;
+        
+        private string[] ogvLinksField;
+        
+        private string[] oldOfficeFormatLinksField;
+        
+        private string[] newOfficeFormatLinksField;
+        
+        private string[] thumbsLinksField;
+        
+        private int thumbsWidthField;
+        
+        private int thumbsHeightField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] pngLinks {
+            get {
+                return this.pngLinksField;
+            }
+            set {
+                this.pngLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] jpegLinks {
+            get {
+                return this.jpegLinksField;
+            }
+            set {
+                this.jpegLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] pdfLinks {
+            get {
+                return this.pdfLinksField;
+            }
+            set {
+                this.pdfLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] mp4Links {
+            get {
+                return this.mp4LinksField;
+            }
+            set {
+                this.mp4LinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] ogvLinks {
+            get {
+                return this.ogvLinksField;
+            }
+            set {
+                this.ogvLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] oldOfficeFormatLinks {
+            get {
+                return this.oldOfficeFormatLinksField;
+            }
+            set {
+                this.oldOfficeFormatLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] newOfficeFormatLinks {
+            get {
+                return this.newOfficeFormatLinksField;
+            }
+            set {
+                this.newOfficeFormatLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsLinks {
+            get {
+                return this.thumbsLinksField;
+            }
+            set {
+                this.thumbsLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int thumbsWidth {
+            get {
+                return this.thumbsWidthField;
+            }
+            set {
+                this.thumbsWidthField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int thumbsHeight {
+            get {
+                return this.thumbsHeightField;
+            }
+            set {
+                this.thumbsHeightField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
     public partial class AutoWidget {
         
         private string libraryIdField;
@@ -937,33 +1105,19 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
-    public partial class UniversalPreviewContainer {
+    public partial class Attachment {
         
         private string linkIdField;
         
         private string libraryIdField;
         
-        private string[] pngLinksField;
+        private string nameField;
         
-        private string[] jpegLinksField;
+        private string pathField;
         
-        private string[] pdfLinksField;
+        private string originalFormatField;
         
-        private string[] mp4LinksField;
-        
-        private string[] ogvLinksField;
-        
-        private string[] oldOfficeFormatLinksField;
-        
-        private string[] newOfficeFormatLinksField;
-        
-        private string[] thumbsLinksField;
-        
-        private string[] txtLinksField;
-        
-        private int thumbsWidthField;
-        
-        private int thumbsHeightField;
+        private string previewIdField;
         
         /// <remarks/>
         public string linkId {
@@ -986,112 +1140,252 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         }
         
         /// <remarks/>
-        public string[] pngLinks {
+        public string name {
             get {
-                return this.pngLinksField;
+                return this.nameField;
             }
             set {
-                this.pngLinksField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
-        public string[] jpegLinks {
+        public string path {
             get {
-                return this.jpegLinksField;
+                return this.pathField;
             }
             set {
-                this.jpegLinksField = value;
+                this.pathField = value;
             }
         }
         
         /// <remarks/>
-        public string[] pdfLinks {
+        public string originalFormat {
             get {
-                return this.pdfLinksField;
+                return this.originalFormatField;
             }
             set {
-                this.pdfLinksField = value;
+                this.originalFormatField = value;
             }
         }
         
         /// <remarks/>
-        public string[] mp4Links {
+        public string previewId {
             get {
-                return this.mp4LinksField;
+                return this.previewIdField;
             }
             set {
-                this.mp4LinksField = value;
+                this.previewIdField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class LinkCategory {
+        
+        private string linkIdField;
+        
+        private string libraryIdField;
+        
+        private string categoryField;
+        
+        private string tagField;
+        
+        /// <remarks/>
+        public string linkId {
+            get {
+                return this.linkIdField;
+            }
+            set {
+                this.linkIdField = value;
             }
         }
         
         /// <remarks/>
-        public string[] ogvLinks {
+        public string libraryId {
             get {
-                return this.ogvLinksField;
+                return this.libraryIdField;
             }
             set {
-                this.ogvLinksField = value;
+                this.libraryIdField = value;
             }
         }
         
         /// <remarks/>
-        public string[] oldOfficeFormatLinks {
+        public string category {
             get {
-                return this.oldOfficeFormatLinksField;
+                return this.categoryField;
             }
             set {
-                this.oldOfficeFormatLinksField = value;
+                this.categoryField = value;
             }
         }
         
         /// <remarks/>
-        public string[] newOfficeFormatLinks {
+        public string tag {
             get {
-                return this.newOfficeFormatLinksField;
+                return this.tagField;
             }
             set {
-                this.newOfficeFormatLinksField = value;
+                this.tagField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class FileCard {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string advertiserField;
+        
+        private string dateSoldField;
+        
+        private float broadcastClosedField;
+        
+        private float digitalClosedField;
+        
+        private float publishingClosedField;
+        
+        private string salesNameField;
+        
+        private string salesEmailField;
+        
+        private string salesPhoneField;
+        
+        private string salesStationField;
+        
+        private string[] notesField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
             }
         }
         
         /// <remarks/>
-        public string[] thumbsLinks {
+        public string libraryId {
             get {
-                return this.thumbsLinksField;
+                return this.libraryIdField;
             }
             set {
-                this.thumbsLinksField = value;
+                this.libraryIdField = value;
             }
         }
         
         /// <remarks/>
-        public string[] txtLinks {
+        public string advertiser {
             get {
-                return this.txtLinksField;
+                return this.advertiserField;
             }
             set {
-                this.txtLinksField = value;
+                this.advertiserField = value;
             }
         }
         
         /// <remarks/>
-        public int thumbsWidth {
+        public string dateSold {
             get {
-                return this.thumbsWidthField;
+                return this.dateSoldField;
             }
             set {
-                this.thumbsWidthField = value;
+                this.dateSoldField = value;
             }
         }
         
         /// <remarks/>
-        public int thumbsHeight {
+        public float broadcastClosed {
             get {
-                return this.thumbsHeightField;
+                return this.broadcastClosedField;
             }
             set {
-                this.thumbsHeightField = value;
+                this.broadcastClosedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public float digitalClosed {
+            get {
+                return this.digitalClosedField;
+            }
+            set {
+                this.digitalClosedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public float publishingClosed {
+            get {
+                return this.publishingClosedField;
+            }
+            set {
+                this.publishingClosedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string salesName {
+            get {
+                return this.salesNameField;
+            }
+            set {
+                this.salesNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string salesEmail {
+            get {
+                return this.salesEmailField;
+            }
+            set {
+                this.salesEmailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string salesPhone {
+            get {
+                return this.salesPhoneField;
+            }
+            set {
+                this.salesPhoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string salesStation {
+            get {
+                return this.salesStationField;
+            }
+            set {
+                this.salesStationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] notes {
+            get {
+                return this.notesField;
+            }
+            set {
+                this.notesField = value;
             }
         }
     }
@@ -1201,6 +1495,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string fileDateField;
         
+        private string originalFormatField;
+        
         private string noteField;
         
         private bool isBoldField;
@@ -1217,13 +1513,25 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private Banner bannerField;
         
-        private UniversalPreviewContainer universalPreviewField;
+        private bool enableFileCardField;
+        
+        private FileCard fileCardField;
+        
+        private string previewIdField;
+        
+        private LinkCategory[] categoriesField;
         
         private string tagsField;
         
         private string dateAddField;
         
         private string dateModifyField;
+        
+        private string contentPathField;
+        
+        private bool enableAttachmentsField;
+        
+        private Attachment[] attachmentsField;
         
         /// <remarks/>
         public string id {
@@ -1302,6 +1610,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.fileDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string originalFormat {
+            get {
+                return this.originalFormatField;
+            }
+            set {
+                this.originalFormatField = value;
             }
         }
         
@@ -1386,12 +1704,42 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         }
         
         /// <remarks/>
-        public UniversalPreviewContainer universalPreview {
+        public bool enableFileCard {
             get {
-                return this.universalPreviewField;
+                return this.enableFileCardField;
             }
             set {
-                this.universalPreviewField = value;
+                this.enableFileCardField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public FileCard fileCard {
+            get {
+                return this.fileCardField;
+            }
+            set {
+                this.fileCardField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string previewId {
+            get {
+                return this.previewIdField;
+            }
+            set {
+                this.previewIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LinkCategory[] categories {
+            get {
+                return this.categoriesField;
+            }
+            set {
+                this.categoriesField = value;
             }
         }
         
@@ -1422,6 +1770,36 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string contentPath {
+            get {
+                return this.contentPathField;
+            }
+            set {
+                this.contentPathField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool enableAttachments {
+            get {
+                return this.enableAttachmentsField;
+            }
+            set {
+                this.enableAttachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Attachment[] attachments {
+            get {
+                return this.attachmentsField;
+            }
+            set {
+                this.attachmentsField = value;
             }
         }
     }

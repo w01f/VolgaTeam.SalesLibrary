@@ -583,8 +583,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
             {
                 DirectoryInfo attachmentRootFolder = new DirectoryInfo(Path.Combine(this.Folder.FullName, Constants.AttachmentsRootFolderName));
-                foreach (DirectoryInfo subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
-                    ToolClasses.SyncManager.DeleteFolder(subFolder);
+                if (attachmentRootFolder.Exists)
+                    foreach (DirectoryInfo subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
+                        ToolClasses.SyncManager.DeleteFolder(subFolder);
             }
         }
 

@@ -8,6 +8,7 @@
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="pages" type="tns:LibraryPageArray" />
           <xsd:element name="autoWidgets" type="tns:AutoWidgetArray" />
+          <xsd:element name="previewContainers" type="tns:UniversalPreviewContainerArray" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryPageArray">
@@ -99,6 +100,7 @@
           <xsd:element name="fileName" type="xsd:string" />
           <xsd:element name="fileExtension" type="xsd:string" />
           <xsd:element name="fileDate" type="xsd:string" />
+          <xsd:element name="originalFormat" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="isBold" type="xsd:boolean" />
           <xsd:element name="order" type="xsd:int" />
@@ -107,10 +109,16 @@
           <xsd:element name="enableWidget" type="xsd:boolean" />
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
-          <xsd:element name="universalPreview" type="tns:UniversalPreviewContainer" />
+          <xsd:element name="enableFileCard" type="xsd:boolean" />
+          <xsd:element name="fileCard" type="tns:FileCard" />
+          <xsd:element name="previewId" type="xsd:string" />
+          <xsd:element name="categories" type="tns:LinkCategoryArray" />
           <xsd:element name="tags" type="xsd:string" />
           <xsd:element name="dateAdd" type="xsd:string" />
           <xsd:element name="dateModify" type="xsd:string" />
+          <xsd:element name="contentPath" type="xsd:string" />
+          <xsd:element name="enableAttachments" type="xsd:boolean" />
+          <xsd:element name="attachments" type="tns:AttachmentArray" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -123,21 +131,20 @@
           <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="UniversalPreviewContainer">
+      <xsd:complexType name="FileCard">
         <xsd:all>
-          <xsd:element name="linkId" type="xsd:string" />
+          <xsd:element name="id" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
-          <xsd:element name="pngLinks" type="tns:stringArray" />
-          <xsd:element name="jpegLinks" type="tns:stringArray" />
-          <xsd:element name="pdfLinks" type="tns:stringArray" />
-          <xsd:element name="mp4Links" type="tns:stringArray" />
-          <xsd:element name="ogvLinks" type="tns:stringArray" />
-          <xsd:element name="oldOfficeFormatLinks" type="tns:stringArray" />
-          <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsLinks" type="tns:stringArray" />
-          <xsd:element name="txtLinks" type="tns:stringArray" />
-          <xsd:element name="thumbsWidth" type="xsd:int" />
-          <xsd:element name="thumbsHeight" type="xsd:int" />
+          <xsd:element name="advertiser" type="xsd:string" />
+          <xsd:element name="dateSold" type="xsd:string" />
+          <xsd:element name="broadcastClosed" type="xsd:float" />
+          <xsd:element name="digitalClosed" type="xsd:float" />
+          <xsd:element name="publishingClosed" type="xsd:float" />
+          <xsd:element name="salesName" type="xsd:string" />
+          <xsd:element name="salesEmail" type="xsd:string" />
+          <xsd:element name="salesPhone" type="xsd:string" />
+          <xsd:element name="salesStation" type="xsd:string" />
+          <xsd:element name="notes" type="tns:stringArray" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="stringArray">
@@ -146,6 +153,38 @@
             <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkCategoryArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LinkCategory[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkCategory">
+        <xsd:all>
+          <xsd:element name="linkId" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="category" type="xsd:string" />
+          <xsd:element name="tag" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="AttachmentArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:Attachment[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Attachment">
+        <xsd:all>
+          <xsd:element name="linkId" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="path" type="xsd:string" />
+          <xsd:element name="originalFormat" type="xsd:string" />
+          <xsd:element name="previewId" type="xsd:string" />
+        </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="ColumnArray">
         <xsd:complexContent mixed="false">
@@ -183,6 +222,29 @@
           <xsd:element name="libraryId" type="xsd:string" />
           <xsd:element name="extension" type="xsd:string" />
           <xsd:element name="widget" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="UniversalPreviewContainerArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UniversalPreviewContainer[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UniversalPreviewContainer">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="pngLinks" type="tns:stringArray" />
+          <xsd:element name="jpegLinks" type="tns:stringArray" />
+          <xsd:element name="pdfLinks" type="tns:stringArray" />
+          <xsd:element name="mp4Links" type="tns:stringArray" />
+          <xsd:element name="ogvLinks" type="tns:stringArray" />
+          <xsd:element name="oldOfficeFormatLinks" type="tns:stringArray" />
+          <xsd:element name="newOfficeFormatLinks" type="tns:stringArray" />
+          <xsd:element name="thumbsLinks" type="tns:stringArray" />
+          <xsd:element name="thumbsWidth" type="xsd:int" />
+          <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
     </xsd:schema>

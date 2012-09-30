@@ -32,7 +32,7 @@ namespace FileManager.PresentationClasses.IPad
         {
             FormMain.Instance.ribbonBarIPadLocation.Enabled = this.ParentDecorator.Library.IPadManager.Enabled;
             FormMain.Instance.ribbonBarIPadSite.Enabled = this.ParentDecorator.Library.IPadManager.Enabled;
-            xtraTabControl.Enabled = !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
+            xtraTabControl.Enabled = this.ParentDecorator.Library.IPadManager.Enabled && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
             FormMain.Instance.buttonItemIPadVideoConvert.Enabled = xtraTabControl.Enabled;
             FormMain.Instance.buttonItemIPadSyncFiles.Enabled = xtraTabControl.Enabled;
         }

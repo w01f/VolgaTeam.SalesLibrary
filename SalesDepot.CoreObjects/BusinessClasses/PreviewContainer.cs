@@ -125,7 +125,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         {
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Identifier>" + this.Identifier + @"</Identifier>");
-            result.AppendLine(@"<OriginalPath>" + this.OriginalPath + @"</OriginalPath>");
+            result.AppendLine(@"<OriginalPath>" + this.OriginalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</OriginalPath>");
             return result.ToString();
         }
 

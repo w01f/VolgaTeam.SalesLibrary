@@ -27,6 +27,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             }
         }
 
+        public string DestinationRelativePath
+        {
+            get
+            {
+                switch (this.Type)
+                {
+                    case AttachmentType.File:
+                        return Path.Combine(Constants.AttachmentsRootFolderName, this.Identifier.ToString(), Path.GetFileName(this.OriginalPath));
+                    default:
+                        return this.OriginalPath;
+                }
+            }
+        }
+
         public string Name
         {
             get
