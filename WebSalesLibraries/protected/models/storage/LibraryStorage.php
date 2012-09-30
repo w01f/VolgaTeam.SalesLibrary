@@ -41,6 +41,9 @@ class LibraryStorage extends CActiveRecord
             foreach ($library['autoWidgets'] as $autoWidget)
                 AutoWidgetStorage::updateData($autoWidget);
 
+            foreach ($library['previewContainers'] as $previewContainer)
+                PreviewStorage::updateData($previewContainer);
+
             foreach ($library['pages'] as $page)
             {
                 LibraryPageStorage::updateData($page, $libraryRootPath);
@@ -61,8 +64,12 @@ class LibraryStorage extends CActiveRecord
     public static function clearData($libraryId)
     {
         AutoWidgetStorage::clearData($libraryId);
+        PreviewStorage::clearData($libraryId);
         LineBreakStorage::clearData($libraryId);
         BannerStorage::clearData($libraryId);
+        FileCardStorage::clearData($libraryId);
+        AttachmentStorage::clearData($libraryId);
+        LinkCategoryStorage::clearData($libraryId);
         ColumnStorage::clearData($libraryId);
     }
 

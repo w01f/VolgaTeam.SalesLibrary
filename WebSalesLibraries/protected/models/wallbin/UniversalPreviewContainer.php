@@ -6,7 +6,7 @@ class UniversalPreviewContainer
      * @var string
      * @soap
      */
-    public $linkId;
+    public $id;
     /**
      * @var string
      * @soap
@@ -53,32 +53,27 @@ class UniversalPreviewContainer
      */
     public $thumbsLinks;
     /**
-     * @var string[]
-     * @soap
-     */
-    public $txtLinks;
-    /**
      * @var int
      * @soap
-     */    
+     */
     public $thumbsWidth;
     /**
      * @var int
      * @soap
      */
     public $thumbsHeight;
-    public function __construct($libraryLink)
+    public function __construct($library)
     {
-        $this->parent = $libraryLink;
+        $this->parent = $library;
     }
 
     public function load($previewRecords)
     {
         foreach ($previewRecords as $record)
         {
-            $this->linkId = $record->id_link;
+            $this->id = $record->id_container;
             $this->libraryId = $record->id_library;
-            $previewLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $record->relative_path));
+            $previewLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path));
             switch ($record->type)
             {
                 case 'png':

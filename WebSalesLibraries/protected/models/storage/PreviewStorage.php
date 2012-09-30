@@ -18,7 +18,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['pngLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'png';
                     $previewRecord->relative_path = $link;
@@ -30,7 +30,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['jpegLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'jpeg';
                     $previewRecord->relative_path = $link;
@@ -42,7 +42,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['pdfLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'pdf';
                     $previewRecord->relative_path = $link;
@@ -54,7 +54,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['mp4Links'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'mp4';
                     $previewRecord->relative_path = $link;
@@ -66,7 +66,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['ogvLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'ogv';
                     $previewRecord->relative_path = $link;
@@ -78,7 +78,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['oldOfficeFormatLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'old office';
                     $previewRecord->relative_path = $link;
@@ -90,7 +90,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['newOfficeFormatLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'new office';
                     $previewRecord->relative_path = $link;
@@ -102,7 +102,7 @@ class PreviewStorage extends CActiveRecord
                 foreach ($previewContainer['thumbsLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
-                    $previewRecord->id_link = $previewContainer['linkId'];
+                    $previewRecord->id_container = $previewContainer['id'];
                     $previewRecord->id_library = $previewContainer['libraryId'];
                     $previewRecord->type = 'thumbs';
                     $previewRecord->relative_path = $link;
@@ -114,21 +114,10 @@ class PreviewStorage extends CActiveRecord
                 }
     }
 
-    public static function clearByLibrary($libraryId)
+    public static function clearData($libraryId)
     {
         PreviewStorage::model()->deleteAll('id_library=?', array($libraryId));
     }
-
-    public static function clearByLink($linkId)
-    {
-        Yii::app()->db->createCommand()->delete('tbl_preview', "id_link = '" . $linkId . "'");
-    }
-
-    public static function clearByLinks($libraryId, $linkIds)
-    {
-        Yii::app()->db->createCommand()->delete('tbl_preview', "id_library = '" . $libraryId . "' and id_link not in ('" . implode("','", $linkIds) . "')");
-    }
-
 }
 
 ?>

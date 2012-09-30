@@ -39,6 +39,7 @@ class LinkStorage extends CActiveRecord
             $linkRecord->file_extension = $link['fileExtension'];
             $linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
             $linkRecord->note = $link['note'];
+            $linkRecord->format = $link['originalFormat'];
             $linkRecord->is_bold = $link['isBold'];
             $linkRecord->order = $link['order'];
             $linkRecord->type = $link['type'];
@@ -47,28 +48,23 @@ class LinkStorage extends CActiveRecord
             $linkRecord->tags = $link['tags'];
             $linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
             $linkRecord->date_modify = $linkDate;
+            $linkRecord->id_preview = $link['previewId'];
+            $linkRecord->enable_file_card = $link['enableFileCard'];
+            $linkRecord->enable_attachments = $link['enableAttachments'];
 
-            PreviewStorage::clearByLink($link['id']);
-            if (array_key_exists('universalPreview', $link))
-                if (isset($link['universalPreview']))
-                {
-                    PreviewStorage::updateData($link['universalPreview']);
+            $contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $link['contentPath']);
+            if (file_exists($contentPath) && is_file($contentPath))
+                $linkRecord->content = file_get_contents($contentPath);
 
-                    if (array_key_exists('txtLinks', $link['universalPreview']))
-                        if (isset($link['universalPreview']['txtLinks']))
-                            foreach ($link['universalPreview']['txtLinks'] as $contentLink)
-                            {
-                                $contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $contentLink);
-                                if (file_exists($contentPath))
-                                    $linkRecord->content = file_get_contents($contentPath);
-                                break;
-                            }
-                }
             echo 'Link ' . ($needToCreate ? 'created' : 'updated') . ': ' . $link['name'] . ' (' . $link['fileName'] . ')' . "\n";
         }
 
-        $linkRecord->id_banner = $link['banner']['id'];
-        BannerStorage::updateData($link['banner']);
+        if (array_key_exists('banner', $link))
+            if (isset($link['banner']))
+            {
+                $linkRecord->id_banner = $link['banner']['id'];
+                BannerStorage::updateData($link['banner']);
+            }
 
         if (array_key_exists('lineBreakProperties', $link))
             if (isset($link['lineBreakProperties']))
@@ -77,17 +73,30 @@ class LinkStorage extends CActiveRecord
                 LineBreakStorage::updateData($link['lineBreakProperties']);
             }
 
-        $linkRecord->save();
-    }
+        if (array_key_exists('fileCard', $link) && $link['enableFileCard'])
+            if (isset($link['fileCard']))
+            {
+                $linkRecord->id_file_card = $link['fileCard']['id'];
+                FileCardStorage::updateData($link['fileCard']);
+            }
 
-    public static function updateContent($linkId, $content)
-    {
-        $linkRecord = LinkStorage::model()->findByPk($linkId);
-        if ($linkRecord !== false)
-        {
-            $linkRecord->content = $content;
-            $linkRecord->save();
-        }
+        if (array_key_exists('attachments', $link))
+            if (isset($link['filesAttachments']))
+            {
+                FileCardStorage::updateData($link['fileCard']);
+            }
+
+        if (array_key_exists('attachments', $link))
+            if (isset($link['attachments']))
+                foreach ($link['attachments'] as $attachment)
+                    AttachmentStorage::updateData($attachment);
+
+        if (array_key_exists('categories', $link))
+            if (isset($link['categories']))
+                foreach ($link['categories'] as $category)
+                    LinkCategoryStorage::updateData($category);
+
+        $linkRecord->save();
     }
 
     public static function clearByLibrary($libraryId)
@@ -122,10 +131,26 @@ class LinkStorage extends CActiveRecord
                         break;
                 }
             }
+
+            $fileTypeCondition = '1 = 1';
+            if (isset($fileTypes))
+            {
+                $count = count($fileTypes);
+                switch ($count)
+                {
+                    case 0:
+                        $fileTypeCondition = '1 = 1';
+                        break;
+                    default:
+                        $fileTypeCondition = "format in ('" . implode("','", $fileTypes) . "')";
+                        break;
+                }
+            }
+
             $linkRecords = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('tbl_link')
-                ->where("(match(name,file_name,content) against('" . $contentCondition . "' in boolean mode)) and (" . $libraryCondition . ")")
+                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)) and (" . $libraryCondition . ") and (" . $fileTypeCondition . ")")
                 ->queryAll();
             if (isset($linkRecords))
             {
@@ -137,43 +162,43 @@ class LinkStorage extends CActiveRecord
                         $link['id'] = $linkRecord['id'];
                         $link['name'] = $linkRecord['name'];
                         $link['file_name'] = $linkRecord['file_name'];
-
+                        $link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
+                        
                         $library = $libraryManager->getLibraryById($linkRecord['id_library']);
                         if (isset($library))
-                        {
                             $link['library'] = $library->name;
-                            $linkObject = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-                            $linkObject->load(LinkStorage::getLinkById($link['id']));
-                            if (in_array($linkObject->originalFormat, $fileTypes))
-                            {
-                                switch ($linkObject->originalFormat)
-                                {
-                                    case 'ppt':
-                                        $link['file_type'] = 'images/search/search-powerpoint.png';
-                                        break;
-                                    case 'doc':
-                                        $link['file_type'] = 'images/search/search-word.png';
-                                        break;
-                                    case 'xls':
-                                        $link['file_type'] = 'images/search/search-excel.png';
-                                        break;
-                                    case 'pdf':
-                                        $link['file_type'] = 'images/search/search-pdf.png';
-                                        break;
-                                    case 'video':
-                                        $link['file_type'] = 'images/search/search-video.png';
-                                        break;
-                                    default:
-                                        $link['file_type'] = 'undefined';
-                                        break;
-                                }
-                                $links[] = $link;
-                            }
+                        else
+                            $link['library'] = '';
+
+                        switch ($linkRecord['format'])
+                        {
+                            case 'ppt':
+                                $link['file_type'] = 'images/search/search-powerpoint.png';
+                                break;
+                            case 'doc':
+                                $link['file_type'] = 'images/search/search-word.png';
+                                break;
+                            case 'xls':
+                                $link['file_type'] = 'images/search/search-excel.png';
+                                break;
+                            case 'pdf':
+                                $link['file_type'] = 'images/search/search-pdf.png';
+                                break;
+                            case 'video':
+                                $link['file_type'] = 'images/search/search-video.png';
+                                break;
+                            default:
+                                $link['file_type'] = 'undefined';
+                                break;
                         }
+                        $links[] = $link;
                     }
                 }
             }
-            Yii::app()->session['searchedLinks'] = $links;
+            if(isset($links))
+                Yii::app()->session['searchedLinks'] = $links;
+            else
+                Yii::app()->session['searchedLinks'] = null;
         }
         if (isset($links))
             if (count($links) > 0)

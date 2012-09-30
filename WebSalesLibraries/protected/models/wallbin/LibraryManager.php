@@ -58,6 +58,7 @@ class LibraryManager
             }
             if (isset($libraries))
             {
+                usort($libraries, "Library::libraryComparer");
                 Yii::app()->session['libraries'] = $libraries;
                 Yii::app()->cacheDB->set(Yii::app()->session['sessionKey'], 'libraries', (60 * 60 * 24 * 7));
             }

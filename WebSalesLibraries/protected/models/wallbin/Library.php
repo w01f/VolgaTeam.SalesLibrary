@@ -24,6 +24,11 @@ class Library
      * @soap
      */
     public $autoWidgets;
+    /**
+     * @var UniversalPreviewContainer[]
+     * @soap
+     */
+    public $previewContainers;
     public function load()
     {
         foreach (LibraryPageStorage::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
@@ -55,6 +60,14 @@ class Library
             if (strpos($autoWidget->extension, $extension) !== false)
                 return $autoWidget->widget;
         return null;
+    }
+
+    public static function libraryComparer($x, $y)
+    {
+        if ($x->name == $y->name)
+            return 0;
+        else
+            return ($x->name < $y->name) ? -1 : 1;
     }
 
 }

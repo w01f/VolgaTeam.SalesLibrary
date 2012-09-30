@@ -1,17 +1,12 @@
 <?php
-class LibraryLink
+class Attachment
 {
     public $parent;
     /**
      * @var string
      * @soap
      */
-    public $id;
-    /**
-     * @var string
-     * @soap
-     */
-    public $folderId;
+    public $linkId;
     /**
      * @var string
      * @soap
@@ -26,22 +21,7 @@ class LibraryLink
      * @var string
      * @soap
      */
-    public $fileRelativePath;
-    /**
-     * @var string
-     * @soap
-     */
-    public $fileName;
-    /**
-     * @var string
-     * @soap
-     */
-    public $fileExtension;
-    /**
-     * @var string
-     * @soap
-     */
-    public $fileDate;
+    public $path;
     /**
      * @var string
      * @soap
@@ -51,208 +31,33 @@ class LibraryLink
      * @var string
      * @soap
      */
-    public $note;
-    /**
-     * @var boolean
-     * @soap
-     */
-    public $isBold;
-    /**
-     * @var int
-     * @soap
-     */
-    public $order;
-    /**
-     * @var int
-     * @soap
-     */
-    public $type;
-    /**
-     * @var LineBreak
-     * @soap
-     */
-    public $lineBreakProperties;
-    /**
-     * @var boolean
-     * @soap
-     */
-    public $enableWidget;
-    /**
-     * @var string
-     * @soap
-     */
-    public $widget;
-    /**
-     * @var Banner
-     * @soap
-     */
-    public $banner;
-    /**
-     * @var boolean
-     * @soap
-     */
-    public $enableFileCard;
-    /**
-     * @var FileCard
-     * @soap
-     */
-    public $fileCard;
-    /**
-     * @var string
-     * @soap
-     */
     public $previewId;
-    /**
-     * @var LinkCategory[]
-     * @soap
-     */
-    public $categories;
-    /**
-     * @var string
-     * @soap
-     */
-    public $tags;
-    /**
-     * @var string
-     * @soap
-     */
-    public $dateAdd;
-    /**
-     * @var string
-     * @soap
-     */
-    public $dateModify;
-    /**
-     * @var string
-     * @soap
-     */
-    public $contentPath;
-    /**
-     * @var boolean
-     * @soap
-     */
-    public $enableAttachments;
-    /**
-     * @var Attachment[]
-     * @soap
-     */
-    public $attachments;
-    public $fileLink;
-    public $universalPreview;
-    public $browser;
+    public $link;
     public $availableFormats;
-    public function __construct($folder)
+    public function __construct($link)
     {
-        $this->parent = $folder;
-        $this->id = uniqid();
+        $this->parent = $link;
     }
 
-    public function load($linkRecord)
+    public function load($attachmentRecord)
     {
-        $this->id = $linkRecord->id;
-        $this->folderId = $linkRecord->id_folder;
-        $this->libraryId = $linkRecord->id_library;
-        $this->name = $linkRecord->name;
-        $this->fileRelativePath = $linkRecord->file_relative_path;
-        $this->fileName = $linkRecord->file_name;
-        $this->fileExtension = $linkRecord->file_extension;
-        $this->note = $linkRecord->note;
-        $this->isBold = $linkRecord->is_bold;
-        $this->order = $linkRecord->order;
-        $this->type = $linkRecord->type;
-        $this->enableWidget = $linkRecord->enable_widget;
-        $this->widget = $linkRecord->widget;
-        $this->originalFormat = $linkRecord->format;
+        $this->linkId = $attachmentRecord->id_link;
+        $this->libraryId = $attachmentRecord->id_library;
+        $this->name = $attachmentRecord->name;
+        $this->path = $attachmentRecord->path;
+        $this->link = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path));
+        $this->originalFormat = $attachmentRecord->format;
 
-        $lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
-        if ($lineBreakRecord !== null)
+        if ($attachmentRecord->id_preview != null)
         {
-            $this->lineBreakProperties = new LineBreak();
-            $this->lineBreakProperties->load($lineBreakRecord);
-        }
-
-        $bannerRecord = BannerStorage::model()->findByPk($linkRecord->id_banner);
-        if ($bannerRecord !== null)
-        {
-            $this->banner = new Banner();
-            $this->banner->load($bannerRecord);
-        }
-
-        $this->enableFileCard = $linkRecord->enable_file_card;
-        $fileCardRecord = FileCardStorage::model()->findByPk($linkRecord->id_file_card);
-        if ($fileCardRecord !== null)
-        {
-            $this->fileCard = new FileCard();
-            $this->fileCard->load($fileCardRecord);
-        }
-
-        $attachmentRecords = AttachmentStorage::model()->findAll('id_link=?', array($linkRecord->id));
-        if ($attachmentRecords !== null)
-        {
-            foreach ($attachmentRecords as $attachmentRecord)
-            {
-                $attachment = new Attachment($this);
-                $attachment->browser = $this->browser;
-                $attachment->load($attachmentRecord);
-                $this->attachments[] = $attachment;
-            }
-        }
-
-        $linkCategoryRecords = LinkCategoryStorage::model()->findAll('id_link=?', array($linkRecord->id));
-        if ($linkCategoryRecords !== null)
-        {
-            foreach ($linkCategoryRecords as $linkCategoryRecord)
-            {
-                $linkCategory = new LinkCategory();
-                $linkCategory->load($linkCategoryRecord);
-                $this->categories[] = $linkCategory;
-            }
-        }
-
-        if ($linkRecord->id_preview != null)
-        {
-            $previewRecords = PreviewStorage::model()->findAll('id_container=?', array($linkRecord->id_preview));
-
+            $previewRecords = PreviewStorage::model()->findAll('id_container=?', array($attachmentRecord->id_preview));
             if ($previewRecords !== null)
             {
-                $this->universalPreview = new UniversalPreviewContainer($this->parent->parent->parent);
+                $this->universalPreview = new UniversalPreviewContainer($this->parent->parent->parent->parent);
                 $this->universalPreview->load($previewRecords);
             }
         }
-
-        if ($this->type == 5)
-        {
-            $this->fileName = $this->fileRelativePath;
-        }
-        else if ($this->type == 6)
-        {
-            
-        }
-        else if ($this->type == 8)
-        {
-            $this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
-            $this->fileName = $this->fileRelativePath;
-            $this->fileLink = $this->fileRelativePath;
-        }
-        else
-        {
-            $this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
-            $this->fileLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath));
-        }
         $this->getFormats();
-    }
-
-    public function getWidget()
-    {
-        if (isset($this->enableWidget))
-            if (isset($this->widget))
-                return $this->widget;
-        return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
-    }
-
-    public function getIsLineBreak()
-    {
-        return $this->type === 6 && isset($this->lineBreakProperties);
     }
 
     public function getFormats()
@@ -341,7 +146,7 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'ppt':
-                        $viewSources[] = array('href' => $this->fileLink);
+                        $viewSources[] = array('href' => $this->link);
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
@@ -352,7 +157,7 @@ class LibraryLink
                                 $count = count($this->universalPreview->pngLinks);
                                 foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->name . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -366,7 +171,7 @@ class LibraryLink
                                 $count = count($this->universalPreview->jpegLinks);
                                 foreach ($this->universalPreview->jpegLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->name . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -395,7 +200,7 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'doc':
-                        $viewSources[] = array('href' => $this->fileLink);
+                        $viewSources[] = array('href' => $this->link);
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
@@ -405,7 +210,7 @@ class LibraryLink
                                 $count = count($this->universalPreview->pngLinks);
                                 foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -418,7 +223,7 @@ class LibraryLink
                                 $count = count($this->universalPreview->jpegLinks);
                                 foreach ($this->universalPreview->jpegLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -447,7 +252,7 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'xls':
-                        $viewSources[] = array('href' => $this->fileLink);
+                        $viewSources[] = array('href' => $this->link);
                         break;
                 }
                 break;
@@ -455,7 +260,7 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'pdf':
-                        $viewSources[] = array('href' => $this->fileLink);
+                        $viewSources[] = array('href' => $this->link);
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
@@ -465,7 +270,7 @@ class LibraryLink
                                 $count = count($this->universalPreview->pngLinks);
                                 foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -478,7 +283,7 @@ class LibraryLink
                                 $count = count($this->universalPreview->jpegLinks);
                                 foreach ($this->universalPreview->jpegLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
@@ -494,13 +299,13 @@ class LibraryLink
             case 'jpeg':
             case 'png':
             case 'url':
-                $viewSources[] = array('href' => $this->fileLink);
+                $viewSources[] = array('href' => $this->link);
                 break;
             case 'video':
                 switch ($format)
                 {
                     case 'video':
-                        $viewSources[] = array('src' => $this->fileLink);
+                        $viewSources[] = array('src' => $this->link);
                         break;
                     case 'mp4':
                         if (isset($this->universalPreview))
@@ -527,19 +332,11 @@ class LibraryLink
                 }
                 break;
             case 'mp4':
-                $viewSources[] = array('src' => $this->fileLink, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                $viewSources[] = array('src' => $this->link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
                 break;
         }
         if (isset($viewSources))
             return $viewSources;
-    }
-
-    public static function libraryLinkComparer($x, $y)
-    {
-        if ($x->order == $y->order)
-            return 0;
-        else
-            return ($x->order < $y->order) ? -1 : 1;
     }
 
 }
