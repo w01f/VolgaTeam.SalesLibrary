@@ -856,9 +856,9 @@
             this.checkBoxFileCardImportantInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.checkBoxFileCardImportantInfo.Location = new System.Drawing.Point(6, 238);
             this.checkBoxFileCardImportantInfo.Name = "checkBoxFileCardImportantInfo";
-            this.checkBoxFileCardImportantInfo.Size = new System.Drawing.Size(325, 20);
+            this.checkBoxFileCardImportantInfo.Size = new System.Drawing.Size(135, 20);
             this.checkBoxFileCardImportantInfo.TabIndex = 30;
-            this.checkBoxFileCardImportantInfo.Text = "J. Sales Contact Info to learn more about this File...";
+            this.checkBoxFileCardImportantInfo.Text = "G. Important Info...";
             this.checkBoxFileCardImportantInfo.UseVisualStyleBackColor = true;
             this.checkBoxFileCardImportantInfo.CheckedChanged += new System.EventHandler(this.checkBoxFileCardImportantInfo_CheckedChanged);
             // 
