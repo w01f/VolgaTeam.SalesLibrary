@@ -15,6 +15,11 @@ class FileCard
      * @var string
      * @soap
      */
+    public $title;    
+    /**
+     * @var string
+     * @soap
+     */
     public $advertiser;
     /**
      * @var string
@@ -65,6 +70,7 @@ class FileCard
     {
         $this->id = $fileCardRecord->id;
         $this->libraryId = $fileCardRecord->id_library;
+        $this->title = $fileCardRecord->title;
         if ($fileCardRecord->advertiser != null)
             $this->advertiser = $fileCardRecord->advertiser;
         if ($fileCardRecord->date_sold != null)

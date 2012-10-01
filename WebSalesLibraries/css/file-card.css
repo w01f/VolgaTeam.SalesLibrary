@@ -10,15 +10,32 @@
     font-weight: bold;
 }
 
-.file-card-body .details
+.file-card-body .details, .file-card-body .sales-info
 { 
     text-align: left;
     font-family: 'Arial';
     font-size: 11pt;
     font-weight: normal;
+    width: 100%;
 }
 
-.file-card-body .details .title
+.file-card-body .details 
+{ 
+    border-top: 5px black solid;
+}
+
+.file-card-body .sales-info
+{ 
+    border-top: 3px black solid;
+}
+
+.file-card-body .details tr, .file-card-body .sales-info tr
+{ 
+    height: 25px;
+    vertical-align: middle;
+}
+
+.file-card-body .details .title, .file-card-body .sales-info .title
 { 
     text-align: left;
     font-family: 'Arial';

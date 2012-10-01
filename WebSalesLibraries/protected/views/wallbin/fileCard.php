@@ -1,9 +1,10 @@
-<?php 
-if (isset($link->fileCard)): 
+<?php
+if (isset($link->fileCard)):
     $fileCard = $link->fileCard;
     ?>
     <div class ="file-card-body">
         <div class ="title"><?php echo $link->name ?><br></div>
+        <br>
         <table class ="details">
             <?php if (isset($fileCard->advertiser)): ?>
                 <tr>
@@ -40,6 +41,35 @@ if (isset($link->fileCard)):
                 </tr>
             <?php endif; ?>                        
 
+            <?php if (isset($fileCard->notes)): ?>
+                <tr>
+                    <td class ="title">Important Info:</td>
+                </tr>
+                <?php
+                foreach ($fileCard->notes as $note)
+                {
+                    echo CHtml::openTag('tr', array());
+                    {
+                        echo CHtml::openTag('td', array());
+                        {
+                            echo $note;
+                        }
+                        echo CHtml::closeTag('td');
+                    }
+                    echo CHtml::closeTag('tr');
+                }
+                ?>                                                                                
+            <?php endif; ?>                                                                                
+        </table>
+        <br>
+        <table class ="sales-info">
+            <?php if (isset($fileCard->salesStation)): ?>
+                <tr>
+                    <td class ="title">Station or Newspaper:</td>
+                    <td><?php echo $fileCard->salesStation ?><br></td>
+                </tr>
+            <?php endif; ?>                            
+            
             <?php if (isset($fileCard->salesName)): ?>
                 <tr>
                     <td class ="title">Sales Contact:</td>
@@ -60,33 +90,6 @@ if (isset($link->fileCard)):
                     <td><?php echo $fileCard->salesPhone ?><br></td>
                 </tr>
             <?php endif; ?>                                                
-
-            <?php if (isset($fileCard->salesStation)): ?>
-                <tr>
-                    <td class ="title">Station or Newspaper:</td>
-                    <td><?php echo $fileCard->salesStation ?><br></td>
-                </tr>
-            <?php endif; ?>
-
-            <?php if (isset($fileCard->notes)): ?>
-                <tr>
-                    <td class ="title">Important Info:</td>
-                </tr>
-                <?php
-                foreach ($fileCard->notes as $note)
-                {
-                    echo CHtml::openTag('tr', array());
-                    {
-                        echo CHtml::openTag('td', array());
-                        {
-                            echo $note;
-                        }
-                        echo CHtml::closeTag('td');
-                    }
-                    echo CHtml::closeTag('tr');
-                }
-                ?>                                                                                
-            <?php endif; ?>                                                                                
         </table>
     </div>
 <?php endif; ?>

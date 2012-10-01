@@ -16,6 +16,7 @@ class FileCardStorage extends CActiveRecord
         $fileCardRecord = new FileCardStorage();
         $fileCardRecord->id = $fileCard['id'];
         $fileCardRecord->id_library = $fileCard['libraryId'];
+        $fileCardRecord->title = $fileCard['title'];
         $fileCardRecord->advertiser = $fileCard['advertiser'];
         $fileCardRecord->date_sold = $fileCard['dateSold'] != null ? date(Yii::app()->params['mysqlDateFormat'], strtotime($fileCard['dateSold'])) : null;
         $fileCardRecord->broadcast_closed = $fileCard['broadcastClosed'] > 0 ? $fileCard['broadcastClosed'] : null;
