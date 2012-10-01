@@ -175,6 +175,7 @@
             this.dlgFont = new System.Windows.Forms.FontDialog();
             this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
             this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
+            this.textEditFileCardTitle = new DevExpress.XtraEditors.TextEdit();
             this.gbNotes.SuspendLayout();
             this.groupBoxNotes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
@@ -255,6 +256,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBanners)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditBanner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditFileCardTitle.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gbNotes
@@ -814,6 +816,7 @@
             // 
             // xtraTabPageFileCard
             // 
+            this.xtraTabPageFileCard.Controls.Add(this.textEditFileCardTitle);
             this.xtraTabPageFileCard.Controls.Add(this.groupBoxFileCard);
             this.xtraTabPageFileCard.Controls.Add(this.checkBoxEnableFileCard);
             this.xtraTabPageFileCard.Name = "xtraTabPageFileCard";
@@ -1224,11 +1227,10 @@
             // 
             this.checkBoxEnableFileCard.AutoSize = true;
             this.checkBoxEnableFileCard.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxEnableFileCard.Location = new System.Drawing.Point(11, 11);
+            this.checkBoxEnableFileCard.Location = new System.Drawing.Point(11, 14);
             this.checkBoxEnableFileCard.Name = "checkBoxEnableFileCard";
-            this.checkBoxEnableFileCard.Size = new System.Drawing.Size(341, 20);
+            this.checkBoxEnableFileCard.Size = new System.Drawing.Size(15, 14);
             this.checkBoxEnableFileCard.TabIndex = 6;
-            this.checkBoxEnableFileCard.Text = "Post Important Sales Information about this File...";
             this.checkBoxEnableFileCard.UseVisualStyleBackColor = true;
             this.checkBoxEnableFileCard.CheckedChanged += new System.EventHandler(this.checkBoxEnableFileCard_CheckedChanged);
             // 
@@ -2121,6 +2123,16 @@
             this.buttonXCancel.Text = "Cancel";
             this.buttonXCancel.TextColor = System.Drawing.Color.Black;
             // 
+            // textEditFileCardTitle
+            // 
+            this.textEditFileCardTitle.Enabled = false;
+            this.textEditFileCardTitle.Location = new System.Drawing.Point(32, 9);
+            this.textEditFileCardTitle.Name = "textEditFileCardTitle";
+            this.textEditFileCardTitle.Properties.NullText = "Type here...";
+            this.textEditFileCardTitle.Size = new System.Drawing.Size(503, 22);
+            this.textEditFileCardTitle.StyleController = this.styleController;
+            this.textEditFileCardTitle.TabIndex = 13;
+            // 
             // FormLinkProperties
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2231,6 +2243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewBanners)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditBanner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSelectedBanner)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditFileCardTitle.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2374,5 +2387,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEditFileCardImportantInfo;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnFileCardImportantInfoButtons;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditFileCardImportantInfo;
+        private DevExpress.XtraEditors.TextEdit textEditFileCardTitle;
     }
 }

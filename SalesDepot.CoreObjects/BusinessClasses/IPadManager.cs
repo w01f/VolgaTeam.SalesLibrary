@@ -290,6 +290,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         link.fileCard = new ContentManagmentService.FileCard();
                         link.fileCard.id = libraryFile.FileCard.Identifier.ToString();
                         link.fileCard.libraryId = this.Parent.Identifier.ToString();
+                        link.fileCard.title = libraryFile.FileCard.Title;
                         link.fileCard.advertiser = libraryFile.FileCard.Advertiser;
                         link.fileCard.dateSold = libraryFile.FileCard.DateSold.HasValue ? libraryFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
                         link.fileCard.broadcastClosed = libraryFile.FileCard.BroadcastClosed.HasValue ? (float)libraryFile.FileCard.BroadcastClosed.Value : 0;

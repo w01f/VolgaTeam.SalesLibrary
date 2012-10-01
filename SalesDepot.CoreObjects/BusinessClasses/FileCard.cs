@@ -10,6 +10,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         public ILibraryFile Parent { get; private set; }
         public Guid Identifier { get; set; }
         public bool Enable { get; set; }
+        public string Title { get; set; }
         public string Advertiser { get; set; }
         public DateTime? DateSold { get; set; }
         public double? BroadcastClosed { get; set; }
@@ -26,6 +27,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             this.Parent = parent;
             this.Identifier = Guid.NewGuid();
             this.Notes = new List<string>();
+            this.Title = "Information about this file...";
         }
 
         public string Serialize()
@@ -33,6 +35,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             StringBuilder result = new StringBuilder();
             result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
             result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
+            result.AppendLine(@"<Title>" + this.Title.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Title>");
             if (!string.IsNullOrEmpty(this.Advertiser))
                 result.AppendLine(@"<Advertiser>" + this.Advertiser.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Advertiser>");
             if (this.DateSold.HasValue)
@@ -75,6 +78,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     case "Enable":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             this.Enable = tempBool;
+                        break;
+                    case "Title":
+                        this.Title = childNode.InnerText;
                         break;
                     case "Advertiser":
                         this.Advertiser = childNode.InnerText;

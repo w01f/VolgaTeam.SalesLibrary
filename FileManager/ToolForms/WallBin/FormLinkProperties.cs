@@ -373,6 +373,7 @@ namespace FileManager.ToolForms.WallBin
 
                 #region File Card
                 checkBoxEnableFileCard.Checked = this.FileCard.Enable;
+                textEditFileCardTitle.EditValue = this.FileCard.Title;
                 checkBoxFileCardAdvertiser.Checked = !string.IsNullOrEmpty(this.FileCard.Advertiser);
                 textEditFileCardAdvertiser.EditValue = this.FileCard.Advertiser;
                 checkBoxFileCardDateSold.Checked = this.FileCard.DateSold.HasValue;
@@ -552,6 +553,7 @@ namespace FileManager.ToolForms.WallBin
 
                 #region File Card
                 this.FileCard.Enable = checkBoxEnableFileCard.Checked;
+                this.FileCard.Title = textEditFileCardTitle.EditValue != null ? textEditFileCardTitle.EditValue.ToString() : string.Empty;
                 this.FileCard.Advertiser = this.FileCard.Enable && checkBoxFileCardAdvertiser.Checked && textEditFileCardAdvertiser.EditValue != null ? textEditFileCardAdvertiser.EditValue.ToString() : null;
                 this.FileCard.DateSold = this.FileCard.Enable && checkBoxFileCardDateSold.Checked && dateEditFileCardDateSold.EditValue != null ? (DateTime?)dateEditFileCardDateSold.DateTime : null;
                 this.FileCard.BroadcastClosed = this.FileCard.Enable && checkBoxFileCardBroadcastClosed.Checked && spinEditFileCardBroadcastClosed.EditValue != null ? (double?)spinEditFileCardBroadcastClosed.Value : null;
@@ -756,6 +758,7 @@ namespace FileManager.ToolForms.WallBin
         private void checkBoxEnableFileCard_CheckedChanged(object sender, EventArgs e)
         {
             groupBoxFileCard.Enabled = checkBoxEnableFileCard.Checked;
+            textEditFileCardTitle.Enabled = checkBoxEnableFileCard.Checked;
             if (!checkBoxEnableFileCard.Checked)
             {
                 checkBoxFileCardAdvertiser.Checked = false;
@@ -863,26 +866,26 @@ namespace FileManager.ToolForms.WallBin
         {
             using (OpenFileDialog dialog = new OpenFileDialog())
             {
-                dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                dialog.Multiselect = false;
+                dialog.Multiselect = true;
                 dialog.Title = "Attach file";
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    if (!this.AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.ToLower().Equals(dialog.FileName.ToLower())))
+                    foreach (string fileName in dialog.FileNames)
                     {
-                        LinkAttachment attachment = new LinkAttachment(this.AttachmentProperties);
-                        attachment.Type = AttachmentType.File;
-                        attachment.OriginalPath = dialog.FileName;
-                        this.AttachmentProperties.FilesAttachments.Add(attachment);
-                        gridViewAttachmentsFiles.RefreshData();
-                        if (gridViewAttachmentsFiles.RowCount > 0)
+                        if (!this.AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.ToLower().Equals(fileName.ToLower())))
                         {
-                            gridViewAttachmentsFiles.FocusedRowHandle = gridViewAttachmentsFiles.RowCount - 1;
-                            gridViewAttachmentsFiles.MakeRowVisible(gridViewAttachmentsFiles.FocusedRowHandle, true);
+                            LinkAttachment attachment = new LinkAttachment(this.AttachmentProperties);
+                            attachment.Type = AttachmentType.File;
+                            attachment.OriginalPath = fileName;
+                            this.AttachmentProperties.FilesAttachments.Add(attachment);
+                            gridViewAttachmentsFiles.RefreshData();
+                            if (gridViewAttachmentsFiles.RowCount > 0)
+                            {
+                                gridViewAttachmentsFiles.FocusedRowHandle = gridViewAttachmentsFiles.RowCount - 1;
+                                gridViewAttachmentsFiles.MakeRowVisible(gridViewAttachmentsFiles.FocusedRowHandle, true);
+                            }
                         }
                     }
-                    else
-                        AppManager.Instance.ShowWarning("This file is already attached");
                 }
             }
         }
@@ -931,7 +934,7 @@ namespace FileManager.ToolForms.WallBin
         }
         #endregion
 
-        #region Websiets
+        #region Websites
         private void buttonXAttachmentsWebAdd_Click(object sender, EventArgs e)
         {
             gridViewAttachmentsWeb.CloseEditor();

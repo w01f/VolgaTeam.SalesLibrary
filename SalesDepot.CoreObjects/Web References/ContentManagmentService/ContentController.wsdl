@@ -135,6 +135,7 @@
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
           <xsd:element name="advertiser" type="xsd:string" />
           <xsd:element name="dateSold" type="xsd:string" />
           <xsd:element name="broadcastClosed" type="xsd:float" />

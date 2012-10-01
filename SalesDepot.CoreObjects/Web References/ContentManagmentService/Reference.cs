@@ -1249,6 +1249,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string libraryIdField;
         
+        private string titleField;
+        
         private string advertiserField;
         
         private string dateSoldField;
@@ -1286,6 +1288,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string title {
+            get {
+                return this.titleField;
+            }
+            set {
+                this.titleField = value;
             }
         }
         
