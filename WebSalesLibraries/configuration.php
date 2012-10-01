@@ -15,6 +15,10 @@ return CMap::mergeArray(
         'name' => 'Sales Libraries',
         'params' => array(
             'appRoot' => dirname(__FILE__),
+            'login' => array(
+                'rememberMeField' => false,
+                'forgotPasswordField' => false,
+            ),
             'home_tab' => array(
                 'name' => 'Home',
                 'list_button' => array(

@@ -54,19 +54,23 @@ echo CHtml::openTag('div', array(
         ));
         echo CHtml::openTag('tr');
         {
-            echo CHtml::openTag('td', array(
-                'id' => 'remember-me-container'
-            ));
+            if (Yii::app()->params['login']['rememberMeField'])
             {
-                echo $form->checkBox($loginData, 'rememberMe'
-                    , array(
-                    'id' => 'field-remember')
-                );
-                echo $form->label($loginData, 'rememberMe'
-                    , array('id' => 'lable-remember')
-                );
+
+                echo CHtml::openTag('td', array(
+                    'id' => 'remember-me-container'
+                ));
+                {
+                    echo $form->checkBox($loginData, 'rememberMe'
+                        , array(
+                        'id' => 'field-remember')
+                    );
+                    echo $form->label($loginData, 'rememberMe'
+                        , array('id' => 'lable-remember')
+                    );
+                }
+                echo CHtml::closeTag('td'); //rememberMeContainer
             }
-            echo CHtml::closeTag('td'); //rememberMeContainer
             echo CHtml::openTag('td', array(
                 'id' => 'button-login-container')
             );
@@ -78,28 +82,31 @@ echo CHtml::openTag('div', array(
         echo CHtml::closeTag('tr'); //row
         echo CHtml::closeTag('table'); //row
 
-        echo CHtml::tag('br');
-        echo CHtml::tag('br');
-        echo CHtml::tag('br');
-
-        echo CHtml::openTag('table', array(
-            'class' => 'row'
-        ));
-        echo CHtml::openTag('tr');
-        echo CHtml::openTag('td', array(
-            'id' => 'recover-password-container')
-        );
+        if (Yii::app()->params['login']['forgotPasswordField'])
         {
-            echo CHtml::ajaxLink('Forgot Password?'
-                , array('site/passwordRecover')
-                , array('method' => 'POST')
-                , array(
-                'id' => 'recover-password-link')
+            echo CHtml::tag('br');
+            echo CHtml::tag('br');
+            echo CHtml::tag('br');
+
+            echo CHtml::openTag('table', array(
+                'class' => 'row'
+            ));
+            echo CHtml::openTag('tr');
+            echo CHtml::openTag('td', array(
+                'id' => 'recover-password-container')
             );
+            {
+                echo CHtml::ajaxLink('Forgot Password?'
+                    , array('site/passwordRecover')
+                    , array('method' => 'POST')
+                    , array(
+                    'id' => 'recover-password-link')
+                );
+            }
+            echo CHtml::closeTag('td');
+            echo CHtml::closeTag('tr'); //row
+            echo CHtml::closeTag('table'); //row
         }
-        echo CHtml::closeTag('td');
-        echo CHtml::closeTag('tr'); //row
-        echo CHtml::closeTag('table'); //row
     }
     $this->endWidget();
 }

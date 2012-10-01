@@ -20,8 +20,9 @@
 #remember-me-container
 {
     height: 25px;
+    width: 50%;
+    text-align: center;
     vertical-align: middle;
-    display: block;
 }
 
 #field-remember,#lable-remember
@@ -30,7 +31,8 @@
 
 #button-login-container
 {
-    text-align: right;
+    width: 50%;
+    text-align: center;
 }
 
 #button-login
