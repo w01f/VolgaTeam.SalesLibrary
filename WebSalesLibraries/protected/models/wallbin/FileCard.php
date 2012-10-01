@@ -30,12 +30,12 @@ class FileCard
      * @var double
      * @soap
      */
-    public $digitalClosed;    
+    public $digitalClosed;
     /**
      * @var double
      * @soap
      */
-    public $publishingClosed;        
+    public $publishingClosed;
     /**
      * @var string
      * @soap
@@ -60,22 +60,33 @@ class FileCard
      * @var string[]
      * @soap
      */
-    public $notes;    
-
+    public $notes;
     public function load($fileCardRecord)
     {
         $this->id = $fileCardRecord->id;
-        $this->libraryId = $fileCardRecord->id_library;        
-        $this->advertiser = $fileCardRecord->advertiser;
-        $this->dateSold = $fileCardRecord->date_sold;
-        $this->broadcastClosed = $fileCardRecord->broadcast_closed;
-        $this->digitalClosed = $fileCardRecord->digital_closed;
-        $this->publishingClosed = $fileCardRecord->publishing_closed;
-        $this->salesName = $fileCardRecord->sales_name;
-        $this->salesEmail = $fileCardRecord->sales_email;
-        $this->salesPhone = $fileCardRecord->sales_phone;
-        $this->salesStation = $fileCardRecord->sales_station;
-        $this->notes = CJSON::decode($fileCardRecord->notes);
+        $this->libraryId = $fileCardRecord->id_library;
+        if ($fileCardRecord->advertiser != null)
+            $this->advertiser = $fileCardRecord->advertiser;
+        if ($fileCardRecord->date_sold != null)
+            $this->dateSold = $fileCardRecord->date_sold;
+        if ($fileCardRecord->broadcast_closed != null)
+            $this->broadcastClosed = $fileCardRecord->broadcast_closed;
+        if ($fileCardRecord->digital_closed != null)
+            $this->digitalClosed = $fileCardRecord->digital_closed;
+        if ($fileCardRecord->publishing_closed != null)
+            $this->publishingClosed = $fileCardRecord->publishing_closed;
+        if ($fileCardRecord->sales_name != null)
+            $this->salesName = $fileCardRecord->sales_name;
+        if ($fileCardRecord->sales_email != null)
+            $this->salesEmail = $fileCardRecord->sales_email;
+        if ($fileCardRecord->sales_phone != null)
+            $this->salesPhone = $fileCardRecord->sales_phone;
+        if ($fileCardRecord->sales_station != null)
+            $this->salesStation = $fileCardRecord->sales_station;
+        if ($fileCardRecord->notes != null)
+            $this->notes = CJSON::decode($fileCardRecord->notes);
     }
+
 }
+
 ?>

@@ -6,12 +6,12 @@
         
         var linkDateWidth = 140;
 
-        var linkNameHeaderWidth = $('#search-result').width() - $('#search-grid-header td.library-column').width() - $('#search-grid-header td.link-type-column').width() -linkDateWidth;
+        var linkNameHeaderWidth = $('#search-result').width()- $('#search-grid-header td.details-button').width() - $('#search-grid-header td.library-column').width() - $('#search-grid-header td.link-type-column').width() -linkDateWidth;
         $('#search-grid-header td.link-name-column').css({
             'width':linkNameHeaderWidth+'px'
         });
         
-        var linkNameBodyWidth = $('#search-result').width() - $('#search-grid-body td.library-column').width() - $('#search-grid-body td.link-type-column').width() -linkDateWidth;
+        var linkNameBodyWidth = $('#search-result').width() - $('#search-grid-body td.details-button').width()- $('#search-grid-body td.library-column').width() - $('#search-grid-body td.link-type-column').width() -linkDateWidth;
         $('#search-grid-body td.link-name-column').css({
             'width':linkNameBodyWidth+'px'
         });
@@ -69,10 +69,88 @@
         $.runSearch(1);
     }
     
-    $.searchGridViewDetails = function(){
+    $.searchGridViewPreviewLink = function(){
         var linkId =  $(this).parent().find('.link-id-column').html();
         $.openViewDialogSearchGrid(linkId);
     }
+    
+    $.searchGridViewFileCard = function(){
+        var fileCardContainer =  $(this).parent().find('td.hidden-content');
+        $.openFileCard.call(fileCardContainer);
+    }
+    
+    $.searchGridViewAttachment = function(){
+        var viewDialogContainer =  $(this).parent().find('td.hidden-content');
+        $.openViewDialogEmbedded.call(viewDialogContainer);
+    }
+    
+    $.searchGridViewLinkDetails = function(){
+        if($(this).hasClass('collapsed'))
+        {
+            var currentCell = $(this);
+            var currentRow = $(this).parent();
+            var linkId =  currentRow.find('.link-id-column').html();
+            $.ajax({
+                type: "POST",
+                url: "search/getLinkDetails",
+                data: {
+                    linkId: linkId
+                },
+                beforeSend: function(){
+                    $.showOverlayLight();
+                },
+                complete: function(){
+                    $.hideOverlayLight();
+                },
+                success: function(msg){
+                    if(msg != '')
+                    {
+                        $(msg).insertAfter(currentRow);
+                        
+                        $( "#search-grid-body tr.link-details-container tr.file-card td" ).off('click');
+                        $( "#search-grid-body tr.link-details-container tr.file-card td.click-no-mobile" ).on('click',function(){
+                            $.searchGridViewFileCard.call($(this));
+                        });                        
+                        $( "#search-grid-body tr.link-details-container tr.file-card td" ).off('touchstart').off('touchmove').off('touchend');
+                        $( "#search-grid-body tr.link-details-container tr.file-card td.click-mobile" ).on('touchstart',function(){
+                            isScrolling = false;
+                        }).on('touchmove',function(){
+                            isScrolling = true;
+                        }).on('touchend',function(){
+                            if(!isScrolling)
+                                $.searchGridViewFileCard.call($(this));
+                        });        
+                        
+                        
+                        $( "#search-grid-body tr.link-details-container tr.attachment td" ).off('click');
+                        $( "#search-grid-body tr.link-details-container tr.attachment td.click-no-mobile" ).on('click',function(){
+                            $.searchGridViewAttachment.call($(this));
+                        });                        
+                        $( "#search-grid-body tr.link-details-container tr.attachment td" ).off('touchstart').off('touchmove').off('touchend');
+                        $( "#search-grid-body tr.link-details-container tr.attachment td.click-mobile" ).on('touchstart',function(){
+                            isScrolling = false;
+                        }).on('touchmove',function(){
+                            isScrolling = true;
+                        }).on('touchend',function(){
+                            if(!isScrolling)
+                                $.searchGridViewAttachment.call($(this));
+                        });        
+                        
+                        currentCell.removeClass('collapsed');
+                        currentCell.addClass('expanded');
+                    }
+                },
+                async: true,
+                dataType: 'html'                        
+            });                                    
+        }
+        else if($(this).hasClass('expanded'))
+        {
+            $(this).parent().next('.link-details-container').remove();
+            $(this).removeClass('expanded');
+            $(this).addClass('collapsed');
+        }
+    }    
     
     $.initSearchGrid = function(){
         if($('#search-grid-body tr').length>0)
@@ -103,7 +181,7 @@
         
         $( "#search-grid-body td.click-no-mobile" ).off('click');
         $( "#search-grid-body td.click-no-mobile" ).on('click',function(){
-            $.searchGridViewDetails.call($(this));
+            $.searchGridViewPreviewLink.call($(this));
         });
         $( "#search-grid-body td.click-mobile" ).off('touchstart').off('touchmove').off('touchend');
         $( "#search-grid-body td.click-mobile" ).on('touchstart',function(){
@@ -112,8 +190,22 @@
             isScrolling = true;
         }).on('touchend',function(){
             if(!isScrolling)
-                $.searchGridViewDetails.call($(this));
+                $.searchGridViewPreviewLink.call($(this));
         });
+        
+        $( "#search-grid-body td.details-button" ).off('click');
+        $( "#search-grid-body td.details-button.click-no-mobile" ).on('click',function(){
+            $.searchGridViewLinkDetails.call($(this));
+        });
+        $( "#search-grid-body td.details-button" ).off('touchstart').off('touchmove').off('touchend');
+        $( "#search-grid-body td.details-button.click-mobile" ).on('touchstart',function(){
+            isScrolling = false;
+        }).on('touchmove',function(){
+            isScrolling = true;
+        }).on('touchend',function(){
+            if(!isScrolling)
+                $.searchGridViewLinkDetails.call($(this));
+        });        
     }
     
 })( jQuery );    

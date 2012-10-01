@@ -1,6 +1,7 @@
 <table id ="search-grid-header">
     <tr>
         <td class = "link-id-column"><span>Id</span></td>
+        <td class = "details-button"><span></span></td>
         <td class = "library-column"><span>Station</span></td>
         <td class = "link-type-column"><span>Type</span></td>
         <td class = "link-name-column"><span>Link</span></td>
@@ -26,6 +27,14 @@
                     echo CHtml::openTag('td', array('class' => 'link-id-column'));
                     {
                         echo $link['id'];
+                    }
+                    echo CHtml::closeTag('td');
+
+                    $detailsButtonClass = 'details-button';
+                    if($link['hasDetails'])
+                        $detailsButtonClass .= $clickClass.' collapsed';
+                    echo CHtml::openTag('td', array('class' => $detailsButtonClass));
+                    {
                     }
                     echo CHtml::closeTag('td');
 

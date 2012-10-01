@@ -2,6 +2,7 @@
 class Attachment
 {
     public $parent;
+    public $id;
     /**
      * @var string
      * @soap
@@ -41,12 +42,16 @@ class Attachment
 
     public function load($attachmentRecord)
     {
+        $this->id = $attachmentRecord->id;
         $this->linkId = $attachmentRecord->id_link;
         $this->libraryId = $attachmentRecord->id_library;
         $this->name = $attachmentRecord->name;
         $this->path = $attachmentRecord->path;
-        $this->link = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path));
         $this->originalFormat = $attachmentRecord->format;
+        if ($this->originalFormat != 'url')
+            $this->link = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path));
+        else
+            $this->link = $attachmentRecord->path;
 
         if ($attachmentRecord->id_preview != null)
         {
@@ -337,6 +342,14 @@ class Attachment
         }
         if (isset($viewSources))
             return $viewSources;
+    }
+
+    public static function attachmentComparer($x, $y)
+    {
+        if ($x->originalFormat == $y->originalFormat)
+            return 0;
+        else
+            return ($x->originalFormat < $y->originalFormat) ? -1 : 1;
     }
 
 }

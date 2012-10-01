@@ -20,15 +20,18 @@ echo CHtml::openTag('div', array(
 
             echo CHtml::tag('br');
 
-            echo CHtml::openTag('div', array(
-                'class' => 'description'
-            ));
+            if (isset($link->fileName))
             {
-                echo $link->fileName;
-            }
-            echo CHtml::closeTag('div'); //viewDialogDescription
+                echo CHtml::openTag('div', array(
+                    'class' => 'description'
+                ));
+                {
+                    echo $link->fileName;
+                }
+                echo CHtml::closeTag('div'); //viewDialogDescription
 
-            echo CHtml::tag('br');
+                echo CHtml::tag('br');
+            }
         }
         echo CHtml::closeTag('div'); //viewDialogTitle
 
@@ -71,10 +74,10 @@ echo CHtml::openTag('div', array(
                             break;
                         case 'ogv':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/ogv.png';
-                            break;                        
+                            break;
                         case 'tab':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/tab.png';
-                            break;                        
+                            break;
                         case 'url':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/url.png';
                             break;

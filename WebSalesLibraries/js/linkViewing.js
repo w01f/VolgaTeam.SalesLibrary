@@ -58,6 +58,25 @@
         });  
     }
     
+    $.openFileCard = function(){
+        var fileCardContent = $(this).find('.file-card-content').html();
+        $.fancybox({
+            content: $(this).find('.file-card-body'),
+            title: 'File Card',
+            minWidth: 400,
+            helpers: {
+                overlay : {
+                    css : {
+                        'background-color' : '#eee'
+                    }
+                }
+            },
+            openEffect  : 'none',
+            closeEffect	: 'none'            
+        });
+        $(this).find('.file-card-content').html(fileCardContent);
+    }
+    
     $.viewSelectedFormat = function()
     {
         var selectedFileType = $(this).find('.service-data .file-type').html();

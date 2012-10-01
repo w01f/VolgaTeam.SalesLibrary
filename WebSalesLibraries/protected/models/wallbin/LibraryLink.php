@@ -186,6 +186,7 @@ class LibraryLink
             $this->fileCard->load($fileCardRecord);
         }
 
+        $this->enableAttachments = $linkRecord->enable_attachments;
         $attachmentRecords = AttachmentStorage::model()->findAll('id_link=?', array($linkRecord->id));
         if ($attachmentRecords !== null)
         {
@@ -197,6 +198,8 @@ class LibraryLink
                 $this->attachments[] = $attachment;
             }
         }
+        if (isset($this->attachments))
+            usort($this->attachments, "Attachment::attachmentComparer");
 
         $linkCategoryRecords = LinkCategoryStorage::model()->findAll('id_link=?', array($linkRecord->id));
         if ($linkCategoryRecords !== null)

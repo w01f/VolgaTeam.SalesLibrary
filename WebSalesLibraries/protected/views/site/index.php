@@ -8,6 +8,7 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/css/ribbon.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/columns.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/search.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/view-dialog.css?'.$version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/file-card.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/library-selector.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/search-grid.css?'.$version);
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');

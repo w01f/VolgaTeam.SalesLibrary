@@ -1,0 +1,27 @@
+.file-card-body 
+{ 
+}
+
+.file-card-body  .title
+{ 
+    text-align: left;
+    font-family: 'Arial';
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.file-card-body .details
+{ 
+    text-align: left;
+    font-family: 'Arial';
+    font-size: 11pt;
+    font-weight: normal;
+}
+
+.file-card-body .details .title
+{ 
+    text-align: left;
+    font-family: 'Arial';
+    font-size: 11pt;
+    font-weight: bold;
+}
