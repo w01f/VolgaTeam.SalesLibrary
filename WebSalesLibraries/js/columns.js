@@ -67,8 +67,6 @@
                 $.updateContentAreaDimensions();            
                 $('.clickable').off('click');        
                 $('.clickable').on('click',$.openViewDialogEmbedded);        
-                $('.view-dialog-content .format-list .item').off('click'); 
-                $('.view-dialog-content .format-list .item').on('click',$.viewSelectedFormat);        
             },
             error: function(){
                 $('#content').html('');

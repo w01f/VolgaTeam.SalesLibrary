@@ -108,34 +108,17 @@
                         $(msg).insertAfter(currentRow);
                         
                         $( "#search-grid-body tr.link-details-container tr.file-card td" ).off('click');
-                        $( "#search-grid-body tr.link-details-container tr.file-card td.click-no-mobile" ).on('click',function(){
+                        $( "#search-grid-body tr.link-details-container tr.file-card>td.click-no-mobile" ).on('click',function(e){
+                            e.stopPropagation();
                             $.searchGridViewFileCard.call($(this));
                         });                        
-                        $( "#search-grid-body tr.link-details-container tr.file-card td" ).off('touchstart').off('touchmove').off('touchend');
-                        $( "#search-grid-body tr.link-details-container tr.file-card td.click-mobile" ).on('touchstart',function(){
-                            isScrolling = false;
-                        }).on('touchmove',function(){
-                            isScrolling = true;
-                        }).on('touchend',function(){
-                            if(!isScrolling)
-                                $.searchGridViewFileCard.call($(this));
-                        });        
-                        
                         
                         $( "#search-grid-body tr.link-details-container tr.attachment td" ).off('click');
-                        $( "#search-grid-body tr.link-details-container tr.attachment td.click-no-mobile" ).on('click',function(){
+                        $( "#search-grid-body tr.link-details-container tr.attachment>td.click-no-mobile" ).on('click',function(e){
+                            e.stopPropagation();
                             $.searchGridViewAttachment.call($(this));
                         });                        
-                        $( "#search-grid-body tr.link-details-container tr.attachment td" ).off('touchstart').off('touchmove').off('touchend');
-                        $( "#search-grid-body tr.link-details-container tr.attachment td.click-mobile" ).on('touchstart',function(){
-                            isScrolling = false;
-                        }).on('touchmove',function(){
-                            isScrolling = true;
-                        }).on('touchend',function(){
-                            if(!isScrolling)
-                                $.searchGridViewAttachment.call($(this));
-                        });        
-                        
+
                         currentCell.removeClass('collapsed');
                         currentCell.addClass('expanded');
                     }

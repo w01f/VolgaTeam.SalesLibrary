@@ -7,9 +7,9 @@
         <?php
         if (isset($link))
         {
-            if (Yii::app()->browser->isMobile())
-                $clickClass = ' click-mobile';
-            else
+//            if (Yii::app()->browser->isMobile())
+//                $clickClass = ' click-mobile';
+//            else
                 $clickClass = ' click-no-mobile';
 
             if ($link->enableFileCard && isset($link->fileCard))

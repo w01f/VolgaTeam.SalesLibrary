@@ -21,7 +21,7 @@
 
 .file-card-body .details 
 { 
-    border-top: 5px black solid;
+    border-top: none;
 }
 
 .file-card-body .sales-info
