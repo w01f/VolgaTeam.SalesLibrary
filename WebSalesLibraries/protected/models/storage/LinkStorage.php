@@ -162,6 +162,7 @@ class LinkStorage extends CActiveRecord
                         $link['id'] = $linkRecord['id'];
                         $link['name'] = $linkRecord['name'];
                         $link['file_name'] = $linkRecord['file_name'];
+                        $link['date_modify'] = $linkRecord['date_modify'];
                         $link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
                         
                         $library = $libraryManager->getLibraryById($linkRecord['id_library']);
@@ -231,6 +232,7 @@ class LinkStorage extends CActiveRecord
                     $sortColumn = 'name';
                     break;
                 case 'link-date':
+                    $sortColumn = 'date_modify';
                     break;
             }
         }

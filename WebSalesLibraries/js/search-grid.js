@@ -162,6 +162,11 @@
             $.sortByColumn('link-name');
         });                
         
+        $( "#search-grid-header td.link-date-column" ).off('click');
+        $( "#search-grid-header td.link-date-column" ).on('click',function(){
+            $.sortByColumn('link-date');
+        });                        
+        
         $( "#search-grid-body td.click-no-mobile" ).off('click');
         $( "#search-grid-body td.click-no-mobile" ).on('click',function(){
             $.searchGridViewPreviewLink.call($(this));

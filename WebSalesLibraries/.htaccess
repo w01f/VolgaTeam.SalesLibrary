@@ -30,8 +30,4 @@ RewriteCond %{HTTP_REFERER} !^http://(www\.)?raycomsales.com [NC]
 RewriteCond %{HTTP_REFERER} !^http://(www\.)?raycomsales.com.*$ [NC] 
 RewriteCond %{HTTP_REFERER} !^http://(www\.)?wuddupdog.com [NC] 
 RewriteCond %{HTTP_REFERER} !^http://(www\.)?wuddupdog.com.*$ [NC] 
-RewriteRule \.(gif|jpg|jpeg|png|pdf|ppt|pptx|doc|docx|xls|xlsx|ogv|wmv)$ - [F]
-
-
-
-
+RewriteRule \.(gif|jpg|jpeg|png|pdf|ppt|pptx|doc|docx|xls|xlsx|ogv|mp4|wmv)$ - [F]

@@ -80,7 +80,7 @@
 
                     echo CHtml::openTag('td', array('class' => 'link-date-column'));
                     {
-                        echo '';
+                        echo date(Yii::app()->params['sourceDateFormat'], strtotime($link['date_modify']));
                     }
                     echo CHtml::closeTag('td');
                 }
