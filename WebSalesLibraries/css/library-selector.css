@@ -1,6 +1,5 @@
 #library-checkbox-list
 {
-    width: 670px;
     height:300px;
     background: white;
     border-color: #999;
@@ -9,8 +8,6 @@
     border-style: solid;
     font-family: Verdana,Arial,sans-serif;
     font-size: 10pt;
-    margin-top : 5px;
-    margin-bottom : 5px;
     padding: 5px;
     list-style-type: none;
 }

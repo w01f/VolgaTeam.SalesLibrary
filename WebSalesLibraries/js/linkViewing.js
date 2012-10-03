@@ -76,6 +76,32 @@
         $(this).find('.file-card-content').html(fileCardContent);
     }
     
+    $.downloadFile = function(url)
+    {
+//        $.ajax({
+//            type: "POST",
+//            url: "site/downloadFile",
+//            data: {
+//                url: url
+//            },            
+//            beforeSend: function(){
+//                $.showOverlay();
+//            },
+//            complete: function(){
+//                $.hideOverlay();
+//            },
+//            success: function(msg){
+//                $('<iframe id="secretIFrame" src="" style="display:none; visibility:hidden;"></iframe>').attr("src",msg);
+//            },            
+//            error: function(msg){
+//                alert(msg);
+//            },                        
+//            async: true
+//        });        
+//        window.open("site/downloadFile?url="+url);                                    
+        window.open(url);
+    }    
+    
     $.viewSelectedFormat = function()
     {
         var selectedFileType = $(this).find('.service-data .file-type').html();
@@ -119,13 +145,13 @@
                             });                        
                             break;
                         default:
-                            window.open(selectedLinks[0].href);                            
+                            $.downloadFile(selectedLinks[0].href);
                             break;
                     }
                     break;                    
                 case 'xls':                                    
                 case 'url':
-                    window.open(selectedLinks[0].href);                    
+                    $.downloadFile(selectedLinks[0].href);
                     break;                
                 case 'png':
                 case 'jpeg':
@@ -148,7 +174,7 @@
                         case 'video':
                         case 'tab':                            
                         case 'ogv':
-                            window.open(selectedLinks[0].src);                            
+                            $.downloadFile(selectedLinks[0].src);
                             break;                        
                         case 'mp4':
                             VideoJS.players = {};

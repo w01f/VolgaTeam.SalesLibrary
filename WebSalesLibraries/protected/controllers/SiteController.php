@@ -2,7 +2,6 @@
 class SiteController extends CController
 {
     public $defaultAction = 'index';
-    
     public function actionIndex()
     {
         $this->layout = '/layouts/ribbon';
@@ -38,6 +37,21 @@ class SiteController extends CController
             else
                 $this->render('errorMessage', $error);
         }
+    }
+
+    public function actionDownloadFile()
+    {
+        //$url = Yii::app()->request->getPost('url');
+        $url = Yii::app()->request->getQuery('url', '');
+        if (isset($url))
+        {
+            $path = realpath(str_replace(Yii::app()->baseUrl, '', $url));
+            Yii::app()->request->xSendFile($path, array(
+                'forceDownload' => false,
+                'terminate' => false,
+            ));
+        }
+        Yii::app()->end();
     }
 
 }

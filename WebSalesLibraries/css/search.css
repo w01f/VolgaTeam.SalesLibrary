@@ -74,42 +74,22 @@
     text-align: center;
 }
 
-#library-selector
-{
-    text-align: left;
-    width: 100%;
-}
-
-#library-selected-container
-{
-    color: #222222;
-    font-family: Verdana,Arial,sans-serif;
-    font-size: 10pt;
-    width: 75%;
-}
-
-#library-select-container
-{
-    width: 25%;
-    text-align: right;
-}
-
-#library-select .ui-button
-{
-    font-size: 10pt;
-}
-
-#condition-type
+#search-control-panel
 { 
-    padding: 0;
     height: 100%;
     background: #eee;
     font-size: 10pt;
 }
 
+#search-control-panel .ui-tabs, #search-control-panel .ui-tabs-panel
+{ 
+    padding: 0px;
+}
+
 #condition-content-value
 {
-    width: 100%;
+    width: 98%;
+    padding-right: 1%;
 }
 
 #file-types .ui-button 
@@ -168,7 +148,7 @@
     background: #F7BE81;
 }
 
-#content-compare-type .ui-state-active
+#search-control-panel .ui-state-active
 {
     background: #F7BE81;
 }

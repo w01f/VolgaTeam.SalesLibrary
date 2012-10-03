@@ -31,10 +31,11 @@
                     echo CHtml::closeTag('td');
 
                     $detailsButtonClass = 'details-button';
-                    if($link['hasDetails'])
-                        $detailsButtonClass .= $clickClass.' collapsed';
+                    if ($link['hasDetails'])
+                        $detailsButtonClass .= $clickClass . ' collapsed';
                     echo CHtml::openTag('td', array('class' => $detailsButtonClass));
                     {
+                        
                     }
                     echo CHtml::closeTag('td');
 
@@ -80,7 +81,29 @@
 
                     echo CHtml::openTag('td', array('class' => 'link-date-column'));
                     {
-                        echo date(Yii::app()->params['sourceDateFormat'], strtotime($link['date_modify']));
+                        echo CHtml::openTag('table', array('class' => 'link-container'));
+                        {
+                            echo CHtml::openTag('tr');
+                            {
+                                echo CHtml::openTag('td', array('class' => 'link-name'));
+                                {
+                                    echo date(Yii::app()->params['outputDateFormat'], strtotime($link['date_modify']));
+                                }
+                                echo CHtml::closeTag('td');
+                            }
+                            echo CHtml::closeTag('tr');
+
+                            echo CHtml::openTag('tr');
+                            {
+                                echo CHtml::openTag('td', array('class' => 'file-name'));
+                                {
+                                    echo date(Yii::app()->params['outputTimeFormat'], strtotime($link['date_modify']));
+                                }
+                                echo CHtml::closeTag('td');
+                            }
+                            echo CHtml::closeTag('tr');
+                        }
+                        echo CHtml::closeTag('table');
                     }
                     echo CHtml::closeTag('td');
                 }

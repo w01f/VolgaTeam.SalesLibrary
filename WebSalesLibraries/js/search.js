@@ -12,43 +12,36 @@
         if($('#search-file-type-video').is(':checked'))
             selectedFileTypes.push("video");     
         
-        var selectedConditionType = parseInt($( "#condition-type" ).tabs( "option", "selected" ));
-        
-        switch(selectedConditionType)
-        {
-            case 0:
-                var selectedCondition = $('#condition-content-value').val();
-                if($('#content-compare-exact').is(':checked'))
-                    selectedCondition = '"' + selectedCondition + '"';
+        var selectedCondition = $('#condition-content-value').val();
+        if($('#content-compare-exact').is(':checked'))
+            selectedCondition = '"' + selectedCondition + '"';
                 
-                $.ajax({
-                    type: "POST",
-                    url: "search/searchByContent",
-                    data: {
-                        fileTypes: selectedFileTypes,
-                        condition: selectedCondition,
-                        isSort: isSort
-                    },
-                    beforeSend: function(){
-                        $.showOverlayLight();
-                    },
-                    complete: function(){
-                        $.hideOverlayLight();
-                        $.updateContentAreaDimensions();
-                        $.initSearchGrid();
-                    },
-                    success: function(msg){
-                        $('#search-result>div').html('');
-                        $('#search-result>div').append(msg);
-                    },
-                    error: function(){
-                        $('#search-result>div').html('');
-                    },            
-                    async: true,
-                    dataType: 'html'                        
-                });                        
-                break;
-        }
+        $.ajax({
+            type: "POST",
+            url: "search/searchByContent",
+            data: {
+                fileTypes: selectedFileTypes,
+                condition: selectedCondition,
+                isSort: isSort
+            },
+            beforeSend: function(){
+                $.showOverlayLight();
+            },
+            complete: function(){
+                $.hideOverlayLight();
+                $.updateContentAreaDimensions();
+                $.initSearchGrid();
+            },
+            success: function(msg){
+                $('#search-result>div').html('');
+                $('#search-result>div').append(msg);
+            },
+            error: function(){
+                $('#search-result>div').html('');
+            },            
+            async: true,
+            dataType: 'html'                        
+        });                        
     }
     
     $.fileTypeButtonClick = function(){
@@ -70,7 +63,7 @@
     }
     
     $.conditionTypeChanged = function(event, ui){
-        $.cookie("conditionType", ui.index, {
+        $.cookie("search-control-panel", ui.index, {
             expires: (60 * 60 * 24 * 7)
         });
     }
@@ -156,18 +149,14 @@
             primary: "button-search-video"
         });
 
-        $.getSelectedLibraries();
-        $("#library-select").button();
-        $("#library-select").off('click');        
-        $("#library-select").on('click',$.selectLibraries);
-        
         var conditionType  = 0;
-        if($.cookie("conditionType")!=null)
-            conditionType = parseInt($.cookie("conditionType"));
-        $( "#condition-type" ).tabs({
-            selected: conditionType
+        if($.cookie("search-control-panel")!=null)
+            conditionType = parseInt($.cookie("search-control-panel"));
+        $( "#search-control-panel" ).tabs({
+            selected: conditionType,
+            disabled: [2]
         });        
-        $( "#condition-type" ).on('tabsselect',$.conditionTypeChanged)
+        $( "#search-control-panel" ).on('tabsselect',$.conditionTypeChanged)
 
         if($.cookie("exactMatch")!=null)
         {
@@ -197,7 +186,9 @@
             if (e.which == 13) {
                 $.runSearch(0);
             }
-        });        
+        });  
+        
+        $.initLibrarySelector();
     }
     
     $.initSearchView = function(){
