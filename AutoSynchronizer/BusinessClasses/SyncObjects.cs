@@ -258,18 +258,6 @@ namespace AutoSynchronizer.BusinessClasses
                                         break;
                                 }
 
-                                if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                                {
-                                    foreach (IPreviewContainer previewContainer in this.Manager.Library.PreviewContainers)
-                                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                                        {
-                                            if (!string.IsNullOrEmpty(previewContainer.ContainerPath))
-                                                AddFolderForSync(new DirectoryInfo(previewContainer.ContainerPath), filesWhiteList);
-                                        }
-                                        else
-                                            break;
-                                }
-
                                 #region Sync Primary Root
                                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                                     syncManager.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
@@ -581,17 +569,6 @@ namespace AutoSynchronizer.BusinessClasses
                     }
                 }
 
-                if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                {
-                    foreach (IPreviewContainer previewContainer in this.Manager.Library.PreviewContainers)
-                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                        {
-                            if (!string.IsNullOrEmpty(previewContainer.ContainerPath))
-                                AddFolderForSync(new DirectoryInfo(previewContainer.ContainerPath), filesWhiteList);
-                        }
-                        else
-                            break;
-                }
                 #region Sync Primary Root
                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                     syncManager.SynchronizeFolders(this.Manager.Library.Folder, destinationFolder, filesWhiteList, false);
@@ -673,6 +650,28 @@ namespace AutoSynchronizer.BusinessClasses
                     }
                 }
                 #endregion
+
+                #region Sync Preview Containers
+                if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                {
+                    string previewSourceFolderPath = Path.Combine(this.Manager.Library.Folder.FullName, Constants.FtpPreviewContainersRootFolderName);
+                    DirectoryInfo previewSourceFolder = new DirectoryInfo(previewSourceFolderPath);
+                    if (previewSourceFolder.Exists)
+                    {
+                        string previewDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.FtpPreviewContainersRootFolderName);
+                        if (!Directory.Exists(previewDestinationFolderPath))
+                        {
+                            Directory.CreateDirectory(previewDestinationFolderPath);
+                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { previewDestinationFolderPath }));
+                            foldersCreated++;
+                        }
+                        DirectoryInfo previewDestinationFolder = new DirectoryInfo(previewDestinationFolderPath);
+                        destinationSubFolders.Add(previewDestinationFolder);
+                        syncManager.SynchronizeFolders(previewSourceFolder, previewDestinationFolder, new HashSet<string>());
+                    }
+                }
+                #endregion
+
                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                 {
                     syncLog.AppendLine(string.Format("Sync completed: {0}", new string[] { DateTime.Now.ToString("MM/dd/yy h:mm tt") }));

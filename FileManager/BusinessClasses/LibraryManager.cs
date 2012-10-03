@@ -194,17 +194,7 @@ namespace FileManager.BusinessClasses
                                         if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
                                             break;
                                     }
-                                    if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                                    {
-                                        foreach (IPreviewContainer previewContainer in salesDepot.PreviewContainers)
-                                            if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                                            {
-                                                if (!string.IsNullOrEmpty(previewContainer.ContainerPath))
-                                                    AddFolderForSync(new DirectoryInfo(previewContainer.ContainerPath), filesWhiteList);
-                                            }
-                                            else
-                                                break;
-                                    }
+
                                     #region Sync Primary Root
                                     if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                                         syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
@@ -515,18 +505,6 @@ namespace FileManager.BusinessClasses
                     }
                 }
 
-                if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                {
-                    foreach (IPreviewContainer previewContainer in salesDepot.PreviewContainers)
-                        if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-                        {
-                            if (!string.IsNullOrEmpty(previewContainer.ContainerPath))
-                                AddFolderForSync(new DirectoryInfo(previewContainer.ContainerPath), filesWhiteList);
-                        }
-                        else
-                            break;
-                }
-
                 #region Sync Primary Root
                 if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
                     syncManager.SynchronizeFolders(salesDepot.Folder, destinationFolder, filesWhiteList, false);
@@ -606,6 +584,27 @@ namespace FileManager.BusinessClasses
                                 foldersDeleted++;
                             }
                         }
+                    }
+                }
+                #endregion
+
+                #region Sync Preview Containers
+                if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+                {
+                    string previewSourceFolderPath = Path.Combine(salesDepot.Folder.FullName, Constants.FtpPreviewContainersRootFolderName);
+                    DirectoryInfo previewSourceFolder = new DirectoryInfo(previewSourceFolderPath);
+                    if (previewSourceFolder.Exists)
+                    {
+                        string previewDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.FtpPreviewContainersRootFolderName);
+                        if (!Directory.Exists(previewDestinationFolderPath))
+                        {
+                            Directory.CreateDirectory(previewDestinationFolderPath);
+                            syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { previewDestinationFolderPath }));
+                            foldersCreated++;
+                        }
+                        DirectoryInfo previewDestinationFolder = new DirectoryInfo(previewDestinationFolderPath);
+                        destinationSubFolders.Add(previewDestinationFolder);
+                        syncManager.SynchronizeFolders(previewSourceFolder, previewDestinationFolder, new HashSet<string>());
                     }
                 }
                 #endregion
