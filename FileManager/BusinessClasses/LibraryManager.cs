@@ -358,7 +358,7 @@ namespace FileManager.BusinessClasses
 
                     try
                     {
-                        string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Manual Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                        string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Library Sync Manual at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
                         using (StreamWriter sw = new StreamWriter(logPath, false))
                         {
                             sw.Write(syncLog.ToString());
@@ -632,7 +632,7 @@ namespace FileManager.BusinessClasses
 
                 try
                 {
-                    string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("iPad Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                    string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("iPad Sync Manual at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
                     using (StreamWriter sw = new StreamWriter(logPath, false))
                     {
                         sw.Write(syncLog.ToString());

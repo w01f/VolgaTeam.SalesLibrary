@@ -384,7 +384,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             this.AddDate = DateTime.Now;
             this.SearchTags = new LibraryFileSearchTags();
             this.ExpirationDateOptions = new ExpirationDateOptions();
+            this.AttachmentProperties = new AttachmentProperties(this);
             this.FileCard = new FileCard(this);
+
+            this.CustomKeywords = new CustomKeywords();
+
             SetProperties();
         }
 
@@ -404,9 +408,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             result.AppendLine(@"<Order>" + _order + @"</Order>");
             result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
             result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
+            result.AppendLine(@"<AttachmentProperties>" + this.AttachmentProperties.Serialize() + @"</AttachmentProperties>");
             result.AppendLine(@"<AddDate>" + this.AddDate.ToString() + @"</AddDate>");
             result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
             result.Append(this.SearchTags.Serialize());
+            result.Append(this.CustomKeywords.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
             result.AppendLine(@"<FileCard>" + this.FileCard.Serialize() + @"</FileCard>");
             #region Compatibility with desktop version of Sales Depot
@@ -492,6 +498,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         else if (!string.IsNullOrEmpty(childNode.InnerText))
                             _widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
+                    case "AttachmentProperties":
+                        this.AttachmentProperties.Deserialize(childNode);
+                        break;
                     case "AddDate":
                         if (DateTime.TryParse(childNode.InnerText, out tempDate))
                             this.AddDate = tempDate;
@@ -502,6 +511,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         break;
                     case "SearchTags":
                         this.SearchTags.Deserialize(childNode);
+                        break;
+                    case SalesDepot.CoreObjects.BusinessClasses.CustomKeywords.TagName:
+                        this.CustomKeywords.Deserialize(childNode);
                         break;
                     case "ExpirationDateOptions":
                         this.ExpirationDateOptions.Deserialize(childNode);

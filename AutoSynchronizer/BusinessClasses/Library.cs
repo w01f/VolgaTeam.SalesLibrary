@@ -127,6 +127,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             this.EnableAutoSync = false;
             this.SyncScheduleRecords.Clear();
             this.ExtraFolders.Clear();
+            this.PreviewContainers.Clear();
 
             bool fileBusy = false;
             string file = Path.Combine(this.Folder.FullName, Constants.StorageFileName);
@@ -230,6 +231,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                                 autoWidget.Deserialize(childNode);
                                 this.AutoWidgets.Add(autoWidget);
                             }
+
                         node = document.SelectSingleNode(@"/Library/PreviewContainers");
                         if (node != null)
                             foreach (XmlNode childNode in node.ChildNodes)
@@ -467,6 +469,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 if (!this.UseDirectAccess)
                 {
+                    UpdatePreviewContainers();
                     GenerateExtendedPreviewFiles();
                     ProcessAttachments();
                 }
@@ -610,22 +613,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             {
                 if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
                 {
-                    if (IsPreviewAlive(previewContainer.OriginalPath))
-                        previewContainer.UpdateContent();
-                    else
-                    {
-                        previewContainer.ClearContent();
-                        previewContainer.OriginalPath = string.Empty;
-                    }
+                    previewContainer.UpdateContent();
                 }
                 else
                     break;
-            }
-
-            if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
-            {
-                this.PreviewContainers.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
-                this.Save();
             }
         }
 
@@ -830,28 +821,37 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     }
         }
 
-        public bool IsPreviewAlive(string originalPath)
+        public void UpdatePreviewContainers()
         {
-            bool alive = false;
-            foreach (LibraryPage page in this.Pages)
+            foreach (IPreviewContainer previewContainer in this.PreviewContainers)
             {
-                foreach (LibraryFolder folder in page.Folders)
+                bool alive = false;
+                foreach (LibraryPage page in this.Pages)
                 {
-                    foreach (LibraryFile file in folder.Files)
+                    foreach (LibraryFolder folder in page.Folders)
                     {
-                        alive = file.OriginalPath.Equals(originalPath);
-                        if (!alive)
-                            alive = file.AttachmentProperties.FilesAttachments.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault() != null;
+                        foreach (LibraryFile file in folder.Files)
+                        {
+                            alive = file.OriginalPath.Equals(previewContainer.OriginalPath);
+                            if (!alive)
+                                alive = file.AttachmentProperties.FilesAttachments.Where(x => x.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower())).FirstOrDefault() != null;
+                            if (alive)
+                                break;
+                        }
                         if (alive)
                             break;
                     }
                     if (alive)
                         break;
                 }
-                if (alive)
-                    break;
+                if (!alive)
+                {
+                    previewContainer.ClearContent();
+                    previewContainer.OriginalPath = string.Empty;
+                }
             }
-            return alive;
+            this.PreviewContainers.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
+            this.Save();
         }
         #endregion
     }

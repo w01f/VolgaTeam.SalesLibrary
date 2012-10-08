@@ -15,7 +15,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         IPreviewContainer GetPreviewContainer(string originalPath);
         IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer);
         void UpdatePreviewableObject(string originalPath, DateTime lastChanged);
-        bool IsPreviewAlive(string originalPath);
+        void UpdatePreviewContainers();
     }
 
     public interface IPreviewContainer
@@ -96,10 +96,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         this.Type = FileTypes.QuickTimeVideo;
                         this.ContainerPath = Path.Combine(this.Parent.StoragePath, Constants.FtpPreviewContainersRootFolderName, "video", this.Identifier);
                         break;
-
-
                     default:
-                        this.Type = FileTypes.Other;
+                        this.Type = FileTypes.Url;
                         break;
                 }
             }

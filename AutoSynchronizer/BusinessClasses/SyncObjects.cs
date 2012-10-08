@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
-using System.Windows.Forms;
 
 namespace AutoSynchronizer.BusinessClasses
 {
@@ -410,7 +410,7 @@ namespace AutoSynchronizer.BusinessClasses
 
                         try
                         {
-                            string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Manual Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                            string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("Library Sync Auto at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
                             using (StreamWriter sw = new StreamWriter(logPath, false))
                             {
                                 sw.Write(syncLog.ToString());
@@ -684,7 +684,7 @@ namespace AutoSynchronizer.BusinessClasses
 
                     try
                     {
-                        string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("iPad Sync at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
+                        string logPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LogRootPath, string.Format("iPad Sync Auto at {0}.txt", DateTime.Now.ToString("MM-dd-yy h-mm tt")));
                         using (StreamWriter sw = new StreamWriter(logPath, false))
                         {
                             sw.Write(syncLog.ToString());
@@ -820,7 +820,7 @@ namespace AutoSynchronizer.BusinessClasses
         public void ScheduleNextGrab()
         {
             StopBackgroundGrab();
-            if (this.Manager.Library.OvernightsCalendar.EnableFileGrabber)
+            if (this.Manager.Library.OvernightsCalendar.EnableFileGrabber && Directory.Exists(this.Manager.Library.OvernightsCalendar.FileGrabSourceFolder))
             {
                 _timer = new System.Threading.Timer(delegate(object state)
                 {

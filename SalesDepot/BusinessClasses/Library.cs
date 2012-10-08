@@ -311,12 +311,9 @@ namespace SalesDepot.BusinessClasses
         {
         }
 
-        public bool IsPreviewAlive(string originalPath)
+        public void UpdatePreviewContainers()
         {
-            bool alive = false;
-            return alive;
         }
-
         #endregion
     }
 }

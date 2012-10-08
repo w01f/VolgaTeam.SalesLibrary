@@ -225,13 +225,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         link.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
                         link.dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
-                        IPreviewContainer previewContainer = this.Parent.GetPreviewContainer(libraryFile.OriginalPath);
-                        if (previewContainer != null)
+                        if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other)
                         {
-                            link.previewId = previewContainer.Identifier;
-                            string[] txtLinks = previewContainer.GetPreviewLinks("txt");
-                            if (txtLinks != null && txtLinks.Length > 0)
-                                link.contentPath = txtLinks[0];
+                            IPreviewContainer previewContainer = this.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+                            if (previewContainer != null)
+                            {
+                                link.previewId = previewContainer.Identifier;
+                                string[] txtLinks = previewContainer.GetPreviewLinks("txt");
+                                if (txtLinks != null && txtLinks.Length > 0)
+                                    link.contentPath = txtLinks[0];
+                            }
                         }
 
                         #region Line Break
@@ -316,7 +319,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                             attachment.originalFormat = linkAttachment.Format;
                             attachment.path = linkAttachment.DestinationRelativePath;
 
-                            previewContainer = this.Parent.GetPreviewContainer(linkAttachment.OriginalPath);
+                            IPreviewContainer previewContainer = this.Parent.GetPreviewContainer(linkAttachment.OriginalPath);
                             if (previewContainer != null)
                                 attachment.previewId = previewContainer.Identifier;
 
@@ -508,7 +511,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             {
                 List<VideoInfo> videoFiles = new List<VideoInfo>();
                 int i = 1;
-                foreach (IPreviewContainer previewContainer in this.Parent.PreviewContainers.Where(x => this.Parent.IsPreviewAlive(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
+                foreach (IPreviewContainer previewContainer in this.Parent.PreviewContainers.Where(x => !string.IsNullOrEmpty(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
                 {
                     VideoInfo videoFile = new VideoInfo(previewContainer);
                     videoFile.Index = i.ToString();
