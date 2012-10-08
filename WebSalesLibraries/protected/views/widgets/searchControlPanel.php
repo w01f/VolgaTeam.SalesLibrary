@@ -35,6 +35,12 @@
         </div>
         <div class ="group-panel">
             <div class ="group-title">Date Range:</div>
+<!--            <div class ="group-body">
+                <div id="condition-date-value" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                    <input class="span2" size="16" type="text" value="12-02-2012" readonly="">
+                    <span class="add-on"><i class="icon-calendar"></i></span>
+                </div>
+            </div>-->
         </div>            
     </div>
     <div id="search-options-stations">

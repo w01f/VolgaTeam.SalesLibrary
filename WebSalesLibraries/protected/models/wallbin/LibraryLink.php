@@ -510,27 +510,27 @@ class LibraryLink
                         {
                             if (isset($this->universalPreview->mp4Links))
                                 foreach ($this->universalPreview->mp4Links as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                             if (isset($this->universalPreview->ogvLinks))
                                 foreach ($this->universalPreview->ogvLinks as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         }
                     case 'tab':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->mp4Links))
                                 foreach ($this->universalPreview->mp4Links as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         break;
                     case 'ogv':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->ogvLinks))
                                 foreach ($this->universalPreview->ogvLinks as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         break;
                 }
                 break;
             case 'mp4':
-                $viewSources[] = array('src' => $this->fileLink, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/js/video-js/video-js.swf');
+                $viewSources[] = array('src' => $this->fileLink, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                 break;
         }
         if (isset($viewSources))
