@@ -12,11 +12,26 @@
             };
 		
             var thatRet = that;
-		
-            if($.cookie("selectedRibbonTab")!=null)
-                that.selectedTabIndex = parseInt($.cookie("selectedRibbonTab"));
+            
+            if($.cookie("selectedRibbonTabId")!=null)
+                that.selectedTabId = $.cookie("selectedRibbonTabId");
             else
-                that.selectedTabIndex = -1;
+                that.selectedTabId = null;
+            
+            that.selectedTabIndex = -1;
+            $.cookie("selectedRibbonTabIndex", 0, {
+                expires: (60 * 60 * 24 * 7)
+            });        
+            if(that.selectedTabId != null)
+                $('.ribbon-tab').each(function(index) {
+                    if(that.selectedTabId == $(this).attr('id'))
+                    {
+                        that.selectedTabIndex = index;
+                        $.cookie("selectedRibbonTabIndex", index, {
+                            expires: (60 * 60 * 24 * 7)
+                        });        
+                    }
+                });
 		
             var tabNames = [];
 		
@@ -56,7 +71,7 @@
                         thisTabHeader.addClass('file');
 					
                         thisTabHeader.click(function() {
-                            that.switchToTabByIndex(index);
+                            that.switchToTabByIndex(index,id);
                             that.goToBackstage();
                         });
                     } else {
@@ -67,7 +82,7 @@
 					
                         thisTabHeader.click(function() {
                             that.returnFromBackstage();
-                            that.switchToTabByIndex(index);
+                            that.switchToTabByIndex(index,id);
                         });
                     }
 				
@@ -108,10 +123,10 @@
                 ribObj.find('span').attr('unselectable', 'on');
                 ribObj.attr('unselectable', 'on');
 
-                that.switchToTabByIndex(that.selectedTabIndex);
+                that.switchToTabByIndex(that.selectedTabIndex, that.selectedTabId);
             }
 		
-            that.switchToTabByIndex = function(index) {
+            that.switchToTabByIndex = function(index,id) {
                 var headerStrip = $('#ribbon #ribbon-tab-header-strip');
                 headerStrip.find('.ribbon-tab-header').removeClass('sel');
                 headerStrip.find('#ribbon-tab-header-'+index).addClass('sel');
@@ -119,21 +134,28 @@
                 $('#ribbon .ribbon-tab').hide();
                 $('#ribbon #'+tabNames[index]).show();
                 
-                that.switchToPageByIndex(index);
+                that.switchToPageByIndex(index,id);
             }
             
-            that.switchToPageByIndex = function(index) {
-                $.cookie("selectedRibbonTab", index, {
+            that.switchToPageByIndex = function(index,id) {
+                $.cookie("selectedRibbonTabIndex", index, {
                     expires: (60 * 60 * 24 * 7)
                 });        
-                switch(index)
+                $.cookie("selectedRibbonTabId", id, {
+                    expires: (60 * 60 * 24 * 7)
+                });                    
+                switch(id)
                 {
-                    case 0:
+                    case 'home-tab':
                         $.initColumnsView();                            
                         break;
-                    case 1:
+                    case 'search-full-tab':
+                    case 'search-file-card-tab':
                         $.initSearchView();
-                        break;                        
+                        break;                   
+                    default:
+                        $.initColumnsView();                            
+                        break;                            
                 }
             }            
 		

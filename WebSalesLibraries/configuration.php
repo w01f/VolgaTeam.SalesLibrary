@@ -21,6 +21,7 @@ return CMap::mergeArray(
             ),
             'home_tab' => array(
                 'name' => 'Home',
+                'position' => 1,
                 'list_button' => array(
                     'visible' => true,
                 ),
@@ -31,9 +32,15 @@ return CMap::mergeArray(
                     'visible' => true,
                 ),
             ),
-            'search_tab' => array(
+            'search_full_tab' => array(
                 'visible' => true,
                 'name' => 'Search',
+                'position' => 2,
+            ),
+            'search_file_card_tab' => array(
+                'visible' => true,
+                'name' => 'Sales Success Models',
+                'position' => 3,
             ),
             'email' => array(
                 'from' => 'billy@adSALESapps.com',

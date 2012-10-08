@@ -15,13 +15,21 @@
         var selectedCondition = $('#condition-content-value').val();
         if($('#content-compare-exact').is(':checked'))
             selectedCondition = '"' + selectedCondition + '"';
-                
+        
+        var selectedTabId = $.cookie("selectedRibbonTabId");
+        var onlyFileCards = 0;
+        if(selectedTabId == 'search-file-card-tab')
+            onlyFileCards = 1;
+        else if($.cookie("onlyFileCards")!= null)
+            onlyFileCards = parseInt($.cookie("onlyFileCards"));
+            
         $.ajax({
             type: "POST",
             url: "search/searchByContent",
             data: {
                 fileTypes: selectedFileTypes,
                 condition: selectedCondition,
+                onlyFileCards: onlyFileCards,
                 isSort: isSort
             },
             beforeSend: function(){
@@ -84,6 +92,17 @@
         });        
         
         $.updateSearchGridDimensions();
+    }
+    
+    $.toggleSearchFileCard = function(toggleState){
+        if(toggleState == 1)
+            $('#search-file-card-button').addClass('sel');        
+        else
+            $('#search-file-card-button').removeClass('sel');        
+        
+        $.cookie("onlyFileCards", toggleState, {
+            expires: (60 * 60 * 24 * 7)
+        });
     }
     
     $.initControlPanel = function(){
@@ -173,10 +192,14 @@
         $( "#content-compare-partial" ).off('click');        
         $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
         
-        $( "#run-search" ).off('click');
-        $( "#run-search" ).on('click',function () {
+        $( "#run-search-full" ).off('click');
+        $( "#run-search-full" ).on('click',function () {
             $.runSearch(0);
         });        
+        $( "#run-search-file-card" ).off('click');
+        $( "#run-search-file-card" ).on('click',function () {
+            $.runSearch(0);
+        });                
         $("#right-navbar input").keypress(function (e) {
             if (e.which == 13) {
                 return false;
@@ -187,7 +210,29 @@
                 $.runSearch(0);
             }
         });  
-        
+    
+        var selectedTabId = $.cookie("selectedRibbonTabId");
+        if(selectedTabId == 'search-full-tab')
+        {
+            var onlyFileCards = 0;
+            if($.cookie("onlyFileCards")!= null)
+                onlyFileCards = parseInt($.cookie("onlyFileCards"));
+            $.toggleSearchFileCard(onlyFileCards);
+            $( "#search-file-card-button" ).off('click');
+            $( "#search-file-card-button" ).on('click',function () {
+                var onlyFileCards = 0;
+                if($.cookie("onlyFileCards")!= null)
+                    onlyFileCards = parseInt($.cookie("onlyFileCards"));
+                if(onlyFileCards == 0)
+                    onlyFileCards = 1;
+                else
+                    onlyFileCards = 0;
+                $.toggleSearchFileCard(onlyFileCards);
+            });  
+        }
+        else
+            $.toggleSearchFileCard(0);
+
         $.initLibrarySelector();
     }
     

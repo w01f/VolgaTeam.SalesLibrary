@@ -109,7 +109,7 @@ class LinkStorage extends CActiveRecord
         Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
     }
 
-    public static function searchByContent($contentCondition, $fileTypes, $checkedLibraryIds, $isSort)
+    public static function searchByContent($contentCondition, $fileTypes, $checkedLibraryIds, $onlyFileCards, $isSort)
     {
         if ($isSort == 1)
         {
@@ -147,10 +147,22 @@ class LinkStorage extends CActiveRecord
                 }
             }
 
+            $fileCardsCondition = '1 = 1';
+            $additionalFileCardsCondition = '';
+            if (isset($onlyFileCards))
+            {
+                if ($onlyFileCards == 1)
+                {
+                    $fileCardsCondition = 'enable_file_card = true or enable_attachments = true ';
+                    if ($contentCondition == '""')
+                        $additionalFileCardsCondition = ' or (enable_file_card = true or enable_attachments = true)';
+                }
+            }
+
             $linkRecords = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('tbl_link')
-                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)) and (" . $libraryCondition . ") and (" . $fileTypeCondition . ")")
+                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ")")
                 ->queryAll();
             if (isset($linkRecords))
             {
@@ -164,7 +176,7 @@ class LinkStorage extends CActiveRecord
                         $link['file_name'] = $linkRecord['file_name'];
                         $link['date_modify'] = $linkRecord['date_modify'];
                         $link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
-                        
+
                         $library = $libraryManager->getLibraryById($linkRecord['id_library']);
                         if (isset($library))
                             $link['library'] = $library->name;
@@ -196,7 +208,7 @@ class LinkStorage extends CActiveRecord
                     }
                 }
             }
-            if(isset($links))
+            if (isset($links))
                 Yii::app()->session['searchedLinks'] = $links;
             else
                 Yii::app()->session['searchedLinks'] = null;
