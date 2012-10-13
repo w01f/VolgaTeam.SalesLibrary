@@ -449,6 +449,7 @@ body
     vertical-align: middle;
     color: black;
     height: 25px;
+    line-height: normal;
 }
 
 #select-library

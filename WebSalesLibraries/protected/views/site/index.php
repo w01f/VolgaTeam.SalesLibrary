@@ -1,12 +1,12 @@
 <?php
-$version = '9.0';
+$version = '2.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/video-js/video-js.min.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?'.$version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/datepicker.css?'.$version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/daterangepicker.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/ribbon.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/columns.css?'.$version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/search.css?'.$version);
@@ -22,8 +22,9 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fa
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
-//$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.min.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/bootstrap-datepicker.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.min.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/date.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/daterangepicker.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/overlay.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/textSizing.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/scaling.js?'.$version, CClientScript::POS_HEAD);

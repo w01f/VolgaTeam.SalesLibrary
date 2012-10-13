@@ -11,6 +11,8 @@ class SearchController extends CController
     {
         $fileTypes = Yii::app()->request->getPost('fileTypes');
         $condition = Yii::app()->request->getPost('condition');
+        $startDate = Yii::app()->request->getPost('startDate');
+        $endDate = Yii::app()->request->getPost('endDate');
         $onlyFileCards = intval(Yii::app()->request->getPost('onlyFileCards'));
         $isSort = intval(Yii::app()->request->getPost('isSort'));
 
@@ -20,7 +22,7 @@ class SearchController extends CController
             $checkedLibraryIds = array();
 
         if (isset($fileTypes) && isset($condition) && isset($isSort))
-            $links = LinkStorage::searchByContent($condition, $fileTypes, $checkedLibraryIds, $onlyFileCards, $isSort);
+            $links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $isSort);
 
         if (!isset($links))
             $links = null;

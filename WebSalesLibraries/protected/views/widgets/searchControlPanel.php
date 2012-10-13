@@ -8,15 +8,12 @@
         <div class ="group-panel">
             <div class ="group-title">What Are You Looking For?</div>
             <div class ="group-body">
-                <input id="condition-content-value">
+                <input type="text" id="condition-content-value" placeholder="Type here…">
                 <br>
-                <br>
-                <table id="content-compare-type">
-                    <tr>                
-                        <td><input type="radio" id="content-compare-exact" name ="radio" /><label for="content-compare-exact">Exact Match</label></td>
-                        <td><input type="radio" id="content-compare-partial" name ="radio"/><label for="content-compare-partial">Partial Match</label></td>
-                    </tr>
-                </table>
+                <div class="btn-group" id="content-compare-type">
+                    <button type="button" class="btn" id="content-compare-exact">Exact Match</button>
+                    <button type="button" class="btn" id="content-compare-partial">Partial Match</button>
+                </div>
             </div>
         </div>
         <div class ="group-panel">
@@ -24,31 +21,30 @@
             <div class ="group-body">
                 <table id ="file-types">
                     <tr>
-                        <td><input type="checkbox" class ="search-file-type" id="search-file-type-powerpoint" name="checkbox"/><label for="search-file-type-powerpoint">Power Point</label></td>
-                        <td><input type="checkbox" class ="search-file-type" id="search-file-type-word" name="checkbox" /><label for="search-file-type-word">Word</label></td>
-                        <td><input type="checkbox" class ="search-file-type" id="search-file-type-excel" name="checkbox" /><label for="search-file-type-excel">Excel</label></td>
-                        <td><input type="checkbox" class ="search-file-type" id="search-file-type-pdf" name="checkbox" /><label for="search-file-type-pdf">PDF</label></td>
-                        <td><input type="checkbox" class ="search-file-type" id="search-file-type-video" name="checkbox" /><label for="search-file-type-video">Video</label></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-powerpoint"><i class="icon-search-powerpoint"></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-word"><i class="icon-search-word"></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-excel"><i class="icon-search-excel"></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-pdf"><i class="icon-search-pdf"></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-video"><i class="icon-search-video"></button></td>
                     </tr>
                 </table>
             </div>
-        </div>
+        </div>        
         <div class ="group-panel">
             <div class ="group-title">Date Range:</div>
-<!--            <div class ="group-body">
-                <div id="condition-date-value" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-                    <input class="span2" size="16" type="text" value="12-02-2012" readonly="">
-                    <span class="add-on"><i class="icon-calendar"></i></span>
+            <div class ="group-body">
+                <div class="input-prepend" id="condition-date-range">
+                    <span class="add-on"><i class="icon-calendar"></i></span><input type="text" placeholder="Select Date Range...">
                 </div>
-            </div>-->
-        </div>            
+            </div>            
+        </div>        
     </div>
     <div id="search-options-stations">
         <div class ="group-panel">
             <table class ="library-checkbox-list-buttons">
                 <tr>                
-                    <td class ="left"><input type="submit" id="library-select-all" value ="Select All"/></td>
-                    <td class ="right"><input type="submit" id="library-clear-all" value ="Clear All"/></td>
+                    <td class ="left"><button type="button" class="btn btn-block" id="library-select-all">Select All</button></td>
+                    <td class ="right"><button type="button" class="btn btn-block" id="library-clear-all">Clear All</button></td>
                 </tr>
             </table>  
             <ul id="library-checkbox-list">
@@ -56,8 +52,12 @@
                 foreach ($libraries as $library)
                 {
                     echo CHtml::openTag('li');
-                    echo CHtml::checkBox($library['id'], $library['selected']);
-                    echo CHtml::label($library['name'], $library['id']);
+                    {
+                        $btnClass = 'btn' . ($library['selected'] ? ' active' : '');
+                        echo CHtml::openTag('button', array('class' => $btnClass, 'id' => $library['id']));
+                        echo $library['name'];
+                        echo CHtml::closeTag('button');
+                    }
                     echo CHtml::closeTag('li');
                 }
                 ?>

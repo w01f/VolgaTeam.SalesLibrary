@@ -1,6 +1,6 @@
 #library-checkbox-list
 {
-    height:300px;
+    height:310px;
     background: white;
     border-color: #999;
     border-width: 1px;
@@ -34,14 +34,11 @@
 .library-checkbox-list-buttons .left
 {
     text-align: left;
+    padding-right: 20px;
 }
 
 .library-checkbox-list-buttons .right
 {
     text-align: right;
-}
-
-#library-checkbox-list .ui-button
-{
-    width: 75px;
+    padding-left: 20px;
 }

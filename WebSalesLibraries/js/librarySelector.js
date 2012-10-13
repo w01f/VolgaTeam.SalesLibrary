@@ -1,19 +1,17 @@
 (function( $ ) {
     $.selectAllLibraries = function(){
-        $('#library-checkbox-list input[type="checkbox"]').attr('checked', true);
-        $('#library-checkbox-list input[type="checkbox"]').button('refresh');
+        $('#library-checkbox-list .btn').addClass('active');
         $.saveSelectedLibraries();
     }    
 
     $.clearAllLibraries = function(){
-        $('#library-checkbox-list input[type="checkbox"]').attr('checked', false);
-        $('#library-checkbox-list input[type="checkbox"]').button('refresh');
+        $('#library-checkbox-list .btn').removeClass('active');
         $.saveSelectedLibraries();
     }    
     
     $.saveSelectedLibraries = function(){
         var selectedLibraryIds = [];
-        $('#library-checkbox-list input:checked').each(function(){
+        $('#library-checkbox-list .btn.active').each(function(){
             selectedLibraryIds.push(this.id);
         });
         $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
@@ -22,10 +20,14 @@
     }    
     
     $.initLibrarySelector = function(){
-        $("#library-select-all, #library-clear-all, #library-select-save, #library-select-cancel").button();                
-        $('#library-checkbox-list input[type="checkbox"]').button();
-        $('#library-checkbox-list input[type="checkbox"]').off('click');
-        $('#library-checkbox-list input[type="checkbox"]').on('click',$.saveSelectedLibraries);
+        $('#library-checkbox-list .btn').off('click');
+        $('#library-checkbox-list .btn').on('click',function(){
+            if($(this).hasClass('active'))
+                $(this).removeClass('active');
+            else
+                $(this).addClass('active');            
+            $.saveSelectedLibraries
+        });
         $("#library-select-all").off('click'); 
         $("#library-select-all").on('click',$.selectAllLibraries);
         $("#library-clear-all").off('click'); 
