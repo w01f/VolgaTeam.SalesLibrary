@@ -105,16 +105,11 @@
     padding: 0px;
 }
 
-#condition-content-value
+#right-navbar input
 {
-    padding-left: 0px;
-    padding-right: 0px;
-    width: 100%;
-}
-
-#condition-date-range input
-{
-    width: 87%;
+    height: 16px;
+    font-size: 11pt;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .btn.active {
@@ -192,4 +187,20 @@
     border-top: 6px solid white;              
     top: auto !important; 
     bottom: -6px; 
+}
+
+.button-edit
+{
+    width: 100%;
+}
+
+.button-edit .editor
+{
+    width: 100%;
+}
+
+.button-edit .editor input
+{
+    width: 100%; 
+    padding: 4px 0px;
 }

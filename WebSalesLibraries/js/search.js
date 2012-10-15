@@ -132,6 +132,25 @@
             disabled: [2]
         });        
         $( "#search-control-panel" ).on('tabsselect',$.conditionTypeChanged)
+        
+        $( "#clear-content-value" ).off('click');
+        $( "#clear-content-value" ).on('click',function () {
+            $('#condition-content-value').val('');
+        });
+        
+        if($.cookie("exactMatch")!=null)
+        {
+            if($.cookie("exactMatch")==  "true")
+                $( "#content-compare-exact" ).button('toggle');
+            else
+                $( "#content-compare-partial" ).button('toggle');
+        }
+        else
+            $( "#content-compare-exact" ).button('toggle');
+        $( "#content-compare-exact" ).off('click');        
+        $( "#content-compare-exact" ).on('click',$.contentMatchButtonClick);
+        $( "#content-compare-partial" ).off('click');        
+        $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
 
         if($.cookie("fileTypePpt")!=null)
         {
@@ -179,20 +198,6 @@
         $( '#file-types .search-file-type').off('click');
         $( '#file-types .search-file-type').on('click',$.fileTypeButtonClick);
         
-        if($.cookie("exactMatch")!=null)
-        {
-            if($.cookie("exactMatch")==  "true")
-                $( "#content-compare-exact" ).button('toggle');
-            else
-                $( "#content-compare-partial" ).button('toggle');
-        }
-        else
-            $( "#content-compare-exact" ).button('toggle');
-        $( "#content-compare-exact" ).off('click');        
-        $( "#content-compare-exact" ).on('click',$.contentMatchButtonClick);
-        $( "#content-compare-partial" ).off('click');        
-        $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
-        
         $( "#run-search-full" ).off('click');
         $( "#run-search-full" ).on('click',function () {
             $.runSearch(0);
@@ -233,8 +238,9 @@
         }
         else
             $.toggleSearchFileCard(0);
+        
         $.dateFormat = 'MM/dd/yyyy';
-        $('#condition-date-range input').daterangepicker(
+        $('#condition-date-range').daterangepicker(
         {
             format: $.dateFormat,
             ranges: {
@@ -248,9 +254,13 @@
             }
         }, 
         function(start, end) {
-            $('#condition-date-range input').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
+            $('#condition-date-range input').val(start.toString($.dateFormat) + ' - ' + end.toString($.dateFormat));
         }
         );
+        $( "#clear-date-range" ).off('click');
+        $( "#clear-date-range" ).on('click',function () {
+            $('#condition-date-range input').val('');
+        });            
         
         $.initLibrarySelector();
     }

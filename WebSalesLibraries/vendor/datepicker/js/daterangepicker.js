@@ -53,8 +53,8 @@
         };
 
         //element that triggered the date range picker
-        this.element = $(element);
-        this.button = this.element.parent().find('span');
+        this.element = $(element).find('input');
+        this.button = $(element).find('#select-date-range');
 
         if (this.element.hasClass('pull-right'))
             this.opens = 'left';
@@ -283,13 +283,13 @@
             if (this.opens == 'left') {
                 this.container.css({
                     top: this.element.offset().top - this.container.height()-20,
-                    right: $(window).width() - this.button.offset().left - this.element.outerWidth(),
+                    right: $(window).width() - this.element.offset().left - this.element.outerWidth(),
                     left: 'auto'
                 });
             } else {
                 this.container.css({
                     top: this.element.offset().top - this.container.height()-20,
-                    left: this.button.offset().left,
+                    left: this.element.offset().left,
                     right: 'auto'
                 });
             }

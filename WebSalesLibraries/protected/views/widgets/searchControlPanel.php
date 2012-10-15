@@ -8,8 +8,14 @@
         <div class ="group-panel">
             <div class ="group-title">What Are You Looking For?</div>
             <div class ="group-body">
-                <input type="text" id="condition-content-value" placeholder="Type here…">
-                <br>
+                <table class="button-edit input-append">
+                    <tr>
+                        <td class="editor"><input type="text" id="condition-content-value" placeholder="Type Here..."></td>
+                        <td class="buttons">
+                            <a class ="btn btn-small" id ="clear-content-value" href="#"><i class="icon-remove-sign"/></a>
+                        </td>
+                    </tr>
+                </table>                
                 <div class="btn-group" id="content-compare-type">
                     <button type="button" class="btn" id="content-compare-exact">Exact Match</button>
                     <button type="button" class="btn" id="content-compare-partial">Partial Match</button>
@@ -21,11 +27,11 @@
             <div class ="group-body">
                 <table id ="file-types">
                     <tr>
-                        <td><button class ="search-file-type btn" id="search-file-type-powerpoint"><i class="icon-search-powerpoint"></button></td>
-                        <td><button class ="search-file-type btn" id="search-file-type-word"><i class="icon-search-word"></button></td>
-                        <td><button class ="search-file-type btn" id="search-file-type-excel"><i class="icon-search-excel"></button></td>
-                        <td><button class ="search-file-type btn" id="search-file-type-pdf"><i class="icon-search-pdf"></button></td>
-                        <td><button class ="search-file-type btn" id="search-file-type-video"><i class="icon-search-video"></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-powerpoint"><i class="icon-search-powerpoint"/></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-word"><i class="icon-search-word"/></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-excel"><i class="icon-search-excel"/></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-pdf"><i class="icon-search-pdf"/></button></td>
+                        <td><button class ="search-file-type btn" id="search-file-type-video"><i class="icon-search-video"/></button></td>
                     </tr>
                 </table>
             </div>
@@ -33,9 +39,15 @@
         <div class ="group-panel">
             <div class ="group-title">Date Range:</div>
             <div class ="group-body">
-                <div class="input-prepend" id="condition-date-range">
-                    <span class="add-on"><i class="icon-calendar"></i></span><input type="text" placeholder="Select Date Range...">
-                </div>
+                <table class="button-edit input-append" id="condition-date-range">
+                    <tr>
+                        <td class="editor"><input type="text" placeholder="Select Date Range..."></td>
+                        <td class="buttons">
+                            <a class ="btn btn-small" id ="select-date-range" href="#"><i class="icon-calendar"/></a>
+                            <a class ="btn btn-small" id ="clear-date-range" href="#"><i class="icon-remove-sign"/></a>
+                        </td>
+                    </tr>
+                </table>
             </div>            
         </div>        
     </div>

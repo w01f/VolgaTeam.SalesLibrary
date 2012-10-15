@@ -26,7 +26,6 @@ body
     -webkit-box-shadow: #8b9097 0px 1px 3px;
     -moz-box-shadow: #8b9097 0px 1px 3px;
     box-shadow: #8b9097 0px 1px 3px;
-    overflow: hidden;
     z-index: 25;
     position: fixed;
     top: 0;
@@ -156,7 +155,6 @@ body
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#ffffff), to(#eaedf1));
     background: -moz-linear-gradient(#ffffff, #eaedf1); 
     -pie-background: linear-gradient(#ffffff, #eaedf1);
-    overflow: hidden;
     min-width: 500px;
     z-index: 30;
     -pie-watch-ancestors: 2;
@@ -424,40 +422,44 @@ body
 
 #libraries-selector-container
 {
-    display: table;
     z-index: 999; 
 }
 
 #libraries-selector
 {
-    display:table-cell; 
-    vertical-align: middle;
+    width: 200px;
+}
+
+#select-library,#select-page
+{
+    margin-bottom: 10px;
+}
+
+#select-library .dropdown-menu,#select-page .dropdown-menu
+{
+    width: 195px;
+    text-align: center;
+}
+
+#select-library .dropdown-menu li,#select-page .dropdown-menu li
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
 }
 
 #page-logo
 {
     border:none; 
-    display: table-cell; 
     vertical-align: middle;
-}
-
-#select-library,#select-page
-{
-    display: block;
-    width: 170px;
-    font-size: 9pt;
-    vertical-align: middle;
-    color: black;
-    height: 25px;
-    line-height: normal;
-}
-
-#select-library
-{
-    margin-bottom: 20px;
 }
 
 #view-dialog-wrapper,#view-dialog-link
+{
+    display: none;
+}
+
+.list-item-info
 {
     display: none;
 }

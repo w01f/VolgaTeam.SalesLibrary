@@ -21,15 +21,17 @@ asort($tabParam);
                         <span class="ribbon-title"><?php echo Yii::app()->params['home_tab']['name'] ?></span>
                         <div class="ribbon-section" >
                             <span class="section-title" id="libraries-selector-title">Sales Library</span>
-                            <div id ="libraries-selector-container">
-                                <img src="" id="page-logo"/>
-                                <div id="libraries-selector">
-                                    <select  id="select-library">
-                                    </select>
-                                    <select  id="select-page">
-                                    </select>
-                                </div>  
-                            </div>  
+                            <table id ="libraries-selector-container">
+                                <tr>
+                                    <td><img src="" id="page-logo"/></td>
+                                    <td>
+                                        <table id="libraries-selector">
+                                            <tr><td><div class="btn-group" id="select-library"></div></td></tr>
+                                            <tr><td><div class="btn-group" id="select-page"></div></td></tr>
+                                        </table>  
+                                    </td>
+                                </tr>
+                            </table>  
                         </div>
                         <?php if (Yii::app()->params['home_tab']['list_button']['visible'] || Yii::app()->params['home_tab']['buttons_button']['visible'] || Yii::app()->params['home_tab']['search_button']['visible']): ?>                                    
                             <div class="ribbon-section">
