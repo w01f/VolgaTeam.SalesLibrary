@@ -208,6 +208,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                                 folder.Deserialize(childNode);
                                 this.ExtraFolders.Add(folder);
                             }
+
+                        node = document.SelectSingleNode(@"/Library/PreviewContainers");
+                        if (node != null)
+                            foreach (XmlNode childNode in node.ChildNodes)
+                            {
+                                UniversalPreviewContainer previewContainer = new UniversalPreviewContainer(this);
+                                previewContainer.Deserialize(childNode);
+                                this.PreviewContainers.Add(previewContainer);
+                            }
+
                         node = document.SelectSingleNode(@"/Library/Pages");
                         if (node != null)
                             foreach (XmlNode childNode in node.ChildNodes)
@@ -230,15 +240,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                                 AutoWidget autoWidget = new AutoWidget();
                                 autoWidget.Deserialize(childNode);
                                 this.AutoWidgets.Add(autoWidget);
-                            }
-
-                        node = document.SelectSingleNode(@"/Library/PreviewContainers");
-                        if (node != null)
-                            foreach (XmlNode childNode in node.ChildNodes)
-                            {
-                                UniversalPreviewContainer previewContainer = new UniversalPreviewContainer(this);
-                                previewContainer.Deserialize(childNode);
-                                this.PreviewContainers.Add(previewContainer);
                             }
 
                         #region Auto Sync Settings

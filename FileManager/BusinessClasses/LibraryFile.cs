@@ -50,10 +50,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
             set
             {
                 if (_name != value)
@@ -70,7 +67,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     return string.Empty;
                 else
                     return _note;
-
             }
             set
             {
@@ -82,10 +78,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public int Order
         {
-            get
-            {
-                return _order;
-            }
+            get { return _order; }
             set
             {
                 if (_order != value)
@@ -96,10 +89,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public bool IsBold
         {
-            get
-            {
-                return _isBold;
-            }
+            get { return _isBold; }
             set
             {
                 if (_isBold != value)
@@ -110,10 +100,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public bool IsDead
         {
-            get
-            {
-                return _isDead;
-            }
+            get { return _isDead; }
             set
             {
                 if (_isDead != value)
@@ -124,10 +111,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public bool EnableWidget
         {
-            get
-            {
-                return _enableWidget;
-            }
+            get { return _enableWidget; }
             set
             {
                 if (_enableWidget != value)
@@ -157,10 +141,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public DateTime LastChanged
         {
-            get
-            {
-                return _lastChanged;
-            }
+            get { return _lastChanged; }
             set
             {
                 _lastChanged = value;
@@ -184,10 +165,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 else
                     return _linkLocalPath;
             }
-            set
-            {
-                _linkLocalPath = value;
-            }
+            set { _linkLocalPath = value; }
         }
 
         public string DisplayName
@@ -295,7 +273,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 else
                     return false;
             }
-
         }
 
         public string Content
@@ -312,10 +289,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
         public string PreviewStoragePath
         {
-            get
-            {
-                return this.Parent.Parent.Parent.Folder.FullName;
-            }
+            get { return this.Parent.Parent.Parent.Folder.FullName; }
         }
 
         public string Format
@@ -416,10 +390,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             result.Append(this.CustomKeywords.Serialize());
             result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
             result.AppendLine(@"<FileCard>" + this.FileCard.Serialize() + @"</FileCard>");
+
             #region Compatibility with desktop version of Sales Depot
             if (this.PreviewContainer != null)
                 result.AppendLine(@"<PreviewContainer>" + this.PreviewContainer.Serialize() + @"</PreviewContainer>");
             #endregion
+
             if (this.PresentationProperties != null)
                 result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
             if (this.LineBreakProperties != null)
@@ -427,6 +403,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
             if (this.BannerProperties != null && this.BannerProperties.Configured)
             {
                 result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
+
                 #region Compatibility with old versions
                 result.AppendLine(@"<EnableBanner>" + this.BannerProperties.Enable.ToString() + @"</EnableBanner>");
                 result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.BannerProperties.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
@@ -522,7 +499,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                     case "FileCard":
                         this.FileCard.Deserialize(childNode);
                         break;
-                    #region Compatibility with old version of Sales Depot
+
+                        #region Compatibility with old version of Sales Depot
                     case "PreviewContainer":
                         this.PreviewContainer = new PresentationPreviewContainer(this);
                         this.PreviewContainer.Deserialize(childNode);
@@ -534,7 +512,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         if (!this.Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.ToLower().Equals(this.OriginalPath.ToLower())))
                             this.Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
                         break;
-                    #endregion
+                        #endregion
+
                     case "PresentationProperties":
                         this.PresentationProperties = new PresentationProperties();
                         this.PresentationProperties.Deserialize(childNode);
@@ -549,7 +528,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         this.BannerProperties = new BannerProperties(this);
                         this.BannerProperties.Deserialize(childNode);
                         break;
-                    #region Compatibility with old versions
+
+                        #region Compatibility with old versions
                     case "EnableBanner":
                         if (bool.TryParse(childNode.InnerText, out tempBool))
                             _oldEnableBanner = tempBool;
@@ -560,7 +540,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                         else
                             _oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
                         break;
-                    #endregion
+                        #endregion
                 }
             }
 
@@ -568,6 +548,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 InitBannerProperties();
 
             SetProperties();
+
+            if (this.Type == FileTypes.BuggyPresentation || this.Type == FileTypes.FriendlyPresentation || this.Type == FileTypes.Presentation || this.Type == FileTypes.Other || this.Type == FileTypes.MediaPlayerVideo || this.Type == FileTypes.QuickTimeVideo)
+                this.Parent.Parent.Parent.GetPreviewContainer(this.OriginalPath);
         }
 
         public void InitBannerProperties()
