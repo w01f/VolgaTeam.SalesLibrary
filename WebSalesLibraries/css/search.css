@@ -107,9 +107,6 @@
 
 #right-navbar input
 {
-    height: 16px;
-    font-size: 11pt;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .btn.active {
@@ -192,6 +189,7 @@
 .button-edit
 {
     width: 100%;
+    height: 17px;
 }
 
 .button-edit .editor
@@ -201,6 +199,25 @@
 
 .button-edit .editor input
 {
+    font-size: 12pt;
     width: 100%; 
     padding: 4px 0px;
+}
+
+#search-links-number
+{
+    position: absolute;
+    bottom: 0px;
+}
+
+#search-links-number>span
+{
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 14pt;
+    font-weight: bold;
+}
+
+#links-number-hidden
+{
+    display: none;
 }

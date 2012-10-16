@@ -1,7 +1,10 @@
 <?php
+$version = '2.0';
 $cs = Yii::app()->clientScript;
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/login.css?' . $version);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/login.js', CClientScript::POS_HEAD);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/login.css');
 $this->pageTitle = Yii::app()->name . ' - Login';
 echo CHtml::openTag('div', array(
     'class' => 'form'
@@ -21,6 +24,7 @@ echo CHtml::openTag('div', array(
         echo $form->textField($loginData, 'login'
             , array(
             'class' => 'row',
+            'placeholder' => 'Username',
             'id' => 'field-login')
         );
 
@@ -30,6 +34,7 @@ echo CHtml::openTag('div', array(
         echo $form->textField($loginData, 'password'
             , array(
             'class' => 'row',
+            'placeholder' => 'Password',
             'id' => 'field-password')
         );
 
@@ -52,34 +57,38 @@ echo CHtml::openTag('div', array(
         echo CHtml::openTag('table', array(
             'class' => 'row'
         ));
-        echo CHtml::openTag('tr');
         {
-            if (Yii::app()->params['login']['rememberMeField'])
+            echo CHtml::openTag('tr');
             {
-
-                echo CHtml::openTag('td', array(
-                    'id' => 'remember-me-container'
-                ));
+                if (Yii::app()->params['login']['rememberMeField'])
                 {
-                    echo $form->checkBox($loginData, 'rememberMe'
-                        , array(
-                        'id' => 'field-remember')
-                    );
-                    echo $form->label($loginData, 'rememberMe'
-                        , array('id' => 'lable-remember')
-                    );
+
+                    echo CHtml::openTag('td', array(
+                        'id' => 'remember-me-container'
+                    ));
+                    {
+                        echo $form->checkBox($loginData, 'rememberMe'
+                            , array(
+                            'id' => 'field-remember')
+                        );
+                        echo $form->label($loginData, 'rememberMe'
+                            , array('id' => 'lable-remember')
+                        );
+                    }
+                    echo CHtml::closeTag('td'); //rememberMeContainer
                 }
-                echo CHtml::closeTag('td'); //rememberMeContainer
+                echo CHtml::openTag('td', array(
+                    'id' => 'button-login-container')
+                );
+                echo CHtml::submitButton('Log In'
+                    , array('id' => 'button-login',
+                    'class' => 'btn'
+                    )
+                );
+                echo CHtml::closeTag('td');
             }
-            echo CHtml::openTag('td', array(
-                'id' => 'button-login-container')
-            );
-            echo CHtml::submitButton('Log In'
-                , array('id' => 'button-login')
-            );
-            echo CHtml::closeTag('td');
+            echo CHtml::closeTag('tr'); //row
         }
-        echo CHtml::closeTag('tr'); //row
         echo CHtml::closeTag('table'); //row
 
         if (Yii::app()->params['login']['forgotPasswordField'])

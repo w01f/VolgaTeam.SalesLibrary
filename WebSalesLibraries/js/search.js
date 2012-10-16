@@ -43,6 +43,7 @@
             },
             beforeSend: function(){
                 $.showOverlayLight();
+                $('#search-links-number>span').html('');
             },
             complete: function(){
                 $.hideOverlayLight();
@@ -52,6 +53,11 @@
             success: function(msg){
                 $('#search-result>div').html('');
                 $('#search-result>div').append(msg);
+                
+                var searchedLinks = $('#links-number-hidden').html();
+                if(searchedLinks!= null)
+                    if(searchedLinks!= '')
+                        $('#search-links-number>span').html('Files: '+ searchedLinks);
             },
             error: function(){
                 $('#search-result>div').html('');

@@ -135,9 +135,14 @@
 
 #search-grid-body tr.link-details-container .link-details td
 {
-    border: none;
     margin: 0px;
     padding: 0;
+}
+
+#search-grid-body tr.link-details-container .link-details td.link-type-column
+{
+    padding-left: 50px;
+    padding-bottom: 2px;
 }
 
 #search-grid-body tr.link-details-container .link-details td.hidden-content

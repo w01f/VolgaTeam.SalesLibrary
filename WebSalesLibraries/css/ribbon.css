@@ -433,19 +433,13 @@ body
 #select-library,#select-page
 {
     margin-bottom: 10px;
+    font-size: 9pt;
+    vertical-align: middle;
+    line-height: 15px;
 }
 
-#select-library .dropdown-menu,#select-page .dropdown-menu
+#select-library option,#select-page option
 {
-    width: 195px;
-    text-align: center;
-}
-
-#select-library .dropdown-menu li,#select-page .dropdown-menu li
-{
-    margin: 0px;
-    padding: 0px;
-    font-size: 12px;
 }
 
 #page-logo
@@ -455,11 +449,6 @@ body
 }
 
 #view-dialog-wrapper,#view-dialog-link
-{
-    display: none;
-}
-
-.list-item-info
 {
     display: none;
 }

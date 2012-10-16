@@ -12,7 +12,7 @@
                     <tr>
                         <td class="editor"><input type="text" id="condition-content-value" placeholder="Type Here..."></td>
                         <td class="buttons">
-                            <a class ="btn btn-small" id ="clear-content-value" href="#"><i class="icon-remove-sign"/></a>
+                            <a class ="btn" id ="clear-content-value" href="#"><i class="icon-remove-sign"/></a>
                         </td>
                     </tr>
                 </table>                
@@ -36,20 +36,23 @@
                 </table>
             </div>
         </div>        
-        <div class ="group-panel">
+        <div class ="group-panel" id="condition-date-panel">
             <div class ="group-title">Date Range:</div>
             <div class ="group-body">
                 <table class="button-edit input-append" id="condition-date-range">
                     <tr>
                         <td class="editor"><input type="text" placeholder="Select Date Range..."></td>
                         <td class="buttons">
-                            <a class ="btn btn-small" id ="select-date-range" href="#"><i class="icon-calendar"/></a>
-                            <a class ="btn btn-small" id ="clear-date-range" href="#"><i class="icon-remove-sign"/></a>
+                            <a class ="btn" id ="select-date-range" href="#"><i class="icon-calendar"/></a>
+                            <a class ="btn" id ="clear-date-range" href="#"><i class="icon-remove-sign"/></a>
                         </td>
                     </tr>
                 </table>
             </div>            
-        </div>        
+        </div> 
+        <div class ="group-panel" id ="search-links-number">
+            <span></span>
+        </div>                
     </div>
     <div id="search-options-stations">
         <div class ="group-panel">
@@ -78,3 +81,4 @@
     </div>
     <div id="search-options-advanced"></div>
 </div>
+

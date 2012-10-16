@@ -1,3 +1,11 @@
+<?php
+if (isset($links))
+{
+    echo CHtml::openTag('div', array('id' => 'links-number-hidden'));
+    echo count($links);
+    echo CHtml::closeTag('div');
+}
+?>
 <table id ="search-grid-header">
     <tr>
         <td class = "link-id-column"><span>Id</span></td>

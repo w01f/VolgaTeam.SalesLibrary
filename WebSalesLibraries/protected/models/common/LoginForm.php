@@ -1,8 +1,8 @@
 <?php
 class LoginForm extends CFormModel
 {
-    public $login = 'Username';
-    public $password = 'Password';
+    public $login;
+    public $password;
     public $rememberMe;
     private $_identity;
     public function rules()

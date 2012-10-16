@@ -26,8 +26,8 @@ asort($tabParam);
                                     <td><img src="" id="page-logo"/></td>
                                     <td>
                                         <table id="libraries-selector">
-                                            <tr><td><div class="btn-group" id="select-library"></div></td></tr>
-                                            <tr><td><div class="btn-group" id="select-page"></div></td></tr>
+                                            <tr><td><select  id="select-library"></select></td></tr>
+                                            <tr><td><select  id="select-page"></select></td></tr>
                                         </table>  
                                     </td>
                                 </tr>

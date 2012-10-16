@@ -26,7 +26,7 @@
                 $(this).removeClass('active');
             else
                 $(this).addClass('active');            
-            $.saveSelectedLibraries
+            $.saveSelectedLibraries();
         });
         $("#library-select-all").off('click'); 
         $("#library-select-all").on('click',$.selectAllLibraries);

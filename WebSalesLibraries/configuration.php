@@ -16,8 +16,8 @@ return CMap::mergeArray(
         'params' => array(
             'appRoot' => dirname(__FILE__),
             'login' => array(
-                'rememberMeField' => false,
-                'forgotPasswordField' => false,
+                'rememberMeField' => true,
+                'forgotPasswordField' => true,
             ),
             'home_tab' => array(
                 'name' => 'Home',
