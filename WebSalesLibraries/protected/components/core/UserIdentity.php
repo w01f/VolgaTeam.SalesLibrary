@@ -15,6 +15,7 @@ class UserIdentity extends CUserIdentity
             $this->username = $user->login;
             $this->setState('firstName', $user->first_name);
             $this->setState('lastName', $user->last_name);
+            $this->setState('email', $user->email);
             $this->setState('role', $user->role);
             $this->errorCode = self::ERROR_NONE;
         }

@@ -116,8 +116,32 @@
                 $.hideOverlayLight();
             },
             success: function(msg){
+                var content = $(msg);
+                content.find('#email-accept').off('click');
+                content.find('#email-accept').on('click',function(){
+                    $.ajax({
+                        type: "POST",
+                        url: "wallbin/emailSend",
+                        data: {
+                            file: selectedLink.href,
+                            emailTo: content.find('#email-to').val(),
+                            emailFrom: content.find('#email-from').val(),
+                            emailSubject: content.find('#email-subject').val(),
+                            emailBody: content.find('#email-body').val()
+                        },
+                        complete: function(){
+                            $.fancybox.close();
+                        },
+                        async: true,
+                        dataType: 'html'                        
+                    });
+                });
+                content.find('#email-cancel').off('click');
+                content.find('#email-cancel').on('click',function(){
+                    $.fancybox.close();
+                });                    
                 $.fancybox({
-                    content: $(msg),
+                    content: content,
                     title: selectedLink.title,
                     helpers: {
                         overlay : {

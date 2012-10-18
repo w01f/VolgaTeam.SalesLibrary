@@ -17,7 +17,7 @@
             <label class="control-label" for="email-from">From:</label>
         </td>
         <td>
-            <input type="text" id="email-from" value="<?php echo Yii::app()->params['email']['from']; ?>">
+            <input type="text" id="email-from" value="<?php echo Yii::app()->user->email; ?>">
         </td>
     </tr>        
     <tr>
