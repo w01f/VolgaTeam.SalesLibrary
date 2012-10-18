@@ -1,0 +1,43 @@
+#email-dialog
+{ 
+}
+
+#email-dialog td
+{ 
+    padding-bottom: 5px;
+}
+
+#email-dialog td.title
+{ 
+    text-align: left;
+}
+
+#email-dialog td.buttons-area
+{ 
+    padding-top: 10px;
+    text-align: center;
+}
+
+#email-dialog .email-body-title
+{ 
+    vertical-align: top;
+}
+
+#email-dialog .btn
+{ 
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 100px;
+}
+
+#email-to, #email-from, #email-subject
+{
+    width: 300px;
+}
+
+#email-body
+{
+    margin: 0px;
+    width: 300px;
+    resize: none;
+}

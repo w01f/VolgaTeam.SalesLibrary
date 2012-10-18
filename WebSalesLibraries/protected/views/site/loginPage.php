@@ -35,6 +35,7 @@ echo CHtml::openTag('div', array(
             , array(
             'class' => 'row',
             'placeholder' => 'Password',
+			'input type' => 'Password',                
             'id' => 'field-password')
         );
 

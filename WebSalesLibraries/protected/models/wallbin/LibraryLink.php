@@ -240,6 +240,7 @@ class LibraryLink
         else
         {
             $this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
+            $this->filePath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
             $this->fileLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath));
         }
         $this->getFormats();
@@ -269,20 +270,24 @@ class LibraryLink
                     $this->availableFormats[] = 'pdf';
                     $this->availableFormats[] = 'png';
                     $this->availableFormats[] = 'jpeg';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'doc':
                     $this->availableFormats[] = 'doc';
                     $this->availableFormats[] = 'pdf';
                     $this->availableFormats[] = 'png';
                     $this->availableFormats[] = 'jpeg';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'xls':
                     $this->availableFormats[] = 'xls';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'pdf':
                     $this->availableFormats[] = 'pdf';
                     $this->availableFormats[] = 'png';
                     $this->availableFormats[] = 'jpeg';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'video':
                     switch ($this->browser)
@@ -322,15 +327,20 @@ class LibraryLink
                     break;
                 case 'png':
                     $this->availableFormats[] = 'png';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'jpeg':
                     $this->availableFormats[] = 'jpeg';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'url':
                     $this->availableFormats[] = 'url';
                     break;
                 default:
                     $this->originalFormat = 'other';
+                    if (isset($this->fileLink))
+                        if ($this->fileLink != '')
+                            $this->availableFormats[] = 'url';
                     break;
             }
         }
@@ -345,6 +355,9 @@ class LibraryLink
                 {
                     case 'ppt':
                         $viewSources[] = array('href' => $this->fileLink);
+                        break;
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
@@ -400,6 +413,9 @@ class LibraryLink
                     case 'doc':
                         $viewSources[] = array('href' => $this->fileLink);
                         break;
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+                        break;
                     case 'png':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->pngLinks))
@@ -452,6 +468,9 @@ class LibraryLink
                     case 'xls':
                         $viewSources[] = array('href' => $this->fileLink);
                         break;
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+                        break;
                 }
                 break;
             case 'pdf':
@@ -459,6 +478,9 @@ class LibraryLink
                 {
                     case 'pdf':
                         $viewSources[] = array('href' => $this->fileLink);
+                        break;
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
@@ -496,7 +518,19 @@ class LibraryLink
                 break;
             case 'jpeg':
             case 'png':
+                switch ($format)
+                {
+                    case 'jpeg':
+                    case 'png':
+                        $viewSources[] = array('href' => $this->fileLink);
+                        break;
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+                        break;
+                }
+                break;
             case 'url':
+            case 'other':
                 $viewSources[] = array('href' => $this->fileLink);
                 break;
             case 'video':

@@ -29,6 +29,15 @@ class WallbinController extends CController
         $this->renderPartial('pageDropDownList', array('selectedLibrary' => $libraryManager->getSelectedLibrary(),
             'selectedPage' => $libraryManager->getSelectedPage()), false, true);
     }
+    
+    public function actionEmailDialog()
+    {
+        $this->renderPartial('emailDialog', array(), false, true);
+    }
+    
+    public function actionEmailSend()
+    {
+        
+    }    
 }
-
 ?>

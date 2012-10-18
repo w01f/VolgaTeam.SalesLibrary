@@ -81,6 +81,9 @@ echo CHtml::openTag('div', array(
                         case 'url':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/url.png';
                             break;
+                        case 'email':
+                            $imageSource = Yii::app()->baseUrl . '/images/fileFormats/email.png';
+                            break;                        
                     }
                     if ($imageSource != '')
                     {

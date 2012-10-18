@@ -78,28 +78,63 @@
     
     $.downloadFile = function(url)
     {
-//        $.ajax({
-//            type: "POST",
-//            url: "site/downloadFile",
-//            data: {
-//                url: url
-//            },            
-//            beforeSend: function(){
-//                $.showOverlay();
-//            },
-//            complete: function(){
-//                $.hideOverlay();
-//            },
-//            success: function(msg){
-//                $('<iframe id="secretIFrame" src="" style="display:none; visibility:hidden;"></iframe>').attr("src",msg);
-//            },            
-//            error: function(msg){
-//                alert(msg);
-//            },                        
-//            async: true
-//        });        
-//        window.open("site/downloadFile?url="+url);                                    
+        //        $.ajax({
+        //            type: "POST",
+        //            url: "site/downloadFile",
+        //            data: {
+        //                url: url
+        //            },            
+        //            beforeSend: function(){
+        //                $.showOverlay();
+        //            },
+        //            complete: function(){
+        //                $.hideOverlay();
+        //            },
+        //            success: function(msg){
+        //                $('<iframe id="secretIFrame" src="" style="display:none; visibility:hidden;"></iframe>').attr("src",msg);
+        //            },            
+        //            error: function(msg){
+        //                alert(msg);
+        //            },                        
+        //            async: true
+        //        });        
+        //        window.open("site/downloadFile?url="+url);                                    
         window.open(url);
+    }    
+    
+    $.emailFile = function(selectedLink)
+    {
+        $.ajax({
+            type: "POST",
+            url: "wallbin/emailDialog",
+            data: {
+            },
+            beforeSend: function(){
+                $.showOverlayLight();
+            },
+            complete: function(){
+                $.hideOverlayLight();
+            },
+            success: function(msg){
+                $.fancybox({
+                    content: $(msg),
+                    title: selectedLink.title,
+                    helpers: {
+                        overlay : {
+                            css : {
+                                'background-color' : '#eee'
+                            }
+                        }
+                    },
+                    openEffect  : 'none',
+                    closeEffect	: 'none'            
+                });                
+            },
+            error: function(){
+            },            
+            async: true,
+            dataType: 'html'                        
+        });          
     }    
     
     $.viewSelectedFormat = function()
@@ -144,28 +179,50 @@
                                 closeEffect	: 'none'            
                             });                        
                             break;
+                        case 'email':
+                            $.emailFile(selectedLinks[0]);
+                            break;
                         default:
                             $.downloadFile(selectedLinks[0].href);
                             break;
                     }
                     break;                    
-                case 'xls':                                    
+                case 'xls':
+                    switch(selectedViewType)
+                    {
+                        case 'email':
+                            $.emailFile(selectedLinks[0]);
+                            break;
+                        default:
+                            $.downloadFile(selectedLinks[0].href);
+                            break;
+                    }                    
+                    break;
                 case 'url':
+                case 'other':
                     $.downloadFile(selectedLinks[0].href);
                     break;                
                 case 'png':
                 case 'jpeg':
-                    $.fancybox(selectedLinks,{
-                        helpers: {
-                            overlay : {
-                                css : {
-                                    'background-color' : '#eee'
-                                }
-                            }                                
-                        },
-                        openEffect  : 'none',
-                        closeEffect	: 'none'            
-                    });
+                    switch(selectedViewType)
+                    {
+                        case 'email':
+                            $.emailFile(selectedLinks[0]);
+                            break;
+                        default:
+                            $.fancybox(selectedLinks,{
+                                helpers: {
+                                    overlay : {
+                                        css : {
+                                            'background-color' : '#eee'
+                                        }
+                                    }                                
+                                },
+                                openEffect  : 'none',
+                                closeEffect	: 'none'            
+                            });
+                            break;
+                    }                    
                     break;
                 case 'mp4':                    
                 case 'video':

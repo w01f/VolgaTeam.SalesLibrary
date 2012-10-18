@@ -48,6 +48,10 @@ return CMap::mergeArray(
                     'subject' => 'Accsess to isalesdepot.com',
                     'body' => 'You have been created accont at isalesdepot.com',
                 ),
+                'send_link' => array(
+                    'subject' => 'iSalesDepot Link',
+                    'body' => 'Check this link, please:',
+                ),                
             ),
         ),
         'components' => array(
