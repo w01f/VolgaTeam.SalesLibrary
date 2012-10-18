@@ -22,6 +22,12 @@ class SiteController extends CController
 
         $this->render('loginPage', array('loginData' => $model));
     }
+    
+    public function actionLogout()
+    {
+        Yii::app()->user->logout();
+        Yii::app()->end();
+    }    
 
     public function actionRecoverPassword()
     {

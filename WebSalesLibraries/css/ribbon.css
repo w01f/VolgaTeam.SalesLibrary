@@ -425,6 +425,11 @@ body
     z-index: 999; 
 }
 
+#user-info
+{
+    height: 60%;
+}
+
 #libraries-selector
 {
     width: 200px;

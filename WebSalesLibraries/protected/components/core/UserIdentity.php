@@ -2,10 +2,9 @@
 class UserIdentity extends CUserIdentity
 {
     private $_id;
-    
     public function authenticate()
     {
-        $user=UserStorage::model()->find('LOWER(login)=?',array(strtolower($this->username)));
+        $user = UserStorage::model()->find('LOWER(login)=?', array(strtolower($this->username)));
         if ($user === null)
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         else if (!$user->validatePassword($this->password))
@@ -14,8 +13,10 @@ class UserIdentity extends CUserIdentity
         {
             $this->_id = $user->id;
             $this->username = $user->login;
-            $this->errorCode = self::ERROR_NONE;
+            $this->setState('firstName', $user->first_name);
+            $this->setState('lastName', $user->last_name);
             $this->setState('role', $user->role);
+            $this->errorCode = self::ERROR_NONE;
         }
         return $this->errorCode == self::ERROR_NONE;
     }
@@ -24,6 +25,7 @@ class UserIdentity extends CUserIdentity
     {
         return $this->_id;
     }
+
 }
 
 ?>

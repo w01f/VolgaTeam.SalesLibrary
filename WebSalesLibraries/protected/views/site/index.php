@@ -1,5 +1,5 @@
 <?php
-$version = '4.0';
+$version = '7.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?'.$version);
@@ -26,6 +26,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', C
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/date.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/daterangepicker.js?'.$version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/login.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/overlay.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/textSizing.js?'.$version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/scaling.js?'.$version, CClientScript::POS_HEAD);

@@ -35,7 +35,7 @@ echo CHtml::openTag('div', array(
             , array(
             'class' => 'row',
             'placeholder' => 'Password',
-			'input type' => 'Password',                
+            'input type' => 'Password',
             'id' => 'field-password')
         );
 
@@ -72,10 +72,11 @@ echo CHtml::openTag('div', array(
                             , array(
                             'id' => 'field-remember')
                         );
-                        echo $form->label($loginData, 'rememberMe'
+                        echo $form->labelEx($loginData, 'rememberMe'
                             , array('id' => 'lable-remember')
                         );
                     }
+
                     echo CHtml::closeTag('td'); //rememberMeContainer
                 }
                 echo CHtml::openTag('td', array(

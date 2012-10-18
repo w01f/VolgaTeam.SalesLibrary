@@ -98,6 +98,29 @@ asort($tabParam);
                                 <img  class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/decreaseTextSpace.png' ?>" />
                             </div>
                         </div>
+                        <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
+                            <div class="ribbon-section">
+                                <span class="section-title">User</span>
+                                <table id ="user-info">
+                                    <tr>
+                                        <td>
+                                            <div><?php echo Yii::app()->user->firstName; ?></div>
+                                        </td>
+                                        <td>
+                                            <div><?php echo Yii::app()->user->lastName; ?></div>
+                                        </td>
+                                    </tr>
+                                </table>                              
+                            </div>                        
+                            <div class="ribbon-section">
+                                <span class="section-title">Logout</span>
+                                <div class="ribbon-button ribbon-button-large" id="logout">
+                                    <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                    <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                    <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                </div>
+                            </div> 
+                        <?php endif; ?>                        
                     </div>
                 <?php endif; ?>
                 <?php if ($tabName == 'search_full_tab'): ?>                                    

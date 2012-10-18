@@ -143,5 +143,10 @@
                 storedTextSize--;
             $.updateTextSize(storedTextSize);
         });                    
+
+        $('#logout').off('click'); 
+        $('#logout').on('click',function(){
+            $.logout();
+        });                    
     });
 })( jQuery );    
