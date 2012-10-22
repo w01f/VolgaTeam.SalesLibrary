@@ -112,6 +112,7 @@
     <Compile Include="TabPages\TabIPadManagerControl.Designer.cs">
       <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolClasses\PasswordHelper.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
     <Compile Include="ToolForms\FormProgressSync.cs">
       <SubType>Form</SubType>
