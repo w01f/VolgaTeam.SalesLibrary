@@ -1,6 +1,6 @@
 Hello <?php echo $fullName ?>:
 <br><br>
-<?php echo Yii::app()->params['email']['new_user']['body'] ?>
+Your password was reset.
 <br><br>
 Your login: <?php echo $login ?><br>
 <br>

@@ -18,6 +18,7 @@ return CMap::mergeArray(
             'login' => array(
                 'rememberMeField' => true,
                 'forgotPasswordField' => true,
+                'tempPasswordExpiredIn' => '7',
             ),
             'home_tab' => array(
                 'name' => 'Home',

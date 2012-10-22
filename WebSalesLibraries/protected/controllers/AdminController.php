@@ -45,10 +45,11 @@ class AdminController extends CController
     /**
      * @param string Session Key
      * @param string Login
-     * @param string Password
+     * @param string Temporary Password
      * @param string First Name
      * @param string Last Name 
      * @param string Email
+     * @param string Temporary password expirartion date
      * @soap
      */
     public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email)
@@ -57,7 +58,7 @@ class AdminController extends CController
         if ($this->authenticateBySession($sessionKey))
         {
             $user = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
-            if ($user === null)
+            if (!isset($user))
             {
                 $user = new UserStorage();
                 $user->login = $login;
@@ -71,16 +72,8 @@ class AdminController extends CController
                 $user->password = md5($password);
             }
             $user->save();
-            if ($newUser)
-            {
-                $message = Yii::app()->email;
-                $message->to = $email;
-                $message->subject = Yii::app()->params['email']['new_user']['subject'];
-                $message->from = Yii::app()->params['email']['from'];
-                $message->view = 'newUser';
-                $message->viewVars = array('fullName' => ($firstName . ' ' . $lastName), 'login' => $login, 'password' => $password, 'site'=>Yii::app()->name);
-                $message->send();
-            }
+
+            ResetPasswordStorage::resetPasswordForUser($login,$password,$newUser);
         }
     }
 
