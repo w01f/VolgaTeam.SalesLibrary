@@ -1,7 +1,11 @@
 <?php
 class SearchController extends CController
 {
-    public $defaultAction = 'getSearchView';
+    public function getViewPath()
+    {
+        return YiiBase::getPathOfAlias('application.views.regular.search');
+    }
+
     public function actionGetSearchView()
     {
         $this->renderPartial('searchView', array(), false, true);
@@ -69,7 +73,7 @@ class SearchController extends CController
                     }
                 }
                 $link->load($linkRecord);
-                $this->renderPartial('application.views.wallbin.viewDialog', array('link' => $link), false, true);
+                $this->renderPartial('application.views.regular.wallbin.viewDialog', array('link' => $link), false, true);
                 $rendered = true;
             }
         }
@@ -117,7 +121,7 @@ class SearchController extends CController
                     }
                 }
                 $link->load($linkRecord);
-                $this->renderPartial('application.views.wallbin.linkDetails', array('link' => $link), false, true);
+                $this->renderPartial('application.views.regular.wallbin.linkDetails', array('link' => $link), false, true);
             }
         }
     }

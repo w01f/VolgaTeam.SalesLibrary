@@ -1,6 +1,11 @@
 <?php
 class WallbinController extends CController
 {
+    public function getViewPath()
+    {
+        return YiiBase::getPathOfAlias('application.views.regular.wallbin');
+    }
+
     public function actionGetColumnsView()
     {
         $libraryManager = new LibraryManager();
@@ -10,11 +15,6 @@ class WallbinController extends CController
 
         $selectedPage = $libraryManager->getSelectedPage();
         $this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
-    }
-
-    public function actionGetListView()
-    {
-        
     }
 
     public function actionGetLibraryDropDownList()
@@ -48,7 +48,7 @@ class WallbinController extends CController
             {
                 $fileName = basename($filePath);
                 $emailFolder = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['emailTemp'];
-                $emailFolderLink = Yii::app()->getBaseUrl(true) . '/' . Yii::app()->params['librariesRoot'] . '/'. Yii::app()->params['emailTemp'];
+                $emailFolderLink = Yii::app()->getBaseUrl(true) . '/' . Yii::app()->params['librariesRoot'] . '/' . Yii::app()->params['emailTemp'];
                 if (!file_exists($emailFolder))
                     mkdir($emailFolder, 0, true);
 

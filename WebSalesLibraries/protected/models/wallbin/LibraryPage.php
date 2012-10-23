@@ -111,7 +111,7 @@ class LibraryPage
         if (isset($this->columns))
             usort($this->columns, "Column::columnComparer");
 
-        $path = Yii::getPathOfAlias('application.views.wallbin').'/columnsPage.php';
+        $path = Yii::getPathOfAlias('application.views.regular.wallbin').'/columnsPage.php';
         $content = $controller->renderFile($path, array('libraryPage' => $this), true);
         
         if (isset($content))

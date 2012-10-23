@@ -2,9 +2,19 @@
 class SiteController extends CController
 {
     public $defaultAction = 'index';
+    public function init()
+    {
+        $this->layout = '/regular/layouts/main';
+    }
+
+    public function getViewPath()
+    {
+        return YiiBase::getPathOfAlias('application.views.regular.site');
+    }
+
     public function actionIndex()
     {
-        $this->layout = '/layouts/ribbon';
+        $this->layout = '/regular/layouts/ribbon';
         $this->render('index');
     }
 
@@ -74,20 +84,25 @@ class SiteController extends CController
         $this->renderPartial('recoverPassword', array(), false, true);
     }
 
+    public function actionRecoverPasswordDialogSuccess()
+    {
+        $this->renderPartial('recoverPasswordSuccess', array(), false, true);
+    }
+
     public function actionValidateUserByEmail()
     {
         $login = Yii::app()->request->getPost('login');
         $email = Yii::app()->request->getPost('email');
         $result = 'Error while validating user. Try again or contact to technical support';
         if (isset($login) && isset($email))
-            $result = UserStorage::validateUserByEmail ($login, $email);
+            $result = UserStorage::validateUserByEmail($login, $email);
         echo $result;
     }
-    
+
     public function actionRecoverPassword()
     {
         $login = Yii::app()->request->getPost('login');
-        if(isset($login))
+        if (isset($login))
         {
             $password = UserStorage::generatePassword();
             UserStorage::changePassword($login, $password);

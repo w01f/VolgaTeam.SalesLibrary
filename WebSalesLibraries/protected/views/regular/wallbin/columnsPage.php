@@ -21,7 +21,7 @@ for ($i = 0; $i < 3; $i++)
                 ));
             if (isset($column->banner) && $column->banner->isEnabled)
             {
-                $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.wallbin').'/banner.php', array('banner' => $column->banner, 'isLinkBanner' => false), true);
+                $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin').'/banner.php', array('banner' => $column->banner, 'isLinkBanner' => false), true);
             }
             else
             {
@@ -74,7 +74,7 @@ for ($i = 0; $i < 3; $i++)
                 ));
             if (isset($folder->banner) && $folder->banner->isEnabled)
             {
-                $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.wallbin').'/banner.php', array('banner' => $folder->banner, 'isLinkBanner' => false), true);
+                $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin').'/banner.php', array('banner' => $folder->banner, 'isLinkBanner' => false), true);
             }
             else
             {
@@ -103,7 +103,7 @@ for ($i = 0; $i < 3; $i++)
                     {
                         if (isset($link->banner) && $link->banner->isEnabled)
                         {
-                            $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.wallbin').'/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true), true);
+                            $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin').'/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true), true);
                         }
                         else
                         {
@@ -147,7 +147,7 @@ for ($i = 0; $i < 3; $i++)
                                 'class' => 'view-dialog-content'
                             ));
                         {
-                            $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.wallbin').'/viewDialog.php', array('link' => $link), true);
+                            $cache .=$this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin').'/viewDialog.php', array('link' => $link), true);
                         }
                         $cache .=CHtml::closeTag('div'); //view-dialog-content
                     }

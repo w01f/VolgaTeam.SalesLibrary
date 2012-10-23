@@ -49,13 +49,13 @@
 
 #search-grid-header td span.asc
 {
-    background:url(../images/search/sort-asc.gif) right center no-repeat;
+    background:url(../../images/search/sort-asc.gif) right center no-repeat;
     padding-right: 10px;
 }
 
 #search-grid-header td span.desc
 {
-    background:url(../images/search/sort-desc.gif) right center no-repeat;
+    background:url(../../images/search/sort-desc.gif) right center no-repeat;
     padding-right: 10px;
 }
 
@@ -118,13 +118,13 @@
 
 #search-grid-body td.details-button.collapsed
 {
-    background:url(../images/search/expand.png) center center no-repeat;
+    background:url(../../images/search/expand.png) center center no-repeat;
     cursor: pointer;
 }
 
 #search-grid-body td.details-button.expanded
 {
-    background:url(../images/search/collapse.png) center center no-repeat;
+    background:url(../../images/search/collapse.png) center center no-repeat;
     cursor: pointer;
 }
 

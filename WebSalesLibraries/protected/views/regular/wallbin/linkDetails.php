@@ -37,7 +37,7 @@
                             'class' => 'file-card-content'
                         ));
                         {
-                            echo $this->renderFile(Yii::getPathOfAlias('application.views.wallbin') . '/fileCard.php', array('link' => $link));
+                            echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/fileCard.php', array('link' => $link));
                         }
                         echo CHtml::closeTag('div'); //view-dialog-content
                     }
@@ -126,7 +126,7 @@
                                 'class' => 'view-dialog-content'
                             ));
                             {
-                                echo $this->renderFile(Yii::getPathOfAlias('application.views.wallbin') . '/viewDialog.php', array('link' => $attachment));
+                                echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/viewDialog.php', array('link' => $attachment));
                             }
                             echo CHtml::closeTag('div'); //view-dialog-content
                         }

@@ -70,8 +70,43 @@
                                     data: {
                                         login: content.find('#login').val()
                                     },
-                                    complete: function(){
+                                    success: function(){
                                         $.fancybox.close();
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "recoverPasswordDialogSuccess",
+                                            data: {},
+                                            beforeSend: function(){
+                                                $.showOverlay();
+                                            },
+                                            complete: function(){
+                                                $.hideOverlay();
+                                            },
+                                            success: function(msg){
+                                                var content = $(msg);
+                                                content.find('#accept').off('click');
+                                                content.find('#accept').on('click',function(){
+                                                    $.fancybox.close();
+                                                });                    
+                                                $.fancybox({
+                                                    content: content,
+                                                    title: 'Password recovery',
+                                                    helpers: {
+                                                        overlay : {
+                                                            css : {
+                                                                'background-color' : '#eee'
+                                                            }
+                                                        }
+                                                    },
+                                                    openEffect  : 'none',
+                                                    closeEffect	: 'none'            
+                                                });                
+                                            },
+                                            error: function(){
+                                            },            
+                                            async: true,
+                                            dataType: 'html'                        
+                                        });
                                     },
                                     async: true,
                                     dataType: 'html'                        

@@ -27,7 +27,7 @@ class ResetPasswordStorage extends CActiveRecord
 
             $message = Yii::app()->email;
             $message->to = $user->email;
-            $message->subject = Yii::app()->params['email']['new_user']['subject'];
+            $message->subject = $newUser ? Yii::app()->params['email']['new_user']['subject'] : ('Password Reset for ' . Yii::app()->getBaseUrl(true));
             $message->from = Yii::app()->params['email']['from'];
             $message->viewVars = array('fullName' => ($user->first_name . ' ' . $user->last_name), 'login' => $user->login, 'password' => $password, 'site' => Yii::app()->name);
             $message->view = $newUser ? 'newUser' : 'existedUser';

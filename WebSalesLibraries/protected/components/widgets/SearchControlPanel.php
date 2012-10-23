@@ -21,7 +21,7 @@ class SearchControlPanel extends CWidget
         if (!isset($libraries))
             $libraries[] = 'All';
 
-        $this->render('application.views.widgets.searchControlPanel', array('libraries' => $libraries));
+        $this->render('application.views.regular.widgets.searchControlPanel', array('libraries' => $libraries));
     }
 
 }
