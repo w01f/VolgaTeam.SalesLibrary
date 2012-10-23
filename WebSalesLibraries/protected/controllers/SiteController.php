@@ -2,19 +2,44 @@
 class SiteController extends CController
 {
     public $defaultAction = 'index';
+    public $browser;
     public function init()
     {
-        $this->layout = '/regular/layouts/main';
+        $this->browser = Yii::app()->browser->getBrowser();
+        //$this->browser = Browser::BROWSER_IPHONE;
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                $this->layout = '/phone/layouts/main';
+                break;
+            default :
+                $this->layout = '/regular/layouts/main';
+                break;
+        }
     }
 
     public function getViewPath()
     {
-        return YiiBase::getPathOfAlias('application.views.regular.site');
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                return YiiBase::getPathOfAlias('application.views.phone.site');
+            default :
+                return YiiBase::getPathOfAlias('application.views.regular.site');
+        }
     }
 
     public function actionIndex()
     {
-        $this->layout = '/regular/layouts/ribbon';
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                $this->layout = '/phone/layouts/ribbon';
+                break;
+            default :
+                $this->layout = '/regular/layouts/ribbon';
+                break;
+        }
         $this->render('index');
     }
 

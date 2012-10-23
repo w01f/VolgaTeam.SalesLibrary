@@ -10,7 +10,6 @@ class LoginForm extends CFormModel
     public function rules()
     {
         return array(
-            array('login, password', 'required'),
             array('rememberMe', 'boolean'),
             array('login', 'validateCredentials'),
             array('password', 'validateCredentials'),
@@ -20,6 +19,8 @@ class LoginForm extends CFormModel
     public function attributeLabels()
     {
         return array(
+            'login' => 'User Name:',
+            'password' => 'Password:',
             'rememberMe' => 'Remember me',
         );
     }

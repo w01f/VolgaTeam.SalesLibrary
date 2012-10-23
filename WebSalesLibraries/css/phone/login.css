@@ -1,0 +1,25 @@
+#form-login
+{
+    width:100%;
+}
+
+#form-login td
+{
+    text-align: center;
+    height: 40 px;
+}
+
+#form-login td.title
+{
+    text-align: left;
+}
+
+.edit-field
+{
+    width:100%;
+}
+
+.error-message
+{
+    color:#FF0000
+}

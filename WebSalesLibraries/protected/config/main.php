@@ -3,7 +3,7 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Sales Libraries',
     'defaultController' => 'site',
-    'preload' => array('log'),
+    'preload' => array('log','browser'),
     'import' => array(
         'application.models.*',
         'application.models.storage.*',
@@ -22,7 +22,7 @@ return array(
             'allowAutoLogin' => true,
         ),
         'errorHandler' => array(
-            'errorAction' => 'site/error',
+            'errorAction' => 'regular/site/error',
         ),
         'urlManager' => array(
             'urlFormat' => 'path',
