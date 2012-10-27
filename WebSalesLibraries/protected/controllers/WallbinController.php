@@ -1,9 +1,31 @@
 <?php
 class WallbinController extends CController
 {
+    public $browser;
+    public function init()
+    {
+        $this->browser = Yii::app()->browser->getBrowser();
+        //$this->browser = Browser::BROWSER_IPHONE;
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                $this->layout = '/phone/layouts/main';
+                break;
+            default :
+                $this->layout = '/regular/layouts/main';
+                break;
+        }
+    }    
+    
     public function getViewPath()
     {
-        return YiiBase::getPathOfAlias('application.views.regular.wallbin');
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                return YiiBase::getPathOfAlias('application.views.phone.wallbin');
+            default :
+                return YiiBase::getPathOfAlias('application.views.regular.wallbin');
+        }        
     }
 
     public function actionGetColumnsView()
@@ -22,6 +44,12 @@ class WallbinController extends CController
         $libraryManager = new LibraryManager();
         $this->renderPartial('libraryDropDownList', array('libraryManager' => $libraryManager), false, true);
     }
+    
+    public function actionGetLibraryThumbnailList()
+    {
+        $libraryManager = new LibraryManager();
+        $this->renderPartial('libraryThumbnailList', array('libraryManager' => $libraryManager), false, true);
+    }    
 
     public function actionGetPageDropDownList()
     {

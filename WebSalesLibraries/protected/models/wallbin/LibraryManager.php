@@ -48,6 +48,7 @@ class LibraryManager
                                 $library->storagePath = $storagePath;
                                 $library->storageLink = $storageLink;
                                 $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
+                                $library->logoLink = str_replace(' ', '%20', str_replace('&', '%26', $library->logoPath));
                                 $library->load();
                                 Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
                             }
@@ -154,6 +155,7 @@ class LibraryManager
             Yii::app()->request->cookies['selectedPageName'] = $cookie;
         }
     }
+
 }
 
 ?>

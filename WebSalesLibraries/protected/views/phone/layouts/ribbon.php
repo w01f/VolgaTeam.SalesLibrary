@@ -7,7 +7,6 @@
         $cs = Yii::app()->clientScript;
         $cs->registerCoreScript('jquery');
         $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
-        $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.js?' . $version, CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js', CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js', CClientScript::POS_HEAD);
         ?>
@@ -25,8 +24,8 @@
                     </ul>
                 </div>
             </div> 
-            <div data-role='content'>
-                <?php echo $content; ?>
+            <div data-role='content' id ="content">
+                    <?php echo $content; ?>
             </div> 
             <div data-role="tabbar" data-iconpos="top" data-theme="b" id="ribbon">
                 <ul>

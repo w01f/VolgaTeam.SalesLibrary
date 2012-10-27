@@ -23,6 +23,7 @@ class LibraryPage
      */
     public $order;
     public $logoPath;
+    public $logoLink;
     /**
      * @var LibraryFolder[]
      * @soap
@@ -59,35 +60,41 @@ class LibraryPage
 
         $logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $this->parent->name . "/page" . strval($this->order + 1) . ".png";
         if (file_exists($logoPath))
+        {
             $this->logoPath = $logoPath;
+            $this->logoLink = str_replace(' ', '%20', str_replace('&', '%26', $logoPath));
+        }
         else
+        {
             $this->logoPath = $this->parent->logoPath;
+            $this->logoLink = str_replace(' ', '%20', str_replace('&', '%26', $this->parent->logoPath));
+        }
     }
 
     public function buildCache($controller)
     {
         $i = 0;
-        while (!$this->buildCacheForBrowser($controller,'ie') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller, 'ie') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser($controller,'firefox') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller, 'firefox') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser($controller,'webkit') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller, 'webkit') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser($controller,'opera') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller, 'opera') && $i < 1000)
             $i++;
 
         $i = 0;
-        while (!$this->buildCacheForBrowser($controller,'mobile') && $i < 1000)
+        while (!$this->buildCacheForBrowser($controller, 'mobile') && $i < 1000)
             $i++;
     }
 
-    private function buildCacheForBrowser($controller,$browser)
+    private function buildCacheForBrowser($controller, $browser)
     {
         unset($this->folders);
         foreach (FolderStorage::model()->findAll('id_page=?', array($this->id)) as $folderRecord)
@@ -111,9 +118,9 @@ class LibraryPage
         if (isset($this->columns))
             usort($this->columns, "Column::columnComparer");
 
-        $path = Yii::getPathOfAlias('application.views.regular.wallbin').'/columnsPage.php';
+        $path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsPage.php';
         $content = $controller->renderFile($path, array('libraryPage' => $this), true);
-        
+
         if (isset($content))
         {
             if ($content != '')

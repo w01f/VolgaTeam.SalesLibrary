@@ -36,8 +36,8 @@
     });    
     
     $(document).ready(function() {
-        $('#ribbon').tabbar('setActive', '#libraries');
-        
+        //$('#ribbon').tabbar('setActive', '#libraries');
+
         $('#logout').off('click'); 
         $('#logout').on('click',function(){
             $.logout();
