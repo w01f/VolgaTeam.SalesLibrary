@@ -32,8 +32,8 @@ class WallbinController extends CController
     {
         $libraryManager = new LibraryManager();
 
-        $libraryManager->setSelectedLibraryName(Yii::app()->request->getPost('selectedLibrary'));
-        $libraryManager->setSelectedPageName(Yii::app()->request->getPost('selectedPage'));
+        $libraryManager->setSelectedLibraryName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedLibrary')));
+        $libraryManager->setSelectedPageName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedPage')));
 
         $selectedPage = $libraryManager->getSelectedPage();
         $this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
@@ -81,7 +81,7 @@ class WallbinController extends CController
                     mkdir($emailFolder, 0, true);
 
                 $destinationPath = $emailFolder . DIRECTORY_SEPARATOR . $fileName;
-                $destinationLink = str_replace(' ', '%20', str_replace('&', '%26', $emailFolderLink . '/' . $fileName));
+                $destinationLink = str_replace(' ', '%20', htmlspecialchars($emailFolderLink . '/' . $fileName));
 
                 if (!file_exists($destinationPath))
                     copy($filePath, $destinationPath);

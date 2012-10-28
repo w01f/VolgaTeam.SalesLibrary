@@ -62,39 +62,16 @@ class LibraryPage
         if (file_exists($logoPath))
         {
             $this->logoPath = $logoPath;
-            $this->logoLink = str_replace(' ', '%20', str_replace('&', '%26', $logoPath));
+            $this->logoLink = str_replace(' ', '%20', htmlspecialchars($logoPath));
         }
         else
         {
             $this->logoPath = $this->parent->logoPath;
-            $this->logoLink = str_replace(' ', '%20', str_replace('&', '%26', $this->parent->logoPath));
+            $this->logoLink = str_replace(' ', '%20', htmlspecialchars($this->parent->logoPath));
         }
     }
 
-    public function buildCache($controller)
-    {
-        $i = 0;
-        while (!$this->buildCacheForBrowser($controller, 'ie') && $i < 1000)
-            $i++;
-
-        $i = 0;
-        while (!$this->buildCacheForBrowser($controller, 'firefox') && $i < 1000)
-            $i++;
-
-        $i = 0;
-        while (!$this->buildCacheForBrowser($controller, 'webkit') && $i < 1000)
-            $i++;
-
-        $i = 0;
-        while (!$this->buildCacheForBrowser($controller, 'opera') && $i < 1000)
-            $i++;
-
-        $i = 0;
-        while (!$this->buildCacheForBrowser($controller, 'mobile') && $i < 1000)
-            $i++;
-    }
-
-    private function buildCacheForBrowser($controller, $browser)
+    public function loadData($browser)
     {
         unset($this->folders);
         foreach (FolderStorage::model()->findAll('id_page=?', array($this->id)) as $folderRecord)
@@ -117,7 +94,21 @@ class LibraryPage
 
         if (isset($this->columns))
             usort($this->columns, "Column::columnComparer");
+    }
 
+    public function buildCache($controller)
+    {
+        $this->buildCacheForBrowser($controller, 'ie');
+        $this->buildCacheForBrowser($controller, 'firefox');
+        $this->buildCacheForBrowser($controller, 'webkit');
+        $this->buildCacheForBrowser($controller, 'opera');
+        $this->buildCacheForBrowser($controller, 'mobile');
+    }
+
+    private function buildCacheForBrowser($controller, $browser)
+    {
+        $this->loadData($browser);
+        
         $path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsPage.php';
         $content = $controller->renderFile($path, array('libraryPage' => $this), true);
 

@@ -1,6 +1,11 @@
-.library-item-container td
+.library-item-container table td
 {
     text-align: left;
     vertical-align: middle;
+}
+
+.item-content
+{
+    display: none;
 }
 

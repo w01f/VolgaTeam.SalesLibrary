@@ -48,7 +48,7 @@ class LibraryManager
                                 $library->storagePath = $storagePath;
                                 $library->storageLink = $storageLink;
                                 $library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
-                                $library->logoLink = str_replace(' ', '%20', str_replace('&', '%26', $library->logoPath));
+                                $library->logoLink = str_replace(' ', '%20', htmlspecialchars($library->logoPath));
                                 $library->load();
                                 Yii::app()->cacheDB->set($library->id, $library, (60 * 60 * 24 * 7));
                             }
@@ -115,7 +115,7 @@ class LibraryManager
 
     public function setSelectedLibraryName($libraryName)
     {
-        if (isset($libraryName))
+        if (isset($libraryName) && $libraryName != '')
         {
             $cookie = new CHttpCookie('selectedLibraryName', $libraryName);
             $cookie->expire = time() + (60 * 60 * 24 * 7);
@@ -131,7 +131,7 @@ class LibraryManager
             $selectedPageName = Yii::app()->request->cookies['selectedPageName']->value;
             foreach ($selectedLibrary->pages as $page)
             {
-                if ($page->name == $selectedPageName)
+                if (trim($page->name) == trim($selectedPageName))
                 {
                     $selectedPage = $page;
                     break;
@@ -148,7 +148,7 @@ class LibraryManager
 
     public function setSelectedPageName($pageName)
     {
-        if (isset($pageName))
+        if (isset($pageName) && $pageName != '')
         {
             $cookie = new CHttpCookie('selectedPageName', $pageName);
             $cookie->expire = time() + (60 * 60 * 24 * 7);

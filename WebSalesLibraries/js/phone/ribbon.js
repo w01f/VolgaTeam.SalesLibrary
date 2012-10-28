@@ -19,9 +19,18 @@
             // Sometimes the active state isn't properly cleared, so we reset it ourselves
             this.element.find('a').removeClass('ui-btn-active ui-state-persist');
             this.element.find('a[href="' + url + '"]').addClass('ui-btn-active ui-state-persist');
+            switch(url)
+            {
+                case '#libraries':
+                    $.initLibraries();
+                    break;
+                case '#search':
+                    $.initSearch();
+                    break;                 
+            }
         }
     });
-
+        
     $(document).bind('pagecreate create', function(e) {
         return $(e.target).find(":jqmData(role='tabbar')").tabbar();
     });
@@ -36,7 +45,17 @@
     });    
     
     $(document).ready(function() {
-        //$('#ribbon').tabbar('setActive', '#libraries');
+        $('#ribbon').tabbar('setActive', '#libraries');
+
+        $('#tab-libraries').off('click');
+        $('#tab-libraries').on('click',function(){
+            $('#ribbon').tabbar('setActive', '#libraries');
+        });
+        
+        $('#tab-search').off('click');
+        $('#tab-search').on('click',function(){
+            $('#ribbon').tabbar('setActive', '#search');
+        });
 
         $('#logout').off('click'); 
         $('#logout').on('click',function(){

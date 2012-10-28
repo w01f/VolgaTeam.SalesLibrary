@@ -241,7 +241,7 @@ class LibraryLink
         {
             $this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
             $this->filePath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
-            $this->fileLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath));
+            $this->fileLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath)));
         }
         $this->getFormats();
     }

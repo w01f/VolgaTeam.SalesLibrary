@@ -1,13 +1,13 @@
 <div data-role="collapsible-set" data-theme="b" data-content-theme="b" data-inset="false" class="ui-collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-l" data-iconpos="right">
     <?php foreach ($libraryManager->getLibraries() as $library): ?>
-        <div data-role="collapsible">
+        <div data-role="collapsible" class="library-item-container">
             <h4>
-                <table class="library-item-container">
+                <table>
                     <tr>
                         <td>
                             <img src="<?php echo $library->logoPath; ?>">
                         </td>
-                        <td>
+                        <td class ="library-name">
                             <?php echo $library->name; ?>
                         </td>
                     </tr>
@@ -18,7 +18,7 @@
                     <li data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="arrow-r" data-iconpos="right" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
                         <div class="ui-btn-inner ui-li">
                             <div class="ui-btn-text">
-                                <a href="#" class="ui-link-inherit">
+                                <a href="#" class="ui-link-inherit page-name">
                                     <?php echo $page->name; ?>
                                 </a>
                             </div>

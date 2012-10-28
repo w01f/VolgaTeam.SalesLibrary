@@ -73,7 +73,7 @@ class UniversalPreviewContainer
         {
             $this->id = $record->id_container;
             $this->libraryId = $record->id_library;
-            $previewLink = str_replace('&', '%26', str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path));
+            $previewLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path)));
             switch ($record->type)
             {
                 case 'png':

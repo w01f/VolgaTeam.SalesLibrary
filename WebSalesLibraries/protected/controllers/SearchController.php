@@ -1,9 +1,31 @@
 <?php
 class SearchController extends CController
 {
+    public $browser;
+    public function init()
+    {
+        $this->browser = Yii::app()->browser->getBrowser();
+        //$this->browser = Browser::BROWSER_IPHONE;
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                $this->layout = '/phone/layouts/main';
+                break;
+            default :
+                $this->layout = '/regular/layouts/main';
+                break;
+        }
+    }
+
     public function getViewPath()
     {
-        return YiiBase::getPathOfAlias('application.views.regular.search');
+        switch ($this->browser)
+        {
+            case Browser::BROWSER_IPHONE:
+                return YiiBase::getPathOfAlias('application.views.phone.search');
+            default :
+                return YiiBase::getPathOfAlias('application.views.regular.search');
+        }
     }
 
     public function actionGetSearchView()

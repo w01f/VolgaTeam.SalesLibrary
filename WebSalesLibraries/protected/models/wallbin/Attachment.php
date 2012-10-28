@@ -49,7 +49,7 @@ class Attachment
         $this->path = $attachmentRecord->path;
         $this->originalFormat = $attachmentRecord->format;
         if ($this->originalFormat != 'url')
-            $this->link = str_replace('&', '%26', str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path));
+            $this->link = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path)));
         else
             $this->link = $attachmentRecord->path;
 
