@@ -1,11 +1,22 @@
-.library-item-container table td
+.library-item-container .library-title
 {
-    text-align: left;
     vertical-align: middle;
+    line-height: 40px;
 }
 
 .item-content
 {
     display: none;
+}
+
+.link-container td
+{
+    text-align: left;
+    vertical-align: middle;
+}
+
+.link-container span.file
+{
+    color: #b0b0b0;
 }
 

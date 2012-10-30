@@ -1,30 +1,20 @@
-<div data-role="collapsible-set" data-theme="b" data-content-theme="b" data-inset="false" class="ui-collapsible-set" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-l" data-iconpos="right">
+<div data-role="collapsible-set" data-inset="false" data-theme="b">
     <?php foreach ($libraryManager->getLibraries() as $library): ?>
-        <div data-role="collapsible" class="library-item-container">
-            <h4>
-                <table>
-                    <tr>
-                        <td>
-                            <img src="<?php echo $library->logoPath; ?>">
-                        </td>
-                        <td class ="library-name">
-                            <?php echo $library->name; ?>
-                        </td>
-                    </tr>
-                </table>                        
-            </h4>            
-            <ul data-role="listview" class="ui-listview">
+        <div class="library-item-container" data-role="collapsible" >
+            <h3><span class="library-title"><?php echo $library->name; ?></span></h3>
+            <ul data-role="listview" data-divider-theme="d">
                 <?php foreach ($library->pages as $page): ?>
-                    <li data-corners="false" data-shadow="false" data-iconshadow="true" data-icon="arrow-r" data-iconpos="right" class="ui-btn ui-btn-up-d ui-btn-icon-right ui-li-has-arrow ui-li">
-                        <div class="ui-btn-inner ui-li">
-                            <div class="ui-btn-text">
-                                <a href="#" class="ui-link-inherit page-name">
-                                    <?php echo $page->name; ?>
-                                </a>
-                            </div>
-                            <span class="ui-icon ui-icon-arrow-r ui-icon-shadow">&nbsp;</span>
-                        </div>
+                    <li data-role="list-divider" >
+                        <h4><?php echo $page->name; ?></h4>
                     </li>
+                    <?php $page->loadData('mobile'); ?>
+                    <?php foreach ($page->folders as $folder): ?>
+                        <li>
+                            <a class ="folder-link" href="#<?php echo $page->name; ?>-folder-<?php echo $folder->id; ?>">
+                                <span><?php echo $folder->name; ?></span>
+                            </a>
+                        </li>                    
+                    <?php endforeach; ?>                    
                 <?php endforeach; ?>                    
             </ul>
         </div>                                

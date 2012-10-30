@@ -96,6 +96,12 @@ class LibraryPage
             usort($this->columns, "Column::columnComparer");
     }
 
+    public function loadFolders()
+    {
+        foreach($this->folders as $folder)
+            $folder->loadFiles();
+    }
+
     public function buildCache($controller)
     {
         $this->buildCacheForBrowser($controller, 'ie');
@@ -108,7 +114,8 @@ class LibraryPage
     private function buildCacheForBrowser($controller, $browser)
     {
         $this->loadData($browser);
-        
+        $this->loadFolders();
+
         $path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsPage.php';
         $content = $controller->renderFile($path, array('libraryPage' => $this), true);
 

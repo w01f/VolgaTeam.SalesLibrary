@@ -3,21 +3,33 @@
     $.initLibraries = function(){
         $.ajax({
             type: "POST",
-            url: "wallbin/getLibraryThumbnailList",
+            url: "wallbin/getLibraryCollapsibleList",
             beforeSend: function(){
-                $('#content').html('');
+                $('#libraries .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
             },
             complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
             },
             success: function(msg){
-                $('#content').html(msg);
-                $('#content div').collapsibleset();
-                $('#ribbon-title').html('Sales Libraries');
+                $('#libraries .page-content').html(msg);
+                $('.library-item-container > ul').listview();                
+                $('#libraries .page-content > div').collapsibleset();
                 $( ".library-item-container" ).on('expand',function(){
-                    selectedLibrary = $.trim($(this).find('.library-name').text());
+                    selectedLibrary = $.trim($(this).find('.library-title').text());
                 });
-                $( ".page-name" ).on('click',function(){
-                    $.loadPage(selectedLibrary,$.trim($(this).html()));
+                $( ".folder-link" ).on('click',function(){
+                    var substr = $(this).attr("href").split('-folder-');
+                    
+                    var selectedPage = $.trim(substr[0].replace('#', ''));
+                    var selectedFolder = $.trim(substr[1]);
+                    $.loadFolder(selectedLibrary,selectedPage,selectedFolder);
                 });
             },
             async: true,
@@ -25,52 +37,46 @@
         });
     }
     
-    $.loadPage = function(library, page){
+    $.loadFolder = function(library, page, folderId){
         $.ajax({
             type: "POST",
-            url: "wallbin/getColumnsView",
+            url: "wallbin/getFolderLinksList",
             data:{
                 selectedLibrary: library,
-                selectedPage: page
+                selectedPage: page,
+                folderId: folderId
             },
             beforeSend: function(){
-                $('#content').html('');
+                $('#links .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
             },
             complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
             },
             success: function(msg){
-                $('#content').html(msg);
-                loadContent('#content > .item-content');
+                $('#links .page-content').html(msg);
+                $('#links .library-title').html(library);
+                $.mobile.changePage( "#links", {
+                    transition: "slidefade"
+                });
+                $('#links .page-content').children('ul').listview();                     
             },
             async: true,
             dataType: 'html'                        
         });
     }
     
-    var loadContent = function(containerSelector){
-        var container = $(containerSelector);
-        var listItems = container.children('.back-button').html();
-        $.each(container.find('> .item-content > .title'), function() { 
-            listItems += $(this).html();
-        });
-        $('.page-content-list').remove();
-        $('#content').append($('<ul data-role="listview" class="page-content-list"></ul>'));
-        $('.page-content-list').html(listItems);
-        $('.page-content-list').listview();
-        $('.back').button();
-        
-        $( ".page-content-list li" ).off('click');
-        $( ".page-content-list li" ).on('click',function(){
-            var parentId = $(this).find('a.link').attr("href");
-            if(parentId != '#libraries')
-                loadContent(parentId);
-            else
-                $.initLibraries();
-        });
+    $.collapseAllLibraries = function(){
+        $( "#libraries .page-content > div" ).children().trigger("collapse");
     }
     
     $(document).ready(function() 
     {
-        $.initLibraries();
-    });
+        });
 })( jQuery );    

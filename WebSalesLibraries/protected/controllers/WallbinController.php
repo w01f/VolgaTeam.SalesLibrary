@@ -4,8 +4,8 @@ class WallbinController extends CController
     public $browser;
     public function init()
     {
-        $this->browser = Yii::app()->browser->getBrowser();
-        //$this->browser = Browser::BROWSER_IPHONE;
+        //$this->browser = Yii::app()->browser->getBrowser();
+        $this->browser = Browser::BROWSER_IPHONE;
         switch ($this->browser)
         {
             case Browser::BROWSER_IPHONE:
@@ -15,8 +15,8 @@ class WallbinController extends CController
                 $this->layout = '/regular/layouts/main';
                 break;
         }
-    }    
-    
+    }
+
     public function getViewPath()
     {
         switch ($this->browser)
@@ -25,7 +25,7 @@ class WallbinController extends CController
                 return YiiBase::getPathOfAlias('application.views.phone.wallbin');
             default :
                 return YiiBase::getPathOfAlias('application.views.regular.wallbin');
-        }        
+        }
     }
 
     public function actionGetColumnsView()
@@ -44,18 +44,36 @@ class WallbinController extends CController
         $libraryManager = new LibraryManager();
         $this->renderPartial('libraryDropDownList', array('libraryManager' => $libraryManager), false, true);
     }
-    
-    public function actionGetLibraryThumbnailList()
+
+    public function actionGetLibraryCollapsibleList()
     {
         $libraryManager = new LibraryManager();
-        $this->renderPartial('libraryThumbnailList', array('libraryManager' => $libraryManager), false, true);
-    }    
+        $this->renderPartial('libraryCollapsibleList', array('libraryManager' => $libraryManager), false, true);
+    }
 
     public function actionGetPageDropDownList()
     {
         $libraryManager = new LibraryManager();
         $this->renderPartial('pageDropDownList', array('selectedLibrary' => $libraryManager->getSelectedLibrary(),
             'selectedPage' => $libraryManager->getSelectedPage()), false, true);
+    }
+
+    public function actionGetFolderLinksList()
+    {
+        $libraryManager = new LibraryManager();
+        $libraryManager->setSelectedLibraryName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedLibrary')));
+        $libraryManager->setSelectedPageName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedPage')));
+        $folderId = Yii::app()->request->getPost('folderId');
+
+        $selectedPage = $libraryManager->getSelectedPage();
+        foreach ($selectedPage->folders as $folder)
+            if ($folder->id == $folderId)
+            {
+                $selectedFolder = $folder;
+                $selectedFolder->loadFiles();
+                break;
+            }
+        $this->renderPartial('folderLinks', array('folder' => $selectedFolder), false, true);
     }
 
     public function actionEmailDialog()

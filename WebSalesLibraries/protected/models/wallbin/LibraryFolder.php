@@ -142,7 +142,11 @@ class LibraryFolder
             $this->banner = new Banner();
             $this->banner->load($bannerRecord);
         }
+    }
 
+    public function loadFiles()
+    {
+        unset($this->files);
         foreach (LinkStorage::model()->findAll('id_folder=?', array($this->id)) as $linkRecord)
         {
             $link = new LibraryLink($this);
@@ -177,10 +181,15 @@ class LibraryFolder
 
     public static function libraryFolderComparer($x, $y)
     {
-        if ($x->rowOrder == $y->rowOrder)
-            return 0;
+        if ($x->columnOrder == $y->columnOrder)
+        {
+            if ($x->rowOrder == $y->rowOrder)
+                return 0;
+            else
+                return ($x->rowOrder < $y->rowOrder) ? -1 : 1;
+        }
         else
-            return ($x->rowOrder < $y->rowOrder) ? -1 : 1;
+            return ($x->columnOrder < $y->columnOrder) ? -1 : 1;
     }
 
 }
