@@ -62,10 +62,54 @@
             success: function(msg){
                 $('#links .page-content').html(msg);
                 $('#links .library-title').html(library);
+                $('#preview .library-title').html(library);
                 $.mobile.changePage( "#links", {
                     transition: "slidefade"
                 });
                 $('#links .page-content').children('ul').listview();                     
+                $( ".file-link" ).on('click',function(){
+                    var substr = $(this).attr("href").split('-link-');
+                    
+                    var selectedFolder = $.trim(substr[0].replace('#folder', ''));
+                    var selectedLink = $.trim(substr[1]);
+                    $.loadLink(selectedFolder,selectedLink);
+                });
+            },
+            async: true,
+            dataType: 'html'                        
+        });
+    }
+    
+    $.loadLink = function(folderId, linkId){
+        $.ajax({
+            type: "POST",
+            url: "wallbin/getLinkPreviewList",
+            data:{
+                folderId: folderId,
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $('#preview .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            success: function(msg){
+                $('#preview .page-content').html(msg);
+                $.mobile.changePage( "#preview", {
+                    transition: "slidefade"
+                });
+                $('#preview .page-content').children('ul').listview();                     
+                $( ".preview-link" ).on('click',function(){
+                    $.viewSelectedFormat($(this).find('.item-content'));
+                });
             },
             async: true,
             dataType: 'html'                        

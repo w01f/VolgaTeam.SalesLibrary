@@ -4,8 +4,8 @@ class WallbinController extends CController
     public $browser;
     public function init()
     {
-        //$this->browser = Yii::app()->browser->getBrowser();
-        $this->browser = Browser::BROWSER_IPHONE;
+        $this->browser = Yii::app()->browser->getBrowser();
+        //$this->browser = Browser::BROWSER_IPHONE;
         switch ($this->browser)
         {
             case Browser::BROWSER_IPHONE:
@@ -74,6 +74,27 @@ class WallbinController extends CController
                 break;
             }
         $this->renderPartial('folderLinks', array('folder' => $selectedFolder), false, true);
+    }
+
+    public function actionGetLinkPreviewList()
+    {
+        $libraryManager = new LibraryManager();
+        $folderId = Yii::app()->request->getPost('folderId');
+        $linkId = Yii::app()->request->getPost('linkId');
+
+        $selectedPage = $libraryManager->getSelectedPage();
+        foreach ($selectedPage->folders as $folder)
+            if ($folder->id == $folderId)
+            {
+                foreach ($folder->files as $link)
+                    if ($link->id == $linkId)
+                    {
+                        $selectedLink = $link;
+                        break;
+                    }
+                break;
+            }
+        $this->renderPartial('linkPreview', array('link' => $selectedLink), false, true);
     }
 
     public function actionEmailDialog()
