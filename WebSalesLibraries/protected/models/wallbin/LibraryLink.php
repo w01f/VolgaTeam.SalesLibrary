@@ -292,38 +292,49 @@ class LibraryLink
                 case 'video':
                     switch ($this->browser)
                     {
+                        case 'phone':
+                            $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'email';
+                            break;                    
                         case 'mobile':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'email';
                             break;
                         case 'ie':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'video';
+                            $this->availableFormats[] = 'email';
                             break;
                         case 'webkit':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'email';
                             break;
                         case 'firefox':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'ogv';
+                            $this->availableFormats[] = 'email';
                             break;
                         case 'opera':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'ogv';
+                            $this->availableFormats[] = 'email';
                             break;
                         default:
                             $this->availableFormats[] = 'video';
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'ogv';
                             $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'email';
                             break;
                     }
                     break;
                 case 'mp4':
                     $this->availableFormats[] = 'mp4';
                     $this->availableFormats[] = 'tab';
+                    $this->availableFormats[] = 'email';
                     break;
                 case 'png':
                     $this->availableFormats[] = 'png';
@@ -362,11 +373,12 @@ class LibraryLink
                     case 'png':
                         if (isset($this->universalPreview))
                         {
-                            if (isset($this->universalPreview->pngLinks))
+                            $pngLinks = $this->browser == 'phone' && isset($this->universalPreview->pngPhoneLinks) ? $this->universalPreview->pngPhoneLinks : $this->universalPreview->pngLinks;
+                            if (isset($pngLinks))
                             {
                                 $i = 1;
-                                $count = count($this->universalPreview->pngLinks);
-                                foreach ($this->universalPreview->pngLinks as $link)
+                                $count = count($pngLinks);
+                                foreach ($pngLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
@@ -376,16 +388,19 @@ class LibraryLink
                         break;
                     case 'jpeg':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->jpegLinks))
+                        {
+                            $jpegLinks = $this->browser == 'phone' && isset($this->universalPreview->jpegPhoneLinks) ? $this->universalPreview->jpegPhoneLinks : $this->universalPreview->jpegLinks;
+                            if (isset($jpegLinks))
                             {
                                 $i = 1;
-                                $count = count($this->universalPreview->jpegLinks);
-                                foreach ($this->universalPreview->jpegLinks as $link)
+                                $count = count($jpegLinks);
+                                foreach ($jpegLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
+                        }
                         break;
                     case 'pdf':
                         if (isset($this->universalPreview))
@@ -401,9 +416,20 @@ class LibraryLink
                         break;
                     case 'thumbs':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
-                                foreach ($this->universalPreview->thumbsLinks as $link)
-                                    $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
+                        {
+                            if ($this->browser == 'phone')
+                            {
+                                if (isset($this->universalPreview->thumbsPhoneLinks))
+                                    foreach ($this->universalPreview->thumbsPhoneLinks as $link)
+                                        $viewSources[] = array('href' => $link);
+                            }
+                            else
+                            {
+                                if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
+                                    foreach ($this->universalPreview->thumbsLinks as $link)
+                                        $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
+                            }
+                        }
                         break;
                 }
                 break;
@@ -418,29 +444,35 @@ class LibraryLink
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->pngLinks))
+                        {
+                            $pngLinks = $this->browser == 'phone' && isset($this->universalPreview->pngPhoneLinks) ? $this->universalPreview->pngPhoneLinks : $this->universalPreview->pngLinks;
+                            if (isset($pngLinks))
                             {
                                 $i = 1;
-                                $count = count($this->universalPreview->pngLinks);
-                                foreach ($this->universalPreview->pngLinks as $link)
+                                $count = count($pngLinks);
+                                foreach ($pngLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
+                        }
                         break;
                     case 'jpeg':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->jpegLinks))
+                        {
+                            $jpegLinks = $this->browser == 'phone' && isset($this->universalPreview->jpegPhoneLinks) ? $this->universalPreview->jpegPhoneLinks : $this->universalPreview->jpegLinks;
+                            if (isset($jpegLinks))
                             {
                                 $i = 1;
-                                $count = count($this->universalPreview->jpegLinks);
-                                foreach ($this->universalPreview->jpegLinks as $link)
+                                $count = count($jpegLinks);
+                                foreach ($jpegLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
+                        }
                         break;
                     case 'pdf':
                         if (isset($this->universalPreview))
@@ -456,9 +488,20 @@ class LibraryLink
                         break;
                     case 'thumbs':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
-                                foreach ($this->universalPreview->thumbsLinks as $link)
-                                    $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
+                        {
+                            if ($this->browser == 'phone')
+                            {
+                                if (isset($this->universalPreview->thumbsPhoneLinks))
+                                    foreach ($this->universalPreview->thumbsPhoneLinks as $link)
+                                        $viewSources[] = array('href' => $link);
+                            }
+                            else
+                            {
+                                if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
+                                    foreach ($this->universalPreview->thumbsLinks as $link)
+                                        $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
+                            }
+                        }
                         break;
                 }
                 break;
@@ -484,35 +527,52 @@ class LibraryLink
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->pngLinks))
+                        {
+                            $pngLinks = $this->browser == 'phone' && isset($this->universalPreview->pngPhoneLinks) ? $this->universalPreview->pngPhoneLinks : $this->universalPreview->pngLinks;
+                            if (isset($pngLinks))
                             {
                                 $i = 1;
-                                $count = count($this->universalPreview->pngLinks);
-                                foreach ($this->universalPreview->pngLinks as $link)
+                                $count = count($pngLinks);
+                                foreach ($pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
+                        }
                         break;
                     case 'jpeg':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->jpegLinks))
+                        {
+                            $jpegLinks = $this->browser == 'phone' && isset($this->universalPreview->jpegPhoneLinks) ? $this->universalPreview->jpegPhoneLinks : $this->universalPreview->jpegLinks;
+                            if (isset($jpegLinks))
                             {
                                 $i = 1;
-                                $count = count($this->universalPreview->jpegLinks);
-                                foreach ($this->universalPreview->jpegLinks as $link)
+                                $count = count($jpegLinks);
+                                foreach ($jpegLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
+                        }
                         break;
                     case 'thumbs':
                         if (isset($this->universalPreview))
-                            if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
-                                foreach ($this->universalPreview->thumbsLinks as $link)
-                                    $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
+                        {
+                            if ($this->browser == 'phone')
+                            {
+                                if (isset($this->universalPreview->thumbsPhoneLinks))
+                                    foreach ($this->universalPreview->thumbsPhoneLinks as $link)
+                                        $viewSources[] = array('href' => $link);
+                            }
+                            else
+                            {
+                                if (isset($this->universalPreview->thumbsLinks) && isset($this->universalPreview->thumbsWidth) && isset($this->universalPreview->thumbsHeight))
+                                    foreach ($this->universalPreview->thumbsLinks as $link)
+                                        $viewSources[] = array('href' => $link, 'width' => $this->universalPreview->thumbsWidth, 'height' => $this->universalPreview->thumbsHeight);
+                            }
+                        }
                         break;
                 }
                 break;
@@ -537,34 +597,45 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'video':
-                        $viewSources[] = array('src' => $this->fileLink);
+                        $viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
+                        break;
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
                         break;
                     case 'mp4':
                         if (isset($this->universalPreview))
                         {
                             if (isset($this->universalPreview->mp4Links))
                                 foreach ($this->universalPreview->mp4Links as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                             if (isset($this->universalPreview->ogvLinks))
                                 foreach ($this->universalPreview->ogvLinks as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         }
                     case 'tab':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->mp4Links))
                                 foreach ($this->universalPreview->mp4Links as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         break;
                     case 'ogv':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->ogvLinks))
                                 foreach ($this->universalPreview->ogvLinks as $link)
-                                    $viewSources[] = array('src' => $link, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+                                    $viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         break;
                 }
                 break;
             case 'mp4':
-                $viewSources[] = array('src' => $this->fileLink, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+                switch ($format)
+                {
+                    case 'email':
+                        $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+                        break;
+                    default:
+                        $viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+                        break;
+                }
                 break;
         }
         if (isset($viewSources))

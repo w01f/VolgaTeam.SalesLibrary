@@ -7,7 +7,7 @@
                     <li data-role="list-divider" >
                         <h4><?php echo $page->name; ?></h4>
                     </li>
-                    <?php $page->loadData('mobile'); ?>
+                    <?php $page->loadData('phone'); ?>
                     <?php foreach ($page->folders as $folder): ?>
                         <li>
                             <a class ="folder-link" href="#<?php echo $page->name; ?>-folder-<?php echo $folder->id; ?>">

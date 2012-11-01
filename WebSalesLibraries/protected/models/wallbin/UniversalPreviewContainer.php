@@ -21,7 +21,17 @@ class UniversalPreviewContainer
      * @var string[]
      * @soap
      */
+    public $pngPhoneLinks;    
+    /**
+     * @var string[]
+     * @soap
+     */
     public $jpegLinks;
+    /**
+     * @var string[]
+     * @soap
+     */
+    public $jpegPhoneLinks;    
     /**
      * @var string[]
      * @soap
@@ -53,6 +63,11 @@ class UniversalPreviewContainer
      */
     public $thumbsLinks;
     /**
+     * @var string[]
+     * @soap
+     */
+    public $thumbsPhoneLinks;    
+    /**
      * @var int
      * @soap
      */
@@ -79,15 +94,24 @@ class UniversalPreviewContainer
                 case 'png':
                     $this->pngLinks[] = $previewLink;
                     break;
+                case 'png_phone':
+                    $this->pngPhoneLinks[] = $previewLink;
+                    break;                
                 case 'jpeg':
                     $this->jpegLinks[] = $previewLink;
                     break;
+                case 'jpeg_phone':
+                    $this->jpegPhoneLinks[] = $previewLink;
+                    break;                
                 case 'pdf':
                     $this->pdfLinks[] = $previewLink;
                     break;
                 case 'thumbs':
                     $this->thumbsLinks[] = $previewLink;
                     break;
+                case 'thumbs_phone':
+                    $this->thumbsPhoneLinks[] = $previewLink;
+                    break;                
                 case 'mp4':
                     $this->mp4Links[] = $previewLink;
                     break;
@@ -106,16 +130,22 @@ class UniversalPreviewContainer
             $this->thumbsWidth = $thumbsWidth;
         if (isset($this->pngLinks))
             natsort($this->pngLinks);
+        if (isset($this->pngPhoneLinks))
+            natsort($this->pngPhoneLinks);        
         if (isset($this->pdfLinks))
             natsort($this->pdfLinks);
         if (isset($this->jpegLinks))
             natsort($this->jpegLinks);
+        if (isset($this->jpegPhoneLinks))
+            natsort($this->jpegPhoneLinks);        
         if (isset($this->oldOfficeFormatLinks))
             natsort($this->oldOfficeFormatLinks);
         if (isset($this->newOfficeFormatLinks))
             natsort($this->newOfficeFormatLinks);
         if (isset($this->thumbsLinks))
             natsort($this->thumbsLinks);
+        if (isset($this->thumbsPhoneLinks))
+            natsort($this->thumbsPhoneLinks);        
         if (isset($this->mp4Links))
             natsort($this->mp4Links);
         if (isset($this->ogvLinks))

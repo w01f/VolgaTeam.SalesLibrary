@@ -63,6 +63,7 @@
                 $('#links .page-content').html(msg);
                 $('#links .library-title').html(library);
                 $('#preview .library-title').html(library);
+                $('#gallery-page .library-title').html(library);
                 $.mobile.changePage( "#links", {
                     transition: "slidefade"
                 });

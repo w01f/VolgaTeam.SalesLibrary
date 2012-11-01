@@ -13,7 +13,8 @@
 
         if(selectedFileType != ''&& selectedViewType != '' && selectedLinks != '')
         {
-            selectedLinks = $.parseJSON(selectedLinks);
+            if(!(selectedViewType == 'png' || selectedViewType == 'jpeg'))
+                selectedLinks = $.parseJSON(selectedLinks);
             switch(selectedFileType)
             {
                 case 'ppt':
@@ -23,6 +24,12 @@
                     {
                         case 'png':
                         case 'jpeg':
+                            $('#gallery').html(selectedLinks);
+                            $.mobile.changePage( "#gallery-page", {
+                                transition: "slidefade"
+                            });                            
+                            break;
+                        case 'email':
                             break;
                         default:
                             $.downloadFile(selectedLinks[0].href);
@@ -32,6 +39,8 @@
                 case 'xls':
                     switch(selectedViewType)
                     {
+                        case 'email':
+                            break;                        
                         default:
                             $.downloadFile(selectedLinks[0].href);
                             break;
@@ -45,8 +54,11 @@
                 case 'jpeg':
                     switch(selectedViewType)
                     {
+                        case 'email':
+                            break;                        
                         default:
-                            break;
+                            $.downloadFile(selectedLinks[0].href);
+                            break;                
                     }                    
                     break;
                 case 'mp4':                    
@@ -58,8 +70,8 @@
                         case 'ogv':
                             $.downloadFile(selectedLinks[0].src);
                             break;                        
-                        case 'mp4':
-                            break;                    
+                        case 'email':
+                            break;                                                    
                     }
                     break;
             }

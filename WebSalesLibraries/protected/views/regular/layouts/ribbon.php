@@ -20,7 +20,12 @@ asort($tabParam);
                     <div class="ribbon-tab" id="home-tab">
                         <span class="ribbon-title"><?php echo Yii::app()->params['home_tab']['name'] ?></span>
                         <div class="ribbon-section" >
-                            <span class="section-title" id="libraries-selector-title">Sales Library</span>
+                            <span class="section-title" id="libraries-selector-title">
+                                User: 
+                                <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
+                                    <?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
+                                <?php endif; ?>
+                            </span>
                             <table id ="libraries-selector-container">
                                 <tr>
                                     <td><img src="" id="page-logo"/></td>
@@ -99,19 +104,6 @@ asort($tabParam);
                             </div>
                         </div>
                         <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
-                            <div class="ribbon-section">
-                                <span class="section-title">User</span>
-                                <table id ="user-info">
-                                    <tr>
-                                        <td>
-                                            <div><?php echo Yii::app()->user->firstName; ?></div>
-                                        </td>
-                                        <td>
-                                            <div><?php echo Yii::app()->user->lastName; ?></div>
-                                        </td>
-                                    </tr>
-                                </table>                              
-                            </div>                        
                             <div class="ribbon-section">
                                 <span class="section-title">Logout</span>
                                 <div class="ribbon-button ribbon-button-large" id="logout">

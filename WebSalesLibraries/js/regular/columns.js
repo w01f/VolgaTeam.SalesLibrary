@@ -31,7 +31,6 @@
                 $('#select-page').html(msg);
                 $.pageChanged();
                 $("#page-logo").attr('src', $("#select-library").val());
-                $('#libraries-selector-title').html(selectedLibraryName);                                    
             },
             async: true,
             dataType: 'html'            

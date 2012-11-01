@@ -255,8 +255,11 @@
                         case 'video':
                         case 'tab':                            
                         case 'ogv':
-                            $.downloadFile(selectedLinks[0].src);
+                            $.downloadFile(selectedLinks[0].href);
                             break;                        
+                        case 'email':
+                            $.emailFile(selectedLinks[0]);
+                            break;                            
                         case 'mp4':
                             VideoJS.players = {};
                             $.fancybox({

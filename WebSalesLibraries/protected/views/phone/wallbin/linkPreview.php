@@ -55,10 +55,6 @@
                     $imageSource = Yii::app()->baseUrl . '/images/fileFormats/pdf.png';
                     $imageTitle = 'PDF';
                     break;
-                case 'mp4':
-                    $imageSource = Yii::app()->baseUrl . '/images/fileFormats/mp4.png';
-                    $imageTitle = 'MP4';
-                    break;
                 case 'tab':
                     $imageSource = Yii::app()->baseUrl . '/images/fileFormats/tab.png';
                     $imageTitle = 'QuickTime';
@@ -66,6 +62,10 @@
                 case 'url':
                     $imageSource = Yii::app()->baseUrl . '/images/fileFormats/url.png';
                     $imageTitle = 'Web Url';
+                    break;
+                case 'email':
+                    $imageSource = Yii::app()->baseUrl . '/images/fileFormats/email.png';
+                    $imageTitle = 'Email Link';
                     break;
             }
             if ($imageSource != '' && $imageTitle != ''):
@@ -82,12 +82,27 @@
                                         <div class="view-type"><?php echo $format; ?></div>
                                         <?php
                                         $viewLinks = $link->getViewSource($format);
-                                        if (isset($viewLinks))
-                                        {
+                                        if (isset($viewLinks)):
                                             echo CHtml::openTag('div', array('class' => 'links'));
-                                            echo json_encode($viewLinks);
+                                            if ($format == 'png' || $format == 'jpeg'):
+                                                $thumbsLinks = $link->getViewSource('thumbs');
+                                                if (isset($thumbsLinks)):
+                                                    $i = 0;
+                                                    foreach ($viewLinks as $viewLink):
+                                                        ?>
+                                                        <li>
+                                                            <a href="<?php echo $viewLink['href']; ?>" rel="external"><img src="<?php echo $thumbsLinks[$i]['href']; ?>" alt="<?php echo $viewLink['title']; ?>" /></a>
+                                                        </li>
+                                                        <?php
+                                                        $i++;
+                                                    endforeach;
+                                                endif;
+                                            else:
+                                                echo json_encode($viewLinks);
+
+                                            endif;
                                             echo CHtml::closeTag('div');
-                                        }
+                                        endif;
                                         ?>
                                     </div>
                                 </td>
@@ -96,6 +111,6 @@
                     </a>                            
                 </li>                    
             <?php endif; ?>                    
-    <?php endforeach; ?>                    
-<?php endif; ?>                    
+        <?php endforeach; ?>                    
+    <?php endif; ?>                    
 </ul>

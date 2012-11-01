@@ -24,7 +24,17 @@ class PreviewStorage extends CActiveRecord
                     $previewRecord->relative_path = $link;
                     $previewRecord->save();
                 }
-
+        if (array_key_exists('pngPhoneLinks', $previewContainer))
+            if (isset($previewContainer['pngPhoneLinks']))
+                foreach ($previewContainer['pngPhoneLinks'] as $link)
+                {
+                    $previewRecord = new PreviewStorage();
+                    $previewRecord->id_container = $previewContainer['id'];
+                    $previewRecord->id_library = $previewContainer['libraryId'];
+                    $previewRecord->type = 'png_phone';
+                    $previewRecord->relative_path = $link;
+                    $previewRecord->save();
+                }                
         if (array_key_exists('jpegLinks', $previewContainer))
             if (isset($previewContainer['jpegLinks']))
                 foreach ($previewContainer['jpegLinks'] as $link)
@@ -36,7 +46,17 @@ class PreviewStorage extends CActiveRecord
                     $previewRecord->relative_path = $link;
                     $previewRecord->save();
                 }
-
+        if (array_key_exists('jpegPhoneLinks', $previewContainer))
+            if (isset($previewContainer['jpegPhoneLinks']))
+                foreach ($previewContainer['jpegPhoneLinks'] as $link)
+                {
+                    $previewRecord = new PreviewStorage();
+                    $previewRecord->id_container = $previewContainer['id'];
+                    $previewRecord->id_library = $previewContainer['libraryId'];
+                    $previewRecord->type = 'jpeg_phone';
+                    $previewRecord->relative_path = $link;
+                    $previewRecord->save();
+                }                
         if (array_key_exists('pdfLinks', $previewContainer))
             if (isset($previewContainer['pdfLinks']))
                 foreach ($previewContainer['pdfLinks'] as $link)
@@ -112,6 +132,17 @@ class PreviewStorage extends CActiveRecord
                         $previewRecord->thumb_height = $previewContainer['thumbsHeight'];
                     $previewRecord->save();
                 }
+        if (array_key_exists('thumbsPhoneLinks', $previewContainer))
+            if (isset($previewContainer['thumbsPhoneLinks']))
+                foreach ($previewContainer['thumbsPhoneLinks'] as $link)
+                {
+                    $previewRecord = new PreviewStorage();
+                    $previewRecord->id_container = $previewContainer['id'];
+                    $previewRecord->id_library = $previewContainer['libraryId'];
+                    $previewRecord->type = 'thumbs_phone';
+                    $previewRecord->relative_path = $link;
+                    $previewRecord->save();
+                }                
     }
 
     public static function clearData($libraryId)

@@ -2,7 +2,7 @@
 {
     width: 100%;
     display: table;    
-    behavior: url(./css/PIE.htc);
+    behavior: url(./css/regular/PIE.htc);
 }
 
 #page-content-container
