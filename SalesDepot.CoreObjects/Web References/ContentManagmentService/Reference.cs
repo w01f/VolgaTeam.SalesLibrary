@@ -621,7 +621,11 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string[] pngLinksField;
         
+        private string[] pngPhoneLinksField;
+        
         private string[] jpegLinksField;
+        
+        private string[] jpegPhoneLinksField;
         
         private string[] pdfLinksField;
         
@@ -634,6 +638,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         private string[] newOfficeFormatLinksField;
         
         private string[] thumbsLinksField;
+        
+        private string[] thumbsPhoneLinksField;
         
         private int thumbsWidthField;
         
@@ -670,12 +676,32 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         }
         
         /// <remarks/>
+        public string[] pngPhoneLinks {
+            get {
+                return this.pngPhoneLinksField;
+            }
+            set {
+                this.pngPhoneLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string[] jpegLinks {
             get {
                 return this.jpegLinksField;
             }
             set {
                 this.jpegLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] jpegPhoneLinks {
+            get {
+                return this.jpegPhoneLinksField;
+            }
+            set {
+                this.jpegPhoneLinksField = value;
             }
         }
         
@@ -736,6 +762,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.thumbsLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] thumbsPhoneLinks {
+            get {
+                return this.thumbsPhoneLinksField;
+            }
+            set {
+                this.thumbsPhoneLinksField = value;
             }
         }
         

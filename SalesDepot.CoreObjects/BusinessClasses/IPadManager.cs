@@ -381,9 +381,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (pngLinks != null && pngLinks.Length > 0)
 					previewContainer.pngLinks = pngLinks;
 
+				string[] pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
+				if (pngPhoneLinks != null && pngPhoneLinks.Length > 0)
+					previewContainer.pngPhoneLinks = pngPhoneLinks;
+
 				string[] jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
 				if (jpegLinks != null && jpegLinks.Length > 0)
 					previewContainer.jpegLinks = jpegLinks;
+
+				string[] jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
+				if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
+					previewContainer.jpegPhoneLinks = jpegPhoneLinks;
 
 				string[] pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
 				if (pdfLinks != null && pdfLinks.Length > 0)
@@ -408,6 +416,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				string[] thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
 				if (thumbsLinks != null && thumbsLinks.Length > 0)
 					previewContainer.thumbsLinks = thumbsLinks;
+
+				string[] thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
+				if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
+					previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
 
 				previewContainers.Add(previewContainer);
 			}
