@@ -15,7 +15,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
     <table id ="form-login">
         <tr>
             <td>
-                <img  id="image-logo" src="<?php echo Yii::app()->baseUrl . '/images/logo.png'; ?>" />
+                <img  id="image-logo" src="<?php echo Yii::app()->baseUrl . '/images/logo_phone.png'; ?>" />
             </td>
         </tr>        
         <tr>
@@ -33,7 +33,6 @@ $this->pageTitle = Yii::app()->name . ' - Login';
         </tr>        
         <tr>
             <td>
-                <br>
                 <?php
                 echo $form->textField($formData, 'password'
                     , array(
@@ -73,7 +72,6 @@ $this->pageTitle = Yii::app()->name . ' - Login';
                     , array('class' => 'error-message')
                 );
                 ?>
-                <br>                
             </td>        
         </tr>        
         <tr>        

@@ -135,8 +135,15 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <span class="ui-title library-title"></span>
     </div>             
     <div data-role='content' class ="page-content">
-        <table id ="gallery">
-        </table>
+        <ul data-role="listview" data-theme="c" data-divider-theme="c">
+            <li data-role="list-divider" >
+                <h4 id="gallery-title">                        
+                </h4>                        
+            </li>            
+        </ul>
+        <br>
+        <ul id ="gallery">
+        </ul>
     </div> 
     <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
         <div data-role="navbar" data-iconpos="top">

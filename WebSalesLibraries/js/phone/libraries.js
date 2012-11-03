@@ -108,8 +108,31 @@
                     transition: "slidefade"
                 });
                 $('#preview .page-content').children('ul').listview();                     
+                $('#preview .res-selector').navbar();                     
                 $( ".preview-link" ).on('click',function(){
-                    $.viewSelectedFormat($(this).find('.item-content'));
+                    var itemContent = $(this).find('.item-content');
+                    var viewFormat = itemContent.find('.view-type').html().toUpperCase();
+                    
+                    var resolution = 'low';
+                    if($('.res-selector .hi-res-button').hasClass('ui-btn-active'))
+                        var resolution = 'hi';
+                    
+                    if(viewFormat == 'PNG' || viewFormat == 'JPEG')
+                    {
+                        var galleryHeader = $('#preview .link-container').first().clone();
+                        var previewInfo = '';
+                        if(resolution == 'hi')
+                            previewInfo += 'High Resolution - ';
+                        else if(resolution == 'low')
+                            previewInfo += 'Low Resolution - ';
+                        previewInfo += viewFormat + ' Images';
+                        galleryHeader.find('.file').html(previewInfo);
+                    
+                        $('#gallery-title').html('');
+                        $('#gallery-title').append(galleryHeader);
+                    }
+                    
+                    $.viewSelectedFormat(itemContent,resolution);
                 });
             },
             async: true,

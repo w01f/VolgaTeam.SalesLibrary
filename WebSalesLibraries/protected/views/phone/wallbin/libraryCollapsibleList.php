@@ -10,7 +10,7 @@
                     <?php $page->loadData('phone'); ?>
                     <?php foreach ($page->folders as $folder): ?>
                         <li>
-                            <a class ="folder-link" href="#<?php echo $page->name; ?>-folder-<?php echo $folder->id; ?>">
+                            <a class ="folder-link" href="#<?php echo str_replace('/', '----------', $page->name); ?>-folder-<?php echo $folder->id; ?>">
                                 <span><?php echo $folder->name; ?></span>
                             </a>
                         </li>                    

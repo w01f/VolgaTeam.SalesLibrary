@@ -372,36 +372,56 @@ class LibraryLink
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
-                        {
-                            $pngLinks = $this->browser == 'phone' && isset($this->universalPreview->pngPhoneLinks) ? $this->universalPreview->pngPhoneLinks : $this->universalPreview->pngLinks;
-                            if (isset($pngLinks))
+                            if (isset($this->universalPreview->pngLinks))
                             {
                                 $i = 1;
-                                $count = count($pngLinks);
-                                foreach ($pngLinks as $link)
+                                $count = count($this->universalPreview->pngLinks);
+                                foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
                                     $i++;
                                 }
                             }
-                        }
                         break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->pngPhoneLinks))
+                            {
+                                $i = 1;
+                                $count = count($this->universalPreview->pngPhoneLinks);
+                                foreach ($this->universalPreview->pngPhoneLinks as $link)
+                                {
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+                                    $i++;
+                                }
+                            }
+                        break;                        
                     case 'jpeg':
                         if (isset($this->universalPreview))
-                        {
-                            $jpegLinks = $this->browser == 'phone' && isset($this->universalPreview->jpegPhoneLinks) ? $this->universalPreview->jpegPhoneLinks : $this->universalPreview->jpegLinks;
-                            if (isset($jpegLinks))
+                            if (isset($this->universalPreview->jpegLinks))
                             {
                                 $i = 1;
-                                $count = count($jpegLinks);
-                                foreach ($jpegLinks as $link)
+                                $count = count($this->universalPreview->jpegLinks);
+                                foreach ($this->universalPreview->jpegLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
-                        }
                         break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->jpegPhoneLinks))
+                            {
+                                $i = 1;
+                                $count = count($this->universalPreview->jpegPhoneLinks);
+                                foreach ($this->universalPreview->jpegPhoneLinks as $link)
+                                {
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+                                    $i++;
+                                }
+                            }
+                        break;                        
                     case 'pdf':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->pdfLinks))
@@ -444,36 +464,56 @@ class LibraryLink
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
-                        {
-                            $pngLinks = $this->browser == 'phone' && isset($this->universalPreview->pngPhoneLinks) ? $this->universalPreview->pngPhoneLinks : $this->universalPreview->pngLinks;
-                            if (isset($pngLinks))
+                            if (isset($this->universalPreview->pngLinks))
                             {
                                 $i = 1;
-                                $count = count($pngLinks);
-                                foreach ($pngLinks as $link)
+                                $count = count($this->universalPreview->pngLinks);
+                                foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
                                     $i++;
                                 }
                             }
-                        }
                         break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->pngPhoneLinks))
+                            {
+                                $i = 1;
+                                $count = count($this->universalPreview->pngPhoneLinks);
+                                foreach ($this->universalPreview->pngPhoneLinks as $link)
+                                {
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+                                    $i++;
+                                }
+                            }
+                        break;                        
                     case 'jpeg':
                         if (isset($this->universalPreview))
-                        {
-                            $jpegLinks = $this->browser == 'phone' && isset($this->universalPreview->jpegPhoneLinks) ? $this->universalPreview->jpegPhoneLinks : $this->universalPreview->jpegLinks;
-                            if (isset($jpegLinks))
+                            if (isset($this->universalPreview->jpegLinks))
                             {
                                 $i = 1;
-                                $count = count($jpegLinks);
-                                foreach ($jpegLinks as $link)
+                                $count = count($this->universalPreview->jpegLinks);
+                                foreach ($this->universalPreview->jpegLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
-                        }
                         break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->jpegPhoneLinks))
+                            {
+                                $i = 1;
+                                $count = count($this->universalPreview->jpegPhoneLinks);
+                                foreach ($this->universalPreview->jpegPhoneLinks as $link)
+                                {
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $i++;
+                                }
+                            }
+                        break;                        
                     case 'pdf':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->pdfLinks))
@@ -527,36 +567,56 @@ class LibraryLink
                         break;
                     case 'png':
                         if (isset($this->universalPreview))
-                        {
-                            $pngLinks = $this->browser == 'phone' && isset($this->universalPreview->pngPhoneLinks) ? $this->universalPreview->pngPhoneLinks : $this->universalPreview->pngLinks;
-                            if (isset($pngLinks))
+                            if (isset($this->universalPreview->pngLinks))
                             {
                                 $i = 1;
-                                $count = count($pngLinks);
-                                foreach ($pngLinks as $link)
+                                $count = count($this->universalPreview->pngLinks);
+                                foreach ($this->universalPreview->pngLinks as $link)
                                 {
-                                    $viewSources[] = array('title' => ($this->fileName . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
                                     $i++;
                                 }
                             }
-                        }
                         break;
-                    case 'jpeg':
+                    case 'png_phone':
                         if (isset($this->universalPreview))
-                        {
-                            $jpegLinks = $this->browser == 'phone' && isset($this->universalPreview->jpegPhoneLinks) ? $this->universalPreview->jpegPhoneLinks : $this->universalPreview->jpegLinks;
-                            if (isset($jpegLinks))
+                            if (isset($this->universalPreview->pngPhoneLinks))
                             {
                                 $i = 1;
-                                $count = count($jpegLinks);
-                                foreach ($jpegLinks as $link)
+                                $count = count($this->universalPreview->pngPhoneLinks);
+                                foreach ($this->universalPreview->pngPhoneLinks as $link)
+                                {
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+                                    $i++;
+                                }
+                            }
+                        break;                        
+                    case 'jpeg':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->jpegLinks))
+                            {
+                                $i = 1;
+                                $count = count($this->universalPreview->jpegLinks);
+                                foreach ($this->universalPreview->jpegLinks as $link)
                                 {
                                     $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
                                     $i++;
                                 }
                             }
-                        }
                         break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview))
+                            if (isset($this->universalPreview->jpegPhoneLinks))
+                            {
+                                $i = 1;
+                                $count = count($this->universalPreview->jpegPhoneLinks);
+                                foreach ($this->universalPreview->jpegPhoneLinks as $link)
+                                {
+                                    $viewSources[] = array('title' => ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+                                    $i++;
+                                }
+                            }
+                        break;                        
                     case 'thumbs':
                         if (isset($this->universalPreview))
                         {

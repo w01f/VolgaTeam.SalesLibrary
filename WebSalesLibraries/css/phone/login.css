@@ -7,6 +7,8 @@
 {
     text-align: center;
     height: 40 px;
+    padding-right: 12%;
+    padding-left: 12%;
 }
 
 #form-login td.title

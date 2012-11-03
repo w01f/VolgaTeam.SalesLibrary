@@ -62,7 +62,7 @@ class WallbinController extends CController
     {
         $libraryManager = new LibraryManager();
         $libraryManager->setSelectedLibraryName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedLibrary')));
-        $libraryManager->setSelectedPageName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedPage')));
+        $libraryManager->setSelectedPageName(str_replace('----------', '/', htmlspecialchars_decode(Yii::app()->request->getPost('selectedPage'))));
         $folderId = Yii::app()->request->getPost('folderId');
 
         $selectedPage = $libraryManager->getSelectedPage();
