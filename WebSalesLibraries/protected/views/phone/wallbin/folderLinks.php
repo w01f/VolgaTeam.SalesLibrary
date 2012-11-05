@@ -4,7 +4,7 @@
     </li>
     <?php if (isset($folder->files)): ?>
         <?php foreach ($folder->files as $link): ?>
-            <?php if ((isset($link->name) && $link->name != '') || (isset($link->fileName) && $link->fileName != '')): ?>
+            <?php if ($link->type != 5 && $link->type != 6 && ((isset($link->name) && $link->name != '') || (isset($link->fileName) && $link->fileName != ''))): ?>
                 <li>
                     <a class ="file-link" href="#folder<?php echo $folder->id; ?>-link-<?php echo $link->id; ?>">
                         <table class ="link-container">

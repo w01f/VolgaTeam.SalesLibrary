@@ -137,6 +137,11 @@ class WallbinController extends CController
         Yii::app()->end();
     }
 
+    public function actionRunFullscreenGallery()
+    {
+        $selectedLinks = CJSON::decode(Yii::app()->request->getPost('selectedLinks'));
+        $this->renderPartial('fullscreenGallery', array('selectedLinks' => $selectedLinks));
+    }
 }
 
 ?>

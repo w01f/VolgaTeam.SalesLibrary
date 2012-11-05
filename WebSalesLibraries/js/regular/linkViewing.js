@@ -1,32 +1,33 @@
 (function( $ ) {
     $.openViewDialogEmbedded = function(){
-        var formatItems = $(this).find('.view-dialog-body .format-list .item');
-        var selectedFileType = formatItems.find('.service-data .file-type').first().html();
-        if(formatItems.length > 1 || selectedFileType == 'xls')
+        var formatItems = $(this).find('td');
+        var fullScreenSelector = $(this).find('.use-fullscreen');
+        if(formatItems.length > 1)
         {
-            $(this).find('.view-dialog-body .format-list .item').off('click');        
-            $(this).find('.view-dialog-body .format-list .item').on('click',$.viewSelectedFormat);        
-            
+            $(this).find('.view-dialog-body .format-list td').off('click');        
+            $(this).find('.view-dialog-body .format-list td').on('click',function(){
+                $.viewSelectedFormat($(this), fullScreenSelector.is(':checked'));
+            } );        
             var viewDialogContent = $(this).find('.view-dialog-content').html();
             $.fancybox({
                 content: $(this).find('.view-dialog-body'),
                 title: 'How Do you want to Open this File?',
-                minWidth: 300,
-                helpers: {
+                minWidth: 400,
+                openEffect  : 'none',
+                closeEffect	: 'none',
+                helpers : {
                     overlay : {
                         css : {
-                            'background-color' : '#eee'
+                            'background' : 'rgba(224, 224, 224, 0.8)'
                         }
                     }
-                },
-                openEffect  : 'none',
-                closeEffect	: 'none'            
+                }
             });
             $(this).find('.view-dialog-content').html(viewDialogContent);
         }
         else
         {
-            $.viewSelectedFormat.call(formatItems);
+            $.viewSelectedFormat.call(formatItems[0],false);
         }
     }
     
@@ -45,8 +46,6 @@
             },
             success: function(msg){
                 $.viewDilogContent = $('<div>'+msg+'<div>');
-                $.viewDilogContent.off('click');
-                $.viewDilogContent.on('click',$.viewSelectedFormat);
                 $.openViewDialogEmbedded.call($.viewDilogContent);
             },
             error: function(){
@@ -63,42 +62,21 @@
             content: $(this).find('.file-card-body'),
             title: 'File Card',
             minWidth: 400,
-            helpers: {
+            openEffect  : 'none',
+            closeEffect	: 'none',
+            helpers : {
                 overlay : {
                     css : {
-                        'background-color' : '#eee'
+                        'background' : 'rgba(224, 224, 224, 0.8)'
                     }
                 }
-            },
-            openEffect  : 'none',
-            closeEffect	: 'none'            
+            }
         });
         $(this).find('.file-card-content').html(fileCardContent);
     }
     
     $.downloadFile = function(url)
     {
-        //        $.ajax({
-        //            type: "POST",
-        //            url: "site/downloadFile",
-        //            data: {
-        //                url: url
-        //            },            
-        //            beforeSend: function(){
-        //                $.showOverlay();
-        //            },
-        //            complete: function(){
-        //                $.hideOverlay();
-        //            },
-        //            success: function(msg){
-        //                $('<iframe id="secretIFrame" src="" style="display:none; visibility:hidden;"></iframe>').attr("src",msg);
-        //            },            
-        //            error: function(msg){
-        //                alert(msg);
-        //            },                        
-        //            async: true
-        //        });        
-        //        window.open("site/downloadFile?url="+url);                                    
         window.open(url);
     }    
     
@@ -143,15 +121,15 @@
                 $.fancybox({
                     content: content,
                     title: selectedLink.title,
-                    helpers: {
+                    openEffect  : 'none',
+                    closeEffect	: 'none',
+                    helpers : {
                         overlay : {
                             css : {
-                                'background-color' : '#eee'
+                                'background' : 'rgba(224, 224, 224, 0.8)'
                             }
                         }
-                    },
-                    openEffect  : 'none',
-                    closeEffect	: 'none'            
+                    }
                 });                
             },
             error: function(){
@@ -161,22 +139,26 @@
         });          
     }    
     
-    $.viewSelectedFormat = function()
+    $.viewSelectedFormat = function(target, fullScreen)
     {
-        var selectedFileType = $(this).find('.service-data .file-type').html();
-        var selectedViewType = $(this).find('.service-data .view-type').html();
-        var selectedLinks = $(this).find('.service-data .links').html();
-        var selectedThumbs = $(this).find('.service-data .thumbs').html()
-
+        var selectedFileType = target.find('.service-data .file-type').html();
+        var selectedViewType = target.find('.service-data .view-type').html();
+        var selectedLinks = target.find('.service-data .links').html();
+        var selectedThumbs = target.find('.service-data .thumbs').html()
+        
         $.fancybox.close();
-
+        
         if(selectedFileType != ''&& selectedViewType != '' && selectedLinks != '')
         {
             selectedLinks = $.parseJSON(selectedLinks);
             selectedThumbs = $.parseJSON(selectedThumbs);
-            var thumbLinks = [];
-            for ( var item in selectedThumbs )
-                thumbLinks.push(selectedThumbs[item].href);
+            if(selectedThumbs!= null)
+            {
+                $.each(selectedLinks,function(index) {
+                    selectedLinks[index].thumb = selectedThumbs[index].href;
+                    selectedLinks[index].image = selectedLinks[index].href;
+                });
+            }
             switch(selectedFileType)
             {
                 case 'ppt':
@@ -186,22 +168,49 @@
                     {
                         case 'png':
                         case 'jpeg':
-                            $.fancybox(selectedLinks,{
-                                helpers: {
-                                    overlay : {
-                                        css : {
-                                            'background-color' : '#eee'
-                                        }
+                            if(fullScreen)
+                            {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "wallbin/runFullscreenGallery",
+                                    data: {
+                                        selectedLinks:$.toJSON(selectedLinks)
                                     },
-                                    thumbs : {
-                                        height: selectedThumbs[0].height,
-                                        width: selectedThumbs[0].width,
-                                        source: thumbLinks
+                                    beforeSend: function(){
+                                        $.showOverlayLight();
+                                    },
+                                    complete: function(){
+                                        $.hideOverlayLight();
+                                    },
+                                    success: function(msg){
+                                        var galleryWindow = window.open();
+                                        galleryWindow.document.write(msg);
+                                    },
+                                    error: function(){
+                                    },            
+                                    async: true,
+                                    dataType: 'html'                        
+                                });                                  
+                            }
+                            else
+                            {
+                                $.fancybox(selectedLinks,{
+                                    openEffect  : 'none',
+                                    closeEffect	: 'none',
+                                    helpers : {
+                                        overlay : {
+                                            css : {
+                                                'background' : 'rgba(224, 224, 224, 0.8)'
+                                            }
+                                        },
+                                        thumbs : {
+                                            height: selectedThumbs[0].height,
+                                            width: selectedThumbs[0].width,
+                                            source: this.thumb
+                                        }                                    
                                     }
-                                },
-                                openEffect  : 'none',
-                                closeEffect	: 'none'            
-                            });                        
+                                });      
+                            }
                             break;
                         case 'email':
                             $.emailFile(selectedLinks[0]);
@@ -235,15 +244,15 @@
                             break;
                         default:
                             $.fancybox(selectedLinks,{
-                                helpers: {
+                                openEffect  : 'none',
+                                closeEffect	: 'none',
+                                helpers : {
                                     overlay : {
                                         css : {
-                                            'background-color' : '#eee'
+                                            'background' : 'rgba(224, 224, 224, 0.8)'
                                         }
-                                    }                                
-                                },
-                                openEffect  : 'none',
-                                closeEffect	: 'none'            
+                                    }
+                                }
                             });
                             break;
                     }                    
@@ -263,16 +272,17 @@
                         case 'mp4':
                             VideoJS.players = {};
                             $.fancybox({
+                                title: selectedLinks[0].title,
                                 content: $('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
-                                helpers: {
+                                openEffect  : 'none',
+                                closeEffect	: 'none',
+                                helpers : {
                                     overlay : {
                                         css : {
-                                            'background-color' : '#eee'
+                                            'background' : 'rgba(224, 224, 224, 0.8)'
                                         }
                                     }
                                 },
-                                openEffect  : 'none',
-                                closeEffect	: 'none',
                                 afterClose: function(){
                                     $('#video-player').remove();
                                 }

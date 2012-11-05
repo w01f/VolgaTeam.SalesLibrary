@@ -25,34 +25,26 @@
 
 .view-dialog-body .format-list
 { 
-    display: table;
     margin-left: auto;
     margin-right: auto;
 }
 
-.view-dialog-body .format-list .row
+.view-dialog-body .format-list td
 { 
-    display: table-cell;
-    white-space:nowrap;
-}
-
-.view-dialog-body .format-list .item
-{ 
-    display:inline;
     vertical-align: middle;
-    margin-left: 10px;
-    margin-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;    
 }
 
-.view-dialog-body .format-list .image
+.view-dialog-body .format-list img
 { 
+
     border: none;
     cursor: pointer;
 }
 
-.view-dialog-body .service-data
+.view-dialog-body .service-data, .view-dialog-body .checkbox
 { 
     display: none;
-    visibility: hidden;
 }
 

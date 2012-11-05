@@ -1,50 +1,19 @@
-<?php
-echo CHtml::openTag('div', array(
-    'class' => 'view-dialog-body'
-));
-{
-    if (isset($link->originalFormat) && isset($link->availableFormats))
-    {
-
-        echo CHtml::openTag('div', array(
-            'class' => 'title'
-        ));
-        {
-            echo CHtml::openTag('div', array(
-                'class' => 'link-name'
-            ));
-            {
-                echo $link->name;
-            }
-            echo CHtml::closeTag('div'); //viewDialogLinkName
-
-            echo CHtml::tag('br');
-
-            if (isset($link->fileName))
-            {
-                echo CHtml::openTag('div', array(
-                    'class' => 'description'
-                ));
-                {
-                    echo $link->fileName;
-                }
-                echo CHtml::closeTag('div'); //viewDialogDescription
-
-                echo CHtml::tag('br');
-            }
-        }
-        echo CHtml::closeTag('div'); //viewDialogTitle
-
-        echo CHtml::openTag('div', array(
-            'class' => 'format-list'
-        ));
-        {
-            echo CHtml::openTag('div', array(
-                'class' => 'row'
-            ));
-            {
-                foreach ($link->availableFormats as $format)
-                {
+<div class ="view-dialog-body">
+    <?php if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
+        <div class="title">
+            <div class ="link-name">
+                <?php echo $link->name; ?>
+            </div>            
+            <br>
+            <div class ="description">
+                <?php echo $link->fileName; ?>
+            </div>
+            <br>
+        </div>
+        <table class="format-list">
+            <tr>
+                <?php foreach ($link->availableFormats as $format): ?>
+                    <?php
                     $imageSource = '';
                     switch ($format)
                     {
@@ -83,67 +52,43 @@ echo CHtml::openTag('div', array(
                             break;
                         case 'email':
                             $imageSource = Yii::app()->baseUrl . '/images/fileFormats/email.png';
-                            break;                        
+                            break;
                     }
-                    if ($imageSource != '')
-                    {
-                        echo CHtml::openTag('div', array('class' => 'item'));
-                        {
-                            echo CHtml::tag('img', array('class' => 'image', 'src' => $imageSource));
-                            echo CHtml::openTag('div', array('class' => 'service-data'));
-                            {
-                                echo CHtml::openTag('div', array('class' => 'file-type'));
-                                echo $link->originalFormat;
-                                echo CHtml::closeTag('div');
-                                echo CHtml::openTag('div', array('class' => 'view-type'));
-                                echo $format;
-                                echo CHtml::closeTag('div');
-                                $viewLinks = $link->getViewSource($format);
-                                if (isset($viewLinks))
-                                {
-                                    echo CHtml::openTag('div', array('class' => 'links'));
-                                    echo json_encode($viewLinks);
-                                    echo CHtml::closeTag('div');
-                                }
-                                if ($format == 'png' || $format == 'jpeg')
-                                {
-                                    $thumbsLinks = $link->getViewSource('thumbs');
-                                    if (isset($thumbsLinks))
-                                    {
-                                        echo CHtml::openTag('div', array('class' => 'thumbs'));
-                                        echo json_encode($thumbsLinks);
-                                        echo CHtml::closeTag('div');
-                                    }
-                                }
-                            }
-                            echo CHtml::closeTag('div'); //service-data
-                        }
-                        echo CHtml::closeTag('div'); //item
-                    }
-                }
-            }
-            echo CHtml::closeTag('div'); //row
-        }
-        echo CHtml::closeTag('div'); //format-list
-    }
-    else
-    {
-        echo CHtml::openTag('div', array(
-            'class' => 'viewDialogTitle'
-        ));
-        {
-            echo CHtml::openTag('div', array(
-                'class' => 'viewDialogDescription'
-            ));
-            {
-                echo 'This link is not avalable for preview';
-            }
-            echo CHtml::closeTag('div'); //description
-
-            echo CHtml::tag('br');
-        }
-        echo CHtml::closeTag('div'); //title
-    }
-}
-echo CHtml::closeTag('div'); //.view-dialog-body
-?>
+                    ?>
+                    <?php if ($imageSource != ''): ?>
+                        <td>
+                            <img src="<?php echo $imageSource; ?>" />
+                            <div class ="service-data">
+                                <div class ="file-type"><?php echo $link->originalFormat; ?></div>
+                                <div class ="view-type"><?php echo $format; ?></div>
+                                <?php $viewLinks = $link->getViewSource($format); ?>
+                                <?php if (isset($viewLinks)): ?>
+                                    <div class ="links"><?php echo json_encode($viewLinks); ?></div>
+                                <?php endif; ?>
+                                <?php if ($format == 'png' || $format == 'jpeg'): ?>
+                                    <?php $thumbsLinks = $link->getViewSource('thumbs'); ?>
+                                    <?php if (isset($thumbsLinks)): ?>
+                                        <div class ="thumbs"><?php echo json_encode($thumbsLinks); ?></div>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                        </td>                        
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </tr>
+        </table>
+        <?php if ($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf' || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
+            <br>
+            <label class="checkbox">
+                <input class="use-fullscreen" type="checkbox" value="">
+                View PNG & JPEG in a full screen new tab
+            </label>
+        <?php endif; ?>
+    <?php else: ?>
+        <div class="title">
+            <div class ="description">
+                This link is not available for preview
+            </div>
+        </div>
+    <?php endif; ?>
+</div>

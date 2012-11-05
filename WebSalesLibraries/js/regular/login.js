@@ -91,15 +91,15 @@
                                                 $.fancybox({
                                                     content: content,
                                                     title: 'Password recovery',
+                                                    openEffect  : 'none',
+                                                    closeEffect	: 'none',
                                                     helpers: {
                                                         overlay : {
                                                             css : {
                                                                 'background-color' : '#eee'
                                                             }
                                                         }
-                                                    },
-                                                    openEffect  : 'none',
-                                                    closeEffect	: 'none'            
+                                                    }
                                                 });                
                                             },
                                             error: function(){
@@ -127,15 +127,15 @@
                 $.fancybox({
                     content: content,
                     title: 'Password recovery',
-                    helpers: {
+                    openEffect  : 'none',
+                    closeEffect	: 'none',
+                    helpers : {
                         overlay : {
                             css : {
-                                'background-color' : '#eee'
+                                'background' : 'rgba(224, 224, 224, 0.8)'
                             }
                         }
-                    },
-                    openEffect  : 'none',
-                    closeEffect	: 'none'            
+                    }
                 });                
             },
             error: function(){
