@@ -80,11 +80,11 @@
         window.open(url);
     }    
     
-    $.emailFile = function(selectedLink)
+    $.emailFile = function(linkId, libraryId,title)
     {
         $.ajax({
             type: "POST",
-            url: "wallbin/emailDialog",
+            url: "site/emailLinkDialog",
             data: {
             },
             beforeSend: function(){
@@ -99,13 +99,15 @@
                 content.find('#email-accept').on('click',function(){
                     $.ajax({
                         type: "POST",
-                        url: "wallbin/emailSend",
+                        url: "site/emailLinkSend",
                         data: {
-                            file: selectedLink.href,
+                            linkId: linkId,
+                            libraryId: libraryId,
                             emailTo: content.find('#email-to').val(),
                             emailFrom: content.find('#email-from').val(),
                             emailSubject: content.find('#email-subject').val(),
-                            emailBody: content.find('#email-body').val()
+                            emailBody: content.find('#email-body').val(),
+                            expiresIn: content.find('#expires-in').val()
                         },
                         complete: function(){
                             $.fancybox.close();
@@ -120,7 +122,7 @@
                 });                    
                 $.fancybox({
                     content: content,
-                    title: selectedLink.title,
+                    title: title,
                     openEffect  : 'none',
                     closeEffect	: 'none',
                     helpers : {
@@ -141,6 +143,8 @@
     
     $.viewSelectedFormat = function(target, fullScreen)
     {
+        var selectedFileId = target.find('.service-data .link-id').html();
+        var selectedLibraryId = target.find('.service-data .library-id').html();
         var selectedFileType = target.find('.service-data .file-type').html();
         var selectedViewType = target.find('.service-data .view-type').html();
         var selectedLinks = target.find('.service-data .links').html();
@@ -213,7 +217,7 @@
                             }
                             break;
                         case 'email':
-                            $.emailFile(selectedLinks[0]);
+                            $.emailFile(selectedFileId,selectedLibraryId,selectedLinks[0].title);
                             break;
                         default:
                             $.downloadFile(selectedLinks[0].href);
@@ -224,7 +228,7 @@
                     switch(selectedViewType)
                     {
                         case 'email':
-                            $.emailFile(selectedLinks[0]);
+                            $.emailFile(selectedFileId,selectedLibraryId,selectedLinks[0].title);
                             break;
                         default:
                             $.downloadFile(selectedLinks[0].href);
@@ -240,7 +244,7 @@
                     switch(selectedViewType)
                     {
                         case 'email':
-                            $.emailFile(selectedLinks[0]);
+                            $.emailFile(selectedFileId, selectedLibraryId, selectedLinks[0].title);
                             break;
                         default:
                             $.fancybox(selectedLinks,{
@@ -267,40 +271,45 @@
                             $.downloadFile(selectedLinks[0].href);
                             break;                        
                         case 'email':
-                            $.emailFile(selectedLinks[0]);
+                            $.emailFile(selectedFileId,selectedLibraryId,selectedLinks[0].title);
                             break;                            
                         case 'mp4':
-                            VideoJS.players = {};
-                            $.fancybox({
-                                title: selectedLinks[0].title,
-                                content: $('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
-                                openEffect  : 'none',
-                                closeEffect	: 'none',
-                                helpers : {
-                                    overlay : {
-                                        css : {
-                                            'background' : 'rgba(224, 224, 224, 0.8)'
-                                        }
-                                    }
-                                },
-                                afterClose: function(){
-                                    $('#video-player').remove();
-                                }
-                            });
-                            _V_.options.flash.swf = selectedLinks[0].swf;
-                            var myPlayer = _V_("video-player",{
-                                controls: true, 
-                                autoplay: true, 
-                                preload: 'auto',
-                                width: 640,
-                                height:480
-                            });
-                            myPlayer.src(selectedLinks);
+                            playVideo(selectedLinks);
                             break;                    
                     }
                     break;
             }
         }
+    }
+    
+    var playVideo = function(links)
+    {
+        VideoJS.players = {};
+        $.fancybox({
+            title: links[0].title,
+            content: $('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
+            openEffect  : 'none',
+            closeEffect	: 'none',
+            helpers : {
+                overlay : {
+                    css : {
+                        'background' : 'rgba(224, 224, 224, 0.8)'
+                    }
+                }
+            },
+            afterClose: function(){
+                $('#video-player').remove();
+            }
+        });
+        _V_.options.flash.swf = links[0].swf;
+        var myPlayer = _V_("video-player",{
+            controls: true, 
+            autoplay: true, 
+            preload: 'auto',
+            width: 640,
+            height:480
+        });
+        myPlayer.src(links);        
     }
 })( jQuery );    
 

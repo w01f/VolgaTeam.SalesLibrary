@@ -1,4 +1,6 @@
 (function( $ ) {
+    $.storedLibrariesScrollPosition = null;
+    $.storedLinksScrollPosition = null;
     var selectedLibrary = '';
     $.initLibraries = function(){
         $.ajax({
@@ -25,8 +27,9 @@
                     selectedLibrary = $.trim($(this).find('.library-title').text());
                 });
                 $( ".folder-link" ).on('click',function(){
-                    var substr = $(this).attr("href").split('-folder-');
+                    $.storedLibrariesScrollPosition = $(this).offset().top;
                     
+                    var substr = $(this).attr("href").split('-folder-');
                     var selectedPage = $.trim(substr[0].replace('#', ''));
                     var selectedFolder = $.trim(substr[1]);
                     $.loadFolder(selectedLibrary,selectedPage,selectedFolder);
@@ -69,8 +72,9 @@
                 });
                 $('#links .page-content').children('ul').listview();                     
                 $( ".file-link" ).on('click',function(){
-                    var substr = $(this).attr("href").split('-link-');
+                    $.storedLinksScrollPosition = $(this).offset().top;                    
                     
+                    var substr = $(this).attr("href").split('-link-');
                     var selectedFolder = $.trim(substr[0].replace('#folder', ''));
                     var selectedLink = $.trim(substr[1]);
                     $.loadLink(selectedFolder,selectedLink);

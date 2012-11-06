@@ -59,6 +59,8 @@
                         <td>
                             <img src="<?php echo $imageSource; ?>" />
                             <div class ="service-data">
+                                <div class ="link-id"><?php echo $link->id; ?></div>
+                                <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
                                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                                 <div class ="view-type"><?php echo $format; ?></div>
                                 <?php $viewLinks = $link->getViewSource($format); ?>

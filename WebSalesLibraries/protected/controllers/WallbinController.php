@@ -1,22 +1,6 @@
 <?php
-class WallbinController extends CController
+class WallbinController extends IsdController
 {
-    public $browser;
-    public function init()
-    {
-        $this->browser = Yii::app()->browser->getBrowser();
-        //$this->browser = Browser::BROWSER_IPHONE;
-        switch ($this->browser)
-        {
-            case Browser::BROWSER_IPHONE:
-                $this->layout = '/phone/layouts/main';
-                break;
-            default :
-                $this->layout = '/regular/layouts/main';
-                break;
-        }
-    }
-
     public function getViewPath()
     {
         switch ($this->browser)
@@ -95,46 +79,6 @@ class WallbinController extends CController
                 break;
             }
         $this->renderPartial('linkPreview', array('link' => $selectedLink), false, true);
-    }
-
-    public function actionEmailDialog()
-    {
-        $this->renderPartial('emailDialog', array(), false, true);
-    }
-
-    public function actionEmailSend()
-    {
-        $filePath = Yii::app()->request->getPost('file');
-        $emailTo = Yii::app()->request->getPost('emailTo');
-        $emailFrom = Yii::app()->request->getPost('emailFrom');
-        $emailSubject = Yii::app()->request->getPost('emailSubject');
-        $emailBody = Yii::app()->request->getPost('emailBody');
-        if (isset($filePath) && isset($emailTo) && isset($emailFrom) && isset($emailSubject) && isset($emailBody))
-        {
-            if ($emailTo != '' && $emailFrom != '')
-            {
-                $fileName = basename($filePath);
-                $emailFolder = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['emailTemp'];
-                $emailFolderLink = Yii::app()->getBaseUrl(true) . '/' . Yii::app()->params['librariesRoot'] . '/' . Yii::app()->params['emailTemp'];
-                if (!file_exists($emailFolder))
-                    mkdir($emailFolder, 0, true);
-
-                $destinationPath = $emailFolder . DIRECTORY_SEPARATOR . $fileName;
-                $destinationLink = str_replace(' ', '%20', htmlspecialchars($emailFolderLink . '/' . $fileName));
-
-                if (!file_exists($destinationPath))
-                    copy($filePath, $destinationPath);
-
-                $message = Yii::app()->email;
-                $message->to = $emailTo;
-                $message->subject = $emailSubject;
-                $message->from = $emailFrom;
-                $message->view = 'sendLink';
-                $message->viewVars = array('body' => $emailBody, 'link' => $destinationLink);
-                $message->send();
-            }
-        }
-        Yii::app()->end();
     }
 
     public function actionRunFullscreenGallery()

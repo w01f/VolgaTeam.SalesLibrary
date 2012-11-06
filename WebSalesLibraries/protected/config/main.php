@@ -22,7 +22,7 @@ return array(
             'allowAutoLogin' => true,
         ),
         'errorHandler' => array(
-            'errorAction' => 'regular/site/error',
+            'errorAction' => 'site/error',
         ),
         'urlManager' => array(
             'urlFormat' => 'path',
