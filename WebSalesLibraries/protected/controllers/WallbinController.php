@@ -15,10 +15,6 @@ class WallbinController extends IsdController
     public function actionGetColumnsView()
     {
         $libraryManager = new LibraryManager();
-
-        $libraryManager->setSelectedLibraryName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedLibrary')));
-        $libraryManager->setSelectedPageName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedPage')));
-
         $selectedPage = $libraryManager->getSelectedPage();
         $this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
     }
@@ -29,12 +25,6 @@ class WallbinController extends IsdController
         $this->renderPartial('libraryDropDownList', array('libraryManager' => $libraryManager), false, true);
     }
 
-    public function actionGetLibraryCollapsibleList()
-    {
-        $libraryManager = new LibraryManager();
-        $this->renderPartial('libraryCollapsibleList', array('libraryManager' => $libraryManager), false, true);
-    }
-
     public function actionGetPageDropDownList()
     {
         $libraryManager = new LibraryManager();
@@ -42,13 +32,19 @@ class WallbinController extends IsdController
             'selectedPage' => $libraryManager->getSelectedPage()), false, true);
     }
 
-    public function actionGetFolderLinksList()
+    public function actionGetFoldersList()
     {
         $libraryManager = new LibraryManager();
-        $libraryManager->setSelectedLibraryName(htmlspecialchars_decode(Yii::app()->request->getPost('selectedLibrary')));
-        $libraryManager->setSelectedPageName(str_replace('----------', '/', htmlspecialchars_decode(Yii::app()->request->getPost('selectedPage'))));
+        $selectedPage = $libraryManager->getSelectedPage();
+        $selectedPage->loadData('phone');        
+        $this->renderPartial('folders', array('page' => $selectedPage), false, true);
+    }
+
+    public function actionGetFolderLinksList()
+    {
         $folderId = Yii::app()->request->getPost('folderId');
 
+        $libraryManager = new LibraryManager();
         $selectedPage = $libraryManager->getSelectedPage();
         foreach ($selectedPage->folders as $folder)
             if ($folder->id == $folderId)
@@ -86,6 +82,7 @@ class WallbinController extends IsdController
         $selectedLinks = CJSON::decode(Yii::app()->request->getPost('selectedLinks'));
         $this->renderPartial('fullscreenGallery', array('selectedLinks' => $selectedLinks));
     }
+
 }
 
 ?>

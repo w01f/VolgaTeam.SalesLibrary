@@ -1,6 +1,6 @@
 <ul data-role="listview" data-theme="c" data-divider-theme="d">
     <li data-role="list-divider" >
-        <h4><?php echo $folder->name; ?></h4>
+        <h4><?php echo $folder->parent->name.' - '.$folder->name; ?></h4>
     </li>
     <?php if (isset($folder->files)): ?>
         <?php foreach ($folder->files as $link): ?>

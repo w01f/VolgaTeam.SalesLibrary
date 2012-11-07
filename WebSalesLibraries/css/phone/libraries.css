@@ -1,3 +1,20 @@
+#selectors-container
+{
+    width: 100%;
+}
+
+#selectors-container td
+{
+    text-align: left;
+    padding-right: 3%;
+    padding-left: 3%;
+}
+
+.ui-select .ui-btn
+{
+    text-align: left;
+}
+
 .library-item-container .library-title
 {
     vertical-align: middle;

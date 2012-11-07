@@ -47,11 +47,10 @@
     }
     
     $.loadColumns = function(){
-        var savedState = null;
         $.ajax({
             type: "POST",
             url: "wallbin/getColumnsView",
-            data:savedState,
+            data:{},
             beforeSend: function(){
                 $.showOverlay();
                 $('#content').html('');

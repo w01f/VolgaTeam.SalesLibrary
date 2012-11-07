@@ -1,13 +1,9 @@
 (function( $ ) {
-    $.storedLibrariesScrollPosition = null;
-    $.storedLinksScrollPosition = null;
-    var selectedLibrary = '';
     $.initLibraries = function(){
         $.ajax({
             type: "POST",
-            url: "wallbin/getLibraryCollapsibleList",
+            url: "wallbin/getLibraryDropDownList",
             beforeSend: function(){
-                $('#libraries .page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -20,33 +16,94 @@
                 });
             },
             success: function(msg){
-                $('#libraries .page-content').html(msg);
-                $('.library-item-container > ul').listview();                
-                $('#libraries .page-content > div').collapsibleset();
-                $( ".library-item-container" ).on('expand',function(){
-                    selectedLibrary = $.trim($(this).find('.library-title').text());
-                });
-                $( ".folder-link" ).on('click',function(){
-                    $.storedLibrariesScrollPosition = $(this).offset().top;
-                    
-                    var substr = $(this).attr("href").split('-folder-');
-                    var selectedPage = $.trim(substr[0].replace('#', ''));
-                    var selectedFolder = $.trim(substr[1]);
-                    $.loadFolder(selectedLibrary,selectedPage,selectedFolder);
-                });
+                $('#libraries-selector').html(msg);
+                $('#libraries-selector').selectmenu('refresh', true);
+                $.libraryChanged();
             },
             async: true,
             dataType: 'html'                        
         });
     }
     
-    $.loadFolder = function(library, page, folderId){
+    $.libraryChanged = function(){
+        var selectedLibraryName = $("#libraries-selector :selected").text();
+        $.cookie("selectedLibraryName", selectedLibraryName, {
+            expires: 60 * 60 * 24 * 7
+        });
+        $.ajax({
+            type: "POST",
+            url: "wallbin/getPageDropDownList",
+            beforeSend: function(){
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            success: function(msg){
+                $('#page-selector').html(msg);
+                $('#page-selector').selectmenu('refresh', true);
+            },
+            async: true,
+            dataType: 'html'            
+        });     
+    }    
+    
+    $.pageChanged = function(){
+    }    
+    
+    $.loadPage = function(){
+        var selectedPageName = $("#page-selector :selected").text();
+        $.cookie("selectedPageName", selectedPageName, {
+            expires: 60 * 60 * 24 * 7
+        });
+        $.ajax({
+            type: "POST",
+            url: "wallbin/getFoldersList",
+            data:{},
+            beforeSend: function(){
+                $('#folders .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            success: function(msg){
+                $('#folders .page-content').html(msg);
+                $('#folders .library-title').html($.cookie("selectedLibraryName"));                
+                $('#links .library-title').html($.cookie("selectedLibraryName"));
+                $('#preview .library-title').html($.cookie("selectedLibraryName"));
+                $('#gallery-page .library-title').html($.cookie("selectedLibraryName"));
+                $.mobile.changePage( "#folders", {
+                    transition: "slidefade"
+                });
+                $('#folders .page-content').children('ul').listview();                     
+                $( ".folder-link" ).on('click',function(){
+                    var folderId = $.trim($(this).attr("href").replace('#folder', ''));
+                    $.loadFolder(folderId);
+                });
+            },
+            async: true,
+            dataType: 'html'                        
+        });
+    }    
+    
+    $.loadFolder = function(folderId){
         $.ajax({
             type: "POST",
             url: "wallbin/getFolderLinksList",
             data:{
-                selectedLibrary: library,
-                selectedPage: page,
                 folderId: folderId
             },
             beforeSend: function(){
@@ -64,16 +121,11 @@
             },
             success: function(msg){
                 $('#links .page-content').html(msg);
-                $('#links .library-title').html(library);
-                $('#preview .library-title').html(library);
-                $('#gallery-page .library-title').html(library);
                 $.mobile.changePage( "#links", {
                     transition: "slidefade"
                 });
                 $('#links .page-content').children('ul').listview();                     
                 $( ".file-link" ).on('click',function(){
-                    $.storedLinksScrollPosition = $(this).offset().top;                    
-                    
                     var substr = $(this).attr("href").split('-link-');
                     var selectedFolder = $.trim(substr[0].replace('#folder', ''));
                     var selectedLink = $.trim(substr[1]);
@@ -144,11 +196,15 @@
         });
     }
     
-    $.collapseAllLibraries = function(){
-        $( "#libraries .page-content > div" ).children().trigger("collapse");
-    }
-    
     $(document).ready(function() 
     {
+        $('#libraries-selector').off('change');        
+        $('#libraries-selector').on('change',function(){
+            $.libraryChanged();
         });
+        $('#load-page-button').off('click');        
+        $('#load-page-button').on('click',function(){
+            $.loadPage();
+        });                
+    });
 })( jQuery );    

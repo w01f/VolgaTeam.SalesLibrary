@@ -12,23 +12,6 @@
         $('#button-cllapse-all').on('click',function(){
             $.collapseAllLibraries();
         });      
-        
-//        $('#libraries').on('pageshow', function(e){
-//            if($.storedLibrariesScrollPosition!= null)
-//            {
-//                $(window.document).scrollTop($.storedLibrariesScrollPosition-50)
-//                $.storedLibrariesScrollPosition = null;
-//            }
-//        });
-//        
-//        $('#links').on('pageshow', function(e){
-//            if($.storedLinksScrollPosition!= null)
-//            {
-//                $(window.document).scrollTop($.storedLinksScrollPosition-50)
-//                $.storedLinksScrollPosition = null;
-//            }
-//        });
-        
         $('#gallery-page').on('pageshow', function(e){
             var options = {
                 enableMouseWheel: false, 
