@@ -1,14 +1,18 @@
 <?php
-$version = '9.0';
+$version = '1.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/photoswipe/photoswipe.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobiscroll/css/mobiscroll-2.1.custom.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/libraries.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/search.css?' . $version);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobiscroll/js/mobiscroll-2.1.custom.min.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/linkViewing.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/libraries.js?' . $version, CClientScript::POS_HEAD);
@@ -49,7 +53,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade">
+                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -69,7 +73,8 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
 </div>        
 <div data-role='page' id="search" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
     <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
-        <h3>Search</h3>        
+        <a id="search-button" class="ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
+        <span class="ui-title library-title">Search</span>
     </div>             
     <div data-role='content' class ="page-content">
     </div> 
@@ -77,7 +82,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade">
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -105,7 +110,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade">
+                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -134,7 +139,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade">
+                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -163,7 +168,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade">
+                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -201,7 +206,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade">
+                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>

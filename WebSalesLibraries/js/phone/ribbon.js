@@ -8,10 +8,6 @@
             $.logout();
         });                    
         
-        $('#button-cllapse-all').off('click'); 
-        $('#button-cllapse-all').on('click',function(){
-            $.collapseAllLibraries();
-        });      
         $('#gallery-page').on('pageshow', function(e){
             var options = {
                 enableMouseWheel: false, 

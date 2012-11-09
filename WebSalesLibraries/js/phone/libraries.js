@@ -55,13 +55,13 @@
     }    
     
     $.pageChanged = function(){
-    }    
-    
-    $.loadPage = function(){
         var selectedPageName = $("#page-selector :selected").text();
         $.cookie("selectedPageName", selectedPageName, {
             expires: 60 * 60 * 24 * 7
         });
+    }    
+    
+    $.loadPage = function(){
         $.ajax({
             type: "POST",
             url: "wallbin/getFoldersList",
@@ -198,10 +198,12 @@
     
     $(document).ready(function() 
     {
-        $('#libraries-selector').off('change');        
         $('#libraries-selector').on('change',function(){
             $.libraryChanged();
         });
+        $('#page-selector').on('change',function(){
+            $.pageChanged();
+        });        
         $('#load-page-button').off('click');        
         $('#load-page-button').on('click',function(){
             $.loadPage();
