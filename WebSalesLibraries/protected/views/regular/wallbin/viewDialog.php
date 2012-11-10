@@ -5,10 +5,12 @@
                 <?php echo $link->name; ?>
             </div>            
             <br>
-            <div class ="description">
-                <?php echo $link->fileName; ?>
-            </div>
-            <br>
+            <?php if (isset($link->fileName)): ?>            
+                <div class ="description">
+                    <?php echo $link->fileName; ?>
+                </div>
+                <br>
+            <?php endif; ?>
         </div>
         <table class="format-list">
             <tr>

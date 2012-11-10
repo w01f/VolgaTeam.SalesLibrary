@@ -1,5 +1,10 @@
 (function( $ ) {
     $(document).ready(function() {
+        $.mobile.changePage( "#libraries", {
+            transition: "slidefade",
+            direction: "reverse"
+        });
+        
         $.initLibraries();
         $.initSearch();
         

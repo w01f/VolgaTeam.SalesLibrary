@@ -28,6 +28,13 @@ class AttachmentStorage extends CActiveRecord
         self::model()->deleteAll('id_library=?', array($libraryId));
     }
 
+    public static function getAttachmentById($attachmentId)
+    {
+        $attachmentRecord = self::model()->findByPk($attachmentId);
+        if ($attachmentRecord !== false)
+            return $attachmentRecord;
+    }
+
 }
 
 ?>

@@ -83,6 +83,7 @@
                 $('#folders .page-content').html(msg);
                 $('#folders .library-title').html($.cookie("selectedLibraryName"));                
                 $('#links .library-title').html($.cookie("selectedLibraryName"));
+                $('#link-details .library-title').html($.cookie("selectedLibraryName"));
                 $('#preview .library-title').html($.cookie("selectedLibraryName"));
                 $('#gallery-page .library-title').html($.cookie("selectedLibraryName"));
                 $.mobile.changePage( "#folders", {
@@ -126,23 +127,25 @@
                 });
                 $('#links .page-content').children('ul').listview();                     
                 $( ".file-link" ).on('click',function(){
-                    var substr = $(this).attr("href").split('-link-');
-                    var selectedFolder = $.trim(substr[0].replace('#folder', ''));
-                    var selectedLink = $.trim(substr[1]);
-                    $.loadLink(selectedFolder,selectedLink);
+                    var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+                    $.loadLink(selectedLink,false);
                 });
+                $( ".file-link-detail" ).on('click',function(event){
+                    var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+                    $.loadLinkDeatils(selectedLink);
+                    event.stopPropagation();
+                });                                
             },
             async: true,
             dataType: 'html'                        
         });
     }
     
-    $.loadLink = function(folderId, linkId){
+    $.loadLink = function(linkId, isAttachment){
         $.ajax({
             type: "POST",
-            url: "wallbin/getLinkPreviewList",
+            url: isAttachment?"wallbin/getAttachmentPreviewList":"wallbin/getLinkPreviewList",
             data:{
-                folderId: folderId,
                 linkId: linkId
             },
             beforeSend: function(){
@@ -160,6 +163,7 @@
             },
             success: function(msg){
                 $('#preview .page-content').html(msg);
+                $('#preview .link.back').attr('href',isAttachment?'#link-details':'#links');
                 $.mobile.changePage( "#preview", {
                     transition: "slidefade"
                 });
@@ -190,6 +194,44 @@
                     
                     $.viewSelectedFormat(itemContent,resolution);
                 });
+            },
+            async: true,
+            dataType: 'html'                        
+        });
+    }
+    
+    $.loadLinkDeatils = function(linkId){
+        $.ajax({
+            type: "POST",
+            url: "wallbin/getLinkDetails",
+            data:{
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $('#preview .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            success: function(msg){
+                $('#link-details .page-content').html(msg);
+                $.mobile.changePage( "#link-details", {
+                    transition: "slidefade"
+                });
+                $('#link-details .page-content').children('ul').listview();                     
+                $( ".file-card-link" ).on('click',function(){
+                    });
+                $( ".attachment-link" ).on('click',function(){
+                    var attachmentId = $.trim($(this).attr("href").replace('#attachment', ''));
+                    $.loadLink(attachmentId,true);
+                });                    
             },
             async: true,
             dataType: 'html'                        

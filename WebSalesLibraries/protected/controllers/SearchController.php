@@ -86,52 +86,6 @@ class SearchController extends IsdController
         if (!$rendered)
             $this->renderPartial('empty', array(), false, true);
     }
-
-    public function actionGetLinkDetails()
-    {
-        $rendered = false;
-        $linkId = Yii::app()->request->getPost('linkId');
-        if (isset($linkId))
-        {
-            $linkRecord = LinkStorage::getLinkById($linkId);
-            if (isset($linkRecord))
-            {
-                $libraryManager = new LibraryManager();
-                $library = $libraryManager->getLibraryById($linkRecord->id_library);
-                $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-                if (Yii::app()->browser->isMobile())
-                {
-                    $link->browser = 'mobile';
-                }
-                else
-                {
-                    $browser = Yii::app()->browser->getBrowser();
-                    switch ($browser)
-                    {
-                        case 'Internet Explorer':
-                            $link->browser = 'ie';
-                            break;
-                        case 'Chrome':
-                        case 'Safari':
-                            $link->browser = 'webkit';
-                            break;
-                        case 'Firefox':
-                            $link->browser = 'firefox';
-                            break;
-                        case 'Opera':
-                            $link->browser = 'opera';
-                            break;
-                        default:
-                            $link->browser = 'webkit';
-                            break;
-                    }
-                }
-                $link->load($linkRecord);
-                $this->renderPartial('application.views.regular.wallbin.linkDetails', array('link' => $link), false, true);
-            }
-        }
-    }
-
 }
 
 ?>

@@ -27,7 +27,7 @@
         }
         else
         {
-            $.viewSelectedFormat.call(formatItems[0],false);
+            $.viewSelectedFormat.call(formatItems[0],formatItems[0],false);
         }
     }
     
@@ -143,12 +143,12 @@
     
     $.viewSelectedFormat = function(target, fullScreen)
     {
-        var selectedFileId = target.find('.service-data .link-id').html();
-        var selectedLibraryId = target.find('.service-data .library-id').html();
-        var selectedFileType = target.find('.service-data .file-type').html();
-        var selectedViewType = target.find('.service-data .view-type').html();
-        var selectedLinks = target.find('.service-data .links').html();
-        var selectedThumbs = target.find('.service-data .thumbs').html()
+        var selectedFileId = $(target).find('.service-data .link-id').html();
+        var selectedLibraryId = $(target).find('.service-data .library-id').html();
+        var selectedFileType = $(target).find('.service-data .file-type').html();
+        var selectedViewType = $(target).find('.service-data .view-type').html();
+        var selectedLinks = $(target).find('.service-data .links').html();
+        var selectedThumbs = $(target).find('.service-data .thumbs').html()
         
         $.fancybox.close();
         

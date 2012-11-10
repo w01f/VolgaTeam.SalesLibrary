@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '7.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -134,6 +134,36 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <span class="ui-title library-title"></span>
     </div>             
     <div data-role='content' class ="page-content">
+    </div> 
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search" href="#search" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>             
+    </div>             
+</div>        
+<div data-role='page' id="link-details" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="link back ui-btn-right" href="#links" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
+        <span class="ui-title library-title"></span>
+    </div>             
+    <div data-role='content' class ="page-content">
+        Here will be the list of attachments with the file card at top
     </div> 
     <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
         <div data-role="navbar" data-iconpos="top">

@@ -15,7 +15,7 @@
                             </span>
                         </td>
                     </tr>
-                    <?php if (isset($link->name) && $link->name != ''): ?>                            
+                    <?php if (isset($link->name) && $link->name != '' && isset($link->fileName) && $link->fileName != ''): ?>                            
                         <tr>
                             <td>                       
                                 <span class ="file"><?php echo $link->fileName; ?></span>

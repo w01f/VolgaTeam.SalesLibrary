@@ -92,7 +92,7 @@
             var linkId =  currentRow.find('.link-id-column').html();
             $.ajax({
                 type: "POST",
-                url: "search/getLinkDetails",
+                url: "wallbin/getLinkDetails",
                 data: {
                     linkId: linkId
                 },
