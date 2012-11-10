@@ -220,5 +220,73 @@
         }
         
         updateLibraries();
+        
+        var runSearch = function(){
+            var selectedCondition = $('#condition-content-value').val();
+            if($('#content-compare-exact').hasClass('active'))
+                selectedCondition = '"' + selectedCondition + '"';
+        
+            var selectedFileTypes = [];
+            if($('#search-file-type-powerpoint').hasClass('active'))
+                selectedFileTypes.push("ppt");
+            if($('#search-file-type-word').hasClass('active'))
+                selectedFileTypes.push("doc");        
+            if($('#search-file-type-excel').hasClass('active'))
+                selectedFileTypes.push("xls");                
+            if($('#search-file-type-pdf').hasClass('active'))
+                selectedFileTypes.push("pdf");                        
+            if($('#search-file-type-video').hasClass('active'))
+                selectedFileTypes.push("video");     
+        
+            var dateString = $('#condition-date-range input').val().split(" - ");
+            if(dateString.length == 2)
+            {
+                var startDate = dateString[0];
+                var endDate = dateString[1];
+            }
+        
+            var selectedTabId = $.cookie("selectedRibbonTabId");
+            var onlyFileCards = 0;
+            if(selectedTabId == 'search-file-card-tab')
+                onlyFileCards = 1;
+            else if($.cookie("onlyFileCards")!= null)
+                onlyFileCards = parseInt($.cookie("onlyFileCards"));
+            
+            $.ajax({
+                type: "POST",
+                url: "search/searchByContent",
+                data: {
+                    fileTypes: selectedFileTypes,
+                    condition: selectedCondition,
+                    startDate: startDate,
+                    endDate: endDate,
+                    onlyFileCards: onlyFileCards,
+                    isSort: isSort
+                },
+                beforeSend: function(){
+                    $.showOverlayLight();
+                    $('#search-links-number>span').html('');
+                },
+                complete: function(){
+                    $.hideOverlayLight();
+                    $.updateContentAreaDimensions();
+                    $.initSearchGrid();
+                },
+                success: function(msg){
+                    $('#search-result>div').html('');
+                    $('#search-result>div').append(msg);
+                
+                    var searchedLinks = $('#links-number-hidden').html();
+                    if(searchedLinks!= null)
+                        if(searchedLinks!= '')
+                            $('#search-links-number>span').html('Files: '+ searchedLinks);
+                },
+                error: function(){
+                    $('#search-result>div').html('');
+                },            
+                async: true,
+                dataType: 'html'                        
+            });                        
+        }
     }
 })( jQuery );    

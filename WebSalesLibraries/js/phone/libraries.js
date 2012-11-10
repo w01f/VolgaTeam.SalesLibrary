@@ -84,7 +84,6 @@
                 $('#folders .library-title').html($.cookie("selectedLibraryName"));                
                 $('#links .library-title').html($.cookie("selectedLibraryName"));
                 $('#link-details .library-title').html($.cookie("selectedLibraryName"));
-                $('#preview .library-title').html($.cookie("selectedLibraryName"));
                 $('#gallery-page .library-title').html($.cookie("selectedLibraryName"));
                 $.mobile.changePage( "#folders", {
                     transition: "slidefade"
@@ -163,6 +162,7 @@
             },
             success: function(msg){
                 $('#preview .page-content').html(msg);
+                $('#preview .library-title').html($.cookie("selectedLibraryName"));
                 $('#preview .link.back').attr('href',isAttachment?'#link-details':'#links');
                 $.mobile.changePage( "#preview", {
                     transition: "slidefade"
@@ -227,7 +227,9 @@
                 });
                 $('#link-details .page-content').children('ul').listview();                     
                 $( ".file-card-link" ).on('click',function(){
-                    });
+                    var linkId = $.trim($(this).attr("href").replace('#file-card', ''));
+                    $.viewFileCard(linkId);
+                });
                 $( ".attachment-link" ).on('click',function(){
                     var attachmentId = $.trim($(this).attr("href").replace('#attachment', ''));
                     $.loadLink(attachmentId,true);

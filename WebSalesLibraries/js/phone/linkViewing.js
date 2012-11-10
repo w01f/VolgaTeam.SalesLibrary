@@ -84,5 +84,39 @@
             }
         }
     }
+    
+    $.viewFileCard = function(linkId){
+        $.ajax({
+            type: "POST",
+            url: "wallbin/getFileCard",
+            data:{
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $('#preview .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            success: function(msg){
+                $('#preview .page-content').html(msg);
+                $('#preview .library-title').html('Important Info');
+                $('#preview .link.back').attr('href','#link-details');
+                $.mobile.changePage( "#preview", {
+                    transition: "slidefade"
+                });
+                $('#preview .page-content').children('ul').listview();                     
+            },
+            async: true,
+            dataType: 'html'                        
+        });
+    }
 })( jQuery );    
 

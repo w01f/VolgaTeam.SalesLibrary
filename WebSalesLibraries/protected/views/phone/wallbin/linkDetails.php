@@ -27,7 +27,7 @@
     <?php if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
         <?php if ($link->enableFileCard && isset($link->fileCard)): ?>
             <li>
-                <a class="file-card-link" href="#file-card<?php echo $link->fileCard->id; ?>">
+                <a class="file-card-link" href="#file-card<?php echo $link->id; ?>">
                     <table class ="link-container">
                         <tr>
                             <td>

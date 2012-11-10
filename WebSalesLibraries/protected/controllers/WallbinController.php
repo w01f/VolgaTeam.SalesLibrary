@@ -153,6 +153,24 @@ class WallbinController extends IsdController
             }
         }
     }
+    
+    public function actionGetFileCard()
+    {
+        $linkId = Yii::app()->request->getPost('linkId');
+        if (isset($linkId))
+        {
+            $linkRecord = LinkStorage::getLinkById($linkId);
+            if (isset($linkRecord))
+            {
+                $libraryManager = new LibraryManager();
+                $library = $libraryManager->getLibraryById($linkRecord->id_library);
+                $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                $link->browser = 'phone';
+                $link->load($linkRecord);
+                $this->renderPartial('fileCard', array('link' => $link), false, true);
+            }
+        }
+    }    
 
     public function actionRunFullscreenGallery()
     {

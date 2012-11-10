@@ -1,5 +1,5 @@
 <?php
-$version = '7.0';
+$version = '1.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -8,6 +8,7 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/photoswipe/photoswipe.css?' 
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobiscroll/css/mobiscroll-2.1.custom.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/libraries.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/search.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/file-card.css?' . $version);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
