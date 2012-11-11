@@ -30,6 +30,10 @@
         initDateSelector();
         initFileTypeSelector();
         initLibrariesSelector();
+        
+        $('#search-button').on('click',function(){
+            runSearch();
+        });
     }
     
     var initMatchSelector = function(){
@@ -220,73 +224,81 @@
         }
         
         updateLibraries();
-        
-        var runSearch = function(){
-            var selectedCondition = $('#condition-content-value').val();
-            if($('#content-compare-exact').hasClass('active'))
-                selectedCondition = '"' + selectedCondition + '"';
-        
-            var selectedFileTypes = [];
-            if($('#search-file-type-powerpoint').hasClass('active'))
-                selectedFileTypes.push("ppt");
-            if($('#search-file-type-word').hasClass('active'))
-                selectedFileTypes.push("doc");        
-            if($('#search-file-type-excel').hasClass('active'))
-                selectedFileTypes.push("xls");                
-            if($('#search-file-type-pdf').hasClass('active'))
-                selectedFileTypes.push("pdf");                        
-            if($('#search-file-type-video').hasClass('active'))
-                selectedFileTypes.push("video");     
-        
-            var dateString = $('#condition-date-range input').val().split(" - ");
-            if(dateString.length == 2)
-            {
-                var startDate = dateString[0];
-                var endDate = dateString[1];
-            }
-        
-            var selectedTabId = $.cookie("selectedRibbonTabId");
-            var onlyFileCards = 0;
-            if(selectedTabId == 'search-file-card-tab')
-                onlyFileCards = 1;
-            else if($.cookie("onlyFileCards")!= null)
-                onlyFileCards = parseInt($.cookie("onlyFileCards"));
-            
-            $.ajax({
-                type: "POST",
-                url: "search/searchByContent",
-                data: {
-                    fileTypes: selectedFileTypes,
-                    condition: selectedCondition,
-                    startDate: startDate,
-                    endDate: endDate,
-                    onlyFileCards: onlyFileCards,
-                    isSort: isSort
-                },
-                beforeSend: function(){
-                    $.showOverlayLight();
-                    $('#search-links-number>span').html('');
-                },
-                complete: function(){
-                    $.hideOverlayLight();
-                    $.updateContentAreaDimensions();
-                    $.initSearchGrid();
-                },
-                success: function(msg){
-                    $('#search-result>div').html('');
-                    $('#search-result>div').append(msg);
-                
-                    var searchedLinks = $('#links-number-hidden').html();
-                    if(searchedLinks!= null)
-                        if(searchedLinks!= '')
-                            $('#search-links-number>span').html('Files: '+ searchedLinks);
-                },
-                error: function(){
-                    $('#search-result>div').html('');
-                },            
-                async: true,
-                dataType: 'html'                        
-            });                        
-        }
     }
+    
+    var runSearch = function(){
+        var selectedCondition = $('#search-keyword').val();
+        if($('#search-match-exact').hasClass('ui-btn-active'))
+            selectedCondition = '"' + selectedCondition + '"';
+        
+        var selectedFileTypes = [];
+        if($('#search-file-type-powerpoint').is(':checked'))
+            selectedFileTypes.push("ppt");
+        if($('#search-file-type-word').is(':checked'))
+            selectedFileTypes.push("doc");        
+        if($('#search-file-type-excel').is(':checked'))
+            selectedFileTypes.push("xls");                
+        if($('#search-file-type-pdf').is(':checked'))
+            selectedFileTypes.push("pdf");                        
+        if($('#search-file-type-video').is(':checked'))
+            selectedFileTypes.push("video");     
+        
+        
+        var startDateText = $('#search-date-start').val();
+        var endDateText = $('#search-date-end').val();
+        if(startDateText != null && endDateText != null && startDateText!=''&& endDateText!='')
+        {
+            var startDate = startDateText;
+            var endDate = endDateText;
+        }
+        
+        var onlyFileCards = $('#search-only-filecards').is(':checked')?1:0;
+            
+        $.ajax({
+            type: "POST",
+            url: "search/searchByContent",
+            data: {
+                fileTypes: selectedFileTypes,
+                condition: selectedCondition,
+                startDate: startDate,
+                endDate: endDate,
+                onlyFileCards: onlyFileCards,
+                isSort: 0
+            },
+            beforeSend: function(){
+                $('#search-result .page-content').html('');
+                $.mobile.loading( 'show', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            complete: function(){
+                $.mobile.loading( 'hide', {
+                    textVisible: false,
+                    html: ""
+                });
+            },
+            success: function(msg){
+                $('#search-result .page-content').html(msg);
+                $.mobile.changePage( "#search-result", {
+                    transition: "slidefade"
+                });
+                $('#search-result .page-content').children('ul').listview();                     
+                $( ".file-link" ).on('click',function(){
+                    var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+                    $.loadLink(selectedLink,true,false);
+                });
+                $( ".file-link-detail" ).on('click',function(event){
+                    var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+                    $.loadLinkDeatils(selectedLink,true);
+                    event.stopPropagation();
+                });                                
+            },
+            error: function(){
+                $('#search-result>div').html('');
+            },            
+            async: true,
+            dataType: 'html'                        
+        });                        
+    }    
 })( jQuery );    

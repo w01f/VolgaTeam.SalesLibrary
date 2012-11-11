@@ -127,11 +127,11 @@
                 $('#links .page-content').children('ul').listview();                     
                 $( ".file-link" ).on('click',function(){
                     var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-                    $.loadLink(selectedLink,false);
+                    $.loadLink(selectedLink,false,false);
                 });
                 $( ".file-link-detail" ).on('click',function(event){
                     var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-                    $.loadLinkDeatils(selectedLink);
+                    $.loadLinkDeatils(selectedLink,false);
                     event.stopPropagation();
                 });                                
             },
@@ -140,7 +140,7 @@
         });
     }
     
-    $.loadLink = function(linkId, isAttachment){
+    $.loadLink = function(linkId, isSearch, isAttachment){
         $.ajax({
             type: "POST",
             url: isAttachment?"wallbin/getAttachmentPreviewList":"wallbin/getLinkPreviewList",
@@ -163,7 +163,7 @@
             success: function(msg){
                 $('#preview .page-content').html(msg);
                 $('#preview .library-title').html($.cookie("selectedLibraryName"));
-                $('#preview .link.back').attr('href',isAttachment?'#link-details':'#links');
+                $('#preview .link.back').attr('href',isAttachment?'#link-details':(isSearch?'#search-result':'#links'));
                 $.mobile.changePage( "#preview", {
                     transition: "slidefade"
                 });
@@ -200,7 +200,7 @@
         });
     }
     
-    $.loadLinkDeatils = function(linkId){
+    $.loadLinkDeatils = function(linkId,isSearch){
         $.ajax({
             type: "POST",
             url: "wallbin/getLinkDetails",
@@ -222,6 +222,7 @@
             },
             success: function(msg){
                 $('#link-details .page-content').html(msg);
+                $('#link-details .link.back').attr('href',isSearch?'#search-result':'#links');
                 $.mobile.changePage( "#link-details", {
                     transition: "slidefade"
                 });
@@ -232,7 +233,7 @@
                 });
                 $( ".attachment-link" ).on('click',function(){
                     var attachmentId = $.trim($(this).attr("href").replace('#attachment', ''));
-                    $.loadLink(attachmentId,true);
+                    $.loadLink(attachmentId,isSearch,true);
                 });                    
             },
             async: true,
