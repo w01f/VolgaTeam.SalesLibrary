@@ -7,6 +7,7 @@ class SiteController extends IsdController
         switch ($this->browser)
         {
             case Browser::BROWSER_IPHONE:
+            case Browser::BROWSER_ANDROID_MOBILE:
                 return YiiBase::getPathOfAlias('application.views.phone.site');
             default :
                 return YiiBase::getPathOfAlias('application.views.regular.site');
@@ -18,6 +19,7 @@ class SiteController extends IsdController
         switch ($this->browser)
         {
             case Browser::BROWSER_IPHONE:
+            case Browser::BROWSER_ANDROID_MOBILE:
                 $this->layout = '/phone/layouts/ribbon';
                 break;
             default :

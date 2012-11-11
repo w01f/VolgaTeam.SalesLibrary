@@ -6,6 +6,7 @@ class SearchController extends IsdController
         switch ($this->browser)
         {
             case Browser::BROWSER_IPHONE:
+            case Browser::BROWSER_ANDROID_MOBILE:
                 return YiiBase::getPathOfAlias('application.views.phone.search');
             default :
                 return YiiBase::getPathOfAlias('application.views.regular.search');
@@ -86,6 +87,7 @@ class SearchController extends IsdController
         if (!$rendered)
             $this->renderPartial('empty', array(), false, true);
     }
+
 }
 
 ?>

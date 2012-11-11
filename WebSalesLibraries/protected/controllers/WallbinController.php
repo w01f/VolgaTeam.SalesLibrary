@@ -6,6 +6,7 @@ class WallbinController extends IsdController
         switch ($this->browser)
         {
             case Browser::BROWSER_IPHONE:
+            case Browser::BROWSER_ANDROID_MOBILE:
                 return YiiBase::getPathOfAlias('application.views.phone.wallbin');
             default :
                 return YiiBase::getPathOfAlias('application.views.regular.wallbin');
@@ -70,6 +71,7 @@ class WallbinController extends IsdController
                 switch ($this->browser)
                 {
                     case Browser::BROWSER_IPHONE:
+                    case Browser::BROWSER_ANDROID_MOBILE:
                         $link->browser = 'phone';
                         break;
                     default :
@@ -139,21 +141,21 @@ class WallbinController extends IsdController
                 {
                     $libraryManager = new LibraryManager();
                     $library = $libraryManager->getLibraryById($linkRecord->id_library);
-                    
+
                     $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
                     $link->browser = 'phone';
                     $link->load($linkRecord);
-                    
+
                     $attachment = new Attachment($link);
                     $attachment->browser = $link->browser;
                     $attachment->load($attachmentRecord);
-                    
+
                     $this->renderPartial('linkPreview', array('link' => $attachment), false, true);
                 }
             }
         }
     }
-    
+
     public function actionGetFileCard()
     {
         $linkId = Yii::app()->request->getPost('linkId');
@@ -170,7 +172,7 @@ class WallbinController extends IsdController
                 $this->renderPartial('fileCard', array('link' => $link), false, true);
             }
         }
-    }    
+    }
 
     public function actionRunFullscreenGallery()
     {
