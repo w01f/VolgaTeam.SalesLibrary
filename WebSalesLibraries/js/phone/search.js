@@ -30,9 +30,10 @@
         initDateSelector();
         initFileTypeSelector();
         initLibrariesSelector();
+        initSearchSortSelectors();
         
         $('#search-button').on('click',function(){
-            runSearch();
+            runSearch(0);
         });
     }
     
@@ -226,7 +227,28 @@
         updateLibraries();
     }
     
-    var runSearch = function(){
+    var initSearchSortSelectors = function(){
+        $.cookie("sortColumn", 'link-name', {
+            expires: (60 * 60 * 24 * 7)
+        });
+        $('#search-result-sort-column').on('change',function(){
+            $.cookie("sortColumn", $( '#search-result-sort-column :selected').val(), {
+                expires: (60 * 60 * 24 * 7)
+            });
+            runSearch(1);
+        });
+        $.cookie("sortDirection", 'asc', {
+            expires: (60 * 60 * 24 * 7)
+        });        
+        $('#search-result-sort-order').on('change',function(){
+            $.cookie("sortDirection", $( '#search-result-sort-order :selected').val(), {
+                expires: (60 * 60 * 24 * 7)
+            });
+            runSearch(1);
+        });        
+    }
+    
+    var runSearch = function(isSort){
         var selectedCondition = $('#search-keyword').val();
         if($('#search-match-exact').hasClass('ui-btn-active'))
             selectedCondition = '"' + selectedCondition + '"';
@@ -263,10 +285,10 @@
                 startDate: startDate,
                 endDate: endDate,
                 onlyFileCards: onlyFileCards,
-                isSort: 0
+                isSort: isSort
             },
             beforeSend: function(){
-                $('#search-result .page-content').html('');
+                $('#search-result-body').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -279,11 +301,26 @@
                 });
             },
             success: function(msg){
-                $('#search-result .page-content').html(msg);
+                $('#search-result-body').html(msg);
                 $.mobile.changePage( "#search-result", {
                     transition: "slidefade"
                 });
-                $('#search-result .page-content').children('ul').listview();                     
+                $('#search-result-body').listview('refresh');                     
+                
+                var itemsNumber = $('#search-result-body li').length;
+                if(itemsNumber>0)
+                {
+                    $('#search-result-links-number').html('Results: '+itemsNumber);                        
+                    $('#search-result-sort-column-container').show();
+                    $('#search-result-sort-order-container').show();
+                }
+                else
+                {
+                    $('#search-result-links-number').html('Files was not found');            
+                    $('#search-result-sort-column-container').hide();
+                    $('#search-result-sort-order-container').hide();
+                }
+                
                 $( ".file-link" ).on('click',function(){
                     var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
                     $.loadLink(selectedLink,true,false);
@@ -295,7 +332,7 @@
                 });                                
             },
             error: function(){
-                $('#search-result>div').html('');
+                $('#search-result-body').html('');
             },            
             async: true,
             dataType: 'html'                        

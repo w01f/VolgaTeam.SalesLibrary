@@ -261,6 +261,36 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <span class="ui-title library-title">Search</span>
     </div>             
     <div data-role='content' class ="page-content">
+        <ul data-role="listview" data-theme="c" data-divider-theme="c">
+            <li data-role="list-divider" >
+                <h4>
+                    <table class="layout-group">
+                        <tr>
+                            <td id ="search-result-links-number" class="on-left">
+                                Files was not found
+                            </td>
+                            <td id ="search-result-sort-column-container" class="on-center">
+                                <select name="search-result-sort-column" id="search-result-sort-column" data-mini="true">
+                                    <option value="link-name" selected>By Name</option>
+                                    <option value="link-type">By Type</option>
+                                    <option value="link-date">By Date</option>
+                                    <option value="library">By Library</option>
+                                </select>
+                            </td>
+                            <td id ="search-result-sort-order-container" class="on-right">
+                                <select name="search-result-sort-order" id="search-result-sort-order" data-role="slider" data-mini="true" data-track-theme="b">
+                                    <option value="asc">Asc</option>
+                                    <option value="desc">Desc</option>
+                                </select>
+                            </td>                            
+                        </tr>
+                    </table>
+                </h4>
+            </li>
+        </ul>
+        <br>
+        <ul id ="search-result-body" data-role="listview" data-theme="c" data-divider-theme="d">
+        </ul>
     </div> 
     <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
         <div data-role="navbar" data-iconpos="top">
