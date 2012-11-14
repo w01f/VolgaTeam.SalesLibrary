@@ -58,6 +58,7 @@
         <?php if (isset($categories->groups)): ?>
             <div class ="group-panel">
                 <button type="button" class="btn btn-block" id="tags-clear-all">Clear All Tags</button>        
+                <button type="button" class="btn btn-block" id="tags-exact-match">Drill-Down Mode</button>
             </div>
             <div id="categories-container">
                 <div class="accordion" id="categories">

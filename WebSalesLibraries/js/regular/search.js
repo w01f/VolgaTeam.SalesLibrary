@@ -50,6 +50,7 @@
                 endDate: endDate,
                 onlyFileCards: onlyFileCards,
                 categories: categories.length>0?$.toJSON(categories):null,
+                categoriesExactMatch: $('#tags-exact-match').hasClass('active'),
                 isSort: isSort
             },
             beforeSend: function(){
@@ -279,6 +280,24 @@
         $('#tags-clear-all').off('click');
         $('#tags-clear-all').on('click',function(){
             $( "#categories :checked").attr('checked', false);
+        });
+        
+        if($.cookie("tagsExactMatch")!=null)
+        {
+            if($.cookie("tagsExactMatch")==  "true")
+                $( "#tags-exact-match" ).button('toggle');
+        }
+        else
+            $( "#tags-exact-match" ).button('toggle');
+        $('#tags-exact-match').off('click');
+        $('#tags-exact-match').on('click',function(){
+            if($(this).hasClass('active'))
+                $(this).removeClass('active');
+            else
+                $(this).addClass('active');
+            $.cookie("tagsExactMatch", $('#tags-exact-match').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });
         });
         
         $.initLibrarySelector();

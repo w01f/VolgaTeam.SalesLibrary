@@ -19,7 +19,7 @@
             'height':height+'px'
         });    
         $('#categories-container').css({
-            'height':(height-109)+'px'
+            'height':(height-142)+'px'
         });                
         
         $.updateSearchGridDimensions();

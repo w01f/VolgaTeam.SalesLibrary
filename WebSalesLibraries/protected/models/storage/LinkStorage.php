@@ -109,7 +109,7 @@ class LinkStorage extends CActiveRecord
         Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
     }
 
-    public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $categories, $isSort)
+    public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort)
     {
         if ($isSort == 1)
         {
@@ -117,14 +117,14 @@ class LinkStorage extends CActiveRecord
         }
         else
         {
-            $libraryCondition = '1 = 1';
+            $libraryCondition = '1 != 1';
             if (isset($checkedLibraryIds))
             {
                 $count = count($checkedLibraryIds);
                 switch ($count)
                 {
                     case 0:
-                        $libraryCondition = '1 = 1';
+                        $libraryCondition = '1 != 1';
                         break;
                     default:
                         $libraryCondition = "id_library in ('" . implode("','", $checkedLibraryIds) . "')";
@@ -174,10 +174,10 @@ class LinkStorage extends CActiveRecord
             if (isset($categories))
             {
                 foreach ($categories as $category)
-                    $categoriesSelector[] = '(category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '")';
+                    $categoriesSelector[] = '(id in (select id_link from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
                 if (isset($categoriesSelector))
                 {
-                    $categoryCondition = 'id in (select id_link from tbl_link_category where (' . implode(' or ', $categoriesSelector) . '))';
+                    $categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
                     if ($contentCondition == '""' || $contentCondition == '')
                         $additionalCategoryCondition = ' or ' . $categoryCondition;
                 }

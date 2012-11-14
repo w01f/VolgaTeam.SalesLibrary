@@ -35,9 +35,12 @@ class SearchController extends IsdController
         $categories = Yii::app()->request->getPost('categories');
         if (isset($categories))
             $categories = CJSON::decode($categories);
+        $categoriesExactMatch = Yii::app()->request->getPost('categoriesExactMatch');
+        if (!isset($categoriesExactMatch))
+            $categoriesExactMatch = true;
 
         if (isset($fileTypes) && isset($condition) && isset($isSort))
-            $links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards,$categories, $isSort);
+            $links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort);
 
         if (!isset($links))
             $links = null;
