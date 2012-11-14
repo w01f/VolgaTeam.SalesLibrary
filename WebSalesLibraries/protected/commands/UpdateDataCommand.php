@@ -13,12 +13,14 @@ class UpdateDataCommand extends CConsoleCommand
                 $libraryName = $libraryFolder->getBasename();
                 $storagePath = $libraryFolder->getPathname();
                 $storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
+                $referencesFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotReferences.json');
                 $storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
                 if (!file_exists($storageFile))
                 {
                     $storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
                     $storageLink .= '/Primary Root';
                     $storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
+                    $referencesFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotReferences.json');
                 }
                 if (file_exists($storageFile))
                 {
@@ -43,6 +45,16 @@ class UpdateDataCommand extends CConsoleCommand
                             $library->buildCache($this);
                             echo "HTML cache for " . $libraryName . " updated.\n";
                         }
+                    }
+                }
+
+                if (file_exists($referencesFile))
+                {
+                    $referencesContent = file_get_contents($referencesFile);
+                    if ($referencesContent)
+                    {
+                        $categories = CJSON::decode($referencesContent);        
+                        CategoryStorage::updateData($categories);
                     }
                 }
             }

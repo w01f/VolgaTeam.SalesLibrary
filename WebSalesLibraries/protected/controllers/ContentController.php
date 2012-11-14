@@ -20,6 +20,7 @@ class ContentController extends CController
                     'Attachment' => 'Attachment',
                     'LinkCategory' => 'LinkCategory',
                     'UniversalPreviewContainer' => 'UniversalPreviewContainer',
+                    'Category' => 'Category',
                 ),
             ),
         );
@@ -29,8 +30,18 @@ class ContentController extends CController
      * @param Library Library
      * @soap
      */
-    public function mockup($library)
+    public function mockupLibrary($library)
     {
+        
+    }
+    
+        /**
+     * @param Category[] Categories
+     * @soap
+     */
+    public function mockupCategories($categories)
+    {
+        
     }
 }
 

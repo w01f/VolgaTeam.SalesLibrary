@@ -109,7 +109,7 @@ class LinkStorage extends CActiveRecord
         Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
     }
 
-    public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $isSort)
+    public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $categories, $isSort)
     {
         if ($isSort == 1)
         {
@@ -169,10 +169,24 @@ class LinkStorage extends CActiveRecord
                 }
             }
 
+            $categoryCondition = '1 = 1';
+            $additionalCategoryCondition = '';
+            if (isset($categories))
+            {
+                foreach ($categories as $category)
+                    $categoriesSelector[] = '(category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '")';
+                if (isset($categoriesSelector))
+                {
+                    $categoryCondition = 'id in (select id_link from tbl_link_category where (' . implode(' or ', $categoriesSelector) . '))';
+                    if ($contentCondition == '""' || $contentCondition == '')
+                        $additionalCategoryCondition = ' or ' . $categoryCondition;
+                }
+            }
+
             $linkRecords = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('tbl_link')
-                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ")")
+                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ")")
                 ->queryAll();
             if (isset($linkRecords))
             {

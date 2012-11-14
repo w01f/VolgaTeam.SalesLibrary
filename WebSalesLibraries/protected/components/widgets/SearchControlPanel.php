@@ -20,8 +20,11 @@ class SearchControlPanel extends CWidget
         }
         if (!isset($libraries))
             $libraries[] = 'All';
+        
+        $categories = new CategoryManager();
+        $categories->loadCategories();
 
-        $this->render('application.views.regular.widgets.searchControlPanel', array('libraries' => $libraries));
+        $this->render('application.views.regular.widgets.searchControlPanel', array('libraries' => $libraries,'categories' => $categories));
     }
 
 }

@@ -29,6 +29,16 @@
             onlyFileCards = 1;
         else if($.cookie("onlyFileCards")!= null)
             onlyFileCards = parseInt($.cookie("onlyFileCards"));
+        
+        var categories = [];
+        $.each($( "#categories :checked"),function(){
+            var substr = $(this).val().split('------');
+            var category= {
+                category:  substr[0],
+                tag:    substr[1]
+            };
+            categories.push(category);
+        });
             
         $.ajax({
             type: "POST",
@@ -39,6 +49,7 @@
                 startDate: startDate,
                 endDate: endDate,
                 onlyFileCards: onlyFileCards,
+                categories: categories.length>0?$.toJSON(categories):null,
                 isSort: isSort
             },
             beforeSend: function(){
@@ -106,18 +117,6 @@
         });
     }
     
-    $.updateSearchAreaDimensions = function(){
-        var height = $('#content').height();
-        $('#right-navbar > div').css({
-            'height':height+'px'
-        });        
-        $('#search-result > div').css({
-            'height':height+'px'
-        });        
-        
-        $.updateSearchGridDimensions();
-    }
-    
     $.toggleSearchFileCard = function(toggleState){
         if(toggleState == 1)
             $('#search-file-card-button').addClass('sel');        
@@ -134,8 +133,7 @@
         if($.cookie("search-control-panel")!=null)
             conditionType = parseInt($.cookie("search-control-panel"));
         $( "#search-control-panel" ).tabs({
-            selected: conditionType,
-            disabled: [2]
+            selected: conditionType
         });        
         $( "#search-control-panel" ).on('tabsselect',$.conditionTypeChanged)
         
@@ -266,7 +264,22 @@
         $( "#clear-date-range" ).off('click');
         $( "#clear-date-range" ).on('click',function () {
             $('#condition-date-range input').val('');
-        });            
+        });       
+        
+        $( "#categories" ).accordion({
+            autoHeight: false,
+            active: false,
+            collapsible: true,
+            icons: {
+                header: "ui-icon-circle-arrow-e",
+                activeHeader: "ui-icon-circle-arrow-s"
+            }
+        }
+        );
+        $('#tags-clear-all').off('click');
+        $('#tags-clear-all').on('click',function(){
+            $( "#categories :checked").attr('checked', false);
+        });
         
         $.initLibrarySelector();
     }

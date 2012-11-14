@@ -1,8 +1,8 @@
 <div id="search-control-panel">
     <ul>
         <li><a href="#search-options-basic">Search</a></li>
+        <li><a href="#search-options-tags">Tags</a></li>        
         <li><a href="#search-options-stations">Stations</a></li>
-        <li><a href="#search-options-advanced">Advanced</a></li>
     </ul>
     <div id="search-options-basic">
         <div class ="group-panel">
@@ -54,6 +54,29 @@
             <span></span>
         </div>                
     </div>
+    <div id="search-options-tags">
+        <?php if (isset($categories->groups)): ?>
+            <div class ="group-panel">
+                <button type="button" class="btn btn-block" id="tags-clear-all">Clear All Tags</button>        
+            </div>
+            <div id="categories-container">
+                <div class="accordion" id="categories">
+                    <?php $groupNumber = 0; ?>
+                    <?php foreach ($categories->groups as $group): ?>
+                        <h3><span><?php echo $group; ?></span></h3>
+                        <div>
+                            <?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="<?php echo $group.'------'.$tag; ?>">
+                                    <?php echo $tag; ?>
+                                </label>                        
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>                    
+            </div>                                                
+        <?php endif; ?>
+    </div>    
     <div id="search-options-stations">
         <div class ="group-panel">
             <table class ="library-checkbox-list-buttons">
@@ -79,6 +102,5 @@
             </ul>
         </div>                
     </div>
-    <div id="search-options-advanced"></div>
 </div>
 

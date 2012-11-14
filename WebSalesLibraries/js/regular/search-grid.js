@@ -1,22 +1,4 @@
 (function( $ ) {
-    $.updateSearchGridDimensions = function(){
-        $('#search-grid-body-container').css({
-            'height':($('#search-result > div').height() - $('#search-grid-header').height())+'px'
-        });        
-        
-        var linkDateWidth = 140;
-
-        var linkNameHeaderWidth = $('#search-result').width()- $('#search-grid-header td.details-button').width() - $('#search-grid-header td.library-column').width() - $('#search-grid-header td.link-type-column').width() -linkDateWidth;
-        $('#search-grid-header td.link-name-column').css({
-            'width':linkNameHeaderWidth+'px'
-        });
-        
-        var linkNameBodyWidth = $('#search-result').width() - $('#search-grid-body td.details-button').width()- $('#search-grid-body td.library-column').width() - $('#search-grid-body td.link-type-column').width() -linkDateWidth;
-        $('#search-grid-body td.link-name-column').css({
-            'width':linkNameBodyWidth+'px'
-        });
-    }
-    
     $.updateSortingColumns = function(){
         $('#search-grid-header td span').removeClass('asc');
         $('#search-grid-header td span').removeClass('desc');

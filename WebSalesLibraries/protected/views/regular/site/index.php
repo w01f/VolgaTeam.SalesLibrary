@@ -26,9 +26,6 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', C
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/date.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/daterangepicker.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/jquery.easing.min.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/supersized.3.2.7.min.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/login.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/overlay.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/textSizing.js?' . $version, CClientScript::POS_HEAD);
