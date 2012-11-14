@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS `tbl_link_category` (
   `tag` varchar(256) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_link` (`id_link`),
-  KEY `id_library` (`id_library`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+  KEY `id_library` (`id_library`),
+  KEY `category` (`category`,`tag`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=165 ;
