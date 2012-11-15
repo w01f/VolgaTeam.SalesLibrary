@@ -27,7 +27,7 @@
     
     $.updateSearchGridDimensions = function(){
         $('#search-grid-body-container').css({
-            'height':($('#search-result > div').height() - $('#search-grid-header').height())+'px'
+            'height':($('#search-result > div').height() -($('#search-grid-info').height()+12)- $('#search-grid-header').height())+'px'
         });        
         
         var linkDateWidth = 140;

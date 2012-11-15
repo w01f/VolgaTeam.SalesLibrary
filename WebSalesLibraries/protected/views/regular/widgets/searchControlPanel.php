@@ -50,9 +50,6 @@
                 </table>
             </div>            
         </div> 
-        <div class ="group-panel" id ="search-links-number">
-            <span></span>
-        </div>                
     </div>
     <div id="search-options-tags">
         <?php if (isset($categories->groups)): ?>

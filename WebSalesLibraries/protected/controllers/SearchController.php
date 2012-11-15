@@ -75,7 +75,72 @@ class SearchController extends IsdController
 
         if (!isset($links))
             $links = null;
-        $this->renderPartial('searchResult', array('links' => $links), false, true);
+
+        if (isset($links))
+            $searchInfo['count'] = 'Files: ' . count($links);
+        else
+            $searchInfo['count'] = 'No Files Meet your Criteria';
+        if (isset($condition) && !($condition == '""' || $condition == ''))
+            $searchInfo['condition'] = '<b>Keyword (' . (strstr($condition, '"') ? 'Exact match' : 'Partial match') . '):</b> ' . str_replace('"', '', $condition);
+        if (isset($fileTypes))
+            $searchInfo['file_types'] = '<b>File Types:</b> ' . implode(', ', $fileTypes);
+        else
+            $searchInfo['file_types'] = '<b>File Types:</b> None';
+        if (isset($startDate) && isset($endDate))
+            $searchInfo['dates'] = '<b>Dates:</b> ' . $startDate . ' - ' . $endDate;
+        else
+            $searchInfo['dates'] = '<b>Dates:</b> ALL';
+        if (isset($categories))
+        {
+            foreach ($categories as $category)
+                $groups[] = $category['category'];
+            if (isset($groups))
+            {
+                $groups = array_unique($groups);
+                foreach ($groups as $group)
+                {
+                    foreach ($categories as $category)
+                        if ($category['category'] == $group)
+                            $tags[] = $category['tag'];
+                    if (isset($tags))
+                    {
+                        $categoryTags[] = '<b>' . $group . ':</b> ' . implode(', ', $tags);
+                        unset($tags);
+                    }
+                }
+                if (isset($categoryTags))
+                    $searchInfo['categories'] = implode('; ', $categoryTags);
+            }
+        }
+        if (isset($checkedLibraryIds))
+        {
+            $allLibraryRecords = LibraryStorage::model()->findAll();
+            foreach ($checkedLibraryIds as $libraryId)
+            {
+                $libraryRecord = LibraryStorage::model()->findByPk($libraryId);
+                if (isset($libraryRecord))
+                    $libraries[] = $libraryRecord->name;
+            }
+            if (isset($libraries))
+            {
+                if (count($allLibraryRecords) == count($libraries))
+                    $searchInfo['libraries'] = '<b>Libraries:</b> ALL';
+                else
+                    $searchInfo['libraries'] = '<b>Libraries:</b> ' . implode(", ", $libraries);
+            }
+            else
+                $searchInfo['libraries'] = '<b>Libraries:</b> Not selected';
+        }
+        else
+            $searchInfo['libraries'] = 'Libraries: Not selected';
+
+
+        if (!isset($searchInfo))
+            $searchInfo = null;
+
+
+
+        $this->renderPartial('searchResult', array('searchInfo' => $searchInfo, 'links' => $links), false, true);
     }
 
     public function actionViewLink()
@@ -127,5 +192,4 @@ class SearchController extends IsdController
     }
 
 }
-
 ?>

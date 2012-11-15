@@ -204,24 +204,6 @@
     padding: 4px 0px;
 }
 
-#search-links-number
-{
-    position: absolute;
-    bottom: 0px;
-}
-
-#search-links-number>span
-{
-    font-family: Verdana,Arial,sans-serif;
-    font-size: 14pt;
-    font-weight: bold;
-}
-
-#links-number-hidden
-{
-    display: none;
-}
-
 #categories-container
 {
     display:block;
@@ -245,4 +227,25 @@
     padding-left: 30px;
     line-height: 30px;
     font-size: 11pt;
+}
+
+#search-grid-info
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px #999 solid;
+    background-color: #FFFFCC;
+}
+
+#search-grid-info td>span
+{
+    font-family: Verdana,Arial,sans-serif;
+    font-size: 8pt;
+    font-weight: normal;
+}
+
+#search-grid-info  td#search-links-info-count>span
+{
+    font-size: 12pt;
+    font-weight: bold;
 }
