@@ -50,7 +50,7 @@
                 endDate: endDate,
                 onlyFileCards: onlyFileCards,
                 categories: categories.length>0?$.toJSON(categories):null,
-                categoriesExactMatch: $('#tags-exact-match').hasClass('active'),
+                categoriesExactMatch: $('#tags-compare-exact').hasClass('active'),
                 isSort: isSort
             },
             beforeSend: function(){
@@ -281,24 +281,28 @@
         $('#tags-clear-all').on('click',function(){
             $( "#categories :checked").attr('checked', false);
         });
-        
+
         if($.cookie("tagsExactMatch")!=null)
         {
             if($.cookie("tagsExactMatch")==  "true")
-                $( "#tags-exact-match" ).button('toggle');
+                $( "#tags-compare-exact" ).button('toggle');
+            else
+                $( "#tags-compare-partial" ).button('toggle');
         }
         else
-            $( "#tags-exact-match" ).button('toggle');
-        $('#tags-exact-match').off('click');
-        $('#tags-exact-match').on('click',function(){
-            if($(this).hasClass('active'))
-                $(this).removeClass('active');
-            else
-                $(this).addClass('active');
-            $.cookie("tagsExactMatch", $('#tags-exact-match').hasClass('active'), {
+            $( "#tags-compare-exact" ).button('toggle');
+        $( "#tags-compare-exact,#tags-compare-partial" ).off('click');        
+        $( "#tags-compare-exact,#tags-compare-partial" ).on('click',function(){
+            if(!$(this).hasClass('active'))
+            {
+                $('#tags-compare-type .btn').removeClass('active');
+                $(this).addClass('active');    
+            }
+            $.cookie("tagsExactMatch", $('#tags-compare-exact').hasClass('active'), {
                 expires: (60 * 60 * 24 * 7)
             });
         });
+        
         
         $.initLibrarySelector();
     }

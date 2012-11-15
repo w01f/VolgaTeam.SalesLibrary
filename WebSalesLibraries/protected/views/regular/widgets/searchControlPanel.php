@@ -58,7 +58,10 @@
         <?php if (isset($categories->groups)): ?>
             <div class ="group-panel">
                 <button type="button" class="btn btn-block" id="tags-clear-all">Clear All Tags</button>        
-                <button type="button" class="btn btn-block" id="tags-exact-match">Drill-Down Mode</button>
+                <div class="btn-group" id="tags-compare-type">
+                    <button type="button" class="btn" id="tags-compare-exact">Exact Match</button>
+                    <button type="button" class="btn" id="tags-compare-partial">Partial Match</button>
+                </div>
             </div>
             <div id="categories-container">
                 <div class="accordion" id="categories">
@@ -68,7 +71,7 @@
                         <div>
                             <?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
                                 <label class="checkbox">
-                                    <input type="checkbox" value="<?php echo $group.'------'.$tag; ?>">
+                                    <input type="checkbox" value="<?php echo $group . '------' . $tag; ?>">
                                     <?php echo $tag; ?>
                                 </label>                        
                             <?php endforeach; ?>

@@ -235,18 +235,31 @@
     }        
     
     var initLibrariesSelector = function(){
-        $( '#search-libraries-container').collapsible();
-        $( '#search-libraries-container input[type="checkbox"]').checkboxradio();
-        $( '#search-libraries-container input[type="checkbox"]').off('change');
-        $( '#search-libraries-container  input[type="checkbox"]').on('change',function(){
+        var updateLibraries = function(){
             var selectedLibraryIds = [];
             $('#search-libraries-container :checked').each(function(){
                 selectedLibraryIds.push(this.id);
             });
             $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
                 expires: (60 * 60 * 24 * 7)
-            });
+            });            
+        }
+        $( '#search-libraries-container input[type="checkbox"]').checkboxradio();
+        updateLibraries();
+        $( '#search-libraries-container input[type="checkbox"]').off('change');
+        $( '#search-libraries-container  input[type="checkbox"]').on('change',function(){
+            updateLibraries();
         });
+        $( '#search-libraries-select-button').off('click');
+        $( '#search-libraries-select-button').on('click',function(){
+            $('#search-libraries-container input[type="checkbox"]').attr('checked', true).checkboxradio("refresh");
+            updateLibraries();
+        });
+        $( '#search-libraries-clear-button').off('click');
+        $( '#search-libraries-clear-button').on('click',function(){
+            $('#search-libraries-container input[type="checkbox"]').attr('checked', false).checkboxradio("refresh");
+            updateLibraries();
+        });        
     }
     
     var initSearchSortSelectors = function(){

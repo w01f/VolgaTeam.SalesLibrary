@@ -68,13 +68,13 @@
     vertical-align: middle;
 }
 
-#file-types,#content-compare-type,#library-selector
+#file-types,#content-compare-type,#tags-compare-type,#library-selector
 {
     width: 100%;
     text-align: center;
 }
 
-#content-compare-type .btn
+#content-compare-type .btn, #tags-compare-type .btn
 {
     margin-top: 10px;
     margin-left: 10px;
