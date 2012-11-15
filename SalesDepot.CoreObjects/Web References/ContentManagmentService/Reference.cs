@@ -27,6 +27,7 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ContentControllerBinding", Namespace="urn:ContentControllerwsdl")]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Category))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
@@ -37,7 +38,9 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryPage))]
     public partial class ContentControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback mockupOperationCompleted;
+        private System.Threading.SendOrPostCallback mockupLibraryOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback mockupCategoriesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -78,33 +81,64 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         }
         
         /// <remarks/>
-        public event mockupCompletedEventHandler mockupCompleted;
+        public event mockupLibraryCompletedEventHandler mockupLibraryCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockup", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
-        public void mockup(Library library) {
-            this.Invoke("mockup", new object[] {
+        public event mockupCategoriesCompletedEventHandler mockupCategoriesCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockupLibrary", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockupLibrary(Library library) {
+            this.Invoke("mockupLibrary", new object[] {
                         library});
         }
         
         /// <remarks/>
-        public void mockupAsync(Library library) {
-            this.mockupAsync(library, null);
+        public void mockupLibraryAsync(Library library) {
+            this.mockupLibraryAsync(library, null);
         }
         
         /// <remarks/>
-        public void mockupAsync(Library library, object userState) {
-            if ((this.mockupOperationCompleted == null)) {
-                this.mockupOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockupOperationCompleted);
+        public void mockupLibraryAsync(Library library, object userState) {
+            if ((this.mockupLibraryOperationCompleted == null)) {
+                this.mockupLibraryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockupLibraryOperationCompleted);
             }
-            this.InvokeAsync("mockup", new object[] {
-                        library}, this.mockupOperationCompleted, userState);
+            this.InvokeAsync("mockupLibrary", new object[] {
+                        library}, this.mockupLibraryOperationCompleted, userState);
         }
         
-        private void OnmockupOperationCompleted(object arg) {
-            if ((this.mockupCompleted != null)) {
+        private void OnmockupLibraryOperationCompleted(object arg) {
+            if ((this.mockupLibraryCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.mockupCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.mockupLibraryCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:ContentControllerwsdl#mockupCategories", RequestNamespace="urn:ContentControllerwsdl", ResponseNamespace="urn:ContentControllerwsdl")]
+        public void mockupCategories(Category[] categories) {
+            this.Invoke("mockupCategories", new object[] {
+                        categories});
+        }
+        
+        /// <remarks/>
+        public void mockupCategoriesAsync(Category[] categories) {
+            this.mockupCategoriesAsync(categories, null);
+        }
+        
+        /// <remarks/>
+        public void mockupCategoriesAsync(Category[] categories, object userState) {
+            if ((this.mockupCategoriesOperationCompleted == null)) {
+                this.mockupCategoriesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnmockupCategoriesOperationCompleted);
+            }
+            this.InvokeAsync("mockupCategories", new object[] {
+                        categories}, this.mockupCategoriesOperationCompleted, userState);
+        }
+        
+        private void OnmockupCategoriesOperationCompleted(object arg) {
+            if ((this.mockupCategoriesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.mockupCategoriesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -603,6 +637,39 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.isItalicField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class Category {
+        
+        private string categoryField;
+        
+        private string tagField;
+        
+        /// <remarks/>
+        public string category {
+            get {
+                return this.categoryField;
+            }
+            set {
+                this.categoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string tag {
+            get {
+                return this.tagField;
+            }
+            set {
+                this.tagField = value;
             }
         }
     }
@@ -1854,7 +1921,11 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void mockupCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void mockupLibraryCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void mockupCategoriesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

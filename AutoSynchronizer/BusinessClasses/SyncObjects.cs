@@ -501,7 +501,8 @@ namespace AutoSynchronizer.BusinessClasses
 
 				AddFolderForSync(new DirectoryInfo(Path.Combine(this.Manager.Library.Folder.FullName, Constants.LibraryLogoFolder)), filesWhiteList);
 				filesWhiteList.Add(new FileInfo(Path.Combine(this.Manager.Library.Folder.FullName, Constants.StorageLightFileName)).FullName);
-				filesWhiteList.Add(new FileInfo(Path.Combine(this.Manager.Library.Folder.FullName, Constants.JsonFileName)).FullName);
+				filesWhiteList.Add(new FileInfo(Path.Combine(this.Manager.Library.Folder.FullName, Constants.LibrariesJsonFileName)).FullName);
+				filesWhiteList.Add(new FileInfo(Path.Combine(this.Manager.Library.Folder.FullName, Constants.ReferencesJsonFileName)).FullName);
 
 				List<DirectoryInfo> sourceSubFolders = new List<DirectoryInfo>();
 				List<DirectoryInfo> destinationSubFolders = new List<DirectoryInfo>();

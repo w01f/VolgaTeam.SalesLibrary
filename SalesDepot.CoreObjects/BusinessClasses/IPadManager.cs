@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SalesDepot.CoreObjects.ContentManagmentService;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -70,7 +71,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			ContentManagmentService.Library serverLibrary = PrepareServerLibrary();
 			string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(serverLibrary);
-			using (StreamWriter sw = new StreamWriter(Path.Combine(this.Parent.Folder.FullName, Constants.JsonFileName), false))
+			using (StreamWriter sw = new StreamWriter(Path.Combine(this.Parent.Folder.FullName, Constants.LibrariesJsonFileName), false))
+			{
+				sw.Write(jsonString);
+				sw.Flush();
+			}
+
+			jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(PrepareCategories());
+			using (StreamWriter sw = new StreamWriter(Path.Combine(this.Parent.Folder.FullName, Constants.ReferencesJsonFileName), false))
 			{
 				sw.Write(jsonString);
 				sw.Flush();
@@ -426,6 +434,23 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.previewContainers = previewContainers.ToArray();
 
 			return library;
+		}
+
+		private ContentManagmentService.Category[] PrepareCategories()
+		{
+			SearchTags searchTags = new SearchTags();
+			List<ContentManagmentService.Category> result = new List<Category>();
+			foreach (var group in searchTags.SearchGroups)
+			{
+				foreach (var tag in group.Tags)
+				{
+					ContentManagmentService.Category category = new Category();
+					category.category = group.Name;
+					category.tag = tag;
+					result.Add(category);
+				}
+			}
+			return result.ToArray();
 		}
 		#endregion
 

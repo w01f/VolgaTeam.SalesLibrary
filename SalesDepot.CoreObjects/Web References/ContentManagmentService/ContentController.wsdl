@@ -251,24 +251,56 @@
           <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="CategoryArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:Category[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Category">
+        <xsd:all>
+          <xsd:element name="category" type="xsd:string" />
+          <xsd:element name="tag" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="mockupRequest">
+  <wsdl:message name="mockupLibraryRequest">
     <wsdl:part name="library" type="tns:Library" />
   </wsdl:message>
-  <wsdl:message name="mockupResponse" />
+  <wsdl:message name="mockupLibraryResponse" />
+  <wsdl:message name="mockupCategoriesRequest">
+    <wsdl:part name="categories" type="tns:CategoryArray" />
+  </wsdl:message>
+  <wsdl:message name="mockupCategoriesResponse" />
   <wsdl:portType name="ContentControllerPortType">
-    <wsdl:operation name="mockup">
+    <wsdl:operation name="mockupLibrary">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockupRequest" />
-      <wsdl:output message="tns:mockupResponse" />
+      <wsdl:input message="tns:mockupLibraryRequest" />
+      <wsdl:output message="tns:mockupLibraryResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="mockupCategories">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:mockupCategoriesRequest" />
+      <wsdl:output message="tns:mockupCategoriesResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ContentControllerBinding" type="tns:ContentControllerPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
-    <wsdl:operation name="mockup">
-      <soap:operation soapAction="urn:ContentControllerwsdl#mockup" style="rpc" />
+    <wsdl:operation name="mockupLibrary">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockupLibrary" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="mockupCategories">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockupCategories" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
