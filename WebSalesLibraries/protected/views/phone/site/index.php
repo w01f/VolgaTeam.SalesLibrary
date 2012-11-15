@@ -59,7 +59,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -87,7 +87,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -116,7 +116,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -146,7 +146,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -175,7 +175,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -226,10 +226,23 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         </div>             
     </div>             
 </div>
-<div data-role='page' id="search" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+<div data-role='page' id="search-basic" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
     <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
-        <a id="search-button" class="ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
-        <span class="ui-title library-title">Search</span>
+        <a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
+        <span class="ui-title">Search</span>
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-transition="none">Search</a>
+                </li>
+                <li>
+                    <a href="#search-tags" data-transition="none">Tags</a>
+                </li>
+                <li>
+                    <a href="#search-libraries" data-transition="none">Stations</a>
+                </li>
+            </ul>
+        </div>
     </div>             
     <div data-role='content' class ="page-content">
     </div> 
@@ -242,7 +255,91 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>             
+    </div>             
+</div>        
+<div data-role='page' id="search-tags" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
+        <span class="ui-title">Search</span>
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#search-basic" data-transition="none">Search</a>
+                </li>
+                <li>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tags</a>
+                </li>
+                <li>
+                    <a href="#search-libraries" data-transition="none">Stations</a>
+                </li>
+            </ul>
+        </div>
+    </div>             
+    <div data-role='content' class ="page-content">
+    </div> 
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>             
+    </div>             
+</div>        
+<div data-role='page' id="search-libraries" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
+        <span class="ui-title">Search</span>
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#search-basic" data-transition="none">Search</a>
+                </li>
+                <li>
+                    <a href="#search-tags" data-transition="none">Tags</a>
+                </li>
+                <li>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none">Stations</a>
+                </li>
+            </ul>
+        </div>
+    </div>             
+    <div data-role='content' class ="page-content">
+    </div> 
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -257,7 +354,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
 </div>        
 <div data-role='page' id="search-result" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
     <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
-        <a class="link back ui-btn-right" href="#search" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
+        <a class="link back ui-btn-right" href="#search-basic" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
         <span class="ui-title library-title">Search</span>
     </div>             
     <div data-role='content' class ="page-content">
@@ -301,7 +398,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>

@@ -4,7 +4,7 @@
             type: "POST",
             url: "search/getSearchView",
             beforeSend: function(){
-                $('#search .page-content').html('');
+                $('#search-basic .page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -17,25 +17,68 @@
                 });
             },
             success: function(msg){
-                $('#search .page-content').html(msg);
+                $('#search-basic .page-content').html(msg);
                 loadSearchPanel();
             },
             async: true,
             dataType: 'html'                        
         });
+        $.ajax({
+            type: "POST",
+            url: "search/getTagsView",
+            beforeSend: function(){
+                $('#search-tags .page-content').html('');
+            },
+            complete: function(){
+            },
+            success: function(msg){
+                $('#search-tags .page-content').html(msg);
+                loadTagsPanel();
+            },
+            async: true,
+            dataType: 'html'                        
+        });                        
+        $.ajax({
+            type: "POST",
+            url: "search/getLibrariesView",
+            beforeSend: function(){
+                $('#search-libraries .page-content').html('');
+            },
+            complete: function(){
+            },
+            success: function(msg){
+                $('#search-libraries .page-content').html(msg);
+                loadLibrariesPanel();
+            },
+            async: true,
+            dataType: 'html'                        
+        });                
     }
     
     var loadSearchPanel = function(){
         initMatchSelector();
         initDateSelector();
         initFileTypeSelector();
-        initLibrariesSelector();
         initSearchSortSelectors();
         
-        $('#search-button').on('click',function(){
+        $('#search-basic, #search-tags, #search-libraries').on('pageshow', function(e){
+            var currentPage = $(e.target);
+            $('#search-result .link.back').attr('href','#'+currentPage.attr('id'));
+            return true;
+        });
+        
+        $('.search-button').on('click',function(){
             runSearch(0);
         });
     }
+    
+    var loadLibrariesPanel = function(){
+        initLibrariesSelector();
+    }    
+    
+    var loadTagsPanel = function(){
+        initTagsSelector();
+    }    
     
     var initMatchSelector = function(){
         $('#search-match-selector a').removeClass('ui-btn-active');
@@ -203,28 +246,7 @@
             $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
                 expires: (60 * 60 * 24 * 7)
             });
-            updateLibraries();
         });
-        
-        var updateLibraries = function()
-        {
-            var selectedLibrariesTitle ='Libraries: '
-            var selectedLibraryNames =[];
-            $('#search-libraries-container :checked').each(function(){
-                selectedLibraryNames.push($(this).attr('name'));
-            });
-            if($( '#search-libraries-container  input[type="checkbox"]').length == selectedLibraryNames.length)
-                selectedLibrariesTitle += 'All';
-            else if(selectedLibraryNames.length==1)
-                selectedLibrariesTitle +=  selectedLibraryNames.join(', ');
-            else if(selectedLibraryNames.length==0)
-                selectedLibrariesTitle += 'Nothing selected';
-            else
-                selectedLibrariesTitle += 'Some are selected';
-            $('#search-libraries-container .layout-group-title').html(selectedLibrariesTitle);
-        }
-        
-        updateLibraries();
     }
     
     var initSearchSortSelectors = function(){
@@ -246,6 +268,15 @@
             });
             runSearch(1);
         });        
+    }
+    
+    var initTagsSelector = function(){
+        $( '.search-tags-group').collapsible();
+        $( '.search-tags-item').checkboxradio();
+        
+        $('#search-tags-clear-button').on('click',function(){
+            $('.search-tags-item').attr('checked', false).checkboxradio("refresh");
+        });
     }
     
     var runSearch = function(isSort){
@@ -275,6 +306,16 @@
         }
         
         var onlyFileCards = $('#search-only-filecards').is(':checked')?1:0;
+        
+        var categories = [];
+        $.each($( ".search-tags-item:checked"),function(){
+            var substr = $(this).attr('id').split('------');
+            var category= {
+                category:  substr[0],
+                tag:    substr[1]
+            };
+            categories.push(category);
+        });
             
         $.ajax({
             type: "POST",
@@ -285,6 +326,8 @@
                 startDate: startDate,
                 endDate: endDate,
                 onlyFileCards: onlyFileCards,
+                categories: categories.length>0?$.toJSON(categories):null,
+                categoriesExactMatch: $('#search-tags-exact-match :selected').val(),                
                 isSort: isSort
             },
             beforeSend: function(){

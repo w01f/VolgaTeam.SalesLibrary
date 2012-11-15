@@ -18,6 +18,37 @@ class SearchController extends IsdController
         $this->renderPartial('searchView', array(), false, true);
     }
 
+    public function actionGetTagsView()
+    {
+        $categories = new CategoryManager();
+        $categories->loadCategories();
+
+        $this->renderPartial('tagsView', array('categories' => $categories), false, true);
+    }
+
+    public function actionGetLibrariesView()
+    {
+        $libraryManager = new LibraryManager();
+        $libraryObjects = $libraryManager->getLibraries();
+
+        if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
+            $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+        foreach ($libraryObjects as $libraryObject)
+        {
+            $library['id'] = $libraryObject->id;
+            $library['name'] = $libraryObject->name;
+            if (isset($checkedLibraryIds))
+                $library['selected'] = in_array($libraryObject->id, $checkedLibraryIds);
+            else
+                $library['selected'] = true;
+            $libraries[] = $library;
+        }
+        if (!isset($libraries))
+            $libraries[] = 'All';
+
+        $this->renderPartial('librariesView', array('libraries' => $libraries), false, true);
+    }
+
     public function actionSearchByContent()
     {
         $fileTypes = Yii::app()->request->getPost('fileTypes');
