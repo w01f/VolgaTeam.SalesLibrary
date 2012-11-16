@@ -2,10 +2,11 @@
     <ul>
         <li><a href="#search-options-basic">Search</a></li>
         <li><a href="#search-options-tags">Tags</a></li>        
-        <li><a href="#search-options-stations">Stations</a></li>
+        <li><a href="#search-options-stations"><?php echo Yii::app()->params['stations_tab']['name']; ?></a></li>
     </ul>
     <div id="search-options-basic">
         <div class ="group-panel">
+            <button type="button" class="btn btn-block" id="clear-content-file-types-dates-value">Clear All Search Settings</button>
             <div class ="group-title">What Are You Looking For?</div>
             <div class ="group-body">
                 <table class="button-edit input-append">
@@ -48,6 +49,8 @@
                         </td>
                     </tr>
                 </table>
+                <button type="button" class="btn btn-block" id="condition-date-file">Date file was created</button>
+                <button type="button" class="btn btn-block" id="condition-date-link">Date file was uploaded</button>
             </div>            
         </div> 
     </div>
@@ -80,12 +83,8 @@
     </div>    
     <div id="search-options-stations">
         <div class ="group-panel">
-            <table class ="library-checkbox-list-buttons">
-                <tr>                
-                    <td class ="left"><button type="button" class="btn btn-block" id="library-select-all">Select All</button></td>
-                    <td class ="right"><button type="button" class="btn btn-block" id="library-clear-all">Clear All</button></td>
-                </tr>
-            </table>  
+            <button type="button" class="btn btn-block" id="library-select-all">Select All <?php echo Yii::app()->params['stations_tab']['name']; ?></button>
+            <button type="button" class="btn btn-block" id="library-clear-all">Clear All <?php echo Yii::app()->params['stations_tab']['name']; ?></button>
             <ul id="library-checkbox-list">
                 <?php
                 foreach ($libraries as $library)

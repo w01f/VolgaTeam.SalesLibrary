@@ -43,6 +43,9 @@ return CMap::mergeArray(
                 'name' => 'Sales Success Models',
                 'position' => 3,
             ),
+            'stations_tab' => array(
+                'name' => 'Libraries',
+            ),
             'email' => array(
                 'from' => 'billy@adSALESapps.com',
                 'new_user' => array(
@@ -52,7 +55,7 @@ return CMap::mergeArray(
                 'send_link' => array(
                     'subject' => 'iSalesDepot Link',
                     'body' => 'Check this link, please:',
-                ),                
+                ),
             ),
         ),
         'components' => array(

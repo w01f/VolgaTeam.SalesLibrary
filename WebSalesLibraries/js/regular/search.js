@@ -48,6 +48,7 @@
                 condition: selectedCondition,
                 startDate: startDate,
                 endDate: endDate,
+                dateFile: $('#condition-date-file').hasClass('active'),
                 onlyFileCards: onlyFileCards,
                 categories: categories.length>0?$.toJSON(categories):null,
                 categoriesExactMatch: $('#tags-compare-exact').hasClass('active'),
@@ -303,6 +304,36 @@
             });
         });
         
+        $( "#clear-content-file-types-dates-value" ).off('click');
+        $( "#clear-content-file-types-dates-value" ).on('click',function () {
+            $('#condition-content-value').val('');
+            
+            $('#condition-date-range input').val('');
+            
+            $( '#file-types .search-file-type').trigger('click');
+        });      
+        
+        
+        if($.cookie("conditionDateByFile")!=null)
+        {
+            if($.cookie("conditionDateByFile")==  "true")
+                $( "#condition-date-file" ).button('toggle');
+            else
+                $( "#condition-date-link" ).button('toggle');
+        }
+        else
+            $( "#condition-date-file" ).button('toggle');
+        $( '#condition-date-file, #condition-date-link').off('click');
+        $( '#condition-date-file, #condition-date-link').on('click',function(){
+            if(!$(this).hasClass('active'))
+            {
+                $('#condition-date-file, #condition-date-link').removeClass('active');
+                $(this).addClass('active');    
+            }
+            $.cookie("conditionDateByFile", $('#condition-date-file').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });
+        });
         
         $.initLibrarySelector();
     }

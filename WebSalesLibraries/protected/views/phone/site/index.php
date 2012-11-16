@@ -239,7 +239,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
-                    <a href="#search-libraries" data-transition="none">Stations</a>
+                    <a href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
                 </li>
             </ul>
         </div>

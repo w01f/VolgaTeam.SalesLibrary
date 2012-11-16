@@ -109,7 +109,7 @@ class LinkStorage extends CActiveRecord
         Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
     }
 
-    public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort)
+    public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort)
     {
         if ($isSort == 1)
         {
@@ -152,7 +152,10 @@ class LinkStorage extends CActiveRecord
             if (isset($startDate) && isset($endDate))
                 if ($startDate != '' && $endDate != '')
                 {
-                    $dateCondition = "date_modify >= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($startDate)) . "' and date_modify <= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($endDate) + 86400) . "'";
+                    $dateColumn = 'date_modify';
+                    if (isset($dateFile) && $dateFile == 'true')
+                        $dateColumn = 'file_date';
+                    $dateCondition = $dateColumn . " >= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($startDate)) . "' and " . $dateColumn . " <= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($endDate) + 86400) . "'";
                     if ($contentCondition == '""' || $contentCondition == '')
                         $additionalDateCondition = " or (" . $dateCondition . ")";
                 }
@@ -198,7 +201,7 @@ class LinkStorage extends CActiveRecord
                         $link['id'] = $linkRecord['id'];
                         $link['name'] = $linkRecord['name'];
                         $link['file_name'] = $linkRecord['file_name'];
-                        $link['date_modify'] = $linkRecord['date_modify'];
+                        $link['date_modify'] = isset($dateFile) && $dateFile == 'true'? $linkRecord['file_date']:$linkRecord['date_modify'];
                         $link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
 
                         $library = $libraryManager->getLibraryById($linkRecord['id_library']);

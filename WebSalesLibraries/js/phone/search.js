@@ -338,6 +338,7 @@
                 condition: selectedCondition,
                 startDate: startDate,
                 endDate: endDate,
+                dateFile: false,                
                 onlyFileCards: onlyFileCards,
                 categories: categories.length>0?$.toJSON(categories):null,
                 categoriesExactMatch: $('#search-tags-exact-match :selected').val(),                
