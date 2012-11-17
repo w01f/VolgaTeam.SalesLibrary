@@ -53,12 +53,18 @@ class UpdateDataCommand extends CConsoleCommand
                     $referencesContent = file_get_contents($referencesFile);
                     if ($referencesContent)
                     {
-                        $categories = CJSON::decode($referencesContent);        
+                        $categories = CJSON::decode($referencesContent);
                         CategoryStorage::updateData($categories);
                     }
                 }
             }
         }
+
+        LibraryGroupStorage::clearData();
+        $libraryGroupFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'groups.txt';
+        if (file_exists($libraryGroupFilePath))
+            LibraryGroupStorage::updateData(file($libraryGroupFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+
         echo "Job completed.\n";
     }
 

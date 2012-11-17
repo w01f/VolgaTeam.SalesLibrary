@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '3.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -13,7 +13,6 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search.css?' . $version
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/view-dialog.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/email-dialog.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/file-card.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/library-selector.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search-grid.css?' . $version);
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('jquery.ui');
@@ -32,7 +31,6 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/textSizing.js?' . $ve
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/scaling.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/linkViewing.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/columns.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/librarySelector.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search-grid.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/ribbon.js?' . $version, CClientScript::POS_HEAD);

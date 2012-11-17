@@ -204,7 +204,7 @@
     padding: 4px 0px;
 }
 
-#categories-container
+#categories-container, #libraries-container
 {
     display:block;
     width:100%;
@@ -217,12 +217,12 @@
     border-color: #999;
 }
 
-#categories
+#categories, #libraries
 {
     font-family: Verdana,Arial,sans-serif;
 }
 
-#categories h3
+#categories h3, #libraries h3
 {
     padding-left: 30px;
     line-height: 30px;
@@ -249,3 +249,7 @@
     font-size: 12pt;
     font-weight: bold;
 }
+
+.ui-tabs .ui-state-disabled { 
+    display: none;
+} 

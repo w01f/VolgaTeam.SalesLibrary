@@ -77,7 +77,7 @@
     
     $.downloadFile = function(url)
     {
-        window.open(url);
+        window.open(url.replace(/&amp;/g,'%26'));
     }    
     
     $.emailFile = function(linkId, libraryId,title)

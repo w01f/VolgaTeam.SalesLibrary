@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '3.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -239,7 +239,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
-                    <a href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
+                    <a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
                 </li>
             </ul>
         </div>
@@ -281,7 +281,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
-                    <a href="#search-libraries" data-transition="none">Stations</a>
+                    <a class ="tab-search-libraries" "href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
                 </li>
             </ul>
         </div>
@@ -323,7 +323,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
-                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none">Stations</a>
+                    <a class ="tab-search-libraries ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
                 </li>
             </ul>
         </div>

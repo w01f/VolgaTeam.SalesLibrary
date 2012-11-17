@@ -80,65 +80,70 @@
         });                        
     }
     
-    $.fileTypeButtonClick = function(){
-        if($(this).hasClass('active'))
-            $(this).removeClass('active');
-        else
-            $(this).addClass('active');
-        $.cookie("fileTypePpt", $('#search-file-type-powerpoint').hasClass('active'), {
-            expires: (60 * 60 * 24 * 7)
-        });
-        $.cookie("fileTypeDoc", $('#search-file-type-word').hasClass('active'), {
-            expires: (60 * 60 * 24 * 7)
+    var initSearchButtons = function()
+    {
+        $( "#run-search-full" ).off('click');
+        $( "#run-search-full" ).on('click',function () {
+            $.runSearch(0);
         });        
-        $.cookie("fileTypeXls", $('#search-file-type-excel').hasClass('active'), {
-            expires: (60 * 60 * 24 * 7)
+        $( "#run-search-file-card" ).off('click');
+        $( "#run-search-file-card" ).on('click',function () {
+            $.runSearch(0);
         });                
-        $.cookie("fileTypePdf", $('#search-file-type-pdf').hasClass('active'), {
-            expires: (60 * 60 * 24 * 7)
-        });                
-        $.cookie("fileTypeVideo", $('#search-file-type-video').hasClass('active'), {
-            expires: (60 * 60 * 24 * 7)
-        });                        
     }
     
-    $.conditionTypeChanged = function(event, ui){
-        $.cookie("search-control-panel", ui.index, {
-            expires: (60 * 60 * 24 * 7)
-        });
-    }
-    
-    $.contentMatchButtonClick = function(){
-        if(!$(this).hasClass('active'))
-        {
-            $('#content-compare-type .btn').removeClass('active');
-            $(this).addClass('active');    
-        }
-        $.cookie("exactMatch", $('#content-compare-exact').hasClass('active'), {
-            expires: (60 * 60 * 24 * 7)
-        });
-    }
-    
-    $.toggleSearchFileCard = function(toggleState){
-        if(toggleState == 1)
-            $('#search-file-card-button').addClass('sel');        
-        else
-            $('#search-file-card-button').removeClass('sel');        
-        
-        $.cookie("onlyFileCards", toggleState, {
-            expires: (60 * 60 * 24 * 7)
-        });
-    }
-    
-    $.initControlPanel = function(){
+    var initTabControl = function()
+    {
         var conditionType  = 0;
         if($.cookie("search-control-panel")!=null)
             conditionType = parseInt($.cookie("search-control-panel"));
         $( "#search-control-panel" ).tabs({
             selected: conditionType
         });        
-        $( "#search-control-panel" ).on('tabsselect',$.conditionTypeChanged)
+        $( "#search-control-panel" ).on('tabsselect',function(event, ui){
+            $.cookie("search-control-panel", ui.index, {
+                expires: (60 * 60 * 24 * 7)
+            });
+        })
+    }
+    
+    var initFileCard = function()
+    {
+        var toggleSearchFileCard = function(toggleState){
+            if(toggleState == 1)
+                $('#search-file-card-button').addClass('sel');        
+            else
+                $('#search-file-card-button').removeClass('sel');        
         
+            $.cookie("onlyFileCards", toggleState, {
+                expires: (60 * 60 * 24 * 7)
+            });
+        }
+        
+        var selectedTabId = $.cookie("selectedRibbonTabId");
+        if(selectedTabId == 'search-full-tab')
+        {
+            var onlyFileCards = 0;
+            if($.cookie("onlyFileCards")!= null)
+                onlyFileCards = parseInt($.cookie("onlyFileCards"));
+            toggleSearchFileCard(onlyFileCards);
+            $( "#search-file-card-button" ).off('click');
+            $( "#search-file-card-button" ).on('click',function () {
+                var onlyFileCards = 0;
+                if($.cookie("onlyFileCards")!= null)
+                    onlyFileCards = parseInt($.cookie("onlyFileCards"));
+                if(onlyFileCards == 0)
+                    onlyFileCards = 1;
+                else
+                    onlyFileCards = 0;
+                toggleSearchFileCard(onlyFileCards);
+            });  
+        }
+        else
+            toggleSearchFileCard(0);
+    }
+    
+    var initKeywordFiled = function(){
         $( "#clear-content-value" ).off('click');
         $( "#clear-content-value" ).on('click',function () {
             $('#condition-content-value').val('');
@@ -153,11 +158,31 @@
         }
         else
             $( "#content-compare-exact" ).button('toggle');
-        $( "#content-compare-exact" ).off('click');        
-        $( "#content-compare-exact" ).on('click',$.contentMatchButtonClick);
-        $( "#content-compare-partial" ).off('click');        
-        $( "#content-compare-partial" ).on('click',$.contentMatchButtonClick);
-
+        $( "#content-compare-exact, #content-compare-partial" ).off('click');        
+        $( "#content-compare-exact, #content-compare-partial" ).on('click',function(){
+            if(!$(this).hasClass('active'))
+            {
+                $('#content-compare-type .btn').removeClass('active');
+                $(this).addClass('active');    
+            }
+            $.cookie("exactMatch", $('#content-compare-exact').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });
+        });
+        $("#right-navbar input").keypress(function (e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });        
+        $('#condition-content-value').keypress(function (e) {
+            if (e.which == 13) {
+                $.runSearch(0);
+            }
+        });  
+    }
+    
+    var initFileTypes = function()
+    {
         if($.cookie("fileTypePpt")!=null)
         {
             if($.cookie("fileTypePpt")==  "true")
@@ -202,53 +227,35 @@
             text: false
         });
         $( '#file-types .search-file-type').off('click');
-        $( '#file-types .search-file-type').on('click',$.fileTypeButtonClick);
-        
-        $( "#run-search-full" ).off('click');
-        $( "#run-search-full" ).on('click',function () {
-            $.runSearch(0);
-        });        
-        $( "#run-search-file-card" ).off('click');
-        $( "#run-search-file-card" ).on('click',function () {
-            $.runSearch(0);
-        });                
-        $("#right-navbar input").keypress(function (e) {
-            if (e.which == 13) {
-                return false;
-            }
-        });        
-        $('#condition-content-value').keypress(function (e) {
-            if (e.which == 13) {
-                $.runSearch(0);
-            }
-        });  
-    
-        var selectedTabId = $.cookie("selectedRibbonTabId");
-        if(selectedTabId == 'search-full-tab')
-        {
-            var onlyFileCards = 0;
-            if($.cookie("onlyFileCards")!= null)
-                onlyFileCards = parseInt($.cookie("onlyFileCards"));
-            $.toggleSearchFileCard(onlyFileCards);
-            $( "#search-file-card-button" ).off('click');
-            $( "#search-file-card-button" ).on('click',function () {
-                var onlyFileCards = 0;
-                if($.cookie("onlyFileCards")!= null)
-                    onlyFileCards = parseInt($.cookie("onlyFileCards"));
-                if(onlyFileCards == 0)
-                    onlyFileCards = 1;
-                else
-                    onlyFileCards = 0;
-                $.toggleSearchFileCard(onlyFileCards);
-            });  
-        }
-        else
-            $.toggleSearchFileCard(0);
-        
-        $.dateFormat = 'MM/dd/yyyy';
+        $( '#file-types .search-file-type').on('click',function(){
+            if($(this).hasClass('active'))
+                $(this).removeClass('active');
+            else
+                $(this).addClass('active');
+            $.cookie("fileTypePpt", $('#search-file-type-powerpoint').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });
+            $.cookie("fileTypeDoc", $('#search-file-type-word').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });        
+            $.cookie("fileTypeXls", $('#search-file-type-excel').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });                
+            $.cookie("fileTypePdf", $('#search-file-type-pdf').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });                
+            $.cookie("fileTypeVideo", $('#search-file-type-video').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });                        
+        });
+    }
+
+    var initDateRange = function()
+    {
+        var dateFormat = 'MM/dd/yyyy';
         $('#condition-date-range').daterangepicker(
         {
-            format: $.dateFormat,
+            format: dateFormat,
             ranges: {
                 'Last day': ['yesterday','today'],
                 'Last 15 days': [Date.today().add({
@@ -260,14 +267,37 @@
             }
         }, 
         function(start, end) {
-            $('#condition-date-range input').val(start.toString($.dateFormat) + ' - ' + end.toString($.dateFormat));
+            $('#condition-date-range input').val(start.toString(dateFormat) + ' - ' + end.toString(dateFormat));
         }
         );
         $( "#clear-date-range" ).off('click');
         $( "#clear-date-range" ).on('click',function () {
             $('#condition-date-range input').val('');
-        });       
+        });        
         
+        if($.cookie("conditionDateByFile")!=null)
+        {
+            if($.cookie("conditionDateByFile")==  "true")
+                $( "#condition-date-file" ).button('toggle');
+            else
+                $( "#condition-date-link" ).button('toggle');
+        }
+        else
+            $( "#condition-date-file" ).button('toggle');
+        $( '#condition-date-file, #condition-date-link').off('click');
+        $( '#condition-date-file, #condition-date-link').on('click',function(){
+            if(!$(this).hasClass('active'))
+            {
+                $('#condition-date-file, #condition-date-link').removeClass('active');
+                $(this).addClass('active');    
+            }
+            $.cookie("conditionDateByFile", $('#condition-date-file').hasClass('active'), {
+                expires: (60 * 60 * 24 * 7)
+            });
+        });
+    }
+    
+    var initTags = function(){
         $( "#categories" ).accordion({
             autoHeight: false,
             active: false,
@@ -276,8 +306,7 @@
                 header: "ui-icon-circle-arrow-e",
                 activeHeader: "ui-icon-circle-arrow-s"
             }
-        }
-        );
+        });
         $('#tags-clear-all').off('click');
         $('#tags-clear-all').on('click',function(){
             $( "#categories :checked").attr('checked', false);
@@ -303,6 +332,72 @@
                 expires: (60 * 60 * 24 * 7)
             });
         });
+    }
+    
+    var initLibraries = function(){
+        var saveSelectedLibraries = function(){
+            var selectedLibraryIds = [];
+            $('#libraries :checked').each(function(){
+                selectedLibraryIds.push($(this).val());
+            });
+            $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
+                expires: (60 * 60 * 24 * 7)
+            });
+        }
+        
+        var librariesCount = $('#libraries input[type="checkbox"]').length;
+        if(librariesCount < 2)
+        {
+            var conditionType  = 0;
+            if($.cookie("search-control-panel")!=null)
+                conditionType = parseInt($.cookie("search-control-panel"));
+            if(conditionType == 2)
+                conditionType=0;
+            $( "#search-control-panel" ).tabs({
+                selected: conditionType,
+                disabled: [2]
+            });        
+        }
+        
+        var groupsCount = $('#libraries').find('h3').length;
+        
+        $( "#libraries" ).accordion({
+            autoHeight: false,
+            active: groupsCount>1?false:0,
+            collapsible: groupsCount>1?true:false,
+            icons: {
+                header: "ui-icon-circle-arrow-e",
+                activeHeader: "ui-icon-circle-arrow-s"
+            }
+        });
+        
+        $( '#libraries input[type="checkbox"]').on('change',function(){
+            saveSelectedLibraries();
+        })
+        $('#library-select-all').off('click');
+        $('#library-select-all').on('click',function(){
+            $( '#libraries input[type="checkbox"]').attr('checked', true);
+            saveSelectedLibraries();
+        });            
+            
+        $('#library-clear-all').off('click');
+        $('#library-clear-all').on('click',function(){
+            $( "#libraries :checked").attr('checked', false);
+            saveSelectedLibraries();
+        });
+        
+        saveSelectedLibraries();
+    }
+    
+    var initControlPanel = function(){
+        initSearchButtons();
+        initTabControl();
+        initFileCard();
+        initKeywordFiled();
+        initFileTypes();
+        initDateRange();
+        initTags();
+        initLibraries();
         
         $( "#clear-content-file-types-dates-value" ).off('click');
         $( "#clear-content-file-types-dates-value" ).on('click',function () {
@@ -312,30 +407,6 @@
             
             $( '#file-types .search-file-type').trigger('click');
         });      
-        
-        
-        if($.cookie("conditionDateByFile")!=null)
-        {
-            if($.cookie("conditionDateByFile")==  "true")
-                $( "#condition-date-file" ).button('toggle');
-            else
-                $( "#condition-date-link" ).button('toggle');
-        }
-        else
-            $( "#condition-date-file" ).button('toggle');
-        $( '#condition-date-file, #condition-date-link').off('click');
-        $( '#condition-date-file, #condition-date-link').on('click',function(){
-            if(!$(this).hasClass('active'))
-            {
-                $('#condition-date-file, #condition-date-link').removeClass('active');
-                $(this).addClass('active');    
-            }
-            $.cookie("conditionDateByFile", $('#condition-date-file').hasClass('active'), {
-                expires: (60 * 60 * 24 * 7)
-            });
-        });
-        
-        $.initLibrarySelector();
     }
     
     $.initSearchView = function(){
@@ -348,7 +419,7 @@
             },
             complete: function(){
                 $.hideOverlay();
-                $.initControlPanel();
+                initControlPanel();
                 $.updateContentAreaDimensions();
                 $.initSearchGrid();
             },
@@ -364,6 +435,5 @@
     }
     
     $(document).ready(function() 
-    {
-        });
+    {});
 })( jQuery );    

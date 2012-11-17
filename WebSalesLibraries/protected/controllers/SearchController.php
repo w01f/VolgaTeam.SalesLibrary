@@ -29,24 +29,18 @@ class SearchController extends IsdController
     public function actionGetLibrariesView()
     {
         $libraryManager = new LibraryManager();
-        $libraryObjects = $libraryManager->getLibraries();
+        $libraryGroups = $libraryManager->getLibraryGroups();
 
         if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
             $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
-        foreach ($libraryObjects as $libraryObject)
-        {
-            $library['id'] = $libraryObject->id;
-            $library['name'] = $libraryObject->name;
-            if (isset($checkedLibraryIds))
-                $library['selected'] = in_array($libraryObject->id, $checkedLibraryIds);
-            else
-                $library['selected'] = true;
-            $libraries[] = $library;
-        }
-        if (!isset($libraries))
-            $libraries[] = 'All';
 
-        $this->renderPartial('librariesView', array('libraries' => $libraries), false, true);
+        foreach ($libraryGroups as $libraryGroup)
+            foreach ($libraryGroup->libraries as $library)
+                if (isset($checkedLibraryIds))
+                    $library->selected = in_array($library->id, $checkedLibraryIds);
+                else
+                    $library->selected = true;
+        $this->renderPartial('librariesView', array('libraryGroups' => $libraryGroups), false, true);                
     }
 
     public function actionSearchByContent()

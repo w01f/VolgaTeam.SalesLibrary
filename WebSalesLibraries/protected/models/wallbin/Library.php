@@ -11,6 +11,9 @@ class Library
      * @soap
      */
     public $name;
+    public $groupId;
+    public $order;
+    public $selected;
     public $storagePath;
     public $storageLink;
     public $logoPath;
@@ -63,12 +66,20 @@ class Library
         return null;
     }
 
-    public static function libraryComparer($x, $y)
+    public static function libraryComparerByName($x, $y)
     {
         if ($x->name == $y->name)
             return 0;
         else
             return ($x->name < $y->name) ? -1 : 1;
+    }
+
+    public static function libraryComparerByGroup($x, $y)
+    {
+        if ($x->order == $y->order)
+            return 0;
+        else
+            return ($x->order < $y->order) ? -1 : 1;
     }
 
 }

@@ -134,6 +134,22 @@
             }            
         }
         updateDateRange();
+        
+        $('#search-date-container input[type="radio"]').checkboxradio();
+        if($.cookie("conditionDateByFile")!=null)
+        {
+            if($.cookie("conditionDateByFile")==  "true")
+                $( "#search-date-file" ).attr("checked",true).checkboxradio("refresh");
+            else
+                $( "#search-date-link" ).attr("checked",true).checkboxradio("refresh");
+        }
+        else
+            $( "#search-date-file" ).attr("checked",true).checkboxradio("refresh");
+        $( '#search-date-file, #search-date-link').on('change',function(){
+            $.cookie("conditionDateByFile", $('#search-date-file').attr("checked")=="checked", {
+                expires: (60 * 60 * 24 * 7)
+            });
+        });
     }    
     
     var initFileTypeSelector = function(){
@@ -237,27 +253,33 @@
     var initLibrariesSelector = function(){
         var updateLibraries = function(){
             var selectedLibraryIds = [];
-            $('#search-libraries-container :checked').each(function(){
+            $('.search-libraries-item:checked').each(function(){
                 selectedLibraryIds.push(this.id);
             });
             $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
                 expires: (60 * 60 * 24 * 7)
             });            
         }
-        $( '#search-libraries-container input[type="checkbox"]').checkboxradio();
+        $( '.search-libraries-group').collapsible();
+        $( '.search-libraries-item').checkboxradio();
         updateLibraries();
-        $( '#search-libraries-container input[type="checkbox"]').off('change');
-        $( '#search-libraries-container  input[type="checkbox"]').on('change',function(){
+        
+        var librariesCount = $('.search-libraries-item').length;
+        if(librariesCount < 2)
+            $('.tab-search-libraries').addClass('ui-disabled').attr('href',"#");	
+        
+        $( '.search-libraries-item').off('change');
+        $( '.search-libraries-item').on('change',function(){
             updateLibraries();
         });
         $( '#search-libraries-select-button').off('click');
         $( '#search-libraries-select-button').on('click',function(){
-            $('#search-libraries-container input[type="checkbox"]').attr('checked', true).checkboxradio("refresh");
+            $('.search-libraries-item').attr('checked', true).checkboxradio("refresh");
             updateLibraries();
         });
         $( '#search-libraries-clear-button').off('click');
         $( '#search-libraries-clear-button').on('click',function(){
-            $('#search-libraries-container input[type="checkbox"]').attr('checked', false).checkboxradio("refresh");
+            $('.search-libraries-item').attr('checked', false).checkboxradio("refresh");
             updateLibraries();
         });        
     }
@@ -338,7 +360,7 @@
                 condition: selectedCondition,
                 startDate: startDate,
                 endDate: endDate,
-                dateFile: false,                
+                dateFile: $('#search-date-file').attr("checked")=="checked",                
                 onlyFileCards: onlyFileCards,
                 categories: categories.length>0?$.toJSON(categories):null,
                 categoriesExactMatch: $('#search-tags-exact-match :selected').val(),                

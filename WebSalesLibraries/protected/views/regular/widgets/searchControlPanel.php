@@ -65,7 +65,6 @@
             </div>
             <div id="categories-container">
                 <div class="accordion" id="categories">
-                    <?php $groupNumber = 0; ?>
                     <?php foreach ($categories->groups as $group): ?>
                         <h3><span><?php echo $group; ?></span></h3>
                         <div>
@@ -85,22 +84,22 @@
         <div class ="group-panel">
             <button type="button" class="btn btn-block" id="library-select-all">Select All <?php echo Yii::app()->params['stations_tab']['name']; ?></button>
             <button type="button" class="btn btn-block" id="library-clear-all">Clear All <?php echo Yii::app()->params['stations_tab']['name']; ?></button>
-            <ul id="library-checkbox-list">
-                <?php
-                foreach ($libraries as $library)
-                {
-                    echo CHtml::openTag('li');
-                    {
-                        $btnClass = 'btn' . ($library['selected'] ? ' active' : '');
-                        echo CHtml::openTag('button', array('class' => $btnClass, 'id' => $library['id']));
-                        echo $library['name'];
-                        echo CHtml::closeTag('button');
-                    }
-                    echo CHtml::closeTag('li');
-                }
-                ?>
-            </ul>
         </div>                
+        <div id="libraries-container">
+            <div class="accordion" id="libraries">
+                <?php foreach ($libraryGroups as $group): ?>
+                    <h3><span><?php echo $group->name; ?></span></h3>
+                    <div>
+                        <?php foreach ($group->libraries as $library): ?>
+                            <label class="checkbox">
+                                <input type="checkbox" value="<?php echo $library->id; ?>" <?php echo $library->selected ? 'checked="checked"' : '' ?>>
+                                <?php echo $library->name; ?>
+                            </label>                        
+                        <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>                    
+        </div>                                                        
     </div>
 </div>
 
