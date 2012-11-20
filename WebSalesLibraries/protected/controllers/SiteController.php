@@ -132,18 +132,54 @@ class SiteController extends IsdController
         }
     }
 
+    public function actionDownloadDialog()
+    {
+        $linkId = Yii::app()->request->getPost('linkId');
+        if (isset($linkId))
+        {
+            $linkRecord = LinkStorage::getLinkById($linkId);
+            if (isset($linkRecord))
+            {
+                if ($linkRecord->format == 'video')
+                    $this->renderPartial('downloadVideoDialog', array(), false, true);
+                else
+                    $this->renderPartial('downloadDialog', array(), false, true);
+            }
+        }
+    }
+
     public function actionDownloadFile()
     {
-        $url = Yii::app()->request->getQuery('url', '');
-        if (isset($url))
+        $linkId = Yii::app()->request->getQuery('linkId');
+        $format = Yii::app()->request->getQuery('format');
+        if (isset($linkId))
         {
-            $path = realpath(str_replace(Yii::app()->baseUrl, '', $url));
-            Yii::app()->request->xSendFile($path, array(
-                'forceDownload' => false,
-                'terminate' => false,
-            ));
+            $linkRecord = LinkStorage::getLinkById($linkId);
+            if (isset($linkRecord))
+            {
+                $libraryManager = new LibraryManager();
+                $libraryManager->getLibraries();
+                $library = $libraryManager->getLibraryById($linkRecord->id_library);
+                if (isset($library))
+                {
+                    $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                    $link->load($linkRecord);
+                    if ($linkRecord->format == 'video')
+                    {
+                        if ($format == 'wmv')
+                            $path = $link->filePath;
+                        else if ($format == 'mp4')
+                        {
+                            $previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'mp4'));
+                            if (isset($previewRecord))
+                                $path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+                        }
+                    }
+                }
+            }
         }
-        Yii::app()->end();
+        if (isset($path))
+            return Yii::app()->getRequest()->sendFile(basename($path), @file_get_contents($path));
     }
 
     public function actionEmailLinkDialog()
@@ -154,7 +190,6 @@ class SiteController extends IsdController
     public function actionEmailLinkSend()
     {
         $linkId = Yii::app()->request->getPost('linkId');
-        $libraryId = Yii::app()->request->getPost('libraryId');
         $emailTo = Yii::app()->request->getPost('emailTo');
         $emailFrom = Yii::app()->request->getPost('emailFrom');
         $emailSubject = Yii::app()->request->getPost('emailSubject');
@@ -163,21 +198,22 @@ class SiteController extends IsdController
         if (isset($expiresIn) && $expiresIn == '')
             unset($expiresIn);
 
-        $libraryManager = new LibraryManager();
-        $library = $libraryManager->getLibraryById($libraryId);
-        if (isset($library))
+        $linkRecord = LinkStorage::getLinkById($linkId);
+        if (isset($linkRecord))
         {
-            $linkRecord = LinkStorage::getLinkById($linkId);
-            if (isset($linkRecord))
+            $libraryId = $linkRecord->id_library;
+            $libraryManager = new LibraryManager();
+            $library = $libraryManager->getLibraryById($libraryId);
+            if (isset($library))
             {
                 $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
                 $link->load($linkRecord);
             }
-        }
-        else
-        {
-            echo 'Library was not found';
-            echo $emailedLinkRecord->id_library;
+            else
+            {
+                echo 'Library was not found';
+                echo $emailedLinkRecord->id_library;
+            }
         }
 
         if (isset($link) && isset($emailTo) && isset($emailFrom) && isset($emailSubject) && isset($emailBody))

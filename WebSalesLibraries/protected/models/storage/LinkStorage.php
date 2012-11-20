@@ -38,6 +38,7 @@ class LinkStorage extends CActiveRecord
             $linkRecord->file_name = $link['fileName'];
             $linkRecord->file_extension = $link['fileExtension'];
             $linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+            $linkRecord->file_size = $link['fileSize'];
             $linkRecord->note = $link['note'];
             $linkRecord->format = $link['originalFormat'];
             $linkRecord->is_bold = $link['isBold'];

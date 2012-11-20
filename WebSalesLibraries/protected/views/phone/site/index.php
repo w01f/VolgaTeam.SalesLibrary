@@ -236,7 +236,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-transition="none">Search</a>
                 </li>
                 <li>
-                    <a href="#search-tags" data-transition="none">Tags</a>
+                    <a class ="tab-search-tags" href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
                     <a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
@@ -278,7 +278,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a href="#search-basic" data-transition="none">Search</a>
                 </li>
                 <li>
-                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tags</a>
+                    <a class ="tab-search-tags ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
                     <a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>
@@ -320,7 +320,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     <a href="#search-basic" data-transition="none">Search</a>
                 </li>
                 <li>
-                    <a href="#search-tags" data-transition="none">Tags</a>
+                    <a class ="tab-search-tags" href="#search-tags" data-transition="none">Tags</a>
                 </li>
                 <li>
                     <a class ="tab-search-libraries ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations_tab']['name']; ?></a>

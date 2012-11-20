@@ -97,9 +97,30 @@
         var conditionType  = 0;
         if($.cookie("search-control-panel")!=null)
             conditionType = parseInt($.cookie("search-control-panel"));
+
+        var disabled = [];
+        
+        var tagsCount = $('#categories input[type="checkbox"]').length;
+        if(tagsCount < 1)
+        {
+            if(conditionType == 1)
+                conditionType=0;
+            disabled.push(1);
+        }
+        
+        var librariesCount = $('#libraries input[type="checkbox"]').length;
+        if(librariesCount < 2)
+        {
+            if(conditionType == 2)
+                conditionType=0;
+            disabled.push(2);
+        }
+        
         $( "#search-control-panel" ).tabs({
-            selected: conditionType
+            selected: conditionType,
+            disabled: disabled
         });        
+
         $( "#search-control-panel" ).on('tabsselect',function(event, ui){
             $.cookie("search-control-panel", ui.index, {
                 expires: (60 * 60 * 24 * 7)
@@ -345,20 +366,6 @@
             });
         }
         
-        var librariesCount = $('#libraries input[type="checkbox"]').length;
-        if(librariesCount < 2)
-        {
-            var conditionType  = 0;
-            if($.cookie("search-control-panel")!=null)
-                conditionType = parseInt($.cookie("search-control-panel"));
-            if(conditionType == 2)
-                conditionType=0;
-            $( "#search-control-panel" ).tabs({
-                selected: conditionType,
-                disabled: [2]
-            });        
-        }
-        
         var groupsCount = $('#libraries').find('h3').length;
         
         $( "#libraries" ).accordion({
@@ -391,13 +398,13 @@
     
     var initControlPanel = function(){
         initSearchButtons();
-        initTabControl();
         initFileCard();
         initKeywordFiled();
         initFileTypes();
         initDateRange();
         initTags();
         initLibraries();
+        initTabControl();
         
         $( "#clear-content-file-types-dates-value" ).off('click');
         $( "#clear-content-file-types-dates-value" ).on('click',function () {

@@ -77,6 +77,8 @@
                     $imageTitle = 'Email Link';
                     break;
             }
+            $fileSize = $link->getViewSize($format);
+            $fileSizePhone = $link->getViewSize($format . '_phone');
             if ($imageSource != '' && $imageTitle != ''):
                 ?>                
                 <li>
@@ -86,9 +88,16 @@
                                 <td><img src="<?php echo $imageSource; ?>"/></td>
                                 <td>
                                     <span><?php echo $imageTitle; ?></span>
+                                    <?php if (isset($fileSize)): ?>
+                                        <span class="file-size <?php echo isset($fileSizePhone) ? 'regular' : ''; ?>"> (<?php echo $fileSize; ?>)</span>
+                                    <?php endif; ?>
+                                    <?php if (isset($fileSizePhone)): ?>
+                                        <span class="file-size phone"> (<?php echo $fileSizePhone; ?>)</span>
+                                    <?php endif; ?>                                        
                                     <div class="item-content">
                                         <div class="file-type"><?php echo $link->originalFormat; ?></div>
                                         <div class="view-type"><?php echo $format; ?></div>
+                                        <div class="file-size"><?php echo $link->originalFormat; ?></div>                                        
                                         <?php
                                         $viewLinks = $link->getViewSource($format);
                                         if (isset($viewLinks)):

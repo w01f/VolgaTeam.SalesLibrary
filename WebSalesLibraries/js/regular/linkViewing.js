@@ -75,12 +75,63 @@
         $(this).find('.file-card-content').html(fileCardContent);
     }
     
-    $.downloadFile = function(url)
+    var openFile = function(url)
     {
         window.open(url.replace(/&amp;/g,'%26'));
     }    
     
-    $.emailFile = function(linkId, libraryId,title)
+    var downloadFile = function(linkId, title)
+    {
+        $.ajax({
+            type: "POST",
+            url: "site/downloadDialog",
+            data: {
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $.showOverlayLight();
+            },
+            complete: function(){
+                $.hideOverlayLight();
+            },            
+            success: function(msg){
+                var content = $(msg);
+                content.find( ".download-type button" ).on('click',function(){
+                    if(!$(this).hasClass('active'))
+                    {
+                        $('.download-type button').removeClass('active');
+                        $(this).addClass('active');    
+                    }
+                });                
+                content.find('#download-cancel').on('click',function(){
+                    $.fancybox.close();
+                });                    
+                content.find('#download-accept').on('click',function(){
+                    window.open("site/downloadFile?linkId="+linkId+"&format="+$('.download-type button.active img').attr('alt'));
+                    $.fancybox.close();
+                });                                    
+                $.fancybox({
+                    content: content,
+                    title: title,
+                    openEffect  : 'none',
+                    closeEffect	: 'none',
+                    helpers : {
+                        overlay : {
+                            css : {
+                                'background' : 'rgba(224, 224, 224, 0.8)'
+                            }
+                        }
+                    }
+                });                
+            },
+            error: function(){
+            },                        
+            async: true,
+            dataType: 'html'                        
+        });
+    }        
+    
+    $.emailFile = function(linkId, title)
     {
         $.ajax({
             type: "POST",
@@ -95,14 +146,12 @@
             },
             success: function(msg){
                 var content = $(msg);
-                content.find('#email-accept').off('click');
                 content.find('#email-accept').on('click',function(){
                     $.ajax({
                         type: "POST",
                         url: "site/emailLinkSend",
                         data: {
                             linkId: linkId,
-                            libraryId: libraryId,
                             emailTo: content.find('#email-to').val(),
                             emailFrom: content.find('#email-from').val(),
                             emailSubject: content.find('#email-subject').val(),
@@ -116,7 +165,6 @@
                         dataType: 'html'                        
                     });
                 });
-                content.find('#email-cancel').off('click');
                 content.find('#email-cancel').on('click',function(){
                     $.fancybox.close();
                 });                    
@@ -144,7 +192,6 @@
     $.viewSelectedFormat = function(target, fullScreen)
     {
         var selectedFileId = $(target).find('.service-data .link-id').html();
-        var selectedLibraryId = $(target).find('.service-data .library-id').html();
         var selectedFileType = $(target).find('.service-data .file-type').html();
         var selectedViewType = $(target).find('.service-data .view-type').html();
         var selectedLinks = $(target).find('.service-data .links').html();
@@ -217,10 +264,10 @@
                             }
                             break;
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLibraryId,selectedLinks[0].title);
+                            $.emailFile(selectedFileId,selectedLinks[0].title);
                             break;
                         default:
-                            $.downloadFile(selectedLinks[0].href);
+                            openFile(selectedLinks[0].href);
                             break;
                     }
                     break;                    
@@ -228,23 +275,23 @@
                     switch(selectedViewType)
                     {
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLibraryId,selectedLinks[0].title);
+                            $.emailFile(selectedFileId,selectedLinks[0].title);
                             break;
                         default:
-                            $.downloadFile(selectedLinks[0].href);
+                            openFile(selectedLinks[0].href);
                             break;
                     }                    
                     break;
                 case 'url':
                 case 'other':
-                    $.downloadFile(selectedLinks[0].href);
+                    openFile(selectedLinks[0].href);
                     break;                
                 case 'png':
                 case 'jpeg':
                     switch(selectedViewType)
                     {
                         case 'email':
-                            $.emailFile(selectedFileId, selectedLibraryId, selectedLinks[0].title);
+                            $.emailFile(selectedFileId,selectedLinks[0].title);
                             break;
                         default:
                             $.fancybox(selectedLinks,{
@@ -268,11 +315,14 @@
                         case 'video':
                         case 'tab':                            
                         case 'ogv':
-                            $.downloadFile(selectedLinks[0].href);
+                            openFile(selectedLinks[0].href);
                             break;                        
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLibraryId,selectedLinks[0].title);
+                            $.emailFile(selectedFileId,selectedLinks[0].title);
                             break;                            
+                        case 'download':
+                            downloadFile(selectedFileId,selectedLinks[0].title);
+                            break;                                                        
                         case 'mp4':
                             playVideo(selectedLinks);
                             break;                    

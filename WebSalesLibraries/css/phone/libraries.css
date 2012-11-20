@@ -43,7 +43,7 @@
     padding-right: 16px;
 }
 
-.link-container span.file
+.link-container span.file, .file-size
 {
     color: #b0b0b0;
 }

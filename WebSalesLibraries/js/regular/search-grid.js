@@ -158,9 +158,12 @@
             isScrolling = false;
         }).on('touchmove',function(){
             isScrolling = true;
-        }).on('touchend',function(){
+        }).on('touchend',function(e){
             if(!isScrolling)
                 $.searchGridViewPreviewLink.call($(this));
+            e.stopPropagation();
+            e.preventDefault();
+            return false;
         });
         
         $( "#search-grid-body td.details-button" ).off('click');

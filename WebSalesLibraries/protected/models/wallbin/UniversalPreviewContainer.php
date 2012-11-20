@@ -17,26 +17,31 @@ class UniversalPreviewContainer
      * @soap
      */
     public $pngLinks;
+    public $pngMaxFileSize;
     /**
      * @var string[]
      * @soap
      */
-    public $pngPhoneLinks;    
+    public $pngPhoneLinks;
+    public $pngPhoneMaxFileSize;
     /**
      * @var string[]
      * @soap
      */
     public $jpegLinks;
+    public $jpegMaxFileSize;
     /**
      * @var string[]
      * @soap
      */
-    public $jpegPhoneLinks;    
+    public $jpegPhoneLinks;
+    public $jpegPhoneMaxFileSize;
     /**
      * @var string[]
      * @soap
      */
     public $pdfLinks;
+    public $pdfMaxFileSize;
     /**
      * @var string[]
      * @soap
@@ -66,7 +71,7 @@ class UniversalPreviewContainer
      * @var string[]
      * @soap
      */
-    public $thumbsPhoneLinks;    
+    public $thumbsPhoneLinks;
     /**
      * @var int
      * @soap
@@ -89,29 +94,45 @@ class UniversalPreviewContainer
             $this->id = $record->id_container;
             $this->libraryId = $record->id_library;
             $previewLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path)));
+            $previewPath = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
             switch ($record->type)
             {
                 case 'png':
                     $this->pngLinks[] = $previewLink;
+                    $fileSize = filesize($previewPath);
+                    if ($this->pngMaxFileSize < $fileSize)
+                        $this->pngMaxFileSize = $fileSize;
                     break;
                 case 'png_phone':
                     $this->pngPhoneLinks[] = $previewLink;
-                    break;                
+                    $fileSize = filesize($previewPath);
+                    if ($this->pngPhoneMaxFileSize < $fileSize)
+                        $this->pngPhoneMaxFileSize = $fileSize;
+                    break;
                 case 'jpeg':
                     $this->jpegLinks[] = $previewLink;
+                    $fileSize = filesize($previewPath);
+                    if ($this->jpegMaxFileSize < $fileSize)
+                        $this->jpegMaxFileSize = $fileSize;
                     break;
                 case 'jpeg_phone':
                     $this->jpegPhoneLinks[] = $previewLink;
-                    break;                
+                    $fileSize = filesize($previewPath);
+                    if ($this->jpegPhoneMaxFileSize < $fileSize)
+                        $this->jpegPhoneMaxFileSize = $fileSize;
+                    break;
                 case 'pdf':
                     $this->pdfLinks[] = $previewLink;
+                    $fileSize = filesize($previewPath);
+                    if ($this->pdfMaxFileSize < $fileSize)
+                        $this->pdfMaxFileSize = $fileSize;
                     break;
                 case 'thumbs':
                     $this->thumbsLinks[] = $previewLink;
                     break;
                 case 'thumbs_phone':
                     $this->thumbsPhoneLinks[] = $previewLink;
-                    break;                
+                    break;
                 case 'mp4':
                     $this->mp4Links[] = $previewLink;
                     break;
@@ -131,13 +152,13 @@ class UniversalPreviewContainer
         if (isset($this->pngLinks))
             natsort($this->pngLinks);
         if (isset($this->pngPhoneLinks))
-            natsort($this->pngPhoneLinks);        
+            natsort($this->pngPhoneLinks);
         if (isset($this->pdfLinks))
             natsort($this->pdfLinks);
         if (isset($this->jpegLinks))
             natsort($this->jpegLinks);
         if (isset($this->jpegPhoneLinks))
-            natsort($this->jpegPhoneLinks);        
+            natsort($this->jpegPhoneLinks);
         if (isset($this->oldOfficeFormatLinks))
             natsort($this->oldOfficeFormatLinks);
         if (isset($this->newOfficeFormatLinks))
@@ -145,7 +166,7 @@ class UniversalPreviewContainer
         if (isset($this->thumbsLinks))
             natsort($this->thumbsLinks);
         if (isset($this->thumbsPhoneLinks))
-            natsort($this->thumbsPhoneLinks);        
+            natsort($this->thumbsPhoneLinks);
         if (isset($this->mp4Links))
             natsort($this->mp4Links);
         if (isset($this->ogvLinks))

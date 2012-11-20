@@ -30,10 +30,10 @@
                 $('#search-tags .page-content').html('');
             },
             complete: function(){
+                loadTagsPanel();
             },
             success: function(msg){
                 $('#search-tags .page-content').html(msg);
-                loadTagsPanel();
             },
             async: true,
             dataType: 'html'                        
@@ -308,6 +308,10 @@
     var initTagsSelector = function(){
         $( '.search-tags-group').collapsible();
         $( '.search-tags-item').checkboxradio();
+        
+        var tagsCount = $('.search-tags-item').length;
+        if(tagsCount < 1)
+            $('.tab-search-tags').addClass('ui-disabled').attr('href',"#");	
         
         $('#search-tags-clear-button').on('click',function(){
             $('.search-tags-item').attr('checked', false).checkboxradio("refresh");

@@ -43,6 +43,11 @@ class LibraryLink
      */
     public $fileDate;
     /**
+     * @var int
+     * @soap
+     */
+    public $fileSize;
+    /**
      * @var string
      * @soap
      */
@@ -156,6 +161,7 @@ class LibraryLink
         $this->fileRelativePath = $linkRecord->file_relative_path;
         $this->fileName = $linkRecord->file_name;
         $this->fileExtension = $linkRecord->file_extension;
+        $this->fileSize = $linkRecord->file_size;
         $this->note = $linkRecord->note;
         $this->isBold = $linkRecord->is_bold;
         $this->order = $linkRecord->order;
@@ -242,6 +248,8 @@ class LibraryLink
             $this->fileRelativePath = str_replace('\\', '/', $this->fileRelativePath);
             $this->filePath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
             $this->fileLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath)));
+            if (!isset($this->fileSize))
+                $this->fileSize = filesize($this->filePath);
         }
         $this->getFormats();
     }
@@ -295,32 +303,37 @@ class LibraryLink
                         case 'phone':
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'email';
-                            break;                    
+                            break;
                         case 'mobile':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'email';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'ie':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'video';
                             $this->availableFormats[] = 'email';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'webkit':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'email';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'firefox':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'ogv';
                             $this->availableFormats[] = 'email';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'opera':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'ogv';
                             $this->availableFormats[] = 'email';
+                            $this->availableFormats[] = 'download';
                             break;
                         default:
                             $this->availableFormats[] = 'video';
@@ -328,6 +341,7 @@ class LibraryLink
                             $this->availableFormats[] = 'ogv';
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'email';
+                            $this->availableFormats[] = 'download';
                             break;
                     }
                     break;
@@ -335,6 +349,7 @@ class LibraryLink
                     $this->availableFormats[] = 'mp4';
                     $this->availableFormats[] = 'tab';
                     $this->availableFormats[] = 'email';
+                    $this->availableFormats[] = 'download';
                     break;
                 case 'png':
                     $this->availableFormats[] = 'png';
@@ -395,7 +410,7 @@ class LibraryLink
                                     $i++;
                                 }
                             }
-                        break;                        
+                        break;
                     case 'jpeg':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->jpegLinks))
@@ -421,7 +436,7 @@ class LibraryLink
                                     $i++;
                                 }
                             }
-                        break;                        
+                        break;
                     case 'pdf':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->pdfLinks))
@@ -487,7 +502,7 @@ class LibraryLink
                                     $i++;
                                 }
                             }
-                        break;                        
+                        break;
                     case 'jpeg':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->jpegLinks))
@@ -513,7 +528,7 @@ class LibraryLink
                                     $i++;
                                 }
                             }
-                        break;                        
+                        break;
                     case 'pdf':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->pdfLinks))
@@ -590,7 +605,7 @@ class LibraryLink
                                     $i++;
                                 }
                             }
-                        break;                        
+                        break;
                     case 'jpeg':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->jpegLinks))
@@ -616,7 +631,7 @@ class LibraryLink
                                     $i++;
                                 }
                             }
-                        break;                        
+                        break;
                     case 'thumbs':
                         if (isset($this->universalPreview))
                         {
@@ -660,6 +675,7 @@ class LibraryLink
                         $viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
                         break;
                     case 'email':
+                    case 'download':
                         $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
                         break;
                     case 'mp4':
@@ -690,6 +706,7 @@ class LibraryLink
                 switch ($format)
                 {
                     case 'email':
+                    case 'download':
                         $viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
                         break;
                     default:
@@ -700,6 +717,147 @@ class LibraryLink
         }
         if (isset($viewSources))
             return $viewSources;
+    }
+
+    public static function formatFileSize($fileSize)
+    {
+        if (isset($fileSize))
+        {
+            if ($fileSize < 524288000)
+            {
+                if ($fileSize < 512000)
+                    $type = 'kb';
+                else
+                    $type = 'mb';
+            }
+            else
+                $type = 'gb';
+            switch ($type)
+            {
+                case "kb":
+                    $fileSize = $fileSize * .0009765625; // bytes to KB  
+                    break;
+                case "mb":
+                    $fileSize = ($fileSize * .0009765625) * .0009765625; // bytes to MB  
+                    break;
+                case "gb":
+                    $filesize = (($fileSize * .0009765625) * .0009765625) * .0009765625; // bytes to GB  
+                    break;
+            }
+        }
+        else
+            $fileSize = -1;
+        if ($fileSize <= 0)
+            return '';
+        else
+            return round($fileSize, 0) . $type;
+    }
+
+    public function getViewSize($format)
+    {
+        switch ($this->originalFormat)
+        {
+            case 'ppt':
+                switch ($format)
+                {
+                    case 'ppt':
+                        $fileSize = self::formatFileSize($this->fileSize);
+                        break;
+                    case 'png':
+                        if (isset($this->universalPreview->pngMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pngMaxFileSize);
+                        break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview->pngPhoneMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pngPhoneMaxFileSize);
+                        break;
+                    case 'jpeg':
+                        if (isset($this->universalPreview->jpegMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->jpegMaxFileSize);
+                        break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview->jpegPhoneMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->jpegPhoneMaxFileSize);
+                        break;
+                    case 'pdf':
+                        if (isset($this->universalPreview->pdfMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pdfMaxFileSize);
+                        break;
+                }
+                break;
+            case 'doc':
+                switch ($format)
+                {
+                    case 'doc':
+                        $fileSize = self::formatFileSize($this->fileSize);
+                        break;
+                    case 'png':
+                        if (isset($this->universalPreview->pngMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pngMaxFileSize);
+                        break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview->pngPhoneMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pngPhoneMaxFileSize);
+                        break;
+                    case 'jpeg':
+                        if (isset($this->universalPreview->jpegMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->jpegMaxFileSize);
+                        break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview->jpegPhoneMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->jpegPhoneMaxFileSize);
+                        break;
+                    case 'pdf':
+                        if (isset($this->universalPreview->pdfMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pdfMaxFileSize);
+                        break;
+                }
+                break;
+            case 'xls':
+                switch ($format)
+                {
+                    case 'xls':
+                        $fileSize = self::formatFileSize($this->fileSize);
+                        break;
+                }
+                break;
+            case 'pdf':
+                switch ($format)
+                {
+                    case 'pdf':
+                        $fileSize = self::formatFileSize($this->fileSize);
+                        break;
+                    case 'png':
+                        if (isset($this->universalPreview->pngMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pngMaxFileSize);
+                        break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview->pngPhoneMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->pngPhoneMaxFileSize);
+                        break;
+                    case 'jpeg':
+                        if (isset($this->universalPreview->jpegMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->jpegMaxFileSize);
+                        break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview->jpegPhoneMaxFileSize))
+                            $fileSize = self::formatFileSize($this->universalPreview->jpegPhoneMaxFileSize);
+                        break;
+                }
+                break;
+            case 'jpeg':
+            case 'png':
+                switch ($format)
+                {
+                    case 'jpeg':
+                    case 'png':
+                        $fileSize = self::formatFileSize($this->fileSize);
+                        break;
+                }
+                break;
+        }
+        if (isset($fileSize))
+            return $fileSize;
     }
 
     public static function libraryLinkComparer($x, $y)

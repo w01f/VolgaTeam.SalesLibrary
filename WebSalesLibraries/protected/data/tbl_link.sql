@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `file_name` varchar(256) NOT NULL,
   `file_extension` varchar(8) NOT NULL,
   `file_date` datetime NULL,
+  `file_size` int(11) NULL,
   `format` varchar(256) NOT NULL,
   `note` varchar(256) NOT NULL,
   `is_bold` tinyint(1) NOT NULL,

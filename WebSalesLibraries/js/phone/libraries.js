@@ -169,6 +169,22 @@
                 });
                 $('#preview .page-content').children('ul').listview();                     
                 $('#preview .res-selector').navbar();                     
+                
+                $('.file-size.regular').hide();
+                $('.file-size.phone').show();
+                $('.res-selector a').on('click',function(){
+                    if($('a.low-res-button').hasClass('ui-btn-active'))
+                    {
+                        $('.file-size.regular').show();
+                        $('.file-size.phone').hide();
+                    }
+                    else
+                    {
+                        $('.file-size.regular').hide();
+                        $('.file-size.phone').show();
+                    }
+                });
+                
                 $( ".preview-link" ).on('click',function(){
                     var itemContent = $(this).find('.item-content');
                     var viewFormat = itemContent.find('.view-type').html().toUpperCase();
