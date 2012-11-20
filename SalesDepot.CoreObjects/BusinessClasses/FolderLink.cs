@@ -121,5 +121,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
                 }
             }
         }
+
+		public RootFolder Clone(ILibrary parent)
+		{
+			RootFolder folder = new RootFolder(parent);
+			folder.Folder = this.Folder;
+			folder.Order = this.Order;
+			return folder;
+		}
     }
 }

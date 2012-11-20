@@ -38,6 +38,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
         BannerProperties BannerProperties { get;}
         FileCard FileCard { get; set; }
 
+	    ILibraryFile Clone(LibraryFolder parent);
         string Serialize();
         void Deserialize(XmlNode fileNode);
     }

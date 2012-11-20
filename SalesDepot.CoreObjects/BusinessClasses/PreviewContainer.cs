@@ -27,6 +27,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Extension { get; }
 		DateTime LastChanged { set; }
 		string ContainerPath { get; }
+		IPreviewContainer Clone(IPreviewStorage parent);
 		string Serialize();
 		void Deserialize(XmlNode node);
 		string GetTextContent();
@@ -117,6 +118,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				this.Parent.UpdatePreviewableObject(this.OriginalPath, value);
 			}
+		}
+
+		public IPreviewContainer Clone(IPreviewStorage parent)
+		{
+			IPreviewContainer previewContainer = new UniversalPreviewContainer(parent);
+			previewContainer.OriginalPath = this.OriginalPath;
+			return previewContainer;
 		}
 
 		public string Serialize()
@@ -271,6 +279,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public ILibraryFile Parent { get; private set; }
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
+
+		public IPreviewContainer Clone(IPreviewStorage parent)
+		{
+			IPreviewContainer previewContainer = new UniversalPreviewContainer(parent);
+			return previewContainer;
+		}
 
 		public string Serialize()
 		{

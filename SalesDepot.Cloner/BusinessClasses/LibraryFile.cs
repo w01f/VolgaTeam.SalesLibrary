@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using SalesDepot.CoreObjects;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -40,8 +39,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
-		public BannerProperties BannerProperties { get; set; }
 		public AttachmentProperties AttachmentProperties { get; set; }
+		public BannerProperties BannerProperties { get; set; }
 		public FileCard FileCard { get; set; }
 
 		#region Compatibility with desktop version of Sales Depot
@@ -385,7 +384,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.CustomKeywords = this.CustomKeywords;
 			file.ExpirationDateOptions = this.ExpirationDateOptions;
 			file.PresentationProperties = this.PresentationProperties;
-			file.LineBreakProperties = this.LineBreakProperties.Clone(file);
+			if (this.LineBreakProperties != null)
+				file.LineBreakProperties = this.LineBreakProperties.Clone(file);
 			file.AttachmentProperties = this.AttachmentProperties.Clone(file);
 			file.BannerProperties = this.BannerProperties.Clone(file);
 			file.FileCard = this.FileCard.Clone(file);
