@@ -215,6 +215,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							link.fileName = Path.GetFileName(libraryFile.OriginalPath);
 							link.fileExtension = Path.GetExtension(libraryFile.OriginalPath).Replace(".", string.Empty).ToLower();
 							link.fileDate = File.GetLastWriteTime(libraryFile.OriginalPath).ToString("MM/dd/yyyy hh:mm:ss tt");
+							link.fileSize = (int)new FileInfo(libraryFile.OriginalPath).Length;
 						}
 						else
 						{

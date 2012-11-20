@@ -100,6 +100,7 @@
           <xsd:element name="fileName" type="xsd:string" />
           <xsd:element name="fileExtension" type="xsd:string" />
           <xsd:element name="fileDate" type="xsd:string" />
+          <xsd:element name="fileSize" type="xsd:int" />
           <xsd:element name="originalFormat" type="xsd:string" />
           <xsd:element name="note" type="xsd:string" />
           <xsd:element name="isBold" type="xsd:boolean" />
