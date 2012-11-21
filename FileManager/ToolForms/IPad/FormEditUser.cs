@@ -14,6 +14,7 @@ namespace FileManager.ToolForms.IPad
 		public FormEditUser(bool newUser, string[] existedUsers)
 		{
 			InitializeComponent();
+
 			_newUser = newUser;
 			_existedUsers.AddRange(existedUsers);
 
@@ -75,7 +76,7 @@ namespace FileManager.ToolForms.IPad
 
 		private void FormEditUser_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
+			if (this.DialogResult == DialogResult.OK)
 			{
 				textEditLogin.Focus();
 				textEditFirstName.Focus();
@@ -90,6 +91,14 @@ namespace FileManager.ToolForms.IPad
 						e.Cancel = true;
 				}
 			}
+		}
+	}
+
+	class ValidatableTabControl : DevExpress.XtraTab.XtraTabControl
+	{
+		public ValidatableTabControl()
+		{
+			this.SetStyle(ControlStyles.ContainerControl, true);
 		}
 	}
 }

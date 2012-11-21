@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
 			this.buttonEditSource = new DevExpress.XtraEditors.ButtonEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.laSource = new System.Windows.Forms.Label();
 			this.laDestination = new System.Windows.Forms.Label();
 			this.buttonEditDestination = new DevExpress.XtraEditors.ButtonEdit();
@@ -44,7 +43,7 @@
 			// 
 			// defaultLookAndFeel
 			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
+			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
 			// buttonEditSource
 			// 

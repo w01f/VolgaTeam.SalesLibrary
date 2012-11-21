@@ -495,7 +495,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string[] libraryIds, out string message)
 		{
 			message = string.Empty;
 			IPadAdminService.AdminControllerService client = GetAdminClient();
@@ -505,7 +505,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					string sessionKey = client.getSessionKey(this.Login, this.Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email);
+						client.setUser(sessionKey, login, password, firstName, lastName, email, libraryIds);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -610,6 +610,39 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public VideoInfo(IPreviewContainer parent)
 		{
 			this.Parent = parent;
+		}
+	}
+}
+
+namespace SalesDepot.CoreObjects.IPadAdminService
+{
+	public partial class UserRecord
+	{
+		public string FullName
+		{
+			get { return (this.firstName + " " + this.lastName).Trim(); }
+		}
+
+		public string AssignedLibraries
+		{
+			get
+			{
+				string result = string.Empty;
+				if (this.libraries != null)
+				{
+					result = "Assigned Libraries: ";
+					if (this.libraries.Any(x => !x.selected))
+					{
+						if (this.libraries.Any(x => x.selected))
+							result += string.Join(", ", this.libraries.Where(x => x.selected).Select(x => x.name).ToArray());
+						else
+							result += "None";
+					}
+					else
+						result += "ALL";
+				}
+				return result;
+			}
 		}
 	}
 }

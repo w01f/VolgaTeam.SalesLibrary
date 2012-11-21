@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
@@ -309,6 +310,9 @@ namespace FileManager.PresentationClasses.IPad
 						formEdit.textEditFirstName.EditValue = userRecord.firstName;
 						formEdit.textEditLastName.EditValue = userRecord.lastName;
 						formEdit.textEditEmail.EditValue = userRecord.email;
+						formEdit.checkedListBoxLibraries.Items.Clear();
+						foreach (var library in userRecord.libraries)
+							formEdit.checkedListBoxLibraries.Items.Add(library.id, library.name, library.selected ? CheckState.Checked : CheckState.Unchecked, true);
 						if (formEdit.ShowDialog() == DialogResult.OK)
 						{
 							string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
@@ -316,6 +320,9 @@ namespace FileManager.PresentationClasses.IPad
 							string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
 							string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 							string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+							List<string> libraryIds = new List<string>();
+							foreach (CheckedListBoxItem libraryItem in formEdit.checkedListBoxLibraries.CheckedItems)
+								libraryIds.Add(libraryItem.Value.ToString());
 							using (ToolForms.FormProgress form = new ToolForms.FormProgress())
 							{
 								FormMain.Instance.ribbonControl.Enabled = false;
@@ -325,7 +332,7 @@ namespace FileManager.PresentationClasses.IPad
 								form.TopMost = true;
 								Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
 								{
-									this.ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, out message);
+									this.ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, libraryIds.ToArray(), out message);
 								}));
 								form.Show();
 								thread.Start();
@@ -389,6 +396,10 @@ namespace FileManager.PresentationClasses.IPad
 			string message = string.Empty;
 			using (ToolForms.IPad.FormEditUser formEdit = new ToolForms.IPad.FormEditUser(true, _users.Select(x => x.login).ToArray()))
 			{
+				formEdit.checkedListBoxLibraries.Items.Clear();
+				if (_users.FirstOrDefault() != null)
+					foreach (var library in _users.FirstOrDefault().libraries)
+						formEdit.checkedListBoxLibraries.Items.Add(library.id, library.name, CheckState.Checked, true);
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
 					string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
@@ -396,6 +407,9 @@ namespace FileManager.PresentationClasses.IPad
 					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+					List<string> libraryIds = new List<string>();
+					foreach (CheckedListBoxItem libraryItem in formEdit.checkedListBoxLibraries.CheckedItems)
+						libraryIds.Add(libraryItem.Value.ToString());
 					using (ToolForms.FormProgress form = new ToolForms.FormProgress())
 					{
 						FormMain.Instance.ribbonControl.Enabled = false;
@@ -405,7 +419,7 @@ namespace FileManager.PresentationClasses.IPad
 						form.TopMost = true;
 						Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
 						{
-							this.ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, out message);
+							this.ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, libraryIds.ToArray(), out message);
 						}));
 						form.Show();
 						thread.Start();
