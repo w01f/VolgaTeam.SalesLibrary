@@ -248,6 +248,11 @@ class SiteController extends IsdController
         }
         Yii::app()->end();
     }
+    
+    public function actionEmailLinkSuccess()
+    {
+        $this->renderPartial('emailSuccess', array(), false, true);
+    }    
 
     public function actionEmailLinkGet()
     {

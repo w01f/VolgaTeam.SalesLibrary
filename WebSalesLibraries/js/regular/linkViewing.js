@@ -158,6 +158,44 @@
                             emailBody: content.find('#email-body').val(),
                             expiresIn: content.find('#expires-in').val()
                         },
+                        success: function(){
+                            $.fancybox.close();
+                            $.ajax({
+                                type: "POST",
+                                url: "site/emailLinkSuccess",
+                                data: {},
+                                beforeSend: function(){
+                                    $.showOverlayLight();
+                                },
+                                complete: function(){
+                                    $.hideOverlayLight();
+                                },
+                                success: function(msg){
+                                    var content = $(msg);
+                                    content.find('#accept').off('click');
+                                    content.find('#accept').on('click',function(){
+                                        $.fancybox.close();
+                                    });                    
+                                    $.fancybox({
+                                        content: content,
+                                        title: title,
+                                        openEffect  : 'none',
+                                        closeEffect	: 'none',
+                                        helpers : {
+                                            overlay : {
+                                                css : {
+                                                    'background' : 'rgba(224, 224, 224, 0.8)'
+                                                }
+                                            }
+                                        }
+                                    });                
+                                },
+                                error: function(){
+                                },            
+                                async: true,
+                                dataType: 'html'                        
+                            });
+                        },
                         complete: function(){
                             $.fancybox.close();
                         },

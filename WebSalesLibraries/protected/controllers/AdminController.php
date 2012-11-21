@@ -8,6 +8,7 @@ class AdminController extends CController
                 'class' => 'CWebServiceAction',
                 'classMap' => array(
                     'UserRecord' => 'UserRecord',
+                    'Library' => 'Library',
                 ),
             ),
         );
@@ -49,12 +50,13 @@ class AdminController extends CController
      * @param string First Name
      * @param string Last Name 
      * @param string Email
-     * @param string Temporary password expirartion date
+     * @param string[] assigned library ids
      * @soap
      */
-    public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email)
+    public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $libraryIds)
     {
-        $newUser = FALSE;
+        $newUser = false;
+        $resetPassword = false;
         if ($this->authenticateBySession($sessionKey))
         {
             $user = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
@@ -70,10 +72,16 @@ class AdminController extends CController
             if ($password !== '')
             {
                 $user->password = md5($password);
+                $resetPassword = true;
             }
             $user->save();
+            
+            UserLibraryStorage::assignLibrariesForUser($login, $libraryIds);
 
-            ResetPasswordStorage::resetPasswordForUser($login,$password,$newUser);
+            if ($resetPassword)
+                ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser);
+
+            Yii::app()->cacheDB->flush();
         }
     }
 
@@ -104,10 +112,27 @@ class AdminController extends CController
                 $user->firstName = $userRecord->first_name;
                 $user->lastName = $userRecord->last_name;
                 $user->email = $userRecord->email;
+
+                $assignedLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userRecord->id);
+                if (isset($assignedLibraryIds))
+                {
+                    $libraryRecords = LibraryStorage::model()->findAll();
+                    if (isset($libraryRecords))
+                    {
+                        foreach ($libraryRecords as $libraryRecord)
+                        {
+                            $library = new Library();
+                            $library->id = $libraryRecord->id;
+                            $library->name = $libraryRecord->name;
+                            $library->selected = in_array($libraryRecord->id, $assignedLibraryIds);
+                            $user->libraries[] = $library;
+                        }
+                    }
+                }
                 $users[] = $user;
             }
-            return $users;
         }
+        return $users;
     }
 
 }

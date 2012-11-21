@@ -175,13 +175,14 @@
                 $('.res-selector a').on('click',function(){
                     if($('a.low-res-button').hasClass('ui-btn-active'))
                     {
-                        $('.file-size.regular').show();
-                        $('.file-size.phone').hide();
+                        $('.file-size.regular').hide();
+                        $('.file-size.phone').show();                        
+
                     }
                     else
                     {
-                        $('.file-size.regular').hide();
-                        $('.file-size.phone').show();
+                        $('.file-size.regular').show();
+                        $('.file-size.phone').hide();                        
                     }
                 });
                 

@@ -17,8 +17,8 @@
             (function($){
                 $(document).ready(function() 
                 {
-                    $('a#view-dialog-link').fancybox();
-                    $('a#video-link').on('click',function(){
+                    $('a.view-dialog-link').fancybox();
+                    $('a.video-link').on('click',function(){
                         $.viewSelectedFormat($(this), false);
                     } );
                 });
@@ -28,10 +28,10 @@
     <body>
         <span>Billy Byrd Sent you this Video Link to preview.</span>
         <br>
+        <h2><?php echo $link->name; ?></h2>
         <br>
-        <span>Click this link to play the MP4 file:</span>
-        <a id="video-link" href="#">
-            <span><?php echo $link->fileName; ?></span>
+        <a class="video-link" href="#">
+            <h3>MP4 (for iPads and Google Chrome)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
                 <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
@@ -43,10 +43,36 @@
                 <?php endif; ?>
             </span>
         </a>
+        <a class="video-link" href="#">
+            <h3>WMV (for Internet Explorer)</h3>
+            <span class ="service-data" style="display: none;">
+                <div class ="link-id"><?php echo $link->id; ?></div>
+                <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
+                <div class ="file-type"><?php echo $link->originalFormat; ?></div>
+                <div class ="view-type"><?php echo 'video'; ?></div>
+                <?php $viewLinks = $link->getViewSource('video'); ?>
+                <?php if (isset($viewLinks)): ?>
+                    <div class ="links"><?php echo json_encode($viewLinks); ?></div>
+                <?php endif; ?>
+            </span>
+        </a>        
+        <a class="video-link" href="#">
+            <h3>OGV (for Firefox)</h3>
+            <span class ="service-data" style="display: none;">
+                <div class ="link-id"><?php echo $link->id; ?></div>
+                <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
+                <div class ="file-type"><?php echo $link->originalFormat; ?></div>
+                <div class ="view-type"><?php echo 'ogv'; ?></div>
+                <?php $viewLinks = $link->getViewSource('ogv'); ?>
+                <?php if (isset($viewLinks)): ?>
+                    <div class ="links"><?php echo json_encode($viewLinks); ?></div>
+                <?php endif; ?>
+            </span>
+        </a>                
         <?php if (isset($expiresIn)): ?>
             <br>
             <br>
-            <span>This link will expire in <?php echo $expiresIn; ?> days.</span>
+            <span><i>This link will expire in <?php echo $expiresIn; ?> days.</i></span>
         <?php endif; ?>        
         <!--  View dialog hidden part  -->
         <div>

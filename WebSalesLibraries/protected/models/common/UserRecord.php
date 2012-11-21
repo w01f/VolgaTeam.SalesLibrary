@@ -27,6 +27,11 @@ class UserRecord
      * @soap
      */        
     public $email;
+    /**
+     * @var Library[]
+     * @soap
+     */
+    public $libraries;    
 }
 
 ?>

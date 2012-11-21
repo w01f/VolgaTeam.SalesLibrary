@@ -13,7 +13,6 @@ class Library
     public $name;
     public $groupId;
     public $order;
-    public $selected;
     public $storagePath;
     public $storageLink;
     public $logoPath;
@@ -33,6 +32,11 @@ class Library
      * @soap
      */
     public $previewContainers;
+    /**
+     * @var boolean selected
+     * @soap
+     */
+    public $selected;
     public function load()
     {
         foreach (LibraryPageStorage::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
