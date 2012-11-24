@@ -30,11 +30,12 @@ class UpdateDataCommand extends CConsoleCommand
                     {
                         $library = CJSON::decode($storageContent);
                         $library['name'] = $libraryName;
+                        $libraryId = $library['id'];
+                        $libraryIds[] = $libraryId;
                         $updated = LibraryStorage::updateData($library, $sourceDate, $storagePath);
                         if ($updated)
                         {
                             echo "Updating HTML cache for " . $libraryName . "...\n";
-                            $libraryId = $library['id'];
                             $library = new Library();
                             $library->name = $libraryName;
                             $library->id = $libraryId;
@@ -58,6 +59,23 @@ class UpdateDataCommand extends CConsoleCommand
                     }
                 }
             }
+        }
+
+        if (isset($libraryIds))
+        {
+            $libraryRecords = LibraryStorage::model()->findAll();
+            if (isset($libraryRecords))
+                foreach ($libraryRecords as $libraryRecord)
+                    if (!in_array($libraryRecord->id, $libraryIds))
+                    {
+                        UserLibraryStorage::model()->deleteAll('id_library = ?', array($libraryRecord->id));
+                        LibraryStorage::clearData($libraryRecord->id);
+                        LinkStorage::clearByLibrary($libraryRecord->id);
+                        FolderStorage::clearByLibrary($libraryRecord->id);
+                        LibraryPageStorage::clearByLibrary($libraryRecord->id);
+                        $libraryRecord->delete();
+                        Yii::app()->cacheDB->flush();
+                    }
         }
 
         LibraryGroupStorage::clearData();
