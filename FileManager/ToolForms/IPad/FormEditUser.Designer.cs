@@ -104,7 +104,7 @@
 			this.textEditLogin.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
 			this.textEditLogin.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.textEditLogin.Properties.NullText = "Type...";
-			this.textEditLogin.Size = new System.Drawing.Size(187, 22);
+			this.textEditLogin.Size = new System.Drawing.Size(279, 22);
 			this.textEditLogin.StyleController = this.styleController;
 			this.textEditLogin.TabIndex = 1;
 			this.textEditLogin.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -125,7 +125,7 @@
 			this.textEditFirstName.Location = new System.Drawing.Point(94, 45);
 			this.textEditFirstName.Name = "textEditFirstName";
 			this.textEditFirstName.Properties.NullText = "Type...";
-			this.textEditFirstName.Size = new System.Drawing.Size(187, 22);
+			this.textEditFirstName.Size = new System.Drawing.Size(279, 22);
 			this.textEditFirstName.StyleController = this.styleController;
 			this.textEditFirstName.TabIndex = 3;
 			this.textEditFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -137,7 +137,7 @@
 			this.textEditLastName.Location = new System.Drawing.Point(94, 85);
 			this.textEditLastName.Name = "textEditLastName";
 			this.textEditLastName.Properties.NullText = "Type...";
-			this.textEditLastName.Size = new System.Drawing.Size(187, 22);
+			this.textEditLastName.Size = new System.Drawing.Size(279, 22);
 			this.textEditLastName.StyleController = this.styleController;
 			this.textEditLastName.TabIndex = 5;
 			this.textEditLastName.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -160,7 +160,7 @@
 			this.textEditEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditEmail.Properties.NullText = "Type...";
-			this.textEditEmail.Size = new System.Drawing.Size(187, 22);
+			this.textEditEmail.Size = new System.Drawing.Size(279, 22);
 			this.textEditEmail.StyleController = this.styleController;
 			this.textEditEmail.TabIndex = 7;
 			this.textEditEmail.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -204,7 +204,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(63, 244);
+			this.buttonXSave.Location = new System.Drawing.Point(109, 314);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(75, 33);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -219,7 +219,7 @@
 			this.buttonXCancel.CausesValidation = false;
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(165, 244);
+			this.buttonXCancel.Location = new System.Drawing.Point(211, 314);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -237,7 +237,7 @@
 			this.buttonEditPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Generate new password", null, null, true)});
 			this.buttonEditPassword.Properties.NullText = "Type...";
-			this.buttonEditPassword.Size = new System.Drawing.Size(187, 22);
+			this.buttonEditPassword.Size = new System.Drawing.Size(279, 22);
 			this.buttonEditPassword.StyleController = this.styleController;
 			this.buttonEditPassword.TabIndex = 13;
 			this.buttonEditPassword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditPassword_ButtonClick);
@@ -264,7 +264,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(2, 2);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.SelectedTabPage = this.xtraTabPageUser;
-			this.xtraTabControl.Size = new System.Drawing.Size(294, 236);
+			this.xtraTabControl.Size = new System.Drawing.Size(391, 306);
 			this.xtraTabControl.TabIndex = 14;
 			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageUser,
@@ -284,14 +284,14 @@
 			this.xtraTabPageUser.Controls.Add(this.laEmail);
 			this.xtraTabPageUser.Controls.Add(this.textEditLastName);
 			this.xtraTabPageUser.Name = "xtraTabPageUser";
-			this.xtraTabPageUser.Size = new System.Drawing.Size(292, 210);
+			this.xtraTabPageUser.Size = new System.Drawing.Size(389, 280);
 			this.xtraTabPageUser.Text = "User";
 			// 
 			// xtraTabPageLibraries
 			// 
 			this.xtraTabPageLibraries.Controls.Add(this.checkedListBoxLibraries);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(292, 210);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(389, 280);
 			this.xtraTabPageLibraries.Text = "Assigned Libraries";
 			// 
 			// checkedListBoxLibraries
@@ -304,7 +304,7 @@
 			this.checkedListBoxLibraries.Location = new System.Drawing.Point(0, 0);
 			this.checkedListBoxLibraries.Name = "checkedListBoxLibraries";
 			this.checkedListBoxLibraries.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxLibraries.Size = new System.Drawing.Size(292, 210);
+			this.checkedListBoxLibraries.Size = new System.Drawing.Size(389, 280);
 			this.checkedListBoxLibraries.TabIndex = 1;
 			// 
 			// FormEditUser
@@ -312,7 +312,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(298, 284);
+			this.ClientSize = new System.Drawing.Size(395, 354);
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXSave);

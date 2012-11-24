@@ -621,20 +621,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public void DeleteDeadLinks(Guid[] deadLinkIdentifiers)
-		{
-			foreach (LibraryFile link in this.DeadLinks.Where(x => deadLinkIdentifiers.Contains(x.Identifier)))
-				link.RemoveFromCollection();
-			ProcessDeadLinks();
-		}
-
-		public void DeleteExpiredLinks(Guid[] expiredLinkIdentifiers)
-		{
-			foreach (LibraryFile link in this.ExpiredLinks.Where(x => expiredLinkIdentifiers.Contains(x.Identifier)))
-				link.RemoveFromCollection();
-			ProcessExpiredLinks();
-		}
-
 		public void NotifyAboutExpiredLinks()
 		{
 			ProcessExpiredLinks();
@@ -670,39 +656,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public void AddPage()
-		{
-			LibraryPage page = new LibraryPage(this);
-			page.Order = this.Pages.Count;
-			this.Pages.Add(page);
-		}
-
-		public void UpPage(int position)
-		{
-			if (position > 0)
-			{
-				this.Pages[position].Order--;
-				this.Pages[position - 1].Order++;
-				this.Pages.Sort((x, y) => x.Order.CompareTo(y.Order));
-			}
-		}
-
-		public void DownPage(int position)
-		{
-			if (position < this.Pages.Count - 1)
-			{
-				this.Pages[position].Order++;
-				this.Pages[position + 1].Order--;
-				this.Pages.Sort((x, y) => x.Order.CompareTo(y.Order));
-			}
-		}
-
-		public void RebuildPagesOrder()
-		{
-			for (int i = 0; i < this.Pages.Count; i++)
-				this.Pages[i].Order = i;
-		}
-
 		public RootFolder GetRootFolder(Guid folderId)
 		{
 			RootFolder folder = this.ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
@@ -710,41 +663,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				return folder;
 			else
 				return this.RootFolder;
-		}
-
-		public void AddExtraRoot()
-		{
-			RootFolder folder = new RootFolder(this);
-			folder.RootId = Guid.NewGuid();
-			folder.Order = this.ExtraFolders.Count;
-			this.ExtraFolders.Add(folder);
-		}
-
-
-		public void UpExtraRoot(int position)
-		{
-			if (position > 0)
-			{
-				this.ExtraFolders[position].Order--;
-				this.ExtraFolders[position - 1].Order++;
-				this.ExtraFolders.Sort((x, y) => x.Order.CompareTo(y.Order));
-			}
-		}
-
-		public void DownExtraRoot(int position)
-		{
-			if (position < this.ExtraFolders.Count - 1)
-			{
-				this.ExtraFolders[position].Order++;
-				this.ExtraFolders[position + 1].Order--;
-				this.ExtraFolders.Sort((x, y) => x.Order.CompareTo(y.Order));
-			}
-		}
-
-		public void RebuildExtraFoldersOrder()
-		{
-			for (int i = 0; i < this.ExtraFolders.Count; i++)
-				this.ExtraFolders[i].Order = i;
 		}
 
 		#region IPreviewStorage Members

@@ -731,7 +731,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			this.ExtraFolders.Add(folder);
 		}
 
-
 		public void UpExtraRoot(int position)
 		{
 			if (position > 0)

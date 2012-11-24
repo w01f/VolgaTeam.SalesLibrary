@@ -28,6 +28,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			this.Password = string.Empty;
 		}
 
+		public IPadManager Clone(ILibrary parent)
+		{
+			IPadManager ipadManager = new IPadManager(parent);
+			ipadManager.Enabled = this.Enabled;
+			ipadManager.SyncDestinationPath = this.SyncDestinationPath;
+			ipadManager.Website = this.Website;
+			ipadManager.Login = this.Login;
+			ipadManager.Password = this.Password;
+			return ipadManager;
+		}
+
 		public string Serialize()
 		{
 			StringBuilder result = new StringBuilder();

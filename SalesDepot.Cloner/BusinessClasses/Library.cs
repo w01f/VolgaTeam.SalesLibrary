@@ -127,8 +127,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.EnableProgramManagerSync = this.EnableProgramManagerSync;
 			library.ProgramManagerLocation = this.ProgramManagerLocation;
 
-			library.OvernightsCalendar = this.OvernightsCalendar;
-			library.IPadManager = this.IPadManager;
+			library.OvernightsCalendar = this.OvernightsCalendar.Clone(library);
+			library.IPadManager = this.IPadManager.Clone(library);
+
+			library.IsConfigured = this.IsConfigured;
 
 			return library;
 		}
@@ -136,6 +138,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public void Init()
 		{
 			Load();
+			ProcessDeadLinks();
+			ProcessExpiredLinks();
 		}
 
 		private void Load()
@@ -488,6 +492,183 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				return this.RootFolder;
 		}
 
+		public void PrepareForRegularSynchronize()
+		{
+			if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+			{
+				this.SyncDate = DateTime.Now;
+				if (this.IsConfigured)
+					Save();
+				if (!this.UseDirectAccess)
+				{
+					GeneratePresentationPreviewFiles();
+					ProcessAttachments();
+					if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+						NotifyAboutExpiredLinks();
+				}
+			}
+		}
+
+		public void PrepareForIPadSynchronize()
+		{
+			if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+				if (!this.UseDirectAccess)
+				{
+					UpdatePreviewContainers();
+					GenerateExtendedPreviewFiles();
+					ProcessAttachments();
+				}
+
+			if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+			{
+				this.IPadManager.SaveJson();
+				this.SaveLight();
+			}
+		}
+
+		private void ProcessDeadLinks()
+		{
+			this.DeadLinks.Clear();
+			foreach (LibraryPage page in this.Pages)
+				foreach (LibraryFolder folder in page.Folders)
+				{
+					foreach (LibraryFile file in folder.Files)
+						file.CheckIfDead();
+					this.DeadLinks.AddRange(folder.Files.Where(x => x.IsDead));
+				}
+		}
+
+		private void ProcessExpiredLinks()
+		{
+			this.ExpiredLinks.Clear();
+			foreach (LibraryPage page in this.Pages)
+				foreach (LibraryFolder folder in page.Folders)
+					this.ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
+		}
+
+		public void ProcessPresentationProperties()
+		{
+			if (InteropClasses.PowerPointHelper.Instance.Connect())
+			{
+				foreach (LibraryPage page in this.Pages)
+					foreach (LibraryFolder folder in page.Folders)
+						foreach (LibraryFile file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
+							file.GetPresentationPrperties();
+				InteropClasses.PowerPointHelper.Instance.Disconnect();
+				this.Save();
+			}
+		}
+
+		public void ProcessAttachments()
+		{
+			List<Guid> actualAttachmentIds = new List<Guid>();
+
+			foreach (LibraryPage page in this.Pages)
+			{
+				foreach (LibraryFolder folder in page.Folders)
+				{
+					foreach (LibraryFile file in folder.Files.Where(x => x.AttachmentProperties.Enable))
+					{
+						if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+						{
+							foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+							{
+								if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+								{
+									if (attachment.IsSourceAvailable)
+									{
+										bool copy = true;
+										if (attachment.IsDestinationAvailable)
+										{
+											DateTime sourceTimeStamp = File.GetLastWriteTime(attachment.OriginalPath);
+											DateTime destinationTimeStamp = File.GetLastWriteTime(attachment.DestinationPath);
+											if (sourceTimeStamp == destinationTimeStamp)
+												copy = false;
+										}
+										else
+										{
+											if (!Directory.Exists(Path.GetDirectoryName(attachment.DestinationPath)))
+												Directory.CreateDirectory(Path.GetDirectoryName(attachment.DestinationPath));
+										}
+										if (copy)
+											try
+											{
+												File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
+											}
+											catch { }
+										actualAttachmentIds.Add(attachment.Identifier);
+									}
+								}
+								else
+									break;
+							}
+						}
+						else
+							break;
+					}
+					if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+						break;
+				}
+				if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+					break;
+			}
+			if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+				this.Save();
+
+			if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+			{
+				DirectoryInfo attachmentRootFolder = new DirectoryInfo(Path.Combine(this.Folder.FullName, Constants.AttachmentsRootFolderName));
+				if (attachmentRootFolder.Exists)
+					foreach (DirectoryInfo subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
+						ToolClasses.SyncManager.DeleteFolder(subFolder);
+			}
+		}
+
+		private void GeneratePresentationPreviewFiles()
+		{
+			foreach (LibraryPage page in this.Pages)
+			{
+				foreach (LibraryFolder folder in page.Folders)
+				{
+					foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
+					{
+						if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+						{
+							if (file.PreviewContainer == null)
+								file.PreviewContainer = new PresentationPreviewContainer(file);
+							file.PreviewContainer.UpdateContent();
+						}
+						else
+							break;
+					}
+					if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+						break;
+				}
+				if (!((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive))
+					break;
+			}
+			if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+				this.Save();
+		}
+
+		private void GenerateExtendedPreviewFiles()
+		{
+			foreach (IPreviewContainer previewContainer in this.PreviewContainers.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other || x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
+			{
+				if ((ToolClasses.Globals.ThreadActive && !ToolClasses.Globals.ThreadAborted) || !ToolClasses.Globals.ThreadActive)
+				{
+					previewContainer.UpdateContent();
+				}
+				else
+					break;
+			}
+		}
+
+		public void NotifyAboutExpiredLinks()
+		{
+			ProcessExpiredLinks();
+		}
+
 		#region IPreviewStorage Members
 		public List<IPreviewContainer> PreviewContainers { get; private set; }
 		public string StoragePath
@@ -512,16 +693,84 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer)
 		{
-			SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
+			IPreviewGenerator previewGenerator = null;
+			switch (previewContainer.Extension.ToUpper())
+			{
+				case ".PPT":
+				case ".PPTX":
+					previewGenerator = new PowerPointPreviewGenerator(previewContainer);
+					break;
+				case ".DOC":
+				case ".DOCX":
+					previewGenerator = new WordPreviewGenerator(previewContainer);
+					break;
+				case ".XLS":
+				case ".XLSX":
+					previewGenerator = new ExcelPreviewGenerator(previewContainer);
+					break;
+				case ".PDF":
+					previewGenerator = new PdfPreviewGenerator(previewContainer);
+					break;
+				case ".MPEG":
+				case ".WMV":
+				case ".AVI":
+				case ".WMZ":
+				case ".MPG":
+				case ".ASF":
+				case ".MOV":
+				case ".MP4":
+				case ".M4V":
+				case ".FLV":
+				case ".OGV":
+				case ".OGM":
+				case ".OGX":
+					previewGenerator = new VideoPreviewGenerator(previewContainer);
+					break;
+			}
 			return previewGenerator;
 		}
 
 		public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
 		{
+			foreach (var file in this.Pages.SelectMany(page => page.Folders.SelectMany(folder => folder.Files.Cast<LibraryFile>())))
+			{
+				if (file.OriginalPath.ToLower().Equals(originalPath.ToLower()))
+					file.LastChanged = lastChanged;
+				var attachment = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
+				if (attachment != null)
+					attachment.LastChanged = lastChanged;
+			}
 		}
 
 		public void UpdatePreviewContainers()
 		{
+			foreach (var previewContainer in this.PreviewContainers)
+			{
+				bool alive = false;
+				foreach (var page in this.Pages)
+				{
+					foreach (var folder in page.Folders)
+					{
+						foreach (LibraryFile file in folder.Files)
+						{
+							alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+							if (!alive)
+								alive = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower())) != null;
+							if (alive)
+								break;
+						}
+						if (alive)
+							break;
+					}
+					if (alive)
+						break;
+				}
+				if (alive) continue;
+				previewContainer.ClearContent();
+				previewContainer.OriginalPath = string.Empty;
+			}
+			this.PreviewContainers.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
+			this.Save();
 		}
 		#endregion
 	}

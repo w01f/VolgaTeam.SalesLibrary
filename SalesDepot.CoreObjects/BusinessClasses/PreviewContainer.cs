@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
@@ -104,6 +105,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public string RelativePath
+		{
+			get
+			{
+				string result = this.OriginalPath.Replace(this.Parent.StoragePath, string.Empty);
+				if (result.Substring(0, 1) == @"\")
+					result = result.Substring(1, result.Length - 1);
+				return result;
+			}
+		}
+
 		public string Extension
 		{
 			get
@@ -123,7 +135,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public IPreviewContainer Clone(IPreviewStorage parent)
 		{
 			IPreviewContainer previewContainer = new UniversalPreviewContainer(parent);
-			previewContainer.OriginalPath = this.OriginalPath;
+			previewContainer.OriginalPath = Path.Combine(parent.StoragePath, this.RelativePath);
 			return previewContainer;
 		}
 
@@ -131,7 +143,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			StringBuilder result = new StringBuilder();
 			result.AppendLine(@"<Identifier>" + this.Identifier + @"</Identifier>");
-			result.AppendLine(@"<OriginalPath>" + this.OriginalPath.Replace(this.Parent.StoragePath, string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</OriginalPath>");
+			result.AppendLine(@"<OriginalPath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</OriginalPath>");
 			return result.ToString();
 		}
 
