@@ -105,7 +105,7 @@
         {
             if(conditionType == 1)
                 conditionType=0;
-            disabled.push(1);
+            disabled.push(2);
         }
         
         var librariesCount = $('#libraries input[type="checkbox"]').length;
@@ -113,7 +113,7 @@
         {
             if(conditionType == 2)
                 conditionType=0;
-            disabled.push(2);
+            disabled.push(3);
         }
         
         $( "#search-control-panel" ).tabs({
@@ -406,13 +406,11 @@
         initLibraries();
         initTabControl();
         
-        $( "#clear-content-file-types-dates-value" ).off('click');
-        $( "#clear-content-file-types-dates-value" ).on('click',function () {
+        $( "#clear-content-dates-value" ).off('click');
+        $( "#clear-content-dates-value" ).on('click',function () {
             $('#condition-content-value').val('');
             
             $('#condition-date-range input').val('');
-            
-            $( '#file-types .search-file-type').trigger('click');
         });      
     }
     

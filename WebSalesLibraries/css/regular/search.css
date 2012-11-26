@@ -14,7 +14,7 @@
 #right-navbar 
 { 
     width: 25%;
-    min-width: 330px;
+    min-width: 340px;
     background: #eee;
     padding: 0px;
     margin: 0px;
@@ -83,14 +83,37 @@
 
 #file-types td
 {
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-top: 13px;
+    padding-bottom: 13px;
 }
 
 #file-types .btn
 {
-    width: 50px;
     padding: 4px;
+    text-align: left;
+}
+
+#file-types .btn .caption
+{
+    text-align: left;
+    height: 100%;
+    border: none;
+}
+
+#file-types .btn .caption td
+{
+    text-align: left;
+    height: 100%;
+    vertical-align: middle;
+    padding: 0px;
+    padding-right: 10px; 
+    padding-left: 10px; 
+}
+
+.icon-search
+{
+    height: auto;
+    width: auto;    
 }
 
 #search-control-panel
@@ -124,51 +147,6 @@
     color: #333 !important;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
     -webkit-font-smoothing: antialiased;
-}
-
-.icon-search-powerpoint
-{
-    background-image: url(../../images/search/search-powerpoint.png);
-    background-position: center center;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-}
-
-.icon-search-word
-{
-    background-image: url(../../images/search/search-word.png);
-    background-position: center center;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-}
-
-.icon-search-excel
-{
-    background-image: url(../../images/search/search-excel.png);
-    background-position: center center;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-}
-
-.icon-search-pdf
-{
-    background-image: url(../../images/search/search-pdf.png);
-    background-position: center center;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
-}
-
-.icon-search-video
-{
-    background-image: url(../../images/search/search-video.png);
-    background-position: center center;
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
 }
 
 .daterangepicker.dropdown-menu.bottom-up:before 

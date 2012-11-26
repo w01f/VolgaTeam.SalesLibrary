@@ -49,21 +49,4 @@
             </td>
         </tr>                        
     </table>
-</div>  
-<div id="search-file-type-container" data-role="collapsible" data-collapsed="true" data-inset="false">
-    <h3>
-        <span class="layout-group-title">File Types:</span>
-    </h3>
-    <fieldset data-role="controlgroup">
-        <input type="checkbox" name="search-file-type-powerpoint" id="search-file-type-powerpoint" class="custom" />
-        <label for="search-file-type-powerpoint">PowerPoint</label>
-        <input type="checkbox" name="search-file-type-word" id="search-file-type-word" class="custom" />
-        <label for="search-file-type-word">Word</label>    
-        <input type="checkbox" name="search-file-type-excel" id="search-file-type-excel" class="custom" />
-        <label for="search-file-type-excel">Excel</label>        
-        <input type="checkbox" name="search-file-type-pdf" id="search-file-type-pdf" class="custom" />
-        <label for="search-file-type-pdf">PDF</label>            
-        <input type="checkbox" name="search-file-type-video" id="search-file-type-video" class="custom" />
-        <label for="search-file-type-video">Video</label>                
-    </fieldset>
 </div>

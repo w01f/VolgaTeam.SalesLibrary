@@ -18,6 +18,11 @@ class SearchController extends IsdController
         $this->renderPartial('searchView', array(), false, true);
     }
 
+    public function actionGetFileTypesView()
+    {
+        $this->renderPartial('fileTypesView', array(), false, true);
+    }
+
     public function actionGetTagsView()
     {
         $categories = new CategoryManager();
@@ -40,7 +45,7 @@ class SearchController extends IsdController
                     $library->selected = in_array($library->id, $checkedLibraryIds);
                 else
                     $library->selected = true;
-        $this->renderPartial('librariesView', array('libraryGroups' => $libraryGroups), false, true);                
+        $this->renderPartial('librariesView', array('libraryGroups' => $libraryGroups), false, true);
     }
 
     public function actionSearchByContent()
@@ -66,7 +71,7 @@ class SearchController extends IsdController
             $categoriesExactMatch = true;
 
         if (isset($fileTypes) && isset($condition) && isset($isSort))
-            $links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile ,$checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort);
+            $links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort);
 
         if (!isset($links))
             $links = null;
@@ -187,4 +192,5 @@ class SearchController extends IsdController
     }
 
 }
+
 ?>
