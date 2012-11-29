@@ -203,6 +203,13 @@
             $('#ribbon').ribbon();  
             $('a#view-dialog-link').fancybox();
             
+            $.cookie("recoverSearchState"+"search-full-tab", false, {
+                expires: (60 * 60 * 24 * 7)
+            });
+            $.cookie("recoverSearchState"+"search-file-card-tab", false, {
+                expires: (60 * 60 * 24 * 7)
+            });
+            
             $('.logout-button').off('click'); 
             $('.logout-button').on('click',function(){
                 $.logout();

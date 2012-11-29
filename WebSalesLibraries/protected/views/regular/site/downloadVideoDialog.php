@@ -9,7 +9,7 @@
         <tr>
             <td colspan="2">
                 <br>
-                <div>Select and click to format you want to download</div>
+                <div>Select the format you want to download to your PC</div>
             </td>
         </tr>                    
         <tr>

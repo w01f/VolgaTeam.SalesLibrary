@@ -112,9 +112,10 @@ class LinkStorage extends CActiveRecord
 
     public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort)
     {
+        $sessionId = 'searchedLinks' . Yii::app()->request->cookies['selectedRibbonTabId']->value;
         if ($isSort == 1)
         {
-            $links = Yii::app()->session['searchedLinks'];
+            $links = Yii::app()->session[$sessionId];
         }
         else
         {
@@ -242,9 +243,9 @@ class LinkStorage extends CActiveRecord
                 }
             }
             if (isset($links))
-                Yii::app()->session['searchedLinks'] = $links;
+                Yii::app()->session[$sessionId] = $links;
             else
-                Yii::app()->session['searchedLinks'] = null;
+                Yii::app()->session[$sessionId] = null;
         }
         if (isset($links))
             if (count($links) > 0)

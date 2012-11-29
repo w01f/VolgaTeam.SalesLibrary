@@ -11,6 +11,7 @@ class Category
      * @soap
      */
     public $tag;
+    public $selected;
     
     public function __construct()
     {

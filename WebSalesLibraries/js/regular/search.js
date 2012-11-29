@@ -39,6 +39,21 @@
             };
             categories.push(category);
         });
+        
+        //Save search state to recover while tabs are switching
+        $.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"), true, {
+            expires: (60 * 60 * 24 * 7)
+        });
+        $.cookie("textCondition"+$.cookie("selectedRibbonTabId"), $('#condition-content-value').val(), {
+            expires: (60 * 60 * 24 * 7)
+        });
+        $.cookie("dateCondition"+$.cookie("selectedRibbonTabId"), $('#condition-date-range input').val(), {
+            expires: (60 * 60 * 24 * 7)
+        });        
+        $.cookie("selectedCategories"+$.cookie("selectedRibbonTabId"), $.toJSON(categories), {
+            expires: (60 * 60 * 24 * 7)
+        });
+        //-----------------------------------------------------
             
         $.ajax({
             type: "POST",
@@ -155,11 +170,12 @@
                 toggleSearchFileCard(onlyFileCards);
             });  
         }
-        else
-            toggleSearchFileCard(0);
     }
     
     var initKeywordFiled = function(){
+        if($.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"))=="true" && $.cookie("textCondition"+$.cookie("selectedRibbonTabId"))!= null)
+            $('#condition-content-value').val($.cookie("textCondition"+$.cookie("selectedRibbonTabId")));
+        
         $( "#clear-content-value" ).off('click');
         $( "#clear-content-value" ).on('click',function () {
             $('#condition-content-value').val('');
@@ -286,6 +302,10 @@
             $('#condition-date-range input').val(start.toString(dateFormat) + ' - ' + end.toString(dateFormat));
         }
         );
+            
+        if($.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"))=="true" && $.cookie("dateCondition"+$.cookie("selectedRibbonTabId"))!= null)
+            $('#condition-date-range input').val($.cookie("dateCondition"+$.cookie("selectedRibbonTabId")));
+            
         $( "#clear-date-range" ).off('click');
         $( "#clear-date-range" ).on('click',function () {
             $('#condition-date-range input').val('');
@@ -410,6 +430,9 @@
         
         $('.clear-button').off('click'); 
         $('.clear-button').on('click',function(){
+            $.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"), false, {
+                expires: (60 * 60 * 24 * 7)
+            });
             $.ajax({
                 type: "POST",
                 url: "search/searchByContent",
@@ -451,6 +474,8 @@
                 initControlPanel();
                 $.updateContentAreaDimensions();
                 $.initSearchGrid();
+                if($.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"))=="true")
+                    $.runSearch(1);
             },
             success: function(msg){
                 $('#content').html(msg);

@@ -5,6 +5,10 @@ class CategoryManager
     public $groups;
     public function loadCategories()
     {
+        $cookieId = 'selectedCategories' . Yii::app()->request->cookies['selectedRibbonTabId']->value;
+        if (isset(Yii::app()->request->cookies[$cookieId]->value))
+            $selectedCategories = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
+
         $categoryRecords = CategoryStorage::getData();
         if (isset($categoryRecords))
         {
@@ -13,6 +17,14 @@ class CategoryManager
                 $category = new Category();
                 $category->category = $categoryRecord->category;
                 $category->tag = $categoryRecord->tag;
+                $category->selected = false;
+                if (isset($selectedCategories))
+                    foreach ($selectedCategories as $selectedCategory)
+                        if ($selectedCategory['category'] == $category->category && $selectedCategory['tag'] == $category->tag)
+                        {
+                            $category->selected = true;
+                            break;
+                        }
                 $this->categories[] = $category;
 
                 if (!(isset($this->groups) && in_array($category->category, $this->groups)))
@@ -27,7 +39,7 @@ class CategoryManager
         {
             foreach ($this->categories as $category)
                 if ($category->category == $group)
-                    $tags[] = $category->tag;
+                    $tags[] = array('tag' => $category->tag, 'selected' => $category->selected);
             if (isset($tags))
                 return $tags;
         }

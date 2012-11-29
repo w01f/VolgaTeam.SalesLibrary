@@ -123,8 +123,8 @@
                         <div>
                             <?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
                                 <label class="checkbox">
-                                    <input type="checkbox" value="<?php echo $group . '------' . $tag; ?>">
-                                    <?php echo $tag; ?>
+                                    <input type="checkbox" value="<?php echo $group . '------' . $tag['tag']; ?>" <?php echo $tag['selected'] ? 'checked="checked"' : '' ?>>
+                                    <?php echo $tag['tag']; ?>
                                 </label>                        
                             <?php endforeach; ?>
                         </div>
