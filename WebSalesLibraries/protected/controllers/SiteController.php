@@ -140,10 +140,21 @@ class SiteController extends IsdController
             $linkRecord = LinkStorage::getLinkById($linkId);
             if (isset($linkRecord))
             {
-                if ($linkRecord->format == 'video')
-                    $this->renderPartial('downloadVideoDialog', array(), false, true);
+                if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4')
+                    $this->renderPartial('downloadVideoDialog', array('format' => $linkRecord->format), false, true);
                 else
                     $this->renderPartial('downloadDialog', array(), false, true);
+            }
+            else
+            {
+                $attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
+                if (isset($attachmentRecord))
+                {
+                    if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'mp4')
+                        $this->renderPartial('downloadVideoDialog', array('format' => $attachmentRecord->format), false, true);
+                    else
+                        $this->renderPartial('downloadDialog', array(), false, true);
+                }
             }
         }
     }
@@ -164,7 +175,7 @@ class SiteController extends IsdController
                 {
                     $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
                     $link->load($linkRecord);
-                    if ($linkRecord->format == 'video')
+                    if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4')
                     {
                         if ($format == 'wmv')
                             $path = $link->filePath;
@@ -173,6 +184,30 @@ class SiteController extends IsdController
                             $previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'mp4'));
                             if (isset($previewRecord))
                                 $path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                $attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
+                if (isset($attachmentRecord))
+                {
+                    $libraryManager = new LibraryManager();
+                    $libraryManager->getLibraries();
+                    $library = $libraryManager->getLibraryById($attachmentRecord->id_library);
+                    if (isset($library))
+                    {
+                        if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'mp4')
+                        {
+                            if ($format == 'wmv')
+                                $path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
+                            else if ($format == 'mp4')
+                            {
+                                $previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, 'mp4'));
+                                if (isset($previewRecord))
+                                    $path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+                            }
                         }
                     }
                 }
@@ -248,11 +283,11 @@ class SiteController extends IsdController
         }
         Yii::app()->end();
     }
-    
+
     public function actionEmailLinkSuccess()
     {
         $this->renderPartial('emailSuccess', array(), false, true);
-    }    
+    }
 
     public function actionEmailLinkGet()
     {

@@ -5,18 +5,26 @@
             <div>Are you SURE you want to Download this file?</div>
         </td>
     </tr>    
-    <tr>
-        <td colspan="2">
-            <br>
-            <div>Select and click to format you want to download</div>
-        </td>
-    </tr>                    
-    <tr>
-        <td colspan="2" class ="buttons-area download-type">
-            <button class="btn active" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/wmv-download.png'; ?>" alt="wmv"/></button>
-            <button class="btn" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/mp4-download.png'; ?>" alt="mp4"/></button>
-        </td>
-    </tr>                        
+    <?php if ($format == 'video'): ?>    
+        <tr>
+            <td colspan="2">
+                <br>
+                <div>Select and click to format you want to download</div>
+            </td>
+        </tr>                    
+        <tr>
+            <td colspan="2" class ="buttons-area download-type">
+                <button class="btn active" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/wmv-download.png'; ?>" alt="wmv"/></button>
+                <button class="btn" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/mp4-download.png'; ?>" alt="mp4"/></button>
+            </td>
+        </tr>                        
+    <?php else: ?>
+        <tr style="display: none;">
+            <td colspan="2" class ="buttons-area download-type">
+                <button class="btn  active" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/mp4-download.png'; ?>" alt="mp4"/></button>
+            </td>
+        </tr>                                
+    <?php endif; ?>
     <tr>
         <td colspan="2">
             <br>

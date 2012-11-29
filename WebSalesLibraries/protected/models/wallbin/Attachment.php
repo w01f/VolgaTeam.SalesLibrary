@@ -102,35 +102,42 @@ class Attachment
                         case 'mobile':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'ie':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'video';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'webkit':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'firefox':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'ogv';
+                            $this->availableFormats[] = 'download';
                             break;
                         case 'opera':
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'tab';
                             $this->availableFormats[] = 'ogv';
+                            $this->availableFormats[] = 'download';
                             break;
                         default:
                             $this->availableFormats[] = 'video';
                             $this->availableFormats[] = 'mp4';
                             $this->availableFormats[] = 'ogv';
                             $this->availableFormats[] = 'tab';
+                            $this->availableFormats[] = 'download';
                             break;
                     }
                     break;
                 case 'mp4':
                     $this->availableFormats[] = 'mp4';
                     $this->availableFormats[] = 'tab';
+                    $this->availableFormats[] = 'download';
                     break;
                 case 'png':
                     $this->availableFormats[] = 'png';
@@ -451,6 +458,7 @@ class Attachment
                         $viewSources[] = array('src' => $this->link, 'href' => $this->link, 'title' => $this->name);
                         break;
                     case 'email':
+                    case 'download':                        
                         $viewSources[] = array('title' => $this->name, 'href' => $this->path);
                         break;
                     case 'mp4':
@@ -481,6 +489,7 @@ class Attachment
                 switch ($format)
                 {
                     case 'email':
+                    case 'download':                        
                         $viewSources[] = array('title' => $this->name, 'href' => $this->path);
                         break;
                     default:
