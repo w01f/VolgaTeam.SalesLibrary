@@ -202,5 +202,10 @@
         {
             $('#ribbon').ribbon();  
             $('a#view-dialog-link').fancybox();
+            
+            $('.logout-button').off('click'); 
+            $('.logout-button').on('click',function(){
+                $.logout();
+            });                    
         });
     })( jQuery );

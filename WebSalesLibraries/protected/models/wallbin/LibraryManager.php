@@ -122,7 +122,7 @@ class LibraryManager
             {
                 $libraryGroup = new LibraryGroup();
                 $libraryGroup->order = 0;
-                $libraryGroup->name = Yii::app()->params['stations_tab']['name'];
+                $libraryGroup->name = Yii::app()->params['stations']['tab_name'];
                 $libraryRecords = LibraryStorage::model()->findAll();
                 if (isset($libraryRecords) && count($libraryRecords) > 0)
                 {

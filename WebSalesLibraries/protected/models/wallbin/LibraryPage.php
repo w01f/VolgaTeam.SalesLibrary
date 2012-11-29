@@ -44,6 +44,11 @@ class LibraryPage
      * @soap
      */
     public $dateModify;
+    /**
+     * @var boolean selected
+     * @soap
+     */
+    public $selected;    
     public $cachedColumnsView;
     public function __construct($library)
     {

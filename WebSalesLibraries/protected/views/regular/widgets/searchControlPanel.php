@@ -3,7 +3,7 @@
         <li><a href="#search-options-basic">Search</a></li>
         <li><a href="#search-options-files">File Type</a></li>        
         <li><a href="#search-options-tags">Tags</a></li>        
-        <li><a href="#search-options-stations"><?php echo Yii::app()->params['stations_tab']['name']; ?></a></li>
+        <li><a href="#search-options-stations"><?php echo Yii::app()->params['stations']['tab_name']; ?></a></li>
     </ul>
     <div id="search-options-basic">
         <div class ="group-panel">
@@ -24,6 +24,8 @@
                 <button type="button" class="btn" id="content-compare-partial">Partial Match</button>
             </div>
         </div>
+        <br>
+        <br>        
         <div class ="group-panel" id="condition-date-panel">
             <div class ="group-title">Date Range:</div>
             <table class="button-edit input-append" id="condition-date-range">
@@ -133,8 +135,8 @@
     </div>    
     <div id="search-options-stations">
         <div class ="group-panel">
-            <button type="button" class="btn btn-block" id="library-select-all">Select All <?php echo Yii::app()->params['stations_tab']['name']; ?></button>
-            <button type="button" class="btn btn-block" id="library-clear-all">Clear All <?php echo Yii::app()->params['stations_tab']['name']; ?></button>
+            <button type="button" class="btn btn-block" id="library-select-all">Select All <?php echo Yii::app()->params['stations']['tab_name']; ?></button>
+            <button type="button" class="btn btn-block" id="library-clear-all">Clear All <?php echo Yii::app()->params['stations']['tab_name']; ?></button>
         </div>                
         <div id="libraries-container">
             <div class="accordion" id="libraries">

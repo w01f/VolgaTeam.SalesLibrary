@@ -9,6 +9,7 @@ class AdminController extends CController
                 'classMap' => array(
                     'UserRecord' => 'UserRecord',
                     'Library' => 'Library',
+                    'LibraryPage' => 'LibraryPage',
                 ),
             ),
         );
@@ -50,10 +51,10 @@ class AdminController extends CController
      * @param string First Name
      * @param string Last Name 
      * @param string Email
-     * @param string[] assigned library ids
+     * @param LibraryPage[] assigned pages
      * @soap
      */
-    public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $libraryIds)
+    public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $assignedPages)
     {
         $newUser = false;
         $resetPassword = false;
@@ -75,8 +76,8 @@ class AdminController extends CController
                 $resetPassword = true;
             }
             $user->save();
-            
-            UserLibraryStorage::assignLibrariesForUser($login, $libraryIds);
+
+            UserLibraryStorage::assignPagesForUser($login, $assignedPages);
 
             if ($resetPassword)
                 ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser);
@@ -114,7 +115,8 @@ class AdminController extends CController
                 $user->email = $userRecord->email;
 
                 $assignedLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userRecord->id);
-                if (isset($assignedLibraryIds))
+                $assignedPageIds = UserLibraryStorage::getPageIdsByUser($userRecord->id);
+                if (isset($assignedLibraryIds) && isset($assignedPageIds))
                 {
                     $libraryRecords = LibraryStorage::model()->findAll();
                     if (isset($libraryRecords))
@@ -125,6 +127,19 @@ class AdminController extends CController
                             $library->id = $libraryRecord->id;
                             $library->name = $libraryRecord->name;
                             $library->selected = in_array($libraryRecord->id, $assignedLibraryIds);
+                            $pageRecords = LibraryPageStorage::model()->findAll('id_library=?', array($libraryRecord->id));
+                            if (isset($pageRecords))
+                            {
+                                foreach ($pageRecords as $pageRecord)
+                                {
+                                    $page = new LibraryPage($library);
+                                    $page->id = $pageRecord->id;
+                                    $page->libraryId = $pageRecord->id_library;
+                                    $page->name = $pageRecord->name;
+                                    $page->selected = in_array($pageRecord->id, $assignedPageIds);
+                                    $library->pages[] = $page;
+                                }
+                            }
                             $user->libraries[] = $library;
                         }
                     }

@@ -40,7 +40,7 @@
     <tr>
         <td class = "link-id-column"><span>Id</span></td>
         <td class = "details-button"><span></span></td>
-        <td class = "library-column"><span>Station</span></td>
+        <td class = "library-column"><span><?php echo Yii::app()->params['stations']['column_name']; ?></span></td>
         <td class = "link-type-column"><span>Type</span></td>
         <td class = "link-name-column"><span>Link</span></td>
         <td class = "link-date-column"><span>Date</span></td>

@@ -66,11 +66,6 @@
             success: function(msg){
                 $('#search-result>div').html('');
                 $('#search-result>div').append(msg);
-                
-                var searchedLinks = $('#links-number-hidden').html();
-                if(searchedLinks!= null)
-                    if(searchedLinks!= '')
-                        $('#search-links-number>span').html('Files: '+ searchedLinks);
             },
             error: function(){
                 $('#search-result>div').html('');
@@ -411,7 +406,36 @@
             $('#condition-content-value').val('');
             
             $('#condition-date-range input').val('');
-        });      
+        });  
+        
+        $('.clear-button').off('click'); 
+        $('.clear-button').on('click',function(){
+            $.ajax({
+                type: "POST",
+                url: "search/searchByContent",
+                data: {
+                    isClear: 1
+                },
+                beforeSend: function(){
+                    $.showOverlayLight();
+                    $('#search-links-number>span').html('');
+                },
+                complete: function(){
+                    $.hideOverlayLight();
+                    $.updateContentAreaDimensions();
+                    $.initSearchGrid();
+                },
+                success: function(msg){
+                    $('#search-result>div').html('');
+                    $('#search-result>div').append(msg);
+                },
+                error: function(){
+                    $('#search-result>div').html('');
+                },            
+                async: true,
+                dataType: 'html'                        
+            });
+        });                    
     }
     
     $.initSearchView = function(){

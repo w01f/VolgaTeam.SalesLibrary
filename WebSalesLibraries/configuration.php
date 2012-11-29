@@ -37,14 +37,16 @@ return CMap::mergeArray(
                 'visible' => true,
                 'name' => 'Search',
                 'position' => 2,
+                'show_money_button' => true,                
             ),
             'search_file_card_tab' => array(
                 'visible' => true,
                 'name' => 'Sales Success Models',
                 'position' => 3,
             ),
-            'stations_tab' => array(
-                'name' => 'Libraries',
+            'stations' => array(
+                'tab_name' => 'Libraries',
+                'column_name' => 'Libraries',
             ),
             'email' => array(
                 'from' => 'billy@adSALESapps.com',
@@ -67,3 +69,4 @@ return CMap::mergeArray(
         ),
         )
 );
+?>

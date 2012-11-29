@@ -187,10 +187,15 @@ class LinkStorage extends CActiveRecord
                 }
             }
 
+            $folderCondition = '1 != 1';
+            $assignedPageIds = UserLibraryStorage::getPageIdsByUser(Yii::app()->user->getid());
+            if (isset($assignedPageIds))
+                $folderCondition = "id_folder in (select id from tbl_folder where id_page in ('" . implode("', '", $assignedPageIds) . "'))";
+
             $linkRecords = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('tbl_link')
-                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ")")
+                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ")")
                 ->queryAll();
             if (isset($linkRecords))
             {
@@ -202,7 +207,7 @@ class LinkStorage extends CActiveRecord
                         $link['id'] = $linkRecord['id'];
                         $link['name'] = $linkRecord['name'];
                         $link['file_name'] = $linkRecord['file_name'];
-                        $link['date_modify'] = isset($dateFile) && $dateFile == 'true'? $linkRecord['file_date']:$linkRecord['date_modify'];
+                        $link['date_modify'] = isset($dateFile) && $dateFile == 'true' ? $linkRecord['file_date'] : $linkRecord['date_modify'];
                         $link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
 
                         $library = $libraryManager->getLibraryById($linkRecord['id_library']);

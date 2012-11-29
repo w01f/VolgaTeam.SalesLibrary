@@ -106,7 +106,7 @@ asort($tabParam);
                         <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
                             <div class="ribbon-section">
                                 <span class="section-title">Logout</span>
-                                <div class="ribbon-button ribbon-button-large" id="logout">
+                                <div class="ribbon-button ribbon-button-large logout-button">
                                     <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
                                     <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
                                     <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
@@ -120,7 +120,11 @@ asort($tabParam);
                         <div class="ribbon-tab" id="search-full-tab">
                             <span class="ribbon-title"><?php echo Yii::app()->params['search_full_tab']['name'] ?></span>
                             <div class="ribbon-section" >
-                                <span class="section-title"><?php echo Yii::app()->params['search_full_tab']['name'] ?></span>
+                                <span class="section-title">
+                                    <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
+                                        <?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
+                                    <?php endif; ?>
+                                </span>
                                 <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
                             </div>
                             <div class="ribbon-section">
@@ -131,14 +135,34 @@ asort($tabParam);
                                     <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/search/search.png' ?>" />
                                 </div>
                             </div>
+                            <?php if (Yii::app()->params['search_full_tab']['show_money_button']): ?>                   
+                                <div class="ribbon-section">
+                                    <span class="section-title">Show Me the MONEY!</span>
+                                    <div class="ribbon-button ribbon-button-large" id="search-file-card-button">
+                                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/search/search-money.png' ?>" />
+                                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/search/search-money.png' ?>" />
+                                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/search/search-money.png' ?>" />
+                                    </div>
+                                </div>                                        
+                            <?php endif; ?>
                             <div class="ribbon-section">
-                                <span class="section-title">Show Me the MONEY!</span>
-                                <div class="ribbon-button ribbon-button-large" id="search-file-card-button">
-                                    <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/search/search-money.png' ?>" />
-                                    <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/search/search-money.png' ?>" />
-                                    <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/search/search-money.png' ?>" />
+                                <span class="section-title">Clear</span>
+                                <div class="ribbon-button ribbon-button-large clear-button">
+                                    <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/clear.png' ?>" />
+                                    <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/clear.png' ?>" />
+                                    <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/clear.png' ?>" />
                                 </div>
-                            </div>                                        
+                            </div>                             
+                            <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
+                                <div class="ribbon-section">
+                                    <span class="section-title">Logout</span>
+                                    <div class="ribbon-button ribbon-button-large logout-button">
+                                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                    </div>
+                                </div> 
+                            <?php endif; ?>                                                    
                         </div>            
                     <?php endif; ?>
                 <?php endif; ?>            
@@ -147,7 +171,11 @@ asort($tabParam);
                         <div class="ribbon-tab" id="search-file-card-tab">
                             <span class="ribbon-title"><?php echo Yii::app()->params['search_file_card_tab']['name'] ?></span>
                             <div class="ribbon-section" >
-                                <span class="section-title"><?php echo Yii::app()->params['search_file_card_tab']['name'] ?></span>
+                                <span class="section-title">
+                                    <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
+                                        <?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
+                                    <?php endif; ?>
+                                </span>
                                 <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
                             </div>
                             <div class="ribbon-section">
@@ -157,7 +185,25 @@ asort($tabParam);
                                     <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/search/search.png' ?>" />
                                     <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/search/search.png' ?>" />
                                 </div>
-                            </div>                    
+                            </div>
+                            <div class="ribbon-section">
+                                <span class="section-title">Clear</span>
+                                <div class="ribbon-button ribbon-button-large clear-button">
+                                    <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/clear.png' ?>" />
+                                    <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/clear.png' ?>" />
+                                    <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/clear.png' ?>" />
+                                </div>
+                            </div>                            
+                            <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
+                                <div class="ribbon-section">
+                                    <span class="section-title">Logout</span>
+                                    <div class="ribbon-button ribbon-button-large logout-button">
+                                        <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                        <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                        <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                    </div>
+                                </div> 
+                            <?php endif; ?>                        
                         </div>            
                     <?php endif; ?>   
                 <?php endif; ?>                        
