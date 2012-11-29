@@ -19,8 +19,8 @@
             </h3>
             <fieldset data-role="controlgroup">
                 <?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
-                    <input class="search-tags-item" type="checkbox" name="<?php echo $group.'------'.$tag; ?>" id="<?php echo $group.'------'.$tag; ?>" class="custom"/>
-                    <label for="<?php echo $group.'------'.$tag; ?>"><?php echo $tag; ?></label>
+                    <input class="search-tags-item" type="checkbox" name="<?php echo $group . '------' . $tag['tag']; ?>" id="<?php echo $group . '------' . $tag['tag']; ?>" class="custom"/>
+                    <label for="<?php echo $group . '------' . $tag['tag']; ?>"><?php echo $tag['tag']; ?></label>
                 <?php endforeach; ?>
             </fieldset>            
         </div>

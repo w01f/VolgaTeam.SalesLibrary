@@ -5,7 +5,9 @@ class CategoryManager
     public $groups;
     public function loadCategories()
     {
-        $cookieId = 'selectedCategories' . Yii::app()->request->cookies['selectedRibbonTabId']->value;
+        $cookieId = 'selectedCategories';
+        if (isset(Yii::app()->request->cookies['selectedRibbonTabId']->value))
+            $cookieId.=Yii::app()->request->cookies['selectedRibbonTabId']->value;
         if (isset(Yii::app()->request->cookies[$cookieId]->value))
             $selectedCategories = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
 
