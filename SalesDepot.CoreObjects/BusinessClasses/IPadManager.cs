@@ -506,7 +506,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string[] libraryIds, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, IPadAdminService.LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
 			IPadAdminService.AdminControllerService client = GetAdminClient();
@@ -516,7 +516,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					string sessionKey = client.getSessionKey(this.Login, this.Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email, libraryIds);
+						client.setUser(sessionKey, login, password, firstName, lastName, email, pages);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

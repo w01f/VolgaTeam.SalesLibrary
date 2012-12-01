@@ -100,11 +100,23 @@
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
+    <Compile Include="PresentationClasses\IPad\IPadUsersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\IPad\IPadUsersControl.Designer.cs">
+      <DependentUpon>IPadUsersControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\IPad\IPadManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\IPad\IPadManagerControl.Designer.cs">
       <DependentUpon>IPadManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabIPadUsersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabIPadUsersControl.Designer.cs">
+      <DependentUpon>TabIPadUsersControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\TabIPadManagerControl.cs">
       <SubType>UserControl</SubType>
@@ -367,9 +379,16 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PresentationClasses\IPad\IPadUsersControl.resx">
+      <DependentUpon>IPadUsersControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\IPad\IPadManagerControl.resx">
       <DependentUpon>IPadManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabIPadUsersControl.resx">
+      <DependentUpon>TabIPadUsersControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabIPadManagerControl.resx">
       <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
@@ -520,6 +539,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\RefreshUsers.png" />
+    <None Include="Resources\DeleteUser.png" />
+    <None Include="Resources\AddUser.png" />
+    <None Include="Resources\ShowInfo.png" />
     <None Include="Resources\CancelSync.png" />
     <None Include="Resources\EditUser.png" />
     <None Include="Resources\ConvertVideo.png" />

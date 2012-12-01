@@ -2,47 +2,6 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:AdminControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="AdminController" targetNamespace="urn:AdminControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="urn:AdminControllerwsdl">
-      <xsd:complexType name="stringArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="UserRecordArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:UserRecord[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="UserRecord">
-        <xsd:all>
-          <xsd:element name="login" type="xsd:string" />
-          <xsd:element name="password" type="xsd:string" />
-          <xsd:element name="firstName" type="xsd:string" />
-          <xsd:element name="lastName" type="xsd:string" />
-          <xsd:element name="email" type="xsd:string" />
-          <xsd:element name="libraries" type="tns:LibraryArray" />
-        </xsd:all>
-      </xsd:complexType>
-      <xsd:complexType name="LibraryArray">
-        <xsd:complexContent mixed="false">
-          <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:Library[]" ref="soap-enc:arrayType" />
-          </xsd:restriction>
-        </xsd:complexContent>
-      </xsd:complexType>
-      <xsd:complexType name="Library">
-        <xsd:all>
-          <xsd:element name="id" type="xsd:string" />
-          <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="pages" type="tns:LibraryPageArray" />
-          <xsd:element name="autoWidgets" type="tns:AutoWidgetArray" />
-          <xsd:element name="previewContainers" type="tns:UniversalPreviewContainerArray" />
-          <xsd:element name="selected" type="xsd:boolean" />
-        </xsd:all>
-      </xsd:complexType>
       <xsd:complexType name="LibraryPageArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
@@ -60,6 +19,7 @@
           <xsd:element name="enableColumns" type="xsd:boolean" />
           <xsd:element name="columns" type="tns:ColumnArray" />
           <xsd:element name="dateModify" type="xsd:string" />
+          <xsd:element name="selected" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryFolderArray">
@@ -181,6 +141,13 @@
           <xsd:element name="notes" type="tns:stringArray" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
       <xsd:complexType name="LinkCategoryArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
@@ -235,6 +202,40 @@
           <xsd:element name="widget" type="xsd:string" />
           <xsd:element name="banner" type="tns:Banner" />
           <xsd:element name="dateModify" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="UserRecordArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UserRecord[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UserRecord">
+        <xsd:all>
+          <xsd:element name="login" type="xsd:string" />
+          <xsd:element name="password" type="xsd:string" />
+          <xsd:element name="firstName" type="xsd:string" />
+          <xsd:element name="lastName" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="libraries" type="tns:LibraryArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:Library[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="Library">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="pages" type="tns:LibraryPageArray" />
+          <xsd:element name="autoWidgets" type="tns:AutoWidgetArray" />
+          <xsd:element name="previewContainers" type="tns:UniversalPreviewContainerArray" />
+          <xsd:element name="selected" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="AutoWidgetArray">
@@ -293,7 +294,7 @@
     <wsdl:part name="firstName" type="xsd:string" />
     <wsdl:part name="lastName" type="xsd:string" />
     <wsdl:part name="email" type="xsd:string" />
-    <wsdl:part name="libraryIds" type="tns:stringArray" />
+    <wsdl:part name="assignedPages" type="tns:LibraryPageArray" />
   </wsdl:message>
   <wsdl:message name="setUserResponse" />
   <wsdl:message name="deleteUserRequest">

@@ -29,7 +29,18 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			this.gridViewPages = new DevExpress.XtraGrid.Views.Grid.GridView();
+			this.gridColumnPageId = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnPageSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.repositoryItemCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+			this.gridColumnPageName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridControlLibraries = new DevExpress.XtraGrid.GridControl();
+			this.gridViewLibraries = new DevExpress.XtraGrid.Views.Grid.GridView();
+			this.gridColumnLibraryId = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnLibrarySelected = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnLibraryName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.laLogin = new System.Windows.Forms.Label();
@@ -50,7 +61,13 @@
 			this.xtraTabControl = new FileManager.ToolForms.IPad.ValidatableTabControl();
 			this.xtraTabPageUser = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageLibraries = new DevExpress.XtraTab.XtraTabPage();
-			this.checkedListBoxLibraries = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.pnAssignedLibraries = new System.Windows.Forms.Panel();
+			this.buttonXLibrariesClearAll = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXLibrariesSelectAll = new DevComponents.DotNetBar.ButtonX();
+			((System.ComponentModel.ISupportInitialize)(this.gridViewPages)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridControlLibraries)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridViewLibraries)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditLogin.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFirstName.Properties)).BeginInit();
@@ -64,8 +81,165 @@
 			this.xtraTabControl.SuspendLayout();
 			this.xtraTabPageUser.SuspendLayout();
 			this.xtraTabPageLibraries.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxLibraries)).BeginInit();
+			this.pnAssignedLibraries.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// gridViewPages
+			// 
+			this.gridViewPages.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewPages.Appearance.FocusedCell.Options.UseFont = true;
+			this.gridViewPages.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewPages.Appearance.FocusedRow.Options.UseFont = true;
+			this.gridViewPages.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewPages.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewPages.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewPages.Appearance.Row.Options.UseFont = true;
+			this.gridViewPages.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewPages.Appearance.SelectedRow.Options.UseFont = true;
+			this.gridViewPages.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnPageId,
+            this.gridColumnPageSelected,
+            this.gridColumnPageName});
+			this.gridViewPages.GridControl = this.gridControlLibraries;
+			this.gridViewPages.Name = "gridViewPages";
+			this.gridViewPages.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewPages.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewPages.OptionsBehavior.AutoPopulateColumns = false;
+			this.gridViewPages.OptionsBehavior.AutoSelectAllInEditor = false;
+			this.gridViewPages.OptionsBehavior.AutoUpdateTotalSummary = false;
+			this.gridViewPages.OptionsCustomization.AllowColumnMoving = false;
+			this.gridViewPages.OptionsCustomization.AllowColumnResizing = false;
+			this.gridViewPages.OptionsCustomization.AllowFilter = false;
+			this.gridViewPages.OptionsCustomization.AllowGroup = false;
+			this.gridViewPages.OptionsCustomization.AllowQuickHideColumns = false;
+			this.gridViewPages.OptionsCustomization.AllowSort = false;
+			this.gridViewPages.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.gridViewPages.OptionsSelection.EnableAppearanceFocusedRow = false;
+			this.gridViewPages.OptionsSelection.EnableAppearanceHideSelection = false;
+			this.gridViewPages.OptionsView.ShowColumnHeaders = false;
+			this.gridViewPages.OptionsView.ShowGroupPanel = false;
+			this.gridViewPages.OptionsView.ShowHorzLines = false;
+			this.gridViewPages.OptionsView.ShowIndicator = false;
+			this.gridViewPages.OptionsView.ShowVertLines = false;
+			this.gridViewPages.RowHeight = 35;
+			// 
+			// gridColumnPageId
+			// 
+			this.gridColumnPageId.Caption = "Id";
+			this.gridColumnPageId.FieldName = "id";
+			this.gridColumnPageId.Name = "gridColumnPageId";
+			// 
+			// gridColumnPageSelected
+			// 
+			this.gridColumnPageSelected.Caption = "Selected";
+			this.gridColumnPageSelected.ColumnEdit = this.repositoryItemCheckEdit;
+			this.gridColumnPageSelected.FieldName = "selected";
+			this.gridColumnPageSelected.Name = "gridColumnPageSelected";
+			this.gridColumnPageSelected.OptionsColumn.FixedWidth = true;
+			this.gridColumnPageSelected.Visible = true;
+			this.gridColumnPageSelected.VisibleIndex = 0;
+			this.gridColumnPageSelected.Width = 30;
+			// 
+			// repositoryItemCheckEdit
+			// 
+			this.repositoryItemCheckEdit.AutoHeight = false;
+			this.repositoryItemCheckEdit.Name = "repositoryItemCheckEdit";
+			this.repositoryItemCheckEdit.CheckedChanged += new System.EventHandler(this.RepositoryItemCheckEditCheckedChanged);
+			// 
+			// gridColumnPageName
+			// 
+			this.gridColumnPageName.Caption = "Name";
+			this.gridColumnPageName.FieldName = "name";
+			this.gridColumnPageName.Name = "gridColumnPageName";
+			this.gridColumnPageName.OptionsColumn.AllowEdit = false;
+			this.gridColumnPageName.OptionsColumn.ReadOnly = true;
+			this.gridColumnPageName.Visible = true;
+			this.gridColumnPageName.VisibleIndex = 1;
+			// 
+			// gridControlLibraries
+			// 
+			this.gridControlLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
+			gridLevelNode1.LevelTemplate = this.gridViewPages;
+			gridLevelNode1.RelationName = "Pages";
+			this.gridControlLibraries.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1});
+			this.gridControlLibraries.Location = new System.Drawing.Point(0, 46);
+			this.gridControlLibraries.MainView = this.gridViewLibraries;
+			this.gridControlLibraries.Name = "gridControlLibraries";
+			this.gridControlLibraries.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit});
+			this.gridControlLibraries.Size = new System.Drawing.Size(375, 497);
+			this.gridControlLibraries.TabIndex = 0;
+			this.gridControlLibraries.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewLibraries,
+            this.gridViewPages});
+			// 
+			// gridViewLibraries
+			// 
+			this.gridViewLibraries.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewLibraries.Appearance.FocusedCell.Options.UseFont = true;
+			this.gridViewLibraries.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewLibraries.Appearance.FocusedRow.Options.UseFont = true;
+			this.gridViewLibraries.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewLibraries.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewLibraries.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewLibraries.Appearance.Row.Options.UseFont = true;
+			this.gridViewLibraries.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
+			this.gridViewLibraries.Appearance.SelectedRow.Options.UseFont = true;
+			this.gridViewLibraries.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnLibraryId,
+            this.gridColumnLibrarySelected,
+            this.gridColumnLibraryName});
+			this.gridViewLibraries.GridControl = this.gridControlLibraries;
+			this.gridViewLibraries.Name = "gridViewLibraries";
+			this.gridViewLibraries.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewLibraries.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
+			this.gridViewLibraries.OptionsBehavior.AutoPopulateColumns = false;
+			this.gridViewLibraries.OptionsBehavior.AutoSelectAllInEditor = false;
+			this.gridViewLibraries.OptionsBehavior.AutoUpdateTotalSummary = false;
+			this.gridViewLibraries.OptionsCustomization.AllowColumnMoving = false;
+			this.gridViewLibraries.OptionsCustomization.AllowColumnResizing = false;
+			this.gridViewLibraries.OptionsCustomization.AllowFilter = false;
+			this.gridViewLibraries.OptionsCustomization.AllowGroup = false;
+			this.gridViewLibraries.OptionsCustomization.AllowQuickHideColumns = false;
+			this.gridViewLibraries.OptionsCustomization.AllowSort = false;
+			this.gridViewLibraries.OptionsDetail.AllowOnlyOneMasterRowExpanded = true;
+			this.gridViewLibraries.OptionsDetail.ShowDetailTabs = false;
+			this.gridViewLibraries.OptionsSelection.EnableAppearanceFocusedCell = false;
+			this.gridViewLibraries.OptionsSelection.EnableAppearanceFocusedRow = false;
+			this.gridViewLibraries.OptionsSelection.EnableAppearanceHideSelection = false;
+			this.gridViewLibraries.OptionsView.ShowColumnHeaders = false;
+			this.gridViewLibraries.OptionsView.ShowGroupPanel = false;
+			this.gridViewLibraries.OptionsView.ShowIndicator = false;
+			this.gridViewLibraries.RowHeight = 35;
+			// 
+			// gridColumnLibraryId
+			// 
+			this.gridColumnLibraryId.Caption = "Id";
+			this.gridColumnLibraryId.FieldName = "id";
+			this.gridColumnLibraryId.Name = "gridColumnLibraryId";
+			// 
+			// gridColumnLibrarySelected
+			// 
+			this.gridColumnLibrarySelected.Caption = "Selected";
+			this.gridColumnLibrarySelected.ColumnEdit = this.repositoryItemCheckEdit;
+			this.gridColumnLibrarySelected.FieldName = "selected";
+			this.gridColumnLibrarySelected.Name = "gridColumnLibrarySelected";
+			this.gridColumnLibrarySelected.OptionsColumn.FixedWidth = true;
+			this.gridColumnLibrarySelected.Visible = true;
+			this.gridColumnLibrarySelected.VisibleIndex = 0;
+			this.gridColumnLibrarySelected.Width = 30;
+			// 
+			// gridColumnLibraryName
+			// 
+			this.gridColumnLibraryName.Caption = "Name";
+			this.gridColumnLibraryName.FieldName = "name";
+			this.gridColumnLibraryName.Name = "gridColumnLibraryName";
+			this.gridColumnLibraryName.OptionsColumn.AllowEdit = false;
+			this.gridColumnLibraryName.OptionsColumn.ReadOnly = true;
+			this.gridColumnLibraryName.Visible = true;
+			this.gridColumnLibraryName.VisibleIndex = 1;
+			this.gridColumnLibraryName.Width = 355;
 			// 
 			// defaultLookAndFeel
 			// 
@@ -97,6 +271,8 @@
 			// 
 			// textEditLogin
 			// 
+			this.textEditLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditLogin, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditLogin, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditLogin.Location = new System.Drawing.Point(94, 8);
@@ -104,7 +280,7 @@
 			this.textEditLogin.Properties.AppearanceDisabled.ForeColor = System.Drawing.Color.Black;
 			this.textEditLogin.Properties.AppearanceDisabled.Options.UseForeColor = true;
 			this.textEditLogin.Properties.NullText = "Type...";
-			this.textEditLogin.Size = new System.Drawing.Size(279, 22);
+			this.textEditLogin.Size = new System.Drawing.Size(265, 22);
 			this.textEditLogin.StyleController = this.styleController;
 			this.textEditLogin.TabIndex = 1;
 			this.textEditLogin.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -120,24 +296,28 @@
 			// 
 			// textEditFirstName
 			// 
+			this.textEditFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditFirstName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditFirstName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditFirstName.Location = new System.Drawing.Point(94, 45);
 			this.textEditFirstName.Name = "textEditFirstName";
 			this.textEditFirstName.Properties.NullText = "Type...";
-			this.textEditFirstName.Size = new System.Drawing.Size(279, 22);
+			this.textEditFirstName.Size = new System.Drawing.Size(265, 22);
 			this.textEditFirstName.StyleController = this.styleController;
 			this.textEditFirstName.TabIndex = 3;
 			this.textEditFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
 			// 
 			// textEditLastName
 			// 
+			this.textEditLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditLastName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditLastName, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditLastName.Location = new System.Drawing.Point(94, 85);
 			this.textEditLastName.Name = "textEditLastName";
 			this.textEditLastName.Properties.NullText = "Type...";
-			this.textEditLastName.Size = new System.Drawing.Size(279, 22);
+			this.textEditLastName.Size = new System.Drawing.Size(265, 22);
 			this.textEditLastName.StyleController = this.styleController;
 			this.textEditLastName.TabIndex = 5;
 			this.textEditLastName.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -153,6 +333,8 @@
 			// 
 			// textEditEmail
 			// 
+			this.textEditEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.textEditEmail.Location = new System.Drawing.Point(94, 126);
@@ -160,7 +342,7 @@
 			this.textEditEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditEmail.Properties.NullText = "Type...";
-			this.textEditEmail.Size = new System.Drawing.Size(279, 22);
+			this.textEditEmail.Size = new System.Drawing.Size(265, 22);
 			this.textEditEmail.StyleController = this.styleController;
 			this.textEditEmail.TabIndex = 7;
 			this.textEditEmail.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
@@ -204,7 +386,7 @@
 			this.buttonXSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXSave.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXSave.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXSave.Location = new System.Drawing.Point(109, 314);
+			this.buttonXSave.Location = new System.Drawing.Point(102, 577);
 			this.buttonXSave.Name = "buttonXSave";
 			this.buttonXSave.Size = new System.Drawing.Size(75, 33);
 			this.buttonXSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -219,7 +401,7 @@
 			this.buttonXCancel.CausesValidation = false;
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(211, 314);
+			this.buttonXCancel.Location = new System.Drawing.Point(204, 577);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(75, 33);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -229,6 +411,8 @@
 			// 
 			// buttonEditPassword
 			// 
+			this.buttonEditPassword.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.buttonEditPassword.Location = new System.Drawing.Point(94, 166);
@@ -237,7 +421,7 @@
 			this.buttonEditPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Generate new password", null, null, true)});
 			this.buttonEditPassword.Properties.NullText = "Type...";
-			this.buttonEditPassword.Size = new System.Drawing.Size(279, 22);
+			this.buttonEditPassword.Size = new System.Drawing.Size(265, 22);
 			this.buttonEditPassword.StyleController = this.styleController;
 			this.buttonEditPassword.TabIndex = 13;
 			this.buttonEditPassword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditPassword_ButtonClick);
@@ -264,7 +448,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(2, 2);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.SelectedTabPage = this.xtraTabPageUser;
-			this.xtraTabControl.Size = new System.Drawing.Size(391, 306);
+			this.xtraTabControl.Size = new System.Drawing.Size(377, 569);
 			this.xtraTabControl.TabIndex = 14;
 			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageUser,
@@ -284,35 +468,61 @@
 			this.xtraTabPageUser.Controls.Add(this.laEmail);
 			this.xtraTabPageUser.Controls.Add(this.textEditLastName);
 			this.xtraTabPageUser.Name = "xtraTabPageUser";
-			this.xtraTabPageUser.Size = new System.Drawing.Size(389, 280);
+			this.xtraTabPageUser.Size = new System.Drawing.Size(375, 543);
 			this.xtraTabPageUser.Text = "User";
 			// 
 			// xtraTabPageLibraries
 			// 
-			this.xtraTabPageLibraries.Controls.Add(this.checkedListBoxLibraries);
+			this.xtraTabPageLibraries.Controls.Add(this.gridControlLibraries);
+			this.xtraTabPageLibraries.Controls.Add(this.pnAssignedLibraries);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(389, 280);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(375, 543);
 			this.xtraTabPageLibraries.Text = "Assigned Libraries";
 			// 
-			// checkedListBoxLibraries
+			// pnAssignedLibraries
 			// 
-			this.checkedListBoxLibraries.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxLibraries.Appearance.Options.UseFont = true;
-			this.checkedListBoxLibraries.CheckOnClick = true;
-			this.checkedListBoxLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxLibraries.ItemHeight = 20;
-			this.checkedListBoxLibraries.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxLibraries.Name = "checkedListBoxLibraries";
-			this.checkedListBoxLibraries.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxLibraries.Size = new System.Drawing.Size(389, 280);
-			this.checkedListBoxLibraries.TabIndex = 1;
+			this.pnAssignedLibraries.Controls.Add(this.buttonXLibrariesClearAll);
+			this.pnAssignedLibraries.Controls.Add(this.buttonXLibrariesSelectAll);
+			this.pnAssignedLibraries.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedLibraries.Location = new System.Drawing.Point(0, 0);
+			this.pnAssignedLibraries.Name = "pnAssignedLibraries";
+			this.pnAssignedLibraries.Size = new System.Drawing.Size(375, 46);
+			this.pnAssignedLibraries.TabIndex = 1;
+			// 
+			// buttonXLibrariesClearAll
+			// 
+			this.buttonXLibrariesClearAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXLibrariesClearAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXLibrariesClearAll.CausesValidation = false;
+			this.buttonXLibrariesClearAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLibrariesClearAll.Location = new System.Drawing.Point(256, 7);
+			this.buttonXLibrariesClearAll.Name = "buttonXLibrariesClearAll";
+			this.buttonXLibrariesClearAll.Size = new System.Drawing.Size(90, 33);
+			this.buttonXLibrariesClearAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXLibrariesClearAll.TabIndex = 14;
+			this.buttonXLibrariesClearAll.Text = "Clear All";
+			this.buttonXLibrariesClearAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXLibrariesClearAll.Click += new System.EventHandler(this.buttonXLibrariesClearAll_Click);
+			// 
+			// buttonXLibrariesSelectAll
+			// 
+			this.buttonXLibrariesSelectAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXLibrariesSelectAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLibrariesSelectAll.Location = new System.Drawing.Point(29, 7);
+			this.buttonXLibrariesSelectAll.Name = "buttonXLibrariesSelectAll";
+			this.buttonXLibrariesSelectAll.Size = new System.Drawing.Size(90, 33);
+			this.buttonXLibrariesSelectAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXLibrariesSelectAll.TabIndex = 13;
+			this.buttonXLibrariesSelectAll.Text = "Select All";
+			this.buttonXLibrariesSelectAll.TextColor = System.Drawing.Color.Black;
+			this.buttonXLibrariesSelectAll.Click += new System.EventHandler(this.buttonXLibrariesSelectAll_Click);
 			// 
 			// FormEditUser
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.AutoValidate = System.Windows.Forms.AutoValidate.Disable;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(395, 354);
+			this.ClientSize = new System.Drawing.Size(381, 617);
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXSave);
@@ -325,6 +535,10 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Edit User";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditUser_FormClosing);
+			((System.ComponentModel.ISupportInitialize)(this.gridViewPages)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridControlLibraries)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.gridViewLibraries)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditLogin.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFirstName.Properties)).EndInit();
@@ -339,7 +553,7 @@
 			this.xtraTabPageUser.ResumeLayout(false);
 			this.xtraTabPageUser.PerformLayout();
 			this.xtraTabPageLibraries.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxLibraries)).EndInit();
+			this.pnAssignedLibraries.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -366,6 +580,18 @@
 		private ValidatableTabControl xtraTabControl;
 		private DevExpress.XtraTab.XtraTabPage xtraTabPageUser;
 		private DevExpress.XtraTab.XtraTabPage xtraTabPageLibraries;
-		public DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxLibraries;
+		private DevExpress.XtraGrid.GridControl gridControlLibraries;
+		private DevExpress.XtraGrid.Views.Grid.GridView gridViewLibraries;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibraryId;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibrarySelected;
+		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibraryName;
+		private DevExpress.XtraGrid.Views.Grid.GridView gridViewPages;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPageId;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPageSelected;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPageName;
+		private System.Windows.Forms.Panel pnAssignedLibraries;
+		private DevComponents.DotNetBar.ButtonX buttonXLibrariesClearAll;
+		private DevComponents.DotNetBar.ButtonX buttonXLibrariesSelectAll;
     }
 }

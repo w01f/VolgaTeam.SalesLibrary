@@ -29,14 +29,14 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
     [System.Web.Services.WebServiceBindingAttribute(Name="AdminControllerBinding", Namespace="urn:AdminControllerwsdl")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Library))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserRecord))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Attachment))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryLink))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryFolder))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LibraryPage))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(Library))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserRecord))]
     public partial class AdminControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
@@ -131,7 +131,7 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string[] libraryIds) {
+        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, LibraryPage[] assignedPages) {
             this.Invoke("setUser", new object[] {
                         sessionKey,
                         login,
@@ -139,16 +139,16 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
                         firstName,
                         lastName,
                         email,
-                        libraryIds});
+                        assignedPages});
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string[] libraryIds) {
-            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, libraryIds, null);
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, LibraryPage[] assignedPages) {
+            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, assignedPages, null);
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string[] libraryIds, object userState) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, LibraryPage[] assignedPages, object userState) {
             if ((this.setUserOperationCompleted == null)) {
                 this.setUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetUserOperationCompleted);
             }
@@ -159,7 +159,7 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
                         firstName,
                         lastName,
                         email,
-                        libraryIds}, this.setUserOperationCompleted, userState);
+                        assignedPages}, this.setUserOperationCompleted, userState);
         }
         
         private void OnsetUserOperationCompleted(object arg) {
@@ -254,168 +254,6 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class UserRecord {
-        
-        private string loginField;
-        
-        private string passwordField;
-        
-        private string firstNameField;
-        
-        private string lastNameField;
-        
-        private string emailField;
-        
-        private Library[] librariesField;
-        
-        /// <remarks/>
-        public string login {
-            get {
-                return this.loginField;
-            }
-            set {
-                this.loginField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string firstName {
-            get {
-                return this.firstNameField;
-            }
-            set {
-                this.firstNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string lastName {
-            get {
-                return this.lastNameField;
-            }
-            set {
-                this.lastNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public Library[] libraries {
-            get {
-                return this.librariesField;
-            }
-            set {
-                this.librariesField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
-    public partial class Library {
-        
-        private string idField;
-        
-        private string nameField;
-        
-        private LibraryPage[] pagesField;
-        
-        private AutoWidget[] autoWidgetsField;
-        
-        private UniversalPreviewContainer[] previewContainersField;
-        
-        private bool selectedField;
-        
-        /// <remarks/>
-        public string id {
-            get {
-                return this.idField;
-            }
-            set {
-                this.idField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                this.nameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public LibraryPage[] pages {
-            get {
-                return this.pagesField;
-            }
-            set {
-                this.pagesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public AutoWidget[] autoWidgets {
-            get {
-                return this.autoWidgetsField;
-            }
-            set {
-                this.autoWidgetsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public UniversalPreviewContainer[] previewContainers {
-            get {
-                return this.previewContainersField;
-            }
-            set {
-                this.previewContainersField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool selected {
-            get {
-                return this.selectedField;
-            }
-            set {
-                this.selectedField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
     public partial class LibraryPage {
         
         private string idField;
@@ -433,6 +271,8 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
         private Column[] columnsField;
         
         private string dateModifyField;
+        
+        private bool selectedField;
         
         /// <remarks/>
         public string id {
@@ -511,6 +351,16 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
             }
             set {
                 this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool selected {
+            get {
+                return this.selectedField;
+            }
+            set {
+                this.selectedField = value;
             }
         }
     }
@@ -1051,6 +901,168 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
             }
             set {
                 this.widgetField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class Library {
+        
+        private string idField;
+        
+        private string nameField;
+        
+        private LibraryPage[] pagesField;
+        
+        private AutoWidget[] autoWidgetsField;
+        
+        private UniversalPreviewContainer[] previewContainersField;
+        
+        private bool selectedField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LibraryPage[] pages {
+            get {
+                return this.pagesField;
+            }
+            set {
+                this.pagesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public AutoWidget[] autoWidgets {
+            get {
+                return this.autoWidgetsField;
+            }
+            set {
+                this.autoWidgetsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UniversalPreviewContainer[] previewContainers {
+            get {
+                return this.previewContainersField;
+            }
+            set {
+                this.previewContainersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool selected {
+            get {
+                return this.selectedField;
+            }
+            set {
+                this.selectedField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class UserRecord {
+        
+        private string loginField;
+        
+        private string passwordField;
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string emailField;
+        
+        private Library[] librariesField;
+        
+        /// <remarks/>
+        public string login {
+            get {
+                return this.loginField;
+            }
+            set {
+                this.loginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Library[] libraries {
+            get {
+                return this.librariesField;
+            }
+            set {
+                this.librariesField = value;
             }
         }
     }

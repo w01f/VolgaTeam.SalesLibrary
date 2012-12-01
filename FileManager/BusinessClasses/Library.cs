@@ -781,7 +781,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer)
 		{
-			SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
+			IPreviewGenerator previewGenerator = null;
 			switch (previewContainer.Extension.ToUpper())
 			{
 				case ".PPT":
