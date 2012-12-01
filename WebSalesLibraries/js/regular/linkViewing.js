@@ -109,7 +109,7 @@
                 content.find('#download-accept').on('click',function(){
                     window.open("site/downloadFile?linkId="+linkId+"&format="+$('.download-type button.active img').attr('alt'));
                     $.fancybox.close();
-                });                                    
+                });                     
                 $.fancybox({
                     content: content,
                     title: title,
@@ -146,6 +146,35 @@
             },
             success: function(msg){
                 var content = $(msg);
+
+                content.find('.dropdown .dropdown-toggle').dropdown();
+                content.find('.dropdown .dropdown-toggle').on('click',function(event){
+                    var selector = $(this).parent();
+                    var textFiledSelector = '#' + selector.attr('id').replace("-select", "");
+
+                    var applyEmails = function(event){
+                        var selectedEmails = [];
+                        $.each(selector.find(':checked'),function(){
+                            selectedEmails.push($(this).val());
+                        });
+                        $(textFiledSelector).val(selectedEmails.join('; '));
+                        
+                        $(this).parent.dropdown('toggle');
+                        event.stopPropagation();
+                    };
+                    
+                    selector.find('.apply-selection').off('click');
+                    selector.find('.apply-selection').on('click',applyEmails);                
+                    selector.find('.apply-selection').on('touchend',applyEmails);
+                    
+                    $(this).parent.dropdown('toggle');
+                    event.stopPropagation();
+                });
+                
+                content.find('.dropdown .dropdown-menu li').on('click',function(event){
+                    event.stopPropagation();
+                });                
+                
                 content.find('#email-accept').on('click',function(){
                     $.ajax({
                         type: "POST",
@@ -153,6 +182,7 @@
                         data: {
                             linkId: linkId,
                             emailTo: content.find('#email-to').val(),
+                            emailCopyTo: content.find('#email-to-copy').val(),
                             emailFrom: content.find('#email-from').val(),
                             emailSubject: content.find('#email-subject').val(),
                             emailBody: content.find('#email-body').val(),

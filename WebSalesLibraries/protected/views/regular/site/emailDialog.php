@@ -5,11 +5,53 @@
 </td>
 </tr>
 <tr>
-    <td class="title">
-        <label class="control-label" for="email-to">To:</label>
+    <td class="email-body-title">
+        <div id ="email-to-select" class="dropdown">
+            <button class="btn btn-block control-label dropdown-toggle <?php if (!isset($availableEmails)): ?>disabled<?php endif; ?>" type="button" data-toggle="dropdown">To:</button>
+            <div class="dropdown-menu" role="menu">
+                <ul>
+                    <?php if (isset($availableEmails)): ?>
+                        <?php foreach ($availableEmails as $email): ?>
+                            <li>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="<?php echo $email; ?>">
+                                    <?php echo $email; ?>
+                                </label>                        
+                            </li>
+                        <?php endforeach; ?>            
+                    <?php endif; ?>
+                </ul>
+                <button class="btn btn-small btn-block apply-selection" type="button">Apply</button>
+            </div>
+        </div>
     </td>
     <td>
-        <input type="text" id="email-to" value="">
+        <textarea id="email-to" rows="1"></textarea>
+    </td>
+</tr>    
+<tr>
+    <td class="email-body-title">
+        <div id ="email-to-copy-select" class="dropdown">
+            <button class="btn btn-block control-label  dropdown-toggle <?php if (!isset($availableEmails)): ?>disabled<?php endif; ?>" type="button"  data-toggle="dropdown">Cc:</button>
+            <div class="dropdown-menu" role="menu">
+                <ul>
+                    <?php if (isset($availableEmails)): ?>
+                        <?php foreach ($availableEmails as $email): ?>
+                            <li>
+                                <label class="checkbox">
+                                    <input type="checkbox" value="<?php echo $email; ?>">
+                                    <?php echo $email; ?>
+                                </label>                        
+                            </li>
+                        <?php endforeach; ?>            
+                    <?php endif; ?>
+                </ul>
+                <button class="btn btn-small btn-block apply-selection" type="button">Apply</button>
+            </div>
+        </div>
+    </td>
+    <td>
+        <textarea id="email-to-copy" rows="1"></textarea>
     </td>
 </tr>    
 <tr>

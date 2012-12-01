@@ -219,13 +219,19 @@ class SiteController extends IsdController
 
     public function actionEmailLinkDialog()
     {
-        $this->renderPartial('emailDialog', array(), false, true);
+        $userId = Yii::app()->user->getId();
+        if (isset($userId))
+            $availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
+        if (!isset($availableEmails))
+            $availableEmails = null;
+        $this->renderPartial('emailDialog', array('availableEmails' => $availableEmails), false, true);
     }
 
     public function actionEmailLinkSend()
     {
         $linkId = Yii::app()->request->getPost('linkId');
         $emailTo = Yii::app()->request->getPost('emailTo');
+        $emailCopyTo = Yii::app()->request->getPost('emailCopyTo');
         $emailFrom = Yii::app()->request->getPost('emailFrom');
         $emailSubject = Yii::app()->request->getPost('emailSubject');
         $emailBody = Yii::app()->request->getPost('emailBody');
@@ -267,13 +273,25 @@ class SiteController extends IsdController
                 if (!file_exists($destinationPath))
                     copy($link->filePath, $destinationPath);
 
-                EmailedLinkStorage::saveEmailedLink($id, $linkId, $libraryId, $destinationPath, $destinationLink, $expiresIn, Yii::app()->user->login, $emailFrom, $emailTo);
+                $recipients = explode(";", $emailTo);
+                $recipientsCopy = isset($emailCopyTo) && $emailCopyTo != '' ? explode(";", $emailCopyTo) : null;
+                if (isset($recipientsCopy))
+                    $recipientsWhole = array_merge($recipients, $recipientsCopy);
+                else
+                    $recipientsWhole = $recipients;
+
+                $userId = Yii::app()->user->getId();
+                if (isset($userId))
+                    UserRecipientStorage::setRecipientsForUser($userId, $recipientsWhole);
+                
+                EmailedLinkStorage::saveEmailedLink($id, $linkId, $libraryId, $destinationPath, $destinationLink, $expiresIn, Yii::app()->user->login, $emailFrom, implode('; ', $recipientsWhole));
 
                 if ($link->originalFormat == 'mp4' || $link->originalFormat == 'video')
                     $destinationLink = Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('site/emailLinkGet', array('emailId' => $id));
 
                 $message = Yii::app()->email;
-                $message->to = $emailTo;
+                $message->to = $recipients;
+                $message->cc = $recipientsCopy;
                 $message->subject = $emailSubject;
                 $message->from = $emailFrom;
                 $message->view = 'sendLink';

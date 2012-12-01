@@ -23,21 +23,38 @@
     vertical-align: top;
 }
 
-#email-dialog .btn
+#email-dialog .buttons-area .btn
 { 
     margin-right: 20px;
     margin-left: 20px;
     width: 100px;
 }
 
-#email-to, #email-from, #email-subject
+#email-to, #email-to-copy, #email-from, #email-subject, #email-body
 {
     width: 300px;
 }
 
-#email-body
+#email-to, #email-to-copy, #email-body
 {
     margin: 0px;
-    width: 300px;
     resize: none;
+}
+
+#email-dialog .dropdown-menu
+{
+    padding: 10px;
+    text-align: left;
+    width: 250px;
+}
+
+#email-dialog .dropdown-menu ul
+{
+    margin: 0px;
+}
+
+#email-dialog .dropdown-menu li
+{
+    list-style: none;
+    padding-bottom: 5px;
 }
