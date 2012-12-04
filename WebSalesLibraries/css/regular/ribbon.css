@@ -223,6 +223,11 @@ body
     height: 92px;
 }
 
+#ribbon .ribbon-section.disabled
+{
+    opacity: 0.4;
+}
+
 #ribbon .ribbon-section-sep
 {
     border-left: 1px solid #E0E0E0;

@@ -249,7 +249,7 @@ class LibraryLink
             $this->filePath = $this->parent->parent->parent->storagePath . $this->fileRelativePath;
             $this->fileLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->storageLink . $this->fileRelativePath)));
             if (!isset($this->fileSize))
-                $this->fileSize = filesize($this->filePath);
+                $this->fileSize = file_exists($this->filePath) ? filesize($this->filePath) : 0;
         }
         $this->getFormats();
     }

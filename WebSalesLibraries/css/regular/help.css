@@ -1,0 +1,12 @@
+ul.help-links li
+{
+   float:left;
+   padding: 12px;
+   list-style: none;
+}
+
+ul.help-links .service-data
+{ 
+    display: none;
+}
+

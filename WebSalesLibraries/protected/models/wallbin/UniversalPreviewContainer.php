@@ -99,31 +99,31 @@ class UniversalPreviewContainer
             {
                 case 'png':
                     $this->pngLinks[] = $previewLink;
-                    $fileSize = filesize($previewPath);
+                    $fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
                     if ($this->pngMaxFileSize < $fileSize)
                         $this->pngMaxFileSize = $fileSize;
                     break;
                 case 'png_phone':
                     $this->pngPhoneLinks[] = $previewLink;
-                    $fileSize = filesize($previewPath);
+                    $fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
                     if ($this->pngPhoneMaxFileSize < $fileSize)
                         $this->pngPhoneMaxFileSize = $fileSize;
                     break;
                 case 'jpeg':
                     $this->jpegLinks[] = $previewLink;
-                    $fileSize = filesize($previewPath);
+                    $fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
                     if ($this->jpegMaxFileSize < $fileSize)
                         $this->jpegMaxFileSize = $fileSize;
                     break;
                 case 'jpeg_phone':
                     $this->jpegPhoneLinks[] = $previewLink;
-                    $fileSize = filesize($previewPath);
+                    $fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
                     if ($this->jpegPhoneMaxFileSize < $fileSize)
                         $this->jpegPhoneMaxFileSize = $fileSize;
                     break;
                 case 'pdf':
                     $this->pdfLinks[] = $previewLink;
-                    $fileSize = filesize($previewPath);
+                    $fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
                     if ($this->pdfMaxFileSize < $fileSize)
                         $this->pdfMaxFileSize = $fileSize;
                     break;

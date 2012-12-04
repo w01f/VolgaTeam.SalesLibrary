@@ -157,7 +157,10 @@
                         $.each(selector.find(':checked'),function(){
                             selectedEmails.push($(this).val());
                         });
-                        $(textFiledSelector).val(selectedEmails.join('; '));
+                        if(selectedEmails.length>0)
+                            $(textFiledSelector).val(selectedEmails.join('; '));
+                        else
+                            $(textFiledSelector).val('Nothing selected');
                         
                         $(this).parent.dropdown('toggle');
                         event.stopPropagation();
@@ -165,11 +168,14 @@
                     
                     selector.find('.apply-selection').off('click');
                     selector.find('.apply-selection').on('click',applyEmails);                
-                    selector.find('.apply-selection').on('touchend',applyEmails);
                     
                     $(this).parent.dropdown('toggle');
                     event.stopPropagation();
                 });
+                
+                content.find('.dropdown .dropdown-menu li').on('touchstart',function(event){
+                    event.stopPropagation();
+                });                
                 
                 content.find('.dropdown .dropdown-menu li').on('click',function(event){
                     event.stopPropagation();

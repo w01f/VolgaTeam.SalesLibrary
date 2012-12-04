@@ -21,8 +21,10 @@
             that.selectedTabIndex = -1;
             $.cookie("selectedRibbonTabIndex", 0, {
                 expires: (60 * 60 * 24 * 7)
-            });        
+            });
             if(that.selectedTabId != null)
+            {
+                var storedTabIdFound = false;
                 $('.ribbon-tab').each(function(index) {
                     if(that.selectedTabId == $(this).attr('id'))
                     {
@@ -30,8 +32,16 @@
                         $.cookie("selectedRibbonTabIndex", index, {
                             expires: (60 * 60 * 24 * 7)
                         });        
+                        storedTabIdFound = true;
                     }
                 });
+                if(!storedTabIdFound)
+                {
+                    that.selectedTabIndex = -1;
+                    that.selectedTabId = null;
+                    $.cookie("selectedRibbonTabId", null);
+                }
+            }
 		
             var tabNames = [];
 		
@@ -154,7 +164,10 @@
                         $.initSearchView();
                         break;                   
                     default:
-                        $.initColumnsView();                            
+                        if (id!= null && id.indexOf("help-tab-") >= 0)
+                            $.initHelpView(id);
+                        else
+                            $.initColumnsView();                            
                         break;                            
                 }
             }            

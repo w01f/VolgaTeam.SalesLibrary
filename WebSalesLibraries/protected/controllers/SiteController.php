@@ -16,16 +16,6 @@ class SiteController extends IsdController
 
     public function actionIndex()
     {
-        switch ($this->browser)
-        {
-            case Browser::BROWSER_IPHONE:
-            case Browser::BROWSER_ANDROID_MOBILE:
-                $this->layout = '/phone/layouts/ribbon';
-                break;
-            default :
-                $this->layout = '/regular/layouts/ribbon';
-                break;
-        }
         $this->render('index');
     }
 

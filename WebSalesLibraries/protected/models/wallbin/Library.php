@@ -39,14 +39,17 @@ class Library
     public $selected;
     public function load()
     {
-        $userId = Yii::app()->user->getId();
-        if (isset($userId))
-            $availablePageIds = UserLibraryStorage::getPageIdsByUser(Yii::app()->user->getId());
+        if (isset(Yii::app()->user))
+        {
+            $userId = Yii::app()->user->getId();
+            if (isset($userId))
+                $availablePageIds = UserLibraryStorage::getPageIdsByUser(Yii::app()->user->getId());
+        }
         foreach (LibraryPageStorage::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
         {
             $page = new LibraryPage($this);
             $page->load($pageRecord);
-            if (in_array($page->id, $availablePageIds))
+            if ((isset($availablePageIds) && in_array($page->id, $availablePageIds)) || !isset($availablePageIds))
                 $this->pages[] = $page;
         }
         if (isset($this->pages))

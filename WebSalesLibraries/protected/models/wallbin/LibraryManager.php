@@ -11,9 +11,12 @@ class LibraryManager
             if (isset(Yii::app()->session['libraries']))
                 $libraries = Yii::app()->session['libraries'];
         }
-        $userId = Yii::app()->user->getId();
-        if (isset($userId))
-            $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userId);
+        if (isset(Yii::app()->user))
+        {
+            $userId = Yii::app()->user->getId();
+            if (isset($userId))
+                $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userId);
+        }
         if (!isset($libraries))
         {
             $rootFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries');
@@ -80,9 +83,12 @@ class LibraryManager
 
     public function getLibraryGroups()
     {
-        $userId = Yii::app()->user->getId();
-        if (isset($userId))
-            $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userId);
+        if (isset(Yii::app()->user))
+        {
+            $userId = Yii::app()->user->getId();
+            if (isset($userId))
+                $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userId);
+        }
         if (isset($availableLibraryIds))
         {
             $libraryGroupRecords = LibraryGroupStorage::model()->findAll();

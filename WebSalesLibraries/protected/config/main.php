@@ -7,6 +7,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.models.storage.*',
+        'application.models.help.*',
         'application.models.common.*',
         'application.models.wallbin.*',
         'application.components.*',
