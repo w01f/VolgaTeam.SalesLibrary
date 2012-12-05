@@ -43,6 +43,12 @@ foreach (Yii::app()->params as $key => $row)
         if (array_key_exists('position', $row))
             $tabParam[$key] = $row['position'];
 }
+
+$tabHelpRecords = HelpTabStorage::model()->findAll(array('order' => '`order`', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
+if (isset($tabHelpRecords))
+    foreach ($tabHelpRecords as $tabHelpRecord)
+        $tabParam['help-tab-' . $tabHelpRecord->id] = $tabHelpRecord->order;
+
 asort($tabParam);
 ?>
 <div id="ribbon">
@@ -146,8 +152,7 @@ asort($tabParam);
                     </div> 
                 <?php endif; ?>                        
             </div>
-        <?php endif; ?>
-        <?php if ($tabName == 'search_full_tab'): ?>                                    
+        <?php elseif ($tabName == 'search_full_tab'): ?>                                    
             <?php if (Yii::app()->params['search_full_tab']['visible']): ?>
                 <div class="ribbon-tab" id="search-full-tab">
                     <span class="ribbon-title"><?php echo Yii::app()->params['search_full_tab']['name'] ?></span>
@@ -197,8 +202,7 @@ asort($tabParam);
                     <?php endif; ?>                                                    
                 </div>            
             <?php endif; ?>
-        <?php endif; ?>            
-        <?php if ($tabName == 'search_file_card_tab'): ?>                                    
+        <?php elseif ($tabName == 'search_file_card_tab'): ?>                                    
             <?php if (Yii::app()->params['search_file_card_tab']['visible']): ?>
                 <div class="ribbon-tab" id="search-file-card-tab">
                     <span class="ribbon-title"><?php echo Yii::app()->params['search_file_card_tab']['name'] ?></span>
@@ -238,51 +242,50 @@ asort($tabParam);
                     <?php endif; ?>                        
                 </div>            
             <?php endif; ?>   
-        <?php endif; ?>                        
-    <?php endforeach; ?>            
-    <?php $tabHelpRecords = HelpTabStorage::model()->findAll(array('order' => '`order`', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true))); ?>
-    <?php if (isset($tabHelpRecords)): ?>
-        <?php foreach ($tabHelpRecords as $tabHelpRecord): ?>
-            <div class="ribbon-tab help-tab" id="help-tab-<?php echo $tabHelpRecord->id; ?>">
-                <span class="ribbon-title"><?php echo $tabHelpRecord->name; ?></span>
-                <div class="ribbon-section" >
-                    <span class="section-title">
-                        <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
-                            <?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
-                        <?php endif; ?>
-                    </span>
-                    <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
-                </div>
-                <?php
-                $pageHelpRecords = HelpPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabHelpRecord->id)));
-                $selected = true;
-                ?>
-                <?php if (isset($pageHelpRecords)): ?>
-                    <?php foreach ($pageHelpRecords as $pageHelpRecord): ?>
-                        <div class="ribbon-section <?php echo !$pageHelpRecord->enabled ? 'disabled' : ''; ?>">
-                            <span class="section-title"><?php echo $pageHelpRecord->name; ?></span>
-                            <div class="ribbon-button ribbon-button-large <?php echo $pageHelpRecord->enabled && $selected ? 'sel' : ''; ?> <?php echo !$pageHelpRecord->enabled ? 'disabled' : 'enabled'; ?> help-page" id="<?php echo $pageHelpRecord->id; ?>">
-                                <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>" />
-                                <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>" />
-                                <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>" />
+        <?php elseif (strpos($tabName, 'help-tab-') !== false): ?>                                        
+            <?php $tabHelpRecord = HelpTabStorage::model()->findByPk(str_replace('help-tab-', '', $tabName)); ?>
+            <?php if (isset($tabHelpRecord)): ?>
+                <div class="ribbon-tab help-tab" id="help-tab-<?php echo $tabHelpRecord->id; ?>">
+                    <span class="ribbon-title"><?php echo $tabHelpRecord->name; ?></span>
+                    <div class="ribbon-section" >
+                        <span class="section-title">
+                            <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
+                                <?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
+                            <?php endif; ?>
+                        </span>
+                        <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+                    </div>
+                    <?php
+                    $pageHelpRecords = HelpPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabHelpRecord->id)));
+                    $selected = true;
+                    ?>
+                    <?php if (isset($pageHelpRecords)): ?>
+                        <?php foreach ($pageHelpRecords as $pageHelpRecord): ?>
+                            <div class="ribbon-section <?php echo!$pageHelpRecord->enabled ? 'disabled' : ''; ?>">
+                                <span class="section-title"><?php echo $pageHelpRecord->name; ?></span>
+                                <div class="ribbon-button ribbon-button-large <?php echo $pageHelpRecord->enabled && $selected ? 'sel' : ''; ?> <?php echo!$pageHelpRecord->enabled ? 'disabled' : 'enabled'; ?> help-page" id="<?php echo $pageHelpRecord->id; ?>">
+                                    <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>" />
+                                    <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>" />
+                                    <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>" />
+                                </div>
+                            </div> 
+                            <?php $selected = $pageHelpRecord->enabled ? false : $selected; ?>            
+                        <?php endforeach; ?>            
+                    <?php endif; ?>
+                    <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
+                        <div class="ribbon-section">
+                            <span class="section-title">Logout</span>
+                            <div class="ribbon-button ribbon-button-large logout-button">
+                                <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
+                                <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
                             </div>
                         </div> 
-                        <?php $selected = $pageHelpRecord->enabled ? false : $selected; ?>            
-                    <?php endforeach; ?>            
-                <?php endif; ?>
-                <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>                   
-                    <div class="ribbon-section">
-                        <span class="section-title">Logout</span>
-                        <div class="ribbon-button ribbon-button-large logout-button">
-                            <img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
-                            <img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
-                            <img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>" />
-                        </div>
-                    </div> 
-                <?php endif; ?>                        
-            </div>            
-        <?php endforeach; ?>            
-    <?php endif; ?>
+                    <?php endif; ?>                        
+                </div>            
+            <?php endif; ?>
+        <?php endif; ?>       
+    <?php endforeach; ?>                
 </div>
 <div id="content">
 </div>

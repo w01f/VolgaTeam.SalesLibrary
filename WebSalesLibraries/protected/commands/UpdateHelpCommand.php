@@ -8,80 +8,83 @@ class UpdateHelpCommand extends CConsoleCommand
         HelpTabStorage::clearData();
 
         $rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help';
-        $rootFolder = new DirectoryIterator($rootFolderPath);
-        foreach ($rootFolder as $tabFolder)
+        if (file_exists($rootFolderPath))
         {
-            if ($tabFolder->isDir() && !$tabFolder->isDot())
+            $rootFolder = new DirectoryIterator($rootFolderPath);
+            foreach ($rootFolder as $tabFolder)
             {
-                $tabPath = $tabFolder->getPathname();
-                $tabConfigFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'config.xml');
-                if (file_exists($tabConfigFile))
+                if ($tabFolder->isDir() && !$tabFolder->isDot())
                 {
-                    $tabConfig = new DOMDocument();
-                    $tabConfig->load($tabConfigFile);
-
-                    $tabHelpRecord = new HelpTabStorage();
-                    $tabHelpId = uniqid();
-                    $tabHelpRecord->id = $tabHelpId;
-                    $tabHelpRecord->name = trim($tabConfig->getElementsByTagName("Name")->item(0)->nodeValue);
-                    $tabHelpRecord->order = intval(trim($tabConfig->getElementsByTagName("Order")->item(0)->nodeValue));
-                    $tabHelpRecord->enabled = filter_var(trim($tabConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
-                    $tabHelpRecord->save();
-
-                    $pagesRootPath = realpath($tabPath . DIRECTORY_SEPARATOR . 'pages');
-                    $pagesRoot = new DirectoryIterator($pagesRootPath);
-                    foreach ($pagesRoot as $pageFolder)
+                    $tabPath = $tabFolder->getPathname();
+                    $tabConfigFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'config.xml');
+                    if (file_exists($tabConfigFile))
                     {
-                        if ($pageFolder->isDir() && !$pageFolder->isDot())
+                        $tabConfig = new DOMDocument();
+                        $tabConfig->load($tabConfigFile);
+
+                        $tabHelpRecord = new HelpTabStorage();
+                        $tabHelpId = uniqid();
+                        $tabHelpRecord->id = $tabHelpId;
+                        $tabHelpRecord->name = trim($tabConfig->getElementsByTagName("Name")->item(0)->nodeValue);
+                        $tabHelpRecord->order = intval(trim($tabConfig->getElementsByTagName("Order")->item(0)->nodeValue));
+                        $tabHelpRecord->enabled = filter_var(trim($tabConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
+                        $tabHelpRecord->save();
+
+                        $pagesRootPath = realpath($tabPath . DIRECTORY_SEPARATOR . 'pages');
+                        $pagesRoot = new DirectoryIterator($pagesRootPath);
+                        foreach ($pagesRoot as $pageFolder)
                         {
-                            $pagePath = $pageFolder->getPathname();
-                            $pageConfigFile = realpath($pagePath . DIRECTORY_SEPARATOR . 'config.xml');
-                            $pageImageFile = realpath($pagePath . DIRECTORY_SEPARATOR . 'image.png');
-                            if (file_exists($pageConfigFile))
+                            if ($pageFolder->isDir() && !$pageFolder->isDot())
                             {
-                                $pageConfig = new DOMDocument();
-                                $pageConfig->load($pageConfigFile);
-
-                                $pageHelpRecord = new HelpPageStorage();
-                                $pageHelpId = uniqid();
-                                $pageHelpRecord->id = $pageHelpId;
-                                $pageHelpRecord->id_tab = $tabHelpId;
-                                $pageHelpRecord->name = trim($pageConfig->getElementsByTagName("Name")->item(0)->nodeValue);
-                                $pageHelpRecord->order = intval(trim($pageConfig->getElementsByTagName("Order")->item(0)->nodeValue));
-                                $pageHelpRecord->enabled = filter_var(trim($pageConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
-                                $pageHelpRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $pageImageFile));
-                                $pageImageFile;
-                                $pageHelpRecord->save();
-
-                                $linksRootPath = realpath($pagePath . DIRECTORY_SEPARATOR . 'links');
-                                $linksRoot = new DirectoryIterator($linksRootPath);
-                                foreach ($linksRoot as $linkFolder)
+                                $pagePath = $pageFolder->getPathname();
+                                $pageConfigFile = realpath($pagePath . DIRECTORY_SEPARATOR . 'config.xml');
+                                $pageImageFile = realpath($pagePath . DIRECTORY_SEPARATOR . 'image.png');
+                                if (file_exists($pageConfigFile))
                                 {
-                                    if ($linkFolder->isDir() && !$linkFolder->isDot())
-                                    {
-                                        $linkPath = $linkFolder->getPathname();
-                                        $linkConfigFile = realpath($linkPath . DIRECTORY_SEPARATOR . 'config.xml');
-                                        $linkImageFile = realpath($linkPath . DIRECTORY_SEPARATOR . 'image.png');
-                                        if (file_exists($linkConfigFile))
-                                        {
-                                            $linkConfig = new DOMDocument();
-                                            $linkConfig->load($linkConfigFile);
+                                    $pageConfig = new DOMDocument();
+                                    $pageConfig->load($pageConfigFile);
 
-                                            $linkHelpRecord = new HelpLinkStorage();
-                                            $linkHelpId = uniqid();
-                                            $linkHelpRecord->id = $linkHelpId;
-                                            $linkHelpRecord->id_tab = $tabHelpId;
-                                            $linkHelpRecord->id_page = $pageHelpId;
-                                            $linkHelpRecord->name = trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue);
-                                            $linkHelpRecord->order = intval(trim($linkConfig->getElementsByTagName("Order")->item(0)->nodeValue));
-                                            $linkHelpRecord->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
-                                            if ($linkHelpRecord->type != 'url')
-                                                $linkHelpRecord->source_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $linkPath . DIRECTORY_SEPARATOR . trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue)));
-                                            else
-                                                $linkHelpRecord->source_path = trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue);
-                                            $linkHelpRecord->enabled = true;
-                                            $linkHelpRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $linkImageFile));
-                                            $linkHelpRecord->save();
+                                    $pageHelpRecord = new HelpPageStorage();
+                                    $pageHelpId = uniqid();
+                                    $pageHelpRecord->id = $pageHelpId;
+                                    $pageHelpRecord->id_tab = $tabHelpId;
+                                    $pageHelpRecord->name = trim($pageConfig->getElementsByTagName("Name")->item(0)->nodeValue);
+                                    $pageHelpRecord->order = intval(trim($pageConfig->getElementsByTagName("Order")->item(0)->nodeValue));
+                                    $pageHelpRecord->enabled = filter_var(trim($pageConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
+                                    $pageHelpRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $pageImageFile));
+                                    $pageImageFile;
+                                    $pageHelpRecord->save();
+
+                                    $linksRootPath = realpath($pagePath . DIRECTORY_SEPARATOR . 'links');
+                                    $linksRoot = new DirectoryIterator($linksRootPath);
+                                    foreach ($linksRoot as $linkFolder)
+                                    {
+                                        if ($linkFolder->isDir() && !$linkFolder->isDot())
+                                        {
+                                            $linkPath = $linkFolder->getPathname();
+                                            $linkConfigFile = realpath($linkPath . DIRECTORY_SEPARATOR . 'config.xml');
+                                            $linkImageFile = realpath($linkPath . DIRECTORY_SEPARATOR . 'image.png');
+                                            if (file_exists($linkConfigFile))
+                                            {
+                                                $linkConfig = new DOMDocument();
+                                                $linkConfig->load($linkConfigFile);
+
+                                                $linkHelpRecord = new HelpLinkStorage();
+                                                $linkHelpId = uniqid();
+                                                $linkHelpRecord->id = $linkHelpId;
+                                                $linkHelpRecord->id_tab = $tabHelpId;
+                                                $linkHelpRecord->id_page = $pageHelpId;
+                                                $linkHelpRecord->name = trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue);
+                                                $linkHelpRecord->order = intval(trim($linkConfig->getElementsByTagName("Order")->item(0)->nodeValue));
+                                                $linkHelpRecord->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
+                                                if ($linkHelpRecord->type != 'url')
+                                                    $linkHelpRecord->source_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $linkPath . DIRECTORY_SEPARATOR . trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue)));
+                                                else
+                                                    $linkHelpRecord->source_path = trim($linkConfig->getElementsByTagName("Source")->item(0)->nodeValue);
+                                                $linkHelpRecord->enabled = true;
+                                                $linkHelpRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $linkImageFile));
+                                                $linkHelpRecord->save();
+                                            }
                                         }
                                     }
                                 }
@@ -93,7 +96,6 @@ class UpdateHelpCommand extends CConsoleCommand
         }
         echo "Job completed...\n";
     }
-
 }
 
 ?>

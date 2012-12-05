@@ -87,6 +87,7 @@
                     } else {
                         if (that.selectedTabIndex==-1) {
                             that.selectedTabIndex = index;
+                            that.selectedTabId = id;
                             thisTabHeader.addClass('sel');
                         }
 					

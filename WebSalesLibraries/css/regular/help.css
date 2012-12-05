@@ -1,8 +1,13 @@
 ul.help-links li
 {
-   float:left;
-   padding: 12px;
-   list-style: none;
+    float:left;
+    padding: 12px;
+    list-style: none;
+}
+
+ul.help-links li img
+{
+    cursor: pointer;
 }
 
 ul.help-links .service-data
