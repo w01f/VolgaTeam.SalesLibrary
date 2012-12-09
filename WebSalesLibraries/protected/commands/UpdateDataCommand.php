@@ -83,6 +83,11 @@ class UpdateDataCommand extends CConsoleCommand
         if (file_exists($libraryGroupFilePath))
             LibraryGroupStorage::updateData(file($libraryGroupFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
+        GroupTemplateStorage::clearData();
+        $groupTemplateFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'properties.txt';
+        if (file_exists($groupTemplateFilePath))
+            GroupTemplateStorage::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+
         echo "Job completed.\n";
     }
 

@@ -3,6 +3,11 @@
 class UserRecord
 {
     /**
+     * @var int id
+     * @soap
+     */
+    public $id;    
+    /**
      * @var string login
      * @soap
      */
@@ -28,10 +33,20 @@ class UserRecord
      */        
     public $email;
     /**
+     * @var boolean selected
+     * @soap
+     */
+    public $selected;    
+    /**
+     * @var GroupRecord[]
+     * @soap
+     */
+    public $groups;    
+    /**
      * @var Library[]
      * @soap
      */
-    public $libraries;    
+    public $libraries;        
 }
 
 ?>

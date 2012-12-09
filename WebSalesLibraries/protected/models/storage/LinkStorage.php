@@ -191,7 +191,12 @@ class LinkStorage extends CActiveRecord
             }
 
             $folderCondition = '1 != 1';
-            $assignedPageIds = UserLibraryStorage::getPageIdsByUser(Yii::app()->user->getid());
+            if (isset(Yii::app()->user))
+            {
+                $userId = Yii::app()->user->getId();
+                if (isset($userId))
+                    $assignedPageIds = UserLibraryStorage::getPageIdsByUser($userId);
+            }
             if (isset($assignedPageIds))
                 $folderCondition = "id_folder in (select id from tbl_folder where id_page in ('" . implode("', '", $assignedPageIds) . "'))";
 

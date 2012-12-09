@@ -15,7 +15,7 @@ class LibraryManager
         {
             $userId = Yii::app()->user->getId();
             if (isset($userId))
-                $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userId);
+                $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUserAngHisGroups($userId);
         }
         if (!isset($libraries))
         {
@@ -44,7 +44,7 @@ class LibraryManager
                         $libraryRecord = LibraryStorage::model()->findByPk($libraryId);
                         if ($libraryRecord !== null)
                         {
-                            if ((isset($availableLibraryIds) && in_array($libraryId, $availableLibraryIds)) || !isset($availableLibraryIds))
+                            if ((isset($availableLibraryIds) && in_array($libraryId, $availableLibraryIds)) || !isset($userId))
                             {
                                 $library = Yii::app()->cacheDB->get($libraryId);
                                 if ($library === false)
@@ -87,7 +87,7 @@ class LibraryManager
         {
             $userId = Yii::app()->user->getId();
             if (isset($userId))
-                $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userId);
+                $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUserAngHisGroups($userId);
         }
         if (isset($availableLibraryIds))
         {
@@ -106,7 +106,7 @@ class LibraryManager
                     {
                         foreach ($libraryRecords as $libraryRecord)
                         {
-                            if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || !isset($availableLibraryIds))
+                            if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || !isset($userId))
                             {
                                 $library = new Library();
                                 $library->id = $libraryRecord->id;
@@ -134,7 +134,7 @@ class LibraryManager
                 {
                     foreach ($libraryRecords as $libraryRecord)
                     {
-                        if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || !isset($availableLibraryIds))
+                        if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || !isset($userId))
                         {
                             $library = new Library();
                             $library->id = $libraryRecord->id;

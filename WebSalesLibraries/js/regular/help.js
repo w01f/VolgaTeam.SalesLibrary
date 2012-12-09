@@ -17,14 +17,13 @@
             },
             success: function(msg){
                 $('#content').html(msg);
-                
-                $('.help-link').off('click');
-                $('.help-link').on('click', function(){
+
+                $('.help-link').off('click').on('click', function(){
                     $.viewSelectedFormat($(this), false);
                 });
             },
             async: true,
-            dataType: 'html'                        
+            dataType: 'html'
         });
     }
     

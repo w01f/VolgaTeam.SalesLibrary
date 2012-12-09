@@ -18,6 +18,11 @@ class LibraryPage
      */
     public $name;
     /**
+     * @var string libraryName
+     * @soap
+     */
+    public $libraryName;    
+    /**
      * @var int order
      * @soap
      */
@@ -49,6 +54,16 @@ class LibraryPage
      * @soap
      */
     public $selected;    
+    /**
+     * @var GroupRecord[]
+     * @soap
+     */
+    public $groups;            
+    /**
+     * @var UserRecord[]
+     * @soap
+     */
+    public $users;            
     public $cachedColumnsView;
     public function __construct($library)
     {

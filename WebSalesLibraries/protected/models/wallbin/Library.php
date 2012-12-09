@@ -43,7 +43,7 @@ class Library
         {
             $userId = Yii::app()->user->getId();
             if (isset($userId))
-                $availablePageIds = UserLibraryStorage::getPageIdsByUser(Yii::app()->user->getId());
+                $availablePageIds = UserLibraryStorage::getPageIdsByUserAngHisGroups($userId);
         }
         foreach (LibraryPageStorage::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
         {
