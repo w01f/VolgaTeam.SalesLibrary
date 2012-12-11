@@ -6,12 +6,33 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using Newtonsoft.Json;
 using SalesDepot.CoreObjects.ContentManagmentService;
+using SalesDepot.CoreObjects.IPadAdminService;
+using Attachment = SalesDepot.CoreObjects.ContentManagmentService.Attachment;
+using Banner = SalesDepot.CoreObjects.ContentManagmentService.Banner;
+using Column = SalesDepot.CoreObjects.ContentManagmentService.Column;
+using Font = SalesDepot.CoreObjects.ContentManagmentService.Font;
+using GroupRecord = SalesDepot.CoreObjects.IPadAdminService.GroupRecord;
+using Library = SalesDepot.CoreObjects.ContentManagmentService.Library;
+using LibraryLink = SalesDepot.CoreObjects.ContentManagmentService.LibraryLink;
+using LineBreak = SalesDepot.CoreObjects.ContentManagmentService.LineBreak;
+using LinkCategory = SalesDepot.CoreObjects.ContentManagmentService.LinkCategory;
+using UserRecord = SalesDepot.CoreObjects.IPadAdminService.UserRecord;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class IPadManager
 	{
+		public IPadManager(ILibrary parent)
+		{
+			Parent = parent;
+			SyncDestinationPath = string.Empty;
+			Website = string.Empty;
+			Login = string.Empty;
+			Password = string.Empty;
+		}
+
 		public ILibrary Parent { get; private set; }
 		public bool Enabled { get; set; }
 		public string SyncDestinationPath { get; set; }
@@ -19,34 +40,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string Login { get; set; }
 		public string Password { get; set; }
 
-		public IPadManager(ILibrary parent)
-		{
-			this.Parent = parent;
-			this.SyncDestinationPath = string.Empty;
-			this.Website = string.Empty;
-			this.Login = string.Empty;
-			this.Password = string.Empty;
-		}
-
 		public IPadManager Clone(ILibrary parent)
 		{
-			IPadManager ipadManager = new IPadManager(parent);
-			ipadManager.Enabled = this.Enabled;
-			ipadManager.SyncDestinationPath = this.SyncDestinationPath;
-			ipadManager.Website = this.Website;
-			ipadManager.Login = this.Login;
-			ipadManager.Password = this.Password;
+			var ipadManager = new IPadManager(parent);
+			ipadManager.Enabled = Enabled;
+			ipadManager.SyncDestinationPath = SyncDestinationPath;
+			ipadManager.Website = Website;
+			ipadManager.Login = Login;
+			ipadManager.Password = Password;
 			return ipadManager;
 		}
 
 		public string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Enabled>" + this.Enabled.ToString() + @"</Enabled>");
-			result.AppendLine(@"<SyncDestinationPath>" + this.SyncDestinationPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SyncDestinationPath>");
-			result.AppendLine(@"<Website>" + this.Website.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Website>");
-			result.AppendLine(@"<User>" + this.Login.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</User>");
-			result.AppendLine(@"<Password>" + this.Password.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Password>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<Enabled>" + Enabled.ToString() + @"</Enabled>");
+			result.AppendLine(@"<SyncDestinationPath>" + SyncDestinationPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SyncDestinationPath>");
+			result.AppendLine(@"<Website>" + Website.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Website>");
+			result.AppendLine(@"<User>" + Login.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</User>");
+			result.AppendLine(@"<Password>" + Password.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Password>");
 			return result.ToString();
 		}
 
@@ -59,70 +71,70 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					case "Enabled":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Enabled = tempBool;
+							Enabled = tempBool;
 						break;
 					case "SyncDestinationPath":
-						this.SyncDestinationPath = childNode.InnerText;
+						SyncDestinationPath = childNode.InnerText;
 						break;
 					case "Website":
-						this.Website = childNode.InnerText;
+						Website = childNode.InnerText;
 						break;
 					case "User":
-						this.Login = childNode.InnerText;
+						Login = childNode.InnerText;
 						break;
 					case "Password":
-						this.Password = childNode.InnerText;
+						Password = childNode.InnerText;
 						break;
 				}
 			}
 		}
 
-		#region Data Managment
+		#region Content Manager
 		public void SaveJson()
 		{
-			ContentManagmentService.Library serverLibrary = PrepareServerLibrary();
-			string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(serverLibrary);
-			using (StreamWriter sw = new StreamWriter(Path.Combine(this.Parent.Folder.FullName, Constants.LibrariesJsonFileName), false))
+			Library serverLibrary = PrepareServerLibrary();
+			string jsonString = JsonConvert.SerializeObject(serverLibrary);
+			using (var sw = new StreamWriter(Path.Combine(Parent.Folder.FullName, Constants.LibrariesJsonFileName), false))
 			{
 				sw.Write(jsonString);
 				sw.Flush();
 			}
 
-			jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(PrepareCategories());
-			using (StreamWriter sw = new StreamWriter(Path.Combine(this.Parent.Folder.FullName, Constants.ReferencesJsonFileName), false))
+			jsonString = JsonConvert.SerializeObject(PrepareCategories());
+			using (var sw = new StreamWriter(Path.Combine(Parent.Folder.FullName, Constants.ReferencesJsonFileName), false))
 			{
 				sw.Write(jsonString);
 				sw.Flush();
 			}
 		}
 
-		private ContentManagmentService.Library PrepareServerLibrary()
+		private Library PrepareServerLibrary()
 		{
 			TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 
-			ContentManagmentService.Library library = new ContentManagmentService.Library();
-			library.id = this.Parent.Identifier.ToString();
-			library.name = this.Parent.Name;
+			var library = new Library();
+			library.id = Parent.Identifier.ToString();
+			library.name = Parent.Name;
 
 			#region Pages
-			List<ContentManagmentService.LibraryPage> pages = new List<ContentManagmentService.LibraryPage>();
-			foreach (LibraryPage libraryPage in this.Parent.Pages)
+			var pages = new List<ContentManagmentService.LibraryPage>();
+			foreach (LibraryPage libraryPage in Parent.Pages)
 			{
-				ContentManagmentService.LibraryPage page = new ContentManagmentService.LibraryPage();
+				var page = new ContentManagmentService.LibraryPage();
 				page.id = libraryPage.Identifier.ToString();
-				page.libraryId = this.Parent.Identifier.ToString();
+				page.libraryId = Parent.Identifier.ToString();
 				page.name = libraryPage.Name;
 				page.order = libraryPage.Order;
 				page.enableColumns = libraryPage.EnableColumnTitles;
 				page.dateModify = libraryPage.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
 				#region Columns
-				List<ContentManagmentService.Column> columns = new List<ContentManagmentService.Column>();
+				var columns = new List<Column>();
 				foreach (ColumnTitle columnTitle in libraryPage.ColumnTitles)
 				{
-					ContentManagmentService.Column column = new ContentManagmentService.Column();
+					var column = new Column();
 					column.pageId = libraryPage.Identifier.ToString();
-					column.libraryId = this.Parent.Identifier.ToString();
+					column.libraryId = Parent.Identifier.ToString();
 					column.name = columnTitle.Name;
 					column.order = columnTitle.ColumnOrder;
 					column.backColor = ColorTranslator.ToHtml(columnTitle.BackgroundColor);
@@ -131,7 +143,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					column.alignment = columnTitle.HeaderAlignment.ToString().ToLower();
 					column.enableWidget = columnTitle.EnableWidget;
 					column.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(columnTitle.Widget, typeof(byte[])));
-					column.font = new ContentManagmentService.Font();
+					column.font = new Font();
 					column.font.name = columnTitle.HeaderFont.Name;
 					column.font.size = (int)Math.Round(columnTitle.HeaderFont.Size, 0);
 					column.font.isBold = columnTitle.HeaderFont.Bold;
@@ -139,16 +151,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					column.dateModify = columnTitle.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
 					#region Banner
-					column.banner = new ContentManagmentService.Banner();
+					column.banner = new Banner();
 					column.banner.id = columnTitle.BannerProperties.Identifier.ToString();
-					column.banner.libraryId = this.Parent.Identifier.ToString();
+					column.banner.libraryId = Parent.Identifier.ToString();
 					column.banner.isEnabled = columnTitle.BannerProperties.Enable;
 					column.banner.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(columnTitle.BannerProperties.Image, typeof(byte[])));
 					column.banner.showText = columnTitle.BannerProperties.ShowText;
 					column.banner.imageAlignment = columnTitle.BannerProperties.ImageAlignement.ToString().ToLower();
 					column.banner.text = columnTitle.BannerProperties.Text;
 					column.banner.foreColor = ColorTranslator.ToHtml(columnTitle.BannerProperties.ForeColor);
-					column.banner.font = new ContentManagmentService.Font();
+					column.banner.font = new Font();
 					column.banner.font.name = columnTitle.BannerProperties.Font.Name;
 					column.banner.font.size = (int)Math.Round(columnTitle.BannerProperties.Font.Size, 0);
 					column.banner.font.isBold = columnTitle.BannerProperties.Font.Bold;
@@ -162,13 +174,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				#endregion
 
 				#region Folders
-				List<ContentManagmentService.LibraryFolder> folders = new List<ContentManagmentService.LibraryFolder>();
+				var folders = new List<ContentManagmentService.LibraryFolder>();
 				foreach (LibraryFolder libraryFolder in libraryPage.Folders)
 				{
-					ContentManagmentService.LibraryFolder folder = new ContentManagmentService.LibraryFolder();
+					var folder = new ContentManagmentService.LibraryFolder();
 					folder.id = libraryFolder.Identifier.ToString();
 					folder.pageId = libraryPage.Identifier.ToString();
-					folder.libraryId = this.Parent.Identifier.ToString();
+					folder.libraryId = Parent.Identifier.ToString();
 					folder.name = libraryFolder.Name;
 					folder.columnOrder = libraryFolder.ColumnOrder;
 					folder.rowOrder = (int)libraryFolder.RowOrder;
@@ -180,12 +192,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					folder.headerAlignment = libraryFolder.HeaderAlignment.ToString().ToLower();
 					folder.enableWidget = libraryFolder.EnableWidget;
 					folder.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFolder.Widget, typeof(byte[])));
-					folder.windowFont = new ContentManagmentService.Font();
+					folder.windowFont = new Font();
 					folder.windowFont.name = libraryFolder.WindowFont.Name;
 					folder.windowFont.size = (int)Math.Round(libraryFolder.WindowFont.Size, 0);
 					folder.windowFont.isBold = libraryFolder.WindowFont.Bold;
 					folder.windowFont.isItalic = libraryFolder.WindowFont.Italic;
-					folder.headerFont = new ContentManagmentService.Font();
+					folder.headerFont = new Font();
 					folder.headerFont.name = libraryFolder.HeaderFont.Name;
 					folder.headerFont.size = (int)Math.Round(libraryFolder.HeaderFont.Size, 0);
 					folder.headerFont.isBold = libraryFolder.HeaderFont.Bold;
@@ -194,16 +206,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					folder.dateModify = libraryFolder.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
 					#region Banner
-					folder.banner = new ContentManagmentService.Banner();
+					folder.banner = new Banner();
 					folder.banner.id = libraryFolder.BannerProperties.Identifier.ToString();
-					folder.banner.libraryId = this.Parent.Identifier.ToString();
+					folder.banner.libraryId = Parent.Identifier.ToString();
 					folder.banner.isEnabled = libraryFolder.BannerProperties.Enable;
 					folder.banner.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFolder.BannerProperties.Image, typeof(byte[])));
 					folder.banner.showText = libraryFolder.BannerProperties.ShowText;
 					folder.banner.imageAlignment = libraryFolder.BannerProperties.ImageAlignement.ToString().ToLower();
 					folder.banner.text = libraryFolder.BannerProperties.Text;
 					folder.banner.foreColor = ColorTranslator.ToHtml(libraryFolder.BannerProperties.ForeColor);
-					folder.banner.font = new ContentManagmentService.Font();
+					folder.banner.font = new Font();
 					folder.banner.font.name = libraryFolder.BannerProperties.Font.Name;
 					folder.banner.font.size = (int)Math.Round(libraryFolder.BannerProperties.Font.Size, 0);
 					folder.banner.font.isBold = libraryFolder.BannerProperties.Font.Bold;
@@ -212,13 +224,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					#endregion
 
 					#region Files
-					List<ContentManagmentService.LibraryLink> links = new List<ContentManagmentService.LibraryLink>();
+					var links = new List<LibraryLink>();
 					foreach (ILibraryFile libraryFile in libraryFolder.Files)
 					{
-						ContentManagmentService.LibraryLink link = new ContentManagmentService.LibraryLink();
+						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
 						link.folderId = libraryFolder.Identifier.ToString();
-						link.libraryId = this.Parent.Identifier.ToString();
+						link.libraryId = Parent.Identifier.ToString();
 						link.name = libraryFile.Name;
 						link.fileRelativePath = libraryFile.RelativePath;
 						if (File.Exists(libraryFile.OriginalPath))
@@ -247,7 +259,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 						if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo)
 						{
-							IPreviewContainer previewContainer = this.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+							IPreviewContainer previewContainer = Parent.GetPreviewContainer(libraryFile.OriginalPath);
 							if (previewContainer != null)
 							{
 								link.previewId = previewContainer.Identifier;
@@ -260,12 +272,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						#region Line Break
 						if (libraryFile.LineBreakProperties != null)
 						{
-							link.lineBreakProperties = new ContentManagmentService.LineBreak();
+							link.lineBreakProperties = new LineBreak();
 							link.lineBreakProperties.id = libraryFile.LineBreakProperties.Identifier.ToString();
-							link.lineBreakProperties.libraryId = this.Parent.Identifier.ToString();
+							link.lineBreakProperties.libraryId = Parent.Identifier.ToString();
 							link.lineBreakProperties.note = libraryFile.LineBreakProperties.Note;
 							link.lineBreakProperties.foreColor = ColorTranslator.ToHtml(libraryFile.LineBreakProperties.ForeColor);
-							link.lineBreakProperties.font = new ContentManagmentService.Font();
+							link.lineBreakProperties.font = new Font();
 							link.lineBreakProperties.font.name = libraryFile.LineBreakProperties.Font.Name;
 							link.lineBreakProperties.font.size = (int)Math.Round(libraryFile.LineBreakProperties.Font.Size, 0);
 							link.lineBreakProperties.font.isBold = libraryFile.LineBreakProperties.Font.Bold;
@@ -275,16 +287,16 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						#endregion
 
 						#region Banner
-						link.banner = new ContentManagmentService.Banner();
+						link.banner = new Banner();
 						link.banner.id = libraryFile.BannerProperties.Identifier.ToString();
-						link.banner.libraryId = this.Parent.Identifier.ToString();
+						link.banner.libraryId = Parent.Identifier.ToString();
 						link.banner.isEnabled = libraryFile.BannerProperties.Enable;
 						link.banner.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.BannerProperties.Image, typeof(byte[])));
 						link.banner.showText = libraryFile.BannerProperties.ShowText;
 						link.banner.imageAlignment = libraryFile.BannerProperties.ImageAlignement.ToString().ToLower();
 						link.banner.text = libraryFile.BannerProperties.Text;
 						link.banner.foreColor = ColorTranslator.ToHtml(libraryFile.BannerProperties.ForeColor);
-						link.banner.font = new ContentManagmentService.Font();
+						link.banner.font = new Font();
 						link.banner.font.name = libraryFile.BannerProperties.Font.Name;
 						link.banner.font.size = (int)Math.Round(libraryFile.BannerProperties.Font.Size, 0);
 						link.banner.font.isBold = libraryFile.BannerProperties.Font.Bold;
@@ -293,12 +305,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						#endregion
 
 						#region Categories
-						List<ContentManagmentService.LinkCategory> categories = new List<ContentManagmentService.LinkCategory>();
+						var categories = new List<LinkCategory>();
 						foreach (SearchGroup searchGroup in libraryFile.SearchTags.SearchGroups)
 							foreach (string tag in searchGroup.Tags)
 							{
-								ContentManagmentService.LinkCategory category = new ContentManagmentService.LinkCategory();
-								category.libraryId = this.Parent.Identifier.ToString();
+								var category = new LinkCategory();
+								category.libraryId = Parent.Identifier.ToString();
 								category.linkId = libraryFile.Identifier.ToString();
 								category.category = searchGroup.Name;
 								category.tag = tag;
@@ -312,7 +324,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						link.enableFileCard = libraryFile.FileCard.Enable;
 						link.fileCard = new ContentManagmentService.FileCard();
 						link.fileCard.id = libraryFile.FileCard.Identifier.ToString();
-						link.fileCard.libraryId = this.Parent.Identifier.ToString();
+						link.fileCard.libraryId = Parent.Identifier.ToString();
 						link.fileCard.title = libraryFile.FileCard.Title;
 						link.fileCard.advertiser = libraryFile.FileCard.Advertiser;
 						link.fileCard.dateSold = libraryFile.FileCard.DateSold.HasValue ? libraryFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
@@ -329,17 +341,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 						#region Attachments
 						link.enableAttachments = libraryFile.AttachmentProperties.Enable;
-						List<ContentManagmentService.Attachment> attachments = new List<ContentManagmentService.Attachment>();
+						var attachments = new List<Attachment>();
 						foreach (LinkAttachment linkAttachment in libraryFile.AttachmentProperties.FilesAttachments)
 						{
-							ContentManagmentService.Attachment attachment = new ContentManagmentService.Attachment();
+							var attachment = new Attachment();
 							attachment.linkId = libraryFile.Identifier.ToString();
-							attachment.libraryId = this.Parent.Identifier.ToString();
+							attachment.libraryId = Parent.Identifier.ToString();
 							attachment.name = linkAttachment.Name;
 							attachment.originalFormat = linkAttachment.Format;
 							attachment.path = linkAttachment.DestinationRelativePath;
 
-							IPreviewContainer previewContainer = this.Parent.GetPreviewContainer(linkAttachment.OriginalPath);
+							IPreviewContainer previewContainer = Parent.GetPreviewContainer(linkAttachment.OriginalPath);
 							if (previewContainer != null)
 								attachment.previewId = previewContainer.Identifier;
 
@@ -347,9 +359,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						}
 						foreach (LinkAttachment linkAttachment in libraryFile.AttachmentProperties.WebAttachments)
 						{
-							ContentManagmentService.Attachment attachment = new ContentManagmentService.Attachment();
+							var attachment = new Attachment();
 							attachment.linkId = libraryFile.Identifier.ToString();
-							attachment.libraryId = this.Parent.Identifier.ToString();
+							attachment.libraryId = Parent.Identifier.ToString();
 							attachment.name = linkAttachment.Name;
 							attachment.originalFormat = "url";
 							attachment.path = linkAttachment.DestinationRelativePath;
@@ -375,23 +387,23 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.pages = pages.ToArray();
 			#endregion
 
-			List<ContentManagmentService.AutoWidget> autoWidgets = new List<ContentManagmentService.AutoWidget>();
-			foreach (AutoWidget libraryAutoWidget in this.Parent.AutoWidgets)
+			var autoWidgets = new List<ContentManagmentService.AutoWidget>();
+			foreach (AutoWidget libraryAutoWidget in Parent.AutoWidgets)
 			{
-				ContentManagmentService.AutoWidget autoWidget = new ContentManagmentService.AutoWidget();
-				autoWidget.libraryId = this.Parent.Identifier.ToString();
+				var autoWidget = new ContentManagmentService.AutoWidget();
+				autoWidget.libraryId = Parent.Identifier.ToString();
 				autoWidget.extension = libraryAutoWidget.Extension;
 				autoWidget.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryAutoWidget.Widget, typeof(byte[])));
 				autoWidgets.Add(autoWidget);
 			}
 			library.autoWidgets = autoWidgets.ToArray();
 
-			List<ContentManagmentService.UniversalPreviewContainer> previewContainers = new List<ContentManagmentService.UniversalPreviewContainer>();
-			foreach (IPreviewContainer libraryPreviewContainer in this.Parent.PreviewContainers)
+			var previewContainers = new List<ContentManagmentService.UniversalPreviewContainer>();
+			foreach (IPreviewContainer libraryPreviewContainer in Parent.PreviewContainers)
 			{
-				ContentManagmentService.UniversalPreviewContainer previewContainer = new ContentManagmentService.UniversalPreviewContainer();
+				var previewContainer = new ContentManagmentService.UniversalPreviewContainer();
 				previewContainer.id = libraryPreviewContainer.Identifier;
-				previewContainer.libraryId = this.Parent.Identifier.ToString();
+				previewContainer.libraryId = Parent.Identifier.ToString();
 
 				Size thumbSize = libraryPreviewContainer.GetThumbSize();
 				previewContainer.thumbsWidth = thumbSize.Width;
@@ -448,15 +460,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return library;
 		}
 
-		private ContentManagmentService.Category[] PrepareCategories()
+		private Category[] PrepareCategories()
 		{
-			SearchTags searchTags = new SearchTags();
-			List<ContentManagmentService.Category> result = new List<Category>();
-			foreach (var group in searchTags.SearchGroups)
+			var searchTags = new SearchTags();
+			var result = new List<Category>();
+			foreach (SearchGroup group in searchTags.SearchGroups)
 			{
-				foreach (var tag in group.Tags)
+				foreach (string tag in group.Tags)
 				{
-					ContentManagmentService.Category category = new Category();
+					var category = new Category();
 					category.category = group.Name;
 					category.tag = tag;
 					result.Add(category);
@@ -466,13 +478,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		}
 		#endregion
 
-		#region User Administration
-		private IPadAdminService.AdminControllerService GetAdminClient()
+		#region Permissions Manager
+		private AdminControllerService GetAdminClient()
 		{
 			try
 			{
-				IPadAdminService.AdminControllerService client = new IPadAdminService.AdminControllerService();
-				client.Url = string.Format("{0}/admin/quote?ws=1", this.Website);
+				var client = new AdminControllerService();
+				client.Url = string.Format("{0}/admin/quote?ws=1", Website);
 				return client;
 			}
 			catch
@@ -481,18 +493,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public IPadAdminService.UserRecord[] GetUsers(out string message)
+		#region Users
+		public UserRecord[] GetUsers(out string message)
 		{
 			message = string.Empty;
-			List<IPadAdminService.UserRecord> users = new List<IPadAdminService.UserRecord>();
-			IPadAdminService.AdminControllerService client = GetAdminClient();
+			var users = new List<UserRecord>();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
 				{
-					string sessionKey = client.getSessionKey(this.Login, this.Password);
+					string sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						users.AddRange(client.getUsers(sessionKey));
+						users.AddRange(client.getUsers(sessionKey) ?? new UserRecord[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -506,17 +519,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, GroupRecord[] groups, IPadAdminService.LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
-			IPadAdminService.AdminControllerService client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
 				{
-					string sessionKey = client.getSessionKey(this.Login, this.Password);
+					string sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email, pages);
+						client.setUser(sessionKey, login, password, firstName, lastName, email, groups, pages);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -532,12 +545,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public void DeleteUser(string login, out string message)
 		{
 			message = string.Empty;
-			IPadAdminService.AdminControllerService client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
 				{
-					string sessionKey = client.getSessionKey(this.Login, this.Password);
+					string sessionKey = client.getSessionKey(Login, Password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						client.deleteUser(sessionKey, login);
 					else
@@ -553,16 +566,165 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		}
 		#endregion
 
+		#region Groups
+		public GroupRecord[] GetGroups(out string message)
+		{
+			message = string.Empty;
+			var groups = new List<GroupRecord>();
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						groups.AddRange(client.getGroups(sessionKey) ?? new GroupRecord[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return groups.ToArray();
+		}
+
+		public void SetGroup(string id, string name, UserRecord[] users, IPadAdminService.LibraryPage[] pages, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setGroup(sessionKey, id, name, users, pages);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void DeleteGroup(string id, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.deleteGroup(sessionKey, id);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public string[] GetGroupTemplates(out string message)
+		{
+			message = string.Empty;
+			var groupTemplates = new List<string>();
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						groupTemplates.AddRange(client.getGroupTemplates(sessionKey) ?? new string[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return groupTemplates.ToArray();
+		}
+		#endregion
+
+		#region Libraraies
+		public IPadAdminService.Library[] GetLibraries(out string message)
+		{
+			message = string.Empty;
+			var libraries = new List<IPadAdminService.Library>();
+			var client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						libraries.AddRange(client.getLibraries(sessionKey) ?? new IPadAdminService.Library[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return libraries.ToArray();
+		}
+
+		public void SetPage(string id, UserRecord[] users, GroupRecord[] groups, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(Login, Password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setPage(sessionKey, id, users, groups);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+		#endregion
+		#endregion
+
 		#region Video Management
 		public VideoInfo[] VideoFiles
 		{
 			get
 			{
-				List<VideoInfo> videoFiles = new List<VideoInfo>();
+				var videoFiles = new List<VideoInfo>();
 				int i = 1;
-				foreach (IPreviewContainer previewContainer in this.Parent.PreviewContainers.Where(x => !string.IsNullOrEmpty(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
+				foreach (IPreviewContainer previewContainer in Parent.PreviewContainers.Where(x => !string.IsNullOrEmpty(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
 				{
-					VideoInfo videoFile = new VideoInfo(previewContainer);
+					var videoFile = new VideoInfo(previewContainer);
 					videoFile.Index = i.ToString();
 					videoFile.SourceFileName = Path.GetFileName(previewContainer.OriginalPath);
 					videoFile.SourceFilePath = previewContainer.OriginalPath;
@@ -606,6 +768,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class VideoInfo
 	{
+		public VideoInfo(IPreviewContainer parent)
+		{
+			Parent = parent;
+		}
+
 		public IPreviewContainer Parent { get; private set; }
 		public string Index { get; set; }
 		public bool Selected { get; set; }
@@ -617,11 +784,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string IPadCompatible { get; set; }
 		public string OgvFileName { get; set; }
 		public string OgvFilePath { get; set; }
-
-		public VideoInfo(IPreviewContainer parent)
-		{
-			this.Parent = parent;
-		}
 	}
 }
 
@@ -631,27 +793,136 @@ namespace SalesDepot.CoreObjects.IPadAdminService
 	{
 		public string FullName
 		{
-			get { return (this.firstName + " " + this.lastName).Trim(); }
+			get { return (firstName + " " + lastName).Trim(); }
 		}
 
-		public string AssignedLibraries
+		public string LoginWithName
+		{
+			get { return string.Format("{0} ({1})", login, FullName); }
+		}
+
+		public string AssignedObjects
 		{
 			get
 			{
 				string result = string.Empty;
-				if (this.libraries != null)
+				result += "Assigned Groups: ";
+				if (groups != null)
 				{
-					result = "Assigned Libraries: ";
-					if (this.libraries.Any(x => !x.selected))
+					if (groups.Any(x => !x.selected))
 					{
-						if (this.libraries.Any(x => x.selected))
-							result += string.Join(", ", this.libraries.Where(x => x.selected).Select(x => x.name).ToArray());
+						if (groups.Any(x => x.selected))
+							result += string.Join(", ", groups.Where(x => x.selected).Select(x => x.name).ToArray());
 						else
 							result += "None";
 					}
 					else
 						result += "ALL";
 				}
+				else
+					result += "None";
+				result += Environment.NewLine;
+				result += "Assigned Libraries: ";
+				if (libraries != null)
+				{
+					if (libraries.Any(x => !x.selected))
+					{
+						if (libraries.Any(x => x.selected))
+							result += string.Join(", ", libraries.Where(x => x.selected).Select(x => x.name).ToArray());
+						else
+							result += "None";
+					}
+					else
+						result += "ALL";
+				}
+				else
+					result += "None";
+				return result;
+			}
+		}
+	}
+
+	public partial class GroupRecord
+	{
+		public string AssignedObjects
+		{
+			get
+			{
+				string result = string.Empty;
+				result += "Assigned Users: ";
+				if (users != null)
+				{
+					if (users.Any(x => !x.selected))
+					{
+						if (users.Any(x => x.selected))
+							result += string.Join(", ", users.Where(x => x.selected).Select(x => x.login).ToArray());
+						else
+							result += "None";
+					}
+					else
+						result += "ALL";
+				}
+				else
+					result += "None";
+				result += Environment.NewLine;
+				result += "Assigned Libraries: ";
+				if (libraries != null)
+				{
+					if (libraries.Any(x => !x.selected))
+					{
+						if (libraries.Any(x => x.selected))
+							result += string.Join(", ", libraries.Where(x => x.selected).Select(x => x.name).ToArray());
+						else
+							result += "None";
+					}
+					else
+						result += "ALL";
+				}
+				else
+					result += "ALL";
+				return result;
+			}
+		}
+	}
+
+	public partial class LibraryPage
+	{
+		public string AssignedObjects
+		{
+			get
+			{
+				string result = string.Empty;
+				result += "Assigned Users: ";
+				if (users != null)
+				{
+					if (users.Any(x => !x.selected))
+					{
+						if (users.Any(x => x.selected))
+							result += string.Join(", ", users.Where(x => x.selected).Select(x => x.login).ToArray());
+						else
+							result += "None";
+					}
+					else
+						result += "ALL";
+				}
+				else
+					result += "None";
+				result += Environment.NewLine;
+				result += "Assigned Groups: ";
+				if (groups != null)
+				{
+					if (groups.Any(x => !x.selected))
+					{
+						if (groups.Any(x => x.selected))
+							result += string.Join(", ", groups.Where(x => x.selected).Select(x => x.name).ToArray());
+						else
+							result += "None";
+					}
+					else
+						result += "ALL";
+				}
+				else
+					result += "None";
 				return result;
 			}
 		}

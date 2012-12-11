@@ -38,7 +38,7 @@ namespace FileManager.TabPages
 			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null && PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.AllowToSave)
 			{
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IPadManager.Enabled = FormMain.Instance.buttonItemIPadSyncEnabled.Checked;
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateControlsState();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadContentManager.UpdateControlsState();
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.StateChanged = true;
 			}
 		}
@@ -51,7 +51,7 @@ namespace FileManager.TabPages
 				if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
 				{
 					PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IPadManager.SyncDestinationPath = path;
-					PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateControlsState();
+					PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadContentManager.UpdateControlsState();
 				}
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.StateChanged = true;
 			}
@@ -80,7 +80,7 @@ namespace FileManager.TabPages
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IPadManager.Website = site;
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IPadManager.Login = login;
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.IPadManager.Password = password;
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.UpdateControlsState();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadContentManager.UpdateControlsState();
 				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.StateChanged = true;
 			}
 		}
@@ -137,7 +137,7 @@ namespace FileManager.TabPages
 		public void buttonItemIPadVideo_Click(object sender, EventArgs e)
 		{
 			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadManager.ConvertSelectedVideoFiles();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadContentManager.ConvertSelectedVideoFiles();
 		}
 	}
 }

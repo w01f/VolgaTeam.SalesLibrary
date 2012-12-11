@@ -15,20 +15,29 @@ namespace FileManager.ToolForms.IPad
 		private bool _newUser = false;
 		private List<string> _existedUsers = new List<string>();
 
+		private List<GroupRecord> _groups = new List<GroupRecord>();
 		private List<Library> _libraries = new List<Library>();
 		private List<LibraryPage> _pages = new List<LibraryPage>();
+
+		public GroupRecord[] AssignedGroups
+		{
+			get { return _groups.Where(x => x.selected).ToArray(); }
+		}
 
 		public LibraryPage[] AssignedPages
 		{
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditUser(bool newUser, string[] existedUsers, Library[] libraries)
+		public FormEditUser(bool newUser, string[] existedUsers, GroupRecord[] groups, Library[] libraries)
 		{
 			InitializeComponent();
 
 			_newUser = newUser;
 			_existedUsers.AddRange(existedUsers);
+
+			_groups.AddRange(groups);
+			gridControlGroups.DataSource = _groups;
 
 			_libraries.Clear();
 			_libraries.AddRange(libraries);
@@ -41,21 +50,24 @@ namespace FileManager.ToolForms.IPad
 			gridViewLibraries.MasterRowGetChildList += OnGetLibraryChildList;
 			gridControlLibraries.DataSource = _libraries;
 
-			textEditLogin.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-			textEditLogin.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-			textEditLogin.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
-			textEditFirstName.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-			textEditFirstName.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-			textEditFirstName.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
-			textEditLastName.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-			textEditLastName.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-			textEditLastName.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
-			textEditEmail.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-			textEditEmail.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-			textEditEmail.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
-			buttonEditPassword.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-			buttonEditPassword.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-			buttonEditPassword.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseDown);
+			textEditLogin.Enter += FormMain.Instance.Editor_Enter;
+			textEditLogin.MouseUp += FormMain.Instance.Editor_MouseUp;
+			textEditLogin.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditFirstName.Enter += FormMain.Instance.Editor_Enter;
+			textEditFirstName.MouseUp += FormMain.Instance.Editor_MouseUp;
+			textEditFirstName.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditLastName.Enter += FormMain.Instance.Editor_Enter;
+			textEditLastName.MouseUp += FormMain.Instance.Editor_MouseUp;
+			textEditLastName.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditEmail.Enter += FormMain.Instance.Editor_Enter;
+			textEditEmail.MouseUp += FormMain.Instance.Editor_MouseUp;
+			textEditEmail.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditEmailConfirm.Enter += FormMain.Instance.Editor_Enter;
+			textEditEmailConfirm.MouseUp += FormMain.Instance.Editor_MouseUp;
+			textEditEmailConfirm.MouseDown += FormMain.Instance.Editor_MouseDown;
+			buttonEditPassword.Enter += FormMain.Instance.Editor_Enter;
+			buttonEditPassword.MouseUp += FormMain.Instance.Editor_MouseUp;
+			buttonEditPassword.MouseDown += FormMain.Instance.Editor_MouseDown;
 
 			if (_newUser)
 			{
@@ -75,6 +87,30 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 
+		private void FormEditUser_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (this.DialogResult == DialogResult.OK)
+			{
+				gridViewGroups.PostEditor();
+				gridViewLibraries.PostEditor();
+				gridViewPages.PostEditor();
+				textEditLogin.Focus();
+				textEditFirstName.Focus();
+				textEditLastName.Focus();
+				textEditEmail.Focus();
+				textEditEmailConfirm.Focus();
+				buttonEditPassword.Focus();
+				if (!this.ValidateChildren())
+					e.Cancel = true;
+				else if (_newUser && textEditLogin.EditValue != null && _existedUsers.Contains(textEditLogin.EditValue.ToString()))
+				{
+					if (AppManager.Instance.ShowWarningQuestion("User with given login already exist.\nDo you want to update his data?") == System.Windows.Forms.DialogResult.No)
+						e.Cancel = true;
+				}
+			}
+		}
+
+		#region User
 		private void checkEditPassword_CheckedChanged(object sender, EventArgs e)
 		{
 			buttonEditPassword.Enabled = checkEditPassword.Checked;
@@ -92,28 +128,44 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 
+		private void textEditEmail_Validating(object sender, CancelEventArgs e)
+		{
+			string email = textEditEmail.EditValue != null ? textEditEmail.EditValue.ToString() : string.Empty;
+			string emailConfirm = textEditEmailConfirm.EditValue != null ? textEditEmailConfirm.EditValue.ToString() : string.Empty;
+			if (!email.Equals(emailConfirm))
+			{
+				textEditEmail.ErrorText = textEditEmailConfirm.ErrorText = "Email and confirmation field have different values";
+				e.Cancel = true;
+			}
+		}
+
 		private void buttonEditPassword_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
 			buttonEditPassword.EditValue = new ToolClasses.PasswordGenerator().Generate();
 		}
+		#endregion
 
-		private void FormEditUser_FormClosing(object sender, FormClosingEventArgs e)
+		#region Libraraies
+		private void buttonXLibrariesSelectAll_Click(object sender, EventArgs e)
 		{
-			if (this.DialogResult == DialogResult.OK)
-			{
-				textEditLogin.Focus();
-				textEditFirstName.Focus();
-				textEditLastName.Focus();
-				textEditEmail.Focus();
-				buttonEditPassword.Focus();
-				if (!this.ValidateChildren())
-					e.Cancel = true;
-				else if (_newUser && textEditLogin.EditValue != null && _existedUsers.Contains(textEditLogin.EditValue.ToString()))
-				{
-					if (AppManager.Instance.ShowWarningQuestion("User with given login already exist.\nDo you want to update his data?") == System.Windows.Forms.DialogResult.No)
-						e.Cancel = true;
-				}
-			}
+			foreach (var library in _libraries)
+				library.selected = true;
+			foreach (var page in _pages)
+				page.selected = true;
+			gridViewLibraries.RefreshData();
+			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
+				gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0).RefreshData();
+		}
+
+		private void buttonXLibrariesClearAll_Click(object sender, EventArgs e)
+		{
+			foreach (var library in _libraries)
+				library.selected = false;
+			foreach (var page in _pages)
+				page.selected = false;
+			gridViewLibraries.RefreshData();
+			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
+				gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0).RefreshData();
 		}
 
 		#region Grid Events
@@ -172,31 +224,26 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 		#endregion
+		#endregion
 
-		private void buttonXLibrariesSelectAll_Click(object sender, EventArgs e)
+		#region Groups
+		private void buttonXGroupsSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var library in _libraries)
-				library.selected = true;
-			foreach (var page in _pages)
-				page.selected = true;
-			gridViewLibraries.RefreshData();
-			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
-				gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0).RefreshData();
+			foreach (var group in _groups)
+				group.selected = true;
+			gridViewGroups.RefreshData();
 		}
 
-		private void buttonXLibrariesClearAll_Click(object sender, EventArgs e)
+		private void buttonXGroupsClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var library in _libraries)
-				library.selected = false;
-			foreach (var page in _pages)
-				page.selected = false;
-			gridViewLibraries.RefreshData();
-			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
-				gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0).RefreshData();
+			foreach (var group in _groups)
+				group.selected = false;
+			gridViewGroups.RefreshData();
 		}
+		#endregion
 	}
 
-	class ValidatableTabControl : DevExpress.XtraTab.XtraTabControl
+	public class ValidatableTabControl : DevExpress.XtraTab.XtraTabControl
 	{
 		public ValidatableTabControl()
 		{

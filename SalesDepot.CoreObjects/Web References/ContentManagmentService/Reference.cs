@@ -30,6 +30,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Category))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UniversalPreviewContainer))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AutoWidget))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserRecord))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(GroupRecord))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Column))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(Attachment))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(LinkCategory))]
@@ -179,6 +181,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private UniversalPreviewContainer[] previewContainersField;
         
+        private bool selectedField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -228,6 +232,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
                 this.previewContainersField = value;
             }
         }
+        
+        /// <remarks/>
+        public bool selected {
+            get {
+                return this.selectedField;
+            }
+            set {
+                this.selectedField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -253,6 +267,12 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         private Column[] columnsField;
         
         private string dateModifyField;
+        
+        private bool selectedField;
+        
+        private GroupRecord[] groupsField;
+        
+        private UserRecord[] usersField;
         
         /// <remarks/>
         public string id {
@@ -331,6 +351,36 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.dateModifyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool selected {
+            get {
+                return this.selectedField;
+            }
+            set {
+                this.selectedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public GroupRecord[] groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UserRecord[] users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
             }
         }
     }
@@ -904,6 +954,168 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.widgetField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class UserRecord {
+        
+        private int idField;
+        
+        private string loginField;
+        
+        private string passwordField;
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string emailField;
+        
+        private GroupRecord[] groupsField;
+        
+        private Library[] librariesField;
+        
+        /// <remarks/>
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string login {
+            get {
+                return this.loginField;
+            }
+            set {
+                this.loginField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public GroupRecord[] groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Library[] libraries {
+            get {
+                return this.librariesField;
+            }
+            set {
+                this.librariesField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class GroupRecord {
+        
+        private string idField;
+        
+        private string nameField;
+        
+        private UserRecord[] usersField;
+        
+        private Library[] librariesField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public UserRecord[] users {
+            get {
+                return this.usersField;
+            }
+            set {
+                this.usersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public Library[] libraries {
+            get {
+                return this.librariesField;
+            }
+            set {
+                this.librariesField = value;
             }
         }
     }

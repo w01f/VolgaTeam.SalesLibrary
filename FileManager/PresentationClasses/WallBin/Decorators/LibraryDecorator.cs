@@ -10,10 +10,10 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		public Library Library { get; set; }
 		public PageDecorator ActivePage { get; set; }
 		public List<PageDecorator> Pages { get; set; }
-		public PresentationClasses.WallBin.MultitabLibraryControl TabControl { get; private set; }
-		public PresentationClasses.OvernightsCalendar.OvernightsCalendarControl OvernightsCalendar { get; private set; }
-		public PresentationClasses.IPad.IPadManagerControl IPadManager { get; private set; }
-		public PresentationClasses.IPad.IPadUsersControl IPadUsers { get; private set; }
+		public MultitabLibraryControl TabControl { get; private set; }
+		public OvernightsCalendar.OvernightsCalendarControl OvernightsCalendar { get; private set; }
+		public IPadContentManagerControl IPadContentManager { get; private set; }
+		public IPadPermissionsManagerControl IPadPermissionsManager { get; private set; }
 
 		public bool AllowToSave { get; set; }
 		public bool StateChanged { get; set; }
@@ -23,8 +23,8 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			this.Pages = new List<PageDecorator>();
 			this.TabControl = new PresentationClasses.WallBin.MultitabLibraryControl();
 			this.OvernightsCalendar = new OvernightsCalendar.OvernightsCalendarControl(this);
-			this.IPadManager = new IPad.IPadManagerControl(this);
-			this.IPadUsers = new IPadUsersControl(this);
+			this.IPadContentManager = new IPad.IPadContentManagerControl(this);
+			this.IPadPermissionsManager = new IPadPermissionsManagerControl(this);
 			this.Library = library;
 			BuildWallbin();
 		}
@@ -135,7 +135,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 				page.Save();
 			this.Library.Save();
 			this.StateChanged = false;
-			this.IPadManager.UpdateVideoFiles();
+			this.IPadContentManager.UpdateVideoFiles();
 		}
 
 		public void SelectPage(int pageIndex)
@@ -215,14 +215,13 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			FormMain.Instance.buttonEditIPadSite.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Website) ? this.Library.IPadManager.Website : null;
 			FormMain.Instance.buttonEditIPadLogin.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Login) ? this.Library.IPadManager.Login : null;
 			FormMain.Instance.buttonEditIPadPassword.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Password) ? this.Library.IPadManager.Password : null;
-			this.IPadManager.UpdateVideoFiles();
-			this.IPadUsers.UpdateUsers(false);
-			this.IPadManager.UpdateControlsState();
-			if (!FormMain.Instance.TabIPadManager.Controls.Contains(this.IPadManager))
-				FormMain.Instance.TabIPadManager.Controls.Add(this.IPadManager);
-			if (!FormMain.Instance.TabIPadUsers.Controls.Contains(this.IPadUsers))
-				FormMain.Instance.TabIPadUsers.Controls.Add(this.IPadUsers);
-			this.IPadManager.BringToFront();
+			this.IPadContentManager.UpdateVideoFiles();
+			this.IPadContentManager.UpdateControlsState();
+			if (!FormMain.Instance.TabIPadManager.Controls.Contains(this.IPadContentManager))
+				FormMain.Instance.TabIPadManager.Controls.Add(this.IPadContentManager);
+			if (!FormMain.Instance.TabIPadUsers.Controls.Contains(this.IPadPermissionsManager))
+				FormMain.Instance.TabIPadUsers.Controls.Add(this.IPadPermissionsManager);
+			this.IPadContentManager.BringToFront();
 			this.AllowToSave = true;
 		}
 		#endregion

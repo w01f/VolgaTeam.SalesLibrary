@@ -189,7 +189,11 @@ namespace FileManager
 
 				this.TabHome.InitPage(form);
 
-				ribbonTabItemClipart.Enabled = System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath);
+				ribbonTabItemCalendar.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableOvernightsCalendarTab;
+				ribbonTabItemClipart.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableClipartTab && (System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.ClientLogosRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.SalesGalleryRootPath) || System.IO.Directory.Exists(ConfigurationClasses.SettingsManager.Instance.WebArtRootPath));
+				ribbonTabItemProgramManager.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableProgramManagerTab;
+				ribbonTabItemIPad.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab;
+				ribbonTabItemIPadUsers.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab;
 
 				ribbonControl.Enabled = true;
 
@@ -239,6 +243,7 @@ namespace FileManager
 					if (!pnContainer.Controls.Contains(this.TabIPadUsers))
 						pnContainer.Controls.Add(this.TabIPadUsers);
 					this.TabIPadUsers.BringToFront();
+					this.TabIPadUsers.RefreshData();
 					_currentTab = this.TabIPadUsers;
 				}
 			}

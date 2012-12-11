@@ -12,28 +12,37 @@ namespace FileManager.TabPages
 			this.Dock = DockStyle.Fill;
 		}
 
+		public void RefreshData()
+		{
+			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null && !PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadPermissionsManager.HasConnection)
+			{
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Save();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadPermissionsManager.RefreshData(true);
+			}
+		}
+
 		public void buttonItemIPadUsersAdd_Click(object sender, EventArgs e)
 		{
 			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadUsers.AddUser();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadPermissionsManager.AddObject();
 		}
 
 		public void buttonItemIPadUsersEdit_Click(object sender, EventArgs e)
 		{
 			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadUsers.EditUser();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadPermissionsManager.EditObject();
 		}
 
 		public void buttonItemIPadUsersDelete_Click(object sender, EventArgs e)
 		{
 			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadUsers.DeleteUser();
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadPermissionsManager.DeleteObject();
 		}
 
 		public void buttonItemIPadUsersRefresh_Click(object sender, EventArgs e)
 		{
 			if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator != null)
-				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadUsers.UpdateUsers(true);
+				PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.IPadPermissionsManager.RefreshData(true);
 		}
 
 	}

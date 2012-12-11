@@ -100,17 +100,17 @@
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
-    <Compile Include="PresentationClasses\IPad\IPadUsersControl.cs">
+    <Compile Include="PresentationClasses\IPad\IPadPermissionsManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\IPad\IPadUsersControl.Designer.cs">
-      <DependentUpon>IPadUsersControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\IPad\IPadPermissionsManagerControl.Designer.cs">
+      <DependentUpon>IPadPermissionsManagerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\IPad\IPadManagerControl.cs">
+    <Compile Include="PresentationClasses\IPad\IPadContentManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\IPad\IPadManagerControl.Designer.cs">
-      <DependentUpon>IPadManagerControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\IPad\IPadContentManagerControl.Designer.cs">
+      <DependentUpon>IPadContentManagerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\TabIPadUsersControl.cs">
       <SubType>UserControl</SubType>
@@ -131,6 +131,18 @@
     </Compile>
     <Compile Include="ToolForms\FormProgressSync.designer.cs">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\IPad\FormEditPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\IPad\FormEditPage.Designer.cs">
+      <DependentUpon>FormEditPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\IPad\FormEditGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\IPad\FormEditGroup.Designer.cs">
+      <DependentUpon>FormEditGroup.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\IPad\FormEditUser.cs">
       <SubType>Form</SubType>
@@ -379,12 +391,12 @@
     <Compile Include="BusinessClasses\LibraryManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PresentationClasses\IPad\IPadUsersControl.resx">
-      <DependentUpon>IPadUsersControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\IPad\IPadPermissionsManagerControl.resx">
+      <DependentUpon>IPadPermissionsManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\IPad\IPadManagerControl.resx">
-      <DependentUpon>IPadManagerControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\IPad\IPadContentManagerControl.resx">
+      <DependentUpon>IPadContentManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabIPadUsersControl.resx">
@@ -395,6 +407,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\IPad\FormEditPage.resx">
+      <DependentUpon>FormEditPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\IPad\FormEditGroup.resx">
+      <DependentUpon>FormEditGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\IPad\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>

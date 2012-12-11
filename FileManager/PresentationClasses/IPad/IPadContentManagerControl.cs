@@ -15,13 +15,13 @@ using SalesDepot.CoreObjects.ToolClasses;
 namespace FileManager.PresentationClasses.IPad
 {
 	[System.ComponentModel.ToolboxItem(false)]
-	public partial class IPadManagerControl : UserControl
+	public partial class IPadContentManagerControl : UserControl
 	{
 		private List<VideoInfo> _videoFiles = new List<VideoInfo>();
 
 		public WallBin.Decorators.LibraryDecorator ParentDecorator { get; private set; }
 
-		public IPadManagerControl(WallBin.Decorators.LibraryDecorator parent)
+		public IPadContentManagerControl(WallBin.Decorators.LibraryDecorator parent)
 		{
 			InitializeComponent();
 			this.ParentDecorator = parent;
