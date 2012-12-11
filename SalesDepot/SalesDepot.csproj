@@ -109,6 +109,7 @@
     <Compile Include="BusinessClasses\LibraryPackage.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\ProgramScheduleManager.cs" />
+    <Compile Include="ConfigurationClasses\PermissionsManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
     <Compile Include="FormFloater.cs">
       <SubType>Form</SubType>
@@ -202,6 +203,12 @@
     </Compile>
     <Compile Include="ToolForms\ProgramManager\FormOutputParameters.designer.cs">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormAuthorizeWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Settings\FormAuthorizeWarning.Designer.cs">
+      <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormLinkPreview.cs">
       <SubType>Form</SubType>
@@ -426,6 +433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\ProgramManager\FormOutputParameters.resx">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\Settings\FormAuthorizeWarning.resx">
+      <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormLinkPreview.resx">
       <DependentUpon>FormLinkPreview.cs</DependentUpon>
@@ -660,6 +670,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\AuthorizeWarning.png" />
     <None Include="Resources\AddWeek.png" />
     <None Include="Resources\ProgramShowInfo.png" />
     <None Include="Resources\ProgramBrowseBackward.png" />
