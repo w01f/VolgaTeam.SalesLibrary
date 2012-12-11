@@ -4,5 +4,6 @@ CREATE TABLE IF NOT EXISTS `tbl_help_tab` (
   `name` varchar(256) NOT NULL,
   `order` int(11) NOT NULL,
   `enabled` tinyint(1) NOT NULL,
+  `image_path` varchar(512) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;

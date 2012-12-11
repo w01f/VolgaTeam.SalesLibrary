@@ -253,7 +253,7 @@ asort($tabParam);
                                 <?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
                             <?php endif; ?>
                         </span>
-                        <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+                        <img src="<?php echo Yii::app()->baseUrl . $tabHelpRecord->image_path; ?>"/>
                     </div>
                     <?php
                     $pageHelpRecords = HelpPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabHelpRecord->id)));

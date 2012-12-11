@@ -34,10 +34,16 @@ class SearchController extends IsdController
     public function actionGetLibrariesView()
     {
         $libraryManager = new LibraryManager();
+        $libraries = $libraryManager->getLibraries();
         $libraryGroups = $libraryManager->getLibraryGroups();
 
         if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
-            $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+        {
+            if (count($libraryGroups) > 1 || count($libraries) > 1)
+                $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+            else
+                unset(Yii::app()->request->cookies['selectedLibraryIds']);
+        }        
 
         foreach ($libraryGroups as $libraryGroup)
             foreach ($libraryGroup->libraries as $library)

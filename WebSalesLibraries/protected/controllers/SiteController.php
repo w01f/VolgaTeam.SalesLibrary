@@ -16,7 +16,11 @@ class SiteController extends IsdController
 
     public function actionIndex()
     {
-        $this->render('index');
+        $libraryManager = new LibraryManager();
+        if (count($libraryManager->getLibraries()) > 0)
+            $this->render('index');
+        else
+            $this->render('unauthorized');
     }
 
     public function actionLogin()
@@ -273,7 +277,7 @@ class SiteController extends IsdController
                 $userId = Yii::app()->user->getId();
                 if (isset($userId))
                     UserRecipientStorage::setRecipientsForUser($userId, $recipientsWhole);
-                
+
                 EmailedLinkStorage::saveEmailedLink($id, $linkId, $libraryId, $destinationPath, $destinationLink, $expiresIn, Yii::app()->user->login, $emailFrom, implode('; ', $recipientsWhole));
 
                 if ($link->originalFormat == 'mp4' || $link->originalFormat == 'video')

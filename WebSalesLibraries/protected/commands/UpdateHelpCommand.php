@@ -17,6 +17,7 @@ class UpdateHelpCommand extends CConsoleCommand
                 {
                     $tabPath = $tabFolder->getPathname();
                     $tabConfigFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'config.xml');
+                    $tabImageFile = realpath($tabPath . DIRECTORY_SEPARATOR . 'rbnlogo.png');
                     if (file_exists($tabConfigFile))
                     {
                         $tabConfig = new DOMDocument();
@@ -28,6 +29,7 @@ class UpdateHelpCommand extends CConsoleCommand
                         $tabHelpRecord->name = trim($tabConfig->getElementsByTagName("Name")->item(0)->nodeValue);
                         $tabHelpRecord->order = intval(trim($tabConfig->getElementsByTagName("Order")->item(0)->nodeValue));
                         $tabHelpRecord->enabled = filter_var(trim($tabConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
+                        $tabHelpRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $tabImageFile));
                         $tabHelpRecord->save();
 
                         $pagesRootPath = realpath($tabPath . DIRECTORY_SEPARATOR . 'pages');

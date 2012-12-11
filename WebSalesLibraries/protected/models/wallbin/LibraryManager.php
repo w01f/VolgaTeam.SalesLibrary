@@ -78,7 +78,8 @@ class LibraryManager
         {
             $libraries = Yii::app()->session['libraries'];
         }
-        return $libraries;
+        if (isset($libraries))
+            return $libraries;
     }
 
     public function getLibraryGroups()
