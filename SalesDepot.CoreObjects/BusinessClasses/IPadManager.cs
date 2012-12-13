@@ -24,6 +24,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class IPadManager
 	{
+		private SitePermissionsManager _sitePermissionsManager;
+
+		public ILibrary Parent { get; private set; }
+		public bool Enabled { get; set; }
+		public string SyncDestinationPath { get; set; }
+		public string Website { get; set; }
+		public string Login { get; set; }
+		public string Password { get; set; }
+
 		public IPadManager(ILibrary parent)
 		{
 			Parent = parent;
@@ -32,13 +41,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Login = string.Empty;
 			Password = string.Empty;
 		}
-
-		public ILibrary Parent { get; private set; }
-		public bool Enabled { get; set; }
-		public string SyncDestinationPath { get; set; }
-		public string Website { get; set; }
-		public string Login { get; set; }
-		public string Password { get; set; }
 
 		public IPadManager Clone(ILibrary parent)
 		{
@@ -87,6 +89,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 				}
 			}
+			_sitePermissionsManager = new SitePermissionsManager(this.Website, this.Login, this.Password);
 		}
 
 		#region Content Manager
@@ -479,238 +482,54 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#endregion
 
 		#region Permissions Manager
-		private AdminControllerService GetAdminClient()
-		{
-			try
-			{
-				var client = new AdminControllerService();
-				client.Url = string.Format("{0}/admin/quote?ws=1", Website);
-				return client;
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
-			message = string.Empty;
-			var users = new List<UserRecord>();
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						users.AddRange(client.getUsers(sessionKey) ?? new UserRecord[] { });
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-			return users.ToArray();
+			return _sitePermissionsManager.GetUsers(out message);
 		}
 
 		public void SetUser(string login, string password, string firstName, string lastName, string email, GroupRecord[] groups, IPadAdminService.LibraryPage[] pages, out string message)
 		{
-			message = string.Empty;
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email, groups, pages);
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
+			_sitePermissionsManager.SetUser(login, password, firstName, lastName, email, groups, pages, out message);
 		}
 
 		public void DeleteUser(string login, out string message)
 		{
-			message = string.Empty;
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						client.deleteUser(sessionKey, login);
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
+			_sitePermissionsManager.DeleteUser(login, out message);
 		}
 		#endregion
 
 		#region Groups
 		public GroupRecord[] GetGroups(out string message)
 		{
-			message = string.Empty;
-			var groups = new List<GroupRecord>();
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						groups.AddRange(client.getGroups(sessionKey) ?? new GroupRecord[] { });
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-			return groups.ToArray();
+			return _sitePermissionsManager.GetGroups(out message);
 		}
 
 		public void SetGroup(string id, string name, UserRecord[] users, IPadAdminService.LibraryPage[] pages, out string message)
 		{
-			message = string.Empty;
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						client.setGroup(sessionKey, id, name, users, pages);
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
+			_sitePermissionsManager.SetGroup(id, name, users, pages, out message);
 		}
 
 		public void DeleteGroup(string id, out string message)
 		{
-			message = string.Empty;
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						client.deleteGroup(sessionKey, id);
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
+			_sitePermissionsManager.DeleteGroup(id, out message);
 		}
 
 		public string[] GetGroupTemplates(out string message)
 		{
-			message = string.Empty;
-			var groupTemplates = new List<string>();
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						groupTemplates.AddRange(client.getGroupTemplates(sessionKey) ?? new string[] { });
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-			return groupTemplates.ToArray();
+			return _sitePermissionsManager.GetGroupTemplates(out message);
 		}
 		#endregion
 
 		#region Libraraies
 		public IPadAdminService.Library[] GetLibraries(out string message)
 		{
-			message = string.Empty;
-			var libraries = new List<IPadAdminService.Library>();
-			var client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						libraries.AddRange(client.getLibraries(sessionKey) ?? new IPadAdminService.Library[] { });
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
-			return libraries.ToArray();
+			return _sitePermissionsManager.GetLibraries(out message);
 		}
 
 		public void SetPage(string id, UserRecord[] users, GroupRecord[] groups, out string message)
 		{
-			message = string.Empty;
-			AdminControllerService client = GetAdminClient();
-			if (client != null)
-			{
-				try
-				{
-					string sessionKey = client.getSessionKey(Login, Password);
-					if (!string.IsNullOrEmpty(sessionKey))
-						client.setPage(sessionKey, id, users, groups);
-					else
-						message = "Couldn't complete operation.\nLogin or password are not correct.";
-				}
-				catch (Exception ex)
-				{
-					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
-				}
-			}
-			else
-				message = "Couldn't complete operation.\nServer is unavailable.";
+			_sitePermissionsManager.SetPage(id, users, groups, out message);
 		}
 		#endregion
 		#endregion
@@ -784,6 +603,285 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string IPadCompatible { get; set; }
 		public string OgvFileName { get; set; }
 		public string OgvFilePath { get; set; }
+	}
+
+	public class SitePermissionsManager
+	{
+
+		private string _login;
+		private string _password;
+
+		public string _website;
+		public string Website
+		{
+			get { return _website; }
+		}
+
+		public SitePermissionsManager(XmlNode node)
+		{
+			Deserialize(node);
+		}
+
+		public SitePermissionsManager(string website, string login, string password)
+		{
+			_website = website;
+			_login = login;
+			_password = password;
+		}
+
+		public void Deserialize(XmlNode node)
+		{
+			foreach (XmlNode childNode in node.ChildNodes)
+			{
+				switch (childNode.Name)
+				{
+					case "Url":
+						_website = childNode.InnerText;
+						break;
+					case "User":
+						_login = childNode.InnerText;
+						break;
+					case "Password":
+						_password = childNode.InnerText;
+						break;
+				}
+			}
+		}
+
+		private AdminControllerService GetAdminClient()
+		{
+			try
+			{
+				var client = new AdminControllerService();
+				client.Url = string.Format("{0}/admin/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		#region Users
+		public UserRecord[] GetUsers(out string message)
+		{
+			message = string.Empty;
+			var users = new List<UserRecord>();
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						users.AddRange(client.getUsers(sessionKey) ?? new UserRecord[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return users.ToArray();
+		}
+
+		public void SetUser(string login, string password, string firstName, string lastName, string email, GroupRecord[] groups, IPadAdminService.LibraryPage[] pages, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setUser(sessionKey, login, password, firstName, lastName, email, groups, pages);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void DeleteUser(string login, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.deleteUser(sessionKey, login);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+		#endregion
+
+		#region Groups
+		public GroupRecord[] GetGroups(out string message)
+		{
+			message = string.Empty;
+			var groups = new List<GroupRecord>();
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						groups.AddRange(client.getGroups(sessionKey) ?? new GroupRecord[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return groups.ToArray();
+		}
+
+		public void SetGroup(string id, string name, UserRecord[] users, IPadAdminService.LibraryPage[] pages, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setGroup(sessionKey, id, name, users, pages);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void DeleteGroup(string id, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.deleteGroup(sessionKey, id);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public string[] GetGroupTemplates(out string message)
+		{
+			message = string.Empty;
+			var groupTemplates = new List<string>();
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						groupTemplates.AddRange(client.getGroupTemplates(sessionKey) ?? new string[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return groupTemplates.ToArray();
+		}
+		#endregion
+
+		#region Libraraies
+		public IPadAdminService.Library[] GetLibraries(out string message)
+		{
+			message = string.Empty;
+			var libraries = new List<IPadAdminService.Library>();
+			var client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						libraries.AddRange(client.getLibraries(sessionKey) ?? new IPadAdminService.Library[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return libraries.ToArray();
+		}
+
+		public void SetPage(string id, UserRecord[] users, GroupRecord[] groups, out string message)
+		{
+			message = string.Empty;
+			AdminControllerService client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setPage(sessionKey, id, users, groups);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+		#endregion
 	}
 }
 
