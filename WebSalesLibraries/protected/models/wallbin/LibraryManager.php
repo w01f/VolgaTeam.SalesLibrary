@@ -14,7 +14,11 @@ class LibraryManager
         if (isset(Yii::app()->user))
         {
             $userId = Yii::app()->user->getId();
-            if (isset($userId))
+            if (isset(Yii::app()->user->role))
+                $isAdmin = Yii::app()->user->role != 0;
+            else
+                $isAdmin = true;
+            if (isset($userId) && !$isAdmin)
                 $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUserAngHisGroups($userId);
         }
         if (!isset($libraries))
@@ -44,7 +48,7 @@ class LibraryManager
                         $libraryRecord = LibraryStorage::model()->findByPk($libraryId);
                         if ($libraryRecord !== null)
                         {
-                            if ((isset($availableLibraryIds) && in_array($libraryId, $availableLibraryIds)) || !isset($userId))
+                            if ((isset($availableLibraryIds) && in_array($libraryId, $availableLibraryIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
                             {
                                 $library = Yii::app()->cacheDB->get($libraryId);
                                 if ($library === false)
@@ -87,68 +91,69 @@ class LibraryManager
         if (isset(Yii::app()->user))
         {
             $userId = Yii::app()->user->getId();
-            if (isset($userId))
+            if (isset(Yii::app()->user->role))
+                $isAdmin = Yii::app()->user->role != 0;
+            else
+                $isAdmin = true;
+            if (isset($userId) && !$isAdmin)
                 $availableLibraryIds = UserLibraryStorage::getLibraryIdsByUserAngHisGroups($userId);
         }
-        if (isset($availableLibraryIds))
-        {
-            $libraryGroupRecords = LibraryGroupStorage::model()->findAll();
+        $libraryGroupRecords = LibraryGroupStorage::model()->findAll();
 
-            if (isset($libraryGroupRecords) && count($libraryGroupRecords) > 0)
-            {
-                foreach ($libraryGroupRecords as $libraryGroupRecord)
-                {
-                    $libraryGroup = new LibraryGroup();
-                    $libraryGroup->id = $libraryGroupRecord->id;
-                    $libraryGroup->order = $libraryGroupRecord->order;
-                    $libraryGroup->name = $libraryGroupRecord->name;
-                    $libraryRecords = LibraryStorage::model()->findAll('id_group=?', array($libraryGroupRecord->id));
-                    if (isset($libraryRecords) && count($libraryRecords) > 0)
-                    {
-                        foreach ($libraryRecords as $libraryRecord)
-                        {
-                            if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || !isset($userId))
-                            {
-                                $library = new Library();
-                                $library->id = $libraryRecord->id;
-                                $library->groupId = $libraryRecord->id_group;
-                                $library->name = $libraryRecord->name;
-                                $library->order = $libraryRecord->order;
-                                $libraryGroup->libraries[] = $library;
-                            }
-                        }
-                    }
-                    if (isset($libraryGroup->libraries) && count($libraryGroup->libraries) > 0)
-                    {
-                        usort($libraryGroup->libraries, "Library::libraryComparerByGroup");
-                        $libraryGroups[] = $libraryGroup;
-                    }
-                }
-            }
-            else
+        if (isset($libraryGroupRecords) && count($libraryGroupRecords) > 0)
+        {
+            foreach ($libraryGroupRecords as $libraryGroupRecord)
             {
                 $libraryGroup = new LibraryGroup();
-                $libraryGroup->order = 0;
-                $libraryGroup->name = Yii::app()->params['stations']['tab_name'];
-                $libraryRecords = LibraryStorage::model()->findAll();
+                $libraryGroup->id = $libraryGroupRecord->id;
+                $libraryGroup->order = $libraryGroupRecord->order;
+                $libraryGroup->name = $libraryGroupRecord->name;
+                $libraryRecords = LibraryStorage::model()->findAll('id_group=?', array($libraryGroupRecord->id));
                 if (isset($libraryRecords) && count($libraryRecords) > 0)
                 {
                     foreach ($libraryRecords as $libraryRecord)
                     {
-                        if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || !isset($userId))
+                        if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
                         {
                             $library = new Library();
                             $library->id = $libraryRecord->id;
+                            $library->groupId = $libraryRecord->id_group;
                             $library->name = $libraryRecord->name;
+                            $library->order = $libraryRecord->order;
                             $libraryGroup->libraries[] = $library;
                         }
                     }
                 }
                 if (isset($libraryGroup->libraries) && count($libraryGroup->libraries) > 0)
                 {
-                    usort($libraryGroup->libraries, "Library::libraryComparerByName");
+                    usort($libraryGroup->libraries, "Library::libraryComparerByGroup");
                     $libraryGroups[] = $libraryGroup;
                 }
+            }
+        }
+        else
+        {
+            $libraryGroup = new LibraryGroup();
+            $libraryGroup->order = 0;
+            $libraryGroup->name = Yii::app()->params['stations']['tab_name'];
+            $libraryRecords = LibraryStorage::model()->findAll();
+            if (isset($libraryRecords) && count($libraryRecords) > 0)
+            {
+                foreach ($libraryRecords as $libraryRecord)
+                {
+                    if ((isset($availableLibraryIds) && in_array($libraryRecord->id, $availableLibraryIds)) || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
+                    {
+                        $library = new Library();
+                        $library->id = $libraryRecord->id;
+                        $library->name = $libraryRecord->name;
+                        $libraryGroup->libraries[] = $library;
+                    }
+                }
+            }
+            if (isset($libraryGroup->libraries) && count($libraryGroup->libraries) > 0)
+            {
+                usort($libraryGroup->libraries, "Library::libraryComparerByName");
+                $libraryGroups[] = $libraryGroup;
             }
         }
         if (isset($libraryGroups))

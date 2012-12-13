@@ -42,14 +42,18 @@ class Library
         if (isset(Yii::app()->user))
         {
             $userId = Yii::app()->user->getId();
-            if (isset($userId))
+            if (isset(Yii::app()->user->role))
+                $isAdmin = Yii::app()->user->role != 0;
+            else
+                $isAdmin = true;
+            if (isset($userId) && !$isAdmin)
                 $availablePageIds = UserLibraryStorage::getPageIdsByUserAngHisGroups($userId);
         }
         foreach (LibraryPageStorage::model()->findAll('id_library=?', array($this->id)) as $pageRecord)
         {
             $page = new LibraryPage($this);
             $page->load($pageRecord);
-            if ((isset($availablePageIds) && in_array($page->id, $availablePageIds)) || !isset($availablePageIds))
+            if ((isset($availablePageIds) && in_array($page->id, $availablePageIds))  || (!isset($userId) || (isset($isAdmin) && $isAdmin)))
                 $this->pages[] = $page;
         }
         if (isset($this->pages))

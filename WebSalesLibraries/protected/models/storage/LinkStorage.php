@@ -194,8 +194,12 @@ class LinkStorage extends CActiveRecord
             if (isset(Yii::app()->user))
             {
                 $userId = Yii::app()->user->getId();
-                if (isset($userId))
-                    $assignedPageIds = UserLibraryStorage::getPageIdsByUser($userId);
+                if (isset(Yii::app()->user->role))
+                    $isAdmin = Yii::app()->user->role != 0;
+                else
+                    $isAdmin = true;
+                if (isset($userId) && !$isAdmin)
+                    $assignedPageIds = UserLibraryStorage::getPageIdsByUserAngHisGroups($userId);
             }
             if (isset($assignedPageIds))
                 $folderCondition = "id_folder in (select id from tbl_folder where id_page in ('" . implode("', '", $assignedPageIds) . "'))";

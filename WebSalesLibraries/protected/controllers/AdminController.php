@@ -118,7 +118,7 @@ class AdminController extends CController
     {
         if ($this->authenticateBySession($sessionKey))
         {
-            foreach (UserStorage::model()->findAll() as $userRecord)
+            foreach (UserStorage::model()->findAll('role=0') as $userRecord)
             {
                 $user = new UserRecord();
                 $user->id = $userRecord->id;
@@ -265,7 +265,7 @@ class AdminController extends CController
                 }
 
                 $assignedUsers = UserGroupStorage::getUserIdsByGroup($groupRecord->id);
-                $userRecords = UserStorage::model()->findAll();
+                $userRecords = UserStorage::model()->findAll('role=0');
                 if (isset($userRecords))
                 {
                     foreach ($userRecords as $userRecord)
@@ -343,7 +343,7 @@ class AdminController extends CController
                         $library->pages[] = $page;
 
                         $assignedUsers = UserLibraryStorage::getUserIdsByPage($pageRecord->id);
-                        $userRecords = UserStorage::model()->findAll();
+                        $userRecords = UserStorage::model()->findAll('role=0');
                         if (isset($userRecords))
                         {
                             foreach ($userRecords as $userRecord)
