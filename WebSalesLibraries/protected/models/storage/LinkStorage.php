@@ -203,6 +203,8 @@ class LinkStorage extends CActiveRecord
             }
             if (isset($assignedPageIds))
                 $folderCondition = "id_folder in (select id from tbl_folder where id_page in ('" . implode("', '", $assignedPageIds) . "'))";
+            else if (!isset($userId) || (isset($isAdmin) && $isAdmin))
+                $folderCondition = '1 = 1';
 
             $linkRecords = Yii::app()->db->createCommand()
                 ->select('*')
