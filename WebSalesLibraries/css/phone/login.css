@@ -1,9 +1,9 @@
-#form-login
+.form-login
 {
     width:100%;
 }
 
-#form-login td
+.form-login td
 {
     text-align: center;
     height: 40 px;
@@ -11,7 +11,7 @@
     padding-left: 12%;
 }
 
-#form-login td.title
+.form-login td.title
 {
     text-align: left;
 }

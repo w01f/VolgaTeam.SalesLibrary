@@ -3,14 +3,7 @@ class WallbinController extends IsdController
 {
     public function getViewPath()
     {
-        switch ($this->browser)
-        {
-            case Browser::BROWSER_IPHONE:
-            case Browser::BROWSER_ANDROID_MOBILE:
-                return YiiBase::getPathOfAlias('application.views.phone.wallbin');
-            default :
-                return YiiBase::getPathOfAlias('application.views.regular.wallbin');
-        }
+        return YiiBase::getPathOfAlias($this->pathPrefix . 'wallbin');
     }
 
     public function actionGetColumnsView()
@@ -75,7 +68,9 @@ class WallbinController extends IsdController
                         $link->browser = 'phone';
                         break;
                     default :
-                        if (Yii::app()->browser->isMobile())
+                        if ($this->isTabletMobileView)
+                            $link->browser = 'phone';
+                        else if (Yii::app()->browser->isMobile())
                         {
                             $link->browser = 'mobile';
                         }

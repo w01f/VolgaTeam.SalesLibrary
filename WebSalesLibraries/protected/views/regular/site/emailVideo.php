@@ -26,7 +26,7 @@
         </script>        
     </head>
     <body>
-        <span>Billy Byrd Sent you this Video Link to preview.</span>
+        <span><?php echo $senderName; ?> Sent you this Video Link to preview.</span>
         <br>
         <h2><?php echo $link->name; ?></h2>
         <br>

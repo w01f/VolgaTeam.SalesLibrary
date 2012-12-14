@@ -3,14 +3,7 @@ class SearchController extends IsdController
 {
     public function getViewPath()
     {
-        switch ($this->browser)
-        {
-            case Browser::BROWSER_IPHONE:
-            case Browser::BROWSER_ANDROID_MOBILE:
-                return YiiBase::getPathOfAlias('application.views.phone.search');
-            default :
-                return YiiBase::getPathOfAlias('application.views.regular.search');
-        }
+        return YiiBase::getPathOfAlias($this->pathPrefix . 'search');
     }
 
     public function actionGetSearchView()
@@ -43,7 +36,7 @@ class SearchController extends IsdController
                 $checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
             else
                 unset(Yii::app()->request->cookies['selectedLibraryIds']);
-        }        
+        }
 
         foreach ($libraryGroups as $libraryGroup)
             foreach ($libraryGroup->libraries as $library)
@@ -148,7 +141,7 @@ class SearchController extends IsdController
             $this->renderPartial('searchResult', array('searchInfo' => $searchInfo, 'links' => $links), false, true);
         }
         else
-        $this->renderPartial('searchResult', array(), false, true);
+            $this->renderPartial('searchResult', array(), false, true);
     }
 
     public function actionViewLink()

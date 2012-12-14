@@ -4,14 +4,7 @@ class SiteController extends IsdController
     public $defaultAction = 'index';
     public function getViewPath()
     {
-        switch ($this->browser)
-        {
-            case Browser::BROWSER_IPHONE:
-            case Browser::BROWSER_ANDROID_MOBILE:
-                return YiiBase::getPathOfAlias('application.views.phone.site');
-            default :
-                return YiiBase::getPathOfAlias('application.views.regular.site');
-        }
+        return YiiBase::getPathOfAlias($this->pathPrefix . 'site');
     }
 
     public function actionIndex()
@@ -309,6 +302,11 @@ class SiteController extends IsdController
             $emailedLinkRecord = EmailedLinkStorage::getEmailedLink($id);
             if (isset($emailedLinkRecord))
             {
+                $userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($emailedLinkRecord->sender_login)));
+                if (isset($userRecord))
+                    $senderName = $userRecord->first_name . ' ' . $userRecord->last_name;
+                else
+                    $senderName = 'adSalesApp User';
                 $linkRecord = LinkStorage::getLinkById($emailedLinkRecord->id_link);
                 if (isset($linkRecord))
                 {
@@ -319,7 +317,7 @@ class SiteController extends IsdController
                     {
                         $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
                         $link->load($linkRecord);
-                        $this->render('emailVideo', array('link' => $link, 'expiresIn' => $emailedLinkRecord->expires_in));
+                        $this->render('emailVideo', array('link' => $link, 'expiresIn' => $emailedLinkRecord->expires_in, 'senderName' => $senderName));
                     }
                     else
                     {
@@ -335,6 +333,16 @@ class SiteController extends IsdController
             }
         }
         Yii::app()->end();
+    }
+
+    public function actionSwitchVersion()
+    {
+        $version = Yii::app()->request->getPost('siteVersion');
+        if (isset($version))
+        {
+            Yii::app()->cacheDB->set('siteVersion', $version, (60 * 60 * 24 * 7));
+            Yii::app()->end();
+        }
     }
 
 }

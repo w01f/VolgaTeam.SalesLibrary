@@ -24,6 +24,10 @@
         $('#libraries-container').css({
             'height':(height-142)+'px'
         });                        
+        
+        $('#file-types-container').css({
+            'height':(height-47)+'px'
+        });                                
         $.updateSearchGridDimensions();
     }    
     

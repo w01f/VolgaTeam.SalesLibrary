@@ -23,7 +23,7 @@
                         </tr>
                     <?php endif; ?>                    
                 </table>              
-                <?php if ($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf'): ?>                            
+                <?php if (($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && !$this->isTabletMobileView): ?>                            
                     <hr align="center" width="100%" size="2" color="#b0b0b0" />                
                     <div data-role="navbar" class="res-selector">
                         <ul>
@@ -110,7 +110,7 @@
                                                     foreach ($viewLinks as $viewLink):
                                                         ?>
                                                         <li class ="hi-res">
-                                                            <a href="<?php echo $viewLink['href']; ?>" rel="external"><img src="<?php echo $thumbsLinks[$i]['href']; ?>" alt="<?php echo $viewLink['title']; ?>" /></a>
+                                                            <a href="<?php echo $viewLink['href']; ?>" rel="external"><img src="<?php echo!$this->isTabletMobileView ? $thumbsLinks[$i]['href'] : $viewPhoneLinks[$i]['href']; ?>" alt="<?php echo $viewLink['title']; ?>" /></a>
                                                         </li>
                                                         <li class ="low-res">
                                                             <a href="<?php echo $viewPhoneLinks[$i]['href']; ?>" rel="external"><img src="<?php echo $thumbsLinks[$i]['href']; ?>" alt="<?php echo $viewLink['title']; ?>" /></a>

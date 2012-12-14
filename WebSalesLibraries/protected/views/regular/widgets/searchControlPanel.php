@@ -42,70 +42,72 @@
         </div> 
     </div>
     <div id="search-options-files">
-        <div class ="group-panel">
-            <table id ="file-types">
-                <tr>
-                    <td>
-                        <button class ="search-file-type btn btn-block" id="search-file-type-powerpoint">
-                            <table class="caption">
-                                <tr>
-                                    <td><img class="icon-search powerpoint" src="images/search/search-powerpoint.png"/></td>
-                                    <td><h3>PowerPoint</h3></td>
-                                </tr>
-                            </table>
-                        </button>
-                    </td>
-                </tr>                        
-                <tr>                        
-                    <td>
-                        <button class ="search-file-type btn btn-block" id="search-file-type-video">
-                            <table class="caption">
-                                <tr>
-                                    <td><img class="icon-search video" src="images/search/search-video.png"/></td>
-                                    <td><h3>Video</h3></td>
-                                </tr>
-                            </table>
-                        </button>
-                    </td>
-                </tr>                
-                <tr>                        
-                    <td>
-                        <button class ="search-file-type btn btn-block" id="search-file-type-pdf">
-                            <table class="caption">
-                                <tr>
-                                    <td><img class="icon-search video" src="images/search/search-pdf.png"/></td>
-                                    <td><h3>PDF</h3></td>
-                                </tr>
-                            </table>                            
-                        </button>
-                    </td>
-                </tr>                        
-                <tr>
-                    <td>
-                        <button class ="search-file-type btn btn-block" id="search-file-type-word">
-                            <table class="caption">
-                                <tr>
-                                    <td><img class="icon-search word" src="images/search/search-word.png"/></td>
-                                    <td><h3>Word</h3></td>
-                                </tr>
-                            </table>
-                        </button>
-                    </td>
-                </tr>                        
-                <tr>                        
-                    <td>
-                        <button class ="search-file-type btn btn-block" id="search-file-type-excel">
-                            <table class="caption">
-                                <tr>
-                                    <td><img class="icon-search excel" src="images/search/search-excel.png"/></td>
-                                    <td><h3>Excel</h3></td>
-                                </tr>
-                            </table>                            
-                        </button>
-                    </td>
-                </tr>                                        
-            </table>
-        </div>                
+        <div id="file-types-container">
+            <div class ="group-panel">
+                <table id ="file-types">
+                    <tr>
+                        <td>
+                            <button class ="search-file-type btn btn-block" id="search-file-type-powerpoint">
+                                <table class="caption">
+                                    <tr>
+                                        <td><img class="icon-search powerpoint" src="images/search/search-powerpoint.png"/></td>
+                                        <td><h3>PowerPoint</h3></td>
+                                    </tr>
+                                </table>
+                            </button>
+                        </td>
+                    </tr>                        
+                    <tr>                        
+                        <td>
+                            <button class ="search-file-type btn btn-block" id="search-file-type-video">
+                                <table class="caption">
+                                    <tr>
+                                        <td><img class="icon-search video" src="images/search/search-video.png"/></td>
+                                        <td><h3>Video</h3></td>
+                                    </tr>
+                                </table>
+                            </button>
+                        </td>
+                    </tr>                
+                    <tr>                        
+                        <td>
+                            <button class ="search-file-type btn btn-block" id="search-file-type-pdf">
+                                <table class="caption">
+                                    <tr>
+                                        <td><img class="icon-search video" src="images/search/search-pdf.png"/></td>
+                                        <td><h3>PDF</h3></td>
+                                    </tr>
+                                </table>                            
+                            </button>
+                        </td>
+                    </tr>                        
+                    <tr>
+                        <td>
+                            <button class ="search-file-type btn btn-block" id="search-file-type-word">
+                                <table class="caption">
+                                    <tr>
+                                        <td><img class="icon-search word" src="images/search/search-word.png"/></td>
+                                        <td><h3>Word</h3></td>
+                                    </tr>
+                                </table>
+                            </button>
+                        </td>
+                    </tr>                        
+                    <tr>                        
+                        <td>
+                            <button class ="search-file-type btn btn-block" id="search-file-type-excel">
+                                <table class="caption">
+                                    <tr>
+                                        <td><img class="icon-search excel" src="images/search/search-excel.png"/></td>
+                                        <td><h3>Excel</h3></td>
+                                    </tr>
+                                </table>                            
+                            </button>
+                        </td>
+                    </tr>                                        
+                </table>
+            </div>                
+        </div>                            
     </div>
     <div id="search-options-tags">
         <?php if (isset($categories->groups)): ?>

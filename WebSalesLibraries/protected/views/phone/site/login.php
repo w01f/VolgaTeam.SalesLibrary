@@ -1,6 +1,8 @@
 <?php
-$version = '3.0';
+$version = '5.0';
 $cs = Yii::app()->clientScript;
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/login.css?' . $version);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js', CClientScript::POS_HEAD);
 $this->pageTitle = Yii::app()->name . ' - Login';
@@ -12,7 +14,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
         'htmlOptions' => array('data-ajax' => 'false')
         ));
     ?>
-    <table id ="form-login">
+    <table class ="form-login">
         <tr>
             <td>
                 <img  id="image-logo" src="<?php echo Yii::app()->baseUrl . '/images/logo_phone.png'; ?>" />
@@ -87,4 +89,14 @@ $this->pageTitle = Yii::app()->name . ' - Login';
         </tr>                
     </table>
     <?php $this->endWidget(); ?>
+    <?php if (Yii::app()->browser->isMobile() && !($this->browser == Browser::BROWSER_IPHONE || $this->browser == Browser::BROWSER_ANDROID_MOBILE)): ?>
+        <br>
+        <table class ="form-login">
+            <tr>
+                <td>
+                    <button id="button-switch-version" data-role="button" data-theme="b">Switch to Full version</button>                                        
+                </td>
+            </tr>
+        </table>        
+    <?php endif; ?>    
 </div

@@ -3,14 +3,7 @@ class HelpController extends IsdController
 {
     public function getViewPath()
     {
-        switch ($this->browser)
-        {
-            case Browser::BROWSER_IPHONE:
-            case Browser::BROWSER_ANDROID_MOBILE:
-                return YiiBase::getPathOfAlias('application.views.phone.help');
-            default :
-                return YiiBase::getPathOfAlias('application.views.regular.help');
-        }
+        return YiiBase::getPathOfAlias($this->pathPrefix . 'help');
     }
 
     public function actionGetPage()

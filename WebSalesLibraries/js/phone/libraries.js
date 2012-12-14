@@ -190,9 +190,11 @@
                     var itemContent = $(this).find('.item-content');
                     var viewFormat = itemContent.find('.view-type').html().toUpperCase();
                     
-                    var resolution = 'low';
-                    if($('.res-selector .hi-res-button').hasClass('ui-btn-active'))
-                        var resolution = 'hi';
+                    var resolution = 'hi';
+                    if($('.res-selector .low-res-button').hasClass('ui-btn-active'))
+                        var resolution = 'low';
+                    else if($('.res-selector .hi-res-button').hasClass('ui-btn-active'))
+                        var resolution = 'hi';                    
                     
                     if(viewFormat == 'PNG' || viewFormat == 'JPEG')
                     {

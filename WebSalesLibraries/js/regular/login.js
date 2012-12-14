@@ -145,6 +145,28 @@
         });          
     }    
     
+    var switchVersion = function(){
+        $.ajax({
+            type: "POST",
+            url: "switchVersion",
+            data: {
+                siteVersion: 'mobile'
+            },
+            beforeSend: function(){
+                $.showOverlay();
+            },
+            complete: function(){
+            },
+            success: function(){
+                location.reload();
+            },
+            error: function(){
+            },            
+            async: true,
+            dataType: 'html'                        
+        });  
+    }
+    
     $(document).ready(function() 
     {
         $('#recover-password-link').fancybox();
@@ -152,6 +174,11 @@
         $('#recover-password-link').on('click',function(){
             recoverPassword();
         });
+        
+        $('#button-switch-version').off('click');
+        $('#button-switch-version').on('click',function(){
+            switchVersion();
+        });        
         
         updateLoginBodyPosition();
         $(window).on('resize',updateLoginBodyPosition); 

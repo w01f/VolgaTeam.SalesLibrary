@@ -1,5 +1,5 @@
 <?php
-$version = '3.0';
+$version = '6.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -93,7 +93,16 @@ $this->pageTitle = Yii::app()->name . ' - Login';
                     echo CHtml::link('Forgot Password?', '#view-dialog-container', array('id' => 'recover-password-link'));
                 ?>
             </td>
-        </tr>            
+        </tr>        
+        <?php if (Yii::app()->browser->isMobile()): ?>
+            <tr>
+                <td colspan ="2">
+                    <br>
+                    <br>
+                    <button type="button" class="btn btn-block" id="button-switch-version">Switch to Mobile version</button>
+                </td>
+            </tr>        
+        <?php endif; ?>
     </table>
     <?php $this->endWidget(); ?>
 </div>        
