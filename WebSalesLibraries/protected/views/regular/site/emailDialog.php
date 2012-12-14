@@ -63,6 +63,12 @@
     </td>
 </tr>        
 <tr>
+    <td class="title"></td>
+    <td>
+        <label class="checkbox"><input id="email-to-me" type="checkbox" value="">Send a Copy to me</label>
+    </td>
+</tr>        
+<tr>
     <td class="title">
         <label class="control-label" for="email-subject">Subject:</label>
     </td>

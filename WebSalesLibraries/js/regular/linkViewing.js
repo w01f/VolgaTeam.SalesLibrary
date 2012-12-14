@@ -190,6 +190,7 @@
                             emailTo: content.find('#email-to').val(),
                             emailCopyTo: content.find('#email-to-copy').val(),
                             emailFrom: content.find('#email-from').val(),
+                            emailToMe: content.find('#email-to-me').is(':checked'),
                             emailSubject: content.find('#email-subject').val(),
                             emailBody: content.find('#email-body').val(),
                             expiresIn: content.find('#expires-in').val()
