@@ -220,7 +220,6 @@ class SiteController extends IsdController
         $emailTo = Yii::app()->request->getPost('emailTo');
         $emailCopyTo = Yii::app()->request->getPost('emailCopyTo');
         $emailFrom = Yii::app()->request->getPost('emailFrom');
-        $emailToMe = Yii::app()->request->getPost('emailToMe');
         $emailSubject = Yii::app()->request->getPost('emailSubject');
         $emailBody = Yii::app()->request->getPost('emailBody');
         $expiresIn = Yii::app()->request->getPost('expiresIn');
@@ -276,9 +275,6 @@ class SiteController extends IsdController
 
                 if ($link->originalFormat == 'mp4' || $link->originalFormat == 'video')
                     $destinationLink = Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('site/emailLinkGet', array('emailId' => $id));
-
-                if ($emailToMe == 'true')
-                    $recipientsCopy[] = $emailFrom;
 
                 $message = Yii::app()->email;
                 $message->to = $recipients;
