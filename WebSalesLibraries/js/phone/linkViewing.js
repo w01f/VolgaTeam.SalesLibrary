@@ -7,6 +7,7 @@
     
     $.viewSelectedFormat = function(itemContent, resolution)
     {
+        var selectedFileId = itemContent.find('.link-id').html();
         var selectedFileType = itemContent.find('.file-type').html();
         var selectedViewType = itemContent.find('.view-type').html();
         var selectedLinks = itemContent.find('.links');
@@ -37,6 +38,14 @@
                             });                            
                             break;
                         case 'email':
+                            $('.email-tab .link-container .name').html(selectedLinks[0].title);
+                            $( '#email-send').off('click');
+                            $( '#email-send').on('click',function(){
+                                $.sendEmail(selectedFileId);
+                            });                             
+                            $.mobile.changePage( "#email-address", {
+                                transition: "slidefade"
+                            });                                                        
                             break;
                         default:
                             $.downloadFile(selectedLinks[0].href);

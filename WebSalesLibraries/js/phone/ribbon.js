@@ -11,8 +11,8 @@
         $('.logout-button').off('click'); 
         $('.logout-button').on('click',function(){
             $.logout();
-        });                    
-        
+        });  
+
         $('#gallery-page').on('pageshow', function(e){
             var options = {
                 enableMouseWheel: false, 

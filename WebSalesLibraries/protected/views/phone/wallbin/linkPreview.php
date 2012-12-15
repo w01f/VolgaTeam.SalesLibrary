@@ -95,6 +95,7 @@
                                         <span class="file-size phone"> (<?php echo $fileSizePhone; ?>)</span>
                                     <?php endif; ?>                                        
                                     <div class="item-content">
+                                        <div class ="link-id"><?php echo $link->id; ?></div>
                                         <div class="file-type"><?php echo $link->originalFormat; ?></div>
                                         <div class="view-type"><?php echo $format; ?></div>
                                         <div class="file-size"><?php echo $link->originalFormat; ?></div>                                        

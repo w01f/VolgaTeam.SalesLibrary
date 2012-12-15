@@ -162,7 +162,8 @@
             },
             success: function(msg){
                 $('#preview .page-content').html(msg);
-                $('#preview .library-title').html($.cookie("selectedLibraryName"));
+                $('#preview .library-title').html(isSearch?'Search':$.cookie("selectedLibraryName"));
+                $('.email-tab .library-title').html(isSearch?'Search':$.cookie("selectedLibraryName"));
                 $('#preview .link.back').attr('href',isAttachment?'#link-details':(isSearch?'#search-result':'#links'));
                 $.mobile.changePage( "#preview", {
                     transition: "slidefade"

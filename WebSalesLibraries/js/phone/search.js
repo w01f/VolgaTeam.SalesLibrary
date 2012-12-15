@@ -132,8 +132,8 @@
                 updateDateRange();
             }
         });    
-        $('#search-clear-button').off('click');
-        $('#search-clear-button').on('click',function(){
+        $('#search-clear-date-button').off('click');
+        $('#search-clear-date-button').on('click',function(){
             $('#search-date-start, #search-date-end').val('');
             updateDateRange();
         });

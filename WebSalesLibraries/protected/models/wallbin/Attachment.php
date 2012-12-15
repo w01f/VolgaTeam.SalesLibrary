@@ -37,6 +37,7 @@ class Attachment
     public $availableFormats;
     public $browser;
     public $universalPreview;
+    public $fileSize;
     public function __construct($link)
     {
         $this->parent = $link;
@@ -51,9 +52,16 @@ class Attachment
         $this->path = $attachmentRecord->path;
         $this->originalFormat = $attachmentRecord->format;
         if ($this->originalFormat != 'url')
+        {
             $this->link = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path)));
+            $fullPath = $this->parent->parent->parent->parent->storagePath . DIRECTORY_SEPARATOR . $this->path;
+        }
         else
+        {
             $this->link = $attachmentRecord->path;
+            $fullPath = '';
+        }
+        $this->fileSize = file_exists($fullPath) ? filesize($fullPath) : 0;
 
         if ($attachmentRecord->id_preview != null)
         {
@@ -458,7 +466,7 @@ class Attachment
                         $viewSources[] = array('src' => $this->link, 'href' => $this->link, 'title' => $this->name);
                         break;
                     case 'email':
-                    case 'download':                        
+                    case 'download':
                         $viewSources[] = array('title' => $this->name, 'href' => $this->path);
                         break;
                     case 'mp4':
@@ -489,7 +497,7 @@ class Attachment
                 switch ($format)
                 {
                     case 'email':
-                    case 'download':                        
+                    case 'download':
                         $viewSources[] = array('title' => $this->name, 'href' => $this->path);
                         break;
                     default:
@@ -500,6 +508,119 @@ class Attachment
         }
         if (isset($viewSources))
             return $viewSources;
+    }
+
+    public function getViewSize($format)
+    {
+        switch ($this->originalFormat)
+        {
+            case 'ppt':
+            case 'pptx':
+                switch ($format)
+                {
+                    case 'ppt':
+                    case 'pptx':
+                        $fileSize = LibraryLink::formatFileSize($this->fileSize);
+                        break;
+                    case 'png':
+                        if (isset($this->universalPreview->pngMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pngMaxFileSize);
+                        break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview->pngPhoneMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pngPhoneMaxFileSize);
+                        break;
+                    case 'jpeg':
+                        if (isset($this->universalPreview->jpegMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->jpegMaxFileSize);
+                        break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview->jpegPhoneMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->jpegPhoneMaxFileSize);
+                        break;
+                    case 'pdf':
+                        if (isset($this->universalPreview->pdfMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pdfMaxFileSize);
+                        break;
+                }
+                break;
+            case 'doc':
+            case 'docx':
+                switch ($format)
+                {
+                    case 'doc':
+                    case 'docx':
+                        $fileSize = LibraryLink::formatFileSize($this->fileSize);
+                        break;
+                    case 'png':
+                        if (isset($this->universalPreview->pngMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pngMaxFileSize);
+                        break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview->pngPhoneMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pngPhoneMaxFileSize);
+                        break;
+                    case 'jpeg':
+                        if (isset($this->universalPreview->jpegMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->jpegMaxFileSize);
+                        break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview->jpegPhoneMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->jpegPhoneMaxFileSize);
+                        break;
+                    case 'pdf':
+                        if (isset($this->universalPreview->pdfMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pdfMaxFileSize);
+                        break;
+                }
+                break;
+            case 'xls':
+            case 'xlsx':
+                switch ($format)
+                {
+                    case 'xls':
+                    case 'xlsx':
+                        $fileSize = LibraryLink::formatFileSize($this->fileSize);
+                        break;
+                }
+                break;
+            case 'pdf':
+                switch ($format)
+                {
+                    case 'pdf':
+                        $fileSize = LibraryLink::formatFileSize($this->fileSize);
+                        break;
+                    case 'png':
+                        if (isset($this->universalPreview->pngMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pngMaxFileSize);
+                        break;
+                    case 'png_phone':
+                        if (isset($this->universalPreview->pngPhoneMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->pngPhoneMaxFileSize);
+                        break;
+                    case 'jpeg':
+                        if (isset($this->universalPreview->jpegMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->jpegMaxFileSize);
+                        break;
+                    case 'jpeg_phone':
+                        if (isset($this->universalPreview->jpegPhoneMaxFileSize))
+                            $fileSize = LibraryLink::formatFileSize($this->universalPreview->jpegPhoneMaxFileSize);
+                        break;
+                }
+                break;
+            case 'jpeg':
+            case 'png':
+                switch ($format)
+                {
+                    case 'jpeg':
+                    case 'png':
+                        $fileSize = LibraryLink::formatFileSize($this->fileSize);
+                        break;
+                }
+                break;
+        }
+        if (isset($fileSize))
+            return $fileSize;
     }
 
     public static function attachmentComparer($x, $y)

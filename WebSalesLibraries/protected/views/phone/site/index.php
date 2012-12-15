@@ -9,6 +9,7 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobiscroll/css/mobiscroll-2.
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/libraries.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/search.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/file-card.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/email.css?' . $version);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
@@ -18,8 +19,16 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js?' . $version, 
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/linkViewing.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/libraries.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/search.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version, CClientScript::POS_HEAD);
 ?>
+
+<?php
+$userId = Yii::app()->user->getId();
+if (isset($userId))
+    $availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
+?>
+
 <div data-role='page' id="libraries" data-cache="never" data-dom-cache ="false" data-ajax="false"> 
     <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
         <span class="ui-title">Sales Libraries</span>
@@ -82,7 +91,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -111,7 +120,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -135,13 +144,12 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <span class="ui-title library-title"></span>
     </div>             
     <div data-role='content' class ="page-content">
-        Here will be the list of attachments with the file card at top
     </div> 
     <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -170,7 +178,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -208,7 +216,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         <div data-role="navbar" data-iconpos="top">
             <ul>
                 <li>
-                    <a class ="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
                         Libraries
                     </a>
                 </li>
@@ -452,7 +460,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
                     </a>
                 </li>
                 <li>
-                    <a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
                         Search
                     </a>
                 </li>
@@ -465,3 +473,297 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version,
         </div>             
     </div>             
 </div>        
+<div data-role='page' class="email-tab" id="email-address" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
+        <span class="ui-title library-title"></span>
+        <ul data-role="listview" data-theme="c" data-divider-theme="c">
+            <li data-role="list-divider" >
+                <h4>                        
+                    <table class ="link-container">
+                        <tr><td>Email Link: <span class ="name"></span></td></tr>
+                    </table>              
+                </h4>
+            </li>    
+        </ul>        
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#email-address" data-transition="none">People</a>
+                </li>
+                <li>
+                    <a href="#email-text" data-transition="none">Info</a>
+                </li>                                                
+                <li>
+                    <a href="#email-summary" data-transition="none">Send</a>
+                </li>
+            </ul>
+        </div>
+    </div>             
+    <div data-role='content' class ="page-content">
+        <table class="layout-group">
+            <tr>
+                <td class="on-left">To:</td>
+                <td class="on-right">
+                    <a <?php if (isset($availableEmails)): ?> id="email-to-select-button"<?php endif; ?> class="<?php if (!isset($availableEmails)) echo 'ui-disabled'; ?>" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select Recipients</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="on-left">
+                    <input id="email-to" name="email-to" type="text" value="" data-mini="true"/>
+                    <br>
+                </td>
+            </tr>        
+            <tr>
+                <td class="on-left">Cc:</td>
+                <td class="on-right">
+                    <a <?php if (isset($availableEmails)): ?>id="email-to-copy-select-button"<?php endif; ?> class="<?php if (!isset($availableEmails)) echo 'ui-disabled'; ?>" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select Recipients</a>
+                </td>
+            </tr>                
+            <tr>
+                <td colspan="2" class="on-left">
+                    <input id="email-to-copy" name="email-to-copy" type="text" value="" data-mini="true"/>
+                    <br>
+                </td>
+            </tr>                        
+            <tr>
+                <td class="on-left" width ="70%">From:</td>
+                <td class="on-right">
+                    <input type="checkbox" name="email-from-copy-me" id="email-from-copy-me" class="custom" data-mini="true"/>
+                    <label for="email-from-copy-me">Send Copy to Me</label>
+                </td>                
+            </tr>                
+            <tr>
+                <td colspan="2" class="on-left">
+                    <input id="email-from" name="email-to-copy" type="text" data-mini="true" value="<?php echo Yii::app()->user->email; ?>"/>
+                </td>
+            </tr>                        
+        </table>
+    </div> 
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>             
+    </div>             
+</div>        
+<div data-role='page' class="email-tab" id="email-text" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
+        <span class="ui-title library-title"></span>
+        <ul data-role="listview" data-theme="c" data-divider-theme="c">
+            <li data-role="list-divider" >
+                <h4>                        
+                    <table class ="link-container">
+                        <tr><td>Email Link: <span class ="name"></span></td></tr>
+                    </table>              
+                </h4>
+            </li>    
+        </ul>                
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#email-address" data-transition="none">People</a>
+                </li>
+                <li>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#email-text" data-transition="none">Info</a>
+                </li>                                                
+                <li>
+                    <a href="#email-summary" data-transition="none">Send</a>
+                </li>
+            </ul>
+        </div>
+    </div>             
+    <div data-role='content' class ="page-content">
+        <table class="layout-group">
+            <tr>
+                <td colspan="2" class="on-left">Subject Header:</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="on-left">
+                    <input id="email-subject" name="email-subject" type="text" data-mini="true" value="<?php echo Yii::app()->params['email']['send_link']['subject']; ?>"/>
+                    <br>
+                </td>
+            </tr>        
+            <tr>
+                <td colspan="2" class="on-left">Message Body:</td>
+            </tr>                
+            <tr>
+                <td colspan="2" class="on-left">
+                    <textarea id="email-body" rows="4"><?php echo Yii::app()->params['email']['send_link']['body']; ?></textarea>
+                    <br>
+                </td>
+            </tr>                        
+            <tr>
+                <td class="on-left">Expires After:</td>
+                <td class="on-right">
+                    <select id="expires-in" data-mini="true">
+                        <option selected value="7">7 days</option>
+                        <option value="30">30 days</option>
+                        <option value="90">90 days</option>
+                        <option value="">Never</option>
+                    </select>
+                </td>
+            </tr>                        
+        </table>        
+    </div> 
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>             
+    </div>             
+</div>        
+<div data-role='page' class="email-tab" id="email-summary" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
+        <span class="ui-title library-title"></span>
+        <ul data-role="listview" data-theme="c" data-divider-theme="c">
+            <li data-role="list-divider" >
+                <h4>                        
+                    <table class ="link-container">
+                        <tr><td>Email Link: <span class ="name"></span></td></tr>
+                    </table>              
+                </h4>
+            </li>    
+        </ul>        
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#email-address" data-transition="none">People</a>
+                </li>
+                <li>
+                    <a href="#email-text" data-transition="none">Info</a>
+                </li>                                                
+                <li>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#email-summary" data-transition="none">Send</a>
+                </li>
+            </ul>
+        </div>
+    </div>             
+    <div data-role='content' class ="page-content">
+        <div>
+            <span>To: </span><span id ="email-to-summary"></span>
+        </div>
+        <br>
+        <div>
+            <span>Cc: </span><span id ="email-to-copy-summary"></span>
+        </div>
+        <br>
+        <div>
+            <span>From: </span><span id ="email-from-summary"></span>            
+        </div>        
+        <br>
+        <div>
+            <span>Subject: </span><span id ="email-subject-summary"></span>            
+        </div>                
+        <br>
+        <div>
+            <span>Message: </span><span id ="email-body-summary"></span>            
+        </div>          
+        <br>
+        <a id="email-send" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b">Send Email</a>        
+    </div> 
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>             
+    </div>             
+</div>
+<div data-role="dialog" id="email-to-existed-list" data-overlay-theme="c">
+    <div data-role="header" data-theme="b">
+        <span class="ui-title library-title">Recipients</span>
+    </div>    
+    <div data-role="content">
+        <?php if (isset($availableEmails)): ?>
+            <fieldset id="email-to-existed-list-container" data-role="controlgroup">
+                <?php $i = 0; ?>
+                <?php foreach ($availableEmails as $email): ?>
+                    <input type="checkbox" name="existed-email-to<?php echo $i; ?>" id="existed-email-to<?php echo $i; ?>" class="existed-email-to" class="custom" value="<?php echo $email; ?>"/>
+                    <label for="existed-email-to<?php echo $i; ?>"><?php echo $email; ?></label>
+                    <?php $i++; ?>
+                <?php endforeach; ?>            
+            </fieldset>
+            <br>
+            <a id="email-to-apply-button" href="#email-address" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction ="reverse" data-theme="b" data-icon="check">Apply</a>        
+        <?php endif; ?>          
+    </div>    
+</div>
+<div data-role="dialog" id="email-to-copy-existed-list" data-overlay-theme="c">
+    <div data-role="header" data-theme="b">
+        <span class="ui-title library-title">Recipients</span>
+    </div>    
+    <div data-role="content">
+        <?php if (isset($availableEmails)): ?>
+            <fieldset id="email-to-copy-existed-list-container" data-role="controlgroup">
+                <?php $i = 0; ?>
+                <?php foreach ($availableEmails as $email): ?>
+                    <input type="checkbox" name="existed-email-to-copy<?php echo $i; ?>" id="existed-email-to-copy<?php echo $i; ?>" class="existed-email-to-copy" class="custom" value="<?php echo $email; ?>"/>
+                    <label for="existed-email-to-copy<?php echo $i; ?>"><?php echo $email; ?></label>
+                    <?php $i++; ?>
+                <?php endforeach; ?>            
+            </fieldset>
+            <br>
+            <a id="email-to-copy-apply-button" href="#" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction ="reverse" data-theme="b" data-icon="check">Apply</a>        
+        <?php endif; ?>          
+    </div>    
+</div>
+<div data-role="page" id="email-success-popup" data-overlay-theme="c">
+    <div data-role="header" data-theme="b">
+        <span class="ui-title library-title">Email sent</span>
+    </div>    
+    <div data-role="content">
+        <div>The email has been sent by the adSALESapps server.</div>
+        <br>
+        <div>Tell your Recipient they MAY want to check their Spam or Junk mail if they do not receive the link.</div>        
+        <br>
+        <a href="#preview" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction ="reverse" data-theme="b">Close</a>                    
+    </div>    
+</div>
+

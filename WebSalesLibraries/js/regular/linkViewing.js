@@ -160,12 +160,12 @@
                         if(selectedEmails.length>0)
                             $(textFiledSelector).val(selectedEmails.join('; '));
                         else
-                            $(textFiledSelector).val('Nothing selected');
+                            $(textFiledSelector).val('');
                         
                         $(this).parent.dropdown('toggle');
                         event.stopPropagation();
                     };
-                    
+
                     selector.find('.apply-selection').off('click');
                     selector.find('.apply-selection').on('click',applyEmails);                
                     
@@ -190,6 +190,7 @@
                             emailTo: content.find('#email-to').val(),
                             emailCopyTo: content.find('#email-to-copy').val(),
                             emailFrom: content.find('#email-from').val(),
+                            emailToMe: content.find('#email-to-me').is(':checked'),
                             emailSubject: content.find('#email-subject').val(),
                             emailBody: content.find('#email-body').val(),
                             expiresIn: content.find('#expires-in').val()

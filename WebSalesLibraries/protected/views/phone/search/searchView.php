@@ -45,7 +45,7 @@
         </tr>                        
         <tr>
             <td colspan="2" class="on-center">
-                <a id="search-clear-button" href="#" data-role="button" data-mini="true" data-icon="delete" data-inline="true" data-theme="b">Clear Dates</a>
+                <a id="search-clear-date-button" href="#" data-role="button" data-mini="true" data-icon="delete" data-inline="true" data-theme="b">Clear Dates</a>
             </td>
         </tr>                        
     </table>
