@@ -151,26 +151,23 @@
                 content.find('.dropdown .dropdown-toggle').on('click',function(event){
                     var selector = $(this).parent();
                     var textFiledSelector = '#' + selector.attr('id').replace("-select", "");
-                    var selectedEmails = [];
-                    
-                    selector.find('.existed-email').off('change');
-                    selector.find('.existed-email').on('change',function(){
-                        selectedEmails = [];
-                        $.each(selector.find('.existed-email'),function(){
-                            if($(this).is(':checked'))
-                                selectedEmails.push($(this).val());
-                        });
-                    });
 
-                    selector.find('.apply-selection').off('click');
-                    selector.find('.apply-selection').on('click',function(event){
+                    var applyEmails = function(event){
+                        var selectedEmails = [];
+                        $.each(selector.find(':checked'),function(){
+                            selectedEmails.push($(this).val());
+                        });
                         if(selectedEmails.length>0)
                             $(textFiledSelector).val(selectedEmails.join('; '));
                         else
-                            $(textFiledSelector).val('');
+                            $(textFiledSelector).val('Nothing selected');
+                        
                         $(this).parent.dropdown('toggle');
                         event.stopPropagation();
-                    });                
+                    };
+                    
+                    selector.find('.apply-selection').off('click');
+                    selector.find('.apply-selection').on('click',applyEmails);                
                     
                     $(this).parent.dropdown('toggle');
                     event.stopPropagation();
