@@ -14,7 +14,7 @@
                         <?php foreach ($availableEmails as $email): ?>
                             <li>
                                 <label class="checkbox">
-                                    <input class="existed-email" type="checkbox" value="<?php echo $email; ?>">
+                                    <input type="checkbox" value="<?php echo $email; ?>">
                                     <?php echo $email; ?>
                                 </label>                        
                             </li>
@@ -39,7 +39,7 @@
                         <?php foreach ($availableEmails as $email): ?>
                             <li>
                                 <label class="checkbox">
-                                    <input class="existed-email" type="checkbox" value="<?php echo $email; ?>">
+                                    <input type="checkbox" value="<?php echo $email; ?>">
                                     <?php echo $email; ?>
                                 </label>                        
                             </li>
