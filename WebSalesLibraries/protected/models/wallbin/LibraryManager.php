@@ -32,7 +32,7 @@ class LibraryManager
                 {
                     $libraryName = $libraryFolder->getBasename();
                     $storagePath = $libraryFolder->getPathname();
-                    $storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
+                    $storageLink = Yii::app()->getBaseUrl(true) . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
                     $storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCacheLight.xml');
                     if (!file_exists($storageFile))
                     {

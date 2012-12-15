@@ -296,27 +296,10 @@
                         case 'jpeg':
                             if(fullScreen)
                             {
-                                $.ajax({
-                                    type: "POST",
-                                    url: "wallbin/runFullscreenGallery",
-                                    data: {
-                                        selectedLinks:$.toJSON(selectedLinks)
-                                    },
-                                    beforeSend: function(){
-                                        $.showOverlayLight();
-                                    },
-                                    complete: function(){
-                                        $.hideOverlayLight();
-                                    },
-                                    success: function(msg){
-                                        var galleryWindow = window.open();
-                                        galleryWindow.document.write(msg);
-                                    },
-                                    error: function(){
-                                    },            
-                                    async: true,
-                                    dataType: 'html'                        
-                                });                                  
+                                $.cookie("fullScreenContent", $.toJSON(selectedLinks), {
+                                    expires: (60 * 60 * 24 * 7)
+                                });                                        
+                                window.open("wallbin/runFullscreenGallery");
                             }
                             else
                             {

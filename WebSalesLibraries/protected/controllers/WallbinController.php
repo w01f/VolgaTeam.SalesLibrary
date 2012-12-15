@@ -171,8 +171,11 @@ class WallbinController extends IsdController
 
     public function actionRunFullscreenGallery()
     {
-        $selectedLinks = CJSON::decode(Yii::app()->request->getPost('selectedLinks'));
-        $this->renderPartial('fullscreenGallery', array('selectedLinks' => $selectedLinks));
+        if (isset(Yii::app()->request->cookies['fullScreenContent']->value))
+        {
+            $selectedLinks = CJSON::decode(Yii::app()->request->cookies['fullScreenContent']->value);
+            $this->render('fullscreenGallery', array('selectedLinks' => $selectedLinks));
+        }
     }
 
 }
