@@ -17,7 +17,7 @@
             (function($){
                 $(document).ready(function() 
                 {
-                    $('a.view-dialog-link').fancybox();
+                    $('a#view-dialog-link').fancybox();
                     $('a.video-link').on('click',function(){
                         $.viewSelectedFormat($(this), false);
                     } );
