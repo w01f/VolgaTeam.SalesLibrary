@@ -5,6 +5,18 @@
         window.open(url);
     }    
     
+    var runEmailPage = function(linkId, selectedLinks)
+    {
+        $('.email-tab .link-container .name').html(selectedLinks[0].title);
+        $( '#email-send').off('click');
+        $( '#email-send').on('click',function(){
+            $.sendEmail(linkId);
+        });                             
+        $.mobile.changePage( "#email-address", {
+            transition: "slidefade"
+        });                                                                
+    }
+    
     $.viewSelectedFormat = function(itemContent, resolution)
     {
         var selectedFileId = itemContent.find('.link-id').html();
@@ -38,14 +50,7 @@
                             });                            
                             break;
                         case 'email':
-                            $('.email-tab .link-container .name').html(selectedLinks[0].title);
-                            $( '#email-send').off('click');
-                            $( '#email-send').on('click',function(){
-                                $.sendEmail(selectedFileId);
-                            });                             
-                            $.mobile.changePage( "#email-address", {
-                                transition: "slidefade"
-                            });                                                        
+                            runEmailPage(selectedFileId, selectedLinks);
                             break;
                         default:
                             $.downloadFile(selectedLinks[0].href);
@@ -56,6 +61,7 @@
                     switch(selectedViewType)
                     {
                         case 'email':
+                            runEmailPage(selectedFileId, selectedLinks);
                             break;                        
                         default:
                             $.downloadFile(selectedLinks[0].href);
@@ -71,6 +77,7 @@
                     switch(selectedViewType)
                     {
                         case 'email':
+                            runEmailPage(selectedFileId, selectedLinks);
                             break;                        
                         default:
                             $.downloadFile(selectedLinks[0].href);
@@ -87,6 +94,7 @@
                             $.downloadFile(selectedLinks[0].src);
                             break;                        
                         case 'email':
+                            runEmailPage(selectedFileId, selectedLinks);
                             break;                                                    
                     }
                     break;
