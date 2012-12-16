@@ -278,13 +278,6 @@
         {
             selectedLinks = $.parseJSON(selectedLinks);
             selectedThumbs = $.parseJSON(selectedThumbs);
-            if(selectedThumbs!= null)
-            {
-                $.each(selectedLinks,function(index) {
-                    selectedLinks[index].thumb = selectedThumbs[index].href;
-                    selectedLinks[index].image = selectedLinks[index].href;
-                });
-            }
             switch(selectedFileType)
             {
                 case 'ppt':
@@ -295,12 +288,7 @@
                         case 'png':
                         case 'jpeg':
                             if(fullScreen)
-                            {
-                                $.cookie("fullScreenContent", $.toJSON(selectedLinks), {
-                                    expires: (60 * 60 * 24 * 7)
-                                });                                        
-                                window.open("wallbin/runFullscreenGallery");
-                            }
+                                window.open("wallbin/runFullscreenGallery?linkId="+selectedFileId+"&format="+selectedViewType);
                             else
                             {
                                 $.fancybox(selectedLinks,{

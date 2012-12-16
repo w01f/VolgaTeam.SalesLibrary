@@ -171,10 +171,60 @@ class WallbinController extends IsdController
 
     public function actionRunFullscreenGallery()
     {
-        if (isset(Yii::app()->request->cookies['fullScreenContent']->value))
+        $linkId = Yii::app()->request->getQuery('linkId');
+        $format = Yii::app()->request->getQuery('format');
+        if (isset($linkId) && isset($format))
         {
-            $selectedLinks = CJSON::decode(Yii::app()->request->cookies['fullScreenContent']->value);
-            $this->render('fullscreenGallery', array('selectedLinks' => $selectedLinks));
+            $linkRecord = LinkStorage::getLinkById($linkId);
+            if (isset($linkRecord))
+            {
+                $libraryManager = new LibraryManager();
+                $libraryManager->getLibraries();
+                $library = $libraryManager->getLibraryById($linkRecord->id_library);
+                if (isset($library))
+                {
+                    $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                    $link->browser = 'default';
+                    $link->load($linkRecord);
+                    $selectedLinks = $link->getViewSource($format);
+                    $selectedThumbs = $link->getViewSource('thumbs');
+                }
+            }
+            else
+            {
+                $attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
+                if (isset($attachmentRecord))
+                {
+                    $linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
+                    $libraryManager = new LibraryManager();
+                    $libraryManager->getLibraries();
+                    $library = $libraryManager->getLibraryById($attachmentRecord->id_library);
+                    if (isset($library) && isset($linkRecord))
+                    {
+                        $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                        $link->browser = 'default';
+                        $link->load($linkRecord);
+
+                        $attachment = new Attachment($link);
+                        $attachment->browser = 'default';
+                        $attachment->load($attachmentRecord);
+                        $selectedLinks = $attachment->getViewSource($format);
+                        $selectedThumbs = $attachment->getViewSource('thumbs');
+                    }
+                }
+            }
+        }
+        if (isset($selectedLinks) && isset($selectedThumbs))
+        {
+            for ($i = 0; $i < count($selectedLinks); $i++)
+            {
+                $galleryLink = array('image' => $selectedLinks[$i]['href'],
+                    'title' => $selectedLinks[$i]['title'],
+                    'thumb' => $selectedThumbs[$i]['href']);
+                $galleryLinks[] = $galleryLink;
+            }
+            if (isset($galleryLinks))
+                $this->render('fullscreenGallery', array('selectedLinks' => $galleryLinks));
         }
     }
 
