@@ -1,5 +1,5 @@
 <?php
-$version = '46.0';
+$version = '58.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);

@@ -4,7 +4,8 @@
 
 #email-dialog td
 { 
-    padding-bottom: 5px;
+    height: 40px;
+    padding-bottom: 15px;
 }
 
 #email-dialog td.title
@@ -18,7 +19,7 @@
     text-align: center;
 }
 
-#email-dialog .email-body-title
+#email-dialog .aligned-top
 { 
     vertical-align: top;
 }

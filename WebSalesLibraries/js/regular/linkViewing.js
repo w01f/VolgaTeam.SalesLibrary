@@ -131,6 +131,7 @@
         });
     }        
     
+    var emailDialogObject = [];
     $.emailFile = function(linkId, title)
     {
         $.ajax({
@@ -145,55 +146,102 @@
                 $.hideOverlayLight();
             },
             success: function(msg){
-                var content = $(msg);
+                emailDialogObject.content = $(msg);
+                emailDialogObject.content.find('.dropdown .dropdown-toggle').dropdown();
 
-                content.find('.dropdown .dropdown-toggle').dropdown();
-                content.find('.dropdown .dropdown-toggle').on('click',function(event){
-                    var selector = $(this).parent();
-                    var textFiledSelector = '#' + selector.attr('id').replace("-select", "");
-
-                    var applyEmails = function(event){
-                        var selectedEmails = [];
-                        $.each(selector.find(':checked'),function(){
-                            selectedEmails.push($(this).val());
-                        });
-                        if(selectedEmails.length>0)
-                            $(textFiledSelector).val(selectedEmails.join('; '));
-                        else
-                            $(textFiledSelector).val('');
-                        
-                        $(this).parent.dropdown('toggle');
-                        event.stopPropagation();
-                    };
-
-                    selector.find('.apply-selection').off('click');
-                    selector.find('.apply-selection').on('click',applyEmails);                
-                    
+                emailDialogObject.content.find('.dropdown .dropdown-menu li').on('click',function(event){
+                    event.stopPropagation();
+                });                
+                emailDialogObject.content.find('.dropdown .dropdown-menu li').on('touchstart',function(event){
+                    event.stopPropagation();
+                });                
+                
+                emailDialogObject.content.find('.dropdown .dropdown-toggle').on('click',function(event){
                     $(this).parent.dropdown('toggle');
                     event.stopPropagation();
                 });
-                
-                content.find('.dropdown .dropdown-menu li').on('touchstart',function(event){
+                emailDialogObject.content.find('.dropdown .dropdown-toggle').on('touchstart',function(event){
+                    $(this).parent.dropdown('toggle');
                     event.stopPropagation();
                 });                
                 
-                content.find('.dropdown .dropdown-menu li').on('click',function(event){
+                emailDialogObject.toSelector = emailDialogObject.content.find('#email-to-select');                
+                emailDialogObject.toSelector.find('button.apply-selection').on('click',function(event){
+                    var selectedEmails = [];
+                    $.each(emailDialogObject.toSelector.find(':checked'),function(){
+                        selectedEmails.push($(this).val());
+                    });
+                    if(selectedEmails.length>0)
+                        emailDialogObject.content.find('#email-to').val(selectedEmails.join('; '));
+                    else
+                        emailDialogObject.content.find('#email-to').val('');
+
+                    $(this).parent.dropdown('toggle');
                     event.stopPropagation();
-                });                
+                });
+                emailDialogObject.toSelector.find('button.apply-selection').on('touchstart',function(event){
+                    var selectedEmails = [];
+                    $.each(emailDialogObject.toSelector.find(':checked'),function(){
+                        selectedEmails.push($(this).val());
+                    });
+                    if(selectedEmails.length>0)
+                        emailDialogObject.content.find('#email-to').val(selectedEmails.join('; '));
+                    else
+                        emailDialogObject.content.find('#email-to').val('');
+
+                    $(this).parent.dropdown('toggle');
+                    event.stopPropagation();
+                    event.preventDefault();
+                }).on('touchend',function(event){
+                    event.stopPropagation();
+                    event.preventDefault();
+                });
                 
-                content.find('#email-accept').on('click',function(){
+                emailDialogObject.toCopySelector = emailDialogObject.content.find('#email-to-copy-select');                
+                emailDialogObject.toCopySelector.find('button.apply-selection').on('click',function(event){
+                    var selectedEmails = [];
+                    $.each(emailDialogObject.toCopySelector.find(':checked'),function(){
+                        selectedEmails.push($(this).val());
+                    });
+                    if(selectedEmails.length>0)
+                        emailDialogObject.content.find('#email-to-copy').val(selectedEmails.join('; '));
+                    else
+                        emailDialogObject.content.find('#email-to-copy').val('');
+
+                    $(this).parent.dropdown('toggle');
+                    event.stopPropagation();
+                });
+                emailDialogObject.toCopySelector.find('button.apply-selection').on('touchstart',function(event){
+                    var selectedEmails = [];
+                    $.each(emailDialogObject.toCopySelector.find(':checked'),function(){
+                        selectedEmails.push($(this).val());
+                    });
+                    if(selectedEmails.length>0)
+                        emailDialogObject.content.find('#email-to-copy').val(selectedEmails.join('; '));
+                    else
+                        emailDialogObject.content.find('#email-to-copy').val('');
+
+                    $(this).parent.dropdown('toggle');
+                    event.stopPropagation();
+                    event.preventDefault();
+                }).on('touchend',function(event){
+                    event.stopPropagation();
+                    event.preventDefault();
+                });
+                
+                emailDialogObject.content.find('#email-accept').on('click',function(){
                     $.ajax({
                         type: "POST",
                         url: "site/emailLinkSend",
                         data: {
                             linkId: linkId,
-                            emailTo: content.find('#email-to').val(),
-                            emailCopyTo: content.find('#email-to-copy').val(),
-                            emailFrom: content.find('#email-from').val(),
-                            emailToMe: content.find('#email-to-me').is(':checked'),
-                            emailSubject: content.find('#email-subject').val(),
-                            emailBody: content.find('#email-body').val(),
-                            expiresIn: content.find('#expires-in').val()
+                            emailTo: emailDialogObject.content.find('#email-to').val(),
+                            emailCopyTo: emailDialogObject.content.find('#email-to-copy').val(),
+                            emailFrom: emailDialogObject.content.find('#email-from').val(),
+                            emailToMe: emailDialogObject.content.find('#email-to-me').is(':checked'),
+                            emailSubject: emailDialogObject.content.find('#email-subject').val(),
+                            emailBody: emailDialogObject.content.find('#email-body').val(),
+                            expiresIn: emailDialogObject.content.find('#expires-in').val()
                         },
                         success: function(){
                             $.fancybox.close();
@@ -240,11 +288,11 @@
                         dataType: 'html'                        
                     });
                 });
-                content.find('#email-cancel').on('click',function(){
+                emailDialogObject.content.find('#email-cancel').on('click',function(){
                     $.fancybox.close();
                 });                    
                 $.fancybox({
-                    content: content,
+                    content: emailDialogObject.content,
                     title: title,
                     openEffect  : 'none',
                     closeEffect	: 'none',

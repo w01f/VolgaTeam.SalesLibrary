@@ -87,7 +87,7 @@
             <br>
             <label class="checkbox">
                 <input class="use-fullscreen" type="checkbox" value="">
-                View PNG & JPEG in a full screen new tab
+                Open PNG and JPEG images in a new Browser tab
             </label>
         <?php endif; ?>
     <?php else: ?>

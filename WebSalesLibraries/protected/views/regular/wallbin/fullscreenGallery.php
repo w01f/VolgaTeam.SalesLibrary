@@ -24,7 +24,7 @@
                         slide_interval          :   3000,		// Length between transitions
                         transition              :   6, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
                         transition_speed		:	1000,		// Speed of transition
-                        new_window				:	1,			// Image links open in new window/tab
+                        new_window				:	0,			// Image links open in new window/tab
                         pause_hover             :   0,			// Pause slideshow on hover
                         keyboard_nav            :   1,			// Keyboard navigation on/off
                         performance				:	1,			// 0-Normal, 1-Hybrid speed/quality, 2-Optimizes image quality, 3-Optimizes transition speed // (Only works for Firefox/IE, not Webkit)
@@ -43,7 +43,7 @@
                         thumbnail_navigation    :   0,			// Thumbnail navigation
                         slides 					:  	[			// Slideshow Images
                         <?php foreach ($selectedLinks as $link): ?>
-                            {image : '<?php echo str_replace('//sd_cache','/sd_cache', Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['image'])); ?>', title : '<?php echo $link['title']; ?>', thumb : '<?php echo str_replace('//sd_cache','/sd_cache',Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['thumb'])); ?>', url : '<?php echo str_replace('//sd_cache','/sd_cache',Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['image'])); ?>'},
+                            {image : "<?php echo str_replace('//sd_cache','/sd_cache', Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['image'])); ?>", title : "<?php echo $link['title']; ?>", thumb : "<?php echo str_replace('//sd_cache','/sd_cache',Yii::app()->getBaseUrl(true).'/'.str_replace('./', '', $link['thumb'])); ?>", url : "#"},
                         <?php endforeach; ?>
                       ]
                        });
@@ -56,10 +56,10 @@
         <a id="prevslide" class="load-item"></a>
         <a id="nextslide" class="load-item"></a>
 
-        <div id="thumb-tray" class="load-item">
+<!--        <div id="thumb-tray" class="load-item">
             <div id="thumb-back"></div>
             <div id="thumb-forward"></div>
-        </div>
+        </div>-->
 
         <!--Control Bar-->
         <div id="controls-wrapper" class="load-item">
