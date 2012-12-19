@@ -317,9 +317,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (node != null)
 							this.OvernightsCalendar.Deserialize(node);
 
-						node = document.SelectSingleNode(@"/Library/IPadManager");
+						node = document.SelectSingleNode(@"/Library/IPadContentManager");
 						if (node != null)
 							this.IPadManager.Deserialize(node);
+						else
+						{
+							node = document.SelectSingleNode(@"/Library/IPadManager");
+							if (node != null)
+								this.IPadManager.Deserialize(node);
+						}
 
 						#region Program Manager Settings
 						node = document.SelectSingleNode(@"/Library/EnableProgramManagerSync");

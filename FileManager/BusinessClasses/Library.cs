@@ -341,6 +341,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				node = document.SelectSingleNode(@"/Library/IPadContentManager");
 				if (node != null)
 					this.IPadManager.Deserialize(node);
+				else
+				{
+					node = document.SelectSingleNode(@"/Library/IPadManager");
+					if (node != null)
+						this.IPadManager.Deserialize(node);
+				}
 
 				#region Program Manager Settings
 				node = document.SelectSingleNode(@"/Library/EnableProgramManagerSync");
@@ -421,7 +427,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			#endregion
 
 			xml.AppendLine(@"<OvernightsCalendar>" + this.OvernightsCalendar.Serialize() + @"</OvernightsCalendar>");
-			xml.AppendLine(@"<IPadContentManager>" + this.IPadManager.Serialize() + @"</IPadContentManager>");
+			xml.AppendLine(@"<IPadManager>" + this.IPadManager.Serialize() + @"</IPadManager>");
 
 			#region Program Manager Settings
 			xml.AppendLine(@"<EnableProgramManagerSync>" + this.EnableProgramManagerSync.ToString() + @"</EnableProgramManagerSync>");
