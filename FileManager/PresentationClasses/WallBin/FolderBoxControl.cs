@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
+using DevExpress.Utils;
+using FileManager.ConfigurationClasses;
+using FileManager.PresentationClasses.WallBin.Decorators;
+using FileManager.ToolForms;
+using FileManager.ToolForms.WallBin;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.CoreObjects.InteropClasses;
 
 namespace FileManager.PresentationClasses.WallBin
 {
-	[System.ComponentModel.ToolboxItem(false)]
+	[ToolboxItem(false)]
 	public partial class FolderBoxControl : UserControl
 	{
 		private const int ImageWidthMargin = 6;
@@ -18,31 +24,32 @@ namespace FileManager.PresentationClasses.WallBin
 		private const int DefaultImageWidth = 26;
 		private const int DefaultImageHeight = 26;
 
-		private LibraryFolder _folder;
-		private Font _noteFont;
-		private Font _textFont;
-		private Pen _rowDropHintPen = new Pen(Color.Black, 2);
-		private Pen _boxDropHintPen = new Pen(Color.Black, 8);
-		private RichTextBox _richTextControl = new RichTextBox();
-		private bool _containFiles = false;
-		private bool _containsWidgets = false;
+		private readonly Pen _boxDropHintPen = new Pen(Color.Black, 8);
+		private readonly FormLinkProperties _formLinkProperties = new FormLinkProperties();
+		private readonly RichTextBox _richTextControl = new RichTextBox();
+		private readonly Pen _rowDropHintPen = new Pen(Color.Black, 2);
+		private bool _containFiles;
+		private bool _containsWidgets;
+		private int _currentDragOverRow = -1;
 		private Font _displayCellFont;
+		private Rectangle _dragBox;
 		private Font _editCellFont;
+		private LibraryFolder _folder;
 
 		private DataGridView.HitTestInfo _hitTest;
-		private Rectangle _dragBox;
-		private bool _underlineRow = false;
-		private bool _underlineBox = false;
-		private int _currentDragOverRow = -1;
-
-		private ToolForms.WallBin.FormLinkProperties _formLinkProperties = new ToolForms.WallBin.FormLinkProperties();
+		private Font _noteFont;
+		private Font _textFont;
+		private bool _underlineBox;
+		private bool _underlineRow;
 
 		#region Public Properties
-		public Decorators.PageDecorator Decorator { get; set; }
+		public PageDecorator Decorator { get; set; }
+		public WallBinOptions WallBinOptions { get; private set; }
 		public bool IsActive { get; set; }
 
 		public LibraryFolder Folder
 		{
+			get { return _folder; }
 			set
 			{
 				_folder = value;
@@ -62,13 +69,13 @@ namespace FileManager.PresentationClasses.WallBin
 						switch (_folder.HeaderAlignment)
 						{
 							case Alignment.Left:
-								labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+								labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
 								break;
 							case Alignment.Center:
-								labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+								labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 								break;
 							case Alignment.Right:
-								labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+								labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 								break;
 						}
 					}
@@ -104,13 +111,13 @@ namespace FileManager.PresentationClasses.WallBin
 					switch (_folder.HeaderAlignment)
 					{
 						case Alignment.Left:
-							labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
 							break;
 						case Alignment.Center:
-							labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 							break;
 						case Alignment.Right:
-							labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+							labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
 							break;
 					}
 				}
@@ -122,7 +129,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 				grFiles.BackgroundColor = _folder.BackgroundWindowColor;
 				grFiles.DefaultCellStyle.BackColor = _folder.BackgroundWindowColor;
-				grFiles.DefaultCellStyle.SelectionBackColor = this.IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
+				grFiles.DefaultCellStyle.SelectionBackColor = IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
 
 				grFiles.DefaultCellStyle.ForeColor = _folder.ForeWindowColor;
 				grFiles.DefaultCellStyle.SelectionForeColor = _folder.ForeWindowColor;
@@ -137,44 +144,28 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public int Column
 		{
-			get
-			{
-				return _folder.ColumnOrder;
-			}
-			set
-			{
-				_folder.ColumnOrder = value;
-			}
+			get { return _folder.ColumnOrder; }
+			set { _folder.ColumnOrder = value; }
 		}
 
 		public double RowOrder
 		{
-			get
-			{
-				return _folder.RowOrder;
-			}
-			set
-			{
-				_folder.RowOrder = value;
-			}
+			get { return _folder.RowOrder; }
+			set { _folder.RowOrder = value; }
 		}
 
 		public bool UnderlineBox
 		{
-			get
-			{
-				return _underlineBox;
-			}
+			get { return _underlineBox; }
 			set
 			{
 				_underlineBox = value;
 				if (_underlineBox)
-					this.Padding = new Padding(0, 4, 0, 0);
+					Padding = new Padding(0, 4, 0, 0);
+				else if (IsActive)
+					Padding = new Padding(2, 2, 2, 2);
 				else
-					if (this.IsActive)
-						this.Padding = new Padding(2, 2, 2, 2);
-					else
-						this.Padding = new Padding(0, 0, 0, 0);
+					Padding = new Padding(0, 0, 0, 0);
 			}
 		}
 		#endregion
@@ -182,17 +173,18 @@ namespace FileManager.PresentationClasses.WallBin
 		public FolderBoxControl()
 		{
 			InitializeComponent();
+			WallBinOptions = new WallBinOptions();
 		}
 
 		#region Formatting Event Handlers
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			base.OnPaint(e);
-			if (this.IsActive)
+			if (IsActive)
 			{
 				Rectangle rect;
 				if (e.ClipRectangle.Top == 0)
-					rect = new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, this.Height);
+					rect = new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, Height);
 				else
 					rect = new Rectangle(e.ClipRectangle.Left, 0, e.ClipRectangle.Width, e.ClipRectangle.Bottom);
 				for (int i = 0; i < 3; i++)
@@ -205,17 +197,17 @@ namespace FileManager.PresentationClasses.WallBin
 				}
 			}
 			if (_underlineBox)
-				e.Graphics.DrawLine(_boxDropHintPen, 0, 0, this.Width, 0);
+				e.Graphics.DrawLine(_boxDropHintPen, 0, 0, Width, 0);
 		}
 
 		private void ControlBorders_Paint(object sender, PaintEventArgs e)
 		{
 			Rectangle rect;
 			if (e.ClipRectangle.Top == 0)
-				rect = new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, this.Height);
+				rect = new Rectangle(e.ClipRectangle.Left, e.ClipRectangle.Top, e.ClipRectangle.Width, Height);
 			else
 				rect = new Rectangle(e.ClipRectangle.Left, 0, e.ClipRectangle.Width, e.ClipRectangle.Bottom);
-			for (int i = 0; i < 1; i++)
+			for (var i = 0; i < 1; i++)
 			{
 				ControlPaint.DrawBorder(e.Graphics, rect, _folder.BorderColor, ButtonBorderStyle.Solid);
 				rect.X = rect.X + 1;
@@ -227,177 +219,161 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void grFiles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			if (grFiles.Rows[e.RowIndex].Tag != null)
+			if (grFiles.Rows[e.RowIndex].Tag == null) return;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			if (file == null) return;
+			var toolTipText = new List<string>();
+			if (!string.IsNullOrEmpty(file.OriginalPath))
 			{
-				LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
-				if (file != null)
-				{
-					List<string> toolTipText = new List<string>();
-					if (!string.IsNullOrEmpty(file.OriginalPath))
-					{
-						toolTipText.Add("Path: " + file.OriginalPath);
-						if (file.PresentationProperties != null)
-							toolTipText.Add(string.Format("Slide Size: {0} W = {1} H = {2}", new object[] { file.PresentationProperties.Orientation, file.PresentationProperties.Width.ToString("#.##"), file.PresentationProperties.Height.ToString("#.##") }));
-						toolTipText.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
-						if (file.ExpirationDateOptions.EnableExpirationDate && file.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
-							toolTipText.Add("Expires: " + file.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt"));
-						else
-							toolTipText.Add("Expires: No Expiration Date");
-						if (!string.IsNullOrEmpty(file.SearchTags.AllTags))
-							toolTipText.Add("Search Tags: " + file.SearchTags.AllTags);
-						else
-							toolTipText.Add("No Search Tags Assigned");
-					}
-					else if (file.Type == FileTypes.LineBreak)
-					{
-						if (!string.IsNullOrEmpty(file.LineBreakProperties.Note))
-							toolTipText.Add(file.LineBreakProperties.Note);
-					}
-					grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = string.Join(Environment.NewLine, toolTipText.ToArray());
-				}
+				toolTipText.Add("Path: " + file.OriginalPath);
+				if (file.PresentationProperties != null)
+					toolTipText.Add(string.Format("Slide Size: {0} W = {1} H = {2}", new object[] { file.PresentationProperties.Orientation, file.PresentationProperties.Width.ToString("#.##"), file.PresentationProperties.Height.ToString("#.##") }));
+				toolTipText.Add("Added: " + file.AddDate.ToString("M/dd/yy h:mm:ss tt"));
+				if (file.ExpirationDateOptions.EnableExpirationDate && file.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
+					toolTipText.Add("Expires: " + file.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt"));
+				else
+					toolTipText.Add("Expires: No Expiration Date");
+				if (!string.IsNullOrEmpty(file.SearchTags.AllTags))
+					toolTipText.Add("Search Tags: " + file.SearchTags.AllTags);
+				else
+					toolTipText.Add("No Search Tags Assigned");
 			}
+			else if (file.Type == FileTypes.LineBreak)
+			{
+				if (!string.IsNullOrEmpty(file.LineBreakProperties.Note))
+					toolTipText.Add(file.LineBreakProperties.Note);
+			}
+			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].ToolTipText = string.Join(Environment.NewLine, toolTipText.ToArray());
 		}
 
 		private void grFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
-			if (e.ColumnIndex == 0)
+			if (e.ColumnIndex != 0) return;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			if (file != null)
 			{
-				LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
-				if (file != null)
+				e.PaintBackground(e.CellBounds, true);
+
+				#region Calculate Options
+				Image image = null;
+				int imageLeft = 0;
+				int imageTop = 0;
+				int imageWidth = 0;
+				int imageHeight = 0;
+				string text = string.Empty;
+				int textLeft = 0;
+				int textTop = 0;
+				int textWidth = 0;
+				int textHeight = 0;
+				int columnWidth = 0;
+				int rowHeight = 0;
+				Color foreColor = Color.Black;
+				Font font = null;
+
+				GetLinkGUIValues(file
+								 , ref image
+								 , ref imageLeft
+								 , ref imageTop
+								 , ref imageWidth
+								 , ref imageHeight
+								 , ref text
+								 , ref textLeft
+								 , ref textTop
+								 , ref textWidth
+								 , ref textHeight
+								 , ref columnWidth
+								 , ref rowHeight
+								 , ref foreColor
+								 , ref font);
+
+				if (columnWidth > colDisplayName.Width)
+					colDisplayName.Width = columnWidth;
+
+				if (rowHeight > grFiles.Rows[e.RowIndex].Height)
 				{
-					e.PaintBackground(e.CellBounds, true);
-
-					#region Calculate Options
-					Image image = null;
-					int imageLeft = 0;
-					int imageTop = 0;
-					int imageWidth = 0;
-					int imageHeight = 0;
-					string text = string.Empty;
-					int textLeft = 0;
-					int textTop = 0;
-					int textWidth = 0;
-					int textHeight = 0;
-					int columnWidth = 0;
-					int rowHeight = 0;
-					Color foreColor = Color.Black;
-					Font font = null;
-
-					GetLinkGUIValues(file
-						, ref image
-						, ref imageLeft
-						, ref imageTop
-						, ref imageWidth
-						, ref imageHeight
-						, ref text
-						, ref textLeft
-						, ref textTop
-						, ref textWidth
-						, ref textHeight
-						, ref columnWidth
-						, ref rowHeight
-						, ref foreColor
-						, ref font);
-
-					if (columnWidth > colDisplayName.Width)
-						colDisplayName.Width = columnWidth;
-
-					if (rowHeight > grFiles.Rows[e.RowIndex].Height)
+					grFiles.Rows[e.RowIndex].Height = rowHeight;
+					SetGridSize();
+					if (Parent != null)
 					{
-						grFiles.Rows[e.RowIndex].Height = rowHeight;
-						SetGridSize();
-						if (this.Parent != null)
-						{
-							((ColumnPanel)this.Parent).ResizePanel();
-							this.Decorator.RefreshPanelHeight();
-						}
-					}
-					#endregion
-
-					#region Build RichTextControl
-					_richTextControl.Text = text;
-					_richTextControl.Font = font;
-					_richTextControl.Height = textHeight;
-					_richTextControl.Width = textWidth;
-
-					if (!string.IsNullOrEmpty(file.Note))
-					{
-						_richTextControl.SelectionStart = file.DisplayName.Length;
-						_richTextControl.SelectionLength = file.Note.Length;
-						_richTextControl.SelectionFont = _noteFont;
-					}
-					if (grFiles.SelectedRows.Count > 0)
-					{
-						if (grFiles.SelectedRows[0].Index == e.RowIndex)
-						{
-							_richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
-							_richTextControl.ForeColor = foreColor;
-						}
-						else
-						{
-							_richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-							_richTextControl.ForeColor = foreColor;
-						}
-					}
-					else
-					{
-						_richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
-						_richTextControl.ForeColor = foreColor;
-					}
-					#endregion
-
-					#region Custom Draw
-					if (image != null)
-						e.Graphics.DrawImage(image, new Rectangle(e.CellBounds.X + imageLeft, e.CellBounds.Y + imageTop, imageWidth, imageHeight));
-					if (!string.IsNullOrEmpty(text))
-						e.Graphics.DrawImage(RichTextBoxPrinter.Print(_richTextControl, textWidth, textHeight), new Rectangle(e.CellBounds.X + textLeft, e.CellBounds.Y + textTop, textWidth, textHeight));
-					#endregion
-				}
-				if (_containFiles && _underlineRow && (_currentDragOverRow == e.RowIndex || _currentDragOverRow == -1))
-				{
-					if (_currentDragOverRow == -1)
-						e.Graphics.DrawLine(_rowDropHintPen, 0, e.CellBounds.Height * grFiles.RowCount + 1, grFiles.Width, e.CellBounds.Height * grFiles.RowCount + 1);
-					else
-					{
-						if (e.RowIndex == 0)
-							e.Graphics.DrawLine(_rowDropHintPen, 0, e.CellBounds.Top + 2, grFiles.Width, e.CellBounds.Top + 2);
-						else
-							e.Graphics.DrawLine(_rowDropHintPen, 0, e.CellBounds.Top - 1, grFiles.Width, e.CellBounds.Top - 1);
+						((ColumnPanel)Parent).ResizePanel();
+						Decorator.RefreshPanelHeight();
 					}
 				}
-				e.Handled = true;
+				#endregion
+
+				#region Build RichTextControl
+				_richTextControl.Text = text;
+				_richTextControl.Font = font;
+				_richTextControl.Height = textHeight;
+				_richTextControl.Width = textWidth;
+
+				if (!string.IsNullOrEmpty(file.Note))
+				{
+					_richTextControl.SelectionStart = file.DisplayName.Length;
+					_richTextControl.SelectionLength = file.Note.Length;
+					_richTextControl.SelectionFont = _noteFont;
+				}
+
+				_richTextControl.ForeColor = foreColor;
+				if (WallBinOptions.AllowEdit && grFiles.SelectedRows.Count > 0 && grFiles.SelectedRows[0].Index == e.RowIndex)
+					_richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
+				else if (WallBinOptions.AllowMultiSelect && grFiles.Rows[e.RowIndex].Selected)
+					_richTextControl.BackColor = grFiles.DefaultCellStyle.SelectionBackColor;
+				else
+					_richTextControl.BackColor = grFiles.DefaultCellStyle.BackColor;
+
+				#endregion
+
+				#region Custom Draw
+				if (image != null)
+					e.Graphics.DrawImage(image, new Rectangle(e.CellBounds.X + imageLeft, e.CellBounds.Y + imageTop, imageWidth, imageHeight));
+				if (!string.IsNullOrEmpty(text))
+					e.Graphics.DrawImage(RichTextBoxPrinter.Print(_richTextControl, textWidth, textHeight), new Rectangle(e.CellBounds.X + textLeft, e.CellBounds.Y + textTop, textWidth, textHeight));
+				#endregion
 			}
+			if (_containFiles && _underlineRow && (_currentDragOverRow == e.RowIndex || _currentDragOverRow == -1))
+			{
+				if (_currentDragOverRow == -1)
+					e.Graphics.DrawLine(_rowDropHintPen, 0, e.CellBounds.Height * grFiles.RowCount + 1, grFiles.Width, e.CellBounds.Height * grFiles.RowCount + 1);
+				else
+				{
+					if (e.RowIndex == 0)
+						e.Graphics.DrawLine(_rowDropHintPen, 0, e.CellBounds.Top + 2, grFiles.Width, e.CellBounds.Top + 2);
+					else
+						e.Graphics.DrawLine(_rowDropHintPen, 0, e.CellBounds.Top - 1, grFiles.Width, e.CellBounds.Top - 1);
+				}
+			}
+			e.Handled = true;
 		}
-
 		#endregion
 
 		#region Drag&Drop Event Handlers
 		private void grFiles_DragEnter(object sender, DragEventArgs e)
 		{
-			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
+			if (!WallBinOptions.AllowEdit) return;
+			if (!e.Data.GetDataPresent(DataFormats.Serializable, true)) return;
+			var data = e.Data.GetData(DataFormats.Serializable, true);
+			if (data.GetType() == typeof(DataGridViewRow))
 			{
-				var data = e.Data.GetData(DataFormats.Serializable, true);
-				if (data.GetType() == typeof(DataGridViewRow))
-				{
-					_underlineRow = true;
-					e.Effect = DragDropEffects.Move;
-				}
-				else if (data.GetType() != typeof(FolderBoxControl))
-				{
-					_underlineRow = true;
-					e.Effect = DragDropEffects.Copy;
-				}
-				else
-					this.Decorator.Column_DragEnter(this.Parent, e);
+				_underlineRow = true;
+				e.Effect = DragDropEffects.Move;
 			}
+			else if (data.GetType() != typeof(FolderBoxControl))
+			{
+				_underlineRow = true;
+				e.Effect = DragDropEffects.Copy;
+			}
+			else
+				Decorator.ColumnDragEnter(Parent, e);
 		}
 
 		private void grFiles_DragOver(object sender, DragEventArgs e)
 		{
+			if (!WallBinOptions.AllowEdit) return;
 			if (_underlineRow)
 			{
-				Point pt = grFiles.PointToClient(new Point(e.X + 1, e.Y + 1));
-				DataGridView.HitTestInfo ht = grFiles.HitTest(pt.X, pt.Y);
+				var pt = grFiles.PointToClient(new Point(e.X + 1, e.Y + 1));
+				var ht = grFiles.HitTest(pt.X, pt.Y);
 				if (_currentDragOverRow != ht.RowIndex)
 				{
 					_currentDragOverRow = ht.RowIndex;
@@ -405,11 +381,12 @@ namespace FileManager.PresentationClasses.WallBin
 				}
 			}
 			else
-				this.Decorator.Column_DragOver(this.Parent, e);
+				Decorator.ColumnDragOver(Parent, e);
 		}
 
 		private void grFiles_DragLeave(object sender, EventArgs e)
 		{
+			if (!WallBinOptions.AllowEdit) return;
 			_underlineRow = false;
 			_currentDragOverRow = -1;
 			grFiles.Refresh();
@@ -417,8 +394,9 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void grFiles_DragDrop(object sender, DragEventArgs e)
 		{
-			Point p = grFiles.PointToClient(new Point(e.X, e.Y));
-			DataGridView.HitTestInfo ht = grFiles.HitTest(p.X, p.Y);
+			if (!WallBinOptions.AllowEdit) return;
+			var p = grFiles.PointToClient(new Point(e.X, e.Y));
+			var ht = grFiles.HitTest(p.X, p.Y);
 			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
 			{
 				var data = e.Data.GetData(DataFormats.Serializable, true);
@@ -431,8 +409,8 @@ namespace FileManager.PresentationClasses.WallBin
 							MoveFile((DataGridViewRow)data, ht.RowIndex);
 						else
 						{
-							List<FileLink> files = new List<FileLink>();
-							List<FolderLink> folders = new List<FolderLink>();
+							var files = new List<FileLink>();
+							var folders = new List<FolderLink>();
 							foreach (object dragItem in (object[])data)
 								if (dragItem != null)
 								{
@@ -443,23 +421,23 @@ namespace FileManager.PresentationClasses.WallBin
 								}
 							folders.Sort((x, y) => x.Folder.Name.CompareTo(y.Folder.Name));
 							files.Sort((x, y) => x.File.Name.CompareTo(y.File.Name));
-							foreach (FolderLink folder in folders)
+							foreach (var folder in folders)
 								AddFolder(folder, ht.RowIndex);
-							foreach (FileLink file in files)
+							foreach (var file in files)
 								AddFile(file, ht.RowIndex);
 						}
 						_containFiles = true;
-						SetGridFont(ConfigurationClasses.SettingsManager.Instance.FontSize);
+						SetGridFont(SettingsManager.Instance.FontSize);
 						SetGridSize();
-						if (this.Parent != null)
+						if (Parent != null)
 						{
-							((ColumnPanel)this.Parent).ResizePanel();
-							this.Decorator.RefreshPanelHeight();
+							((ColumnPanel)Parent).ResizePanel();
+							Decorator.RefreshPanelHeight();
 						}
-						this.Decorator.Parent.StateChanged = true;
+						Decorator.Parent.StateChanged = true;
 					}
 					else
-						this.Decorator.Column_DragDrop(this.Parent, e);
+						Decorator.ColumnDragDrop(Parent, e);
 				}
 			}
 			grFiles_DragLeave(null, null);
@@ -467,20 +445,22 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void grFiles_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			if (!WallBinOptions.AllowEdit) return;
 			_hitTest = grFiles.HitTest(e.X, e.Y);
 			if (_hitTest.Type == DataGridViewHitTestType.Cell && _containFiles)
 			{
 				_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
-					SystemInformation.DragSize);
+										 SystemInformation.DragSize);
 			}
 			else
 				_hitTest = DataGridView.HitTestInfo.Nowhere;
 		}
 
-		void grFiles_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+		private void grFiles_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
 		{
+			if (!WallBinOptions.AllowEdit) return;
 			if (_containFiles)
-				this.Cursor = Cursors.Hand;
+				Cursor = Cursors.Hand;
 			if (((e.Button & MouseButtons.Left) != MouseButtons.Left)
 				|| _hitTest == DataGridView.HitTestInfo.Nowhere
 				|| _dragBox.Contains(e.X, e.Y))
@@ -490,116 +470,106 @@ namespace FileManager.PresentationClasses.WallBin
 			if (grFiles.SelectedRows.Count > 0)
 				dragData = grFiles.SelectedRows[0];
 			if (dragData != null)
-				grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, (object)dragData), DragDropEffects.Move);
+				grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, dragData), DragDropEffects.Move);
 			_hitTest = DataGridView.HitTestInfo.Nowhere;
 		}
 
 		private void laFolderName_MouseDown(object sender, MouseEventArgs e)
 		{
+			if (!WallBinOptions.AllowEdit) return;
 			_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
-				SystemInformation.DragSize);
+									 SystemInformation.DragSize);
 		}
 
 		private void laFolderName_MouseMove(object sender, MouseEventArgs e)
 		{
-			this.Cursor = Cursors.Default;
+			if (!WallBinOptions.AllowEdit) return;
+			Cursor = Cursors.Default;
 			if (((e.Button & MouseButtons.Left) != MouseButtons.Left)
 				|| _dragBox.Contains(e.X, e.Y))
 				return;
-			grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, (object)this), DragDropEffects.Move);
+			grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, this), DragDropEffects.Move);
 		}
 		#endregion
 
 		#region Other GUI Routines
-		private void FileBoxControl_Load(object sender, EventArgs e)
-		{
-			Init();
-		}
-
 		private void laFolderName_Click(object sender, EventArgs e)
 		{
-			if (!this.IsActive)
-			{
-				MakeActive();
-				labelControlText.Focus();
-			}
+			if (!WallBinOptions.AllowEdit) return;
+			if (IsActive) return;
+			MakeActive();
+			labelControlText.Focus();
 		}
 
 		private void grFiles_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (!this.IsActive)
+			if (!WallBinOptions.AllowEdit) return;
+			if (!IsActive)
 			{
 				MakeActive();
 				labelControlText.Focus();
 			}
 			else
 			{
-				DataGridView.HitTestInfo hitTest = grFiles.HitTest(e.X, e.Y);
+				var hitTest = grFiles.HitTest(e.X, e.Y);
 				if (hitTest.Type != DataGridViewHitTestType.Cell)
 					labelControlText.Focus();
 			}
 		}
 
-		private void grFiles_Click(object sender, EventArgs e)
-		{
-		}
-
 		private void grFiles_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
 		{
-			this.Cursor = Cursors.Default;
+			Cursor = Cursors.Default;
 		}
 
 		private void grWindowFiles_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
 		{
 			e.Cancel = true;
-			if (e.ColumnIndex == 0)
+			if (!WallBinOptions.AllowEdit) return;
+			if (e.ColumnIndex != 0) return;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			if (file != null)
 			{
-				LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
-				if (file != null)
-				{
-					if (file.BannerProperties.Enable)
-						return;
-					_displayCellFont = grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font;
-					grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = file.Type == FileTypes.LineBreak ? _noteFont : _editCellFont;
-					grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.Name;
-					e.Cancel = false;
-				}
+				if (file.BannerProperties.Enable)
+					return;
+				_displayCellFont = grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font;
+				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = file.Type == FileTypes.LineBreak ? _noteFont : _editCellFont;
+				grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.Name;
+				e.Cancel = false;
 			}
 		}
 
 		private void grWindowFiles_CellEndEdit(object sender, DataGridViewCellEventArgs e)
 		{
-			if (e.ColumnIndex == 0)
+			if (!WallBinOptions.AllowEdit) return;
+			if (e.ColumnIndex != 0) return;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			if (file == null) return;
+			if (file.BannerProperties.Enable)
+				return;
+			if (grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
 			{
-				LibraryFile file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
-				if (file != null)
+				if (!grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Equals(file.Name))
 				{
-					if (file.BannerProperties.Enable)
-						return;
-					if (grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
-					{
-						if (!grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().Equals(file.Name))
-						{
-							file.Name = grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-							this.Decorator.Parent.StateChanged = true;
-						}
-					}
-					else
-					{
-						file.Name = string.Empty;
-						this.Decorator.Parent.StateChanged = true;
-					}
-					grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.DisplayName + file.Note;
-					grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = _displayCellFont;
-					SetGridSize();
+					file.Name = grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+					Decorator.Parent.StateChanged = true;
 				}
 			}
+			else
+			{
+				file.Name = string.Empty;
+				Decorator.Parent.StateChanged = true;
+			}
+			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = file.DisplayName + file.Note;
+			grFiles.Rows[e.RowIndex].Cells[e.ColumnIndex].Style.Font = _displayCellFont;
+			SetGridSize();
 		}
 
 		private void grFiles_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			if (e.Button == MouseButtons.Right && this.IsActive)
+			if (WallBinOptions.AllowEdit)
 			{
+				if (e.Button != MouseButtons.Right || !IsActive) return;
 				grFiles.Rows[e.RowIndex].Selected = true;
 				ShowLinkProperties(e.Location);
 			}
@@ -607,7 +577,10 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void grFiles_SelectionChanged(object sender, EventArgs e)
 		{
-			UpdateButtonsStatus();
+			if (WallBinOptions.AllowMultiSelect)
+				Decorator.SelectLink(_folder.Identifier, (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryFile>().ToArray(), ModifierKeys);
+			if (WallBinOptions.AllowEdit)
+				UpdateButtonsStatus();
 		}
 
 		private void grFiles_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -619,11 +592,11 @@ namespace FileManager.PresentationClasses.WallBin
 		#region Button Click's Methods
 		public void AddUrl()
 		{
-			using (ToolForms.WallBin.FormAddUrl form = new ToolForms.WallBin.FormAddUrl())
+			using (var form = new FormAddUrl())
 			{
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					LibraryFile file = new LibraryFile(_folder);
+					var file = new LibraryFile(_folder);
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Url;
@@ -642,14 +615,14 @@ namespace FileManager.PresentationClasses.WallBin
 						row.Tag = file;
 					}
 					_containFiles = true;
-					SetGridFont(ConfigurationClasses.SettingsManager.Instance.FontSize);
+					SetGridFont(SettingsManager.Instance.FontSize);
 					SetGridSize();
-					if (this.Parent != null)
+					if (Parent != null)
 					{
-						((ColumnPanel)this.Parent).ResizePanel();
-						this.Decorator.RefreshPanelHeight();
+						((ColumnPanel)Parent).ResizePanel();
+						Decorator.RefreshPanelHeight();
 					}
-					this.Decorator.Parent.StateChanged = true;
+					Decorator.Parent.StateChanged = true;
 					UpdateButtonsStatus();
 				}
 			}
@@ -657,11 +630,11 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void AddNetworkFolder()
 		{
-			using (ToolForms.WallBin.FormAddNetworkFolder form = new ToolForms.WallBin.FormAddNetworkFolder())
+			using (var form = new FormAddNetworkFolder())
 			{
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					LibraryFile file = new LibraryFile(_folder);
+					var file = new LibraryFile(_folder);
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Network;
@@ -680,14 +653,14 @@ namespace FileManager.PresentationClasses.WallBin
 						row.Tag = file;
 					}
 					_containFiles = true;
-					SetGridFont(ConfigurationClasses.SettingsManager.Instance.FontSize);
+					SetGridFont(SettingsManager.Instance.FontSize);
 					SetGridSize();
-					if (this.Parent != null)
+					if (Parent != null)
 					{
-						((ColumnPanel)this.Parent).ResizePanel();
-						this.Decorator.RefreshPanelHeight();
+						((ColumnPanel)Parent).ResizePanel();
+						Decorator.RefreshPanelHeight();
 					}
-					this.Decorator.Parent.StateChanged = true;
+					Decorator.Parent.StateChanged = true;
 					UpdateButtonsStatus();
 				}
 			}
@@ -697,7 +670,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			if (grFiles.SelectedRows.Count > 0)
 			{
-				LibraryFile file = new LibraryFile(_folder);
+				var file = new LibraryFile(_folder);
 				file.Type = FileTypes.LineBreak;
 				file.LineBreakProperties = new LineBreakProperties(file);
 				file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
@@ -710,12 +683,12 @@ namespace FileManager.PresentationClasses.WallBin
 				row.Tag = file;
 				grFiles.ClearSelection();
 				SetGridSize();
-				if (this.Parent != null)
+				if (Parent != null)
 				{
-					((ColumnPanel)this.Parent).ResizePanel();
-					this.Decorator.RefreshPanelHeight();
+					((ColumnPanel)Parent).ResizePanel();
+					Decorator.RefreshPanelHeight();
 				}
-				this.Decorator.Parent.StateChanged = true;
+				Decorator.Parent.StateChanged = true;
 				UpdateButtonsStatus();
 			}
 			else
@@ -724,7 +697,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void DownLink()
 		{
-			LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
+			var file = grFiles.SelectedRows[0].Tag as LibraryFile;
 			string tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
 
 			grFiles.SuspendLayout();
@@ -740,13 +713,13 @@ namespace FileManager.PresentationClasses.WallBin
 			grFiles.ResumeLayout();
 
 			UpdateButtonsStatus();
-			this.Decorator.Parent.StateChanged = true;
+			Decorator.Parent.StateChanged = true;
 		}
 
 		public void UpLink()
 		{
-			LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
-			string tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
+			var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+			var tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
 
 			grFiles.SuspendLayout();
 
@@ -761,104 +734,89 @@ namespace FileManager.PresentationClasses.WallBin
 			grFiles.ResumeLayout();
 
 			UpdateButtonsStatus();
-			this.Decorator.Parent.StateChanged = true;
+			Decorator.Parent.StateChanged = true;
 		}
 
 		public void ShowLinkProperties(Point cursorPosition)
 		{
-			if (grFiles.SelectedRows.Count > 0)
+			if (grFiles.SelectedRows.Count <= 0) return;
+			var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+			if (file == null) return;
+			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
+			_formLinkProperties.IsBold = file.IsBold;
+			_formLinkProperties.EnableWidget = file.EnableWidget;
+			_formLinkProperties.Widget = file.EnableWidget ? file.Widget : null;
+			_formLinkProperties.BannerProperties = file.BannerProperties;
+			_formLinkProperties.IsLineBreak = file.Type == FileTypes.LineBreak;
+			if (file.Type != FileTypes.LineBreak)
 			{
-				LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
-				if (file != null)
-				{
-					_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
-					_formLinkProperties.IsBold = file.IsBold;
-					_formLinkProperties.EnableWidget = file.EnableWidget;
-					_formLinkProperties.Widget = file.EnableWidget ? file.Widget : null;
-					_formLinkProperties.BannerProperties = file.BannerProperties;
-					_formLinkProperties.IsLineBreak = file.Type == FileTypes.LineBreak;
-					if (file.Type != FileTypes.LineBreak)
-					{
-						_formLinkProperties.Note = file.Note;
-						_formLinkProperties.AddDate = file.AddDate;
-						_formLinkProperties.ExpirationDateOptions = file.ExpirationDateOptions;
-						_formLinkProperties.SearchTags = file.SearchTags;
+				_formLinkProperties.Note = file.Note;
+				_formLinkProperties.AddDate = file.AddDate;
+				_formLinkProperties.ExpirationDateOptions = file.ExpirationDateOptions;
+				_formLinkProperties.SearchTags = file.SearchTags;
 
-						_formLinkProperties.Keywords.Clear();
-						_formLinkProperties.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x)));
+				_formLinkProperties.Keywords.Clear();
+				_formLinkProperties.Keywords.AddRange(file.CustomKeywords.Tags.Select(x => new StringDataSourceWrapper(x.Name)));
 
-						_formLinkProperties.FileCard = file.FileCard;
-						_formLinkProperties.FileCardImportantInfo.Clear();
-						_formLinkProperties.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
+				_formLinkProperties.FileCard = file.FileCard;
+				_formLinkProperties.FileCardImportantInfo.Clear();
+				_formLinkProperties.FileCardImportantInfo.AddRange(file.FileCard.Notes.Select(x => new StringDataSourceWrapper(x)));
 
-						_formLinkProperties.AttachmentProperties = file.AttachmentProperties;
-					}
-					else
-					{
-						_formLinkProperties.LineBreakProperties = file.LineBreakProperties;
-					}
-					_formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
-					if (_formLinkProperties.ShowDialog() == DialogResult.OK)
-					{
-						file.LastChanged = DateTime.Now;
-						file.Widget = _formLinkProperties.EnableWidget ? _formLinkProperties.Widget : null;
-						file.EnableWidget = _formLinkProperties.EnableWidget;
-						file.BannerProperties = _formLinkProperties.BannerProperties;
-						if (file.Type != FileTypes.LineBreak)
-						{
-							file.IsBold = _formLinkProperties.IsBold;
-							file.Note = _formLinkProperties.Note;
-							file.SearchTags = _formLinkProperties.SearchTags;
-
-							file.CustomKeywords.Tags.Clear();
-							file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
-
-							file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
-
-							file.FileCard = _formLinkProperties.FileCard;
-							file.FileCard.Notes.Clear();
-							file.FileCard.Notes.AddRange(_formLinkProperties.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
-
-							file.AttachmentProperties = _formLinkProperties.AttachmentProperties;
-							foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
-								file.Parent.Parent.Parent.GetPreviewContainer(attachment.OriginalPath);
-						}
-						else
-						{
-							file.LineBreakProperties = _formLinkProperties.LineBreakProperties;
-						}
-						grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
-
-						bool widgetColumnVisible = false;
-						foreach (DataGridViewRow row in grFiles.Rows)
-						{
-							LibraryFile libraryfile = row.Tag as LibraryFile;
-							if (libraryfile.Widget != null)
-							{
-								widgetColumnVisible = true;
-								break;
-							}
-						}
-						_containsWidgets = widgetColumnVisible;
-
-						SetGridSize();
-						grFiles.Refresh();
-						if (this.Parent != null)
-						{
-							((ColumnPanel)this.Parent).ResizePanel();
-							this.Decorator.RefreshPanelHeight();
-						}
-						this.Decorator.Parent.StateChanged = true;
-					}
-				}
+				_formLinkProperties.AttachmentProperties = file.AttachmentProperties;
 			}
+			else
+			{
+				_formLinkProperties.LineBreakProperties = file.LineBreakProperties;
+			}
+			_formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
+			if (_formLinkProperties.ShowDialog() != DialogResult.OK) return;
+			file.LastChanged = DateTime.Now;
+			file.Widget = _formLinkProperties.EnableWidget ? _formLinkProperties.Widget : null;
+			file.EnableWidget = _formLinkProperties.EnableWidget;
+			file.BannerProperties = _formLinkProperties.BannerProperties;
+			if (file.Type != FileTypes.LineBreak)
+			{
+				file.IsBold = _formLinkProperties.IsBold;
+				file.Note = _formLinkProperties.Note;
+				file.SearchTags = _formLinkProperties.SearchTags;
+
+				file.CustomKeywords.Tags.Clear();
+				file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
+
+				file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
+
+				file.FileCard = _formLinkProperties.FileCard;
+				file.FileCard.Notes.Clear();
+				file.FileCard.Notes.AddRange(_formLinkProperties.FileCardImportantInfo.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => x.Value));
+
+				file.AttachmentProperties = _formLinkProperties.AttachmentProperties;
+				foreach (var attachment in file.AttachmentProperties.FilesAttachments)
+					file.Parent.Parent.Parent.GetPreviewContainer(attachment.OriginalPath);
+			}
+			else
+			{
+				file.LineBreakProperties = _formLinkProperties.LineBreakProperties;
+			}
+			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
+
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryFile).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+			_containsWidgets = widgetColumnVisible;
+
+			SetGridSize();
+			grFiles.Refresh();
+			if (Parent != null)
+			{
+				((ColumnPanel)Parent).ResizePanel();
+				Decorator.RefreshPanelHeight();
+			}
+			Decorator.Parent.StateChanged = true;
 		}
 
 		public void OpenLink()
 		{
 			if (grFiles.SelectedRows.Count > 0)
 			{
-				LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
+				var file = grFiles.SelectedRows[0].Tag as LibraryFile;
 				if (file != null)
 				{
 					try
@@ -879,7 +837,7 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				if (grFiles.SelectedRows.Count > 0)
 				{
-					LibraryFile file = grFiles.SelectedRows[0].Tag as LibraryFile;
+					var file = grFiles.SelectedRows[0].Tag as LibraryFile;
 					if (file != null)
 					{
 						if (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation)
@@ -899,45 +857,54 @@ namespace FileManager.PresentationClasses.WallBin
 			if (!(grFiles.Rows.Count > 0))
 				_containFiles = false;
 			SetGridSize();
-			if (this.Parent != null)
+			if (Parent != null)
 			{
-				((ColumnPanel)this.Parent).ResizePanel();
-				this.Decorator.RefreshPanelHeight();
+				((ColumnPanel)Parent).ResizePanel();
+				Decorator.RefreshPanelHeight();
 			}
-			this.Decorator.Parent.StateChanged = true;
+			Decorator.Parent.StateChanged = true;
 			UpdateButtonsStatus();
-			grFiles.DefaultCellStyle.SelectionBackColor = this.IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
+			grFiles.DefaultCellStyle.SelectionBackColor = IsActive ? Color.Wheat : _folder.BackgroundWindowColor;
 		}
 
 		public void Save()
 		{
 			_folder.Files.Clear();
-			if (_containFiles)
+			if (!_containFiles) return;
+			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				foreach (DataGridViewRow row in grFiles.Rows)
-				{
-					LibraryFile file = row.Tag as LibraryFile;
-					if (file != null)
-					{
-						if (file.LastChanged == DateTime.MinValue)
-							_folder.LastChanged = DateTime.Now;
-						file.Order = row.Index;
-						_folder.Files.Add(file);
-					}
-				}
+				var file = row.Tag as LibraryFile;
+				if (file == null) continue;
+				if (file.LastChanged == DateTime.MinValue)
+					_folder.LastChanged = DateTime.Now;
+				file.Order = row.Index;
+				_folder.Files.Add(file);
 			}
 		}
 		#endregion
 
 		#region Other Methods
-		protected void Init()
+		public void Init()
 		{
-			this.Resize += new EventHandler(FolderBoxControl_Resize);
-			grFiles.CellMouseMove += new DataGridViewCellMouseEventHandler(grFiles_CellMouseMove);
-			grFiles.CellMouseLeave += new DataGridViewCellEventHandler(grFiles_CellMouseLeave);
-			grFiles.CellPainting += new DataGridViewCellPaintingEventHandler(grFiles_CellPainting);
-			grFiles.CellFormatting += new DataGridViewCellFormattingEventHandler(grFiles_CellFormatting);
+			Resize += FolderBoxControl_Resize;
+			grFiles.CellMouseMove += grFiles_CellMouseMove;
+			grFiles.CellMouseLeave += grFiles_CellMouseLeave;
+			grFiles.CellPainting += grFiles_CellPainting;
+			grFiles.CellFormatting += grFiles_CellFormatting;
 			grFiles.DragOver += (s, eParameter) => eParameter.Effect = DragDropEffects.All;
+			Decorator.SelectionChanged += (sender, e) =>
+											  {
+												  if (grFiles.SelectedRows.Count > 0 && !e.SourceFolderId.Equals(_folder.Identifier))
+												  {
+													  grFiles.SelectionChanged -= grFiles_SelectionChanged;
+													  foreach (DataGridViewRow row in grFiles.SelectedRows)
+													  {
+														  var file = row.Tag as LibraryFile;
+														  row.Selected = Decorator.IsLinkSelected(file);
+													  }
+													  grFiles.SelectionChanged += grFiles_SelectionChanged;
+												  }
+											  };
 		}
 
 		private void FolderBoxControl_Resize(object sender, EventArgs e)
@@ -947,25 +914,34 @@ namespace FileManager.PresentationClasses.WallBin
 		}
 
 		private void GetLinkGUIValues(LibraryFile file
-			, ref Image image
-			, ref int imageLeft
-			, ref int imageTop
-			, ref int imageWidth
-			, ref int imageHeight
-			, ref string text
-			, ref int textLeft
-			, ref int textTop
-			, ref int textWidth
-			, ref int textHeight
-			, ref int columnWidth
-			, ref int rowHeight
-			, ref Color foreColor
-			, ref Font font)
+									  , ref Image image
+									  , ref int imageLeft
+									  , ref int imageTop
+									  , ref int imageWidth
+									  , ref int imageHeight
+									  , ref string text
+									  , ref int textLeft
+									  , ref int textTop
+									  , ref int textWidth
+									  , ref int textHeight
+									  , ref int columnWidth
+									  , ref int rowHeight
+									  , ref Color foreColor
+									  , ref Font font)
 		{
-
 			#region Image
 			if (file.BannerProperties.Enable && file.BannerProperties.Image != null)
 				image = file.BannerProperties.Image;
+			else if (WallBinOptions.ShowCategoryTags && file.HasCategories)
+				image = Properties.Resources.TagsCategoriesWidget;
+			else if (WallBinOptions.ShowKeywordTags && file.HasKeywords)
+				image = Properties.Resources.TagsKeywordsWidget;
+			else if (WallBinOptions.ShowFileCardTags && file.HasFileCard)
+				image = Properties.Resources.TagsFileCardsWidget;
+			else if (WallBinOptions.ShowAttachmentTags && file.HasFileAttachments)
+				image = Properties.Resources.TagsFileAttachmentsWidget;
+			else if (WallBinOptions.ShowAttachmentTags && file.HasWebAttachments)
+				image = Properties.Resources.TagsWebAttachmentsWidget;
 			else if (file.Widget != null)
 				image = file.Widget;
 			else
@@ -973,10 +949,6 @@ namespace FileManager.PresentationClasses.WallBin
 			#endregion
 
 			#region Image Size and Coordinates
-			imageLeft = 0;
-			imageTop = 0;
-			imageHeight = 0;
-			imageWidth = 0;
 			if (file.BannerProperties.Enable && file.BannerProperties.Image != null)
 			{
 				if (file.BannerProperties.ShowText)
@@ -1007,6 +979,12 @@ namespace FileManager.PresentationClasses.WallBin
 				}
 				imageWidth = file.BannerProperties.Image.Width > DefaultImageWidth ? file.BannerProperties.Image.Width : DefaultImageWidth;
 				imageHeight = file.BannerProperties.Image.Height > DefaultImageHeight ? file.BannerProperties.Image.Height : DefaultImageHeight;
+			}
+			else if (WallBinOptions.ShowTagsEditor && file.HasTags && image != null)
+			{
+				imageLeft = 0;
+				imageWidth = DefaultImageWidth;
+				imageHeight = DefaultImageHeight;
 			}
 			else if (file.Widget != null)
 			{
@@ -1053,12 +1031,12 @@ namespace FileManager.PresentationClasses.WallBin
 			#endregion
 
 			#region Text Size and Coordinates
-			SizeF textSize = new SizeF();
+			SizeF textSize;
 			if (file.BannerProperties.Enable && file.BannerProperties.ShowText && !string.IsNullOrEmpty(file.BannerProperties.Text))
-				using (Graphics g = labelControlText.CreateGraphics())
+				using (var g = labelControlText.CreateGraphics())
 					textSize = g.MeasureString(text, fontForSizeCalculation, Int32.MaxValue);
 			else
-				using (Graphics g = labelControlText.CreateGraphics())
+				using (var g = labelControlText.CreateGraphics())
 					textSize = g.MeasureString(text, fontForSizeCalculation, Int32.MaxValue);
 
 			if (file.BannerProperties.Enable)
@@ -1152,7 +1130,7 @@ namespace FileManager.PresentationClasses.WallBin
 			int maxColumnWidth = 0;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				LibraryFile file = row.Tag as LibraryFile;
+				var file = row.Tag as LibraryFile;
 				if (file != null)
 				{
 					Image image = null;
@@ -1171,20 +1149,20 @@ namespace FileManager.PresentationClasses.WallBin
 					Font font = null;
 
 					GetLinkGUIValues(file
-						, ref image
-						, ref imageLeft
-						, ref imageTop
-						, ref imageWidth
-						, ref imageHeight
-						, ref text
-						, ref textLeft
-						, ref textTop
-						, ref textWidth
-						, ref textHeight
-						, ref columnWidth
-						, ref rowHeight
-						, ref foreColor
-						, ref font);
+									 , ref image
+									 , ref imageLeft
+									 , ref imageTop
+									 , ref imageWidth
+									 , ref imageHeight
+									 , ref text
+									 , ref textLeft
+									 , ref textTop
+									 , ref textWidth
+									 , ref textHeight
+									 , ref columnWidth
+									 , ref rowHeight
+									 , ref foreColor
+									 , ref font);
 
 					row.Height = rowHeight;
 					if (maxColumnWidth < columnWidth)
@@ -1197,7 +1175,7 @@ namespace FileManager.PresentationClasses.WallBin
 				height = 90;
 			height = height + pnHeaderBorder.Height;
 
-			this.Height = height;
+			Height = height;
 			colDisplayName.Width = maxColumnWidth > (grFiles.Width - 10) ? maxColumnWidth : (grFiles.Width - 10);
 		}
 
@@ -1213,9 +1191,9 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void UpdateDataSource()
 		{
-			grFiles.RowsRemoved -= new DataGridViewRowsRemovedEventHandler(grFiles_RowsRemoved);
+			grFiles.RowsRemoved -= grFiles_RowsRemoved;
 			grFiles.Rows.Clear();
-			grFiles.RowsRemoved += new DataGridViewRowsRemovedEventHandler(grFiles_RowsRemoved);
+			grFiles.RowsRemoved += grFiles_RowsRemoved;
 			if (_folder.Files.Count > 0)
 			{
 				_containFiles = true;
@@ -1224,70 +1202,65 @@ namespace FileManager.PresentationClasses.WallBin
 					DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 					row.Tag = libraryFile;
 				}
-				_containsWidgets = _folder.Files.Where(x => x.Widget != null).Count() > 0;
+				_containsWidgets = _folder.Files.OfType<LibraryFile>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
 			}
 			else
 				_containFiles = false;
-			if (this.Parent != null)
+			if (Parent != null)
 			{
-				((ColumnPanel)this.Parent).ResizePanel();
-				this.Decorator.RefreshPanelHeight();
+				((ColumnPanel)Parent).ResizePanel();
+				Decorator.RefreshPanelHeight();
 			}
+			grFiles.ClearSelection();
 			grFiles.Refresh();
 		}
 
 		private void MakeActive()
 		{
-			this.IsActive = true;
-			if (this.Decorator.ActiveBox != null && this.Decorator.ActiveBox != this)
-				this.Decorator.ActiveBox.MakeInactive();
-			this.Decorator.ActiveBox = this;
-			this.Padding = new Padding(2, 2, 2, 2);
+			IsActive = true;
+			if (Decorator.ActiveBox != null && Decorator.ActiveBox != this)
+				Decorator.ActiveBox.MakeInactive();
+			Decorator.ActiveBox = this;
+			Padding = new Padding(2, 2, 2, 2);
 			grFiles.ReadOnly = false;
 			grFiles.DefaultCellStyle.SelectionBackColor = Color.Wheat;
-			this.Refresh();
+			Refresh();
 			UpdateButtonsStatus();
 		}
 
 		public void MakeInactive()
 		{
-			this.IsActive = false;
+			IsActive = false;
 			grFiles.ReadOnly = true;
-			this.Padding = new Padding(0, 0, 0, 0);
+			Padding = new Padding(0, 0, 0, 0);
 			grFiles.DefaultCellStyle.SelectionBackColor = grFiles.DefaultCellStyle.BackColor;
-			this.Decorator.ActiveBox.Refresh();
+			Decorator.ActiveBox.Refresh();
 			UpdateButtonsStatus();
+			Decorator.ActiveBox = null;
 		}
 
-		private int GetLeft(Control control)
+		public void ApplyWallBinOptions(WallBinOptions options)
 		{
-			return control.Left + (control.Parent != null ? GetLeft(control.Parent) : 0);
-		}
-
-		private int GetTop(Control control)
-		{
-			return control.Top + (control.Parent != null ? GetTop(control.Parent) : 0);
+			WallBinOptions.AllowEdit = options.AllowEdit;
+			WallBinOptions.AllowMultiSelect = options.AllowMultiSelect;
+			WallBinOptions.ShowFiles = options.ShowFiles;
+			WallBinOptions.ShowTagsEditor = options.ShowTagsEditor;
+			WallBinOptions.ShowCategoryTags = options.ShowCategoryTags;
+			WallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
+			WallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
+			WallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
+			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags);
+			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
+			grFiles.ClearSelection();
+			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryFile).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
 		}
 
 		private void AddFile(FileLink file, int rowIndex)
 		{
-			bool isExisted = false;
-			foreach (DataGridViewRow row in grFiles.Rows)
-			{
-				LibraryFile libraryFile = row.Tag as LibraryFile;
-				if (libraryFile != null)
-				{
-					if (file.File.FullName.Equals(libraryFile.OriginalPath))
-					{
-						isExisted = true;
-						break;
-					}
-				}
-			}
-
+			var isExisted = (from DataGridViewRow row in grFiles.Rows select row.Tag).OfType<LibraryFile>().Any(libraryFile => file.File.FullName.Equals(libraryFile.OriginalPath));
 			if (!isExisted)
 			{
-				LibraryFile libraryFile = new LibraryFile(_folder);
+				var libraryFile = new LibraryFile(_folder);
 				libraryFile.Name = file.File.Name.Replace(file.File.Extension, string.Empty);
 				libraryFile.RootId = file.RootId;
 
@@ -1304,27 +1277,27 @@ namespace FileManager.PresentationClasses.WallBin
 					case FileTypes.BuggyPresentation:
 					case FileTypes.FriendlyPresentation:
 					case FileTypes.Presentation:
-						using (ToolForms.FormProgress form = new ToolForms.FormProgress())
+						using (var form = new FormProgress())
 						{
 							FormMain.Instance.ribbonControl.Enabled = false;
 							form.laProgress.Text = "Get Presentation Properties...";
 							form.TopMost = true;
 
-							System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-							{
-								if (SalesDepot.CoreObjects.InteropClasses.PowerPointHelper.Instance.Connect())
-								{
-									libraryFile.GetPresentationPrperties();
-									SalesDepot.CoreObjects.InteropClasses.PowerPointHelper.Instance.Disconnect();
-								}
-							}));
+							var thread = new Thread(delegate()
+														{
+															if (PowerPointHelper.Instance.Connect())
+															{
+																libraryFile.GetPresentationPrperties();
+																PowerPointHelper.Instance.Disconnect();
+															}
+														});
 
 							form.Show();
 
 							thread.Start();
 
 							while (thread.IsAlive)
-								System.Windows.Forms.Application.DoEvents();
+								Application.DoEvents();
 
 							form.Close();
 							FormMain.Instance.ribbonControl.Enabled = true;
@@ -1334,6 +1307,7 @@ namespace FileManager.PresentationClasses.WallBin
 						if (libraryFile.PreviewContainer == null)
 							libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
 						#endregion
+
 						break;
 					case FileTypes.Other:
 					case FileTypes.MediaPlayerVideo:
@@ -1344,12 +1318,12 @@ namespace FileManager.PresentationClasses.WallBin
 				libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
 
 
-				if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MAX_PATH)
+				if ((pathLength + SettingsManager.Instance.DestinationPathLength) < WinAPIHelper.MAX_PATH)
 				{
 					if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
 					{
 						grFiles.Rows.Insert(rowIndex, libraryFile.DisplayName + libraryFile.Note);
-						DataGridViewRow row = grFiles.Rows[rowIndex];
+						var row = grFiles.Rows[rowIndex];
 						row.Tag = libraryFile;
 						grFiles.Rows[rowIndex].Selected = true;
 					}
@@ -1373,7 +1347,7 @@ namespace FileManager.PresentationClasses.WallBin
 			bool isExisted = false;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				LibraryFile libraryFile = row.Tag as LibraryFile;
+				var libraryFile = row.Tag as LibraryFile;
 				if (libraryFile != null)
 				{
 					if (folder.Folder.FullName.Equals(libraryFile.OriginalPath))
@@ -1385,7 +1359,7 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			if (!isExisted)
 			{
-				LibraryFile libraryFile = new LibraryFile(_folder);
+				var libraryFile = new LibraryFile(_folder);
 				libraryFile.Name = folder.Folder.Name;
 				libraryFile.RootId = folder.RootId;
 
@@ -1396,7 +1370,7 @@ namespace FileManager.PresentationClasses.WallBin
 				libraryFile.InitBannerProperties();
 
 				int pathLength = libraryFile.RelativePath.Length;
-				if ((pathLength + ConfigurationClasses.SettingsManager.Instance.DestinationPathLength) < SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MAX_PATH)
+				if ((pathLength + SettingsManager.Instance.DestinationPathLength) < WinAPIHelper.MAX_PATH)
 				{
 					if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
 					{
@@ -1422,9 +1396,9 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void MoveFile(DataGridViewRow row, int rowIndex)
 		{
-			grFiles.RowsRemoved -= new DataGridViewRowsRemovedEventHandler(grFiles_RowsRemoved);
+			grFiles.RowsRemoved -= grFiles_RowsRemoved;
 			row.DataGridView.Rows.Remove(row);
-			grFiles.RowsRemoved += new DataGridViewRowsRemovedEventHandler(grFiles_RowsRemoved);
+			grFiles.RowsRemoved += grFiles_RowsRemoved;
 			if (rowIndex >= 0 && rowIndex < grFiles.RowCount)
 				grFiles.Rows.Insert(rowIndex, row);
 			else
@@ -1435,7 +1409,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void UpdateButtonsStatus()
 		{
-			if (this.IsActive)
+			if (IsActive)
 			{
 				if (grFiles.SelectedRows.Count > 0)
 				{
@@ -1445,14 +1419,8 @@ namespace FileManager.PresentationClasses.WallBin
 						FormMain.Instance.OpenLinkButton = true;
 						FormMain.Instance.LinkPropertiesButton = true;
 						FormMain.Instance.LineBreakButton = true;
-						if (grFiles.SelectedRows[0].Index > 0)
-							FormMain.Instance.UpLinkButton = true;
-						else
-							FormMain.Instance.UpLinkButton = false;
-						if (grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1)
-							FormMain.Instance.DownLinkButton = true;
-						else
-							FormMain.Instance.DownLinkButton = false;
+						FormMain.Instance.UpLinkButton = grFiles.SelectedRows[0].Index > 0;
+						FormMain.Instance.DownLinkButton = grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1;
 					}
 					catch
 					{

@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -7,22 +9,23 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class SearchTags
 	{
-		private string _listsFileName;
-		public List<SearchGroup> SearchGroups { get; set; }
+		private readonly string _listsFileName;
 
 		public SearchTags()
 		{
-			_listsFileName = Path.Combine(string.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles)), "SDSearch.xml");
-			this.SearchGroups = new List<SearchGroup>();
+			_listsFileName = Path.Combine(string.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)), "SDSearch.xml");
+			SearchGroups = new List<SearchGroup>();
 			Load();
 		}
+
+		public List<SearchGroup> SearchGroups { get; set; }
 
 		private void Load()
 		{
 			XmlNode node;
 			if (File.Exists(_listsFileName))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				document.Load(_listsFileName);
 
 				node = document.SelectSingleNode(@"/SDSearch");
@@ -33,7 +36,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						switch (childNode.Name)
 						{
 							case "Category":
-								SearchGroup group = new SearchGroup();
+								var group = new SearchGroup();
 								foreach (XmlAttribute attribute in childNode.Attributes)
 								{
 									switch (attribute.Name)
@@ -57,7 +60,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 												{
 													case "Value":
 														if (!string.IsNullOrEmpty(attribute.Value))
-															group.Tags.Add(attribute.Value);
+															group.Tags.Add(new SearchTag(group.Name) { Name = attribute.Value });
 														break;
 												}
 											}
@@ -65,7 +68,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 									}
 								}
 								if (!string.IsNullOrEmpty(group.Name) && group.Tags.Count > 0)
-									this.SearchGroups.Add(group);
+									SearchGroups.Add(group);
 								break;
 						}
 					}
@@ -76,29 +79,34 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class LibraryFileSearchTags
 	{
+		public LibraryFileSearchTags()
+		{
+			SearchGroups = new List<SearchGroup>();
+		}
+
 		public List<SearchGroup> SearchGroups { get; set; }
 
 		public string AllTags
 		{
 			get
 			{
-				List<string> allTags = new List<string>();
-				foreach (SearchGroup group in this.SearchGroups)
-					allTags.AddRange(group.Tags);
+				var allTags = new List<string>();
+				foreach (var group in SearchGroups)
+					allTags.AddRange(group.Tags.Select(x => x.Name));
 				return string.Join(", ", allTags.ToArray());
 			}
 		}
 
-		public LibraryFileSearchTags()
+		public bool Compare(LibraryFileSearchTags anotherTags)
 		{
-			this.SearchGroups = new List<SearchGroup>();
+			return SearchGroups.All(tag => anotherTags.SearchGroups.Any(x => x.Name.Equals(tag.Name) && x.Compare(tag))) && SearchGroups.Count == anotherTags.SearchGroups.Count;
 		}
 
 		public string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
+			var result = new StringBuilder();
 			result.AppendLine(@"<SearchTags>");
-			foreach (SearchGroup group in this.SearchGroups)
+			foreach (var group in SearchGroups)
 				result.Append(group.Serialize());
 			result.AppendLine(@"</SearchTags>");
 			return result.ToString();
@@ -106,17 +114,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void Deserialize(XmlNode node)
 		{
-			this.SearchGroups.Clear();
+			SearchGroups.Clear();
 
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
 				switch (childNode.Name)
 				{
 					case SearchGroup.TagName:
-						SearchGroup group = new SearchGroup();
+						var group = new SearchGroup();
 						group.Deserialize(childNode);
 						if (!string.IsNullOrEmpty(group.Name) && group.Tags.Count > 0)
-							this.SearchGroups.Add(group);
+							SearchGroups.Add(group);
 						break;
 				}
 			}

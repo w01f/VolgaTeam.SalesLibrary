@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -8,15 +9,81 @@ namespace FileManager.ConfigurationClasses
 {
 	public class SettingsManager
 	{
-		private static SettingsManager _instance = new SettingsManager();
+		private static readonly SettingsManager _instance = new SettingsManager();
 
-		private string _settingsFilePath = string.Empty;
-		private string _autoSyncSettingsPath = string.Empty;
+		private readonly string _autoSyncSettingsPath = string.Empty;
+		private readonly string _ribbonSettingsFilePath = string.Empty;
+		private readonly string _settingsFilePath = string.Empty;
+		private readonly string _syncSettingsFilePath = string.Empty;
+
+		private SettingsManager()
+		{
+			ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
+
+			DestinationPathLength = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries\Primary Root", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)).Length;
+
+			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\file_manager", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			if (!Directory.Exists(settingsFolderPath))
+				Directory.CreateDirectory(settingsFolderPath);
+			_settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
+			_autoSyncSettingsPath = Path.Combine(settingsFolderPath, "AutoSyncSchedule.xml");
+
+			ArhivePath = Path.Combine(settingsFolderPath, "Archives");
+			if (Directory.Exists(ArhivePath))
+				Directory.CreateDirectory(ArhivePath);
+			_syncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+
+			LogRootPath = Path.Combine(settingsFolderPath, "Log");
+			if (!Directory.Exists(LogRootPath))
+				Directory.CreateDirectory(LogRootPath);
+
+			ClientLogosRootPath = string.Empty;
+			SalesGalleryRootPath = string.Empty;
+			WebArtRootPath = string.Empty;
+			AdSpecsSamplesRootPath = string.Empty;
+			ScreenshotLibraryRootPath = string.Empty;
+
+			AutoFMSyncShorcutPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Startup), "AutoFMSync.exe - Shortcut.lnk");
+			VideoConverterPath = Path.Combine(ApplicationRootsPath, "video converter");
+
+			#region FM Settings
+			BackupPath = string.Empty;
+			NetworkPath = string.Empty;
+			UseDirectAccessToFiles = false;
+			SelectedLibrary = string.Empty;
+			SelectedPage = string.Empty;
+			FontSize = 12;
+			CalendarFontSize = 10;
+			TreeViewVisible = false;
+			TreeViewDocked = true;
+			MultitabView = true;
+			#endregion
+
+			#region Ribbon Settings
+			_ribbonSettingsFilePath = Path.Combine(ApplicationRootsPath, "ribbontabs.xml");
+			EnableOvernightsCalendarTab = true;
+			EnableClipartTab = true;
+			EnableProgramManagerTab = true;
+			EnableIPadSettingsTab = true;
+			EnableIPadUsersTab = true;
+			EnableTagsCategories = true;
+			LoadRibbonSettings();
+			#endregion
+
+			HiddenObjects = new List<string>();
+			HiddenObjects.Add("!Old");
+			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
+			HiddenObjects.Add(Constants.FtpPreviewContainersRootFolderName);
+			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
+			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
+			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
+			HiddenObjects.Add("thumbs.db");
+			HiddenObjects.Add("SalesDepotCache.xml");
+		}
+
 		public string ApplicationRootsPath { get; private set; }
 		public string ArhivePath { get; set; }
 		public string LogRootPath { get; set; }
-		private string _syncSettingsFilePath = string.Empty;
-		private string _ribbonSettingsFilePath = string.Empty;
 		public string ClientLogosRootPath { get; set; }
 		public string SalesGalleryRootPath { get; set; }
 		public string WebArtRootPath { get; set; }
@@ -24,6 +91,15 @@ namespace FileManager.ConfigurationClasses
 		public string ScreenshotLibraryRootPath { get; set; }
 		public string AutoFMSyncShorcutPath { get; set; }
 		public string VideoConverterPath { get; set; }
+
+		public int DestinationPathLength { get; private set; }
+
+		public List<string> HiddenObjects { get; private set; }
+
+		public static SettingsManager Instance
+		{
+			get { return _instance; }
+		}
 
 		#region FM Settings
 		public string BackupPath { get; set; }
@@ -46,139 +122,67 @@ namespace FileManager.ConfigurationClasses
 		public bool EnableProgramManagerTab { get; private set; }
 		public bool EnableIPadSettingsTab { get; private set; }
 		public bool EnableIPadUsersTab { get; private set; }
+		public bool EnableTagsCategories { get; set; }
+		public bool EnableTagsKeywords { get; set; }
+		public bool EnableTagsFileCards { get; set; }
+		public bool EnableTagsAttachments { get; set; }
+		public bool EnableTagsCleaner { get; set; }
 		#endregion
-
-		public int DestinationPathLength { get; private set; }
-
-		public List<string> HiddenObjects { get; private set; }
-
-		public static SettingsManager Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
-
-		private SettingsManager()
-		{
-			this.ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
-
-			this.DestinationPathLength = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries\Primary Root", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles)).Length;
-
-			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\file_manager", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			if (!Directory.Exists(settingsFolderPath))
-				Directory.CreateDirectory(settingsFolderPath);
-			_settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
-			_autoSyncSettingsPath = Path.Combine(settingsFolderPath, "AutoSyncSchedule.xml");
-
-			this.ArhivePath = Path.Combine(settingsFolderPath, "Archives");
-			if (Directory.Exists(this.ArhivePath))
-				Directory.CreateDirectory(this.ArhivePath);
-			_syncSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\!Update_Settings\syncfile.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-
-			this.LogRootPath = Path.Combine(settingsFolderPath, "Log");
-			if (!Directory.Exists(this.LogRootPath))
-				Directory.CreateDirectory(this.LogRootPath);
-
-			this.ClientLogosRootPath = string.Empty;
-			this.SalesGalleryRootPath = string.Empty;
-			this.WebArtRootPath = string.Empty;
-			this.AdSpecsSamplesRootPath = string.Empty;
-			this.ScreenshotLibraryRootPath = string.Empty;
-
-			this.AutoFMSyncShorcutPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Startup), "AutoFMSync.exe - Shortcut.lnk");
-			this.VideoConverterPath = Path.Combine(this.ApplicationRootsPath, "video converter");
-
-			#region FM Settings
-			this.BackupPath = string.Empty;
-			this.NetworkPath = string.Empty;
-			this.UseDirectAccessToFiles = false;
-			this.SelectedLibrary = string.Empty;
-			this.SelectedPage = string.Empty;
-			this.FontSize = 12;
-			this.CalendarFontSize = 10;
-			this.TreeViewVisible = false;
-			this.TreeViewDocked = true;
-			this.MultitabView = true;
-			#endregion
-
-			#region Ribbon Settings
-			_ribbonSettingsFilePath = Path.Combine(this.ApplicationRootsPath, "ribbontabs.xml");
-			this.EnableOvernightsCalendarTab = true;
-			this.EnableClipartTab = true;
-			this.EnableProgramManagerTab = true;
-			this.EnableIPadSettingsTab = true;
-			this.EnableIPadUsersTab = true;
-			LoadRibbonSettings();
-			#endregion
-
-			this.HiddenObjects = new List<string>();
-			this.HiddenObjects.Add("!Old");
-			this.HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
-			this.HiddenObjects.Add(Constants.FtpPreviewContainersRootFolderName);
-			this.HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
-			this.HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
-			this.HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
-			this.HiddenObjects.Add("thumbs.db");
-			this.HiddenObjects.Add("SalesDepotCache.xml");
-		}
 
 		public void Load()
 		{
-			XmlNode node;
-			int tempInt = 0;
-			bool tempBool = false;
 			if (File.Exists(_settingsFilePath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				document.Load(_settingsFilePath);
 
 				#region FM Settings
-				node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
+				var node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
 				if (node != null)
-					this.BackupPath = node.InnerText;
+					BackupPath = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
 				if (node != null)
-					this.NetworkPath = node.InnerText;
+					NetworkPath = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/UseDirectAccessToFiles");
+				var tempBool = false;
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.UseDirectAccessToFiles = tempBool;
+						UseDirectAccessToFiles = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/DirectAccessFileAgeLimit");
+				int tempInt = 0;
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.DirectAccessFileAgeLimit = tempInt;
+						DirectAccessFileAgeLimit = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedLibrary");
 				if (node != null)
-					this.SelectedLibrary = node.InnerText;
+					SelectedLibrary = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
 				if (node != null)
-					this.SelectedPage = node.InnerText;
+					SelectedPage = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.SelectedCalendarYear = tempInt;
+						SelectedCalendarYear = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/FontSize");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.FontSize = tempInt;
+						FontSize = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.CalendarFontSize = tempInt;
+						CalendarFontSize = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/TreeViewVisible");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.TreeViewVisible = tempBool;
+						TreeViewVisible = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/TreeViewDocked");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.TreeViewDocked = tempBool;
+						TreeViewDocked = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/MultitabView");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.MultitabView = tempBool;
+						MultitabView = tempBool;
 				#endregion
 			}
 			LoadClipartPath();
@@ -186,28 +190,28 @@ namespace FileManager.ConfigurationClasses
 
 		public void Save()
 		{
-			StringBuilder xml = new StringBuilder();
+			var xml = new StringBuilder();
 
 			xml.AppendLine(@"<LocalSettings>");
 
 			#region FM Settings
-			xml.AppendLine(@"<BackupPath>" + this.BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
-			xml.AppendLine(@"<NetworkPath>" + this.NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
-			xml.AppendLine(@"<UseDirectAccessToFiles>" + this.UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
-			xml.AppendLine(@"<DirectAccessFileAgeLimit>" + this.DirectAccessFileAgeLimit.ToString() + @"</DirectAccessFileAgeLimit>");
-			xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
-			xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
-			xml.AppendLine(@"<SelectedCalendarYear>" + this.SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
-			xml.AppendLine(@"<FontSize>" + this.FontSize.ToString() + @"</FontSize>");
-			xml.AppendLine(@"<CalendarFontSize>" + this.CalendarFontSize.ToString() + @"</CalendarFontSize>");
-			xml.AppendLine(@"<TreeViewVisible>" + this.TreeViewVisible.ToString() + @"</TreeViewVisible>");
-			xml.AppendLine(@"<TreeViewDocked>" + this.TreeViewDocked.ToString() + @"</TreeViewDocked>");
-			xml.AppendLine(@"<MultitabView>" + this.MultitabView.ToString() + @"</MultitabView>");
+			xml.AppendLine(@"<BackupPath>" + BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
+			xml.AppendLine(@"<NetworkPath>" + NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
+			xml.AppendLine(@"<UseDirectAccessToFiles>" + UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
+			xml.AppendLine(@"<DirectAccessFileAgeLimit>" + DirectAccessFileAgeLimit.ToString() + @"</DirectAccessFileAgeLimit>");
+			xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
+			xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
+			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
+			xml.AppendLine(@"<FontSize>" + FontSize.ToString() + @"</FontSize>");
+			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize.ToString() + @"</CalendarFontSize>");
+			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible.ToString() + @"</TreeViewVisible>");
+			xml.AppendLine(@"<TreeViewDocked>" + TreeViewDocked.ToString() + @"</TreeViewDocked>");
+			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");
 
-			using (StreamWriter sw = new StreamWriter(_settingsFilePath, false))
+			using (var sw = new StreamWriter(_settingsFilePath, false))
 			{
 				sw.Write(xml);
 				sw.Flush();
@@ -216,66 +220,64 @@ namespace FileManager.ConfigurationClasses
 
 		private void LoadRibbonSettings()
 		{
-			XmlNode node;
-			bool tempBool;
 			if (File.Exists(_ribbonSettingsFilePath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				document.Load(_ribbonSettingsFilePath);
 
-				node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
+				XmlNode node = document.SelectSingleNode(@"/ribbon/OvernightsCalendar");
+				bool tempBool;
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EnableOvernightsCalendarTab = tempBool;
+						EnableOvernightsCalendarTab = tempBool;
 
 				node = document.SelectSingleNode(@"/ribbon/Clipart");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EnableClipartTab = tempBool;
+						EnableClipartTab = tempBool;
 
 				node = document.SelectSingleNode(@"/ribbon/ProgramSchedule");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EnableProgramManagerTab = tempBool;
+						EnableProgramManagerTab = tempBool;
 
 				node = document.SelectSingleNode(@"/ribbon/iPadsettings");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EnableIPadSettingsTab = tempBool;
+						EnableIPadSettingsTab = tempBool;
 
-				node = document.SelectSingleNode(@"/ribbon/Users");
+				node = document.SelectSingleNode(@"/ribbon/IPadUsers");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EnableIPadUsersTab = tempBool;
+						EnableIPadUsersTab = tempBool;
 			}
 		}
 
 		private void LoadClipartPath()
 		{
-			XmlNode node;
 			if (File.Exists(_syncSettingsFilePath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				document.Load(_syncSettingsFilePath);
 
-				node = document.SelectSingleNode(@"/Settings/MediaProperty/Path");
+				XmlNode node = document.SelectSingleNode(@"/Settings/MediaProperty/Path");
 				if (node != null)
 				{
 					string path = node.InnerText.Replace("\"", string.Empty).Trim();
-					this.ClientLogosRootPath = Path.Combine(path, @"outgoing\gallery\client logos");
-					this.SalesGalleryRootPath = Path.Combine(path, @"outgoing\gallery\sales gallery");
-					this.WebArtRootPath = Path.Combine(path, @"outgoing\gallery\web art");
-					this.AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
-					this.ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
+					ClientLogosRootPath = Path.Combine(path, @"outgoing\gallery\client logos");
+					SalesGalleryRootPath = Path.Combine(path, @"outgoing\gallery\sales gallery");
+					WebArtRootPath = Path.Combine(path, @"outgoing\gallery\web art");
+					AdSpecsSamplesRootPath = Path.Combine(path, @"outgoing\gallery\web art\Ad Specs-Samples");
+					ScreenshotLibraryRootPath = Path.Combine(path, @"outgoing\gallery\web art\Screenshot Library");
 				}
 			}
 		}
 
 		public void SaveAutoSyncSettings(string settings)
 		{
-			using (StreamWriter sw = new StreamWriter(_autoSyncSettingsPath, false))
+			using (var sw = new StreamWriter(_autoSyncSettingsPath, false))
 			{
-				sw.Write(settings.ToString());
+				sw.Write(settings);
 				sw.Flush();
 			}
 		}

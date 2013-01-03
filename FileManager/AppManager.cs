@@ -3,114 +3,113 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using SalesDepot.CoreObjects;
+using FileManager.ConfigurationClasses;
+using FileManager.ToolForms.Settings;
+using SalesDepot.CoreObjects.InteropClasses;
 
 namespace FileManager
 {
-    class AppManager
-    {
-        private delegate void NoParamsDelegate();
+	internal class AppManager
+	{
+		private static readonly AppManager instance = new AppManager();
 
-        private static AppManager instance = new AppManager();
+		private AppManager() { }
 
-        private AppManager()
-        {
-        }
+		public static AppManager Instance
+		{
+			get { return instance; }
+		}
 
-        public static AppManager Instance
-        {
-            get
-            {
-                return instance;
-            }
-        }
+		private bool Init()
+		{
+			bool result = false;
+			SettingsManager.Instance.Load();
+			ListManager.Instance.Init();
+			if (string.IsNullOrEmpty(SettingsManager.Instance.BackupPath) || !Directory.Exists(SettingsManager.Instance.BackupPath))
+			{
+				Instance.ShowWarning("Primary Backup Root is not set or unavailable.\nYou need to configure application");
+				using (var form = new FormPaths())
+				{
+					if (form.ShowDialog() == DialogResult.Cancel)
+					{
+						Instance.ShowWarning("Application is not configured and will be closed");
+					}
+					else
+						result = true;
+				}
+			}
+			else
+				result = true;
+			return result;
+		}
 
-        private bool Init()
-        {
-            bool result = false;
-            ConfigurationClasses.SettingsManager.Instance.Load();
-            ConfigurationClasses.ListManager.Instance.Init();
-            if (string.IsNullOrEmpty(ConfigurationClasses.SettingsManager.Instance.BackupPath) || !Directory.Exists(ConfigurationClasses.SettingsManager.Instance.BackupPath))
-            {
-                AppManager.Instance.ShowWarning("Primary Backup Root is not set or unavailable.\nYou need to configure application");
-                using (ToolForms.Settings.FormPaths form = new ToolForms.Settings.FormPaths())
-                {
-                    if (form.ShowDialog() == DialogResult.Cancel)
-                    {
-                        AppManager.Instance.ShowWarning("Application is not configured and will be closed");
-                    }
-                    else
-                        result = true;
-                }
-            }
-            else
-                result = true;
-            return result;
-        }
+		public void RunForm()
+		{
+			if (Init())
+			{
+				FormMain.Instance.ShowInTaskbar = true;
+				Application.Run(FormMain.Instance);
+			}
+		}
 
-        public void RunForm()
-        {
-            if (Init())
-            {
-                FormMain.Instance.ShowInTaskbar = true;
-                Application.Run(FormMain.Instance);
-            }
-        }
+		public void ActivateMainForm()
+		{
+			IntPtr mainFormHandle = IntPtr.Zero;
+			Process[] processList = Process.GetProcesses();
+			foreach (Process process in processList.Where(x => x.ProcessName.Contains("FileManager")))
+			{
+				if (process.MainWindowHandle.ToInt32() != 0)
+				{
+					mainFormHandle = process.MainWindowHandle;
+					break;
+				}
+			}
+			if (mainFormHandle.ToInt32() != 0)
+			{
+				WinAPIHelper.ShowWindow(mainFormHandle, WindowShowStyle.ShowMaximized);
+				WinAPIHelper.MakeTopMost(mainFormHandle);
+				WinAPIHelper.MakeNormal(mainFormHandle);
+				uint lpdwProcessId = 0;
+				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+				WinAPIHelper.SetForegroundWindow(mainFormHandle);
+				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			}
+		}
 
-        public void ActivateMainForm()
-        {
-            IntPtr mainFormHandle = IntPtr.Zero;
-            Process[] processList = Process.GetProcesses();
-            foreach (Process process in processList.Where(x => x.ProcessName.Contains("FileManager")))
-            {
-                if (process.MainWindowHandle.ToInt32() != 0)
-                {
-                    mainFormHandle = process.MainWindowHandle;
-                    break;
-                }
-            }
-            if (mainFormHandle.ToInt32() != 0)
-            {
-                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.ShowWindow(mainFormHandle, SalesDepot.CoreObjects.InteropClasses.WindowShowStyle.ShowMaximized);
-                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MakeTopMost(mainFormHandle);
-                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.MakeNormal(mainFormHandle);
-                uint lpdwProcessId = 0;
-                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.AttachThreadInput(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetCurrentThreadId(), SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.SetForegroundWindow(mainFormHandle);
-                SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.AttachThreadInput(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetCurrentThreadId(), SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetWindowThreadProcessId(SalesDepot.CoreObjects.InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-            }
-        }
+		public void ShowInfo(string text)
+		{
+			MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
-        public void ShowInfo(string text)
-        {
-            MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+		public void ShowWarning(string text)
+		{
+			MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		}
 
-        public void ShowWarning(string text)
-        {
-            MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
+		public DialogResult ShowQuestion(string text)
+		{
+			return MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+		}
 
-        public DialogResult ShowQuestion(string text)
-        {
-            return MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        }
+		public DialogResult ShowWarningQuestion(string text)
+		{
+			return MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+		}
 
-        public DialogResult ShowWarningQuestion(string text)
-        {
-            return MessageBox.Show(text, "Digital Wall Bin Administrator", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-        }
+		public void KillAutoFM()
+		{
+			foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName.ToUpper().Contains("AUTOFMSYNC")))
+				process.Kill();
+		}
 
-        public void KillAutoFM()
-        {
-            foreach (Process process in Process.GetProcesses().Where(x => x.ProcessName.ToUpper().Contains("AUTOFMSYNC")))
-                process.Kill();
-        }
+		public void RunAutoFM()
+		{
+			if (File.Exists(SettingsManager.Instance.AutoFMSyncShorcutPath))
+				Process.Start(SettingsManager.Instance.AutoFMSyncShorcutPath);
+		}
 
-        public void RunAutoFM()
-        {
-            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.AutoFMSyncShorcutPath))
-                Process.Start(ConfigurationClasses.SettingsManager.Instance.AutoFMSyncShorcutPath);
-        }
-    }
+		#region Nested type: NoParamsDelegate
+		private delegate void NoParamsDelegate();
+		#endregion
+	}
 }

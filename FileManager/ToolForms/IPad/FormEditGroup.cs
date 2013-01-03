@@ -50,9 +50,9 @@ namespace FileManager.ToolForms.IPad
 			gridViewLibraries.MasterRowGetChildList += OnGetLibraryChildList;
 			gridControlLibraries.DataSource = _libraries;
 
-			comboBoxEditName.Enter += FormMain.Instance.Editor_Enter;
-			comboBoxEditName.MouseUp += FormMain.Instance.Editor_MouseUp;
-			comboBoxEditName.MouseDown += FormMain.Instance.Editor_MouseDown;
+			comboBoxEditName.Enter += FormMain.Instance.EditorEnter;
+			comboBoxEditName.MouseUp += FormMain.Instance.EditorMouseUp;
+			comboBoxEditName.MouseDown += FormMain.Instance.EditorMouseDown;
 
 			if (_newGroup)
 				this.Text = "Add Group";

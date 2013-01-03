@@ -237,5 +237,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				searchFiles.AddRange(folder.SearchByDate(startDate, endDate));
 			return searchFiles.ToArray();
 		}
+
+		public override string ToString()
+		{
+			return Name;
+		}
 	}
 }

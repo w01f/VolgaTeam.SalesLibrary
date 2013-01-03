@@ -1,88 +1,111 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public class SearchGroup
-    {
-        public const string TagName = "Category";
+	public class SearchGroup
+	{
+		public const string TagName = "Category";
 
-        public virtual string TagNameObject { get; set; }
+		public SearchGroup()
+		{
+			Name = string.Empty;
+			Description = string.Empty;
+			Tags = new List<SearchTag>();
+			TagNameObject = TagName;
+		}
 
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public Image Logo { get; set; }
-        public List<string> Tags { get; private set; }
+		public virtual string TagNameObject { get; set; }
 
-        public SearchGroup()
-        {
-            this.Name = string.Empty;
-            this.Description = string.Empty;
-            this.Tags = new List<string>();
-            this.TagNameObject = TagName;
-        }
+		public string Name { get; set; }
+		public bool Selected { get; set; }
+		public string Description { get; set; }
+		public Image Logo { get; set; }
+		public List<SearchTag> Tags { get; private set; }
 
-        public string Serialize()
-        {
-            StringBuilder result = new StringBuilder();
-            result.Append(@"<" + this.TagNameObject + " ");
-            result.Append("Name = \"" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
-            result.AppendLine(@">");
-            foreach (string tag in this.Tags)
-            {
-                result.Append(@"<Tag ");
-                result.Append("Value = \"" + tag.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
-                result.AppendLine(@"/>");
-            }
-            result.AppendLine(@"</" + this.TagNameObject + ">");
-            return result.ToString();
-        }
+		public bool Compare(SearchGroup anotherGroup)
+		{
+			return Tags.All(tag => anotherGroup.Tags.Contains(tag)) && Tags.Count == anotherGroup.Tags.Count;
+		}
 
-        public void Deserialize(XmlNode node)
-        {
-            foreach (XmlAttribute attribute in node.Attributes)
-            {
-                switch (attribute.Name)
-                {
-                    case "Name":
-                        this.Name = attribute.Value;
-                        break;
-                }
-            }
-            foreach (XmlNode tagNode in node.ChildNodes)
-            {
-                switch (tagNode.Name)
-                {
-                    case "Tag":
-                        foreach (XmlAttribute attribute in tagNode.Attributes)
-                        {
-                            switch (attribute.Name)
-                            {
-                                case "Value":
-                                    if (!string.IsNullOrEmpty(attribute.Value))
-                                        this.Tags.Add(attribute.Value);
-                                    break;
-                            }
-                        }
-                        break;
-                }
-            }
-        }
-    }
+		public string Serialize()
+		{
+			var result = new StringBuilder();
+			result.Append(@"<" + TagNameObject + " ");
+			result.Append("Name = \"" + Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
+			result.AppendLine(@">");
+			foreach (var tag in Tags)
+			{
+				result.Append(@"<Tag ");
+				result.Append("Value = \"" + tag.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + "\" ");
+				result.AppendLine(@"/>");
+			}
+			result.AppendLine(@"</" + TagNameObject + ">");
+			return result.ToString();
+		}
 
-    public class CustomKeywords : SearchGroup
-    {
-        new public const string TagName = "CustomKeywords";
-        public override string TagNameObject { get; set; }
+		public void Deserialize(XmlNode node)
+		{
+			foreach (XmlAttribute attribute in node.Attributes)
+			{
+				switch (attribute.Name)
+				{
+					case "Name":
+						Name = attribute.Value;
+						break;
+				}
+			}
+			foreach (XmlNode tagNode in node.ChildNodes)
+			{
+				switch (tagNode.Name)
+				{
+					case "Tag":
+						foreach (XmlAttribute attribute in tagNode.Attributes)
+						{
+							switch (attribute.Name)
+							{
+								case "Value":
+									if (!string.IsNullOrEmpty(attribute.Value))
+										Tags.Add(new SearchTag(Name) { Name = attribute.Value });
+									break;
+							}
+						}
+						break;
+				}
+			}
+		}
+	}
 
-        public CustomKeywords()
-            : base()
-        {
-            this.Name = "Custom Keywords";
-            this.TagNameObject = TagName;
-        }
-    }
+	public class CustomKeywords : SearchGroup
+	{
+		public new const string TagName = "CustomKeywords";
 
+		public CustomKeywords()
+		{
+			Name = "Custom Keywords";
+			TagNameObject = TagName;
+		}
+
+		public override string TagNameObject { get; set; }
+	}
+
+	public class SearchTag
+	{
+		public string Name { get; set; }
+		public string Parent { get; set; }
+		public bool Selected { get; set; }
+
+		public SearchTag(string parentGroup)
+		{
+			Parent = parentGroup;
+		}
+
+		public override string ToString()
+		{
+			return Name;
+		}
+	}
 }

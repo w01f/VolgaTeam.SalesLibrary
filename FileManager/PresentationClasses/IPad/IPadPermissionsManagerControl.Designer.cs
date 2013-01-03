@@ -224,7 +224,7 @@
 			this.xtraTabPageUsers.Controls.Add(this.gridControlUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
 			this.xtraTabPageUsers.Size = new System.Drawing.Size(896, 457);
-			this.xtraTabPageUsers.Text = "Users";
+			this.xtraTabPageUsers.Text = "IPadUsers";
 			// 
 			// xtraTabPageGroups
 			// 

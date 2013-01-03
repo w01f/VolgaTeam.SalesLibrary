@@ -1,6 +1,6 @@
-﻿namespace FileManager.TabPages
+﻿namespace FileManager.PresentationClasses.TabPages
 {
-    partial class TabIPadUsersControl
+    partial class TabIPadContentControl
     {
         /// <summary> 
         /// Required designer variable.

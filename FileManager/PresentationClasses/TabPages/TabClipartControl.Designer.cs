@@ -1,4 +1,4 @@
-﻿namespace FileManager.TabPages
+﻿namespace FileManager.PresentationClasses.TabPages
 {
     partial class TabClipartControl
     {
@@ -81,7 +81,6 @@
             this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Name = "TabClipartControl";
             this.Size = new System.Drawing.Size(977, 603);
-            this.Load += new System.EventHandler(this.TabClipartControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlMain)).EndInit();
             this.splitContainerControlMain.ResumeLayout(false);
             this.ResumeLayout(false);

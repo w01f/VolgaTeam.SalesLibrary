@@ -1,97 +1,110 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraTab;
+using FileManager.ConfigurationClasses;
+using FileManager.PresentationClasses.WallBin.Decorators;
+using FileManager.ToolForms;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.OvernightsCalendar
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class OvernightsCalendarControl : UserControl
-    {
-        private bool _buildInProgress = false;
-        public WallBin.Decorators.LibraryDecorator ParentDecorator { get; private set; }
-        public List<YearControl> Years { get; private set; }
-        public bool ViewBuilded { get; set; }
+	[ToolboxItem(false)]
+	public partial class OvernightsCalendarControl : UserControl
+	{
+		private bool _buildInProgress;
 
-        public OvernightsCalendarControl(WallBin.Decorators.LibraryDecorator parent)
-        {
-            InitializeComponent();
-            this.ParentDecorator = parent;
-            this.Dock = DockStyle.Fill;
-            this.Years = new List<YearControl>();
+		public OvernightsCalendarControl(LibraryDecorator parent)
+		{
+			InitializeComponent();
+			ParentDecorator = parent;
+			Dock = DockStyle.Fill;
+			Years = new List<YearControl>();
 
-            xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
-        }
+			xtraTabControl.SelectedPageChanged += xtraTabControl_SelectedPageChanged;
+		}
 
-        public void Build(bool forceBuild)
-        {
-            if (!this.ViewBuilded || forceBuild)
-            {
-                _buildInProgress = true;
-                xtraTabControl.TabPages.Clear();
-                this.Years.Clear();
-                foreach (CalendarYear year in this.ParentDecorator.Library.OvernightsCalendar.Years)
-                {
-                    this.Years.Add(new YearControl(year));
-                    Application.DoEvents();
-                }
-                xtraTabControl.TabPages.AddRange(this.Years.ToArray());
+		public void DisposeCalendar()
+		{
+			xtraTabControl.SelectedPageChanged -= xtraTabControl_SelectedPageChanged;
+			xtraTabControl.TabPages.Clear();
+			foreach (var yearControl in Years)
+			{
+				yearControl.Parent = null;
+				yearControl.Dispose();
+				Application.DoEvents();
+			}
+		}
 
-                YearControl selectedTab = this.Years.Where(x => x.Data.Year.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear)).FirstOrDefault();
-                if (selectedTab == null)
-                    selectedTab = this.Years.FirstOrDefault();
-                if (selectedTab != null)
-                    selectedTab.BuildControls();
-                xtraTabControl.SelectedTabPage = selectedTab;
+		public LibraryDecorator ParentDecorator { get; private set; }
+		public List<YearControl> Years { get; private set; }
+		public bool ViewBuilded { get; set; }
 
-                _buildInProgress = false;
-            }
-            this.ViewBuilded = true;
-        }
+		public void Build(bool forceBuild)
+		{
+			if (!ViewBuilded || forceBuild)
+			{
+				_buildInProgress = true;
+				xtraTabControl.TabPages.Clear();
+				Years.Clear();
+				foreach (CalendarYear year in ParentDecorator.Library.OvernightsCalendar.Years)
+				{
+					Years.Add(new YearControl(year));
+					Application.DoEvents();
+				}
+				xtraTabControl.TabPages.AddRange(Years.ToArray());
 
-        public void RefreshColors()
-        {
-            foreach (YearControl year in this.Years)
-                year.RefreshColors();
-        }
+				YearControl selectedTab = Years.Where(x => x.Data.Year.Equals(SettingsManager.Instance.SelectedCalendarYear)).FirstOrDefault();
+				if (selectedTab == null)
+					selectedTab = Years.FirstOrDefault();
+				if (selectedTab != null)
+					selectedTab.BuildControls();
+				xtraTabControl.SelectedTabPage = selectedTab;
 
-        public void RefreshFont()
-        {
-            foreach (YearControl year in this.Years)
-                year.RefreshFont();
-        }
+				_buildInProgress = false;
+			}
+			ViewBuilded = true;
+		}
 
-        private void xtraTabControl_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
-        {
-            if (!_buildInProgress)
-            {
-                YearControl selectedYear = e.Page as YearControl;
-                if (selectedYear != null && !selectedYear.ViewBuilded)
-                {
-                    ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear = selectedYear.Data.Year;
-                    ConfigurationClasses.SettingsManager.Instance.Save();
-                    using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
-                    {
-                        FormMain.Instance.ribbonControl.Enabled = false;
-                        formProgress.TopMost = true;
-                        formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
-                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                        {
-                            this.Invoke((MethodInvoker)delegate()
-                            {
-                                selectedYear.BuildControls();
-                            });
-                        }));
-                        formProgress.Show();
-                        System.Windows.Forms.Application.DoEvents();
-                        thread.Start();
-                        while (thread.IsAlive)
-                            System.Windows.Forms.Application.DoEvents();
-                        formProgress.Close();
-                        FormMain.Instance.ribbonControl.Enabled = true;
-                    }
-                }
-            }
-        }
-    }
+		public void RefreshColors()
+		{
+			foreach (YearControl year in Years)
+				year.RefreshColors();
+		}
+
+		public void RefreshFont()
+		{
+			foreach (YearControl year in Years)
+				year.RefreshFont();
+		}
+
+		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
+		{
+			if (!_buildInProgress)
+			{
+				var selectedYear = e.Page as YearControl;
+				if (selectedYear != null && !selectedYear.ViewBuilded)
+				{
+					SettingsManager.Instance.SelectedCalendarYear = selectedYear.Data.Year;
+					SettingsManager.Instance.Save();
+					using (var formProgress = new FormProgress())
+					{
+						FormMain.Instance.ribbonControl.Enabled = false;
+						formProgress.TopMost = true;
+						formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
+						var thread = new Thread(delegate() { Invoke((MethodInvoker)delegate { selectedYear.BuildControls(); }); });
+						formProgress.Show();
+						Application.DoEvents();
+						thread.Start();
+						while (thread.IsAlive)
+							Application.DoEvents();
+						formProgress.Close();
+						FormMain.Instance.ribbonControl.Enabled = true;
+					}
+				}
+			}
+		}
+	}
 }

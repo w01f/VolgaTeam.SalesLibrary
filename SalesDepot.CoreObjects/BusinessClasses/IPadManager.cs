@@ -256,7 +256,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						link.enableWidget = libraryFile.EnableWidget;
 						link.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
 						if (libraryFile.CustomKeywords.Tags.Count > 0)
-							link.tags = string.Join(" ", libraryFile.CustomKeywords.Tags.ToArray());
+							link.tags = string.Join(" ", libraryFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
 						link.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 						link.dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
@@ -310,13 +310,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						#region Categories
 						var categories = new List<LinkCategory>();
 						foreach (SearchGroup searchGroup in libraryFile.SearchTags.SearchGroups)
-							foreach (string tag in searchGroup.Tags)
+							foreach (var tag in searchGroup.Tags)
 							{
 								var category = new LinkCategory();
 								category.libraryId = Parent.Identifier.ToString();
 								category.linkId = libraryFile.Identifier.ToString();
 								category.category = searchGroup.Name;
-								category.tag = tag;
+								category.tag = tag.Name;
 								categories.Add(category);
 							}
 						if (categories.Count > 0)
@@ -469,11 +469,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var result = new List<Category>();
 			foreach (SearchGroup group in searchTags.SearchGroups)
 			{
-				foreach (string tag in group.Tags)
+				foreach (var tag in group.Tags)
 				{
 					var category = new Category();
 					category.category = group.Name;
-					category.tag = tag;
+					category.tag = tag.Name;
 					result.Add(category);
 				}
 			}

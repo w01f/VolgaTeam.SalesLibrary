@@ -1,34 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
+using FileManager.Controllers;
 
 namespace FileManager.ToolForms.Settings
 {
-    public partial class FormSync : Form
-    {
-        public FormSync()
-        {
-            InitializeComponent();
-        }
+	public partial class FormSync : Form
+	{
+		public FormSync()
+		{
+			InitializeComponent();
+		}
 
-        private void Form_Load(object sender, EventArgs e)
-        {
-            ckMinimizeOnSync.Checked = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.MinimizeOnSync;
-            ckCloseAfterSync.Checked = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync;
-            ckShowSyncStatus.Checked = PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync;
-        }
+		private void Form_Load(object sender, EventArgs e)
+		{
+			ckMinimizeOnSync.Checked = MainController.Instance.ActiveDecorator.Library.MinimizeOnSync;
+			ckCloseAfterSync.Checked = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;
+			ckShowSyncStatus.Checked = MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync;
+		}
 
-        private void FormSync_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
-            {
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.MinimizeOnSync = ckMinimizeOnSync.Checked;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.CloseAfterSync = ckCloseAfterSync.Checked;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.ShowProgressDuringSync = ckShowSyncStatus.Checked;
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActiveDecorator.Library.Save();
-            }
-        }
-    }
+		private void FormSync_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			if (DialogResult == DialogResult.OK)
+			{
+				MainController.Instance.ActiveDecorator.Library.MinimizeOnSync = ckMinimizeOnSync.Checked;
+				MainController.Instance.ActiveDecorator.Library.CloseAfterSync = ckCloseAfterSync.Checked;
+				MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync = ckShowSyncStatus.Checked;
+				MainController.Instance.ActiveDecorator.Library.Save();
+			}
+		}
+	}
 }

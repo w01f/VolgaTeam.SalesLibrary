@@ -50,24 +50,24 @@ namespace FileManager.ToolForms.IPad
 			gridViewLibraries.MasterRowGetChildList += OnGetLibraryChildList;
 			gridControlLibraries.DataSource = _libraries;
 
-			textEditLogin.Enter += FormMain.Instance.Editor_Enter;
-			textEditLogin.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditLogin.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditFirstName.Enter += FormMain.Instance.Editor_Enter;
-			textEditFirstName.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditFirstName.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditLastName.Enter += FormMain.Instance.Editor_Enter;
-			textEditLastName.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditLastName.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditEmail.Enter += FormMain.Instance.Editor_Enter;
-			textEditEmail.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditEmail.MouseDown += FormMain.Instance.Editor_MouseDown;
-			textEditEmailConfirm.Enter += FormMain.Instance.Editor_Enter;
-			textEditEmailConfirm.MouseUp += FormMain.Instance.Editor_MouseUp;
-			textEditEmailConfirm.MouseDown += FormMain.Instance.Editor_MouseDown;
-			buttonEditPassword.Enter += FormMain.Instance.Editor_Enter;
-			buttonEditPassword.MouseUp += FormMain.Instance.Editor_MouseUp;
-			buttonEditPassword.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditLogin.Enter += FormMain.Instance.EditorEnter;
+			textEditLogin.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditLogin.MouseDown += FormMain.Instance.EditorMouseDown;
+			textEditFirstName.Enter += FormMain.Instance.EditorEnter;
+			textEditFirstName.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditFirstName.MouseDown += FormMain.Instance.EditorMouseDown;
+			textEditLastName.Enter += FormMain.Instance.EditorEnter;
+			textEditLastName.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditLastName.MouseDown += FormMain.Instance.EditorMouseDown;
+			textEditEmail.Enter += FormMain.Instance.EditorEnter;
+			textEditEmail.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditEmail.MouseDown += FormMain.Instance.EditorMouseDown;
+			textEditEmailConfirm.Enter += FormMain.Instance.EditorEnter;
+			textEditEmailConfirm.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditEmailConfirm.MouseDown += FormMain.Instance.EditorMouseDown;
+			buttonEditPassword.Enter += FormMain.Instance.EditorEnter;
+			buttonEditPassword.MouseUp += FormMain.Instance.EditorMouseUp;
+			buttonEditPassword.MouseDown += FormMain.Instance.EditorMouseDown;
 
 			if (_newUser)
 			{
@@ -120,7 +120,7 @@ namespace FileManager.ToolForms.IPad
 
 		private void textEdit_Validating(object sender, CancelEventArgs e)
 		{
-			BaseEdit edit = sender as BaseEdit;
+			var edit = sender as BaseEdit;
 			if (edit != null && edit.Enabled && string.IsNullOrEmpty(edit.Text))
 			{
 				edit.ErrorText = "Empty value is not allowed";

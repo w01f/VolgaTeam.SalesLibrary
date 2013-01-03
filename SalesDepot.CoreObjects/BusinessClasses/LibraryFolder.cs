@@ -438,8 +438,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					SearchGroup fileSearchGroup = file.SearchTags.SearchGroups.Where(x => x.Name.Equals(group.Name)).FirstOrDefault();
 					if (fileSearchGroup != null)
 					{
-						foreach (string tag in group.Tags)
-							if (fileSearchGroup.Tags.Contains(tag))
+						foreach (var tag in group.Tags)
+							if (fileSearchGroup.Tags.Select(x=>x.Name).Contains(tag.Name))
 							{
 								partialMatch = true;
 								fullMatch = fullMatch & true;

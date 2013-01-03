@@ -76,7 +76,7 @@
             this.gbDeadLinksMarkup.Size = new System.Drawing.Size(483, 128);
             this.gbDeadLinksMarkup.TabIndex = 1;
             this.gbDeadLinksMarkup.TabStop = false;
-            this.gbDeadLinksMarkup.Text = "How do you want Inactive Links to be Displayed to the Users?";
+            this.gbDeadLinksMarkup.Text = "How do you want Inactive Links to be Displayed to the IPadUsers?";
             // 
             // laMarkupAsLineBreakDescription
             // 

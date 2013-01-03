@@ -1,384 +1,484 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraEditors;
+using DevExpress.XtraTab;
+using FileManager.ConfigurationClasses;
+using FileManager.Controllers;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin.Decorators
 {
-    public class PageDecorator
-    {
-        public LibraryPage Page { get; private set; }
-        private List<PresentationClasses.WallBin.FolderBoxControl> _boxes = new List<PresentationClasses.WallBin.FolderBoxControl>();
-        private Panel _headerPanel = null;
-        private Panel _parentPanel = null;
-        public DevExpress.XtraEditors.XtraScrollableControl Container { get; private set; }
-        public DevExpress.XtraTab.XtraTabPage TabPage { get; private set; }
-        private Timer _scrooTimer = new Timer();
-        private bool _scroolDown = false;
-        public LibraryDecorator Parent { get; set; }
-        public PresentationClasses.WallBin.FolderBoxControl ActiveBox { get; set; }
+	public class PageDecorator
+	{
+		private readonly List<FolderBoxControl> _boxes = new List<FolderBoxControl>();
+		private readonly Timer _scrooTimer = new Timer();
+		private XtraScrollableControl _container = new XtraScrollableControl();
 
-        public PageDecorator(LibraryPage page)
-        {
-            this.Page = page;
-            this.Container = new DevExpress.XtraEditors.XtraScrollableControl();
-            this.TabPage = new DevExpress.XtraTab.XtraTabPage();
-            this.TabPage.Tag = this;
-            this.TabPage.Text = page.Name.Replace("&", "&&");
-            _scrooTimer.Stop();
-            _scrooTimer.Interval = 5;
-            _scrooTimer.Tick += new EventHandler(scrooTimer_Tick);
+		private Panel _headerPanel;
+		private bool _isDisposed;
+		private Panel _parentPanel;
+		private bool _scroolDown;
+		private Panel _splash = new Panel();
 
-            BuildPage();
-            BuildDisplayBoxes();
-        }
+		public PageDecorator(LibraryPage page)
+		{
+			Page = page;
+			TabPage = new XtraTabPage();
+			RegularPage = new Control { Dock = DockStyle.Fill };
+			SelectedLinks = new List<LibraryFile>();
+			TabPage.Tag = this;
+			TabPage.Text = page.Name.Replace("&", "&&");
+			_scrooTimer.Stop();
+			_scrooTimer.Interval = 5;
+			_scrooTimer.Tick += scrooTimer_Tick;
 
-        private void BuildDisplayBoxes()
-        {
-            foreach (PresentationClasses.WallBin.FolderBoxControl box in _boxes)
-                box.Dispose();
-            _boxes.Clear();
+			BuildPage();
+			BuildDisplayBoxes();
+			LinkBoxesToColumns();
 
-            this.Page.Folders.Sort((x, y) => x.ColumnOrder.CompareTo(y.ColumnOrder) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.ColumnOrder.CompareTo(y.ColumnOrder));
-            foreach (LibraryFolder folder in this.Page.Folders)
-            {
-                PresentationClasses.WallBin.FolderBoxControl box = new PresentationClasses.WallBin.FolderBoxControl();
-                box.Folder = folder;
-                box.Decorator = this;
-                _boxes.Add(box);
-                Application.DoEvents();
-            }
-        }
+			Application.DoEvents();
+		}
 
-        private void BuildPage()
-        {
-            this.Container.Dock = DockStyle.Fill;
-            this.Container.AlwaysScrollActiveControlIntoView = false;
-            BuildColumnTitles();
-            BuildColumns();
-        }
+		public LibraryPage Page { get; private set; }
 
-        private void BuildColumnTitles()
-        {
-            _headerPanel = new Panel();
-            _headerPanel.BorderStyle = BorderStyle.None;
-            _headerPanel.Height = 0;
-            _headerPanel.Dock = DockStyle.Top;
-            this.Container.Controls.Add(_headerPanel);
-            _headerPanel.BringToFront();
-            _headerPanel.Resize += new EventHandler(ColumnTitles_Resize);
+		public XtraTabPage TabPage { get; private set; }
+		public Control RegularPage { get; private set; }
+		public LibraryDecorator Parent { get; set; }
+		public FolderBoxControl ActiveBox { get; set; }
 
-            if (this.Page.EnableColumnTitles)
-            {
-                foreach (ColumnTitle columnTitle in this.Page.ColumnTitles)
-                {
-                    PresentationClasses.WallBin.ColumnTitleControl columnTitleControl = new PresentationClasses.WallBin.ColumnTitleControl(columnTitle);
-                    columnTitleControl.Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left;
-                    _headerPanel.Controls.Add(columnTitleControl);
-                    columnTitleControl.BringToFront();
-                    Application.DoEvents();
-                }
-            }
-        }
+		public void Dispose()
+		{
+			_isDisposed = true;
 
-        private void BuildColumns()
-        {
-            _parentPanel = new Panel();
-            _parentPanel.BorderStyle = BorderStyle.None;
-            _parentPanel.Height = this.Container.Height;
-            _parentPanel.Dock = DockStyle.Top;
-            this.Container.Controls.Add(_parentPanel);
-            _parentPanel.BringToFront();
-            _parentPanel.Resize += new EventHandler(WallBin_Resize);
+			foreach (FolderBoxControl box in _boxes)
+			{
+				box.Parent = null;
+				box.Dispose();
+				Application.DoEvents();
+			}
+			_boxes.Clear();
 
-            PresentationClasses.WallBin.ColumnPanel panel = new PresentationClasses.WallBin.ColumnPanel();
-            panel.BorderStyle = BorderStyle.None;
-            panel.AllowDrop = true;
-            panel.Dock = DockStyle.Left;
-            panel.Order = 0;
-            panel.MouseMove += new MouseEventHandler((sender, e) => { ((Control)sender).Parent.Parent.Focus(); });
-            panel.DragEnter += new DragEventHandler(Column_DragEnter);
-            panel.DragOver += new DragEventHandler(Column_DragOver);
-            panel.DragLeave += new EventHandler(Column_DragLeave);
-            panel.DragDrop += new DragEventHandler(Column_DragDrop);
-            _parentPanel.Controls.Add(panel);
-            panel.BringToFront();
+			_headerPanel.Parent = null;
+			_headerPanel.Dispose();
+			_headerPanel = null;
 
-            panel = new PresentationClasses.WallBin.ColumnPanel();
-            panel.BorderStyle = BorderStyle.None;
-            panel.AllowDrop = true;
-            panel.Dock = DockStyle.Left;
-            panel.Order = 1;
-            panel.MouseMove += new MouseEventHandler((sender, e) => { ((Control)sender).Parent.Parent.Focus(); });
-            panel.DragEnter += new DragEventHandler(Column_DragEnter);
-            panel.DragOver += new DragEventHandler(Column_DragOver);
-            panel.DragLeave += new EventHandler(Column_DragLeave);
-            panel.DragDrop += new DragEventHandler(Column_DragDrop);
-            _parentPanel.Controls.Add(panel);
-            panel.BringToFront();
+			_parentPanel.Parent = null;
+			_parentPanel.Dispose();
+			_parentPanel = null;
 
-            panel = new PresentationClasses.WallBin.ColumnPanel();
-            panel.BorderStyle = BorderStyle.None;
-            panel.AllowDrop = true;
-            panel.Dock = DockStyle.Fill;
-            panel.Order = 2;
-            panel.MouseMove += new MouseEventHandler((sender, e) => { ((Control)sender).Parent.Parent.Focus(); });
-            panel.DragEnter += new DragEventHandler(Column_DragEnter);
-            panel.DragOver += new DragEventHandler(Column_DragOver);
-            panel.DragLeave += new EventHandler(Column_DragLeave);
-            panel.DragDrop += new DragEventHandler(Column_DragDrop);
-            _parentPanel.Controls.Add(panel);
-            panel.BringToFront();
+			_container.Parent = null;
+			_container.Dispose();
+			_container = null;
 
-            Application.DoEvents();
-        }
+			_splash.Dispose();
+			_splash = null;
 
-        private void LinkBoxesToColumns()
-        {
-            _boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
-            foreach (Control control in _parentPanel.Controls)
-                control.Controls.Clear();
-            foreach (PresentationClasses.WallBin.FolderBoxControl box in _boxes)
-                _parentPanel.Controls[2 - box.Column].Controls.Add(box);
-        }
+			TabPage.Parent = null;
+			TabPage.Dispose();
+			TabPage = null;
+			RegularPage.Parent = null;
+			RegularPage.Dispose();
+			RegularPage = null;
+			Application.DoEvents();
+		}
 
-        private void WallBin_Resize(object sender, EventArgs e)
-        {
-            FitObjectsToPage();
-        }
+		private void BuildDisplayBoxes()
+		{
+			foreach (FolderBoxControl box in _boxes)
+				box.Dispose();
+			_boxes.Clear();
 
-        private void ColumnTitles_Resize(object sender, EventArgs e)
-        {
-            FitColumnsToPage();
-        }
+			Page.Folders.Sort((x, y) => x.ColumnOrder.CompareTo(y.ColumnOrder) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.ColumnOrder.CompareTo(y.ColumnOrder));
+			foreach (LibraryFolder folder in Page.Folders)
+			{
+				var box = new FolderBoxControl { Folder = folder, Decorator = this };
+				box.Init();
+				_boxes.Add(box);
+				Application.DoEvents();
+			}
+		}
 
-        private void ReorderBoxes()
-        {
-            int boxOrder = -1;
-            int currentColumn = -1;
+		private void BuildPage()
+		{
+			_container.Dock = DockStyle.Fill;
+			_container.AlwaysScrollActiveControlIntoView = false;
+			_splash.BorderStyle = BorderStyle.None;
+			_splash.Dock = DockStyle.Fill;
+			BuildColumnTitles();
+			BuildColumns();
+		}
 
-            _boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
-            for (int i = 0; i < _boxes.Count; i++)
-            {
-                if (currentColumn != _boxes[i].Column)
-                {
-                    currentColumn = _boxes[i].Column;
-                    boxOrder = 0;
-                }
-                _boxes[i].RowOrder = boxOrder;
-                boxOrder++;
-            }
-        }
+		private void BuildColumnTitles()
+		{
+			_headerPanel = new Panel { BorderStyle = BorderStyle.None, Height = 0, Dock = DockStyle.Top };
+			_container.Controls.Add(_headerPanel);
+			_headerPanel.BringToFront();
 
-        public void RefreshPanelHeight()
-        {
-            _parentPanel.Resize -= new EventHandler(WallBin_Resize);
-            int maxHeight = this.Container.Height - (_headerPanel != null ? _headerPanel.Height : 0);
+			if (Page.EnableColumnTitles)
+			{
+				foreach (ColumnTitle columnTitle in Page.ColumnTitles)
+				{
+					var columnTitleControl = new ColumnTitleControl(columnTitle) { Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left };
+					_headerPanel.Controls.Add(columnTitleControl);
+					columnTitleControl.BringToFront();
+					Application.DoEvents();
+				}
+			}
+		}
 
-            int realHeight = 0;
-            for (int i = 0; i < 3; i++)
-            {
-                int columnHeight = 0;
-                foreach (var box in _boxes)
-                    if (box.Column == i)
-                        columnHeight += box.Height;
-                if (realHeight < columnHeight)
-                    realHeight = columnHeight;
-            }
+		private void BuildColumns()
+		{
+			_parentPanel = new Panel { BorderStyle = BorderStyle.None, Height = _container.Height, Dock = DockStyle.Top };
+			_container.Controls.Add(_parentPanel);
+			_parentPanel.BringToFront();
 
-            if (realHeight < maxHeight)
-                realHeight = maxHeight;
+			var panel = new ColumnPanel { BorderStyle = BorderStyle.None, AllowDrop = true, Dock = DockStyle.Left, Order = 0 };
+			panel.MouseMove += (sender, e) => ((Control)sender).Parent.Parent.Focus();
+			panel.DragEnter += ColumnDragEnter;
+			panel.DragOver += ColumnDragOver;
+			panel.DragLeave += ColumnDragLeave;
+			panel.DragDrop += ColumnDragDrop;
+			_parentPanel.Controls.Add(panel);
+			panel.BringToFront();
 
-            _parentPanel.Height = realHeight;
-            _parentPanel.Resize += new EventHandler(WallBin_Resize);
-        }
+			panel = new ColumnPanel { BorderStyle = BorderStyle.None, AllowDrop = true, Dock = DockStyle.Left, Order = 1 };
+			panel.MouseMove += (sender, e) => ((Control)sender).Parent.Parent.Focus();
+			panel.DragEnter += ColumnDragEnter;
+			panel.DragOver += ColumnDragOver;
+			panel.DragLeave += ColumnDragLeave;
+			panel.DragDrop += ColumnDragDrop;
+			_parentPanel.Controls.Add(panel);
+			panel.BringToFront();
 
-        private void FitColumnsToPage()
-        {
-            int panelWidth = _headerPanel.Width / 3;
-            int panelHeight = 0;
-            foreach (Control panel in _headerPanel.Controls)
-            {
-                panel.Width = panelWidth;
-                int controlHeight = (panel as ColumnTitleControl).GetHeight();
-                if (panelHeight < controlHeight)
-                    panelHeight = controlHeight;
-            }
-            _headerPanel.Height = panelHeight;
-        }
+			panel = new ColumnPanel { BorderStyle = BorderStyle.None, AllowDrop = true, Dock = DockStyle.Fill, Order = 2 };
+			panel.MouseMove += (sender, e) => ((Control)sender).Parent.Parent.Focus();
+			panel.DragEnter += ColumnDragEnter;
+			panel.DragOver += ColumnDragOver;
+			panel.DragLeave += ColumnDragLeave;
+			panel.DragDrop += ColumnDragDrop;
+			_parentPanel.Controls.Add(panel);
+			panel.BringToFront();
 
-        public void FitObjectsToPage()
-        {
-            foreach (PresentationClasses.WallBin.FolderBoxControl box in _boxes)
-                box.SetGridFont(ConfigurationClasses.SettingsManager.Instance.FontSize);
+			Application.DoEvents();
+		}
+
+		private void LinkBoxesToColumns()
+		{
+			_boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
+			foreach (Control control in _parentPanel.Controls)
+				control.Controls.Clear();
+			foreach (FolderBoxControl box in _boxes)
+				_parentPanel.Controls[2 - box.Column].Controls.Add(box);
+		}
+
+		private void ReorderBoxes()
+		{
+			int boxOrder = -1;
+			int currentColumn = -1;
+
+			_boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
+			foreach (FolderBoxControl t in _boxes)
+			{
+				if (currentColumn != t.Column)
+				{
+					currentColumn = t.Column;
+					boxOrder = 0;
+				}
+				t.RowOrder = boxOrder;
+				boxOrder++;
+			}
+		}
+
+		public void RefreshPanelHeight()
+		{
+			if (_isDisposed) return;
+			int maxHeight = _container.Height - (_headerPanel != null ? _headerPanel.Height : 0);
+
+			int realHeight = 0;
+			for (int i = 0; i < 3; i++)
+			{
+				int columnHeight = _boxes.Where(box => box.Column == i).Sum(box => box.Height);
+				if (realHeight < columnHeight)
+					realHeight = columnHeight;
+			}
+
+			if (realHeight < maxHeight)
+				realHeight = maxHeight;
+
+			_parentPanel.Height = realHeight;
+		}
+
+		private void FitColumnsToPage()
+		{
+			int panelWidth = _headerPanel.Width / 3;
+			int panelHeight = 0;
+			foreach (Control panel in _headerPanel.Controls)
+			{
+				panel.Width = panelWidth;
+				var columnTitleControl = panel as ColumnTitleControl;
+				if (columnTitleControl == null) continue;
+				int controlHeight = columnTitleControl.GetHeight();
+				if (panelHeight < controlHeight)
+					panelHeight = controlHeight;
+			}
+			_headerPanel.Height = panelHeight;
+		}
+
+		private void FitObjectsToPage()
+		{
+			foreach (FolderBoxControl box in _boxes)
+				box.SetGridFont(SettingsManager.Instance.FontSize);
 
 
-            RefreshPanelHeight();
+			RefreshPanelHeight();
 
-            foreach (Control panel in _parentPanel.Controls)
-            {
-                ((PresentationClasses.WallBin.ColumnPanel)panel).ResizePanel();
-                if (((PresentationClasses.WallBin.ColumnPanel)panel).Order < 2)
-                {
-                    panel.Dock = DockStyle.Left;
-                }
-                else
-                {
-                    panel.Dock = DockStyle.Fill;
-                    panel.BringToFront();
-                }
-            }
-        }
+			foreach (Control panel in _parentPanel.Controls)
+			{
+				((ColumnPanel)panel).ResizePanel();
+				if (((ColumnPanel)panel).Order < 2)
+				{
+					panel.Dock = DockStyle.Left;
+				}
+				else
+				{
+					panel.Dock = DockStyle.Fill;
+					panel.BringToFront();
+				}
+			}
+		}
 
-        public void FitPage()
-        {
-            LinkBoxesToColumns();
-            FitColumnsToPage();
-            FitObjectsToPage();
-        }
+		public void ResizePage()
+		{
+			if (!_isDisposed)
+			{
+				_splash.BringToFront();
+				FitColumnsToPage();
+				FitObjectsToPage();
+				_container.BringToFront();
+			}
+		}
 
-        public void Apply()
-        {
-            this.Container.Parent = null;
-            FormMain.Instance.TabHome.pnMain.Controls.Add(this.Container);
-            FitPage();
-        }
+		public void SwitchMultitab(bool multitab)
+		{
+			if (!_isDisposed)
+			{
+				if (multitab)
+				{
+					if (!TabPage.Controls.Contains(_container))
+					{
+						_container.Parent = null;
+						_splash.Parent = null;
+						TabPage.Controls.Add(_container);
+						TabPage.Controls.Add(_splash);
+					}
+				}
+				else
+				{
+					if (!RegularPage.Controls.Contains(_container))
+					{
+						_container.Parent = null;
+						_splash.Parent = null;
+						RegularPage.Controls.Add(_container);
+						RegularPage.Controls.Add(_splash);
+					}
+				}
+			}
+		}
 
-        public void Save()
-        {
-            foreach (PresentationClasses.WallBin.FolderBoxControl box in _boxes)
-                box.Save();
-        }
+		public void ApplyWallBinOptions(WallBinOptions options)
+		{
+			if (ActiveBox != null)
+				ActiveBox.MakeInactive();
+			ClearSelection();
+			foreach (var folderBoxControl in _boxes)
+				folderBoxControl.ApplyWallBinOptions(options);
+		}
 
-        #region Drag&Drop Event Handlers
-        public void Column_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.Serializable, true))
-            {
-                var data = e.Data.GetData(DataFormats.Serializable, true);
-                if (data.GetType() == typeof(PresentationClasses.WallBin.FolderBoxControl))
-                {
-                    e.Effect = DragDropEffects.Move;
-                }
-            }
-        }
+		public void Save()
+		{
+			if (!_isDisposed)
+				foreach (var box in _boxes)
+					box.Save();
+		}
 
-        public void Column_DragOver(object sender, DragEventArgs e)
-        {
-            Point point = this.Container.PointToClient(new Point(e.X, e.Y));
+		#region Drag&Drop Stuff
+		public void ColumnDragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
+			{
+				object data = e.Data.GetData(DataFormats.Serializable, true);
+				if (data.GetType() == typeof(FolderBoxControl))
+				{
+					e.Effect = DragDropEffects.Move;
+				}
+			}
+		}
 
-            if (point.Y < this.Container.Bottom && point.Y > this.Container.Bottom - 50)
-            {
-                _scroolDown = true;
-                _scrooTimer.Start();
-            }
-            else if (point.Y > this.Container.Top && point.Y < this.Container.Top + 50)
-            {
-                _scroolDown = false;
-                _scrooTimer.Start();
-            }
-            else
-                _scrooTimer.Stop();
-            if (e.Data.GetDataPresent(DataFormats.Serializable, true))
-            {
-                var data = e.Data.GetData(DataFormats.Serializable, true);
-                if (data.GetType() == typeof(PresentationClasses.WallBin.FolderBoxControl))
-                {
-                    PresentationClasses.WallBin.ColumnPanel panel = (PresentationClasses.WallBin.ColumnPanel)sender;
-                    Point pt = panel.PointToClient(new Point(Control.MousePosition.X, Control.MousePosition.Y));
-                    int bottomBoxBorder = 0;
-                    foreach (Control control in panel.Controls)
-                    {
-                        if (control.Top <= pt.Y && control.Bottom >= pt.Y && control != data)
-                        {
-                            ((PresentationClasses.WallBin.FolderBoxControl)control).UnderlineBox = true;
-                            if (panel.DropHintLineHeight != control.Top)
-                            {
-                                panel.DropHintLineHeight = control.Top;
-                                panel.Refresh();
-                            }
-                        }
-                        else
-                            ((PresentationClasses.WallBin.FolderBoxControl)control).UnderlineBox = false;
+		public void ColumnDragOver(object sender, DragEventArgs e)
+		{
+			Point point = _container.PointToClient(new Point(e.X, e.Y));
 
-                        if (bottomBoxBorder < control.Bottom)
-                            bottomBoxBorder = control.Bottom;
-                    }
-                    if (bottomBoxBorder < pt.Y)
-                    {
-                        if (panel.Controls.Count > 0)
-                            if (panel.Controls[panel.Controls.Count - 1] == data)
-                                return;
-                        if (panel.DropHintLineHeight != bottomBoxBorder)
-                        {
-                            panel.DropHintLineHeight = bottomBoxBorder;
-                            panel.Refresh();
-                        }
-                    }
-                }
-            }
-        }
+			if (point.Y < _container.Bottom && point.Y > _container.Bottom - 50)
+			{
+				_scroolDown = true;
+				_scrooTimer.Start();
+			}
+			else if (point.Y > _container.Top && point.Y < _container.Top + 50)
+			{
+				_scroolDown = false;
+				_scrooTimer.Start();
+			}
+			else
+				_scrooTimer.Stop();
+			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
+			{
+				object data = e.Data.GetData(DataFormats.Serializable, true);
+				if (data.GetType() == typeof(FolderBoxControl))
+				{
+					var panel = (ColumnPanel)sender;
+					Point pt = panel.PointToClient(new Point(Control.MousePosition.X, Control.MousePosition.Y));
+					int bottomBoxBorder = 0;
+					foreach (Control control in panel.Controls)
+					{
+						if (control.Top <= pt.Y && control.Bottom >= pt.Y && control != data)
+						{
+							((FolderBoxControl)control).UnderlineBox = true;
+							if (panel.DropHintLineHeight != control.Top)
+							{
+								panel.DropHintLineHeight = control.Top;
+								panel.Refresh();
+							}
+						}
+						else
+							((FolderBoxControl)control).UnderlineBox = false;
 
-        private void Column_DragLeave(object sender, EventArgs e)
-        {
-            _scrooTimer.Stop();
-            ((PresentationClasses.WallBin.ColumnPanel)sender).DropHintLineHeight = -1;
-            foreach (Control control in ((PresentationClasses.WallBin.ColumnPanel)sender).Controls)
-                ((PresentationClasses.WallBin.FolderBoxControl)control).UnderlineBox = false;
-            ((PresentationClasses.WallBin.ColumnPanel)sender).Refresh();
-        }
+						if (bottomBoxBorder < control.Bottom)
+							bottomBoxBorder = control.Bottom;
+					}
+					if (bottomBoxBorder < pt.Y)
+					{
+						if (panel.Controls.Count > 0)
+							if (panel.Controls[panel.Controls.Count - 1] == data)
+								return;
+						if (panel.DropHintLineHeight != bottomBoxBorder)
+						{
+							panel.DropHintLineHeight = bottomBoxBorder;
+							panel.Refresh();
+						}
+					}
+				}
+			}
+		}
 
-        public void Column_DragDrop(object sender, DragEventArgs e)
-        {
-            _scrooTimer.Stop();
-            double orderInColumn = -1;
-            PresentationClasses.WallBin.ColumnPanel panel = (PresentationClasses.WallBin.ColumnPanel)sender;
-            panel.DropHintLineHeight = -1;
-            Point pt = panel.PointToClient(new Point(e.X + 1, e.Y + 1));
-            for (int i = 0; i < panel.Controls.Count; i++)
-            {
-                ((PresentationClasses.WallBin.FolderBoxControl)panel.Controls[i]).UnderlineBox = false;
-                if (panel.Controls[i].Top <= pt.Y && panel.Controls[i].Bottom >= pt.Y)
-                    orderInColumn = i;
-            }
-            if (orderInColumn == -1)
-                orderInColumn = panel.Controls.Count;
+		private void ColumnDragLeave(object sender, EventArgs e)
+		{
+			_scrooTimer.Stop();
+			((ColumnPanel)sender).DropHintLineHeight = -1;
+			foreach (Control control in ((ColumnPanel)sender).Controls)
+				((FolderBoxControl)control).UnderlineBox = false;
+			((ColumnPanel)sender).Refresh();
+		}
 
-            if (e.Data.GetDataPresent(DataFormats.Serializable, true))
-            {
-                var data = e.Data.GetData(DataFormats.Serializable, true);
-                if (data.GetType() == typeof(PresentationClasses.WallBin.FolderBoxControl))
-                {
-                    PresentationClasses.WallBin.FolderBoxControl box = (PresentationClasses.WallBin.FolderBoxControl)data;
-                    box.Column = panel.Order;
-                    box.RowOrder = orderInColumn - 0.5;
-                    this.ReorderBoxes();
-                    this.LinkBoxesToColumns();
-                    this.FitObjectsToPage();
-                    panel.Refresh();
-                    this.Parent.StateChanged = true;
-                }
-            }
-        }
+		public void ColumnDragDrop(object sender, DragEventArgs e)
+		{
+			_scrooTimer.Stop();
+			double orderInColumn = -1;
+			var panel = (ColumnPanel)sender;
+			panel.DropHintLineHeight = -1;
+			Point pt = panel.PointToClient(new Point(e.X + 1, e.Y + 1));
+			for (int i = 0; i < panel.Controls.Count; i++)
+			{
+				((FolderBoxControl)panel.Controls[i]).UnderlineBox = false;
+				if (panel.Controls[i].Top <= pt.Y && panel.Controls[i].Bottom >= pt.Y)
+					orderInColumn = i;
+			}
+			if (orderInColumn == -1)
+				orderInColumn = panel.Controls.Count;
 
-        private void scrooTimer_Tick(object sender, EventArgs e)
-        {
-            if (_scroolDown)
-            {
-                if (this.Container.VerticalScroll.Value < this.Container.VerticalScroll.Maximum - 10)
-                    this.Container.VerticalScroll.Value += 10;
-                else
-                    this.Container.VerticalScroll.Value = this.Container.VerticalScroll.Maximum;
-            }
-            else
-            {
-                if (this.Container.VerticalScroll.Value > this.Container.VerticalScroll.Minimum + 10)
-                    this.Container.VerticalScroll.Value -= 10;
-                else
-                    this.Container.VerticalScroll.Value = this.Container.VerticalScroll.Minimum;
-            }
-        }
-        #endregion
-    }
+			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
+			{
+				object data = e.Data.GetData(DataFormats.Serializable, true);
+				if (data.GetType() == typeof(FolderBoxControl))
+				{
+					var box = (FolderBoxControl)data;
+					box.Column = panel.Order;
+					box.RowOrder = orderInColumn - 0.5;
+					ReorderBoxes();
+					LinkBoxesToColumns();
+					FitObjectsToPage();
+					panel.Refresh();
+					Parent.StateChanged = true;
+				}
+			}
+		}
+
+		private void scrooTimer_Tick(object sender, EventArgs e)
+		{
+			if (_scroolDown)
+			{
+				if (_container.VerticalScroll.Value < _container.VerticalScroll.Maximum - 10)
+					_container.VerticalScroll.Value += 10;
+				else
+					_container.VerticalScroll.Value = _container.VerticalScroll.Maximum;
+			}
+			else
+			{
+				if (_container.VerticalScroll.Value > _container.VerticalScroll.Minimum + 10)
+					_container.VerticalScroll.Value -= 10;
+				else
+					_container.VerticalScroll.Value = _container.VerticalScroll.Minimum;
+			}
+		}
+		#endregion
+
+		#region Multi-select Stuff
+		public List<LibraryFile> SelectedLinks { get; private set; }
+		public event EventHandler<SelectionChangedEventArgs> SelectionChanged;
+
+		public void ClearSelection()
+		{
+			if (SelectedLinks.Count <= 0) return;
+			SelectedLinks.Clear();
+			if (SelectionChanged != null)
+				SelectionChanged(this, new SelectionChangedEventArgs(Guid.Empty));
+			MainController.Instance.WallbinController.UpdateTagsEditor();
+		}
+
+		public bool IsLinkSelected(LibraryFile link)
+		{
+			return SelectedLinks.Contains(link);
+		}
+
+		public void SelectLink(Guid folderId, LibraryFile[] links, Keys modifierKeys)
+		{
+			var ctrlSelect = (modifierKeys & Keys.Control) == Keys.Control;
+			SelectedLinks.RemoveAll(x => x.Parent.Identifier.Equals(folderId) || !ctrlSelect);
+			foreach (var link in links.Where(link => link.Type != FileTypes.LineBreak && !SelectedLinks.Contains(link)))
+				SelectedLinks.Add(link);
+			if (SelectionChanged != null)
+				SelectionChanged(this, new SelectionChangedEventArgs(folderId));
+			MainController.Instance.WallbinController.UpdateTagsEditor();
+		}
+
+		public void RefreshSelectedLinks()
+		{
+			foreach (var box in _boxes.Where(x => SelectedLinks.Select(link => link.Parent.Identifier.ToString()).Contains(x.Folder.Identifier.ToString())))
+				box.Refresh();
+		}
+		#endregion
+	}
+
+	public class SelectionChangedEventArgs : EventArgs
+	{
+		public Guid SourceFolderId { get; private set; }
+
+		public SelectionChangedEventArgs(Guid sourceFolderId)
+		{
+			SourceFolderId = sourceFolderId;
+		}
+	}
 }
+

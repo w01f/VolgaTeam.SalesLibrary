@@ -42,7 +42,7 @@ namespace FileManager.ToolForms.IPad
 			}
 		}
 
-		#region Users
+		#region IPadUsers
 		private void buttonXUsersSelectAll_Click(object sender, EventArgs e)
 		{
 			foreach (var user in _users)

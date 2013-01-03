@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -7,6 +8,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class FileCard
 	{
+		public FileCard(ILibraryFile parent)
+		{
+			Parent = parent;
+			Identifier = Guid.NewGuid();
+			Notes = new List<string>();
+			Title = "Information about this file...";
+		}
+
 		public ILibraryFile Parent { get; private set; }
 		public Guid Identifier { get; set; }
 		public bool Enable { get; set; }
@@ -22,58 +31,66 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string SalesStation { get; set; }
 		public List<string> Notes { get; set; }
 
-		public FileCard(ILibraryFile parent)
-		{
-			this.Parent = parent;
-			this.Identifier = Guid.NewGuid();
-			this.Notes = new List<string>();
-			this.Title = "Information about this file...";
-		}
-
 		public FileCard Clone(ILibraryFile parent)
 		{
-			FileCard fileCard = new FileCard(parent);
-			fileCard.Enable = this.Enable;
-			fileCard.Title = this.Title;
-			fileCard.Advertiser = this.Advertiser;
-			fileCard.DateSold = this.DateSold;
-			fileCard.BroadcastClosed = this.BroadcastClosed;
-			fileCard.DigitalClosed = this.DigitalClosed;
-			fileCard.PublishingClosed = this.PublishingClosed;
-			fileCard.SalesName = this.SalesName;
-			fileCard.SalesEmail = this.SalesEmail;
-			fileCard.SalesPhone = this.SalesPhone;
-			fileCard.SalesStation = this.SalesStation;
-			fileCard.Notes.AddRange(this.Notes);
+			var fileCard = new FileCard(parent);
+			fileCard.Enable = Enable;
+			fileCard.Title = Title;
+			fileCard.Advertiser = Advertiser;
+			fileCard.DateSold = DateSold;
+			fileCard.BroadcastClosed = BroadcastClosed;
+			fileCard.DigitalClosed = DigitalClosed;
+			fileCard.PublishingClosed = PublishingClosed;
+			fileCard.SalesName = SalesName;
+			fileCard.SalesEmail = SalesEmail;
+			fileCard.SalesPhone = SalesPhone;
+			fileCard.SalesStation = SalesStation;
+			fileCard.Notes.AddRange(Notes);
 			return fileCard;
+		}
+
+		public bool Compare(FileCard anotherFileCard)
+		{
+			return anotherFileCard.Enable == Enable &&
+				anotherFileCard.Title == Title &&
+				anotherFileCard.Advertiser == Advertiser &&
+				anotherFileCard.DateSold == DateSold &&
+				anotherFileCard.BroadcastClosed == BroadcastClosed &&
+				anotherFileCard.DigitalClosed == DigitalClosed &&
+				anotherFileCard.PublishingClosed == PublishingClosed &&
+				anotherFileCard.SalesName == SalesName &&
+				anotherFileCard.SalesEmail == SalesEmail &&
+				anotherFileCard.SalesPhone == SalesPhone &&
+				anotherFileCard.SalesStation == SalesStation &&
+				anotherFileCard.Notes.All(x => Notes.Contains(x)) && Notes.Count == anotherFileCard.Notes.Count;
 		}
 
 		public string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-			result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
-			result.AppendLine(@"<Title>" + this.Title.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Title>");
-			if (!string.IsNullOrEmpty(this.Advertiser))
-				result.AppendLine(@"<Advertiser>" + this.Advertiser.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Advertiser>");
-			if (this.DateSold.HasValue)
-				result.AppendLine(@"<DateSold>" + this.DateSold.Value.ToString() + @"</DateSold>");
-			if (this.BroadcastClosed.HasValue)
-				result.AppendLine(@"<BroadcastClosed>" + this.BroadcastClosed.Value.ToString() + @"</BroadcastClosed>");
-			if (this.DigitalClosed.HasValue)
-				result.AppendLine(@"<DigitalClosed>" + this.DigitalClosed.Value.ToString() + @"</DigitalClosed>");
-			if (this.PublishingClosed.HasValue)
-				result.AppendLine(@"<PublishingClosed>" + this.PublishingClosed.Value.ToString() + @"</PublishingClosed>");
-			if (!string.IsNullOrEmpty(this.SalesName))
-				result.AppendLine(@"<SalesName>" + this.SalesName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesName>");
-			if (!string.IsNullOrEmpty(this.SalesEmail))
-				result.AppendLine(@"<SalesEmail>" + this.SalesEmail.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesEmail>");
-			if (!string.IsNullOrEmpty(this.SalesPhone))
-				result.AppendLine(@"<SalesPhone>" + this.SalesPhone.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesPhone>");
-			if (!string.IsNullOrEmpty(this.SalesStation))
-				result.AppendLine(@"<SalesStation>" + this.SalesStation.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesStation>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
+			result.AppendLine(@"<Enable>" + Enable.ToString() + @"</Enable>");
+			result.AppendLine(@"<Title>" + Title.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Title>");
+			if (!string.IsNullOrEmpty(Advertiser))
+				result.AppendLine(@"<Advertiser>" + Advertiser.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Advertiser>");
+			if (DateSold.HasValue)
+				result.AppendLine(@"<DateSold>" + DateSold.Value.ToString() + @"</DateSold>");
+			if (BroadcastClosed.HasValue)
+				result.AppendLine(@"<BroadcastClosed>" + BroadcastClosed.Value.ToString() + @"</BroadcastClosed>");
+			if (DigitalClosed.HasValue)
+				result.AppendLine(@"<DigitalClosed>" + DigitalClosed.Value.ToString() + @"</DigitalClosed>");
+			if (PublishingClosed.HasValue)
+				result.AppendLine(@"<PublishingClosed>" + PublishingClosed.Value.ToString() + @"</PublishingClosed>");
+			if (!string.IsNullOrEmpty(SalesName))
+				result.AppendLine(@"<SalesName>" + SalesName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesName>");
+			if (!string.IsNullOrEmpty(SalesEmail))
+				result.AppendLine(@"<SalesEmail>" + SalesEmail.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesEmail>");
+			if (!string.IsNullOrEmpty(SalesPhone))
+				result.AppendLine(@"<SalesPhone>" + SalesPhone.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesPhone>");
+			if (!string.IsNullOrEmpty(SalesStation))
+				result.AppendLine(@"<SalesStation>" + SalesStation.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</SalesStation>");
 			result.AppendLine(@"<Notes>");
-			foreach (string note in this.Notes)
+			foreach (string note in Notes)
 				result.AppendLine(@"<Note>" + note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
 			result.AppendLine(@"</Notes>");
 			return result.ToString();
@@ -81,59 +98,59 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void Deserialize(XmlNode node)
 		{
-			Guid tempGuid;
-			bool tempBool;
-			double tempDouble;
-			DateTime tempDate;
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
+				double tempDouble;
 				switch (childNode.Name)
 				{
 					case "Identifier":
+						Guid tempGuid;
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "Enable":
+						bool tempBool;
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Enable = tempBool;
+							Enable = tempBool;
 						break;
 					case "Title":
-						this.Title = childNode.InnerText;
+						Title = childNode.InnerText;
 						break;
 					case "Advertiser":
-						this.Advertiser = childNode.InnerText;
+						Advertiser = childNode.InnerText;
 						break;
 					case "DateSold":
+						DateTime tempDate;
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
-							this.DateSold = tempDate;
+							DateSold = tempDate;
 						break;
 					case "BroadcastClosed":
 						if (double.TryParse(childNode.InnerText, out tempDouble))
-							this.BroadcastClosed = tempDouble;
+							BroadcastClosed = tempDouble;
 						break;
 					case "DigitalClosed":
 						if (double.TryParse(childNode.InnerText, out tempDouble))
-							this.DigitalClosed = tempDouble;
+							DigitalClosed = tempDouble;
 						break;
 					case "PublishingClosed":
 						if (double.TryParse(childNode.InnerText, out tempDouble))
-							this.PublishingClosed = tempDouble;
+							PublishingClosed = tempDouble;
 						break;
 					case "SalesName":
-						this.SalesName = childNode.InnerText;
+						SalesName = childNode.InnerText;
 						break;
 					case "SalesEmail":
-						this.SalesEmail = childNode.InnerText;
+						SalesEmail = childNode.InnerText;
 						break;
 					case "SalesPhone":
-						this.SalesPhone = childNode.InnerText;
+						SalesPhone = childNode.InnerText;
 						break;
 					case "SalesStation":
-						this.SalesStation = childNode.InnerText;
+						SalesStation = childNode.InnerText;
 						break;
 					case "Notes":
 						foreach (XmlNode noteNode in childNode.ChildNodes)
-							this.Notes.Add(noteNode.InnerText);
+							Notes.Add(noteNode.InnerText);
 						break;
 				}
 			}

@@ -100,6 +100,10 @@
     <Compile Include="BusinessClasses\Library.cs" />
     <Compile Include="BusinessClasses\LibraryFile.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\ClipartController.cs" />
+    <Compile Include="Controllers\IPadContentController.cs" />
+    <Compile Include="Controllers\IPadUsersController.cs" />
     <Compile Include="PresentationClasses\IPad\IPadPermissionsManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,17 +116,56 @@
     <Compile Include="PresentationClasses\IPad\IPadContentManagerControl.Designer.cs">
       <DependentUpon>IPadContentManagerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\TabIPadUsersControl.cs">
+    <Compile Include="Controllers\WallbinController.cs" />
+    <Compile Include="PresentationClasses\Tags\CategoriesEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\TabIPadUsersControl.Designer.cs">
+    <Compile Include="PresentationClasses\Tags\CategoriesEditor.Designer.cs">
+      <DependentUpon>CategoriesEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\AttachmentsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\AttachmentsEditor.Designer.cs">
+      <DependentUpon>AttachmentsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\ITagsEditor.cs" />
+    <Compile Include="PresentationClasses\Tags\TagsCleaner.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\TagsCleaner.Designer.cs">
+      <DependentUpon>TagsCleaner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\FileCardsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\FileCardsEditor.Designer.cs">
+      <DependentUpon>FileCardsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\KeywordsEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\KeywordsEditor.Designer.cs">
+      <DependentUpon>KeywordsEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\Decorators\WallBinOptions.cs" />
+    <Compile Include="PresentationClasses\WallBin\RegularLibraryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\RegularLibraryControl.Designer.cs">
+      <DependentUpon>RegularLibraryControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\TabPages\TabIPadUsersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\TabPages\TabIPadUsersControl.Designer.cs">
       <DependentUpon>TabIPadUsersControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\TabIPadManagerControl.cs">
+    <Compile Include="PresentationClasses\TabPages\TabIPadContentControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\TabIPadManagerControl.Designer.cs">
-      <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\TabPages\TabIPadContentControl.Designer.cs">
+      <DependentUpon>TabIPadContentControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\PasswordHelper.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
@@ -186,7 +229,7 @@
     <Compile Include="ToolForms\WallBin\FormAddUrl.Designer.cs">
       <DependentUpon>FormAddUrl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="PresentationClasses\OvernightsCalendar\WeekDayHeaderControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -311,22 +354,22 @@
     <Compile Include="ToolForms\Settings\FormSync.Designer.cs">
       <DependentUpon>FormSync.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\TabOvernightsCalendarControl.cs">
+    <Compile Include="PresentationClasses\TabPages\TabOvernightsCalendarControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\TabOvernightsCalendarControl.Designer.cs">
+    <Compile Include="PresentationClasses\TabPages\TabOvernightsCalendarControl.Designer.cs">
       <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\TabClipartControl.cs">
+    <Compile Include="PresentationClasses\TabPages\TabClipartControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\TabClipartControl.Designer.cs">
+    <Compile Include="PresentationClasses\TabPages\TabClipartControl.Designer.cs">
       <DependentUpon>TabClipartControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="TabPages\TabHomeControl.cs">
+    <Compile Include="PresentationClasses\TabPages\TabHomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\TabHomeControl.Designer.cs">
+    <Compile Include="PresentationClasses\TabPages\TabHomeControl.Designer.cs">
       <DependentUpon>TabHomeControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormDeleteIncorrectLinks.cs">
@@ -399,11 +442,29 @@
       <DependentUpon>IPadContentManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TabIPadUsersControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Tags\CategoriesEditor.resx">
+      <DependentUpon>CategoriesEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Tags\AttachmentsEditor.resx">
+      <DependentUpon>AttachmentsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Tags\TagsCleaner.resx">
+      <DependentUpon>TagsCleaner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Tags\FileCardsEditor.resx">
+      <DependentUpon>FileCardsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Tags\KeywordsEditor.resx">
+      <DependentUpon>KeywordsEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\RegularLibraryControl.resx">
+      <DependentUpon>RegularLibraryControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\TabPages\TabIPadUsersControl.resx">
       <DependentUpon>TabIPadUsersControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TabIPadManagerControl.resx">
-      <DependentUpon>TabIPadManagerControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\TabPages\TabIPadContentControl.resx">
+      <DependentUpon>TabIPadContentControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
@@ -496,13 +557,13 @@
     <EmbeddedResource Include="ToolForms\Settings\FormSync.resx">
       <DependentUpon>FormSync.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TabOvernightsCalendarControl.resx">
+    <EmbeddedResource Include="PresentationClasses\TabPages\TabOvernightsCalendarControl.resx">
       <DependentUpon>TabOvernightsCalendarControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TabClipartControl.resx">
+    <EmbeddedResource Include="PresentationClasses\TabPages\TabClipartControl.resx">
       <DependentUpon>TabClipartControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TabPages\TabHomeControl.resx">
+    <EmbeddedResource Include="PresentationClasses\TabPages\TabHomeControl.resx">
       <DependentUpon>TabHomeControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormSelectWidget.resx">
@@ -557,6 +618,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\TagsCleanerWarning.png" />
+    <None Include="Resources\TagsWebAttachmentsWidget.png" />
+    <None Include="Resources\TagsKeywordsWidget.png" />
+    <None Include="Resources\TagsFileCardsWidget.png" />
+    <None Include="Resources\TagsFileAttachmentsWidget.png" />
+    <None Include="Resources\TagsCategoriesWidget.png" />
+    <None Include="Resources\TagsSave.png" />
+    <None Include="Resources\TagsClear.png" />
+    <None Include="Resources\TagsAttachments.png" />
+    <None Include="Resources\TagsFileCards.png" />
+    <None Include="Resources\TagsKeywords.png" />
+    <None Include="Resources\TagsCategories.png" />
     <None Include="Resources\RefreshUsers.png" />
     <None Include="Resources\DeleteUser.png" />
     <None Include="Resources\AddUser.png" />

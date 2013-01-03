@@ -3,32 +3,29 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.Utils;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Base;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraGrid.Views.Layout;
+using DevExpress.XtraGrid.Views.Layout.ViewInfo;
+using DevExpress.XtraNavBar;
+using FileManager.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ToolForms.WallBin
 {
 	public partial class FormLinkProperties : Form
 	{
+		private bool _closeEventAssigned;
+		private bool _isBold;
 		private string _note = string.Empty;
-		private bool _isBold = false;
-		private bool _closeEventAssigned = false;
-
-		public bool IsLineBreak { get; set; }
-
-		public DateTime AddDate { get; set; }
-		public LibraryFileSearchTags SearchTags { get; set; }
-		public List<StringDataSourceWrapper> Keywords { get; private set; }
-		public ExpirationDateOptions ExpirationDateOptions { get; set; }
-		public LineBreakProperties LineBreakProperties { get; set; }
-		public BannerProperties BannerProperties { get; set; }
-		public AttachmentProperties AttachmentProperties { get; set; }
-		public bool EnableWidget { get; set; }
-		public Image Widget { get; set; }
-		public FileCard FileCard { get; set; }
-		public List<StringDataSourceWrapper> FileCardImportantInfo { get; private set; }
-
 
 		public FormLinkProperties()
 		{
@@ -36,7 +33,7 @@ namespace FileManager.ToolForms.WallBin
 
 			if ((base.CreateGraphics()).DpiX > 96)
 			{
-				Font styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
+				var styleControllerFont = new Font(styleController.Appearance.Font.FontFamily, styleController.Appearance.Font.Size - 2, styleController.Appearance.Font.Style);
 				styleController.AppearanceDisabled.Font = styleControllerFont;
 				styleController.AppearanceDropDown.Font = styleControllerFont;
 				styleController.AppearanceDropDownHeader.Font = styleControllerFont;
@@ -85,131 +82,141 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxFileCardImportantInfo.Font = new Font(checkBoxFileCardImportantInfo.Font.FontFamily, checkBoxFileCardImportantInfo.Font.Size - 2, checkBoxFileCardImportantInfo.Font.Style);
 				buttonXFileCardImportantInfoAdd.Font = new Font(buttonXFileCardImportantInfoAdd.Font.FontFamily, buttonXFileCardImportantInfoAdd.Font.Size - 2, buttonXFileCardImportantInfoAdd.Font.Style);
 
-				repositoryItemButtonEditKeyword.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				repositoryItemButtonEditKeyword.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemButtonEditKeyword.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemButtonEditAttachmentsFiles.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				repositoryItemButtonEditAttachmentsFiles.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemButtonEditAttachmentsFiles.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemButtonEditAttachmentsWeb.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				repositoryItemButtonEditAttachmentsWeb.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemButtonEditAttachmentsWeb.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+				repositoryItemButtonEditKeyword.Enter += FormMain.Instance.EditorEnter;
+				repositoryItemButtonEditKeyword.MouseUp += FormMain.Instance.EditorMouseUp;
+				repositoryItemButtonEditKeyword.MouseDown += FormMain.Instance.EditorMouseUp;
+				repositoryItemButtonEditAttachmentsFiles.Enter += FormMain.Instance.EditorEnter;
+				repositoryItemButtonEditAttachmentsFiles.MouseUp += FormMain.Instance.EditorMouseUp;
+				repositoryItemButtonEditAttachmentsFiles.MouseDown += FormMain.Instance.EditorMouseUp;
+				repositoryItemButtonEditAttachmentsWeb.Enter += FormMain.Instance.EditorEnter;
+				repositoryItemButtonEditAttachmentsWeb.MouseUp += FormMain.Instance.EditorMouseUp;
+				repositoryItemButtonEditAttachmentsWeb.MouseDown += FormMain.Instance.EditorMouseUp;
 
-				textEditFileCardAdvertiser.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				textEditFileCardAdvertiser.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardAdvertiser.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				dateEditFileCardDateSold.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				dateEditFileCardDateSold.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				dateEditFileCardDateSold.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				spinEditFileCardBroadcastClosed.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				spinEditFileCardBroadcastClosed.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				spinEditFileCardBroadcastClosed.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				spinEditFileCardDigitalClosed.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				spinEditFileCardDigitalClosed.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				spinEditFileCardDigitalClosed.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				spinEditFileCardPublishingClosed.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				spinEditFileCardPublishingClosed.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				spinEditFileCardPublishingClosed.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesName.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				textEditFileCardSalesName.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesName.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesEmail.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				textEditFileCardSalesEmail.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesEmail.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesPhone.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				textEditFileCardSalesPhone.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesPhone.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesStation.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				textEditFileCardSalesStation.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				textEditFileCardSalesStation.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemMemoEditFileCardImportantInfo.Enter += new EventHandler(FormMain.Instance.Editor_Enter);
-				repositoryItemMemoEditFileCardImportantInfo.MouseUp += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
-				repositoryItemMemoEditFileCardImportantInfo.MouseDown += new MouseEventHandler(FormMain.Instance.Editor_MouseUp);
+				textEditFileCardAdvertiser.Enter += FormMain.Instance.EditorEnter;
+				textEditFileCardAdvertiser.MouseUp += FormMain.Instance.EditorMouseUp;
+				textEditFileCardAdvertiser.MouseDown += FormMain.Instance.EditorMouseUp;
+				dateEditFileCardDateSold.Enter += FormMain.Instance.EditorEnter;
+				dateEditFileCardDateSold.MouseUp += FormMain.Instance.EditorMouseUp;
+				dateEditFileCardDateSold.MouseDown += FormMain.Instance.EditorMouseUp;
+				spinEditFileCardBroadcastClosed.Enter += FormMain.Instance.EditorEnter;
+				spinEditFileCardBroadcastClosed.MouseUp += FormMain.Instance.EditorMouseUp;
+				spinEditFileCardBroadcastClosed.MouseDown += FormMain.Instance.EditorMouseUp;
+				spinEditFileCardDigitalClosed.Enter += FormMain.Instance.EditorEnter;
+				spinEditFileCardDigitalClosed.MouseUp += FormMain.Instance.EditorMouseUp;
+				spinEditFileCardDigitalClosed.MouseDown += FormMain.Instance.EditorMouseUp;
+				spinEditFileCardPublishingClosed.Enter += FormMain.Instance.EditorEnter;
+				spinEditFileCardPublishingClosed.MouseUp += FormMain.Instance.EditorMouseUp;
+				spinEditFileCardPublishingClosed.MouseDown += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesName.Enter += FormMain.Instance.EditorEnter;
+				textEditFileCardSalesName.MouseUp += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesName.MouseDown += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesEmail.Enter += FormMain.Instance.EditorEnter;
+				textEditFileCardSalesEmail.MouseUp += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesEmail.MouseDown += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesPhone.Enter += FormMain.Instance.EditorEnter;
+				textEditFileCardSalesPhone.MouseUp += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesPhone.MouseDown += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesStation.Enter += FormMain.Instance.EditorEnter;
+				textEditFileCardSalesStation.MouseUp += FormMain.Instance.EditorMouseUp;
+				textEditFileCardSalesStation.MouseDown += FormMain.Instance.EditorMouseUp;
+				repositoryItemMemoEditFileCardImportantInfo.Enter += FormMain.Instance.EditorEnter;
+				repositoryItemMemoEditFileCardImportantInfo.MouseUp += FormMain.Instance.EditorMouseUp;
+				repositoryItemMemoEditFileCardImportantInfo.MouseDown += FormMain.Instance.EditorMouseUp;
 			}
 
-			if (!this.IsLineBreak)
+			if (!IsLineBreak)
 			{
-				this.SearchTags = new LibraryFileSearchTags();
-				this.ExpirationDateOptions = new ExpirationDateOptions();
+				SearchTags = new LibraryFileSearchTags();
+				ExpirationDateOptions = new ExpirationDateOptions();
 				dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
 
 				#region Search tags
+
 				#region Categories
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 0)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 0)
 				{
-					navBarGroup1.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Name;
-					checkedListBoxControlGroup1.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[0].Tags.ToArray());
+					navBarGroup1.Caption = ListManager.Instance.SearchTags.SearchGroups[0].Name;
+					checkedListBoxControlGroup1.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[0].Tags.ToArray());
 				}
 				else
 					navBarGroup1.Visible = false;
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 1)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 1)
 				{
-					navBarGroup2.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Name;
-					checkedListBoxControlGroup2.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[1].Tags.ToArray());
+					navBarGroup2.Caption = ListManager.Instance.SearchTags.SearchGroups[1].Name;
+					checkedListBoxControlGroup2.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[1].Tags.ToArray());
 				}
 				else
 					navBarGroup2.Visible = false;
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 2)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 2)
 				{
-					navBarGroup3.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Name;
-					checkedListBoxControlGroup3.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[2].Tags.ToArray());
+					navBarGroup3.Caption = ListManager.Instance.SearchTags.SearchGroups[2].Name;
+					checkedListBoxControlGroup3.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[2].Tags.ToArray());
 				}
 				else
 					navBarGroup3.Visible = false;
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 3)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 3)
 				{
-					navBarGroup4.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Name;
-					checkedListBoxControlGroup4.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[3].Tags.ToArray());
+					navBarGroup4.Caption = ListManager.Instance.SearchTags.SearchGroups[3].Name;
+					checkedListBoxControlGroup4.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[3].Tags.ToArray());
 				}
 				else
 					navBarGroup4.Visible = false;
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 4)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 4)
 				{
-					navBarGroup5.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Name;
-					checkedListBoxControlGroup5.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[4].Tags.ToArray());
+					navBarGroup5.Caption = ListManager.Instance.SearchTags.SearchGroups[4].Name;
+					checkedListBoxControlGroup5.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[4].Tags.ToArray());
 				}
 				else
 					navBarGroup5.Visible = false;
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 5)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 5)
 				{
-					navBarGroup6.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Name;
-					checkedListBoxControlGroup6.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[5].Tags.ToArray());
+					navBarGroup6.Caption = ListManager.Instance.SearchTags.SearchGroups[5].Name;
+					checkedListBoxControlGroup6.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[5].Tags.ToArray());
 				}
 				else
 					navBarGroup6.Visible = false;
-				if (ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups.Count > 6)
+				if (ListManager.Instance.SearchTags.SearchGroups.Count > 6)
 				{
-					navBarGroup7.Caption = ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Name;
-					checkedListBoxControlGroup7.Items.AddRange(ConfigurationClasses.ListManager.Instance.SearchTags.SearchGroups[6].Tags.ToArray());
+					navBarGroup7.Caption = ListManager.Instance.SearchTags.SearchGroups[6].Name;
+					checkedListBoxControlGroup7.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[6].Tags.ToArray());
 				}
 				else
 					navBarGroup7.Visible = false;
 				#endregion
 
-				this.Keywords = new List<StringDataSourceWrapper>();
+				Keywords = new List<StringDataSourceWrapper>();
 				#endregion
 
-				this.FileCardImportantInfo = new List<StringDataSourceWrapper>();
+				FileCardImportantInfo = new List<StringDataSourceWrapper>();
 			}
 
-			gridControlWidgets.DataSource = new BindingList<ConfigurationClasses.Widget>(ConfigurationClasses.ListManager.Instance.Widgets);
-			gridControlBanners.DataSource = new BindingList<ConfigurationClasses.Banner>(ConfigurationClasses.ListManager.Instance.Banners);
+			gridControlWidgets.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
+			gridControlBanners.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
 		}
+
+		public bool IsLineBreak { get; set; }
+
+		public DateTime AddDate { get; set; }
+		public LibraryFileSearchTags SearchTags { get; set; }
+		public List<StringDataSourceWrapper> Keywords { get; private set; }
+		public ExpirationDateOptions ExpirationDateOptions { get; set; }
+		public LineBreakProperties LineBreakProperties { get; set; }
+		public BannerProperties BannerProperties { get; set; }
+		public AttachmentProperties AttachmentProperties { get; set; }
+		public bool EnableWidget { get; set; }
+		public Image Widget { get; set; }
+		public FileCard FileCard { get; set; }
+		public List<StringDataSourceWrapper> FileCardImportantInfo { get; private set; }
+
 
 		public string CaptionName
 		{
-			set
-			{
-				this.Text = value;
-			}
+			set { Text = value; }
 		}
 
 		public string Note
 		{
-			get
-			{
-				return _note;
-			}
+			get { return _note; }
 			set
 			{
 				_note = value;
@@ -233,10 +240,7 @@ namespace FileManager.ToolForms.WallBin
 
 		public bool IsBold
 		{
-			get
-			{
-				return _isBold;
-			}
+			get { return _isBold; }
 			set
 			{
 				_isBold = value;
@@ -266,20 +270,20 @@ namespace FileManager.ToolForms.WallBin
 				&& controlType != typeof(RadioButton)
 				&& controlType != typeof(TextBox)
 				&& controlType != typeof(DataGridView)
-				&& controlType != typeof(DevExpress.XtraGrid.GridControl)
-				&& controlType != typeof(DevExpress.XtraEditors.ButtonEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.CheckEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.CheckedListBoxControl)
-				&& controlType != typeof(DevExpress.XtraEditors.ColorEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.ComboBoxEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.DateEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.TimeEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.MemoEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.SpinEdit)
-				&& controlType != typeof(DevExpress.XtraEditors.TextEdit)
-				&& controlType != typeof(DevExpress.XtraNavBar.NavBarControl))
+				&& controlType != typeof(GridControl)
+				&& controlType != typeof(ButtonEdit)
+				&& controlType != typeof(CheckEdit)
+				&& controlType != typeof(CheckedListBoxControl)
+				&& controlType != typeof(ColorEdit)
+				&& controlType != typeof(ComboBoxEdit)
+				&& controlType != typeof(DateEdit)
+				&& controlType != typeof(TimeEdit)
+				&& controlType != typeof(MemoEdit)
+				&& controlType != typeof(SpinEdit)
+				&& controlType != typeof(TextEdit)
+				&& controlType != typeof(NavBarControl))
 			{
-				control.Click += new EventHandler(CloseActiveEditorsonOutSideClick);
+				control.Click += CloseActiveEditorsonOutSideClick;
 				foreach (Control childControl in control.Controls)
 				{
 					Application.DoEvents();
@@ -290,76 +294,77 @@ namespace FileManager.ToolForms.WallBin
 
 		private void FormProperties_Load(object sender, EventArgs e)
 		{
-			xtraTabPageExpiredLinks.PageVisible = !this.IsLineBreak;
-			xtraTabPageNotes.PageVisible = !this.IsLineBreak;
-			xtraTabPageSearchTags.PageVisible = !this.IsLineBreak;
-			xtraTabPageAttachments.PageVisible = !this.IsLineBreak;
-			xtraTabPageLineBrealProperties.PageVisible = this.IsLineBreak;
-			if (!this.IsLineBreak)
+			xtraTabPageExpiredLinks.PageVisible = !IsLineBreak;
+			xtraTabPageNotes.PageVisible = !IsLineBreak;
+			xtraTabPageSearchTags.PageVisible = !IsLineBreak;
+			xtraTabPageAttachments.PageVisible = !IsLineBreak;
+			xtraTabPageLineBrealProperties.PageVisible = IsLineBreak;
+			if (!IsLineBreak)
 			{
 				#region Search tags
+
 				#region Categories
 				if (navBarGroup1.Visible)
 				{
 					checkedListBoxControlGroup1.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup1.Caption)).FirstOrDefault();
+					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup1.Caption)).FirstOrDefault();
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				if (navBarGroup2.Visible)
 				{
 					checkedListBoxControlGroup2.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup2.Caption)).FirstOrDefault();
+					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup2.Caption)).FirstOrDefault();
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				if (navBarGroup3.Visible)
 				{
 					checkedListBoxControlGroup3.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup3.Caption)).FirstOrDefault();
+					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup3.Caption)).FirstOrDefault();
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				if (navBarGroup4.Visible)
 				{
 					checkedListBoxControlGroup4.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup4.Caption)).FirstOrDefault();
+					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup4.Caption)).FirstOrDefault();
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				if (navBarGroup5.Visible)
 				{
 					checkedListBoxControlGroup5.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup5.Caption)).FirstOrDefault();
+					SearchGroup group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(navBarGroup5.Caption));
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				if (navBarGroup6.Visible)
 				{
 					checkedListBoxControlGroup6.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup6.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup6.Caption)).FirstOrDefault();
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				if (navBarGroup7.Visible)
 				{
 					checkedListBoxControlGroup7.UnCheckAll();
-					SearchGroup group = this.SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup7.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup7.Caption)).FirstOrDefault();
 					if (group != null)
-						foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
-							if (group.Tags.Contains(item.Value.ToString()))
+						foreach (CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
+							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
 								item.CheckState = CheckState.Checked;
 				}
 				#endregion
@@ -367,65 +372,66 @@ namespace FileManager.ToolForms.WallBin
 				#region Keywords
 				UpdateKeywordsDataSource();
 				#endregion
+
 				#endregion
 
 				#region Expiration date
-				laAddDateValue.Text = this.AddDate.ToString("M/dd/yyyy h:mm:ss tt");
-				dateEditExpirationDate.DateTime = this.ExpirationDateOptions.ExpirationDate;
-				timeEditExpirationTime.Time = this.ExpirationDateOptions.ExpirationDate;
-				checkBoxSendEmailWhenDelete.Checked = this.ExpirationDateOptions.SendEmailWhenSync;
-				checkBoxLabelLink.Checked = this.ExpirationDateOptions.LabelLinkWhenExpired;
-				checkBoxEnableExpiredLinks.Checked = this.ExpirationDateOptions.EnableExpirationDate;
+				laAddDateValue.Text = AddDate.ToString("M/dd/yyyy h:mm:ss tt");
+				dateEditExpirationDate.DateTime = ExpirationDateOptions.ExpirationDate;
+				timeEditExpirationTime.Time = ExpirationDateOptions.ExpirationDate;
+				checkBoxSendEmailWhenDelete.Checked = ExpirationDateOptions.SendEmailWhenSync;
+				checkBoxLabelLink.Checked = ExpirationDateOptions.LabelLinkWhenExpired;
+				checkBoxEnableExpiredLinks.Checked = ExpirationDateOptions.EnableExpirationDate;
 				#endregion
 
 				#region File Card
-				checkBoxEnableFileCard.Checked = this.FileCard.Enable;
-				textEditFileCardTitle.EditValue = this.FileCard.Title;
-				checkBoxFileCardAdvertiser.Checked = !string.IsNullOrEmpty(this.FileCard.Advertiser);
-				textEditFileCardAdvertiser.EditValue = this.FileCard.Advertiser;
-				checkBoxFileCardDateSold.Checked = this.FileCard.DateSold.HasValue;
-				dateEditFileCardDateSold.EditValue = this.FileCard.DateSold;
-				checkBoxFileCardBroadcastClosed.Checked = this.FileCard.BroadcastClosed.HasValue;
-				spinEditFileCardBroadcastClosed.EditValue = this.FileCard.BroadcastClosed;
-				checkBoxFileCardDigitalClosed.Checked = this.FileCard.DigitalClosed.HasValue;
-				spinEditFileCardDigitalClosed.EditValue = this.FileCard.DigitalClosed;
-				checkBoxFileCardPublishingClosed.Checked = this.FileCard.PublishingClosed.HasValue;
-				spinEditFileCardPublishingClosed.EditValue = this.FileCard.PublishingClosed;
-				checkBoxFileCardSalesInfo.Checked = !string.IsNullOrEmpty(this.FileCard.SalesName) || !string.IsNullOrEmpty(this.FileCard.SalesEmail) || !string.IsNullOrEmpty(this.FileCard.SalesPhone) || !string.IsNullOrEmpty(this.FileCard.SalesStation);
-				textEditFileCardSalesName.EditValue = this.FileCard.SalesName;
-				textEditFileCardSalesEmail.EditValue = this.FileCard.SalesEmail;
-				textEditFileCardSalesPhone.EditValue = this.FileCard.SalesPhone;
-				textEditFileCardSalesStation.EditValue = this.FileCard.SalesStation;
+				checkBoxEnableFileCard.Checked = FileCard.Enable;
+				textEditFileCardTitle.EditValue = FileCard.Title;
+				checkBoxFileCardAdvertiser.Checked = !string.IsNullOrEmpty(FileCard.Advertiser);
+				textEditFileCardAdvertiser.EditValue = FileCard.Advertiser;
+				checkBoxFileCardDateSold.Checked = FileCard.DateSold.HasValue;
+				dateEditFileCardDateSold.EditValue = FileCard.DateSold;
+				checkBoxFileCardBroadcastClosed.Checked = FileCard.BroadcastClosed.HasValue;
+				spinEditFileCardBroadcastClosed.EditValue = FileCard.BroadcastClosed;
+				checkBoxFileCardDigitalClosed.Checked = FileCard.DigitalClosed.HasValue;
+				spinEditFileCardDigitalClosed.EditValue = FileCard.DigitalClosed;
+				checkBoxFileCardPublishingClosed.Checked = FileCard.PublishingClosed.HasValue;
+				spinEditFileCardPublishingClosed.EditValue = FileCard.PublishingClosed;
+				checkBoxFileCardSalesInfo.Checked = !string.IsNullOrEmpty(FileCard.SalesName) || !string.IsNullOrEmpty(FileCard.SalesEmail) || !string.IsNullOrEmpty(FileCard.SalesPhone) || !string.IsNullOrEmpty(FileCard.SalesStation);
+				textEditFileCardSalesName.EditValue = FileCard.SalesName;
+				textEditFileCardSalesEmail.EditValue = FileCard.SalesEmail;
+				textEditFileCardSalesPhone.EditValue = FileCard.SalesPhone;
+				textEditFileCardSalesStation.EditValue = FileCard.SalesStation;
 
-				checkBoxFileCardImportantInfo.Checked = this.FileCardImportantInfo.Count > 0;
-				gridControlFileCardImportantInfo.DataSource = this.FileCardImportantInfo;
+				checkBoxFileCardImportantInfo.Checked = FileCardImportantInfo.Count > 0;
+				gridControlFileCardImportantInfo.DataSource = FileCardImportantInfo;
 				gridViewFileCardImportantInfo.RefreshData();
 				#endregion
 
 				#region Attachments
-				checkBoxEnableAttachmnets.Checked = this.AttachmentProperties.Enable;
-				gridControlAttachmentsFiles.DataSource = this.AttachmentProperties.FilesAttachments;
-				gridControlAttachmentsWeb.DataSource = this.AttachmentProperties.WebAttachments;
+				checkBoxEnableAttachmnets.Checked = AttachmentProperties.Enable;
+				gridControlAttachmentsFiles.DataSource = AttachmentProperties.FilesAttachments;
+				gridControlAttachmentsWeb.DataSource = AttachmentProperties.WebAttachments;
 				#endregion
 			}
 			else
 			{
 				#region Linebreak properties
-				buttonEditLineBreakFont.Tag = this.LineBreakProperties.Font;
-				buttonEditLineBreakFont.EditValue = FontToString(this.LineBreakProperties.Font);
-				colorEditLineBreakFontColor.Color = this.LineBreakProperties.ForeColor;
-				memoEditNote.EditValue = this.LineBreakProperties.Note;
+				buttonEditLineBreakFont.Tag = LineBreakProperties.Font;
+				buttonEditLineBreakFont.EditValue = FontToString(LineBreakProperties.Font);
+				colorEditLineBreakFontColor.Color = LineBreakProperties.ForeColor;
+				memoEditNote.EditValue = LineBreakProperties.Note;
 				#endregion
 			}
 
-			pbSelectedWidget.Image = this.EnableWidget ? this.Widget : null;
-			checkBoxEnableWidget.Checked = this.EnableWidget;
+			pbSelectedWidget.Image = EnableWidget ? Widget : null;
+			checkBoxEnableWidget.Checked = EnableWidget;
 
 			#region Banner properties
-			xtraTabPageBanner.PageEnabled = System.IO.Directory.Exists(ConfigurationClasses.ListManager.Instance.BannerFolder);
-			checkBoxEnableBanner.Checked = this.BannerProperties.Enable;
-			pbSelectedBanner.Image = this.BannerProperties.Enable ? this.BannerProperties.Image : null;
-			switch (this.BannerProperties.ImageAlignement)
+			xtraTabPageBanner.PageEnabled = Directory.Exists(ListManager.Instance.BannerFolder);
+			checkBoxEnableBanner.Checked = BannerProperties.Enable;
+			pbSelectedBanner.Image = BannerProperties.Enable ? BannerProperties.Image : null;
+			switch (BannerProperties.ImageAlignement)
 			{
 				case Alignment.Left:
 					rbBannerAligmentLeft.Checked = true;
@@ -443,17 +449,17 @@ namespace FileManager.ToolForms.WallBin
 					rbBannerAligmentRight.Checked = true;
 					break;
 			}
-			checkBoxBannerShowText.Checked = this.BannerProperties.ShowText;
-			buttonEditBannerTextFont.Tag = this.BannerProperties.Font;
-			buttonEditBannerTextFont.EditValue = FontToString(this.BannerProperties.Font);
-			colorEditBannerTextColor.Color = this.BannerProperties.ForeColor;
-			memoEditBannerText.EditValue = this.BannerProperties.Text;
-			memoEditBannerText.Font = this.BannerProperties.Font;
-			memoEditBannerText.Properties.Appearance.Font = this.BannerProperties.Font;
-			memoEditBannerText.Properties.AppearanceDisabled.Font = this.BannerProperties.Font;
-			memoEditBannerText.Properties.AppearanceFocused.Font = this.BannerProperties.Font;
-			memoEditBannerText.Properties.AppearanceReadOnly.Font = this.BannerProperties.Font;
-			memoEditBannerText.ForeColor = this.BannerProperties.ForeColor;
+			checkBoxBannerShowText.Checked = BannerProperties.ShowText;
+			buttonEditBannerTextFont.Tag = BannerProperties.Font;
+			buttonEditBannerTextFont.EditValue = FontToString(BannerProperties.Font);
+			colorEditBannerTextColor.Color = BannerProperties.ForeColor;
+			memoEditBannerText.EditValue = BannerProperties.Text;
+			memoEditBannerText.Font = BannerProperties.Font;
+			memoEditBannerText.Properties.Appearance.Font = BannerProperties.Font;
+			memoEditBannerText.Properties.AppearanceDisabled.Font = BannerProperties.Font;
+			memoEditBannerText.Properties.AppearanceFocused.Font = BannerProperties.Font;
+			memoEditBannerText.Properties.AppearanceReadOnly.Font = BannerProperties.Font;
+			memoEditBannerText.ForeColor = BannerProperties.ForeColor;
 			#endregion
 
 			if (!_closeEventAssigned)
@@ -465,7 +471,7 @@ namespace FileManager.ToolForms.WallBin
 
 		private void btOK_Click(object sender, EventArgs e)
 		{
-			if (!this.IsLineBreak)
+			if (!IsLineBreak)
 			{
 				if (rbNew.Checked)
 					_note = rbNew.Text;
@@ -483,135 +489,137 @@ namespace FileManager.ToolForms.WallBin
 				_isBold = rbBold.Checked;
 
 				#region Search tags
+
 				#region Categories
-				this.SearchTags.SearchGroups.Clear();
+				SearchTags.SearchGroups.Clear();
 				if (checkedListBoxControlGroup1.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup1.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				if (checkedListBoxControlGroup2.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup2.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				if (checkedListBoxControlGroup3.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup3.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				if (checkedListBoxControlGroup4.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup4.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				if (checkedListBoxControlGroup5.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup5.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				if (checkedListBoxControlGroup6.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup6.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				if (checkedListBoxControlGroup7.CheckedItemsCount > 0)
 				{
-					SearchGroup group = new SearchGroup();
+					var group = new SearchGroup();
 					group.Name = navBarGroup7.Caption;
-					foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
+					foreach (CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
 						if (item.CheckState == CheckState.Checked)
-							group.Tags.Add(item.Value.ToString());
-					this.SearchTags.SearchGroups.Add(group);
+							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
+					SearchTags.SearchGroups.Add(group);
 				}
 				#endregion
+
 				#endregion
 
 				#region Expiration date
-				this.ExpirationDateOptions.ExpirationDate = new DateTime(dateEditExpirationDate.DateTime.Year, dateEditExpirationDate.DateTime.Month, dateEditExpirationDate.DateTime.Day, timeEditExpirationTime.Time.Hour, timeEditExpirationTime.Time.Minute, timeEditExpirationTime.Time.Second);
-				this.ExpirationDateOptions.SendEmailWhenSync = checkBoxSendEmailWhenDelete.Checked;
-				this.ExpirationDateOptions.LabelLinkWhenExpired = checkBoxLabelLink.Checked;
-				this.ExpirationDateOptions.EnableExpirationDate = checkBoxEnableExpiredLinks.Checked;
+				ExpirationDateOptions.ExpirationDate = new DateTime(dateEditExpirationDate.DateTime.Year, dateEditExpirationDate.DateTime.Month, dateEditExpirationDate.DateTime.Day, timeEditExpirationTime.Time.Hour, timeEditExpirationTime.Time.Minute, timeEditExpirationTime.Time.Second);
+				ExpirationDateOptions.SendEmailWhenSync = checkBoxSendEmailWhenDelete.Checked;
+				ExpirationDateOptions.LabelLinkWhenExpired = checkBoxLabelLink.Checked;
+				ExpirationDateOptions.EnableExpirationDate = checkBoxEnableExpiredLinks.Checked;
 				#endregion
 
 				#region File Card
-				this.FileCard.Enable = checkBoxEnableFileCard.Checked;
-				this.FileCard.Title = textEditFileCardTitle.EditValue != null ? textEditFileCardTitle.EditValue.ToString() : string.Empty;
-				this.FileCard.Advertiser = this.FileCard.Enable && checkBoxFileCardAdvertiser.Checked && textEditFileCardAdvertiser.EditValue != null ? textEditFileCardAdvertiser.EditValue.ToString() : null;
-				this.FileCard.DateSold = this.FileCard.Enable && checkBoxFileCardDateSold.Checked && dateEditFileCardDateSold.EditValue != null ? (DateTime?)dateEditFileCardDateSold.DateTime : null;
-				this.FileCard.BroadcastClosed = this.FileCard.Enable && checkBoxFileCardBroadcastClosed.Checked && spinEditFileCardBroadcastClosed.EditValue != null ? (double?)spinEditFileCardBroadcastClosed.Value : null;
-				this.FileCard.DigitalClosed = this.FileCard.Enable && checkBoxFileCardDigitalClosed.Checked && spinEditFileCardDigitalClosed.EditValue != null ? (double?)spinEditFileCardDigitalClosed.Value : null;
-				this.FileCard.PublishingClosed = this.FileCard.Enable && checkBoxFileCardPublishingClosed.Checked && spinEditFileCardPublishingClosed.EditValue != null ? (double?)spinEditFileCardPublishingClosed.Value : null;
-				this.FileCard.SalesName = this.FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesName.EditValue != null ? textEditFileCardSalesName.EditValue.ToString() : null;
-				this.FileCard.SalesEmail = this.FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesEmail.EditValue != null ? textEditFileCardSalesEmail.EditValue.ToString() : null;
-				this.FileCard.SalesPhone = this.FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesPhone.EditValue != null ? textEditFileCardSalesPhone.EditValue.ToString() : null;
-				this.FileCard.SalesStation = this.FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesStation.EditValue != null ? textEditFileCardSalesStation.EditValue.ToString() : null;
+				FileCard.Enable = checkBoxEnableFileCard.Checked;
+				FileCard.Title = textEditFileCardTitle.EditValue != null ? textEditFileCardTitle.EditValue.ToString() : string.Empty;
+				FileCard.Advertiser = FileCard.Enable && checkBoxFileCardAdvertiser.Checked && textEditFileCardAdvertiser.EditValue != null ? textEditFileCardAdvertiser.EditValue.ToString() : null;
+				FileCard.DateSold = FileCard.Enable && checkBoxFileCardDateSold.Checked && dateEditFileCardDateSold.EditValue != null ? (DateTime?)dateEditFileCardDateSold.DateTime : null;
+				FileCard.BroadcastClosed = FileCard.Enable && checkBoxFileCardBroadcastClosed.Checked && spinEditFileCardBroadcastClosed.EditValue != null ? (double?)spinEditFileCardBroadcastClosed.Value : null;
+				FileCard.DigitalClosed = FileCard.Enable && checkBoxFileCardDigitalClosed.Checked && spinEditFileCardDigitalClosed.EditValue != null ? (double?)spinEditFileCardDigitalClosed.Value : null;
+				FileCard.PublishingClosed = FileCard.Enable && checkBoxFileCardPublishingClosed.Checked && spinEditFileCardPublishingClosed.EditValue != null ? (double?)spinEditFileCardPublishingClosed.Value : null;
+				FileCard.SalesName = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesName.EditValue != null ? textEditFileCardSalesName.EditValue.ToString() : null;
+				FileCard.SalesEmail = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesEmail.EditValue != null ? textEditFileCardSalesEmail.EditValue.ToString() : null;
+				FileCard.SalesPhone = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesPhone.EditValue != null ? textEditFileCardSalesPhone.EditValue.ToString() : null;
+				FileCard.SalesStation = FileCard.Enable && checkBoxFileCardSalesInfo.Checked && textEditFileCardSalesStation.EditValue != null ? textEditFileCardSalesStation.EditValue.ToString() : null;
 				#endregion
 
 				#region Attachments
-				this.AttachmentProperties.Enable = checkBoxEnableAttachmnets.Checked;
-				if (!this.AttachmentProperties.Enable)
+				AttachmentProperties.Enable = checkBoxEnableAttachmnets.Checked;
+				if (!AttachmentProperties.Enable)
 				{
-					this.AttachmentProperties.FilesAttachments.Clear();
-					this.AttachmentProperties.WebAttachments.Clear();
+					AttachmentProperties.FilesAttachments.Clear();
+					AttachmentProperties.WebAttachments.Clear();
 				}
 				#endregion
 			}
 			else
 			{
 				#region Linebreak properties
-				this.LineBreakProperties.Font = buttonEditLineBreakFont.Tag as Font;
-				this.LineBreakProperties.BoldFont = new Font(this.LineBreakProperties.Font.Name, this.LineBreakProperties.Font.Size, FontStyle.Bold);
-				this.LineBreakProperties.ForeColor = colorEditLineBreakFontColor.Color;
-				this.LineBreakProperties.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
+				LineBreakProperties.Font = buttonEditLineBreakFont.Tag as Font;
+				LineBreakProperties.BoldFont = new Font(LineBreakProperties.Font.Name, LineBreakProperties.Font.Size, FontStyle.Bold);
+				LineBreakProperties.ForeColor = colorEditLineBreakFontColor.Color;
+				LineBreakProperties.Note = memoEditNote.EditValue != null ? memoEditNote.EditValue.ToString().Trim() : string.Empty;
 				#endregion
 			}
 
-			this.EnableWidget = checkBoxEnableWidget.Checked;
-			this.Widget = pbSelectedWidget.Image;
+			EnableWidget = checkBoxEnableWidget.Checked;
+			Widget = pbSelectedWidget.Image;
 
 			#region Banner properties
-			this.BannerProperties.Enable = checkBoxEnableBanner.Checked;
-			this.BannerProperties.Image = pbSelectedBanner.Image;
+			BannerProperties.Enable = checkBoxEnableBanner.Checked;
+			BannerProperties.Image = pbSelectedBanner.Image;
 			if (rbBannerAligmentLeft.Checked)
-				this.BannerProperties.ImageAlignement = Alignment.Left;
+				BannerProperties.ImageAlignement = Alignment.Left;
 			else if (rbBannerAligmentCenter.Checked)
-				this.BannerProperties.ImageAlignement = Alignment.Center;
+				BannerProperties.ImageAlignement = Alignment.Center;
 			else if (rbBannerAligmentRight.Checked)
-				this.BannerProperties.ImageAlignement = Alignment.Right;
-			this.BannerProperties.ShowText = checkBoxBannerShowText.Checked;
-			this.BannerProperties.Text = memoEditBannerText.EditValue != null ? memoEditBannerText.EditValue.ToString() : string.Empty;
-			this.BannerProperties.Font = buttonEditBannerTextFont.Tag as Font;
-			this.BannerProperties.ForeColor = colorEditBannerTextColor.Color;
-			this.BannerProperties.Configured = true;
+				BannerProperties.ImageAlignement = Alignment.Right;
+			BannerProperties.ShowText = checkBoxBannerShowText.Checked;
+			BannerProperties.Text = memoEditBannerText.EditValue != null ? memoEditBannerText.EditValue.ToString() : string.Empty;
+			BannerProperties.Font = buttonEditBannerTextFont.Tag as Font;
+			BannerProperties.ForeColor = colorEditBannerTextColor.Color;
+			BannerProperties.Configured = true;
 			#endregion
 
-			this.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.Close();
+			DialogResult = DialogResult.OK;
+			Close();
 		}
 
 		private void rbNew_CheckedChanged(object sender, EventArgs e)
@@ -625,8 +633,8 @@ namespace FileManager.ToolForms.WallBin
 			gbExpiredLinks.Enabled = checkBoxEnableExpiredLinks.Checked;
 			if (checkBoxEnableExpiredLinks.Checked)
 			{
-				dateEditExpirationDate.DateTime = this.ExpirationDateOptions.ExpirationDate;
-				timeEditExpirationTime.Time = this.ExpirationDateOptions.ExpirationDate;
+				dateEditExpirationDate.DateTime = ExpirationDateOptions.ExpirationDate;
+				timeEditExpirationTime.Time = ExpirationDateOptions.ExpirationDate;
 			}
 			else
 			{
@@ -644,19 +652,19 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxEnableBanner.Checked = false;
 		}
 
-		private void layoutViewWidgets_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+		private void layoutViewWidgets_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			ConfigurationClasses.Widget selectedWidget = null;
+			Widget selectedWidget = null;
 			if (layoutViewWidgets.FocusedRowHandle >= 0)
 			{
-				selectedWidget = ConfigurationClasses.ListManager.Instance.Widgets[layoutViewWidgets.GetDataSourceRowIndex(layoutViewWidgets.FocusedRowHandle)];
+				selectedWidget = ListManager.Instance.Widgets[layoutViewWidgets.GetDataSourceRowIndex(layoutViewWidgets.FocusedRowHandle)];
 			}
 			pbSelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
 		}
 
 		private void layoutViewWidgets_Click(object sender, EventArgs e)
 		{
-			Point pt = gridControlWidgets.PointToClient(Control.MousePosition);
+			Point pt = gridControlWidgets.PointToClient(MousePosition);
 
 			if (layoutViewWidgets.CalcHitInfo(pt).RowHandle == layoutViewWidgets.FocusedRowHandle)
 				layoutViewWidgets_FocusedRowChanged(null, null);
@@ -664,7 +672,7 @@ namespace FileManager.ToolForms.WallBin
 
 		private void layoutViewWidgets_DoubleClick(object sender, EventArgs e)
 		{
-			Point pt = gridControlWidgets.PointToClient(Control.MousePosition);
+			Point pt = gridControlWidgets.PointToClient(MousePosition);
 
 			if (layoutViewWidgets.CalcHitInfo(pt).InField)
 				btOK_Click(null, null);
@@ -679,17 +687,17 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxEnableWidget.Checked = false;
 		}
 
-		private void gridViewBanners_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+		private void gridViewBanners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
-			ConfigurationClasses.Banner selectedBanner = null;
+			Banner selectedBanner = null;
 			if (gridViewBanners.FocusedRowHandle >= 0)
-				selectedBanner = ConfigurationClasses.ListManager.Instance.Banners[gridViewBanners.GetDataSourceRowIndex(gridViewBanners.FocusedRowHandle)];
+				selectedBanner = ListManager.Instance.Banners[gridViewBanners.GetDataSourceRowIndex(gridViewBanners.FocusedRowHandle)];
 			pbSelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
 		}
 
 		private void gridViewBanners_Click(object sender, EventArgs e)
 		{
-			Point pt = gridControlBanners.PointToClient(Control.MousePosition);
+			Point pt = gridControlBanners.PointToClient(MousePosition);
 
 			if (gridViewBanners.CalcHitInfo(pt).RowHandle == gridViewBanners.FocusedRowHandle)
 				gridViewBanners_FocusedRowChanged(null, null);
@@ -697,7 +705,7 @@ namespace FileManager.ToolForms.WallBin
 
 		private void gridViewBanners_DoubleClick(object sender, EventArgs e)
 		{
-			Point pt = gridControlBanners.PointToClient(Control.MousePosition);
+			Point pt = gridControlBanners.PointToClient(MousePosition);
 
 			if (gridViewBanners.CalcHitInfo(pt).InRowCell)
 				btOK_Click(null, null);
@@ -717,7 +725,8 @@ namespace FileManager.ToolForms.WallBin
 
 		private void buttonEditBannerTextFont_EditValueChanged(object sender, EventArgs e)
 		{
-			memoEditBannerText.Font = buttonEditBannerTextFont.Tag as Font; ;
+			memoEditBannerText.Font = buttonEditBannerTextFont.Tag as Font;
+			;
 			memoEditBannerText.Properties.Appearance.Font = memoEditBannerText.Font;
 			memoEditBannerText.Properties.AppearanceDisabled.Font = memoEditBannerText.Font;
 			memoEditBannerText.Properties.AppearanceFocused.Font = memoEditBannerText.Font;
@@ -728,22 +737,22 @@ namespace FileManager.ToolForms.WallBin
 		#region Keyword processing
 		private void UpdateKeywordsDataSource()
 		{
-			gridControlSearchTagsKeywords.DataSource = this.Keywords;
+			gridControlSearchTagsKeywords.DataSource = Keywords;
 			gridViewSearchTagsKeywords.RefreshData();
 		}
 
 		private void SaveKeywordsDataSource()
 		{
 			gridViewSearchTagsKeywords.CloseEditor();
-			this.Keywords.RemoveAll(x => string.IsNullOrEmpty(x.Value));
+			Keywords.RemoveAll(x => string.IsNullOrEmpty(x.Value));
 		}
 
-		private void repositoryItemButtonEditKeyword_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void repositoryItemButtonEditKeyword_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			gridViewSearchTagsKeywords.CloseEditor();
 			if (gridViewSearchTagsKeywords.FocusedRowHandle >= 0 && gridViewSearchTagsKeywords.FocusedRowHandle < gridViewSearchTagsKeywords.RowCount)
 			{
-				this.Keywords.RemoveAt(gridViewSearchTagsKeywords.GetDataSourceRowIndex(gridViewSearchTagsKeywords.FocusedRowHandle));
+				Keywords.RemoveAt(gridViewSearchTagsKeywords.GetDataSourceRowIndex(gridViewSearchTagsKeywords.FocusedRowHandle));
 				gridViewSearchTagsKeywords.RefreshData();
 			}
 		}
@@ -751,7 +760,7 @@ namespace FileManager.ToolForms.WallBin
 		private void buttonXAddKeyWord_Click(object sender, EventArgs e)
 		{
 			SaveKeywordsDataSource();
-			this.Keywords.Add(new StringDataSourceWrapper());
+			Keywords.Add(new StringDataSourceWrapper());
 			gridViewSearchTagsKeywords.RefreshData();
 			if (gridViewSearchTagsKeywords.RowCount > 0)
 			{
@@ -833,7 +842,7 @@ namespace FileManager.ToolForms.WallBin
 			gridControlFileCardImportantInfo.Enabled = checkBoxFileCardImportantInfo.Checked;
 			if (!checkBoxFileCardImportantInfo.Checked)
 			{
-				this.FileCardImportantInfo.Clear();
+				FileCardImportantInfo.Clear();
 				gridViewFileCardImportantInfo.RefreshData();
 			}
 		}
@@ -841,8 +850,8 @@ namespace FileManager.ToolForms.WallBin
 		private void buttonXFileCardImportantInfoAdd_Click(object sender, EventArgs e)
 		{
 			gridViewFileCardImportantInfo.CloseEditor();
-			this.FileCardImportantInfo.RemoveAll(x => string.IsNullOrEmpty(x.Value));
-			this.FileCardImportantInfo.Add(new StringDataSourceWrapper());
+			FileCardImportantInfo.RemoveAll(x => string.IsNullOrEmpty(x.Value));
+			FileCardImportantInfo.Add(new StringDataSourceWrapper());
 			gridViewFileCardImportantInfo.RefreshData();
 			if (gridViewFileCardImportantInfo.RowCount > 0)
 			{
@@ -851,12 +860,12 @@ namespace FileManager.ToolForms.WallBin
 			}
 		}
 
-		private void repositoryItemButtonEditFileCardImportantInfo_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void repositoryItemButtonEditFileCardImportantInfo_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			gridViewFileCardImportantInfo.CloseEditor();
 			if (gridViewFileCardImportantInfo.FocusedRowHandle >= 0 && gridViewFileCardImportantInfo.FocusedRowHandle < gridViewFileCardImportantInfo.RowCount)
 			{
-				this.FileCardImportantInfo.RemoveAt(gridViewFileCardImportantInfo.GetDataSourceRowIndex(gridViewFileCardImportantInfo.FocusedRowHandle));
+				FileCardImportantInfo.RemoveAt(gridViewFileCardImportantInfo.GetDataSourceRowIndex(gridViewFileCardImportantInfo.FocusedRowHandle));
 				gridViewFileCardImportantInfo.RefreshData();
 			}
 		}
@@ -871,20 +880,20 @@ namespace FileManager.ToolForms.WallBin
 		#region Files
 		private void buttonXAttachmentsFilesAdd_Click(object sender, EventArgs e)
 		{
-			using (OpenFileDialog dialog = new OpenFileDialog())
+			using (var dialog = new OpenFileDialog())
 			{
 				dialog.Multiselect = true;
 				dialog.Title = "Attach file";
-				if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+				if (dialog.ShowDialog() == DialogResult.OK)
 				{
 					foreach (string fileName in dialog.FileNames)
 					{
-						if (!this.AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.ToLower().Equals(fileName.ToLower())))
+						if (!AttachmentProperties.FilesAttachments.Any(x => x.OriginalPath.ToLower().Equals(fileName.ToLower())))
 						{
-							LinkAttachment attachment = new LinkAttachment(this.AttachmentProperties);
+							var attachment = new LinkAttachment(AttachmentProperties);
 							attachment.Type = AttachmentType.File;
 							attachment.OriginalPath = fileName;
-							this.AttachmentProperties.FilesAttachments.Add(attachment);
+							AttachmentProperties.FilesAttachments.Add(attachment);
 							gridViewAttachmentsFiles.RefreshData();
 							if (gridViewAttachmentsFiles.RowCount > 0)
 							{
@@ -897,14 +906,14 @@ namespace FileManager.ToolForms.WallBin
 			}
 		}
 
-		private void repositoryItemButtonEditAttachmentsFiles_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void repositoryItemButtonEditAttachmentsFiles_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			gridViewAttachmentsFiles.CloseEditor();
 			if (gridViewAttachmentsFiles.FocusedRowHandle >= 0 && gridViewAttachmentsFiles.FocusedRowHandle < gridViewAttachmentsFiles.RowCount)
 			{
 				if (e.Button.Index == 0)
 				{
-					LinkAttachment attachment = this.AttachmentProperties.FilesAttachments[gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle)];
+					LinkAttachment attachment = AttachmentProperties.FilesAttachments[gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle)];
 					if (attachment.IsSourceAvailable)
 					{
 						try
@@ -921,18 +930,18 @@ namespace FileManager.ToolForms.WallBin
 				}
 				else if (e.Button.Index == 1)
 				{
-					this.AttachmentProperties.FilesAttachments.RemoveAt(gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle));
+					AttachmentProperties.FilesAttachments.RemoveAt(gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle));
 					gridViewAttachmentsFiles.RefreshData();
 				}
 			}
 		}
 
-		private void gridViewAttachmentsFiles_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+		private void gridViewAttachmentsFiles_RowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
 			int attachmentIndex = gridViewAttachmentsFiles.GetDataSourceRowIndex(e.RowHandle);
-			if (attachmentIndex >= 0 && attachmentIndex < this.AttachmentProperties.FilesAttachments.Count)
+			if (attachmentIndex >= 0 && attachmentIndex < AttachmentProperties.FilesAttachments.Count)
 			{
-				LinkAttachment attachment = this.AttachmentProperties.FilesAttachments[attachmentIndex];
+				LinkAttachment attachment = AttachmentProperties.FilesAttachments[attachmentIndex];
 				if (attachment.IsSourceAvailable)
 					e.Appearance.ForeColor = Color.Black;
 				else
@@ -945,10 +954,10 @@ namespace FileManager.ToolForms.WallBin
 		private void buttonXAttachmentsWebAdd_Click(object sender, EventArgs e)
 		{
 			gridViewAttachmentsWeb.CloseEditor();
-			this.AttachmentProperties.WebAttachments.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
-			LinkAttachment attachment = new LinkAttachment(this.AttachmentProperties);
+			AttachmentProperties.WebAttachments.RemoveAll(x => string.IsNullOrEmpty(x.OriginalPath));
+			var attachment = new LinkAttachment(AttachmentProperties);
 			attachment.Type = AttachmentType.Url;
-			this.AttachmentProperties.WebAttachments.Add(attachment);
+			AttachmentProperties.WebAttachments.Add(attachment);
 			gridViewAttachmentsWeb.RefreshData();
 			if (gridViewAttachmentsWeb.RowCount > 0)
 			{
@@ -957,14 +966,14 @@ namespace FileManager.ToolForms.WallBin
 			}
 		}
 
-		private void repositoryItemButtonEditAttachmentsWeb_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void repositoryItemButtonEditAttachmentsWeb_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			gridViewAttachmentsWeb.CloseEditor();
 			if (gridViewAttachmentsWeb.FocusedRowHandle >= 0 && gridViewAttachmentsWeb.FocusedRowHandle < gridViewAttachmentsWeb.RowCount)
 			{
 				if (e.Button.Index == 0)
 				{
-					LinkAttachment attachment = this.AttachmentProperties.WebAttachments[gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle)];
+					LinkAttachment attachment = AttachmentProperties.WebAttachments[gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle)];
 					try
 					{
 						Process.Start(attachment.OriginalPath);
@@ -976,12 +985,13 @@ namespace FileManager.ToolForms.WallBin
 				}
 				else if (e.Button.Index == 1)
 				{
-					this.AttachmentProperties.WebAttachments.RemoveAt(gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle));
+					AttachmentProperties.WebAttachments.RemoveAt(gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle));
 					gridViewAttachmentsWeb.RefreshData();
 				}
 			}
 		}
 		#endregion
+
 		#endregion
 
 		#region Shared methods
@@ -990,19 +1000,19 @@ namespace FileManager.ToolForms.WallBin
 			xtraTabControl.Focus();
 		}
 
-		private void toolTipController_GetActiveObjectInfo(object sender, DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventArgs e)
+		private void toolTipController_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
 		{
 			if (e.SelectedControl == gridControlWidgets)
 			{
-				DevExpress.Utils.ToolTipControlInfo info = null;
+				ToolTipControlInfo info = null;
 				try
 				{
-					DevExpress.XtraGrid.Views.Layout.LayoutView view = gridControlWidgets.GetViewAt(e.ControlMousePosition) as DevExpress.XtraGrid.Views.Layout.LayoutView;
+					var view = gridControlWidgets.GetViewAt(e.ControlMousePosition) as LayoutView;
 					if (view == null)
 						return;
-					DevExpress.XtraGrid.Views.Layout.ViewInfo.LayoutViewHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
+					LayoutViewHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
 					if (hi.InFieldValue)
-						info = new DevExpress.Utils.ToolTipControlInfo(new DevExpress.XtraGrid.Views.Base.CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ConfigurationClasses.ListManager.Instance.Widgets[layoutViewWidgets.GetDataSourceRowIndex(hi.RowHandle)].FileName);
+						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Widgets[layoutViewWidgets.GetDataSourceRowIndex(hi.RowHandle)].FileName);
 				}
 				finally
 				{
@@ -1011,15 +1021,15 @@ namespace FileManager.ToolForms.WallBin
 			}
 			else if (e.SelectedControl == gridControlBanners)
 			{
-				DevExpress.Utils.ToolTipControlInfo info = null;
+				ToolTipControlInfo info = null;
 				try
 				{
-					DevExpress.XtraGrid.Views.Grid.GridView view = gridControlBanners.GetViewAt(e.ControlMousePosition) as DevExpress.XtraGrid.Views.Grid.GridView;
+					var view = gridControlBanners.GetViewAt(e.ControlMousePosition) as GridView;
 					if (view == null)
 						return;
-					DevExpress.XtraGrid.Views.Grid.ViewInfo.GridHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
+					GridHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
 					if (hi.InRowCell)
-						info = new DevExpress.Utils.ToolTipControlInfo(new DevExpress.XtraGrid.Views.Base.CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ConfigurationClasses.ListManager.Instance.Widgets[gridViewBanners.GetDataSourceRowIndex(hi.RowHandle)].FileName);
+						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Widgets[gridViewBanners.GetDataSourceRowIndex(hi.RowHandle)].FileName);
 				}
 				finally
 				{
@@ -1030,7 +1040,7 @@ namespace FileManager.ToolForms.WallBin
 
 		private void FontEdit_Click(object sender, EventArgs e)
 		{
-			DevExpress.XtraEditors.ButtonEdit fontEdit = sender as DevExpress.XtraEditors.ButtonEdit;
+			var fontEdit = sender as ButtonEdit;
 			if (fontEdit != null)
 			{
 				dlgFont.Font = fontEdit.Tag as Font;
@@ -1042,7 +1052,7 @@ namespace FileManager.ToolForms.WallBin
 			}
 		}
 
-		private void FontEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void FontEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			FontEdit_Click(this, null);
 		}

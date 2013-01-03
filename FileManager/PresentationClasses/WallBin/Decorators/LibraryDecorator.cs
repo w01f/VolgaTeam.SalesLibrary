@@ -1,229 +1,144 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
+using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.IPad;
+using FileManager.PresentationClasses.OvernightsCalendar;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.WallBin.Decorators
 {
 	public class LibraryDecorator
 	{
+		private bool _isDisposed;
+
 		public Library Library { get; set; }
-		public PageDecorator ActivePage { get; set; }
-		public List<PageDecorator> Pages { get; set; }
+
+		public RegularLibraryControl RegularControl { get; private set; }
 		public MultitabLibraryControl TabControl { get; private set; }
-		public OvernightsCalendar.OvernightsCalendarControl OvernightsCalendar { get; private set; }
+		public OvernightsCalendarControl OvernightsCalendar { get; private set; }
 		public IPadContentManagerControl IPadContentManager { get; private set; }
 		public IPadPermissionsManagerControl IPadPermissionsManager { get; private set; }
 
-		public bool AllowToSave { get; set; }
 		public bool StateChanged { get; set; }
+		public bool FirstTimeProcess { get; set; }
+
+		public List<PageDecorator> Pages { get; set; }
+		private PageDecorator _activePage;
+		public PageDecorator ActivePage
+		{
+			get { return _activePage ?? (_activePage = Pages.FirstOrDefault(x => x.Page.Name.Equals(SettingsManager.Instance.SelectedPage) || string.IsNullOrEmpty(SettingsManager.Instance.SelectedPage) || !Pages.Select(y => y.Page.Name).Contains(SettingsManager.Instance.SelectedPage))); }
+			set
+			{
+				if (_activePage != null)
+				{
+					if (_activePage.ActiveBox != null)
+						_activePage.ActiveBox.MakeInactive();
+					_activePage.ClearSelection();
+				}
+				if (value != null)
+				{
+					SettingsManager.Instance.SelectedPage = value.Page.Name;
+					SettingsManager.Instance.Save();
+				}
+				_activePage = value;
+			}
+		}
 
 		public LibraryDecorator(Library library)
 		{
-			this.Pages = new List<PageDecorator>();
-			this.TabControl = new PresentationClasses.WallBin.MultitabLibraryControl();
-			this.OvernightsCalendar = new OvernightsCalendar.OvernightsCalendarControl(this);
-			this.IPadContentManager = new IPad.IPadContentManagerControl(this);
-			this.IPadPermissionsManager = new IPadPermissionsManagerControl(this);
-			this.Library = library;
+			Library = library;
+		}
+
+		public void Init()
+		{
+			FirstTimeProcess = true;
+			Pages = new List<PageDecorator>();
 			BuildWallbin();
 		}
 
-		#region Wallbin Part
-		private void BuildWallbin()
+		public void Dispose()
 		{
-			this.Pages.Clear();
-			foreach (LibraryPage page in this.Library.Pages)
+			_isDisposed = true;
+			if (TabControl != null)
 			{
-				PageDecorator pageDecorator = new PageDecorator(page);
-				pageDecorator.Parent = this;
-				this.Pages.Add(pageDecorator);
+				TabControl.Dispose();
+				TabControl = null;
+			}
+			if (RegularControl != null)
+			{
+				RegularControl.Dispose();
+				RegularControl = null;
+			}
+			if (OvernightsCalendar != null)
+			{
+				OvernightsCalendar.Parent = null;
+				OvernightsCalendar.DisposeCalendar();
+				OvernightsCalendar.Dispose();
+				OvernightsCalendar = null;
+			}
+			if (IPadContentManager != null)
+			{
+				IPadContentManager.Parent = null;
+				IPadContentManager.Dispose();
+				IPadContentManager = null;
+			}
+			if (IPadPermissionsManager != null)
+			{
+				IPadPermissionsManager.Parent = null;
+				IPadPermissionsManager.Dispose();
+				IPadPermissionsManager = null;
+			}
+			Application.DoEvents();
+			foreach (var pageDecorator in Pages)
+			{
+				pageDecorator.Dispose();
 				Application.DoEvents();
 			}
-			this.StateChanged = false;
+			Pages.Clear();
 		}
 
-		public void ApplyWallbin(bool firstRun, bool reload = false)
+		public void BuildWallbin()
 		{
-			FormMain.Instance.TabHome.pnEmpty.Visible = true;
-			FormMain.Instance.TabHome.pnEmpty.BringToFront();
-			DialogResult result = DialogResult.Cancel;
-			if (this.Library.DeadLinks.Count > 0 && this.Library.EnableInactiveLinks && this.Library.InactiveLinksMessageAtStartup && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
-				using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
-				{
-					form.pbLogo.Image = Properties.Resources.DeadLinks;
-					form.Text = string.Format(form.Text, "INACTIVE");
-					form.laTitle.Text = string.Format(form.laTitle.Text, "DEAD");
-					result = form.ShowDialog();
-					if (result == DialogResult.OK)
-						DeleteDeadLinks();
-				}
-			if (this.Library.ExpiredLinks.Count > 0 && !BusinessClasses.LibraryManager.Instance.OldStyleProceed && firstRun)
-				using (ToolForms.WallBin.FormIncorrectLinksNotification form = new ToolForms.WallBin.FormIncorrectLinksNotification())
-				{
-					form.pbLogo.Image = Properties.Resources.ExpiredLinks;
-					form.Text = string.Format(form.Text, "EXPIRED");
-					form.laTitle.Text = string.Format(form.laTitle.Text, "EXPIRED");
-					result = form.ShowDialog();
-					if (result == DialogResult.OK)
-						DeleteExpiredLinks();
-				}
-
-			if (result == DialogResult.OK || reload)
-				BuildWallbin();
-
-			if (ConfigurationClasses.SettingsManager.Instance.MultitabView)
+			ActivePage = null;
+			foreach (var pageDecorator in Library.Pages.Select(page => new PageDecorator(page) { Parent = this }))
 			{
-				foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
-					control.Parent = null;
-				foreach (PageDecorator page in this.Pages)
-				{
-					page.Container.Parent = null;
-					page.TabPage.Controls.Add(page.Container);
-					page.FitPage();
-				}
-				this.TabControl.AddPages(this.Pages.ToArray());
-				FormMain.Instance.TabHome.pnMain.Controls.Add(this.TabControl);
+				Pages.Add(pageDecorator);
+				Application.DoEvents();
 			}
-			FormMain.Instance.TabHome.pnEmpty.SendToBack();
+			RegularControl = new RegularLibraryControl();
+			RegularControl.Init(Pages.ToArray());
+			TabControl = new MultitabLibraryControl();
+			TabControl.Init(Pages.ToArray());
+
+			IPadContentManager = new IPadContentManagerControl(this);
+			IPadPermissionsManager = new IPadPermissionsManagerControl(this);
+
+			StateChanged = false;
 		}
 
-		private void DeleteDeadLinks()
+		public void BuildOvernightsCalendar(bool forceBuild = false)
 		{
-			using (ToolForms.WallBin.FormDeleteIncorrectLinks form = new ToolForms.WallBin.FormDeleteIncorrectLinks())
+			OvernightsCalendar = new OvernightsCalendarControl(this);
+			Library.OvernightsCalendar.LoadYears();
+			if (Library.OvernightsCalendar.Enabled)
 			{
-				form.Text = string.Format(form.Text, "Dead");
-				form.ExpiredLinks = false;
-				form.IncorrectLinks.Clear();
-				form.IncorrectLinks.AddRange(this.Library.DeadLinks.ToArray());
-				if (form.ShowDialog() == DialogResult.OK)
-				{
-					this.Library.DeleteDeadLinks(form.LinksForDelete.ToArray());
-					this.Library.Save();
-				}
+				OvernightsCalendar.Build(forceBuild);
+				Application.DoEvents();
 			}
-		}
-
-		private void DeleteExpiredLinks()
-		{
-			using (ToolForms.WallBin.FormDeleteIncorrectLinks form = new ToolForms.WallBin.FormDeleteIncorrectLinks())
-			{
-				form.Text = string.Format(form.Text, "Expired");
-				form.ExpiredLinks = true;
-				form.IncorrectLinks.Clear();
-				form.IncorrectLinks.AddRange(this.Library.ExpiredLinks.ToArray());
-				if (form.ShowDialog() == DialogResult.OK)
-				{
-					this.Library.DeleteExpiredLinks(form.LinksForDelete.ToArray());
-					this.Library.Save();
-				}
-			}
-		}
-
-		public void FitObjectsToPage()
-		{
-			if (ConfigurationClasses.SettingsManager.Instance.MultitabView)
-				foreach (PageDecorator page in this.Pages)
-					page.FitObjectsToPage();
-			else
-				this.ActivePage.FitObjectsToPage();
 		}
 
 		public void Save()
 		{
-			foreach (PageDecorator page in this.Pages)
-				page.Save();
-			this.Library.Save();
-			this.StateChanged = false;
-			this.IPadContentManager.UpdateVideoFiles();
-		}
-
-		public void SelectPage(int pageIndex)
-		{
-			FormMain.Instance.TabHome.pnEmpty.Visible = true;
-			FormMain.Instance.TabHome.pnEmpty.BringToFront();
-			foreach (Control control in FormMain.Instance.TabHome.pnMain.Controls)
-				control.Parent = null;
-			if (pageIndex < this.Pages.Count)
+			if (!_isDisposed)
 			{
-				this.ActivePage = this.Pages[pageIndex];
-				this.ActivePage.Apply();
+				foreach (PageDecorator page in Pages)
+					page.Save();
+				Library.Save();
+				StateChanged = false;
+				IPadContentManager.UpdateVideoFiles();
 			}
-			FormMain.Instance.TabHome.pnEmpty.SendToBack();
 		}
-		#endregion
-
-		#region Overnights Calendar Part
-		public void BuildOvernightsCalendar(bool forceBuild = false)
-		{
-			this.Library.OvernightsCalendar.LoadYears();
-			if (this.Library.OvernightsCalendar.Enabled)
-				this.OvernightsCalendar.Build(forceBuild);
-		}
-
-		public void ApplyOvernightsCalebdar()
-		{
-			LoadOvernightsCalebdarSettings();
-			if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(this.OvernightsCalendar))
-				FormMain.Instance.TabOvernightsCalendar.Controls.Add(this.OvernightsCalendar);
-			this.OvernightsCalendar.BringToFront();
-		}
-
-		private void LoadOvernightsCalebdarSettings()
-		{
-			this.AllowToSave = false;
-			FormMain.Instance.buttonItemCalendarSyncStatusDisabled.Checked = !this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.buttonItemCalendarSyncStatusEnabled.Checked = this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.buttonEditCalendarLocation.EditValue = this.Library.OvernightsCalendar.RootFolder.FullName;
-			FormMain.Instance.ribbonBarCalendarLocation.Enabled = this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarSettings.Enabled = this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarFont.Enabled = this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarFileGrabber.Enabled = this.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.TabOvernightsCalendar.Enabled = this.Library.OvernightsCalendar.Enabled;
-			this.AllowToSave = true;
-
-			UpdateCalendarFontButtonsStatus();
-		}
-
-		public void UpdateCalendarFontButtonsStatus()
-		{
-			FormMain.Instance.buttonItemCalendarFontUp.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize < 14;
-			FormMain.Instance.buttonItemCalendarFontDown.Enabled = ConfigurationClasses.SettingsManager.Instance.CalendarFontSize > 10;
-		}
-		#endregion
-
-		#region ProgramManager Part
-		public void ApplyProgramManager()
-		{
-			this.AllowToSave = false;
-			FormMain.Instance.buttonItemProgramManagerSyncDisabled.Checked = !this.Library.EnableProgramManagerSync;
-			FormMain.Instance.buttonItemProgramManagerSyncEnabled.Checked = this.Library.EnableProgramManagerSync;
-			FormMain.Instance.buttonEditProgramManagerLocation.EditValue = this.Library.ProgramManagerLocation;
-			FormMain.Instance.ribbonBarProgramManagerLocation.Enabled = this.Library.EnableProgramManagerSync;
-			this.AllowToSave = true;
-		}
-		#endregion
-
-		#region IPad Part
-		public void ApplyIPadManager()
-		{
-			this.AllowToSave = false;
-			FormMain.Instance.buttonItemIPadSyncDisabled.Checked = !this.Library.IPadManager.Enabled;
-			FormMain.Instance.buttonItemIPadSyncEnabled.Checked = this.Library.IPadManager.Enabled;
-			FormMain.Instance.buttonEditIPadLocation.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.SyncDestinationPath) ? this.Library.IPadManager.SyncDestinationPath : null;
-			FormMain.Instance.buttonEditIPadSite.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Website) ? this.Library.IPadManager.Website : null;
-			FormMain.Instance.buttonEditIPadLogin.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Login) ? this.Library.IPadManager.Login : null;
-			FormMain.Instance.buttonEditIPadPassword.EditValue = !string.IsNullOrEmpty(this.Library.IPadManager.Password) ? this.Library.IPadManager.Password : null;
-			this.IPadContentManager.UpdateVideoFiles();
-			this.IPadContentManager.UpdateControlsState();
-			if (!FormMain.Instance.TabIPadManager.Controls.Contains(this.IPadContentManager))
-				FormMain.Instance.TabIPadManager.Controls.Add(this.IPadContentManager);
-			if (!FormMain.Instance.TabIPadUsers.Controls.Contains(this.IPadPermissionsManager))
-				FormMain.Instance.TabIPadUsers.Controls.Add(this.IPadPermissionsManager);
-			this.IPadContentManager.BringToFront();
-			this.AllowToSave = true;
-		}
-		#endregion
 	}
 }

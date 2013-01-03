@@ -466,6 +466,90 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap TagsAttachments {
+            get {
+                object obj = ResourceManager.GetObject("TagsAttachments", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsCategories {
+            get {
+                object obj = ResourceManager.GetObject("TagsCategories", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsCategoriesWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsCategoriesWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsCleanerWarning {
+            get {
+                object obj = ResourceManager.GetObject("TagsCleanerWarning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsClear {
+            get {
+                object obj = ResourceManager.GetObject("TagsClear", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsFileAttachmentsWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsFileAttachmentsWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsFileCards {
+            get {
+                object obj = ResourceManager.GetObject("TagsFileCards", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsFileCardsWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsFileCardsWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsKeywords {
+            get {
+                object obj = ResourceManager.GetObject("TagsKeywords", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsKeywordsWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsKeywordsWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsSave {
+            get {
+                object obj = ResourceManager.GetObject("TagsSave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsWebAttachmentsWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsWebAttachmentsWidget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap text_tree {
             get {
                 object obj = ResourceManager.GetObject("text_tree", resourceCulture);
