@@ -24,25 +24,30 @@ return CMap::mergeArray(
                 'name' => 'Home',
                 'position' => 1,
                 'list_button' => array(
-                    'visible' => true,
+                    'visible' => false,
                 ),
                 'buttons_button' => array(
-                    'visible' => true,
+                    'visible' => false,
                 ),
                 'search_button' => array(
-                    'visible' => true,
+                    'visible' => false,
                 ),
             ),
             'search_full_tab' => array(
                 'visible' => true,
                 'name' => 'Search',
                 'position' => 2,
-                'show_money_button' => true,                
+                'show_money_button' => true,
             ),
             'search_file_card_tab' => array(
                 'visible' => true,
                 'name' => 'Sales Success Models',
                 'position' => 3,
+            ),
+            'calendar_tab' => array(
+                'visible' => true,
+                'name' => 'Schedule',
+                'position' => 4,
             ),
             'stations' => array(
                 'tab_name' => 'Libraries',

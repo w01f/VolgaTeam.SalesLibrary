@@ -1,6 +1,9 @@
 (function( $ ) {
     $.updateContentAreaDimensions = function(){
         var height = $(window).height() - $('#ribbon').height()-10;
+        $('body').css({
+            'height':'auto'
+        });        
         $('#content').css({
             'height':height+'px'
         });

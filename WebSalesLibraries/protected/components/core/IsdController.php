@@ -30,6 +30,9 @@ class IsdController extends CController
                     $this->pathPrefix = 'application.views.regular.';
                     $this->isTabletMobileView = false;
                 }
+                $cookie = new CHttpCookie('mobileDeviceUsed', Yii::app()->browser->isMobile() ? "true" : "false");
+                $cookie->expire = time() + (60 * 60 * 24 * 7);
+                Yii::app()->request->cookies['mobileDeviceUsed'] = $cookie;
                 break;
         }
     }

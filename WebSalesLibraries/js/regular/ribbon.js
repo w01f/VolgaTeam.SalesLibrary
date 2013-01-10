@@ -158,17 +158,32 @@
                 switch(id)
                 {
                     case 'home-tab':
-                        $.initColumnsView();                            
+                        $('.jx-bar, .jx-show').css({
+                            'height':'30px'
+                        });                            
+                        $.initWallbinView();                            
                         break;
                     case 'search-full-tab':
                     case 'search-file-card-tab':
+                        $('.jx-bar, .jx-show').css({
+                            'height':'0px'
+                        });                            
                         $.initSearchView();
                         break;                   
+                    case 'calendar-tab':
+                        $('.jx-bar, .jx-show').css({
+                            'height':'0px'
+                        });                            
+                        $.initCalendarView();
+                        break;                                           
                     default:
+                        $('.jx-bar, .jx-show').css({
+                            'height':'0px'
+                        });                            
                         if (id!= null && id.indexOf("help-tab-") >= 0)
                             $.initHelpView(id);
                         else
-                            $.initColumnsView();                            
+                            $.initWallbinView();                            
                         break;                            
                 }
             }            

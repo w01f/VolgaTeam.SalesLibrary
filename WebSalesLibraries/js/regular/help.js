@@ -16,8 +16,8 @@
                 $.hideOverlay();
             },
             success: function(msg){
-                $('#content').html(msg);
-
+                $('#content').html('<div>'+msg+'</div>');
+                $.updateContentAreaDimensions();                            
                 $('.help-link').off('click').on('click', function(){
                     $.viewSelectedFormat($(this), false);
                 });

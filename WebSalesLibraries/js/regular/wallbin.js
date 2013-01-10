@@ -7,7 +7,7 @@
     if(storedTextSpace==null)
         storedTextSpace = 2;
     
-    $.libraryChanged = function(){
+    var libraryChanged = function(){
         var selectedLibraryName = $("#select-library :selected").text();
         $.cookie("selectedLibraryName", selectedLibraryName, {
             expires: 60 * 60 * 24 * 7
@@ -29,7 +29,7 @@
             },
             success: function(msg){
                 $('#select-page').html(msg);
-                $.pageChanged();
+                pageChanged();
                 $("#page-logo").attr('src', $("#select-library").val());
             },
             async: true,
@@ -37,16 +37,16 @@
         });     
     }
     
-    $.pageChanged = function(){
+    var pageChanged = function(){
         var selectedPageName = $("#select-page :selected").text();
         $.cookie("selectedPageName", selectedPageName, {
             expires: 60 * 60 * 24 * 7
         });
         $("#page-logo").attr('src', $("#select-page").val());
-        $.loadColumns();
+        updateView();
     }
     
-    $.loadColumns = function(){
+    var loadColumns = function(){
         $.ajax({
             type: "POST",
             url: "wallbin/getColumnsView",
@@ -74,7 +74,101 @@
         });     
     }
     
-    $.initColumnsView = function(){
+    var loadAccordion = function(){
+        $.ajax({
+            type: "POST",
+            url: "wallbin/getAccordionView",
+            data:{},
+            beforeSend: function(){
+                $.showOverlay();
+                $('#content').html('');
+            },
+            complete: function(){
+                $.hideOverlay(); 
+            },
+            success: function(msg){
+                $('#content').html('<div>'+msg+'</div>');
+                $.updateContentAreaDimensions();            
+                $('.folder-header').off('click');        
+                $('.folder-header').on('click',function(){
+                    if(!$(this).hasClass('active'))
+                    {
+                        $('.folder-header.active').parent().find('.folder-links').hide("blind", {
+                            direction:"vertical"
+                        }, 500);
+                        $('.folder-header').removeClass('active');
+                        $(this).addClass('active');
+                        var folderContainer = $(this).parent();
+                        var folderId = $.trim($(this).attr("id").replace('folder-', ''));
+                        showAccordionFolder(folderContainer,folderId);
+                    }
+                });        
+            },
+            error: function(){
+                $('#content').html('');
+            },
+            async: true,
+            dataType: 'html'
+        });     
+    }
+    
+    var showAccordionFolder = function(folderContainer, folderId){
+        var folderLinks = folderContainer.find('.folder-links');
+        if(folderLinks.html() == '')
+        {
+            $.ajax({
+                type: "POST",
+                url: "wallbin/getFolderLinksList",
+                data:{
+                    folderId:folderId
+                },
+                beforeSend: function(){
+                    $.showOverlayLight();
+                    folderLinks.html('');
+                },
+                complete: function(){
+                    $.hideOverlayLight(); 
+                },
+                success: function(msg){
+                    folderLinks.html(msg);
+                    $.updateTextSize(storedTextSize);
+                    $.updateTextSpace(storedTextSpace);
+                    $.updateContentAreaDimensions();            
+                    $('.clickable').off('click');        
+                    $('.clickable').on('click',$.openViewDialogEmbedded);        
+                    folderLinks.show("blind", {
+                        direction:"vertical"
+                    }, 500);
+                },
+                error: function(){
+                    folderLinks.html('');
+                },
+                async: true,
+                dataType: 'html'
+            });                     
+        }
+        else
+            folderLinks.show("blind", {
+                direction:"vertical"
+            }, 500);
+    }
+    
+    var updateView = function()
+    {
+        $('#minibar li').removeClass('active');
+        if($.cookie("accordionView")!=null && $.cookie("accordionView") == "true")
+        {
+            $('#accordion-view').addClass('active');
+            loadAccordion();
+        }
+        else
+        {
+            $('#columns-view').addClass('active');
+            loadColumns();
+        }
+    }
+    
+    $.initWallbinView = function(){
         $.ajax({
             type: "POST",
             url: "wallbin/getLibraryDropDownList",
@@ -93,7 +187,7 @@
             },
             success: function(msg){
                 $('#select-library').html(msg);
-                $.libraryChanged();
+                libraryChanged();
             },
             async: true,
             dataType: 'html'                        
@@ -103,10 +197,10 @@
     $(document).ready(function() 
     {
         $('#select-library').on('change',function(){
-            $.libraryChanged();
+            libraryChanged();
         });
         $('#select-page').on('change',function(){
-            $.pageChanged();
+            pageChanged();
         });
         
         $(window).on('resize',$.updateContentAreaDimensions);         
@@ -141,5 +235,21 @@
                 storedTextSize--;
             $.updateTextSize(storedTextSize);
         });                    
+        
+        $('#columns-view').off('click'); 
+        $('#columns-view').on('click',function(){
+            $.cookie("accordionView", false, {
+                expires: 60 * 60 * 24 * 7
+            });
+            updateView();
+        });                            
+        
+        $('#accordion-view').off('click'); 
+        $('#accordion-view').on('click',function(){
+            $.cookie("accordionView", true, {
+                expires: 60 * 60 * 24 * 7
+            });
+            updateView();
+        });                                    
     });
 })( jQuery );    

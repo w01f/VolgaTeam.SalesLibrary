@@ -13,6 +13,14 @@ class WallbinController extends IsdController
         $this->renderPartial('columnsView', array('selectedPage' => $selectedPage), false, true);
     }
 
+    public function actionGetAccordionView()
+    {
+        $libraryManager = new LibraryManager();
+        $selectedPage = $libraryManager->getSelectedPage();
+        $selectedPage->loadData(null);
+        $this->renderPartial('accordionView', array('libraryPage' => $selectedPage), false, true);
+    }
+
     public function actionGetLibraryDropDownList()
     {
         $libraryManager = new LibraryManager();

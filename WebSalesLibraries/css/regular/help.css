@@ -1,3 +1,8 @@
+ul.help-links
+{
+    margin: 10px;
+}
+
 ul.help-links li
 {
     float:left;

@@ -1,5 +1,5 @@
 <?php
-$version = '58.0';
+$version = '72.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -7,14 +7,21 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jque
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/video-js/video-js.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/daterangepicker.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/jixedbar/themes/default/jx.stylesheet.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fullcalendar/fullcalendar.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/ribbon.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/minibar.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/columns.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/accordion.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/folder-links.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/banner.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/view-dialog.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/email-dialog.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/file-card.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search-grid.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/help.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/calendar.css?' . $version);
 $cs->registerCoreScript('jquery.ui');
 $cs->registerCoreScript('cookie');
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
@@ -25,15 +32,20 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', C
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/date.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/daterangepicker.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/jixedbar/js/jquery.jixedbar.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/fullcalendar.min.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/jquery.qtip-1.0.0-rc3.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/login.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/overlay.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/textSizing.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/scaling.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/linkViewing.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/columns.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/wallbin.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search-grid.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/help.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/calendar.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/minibar.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/ribbon.js?' . $version, CClientScript::POS_HEAD);
 $this->pageTitle = Yii::app()->name;
 
@@ -241,7 +253,49 @@ asort($tabParam);
                         </div> 
                     <?php endif; ?>                        
                 </div>            
-            <?php endif; ?>   
+            <?php endif; ?> 
+        <?php elseif ($tabName == 'calendar_tab'): ?>                                    
+            <?php if (Yii::app()->params['calendar_tab']['visible']): ?>
+                <div class="ribbon-tab" id="calendar-tab">
+                    <span class="ribbon-title"><?php echo Yii::app()->params['calendar_tab']['name'] ?></span>
+                    <div class="ribbon-section" >
+                        <span class="section-title">Training</span>
+                        <img src="<?php echo Yii::app()->baseUrl . '/images/calendar/ribbon_logo.png' ?>"/>
+                    </div>                    
+                    <div class="ribbon-section">
+                        <span class="section-title">Courses for Sales Reps</span>
+                        <div id="calendar-pdf1" class="ribbon-button ribbon-button-large pdf">
+                            <img class="ribbon-icon ribbon-normal calendar-button-icon" src="images/calendar/1.png" />
+                            <img class="ribbon-icon ribbon-hot calendar-button-icon" src="images/calendar/1.png" />
+                            <img class="ribbon-icon ribbon-disabled calendar-button-icon" src="images/calendar/1.png" />
+                        </div>
+                    </div>                 
+                    <div class="ribbon-section">
+                        <span class="section-title">Courses for Admins & Research</span>
+                        <div id="calendar-pdf2" class="ribbon-button ribbon-button-large pdf">
+                            <img class="ribbon-icon ribbon-normal calendar-button-icon" src="images/calendar/2.png" />
+                            <img class="ribbon-icon ribbon-hot calendar-button-icon" src="images/calendar/2.png" />
+                            <img class="ribbon-icon ribbon-disabled calendar-button-icon" src="images/calendar/2.png" />
+                        </div>
+                    </div>                                 
+                    <div class="ribbon-section">
+                        <span class="section-title">Courses for Managers</span>
+                        <div id="calendar-pdf3" class="ribbon-button ribbon-button-large pdf">
+                            <img class="ribbon-icon ribbon-normal calendar-button-icon" src="images/calendar/3.png" />
+                            <img class="ribbon-icon ribbon-hot calendar-button-icon" src="images/calendar/3.png" />
+                            <img class="ribbon-icon ribbon-disabled calendar-button-icon" src="images/calendar/3.png" />
+                        </div>
+                    </div>                                                 
+                    <div class="ribbon-section">
+                        <span class="section-title">Help Using This Site</span>
+                        <div id="calendar-video" class="ribbon-button ribbon-button-large video">
+                            <img class="ribbon-icon ribbon-normal calendar-button-icon" src="images/calendar/4.png" />
+                            <img class="ribbon-icon ribbon-hot calendar-button-icon" src="images/calendar/4.png" />
+                            <img class="ribbon-icon ribbon-disabled calendar-button-icon" src="images/calendar/4.png" />
+                        </div>
+                    </div>                                                                                         
+                </div>            
+            <?php endif; ?>           
         <?php elseif (strpos($tabName, 'help-tab-') !== false): ?>                                        
             <?php $tabHelpRecord = HelpTabStorage::model()->findByPk(str_replace('help-tab-', '', $tabName)); ?>
             <?php if (isset($tabHelpRecord)): ?>
@@ -300,4 +354,18 @@ asort($tabParam);
     </div>
 </div>
 <!------------------------->
-
+<!---------Minibar--------->
+<div id="minibar">
+    <ul>
+        <li id="columns-view" title="Columns View">
+            <a href="#"><img src="<?php echo Yii::app()->baseUrl . '/images/minibar/columns.png' ?>" alt="Columns" /></a>
+        </li>
+    </ul>
+    <span class="jx-separator-left"></span>
+    <ul>
+        <li id="accordion-view" title="Accordion View">
+            <a href="#"><img src="<?php echo Yii::app()->baseUrl . '/images/minibar/accordion.png' ?>" alt="Accordion" /></a>
+        </li>
+    </ul>
+</div>
+<!------------------------->    

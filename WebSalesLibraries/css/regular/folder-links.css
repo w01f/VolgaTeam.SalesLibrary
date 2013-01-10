@@ -1,0 +1,65 @@
+.folder-body{
+    margin-top:-1px;
+    border-width:1px;
+    border-style: solid;
+    min-height:80px;
+}
+
+.folder-header-container{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+
+.folder-widget{
+    vertical-align: middle;
+}
+
+.folder-header{
+    vertical-align: middle;
+    padding-left: 5px;
+}
+
+.folder-links-scroll-area{
+    min-height:160px;
+    overflow-x:auto;
+}
+
+.folder-links-container{
+    margin: 5px;
+}
+
+.folder-links-container .link-container{
+    vertical-align: middle;
+    margin-bottom: 9px;
+    min-height: 26px;
+    width: 100%;
+}
+
+.link-text {
+    font-size: 12pt;
+    white-space: nowrap;
+    line-height: 26px;
+}
+
+.link-line-break {
+    white-space: nowrap;
+}
+
+.link-note{
+    font-weight: bold;
+}
+
+.widget {
+    padding-left: 32px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+}
+
+.view-dialog-content{
+    display: none;
+}
+
+.clickable
+{
+    cursor: pointer;
+}

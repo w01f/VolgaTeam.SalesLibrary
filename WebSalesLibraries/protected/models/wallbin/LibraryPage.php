@@ -93,6 +93,34 @@ class LibraryPage
 
     public function loadData($browser)
     {
+        if(!isset($browser))
+        {
+            if (Yii::app()->browser->isMobile())
+                $browser = 'mobile';
+            else
+            {
+                $browser = Yii::app()->browser->getBrowser();
+                switch ($browser)
+                {
+                    case 'Internet Explorer':
+                        $browser = 'ie';
+                        break;
+                    case 'Chrome':
+                    case 'Safari':
+                        $browser = 'webkit';
+                        break;
+                    case 'Firefox':
+                        $browser = 'firefox';
+                        break;
+                    case 'Opera':
+                        $browser = 'opera';
+                        break;
+                    default:
+                        $browser = 'webkit';
+                        break;
+                }
+            }
+        }
         unset($this->folders);
         foreach (FolderStorage::model()->findAll('id_page=?', array($this->id)) as $folderRecord)
         {

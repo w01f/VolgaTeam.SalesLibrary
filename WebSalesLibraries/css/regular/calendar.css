@@ -1,0 +1,33 @@
+#calendar 
+{ 
+    width: 900px; 
+    margin: 0 auto; 
+    text-align: center; 
+}
+#schedule
+{
+    display: none;
+}
+#calendar .pdf 
+{ 
+    width: 150px; 
+}
+#calendar .video 
+{ 
+    width: 150px; 
+}   
+ .calendar-button-icon
+{ 
+    width: 100% !important; 
+    height: auto !important; 
+}
+.qtip h2 
+{
+    margin:0px; 
+    font-size:18px;
+}
+.qtip 
+{
+    font-weight:normal; 
+    font-size:14px;
+}

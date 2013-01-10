@@ -171,6 +171,15 @@ class LibraryFolder
             }
     }
 
+    public function getRealLinksNumber()
+    {
+        $count = 0;
+        foreach (LinkStorage::model()->findAll('id_folder=?', array($this->id)) as $linkRecord)
+            if ($linkRecord->type != 6)
+                $count++;
+        return $count;
+    }
+
     public function getWidget()
     {
         if (isset($this->enableWidget))
