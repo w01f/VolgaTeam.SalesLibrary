@@ -23,15 +23,6 @@ return CMap::mergeArray(
             'home_tab' => array(
                 'name' => 'Home',
                 'position' => 1,
-                'list_button' => array(
-                    'visible' => false,
-                ),
-                'buttons_button' => array(
-                    'visible' => false,
-                ),
-                'search_button' => array(
-                    'visible' => false,
-                ),
             ),
             'search_full_tab' => array(
                 'visible' => true,

@@ -54,7 +54,6 @@ class UpdateHelpCommand extends CConsoleCommand
                                     $pageHelpRecord->order = intval(trim($pageConfig->getElementsByTagName("Order")->item(0)->nodeValue));
                                     $pageHelpRecord->enabled = filter_var(trim($pageConfig->getElementsByTagName("Enabled")->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN);
                                     $pageHelpRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Help', $pageImageFile));
-                                    $pageImageFile;
                                     $pageHelpRecord->save();
 
                                     $linksRootPath = realpath($pagePath . DIRECTORY_SEPARATOR . 'links');
