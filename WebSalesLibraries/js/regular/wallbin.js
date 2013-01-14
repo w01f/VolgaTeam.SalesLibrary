@@ -91,12 +91,13 @@
                 $.updateContentAreaDimensions();            
                 $('.folder-header').off('click');        
                 $('.folder-header').on('click',function(){
-                    if(!$(this).hasClass('active'))
-                    {
-                        $('.folder-header.active').parent().find('.folder-links').hide("blind", {
-                            direction:"vertical"
-                        }, 500);
-                        $('.folder-header').removeClass('active');
+                    $('.folder-header.active').parent().find('.folder-links').hide("blind", {
+                        direction:"vertical"
+                    }, 500);
+                    var justCollapse = $(this).hasClass('active');
+                    $('.folder-header').removeClass('active');
+                    if(!justCollapse)
+                    {                        
                         $(this).addClass('active');
                         var folderContainer = $(this).parent();
                         var folderId = $.trim($(this).attr("id").replace('folder-', ''));
