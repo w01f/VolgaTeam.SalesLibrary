@@ -1,4 +1,4 @@
-<table id ="email-dialog">
+<table id ="tool-dialog">
     <tr>
         <td collspan="2">
             <h4>Video Files are usually VERY BIG!</h4>
@@ -21,7 +21,7 @@
     <?php else: ?>
         <tr style="display: none;">
             <td colspan="2" class ="buttons-area download-type">
-                <button class="btn  active" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/mp4-download.png'; ?>" alt="mp4"/></button>
+                <button class="btn active" type="button"><img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/mp4-download.png'; ?>" alt="mp4"/></button>
             </td>
         </tr>                                
     <?php endif; ?>
@@ -32,8 +32,8 @@
     </tr>                    
     <tr>
         <td colspan="2" class ="buttons-area">
-            <button class="btn" id="download-accept" type="button">Download</button>
-            <button class="btn" id="download-cancel" type="button">Cancel</button>
+            <button class="btn" id="accept-button" type="button">Download</button>
+            <button class="btn" id="cancel-button" type="button">Cancel</button>
         </td>
     </tr>                    
 </table>

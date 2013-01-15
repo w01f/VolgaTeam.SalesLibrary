@@ -44,8 +44,8 @@
             },
             success: function(msg){
                 var content = $(msg);
-                content.find('#accept').off('click');
-                content.find('#accept').on('click',function(){
+                content.find('#accept-button').off('click');
+                content.find('#accept-button').on('click',function(){
                     $.ajax({
                         type: "POST",
                         url: "validateUserByEmail",
@@ -84,8 +84,8 @@
                                             },
                                             success: function(msg){
                                                 var content = $(msg);
-                                                content.find('#accept').off('click');
-                                                content.find('#accept').on('click',function(){
+                                                content.find('#accept-button').off('click');
+                                                content.find('#accept-button').on('click',function(){
                                                     $.fancybox.close();
                                                 });                    
                                                 $.fancybox({
@@ -120,8 +120,8 @@
                         dataType: 'html'                        
                     });          
                 });
-                content.find('#cancel').off('click');
-                content.find('#cancel').on('click',function(){
+                content.find('#cancel-button').off('click');
+                content.find('#cancel-button').on('click',function(){
                     $.fancybox.close();
                 });                    
                 $.fancybox({

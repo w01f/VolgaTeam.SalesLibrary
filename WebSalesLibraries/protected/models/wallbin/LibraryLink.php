@@ -146,6 +146,7 @@ class LibraryLink
     public $universalPreview;
     public $browser;
     public $availableFormats;
+    public $isFavorite;
     public function __construct($folder)
     {
         $this->parent = $folder;

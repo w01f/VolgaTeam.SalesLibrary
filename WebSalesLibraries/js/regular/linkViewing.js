@@ -1,18 +1,20 @@
 (function( $ ) {
     $.openViewDialogEmbedded = function(){
-        var formatItems = $(this).find('td');
+        var formatItems = $(this).find('li');
         var fullScreenSelector = $(this).find('.use-fullscreen');
         if(formatItems.length > 1)
         {
-            $(this).find('.view-dialog-body .format-list td').off('click');        
-            $(this).find('.view-dialog-body .format-list td').on('click',function(){
+            $(this).find('.view-dialog-body .format-list li').off('click');        
+            $(this).find('.view-dialog-body .format-list li').on('click',function(){
                 $.viewSelectedFormat($(this), fullScreenSelector.is(':checked'));
             } );        
             var viewDialogContent = $(this).find('.view-dialog-content').html();
             $.fancybox({
                 content: $(this).find('.view-dialog-body'),
                 title: 'How Do you want to Open this File?',
-                minWidth: 400,
+                width: 450,
+                autoSize: false,
+                autoHeight: true,
                 openEffect  : 'none',
                 closeEffect	: 'none',
                 helpers : {
@@ -103,10 +105,10 @@
                         $(this).addClass('active');    
                     }
                 });                
-                content.find('#download-cancel').on('click',function(){
+                content.find('#cancel-button').on('click',function(){
                     $.fancybox.close();
                 });                    
-                content.find('#download-accept').on('click',function(){
+                content.find('#accept-button').on('click',function(){
                     window.open("site/downloadFile?linkId="+linkId+"&format="+$('.download-type button.active img').attr('alt'));
                     $.fancybox.close();
                 });                     
@@ -131,8 +133,84 @@
         });
     }        
     
+    var addToFavorites = function(linkId, title)
+    {
+        $.ajax({
+            type: "POST",
+            url: "site/addToFavoritesDialog",
+            data: {
+                linkId: linkId
+            },
+            beforeSend: function(){
+                $.showOverlayLight();
+            },
+            complete: function(){
+                $.hideOverlayLight();
+            },        
+            success: function(msg){    
+                var content = $(msg);
+                content.find('#cancel-button').on('click',function(){
+                    $.fancybox.close();
+                });                    
+                content.find('#accept-button').on('click',function(){
+                    $.fancybox.close();
+                    $.ajax({
+                        type: "POST",
+                        url: "site/addToFavorites",
+                        data: {
+                            linkId: linkId
+                        },
+                        beforeSend: function(){
+                            $.showOverlayLight();
+                        },
+                        complete: function(){
+                            $.hideOverlayLight();
+                        },            
+                        success: function(msg){
+                            var content = $(msg);
+                            $.fancybox({
+                                content: content,
+                                title: title,
+                                openEffect  : 'none',
+                                closeEffect	: 'none',
+                                helpers : {
+                                    overlay : {
+                                        css : {
+                                            'background' : 'rgba(224, 224, 224, 0.8)'
+                                        }
+                                    }
+                                }
+                            });                
+                        },
+                        error: function(){
+                        },                        
+                        async: true,
+                        dataType: 'html'                        
+                    });                    
+                });                     
+                $.fancybox({
+                    content: content,
+                    title: title,
+                    openEffect  : 'none',
+                    closeEffect	: 'none',
+                    helpers : {
+                        overlay : {
+                            css : {
+                                'background' : 'rgba(224, 224, 224, 0.8)'
+                            }
+                        }
+                    }
+                });                                
+            },
+            error: function(){
+            },                        
+            async: true,
+            dataType: 'html'                        
+        });        
+    }            
+    
     var emailDialogObject = [];
-    $.emailFile = function(linkId, title)
+    var emailFile = function(linkId, title)
     {
         $.ajax({
             type: "POST",
@@ -229,7 +307,7 @@
                     event.preventDefault();
                 });
                 
-                emailDialogObject.content.find('#email-accept').on('click',function(){
+                emailDialogObject.content.find('#accept-button').on('click',function(){
                     $.ajax({
                         type: "POST",
                         url: "site/emailLinkSend",
@@ -257,8 +335,8 @@
                                 },
                                 success: function(msg){
                                     var content = $(msg);
-                                    content.find('#accept').off('click');
-                                    content.find('#accept').on('click',function(){
+                                    content.find('#accept-button').off('click');
+                                    content.find('#accept-button').on('click',function(){
                                         $.fancybox.close();
                                     });                    
                                     $.fancybox({
@@ -288,7 +366,7 @@
                         dataType: 'html'                        
                     });
                 });
-                emailDialogObject.content.find('#email-cancel').on('click',function(){
+                emailDialogObject.content.find('#cancel-button').on('click',function(){
                     $.fancybox.close();
                 });                    
                 $.fancybox({
@@ -358,8 +436,11 @@
                             }
                             break;
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLinks[0].title);
+                            emailFile(selectedFileId,selectedLinks[0].title);
                             break;
+                        case 'favorites':
+                            addToFavorites(selectedFileId,selectedLinks[0].title);
+                            break;                            
                         default:
                             openFile(selectedLinks[0].href);
                             break;
@@ -369,8 +450,11 @@
                     switch(selectedViewType)
                     {
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLinks[0].title);
+                            emailFile(selectedFileId,selectedLinks[0].title);
                             break;
+                        case 'favorites':
+                            addToFavorites(selectedFileId,selectedLinks[0].title);
+                            break;                                                        
                         default:
                             openFile(selectedLinks[0].href);
                             break;
@@ -378,15 +462,26 @@
                     break;
                 case 'url':
                 case 'other':
-                    openFile(selectedLinks[0].href);
+                    switch(selectedViewType)
+                    {
+                        case 'favorites':
+                            addToFavorites(selectedFileId,selectedLinks[0].title);
+                            break;                                                        
+                        default:
+                            openFile(selectedLinks[0].href);
+                            break;
+                    }                    
                     break;                
                 case 'png':
                 case 'jpeg':
                     switch(selectedViewType)
                     {
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLinks[0].title);
+                            emailFile(selectedFileId,selectedLinks[0].title);
                             break;
+                        case 'favorites':
+                            addToFavorites(selectedFileId,selectedLinks[0].title);
+                            break;                                                        
                         default:
                             $.fancybox(selectedLinks,{
                                 openEffect  : 'none',
@@ -412,10 +507,13 @@
                             openFile(selectedLinks[0].href);
                             break;                        
                         case 'email':
-                            $.emailFile(selectedFileId,selectedLinks[0].title);
+                            emailFile(selectedFileId,selectedLinks[0].title);
                             break;                            
                         case 'download':
                             downloadFile(selectedFileId,selectedLinks[0].title);
+                            break;                            
+                        case 'favorites':
+                            addToFavorites(selectedFileId,selectedLinks[0].title);
                             break;                                                        
                         case 'mp4':
                             playVideo(selectedLinks);

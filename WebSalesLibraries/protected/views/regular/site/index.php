@@ -1,5 +1,5 @@
 <?php
-$version = '74.0';
+$version = '75.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -17,7 +17,7 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/folder-links.css?' . $v
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/banner.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/view-dialog.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/email-dialog.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/tool-dialog.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/file-card.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search-grid.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/help.css?' . $version);

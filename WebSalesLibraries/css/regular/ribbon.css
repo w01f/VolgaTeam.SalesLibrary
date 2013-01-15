@@ -437,12 +437,12 @@ body
 
 #libraries-selector
 {
-    width: 180px;
+    width: 220px;
 }
 
 #libraries-selector select
 {
-    width: 180px;
+    width: 220px;
 }
 
 #select-library,#select-page

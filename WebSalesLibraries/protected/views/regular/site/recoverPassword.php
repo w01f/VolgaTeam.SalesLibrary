@@ -1,4 +1,4 @@
-<table id ="recover-password-dialog">
+<table id ="tool-dialog">
     <tr>
         <td colspan="2">
             <legend>Password Recovery</legend>
@@ -26,8 +26,8 @@
     </tr>            
     <tr>
         <td colspan="2" class ="buttons-area">
-            <button class="btn" id="accept" type="button">Accept</button>
-            <button class="btn" id="cancel" type="button">Cancel</button>
+            <button class="btn" id="accept-button" type="button">Accept</button>
+            <button class="btn" id="cancel-button" type="button">Cancel</button>
         </td>
     </tr>                    
 </table>

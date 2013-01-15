@@ -84,7 +84,7 @@ class SiteController extends IsdController
 
     public function actionRecoverPasswordDialogSuccess()
     {
-        $this->renderPartial('recoverPasswordSuccess', array(), false, true);
+        $this->renderPartial('successDialog', array('header'=>'Password Recovery','content'=>'A temporary password has been sent<br>Check your inbox of junk mail filter'), false, true);
     }
 
     public function actionValidateUserByEmail()
@@ -295,7 +295,7 @@ class SiteController extends IsdController
 
     public function actionEmailLinkSuccess()
     {
-        $this->renderPartial('emailSuccess', array(), false, true);
+        $this->renderPartial('successDialog', array('header'=>'Email sent','content'=>'The email has been sent by the adSALESapps server.<br>Tell your Recipient they MAY want to check their Spam or Junk mail if they do not receive the link.'), false, true);
     }
 
     public function actionEmailLinkGet()
