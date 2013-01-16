@@ -51,7 +51,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                 {
                     pageDecorator.ApplyPageLogo();
                     pageDecorator.FitColumnsToPage();
-                    pageDecorator.FitObjectsToPage();
+                    pageDecorator.UpdatePageContent();
                     ConfigurationClasses.SettingsManager.Instance.SelectedPage = pageDecorator.Page.Name;
                     ConfigurationClasses.SettingsManager.Instance.SaveSettings();
                 }

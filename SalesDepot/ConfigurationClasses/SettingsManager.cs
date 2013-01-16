@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Windows.Forms;
 using System.Xml;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.ConfigurationClasses
 {
@@ -32,27 +32,23 @@ namespace SalesDepot.ConfigurationClasses
 
 	public class SettingsManager
 	{
-		private static SettingsManager _instance = new SettingsManager();
-
-		private const string DefaultUserName = "Default";
 		public const string ContentsSlideName = @"WizContents.ppt";
 		public const string NoLogoFileName = @"no_logo.png";
 		public const string PageLogoFileTemplate = @"page{0}.*";
+		private static readonly SettingsManager _instance = new SettingsManager();
+		private readonly string _appIDFile = string.Empty;
+		private readonly string _configurationPath = string.Empty;
 
-		private string _localSettingsFilePath = string.Empty;
-		private string _remoteSettingsFilePath = string.Empty;
-		private string _defaultSettingsFilePath = string.Empty;
-		private string _defaultViewPath = string.Empty;
-		private string _viewButtonsPath = string.Empty;
-		private string _configurationPath = string.Empty;
+		private readonly string _defaultSettingsFilePath = string.Empty;
+		private readonly string _defaultViewPath = string.Empty;
 
-		private string _localLibraryRootFolder = string.Empty;
-		private string _remoteLibraryRootFolder = string.Empty;
-
-		private string _localLibraryLogoFolder = string.Empty;
+		private readonly string _localLibraryLogoFolder = string.Empty;
+		private readonly string _localLibraryRootFolder = string.Empty;
+		private readonly string _localSettingsFilePath = string.Empty;
+		private readonly string _remoteSettingsFilePath = string.Empty;
+		private readonly string _viewButtonsPath = string.Empty;
 		private string _remoteLibraryLogoFolder = string.Empty;
-
-		private string _appIDFile = string.Empty;
+		private string _remoteLibraryRootFolder = string.Empty;
 
 		public bool IsConfigured { get; set; }
 		public bool UseRemoteConnection { get; set; }
@@ -95,15 +91,35 @@ namespace SalesDepot.ConfigurationClasses
 		public bool MultitabView { get; set; }
 		public bool ClassicView { get; set; }
 		public bool ListView { get; set; }
+		public bool AccordionView { get; set; }
 		public bool SolutionTitleView { get; set; }
 		public bool SolutionDateView { get; set; }
 		public bool SolutionTagsView { get; set; }
 		public bool CalendarView { get; set; }
 		public bool LastViewed { get; set; }
 		public string ClassicTitle { get; set; }
+		public string ClassicDescription { get; set; }
 		public string ListTitle { get; set; }
+		public string ListDescription { get; set; }
+		public string AccordionTitle { get; set; }
+		public string AccordionDescription { get; set; }
 		public string SolutionTitle { get; set; }
+		public string SolutionDescription { get; set; }
 		public KeyWordFileFilters KeyWordFilters { get; private set; }
+
+		public Guid AppID { get; set; }
+
+		public List<string> HiddenObjects { get; private set; }
+
+		public bool SolutionView
+		{
+			get { return !(ClassicView | ListView | AccordionView); }
+		}
+
+		public static SettingsManager Instance
+		{
+			get { return _instance; }
+		}
 
 		#region Program Schedule Settings
 		public string ProgramScheduleSelectedStation { get; set; }
@@ -113,75 +129,55 @@ namespace SalesDepot.ConfigurationClasses
 		public string OutputCache { get; private set; }
 		#endregion
 
-		public Guid AppID { get; set; }
-
-		public List<string> HiddenObjects { get; private set; }
-
-		public bool SolutionView
-		{
-			get
-			{
-				return !(this.ClassicView | this.ListView);
-			}
-		}
-
-		public static SettingsManager Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
-
 		private SettingsManager()
 		{
-			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\sales depot\Settings", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\sales depot\Settings", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			_localSettingsFilePath = Path.Combine(settingsFolderPath, "ApplicationSettings.xml");
 			_remoteSettingsFilePath = Path.Combine(settingsFolderPath, "RemoteApplicationSettings.xml");
-			_defaultSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ResetSettings.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			_defaultViewPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\defaultview.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			_viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			_appIDFile = string.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			_configurationPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Config.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+			_defaultSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ResetSettings.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_defaultViewPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\defaultview.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_appIDFile = string.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_configurationPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Config.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
-			_localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.TempPath = string.Format(@"{0}\newlocaldirect.com\Sync\Temp", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.LibraryLogoFolder = string.Empty;
-			this.CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
-			this.PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+			_localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			TempPath = string.Format(@"{0}\newlocaldirect.com\Sync\Temp", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			LibraryLogoFolder = string.Empty;
+			CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
-			this.DefaultWizard = string.Empty;
-			this.SalesDepotName = string.Empty;
-			this.KeyWordFilters = new KeyWordFileFilters();
+			DefaultWizard = string.Empty;
+			SalesDepotName = string.Empty;
+			KeyWordFilters = new KeyWordFileFilters();
 
 			LoadAppID();
 
-			this.ActivityFolder = string.Format(@"{0}\newlocaldirect.com\sync\outgoing\AppID-{1}\user_data\sales_library", new string[] { System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles), this.AppID.ToString() });
-			if (!Directory.Exists(this.ActivityFolder))
-				Directory.CreateDirectory(this.ActivityFolder);
+			ActivityFolder = string.Format(@"{0}\newlocaldirect.com\sync\outgoing\AppID-{1}\user_data\sales_library", new[] { Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), AppID.ToString() });
+			if (!Directory.Exists(ActivityFolder))
+				Directory.CreateDirectory(ActivityFolder);
 
 			#region Program Manager Settings
-			this.ProgramScheduleShowInfo = true;
-			this.ProgramScheduleOutputSettings = new ConfigurationClasses.ProgramOutputSettings();
-			this.OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
+			ProgramScheduleShowInfo = true;
+			ProgramScheduleOutputSettings = new ProgramOutputSettings();
+			OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
 			#endregion
 
-			this.HiddenObjects = new List<string>();
-			this.HiddenObjects.Add("!Old");
-			this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.RegularPreviewContainersRootFolderName);
-			this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.OvernightsCalendarRootFolderName);
-			this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.ProgramManagerRootFolderName);
-			this.HiddenObjects.Add(CoreObjects.BusinessClasses.Constants.ExtraFoldersRootFolderName);
-			this.HiddenObjects.Add("thumbs.db");
-			this.HiddenObjects.Add("SalesDepotCache.xml");
+			HiddenObjects = new List<string>();
+			HiddenObjects.Add("!Old");
+			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
+			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
+			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
+			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
+			HiddenObjects.Add("thumbs.db");
+			HiddenObjects.Add("SalesDepotCache.xml");
 		}
 
 		private void LoadDefaultViewSettings()
@@ -191,47 +187,49 @@ namespace SalesDepot.ConfigurationClasses
 
 			if (File.Exists(_defaultViewPath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				try
 				{
 					document.Load(_defaultViewPath);
-					this.IsConfigured = true;
+					IsConfigured = true;
 				}
-				catch
-				{
-				}
+				catch {}
 
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/Classic");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ClassicView = tempBool;
+						ClassicView = tempBool;
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/List");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ListView = tempBool;
+						ListView = tempBool;
+				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/Accordion");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						AccordionView = tempBool;
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/solutiontarget");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.SolutionTagsView = tempBool;
+						SolutionTagsView = tempBool;
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/solutiontitle");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.SolutionTitleView = tempBool;
+						SolutionTitleView = tempBool;
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/solutiondate");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.SolutionDateView = tempBool;
+						SolutionDateView = tempBool;
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/lastviewed");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.LastViewed = tempBool;
+						LastViewed = tempBool;
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/emailbinpdf");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EmailBinSendAsPdf = tempBool;
+						EmailBinSendAsPdf = tempBool;
 			}
-			if (this.LastViewed)
-				this.ClassicView = true;
+			if (LastViewed)
+				ClassicView = true;
 		}
 
 		private void LoadViewButtonsSettings()
@@ -240,44 +238,56 @@ namespace SalesDepot.ConfigurationClasses
 
 			if (File.Exists(_viewButtonsPath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				try
 				{
 					document.Load(_viewButtonsPath);
-					this.IsConfigured = true;
+					IsConfigured = true;
 				}
-				catch
-				{
-				}
+				catch {}
 
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn1");
 				if (node != null)
-					this.ClassicTitle = node.InnerText;
+					ClassicTitle = node.InnerText;
+				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn1tooltip");
+				if (node != null)
+					ClassicDescription = node.InnerText;
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn2");
 				if (node != null)
-					this.ListTitle = node.InnerText;
+					ListTitle = node.InnerText;
+				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn2tooltip");
+				if (node != null)
+					ListDescription = node.InnerText;
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn3");
 				if (node != null)
-					this.SolutionTitle = node.InnerText;
+					SolutionTitle = node.InnerText;
+				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn3tooltip");
+				if (node != null)
+					SolutionDescription = node.InnerText;
+				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn4");
+				if (node != null)
+					AccordionTitle = node.InnerText;
+				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn4tooltip");
+				if (node != null)
+					AccordionDescription = node.InnerText;
+
 			}
 		}
 
 		private void LoadConfiguration()
 		{
-			if (this.UseRemoteConnection)
+			if (UseRemoteConnection)
 			{
 				XmlNode node;
 
 				if (File.Exists(_configurationPath))
 				{
-					XmlDocument document = new XmlDocument();
+					var document = new XmlDocument();
 					try
 					{
 						document.Load(_configurationPath);
 					}
-					catch
-					{
-					}
+					catch {}
 					node = document.SelectSingleNode(@"/Config/Connection/Path");
 					if (node != null)
 						if (Directory.Exists(node.InnerText))
@@ -286,21 +296,21 @@ namespace SalesDepot.ConfigurationClasses
 							_remoteLibraryLogoFolder = Path.Combine(node.InnerText, "Graphics");
 						}
 				}
-				if (!Directory.Exists(this.LocalLibraryCacheFolder))
-					Directory.CreateDirectory(this.LocalLibraryCacheFolder);
+				if (!Directory.Exists(LocalLibraryCacheFolder))
+					Directory.CreateDirectory(LocalLibraryCacheFolder);
 			}
 		}
 
 		public void UpdateSetingsAccordingConfiguration()
 		{
-			this.LibraryRootFolder = this.UseRemoteConnection ? _remoteLibraryRootFolder : _localLibraryRootFolder;
-			this.LibraryLogoFolder = this.UseRemoteConnection ? _remoteLibraryLogoFolder : _localLibraryLogoFolder;
+			LibraryRootFolder = UseRemoteConnection ? _remoteLibraryRootFolder : _localLibraryRootFolder;
+			LibraryLogoFolder = UseRemoteConnection ? _remoteLibraryLogoFolder : _localLibraryLogoFolder;
 
-			this.SolutionTagsView &= !this.UseRemoteConnection;
-			this.SolutionDateView &= !this.UseRemoteConnection;
-			this.SolutionTitleView |= (this.UseRemoteConnection & !this.ClassicView & !this.ListView);
+			SolutionTagsView &= !UseRemoteConnection;
+			SolutionDateView &= !UseRemoteConnection;
+			SolutionTitleView |= (UseRemoteConnection & !ClassicView & !ListView & !AccordionView);
 
-			this.SalesDepotName = this.UseRemoteConnection ? " Remote Sales Libraries" : this.SalesDepotName;
+			SalesDepotName = UseRemoteConnection ? " Remote Sales Libraries" : SalesDepotName;
 		}
 
 		public void LoadSettings()
@@ -311,189 +321,190 @@ namespace SalesDepot.ConfigurationClasses
 			LinkLaunchOptions tempLaunchOptions;
 			EmailButtonsDisplayOptions tempEmailButtons;
 
-			this.ClassicView = true;
-			this.ListView = false;
-			this.SolutionDateView = false;
-			this.SolutionTagsView = false;
-			this.SolutionTitleView = false;
-			this.LastViewed = false;
-			this.ClassicTitle = string.Empty;
-			this.SolutionTitle = string.Empty;
-			this.ListTitle = string.Empty;
-			this.SelectedPackage = string.Empty;
-			this.SelectedLibrary = string.Empty;
-			this.SelectedPage = string.Empty;
-			this.SelectedCalendarYear = 0;
-			this.FontSize = 12;
-			this.CalendarFontSize = 10;
-			this.EmailBinSendAsPdf = false;
-			this.EmailBinSendAsZip = false;
-			this.EnablePdfConverting = true;
-			this.OldStyleQuickView = false;
-			this.LaunchPPT = true;
-			this.PowerPointLaunchOptions = LinkLaunchOptions.Viewer;
-			this.PDFLaunchOptions = LinkLaunchOptions.Viewer;
-			this.WordLaunchOptions = LinkLaunchOptions.Menu;
-			this.ExcelLaunchOptions = LinkLaunchOptions.Menu;
-			this.VideoLaunchOptions = LinkLaunchOptions.Viewer;
-			this.EmailButtons = EmailButtonsDisplayOptions.DisplayEmailBin | EmailButtonsDisplayOptions.DisplayQuickView | EmailButtonsDisplayOptions.DisplayViewOptions;
-			this.MultitabView = true;
+			ClassicView = true;
+			ListView = false;
+			AccordionView = false;
+			SolutionDateView = false;
+			SolutionTagsView = false;
+			SolutionTitleView = false;
+			LastViewed = false;
+			ClassicTitle = string.Empty;
+			SolutionTitle = string.Empty;
+			ListTitle = string.Empty;
+			SelectedPackage = string.Empty;
+			SelectedLibrary = string.Empty;
+			SelectedPage = string.Empty;
+			SelectedCalendarYear = 0;
+			FontSize = 12;
+			CalendarFontSize = 10;
+			EmailBinSendAsPdf = false;
+			EmailBinSendAsZip = false;
+			EnablePdfConverting = true;
+			OldStyleQuickView = false;
+			LaunchPPT = true;
+			PowerPointLaunchOptions = LinkLaunchOptions.Viewer;
+			PDFLaunchOptions = LinkLaunchOptions.Viewer;
+			WordLaunchOptions = LinkLaunchOptions.Menu;
+			ExcelLaunchOptions = LinkLaunchOptions.Menu;
+			VideoLaunchOptions = LinkLaunchOptions.Viewer;
+			EmailButtons = EmailButtonsDisplayOptions.DisplayEmailBin | EmailButtonsDisplayOptions.DisplayQuickView | EmailButtonsDisplayOptions.DisplayViewOptions;
+			MultitabView = true;
 
 			LoadDefaultViewSettings();
 			LoadViewButtonsSettings();
 			LoadConfiguration();
 
-			string settingsPath = this.UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;
+			string settingsPath = UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;
 			if (File.Exists(settingsPath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				try
 				{
 					document.Load(settingsPath);
-					this.IsConfigured = true;
+					IsConfigured = true;
 				}
-				catch
-				{
-				}
+				catch {}
 
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedPackage");
 				if (node != null)
-					this.SelectedPackage = node.InnerText;
+					SelectedPackage = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedLibrary");
 				if (node != null)
-					this.SelectedLibrary = node.InnerText;
+					SelectedLibrary = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
 				if (node != null)
-					this.SelectedPage = node.InnerText;
+					SelectedPage = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.SelectedCalendarYear = tempInt;
+						SelectedCalendarYear = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/FontSize");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.FontSize = tempInt;
+						FontSize = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.CalendarFontSize = tempInt;
+						CalendarFontSize = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/ShowEmailBin");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ShowEmailBin = tempBool;
+						ShowEmailBin = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/EmailBinSendAsZip");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EmailBinSendAsZip = tempBool;
+						EmailBinSendAsZip = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/CalendarView");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.CalendarView = tempBool;
+						CalendarView = tempBool;
 
 				#region Program Shedule Settings
 				node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleSelectedStation");
 				if (node != null)
 				{
-					this.ProgramScheduleSelectedStation = node.InnerText;
+					ProgramScheduleSelectedStation = node.InnerText;
 				}
 
 				node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleShowInfo");
 				if (node != null)
 				{
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ProgramScheduleShowInfo = tempBool;
+						ProgramScheduleShowInfo = tempBool;
 				}
 
 				node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleBrowseType");
 				if (node != null)
 				{
 					if (int.TryParse(node.InnerText, out tempInt))
-						this.ProgramScheduleBrowseType = (BrowseType)tempInt;
+						ProgramScheduleBrowseType = (BrowseType)tempInt;
 				}
 
 				node = document.SelectSingleNode(@"/LocalSettings/ProgramScheduleOutputSettings");
 				if (node != null)
 				{
-					this.ProgramScheduleOutputSettings.Deserialize(node);
+					ProgramScheduleOutputSettings.Deserialize(node);
 				}
 				#endregion
 
-				if (this.LastViewed || this.UseRemoteConnection)
+				if (LastViewed || UseRemoteConnection)
 				{
 					node = document.SelectSingleNode(@"/LocalSettings/ClassicView");
 					if (node != null)
 						if (bool.TryParse(node.InnerText, out tempBool))
-							this.ClassicView = tempBool;
+							ClassicView = tempBool;
 					node = document.SelectSingleNode(@"/LocalSettings/ListView");
 					if (node != null)
 						if (bool.TryParse(node.InnerText, out tempBool))
-							this.ListView = tempBool;
+							ListView = tempBool;
+					node = document.SelectSingleNode(@"/LocalSettings/AccordionView");
+					if (node != null)
+						if (bool.TryParse(node.InnerText, out tempBool))
+							AccordionView = tempBool;
 					node = document.SelectSingleNode(@"/LocalSettings/SolutionDateView");
 					if (node != null)
 						if (bool.TryParse(node.InnerText, out tempBool))
-							this.SolutionDateView = tempBool;
+							SolutionDateView = tempBool;
 					node = document.SelectSingleNode(@"/LocalSettings/SolutionTagsView");
 					if (node != null)
 						if (bool.TryParse(node.InnerText, out tempBool))
-							this.SolutionTagsView = tempBool;
+							SolutionTagsView = tempBool;
 					node = document.SelectSingleNode(@"/LocalSettings/SolutionTitleView");
 					if (node != null)
 						if (bool.TryParse(node.InnerText, out tempBool))
-							this.SolutionTitleView = tempBool;
+							SolutionTitleView = tempBool;
 					node = document.SelectSingleNode(@"/LocalSettings/KeyWordFilters");
 					if (node != null)
-						this.KeyWordFilters.Deserialize(node);
+						KeyWordFilters.Deserialize(node);
 				}
 
 				if (File.Exists(_defaultSettingsFilePath))
 				{
-					XmlDocument defaultDocument = new XmlDocument();
+					var defaultDocument = new XmlDocument();
 					try
 					{
 						defaultDocument.Load(_defaultSettingsFilePath);
 						document = defaultDocument;
 					}
-					catch
-					{
-					}
+					catch {}
 				}
 
 				node = document.SelectSingleNode(@"/LocalSettings/OldStyleQuickView");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.OldStyleQuickView = tempBool;
+						OldStyleQuickView = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/LaunchPPT");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.LaunchPPT = tempBool;
+						LaunchPPT = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/PowerPointLaunchOptions");
 				if (node != null)
-					if (Enum.TryParse<LinkLaunchOptions>(node.InnerText, out tempLaunchOptions))
-						this.PowerPointLaunchOptions = tempLaunchOptions;
+					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
+						PowerPointLaunchOptions = tempLaunchOptions;
 				node = document.SelectSingleNode(@"/LocalSettings/PDFLaunchOptions");
 				if (node != null)
-					if (Enum.TryParse<LinkLaunchOptions>(node.InnerText, out tempLaunchOptions))
-						this.PDFLaunchOptions = tempLaunchOptions;
+					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
+						PDFLaunchOptions = tempLaunchOptions;
 				node = document.SelectSingleNode(@"/LocalSettings/WordLaunchOptions");
 				if (node != null)
-					if (Enum.TryParse<LinkLaunchOptions>(node.InnerText, out tempLaunchOptions))
-						this.WordLaunchOptions = tempLaunchOptions;
+					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
+						WordLaunchOptions = tempLaunchOptions;
 				node = document.SelectSingleNode(@"/LocalSettings/ExcelLaunchOptions");
 				if (node != null)
-					if (Enum.TryParse<LinkLaunchOptions>(node.InnerText, out tempLaunchOptions))
-						this.ExcelLaunchOptions = tempLaunchOptions;
+					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
+						ExcelLaunchOptions = tempLaunchOptions;
 				node = document.SelectSingleNode(@"/LocalSettings/VideoLaunchOptions");
 				if (node != null)
-					if (Enum.TryParse<LinkLaunchOptions>(node.InnerText, out tempLaunchOptions))
-						this.VideoLaunchOptions = tempLaunchOptions;
+					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
+						VideoLaunchOptions = tempLaunchOptions;
 				node = document.SelectSingleNode(@"/LocalSettings/EmailButtons");
 				if (node != null)
-					if (Enum.TryParse<EmailButtonsDisplayOptions>(node.InnerText, out tempEmailButtons))
-						this.EmailButtons = tempEmailButtons;
+					if (Enum.TryParse(node.InnerText, out tempEmailButtons))
+						EmailButtons = tempEmailButtons;
 				node = document.SelectSingleNode(@"/LocalSettings/MultitabView");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
-						this.MultitabView = tempBool;
+						MultitabView = tempBool;
 			}
 
 			UpdateSetingsAccordingConfiguration();
@@ -501,87 +512,88 @@ namespace SalesDepot.ConfigurationClasses
 
 		public void SaveSettings()
 		{
-			StringBuilder xml = new StringBuilder();
+			var xml = new StringBuilder();
 
 			xml.AppendLine(@"<LocalSettings>");
-			xml.AppendLine(@"<SelectedPackage>" + this.SelectedPackage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPackage>");
-			xml.AppendLine(@"<SelectedLibrary>" + this.SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
-			xml.AppendLine(@"<SelectedPage>" + this.SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
-			xml.AppendLine(@"<SelectedCalendarYear>" + this.SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
-			xml.AppendLine(@"<FontSize>" + this.FontSize.ToString() + @"</FontSize>");
-			xml.AppendLine(@"<CalendarFontSize>" + this.CalendarFontSize.ToString() + @"</CalendarFontSize>");
-			xml.AppendLine(@"<ShowEmailBin>" + this.ShowEmailBin.ToString() + @"</ShowEmailBin>");
-			xml.AppendLine(@"<EmailBinSendAsZip>" + this.EmailBinSendAsZip.ToString() + @"</EmailBinSendAsZip>");
-			xml.AppendLine(@"<OldStyleQuickView>" + this.OldStyleQuickView.ToString() + @"</OldStyleQuickView>");
-			xml.AppendLine(@"<LaunchPPT>" + this.LaunchPPT.ToString() + @"</LaunchPPT>");
-			xml.AppendLine(@"<PowerPointLaunchOptions>" + this.PowerPointLaunchOptions.ToString() + @"</PowerPointLaunchOptions>");
-			xml.AppendLine(@"<PDFLaunchOptions>" + this.PDFLaunchOptions.ToString() + @"</PDFLaunchOptions>");
-			xml.AppendLine(@"<WordLaunchOptions>" + this.WordLaunchOptions.ToString() + @"</WordLaunchOptions>");
-			xml.AppendLine(@"<ExcelLaunchOptions>" + this.ExcelLaunchOptions.ToString() + @"</ExcelLaunchOptions>");
-			xml.AppendLine(@"<VideoLaunchOptions>" + this.VideoLaunchOptions.ToString() + @"</VideoLaunchOptions>");
-			xml.AppendLine(@"<EmailButtons>" + this.EmailButtons.ToString() + @"</EmailButtons>");
-			xml.AppendLine(@"<MultitabView>" + this.MultitabView.ToString() + @"</MultitabView>");
-			xml.AppendLine(@"<CalendarView>" + this.CalendarView.ToString() + @"</CalendarView>");
-			if (this.LastViewed || this.UseRemoteConnection)
+			xml.AppendLine(@"<SelectedPackage>" + SelectedPackage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPackage>");
+			xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
+			xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
+			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
+			xml.AppendLine(@"<FontSize>" + FontSize.ToString() + @"</FontSize>");
+			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize.ToString() + @"</CalendarFontSize>");
+			xml.AppendLine(@"<ShowEmailBin>" + ShowEmailBin.ToString() + @"</ShowEmailBin>");
+			xml.AppendLine(@"<EmailBinSendAsZip>" + EmailBinSendAsZip.ToString() + @"</EmailBinSendAsZip>");
+			xml.AppendLine(@"<OldStyleQuickView>" + OldStyleQuickView.ToString() + @"</OldStyleQuickView>");
+			xml.AppendLine(@"<LaunchPPT>" + LaunchPPT.ToString() + @"</LaunchPPT>");
+			xml.AppendLine(@"<PowerPointLaunchOptions>" + PowerPointLaunchOptions.ToString() + @"</PowerPointLaunchOptions>");
+			xml.AppendLine(@"<PDFLaunchOptions>" + PDFLaunchOptions.ToString() + @"</PDFLaunchOptions>");
+			xml.AppendLine(@"<WordLaunchOptions>" + WordLaunchOptions.ToString() + @"</WordLaunchOptions>");
+			xml.AppendLine(@"<ExcelLaunchOptions>" + ExcelLaunchOptions.ToString() + @"</ExcelLaunchOptions>");
+			xml.AppendLine(@"<VideoLaunchOptions>" + VideoLaunchOptions.ToString() + @"</VideoLaunchOptions>");
+			xml.AppendLine(@"<EmailButtons>" + EmailButtons.ToString() + @"</EmailButtons>");
+			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
+			xml.AppendLine(@"<CalendarView>" + CalendarView.ToString() + @"</CalendarView>");
+			if (LastViewed || UseRemoteConnection)
 			{
-				xml.AppendLine(@"<ClassicView>" + this.ClassicView.ToString() + @"</ClassicView>");
-				xml.AppendLine(@"<ListView>" + this.ListView.ToString() + @"</ListView>");
-				xml.AppendLine(@"<SolutionDateView>" + this.SolutionDateView.ToString() + @"</SolutionDateView>");
-				xml.AppendLine(@"<SolutionTagsView>" + this.SolutionTagsView.ToString() + @"</SolutionTagsView>");
-				xml.AppendLine(@"<SolutionTitleView>" + this.SolutionTitleView.ToString() + @"</SolutionTitleView>");
-				xml.AppendLine(@"<KeyWordFilters>" + this.KeyWordFilters.Serialize() + @"</KeyWordFilters>");
+				xml.AppendLine(@"<ClassicView>" + ClassicView.ToString() + @"</ClassicView>");
+				xml.AppendLine(@"<ListView>" + ListView + @"</ListView>");
+				xml.AppendLine(@"<AccordionView>" + AccordionView + @"</AccordionView>");
+				xml.AppendLine(@"<SolutionDateView>" + SolutionDateView + @"</SolutionDateView>");
+				xml.AppendLine(@"<SolutionTagsView>" + SolutionTagsView + @"</SolutionTagsView>");
+				xml.AppendLine(@"<SolutionTitleView>" + SolutionTitleView + @"</SolutionTitleView>");
+				xml.AppendLine(@"<KeyWordFilters>" + KeyWordFilters.Serialize() + @"</KeyWordFilters>");
 			}
 
 			#region Program Schedule Settings
-			if (!string.IsNullOrEmpty(this.ProgramScheduleSelectedStation))
-				xml.AppendLine(@"<ProgramScheduleSelectedStation>" + this.ProgramScheduleSelectedStation.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</ProgramScheduleSelectedStation>");
-			xml.AppendLine(@"<ProgramScheduleShowInfo>" + this.ProgramScheduleShowInfo.ToString() + @"</ProgramScheduleShowInfo>");
-			xml.AppendLine(@"<ProgramScheduleBrowseType>" + ((int)this.ProgramScheduleBrowseType).ToString() + @"</ProgramScheduleBrowseType>");
-			xml.AppendLine(@"<ProgramScheduleOutputSettings>" + this.ProgramScheduleOutputSettings.Serialize() + @"</ProgramScheduleOutputSettings>");
+			if (!string.IsNullOrEmpty(ProgramScheduleSelectedStation))
+				xml.AppendLine(@"<ProgramScheduleSelectedStation>" + ProgramScheduleSelectedStation.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</ProgramScheduleSelectedStation>");
+			xml.AppendLine(@"<ProgramScheduleShowInfo>" + ProgramScheduleShowInfo.ToString() + @"</ProgramScheduleShowInfo>");
+			xml.AppendLine(@"<ProgramScheduleBrowseType>" + ((int)ProgramScheduleBrowseType).ToString() + @"</ProgramScheduleBrowseType>");
+			xml.AppendLine(@"<ProgramScheduleOutputSettings>" + ProgramScheduleOutputSettings.Serialize() + @"</ProgramScheduleOutputSettings>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");
 
-			string settingsPath = this.UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;
-			using (StreamWriter sw = new StreamWriter(settingsPath, false))
+			string settingsPath = UseRemoteConnection ? _remoteSettingsFilePath : _localSettingsFilePath;
+			using (var sw = new StreamWriter(settingsPath, false))
 			{
 				sw.Write(xml);
 				sw.Flush();
 			}
 
-			this.IsConfigured = true;
+			IsConfigured = true;
 		}
 
 		public void GetDefaultWizard()
 		{
-			FileInfo defaultWizardFile = new FileInfo(this.DefaultWizardFileName);
+			var defaultWizardFile = new FileInfo(DefaultWizardFileName);
 			if (defaultWizardFile.Exists)
-				using (StreamReader sr = new StreamReader(defaultWizardFile.FullName))
-					if ((this.DefaultWizard = sr.ReadLine()) == null)
-						this.DefaultWizard = string.Empty;
+				using (var sr = new StreamReader(defaultWizardFile.FullName))
+					if ((DefaultWizard = sr.ReadLine()) == null)
+						DefaultWizard = string.Empty;
 		}
 
 		public void GetSalesDepotName()
 		{
-			this.SalesDepotName = "Sales Libraries";
+			SalesDepotName = "Sales Libraries";
 			XmlNode node;
-			string filePath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\SDName.xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+			string filePath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\SDSettings.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			if (File.Exists(filePath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				document.Load(filePath);
 
-				node = document.SelectSingleNode(@"/SDName");
+				node = document.SelectSingleNode(@"/Root/LocalName");
 				if (node != null)
-					this.SalesDepotName = node.InnerText;
+					SalesDepotName = node.InnerText;
 			}
 		}
 
 		public bool CheckLibraries()
 		{
 			bool result = false;
-			if (Directory.Exists(this.LibraryRootFolder))
-				result = ((new DirectoryInfo(this.LibraryRootFolder)).GetDirectories()).Length > 0;
+			if (Directory.Exists(LibraryRootFolder))
+				result = ((new DirectoryInfo(LibraryRootFolder)).GetDirectories()).Length > 0;
 			return result;
 		}
 
@@ -589,7 +601,7 @@ namespace SalesDepot.ConfigurationClasses
 		{
 			try
 			{
-				string localSettingsFolder = string.Format(@"{0}\newlocaldirect.com\xml", System.Environment.GetFolderPath(System.Environment.SpecialFolder.ProgramFiles));
+				string localSettingsFolder = string.Format(@"{0}\newlocaldirect.com\xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 				if (!Directory.Exists(localSettingsFolder))
 					Directory.CreateDirectory(localSettingsFolder);
 				if (!Directory.Exists(Path.Combine(localSettingsFolder, "sales depot")))
@@ -597,30 +609,41 @@ namespace SalesDepot.ConfigurationClasses
 				if (!Directory.Exists(Path.Combine(localSettingsFolder, "sales depot", "Settings")))
 					Directory.CreateDirectory(Path.Combine(localSettingsFolder, "sales depot", "Settings"));
 			}
-			catch
-			{
-			}
+			catch {}
 		}
 
 		private void LoadAppID()
 		{
-			this.AppID = Guid.Empty;
+			AppID = Guid.Empty;
 			string appIDPath = _appIDFile;
 			if (File.Exists(appIDPath))
 			{
-				XmlDocument document = new XmlDocument();
+				var document = new XmlDocument();
 				document.Load(appIDPath);
 
 				XmlNode node = document.SelectSingleNode(@"/AppID");
 				if (node != null)
 					if (!string.IsNullOrEmpty(node.InnerText))
-						this.AppID = new Guid(node.InnerText);
+						AppID = new Guid(node.InnerText);
 			}
 		}
 	}
 
 	public class KeyWordFileFilters
 	{
+		public KeyWordFileFilters()
+		{
+			AllFiles = true;
+			PowerPoint = true;
+			PDF = true;
+			Excel = true;
+			Word = true;
+			Video = true;
+			Url = true;
+			Network = true;
+			Folder = true;
+		}
+
 		public bool AllFiles { get; set; }
 		public bool PowerPoint { get; set; }
 		public bool PDF { get; set; }
@@ -631,31 +654,18 @@ namespace SalesDepot.ConfigurationClasses
 		public bool Network { get; set; }
 		public bool Folder { get; set; }
 
-		public KeyWordFileFilters()
-		{
-			this.AllFiles = true;
-			this.PowerPoint = true;
-			this.PDF = true;
-			this.Excel = true;
-			this.Word = true;
-			this.Video = true;
-			this.Url = true;
-			this.Network = true;
-			this.Folder = true;
-		}
-
 		public string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<AllFiles>" + this.AllFiles.ToString() + @"</AllFiles>");
-			result.AppendLine(@"<PowerPoint>" + this.PowerPoint.ToString() + @"</PowerPoint>");
-			result.AppendLine(@"<PDF>" + this.PDF.ToString() + @"</PDF>");
-			result.AppendLine(@"<Excel>" + this.Excel.ToString() + @"</Excel>");
-			result.AppendLine(@"<Word>" + this.Word.ToString() + @"</Word>");
-			result.AppendLine(@"<Video>" + this.Video.ToString() + @"</Video>");
-			result.AppendLine(@"<Url>" + this.Url.ToString() + @"</Url>");
-			result.AppendLine(@"<Network>" + this.Network.ToString() + @"</Network>");
-			result.AppendLine(@"<Folder>" + this.Folder.ToString() + @"</Folder>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<AllFiles>" + AllFiles.ToString() + @"</AllFiles>");
+			result.AppendLine(@"<PowerPoint>" + PowerPoint.ToString() + @"</PowerPoint>");
+			result.AppendLine(@"<PDF>" + PDF.ToString() + @"</PDF>");
+			result.AppendLine(@"<Excel>" + Excel.ToString() + @"</Excel>");
+			result.AppendLine(@"<Word>" + Word.ToString() + @"</Word>");
+			result.AppendLine(@"<Video>" + Video.ToString() + @"</Video>");
+			result.AppendLine(@"<Url>" + Url.ToString() + @"</Url>");
+			result.AppendLine(@"<Network>" + Network.ToString() + @"</Network>");
+			result.AppendLine(@"<Folder>" + Folder.ToString() + @"</Folder>");
 			return result.ToString();
 		}
 
@@ -669,39 +679,39 @@ namespace SalesDepot.ConfigurationClasses
 				{
 					case "AllFiles":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.AllFiles = tempBool;
+							AllFiles = tempBool;
 						break;
 					case "PowerPoint":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.PowerPoint = tempBool;
+							PowerPoint = tempBool;
 						break;
 					case "PDF":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.PDF = tempBool;
+							PDF = tempBool;
 						break;
 					case "Excel":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Excel = tempBool;
+							Excel = tempBool;
 						break;
 					case "Word":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Word = tempBool;
+							Word = tempBool;
 						break;
 					case "Video":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Video = tempBool;
+							Video = tempBool;
 						break;
 					case "Url":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Url = tempBool;
+							Url = tempBool;
 						break;
 					case "Network":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Network = tempBool;
+							Network = tempBool;
 						break;
 					case "Folder":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Folder = tempBool;
+							Folder = tempBool;
 						break;
 				}
 			}

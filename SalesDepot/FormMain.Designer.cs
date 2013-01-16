@@ -47,15 +47,12 @@
 			this.itemContainerViewSettings = new DevComponents.DotNetBar.ItemContainer();
 			this.buttonItemLargerText = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemSmallerText = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarHomeSearchMode = new DevComponents.DotNetBar.RibbonBar();
-			this.itemContainerHomeSearchMode = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemHomeSearchByTags = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeSearchByFileName = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeSearchRecentFiles = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeView = new DevComponents.DotNetBar.RibbonBar();
-			this.itemContainerHomeView = new DevComponents.DotNetBar.ItemContainer();
+			this.itemContainerHomeView1 = new DevComponents.DotNetBar.ItemContainer();
 			this.buttonItemHomeClassicView = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemHomeListView = new DevComponents.DotNetBar.ButtonItem();
+			this.itemContainerHomeView2 = new DevComponents.DotNetBar.ItemContainer();
+			this.buttonItemHomeAccordionView = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemHomeSolutionView = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarStations = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeBrandLogo = new DevComponents.DotNetBar.ItemContainer();
@@ -266,7 +263,6 @@
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeFloater);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarEmailBin);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarViewSettings);
-			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeSearchMode);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeView);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarStations);
 			this.ribbonPanelHome.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -306,7 +302,7 @@
 			this.ribbonBarExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemExit});
 			this.ribbonBarExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarExit.Location = new System.Drawing.Point(819, 0);
+			this.ribbonBarExit.Location = new System.Drawing.Point(833, 0);
 			this.ribbonBarExit.Name = "ribbonBarExit";
 			this.ribbonBarExit.ResizeItemsToFit = false;
 			this.ribbonBarExit.Size = new System.Drawing.Size(73, 113);
@@ -346,7 +342,7 @@
 			this.ribbonBarHomeHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemHomeHelp});
 			this.ribbonBarHomeHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeHelp.Location = new System.Drawing.Point(751, 0);
+			this.ribbonBarHomeHelp.Location = new System.Drawing.Point(765, 0);
 			this.ribbonBarHomeHelp.Name = "ribbonBarHomeHelp";
 			this.ribbonBarHomeHelp.Size = new System.Drawing.Size(68, 113);
 			this.ribbonBarHomeHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -384,7 +380,7 @@
 			this.ribbonBarHomeFloater.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemHomeFloater});
 			this.ribbonBarHomeFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeFloater.Location = new System.Drawing.Point(668, 0);
+			this.ribbonBarHomeFloater.Location = new System.Drawing.Point(682, 0);
 			this.ribbonBarHomeFloater.Name = "ribbonBarHomeFloater";
 			this.ribbonBarHomeFloater.Size = new System.Drawing.Size(83, 113);
 			this.ribbonBarHomeFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -426,7 +422,7 @@
 			this.ribbonBarEmailBin.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemEmailBin});
 			this.ribbonBarEmailBin.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarEmailBin.Location = new System.Drawing.Point(592, 0);
+			this.ribbonBarEmailBin.Location = new System.Drawing.Point(606, 0);
 			this.ribbonBarEmailBin.Name = "ribbonBarEmailBin";
 			this.ribbonBarEmailBin.Size = new System.Drawing.Size(76, 113);
 			this.ribbonBarEmailBin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -466,7 +462,7 @@
 			this.ribbonBarViewSettings.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerViewSettings});
 			this.ribbonBarViewSettings.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarViewSettings.Location = new System.Drawing.Point(538, 0);
+			this.ribbonBarViewSettings.Location = new System.Drawing.Point(552, 0);
 			this.ribbonBarViewSettings.Name = "ribbonBarViewSettings";
 			this.ribbonBarViewSettings.Size = new System.Drawing.Size(54, 113);
 			this.ribbonBarViewSettings.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -508,81 +504,6 @@
 			this.superTooltip.SetSuperTooltip(this.buttonItemSmallerText, new DevComponents.DotNetBar.SuperTooltipInfo("Decrease Font Size", "", "Click to make the font smaller", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemSmallerText.Text = "Small Text";
 			// 
-			// ribbonBarHomeSearchMode
-			// 
-			this.ribbonBarHomeSearchMode.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeSearchMode.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeSearchMode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarHomeSearchMode.ContainerControlProcessDialogKey = true;
-			this.ribbonBarHomeSearchMode.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarHomeSearchMode.Enabled = false;
-			this.ribbonBarHomeSearchMode.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerHomeSearchMode});
-			this.ribbonBarHomeSearchMode.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeSearchMode.Location = new System.Drawing.Point(465, 0);
-			this.ribbonBarHomeSearchMode.Name = "ribbonBarHomeSearchMode";
-			this.ribbonBarHomeSearchMode.Size = new System.Drawing.Size(73, 113);
-			this.ribbonBarHomeSearchMode.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarHomeSearchMode.TabIndex = 2;
-			this.ribbonBarHomeSearchMode.Text = "Search Mode";
-			// 
-			// 
-			// 
-			this.ribbonBarHomeSearchMode.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarHomeSearchMode.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// itemContainerHomeSearchMode
-			// 
-			// 
-			// 
-			// 
-			this.itemContainerHomeSearchMode.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.itemContainerHomeSearchMode.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-			this.itemContainerHomeSearchMode.Name = "itemContainerHomeSearchMode";
-			this.itemContainerHomeSearchMode.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemHomeSearchByTags,
-            this.buttonItemHomeSearchByFileName,
-            this.buttonItemHomeSearchRecentFiles});
-			// 
-			// buttonItemHomeSearchByTags
-			// 
-			this.buttonItemHomeSearchByTags.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeSearchByTags.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeSearchByTags.Image = global::SalesDepot.Properties.Resources.SearchTags;
-			this.buttonItemHomeSearchByTags.ImageFixedSize = new System.Drawing.Size(24, 24);
-			this.buttonItemHomeSearchByTags.Name = "buttonItemHomeSearchByTags";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchByTags, new DevComponents.DotNetBar.SuperTooltipInfo("Target", "", "Search for files by target criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeSearchByTags.Text = "Target";
-			// 
-			// buttonItemHomeSearchByFileName
-			// 
-			this.buttonItemHomeSearchByFileName.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeSearchByFileName.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeSearchByFileName.Image = global::SalesDepot.Properties.Resources.SearchLinkName;
-			this.buttonItemHomeSearchByFileName.ImageFixedSize = new System.Drawing.Size(24, 24);
-			this.buttonItemHomeSearchByFileName.Name = "buttonItemHomeSearchByFileName";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchByFileName, new DevComponents.DotNetBar.SuperTooltipInfo("Title", "", "Search for files by title or filename", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeSearchByFileName.Text = "Title";
-			// 
-			// buttonItemHomeSearchRecentFiles
-			// 
-			this.buttonItemHomeSearchRecentFiles.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeSearchRecentFiles.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeSearchRecentFiles.Image = global::SalesDepot.Properties.Resources.SearchRecentFiles;
-			this.buttonItemHomeSearchRecentFiles.ImageFixedSize = new System.Drawing.Size(24, 24);
-			this.buttonItemHomeSearchRecentFiles.Name = "buttonItemHomeSearchRecentFiles";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSearchRecentFiles, new DevComponents.DotNetBar.SuperTooltipInfo("Date", "", "Search for files by date added to the library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeSearchRecentFiles.Text = "Date";
-			// 
 			// ribbonBarHomeView
 			// 
 			this.ribbonBarHomeView.AutoOverflowEnabled = true;
@@ -597,11 +518,12 @@
 			this.ribbonBarHomeView.ContainerControlProcessDialogKey = true;
 			this.ribbonBarHomeView.Dock = System.Windows.Forms.DockStyle.Left;
 			this.ribbonBarHomeView.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.itemContainerHomeView});
+            this.itemContainerHomeView1,
+            this.itemContainerHomeView2});
 			this.ribbonBarHomeView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeView.Location = new System.Drawing.Point(379, 0);
 			this.ribbonBarHomeView.Name = "ribbonBarHomeView";
-			this.ribbonBarHomeView.Size = new System.Drawing.Size(86, 113);
+			this.ribbonBarHomeView.Size = new System.Drawing.Size(173, 113);
 			this.ribbonBarHomeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeView.TabIndex = 1;
 			this.ribbonBarHomeView.Text = "View";
@@ -614,18 +536,19 @@
 			// 
 			this.ribbonBarHomeView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// itemContainerHomeView
+			// itemContainerHomeView1
 			// 
 			// 
 			// 
 			// 
-			this.itemContainerHomeView.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.itemContainerHomeView.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-			this.itemContainerHomeView.Name = "itemContainerHomeView";
-			this.itemContainerHomeView.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+			this.itemContainerHomeView1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerHomeView1.ItemSpacing = 15;
+			this.itemContainerHomeView1.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+			this.itemContainerHomeView1.Name = "itemContainerHomeView1";
+			this.itemContainerHomeView1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemHomeClassicView,
-            this.buttonItemHomeListView,
-            this.buttonItemHomeSolutionView});
+            this.buttonItemHomeListView});
+			this.itemContainerHomeView1.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemHomeClassicView
 			// 
@@ -646,6 +569,30 @@
 			this.buttonItemHomeListView.SubItemsExpandWidth = 14;
 			this.superTooltip.SetSuperTooltip(this.buttonItemHomeListView, new DevComponents.DotNetBar.SuperTooltipInfo("List View", "", "Browse for slides and files in a scrolling list format", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemHomeListView.Text = "List";
+			// 
+			// itemContainerHomeView2
+			// 
+			// 
+			// 
+			// 
+			this.itemContainerHomeView2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerHomeView2.ItemSpacing = 15;
+			this.itemContainerHomeView2.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+			this.itemContainerHomeView2.Name = "itemContainerHomeView2";
+			this.itemContainerHomeView2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemHomeAccordionView,
+            this.buttonItemHomeSolutionView});
+			this.itemContainerHomeView2.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+			// 
+			// buttonItemHomeAccordionView
+			// 
+			this.buttonItemHomeAccordionView.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemHomeAccordionView.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemHomeAccordionView.Image = global::SalesDepot.Properties.Resources.ListView;
+			this.buttonItemHomeAccordionView.Name = "buttonItemHomeAccordionView";
+			this.buttonItemHomeAccordionView.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAccordionView, new DevComponents.DotNetBar.SuperTooltipInfo("Solution View", "", "Search for slides using qualified solution focused criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeAccordionView.Text = "Accordion";
 			// 
 			// buttonItemHomeSolutionView
 			// 
@@ -2786,11 +2733,7 @@
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         public DevComponents.DotNetBar.ButtonItem buttonItemHomeClassicView;
         public DevComponents.DotNetBar.RibbonBar ribbonBarSettingsExit;
-        private DevComponents.DotNetBar.ButtonItem buttonItemSettingsExit;
-        private DevComponents.DotNetBar.ItemContainer itemContainerHomeSearchMode;
-        public DevComponents.DotNetBar.ButtonItem buttonItemHomeSearchByTags;
-        public DevComponents.DotNetBar.ButtonItem buttonItemHomeSearchByFileName;
-        public DevComponents.DotNetBar.ButtonItem buttonItemHomeSearchRecentFiles;
+		private DevComponents.DotNetBar.ButtonItem buttonItemSettingsExit;
         private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsStartup;
         private DevComponents.DotNetBar.ItemContainer itemContainerSettingsStartup;
         public DevComponents.DotNetBar.ButtonItem buttonItemSettingsLaunchPowerPoint;
@@ -2812,8 +2755,7 @@
         public DevComponents.DotNetBar.SuperTooltip superTooltip;
         public DevComponents.DotNetBar.RibbonBar ribbonBarEmailBin;
         public DevComponents.DotNetBar.RibbonBar ribbonBarHomeView;
-        public DevComponents.DotNetBar.RibbonBar ribbonBarHomeHelp;
-        public DevComponents.DotNetBar.RibbonBar ribbonBarHomeSearchMode;
+		public DevComponents.DotNetBar.RibbonBar ribbonBarHomeHelp;
         public DevComponents.DotNetBar.ButtonItem buttonItemHomeHelp;
         public DevComponents.DotNetBar.ButtonItem buttonItemSettingsPowerPointViewer;
         public DevComponents.DotNetBar.ButtonItem buttonItemSettingsPowerPointMenu;
@@ -2849,7 +2791,7 @@
         private DevComponents.DotNetBar.ItemContainer itemContainerCalendarLogo;
         public DevComponents.DotNetBar.LabelItem labelItemCalendarLogo;
         private System.Windows.Forms.Panel pnEmpty;
-        private DevComponents.DotNetBar.ItemContainer itemContainerHomeView;
+        private DevComponents.DotNetBar.ItemContainer itemContainerHomeView1;
         public DevComponents.DotNetBar.ButtonItem buttonItemHomeListView;
         public DevComponents.DotNetBar.ButtonItem buttonItemHomeSolutionView;
         private DevComponents.DotNetBar.ButtonItem buttonItemHomeFloater;
@@ -2920,5 +2862,7 @@
         public DevComponents.DotNetBar.ButtonItem buttonItemProgramSearchRun;
         private DevComponents.DotNetBar.RibbonBar ribbonBarProgramScheduleHelp;
         public DevComponents.DotNetBar.ButtonItem buttonItemProgramScheduleHelp;
+		private DevComponents.DotNetBar.ItemContainer itemContainerHomeView2;
+		public DevComponents.DotNetBar.ButtonItem buttonItemHomeAccordionView;
     }
 }

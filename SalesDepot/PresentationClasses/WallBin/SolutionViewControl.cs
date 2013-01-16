@@ -13,6 +13,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraTab;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
@@ -52,11 +53,31 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 			FormMain.Instance.ribbonBarEmailBin.Enabled = false;
 			FormMain.Instance.ribbonBarViewSettings.Enabled = false;
-			FormMain.Instance.ribbonBarHomeSearchMode.Enabled = !SettingsManager.Instance.UseRemoteConnection;
 
 			FormMain.Instance.comboBoxItemStations.Visible = false;
 			FormMain.Instance.comboBoxItemPages.Visible = false;
 			FormMain.Instance.ribbonBarStations.RecalcLayout();
+
+			if (SettingsManager.Instance.SolutionView && !SettingsManager.Instance.UseRemoteConnection)
+			{
+				xtraTabControlSolutionModes.ShowTabHeader = DefaultBoolean.True;
+				if (SettingsManager.Instance.SolutionTagsView)
+					xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageSearchTags;
+				else if (SettingsManager.Instance.SolutionTitleView)
+					xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageKeyWords;
+				else if (SettingsManager.Instance.SolutionDateView)
+					xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageAddDate;
+			}
+			else if (SettingsManager.Instance.UseRemoteConnection)
+			{
+				xtraTabControlSolutionModes.ShowTabHeader = DefaultBoolean.False;
+				xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageKeyWords;
+			}
+			else
+			{
+				xtraTabControlSolutionModes.ShowTabHeader = DefaultBoolean.True;
+				xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageSearchTags;
+			}
 
 			if (SettingsManager.Instance.SolutionTitleView)
 				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
@@ -288,7 +309,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			if (DecoratorManager.Instance.ActivePackageViewer != null)
 			{
 				var files = new ILibraryFile[] { };
-				if (FormMain.Instance.buttonItemHomeSearchByTags.Checked)
+				if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageSearchTags)
 				{
 					files = DecoratorManager.Instance.ActivePackageViewer.Package.SearchByTags(GetSearhTags());
 					if (files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation).Count() > 25)
@@ -297,7 +318,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 						files = files.Take(25).ToArray();
 					}
 				}
-				else if (FormMain.Instance.buttonItemHomeSearchByFileName.Checked)
+				else if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageKeyWords)
 				{
 					string criteria = textEditSearchByFiles.EditValue != null ? textEditSearchByFiles.EditValue.ToString().ToLower() : string.Empty;
 					if (checkEditAllFiles.Checked)
@@ -342,7 +363,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 						AppManager.Instance.ShowWarning("No files meet this search criteria...");
 					}
 				}
-				else if (FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked)
+				else if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageAddDate)
 				{
 					DateTime startDate = DateTime.Now;
 					DateTime endDate = DateTime.Now;
@@ -425,7 +446,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		public void UpdateSearchButtonStatus()
 		{
 			bool enableButton = false;
-			if (FormMain.Instance.buttonItemHomeSearchByTags.Checked)
+			if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageSearchTags)
 			{
 				foreach (CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
 					if (item.CheckState == CheckState.Checked)
@@ -476,7 +497,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 							break;
 						}
 			}
-			else if (FormMain.Instance.buttonItemHomeSearchByFileName.Checked)
+			else if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageKeyWords)
 				enableButton = textEditSearchByFiles.EditValue != null;
 			else
 				enableButton = true;
@@ -889,47 +910,19 @@ namespace SalesDepot.PresentationClasses.WallBin
 			}
 		}
 
-		public void buttonItemHomeSearchMode_Click(object sender, EventArgs e)
+		private void xtraTabControlSolutionModes_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
 		{
-			var buttonItem = sender as ButtonItem;
-			if (buttonItem != null)
-			{
-				FormMain.Instance.buttonItemHomeSearchByTags.Checked = false;
-				FormMain.Instance.buttonItemHomeSearchByFileName.Checked = false;
-				FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked = false;
-				buttonItem.Checked = true;
-			}
-		}
-
-		public void buttonItemHomeSearchMode_CheckedChanged(object sender, EventArgs e)
-		{
-			var buttonItem = sender as ButtonItem;
-			if (buttonItem != null)
-			{
-				if (buttonItem.Checked)
-				{
-					ClearSolutionControl();
-					if (buttonItem == FormMain.Instance.buttonItemHomeSearchByTags)
-					{
-						xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageSearchTags;
-						FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _targetToolTip);
-					}
-					else if (buttonItem == FormMain.Instance.buttonItemHomeSearchByFileName)
-					{
-						xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageKeyWords;
-						FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
-					}
-					else if (buttonItem == FormMain.Instance.buttonItemHomeSearchRecentFiles)
-					{
-						xtraTabControlSolutionModes.SelectedTabPage = xtraTabPageAddDate;
-						FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
-					}
-					SettingsManager.Instance.SolutionTitleView = FormMain.Instance.buttonItemHomeSearchByFileName.Checked;
-					SettingsManager.Instance.SolutionTagsView = FormMain.Instance.buttonItemHomeSearchByTags.Checked;
-					SettingsManager.Instance.SolutionDateView = FormMain.Instance.buttonItemHomeSearchRecentFiles.Checked;
-					SettingsManager.Instance.SaveSettings();
-				}
-			}
+			ClearSolutionControl();
+			if (e.Page == xtraTabPageSearchTags)
+				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _targetToolTip);
+			else if (e.Page == xtraTabPageKeyWords)
+				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _titleToolTip);
+			else if (e.Page == xtraTabPageAddDate)
+				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
+			SettingsManager.Instance.SolutionTitleView = e.Page == xtraTabPageKeyWords;
+			SettingsManager.Instance.SolutionTagsView = e.Page == xtraTabPageSearchTags;
+			SettingsManager.Instance.SolutionDateView = e.Page == xtraTabPageAddDate;
+			SettingsManager.Instance.SaveSettings();
 		}
 		#endregion
 	}

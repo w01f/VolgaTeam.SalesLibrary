@@ -105,9 +105,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
             FormMain.Instance.comboBoxItemStations.Items.AddRange(this.Package.LibraryCollection.Select(x => x.Name).ToArray());
 
             if (FormMain.Instance.comboBoxItemStations.Items.Count > 1)
-                FormMain.Instance.comboBoxItemStations.Visible = (ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView) & true;
+                FormMain.Instance.comboBoxItemStations.Visible = !ConfigurationClasses.SettingsManager.Instance.SolutionView & true;
             else
-                FormMain.Instance.comboBoxItemStations.Visible = (ConfigurationClasses.SettingsManager.Instance.ClassicView | ConfigurationClasses.SettingsManager.Instance.ListView) & false;
+				FormMain.Instance.comboBoxItemStations.Visible = !ConfigurationClasses.SettingsManager.Instance.SolutionView & false;
 
             if (FormMain.Instance.comboBoxItemStations.Items.Count > 0)
             {
@@ -136,7 +136,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
         {
             if (this.SelectedLibrary != null)
                 foreach (PageDecorator page in this.SelectedLibrary.Pages)
-                    page.FitObjectsToPage();
+                    page.UpdatePageContent();
         }
 
         public void FormatCalendar()
