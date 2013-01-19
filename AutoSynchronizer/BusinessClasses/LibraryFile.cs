@@ -1,31 +1,77 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using SalesDepot.CoreObjects.InteropClasses;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-	public class LibraryFile : ILibraryFile
+	public class LibraryLink : ILibraryLink
 	{
+		private bool _enableWidget;
+		private bool _isBold;
+		private bool _isDead;
+		private DateTime _lastChanged = DateTime.MinValue;
 		private string _linkLocalPath = string.Empty;
 		private string _name = string.Empty;
 		private string _note = string.Empty;
-		private int _order = 0;
-		private bool _isBold = false;
-		private bool _isDead = false;
-		private bool _enableWidget = false;
-		private Image _widget = null;
+		private int _order;
+		private Image _widget;
 
 		#region Compatibility with old versions
-		private bool _oldEnableBanner;
 		private Image _oldBanner;
+		private bool _oldEnableBanner;
 		#endregion
 
-		private DateTime _lastChanged = DateTime.MinValue;
+		public LibraryLink(LibraryFolder parent)
+		{
+			Parent = parent;
+			RootId = Guid.Empty;
+			Identifier = Guid.NewGuid();
+			RelativePath = string.Empty;
+			Type = FileTypes.Other;
+			AddDate = DateTime.Now;
+			SearchTags = new LibraryFileSearchTags();
+			ExpirationDateOptions = new ExpirationDateOptions();
+			AttachmentProperties = new AttachmentProperties(this);
+			FileCard = new FileCard(this);
 
+			CustomKeywords = new CustomKeywords();
+
+			SetProperties();
+		}
+
+		public string PropertiesName
+		{
+			get
+			{
+				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder || Type == FileTypes.LineBreak)
+					return _name;
+				else
+					return Path.GetFileName(OriginalPath);
+			}
+		}
+		public string Content
+		{
+			get
+			{
+				IPreviewContainer previewContainer = Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
+				if (previewContainer != null)
+					return previewContainer.GetTextContent();
+				return string.Empty;
+			}
+		}
+
+		public string PreviewStoragePath
+		{
+			get { return Parent.Parent.Parent.Folder.FullName; }
+		}
+
+		#region ILibraryFile Members
 		public LibraryFolder Parent { get; set; }
 		public Guid RootId { get; set; }
 		public Guid Identifier { get; set; }
@@ -39,13 +85,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
-		public AttachmentProperties AttachmentProperties { get; set; }
 		public BannerProperties BannerProperties { get; set; }
+		public virtual AttachmentProperties AttachmentProperties { get; set; }
 		public FileCard FileCard { get; set; }
-
-		#region Compatibility with desktop version of Sales Depot
-		public PresentationPreviewContainer PreviewContainer { get; set; }
-		#endregion
 
 		public string Name
 		{
@@ -53,7 +95,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set
 			{
 				if (_name != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_name = value;
 			}
 		}
@@ -62,15 +104,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (_isDead && this.Parent.Parent.Parent.EnableInactiveLinks && (this.Parent.Parent.Parent.InactiveLinksBoldWarning || this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
+				if (_isDead && Parent.Parent.Parent.EnableInactiveLinks && (Parent.Parent.Parent.InactiveLinksBoldWarning || Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
 					return string.Empty;
-				else
-					return _note;
+				return _note;
 			}
 			set
 			{
 				if (_note != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_note = value;
 			}
 		}
@@ -81,7 +122,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set
 			{
 				if (_order != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_order = value;
 			}
 		}
@@ -92,7 +133,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set
 			{
 				if (_isBold != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_isBold = value;
 			}
 		}
@@ -103,7 +144,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set
 			{
 				if (_isDead != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_isDead = value;
 			}
 		}
@@ -114,7 +155,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set
 			{
 				if (_enableWidget != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_enableWidget = value;
 			}
 		}
@@ -125,15 +166,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				if (_enableWidget && _widget != null)
 					return _widget;
-				else if (this.Parent != null)
-					return this.Parent.Parent.Parent.AutoWidgets.Where(x => x.Extension.ToLower().Equals(!string.IsNullOrEmpty(this.Extension) ? this.Extension.Substring(1).ToLower() : string.Empty)).Select(y => y.Widget).FirstOrDefault();
-				else
-					return null;
+				return Parent != null ? Parent.Parent.Parent.AutoWidgets.Where(x => x.Extension.ToLower().Equals(!string.IsNullOrEmpty(Extension) ? Extension.Substring(1).ToLower() : string.Empty)).Select(y => y.Widget).FirstOrDefault() : null;
 			}
 			set
 			{
 				if (_widget != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_widget = value;
 			}
 		}
@@ -144,7 +182,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set
 			{
 				_lastChanged = value;
-				this.Parent.LastChanged = _lastChanged;
+				Parent.LastChanged = _lastChanged;
 			}
 		}
 
@@ -154,15 +192,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				if (string.IsNullOrEmpty(_linkLocalPath))
 				{
-					if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
-						return this.RelativePath;
-					else if (this.Type == FileTypes.LineBreak)
+					if (Type == FileTypes.Url || Type == FileTypes.Network)
+						return RelativePath;
+					if (Type == FileTypes.LineBreak)
 						return string.Empty;
-					else
-						return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
+					return ((Parent != null ? Parent.Parent.Parent.GetRootFolder(RootId).Folder.FullName : string.Empty) + @"\" + RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
 				}
-				else
-					return _linkLocalPath;
+				return _linkLocalPath;
 			}
 			set { _linkLocalPath = value; }
 		}
@@ -171,35 +207,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (_isDead && this.Parent.Parent.Parent.EnableInactiveLinks)
+				if (_isDead && Parent.Parent.Parent.EnableInactiveLinks)
 				{
-					if (this.Parent.Parent.Parent.InactiveLinksBoldWarning)
+					if (Parent.Parent.Parent.InactiveLinksBoldWarning)
 					{
 						if (!_name.Contains("INACTIVE!"))
 							return "INACTIVE! " + _name;
-						else
-							return _name;
-					}
-					else if (this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak)
-						return string.Empty;
-					else
 						return _name;
+					}
+					return Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak ? string.Empty : _name;
 				}
-				else if (this.ExpirationDateOptions.EnableExpirationDate && this.ExpirationDateOptions.LabelLinkWhenExpired && this.IsExpired)
+				if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.LabelLinkWhenExpired && IsExpired)
 					return "EXPIRED! " + _name;
-				else
-					return _name;
-			}
-		}
-
-		public string PropertiesName
-		{
-			get
-			{
-				if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder || this.Type == FileTypes.LineBreak)
-					return _name;
-				else
-					return Path.GetFileName(this.OriginalPath);
+				return _name;
 			}
 		}
 
@@ -207,12 +227,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder)
+				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder)
 					return _name;
-				else if (this.Type == FileTypes.LineBreak)
-					return string.Empty;
-				else
-					return Path.GetFileName(this.OriginalPath);
+				return Type == FileTypes.LineBreak ? string.Empty : Path.GetFileName(OriginalPath);
 			}
 		}
 
@@ -220,14 +237,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder)
+				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder)
 					return _name;
-				else if (this.Type == FileTypes.LineBreak)
-					return string.Empty;
-				else
-				{
-					return Path.GetFileNameWithoutExtension(this.OriginalPath);
-				}
+				return Type == FileTypes.LineBreak ? string.Empty : Path.GetFileNameWithoutExtension(OriginalPath);
 			}
 		}
 
@@ -235,7 +247,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case FileTypes.Presentation:
 					case FileTypes.BuggyPresentation:
@@ -243,7 +255,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case FileTypes.MediaPlayerVideo:
 					case FileTypes.Other:
 					case FileTypes.QuickTimeVideo:
-						return Path.GetExtension(this.OriginalPath);
+						return Path.GetExtension(OriginalPath);
 					default:
 						return string.Empty;
 				}
@@ -254,12 +266,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (_isDead && this.Parent.Parent.Parent.EnableInactiveLinks && this.Parent.Parent.Parent.InactiveLinksBoldWarning)
+				if (_isDead && Parent.Parent.Parent.EnableInactiveLinks && Parent.Parent.Parent.InactiveLinksBoldWarning)
 					return true;
-				else if (this.ExpirationDateOptions.EnableExpirationDate && this.IsExpired && this.ExpirationDateOptions.LabelLinkWhenExpired)
+				if (ExpirationDateOptions.EnableExpirationDate && IsExpired && ExpirationDateOptions.LabelLinkWhenExpired)
 					return true;
-				else
-					return _isBold;
+				return _isBold;
 			}
 		}
 
@@ -267,36 +278,48 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				if (this.ExpirationDateOptions.EnableExpirationDate && this.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
-					return ((long)this.ExpirationDateOptions.ExpirationDate.Subtract(DateTime.Now).TotalMilliseconds) < 0;
-				else
-					return false;
+				if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
+					return ((long)ExpirationDateOptions.ExpirationDate.Subtract(DateTime.Now).TotalMilliseconds) < 0;
+				return false;
 			}
 		}
 
-		public string Content
+		public bool HasTags
 		{
-			get
-			{
-				IPreviewContainer previewContainer = this.Parent.Parent.Parent.GetPreviewContainer(this.OriginalPath);
-				if (previewContainer != null)
-					return previewContainer.GetTextContent();
-				else
-					return string.Empty;
-			}
+			get { return HasCategories || HasKeywords || HasFileCard || HasFileAttachments || HasWebAttachments; }
 		}
 
-		public string PreviewStoragePath
+		public bool HasCategories
 		{
-			get { return this.Parent.Parent.Parent.Folder.FullName; }
+			get { return !string.IsNullOrEmpty(SearchTags.AllTags); }
+		}
+
+		public bool HasKeywords
+		{
+			get { return CustomKeywords.Tags.Count > 0; }
+		}
+
+		public bool HasFileCard
+		{
+			get { return FileCard.Enable; }
+		}
+
+		public bool HasFileAttachments
+		{
+			get { return AttachmentProperties.Enable && AttachmentProperties.FilesAttachments.Count > 0; }
+		}
+
+		public bool HasWebAttachments
+		{
+			get { return AttachmentProperties.Enable && AttachmentProperties.WebAttachments.Count > 0; }
 		}
 
 		public string Format
 		{
 			get
 			{
-				string format = string.Empty;
-				switch (this.Extension.Replace(".", string.Empty).ToLower())
+				string format;
+				switch (Extension.Replace(".", string.Empty).ToLower())
 				{
 					case "ppt":
 					case "pptx":
@@ -348,89 +371,71 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public LibraryFile(LibraryFolder parent)
+		public ILibraryLink Clone(LibraryFolder parent)
 		{
-			this.Parent = parent;
-			this.RootId = Guid.Empty;
-			this.Identifier = Guid.NewGuid();
-			this.RelativePath = string.Empty;
-			this.Type = FileTypes.Other;
-			this.AddDate = DateTime.Now;
-			this.SearchTags = new LibraryFileSearchTags();
-			this.ExpirationDateOptions = new ExpirationDateOptions();
-			this.AttachmentProperties = new AttachmentProperties(this);
-			this.FileCard = new FileCard(this);
-
-			this.CustomKeywords = new CustomKeywords();
-
-			SetProperties();
-		}
-
-		public ILibraryFile Clone(LibraryFolder parent)
-		{
-			LibraryFile file = new LibraryFile(parent);
+			var file = new LibraryLink(parent);
 			file.OriginalPath = _linkLocalPath;
-			file.Name = this.Name;
-			file.Note = this.Note;
-			file.Order = this.Order;
-			file.IsBold = this.IsBold;
-			file.EnableWidget = this.EnableWidget;
-			file.Widget = this.Widget;
-			file.RootId = this.RootId;
-			file.RelativePath = this.RelativePath;
-			file.Type = this.Type;
-			file.AddDate = this.AddDate;
-			file.SearchTags = this.SearchTags;
-			file.CustomKeywords = this.CustomKeywords;
-			file.ExpirationDateOptions = this.ExpirationDateOptions;
-			file.PresentationProperties = this.PresentationProperties;
-			file.LineBreakProperties = this.LineBreakProperties.Clone(file);
-			file.AttachmentProperties = this.AttachmentProperties.Clone(file);
-			file.BannerProperties = this.BannerProperties.Clone(file);
-			file.FileCard = this.FileCard.Clone(file);
+			file.Name = Name;
+			file.Note = Note;
+			file.Order = Order;
+			file.IsBold = IsBold;
+			file.EnableWidget = EnableWidget;
+			file.Widget = Widget;
+			file.RootId = RootId;
+			file.RelativePath = RelativePath;
+			file.Type = Type;
+			file.AddDate = AddDate;
+			file.SearchTags = SearchTags;
+			file.CustomKeywords = CustomKeywords;
+			file.ExpirationDateOptions = ExpirationDateOptions;
+			file.PresentationProperties = PresentationProperties;
+			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			file.AttachmentProperties = AttachmentProperties.Clone(file);
+			file.BannerProperties = BannerProperties.Clone(file);
+			file.FileCard = FileCard.Clone(file);
 			return file;
 		}
 
-		public string Serialize()
+		public virtual string Serialize()
 		{
-			TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
+			var converter = TypeDescriptor.GetConverter(typeof(Bitmap));
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
 			result.AppendLine(@"<DisplayName>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
 			result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
 			result.AppendLine(@"<IsBold>" + _isBold + @"</IsBold>");
 			result.AppendLine(@"<IsDead>" + _isDead + @"</IsDead>");
-			result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+			result.AppendLine(@"<RootId>" + RootId.ToString() + @"</RootId>");
 			result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
-			result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
-			result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
+			result.AppendLine(@"<RelativePath>" + RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
+			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
 			result.AppendLine(@"<Order>" + _order + @"</Order>");
 			result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-			result.AppendLine(@"<AttachmentProperties>" + this.AttachmentProperties.Serialize() + @"</AttachmentProperties>");
-			result.AppendLine(@"<AddDate>" + this.AddDate.ToString() + @"</AddDate>");
+			result.AppendLine(@"<AttachmentProperties>" + AttachmentProperties.Serialize() + @"</AttachmentProperties>");
+			result.AppendLine(@"<AddDate>" + AddDate.ToString() + @"</AddDate>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
-			result.Append(this.SearchTags.Serialize());
-			result.Append(this.CustomKeywords.Serialize());
-			result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
-			result.AppendLine(@"<FileCard>" + this.FileCard.Serialize() + @"</FileCard>");
+			result.Append(SearchTags.Serialize());
+			result.Append(CustomKeywords.Serialize());
+			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
+			result.AppendLine(@"<FileCard>" + FileCard.Serialize() + @"</FileCard>");
 
 			#region Compatibility with desktop version of Sales Depot
-			if (this.PreviewContainer != null)
-				result.AppendLine(@"<PreviewContainer>" + this.PreviewContainer.Serialize() + @"</PreviewContainer>");
+			if (PreviewContainer != null)
+				result.AppendLine(@"<PreviewContainer>" + PreviewContainer.Serialize() + @"</PreviewContainer>");
 			#endregion
 
-			if (this.PresentationProperties != null)
-				result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
-			if (this.LineBreakProperties != null)
-				result.AppendLine(@"<LineBreakProperties>" + this.LineBreakProperties.Serialize() + @"</LineBreakProperties>");
-			if (this.BannerProperties != null && this.BannerProperties.Configured)
+			if (PresentationProperties != null)
+				result.AppendLine(@"<PresentationProperties>" + PresentationProperties.Serialize() + @"</PresentationProperties>");
+			if (LineBreakProperties != null)
+				result.AppendLine(@"<LineBreakProperties>" + LineBreakProperties.Serialize() + @"</LineBreakProperties>");
+			if (BannerProperties != null && BannerProperties.Configured)
 			{
-				result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
+				result.AppendLine(@"<BannerProperties>" + BannerProperties.Serialize() + @"</BannerProperties>");
 
 				#region Compatibility with old versions
-				result.AppendLine(@"<EnableBanner>" + this.BannerProperties.Enable.ToString() + @"</EnableBanner>");
-				result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(this.BannerProperties.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
+				result.AppendLine(@"<EnableBanner>" + BannerProperties.Enable.ToString() + @"</EnableBanner>");
+				result.AppendLine(@"<Banner>" + Convert.ToBase64String((byte[])converter.ConvertTo(BannerProperties.Image, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Banner>");
 				#endregion
 			}
 			else
@@ -443,10 +448,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return result.ToString();
 		}
 
-		public void Deserialize(XmlNode node)
+		public virtual void Deserialize(XmlNode node)
 		{
-			bool tempBool = false;
-			int tempInt = 0;
+			bool tempBool;
+			int tempInt;
 			DateTime tempDate = DateTime.Now;
 			Guid tempGuid;
 
@@ -456,7 +461,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					case "Identifier":
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "DisplayName":
 						_name = childNode.InnerText;
@@ -470,20 +475,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 					case "RootId":
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.RootId = tempGuid;
+							RootId = tempGuid;
 						break;
 					case "LocalPath":
 						_linkLocalPath = childNode.InnerText;
 						break;
 					case "RelativePath":
-						this.RelativePath = childNode.InnerText;
+						RelativePath = childNode.InnerText;
 						break;
 					case "Type":
 						if (int.TryParse(childNode.InnerText, out tempInt))
 						{
-							this.Type = (FileTypes)tempInt;
-							if (this.Type == FileTypes.LineBreak)
-								this.LineBreakProperties = new LineBreakProperties(this);
+							Type = (FileTypes)tempInt;
+							if (Type == FileTypes.LineBreak)
+								LineBreakProperties = new LineBreakProperties(this);
 						}
 						break;
 					case "Order":
@@ -501,56 +506,56 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							_widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
 					case "AttachmentProperties":
-						this.AttachmentProperties.Deserialize(childNode);
+						AttachmentProperties.Deserialize(childNode);
 						break;
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
-							this.AddDate = tempDate;
+							AddDate = tempDate;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							_lastChanged = tempDate;
 						break;
 					case "SearchTags":
-						this.SearchTags.Deserialize(childNode);
+						SearchTags.Deserialize(childNode);
 						break;
-					case SalesDepot.CoreObjects.BusinessClasses.CustomKeywords.TagName:
-						this.CustomKeywords.Deserialize(childNode);
+					case BusinessClasses.CustomKeywords.TagName:
+						CustomKeywords.Deserialize(childNode);
 						break;
 					case "ExpirationDateOptions":
-						this.ExpirationDateOptions.Deserialize(childNode);
+						ExpirationDateOptions.Deserialize(childNode);
 						break;
 					case "FileCard":
-						this.FileCard.Deserialize(childNode);
+						FileCard.Deserialize(childNode);
 						break;
 
 					#region Compatibility with old version of Sales Depot
 					case "PreviewContainer":
-						this.PreviewContainer = new PresentationPreviewContainer(this);
-						this.PreviewContainer.Deserialize(childNode);
+						PreviewContainer = new PresentationPreviewContainer(this);
+						PreviewContainer.Deserialize(childNode);
 						break;
 					case "UniversalPreviewContainer":
-						UniversalPreviewContainer universalPreviewContainer = new UniversalPreviewContainer(this.Parent.Parent.Parent);
+						var universalPreviewContainer = new UniversalPreviewContainer(Parent.Parent.Parent);
 						universalPreviewContainer.Deserialize(childNode);
-						universalPreviewContainer.OriginalPath = this.OriginalPath;
-						if (!this.Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.ToLower().Equals(this.OriginalPath.ToLower())))
-							this.Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
+						universalPreviewContainer.OriginalPath = OriginalPath;
+						if (!Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.ToLower().Equals(OriginalPath.ToLower())))
+							Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
 						break;
 					#endregion
 
 					case "PresentationProperties":
-						this.PresentationProperties = new PresentationProperties();
-						this.PresentationProperties.Deserialize(childNode);
+						PresentationProperties = new PresentationProperties();
+						PresentationProperties.Deserialize(childNode);
 						break;
 					case "LineBreakProperties":
-						this.LineBreakProperties = new LineBreakProperties(this);
-						this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-						this.LineBreakProperties.BoldFont = new Font(this.Parent.WindowFont, FontStyle.Bold);
-						this.LineBreakProperties.Deserialize(childNode);
+						LineBreakProperties = new LineBreakProperties(this);
+						LineBreakProperties.Font = new Font(Parent.WindowFont, Parent.WindowFont.Style);
+						LineBreakProperties.BoldFont = new Font(Parent.WindowFont, FontStyle.Bold);
+						LineBreakProperties.Deserialize(childNode);
 						break;
 					case "BannerProperties":
-						this.BannerProperties = new BannerProperties(this);
-						this.BannerProperties.Deserialize(childNode);
+						BannerProperties = new BannerProperties(this);
+						BannerProperties.Deserialize(childNode);
 						break;
 
 					#region Compatibility with old versions
@@ -559,56 +564,58 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							_oldEnableBanner = tempBool;
 						break;
 					case "Banner":
-						if (string.IsNullOrEmpty(childNode.InnerText))
-							_oldBanner = null;
-						else
-							_oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+						_oldBanner = string.IsNullOrEmpty(childNode.InnerText) ? null : new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
 					#endregion
 				}
 			}
 
-			if (this.BannerProperties == null)
+			if (BannerProperties == null)
 				InitBannerProperties();
 
 			SetProperties();
 
-			if (this.Type == FileTypes.BuggyPresentation || this.Type == FileTypes.FriendlyPresentation || this.Type == FileTypes.Presentation || this.Type == FileTypes.Other || this.Type == FileTypes.MediaPlayerVideo || this.Type == FileTypes.QuickTimeVideo)
-				this.Parent.Parent.Parent.GetPreviewContainer(this.OriginalPath);
+			if (Type == FileTypes.BuggyPresentation || Type == FileTypes.FriendlyPresentation || Type == FileTypes.Presentation || Type == FileTypes.Other || Type == FileTypes.MediaPlayerVideo || Type == FileTypes.QuickTimeVideo)
+				Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
 		}
+		#endregion
+
+		#region Compatibility with desktop version of Sales Depot
+		public PresentationPreviewContainer PreviewContainer { get; set; }
+		#endregion
 
 		public void InitBannerProperties()
 		{
-			this.BannerProperties = new BannerProperties(this);
-			this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-			this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
-			this.BannerProperties.Text = this.DisplayName;
+			BannerProperties = new BannerProperties(this);
+			BannerProperties.Font = new Font(Parent.WindowFont, Parent.WindowFont.Style);
+			BannerProperties.ForeColor = Parent.ForeWindowColor;
+			BannerProperties.Text = DisplayName;
 
-			this.BannerProperties.Enable = _oldEnableBanner;
-			this.BannerProperties.Image = _oldBanner;
-			if (this.LineBreakProperties != null)
+			BannerProperties.Enable = _oldEnableBanner;
+			BannerProperties.Image = _oldBanner;
+			if (LineBreakProperties != null)
 			{
-				this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
-				if (this.LineBreakProperties.Banner != null)
-					this.BannerProperties.Image = this.LineBreakProperties.Banner;
+				BannerProperties.Enable |= LineBreakProperties.EnableBanner;
+				if (LineBreakProperties.Banner != null)
+					BannerProperties.Image = LineBreakProperties.Banner;
 			}
 		}
 
 		public void SetProperties()
 		{
-			if (this.Type != FileTypes.Folder && this.Type != FileTypes.LineBreak && this.Type != FileTypes.Url && this.Type != FileTypes.Network)
+			if (Type != FileTypes.Folder && Type != FileTypes.LineBreak && Type != FileTypes.Url && Type != FileTypes.Network)
 			{
-				switch (this.Extension.ToUpper())
+				switch (Extension.ToUpper())
 				{
 					case ".PPT":
 					case ".PPTX":
-						this.Type = FileTypes.Presentation;
+						Type = FileTypes.Presentation;
 						break;
 					case ".MPEG":
 					case ".WMV":
 					case ".AVI":
 					case ".WMZ":
-						this.Type = FileTypes.MediaPlayerVideo;
+						Type = FileTypes.MediaPlayerVideo;
 						break;
 					case ".ASF":
 					case ".MOV":
@@ -619,10 +626,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case ".OGV":
 					case ".OGM":
 					case ".OGX":
-						this.Type = FileTypes.QuickTimeVideo;
+						Type = FileTypes.QuickTimeVideo;
 						break;
 					default:
-						this.Type = FileTypes.Other;
+						Type = FileTypes.Other;
 						break;
 				}
 			}
@@ -630,12 +637,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void GetPresentationPrperties()
 		{
-			InteropClasses.PowerPointHelper.Instance.GetPresentationProperties(this);
+			PowerPointHelper.Instance.GetPresentationProperties(this);
 		}
 
 		public void CheckIfDead()
 		{
-			switch (this.Type)
+			switch (Type)
 			{
 				case FileTypes.BuggyPresentation:
 				case FileTypes.FriendlyPresentation:
@@ -643,24 +650,107 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				case FileTypes.QuickTimeVideo:
 				case FileTypes.MediaPlayerVideo:
 				case FileTypes.Other:
-					if (!File.Exists(this.OriginalPath))
-						this.IsDead = true;
-					else
-						this.IsDead = false;
+					IsDead = !File.Exists(OriginalPath);
 					break;
 				case FileTypes.Folder:
-					if (!Directory.Exists(this.OriginalPath))
-						this.IsDead = true;
-					else
-						this.IsDead = false;
+					IsDead = !Directory.Exists(OriginalPath);
 					break;
 			}
 		}
 
 		public void RemoveFromCollection()
 		{
-			this.Parent.Files.Remove(this);
-			this.Parent.LastChanged = DateTime.Now;
+			Parent.Files.Remove(this);
+			Parent.LastChanged = DateTime.Now;
+		}
+	}
+
+	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
+	{
+		public List<ILibraryLink> FolderContent { get; private set; }
+
+		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
+		{
+			bool alive = false;
+			foreach (var file in FolderContent)
+			{
+				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+				if (!alive && file is LibraryFolderLink)
+					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
+				if (alive)
+					break;
+			}
+			return alive;
+		}
+
+		public LibraryFolderLink(LibraryFolder parent)
+			: base(parent)
+		{
+			FolderContent = new List<ILibraryLink>();
+		}
+
+		public override void Deserialize(XmlNode node)
+		{
+			base.Deserialize(node);
+			var contentNode = node.SelectSingleNode("FolderContent");
+			if (contentNode != null)
+				foreach (XmlNode fileNode in contentNode)
+				{
+					var file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
+					file.Deserialize(fileNode);
+					FolderContent.Add(file);
+				}
+
+			UpdateFolderContent();
+		}
+
+		public override string Serialize()
+		{
+			UpdateFolderContent();
+
+			var result = new StringBuilder();
+			result.AppendLine(base.Serialize());
+			result.AppendLine(@"<FolderContent>");
+			foreach (var link in FolderContent)
+				result.AppendLine(@"<File>" + link.Serialize() + @"</File>");
+			result.AppendLine(@"</FolderContent>");
+			return result.ToString();
+		}
+
+		public void UpdateFolderContent()
+		{
+			var existedPaths = new List<string>();
+			if (Directory.Exists(OriginalPath))
+			{
+				foreach (var folder in Directory.GetDirectories(OriginalPath).Select(folderPath => new DirectoryInfo(folderPath)))
+				{
+					existedPaths.Add(folder.FullName);
+					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(folder.FullName.ToLower()))) continue;
+					var libraryFile = new LibraryFolderLink(Parent);
+					libraryFile.Name = folder.Name;
+					libraryFile.RootId = RootId;
+					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+					libraryFile.Type = FileTypes.Folder;
+					libraryFile.InitBannerProperties();
+					FolderContent.Add(libraryFile);
+				}
+				foreach (var file in Directory.GetFiles(OriginalPath).Where(x => !x.ToLower().Contains("thumbs.db")).Select(filePath => new FileInfo(filePath)))
+				{
+					existedPaths.Add(file.FullName);
+					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(file.FullName.ToLower()))) continue;
+					var libraryFile = new LibraryLink(Parent);
+					libraryFile.Name = file.Name;
+					libraryFile.RootId = RootId;
+					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+					libraryFile.SetProperties();
+					libraryFile.InitBannerProperties();
+					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					FolderContent.Add(libraryFile);
+				}
+			}
+			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
 		}
 	}
 }

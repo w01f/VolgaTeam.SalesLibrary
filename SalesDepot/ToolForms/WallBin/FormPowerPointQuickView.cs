@@ -10,7 +10,7 @@ namespace SalesDepot.ToolForms.WallBin
     public partial class FormPowerPointQuickView : Form
     {
         private FileInfo _tempCopy = null;
-        public BusinessClasses.LibraryFile SelectedFile { get; set; }
+        public BusinessClasses.LibraryLink SelectedFile { get; set; }
 
         public FormPowerPointQuickView()
         {

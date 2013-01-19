@@ -28,7 +28,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public bool Compare(SearchGroup anotherGroup)
 		{
-			return Tags.All(tag => anotherGroup.Tags.Contains(tag)) && Tags.Count == anotherGroup.Tags.Count;
+			return Tags.All(tag => anotherGroup.Tags.Select(x => x.Name).Contains(tag.Name)) && Tags.Count == anotherGroup.Tags.Count;
 		}
 
 		public string Serialize()

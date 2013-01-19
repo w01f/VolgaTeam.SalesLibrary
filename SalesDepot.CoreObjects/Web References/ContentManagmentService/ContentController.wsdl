@@ -24,6 +24,7 @@
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="libraryName" type="xsd:string" />
           <xsd:element name="order" type="xsd:int" />
           <xsd:element name="folders" type="tns:LibraryFolderArray" />
           <xsd:element name="enableColumns" type="xsd:boolean" />
@@ -97,6 +98,7 @@
       <xsd:complexType name="LibraryLink">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="parentLinkId" type="xsd:string" />
           <xsd:element name="folderId" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
@@ -227,6 +229,7 @@
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="users" type="tns:UserRecordArray" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
         </xsd:all>
@@ -246,6 +249,7 @@
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="groups" type="tns:GroupRecordArray" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
         </xsd:all>

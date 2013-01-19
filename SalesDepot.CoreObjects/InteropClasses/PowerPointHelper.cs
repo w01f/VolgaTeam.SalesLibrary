@@ -297,7 +297,7 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			}
 		}
 
-		public void GetPresentationProperties(BusinessClasses.ILibraryFile file)
+		public void GetPresentationProperties(BusinessClasses.ILibraryLink file)
 		{
 			try
 			{

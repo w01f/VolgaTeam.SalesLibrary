@@ -11,272 +11,230 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class LibraryFolder : ISyncObject
 	{
+		private Color _backgroundHeaderColor = Color.White;
+		private Color _backgroundWindowColor = Color.White;
+		private Color _borderColor = Color.Black;
+		private int _columnOrder;
+		private bool _enableWidget;
+		private Color _foreHeaderColor = Color.Black;
+		private Color _foreWindowColor = Color.Black;
+		private Alignment _headerAlignment = Alignment.Center;
+		private Font _headerFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+		private DateTime _lastChanged = DateTime.MinValue;
+		private string _name = string.Empty;
+		private double _rowOrder;
+		private Image _widget;
+		private Font _windowFont = new Font("Arial", 14, FontStyle.Regular, GraphicsUnit.Pixel);
+
+		public LibraryFolder(LibraryPage parent)
+		{
+			Identifier = Guid.NewGuid();
+			Parent = parent;
+			AddDate = DateTime.Now;
+
+			BannerProperties = new BannerProperties(this);
+			BannerProperties.Font = _headerFont;
+			BannerProperties.ForeColor = _foreHeaderColor;
+
+			Files = new List<ILibraryLink>();
+		}
+
 		public Guid Identifier { get; set; }
 		public LibraryPage Parent { get; set; }
-		private string _name = string.Empty;
-		private double _rowOrder = 0;
-		private int _columnOrder = 0;
-		private Color _borderColor = Color.Black;
-		private Color _backgroundWindowColor = Color.White;
-		private Color _foreWindowColor = Color.Black;
-		private Color _backgroundHeaderColor = Color.White;
-		private Color _foreHeaderColor = Color.Black;
-		private Font _windowFont = new Font("Arial", 14, FontStyle.Regular, GraphicsUnit.Pixel);
-		private Font _headerFont = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-		private Alignment _headerAlignment = Alignment.Center;
-		private bool _enableWidget = false;
-		private Image _widget = null;
-		private DateTime _lastChanged = DateTime.MinValue;
 
 		public DateTime AddDate { get; set; }
 		public BannerProperties BannerProperties { get; set; }
-		public List<ILibraryFile> Files { get; set; }
+		public List<ILibraryLink> Files { get; set; }
 
 		public string Name
 		{
-			get
-			{
-				return _name;
-			}
+			get { return _name; }
 			set
 			{
 				if (_name != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_name = value;
 			}
 		}
 
 		public double RowOrder
 		{
-			get
-			{
-				return _rowOrder;
-			}
+			get { return _rowOrder; }
 			set
 			{
 				if (_rowOrder != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_rowOrder = value;
 			}
 		}
 
 		public int ColumnOrder
 		{
-			get
-			{
-				return _columnOrder;
-			}
+			get { return _columnOrder; }
 			set
 			{
 				if (_columnOrder != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_columnOrder = value;
 			}
 		}
 
 		public Color BorderColor
 		{
-			get
-			{
-				return _borderColor;
-			}
+			get { return _borderColor; }
 			set
 			{
 				if (_borderColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_borderColor = value;
 			}
 		}
 
 		public Color BackgroundWindowColor
 		{
-			get
-			{
-				return _backgroundWindowColor;
-			}
+			get { return _backgroundWindowColor; }
 			set
 			{
 				if (_backgroundWindowColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_backgroundWindowColor = value;
 			}
 		}
 
 		public Color ForeWindowColor
 		{
-			get
-			{
-				return _foreWindowColor;
-			}
+			get { return _foreWindowColor; }
 			set
 			{
 				if (_foreWindowColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_foreWindowColor = value;
 			}
 		}
 
 		public Color BackgroundHeaderColor
 		{
-			get
-			{
-				return _backgroundHeaderColor;
-			}
+			get { return _backgroundHeaderColor; }
 			set
 			{
 				if (_backgroundHeaderColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_backgroundHeaderColor = value;
 			}
 		}
 
 		public Color ForeHeaderColor
 		{
-			get
-			{
-				return _foreHeaderColor;
-			}
+			get { return _foreHeaderColor; }
 			set
 			{
 				if (_foreHeaderColor != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_foreHeaderColor = value;
 			}
 		}
 
 		public Font WindowFont
 		{
-			get
-			{
-				return _windowFont;
-			}
+			get { return _windowFont; }
 			set
 			{
 				if (_windowFont != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_windowFont = value;
 			}
 		}
 
 		public Font HeaderFont
 		{
-			get
-			{
-				return _headerFont;
-			}
+			get { return _headerFont; }
 			set
 			{
 				if (_headerFont != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_headerFont = value;
 			}
 		}
 
 		public Alignment HeaderAlignment
 		{
-			get
-			{
-				return _headerAlignment;
-			}
+			get { return _headerAlignment; }
 			set
 			{
 				if (_headerAlignment != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_headerAlignment = value;
 			}
 		}
 
 		public bool EnableWidget
 		{
-			get
-			{
-				return _enableWidget;
-			}
+			get { return _enableWidget; }
 			set
 			{
 				if (_enableWidget != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_enableWidget = value;
 			}
 		}
 
 		public Image Widget
 		{
-			get
-			{
-				return _widget;
-			}
+			get { return _widget; }
 			set
 			{
 				if (_widget != value)
-					this.LastChanged = DateTime.Now;
+					LastChanged = DateTime.Now;
 				_widget = value;
-			}
-		}
-
-		public DateTime LastChanged
-		{
-			get
-			{
-				return _lastChanged;
-			}
-			set
-			{
-				_lastChanged = value;
-				this.Parent.LastChanged = _lastChanged;
 			}
 		}
 
 		public double AbsoluteRowOrder
 		{
-			get
+			get { return Parent.Folders.Where(x => x.ColumnOrder < ColumnOrder).Count() + Parent.Folders.Where(x => x.ColumnOrder == ColumnOrder).ToList().IndexOf(this); }
+		}
+
+		#region ISyncObject Members
+		public DateTime LastChanged
+		{
+			get { return _lastChanged; }
+			set
 			{
-				return this.Parent.Folders.Where(x => x.ColumnOrder < this.ColumnOrder).Count() + this.Parent.Folders.Where(x => x.ColumnOrder == this.ColumnOrder).ToList().IndexOf(this);
+				_lastChanged = value;
+				Parent.LastChanged = _lastChanged;
 			}
 		}
-
-		public LibraryFolder(LibraryPage parent)
-		{
-			this.Identifier = Guid.NewGuid();
-			this.Parent = parent;
-			this.AddDate = DateTime.Now;
-
-			this.BannerProperties = new BannerProperties(this);
-			this.BannerProperties.Font = _headerFont;
-			this.BannerProperties.ForeColor = _foreHeaderColor;
-
-			this.Files = new List<ILibraryFile>();
-		}
+		#endregion
 
 		public LibraryFolder Clone(LibraryPage parent)
 		{
-			LibraryFolder folder = new LibraryFolder(parent);
-			folder.Name = this.Name;
-			folder.RowOrder = this.RowOrder;
-			folder.ColumnOrder = this.ColumnOrder;
-			folder.BorderColor = this.BorderColor;
-			folder.BackgroundWindowColor = this.BackgroundWindowColor;
-			folder.ForeWindowColor = this.ForeWindowColor;
-			folder.BackgroundHeaderColor = this.BackgroundHeaderColor;
-			folder.ForeHeaderColor = this.ForeHeaderColor;
-			folder.WindowFont = this.WindowFont;
-			folder.HeaderFont = this.HeaderFont;
-			folder.HeaderAlignment = this.HeaderAlignment;
-			folder.EnableWidget = this.EnableWidget;
-			folder.Widget = this.Widget;
-			folder.AddDate = this.AddDate;
-			folder.BannerProperties = this.BannerProperties.Clone(folder);
-			folder.Files.AddRange(this.Files.Select(x => x.Clone(folder)));
+			var folder = new LibraryFolder(parent);
+			folder.Name = Name;
+			folder.RowOrder = RowOrder;
+			folder.ColumnOrder = ColumnOrder;
+			folder.BorderColor = BorderColor;
+			folder.BackgroundWindowColor = BackgroundWindowColor;
+			folder.ForeWindowColor = ForeWindowColor;
+			folder.BackgroundHeaderColor = BackgroundHeaderColor;
+			folder.ForeHeaderColor = ForeHeaderColor;
+			folder.WindowFont = WindowFont;
+			folder.HeaderFont = HeaderFont;
+			folder.HeaderAlignment = HeaderAlignment;
+			folder.EnableWidget = EnableWidget;
+			folder.Widget = Widget;
+			folder.AddDate = AddDate;
+			folder.BannerProperties = BannerProperties.Clone(folder);
+			folder.Files.AddRange(Files.Select(x => x.Clone(folder)));
 			return folder;
 		}
 
 		public string Serialize()
 		{
-			FontConverter converter = new FontConverter();
+			var converter = new FontConverter();
 			TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
-			StringBuilder result = new StringBuilder();
+			var result = new StringBuilder();
 			result.AppendLine(@"<Name>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Name>");
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
+			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
 			result.AppendLine(@"<RowOrder>" + _rowOrder + @"</RowOrder>");
 			result.AppendLine(@"<ColumnOrder>" + _columnOrder + @"</ColumnOrder>");
 			result.AppendLine(@"<BorderColor>" + _borderColor.ToArgb() + @"</BorderColor>");
@@ -290,11 +248,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
 			if (_widget != null)
 				result.AppendLine(@"<Widget>" + Convert.ToBase64String((byte[])imageConverter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-			result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
-			result.AppendLine(@"<AddDate>" + this.AddDate.ToString() + @"</AddDate>");
+			result.AppendLine(@"<BannerProperties>" + BannerProperties.Serialize() + @"</BannerProperties>");
+			result.AppendLine(@"<AddDate>" + AddDate.ToString() + @"</AddDate>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.AppendLine("<Files>");
-			foreach (ILibraryFile file in this.Files)
+			foreach (ILibraryLink file in Files)
 				result.AppendLine(@"<File>" + file.Serialize() + @"</File>");
 			result.AppendLine("</Files>");
 			return result.ToString();
@@ -304,7 +262,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			int tempInt = 0;
 			bool tempBool;
-			FontConverter converter = new FontConverter();
+			var converter = new FontConverter();
 			Guid tempGuid;
 			DateTime tempDateTime;
 
@@ -317,7 +275,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 					case "Identifier":
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "RowOrder":
 						if (int.TryParse(childNode.InnerText, out tempInt))
@@ -352,18 +310,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						{
 							_windowFont = converter.ConvertFromString(childNode.InnerText) as Font;
 						}
-						catch
-						{
-						}
+						catch { }
 						break;
 					case "HeaderFont":
 						try
 						{
 							_headerFont = converter.ConvertFromString(childNode.InnerText) as Font;
 						}
-						catch
-						{
-						}
+						catch { }
 						break;
 					case "HeaderAligment":
 						if (int.TryParse(childNode.InnerText, out tempInt))
@@ -378,58 +332,58 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							_widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
 					case "BannerProperties":
-						this.BannerProperties.Deserialize(childNode);
+						BannerProperties.Deserialize(childNode);
 						break;
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
-							this.AddDate = tempDateTime;
+							AddDate = tempDateTime;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDateTime))
 							_lastChanged = tempDateTime;
 						break;
 					case "Files":
-						this.Files.Clear();
+						Files.Clear();
 						foreach (XmlNode fileNode in childNode.ChildNodes)
 						{
-							ILibraryFile file = this.Parent.Parent.GetLinkInstance(this);
+							var file = Parent.Parent.GetLinkInstance(this, fileNode);
 							file.Deserialize(fileNode);
-							this.Files.Add(file);
+							Files.Add(file);
 						}
 
 						#region Order Bug Fix
-						if (this.Files.Count > 0)
+						if (Files.Count > 0)
 						{
-							int maxOrder = this.Files.Select(x => x.Order).Max();
+							int maxOrder = Files.Select(x => x.Order).Max();
 							if (maxOrder == 0)
-								for (int i = 0; i < this.Files.Count; i++)
-									if (this.Files[i].Order != i)
-										this.Files[i].Order = i;
+								for (int i = 0; i < Files.Count; i++)
+									if (Files[i].Order != i)
+										Files[i].Order = i;
 						}
 						#endregion
 
-						this.Files.Sort((x, y) => x.Order.CompareTo(y.Order));
+						Files.Sort((x, y) => x.Order.CompareTo(y.Order));
 						break;
 				}
 			}
-			if (!this.BannerProperties.Configured)
+			if (!BannerProperties.Configured)
 			{
-				this.BannerProperties.Text = _name;
-				this.BannerProperties.Font = _headerFont;
-				this.BannerProperties.ForeColor = _foreHeaderColor;
+				BannerProperties.Text = _name;
+				BannerProperties.Font = _headerFont;
+				BannerProperties.ForeColor = _foreHeaderColor;
 			}
 		}
 
 		public void RemoveFromParent()
 		{
-			this.Parent.Folders.Remove(this);
-			this.Parent.LastChanged = DateTime.Now;
+			Parent.Folders.Remove(this);
+			Parent.LastChanged = DateTime.Now;
 		}
 
-		public ILibraryFile[] SearchByTags(LibraryFileSearchTags searchCriteria)
+		public ILibraryLink[] SearchByTags(LibraryFileSearchTags searchCriteria)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
-			foreach (ILibraryFile file in this.Files.Where(x => x.Type != FileTypes.LineBreak))
+			var searchFiles = new List<ILibraryLink>();
+			foreach (ILibraryLink file in Files.Where(x => x.Type != FileTypes.LineBreak))
 			{
 				bool fullMatch = true;
 				bool partialMatch = false;
@@ -438,8 +392,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					SearchGroup fileSearchGroup = file.SearchTags.SearchGroups.Where(x => x.Name.Equals(group.Name)).FirstOrDefault();
 					if (fileSearchGroup != null)
 					{
-						foreach (var tag in group.Tags)
-							if (fileSearchGroup.Tags.Select(x=>x.Name).Contains(tag.Name))
+						foreach (SearchTag tag in group.Tags)
+							if (fileSearchGroup.Tags.Select(x => x.Name).Contains(tag.Name))
 							{
 								partialMatch = true;
 								fullMatch = fullMatch & true;
@@ -463,11 +417,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return searchFiles.ToArray();
 		}
 
-		public ILibraryFile[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
+		public ILibraryLink[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
 		{
 			string[] templateParts = template.Split(' ');
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
-			foreach (ILibraryFile file in this.Files.Where(x => x.Type != FileTypes.LineBreak))
+			var searchFiles = new List<ILibraryLink>();
+			foreach (ILibraryLink file in Files.Where(x => x.Type != FileTypes.LineBreak))
 			{
 				bool fullMatch = false;
 				bool partialMatch = false;
@@ -505,10 +459,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return searchFiles.ToArray();
 		}
 
-		public ILibraryFile[] SearchByDate(DateTime startDate, DateTime endDate)
+		public ILibraryLink[] SearchByDate(DateTime startDate, DateTime endDate)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
-			foreach (ILibraryFile file in this.Files.Where(x => x.Type != FileTypes.LineBreak))
+			var searchFiles = new List<ILibraryLink>();
+			foreach (ILibraryLink file in Files.Where(x => x.Type != FileTypes.LineBreak))
 			{
 				bool fullMatch = false;
 

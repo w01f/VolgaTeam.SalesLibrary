@@ -6,7 +6,7 @@ namespace SalesDepot.ToolForms.WallBin
 {
     public partial class FormEmailLink : Form
     {
-        public BusinessClasses.LibraryFile link { get; set; }
+        public BusinessClasses.LibraryLink link { get; set; }
 
         public FormEmailLink()
         {

@@ -8,7 +8,7 @@ namespace SalesDepot.PresentationClasses.Viewers
     public partial class WebViewer : UserControl, IFileViewer
     {
         #region Properties
-        public BusinessClasses.LibraryFile File { get; private set; }
+        public BusinessClasses.LibraryLink File { get; private set; }
 
         public string DisplayName
         {
@@ -35,7 +35,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         }
         #endregion
 
-        public WebViewer(BusinessClasses.LibraryFile file)
+        public WebViewer(BusinessClasses.LibraryLink file)
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;

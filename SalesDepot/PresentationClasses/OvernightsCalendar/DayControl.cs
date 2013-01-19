@@ -50,7 +50,7 @@ namespace SalesDepot.PresentationClasses.OvernightsCalendar
         {
             if (this.Data.LinkedFile != null)
             {
-                BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(new LibraryFolder(new LibraryPage(this.Data.Parent.Parent.Parent.Parent)));
+                BusinessClasses.LibraryLink libraryFile = new BusinessClasses.LibraryLink(new LibraryFolder(new LibraryPage(this.Data.Parent.Parent.Parent.Parent)));
                 libraryFile.OriginalPath = this.Data.LinkedFile.FullName;
                 libraryFile.Type = FileTypes.OvernightsLink;
                 BusinessClasses.LinkManager.Instance.OpenLink(libraryFile);

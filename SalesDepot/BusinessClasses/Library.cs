@@ -242,9 +242,18 @@ namespace SalesDepot.BusinessClasses
 				this.IsConfigured = false;
 		}
 
-		public ILibraryFile GetLinkInstance(LibraryFolder parentFolder)
+		public ILibraryLink GetLinkInstance(LibraryFolder parentFolder, XmlNode data)
 		{
-			return new LibraryFile(parentFolder);
+			ILibraryLink libraryFile = null;
+			XmlNode typeNode = data.SelectSingleNode("Type");
+			int tempInt;
+			if (typeNode != null && int.TryParse(typeNode.InnerText, out tempInt))
+			{
+				var type = (FileTypes)tempInt;
+				if (type == FileTypes.Folder)
+					libraryFile = new LibraryFolderLink(parentFolder);
+			}
+			return libraryFile ?? new LibraryLink(parentFolder);
 		}
 
 		public RootFolder GetRootFolder(Guid folderId)
@@ -256,25 +265,25 @@ namespace SalesDepot.BusinessClasses
 				return this.RootFolder;
 		}
 
-		public ILibraryFile[] SearchByTags(LibraryFileSearchTags searchCriteria)
+		public ILibraryLink[] SearchByTags(LibraryFileSearchTags searchCriteria)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
 			foreach (LibraryPage page in this.Pages)
 				searchFiles.AddRange(page.SearchByTags(searchCriteria));
 			return searchFiles.ToArray();
 		}
 
-		public ILibraryFile[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
+		public ILibraryLink[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
 			foreach (LibraryPage page in this.Pages)
 				searchFiles.AddRange(page.SearchByName(template, fullMatchOnly, type));
 			return searchFiles.ToArray();
 		}
 
-		public ILibraryFile[] SearchByDate(DateTime startDate, DateTime endDate)
+		public ILibraryLink[] SearchByDate(DateTime startDate, DateTime endDate)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
 			foreach (LibraryPage page in this.Pages)
 				searchFiles.AddRange(page.SearchByDate(startDate, endDate));
 			return searchFiles.ToArray();

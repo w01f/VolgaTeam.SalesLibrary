@@ -214,25 +214,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return page;
 		}
 
-		public ILibraryFile[] SearchByTags(LibraryFileSearchTags searchCriteria)
+		public ILibraryLink[] SearchByTags(LibraryFileSearchTags searchCriteria)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
 			foreach (LibraryFolder folder in this.Folders)
 				searchFiles.AddRange(folder.SearchByTags(searchCriteria));
 			return searchFiles.ToArray();
 		}
 
-		public ILibraryFile[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
+		public ILibraryLink[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
 			foreach (LibraryFolder folder in this.Folders)
 				searchFiles.AddRange(folder.SearchByName(template, fullMatchOnly, type));
 			return searchFiles.ToArray();
 		}
 
-		public ILibraryFile[] SearchByDate(DateTime startDate, DateTime endDate)
+		public ILibraryLink[] SearchByDate(DateTime startDate, DateTime endDate)
 		{
-			List<ILibraryFile> searchFiles = new List<ILibraryFile>();
+			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
 			foreach (LibraryFolder folder in this.Folders)
 				searchFiles.AddRange(folder.SearchByDate(startDate, endDate));
 			return searchFiles.ToArray();

@@ -26,8 +26,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			ExtraFolders = new List<RootFolder>();
 			Pages = new List<LibraryPage>();
 			EmailList = new List<string>();
-			DeadLinks = new List<ILibraryFile>();
-			ExpiredLinks = new List<ILibraryFile>();
+			DeadLinks = new List<ILibraryLink>();
+			ExpiredLinks = new List<ILibraryLink>();
 			AutoWidgets = new List<AutoWidget>();
 			PreviewContainers = new List<IPreviewContainer>();
 
@@ -44,8 +44,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Init();
 		}
 
-		public List<ILibraryFile> DeadLinks { get; private set; }
-		public List<ILibraryFile> ExpiredLinks { get; private set; }
+		public List<ILibraryLink> DeadLinks { get; private set; }
+		public List<ILibraryLink> ExpiredLinks { get; private set; }
 		public OvernightsCalendar OvernightsCalendar { get; set; }
 
 		public IPadManager IPadManager { get; private set; }
@@ -92,9 +92,18 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public ILibraryFile GetLinkInstance(LibraryFolder parentFolder)
+		public ILibraryLink GetLinkInstance(LibraryFolder parentFolder, XmlNode data)
 		{
-			return new LibraryFile(parentFolder);
+			ILibraryLink libraryFile = null;
+			var typeNode = data.SelectSingleNode("Type");
+			int tempInt;
+			if (typeNode != null && int.TryParse(typeNode.InnerText, out tempInt))
+			{
+				var type = (FileTypes)tempInt;
+				if (type == FileTypes.Folder)
+					libraryFile = new LibraryFolderLink(parentFolder);
+			}
+			return libraryFile ?? new LibraryLink(parentFolder);
 		}
 
 		public RootFolder GetRootFolder(Guid folderId)
@@ -165,11 +174,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void UpdatePreviewableObject(string originalPath, DateTime lastChanged)
 		{
-			foreach (LibraryFile file in Pages.SelectMany(page => page.Folders.SelectMany(folder => folder.Files.Cast<LibraryFile>())))
+			foreach (var file in Pages.SelectMany(page => page.Folders.SelectMany(folder => folder.Files.Cast<LibraryLink>())))
 			{
 				if (file.OriginalPath.ToLower().Equals(originalPath.ToLower()))
 					file.LastChanged = lastChanged;
-				LinkAttachment attachment = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
+				var attachment = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
 				if (attachment != null)
 					attachment.LastChanged = lastChanged;
 			}
@@ -177,18 +186,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void UpdatePreviewContainers()
 		{
-			foreach (IPreviewContainer previewContainer in PreviewContainers)
+			foreach (var previewContainer in PreviewContainers)
 			{
-				bool alive = false;
-				foreach (LibraryPage page in Pages)
+				var alive = false;
+				foreach (var page in Pages)
 				{
-					foreach (LibraryFolder folder in page.Folders)
+					foreach (var folder in page.Folders)
 					{
-						foreach (LibraryFile file in folder.Files)
+						foreach (LibraryLink file in folder.Files)
 						{
 							alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
 							if (!alive)
 								alive = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower())) != null;
+							if (!alive && file is LibraryFolderLink)
+								alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
 							if (alive)
 								break;
 						}
@@ -507,11 +518,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			xml.AppendLine(@"<InactiveLinksMessageAtStartup>" + InactiveLinksMessageAtStartup + @"</InactiveLinksMessageAtStartup>");
 			xml.AppendLine(@"<SendEmail>" + SendEmail + @"</SendEmail>");
 			xml.AppendLine("<ExtraRoots>");
-			foreach (RootFolder folder in ExtraFolders)
+			foreach (var folder in ExtraFolders)
 				xml.AppendLine(@"<ExtraRoot>" + folder.Serialize() + @"</ExtraRoot>");
 			xml.AppendLine("</ExtraRoots>");
 			xml.AppendLine("<Pages>");
-			foreach (LibraryPage page in Pages)
+			foreach (var page in Pages)
 				xml.AppendLine(@"<Page>" + page.Serialize() + @"</Page>");
 			xml.AppendLine("</Pages>");
 			xml.AppendLine("<EmailList>");
@@ -519,11 +530,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				xml.AppendLine(@"<Email>" + email.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Email>");
 			xml.AppendLine("</EmailList>");
 			xml.AppendLine("<AutoWidgets>");
-			foreach (AutoWidget autoWidget in AutoWidgets)
+			foreach (var autoWidget in AutoWidgets)
 				xml.AppendLine(@"<AutoWidget>" + autoWidget.Serialize() + @"</AutoWidget>");
 			xml.AppendLine("</AutoWidgets>");
 			xml.AppendLine("<PreviewContainers>");
-			foreach (IPreviewContainer previewContainer in PreviewContainers)
+			foreach (var previewContainer in PreviewContainers)
 				xml.AppendLine(@"<PreviewContainer>" + previewContainer.Serialize() + @"</PreviewContainer>");
 			xml.AppendLine("</PreviewContainers>");
 
@@ -534,7 +545,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			autoSyncSettings.AppendLine(@"<EnableAutoSync>" + EnableAutoSync.ToString() + @"</EnableAutoSync>");
 			xml.AppendLine(@"<SyncSchedule>");
 			autoSyncSettings.AppendLine(@"<SyncSchedule>");
-			foreach (SyncScheduleRecord syncTime in SyncScheduleRecords)
+			foreach (var syncTime in SyncScheduleRecords)
 			{
 				xml.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
 				autoSyncSettings.AppendLine(@"<SyncScheduleRecord>" + syncTime.Serialize() + @"</SyncScheduleRecord>");
@@ -567,7 +578,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			var xml = new StringBuilder();
 			xml.AppendLine("<Library>");
-			xml.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
+			xml.AppendLine(@"<Identifier>" + Identifier + @"</Identifier>");
 			xml.AppendLine(@"</Library>");
 
 			using (var sw = new StreamWriter(Path.Combine(Folder.FullName, Constants.StorageLightFileName), false))
@@ -617,82 +628,69 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private void ProcessDeadLinks()
 		{
 			DeadLinks.Clear();
-			foreach (LibraryPage page in Pages)
-				foreach (LibraryFolder folder in page.Folders)
-				{
-					foreach (LibraryFile file in folder.Files)
-						file.CheckIfDead();
-					DeadLinks.AddRange(folder.Files.Where(x => x.IsDead));
-				}
+			foreach (var folder in Pages.SelectMany(page => page.Folders))
+			{
+				foreach (LibraryLink file in folder.Files)
+					file.CheckIfDead();
+				DeadLinks.AddRange(folder.Files.Where(x => x.IsDead));
+			}
 		}
 
 		private void ProcessExpiredLinks()
 		{
 			ExpiredLinks.Clear();
-			foreach (LibraryPage page in Pages)
-				foreach (LibraryFolder folder in page.Folders)
-					ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
+			foreach (var folder in Pages.SelectMany(page => page.Folders))
+				ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
 		}
 
 		public void ProcessPresentationProperties()
 		{
-			if (PowerPointHelper.Instance.Connect())
-			{
-				foreach (LibraryPage page in Pages)
-					foreach (LibraryFolder folder in page.Folders)
-						foreach (LibraryFile file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
-							file.GetPresentationPrperties();
-				PowerPointHelper.Instance.Disconnect();
-				Save();
-			}
+			if (!PowerPointHelper.Instance.Connect()) return;
+			foreach (var page in Pages)
+				foreach (var folder in page.Folders)
+					foreach (LibraryLink file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
+						file.GetPresentationPrperties();
+			PowerPointHelper.Instance.Disconnect();
+			Save();
 		}
 
 		public void ProcessAttachments()
 		{
 			var actualAttachmentIds = new List<Guid>();
 
-			foreach (LibraryPage page in Pages)
+			foreach (var page in Pages)
 			{
-				foreach (LibraryFolder folder in page.Folders)
+				foreach (var folder in page.Folders)
 				{
-					foreach (LibraryFile file in folder.Files.Where(x => x.AttachmentProperties.Enable))
+					foreach (var file in folder.Files)
 					{
-						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+						var attachmentProperties = file.AttachmentProperties;
+						if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+						foreach (var attachment in attachmentProperties.FilesAttachments)
 						{
-							foreach (LinkAttachment attachment in file.AttachmentProperties.FilesAttachments)
+							if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+							if (!attachment.IsSourceAvailable) continue;
+							var copy = true;
+							if (attachment.IsDestinationAvailable)
 							{
-								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-								{
-									if (attachment.IsSourceAvailable)
-									{
-										bool copy = true;
-										if (attachment.IsDestinationAvailable)
-										{
-											DateTime sourceTimeStamp = File.GetLastWriteTime(attachment.OriginalPath);
-											DateTime destinationTimeStamp = File.GetLastWriteTime(attachment.DestinationPath);
-											if (sourceTimeStamp == destinationTimeStamp)
-												copy = false;
-										}
-										else
-										{
-											if (!Directory.Exists(Path.GetDirectoryName(attachment.DestinationPath)))
-												Directory.CreateDirectory(Path.GetDirectoryName(attachment.DestinationPath));
-										}
-										if (copy)
-											try
-											{
-												File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
-											}
-											catch {}
-										actualAttachmentIds.Add(attachment.Identifier);
-									}
-								}
-								else
-									break;
+								var sourceTimeStamp = File.GetLastWriteTime(attachment.OriginalPath);
+								var destinationTimeStamp = File.GetLastWriteTime(attachment.DestinationPath);
+								if (sourceTimeStamp == destinationTimeStamp)
+									copy = false;
 							}
+							else
+							{
+								if (!Directory.Exists(Path.GetDirectoryName(attachment.DestinationPath)))
+									Directory.CreateDirectory(Path.GetDirectoryName(attachment.DestinationPath));
+							}
+							if (copy)
+								try
+								{
+									File.Copy(attachment.OriginalPath, attachment.DestinationPath, true);
+								}
+								catch { }
+							actualAttachmentIds.Add(attachment.Identifier);
 						}
-						else
-							break;
 					}
 					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
 						break;
@@ -703,31 +701,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				Save();
 
-			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-			{
-				var attachmentRootFolder = new DirectoryInfo(Path.Combine(Folder.FullName, Constants.AttachmentsRootFolderName));
-				if (attachmentRootFolder.Exists)
-					foreach (DirectoryInfo subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
-						SyncManager.DeleteFolder(subFolder);
-			}
+			if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) return;
+			var attachmentRootFolder = new DirectoryInfo(Path.Combine(Folder.FullName, Constants.AttachmentsRootFolderName));
+			if (attachmentRootFolder.Exists)
+				foreach (var subFolder in attachmentRootFolder.GetDirectories().Where(x => !actualAttachmentIds.Select(y => y.ToString()).Contains(x.Name) && !x.FullName.Contains("_gsdata_")))
+					SyncManager.DeleteFolder(subFolder);
 		}
 
 		private void GeneratePresentationPreviewFiles()
 		{
-			foreach (LibraryPage page in Pages)
+			foreach (var page in Pages)
 			{
-				foreach (LibraryFolder folder in page.Folders)
+				foreach (var folder in page.Folders)
 				{
-					foreach (LibraryFile file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
+					foreach (LibraryLink file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
 					{
-						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-						{
-							if (file.PreviewContainer == null)
-								file.PreviewContainer = new PresentationPreviewContainer(file);
-							file.PreviewContainer.UpdateContent();
-						}
-						else
-							break;
+						if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+						if (file.PreviewContainer == null)
+							file.PreviewContainer = new PresentationPreviewContainer(file);
+						file.PreviewContainer.UpdateContent();
 					}
 					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
 						break;
@@ -741,7 +733,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		private void GenerateExtendedPreviewFiles()
 		{
-			foreach (IPreviewContainer previewContainer in PreviewContainers.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
+			foreach (var previewContainer in PreviewContainers.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation || x.Type == FileTypes.Other))
 			{
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
@@ -754,14 +746,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void DeleteDeadLinks(Guid[] deadLinkIdentifiers)
 		{
-			foreach (LibraryFile link in DeadLinks.Where(x => deadLinkIdentifiers.Contains(x.Identifier)))
+			foreach (LibraryLink link in DeadLinks.Where(x => deadLinkIdentifiers.Contains(x.Identifier)))
 				link.RemoveFromCollection();
 			ProcessDeadLinks();
 		}
 
 		public void DeleteExpiredLinks(Guid[] expiredLinkIdentifiers)
 		{
-			foreach (LibraryFile link in ExpiredLinks.Where(x => expiredLinkIdentifiers.Contains(x.Identifier)))
+			foreach (LibraryLink link in ExpiredLinks.Where(x => expiredLinkIdentifiers.Contains(x.Identifier)))
 				link.RemoveFromCollection();
 			ProcessExpiredLinks();
 		}
@@ -769,22 +761,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public void NotifyAboutExpiredLinks()
 		{
 			ProcessExpiredLinks();
-			if (ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Count() > 0)
+			if (!ExpiredLinks.Any(x => x.ExpirationDateOptions.SendEmailWhenSync)) return;
+			if (OutlookHelper.Instance.Connect())
 			{
-				if (OutlookHelper.Instance.Connect())
-				{
-					OutlookHelper.Instance.CreateMessage(EmailList.ToArray(), string.Join(Environment.NewLine, ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)), SendEmail);
-					OutlookHelper.Instance.Disconnect();
-				}
-				else
-					AppManager.Instance.ShowWarning("Cannot open Outlook");
+				OutlookHelper.Instance.CreateMessage(EmailList.ToArray(), string.Join(Environment.NewLine, ExpiredLinks.Where(x => x.ExpirationDateOptions.SendEmailWhenSync).Select(y => y.OriginalPath)), SendEmail);
+				OutlookHelper.Instance.Disconnect();
 			}
+			else
+				AppManager.Instance.ShowWarning("Cannot open Outlook");
 		}
 
 		private void Archive()
 		{
-			DateTime archiveDateTime = DateTime.Now;
-			string archiveFolder = Path.Combine(SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
+			var archiveDateTime = DateTime.Now;
+			var archiveFolder = Path.Combine(SettingsManager.Instance.ArhivePath, archiveDateTime.ToString("MMddyy") + "-" + archiveDateTime.ToString("hhmmsstt"));
 			try
 			{
 				if (!Directory.Exists(archiveFolder))
@@ -796,7 +786,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				foreach (FileInfo file in Folder.GetFiles("*.json"))
 					file.CopyTo(Path.Combine(archiveFolder, file.Name), true);
 			}
-			catch {}
+			catch { }
 		}
 
 		public void AddPage()

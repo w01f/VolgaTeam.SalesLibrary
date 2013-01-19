@@ -28,7 +28,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			Page = page;
 			TabPage = new XtraTabPage();
 			RegularPage = new Control { Dock = DockStyle.Fill };
-			SelectedLinks = new List<LibraryFile>();
+			SelectedLinks = new List<LibraryLink>();
 			TabPage.Tag = this;
 			TabPage.Text = page.Name.Replace("&", "&&");
 			_scrooTimer.Stop();
@@ -435,7 +435,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		#endregion
 
 		#region Multi-select Stuff
-		public List<LibraryFile> SelectedLinks { get; private set; }
+		public List<LibraryLink> SelectedLinks { get; private set; }
 		public event EventHandler<SelectionChangedEventArgs> SelectionChanged;
 
 		public void ClearSelection()
@@ -447,12 +447,12 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			MainController.Instance.WallbinController.UpdateTagsEditor();
 		}
 
-		public bool IsLinkSelected(LibraryFile link)
+		public bool IsLinkSelected(LibraryLink link)
 		{
 			return SelectedLinks.Contains(link);
 		}
 
-		public void SelectLink(Guid folderId, LibraryFile[] links, Keys modifierKeys)
+		public void SelectLink(Guid folderId, LibraryLink[] links, Keys modifierKeys)
 		{
 			var ctrlSelect = (modifierKeys & Keys.Control) == Keys.Control;
 			SelectedLinks.RemoveAll(x => x.Parent.Identifier.Equals(folderId) || !ctrlSelect);

@@ -8,22 +8,22 @@ namespace FileManager.ToolForms.WallBin
 {
 	public partial class FormDeleteIncorrectLinks : Form
 	{
-		public bool ExpiredLinks { get; set; }
-		public List<ILibraryFile> IncorrectLinks { get; set; }
-		public List<Guid> LinksForDelete { get; set; }
-
 		public FormDeleteIncorrectLinks()
 		{
 			InitializeComponent();
-			this.IncorrectLinks = new List<ILibraryFile>();
-			this.LinksForDelete = new List<Guid>();
+			IncorrectLinks = new List<ILibraryLink>();
+			LinksForDelete = new List<Guid>();
 		}
+
+		public bool ExpiredLinks { get; set; }
+		public List<ILibraryLink> IncorrectLinks { get; set; }
+		public List<Guid> LinksForDelete { get; set; }
 
 		private void DeadLinksForm_Load(object sender, EventArgs e)
 		{
-			btExpiredDate.Visible = this.ExpiredLinks;
+			btExpiredDate.Visible = ExpiredLinks;
 			grIncorrectLinks.Rows.Clear();
-			foreach (LibraryFile incorrectLink in this.IncorrectLinks)
+			foreach (LibraryLink incorrectLink in IncorrectLinks)
 			{
 				DataGridViewRow row = grIncorrectLinks.Rows[grIncorrectLinks.Rows.Add(incorrectLink.Identifier, incorrectLink.Parent.Name, incorrectLink.Name, incorrectLink.OriginalPath)];
 				row.Tag = incorrectLink;
@@ -34,9 +34,9 @@ namespace FileManager.ToolForms.WallBin
 		{
 			if (grIncorrectLinks.SelectedRows.Count > 0)
 			{
-				if (AppManager.Instance.ShowQuestion("Are you Sure you want to REMOVE this Link from the Library?") == System.Windows.Forms.DialogResult.Yes)
+				if (AppManager.Instance.ShowQuestion("Are you Sure you want to REMOVE this Link from the Library?") == DialogResult.Yes)
 				{
-					this.LinksForDelete.Add((grIncorrectLinks.SelectedRows[0].Tag as LibraryFile).Identifier);
+					LinksForDelete.Add((grIncorrectLinks.SelectedRows[0].Tag as LibraryLink).Identifier);
 					grIncorrectLinks.Rows.Remove(grIncorrectLinks.SelectedRows[0]);
 				}
 			}
@@ -50,10 +50,10 @@ namespace FileManager.ToolForms.WallBin
 		{
 			if (grIncorrectLinks.SelectedRows.Count > 0)
 			{
-				LibraryFile file = grIncorrectLinks.SelectedRows[0].Tag as LibraryFile;
+				var file = grIncorrectLinks.SelectedRows[0].Tag as LibraryLink;
 				if (file != null)
 				{
-					using (ToolForms.WallBin.FormLinkProperties form = new ToolForms.WallBin.FormLinkProperties())
+					using (var form = new FormLinkProperties())
 					{
 						form.CaptionName = file.PropertiesName;
 						form.Note = file.Note;

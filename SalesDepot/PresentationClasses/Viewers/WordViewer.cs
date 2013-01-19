@@ -9,7 +9,7 @@ namespace SalesDepot.PresentationClasses.Viewers
     public partial class WordViewer : UserControl, IFileViewer
     {
         #region Properties
-        public BusinessClasses.LibraryFile File { get; private set; }
+        public BusinessClasses.LibraryLink File { get; private set; }
 
         public string DisplayName
         {
@@ -36,7 +36,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         }
         #endregion
 
-        public WordViewer(BusinessClasses.LibraryFile file)
+        public WordViewer(BusinessClasses.LibraryLink file)
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;

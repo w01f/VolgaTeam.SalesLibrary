@@ -8,7 +8,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class FileCard
 	{
-		public FileCard(ILibraryFile parent)
+		public FileCard(ILibraryLink parent)
 		{
 			Parent = parent;
 			Identifier = Guid.NewGuid();
@@ -16,7 +16,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Title = "Information about this file...";
 		}
 
-		public ILibraryFile Parent { get; private set; }
+		public ILibraryLink Parent { get; private set; }
 		public Guid Identifier { get; set; }
 		public bool Enable { get; set; }
 		public string Title { get; set; }
@@ -31,7 +31,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string SalesStation { get; set; }
 		public List<string> Notes { get; set; }
 
-		public FileCard Clone(ILibraryFile parent)
+		public FileCard Clone(ILibraryLink parent)
 		{
 			var fileCard = new FileCard(parent);
 			fileCard.Enable = Enable;

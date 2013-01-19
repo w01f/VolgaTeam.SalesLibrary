@@ -10,7 +10,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         private FileInfo _tempCopy = null;
 
         #region Properties
-        public BusinessClasses.LibraryFile File { get; private set; }
+        public BusinessClasses.LibraryLink File { get; private set; }
 
         public string DisplayName
         {
@@ -37,7 +37,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         }
         #endregion
 
-        public QuickTimeViewer(BusinessClasses.LibraryFile file)
+        public QuickTimeViewer(BusinessClasses.LibraryLink file)
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;

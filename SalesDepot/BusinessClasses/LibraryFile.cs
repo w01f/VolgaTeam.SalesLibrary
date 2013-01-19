@@ -1,31 +1,101 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.BusinessClasses
 {
-	public class LibraryFile : ILibraryFile
+	public class LibraryLink : ILibraryLink
 	{
+		private bool _linkAvailabel;
+		private bool _linkAvailabilityChecked;
+
+		protected string _linkLocalPath = string.Empty;
+		private string _linkRemotePath = string.Empty;
 		private string _note = string.Empty;
-		private Image _widget = null;
+		private Image _widget;
 
 		#region Compatibility with old versions
-		private bool _oldEnableBanner;
 		private Image _oldBanner;
+		private bool _oldEnableBanner;
 		#endregion
 
-		private bool _linkAvailabilityChecked = false;
-		private bool _linkAvailabel = false;
+		public LibraryLink(LibraryFolder parent)
+		{
+			Name = string.Empty;
+			Parent = parent;
+			RootId = Guid.Empty;
+			Identifier = Guid.NewGuid();
+			RelativePath = string.Empty;
+			Type = FileTypes.Other;
+			Order = 0;
+			IsBold = false;
+			IsDead = false;
+			CriteriaOverlap = string.Empty;
+			SearchTags = new LibraryFileSearchTags();
+			ExpirationDateOptions = new ExpirationDateOptions();
+			FileCard = new FileCard(this);
+			PreviewContainer = null;
+			SetProperties();
+		}
 
-		private string _linkRemotePath = string.Empty;
-		private string _linkLocalPath = string.Empty;
+		public PresentationPreviewContainer PreviewContainer { get; set; }
+		public string LocalPath
+		{
+			get
+			{
+				if (string.IsNullOrEmpty(_linkLocalPath) && LinkAvailable)
+					GetLocalCopy();
+				return _linkLocalPath;
+			}
+		}
 
+		public bool LinkAvailable
+		{
+			get
+			{
+				if (!_linkAvailabilityChecked)
+				{
+					switch (Type)
+					{
+						case FileTypes.BuggyPresentation:
+						case FileTypes.Excel:
+						case FileTypes.FriendlyPresentation:
+						case FileTypes.MediaPlayerVideo:
+						case FileTypes.Other:
+						case FileTypes.Presentation:
+						case FileTypes.PDF:
+						case FileTypes.QuickTimeVideo:
+						case FileTypes.Word:
+						case FileTypes.OvernightsLink:
+							_linkAvailabel = File.Exists(OriginalPath);
+							break;
+						case FileTypes.Folder:
+							_linkAvailabel = Directory.Exists(OriginalPath);
+							break;
+						default:
+							_linkAvailabel = true;
+							break;
+					}
+					_linkAvailabilityChecked = true;
+				}
+				return _linkAvailabel;
+			}
+		}
+		public string PreviewStoragePath
+		{
+			get { return Parent.Parent.Parent.Folder.FullName; }
+		}
+
+		#region ILibraryLink Members
 		public string Name { get; set; }
 		public LibraryFolder Parent { get; set; }
 		public Guid RootId { get; set; }
@@ -41,9 +111,8 @@ namespace SalesDepot.BusinessClasses
 		public DateTime LastChanged { get; set; }
 
 		public LibraryFileSearchTags SearchTags { get; set; }
-		public SearchGroup CustomKeywords { get; private set; }
+		public SearchGroup CustomKeywords { get; protected set; }
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
-		public PresentationPreviewContainer PreviewContainer { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
 		public AttachmentProperties AttachmentProperties { get; set; }
@@ -56,104 +125,55 @@ namespace SalesDepot.BusinessClasses
 			{
 				if (string.IsNullOrEmpty(_linkRemotePath))
 				{
-					if (this.Type == FileTypes.Url || this.Type == FileTypes.Network)
-						return this.RelativePath;
-					else if (this.Type == FileTypes.LineBreak)
+					if (Type == FileTypes.Url || Type == FileTypes.Network)
+						return RelativePath;
+					else if (Type == FileTypes.LineBreak)
 						return string.Empty;
 					else
-						return ((this.Parent != null ? this.Parent.Parent.Parent.GetRootFolder(this.RootId).Folder.FullName : string.Empty) + @"\" + this.RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
+						return ((Parent != null ? Parent.Parent.Parent.GetRootFolder(RootId).Folder.FullName : string.Empty) + @"\" + RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\");
 				}
 				else
 					return _linkRemotePath;
 			}
-			set
-			{
-				_linkRemotePath = value;
-			}
-		}
-
-		public string LocalPath
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(_linkLocalPath) && this.LinkAvailable)
-					GetLocalCopy();
-				return _linkLocalPath;
-			}
-		}
-
-		public bool LinkAvailable
-		{
-			get
-			{
-				if (!_linkAvailabilityChecked)
-				{
-					switch (this.Type)
-					{
-						case FileTypes.BuggyPresentation:
-						case FileTypes.Excel:
-						case FileTypes.FriendlyPresentation:
-						case FileTypes.MediaPlayerVideo:
-						case FileTypes.Other:
-						case FileTypes.Presentation:
-						case FileTypes.PDF:
-						case FileTypes.QuickTimeVideo:
-						case FileTypes.Word:
-						case FileTypes.OvernightsLink:
-							_linkAvailabel = File.Exists(this.OriginalPath);
-							break;
-						case FileTypes.Folder:
-							_linkAvailabel = Directory.Exists(this.OriginalPath);
-							break;
-						default:
-							_linkAvailabel = true;
-							break;
-					}
-					_linkAvailabilityChecked = true;
-				}
-				return _linkAvailabel;
-			}
+			set { _linkRemotePath = value; }
 		}
 
 		public string DisplayName
 		{
 			get
 			{
-				if (this.IsDead && this.Parent.Parent.Parent.EnableInactiveLinks)
+				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks)
 				{
-					if (this.Parent.Parent.Parent.InactiveLinksBoldWarning)
+					if (Parent.Parent.Parent.InactiveLinksBoldWarning)
 					{
-						if (!this.Name.Contains("INACTIVE!"))
-							return "INACTIVE! " + this.Name;
+						if (!Name.Contains("INACTIVE!"))
+							return "INACTIVE! " + Name;
 						else
-							return this.Name;
+							return Name;
 					}
-					else if (this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak)
+					else if (Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak)
 						return string.Empty;
 					else
-						return this.Name;
+						return Name;
 				}
-				else if (this.ExpirationDateOptions.EnableExpirationDate && this.ExpirationDateOptions.LabelLinkWhenExpired && this.IsExpired)
-					return "EXPIRED! " + this.Name;
+				else if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.LabelLinkWhenExpired && IsExpired)
+					return "EXPIRED! " + Name;
 				else
-					return this.Name;
+					return Name;
 			}
-			set
-			{
-				this.Name = value;
-			}
+			set { Name = value; }
 		}
 
 		public string NameWithExtension
 		{
 			get
 			{
-				if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder)
-					return this.Name;
-				else if (this.Type == FileTypes.LineBreak)
+				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder)
+					return Name;
+				else if (Type == FileTypes.LineBreak)
 					return string.Empty;
 				else
-					return Path.GetFileName(this.OriginalPath);
+					return Path.GetFileName(OriginalPath);
 			}
 		}
 
@@ -161,13 +181,13 @@ namespace SalesDepot.BusinessClasses
 		{
 			get
 			{
-				if (this.Type == FileTypes.Url || this.Type == FileTypes.Network || this.Type == FileTypes.Folder)
-					return this.Name;
-				else if (this.Type == FileTypes.LineBreak)
+				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder)
+					return Name;
+				else if (Type == FileTypes.LineBreak)
 					return string.Empty;
 				else
 				{
-					return Path.GetFileNameWithoutExtension(this.OriginalPath);
+					return Path.GetFileNameWithoutExtension(OriginalPath);
 				}
 			}
 		}
@@ -176,7 +196,7 @@ namespace SalesDepot.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case FileTypes.BuggyPresentation:
 					case FileTypes.FriendlyPresentation:
@@ -188,7 +208,7 @@ namespace SalesDepot.BusinessClasses
 					case FileTypes.PDF:
 					case FileTypes.Word:
 					case FileTypes.OvernightsLink:
-						return Path.GetExtension(this.OriginalPath);
+						return Path.GetExtension(OriginalPath);
 					default:
 						return string.Empty;
 				}
@@ -199,28 +219,24 @@ namespace SalesDepot.BusinessClasses
 		{
 			get
 			{
-				if (this.IsDead && this.Parent.Parent.Parent.EnableInactiveLinks && (this.Parent.Parent.Parent.InactiveLinksBoldWarning || this.Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
+				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks && (Parent.Parent.Parent.InactiveLinksBoldWarning || Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
 					return string.Empty;
 				else
 					return _note;
-
 			}
-			set
-			{
-				_note = value;
-			}
+			set { _note = value; }
 		}
 
 		public bool DisplayAsBold
 		{
 			get
 			{
-				if (this.IsDead && this.Parent.Parent.Parent.EnableInactiveLinks && this.Parent.Parent.Parent.InactiveLinksBoldWarning)
+				if (IsDead && Parent.Parent.Parent.EnableInactiveLinks && Parent.Parent.Parent.InactiveLinksBoldWarning)
 					return true;
-				else if (this.ExpirationDateOptions.EnableExpirationDate && this.IsExpired && this.ExpirationDateOptions.LabelLinkWhenExpired)
+				else if (ExpirationDateOptions.EnableExpirationDate && IsExpired && ExpirationDateOptions.LabelLinkWhenExpired)
 					return true;
 				else
-					return this.IsBold;
+					return IsBold;
 			}
 		}
 
@@ -228,37 +244,25 @@ namespace SalesDepot.BusinessClasses
 		{
 			get
 			{
-				if (this.ExpirationDateOptions.EnableExpirationDate && this.ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
-					return ((long)this.ExpirationDateOptions.ExpirationDate.Subtract(DateTime.Now).TotalMilliseconds) < 0;
+				if (ExpirationDateOptions.EnableExpirationDate && ExpirationDateOptions.ExpirationDate != DateTime.MinValue)
+					return ((long)ExpirationDateOptions.ExpirationDate.Subtract(DateTime.Now).TotalMilliseconds) < 0;
 				else
 					return false;
 			}
-
 		}
 
 		public Image Widget
 		{
 			get
 			{
-				if (this.EnableWidget && _widget != null)
+				if (EnableWidget && _widget != null)
 					return _widget;
-				else if (this.Parent != null)
-					return this.Parent.Parent.Parent.AutoWidgets.Where(x => x.Extension.ToLower().Equals(!string.IsNullOrEmpty(this.Extension) ? this.Extension.Substring(1).ToLower() : string.Empty)).Select(y => y.Widget).FirstOrDefault();
+				else if (Parent != null)
+					return Parent.Parent.Parent.AutoWidgets.Where(x => x.Extension.ToLower().Equals(!string.IsNullOrEmpty(Extension) ? Extension.Substring(1).ToLower() : string.Empty)).Select(y => y.Widget).FirstOrDefault();
 				else
 					return null;
 			}
-			set
-			{
-				_widget = value;
-			}
-		}
-
-		public string PreviewStoragePath
-		{
-			get
-			{
-				return this.Parent.Parent.Parent.Folder.FullName;
-			}
+			set { _widget = value; }
 		}
 
 		public string Format
@@ -266,7 +270,7 @@ namespace SalesDepot.BusinessClasses
 			get
 			{
 				string format = string.Empty;
-				switch (this.Extension.Replace(".", string.Empty).ToLower())
+				switch (Extension.Replace(".", string.Empty).ToLower())
 				{
 					case "ppt":
 					case "pptx":
@@ -318,80 +322,61 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
-		public LibraryFile(LibraryFolder parent)
+		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
-			this.Name = string.Empty;
-			this.Parent = parent;
-			this.RootId = Guid.Empty;
-			this.Identifier = Guid.NewGuid();
-			this.RelativePath = string.Empty;
-			this.Type = FileTypes.Other;
-			this.Order = 0;
-			this.IsBold = false;
-			this.IsDead = false;
-			this.CriteriaOverlap = string.Empty;
-			this.SearchTags = new LibraryFileSearchTags();
-			this.ExpirationDateOptions = new ExpirationDateOptions();
-			this.FileCard = new FileCard(this);
-			this.PreviewContainer = null;
-			SetProperties();
-		}
-
-		public ILibraryFile Clone(LibraryFolder parent)
-		{
-			LibraryFile file = new LibraryFile(parent);
+			var file = new LibraryLink(parent);
 			file.OriginalPath = _linkLocalPath;
-			file.Name = this.Name;
-			file.Note = this.Note;
-			file.Order = this.Order;
-			file.IsBold = this.IsBold;
-			file.EnableWidget = this.EnableWidget;
-			file.Widget = this.Widget;
-			file.RootId = this.RootId;
-			file.RelativePath = this.RelativePath;
-			file.Type = this.Type;
-			file.AddDate = this.AddDate;
-			file.SearchTags = this.SearchTags;
-			file.CustomKeywords = this.CustomKeywords;
-			file.ExpirationDateOptions = this.ExpirationDateOptions;
-			file.PresentationProperties = this.PresentationProperties;
-			file.LineBreakProperties = this.LineBreakProperties.Clone(file);
-			file.AttachmentProperties = this.AttachmentProperties.Clone(file);
-			file.BannerProperties = this.BannerProperties.Clone(file);
-			file.FileCard = this.FileCard.Clone(file);
+			file.Name = Name;
+			file.Note = Note;
+			file.Order = Order;
+			file.IsBold = IsBold;
+			file.EnableWidget = EnableWidget;
+			file.Widget = Widget;
+			file.RootId = RootId;
+			file.RelativePath = RelativePath;
+			file.Type = Type;
+			file.AddDate = AddDate;
+			file.SearchTags = SearchTags;
+			file.CustomKeywords = CustomKeywords;
+			file.ExpirationDateOptions = ExpirationDateOptions;
+			file.PresentationProperties = PresentationProperties;
+			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			file.AttachmentProperties = AttachmentProperties.Clone(file);
+			file.BannerProperties = BannerProperties.Clone(file);
+			file.FileCard = FileCard.Clone(file);
 			return file;
 		}
 
-		public string Serialize()
+		public virtual string Serialize()
 		{
 			TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<DisplayName>" + this.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<DisplayName>" + Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
 			result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
-			result.AppendLine(@"<IsDead>" + this.IsDead + @"</IsDead>");
-			result.AppendLine(@"<IsBold>" + this.IsBold + @"</IsBold>");
-			result.AppendLine(@"<RootId>" + this.RootId.ToString() + @"</RootId>");
+			result.AppendLine(@"<IsDead>" + IsDead + @"</IsDead>");
+			result.AppendLine(@"<IsBold>" + IsBold + @"</IsBold>");
+			result.AppendLine(@"<RootId>" + RootId.ToString() + @"</RootId>");
 			result.AppendLine(@"<LocalPath>" + _linkRemotePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
-			result.AppendLine(@"<RelativePath>" + this.RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
-			result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
-			result.AppendLine(@"<Order>" + this.Order + @"</Order>");
-			result.AppendLine(@"<EnableWidget>" + this.EnableWidget + @"</EnableWidget>");
+			result.AppendLine(@"<RelativePath>" + RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
+			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
+			result.AppendLine(@"<Order>" + Order + @"</Order>");
+			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
-			result.AppendLine(this.SearchTags.Serialize());
-			result.AppendLine(@"<ExpirationDateOptions>" + this.ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
-			result.AppendLine(@"<FileCard>" + this.FileCard.Serialize() + @"</FileCard>");
-			if (this.PreviewContainer != null)
-				result.AppendLine(@"<PreviewContainer>" + this.PreviewContainer.Serialize() + @"</PreviewContainer>");
-			if (this.PresentationProperties != null)
-				result.AppendLine(@"<PresentationProperties>" + this.PresentationProperties.Serialize() + @"</PresentationProperties>");
-			if (this.LineBreakProperties != null)
-				result.AppendLine(@"<LineBreakProperties>" + this.LineBreakProperties.Serialize() + @"</LineBreakProperties>");
-			if (this.BannerProperties != null && this.BannerProperties.Configured)
-				result.AppendLine(@"<BannerProperties>" + this.BannerProperties.Serialize() + @"</BannerProperties>");
+			result.AppendLine(SearchTags.Serialize());
+			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
+			result.AppendLine(@"<FileCard>" + FileCard.Serialize() + @"</FileCard>");
+			if (PreviewContainer != null)
+				result.AppendLine(@"<PreviewContainer>" + PreviewContainer.Serialize() + @"</PreviewContainer>");
+			if (PresentationProperties != null)
+				result.AppendLine(@"<PresentationProperties>" + PresentationProperties.Serialize() + @"</PresentationProperties>");
+			if (LineBreakProperties != null)
+				result.AppendLine(@"<LineBreakProperties>" + LineBreakProperties.Serialize() + @"</LineBreakProperties>");
+			if (BannerProperties != null && BannerProperties.Configured)
+				result.AppendLine(@"<BannerProperties>" + BannerProperties.Serialize() + @"</BannerProperties>");
 			return result.ToString();
 		}
 
-		public void Deserialize(XmlNode node)
+		public virtual void Deserialize(XmlNode node)
 		{
 			bool tempBool = false;
 			int tempInt = 0;
@@ -403,86 +388,87 @@ namespace SalesDepot.BusinessClasses
 				switch (childNode.Name)
 				{
 					case "DisplayName":
-						this.Name = childNode.InnerText;
+						Name = childNode.InnerText;
 						break;
 					case "Note":
 						_note = childNode.InnerText;
 						break;
 					case "IsBold":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.IsBold = tempBool;
+							IsBold = tempBool;
 						break;
 					case "IsDead":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.IsDead = tempBool;
+							IsDead = tempBool;
 						break;
 					case "RootId":
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.RootId = tempGuid;
+							RootId = tempGuid;
 						break;
 					case "LocalPath":
 						_linkRemotePath = childNode.InnerText;
 						break;
 					case "RelativePath":
-						this.RelativePath = childNode.InnerText;
+						RelativePath = childNode.InnerText;
 						break;
 					case "Type":
 						if (int.TryParse(childNode.InnerText, out tempInt))
 						{
-							this.Type = (FileTypes)tempInt;
-							if (this.Type == FileTypes.LineBreak)
-								this.LineBreakProperties = new LineBreakProperties(this);
+							Type = (FileTypes)tempInt;
+							if (Type == FileTypes.LineBreak)
+								LineBreakProperties = new LineBreakProperties(this);
 						}
 						break;
 					case "Order":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.Order = tempInt;
+							Order = tempInt;
 						break;
 					case "EnableWidget":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.EnableWidget = tempBool;
+							EnableWidget = tempBool;
 						break;
 					case "Widget":
-						if (string.IsNullOrEmpty(childNode.InnerText) && this.EnableWidget)
+						if (string.IsNullOrEmpty(childNode.InnerText) && EnableWidget)
 							_widget = null;
 						else if (!string.IsNullOrEmpty(childNode.InnerText))
 							_widget = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
-							this.AddDate = tempDate;
+							AddDate = tempDate;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
-							this.LastChanged = tempDate;
+							LastChanged = tempDate;
 						break;
 					case "SearchTags":
-						this.SearchTags.Deserialize(childNode);
+						SearchTags.Deserialize(childNode);
 						break;
 					case "ExpirationDateOptions":
-						this.ExpirationDateOptions.Deserialize(childNode);
+						ExpirationDateOptions.Deserialize(childNode);
 						break;
 					case "FileCard":
-						this.FileCard.Deserialize(childNode);
+						FileCard.Deserialize(childNode);
 						break;
 					case "PreviewContainer":
-						this.PreviewContainer = new PresentationPreviewContainer(this);
-						this.PreviewContainer.Deserialize(childNode);
+						PreviewContainer = new PresentationPreviewContainer(this);
+						PreviewContainer.Deserialize(childNode);
 						break;
 					case "PresentationProperties":
-						this.PresentationProperties = new PresentationProperties();
-						this.PresentationProperties.Deserialize(childNode);
+						PresentationProperties = new PresentationProperties();
+						PresentationProperties.Deserialize(childNode);
 						break;
 					case "LineBreakProperties":
-						this.LineBreakProperties = new LineBreakProperties(this);
-						this.LineBreakProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-						this.LineBreakProperties.Deserialize(childNode);
+						LineBreakProperties = new LineBreakProperties(this);
+						LineBreakProperties.Font = new Font(Parent.WindowFont, Parent.WindowFont.Style);
+						LineBreakProperties.Deserialize(childNode);
 						break;
 					case "BannerProperties":
-						this.BannerProperties = new BannerProperties(this);
-						this.BannerProperties.Deserialize(childNode);
+						BannerProperties = new BannerProperties(this);
+						BannerProperties.Deserialize(childNode);
 						break;
-					#region Compatibility with old versions
+
+						#region Compatibility with old versions
 					case "EnableBanner":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_oldEnableBanner = tempBool;
@@ -493,63 +479,64 @@ namespace SalesDepot.BusinessClasses
 						else
 							_oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
-					#endregion
+						#endregion
 				}
 			}
 
-			if (this.BannerProperties == null)
+			if (BannerProperties == null)
 				InitBannerProperties();
 
-			if (this.Type == FileTypes.Other || this.Type == FileTypes.MediaPlayerVideo || this.Type == FileTypes.QuickTimeVideo)
+			if (Type == FileTypes.Other || Type == FileTypes.MediaPlayerVideo || Type == FileTypes.QuickTimeVideo)
 				SetProperties();
 		}
+		#endregion
 
 		public void InitBannerProperties()
 		{
-			this.BannerProperties = new BannerProperties(this);
+			BannerProperties = new BannerProperties(this);
 			try
 			{
-				this.BannerProperties.Font = new Font(this.Parent.WindowFont, this.Parent.WindowFont.Style);
-				this.BannerProperties.ForeColor = this.Parent.ForeWindowColor;
-				this.BannerProperties.Text = this.DisplayName;
+				BannerProperties.Font = new Font(Parent.WindowFont, Parent.WindowFont.Style);
+				BannerProperties.ForeColor = Parent.ForeWindowColor;
+				BannerProperties.Text = DisplayName;
 
-				this.BannerProperties.Enable = _oldEnableBanner;
-				this.BannerProperties.Image = _oldBanner;
-				if (this.LineBreakProperties != null)
+				BannerProperties.Enable = _oldEnableBanner;
+				BannerProperties.Image = _oldBanner;
+				if (LineBreakProperties != null)
 				{
-					this.BannerProperties.Enable |= this.LineBreakProperties.EnableBanner;
-					if (this.LineBreakProperties.Banner != null)
-						this.BannerProperties.Image = this.LineBreakProperties.Banner;
+					BannerProperties.Enable |= LineBreakProperties.EnableBanner;
+					if (LineBreakProperties.Banner != null)
+						BannerProperties.Image = LineBreakProperties.Banner;
 				}
 			}
-			catch { }
+			catch {}
 		}
 
 		public void SetProperties()
 		{
-			switch (this.Extension.ToUpper())
+			switch (Extension.ToUpper())
 			{
 				case ".PPT":
 				case ".PPTX":
-					this.Type = FileTypes.Presentation;
+					Type = FileTypes.Presentation;
 					break;
 				case ".DOC":
 				case ".DOCX":
-					this.Type = FileTypes.Word;
+					Type = FileTypes.Word;
 					break;
 				case ".XLS":
 				case ".XLSX":
-					this.Type = FileTypes.Excel;
+					Type = FileTypes.Excel;
 					break;
 				case ".PDF":
-					this.Type = FileTypes.PDF;
+					Type = FileTypes.PDF;
 					break;
 				case ".MPEG":
 				case ".WMV":
 				case ".AVI":
 				case ".WMZ":
 				case ".MPG":
-					this.Type = FileTypes.MediaPlayerVideo;
+					Type = FileTypes.MediaPlayerVideo;
 					break;
 				case ".ASF":
 				case ".MOV":
@@ -559,71 +546,189 @@ namespace SalesDepot.BusinessClasses
 				case ".OGV":
 				case ".OGM":
 				case ".OGX":
-					this.Type = FileTypes.QuickTimeVideo;
+					Type = FileTypes.QuickTimeVideo;
 					break;
 				case ".URL":
-					this.Type = FileTypes.Url;
+					Type = FileTypes.Url;
 					break;
 				default:
-					this.Type = FileTypes.Other;
+					Type = FileTypes.Other;
 					break;
 			}
 		}
 
 		public void RemoveFromCollection()
 		{
-			this.Parent.Files.Remove(this);
+			Parent.Files.Remove(this);
 		}
 
 		private void GetLocalCopy()
 		{
-			if (this.LinkAvailable)
+			if (LinkAvailable)
 			{
-				if (ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
+				if (SettingsManager.Instance.UseRemoteConnection)
 				{
-					System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-					{
-						switch (this.Type)
-						{
-							case FileTypes.BuggyPresentation:
-							case FileTypes.Excel:
-							case FileTypes.FriendlyPresentation:
-							case FileTypes.MediaPlayerVideo:
-							case FileTypes.Other:
-							case FileTypes.Presentation:
-							case FileTypes.PDF:
-							case FileTypes.QuickTimeVideo:
-							case FileTypes.Word:
-							case FileTypes.OvernightsLink:
-								_linkLocalPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder, this.NameWithExtension);
-								try
-								{
-									File.Copy(this.OriginalPath, _linkLocalPath, true);
-								}
-								catch
-								{
-									_linkLocalPath = string.Empty;
-								}
-								break;
-							case FileTypes.Folder:
-								_linkLocalPath = this.OriginalPath;
-								break;
-							default:
-								_linkLocalPath = string.Empty;
-								break;
-						}
-
-					}));
+					var thread = new Thread(delegate()
+						                        {
+							                        switch (Type)
+							                        {
+								                        case FileTypes.BuggyPresentation:
+								                        case FileTypes.Excel:
+								                        case FileTypes.FriendlyPresentation:
+								                        case FileTypes.MediaPlayerVideo:
+								                        case FileTypes.Other:
+								                        case FileTypes.Presentation:
+								                        case FileTypes.PDF:
+								                        case FileTypes.QuickTimeVideo:
+								                        case FileTypes.Word:
+								                        case FileTypes.OvernightsLink:
+									                        _linkLocalPath = Path.Combine(SettingsManager.Instance.LocalLibraryCacheFolder, NameWithExtension);
+									                        try
+									                        {
+										                        File.Copy(OriginalPath, _linkLocalPath, true);
+									                        }
+									                        catch
+									                        {
+										                        _linkLocalPath = string.Empty;
+									                        }
+									                        break;
+								                        case FileTypes.Folder:
+									                        _linkLocalPath = OriginalPath;
+									                        break;
+								                        default:
+									                        _linkLocalPath = string.Empty;
+									                        break;
+							                        }
+						                        });
 					thread.Start();
 					Application.DoEvents();
 					while (thread.IsAlive)
 						Application.DoEvents();
 				}
 				else
-					_linkLocalPath = this.OriginalPath;
+					_linkLocalPath = OriginalPath;
 			}
 			else
 				_linkLocalPath = string.Empty;
+		}
+	}
+
+	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
+	{
+		public LibraryFolderLink(LibraryFolder parent)
+			: base(parent)
+		{
+			FolderContent = new List<ILibraryLink>();
+		}
+
+		#region ILibraryFolderLink Members
+		public List<ILibraryLink> FolderContent { get; private set; }
+
+		public override ILibraryLink Clone(LibraryFolder parent)
+		{
+			var file = new LibraryFolderLink(parent);
+			file.OriginalPath = _linkLocalPath;
+			file.Name = Name;
+			file.Note = Note;
+			file.Order = Order;
+			file.IsBold = IsBold;
+			file.EnableWidget = EnableWidget;
+			file.Widget = Widget;
+			file.RootId = RootId;
+			file.RelativePath = RelativePath;
+			file.Type = Type;
+			file.AddDate = AddDate;
+			file.SearchTags = SearchTags;
+			file.CustomKeywords = CustomKeywords;
+			file.ExpirationDateOptions = ExpirationDateOptions;
+			file.PresentationProperties = PresentationProperties;
+			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			file.AttachmentProperties = AttachmentProperties.Clone(file);
+			file.BannerProperties = BannerProperties.Clone(file);
+			file.FileCard = FileCard.Clone(file);
+			file.FolderContent.AddRange(FolderContent.Select(x => x.Clone(parent)));
+			return file;
+		}
+
+		public override void Deserialize(XmlNode node)
+		{
+			base.Deserialize(node);
+			XmlNode contentNode = node.SelectSingleNode("FolderContent");
+			if (contentNode != null)
+				foreach (XmlNode fileNode in contentNode)
+				{
+					ILibraryLink file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
+					file.Deserialize(fileNode);
+					FolderContent.Add(file);
+				}
+
+			UpdateFolderContent();
+		}
+
+		public override string Serialize()
+		{
+			UpdateFolderContent();
+
+			var result = new StringBuilder();
+			result.AppendLine(base.Serialize());
+			result.AppendLine(@"<FolderContent>");
+			foreach (ILibraryLink link in FolderContent)
+				result.AppendLine(@"<File>" + link.Serialize() + @"</File>");
+			result.AppendLine(@"</FolderContent>");
+			return result.ToString();
+		}
+		#endregion
+
+		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
+		{
+			bool alive = false;
+			foreach (ILibraryLink file in FolderContent)
+			{
+				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+				if (!alive && file is LibraryFolderLink)
+					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
+				if (alive)
+					break;
+			}
+			return alive;
+		}
+
+		public void UpdateFolderContent()
+		{
+			var existedPaths = new List<string>();
+			if (Directory.Exists(OriginalPath))
+			{
+				foreach (DirectoryInfo folder in Directory.GetDirectories(OriginalPath).Select(folderPath => new DirectoryInfo(folderPath)))
+				{
+					existedPaths.Add(folder.FullName);
+					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(folder.FullName.ToLower()))) continue;
+					var libraryFile = new LibraryFolderLink(Parent);
+					libraryFile.Name = folder.Name;
+					libraryFile.RootId = RootId;
+					RootFolder rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+					libraryFile.Type = FileTypes.Folder;
+					libraryFile.InitBannerProperties();
+					FolderContent.Add(libraryFile);
+				}
+				foreach (FileInfo file in Directory.GetFiles(OriginalPath).Select(filePath => new FileInfo(filePath)))
+				{
+					existedPaths.Add(file.FullName);
+					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(file.FullName.ToLower()))) continue;
+					var libraryFile = new LibraryLink(Parent);
+					libraryFile.Name = file.Name;
+					libraryFile.RootId = RootId;
+					RootFolder rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+					libraryFile.SetProperties();
+					libraryFile.InitBannerProperties();
+					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					FolderContent.Add(libraryFile);
+				}
+			}
+			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
+			for (int i = 0; i < FolderContent.Count; i++)
+				FolderContent[i].Order = i;
 		}
 	}
 }

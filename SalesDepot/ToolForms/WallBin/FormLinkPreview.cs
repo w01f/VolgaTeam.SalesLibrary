@@ -9,7 +9,7 @@ namespace SalesDepot.ToolForms.WallBin
     public partial class FormLinkPreview : Form
     {
         private PresentationClasses.Viewers.IFileViewer _selectedFileViewer = null;
-        public BusinessClasses.LibraryFile SelectedFile { get; set; }
+        public BusinessClasses.LibraryLink SelectedFile { get; set; }
 
         public FormLinkPreview()
         {

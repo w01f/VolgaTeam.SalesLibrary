@@ -10,7 +10,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	{
 		private DateTime _lastChanged = DateTime.Now;
 
-		public ILibraryFile Parent { get; private set; }
+		public ILibraryLink Parent { get; private set; }
 		public Guid Identifier { get; set; }
 		private Color _foreColor = Color.Black;
 		private Font _font = new Font("Arial", 12, FontStyle.Regular, GraphicsUnit.Pixel);
@@ -110,13 +110,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public LineBreakProperties(ILibraryFile parent)
+		public LineBreakProperties(ILibraryLink parent)
 		{
 			this.Parent = parent;
 			this.Identifier = Guid.NewGuid();
 		}
 
-		public LineBreakProperties Clone(ILibraryFile parent)
+		public LineBreakProperties Clone(ILibraryLink parent)
 		{
 			LineBreakProperties lineBreak = new LineBreakProperties(parent);
 			lineBreak.ForeColor = this.ForeColor;

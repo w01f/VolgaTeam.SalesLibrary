@@ -200,7 +200,7 @@ namespace AutoSynchronizer.BusinessClasses
 								{
 									foreach (LibraryFolder folder in page.Folders)
 									{
-										foreach (LibraryFile file in folder.Files)
+										foreach (LibraryLink file in folder.Files)
 										{
 											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 											{
@@ -513,7 +513,7 @@ namespace AutoSynchronizer.BusinessClasses
 					{
 						foreach (LibraryFolder folder in page.Folders)
 						{
-							foreach (LibraryFile file in folder.Files)
+							foreach (LibraryLink file in folder.Files)
 							{
 								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 								{

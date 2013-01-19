@@ -13,7 +13,7 @@ namespace SalesDepot.ToolForms.WallBin
         private FileInfo _viewedFile;
         private FileInfo _originalFile;
 
-        public BusinessClasses.LibraryFile SelectedFile { get; set; }
+        public BusinessClasses.LibraryLink SelectedFile { get; set; }
 
         public FormPowerPointQuickViewOld()
         {

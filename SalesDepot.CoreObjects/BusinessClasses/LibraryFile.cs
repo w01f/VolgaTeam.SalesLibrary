@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-	public interface ILibraryFile : ISyncObject
+	public interface ILibraryLink : ISyncObject
 	{
 		string Name { get; set; }
 		LibraryFolder Parent { get; set; }
 		Guid RootId { get; set; }
 		Guid Identifier { get; set; }
-		string OriginalPath { get; }
+		string OriginalPath { get; set; }
 		string RelativePath { get; set; }
 		FileTypes Type { get; set; }
 		string Format { get; }
@@ -24,22 +25,27 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string NameWithExtension { get; }
 		string NameWithoutExtesion { get; }
 		string Extension { get; }
-		string Note { get; }
+		string Note { get; set; }
 		bool DisplayAsBold { get; }
 		bool IsExpired { get; }
-		Image Widget { get; }
+		Image Widget { get; set; }
 
 		LibraryFileSearchTags SearchTags { get; set; }
 		SearchGroup CustomKeywords { get; }
 		ExpirationDateOptions ExpirationDateOptions { get; }
 		PresentationProperties PresentationProperties { get; set; }
-		LineBreakProperties LineBreakProperties { get; }
-		AttachmentProperties AttachmentProperties { get; set; }
+		LineBreakProperties LineBreakProperties { get; set; }
 		BannerProperties BannerProperties { get; }
 		FileCard FileCard { get; set; }
+		AttachmentProperties AttachmentProperties { get; set; }
 
-		ILibraryFile Clone(LibraryFolder parent);
+		ILibraryLink Clone(LibraryFolder parent);
 		string Serialize();
 		void Deserialize(XmlNode fileNode);
+	}
+
+	public interface ILibraryFolderLink : ILibraryLink
+	{
+		List<ILibraryLink> FolderContent { get; }
 	}
 }

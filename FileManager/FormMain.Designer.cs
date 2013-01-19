@@ -258,13 +258,13 @@
 			this.ribbonControl.EnableQatPlacement = false;
 			this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ribbonTabItemHome,
-            this.ribbonTabItemTags,
             this.ribbonTabItemSettings,
             this.ribbonTabItemClipart,
             this.ribbonTabItemCalendar,
             this.ribbonTabItemProgramManager,
             this.ribbonTabItemIPad,
             this.ribbonTabItemIPadUsers,
+            this.ribbonTabItemTags,
             this.ribbonTabItemHelp});
 			this.ribbonControl.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
 			this.ribbonControl.Location = new System.Drawing.Point(0, 0);

@@ -9,14 +9,14 @@ namespace SalesDepot.BusinessClasses
 {
     public class PresentationPreviewContainer
     {
-        private LibraryFile _parent = null;
+        private LibraryLink _parent = null;
         private string _folderName = Guid.NewGuid().ToString();
         private string _remotePreviewStorageFolder = string.Empty;
         private string LocalPreviewStorageFolder { get; set; }
         public List<PresentationPreviewSlide> Slides { get; set; }
         public int SelectedIndex { get; set; }
 
-        public PresentationPreviewContainer(LibraryFile parent)
+        public PresentationPreviewContainer(LibraryLink parent)
         {
             _parent = parent;
             if (_parent.Parent != null)

@@ -8,6 +8,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class LinkAttachment
 	{
+		public LinkAttachment(AttachmentProperties parent)
+		{
+			Parent = parent;
+			Identifier = Guid.NewGuid();
+		}
+
 		public AttachmentProperties Parent { get; private set; }
 		public Guid Identifier { get; set; }
 		public AttachmentType Type { get; set; }
@@ -17,12 +23,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case AttachmentType.File:
-						return Path.Combine(this.Parent.Parent.Parent.Parent.Parent.Folder.FullName, Constants.AttachmentsRootFolderName, this.Identifier.ToString(), Path.GetFileName(this.OriginalPath));
+						return Path.Combine(Parent.Parent.Parent.Parent.Parent.Folder.FullName, Constants.AttachmentsRootFolderName, Identifier.ToString(), Path.GetFileName(OriginalPath));
 					default:
-						return this.OriginalPath;
+						return OriginalPath;
 				}
 			}
 		}
@@ -31,12 +37,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case AttachmentType.File:
-						return Path.Combine(Constants.AttachmentsRootFolderName, this.Identifier.ToString(), Path.GetFileName(this.OriginalPath));
+						return Path.Combine(Constants.AttachmentsRootFolderName, Identifier.ToString(), Path.GetFileName(OriginalPath));
 					default:
-						return this.OriginalPath;
+						return OriginalPath;
 				}
 			}
 		}
@@ -45,12 +51,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case AttachmentType.File:
-						return Path.GetFileName(this.OriginalPath);
+						return Path.GetFileName(OriginalPath);
 					default:
-						return this.OriginalPath;
+						return OriginalPath;
 				}
 			}
 		}
@@ -59,10 +65,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case AttachmentType.File:
-						return File.Exists(this.OriginalPath);
+						return File.Exists(OriginalPath);
 					default:
 						return true;
 				}
@@ -73,10 +79,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				switch (this.Type)
+				switch (Type)
 				{
 					case AttachmentType.File:
-						return File.Exists(this.DestinationPath);
+						return File.Exists(DestinationPath);
 					default:
 						return true;
 				}
@@ -85,14 +91,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public DateTime LastChanged
 		{
-			get
-			{
-				return this.Parent.Parent.LastChanged;
-			}
-			set
-			{
-				this.Parent.Parent.LastChanged = value;
-			}
+			get { return Parent.Parent.LastChanged; }
+			set { Parent.Parent.LastChanged = value; }
 		}
 
 		public string Format
@@ -100,9 +100,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			get
 			{
 				string format = "other";
-				if (this.Type == AttachmentType.File && !string.IsNullOrEmpty(this.OriginalPath))
+				if ((Type == AttachmentType.File) && !string.IsNullOrEmpty(OriginalPath))
 				{
-					switch (Path.GetExtension(this.OriginalPath).Replace(".", string.Empty).ToLower())
+					switch (Path.GetExtension(OriginalPath).Replace(".", string.Empty).ToLower())
 					{
 						case "ppt":
 						case "pptx":
@@ -155,27 +155,21 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public LinkAttachment(AttachmentProperties parent)
-		{
-			this.Parent = parent;
-			this.Identifier = Guid.NewGuid();
-		}
-
 		public LinkAttachment Clone(AttachmentProperties parent)
 		{
-			LinkAttachment linkAttachment = new LinkAttachment(parent);
-			linkAttachment.Type = this.Type;
-			linkAttachment.OriginalPath = this.OriginalPath;
+			var linkAttachment = new LinkAttachment(parent);
+			linkAttachment.Type = Type;
+			linkAttachment.OriginalPath = OriginalPath;
 			return linkAttachment;
 		}
 
 		public string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-			result.AppendLine(@"<Type>" + (int)this.Type + @"</Type>");
-			if (!string.IsNullOrEmpty(this.OriginalPath))
-				result.AppendLine(@"<OriginalPath>" + this.OriginalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</OriginalPath>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
+			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
+			if (!string.IsNullOrEmpty(OriginalPath))
+				result.AppendLine(@"<OriginalPath>" + OriginalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</OriginalPath>");
 			return result.ToString();
 		}
 
@@ -189,22 +183,23 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					case "Identifier":
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "Type":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.Type = (AttachmentType)tempInt;
+							Type = (AttachmentType)tempInt;
 						break;
 					case "OriginalPath":
-						this.OriginalPath = childNode.InnerText;
+						OriginalPath = childNode.InnerText;
 						break;
+
 					#region Compatibility with old version of Sales Depot
 					case "UniversalPreviewContainer":
-						UniversalPreviewContainer universalPreviewContainer = new UniversalPreviewContainer(this.Parent.Parent.Parent.Parent.Parent);
+						var universalPreviewContainer = new UniversalPreviewContainer(Parent.Parent.Parent.Parent.Parent);
 						universalPreviewContainer.Deserialize(childNode);
-						universalPreviewContainer.OriginalPath = this.OriginalPath;
-						if (!this.Parent.Parent.Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.Equals(this.OriginalPath)))
-							this.Parent.Parent.Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
+						universalPreviewContainer.OriginalPath = OriginalPath;
+						if (!Parent.Parent.Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.Equals(OriginalPath)))
+							Parent.Parent.Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
 						break;
 					#endregion
 				}

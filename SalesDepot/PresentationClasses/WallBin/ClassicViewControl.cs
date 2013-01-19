@@ -25,7 +25,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		private readonly SuperTooltipInfo _accordionToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Accordion View", null, null, eTooltipColor.Gray);
 		private readonly SuperTooltipInfo _classicToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Column View", null, null, eTooltipColor.Gray);
 		private readonly string _emailBinFileName = string.Empty;
-		private readonly Dictionary<LibraryFile, string> _emailLinks = new Dictionary<LibraryFile, string>();
+		private readonly Dictionary<LibraryLink, string> _emailLinks = new Dictionary<LibraryLink, string>();
 
 		private readonly SuperTooltipInfo _emailToolTip = new SuperTooltipInfo("HELP", "", "Learn more about how to EMAIL files from this Sales Library", null, null, eTooltipColor.Gray);
 		private readonly SuperTooltipInfo _listToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library List View", null, null, eTooltipColor.Gray);
@@ -97,7 +97,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		private void ClassicViewControl_Load(object sender, EventArgs e)
 		{
 			LoadEmailBin();
-			gridControlFiles.DataSource = new BindingList<LibraryFile>(_emailLinks.Keys.ToArray());
+			gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 			LoadOptions();
 		}
 
@@ -151,7 +151,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 						if (childNode.Name.Equals("EmailLink"))
 						{
 							string path = string.Empty;
-							var link = new LibraryFile(new LibraryFolder(new LibraryPage(DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library)));
+							var link = new LibraryLink(new LibraryFolder(new LibraryPage(DecoratorManager.Instance.ActivePackageViewer.SelectedLibrary.Library)));
 							foreach (XmlNode emailLinkNode in childNode.ChildNodes)
 							{
 								switch (emailLinkNode.Name)
@@ -220,7 +220,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			if (AppManager.Instance.ShowWarningQuestion("Are you sure you want to remove from email bin?") == DialogResult.Yes)
 			{
 				_emailLinks.Remove(_emailLinks.Keys.ElementAt(gridViewFiles.GetDataSourceRowIndex(gridViewFiles.FocusedRowHandle)));
-				gridControlFiles.DataSource = new BindingList<LibraryFile>(_emailLinks.Keys.ToArray());
+				gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 				SaveEmailBin();
 			}
 		}
@@ -232,7 +232,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 				object data = e.Data.GetData(DataFormats.Serializable, true);
 				if (data != null)
 				{
-					var link = data as LibraryFile;
+					var link = data as LibraryLink;
 					if (link != null)
 					{
 						if (!_emailLinks.Keys.Contains(link))
@@ -242,7 +242,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 								LinkManager.Instance.RequestFile(link);
 								_emailLinks.Add(link, link.LocalPath);
 								SaveEmailBin();
-								gridControlFiles.DataSource = new BindingList<LibraryFile>(_emailLinks.Keys.ToArray());
+								gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 							}
 							else
 								AppManager.Instance.ShowWarning("File is not existed and cannot be added into Email Bin.\n Contact your system administrator");
@@ -257,7 +257,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
 			{
 				object data = e.Data.GetData(DataFormats.Serializable, true);
-				if (data.GetType() == typeof(LibraryFile))
+				if (data.GetType() == typeof(LibraryLink))
 					e.Effect = DragDropEffects.Copy;
 			}
 		}
@@ -268,7 +268,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			{
 				gridControlFiles.DataSource = null;
 				_emailLinks.Clear();
-				gridControlFiles.DataSource = new BindingList<LibraryFile>(_emailLinks.Keys.ToArray());
+				gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 				SaveEmailBin();
 			}
 		}

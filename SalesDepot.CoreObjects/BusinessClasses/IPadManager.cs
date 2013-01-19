@@ -7,17 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using Newtonsoft.Json;
+using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ContentManagmentService;
 using SalesDepot.CoreObjects.IPadAdminService;
-using Attachment = SalesDepot.CoreObjects.ContentManagmentService.Attachment;
 using Banner = SalesDepot.CoreObjects.ContentManagmentService.Banner;
 using Column = SalesDepot.CoreObjects.ContentManagmentService.Column;
 using Font = SalesDepot.CoreObjects.ContentManagmentService.Font;
 using GroupRecord = SalesDepot.CoreObjects.IPadAdminService.GroupRecord;
 using Library = SalesDepot.CoreObjects.ContentManagmentService.Library;
 using LibraryLink = SalesDepot.CoreObjects.ContentManagmentService.LibraryLink;
-using LineBreak = SalesDepot.CoreObjects.ContentManagmentService.LineBreak;
-using LinkCategory = SalesDepot.CoreObjects.ContentManagmentService.LinkCategory;
 using UserRecord = SalesDepot.CoreObjects.IPadAdminService.UserRecord;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
@@ -25,13 +23,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	public class IPadManager
 	{
 		private SitePermissionsManager _sitePermissionsManager;
-
-		public ILibrary Parent { get; private set; }
-		public bool Enabled { get; set; }
-		public string SyncDestinationPath { get; set; }
-		public string Website { get; set; }
-		public string Login { get; set; }
-		public string Password { get; set; }
 
 		public IPadManager(ILibrary parent)
 		{
@@ -41,6 +32,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Login = string.Empty;
 			Password = string.Empty;
 		}
+
+		public ILibrary Parent { get; private set; }
+		public bool Enabled { get; set; }
+		public string SyncDestinationPath { get; set; }
+		public string Website { get; set; }
+		public string Login { get; set; }
+		public string Password { get; set; }
 
 		public IPadManager Clone(ILibrary parent)
 		{
@@ -89,7 +87,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 				}
 			}
-			_sitePermissionsManager = new SitePermissionsManager(this.Website, this.Login, this.Password);
+			_sitePermissionsManager = new SitePermissionsManager(Website, Login, Password);
 		}
 
 		#region Content Manager
@@ -228,153 +226,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (ILibraryFile libraryFile in libraryFolder.Files)
+					foreach (ILibraryLink libraryFile in libraryFolder.Files)
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
 						link.folderId = libraryFolder.Identifier.ToString();
 						link.libraryId = Parent.Identifier.ToString();
-						link.name = libraryFile.Name;
-						link.fileRelativePath = libraryFile.RelativePath;
-						if (File.Exists(libraryFile.OriginalPath))
-						{
-							link.fileName = Path.GetFileName(libraryFile.OriginalPath);
-							link.fileExtension = Path.GetExtension(libraryFile.OriginalPath).Replace(".", string.Empty).ToLower();
-							link.fileDate = File.GetLastWriteTime(libraryFile.OriginalPath).ToString("MM/dd/yyyy hh:mm:ss tt");
-							link.fileSize = (int)new FileInfo(libraryFile.OriginalPath).Length;
-						}
-						else
-						{
-							link.fileName = string.Empty;
-							link.fileExtension = string.Empty;
-						}
-						link.note = libraryFile.Note;
-						link.originalFormat = libraryFile.Format;
-						link.isBold = libraryFile.IsBold;
-						link.order = libraryFile.Order;
-						link.type = (int)libraryFile.Type;
-						link.enableWidget = libraryFile.EnableWidget;
-						link.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
-						if (libraryFile.CustomKeywords.Tags.Count > 0)
-							link.tags = string.Join(" ", libraryFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
-						link.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
-						link.dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
-
-						if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo)
-						{
-							IPreviewContainer previewContainer = Parent.GetPreviewContainer(libraryFile.OriginalPath);
-							if (previewContainer != null)
-							{
-								link.previewId = previewContainer.Identifier;
-								string[] txtLinks = previewContainer.GetPreviewLinks("txt");
-								if (txtLinks != null && txtLinks.Length > 0)
-									link.contentPath = txtLinks[0];
-							}
-						}
-
-						#region Line Break
-						if (libraryFile.LineBreakProperties != null)
-						{
-							link.lineBreakProperties = new LineBreak();
-							link.lineBreakProperties.id = libraryFile.LineBreakProperties.Identifier.ToString();
-							link.lineBreakProperties.libraryId = Parent.Identifier.ToString();
-							link.lineBreakProperties.note = libraryFile.LineBreakProperties.Note;
-							link.lineBreakProperties.foreColor = ColorTranslator.ToHtml(libraryFile.LineBreakProperties.ForeColor);
-							link.lineBreakProperties.font = new Font();
-							link.lineBreakProperties.font.name = libraryFile.LineBreakProperties.Font.Name;
-							link.lineBreakProperties.font.size = (int)Math.Round(libraryFile.LineBreakProperties.Font.Size, 0);
-							link.lineBreakProperties.font.isBold = libraryFile.LineBreakProperties.Font.Bold;
-							link.lineBreakProperties.font.isItalic = libraryFile.LineBreakProperties.Font.Italic;
-							link.lineBreakProperties.dateModify = libraryFile.LineBreakProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
-						}
-						#endregion
-
-						#region Banner
-						link.banner = new Banner();
-						link.banner.id = libraryFile.BannerProperties.Identifier.ToString();
-						link.banner.libraryId = Parent.Identifier.ToString();
-						link.banner.isEnabled = libraryFile.BannerProperties.Enable;
-						link.banner.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.BannerProperties.Image, typeof(byte[])));
-						link.banner.showText = libraryFile.BannerProperties.ShowText;
-						link.banner.imageAlignment = libraryFile.BannerProperties.ImageAlignement.ToString().ToLower();
-						link.banner.text = libraryFile.BannerProperties.Text;
-						link.banner.foreColor = ColorTranslator.ToHtml(libraryFile.BannerProperties.ForeColor);
-						link.banner.font = new Font();
-						link.banner.font.name = libraryFile.BannerProperties.Font.Name;
-						link.banner.font.size = (int)Math.Round(libraryFile.BannerProperties.Font.Size, 0);
-						link.banner.font.isBold = libraryFile.BannerProperties.Font.Bold;
-						link.banner.font.isItalic = libraryFile.BannerProperties.Font.Italic;
-						link.banner.dateModify = libraryFile.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
-						#endregion
-
-						#region Categories
-						var categories = new List<LinkCategory>();
-						foreach (SearchGroup searchGroup in libraryFile.SearchTags.SearchGroups)
-							foreach (var tag in searchGroup.Tags)
-							{
-								var category = new LinkCategory();
-								category.libraryId = Parent.Identifier.ToString();
-								category.linkId = libraryFile.Identifier.ToString();
-								category.category = searchGroup.Name;
-								category.tag = tag.Name;
-								categories.Add(category);
-							}
-						if (categories.Count > 0)
-							link.categories = categories.ToArray();
-						#endregion
-
-						#region File Card
-						link.enableFileCard = libraryFile.FileCard.Enable;
-						link.fileCard = new ContentManagmentService.FileCard();
-						link.fileCard.id = libraryFile.FileCard.Identifier.ToString();
-						link.fileCard.libraryId = Parent.Identifier.ToString();
-						link.fileCard.title = libraryFile.FileCard.Title;
-						link.fileCard.advertiser = libraryFile.FileCard.Advertiser;
-						link.fileCard.dateSold = libraryFile.FileCard.DateSold.HasValue ? libraryFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
-						link.fileCard.broadcastClosed = libraryFile.FileCard.BroadcastClosed.HasValue ? (float)libraryFile.FileCard.BroadcastClosed.Value : 0;
-						link.fileCard.digitalClosed = libraryFile.FileCard.DigitalClosed.HasValue ? (float)libraryFile.FileCard.DigitalClosed.Value : 0;
-						link.fileCard.publishingClosed = libraryFile.FileCard.PublishingClosed.HasValue ? (float)libraryFile.FileCard.PublishingClosed.Value : 0;
-						link.fileCard.salesName = libraryFile.FileCard.SalesName;
-						link.fileCard.salesEmail = libraryFile.FileCard.SalesEmail;
-						link.fileCard.salesPhone = libraryFile.FileCard.SalesPhone;
-						link.fileCard.salesStation = libraryFile.FileCard.SalesStation;
-						if (libraryFile.FileCard.Notes.Count > 0)
-							link.fileCard.notes = libraryFile.FileCard.Notes.ToArray();
-						#endregion
-
-						#region Attachments
-						link.enableAttachments = libraryFile.AttachmentProperties.Enable;
-						var attachments = new List<Attachment>();
-						foreach (LinkAttachment linkAttachment in libraryFile.AttachmentProperties.FilesAttachments)
-						{
-							var attachment = new Attachment();
-							attachment.linkId = libraryFile.Identifier.ToString();
-							attachment.libraryId = Parent.Identifier.ToString();
-							attachment.name = linkAttachment.Name;
-							attachment.originalFormat = linkAttachment.Format;
-							attachment.path = linkAttachment.DestinationRelativePath;
-
-							IPreviewContainer previewContainer = Parent.GetPreviewContainer(linkAttachment.OriginalPath);
-							if (previewContainer != null)
-								attachment.previewId = previewContainer.Identifier;
-
-							attachments.Add(attachment);
-						}
-						foreach (LinkAttachment linkAttachment in libraryFile.AttachmentProperties.WebAttachments)
-						{
-							var attachment = new Attachment();
-							attachment.linkId = libraryFile.Identifier.ToString();
-							attachment.libraryId = Parent.Identifier.ToString();
-							attachment.name = linkAttachment.Name;
-							attachment.originalFormat = "url";
-							attachment.path = linkAttachment.DestinationRelativePath;
-
-							attachments.Add(attachment);
-						}
-						if (attachments.Count > 0)
-							link.attachments = attachments.ToArray();
-						#endregion
-
+						link.FillLinkProperties(libraryFile, Parent, links);
 						links.Add(link);
 					}
 					folder.files = links.ToArray();
@@ -469,7 +327,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var result = new List<Category>();
 			foreach (SearchGroup group in searchTags.SearchGroups)
 			{
-				foreach (var tag in group.Tags)
+				foreach (SearchTag tag in group.Tags)
 				{
 					var category = new Category();
 					category.category = group.Name;
@@ -482,6 +340,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#endregion
 
 		#region Permissions Manager
+
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
@@ -532,6 +391,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			_sitePermissionsManager.SetPage(id, users, groups, out message);
 		}
 		#endregion
+
 		#endregion
 
 		#region Video Management
@@ -540,8 +400,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			get
 			{
 				var videoFiles = new List<VideoInfo>();
-				int i = 1;
-				foreach (IPreviewContainer previewContainer in Parent.PreviewContainers.Where(x => !string.IsNullOrEmpty(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
+				var i = 1;
+				foreach (var previewContainer in Parent.PreviewContainers.Where(x => !string.IsNullOrEmpty(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
 				{
 					var videoFile = new VideoInfo(previewContainer);
 					videoFile.Index = i.ToString();
@@ -607,15 +467,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class SitePermissionsManager
 	{
-
 		private string _login;
 		private string _password;
 
 		public string _website;
-		public string Website
-		{
-			get { return _website; }
-		}
 
 		public SitePermissionsManager(XmlNode node)
 		{
@@ -627,6 +482,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			_website = website;
 			_login = login;
 			_password = password;
+		}
+
+		public string Website
+		{
+			get { return _website; }
 		}
 
 		public void Deserialize(XmlNode node)
@@ -838,7 +698,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			message = string.Empty;
 			var libraries = new List<IPadAdminService.Library>();
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
@@ -1023,6 +883,178 @@ namespace SalesDepot.CoreObjects.IPadAdminService
 					result += "None";
 				return result;
 			}
+		}
+	}
+}
+
+namespace SalesDepot.CoreObjects.ContentManagmentService
+{
+	public partial class LibraryLink
+	{
+		public void FillLinkProperties(ILibraryLink libraryFile, ILibrary library, List<LibraryLink> linksCollection)
+		{
+			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
+			name = libraryFile.Name;
+			fileRelativePath = libraryFile.RelativePath;
+			if (File.Exists(libraryFile.OriginalPath))
+			{
+				fileName = Path.GetFileName(libraryFile.OriginalPath);
+				fileExtension = Path.GetExtension(libraryFile.OriginalPath).Replace(".", string.Empty).ToLower();
+				fileDate = File.GetLastWriteTime(libraryFile.OriginalPath).ToString("MM/dd/yyyy hh:mm:ss tt");
+				fileSize = (int)new FileInfo(libraryFile.OriginalPath).Length;
+			}
+			else
+			{
+				fileName = string.Empty;
+				fileExtension = string.Empty;
+			}
+			note = libraryFile.Note;
+			originalFormat = libraryFile.Format;
+			isBold = libraryFile.IsBold;
+			order = libraryFile.Order;
+			type = (int)libraryFile.Type;
+			enableWidget = libraryFile.EnableWidget;
+			widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
+			if (libraryFile.CustomKeywords.Tags.Count > 0)
+				tags = string.Join(" ", libraryFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
+			dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
+			dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
+
+			if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo)
+			{
+				var previewContainer = library.GetPreviewContainer(libraryFile.OriginalPath);
+				if (previewContainer != null)
+				{
+					previewId = previewContainer.Identifier;
+					string[] txtLinks = previewContainer.GetPreviewLinks("txt");
+					if (txtLinks != null && txtLinks.Length > 0)
+						contentPath = txtLinks[0];
+				}
+			}
+
+			#region Line Break
+			if (libraryFile.LineBreakProperties != null)
+			{
+				lineBreakProperties = new LineBreak();
+				lineBreakProperties.id = libraryFile.LineBreakProperties.Identifier.ToString();
+				lineBreakProperties.libraryId = library.Identifier.ToString();
+				lineBreakProperties.note = libraryFile.LineBreakProperties.Note;
+				lineBreakProperties.foreColor = ColorTranslator.ToHtml(libraryFile.LineBreakProperties.ForeColor);
+				lineBreakProperties.font = new Font();
+				lineBreakProperties.font.name = libraryFile.LineBreakProperties.Font.Name;
+				lineBreakProperties.font.size = (int)Math.Round(libraryFile.LineBreakProperties.Font.Size, 0);
+				lineBreakProperties.font.isBold = libraryFile.LineBreakProperties.Font.Bold;
+				lineBreakProperties.font.isItalic = libraryFile.LineBreakProperties.Font.Italic;
+				lineBreakProperties.dateModify = libraryFile.LineBreakProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
+			}
+			#endregion
+
+			#region Banner
+			banner = new Banner();
+			banner.id = libraryFile.BannerProperties.Identifier.ToString();
+			banner.libraryId = library.Identifier.ToString();
+			banner.isEnabled = libraryFile.BannerProperties.Enable;
+			banner.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.BannerProperties.Image, typeof(byte[])));
+			banner.showText = libraryFile.BannerProperties.ShowText;
+			banner.imageAlignment = libraryFile.BannerProperties.ImageAlignement.ToString().ToLower();
+			banner.text = libraryFile.BannerProperties.Text;
+			banner.foreColor = ColorTranslator.ToHtml(libraryFile.BannerProperties.ForeColor);
+			banner.font = new Font();
+			banner.font.name = libraryFile.BannerProperties.Font.Name;
+			banner.font.size = (int)Math.Round(libraryFile.BannerProperties.Font.Size, 0);
+			banner.font.isBold = libraryFile.BannerProperties.Font.Bold;
+			banner.font.isItalic = libraryFile.BannerProperties.Font.Italic;
+			banner.dateModify = libraryFile.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
+			#endregion
+
+			#region Categories
+			var fileCategories = new List<LinkCategory>();
+			foreach (var searchGroup in libraryFile.SearchTags.SearchGroups)
+				foreach (var tag in searchGroup.Tags)
+				{
+					var category = new LinkCategory();
+					category.libraryId = library.Identifier.ToString();
+					category.linkId = libraryFile.Identifier.ToString();
+					category.category = searchGroup.Name;
+					category.tag = tag.Name;
+					fileCategories.Add(category);
+				}
+			if (fileCategories.Count > 0)
+				categories = fileCategories.ToArray();
+			#endregion
+
+			#region File Card
+			enableFileCard = libraryFile.FileCard.Enable;
+			fileCard = new FileCard();
+			fileCard.id = libraryFile.FileCard.Identifier.ToString();
+			fileCard.libraryId = library.Identifier.ToString();
+			fileCard.title = libraryFile.FileCard.Title;
+			fileCard.advertiser = libraryFile.FileCard.Advertiser;
+			fileCard.dateSold = libraryFile.FileCard.DateSold.HasValue ? libraryFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
+			fileCard.broadcastClosed = libraryFile.FileCard.BroadcastClosed.HasValue ? (float)libraryFile.FileCard.BroadcastClosed.Value : 0;
+			fileCard.digitalClosed = libraryFile.FileCard.DigitalClosed.HasValue ? (float)libraryFile.FileCard.DigitalClosed.Value : 0;
+			fileCard.publishingClosed = libraryFile.FileCard.PublishingClosed.HasValue ? (float)libraryFile.FileCard.PublishingClosed.Value : 0;
+			fileCard.salesName = libraryFile.FileCard.SalesName;
+			fileCard.salesEmail = libraryFile.FileCard.SalesEmail;
+			fileCard.salesPhone = libraryFile.FileCard.SalesPhone;
+			fileCard.salesStation = libraryFile.FileCard.SalesStation;
+			if (libraryFile.FileCard.Notes.Count > 0)
+				fileCard.notes = libraryFile.FileCard.Notes.ToArray();
+			#endregion
+
+			#region Attachments
+			var fileAttachments = new List<Attachment>();
+			var attachmentProperties = libraryFile.AttachmentProperties;
+			if (attachmentProperties != null)
+			{
+				enableAttachments = attachmentProperties.Enable;
+				foreach (var linkAttachment in attachmentProperties.FilesAttachments)
+				{
+					var attachment = new Attachment();
+					attachment.linkId = libraryFile.Identifier.ToString();
+					attachment.libraryId = library.Identifier.ToString();
+					attachment.name = linkAttachment.Name;
+					attachment.originalFormat = linkAttachment.Format;
+					attachment.path = linkAttachment.DestinationRelativePath;
+
+					var previewContainer = library.GetPreviewContainer(linkAttachment.OriginalPath);
+					if (previewContainer != null)
+						attachment.previewId = previewContainer.Identifier;
+
+					fileAttachments.Add(attachment);
+				}
+				foreach (var linkAttachment in attachmentProperties.WebAttachments)
+				{
+					var attachment = new Attachment();
+					attachment.linkId = libraryFile.Identifier.ToString();
+					attachment.libraryId = library.Identifier.ToString();
+					attachment.name = linkAttachment.Name;
+					attachment.originalFormat = "url";
+					attachment.path = linkAttachment.DestinationRelativePath;
+
+					fileAttachments.Add(attachment);
+				}
+			}
+			else
+			{
+				enableAttachments = false;
+			}
+
+			if(libraryFile is ILibraryFolderLink)
+				foreach (var childFile in (libraryFile as ILibraryFolderLink).FolderContent)
+				{
+					var childLink = new LibraryLink();
+					childLink.id = childFile.Identifier.ToString();
+					childLink.parentLinkId = id;
+					childLink.folderId = folderId;
+					childLink.libraryId = libraryId;
+					childLink.FillLinkProperties(childFile, library, linksCollection);
+					linksCollection.Add(childLink);					
+				}
+
+			if (fileAttachments.Count > 0)
+				attachments = fileAttachments.ToArray();
+			#endregion
 		}
 	}
 }

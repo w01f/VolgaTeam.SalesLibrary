@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.IO;
@@ -9,13 +10,13 @@ using SalesDepot.CoreObjects.InteropClasses;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-	public class LibraryFile : ILibraryFile
+	public class LibraryLink : ILibraryLink
 	{
 		private bool _enableWidget;
 		private bool _isBold;
 		private bool _isDead;
 		private DateTime _lastChanged = DateTime.MinValue;
-		private string _linkLocalPath = string.Empty;
+		protected string _linkLocalPath = string.Empty;
 		private string _name = string.Empty;
 		private string _note = string.Empty;
 		private int _order;
@@ -26,7 +27,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private bool _oldEnableBanner;
 		#endregion
 
-		public LibraryFile(LibraryFolder parent)
+		public LibraryLink(LibraryFolder parent)
 		{
 			Parent = parent;
 			RootId = Guid.Empty;
@@ -61,8 +62,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				IPreviewContainer previewContainer = Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
 				if (previewContainer != null)
 					return previewContainer.GetTextContent();
-				else
-					return string.Empty;
+				return string.Empty;
 			}
 		}
 
@@ -81,12 +81,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string CriteriaOverlap { get; set; }
 
 		public LibraryFileSearchTags SearchTags { get; set; }
-		public SearchGroup CustomKeywords { get; private set; }
+		public SearchGroup CustomKeywords { get; protected set; }
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
 		public BannerProperties BannerProperties { get; set; }
-		public AttachmentProperties AttachmentProperties { get; set; }
+		public virtual AttachmentProperties AttachmentProperties { get; set; }
 		public FileCard FileCard { get; set; }
 
 		public string Name
@@ -106,8 +106,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				if (_isDead && Parent.Parent.Parent.EnableInactiveLinks && (Parent.Parent.Parent.InactiveLinksBoldWarning || Parent.Parent.Parent.ReplaceInactiveLinksWithLineBreak))
 					return string.Empty;
-				else
-					return _note;
+				return _note;
 			}
 			set
 			{
@@ -372,9 +371,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public ILibraryFile Clone(LibraryFolder parent)
+		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
-			var file = new LibraryFile(parent);
+			var file = new LibraryLink(parent);
 			file.OriginalPath = _linkLocalPath;
 			file.Name = Name;
 			file.Note = Note;
@@ -397,9 +396,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return file;
 		}
 
-		public string Serialize()
+		public virtual string Serialize()
 		{
-			TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
+			var converter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			var result = new StringBuilder();
 			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
 			result.AppendLine(@"<DisplayName>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
@@ -449,10 +448,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return result.ToString();
 		}
 
-		public void Deserialize(XmlNode node)
+		public virtual void Deserialize(XmlNode node)
 		{
-			bool tempBool = false;
-			int tempInt = 0;
+			bool tempBool;
+			int tempInt;
 			DateTime tempDate = DateTime.Now;
 			Guid tempGuid;
 
@@ -565,10 +564,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							_oldEnableBanner = tempBool;
 						break;
 					case "Banner":
-						if (string.IsNullOrEmpty(childNode.InnerText))
-							_oldBanner = null;
-						else
-							_oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
+						_oldBanner = string.IsNullOrEmpty(childNode.InnerText) ? null : new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
 					#endregion
 				}
@@ -666,6 +662,123 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			Parent.Files.Remove(this);
 			Parent.LastChanged = DateTime.Now;
+		}
+	}
+
+	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
+	{
+		public List<ILibraryLink> FolderContent { get; private set; }
+
+		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
+		{
+			bool alive = false;
+			foreach (var file in FolderContent)
+			{
+				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+				if (!alive && file is LibraryFolderLink)
+					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
+				if (alive)
+					break;
+			}
+			return alive;
+		}
+
+		public LibraryFolderLink(LibraryFolder parent)
+			: base(parent)
+		{
+			FolderContent = new List<ILibraryLink>();
+		}
+
+		public override ILibraryLink Clone(LibraryFolder parent)
+		{
+			var file = new LibraryFolderLink(parent);
+			file.OriginalPath = _linkLocalPath;
+			file.Name = Name;
+			file.Note = Note;
+			file.Order = Order;
+			file.IsBold = IsBold;
+			file.EnableWidget = EnableWidget;
+			file.Widget = Widget;
+			file.RootId = RootId;
+			file.RelativePath = RelativePath;
+			file.Type = Type;
+			file.AddDate = AddDate;
+			file.SearchTags = SearchTags;
+			file.CustomKeywords = CustomKeywords;
+			file.ExpirationDateOptions = ExpirationDateOptions;
+			file.PresentationProperties = PresentationProperties;
+			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			file.AttachmentProperties = AttachmentProperties.Clone(file);
+			file.BannerProperties = BannerProperties.Clone(file);
+			file.FileCard = FileCard.Clone(file);
+			file.FolderContent.AddRange(FolderContent.Select(x => x.Clone(parent)));
+			return file;
+		}
+
+		public override void Deserialize(XmlNode node)
+		{
+			base.Deserialize(node);
+			var contentNode = node.SelectSingleNode("FolderContent");
+			if (contentNode != null)
+				foreach (XmlNode fileNode in contentNode)
+				{
+					var file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
+					file.Deserialize(fileNode);
+					FolderContent.Add(file);
+				}
+
+			UpdateFolderContent();
+		}
+
+		public override string Serialize()
+		{
+			UpdateFolderContent();
+
+			var result = new StringBuilder();
+			result.AppendLine(base.Serialize());
+			result.AppendLine(@"<FolderContent>");
+			foreach (var link in FolderContent)
+				result.AppendLine(@"<File>" + link.Serialize() + @"</File>");
+			result.AppendLine(@"</FolderContent>");
+			return result.ToString();
+		}
+
+		public void UpdateFolderContent()
+		{
+			var existedPaths = new List<string>();
+			if (Directory.Exists(OriginalPath))
+			{
+				foreach (var folder in Directory.GetDirectories(OriginalPath).Select(folderPath => new DirectoryInfo(folderPath)))
+				{
+					existedPaths.Add(folder.FullName);
+					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(folder.FullName.ToLower()))) continue;
+					var libraryFile = new LibraryFolderLink(Parent);
+					libraryFile.Name = folder.Name;
+					libraryFile.RootId = RootId;
+					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+					libraryFile.Type = FileTypes.Folder;
+					libraryFile.InitBannerProperties();
+					FolderContent.Add(libraryFile);
+				}
+				foreach (var file in Directory.GetFiles(OriginalPath).Where(x => !x.ToLower().Contains("thumbs.db")).Select(filePath => new FileInfo(filePath)))
+				{
+					existedPaths.Add(file.FullName);
+					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(file.FullName.ToLower()))) continue;
+					var libraryFile = new LibraryLink(Parent);
+					libraryFile.Name = file.Name;
+					libraryFile.RootId = RootId;
+					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
+					libraryFile.SetProperties();
+					libraryFile.InitBannerProperties();
+					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					FolderContent.Add(libraryFile);
+				}
+			}
+			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
+			for (int i = 0; i < FolderContent.Count; i++)
+				FolderContent[i].Order = i;
 		}
 	}
 }

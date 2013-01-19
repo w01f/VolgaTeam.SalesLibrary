@@ -449,7 +449,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         {
             try
             {
-                BusinessClasses.LibraryFile link = new BusinessClasses.LibraryFile(new CoreObjects.BusinessClasses.LibraryFolder(new CoreObjects.BusinessClasses.LibraryPage(_parentLibrary)));
+                BusinessClasses.LibraryLink link = new BusinessClasses.LibraryLink(new CoreObjects.BusinessClasses.LibraryFolder(new CoreObjects.BusinessClasses.LibraryPage(_parentLibrary)));
                 link.OriginalPath = file.File.FullName;
                 link.SetProperties();
                 BusinessClasses.LinkManager.Instance.OpenLink(link);
@@ -461,7 +461,7 @@ namespace SalesDepot.PresentationClasses.WallBin
         #region Previewer
         private Viewers.IFileViewer _selectedFileViewer = null;
 
-        private void UpdateViewAccordingFileType(BusinessClasses.LibraryFile file)
+        private void UpdateViewAccordingFileType(BusinessClasses.LibraryLink file)
         {
             barButtonItemOpenLink.Enabled = false;
             barButtonItemSave.Enabled = false;
@@ -518,7 +518,7 @@ namespace SalesDepot.PresentationClasses.WallBin
                     CoreObjects.BusinessClasses.FileLink file = node.Tag as CoreObjects.BusinessClasses.FileLink;
                     if (file != null)
                     {
-                        BusinessClasses.LibraryFile libraryFile = new BusinessClasses.LibraryFile(new CoreObjects.BusinessClasses.LibraryFolder(new CoreObjects.BusinessClasses.LibraryPage(_parentLibrary)));
+                        BusinessClasses.LibraryLink libraryFile = new BusinessClasses.LibraryLink(new CoreObjects.BusinessClasses.LibraryFolder(new CoreObjects.BusinessClasses.LibraryPage(_parentLibrary)));
                         libraryFile.OriginalPath = file.File.FullName;
                         libraryFile.SetProperties();
 

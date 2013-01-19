@@ -280,7 +280,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	#region Compatibility with desktop version of Sales Depot
 	public class PresentationPreviewContainer
 	{
-		public PresentationPreviewContainer(ILibraryFile parent)
+		public PresentationPreviewContainer(ILibraryLink parent)
 		{
 			this.Parent = parent;
 			this.Identifier = Guid.NewGuid().ToString();
@@ -288,7 +288,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		}
 
 		#region PreviewContainer Members
-		public ILibraryFile Parent { get; private set; }
+		public ILibraryLink Parent { get; private set; }
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
 

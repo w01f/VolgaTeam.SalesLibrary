@@ -31,7 +31,7 @@ namespace SalesDepot.BusinessClasses
             _formPowerPointQuickViewOld = new ToolForms.WallBin.FormPowerPointQuickViewOld();
         }
 
-        public void OpenLink(LibraryFile link)
+        public void OpenLink(LibraryLink link)
         {
             FileInfo sourceFile = null;
             if (link.Type != CoreObjects.BusinessClasses.FileTypes.LineBreak && link.Type != CoreObjects.BusinessClasses.FileTypes.Folder && link.Type != CoreObjects.BusinessClasses.FileTypes.Url && link.Type != CoreObjects.BusinessClasses.FileTypes.Network)
@@ -269,7 +269,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        private void PreviewFile(LibraryFile link)
+        private void PreviewFile(LibraryLink link)
         {
             AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
@@ -282,7 +282,7 @@ namespace SalesDepot.BusinessClasses
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
-        public void OpenCopyOfFile(LibraryFile link)
+        public void OpenCopyOfFile(LibraryLink link)
         {
             try
             {
@@ -311,7 +311,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void OpenFolder(LibraryFile link)
+        public void OpenFolder(LibraryLink link)
         {
             if (Directory.Exists(link.LocalPath))
             {
@@ -322,7 +322,7 @@ namespace SalesDepot.BusinessClasses
                 AppManager.Instance.ShowWarning("Folder is Not Active");
         }
 
-        public void StartProcess(LibraryFile link)
+        public void StartProcess(LibraryLink link)
         {
             try
             {
@@ -335,7 +335,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void SaveFile(string dialogTitle, LibraryFile link, bool isCopy = true)
+        public void SaveFile(string dialogTitle, LibraryLink link, bool isCopy = true)
         {
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Title = dialogTitle;
@@ -380,7 +380,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void PrintFile(LibraryFile link)
+        public void PrintFile(LibraryLink link)
         {
             Process printProcess = new Process();
             string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
@@ -431,7 +431,7 @@ namespace SalesDepot.BusinessClasses
             AppManager.Instance.ActivityManager.AddLinkAccessActivity("Print Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
         }
 
-        public void EmailFile(LibraryFile link)
+        public void EmailFile(LibraryLink link)
         {
             if (InteropClasses.OutlookHelper.Instance.Open())
             {
@@ -465,7 +465,7 @@ namespace SalesDepot.BusinessClasses
                 AppManager.Instance.ShowWarning("Cannot open Outlook");
         }
 
-        public FileInfo RequestFile(LibraryFile link)
+        public FileInfo RequestFile(LibraryLink link)
         {
             FileInfo sourceFile = null;
             if (link.LinkAvailable)
@@ -508,7 +508,7 @@ namespace SalesDepot.BusinessClasses
             return sourceFile;
         }
 
-        public void ViewPresentation(LibraryFile link)
+        public void ViewPresentation(LibraryLink link)
         {
             string presentationFile = link.LocalPath;
             FormMain.Instance.TopMost = true;
@@ -546,7 +546,7 @@ namespace SalesDepot.BusinessClasses
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
-        public void ViewPresentationOld(LibraryFile link)
+        public void ViewPresentationOld(LibraryLink link)
         {
             FormMain.Instance.TopMost = true;
             if (!InteropClasses.PowerPointHelper.Instance.IsLinkedWithApplication)
@@ -581,7 +581,7 @@ namespace SalesDepot.BusinessClasses
             ConfigurationClasses.RegistryHelper.MaximizeSalesDepot = true;
         }
 
-        public void AddVideoIntoPresentation(LibraryFile link)
+        public void AddVideoIntoPresentation(LibraryLink link)
         {
             if (File.Exists(InteropClasses.PowerPointHelper.Instance.ActivePresentation.FullName))
             {
@@ -628,7 +628,7 @@ namespace SalesDepot.BusinessClasses
             }
         }
 
-        public void OpenVideo(LibraryFile link)
+        public void OpenVideo(LibraryLink link)
         {
             string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileName(link.LocalPath));
             File.Copy(link.LocalPath, newFile, true);

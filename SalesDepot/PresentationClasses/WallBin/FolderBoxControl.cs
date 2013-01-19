@@ -192,7 +192,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 				|| _hitTest == DataGridView.HitTestInfo.Nowhere
 				|| _dragBox.Contains(e.X, e.Y))
 				return;
-			var file = grFiles.Rows[_hitTest.RowIndex].Tag as LibraryFile;
+			var file = grFiles.Rows[_hitTest.RowIndex].Tag as LibraryLink;
 			if (file != null)
 				switch (file.Type)
 				{
@@ -214,7 +214,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		{
 			if (grFiles.Rows[e.RowIndex].Tag != null)
 			{
-				var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+				var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 				LinkManager.Instance.OpenLink(file);
 			}
 		}
@@ -226,7 +226,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 		private void grFiles_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
 		{
-			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 			if (file != null)
 				if (file.Type != FileTypes.LineBreak)
 					Cursor = Cursors.Hand;
@@ -275,7 +275,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		{
 			if (grFiles.Rows[e.RowIndex].Tag != null)
 			{
-				var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+				var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 				if (file != null)
 				{
 					var toolTipText = new List<string>();
@@ -302,7 +302,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		{
 			if (e.ColumnIndex == 0)
 			{
-				var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+				var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 				if (file != null)
 				{
 					e.PaintBackground(e.CellBounds, true);
@@ -398,7 +398,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			grFiles.ScrollBars = ScrollBars.Horizontal;
 		}
 
-		private void GetLinkGUIValues(LibraryFile file
+		private void GetLinkGUIValues(LibraryLink file
 									  , ref Image image
 									  , ref int imageLeft
 									  , ref int imageTop
@@ -602,7 +602,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			int maxColumnWidth = 0;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				var file = row.Tag as LibraryFile;
+				var file = row.Tag as LibraryLink;
 				if (file != null)
 				{
 					Image image = null;
@@ -694,7 +694,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		private void UpdateDataSource()
 		{
 			grFiles.Rows.Clear();
-			foreach (LibraryFile libraryFile in _folder.Files)
+			foreach (LibraryLink libraryFile in _folder.Files)
 			{
 				var row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 				row.Tag = libraryFile;

@@ -258,6 +258,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string nameField;
         
+        private string libraryNameField;
+        
         private int orderField;
         
         private LibraryFolder[] foldersField;
@@ -301,6 +303,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryName {
+            get {
+                return this.libraryNameField;
+            }
+            set {
+                this.libraryNameField = value;
             }
         }
         
@@ -978,6 +990,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string emailField;
         
+        private bool selectedField;
+        
         private GroupRecord[] groupsField;
         
         private Library[] librariesField;
@@ -1043,6 +1057,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         }
         
         /// <remarks/>
+        public bool selected {
+            get {
+                return this.selectedField;
+            }
+            set {
+                this.selectedField = value;
+            }
+        }
+        
+        /// <remarks/>
         public GroupRecord[] groups {
             get {
                 return this.groupsField;
@@ -1075,6 +1099,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string nameField;
         
+        private bool selectedField;
+        
         private UserRecord[] usersField;
         
         private Library[] librariesField;
@@ -1096,6 +1122,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool selected {
+            get {
+                return this.selectedField;
+            }
+            set {
+                this.selectedField = value;
             }
         }
         
@@ -1808,6 +1844,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string idField;
         
+        private string parentLinkIdField;
+        
         private string folderIdField;
         
         private string libraryIdField;
@@ -1869,6 +1907,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string parentLinkId {
+            get {
+                return this.parentLinkIdField;
+            }
+            set {
+                this.parentLinkIdField = value;
             }
         }
         

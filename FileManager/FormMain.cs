@@ -109,6 +109,7 @@ namespace FileManager
 			ribbonTabItemProgramManager.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableProgramManagerTab;
 			ribbonTabItemIPad.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab;
 			ribbonTabItemIPadUsers.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab;
+			ribbonTabItemTags.Enabled = ConfigurationClasses.SettingsManager.Instance.EnableTagsTab;
 
 			MainController.Instance.InitializeControllers();
 			MainController.Instance.LoadDataAndGUI();

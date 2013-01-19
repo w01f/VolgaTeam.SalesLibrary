@@ -66,7 +66,8 @@ namespace FileManager.ConfigurationClasses
 			EnableProgramManagerTab = true;
 			EnableIPadSettingsTab = true;
 			EnableIPadUsersTab = true;
-			EnableTagsCategories = true;
+			EnableTagsTab = true;
+			ShowTagsCategories = true;
 			LoadRibbonSettings();
 			#endregion
 
@@ -122,11 +123,12 @@ namespace FileManager.ConfigurationClasses
 		public bool EnableProgramManagerTab { get; private set; }
 		public bool EnableIPadSettingsTab { get; private set; }
 		public bool EnableIPadUsersTab { get; private set; }
-		public bool EnableTagsCategories { get; set; }
-		public bool EnableTagsKeywords { get; set; }
-		public bool EnableTagsFileCards { get; set; }
-		public bool EnableTagsAttachments { get; set; }
-		public bool EnableTagsCleaner { get; set; }
+		public bool EnableTagsTab { get; private set; }
+		public bool ShowTagsCategories { get; set; }
+		public bool ShowTagsKeywords { get; set; }
+		public bool ShowTagsFileCards { get; set; }
+		public bool ShowTagsAttachments { get; set; }
+		public bool ShowTagsCleaner { get; set; }
 		#endregion
 
 		public void Load()
@@ -250,6 +252,10 @@ namespace FileManager.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EnableIPadUsersTab = tempBool;
+				node = document.SelectSingleNode(@"/ribbon/Tags");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						EnableTagsTab = tempBool;
 			}
 		}
 

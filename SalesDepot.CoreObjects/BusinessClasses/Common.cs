@@ -52,7 +52,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	{
 		File,
 		Url,
-		Network
+		Network,
 	}
 
 	public class StringDataSourceWrapper

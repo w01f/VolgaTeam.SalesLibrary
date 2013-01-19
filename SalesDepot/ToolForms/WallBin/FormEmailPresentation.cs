@@ -7,7 +7,7 @@ namespace SalesDepot.ToolForms.WallBin
     public partial class FormEmailPresentation : Form
     {
         public int ActiveSlide { get; set; }
-        public BusinessClasses.LibraryFile SelectedFile { get; set; }
+        public BusinessClasses.LibraryLink SelectedFile { get; set; }
 
         public FormEmailPresentation()
         {

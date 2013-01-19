@@ -220,7 +220,7 @@ namespace FileManager.PresentationClasses.WallBin
 		private void grFiles_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
 			if (grFiles.Rows[e.RowIndex].Tag == null) return;
-			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 			if (file == null) return;
 			var toolTipText = new List<string>();
 			if (!string.IsNullOrEmpty(file.OriginalPath))
@@ -249,7 +249,7 @@ namespace FileManager.PresentationClasses.WallBin
 		private void grFiles_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
 			if (e.ColumnIndex != 0) return;
-			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 			if (file != null)
 			{
 				e.PaintBackground(e.CellBounds, true);
@@ -527,7 +527,7 @@ namespace FileManager.PresentationClasses.WallBin
 			e.Cancel = true;
 			if (!WallBinOptions.AllowEdit) return;
 			if (e.ColumnIndex != 0) return;
-			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 			if (file != null)
 			{
 				if (file.BannerProperties.Enable)
@@ -543,7 +543,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			if (!WallBinOptions.AllowEdit) return;
 			if (e.ColumnIndex != 0) return;
-			var file = grFiles.Rows[e.RowIndex].Tag as LibraryFile;
+			var file = grFiles.Rows[e.RowIndex].Tag as LibraryLink;
 			if (file == null) return;
 			if (file.BannerProperties.Enable)
 				return;
@@ -578,7 +578,7 @@ namespace FileManager.PresentationClasses.WallBin
 		private void grFiles_SelectionChanged(object sender, EventArgs e)
 		{
 			if (WallBinOptions.AllowMultiSelect)
-				Decorator.SelectLink(_folder.Identifier, (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryFile>().ToArray(), ModifierKeys);
+				Decorator.SelectLink(_folder.Identifier, (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>().ToArray(), ModifierKeys);
 			if (WallBinOptions.AllowEdit)
 				UpdateButtonsStatus();
 		}
@@ -596,7 +596,7 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					var file = new LibraryFile(_folder);
+					var file = new LibraryLink(_folder);
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Url;
@@ -634,22 +634,22 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				if (form.ShowDialog() == DialogResult.OK)
 				{
-					var file = new LibraryFile(_folder);
+					var file = new LibraryLink(_folder);
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Network;
 					file.InitBannerProperties();
 					if (grFiles.SelectedRows.Count > 0)
 					{
-						int rowIndex = grFiles.SelectedRows[0].Index;
+						var rowIndex = grFiles.SelectedRows[0].Index;
 						grFiles.Rows.Insert(rowIndex, file.DisplayName + file.Note);
-						DataGridViewRow row = grFiles.Rows[rowIndex];
+						var row = grFiles.Rows[rowIndex];
 						row.Tag = file;
 						grFiles.ClearSelection();
 					}
 					else
 					{
-						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.Note)];
+						var row = grFiles.Rows[grFiles.Rows.Add(file.DisplayName + file.Note)];
 						row.Tag = file;
 					}
 					_containFiles = true;
@@ -670,7 +670,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			if (grFiles.SelectedRows.Count > 0)
 			{
-				var file = new LibraryFile(_folder);
+				var file = new LibraryLink(_folder);
 				file.Type = FileTypes.LineBreak;
 				file.LineBreakProperties = new LineBreakProperties(file);
 				file.LineBreakProperties.Font = new Font(_textFont, FontStyle.Regular);
@@ -697,7 +697,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void DownLink()
 		{
-			var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			string tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
 
 			grFiles.SuspendLayout();
@@ -718,7 +718,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void UpLink()
 		{
-			var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			var tempFileDisplayName = grFiles.SelectedRows[0].Cells[0].Value.ToString();
 
 			grFiles.SuspendLayout();
@@ -740,7 +740,7 @@ namespace FileManager.PresentationClasses.WallBin
 		public void ShowLinkProperties(Point cursorPosition)
 		{
 			if (grFiles.SelectedRows.Count <= 0) return;
-			var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
 			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.IsBold = file.IsBold;
@@ -799,7 +799,7 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
 
-			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryFile).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
 			_containsWidgets = widgetColumnVisible;
 
 			SetGridSize();
@@ -816,7 +816,7 @@ namespace FileManager.PresentationClasses.WallBin
 		{
 			if (grFiles.SelectedRows.Count > 0)
 			{
-				var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+				var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 				if (file != null)
 				{
 					try
@@ -837,7 +837,7 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				if (grFiles.SelectedRows.Count > 0)
 				{
-					var file = grFiles.SelectedRows[0].Tag as LibraryFile;
+					var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 					if (file != null)
 					{
 						if (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation)
@@ -873,7 +873,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (!_containFiles) return;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				var file = row.Tag as LibraryFile;
+				var file = row.Tag as LibraryLink;
 				if (file == null) continue;
 				if (file.LastChanged == DateTime.MinValue)
 					_folder.LastChanged = DateTime.Now;
@@ -899,7 +899,7 @@ namespace FileManager.PresentationClasses.WallBin
 													  grFiles.SelectionChanged -= grFiles_SelectionChanged;
 													  foreach (DataGridViewRow row in grFiles.SelectedRows)
 													  {
-														  var file = row.Tag as LibraryFile;
+														  var file = row.Tag as LibraryLink;
 														  row.Selected = Decorator.IsLinkSelected(file);
 													  }
 													  grFiles.SelectionChanged += grFiles_SelectionChanged;
@@ -913,7 +913,7 @@ namespace FileManager.PresentationClasses.WallBin
 			SetGridSize();
 		}
 
-		private void GetLinkGUIValues(LibraryFile file
+		private void GetLinkGUIValues(LibraryLink file
 									  , ref Image image
 									  , ref int imageLeft
 									  , ref int imageTop
@@ -1130,7 +1130,7 @@ namespace FileManager.PresentationClasses.WallBin
 			int maxColumnWidth = 0;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				var file = row.Tag as LibraryFile;
+				var file = row.Tag as LibraryLink;
 				if (file != null)
 				{
 					Image image = null;
@@ -1197,12 +1197,12 @@ namespace FileManager.PresentationClasses.WallBin
 			if (_folder.Files.Count > 0)
 			{
 				_containFiles = true;
-				foreach (LibraryFile libraryFile in _folder.Files)
+				foreach (LibraryLink libraryFile in _folder.Files)
 				{
 					DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 					row.Tag = libraryFile;
 				}
-				_containsWidgets = _folder.Files.OfType<LibraryFile>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
 			}
 			else
 				_containFiles = false;
@@ -1252,25 +1252,25 @@ namespace FileManager.PresentationClasses.WallBin
 			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
 			grFiles.ClearSelection();
-			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryFile).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
 		}
 
 		private void AddFile(FileLink file, int rowIndex)
 		{
-			var isExisted = (from DataGridViewRow row in grFiles.Rows select row.Tag).OfType<LibraryFile>().Any(libraryFile => file.File.FullName.Equals(libraryFile.OriginalPath));
+			var isExisted = (from DataGridViewRow row in grFiles.Rows select row.Tag).OfType<LibraryLink>().Any(libraryFile => file.File.FullName.Equals(libraryFile.OriginalPath));
 			if (!isExisted)
 			{
-				var libraryFile = new LibraryFile(_folder);
+				var libraryFile = new LibraryLink(_folder);
 				libraryFile.Name = file.File.Name.Replace(file.File.Extension, string.Empty);
 				libraryFile.RootId = file.RootId;
 
-				RootFolder rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
+				var rootFolder = _folder.Parent.Parent.GetRootFolder(file.RootId);
 				libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.File.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
 
 				libraryFile.SetProperties();
 				libraryFile.InitBannerProperties();
 
-				int pathLength = libraryFile.RelativePath.Length;
+				var pathLength = libraryFile.RelativePath.Length;
 
 				switch (libraryFile.Type)
 				{
@@ -1329,7 +1329,7 @@ namespace FileManager.PresentationClasses.WallBin
 					}
 					else
 					{
-						DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
+						var row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 						row.Tag = libraryFile;
 						grFiles.Rows[grFiles.RowCount - 1].Selected = true;
 					}
@@ -1347,7 +1347,7 @@ namespace FileManager.PresentationClasses.WallBin
 			bool isExisted = false;
 			foreach (DataGridViewRow row in grFiles.Rows)
 			{
-				var libraryFile = row.Tag as LibraryFile;
+				var libraryFile = row.Tag as LibraryLink;
 				if (libraryFile != null)
 				{
 					if (folder.Folder.FullName.Equals(libraryFile.OriginalPath))
@@ -1359,7 +1359,7 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			if (!isExisted)
 			{
-				var libraryFile = new LibraryFile(_folder);
+				var libraryFile = new LibraryFolderLink(_folder);
 				libraryFile.Name = folder.Folder.Name;
 				libraryFile.RootId = folder.RootId;
 

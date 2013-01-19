@@ -265,15 +265,15 @@ namespace FileManager.PresentationClasses.TabPages
 
 		public void SwitchTagsEditor()
 		{
-			if (SettingsManager.Instance.EnableTagsCategories)
+			if (SettingsManager.Instance.ShowTagsCategories)
 				ActiveTagsEditor = _categoriesEditor;
-			else if (SettingsManager.Instance.EnableTagsKeywords)
+			else if (SettingsManager.Instance.ShowTagsKeywords)
 				ActiveTagsEditor = _keywordsEditor;
-			else if (SettingsManager.Instance.EnableTagsFileCards)
+			else if (SettingsManager.Instance.ShowTagsFileCards)
 				ActiveTagsEditor = _fileCardsEditor;
-			else if (SettingsManager.Instance.EnableTagsAttachments)
+			else if (SettingsManager.Instance.ShowTagsAttachments)
 				ActiveTagsEditor = _attachmentsEditor;
-			else if (SettingsManager.Instance.EnableTagsCleaner)
+			else if (SettingsManager.Instance.ShowTagsCleaner)
 				ActiveTagsEditor = _tagsCleaner;
 			else
 				ActiveTagsEditor = null;

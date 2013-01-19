@@ -8,7 +8,7 @@ namespace SalesDepot.PresentationClasses.Viewers
     public partial class DefaultViewer : UserControl, IFileViewer
     {
         #region Properties
-        public BusinessClasses.LibraryFile File { get; private set; }
+        public BusinessClasses.LibraryLink File { get; private set; }
 
         public string DisplayName
         {
@@ -35,7 +35,7 @@ namespace SalesDepot.PresentationClasses.Viewers
         }
         #endregion
 
-        public DefaultViewer(BusinessClasses.LibraryFile file)
+        public DefaultViewer(BusinessClasses.LibraryLink file)
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;

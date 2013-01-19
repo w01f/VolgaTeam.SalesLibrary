@@ -87,7 +87,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _dateToolTip);
 		}
 
-		public void ApplySearchCriteria(ILibraryFile[] files)
+		public void ApplySearchCriteria(ILibraryLink[] files)
 		{
 			_selectedFileViewer = null;
 			pnPreviewArea.Controls.Clear();
@@ -106,7 +106,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 																								_fileViewers.Clear();
 																							});
 
-												foreach (LibraryFile file in files)
+												foreach (LibraryLink file in files)
 												{
 													IFileViewer viewer = null;
 													switch (file.Type)
@@ -223,7 +223,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			gridViewFiles.FocusedRowChanged += gridViewFiles_FocusedRowChanged;
 		}
 
-		private void UpdateViewAccordingFileType(LibraryFile file)
+		private void UpdateViewAccordingFileType(LibraryLink file)
 		{
 			barButtonItemOpenLink.Enabled = false;
 			barButtonItemSave.Enabled = false;
@@ -308,7 +308,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		{
 			if (DecoratorManager.Instance.ActivePackageViewer != null)
 			{
-				var files = new ILibraryFile[] { };
+				var files = new ILibraryLink[] { };
 				if (xtraTabControlSolutionModes.SelectedTabPage == xtraTabPageSearchTags)
 				{
 					files = DecoratorManager.Instance.ActivePackageViewer.Package.SearchByTags(GetSearhTags());
@@ -327,7 +327,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 					}
 					else
 					{
-						var filesByName = new List<ILibraryFile>();
+						var filesByName = new List<ILibraryLink>();
 						if (checkEditExcel.Checked)
 							filesByName.AddRange(DecoratorManager.Instance.ActivePackageViewer.Package.SearchByName(criteria, checkEditSearchByFilesExactMatch.Checked, FileTypes.Excel));
 						if (checkEditFolders.Checked)
@@ -438,7 +438,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 			LoadKeyWordFilterSet();
 
-			ApplySearchCriteria(new ILibraryFile[] { });
+			ApplySearchCriteria(new ILibraryLink[] { });
 			UpdateSearchButtonStatus();
 			navBarControlSearchTags.View = new CustomNavPaneViewInfoRegistrator();
 		}
@@ -824,7 +824,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 		{
 			if (e.RowHandle >= 0 && _fileViewers.Count > e.RowHandle)
 			{
-				LibraryFile file = _fileViewers[gridViewFiles.GetDataSourceRowIndex(e.RowHandle)].File;
+				LibraryLink file = _fileViewers[gridViewFiles.GetDataSourceRowIndex(e.RowHandle)].File;
 				switch (file.CriteriaOverlap)
 				{
 					case "meet ALL of your Search Criteria":
@@ -889,7 +889,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 				{
 					if (hi.RowHandle >= 0 && _fileViewers.Count > hi.RowHandle)
 					{
-						LibraryFile file = _fileViewers[gridViewFiles.GetDataSourceRowIndex(hi.RowHandle)].File;
+						LibraryLink file = _fileViewers[gridViewFiles.GetDataSourceRowIndex(hi.RowHandle)].File;
 						if (file != null)
 						{
 							var toolTip = new List<string>();

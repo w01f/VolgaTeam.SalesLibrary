@@ -8,43 +8,43 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class AttachmentProperties
 	{
-		public ILibraryFile Parent { get; private set; }
+		public AttachmentProperties(ILibraryLink parent)
+		{
+			Parent = parent;
+			Identifier = Guid.NewGuid();
+			FilesAttachments = new List<LinkAttachment>();
+			WebAttachments = new List<LinkAttachment>();
+		}
+
+		public ILibraryLink Parent { get; private set; }
 		public Guid Identifier { get; set; }
 		public bool Enable { get; set; }
 		public List<LinkAttachment> FilesAttachments { get; private set; }
 		public List<LinkAttachment> WebAttachments { get; private set; }
 
-		public AttachmentProperties(ILibraryFile parent)
+		public virtual AttachmentProperties Clone(ILibraryLink parent)
 		{
-			this.Parent = parent;
-			this.Identifier = Guid.NewGuid();
-			this.FilesAttachments = new List<LinkAttachment>();
-			this.WebAttachments = new List<LinkAttachment>();
-		}
-
-		public AttachmentProperties Clone(ILibraryFile parent)
-		{
-			AttachmentProperties attachmentProperties = new AttachmentProperties(parent);
-			attachmentProperties.Enable = this.Enable;
-			attachmentProperties.FilesAttachments.AddRange(this.FilesAttachments.Select(x => x.Clone(attachmentProperties)));
-			attachmentProperties.WebAttachments.AddRange(this.WebAttachments.Select(x => x.Clone(attachmentProperties)));
+			var attachmentProperties = new AttachmentProperties(parent);
+			attachmentProperties.Enable = Enable;
+			attachmentProperties.FilesAttachments.AddRange(FilesAttachments.Select(x => x.Clone(attachmentProperties)));
+			attachmentProperties.WebAttachments.AddRange(WebAttachments.Select(x => x.Clone(attachmentProperties)));
 			return attachmentProperties;
 		}
 
 
-		public string Serialize()
+		public virtual string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Identifier>" + this.Identifier.ToString() + @"</Identifier>");
-			result.AppendLine(@"<Enable>" + this.Enable.ToString() + @"</Enable>");
-			foreach (LinkAttachment attachment in this.FilesAttachments)
+			var result = new StringBuilder();
+			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
+			result.AppendLine(@"<Enable>" + Enable.ToString() + @"</Enable>");
+			foreach (LinkAttachment attachment in FilesAttachments)
 				result.AppendLine(@"<Attachment>" + attachment.Serialize() + @"</Attachment>");
-			foreach (LinkAttachment attachment in this.WebAttachments)
+			foreach (LinkAttachment attachment in WebAttachments)
 				result.AppendLine(@"<Attachment>" + attachment.Serialize() + @"</Attachment>");
 			return result.ToString();
 		}
 
-		public void Deserialize(XmlNode node)
+		public virtual void Deserialize(XmlNode node)
 		{
 			Guid tempGuid;
 			bool tempBool;
@@ -54,22 +54,22 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					case "Identifier":
 						if (Guid.TryParse(childNode.InnerText, out tempGuid))
-							this.Identifier = tempGuid;
+							Identifier = tempGuid;
 						break;
 					case "Enable":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Enable = tempBool;
+							Enable = tempBool;
 						break;
 					case "Attachment":
-						LinkAttachment attachment = new LinkAttachment(this);
+						var attachment = new LinkAttachment(this);
 						attachment.Deserialize(childNode);
 						switch (attachment.Type)
 						{
 							case AttachmentType.File:
-								this.FilesAttachments.Add(attachment);
+								FilesAttachments.Add(attachment);
 								break;
 							case AttachmentType.Url:
-								this.WebAttachments.Add(attachment);
+								WebAttachments.Add(attachment);
 								break;
 						}
 						break;

@@ -150,10 +150,10 @@ namespace FileManager.Controllers
 					_wallBinOptions.AllowMultiSelect = true;
 					_wallBinOptions.ShowFiles = false;
 					_wallBinOptions.ShowTagsEditor = true;
-					_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.EnableTagsCategories;
-					_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.EnableTagsKeywords;
-					_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.EnableTagsFileCards;
-					_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.EnableTagsAttachments;
+					_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
+					_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
+					_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
+					_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
 					break;
 				default:
 					_wallBinOptions.AllowEdit = true;
@@ -313,11 +313,11 @@ namespace FileManager.Controllers
 		#region Tags Processing
 		private void UpdateTagsButtons()
 		{
-			FormMain.Instance.buttonItemTagsCategories.Checked = SettingsManager.Instance.EnableTagsCategories;
-			FormMain.Instance.buttonItemTagsKeywords.Checked = SettingsManager.Instance.EnableTagsKeywords;
-			FormMain.Instance.buttonItemTagsFileCards.Checked = SettingsManager.Instance.EnableTagsFileCards;
-			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.EnableTagsAttachments;
-			FormMain.Instance.buttonItemTagsClear.Checked = SettingsManager.Instance.EnableTagsCleaner;
+			FormMain.Instance.buttonItemTagsCategories.Checked = SettingsManager.Instance.ShowTagsCategories;
+			FormMain.Instance.buttonItemTagsKeywords.Checked = SettingsManager.Instance.ShowTagsKeywords;
+			FormMain.Instance.buttonItemTagsFileCards.Checked = SettingsManager.Instance.ShowTagsFileCards;
+			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.ShowTagsAttachments;
+			FormMain.Instance.buttonItemTagsClear.Checked = SettingsManager.Instance.ShowTagsCleaner;
 		}
 
 		public void UpdateTagsEditor()
@@ -658,15 +658,15 @@ namespace FileManager.Controllers
 			var button = sender as ButtonItem;
 			if (button == null) return;
 			if (!button.Checked) return;
-			SettingsManager.Instance.EnableTagsCategories = FormMain.Instance.buttonItemTagsCategories.Checked;
-			SettingsManager.Instance.EnableTagsKeywords = FormMain.Instance.buttonItemTagsKeywords.Checked;
-			SettingsManager.Instance.EnableTagsFileCards = FormMain.Instance.buttonItemTagsFileCards.Checked;
-			SettingsManager.Instance.EnableTagsAttachments = FormMain.Instance.buttonItemTagsAttachments.Checked;
-			SettingsManager.Instance.EnableTagsCleaner = FormMain.Instance.buttonItemTagsClear.Checked;
-			_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.EnableTagsCategories;
-			_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.EnableTagsKeywords;
-			_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.EnableTagsFileCards;
-			_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.EnableTagsAttachments;
+			SettingsManager.Instance.ShowTagsCategories = FormMain.Instance.buttonItemTagsCategories.Checked;
+			SettingsManager.Instance.ShowTagsKeywords = FormMain.Instance.buttonItemTagsKeywords.Checked;
+			SettingsManager.Instance.ShowTagsFileCards = FormMain.Instance.buttonItemTagsFileCards.Checked;
+			SettingsManager.Instance.ShowTagsAttachments = FormMain.Instance.buttonItemTagsAttachments.Checked;
+			SettingsManager.Instance.ShowTagsCleaner = FormMain.Instance.buttonItemTagsClear.Checked;
+			_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
+			_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
+			_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
+			_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
 			_tabPage.ApplyWallBinOptions(_wallBinOptions);
 			ApplyWallBinOptions();
 			_tabPage.SwitchTagsEditor();
