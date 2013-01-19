@@ -147,7 +147,7 @@ class LibraryFolder
     public function loadFiles()
     {
         unset($this->files);
-        foreach (LinkStorage::model()->findAll('id_folder=?', array($this->id)) as $linkRecord)
+        foreach (LinkStorage::model()->findAll('id_folder=? and id_parent_link is null', array($this->id)) as $linkRecord)
         {
             $link = new LibraryLink($this);
             $link->browser = $this->browser;

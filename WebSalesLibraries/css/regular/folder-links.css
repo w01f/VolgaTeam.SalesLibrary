@@ -55,11 +55,16 @@
     background-repeat: no-repeat;
 }
 
-.view-dialog-content{
+.view-dialog-content, .folder-link-content{
     display: none;
 }
 
-.clickable
+.clickable, .folder-link
 {
     cursor: pointer;
+}
+
+.folder-link-content{
+    margin-left: 32px;
+    margin-right: 5px;
 }

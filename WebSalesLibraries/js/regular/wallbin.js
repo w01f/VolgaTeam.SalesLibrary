@@ -64,7 +64,25 @@
                 $.updateTextSpace(storedTextSpace);
                 $.updateContentAreaDimensions();            
                 $('.clickable').off('click');        
-                $('.clickable').on('click',$.openViewDialogEmbedded);        
+                $('.clickable').on('click',$.openViewDialogEmbedded);
+                $('.folder-link').off('click');        
+                $('.folder-link').on('click',function(event){
+                    if(!$(this).hasClass('active'))
+                    {                        
+                        $(this).addClass('active');
+                        $(this).children('.folder-link-content').show("blind", {
+                            direction:"vertical"
+                        }, 500);                                
+                    }
+                    else
+                    {
+                        $(this).children('.folder-link-content').hide("blind", {
+                            direction:"vertical"
+                        }, 500);                                
+                        $(this).removeClass('active');
+                    }
+                    event.stopPropagation();
+                });                                            
             },
             error: function(){
                 $('#content').html('');
@@ -137,6 +155,24 @@
                     $.updateContentAreaDimensions();            
                     $('.clickable').off('click');        
                     $('.clickable').on('click',$.openViewDialogEmbedded);        
+                    $('.folder-link').off('click');        
+                    $('.folder-link').on('click',function(event){
+                        if(!$(this).hasClass('active'))
+                        {                        
+                            $(this).addClass('active');
+                            $(this).children('.folder-link-content').show("blind", {
+                                direction:"vertical"
+                            }, 500);                                
+                        }
+                        else
+                        {
+                            $(this).children('.folder-link-content').hide("blind", {
+                                direction:"vertical"
+                            }, 500);                                
+                            $(this).removeClass('active');
+                        }
+                        event.stopPropagation();
+                    });                            
                     folderLinks.show("blind", {
                         direction:"vertical"
                     }, 500);

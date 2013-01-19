@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS `tbl_link`;
 CREATE TABLE IF NOT EXISTS `tbl_link` (
   `id` varchar(36) NOT NULL,
+  `id_parent_link` varchar(36) NULL,
   `id_folder` varchar(36) NOT NULL,
   `id_library` varchar(36) NOT NULL,
   `name` varchar(256) NOT NULL,
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `date_add` datetime NULL,
   `date_modify` datetime NULL,
   PRIMARY KEY (`id`),
+  KEY `id_parent_link` (`id_parent_link`),
   KEY `id_folder` (`id_folder`),
   KEY `id_library` (`id_library`),
   KEY `format` (`format`),

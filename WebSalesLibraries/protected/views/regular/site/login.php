@@ -1,5 +1,5 @@
 <?php
-$version = '7.0';
+$version = '9.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -16,6 +16,16 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 ?>
 
 <div id="content">
+    <?php if (Yii::app()->params['login']['forgotPasswordField']): ?>
+        <a id="recover-password-link" href="#view-dialog-container">
+            <img src="<?php echo Yii::app()->baseUrl . '/images/login/forgot-password.png'; ?>" alt="Forgot Password?">
+        </a>
+    <?php endif; ?>
+    <?php if (Yii::app()->browser->isMobile()): ?>
+        <a id="button-switch-version" href="#">
+            <img src="<?php echo Yii::app()->baseUrl . '/images/login/mobile-version.png'; ?>" alt="Switch to Mobile version">
+        </a>    
+    <?php endif; ?>    
     <?php $form = $this->beginWidget('CActiveForm', array('action' => Yii::app()->createUrl('site/login'))); ?>
     <table id ="form-login">
         <tr>
@@ -24,8 +34,11 @@ $this->pageTitle = Yii::app()->name . ' - Login';
             </td>
         </tr>        
         <tr>
-            <td colspan ="2">
+            <td colspan ="2" class="text-field">
                 <br>
+                <?php if (Yii::app()->browser->getBrowser() == 'Internet Explorer'): ?>
+                    <div>Username:</div>
+                <?php endif; ?>                
                 <?php
                 echo $form->textField($formData, 'login'
                     , array(
@@ -36,7 +49,10 @@ $this->pageTitle = Yii::app()->name . ' - Login';
             </td>
         </tr>        
         <tr>        
-            <td colspan ="2">
+            <td colspan ="2" class="text-field">
+                <?php if (Yii::app()->browser->getBrowser() == 'Internet Explorer'): ?>
+                    <div>Password:</div>
+                <?php endif; ?>
                 <?php
                 echo $form->textField($formData, 'password'
                     , array(
@@ -60,7 +76,34 @@ $this->pageTitle = Yii::app()->name . ' - Login';
                 ?>
                 <br>
             </td>        
+        </tr>                
+        <tr>        
+            <td colspan ="2">
+                <?php
+                echo $form->error($formData, 'login'
+                    , array('class' => 'error-message')
+                );
+                echo $form->error($formData, 'password'
+                    , array('class' => 'error-message')
+                );
+                ?>
+                <br>
+            </td>        
         </tr>        
+        <?php if (Yii::app()->params['login']['disclaimer']): ?>            
+            <tr>
+                <td colspan ="2">
+                    <div id="disclaimer-container">
+                        <label class="checkbox">
+                            <input id="disclaimer" type="checkbox" value="">
+                            <?php echo Yii::app()->params['login']['disclaimerText']; ?>            
+                        </label>
+                    </div>
+                    <br>
+                    <br>
+                </td>                    
+            </tr>        
+        <?php endif; ?>                            
         <tr>        
             <?php if (Yii::app()->params['login']['rememberMeField']): ?>            
                 <td id="remember-me-container">
@@ -79,30 +122,11 @@ $this->pageTitle = Yii::app()->name . ' - Login';
                 <?php
                 echo CHtml::submitButton('Log In'
                     , array('id' => 'button-login',
-                    'class' => 'btn'
+                    'class' => Yii::app()->params['login']['disclaimer'] ? 'btn disabled' : 'btn'
                 ));
                 ?>                        
             </td>                            
         </tr>
-        <tr>
-            <td colspan ="2" id ="recover-password-container">
-                <br>
-                <br>
-                <?php
-                if (Yii::app()->params['login']['forgotPasswordField'])
-                    echo CHtml::link('Forgot Password?', '#view-dialog-container', array('id' => 'recover-password-link'));
-                ?>
-            </td>
-        </tr>        
-        <?php if (Yii::app()->browser->isMobile()): ?>
-            <tr>
-                <td colspan ="2">
-                    <br>
-                    <br>
-                    <button type="button" class="btn btn-block" id="button-switch-version">Switch to Mobile version</button>
-                </td>
-            </tr>        
-        <?php endif; ?>
     </table>
     <?php $this->endWidget(); ?>
 </div>        

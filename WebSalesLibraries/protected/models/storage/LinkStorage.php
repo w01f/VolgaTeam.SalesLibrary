@@ -31,6 +31,8 @@ class LinkStorage extends CActiveRecord
         if ($needToCreate || $needToUpdate)
         {
             $linkRecord->id = $link['id'];
+            if (array_key_exists('parentLinkId', $link))
+                $linkRecord->id_parent_link = $link['parentLinkId'];
             $linkRecord->id_folder = $link['folderId'];
             $linkRecord->id_library = $link['libraryId'];
             $linkRecord->name = $link['name'];

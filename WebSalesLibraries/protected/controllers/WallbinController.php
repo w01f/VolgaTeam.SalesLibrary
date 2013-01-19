@@ -48,14 +48,17 @@ class WallbinController extends IsdController
 
         $libraryManager = new LibraryManager();
         $selectedPage = $libraryManager->getSelectedPage();
-        foreach ($selectedPage->folders as $folder)
-            if ($folder->id == $folderId)
-            {
-                $selectedFolder = $folder;
-                $selectedFolder->loadFiles();
-                break;
-            }
-        $this->renderPartial('folderLinks', array('folder' => $selectedFolder), false, true);
+        if (isset($selectedPage->folders))
+        {
+            foreach ($selectedPage->folders as $folder)
+                if ($folder->id == $folderId)
+                {
+                    $selectedFolder = $folder;
+                    $selectedFolder->loadFiles();
+                    break;
+                }
+            $this->renderPartial('folderLinks', array('folder' => $selectedFolder), false, true);
+        }
     }
 
     public function actionGetLinkDetails()

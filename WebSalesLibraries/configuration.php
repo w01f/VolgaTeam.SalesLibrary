@@ -18,6 +18,8 @@ return CMap::mergeArray(
             'login' => array(
                 'rememberMeField' => true,
                 'forgotPasswordField' => true,
+                'disclaimer' => false,
+                'disclaimerText' => 'I understand  that this Website contains information that is privileged, confidential and exempt from disclosure under applicable law.  Only Authorized employees  and representatives of WPLG-TV, Miami, may access or download information from this site.',
                 'tempPasswordExpiredIn' => '7',
             ),
             'home_tab' => array(

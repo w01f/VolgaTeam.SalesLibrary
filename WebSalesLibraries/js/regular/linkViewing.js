@@ -1,5 +1,5 @@
 (function( $ ) {
-    $.openViewDialogEmbedded = function(){
+    $.openViewDialogEmbedded = function(event){
         var formatItems = $(this).find('li');
         var fullScreenSelector = $(this).find('.use-fullscreen');
         if(formatItems.length > 1)
@@ -31,6 +31,7 @@
         {
             $.viewSelectedFormat.call(formatItems[0],formatItems[0],false);
         }
+        event.stopPropagation();
     }
     
     $.openViewDialogSearchGrid = function(linkId){

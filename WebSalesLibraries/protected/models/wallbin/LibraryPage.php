@@ -21,7 +21,7 @@ class LibraryPage
      * @var string libraryName
      * @soap
      */
-    public $libraryName;    
+    public $libraryName;
     /**
      * @var int order
      * @soap
@@ -53,17 +53,17 @@ class LibraryPage
      * @var boolean selected
      * @soap
      */
-    public $selected;    
+    public $selected;
     /**
      * @var GroupRecord[]
      * @soap
      */
-    public $groups;            
+    public $groups;
     /**
      * @var UserRecord[]
      * @soap
      */
-    public $users;            
+    public $users;
     public $cachedColumnsView;
     public function __construct($library)
     {
@@ -93,7 +93,7 @@ class LibraryPage
 
     public function loadData($browser)
     {
-        if(!isset($browser))
+        if (!isset($browser))
         {
             if (Yii::app()->browser->isMobile())
                 $browser = 'mobile';
@@ -146,8 +146,9 @@ class LibraryPage
 
     public function loadFolders()
     {
-        foreach($this->folders as $folder)
-            $folder->loadFiles();
+        if (isset($this->folders))
+            foreach ($this->folders as $folder)
+                $folder->loadFiles();
     }
 
     public function buildCache($controller)

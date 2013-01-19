@@ -76,3 +76,10 @@
     opacity: 0.8;
     background: #eee;
 }
+
+#disclaimer-container
+{
+    margin-left: -120px;
+    margin-right: -120px;
+    text-align: justify;
+}

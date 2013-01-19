@@ -10,6 +10,7 @@ return array(
         'application.models.help.*',
         'application.models.common.*',
         'application.models.wallbin.*',
+        'application.models.favorites.*',
         'application.components.*',
         'application.components.widgets.*',
         'application.components.core.*',

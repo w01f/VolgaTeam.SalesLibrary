@@ -11,6 +11,11 @@ class LibraryLink
      * @var string
      * @soap
      */
+    public $parentLinkId;
+    /**
+     * @var string
+     * @soap
+     */
     public $folderId;
     /**
      * @var string
@@ -147,6 +152,7 @@ class LibraryLink
     public $browser;
     public $availableFormats;
     public $isFavorite;
+    public $folderContent;
     public function __construct($folder)
     {
         $this->parent = $folder;
@@ -156,6 +162,7 @@ class LibraryLink
     public function load($linkRecord)
     {
         $this->id = $linkRecord->id;
+        $this->parentLinkId = $linkRecord->id_parent_link;
         $this->folderId = $linkRecord->id_folder;
         $this->libraryId = $linkRecord->id_library;
         $this->name = $linkRecord->name;
@@ -170,6 +177,19 @@ class LibraryLink
         $this->enableWidget = $linkRecord->enable_widget;
         $this->widget = $linkRecord->widget;
         $this->originalFormat = $linkRecord->format;
+
+        unset($this->files);
+        foreach (LinkStorage::model()->findAll('id_parent_link=?', array($linkRecord->id)) as $contentRecord)
+        {
+            $link = new LibraryLink($this->parent);
+            $link->browser = $this->browser;
+            $link->load($contentRecord);
+            $this->folderContent[] = $link;
+        }
+
+        if (isset($this->files))
+            usort($this->files, "LibraryLink::libraryLinkComparer");
+
 
         $lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
         if ($lineBreakRecord !== null)
@@ -257,6 +277,38 @@ class LibraryLink
 
     public function getWidget()
     {
+        if (isset($this->folderContent))
+            return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'folder.png'));
+        if (isset($this->parentLinkId))
+        {
+            if (isset($this->originalFormat))
+            {
+                switch ($this->originalFormat)
+                {
+                    case 'ppt':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'pptx.png'));
+                    case 'doc':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'docx.png'));
+                    case 'xls':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'xlsx.png'));
+                    case 'pdf':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'pdf.png'));
+                    case 'video':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'wmv.png'));
+                    case 'mp4':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'mp4.png'));
+                    case 'png':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'png.png'));
+                    case 'jpeg':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'jpeg.png'));
+                    case 'url':
+                        return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'url.png'));
+                    default:
+                        return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
+                        break;
+                }
+            }
+        }
         if (isset($this->enableWidget))
             if (isset($this->widget))
                 return $this->widget;

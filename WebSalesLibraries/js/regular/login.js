@@ -180,6 +180,21 @@
             switchVersion();
         });        
         
+        $('#disclaimer').on('change',function(){
+            if($(this).attr('checked'))
+                $('#button-login').removeClass('disabled');
+            else
+                $('#button-login').addClass('disabled');
+        });
+        $('#button-login').off('click');
+        $('#button-login').on('click',function(event){
+            if($('#disclaimer').length && !$("#disclaimer").attr('checked'))
+            {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });                
+        
         updateLoginBodyPosition();
         $(window).on('resize',updateLoginBodyPosition); 
     });
