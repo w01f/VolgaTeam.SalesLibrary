@@ -18,7 +18,7 @@ return CMap::mergeArray(
 			'login' => array(
                 'rememberMeField' => true,
                 'forgotPasswordField' => true,
-                'disclaimer' => false,
+                'disclaimer' => true,
                 'disclaimerText' => 'I understand  that this Website contains information that is privileged, confidential and exempt from disclosure under applicable law.  Only Authorized employees  and representatives of WPLG-TV, Miami, may access or download information from this site.',
                 'tempPasswordExpiredIn' => '7',
             ),
@@ -30,10 +30,10 @@ return CMap::mergeArray(
                 'visible' => true,
                 'name' => 'SEARCH',
                 'position' => 2,
-                'show_money_button' => false,
+                'show_money_button' => true,
             ),
             'search_file_card_tab' => array(
-                'visible' => false,
+                'visible' => true,
                 'name' => 'Sales Success Models',
                 'position' => 3,
             ),
@@ -60,9 +60,9 @@ return CMap::mergeArray(
         ),
 		'components' => array(            
 			'db' => array(                
-				'connectionString' => 'mysql:host=localhost;dbname=raycomre_db',                
-				'username' => 'raycomre',                
-				'password' => 'nR!%kBV,=P**',            
+				'connectionString' => 'mysql:host=localhost;dbname=sales_library',
+				'username' => 'root',
+				'password' => 'root',
 			),
         ),
     )
