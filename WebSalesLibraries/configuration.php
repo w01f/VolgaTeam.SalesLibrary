@@ -15,7 +15,7 @@ return CMap::mergeArray(
         'name' => 'Sales Libraries',
         'params' => array(
             'appRoot' => dirname(__FILE__),
-            'login' => array(
+			'login' => array(
                 'rememberMeField' => true,
                 'forgotPasswordField' => true,
                 'disclaimer' => false,
@@ -23,23 +23,23 @@ return CMap::mergeArray(
                 'tempPasswordExpiredIn' => '7',
             ),
             'home_tab' => array(
-                'name' => 'Home',
+                'name' => 'HOME',
                 'position' => 1,
             ),
             'search_full_tab' => array(
                 'visible' => true,
-                'name' => 'Search',
+                'name' => 'SEARCH',
                 'position' => 2,
-                'show_money_button' => true,
+                'show_money_button' => false,
             ),
             'search_file_card_tab' => array(
-                'visible' => true,
+                'visible' => false,
                 'name' => 'Sales Success Models',
                 'position' => 3,
             ),
             'calendar_tab' => array(
                 'visible' => true,
-                'name' => 'Schedule',
+                'name' => 'WEBCAST',
                 'position' => 4,
             ),
             'stations' => array(
@@ -47,24 +47,24 @@ return CMap::mergeArray(
                 'column_name' => 'Libraries',
             ),
             'email' => array(
-                'from' => 'billy@adSALESapps.com',
+                'from' => 'bcaudill@raycommedia.com',
                 'new_user' => array(
-                    'subject' => 'Accsess to isalesdepot.com',
-                    'body' => 'You have been created accont at isalesdepot.com',
+                    'subject' => 'RaycomResults.tv',
+                    'body' => 'You have a new account at RaycomResults.tv',
                 ),
                 'send_link' => array(
-                    'subject' => 'iSalesDepot Link',
-                    'body' => 'Check this link, please:',
+                    'subject' => 'Raycom Results File Link',
+                    'body' => 'View your file:',
                 ),
             ),
         ),
-        'components' => array(
-            'db' => array(
-                'connectionString' => 'mysql:host=localhost;dbname=sales_library',
-                'username' => 'root',
-                'password' => 'root',
-            ),
+		'components' => array(            
+			'db' => array(                
+				'connectionString' => 'mysql:host=localhost;dbname=raycomre_db',                
+				'username' => 'raycomre',                
+				'password' => 'nR!%kBV,=P**',            
+			),
         ),
-        )
+    )
 );
 ?>

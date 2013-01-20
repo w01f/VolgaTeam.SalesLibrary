@@ -25,7 +25,7 @@
             async: true,
             dataType: 'html'
         });
-    }
+    };
     
     $.initHelpView = function(tabId){
         var pageSelector = '#'+tabId+ ' .enabled.help-page';
@@ -37,7 +37,7 @@
         });        
         
         loadHelpPage(tabId);
-    }
+    };
     
     $(document).ready(function() 
     {

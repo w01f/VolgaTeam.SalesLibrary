@@ -35,7 +35,7 @@
             async: true,
             dataType: 'html'            
         });     
-    }
+    };
     
     var pageChanged = function(){
         var selectedPageName = $("#select-page :selected").text();
@@ -44,7 +44,7 @@
         });
         $("#page-logo").attr('src', $("#select-page").val());
         updateView();
-    }
+    };
     
     var loadColumns = function(){
         $.ajax({
@@ -63,10 +63,8 @@
                 $.updateTextSize(storedTextSize);
                 $.updateTextSpace(storedTextSpace);
                 $.updateContentAreaDimensions();            
-                $('.clickable').off('click');        
-                $('.clickable').on('click',$.openViewDialogEmbedded);
-                $('.folder-link').off('click');        
-                $('.folder-link').on('click',function(event){
+                $('.clickable').off('click').on('click',$.openViewDialogEmbedded);
+                $('.folder-link').off('click').on('click',function(event){
                     if(!$(this).hasClass('active'))
                     {                        
                         $(this).addClass('active');
@@ -90,7 +88,7 @@
             async: true,
             dataType: 'html'
         });     
-    }
+    };
     
     var loadAccordion = function(){
         $.ajax({
@@ -107,8 +105,7 @@
             success: function(msg){
                 $('#content').html('<div>'+msg+'</div>');
                 $.updateContentAreaDimensions();            
-                $('.folder-header').off('click');        
-                $('.folder-header').on('click',function(){
+                $('.folder-header').off('click').on('click',function(){
                     $('.folder-header.active').parent().find('.folder-links').hide("blind", {
                         direction:"vertical"
                     }, 500);
@@ -129,7 +126,7 @@
             async: true,
             dataType: 'html'
         });     
-    }
+    };
     
     var showAccordionFolder = function(folderContainer, folderId){
         var folderLinks = folderContainer.find('.folder-links');
@@ -153,10 +150,8 @@
                     $.updateTextSize(storedTextSize);
                     $.updateTextSpace(storedTextSpace);
                     $.updateContentAreaDimensions();            
-                    $('.clickable').off('click');        
-                    $('.clickable').on('click',$.openViewDialogEmbedded);        
-                    $('.folder-link').off('click');        
-                    $('.folder-link').on('click',function(event){
+                    $('.clickable').off('click').on('click',$.openViewDialogEmbedded);
+                    $('.folder-link').off('click').on('click',function(event){
                         if(!$(this).hasClass('active'))
                         {                        
                             $(this).addClass('active');

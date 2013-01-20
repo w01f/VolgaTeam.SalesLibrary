@@ -186,6 +186,7 @@ class LibraryFolder
             if (isset($this->widget))
                 if ($this->widget != '')
                     return $this->widget;
+        return null;
     }
 
     public static function libraryFolderComparer($x, $y)

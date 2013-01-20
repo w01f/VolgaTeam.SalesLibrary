@@ -21,7 +21,7 @@
                 {
                     $.each(events,function(index) 
                     {
-                        var date = events[index].start.split("-")
+                        var date = events[index].start.split("-");
                         events[index].start = new Date(date[2],date[0]-1,date[1],0,0,0,0);
                     });                    
                     $('#calendar').fullCalendar({
@@ -51,10 +51,9 @@
                         },
 					
                         eventClick: function(event) {
-                            if (event.url) 
+                            if (event.url)
                             {
                                 window.open(event.url);
-                                return false;
                             }
                         }
 					
@@ -64,7 +63,7 @@
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
     
     $(document).ready(function() 
     {

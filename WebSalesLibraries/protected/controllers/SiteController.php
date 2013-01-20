@@ -104,7 +104,7 @@ class SiteController extends IsdController
         {
             $password = UserStorage::generatePassword();
             UserStorage::changePassword($login, $password);
-            ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser);
+            ResetPasswordStorage::resetPasswordForUser($login, $password, false);
         }
     }
 
@@ -202,6 +202,7 @@ class SiteController extends IsdController
         }
         if (isset($path))
             return Yii::app()->getRequest()->sendFile(basename($path), @file_get_contents($path));
+        return null;
     }
 
     public function actionEmailLinkDialog()
@@ -241,7 +242,7 @@ class SiteController extends IsdController
             else
             {
                 echo 'Library was not found';
-                echo $emailedLinkRecord->id_library;
+                echo $linkRecord->id_library;
             }
         }
 

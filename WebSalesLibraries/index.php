@@ -14,4 +14,3 @@ else
     require_once($webRoot . '/yii/framework/yii.php');
 }
 $app = Yii::createWebApplication($webRoot . '/configuration.php')->run();
-?>
