@@ -49,7 +49,6 @@ class LibraryPageStorage extends CActiveRecord
         if (isset($folderIds))
             FolderStorage::clearByIds($page['id'], $folderIds);
 
-        ColumnStorage::clearData($page['libraryId']);
         foreach ($page['columns'] as $column)
             ColumnStorage::updateData($column);
     }
