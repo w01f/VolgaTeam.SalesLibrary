@@ -18,7 +18,7 @@
             async: true,
             dataType: 'html'                        
         });  
-    }    
+    };
     
     var updateLoginBodyPosition = function(){
         var top = ($(window).height() - $('#form-login').height())/2;
@@ -29,7 +29,7 @@
         $('#form-login').css({
             'top':top+'px'
         });
-    }
+    };
     
     var recoverPassword = function(){
         $.ajax({
@@ -143,7 +143,7 @@
             async: true,
             dataType: 'html'                        
         });          
-    }    
+    };
     
     var switchVersion = function(){
         $.ajax({
@@ -165,18 +165,15 @@
             async: true,
             dataType: 'html'                        
         });  
-    }
+    };
     
     $(document).ready(function() 
     {
-        $('#recover-password-link').fancybox();
-        $('#recover-password-link').off('click');
-        $('#recover-password-link').on('click',function(){
+        $('#recover-password-link').fancybox().off('click').on('click',function(){
             recoverPassword();
         });
         
-        $('#button-switch-version').off('click');
-        $('#button-switch-version').on('click',function(){
+        $('#button-switch-version').off('click').on('click',function(){
             switchVersion();
         });        
         
@@ -186,8 +183,7 @@
             else
                 $('#button-login').addClass('disabled');
         });
-        $('#button-login').off('click');
-        $('#button-login').on('click',function(event){
+        $('#button-login').off('click').on('click',function(event){
             if($('#disclaimer').length && !$("#disclaimer").attr('checked'))
             {
                 event.preventDefault();

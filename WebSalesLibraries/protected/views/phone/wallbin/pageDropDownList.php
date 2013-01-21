@@ -8,4 +8,3 @@ foreach ($selectedLibrary->pages as $page)
     $libraryPagesList .= ' >' . $page->name . '</option>';
 }
 echo $libraryPagesList;
-?>

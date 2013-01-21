@@ -28,5 +28,3 @@ class GroupRecord
      */
     public $libraries;    
 }
-
-?>

@@ -193,5 +193,3 @@ class SearchController extends IsdController
     }
 
 }
-
-?>

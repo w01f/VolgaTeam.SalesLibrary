@@ -33,8 +33,7 @@ class AttachmentStorage extends CActiveRecord
         $attachmentRecord = self::model()->findByPk($attachmentId);
         if ($attachmentRecord !== false)
             return $attachmentRecord;
+        return null;
     }
 
 }
-
-?>

@@ -18,18 +18,18 @@
     width: 90%;
     margin: 20px;
     border: 1px solid lightgray;
-    -webkit-box-shadow: #000000 0px 0px 3px;
-    -moz-box-shadow: #000000 0px 0px 3px;
-    box-shadow: #000000 0px 0px 3px;
+    -webkit-box-shadow: #000000 0 0 3;
+    -moz-box-shadow: #000000 0 0 3;
+    box-shadow: #000000 0 0 3;
 }
 
 .folder-links
 {
     display: none;
     border-top: 1px solid lightgray;
-    -webkit-box-shadow: #000000 0px 0px 3px;
-    -moz-box-shadow: #000000 0px 0px 3px;
-    box-shadow: #000000 0px 0px 3px;
+    -webkit-box-shadow: #000000 0 0 3;
+    -moz-box-shadow: #000000 0 0 3;
+    box-shadow: #000000 0 0 3;
 }
 
 .folder-header .links-number

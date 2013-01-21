@@ -49,6 +49,7 @@ class UserGroupStorage extends CActiveRecord
                 $groupIds[] = $userGroupRecord->id_group;
         if (isset($groupIds))
             return array_unique($groupIds);
+        return null;
     }
     
     public static function getUserIdsByGroup($groupId)
@@ -59,6 +60,7 @@ class UserGroupStorage extends CActiveRecord
                 $userIds[] = $userGroupRecord->id_user;
         if (isset($userIds))
             return array_unique($userIds);
+        return null;
     }    
 
     public static function clearObjectsByUser($userId)
@@ -72,5 +74,3 @@ class UserGroupStorage extends CActiveRecord
     }
 
 }
-
-?>

@@ -17,5 +17,3 @@ class HelpLinkStorage extends CActiveRecord
     }
 
 }
-
-?>

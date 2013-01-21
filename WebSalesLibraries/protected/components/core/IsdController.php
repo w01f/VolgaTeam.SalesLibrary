@@ -38,5 +38,3 @@ class IsdController extends CController
     }
 
 }
-
-?>

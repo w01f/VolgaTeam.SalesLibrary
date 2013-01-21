@@ -174,6 +174,7 @@ class AdminController extends CController
         }
         if (isset($users))
             return $users;
+        return null;
     }
 
     /**
@@ -285,6 +286,7 @@ class AdminController extends CController
         }
         if (isset($groups))
             return $groups;
+        return null;
     }
 
     /**
@@ -379,6 +381,7 @@ class AdminController extends CController
         }
         if (isset($libraries))
             return $libraries;
+        return null;
     }
 
     /**
@@ -393,8 +396,7 @@ class AdminController extends CController
                 $groupTemplates[] = $groupTemplateRecord->name;
         if (isset($groupTemplates))
             return $groupTemplates;
+        return null;
     }
 
 }
-
-?>

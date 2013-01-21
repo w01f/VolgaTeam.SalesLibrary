@@ -9,7 +9,7 @@
 .view-dialog-body .link-name
 { 
     text-align: left;
-    font-family: 'Arial';
+    font-family: 'Arial',serif;
     font-size: 16pt;
     font-weight: bold;
 }
@@ -17,7 +17,7 @@
 .view-dialog-body .description
 { 
     text-align: left;
-    font-family: 'Arial';
+    font-family: 'Arial',serif;
     font-size: 12pt;
     color: #C0C0C0;
     font-weight: normal;

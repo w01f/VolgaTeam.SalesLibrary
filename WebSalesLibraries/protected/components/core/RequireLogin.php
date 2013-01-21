@@ -26,4 +26,3 @@ class RequireLogin extends CBehavior
 
 }
 
-?>

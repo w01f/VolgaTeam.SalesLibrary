@@ -47,6 +47,7 @@ class GroupLibraryStorage extends CActiveRecord
                 $groupIds[] = $groupLibraryRecord->id_group;
         if (isset($groupIds))
             return array_unique($groupIds);
+        return null;
     }    
 
     public static function getLibraryIdsByGroup($groupId)
@@ -57,6 +58,7 @@ class GroupLibraryStorage extends CActiveRecord
                 $libraryIds[] = $groupLibraryRecord->id_library;
         if (isset($libraryIds))
             return array_unique($libraryIds);
+        return null;
     }
 
     public static function getPageIdsByGroup($groupId)
@@ -67,6 +69,7 @@ class GroupLibraryStorage extends CActiveRecord
                 $pageIds[] = $groupLibraryRecord->id_page;
         if (isset($pageIds))
             return array_unique($pageIds);
+        return null;
     }
 
     public static function clearObjectsByGroup($groupId)
@@ -80,5 +83,3 @@ class GroupLibraryStorage extends CActiveRecord
     }
 
 }
-
-?>

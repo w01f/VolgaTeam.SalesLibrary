@@ -48,5 +48,3 @@ class UserRecord
      */
     public $libraries;        
 }
-
-?>

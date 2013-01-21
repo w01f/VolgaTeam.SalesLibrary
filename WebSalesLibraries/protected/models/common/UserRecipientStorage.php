@@ -38,6 +38,7 @@ class UserRecipientStorage extends CActiveRecord
                 $existedRecipients[] = trim($userRecipientsRecord->recipient);
         if (isset($existedRecipients))
             return array_unique($existedRecipients);
+        return null;
     }
 
     public static function clearRecipientsByUser($userId)
@@ -46,5 +47,3 @@ class UserRecipientStorage extends CActiveRecord
     }
 
 }
-
-?>

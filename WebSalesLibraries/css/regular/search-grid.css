@@ -5,8 +5,8 @@
 
 #search-grid-header, #search-grid-body, .link-details
 {
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     width: 100%;
     border-collapse: collapse;
 }
@@ -25,7 +25,6 @@
     text-align: left;
     vertical-align: middle;
     padding: 0;
-    padding-left: 5px;
     border: 1px white solid;
     border-right: none;
 }
@@ -77,8 +76,8 @@
 #search-grid-body .link-container .link-name, #search-grid-body .link-container .file-name
 {
     border: none;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
 #search-grid-body .link-container .file-name
@@ -135,14 +134,14 @@
 
 #search-grid-body tr.link-details-container .link-details td
 {
-    margin: 0px;
+    margin: 0;
     padding: 0;
 }
 
 #search-grid-body tr.link-details-container .link-details td.link-type-column
 {
-    padding-left: 50px;
-    padding-bottom: 2px;
+    padding-left: 50;
+    padding-bottom: 2;
 }
 
 #search-grid-body tr.link-details-container .link-details td.hidden-content

@@ -1,7 +1,6 @@
 (function( $ ) {
     $.updateSortingColumns = function(){
-        $('#search-grid-header td span').removeClass('asc');
-        $('#search-grid-header td span').removeClass('desc');
+        $('#search-grid-header').find('td span').removeClass('asc').removeClass('desc');
         
         var selector = null;
         if($.cookie("sortColumn")!=null)
@@ -24,7 +23,7 @@
         }
         if(selector != null && $.cookie("sortDirection")!=null)
             $(selector).addClass($.cookie("sortDirection"));
-    }
+    };
     
     $.sortByColumn = function(columnName){
         var sortDirection = 'asc';
@@ -49,22 +48,22 @@
             expires: (60 * 60 * 24 * 7)
         });        
         $.runSearch(1);
-    }
+    };
     
     $.searchGridViewPreviewLink = function(){
         var linkId =  $(this).parent().find('.link-id-column').html();
         $.openViewDialogSearchGrid(linkId);
-    }
+    };
     
     $.searchGridViewFileCard = function(){
         var fileCardContainer =  $(this).parent().find('td.hidden-content');
         $.openFileCard.call(fileCardContainer);
-    }
+    };
     
     $.searchGridViewAttachment = function(){
         var viewDialogContainer =  $(this).parent().find('td.hidden-content');
         $.openViewDialogEmbedded.call(viewDialogContainer);
-    }
+    };
     
     $.searchGridViewLinkDetails = function(){
         if($(this).hasClass('collapsed'))
@@ -89,14 +88,14 @@
                     {
                         $(msg).insertAfter(currentRow);
                         
-                        $( "#search-grid-body tr.link-details-container tr.file-card td" ).off('click');
-                        $( "#search-grid-body tr.link-details-container tr.file-card>td.click-no-mobile" ).on('click',function(e){
+                        $( "#search-grid-body").find("tr.link-details-container tr.file-card td" ).off('click');
+                        $( "#search-grid-body").find("tr.link-details-container tr.file-card>td.click-no-mobile" ).on('click',function(e){
                             e.stopPropagation();
                             $.searchGridViewFileCard.call($(this));
                         });                        
                         
-                        $( "#search-grid-body tr.link-details-container tr.attachment td" ).off('click');
-                        $( "#search-grid-body tr.link-details-container tr.attachment>td.click-no-mobile" ).on('click',function(e){
+                        $( "#search-grid-body").find("tr.link-details-container tr.attachment td" ).off('click');
+                        $( "#search-grid-body").find("tr.link-details-container tr.attachment>td.click-no-mobile" ).on('click',function(e){
                             e.stopPropagation();
                             $.searchGridViewAttachment.call($(this));
                         });                        
@@ -115,10 +114,10 @@
             $(this).removeClass('expanded');
             $(this).addClass('collapsed');
         }
-    }    
+    };
     
     $.initSearchGrid = function(){
-        if($('#search-grid-body tr').length>0)
+        if($('#search-grid-body').find('tr').length>0)
         {
             $.updateSortingColumns();
             if($.cookie("searchGridScrollPosition")!= null)
@@ -129,32 +128,26 @@
                 expires: (60 * 60 * 24 * 7)
             });        
         
-        $( "#search-grid-header td.library-column" ).off('click');
-        $( "#search-grid-header td.library-column" ).on('click',function(){
+        $( "#search-grid-header").find("td.library-column" ).off('click').on('click',function(){
             $.sortByColumn('library');
         });
         
-        $( "#search-grid-header td.link-type-column" ).off('click');
-        $( "#search-grid-header td.link-type-column" ).on('click',function(){
+        $( "#search-grid-header").find("td.link-type-column" ).off('click').on('click',function(){
             $.sortByColumn('link-type');
         });        
         
-        $( "#search-grid-header td.link-name-column" ).off('click');
-        $( "#search-grid-header td.link-name-column" ).on('click',function(){
+        $( "#search-grid-header").find("td.link-name-column" ).off('click').on('click',function(){
             $.sortByColumn('link-name');
         });                
         
-        $( "#search-grid-header td.link-date-column" ).off('click');
-        $( "#search-grid-header td.link-date-column" ).on('click',function(){
+        $( "#search-grid-header").find("td.link-date-column" ).off('click').on('click',function(){
             $.sortByColumn('link-date');
         });                        
         
-        $( "#search-grid-body td.click-no-mobile" ).off('click');
-        $( "#search-grid-body td.click-no-mobile" ).on('click',function(){
+        $( "#search-grid-body").find("td.click-no-mobile" ).off('click').on('click',function(){
             $.searchGridViewPreviewLink.call($(this));
         });
-        $( "#search-grid-body td.click-mobile" ).off('touchstart').off('touchmove').off('touchend');
-        $( "#search-grid-body td.click-mobile" ).on('touchstart',function(){
+        $( "#search-grid-body").find("td.click-mobile" ).off('touchstart').off('touchmove').off('touchend').on('touchstart',function(){
             isScrolling = false;
         }).on('touchmove',function(){
             isScrolling = true;
@@ -166,12 +159,12 @@
             return false;
         });
         
-        $( "#search-grid-body td.details-button" ).off('click');
-        $( "#search-grid-body td.details-button.click-no-mobile" ).on('click',function(){
+        $( "#search-grid-body").find("td.details-button" ).off('click');
+        $( "#search-grid-body").find("td.details-button.click-no-mobile" ).on('click',function(){
             $.searchGridViewLinkDetails.call($(this));
         });
-        $( "#search-grid-body td.details-button" ).off('touchstart').off('touchmove').off('touchend');
-        $( "#search-grid-body td.details-button.click-mobile" ).on('touchstart',function(){
+        $( "#search-grid-body").find("td.details-button" ).off('touchstart').off('touchmove').off('touchend');
+        $( "#search-grid-body").find("td.details-button.click-mobile" ).on('touchstart',function(){
             isScrolling = false;
         }).on('touchmove',function(){
             isScrolling = true;
@@ -179,6 +172,6 @@
             if(!isScrolling)
                 $.searchGridViewLinkDetails.call($(this));
         });        
-    }
+    };
     
 })( jQuery );    

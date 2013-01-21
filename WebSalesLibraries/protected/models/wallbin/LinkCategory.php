@@ -34,5 +34,3 @@ class LinkCategory
         $this->tag = $linkCategoryRecord->tag;
     }
 }
-
-?>

@@ -42,5 +42,3 @@ class ColumnStorage extends CActiveRecord
     }
 
 }
-
-?>

@@ -60,5 +60,3 @@ class LibraryGroupStorage extends CActiveRecord
     }
 
 }
-
-?>

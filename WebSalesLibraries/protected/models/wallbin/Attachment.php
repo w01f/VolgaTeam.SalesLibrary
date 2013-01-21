@@ -479,6 +479,7 @@ class Attachment
                                 foreach ($this->universalPreview->ogvLinks as $link)
                                     $viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->name, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
                         }
+                        break;
                     case 'tab':
                         if (isset($this->universalPreview))
                             if (isset($this->universalPreview->mp4Links))
@@ -508,6 +509,7 @@ class Attachment
         }
         if (isset($viewSources))
             return $viewSources;
+        return null;
     }
 
     public function getViewSize($format)
@@ -621,6 +623,7 @@ class Attachment
         }
         if (isset($fileSize))
             return $fileSize;
+        return null;
     }
 
     public static function attachmentComparer($x, $y)
@@ -632,5 +635,3 @@ class Attachment
     }
 
 }
-
-?>

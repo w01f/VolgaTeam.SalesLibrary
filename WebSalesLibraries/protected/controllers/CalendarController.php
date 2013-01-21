@@ -11,5 +11,3 @@ class CalendarController extends IsdController
         $this->renderPartial('calendarView', array(), false, true);
     }
 }
-
-?>

@@ -74,5 +74,3 @@ class LibraryPageStorage extends CActiveRecord
     }
 
 }
-
-?>

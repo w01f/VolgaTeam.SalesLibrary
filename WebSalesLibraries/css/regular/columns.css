@@ -13,8 +13,8 @@
 .page-column{
     width: 33%;
     float:left;
-    border:0px solid #fff;
-    margin-top:0px;
+    border:0 solid #fff;
+    margin-top:0;
     margin-left: -1px;
     vertical-align: top;
 }

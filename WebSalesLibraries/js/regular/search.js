@@ -16,7 +16,7 @@
         if($('#search-file-type-video').hasClass('active'))
             selectedFileTypes.push("video");     
         
-        var dateString = $('#condition-date-range input').val().split(" - ");
+        var dateString = $('#condition-date-range').find('input').val().split(" - ");
         if(dateString.length == 2)
         {
             var startDate = dateString[0];
@@ -31,7 +31,7 @@
             onlyFileCards = parseInt($.cookie("onlyFileCards"));
         
         var categories = [];
-        $.each($( "#categories :checked"),function(){
+        $.each($( "#categories").find(":checked"),function(){
             var substr = $(this).val().split('------');
             var category= {
                 category:  substr[0],
@@ -47,7 +47,7 @@
         $.cookie("textCondition"+$.cookie("selectedRibbonTabId"), $('#condition-content-value').val(), {
             expires: (60 * 60 * 24 * 7)
         });
-        $.cookie("dateCondition"+$.cookie("selectedRibbonTabId"), $('#condition-date-range input').val(), {
+        $.cookie("dateCondition"+$.cookie("selectedRibbonTabId"), $('#condition-date-range').find('input').val(), {
             expires: (60 * 60 * 24 * 7)
         });        
         $.cookie("selectedCategories"+$.cookie("selectedRibbonTabId"), $.toJSON(categories), {
@@ -71,7 +71,7 @@
             },
             beforeSend: function(){
                 $.showOverlayLight();
-                $('#search-links-number>span').html('');
+                $('#search-links-number').find('>span').html('');
             },
             complete: function(){
                 $.hideOverlayLight();
@@ -79,28 +79,26 @@
                 $.initSearchGrid();
             },
             success: function(msg){
-                $('#search-result>div').html('');
-                $('#search-result>div').append(msg);
+                $('#search-result').find('>div').html('');
+                $('#search-result').find('>div').append(msg);
             },
             error: function(){
-                $('#search-result>div').html('');
+                $('#search-result').find('>div').html('');
             },            
             async: true,
             dataType: 'html'                        
         });                        
-    }
+    };
     
     var initSearchButtons = function()
     {
-        $( "#run-search-full" ).off('click');
-        $( "#run-search-full" ).on('click',function () {
+        $( "#run-search-full" ).off('click').on('click',function () {
             $.runSearch(0);
         });        
-        $( "#run-search-file-card" ).off('click');
-        $( "#run-search-file-card" ).on('click',function () {
+        $( "#run-search-file-card" ).off('click').on('click',function () {
             $.runSearch(0);
         });                
-    }
+    };
     
     var initTabControl = function()
     {
@@ -110,7 +108,7 @@
 
         var disabled = [];
         
-        var tagsCount = $('#categories input[type="checkbox"]').length;
+        var tagsCount = $('#categories').find('input[type="checkbox"]').length;
         if(tagsCount < 1)
         {
             if(conditionType == 1)
@@ -118,7 +116,7 @@
             disabled.push(2);
         }
         
-        var librariesCount = $('#libraries input[type="checkbox"]').length;
+        var librariesCount = $('#libraries').find('input[type="checkbox"]').length;
         if(librariesCount < 2)
         {
             if(conditionType == 2)
@@ -129,14 +127,12 @@
         $( "#search-control-panel" ).tabs({
             selected: conditionType,
             disabled: disabled
-        });        
-
-        $( "#search-control-panel" ).on('tabsselect',function(event, ui){
+        }).on('tabsselect',function(event, ui){
             $.cookie("search-control-panel", ui.index, {
                 expires: (60 * 60 * 24 * 7)
             });
         })
-    }
+    };
     
     var initFileCard = function()
     {
@@ -149,7 +145,7 @@
             $.cookie("onlyFileCards", toggleState, {
                 expires: (60 * 60 * 24 * 7)
             });
-        }
+        };
         
         var selectedTabId = $.cookie("selectedRibbonTabId");
         if(selectedTabId == 'search-full-tab')
@@ -158,8 +154,7 @@
             if($.cookie("onlyFileCards")!= null)
                 onlyFileCards = parseInt($.cookie("onlyFileCards"));
             toggleSearchFileCard(onlyFileCards);
-            $( "#search-file-card-button" ).off('click');
-            $( "#search-file-card-button" ).on('click',function () {
+            $( "#search-file-card-button" ).off('click').on('click',function () {
                 var onlyFileCards = 0;
                 if($.cookie("onlyFileCards")!= null)
                     onlyFileCards = parseInt($.cookie("onlyFileCards"));
@@ -170,14 +165,13 @@
                 toggleSearchFileCard(onlyFileCards);
             });  
         }
-    }
+    };
     
     var initKeywordFiled = function(){
         if($.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"))=="true" && $.cookie("textCondition"+$.cookie("selectedRibbonTabId"))!= null)
             $('#condition-content-value').val($.cookie("textCondition"+$.cookie("selectedRibbonTabId")));
         
-        $( "#clear-content-value" ).off('click');
-        $( "#clear-content-value" ).on('click',function () {
+        $( "#clear-content-value" ).off('click').on('click',function () {
             $('#condition-content-value').val('');
         });
         
@@ -190,18 +184,17 @@
         }
         else
             $( "#content-compare-exact" ).button('toggle');
-        $( "#content-compare-exact, #content-compare-partial" ).off('click');        
-        $( "#content-compare-exact, #content-compare-partial" ).on('click',function(){
+        $( "#content-compare-exact, #content-compare-partial" ).off('click').on('click',function(){
             if(!$(this).hasClass('active'))
             {
-                $('#content-compare-type .btn').removeClass('active');
+                $('#content-compare-type').find('.btn').removeClass('active');
                 $(this).addClass('active');    
             }
             $.cookie("exactMatch", $('#content-compare-exact').hasClass('active'), {
                 expires: (60 * 60 * 24 * 7)
             });
         });
-        $("#right-navbar input").keypress(function (e) {
+        $("#right-navbar").find("input").keypress(function (e) {
             if (e.which == 13) {
                 return false;
             }
@@ -211,7 +204,7 @@
                 $.runSearch(0);
             }
         });  
-    }
+    };
     
     var initFileTypes = function()
     {
@@ -255,11 +248,10 @@
         else
             $( "#search-file-type-video" ).button('toggle');
 
-        $('#file-types input[type="checkbox"]').button({
+        $('#file-types').find('input[type="checkbox"]').button({
             text: false
         });
-        $( '#file-types .search-file-type').off('click');
-        $( '#file-types .search-file-type').on('click',function(){
+        $( '#file-types').find('.search-file-type').off('click').on('click',function(){
             if($(this).hasClass('active'))
                 $(this).removeClass('active');
             else
@@ -280,7 +272,7 @@
                 expires: (60 * 60 * 24 * 7)
             });                        
         });
-    }
+    };
 
     var initDateRange = function()
     {
@@ -299,16 +291,15 @@
             }
         }, 
         function(start, end) {
-            $('#condition-date-range input').val(start.toString(dateFormat) + ' - ' + end.toString(dateFormat));
+            $('#condition-date-range').find('input').val(start.toString(dateFormat) + ' - ' + end.toString(dateFormat));
         }
         );
             
         if($.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"))=="true" && $.cookie("dateCondition"+$.cookie("selectedRibbonTabId"))!= null)
-            $('#condition-date-range input').val($.cookie("dateCondition"+$.cookie("selectedRibbonTabId")));
+            $('#condition-date-range').find('input').val($.cookie("dateCondition"+$.cookie("selectedRibbonTabId")));
             
-        $( "#clear-date-range" ).off('click');
-        $( "#clear-date-range" ).on('click',function () {
-            $('#condition-date-range input').val('');
+        $( "#clear-date-range" ).off('click').on('click',function () {
+            $('#condition-date-range').find('input').val('');
         });        
         
         if($.cookie("conditionDateByFile")!=null)
@@ -320,8 +311,7 @@
         }
         else
             $( "#condition-date-file" ).button('toggle');
-        $( '#condition-date-file, #condition-date-link').off('click');
-        $( '#condition-date-file, #condition-date-link').on('click',function(){
+        $( '#condition-date-file, #condition-date-link').off('click').on('click',function(){
             if(!$(this).hasClass('active'))
             {
                 $('#condition-date-file, #condition-date-link').removeClass('active');
@@ -331,7 +321,7 @@
                 expires: (60 * 60 * 24 * 7)
             });
         });
-    }
+    };
     
     var initTags = function(){
         $( "#categories" ).accordion({
@@ -343,9 +333,8 @@
                 activeHeader: "ui-icon-circle-arrow-s"
             }
         });
-        $('#tags-clear-all').off('click');
-        $('#tags-clear-all').on('click',function(){
-            $( "#categories :checked").attr('checked', false);
+        $('#tags-clear-all').off('click').on('click',function(){
+            $( "#categories").find(":checked").attr('checked', false);
         });
 
         if($.cookie("tagsExactMatch")!=null)
@@ -357,59 +346,56 @@
         }
         else
             $( "#tags-compare-exact" ).button('toggle');
-        $( "#tags-compare-exact,#tags-compare-partial" ).off('click');        
-        $( "#tags-compare-exact,#tags-compare-partial" ).on('click',function(){
+        $( "#tags-compare-exact,#tags-compare-partial" ).off('click').on('click',function(){
             if(!$(this).hasClass('active'))
             {
-                $('#tags-compare-type .btn').removeClass('active');
+                $('#tags-compare-type').find('.btn').removeClass('active');
                 $(this).addClass('active');    
             }
             $.cookie("tagsExactMatch", $('#tags-compare-exact').hasClass('active'), {
                 expires: (60 * 60 * 24 * 7)
             });
         });
-    }
+    };
     
     var initLibraries = function(){
         var saveSelectedLibraries = function(){
             var selectedLibraryIds = [];
-            $('#libraries :checked').each(function(){
+            $('#libraries').find(':checked').each(function(){
                 selectedLibraryIds.push($(this).val());
             });
             $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
                 expires: (60 * 60 * 24 * 7)
             });
-        }
+        };
         
         var groupsCount = $('#libraries').find('h3').length;
         
         $( "#libraries" ).accordion({
             autoHeight: false,
             active: groupsCount>1?false:0,
-            collapsible: groupsCount>1?true:false,
+            collapsible: !!(groupsCount > 1),
             icons: {
                 header: "ui-icon-circle-arrow-e",
                 activeHeader: "ui-icon-circle-arrow-s"
             }
         });
         
-        $( '#libraries input[type="checkbox"]').on('change',function(){
+        $( '#libraries').find('input[type="checkbox"]').on('change',function(){
             saveSelectedLibraries();
-        })
-        $('#library-select-all').off('click');
-        $('#library-select-all').on('click',function(){
-            $( '#libraries input[type="checkbox"]').attr('checked', true);
+        });
+        $('#library-select-all').off('click').on('click',function(){
+            $( '#libraries').find('input[type="checkbox"]').attr('checked', true);
             saveSelectedLibraries();
         });            
             
-        $('#library-clear-all').off('click');
-        $('#library-clear-all').on('click',function(){
-            $( "#libraries :checked").attr('checked', false);
+        $('#library-clear-all').off('click').on('click',function(){
+            $( "#libraries").find(":checked").attr('checked', false);
             saveSelectedLibraries();
         });
         
         saveSelectedLibraries();
-    }
+    };
     
     var initControlPanel = function(){
         initSearchButtons();
@@ -421,15 +407,13 @@
         initLibraries();
         initTabControl();
         
-        $( "#clear-content-dates-value" ).off('click');
-        $( "#clear-content-dates-value" ).on('click',function () {
+        $( "#clear-content-dates-value" ).off('click').on('click',function () {
             $('#condition-content-value').val('');
             
-            $('#condition-date-range input').val('');
+            $('#condition-date-range').find('input').val('');
         });  
         
-        $('.clear-button').off('click'); 
-        $('.clear-button').on('click',function(){
+        $('.clear-button').off('click').on('click',function(){
             $.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"), false, {
                 expires: (60 * 60 * 24 * 7)
             });
@@ -441,7 +425,7 @@
                 },
                 beforeSend: function(){
                     $.showOverlayLight();
-                    $('#search-links-number>span').html('');
+                    $('#search-links-number').find('>span').html('');
                 },
                 complete: function(){
                     $.hideOverlayLight();
@@ -449,17 +433,16 @@
                     $.initSearchGrid();
                 },
                 success: function(msg){
-                    $('#search-result>div').html('');
-                    $('#search-result>div').append(msg);
+                    $('#search-result').find('>div').html('').append(msg);
                 },
                 error: function(){
-                    $('#search-result>div').html('');
+                    $('#search-result').find('>div').html('');
                 },            
                 async: true,
                 dataType: 'html'                        
             });
         });                    
-    }
+    };
     
     $.initSearchView = function(){
         $.ajax({
@@ -486,7 +469,7 @@
             async: true,
             dataType: 'html'                        
         });        
-    }
+    };
     
     $(document).ready(function() 
     {});

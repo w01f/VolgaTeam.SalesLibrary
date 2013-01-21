@@ -6,7 +6,7 @@
 .file-card-body .details
 { 
     text-align: left;
-    font-family: 'Arial';
+    font-family: 'Arial',serif;
     font-size: 11pt;
     font-weight: normal;
     width: 100%;
@@ -27,7 +27,7 @@
 .file-card-body .details .title
 { 
     text-align: left;
-    font-family: 'Arial';
+    font-family: 'Arial',serif;
     font-size: 11pt;
     font-weight: bold;
 }

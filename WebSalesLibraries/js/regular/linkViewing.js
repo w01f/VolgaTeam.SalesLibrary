@@ -32,7 +32,7 @@
             $.viewSelectedFormat.call(formatItems[0],formatItems[0],false);
         }
         event.stopPropagation();
-    }
+    };
     
     $.openViewDialogSearchGrid = function(linkId){
         $.ajax({
@@ -57,7 +57,7 @@
             async: true,
             dataType: 'html'                        
         });  
-    }
+    };
     
     $.openFileCard = function(){
         var fileCardContent = $(this).find('.file-card-content').html();
@@ -76,12 +76,12 @@
             }
         });
         $(this).find('.file-card-content').html(fileCardContent);
-    }
+    };
     
     var openFile = function(url)
     {
         window.open(url.replace(/&amp;/g,'%26'));
-    }    
+    };
     
     var downloadFile = function(linkId, title)
     {
@@ -132,7 +132,7 @@
             async: true,
             dataType: 'html'                        
         });
-    }        
+    };
     
     var addToFavorites = function(linkId, title)
     {
@@ -208,7 +208,7 @@
             async: true,
             dataType: 'html'                        
         });        
-    }            
+    };
     
     var emailDialogObject = [];
     var emailFile = function(linkId, title)
@@ -389,7 +389,7 @@
             async: true,
             dataType: 'html'                        
         });          
-    }    
+    };
     
     $.viewSelectedFormat = function(target, fullScreen)
     {
@@ -397,7 +397,7 @@
         var selectedFileType = $(target).find('.service-data .file-type').html();
         var selectedViewType = $(target).find('.service-data .view-type').html();
         var selectedLinks = $(target).find('.service-data .links').html();
-        var selectedThumbs = $(target).find('.service-data .thumbs').html()
+        var selectedThumbs = $(target).find('.service-data .thumbs').html();
         
         $.fancybox.close();
         
@@ -523,7 +523,7 @@
                     break;
             }
         }
-    }
+    };
     
     var playVideo = function(links)
     {

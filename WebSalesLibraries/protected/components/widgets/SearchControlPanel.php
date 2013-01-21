@@ -30,5 +30,3 @@ class SearchControlPanel extends CWidget
     }
 
 }
-
-?>

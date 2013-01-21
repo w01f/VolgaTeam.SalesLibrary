@@ -23,5 +23,3 @@ class Category
         $this->tag = $categoryRecord->tag;
     }
 }
-
-?>

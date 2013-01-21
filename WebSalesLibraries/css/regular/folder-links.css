@@ -1,13 +1,11 @@
 .folder-body{
     margin-top:-1px;
-    border-width:1px;
-    border-style: solid;
+    border: 1px solid;
     min-height:80px;
 }
 
 .folder-header-container{
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
+    border-bottom: 1px solid;
 }
 
 .folder-widget{
@@ -51,8 +49,7 @@
 
 .widget {
     padding-left: 32px;
-    background-position: 0 0;
-    background-repeat: no-repeat;
+    background: no-repeat 0 0;
 }
 
 .view-dialog-content, .folder-link-content{

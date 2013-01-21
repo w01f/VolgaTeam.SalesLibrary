@@ -82,5 +82,3 @@ class FolderStorage extends CActiveRecord
     }
 
 }
-
-?>

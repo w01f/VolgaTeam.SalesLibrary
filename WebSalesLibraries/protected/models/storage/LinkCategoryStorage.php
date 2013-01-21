@@ -27,5 +27,3 @@ class LinkCategoryStorage extends CActiveRecord
     }
 
 }
-
-?>

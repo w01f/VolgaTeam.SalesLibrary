@@ -40,5 +40,3 @@ class FileCardStorage extends CActiveRecord
     }
 
 }
-
-?>

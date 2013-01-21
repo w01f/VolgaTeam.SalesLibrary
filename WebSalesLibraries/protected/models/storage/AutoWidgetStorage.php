@@ -27,4 +27,3 @@ class AutoWidgetStorage extends CActiveRecord
 
 }
 
-?>

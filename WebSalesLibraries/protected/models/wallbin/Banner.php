@@ -69,5 +69,3 @@ class Banner
         $this->font->isItalic = $bannerRecord->font_italic;
     }
 }
-
-?>

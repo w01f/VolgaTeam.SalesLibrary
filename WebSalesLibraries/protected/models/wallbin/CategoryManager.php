@@ -45,8 +45,7 @@ class CategoryManager
             if (isset($tags))
                 return $tags;
         }
+        return null;
     }
 
 }
-
-?>

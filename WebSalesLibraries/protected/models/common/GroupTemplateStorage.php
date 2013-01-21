@@ -13,7 +13,6 @@ class GroupTemplateStorage extends CActiveRecord
 
     public static function updateData($groupTemplateContent)
     {
-        $groupName = '';
         if ($groupTemplateContent !== false)
         {
             foreach ($groupTemplateContent as $line)
@@ -36,5 +35,3 @@ class GroupTemplateStorage extends CActiveRecord
     }
 
 }
-
-?>

@@ -98,5 +98,3 @@ class UpdateHelpCommand extends CConsoleCommand
         echo "Job completed...\n";
     }
 }
-
-?>

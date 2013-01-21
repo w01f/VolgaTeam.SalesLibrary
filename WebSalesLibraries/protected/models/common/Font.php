@@ -23,4 +23,3 @@ class Font
     public $isItalic;
 }
 
-?>

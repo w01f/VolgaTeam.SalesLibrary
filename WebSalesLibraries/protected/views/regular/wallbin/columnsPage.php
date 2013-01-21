@@ -6,7 +6,7 @@
             <?php if (isset($libraryPage->columns[$i])): ?>
                 <?php $column = $libraryPage->columns[$i]; ?>
                 <div id="column-header-container-<?php echo $i; ?>" class="column-header-container"
-                     style="font-family: <?php echo $column->font->name; ?>;
+                     style="font-family: <?php echo $column->font->name; ?>,serif;
                      font-size: <?php echo $column->font->size; ?>pt;
                      font-weight: <?php echo $column->font->isBold ? ' bold' : ' normal'; ?>;
                      font-style: <?php echo $column->font->isItalic ? ' italic' : ' normal'; ?>;
@@ -41,7 +41,7 @@
                 <?php foreach ($folders as $folder): ?>
                     <div class="folder-body">
                         <div class="folder-header-container"
-                             style="font-family: <?php echo $folder->headerFont->name; ?>;
+                             style="font-family: <?php echo $folder->headerFont->name; ?>,serif;
                              font-size: <?php echo $folder->headerFont->size; ?>pt;
                              font-weight: <?php echo $folder->headerFont->isBold ? ' bold' : ' normal'; ?>;
                              font-style: <?php echo $folder->headerFont->isItalic ? ' italic' : ' normal'; ?>;

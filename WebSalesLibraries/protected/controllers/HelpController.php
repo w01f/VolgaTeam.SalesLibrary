@@ -18,5 +18,3 @@ class HelpController extends IsdController
     }
 
 }
-
-?>

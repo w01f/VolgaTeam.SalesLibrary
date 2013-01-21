@@ -13,7 +13,7 @@
         $.cookie("textSpace", textSpace, {
             expires: (60 * 60 * 24 * 7)
         });
-    }
+    };
     
     $.updateTextSize = function(textSize){
         $('.link-text').css('font-size',textSize+'pt');
@@ -21,5 +21,5 @@
         $.cookie("textSize", textSize, {
             expires: (60 * 60 * 24 * 7)
         });
-    }  
+    };
 })( jQuery );    

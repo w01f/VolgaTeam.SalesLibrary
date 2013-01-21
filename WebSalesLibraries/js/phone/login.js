@@ -17,7 +17,7 @@
             async: true,
             dataType: 'html'                        
         });  
-    }    
+    };
     
     var switchVersion = function(){
         $.ajax({
@@ -42,7 +42,7 @@
             async: true,
             dataType: 'html'                        
         });  
-    }
+    };
     
     $(document).ready(function() 
     {
@@ -51,8 +51,7 @@
             $.mobile.ajaxFormsEnabled = false;
         });
         
-        $('#button-switch-version').off('click');
-        $('#button-switch-version').on('click',function(e){
+        $('#button-switch-version').off('click').on('click',function(e){
             switchVersion();
         });        
     });

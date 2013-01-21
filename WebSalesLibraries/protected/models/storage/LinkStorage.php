@@ -268,6 +268,7 @@ class LinkStorage extends CActiveRecord
                 usort($links, 'LinkStorage::sortLinks');
                 return $links;
             }
+        return null;
     }
 
     public static function getLinkById($linkId)
@@ -275,6 +276,7 @@ class LinkStorage extends CActiveRecord
         $linkRecord = self::model()->findByPk($linkId);
         if ($linkRecord !== false)
             return $linkRecord;
+        return null;
     }
 
     private static function sortLinks($a, $b)
@@ -317,5 +319,3 @@ class LinkStorage extends CActiveRecord
     }
 
 }
-
-?>

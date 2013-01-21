@@ -34,4 +34,3 @@ class CleanExpiredEmailsCommand extends CConsoleCommand
     }
 }
 
-?>

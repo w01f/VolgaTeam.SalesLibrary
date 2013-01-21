@@ -8,8 +8,7 @@
         $.initLibraries();
         $.initSearch();
         
-        $('.logout-button').off('click'); 
-        $('.logout-button').on('click',function(){
+        $('.logout-button').off('click').on('click',function(){
             $.logout();
         });  
 
@@ -20,7 +19,7 @@
                 captionAndToolbarAutoHideDelay: 0,
                 jQueryMobile: true
             };
-            $("#gallery a").photoSwipe(options);
+            $("#gallery").find("a").photoSwipe(options);
             return true;
         }).on('pagehide', function(e){
             var currentPage = $(e.target),

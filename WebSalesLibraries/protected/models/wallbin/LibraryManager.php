@@ -84,6 +84,7 @@ class LibraryManager
         }
         if (isset($libraries))
             return $libraries;
+        return null;
     }
 
     public function getLibraryGroups()
@@ -161,6 +162,7 @@ class LibraryManager
             usort($libraryGroups, "LibraryGroup::libraryGroupComparer");
             return $libraryGroups;
         }
+        return null;
     }
 
     public function getLibraryById($libraryId)
@@ -179,6 +181,7 @@ class LibraryManager
         }
         if (isset($selectedLibrary))
             return $selectedLibrary;
+        return null;
     }
 
     public function getSelectedLibrary()
@@ -249,5 +252,3 @@ class LibraryManager
     }
 
 }
-
-?>

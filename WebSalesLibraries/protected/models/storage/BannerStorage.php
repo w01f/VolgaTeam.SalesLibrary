@@ -36,5 +36,3 @@ class BannerStorage extends CActiveRecord
     }
 
 }
-
-?>

@@ -45,4 +45,3 @@ else
         . 'margin-right: ' . $bannerMarginRight . '; '
     ));
 }
-?>

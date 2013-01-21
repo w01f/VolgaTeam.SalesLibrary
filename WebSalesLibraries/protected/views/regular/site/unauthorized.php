@@ -4,7 +4,7 @@
             $('#container').css({
                 'height':$(window).height()+'px'
             });
-        }
+        };
         
         $(document).ready(function() 
         {

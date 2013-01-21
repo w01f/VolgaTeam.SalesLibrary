@@ -23,10 +23,10 @@
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
     
     $.libraryChanged = function(){
-        var selectedLibraryName = $("#libraries-selector :selected").text();
+        var selectedLibraryName = $("#libraries-selector").find(":selected").text();
         $.cookie("selectedLibraryName", selectedLibraryName, {
             expires: 60 * 60 * 24 * 7
         });
@@ -46,20 +46,19 @@
                 });
             },
             success: function(msg){
-                $('#page-selector').html(msg);
-                $('#page-selector').selectmenu('refresh', true);
+                $('#page-selector').html(msg).selectmenu('refresh', true);
             },
             async: true,
             dataType: 'html'            
         });     
-    }    
+    };
     
     $.pageChanged = function(){
-        var selectedPageName = $("#page-selector :selected").text();
+        var selectedPageName = $("#page-selector").find(":selected").text();
         $.cookie("selectedPageName", selectedPageName, {
             expires: 60 * 60 * 24 * 7
         });
-    }    
+    };
     
     $.loadPage = function(){
         $.ajax({
@@ -67,7 +66,7 @@
             url: "wallbin/getFoldersList",
             data:{},
             beforeSend: function(){
-                $('#folders .page-content').html('');
+                $('#folders').find('.page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -80,15 +79,15 @@
                 });
             },
             success: function(msg){
-                $('#folders .page-content').html(msg);
-                $('#folders .library-title').html($.cookie("selectedLibraryName"));                
-                $('#links .library-title').html($.cookie("selectedLibraryName"));
-                $('#link-details .library-title').html($.cookie("selectedLibraryName"));
-                $('#gallery-page .library-title').html($.cookie("selectedLibraryName"));
+                $('#folders').find('.page-content').html(msg);
+                $('#folders').find('.library-title').html($.cookie("selectedLibraryName"));
+                $('#links').find('.library-title').html($.cookie("selectedLibraryName"));
+                $('#link-details').find('.library-title').html($.cookie("selectedLibraryName"));
+                $('#gallery-page').find('.library-title').html($.cookie("selectedLibraryName"));
                 $.mobile.changePage( "#folders", {
                     transition: "slidefade"
                 });
-                $('#folders .page-content').children('ul').listview();                     
+                $('#folders').find('.page-content').children('ul').listview();
                 $( ".folder-link" ).on('click',function(){
                     var folderId = $.trim($(this).attr("href").replace('#folder', ''));
                     $.loadFolder(folderId);
@@ -97,7 +96,7 @@
             async: true,
             dataType: 'html'                        
         });
-    }    
+    };
     
     $.loadFolder = function(folderId){
         $.ajax({
@@ -107,7 +106,7 @@
                 folderId: folderId
             },
             beforeSend: function(){
-                $('#links .page-content').html('');
+                $('#links').find('.page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -120,11 +119,11 @@
                 });
             },
             success: function(msg){
-                $('#links .page-content').html(msg);
+                $('#links').find('.page-content').html(msg);
                 $.mobile.changePage( "#links", {
                     transition: "slidefade"
                 });
-                $('#links .page-content').children('ul').listview();                     
+                $('#links').find('.page-content').children('ul').listview();
                 $( ".file-link" ).on('click',function(){
                     var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
                     $.loadLink(selectedLink,false,false);
@@ -138,7 +137,7 @@
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
     
     $.loadLink = function(linkId, isSearch, isAttachment){
         $.ajax({
@@ -148,7 +147,7 @@
                 linkId: linkId
             },
             beforeSend: function(){
-                $('#preview .page-content').html('');
+                $('#preview').find('.page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -161,15 +160,15 @@
                 });
             },
             success: function(msg){
-                $('#preview .page-content').html(msg);
-                $('#preview .library-title').html(isSearch?'Search':$.cookie("selectedLibraryName"));
+                $('#preview').find('.page-content').html(msg);
+                $('#preview').find('.library-title').html(isSearch?'Search':$.cookie("selectedLibraryName"));
                 $('.email-tab .library-title').html(isSearch?'Search':$.cookie("selectedLibraryName"));
-                $('#preview .link.back').attr('href',isAttachment?'#link-details':(isSearch?'#search-result':'#links'));
+                $('#preview').find('.link.back').attr('href',isAttachment?'#link-details':(isSearch?'#search-result':'#links'));
                 $.mobile.changePage( "#preview", {
                     transition: "slidefade"
                 });
-                $('#preview .page-content').children('ul').listview();                     
-                $('#preview .res-selector').navbar();                     
+                $('#preview').find('.page-content').children('ul').listview();
+                $('#preview').find('.res-selector').navbar();
                 
                 $('.file-size.regular').hide();
                 $('.file-size.phone').show();
@@ -199,7 +198,7 @@
                     
                     if(viewFormat == 'PNG' || viewFormat == 'JPEG')
                     {
-                        var galleryHeader = $('#preview .link-container').first().clone();
+                        var galleryHeader = $('#preview').find('.link-container').first().clone();
                         var previewInfo = '';
                         if(resolution == 'hi')
                             previewInfo += 'High Resolution - ';
@@ -208,8 +207,7 @@
                         previewInfo += viewFormat + ' Images';
                         galleryHeader.find('.file').html(previewInfo);
                     
-                        $('#gallery-title').html('');
-                        $('#gallery-title').append(galleryHeader);
+                        $('#gallery-title').html('').append(galleryHeader);
                     }
                     
                     $.viewSelectedFormat(itemContent,resolution);
@@ -218,7 +216,7 @@
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
     
     $.loadLinkDeatils = function(linkId,isSearch){
         $.ajax({
@@ -228,7 +226,7 @@
                 linkId: linkId
             },
             beforeSend: function(){
-                $('#preview .page-content').html('');
+                $('#preview').find('.page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -241,12 +239,12 @@
                 });
             },
             success: function(msg){
-                $('#link-details .page-content').html(msg);
-                $('#link-details .link.back').attr('href',isSearch?'#search-result':'#links');
+                $('#link-details').find('.page-content').html(msg);
+                $('#link-details').find('.link.back').attr('href',isSearch?'#search-result':'#links');
                 $.mobile.changePage( "#link-details", {
                     transition: "slidefade"
                 });
-                $('#link-details .page-content').children('ul').listview();                     
+                $('#link-details').find('.page-content').children('ul').listview();
                 $( ".file-card-link" ).on('click',function(){
                     var linkId = $.trim($(this).attr("href").replace('#file-card', ''));
                     $.viewFileCard(linkId);
@@ -259,7 +257,7 @@
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
     
     $(document).ready(function() 
     {
@@ -269,8 +267,7 @@
         $('#page-selector').on('change',function(){
             $.pageChanged();
         });        
-        $('#load-page-button').off('click');        
-        $('#load-page-button').on('click',function(){
+        $('#load-page-button').off('click').on('click',function(){
             $.loadPage();
         });                
     });

@@ -236,6 +236,7 @@ class LibraryPage
         }
         if (isset($cache))
             return $cache;
+        return null;
     }
 
     public function getFoldersByColumn($columnOrder)
@@ -261,5 +262,3 @@ class LibraryPage
     }
 
 }
-
-?>

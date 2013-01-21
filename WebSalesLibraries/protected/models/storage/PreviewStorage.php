@@ -150,5 +150,3 @@ class PreviewStorage extends CActiveRecord
         PreviewStorage::model()->deleteAll('id_library=?', array($libraryId));
     }
 }
-
-?>

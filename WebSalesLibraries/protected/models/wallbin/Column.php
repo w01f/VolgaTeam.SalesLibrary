@@ -116,6 +116,7 @@ class Column
             if (isset($this->widget))
                 if ($this->widget != '')
                     return $this->widget;
+        return null;
     }
 
     public static function columnComparer($x, $y)
@@ -127,5 +128,3 @@ class Column
     }
 
 }
-
-?>

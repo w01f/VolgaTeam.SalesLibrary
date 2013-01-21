@@ -5,7 +5,7 @@
         $('#email-from-summary').html($('#email-from').val());        
         $('#email-subject-summary').html($('#email-subject').val());        
         $('#email-body-summary').html($('#email-body').val());        
-    }
+    };
     
     $.sendEmail = function(linkId){
         $.ajax({
@@ -41,30 +41,27 @@
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
     
     $(document).ready(function() 
     {
-        $( '#email-existed-list input[type="checkbox"]').checkboxradio();
+        $( '#email-existed-list').find('input[type="checkbox"]').checkboxradio();
         
-        $( '#email-to-select-button').off('click');
-        $( '#email-to-select-button').on('click',function(){
+        $( '#email-to-select-button').off('click').on('click',function(){
             $.mobile.changePage('#email-to-existed-list', {
                 transition: "pop"
             });
         });                
         
-        $( '#email-to-copy-select-button').off('click');
-        $( '#email-to-copy-select-button').on('click',function(){
+        $( '#email-to-copy-select-button').off('click').on('click',function(){
             $.mobile.changePage('#email-to-copy-existed-list', {
                 transition: "pop"
             });
         });                
         
-        $( '#email-to-apply-button').off('click');
-        $( '#email-to-apply-button').on('click',function(){
+        $( '#email-to-apply-button').off('click').on('click',function(){
             var selectedEmails = [];
-            $.each($('#email-to-existed-list-container .existed-email-to:checked'),function(){
+            $.each($('#email-to-existed-list-container').find('.existed-email-to:checked'),function(){
                 selectedEmails.push($(this).val());
             });
             if(selectedEmails.length>0)
@@ -74,10 +71,9 @@
             $( "#email-to-existed-list" ).dialog( "close" );
         });                        
         
-        $( '#email-to-copy-apply-button').off('click');
-        $( '#email-to-copy-apply-button').on('click',function(){
+        $( '#email-to-copy-apply-button').off('click').on('click',function(){
             var selectedEmails = [];
-            $.each($('#email-to-copy-existed-list-container .existed-email-to-copy:checked'),function(){
+            $.each($('#email-to-copy-existed-list-container').find('.existed-email-to-copy:checked'),function(){
                 selectedEmails.push($(this).val());
             });
             if(selectedEmails.length>0)

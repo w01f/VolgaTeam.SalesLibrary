@@ -17,5 +17,3 @@ class HelpPageStorage extends CActiveRecord
     }
 
 }
-
-?>

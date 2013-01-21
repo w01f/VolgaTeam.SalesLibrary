@@ -3,19 +3,18 @@
     $.downloadFile = function(url)
     {
         window.open(url);
-    }    
+    };
     
     var runEmailPage = function(linkId, selectedLinks)
     {
         $('.email-tab .link-container .name').html(selectedLinks[0].title);
-        $( '#email-send').off('click');
-        $( '#email-send').on('click',function(){
+        $( '#email-send').off('click').on('click',function(){
             $.sendEmail(linkId);
         });                             
         $.mobile.changePage( "#email-address", {
             transition: "slidefade"
         });                                                                
-    }
+    };
     
     $.viewSelectedFormat = function(itemContent, resolution)
     {
@@ -100,7 +99,7 @@
                     break;
             }
         }
-    }
+    };
     
     $.viewFileCard = function(linkId){
         $.ajax({
@@ -110,7 +109,7 @@
                 linkId: linkId
             },
             beforeSend: function(){
-                $('#preview .page-content').html('');
+                $('#preview').find('.page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -123,17 +122,17 @@
                 });
             },
             success: function(msg){
-                $('#preview .page-content').html(msg);
-                $('#preview .library-title').html('Important Info');
-                $('#preview .link.back').attr('href','#link-details');
+                $('#preview').find('.page-content').html(msg);
+                $('#preview').find('.library-title').html('Important Info');
+                $('#preview').find('.link.back').attr('href','#link-details');
                 $.mobile.changePage( "#preview", {
                     transition: "slidefade"
                 });
-                $('#preview .page-content').children('ul').listview();                     
+                $('#preview').find('.page-content').children('ul').listview();
             },
             async: true,
             dataType: 'html'                        
         });
-    }
+    };
 })( jQuery );    
 

@@ -4,7 +4,7 @@
             type: "POST",
             url: "search/getSearchView",
             beforeSend: function(){
-                $('#search-basic .page-content').html('');
+                $('#search-basic').find('.page-content').html('');
                 $.mobile.loading( 'show', {
                     textVisible: false,
                     html: ""
@@ -17,7 +17,7 @@
                 });
             },
             success: function(msg){
-                $('#search-basic .page-content').html(msg);
+                $('#search-basic').find('.page-content').html(msg);
                 loadSearchPanel();
             },
             async: true,
@@ -27,13 +27,13 @@
             type: "POST",
             url: "search/getFileTypesView",
             beforeSend: function(){
-                $('#search-file-types .page-content').html('');
+                $('#search-file-types').find('.page-content').html('');
             },
             complete: function(){
                 loadFileTypesPanel();
             },
             success: function(msg){
-                $('#search-file-types .page-content').html(msg);
+                $('#search-file-types').find('.page-content').html(msg);
             },
             async: true,
             dataType: 'html'                        
@@ -42,13 +42,13 @@
             type: "POST",
             url: "search/getTagsView",
             beforeSend: function(){
-                $('#search-tags .page-content').html('');
+                $('#search-tags').find('.page-content').html('');
             },
             complete: function(){
                 loadTagsPanel();
             },
             success: function(msg){
-                $('#search-tags .page-content').html(msg);
+                $('#search-tags').find('.page-content').html(msg);
             },
             async: true,
             dataType: 'html'                        
@@ -57,18 +57,18 @@
             type: "POST",
             url: "search/getLibrariesView",
             beforeSend: function(){
-                $('#search-libraries .page-content').html('');
+                $('#search-libraries').find('.page-content').html('');
             },
             complete: function(){
             },
             success: function(msg){
-                $('#search-libraries .page-content').html(msg);
+                $('#search-libraries').find('.page-content').html(msg);
                 loadLibrariesPanel();
             },
             async: true,
             dataType: 'html'                        
         });                
-    }
+    };
     
     var loadSearchPanel = function(){
         initMatchSelector();
@@ -77,29 +77,29 @@
         
         $('#search-basic, #search-file-types, #search-tags, #search-libraries').on('pageshow', function(e){
             var currentPage = $(e.target);
-            $('#search-result .link.back').attr('href','#'+currentPage.attr('id'));
+            $('#search-result').find('.link.back').attr('href','#'+currentPage.attr('id'));
             return true;
         });
         
         $('.search-button').on('click',function(){
             runSearch(0);
         });
-    }
+    };
     
     var loadFileTypesPanel = function(){
         initFileTypeSelector();
-    }        
+    };
     
     var loadLibrariesPanel = function(){
         initLibrariesSelector();
-    }    
+    };
     
     var loadTagsPanel = function(){
         initTagsSelector();
-    }    
+    };
     
     var initMatchSelector = function(){
-        $('#search-match-selector a').removeClass('ui-btn-active');
+        $('#search-match-selector').find('a').removeClass('ui-btn-active');
         if($.cookie("exactMatch")!=null)
         {
             if($.cookie("exactMatch")==  "true")
@@ -109,13 +109,12 @@
         }
         else
             $( "#search-match-exact" ).addClass('ui-btn-active');
-        $( "#search-match-exact, #search-match-partial" ).off('click');        
-        $( "#search-match-exact, #search-match-partial" ).on('click',function(){
+        $( '#search-match-exact, #search-match-partial' ).off('click').on('click',function(){
             $.cookie("exactMatch", $('#search-match-partial').hasClass('ui-btn-active'), {
                 expires: (60 * 60 * 24 * 7)
             });
         });
-    }
+    };
     
     var initDateSelector = function(){
         $('#search-date-container').collapsible();
@@ -132,8 +131,7 @@
                 updateDateRange();
             }
         });    
-        $('#search-clear-date-button').off('click');
-        $('#search-clear-date-button').on('click',function(){
+        $('#search-clear-date-button').off('click').on('click',function(){
             $('#search-date-start, #search-date-end').val('');
             updateDateRange();
         });
@@ -144,16 +142,16 @@
             var endDateText = $('#search-date-end').val();
             if(startDateText != null && endDateText != null && startDateText!=''&& endDateText!='')
             {
-                $('#search-date-container .layout-group-title').html('Dates: ' + startDateText + '-' + endDateText);
+                $('#search-date-container').find('.layout-group-title').html('Dates: ' + startDateText + '-' + endDateText);
             }
             else
             {
-                $('#search-date-container .layout-group-title').html('Dates: All');
+                $('#search-date-container').find('.layout-group-title').html('Dates: All');
             }            
-        }
+        };
         updateDateRange();
         
-        $('#search-date-container input[type="radio"]').checkboxradio();
+        $('#search-date-container').find('input[type="radio"]').checkboxradio();
         if($.cookie("conditionDateByFile")!=null)
         {
             if($.cookie("conditionDateByFile")==  "true")
@@ -168,7 +166,7 @@
                 expires: (60 * 60 * 24 * 7)
             });
         });
-    }    
+    };
     
     var initFileTypeSelector = function(){
         var updateFileTypes = function(){
@@ -187,9 +185,9 @@
             $.cookie("fileTypeVideo", $('#search-file-type-video').is(':checked'), {
                 expires: (60 * 60 * 24 * 7)
             });            
-        }
+        };
         
-        $( '#search-file-type-container input[type="checkbox"]').checkboxradio();
+        $( '#search-file-type-container').find('input[type="checkbox"]').checkboxradio();
         
         if($.cookie("fileTypePpt")!=null)
         {
@@ -231,26 +229,24 @@
         else
             $( "#search-file-type-video" ).attr("checked",true).checkboxradio("refresh");
 
-        $('#file-types input[type="checkbox"]').button({
+        $('#file-types').find('input[type="checkbox"]').button({
             text: false
         });
         
-        $( '#search-file-types-select-button').off('click');
-        $( '#search-file-types-select-button').on('click',function(){
-            $('#search-file-type-container input[type="checkbox"]').attr('checked', true).checkboxradio("refresh");
-            updateFileTypes
+        $( '#search-file-types-select-button').off('click').on('click',function(){
+            $('#search-file-type-container').find('input[type="checkbox"]').attr('checked', true).checkboxradio("refresh");
+            updateFileTypes();
         });
         $( '#search-file-types-button').off('click');
         $( '#search-file-types-clear-button').on('click',function(){
-            $('#search-file-type-container input[type="checkbox"]').attr('checked', false).checkboxradio("refresh");
-            updateFileTypes
+            $('#search-file-type-container').find('input[type="checkbox"]').attr('checked', false).checkboxradio("refresh");
+            updateFileTypes();
         });        
         
-        $( '#search-file-type-container input[type="checkbox"]').off('change');
-        $( '#search-file-type-container  input[type="checkbox"]').on('change',function(){
-            updateFileTypes
+        $( '#search-file-type-container').find('input[type="checkbox"]').off('change').on('change',function(){
+            updateFileTypes();
         });
-    }        
+    };
     
     var initLibrariesSelector = function(){
         var updateLibraries = function(){
@@ -261,7 +257,7 @@
             $.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
                 expires: (60 * 60 * 24 * 7)
             });            
-        }
+        };
         $( '.search-libraries-group').collapsible();
         $( '.search-libraries-item').checkboxradio();
         updateLibraries();
@@ -270,28 +266,25 @@
         if(librariesCount < 2)
             $('.tab-search-libraries').addClass('ui-disabled').attr('href',"#");	
         
-        $( '.search-libraries-item').off('change');
-        $( '.search-libraries-item').on('change',function(){
+        $( '.search-libraries-item').off('change').on('change',function(){
             updateLibraries();
         });
-        $( '#search-libraries-select-button').off('click');
-        $( '#search-libraries-select-button').on('click',function(){
+        $( '#search-libraries-select-button').off('click').on('click',function(){
             $('.search-libraries-item').attr('checked', true).checkboxradio("refresh");
             updateLibraries();
         });
-        $( '#search-libraries-clear-button').off('click');
-        $( '#search-libraries-clear-button').on('click',function(){
+        $( '#search-libraries-clear-button').off('click').on('click',function(){
             $('.search-libraries-item').attr('checked', false).checkboxradio("refresh");
             updateLibraries();
         });        
-    }
+    };
     
     var initSearchSortSelectors = function(){
         $.cookie("sortColumn", 'link-name', {
             expires: (60 * 60 * 24 * 7)
         });
         $('#search-result-sort-column').on('change',function(){
-            $.cookie("sortColumn", $( '#search-result-sort-column :selected').val(), {
+            $.cookie("sortColumn", $( '#search-result-sort-column').find(':selected').val(), {
                 expires: (60 * 60 * 24 * 7)
             });
             runSearch(1);
@@ -300,12 +293,12 @@
             expires: (60 * 60 * 24 * 7)
         });        
         $('#search-result-sort-order').on('change',function(){
-            $.cookie("sortDirection", $( '#search-result-sort-order :selected').val(), {
+            $.cookie("sortDirection", $( '#search-result-sort-order').find(':selected').val(), {
                 expires: (60 * 60 * 24 * 7)
             });
             runSearch(1);
         });        
-    }
+    };
     
     var initTagsSelector = function(){
         $( '.search-tags-group').collapsible();
@@ -318,7 +311,7 @@
         $('#search-tags-clear-button').on('click',function(){
             $('.search-tags-item').attr('checked', false).checkboxradio("refresh");
         });
-    }
+    };
     
     var runSearch = function(isSort){
         var selectedCondition = $('#search-keyword').val();
@@ -369,7 +362,7 @@
                 dateFile: $('#search-date-file').attr("checked")=="checked",                
                 onlyFileCards: onlyFileCards,
                 categories: categories.length>0?$.toJSON(categories):null,
-                categoriesExactMatch: $('#search-tags-exact-match :selected').val(),                
+                categoriesExactMatch: $('#search-tags-exact-match').find(':selected').val(),
                 isSort: isSort
             },
             beforeSend: function(){
@@ -392,7 +385,7 @@
                 });
                 $('#search-result-body').listview('refresh');                     
                 
-                var itemsNumber = $('#search-result-body li').length;
+                var itemsNumber = $('#search-result-body').find('li').length;
                 if(itemsNumber>0)
                 {
                     $('#search-result-links-number').html('Results: '+itemsNumber);                        

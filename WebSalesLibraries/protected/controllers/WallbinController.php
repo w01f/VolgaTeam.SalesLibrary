@@ -240,5 +240,3 @@ class WallbinController extends IsdController
     }
 
 }
-
-?>

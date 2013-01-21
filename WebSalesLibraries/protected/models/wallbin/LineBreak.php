@@ -45,5 +45,3 @@ class LineBreak
         $this->font->isItalic = $lineBreakRecord->font_italic;        
     }
 }
-
-?>

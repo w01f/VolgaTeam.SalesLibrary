@@ -9,4 +9,3 @@ foreach ($libraryManager->getLibraries() as $library)
     $librariesList .= ' >' . $library->name . '</option>';
 }
 echo $librariesList;
-?>

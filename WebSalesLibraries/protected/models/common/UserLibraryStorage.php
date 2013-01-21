@@ -51,6 +51,7 @@ class UserLibraryStorage extends CActiveRecord
                 $libraryIds[] = $userLibraryRecord->id_library;
         if (isset($libraryIds))
             return array_unique($libraryIds);
+        return null;
     }
 
     public static function getLibraryIdsByUserAngHisGroups($userId)
@@ -76,6 +77,7 @@ class UserLibraryStorage extends CActiveRecord
 
         if (isset($libraryIds))
             return array_unique($libraryIds);
+        return null;
     }
 
     public static function getPageIdsByUser($userId)
@@ -86,6 +88,7 @@ class UserLibraryStorage extends CActiveRecord
                 $pageIds[] = $userLibraryRecord->id_page;
         if (isset($pageIds))
             return array_unique($pageIds);
+        return null;
     }
 
     public static function getPageIdsByUserAngHisGroups($userId)
@@ -111,6 +114,7 @@ class UserLibraryStorage extends CActiveRecord
 
         if (isset($pageIds))
             return array_unique($pageIds);
+        return null;
     }
 
     public static function getUserIdsByPage($pageId)
@@ -121,6 +125,7 @@ class UserLibraryStorage extends CActiveRecord
                 $userIds[] = $userLibraryRecord->id_user;
         if (isset($userIds))
             return array_unique($userIds);
+        return null;
     }
 
     public static function clearObjectsByUser($userId)
@@ -134,5 +139,3 @@ class UserLibraryStorage extends CActiveRecord
     }
 
 }
-
-?>

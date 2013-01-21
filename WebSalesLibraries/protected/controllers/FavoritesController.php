@@ -18,5 +18,3 @@ class FavoritesController extends IsdController
     }
 
 }
-
-?>

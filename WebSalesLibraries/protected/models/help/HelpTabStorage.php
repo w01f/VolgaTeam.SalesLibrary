@@ -19,5 +19,3 @@ class HelpTabStorage extends CActiveRecord
     }
 
 }
-
-?>
