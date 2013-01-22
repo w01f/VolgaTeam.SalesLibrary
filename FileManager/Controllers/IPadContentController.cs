@@ -90,7 +90,7 @@ namespace FileManager.Controllers
 			bool settingsConfigured = activeDecorator.Library.IPadManager.Enabled && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Password);
 			FormMain.Instance.buttonItemIPadVideoConvert.Enabled = settingsConfigured;
 			FormMain.Instance.buttonItemIPadSyncFiles.Enabled = settingsConfigured;
-			FormMain.Instance.ribbonTabItemIPadUsers.Enabled = settingsConfigured;
+			FormMain.Instance.ribbonTabItemIPadUsers.Enabled = settingsConfigured & ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab;
 			activeDecorator.IPadContentManager.UpdateControlsState();
 		}
 

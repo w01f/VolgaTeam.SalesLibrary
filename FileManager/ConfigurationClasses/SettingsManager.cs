@@ -248,7 +248,7 @@ namespace FileManager.ConfigurationClasses
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EnableIPadSettingsTab = tempBool;
 
-				node = document.SelectSingleNode(@"/ribbon/IPadUsers");
+				node = document.SelectSingleNode(@"/ribbon/Users");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EnableIPadUsersTab = tempBool;

@@ -119,7 +119,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			#region Pages
 			var pages = new List<ContentManagmentService.LibraryPage>();
-			foreach (LibraryPage libraryPage in Parent.Pages)
+			foreach (var libraryPage in Parent.Pages)
 			{
 				var page = new ContentManagmentService.LibraryPage();
 				page.id = libraryPage.Identifier.ToString();
@@ -176,7 +176,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 				#region Folders
 				var folders = new List<ContentManagmentService.LibraryFolder>();
-				foreach (LibraryFolder libraryFolder in libraryPage.Folders)
+				foreach (var libraryFolder in libraryPage.Folders)
 				{
 					var folder = new ContentManagmentService.LibraryFolder();
 					folder.id = libraryFolder.Identifier.ToString();
@@ -226,13 +226,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (ILibraryLink libraryFile in libraryFolder.Files)
+					foreach (var libraryFile in libraryFolder.Files)
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
 						link.folderId = libraryFolder.Identifier.ToString();
 						link.libraryId = Parent.Identifier.ToString();
-						link.FillLinkProperties(libraryFile, Parent, links);
+						link.FillLinkProperties(libraryFile, libraryFile, Parent, links);
 						links.Add(link);
 					}
 					folder.files = links.ToArray();
@@ -249,7 +249,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			#endregion
 
 			var autoWidgets = new List<ContentManagmentService.AutoWidget>();
-			foreach (AutoWidget libraryAutoWidget in Parent.AutoWidgets)
+			foreach (var libraryAutoWidget in Parent.AutoWidgets)
 			{
 				var autoWidget = new ContentManagmentService.AutoWidget();
 				autoWidget.libraryId = Parent.Identifier.ToString();
@@ -260,7 +260,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.autoWidgets = autoWidgets.ToArray();
 
 			var previewContainers = new List<ContentManagmentService.UniversalPreviewContainer>();
-			foreach (IPreviewContainer libraryPreviewContainer in Parent.PreviewContainers)
+			foreach (var libraryPreviewContainer in Parent.PreviewContainers)
 			{
 				var previewContainer = new ContentManagmentService.UniversalPreviewContainer();
 				previewContainer.id = libraryPreviewContainer.Identifier;
@@ -270,47 +270,47 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				previewContainer.thumbsWidth = thumbSize.Width;
 				previewContainer.thumbsHeight = thumbSize.Height;
 
-				string[] pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
+				var pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
 				if (pngLinks != null && pngLinks.Length > 0)
 					previewContainer.pngLinks = pngLinks;
 
-				string[] pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
+				var pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
 				if (pngPhoneLinks != null && pngPhoneLinks.Length > 0)
 					previewContainer.pngPhoneLinks = pngPhoneLinks;
 
-				string[] jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
+				var jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
 				if (jpegLinks != null && jpegLinks.Length > 0)
 					previewContainer.jpegLinks = jpegLinks;
 
-				string[] jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
+				var jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
 				if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
 					previewContainer.jpegPhoneLinks = jpegPhoneLinks;
 
-				string[] pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
+				var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
 				if (pdfLinks != null && pdfLinks.Length > 0)
 					previewContainer.pdfLinks = pdfLinks;
 
-				string[] mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
+				var mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
 				if (mp4Links != null && mp4Links.Length > 0)
 					previewContainer.mp4Links = mp4Links;
 
-				string[] ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
+				var ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
 				if (ogvLinks != null && ogvLinks.Length > 0)
 					previewContainer.ogvLinks = ogvLinks;
 
-				string[] oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
+				var oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
 				if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
 					previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
 
-				string[] newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
+				var newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
 				if (newOfficeLinks != null && newOfficeLinks.Length > 0)
 					previewContainer.newOfficeFormatLinks = newOfficeLinks;
 
-				string[] thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
+				var thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
 				if (thumbsLinks != null && thumbsLinks.Length > 0)
 					previewContainer.thumbsLinks = thumbsLinks;
 
-				string[] thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
+				var thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
 				if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
 					previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
 
@@ -891,7 +891,7 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 {
 	public partial class LibraryLink
 	{
-		public void FillLinkProperties(ILibraryLink libraryFile, ILibrary library, List<LibraryLink> linksCollection)
+		public void FillLinkProperties(ILibraryLink libraryFile, ILibraryLink topLevelFile, ILibrary library, List<LibraryLink> linksCollection)
 		{
 			var imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			name = libraryFile.Name;
@@ -915,10 +915,10 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 			type = (int)libraryFile.Type;
 			enableWidget = libraryFile.EnableWidget;
 			widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
-			if (libraryFile.CustomKeywords.Tags.Count > 0)
-				tags = string.Join(" ", libraryFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
+			if (topLevelFile.CustomKeywords.Tags.Count > 0)
+				tags = string.Join(" ", topLevelFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
 			dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
-			dateModify = libraryFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
+			dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
 			if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo)
 			{
@@ -969,7 +969,7 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 
 			#region Categories
 			var fileCategories = new List<LinkCategory>();
-			foreach (var searchGroup in libraryFile.SearchTags.SearchGroups)
+			foreach (var searchGroup in topLevelFile.SearchTags.SearchGroups)
 				foreach (var tag in searchGroup.Tags)
 				{
 					var category = new LinkCategory();
@@ -984,27 +984,27 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 			#endregion
 
 			#region File Card
-			enableFileCard = libraryFile.FileCard.Enable;
+			enableFileCard = topLevelFile.FileCard.Enable;
 			fileCard = new FileCard();
-			fileCard.id = libraryFile.FileCard.Identifier.ToString();
+			fileCard.id = topLevelFile.FileCard.Identifier.ToString();
 			fileCard.libraryId = library.Identifier.ToString();
-			fileCard.title = libraryFile.FileCard.Title;
-			fileCard.advertiser = libraryFile.FileCard.Advertiser;
-			fileCard.dateSold = libraryFile.FileCard.DateSold.HasValue ? libraryFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
-			fileCard.broadcastClosed = libraryFile.FileCard.BroadcastClosed.HasValue ? (float)libraryFile.FileCard.BroadcastClosed.Value : 0;
-			fileCard.digitalClosed = libraryFile.FileCard.DigitalClosed.HasValue ? (float)libraryFile.FileCard.DigitalClosed.Value : 0;
-			fileCard.publishingClosed = libraryFile.FileCard.PublishingClosed.HasValue ? (float)libraryFile.FileCard.PublishingClosed.Value : 0;
-			fileCard.salesName = libraryFile.FileCard.SalesName;
-			fileCard.salesEmail = libraryFile.FileCard.SalesEmail;
-			fileCard.salesPhone = libraryFile.FileCard.SalesPhone;
-			fileCard.salesStation = libraryFile.FileCard.SalesStation;
-			if (libraryFile.FileCard.Notes.Count > 0)
-				fileCard.notes = libraryFile.FileCard.Notes.ToArray();
+			fileCard.title = topLevelFile.FileCard.Title;
+			fileCard.advertiser = topLevelFile.FileCard.Advertiser;
+			fileCard.dateSold = topLevelFile.FileCard.DateSold.HasValue ? topLevelFile.FileCard.DateSold.Value.ToString("MM/dd/yyyy hh:mm:ss tt") : null;
+			fileCard.broadcastClosed = topLevelFile.FileCard.BroadcastClosed.HasValue ? (float)topLevelFile.FileCard.BroadcastClosed.Value : 0;
+			fileCard.digitalClosed = topLevelFile.FileCard.DigitalClosed.HasValue ? (float)topLevelFile.FileCard.DigitalClosed.Value : 0;
+			fileCard.publishingClosed = topLevelFile.FileCard.PublishingClosed.HasValue ? (float)topLevelFile.FileCard.PublishingClosed.Value : 0;
+			fileCard.salesName = topLevelFile.FileCard.SalesName;
+			fileCard.salesEmail = topLevelFile.FileCard.SalesEmail;
+			fileCard.salesPhone = topLevelFile.FileCard.SalesPhone;
+			fileCard.salesStation = topLevelFile.FileCard.SalesStation;
+			if (topLevelFile.FileCard.Notes.Count > 0)
+				fileCard.notes = topLevelFile.FileCard.Notes.ToArray();
 			#endregion
 
 			#region Attachments
 			var fileAttachments = new List<Attachment>();
-			var attachmentProperties = libraryFile.AttachmentProperties;
+			var attachmentProperties = topLevelFile.AttachmentProperties;
 			if (attachmentProperties != null)
 			{
 				enableAttachments = attachmentProperties.Enable;
@@ -1039,8 +1039,9 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 			{
 				enableAttachments = false;
 			}
+			#endregion
 
-			if(libraryFile is ILibraryFolderLink)
+			if (libraryFile is ILibraryFolderLink)
 				foreach (var childFile in (libraryFile as ILibraryFolderLink).FolderContent)
 				{
 					var childLink = new LibraryLink();
@@ -1048,13 +1049,12 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 					childLink.parentLinkId = id;
 					childLink.folderId = folderId;
 					childLink.libraryId = libraryId;
-					childLink.FillLinkProperties(childFile, library, linksCollection);
-					linksCollection.Add(childLink);					
+					childLink.FillLinkProperties(childFile, topLevelFile, library, linksCollection);
+					linksCollection.Add(childLink);
 				}
 
 			if (fileAttachments.Count > 0)
 				attachments = fileAttachments.ToArray();
-			#endregion
 		}
 	}
 }

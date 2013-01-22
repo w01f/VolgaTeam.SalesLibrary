@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/assets" />
+      <excludeFolder url="file://$MODULE_DIR$/nbproject" />
+      <excludeFolder url="file://$MODULE_DIR$/protected/runtime" />
+      <excludeFolder url="file://$MODULE_DIR$/sd_cache" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://D:/WorkingFiles/Websites/SalesLibraries/yii" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file://D:/WorkingFiles/Websites/SalesLibraries/yii" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
+
