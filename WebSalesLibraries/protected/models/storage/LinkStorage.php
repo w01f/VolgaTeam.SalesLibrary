@@ -22,8 +22,7 @@ class LinkStorage extends CActiveRecord
             if ($linkRecord->date_modify != null)
                 if ($linkRecord->date_modify != $linkDate)
                     $needToUpdate = true;
-        }
-        else
+        } else
         {
             $linkRecord = new LinkStorage();
             $needToCreate = true;
@@ -62,37 +61,27 @@ class LinkStorage extends CActiveRecord
             echo 'Link ' . ($needToCreate ? 'created' : 'updated') . ': ' . $link['name'] . ' (' . $link['fileName'] . ')' . "\n";
         }
 
-        if (array_key_exists('banner', $link))
-            if (isset($link['banner']))
-            {
-                $linkRecord->id_banner = $link['banner']['id'];
-                BannerStorage::updateData($link['banner']);
-            }
+        if (array_key_exists('banner', $link) && isset($link['banner']))
+        {
+            $linkRecord->id_banner = $link['banner']['id'];
+            BannerStorage::updateData($link['banner']);
+        }
 
-        if (array_key_exists('lineBreakProperties', $link))
-            if (isset($link['lineBreakProperties']))
-            {
-                $linkRecord->id_line_break = $link['lineBreakProperties']['id'];
-                LineBreakStorage::updateData($link['lineBreakProperties']);
-            }
+        if (array_key_exists('lineBreakProperties', $link) && isset($link['lineBreakProperties']))
+        {
+            $linkRecord->id_line_break = $link['lineBreakProperties']['id'];
+            LineBreakStorage::updateData($link['lineBreakProperties']);
+        }
 
-        if (array_key_exists('fileCard', $link) && $link['enableFileCard'])
-            if (isset($link['fileCard']))
-            {
-                $linkRecord->id_file_card = $link['fileCard']['id'];
-                FileCardStorage::updateData($link['fileCard']);
-            }
+        if (array_key_exists('fileCard', $link) && $link['enableFileCard'] && isset($link['fileCard']))
+        {
+            $linkRecord->id_file_card = $link['fileCard']['id'];
+            FileCardStorage::updateData($link['fileCard']);
+        }
 
-        if (array_key_exists('attachments', $link))
-            if (isset($link['filesAttachments']))
-            {
-                FileCardStorage::updateData($link['fileCard']);
-            }
-
-        if (array_key_exists('attachments', $link))
-            if (isset($link['attachments']))
-                foreach ($link['attachments'] as $attachment)
-                    AttachmentStorage::updateData($attachment);
+        if (array_key_exists('attachments', $link) && isset($link['attachments']))
+            foreach ($link['attachments'] as $attachment)
+                AttachmentStorage::updateData($attachment);
 
         if (array_key_exists('categories', $link))
             if (isset($link['categories']))
@@ -120,8 +109,7 @@ class LinkStorage extends CActiveRecord
         if ($isSort == 1)
         {
             $links = Yii::app()->session[$sessionId];
-        }
-        else
+        } else
         {
             $libraryCondition = '1 != 1';
             if (isset($checkedLibraryIds))
@@ -298,8 +286,7 @@ class LinkStorage extends CActiveRecord
                     $sortColumn = 'date_modify';
                     break;
             }
-        }
-        else
+        } else
             $sortColumn = 'name';
 
         if (isset(Yii::app()->request->cookies['sortDirection']->value))
@@ -313,8 +300,7 @@ class LinkStorage extends CActiveRecord
                 return strnatcmp($a[$sortColumn], $b[$sortColumn]);
             else
                 return strnatcmp($b[$sortColumn], $a[$sortColumn]);
-        }
-        else
+        } else
             return 0;
     }
 

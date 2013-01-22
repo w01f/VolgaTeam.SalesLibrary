@@ -101,6 +101,7 @@
     height: 100%;
     vertical-align: middle;
     padding: 0;
+    padding-left: 10px;
 }
 
 #file-types-container

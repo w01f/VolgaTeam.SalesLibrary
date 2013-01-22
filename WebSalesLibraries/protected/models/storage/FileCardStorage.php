@@ -13,6 +13,9 @@ class FileCardStorage extends CActiveRecord
 
     public static function updateData($fileCard)
     {
+        $existedItem = self::model()->findByPk($fileCard['id']);
+        if(isset($existedItem))
+            return;
         $fileCardRecord = new FileCardStorage();
         $fileCardRecord->id = $fileCard['id'];
         $fileCardRecord->id_library = $fileCard['libraryId'];
