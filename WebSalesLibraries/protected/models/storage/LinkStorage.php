@@ -51,8 +51,6 @@ class LinkStorage extends CActiveRecord
             $linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
             $linkRecord->date_modify = $linkDate;
             $linkRecord->id_preview = $link['previewId'];
-            $linkRecord->enable_file_card = $link['enableFileCard'];
-            $linkRecord->enable_attachments = $link['enableAttachments'];
 
             $contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $link['contentPath']);
             if (file_exists($contentPath) && is_file($contentPath))
@@ -73,15 +71,23 @@ class LinkStorage extends CActiveRecord
             LineBreakStorage::updateData($link['lineBreakProperties']);
         }
 
-        if (array_key_exists('fileCard', $link) && $link['enableFileCard'] && isset($link['fileCard']))
+        if (array_key_exists('fileCard', $link) && isset($link['fileCard']))
         {
+            $linkRecord->enable_file_card = $link['enableFileCard'];
             $linkRecord->id_file_card = $link['fileCard']['id'];
             FileCardStorage::updateData($link['fileCard']);
         }
+        else
+            $linkRecord->enable_file_card = false;
 
         if (array_key_exists('attachments', $link) && isset($link['attachments']))
+        {
+            $linkRecord->enable_attachments = $link['enableAttachments'];
             foreach ($link['attachments'] as $attachment)
                 AttachmentStorage::updateData($attachment);
+        }
+        else
+            $linkRecord->enable_attachments = false;
 
         if (array_key_exists('categories', $link))
             if (isset($link['categories']))

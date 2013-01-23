@@ -388,7 +388,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
-			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			if (LineBreakProperties != null)
+				file.LineBreakProperties = LineBreakProperties.Clone(file);
 			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
 			file.FileCard = FileCard.Clone(file);
@@ -528,7 +529,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						FileCard.Deserialize(childNode);
 						break;
 
-						#region Compatibility with old version of Sales Depot
+					#region Compatibility with old version of Sales Depot
 					case "PreviewContainer":
 						PreviewContainer = new PresentationPreviewContainer(this);
 						PreviewContainer.Deserialize(childNode);
@@ -540,7 +541,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (!Parent.Parent.Parent.PreviewContainers.Any(x => x.OriginalPath.ToLower().Equals(OriginalPath.ToLower())))
 							Parent.Parent.Parent.PreviewContainers.Add(universalPreviewContainer);
 						break;
-						#endregion
+					#endregion
 
 					case "PresentationProperties":
 						PresentationProperties = new PresentationProperties();
@@ -557,7 +558,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						BannerProperties.Deserialize(childNode);
 						break;
 
-						#region Compatibility with old versions
+					#region Compatibility with old versions
 					case "EnableBanner":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_oldEnableBanner = tempBool;
@@ -565,7 +566,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "Banner":
 						_oldBanner = string.IsNullOrEmpty(childNode.InnerText) ? null : new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
-						#endregion
+					#endregion
 				}
 			}
 

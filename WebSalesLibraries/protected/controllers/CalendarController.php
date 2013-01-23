@@ -8,6 +8,10 @@ class CalendarController extends IsdController
 
     public function actionGetCalendarView()
     {
-        $this->renderPartial('calendarView', array(), false, true);
+        if (file_exists(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'schedule.php'))
+        {
+            $schedule = require(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'schedule.php');
+            $this->renderPartial('calendarView', array('schedule' => $schedule), false, true);
+        }
     }
 }

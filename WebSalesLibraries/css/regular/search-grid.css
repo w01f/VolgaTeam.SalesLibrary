@@ -99,6 +99,10 @@
 #search-grid-header td.link-type-column, #search-grid-body td.link-type-column
 {
     width: 55px;
+}
+
+#search-grid-body td.link-type-column
+{
     text-align: center;
 }
 

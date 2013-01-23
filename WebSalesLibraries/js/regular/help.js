@@ -1,45 +1,56 @@
-(function( $ ) {
-    var loadHelpPage = function(tabId){
-        var pageIdSelector = '#'+tabId+ ' .sel.help-page';
+(function ($)
+{
+    var loadHelpPage = function (tabId)
+    {
+        var pageIdSelector = '#' + tabId + ' .sel.help-page';
         var pageId = $(pageIdSelector).attr('id');
         $.ajax({
-            type: "POST",
-            url: "help/getPage",
+            type:"POST",
+            url:"help/getPage",
             data:{
-                pageId: pageId
+                pageId:pageId
             },
-            beforeSend: function(){
+            beforeSend:function ()
+            {
                 $('#content').html('');
                 $.showOverlay();
             },
-            complete: function(){
+            complete:function ()
+            {
                 $.hideOverlay();
+                $.updateContentAreaDimensions();
+                $('#calendar').fullCalendar('today');
             },
-            success: function(msg){
-                $('#content').html('<div>'+msg+'</div>');
-                $.updateContentAreaDimensions();                            
-                $('.help-link').off('click').on('click', function(){
+            success:function (msg)
+            {
+                $('#content').html('<div>' + msg + '</div>');
+                var content = $('#content');
+                $('.help-link').off('click').on('click', function ()
+                {
                     $.viewSelectedFormat($(this), false);
                 });
+                $.buildCalendar(content);
             },
-            async: true,
-            dataType: 'html'
+            async:true,
+            dataType:'html'
         });
     };
-    
-    $.initHelpView = function(tabId){
-        var pageSelector = '#'+tabId+ ' .enabled.help-page';
+
+    $.initHelpView = function (tabId)
+    {
+        var pageSelector = '#' + tabId + ' .enabled.help-page';
         $('.help-page').off('click');
-        $(pageSelector).on('click', function(){
+        $(pageSelector).on('click', function ()
+        {
             $(pageSelector).removeClass('sel');
             $(this).addClass('sel');
             loadHelpPage(tabId);
-        });        
-        
+        });
+
         loadHelpPage(tabId);
     };
-    
-    $(document).ready(function() 
+
+    $(document).ready(function ()
     {
-        });
-})( jQuery );    
+    });
+})(jQuery);
