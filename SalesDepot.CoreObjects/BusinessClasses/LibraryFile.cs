@@ -28,6 +28,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Note { get; set; }
 		bool DisplayAsBold { get; }
 		bool IsExpired { get; }
+		bool IsRestricted { get; set; }
+		string AssignedUsers { get; set; }
 		Image Widget { get; set; }
 
 		LibraryFileSearchTags SearchTags { get; set; }

@@ -151,6 +151,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap ColumnsSort {
+            get {
+                object obj = ResourceManager.GetObject("ColumnsSort", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap ConvertVideo {
             get {
                 object obj = ResourceManager.GetObject("ConvertVideo", resourceCulture);
@@ -245,6 +252,13 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap ExpiredLinks {
             get {
                 object obj = ResourceManager.GetObject("ExpiredLinks", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ExtraRoots {
+            get {
+                object obj = ResourceManager.GetObject("ExtraRoots", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -539,6 +553,20 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap TagsSave {
             get {
                 object obj = ResourceManager.GetObject("TagsSave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsSecurity {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap TagsSecurityWidget {
+            get {
+                object obj = ResourceManager.GetObject("TagsSecurityWidget", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

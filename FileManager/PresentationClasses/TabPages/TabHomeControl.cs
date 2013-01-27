@@ -24,6 +24,7 @@ namespace FileManager.PresentationClasses.TabPages
 		private readonly KeywordsEditor _keywordsEditor = new KeywordsEditor();
 		private readonly FileCardsEditor _fileCardsEditor = new FileCardsEditor();
 		private readonly AttachmentsEditor _attachmentsEditor = new AttachmentsEditor();
+		private readonly SecurityEditor _securityEditor = new SecurityEditor();
 		private readonly TagsCleaner _tagsCleaner = new TagsCleaner();
 
 		public TabHomeControl()
@@ -168,6 +169,7 @@ namespace FileManager.PresentationClasses.TabPages
 			_wallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
 			_wallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
 			_wallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
+			_wallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
 
 			var activeLibrary = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
 			ShowDockPanel(_wallBinOptions.ShowFiles && (SettingsManager.Instance.TreeViewVisible || (activeLibrary != null && activeLibrary.UseDirectAccess)));
@@ -247,6 +249,8 @@ namespace FileManager.PresentationClasses.TabPages
 				splitContainerControl.Panel1.Controls.Add(_fileCardsEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_attachmentsEditor))
 				splitContainerControl.Panel1.Controls.Add(_attachmentsEditor);
+			if (!splitContainerControl.Panel1.Controls.Contains(_securityEditor))
+				splitContainerControl.Panel1.Controls.Add(_securityEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_tagsCleaner))
 				splitContainerControl.Panel1.Controls.Add(_tagsCleaner);
 			SwitchTagsEditor();
@@ -273,6 +277,8 @@ namespace FileManager.PresentationClasses.TabPages
 				ActiveTagsEditor = _fileCardsEditor;
 			else if (SettingsManager.Instance.ShowTagsAttachments)
 				ActiveTagsEditor = _attachmentsEditor;
+			else if (SettingsManager.Instance.ShowTagsSecurity)
+				ActiveTagsEditor = _securityEditor;
 			else if (SettingsManager.Instance.ShowTagsCleaner)
 				ActiveTagsEditor = _tagsCleaner;
 			else

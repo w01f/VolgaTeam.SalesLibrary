@@ -129,6 +129,12 @@
     <Compile Include="PresentationClasses\Tags\AttachmentsEditor.Designer.cs">
       <DependentUpon>AttachmentsEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Tags\SecurityEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\SecurityEditor.Designer.cs">
+      <DependentUpon>SecurityEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Tags\ITagsEditor.cs" />
     <Compile Include="PresentationClasses\Tags\TagsCleaner.cs">
       <SubType>UserControl</SubType>
@@ -448,6 +454,9 @@
     <EmbeddedResource Include="PresentationClasses\Tags\AttachmentsEditor.resx">
       <DependentUpon>AttachmentsEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Tags\SecurityEditor.resx">
+      <DependentUpon>SecurityEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Tags\TagsCleaner.resx">
       <DependentUpon>TagsCleaner.cs</DependentUpon>
     </EmbeddedResource>
@@ -618,6 +627,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ExtraRoots.png" />
+    <None Include="Resources\ColumnsSort.png" />
+    <None Include="Resources\TagsSecurityWidget.png" />
+    <None Include="Resources\TagsSecurity.png" />
     <None Include="Resources\TagsCleanerWarning.png" />
     <None Include="Resources\TagsWebAttachmentsWidget.png" />
     <None Include="Resources\TagsKeywordsWidget.png" />

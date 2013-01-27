@@ -142,6 +142,12 @@
 			this.buttonEditLineBreakFont = new DevExpress.XtraEditors.ButtonEdit();
 			this.colorEditLineBreakFontColor = new DevExpress.XtraEditors.ColorEdit();
 			this.laFontColor = new System.Windows.Forms.Label();
+			this.xtraTabPageSecurity = new DevExpress.XtraTab.XtraTabPage();
+			this.groupBoxSecurity = new System.Windows.Forms.GroupBox();
+			this.memoEditSecurityUsers = new DevExpress.XtraEditors.MemoEdit();
+			this.rbSecurityAllowed = new System.Windows.Forms.RadioButton();
+			this.rbSecurityRestricted = new System.Windows.Forms.RadioButton();
+			this.rbSecurityDenied = new System.Windows.Forms.RadioButton();
 			this.xtraTabPageWidgets = new DevExpress.XtraTab.XtraTabPage();
 			this.groupBoxWidgets = new System.Windows.Forms.GroupBox();
 			this.gridControlWidgets = new DevExpress.XtraGrid.GridControl();
@@ -240,6 +246,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditNote.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLineBreakFont.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLineBreakFontColor.Properties)).BeginInit();
+			this.xtraTabPageSecurity.SuspendLayout();
+			this.groupBoxSecurity.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.memoEditSecurityUsers.Properties)).BeginInit();
 			this.xtraTabPageWidgets.SuspendLayout();
 			this.groupBoxWidgets.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlWidgets)).BeginInit();
@@ -270,9 +279,9 @@
 			this.gbNotes.Controls.Add(this.rbSell);
 			this.gbNotes.Controls.Add(this.rbUpdated);
 			this.gbNotes.Controls.Add(this.rbNew);
-			this.gbNotes.Location = new System.Drawing.Point(3, 3);
+			this.gbNotes.Location = new System.Drawing.Point(10, 3);
 			this.gbNotes.Name = "gbNotes";
-			this.gbNotes.Size = new System.Drawing.Size(542, 264);
+			this.gbNotes.Size = new System.Drawing.Size(616, 264);
 			this.gbNotes.TabIndex = 0;
 			this.gbNotes.TabStop = false;
 			// 
@@ -283,7 +292,7 @@
 			this.edCustomNote.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.edCustomNote.Location = new System.Drawing.Point(25, 225);
 			this.edCustomNote.Name = "edCustomNote";
-			this.edCustomNote.Size = new System.Drawing.Size(511, 26);
+			this.edCustomNote.Size = new System.Drawing.Size(585, 26);
 			this.edCustomNote.TabIndex = 6;
 			// 
 			// rbCustomNote
@@ -372,9 +381,9 @@
 			this.groupBoxNotes.Controls.Add(this.rbRegular);
 			this.groupBoxNotes.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.groupBoxNotes.ForeColor = System.Drawing.Color.Black;
-			this.groupBoxNotes.Location = new System.Drawing.Point(3, 273);
+			this.groupBoxNotes.Location = new System.Drawing.Point(10, 273);
 			this.groupBoxNotes.Name = "groupBoxNotes";
-			this.groupBoxNotes.Size = new System.Drawing.Size(542, 47);
+			this.groupBoxNotes.Size = new System.Drawing.Size(616, 47);
 			this.groupBoxNotes.TabIndex = 3;
 			this.groupBoxNotes.TabStop = false;
 			this.groupBoxNotes.Text = "Line Text Format";
@@ -384,7 +393,7 @@
 			this.rbBold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbBold.AutoSize = true;
 			this.rbBold.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.rbBold.Location = new System.Drawing.Point(474, 21);
+			this.rbBold.Location = new System.Drawing.Point(143, 21);
 			this.rbBold.Name = "rbBold";
 			this.rbBold.Size = new System.Drawing.Size(62, 20);
 			this.rbBold.TabIndex = 1;
@@ -425,7 +434,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.SelectedTabPage = this.xtraTabPageNotes;
-			this.xtraTabControl.Size = new System.Drawing.Size(564, 546);
+			this.xtraTabControl.Size = new System.Drawing.Size(639, 546);
 			this.xtraTabControl.TabIndex = 4;
 			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageNotes,
@@ -434,6 +443,7 @@
             this.xtraTabPageAttachments,
             this.xtraTabPageExpiredLinks,
             this.xtraTabPageLineBrealProperties,
+            this.xtraTabPageSecurity,
             this.xtraTabPageWidgets,
             this.xtraTabPageBanner});
 			// 
@@ -442,7 +452,7 @@
 			this.xtraTabPageNotes.Controls.Add(this.gbNotes);
 			this.xtraTabPageNotes.Controls.Add(this.groupBoxNotes);
 			this.xtraTabPageNotes.Name = "xtraTabPageNotes";
-			this.xtraTabPageNotes.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageNotes.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageNotes.Text = "Notes";
 			// 
 			// xtraTabPageSearchTags
@@ -450,7 +460,7 @@
 			this.xtraTabPageSearchTags.Controls.Add(this.xtraTabControlSearchTags);
 			this.xtraTabPageSearchTags.Name = "xtraTabPageSearchTags";
 			this.xtraTabPageSearchTags.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-			this.xtraTabPageSearchTags.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageSearchTags.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageSearchTags.Text = "Search Tags";
 			// 
 			// xtraTabControlSearchTags
@@ -471,7 +481,7 @@
 			this.xtraTabControlSearchTags.Location = new System.Drawing.Point(0, 10);
 			this.xtraTabControlSearchTags.Name = "xtraTabControlSearchTags";
 			this.xtraTabControlSearchTags.SelectedTabPage = this.xtraTabPageSearchTagsCategories;
-			this.xtraTabControlSearchTags.Size = new System.Drawing.Size(562, 510);
+			this.xtraTabControlSearchTags.Size = new System.Drawing.Size(637, 510);
 			this.xtraTabControlSearchTags.TabIndex = 1;
 			this.xtraTabControlSearchTags.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageSearchTagsCategories,
@@ -481,7 +491,7 @@
 			// 
 			this.xtraTabPageSearchTagsCategories.Controls.Add(this.navBarControlSearchTags);
 			this.xtraTabPageSearchTagsCategories.Name = "xtraTabPageSearchTagsCategories";
-			this.xtraTabPageSearchTagsCategories.Size = new System.Drawing.Size(560, 484);
+			this.xtraTabPageSearchTagsCategories.Size = new System.Drawing.Size(635, 484);
 			this.xtraTabPageSearchTagsCategories.Text = "Assign Categories";
 			// 
 			// navBarControlSearchTags
@@ -516,7 +526,7 @@
 			this.navBarControlSearchTags.Location = new System.Drawing.Point(0, 0);
 			this.navBarControlSearchTags.Name = "navBarControlSearchTags";
 			this.navBarControlSearchTags.OptionsNavPane.ExpandedWidth = 200;
-			this.navBarControlSearchTags.Size = new System.Drawing.Size(560, 484);
+			this.navBarControlSearchTags.Size = new System.Drawing.Size(635, 484);
 			this.navBarControlSearchTags.TabIndex = 0;
 			this.navBarControlSearchTags.Text = "navBarControl1";
 			// 
@@ -552,7 +562,7 @@
 			// 
 			this.navBarGroupControlContainer1.Controls.Add(this.checkedListBoxControlGroup1);
 			this.navBarGroupControlContainer1.Name = "navBarGroupControlContainer1";
-			this.navBarGroupControlContainer1.Size = new System.Drawing.Size(556, 78);
+			this.navBarGroupControlContainer1.Size = new System.Drawing.Size(631, 78);
 			this.navBarGroupControlContainer1.TabIndex = 0;
 			// 
 			// checkedListBoxControlGroup1
@@ -565,7 +575,7 @@
 			this.checkedListBoxControlGroup1.Location = new System.Drawing.Point(0, 0);
 			this.checkedListBoxControlGroup1.Name = "checkedListBoxControlGroup1";
 			this.checkedListBoxControlGroup1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup1.Size = new System.Drawing.Size(556, 78);
+			this.checkedListBoxControlGroup1.Size = new System.Drawing.Size(631, 78);
 			this.checkedListBoxControlGroup1.TabIndex = 0;
 			// 
 			// navBarGroupControlContainer3
@@ -722,7 +732,7 @@
 			this.xtraTabPageSearchTagsKeywords.Controls.Add(this.buttonXAddKeyWord);
 			this.xtraTabPageSearchTagsKeywords.Controls.Add(this.gridControlSearchTagsKeywords);
 			this.xtraTabPageSearchTagsKeywords.Name = "xtraTabPageSearchTagsKeywords";
-			this.xtraTabPageSearchTagsKeywords.Size = new System.Drawing.Size(560, 484);
+			this.xtraTabPageSearchTagsKeywords.Size = new System.Drawing.Size(635, 484);
 			this.xtraTabPageSearchTagsKeywords.Text = "Assign Keywords";
 			// 
 			// buttonXAddKeyWord
@@ -750,7 +760,7 @@
 			this.gridControlSearchTagsKeywords.Name = "gridControlSearchTagsKeywords";
 			this.gridControlSearchTagsKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditKeyword});
-			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(540, 432);
+			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(615, 432);
 			this.gridControlSearchTagsKeywords.TabIndex = 0;
 			this.gridControlSearchTagsKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSearchTagsKeywords});
@@ -821,7 +831,7 @@
 			this.xtraTabPageFileCard.Controls.Add(this.groupBoxFileCard);
 			this.xtraTabPageFileCard.Controls.Add(this.checkBoxEnableFileCard);
 			this.xtraTabPageFileCard.Name = "xtraTabPageFileCard";
-			this.xtraTabPageFileCard.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageFileCard.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageFileCard.Text = "File Card";
 			// 
 			// textEditFileCardTitle
@@ -875,7 +885,7 @@
 			this.groupBoxFileCard.Enabled = false;
 			this.groupBoxFileCard.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxFileCard.Name = "groupBoxFileCard";
-			this.groupBoxFileCard.Size = new System.Drawing.Size(540, 467);
+			this.groupBoxFileCard.Size = new System.Drawing.Size(615, 467);
 			this.groupBoxFileCard.TabIndex = 7;
 			this.groupBoxFileCard.TabStop = false;
 			// 
@@ -919,7 +929,7 @@
 			this.gridControlFileCardImportantInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEditFileCardImportantInfo,
             this.repositoryItemButtonEditFileCardImportantInfo});
-			this.gridControlFileCardImportantInfo.Size = new System.Drawing.Size(528, 156);
+			this.gridControlFileCardImportantInfo.Size = new System.Drawing.Size(603, 156);
 			this.gridControlFileCardImportantInfo.TabIndex = 28;
 			this.gridControlFileCardImportantInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFileCardImportantInfo});
@@ -1005,8 +1015,9 @@
 			// 
 			// textEditFileCardSalesStation
 			// 
+			this.textEditFileCardSalesStation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditFileCardSalesStation.Enabled = false;
-			this.textEditFileCardSalesStation.Location = new System.Drawing.Point(371, 199);
+			this.textEditFileCardSalesStation.Location = new System.Drawing.Point(446, 199);
 			this.textEditFileCardSalesStation.Name = "textEditFileCardSalesStation";
 			this.textEditFileCardSalesStation.Properties.NullText = "Station or Newspaper...";
 			this.textEditFileCardSalesStation.Size = new System.Drawing.Size(153, 22);
@@ -1015,8 +1026,9 @@
 			// 
 			// textEditFileCardSalesPhone
 			// 
+			this.textEditFileCardSalesPhone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditFileCardSalesPhone.Enabled = false;
-			this.textEditFileCardSalesPhone.Location = new System.Drawing.Point(371, 171);
+			this.textEditFileCardSalesPhone.Location = new System.Drawing.Point(446, 171);
 			this.textEditFileCardSalesPhone.Name = "textEditFileCardSalesPhone";
 			this.textEditFileCardSalesPhone.Properties.NullText = "Phone #";
 			this.textEditFileCardSalesPhone.Size = new System.Drawing.Size(153, 22);
@@ -1031,7 +1043,7 @@
 			this.textEditFileCardSalesEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditFileCardSalesEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
 			this.textEditFileCardSalesEmail.Properties.NullText = "Email Address";
-			this.textEditFileCardSalesEmail.Size = new System.Drawing.Size(335, 22);
+			this.textEditFileCardSalesEmail.Size = new System.Drawing.Size(371, 22);
 			this.textEditFileCardSalesEmail.StyleController = this.styleController;
 			this.textEditFileCardSalesEmail.TabIndex = 25;
 			// 
@@ -1041,7 +1053,7 @@
 			this.textEditFileCardSalesName.Location = new System.Drawing.Point(6, 171);
 			this.textEditFileCardSalesName.Name = "textEditFileCardSalesName";
 			this.textEditFileCardSalesName.Properties.NullText = "Name";
-			this.textEditFileCardSalesName.Size = new System.Drawing.Size(335, 22);
+			this.textEditFileCardSalesName.Size = new System.Drawing.Size(371, 22);
 			this.textEditFileCardSalesName.StyleController = this.styleController;
 			this.textEditFileCardSalesName.TabIndex = 24;
 			// 
@@ -1059,13 +1071,14 @@
 			// 
 			// spinEditFileCardPublishingClosed
 			// 
+			this.spinEditFileCardPublishingClosed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.spinEditFileCardPublishingClosed.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
 			this.spinEditFileCardPublishingClosed.Enabled = false;
-			this.spinEditFileCardPublishingClosed.Location = new System.Drawing.Point(371, 103);
+			this.spinEditFileCardPublishingClosed.Location = new System.Drawing.Point(446, 103);
 			this.spinEditFileCardPublishingClosed.Name = "spinEditFileCardPublishingClosed";
 			this.spinEditFileCardPublishingClosed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
 			this.spinEditFileCardPublishingClosed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1086,9 +1099,10 @@
 			// 
 			// checkBoxFileCardPublishingClosed
 			// 
+			this.checkBoxFileCardPublishingClosed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxFileCardPublishingClosed.AutoSize = true;
 			this.checkBoxFileCardPublishingClosed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkBoxFileCardPublishingClosed.Location = new System.Drawing.Point(371, 77);
+			this.checkBoxFileCardPublishingClosed.Location = new System.Drawing.Point(446, 77);
 			this.checkBoxFileCardPublishingClosed.Name = "checkBoxFileCardPublishingClosed";
 			this.checkBoxFileCardPublishingClosed.Size = new System.Drawing.Size(163, 20);
 			this.checkBoxFileCardPublishingClosed.TabIndex = 21;
@@ -1104,7 +1118,7 @@
             0,
             0});
 			this.spinEditFileCardDigitalClosed.Enabled = false;
-			this.spinEditFileCardDigitalClosed.Location = new System.Drawing.Point(194, 103);
+			this.spinEditFileCardDigitalClosed.Location = new System.Drawing.Point(230, 103);
 			this.spinEditFileCardDigitalClosed.Name = "spinEditFileCardDigitalClosed";
 			this.spinEditFileCardDigitalClosed.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
 			this.spinEditFileCardDigitalClosed.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -1127,7 +1141,7 @@
 			// 
 			this.checkBoxFileCardDigitalClosed.AutoSize = true;
 			this.checkBoxFileCardDigitalClosed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkBoxFileCardDigitalClosed.Location = new System.Drawing.Point(194, 77);
+			this.checkBoxFileCardDigitalClosed.Location = new System.Drawing.Point(230, 77);
 			this.checkBoxFileCardDigitalClosed.Name = "checkBoxFileCardDigitalClosed";
 			this.checkBoxFileCardDigitalClosed.Size = new System.Drawing.Size(139, 20);
 			this.checkBoxFileCardDigitalClosed.TabIndex = 19;
@@ -1176,9 +1190,10 @@
 			// 
 			// dateEditFileCardDateSold
 			// 
+			this.dateEditFileCardDateSold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.dateEditFileCardDateSold.EditValue = null;
 			this.dateEditFileCardDateSold.Enabled = false;
-			this.dateEditFileCardDateSold.Location = new System.Drawing.Point(371, 40);
+			this.dateEditFileCardDateSold.Location = new System.Drawing.Point(446, 40);
 			this.dateEditFileCardDateSold.Name = "dateEditFileCardDateSold";
 			this.dateEditFileCardDateSold.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditFileCardDateSold.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1202,9 +1217,10 @@
 			// 
 			// checkBoxFileCardDateSold
 			// 
+			this.checkBoxFileCardDateSold.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxFileCardDateSold.AutoSize = true;
 			this.checkBoxFileCardDateSold.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkBoxFileCardDateSold.Location = new System.Drawing.Point(371, 14);
+			this.checkBoxFileCardDateSold.Location = new System.Drawing.Point(446, 14);
 			this.checkBoxFileCardDateSold.Name = "checkBoxFileCardDateSold";
 			this.checkBoxFileCardDateSold.Size = new System.Drawing.Size(105, 20);
 			this.checkBoxFileCardDateSold.TabIndex = 15;
@@ -1230,7 +1246,7 @@
 			this.textEditFileCardAdvertiser.Location = new System.Drawing.Point(6, 40);
 			this.textEditFileCardAdvertiser.Name = "textEditFileCardAdvertiser";
 			this.textEditFileCardAdvertiser.Properties.NullText = "Type here...";
-			this.textEditFileCardAdvertiser.Size = new System.Drawing.Size(335, 22);
+			this.textEditFileCardAdvertiser.Size = new System.Drawing.Size(371, 22);
 			this.textEditFileCardAdvertiser.StyleController = this.styleController;
 			this.textEditFileCardAdvertiser.TabIndex = 12;
 			// 
@@ -1250,7 +1266,7 @@
 			this.xtraTabPageAttachments.Controls.Add(this.groupBoxAttachments);
 			this.xtraTabPageAttachments.Controls.Add(this.checkBoxEnableAttachmnets);
 			this.xtraTabPageAttachments.Name = "xtraTabPageAttachments";
-			this.xtraTabPageAttachments.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageAttachments.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageAttachments.Text = "Attachments";
 			// 
 			// groupBoxAttachments
@@ -1265,20 +1281,21 @@
 			this.groupBoxAttachments.Enabled = false;
 			this.groupBoxAttachments.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxAttachments.Name = "groupBoxAttachments";
-			this.groupBoxAttachments.Size = new System.Drawing.Size(540, 467);
+			this.groupBoxAttachments.Size = new System.Drawing.Size(615, 467);
 			this.groupBoxAttachments.TabIndex = 5;
 			this.groupBoxAttachments.TabStop = false;
 			// 
 			// gridControlAttachmentsWeb
 			// 
-			this.gridControlAttachmentsWeb.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.gridControlAttachmentsWeb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.gridControlAttachmentsWeb.Location = new System.Drawing.Point(6, 285);
 			this.gridControlAttachmentsWeb.MainView = this.gridViewAttachmentsWeb;
 			this.gridControlAttachmentsWeb.Name = "gridControlAttachmentsWeb";
 			this.gridControlAttachmentsWeb.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditAttachmentsWeb});
-			this.gridControlAttachmentsWeb.Size = new System.Drawing.Size(528, 176);
+			this.gridControlAttachmentsWeb.Size = new System.Drawing.Size(603, 176);
 			this.gridControlAttachmentsWeb.TabIndex = 10;
 			this.gridControlAttachmentsWeb.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAttachmentsWeb});
@@ -1371,7 +1388,7 @@
 			this.gridControlAttachmentsFiles.Name = "gridControlAttachmentsFiles";
 			this.gridControlAttachmentsFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditAttachmentsFiles});
-			this.gridControlAttachmentsFiles.Size = new System.Drawing.Size(528, 178);
+			this.gridControlAttachmentsFiles.Size = new System.Drawing.Size(603, 178);
 			this.gridControlAttachmentsFiles.TabIndex = 8;
 			this.gridControlAttachmentsFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAttachmentsFiles});
@@ -1472,7 +1489,7 @@
 			this.xtraTabPageExpiredLinks.Controls.Add(this.checkBoxEnableExpiredLinks);
 			this.xtraTabPageExpiredLinks.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabPageExpiredLinks.Name = "xtraTabPageExpiredLinks";
-			this.xtraTabPageExpiredLinks.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageExpiredLinks.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageExpiredLinks.Text = "Expiration Date";
 			// 
 			// gbExpiredLinks
@@ -1491,7 +1508,7 @@
 			this.gbExpiredLinks.Enabled = false;
 			this.gbExpiredLinks.Location = new System.Drawing.Point(11, 37);
 			this.gbExpiredLinks.Name = "gbExpiredLinks";
-			this.gbExpiredLinks.Size = new System.Drawing.Size(540, 471);
+			this.gbExpiredLinks.Size = new System.Drawing.Size(615, 471);
 			this.gbExpiredLinks.TabIndex = 1;
 			this.gbExpiredLinks.TabStop = false;
 			// 
@@ -1615,7 +1632,7 @@
 			this.xtraTabPageLineBrealProperties.Controls.Add(this.colorEditLineBreakFontColor);
 			this.xtraTabPageLineBrealProperties.Controls.Add(this.laFontColor);
 			this.xtraTabPageLineBrealProperties.Name = "xtraTabPageLineBrealProperties";
-			this.xtraTabPageLineBrealProperties.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageLineBrealProperties.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageLineBrealProperties.Text = "Info";
 			// 
 			// memoEditNote
@@ -1625,7 +1642,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditNote.Location = new System.Drawing.Point(98, 94);
 			this.memoEditNote.Name = "memoEditNote";
-			this.memoEditNote.Size = new System.Drawing.Size(453, 412);
+			this.memoEditNote.Size = new System.Drawing.Size(528, 412);
 			this.memoEditNote.StyleController = this.styleController;
 			this.memoEditNote.TabIndex = 33;
 			// 
@@ -1658,7 +1675,7 @@
 			this.buttonEditLineBreakFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditLineBreakFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditLineBreakFont.Size = new System.Drawing.Size(453, 22);
+			this.buttonEditLineBreakFont.Size = new System.Drawing.Size(528, 22);
 			this.buttonEditLineBreakFont.StyleController = this.styleController;
 			this.buttonEditLineBreakFont.TabIndex = 29;
 			this.buttonEditLineBreakFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
@@ -1686,12 +1703,90 @@
 			this.laFontColor.TabIndex = 25;
 			this.laFontColor.Text = "Font Color";
 			// 
+			// xtraTabPageSecurity
+			// 
+			this.xtraTabPageSecurity.Controls.Add(this.groupBoxSecurity);
+			this.xtraTabPageSecurity.Name = "xtraTabPageSecurity";
+			this.xtraTabPageSecurity.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageSecurity.Text = "Security";
+			// 
+			// groupBoxSecurity
+			// 
+			this.groupBoxSecurity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxSecurity.Controls.Add(this.memoEditSecurityUsers);
+			this.groupBoxSecurity.Controls.Add(this.rbSecurityAllowed);
+			this.groupBoxSecurity.Controls.Add(this.rbSecurityRestricted);
+			this.groupBoxSecurity.Controls.Add(this.rbSecurityDenied);
+			this.groupBoxSecurity.Location = new System.Drawing.Point(10, 3);
+			this.groupBoxSecurity.Name = "groupBoxSecurity";
+			this.groupBoxSecurity.Size = new System.Drawing.Size(616, 507);
+			this.groupBoxSecurity.TabIndex = 1;
+			this.groupBoxSecurity.TabStop = false;
+			// 
+			// memoEditSecurityUsers
+			// 
+			this.memoEditSecurityUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.memoEditSecurityUsers.Enabled = false;
+			this.memoEditSecurityUsers.Location = new System.Drawing.Point(24, 189);
+			this.memoEditSecurityUsers.Name = "memoEditSecurityUsers";
+			this.memoEditSecurityUsers.Properties.NullText = "Type Usernames, separated by  commas...";
+			this.memoEditSecurityUsers.Size = new System.Drawing.Size(580, 306);
+			this.memoEditSecurityUsers.StyleController = this.styleController;
+			this.memoEditSecurityUsers.TabIndex = 34;
+			// 
+			// rbSecurityAllowed
+			// 
+			this.rbSecurityAllowed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityAllowed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityAllowed.Location = new System.Drawing.Point(8, 14);
+			this.rbSecurityAllowed.Name = "rbSecurityAllowed";
+			this.rbSecurityAllowed.Size = new System.Drawing.Size(596, 39);
+			this.rbSecurityAllowed.TabIndex = 4;
+			this.rbSecurityAllowed.TabStop = true;
+			this.rbSecurityAllowed.Text = "This link is DISPLAYED in the Local Sales Library and also in the iPad Sales Libr" +
+    "ary…";
+			this.rbSecurityAllowed.UseVisualStyleBackColor = true;
+			// 
+			// rbSecurityRestricted
+			// 
+			this.rbSecurityRestricted.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityRestricted.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityRestricted.Location = new System.Drawing.Point(8, 136);
+			this.rbSecurityRestricted.Name = "rbSecurityRestricted";
+			this.rbSecurityRestricted.Size = new System.Drawing.Size(596, 47);
+			this.rbSecurityRestricted.TabIndex = 1;
+			this.rbSecurityRestricted.TabStop = true;
+			this.rbSecurityRestricted.Text = "This link is DISPLAYED in the Local Sales Library and ONLY VISIBLE in the iPad Sa" +
+    "les Library by these SPECIFIC Users:";
+			this.rbSecurityRestricted.UseVisualStyleBackColor = true;
+			this.rbSecurityRestricted.CheckedChanged += new System.EventHandler(this.rbSecurityRestricted_CheckedChanged);
+			// 
+			// rbSecurityDenied
+			// 
+			this.rbSecurityDenied.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityDenied.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityDenied.Location = new System.Drawing.Point(8, 73);
+			this.rbSecurityDenied.Name = "rbSecurityDenied";
+			this.rbSecurityDenied.Size = new System.Drawing.Size(596, 45);
+			this.rbSecurityDenied.TabIndex = 0;
+			this.rbSecurityDenied.TabStop = true;
+			this.rbSecurityDenied.Text = "This link is ONLY DISPLAYED in the Local Sales Library (not visible at all in the" +
+    " iPad Sales Library)";
+			this.rbSecurityDenied.UseVisualStyleBackColor = true;
+			// 
 			// xtraTabPageWidgets
 			// 
 			this.xtraTabPageWidgets.Controls.Add(this.groupBoxWidgets);
 			this.xtraTabPageWidgets.Controls.Add(this.checkBoxEnableWidget);
 			this.xtraTabPageWidgets.Name = "xtraTabPageWidgets";
-			this.xtraTabPageWidgets.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageWidgets.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageWidgets.Text = "Widget";
 			// 
 			// groupBoxWidgets
@@ -1706,7 +1801,7 @@
 			this.groupBoxWidgets.Enabled = false;
 			this.groupBoxWidgets.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxWidgets.Name = "groupBoxWidgets";
-			this.groupBoxWidgets.Size = new System.Drawing.Size(540, 467);
+			this.groupBoxWidgets.Size = new System.Drawing.Size(615, 467);
 			this.groupBoxWidgets.TabIndex = 3;
 			this.groupBoxWidgets.TabStop = false;
 			// 
@@ -1720,7 +1815,7 @@
 			this.gridControlWidgets.Name = "gridControlWidgets";
 			this.gridControlWidgets.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditImage});
-			this.gridControlWidgets.Size = new System.Drawing.Size(525, 382);
+			this.gridControlWidgets.Size = new System.Drawing.Size(600, 382);
 			this.gridControlWidgets.TabIndex = 4;
 			this.gridControlWidgets.ToolTipController = this.toolTipController;
 			this.gridControlWidgets.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -1870,7 +1965,7 @@
 			this.xtraTabPageBanner.Controls.Add(this.groupBoxBanners);
 			this.xtraTabPageBanner.Controls.Add(this.checkBoxEnableBanner);
 			this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-			this.xtraTabPageBanner.Size = new System.Drawing.Size(562, 520);
+			this.xtraTabPageBanner.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageBanner.Text = "Banner";
 			// 
 			// groupBoxBanners
@@ -1893,7 +1988,7 @@
 			this.groupBoxBanners.Enabled = false;
 			this.groupBoxBanners.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxBanners.Name = "groupBoxBanners";
-			this.groupBoxBanners.Size = new System.Drawing.Size(540, 468);
+			this.groupBoxBanners.Size = new System.Drawing.Size(615, 468);
 			this.groupBoxBanners.TabIndex = 5;
 			this.groupBoxBanners.TabStop = false;
 			// 
@@ -1902,7 +1997,7 @@
 			this.colorEditBannerTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditBannerTextColor.Enabled = false;
-			this.colorEditBannerTextColor.Location = new System.Drawing.Point(429, 432);
+			this.colorEditBannerTextColor.Location = new System.Drawing.Point(504, 432);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1922,7 +2017,7 @@
 			this.buttonEditBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.buttonEditBannerTextFont.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-			this.buttonEditBannerTextFont.Size = new System.Drawing.Size(403, 22);
+			this.buttonEditBannerTextFont.Size = new System.Drawing.Size(478, 22);
 			this.buttonEditBannerTextFont.StyleController = this.styleController;
 			this.buttonEditBannerTextFont.TabIndex = 31;
 			this.buttonEditBannerTextFont.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.FontEdit_ButtonClick);
@@ -1936,7 +2031,7 @@
 			this.memoEditBannerText.Enabled = false;
 			this.memoEditBannerText.Location = new System.Drawing.Point(9, 377);
 			this.memoEditBannerText.Name = "memoEditBannerText";
-			this.memoEditBannerText.Size = new System.Drawing.Size(525, 49);
+			this.memoEditBannerText.Size = new System.Drawing.Size(600, 49);
 			this.memoEditBannerText.StyleController = this.styleController;
 			this.memoEditBannerText.TabIndex = 10;
 			// 
@@ -2001,7 +2096,7 @@
 			this.gridControlBanners.Name = "gridControlBanners";
 			this.gridControlBanners.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEditBanner});
-			this.gridControlBanners.Size = new System.Drawing.Size(525, 194);
+			this.gridControlBanners.Size = new System.Drawing.Size(600, 194);
 			this.gridControlBanners.TabIndex = 4;
 			this.gridControlBanners.ToolTipController = this.toolTipController;
 			this.gridControlBanners.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -2068,7 +2163,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.pbSelectedBanner.Location = new System.Drawing.Point(129, 9);
 			this.pbSelectedBanner.Name = "pbSelectedBanner";
-			this.pbSelectedBanner.Size = new System.Drawing.Size(405, 59);
+			this.pbSelectedBanner.Size = new System.Drawing.Size(480, 59);
 			this.pbSelectedBanner.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pbSelectedBanner.TabIndex = 3;
 			this.pbSelectedBanner.TabStop = false;
@@ -2111,7 +2206,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(130, 550);
+			this.buttonXOK.Location = new System.Drawing.Point(167, 550);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(111, 34);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2126,7 +2221,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(323, 550);
+			this.buttonXCancel.Location = new System.Drawing.Point(360, 550);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(111, 34);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2138,7 +2233,7 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(564, 587);
+			this.ClientSize = new System.Drawing.Size(639, 587);
 			this.Controls.Add(this.buttonXCancel);
 			this.Controls.Add(this.buttonXOK);
 			this.Controls.Add(this.xtraTabControl);
@@ -2224,6 +2319,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditNote.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditLineBreakFont.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.colorEditLineBreakFontColor.Properties)).EndInit();
+			this.xtraTabPageSecurity.ResumeLayout(false);
+			this.groupBoxSecurity.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.memoEditSecurityUsers.Properties)).EndInit();
 			this.xtraTabPageWidgets.ResumeLayout(false);
 			this.xtraTabPageWidgets.PerformLayout();
 			this.groupBoxWidgets.ResumeLayout(false);
@@ -2389,5 +2487,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnFileCardImportantInfoButtons;
         private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditFileCardImportantInfo;
         private DevExpress.XtraEditors.TextEdit textEditFileCardTitle;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageSecurity;
+		private System.Windows.Forms.GroupBox groupBoxSecurity;
+		public System.Windows.Forms.RadioButton rbSecurityAllowed;
+		public System.Windows.Forms.RadioButton rbSecurityRestricted;
+		public System.Windows.Forms.RadioButton rbSecurityDenied;
+		public DevExpress.XtraEditors.MemoEdit memoEditSecurityUsers;
     }
 }

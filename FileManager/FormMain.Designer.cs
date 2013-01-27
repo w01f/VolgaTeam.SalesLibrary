@@ -38,32 +38,18 @@
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarHomeExit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeExit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeSync = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeSave = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeSave = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeDelete = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeDelete = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeOpen = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeOpen = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeProperties = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeProperties = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeFontSize = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeFont = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemHomeFontUp = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeFontDown = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeNudge = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeNudge = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemHomeNudgeUp = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeNudgeDown = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeAddLink = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeAddLink = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemHomeAddUrl = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeAddNetworkShare = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemHomeAddLineBreak = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeFileTreeView = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemHomeFileTreeView = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarHomeLibraries = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditLibraries = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerHomeLibraries = new DevComponents.DotNetBar.ItemContainer();
@@ -75,31 +61,20 @@
 			this.controlContainerItemHomePages = new DevComponents.DotNetBar.ControlContainerItem();
 			this.ribbonPanelTags = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarTagsSave = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsSave = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarTagsClear = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsClear = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarTagsSecurity = new DevComponents.DotNetBar.RibbonBar();
 			this.ribbonBarTagsAttachments = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsAttachments = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarTagsFileCards = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsFileCards = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarTagsKeywords = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsKeywords = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarTagsCategories = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemTagsCategories = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelIPadUsers = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarIPadUsersRefresh = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadUsersRefresh = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarIPadUsersDelete = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadUsersDelete = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarIPadUsersEdit = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadUsersEdit = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarIPadUsersAdd = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadUsersAdd = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelIPad = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarIPadSyncFiles = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadSyncFiles = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarIPadVideoConvert = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemIPadVideoConvert = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarIPadSite = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonEditIPadSite = new DevExpress.XtraEditors.ButtonEdit();
 			this.buttonEditIPadLogin = new DevExpress.XtraEditors.ButtonEdit();
@@ -136,45 +111,26 @@
 			this.buttonItemProgramManagerSyncDisabled = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelSettings = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarSettingsAutoSync = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsAutoSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsMultitab = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsMultitab = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsEmailList = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsEmailList = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsDeadLinks = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsDeadLinks = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsAutoWidgets = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsAutoWidgets = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsColumns = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsColumns = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsPages = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsPages = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsSync = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsSync = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsBranding = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsBranding = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsExtraRoots = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsExtraRoots = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsPaths = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsPaths = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelClipart = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarClipartWebArt = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemClipartWebArt = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarClipartClientLogos = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemClipartClientLogos = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarClipartSalesGallery = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemClipartSalesGallery = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelCalendar = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarCalendarFileGrabber = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemCalendarFileGrabber = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarCalendarEmailGrabber = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemCalendarEmailGrabber = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarCalendarFont = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerCalendarFont = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemCalendarFontUp = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemCalendarFontDown = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarCalendarSettings = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemCalendarSettings = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarCalendarLocation = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonEditCalendarLocation = new DevExpress.XtraEditors.ButtonEdit();
 			this.labelItemCalendarLocatiuonTitle = new DevComponents.DotNetBar.LabelItem();
@@ -186,19 +142,65 @@
 			this.buttonItemCalendarSyncStatusDisabled = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelHelp = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonTabItemHome = new DevComponents.DotNetBar.RibbonTabItem();
-			this.ribbonTabItemTags = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemSettings = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemClipart = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemCalendar = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemProgramManager = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemIPad = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemIPadUsers = new DevComponents.DotNetBar.RibbonTabItem();
+			this.ribbonTabItemTags = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemHelp = new DevComponents.DotNetBar.RibbonTabItem();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnContainer = new System.Windows.Forms.Panel();
+			this.buttonItemSettingsAutoSync = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsMultitab = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsEmailList = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsDeadLinks = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsAutoWidgets = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsColumns = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsPages = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsSync = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsBranding = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsExtraRoots = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsPaths = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeExit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeSync = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeSave = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeDelete = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeOpen = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeProperties = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeFontUp = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeFontDown = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeNudgeUp = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeNudgeDown = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeAddUrl = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeAddNetworkShare = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeAddLineBreak = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemHomeFileTreeView = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsSave = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsClear = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsSecurity = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsAttachments = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsFileCards = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsKeywords = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemTagsCategories = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemIPadUsersRefresh = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemIPadUsersDelete = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemIPadUsersEdit = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemIPadUsersAdd = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemIPadSyncFiles = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemIPadVideoConvert = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemClipartWebArt = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemClipartClientLogos = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemClipartSalesGallery = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemCalendarFileGrabber = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemCalendarEmailGrabber = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemCalendarFontUp = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemCalendarFontDown = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemCalendarSettings = new DevComponents.DotNetBar.ButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditPages.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.ribbonControl.SuspendLayout();
@@ -245,11 +247,11 @@
 			this.ribbonControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonControl.CanCustomize = false;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
+			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
 			this.ribbonControl.Controls.Add(this.ribbonPanelTags);
 			this.ribbonControl.Controls.Add(this.ribbonPanelIPadUsers);
 			this.ribbonControl.Controls.Add(this.ribbonPanelIPad);
 			this.ribbonControl.Controls.Add(this.ribbonPanelProgramManager);
-			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
 			this.ribbonControl.Controls.Add(this.ribbonPanelClipart);
 			this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
 			this.ribbonControl.Controls.Add(this.ribbonPanelHelp);
@@ -356,15 +358,6 @@
 			// 
 			this.ribbonBarHomeExit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemHomeExit
-			// 
-			this.buttonItemHomeExit.Image = global::FileManager.Properties.Resources.Exit;
-			this.buttonItemHomeExit.Name = "buttonItemHomeExit";
-			this.buttonItemHomeExit.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close your Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeExit.Text = "buttonItem1";
-			this.buttonItemHomeExit.Click += new System.EventHandler(this.btExit_Click);
-			// 
 			// ribbonBarHomeSync
 			// 
 			this.ribbonBarHomeSync.AutoOverflowEnabled = true;
@@ -395,14 +388,6 @@
 			// 
 			// 
 			this.ribbonBarHomeSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemHomeSync
-			// 
-			this.buttonItemHomeSync.Image = global::FileManager.Properties.Resources.Refresh;
-			this.buttonItemHomeSync.Name = "buttonItemHomeSync";
-			this.buttonItemHomeSync.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSync, new DevComponents.DotNetBar.SuperTooltipInfo("Sync Library", "", "Deploy all new changes in this library to your sales team", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeSync.Text = "buttonItem1";
 			// 
 			// ribbonBarHomeSave
 			// 
@@ -435,14 +420,6 @@
 			// 
 			this.ribbonBarHomeSave.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemHomeSave
-			// 
-			this.buttonItemHomeSave.Image = global::FileManager.Properties.Resources.Save;
-			this.buttonItemHomeSave.Name = "buttonItemHomeSave";
-			this.buttonItemHomeSave.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSave, new DevComponents.DotNetBar.SuperTooltipInfo("Save Library", "", "Save all Changes to this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeSave.Text = "buttonItem1";
-			// 
 			// ribbonBarHomeDelete
 			// 
 			this.ribbonBarHomeDelete.AutoOverflowEnabled = true;
@@ -473,15 +450,6 @@
 			// 
 			// 
 			this.ribbonBarHomeDelete.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemHomeDelete
-			// 
-			this.buttonItemHomeDelete.Enabled = false;
-			this.buttonItemHomeDelete.Image = global::FileManager.Properties.Resources.Delete;
-			this.buttonItemHomeDelete.Name = "buttonItemHomeDelete";
-			this.buttonItemHomeDelete.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeDelete, new DevComponents.DotNetBar.SuperTooltipInfo("Delete Line", "", "Remove Link or Line Break from the Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeDelete.Text = "buttonItem1";
 			// 
 			// ribbonBarHomeOpen
 			// 
@@ -514,15 +482,6 @@
 			// 
 			this.ribbonBarHomeOpen.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemHomeOpen
-			// 
-			this.buttonItemHomeOpen.Enabled = false;
-			this.buttonItemHomeOpen.Image = global::FileManager.Properties.Resources.OpenFile;
-			this.buttonItemHomeOpen.Name = "buttonItemHomeOpen";
-			this.buttonItemHomeOpen.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeOpen, new DevComponents.DotNetBar.SuperTooltipInfo("Open Link", "", "Open the selected File", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeOpen.Text = "buttonItem1";
-			// 
 			// ribbonBarHomeProperties
 			// 
 			this.ribbonBarHomeProperties.AutoOverflowEnabled = true;
@@ -553,15 +512,6 @@
 			// 
 			// 
 			this.ribbonBarHomeProperties.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemHomeProperties
-			// 
-			this.buttonItemHomeProperties.Enabled = false;
-			this.buttonItemHomeProperties.Image = global::FileManager.Properties.Resources.LinkProperties;
-			this.buttonItemHomeProperties.Name = "buttonItemHomeProperties";
-			this.buttonItemHomeProperties.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeProperties, new DevComponents.DotNetBar.SuperTooltipInfo("Link Properties", "", "Add Notes, Expiration Dates\r\nAnd Search Criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeProperties.Text = "buttonItem1";
 			// 
 			// ribbonBarHomeFontSize
 			// 
@@ -608,20 +558,6 @@
             this.buttonItemHomeFontDown});
 			this.itemContainerHomeFont.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
-			// buttonItemHomeFontUp
-			// 
-			this.buttonItemHomeFontUp.Image = global::FileManager.Properties.Resources.FormatFontLarger;
-			this.buttonItemHomeFontUp.Name = "buttonItemHomeFontUp";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeFontUp, new DevComponents.DotNetBar.SuperTooltipInfo("Larger Text", "", "Increase the Font Size", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeFontUp.Text = "buttonItem1";
-			// 
-			// buttonItemHomeFontDown
-			// 
-			this.buttonItemHomeFontDown.Image = global::FileManager.Properties.Resources.FormatFontSmaller;
-			this.buttonItemHomeFontDown.Name = "buttonItemHomeFontDown";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeFontDown, new DevComponents.DotNetBar.SuperTooltipInfo("Smaller Text", "", "Decrease the Font Size", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeFontDown.Text = "buttonItem1";
-			// 
 			// ribbonBarHomeNudge
 			// 
 			this.ribbonBarHomeNudge.AutoOverflowEnabled = true;
@@ -666,22 +602,6 @@
             this.buttonItemHomeNudgeUp,
             this.buttonItemHomeNudgeDown});
 			this.itemContainerHomeNudge.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
-			// 
-			// buttonItemHomeNudgeUp
-			// 
-			this.buttonItemHomeNudgeUp.Enabled = false;
-			this.buttonItemHomeNudgeUp.Image = global::FileManager.Properties.Resources.UpLink;
-			this.buttonItemHomeNudgeUp.Name = "buttonItemHomeNudgeUp";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeNudgeUp, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Up", "", "Move this Link Up", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeNudgeUp.Text = "buttonItem1";
-			// 
-			// buttonItemHomeNudgeDown
-			// 
-			this.buttonItemHomeNudgeDown.Enabled = false;
-			this.buttonItemHomeNudgeDown.Image = global::FileManager.Properties.Resources.DownLink;
-			this.buttonItemHomeNudgeDown.Name = "buttonItemHomeNudgeDown";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeNudgeDown, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Down", "", "Move this Link Down", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeNudgeDown.Text = "buttonItem1";
 			// 
 			// ribbonBarHomeAddLink
 			// 
@@ -729,36 +649,6 @@
             this.buttonItemHomeAddLineBreak});
 			this.itemContainerHomeAddLink.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
-			// buttonItemHomeAddUrl
-			// 
-			this.buttonItemHomeAddUrl.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeAddUrl.Enabled = false;
-			this.buttonItemHomeAddUrl.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeAddUrl.Image = global::FileManager.Properties.Resources.Url;
-			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add Web Link", "", "Add a Link to a website", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-			this.buttonItemHomeAddUrl.Text = "Website";
-			// 
-			// buttonItemHomeAddNetworkShare
-			// 
-			this.buttonItemHomeAddNetworkShare.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeAddNetworkShare.Enabled = false;
-			this.buttonItemHomeAddNetworkShare.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeAddNetworkShare.Image = global::FileManager.Properties.Resources.NetworkShare;
-			this.buttonItemHomeAddNetworkShare.Name = "buttonItemHomeAddNetworkShare";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddNetworkShare, new DevComponents.DotNetBar.SuperTooltipInfo("Add Network Link", "", "Add a Link to folder on your network", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-			this.buttonItemHomeAddNetworkShare.Text = "Network";
-			// 
-			// buttonItemHomeAddLineBreak
-			// 
-			this.buttonItemHomeAddLineBreak.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-			this.buttonItemHomeAddLineBreak.Enabled = false;
-			this.buttonItemHomeAddLineBreak.ForeColor = System.Drawing.Color.Black;
-			this.buttonItemHomeAddLineBreak.Image = global::FileManager.Properties.Resources.LineBreak;
-			this.buttonItemHomeAddLineBreak.Name = "buttonItemHomeAddLineBreak";
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddLineBreak, new DevComponents.DotNetBar.SuperTooltipInfo("Add Line Break", "", "Add an empty Line ABOVE the selected Link", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemHomeAddLineBreak.Text = "LineBreak";
-			// 
 			// ribbonBarHomeFileTreeView
 			// 
 			this.ribbonBarHomeFileTreeView.AutoOverflowEnabled = true;
@@ -789,16 +679,6 @@
 			// 
 			// 
 			this.ribbonBarHomeFileTreeView.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemHomeFileTreeView
-			// 
-			this.buttonItemHomeFileTreeView.AutoCheckOnClick = true;
-			this.buttonItemHomeFileTreeView.FixedSize = new System.Drawing.Size(70, 72);
-			this.buttonItemHomeFileTreeView.Image = global::FileManager.Properties.Resources.text_tree;
-			this.buttonItemHomeFileTreeView.Name = "buttonItemHomeFileTreeView";
-			this.buttonItemHomeFileTreeView.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemHomeFileTreeView, new DevComponents.DotNetBar.SuperTooltipInfo("DRAG && DROP", "", "Move Files from your Network Directory to your Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
-			this.buttonItemHomeFileTreeView.Text = "buttonItem1";
 			// 
 			// ribbonBarHomeLibraries
 			// 
@@ -913,6 +793,7 @@
 			this.ribbonPanelTags.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSave);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsClear);
+			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsSecurity);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsAttachments);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsFileCards);
 			this.ribbonPanelTags.Controls.Add(this.ribbonBarTagsKeywords);
@@ -953,7 +834,7 @@
 			this.ribbonBarTagsSave.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemTagsSave});
 			this.ribbonBarTagsSave.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsSave.Location = new System.Drawing.Point(460, 0);
+			this.ribbonBarTagsSave.Location = new System.Drawing.Point(550, 0);
 			this.ribbonBarTagsSave.Name = "ribbonBarTagsSave";
 			this.ribbonBarTagsSave.Size = new System.Drawing.Size(90, 123);
 			this.ribbonBarTagsSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -967,13 +848,6 @@
 			// 
 			// 
 			this.ribbonBarTagsSave.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsSave
-			// 
-			this.buttonItemTagsSave.Image = global::FileManager.Properties.Resources.TagsSave;
-			this.buttonItemTagsSave.Name = "buttonItemTagsSave";
-			this.buttonItemTagsSave.SubItemsExpandWidth = 14;
-			this.buttonItemTagsSave.Text = "buttonItem1";
 			// 
 			// ribbonBarTagsClear
 			// 
@@ -991,7 +865,7 @@
 			this.ribbonBarTagsClear.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemTagsClear});
 			this.ribbonBarTagsClear.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarTagsClear.Location = new System.Drawing.Point(370, 0);
+			this.ribbonBarTagsClear.Location = new System.Drawing.Point(460, 0);
 			this.ribbonBarTagsClear.Name = "ribbonBarTagsClear";
 			this.ribbonBarTagsClear.Size = new System.Drawing.Size(90, 123);
 			this.ribbonBarTagsClear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1006,12 +880,36 @@
 			// 
 			this.ribbonBarTagsClear.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemTagsClear
+			// ribbonBarTagsSecurity
 			// 
-			this.buttonItemTagsClear.Image = global::FileManager.Properties.Resources.TagsClear;
-			this.buttonItemTagsClear.Name = "buttonItemTagsClear";
-			this.buttonItemTagsClear.SubItemsExpandWidth = 14;
-			this.buttonItemTagsClear.Text = "buttonItem1";
+			this.ribbonBarTagsSecurity.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSecurity.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSecurity.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarTagsSecurity.ContainerControlProcessDialogKey = true;
+			this.ribbonBarTagsSecurity.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarTagsSecurity.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemTagsSecurity});
+			this.ribbonBarTagsSecurity.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarTagsSecurity.Location = new System.Drawing.Point(370, 0);
+			this.ribbonBarTagsSecurity.Name = "ribbonBarTagsSecurity";
+			this.ribbonBarTagsSecurity.Size = new System.Drawing.Size(90, 123);
+			this.ribbonBarTagsSecurity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarTagsSecurity.TabIndex = 6;
+			this.ribbonBarTagsSecurity.Text = "Security";
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSecurity.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarTagsSecurity.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// ribbonBarTagsAttachments
 			// 
@@ -1044,13 +942,6 @@
 			// 
 			this.ribbonBarTagsAttachments.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemTagsAttachments
-			// 
-			this.buttonItemTagsAttachments.Image = global::FileManager.Properties.Resources.TagsAttachments;
-			this.buttonItemTagsAttachments.Name = "buttonItemTagsAttachments";
-			this.buttonItemTagsAttachments.SubItemsExpandWidth = 14;
-			this.buttonItemTagsAttachments.Text = "buttonItem1";
-			// 
 			// ribbonBarTagsFileCards
 			// 
 			this.ribbonBarTagsFileCards.AutoOverflowEnabled = true;
@@ -1081,13 +972,6 @@
 			// 
 			// 
 			this.ribbonBarTagsFileCards.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsFileCards
-			// 
-			this.buttonItemTagsFileCards.Image = global::FileManager.Properties.Resources.TagsFileCards;
-			this.buttonItemTagsFileCards.Name = "buttonItemTagsFileCards";
-			this.buttonItemTagsFileCards.SubItemsExpandWidth = 14;
-			this.buttonItemTagsFileCards.Text = "buttonItem1";
 			// 
 			// ribbonBarTagsKeywords
 			// 
@@ -1120,13 +1004,6 @@
 			// 
 			this.ribbonBarTagsKeywords.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemTagsKeywords
-			// 
-			this.buttonItemTagsKeywords.Image = global::FileManager.Properties.Resources.TagsKeywords;
-			this.buttonItemTagsKeywords.Name = "buttonItemTagsKeywords";
-			this.buttonItemTagsKeywords.SubItemsExpandWidth = 14;
-			this.buttonItemTagsKeywords.Text = "buttonItem1";
-			// 
 			// ribbonBarTagsCategories
 			// 
 			this.ribbonBarTagsCategories.AutoOverflowEnabled = true;
@@ -1157,13 +1034,6 @@
 			// 
 			// 
 			this.ribbonBarTagsCategories.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemTagsCategories
-			// 
-			this.buttonItemTagsCategories.Image = global::FileManager.Properties.Resources.TagsCategories;
-			this.buttonItemTagsCategories.Name = "buttonItemTagsCategories";
-			this.buttonItemTagsCategories.SubItemsExpandWidth = 14;
-			this.buttonItemTagsCategories.Text = "buttonItem1";
 			// 
 			// ribbonPanelIPadUsers
 			// 
@@ -1223,13 +1093,6 @@
 			// 
 			this.ribbonBarIPadUsersRefresh.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemIPadUsersRefresh
-			// 
-			this.buttonItemIPadUsersRefresh.Image = global::FileManager.Properties.Resources.RefreshUsers;
-			this.buttonItemIPadUsersRefresh.Name = "buttonItemIPadUsersRefresh";
-			this.buttonItemIPadUsersRefresh.SubItemsExpandWidth = 14;
-			this.buttonItemIPadUsersRefresh.Text = "buttonItem1";
-			// 
 			// ribbonBarIPadUsersDelete
 			// 
 			this.ribbonBarIPadUsersDelete.AutoOverflowEnabled = true;
@@ -1260,13 +1123,6 @@
 			// 
 			// 
 			this.ribbonBarIPadUsersDelete.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemIPadUsersDelete
-			// 
-			this.buttonItemIPadUsersDelete.Image = global::FileManager.Properties.Resources.DeleteUser;
-			this.buttonItemIPadUsersDelete.Name = "buttonItemIPadUsersDelete";
-			this.buttonItemIPadUsersDelete.SubItemsExpandWidth = 14;
-			this.buttonItemIPadUsersDelete.Text = "buttonItem1";
 			// 
 			// ribbonBarIPadUsersEdit
 			// 
@@ -1299,13 +1155,6 @@
 			// 
 			this.ribbonBarIPadUsersEdit.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemIPadUsersEdit
-			// 
-			this.buttonItemIPadUsersEdit.Image = global::FileManager.Properties.Resources.ShowInfo;
-			this.buttonItemIPadUsersEdit.Name = "buttonItemIPadUsersEdit";
-			this.buttonItemIPadUsersEdit.SubItemsExpandWidth = 14;
-			this.buttonItemIPadUsersEdit.Text = "buttonItem1";
-			// 
 			// ribbonBarIPadUsersAdd
 			// 
 			this.ribbonBarIPadUsersAdd.AutoOverflowEnabled = true;
@@ -1336,13 +1185,6 @@
 			// 
 			// 
 			this.ribbonBarIPadUsersAdd.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemIPadUsersAdd
-			// 
-			this.buttonItemIPadUsersAdd.Image = global::FileManager.Properties.Resources.AddUser;
-			this.buttonItemIPadUsersAdd.Name = "buttonItemIPadUsersAdd";
-			this.buttonItemIPadUsersAdd.SubItemsExpandWidth = 14;
-			this.buttonItemIPadUsersAdd.Text = "buttonItem1";
 			// 
 			// ribbonPanelIPad
 			// 
@@ -1403,14 +1245,6 @@
 			// 
 			this.ribbonBarIPadSyncFiles.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemIPadSyncFiles
-			// 
-			this.buttonItemIPadSyncFiles.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemIPadSyncFiles.Image = global::FileManager.Properties.Resources.SyncIPad;
-			this.buttonItemIPadSyncFiles.Name = "buttonItemIPadSyncFiles";
-			this.buttonItemIPadSyncFiles.SubItemsExpandWidth = 14;
-			this.buttonItemIPadSyncFiles.Text = "buttonItem1";
-			// 
 			// ribbonBarIPadVideoConvert
 			// 
 			this.ribbonBarIPadVideoConvert.AutoOverflowEnabled = true;
@@ -1441,14 +1275,6 @@
 			// 
 			// 
 			this.ribbonBarIPadVideoConvert.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemIPadVideoConvert
-			// 
-			this.buttonItemIPadVideoConvert.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemIPadVideoConvert.Image = global::FileManager.Properties.Resources.ConvertVideo;
-			this.buttonItemIPadVideoConvert.Name = "buttonItemIPadVideoConvert";
-			this.buttonItemIPadVideoConvert.SubItemsExpandWidth = 14;
-			this.buttonItemIPadVideoConvert.Text = "buttonItem1";
 			// 
 			// ribbonBarIPadSite
 			// 
@@ -1954,7 +1780,7 @@
 			this.ribbonBarSettingsAutoSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsAutoSync});
 			this.ribbonBarSettingsAutoSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsAutoSync.Location = new System.Drawing.Point(870, 0);
+			this.ribbonBarSettingsAutoSync.Location = new System.Drawing.Point(888, 0);
 			this.ribbonBarSettingsAutoSync.Name = "ribbonBarSettingsAutoSync";
 			this.ribbonBarSettingsAutoSync.Size = new System.Drawing.Size(88, 123);
 			this.ribbonBarSettingsAutoSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1968,13 +1794,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsAutoSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsAutoSync
-			// 
-			this.buttonItemSettingsAutoSync.Image = global::FileManager.Properties.Resources.AutoSync;
-			this.buttonItemSettingsAutoSync.Name = "buttonItemSettingsAutoSync";
-			this.buttonItemSettingsAutoSync.SubItemsExpandWidth = 14;
-			this.buttonItemSettingsAutoSync.Text = "Auto-Sync";
 			// 
 			// ribbonBarSettingsMultitab
 			// 
@@ -1992,7 +1811,7 @@
 			this.ribbonBarSettingsMultitab.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsMultitab});
 			this.ribbonBarSettingsMultitab.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsMultitab.Location = new System.Drawing.Point(782, 0);
+			this.ribbonBarSettingsMultitab.Location = new System.Drawing.Point(800, 0);
 			this.ribbonBarSettingsMultitab.Name = "ribbonBarSettingsMultitab";
 			this.ribbonBarSettingsMultitab.Size = new System.Drawing.Size(88, 123);
 			this.ribbonBarSettingsMultitab.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2006,14 +1825,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsMultitab.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsMultitab
-			// 
-			this.buttonItemSettingsMultitab.AutoCheckOnClick = true;
-			this.buttonItemSettingsMultitab.Image = global::FileManager.Properties.Resources.MultiTabs;
-			this.buttonItemSettingsMultitab.Name = "buttonItemSettingsMultitab";
-			this.buttonItemSettingsMultitab.SubItemsExpandWidth = 14;
-			this.buttonItemSettingsMultitab.Text = "Multi-tab\r\n   View";
 			// 
 			// ribbonBarSettingsEmailList
 			// 
@@ -2031,7 +1842,7 @@
 			this.ribbonBarSettingsEmailList.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsEmailList});
 			this.ribbonBarSettingsEmailList.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsEmailList.Location = new System.Drawing.Point(695, 0);
+			this.ribbonBarSettingsEmailList.Location = new System.Drawing.Point(713, 0);
 			this.ribbonBarSettingsEmailList.Name = "ribbonBarSettingsEmailList";
 			this.ribbonBarSettingsEmailList.Size = new System.Drawing.Size(87, 123);
 			this.ribbonBarSettingsEmailList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2045,14 +1856,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsEmailList.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsEmailList
-			// 
-			this.buttonItemSettingsEmailList.Image = global::FileManager.Properties.Resources.EmailList;
-			this.buttonItemSettingsEmailList.Name = "buttonItemSettingsEmailList";
-			this.buttonItemSettingsEmailList.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsEmailList, new DevComponents.DotNetBar.SuperTooltipInfo("Email List", "", "Set up your sales library to email expired file notifications to other managers", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsEmailList.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsDeadLinks
 			// 
@@ -2070,7 +1873,7 @@
 			this.ribbonBarSettingsDeadLinks.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsDeadLinks});
 			this.ribbonBarSettingsDeadLinks.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsDeadLinks.Location = new System.Drawing.Point(604, 0);
+			this.ribbonBarSettingsDeadLinks.Location = new System.Drawing.Point(622, 0);
 			this.ribbonBarSettingsDeadLinks.Name = "ribbonBarSettingsDeadLinks";
 			this.ribbonBarSettingsDeadLinks.Size = new System.Drawing.Size(91, 123);
 			this.ribbonBarSettingsDeadLinks.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2084,14 +1887,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsDeadLinks.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsDeadLinks
-			// 
-			this.buttonItemSettingsDeadLinks.Image = global::FileManager.Properties.Resources.DeadLinks;
-			this.buttonItemSettingsDeadLinks.Name = "buttonItemSettingsDeadLinks";
-			this.buttonItemSettingsDeadLinks.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsDeadLinks, new DevComponents.DotNetBar.SuperTooltipInfo("Dead Links", "", "Configure how your sales library works with disabled or dead file links", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsDeadLinks.Text = "buttonItemSettingsDeadLinks";
 			// 
 			// ribbonBarSettingsAutoWidgets
 			// 
@@ -2109,7 +1904,7 @@
 			this.ribbonBarSettingsAutoWidgets.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsAutoWidgets});
 			this.ribbonBarSettingsAutoWidgets.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsAutoWidgets.Location = new System.Drawing.Point(508, 0);
+			this.ribbonBarSettingsAutoWidgets.Location = new System.Drawing.Point(526, 0);
 			this.ribbonBarSettingsAutoWidgets.Name = "ribbonBarSettingsAutoWidgets";
 			this.ribbonBarSettingsAutoWidgets.Size = new System.Drawing.Size(96, 123);
 			this.ribbonBarSettingsAutoWidgets.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2123,15 +1918,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsAutoWidgets.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsAutoWidgets
-			// 
-			this.buttonItemSettingsAutoWidgets.FixedSize = new System.Drawing.Size(92, 72);
-			this.buttonItemSettingsAutoWidgets.Image = global::FileManager.Properties.Resources.AutoWidgets;
-			this.buttonItemSettingsAutoWidgets.Name = "buttonItemSettingsAutoWidgets";
-			this.buttonItemSettingsAutoWidgets.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsAutoWidgets, new DevComponents.DotNetBar.SuperTooltipInfo("Auto Widgets", "", "Enable or edit universal widgets for specific file types in your library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsAutoWidgets.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsColumns
 			// 
@@ -2149,7 +1935,7 @@
 			this.ribbonBarSettingsColumns.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsColumns});
 			this.ribbonBarSettingsColumns.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsColumns.Location = new System.Drawing.Point(420, 0);
+			this.ribbonBarSettingsColumns.Location = new System.Drawing.Point(438, 0);
 			this.ribbonBarSettingsColumns.Name = "ribbonBarSettingsColumns";
 			this.ribbonBarSettingsColumns.Size = new System.Drawing.Size(88, 123);
 			this.ribbonBarSettingsColumns.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2163,14 +1949,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsColumns.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsColumns
-			// 
-			this.buttonItemSettingsColumns.Image = global::FileManager.Properties.Resources.Columns;
-			this.buttonItemSettingsColumns.Name = "buttonItemSettingsColumns";
-			this.buttonItemSettingsColumns.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsColumns, new DevComponents.DotNetBar.SuperTooltipInfo("Window Columns", "", "Create and customize windows and titles for your sales library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsColumns.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsPages
 			// 
@@ -2188,7 +1966,7 @@
 			this.ribbonBarSettingsPages.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsPages});
 			this.ribbonBarSettingsPages.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsPages.Location = new System.Drawing.Point(332, 0);
+			this.ribbonBarSettingsPages.Location = new System.Drawing.Point(350, 0);
 			this.ribbonBarSettingsPages.Name = "ribbonBarSettingsPages";
 			this.ribbonBarSettingsPages.Size = new System.Drawing.Size(88, 123);
 			this.ribbonBarSettingsPages.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2202,14 +1980,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsPages.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsPages
-			// 
-			this.buttonItemSettingsPages.Image = global::FileManager.Properties.Resources.Pages;
-			this.buttonItemSettingsPages.Name = "buttonItemSettingsPages";
-			this.buttonItemSettingsPages.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsPages, new DevComponents.DotNetBar.SuperTooltipInfo("Pages", "", "Activate the individual pages for this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsPages.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsSync
 			// 
@@ -2227,7 +1997,7 @@
 			this.ribbonBarSettingsSync.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsSync});
 			this.ribbonBarSettingsSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsSync.Location = new System.Drawing.Point(244, 0);
+			this.ribbonBarSettingsSync.Location = new System.Drawing.Point(262, 0);
 			this.ribbonBarSettingsSync.Name = "ribbonBarSettingsSync";
 			this.ribbonBarSettingsSync.Size = new System.Drawing.Size(88, 123);
 			this.ribbonBarSettingsSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2241,14 +2011,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsSync.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsSync
-			// 
-			this.buttonItemSettingsSync.Image = global::FileManager.Properties.Resources.SyncSettings;
-			this.buttonItemSettingsSync.Name = "buttonItemSettingsSync";
-			this.buttonItemSettingsSync.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsSync, new DevComponents.DotNetBar.SuperTooltipInfo("Sync Settings", "", "Configure your Sync Settings for this Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsSync.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsBranding
 			// 
@@ -2266,7 +2028,7 @@
 			this.ribbonBarSettingsBranding.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsBranding});
 			this.ribbonBarSettingsBranding.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsBranding.Location = new System.Drawing.Point(159, 0);
+			this.ribbonBarSettingsBranding.Location = new System.Drawing.Point(177, 0);
 			this.ribbonBarSettingsBranding.Name = "ribbonBarSettingsBranding";
 			this.ribbonBarSettingsBranding.Size = new System.Drawing.Size(85, 123);
 			this.ribbonBarSettingsBranding.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2280,14 +2042,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsBranding.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsBranding
-			// 
-			this.buttonItemSettingsBranding.Image = global::FileManager.Properties.Resources.Branding;
-			this.buttonItemSettingsBranding.Name = "buttonItemSettingsBranding";
-			this.buttonItemSettingsBranding.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsBranding, new DevComponents.DotNetBar.SuperTooltipInfo("Library Branding", "", "Give your Sales Library a unique name or title", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsBranding.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsExtraRoots
 			// 
@@ -2307,7 +2061,7 @@
 			this.ribbonBarSettingsExtraRoots.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSettingsExtraRoots.Location = new System.Drawing.Point(91, 0);
 			this.ribbonBarSettingsExtraRoots.Name = "ribbonBarSettingsExtraRoots";
-			this.ribbonBarSettingsExtraRoots.Size = new System.Drawing.Size(68, 123);
+			this.ribbonBarSettingsExtraRoots.Size = new System.Drawing.Size(86, 123);
 			this.ribbonBarSettingsExtraRoots.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsExtraRoots.TabIndex = 11;
 			this.ribbonBarSettingsExtraRoots.Text = "Extra Roots";
@@ -2319,13 +2073,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsExtraRoots.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsExtraRoots
-			// 
-			this.buttonItemSettingsExtraRoots.Image = global::FileManager.Properties.Resources.OpenFile;
-			this.buttonItemSettingsExtraRoots.Name = "buttonItemSettingsExtraRoots";
-			this.buttonItemSettingsExtraRoots.SubItemsExpandWidth = 14;
-			this.buttonItemSettingsExtraRoots.Text = "buttonItem1";
 			// 
 			// ribbonBarSettingsPaths
 			// 
@@ -2357,14 +2104,6 @@
 			// 
 			// 
 			this.ribbonBarSettingsPaths.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsPaths
-			// 
-			this.buttonItemSettingsPaths.Image = global::FileManager.Properties.Resources.paths;
-			this.buttonItemSettingsPaths.Name = "buttonItemSettingsPaths";
-			this.buttonItemSettingsPaths.SubItemsExpandWidth = 14;
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsPaths, new DevComponents.DotNetBar.SuperTooltipInfo("Network Paths", "", "Configure your Network Sync Paths so you can deploy your sales library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsPaths.Text = "buttonItem1";
 			// 
 			// ribbonPanelClipart
 			// 
@@ -2423,14 +2162,6 @@
 			// 
 			this.ribbonBarClipartWebArt.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemClipartWebArt
-			// 
-			this.buttonItemClipartWebArt.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemClipartWebArt.Image = global::FileManager.Properties.Resources.WebArt;
-			this.buttonItemClipartWebArt.Name = "buttonItemClipartWebArt";
-			this.buttonItemClipartWebArt.SubItemsExpandWidth = 14;
-			this.buttonItemClipartWebArt.Text = "buttonItem1";
-			// 
 			// ribbonBarClipartClientLogos
 			// 
 			this.ribbonBarClipartClientLogos.AutoOverflowEnabled = true;
@@ -2462,14 +2193,6 @@
 			// 
 			this.ribbonBarClipartClientLogos.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemClipartClientLogos
-			// 
-			this.buttonItemClipartClientLogos.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemClipartClientLogos.Image = global::FileManager.Properties.Resources.ClientLogos;
-			this.buttonItemClipartClientLogos.Name = "buttonItemClipartClientLogos";
-			this.buttonItemClipartClientLogos.SubItemsExpandWidth = 14;
-			this.buttonItemClipartClientLogos.Text = "buttonItem1";
-			// 
 			// ribbonBarClipartSalesGallery
 			// 
 			this.ribbonBarClipartSalesGallery.AutoOverflowEnabled = true;
@@ -2500,14 +2223,6 @@
 			// 
 			// 
 			this.ribbonBarClipartSalesGallery.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemClipartSalesGallery
-			// 
-			this.buttonItemClipartSalesGallery.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemClipartSalesGallery.Image = global::FileManager.Properties.Resources.SalesGallery;
-			this.buttonItemClipartSalesGallery.Name = "buttonItemClipartSalesGallery";
-			this.buttonItemClipartSalesGallery.SubItemsExpandWidth = 14;
-			this.buttonItemClipartSalesGallery.Text = "buttonItem1";
 			// 
 			// ribbonPanelCalendar
 			// 
@@ -2569,14 +2284,6 @@
 			// 
 			this.ribbonBarCalendarFileGrabber.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
-			// buttonItemCalendarFileGrabber
-			// 
-			this.buttonItemCalendarFileGrabber.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemCalendarFileGrabber.Image = global::FileManager.Properties.Resources.FileGrabber;
-			this.buttonItemCalendarFileGrabber.Name = "buttonItemCalendarFileGrabber";
-			this.buttonItemCalendarFileGrabber.SubItemsExpandWidth = 14;
-			this.buttonItemCalendarFileGrabber.Text = "buttonItem1";
-			// 
 			// ribbonBarCalendarEmailGrabber
 			// 
 			this.ribbonBarCalendarEmailGrabber.AutoOverflowEnabled = true;
@@ -2607,14 +2314,6 @@
 			// 
 			// 
 			this.ribbonBarCalendarEmailGrabber.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemCalendarEmailGrabber
-			// 
-			this.buttonItemCalendarEmailGrabber.FixedSize = new System.Drawing.Size(90, 72);
-			this.buttonItemCalendarEmailGrabber.Image = global::FileManager.Properties.Resources.EmailGrabber;
-			this.buttonItemCalendarEmailGrabber.Name = "buttonItemCalendarEmailGrabber";
-			this.buttonItemCalendarEmailGrabber.SubItemsExpandWidth = 14;
-			this.buttonItemCalendarEmailGrabber.Text = "buttonItem1";
 			// 
 			// ribbonBarCalendarFont
 			// 
@@ -2661,20 +2360,6 @@
             this.buttonItemCalendarFontDown});
 			this.itemContainerCalendarFont.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
-			// buttonItemCalendarFontUp
-			// 
-			this.buttonItemCalendarFontUp.Image = global::FileManager.Properties.Resources.FormatFontLarger;
-			this.buttonItemCalendarFontUp.Name = "buttonItemCalendarFontUp";
-			this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontUp, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Up", "", "Move this Link Up", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemCalendarFontUp.Text = "buttonItem1";
-			// 
-			// buttonItemCalendarFontDown
-			// 
-			this.buttonItemCalendarFontDown.Image = global::FileManager.Properties.Resources.FormatFontSmaller;
-			this.buttonItemCalendarFontDown.Name = "buttonItemCalendarFontDown";
-			this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontDown, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Down", "", "Move this Link Down", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemCalendarFontDown.Text = "buttonItem1";
-			// 
 			// ribbonBarCalendarSettings
 			// 
 			this.ribbonBarCalendarSettings.AutoOverflowEnabled = true;
@@ -2705,13 +2390,6 @@
 			// 
 			// 
 			this.ribbonBarCalendarSettings.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemCalendarSettings
-			// 
-			this.buttonItemCalendarSettings.Image = global::FileManager.Properties.Resources.Colors;
-			this.buttonItemCalendarSettings.Name = "buttonItemCalendarSettings";
-			this.buttonItemCalendarSettings.SubItemsExpandWidth = 14;
-			this.buttonItemCalendarSettings.Text = "buttonItem1";
 			// 
 			// ribbonBarCalendarLocation
 			// 
@@ -2871,12 +2549,6 @@
 			this.ribbonTabItemHome.Panel = this.ribbonPanelHome;
 			this.ribbonTabItemHome.Text = "Home";
 			// 
-			// ribbonTabItemTags
-			// 
-			this.ribbonTabItemTags.Name = "ribbonTabItemTags";
-			this.ribbonTabItemTags.Panel = this.ribbonPanelTags;
-			this.ribbonTabItemTags.Text = "Tags";
-			// 
 			// ribbonTabItemSettings
 			// 
 			this.ribbonTabItemSettings.Name = "ribbonTabItemSettings";
@@ -2912,6 +2584,12 @@
 			this.ribbonTabItemIPadUsers.Name = "ribbonTabItemIPadUsers";
 			this.ribbonTabItemIPadUsers.Panel = this.ribbonPanelIPadUsers;
 			this.ribbonTabItemIPadUsers.Text = "Users";
+			// 
+			// ribbonTabItemTags
+			// 
+			this.ribbonTabItemTags.Name = "ribbonTabItemTags";
+			this.ribbonTabItemTags.Panel = this.ribbonPanelTags;
+			this.ribbonTabItemTags.Text = "Tags";
 			// 
 			// ribbonTabItemHelp
 			// 
@@ -2950,6 +2628,369 @@
 			this.pnContainer.Name = "pnContainer";
 			this.pnContainer.Size = new System.Drawing.Size(1008, 508);
 			this.pnContainer.TabIndex = 31;
+			// 
+			// buttonItemSettingsAutoSync
+			// 
+			this.buttonItemSettingsAutoSync.Image = global::FileManager.Properties.Resources.AutoSync;
+			this.buttonItemSettingsAutoSync.Name = "buttonItemSettingsAutoSync";
+			this.buttonItemSettingsAutoSync.SubItemsExpandWidth = 14;
+			this.buttonItemSettingsAutoSync.Text = "Auto-Sync";
+			// 
+			// buttonItemSettingsMultitab
+			// 
+			this.buttonItemSettingsMultitab.AutoCheckOnClick = true;
+			this.buttonItemSettingsMultitab.Image = global::FileManager.Properties.Resources.MultiTabs;
+			this.buttonItemSettingsMultitab.Name = "buttonItemSettingsMultitab";
+			this.buttonItemSettingsMultitab.SubItemsExpandWidth = 14;
+			this.buttonItemSettingsMultitab.Text = "Multi-tab\r\n   View";
+			// 
+			// buttonItemSettingsEmailList
+			// 
+			this.buttonItemSettingsEmailList.Image = global::FileManager.Properties.Resources.EmailList;
+			this.buttonItemSettingsEmailList.Name = "buttonItemSettingsEmailList";
+			this.buttonItemSettingsEmailList.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsEmailList, new DevComponents.DotNetBar.SuperTooltipInfo("Email List", "", "Set up your sales library to email expired file notifications to other managers", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsEmailList.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsDeadLinks
+			// 
+			this.buttonItemSettingsDeadLinks.Image = global::FileManager.Properties.Resources.DeadLinks;
+			this.buttonItemSettingsDeadLinks.Name = "buttonItemSettingsDeadLinks";
+			this.buttonItemSettingsDeadLinks.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsDeadLinks, new DevComponents.DotNetBar.SuperTooltipInfo("Dead Links", "", "Configure how your sales library works with disabled or dead file links", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsDeadLinks.Text = "buttonItemSettingsDeadLinks";
+			// 
+			// buttonItemSettingsAutoWidgets
+			// 
+			this.buttonItemSettingsAutoWidgets.FixedSize = new System.Drawing.Size(92, 72);
+			this.buttonItemSettingsAutoWidgets.Image = global::FileManager.Properties.Resources.AutoWidgets;
+			this.buttonItemSettingsAutoWidgets.Name = "buttonItemSettingsAutoWidgets";
+			this.buttonItemSettingsAutoWidgets.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsAutoWidgets, new DevComponents.DotNetBar.SuperTooltipInfo("Auto Widgets", "", "Enable or edit universal widgets for specific file types in your library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsAutoWidgets.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsColumns
+			// 
+			this.buttonItemSettingsColumns.Image = global::FileManager.Properties.Resources.Columns;
+			this.buttonItemSettingsColumns.Name = "buttonItemSettingsColumns";
+			this.buttonItemSettingsColumns.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsColumns, new DevComponents.DotNetBar.SuperTooltipInfo("Window Columns", "", "Create and customize windows and titles for your sales library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsColumns.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsPages
+			// 
+			this.buttonItemSettingsPages.Image = global::FileManager.Properties.Resources.Pages;
+			this.buttonItemSettingsPages.Name = "buttonItemSettingsPages";
+			this.buttonItemSettingsPages.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsPages, new DevComponents.DotNetBar.SuperTooltipInfo("Pages", "", "Activate the individual pages for this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsPages.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsSync
+			// 
+			this.buttonItemSettingsSync.Image = global::FileManager.Properties.Resources.SyncSettings;
+			this.buttonItemSettingsSync.Name = "buttonItemSettingsSync";
+			this.buttonItemSettingsSync.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsSync, new DevComponents.DotNetBar.SuperTooltipInfo("Sync Settings", "", "Configure your Sync Settings for this Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsSync.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsBranding
+			// 
+			this.buttonItemSettingsBranding.Image = global::FileManager.Properties.Resources.Branding;
+			this.buttonItemSettingsBranding.Name = "buttonItemSettingsBranding";
+			this.buttonItemSettingsBranding.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsBranding, new DevComponents.DotNetBar.SuperTooltipInfo("Library Branding", "", "Give your Sales Library a unique name or title", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsBranding.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsExtraRoots
+			// 
+			this.buttonItemSettingsExtraRoots.Image = global::FileManager.Properties.Resources.ExtraRoots;
+			this.buttonItemSettingsExtraRoots.Name = "buttonItemSettingsExtraRoots";
+			this.buttonItemSettingsExtraRoots.SubItemsExpandWidth = 14;
+			this.buttonItemSettingsExtraRoots.Text = "buttonItem1";
+			// 
+			// buttonItemSettingsPaths
+			// 
+			this.buttonItemSettingsPaths.Image = global::FileManager.Properties.Resources.paths;
+			this.buttonItemSettingsPaths.Name = "buttonItemSettingsPaths";
+			this.buttonItemSettingsPaths.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsPaths, new DevComponents.DotNetBar.SuperTooltipInfo("Network Paths", "", "Configure your Network Sync Paths so you can deploy your sales library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsPaths.Text = "buttonItem1";
+			// 
+			// buttonItemHomeExit
+			// 
+			this.buttonItemHomeExit.Image = global::FileManager.Properties.Resources.Exit;
+			this.buttonItemHomeExit.Name = "buttonItemHomeExit";
+			this.buttonItemHomeExit.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeExit, new DevComponents.DotNetBar.SuperTooltipInfo("Exit", "", "Close your Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeExit.Text = "buttonItem1";
+			this.buttonItemHomeExit.Click += new System.EventHandler(this.btExit_Click);
+			// 
+			// buttonItemHomeSync
+			// 
+			this.buttonItemHomeSync.Image = global::FileManager.Properties.Resources.Refresh;
+			this.buttonItemHomeSync.Name = "buttonItemHomeSync";
+			this.buttonItemHomeSync.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSync, new DevComponents.DotNetBar.SuperTooltipInfo("Sync Library", "", "Deploy all new changes in this library to your sales team", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeSync.Text = "buttonItem1";
+			// 
+			// buttonItemHomeSave
+			// 
+			this.buttonItemHomeSave.Image = global::FileManager.Properties.Resources.Save;
+			this.buttonItemHomeSave.Name = "buttonItemHomeSave";
+			this.buttonItemHomeSave.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeSave, new DevComponents.DotNetBar.SuperTooltipInfo("Save Library", "", "Save all Changes to this Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeSave.Text = "buttonItem1";
+			// 
+			// buttonItemHomeDelete
+			// 
+			this.buttonItemHomeDelete.Enabled = false;
+			this.buttonItemHomeDelete.Image = global::FileManager.Properties.Resources.Delete;
+			this.buttonItemHomeDelete.Name = "buttonItemHomeDelete";
+			this.buttonItemHomeDelete.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeDelete, new DevComponents.DotNetBar.SuperTooltipInfo("Delete Line", "", "Remove Link or Line Break from the Library", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeDelete.Text = "buttonItem1";
+			// 
+			// buttonItemHomeOpen
+			// 
+			this.buttonItemHomeOpen.Enabled = false;
+			this.buttonItemHomeOpen.Image = global::FileManager.Properties.Resources.OpenFile;
+			this.buttonItemHomeOpen.Name = "buttonItemHomeOpen";
+			this.buttonItemHomeOpen.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeOpen, new DevComponents.DotNetBar.SuperTooltipInfo("Open Link", "", "Open the selected File", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeOpen.Text = "buttonItem1";
+			// 
+			// buttonItemHomeProperties
+			// 
+			this.buttonItemHomeProperties.Enabled = false;
+			this.buttonItemHomeProperties.Image = global::FileManager.Properties.Resources.LinkProperties;
+			this.buttonItemHomeProperties.Name = "buttonItemHomeProperties";
+			this.buttonItemHomeProperties.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeProperties, new DevComponents.DotNetBar.SuperTooltipInfo("Link Properties", "", "Add Notes, Expiration Dates\r\nAnd Search Criteria", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeProperties.Text = "buttonItem1";
+			// 
+			// buttonItemHomeFontUp
+			// 
+			this.buttonItemHomeFontUp.Image = global::FileManager.Properties.Resources.FormatFontLarger;
+			this.buttonItemHomeFontUp.Name = "buttonItemHomeFontUp";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeFontUp, new DevComponents.DotNetBar.SuperTooltipInfo("Larger Text", "", "Increase the Font Size", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeFontUp.Text = "buttonItem1";
+			// 
+			// buttonItemHomeFontDown
+			// 
+			this.buttonItemHomeFontDown.Image = global::FileManager.Properties.Resources.FormatFontSmaller;
+			this.buttonItemHomeFontDown.Name = "buttonItemHomeFontDown";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeFontDown, new DevComponents.DotNetBar.SuperTooltipInfo("Smaller Text", "", "Decrease the Font Size", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeFontDown.Text = "buttonItem1";
+			// 
+			// buttonItemHomeNudgeUp
+			// 
+			this.buttonItemHomeNudgeUp.Enabled = false;
+			this.buttonItemHomeNudgeUp.Image = global::FileManager.Properties.Resources.UpLink;
+			this.buttonItemHomeNudgeUp.Name = "buttonItemHomeNudgeUp";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeNudgeUp, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Up", "", "Move this Link Up", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeNudgeUp.Text = "buttonItem1";
+			// 
+			// buttonItemHomeNudgeDown
+			// 
+			this.buttonItemHomeNudgeDown.Enabled = false;
+			this.buttonItemHomeNudgeDown.Image = global::FileManager.Properties.Resources.DownLink;
+			this.buttonItemHomeNudgeDown.Name = "buttonItemHomeNudgeDown";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeNudgeDown, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Down", "", "Move this Link Down", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeNudgeDown.Text = "buttonItem1";
+			// 
+			// buttonItemHomeAddUrl
+			// 
+			this.buttonItemHomeAddUrl.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemHomeAddUrl.Enabled = false;
+			this.buttonItemHomeAddUrl.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemHomeAddUrl.Image = global::FileManager.Properties.Resources.Url;
+			this.buttonItemHomeAddUrl.Name = "buttonItemHomeAddUrl";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddUrl, new DevComponents.DotNetBar.SuperTooltipInfo("Add Web Link", "", "Add a Link to a website", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
+			this.buttonItemHomeAddUrl.Text = "Website";
+			// 
+			// buttonItemHomeAddNetworkShare
+			// 
+			this.buttonItemHomeAddNetworkShare.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemHomeAddNetworkShare.Enabled = false;
+			this.buttonItemHomeAddNetworkShare.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemHomeAddNetworkShare.Image = global::FileManager.Properties.Resources.NetworkShare;
+			this.buttonItemHomeAddNetworkShare.Name = "buttonItemHomeAddNetworkShare";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddNetworkShare, new DevComponents.DotNetBar.SuperTooltipInfo("Add Network Link", "", "Add a Link to folder on your network", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
+			this.buttonItemHomeAddNetworkShare.Text = "Network";
+			// 
+			// buttonItemHomeAddLineBreak
+			// 
+			this.buttonItemHomeAddLineBreak.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+			this.buttonItemHomeAddLineBreak.Enabled = false;
+			this.buttonItemHomeAddLineBreak.ForeColor = System.Drawing.Color.Black;
+			this.buttonItemHomeAddLineBreak.Image = global::FileManager.Properties.Resources.LineBreak;
+			this.buttonItemHomeAddLineBreak.Name = "buttonItemHomeAddLineBreak";
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeAddLineBreak, new DevComponents.DotNetBar.SuperTooltipInfo("Add Line Break", "", "Add an empty Line ABOVE the selected Link", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemHomeAddLineBreak.Text = "LineBreak";
+			// 
+			// buttonItemHomeFileTreeView
+			// 
+			this.buttonItemHomeFileTreeView.AutoCheckOnClick = true;
+			this.buttonItemHomeFileTreeView.FixedSize = new System.Drawing.Size(70, 72);
+			this.buttonItemHomeFileTreeView.Image = global::FileManager.Properties.Resources.text_tree;
+			this.buttonItemHomeFileTreeView.Name = "buttonItemHomeFileTreeView";
+			this.buttonItemHomeFileTreeView.SubItemsExpandWidth = 14;
+			this.superTooltip.SetSuperTooltip(this.buttonItemHomeFileTreeView, new DevComponents.DotNetBar.SuperTooltipInfo("DRAG && DROP", "", "Move Files from your Network Directory to your Sales Library", null, null, DevComponents.DotNetBar.eTooltipColor.Default, true, false, new System.Drawing.Size(0, 0)));
+			this.buttonItemHomeFileTreeView.Text = "buttonItem1";
+			// 
+			// buttonItemTagsSave
+			// 
+			this.buttonItemTagsSave.Image = global::FileManager.Properties.Resources.TagsSave;
+			this.buttonItemTagsSave.Name = "buttonItemTagsSave";
+			this.buttonItemTagsSave.SubItemsExpandWidth = 14;
+			this.buttonItemTagsSave.Text = "buttonItem1";
+			// 
+			// buttonItemTagsClear
+			// 
+			this.buttonItemTagsClear.Image = global::FileManager.Properties.Resources.TagsClear;
+			this.buttonItemTagsClear.Name = "buttonItemTagsClear";
+			this.buttonItemTagsClear.SubItemsExpandWidth = 14;
+			this.buttonItemTagsClear.Text = "buttonItem1";
+			// 
+			// buttonItemTagsSecurity
+			// 
+			this.buttonItemTagsSecurity.Image = global::FileManager.Properties.Resources.TagsSecurity;
+			this.buttonItemTagsSecurity.Name = "buttonItemTagsSecurity";
+			this.buttonItemTagsSecurity.SubItemsExpandWidth = 14;
+			this.buttonItemTagsSecurity.Text = "buttonItem1";
+			// 
+			// buttonItemTagsAttachments
+			// 
+			this.buttonItemTagsAttachments.Image = global::FileManager.Properties.Resources.TagsAttachments;
+			this.buttonItemTagsAttachments.Name = "buttonItemTagsAttachments";
+			this.buttonItemTagsAttachments.SubItemsExpandWidth = 14;
+			this.buttonItemTagsAttachments.Text = "buttonItem1";
+			// 
+			// buttonItemTagsFileCards
+			// 
+			this.buttonItemTagsFileCards.Image = global::FileManager.Properties.Resources.TagsFileCards;
+			this.buttonItemTagsFileCards.Name = "buttonItemTagsFileCards";
+			this.buttonItemTagsFileCards.SubItemsExpandWidth = 14;
+			this.buttonItemTagsFileCards.Text = "buttonItem1";
+			// 
+			// buttonItemTagsKeywords
+			// 
+			this.buttonItemTagsKeywords.Image = global::FileManager.Properties.Resources.TagsKeywords;
+			this.buttonItemTagsKeywords.Name = "buttonItemTagsKeywords";
+			this.buttonItemTagsKeywords.SubItemsExpandWidth = 14;
+			this.buttonItemTagsKeywords.Text = "buttonItem1";
+			// 
+			// buttonItemTagsCategories
+			// 
+			this.buttonItemTagsCategories.Image = global::FileManager.Properties.Resources.TagsCategories;
+			this.buttonItemTagsCategories.Name = "buttonItemTagsCategories";
+			this.buttonItemTagsCategories.SubItemsExpandWidth = 14;
+			this.buttonItemTagsCategories.Text = "buttonItem1";
+			// 
+			// buttonItemIPadUsersRefresh
+			// 
+			this.buttonItemIPadUsersRefresh.Image = global::FileManager.Properties.Resources.RefreshUsers;
+			this.buttonItemIPadUsersRefresh.Name = "buttonItemIPadUsersRefresh";
+			this.buttonItemIPadUsersRefresh.SubItemsExpandWidth = 14;
+			this.buttonItemIPadUsersRefresh.Text = "buttonItem1";
+			// 
+			// buttonItemIPadUsersDelete
+			// 
+			this.buttonItemIPadUsersDelete.Image = global::FileManager.Properties.Resources.DeleteUser;
+			this.buttonItemIPadUsersDelete.Name = "buttonItemIPadUsersDelete";
+			this.buttonItemIPadUsersDelete.SubItemsExpandWidth = 14;
+			this.buttonItemIPadUsersDelete.Text = "buttonItem1";
+			// 
+			// buttonItemIPadUsersEdit
+			// 
+			this.buttonItemIPadUsersEdit.Image = global::FileManager.Properties.Resources.ShowInfo;
+			this.buttonItemIPadUsersEdit.Name = "buttonItemIPadUsersEdit";
+			this.buttonItemIPadUsersEdit.SubItemsExpandWidth = 14;
+			this.buttonItemIPadUsersEdit.Text = "buttonItem1";
+			// 
+			// buttonItemIPadUsersAdd
+			// 
+			this.buttonItemIPadUsersAdd.Image = global::FileManager.Properties.Resources.AddUser;
+			this.buttonItemIPadUsersAdd.Name = "buttonItemIPadUsersAdd";
+			this.buttonItemIPadUsersAdd.SubItemsExpandWidth = 14;
+			this.buttonItemIPadUsersAdd.Text = "buttonItem1";
+			// 
+			// buttonItemIPadSyncFiles
+			// 
+			this.buttonItemIPadSyncFiles.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemIPadSyncFiles.Image = global::FileManager.Properties.Resources.SyncIPad;
+			this.buttonItemIPadSyncFiles.Name = "buttonItemIPadSyncFiles";
+			this.buttonItemIPadSyncFiles.SubItemsExpandWidth = 14;
+			this.buttonItemIPadSyncFiles.Text = "buttonItem1";
+			// 
+			// buttonItemIPadVideoConvert
+			// 
+			this.buttonItemIPadVideoConvert.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemIPadVideoConvert.Image = global::FileManager.Properties.Resources.ConvertVideo;
+			this.buttonItemIPadVideoConvert.Name = "buttonItemIPadVideoConvert";
+			this.buttonItemIPadVideoConvert.SubItemsExpandWidth = 14;
+			this.buttonItemIPadVideoConvert.Text = "buttonItem1";
+			// 
+			// buttonItemClipartWebArt
+			// 
+			this.buttonItemClipartWebArt.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemClipartWebArt.Image = global::FileManager.Properties.Resources.WebArt;
+			this.buttonItemClipartWebArt.Name = "buttonItemClipartWebArt";
+			this.buttonItemClipartWebArt.SubItemsExpandWidth = 14;
+			this.buttonItemClipartWebArt.Text = "buttonItem1";
+			// 
+			// buttonItemClipartClientLogos
+			// 
+			this.buttonItemClipartClientLogos.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemClipartClientLogos.Image = global::FileManager.Properties.Resources.ClientLogos;
+			this.buttonItemClipartClientLogos.Name = "buttonItemClipartClientLogos";
+			this.buttonItemClipartClientLogos.SubItemsExpandWidth = 14;
+			this.buttonItemClipartClientLogos.Text = "buttonItem1";
+			// 
+			// buttonItemClipartSalesGallery
+			// 
+			this.buttonItemClipartSalesGallery.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemClipartSalesGallery.Image = global::FileManager.Properties.Resources.SalesGallery;
+			this.buttonItemClipartSalesGallery.Name = "buttonItemClipartSalesGallery";
+			this.buttonItemClipartSalesGallery.SubItemsExpandWidth = 14;
+			this.buttonItemClipartSalesGallery.Text = "buttonItem1";
+			// 
+			// buttonItemCalendarFileGrabber
+			// 
+			this.buttonItemCalendarFileGrabber.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemCalendarFileGrabber.Image = global::FileManager.Properties.Resources.FileGrabber;
+			this.buttonItemCalendarFileGrabber.Name = "buttonItemCalendarFileGrabber";
+			this.buttonItemCalendarFileGrabber.SubItemsExpandWidth = 14;
+			this.buttonItemCalendarFileGrabber.Text = "buttonItem1";
+			// 
+			// buttonItemCalendarEmailGrabber
+			// 
+			this.buttonItemCalendarEmailGrabber.FixedSize = new System.Drawing.Size(90, 72);
+			this.buttonItemCalendarEmailGrabber.Image = global::FileManager.Properties.Resources.EmailGrabber;
+			this.buttonItemCalendarEmailGrabber.Name = "buttonItemCalendarEmailGrabber";
+			this.buttonItemCalendarEmailGrabber.SubItemsExpandWidth = 14;
+			this.buttonItemCalendarEmailGrabber.Text = "buttonItem1";
+			// 
+			// buttonItemCalendarFontUp
+			// 
+			this.buttonItemCalendarFontUp.Image = global::FileManager.Properties.Resources.FormatFontLarger;
+			this.buttonItemCalendarFontUp.Name = "buttonItemCalendarFontUp";
+			this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontUp, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Up", "", "Move this Link Up", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemCalendarFontUp.Text = "buttonItem1";
+			// 
+			// buttonItemCalendarFontDown
+			// 
+			this.buttonItemCalendarFontDown.Image = global::FileManager.Properties.Resources.FormatFontSmaller;
+			this.buttonItemCalendarFontDown.Name = "buttonItemCalendarFontDown";
+			this.superTooltip.SetSuperTooltip(this.buttonItemCalendarFontDown, new DevComponents.DotNetBar.SuperTooltipInfo("Nudge Down", "", "Move this Link Down", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemCalendarFontDown.Text = "buttonItem1";
+			// 
+			// buttonItemCalendarSettings
+			// 
+			this.buttonItemCalendarSettings.Image = global::FileManager.Properties.Resources.Colors;
+			this.buttonItemCalendarSettings.Name = "buttonItemCalendarSettings";
+			this.buttonItemCalendarSettings.SubItemsExpandWidth = 14;
+			this.buttonItemCalendarSettings.Text = "buttonItem1";
 			// 
 			// FormMain
 			// 
@@ -3165,5 +3206,7 @@
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsClear;
 		public DevComponents.DotNetBar.ButtonItem buttonItemTagsSave;
 		public System.Windows.Forms.Panel pnContainer;
+		private DevComponents.DotNetBar.RibbonBar ribbonBarTagsSecurity;
+		public DevComponents.DotNetBar.ButtonItem buttonItemTagsSecurity;
     }
 }

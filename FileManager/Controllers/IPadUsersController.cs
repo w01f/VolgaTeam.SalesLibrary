@@ -36,8 +36,8 @@ namespace FileManager.Controllers
 
 		private void ApplyPermissionsManager()
 		{
-			LibraryDecorator activeDecorator = MainController.Instance.ActiveDecorator;
-			if (activeDecorator == null || !activeDecorator.Library.IsConfigured) return;
+			var activeDecorator = MainController.Instance.ActiveDecorator;
+			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !activeDecorator.Library.IPadManager.Enabled || !ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab || string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Website) || string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Login) || string.IsNullOrEmpty(activeDecorator.Library.IPadManager.Password)) return;
 			activeDecorator.IPadPermissionsManager.RefreshData(false);
 			if (!_tabPage.Controls.Contains(activeDecorator.IPadPermissionsManager))
 				_tabPage.Controls.Add(activeDecorator.IPadPermissionsManager);

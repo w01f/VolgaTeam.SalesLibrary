@@ -21,6 +21,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private string _note = string.Empty;
 		private int _order;
 		private Image _widget;
+		private bool _isRestricted;
+		private string _assignedUsers;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -70,37 +72,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get { return Parent.Parent.Parent.Folder.FullName; }
 		}
-		public bool HasTags
-		{
-			get { return HasCategories || HasKeywords || HasFileCard || HasFileAttachments || HasWebAttachments; }
-		}
 
-		public bool HasCategories
-		{
-			get { return !string.IsNullOrEmpty(SearchTags.AllTags); }
-		}
-
-		public bool HasKeywords
-		{
-			get { return CustomKeywords.Tags.Count > 0; }
-		}
-
-		public bool HasFileCard
-		{
-			get { return FileCard.Enable; }
-		}
-
-		public bool HasFileAttachments
-		{
-			get { return AttachmentProperties.Enable && AttachmentProperties.FilesAttachments.Count > 0; }
-		}
-
-		public bool HasWebAttachments
-		{
-			get { return AttachmentProperties.Enable && AttachmentProperties.WebAttachments.Count > 0; }
-		}
-
-		#region ILibraryLink Members
+		#region ILibraryFile Members
 		public LibraryFolder Parent { get; set; }
 		public Guid RootId { get; set; }
 		public Guid Identifier { get; set; }
@@ -313,6 +286,36 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool HasTags
+		{
+			get { return HasCategories || HasKeywords || HasFileCard || HasFileAttachments || HasWebAttachments; }
+		}
+
+		public bool HasCategories
+		{
+			get { return !string.IsNullOrEmpty(SearchTags.AllTags); }
+		}
+
+		public bool HasKeywords
+		{
+			get { return CustomKeywords.Tags.Count > 0; }
+		}
+
+		public bool HasFileCard
+		{
+			get { return FileCard.Enable; }
+		}
+
+		public bool HasFileAttachments
+		{
+			get { return AttachmentProperties.Enable && AttachmentProperties.FilesAttachments.Count > 0; }
+		}
+
+		public bool HasWebAttachments
+		{
+			get { return AttachmentProperties.Enable && AttachmentProperties.WebAttachments.Count > 0; }
+		}
+
 		public string Format
 		{
 			get
@@ -370,6 +373,28 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool IsRestricted
+		{
+			get { return _isRestricted; }
+			set
+			{
+				if (_isRestricted != value)
+					LastChanged = DateTime.Now;
+				_isRestricted = value;
+			}
+		}
+
+		public string AssignedUsers
+		{
+			get { return _assignedUsers; }
+			set
+			{
+				if (_assignedUsers != value)
+					LastChanged = DateTime.Now;
+				_assignedUsers = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -384,6 +409,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsRestricted = IsRestricted;
+			file.AssignedUsers = AssignedUsers;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -398,14 +425,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public virtual string Serialize()
 		{
-			TypeConverter converter = TypeDescriptor.GetConverter(typeof(Bitmap));
+			var converter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			var result = new StringBuilder();
 			result.AppendLine(@"<Identifier>" + Identifier.ToString() + @"</Identifier>");
 			result.AppendLine(@"<DisplayName>" + _name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</DisplayName>");
 			result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
 			result.AppendLine(@"<IsBold>" + _isBold + @"</IsBold>");
 			result.AppendLine(@"<IsDead>" + _isDead + @"</IsDead>");
-			result.AppendLine(@"<RootId>" + RootId.ToString() + @"</RootId>");
+			result.AppendLine(@"<RootId>" + RootId + @"</RootId>");
 			result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
 			result.AppendLine(@"<RelativePath>" + RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
 			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
@@ -413,7 +440,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(@"<AttachmentProperties>" + AttachmentProperties.Serialize() + @"</AttachmentProperties>");
-			result.AppendLine(@"<AddDate>" + AddDate.ToString() + @"</AddDate>");
+			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
+			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
+			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.Append(SearchTags.Serialize());
 			result.Append(CustomKeywords.Serialize());
@@ -511,6 +540,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
+						break;
+					case "IsRestricted":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isRestricted = tempBool;
+						break;
+					case "AssignedUsers":
+						_assignedUsers = childNode.InnerText;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))

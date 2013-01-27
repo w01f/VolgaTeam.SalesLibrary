@@ -63,7 +63,7 @@ namespace FileManager.Controllers
 		private void ApplyIPadManager()
 		{
 			LibraryDecorator activeDecorator = MainController.Instance.ActiveDecorator;
-			if (activeDecorator == null || !activeDecorator.Library.IsConfigured) return;
+			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !ConfigurationClasses.SettingsManager.Instance.EnableIPadSettingsTab) return;
 
 			activeDecorator.IPadContentManager.UpdateVideoFiles();
 
@@ -106,8 +106,8 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator != null && !_initialization)
 			{
 				MainController.Instance.ActiveDecorator.Library.IPadManager.Enabled = FormMain.Instance.buttonItemIPadSyncEnabled.Checked;
-				MainController.Instance.ActiveDecorator.IPadContentManager.UpdateControlsState();
 				MainController.Instance.ActiveDecorator.Library.Save();
+				ApplyIPadManager();
 			}
 		}
 

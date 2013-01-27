@@ -78,8 +78,12 @@ namespace FileManager.ConfigurationClasses
 			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
 			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
 			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
+			HiddenObjects.Add(Constants.AttachmentsRootFolderName);
 			HiddenObjects.Add("thumbs.db");
 			HiddenObjects.Add("SalesDepotCache.xml");
+			HiddenObjects.Add("SalesDepotCacheLight.xml");
+			HiddenObjects.Add("SalesDepotCache.json");
+			HiddenObjects.Add("SalesDepotReferences.json");
 		}
 
 		public string ApplicationRootsPath { get; private set; }
@@ -115,6 +119,7 @@ namespace FileManager.ConfigurationClasses
 		public bool TreeViewVisible { get; set; }
 		public bool TreeViewDocked { get; set; }
 		public bool MultitabView { get; set; }
+		public string DefaultLinkUsers { get; set; }
 		#endregion
 
 		#region Ribbon Settings
@@ -128,6 +133,7 @@ namespace FileManager.ConfigurationClasses
 		public bool ShowTagsKeywords { get; set; }
 		public bool ShowTagsFileCards { get; set; }
 		public bool ShowTagsAttachments { get; set; }
+		public bool ShowTagsSecurity { get; set; }
 		public bool ShowTagsCleaner { get; set; }
 		#endregion
 
@@ -185,6 +191,9 @@ namespace FileManager.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						MultitabView = tempBool;
+				node = document.SelectSingleNode(@"/LocalSettings/DefaultLinkUsers");
+				if (node != null)
+					DefaultLinkUsers = node.InnerText;
 				#endregion
 			}
 			LoadClipartPath();
@@ -209,6 +218,7 @@ namespace FileManager.ConfigurationClasses
 			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible.ToString() + @"</TreeViewVisible>");
 			xml.AppendLine(@"<TreeViewDocked>" + TreeViewDocked.ToString() + @"</TreeViewDocked>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
+			xml.AppendLine(@"<DefaultLinkUsers>" + (DefaultLinkUsers ?? string.Empty).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</DefaultLinkUsers>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");

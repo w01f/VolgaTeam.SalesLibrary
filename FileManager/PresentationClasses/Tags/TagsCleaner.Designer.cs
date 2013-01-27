@@ -31,14 +31,15 @@
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
-			this.pbWarning = new System.Windows.Forms.PictureBox();
-			this.laWarning = new System.Windows.Forms.Label();
-			this.laWarningDescription = new System.Windows.Forms.Label();
-			this.buttonXCategories = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXKeywords = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXFileCards = new DevComponents.DotNetBar.ButtonX();
-			this.buttonXFileAttachments = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXWebAttachments = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXFileAttachments = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXFileCards = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXKeywords = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXCategories = new DevComponents.DotNetBar.ButtonX();
+			this.laWarningDescription = new System.Windows.Forms.Label();
+			this.laWarning = new System.Windows.Forms.Label();
+			this.pbWarning = new System.Windows.Forms.PictureBox();
+			this.buttonXSecurity = new DevComponents.DotNetBar.ButtonX();
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbWarning)).BeginInit();
@@ -68,6 +69,7 @@
 			// 
 			// pnData
 			// 
+			this.pnData.Controls.Add(this.buttonXSecurity);
 			this.pnData.Controls.Add(this.buttonXWebAttachments);
 			this.pnData.Controls.Add(this.buttonXFileAttachments);
 			this.pnData.Controls.Add(this.buttonXFileCards);
@@ -82,40 +84,73 @@
 			this.pnData.Size = new System.Drawing.Size(346, 653);
 			this.pnData.TabIndex = 1;
 			// 
-			// pbWarning
+			// buttonXWebAttachments
 			// 
-			this.pbWarning.Image = global::FileManager.Properties.Resources.TagsCleanerWarning;
-			this.pbWarning.Location = new System.Drawing.Point(3, 3);
-			this.pbWarning.Name = "pbWarning";
-			this.pbWarning.Size = new System.Drawing.Size(79, 78);
-			this.pbWarning.TabIndex = 0;
-			this.pbWarning.TabStop = false;
-			// 
-			// laWarning
-			// 
-			this.laWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXWebAttachments.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXWebAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.laWarning.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laWarning.ForeColor = System.Drawing.Color.Red;
-			this.laWarning.Location = new System.Drawing.Point(88, 3);
-			this.laWarning.Name = "laWarning";
-			this.laWarning.Size = new System.Drawing.Size(255, 78);
-			this.laWarning.TabIndex = 1;
-			this.laWarning.Text = "Uhm....\r\nAre You Sure?";
-			this.laWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonXWebAttachments.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXWebAttachments.Image = global::FileManager.Properties.Resources.TagsWebAttachmentsWidget;
+			this.buttonXWebAttachments.Location = new System.Drawing.Point(19, 423);
+			this.buttonXWebAttachments.Name = "buttonXWebAttachments";
+			this.buttonXWebAttachments.Size = new System.Drawing.Size(308, 47);
+			this.buttonXWebAttachments.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXWebAttachments.TabIndex = 12;
+			this.buttonXWebAttachments.Text = "Blow up ALL URL Attachments for this Page!";
+			this.buttonXWebAttachments.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXWebAttachments.TextColor = System.Drawing.Color.Black;
+			this.buttonXWebAttachments.Click += new System.EventHandler(this.buttonXWebAttachments_Click);
 			// 
-			// laWarningDescription
+			// buttonXFileAttachments
 			// 
-			this.laWarningDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXFileAttachments.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXFileAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.laWarningDescription.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laWarningDescription.Location = new System.Drawing.Point(16, 84);
-			this.laWarningDescription.Name = "laWarningDescription";
-			this.laWarningDescription.Size = new System.Drawing.Size(311, 78);
-			this.laWarningDescription.TabIndex = 2;
-			this.laWarningDescription.Text = "You have been granted the power and unique gift to BLOW up all tags on this page." +
-    " You BETTER BE CAREFUL!";
-			this.laWarningDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.buttonXFileAttachments.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXFileAttachments.Image = global::FileManager.Properties.Resources.TagsFileAttachmentsWidget;
+			this.buttonXFileAttachments.Location = new System.Drawing.Point(19, 359);
+			this.buttonXFileAttachments.Name = "buttonXFileAttachments";
+			this.buttonXFileAttachments.Size = new System.Drawing.Size(308, 47);
+			this.buttonXFileAttachments.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXFileAttachments.TabIndex = 11;
+			this.buttonXFileAttachments.Text = "Blow up ALL FILE Attachments for this Page!";
+			this.buttonXFileAttachments.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXFileAttachments.TextColor = System.Drawing.Color.Black;
+			this.buttonXFileAttachments.Click += new System.EventHandler(this.buttonXFileAttachments_Click);
+			// 
+			// buttonXFileCards
+			// 
+			this.buttonXFileCards.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXFileCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXFileCards.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXFileCards.Image = global::FileManager.Properties.Resources.TagsFileCardsWidget;
+			this.buttonXFileCards.Location = new System.Drawing.Point(19, 294);
+			this.buttonXFileCards.Name = "buttonXFileCards";
+			this.buttonXFileCards.Size = new System.Drawing.Size(308, 47);
+			this.buttonXFileCards.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXFileCards.TabIndex = 10;
+			this.buttonXFileCards.Text = "Blow up ALL FileCards for this Page!";
+			this.buttonXFileCards.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXFileCards.TextColor = System.Drawing.Color.Black;
+			this.buttonXFileCards.Click += new System.EventHandler(this.buttonXFileCards_Click);
+			// 
+			// buttonXKeywords
+			// 
+			this.buttonXKeywords.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXKeywords.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXKeywords.Image = global::FileManager.Properties.Resources.TagsKeywordsWidget;
+			this.buttonXKeywords.Location = new System.Drawing.Point(19, 228);
+			this.buttonXKeywords.Name = "buttonXKeywords";
+			this.buttonXKeywords.Size = new System.Drawing.Size(308, 47);
+			this.buttonXKeywords.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXKeywords.TabIndex = 9;
+			this.buttonXKeywords.Text = "Blow up ALL Keyword Tags for this Page!";
+			this.buttonXKeywords.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXKeywords.TextColor = System.Drawing.Color.Black;
+			this.buttonXKeywords.Click += new System.EventHandler(this.buttonXKeywords_Click);
 			// 
 			// buttonXCategories
 			// 
@@ -134,73 +169,57 @@
 			this.buttonXCategories.TextColor = System.Drawing.Color.Black;
 			this.buttonXCategories.Click += new System.EventHandler(this.buttonXCategories_Click);
 			// 
-			// buttonXKeywords
+			// laWarningDescription
 			// 
-			this.buttonXKeywords.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXKeywords.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.laWarningDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXKeywords.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXKeywords.Image = global::FileManager.Properties.Resources.TagsKeywordsWidget;
-			this.buttonXKeywords.Location = new System.Drawing.Point(19, 244);
-			this.buttonXKeywords.Name = "buttonXKeywords";
-			this.buttonXKeywords.Size = new System.Drawing.Size(308, 47);
-			this.buttonXKeywords.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXKeywords.TabIndex = 9;
-			this.buttonXKeywords.Text = "Blow up ALL Keyword Tags for this Page!";
-			this.buttonXKeywords.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXKeywords.TextColor = System.Drawing.Color.Black;
-			this.buttonXKeywords.Click += new System.EventHandler(this.buttonXKeywords_Click);
+			this.laWarningDescription.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWarningDescription.Location = new System.Drawing.Point(16, 84);
+			this.laWarningDescription.Name = "laWarningDescription";
+			this.laWarningDescription.Size = new System.Drawing.Size(311, 78);
+			this.laWarningDescription.TabIndex = 2;
+			this.laWarningDescription.Text = "You have been granted the power and unique gift to BLOW up all tags on this page." +
+    " You BETTER BE CAREFUL!";
+			this.laWarningDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// buttonXFileCards
+			// laWarning
 			// 
-			this.buttonXFileCards.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXFileCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.laWarning.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXFileCards.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXFileCards.Image = global::FileManager.Properties.Resources.TagsFileCardsWidget;
-			this.buttonXFileCards.Location = new System.Drawing.Point(19, 326);
-			this.buttonXFileCards.Name = "buttonXFileCards";
-			this.buttonXFileCards.Size = new System.Drawing.Size(308, 47);
-			this.buttonXFileCards.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXFileCards.TabIndex = 10;
-			this.buttonXFileCards.Text = "Blow up ALL FileCards for this Page!";
-			this.buttonXFileCards.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXFileCards.TextColor = System.Drawing.Color.Black;
-			this.buttonXFileCards.Click += new System.EventHandler(this.buttonXFileCards_Click);
+			this.laWarning.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWarning.ForeColor = System.Drawing.Color.Red;
+			this.laWarning.Location = new System.Drawing.Point(88, 3);
+			this.laWarning.Name = "laWarning";
+			this.laWarning.Size = new System.Drawing.Size(255, 78);
+			this.laWarning.TabIndex = 1;
+			this.laWarning.Text = "Uhm....\r\nAre You Sure?";
+			this.laWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
-			// buttonXFileAttachments
+			// pbWarning
 			// 
-			this.buttonXFileAttachments.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXFileAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.pbWarning.Image = global::FileManager.Properties.Resources.TagsCleanerWarning;
+			this.pbWarning.Location = new System.Drawing.Point(3, 3);
+			this.pbWarning.Name = "pbWarning";
+			this.pbWarning.Size = new System.Drawing.Size(79, 78);
+			this.pbWarning.TabIndex = 0;
+			this.pbWarning.TabStop = false;
+			// 
+			// buttonXSecurity
+			// 
+			this.buttonXSecurity.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSecurity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXFileAttachments.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXFileAttachments.Image = global::FileManager.Properties.Resources.TagsFileAttachmentsWidget;
-			this.buttonXFileAttachments.Location = new System.Drawing.Point(19, 407);
-			this.buttonXFileAttachments.Name = "buttonXFileAttachments";
-			this.buttonXFileAttachments.Size = new System.Drawing.Size(308, 47);
-			this.buttonXFileAttachments.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXFileAttachments.TabIndex = 11;
-			this.buttonXFileAttachments.Text = "Blow up ALL FileCards for this Page!";
-			this.buttonXFileAttachments.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXFileAttachments.TextColor = System.Drawing.Color.Black;
-			this.buttonXFileAttachments.Click += new System.EventHandler(this.buttonXFileAttachments_Click);
-			// 
-			// buttonXWebAttachments
-			// 
-			this.buttonXWebAttachments.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXWebAttachments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXWebAttachments.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXWebAttachments.Image = global::FileManager.Properties.Resources.TagsWebAttachmentsWidget;
-			this.buttonXWebAttachments.Location = new System.Drawing.Point(19, 487);
-			this.buttonXWebAttachments.Name = "buttonXWebAttachments";
-			this.buttonXWebAttachments.Size = new System.Drawing.Size(308, 47);
-			this.buttonXWebAttachments.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXWebAttachments.TabIndex = 12;
-			this.buttonXWebAttachments.Text = "Blow up ALL FileCards for this Page!";
-			this.buttonXWebAttachments.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
-			this.buttonXWebAttachments.TextColor = System.Drawing.Color.Black;
-			this.buttonXWebAttachments.Click += new System.EventHandler(this.buttonXWebAttachments_Click);
+			this.buttonXSecurity.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSecurity.Image = global::FileManager.Properties.Resources.TagsSecurityWidget;
+			this.buttonXSecurity.Location = new System.Drawing.Point(19, 488);
+			this.buttonXSecurity.Name = "buttonXSecurity";
+			this.buttonXSecurity.Size = new System.Drawing.Size(308, 47);
+			this.buttonXSecurity.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSecurity.TabIndex = 13;
+			this.buttonXSecurity.Text = "Blow up ALL Security for this Page!";
+			this.buttonXSecurity.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
+			this.buttonXSecurity.TextColor = System.Drawing.Color.Black;
+			this.buttonXSecurity.Click += new System.EventHandler(this.buttonXSecurity_Click);
 			// 
 			// TagsCleaner
 			// 
@@ -231,5 +250,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXFileCards;
 		private DevComponents.DotNetBar.ButtonX buttonXKeywords;
 		private DevComponents.DotNetBar.ButtonX buttonXCategories;
+		private DevComponents.DotNetBar.ButtonX buttonXSecurity;
 	}
 }

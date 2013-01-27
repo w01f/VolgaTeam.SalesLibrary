@@ -768,12 +768,29 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				_formLinkProperties.LineBreakProperties = file.LineBreakProperties;
 			}
+
+			_formLinkProperties.rbSecurityAllowed.Checked = !file.IsRestricted;
+			_formLinkProperties.rbSecurityDenied.Checked = file.IsRestricted && string.IsNullOrEmpty(file.AssignedUsers);
+			_formLinkProperties.rbSecurityRestricted.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers);
+			_formLinkProperties.memoEditSecurityUsers.EditValue = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers) ? file.AssignedUsers : (!string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null);
+
 			_formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
 			if (_formLinkProperties.ShowDialog() != DialogResult.OK) return;
 			file.LastChanged = DateTime.Now;
 			file.Widget = _formLinkProperties.EnableWidget ? _formLinkProperties.Widget : null;
 			file.EnableWidget = _formLinkProperties.EnableWidget;
 			file.BannerProperties = _formLinkProperties.BannerProperties;
+
+			file.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityRestricted.Checked;
+			if (_formLinkProperties.rbSecurityRestricted.Checked && _formLinkProperties.memoEditSecurityUsers.EditValue != null && !string.IsNullOrEmpty(_formLinkProperties.memoEditSecurityUsers.EditValue.ToString().Trim()))
+			{
+				file.AssignedUsers = _formLinkProperties.memoEditSecurityUsers.EditValue.ToString().Trim();
+				SettingsManager.Instance.DefaultLinkUsers = file.AssignedUsers;
+				SettingsManager.Instance.Save();
+			}
+			else
+				file.AssignedUsers = null;
+
 			if (file.Type != FileTypes.LineBreak)
 			{
 				file.IsBold = _formLinkProperties.IsBold;
@@ -799,7 +816,7 @@ namespace FileManager.PresentationClasses.WallBin
 			}
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
 
-			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
 			_containsWidgets = widgetColumnVisible;
 
 			SetGridSize();
@@ -942,6 +959,8 @@ namespace FileManager.PresentationClasses.WallBin
 				image = Properties.Resources.TagsFileAttachmentsWidget;
 			else if (WallBinOptions.ShowAttachmentTags && file.HasWebAttachments)
 				image = Properties.Resources.TagsWebAttachmentsWidget;
+			else if (WallBinOptions.ShowSecurityTags && file.IsRestricted)
+				image = Properties.Resources.TagsSecurityWidget;
 			else if (file.Widget != null)
 				image = file.Widget;
 			else
@@ -1202,7 +1221,7 @@ namespace FileManager.PresentationClasses.WallBin
 					DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 					row.Tag = libraryFile;
 				}
-				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
 			}
 			else
 				_containFiles = false;
@@ -1249,10 +1268,11 @@ namespace FileManager.PresentationClasses.WallBin
 			WallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
 			WallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
 			WallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
-			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags);
+			WallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
+			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
 			grFiles.ClearSelection();
-			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)));
+			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
 		}
 
 		private void AddFile(FileLink file, int rowIndex)

@@ -187,6 +187,9 @@
   <data name="Opera" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Opera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ExpiredLinks" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExpiredLinks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Safari" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Safari.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -244,8 +247,8 @@
   <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExpiredLinks" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExpiredLinks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TagsCleanerWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsCleanerWarning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SyncIPad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SyncIPad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -261,6 +264,9 @@
   </data>
   <data name="MediaPlayerSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MediaPlayerSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagsSecurity" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsSecurity.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OpenVideoSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenVideoSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -285,6 +291,9 @@
   </data>
   <data name="InActiveLinksWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InActiveLinksWarning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ColumnsSort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ColumnsSort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MultiTabs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiTabs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,6 +331,9 @@
   <data name="DownLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DownLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TagsSecurityWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsSecurityWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TagsSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -340,7 +352,7 @@
   <data name="Columns" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Columns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="TagsCleanerWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsCleanerWarning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExtraRoots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtraRoots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

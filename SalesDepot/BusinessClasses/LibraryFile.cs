@@ -15,6 +15,8 @@ namespace SalesDepot.BusinessClasses
 {
 	public class LibraryLink : ILibraryLink
 	{
+		private string _assignedUsers;
+		private bool _isRestricted;
 		private bool _linkAvailabel;
 		private bool _linkAvailabilityChecked;
 
@@ -322,6 +324,28 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
+		public bool IsRestricted
+		{
+			get { return _isRestricted; }
+			set
+			{
+				if (_isRestricted != value)
+					LastChanged = DateTime.Now;
+				_isRestricted = value;
+			}
+		}
+
+		public string AssignedUsers
+		{
+			get { return _assignedUsers; }
+			set
+			{
+				if (_assignedUsers != value)
+					LastChanged = DateTime.Now;
+				_assignedUsers = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -336,6 +360,8 @@ namespace SalesDepot.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsRestricted = IsRestricted;
+			file.AssignedUsers = AssignedUsers;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -361,6 +387,8 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
 			result.AppendLine(@"<Order>" + Order + @"</Order>");
 			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
+			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
+			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(SearchTags.Serialize());
 			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
@@ -437,6 +465,13 @@ namespace SalesDepot.BusinessClasses
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
 						break;
+					case "IsRestricted":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isRestricted = tempBool;
+						break;
+					case "AssignedUsers":
+						_assignedUsers = childNode.InnerText;
+						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							LastChanged = tempDate;
@@ -468,7 +503,7 @@ namespace SalesDepot.BusinessClasses
 						BannerProperties.Deserialize(childNode);
 						break;
 
-						#region Compatibility with old versions
+					#region Compatibility with old versions
 					case "EnableBanner":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_oldEnableBanner = tempBool;
@@ -479,7 +514,7 @@ namespace SalesDepot.BusinessClasses
 						else
 							_oldBanner = new Bitmap(new MemoryStream(Convert.FromBase64String(childNode.InnerText)));
 						break;
-						#endregion
+					#endregion
 				}
 			}
 
@@ -509,7 +544,7 @@ namespace SalesDepot.BusinessClasses
 						BannerProperties.Image = LineBreakProperties.Banner;
 				}
 			}
-			catch {}
+			catch { }
 		}
 
 		public void SetProperties()
@@ -569,37 +604,37 @@ namespace SalesDepot.BusinessClasses
 				if (SettingsManager.Instance.UseRemoteConnection)
 				{
 					var thread = new Thread(delegate()
-						                        {
-							                        switch (Type)
-							                        {
-								                        case FileTypes.BuggyPresentation:
-								                        case FileTypes.Excel:
-								                        case FileTypes.FriendlyPresentation:
-								                        case FileTypes.MediaPlayerVideo:
-								                        case FileTypes.Other:
-								                        case FileTypes.Presentation:
-								                        case FileTypes.PDF:
-								                        case FileTypes.QuickTimeVideo:
-								                        case FileTypes.Word:
-								                        case FileTypes.OvernightsLink:
-									                        _linkLocalPath = Path.Combine(SettingsManager.Instance.LocalLibraryCacheFolder, NameWithExtension);
-									                        try
-									                        {
-										                        File.Copy(OriginalPath, _linkLocalPath, true);
-									                        }
-									                        catch
-									                        {
-										                        _linkLocalPath = string.Empty;
-									                        }
-									                        break;
-								                        case FileTypes.Folder:
-									                        _linkLocalPath = OriginalPath;
-									                        break;
-								                        default:
-									                        _linkLocalPath = string.Empty;
-									                        break;
-							                        }
-						                        });
+												{
+													switch (Type)
+													{
+														case FileTypes.BuggyPresentation:
+														case FileTypes.Excel:
+														case FileTypes.FriendlyPresentation:
+														case FileTypes.MediaPlayerVideo:
+														case FileTypes.Other:
+														case FileTypes.Presentation:
+														case FileTypes.PDF:
+														case FileTypes.QuickTimeVideo:
+														case FileTypes.Word:
+														case FileTypes.OvernightsLink:
+															_linkLocalPath = Path.Combine(SettingsManager.Instance.LocalLibraryCacheFolder, NameWithExtension);
+															try
+															{
+																File.Copy(OriginalPath, _linkLocalPath, true);
+															}
+															catch
+															{
+																_linkLocalPath = string.Empty;
+															}
+															break;
+														case FileTypes.Folder:
+															_linkLocalPath = OriginalPath;
+															break;
+														default:
+															_linkLocalPath = string.Empty;
+															break;
+													}
+												});
 					thread.Start();
 					Application.DoEvents();
 					while (thread.IsAlive)

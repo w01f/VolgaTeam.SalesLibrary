@@ -82,6 +82,10 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxFileCardImportantInfo.Font = new Font(checkBoxFileCardImportantInfo.Font.FontFamily, checkBoxFileCardImportantInfo.Font.Size - 2, checkBoxFileCardImportantInfo.Font.Style);
 				buttonXFileCardImportantInfoAdd.Font = new Font(buttonXFileCardImportantInfoAdd.Font.FontFamily, buttonXFileCardImportantInfoAdd.Font.Size - 2, buttonXFileCardImportantInfoAdd.Font.Style);
 
+				rbSecurityAllowed.Font = new Font(rbSecurityAllowed.Font.FontFamily, rbSecurityAllowed.Font.Size - 2, rbSecurityAllowed.Font.Style);
+				rbSecurityDenied.Font = new Font(rbSecurityDenied.Font.FontFamily, rbSecurityDenied.Font.Size - 2, rbSecurityDenied.Font.Style);
+				rbSecurityRestricted.Font = new Font(rbSecurityRestricted.Font.FontFamily, rbSecurityRestricted.Font.Size - 2, rbSecurityRestricted.Font.Style);
+
 				repositoryItemButtonEditKeyword.Enter += FormMain.Instance.EditorEnter;
 				repositoryItemButtonEditKeyword.MouseUp += FormMain.Instance.EditorMouseUp;
 				repositoryItemButtonEditKeyword.MouseDown += FormMain.Instance.EditorMouseUp;
@@ -122,6 +126,10 @@ namespace FileManager.ToolForms.WallBin
 				repositoryItemMemoEditFileCardImportantInfo.Enter += FormMain.Instance.EditorEnter;
 				repositoryItemMemoEditFileCardImportantInfo.MouseUp += FormMain.Instance.EditorMouseUp;
 				repositoryItemMemoEditFileCardImportantInfo.MouseDown += FormMain.Instance.EditorMouseUp;
+
+				memoEditSecurityUsers.Enter += FormMain.Instance.EditorEnter;
+				memoEditSecurityUsers.MouseUp += FormMain.Instance.EditorMouseUp;
+				memoEditSecurityUsers.MouseDown += FormMain.Instance.EditorMouseUp;
 			}
 
 			if (!IsLineBreak)
@@ -994,6 +1002,13 @@ namespace FileManager.ToolForms.WallBin
 
 		#endregion
 
+		#region Security Processing
+		private void rbSecurityRestricted_CheckedChanged(object sender, EventArgs e)
+		{
+			memoEditSecurityUsers.Enabled = rbSecurityRestricted.Checked;
+		}
+		#endregion
+
 		#region Shared methods
 		private void CloseActiveEditorsonOutSideClick(object sender, EventArgs e)
 		{
@@ -1029,7 +1044,7 @@ namespace FileManager.ToolForms.WallBin
 						return;
 					GridHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
 					if (hi.InRowCell)
-						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Widgets[gridViewBanners.GetDataSourceRowIndex(hi.RowHandle)].FileName);
+						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Banners[gridViewBanners.GetDataSourceRowIndex(hi.RowHandle)].FileName);
 				}
 				finally
 				{

@@ -121,12 +121,11 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 		public void BuildOvernightsCalendar(bool forceBuild = false)
 		{
 			OvernightsCalendar = new OvernightsCalendarControl(this);
-			Library.OvernightsCalendar.LoadYears();
-			if (Library.OvernightsCalendar.Enabled)
-			{
-				OvernightsCalendar.Build(forceBuild);
-				Application.DoEvents();
-			}
+			if (SettingsManager.Instance.EnableOvernightsCalendarTab)
+				Library.OvernightsCalendar.LoadYears();
+			if (!Library.OvernightsCalendar.Enabled || !SettingsManager.Instance.EnableOvernightsCalendarTab) return;
+			OvernightsCalendar.Build(forceBuild);
+			Application.DoEvents();
 		}
 
 		public void Save()

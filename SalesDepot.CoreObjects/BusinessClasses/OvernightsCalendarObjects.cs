@@ -9,8 +9,31 @@ using System.Xml;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-	public partial class OvernightsCalendar
+	public class OvernightsCalendar
 	{
+		public OvernightsCalendar(ILibrary parent)
+		{
+			Parent = parent;
+
+			RootFolder = new DirectoryInfo(Application.StartupPath);
+			Years = new List<CalendarYear>();
+			Files = new List<FileInfo>();
+
+			#region Email Grabber Settings
+			EnableEmailGrabber = false;
+			EmailGrabInterval = 10;
+			InboxSubFolder = "Inbox";
+			#endregion
+
+			#region File Grabber Settings
+			EnableFileGrabber = false;
+			FileGrabInterval = 10;
+			FileGrabSourceFolder = @"c:\Overnights Source";
+			#endregion
+
+			ResetColors();
+		}
+
 		public ILibrary Parent { get; set; }
 		public bool Enabled { get; set; }
 		public DirectoryInfo RootFolder { get; set; }
@@ -43,59 +66,36 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string FileGrabSourceFolder { get; set; }
 		#endregion
 
-		public OvernightsCalendar(ILibrary parent)
-		{
-			this.Parent = parent;
-
-			this.RootFolder = new DirectoryInfo(Path.Combine(this.Parent.Folder.FullName, CoreObjects.BusinessClasses.Constants.OvernightsCalendarRootFolderName));
-			this.Years = new List<CalendarYear>();
-			this.Files = new List<FileInfo>();
-
-			#region Email Grabber Settings
-			this.EnableEmailGrabber = false;
-			this.EmailGrabInterval = 10;
-			this.InboxSubFolder = "Inbox";
-			#endregion
-
-			#region File Grabber Settings
-			this.EnableFileGrabber = false;
-			this.FileGrabInterval = 10;
-			this.FileGrabSourceFolder = @"c:\Overnights Source";
-			#endregion
-
-			ResetColors();
-		}
-
 		public OvernightsCalendar Clone(ILibrary parent)
 		{
-			OvernightsCalendar calendar = new OvernightsCalendar(parent);
-			calendar.Enabled = this.Enabled;
-			calendar.RootFolder = this.RootFolder;
+			var calendar = new OvernightsCalendar(parent);
+			calendar.Enabled = Enabled;
+			calendar.RootFolder = RootFolder;
 
 			#region Color Settings
-			calendar.CalendarBackColor = this.CalendarBackColor;
-			calendar.CalendarBorderColor = this.CalendarBorderColor;
-			calendar.CalendarHeaderBackColor = this.CalendarHeaderBackColor;
-			calendar.CalendarHeaderForeColor = this.CalendarHeaderForeColor;
-			calendar.MonthHeaderBackColor = this.MonthHeaderBackColor;
-			calendar.MonthHeaderForeColor = this.MonthHeaderForeColor;
-			calendar.MonthBodyBackColor = this.MonthBodyBackColor;
-			calendar.MonthBodyForeColor = this.MonthBodyForeColor;
-			calendar.SweepBackColor = this.SweepBackColor;
-			calendar.SweepForeColor = this.SweepForeColor;
-			calendar.DeadLinksForeColor = this.DeadLinksForeColor;
+			calendar.CalendarBackColor = CalendarBackColor;
+			calendar.CalendarBorderColor = CalendarBorderColor;
+			calendar.CalendarHeaderBackColor = CalendarHeaderBackColor;
+			calendar.CalendarHeaderForeColor = CalendarHeaderForeColor;
+			calendar.MonthHeaderBackColor = MonthHeaderBackColor;
+			calendar.MonthHeaderForeColor = MonthHeaderForeColor;
+			calendar.MonthBodyBackColor = MonthBodyBackColor;
+			calendar.MonthBodyForeColor = MonthBodyForeColor;
+			calendar.SweepBackColor = SweepBackColor;
+			calendar.SweepForeColor = SweepForeColor;
+			calendar.DeadLinksForeColor = DeadLinksForeColor;
 			#endregion
 
 			#region Email Grabber Settings
-			calendar.EnableEmailGrabber = this.EnableEmailGrabber;
-			calendar.EmailGrabInterval = this.EmailGrabInterval;
-			calendar.InboxSubFolder = this.InboxSubFolder;
+			calendar.EnableEmailGrabber = EnableEmailGrabber;
+			calendar.EmailGrabInterval = EmailGrabInterval;
+			calendar.InboxSubFolder = InboxSubFolder;
 			#endregion
 
 			#region File Grabber Settings
-			calendar.EnableFileGrabber = this.EnableFileGrabber;
-			calendar.FileGrabInterval = this.FileGrabInterval;
-			calendar.FileGrabSourceFolder = this.FileGrabSourceFolder;
+			calendar.EnableFileGrabber = EnableFileGrabber;
+			calendar.FileGrabInterval = FileGrabInterval;
+			calendar.FileGrabSourceFolder = FileGrabSourceFolder;
 			#endregion
 
 			return calendar;
@@ -103,34 +103,34 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public string Serialize()
 		{
-			StringBuilder result = new StringBuilder();
-			result.AppendLine(@"<Enabled>" + this.Enabled.ToString() + @"</Enabled>");
-			result.AppendLine(@"<RootFolder>" + this.RootFolder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
+			var result = new StringBuilder();
+			result.AppendLine(@"<Enabled>" + Enabled.ToString() + @"</Enabled>");
+			result.AppendLine(@"<RootFolder>" + RootFolder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
 
 			#region Color Settings
-			result.AppendLine(@"<CalendarBackColor>" + this.CalendarBackColor.ToArgb().ToString() + @"</CalendarBackColor>");
-			result.AppendLine(@"<CalendarBorderColor>" + this.CalendarBorderColor.ToArgb().ToString() + @"</CalendarBorderColor>");
-			result.AppendLine(@"<CalendarHeaderBackColor>" + this.CalendarHeaderBackColor.ToArgb().ToString() + @"</CalendarHeaderBackColor>");
-			result.AppendLine(@"<CalendarHeaderForeColor>" + this.CalendarHeaderForeColor.ToArgb().ToString() + @"</CalendarHeaderForeColor>");
-			result.AppendLine(@"<MonthHeaderBackColor>" + this.MonthHeaderBackColor.ToArgb().ToString() + @"</MonthHeaderBackColor>");
-			result.AppendLine(@"<MonthHeaderForeColor>" + this.MonthHeaderForeColor.ToArgb().ToString() + @"</MonthHeaderForeColor>");
-			result.AppendLine(@"<MonthBodyBackColor>" + this.MonthBodyBackColor.ToArgb().ToString() + @"</MonthBodyBackColor>");
-			result.AppendLine(@"<MonthBodyForeColor>" + this.MonthBodyForeColor.ToArgb().ToString() + @"</MonthBodyForeColor>");
-			result.AppendLine(@"<SweepBackColor>" + this.SweepBackColor.ToArgb().ToString() + @"</SweepBackColor>");
-			result.AppendLine(@"<SweepForeColor>" + this.SweepForeColor.ToArgb().ToString() + @"</SweepForeColor>");
-			result.AppendLine(@"<DeadLinksForeColor>" + this.DeadLinksForeColor.ToArgb().ToString() + @"</DeadLinksForeColor>");
+			result.AppendLine(@"<CalendarBackColor>" + CalendarBackColor.ToArgb().ToString() + @"</CalendarBackColor>");
+			result.AppendLine(@"<CalendarBorderColor>" + CalendarBorderColor.ToArgb().ToString() + @"</CalendarBorderColor>");
+			result.AppendLine(@"<CalendarHeaderBackColor>" + CalendarHeaderBackColor.ToArgb().ToString() + @"</CalendarHeaderBackColor>");
+			result.AppendLine(@"<CalendarHeaderForeColor>" + CalendarHeaderForeColor.ToArgb().ToString() + @"</CalendarHeaderForeColor>");
+			result.AppendLine(@"<MonthHeaderBackColor>" + MonthHeaderBackColor.ToArgb().ToString() + @"</MonthHeaderBackColor>");
+			result.AppendLine(@"<MonthHeaderForeColor>" + MonthHeaderForeColor.ToArgb().ToString() + @"</MonthHeaderForeColor>");
+			result.AppendLine(@"<MonthBodyBackColor>" + MonthBodyBackColor.ToArgb().ToString() + @"</MonthBodyBackColor>");
+			result.AppendLine(@"<MonthBodyForeColor>" + MonthBodyForeColor.ToArgb().ToString() + @"</MonthBodyForeColor>");
+			result.AppendLine(@"<SweepBackColor>" + SweepBackColor.ToArgb().ToString() + @"</SweepBackColor>");
+			result.AppendLine(@"<SweepForeColor>" + SweepForeColor.ToArgb().ToString() + @"</SweepForeColor>");
+			result.AppendLine(@"<DeadLinksForeColor>" + DeadLinksForeColor.ToArgb().ToString() + @"</DeadLinksForeColor>");
 			#endregion
 
 			#region Email Grabber Settings
-			result.AppendLine(@"<EnableEmailGrabber>" + this.EnableEmailGrabber.ToString() + @"</EnableEmailGrabber>");
-			result.AppendLine(@"<EmailGrabInterval>" + this.EmailGrabInterval.ToString() + @"</EmailGrabInterval>");
-			result.AppendLine(@"<InboxSubFolder>" + this.InboxSubFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</InboxSubFolder>");
+			result.AppendLine(@"<EnableEmailGrabber>" + EnableEmailGrabber.ToString() + @"</EnableEmailGrabber>");
+			result.AppendLine(@"<EmailGrabInterval>" + EmailGrabInterval.ToString() + @"</EmailGrabInterval>");
+			result.AppendLine(@"<InboxSubFolder>" + InboxSubFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</InboxSubFolder>");
 			#endregion
 
 			#region File Grabber Settings
-			result.AppendLine(@"<EnableFileGrabber>" + this.EnableFileGrabber.ToString() + @"</EnableFileGrabber>");
-			result.AppendLine(@"<FileGrabInterval>" + this.FileGrabInterval.ToString() + @"</FileGrabInterval>");
-			result.AppendLine(@"<FileGrabSourceFolder>" + this.FileGrabSourceFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FileGrabSourceFolder>");
+			result.AppendLine(@"<EnableFileGrabber>" + EnableFileGrabber.ToString() + @"</EnableFileGrabber>");
+			result.AppendLine(@"<FileGrabInterval>" + FileGrabInterval.ToString() + @"</FileGrabInterval>");
+			result.AppendLine(@"<FileGrabSourceFolder>" + FileGrabSourceFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FileGrabSourceFolder>");
 			#endregion
 
 			return result.ToString();
@@ -146,110 +146,111 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					case "Enabled":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.Enabled = tempBool;
+							Enabled = tempBool;
 						break;
 					case "RootFolder":
 						if (Directory.Exists(childNode.InnerText))
-							this.RootFolder = new DirectoryInfo(childNode.InnerText);
+							RootFolder = new DirectoryInfo(childNode.InnerText);
 						break;
-					#region Color Settings
+
+						#region Color Settings
 					case "CalendarBackColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.CalendarBackColor = Color.FromArgb(tempInt);
+							CalendarBackColor = Color.FromArgb(tempInt);
 						break;
 					case "CalendarBorderColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.CalendarBorderColor = Color.FromArgb(tempInt);
+							CalendarBorderColor = Color.FromArgb(tempInt);
 						break;
 					case "CalendarHeaderBackColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.CalendarHeaderBackColor = Color.FromArgb(tempInt);
+							CalendarHeaderBackColor = Color.FromArgb(tempInt);
 						break;
 					case "CalendarHeaderForeColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.CalendarHeaderForeColor = Color.FromArgb(tempInt);
+							CalendarHeaderForeColor = Color.FromArgb(tempInt);
 						break;
 					case "MonthHeaderBackColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.MonthHeaderBackColor = Color.FromArgb(tempInt);
+							MonthHeaderBackColor = Color.FromArgb(tempInt);
 						break;
 					case "MonthHeaderForeColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.MonthHeaderForeColor = Color.FromArgb(tempInt);
+							MonthHeaderForeColor = Color.FromArgb(tempInt);
 						break;
 					case "MonthBodyBackColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.MonthBodyBackColor = Color.FromArgb(tempInt);
+							MonthBodyBackColor = Color.FromArgb(tempInt);
 						break;
 					case "MonthBodyForeColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.MonthBodyForeColor = Color.FromArgb(tempInt);
+							MonthBodyForeColor = Color.FromArgb(tempInt);
 						break;
 					case "SweepBackColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.SweepBackColor = Color.FromArgb(tempInt);
+							SweepBackColor = Color.FromArgb(tempInt);
 						break;
 					case "SweepForeColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.SweepForeColor = Color.FromArgb(tempInt);
+							SweepForeColor = Color.FromArgb(tempInt);
 						break;
 					case "DeadLinksForeColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.DeadLinksForeColor = Color.FromArgb(tempInt);
+							DeadLinksForeColor = Color.FromArgb(tempInt);
 						break;
-					#endregion
+						#endregion
 
-					#region Email Grabber Settings
+						#region Email Grabber Settings
 					case "EnableEmailGrabber":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.EnableEmailGrabber = tempBool;
+							EnableEmailGrabber = tempBool;
 						break;
 					case "EmailGrabInterval":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.EmailGrabInterval = tempInt;
+							EmailGrabInterval = tempInt;
 						break;
 					case "InboxSubFolder":
-						this.InboxSubFolder = childNode.InnerText;
+						InboxSubFolder = childNode.InnerText;
 						break;
-					#endregion
+						#endregion
 
-					#region File Grabber Settings
+						#region File Grabber Settings
 					case "EnableFileGrabber":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
-							this.EnableFileGrabber = tempBool;
+							EnableFileGrabber = tempBool;
 						break;
 					case "FileGrabInterval":
 						if (int.TryParse(childNode.InnerText, out tempInt))
-							this.FileGrabInterval = tempInt;
+							FileGrabInterval = tempInt;
 						break;
 					case "FileGrabSourceFolder":
-						this.FileGrabSourceFolder = childNode.InnerText;
+						FileGrabSourceFolder = childNode.InnerText;
 						break;
-					#endregion
+						#endregion
 				}
 			}
 		}
 
 		public void LoadYears()
 		{
-			this.Years.Clear();
-			this.Files.Clear();
-			if (this.RootFolder.Exists && this.Enabled)
+			Years.Clear();
+			Files.Clear();
+			if (RootFolder.Exists && Enabled)
 			{
-				foreach (DirectoryInfo yearFolder in this.RootFolder.GetDirectories())
+				foreach (DirectoryInfo yearFolder in RootFolder.GetDirectories())
 				{
 					int temp;
 					if (int.TryParse(yearFolder.Name, out temp))
 					{
-						CalendarYear year = new CalendarYear(this);
+						var year = new CalendarYear(this);
 						year.RootFolder = yearFolder;
 						year.Year = temp;
-						this.Files.AddRange(year.RootFolder.GetFiles());
-						this.Years.Add(year);
+						Files.AddRange(year.RootFolder.GetFiles());
+						Years.Add(year);
 						Application.DoEvents();
 					}
 				}
-				foreach (CalendarYear year in this.Years)
+				foreach (CalendarYear year in Years)
 				{
 					year.LoadSweepPeriods();
 					year.LoadMonths();
@@ -260,23 +261,30 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void ResetColors()
 		{
-			this.CalendarBackColor = Color.AliceBlue;
-			this.CalendarBorderColor = Color.DarkGray;
-			this.CalendarHeaderBackColor = Color.Azure;
-			this.CalendarHeaderForeColor = Color.Black;
-			this.MonthHeaderBackColor = Color.AliceBlue;
-			this.MonthHeaderForeColor = Color.Black;
-			this.MonthBodyBackColor = Color.AliceBlue;
-			this.MonthBodyForeColor = Color.Black;
-			this.SweepBackColor = Color.LightGray;
-			this.SweepForeColor = Color.Black;
-			this.DeadLinksForeColor = Color.Black;
+			CalendarBackColor = Color.AliceBlue;
+			CalendarBorderColor = Color.DarkGray;
+			CalendarHeaderBackColor = Color.Azure;
+			CalendarHeaderForeColor = Color.Black;
+			MonthHeaderBackColor = Color.AliceBlue;
+			MonthHeaderForeColor = Color.Black;
+			MonthBodyBackColor = Color.AliceBlue;
+			MonthBodyForeColor = Color.Black;
+			SweepBackColor = Color.LightGray;
+			SweepForeColor = Color.Black;
+			DeadLinksForeColor = Color.Black;
 		}
 	}
 
 	public class CalendarYear
 	{
-		private FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
+		private readonly FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
+
+		public CalendarYear(OvernightsCalendar parent)
+		{
+			Parent = parent;
+			Months = new List<CalendarMonth>();
+			SweepDays = new List<DateTime>();
+		}
 
 		public OvernightsCalendar Parent { get; private set; }
 		public DirectoryInfo RootFolder { get; set; }
@@ -284,45 +292,38 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public List<CalendarMonth> Months { get; private set; }
 		public List<DateTime> SweepDays { get; private set; }
 
-		public CalendarYear(OvernightsCalendar parent)
-		{
-			this.Parent = parent;
-			this.Months = new List<CalendarMonth>();
-			this.SweepDays = new List<DateTime>();
-		}
-
 		public void LoadMonths()
 		{
-			this.Months.Clear();
+			Months.Clear();
 			for (int i = 1; i <= 12; i++)
 			{
-				CalendarMonth month = new CalendarMonth(this);
-				month.MonthFirstDay = new DateTime(this.Year, i, 1);
+				var month = new CalendarMonth(this);
+				month.MonthFirstDay = new DateTime(Year, i, 1);
 				month.LoadDays();
-				this.Months.Add(month);
+				Months.Add(month);
 				Application.DoEvents();
 			}
 
-			_libraryStorageWatcher.Path = this.RootFolder.FullName;
-			_libraryStorageWatcher.Created += new FileSystemEventHandler((sender, e) =>
-			{
-				if (!this.Parent.Files.Select(x => x.FullName).Contains(e.FullPath))
-					this.Parent.Files.Add(new FileInfo(e.FullPath));
-			});
+			_libraryStorageWatcher.Path = RootFolder.FullName;
+			_libraryStorageWatcher.Created += (sender, e) =>
+				                                  {
+					                                  if (!Parent.Files.Select(x => x.FullName).Contains(e.FullPath))
+						                                  Parent.Files.Add(new FileInfo(e.FullPath));
+				                                  };
 			_libraryStorageWatcher.EnableRaisingEvents = true;
 		}
 
 		public void LoadSweepPeriods()
 		{
-			this.SweepDays.Clear();
-			if (this.RootFolder.Exists)
+			SweepDays.Clear();
+			if (RootFolder.Exists)
 			{
-				string sweepPeriodsConnfigFile = Path.Combine(this.RootFolder.FullName, Constants.SweepPeriodsFileName);
+				string sweepPeriodsConnfigFile = Path.Combine(RootFolder.FullName, Constants.SweepPeriodsFileName);
 				if (File.Exists(sweepPeriodsConnfigFile))
 				{
 					try
 					{
-						XmlDocument document = new XmlDocument();
+						var document = new XmlDocument();
 						document.Load(sweepPeriodsConnfigFile);
 						XmlNode node = document.SelectSingleNode(@"/SweepPeriods");
 						if (node != null)
@@ -349,7 +350,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 									{
 										while (dateBegin <= dateEnd)
 										{
-											this.SweepDays.Add(dateBegin);
+											SweepDays.Add(dateBegin);
 											dateBegin = dateBegin.AddDays(1);
 										}
 									}
@@ -357,9 +358,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							}
 						}
 					}
-					catch
-					{
-					}
+					catch {}
 				}
 			}
 		}
@@ -367,42 +366,39 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class CalendarMonth
 	{
+		public CalendarMonth(CalendarYear parent)
+		{
+			Parent = parent;
+			Days = new List<CalendarDay>();
+		}
+
 		public CalendarYear Parent { get; private set; }
 		public DateTime MonthFirstDay { get; set; }
 		public List<CalendarDay> Days { get; private set; }
 
 		public string Name
 		{
-			get
-			{
-				return this.MonthFirstDay.ToString("MMMM").ToUpper();
-			}
-		}
-
-		public CalendarMonth(CalendarYear parent)
-		{
-			this.Parent = parent;
-			this.Days = new List<CalendarDay>();
+			get { return MonthFirstDay.ToString("MMMM").ToUpper(); }
 		}
 
 		public void LoadDays()
 		{
-			this.Days.Clear();
+			Days.Clear();
 
-			DateTime startDay = this.MonthFirstDay;
+			DateTime startDay = MonthFirstDay;
 			while (startDay.DayOfWeek != DayOfWeek.Monday)
 				startDay = startDay.AddDays(-1);
 
-			DateTime lastDay = this.MonthFirstDay.AddMonths(1).AddDays(-1);
+			DateTime lastDay = MonthFirstDay.AddMonths(1).AddDays(-1);
 			while (lastDay.DayOfWeek != DayOfWeek.Sunday)
 				lastDay = lastDay.AddDays(-1);
 
 			while (startDay <= lastDay)
 			{
-				CalendarDay day = new CalendarDay(this);
+				var day = new CalendarDay(this);
 				day.Date = startDay;
-				day.IsSweepDay = this.Parent.SweepDays.Contains(day.Date);
-				this.Days.Add(day);
+				day.IsSweepDay = Parent.SweepDays.Contains(day.Date);
+				Days.Add(day);
 				Application.DoEvents();
 
 				startDay = startDay.AddDays(1);
@@ -412,23 +408,18 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class CalendarDay
 	{
-		private FileInfo _linkedFile = null;
-		private bool _linkedFileReady = false;
+		private FileInfo _linkedFile;
+		private bool _linkedFileReady;
+
+		public CalendarDay(CalendarMonth parent)
+		{
+			Parent = parent;
+		}
 
 		public CalendarMonth Parent { get; private set; }
 		public DateTime Date { get; set; }
 
 		public bool IsSweepDay { get; set; }
-
-		public CalendarDay(CalendarMonth parent)
-		{
-			this.Parent = parent;
-		}
-
-		public void Reset()
-		{
-			_linkedFileReady = false;
-		}
 
 		public FileInfo LinkedFile
 		{
@@ -437,10 +428,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (!_linkedFileReady)
 				{
 					_linkedFileReady = true;
-					_linkedFile = this.Parent.Parent.Parent.Files.Where(x => x.Name.Contains(this.Date.ToString("MMddyy"))).FirstOrDefault();
+					_linkedFile = Parent.Parent.Parent.Files.Where(x => x.Name.Contains(Date.ToString("MMddyy"))).FirstOrDefault();
 				}
 				return _linkedFile;
 			}
+		}
+
+		public void Reset()
+		{
+			_linkedFileReady = false;
 		}
 	}
 }

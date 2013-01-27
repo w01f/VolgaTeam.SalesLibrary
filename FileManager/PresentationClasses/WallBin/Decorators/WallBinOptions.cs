@@ -10,5 +10,6 @@
 		public bool ShowKeywordTags { get; set; }
 		public bool ShowFileCardTags { get; set; }
 		public bool ShowAttachmentTags { get; set; }
+		public bool ShowSecurityTags { get; set; }
 	}
 }

@@ -278,7 +278,7 @@ namespace FileManager.BusinessClasses
 								#region Sync Overnights Calendar
 								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 								{
-									if (salesDepot.OvernightsCalendar.Enabled)
+									if (salesDepot.OvernightsCalendar.Enabled && SettingsManager.Instance.EnableOvernightsCalendarTab)
 									{
 										string overnightsCalendarDestinationFolderPath = Path.Combine(destinationFolder.FullName, Constants.OvernightsCalendarRootFolderName);
 										if (!Directory.Exists(overnightsCalendarDestinationFolderPath))

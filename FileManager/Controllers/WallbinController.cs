@@ -89,6 +89,8 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsFileCards.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsAttachments.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsAttachments.CheckedChanged += ButtonItemTagsCheckedChanged;
+			FormMain.Instance.buttonItemTagsSecurity.Click += ButtonItemTagsClick;
+			FormMain.Instance.buttonItemTagsSecurity.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsClear.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsClear.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsSave.Click += btTagsSave_Click;
@@ -154,6 +156,7 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
 					_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
 					_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
+					_wallBinOptions.ShowSecurityTags = SettingsManager.Instance.ShowTagsSecurity;
 					break;
 				default:
 					_wallBinOptions.AllowEdit = true;
@@ -164,6 +167,7 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowKeywordTags = false;
 					_wallBinOptions.ShowFileCardTags = false;
 					_wallBinOptions.ShowAttachmentTags = false;
+					_wallBinOptions.ShowSecurityTags = false;
 					break;
 			}
 		}
@@ -317,6 +321,7 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsKeywords.Checked = SettingsManager.Instance.ShowTagsKeywords;
 			FormMain.Instance.buttonItemTagsFileCards.Checked = SettingsManager.Instance.ShowTagsFileCards;
 			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.ShowTagsAttachments;
+			FormMain.Instance.buttonItemTagsSecurity.Checked = SettingsManager.Instance.ShowTagsSecurity;
 			FormMain.Instance.buttonItemTagsClear.Checked = SettingsManager.Instance.ShowTagsCleaner;
 		}
 
@@ -662,11 +667,13 @@ namespace FileManager.Controllers
 			SettingsManager.Instance.ShowTagsKeywords = FormMain.Instance.buttonItemTagsKeywords.Checked;
 			SettingsManager.Instance.ShowTagsFileCards = FormMain.Instance.buttonItemTagsFileCards.Checked;
 			SettingsManager.Instance.ShowTagsAttachments = FormMain.Instance.buttonItemTagsAttachments.Checked;
+			SettingsManager.Instance.ShowTagsSecurity = FormMain.Instance.buttonItemTagsSecurity.Checked;
 			SettingsManager.Instance.ShowTagsCleaner = FormMain.Instance.buttonItemTagsClear.Checked;
 			_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
 			_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
 			_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
 			_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
+			_wallBinOptions.ShowSecurityTags = SettingsManager.Instance.ShowTagsSecurity;
 			_tabPage.ApplyWallBinOptions(_wallBinOptions);
 			ApplyWallBinOptions();
 			_tabPage.SwitchTagsEditor();
@@ -690,6 +697,7 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsKeywords.Checked = false;
 			FormMain.Instance.buttonItemTagsFileCards.Checked = false;
 			FormMain.Instance.buttonItemTagsAttachments.Checked = false;
+			FormMain.Instance.buttonItemTagsSecurity.Checked = false;
 			FormMain.Instance.buttonItemTagsClear.Checked = false;
 			button.Checked = true;
 		}

@@ -917,6 +917,9 @@ namespace SalesDepot.CoreObjects.ContentManagmentService
 			widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
 			if (topLevelFile.CustomKeywords.Tags.Count > 0)
 				tags = string.Join(" ", topLevelFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
+			isRestricted = topLevelFile.IsRestricted;
+			if (!string.IsNullOrEmpty(topLevelFile.AssignedUsers))
+				assignedUsers = topLevelFile.AssignedUsers;
 			dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 

@@ -1900,6 +1900,10 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private Attachment[] attachmentsField;
         
+        private bool isRestrictedField;
+        
+        private string assignedUsersField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -2187,6 +2191,26 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.attachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
             }
         }
     }

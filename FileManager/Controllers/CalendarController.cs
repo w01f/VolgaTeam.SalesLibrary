@@ -42,7 +42,7 @@ namespace FileManager.Controllers
 			_initialization = true;
 
 			_tabPage = new TabOvernightsCalendarControl();
-			ApplyOvernightsCalebdar();
+			ApplyOvernightsCalendar();
 			if (!FormMain.Instance.pnMain.Controls.Contains(_tabPage))
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
 
@@ -53,7 +53,7 @@ namespace FileManager.Controllers
 			MainController.Instance.LibraryChanged += (sender, args) =>
 														  {
 															  _initialization = true;
-															  ApplyOvernightsCalebdar();
+															  ApplyOvernightsCalendar();
 															  _initialization = false;
 														  };
 
@@ -65,16 +65,17 @@ namespace FileManager.Controllers
 		public void ShowTab()
 		{
 			_initialization = true;
-			ApplyOvernightsCalebdar();
+			ApplyOvernightsCalendar();
 			_initialization = false;
 			_tabPage.BringToFront();
 		}
 		#endregion
 
-		private void ApplyOvernightsCalebdar()
+		private void ApplyOvernightsCalendar()
 		{
+
 			LibraryDecorator activeDecorator = MainController.Instance.ActiveDecorator;
-			if (activeDecorator == null || !activeDecorator.Library.IsConfigured) return;
+			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !SettingsManager.Instance.EnableOvernightsCalendarTab) return;
 			FormMain.Instance.buttonItemCalendarSyncStatusDisabled.Checked = !activeDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.buttonItemCalendarSyncStatusEnabled.Checked = activeDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.buttonEditCalendarLocation.EditValue = activeDecorator.Library.OvernightsCalendar.RootFolder.FullName;
@@ -116,7 +117,7 @@ namespace FileManager.Controllers
 			FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.ribbonBarCalendarFileGrabber.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			_tabPage.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
-			if (MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled)
+			if (MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled && SettingsManager.Instance.EnableOvernightsCalendarTab)
 				using (var formProgress = new FormProgress())
 				{
 					FormMain.Instance.ribbonControl.Enabled = false;
@@ -125,7 +126,7 @@ namespace FileManager.Controllers
 					var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate
 																							  {
 																								  MainController.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
-																								  ApplyOvernightsCalebdar();
+																								  ApplyOvernightsCalendar();
 																							  }));
 					formProgress.Show();
 					Application.DoEvents();
@@ -153,7 +154,7 @@ namespace FileManager.Controllers
 					var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate
 																							  {
 																								  MainController.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
-																								  ApplyOvernightsCalebdar();
+																								  ApplyOvernightsCalendar();
 																							  }));
 					formProgress.Show();
 					Application.DoEvents();

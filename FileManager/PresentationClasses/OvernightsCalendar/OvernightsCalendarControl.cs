@@ -23,7 +23,7 @@ namespace FileManager.PresentationClasses.OvernightsCalendar
 			Dock = DockStyle.Fill;
 			Years = new List<YearControl>();
 
-			xtraTabControl.SelectedPageChanged += xtraTabControl_SelectedPageChanged;
+			//xtraTabControl.SelectedPageChanged += xtraTabControl_SelectedPageChanged;
 		}
 
 		public void DisposeCalendar()

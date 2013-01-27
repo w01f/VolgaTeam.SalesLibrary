@@ -59,7 +59,8 @@ namespace FileManager.Controllers
 					{
 						Decorators[library.Identifier] = new LibraryDecorator(library);
 						Decorators[library.Identifier].Init();
-						Decorators[library.Identifier].BuildOvernightsCalendar();
+						if (SettingsManager.Instance.EnableOvernightsCalendarTab)
+							Decorators[library.Identifier].BuildOvernightsCalendar();
 					}
 					if (LibraryChanged != null)
 						LibraryChanged(this, new EventArgs());
@@ -183,11 +184,20 @@ namespace FileManager.Controllers
 							Application.DoEvents();
 						});
 
+						if (SettingsManager.Instance.EnableOvernightsCalendarTab)
+							FormMain.Instance.Invoke((MethodInvoker)delegate
+							{
+								formProgress.laProgress.Text = "Loading Overnights Calendar...";
+								Application.DoEvents();
+								BuildOvernightsCalendars();
+								Application.DoEvents();
+							});
+
 						FormMain.Instance.Invoke((MethodInvoker)delegate
 						{
-							formProgress.laProgress.Text = "Loading Overnights Calendar...";
+							formProgress.laProgress.Text = "Preparing libraries to display...";
 							Application.DoEvents();
-							BuildOvernightsCalendars();
+							FormMain.Instance.pnMain.Controls.Clear();
 							Application.DoEvents();
 						});
 

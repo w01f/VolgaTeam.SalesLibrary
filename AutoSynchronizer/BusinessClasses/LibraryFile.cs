@@ -16,11 +16,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private bool _isBold;
 		private bool _isDead;
 		private DateTime _lastChanged = DateTime.MinValue;
-		private string _linkLocalPath = string.Empty;
+		protected string _linkLocalPath = string.Empty;
 		private string _name = string.Empty;
 		private string _note = string.Empty;
 		private int _order;
 		private Image _widget;
+		private bool _isRestricted;
+		private string _assignedUsers;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -81,7 +83,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string CriteriaOverlap { get; set; }
 
 		public LibraryFileSearchTags SearchTags { get; set; }
-		public SearchGroup CustomKeywords { get; private set; }
+		public SearchGroup CustomKeywords { get; protected set; }
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
@@ -371,7 +373,29 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public ILibraryLink Clone(LibraryFolder parent)
+		public bool IsRestricted
+		{
+			get { return _isRestricted; }
+			set
+			{
+				if (_isRestricted != value)
+					LastChanged = DateTime.Now;
+				_isRestricted = value;
+			}
+		}
+
+		public string AssignedUsers
+		{
+			get { return _assignedUsers; }
+			set
+			{
+				if (_assignedUsers != value)
+					LastChanged = DateTime.Now;
+				_assignedUsers = value;
+			}
+		}
+
+		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
 			file.OriginalPath = _linkLocalPath;
@@ -385,11 +409,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsRestricted = IsRestricted;
+			file.AssignedUsers = AssignedUsers;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
 			file.PresentationProperties = PresentationProperties;
-			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			if (LineBreakProperties != null)
+				file.LineBreakProperties = LineBreakProperties.Clone(file);
 			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
 			file.FileCard = FileCard.Clone(file);
@@ -405,7 +432,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<Note>" + _note.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Note>");
 			result.AppendLine(@"<IsBold>" + _isBold + @"</IsBold>");
 			result.AppendLine(@"<IsDead>" + _isDead + @"</IsDead>");
-			result.AppendLine(@"<RootId>" + RootId.ToString() + @"</RootId>");
+			result.AppendLine(@"<RootId>" + RootId + @"</RootId>");
 			result.AppendLine(@"<LocalPath>" + _linkLocalPath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</LocalPath>");
 			result.AppendLine(@"<RelativePath>" + RelativePath.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RelativePath>");
 			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
@@ -413,7 +440,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<EnableWidget>" + _enableWidget + @"</EnableWidget>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(@"<AttachmentProperties>" + AttachmentProperties.Serialize() + @"</AttachmentProperties>");
-			result.AppendLine(@"<AddDate>" + AddDate.ToString() + @"</AddDate>");
+			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
+			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
+			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.Append(SearchTags.Serialize());
 			result.Append(CustomKeywords.Serialize());
@@ -511,6 +540,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
+						break;
+					case "IsRestricted":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isRestricted = tempBool;
+						break;
+					case "AssignedUsers":
+						_assignedUsers = childNode.InnerText;
 						break;
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))

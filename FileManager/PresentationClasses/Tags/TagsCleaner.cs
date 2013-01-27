@@ -16,11 +16,14 @@ namespace FileManager.PresentationClasses.Tags
 		private readonly Dictionary<Guid, CustomKeywords> _keywordsCopy = new Dictionary<Guid, CustomKeywords>();
 		private readonly Dictionary<Guid, FileCard> _fileCardsCopy = new Dictionary<Guid, FileCard>();
 		private readonly Dictionary<Guid, AttachmentProperties> _attachmentsCopy = new Dictionary<Guid, AttachmentProperties>();
+		private readonly Dictionary<Guid, bool> _securityRestrictedCopy = new Dictionary<Guid, bool>();
+		private readonly Dictionary<Guid, string> _securityAssignedUsersCopy = new Dictionary<Guid, string>();
 
 		private bool _categoriesChanged;
 		private bool _keywordsChanged;
 		private bool _fileCardsChanged;
 		private bool _attachmentsChanged;
+		private bool _securityChanged;
 
 		public TagsCleaner()
 		{
@@ -33,6 +36,7 @@ namespace FileManager.PresentationClasses.Tags
 			buttonXFileCards.Font = new Font(buttonXFileCards.Font.FontFamily, buttonXFileCards.Font.Size - 2, buttonXFileCards.Font.Style);
 			buttonXFileAttachments.Font = new Font(buttonXFileAttachments.Font.FontFamily, buttonXFileAttachments.Font.Size - 2, buttonXFileAttachments.Font.Style);
 			buttonXWebAttachments.Font = new Font(buttonXWebAttachments.Font.FontFamily, buttonXWebAttachments.Font.Size - 2, buttonXWebAttachments.Font.Style);
+			buttonXSecurity.Font = new Font(buttonXSecurity.Font.FontFamily, buttonXSecurity.Font.Size - 2, buttonXSecurity.Font.Style);
 			laWarning.Font = new Font(laWarning.Font.FontFamily, laWarning.Font.Size - 3, laWarning.Font.Style);
 			laWarningDescription.Font = new Font(laWarningDescription.Font.FontFamily, laWarningDescription.Font.Size - 2, laWarningDescription.Font.Style);
 		}
@@ -48,11 +52,14 @@ namespace FileManager.PresentationClasses.Tags
 			_keywordsChanged = false;
 			_fileCardsChanged = false;
 			_attachmentsChanged = false;
+			_securityChanged = false;
 
 			_categoriesCopy.Clear();
 			_keywordsCopy.Clear();
 			_fileCardsCopy.Clear();
 			_attachmentsCopy.Clear();
+			_securityRestrictedCopy.Clear();
+			_securityAssignedUsersCopy.Clear();
 			foreach (var link in activePage.Page.Folders.SelectMany(folder => folder.Files))
 			{
 				var categoryCopy = new SearchTags();
@@ -66,6 +73,9 @@ namespace FileManager.PresentationClasses.Tags
 				_fileCardsCopy.Add(link.Identifier, link.FileCard.Clone(link));
 
 				_attachmentsCopy.Add(link.Identifier, link.AttachmentProperties.Clone(link));
+
+				_securityRestrictedCopy.Add(link.Identifier, link.IsRestricted);
+				_securityAssignedUsersCopy.Add(link.Identifier, link.AssignedUsers);
 			}
 		}
 		public void ApplyData()
@@ -90,6 +100,12 @@ namespace FileManager.PresentationClasses.Tags
 					link.FileCard = _fileCardsCopy[link.Identifier];
 				if (_attachmentsChanged)
 					link.AttachmentProperties = _attachmentsCopy[link.Identifier];
+
+				if (_securityChanged)
+				{
+					link.IsRestricted = _securityRestrictedCopy[link.Identifier];
+					link.AssignedUsers  = _securityAssignedUsersCopy[link.Identifier];
+				}
 			}
 			UpdateData();
 		}
@@ -173,6 +189,22 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var attatchment in _attachmentsCopy.Values)
 				attatchment.WebAttachments.Clear();
 			_attachmentsChanged = true;
+			activePage.Parent.StateChanged = true;
+			if (EditorChanged != null)
+				EditorChanged(this, new EventArgs());
+		}
+
+		private void buttonXSecurity_Click(object sender, EventArgs e)
+		{
+			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+			if (activePage == null) return;
+			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
+			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
+			foreach (var restrictedPair in _securityRestrictedCopy)
+				_securityRestrictedCopy[restrictedPair.Key] = false;
+			foreach (var assignedUsersPair in _securityAssignedUsersCopy)
+				_securityAssignedUsersCopy[assignedUsersPair.Key] = null;
+			_securityChanged = true;
 			activePage.Parent.StateChanged = true;
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());

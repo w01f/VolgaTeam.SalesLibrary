@@ -126,6 +126,8 @@
           <xsd:element name="contentPath" type="xsd:string" />
           <xsd:element name="enableAttachments" type="xsd:boolean" />
           <xsd:element name="attachments" type="tns:AttachmentArray" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
