@@ -65,6 +65,7 @@ class LibraryPage
      */
     public $users;
     public $cachedColumnsView;
+
     public function __construct($library)
     {
         $this->parent = $library;
@@ -144,26 +145,53 @@ class LibraryPage
             usort($this->columns, "Column::columnComparer");
     }
 
-    public function loadFolders()
+    public function loadFolders($allLinks, $userId)
     {
         if (isset($this->folders))
             foreach ($this->folders as $folder)
-                $folder->loadFiles();
+                $folder->loadFiles($allLinks, $userId);
     }
 
     public function buildCache($controller)
     {
-        $this->buildCacheForBrowser($controller, 'ie');
-        $this->buildCacheForBrowser($controller, 'firefox');
-        $this->buildCacheForBrowser($controller, 'webkit');
-        $this->buildCacheForBrowser($controller, 'opera');
-        $this->buildCacheForBrowser($controller, 'mobile');
+        $this->buildCacheForBrowser($controller, 'ie', null, false);
+        $this->buildCacheForBrowser($controller, 'firefox', null, false);
+        $this->buildCacheForBrowser($controller, 'webkit', null, false);
+        $this->buildCacheForBrowser($controller, 'opera', null, false);
+        $this->buildCacheForBrowser($controller, 'mobile', null, false);
+
+        $adminIds = UserStorage::getAdminUserIds();
+        if (isset($adminIds))
+            foreach ($adminIds as $userId)
+            {
+                UserPageCacheStorage::updateData($userId, $this->id, $this->libraryId);
+                $this->buildCacheForBrowser($controller, 'ie', $userId, true);
+                $this->buildCacheForBrowser($controller, 'firefox', $userId, true);
+                $this->buildCacheForBrowser($controller, 'webkit', $userId, true);
+                $this->buildCacheForBrowser($controller, 'opera', $userId, true);
+                $this->buildCacheForBrowser($controller, 'mobile', $userId, true);
+            }
+
+        $restrictedUserIds = UserLinkStorage::getRestrictedUsersIds($this->libraryId);
+        if (isset($restrictedUserIds))
+            foreach ($restrictedUserIds as $userId)
+            {
+                if (!isset($adminIds) || (isset($adminIds) && !in_array($userId, $adminIds)))
+                {
+                    UserPageCacheStorage::updateData($userId, $this->id, $this->libraryId);
+                    $this->buildCacheForBrowser($controller, 'ie', $userId, false);
+                    $this->buildCacheForBrowser($controller, 'firefox', $userId, false);
+                    $this->buildCacheForBrowser($controller, 'webkit', $userId, false);
+                    $this->buildCacheForBrowser($controller, 'opera', $userId, false);
+                    $this->buildCacheForBrowser($controller, 'mobile', $userId, false);
+                }
+            }
     }
 
-    private function buildCacheForBrowser($controller, $browser)
+    private function buildCacheForBrowser($controller, $browser, $userId, $isAdmin)
     {
         $this->loadData($browser);
-        $this->loadFolders();
+        $this->loadFolders($isAdmin, $userId);
 
         $path = Yii::getPathOfAlias('application.views.regular.wallbin') . '/columnsPage.php';
         $content = $controller->renderFile($path, array('libraryPage' => $this), true);
@@ -172,28 +200,35 @@ class LibraryPage
         {
             if ($content != '')
             {
-                $pageRecord = LibraryPageStorage::model()->findByPk($this->id);
-                if ($pageRecord !== null)
+                if (isset($userId))
+                {
+                    $cacheRecord = UserPageCacheStorage::getPageCache($userId, $this->id);
+                }
+                else
+                {
+                    $cacheRecord = LibraryPageStorage::model()->findByPk($this->id);
+                }
+                if (isset($cacheRecord))
                 {
                     switch ($browser)
                     {
                         case 'mobile':
-                            $pageRecord->cached_col_view_mobile = $content;
+                            $cacheRecord->cached_col_view_mobile = $content;
                             break;
                         case 'ie':
-                            $pageRecord->cached_col_view_ie = $content;
+                            $cacheRecord->cached_col_view_ie = $content;
                             break;
                         case 'webkit':
-                            $pageRecord->cached_col_view_webkit = $content;
+                            $cacheRecord->cached_col_view_webkit = $content;
                             break;
                         case 'firefox':
-                            $pageRecord->cached_col_view_firefox = $content;
+                            $cacheRecord->cached_col_view_firefox = $content;
                             break;
                         case 'opera':
-                            $pageRecord->cached_col_view_opera = $content;
+                            $cacheRecord->cached_col_view_opera = $content;
                             break;
                     }
-                    $pageRecord->save();
+                    $cacheRecord->save();
                     return true;
                 }
             }
@@ -203,12 +238,19 @@ class LibraryPage
 
     public function getCache()
     {
-        $pageRecord = LibraryPageStorage::model()->findByPk($this->id);
-        if ($pageRecord !== null)
+        if (isset(Yii::app()->user))
+        {
+            $userId = Yii::app()->user->getId();
+            if (isset($userId))
+                $cacheRecord = UserPageCacheStorage::getPageCache($userId, $this->id);
+        }
+        if (!isset($cacheRecord))
+            $cacheRecord = LibraryPageStorage::model()->findByPk($this->id);
+        if (isset($cacheRecord))
         {
             if (Yii::app()->browser->isMobile())
             {
-                $cache = $pageRecord->cached_col_view_mobile;
+                $cache = $cacheRecord->cached_col_view_mobile;
             }
             else
             {
@@ -216,20 +258,20 @@ class LibraryPage
                 switch ($browser)
                 {
                     case 'Internet Explorer':
-                        $cache = $pageRecord->cached_col_view_ie;
+                        $cache = $cacheRecord->cached_col_view_ie;
                         break;
                     case 'Chrome':
                     case 'Safari':
-                        $cache = $pageRecord->cached_col_view_webkit;
+                        $cache = $cacheRecord->cached_col_view_webkit;
                         break;
                     case 'Firefox':
-                        $cache = $pageRecord->cached_col_view_firefox;
+                        $cache = $cacheRecord->cached_col_view_firefox;
                         break;
                     case 'Opera':
-                        $cache = $pageRecord->cached_col_view_opera;
+                        $cache = $cacheRecord->cached_col_view_opera;
                         break;
                     default:
-                        $cache = $pageRecord->cached_col_view_webkit;
+                        $cache = $cacheRecord->cached_col_view_webkit;
                         break;
                 }
             }

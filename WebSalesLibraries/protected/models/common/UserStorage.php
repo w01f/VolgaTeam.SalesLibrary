@@ -59,4 +59,10 @@ class UserStorage extends CActiveRecord
         return $result;
     }
 
+    public static function getAdminUserIds()
+    {
+        foreach (self::model()->findAll('role<>0') as $user)
+            $userIds[] = $user->id;
+        return isset($userIds) ? $userIds : null;
+    }
 }

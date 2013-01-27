@@ -22,7 +22,8 @@ class LinkStorage extends CActiveRecord
             if ($linkRecord->date_modify != null)
                 if ($linkRecord->date_modify != $linkDate)
                     $needToUpdate = true;
-        } else
+        }
+        else
         {
             $linkRecord = new LinkStorage();
             $needToCreate = true;
@@ -48,6 +49,10 @@ class LinkStorage extends CActiveRecord
             $linkRecord->enable_widget = $link['enableWidget'];
             $linkRecord->widget = $link['widget'];
             $linkRecord->tags = $link['tags'];
+            if (array_key_exists('isRestricted', $link))
+                $linkRecord->is_restricted = $link['isRestricted'];
+            else
+                $linkRecord->is_restricted = false;
             $linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
             $linkRecord->date_modify = $linkDate;
             $linkRecord->id_preview = $link['previewId'];
@@ -94,6 +99,9 @@ class LinkStorage extends CActiveRecord
                 foreach ($link['categories'] as $category)
                     LinkCategoryStorage::updateData($category);
 
+        if (array_key_exists('assignedUsers', $link) && isset($link['assignedUsers']))
+            UserLinkStorage::updateData($link['id'], $link['libraryId'], $link['assignedUsers']);
+
         $linkRecord->save();
     }
 
@@ -115,7 +123,8 @@ class LinkStorage extends CActiveRecord
         if ($isSort == 1)
         {
             $links = Yii::app()->session[$sessionId];
-        } else
+        }
+        else
         {
             $libraryCondition = '1 != 1';
             if (isset($checkedLibraryIds))
@@ -187,6 +196,7 @@ class LinkStorage extends CActiveRecord
             }
 
             $folderCondition = '1 != 1';
+            $isAdmin = true;
             if (isset(Yii::app()->user))
             {
                 $userId = Yii::app()->user->getId();
@@ -202,10 +212,22 @@ class LinkStorage extends CActiveRecord
             else if (!isset($userId) || (isset($isAdmin) && $isAdmin))
                 $folderCondition = '1 = 1';
 
+            $linkCondition = '1 != 1';
+            if($isAdmin)
+                $linkCondition = '1 = 1';
+            else if (isset($userId))
+            {
+                $linkIds = UserLinkStorage::getAvailableLinks($userId);
+                if(isset($linkIds))
+                    $linkCondition = "is_restricted <> 1 or id in ('" . implode("', '", $linkIds) . "')";
+                else
+                    $linkCondition = "is_restricted <> 1";
+            }
+
             $linkRecords = Yii::app()->db->createCommand()
                 ->select('*')
                 ->from('tbl_link')
-                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ")")
+                ->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
                 ->queryAll();
             if (isset($linkRecords))
             {
@@ -268,8 +290,39 @@ class LinkStorage extends CActiveRecord
     public static function getLinkById($linkId)
     {
         $linkRecord = self::model()->findByPk($linkId);
-        if ($linkRecord !== false)
+        if (isset($linkRecord))
             return $linkRecord;
+        return null;
+    }
+
+    public static function getLinksByFolder($folderId, $allLinks, $userId)
+    {
+        if ($allLinks)
+            $linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null', array($folderId));
+        else
+        {
+            $linkRecords = self::model()->findAll('id_folder=? and is_restricted <> 1 and id_parent_link is null', array($folderId));
+            if (isset($userId))
+            {
+                $availableLinks = UserLinkStorage::getAvailableLinks($userId);
+                if (isset($availableLinks))
+                {
+                    $restrictedLinkRecords = self::model()->findAll('id in ("' . implode('","', $availableLinks) . '")', array($folderId));
+                    if (isset($restrictedLinkRecords))
+                        $linkRecords = isset($linkRecords) ? array_merge($linkRecords, $restrictedLinkRecords) : $restrictedLinkRecords;
+                }
+            }
+        }
+        if (isset($linkRecords))
+            return $linkRecords;
+        return null;
+    }
+
+    public static function getLinksByParent($linkId)
+    {
+        $linkRecords = self::model()->findAll('id_parent_link=?', array($linkId));
+        if (isset($linkRecords))
+            return $linkRecords;
         return null;
     }
 
@@ -292,7 +345,8 @@ class LinkStorage extends CActiveRecord
                     $sortColumn = 'date_modify';
                     break;
             }
-        } else
+        }
+        else
             $sortColumn = 'name';
 
         if (isset(Yii::app()->request->cookies['sortDirection']->value))
@@ -306,7 +360,8 @@ class LinkStorage extends CActiveRecord
                 return strnatcmp($a[$sortColumn], $b[$sortColumn]);
             else
                 return strnatcmp($b[$sortColumn], $a[$sortColumn]);
-        } else
+        }
+        else
             return 0;
     }
 

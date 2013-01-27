@@ -8,7 +8,17 @@
                 <?php foreach ($folders as $folder): ?>
                     <div class="folder-container">
                         <?php
-                        $linksNumber = $folder->getRealLinksNumber();
+                        $isAdmin = false;
+                        $userId = null;
+                        if (isset(Yii::app()->user))
+                        {
+                            $userId = Yii::app()->user->getId();
+                            if (isset(Yii::app()->user->role))
+                                $isAdmin = Yii::app()->user->role != 0;
+                            else
+                                $isAdmin = true;
+                        }
+                        $linksNumber = $folder->getRealLinksNumber($isAdmin,$userId);
                         $linksCaption = '';
                         if ($linksNumber == 1)
                             $linksCaption = '(1 Link)';

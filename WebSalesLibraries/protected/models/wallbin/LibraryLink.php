@@ -147,6 +147,16 @@ class LibraryLink
      * @soap
      */
     public $attachments;
+    /**
+     * @var boolean
+     * @soap
+     */
+    public $isRestricted;
+    /**
+     * @var string
+     * @soap
+     */
+    public $assignedUsers;
     public $fileLink;
     public $filePath;
     public $universalPreview;

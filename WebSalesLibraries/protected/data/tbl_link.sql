@@ -25,12 +25,14 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `tags` varchar(512) NULL,
   `enable_attachments` tinyint(1) NOT NULL,
   `content` longtext,
+  `is_restricted` tinyint(1) NOT NULL DEFAULT 0,
   `date_add` datetime NULL,
   `date_modify` datetime NULL,
   PRIMARY KEY (`id`),
   KEY `id_parent_link` (`id_parent_link`),
   KEY `id_folder` (`id_folder`),
   KEY `id_library` (`id_library`),
+  KEY `is_restricted` (`is_restricted`),
   KEY `format` (`format`),
   FULLTEXT KEY `content` (`name`,`file_name`,`tags`,`content`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;

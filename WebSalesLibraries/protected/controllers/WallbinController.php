@@ -54,7 +54,17 @@ class WallbinController extends IsdController
                 if ($folder->id == $folderId)
                 {
                     $selectedFolder = $folder;
-                    $selectedFolder->loadFiles();
+                    $isAdmin = false;
+                    $userId = null;
+                    if (isset(Yii::app()->user))
+                    {
+                        $userId = Yii::app()->user->getId();
+                        if (isset(Yii::app()->user->role))
+                            $isAdmin = Yii::app()->user->role != 0;
+                        else
+                            $isAdmin = true;
+                    }
+                    $selectedFolder->loadFiles($isAdmin, $userId);
                     break;
                 }
             $this->renderPartial('folderLinks', array('folder' => $selectedFolder), false, true);

@@ -38,7 +38,7 @@ class ColumnStorage extends CActiveRecord
 
     public static function clearData($libraryId)
     {
-        ColumnStorage::model()->deleteAll('id_library=?', array($libraryId));
+        self::model()->deleteAll('id_library=?', array($libraryId));
     }
 
 }

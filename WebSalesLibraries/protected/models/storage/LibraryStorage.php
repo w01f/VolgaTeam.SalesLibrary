@@ -71,6 +71,8 @@ class LibraryStorage extends CActiveRecord
         AttachmentStorage::clearData($libraryId);
         LinkCategoryStorage::clearData($libraryId);
         ColumnStorage::clearData($libraryId);
+        UserLinkStorage::clearData($libraryId);
+        UserPageCacheStorage::clearData($libraryId);
     }
 
 }

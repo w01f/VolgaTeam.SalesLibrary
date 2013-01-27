@@ -104,6 +104,7 @@ class LibraryFolder
     public $dateModify;
     public $displayLinkWidgets;
     public $browser;
+
     public function __construct($page)
     {
         $this->parent = $page;
@@ -144,16 +145,18 @@ class LibraryFolder
         }
     }
 
-    public function loadFiles()
+    public function loadFiles($allLinks, $userId)
     {
         unset($this->files);
-        foreach (LinkStorage::model()->findAll('id_folder=? and id_parent_link is null', array($this->id)) as $linkRecord)
-        {
-            $link = new LibraryLink($this);
-            $link->browser = $this->browser;
-            $link->load($linkRecord);
-            $this->files[] = $link;
-        }
+        $linkRecords = LinkStorage::getLinksByFolder($this->id, $allLinks, $userId);
+        if (isset($linkRecords))
+            foreach ($linkRecords as $linkRecord)
+            {
+                $link = new LibraryLink($this);
+                $link->browser = $this->browser;
+                $link->load($linkRecord);
+                $this->files[] = $link;
+            }
 
         if (isset($this->files))
             usort($this->files, "LibraryLink::libraryLinkComparer");
@@ -171,12 +174,14 @@ class LibraryFolder
             }
     }
 
-    public function getRealLinksNumber()
+    public function getRealLinksNumber($allLinks, $userId)
     {
         $count = 0;
-        foreach (LinkStorage::model()->findAll('id_folder=?', array($this->id)) as $linkRecord)
-            if ($linkRecord->type != 6)
-                $count++;
+        $linkRecords = LinkStorage::getLinksByFolder($this->id, $allLinks, $userId);
+        if (isset($linkRecords))
+            foreach ($linkRecords as $linkRecord)
+                if ($linkRecord->type != 6)
+                    $count++;
         return $count;
     }
 
