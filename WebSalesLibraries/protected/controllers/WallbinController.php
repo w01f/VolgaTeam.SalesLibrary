@@ -71,6 +71,61 @@ class WallbinController extends IsdController
         }
     }
 
+    public function actionGetLinkFolderContent()
+    {
+        $linkId = Yii::app()->request->getPost('linkId');
+        if (isset($linkId))
+        {
+            $linkRecord = LinkStorage::getLinkById($linkId);
+            if (isset($linkRecord))
+            {
+                $libraryManager = new LibraryManager();
+                $library = $libraryManager->getLibraryById($linkRecord->id_library);
+                $link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+                switch ($this->browser)
+                {
+                    case Browser::BROWSER_IPHONE:
+                    case Browser::BROWSER_ANDROID_MOBILE:
+                        $link->browser = 'phone';
+                        break;
+                    default :
+                        if ($this->isTabletMobileView)
+                            $link->browser = 'phone';
+                        else if (Yii::app()->browser->isMobile())
+                        {
+                            $link->browser = 'mobile';
+                        }
+                        else
+                        {
+                            $browser = Yii::app()->browser->getBrowser();
+                            switch ($browser)
+                            {
+                                case 'Internet Explorer':
+                                    $link->browser = 'ie';
+                                    break;
+                                case 'Chrome':
+                                case 'Safari':
+                                    $link->browser = 'webkit';
+                                    break;
+                                case 'Firefox':
+                                    $link->browser = 'firefox';
+                                    break;
+                                case 'Opera':
+                                    $link->browser = 'opera';
+                                    break;
+                                default:
+                                    $link->browser = 'webkit';
+                                    break;
+                            }
+                        }
+                        break;
+                }
+                $link->load($linkRecord);
+                $this->renderPartial('linkFolderContent', array('link' => $link), false, true);
+            }
+        }
+    }
+
     public function actionGetLinkDetails()
     {
         $linkId = Yii::app()->request->getPost('linkId');

@@ -1,5 +1,5 @@
 <?php
-$version = '16.0';
+$version = '17.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -766,4 +766,34 @@ if (isset($userId))
         <a href="#preview" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction ="reverse" data-theme="b">Close</a>                    
     </div>    
 </div>
-
+<!--Template for folder links content-->
+<div data-role="page" id="link-folder-content-template" data-overlay-theme="c">
+    <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+        <a class="link back ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction ="reverse" data-theme="b">Back</a>
+        <span class="ui-title library-title"></span>
+    </div>
+    <div data-role='content' class ="page-content">
+    </div>
+    <div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+        <div data-role="navbar" data-iconpos="top">
+            <ul>
+                <li>
+                    <a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+                        Libraries
+                    </a>
+                </li>
+                <li>
+                    <a class ="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">
+                        Search
+                    </a>
+                </li>
+                <li>
+                    <a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+                        Log Out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--Template for folder links content-->
