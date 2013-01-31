@@ -50,9 +50,9 @@ class AdminController extends CController
      * @param string Login
      * @param string Temporary Password
      * @param string First Name
-     * @param string Last Name 
+     * @param string Last Name
      * @param string Email
-     * @param GroupRecord[] assigned groups 
+     * @param GroupRecord[] assigned groups
      * @param LibraryPage[] assigned pages
      * @soap
      */
@@ -105,6 +105,8 @@ class AdminController extends CController
                 UserLibraryStorage::clearObjectsByUser($userRecord->id);
                 UserGroupStorage::clearObjectsByUser($userRecord->id);
                 UserStorage::model()->deleteByPk($userRecord->id);
+                FavoritesLinkStorage::clearByUser($userRecord->id);
+                FavoritesFolderStorage::clearByUser($userRecord->id);
             }
         }
     }

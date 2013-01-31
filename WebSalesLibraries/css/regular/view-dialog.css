@@ -41,14 +41,8 @@
     text-align: center;
 }
 
-.view-dialog-body .format-list li:last-child
-{ 
-    display: none;
-}
-
 .view-dialog-body .format-list img
-{ 
-
+{
     border: none;
     cursor: pointer;
 }

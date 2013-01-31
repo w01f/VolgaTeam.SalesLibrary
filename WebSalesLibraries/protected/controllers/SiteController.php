@@ -2,6 +2,7 @@
 class SiteController extends IsdController
 {
     public $defaultAction = 'index';
+
     public function getViewPath()
     {
         return YiiBase::getPathOfAlias($this->pathPrefix . 'site');
@@ -14,6 +15,17 @@ class SiteController extends IsdController
             $this->render('index');
         else
             $this->render('unauthorized');
+    }
+
+    public function actionError()
+    {
+        if ($error = Yii::app()->errorHandler->error)
+        {
+            if (Yii::app()->request->isAjaxRequest)
+                echo $error['message'];
+            else
+                $this->render('errorMessage', $error);
+        }
     }
 
     public function actionLogin()
@@ -29,10 +41,10 @@ class SiteController extends IsdController
                 if ($loginModel->needToResetPassword)
                 {
                     $this->redirect($this->createUrl('site/changePassword', array(
-                            'login' => $loginModel->login,
-                            'password' => $loginModel->password,
-                            'rememberMe' => $loginModel->rememberMe
-                        )));
+                        'login' => $loginModel->login,
+                        'password' => $loginModel->password,
+                        'rememberMe' => $loginModel->rememberMe
+                    )));
                 }
                 else
                     $this->redirect(Yii::app()->user->returnUrl);
@@ -84,7 +96,7 @@ class SiteController extends IsdController
 
     public function actionRecoverPasswordDialogSuccess()
     {
-        $this->renderPartial('successDialog', array('header'=>'Password Recovery','content'=>'A temporary password has been sent<br>Check your inbox of junk mail filter'), false, true);
+        $this->renderPartial('successDialog', array('header' => 'Password Recovery', 'content' => 'A temporary password has been sent<br>Check your inbox of junk mail filter'), false, true);
     }
 
     public function actionValidateUserByEmail()
@@ -105,17 +117,6 @@ class SiteController extends IsdController
             $password = UserStorage::generatePassword();
             UserStorage::changePassword($login, $password);
             ResetPasswordStorage::resetPasswordForUser($login, $password, false);
-        }
-    }
-
-    public function actionError()
-    {
-        if ($error = Yii::app()->errorHandler->error)
-        {
-            if (Yii::app()->request->isAjaxRequest)
-                echo $error['message'];
-            else
-                $this->render('errorMessage', $error);
         }
     }
 
@@ -296,7 +297,7 @@ class SiteController extends IsdController
 
     public function actionEmailLinkSuccess()
     {
-        $this->renderPartial('successDialog', array('header'=>'Email sent','content'=>'The email has been sent by the adSALESapps server.<br>Tell your Recipient they MAY want to check their Spam or Junk mail if they do not receive the link.'), false, true);
+        $this->renderPartial('successDialog', array('header' => 'Email sent', 'content' => 'The email has been sent by the adSALESapps server.<br>Tell your Recipient they MAY want to check their Spam or Junk mail if they do not receive the link.'), false, true);
     }
 
     public function actionEmailLinkGet()
@@ -349,5 +350,4 @@ class SiteController extends IsdController
             Yii::app()->end();
         }
     }
-
 }

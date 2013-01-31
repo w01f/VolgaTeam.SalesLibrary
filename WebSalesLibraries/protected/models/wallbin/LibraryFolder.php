@@ -196,15 +196,15 @@ class LibraryFolder
 
     public static function libraryFolderComparer($x, $y)
     {
-        if ($x->columnOrder == $y->columnOrder)
+        if ($x->rowOrder == $y->rowOrder)
         {
-            if ($x->rowOrder == $y->rowOrder)
+            if ($x->columnOrder == $y->columnOrder)
                 return 0;
             else
-                return ($x->rowOrder < $y->rowOrder) ? -1 : 1;
+                return ($x->columnOrder < $y->columnOrder) ? -1 : 1;
         }
         else
-            return ($x->columnOrder < $y->columnOrder) ? -1 : 1;
+            return ($x->rowOrder < $y->rowOrder) ? -1 : 1;
     }
 
 }

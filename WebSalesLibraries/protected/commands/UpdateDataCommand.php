@@ -73,6 +73,7 @@ class UpdateDataCommand extends CConsoleCommand
                         LinkStorage::clearByLibrary($libraryRecord->id);
                         FolderStorage::clearByLibrary($libraryRecord->id);
                         LibraryPageStorage::clearByLibrary($libraryRecord->id);
+                        FavoritesLinkStorage::clearByLibrary($libraryRecord->id);
                         $libraryRecord->delete();
                         Yii::app()->cacheDB->flush();
                     }
@@ -87,6 +88,13 @@ class UpdateDataCommand extends CConsoleCommand
         $groupTemplateFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'properties.txt';
         if (file_exists($groupTemplateFilePath))
             GroupTemplateStorage::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+
+        $liveLinkRecords = LinkStorage::model()->findAll();
+        if(isset($liveLinkRecords))
+            foreach($liveLinkRecords as $linkRecord)
+                $liveLinkIds[] = $linkRecord->id;
+        if(isset($liveLinkIds))
+            FavoritesLinkStorage::clearByLinkIds($liveLinkIds);
 
         echo "Job completed.\n";
     }

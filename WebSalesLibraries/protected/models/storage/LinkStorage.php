@@ -107,7 +107,7 @@ class LinkStorage extends CActiveRecord
 
     public static function clearByLibrary($libraryId)
     {
-        LinkStorage::model()->deleteAll('id_library=?', array($libraryId));
+        self::model()->deleteAll('id_library=?', array($libraryId));
     }
 
     public static function clearByIds($folderId, $linkIds)
