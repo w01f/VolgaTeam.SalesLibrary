@@ -1,5 +1,5 @@
 <?php
-	$version = '83.0';
+	$version = '85.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -19,9 +19,10 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/view-dialog.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/tool-dialog.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/file-card.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search-grid.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/links-grid.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/help.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/calendar.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/favorites.css?' . $version);
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCoreScript('cookie');
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
@@ -41,7 +42,7 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/scaling.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/linkViewing.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/wallbin.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search-grid.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/links-grid.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/help.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/calendar.js?' . $version, CClientScript::POS_HEAD);

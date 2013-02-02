@@ -1,5 +1,5 @@
 (function( $ ) {
-    $.runSearch = function(isSort){
+    var runSearch = function(isSort){
         var selectedCondition = $('#condition-content-value').val();
         if($('#content-compare-exact').hasClass('active'))
             selectedCondition = '"' + selectedCondition + '"';
@@ -76,11 +76,11 @@
             complete: function(){
                 $.hideOverlayLight();
                 $.updateContentAreaDimensions();
-                $.initSearchGrid();
+				$.linkGrid.refreshData = function()	{runSearch(1);};
+				$.linkGrid.init();
             },
             success: function(msg){
-                $('#search-result').find('>div').html('');
-                $('#search-result').find('>div').append(msg);
+                $('#search-result').find('>div').html('').append(msg);
             },
             error: function(){
                 $('#search-result').find('>div').html('');
@@ -93,10 +93,10 @@
     var initSearchButtons = function()
     {
         $( "#run-search-full" ).off('click').on('click',function () {
-            $.runSearch(0);
+            runSearch(0);
         });        
         $( "#run-search-file-card" ).off('click').on('click',function () {
-            $.runSearch(0);
+            runSearch(0);
         });                
     };
     
@@ -201,7 +201,7 @@
         });        
         $('#condition-content-value').keypress(function (e) {
             if (e.which == 13) {
-                $.runSearch(0);
+                runSearch(0);
             }
         });  
     };
@@ -430,7 +430,8 @@
                 complete: function(){
                     $.hideOverlayLight();
                     $.updateContentAreaDimensions();
-                    $.initSearchGrid();
+					$.linkGrid.refreshData = function()	{runSearch(1);};
+					$.linkGrid.init();
                 },
                 success: function(msg){
                     $('#search-result').find('>div').html('').append(msg);
@@ -456,9 +457,10 @@
                 $.hideOverlay();
                 initControlPanel();
                 $.updateContentAreaDimensions();
-                $.initSearchGrid();
+				$.linkGrid.refreshData = function()	{runSearch(1);};
+				$.linkGrid.init();
                 if($.cookie("recoverSearchState"+$.cookie("selectedRibbonTabId"))=="true")
-                    $.runSearch(1);
+                    runSearch(1);
             },
             success: function(msg){
                 $('#content').html(msg);

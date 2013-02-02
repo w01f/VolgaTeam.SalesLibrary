@@ -37,7 +37,7 @@
 		event.stopPropagation();
 	};
 
-	$.openViewDialogSearchGrid = function (linkId)
+	$.openViewDialogFromGrid = function (linkId)
 	{
 		$.ajax({
 			type:"POST",
