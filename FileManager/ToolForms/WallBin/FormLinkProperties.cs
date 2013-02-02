@@ -199,7 +199,9 @@ namespace FileManager.ToolForms.WallBin
 			}
 
 			gridControlWidgets.DataSource = new BindingList<Widget>(ListManager.Instance.Widgets);
+			layoutViewWidgets.FocusedRowChanged+=layoutViewWidgets_FocusedRowChanged;
 			gridControlBanners.DataSource = new BindingList<Banner>(ListManager.Instance.Banners);
+			layoutViewBanners.FocusedRowChanged += layoutViewBanners_FocusedRowChanged;
 		}
 
 		public bool IsLineBreak { get; set; }
@@ -433,12 +435,14 @@ namespace FileManager.ToolForms.WallBin
 			}
 
 			pbSelectedWidget.Image = EnableWidget ? Widget : null;
+			laWidgetFileName.Text = string.Empty;
 			checkBoxEnableWidget.Checked = EnableWidget;
 
 			#region Banner properties
 			xtraTabPageBanner.PageEnabled = Directory.Exists(ListManager.Instance.BannerFolder);
 			checkBoxEnableBanner.Checked = BannerProperties.Enable;
 			pbSelectedBanner.Image = BannerProperties.Enable ? BannerProperties.Image : null;
+			laBannerFileName.Text = string.Empty;
 			switch (BannerProperties.ImageAlignement)
 			{
 				case Alignment.Left:
@@ -663,11 +667,10 @@ namespace FileManager.ToolForms.WallBin
 		private void layoutViewWidgets_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
 			Widget selectedWidget = null;
-			if (layoutViewWidgets.FocusedRowHandle >= 0)
-			{
+			if (layoutViewWidgets.FocusedRowHandle != GridControl.InvalidRowHandle)
 				selectedWidget = ListManager.Instance.Widgets[layoutViewWidgets.GetDataSourceRowIndex(layoutViewWidgets.FocusedRowHandle)];
-			}
 			pbSelectedWidget.Image = selectedWidget != null ? selectedWidget.Image : null;
+			laWidgetFileName.Text = selectedWidget != null ? selectedWidget.FileName : string.Empty;
 		}
 
 		private void layoutViewWidgets_Click(object sender, EventArgs e)
@@ -695,27 +698,26 @@ namespace FileManager.ToolForms.WallBin
 				checkBoxEnableWidget.Checked = false;
 		}
 
-		private void gridViewBanners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+		private void layoutViewBanners_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
 		{
 			Banner selectedBanner = null;
-			if (gridViewBanners.FocusedRowHandle >= 0)
-				selectedBanner = ListManager.Instance.Banners[gridViewBanners.GetDataSourceRowIndex(gridViewBanners.FocusedRowHandle)];
+			if (layoutViewBanners.FocusedRowHandle != GridControl.InvalidRowHandle)
+				selectedBanner = ListManager.Instance.Banners[layoutViewBanners.GetDataSourceRowIndex(layoutViewBanners.FocusedRowHandle)];
 			pbSelectedBanner.Image = selectedBanner != null ? selectedBanner.Image : null;
+			laBannerFileName.Text = selectedBanner != null ? selectedBanner.FileName : string.Empty;
 		}
 
 		private void gridViewBanners_Click(object sender, EventArgs e)
 		{
-			Point pt = gridControlBanners.PointToClient(MousePosition);
-
-			if (gridViewBanners.CalcHitInfo(pt).RowHandle == gridViewBanners.FocusedRowHandle)
-				gridViewBanners_FocusedRowChanged(null, null);
+			var pt = gridControlBanners.PointToClient(MousePosition);
+			if (layoutViewBanners.CalcHitInfo(pt).RowHandle == layoutViewBanners.FocusedRowHandle)
+				layoutViewBanners_FocusedRowChanged(null, null);
 		}
 
 		private void gridViewBanners_DoubleClick(object sender, EventArgs e)
 		{
-			Point pt = gridControlBanners.PointToClient(MousePosition);
-
-			if (gridViewBanners.CalcHitInfo(pt).InRowCell)
+			var pt = gridControlBanners.PointToClient(MousePosition);
+			if (layoutViewBanners.CalcHitInfo(pt).InField)
 				btOK_Click(null, null);
 		}
 
@@ -1017,15 +1019,15 @@ namespace FileManager.ToolForms.WallBin
 
 		private void toolTipController_GetActiveObjectInfo(object sender, ToolTipControllerGetActiveObjectInfoEventArgs e)
 		{
+			ToolTipControlInfo info = null;
 			if (e.SelectedControl == gridControlWidgets)
 			{
-				ToolTipControlInfo info = null;
 				try
 				{
 					var view = gridControlWidgets.GetViewAt(e.ControlMousePosition) as LayoutView;
 					if (view == null)
 						return;
-					LayoutViewHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
+					var hi = view.CalcHitInfo(e.ControlMousePosition);
 					if (hi.InFieldValue)
 						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Widgets[layoutViewWidgets.GetDataSourceRowIndex(hi.RowHandle)].FileName);
 				}
@@ -1036,15 +1038,14 @@ namespace FileManager.ToolForms.WallBin
 			}
 			else if (e.SelectedControl == gridControlBanners)
 			{
-				ToolTipControlInfo info = null;
 				try
 				{
-					var view = gridControlBanners.GetViewAt(e.ControlMousePosition) as GridView;
+					var view = gridControlBanners.GetViewAt(e.ControlMousePosition) as LayoutView;
 					if (view == null)
 						return;
-					GridHitInfo hi = view.CalcHitInfo(e.ControlMousePosition);
-					if (hi.InRowCell)
-						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Banners[gridViewBanners.GetDataSourceRowIndex(hi.RowHandle)].FileName);
+					var hi = view.CalcHitInfo(e.ControlMousePosition);
+					if (hi.InField)
+						info = new ToolTipControlInfo(new CellToolTipInfo(hi.RowHandle, hi.Column, "cell"), ListManager.Instance.Banners[layoutViewBanners.GetDataSourceRowIndex(hi.RowHandle)].FileName);
 				}
 				finally
 				{

@@ -136,6 +136,8 @@ namespace FileManager
 				key = TabPageEnum.Tags;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
 				key = TabPageEnum.Settings;
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemClipart)
+				key = TabPageEnum.Clipart;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramManager)
 				key = TabPageEnum.ProgramManager;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
