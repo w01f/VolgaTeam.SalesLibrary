@@ -19,14 +19,7 @@
 				autoSize:false,
 				autoHeight:true,
 				openEffect:'none',
-				closeEffect:'none',
-				helpers:{
-					overlay:{
-						css:{
-							'background':'rgba(224, 224, 224, 0.8)'
-						}
-					}
-				}
+				closeEffect:'none'
 			});
 			$(this).find('.view-dialog-content').html(viewDialogContent);
 		}
@@ -75,14 +68,7 @@
 			title:'File Card',
 			minWidth:400,
 			openEffect:'none',
-			closeEffect:'none',
-			helpers:{
-				overlay:{
-					css:{
-						'background':'rgba(224, 224, 224, 0.8)'
-					}
-				}
-			}
+			closeEffect:'none'
 		});
 		$(this).find('.file-card-content').html(fileCardContent);
 	};
@@ -132,14 +118,7 @@
 					content:content,
 					title:title,
 					openEffect:'none',
-					closeEffect:'none',
-					helpers:{
-						overlay:{
-							css:{
-								'background':'rgba(224, 224, 224, 0.8)'
-							}
-						}
-					}
+					closeEffect:'none'
 				});
 			},
 			error:function ()
@@ -215,14 +194,7 @@
 								content:favoritesDialogObject.content,
 								title:title,
 								openEffect:'none',
-								closeEffect:'none',
-								helpers:{
-									overlay:{
-										css:{
-											'background':'rgba(224, 224, 224, 0.8)'
-										}
-									}
-								}
+								closeEffect:'none'
 							});
 						},
 						error:function ()
@@ -236,14 +208,7 @@
 					content:favoritesDialogObject.content,
 					title:title,
 					openEffect:'none',
-					closeEffect:'none',
-					helpers:{
-						overlay:{
-							css:{
-								'background':'rgba(224, 224, 224, 0.8)'
-							}
-						}
-					}
+					closeEffect:'none'
 				});
 			},
 			error:function ()
@@ -411,14 +376,7 @@
 										content:content,
 										title:title,
 										openEffect:'none',
-										closeEffect:'none',
-										helpers:{
-											overlay:{
-												css:{
-													'background':'rgba(224, 224, 224, 0.8)'
-												}
-											}
-										}
+										closeEffect:'none'
 									});
 								},
 								error:function ()
@@ -444,14 +402,7 @@
 					content:emailDialogObject.content,
 					title:title,
 					openEffect:'none',
-					closeEffect:'none',
-					helpers:{
-						overlay:{
-							css:{
-								'background':'rgba(224, 224, 224, 0.8)'
-							}
-						}
-					}
+					closeEffect:'none'
 				});
 			},
 			error:function ()
@@ -493,11 +444,6 @@
 									openEffect:'none',
 									closeEffect:'none',
 									helpers:{
-										overlay:{
-											css:{
-												'background':'rgba(224, 224, 224, 0.8)'
-											}
-										},
 										thumbs:{
 											height:selectedThumbs[0].height,
 											width:selectedThumbs[0].width,
@@ -557,14 +503,7 @@
 						default:
 							$.fancybox(selectedLinks, {
 								openEffect:'none',
-								closeEffect:'none',
-								helpers:{
-									overlay:{
-										css:{
-											'background':'rgba(224, 224, 224, 0.8)'
-										}
-									}
-								}
+								closeEffect:'none'
 							});
 							break;
 					}
@@ -604,13 +543,6 @@
 			content:$('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
 			openEffect:'none',
 			closeEffect:'none',
-			helpers:{
-				overlay:{
-					css:{
-						'background':'rgba(224, 224, 224, 0.8)'
-					}
-				}
-			},
 			afterClose:function ()
 			{
 				$('#video-player').remove();

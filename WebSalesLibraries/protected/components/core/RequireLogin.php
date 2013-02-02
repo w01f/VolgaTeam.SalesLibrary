@@ -17,6 +17,7 @@ class RequireLogin extends CBehavior
             !strstr(Yii::app()->request->getUrl(), 'site/validateUserByEmail') &&
             !strstr(Yii::app()->request->getUrl(), 'site/emailLinkGet') &&
             !strstr(Yii::app()->request->getUrl(), 'site/switchVersion') &&
+			!strstr(Yii::app()->request->getUrl(), 'site/disclaimerWarning') &&
             !strstr(Yii::app()->request->getUrl(), 'admin/') &&
             !strstr(Yii::app()->request->getUrl(), 'content/'))
         {

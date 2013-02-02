@@ -21,12 +21,13 @@
     };
     
     var updateLoginBodyPosition = function(){
-        var top = ($(window).height() - $('#form-login').height())/2;
-        var left = ($(window).width() - $('#form-login').width())/2;
-        $('#form-login').css({
+		var formLogin = $('#form-login');
+        var top = ($(window).height() - formLogin.height())/2;
+        var left = ($(window).width() - formLogin.width())/2;
+		formLogin.css({
             'left':left+'px'
         });
-        $('#form-login').css({
+		formLogin.css({
             'top':top+'px'
         });
     };
@@ -92,14 +93,7 @@
                                                     content: content,
                                                     title: 'Password recovery',
                                                     openEffect  : 'none',
-                                                    closeEffect	: 'none',
-                                                    helpers: {
-                                                        overlay : {
-                                                            css : {
-                                                                'background-color' : '#eee'
-                                                            }
-                                                        }
-                                                    }
+                                                    closeEffect	: 'none'
                                                 });                
                                             },
                                             error: function(){
@@ -128,15 +122,8 @@
                     content: content,
                     title: 'Password recovery',
                     openEffect  : 'none',
-                    closeEffect	: 'none',
-                    helpers : {
-                        overlay : {
-                            css : {
-                                'background' : 'rgba(224, 224, 224, 0.8)'
-                            }
-                        }
-                    }
-                });                
+                    closeEffect	: 'none'
+                });
             },
             error: function(){
             },            
@@ -176,21 +163,44 @@
         $('#button-switch-version').off('click').on('click',function(){
             switchVersion();
         });        
-        
-        $('#disclaimer').on('change',function(){
-            if($(this).attr('checked'))
-                $('#button-login').removeClass('disabled');
-            else
-                $('#button-login').addClass('disabled');
-        });
         $('#button-login').off('click').on('click',function(event){
             if($('#disclaimer').length && !$("#disclaimer").attr('checked'))
             {
-                event.preventDefault();
-                event.stopPropagation();
+				event.preventDefault();
+				event.stopPropagation();
+				$.ajax({
+					type: "POST",
+					url: "disclaimerWarning",
+					data: {},
+					beforeSend: function(){
+						$.showOverlay();
+					},
+					complete: function(){
+						$.hideOverlay();
+					},
+					success: function(msg){
+						var content = $(msg);
+						content.find('#accept-button').off('click');
+						content.find('#accept-button').on('click',function(){
+							$.fancybox.close();
+						});
+						$.fancybox({
+							content: content,
+							title: 'Confirmation Needed!',
+							width:450,
+							autoSize:false,
+							autoHeight:true,
+							openEffect  : 'none',
+							closeEffect	: 'none'
+						});
+					},
+					error: function(){
+					},
+					async: true,
+					dataType: 'html'
+				});
             }
         });                
-        
         updateLoginBodyPosition();
         $(window).on('resize',updateLoginBodyPosition); 
     });

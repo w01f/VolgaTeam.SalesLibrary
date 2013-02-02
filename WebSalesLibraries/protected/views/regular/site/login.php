@@ -1,5 +1,5 @@
 <?php
-$version = '9.0';
+$version = '10.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -122,7 +122,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
                 <?php
                 echo CHtml::submitButton('Log In'
                     , array('id' => 'button-login',
-                    'class' => Yii::app()->params['login']['disclaimer'] ? 'btn disabled' : 'btn'
+                    'class' => 'btn'
                 ));
                 ?>                        
             </td>                            

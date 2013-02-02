@@ -20,6 +20,7 @@
 					'forgotPasswordField' => true,
 					'disclaimer' => true,
 					'disclaimerText' => 'I understand  that this Website contains information that is privileged, confidential and exempt from disclosure under applicable law.  Only Authorized employees  and representatives of WPLG-TV, Miami, may access or download information from this site.',
+					'disclaimerWarningText' => 'Please CONFIRM acceptance of the terms and conditions of the confidentiality statement before logging into the site.',
 					'tempPasswordExpiredIn' => '7',
 				),
 				'home_tab' => array(

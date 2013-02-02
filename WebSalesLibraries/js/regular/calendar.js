@@ -102,13 +102,6 @@
                 content:$('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
                 openEffect:'none',
                 closeEffect:'none',
-                helpers:{
-                    overlay:{
-                        css:{
-                            'background':'rgba(224, 224, 224, 0.8)'
-                        }
-                    }
-                },
                 afterClose:function ()
                 {
                     $('#video-player').remove();
