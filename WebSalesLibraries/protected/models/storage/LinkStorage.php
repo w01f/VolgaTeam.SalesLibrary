@@ -115,7 +115,7 @@
 			Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
 		}
 
-		public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $isSort)
+		public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $hideDuplicated, $isSort)
 		{
 			$sessionId = 'searchedLinks';
 			if (isset(Yii::app()->request->cookies['selectedRibbonTabId']->value))
@@ -224,13 +224,27 @@
 						$linkCondition = "is_restricted <> 1";
 				}
 
-				$linkRecords = Yii::app()->db->createCommand()
-					->select('*')
-					->from('tbl_link')
-					->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
-					->queryAll();
 
-				$links = self::getLinksGrid($linkRecords);
+				if ($hideDuplicated)
+				{
+					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'file_date' : 'date_modify') . ') as link_date';
+					$linkRecords = Yii::app()->db->createCommand()
+						->select('max(id) as id, max(id_library) as id_library, name, file_name, ' . $dateField . ', max(enable_attachments) as enable_attachments, max(enable_file_card) as enable_file_card, max(format) as format')
+						->from('tbl_link')
+						->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
+						->group('name, file_name')
+						->queryAll();
+				}
+				else
+				{
+					$dateField = (isset($dateFile) && $dateFile == 'true' ? 'file_date' : 'date_modify') . ' as link_date';
+					$linkRecords = Yii::app()->db->createCommand()
+						->select('id, id_library, name, file_name, ' . $dateField . ', enable_attachments, enable_file_card, format')
+						->from('tbl_link')
+						->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
+						->queryAll();
+				}
+				$links = self::getLinksGrid($linkRecords, $hideDuplicated);
 
 				if (isset($links))
 					Yii::app()->session[$sessionId] = $links;
@@ -295,7 +309,7 @@
 					$link['id'] = $linkRecord['id'];
 					$link['name'] = $linkRecord['name'];
 					$link['file_name'] = $linkRecord['file_name'];
-					$link['date_modify'] = isset($dateFile) && $dateFile == 'true' ? $linkRecord['file_date'] : $linkRecord['date_modify'];
+					$link['date_modify'] = $linkRecord['link_date'];
 					$link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
 
 					$library = $libraryManager->getLibraryById($linkRecord['id_library']);

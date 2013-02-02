@@ -1,7 +1,7 @@
 <input type="search" name="search" id="search-keyword" value="" />
-<table class="layout-group" id="search-match-selector">
+<table class="layout-group">
     <tr>
-        <td class="on-center">
+        <td colspan="2" class="on-center">
             <div id="search-match-selector" data-role="navbar">
                 <ul>
                     <li><a href="#" id="search-match-exact" data-corners="true" data-shadow="true">Exact</a></li>
@@ -15,6 +15,10 @@
             <input type="checkbox" name="search-only-filecards" id="search-only-filecards" class="custom" data-mini="true"/>
             <label for="search-only-filecards">Show Me the Money!</label>
         </td>
+		<td class="on-center">
+			<input type="checkbox" name="hide-duplicated" id="hide-duplicated" class="custom" data-mini="true"/>
+			<label for="hide-duplicated">Hide Duplicate Files</label>
+		</td>
     </tr>            
 </table>
 <br>

@@ -50,8 +50,9 @@
 				{
 					foreach ($favoriteLinkRecords as $favoriteLinkRecord)
 						$linkIds[] = $favoriteLinkRecord->id_link;
+					$dateField = 'file_date as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('*')
+						->select('id, id_library, name, file_name, ' . $dateField . ', enable_attachments, enable_file_card, format')
 						->from('tbl_link')
 						->where("id in ('" . implode("', '", $linkIds) . "')")
 						->queryAll();

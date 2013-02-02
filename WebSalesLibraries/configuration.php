@@ -52,6 +52,9 @@
 					'tab_name' => 'Libraries',
 					'column_name' => 'Libraries',
 				),
+				'search_options' => array(
+					'hide_duplicate' => true,
+				),
 				'email' => array(
 					'from' => 'bcaudill@raycommedia.com',
 					'new_user' => array(
