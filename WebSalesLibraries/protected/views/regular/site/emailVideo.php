@@ -34,7 +34,6 @@
             <h3>MP4 (for iPads and Google Chrome)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
-                <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                 <div class ="view-type"><?php echo 'mp4'; ?></div>
                 <?php $viewLinks = $link->getViewSource('mp4'); ?>
@@ -47,7 +46,6 @@
             <h3>WMV (for Internet Explorer)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
-                <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                 <div class ="view-type"><?php echo 'video'; ?></div>
                 <?php $viewLinks = $link->getViewSource('video'); ?>
@@ -60,7 +58,6 @@
             <h3>OGV (for Firefox)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
-                <div class ="library-id"><?php echo $link->parent->parent->parent->id; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                 <div class ="view-type"><?php echo 'ogv'; ?></div>
                 <?php $viewLinks = $link->getViewSource('ogv'); ?>

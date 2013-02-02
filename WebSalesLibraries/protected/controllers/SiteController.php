@@ -229,67 +229,52 @@
 			if (isset($expiresIn) && $expiresIn == '')
 				unset($expiresIn);
 
-			$linkRecord = LinkStorage::getLinkById($linkId);
-			if (isset($linkRecord))
+			if (isset($emailTo) && isset($emailFrom) && isset($emailSubject) && isset($emailBody) && $emailTo != '' && $emailFrom != '')
 			{
-				$libraryId = $linkRecord->id_library;
-				$libraryManager = new LibraryManager();
-				$library = $libraryManager->getLibraryById($libraryId);
-				if (isset($library))
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				if (isset($linkRecord))
 				{
-					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-					$link->load($linkRecord);
+					$libraryId = $linkRecord->id_library;
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($libraryId);
+					if (isset($library))
+					{
+						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+						$link->load($linkRecord);
+						EmailedLinkStorage::sendLink($link, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
+					}
+					else
+					{
+						echo 'Library was not found';
+						echo $linkRecord->id_library;
+					}
 				}
 				else
 				{
-					echo 'Library was not found';
-					echo $linkRecord->id_library;
-				}
-			}
-
-			if (isset($link) && isset($emailTo) && isset($emailFrom) && isset($emailSubject) && isset($emailBody))
-			{
-				if ($emailTo != '' && $emailFrom != '')
-				{
-					$emailFolder = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['emailTemp'];
-					$emailFolderLink = Yii::app()->getBaseUrl(true) . '/' . Yii::app()->params['librariesRoot'] . '/' . Yii::app()->params['emailTemp'];
-					if (!file_exists($emailFolder))
-						mkdir($emailFolder, 0, true);
-
-					$id = uniqid();
-					$destinationPath = $emailFolder . DIRECTORY_SEPARATOR . $id . $link->fileName;
-					$destinationLink = str_replace(' ', '%20', htmlspecialchars($emailFolderLink . '/' . $id . $link->fileName));
-
-					if (!file_exists($destinationPath))
-						copy($link->filePath, $destinationPath);
-
-					$recipients = explode(";", $emailTo);
-					$recipientsCopy = isset($emailCopyTo) && $emailCopyTo != '' ? explode(";", $emailCopyTo) : null;
-					if (isset($recipientsCopy))
-						$recipientsWhole = array_merge($recipients, $recipientsCopy);
-					else
-						$recipientsWhole = $recipients;
-
-					$userId = Yii::app()->user->getId();
-					if (isset($userId))
-						UserRecipientStorage::setRecipientsForUser($userId, $recipientsWhole);
-
-					EmailedLinkStorage::saveEmailedLink($id, $linkId, $libraryId, $destinationPath, $destinationLink, $expiresIn, Yii::app()->user->login, $emailFrom, implode('; ', $recipientsWhole));
-
-					if ($link->originalFormat == 'mp4' || $link->originalFormat == 'video')
-						$destinationLink = Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('site/emailLinkGet', array('emailId' => $id));
-
-					if ($emailToMe == 'true')
-						$recipientsCopy[] = $emailFrom;
-
-					$message = Yii::app()->email;
-					$message->to = $recipients;
-					$message->cc = $recipientsCopy;
-					$message->subject = $emailSubject;
-					$message->from = $emailFrom;
-					$message->view = 'sendLink';
-					$message->viewVars = array('body' => $emailBody, 'link' => $destinationLink, 'expiresIn' => $expiresIn);
-					$message->send();
+					$attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
+					if (isset($attachmentRecord))
+					{
+						$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
+						if (isset($linkRecord))
+						{
+							$libraryId = $linkRecord->id_library;
+							$libraryManager = new LibraryManager();
+							$library = $libraryManager->getLibraryById($libraryId);
+							if (isset($library))
+							{
+								$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+								$link->load($linkRecord);
+								$attachment = new Attachment($link);
+								$attachment->load($attachmentRecord);
+								EmailedLinkStorage::sendAttachment($attachment, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
+							}
+							else
+							{
+								echo 'Library was not found';
+								echo $linkRecord->id_library;
+							}
+						}
+					}
 				}
 			}
 			Yii::app()->end();
@@ -333,8 +318,30 @@
 					}
 					else
 					{
-						echo 'Link was not found';
-						echo $emailedLinkRecord->id_link;
+						$attachmentRecord = AttachmentStorage::getAttachmentById($emailedLinkRecord->id_link);
+						if (isset($attachmentRecord))
+						{
+							$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
+							if (isset($linkRecord))
+							{
+								$libraryManager = new LibraryManager();
+								$libraryManager->getLibraries();
+								$library = $libraryManager->getLibraryById($emailedLinkRecord->id_library);
+								if (isset($library))
+								{
+									$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+									$link->load($linkRecord);
+									$attachment = new Attachment($link);
+									$attachment->load($attachmentRecord);
+									$this->render('emailVideo', array('link' => $attachment, 'expiresIn' => $emailedLinkRecord->expires_in, 'senderName' => $senderName));
+								}
+								else
+								{
+									echo 'Library was not found';
+									echo $emailedLinkRecord->id_library;
+								}
+							}
+						}
 					}
 				}
 			}
