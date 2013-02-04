@@ -299,6 +299,27 @@
 			return null;
 		}
 
+		public static function EnumFolderContent($linkId)
+		{
+			$linksNumber = 0;
+			$childLinks = self::getLinksByParent($linkId);
+			if(isset($childLinks))
+				foreach ($childLinks as $linkRecord)
+					switch($linkRecord->type)
+					{
+						case 6:
+							break;
+						case 5:
+							$linksNumber+=	self::EnumFolderContent($linkRecord->id);
+							break;
+						default:
+							$linksNumber++;
+							break;
+					}
+			return $linksNumber;
+		}
+
+
 		public static function getLinksGrid($linkRecords)
 		{
 			if (isset($linkRecords) && count($linkRecords) > 0)

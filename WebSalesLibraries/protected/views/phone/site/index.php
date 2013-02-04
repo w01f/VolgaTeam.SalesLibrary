@@ -1,5 +1,5 @@
 <?php
-$version = '18.0';
+$version = '20.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -241,14 +241,17 @@ if (isset($userId))
         <div data-role="navbar">
             <ul>
                 <li>
-                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-transition="none">Search</a>
+                    <a class ="ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-transition="none">Keyword</a>
                 </li>
+				<li>
+					<a class ="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+				</li>
                 <li>
-                    <a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File Type</a>
-                </li>                                
-                <li>
-                    <a class ="tab-search-tags" href="#search-tags" data-transition="none">Tags</a>
+                    <a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
                 </li>
+				<li>
+					<a class ="tab-search-date" href="#search-date" data-transition="none">Date</a>
+				</li>
                 <li>
                     <a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
                 </li>
@@ -284,20 +287,23 @@ if (isset($userId))
         <a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
         <span class="ui-title">Search</span>
         <div data-role="navbar">
-            <ul>
-                <li>
-                    <a href="#search-basic" data-transition="none">Search</a>
-                </li>
-                <li>
-                    <a class ="tab-search-file-types ui-btn ui-btn-active ui-state-persist" href="#search-file-types" data-transition="none">File Type</a>
-                </li>                
-                <li>
-                    <a class ="tab-search-tags" href="#search-tags" data-transition="none">Tags</a>
-                </li>
-                <li>
-                    <a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
-                </li>
-            </ul>
+			<ul>
+				<li>
+					<a href="#search-basic" data-transition="none">Keyword</a>
+				</li>
+				<li>
+					<a class ="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+				</li>
+				<li>
+					<a class ="tab-search-file-types ui-btn ui-btn-active ui-state-persist" href="#search-file-types" data-transition="none">File</a>
+				</li>
+				<li>
+					<a class ="tab-search-date" href="#search-date" data-transition="none">Date</a>
+				</li>
+				<li>
+					<a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+				</li>
+			</ul>
         </div>
     </div>             
     <div data-role='content' class ="page-content">
@@ -329,20 +335,23 @@ if (isset($userId))
         <a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
         <span class="ui-title">Search</span>
         <div data-role="navbar">
-            <ul>
-                <li>
-                    <a href="#search-basic" data-transition="none">Search</a>
-                </li>
-                <li>
-                    <a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File Type</a>
-                </li>                                                
-                <li>
-                    <a class ="tab-search-tags ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tags</a>
-                </li>
-                <li>
-                    <a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
-                </li>
-            </ul>
+			<ul>
+				<li>
+					<a href="#search-basic" data-transition="none">Keyword</a>
+				</li>
+				<li>
+					<a class ="tab-search-tags  ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tag</a>
+				</li>
+				<li>
+					<a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
+				</li>
+				<li>
+					<a class ="tab-search-date" href="#search-date" data-transition="none">Date</a>
+				</li>
+				<li>
+					<a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+				</li>
+			</ul>
         </div>
     </div>             
     <div data-role='content' class ="page-content">
@@ -368,26 +377,77 @@ if (isset($userId))
             </ul>
         </div>             
     </div>             
-</div>        
+</div>
+<div data-role='page' id="search-date" data-cache="never"  data-dom-cache ="false" data-ajax="false">
+	<div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
+		<a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
+		<span class="ui-title">Search</span>
+		<div data-role="navbar">
+			<ul>
+				<li>
+					<a href="#search-basic" data-transition="none">Keyword</a>
+				</li>
+				<li>
+					<a class ="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+				</li>
+				<li>
+					<a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
+				</li>
+				<li>
+					<a class ="tab-search-date ui-btn ui-btn-active ui-state-persist" href="#search-date" data-transition="none">Date</a>
+				</li>
+				<li>
+					<a class ="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role='content' class ="page-content">
+	</div>
+	<div class ="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class ="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction ="reverse">
+						Libraries
+					</a>
+				</li>
+				<li>
+					<a class ="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">
+						Search
+					</a>
+				</li>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">
+						Log Out
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div data-role='page' id="search-libraries" data-cache="never"  data-dom-cache ="false" data-ajax="false"> 
     <div data-role='header' class ="page-header" data-position="fixed" data-theme="b">
         <a class="search-button ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-theme="b" data-icon="search">Search</a>
         <span class="ui-title">Search</span>
         <div data-role="navbar">
-            <ul>
-                <li>
-                    <a href="#search-basic" data-transition="none">Search</a>
-                </li>
-                <li>
-                    <a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File Type</a>
-                </li>                                                
-                <li>
-                    <a class ="tab-search-tags" href="#search-tags" data-transition="none">Tags</a>
-                </li>
-                <li>
-                    <a class ="tab-search-libraries ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
-                </li>
-            </ul>
+			<ul>
+				<li>
+					<a href="#search-basic" data-transition="none">Keyword</a>
+				</li>
+				<li>
+					<a class ="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+				</li>
+				<li>
+					<a class ="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
+				</li>
+				<li>
+					<a class ="tab-search-date" href="#search-date" data-transition="none">Date</a>
+				</li>
+				<li>
+					<a class ="tab-search-libraries ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+				</li>
+			</ul>
         </div>
     </div>             
     <div data-role='content' class ="page-content">

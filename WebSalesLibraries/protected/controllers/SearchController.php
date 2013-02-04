@@ -24,6 +24,11 @@
 			$this->renderPartial('tagsView', array('categories' => $categories), false, true);
 		}
 
+		public function actionGetDateView()
+		{
+			$this->renderPartial('dateView', array(), false, true);
+		}
+
 		public function actionGetLibrariesView()
 		{
 			$libraryManager = new LibraryManager();

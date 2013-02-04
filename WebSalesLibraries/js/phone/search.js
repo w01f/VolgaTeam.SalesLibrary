@@ -66,6 +66,24 @@
 		});
 		$.ajax({
 			type:"POST",
+			url:"search/getDateView",
+			beforeSend:function ()
+			{
+				$('#search-date').find('.page-content').html('');
+			},
+			complete:function ()
+			{
+				loadDatePanel();
+			},
+			success:function (msg)
+			{
+				$('#search-date').find('.page-content').html(msg);
+			},
+			async:true,
+			dataType:'html'
+		});
+		$.ajax({
+			type:"POST",
 			url:"search/getLibrariesView",
 			beforeSend:function ()
 			{
@@ -87,10 +105,9 @@
 	var loadSearchPanel = function ()
 	{
 		initMatchSelector();
-		initDateSelector();
 		initSearchSortSelectors();
 
-		$('#search-basic, #search-file-types, #search-tags, #search-libraries').on('pageshow', function (e)
+		$('#search-basic, #search-file-types, #search-tags, #search-date, #search-libraries').on('pageshow', function (e)
 		{
 			var currentPage = $(e.target);
 			$('#search-result').find('.link.back').attr('href', '#' + currentPage.attr('id'));
@@ -101,6 +118,11 @@
 		{
 			runSearch(0);
 		});
+	};
+
+	var loadDatePanel = function ()
+	{
+		initDateSelector();
 	};
 
 	var loadFileTypesPanel = function ()
@@ -151,20 +173,6 @@
 
 	var initDateSelector = function ()
 	{
-		var updateDateRange = function ()
-		{
-			var startDateText = $('#search-date-start').val();
-			var endDateText = $('#search-date-end').val();
-			if (startDateText != null && endDateText != null && startDateText != '' && endDateText != '')
-			{
-				searchDateContainer.find('.layout-group-title').html('Dates: ' + startDateText + '-' + endDateText);
-			}
-			else
-			{
-				searchDateContainer.find('.layout-group-title').html('Dates: All');
-			}
-		};
-
 		var searchDateContainer = $('#search-date-container');
 		searchDateContainer.collapsible();
 		$('#search-date-start, #search-date-end').scroller({
@@ -174,19 +182,13 @@
 			mode:'clickpick',
 			animate:'fade',
 			dateOrder:'mmD ddy',
-			dateFormat:'mm/dd/y',
-			onSelect:function (valueText, inst)
-			{
-				updateDateRange();
-			}
+			dateFormat:'mm/dd/y'
 		});
 		$('#search-clear-date-button').off('click').on('click', function ()
 		{
 			$('#search-date-start, #search-date-end').val('');
 			updateDateRange();
 		});
-
-		updateDateRange();
 
 		searchDateContainer.find('input[type="radio"]').checkboxradio();
 		if ($.cookie("conditionDateByFile") != null)
