@@ -1,5 +1,5 @@
 <?php
-	$version = '7.0';
+	$version = '8.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCoreScript('jquery');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
@@ -9,7 +9,7 @@
 	$this->pageTitle = Yii::app()->name . ' - Login';
 ?>
 <div data-role="page" id="main" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class ="page-header" data-position="fixed" data-theme="b"></div>
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b"></div>
 	<div data-role="content">
 		<?php
 		$form = $this->beginWidget('CActiveForm', array(
@@ -80,7 +80,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td style="padding: 2%;">
 					<?php
 					echo CHtml::submitButton('Log In'
 						, array('id' => 'button-login',
@@ -91,29 +91,32 @@
 					?>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<button id="forgot-password" data-role="button" data-theme="b">Forgot Passsord</button>
-				</td>
-			</tr>
 		</table>
 		<?php $this->endWidget(); ?>
-		<?php if (Yii::app()->browser->isMobile() && !($this->browser == Browser::BROWSER_IPHONE || $this->browser == Browser::BROWSER_ANDROID_MOBILE)): ?>
 		<br>
-		<table class="form-login">
+		<?php if (Yii::app()->params['login']['forgotPasswordField'] || (Yii::app()->browser->isMobile() && !($this->browser == Browser::BROWSER_IPHONE || $this->browser == Browser::BROWSER_ANDROID_MOBILE))): ?>
+		<table width="100%">
 			<tr>
-				<td>
-					<button id="button-switch-version" data-role="button" data-theme="b">Switch to Full version</button>
+				<?php if (Yii::app()->params['login']['forgotPasswordField']): ?>
+				<td width="50%" style="padding: 2%;">
+					<a id="forgot-password" href="#recover-password" data-role="button" data-theme="b" data-mini="true"
+					   data-transition="slidefade">Forgot Passsord</a>
 				</td>
+				<?php endif; ?>
+				<?php if (Yii::app()->browser->isMobile() && !($this->browser == Browser::BROWSER_IPHONE || $this->browser == Browser::BROWSER_ANDROID_MOBILE)): ?>
+				<td width="50%" style="padding: 2%;">
+					<a id="button-switch-version" data-role="button" data-theme="b" data-mini="true">Full version</a>
+				</td>
+				<?php endif; ?>
 			</tr>
 		</table>
 		<?php endif; ?>
 	</div
-	<div data-role='footer' class ="page-header" data-position="fixed" data-theme="b"></div>
+	<div data-role='footer' class="page-header" data-position="fixed" data-theme="b"></div>
 </div>
 <?php if (Yii::app()->params['login']['disclaimer']): ?>
 <div data-role="page" id="disclaimer" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class ="page-header" data-position="fixed" data-theme="b"></div>
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b"></div>
 	<div data-role="content">
 		<table class="form-login">
 			<tr>
@@ -125,13 +128,78 @@
 			</tr>
 			<tr>
 				<td>
-					<br>
-					<br>
+					<br> <br>
 					<button id="button-accept-dislaimer" data-role="button" data-theme="b">I Agree</button>
 				</td>
 			</tr>
 		</table>
 	</div
-	<div data-role='footer' class ="page-header" data-position="fixed" data-theme="b"></div>
+	<div data-role='footer' class="page-header" data-position="fixed" data-theme="b"></div>
 </div>
 <?php endif; ?>
+<div data-role='page' id="recover-password" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<span class="ui-title library-title">Recover Password</span>
+	</div>
+	<div data-role='content' class="page-content">
+		<table class="form-login">
+			<tr>
+				<td class="title" colspan="2">Login:</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input id="login" name="login" type="text" value=""/> <br>
+				</td>
+			</tr>
+			<tr>
+				<td class="title" colspan="2">Email:</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input id="email" name="email" type="text" value=""/> <br>
+				</td>
+			</tr>
+			<tr>
+				<td class="error-message" colspan="2">
+					<div></div>
+					<br>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding: 2%;">
+					<a href="#" id="button-recover-password" data-role="button" data-theme="b">Accept</a>
+				</td>
+				<td style="padding: 2%;">
+					<a href="#main" data-role="button" data-theme="b" data-transition="slidefade"
+					   data-direction="reverse">Cancel</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b"></div>
+</div>
+<div data-role="page" id="recover-password-success" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<span class="ui-title library-title">Recover Password</span>
+	</div>
+	<div data-role="content">
+		<table class="form-login">
+			<tr>
+				<td class="text">
+					<span>
+						A temporary password has been sent
+						<br>
+						Check your inbox of junk mail filter
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br> <br> <a href="#main" data-role="button" data-theme="b" data-transition="slidefade"
+								 data-direction="reverse">Back To Login</a>
+				</td>
+			</tr>
+		</table>
+	</div
+	<div data-role='footer' class="page-header" data-position="fixed" data-theme="b"></div>
+</div>

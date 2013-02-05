@@ -45,8 +45,7 @@
             },
             success: function(msg){
                 var content = $(msg);
-                content.find('#accept-button').off('click');
-                content.find('#accept-button').on('click',function(){
+                content.find('#accept-button').off('click').on('click',function(){
                     $.ajax({
                         type: "POST",
                         url: "validateUserByEmail",

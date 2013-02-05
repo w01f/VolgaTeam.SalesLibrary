@@ -78,5 +78,75 @@
 		{
 			switchVersion();
 		});
+
+		$('#button-recover-password').off('click').on('click', function (event)
+		{
+			$.ajax({
+				type:"POST",
+				url:"validateUserByEmail",
+				data:{
+					login:$('#login').val(),
+					email:$('#email').val()
+				},
+				beforeSend:function ()
+				{
+					$.mobile.loading('show', {
+						textVisible:false,
+						html:""
+					});
+				},
+				complete:function ()
+				{
+					$.mobile.loading('hide', {
+						textVisible:false,
+						html:""
+					});
+				},
+				success:function (msg)
+				{
+					if (msg != '')
+						$('#recover-password').find('.error-message div').html(msg);
+					else
+					{
+						$('#recover-password').find('.error-message div').html('');
+						$.ajax({
+							type:"POST",
+							url:"recoverPassword",
+							data:{
+								login:$('#login').val()
+							},
+							beforeSend:function ()
+							{
+								$.mobile.loading('show', {
+									textVisible:false,
+									html:""
+								});
+							},
+							complete:function ()
+							{
+								$.mobile.loading('hide', {
+									textVisible:false,
+									html:""
+								});
+							},
+							success:function ()
+							{
+								$.mobile.changePage("#recover-password-success", {
+									transition:"slidefade"
+								});
+							},
+							async:true,
+							dataType:'html'
+						});
+					}
+				},
+				error:function ()
+				{
+					$('#recover-password').find('.error-message div').html('Error while validating user. Try again or contact to technical support');
+				},
+				async:true,
+				dataType:'html'
+			});
+		});
 	});
 })(jQuery);
