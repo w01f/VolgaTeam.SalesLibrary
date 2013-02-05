@@ -229,10 +229,10 @@
 				{
 					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'file_date' : 'date_modify') . ') as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('max(id) as id, max(id_library) as id_library, name, file_name, ' . $dateField . ', max(enable_attachments) as enable_attachments, max(enable_file_card) as enable_file_card, max(format) as format')
+						->select('max(id) as id, max(id_library) as id_library, max(name) as name, file_name, ' . $dateField . ', max(enable_attachments) as enable_attachments, max(enable_file_card) as enable_file_card, max(format) as format')
 						->from('tbl_link')
 						->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
-						->group('name, file_name')
+						->group('file_name')
 						->queryAll();
 				}
 				else

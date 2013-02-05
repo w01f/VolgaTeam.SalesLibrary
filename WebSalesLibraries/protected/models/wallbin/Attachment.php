@@ -40,6 +40,7 @@
 		public $universalPreview;
 		public $fileSize;
 		public $isAttachment;
+		public $tooltip;
 
 		public function __construct($link)
 		{
@@ -77,6 +78,7 @@
 				}
 			}
 			$this->getFormats();
+			$this->getTooltip();
 		}
 
 		public function getFormats()
@@ -182,6 +184,12 @@
 						break;
 				}
 			}
+		}
+
+		public function getTooltip()
+		{
+			if (isset($this->originalFormat) && array_key_exists($this->originalFormat, Yii::app()->params['tooltips']['wallbin']))
+				$this->tooltip = Yii::app()->params['tooltips']['wallbin'][$this->originalFormat];
 		}
 
 		public function getViewSource($format)

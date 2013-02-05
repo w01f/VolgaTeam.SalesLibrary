@@ -55,6 +55,35 @@
 				'search_options' => array(
 					'hide_duplicate' => true,
 				),
+				'tooltips' => array(
+					'wallbin' => array(
+						'ppt' => 'PowerPoint',
+						'doc' => 'Word',
+						'xls' => 'Excel',
+						'png' => 'PNG',
+						'jpeg' => 'JPEG',
+						'pdf' => 'PDF',
+						'video' => 'WMV Video',
+						'mp4' => 'MP4 Video',
+						'url' => 'Web URL',
+					),
+					'preview_dialog' => array(
+						'ppt' => 'PPT Tooltip',
+						'doc' => 'DOC Tooltip',
+						'xls' => 'XLS Tooltip',
+						'png' => 'PNG Tooltip',
+						'jpeg' => 'JPEG Tooltip',
+						'pdf' => 'PDF Tooltip',
+						'video' => 'WMV Tooltip',
+						'mp4' => 'MP4 Tooltip',
+						'ogv' => 'OGV Tooltip',
+						'tab' => 'TAB Tooltip',
+						'url' => 'URL Tooltip',
+						'email' => 'Email Tooltip',
+						'download' => 'Download Tooltip',
+						'favorites' => 'Favorites Tooltip',
+					)
+				),
 				'email' => array(
 					'from' => 'bcaudill@raycommedia.com',
 					'new_user' => array(

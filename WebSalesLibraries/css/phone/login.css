@@ -11,6 +11,18 @@
     padding-left: 12%;
 }
 
+.form-login td.text
+{
+	text-align: center;
+	font-weight: bold;
+	padding: 0px;
+}
+
+.form-login td.text span
+{
+	line-height: 30px;
+}
+
 .form-login td.title
 {
     text-align: left;

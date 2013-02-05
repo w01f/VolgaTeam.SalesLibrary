@@ -153,10 +153,8 @@
 	</div>
 	<div id="search-options-stations">
 		<div class="group-panel">
-			<button type="button" class="btn btn-block" id="library-select-all">Select
-				All <?php echo Yii::app()->params['stations']['tab_name']; ?></button>
-			<button type="button" class="btn btn-block" id="library-clear-all">Clear
-				All <?php echo Yii::app()->params['stations']['tab_name']; ?></button>
+			<button type="button" class="btn btn-block" id="library-select-all">Select All </button>
+			<button type="button" class="btn btn-block" id="library-clear-all">Clear All </button>
 		</div>
 		<div id="libraries-container">
 			<div class="accordion" id="libraries">

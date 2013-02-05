@@ -48,6 +48,15 @@
     color: #b0b0b0;
 }
 
+li div.warning
+{
+	text-align: left;
+	font-family: 'Arial', serif;
+	font-size: 16pt;
+	color: red;
+	font-weight: bold;
+}
+
 #gallery 
 {
     list-style: none;

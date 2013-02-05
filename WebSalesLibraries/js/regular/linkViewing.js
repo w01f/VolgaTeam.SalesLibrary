@@ -3,11 +3,12 @@
 	$.openViewDialogEmbedded = function (event)
 	{
 		var formatItems = $(this).find('li');
+		var warning = $(this).find('.warning');
 		var fullScreenSelector = $(this).find('.use-fullscreen');
-		if (formatItems.length > 1)
+		if (formatItems.length > 1 || warning.length)
 		{
-			$(this).find('.view-dialog-body .format-list li').off('click');
-			$(this).find('.view-dialog-body .format-list li').on('click', function ()
+			formatItems.tooltip({animation:false, trigger:'hover', delay:{ show:500, hide:100 }});
+			formatItems.off('click').on('click', function ()
 			{
 				$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'));
 			});
@@ -15,7 +16,7 @@
 			$.fancybox({
 				content:$(this).find('.view-dialog-body'),
 				title:'How Do you want to Open this File?',
-				width:450,
+				width:490,
 				autoSize:false,
 				autoHeight:true,
 				openEffect:'none',
