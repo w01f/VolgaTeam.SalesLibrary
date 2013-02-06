@@ -27,7 +27,7 @@ namespace FileManager.Controllers
 			if (!FormMain.Instance.pnMain.Controls.Contains(_tabPage))
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
 			FormMain.Instance.buttonItemClipartSalesGallery.Checked = true;
-			_tabPage.ShowClientLogos();
+			_tabPage.ShowSalesGallery();
 			_initialization = false;
 		}
 
