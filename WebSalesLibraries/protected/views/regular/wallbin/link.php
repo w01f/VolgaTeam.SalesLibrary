@@ -1,5 +1,5 @@
 <?php
-	if (isset($link->folderContent))
+	if ($link->isFolder)
 	{
 		$linkContainerClass = 'link-container folder-link';
 		if ($link->browser != 'mobile')
@@ -40,19 +40,15 @@
 	}
 	?>
 	<div class="<?php echo $linkClass; ?>"
-		 style="background-image: <?php echo isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>;">
-		<span class="link-text" <?php echo $linkFontProperties; ?>" <?php if (isset($tooltip)): ?>rel="tooltip"
-		title="<? echo $tooltip; ?>"<? endif;?>><?php echo $link->name; ?></span>
+		 style="background-image: <?php echo isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <?php echo $linkFontProperties; ?>">
+		<span class="link-text" <?php if (isset($tooltip)): ?>rel="tooltip" title="<? echo $tooltip; ?>"<? endif;?>><?php echo $link->name; ?></span>
 		<?php if (isset($link->note) && $link->note != ""): ?>
 		<span class="link-note"><?php echo $link->note; ?></span>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
-	<?php if (isset($link->folderContent)): ?>
-	<div class="folder-link-content">
-		<?php foreach ($link->folderContent as $contentLink): ?>
-		<?php echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $contentLink), true); ?>
-		<?php endforeach; ?>
+	<?php if ($link->isFolder): ?>
+	<div class="folder-link-content" id="folder-link-content<?php echo $link->id; ?>">
 	</div>
 	<?php endif; ?>
 	<div class="view-dialog-content">

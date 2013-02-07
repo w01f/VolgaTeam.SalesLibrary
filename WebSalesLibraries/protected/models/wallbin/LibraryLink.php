@@ -165,6 +165,7 @@
 		public $isFavorite;
 		public $folderContent;
 		public $tooltip;
+		public $isFolder;
 
 		public function __construct($folder)
 		{
@@ -190,19 +191,6 @@
 			$this->enableWidget = $linkRecord->enable_widget;
 			$this->widget = $linkRecord->widget;
 			$this->originalFormat = $linkRecord->format;
-
-			unset($this->folderContent);
-			foreach (LinkStorage::model()->findAll('id_parent_link=?', array($linkRecord->id)) as $contentRecord)
-			{
-				$link = new LibraryLink($this->parent);
-				$link->browser = $this->browser;
-				$link->load($contentRecord);
-				$this->folderContent[] = $link;
-			}
-
-			if (isset($this->folderContent))
-				usort($this->folderContent, "LibraryLink::libraryLinkComparer");
-
 
 			$lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)
@@ -283,13 +271,36 @@
 				if (!isset($this->fileSize))
 					$this->fileSize = file_exists($this->filePath) ? filesize($this->filePath) : 0;
 			}
+
+			$this->isFolder = false;
+			foreach (LinkStorage::model()->findAll('id_parent_link=?', array($linkRecord->id)) as $contentRecord)
+			{
+				$this->isFolder = true;
+				break;
+			}
+
 			$this->getFormats();
 			$this->getTooltip();
 		}
 
+		public function loadFolderContent()
+		{
+			unset($this->folderContent);
+			foreach (LinkStorage::model()->findAll('id_parent_link=?', array($this->id)) as $contentRecord)
+			{
+				$link = new LibraryLink($this->parent);
+				$link->browser = $this->browser;
+				$link->load($contentRecord);
+				$this->folderContent[] = $link;
+			}
+
+			if (isset($this->folderContent))
+				usort($this->folderContent, "LibraryLink::libraryLinkComparer");
+		}
+
 		public function getWidget()
 		{
-			if (isset($this->folderContent))
+			if ($this->isFolder)
 				return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'folder.png'));
 			if (isset($this->parentLinkId))
 			{

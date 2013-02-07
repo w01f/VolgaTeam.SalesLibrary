@@ -1,6 +1,6 @@
 <?php if (isset($link)): ?>
 <li>
-    <a class="<?php echo isset($link->folderContent) ? 'folder-content-link' : 'file-link'; ?>"
+    <a class="<?php echo $link->isFolder ? 'folder-content-link' : 'file-link'; ?>"
        href="#link<?php echo $link->id; ?>">
         <table class="link-container">
             <tr>
@@ -22,7 +22,7 @@
                                     </span>
                 </td>
             </tr>
-            <?php if (isset($link->name) && $link->name != '' && !isset($link->folderContent)): ?>
+            <?php if (isset($link->name) && $link->name != '' && !$link->isFolder): ?>
             <tr>
                 <td>
                     <span class="file"><?php echo $link->fileName; ?></span>

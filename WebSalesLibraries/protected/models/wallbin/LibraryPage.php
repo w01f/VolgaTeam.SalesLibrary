@@ -229,6 +229,7 @@ class LibraryPage
                             break;
                     }
                     $cacheRecord->save();
+					unset($content);
                     return true;
                 }
             }
