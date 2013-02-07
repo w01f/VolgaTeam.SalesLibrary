@@ -1,4 +1,4 @@
-<table id ="tool-dialog">
+<table class ="tool-dialog">
 	<tr>
 		<td colspan="2" style="color: #a9302a; text-align: center;">
 			<span style="font-size: 16pt; font-weight: bold; line-height: 30px;">

@@ -1,4 +1,4 @@
-<table id ="tool-dialog">
+<table class ="tool-dialog">
     <tr>
         <td colspan="2">
             <legend><?php echo $header; ?></legend>

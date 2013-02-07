@@ -150,22 +150,22 @@
 			success:function (msg)
 			{
 				favoritesDialogObject.content = $(msg);
-				favoritesDialogObject.content.find('.dropdown .dropdown-toggle').dropdown();
-
-				favoritesDialogObject.content.find('.dropdown-menu li')
-					.on('click', function (event)
-					{
-						$('#favorites-folder-name').val($(this).find('a').html());
-					})
-					.on('touchstart', function (event)
-					{
-						$('#favorites-folder-name').val($(this).find('a').html());
-					});
-				favoritesDialogObject.content.find('#cancel-button').on('click', function ()
+				favoritesDialogObject.mainView = favoritesDialogObject.content.find('.main-view');
+				favoritesDialogObject.mainView.find('.dropdown .dropdown-toggle').dropdown();
+				favoritesDialogObject.mainView.find('#show-folder-selector').on('click', function ()
+				{
+					favoritesDialogObject.mainView.hide();
+					favoritesDialogObject.folderSelector.show();
+				});
+				favoritesDialogObject.mainView.find('#clear-folder').on('click', function ()
+				{
+					favoritesDialogObject.mainView.find('#favorites-folder-name').val('');
+				});
+				favoritesDialogObject.mainView.find('.btn.cancel-button').on('click', function ()
 				{
 					$.fancybox.close();
 				});
-				favoritesDialogObject.content.find('#accept-button').on('click', function ()
+				favoritesDialogObject.mainView.find('.btn.accept-button').on('click', function ()
 				{
 					$.fancybox.close();
 					$.ajax({
@@ -173,8 +173,8 @@
 						url:"favorites/addLink",
 						data:{
 							linkId:linkId,
-							linkName:favoritesDialogObject.content.find('#favorites-link-name').val(),
-							folderName:favoritesDialogObject.content.find('#favorites-folder-name').val()
+							linkName:favoritesDialogObject.mainView.find('#favorites-link-name').val(),
+							folderName:favoritesDialogObject.mainView.find('#favorites-folder-name').val()
 						},
 						beforeSend:function ()
 						{
@@ -205,9 +205,38 @@
 						dataType:'html'
 					});
 				});
+
+				favoritesDialogObject.folderSelector = favoritesDialogObject.content.find('.folder-selector');
+				favoritesDialogObject.folderSelector.find('.btn.cancel-button').on('click', function ()
+				{
+					favoritesDialogObject.folderSelector.hide();
+					favoritesDialogObject.mainView.show();
+				});
+				favoritesDialogObject.folderSelector.find('.btn.accept-button').on('click', function ()
+				{
+					favoritesDialogObject.mainView.find('#favorites-folder-name').val(favoritesDialogObject.folderSelector.find('li.active').find('a').html());
+					favoritesDialogObject.folderSelector.hide();
+					favoritesDialogObject.mainView.show();
+				});
+				favoritesDialogObject.folderSelector.find('li')
+					.on('click', function ()
+					{
+						favoritesDialogObject.folderSelector.find('li').removeClass('active');
+						$(this).addClass('active');
+					})
+					.on('dblclick', function ()
+					{
+						favoritesDialogObject.folderSelector.find('li').removeClass('active');
+						$(this).addClass('active');
+						favoritesDialogObject.folderSelector.find('.btn.accept-button').click();
+					});
 				$.fancybox({
 					content:favoritesDialogObject.content,
 					title:title,
+					width:370,
+					height:270,
+					scrolling:'no',
+					autoSize:false,
 					openEffect:'none',
 					closeEffect:'none'
 				});

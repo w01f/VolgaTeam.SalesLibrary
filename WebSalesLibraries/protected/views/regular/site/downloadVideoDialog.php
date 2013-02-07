@@ -1,4 +1,4 @@
-<table id ="tool-dialog">
+<table class ="tool-dialog">
     <tr>
         <td collspan="2">
             <h4>Video Files are usually VERY BIG!</h4>

@@ -1,4 +1,4 @@
-<table id ="tool-dialog">
+<table class ="tool-dialog">
     <tr>
         <td colspan="2">
             <legend>Password Recovery</legend>

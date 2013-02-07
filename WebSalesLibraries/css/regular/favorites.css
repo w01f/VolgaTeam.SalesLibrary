@@ -76,3 +76,51 @@
 	background-image: -o-linear-gradient(top, #fff4e5, #ffcc7f);
 	background-image: linear-gradient(#fff4e5, #ffcc7f);
 }
+
+/*Add To Favorites Dialog*/
+
+.main-view, .folder-selector
+{
+	height: 270px;
+	width: 100%;
+}
+
+.main-view legend, .folder-selector legend
+{
+	margin: 0;
+}
+
+.main-view tr td, .folder-selector tr td
+{
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+.main-view tr.buttons-row td.buttons-area, .main-view.tool-dialog tr.title-row td,
+.folder-selector tr.buttons-row td.buttons-area, .folder-selector.tool-dialog tr.title-row td
+{
+	height: 20%;
+	padding: 0;
+}
+
+.folder-selector .list-container
+{
+	overflow: auto;
+	height: 160px;
+	border: 1px solid lightgray;
+	-webkit-box-shadow: #000000 0 0 3;
+	-moz-box-shadow: #000000 0 0 3;
+	box-shadow: #000000 0 0 3;
+
+}
+
+.folder-selector ul
+{
+	margin: 0;
+}
+
+.folder-selector li a
+{
+	color: #000000;
+}

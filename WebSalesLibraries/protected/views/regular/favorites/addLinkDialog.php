@@ -1,42 +1,63 @@
-<table id="tool-dialog">
-    <tr>
-        <td colspan="2">
-            <legend>Add to Favorites</legend>
-        </td>
-    </tr>
-    <tr>
-        <td class="title">
-            <label class="control-label">Name:</label>
-        </td>
-        <td>
-            <input type="text" id="favorites-link-name" value="<?php echo $link->name; ?>">
-        </td>
-    </tr>
-    <tr>
-        <td class="title">
-            <label class="control-label">Folder:</label>
-        </td>
-        <td>
-            <div class="input-append btn-group dropdown">
-                <input type="text" id="favorites-folder-name" class="span2" value="" style="width: 270px;">
-                <button class="btn dropdown-toggle <?php if (!isset($folders)): ?>disabled<?php endif; ?>"
-                        data-toggle="dropdown">
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <?php if (isset($folders)): ?>
-                        <?php foreach ($folders as $folder): ?>
-                            <li><a href="#"><?php echo $folder; ?></a></a></li>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" class="buttons-area">
-            <button class="btn" id="accept-button" type="button">OK</button>
-            <button class="btn" id="cancel-button" type="button">Cancel</button>
-        </td>
-    </tr>
-</table>
+<div>
+	<table class="main-view tool-dialog">
+		<tr class="title-row">
+			<td colspan="2">
+				<legend>Add to Favorites</legend>
+			</td>
+		</tr>
+		<tr>
+			<td class="title">
+				<label class="control-label">Name:</label>
+			</td>
+			<td>
+				<input type="text" id="favorites-link-name" value="<?php echo $link->name; ?>">
+			</td>
+		</tr>
+		<tr>
+			<td class="title">
+				<label class="control-label">Folder:</label>
+			</td>
+			<td>
+			<span class="button-edit input-append">
+				<input type="text" id="favorites-folder-name" placeholder="Select or Type..." style="width: 220px;">
+				<a class="btn" id="clear-folder" href="#"><i class="icon-remove-sign"/></a>
+				<a class="btn" id="show-folder-selector" href="#"><i class="icon-folder-open"/></a>
+			</span>
+			</td>
+		</tr>
+		<tr class="buttons-row">
+			<td colspan="2" class="buttons-area">
+				<button class="btn accept-button" type="button">OK</button>
+				<button class="btn cancel-button" type="button">Cancel</button>
+			</td>
+		</tr>
+	</table>
+	<table class="folder-selector tool-dialog" style="display: none;">
+		<tr class="title-row">
+			<td colspan="2">
+				<legend>Select Folder from the list</legend>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="list-container">
+					<ul class="nav nav-pills">
+						<?if (isset($folders)): ?>
+						<? foreach ($folders as $folder): ?>
+							<li>
+								<a href="#"><?echo $folder;?></a>
+							</li>
+							<? endforeach; ?>
+						<? endif;?>
+					</ul>
+				</div>
+			</td>
+		</tr>
+		<tr class="buttons-row">
+			<td colspan="2" class="buttons-area">
+				<button class="btn accept-button" type="button">Select</button>
+				<button class="btn cancel-button" type="button">Back</button>
+			</td>
+		</tr>
+	</table>
+</div>
