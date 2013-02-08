@@ -13,9 +13,9 @@
 		<?php if (isset($links)): ?>
 		<?php
 		if (Yii::app()->browser->isMobile())
-			$clickClass = ' click-mobile';
+			$clickClass = ' click-mobile draggable-link';
 		else
-			$clickClass = ' click-no-mobile';
+			$clickClass = ' click-no-mobile draggable-link';
 		$recordNumber = 1;
 		?>
 		<?php foreach ($links as $link): ?>
@@ -43,7 +43,6 @@
 						</tr>
 					</table>
 				</td>
-
 				<td class="link-date-column">
 					<table class="link-container">
 						<tr>

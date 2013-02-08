@@ -77,6 +77,13 @@
 	background-image: linear-gradient(#fff4e5, #ffcc7f);
 }
 
+.droppable-hover
+{
+	font-weight: bold;
+	border: 1px #002a80 solid;
+	background-color: rgb(238, 238, 238);
+}
+
 /*Add To Favorites Dialog*/
 
 .main-view, .folder-selector

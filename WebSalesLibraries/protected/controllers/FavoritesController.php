@@ -47,7 +47,7 @@
 		public function actionGetLinks()
 		{
 			$folderId = Yii::app()->request->getPost('folderId');
-			if (!isset($folderId) || (isset($folderId) && ($folderId=="" || $folderId=="null")))
+			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
 			$isSort = intval(Yii::app()->request->getPost('isSort'));
 			$userId = Yii::app()->user->getId();
@@ -56,5 +56,33 @@
 				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, $isSort);
 				$this->renderPartial('favoritesLinks', array('links' => $links), false, true);
 			}
+		}
+
+		public function actionPutFolderToFolder()
+		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			$parentId = Yii::app()->request->getPost('parentId');
+			if (!isset($parentId) || (isset($parentId) && ($parentId == "" || $parentId == "null")))
+				$parentId = null;
+			$userId = Yii::app()->user->getId();
+			if (isset($folderId) && isset($userId))
+			{
+				FavoritesFolderStorage::putFolderToFolder($folderId, $parentId);
+				$rootFolder = FavoritesFolderStorage::getRootFolder($userId);
+				$this->renderPartial('favoritesView', array('rootFolder' => $rootFolder, 'selectedFolderId' => $folderId), false, true);
+			}
+		}
+
+		public function actionPutLinkToFolder()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			$parentId = Yii::app()->request->getPost('newfolderId');
+			if (!isset($parentId) || (isset($parentId) && ($parentId == "" || $parentId == "null")))
+				$parentId = null;
+			$oldParentId = Yii::app()->request->getPost('oldfolderId');
+			if (!isset($oldParentId) || (isset($oldParentId) && ($oldParentId == "" || $oldParentId == "null")))
+				$oldParentId = null;
+			if (isset($linkId))
+				FavoritesLinkStorage::putLinkToFolder($linkId, $parentId, $oldParentId);
 		}
 	}

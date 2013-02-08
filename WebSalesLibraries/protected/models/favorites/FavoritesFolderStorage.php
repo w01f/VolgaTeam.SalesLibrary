@@ -83,6 +83,35 @@
 			return null;
 		}
 
+		public static function putFolderToFolder($folderId, $parentId)
+		{
+			$folderRecord = self::model()->findByPk($folderId);
+			if (isset($folderId))
+			{
+				$folderRecord->id_parent_folder = $parentId;
+				$folderRecord->save();
+				if (!self::validateFoldersChain($folderId, $parentId))
+				{
+					$parentRecord = self::model()->findByPk($parentId);
+					$parentRecord->id_parent_folder = null;
+					$parentRecord->save();
+				}
+			}
+		}
+
+		public static function validateFoldersChain($folderId, $parentId)
+		{
+			$parentRecord = self::model()->findByPk($parentId);
+			if (isset($parentRecord))
+			{
+				if ($parentRecord->id_parent_folder == $folderId)
+					return false;
+				else
+					return self::validateFoldersChain($folderId, $parentRecord->id_parent_folder);
+			}
+			return true;
+		}
+
 		public static function clearAll()
 		{
 			self::model()->deleteAll();

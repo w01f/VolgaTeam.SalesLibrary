@@ -154,8 +154,11 @@
 				favoritesDialogObject.mainView.find('.dropdown .dropdown-toggle').dropdown();
 				favoritesDialogObject.mainView.find('#show-folder-selector').on('click', function ()
 				{
-					favoritesDialogObject.mainView.hide();
-					favoritesDialogObject.folderSelector.show();
+					if (!$(this).hasClass('disabled'))
+					{
+						favoritesDialogObject.mainView.hide();
+						favoritesDialogObject.folderSelector.show();
+					}
 				});
 				favoritesDialogObject.mainView.find('#clear-folder').on('click', function ()
 				{

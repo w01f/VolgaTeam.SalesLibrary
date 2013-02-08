@@ -58,8 +58,8 @@
 						->queryAll();
 					$preLinks = LinkStorage::getLinksGrid($linkRecords);
 					if (isset($preLinks))
-						foreach ($preLinks as $link)
-							foreach ($favoriteLinkRecords as $favoriteLinkRecord)
+						foreach ($favoriteLinkRecords as $favoriteLinkRecord)
+							foreach ($preLinks as $link)
 								if ($link['id'] == $favoriteLinkRecord->id_link)
 								{
 									$link['name'] = $favoriteLinkRecord->name;
@@ -79,6 +79,19 @@
 					return $links;
 				}
 			return null;
+		}
+
+		public static function putLinkToFolder($linkId, $parentId, $oldParentId)
+		{
+			if (isset($oldParentId))
+				$linkRecord = self::model()->find('id_link=? and id_folder=?', array($linkId,$oldParentId));
+			else
+				$linkRecord = self::model()->find('id_link=? and id_folder is null', array($linkId));
+			if (isset($linkRecord))
+			{
+				$linkRecord->id_folder = $parentId;
+				$linkRecord->save();
+			}
 		}
 
 		public static function clearAll()
