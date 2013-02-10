@@ -2,6 +2,7 @@
 {
 	$.linkGrid = [];
 	$.linkGrid.refreshData = null;
+	$.linkGrid.showDelete = false;
 	$.linkGrid.init = function ()
 	{
 		if ($('#links-grid-body').find('tr').length > 0)
@@ -40,8 +41,8 @@
 			$.linkGrid.refreshData();
 		});
 
-		var searchGridBody = $("#links-grid-body");
-		var clickableLinks = searchGridBody.find("td.click-no-mobile");
+		var linkGridBody = $("#links-grid-body");
+		var clickableLinks = linkGridBody.find("td.click-no-mobile");
 		clickableLinks.off('click').on('click', function ()
 		{
 			previewLink.call($(this));
@@ -54,12 +55,12 @@
 					var linkId = $(this).parent().find('.link-id-column').html();
 					return  $('<i id="' + linkId + '" class="icon-file"></i>');
 				},
-				appendTo: "body",
+				appendTo:"body",
 				cursorAt:{ left:-10, top:0 }
 			}
 		);
 
-		searchGridBody.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
+		linkGridBody.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
 		{
 			isScrolling = false;
 		}).on('touchmove',function ()
@@ -74,13 +75,13 @@
 				return false;
 			});
 
-		searchGridBody.find("td.details-button").off('click');
-		searchGridBody.find("td.details-button.click-no-mobile").on('click', function ()
+		linkGridBody.find("td.details-button").off('click');
+		linkGridBody.find("td.details-button.click-no-mobile").on('click', function ()
 		{
 			viewLinkDetails.call($(this));
 		});
-		searchGridBody.find("td.details-button").off('touchstart').off('touchmove').off('touchend');
-		searchGridBody.find("td.details-button.click-mobile").on('touchstart',function ()
+		linkGridBody.find("td.details-button").off('touchstart').off('touchmove').off('touchend');
+		linkGridBody.find("td.details-button.click-mobile").on('touchstart',function ()
 		{
 			isScrolling = false;
 		}).on('touchmove',function ()
@@ -91,6 +92,20 @@
 				if (!isScrolling)
 					viewLinkDetails.call($(this));
 			});
+
+		if ($.linkGrid.showDelete)
+		{
+			linkGridBody.find("tr").hover(
+				function ()
+				{
+					$(this).find('.delete-link').fadeIn(200);
+				},
+				function ()
+				{
+					$(this).find('.delete-link').fadeOut(100);
+				}
+			);
+		}
 	};
 
 	var updateSortingColumns = function ()

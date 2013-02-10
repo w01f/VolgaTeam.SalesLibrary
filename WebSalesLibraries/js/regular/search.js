@@ -86,6 +86,7 @@
 				{
 					runSearch(1);
 				};
+				$.linkGrid.showDelete = false;
 				$.linkGrid.init();
 			},
 			success:function (msg)
@@ -492,6 +493,7 @@
 					{
 						runSearch(1);
 					};
+					$.linkGrid.showDelete = false;
 					$.linkGrid.init();
 				},
 				success:function (msg)
@@ -527,6 +529,7 @@
 				{
 					runSearch(1);
 				};
+				$.linkGrid.showDelete = false;
 				$.linkGrid.init();
 				if ($.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId")) == "true")
 					runSearch(1);

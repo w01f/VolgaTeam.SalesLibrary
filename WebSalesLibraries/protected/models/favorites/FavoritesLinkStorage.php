@@ -84,7 +84,7 @@
 		public static function putLinkToFolder($linkId, $parentId, $oldParentId)
 		{
 			if (isset($oldParentId))
-				$linkRecord = self::model()->find('id_link=? and id_folder=?', array($linkId,$oldParentId));
+				$linkRecord = self::model()->find('id_link=? and id_folder=?', array($linkId, $oldParentId));
 			else
 				$linkRecord = self::model()->find('id_link=? and id_folder is null', array($linkId));
 			if (isset($linkRecord))
@@ -92,6 +92,14 @@
 				$linkRecord->id_folder = $parentId;
 				$linkRecord->save();
 			}
+		}
+
+		public static function deleteLink($linkId, $parentId)
+		{
+			if (isset($parentId))
+				self::model()->deleteAll('id_link=? and id_folder=?', array($linkId, $parentId));
+			else
+				self::model()->deleteAll('id_link=? and id_folder is null', array($linkId));
 		}
 
 		public static function clearAll()
@@ -112,5 +120,10 @@
 		public static function clearByLibrary($libraryId)
 		{
 			self::model()->deleteAll('id_library=?', array($libraryId));
+		}
+
+		public static function clearByFolder($folderId)
+		{
+			self::model()->deleteAll('id_folder=?', array($folderId));
 		}
 	}

@@ -85,4 +85,23 @@
 			if (isset($linkId))
 				FavoritesLinkStorage::putLinkToFolder($linkId, $parentId, $oldParentId);
 		}
+
+		public function actionDeleteLink()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
+				$folderId = null;
+			if (isset($linkId))
+				FavoritesLinkStorage::deleteLink($linkId, $folderId);
+			Yii::app()->end();
+		}
+
+		public function actionDeleteFolder()
+		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (isset($folderId))
+				FavoritesFolderStorage::deleteFolder($folderId);
+			Yii::app()->end();
+		}
 	}

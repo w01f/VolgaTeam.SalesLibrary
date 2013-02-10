@@ -57,6 +57,11 @@
 	margin: 0;
 }
 
+.favorites-folders-list li .delete-folder
+{
+	margin-left: 10px;
+}
+
 .favorites-folders-list li a
 {
 	color: #000000;

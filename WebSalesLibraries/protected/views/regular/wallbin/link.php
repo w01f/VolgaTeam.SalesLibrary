@@ -26,7 +26,8 @@
 			. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
 			. 'font-weight: ' . ($link->lineBreakProperties->font->isBold ? ' bold' : ' normal') . '; '
 			. 'font-style: ' . ($link->lineBreakProperties->font->isItalic ? ' italic' : ' normal') . '; '
-			. 'color: ' . $link->lineBreakProperties->foreColor . '; ';
+			. 'color: ' . $link->lineBreakProperties->foreColor . '; '
+			. 'white-space: nowrap;';
 	}
 	else
 	{
@@ -36,7 +37,8 @@
 			. 'font-size: ' . $link->parent->windowFont->size . 'pt; '
 			. 'font-weight: ' . ($link->isBold ? 'bold' : ($link->parent->windowFont->isBold ? ' bold' : ' normal')) . '; '
 			. 'font-style: ' . ($link->parent->windowFont->isItalic ? ' italic' : ' normal') . '; '
-			. 'color: ' . $link->parent->windowForeColor . '; ';
+			. 'color: ' . $link->parent->windowForeColor . '; '
+			. 'white-space: nowrap;';
 	}
 	?>
 	<div class="<?php echo $linkClass; ?>"

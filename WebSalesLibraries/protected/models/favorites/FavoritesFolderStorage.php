@@ -112,6 +112,14 @@
 			return true;
 		}
 
+		public static function deleteFolder($folderId)
+		{
+			foreach (self::model()->findAll('id_parent_folder=?', array($folderId)) as $childFolderRecord)
+				self::deleteFolder($childFolderRecord->id);
+			FavoritesLinkStorage::clearByFolder($folderId);
+			self::model()->deleteByPk($folderId);
+		}
+
 		public static function clearAll()
 		{
 			self::model()->deleteAll();

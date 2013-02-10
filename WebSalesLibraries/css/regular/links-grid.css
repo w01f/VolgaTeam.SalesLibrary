@@ -73,6 +73,17 @@
 	background: #ECFBD4;
 }
 
+#links-grid-body .delete-link
+{
+	display: none;
+	margin-left: 20px;
+}
+
+#links-grid-body .link-container
+{
+	display: inline-table;
+}
+
 #links-grid-body .link-container .link-name, #links-grid-body .link-container .file-name
 {
 	border: none;

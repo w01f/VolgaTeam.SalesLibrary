@@ -42,6 +42,7 @@
 							<td class="file-name"><?php echo $link['file_name']; ?></td>
 						</tr>
 					</table>
+					<img class="delete-link" src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png' ?>" alt="Delete Link">
 				</td>
 				<td class="link-date-column">
 					<table class="link-container">
@@ -59,3 +60,4 @@
 		<?php endif; ?>
 	</table>
 </div>
+<div id="delete-link-warning" title="Delete Link">Are you sure want to delete this link?</div>
