@@ -2,19 +2,17 @@
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
-    public class VideoPreviewGenerator : SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator
-    {
-        #region IPreviewGenerator Members
-        public IPreviewContainer Parent { get; private set; }
+	public class VideoPreviewGenerator : IPreviewGenerator
+	{
+		#region IPreviewGenerator Members
+		public IPreviewContainer Parent { get; private set; }
 
-        public VideoPreviewGenerator(IPreviewContainer parent)
-        {
-            this.Parent = parent;
-        }
+		public VideoPreviewGenerator(IPreviewContainer parent)
+		{
+			Parent = parent;
+		}
 
-        public void GeneratePreview()
-        {
-        }
-        #endregion
-    }
+		public void GeneratePreview() { }
+		#endregion
+	}
 }

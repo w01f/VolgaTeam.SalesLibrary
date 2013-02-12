@@ -758,6 +758,8 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         private string[] pdfLinksField;
         
+        private string[] wmvLinksField;
+        
         private string[] mp4LinksField;
         
         private string[] ogvLinksField;
@@ -841,6 +843,16 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
             }
             set {
                 this.pdfLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] wmvLinks {
+            get {
+                return this.wmvLinksField;
+            }
+            set {
+                this.wmvLinksField = value;
             }
         }
         

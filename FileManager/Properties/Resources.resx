@@ -127,6 +127,9 @@
   <data name="Colors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Colors.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SyncSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SyncSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,6 +141,9 @@
   </data>
   <data name="RefreshUsers" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RefreshUsers.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ConvertVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ConvertVideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,8 +181,8 @@
   <data name="UpLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\UpLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmailList" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ColumnsSort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ColumnsSort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ArrowLeftGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ArrowLeftGreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,11 +262,11 @@
   <data name="Green_Plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Green_Plus.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="AutoSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FirefoxSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FirefoxSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MediaPlayerSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MediaPlayerSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -283,17 +289,14 @@
   <data name="TagsWebAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWebAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AutoWidgets" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoWidgets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ExtraRoots" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExtraRoots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SalesGallery" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SalesGallery.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="InActiveLinksWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InActiveLinksWarning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ColumnsSort" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ColumnsSort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MultiTabs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MultiTabs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -313,14 +316,14 @@
   <data name="Chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ConvertVideo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ConvertVideo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EmailList" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EmailList.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Firefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Firefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AutoSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AutoSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AutoWidgets" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AutoWidgets.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FormatFontSmaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FormatFontSmaller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -352,7 +355,7 @@
   <data name="Columns" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Columns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ExtraRoots" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ExtraRoots.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Favorites" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Favorites.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

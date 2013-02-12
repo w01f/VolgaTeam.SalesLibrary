@@ -42,7 +42,7 @@
 			this.gridControlVideo = new DevExpress.XtraGrid.GridControl();
 			this.gridViewVideo = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnVideoIndex = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnVideoSourceFileName = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnVideoWmvFileName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditVideoWmv = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.gridColumnVideoMp4FileName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditVideoMp4 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -188,7 +188,7 @@
 			this.gridViewVideo.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewVideo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnVideoIndex,
-            this.gridColumnVideoSourceFileName,
+            this.gridColumnVideoWmvFileName,
             this.gridColumnVideoMp4FileName,
             this.gridColumnVideoOgvFileName,
             this.gridColumnVideoIPadCompatible,
@@ -209,7 +209,6 @@
 			this.gridViewVideo.OptionsView.ShowIndicator = false;
 			this.gridViewVideo.RowHeight = 35;
 			this.gridViewVideo.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridViewVideo_RowCellStyle);
-			this.gridViewVideo.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridViewVideo_CustomRowCellEdit);
 			this.gridViewVideo.CustomRowCellEditForEditing += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridViewVideo_CustomRowCellEditForEditing);
 			// 
 			// gridColumnVideoIndex
@@ -225,17 +224,17 @@
 			this.gridColumnVideoIndex.VisibleIndex = 1;
 			this.gridColumnVideoIndex.Width = 45;
 			// 
-			// gridColumnVideoSourceFileName
+			// gridColumnVideoWmvFileName
 			// 
-			this.gridColumnVideoSourceFileName.Caption = "File Name";
-			this.gridColumnVideoSourceFileName.ColumnEdit = this.repositoryItemButtonEditVideoWmv;
-			this.gridColumnVideoSourceFileName.FieldName = "SourceFileName";
-			this.gridColumnVideoSourceFileName.Name = "gridColumnVideoSourceFileName";
-			this.gridColumnVideoSourceFileName.OptionsColumn.ReadOnly = true;
-			this.gridColumnVideoSourceFileName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
-			this.gridColumnVideoSourceFileName.Visible = true;
-			this.gridColumnVideoSourceFileName.VisibleIndex = 2;
-			this.gridColumnVideoSourceFileName.Width = 187;
+			this.gridColumnVideoWmvFileName.Caption = "WMV for IE";
+			this.gridColumnVideoWmvFileName.ColumnEdit = this.repositoryItemButtonEditVideoWmv;
+			this.gridColumnVideoWmvFileName.FieldName = "WmvFileName";
+			this.gridColumnVideoWmvFileName.Name = "gridColumnVideoWmvFileName";
+			this.gridColumnVideoWmvFileName.OptionsColumn.ReadOnly = true;
+			this.gridColumnVideoWmvFileName.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
+			this.gridColumnVideoWmvFileName.Visible = true;
+			this.gridColumnVideoWmvFileName.VisibleIndex = 2;
+			this.gridColumnVideoWmvFileName.Width = 187;
 			// 
 			// repositoryItemButtonEditVideoWmv
 			// 
@@ -244,6 +243,7 @@
 			this.repositoryItemButtonEditVideoWmv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditVideoWmv.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.repositoryItemButtonEditVideoWmv.Name = "repositoryItemButtonEditVideoWmv";
+			this.repositoryItemButtonEditVideoWmv.NullText = "NEEDED!";
 			this.repositoryItemButtonEditVideoWmv.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.repositoryItemButtonEditVideoWmv.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditVideoWmv_ButtonClick);
 			this.repositoryItemButtonEditVideoWmv.EditValueChanged += new System.EventHandler(this.repositoryItemButtonEditVideoWmv_EditValueChanged);
@@ -506,14 +506,14 @@
 			// 
 			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
-			// IPadManagerControl
+			// IPadContentManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
 			this.Controls.Add(this.xtraTabControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.Name = "IPadManagerControl";
+			this.Name = "IPadContentManagerControl";
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
 			this.xtraTabControl.ResumeLayout(false);
@@ -556,7 +556,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewVideo;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoIndex;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoSourceFileName;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoWmvFileName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoMp4FileName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoOgvFileName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnVideoIPadCompatible;

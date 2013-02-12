@@ -54,14 +54,14 @@ namespace FileManager.PresentationClasses.IPad
 
 		public void ConvertSelectedVideoFiles()
 		{
-			VideoInfo[] videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
+			var videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
 			if (videoFiles.Length > 0)
 				ConvertVideoFiles(videoFiles);
 			else
 				AppManager.Instance.ShowWarning("Please select one or several videos in the list below");
 		}
 
-		private void ConvertVideoFiles(VideoInfo[] videoFiles)
+		private void ConvertVideoFiles(IEnumerable<VideoInfo> videoFiles)
 		{
 			using (var form = new FormProgressConverVideo())
 			{
@@ -73,7 +73,7 @@ namespace FileManager.PresentationClasses.IPad
 											{
 												Globals.ThreadActive = true;
 												Globals.ThreadAborted = false;
-												foreach (VideoInfo videoFile in videoFiles)
+												foreach (var videoFile in videoFiles)
 												{
 													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 														videoFile.Parent.UpdateContent();
@@ -84,7 +84,7 @@ namespace FileManager.PresentationClasses.IPad
 													ParentDecorator.Library.Save();
 											});
 				form.Show();
-				FormWindowState savedState = FormMain.Instance.WindowState;
+				var savedState = FormMain.Instance.WindowState;
 				if (ParentDecorator.Library.MinimizeOnSync)
 					FormMain.Instance.WindowState = FormWindowState.Minimized;
 				thread.Start();
@@ -110,48 +110,28 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void gridViewVideo_RowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			int videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
-			if (videoIndex >= 0 && videoIndex < _videoFiles.Count)
-			{
-				VideoInfo videoInfo = _videoFiles[videoIndex];
-				if (e.Column == gridColumnVideoMp4FileName)
-				{
-					if (string.IsNullOrEmpty(videoInfo.Mp4FilePath))
-						e.Appearance.ForeColor = Color.Red;
-					else
-						e.Appearance.ForeColor = Color.Black;
-				}
-				else if (e.Column == gridColumnVideoOgvFileName)
-				{
-					if (string.IsNullOrEmpty(videoInfo.OgvFilePath))
-						e.Appearance.ForeColor = Color.Red;
-					else
-						e.Appearance.ForeColor = Color.Black;
-				}
-				else if (e.Column == gridColumnVideoIPadCompatible)
-				{
-					if (string.IsNullOrEmpty(videoInfo.Mp4FilePath))
-						e.Appearance.ForeColor = Color.Red;
-					else
-						e.Appearance.ForeColor = Color.Green;
-				}
+			var videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
+			if (videoIndex < 0 || videoIndex >= _videoFiles.Count) return;
+			var videoInfo = _videoFiles[videoIndex];
+			if (e.Column == gridColumnVideoWmvFileName)
+				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.WmvFilePath) ? Color.Red : Color.Black;
+			if (e.Column == gridColumnVideoMp4FileName)
+				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Black;
+			else if (e.Column == gridColumnVideoOgvFileName)
+				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.OgvFilePath) ? Color.Red : Color.Black;
+			else if (e.Column == gridColumnVideoIPadCompatible)
+				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Green;
 
-				if (videoInfo.Selected)
-					e.Appearance.BackColor = Color.LightGreen;
-				else
-					e.Appearance.BackColor = Color.White;
-			}
+			e.Appearance.BackColor = videoInfo.Selected ? Color.LightGreen : Color.White;
 		}
 
 		private void repositoryItemButtonEditVideoWmv_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle >= 0)
 			{
-				VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-				if (File.Exists(videoInfo.SourceFilePath))
-				{
-					VideoHelper.Instance.OpenMediaPlayer(videoInfo.SourceFilePath);
-				}
+				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+				if (File.Exists(videoInfo.WmvFilePath))
+					VideoHelper.Instance.OpenMediaPlayer(videoInfo.WmvFilePath);
 				else
 					AppManager.Instance.ShowWarning("You need to convert this video first!");
 			}
@@ -161,16 +141,9 @@ namespace FileManager.PresentationClasses.IPad
 		{
 			if (gridViewVideo.FocusedRowHandle >= 0)
 			{
-				VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-				string filePath = string.Empty;
-				if (gridViewVideo.FocusedColumn == gridColumnVideoMp4FileName)
-					filePath = videoInfo.Mp4FilePath;
-				else
-					filePath = videoInfo.SourceFilePath;
-				if (File.Exists(filePath))
-				{
-					VideoHelper.Instance.OpenQuickTime(filePath);
-				}
+				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+				if (File.Exists(videoInfo.Mp4FilePath))
+					VideoHelper.Instance.OpenQuickTime(videoInfo.Mp4FilePath);
 				else
 					AppManager.Instance.ShowWarning("You need to convert this video first!");
 			}
@@ -180,11 +153,9 @@ namespace FileManager.PresentationClasses.IPad
 		{
 			if (gridViewVideo.FocusedRowHandle >= 0)
 			{
-				VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 				if (File.Exists(videoInfo.OgvFilePath))
-				{
 					VideoHelper.Instance.OpenFirefox(videoInfo.OgvFilePath);
-				}
 				else
 					AppManager.Instance.ShowWarning("You need to convert this video first!");
 			}
@@ -194,7 +165,7 @@ namespace FileManager.PresentationClasses.IPad
 		{
 			if (gridViewVideo.FocusedRowHandle >= 0)
 			{
-				VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 				if (e.Button.Index == 0)
 				{
 					if (Directory.Exists(videoInfo.IPadFolderPath))
@@ -206,18 +177,6 @@ namespace FileManager.PresentationClasses.IPad
 				{
 					ConvertVideoFiles(new[] { videoInfo });
 				}
-			}
-		}
-
-		private void gridViewVideo_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
-		{
-			if (e.Column == gridColumnVideoSourceFileName)
-			{
-				VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
-				if (Path.GetExtension(videoInfo.Parent.OriginalPath).ToLower().Contains("mp4"))
-					e.RepositoryItem = repositoryItemButtonEditVideoMp4;
-				else
-					e.RepositoryItem = repositoryItemButtonEditVideoWmv;
 			}
 		}
 
@@ -233,14 +192,14 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void buttonXSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (VideoInfo videoInfo in _videoFiles)
+			foreach (var videoInfo in _videoFiles)
 				videoInfo.Selected = true;
 			gridViewVideo.RefreshData();
 		}
 
 		private void buttonXClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (VideoInfo videoInfo in _videoFiles)
+			foreach (var videoInfo in _videoFiles)
 				videoInfo.Selected = false;
 			gridViewVideo.RefreshData();
 		}

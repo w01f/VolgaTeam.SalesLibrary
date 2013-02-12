@@ -627,6 +627,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\Favorites.png" />
     <None Include="Resources\ExtraRoots.png" />
     <None Include="Resources\ColumnsSort.png" />
     <None Include="Resources\TagsSecurityWidget.png" />

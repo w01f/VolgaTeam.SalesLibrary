@@ -263,6 +263,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap Favorites {
+            get {
+                object obj = ResourceManager.GetObject("Favorites", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap FileGrabber {
             get {
                 object obj = ResourceManager.GetObject("FileGrabber", resourceCulture);

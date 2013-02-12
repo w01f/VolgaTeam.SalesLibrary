@@ -226,7 +226,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (var libraryFile in libraryFolder.Files)
+					foreach (var libraryFile in libraryFolder.Files.Where(x => (!x.IsRestricted || (x.IsRestricted && !(string.IsNullOrEmpty(x.AssignedUsers))))))
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
@@ -289,6 +289,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
 				if (pdfLinks != null && pdfLinks.Length > 0)
 					previewContainer.pdfLinks = pdfLinks;
+
+				var wmvLinks = libraryPreviewContainer.GetPreviewLinks("wmv");
+				if (wmvLinks != null && wmvLinks.Length > 0)
+					previewContainer.wmvLinks = wmvLinks;
 
 				var mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
 				if (mp4Links != null && mp4Links.Length > 0)
@@ -412,7 +416,22 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					else
 						videoFile.IPadFolderPath = null;
 
-					string mp4Path = Path.Combine(previewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".mp4")));
+					var wmvPath = previewContainer.Type == FileTypes.MediaPlayerVideo
+						? videoFile.SourceFilePath
+						: Path.Combine(previewContainer.ContainerPath, "wmv", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".wmv")));
+					if (File.Exists(wmvPath))
+					{
+						videoFile.WmvFileName = Path.GetFileName(wmvPath);
+						videoFile.WmvFilePath = wmvPath;
+					}
+					else
+					{
+						videoFile.WmvFileName = null;
+						videoFile.WmvFilePath = null;
+					}
+					var mp4Path = previewContainer.Type == FileTypes.QuickTimeVideo
+						? videoFile.SourceFilePath
+						: Path.Combine(previewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".mp4")));
 					if (File.Exists(mp4Path))
 					{
 						videoFile.Mp4FileName = Path.GetFileName(mp4Path);
@@ -425,7 +444,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						videoFile.Mp4FilePath = null;
 						videoFile.IPadCompatible = "NO!";
 					}
-					string ogvPath = Path.Combine(previewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".ogv")));
+					var ogvPath = Path.Combine(previewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".ogv")));
 					if (File.Exists(ogvPath))
 					{
 						videoFile.OgvFileName = Path.GetFileName(ogvPath);
@@ -458,6 +477,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string SourceFileName { get; set; }
 		public string SourceFilePath { get; set; }
 		public string IPadFolderPath { get; set; }
+		public string WmvFileName { get; set; }
+		public string WmvFilePath { get; set; }
 		public string Mp4FileName { get; set; }
 		public string Mp4FilePath { get; set; }
 		public string IPadCompatible { get; set; }

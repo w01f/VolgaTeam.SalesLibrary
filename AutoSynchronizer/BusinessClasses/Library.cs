@@ -193,7 +193,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+							alive = (!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))) && file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
 							if (!alive)
 								alive = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower())) != null;
 							if (!alive && file is LibraryFolderLink)

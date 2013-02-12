@@ -167,7 +167,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public string[] GetPreviewLinks(string format)
 		{
-			List<string> result = new List<string>();
+			var result = new List<string>();
 
 			if (!string.IsNullOrEmpty(this.ContainerPath))
 			{
