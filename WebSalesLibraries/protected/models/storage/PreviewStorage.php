@@ -69,6 +69,18 @@ class PreviewStorage extends CActiveRecord
                     $previewRecord->save();
                 }
 
+		if (array_key_exists('wmvLinks', $previewContainer))
+			if (isset($previewContainer['wmvLinks']))
+				foreach ($previewContainer['wmvLinks'] as $link)
+				{
+					$previewRecord = new PreviewStorage();
+					$previewRecord->id_container = $previewContainer['id'];
+					$previewRecord->id_library = $previewContainer['libraryId'];
+					$previewRecord->type = 'wmv';
+					$previewRecord->relative_path = $link;
+					$previewRecord->save();
+				}
+
         if (array_key_exists('mp4Links', $previewContainer))
             if (isset($previewContainer['mp4Links']))
                 foreach ($previewContainer['mp4Links'] as $link)

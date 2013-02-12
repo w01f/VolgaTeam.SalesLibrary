@@ -42,7 +42,12 @@ class UniversalPreviewContainer
      */
     public $pdfLinks;
     public $pdfMaxFileSize;
-    /**
+	/**
+	 * @var string[]
+	 * @soap
+	 */
+	public $wmvLinks;
+	/**
      * @var string[]
      * @soap
      */
@@ -133,6 +138,9 @@ class UniversalPreviewContainer
                 case 'thumbs_phone':
                     $this->thumbsPhoneLinks[] = $previewLink;
                     break;
+				case 'wmv':
+					$this->wmvLinks[] = $previewLink;
+					break;
                 case 'mp4':
                     $this->mp4Links[] = $previewLink;
                     break;

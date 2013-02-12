@@ -32,8 +32,8 @@
 		 * @var string
 		 * @soap
 		 */
-		public $fullPath;
 		public $previewId;
+		public $fullPath;
 		public $link;
 		public $availableFormats;
 		public $browser;
@@ -112,6 +112,7 @@
 						$this->availableFormats[] = 'email';
 						break;
 					case 'video':
+					case 'mp4':
 						switch ($this->browser)
 						{
 							case 'phone':
@@ -158,12 +159,6 @@
 								$this->availableFormats[] = 'download';
 								break;
 						}
-						break;
-					case 'mp4':
-						$this->availableFormats[] = 'mp4';
-						$this->availableFormats[] = 'tab';
-						$this->availableFormats[] = 'email';
-						$this->availableFormats[] = 'download';
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';

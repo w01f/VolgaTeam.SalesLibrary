@@ -374,6 +374,7 @@
 						$this->availableFormats[] = 'email';
 						break;
 					case 'video':
+					case 'mp4':
 						switch ($this->browser)
 						{
 							case 'phone':
@@ -420,12 +421,6 @@
 								$this->availableFormats[] = 'download';
 								break;
 						}
-						break;
-					case 'mp4':
-						$this->availableFormats[] = 'mp4';
-						$this->availableFormats[] = 'tab';
-						$this->availableFormats[] = 'email';
-						$this->availableFormats[] = 'download';
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';
@@ -788,12 +783,35 @@
 				case 'mp4':
 					switch ($format)
 					{
+						case 'mp4':
+							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							if (isset($this->universalPreview->ogvLinks))
+								foreach ($this->universalPreview->ogvLinks as $link)
+									$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							break;
+						case 'video':
+							if (isset($this->universalPreview))
+							{
+								if (isset($this->universalPreview->wmvLinks))
+									foreach ($this->universalPreview->wmvLinks as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName);
+							}
+							break;
+						case 'tab':
+							if (isset($this->universalPreview))
+								if (isset($this->universalPreview->mp4Links))
+									foreach ($this->universalPreview->mp4Links as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							break;
+						case 'ogv':
+							if (isset($this->universalPreview))
+								if (isset($this->universalPreview->ogvLinks))
+									foreach ($this->universalPreview->ogvLinks as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							break;
 						case 'email':
 						case 'download':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
-							break;
-						default:
-							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							break;
 					}
 					break;
