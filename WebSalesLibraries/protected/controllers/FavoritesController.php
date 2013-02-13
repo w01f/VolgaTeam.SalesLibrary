@@ -40,7 +40,7 @@
 			{
 				$linkRecord = LinkStorage::getLinkById($linkId);
 				FavoritesLinkStorage::addLink($userId, $linkId, $linkName, $folderName, $linkRecord->id_library);
-				$this->renderPartial('application.views.regular.site.successDialog', array('header' => 'Add to Favorites', 'content' => 'Link was successfully added to Favorites list'), false, true);
+				$this->renderPartial('successAddDialog', array('header' => 'SUCCESS!', 'content' => $linkRecord->file_name.' was  saved to your favorites...'), false, true);
 			}
 		}
 

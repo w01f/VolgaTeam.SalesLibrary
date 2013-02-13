@@ -218,44 +218,32 @@
 				$.updateContentAreaDimensions();
 
 				var linkGridBody = $("#links-grid-body");
-				linkGridBody.find(".delete-link").off('click').on('click', function (event)
+				linkGridBody.find(".delete-link").off('click').on('click', function (e)
 				{
+					e.stopPropagation();
+					e.preventDefault();
 					var linkId = $(this).parent().parent().find('.link-id-column').html();
-					$("#delete-link-warning").dialog({
-						resizable:false,
-						modal:true,
-						buttons:{
-							"Yes":function ()
-							{
-								$(this).dialog("close");
-								$.ajax({
-									type:"POST",
-									url:"favorites/deleteLink",
-									data:{
-										linkId:linkId,
-										folderId:folderId
-									},
-									beforeSend:function ()
-									{
-										$.showOverlayLight();
-									},
-									complete:function ()
-									{
-										$.hideOverlayLight();
-										getFolderLinks(folderId, 0);
-									},
-									async:true,
-									dataType:'html'
-								});
-							},
-							"No":function ()
-							{
-								$(this).dialog("close");
-							}
-						}
-					});
-					event.stopPropagation();
+					deleteLink(linkId,folderId);
 				});
+				linkGridBody.find(".delete-link").off('touchstart').off('touchmove').off('touchend').on('touchstart',
+					function ()
+					{
+						isScrolling = false;
+					}).on('touchmove',function ()
+					{
+						isScrolling = true;
+					}).on('touchend', function (e)
+					{
+						e.stopPropagation();
+						e.preventDefault();
+
+						if (!isScrolling)
+						{
+							var linkId = $(this).parent().parent().find('.link-id-column').html();
+							deleteLink(linkId,folderId);
+						}
+						return false;
+					});
 			},
 			success:function (msg)
 			{
@@ -267,6 +255,43 @@
 			},
 			async:true,
 			dataType:'html'
+		});
+	};
+
+	var deleteLink = function (linkId,folderId)
+	{
+		$("#delete-link-warning").dialog({
+			resizable:false,
+			modal:true,
+			buttons:{
+				"Yes":function ()
+				{
+					$(this).dialog("close");
+					$.ajax({
+						type:"POST",
+						url:"favorites/deleteLink",
+						data:{
+							linkId:linkId,
+							folderId:folderId
+						},
+						beforeSend:function ()
+						{
+							$.showOverlayLight();
+						},
+						complete:function ()
+						{
+							$.hideOverlayLight();
+							getFolderLinks(folderId, 0);
+						},
+						async:true,
+						dataType:'html'
+					});
+				},
+				"No":function ()
+				{
+					$(this).dialog("close");
+				}
+			}
 		});
 	};
 

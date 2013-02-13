@@ -21,4 +21,4 @@
 		</td>
 	</tr>
 </table>
-<div id="delete-folder-warning" title="Delete Folder">Are you sure want to delete this folder and all his content?</div>
+<div id="delete-folder-warning" title="Delete Folder">Are you SURE you want to delete this folder and its contents?</div>

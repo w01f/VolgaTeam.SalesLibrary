@@ -190,9 +190,16 @@
 						success:function (msg)
 						{
 							favoritesDialogObject.content = $(msg);
-							favoritesDialogObject.content.find('#accept-button').on('click', function ()
+							favoritesDialogObject.content.find('.accept-button').on('click', function ()
 							{
 								$.fancybox.close();
+							});
+							favoritesDialogObject.content.find('.favorites-button').on('click', function ()
+							{
+								$.cookie("selectedRibbonTabId", 'favorites-tab', {
+									expires:(60 * 60 * 24 * 7)
+								});
+								location.reload();
 							});
 							$.fancybox({
 								content:favoritesDialogObject.content,

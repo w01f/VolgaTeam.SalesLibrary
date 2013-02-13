@@ -93,19 +93,8 @@
 					viewLinkDetails.call($(this));
 			});
 
-		if ($.linkGrid.showDelete)
-		{
-			linkGridBody.find("tr").hover(
-				function ()
-				{
-					$(this).find('.delete-link').fadeIn(200);
-				},
-				function ()
-				{
-					$(this).find('.delete-link').fadeOut(100);
-				}
-			);
-		}
+		if (!$.linkGrid.showDelete)
+			linkGridBody.find('.delete-link').hide();
 	};
 
 	var updateSortingColumns = function ()

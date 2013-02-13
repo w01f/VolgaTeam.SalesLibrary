@@ -75,8 +75,8 @@
 
 #links-grid-body .delete-link
 {
-	display: none;
-	margin-left: 20px;
+	float: right;
+	margin-right: 5px;
 }
 
 #links-grid-body .link-container
