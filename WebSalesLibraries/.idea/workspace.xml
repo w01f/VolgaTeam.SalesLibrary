@@ -6,18 +6,25 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/regular/favorites/selectFolderDialog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/tool-dialog.css" afterPath="$PROJECT_DIR$/css/regular/tool-dialog.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php" afterPath="$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php" />
-    </list>
+    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="" />
     <list id="658692b4-5d98-40af-9426-7326b1b432d2" name="C#" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Controllers/ClipartController.cs" afterPath="$PROJECT_DIR$/../FileManager/Controllers/ClipartController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/Library.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/Library.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/PreviewGenerator.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/PreviewGenerator.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Controllers/IPadContentController.cs" afterPath="$PROJECT_DIR$/../FileManager/Controllers/IPadContentController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Controllers/WallbinController.cs" afterPath="$PROJECT_DIR$/../FileManager/Controllers/WallbinController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/Library.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/Library.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/PreviewGenerator.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/PreviewGenerator.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/ToolClasses/VideoHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/ToolClasses/VideoHelper.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1360161016643" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1360773505035" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,21 +46,64 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="addLinkDialog.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php">
+      <file leaf-file-name="linksGrid.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="12" selection-start="300" selection-end="300" vertical-scroll-proportion="-9.807693">
-              <folding>
-                <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#2;n#table#0;n#!!top" expanded="true" />
-              </folding>
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="13.730769">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="selectFolderDialog.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/selectFolderDialog.php">
+      <file leaf-file-name="links-grid.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/regular/links-grid.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="59" selection-start="62" selection-end="62" vertical-scroll-proportion="0.02560241">
+            <state line="84" column="1" selection-start="1196" selection-end="1196" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="50" selection-start="1277" selection-end="1277" vertical-scroll-proportion="-6.658986">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scaling.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/scaling.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="92" column="0" selection-start="2967" selection-end="2967" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="linkViewing.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/linkViewing.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="201" column="50" selection-start="4991" selection-end="5009" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="links-grid.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/links-grid.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="96" column="25" selection-start="2591" selection-end="2591" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="favorites.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/favorites.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="235" column="21" selection-start="5675" selection-end="5675" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -75,22 +125,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/models/wallbin/Attachment.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/link.php" />
-        <option value="$PROJECT_DIR$/js/regular/wallbin.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
-        <option value="$PROJECT_DIR$/js/regular/login.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/banner.php" />
-        <option value="$PROJECT_DIR$/js/phone/login.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/changePassword.php" />
-        <option value="$PROJECT_DIR$/protected/components/core/IsdController.php" />
-        <option value="$PROJECT_DIR$/protected/views/phone/site/changePassword.php" />
-        <option value="$PROJECT_DIR$/protected/views/phone/site/login.php" />
-        <option value="$PROJECT_DIR$/css/regular/favorites.css" />
+        <option value="$PROJECT_DIR$/protected/models/favorites/FavoritesLinkStorage.php" />
+        <option value="$PROJECT_DIR$/protected/models/favorites/FavoritesFolderStorage.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/favorites/favoritesView.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/favorites/successAddDialog.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/FavoritesController.php" />
         <option value="$PROJECT_DIR$/js/regular/linkViewing.js" />
-        <option value="$PROJECT_DIR$/css/regular/tool-dialog.css" />
-        <option value="$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/favorites/selectFolderDialog.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/UniversalPreviewContainer.php" />
+        <option value="$PROJECT_DIR$/protected/models/storage/PreviewStorage.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/Attachment.php" />
+        <option value="$PROJECT_DIR$/js/regular/links-grid.js" />
+        <option value="$PROJECT_DIR$/js/regular/scaling.js" />
+        <option value="$PROJECT_DIR$/css/regular/links-grid.css" />
+        <option value="$PROJECT_DIR$/js/regular/favorites.js" />
+        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
       </list>
     </option>
   </component>
@@ -197,184 +247,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="favorites" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -468,11 +340,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\favorites" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\wallbin" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\site" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\search" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\controllers" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\favorites" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Web Application.SalesDepot">
@@ -639,7 +511,31 @@
       <created>1360085945322</created>
       <updated>1360085945322</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Web SalesDepot: Optimize site to work with folder links with Big amount of data">
+      <created>1360233946344</created>
+      <updated>1360233946344</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Web SalesDepot: Favorites folder selector fix">
+      <created>1360259403941</created>
+      <updated>1360259403941</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Web SalesDepot: Favorites DnD folders and files fix">
+      <created>1360340138291</created>
+      <updated>1360340138291</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Web SalesDepot: Favorites  folders and files deleting fix">
+      <created>1360521831798</created>
+      <updated>1360521831798</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Web SalesDepot: Fix to view WMV for original MP4 video">
+      <created>1360691848570</created>
+      <updated>1360691848570</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Web SalesDepot: Favorites  folders and files deleting fix">
+      <created>1360773529097</created>
+      <updated>1360773529097</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -664,27 +560,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19205298" sideWeight="0.4765208" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21081677" sideWeight="0.4551761" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14887941" sideWeight="0.7891832" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21081677" sideWeight="0.4551761" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14727855" sideWeight="0.7891832" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.8454746" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.8454746" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29690948" sideWeight="0.48719317" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15452538" sideWeight="0.5410886" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49573106" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17395945" sideWeight="0.7891832" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15635005" sideWeight="0.7891832" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49786553" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24834438" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49786553" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21081677" sideWeight="0.49786553" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
@@ -725,7 +621,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Mobile Password Recovery fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Favorites  folders and files deleting fix" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -753,10 +649,15 @@
     <MESSAGE value="Web SalesDepot: Attachments Email fix" />
     <MESSAGE value="Web SalesDepot: Many GUI Fixes" />
     <MESSAGE value="Web SalesDepot: Mobile Password Recovery fix" />
+    <MESSAGE value="Web SalesDepot: Optimize site to work with folder links with Big amount of data" />
+    <MESSAGE value="Web SalesDepot: Favorites folder selector fix" />
+    <MESSAGE value="Web SalesDepot: Favorites DnD folders and files fix" />
+    <MESSAGE value="Web SalesDepot: Fix to view WMV for original MP4 video" />
+    <MESSAGE value="Web SalesDepot: Favorites  folders and files deleting fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="48" />
+      <option name="time" value="54" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -772,227 +673,100 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/controllers/HelpController.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/emailVideo.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="27.538462" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/login.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/successAddDialog.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="19" selection-start="1617" selection-end="1632" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configuration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.9508449">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/site/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="25" selection-start="1118" selection-end="1118" vertical-scroll-proportion="-7.8461537">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/favorites.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="732" selection-end="732" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/favorites.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="14" selection-start="1144" selection-end="1144" vertical-scroll-proportion="0.4992658">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/tool-dialog.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="14" selection-start="738" selection-end="738" vertical-scroll-proportion="0.4950495">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="12" selection-start="300" selection-end="300" vertical-scroll-proportion="-9.807693">
-          <folding>
-            <element signature="n#style#0;n#input#0;n#span#0;n#td#1;n#tr#2;n#table#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/favoritesLinks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="10" column="31" selection-start="320" selection-end="336" vertical-scroll-proportion="0.2746365">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/favoritesView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="23" column="0" selection-start="880" selection-end="880" vertical-scroll-proportion="-7.6666665">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/Attachment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="621" column="34" selection-start="20320" selection-end="20320" vertical-scroll-proportion="0.21107784" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="800" column="51" selection-start="25438" selection-end="25438" vertical-scroll-proportion="4.0718565" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/UniversalPreviewContainer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="12" selection-start="3851" selection-end="3851" vertical-scroll-proportion="-0.22320117" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="32" selection-start="1496" selection-end="1496" vertical-scroll-proportion="1.092511" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/favoritesFolders.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="548" selection-end="548" vertical-scroll-proportion="-9.153846">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/tool-dialog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="13.730769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/scaling.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="0" selection-start="2967" selection-end="2967" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/links-grid.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="1" selection-start="1196" selection-end="1196" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/links-grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="25" selection-start="2591" selection-end="2591" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/linkViewing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="201" column="50" selection-start="4991" selection-end="5009" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/favorites.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="235" column="21" selection-start="5675" selection-end="5675" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="375" column="6" selection-start="19146" selection-end="19316" vertical-scroll-proportion="-16.884615">
-          <folding>
-            <marker date="1360073311103" expanded="true" signature="5502:19049" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="5676:7151" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="5797:6492" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="5876:6133" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6178:6483" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6187:6471" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6240:6461" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6278:6450" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6290:6358" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6370:6435" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6612:7125" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6723:7116" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6767:6851" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="6892:6976" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="7022:7106" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="7316:10282" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="7446:7843" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="7499:7754" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="7875:8384" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="7995:8374" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8040:8118" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8160:8238" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8285:8363" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8493:9040" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8633:9030" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8678:8762" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8804:8888" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="8935:9019" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9091:9609" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9202:9599" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9247:9331" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9373:9457" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9504:9588" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9731:10254" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9844:10244" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="9889:9974" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="10016:10101" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="10148:10233" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="10482:12783" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="10617:11014" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="10670:10925" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11046:11560" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11171:11550" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11216:11294" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11336:11414" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11461:11539" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11592:12110" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11703:12100" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11748:11832" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="11874:11958" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12005:12089" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12232:12755" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12345:12745" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12390:12475" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12517:12602" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12649:12734" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="12959:15147" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="13086:13232" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="13264:13707" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="13402:13697" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="13739:14189" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="13884:14179" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="14221:14662" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="14357:14652" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="14694:15138" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="14833:15128" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="15326:16265" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="15454:15592" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="15714:16237" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="15827:16227" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="15872:15957" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="15999:16084" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="16131:16216" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="16572:18983" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="16678:17077" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="16731:16986" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="17476:18195" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="17748:18184" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="17841:17921" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="17964:18044" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="18092:18172" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="18432:18955" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="18545:18945" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="18590:18675" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="18717:18802" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="18849:18934" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19068:19075" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19102:19109" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19150:19315" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19256:19308" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19291:19300" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19392:20711" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19398:19564" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19444:19557" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19611:19783" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19661:19776" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19830:20025" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19888:20018" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19904:20010" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="19990:20006" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20031:20226" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20089:20219" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20105:20211" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20191:20207" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20273:20465" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20335:20458" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20471:20663" placeholder="..." />
-            <marker date="1360073311103" expanded="true" signature="20533:20656" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/linkViewing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="62" selection-start="907" selection-end="907" vertical-scroll-proportion="-0.19710144">
-          <folding>
-            <marker date="1360147474124" expanded="false" signature="13904:13930" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/ribbon.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-6.342029">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/selectFolderDialog.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="59" selection-start="62" selection-end="62" vertical-scroll-proportion="0.02560241">
+        <state line="15" column="50" selection-start="1277" selection-end="1277" vertical-scroll-proportion="-6.658986">
           <folding />
         </state>
       </provider>

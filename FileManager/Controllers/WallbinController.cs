@@ -429,47 +429,89 @@ namespace FileManager.Controllers
 
 		private void btSync_Click(object sender, EventArgs e)
 		{
-			if (MainController.Instance.ActiveDecorator != null)
+			if (MainController.Instance.ActiveDecorator == null) return;
+			MainController.Instance.ActiveDecorator.Save();
+
+			if (MainController.Instance.ActiveDecorator.Library.VideoConversionWarning
+				&& MainController.Instance.ActiveDecorator.Library.PreviewContainers.Any(x => !x.Ready))
+				AppManager.Instance.ShowWarning("You still have Videos that are not converted");
+
+			FormMain.Instance.ribbonControl.Enabled = false;
+			_tabPage.Enabled = false;
+			Application.DoEvents();
+
+			var savedState = FormMain.Instance.WindowState;
+			if (MainController.Instance.ActiveDecorator.Library.MinimizeOnSync)
+				FormMain.Instance.WindowState = FormWindowState.Minimized;
+
+			Globals.ThreadActive = true;
+			Globals.ThreadAborted = false;
+
+			var closeAfterSync = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;
+
+			using (var form = new FormProgressSyncFilesRegular())
 			{
-				using (var form = new FormProgressSyncFilesRegular())
+				form.CloseAfterSync = closeAfterSync;
+				form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
+				var thread = new Thread(delegate()
+											{
+												if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+													LibraryManager.Instance.SynchronizeLibraries();
+											});
+				if (MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
+					form.Show();
+				thread.Start();
+				while (thread.IsAlive)
 				{
-					form.CloseAfterSync = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;
-					form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
-					FormMain.Instance.ribbonControl.Enabled = false;
-					_tabPage.Enabled = false;
+					Thread.Sleep(100);
 					Application.DoEvents();
-					MainController.Instance.ActiveDecorator.Save();
+				}
+				if (MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
+					form.Close();
+				if (form.CloseAfterSync)
+				{
+					if (form.CloseAfterSync && !MainController.Instance.ActiveDecorator.Library.FullSync)
+						Application.Exit();
+					else
+						closeAfterSync = form.CloseAfterSync;
+				}
+			}
+
+			if (MainController.Instance.ActiveDecorator.Library.FullSync && ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
+			{
+				using (var form = new FormProgressSyncFilesIPad())
+				{
+					form.CloseAfterSync = closeAfterSync;
+					form.ProcessAborted += (progressSender, progressE) => { Globals.ThreadAborted = true; };
 					var thread = new Thread(delegate()
 												{
-													Globals.ThreadActive = true;
-													Globals.ThreadAborted = false;
+													AppManager.Instance.KillAutoFM();
 													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-														LibraryManager.Instance.SynchronizeLibraries();
+														MainController.Instance.ActiveDecorator.Library.PrepareForIPadSynchronize();
+													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+														LibraryManager.Instance.SynchronizeLibraryForIpad(MainController.Instance.ActiveDecorator.Library);
+													AppManager.Instance.RunAutoFM();
 												});
-					if (MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
-						form.Show();
-					var savedState = FormMain.Instance.WindowState;
-					if (MainController.Instance.ActiveDecorator.Library.MinimizeOnSync)
-						FormMain.Instance.WindowState = FormWindowState.Minimized;
+					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
 					{
 						Thread.Sleep(100);
 						Application.DoEvents();
 					}
-					Globals.ThreadActive = false;
-					Globals.ThreadAborted = false;
-					if (MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync)
-						form.Close();
-					FormMain.Instance.ribbonControl.Enabled = true;
-					_tabPage.Enabled = true;
-					Application.DoEvents();
+					form.Close();
+
 					if (form.CloseAfterSync)
 						Application.Exit();
-					else
-						FormMain.Instance.WindowState = savedState;
 				}
 			}
+
+			Globals.ThreadActive = false;
+			Globals.ThreadAborted = false;
+
+			FormMain.Instance.ribbonControl.Enabled = true;
+			_tabPage.Enabled = true;
+			Application.DoEvents();
 		}
 
 		private void buttonItemHomeFileTreeView_CheckedChanged(object sender, EventArgs e)

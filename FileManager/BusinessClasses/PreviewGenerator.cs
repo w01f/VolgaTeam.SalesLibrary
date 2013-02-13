@@ -52,8 +52,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 			{
-				string ogvDestination = Path.Combine(Parent.ContainerPath, "ogv");
-				bool updateOgv = !(Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
+				var ogvDestination = Path.Combine(Parent.ContainerPath, "ogv");
+				var updateOgv = !(Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
 				if (!Directory.Exists(ogvDestination))
 					Directory.CreateDirectory(ogvDestination);
 				if (updateOgv)

@@ -193,6 +193,67 @@ namespace SalesDepot.Cloner.ToolClasses
 			}
 		}
 
+		public void ExportWmv(string sourceFilePath, string destinationPath)
+		{
+			bool allowToExit = false;
+			string analizerPath = Path.Combine(_videoConverterPath, "ffprobe.exe");
+			string converterPath = Path.Combine(_videoConverterPath, "ffmpeg.exe");
+			if (!File.Exists(sourceFilePath) || !File.Exists(analizerPath) || !File.Exists(converterPath)) return;
+			Process videoConverter = null;
+			var videoAnalyzer = new Process
+			{
+				StartInfo = new ProcessStartInfo(analizerPath, String.Format("\"{0}\"", sourceFilePath)) { UseShellExecute = false, RedirectStandardError = true, RedirectStandardOutput = true, CreateNoWindow = true },
+				EnableRaisingEvents = true
+			};
+			videoAnalyzer.Exited += (analyzerSender, analyzerE) =>
+			{
+				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+				{
+					string b = videoAnalyzer.StandardOutput.ReadToEnd();
+
+					if (!b.Contains("bitrate:"))
+						b = videoAnalyzer.StandardError.ReadToEnd();
+
+					int kBitRate = ExtractBitrate(b, 0);
+
+					videoConverter = new Process
+					{
+						StartInfo = new ProcessStartInfo(converterPath, String.Format("-i \"{0}\" -vcodec msmpeg4 -xerror -b {1}k \"{2}\"", sourceFilePath,
+							Math.Ceiling(kBitRate * 1.5), Path.Combine(destinationPath, Path.ChangeExtension(Path.GetFileName(sourceFilePath), ".wmv"))))
+						{
+							UseShellExecute = false,
+							RedirectStandardError = false,
+							RedirectStandardOutput = false,
+							CreateNoWindow = true,
+						},
+						EnableRaisingEvents = true
+					};
+					videoConverter.Exited += (converterSender, converterE) => { allowToExit = true; };
+					videoConverter.Start();
+				}
+			};
+			videoAnalyzer.Start();
+			while (!allowToExit)
+			{
+				Thread.Sleep(2000);
+				if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
+				{
+					try
+					{
+						videoAnalyzer.Kill();
+					}
+					catch { }
+					if (videoConverter != null)
+						try
+						{
+							videoConverter.Kill();
+						}
+						catch { }
+					allowToExit = true;
+				}
+			}
+		}
+
 		private int ExtractBitrate(string b, int defaultValue)
 		{
 			try

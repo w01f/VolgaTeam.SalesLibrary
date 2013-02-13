@@ -60,6 +60,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public bool MinimizeOnSync { get; set; }
 		public bool CloseAfterSync { get; set; }
 		public bool ShowProgressDuringSync { get; set; }
+		public bool FullSync { get; set; }
+		public bool VideoConversionWarning { get; set; }
 		public bool EnableInactiveLinks { get; set; }
 		public bool InactiveLinksBoldWarning { get; set; }
 		public bool ReplaceInactiveLinksWithLineBreak { get; set; }
@@ -346,6 +348,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (node != null)
 							if (bool.TryParse(node.InnerText, out tempBool))
 								ShowProgressDuringSync = tempBool;
+						node = document.SelectSingleNode(@"/Library/FullSync");
+						if (node != null)
+							if (bool.TryParse(node.InnerText, out tempBool))
+								FullSync = tempBool;
+						node = document.SelectSingleNode(@"/Library/VideoConversionWarning");
+						if (node != null)
+							if (bool.TryParse(node.InnerText, out tempBool))
+								VideoConversionWarning = tempBool;
 						node = document.SelectSingleNode(@"/Library/EnableInactiveLinks");
 						if (node != null)
 							if (bool.TryParse(node.InnerText, out tempBool))
@@ -538,6 +548,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			xml.AppendLine(@"<MinimizeOnSync>" + MinimizeOnSync + @"</MinimizeOnSync>");
 			xml.AppendLine(@"<CloseAfterSync>" + CloseAfterSync + @"</CloseAfterSync>");
 			xml.AppendLine(@"<ShowProgressDuringSync>" + ShowProgressDuringSync + @"</ShowProgressDuringSync>");
+			xml.AppendLine(@"<FullSync>" + FullSync + @"</FullSync>");
+			xml.AppendLine(@"<VideoConversionWarning>" + VideoConversionWarning + @"</VideoConversionWarning>");
 			xml.AppendLine(@"<EnableInactiveLinks>" + EnableInactiveLinks + @"</EnableInactiveLinks>");
 			xml.AppendLine(@"<InactiveLinksBoldWarning>" + InactiveLinksBoldWarning + @"</InactiveLinksBoldWarning>");
 			xml.AppendLine(@"<ReplaceInactiveLinksWithLineBreak>" + ReplaceInactiveLinksWithLineBreak + @"</ReplaceInactiveLinksWithLineBreak>");

@@ -16,6 +16,8 @@ namespace FileManager.ToolForms.Settings
 			ckMinimizeOnSync.Checked = MainController.Instance.ActiveDecorator.Library.MinimizeOnSync;
 			ckCloseAfterSync.Checked = MainController.Instance.ActiveDecorator.Library.CloseAfterSync;
 			ckShowSyncStatus.Checked = MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync;
+			ckFullSync.Checked = MainController.Instance.ActiveDecorator.Library.FullSync;
+			ckVideoConversionWarning.Checked = MainController.Instance.ActiveDecorator.Library.VideoConversionWarning;
 		}
 
 		private void FormSync_FormClosed(object sender, FormClosedEventArgs e)
@@ -25,6 +27,8 @@ namespace FileManager.ToolForms.Settings
 				MainController.Instance.ActiveDecorator.Library.MinimizeOnSync = ckMinimizeOnSync.Checked;
 				MainController.Instance.ActiveDecorator.Library.CloseAfterSync = ckCloseAfterSync.Checked;
 				MainController.Instance.ActiveDecorator.Library.ShowProgressDuringSync = ckShowSyncStatus.Checked;
+				MainController.Instance.ActiveDecorator.Library.FullSync = ckFullSync.Checked;
+				MainController.Instance.ActiveDecorator.Library.VideoConversionWarning = ckVideoConversionWarning.Checked;
 				MainController.Instance.ActiveDecorator.Library.Save();
 			}
 		}
