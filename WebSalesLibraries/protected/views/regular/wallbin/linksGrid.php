@@ -60,4 +60,3 @@
 		<?php endif; ?>
 	</table>
 </div>
-<div id="delete-link-warning" title="Delete Link">Are you sure want to delete this link?</div>

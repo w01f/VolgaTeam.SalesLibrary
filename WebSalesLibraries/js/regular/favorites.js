@@ -66,6 +66,7 @@
 		foldersPanel.find('.delete-folder').off('click').on('click', function (event)
 		{
 			var folderId = $(this).parent().parent().children('.service-data').children('.folder-id').html();
+			$('body').append('<div id="delete-folder-warning" title="Delete Folder">Are you SURE you want to delete this folder and its contents?</div>');
 			$("#delete-folder-warning").dialog({
 				resizable:false,
 				modal:true,
@@ -96,8 +97,13 @@
 					{
 						$(this).dialog("close");
 					}
+				},
+				close:function (event, ui)
+				{
+					$("#delete-folder-warning").remove();
 				}
 			});
+
 			event.stopPropagation();
 		});
 
@@ -223,7 +229,7 @@
 					e.stopPropagation();
 					e.preventDefault();
 					var linkId = $(this).parent().parent().find('.link-id-column').html();
-					deleteLink(linkId,folderId);
+					deleteLink(linkId, folderId);
 				});
 				linkGridBody.find(".delete-link").off('touchstart').off('touchmove').off('touchend').on('touchstart',
 					function ()
@@ -240,7 +246,7 @@
 						if (!isScrolling)
 						{
 							var linkId = $(this).parent().parent().find('.link-id-column').html();
-							deleteLink(linkId,folderId);
+							deleteLink(linkId, folderId);
 						}
 						return false;
 					});
@@ -258,8 +264,9 @@
 		});
 	};
 
-	var deleteLink = function (linkId,folderId)
+	var deleteLink = function (linkId, folderId)
 	{
+		$('body').append('<div id="delete-link-warning" title="Delete Link">Are you sure want to delete this link?</div>');
 		$("#delete-link-warning").dialog({
 			resizable:false,
 			modal:true,
@@ -291,6 +298,10 @@
 				{
 					$(this).dialog("close");
 				}
+			},
+			close:function (event, ui)
+			{
+				$('body').remove("#delete-link-warning");
 			}
 		});
 	};
