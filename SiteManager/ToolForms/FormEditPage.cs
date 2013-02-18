@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using SalesDepot.CoreObjects.IPadAdminService;
+using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.ToolForms
 {

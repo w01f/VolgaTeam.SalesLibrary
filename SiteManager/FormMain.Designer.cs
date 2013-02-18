@@ -50,11 +50,13 @@
 			this.itemContainerHomeSite = new DevComponents.DotNetBar.ItemContainer();
 			this.labelItemHomeSite = new DevComponents.DotNetBar.LabelItem();
 			this.controlContainerItem1 = new DevComponents.DotNetBar.ControlContainerItem();
-			this.ribbonTabItemHome = new DevComponents.DotNetBar.RibbonTabItem();
-			this.pnMain = new System.Windows.Forms.Panel();
 			this.ribbonBarHomeLogo = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerHomeLogo = new DevComponents.DotNetBar.ItemContainer();
 			this.labelItemHomeLogo = new DevComponents.DotNetBar.LabelItem();
+			this.ribbonTabItemHome = new DevComponents.DotNetBar.RibbonTabItem();
+			this.pnMain = new System.Windows.Forms.Panel();
+			this.ribbonBarHomeImport = new DevComponents.DotNetBar.RibbonBar();
+			this.buttonItemHomeImport = new DevComponents.DotNetBar.ButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.ribbonControl.SuspendLayout();
 			this.ribbonPanelHome.SuspendLayout();
@@ -102,7 +104,7 @@
 			this.ribbonControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonControl.Name = "ribbonControl";
 			this.ribbonControl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
-			this.ribbonControl.Size = new System.Drawing.Size(769, 146);
+			this.ribbonControl.Size = new System.Drawing.Size(950, 146);
 			this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonControl.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
 			this.ribbonControl.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
@@ -127,6 +129,7 @@
 			// 
 			this.ribbonPanelHome.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeExit);
+			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeImport);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeRefresh);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeDelete);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeEdit);
@@ -138,7 +141,7 @@
 			this.ribbonPanelHome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonPanelHome.Name = "ribbonPanelHome";
 			this.ribbonPanelHome.Padding = new System.Windows.Forms.Padding(3, 0, 3, 4);
-			this.ribbonPanelHome.Size = new System.Drawing.Size(769, 119);
+			this.ribbonPanelHome.Size = new System.Drawing.Size(950, 119);
 			// 
 			// 
 			// 
@@ -169,7 +172,7 @@
 			this.ribbonBarHomeExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemHomeExit});
 			this.ribbonBarHomeExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarHomeExit.Location = new System.Drawing.Point(793, 0);
+			this.ribbonBarHomeExit.Location = new System.Drawing.Point(883, 0);
 			this.ribbonBarHomeExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonBarHomeExit.Name = "ribbonBarHomeExit";
 			this.ribbonBarHomeExit.Size = new System.Drawing.Size(77, 115);
@@ -406,23 +409,6 @@
 			this.controlContainerItem1.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
 			this.controlContainerItem1.Name = "controlContainerItem1";
 			// 
-			// ribbonTabItemHome
-			// 
-			this.ribbonTabItemHome.Checked = true;
-			this.ribbonTabItemHome.Name = "ribbonTabItemHome";
-			this.ribbonTabItemHome.Panel = this.ribbonPanelHome;
-			this.ribbonTabItemHome.Text = "Home";
-			// 
-			// pnMain
-			// 
-			this.pnMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnMain.Location = new System.Drawing.Point(0, 146);
-			this.pnMain.Name = "pnMain";
-			this.pnMain.Size = new System.Drawing.Size(769, 387);
-			this.pnMain.TabIndex = 3;
-			// 
 			// ribbonBarHomeLogo
 			// 
 			this.ribbonBarHomeLogo.AutoOverflowEnabled = true;
@@ -471,11 +457,66 @@
 			// 
 			this.labelItemHomeLogo.Name = "labelItemHomeLogo";
 			// 
+			// ribbonTabItemHome
+			// 
+			this.ribbonTabItemHome.Checked = true;
+			this.ribbonTabItemHome.Name = "ribbonTabItemHome";
+			this.ribbonTabItemHome.Panel = this.ribbonPanelHome;
+			this.ribbonTabItemHome.Text = "Home";
+			// 
+			// pnMain
+			// 
+			this.pnMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.pnMain.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnMain.Location = new System.Drawing.Point(0, 146);
+			this.pnMain.Name = "pnMain";
+			this.pnMain.Size = new System.Drawing.Size(950, 387);
+			this.pnMain.TabIndex = 3;
+			// 
+			// ribbonBarHomeImport
+			// 
+			this.ribbonBarHomeImport.AutoOverflowEnabled = true;
+			// 
+			// 
+			// 
+			this.ribbonBarHomeImport.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarHomeImport.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarHomeImport.ContainerControlProcessDialogKey = true;
+			this.ribbonBarHomeImport.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarHomeImport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemHomeImport});
+			this.ribbonBarHomeImport.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarHomeImport.Location = new System.Drawing.Point(793, 0);
+			this.ribbonBarHomeImport.Name = "ribbonBarHomeImport";
+			this.ribbonBarHomeImport.Size = new System.Drawing.Size(90, 115);
+			this.ribbonBarHomeImport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarHomeImport.TabIndex = 29;
+			this.ribbonBarHomeImport.Text = "Import Users";
+			// 
+			// 
+			// 
+			this.ribbonBarHomeImport.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarHomeImport.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// buttonItemHomeImport
+			// 
+			this.buttonItemHomeImport.Image = global::SalesDepot.SiteManager.Properties.Resources.ImportUsers;
+			this.buttonItemHomeImport.Name = "buttonItemHomeImport";
+			this.buttonItemHomeImport.SubItemsExpandWidth = 14;
+			this.buttonItemHomeImport.Text = "buttonItem1";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-			this.ClientSize = new System.Drawing.Size(769, 533);
+			this.ClientSize = new System.Drawing.Size(950, 533);
 			this.Controls.Add(this.pnMain);
 			this.Controls.Add(this.ribbonControl);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -524,6 +565,8 @@
 		public DevComponents.DotNetBar.RibbonBar ribbonBarHomeLogo;
 		private DevComponents.DotNetBar.ItemContainer itemContainerHomeLogo;
 		public DevComponents.DotNetBar.LabelItem labelItemHomeLogo;
+		private DevComponents.DotNetBar.RibbonBar ribbonBarHomeImport;
+		private DevComponents.DotNetBar.ButtonItem buttonItemHomeImport;
 	}
 }
 

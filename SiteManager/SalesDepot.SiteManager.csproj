@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppManager.cs" />
+    <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\SiteManager.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="FormMain.cs">
@@ -163,6 +164,7 @@
     <EmbeddedResource Include="ToolForms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -177,13 +179,8 @@
     <None Include="Resources\Exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
-      <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
-      <Name>SalesDepot.CoreObjects</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ImportUsers.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -218,6 +215,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\RefreshUsers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
+      <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
+      <Name>SalesDepot.CoreObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.Services\SalesDepot.Services.csproj">
+      <Project>{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}</Project>
+      <Name>SalesDepot.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

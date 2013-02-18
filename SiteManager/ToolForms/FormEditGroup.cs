@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using SalesDepot.CoreObjects.IPadAdminService;
+using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.ToolForms
 {

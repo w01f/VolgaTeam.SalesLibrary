@@ -6,13 +6,13 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using SalesDepot.CoreObjects.IPadAdminService;
+using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.ToolForms
 {
 	public partial class FormEditUser : Form
 	{
-		private bool _newUser = false;
+		private bool _newUser;
 		private List<string> _existedUsers = new List<string>();
 
 		private List<GroupRecord> _groups = new List<GroupRecord>();

@@ -81,6 +81,13 @@ namespace SalesDepot.SiteManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap ImportUsers {
+            get {
+                object obj = ResourceManager.GetObject("ImportUsers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap RefreshUsers {
             get {
                 object obj = ResourceManager.GetObject("RefreshUsers", resourceCulture);

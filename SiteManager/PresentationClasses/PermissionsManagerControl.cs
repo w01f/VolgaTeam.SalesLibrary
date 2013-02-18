@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -9,8 +10,9 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
+using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ToolForms;
-using SalesDepot.CoreObjects.IPadAdminService;
+using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.PresentationClasses
 {
@@ -95,6 +97,50 @@ namespace SalesDepot.SiteManager.PresentationClasses
 				UpdateGroups(showMessages, ref message);
 				UpdateLibraries(showMessages, ref message);
 			}
+		}
+
+		public void ImportUsers()
+		{
+			string message = string.Empty;
+			using (var dialog = new OpenFileDialog())
+			{
+				dialog.Title = "Import Users";
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+				dialog.Filter = "Excel files|*.xls;*.xlsx";
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					using (var form = new FormProgress())
+					{
+						FormMain.Instance.ribbonControl.Enabled = false;
+						Enabled = false;
+						form.laProgress.Text = "Import users...";
+						form.TopMost = true;
+						var thread = new Thread(() =>
+						{
+							var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray());
+							BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
+						});
+						form.Show();
+						thread.Start();
+						while (thread.IsAlive)
+						{
+							Thread.Sleep(100);
+							Application.DoEvents();
+						}
+						form.Close();
+						Enabled = true;
+						FormMain.Instance.ribbonControl.Enabled = true;
+					}
+
+					_userCollectionChanged = true;
+					_groupsCollectionChanged = true;
+					_libraraiesCollectionChanged = true;
+
+					UpdateUsers(true, ref message);
+				}
+			}
+			if (!string.IsNullOrEmpty(message))
+				AppManager.Instance.ShowWarning(message);
 		}
 
 		public void AddObject()
@@ -516,7 +562,7 @@ namespace SalesDepot.SiteManager.PresentationClasses
 
 		private void repositoryItemButtonEditGroupActions_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (gridViewUsers.FocusedRowHandle != GridControl.InvalidRowHandle)
+			if (gridViewGroups.FocusedRowHandle != GridControl.InvalidRowHandle)
 			{
 				if (e.Button.Index == 0)
 					EditGroup();
