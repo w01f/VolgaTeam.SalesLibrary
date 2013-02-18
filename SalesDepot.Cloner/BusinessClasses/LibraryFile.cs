@@ -671,7 +671,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public void GetPresentationPrperties()
+		public void GetPresentationProperties()
 		{
 			PowerPointHelper.Instance.GetPresentationProperties(this);
 		}
@@ -703,14 +703,27 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
 	{
+		public List<ILibraryLink> FolderContent { get; private set; }
+
+		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
+		{
+			bool alive = false;
+			foreach (var file in FolderContent)
+			{
+				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+				if (!alive && file is LibraryFolderLink)
+					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
+				if (alive)
+					break;
+			}
+			return alive;
+		}
+
 		public LibraryFolderLink(LibraryFolder parent)
 			: base(parent)
 		{
 			FolderContent = new List<ILibraryLink>();
 		}
-
-		#region ILibraryFolderLink Members
-		public List<ILibraryLink> FolderContent { get; private set; }
 
 		public override ILibraryLink Clone(LibraryFolder parent)
 		{
@@ -741,11 +754,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public override void Deserialize(XmlNode node)
 		{
 			base.Deserialize(node);
-			XmlNode contentNode = node.SelectSingleNode("FolderContent");
+			var contentNode = node.SelectSingleNode("FolderContent");
 			if (contentNode != null)
 				foreach (XmlNode fileNode in contentNode)
 				{
-					ILibraryLink file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
+					var file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
 					file.Deserialize(fileNode);
 					FolderContent.Add(file);
 				}
@@ -760,25 +773,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var result = new StringBuilder();
 			result.AppendLine(base.Serialize());
 			result.AppendLine(@"<FolderContent>");
-			foreach (ILibraryLink link in FolderContent)
+			foreach (var link in FolderContent)
 				result.AppendLine(@"<File>" + link.Serialize() + @"</File>");
 			result.AppendLine(@"</FolderContent>");
 			return result.ToString();
-		}
-		#endregion
-
-		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
-		{
-			bool alive = false;
-			foreach (ILibraryLink file in FolderContent)
-			{
-				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
-				if (!alive && file is LibraryFolderLink)
-					alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);
-				if (alive)
-					break;
-			}
-			return alive;
 		}
 
 		public void UpdateFolderContent()
@@ -786,14 +784,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var existedPaths = new List<string>();
 			if (Directory.Exists(OriginalPath))
 			{
-				foreach (DirectoryInfo folder in Directory.GetDirectories(OriginalPath).Select(folderPath => new DirectoryInfo(folderPath)))
+				foreach (var folder in Directory.GetDirectories(OriginalPath).Select(folderPath => new DirectoryInfo(folderPath)))
 				{
 					existedPaths.Add(folder.FullName);
 					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(folder.FullName.ToLower()))) continue;
 					var libraryFile = new LibraryFolderLink(Parent);
 					libraryFile.Name = folder.Name;
 					libraryFile.RootId = RootId;
-					RootFolder rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
 					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
 					libraryFile.Type = FileTypes.Folder;
 					libraryFile.InitBannerProperties();
@@ -806,17 +804,29 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					var libraryFile = new LibraryLink(Parent);
 					libraryFile.Name = file.Name;
 					libraryFile.RootId = RootId;
-					RootFolder rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
+					var rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
 					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
 					libraryFile.SetProperties();
 					libraryFile.InitBannerProperties();
 					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
 					FolderContent.Add(libraryFile);
 				}
 			}
+			var linksToRemove = FolderContent.Where(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
+			foreach (var link in linksToRemove.OfType<LibraryLink>().Where(x => x.PreviewContainer != null))
+				link.PreviewContainer.ClearContent();
 			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
 			for (int i = 0; i < FolderContent.Count; i++)
 				FolderContent[i].Order = i;
+		}
+
+		public IEnumerable<LibraryLink> GetWholeContent()
+		{
+			var wholeContent = new List<LibraryLink>();
+			wholeContent.AddRange(FolderContent.Where(x => x.Type != FileTypes.Folder).OfType<LibraryLink>());
+			wholeContent.AddRange(FolderContent.Where(x => x.Type == FileTypes.Folder).OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()));
+			return wholeContent;
 		}
 	}
 }

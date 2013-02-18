@@ -30,9 +30,9 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarExit = new DevComponents.DotNetBar.RibbonBar();
@@ -74,6 +74,11 @@
 			this.itemContainerSettingsQuickView = new DevComponents.DotNetBar.ItemContainer();
 			this.buttonItemSettingsQuickViewImages = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemSettingsQuickViewSlides = new DevComponents.DotNetBar.ButtonItem();
+			this.ribbonBarSettingsFolderLaunchOptions = new DevComponents.DotNetBar.RibbonBar();
+			this.itemContainerSettingsFolderLaunchOptions = new DevComponents.DotNetBar.ItemContainer();
+			this.buttonItemSettingsFolderViewer = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsFolderMenu = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemSettingsFolderLaunch = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarSettingsVideoLaunchOptions = new DevComponents.DotNetBar.RibbonBar();
 			this.itemContainerSettingsVideoLaunchOptions = new DevComponents.DotNetBar.ItemContainer();
 			this.buttonItemSettingsVideoViewer = new DevComponents.DotNetBar.ButtonItem();
@@ -698,6 +703,7 @@
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsHelp);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsEmail);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsQuickView);
+			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsFolderLaunchOptions);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsVideoLaunchOptions);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsExcelLaunchOptions);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsWordLaunchOptions);
@@ -742,7 +748,7 @@
 			this.ribbonBarSettingsExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsExit});
 			this.ribbonBarSettingsExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsExit.Location = new System.Drawing.Point(739, 0);
+			this.ribbonBarSettingsExit.Location = new System.Drawing.Point(807, 0);
 			this.ribbonBarSettingsExit.Name = "ribbonBarSettingsExit";
 			this.ribbonBarSettingsExit.ResizeItemsToFit = false;
 			this.ribbonBarSettingsExit.Size = new System.Drawing.Size(80, 113);
@@ -782,7 +788,7 @@
 			this.ribbonBarSettingsFloater.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsFloater});
 			this.ribbonBarSettingsFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsFloater.Location = new System.Drawing.Point(650, 0);
+			this.ribbonBarSettingsFloater.Location = new System.Drawing.Point(718, 0);
 			this.ribbonBarSettingsFloater.Name = "ribbonBarSettingsFloater";
 			this.ribbonBarSettingsFloater.Size = new System.Drawing.Size(89, 113);
 			this.ribbonBarSettingsFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -824,7 +830,7 @@
 			this.ribbonBarSettingsHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsHelp});
 			this.ribbonBarSettingsHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsHelp.Location = new System.Drawing.Point(565, 0);
+			this.ribbonBarSettingsHelp.Location = new System.Drawing.Point(633, 0);
 			this.ribbonBarSettingsHelp.Name = "ribbonBarSettingsHelp";
 			this.ribbonBarSettingsHelp.ResizeItemsToFit = false;
 			this.ribbonBarSettingsHelp.Size = new System.Drawing.Size(85, 113);
@@ -865,7 +871,7 @@
 			this.ribbonBarSettingsEmail.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsEmail});
 			this.ribbonBarSettingsEmail.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsEmail.Location = new System.Drawing.Point(480, 0);
+			this.ribbonBarSettingsEmail.Location = new System.Drawing.Point(548, 0);
 			this.ribbonBarSettingsEmail.Name = "ribbonBarSettingsEmail";
 			this.ribbonBarSettingsEmail.ResizeItemsToFit = false;
 			this.ribbonBarSettingsEmail.Size = new System.Drawing.Size(85, 113);
@@ -904,7 +910,7 @@
 			this.ribbonBarSettingsQuickView.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsQuickView});
 			this.ribbonBarSettingsQuickView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsQuickView.Location = new System.Drawing.Point(411, 0);
+			this.ribbonBarSettingsQuickView.Location = new System.Drawing.Point(479, 0);
 			this.ribbonBarSettingsQuickView.Name = "ribbonBarSettingsQuickView";
 			this.ribbonBarSettingsQuickView.Size = new System.Drawing.Size(69, 113);
 			this.ribbonBarSettingsQuickView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -948,6 +954,77 @@
 			this.buttonItemSettingsQuickViewSlides.Name = "buttonItemSettingsQuickViewSlides";
 			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsQuickViewSlides, new DevComponents.DotNetBar.SuperTooltipInfo("QuickView Slides (Slower)", "", "PowerPoint slides are displayed in PowerPoint Slide Show in the Quick-Viewer", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemSettingsQuickViewSlides.Text = "    Show\r\n    Slides";
+			// 
+			// ribbonBarSettingsFolderLaunchOptions
+			// 
+			this.ribbonBarSettingsFolderLaunchOptions.AutoOverflowEnabled = false;
+			this.ribbonBarSettingsFolderLaunchOptions.AutoSizeItems = false;
+			// 
+			// 
+			// 
+			this.ribbonBarSettingsFolderLaunchOptions.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarSettingsFolderLaunchOptions.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.ribbonBarSettingsFolderLaunchOptions.ContainerControlProcessDialogKey = true;
+			this.ribbonBarSettingsFolderLaunchOptions.Dock = System.Windows.Forms.DockStyle.Left;
+			this.ribbonBarSettingsFolderLaunchOptions.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
+			this.ribbonBarSettingsFolderLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainerSettingsFolderLaunchOptions});
+			this.ribbonBarSettingsFolderLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+			this.ribbonBarSettingsFolderLaunchOptions.Location = new System.Drawing.Point(411, 0);
+			this.ribbonBarSettingsFolderLaunchOptions.Name = "ribbonBarSettingsFolderLaunchOptions";
+			this.ribbonBarSettingsFolderLaunchOptions.ResizeItemsToFit = false;
+			this.ribbonBarSettingsFolderLaunchOptions.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarSettingsFolderLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.ribbonBarSettingsFolderLaunchOptions.TabIndex = 21;
+			this.ribbonBarSettingsFolderLaunchOptions.Text = "Folder";
+			// 
+			// 
+			// 
+			this.ribbonBarSettingsFolderLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// 
+			// 
+			this.ribbonBarSettingsFolderLaunchOptions.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
+			// itemContainerSettingsFolderLaunchOptions
+			// 
+			// 
+			// 
+			// 
+			this.itemContainerSettingsFolderLaunchOptions.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			this.itemContainerSettingsFolderLaunchOptions.HorizontalItemAlignment = DevComponents.DotNetBar.eHorizontalItemsAlignment.Center;
+			this.itemContainerSettingsFolderLaunchOptions.ItemSpacing = 10;
+			this.itemContainerSettingsFolderLaunchOptions.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+			this.itemContainerSettingsFolderLaunchOptions.Name = "itemContainerSettingsFolderLaunchOptions";
+			this.itemContainerSettingsFolderLaunchOptions.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItemSettingsFolderViewer,
+            this.buttonItemSettingsFolderMenu,
+            this.buttonItemSettingsFolderLaunch});
+			this.itemContainerSettingsFolderLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
+			// 
+			// buttonItemSettingsFolderViewer
+			// 
+			this.buttonItemSettingsFolderViewer.FixedSize = new System.Drawing.Size(60, 24);
+			this.buttonItemSettingsFolderViewer.Name = "buttonItemSettingsFolderViewer";
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsFolderViewer, new DevComponents.DotNetBar.SuperTooltipInfo("Video Viewer", "", "Video links will open the Video file viewer", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsFolderViewer.Text = "   Viewer";
+			// 
+			// buttonItemSettingsFolderMenu
+			// 
+			this.buttonItemSettingsFolderMenu.FixedSize = new System.Drawing.Size(60, 24);
+			this.buttonItemSettingsFolderMenu.Name = "buttonItemSettingsFolderMenu";
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsFolderMenu, new DevComponents.DotNetBar.SuperTooltipInfo("Video Menu", "", "Video links will open the Video File Options Menu", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsFolderMenu.Text = "    Menu";
+			// 
+			// buttonItemSettingsFolderLaunch
+			// 
+			this.buttonItemSettingsFolderLaunch.FixedSize = new System.Drawing.Size(60, 24);
+			this.buttonItemSettingsFolderLaunch.Name = "buttonItemSettingsFolderLaunch";
+			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsFolderLaunch, new DevComponents.DotNetBar.SuperTooltipInfo("Video Launch", "", "Video links will immediately play the Video file", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
+			this.buttonItemSettingsFolderLaunch.Text = "   Launch";
 			// 
 			// ribbonBarSettingsVideoLaunchOptions
 			// 
@@ -1692,7 +1769,7 @@
 			this.dateEditProgramSearchDateStart.Name = "dateEditProgramSearchDateStart";
 			this.dateEditProgramSearchDateStart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditProgramSearchDateStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
 			this.dateEditProgramSearchDateStart.Properties.DisplayFormat.FormatString = "MM/dd/yy";
 			this.dateEditProgramSearchDateStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 			this.dateEditProgramSearchDateStart.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -1711,7 +1788,7 @@
 			this.dateEditProgramSearchDateEnd.Name = "dateEditProgramSearchDateEnd";
 			this.dateEditProgramSearchDateEnd.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditProgramSearchDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.dateEditProgramSearchDateEnd.Properties.DisplayFormat.FormatString = "MM/dd/yy";
 			this.dateEditProgramSearchDateEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 			this.dateEditProgramSearchDateEnd.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -2249,7 +2326,7 @@
 			this.dateEditProgramScheduleDay.Name = "dateEditProgramScheduleDay";
 			this.dateEditProgramScheduleDay.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditProgramScheduleDay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.dateEditProgramScheduleDay.Properties.DisplayFormat.FormatString = "MM/dd/yy";
 			this.dateEditProgramScheduleDay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 			this.dateEditProgramScheduleDay.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -2864,5 +2941,10 @@
         public DevComponents.DotNetBar.ButtonItem buttonItemProgramScheduleHelp;
 		private DevComponents.DotNetBar.ItemContainer itemContainerHomeView2;
 		public DevComponents.DotNetBar.ButtonItem buttonItemHomeAccordionView;
+		private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsFolderLaunchOptions;
+		private DevComponents.DotNetBar.ItemContainer itemContainerSettingsFolderLaunchOptions;
+		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsFolderViewer;
+		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsFolderMenu;
+		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsFolderLaunch;
     }
 }

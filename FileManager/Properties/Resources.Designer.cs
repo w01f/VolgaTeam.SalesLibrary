@@ -592,6 +592,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap ToolboxClose {
+            get {
+                object obj = ResourceManager.GetObject("ToolboxClose", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap UpArrow {
             get {
                 object obj = ResourceManager.GetObject("UpArrow", resourceCulture);

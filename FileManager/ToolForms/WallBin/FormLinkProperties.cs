@@ -12,7 +12,6 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Layout;
 using DevExpress.XtraGrid.Views.Layout.ViewInfo;
 using DevExpress.XtraNavBar;
@@ -146,53 +145,81 @@ namespace FileManager.ToolForms.WallBin
 				#region Categories
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 0)
 				{
-					navBarGroup1.Caption = ListManager.Instance.SearchTags.SearchGroups[0].Name;
+					buttonXSearchTagsCategoriesGroup1.Text = ListManager.Instance.SearchTags.SearchGroups[0].Name;
 					checkedListBoxControlGroup1.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[0].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup1.Tag = checkedListBoxControlGroup1;
 				}
 				else
-					navBarGroup1.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup1.Visible = false;
+					buttonXSearchTagsCategoriesGroup1.Enabled = false;
+				}
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 1)
 				{
-					navBarGroup2.Caption = ListManager.Instance.SearchTags.SearchGroups[1].Name;
+					buttonXSearchTagsCategoriesGroup2.Text = ListManager.Instance.SearchTags.SearchGroups[1].Name;
 					checkedListBoxControlGroup2.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[1].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup2.Tag = checkedListBoxControlGroup2;
 				}
 				else
-					navBarGroup2.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup2.Visible = false;
+					buttonXSearchTagsCategoriesGroup2.Enabled = false;
+				}
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 2)
 				{
-					navBarGroup3.Caption = ListManager.Instance.SearchTags.SearchGroups[2].Name;
+					buttonXSearchTagsCategoriesGroup3.Text = ListManager.Instance.SearchTags.SearchGroups[2].Name;
 					checkedListBoxControlGroup3.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[2].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup3.Tag = checkedListBoxControlGroup3;
 				}
 				else
-					navBarGroup3.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup3.Visible = false;
+					buttonXSearchTagsCategoriesGroup3.Enabled = false;
+				}
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 3)
 				{
-					navBarGroup4.Caption = ListManager.Instance.SearchTags.SearchGroups[3].Name;
+					buttonXSearchTagsCategoriesGroup4.Text = ListManager.Instance.SearchTags.SearchGroups[3].Name;
 					checkedListBoxControlGroup4.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[3].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup4.Tag = checkedListBoxControlGroup4;
 				}
 				else
-					navBarGroup4.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup4.Visible = false;
+					buttonXSearchTagsCategoriesGroup4.Enabled = false;
+				}
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 4)
 				{
-					navBarGroup5.Caption = ListManager.Instance.SearchTags.SearchGroups[4].Name;
+					buttonXSearchTagsCategoriesGroup5.Text = ListManager.Instance.SearchTags.SearchGroups[4].Name;
 					checkedListBoxControlGroup5.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[4].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup5.Tag = checkedListBoxControlGroup5;
 				}
 				else
-					navBarGroup5.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup5.Visible = false;
+					buttonXSearchTagsCategoriesGroup5.Enabled = false;
+				}
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 5)
 				{
-					navBarGroup6.Caption = ListManager.Instance.SearchTags.SearchGroups[5].Name;
+					buttonXSearchTagsCategoriesGroup6.Text = ListManager.Instance.SearchTags.SearchGroups[5].Name;
 					checkedListBoxControlGroup6.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[5].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup6.Tag = checkedListBoxControlGroup6;
 				}
 				else
-					navBarGroup6.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup6.Visible = false;
+					buttonXSearchTagsCategoriesGroup6.Enabled = false;
+				}
 				if (ListManager.Instance.SearchTags.SearchGroups.Count > 6)
 				{
-					navBarGroup7.Caption = ListManager.Instance.SearchTags.SearchGroups[6].Name;
+					buttonXSearchTagsCategoriesGroup7.Text = ListManager.Instance.SearchTags.SearchGroups[6].Name;
 					checkedListBoxControlGroup7.Items.AddRange(ListManager.Instance.SearchTags.SearchGroups[6].Tags.ToArray());
+					buttonXSearchTagsCategoriesGroup7.Tag = checkedListBoxControlGroup7;
 				}
 				else
-					navBarGroup7.Visible = false;
+				{
+					buttonXSearchTagsCategoriesGroup7.Visible = false;
+					buttonXSearchTagsCategoriesGroup7.Enabled = false;
+				}
 				#endregion
 
 				Keywords = new List<StringDataSourceWrapper>();
@@ -321,69 +348,63 @@ namespace FileManager.ToolForms.WallBin
 				#region Search tags
 
 				#region Categories
-				if (navBarGroup1.Visible)
+				if (buttonXSearchTagsCategoriesGroup1.Enabled)
 				{
 					checkedListBoxControlGroup1.UnCheckAll();
-					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup1.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup1.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup1.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
-				if (navBarGroup2.Visible)
+				if (buttonXSearchTagsCategoriesGroup2.Enabled)
 				{
 					checkedListBoxControlGroup2.UnCheckAll();
-					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup2.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup2.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup2.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
-				if (navBarGroup3.Visible)
+				if (buttonXSearchTagsCategoriesGroup3.Enabled)
 				{
 					checkedListBoxControlGroup3.UnCheckAll();
-					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup3.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup3.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup3.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
-				if (navBarGroup4.Visible)
+				if (buttonXSearchTagsCategoriesGroup4.Enabled)
 				{
 					checkedListBoxControlGroup4.UnCheckAll();
-					SearchGroup group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup4.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup4.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup4.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
-				if (navBarGroup5.Visible)
+				if (buttonXSearchTagsCategoriesGroup5.Enabled)
 				{
 					checkedListBoxControlGroup5.UnCheckAll();
-					SearchGroup group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(navBarGroup5.Caption));
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup5.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup5.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
-				if (navBarGroup6.Visible)
+				if (buttonXSearchTagsCategoriesGroup6.Enabled)
 				{
 					checkedListBoxControlGroup6.UnCheckAll();
-					var group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup6.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup6.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup6.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
-				if (navBarGroup7.Visible)
+				if (buttonXSearchTagsCategoriesGroup7.Enabled)
 				{
 					checkedListBoxControlGroup7.UnCheckAll();
-					var group = SearchTags.SearchGroups.Where(x => x.Name.Equals(navBarGroup7.Caption)).FirstOrDefault();
+					var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(buttonXSearchTagsCategoriesGroup7.Text));
 					if (group != null)
-						foreach (CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
-							if (group.Tags.Select(x => x.Name).Contains(item.Value.ToString()))
-								item.CheckState = CheckState.Checked;
+						foreach (var item in checkedListBoxControlGroup7.Items.Cast<CheckedListBoxItem>().Where(item => @group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
+							item.CheckState = CheckState.Checked;
 				}
+				buttonXSearchTagsCategoriesGroup1_Click(buttonXSearchTagsCategoriesGroup1, new EventArgs());
 				#endregion
 
 				#region Keywords
@@ -514,7 +535,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup1.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup1.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup1.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup1.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -523,7 +544,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup2.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup2.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup2.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup2.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -532,7 +553,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup3.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup3.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup3.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup3.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -541,7 +562,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup4.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup4.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup4.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup4.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -550,7 +571,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup5.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup5.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup5.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup5.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -559,7 +580,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup6.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup6.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup6.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup6.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -568,7 +589,7 @@ namespace FileManager.ToolForms.WallBin
 				if (checkedListBoxControlGroup7.CheckedItemsCount > 0)
 				{
 					var group = new SearchGroup();
-					group.Name = navBarGroup7.Caption;
+					group.Name = buttonXSearchTagsCategoriesGroup7.Text;
 					foreach (CheckedListBoxItem item in checkedListBoxControlGroup7.Items)
 						if (item.CheckState == CheckState.Checked)
 							group.Tags.Add(new SearchTag(group.Name) { Name = item.Value.ToString() });
@@ -830,6 +851,32 @@ namespace FileManager.ToolForms.WallBin
 			memoEditBannerText.Properties.AppearanceDisabled.Font = memoEditBannerText.Font;
 			memoEditBannerText.Properties.AppearanceFocused.Font = memoEditBannerText.Font;
 			memoEditBannerText.Properties.AppearanceReadOnly.Font = memoEditBannerText.Font;
+		}
+		#endregion
+
+		#region Categories Processing
+		private void buttonXSearchTagsCategoriesGroup1_Click(object sender, EventArgs e)
+		{
+			var button = sender as DevComponents.DotNetBar.ButtonX;
+			if (button.Checked) return;
+			buttonXSearchTagsCategoriesGroup1.Checked = false;
+			buttonXSearchTagsCategoriesGroup2.Checked = false;
+			buttonXSearchTagsCategoriesGroup3.Checked = false;
+			buttonXSearchTagsCategoriesGroup4.Checked = false;
+			buttonXSearchTagsCategoriesGroup5.Checked = false;
+			buttonXSearchTagsCategoriesGroup6.Checked = false;
+			buttonXSearchTagsCategoriesGroup7.Checked = false;
+			button.Checked = true;
+		}
+
+		private void buttonXSearchTagsCategoriesGroup1_CheckedChanged(object sender, EventArgs e)
+		{
+			var button = sender as DevComponents.DotNetBar.ButtonX;
+			if (!button.Checked) return;
+			var assignedControl = button.Tag as Control;
+			if (assignedControl == null) return;
+			assignedControl.Dock = DockStyle.Fill;
+			assignedControl.BringToFront();
 		}
 		#endregion
 

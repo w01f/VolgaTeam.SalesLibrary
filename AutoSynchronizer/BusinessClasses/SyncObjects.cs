@@ -208,6 +208,7 @@ namespace AutoSynchronizer.BusinessClasses
 												{
 													case FileTypes.Folder:
 														AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
+														(file as LibraryFolderLink).GetWholeContent().Where(x => (x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.Presentation) && x.PreviewContainer != null).ToList().ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
 														break;
 													case FileTypes.BuggyPresentation:
 													case FileTypes.FriendlyPresentation:
@@ -521,6 +522,7 @@ namespace AutoSynchronizer.BusinessClasses
 									{
 										case FileTypes.Folder:
 											AddFolderForSync(new DirectoryInfo(file.OriginalPath), filesWhiteList);
+											(file as LibraryFolderLink).GetWholeContent().Where(x => (x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.Presentation) && x.PreviewContainer != null).ToList().ForEach(x => AddFolderForSync(new DirectoryInfo(x.PreviewContainer.ContainerPath), filesWhiteList));
 											break;
 										case FileTypes.BuggyPresentation:
 										case FileTypes.FriendlyPresentation:

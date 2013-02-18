@@ -186,6 +186,55 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap FolderContentDocx {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentDocx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FolderContentFolder {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentFolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FolderContentMp4 {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentMp4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FolderContentPdf {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentPdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FolderContentPptx {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentPptx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FolderContentWmv {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentWmv", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap FolderContentXlsx {
+            get {
+                object obj = ResourceManager.GetObject("FolderContentXlsx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Format_Font_Larger {
             get {
                 object obj = ResourceManager.GetObject("Format_Font_Larger", resourceCulture);

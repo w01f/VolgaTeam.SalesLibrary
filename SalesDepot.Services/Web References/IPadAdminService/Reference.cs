@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace SalesDepot.CoreObjects.IPadAdminService {
+namespace SalesDepot.Services.IPadAdminService {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -64,7 +64,7 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
         
         /// <remarks/>
         public AdminControllerService() {
-            this.Url = global::SalesDepot.CoreObjects.Properties.Settings.Default.SalesDepot_CoreObjects_IPadAdminService_AdminControllerService;
+            this.Url = global::SalesDepot.Services.Properties.Settings.Default.SalesDepot_Services_IPadAdminService_AdminControllerService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -1219,6 +1219,8 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
         
         private string[] pdfLinksField;
         
+        private string[] wmvLinksField;
+        
         private string[] mp4LinksField;
         
         private string[] ogvLinksField;
@@ -1302,6 +1304,16 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
             }
             set {
                 this.pdfLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] wmvLinks {
+            get {
+                return this.wmvLinksField;
+            }
+            set {
+                this.wmvLinksField = value;
             }
         }
         
@@ -2119,6 +2131,8 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
         
         private string idField;
         
+        private string parentLinkIdField;
+        
         private string folderIdField;
         
         private string libraryIdField;
@@ -2173,6 +2187,10 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
         
         private Attachment[] attachmentsField;
         
+        private bool isRestrictedField;
+        
+        private string assignedUsersField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -2180,6 +2198,16 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
             }
             set {
                 this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string parentLinkId {
+            get {
+                return this.parentLinkIdField;
+            }
+            set {
+                this.parentLinkIdField = value;
             }
         }
         
@@ -2450,6 +2478,26 @@ namespace SalesDepot.CoreObjects.IPadAdminService {
             }
             set {
                 this.attachmentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string assignedUsers {
+            get {
+                return this.assignedUsersField;
+            }
+            set {
+                this.assignedUsersField = value;
             }
         }
     }

@@ -10,6 +10,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	{
 		public const string TagName = "Category";
 
+		public string AllTags
+		{
+			get
+			{
+				return string.Join(", ", Tags.Select(x => x.Name));
+			}
+		}
+
 		public SearchGroup()
 		{
 			Name = string.Empty;

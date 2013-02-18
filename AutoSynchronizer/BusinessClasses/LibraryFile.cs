@@ -725,6 +725,32 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			FolderContent = new List<ILibraryLink>();
 		}
 
+		public override ILibraryLink Clone(LibraryFolder parent)
+		{
+			var file = new LibraryFolderLink(parent);
+			file.OriginalPath = _linkLocalPath;
+			file.Name = Name;
+			file.Note = Note;
+			file.Order = Order;
+			file.IsBold = IsBold;
+			file.EnableWidget = EnableWidget;
+			file.Widget = Widget;
+			file.RootId = RootId;
+			file.RelativePath = RelativePath;
+			file.Type = Type;
+			file.AddDate = AddDate;
+			file.SearchTags = SearchTags;
+			file.CustomKeywords = CustomKeywords;
+			file.ExpirationDateOptions = ExpirationDateOptions;
+			file.PresentationProperties = PresentationProperties;
+			file.LineBreakProperties = LineBreakProperties.Clone(file);
+			file.AttachmentProperties = AttachmentProperties.Clone(file);
+			file.BannerProperties = BannerProperties.Clone(file);
+			file.FileCard = FileCard.Clone(file);
+			file.FolderContent.AddRange(FolderContent.Select(x => x.Clone(parent)));
+			return file;
+		}
+
 		public override void Deserialize(XmlNode node)
 		{
 			base.Deserialize(node);
@@ -783,10 +809,24 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					libraryFile.SetProperties();
 					libraryFile.InitBannerProperties();
 					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
 					FolderContent.Add(libraryFile);
 				}
 			}
+			var linksToRemove = FolderContent.Where(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
+			foreach (var link in linksToRemove.OfType<LibraryLink>().Where(x => x.PreviewContainer != null))
+				link.PreviewContainer.ClearContent();
 			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
+			for (int i = 0; i < FolderContent.Count; i++)
+				FolderContent[i].Order = i;
+		}
+
+		public IEnumerable<LibraryLink> GetWholeContent()
+		{
+			var wholeContent = new List<LibraryLink>();
+			wholeContent.AddRange(FolderContent.Where(x => x.Type != FileTypes.Folder).OfType<LibraryLink>());
+			wholeContent.AddRange(FolderContent.Where(x => x.Type == FileTypes.Folder).OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()));
+			return wholeContent;
 		}
 	}
 }

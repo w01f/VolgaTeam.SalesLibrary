@@ -175,7 +175,7 @@ namespace FileManager.Controllers
 						});
 
 						LibraryManager.Instance.LoadLibraries(new DirectoryInfo(SettingsManager.Instance.BackupPath));
-						foreach (Library library in LibraryManager.Instance.LibraryCollection)
+						foreach (var library in LibraryManager.Instance.LibraryCollection)
 							library.ProcessPresentationProperties();
 
 						FormMain.Instance.Invoke((MethodInvoker)delegate

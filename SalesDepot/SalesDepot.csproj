@@ -159,6 +159,12 @@
     <Compile Include="PresentationClasses\ProgramManager\ProgramSearchControl.Designer.cs">
       <DependentUpon>ProgramSearchControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Viewers\FolderViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Viewers\FolderViewer.Designer.cs">
+      <DependentUpon>FolderViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Viewers\EmptyViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,6 +215,12 @@
     </Compile>
     <Compile Include="ToolForms\Settings\FormAuthorizeWarning.Designer.cs">
       <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormFolderViewOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormFolderViewOptions.Designer.cs">
+      <DependentUpon>FormFolderViewOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\WallBin\FormLinkPreview.cs">
       <SubType>Form</SubType>
@@ -413,6 +425,9 @@
     <EmbeddedResource Include="PresentationClasses\ProgramManager\ProgramSearchControl.resx">
       <DependentUpon>ProgramSearchControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Viewers\FolderViewer.resx">
+      <DependentUpon>FolderViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Viewers\EmptyViewer.resx">
       <DependentUpon>EmptyViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -436,6 +451,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormAuthorizeWarning.resx">
       <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WallBin\FormFolderViewOptions.resx">
+      <DependentUpon>FormFolderViewOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormLinkPreview.resx">
       <DependentUpon>FormLinkPreview.cs</DependentUpon>
@@ -670,6 +689,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\FolderContentXlsx.png" />
+    <None Include="Resources\FolderContentWmv.png" />
+    <None Include="Resources\FolderContentPptx.png" />
+    <None Include="Resources\FolderContentPdf.png" />
+    <None Include="Resources\FolderContentMp4.png" />
+    <None Include="Resources\FolderContentFolder.png" />
+    <None Include="Resources\FolderContentDocx.png" />
     <None Include="Resources\AuthorizeWarning.png" />
     <None Include="Resources\AddWeek.png" />
     <None Include="Resources\ProgramShowInfo.png" />

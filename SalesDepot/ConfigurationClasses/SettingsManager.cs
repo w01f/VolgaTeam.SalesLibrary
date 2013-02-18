@@ -86,6 +86,7 @@ namespace SalesDepot.ConfigurationClasses
 		public LinkLaunchOptions WordLaunchOptions { get; set; }
 		public LinkLaunchOptions ExcelLaunchOptions { get; set; }
 		public LinkLaunchOptions VideoLaunchOptions { get; set; }
+		public LinkLaunchOptions FolderLaunchOptions { get; set; }
 		public EmailButtonsDisplayOptions EmailButtons { get; set; }
 
 		public bool MultitabView { get; set; }
@@ -348,6 +349,7 @@ namespace SalesDepot.ConfigurationClasses
 			WordLaunchOptions = LinkLaunchOptions.Menu;
 			ExcelLaunchOptions = LinkLaunchOptions.Menu;
 			VideoLaunchOptions = LinkLaunchOptions.Viewer;
+			FolderLaunchOptions = LinkLaunchOptions.Viewer;
 			EmailButtons = EmailButtonsDisplayOptions.DisplayEmailBin | EmailButtonsDisplayOptions.DisplayQuickView | EmailButtonsDisplayOptions.DisplayViewOptions;
 			MultitabView = true;
 
@@ -498,6 +500,10 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
 						VideoLaunchOptions = tempLaunchOptions;
+				node = document.SelectSingleNode(@"/LocalSettings/FolderLaunchOptions");
+				if (node != null)
+					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
+						FolderLaunchOptions = tempLaunchOptions;
 				node = document.SelectSingleNode(@"/LocalSettings/EmailButtons");
 				if (node != null)
 					if (Enum.TryParse(node.InnerText, out tempEmailButtons))
@@ -531,6 +537,7 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<WordLaunchOptions>" + WordLaunchOptions.ToString() + @"</WordLaunchOptions>");
 			xml.AppendLine(@"<ExcelLaunchOptions>" + ExcelLaunchOptions.ToString() + @"</ExcelLaunchOptions>");
 			xml.AppendLine(@"<VideoLaunchOptions>" + VideoLaunchOptions.ToString() + @"</VideoLaunchOptions>");
+			xml.AppendLine(@"<FolderLaunchOptions>" + FolderLaunchOptions.ToString() + @"</FolderLaunchOptions>");
 			xml.AppendLine(@"<EmailButtons>" + EmailButtons.ToString() + @"</EmailButtons>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
 			xml.AppendLine(@"<CalendarView>" + CalendarView.ToString() + @"</CalendarView>");

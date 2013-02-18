@@ -304,6 +304,9 @@
         y0QQBCJJIuE5ntA64TiOsCxLcrkcEfkcEbgMoc0kFospfwBV/pWhSpZkdAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="superTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="defaultLookAndFeel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>137, 17</value>
   </metadata>

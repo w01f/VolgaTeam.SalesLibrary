@@ -234,9 +234,11 @@ namespace FileManager.PresentationClasses.WallBin
 				else
 					toolTipText.Add("Expires: No Expiration Date");
 				if (!string.IsNullOrEmpty(file.SearchTags.AllTags))
-					toolTipText.Add("Search Tags: " + file.SearchTags.AllTags);
+					toolTipText.Add("Category Tags: " + file.SearchTags.AllTags);
 				else
-					toolTipText.Add("No Search Tags Assigned");
+					toolTipText.Add("No Category Tags Assigned");
+				if (!string.IsNullOrEmpty(file.CustomKeywords.AllTags))
+					toolTipText.Add("Keyword Tags: " + file.CustomKeywords.AllTags);
 			}
 			else if (file.Type == FileTypes.LineBreak)
 			{
@@ -1307,7 +1309,7 @@ namespace FileManager.PresentationClasses.WallBin
 														{
 															if (PowerPointHelper.Instance.Connect())
 															{
-																libraryFile.GetPresentationPrperties();
+																libraryFile.GetPresentationProperties();
 																PowerPointHelper.Instance.Disconnect();
 															}
 														});

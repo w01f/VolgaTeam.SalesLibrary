@@ -59,7 +59,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -110,21 +109,15 @@
     <Compile Include="ToolClasses\PDFParser.cs" />
     <Compile Include="ToolClasses\SyncManager.cs" />
     <Compile Include="ToolClasses\Utils.cs" />
-    <Compile Include="Web References\ContentManagmentService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\IPadAdminService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OldFormatLoader\OldFormatLoader.csproj">
       <Project>{07E5E9EC-8E52-4E68-9507-8B4E70EABA0A}</Project>
       <Name>OldFormatLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.Services\SalesDepot.Services.csproj">
+      <Project>{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}</Project>
+      <Name>SalesDepot.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -215,60 +208,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/admin/quote">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\IPadAdminService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/admin/quote</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>SalesDepot_CoreObjects_IPadAdminService_AdminControllerService</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost/SalesLibraries/content/quote">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ContentManagmentService\</RelPath>
-      <UpdateFromURL>http://localhost/SalesLibraries/content/quote</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>SalesDepot_CoreObjects_ContentManagmentService_ContentControllerService</CachedSettingsPropName>
-    </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\ContentManagmentService\ContentController.wsdl" />
-    <None Include="Web References\ContentManagmentService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\IPadAdminService\AdminController.wsdl" />
-    <None Include="Web References\IPadAdminService\GroupRecord.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\IPadAdminService\Library.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\IPadAdminService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\IPadAdminService\UserRecord.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -90,10 +90,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				var allTags = new List<string>();
-				foreach (var group in SearchGroups)
-					allTags.AddRange(group.Tags.Select(x => x.Name));
-				return string.Join(", ", allTags.ToArray());
+				return string.Join(", ", SearchGroups.Select(x => x.AllTags));
 			}
 		}
 

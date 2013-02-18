@@ -671,7 +671,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public void GetPresentationPrperties()
+		public void GetPresentationProperties()
 		{
 			PowerPointHelper.Instance.GetPresentationProperties(this);
 		}
@@ -809,12 +809,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					libraryFile.SetProperties();
 					libraryFile.InitBannerProperties();
 					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					libraryFile.GetPresentationProperties();
+					libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
 					FolderContent.Add(libraryFile);
 				}
 			}
+			var linksToRemove = FolderContent.Where(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
+			foreach (var link in linksToRemove.OfType<LibraryLink>().Where(x => x.PreviewContainer != null))
+				link.PreviewContainer.ClearContent();
 			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
 			for (int i = 0; i < FolderContent.Count; i++)
 				FolderContent[i].Order = i;
+		}
+
+		public IEnumerable<LibraryLink> GetWholeContent()
+		{
+			var wholeContent = new List<LibraryLink>();
+			wholeContent.AddRange(FolderContent.Where(x => x.Type != FileTypes.Folder).OfType<LibraryLink>());
+			wholeContent.AddRange(FolderContent.Where(x => x.Type == FileTypes.Folder).OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()));
+			return wholeContent;
 		}
 	}
 }

@@ -646,19 +646,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
 		}
 
-		public void ProcessPresentationProperties()
-		{
-			if (PowerPointHelper.Instance.Connect())
-			{
-				foreach (LibraryPage page in Pages)
-					foreach (LibraryFolder folder in page.Folders)
-						foreach (LibraryLink file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
-							file.GetPresentationPrperties();
-				PowerPointHelper.Instance.Disconnect();
-				Save();
-			}
-		}
-
 		public void ProcessAttachments()
 		{
 			var actualAttachmentIds = new List<Guid>();
@@ -720,26 +707,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		private void GeneratePresentationPreviewFiles()
 		{
-			foreach (LibraryPage page in Pages)
+			var links = new List<LibraryLink>();
+			links.AddRange(Pages.SelectMany(page => page.Folders.SelectMany(folder => folder.Files)).OfType<LibraryLink>());
+			links.AddRange(links.OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()).ToList());
+			foreach (var file in links.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
 			{
-				foreach (LibraryFolder folder in page.Folders)
-				{
-					foreach (LibraryLink file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
-					{
-						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-						{
-							if (file.PreviewContainer == null)
-								file.PreviewContainer = new PresentationPreviewContainer(file);
-							file.PreviewContainer.UpdateContent();
-						}
-						else
-							break;
-					}
-					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-						break;
-				}
-				if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-					break;
+				if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+				if (file.PreviewContainer == null)
+					file.PreviewContainer = new PresentationPreviewContainer(file);
+				file.PreviewContainer.UpdateContent();
 			}
 			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				Save();

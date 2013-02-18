@@ -55,28 +55,21 @@
 			this.xtraTabPageSearchTags = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabControlSearchTags = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageSearchTagsCategories = new DevExpress.XtraTab.XtraTabPage();
-			this.navBarControlSearchTags = new DevExpress.XtraNavBar.NavBarControl();
-			this.navBarGroup5 = new DevExpress.XtraNavBar.NavBarGroup();
-			this.navBarGroupControlContainer5 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
-			this.checkedListBoxControlGroup5 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroupControlContainer1 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
-			this.checkedListBoxControlGroup1 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroupControlContainer3 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
-			this.checkedListBoxControlGroup3 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroupControlContainer4 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
-			this.checkedListBoxControlGroup4 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroupControlContainer6 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
-			this.checkedListBoxControlGroup6 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroupControlContainer2 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
-			this.checkedListBoxControlGroup2 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroupControlContainer7 = new DevExpress.XtraNavBar.NavBarGroupControlContainer();
+			this.splitContainerSearchTagsCategories = new DevExpress.XtraEditors.SplitContainerControl();
+			this.buttonXSearchTagsCategoriesGroup7 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSearchTagsCategoriesGroup6 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSearchTagsCategoriesGroup5 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSearchTagsCategoriesGroup4 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSearchTagsCategoriesGroup3 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSearchTagsCategoriesGroup2 = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXSearchTagsCategoriesGroup1 = new DevComponents.DotNetBar.ButtonX();
 			this.checkedListBoxControlGroup7 = new DevExpress.XtraEditors.CheckedListBoxControl();
-			this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
-			this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
-			this.navBarGroup3 = new DevExpress.XtraNavBar.NavBarGroup();
-			this.navBarGroup4 = new DevExpress.XtraNavBar.NavBarGroup();
-			this.navBarGroup6 = new DevExpress.XtraNavBar.NavBarGroup();
-			this.navBarGroup7 = new DevExpress.XtraNavBar.NavBarGroup();
+			this.checkedListBoxControlGroup6 = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.checkedListBoxControlGroup5 = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.checkedListBoxControlGroup4 = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.checkedListBoxControlGroup3 = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.checkedListBoxControlGroup2 = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.checkedListBoxControlGroup1 = new DevExpress.XtraEditors.CheckedListBoxControl();
 			this.xtraTabPageSearchTagsKeywords = new DevExpress.XtraTab.XtraTabPage();
 			this.buttonXAddKeyWord = new DevComponents.DotNetBar.ButtonX();
 			this.gridControlSearchTagsKeywords = new DevExpress.XtraGrid.GridControl();
@@ -162,6 +155,7 @@
 			this.layoutViewFieldWidgetsGalleryImage = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
 			this.layoutViewCardWidgetsGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
 			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.laWidgetHint = new System.Windows.Forms.Label();
 			this.xtraTabPageWidgetsFavs = new DevExpress.XtraTab.XtraTabPage();
 			this.gridControlWidgetsFavs = new DevExpress.XtraGrid.GridControl();
 			this.layoutViewWidgetsFavs = new DevExpress.XtraGrid.Views.Layout.LayoutView();
@@ -182,6 +176,7 @@
 			this.gridColumnBannersGallery = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
 			this.layoutViewFieldBannerGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
 			this.layoutViewCardBannersGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
+			this.laBannerHint = new System.Windows.Forms.Label();
 			this.xtraTabPageBannersFavs = new DevExpress.XtraTab.XtraTabPage();
 			this.gridControlBannersFavs = new DevExpress.XtraGrid.GridControl();
 			this.layoutViewBannersFavs = new DevExpress.XtraGrid.Views.Layout.LayoutView();
@@ -204,8 +199,6 @@
 			this.dlgFont = new System.Windows.Forms.FontDialog();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.laWidgetHint = new System.Windows.Forms.Label();
-			this.laBannerHint = new System.Windows.Forms.Label();
 			this.gbNotes.SuspendLayout();
 			this.groupBoxNotes.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
@@ -215,22 +208,15 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).BeginInit();
 			this.xtraTabControlSearchTags.SuspendLayout();
 			this.xtraTabPageSearchTagsCategories.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.navBarControlSearchTags)).BeginInit();
-			this.navBarControlSearchTags.SuspendLayout();
-			this.navBarGroupControlContainer5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup5)).BeginInit();
-			this.navBarGroupControlContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup1)).BeginInit();
-			this.navBarGroupControlContainer3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup3)).BeginInit();
-			this.navBarGroupControlContainer4.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup4)).BeginInit();
-			this.navBarGroupControlContainer6.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup6)).BeginInit();
-			this.navBarGroupControlContainer2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup2)).BeginInit();
-			this.navBarGroupControlContainer7.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchTagsCategories)).BeginInit();
+			this.splitContainerSearchTagsCategories.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup7)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup6)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup3)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup2)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup1)).BeginInit();
 			this.xtraTabPageSearchTagsKeywords.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSearchTagsKeywords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSearchTagsKeywords)).BeginInit();
@@ -533,243 +519,226 @@
 			// 
 			// xtraTabPageSearchTagsCategories
 			// 
-			this.xtraTabPageSearchTagsCategories.Controls.Add(this.navBarControlSearchTags);
+			this.xtraTabPageSearchTagsCategories.Controls.Add(this.splitContainerSearchTagsCategories);
 			this.xtraTabPageSearchTagsCategories.Name = "xtraTabPageSearchTagsCategories";
 			this.xtraTabPageSearchTagsCategories.Size = new System.Drawing.Size(635, 484);
 			this.xtraTabPageSearchTagsCategories.Text = "Assign Categories";
 			// 
-			// navBarControlSearchTags
+			// splitContainerSearchTagsCategories
 			// 
-			this.navBarControlSearchTags.ActiveGroup = this.navBarGroup5;
-			this.navBarControlSearchTags.Appearance.GroupBackground.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.navBarControlSearchTags.Appearance.GroupBackground.Options.UseFont = true;
-			this.navBarControlSearchTags.Appearance.GroupHeader.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.navBarControlSearchTags.Appearance.GroupHeader.Options.UseFont = true;
-			this.navBarControlSearchTags.Appearance.GroupHeaderActive.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.navBarControlSearchTags.Appearance.GroupHeaderActive.Options.UseFont = true;
-			this.navBarControlSearchTags.Appearance.GroupHeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.navBarControlSearchTags.Appearance.GroupHeaderHotTracked.Options.UseFont = true;
-			this.navBarControlSearchTags.Appearance.GroupHeaderPressed.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.navBarControlSearchTags.Appearance.GroupHeaderPressed.Options.UseFont = true;
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer1);
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer3);
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer4);
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer5);
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer6);
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer2);
-			this.navBarControlSearchTags.Controls.Add(this.navBarGroupControlContainer7);
-			this.navBarControlSearchTags.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.navBarControlSearchTags.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
-            this.navBarGroup1,
-            this.navBarGroup2,
-            this.navBarGroup3,
-            this.navBarGroup4,
-            this.navBarGroup5,
-            this.navBarGroup6,
-            this.navBarGroup7});
-			this.navBarControlSearchTags.Location = new System.Drawing.Point(0, 0);
-			this.navBarControlSearchTags.Name = "navBarControlSearchTags";
-			this.navBarControlSearchTags.OptionsNavPane.ExpandedWidth = 200;
-			this.navBarControlSearchTags.Size = new System.Drawing.Size(635, 484);
-			this.navBarControlSearchTags.TabIndex = 0;
-			this.navBarControlSearchTags.Text = "navBarControl1";
+			this.splitContainerSearchTagsCategories.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainerSearchTagsCategories.Location = new System.Drawing.Point(0, 0);
+			this.splitContainerSearchTagsCategories.Name = "splitContainerSearchTagsCategories";
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup7);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup6);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup5);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup4);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup3);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup2);
+			this.splitContainerSearchTagsCategories.Panel1.Controls.Add(this.buttonXSearchTagsCategoriesGroup1);
+			this.splitContainerSearchTagsCategories.Panel1.MinSize = 250;
+			this.splitContainerSearchTagsCategories.Panel1.Text = "Panel1";
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup7);
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup6);
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup5);
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup4);
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup3);
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup2);
+			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup1);
+			this.splitContainerSearchTagsCategories.Panel2.Text = "Panel2";
+			this.splitContainerSearchTagsCategories.Size = new System.Drawing.Size(635, 484);
+			this.splitContainerSearchTagsCategories.SplitterPosition = 250;
+			this.splitContainerSearchTagsCategories.TabIndex = 1;
+			this.splitContainerSearchTagsCategories.Text = "splitContainerControl1";
 			// 
-			// navBarGroup5
+			// buttonXSearchTagsCategoriesGroup7
 			// 
-			this.navBarGroup5.Caption = "Group 5";
-			this.navBarGroup5.ControlContainer = this.navBarGroupControlContainer5;
-			this.navBarGroup5.GroupClientHeight = 80;
-			this.navBarGroup5.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup5.Name = "navBarGroup5";
+			this.buttonXSearchTagsCategoriesGroup7.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup7.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup7.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup7.Location = new System.Drawing.Point(0, 342);
+			this.buttonXSearchTagsCategoriesGroup7.Name = "buttonXSearchTagsCategoriesGroup7";
+			this.buttonXSearchTagsCategoriesGroup7.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup7.TabIndex = 12;
+			this.buttonXSearchTagsCategoriesGroup7.Text = "Group 7";
+			this.buttonXSearchTagsCategoriesGroup7.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup7.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup7.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
-			// navBarGroupControlContainer5
+			// buttonXSearchTagsCategoriesGroup6
 			// 
-			this.navBarGroupControlContainer5.Controls.Add(this.checkedListBoxControlGroup5);
-			this.navBarGroupControlContainer5.Name = "navBarGroupControlContainer5";
-			this.navBarGroupControlContainer5.Size = new System.Drawing.Size(350, 78);
-			this.navBarGroupControlContainer5.TabIndex = 3;
+			this.buttonXSearchTagsCategoriesGroup6.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup6.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup6.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup6.Location = new System.Drawing.Point(0, 285);
+			this.buttonXSearchTagsCategoriesGroup6.Name = "buttonXSearchTagsCategoriesGroup6";
+			this.buttonXSearchTagsCategoriesGroup6.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup6.TabIndex = 11;
+			this.buttonXSearchTagsCategoriesGroup6.Text = "Group 6";
+			this.buttonXSearchTagsCategoriesGroup6.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup6.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup6.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
-			// checkedListBoxControlGroup5
+			// buttonXSearchTagsCategoriesGroup5
 			// 
-			this.checkedListBoxControlGroup5.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxControlGroup5.Appearance.Options.UseFont = true;
-			this.checkedListBoxControlGroup5.CheckOnClick = true;
-			this.checkedListBoxControlGroup5.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup5.ItemHeight = 20;
-			this.checkedListBoxControlGroup5.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxControlGroup5.Name = "checkedListBoxControlGroup5";
-			this.checkedListBoxControlGroup5.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup5.Size = new System.Drawing.Size(350, 78);
-			this.checkedListBoxControlGroup5.TabIndex = 3;
+			this.buttonXSearchTagsCategoriesGroup5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup5.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup5.Location = new System.Drawing.Point(0, 228);
+			this.buttonXSearchTagsCategoriesGroup5.Name = "buttonXSearchTagsCategoriesGroup5";
+			this.buttonXSearchTagsCategoriesGroup5.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup5.TabIndex = 10;
+			this.buttonXSearchTagsCategoriesGroup5.Text = "Group 5";
+			this.buttonXSearchTagsCategoriesGroup5.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup5.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup5.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
-			// navBarGroupControlContainer1
+			// buttonXSearchTagsCategoriesGroup4
 			// 
-			this.navBarGroupControlContainer1.Controls.Add(this.checkedListBoxControlGroup1);
-			this.navBarGroupControlContainer1.Name = "navBarGroupControlContainer1";
-			this.navBarGroupControlContainer1.Size = new System.Drawing.Size(631, 78);
-			this.navBarGroupControlContainer1.TabIndex = 0;
+			this.buttonXSearchTagsCategoriesGroup4.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup4.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup4.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup4.Location = new System.Drawing.Point(0, 171);
+			this.buttonXSearchTagsCategoriesGroup4.Name = "buttonXSearchTagsCategoriesGroup4";
+			this.buttonXSearchTagsCategoriesGroup4.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup4.TabIndex = 9;
+			this.buttonXSearchTagsCategoriesGroup4.Text = "Group 4";
+			this.buttonXSearchTagsCategoriesGroup4.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup4.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup4.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
-			// checkedListBoxControlGroup1
+			// buttonXSearchTagsCategoriesGroup3
 			// 
-			this.checkedListBoxControlGroup1.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxControlGroup1.Appearance.Options.UseFont = true;
-			this.checkedListBoxControlGroup1.CheckOnClick = true;
-			this.checkedListBoxControlGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup1.ItemHeight = 20;
-			this.checkedListBoxControlGroup1.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxControlGroup1.Name = "checkedListBoxControlGroup1";
-			this.checkedListBoxControlGroup1.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup1.Size = new System.Drawing.Size(631, 78);
-			this.checkedListBoxControlGroup1.TabIndex = 0;
+			this.buttonXSearchTagsCategoriesGroup3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup3.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup3.Location = new System.Drawing.Point(0, 114);
+			this.buttonXSearchTagsCategoriesGroup3.Name = "buttonXSearchTagsCategoriesGroup3";
+			this.buttonXSearchTagsCategoriesGroup3.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup3.TabIndex = 8;
+			this.buttonXSearchTagsCategoriesGroup3.Text = "Group 3";
+			this.buttonXSearchTagsCategoriesGroup3.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup3.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup3.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
-			// navBarGroupControlContainer3
+			// buttonXSearchTagsCategoriesGroup2
 			// 
-			this.navBarGroupControlContainer3.Controls.Add(this.checkedListBoxControlGroup3);
-			this.navBarGroupControlContainer3.Name = "navBarGroupControlContainer3";
-			this.navBarGroupControlContainer3.Size = new System.Drawing.Size(350, 78);
-			this.navBarGroupControlContainer3.TabIndex = 1;
+			this.buttonXSearchTagsCategoriesGroup2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup2.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup2.Location = new System.Drawing.Point(0, 57);
+			this.buttonXSearchTagsCategoriesGroup2.Name = "buttonXSearchTagsCategoriesGroup2";
+			this.buttonXSearchTagsCategoriesGroup2.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup2.TabIndex = 7;
+			this.buttonXSearchTagsCategoriesGroup2.Text = "Group 2";
+			this.buttonXSearchTagsCategoriesGroup2.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup2.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup2.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
-			// checkedListBoxControlGroup3
+			// buttonXSearchTagsCategoriesGroup1
 			// 
-			this.checkedListBoxControlGroup3.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxControlGroup3.Appearance.Options.UseFont = true;
-			this.checkedListBoxControlGroup3.CheckOnClick = true;
-			this.checkedListBoxControlGroup3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup3.ItemHeight = 20;
-			this.checkedListBoxControlGroup3.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxControlGroup3.Name = "checkedListBoxControlGroup3";
-			this.checkedListBoxControlGroup3.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup3.Size = new System.Drawing.Size(350, 78);
-			this.checkedListBoxControlGroup3.TabIndex = 1;
-			// 
-			// navBarGroupControlContainer4
-			// 
-			this.navBarGroupControlContainer4.Controls.Add(this.checkedListBoxControlGroup4);
-			this.navBarGroupControlContainer4.Name = "navBarGroupControlContainer4";
-			this.navBarGroupControlContainer4.Size = new System.Drawing.Size(350, 78);
-			this.navBarGroupControlContainer4.TabIndex = 2;
-			// 
-			// checkedListBoxControlGroup4
-			// 
-			this.checkedListBoxControlGroup4.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxControlGroup4.Appearance.Options.UseFont = true;
-			this.checkedListBoxControlGroup4.CheckOnClick = true;
-			this.checkedListBoxControlGroup4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup4.ItemHeight = 20;
-			this.checkedListBoxControlGroup4.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxControlGroup4.Name = "checkedListBoxControlGroup4";
-			this.checkedListBoxControlGroup4.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup4.Size = new System.Drawing.Size(350, 78);
-			this.checkedListBoxControlGroup4.TabIndex = 2;
-			// 
-			// navBarGroupControlContainer6
-			// 
-			this.navBarGroupControlContainer6.Controls.Add(this.checkedListBoxControlGroup6);
-			this.navBarGroupControlContainer6.Name = "navBarGroupControlContainer6";
-			this.navBarGroupControlContainer6.Size = new System.Drawing.Size(350, 78);
-			this.navBarGroupControlContainer6.TabIndex = 4;
-			// 
-			// checkedListBoxControlGroup6
-			// 
-			this.checkedListBoxControlGroup6.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxControlGroup6.Appearance.Options.UseFont = true;
-			this.checkedListBoxControlGroup6.CheckOnClick = true;
-			this.checkedListBoxControlGroup6.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup6.ItemHeight = 20;
-			this.checkedListBoxControlGroup6.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxControlGroup6.Name = "checkedListBoxControlGroup6";
-			this.checkedListBoxControlGroup6.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup6.Size = new System.Drawing.Size(350, 78);
-			this.checkedListBoxControlGroup6.TabIndex = 3;
-			// 
-			// navBarGroupControlContainer2
-			// 
-			this.navBarGroupControlContainer2.Controls.Add(this.checkedListBoxControlGroup2);
-			this.navBarGroupControlContainer2.Name = "navBarGroupControlContainer2";
-			this.navBarGroupControlContainer2.Size = new System.Drawing.Size(350, 78);
-			this.navBarGroupControlContainer2.TabIndex = 5;
-			// 
-			// checkedListBoxControlGroup2
-			// 
-			this.checkedListBoxControlGroup2.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkedListBoxControlGroup2.Appearance.Options.UseFont = true;
-			this.checkedListBoxControlGroup2.CheckOnClick = true;
-			this.checkedListBoxControlGroup2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup2.ItemHeight = 20;
-			this.checkedListBoxControlGroup2.Location = new System.Drawing.Point(0, 0);
-			this.checkedListBoxControlGroup2.Name = "checkedListBoxControlGroup2";
-			this.checkedListBoxControlGroup2.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup2.Size = new System.Drawing.Size(350, 78);
-			this.checkedListBoxControlGroup2.TabIndex = 1;
-			// 
-			// navBarGroupControlContainer7
-			// 
-			this.navBarGroupControlContainer7.Controls.Add(this.checkedListBoxControlGroup7);
-			this.navBarGroupControlContainer7.Name = "navBarGroupControlContainer7";
-			this.navBarGroupControlContainer7.Size = new System.Drawing.Size(350, 78);
-			this.navBarGroupControlContainer7.TabIndex = 6;
+			this.buttonXSearchTagsCategoriesGroup1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXSearchTagsCategoriesGroup1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXSearchTagsCategoriesGroup1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.buttonXSearchTagsCategoriesGroup1.Location = new System.Drawing.Point(0, 0);
+			this.buttonXSearchTagsCategoriesGroup1.Name = "buttonXSearchTagsCategoriesGroup1";
+			this.buttonXSearchTagsCategoriesGroup1.Size = new System.Drawing.Size(250, 57);
+			this.buttonXSearchTagsCategoriesGroup1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXSearchTagsCategoriesGroup1.TabIndex = 6;
+			this.buttonXSearchTagsCategoriesGroup1.Text = "Group 1";
+			this.buttonXSearchTagsCategoriesGroup1.TextColor = System.Drawing.Color.Black;
+			this.buttonXSearchTagsCategoriesGroup1.CheckedChanged += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_CheckedChanged);
+			this.buttonXSearchTagsCategoriesGroup1.Click += new System.EventHandler(this.buttonXSearchTagsCategoriesGroup1_Click);
 			// 
 			// checkedListBoxControlGroup7
 			// 
 			this.checkedListBoxControlGroup7.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkedListBoxControlGroup7.Appearance.Options.UseFont = true;
 			this.checkedListBoxControlGroup7.CheckOnClick = true;
-			this.checkedListBoxControlGroup7.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControlGroup7.ItemHeight = 20;
-			this.checkedListBoxControlGroup7.Location = new System.Drawing.Point(0, 0);
+			this.checkedListBoxControlGroup7.ItemHeight = 40;
+			this.checkedListBoxControlGroup7.Location = new System.Drawing.Point(13, 113);
 			this.checkedListBoxControlGroup7.Name = "checkedListBoxControlGroup7";
 			this.checkedListBoxControlGroup7.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroup7.Size = new System.Drawing.Size(350, 78);
+			this.checkedListBoxControlGroup7.Size = new System.Drawing.Size(48, 36);
 			this.checkedListBoxControlGroup7.TabIndex = 4;
 			// 
-			// navBarGroup1
+			// checkedListBoxControlGroup6
 			// 
-			this.navBarGroup1.Caption = "Group 1";
-			this.navBarGroup1.ControlContainer = this.navBarGroupControlContainer1;
-			this.navBarGroup1.Expanded = true;
-			this.navBarGroup1.GroupClientHeight = 80;
-			this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup1.Name = "navBarGroup1";
+			this.checkedListBoxControlGroup6.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkedListBoxControlGroup6.Appearance.Options.UseFont = true;
+			this.checkedListBoxControlGroup6.CheckOnClick = true;
+			this.checkedListBoxControlGroup6.ItemHeight = 40;
+			this.checkedListBoxControlGroup6.Location = new System.Drawing.Point(119, 66);
+			this.checkedListBoxControlGroup6.Name = "checkedListBoxControlGroup6";
+			this.checkedListBoxControlGroup6.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlGroup6.Size = new System.Drawing.Size(46, 41);
+			this.checkedListBoxControlGroup6.TabIndex = 3;
 			// 
-			// navBarGroup2
+			// checkedListBoxControlGroup5
 			// 
-			this.navBarGroup2.Caption = "Group 2";
-			this.navBarGroup2.ControlContainer = this.navBarGroupControlContainer2;
-			this.navBarGroup2.GroupClientHeight = 80;
-			this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup2.Name = "navBarGroup2";
+			this.checkedListBoxControlGroup5.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkedListBoxControlGroup5.Appearance.Options.UseFont = true;
+			this.checkedListBoxControlGroup5.CheckOnClick = true;
+			this.checkedListBoxControlGroup5.ItemHeight = 40;
+			this.checkedListBoxControlGroup5.Location = new System.Drawing.Point(67, 66);
+			this.checkedListBoxControlGroup5.Name = "checkedListBoxControlGroup5";
+			this.checkedListBoxControlGroup5.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlGroup5.Size = new System.Drawing.Size(46, 41);
+			this.checkedListBoxControlGroup5.TabIndex = 3;
 			// 
-			// navBarGroup3
+			// checkedListBoxControlGroup4
 			// 
-			this.navBarGroup3.Caption = "Group 3";
-			this.navBarGroup3.ControlContainer = this.navBarGroupControlContainer3;
-			this.navBarGroup3.GroupClientHeight = 80;
-			this.navBarGroup3.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup3.Name = "navBarGroup3";
+			this.checkedListBoxControlGroup4.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkedListBoxControlGroup4.Appearance.Options.UseFont = true;
+			this.checkedListBoxControlGroup4.CheckOnClick = true;
+			this.checkedListBoxControlGroup4.ItemHeight = 40;
+			this.checkedListBoxControlGroup4.Location = new System.Drawing.Point(13, 66);
+			this.checkedListBoxControlGroup4.Name = "checkedListBoxControlGroup4";
+			this.checkedListBoxControlGroup4.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlGroup4.Size = new System.Drawing.Size(48, 41);
+			this.checkedListBoxControlGroup4.TabIndex = 2;
 			// 
-			// navBarGroup4
+			// checkedListBoxControlGroup3
 			// 
-			this.navBarGroup4.Caption = "Group 4";
-			this.navBarGroup4.ControlContainer = this.navBarGroupControlContainer4;
-			this.navBarGroup4.GroupClientHeight = 80;
-			this.navBarGroup4.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup4.Name = "navBarGroup4";
+			this.checkedListBoxControlGroup3.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkedListBoxControlGroup3.Appearance.Options.UseFont = true;
+			this.checkedListBoxControlGroup3.CheckOnClick = true;
+			this.checkedListBoxControlGroup3.ItemHeight = 40;
+			this.checkedListBoxControlGroup3.Location = new System.Drawing.Point(119, 12);
+			this.checkedListBoxControlGroup3.Name = "checkedListBoxControlGroup3";
+			this.checkedListBoxControlGroup3.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlGroup3.Size = new System.Drawing.Size(46, 47);
+			this.checkedListBoxControlGroup3.TabIndex = 1;
 			// 
-			// navBarGroup6
+			// checkedListBoxControlGroup2
 			// 
-			this.navBarGroup6.Caption = "Group 6";
-			this.navBarGroup6.ControlContainer = this.navBarGroupControlContainer6;
-			this.navBarGroup6.GroupClientHeight = 80;
-			this.navBarGroup6.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup6.Name = "navBarGroup6";
+			this.checkedListBoxControlGroup2.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkedListBoxControlGroup2.Appearance.Options.UseFont = true;
+			this.checkedListBoxControlGroup2.CheckOnClick = true;
+			this.checkedListBoxControlGroup2.ItemHeight = 40;
+			this.checkedListBoxControlGroup2.Location = new System.Drawing.Point(67, 12);
+			this.checkedListBoxControlGroup2.Name = "checkedListBoxControlGroup2";
+			this.checkedListBoxControlGroup2.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlGroup2.Size = new System.Drawing.Size(46, 48);
+			this.checkedListBoxControlGroup2.TabIndex = 1;
 			// 
-			// navBarGroup7
+			// checkedListBoxControlGroup1
 			// 
-			this.navBarGroup7.Caption = "Group 7";
-			this.navBarGroup7.ControlContainer = this.navBarGroupControlContainer7;
-			this.navBarGroup7.GroupClientHeight = 80;
-			this.navBarGroup7.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.ControlContainer;
-			this.navBarGroup7.Name = "navBarGroup7";
+			this.checkedListBoxControlGroup1.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkedListBoxControlGroup1.Appearance.Options.UseFont = true;
+			this.checkedListBoxControlGroup1.CheckOnClick = true;
+			this.checkedListBoxControlGroup1.ItemHeight = 40;
+			this.checkedListBoxControlGroup1.Location = new System.Drawing.Point(13, 12);
+			this.checkedListBoxControlGroup1.Name = "checkedListBoxControlGroup1";
+			this.checkedListBoxControlGroup1.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControlGroup1.Size = new System.Drawing.Size(48, 48);
+			this.checkedListBoxControlGroup1.TabIndex = 0;
 			// 
 			// xtraTabPageSearchTagsKeywords
 			// 
@@ -2019,6 +1988,18 @@
 			this.toolTipController.ShowShadow = false;
 			this.toolTipController.GetActiveObjectInfo += new DevExpress.Utils.ToolTipControllerGetActiveObjectInfoEventHandler(this.toolTipController_GetActiveObjectInfo);
 			// 
+			// laWidgetHint
+			// 
+			this.laWidgetHint.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.laWidgetHint.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laWidgetHint.ForeColor = System.Drawing.Color.Red;
+			this.laWidgetHint.Location = new System.Drawing.Point(0, 318);
+			this.laWidgetHint.Name = "laWidgetHint";
+			this.laWidgetHint.Size = new System.Drawing.Size(601, 38);
+			this.laWidgetHint.TabIndex = 5;
+			this.laWidgetHint.Text = "RIGHT-CLICK on the Image to Save it in MY FAVORITES";
+			this.laWidgetHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// xtraTabPageWidgetsFavs
 			// 
 			this.xtraTabPageWidgetsFavs.Controls.Add(this.gridControlWidgetsFavs);
@@ -2349,6 +2330,18 @@
 			this.layoutViewCardBannersGallery.OptionsItemText.TextToControlDistance = 2;
 			this.layoutViewCardBannersGallery.Text = "TemplateCard";
 			// 
+			// laBannerHint
+			// 
+			this.laBannerHint.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.laBannerHint.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laBannerHint.ForeColor = System.Drawing.Color.Red;
+			this.laBannerHint.Location = new System.Drawing.Point(0, 140);
+			this.laBannerHint.Name = "laBannerHint";
+			this.laBannerHint.Size = new System.Drawing.Size(598, 38);
+			this.laBannerHint.TabIndex = 35;
+			this.laBannerHint.Text = "RIGHT-CLICK on the Image to Save it in MY FAVORITES";
+			this.laBannerHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// xtraTabPageBannersFavs
 			// 
 			this.xtraTabPageBannersFavs.Controls.Add(this.gridControlBannersFavs);
@@ -2642,30 +2635,6 @@
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
 			// 
-			// laWidgetHint
-			// 
-			this.laWidgetHint.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.laWidgetHint.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laWidgetHint.ForeColor = System.Drawing.Color.Red;
-			this.laWidgetHint.Location = new System.Drawing.Point(0, 318);
-			this.laWidgetHint.Name = "laWidgetHint";
-			this.laWidgetHint.Size = new System.Drawing.Size(601, 38);
-			this.laWidgetHint.TabIndex = 5;
-			this.laWidgetHint.Text = "RIGHT-CLICK on the Image to Save it in MY FAVORITES";
-			this.laWidgetHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// laBannerHint
-			// 
-			this.laBannerHint.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.laBannerHint.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laBannerHint.ForeColor = System.Drawing.Color.Red;
-			this.laBannerHint.Location = new System.Drawing.Point(0, 140);
-			this.laBannerHint.Name = "laBannerHint";
-			this.laBannerHint.Size = new System.Drawing.Size(598, 38);
-			this.laBannerHint.TabIndex = 35;
-			this.laBannerHint.Text = "RIGHT-CLICK on the Image to Save it in MY FAVORITES";
-			this.laBannerHint.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
 			// FormLinkProperties
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2693,22 +2662,15 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).EndInit();
 			this.xtraTabControlSearchTags.ResumeLayout(false);
 			this.xtraTabPageSearchTagsCategories.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.navBarControlSearchTags)).EndInit();
-			this.navBarControlSearchTags.ResumeLayout(false);
-			this.navBarGroupControlContainer5.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup5)).EndInit();
-			this.navBarGroupControlContainer1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup1)).EndInit();
-			this.navBarGroupControlContainer3.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup3)).EndInit();
-			this.navBarGroupControlContainer4.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup4)).EndInit();
-			this.navBarGroupControlContainer6.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup6)).EndInit();
-			this.navBarGroupControlContainer2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup2)).EndInit();
-			this.navBarGroupControlContainer7.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainerSearchTagsCategories)).EndInit();
+			this.splitContainerSearchTagsCategories.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup7)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup6)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup3)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup2)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroup1)).EndInit();
 			this.xtraTabPageSearchTagsKeywords.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlSearchTagsKeywords)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewSearchTagsKeywords)).EndInit();
@@ -2814,18 +2776,7 @@
         private System.Windows.Forms.RadioButton rbBold;
         private System.Windows.Forms.RadioButton rbRegular;
         private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl;
-        private DevExpress.XtraNavBar.NavBarControl navBarControlSearchTags;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer1;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer3;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer4;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer5;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer6;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup3;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup4;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup5;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup6;
+		private DevExpress.XtraTab.XtraTabControl xtraTabControl;
         private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup1;
         private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup3;
         private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup4;
@@ -2843,10 +2794,8 @@
         private DevExpress.XtraEditors.TimeEdit timeEditExpirationTime;
         private System.Windows.Forms.CheckBox checkBoxLabelLink;
         public DevExpress.XtraTab.XtraTabPage xtraTabPageNotes;
-        public DevExpress.XtraTab.XtraTabPage xtraTabPageSearchTags;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer2;
-        private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup2;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
+		public DevExpress.XtraTab.XtraTabPage xtraTabPageSearchTags;
+		private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup2;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageWidgets;
         private System.Windows.Forms.GroupBox groupBoxWidgets;
         private System.Windows.Forms.Label laAvailableWidgets;
@@ -2856,9 +2805,7 @@
 		private DevExpress.XtraGrid.GridControl gridControlWidgetsGallery;
         private DevExpress.XtraGrid.Views.Layout.LayoutView layoutViewWidgetsGallery;
         private DevExpress.XtraGrid.Columns.LayoutViewColumn gridColumnWidgetsGalleryImage;
-        private DevExpress.Utils.ToolTipController toolTipController;
-        private DevExpress.XtraNavBar.NavBarGroupControlContainer navBarGroupControlContainer7;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup7;
+		private DevExpress.Utils.ToolTipController toolTipController;
         private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroup7;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageLineBrealProperties;
         private DevExpress.XtraEditors.ColorEdit colorEditLineBreakFontColor;
@@ -2970,5 +2917,13 @@
 		private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCardWidgetsFavs;
 		private System.Windows.Forms.Label laWidgetHint;
 		private System.Windows.Forms.Label laBannerHint;
+		private DevExpress.XtraEditors.SplitContainerControl splitContainerSearchTagsCategories;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup7;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup6;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup5;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup4;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup3;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup2;
+		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup1;
     }
 }

@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDepot.Cloner", "SalesD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDepot.SiteManager", "SiteManager\SalesDepot.SiteManager.csproj", "{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesDepot.Services", "SalesDepot.Services\SalesDepot.Services.csproj", "{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,16 @@ Global
 		{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}.Release|Mixed Platforms.Build.0 = Release|x86
 		{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}.Release|x86.ActiveCfg = Release|x86
 		{DD5FB7D5-6358-4DC4-87C7-EDA57B7F8BBB}.Release|x86.Build.0 = Release|x86
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -199,6 +199,12 @@
     <Compile Include="ToolForms\IPad\FormEditUser.Designer.cs">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\IPad\FormVideoWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\IPad\FormVideoWarning.designer.cs">
+      <DependentUpon>FormVideoWarning.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\Settings\FormAutoSyncEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -487,6 +493,9 @@
     <EmbeddedResource Include="ToolForms\IPad\FormEditUser.resx">
       <DependentUpon>FormEditUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\IPad\FormVideoWarning.resx">
+      <DependentUpon>FormVideoWarning.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormAutoSyncEdit.resx">
       <DependentUpon>FormAutoSyncEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -627,6 +636,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ToolboxClose.png" />
     <None Include="Resources\Favorites.png" />
     <None Include="Resources\ExtraRoots.png" />
     <None Include="Resources\ColumnsSort.png" />
@@ -720,6 +730,10 @@
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
       <Name>SalesDepot.CoreObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.Services\SalesDepot.Services.csproj">
+      <Project>{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}</Project>
+      <Name>SalesDepot.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

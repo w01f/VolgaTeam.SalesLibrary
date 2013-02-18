@@ -127,6 +127,18 @@ namespace SalesDepot.TabPages
 					FormMain.Instance.buttonItemSettingsVideoLaunch.Checked = true;
 					break;
 			}
+			switch (SettingsManager.Instance.FolderLaunchOptions)
+			{
+				case LinkLaunchOptions.Viewer:
+					FormMain.Instance.buttonItemSettingsFolderViewer.Checked = true;
+					break;
+				case LinkLaunchOptions.Menu:
+					FormMain.Instance.buttonItemSettingsFolderMenu.Checked = true;
+					break;
+				case LinkLaunchOptions.Launch:
+					FormMain.Instance.buttonItemSettingsFolderLaunch.Checked = true;
+					break;
+			}
 			FormMain.Instance.buttonItemSettingsQuickViewImages.Checked = !SettingsManager.Instance.OldStyleQuickView;
 			FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked = SettingsManager.Instance.OldStyleQuickView;
 			#endregion
@@ -421,6 +433,30 @@ namespace SalesDepot.TabPages
 					SettingsManager.Instance.VideoLaunchOptions = LinkLaunchOptions.Menu;
 				else if (FormMain.Instance.buttonItemSettingsVideoLaunch.Checked)
 					SettingsManager.Instance.VideoLaunchOptions = LinkLaunchOptions.Launch;
+				SettingsManager.Instance.SaveSettings();
+			}
+		}
+
+		public void buttonItemSettingsFolderSettings_Click(object sender, EventArgs e)
+		{
+			_allowToSave = false;
+			FormMain.Instance.buttonItemSettingsFolderViewer.Checked = false;
+			FormMain.Instance.buttonItemSettingsFolderMenu.Checked = false;
+			FormMain.Instance.buttonItemSettingsFolderLaunch.Checked = false;
+			_allowToSave = true;
+			(sender as ButtonItem).Checked = true;
+		}
+
+		public void buttonItemSettingsFolderSettings_CheckedChanged(object sender, EventArgs e)
+		{
+			if (_allowToSave)
+			{
+				if (FormMain.Instance.buttonItemSettingsFolderViewer.Checked)
+					SettingsManager.Instance.FolderLaunchOptions = LinkLaunchOptions.Viewer;
+				else if (FormMain.Instance.buttonItemSettingsFolderMenu.Checked)
+					SettingsManager.Instance.FolderLaunchOptions = LinkLaunchOptions.Menu;
+				else if (FormMain.Instance.buttonItemSettingsFolderLaunch.Checked)
+					SettingsManager.Instance.FolderLaunchOptions = LinkLaunchOptions.Launch;
 				SettingsManager.Instance.SaveSettings();
 			}
 		}

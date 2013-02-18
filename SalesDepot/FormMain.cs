@@ -86,6 +86,12 @@ namespace SalesDepot
 			buttonItemSettingsVideoLaunch.CheckedChanged += TabHome.buttonItemSettingsVideoSettings_CheckedChanged;
 			buttonItemSettingsVideoMenu.CheckedChanged += TabHome.buttonItemSettingsVideoSettings_CheckedChanged;
 			buttonItemSettingsVideoViewer.CheckedChanged += TabHome.buttonItemSettingsVideoSettings_CheckedChanged;
+			buttonItemSettingsFolderLaunch.Click += TabHome.buttonItemSettingsFolderSettings_Click;
+			buttonItemSettingsFolderMenu.Click += TabHome.buttonItemSettingsFolderSettings_Click;
+			buttonItemSettingsFolderViewer.Click += TabHome.buttonItemSettingsFolderSettings_Click;
+			buttonItemSettingsFolderLaunch.CheckedChanged += TabHome.buttonItemSettingsFolderSettings_CheckedChanged;
+			buttonItemSettingsFolderMenu.CheckedChanged += TabHome.buttonItemSettingsFolderSettings_CheckedChanged;
+			buttonItemSettingsFolderViewer.CheckedChanged += TabHome.buttonItemSettingsFolderSettings_CheckedChanged;
 			buttonItemSettingsQuickViewImages.Click += TabHome.buttonItemSettingsQuickView_Click;
 			buttonItemSettingsQuickViewSlides.Click += TabHome.buttonItemSettingsQuickView_Click;
 			buttonItemSettingsQuickViewImages.CheckedChanged += TabHome.buttonItemSettingsQuickViewSettings_CheckedChanged;

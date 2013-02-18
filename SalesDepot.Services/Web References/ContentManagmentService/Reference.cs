@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace SalesDepot.CoreObjects.ContentManagmentService {
+namespace SalesDepot.Services.ContentManagmentService {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -48,7 +48,7 @@ namespace SalesDepot.CoreObjects.ContentManagmentService {
         
         /// <remarks/>
         public ContentControllerService() {
-            this.Url = global::SalesDepot.CoreObjects.Properties.Settings.Default.SalesDepot_CoreObjects_ContentManagmentService_ContentControllerService;
+            this.Url = global::SalesDepot.Services.Properties.Settings.Default.SalesDepot_Services_ContentManagmentService_ContentControllerService;
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;

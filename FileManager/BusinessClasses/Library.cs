@@ -609,6 +609,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					Save();
 				if (!UseDirectAccess)
 				{
+					ProcessPresentationProperties();
 					GeneratePresentationPreviewFiles();
 					ProcessAttachments();
 					if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
@@ -657,11 +658,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void ProcessPresentationProperties()
 		{
+			var processFiles = new List<LibraryLink>();
+			var wholeFiles = Pages.SelectMany(page => page.Folders).SelectMany(folder => folder.Files);
+			processFiles.AddRange(wholeFiles.Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate)).OfType<LibraryLink>());
+			processFiles.AddRange(wholeFiles.OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent().Where(file => (file.Type == FileTypes.BuggyPresentation || file.Type == FileTypes.FriendlyPresentation || file.Type == FileTypes.Presentation) && (file.PresentationProperties == null || File.GetLastWriteTime(file.OriginalPath) > file.PresentationProperties.LastUpdate))));
+			if (!processFiles.Any()) return;
 			if (!PowerPointHelper.Instance.Connect()) return;
-			foreach (var page in Pages)
-				foreach (var folder in page.Folders)
-					foreach (LibraryLink file in folder.Files.Where(x => (x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation) && (x.PresentationProperties == null || File.GetLastWriteTime(x.OriginalPath) > x.PresentationProperties.LastUpdate)))
-						file.GetPresentationPrperties();
+			foreach (var file in processFiles)
+				file.GetPresentationProperties();
 			PowerPointHelper.Instance.Disconnect();
 			Save();
 		}
@@ -722,22 +726,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		private void GeneratePresentationPreviewFiles()
 		{
-			foreach (var page in Pages)
+			var links = new List<LibraryLink>();
+			links.AddRange(Pages.SelectMany(page => page.Folders.SelectMany(folder => folder.Files)).OfType<LibraryLink>());
+			links.AddRange(links.OfType<LibraryFolderLink>().SelectMany(x => x.GetWholeContent()).ToList());
+			foreach (var file in links.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
 			{
-				foreach (var folder in page.Folders)
-				{
-					foreach (LibraryLink file in folder.Files.Where(x => x.Type == FileTypes.BuggyPresentation || x.Type == FileTypes.FriendlyPresentation || x.Type == FileTypes.Presentation))
-					{
-						if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
-						if (file.PreviewContainer == null)
-							file.PreviewContainer = new PresentationPreviewContainer(file);
-						file.PreviewContainer.UpdateContent();
-					}
-					if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-						break;
-				}
-				if (!((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive))
-					break;
+				if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+				if (file.PreviewContainer == null)
+					file.PreviewContainer = new PresentationPreviewContainer(file);
+				file.PreviewContainer.UpdateContent();
 			}
 			if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				Save();

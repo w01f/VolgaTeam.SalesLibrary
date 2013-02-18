@@ -141,6 +141,7 @@
       <xsd:complexType name="LibraryLink">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="parentLinkId" type="xsd:string" />
           <xsd:element name="folderId" type="xsd:string" />
           <xsd:element name="libraryId" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
@@ -168,6 +169,8 @@
           <xsd:element name="contentPath" type="xsd:string" />
           <xsd:element name="enableAttachments" type="xsd:boolean" />
           <xsd:element name="attachments" type="tns:AttachmentArray" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="assignedUsers" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -290,6 +293,7 @@
           <xsd:element name="jpegLinks" type="tns:stringArray" />
           <xsd:element name="jpegPhoneLinks" type="tns:stringArray" />
           <xsd:element name="pdfLinks" type="tns:stringArray" />
+          <xsd:element name="wmvLinks" type="tns:stringArray" />
           <xsd:element name="mp4Links" type="tns:stringArray" />
           <xsd:element name="ogvLinks" type="tns:stringArray" />
           <xsd:element name="oldOfficeFormatLinks" type="tns:stringArray" />

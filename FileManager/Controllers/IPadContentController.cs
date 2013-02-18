@@ -9,6 +9,7 @@ using FileManager.BusinessClasses;
 using FileManager.PresentationClasses.TabPages;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms;
+using FileManager.ToolForms.IPad;
 using SalesDepot.CoreObjects.ToolClasses;
 
 namespace FileManager.Controllers
@@ -51,6 +52,8 @@ namespace FileManager.Controllers
 														  };
 
 			_initialization = false;
+
+			ShowVideoWarning();
 		}
 
 		public void PrepareTab(TabPageEnum tabPage) { }
@@ -93,6 +96,16 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemIPadSyncFiles.Enabled = settingsConfigured;
 			FormMain.Instance.ribbonTabItemIPadUsers.Enabled = settingsConfigured & ConfigurationClasses.SettingsManager.Instance.EnableIPadUsersTab;
 			activeDecorator.IPadContentManager.UpdateControlsState();
+		}
+
+		private void ShowVideoWarning()
+		{
+			if (MainController.Instance.ActiveDecorator.Library.VideoConversionWarning
+				&& MainController.Instance.ActiveDecorator.Library.PreviewContainers.Any(x => !x.Ready))
+			{
+				var form = new FormVideoWarning();
+				form.Show();
+			}
 		}
 
 		private void buttonItemIPadSyncStatus_Click(object sender, EventArgs e)

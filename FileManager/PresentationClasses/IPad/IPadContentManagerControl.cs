@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using FileManager.Controllers;
@@ -39,7 +40,7 @@ namespace FileManager.PresentationClasses.IPad
 		#region Video Tab
 		public void UpdateVideoFiles()
 		{
-			int focussedRow = gridViewVideo.FocusedRowHandle;
+			var focussedRow = gridViewVideo.FocusedRowHandle;
 
 			gridControlVideo.DataSource = null;
 			_videoFiles.Clear();
@@ -127,57 +128,75 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void repositoryItemButtonEditVideoWmv_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (gridViewVideo.FocusedRowHandle >= 0)
-			{
-				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-				if (File.Exists(videoInfo.WmvFilePath))
-					VideoHelper.Instance.OpenMediaPlayer(videoInfo.WmvFilePath);
-				else
-					AppManager.Instance.ShowWarning("You need to convert this video first!");
-			}
+			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			if (File.Exists(videoInfo.WmvFilePath))
+				VideoHelper.Instance.OpenMediaPlayer(videoInfo.WmvFilePath);
+			else
+				AppManager.Instance.ShowWarning("You need to convert this video first!");
 		}
 
 		private void repositoryItemButtonEditVideoMp4_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (gridViewVideo.FocusedRowHandle >= 0)
-			{
-				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-				if (File.Exists(videoInfo.Mp4FilePath))
-					VideoHelper.Instance.OpenQuickTime(videoInfo.Mp4FilePath);
-				else
-					AppManager.Instance.ShowWarning("You need to convert this video first!");
-			}
+			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			if (File.Exists(videoInfo.Mp4FilePath))
+				VideoHelper.Instance.OpenQuickTime(videoInfo.Mp4FilePath);
+			else
+				AppManager.Instance.ShowWarning("You need to convert this video first!");
 		}
 
 		private void repositoryItemButtonEditVideoOgv_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (gridViewVideo.FocusedRowHandle >= 0)
-			{
-				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-				if (File.Exists(videoInfo.OgvFilePath))
-					VideoHelper.Instance.OpenFirefox(videoInfo.OgvFilePath);
-				else
-					AppManager.Instance.ShowWarning("You need to convert this video first!");
-			}
+			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			if (File.Exists(videoInfo.OgvFilePath))
+				VideoHelper.Instance.OpenFirefox(videoInfo.OgvFilePath);
+			else
+				AppManager.Instance.ShowWarning("You need to convert this video first!");
+		}
+
+		private void repositoryItemButtonEditVideoMp4_Click(object sender, EventArgs e)
+		{
+			repositoryItemButtonEditVideoMp4_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoMp4.Buttons[0]));
+		}
+
+		private void repositoryItemButtonEditVideoOgv_Click(object sender, EventArgs e)
+		{
+			repositoryItemButtonEditVideoOgv_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoOgv.Buttons[0]));
+		}
+
+		private void repositoryItemButtonEditVideoWmv_Click(object sender, EventArgs e)
+		{
+			repositoryItemButtonEditVideoWmv_ButtonClick(this, new ButtonPressedEventArgs(repositoryItemButtonEditVideoWmv.Buttons[0]));
 		}
 
 		private void repositoryItemButtonEditVideoFolder_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (gridViewVideo.FocusedRowHandle >= 0)
-			{
-				var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-				if (e.Button.Index == 0)
-				{
-					if (Directory.Exists(videoInfo.IPadFolderPath))
-						Process.Start(videoInfo.IPadFolderPath);
-					else
-						AppManager.Instance.ShowWarning("You need to convert this video first!");
-				}
-				else if (e.Button.Index == 1)
-				{
-					ConvertVideoFiles(new[] { videoInfo });
-				}
-			}
+			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			var folderPath = gridViewVideo.FocusedColumn == gridColumnVideoSourceFolder ? videoInfo.SourceFolderPath : videoInfo.IPadFolderPath;
+			if (Directory.Exists(folderPath))
+				Process.Start(folderPath);
+			else
+				AppManager.Instance.ShowWarning("The folder is unavailable");
+		}
+
+		private void repositoryItemButtonEditVideoConvert_ButtonClick(object sender, ButtonPressedEventArgs e)
+		{
+			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			ConvertVideoFiles(new[] { videoInfo });
+		}
+
+		private void gridViewVideo_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
+		{
+			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
+			var videoConverted = videoInfo.Converted;
+			if (e.Column == gridColumnVideoIPadFolder)
+				e.RepositoryItem = videoConverted ? repositoryItemButtonEditVideoFolderEnabled : repositoryItemButtonEditVideoFolderDisabled;
+			else if (e.Column == gridColumnVideoConvert)
+				e.RepositoryItem = videoConverted ? repositoryItemButtonEditVideoConvertDisabled : repositoryItemButtonEditVideoConvertEnabled;
 		}
 
 		private void gridViewVideo_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)

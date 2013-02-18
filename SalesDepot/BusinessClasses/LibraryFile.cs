@@ -172,10 +172,9 @@ namespace SalesDepot.BusinessClasses
 			{
 				if (Type == FileTypes.Url || Type == FileTypes.Network || Type == FileTypes.Folder)
 					return Name;
-				else if (Type == FileTypes.LineBreak)
+				if (Type == FileTypes.LineBreak)
 					return string.Empty;
-				else
-					return Path.GetFileName(OriginalPath);
+				return Path.GetFileName(OriginalPath);
 			}
 		}
 
@@ -650,74 +649,12 @@ namespace SalesDepot.BusinessClasses
 
 	public class LibraryFolderLink : LibraryLink, ILibraryFolderLink
 	{
-		public LibraryFolderLink(LibraryFolder parent)
-			: base(parent)
-		{
-			FolderContent = new List<ILibraryLink>();
-		}
-
-		#region ILibraryFolderLink Members
 		public List<ILibraryLink> FolderContent { get; private set; }
-
-		public override ILibraryLink Clone(LibraryFolder parent)
-		{
-			var file = new LibraryFolderLink(parent);
-			file.OriginalPath = _linkLocalPath;
-			file.Name = Name;
-			file.Note = Note;
-			file.Order = Order;
-			file.IsBold = IsBold;
-			file.EnableWidget = EnableWidget;
-			file.Widget = Widget;
-			file.RootId = RootId;
-			file.RelativePath = RelativePath;
-			file.Type = Type;
-			file.AddDate = AddDate;
-			file.SearchTags = SearchTags;
-			file.CustomKeywords = CustomKeywords;
-			file.ExpirationDateOptions = ExpirationDateOptions;
-			file.PresentationProperties = PresentationProperties;
-			file.LineBreakProperties = LineBreakProperties.Clone(file);
-			file.AttachmentProperties = AttachmentProperties.Clone(file);
-			file.BannerProperties = BannerProperties.Clone(file);
-			file.FileCard = FileCard.Clone(file);
-			file.FolderContent.AddRange(FolderContent.Select(x => x.Clone(parent)));
-			return file;
-		}
-
-		public override void Deserialize(XmlNode node)
-		{
-			base.Deserialize(node);
-			XmlNode contentNode = node.SelectSingleNode("FolderContent");
-			if (contentNode != null)
-				foreach (XmlNode fileNode in contentNode)
-				{
-					ILibraryLink file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
-					file.Deserialize(fileNode);
-					FolderContent.Add(file);
-				}
-
-			UpdateFolderContent();
-		}
-
-		public override string Serialize()
-		{
-			UpdateFolderContent();
-
-			var result = new StringBuilder();
-			result.AppendLine(base.Serialize());
-			result.AppendLine(@"<FolderContent>");
-			foreach (ILibraryLink link in FolderContent)
-				result.AppendLine(@"<File>" + link.Serialize() + @"</File>");
-			result.AppendLine(@"</FolderContent>");
-			return result.ToString();
-		}
-		#endregion
 
 		public bool IsPreviewContainerAlive(IPreviewContainer previewContainer)
 		{
-			bool alive = false;
-			foreach (ILibraryLink file in FolderContent)
+			var alive = false;
+			foreach (var file in FolderContent)
 			{
 				alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
 				if (!alive && file is LibraryFolderLink)
@@ -728,42 +665,61 @@ namespace SalesDepot.BusinessClasses
 			return alive;
 		}
 
-		public void UpdateFolderContent()
+		public LibraryFolderLink(LibraryFolder parent)
+			: base(parent)
 		{
-			var existedPaths = new List<string>();
-			if (Directory.Exists(OriginalPath))
-			{
-				foreach (DirectoryInfo folder in Directory.GetDirectories(OriginalPath).Select(folderPath => new DirectoryInfo(folderPath)))
+			FolderContent = new List<ILibraryLink>();
+		}
+
+		public override void Deserialize(XmlNode node)
+		{
+			base.Deserialize(node);
+			var contentNode = node.SelectSingleNode("FolderContent");
+			if (contentNode != null)
+				foreach (XmlNode fileNode in contentNode)
 				{
-					existedPaths.Add(folder.FullName);
-					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(folder.FullName.ToLower()))) continue;
-					var libraryFile = new LibraryFolderLink(Parent);
-					libraryFile.Name = folder.Name;
-					libraryFile.RootId = RootId;
-					RootFolder rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
-					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + folder.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
-					libraryFile.Type = FileTypes.Folder;
-					libraryFile.InitBannerProperties();
-					FolderContent.Add(libraryFile);
+					var file = Parent.Parent.Parent.GetLinkInstance(Parent, fileNode);
+					file.Deserialize(fileNode);
+					FolderContent.Add(file);
+					if (Widget != null) continue;
+					EnableWidget = true;
+					Widget = Properties.Resources.FolderContentFolder;
+					ApplyWidgetsForFolderContent();
 				}
-				foreach (FileInfo file in Directory.GetFiles(OriginalPath).Select(filePath => new FileInfo(filePath)))
+		}
+
+		private void ApplyWidgetsForFolderContent()
+		{
+			foreach (var link in FolderContent)
+			{
+				link.EnableWidget = true;
+				switch(link.Type)
 				{
-					existedPaths.Add(file.FullName);
-					if (FolderContent.Any(x => x.OriginalPath.ToLower().Equals(file.FullName.ToLower()))) continue;
-					var libraryFile = new LibraryLink(Parent);
-					libraryFile.Name = file.Name;
-					libraryFile.RootId = RootId;
-					RootFolder rootFolder = Parent.Parent.Parent.GetRootFolder(RootId);
-					libraryFile.RelativePath = (rootFolder.IsDrive ? @"\" : string.Empty) + file.FullName.Replace(rootFolder.Folder.FullName, string.Empty);
-					libraryFile.SetProperties();
-					libraryFile.InitBannerProperties();
-					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
-					FolderContent.Add(libraryFile);
+					case FileTypes.QuickTimeVideo:
+						link.Widget = Properties.Resources.FolderContentMp4;
+						break;
+					case FileTypes.BuggyPresentation:
+					case FileTypes.FriendlyPresentation:
+					case FileTypes.Presentation:
+						link.Widget = Properties.Resources.FolderContentPptx;
+						break;
+					case FileTypes.Excel:
+						link.Widget = Properties.Resources.FolderContentXlsx;
+						break;
+					case FileTypes.Folder:
+						link.Widget = Properties.Resources.FolderContentFolder;
+						break;
+					case FileTypes.MediaPlayerVideo:
+						link.Widget = Properties.Resources.FolderContentWmv;
+						break;
+					case FileTypes.PDF:
+						link.Widget = Properties.Resources.FolderContentPdf;
+						break;
+					case FileTypes.Word:
+						link.Widget = Properties.Resources.FolderContentDocx;
+						break;
 				}
 			}
-			FolderContent.RemoveAll(x => !existedPaths.Any(y => y.ToLower().Equals(x.OriginalPath.ToLower())));
-			for (int i = 0; i < FolderContent.Count; i++)
-				FolderContent[i].Order = i;
 		}
 	}
 }
