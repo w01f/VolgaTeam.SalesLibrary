@@ -86,6 +86,8 @@
 				),
 				'email' => array(
 					'from' => 'bcaudill@raycommedia.com',
+					'copy_enabled' => true,
+					'copy' => 'billy@adsalesapp.com',
 					'new_user' => array(
 						'subject' => 'RaycomResults.tv',
 						'body' => 'You have a new account at RaycomResults.tv',
