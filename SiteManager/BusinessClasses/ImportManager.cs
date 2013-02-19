@@ -10,8 +10,9 @@ namespace SalesDepot.SiteManager.BusinessClasses
 {
 	public class ImportManager
 	{
-		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserRecord[] existedUsers, GroupRecord[] existedGroups)
+		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserRecord[] existedUsers, GroupRecord[] existedGroups, out string message)
 		{
+			message = string.Empty;
 			var userInfo = new List<UserInfo>();
 			var existedGroupList = new List<GroupRecord>(existedGroups);
 			var existedUserLogins = new List<string>(existedUsers.Select(x => x.login));
@@ -40,8 +41,8 @@ namespace SalesDepot.SiteManager.BusinessClasses
 						var user = new UserInfo();
 						user.Login = login.ToLower().Trim();
 						user.Password = (new PasswordGenerator()).Generate();
-						user.FirstName = firtsName.ToLower().Trim();
-						user.LastName = lastName.ToLower().Trim();
+						user.FirstName = firtsName.Trim();
+						user.LastName = lastName.Trim();
 						user.Email = email.ToLower().Trim();
 
 						foreach (var groupName in groups.Split(','))
@@ -61,7 +62,10 @@ namespace SalesDepot.SiteManager.BusinessClasses
 						userInfo.Add(user);
 					}
 				}
-				catch { }
+				catch
+				{
+					message = "Couldn't read file";
+				}
 				finally
 				{
 					dataAdapter.Dispose();
@@ -69,7 +73,10 @@ namespace SalesDepot.SiteManager.BusinessClasses
 				}
 				connection.Close();
 			}
-			catch { }
+			catch
+			{
+				message = "Couldn't connect to file";
+			}
 			return userInfo;
 		}
 	}

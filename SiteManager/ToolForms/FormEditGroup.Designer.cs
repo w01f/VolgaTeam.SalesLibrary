@@ -55,7 +55,9 @@
 			this.gridColumnUserSelected = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemCheckEditUsers = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
 			this.gridColumnUserLogin = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.pnAssignedUsers = new System.Windows.Forms.Panel();
+			this.pnAssignedUsers2 = new System.Windows.Forms.Panel();
+			this.buttonXExportUsers = new DevComponents.DotNetBar.ButtonX();
+			this.pnAssignedUsers1 = new System.Windows.Forms.Panel();
 			this.buttonXUsersClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXUsersSelectAll = new DevComponents.DotNetBar.ButtonX();
 			this.xtraTabPageLibraries = new DevExpress.XtraTab.XtraTabPage();
@@ -77,7 +79,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridControlUsers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditUsers)).BeginInit();
-			this.pnAssignedUsers.SuspendLayout();
+			this.pnAssignedUsers2.SuspendLayout();
+			this.pnAssignedUsers1.SuspendLayout();
 			this.xtraTabPageLibraries.SuspendLayout();
 			this.pnAssignedLibraries.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditName.Properties)).BeginInit();
@@ -328,7 +331,8 @@
 			// xtraTabPageUsers
 			// 
 			this.xtraTabPageUsers.Controls.Add(this.gridControlUsers);
-			this.xtraTabPageUsers.Controls.Add(this.pnAssignedUsers);
+			this.xtraTabPageUsers.Controls.Add(this.pnAssignedUsers2);
+			this.xtraTabPageUsers.Controls.Add(this.pnAssignedUsers1);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
 			this.xtraTabPageUsers.Size = new System.Drawing.Size(369, 490);
 			this.xtraTabPageUsers.Text = "Users";
@@ -341,7 +345,7 @@
 			this.gridControlUsers.Name = "gridControlUsers";
 			this.gridControlUsers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditUsers});
-			this.gridControlUsers.Size = new System.Drawing.Size(369, 444);
+			this.gridControlUsers.Size = new System.Drawing.Size(369, 387);
 			this.gridControlUsers.TabIndex = 1;
 			this.gridControlUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
@@ -418,16 +422,41 @@
 			this.gridColumnUserLogin.VisibleIndex = 1;
 			this.gridColumnUserLogin.Width = 80;
 			// 
-			// pnAssignedUsers
+			// pnAssignedUsers2
 			// 
-			this.pnAssignedUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-			this.pnAssignedUsers.Controls.Add(this.buttonXUsersClearAll);
-			this.pnAssignedUsers.Controls.Add(this.buttonXUsersSelectAll);
-			this.pnAssignedUsers.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnAssignedUsers.Location = new System.Drawing.Point(0, 0);
-			this.pnAssignedUsers.Name = "pnAssignedUsers";
-			this.pnAssignedUsers.Size = new System.Drawing.Size(369, 46);
-			this.pnAssignedUsers.TabIndex = 2;
+			this.pnAssignedUsers2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.pnAssignedUsers2.Controls.Add(this.buttonXExportUsers);
+			this.pnAssignedUsers2.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnAssignedUsers2.Location = new System.Drawing.Point(0, 433);
+			this.pnAssignedUsers2.Name = "pnAssignedUsers2";
+			this.pnAssignedUsers2.Size = new System.Drawing.Size(369, 57);
+			this.pnAssignedUsers2.TabIndex = 3;
+			// 
+			// buttonXExportUsers
+			// 
+			this.buttonXExportUsers.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXExportUsers.CausesValidation = false;
+			this.buttonXExportUsers.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXExportUsers.Image = global::SalesDepot.SiteManager.Properties.Resources.ExportGroup;
+			this.buttonXExportUsers.Location = new System.Drawing.Point(71, 5);
+			this.buttonXExportUsers.Name = "buttonXExportUsers";
+			this.buttonXExportUsers.Size = new System.Drawing.Size(227, 47);
+			this.buttonXExportUsers.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXExportUsers.TabIndex = 13;
+			this.buttonXExportUsers.Text = "Export to Excel";
+			this.buttonXExportUsers.TextColor = System.Drawing.Color.Black;
+			this.buttonXExportUsers.Click += new System.EventHandler(this.buttonXExportUsers_Click);
+			// 
+			// pnAssignedUsers1
+			// 
+			this.pnAssignedUsers1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.pnAssignedUsers1.Controls.Add(this.buttonXUsersClearAll);
+			this.pnAssignedUsers1.Controls.Add(this.buttonXUsersSelectAll);
+			this.pnAssignedUsers1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnAssignedUsers1.Location = new System.Drawing.Point(0, 0);
+			this.pnAssignedUsers1.Name = "pnAssignedUsers1";
+			this.pnAssignedUsers1.Size = new System.Drawing.Size(369, 46);
+			this.pnAssignedUsers1.TabIndex = 2;
 			// 
 			// buttonXUsersClearAll
 			// 
@@ -556,7 +585,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridControlUsers)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditUsers)).EndInit();
-			this.pnAssignedUsers.ResumeLayout(false);
+			this.pnAssignedUsers2.ResumeLayout(false);
+			this.pnAssignedUsers1.ResumeLayout(false);
 			this.xtraTabPageLibraries.ResumeLayout(false);
 			this.pnAssignedLibraries.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditName.Properties)).EndInit();
@@ -596,10 +626,12 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnUserSelected;
 		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditUsers;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnUserLogin;
-		private System.Windows.Forms.Panel pnAssignedUsers;
+		private System.Windows.Forms.Panel pnAssignedUsers1;
 		private DevComponents.DotNetBar.ButtonX buttonXUsersClearAll;
 		private DevComponents.DotNetBar.ButtonX buttonXUsersSelectAll;
 		public DevExpress.XtraEditors.ComboBoxEdit comboBoxEditName;
 		private DevComponents.DotNetBar.StyleManager styleManager;
+		private System.Windows.Forms.Panel pnAssignedUsers2;
+		private DevComponents.DotNetBar.ButtonX buttonXExportUsers;
     }
 }

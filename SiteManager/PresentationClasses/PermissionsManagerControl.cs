@@ -117,8 +117,9 @@ namespace SalesDepot.SiteManager.PresentationClasses
 						form.TopMost = true;
 						var thread = new Thread(() =>
 						{
-							var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray());
-							BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
+							var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), out message);
+							if (string.IsNullOrEmpty(message))
+								BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
 						});
 						form.Show();
 						thread.Start();
@@ -136,7 +137,8 @@ namespace SalesDepot.SiteManager.PresentationClasses
 					_groupsCollectionChanged = true;
 					_libraraiesCollectionChanged = true;
 
-					UpdateUsers(true, ref message);
+					if (string.IsNullOrEmpty(message))
+						UpdateUsers(true, ref message);
 				}
 			}
 			if (!string.IsNullOrEmpty(message))

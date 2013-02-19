@@ -1,32 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.ToolForms
 {
 	public partial class FormEditGroup : Form
 	{
-		private bool _newGroup = false;
-		private List<string> _existedGroups = new List<string>();
+		private readonly List<string> _existedGroups = new List<string>();
 
-		private List<UserRecord> _users = new List<UserRecord>();
-		private List<Library> _libraries = new List<Library>();
-		private List<LibraryPage> _pages = new List<LibraryPage>();
-
-		public UserRecord[] AssignedUsers
-		{
-			get { return _users.Where(x => x.selected).ToArray(); }
-		}
-
-		public LibraryPage[] AssignedPages
-		{
-			get { return _pages.Where(x => x.selected).ToArray(); }
-		}
+		private readonly List<Library> _libraries = new List<Library>();
+		private readonly bool _newGroup;
+		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
+		private readonly List<UserRecord> _users = new List<UserRecord>();
 
 		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserRecord[] users, Library[] libraries)
 		{
@@ -55,20 +47,30 @@ namespace SalesDepot.SiteManager.ToolForms
 			comboBoxEditName.MouseDown += FormMain.Instance.Editor_MouseDown;
 
 			if (_newGroup)
-				this.Text = "Add Group";
+				Text = "Add Group";
 			else
-				this.Text = "Edit Group";
+				Text = "Edit Group";
+		}
+
+		public UserRecord[] AssignedUsers
+		{
+			get { return _users.Where(x => x.selected).ToArray(); }
+		}
+
+		public LibraryPage[] AssignedPages
+		{
+			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
 		private void FormEditGroup_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			if (this.DialogResult == DialogResult.OK)
+			if (DialogResult == DialogResult.OK)
 			{
 				gridViewUsers.PostEditor();
 				gridViewLibraries.PostEditor();
 				gridViewPages.PostEditor();
 				comboBoxEditName.Focus();
-				if (!this.ValidateChildren())
+				if (!ValidateChildren())
 					e.Cancel = true;
 			}
 		}
@@ -83,15 +85,14 @@ namespace SalesDepot.SiteManager.ToolForms
 				e.Cancel = true;
 			}
 		}
-
 		#endregion
 
 		#region Libraraies
 		private void buttonXLibrariesSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var library in _libraries)
+			foreach (Library library in _libraries)
 				library.selected = true;
-			foreach (var page in _pages)
+			foreach (LibraryPage page in _pages)
 				page.selected = true;
 			gridViewLibraries.RefreshData();
 			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
@@ -100,9 +101,9 @@ namespace SalesDepot.SiteManager.ToolForms
 
 		private void buttonXLibrariesClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var library in _libraries)
+			foreach (Library library in _libraries)
 				library.selected = false;
-			foreach (var page in _pages)
+			foreach (LibraryPage page in _pages)
 				page.selected = false;
 			gridViewLibraries.RefreshData();
 			if (gridViewLibraries.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewLibraries.GetDetailView(gridViewLibraries.FocusedRowHandle, 0) != null)
@@ -144,7 +145,7 @@ namespace SalesDepot.SiteManager.ToolForms
 						var libraray = focussedView.GetFocusedRow() as Library;
 						if (libraray != null)
 						{
-							foreach (var page in _pages.Where(x => x.libraryId == libraray.id))
+							foreach (LibraryPage page in _pages.Where(x => x.libraryId == libraray.id))
 								page.selected = libraray.selected;
 							var pagesView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
 							if (pagesView != null)
@@ -165,23 +166,53 @@ namespace SalesDepot.SiteManager.ToolForms
 			}
 		}
 		#endregion
+
 		#endregion
 
 		#region Users
 		private void buttonXUsersSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var user in _users)
+			foreach (UserRecord user in _users)
 				user.selected = true;
 			gridViewUsers.RefreshData();
 		}
 
 		private void buttonXUsersClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var user in _users)
+			foreach (UserRecord user in _users)
 				user.selected = false;
 			gridViewUsers.RefreshData();
 		}
-		#endregion
 
+		private void buttonXExportUsers_Click(object sender, EventArgs e)
+		{
+			var groupName = comboBoxEditName.EditValue != null ? comboBoxEditName.EditValue.ToString() : string.Empty;
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.Title = "Export Users";
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+				dialog.Filter = "Excel files|*.xls;*.xlsx";
+				dialog.FileName = groupName;
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					var selectedUsers = _users.Where(x => x.selected).ToArray();
+					var users = new string[selectedUsers.Length, 4];
+					for (var i = 0; i < selectedUsers.Length; i++)
+					{
+						users[i, 0] = selectedUsers[i].firstName;
+						users[i, 1] = selectedUsers[i].lastName;
+						users[i, 2] = selectedUsers[i].email;
+						users[i, 3] = selectedUsers[i].login;
+					}
+					ExcelHelper.Instance.ExportGroup(dialog.FileName, groupName, users);
+					try
+					{
+						Process.Start(dialog.FileName);
+					}
+					catch { }
+				}
+			}
+		}
+		#endregion
 	}
 }
