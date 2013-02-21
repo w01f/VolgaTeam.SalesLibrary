@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,30 +9,30 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
+using SalesDepot.Services.IPadAdminService;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ToolForms;
-using SalesDepot.Services.IPadAdminService;
 
 namespace SalesDepot.SiteManager.PresentationClasses
 {
 	[ToolboxItem(false)]
 	public sealed partial class PermissionsManagerControl : UserControl
 	{
+		private readonly List<string> _groupTemplates = new List<string>();
 		private readonly List<GroupRecord> _groups = new List<GroupRecord>();
 		private readonly List<Library> _libraries = new List<Library>();
 		private readonly List<UserRecord> _users = new List<UserRecord>();
-		private readonly List<string> _groupTemplates = new List<string>();
 		private bool _groupsCollectionChanged;
 		private bool _libraraiesCollectionChanged;
 		private bool _userCollectionChanged;
-
-		public bool HasConnection { get; set; }
 
 		public PermissionsManagerControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 		}
+
+		public bool HasConnection { get; set; }
 
 		private void UpdateControlsState()
 		{
@@ -116,11 +115,11 @@ namespace SalesDepot.SiteManager.PresentationClasses
 						form.laProgress.Text = "Import users...";
 						form.TopMost = true;
 						var thread = new Thread(() =>
-						{
-							var users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), out message);
-							if (string.IsNullOrEmpty(message))
-								BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
-						});
+													{
+														IEnumerable<UserInfo> users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), out message);
+														if (string.IsNullOrEmpty(message))
+															BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
+													});
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -289,88 +288,103 @@ namespace SalesDepot.SiteManager.PresentationClasses
 		{
 			string message = string.Empty;
 			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
-			if (userRecord != null)
+			if (userRecord == null) return;
+			using (var formEdit = new FormEditUser(false, _users.Select(x => x.login).ToArray(),
+												   _groups.Select(x => new GroupRecord
+																	   {
+																		   id = x.id,
+																		   name = x.name,
+																		   selected = (userRecord.groups != null && userRecord.groups.Any(y => y.id == x.id))
+																	   }).ToArray(),
+												   _libraries.Select(x => new Library
+																		  {
+																			  id = x.id,
+																			  name = x.name,
+																			  selected = (userRecord.libraries != null && userRecord.libraries.Any(y => y.id == x.id)),
+																			  pages = x.pages.Select(y => new LibraryPage
+																										  {
+																											  id = y.id,
+																											  name = y.name,
+																											  libraryId = y.libraryId,
+																											  selected = (userRecord.libraries != null && userRecord.libraries.SelectMany(library => library.pages).Select(userPage => userPage.id).Contains(y.id))
+																										  }).ToArray()
+																		  }).ToArray()))
 			{
-				using (var formEdit = new FormEditUser(false, _users.Select(x => x.login).ToArray(), userRecord.groups ?? new GroupRecord[] { }, userRecord.libraries ?? new Library[] { }))
+				formEdit.textEditLogin.EditValue = userRecord.login;
+				formEdit.textEditFirstName.EditValue = userRecord.firstName;
+				formEdit.textEditLastName.EditValue = userRecord.lastName;
+				formEdit.textEditEmail.EditValue = userRecord.email;
+				formEdit.textEditEmailConfirm.EditValue = userRecord.email;
+				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
-					formEdit.textEditLogin.EditValue = userRecord.login;
-					formEdit.textEditFirstName.EditValue = userRecord.firstName;
-					formEdit.textEditLastName.EditValue = userRecord.lastName;
-					formEdit.textEditEmail.EditValue = userRecord.email;
-					formEdit.textEditEmailConfirm.EditValue = userRecord.email;
-					if (formEdit.ShowDialog() == DialogResult.OK)
+					string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
+					string password = formEdit.buttonEditPassword.EditValue != null ? formEdit.buttonEditPassword.EditValue.ToString() : string.Empty;
+					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
+					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
+					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+					var pages = new List<LibraryPage>(formEdit.AssignedPages);
+					using (var form = new FormProgress())
 					{
-						string login = formEdit.textEditLogin.EditValue != null ? formEdit.textEditLogin.EditValue.ToString() : string.Empty;
-						string password = formEdit.buttonEditPassword.EditValue != null ? formEdit.buttonEditPassword.EditValue.ToString() : string.Empty;
-						string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
-						string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
-						string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
-						var groups = new List<GroupRecord>(formEdit.AssignedGroups);
-						var pages = new List<LibraryPage>(formEdit.AssignedPages);
-						using (var form = new FormProgress())
+						FormMain.Instance.ribbonControl.Enabled = false;
+						Enabled = false;
+						form.laProgress.Text = "Updating user...";
+						form.TopMost = true;
+						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, groups.ToArray(), pages.ToArray(), out message));
+						form.Show();
+						thread.Start();
+						while (thread.IsAlive)
 						{
-							FormMain.Instance.ribbonControl.Enabled = false;
-							Enabled = false;
-							form.laProgress.Text = "Updating user...";
-							form.TopMost = true;
-							var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, groups.ToArray(), pages.ToArray(), out message));
-							form.Show();
-							thread.Start();
-							while (thread.IsAlive)
-							{
-								Thread.Sleep(100);
-								Application.DoEvents();
-							}
-							form.Close();
-							Enabled = true;
-							FormMain.Instance.ribbonControl.Enabled = true;
+							Thread.Sleep(100);
+							Application.DoEvents();
 						}
-
-						_userCollectionChanged = true;
-						_groupsCollectionChanged = true;
-						_libraraiesCollectionChanged = true;
-
-						UpdateUsers(true, ref message);
+						form.Close();
+						Enabled = true;
+						FormMain.Instance.ribbonControl.Enabled = true;
 					}
+
+					_userCollectionChanged = true;
+					_groupsCollectionChanged = true;
+					_libraraiesCollectionChanged = true;
+
+					UpdateUsers(true, ref message);
 				}
-				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
 			}
+			if (!string.IsNullOrEmpty(message))
+				AppManager.Instance.ShowWarning(message);
 		}
 
 		public void DeleteUser()
 		{
 			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
-			if (userRecord != null && AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) == DialogResult.Yes)
+			if (userRecord == null || AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) != DialogResult.Yes) return;
+			string message = string.Empty;
+			using (var form = new FormProgress())
 			{
-				string message = string.Empty;
-				using (var form = new FormProgress())
+				FormMain.Instance.ribbonControl.Enabled = false;
+				Enabled = false;
+				form.laProgress.Text = "Deleting user...";
+				form.TopMost = true;
+				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeleteUser(userRecord.login, out message));
+				form.Show();
+				thread.Start();
+				while (thread.IsAlive)
 				{
-					FormMain.Instance.ribbonControl.Enabled = false;
-					Enabled = false;
-					form.laProgress.Text = "Deleting user...";
-					form.TopMost = true;
-					var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeleteUser(userRecord.login, out message));
-					form.Show();
-					thread.Start();
-					while (thread.IsAlive)
-					{
-						Thread.Sleep(100);
-						Application.DoEvents();
-					}
-					form.Close();
-					Enabled = true;
-					FormMain.Instance.ribbonControl.Enabled = true;
+					Thread.Sleep(100);
+					Application.DoEvents();
 				}
-
-				_userCollectionChanged = true;
-				_groupsCollectionChanged = true;
-				_libraraiesCollectionChanged = true;
-
-				UpdateUsers(true, ref message);
-				if (!string.IsNullOrEmpty(message))
-					AppManager.Instance.ShowWarning(message);
+				form.Close();
+				Enabled = true;
+				FormMain.Instance.ribbonControl.Enabled = true;
 			}
+
+			_userCollectionChanged = true;
+			_groupsCollectionChanged = true;
+			_libraraiesCollectionChanged = true;
+
+			UpdateUsers(true, ref message);
+			if (!string.IsNullOrEmpty(message))
+				AppManager.Instance.ShowWarning(message);
 		}
 
 		private void repositoryItemButtonEditUsersActions_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -401,10 +415,10 @@ namespace SalesDepot.SiteManager.PresentationClasses
 					form.laProgress.Text = "Loading groups...";
 					form.TopMost = true;
 					var thread = new Thread(() =>
-					{
-						_groups.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroups(out message));
-						_groupTemplates.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
-					});
+												{
+													_groups.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroups(out message));
+													_groupTemplates.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
+												});
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -422,10 +436,10 @@ namespace SalesDepot.SiteManager.PresentationClasses
 			else
 			{
 				var thread = new Thread(() =>
-				{
-					_groups.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroups(out message));
-					_groupTemplates.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
-				});
+											{
+												_groups.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroups(out message));
+												_groupTemplates.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
+											});
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -487,7 +501,31 @@ namespace SalesDepot.SiteManager.PresentationClasses
 			var groupRecord = gridViewGroups.GetFocusedRow() as GroupRecord;
 			if (groupRecord != null)
 			{
-				using (var formEdit = new FormEditGroup(false, _groupTemplates.ToArray(), _groups.Where(x => !x.name.Equals(groupRecord.name)).Select(x => x.name).ToArray(), groupRecord.users ?? new UserRecord[] { }, groupRecord.libraries ?? new Library[] { }))
+				using (var formEdit = new FormEditGroup(false,
+														_groupTemplates.ToArray(),
+														_groups.Where(x => !x.name.Equals(groupRecord.name)).Select(x => x.name).ToArray(),
+														_users.Select(x => new UserRecord
+																		   {
+																			   id = x.id,
+																			   login = x.login,
+																			   firstName = x.firstName,
+																			   lastName = x.lastName,
+																			   email = x.email,
+																			   selected = (groupRecord.users != null && groupRecord.users.Any(y => y.id == x.id))
+																		   }).ToArray(),
+														_libraries.Select(x => new Library
+																			   {
+																				   id = x.id,
+																				   name = x.name,
+																				   selected = (groupRecord.libraries != null && groupRecord.libraries.Any(y => y.id == x.id)),
+																				   pages = x.pages.Select(y => new LibraryPage
+																											   {
+																												   id = y.id,
+																												   name = y.name,
+																												   libraryId = y.libraryId,
+																												   selected = (groupRecord.libraries != null && groupRecord.libraries.SelectMany(library => library.pages).Select(groupPage => groupPage.id).Contains(y.id))
+																											   }).ToArray()
+																			   }).ToArray()))
 				{
 					formEdit.comboBoxEditName.EditValue = groupRecord.name;
 					if (formEdit.ShowDialog() == DialogResult.OK)
@@ -519,7 +557,7 @@ namespace SalesDepot.SiteManager.PresentationClasses
 						_groupsCollectionChanged = true;
 						_libraraiesCollectionChanged = true;
 
-						UpdateUsers(true, ref message);
+						UpdateGroups(true, ref message);
 					}
 				}
 				if (!string.IsNullOrEmpty(message))
@@ -628,7 +666,21 @@ namespace SalesDepot.SiteManager.PresentationClasses
 			var pageRecord = gridViewPages.GetFocusedRow() as LibraryPage;
 			if (pageRecord != null)
 			{
-				using (var formEdit = new FormEditPage(pageRecord.users ?? new UserRecord[] { }, pageRecord.groups ?? new GroupRecord[] { }))
+				using (var formEdit = new FormEditPage(_users.Select(x => new UserRecord
+																		  {
+																			  id = x.id,
+																			  login = x.login,
+																			  firstName = x.firstName,
+																			  lastName = x.lastName,
+																			  email = x.email,
+																			  selected = (pageRecord.users != null && pageRecord.users.Any(y => y.id == x.id))
+																		  }).ToArray(),
+													   _groups.Select(x => new GroupRecord
+																		   {
+																			   id = x.id,
+																			   name = x.name,
+																			   selected = (pageRecord.groups != null && pageRecord.groups.Any(y => y.id == x.id))
+																		   }).ToArray()))
 				{
 					formEdit.laLibrary.Text = string.Format(formEdit.laLibrary.Text, pageRecord.libraryName);
 					formEdit.laPage.Text = string.Format(formEdit.laPage.Text, pageRecord.name);
@@ -645,17 +697,17 @@ namespace SalesDepot.SiteManager.PresentationClasses
 							form.laProgress.Text = allLibrary ? "Updating library..." : "Updating page...";
 							form.TopMost = true;
 							var thread = new Thread(() =>
-							{
-								if (allLibrary)
-								{
-									var libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
-									if (libraray != null)
-										foreach (var page in libraray.pages)
-											BusinessClasses.SiteManager.Instance.SelectedSite.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
-								}
-								else
-									BusinessClasses.SiteManager.Instance.SelectedSite.SetPage(pageRecord.id, users.ToArray(), groups.ToArray(), out message);
-							});
+														{
+															if (allLibrary)
+															{
+																Library libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
+																if (libraray != null)
+																	foreach (LibraryPage page in libraray.pages)
+																		BusinessClasses.SiteManager.Instance.SelectedSite.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
+															}
+															else
+																BusinessClasses.SiteManager.Instance.SelectedSite.SetPage(pageRecord.id, users.ToArray(), groups.ToArray(), out message);
+														});
 							form.Show();
 							thread.Start();
 							while (thread.IsAlive)

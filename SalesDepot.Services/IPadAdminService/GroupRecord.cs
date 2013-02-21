@@ -16,35 +16,29 @@ namespace SalesDepot.Services.IPadAdminService
 		{
 			get
 			{
-				string result = string.Empty;
+				var result = string.Empty;
 				result += "Assigned Users: ";
-				if (users != null)
+				if (allUsers)
+					result += "ALL";
+				else if (users != null)
 				{
-					if (users.Any(x => !x.selected))
-					{
-						if (users.Any(x => x.selected))
-							result += string.Join(", ", users.Where(x => x.selected).Select(x => x.login).ToArray());
-						else
-							result += "None";
-					}
+					if (users.Length > 0)
+						result += string.Join(", ", users.Select(x => x.login).ToArray());
 					else
-						result += "ALL";
+						result += "None";
 				}
 				else
 					result += "None";
 				result += Environment.NewLine;
 				result += "Assigned Libraries: ";
-				if (libraries != null)
+				if (allLibraries)
+					result += "ALL";
+				else if (libraries != null)
 				{
-					if (libraries.Any(x => !x.selected))
-					{
-						if (libraries.Any(x => x.selected))
-							result += string.Join(", ", libraries.Where(x => x.selected).Select(x => x.name).ToArray());
-						else
-							result += "None";
-					}
+					if (libraries.Length > 0)
+						result += string.Join(", ", libraries.Select(x => x.name).ToArray());
 					else
-						result += "ALL";
+						result += "None";
 				}
 				else
 					result += "ALL";

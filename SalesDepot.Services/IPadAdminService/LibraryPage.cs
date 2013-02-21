@@ -13,33 +13,27 @@ namespace SalesDepot.Services.IPadAdminService
 			{
 				string result = string.Empty;
 				result += "Assigned Users: ";
-				if (users != null)
+				if (allUsers)
+					result += "ALL";
+				else if (users != null)
 				{
-					if (users.Any(x => !x.selected))
-					{
-						if (users.Any(x => x.selected))
-							result += string.Join(", ", users.Where(x => x.selected).Select(x => x.login).ToArray());
-						else
-							result += "None";
-					}
+					if (users.Length > 0)
+						result += string.Join(", ", users.Select(x => x.login).ToArray());
 					else
-						result += "ALL";
+						result += "None";
 				}
 				else
 					result += "None";
 				result += Environment.NewLine;
 				result += "Assigned Groups: ";
-				if (groups != null)
+				if (allGroups)
+					result += "ALL";
+				else if (groups != null)
 				{
-					if (groups.Any(x => !x.selected))
-					{
-						if (groups.Any(x => x.selected))
-							result += string.Join(", ", groups.Where(x => x.selected).Select(x => x.name).ToArray());
-						else
-							result += "None";
-					}
+					if (groups.Length > 0)
+						result += string.Join(", ", groups.Select(x => x.name).ToArray());
 					else
-						result += "ALL";
+						result += "None";
 				}
 				else
 					result += "None";
