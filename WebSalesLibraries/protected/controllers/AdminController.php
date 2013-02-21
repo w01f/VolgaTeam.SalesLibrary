@@ -130,34 +130,34 @@
 					$user->lastName = $userRecord->last_name;
 					$user->email = $userRecord->email;
 
-					$assignedLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userRecord->id);
-					$assignedPageIds = UserLibraryStorage::getPageIdsByUser($userRecord->id);
-					$libraryRecords = LibraryStorage::model()->findAll();
-					if (isset($libraryRecords))
-					{
-						foreach ($libraryRecords as $libraryRecord)
-						{
-							$library = new Library();
-							$library->id = $libraryRecord->id;
-							$library->name = $libraryRecord->name;
-							$library->selected = isset($assignedLibraryIds) && in_array($libraryRecord->id, $assignedLibraryIds);
-							$pageRecords = LibraryPageStorage::model()->findAll('id_library=?', array($libraryRecord->id));
-							if (isset($pageRecords))
-							{
-								foreach ($pageRecords as $pageRecord)
-								{
-									$page = new LibraryPage($library);
-									$page->id = $pageRecord->id;
-									$page->libraryId = $pageRecord->id_library;
-									$page->name = $pageRecord->name;
-									$page->libraryName = $libraryRecord->name;
-									$page->selected = isset($assignedPageIds) && in_array($pageRecord->id, $assignedPageIds);
-									$library->pages[] = $page;
-								}
-							}
-							$user->libraries[] = $library;
-						}
-					}
+//					$assignedLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userRecord->id);
+//					$assignedPageIds = UserLibraryStorage::getPageIdsByUser($userRecord->id);
+//					$libraryRecords = LibraryStorage::model()->findAll();
+//					if (isset($libraryRecords))
+//					{
+//						foreach ($libraryRecords as $libraryRecord)
+//						{
+//							$library = new Library();
+//							$library->id = $libraryRecord->id;
+//							$library->name = $libraryRecord->name;
+//							$library->selected = isset($assignedLibraryIds) && in_array($libraryRecord->id, $assignedLibraryIds);
+//							$pageRecords = LibraryPageStorage::model()->findAll('id_library=?', array($libraryRecord->id));
+//							if (isset($pageRecords))
+//							{
+//								foreach ($pageRecords as $pageRecord)
+//								{
+//									$page = new LibraryPage($library);
+//									$page->id = $pageRecord->id;
+//									$page->libraryId = $pageRecord->id_library;
+//									$page->name = $pageRecord->name;
+//									$page->libraryName = $libraryRecord->name;
+//									$page->selected = isset($assignedPageIds) && in_array($pageRecord->id, $assignedPageIds);
+//									$library->pages[] = $page;
+//								}
+//							}
+//							$user->libraries[] = $library;
+//						}
+//					}
 
 					$assignedGroups = UserGroupStorage::getGroupIdsByUser($userRecord->id);
 					$groupRecords = GroupStorage::model()->findAll();
@@ -349,22 +349,22 @@
 							$page->libraryName = $library->name;
 							$library->pages[] = $page;
 
-							$assignedUsers = UserLibraryStorage::getUserIdsByPage($pageRecord->id);
-							$userRecords = UserStorage::model()->findAll('role=0');
-							if (isset($userRecords))
-							{
-								foreach ($userRecords as $userRecord)
-								{
-									$user = new UserRecord();
-									$user->id = $userRecord->id;
-									$user->login = $userRecord->login;
-									$user->firstName = $userRecord->first_name;
-									$user->lastName = $userRecord->last_name;
-									$user->email = $userRecord->email;
-									$user->selected = isset($assignedUsers) && in_array($userRecord->id, $assignedUsers);
-									$page->users[] = $user;
-								}
-							}
+//							$assignedUsers = UserLibraryStorage::getUserIdsByPage($pageRecord->id);
+//							$userRecords = UserStorage::model()->findAll('role=0');
+//							if (isset($userRecords))
+//							{
+//								foreach ($userRecords as $userRecord)
+//								{
+//									$user = new UserRecord();
+//									$user->id = $userRecord->id;
+//									$user->login = $userRecord->login;
+//									$user->firstName = $userRecord->first_name;
+//									$user->lastName = $userRecord->last_name;
+//									$user->email = $userRecord->email;
+//									$user->selected = isset($assignedUsers) && in_array($userRecord->id, $assignedUsers);
+//									$page->users[] = $user;
+//								}
+//							}
 
 							$assignedGroups = GroupLibraryStorage::getGroupIdsByPage($pageRecord->id);
 							$groupRecords = GroupStorage::model()->findAll();

@@ -52,6 +52,9 @@
 					'tab_name' => 'Libraries',
 					'column_name' => 'Libraries',
 				),
+				'tags' => array(
+					'visible' => true,
+				),
 				'search_options' => array(
 					'hide_duplicate' => true,
 				),
