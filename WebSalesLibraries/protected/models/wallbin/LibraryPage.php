@@ -59,11 +59,22 @@ class LibraryPage
      * @soap
      */
     public $groups;
+	/**
+	 * @var boolean selected
+	 * @soap
+	 */
+	public $allGroups;
     /**
      * @var UserRecord[]
      * @soap
      */
     public $users;
+	/**
+	 * @var boolean selected
+	 * @soap
+	 */
+	public $allUsers;
+
     public $cachedColumnsView;
 
     public function __construct($library)

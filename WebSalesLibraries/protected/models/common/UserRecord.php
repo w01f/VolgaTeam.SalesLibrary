@@ -41,10 +41,20 @@ class UserRecord
      * @var GroupRecord[]
      * @soap
      */
-    public $groups;    
+    public $groups;
+	/**
+	 * @var boolean selected
+	 * @soap
+	 */
+	public $allGroups;
     /**
      * @var Library[]
      * @soap
      */
-    public $libraries;        
+    public $libraries;
+	/**
+	 * @var boolean selected
+	 * @soap
+	 */
+	public $allLibraries;
 }
