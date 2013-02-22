@@ -10,15 +10,8 @@
 		<div class="group-panel">
 			<button type="button" class="btn btn-block" id="clear-all-content-value">Clear Keyword Settings</button>
 		</div>
-		<br> <br>
-		<?if (Yii::app()->browser->isMobile()): ?>
 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<? endif;?>
-		<div class="group-title">Search the Sales Library for Presentations and Video:</div>
+		<div class="group-title">What Are You Looking For?</div>
 		<table class="button-edit input-append">
 			<tr>
 				<td class="editor"><input type="text" id="condition-content-value" placeholder="Type Here..."></td>
@@ -139,19 +132,12 @@
 		<div class="group-panel">
 			<button type="button" class="btn btn-block" id="clear-date-value">Clear Date Settings</button>
 		</div>
-		<br> <br>
-		<?if (Yii::app()->browser->isMobile()): ?>
 		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<? endif;?>
 		<div class="group-panel" id="condition-date-panel">
 			<div class="group-title">Date Range:</div>
 			<table class="button-edit input-append" id="condition-date-range">
 				<tr>
-					<td class="editor"><input type="text" placeholder="Select Date Range..."></td>
+					<td class="editor"><input type="text" readonly placeholder="Select Date Range..."></td>
 					<td class="buttons">
 						<a class="btn" id="select-date-range" href="#"><i class="icon-calendar"/></a> <a class="btn"
 																										 id="clear-date-range"

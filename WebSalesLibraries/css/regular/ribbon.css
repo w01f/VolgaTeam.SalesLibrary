@@ -27,7 +27,7 @@ body
     -moz-box-shadow: #8b9097 0 1 3;
     box-shadow: #8b9097 0 1 3;
     z-index: 25;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
