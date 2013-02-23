@@ -142,7 +142,7 @@ namespace SalesDepot.ConfigurationClasses
 			_configurationPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Config.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			_localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));

@@ -31,8 +31,8 @@ namespace FileManager.ConfigurationClasses
 		public void Init()
 		{
 			ListsFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			WidgetFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			BannerFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			WidgetFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			BannerFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			WidgetFavsFolder = string.Format(@"{0}\newlocaldirect.com\xml\file_manager\Favorite_Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			BannerFavsFolder = string.Format(@"{0}\newlocaldirect.com\xml\file_manager\Favorite_Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 

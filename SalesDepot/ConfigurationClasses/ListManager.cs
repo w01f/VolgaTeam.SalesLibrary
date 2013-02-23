@@ -59,7 +59,7 @@ namespace SalesDepot.ConfigurationClasses
 		public void Init()
 		{
 			ListsFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			SearchGroupsLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\SDSearchButton", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			SearchGroupsLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\SDSearchButton", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			SearchTags = new SearchTags();
 		}
