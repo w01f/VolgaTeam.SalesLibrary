@@ -18,8 +18,7 @@
 		</label>
 		<br>
 		<?php endif; ?>
-	<?php $viewSource = $link->getViewSource($link->availableFormats[0]); ?>
-	<?php if ($link->originalFormat == 'video' && !isset($viewSource)): ?>
+	<?php if ($link->originalFormat == 'video' && !isset($link->universalPreview)): ?>
 		<div class="warning">
 			This Video is unavailable…<br><br>
 			Ask your Site Administrator to convert this Video to MP4.<br><br>

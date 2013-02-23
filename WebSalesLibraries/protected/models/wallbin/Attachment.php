@@ -68,10 +68,10 @@
 			}
 			$this->fileSize = file_exists($this->fullPath) ? filesize($this->fullPath) : 0;
 
-			if ($attachmentRecord->id_preview != null)
+			if (isset($attachmentRecord->id_preview))
 			{
 				$previewRecords = PreviewStorage::model()->findAll('id_container=?', array($attachmentRecord->id_preview));
-				if ($previewRecords !== null)
+				if (isset($previewRecords) && count($previewRecords) > 0)
 				{
 					$this->universalPreview = new UniversalPreviewContainer($this->parent->parent->parent->parent);
 					$this->universalPreview->load($previewRecords);
@@ -89,16 +89,26 @@
 				{
 					case 'ppt':
 						$this->availableFormats[] = 'ppt';
-						$this->availableFormats[] = 'pdf';
-						$this->availableFormats[] = 'png';
-						$this->availableFormats[] = 'jpeg';
+
+						if (isset($this->universalPreview))
+						{
+							$this->availableFormats[] = 'pdf';
+							$this->availableFormats[] = 'png';
+							$this->availableFormats[] = 'jpeg';
+						}
+
 						$this->availableFormats[] = 'email';
 						break;
 					case 'doc':
 						$this->availableFormats[] = 'doc';
-						$this->availableFormats[] = 'pdf';
-						$this->availableFormats[] = 'png';
-						$this->availableFormats[] = 'jpeg';
+
+						if (isset($this->universalPreview))
+						{
+							$this->availableFormats[] = 'pdf';
+							$this->availableFormats[] = 'png';
+							$this->availableFormats[] = 'jpeg';
+						}
+
 						$this->availableFormats[] = 'email';
 						break;
 					case 'xls':
@@ -107,58 +117,54 @@
 						break;
 					case 'pdf':
 						$this->availableFormats[] = 'pdf';
-						$this->availableFormats[] = 'png';
-						$this->availableFormats[] = 'jpeg';
+
+						if (isset($this->universalPreview))
+						{
+							$this->availableFormats[] = 'png';
+							$this->availableFormats[] = 'jpeg';
+						}
+
 						$this->availableFormats[] = 'email';
 						break;
 					case 'video':
 					case 'mp4':
-						switch ($this->browser)
-						{
-							case 'phone':
-								$this->availableFormats[] = 'tab';
-								$this->availableFormats[] = 'email';
-								break;
-							case 'mobile':
-								$this->availableFormats[] = 'mp4';
-								$this->availableFormats[] = 'tab';
-								$this->availableFormats[] = 'email';
-								$this->availableFormats[] = 'download';
-								break;
-							case 'ie':
-								$this->availableFormats[] = 'mp4';
-								$this->availableFormats[] = 'video';
-								$this->availableFormats[] = 'email';
-								$this->availableFormats[] = 'download';
-								break;
-							case 'webkit':
-								$this->availableFormats[] = 'mp4';
-								$this->availableFormats[] = 'tab';
-								$this->availableFormats[] = 'email';
-								$this->availableFormats[] = 'download';
-								break;
-							case 'firefox':
-								$this->availableFormats[] = 'mp4';
-								$this->availableFormats[] = 'ogv';
-								$this->availableFormats[] = 'email';
-								$this->availableFormats[] = 'download';
-								break;
-							case 'opera':
-								$this->availableFormats[] = 'mp4';
-								$this->availableFormats[] = 'tab';
-								$this->availableFormats[] = 'ogv';
-								$this->availableFormats[] = 'email';
-								$this->availableFormats[] = 'download';
-								break;
-							default:
-								$this->availableFormats[] = 'video';
-								$this->availableFormats[] = 'mp4';
-								$this->availableFormats[] = 'ogv';
-								$this->availableFormats[] = 'tab';
-								$this->availableFormats[] = 'email';
-								$this->availableFormats[] = 'download';
-								break;
-						}
+						if (isset($this->universalPreview))
+							switch ($this->browser)
+							{
+								case 'phone':
+									$this->availableFormats[] = 'tab';
+									break;
+								case 'mobile':
+									$this->availableFormats[] = 'mp4';
+									$this->availableFormats[] = 'tab';
+									break;
+								case 'ie':
+									$this->availableFormats[] = 'mp4';
+									$this->availableFormats[] = 'video';
+									break;
+								case 'webkit':
+									$this->availableFormats[] = 'mp4';
+									$this->availableFormats[] = 'tab';
+									break;
+								case 'firefox':
+									$this->availableFormats[] = 'mp4';
+									$this->availableFormats[] = 'ogv';
+									break;
+								case 'opera':
+									$this->availableFormats[] = 'mp4';
+									$this->availableFormats[] = 'tab';
+									$this->availableFormats[] = 'ogv';
+									break;
+								default:
+									$this->availableFormats[] = 'video';
+									$this->availableFormats[] = 'mp4';
+									$this->availableFormats[] = 'ogv';
+									$this->availableFormats[] = 'tab';
+									break;
+							}
+						$this->availableFormats[] = 'email';
+						if ($this->browser != 'phone')
+							$this->availableFormats[] = 'download';
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';
@@ -173,8 +179,8 @@
 						break;
 					default:
 						$this->originalFormat = 'other';
-						if (isset($this->link))
-							if ($this->link != '')
+						if (isset($this->fileLink))
+							if ($this->fileLink != '')
 								$this->availableFormats[] = 'url';
 						break;
 				}

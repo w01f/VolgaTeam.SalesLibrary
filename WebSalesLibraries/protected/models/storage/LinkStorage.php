@@ -55,7 +55,9 @@
 					$linkRecord->is_restricted = false;
 				$linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
 				$linkRecord->date_modify = $linkDate;
-				$linkRecord->id_preview = $link['previewId'];
+
+				if (array_key_exists('previewId', $link) && isset($link['previewId']))
+					$linkRecord->id_preview = $link['previewId'];
 
 				$contentPath = str_replace('\\', '/', $libraryRootPath . DIRECTORY_SEPARATOR . $link['contentPath']);
 				if (file_exists($contentPath) && is_file($contentPath))
@@ -303,14 +305,14 @@
 		{
 			$linksNumber = 0;
 			$childLinks = self::getLinksByParent($linkId);
-			if(isset($childLinks))
+			if (isset($childLinks))
 				foreach ($childLinks as $linkRecord)
-					switch($linkRecord->type)
+					switch ($linkRecord->type)
 					{
 						case 6:
 							break;
 						case 5:
-							$linksNumber+=	self::EnumFolderContent($linkRecord->id);
+							$linksNumber += self::EnumFolderContent($linkRecord->id);
 							break;
 						default:
 							$linksNumber++;
