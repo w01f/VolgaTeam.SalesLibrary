@@ -29,6 +29,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Extension { get; }
 		DateTime LastChanged { set; }
 		string ContainerPath { get; }
+		bool OnlyText { get; set; }
 		bool Ready { get; }
 		IPreviewContainer Clone(IPreviewStorage parent);
 		string Serialize();
@@ -66,6 +67,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string Identifier { get; private set; }
 		public string ContainerPath { get; private set; }
 		public FileTypes Type { get; set; }
+		public bool OnlyText { get; set; }
 
 		public string OriginalPath
 		{
@@ -254,6 +256,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				bool update;
 				if (!previewFolder.Exists)
 					update = true;
+				else if (OnlyText && previewFolder.GetDirectories().Count() > 1)
+					update = true;
 				else
 				{
 					var time = parentFile.LastWriteTime.Subtract(previewFolder.CreationTime);
@@ -270,7 +274,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					var previewGenerator = Parent.GetPreviewGenerator(this);
 					if (previewGenerator != null)
-						previewGenerator.GeneratePreview();
+						previewGenerator.GeneratePreview(OnlyText);
 				}
 			}
 		}

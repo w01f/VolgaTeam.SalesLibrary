@@ -15,7 +15,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			this.Parent = parent;
 		}
 
-		public void GeneratePreview()
+		public void GeneratePreview(bool onlyText = false)
 		{
 			bool update = false;
 			if (Parent.Type != FileTypes.QuickTimeVideo)

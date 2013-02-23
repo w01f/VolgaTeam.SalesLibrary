@@ -12,7 +12,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			Parent = parent;
 		}
 
-		public void GeneratePreview() { }
+		public void GeneratePreview(bool onlyText = false) { }
 		#endregion
 	}
 }

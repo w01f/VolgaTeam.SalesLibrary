@@ -6,7 +6,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 	public interface IPreviewGenerator
 	{
 		IPreviewContainer Parent { get; }
-		void GeneratePreview();
+		void GeneratePreview(bool onlyText);
 	}
 
 	public class PowerPointPreviewGenerator : IPreviewGenerator
@@ -19,12 +19,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			this.Parent = parent;
 		}
 
-		public void GeneratePreview()
+		public void GeneratePreview(bool onlyText)
 		{
-			bool update = false;
-			InteropClasses.PowerPointHelper.Instance.ExportPresentationAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, out update);
+			bool update;
+			InteropClasses.PowerPointHelper.Instance.ExportPresentationAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, onlyText, out update);
 			if (update)
-				this.Parent.LastChanged = DateTime.Now;
+				Parent.LastChanged = DateTime.Now;
 		}
 		#endregion
 	}
@@ -36,15 +36,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public WordPreviewGenerator(IPreviewContainer parent)
 		{
-			this.Parent = parent;
+			Parent = parent;
 		}
 
-		public void GeneratePreview()
+		public void GeneratePreview(bool onlyText)
 		{
-			bool update = false;
-			InteropClasses.WordHelper.Instance.ExportDocumentAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, out update);
+			bool update;
+			InteropClasses.WordHelper.Instance.ExportDocumentAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, onlyText, out update);
 			if (update)
-				this.Parent.LastChanged = DateTime.Now;
+				Parent.LastChanged = DateTime.Now;
 		}
 		#endregion
 	}
@@ -59,7 +59,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			this.Parent = parent;
 		}
 
-		public void GeneratePreview()
+		public void GeneratePreview(bool onlyText)
 		{
 			bool update = false;
 			InteropClasses.ExcelHelper.Instance.ExportBookAllFormats(this.Parent.OriginalPath, this.Parent.ContainerPath, out update);
@@ -80,39 +80,39 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			this.Parent = parent;
 		}
 
-		public void GeneratePreview()
+		public void GeneratePreview(bool onlyText)
 		{
-			string pngDestination = Path.Combine(this.Parent.ContainerPath, "png");
-			bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
-			if (!Directory.Exists(pngDestination))
+			var pngDestination = Path.Combine(this.Parent.ContainerPath, "png");
+			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0) && !onlyText;
+			if (updatePng && !Directory.Exists(pngDestination))
 				Directory.CreateDirectory(pngDestination);
-			string pngPhoneDestination = Path.Combine(this.Parent.ContainerPath, "png_phone");
-			bool updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0);
-			if (!Directory.Exists(pngPhoneDestination))
+			var pngPhoneDestination = Path.Combine(this.Parent.ContainerPath, "png_phone");
+			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0) && !onlyText;
+			if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 				Directory.CreateDirectory(pngPhoneDestination);
-			string jpgDestination = Path.Combine(this.Parent.ContainerPath, "jpg");
-			bool updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
-			if (!Directory.Exists(jpgDestination))
+			var jpgDestination = Path.Combine(this.Parent.ContainerPath, "jpg");
+			var updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0) && !onlyText;
+			if (updateJpg && !Directory.Exists(jpgDestination))
 				Directory.CreateDirectory(jpgDestination);
-			string jpgPhoneDestination = Path.Combine(this.Parent.ContainerPath, "jpg_phone");
-			bool updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0);
-			if (!Directory.Exists(jpgPhoneDestination))
+			var jpgPhoneDestination = Path.Combine(this.Parent.ContainerPath, "jpg_phone");
+			var updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0) && !onlyText;
+			if (updateJpgPhone && !Directory.Exists(jpgPhoneDestination))
 				Directory.CreateDirectory(jpgPhoneDestination);
-			string thumbsDestination = Path.Combine(this.Parent.ContainerPath, "thumbs");
-			bool updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0);
-			if (!Directory.Exists(thumbsDestination))
+			var thumbsDestination = Path.Combine(this.Parent.ContainerPath, "thumbs");
+			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0) && !onlyText;
+			if (updateThumbs && !Directory.Exists(thumbsDestination))
 				Directory.CreateDirectory(thumbsDestination);
-			string thumbsPhoneDestination = Path.Combine(this.Parent.ContainerPath, "thumbs_phone");
-			bool updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0);
-			if (!Directory.Exists(thumbsPhoneDestination))
+			var thumbsPhoneDestination = Path.Combine(this.Parent.ContainerPath, "thumbs_phone");
+			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0) && !onlyText;
+			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
 			if (updatePng || updateJpg || updateThumbs)
 				ToolClasses.PdfHelper.Instance.ExportPdf(this.Parent.OriginalPath, pngDestination, jpgDestination, thumbsDestination);
 			if (updatePngPhone || updateJpgPhone || updateThumbsPhone)
 				ToolClasses.PdfHelper.Instance.ExportPdfPhone(this.Parent.OriginalPath, pngPhoneDestination, jpgPhoneDestination, thumbsPhoneDestination);
 
-			string txtDestination = Path.Combine(this.Parent.ContainerPath, "txt");
-			bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
+			var txtDestination = Path.Combine(this.Parent.ContainerPath, "txt");
+			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
 			if (!Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
 			if (updateTxt)

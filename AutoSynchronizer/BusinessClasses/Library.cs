@@ -189,13 +189,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			foreach (var previewContainer in PreviewContainers)
 			{
 				var alive = false;
+				var onlyText = false;
 				foreach (var page in Pages)
 				{
 					foreach (var folder in page.Folders)
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							alive = (!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))) && file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+							if (!(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
+								continue;
+							alive = file.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower());
+							onlyText |= alive && file.DoNotGeneratePreview;
 							if (!alive)
 								alive = file.AttachmentProperties.FilesAttachments.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(previewContainer.OriginalPath.ToLower())) != null;
 							if (!alive && file is LibraryFolderLink)
@@ -209,7 +213,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					if (alive)
 						break;
 				}
-				if (alive) continue;
+
+				if (alive)
+				{
+					previewContainer.OnlyText = onlyText;
+					continue;
+				}
 				previewContainer.ClearContent();
 				previewContainer.OriginalPath = string.Empty;
 			}

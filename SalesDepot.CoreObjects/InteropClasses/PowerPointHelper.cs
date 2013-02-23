@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
@@ -78,128 +79,125 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			return result;
 		}
 
-		public void ExportPresentationAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
+		public void ExportPresentationAllFormats(string sourceFilePath, string destinationFolderPath, bool onlyText, out bool update)
 		{
-			string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-			bool updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
-			if (!Directory.Exists(pdfDestination))
+			var pdfDestination = Path.Combine(destinationFolderPath, "pdf");
+			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0) && !onlyText;
+			if (updatePdf && !Directory.Exists(pdfDestination))
 				Directory.CreateDirectory(pdfDestination);
-			string pngDestination = Path.Combine(destinationFolderPath, "png");
-			bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
-			if (!Directory.Exists(pngDestination))
+			var pngDestination = Path.Combine(destinationFolderPath, "png");
+			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0) && !onlyText;
+			if (updatePng && !Directory.Exists(pngDestination))
 				Directory.CreateDirectory(pngDestination);
-			string pngPhoneDestination = Path.Combine(destinationFolderPath, "png_phone");
-			bool updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0);
-			if (!Directory.Exists(pngPhoneDestination))
+			var pngPhoneDestination = Path.Combine(destinationFolderPath, "png_phone");
+			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0) && !onlyText;
+			if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 				Directory.CreateDirectory(pngPhoneDestination);
-			string jpgDestination = Path.Combine(destinationFolderPath, "jpg");
-			bool updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
-			if (!Directory.Exists(jpgDestination))
+			var jpgDestination = Path.Combine(destinationFolderPath, "jpg");
+			var updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0) && !onlyText;
+			if (updateJpg && !Directory.Exists(jpgDestination))
 				Directory.CreateDirectory(jpgDestination);
-			string jpgPhoneDestination = Path.Combine(destinationFolderPath, "jpg_phone");
-			bool updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0);
-			if (!Directory.Exists(jpgPhoneDestination))
+			var jpgPhoneDestination = Path.Combine(destinationFolderPath, "jpg_phone");
+			var updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0) && !onlyText;
+			if (updateJpgPhone && !Directory.Exists(jpgPhoneDestination))
 				Directory.CreateDirectory(jpgPhoneDestination);
-			string thumbDestination = Path.Combine(destinationFolderPath, "thumbs");
-			bool updateThumbs = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination, "*.png").Length > 0);
-			if (!Directory.Exists(thumbDestination))
+			var thumbDestination = Path.Combine(destinationFolderPath, "thumbs");
+			var updateThumbs = !(Directory.Exists(thumbDestination) && Directory.GetFiles(thumbDestination, "*.png").Length > 0) && !onlyText;
+			if (updateThumbs && !Directory.Exists(thumbDestination))
 				Directory.CreateDirectory(thumbDestination);
-			string thumbsPhoneDestination = Path.Combine(destinationFolderPath, "thumbs_phone");
-			bool updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0);
-			if (!Directory.Exists(thumbsPhoneDestination))
+			var thumbsPhoneDestination = Path.Combine(destinationFolderPath, "thumbs_phone");
+			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0) && !onlyText;
+			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
-			string pptDestination = Path.Combine(destinationFolderPath, "ppt");
-			bool updatePpt = !(Directory.Exists(pptDestination) && Directory.GetFiles(pptDestination, "*.ppt").Length > 0);
-			if (!Directory.Exists(pptDestination))
+			var pptDestination = Path.Combine(destinationFolderPath, "ppt");
+			var updatePpt = !(Directory.Exists(pptDestination) && Directory.GetFiles(pptDestination, "*.ppt").Length > 0) && !onlyText;
+			if (updatePpt && !Directory.Exists(pptDestination))
 				Directory.CreateDirectory(pptDestination);
-			string pptxDestination = Path.Combine(destinationFolderPath, "pptx");
-			bool updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination, "*.pptx").Length > 0);
-			if (!Directory.Exists(pptxDestination))
+			var pptxDestination = Path.Combine(destinationFolderPath, "pptx");
+			var updatePptx = !(Directory.Exists(pptxDestination) && Directory.GetFiles(pptxDestination, "*.pptx").Length > 0) && !onlyText;
+			if (updatePptx && !Directory.Exists(pptxDestination))
 				Directory.CreateDirectory(pptxDestination);
-			string txtDestination = Path.Combine(destinationFolderPath, "txt");
-			bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
+			var txtDestination = Path.Combine(destinationFolderPath, "txt");
+			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
 			if (!Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
 
 			update = false;
-			if (updatePdf || updatePng || updateJpg || updateThumbs || updatePpt || updatePptx || updateTxt || updatePngPhone || updateJpgPhone || updateThumbsPhone)
+			if (!updatePdf && !updatePng && !updateJpg && !updateThumbs && !updatePpt && !updatePptx && !updateTxt && !updatePngPhone && !updateJpgPhone && !updateThumbsPhone) return;
+			update = true;
+			try
 			{
-				update = true;
-				try
+				if (Connect())
 				{
-					if (Connect())
+					MessageFilter.Register();
+					var presentation = _powerPointObject.Presentations.Open(FileName: sourceFilePath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
+
+					var content = new StringBuilder();
+
+					if (updatePng || updateJpg || updateThumbs || updatePpt || updatePptx || updateTxt || updatePngPhone || updateJpgPhone || updateThumbsPhone)
 					{
-						MessageFilter.Register();
-						PowerPoint.Presentation presentation = _powerPointObject.Presentations.Open(FileName: sourceFilePath, WithWindow: Microsoft.Office.Core.MsoTriState.msoFalse);
-
-						StringBuilder content = new StringBuilder();
-
-						if (updatePng || updateJpg || updateThumbs || updatePpt || updatePptx || updateTxt || updatePngPhone || updateJpgPhone || updateThumbsPhone)
+						int i = 1;
+						var thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
+						var thumbWidth = (int)presentation.PageSetup.SlideWidth / 10;
+						var phoneHeight = (int)(presentation.PageSetup.SlideHeight / 1.5);
+						var phoneWidth = (int)(presentation.PageSetup.SlideWidth / 1.5);
+						var thumbPhoneHeight = (int)presentation.PageSetup.SlideHeight / 4;
+						var thumbPhoneWidth = (int)presentation.PageSetup.SlideWidth / 4;
+						foreach (PowerPoint.Slide slide in presentation.Slides)
 						{
-							int i = 1;
-							int thumbHeight = (int)presentation.PageSetup.SlideHeight / 10;
-							int thumbWidth = (int)presentation.PageSetup.SlideWidth / 10;
-							int phoneHeight = (int)(presentation.PageSetup.SlideHeight / 1.5);
-							int phoneWidth = (int)(presentation.PageSetup.SlideWidth / 1.5);
-							int thumbPhoneHeight = (int)presentation.PageSetup.SlideHeight / 4;
-							int thumbPhoneWidth = (int)presentation.PageSetup.SlideWidth / 4;
-							foreach (PowerPoint.Slide slide in presentation.Slides)
+							if (updatePng)
+								slide.Export(Path.Combine(pngDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG");
+							if (updatePngPhone)
+								slide.Export(Path.Combine(pngPhoneDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", phoneWidth, phoneHeight);
+							if (updateJpg)
+								slide.Export(Path.Combine(jpgDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "jpg" })), "JPG");
+							if (updateJpgPhone)
+								slide.Export(Path.Combine(jpgPhoneDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "jpg" })), "JPG", phoneWidth, phoneHeight);
+							if (updateThumbs)
+								slide.Export(Path.Combine(thumbDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", thumbWidth, thumbHeight);
+							if (updateThumbsPhone)
+								slide.Export(Path.Combine(thumbsPhoneDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", thumbPhoneWidth, thumbPhoneHeight);
+
+							if (updatePpt || updatePptx)
 							{
-								if (updatePng)
-									slide.Export(Path.Combine(pngDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG");
-								if (updatePngPhone)
-									slide.Export(Path.Combine(pngPhoneDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", phoneWidth, phoneHeight);
-								if (updateJpg)
-									slide.Export(Path.Combine(jpgDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "jpg" })), "JPG");
-								if (updateJpgPhone)
-									slide.Export(Path.Combine(jpgPhoneDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "jpg" })), "JPG", phoneWidth, phoneHeight);
-								if (updateThumbs)
-									slide.Export(Path.Combine(thumbDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", thumbWidth, thumbHeight);
-								if (updateThumbsPhone)
-									slide.Export(Path.Combine(thumbsPhoneDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "png" })), "PNG", thumbPhoneWidth, thumbPhoneHeight);
-
-								if (updatePpt || updatePptx)
-								{
-									PowerPoint.Presentation singleSlidePresentation = _powerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoFalse);
-									CopyPasteSlide(slide, singleSlidePresentation);
-									if (updatePpt)
-										singleSlidePresentation.SaveCopyAs(Path.Combine(pptDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "ppt" })), PowerPoint.PpSaveAsFileType.ppSaveAsPresentation);
-									if (updatePptx)
-										singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "pptx" })), PowerPoint.PpSaveAsFileType.ppSaveAsDefault);
-									singleSlidePresentation.Close();
-									ToolClasses.Utils.ReleaseComObject(singleSlidePresentation);
-								}
-								if (updateTxt)
-								{
-									foreach (PowerPoint.Shape shape in slide.Shapes)
-										if (shape.HasTextFrame == Microsoft.Office.Core.MsoTriState.msoTrue)
-											content.AppendLine(shape.TextFrame.TextRange.Text.Trim());
-
-								}
-								i++;
+								PowerPoint.Presentation singleSlidePresentation = _powerPointObject.Presentations.Add(Microsoft.Office.Core.MsoTriState.msoFalse);
+								CopyPasteSlide(slide, singleSlidePresentation);
+								if (updatePpt)
+									singleSlidePresentation.SaveCopyAs(Path.Combine(pptDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "ppt" })), PowerPoint.PpSaveAsFileType.ppSaveAsPresentation);
+								if (updatePptx)
+									singleSlidePresentation.SaveCopyAs(Path.Combine(pptxDestination, string.Format("Slide{0}.{1}", new string[] { i.ToString(), "pptx" })), PowerPoint.PpSaveAsFileType.ppSaveAsDefault);
+								singleSlidePresentation.Close();
+								ToolClasses.Utils.ReleaseComObject(singleSlidePresentation);
 							}
+							if (updateTxt)
+							{
+								foreach (PowerPoint.Shape shape in slide.Shapes.Cast<PowerPoint.Shape>().Where(shape => shape.HasTextFrame == Microsoft.Office.Core.MsoTriState.msoTrue))
+									content.AppendLine(shape.TextFrame.TextRange.Text.Trim());
+
+							}
+							i++;
+						}
+					}
+
+					if (updateTxt && content.Length > 0)
+						using (var sw = new StreamWriter(Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt")), false))
+						{
+							sw.Write(content.ToString());
+							sw.Flush();
 						}
 
-						if (updateTxt && content.Length > 0)
-							using (StreamWriter sw = new StreamWriter(Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt")), false))
-							{
-								sw.Write(content.ToString());
-								sw.Flush();
-							}
-
-						if (updatePdf)
-							presentation.ExportAsFixedFormat(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF);
-						ToolClasses.Utils.ReleaseComObject(presentation);
-					}
+					if (updatePdf)
+						presentation.ExportAsFixedFormat(Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf")), PowerPoint.PpFixedFormatType.ppFixedFormatTypePDF);
+					ToolClasses.Utils.ReleaseComObject(presentation);
 				}
-				catch
-				{
-				}
-				finally
-				{
-					MessageFilter.Revoke();
-					Disconnect();
-				}
+			}
+			catch
+			{
+			}
+			finally
+			{
+				MessageFilter.Revoke();
+				Disconnect();
 			}
 		}
 

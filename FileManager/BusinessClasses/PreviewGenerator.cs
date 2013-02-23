@@ -15,7 +15,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#region IPreviewGenerator Members
 		public IPreviewContainer Parent { get; private set; }
 
-		public void GeneratePreview()
+		public void GeneratePreview(bool onlyText = false)
 		{
 			bool update = false;
 			if (Parent.Type != FileTypes.QuickTimeVideo)

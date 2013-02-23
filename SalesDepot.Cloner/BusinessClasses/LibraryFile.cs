@@ -23,6 +23,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private Image _widget;
 		private bool _isRestricted;
 		private string _assignedUsers;
+		private bool _doNotGeneratePreview;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -395,6 +396,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool DoNotGeneratePreview
+		{
+			get { return _doNotGeneratePreview; }
+			set
+			{
+				if (_doNotGeneratePreview != value)
+					LastChanged = DateTime.Now;
+				_doNotGeneratePreview = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -411,6 +423,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.AddDate = AddDate;
 			file.IsRestricted = IsRestricted;
 			file.AssignedUsers = AssignedUsers;
+			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -443,6 +456,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
+			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.Append(SearchTags.Serialize());
 			result.Append(CustomKeywords.Serialize());
@@ -563,6 +577,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 					case "FileCard":
 						FileCard.Deserialize(childNode);
+						break;
+					case "DoNotGeneratePreview":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_doNotGeneratePreview = tempBool;
 						break;
 
 					#region Compatibility with old version of Sales Depot
@@ -739,6 +757,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsRestricted = IsRestricted;
+			file.AssignedUsers = AssignedUsers;
+			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -809,6 +830,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					libraryFile.SetProperties();
 					libraryFile.InitBannerProperties();
 					libraryFile.Parent.Parent.Parent.GetPreviewContainer(libraryFile.OriginalPath);
+					libraryFile.GetPresentationProperties();
 					libraryFile.PreviewContainer = new PresentationPreviewContainer(libraryFile);
 					FolderContent.Add(libraryFile);
 				}

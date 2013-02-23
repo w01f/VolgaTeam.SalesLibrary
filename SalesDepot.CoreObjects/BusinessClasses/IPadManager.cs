@@ -251,7 +251,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			#endregion
 
 			var autoWidgets = new List<Services.ContentManagmentService.AutoWidget>();
-			foreach (AutoWidget libraryAutoWidget in Parent.AutoWidgets)
+			foreach (var libraryAutoWidget in Parent.AutoWidgets)
 			{
 				var autoWidget = new Services.ContentManagmentService.AutoWidget();
 				autoWidget.libraryId = Parent.Identifier.ToString();
@@ -262,7 +262,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.autoWidgets = autoWidgets.ToArray();
 
 			var previewContainers = new List<Services.ContentManagmentService.UniversalPreviewContainer>();
-			foreach (IPreviewContainer libraryPreviewContainer in Parent.PreviewContainers)
+			foreach (var libraryPreviewContainer in Parent.PreviewContainers.Where(x => !x.OnlyText))
 			{
 				var previewContainer = new Services.ContentManagmentService.UniversalPreviewContainer();
 				previewContainer.id = libraryPreviewContainer.Identifier;
@@ -361,11 +361,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			if (libraryFile.Type == FileTypes.BuggyPresentation || libraryFile.Type == FileTypes.FriendlyPresentation || libraryFile.Type == FileTypes.Presentation || libraryFile.Type == FileTypes.Other || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo)
 			{
-				IPreviewContainer previewContainer = library.GetPreviewContainer(libraryFile.OriginalPath);
+				var previewContainer = library.GetPreviewContainer(libraryFile.OriginalPath);
 				if (previewContainer != null)
 				{
-					destinationLink.previewId = previewContainer.Identifier;
-					string[] txtLinks = previewContainer.GetPreviewLinks("txt");
+					destinationLink.previewId = !previewContainer.OnlyText ? previewContainer.Identifier : null;
+					var txtLinks = previewContainer.GetPreviewLinks("txt");
 					if (txtLinks != null && txtLinks.Length > 0)
 						destinationLink.contentPath = txtLinks[0];
 				}

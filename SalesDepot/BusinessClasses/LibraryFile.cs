@@ -24,6 +24,7 @@ namespace SalesDepot.BusinessClasses
 		private string _linkRemotePath = string.Empty;
 		private string _note = string.Empty;
 		private Image _widget;
+		private bool _doNotGeneratePreview;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -345,6 +346,17 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
+		public bool DoNotGeneratePreview
+		{
+			get { return _doNotGeneratePreview; }
+			set
+			{
+				if (_doNotGeneratePreview != value)
+					LastChanged = DateTime.Now;
+				_doNotGeneratePreview = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -361,6 +373,7 @@ namespace SalesDepot.BusinessClasses
 			file.AddDate = AddDate;
 			file.IsRestricted = IsRestricted;
 			file.AssignedUsers = AssignedUsers;
+			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -387,6 +400,7 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<Order>" + Order + @"</Order>");
 			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
+			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(SearchTags.Serialize());
@@ -474,6 +488,10 @@ namespace SalesDepot.BusinessClasses
 					case "LastChanged":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							LastChanged = tempDate;
+						break;
+					case "DoNotGeneratePreview":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_doNotGeneratePreview = tempBool;
 						break;
 					case "SearchTags":
 						SearchTags.Deserialize(childNode);
@@ -684,8 +702,8 @@ namespace SalesDepot.BusinessClasses
 					if (Widget != null) continue;
 					EnableWidget = true;
 					Widget = Properties.Resources.FolderContentFolder;
-					ApplyWidgetsForFolderContent();
 				}
+			ApplyWidgetsForFolderContent();
 		}
 
 		private void ApplyWidgetsForFolderContent()

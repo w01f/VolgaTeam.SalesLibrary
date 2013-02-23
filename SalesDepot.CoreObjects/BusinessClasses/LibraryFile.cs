@@ -29,6 +29,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		bool DisplayAsBold { get; }
 		bool IsExpired { get; }
 		bool IsRestricted { get; set; }
+		bool DoNotGeneratePreview { get; set; }
 		string AssignedUsers { get; set; }
 		Image Widget { get; set; }
 

@@ -57,116 +57,114 @@ namespace SalesDepot.CoreObjects.InteropClasses
 			GC.WaitForPendingFinalizers();
 		}
 
-		public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath, out bool update)
+		public void ExportDocumentAllFormats(string sourceFilePath, string destinationFolderPath, bool onlyText, out bool update)
 		{
-			string pdfDestination = Path.Combine(destinationFolderPath, "pdf");
-			bool updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0);
-			if (!Directory.Exists(pdfDestination))
+			var pdfDestination = Path.Combine(destinationFolderPath, "pdf");
+			var updatePdf = !(Directory.Exists(pdfDestination) && Directory.GetFiles(pdfDestination, "*.pdf").Length > 0) && !onlyText;
+			if (updatePdf && !Directory.Exists(pdfDestination))
 				Directory.CreateDirectory(pdfDestination);
-			string pngDestination = Path.Combine(destinationFolderPath, "png");
-			bool updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0);
-			if (!Directory.Exists(pngDestination))
+			var pngDestination = Path.Combine(destinationFolderPath, "png");
+			var updatePng = !(Directory.Exists(pngDestination) && Directory.GetFiles(pngDestination, "*.png").Length > 0) && !onlyText;
+			if (updatePng && !Directory.Exists(pngDestination))
 				Directory.CreateDirectory(pngDestination);
-			string pngPhoneDestination = Path.Combine(destinationFolderPath, "png_phone");
-			bool updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0);
-			if (!Directory.Exists(pngPhoneDestination))
+			var pngPhoneDestination = Path.Combine(destinationFolderPath, "png_phone");
+			var updatePngPhone = !(Directory.Exists(pngPhoneDestination) && Directory.GetFiles(pngPhoneDestination, "*.png").Length > 0) && !onlyText;
+			if (updatePngPhone && !Directory.Exists(pngPhoneDestination))
 				Directory.CreateDirectory(pngPhoneDestination);
-			string jpgDestination = Path.Combine(destinationFolderPath, "jpg");
-			bool updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0);
-			if (!Directory.Exists(jpgDestination))
+			var jpgDestination = Path.Combine(destinationFolderPath, "jpg");
+			var updateJpg = !(Directory.Exists(jpgDestination) && Directory.GetFiles(jpgDestination, "*.jpg").Length > 0) && !onlyText;
+			if (updateJpg && !Directory.Exists(jpgDestination))
 				Directory.CreateDirectory(jpgDestination);
-			string jpgPhoneDestination = Path.Combine(destinationFolderPath, "jpg_phone");
-			bool updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0);
-			if (!Directory.Exists(jpgPhoneDestination))
+			var jpgPhoneDestination = Path.Combine(destinationFolderPath, "jpg_phone");
+			var updateJpgPhone = !(Directory.Exists(jpgPhoneDestination) && Directory.GetFiles(jpgPhoneDestination, "*.jpg").Length > 0) && !onlyText;
+			if (updateJpgPhone && !Directory.Exists(jpgPhoneDestination))
 				Directory.CreateDirectory(jpgPhoneDestination);
-			string thumbsDestination = Path.Combine(destinationFolderPath, "thumbs");
-			bool updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0);
-			if (!Directory.Exists(thumbsDestination))
+			var thumbsDestination = Path.Combine(destinationFolderPath, "thumbs");
+			var updateThumbs = !(Directory.Exists(thumbsDestination) && Directory.GetFiles(thumbsDestination, "*.png").Length > 0) && !onlyText;
+			if (updateThumbs && !Directory.Exists(thumbsDestination))
 				Directory.CreateDirectory(thumbsDestination);
-			string thumbsPhoneDestination = Path.Combine(destinationFolderPath, "thumbs_phone");
-			bool updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0);
-			if (!Directory.Exists(thumbsPhoneDestination))
+			var thumbsPhoneDestination = Path.Combine(destinationFolderPath, "thumbs_phone");
+			var updateThumbsPhone = !(Directory.Exists(thumbsPhoneDestination) && Directory.GetFiles(thumbsPhoneDestination, "*.png").Length > 0) && !onlyText;
+			if (updateThumbsPhone && !Directory.Exists(thumbsPhoneDestination))
 				Directory.CreateDirectory(thumbsPhoneDestination);
-			string docDestination = Path.Combine(destinationFolderPath, "doc");
-			bool updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0);
-			if (!Directory.Exists(docDestination))
+			var docDestination = Path.Combine(destinationFolderPath, "doc");
+			var updateDoc = !(Directory.Exists(docDestination) && Directory.GetFiles(docDestination, "*.doc").Length > 0) && !onlyText;
+			if (updateDoc && !Directory.Exists(docDestination))
 				Directory.CreateDirectory(docDestination);
-			string docxDestination = Path.Combine(destinationFolderPath, "docx");
-			bool updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0);
-			if (!Directory.Exists(docxDestination))
+			var docxDestination = Path.Combine(destinationFolderPath, "docx");
+			var updateDocx = !(Directory.Exists(docxDestination) && Directory.GetFiles(docxDestination, "*.docx").Length > 0) && !onlyText;
+			if (updateDocx && !Directory.Exists(docxDestination))
 				Directory.CreateDirectory(docxDestination);
-			string txtDestination = Path.Combine(destinationFolderPath, "txt");
-			bool updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
+			var txtDestination = Path.Combine(destinationFolderPath, "txt");
+			var updateTxt = !(Directory.Exists(txtDestination) && Directory.GetFiles(txtDestination, "*.txt").Length > 0);
 			if (!Directory.Exists(txtDestination))
 				Directory.CreateDirectory(txtDestination);
 
 			update = false;
-			if (updatePdf || updatePng || updateJpg || updateThumbs || updateDoc || updateDocx || updateTxt || updatePngPhone || updateJpgPhone || updateThumbsPhone)
+			if (!updatePdf && !updatePng && !updateJpg && !updateThumbs && !updateDoc && !updateDocx && !updateTxt && !updatePngPhone && !updateJpgPhone && !updateThumbsPhone) return;
+			update = true;
+			try
 			{
-				update = true;
-				try
+				if (Connect())
 				{
-					if (Connect())
+					MessageFilter.Register();
+
+					Word.Document document = _wordObject.Documents.Open(FileName: sourceFilePath);
+
+					string pdfFileName = Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf"));
+					if (updatePdf)
+						document.ExportAsFixedFormat(OutputFileName: pdfFileName, ExportFormat: Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
+
+					if (updateJpg || updatePng || updateThumbs)
+						ToolClasses.PdfHelper.Instance.ExportPdf(pdfFileName, pngDestination, jpgDestination, thumbsDestination);
+					if (updateJpgPhone || updatePngPhone || updateThumbsPhone)
+						ToolClasses.PdfHelper.Instance.ExportPdfPhone(pdfFileName, pngPhoneDestination, jpgPhoneDestination, thumbsPhoneDestination);
+
+					var txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt"));
+					if (updateTxt)
 					{
-						MessageFilter.Register();
-
-						Word.Document document = _wordObject.Documents.Open(FileName: sourceFilePath);
-
-						string pdfFileName = Path.Combine(pdfDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "pdf"));
-						if (updatePdf)
-							document.ExportAsFixedFormat(OutputFileName: pdfFileName, ExportFormat: Microsoft.Office.Interop.Word.WdExportFormat.wdExportFormatPDF);
-
-						if (updateJpg || updatePng || updateThumbs)
-							ToolClasses.PdfHelper.Instance.ExportPdf(pdfFileName, pngDestination, jpgDestination, thumbsDestination);
-						if (updateJpgPhone || updatePngPhone || updateThumbsPhone)
-							ToolClasses.PdfHelper.Instance.ExportPdfPhone(pdfFileName, pngPhoneDestination, jpgPhoneDestination, thumbsPhoneDestination);
-
-						string txtFileName = Path.Combine(txtDestination, Path.ChangeExtension(Path.GetFileName(sourceFilePath), "txt"));
-						if (updateTxt)
+						using (var sw = new StreamWriter(txtFileName, false))
 						{
-							using (StreamWriter sw = new StreamWriter(txtFileName, false))
-							{
-								sw.Write(document.Content.Text);
-								sw.Flush();
-							}
+							sw.Write(document.Content.Text);
+							sw.Flush();
 						}
-
-						if (updateDoc || updateDocx)
-						{
-							_wordObject.Browser.Target = Word.WdBrowseTarget.wdBrowsePage;
-							for (int i = 1; i <= document.ComputeStatistics(Word.WdStatistic.wdStatisticPages); i++)
-							{
-								document.Bookmarks["\\page"].Range.Copy();
-
-								Word.Document singlePageDocument = _wordObject.Documents.Add();
-								singlePageDocument.Activate();
-								_wordObject.Selection.Paste();
-								_wordObject.Selection.TypeBackspace();
-
-								if (updateDoc)
-									singlePageDocument.SaveAs(Path.Combine(docDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "doc" })), Word.WdSaveFormat.wdFormatDocument);
-								if (updateDocx)
-									singlePageDocument.SaveAs(Path.Combine(docxDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "docx" })), Word.WdSaveFormat.wdFormatXMLDocument);
-
-								((Word._Document)singlePageDocument).Close();
-								ToolClasses.Utils.ReleaseComObject(singlePageDocument);
-								document.Activate();
-								_wordObject.Browser.Next();
-							}
-						}
-
-						((Word._Document)document).Close(false);
-						ToolClasses.Utils.ReleaseComObject(document);
 					}
+
+					if (updateDoc || updateDocx)
+					{
+						_wordObject.Browser.Target = Word.WdBrowseTarget.wdBrowsePage;
+						for (int i = 1; i <= document.ComputeStatistics(Word.WdStatistic.wdStatisticPages); i++)
+						{
+							document.Bookmarks["\\page"].Range.Copy();
+
+							Word.Document singlePageDocument = _wordObject.Documents.Add();
+							singlePageDocument.Activate();
+							_wordObject.Selection.Paste();
+							_wordObject.Selection.TypeBackspace();
+
+							if (updateDoc)
+								singlePageDocument.SaveAs(Path.Combine(docDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "doc" })), Word.WdSaveFormat.wdFormatDocument);
+							if (updateDocx)
+								singlePageDocument.SaveAs(Path.Combine(docxDestination, string.Format("Page{0}.{1}", new string[] { i.ToString(), "docx" })), Word.WdSaveFormat.wdFormatXMLDocument);
+
+							((Word._Document)singlePageDocument).Close();
+							ToolClasses.Utils.ReleaseComObject(singlePageDocument);
+							document.Activate();
+							_wordObject.Browser.Next();
+						}
+					}
+
+					((Word._Document)document).Close(false);
+					ToolClasses.Utils.ReleaseComObject(document);
 				}
-				catch
-				{
-				}
-				finally
-				{
-					MessageFilter.Revoke();
-					Disconnect();
-				}
+			}
+			catch
+			{
+			}
+			finally
+			{
+				MessageFilter.Revoke();
+				Disconnect();
 			}
 		}
 	}
