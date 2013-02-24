@@ -11,18 +11,14 @@
 		</div><br>
 		<?php endif; ?>
 	</div>
-	<?php if ($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf' || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
-		<label class="checkbox">
-			<input class="use-fullscreen" type="checkbox" value="">
-			Open PNG and JPEG images in a new Browser tab
-		</label>
+	<?php if ((($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && isset($link->universalPreview)) || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
+		<label class="checkbox"> <input class="use-fullscreen" type="checkbox"
+										value=""> Open PNG and JPEG images in a new Browser tab </label>
 		<br>
 		<?php endif; ?>
-	<?php if ($link->originalFormat == 'video' && !isset($link->universalPreview)): ?>
+	<?php if (($link->originalFormat == 'video' || $link->originalFormat == 'mp4') && !isset($link->universalPreview)): ?>
 		<div class="warning">
-			This Video is unavailable…<br><br>
-			Ask your Site Administrator to convert this Video to MP4.<br><br>
-			Then the video can be accessed.<br><br>
+			This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 		</div>
 		<?php else: ?>
 		<ul class="format-list">
@@ -76,6 +72,7 @@
 				<li <?if ($link->browser != 'mobile'): ?>rel="tooltip"
 						title="<?echo Yii::app()->params['tooltips']['preview_dialog'][$format];?>"<?php endif; ?>>
 					<img src="<?php echo $imageSource; ?>"/>
+
 					<div class="service-data">
 						<div class="link-id"><?php echo $link->id; ?></div>
 						<div class="file-type"><?php echo $link->originalFormat; ?></div>
@@ -98,6 +95,7 @@
 			<li <?if ($link->browser != 'mobile'): ?>rel="tooltip"
 					title="<?echo Yii::app()->params['tooltips']['preview_dialog']['favorites'];?>"<?php endif; ?>>
 				<img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/favorites.png'; ?>"/>
+
 				<div class="service-data">
 					<div class="link-id"><?php echo $link->id; ?></div>
 					<div class="file-type"><?php echo $link->originalFormat; ?></div>
