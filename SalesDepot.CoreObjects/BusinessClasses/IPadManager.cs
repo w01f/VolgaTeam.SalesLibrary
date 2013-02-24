@@ -262,63 +262,66 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.autoWidgets = autoWidgets.ToArray();
 
 			var previewContainers = new List<Services.ContentManagmentService.UniversalPreviewContainer>();
-			foreach (var libraryPreviewContainer in Parent.PreviewContainers.Where(x => !x.OnlyText))
+			foreach (var libraryPreviewContainer in Parent.PreviewContainers)
 			{
 				var previewContainer = new Services.ContentManagmentService.UniversalPreviewContainer();
 				previewContainer.id = libraryPreviewContainer.Identifier;
 				previewContainer.libraryId = Parent.Identifier.ToString();
 
-				Size thumbSize = libraryPreviewContainer.GetThumbSize();
-				previewContainer.thumbsWidth = thumbSize.Width;
-				previewContainer.thumbsHeight = thumbSize.Height;
+				if (!libraryPreviewContainer.OnlyText)
+				{
+					var thumbSize = libraryPreviewContainer.GetThumbSize();
+					previewContainer.thumbsWidth = thumbSize.Width;
+					previewContainer.thumbsHeight = thumbSize.Height;
 
-				string[] pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
-				if (pngLinks != null && pngLinks.Length > 0)
-					previewContainer.pngLinks = pngLinks;
+					var pngLinks = libraryPreviewContainer.GetPreviewLinks("png");
+					if (pngLinks != null && pngLinks.Length > 0)
+						previewContainer.pngLinks = pngLinks;
 
-				string[] pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
-				if (pngPhoneLinks != null && pngPhoneLinks.Length > 0)
-					previewContainer.pngPhoneLinks = pngPhoneLinks;
+					var pngPhoneLinks = libraryPreviewContainer.GetPreviewLinks("png_phone");
+					if (pngPhoneLinks != null && pngPhoneLinks.Length > 0)
+						previewContainer.pngPhoneLinks = pngPhoneLinks;
 
-				string[] jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
-				if (jpegLinks != null && jpegLinks.Length > 0)
-					previewContainer.jpegLinks = jpegLinks;
+					var jpegLinks = libraryPreviewContainer.GetPreviewLinks("jpg");
+					if (jpegLinks != null && jpegLinks.Length > 0)
+						previewContainer.jpegLinks = jpegLinks;
 
-				string[] jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
-				if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
-					previewContainer.jpegPhoneLinks = jpegPhoneLinks;
+					var jpegPhoneLinks = libraryPreviewContainer.GetPreviewLinks("jpg_phone");
+					if (jpegPhoneLinks != null && jpegPhoneLinks.Length > 0)
+						previewContainer.jpegPhoneLinks = jpegPhoneLinks;
 
-				string[] pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
-				if (pdfLinks != null && pdfLinks.Length > 0)
-					previewContainer.pdfLinks = pdfLinks;
+					var pdfLinks = libraryPreviewContainer.GetPreviewLinks("pdf");
+					if (pdfLinks != null && pdfLinks.Length > 0)
+						previewContainer.pdfLinks = pdfLinks;
 
-				string[] wmvLinks = libraryPreviewContainer.GetPreviewLinks("wmv");
+					var oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
+					if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
+						previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
+
+					var newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
+					if (newOfficeLinks != null && newOfficeLinks.Length > 0)
+						previewContainer.newOfficeFormatLinks = newOfficeLinks;
+
+					var thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
+					if (thumbsLinks != null && thumbsLinks.Length > 0)
+						previewContainer.thumbsLinks = thumbsLinks;
+
+					var thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
+					if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
+						previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
+				}
+
+				var wmvLinks = libraryPreviewContainer.GetPreviewLinks("wmv");
 				if (wmvLinks != null && wmvLinks.Length > 0)
 					previewContainer.wmvLinks = wmvLinks;
 
-				string[] mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
+				var mp4Links = libraryPreviewContainer.GetPreviewLinks("mp4");
 				if (mp4Links != null && mp4Links.Length > 0)
 					previewContainer.mp4Links = mp4Links;
 
-				string[] ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
+				var ogvLinks = libraryPreviewContainer.GetPreviewLinks("ogv");
 				if (ogvLinks != null && ogvLinks.Length > 0)
 					previewContainer.ogvLinks = ogvLinks;
-
-				string[] oldOfficeLinks = libraryPreviewContainer.GetPreviewLinks("old office");
-				if (oldOfficeLinks != null && oldOfficeLinks.Length > 0)
-					previewContainer.oldOfficeFormatLinks = oldOfficeLinks;
-
-				string[] newOfficeLinks = libraryPreviewContainer.GetPreviewLinks("new office");
-				if (newOfficeLinks != null && newOfficeLinks.Length > 0)
-					previewContainer.newOfficeFormatLinks = newOfficeLinks;
-
-				string[] thumbsLinks = libraryPreviewContainer.GetPreviewLinks("thumbs");
-				if (thumbsLinks != null && thumbsLinks.Length > 0)
-					previewContainer.thumbsLinks = thumbsLinks;
-
-				string[] thumbsPhoneLinks = libraryPreviewContainer.GetPreviewLinks("thumbs_phone");
-				if (thumbsPhoneLinks != null && thumbsPhoneLinks.Length > 0)
-					previewContainer.thumbsPhoneLinks = thumbsPhoneLinks;
 
 				previewContainers.Add(previewContainer);
 			}
@@ -364,7 +367,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				var previewContainer = library.GetPreviewContainer(libraryFile.OriginalPath);
 				if (previewContainer != null)
 				{
-					destinationLink.previewId = !previewContainer.OnlyText ? previewContainer.Identifier : null;
+					destinationLink.previewId = !previewContainer.OnlyText || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo ? previewContainer.Identifier : null;
 					var txtLinks = previewContainer.GetPreviewLinks("txt");
 					if (txtLinks != null && txtLinks.Length > 0)
 						destinationLink.contentPath = txtLinks[0];
