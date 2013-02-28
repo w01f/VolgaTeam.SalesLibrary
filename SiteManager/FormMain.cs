@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using FileManager.Controllers;
 using SalesDepot.SiteManager.ConfigurationClasses;
 using SalesDepot.SiteManager.TabPages;
 
@@ -16,10 +17,10 @@ namespace SalesDepot.SiteManager
 		{
 			InitializeComponent();
 
-			TabHome = new TabHomeControl();
+			TabUsers = new TabUsersControl();
 		}
 
-		public TabHomeControl TabHome { get; private set; }
+		public TabUsersControl TabUsers { get; private set; }
 
 		public static FormMain Instance
 		{
@@ -31,24 +32,29 @@ namespace SalesDepot.SiteManager
 			if (File.Exists(SettingsManager.Instance.IconPath))
 				Icon = new Icon(SettingsManager.Instance.IconPath);
 			if (File.Exists(SettingsManager.Instance.LogoPath))
-				labelItemHomeLogo.Image = new Bitmap(SettingsManager.Instance.LogoPath);
+			{
+				var image = new Bitmap(SettingsManager.Instance.LogoPath);
+				labelItemUsersLogo.Image = image;
+				labelItemActivitiesLogo.Image = image;
+			}
 
-			TabHome = new TabHomeControl();
-			buttonItemHomeAdd.Click += TabHome.buttonItemIPadUsersAdd_Click;
-			buttonItemHomeEdit.Click += TabHome.buttonItemIPadUsersEdit_Click;
-			buttonItemHomeDelete.Click += TabHome.buttonItemIPadUsersDelete_Click;
-			buttonItemHomeRefresh.Click += TabHome.buttonItemIPadUsersRefresh_Click;
-			buttonItemHomeImport.Click += TabHome.buttonItemIPadUsersImport_Click;
-			if (!pnMain.Controls.Contains(TabHome))
-				pnMain.Controls.Add(TabHome);
+			MainController.Instance.InitializeControllers();
+			MainController.Instance.LoadDataAndGUI();
+
+			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
 		}
 
-		private void FormMain_Shown(object sender, EventArgs e)
+		private void ribbonControl_SelectedRibbonTabChanged(object sender, EventArgs e)
 		{
-			TabHome.InitControl();
+			var key = TabPageEnum.Users;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemUsers)
+				key = TabPageEnum.Users;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemActivities)
+				key = TabPageEnum.Activities;
+			MainController.Instance.ShowTab(key);
 		}
 
-		private void buttonItemHomeExit_Click(object sender, EventArgs e)
+		private void buttonItemExit_Click(object sender, EventArgs e)
 		{
 			Close();
 		}

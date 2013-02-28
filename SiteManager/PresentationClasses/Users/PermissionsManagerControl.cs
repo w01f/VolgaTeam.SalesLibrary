@@ -13,7 +13,7 @@ using SalesDepot.Services.IPadAdminService;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ToolForms;
 
-namespace SalesDepot.SiteManager.PresentationClasses
+namespace SalesDepot.SiteManager.PresentationClasses.Users
 {
 	[ToolboxItem(false)]
 	public sealed partial class PermissionsManagerControl : UserControl
@@ -40,27 +40,27 @@ namespace SalesDepot.SiteManager.PresentationClasses
 
 			if (xtraTabControl.SelectedTabPage == xtraTabPageUsers)
 			{
-				FormMain.Instance.buttonItemHomeAdd.Enabled = HasConnection;
-				FormMain.Instance.buttonItemHomeEdit.Enabled = gridControlUsers.FocusedView as GridView != null && (gridControlUsers.FocusedView as GridView).GetFocusedRow() != null;
-				FormMain.Instance.buttonItemHomeDelete.Enabled = gridControlUsers.FocusedView as GridView != null && (gridControlUsers.FocusedView as GridView).GetFocusedRow() != null;
+				FormMain.Instance.buttonItemUsersAdd.Enabled = HasConnection;
+				FormMain.Instance.buttonItemUsersEdit.Enabled = gridControlUsers.FocusedView as GridView != null && (gridControlUsers.FocusedView as GridView).GetFocusedRow() != null;
+				FormMain.Instance.buttonItemUsersDelete.Enabled = gridControlUsers.FocusedView as GridView != null && (gridControlUsers.FocusedView as GridView).GetFocusedRow() != null;
 			}
 			else if (xtraTabControl.SelectedTabPage == xtraTabPageGroups)
 			{
-				FormMain.Instance.buttonItemHomeAdd.Enabled = HasConnection;
-				FormMain.Instance.buttonItemHomeEdit.Enabled = gridControlGroups.FocusedView as GridView != null && (gridControlGroups.FocusedView as GridView).GetFocusedRow() != null;
-				FormMain.Instance.buttonItemHomeDelete.Enabled = gridControlGroups.FocusedView as GridView != null && (gridControlGroups.FocusedView as GridView).GetFocusedRow() != null;
+				FormMain.Instance.buttonItemUsersAdd.Enabled = HasConnection;
+				FormMain.Instance.buttonItemUsersEdit.Enabled = gridControlGroups.FocusedView as GridView != null && (gridControlGroups.FocusedView as GridView).GetFocusedRow() != null;
+				FormMain.Instance.buttonItemUsersDelete.Enabled = gridControlGroups.FocusedView as GridView != null && (gridControlGroups.FocusedView as GridView).GetFocusedRow() != null;
 			}
 			else if (xtraTabControl.SelectedTabPage == xtraTabPageLibraries)
 			{
-				FormMain.Instance.buttonItemHomeAdd.Enabled = false;
-				FormMain.Instance.buttonItemHomeEdit.Enabled = gridControlPages.FocusedView as GridView != null && ((gridControlPages.FocusedView as GridView).GetFocusedRow() as LibraryPage) != null;
-				FormMain.Instance.buttonItemHomeDelete.Enabled = false;
+				FormMain.Instance.buttonItemUsersAdd.Enabled = false;
+				FormMain.Instance.buttonItemUsersEdit.Enabled = gridControlPages.FocusedView as GridView != null && ((gridControlPages.FocusedView as GridView).GetFocusedRow() as LibraryPage) != null;
+				FormMain.Instance.buttonItemUsersDelete.Enabled = false;
 			}
 			else
 			{
-				FormMain.Instance.buttonItemHomeAdd.Enabled = false;
-				FormMain.Instance.buttonItemHomeEdit.Enabled = false;
-				FormMain.Instance.buttonItemHomeDelete.Enabled = false;
+				FormMain.Instance.buttonItemUsersAdd.Enabled = false;
+				FormMain.Instance.buttonItemUsersEdit.Enabled = false;
+				FormMain.Instance.buttonItemUsersDelete.Enabled = false;
 			}
 		}
 

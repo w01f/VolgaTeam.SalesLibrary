@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:StatisticControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="StatisticController" targetNamespace="urn:StatisticControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:StatisticControllerwsdl">
+      <xsd:complexType name="UserActivityArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:UserActivity[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="UserActivity">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="date" type="xsd:string" />
+          <xsd:element name="type" type="xsd:string" />
+          <xsd:element name="subType" type="xsd:string" />
+          <xsd:element name="login" type="xsd:string" />
+          <xsd:element name="firstName" type="xsd:string" />
+          <xsd:element name="lastName" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="groups" type="xsd:string" />
+          <xsd:element name="ip" type="xsd:string" />
+          <xsd:element name="os" type="xsd:string" />
+          <xsd:element name="device" type="xsd:string" />
+          <xsd:element name="browser" type="xsd:string" />
+          <xsd:element name="details" type="tns:ActivityDetailArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="ActivityDetailArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:ActivityDetail[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ActivityDetail">
+        <xsd:all>
+          <xsd:element name="tag" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getSessionKeyRequest">
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSessionKeyResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getActivitiesRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getActivitiesResponse">
+    <wsdl:part name="return" type="tns:UserActivityArray" />
+  </wsdl:message>
+  <wsdl:portType name="StatisticControllerPortType">
+    <wsdl:operation name="getSessionKey">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getSessionKeyRequest" />
+      <wsdl:output message="tns:getSessionKeyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getActivities">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getActivitiesRequest" />
+      <wsdl:output message="tns:getActivitiesResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StatisticControllerBinding" type="tns:StatisticControllerPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getSessionKey">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getSessionKey" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getActivities">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getActivities" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StatisticControllerService">
+    <wsdl:port name="StatisticControllerPort" binding="tns:StatisticControllerBinding">
+      <soap:address location="http://localhost/SalesLibraries/statistic/quote?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

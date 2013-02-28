@@ -86,25 +86,40 @@
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\SiteManager.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\PermissionsManagerControl.cs">
+    <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\PermissionsManagerControl.Designer.cs">
+    <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.Designer.cs">
+      <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Users\PermissionsManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Users\PermissionsManagerControl.Designer.cs">
       <DependentUpon>PermissionsManagerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TabPages\TabHomeControl.cs">
+    <Compile Include="TabPages\TabActivitiesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TabPages\TabHomeControl.Designer.cs">
-      <DependentUpon>TabHomeControl.cs</DependentUpon>
+    <Compile Include="TabPages\TabActivitiesControl.Designer.cs">
+      <DependentUpon>TabActivitiesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\TabUsersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabUsersControl.Designer.cs">
+      <DependentUpon>TabUsersControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\PasswordHelper.cs" />
     <Compile Include="ToolForms\FormEditGroup.cs">
@@ -134,7 +149,11 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\PermissionsManagerControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Activities\ActivitiesManagerControl.resx">
+      <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Users\PermissionsManagerControl.resx">
       <DependentUpon>PermissionsManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -149,8 +168,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="TabPages\TabHomeControl.resx">
-      <DependentUpon>TabHomeControl.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\TabActivitiesControl.resx">
+      <DependentUpon>TabActivitiesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabUsersControl.resx">
+      <DependentUpon>TabUsersControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormEditGroup.resx">
       <DependentUpon>FormEditGroup.cs</DependentUpon>

@@ -1,4 +1,4 @@
-﻿namespace SalesDepot.SiteManager.PresentationClasses
+﻿namespace SalesDepot.SiteManager.PresentationClasses.Users
 {
 	sealed partial class PermissionsManagerControl
     {

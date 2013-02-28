@@ -1,6 +1,6 @@
 ﻿namespace SalesDepot.SiteManager.TabPages
 {
-    partial class TabHomeControl
+    partial class TabActivitiesControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,12 +36,12 @@
 			// 
 			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
-			// TabHomeControl
+			// TabUsersControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "TabHomeControl";
+			this.Name = "TabUsersControl";
 			this.Size = new System.Drawing.Size(977, 603);
 			this.ResumeLayout(false);
 

@@ -9,6 +9,7 @@ using System.Xml;
 using Newtonsoft.Json;
 using SalesDepot.Services.ContentManagmentService;
 using SalesDepot.Services.IPadAdminService;
+using SalesDepot.Services.StatisticService;
 using Attachment = SalesDepot.Services.ContentManagmentService.Attachment;
 using Banner = SalesDepot.Services.ContentManagmentService.Banner;
 using Column = SalesDepot.Services.ContentManagmentService.Column;
@@ -24,7 +25,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class IPadManager
 	{
-		private SitePermissionsManager _sitePermissionsManager;
+		private SiteClient _siteClient;
 
 		public IPadManager(ILibrary parent)
 		{
@@ -89,7 +90,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 				}
 			}
-			_sitePermissionsManager = new SitePermissionsManager(Website, Login, Password);
+			_siteClient = new SiteClient(Website, Login, Password);
 		}
 
 		#region Content Manager
@@ -522,51 +523,51 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
-			return _sitePermissionsManager.GetUsers(out message);
+			return _siteClient.GetUsers(out message);
 		}
 
 		public void SetUser(string login, string password, string firstName, string lastName, string email, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
-			_sitePermissionsManager.SetUser(login, password, firstName, lastName, email, groups, pages, out message);
+			_siteClient.SetUser(login, password, firstName, lastName, email, groups, pages, out message);
 		}
 
 		public void DeleteUser(string login, out string message)
 		{
-			_sitePermissionsManager.DeleteUser(login, out message);
+			_siteClient.DeleteUser(login, out message);
 		}
 		#endregion
 
 		#region Groups
 		public GroupRecord[] GetGroups(out string message)
 		{
-			return _sitePermissionsManager.GetGroups(out message);
+			return _siteClient.GetGroups(out message);
 		}
 
 		public void SetGroup(string id, string name, UserRecord[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
-			_sitePermissionsManager.SetGroup(id, name, users, pages, out message);
+			_siteClient.SetGroup(id, name, users, pages, out message);
 		}
 
 		public void DeleteGroup(string id, out string message)
 		{
-			_sitePermissionsManager.DeleteGroup(id, out message);
+			_siteClient.DeleteGroup(id, out message);
 		}
 
 		public string[] GetGroupTemplates(out string message)
 		{
-			return _sitePermissionsManager.GetGroupTemplates(out message);
+			return _siteClient.GetGroupTemplates(out message);
 		}
 		#endregion
 
 		#region Libraraies
 		public Services.IPadAdminService.Library[] GetLibraries(out string message)
 		{
-			return _sitePermissionsManager.GetLibraries(out message);
+			return _siteClient.GetLibraries(out message);
 		}
 
 		public void SetPage(string id, UserRecord[] users, GroupRecord[] groups, out string message)
 		{
-			_sitePermissionsManager.SetPage(id, users, groups, out message);
+			_siteClient.SetPage(id, users, groups, out message);
 		}
 		#endregion
 
@@ -664,19 +665,19 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string OgvFilePath { get; set; }
 	}
 
-	public class SitePermissionsManager
+	public class SiteClient
 	{
 		private string _login;
 		private string _password;
 
 		public string _website;
 
-		public SitePermissionsManager(XmlNode node)
+		public SiteClient(XmlNode node)
 		{
 			Deserialize(node);
 		}
 
-		public SitePermissionsManager(string website, string login, string password)
+		public SiteClient(string website, string login, string password)
 		{
 			_website = website;
 			_login = login;
@@ -686,6 +687,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string Website
 		{
 			get { return _website; }
+		}
+
+		public override string ToString()
+		{
+			return _website;
 		}
 
 		public void Deserialize(XmlNode node)
@@ -721,6 +727,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		private StatisticControllerService GetStatisticClient()
+		{
+			try
+			{
+				var client = new StatisticControllerService();
+				client.Url = string.Format("{0}/statistic/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
@@ -731,7 +751,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				try
 				{
-					string sessionKey = client.getSessionKey(_login, _password);
+					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						users.AddRange(client.getUsers(sessionKey) ?? new UserRecord[] { });
 					else
@@ -968,6 +988,42 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 			else
 				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+		#endregion
+
+		#region Activities
+		public UserActivity[] GetActivities(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<UserActivity>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						while (startDate < endDate)
+						{
+							var nextDate = startDate.AddDays(10);
+							if (nextDate > endDate)
+								nextDate = endDate;
+							activities.AddRange(client.getActivities(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new UserActivity[] { });
+							startDate = nextDate;
+						}
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
 		}
 		#endregion
 	}

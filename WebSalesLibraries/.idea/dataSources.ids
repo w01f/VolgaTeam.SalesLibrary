@@ -1190,6 +1190,7 @@
       <column name="id_parent_folder" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12" />
       <column name="id_user" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
       <column name="name" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" />
       <primary-key name="PRIMARY" columns="id" />
       <index name="id_parent_folder" unique="false" columns="id_parent_folder" />
       <index name="id_user" unique="false" columns="id_user" />
@@ -1198,9 +1199,11 @@
     <table name="tbl_favorites_link" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
       <column name="id_link" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
-      <column name="id_folder" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="id_library" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="id_folder" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12" />
       <column name="id_user" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
       <column name="name" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12" />
+      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" />
       <primary-key name="PRIMARY" columns="id" />
       <index name="id_link" unique="false" columns="id_link" />
       <index name="id_folder" unique="false" columns="id_folder" />
@@ -1361,12 +1364,14 @@
       <column name="tags" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12" />
       <column name="enable_attachments" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" />
       <column name="content" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1" />
+      <column name="is_restricted" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA==" />
       <column name="date_add" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
       <column name="date_modify" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93" />
       <primary-key name="PRIMARY" columns="id" />
       <index name="id_parent_link" unique="false" columns="id_parent_link" />
       <index name="id_folder" unique="false" columns="id_folder" />
       <index name="id_library" unique="false" columns="id_library" />
+      <index name="is_restricted" unique="false" columns="is_restricted" />
       <index name="format" unique="false" columns="format" />
       <index name="content" unique="false" columns="name,file_name,tags,content" />
     </table>
@@ -1414,6 +1419,38 @@
       <column name="initial_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
       <primary-key name="PRIMARY" columns="login" />
     </table>
+    <table name="tbl_statistic_activity" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="date_time" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93" />
+      <column name="type" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="sub_type" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="date_time" unique="false" columns="date_time,type,sub_type" />
+    </table>
+    <table name="tbl_statistic_detail" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="id_activity" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="tag" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <column name="data" sqlType="VARCHAR" length="2048" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="tag" unique="false" columns="tag" />
+      <index name="id_activity" unique="false" columns="id_activity" />
+    </table>
+    <table name="tbl_statistic_user" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="id_activity" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="login" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="first_name" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="last_name" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="email" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="group_name" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12" />
+      <column name="ip" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12" />
+      <column name="os" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="device" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <column name="browser" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="id_statistic" unique="false" columns="id_activity" />
+    </table>
     <table name="tbl_user" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
       <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12" />
@@ -1442,6 +1479,31 @@
       <index name="user" unique="false" columns="id_user" />
       <index name="library" unique="false" columns="id_library" />
       <index name="page" unique="false" columns="id_page" />
+    </table>
+    <table name="tbl_user_link" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="id_user" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="id_link" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="id_library" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="user" unique="false" columns="id_user" />
+      <index name="link" unique="false" columns="id_link" />
+      <index name="library" unique="false" columns="id_library" />
+    </table>
+    <table name="tbl_user_page_cache" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="id_user" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="id_page" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="id_library" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />
+      <column name="cached_col_view_ie" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4" />
+      <column name="cached_col_view_firefox" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4" />
+      <column name="cached_col_view_webkit" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4" />
+      <column name="cached_col_view_opera" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4" />
+      <column name="cached_col_view_mobile" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="user" unique="false" columns="id_user" />
+      <index name="page" unique="false" columns="id_page" />
+      <index name="library" unique="false" columns="id_library" />
     </table>
     <table name="tbl_user_recipient" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12" />

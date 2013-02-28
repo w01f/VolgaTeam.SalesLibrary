@@ -42,5 +42,15 @@ namespace SalesDepot.Services.Properties {
                 return ((string)(this["SalesDepot_Services_IPadAdminService_AdminControllerService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/statistic/quote?ws=1")]
+        public string SalesDepot_Services_StatisticService_StatisticControllerService {
+            get {
+                return ((string)(this["SalesDepot_Services_StatisticService_StatisticControllerService"]));
+            }
+        }
     }
 }

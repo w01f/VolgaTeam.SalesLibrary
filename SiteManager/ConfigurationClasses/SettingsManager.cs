@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
 using System.Xml;
 
@@ -21,24 +18,22 @@ namespace SalesDepot.SiteManager.ConfigurationClasses
 
 		#region Local Settings
 		public string SelectedSiteName { get; set; }
+		public int SelectedTab { get; set; }
 		#endregion
-
-		public static SettingsManager Instance
-		{
-			get
-			{
-				return _instance;
-			}
-		}
 
 		private SettingsManager()
 		{
-			this.ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
-			_settingsFilePath = Path.Combine(this.ApplicationRootsPath, "LocalSettings.xml");
-			this.SitesListPath = Path.Combine(this.ApplicationRootsPath, "Sites.xml");
-			this.LogoPath = Path.Combine(this.ApplicationRootsPath, "logo.png");
-			this.IconPath = Path.Combine(this.ApplicationRootsPath, "icon.ico");
+			ApplicationRootsPath = Path.GetDirectoryName(typeof(SettingsManager).Assembly.Location);
+			_settingsFilePath = Path.Combine(ApplicationRootsPath, "LocalSettings.xml");
+			SitesListPath = Path.Combine(ApplicationRootsPath, "Sites.xml");
+			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
+			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
 			Load();
+		}
+
+		public static SettingsManager Instance
+		{
+			get { return _instance; }
 		}
 
 		public void Load()
@@ -52,7 +47,13 @@ namespace SalesDepot.SiteManager.ConfigurationClasses
 				#region Local Settings
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedSiteName");
 				if (node != null)
-					this.SelectedSiteName = node.InnerText;
+					SelectedSiteName = node.InnerText;
+
+				int tempInt;
+				node = document.SelectSingleNode(@"/LocalSettings/SelectedTab");
+				if (node != null)
+					if (int.TryParse(node.InnerText, out tempInt))
+						SelectedTab = tempInt;
 				#endregion
 			}
 		}
@@ -64,7 +65,8 @@ namespace SalesDepot.SiteManager.ConfigurationClasses
 			xml.AppendLine(@"<LocalSettings>");
 
 			#region FM Settings
-			xml.AppendLine(@"<SelectedSiteName>" + this.SelectedSiteName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedSiteName>");
+			xml.AppendLine(@"<SelectedSiteName>" + SelectedSiteName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedSiteName>");
+			xml.AppendLine(@"<SelectedTab>" + SelectedTab + @"</SelectedTab>");
 			#endregion
 
 			xml.AppendLine(@"</LocalSettings>");
