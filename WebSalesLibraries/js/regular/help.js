@@ -27,7 +27,7 @@
                 var content = $('#content');
                 $('.help-link').off('click').on('click', function ()
                 {
-                    $.viewSelectedFormat($(this), false);
+                    $.viewSelectedFormat($(this), false, true);
                 });
                 $.buildCalendar(content);
             },

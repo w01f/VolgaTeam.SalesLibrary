@@ -16,6 +16,19 @@
 		});
 		$.ajax({
 			type:"POST",
+			url:"statistic/writeActivity",
+			data:{
+				type:'Wallbin',
+				subType:'Library Changed',
+				data:$.toJSON({
+					Library:selectedLibraryName
+				})
+			},
+			async:true,
+			dataType:'html'
+		});
+		$.ajax({
+			type:"POST",
 			url:"wallbin/getPageDropDownList",
 			beforeSend:function ()
 			{
@@ -49,6 +62,19 @@
 			expires:60 * 60 * 24 * 7
 		});
 		$("#page-logo").attr('src', $("#select-page").val());
+		$.ajax({
+			type:"POST",
+			url:"statistic/writeActivity",
+			data:{
+				type:'Wallbin',
+				subType:'Page Changed',
+				data:$.toJSON({
+					Page:selectedPageName
+				})
+			},
+			async:true,
+			dataType:'html'
+		});
 		updateView();
 	};
 
@@ -94,14 +120,14 @@
 		});
 	};
 
-	var loadFolderLinkContent = function(linkObject)
+	var loadFolderLinkContent = function (linkObject)
 	{
 		if (!linkObject.hasClass('active'))
 		{
 			linkObject.addClass('active');
 			var folderLinkContent = linkObject.children('.folder-link-content');
-			var linkId =null;
-			if(folderLinkContent.attr("id")!=null)
+			var linkId = null;
+			if (folderLinkContent.attr("id") != null)
 				var linkId = folderLinkContent.attr("id").replace('folder-link-content', '');
 			if (!folderLinkContent.find('.link-container').length && linkId != null)
 			{

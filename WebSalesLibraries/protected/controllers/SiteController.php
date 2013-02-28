@@ -38,6 +38,7 @@
 				$loginModel->attributes = $attributes;
 				if ($loginModel->validate() && $loginModel->login())
 				{
+					StatisticActivityStorage::WriteActivity('System', 'Login', null);
 					if ($loginModel->needToResetPassword)
 					{
 						$this->redirect($this->createUrl('site/changePassword', array(
@@ -55,6 +56,7 @@
 
 		public function actionLogout()
 		{
+			StatisticActivityStorage::WriteActivity('System', 'Logout', null);
 			Yii::app()->user->logout();
 			Yii::app()->end();
 		}
@@ -163,6 +165,8 @@
 					{
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->load($linkRecord);
+						$name = $link->name;
+						$originalFormat = $linkRecord->format;
 						if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4')
 						{
 							if ($format == 'wmv')
@@ -181,6 +185,8 @@
 					$attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
 					if (isset($attachmentRecord))
 					{
+						$name = $attachmentRecord->name;
+						$originalFormat = $attachmentRecord->format;
 						$libraryManager = new LibraryManager();
 						$libraryManager->getLibraries();
 						$library = $libraryManager->getLibraryById($attachmentRecord->id_library);
@@ -202,7 +208,10 @@
 				}
 			}
 			if (isset($path))
+			{
+				StatisticActivityStorage::WriteActivity('Link', 'Download', array('Name' => $name, 'File' => basename($path), 'Original Format' => $originalFormat, 'Format' => $format));
 				return Yii::app()->getRequest()->sendFile(basename($path), @file_get_contents($path));
+			}
 			return null;
 		}
 
@@ -241,6 +250,7 @@
 					{
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->load($linkRecord);
+						StatisticActivityStorage::WriteActivity('Link', 'Email', array('Name' => $link->name, 'File' => $link->fileName, 'Format' => $link->format, 'To' => $emailTo, 'Copy' => $emailCopyTo, 'Subject' => $emailSubject));
 						EmailedLinkStorage::sendLink($link, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
 					}
 					else
@@ -266,6 +276,7 @@
 								$link->load($linkRecord);
 								$attachment = new Attachment($link);
 								$attachment->load($attachmentRecord);
+								StatisticActivityStorage::WriteActivity('Link', 'Email', array('Name' => $attachment->name, 'File' => $attachment->name, 'Format' => $attachment->format, 'To' => $emailTo, 'Copy' => $emailCopyTo, 'Subject' => $emailSubject));
 								EmailedLinkStorage::sendAttachment($attachment, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
 							}
 							else

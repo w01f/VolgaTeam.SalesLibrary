@@ -108,6 +108,8 @@
 									<?php endif; ?>
 									<div class="item-content">
 										<div class="link-id"><?php echo $link->id; ?></div>
+										<div class="link-name"><?php echo $link->name; ?></div>
+										<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
 										<div class="file-type"><?php echo $link->originalFormat; ?></div>
 										<div class="view-type"><?php echo $format; ?></div>
 										<div class="file-size"><?php echo $link->originalFormat; ?></div>

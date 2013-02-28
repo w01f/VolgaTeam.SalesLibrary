@@ -39,8 +39,9 @@
 			if (isset($userId) && isset($linkId) && isset($linkName))
 			{
 				$linkRecord = LinkStorage::getLinkById($linkId);
+				StatisticActivityStorage::WriteActivity('Link', 'Add to Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Format' => $linkRecord->format, 'Favorites Folder' => $folderName, 'Favorites Name' => $linkName));
 				FavoritesLinkStorage::addLink($userId, $linkId, $linkName, $folderName, $linkRecord->id_library);
-				$this->renderPartial('successAddDialog', array('header' => 'SUCCESS!', 'content' => $linkRecord->file_name.' was  saved to your favorites...'), false, true);
+				$this->renderPartial('successAddDialog', array('header' => 'SUCCESS!', 'content' => $linkRecord->file_name . ' was  saved to your favorites...'), false, true);
 			}
 		}
 

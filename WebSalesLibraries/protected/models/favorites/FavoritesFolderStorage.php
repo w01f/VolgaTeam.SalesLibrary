@@ -21,23 +21,14 @@
 
 		public static function addFolder($userId, $folderName, $parentFolderId)
 		{
+			$folder = new FavoritesFolderStorage();
+			$folder->id = uniqid();
 			if (isset($parentFolderId))
-				$existedFolder = self::model()->find('LOWER(name)=? and id_parent_folder=?', array(strtolower($folderName), $parentFolderId));
-			else
-				$existedFolder = self::model()->find('LOWER(name)=?', array(strtolower($folderName)));
-			if (!isset($existedFolder))
-			{
-				$folder = new FavoritesFolderStorage();
-				$folder->id = uniqid();
-				if (isset($parentFolderId))
-					$folder->id_parent_folder = $parentFolderId;
-				$folder->id_user = $userId;
-				$folder->name = $folderName;
-				$folder->save();
-				return $folder;
-			}
-			else
-				return $existedFolder;
+				$folder->id_parent_folder = $parentFolderId;
+			$folder->id_user = $userId;
+			$folder->name = $folderName;
+			$folder->save();
+			return $folder;
 		}
 
 		public static function getAllFolderNames($userId)

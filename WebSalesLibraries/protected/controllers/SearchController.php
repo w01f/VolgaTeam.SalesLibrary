@@ -149,6 +149,14 @@
 
 				if (!isset($searchInfo))
 					$searchInfo = null;
+				StatisticActivityStorage::WriteActivity('Search', 'Run', array(
+					'Condition' => array_key_exists('condition', $searchInfo) ? $searchInfo['condition'] : null,
+					'Types' => str_replace('File Types:', '', $searchInfo['file_types']),
+					'Dates' => str_replace('Dates:', '', $searchInfo['dates']),
+					'Tags' => array_key_exists('categories', $searchInfo) ? $searchInfo['categories'] : null,
+					'Libraries' => array_key_exists('libraries', $searchInfo) ? str_replace('Libraries:', '', $searchInfo['libraries']) : null,
+					'Found' => isset($links) ? count($links) : null,
+				));
 				$this->renderPartial('searchResult', array('searchInfo' => $searchInfo, 'links' => $links), false, true);
 			}
 			else

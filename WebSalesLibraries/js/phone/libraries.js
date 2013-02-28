@@ -35,6 +35,19 @@
         $.cookie("selectedLibraryName", selectedLibraryName, {
             expires:60 * 60 * 24 * 7
         });
+		$.ajax({
+			type:"POST",
+			url:"statistic/writeActivity",
+			data:{
+				type:'Wallbin',
+				subType:'Library Changed',
+				data:$.toJSON({
+					Library:selectedLibraryName
+				})
+			},
+			async:true,
+			dataType:'html'
+		});
         $.ajax({
             type:"POST",
             url:"wallbin/getPageDropDownList",
@@ -67,6 +80,19 @@
         $.cookie("selectedPageName", selectedPageName, {
             expires:60 * 60 * 24 * 7
         });
+		$.ajax({
+			type:"POST",
+			url:"statistic/writeActivity",
+			data:{
+				type:'Wallbin',
+				subType:'Page Changed',
+				data:$.toJSON({
+					Page:selectedPageName
+				})
+			},
+			async:true,
+			dataType:'html'
+		});
     };
 
     $.loadPage = function ()

@@ -7,10 +7,27 @@
 		var fullScreenSelector = $(this).find('.use-fullscreen');
 		if (formatItems.length > 1 || warning.length)
 		{
+			var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
+			var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
+			$.ajax({
+				type:"POST",
+				url:"statistic/writeActivity",
+				data:{
+					type:'Link',
+					subType:'Preview Options',
+					data:$.toJSON({
+						Name:selectedLinkName,
+						File:selectedFileName
+					})
+				},
+				async:true,
+				dataType:'html'
+			});
+
 			formatItems.tooltip({animation:false, trigger:'hover', delay:{ show:500, hide:100 }});
 			formatItems.off('click').on('click', function ()
 			{
-				$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'));
+				$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
 			});
 			var viewDialogContent = $(this).find('.view-dialog-content').html();
 			$.fancybox({
@@ -26,7 +43,7 @@
 		}
 		else
 		{
-			$.viewSelectedFormat.call(formatItems[0], formatItems[0], false);
+			$.viewSelectedFormat.call(formatItems[0], formatItems[0], false, false);
 		}
 		event.stopPropagation();
 	};
@@ -63,6 +80,19 @@
 
 	$.openFileCard = function ()
 	{
+		$.ajax({
+			type:"POST",
+			url:"statistic/writeActivity",
+			data:{
+				type:'Link',
+				subType:'File Card',
+				data:$.toJSON({
+					Name:$(this).find('.file-card-body').children('.title').html().replace('<br>', '')
+				})
+			},
+			async:true,
+			dataType:'html'
+		});
 		var fileCardContent = $(this).find('.file-card-content').html();
 		$.fancybox({
 			content:$(this).find('.file-card-body'),
@@ -453,9 +483,11 @@
 		});
 	};
 
-	$.viewSelectedFormat = function (target, fullScreen)
+	$.viewSelectedFormat = function (target, fullScreen, isHelp)
 	{
 		var selectedFileId = $(target).find('.service-data .link-id').html();
+		var selectedLinkName = $(target).find('.service-data .link-name').html();
+		var selectedFileName = $(target).find('.service-data .file-name').html();
 		var selectedFileType = $(target).find('.service-data .file-type').html();
 		var selectedViewType = $(target).find('.service-data .view-type').html();
 		var selectedLinks = $(target).find('.service-data .links').html();
@@ -476,6 +508,23 @@
 					{
 						case 'png':
 						case 'jpeg':
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:'Link',
+									subType:'Preview',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:selectedFileName,
+										'Original Format':selectedFileType,
+										Format:selectedViewType,
+										Mode:fullScreen ? 'Fullscreen' : 'Modal'
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
 							if (fullScreen)
 								window.open("wallbin/runFullscreenGallery?linkId=" + selectedFileId + "&format=" + selectedViewType);
 							else
@@ -500,6 +549,22 @@
 							addToFavorites(selectedFileId, selectedLinks[0].title);
 							break;
 						default:
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:isHelp ? 'Help Link' : 'Link',
+									subType:'Open',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:selectedFileName,
+										'Original Format':selectedFileType,
+										Format:selectedViewType
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
 							openFile(selectedLinks[0].href);
 							break;
 					}
@@ -514,6 +579,22 @@
 							addToFavorites(selectedFileId, selectedLinks[0].title);
 							break;
 						default:
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:isHelp ? 'Help Link' : 'Link',
+									subType:'Open',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:selectedFileName,
+										'Original Format':selectedFileType,
+										Format:selectedFileType != selectedViewType ? selectedViewType : null
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
 							openFile(selectedLinks[0].href);
 							break;
 					}
@@ -526,6 +607,21 @@
 							addToFavorites(selectedFileId, selectedLinks[0].title);
 							break;
 						default:
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:isHelp ? 'Help Link' : 'Link',
+									subType:'Open',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:selectedFileName,
+										'Original Format':selectedFileType
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
 							openFile(selectedLinks[0].href);
 							break;
 					}
@@ -541,6 +637,21 @@
 							addToFavorites(selectedFileId, selectedLinks[0].title);
 							break;
 						default:
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:'Link',
+									subType:'Preview',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:selectedFileName,
+										'Original Format':selectedFileType
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
 							$.fancybox(selectedLinks, {
 								openEffect:'none',
 								closeEffect:'none'
@@ -555,6 +666,22 @@
 						case 'video':
 						case 'tab':
 						case 'ogv':
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:isHelp ? 'Help Link' : 'Link',
+									subType:'Open',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:decodeURI(selectedLinks[0].src.substr(selectedLinks[0].src.lastIndexOf('/') + 1)),
+										'Original Format':selectedFileType,
+										Format:selectedFileType != selectedViewType ? selectedViewType : null
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
 							openFile(selectedLinks[0].href);
 							break;
 						case 'email':
@@ -567,7 +694,24 @@
 							addToFavorites(selectedFileId, selectedLinks[0].title);
 							break;
 						case 'mp4':
-							playVideo(selectedLinks);
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:isHelp ? 'Help Link' : 'Link',
+									subType:'Play Video',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:decodeURI(selectedLinks[0].src.substr(selectedLinks[0].src.lastIndexOf('/') + 1)),
+										'Original Format':selectedFileType,
+										Format:selectedFileType != selectedViewType ? selectedViewType : null
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
+
+							playVideo(selectedLinks, isHelp);
 							break;
 					}
 					break;
@@ -575,7 +719,7 @@
 		}
 	};
 
-	var playVideo = function (links)
+	var playVideo = function (links, isHelp)
 	{
 		VideoJS.players = {};
 		$.fancybox({

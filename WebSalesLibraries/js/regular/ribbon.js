@@ -169,16 +169,30 @@
 			$('#ribbon').find('.ribbon-tab').hide();
 			$('#ribbon #' + tabNames[index]).show();
 
-			that.switchToPageByIndex(index, id);
+			var name = headerStrip.find('#ribbon-tab-header-' + index).find('.ribbon-title').html();
+			that.switchToPageByIndex(index, id, name);
 		};
 
-		that.switchToPageByIndex = function (index, id)
+		that.switchToPageByIndex = function (index, id, name)
 		{
 			$.cookie("selectedRibbonTabIndex", index, {
 				expires:(60 * 60 * 24 * 7)
 			});
 			$.cookie("selectedRibbonTabId", id, {
 				expires:(60 * 60 * 24 * 7)
+			});
+			$.ajax({
+				type:"POST",
+				url:"statistic/writeActivity",
+				data:{
+					type:'System',
+					subType:'Tab Changed',
+					data:$.toJSON({
+						Name:name
+					})
+				},
+				async:true,
+				dataType:'html'
 			});
 			var minibar = $('.jx-bar, .jx-show');
 			switch (id)

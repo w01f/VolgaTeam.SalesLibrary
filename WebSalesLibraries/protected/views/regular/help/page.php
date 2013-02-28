@@ -13,6 +13,8 @@
 
                 <div class="service-data">
                     <div class="link-id"><?php echo $linkRecord->id; ?></div>
+					<div class="link-name"><?php echo $linkRecord->name; ?></div>
+					<div class="file-name"><?php echo $linkRecord->name; ?></div>
                     <div class="file-type"><?php echo $linkRecord->type == 'mp4' || $linkRecord->type == 'url' ? $linkRecord->type : 'other'; ?></div>
                     <div class="view-type"><?php echo $linkRecord->type == 'mp4' || $linkRecord->type == 'url' ? $linkRecord->type : 'other'; ?></div>
                     <?php if ($linkRecord->type == 'mp4'): ?>

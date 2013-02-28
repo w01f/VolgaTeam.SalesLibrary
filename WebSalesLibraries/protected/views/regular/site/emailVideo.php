@@ -15,15 +15,15 @@
         ?>
         <script type="text/javascript">
             (function($){
-                $(document).ready(function() 
+                $(document).ready(function()
                 {
                     $('a#view-dialog-link').fancybox();
                     $('a.video-link').on('click',function(){
-                        $.viewSelectedFormat($(this), false);
+                        $.viewSelectedFormat($(this), false, false);
                     } );
                 });
-            })( jQuery );    
-        </script>        
+            })( jQuery );
+        </script>
     </head>
     <body>
         <span><?php echo $senderName; ?> Sent you this Video Link to preview.</span>
@@ -34,6 +34,8 @@
             <h3>MP4 (for iPads and Google Chrome)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
+				<div class="link-name"><?php echo $link->name; ?></div>
+				<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                 <div class ="view-type"><?php echo 'mp4'; ?></div>
                 <?php $viewLinks = $link->getViewSource('mp4'); ?>
@@ -46,6 +48,8 @@
             <h3>WMV (for Internet Explorer)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
+				<div class="link-name"><?php echo $link->name; ?></div>
+				<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                 <div class ="view-type"><?php echo 'video'; ?></div>
                 <?php $viewLinks = $link->getViewSource('video'); ?>
@@ -53,11 +57,13 @@
                     <div class ="links"><?php echo json_encode($viewLinks); ?></div>
                 <?php endif; ?>
             </span>
-        </a>        
+        </a>
         <a class="video-link" href="#">
             <h3>OGV (for Firefox)</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
+				<div class="link-name"><?php echo $link->name; ?></div>
+				<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
                 <div class ="view-type"><?php echo 'ogv'; ?></div>
                 <?php $viewLinks = $link->getViewSource('ogv'); ?>
@@ -65,12 +71,12 @@
                     <div class ="links"><?php echo json_encode($viewLinks); ?></div>
                 <?php endif; ?>
             </span>
-        </a>                
+        </a>
         <?php if (isset($expiresIn)): ?>
             <br>
             <br>
             <span><i>This link will expire in <?php echo $expiresIn; ?> days.</i></span>
-        <?php endif; ?>        
+        <?php endif; ?>
         <!--  View dialog hidden part  -->
         <div>
             <a id="view-dialog-link" href="#view-dialog-container" style="display: none;">View Options</a>

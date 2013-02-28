@@ -11,6 +11,7 @@ return array(
         'application.models.common.*',
         'application.models.wallbin.*',
         'application.models.favorites.*',
+		'application.models.statistic.*',
         'application.components.*',
         'application.components.widgets.*',
         'application.components.core.*',
