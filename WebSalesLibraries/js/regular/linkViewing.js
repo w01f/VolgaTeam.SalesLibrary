@@ -1,6 +1,6 @@
 (function ($)
 {
-	$.openViewDialogEmbedded = function (event)
+	$.openViewDialogEmbedded = function ()
 	{
 		var formatItems = $(this).find('li');
 		var warning = $(this).find('.warning');
@@ -45,7 +45,6 @@
 		{
 			$.viewSelectedFormat.call(formatItems[0], formatItems[0], false, false);
 		}
-		event.stopPropagation();
 	};
 
 	$.openViewDialogFromGrid = function (linkId)

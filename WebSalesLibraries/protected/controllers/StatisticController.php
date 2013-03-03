@@ -54,7 +54,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				$activityRecords = StatisticActivityStorage::model()->findAll("date_time>=? and date_time<=?", array(date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd))));
+				$activityRecords = StatisticActivityStorage::model()->findByDateRange($dateStart, $dateEnd);
 				foreach ($activityRecords as $activityRecord)
 				{
 					$activity = new UserActivity();
@@ -62,29 +62,22 @@
 					$activity->date = $activityRecord->date_time;
 					$activity->type = $activityRecord->type;
 					$activity->subType = $activityRecord->sub_type;
+					$activity->login = $activityRecord->userActivity->login;
+					$activity->firstName = $activityRecord->userActivity->first_name;
+					$activity->lastName = $activityRecord->userActivity->last_name;
+					$activity->email = $activityRecord->userActivity->email;
+					$activity->ip = $activityRecord->userActivity->ip;
+					$activity->os = $activityRecord->userActivity->os;
+					$activity->device = $activityRecord->userActivity->device;
+					$activity->browser = $activityRecord->userActivity->browser;
 
-					$userRecord = StatisticUserStorage::model()->find('id_activity=?', array($activityRecord->id));
-					if (isset($userRecord))
-					{
-						$activity->login = $userRecord->login;
-						$activity->firstName = $userRecord->first_name;
-						$activity->lastName = $userRecord->last_name;
-						$activity->email = $userRecord->email;
-						$activity->ip = $userRecord->ip;
-						$activity->os = $userRecord->os;
-						$activity->device = $userRecord->device;
-						$activity->browser = $userRecord->browser;
-					}
-
-					$groupRecords = StatisticGroupStorage::model()->findAll('id_activity=?', array($activityRecord->id));
-					foreach ($groupRecords as $groupRecord)
+					unset($groups);
+					foreach ($activityRecord->groupActivities as $groupRecord)
 						$groups[] = $groupRecord->name;
 					if (isset($groups))
-						$activity->groups = implode(",", $groups);
+						$activity->groups = implode(", ", array_values($groups));
 
-
-					$detailRecords = StatisticDetailStorage::model()->findAll('id_activity=?', array($activityRecord->id));
-					foreach ($detailRecords as $detailRecord)
+					foreach ($activityRecord->activityDetails as $detailRecord)
 					{
 						$detail = new ActivityDetail();
 						$detail->tag = $detailRecord->tag;
@@ -96,6 +89,40 @@
 			}
 			if (isset($activities))
 				return $activities;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return MainUserReportRecord[]
+		 * @soap
+		 */
+		public function getMainUserReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_main_user_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new MainUserReportRecord();
+					$reportRecord->firstName = $resultRecord['first_name'];
+					$reportRecord->lastName = $resultRecord['last_name'];
+					$reportRecord->groups = $resultRecord['groups'];
+					$reportRecord->totals = $resultRecord['totals'];
+					$reportRecord->logins = $resultRecord['logins'];
+					$reportRecord->files = $resultRecord['docs'];
+					$reportRecord->videos = $resultRecord['videos'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
 			else
 				return null;
 		}

@@ -1,5 +1,6 @@
 .banner-container{
     display: table;
+	width: 100%;
 }
 
 .banner-image{

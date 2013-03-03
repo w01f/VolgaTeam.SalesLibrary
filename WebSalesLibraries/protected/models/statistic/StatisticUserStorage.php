@@ -45,7 +45,7 @@
 
 						$platform = Yii::app()->browser->getPlatform();
 						$browser = Yii::app()->browser->getBrowser();
-						switch($platform)
+						switch ($platform)
 						{
 							case Browser::PLATFORM_IPHONE:
 							case Browser::PLATFORM_IPOD:
