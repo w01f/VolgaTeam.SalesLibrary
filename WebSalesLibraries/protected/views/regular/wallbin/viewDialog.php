@@ -60,6 +60,9 @@
 				case 'url':
 					$imageSource = Yii::app()->baseUrl . '/images/fileFormats/url.png';
 					break;
+				case 'key':
+					$imageSource = Yii::app()->baseUrl . '/images/fileFormats/keynote.png';
+					break;
 				case 'email':
 					$imageSource = Yii::app()->baseUrl . '/images/fileFormats/email.png';
 					break;

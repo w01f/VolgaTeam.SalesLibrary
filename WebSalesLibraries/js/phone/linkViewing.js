@@ -120,24 +120,33 @@
 							break;
 					}
 					break;
+				case 'key':
 				case 'url':
 				case 'other':
-					$.ajax({
-						type:"POST",
-						url:"statistic/writeActivity",
-						data:{
-							type:'Link',
-							subType:'Open',
-							data:$.toJSON({
-								Name:selectedLinkName,
-								File:selectedFileName,
-								'Original Format':selectedFileType
-							})
-						},
-						async:true,
-						dataType:'html'
-					});
-					$.downloadFile(selectedLinks[0].href);
+					switch (selectedViewType)
+					{
+						case 'email':
+							runEmailPage(selectedFileId, selectedLinks);
+							break;
+						default:
+							$.ajax({
+								type:"POST",
+								url:"statistic/writeActivity",
+								data:{
+									type:'Link',
+									subType:'Open',
+									data:$.toJSON({
+										Name:selectedLinkName,
+										File:selectedFileName,
+										'Original Format':selectedFileType
+									})
+								},
+								async:true,
+								dataType:'html'
+							});
+							$.downloadFile(selectedLinks[0].href);
+							break;
+					}
 					break;
 				case 'png':
 				case 'jpeg':

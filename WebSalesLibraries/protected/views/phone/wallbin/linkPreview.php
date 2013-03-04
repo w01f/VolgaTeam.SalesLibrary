@@ -83,6 +83,10 @@
 					$imageSource = Yii::app()->baseUrl . '/images/fileFormats_phone/url.png';
 					$imageTitle = 'Web Url';
 					break;
+				case 'key':
+					$imageSource = Yii::app()->baseUrl . '/images/fileFormats_phone/keynote.png';
+					$imageTitle = 'Apple Keynote';
+					break;
 				case 'email':
 					$imageSource = Yii::app()->baseUrl . '/images/fileFormats_phone/email.png';
 					$imageTitle = 'Email Link';

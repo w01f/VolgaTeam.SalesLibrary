@@ -325,6 +325,8 @@
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'jpeg.png'));
 						case 'url':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'url.png'));
+						case 'key':
+							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'keynote.png'));
 						default:
 							return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
 							break;
@@ -437,6 +439,10 @@
 						break;
 					case 'url':
 						$this->availableFormats[] = 'url';
+						break;
+					case 'key':
+						$this->availableFormats[] = 'key';
+						$this->availableFormats[] = 'email';
 						break;
 					default:
 						$this->originalFormat = 'other';
@@ -746,6 +752,17 @@
 							break;
 					}
 					break;
+				case 'key':
+					switch ($format)
+					{
+						case 'key':
+							$viewSources[] = array('href' => $this->fileLink);
+							break;
+						case 'email':
+							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+							break;
+					}
+					break;
 				case 'url':
 				case 'other':
 					$viewSources[] = array('href' => $this->fileLink);
@@ -959,6 +976,14 @@
 					{
 						case 'jpeg':
 						case 'png':
+							$fileSize = self::formatFileSize($this->fileSize);
+							break;
+					}
+					break;
+				case 'key':
+					switch ($format)
+					{
+						case 'key':
 							$fileSize = self::formatFileSize($this->fileSize);
 							break;
 					}

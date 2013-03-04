@@ -598,10 +598,14 @@
 							break;
 					}
 					break;
+				case 'key':
 				case 'url':
 				case 'other':
 					switch (selectedViewType)
 					{
+						case 'email':
+							emailFile(selectedFileId, selectedLinks[0].title);
+							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinks[0].title);
 							break;

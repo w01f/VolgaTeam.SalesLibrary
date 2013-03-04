@@ -358,6 +358,9 @@
 						case 'video':
 							$link['file_type'] = 'images/search/search-video.png';
 							break;
+						case 'key':
+							$link['file_type'] = 'images/search/search-keynote.png';
+							break;
 						default:
 							$link['file_type'] = 'undefined';
 							break;

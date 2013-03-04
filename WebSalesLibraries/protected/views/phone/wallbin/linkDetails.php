@@ -69,6 +69,9 @@
                                 case 'url':
                                     $imagePath = 'images/search/search-url.png';
                                     break;
+								case 'key':
+									$imagePath = 'images/search/search-keynote.png';
+									break;
                                 default:
                                     $imagePath = 'images/search/search-undefined-type.png';
                                     break;

@@ -69,6 +69,7 @@
 						'video' => 'WMV Video',
 						'mp4' => 'MP4 Video',
 						'url' => 'Web URL',
+						'key' => 'Apple Keynote',
 					),
 					'preview_dialog' => array(
 						'ppt' => 'PPT Tooltip',
@@ -82,6 +83,7 @@
 						'ogv' => 'OGV Tooltip',
 						'tab' => 'TAB Tooltip',
 						'url' => 'URL Tooltip',
+						'key' => 'Open Apple Keynote',
 						'email' => 'Email Tooltip',
 						'download' => 'Download Tooltip',
 						'favorites' => 'Favorites Tooltip',

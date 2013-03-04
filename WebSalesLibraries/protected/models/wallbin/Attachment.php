@@ -177,6 +177,10 @@
 					case 'url':
 						$this->availableFormats[] = 'url';
 						break;
+					case 'key':
+						$this->availableFormats[] = 'key';
+						$this->availableFormats[] = 'email';
+						break;
 					default:
 						$this->originalFormat = 'other';
 						if (isset($this->fileLink))
@@ -489,6 +493,17 @@
 				case 'other':
 					$viewSources[] = array('href' => $this->link);
 					break;
+				case 'key':
+					switch ($format)
+					{
+						case 'key':
+							$viewSources[] = array('href' => $this->link);
+							break;
+						case 'email':
+							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
+							break;
+					}
+					break;
 				case 'video':
 					switch ($format)
 					{
@@ -647,6 +662,14 @@
 						case 'jpeg':
 						case 'png':
 							$fileSize = LibraryLink::formatFileSize($this->fileSize);
+							break;
+					}
+					break;
+				case 'key':
+					switch ($format)
+					{
+						case 'key':
+							$fileSize = self::formatFileSize($this->fileSize);
 							break;
 					}
 					break;
