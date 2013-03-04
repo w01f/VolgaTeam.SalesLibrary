@@ -32,15 +32,15 @@
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.gridViewData = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
 			this.gridColumnGroups = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnLogin = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnFiles = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnVideos = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.gridColumnVideos = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnTotal = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
@@ -106,6 +106,7 @@
 			this.gridViewData.PreviewIndent = 5;
 			this.gridViewData.RowHeight = 35;
 			this.gridViewData.RowSeparatorHeight = 5;
+			this.gridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
 			// gridColumnName
 			// 
@@ -115,19 +116,6 @@
 			this.gridColumnName.Visible = true;
 			this.gridColumnName.VisibleIndex = 0;
 			this.gridColumnName.Width = 230;
-			// 
-			// repositoryItemDateEditDate
-			// 
-			this.repositoryItemDateEditDate.AutoHeight = false;
-			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
-			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
-			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
-			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
 			// gridColumnGroups
 			// 
@@ -143,6 +131,7 @@
 			this.gridColumnLogin.Caption = "Login Activity";
 			this.gridColumnLogin.FieldName = "logins";
 			this.gridColumnLogin.Name = "gridColumnLogin";
+			this.gridColumnLogin.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnLogin.Visible = true;
 			this.gridColumnLogin.VisibleIndex = 2;
 			this.gridColumnLogin.Width = 302;
@@ -152,9 +141,43 @@
 			this.gridColumnFiles.Caption = "Documents Activity";
 			this.gridColumnFiles.FieldName = "files";
 			this.gridColumnFiles.Name = "gridColumnFiles";
+			this.gridColumnFiles.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnFiles.Visible = true;
 			this.gridColumnFiles.VisibleIndex = 3;
 			this.gridColumnFiles.Width = 349;
+			// 
+			// gridColumnVideos
+			// 
+			this.gridColumnVideos.Caption = "Video Activity";
+			this.gridColumnVideos.FieldName = "videos";
+			this.gridColumnVideos.Name = "gridColumnVideos";
+			this.gridColumnVideos.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
+			this.gridColumnVideos.Visible = true;
+			this.gridColumnVideos.VisibleIndex = 4;
+			this.gridColumnVideos.Width = 283;
+			// 
+			// gridColumnTotal
+			// 
+			this.gridColumnTotal.Caption = "All Activity";
+			this.gridColumnTotal.FieldName = "totals";
+			this.gridColumnTotal.Name = "gridColumnTotal";
+			this.gridColumnTotal.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
+			this.gridColumnTotal.Visible = true;
+			this.gridColumnTotal.VisibleIndex = 5;
+			this.gridColumnTotal.Width = 302;
+			// 
+			// repositoryItemDateEditDate
+			// 
+			this.repositoryItemDateEditDate.AutoHeight = false;
+			this.repositoryItemDateEditDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.repositoryItemDateEditDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
+			this.repositoryItemDateEditDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.repositoryItemDateEditDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
+			this.repositoryItemDateEditDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
+			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
 			// 
 			// defaultLookAndFeel
 			// 
@@ -179,24 +202,6 @@
 			this.styleController.AppearanceFocused.Options.UseFont = true;
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
-			// 
-			// gridColumnVideos
-			// 
-			this.gridColumnVideos.Caption = "Video Activity";
-			this.gridColumnVideos.FieldName = "videos";
-			this.gridColumnVideos.Name = "gridColumnVideos";
-			this.gridColumnVideos.Visible = true;
-			this.gridColumnVideos.VisibleIndex = 4;
-			this.gridColumnVideos.Width = 283;
-			// 
-			// gridColumnTotal
-			// 
-			this.gridColumnTotal.Caption = "All Activity";
-			this.gridColumnTotal.FieldName = "totals";
-			this.gridColumnTotal.Name = "gridColumnTotal";
-			this.gridColumnTotal.Visible = true;
-			this.gridColumnTotal.VisibleIndex = 5;
-			this.gridColumnTotal.Width = 302;
 			// 
 			// MainUserReportControl
 			// 

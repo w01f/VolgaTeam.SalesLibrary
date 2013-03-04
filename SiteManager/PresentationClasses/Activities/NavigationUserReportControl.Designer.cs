@@ -104,6 +104,7 @@
 			this.gridViewData.PreviewIndent = 5;
 			this.gridViewData.RowHeight = 35;
 			this.gridViewData.RowSeparatorHeight = 5;
+			this.gridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
 			// gridColumnName
 			// 
@@ -128,6 +129,7 @@
 			this.gridColumnLibraries.Caption = "Library Activity";
 			this.gridColumnLibraries.FieldName = "libs";
 			this.gridColumnLibraries.Name = "gridColumnLibraries";
+			this.gridColumnLibraries.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnLibraries.Visible = true;
 			this.gridColumnLibraries.VisibleIndex = 2;
 			this.gridColumnLibraries.Width = 302;
@@ -137,6 +139,7 @@
 			this.gridColumnPages.Caption = "Page Activity";
 			this.gridColumnPages.FieldName = "pages";
 			this.gridColumnPages.Name = "gridColumnPages";
+			this.gridColumnPages.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnPages.Visible = true;
 			this.gridColumnPages.VisibleIndex = 3;
 			this.gridColumnPages.Width = 349;
@@ -146,6 +149,7 @@
 			this.gridColumnTotal.Caption = "All Navigation Activity";
 			this.gridColumnTotal.FieldName = "totals";
 			this.gridColumnTotal.Name = "gridColumnTotal";
+			this.gridColumnTotal.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnTotal.Visible = true;
 			this.gridColumnTotal.VisibleIndex = 4;
 			this.gridColumnTotal.Width = 302;

@@ -104,6 +104,7 @@
 			this.gridViewData.PreviewIndent = 5;
 			this.gridViewData.RowHeight = 35;
 			this.gridViewData.RowSeparatorHeight = 5;
+			this.gridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
 			// gridColumnName
 			// 
@@ -119,6 +120,7 @@
 			this.gridColumnLogin.Caption = "Login Activity";
 			this.gridColumnLogin.FieldName = "logins";
 			this.gridColumnLogin.Name = "gridColumnLogin";
+			this.gridColumnLogin.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnLogin.Visible = true;
 			this.gridColumnLogin.VisibleIndex = 1;
 			this.gridColumnLogin.Width = 302;
@@ -128,6 +130,7 @@
 			this.gridColumnFiles.Caption = "Documents Activity";
 			this.gridColumnFiles.FieldName = "files";
 			this.gridColumnFiles.Name = "gridColumnFiles";
+			this.gridColumnFiles.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnFiles.Visible = true;
 			this.gridColumnFiles.VisibleIndex = 2;
 			this.gridColumnFiles.Width = 349;
@@ -137,6 +140,7 @@
 			this.gridColumnVideos.Caption = "Video Activity";
 			this.gridColumnVideos.FieldName = "videos";
 			this.gridColumnVideos.Name = "gridColumnVideos";
+			this.gridColumnVideos.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnVideos.Visible = true;
 			this.gridColumnVideos.VisibleIndex = 3;
 			this.gridColumnVideos.Width = 283;
@@ -146,6 +150,7 @@
 			this.gridColumnTotal.Caption = "All Activity";
 			this.gridColumnTotal.FieldName = "totals";
 			this.gridColumnTotal.Name = "gridColumnTotal";
+			this.gridColumnTotal.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnTotal.Visible = true;
 			this.gridColumnTotal.VisibleIndex = 4;
 			this.gridColumnTotal.Width = 302;
