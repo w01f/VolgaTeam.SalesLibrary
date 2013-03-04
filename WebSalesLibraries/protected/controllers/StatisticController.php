@@ -9,6 +9,10 @@
 					'classMap' => array(
 						'UserActivity' => 'UserActivity',
 						'ActivityDetail' => 'ActivityDetail',
+						'MainUserReportRecord' => 'MainUserReportRecord',
+						'MainGroupReportRecord' => 'MainGroupReportRecord',
+						'NavigationUserReportRecord' => 'NavigationUserReportRecord',
+						'NavigationGroupReportRecord' => 'NavigationGroupReportRecord',
 					),
 				),
 			);
@@ -118,6 +122,102 @@
 					$reportRecord->logins = $resultRecord['logins'];
 					$reportRecord->files = $resultRecord['docs'];
 					$reportRecord->videos = $resultRecord['videos'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return MainGroupReportRecord[]
+		 * @soap
+		 */
+		public function getMainGroupReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_main_group_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new MainGroupReportRecord();
+					$reportRecord->name = $resultRecord['name'];
+					$reportRecord->totals = $resultRecord['totals'];
+					$reportRecord->logins = $resultRecord['logins'];
+					$reportRecord->files = $resultRecord['docs'];
+					$reportRecord->videos = $resultRecord['videos'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return NavigationUserReportRecord[]
+		 * @soap
+		 */
+		public function getNavigationUserReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_navigation_user_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new NavigationUserReportRecord();
+					$reportRecord->firstName = $resultRecord['first_name'];
+					$reportRecord->lastName = $resultRecord['last_name'];
+					$reportRecord->groups = $resultRecord['groups'];
+					$reportRecord->totals = $resultRecord['totals'];
+					$reportRecord->libs = $resultRecord['libs'];
+					$reportRecord->pages = $resultRecord['pages'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return NavigationGroupReportRecord[]
+		 * @soap
+		 */
+		public function getNavigationGroupReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_navigation_group_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new NavigationGroupReportRecord();
+					$reportRecord->name = $resultRecord['name'];
+					$reportRecord->totals = $resultRecord['totals'];
+					$reportRecord->libs = $resultRecord['libs'];
+					$reportRecord->pages = $resultRecord['pages'];
 					$reportRecords[] = $reportRecord;
 				}
 			}
