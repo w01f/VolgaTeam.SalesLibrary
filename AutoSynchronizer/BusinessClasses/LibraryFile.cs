@@ -366,6 +366,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "url":
 						format = "url";
 						break;
+					case "key":
+						format = "key";
+						break;
 					default:
 						format = "other";
 						break;
