@@ -1436,6 +1436,13 @@
       <index name="tag" unique="false" columns="tag" />
       <index name="id_activity" unique="false" columns="id_activity" />
     </table>
+    <table name="tbl_statistic_group" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="id_activity" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
+      <column name="name" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="id_activity" unique="false" columns="id_activity" />
+    </table>
     <table name="tbl_statistic_user" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
       <column name="id_activity" sqlType="VARCHAR" length="32" precision="0" nullable="false" jdbcType="12" />
@@ -1517,5 +1524,29 @@
       <column name="pass" sqlType="CHAR" length="32" precision="0" nullable="false" jdbcType="1" def="Jyc=" />
       <primary-key name="PRIMARY" columns="name" />
     </table>
+    <procedure name="sp_get_main_group_report" schema="" catalog="sales_library" type="0">
+      <prototype>
+        <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+        <parameter name="end_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+      </prototype>
+    </procedure>
+    <procedure name="sp_get_main_user_report" schema="" catalog="sales_library" type="0">
+      <prototype>
+        <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+        <parameter name="end_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+      </prototype>
+    </procedure>
+    <procedure name="sp_get_navigation_group_report" schema="" catalog="sales_library" type="0">
+      <prototype>
+        <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+        <parameter name="end_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+      </prototype>
+    </procedure>
+    <procedure name="sp_get_navigation_user_report" schema="" catalog="sales_library" type="0">
+      <prototype>
+        <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+        <parameter name="end_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+      </prototype>
+    </procedure>
   </data-source>
 </component>

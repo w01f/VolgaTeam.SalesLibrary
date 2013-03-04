@@ -28,6 +28,7 @@ namespace SalesDepot.Services.StatisticService
 				userString.Add("First Name: " + firstName);
 				userString.Add("Last Name: " + lastName);
 				userString.Add("Email: " + email);
+				userString.Add("Groups: " + groups);
 				userString.Add("IP: " + ip);
 				userString.Add("OS: " + os);
 				userString.Add("Device: " + device);

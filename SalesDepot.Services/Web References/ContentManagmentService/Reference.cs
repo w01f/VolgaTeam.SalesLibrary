@@ -274,7 +274,11 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private GroupRecord[] groupsField;
         
+        private bool allGroupsField;
+        
         private UserRecord[] usersField;
+        
+        private bool allUsersField;
         
         /// <remarks/>
         public string id {
@@ -387,12 +391,32 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
+        public bool allGroups {
+            get {
+                return this.allGroupsField;
+            }
+            set {
+                this.allGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
         public UserRecord[] users {
             get {
                 return this.usersField;
             }
             set {
                 this.usersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allUsers {
+            get {
+                return this.allUsersField;
+            }
+            set {
+                this.allUsersField = value;
             }
         }
     }
@@ -1006,7 +1030,11 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private GroupRecord[] groupsField;
         
+        private bool allGroupsField;
+        
         private Library[] librariesField;
+        
+        private bool allLibrariesField;
         
         /// <remarks/>
         public int id {
@@ -1089,12 +1117,32 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
+        public bool allGroups {
+            get {
+                return this.allGroupsField;
+            }
+            set {
+                this.allGroupsField = value;
+            }
+        }
+        
+        /// <remarks/>
         public Library[] libraries {
             get {
                 return this.librariesField;
             }
             set {
                 this.librariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allLibraries {
+            get {
+                return this.allLibrariesField;
+            }
+            set {
+                this.allLibrariesField = value;
             }
         }
     }
@@ -1115,7 +1163,11 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private UserRecord[] usersField;
         
+        private bool allUsersField;
+        
         private Library[] librariesField;
+        
+        private bool allLibrariesField;
         
         /// <remarks/>
         public string id {
@@ -1158,12 +1210,32 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
+        public bool allUsers {
+            get {
+                return this.allUsersField;
+            }
+            set {
+                this.allUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
         public Library[] libraries {
             get {
                 return this.librariesField;
             }
             set {
                 this.librariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool allLibraries {
+            get {
+                return this.allLibrariesField;
+            }
+            set {
+                this.allLibrariesField = value;
             }
         }
     }

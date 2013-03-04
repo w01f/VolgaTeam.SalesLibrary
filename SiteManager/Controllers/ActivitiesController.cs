@@ -36,6 +36,23 @@ namespace FileManager.Controllers
 				if (!NeedToUpdate)
 					MainController.Instance.ChangeSite(FormMain.Instance.comboBoxEditActivitiesSite.EditValue as SiteClient);
 			};
+
+			FormMain.Instance.buttonItemActivitiesViewsRawData.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport1.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport2.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport3.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport4.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport5.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport6.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsRawData.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport1.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport2.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport3.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport4.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport5.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport6.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = true;
+
 			MainController.Instance.SiteChanged += (sender, args) =>
 													   {
 														   if (IsActive)
@@ -62,5 +79,28 @@ namespace FileManager.Controllers
 			IsActive = true;
 		}
 		#endregion
+
+		private void buttonItemActivitiesViews_CheckedChanged(object sender, System.EventArgs e)
+		{
+			var button = sender as DevComponents.DotNetBar.ButtonItem;
+			if (button == null || !button.Checked || button.Tag == null) return;
+			ViewType viewType = ViewType.None;
+			ViewType.TryParse(button.Tag.ToString(), out viewType);
+			ActivitiesManagerControl.ChangeView(viewType);
+		}
+
+		private void buttonItemActivitiesViews_Click(object sender, System.EventArgs e)
+		{
+			var button = sender as DevComponents.DotNetBar.ButtonItem;
+			if (button == null || button.Checked) return;
+			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport1.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport2.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport3.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport4.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport5.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport6.Checked = false;
+			button.Checked = true;
+		}
 	}
 }

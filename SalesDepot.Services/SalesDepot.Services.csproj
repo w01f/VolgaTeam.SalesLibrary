@@ -68,6 +68,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StatisticService\NavigationUserReportRecord.cs" />
+    <Compile Include="StatisticService\MainUserReportRecord.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />
     <Compile Include="Web References\ContentManagmentService\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -171,6 +173,18 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\IPadAdminService\UserRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\MainGroupReportRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\MainUserReportRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\NavigationGroupReportRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\NavigationUserReportRecord.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\Reference.map">

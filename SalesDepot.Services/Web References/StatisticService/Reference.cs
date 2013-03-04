@@ -27,6 +27,10 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="StatisticControllerBinding", Namespace="urn:StatisticControllerwsdl")]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationGroupReportRecord))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationUserReportRecord))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainGroupReportRecord))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainUserReportRecord))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(ActivityDetail))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserActivity))]
     public partial class StatisticControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
@@ -34,6 +38,14 @@ namespace SalesDepot.Services.StatisticService {
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
         private System.Threading.SendOrPostCallback getActivitiesOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getMainUserReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getMainGroupReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getNavigationUserReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getNavigationGroupReportOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -78,6 +90,18 @@ namespace SalesDepot.Services.StatisticService {
         
         /// <remarks/>
         public event getActivitiesCompletedEventHandler getActivitiesCompleted;
+        
+        /// <remarks/>
+        public event getMainUserReportCompletedEventHandler getMainUserReportCompleted;
+        
+        /// <remarks/>
+        public event getMainGroupReportCompletedEventHandler getMainGroupReportCompleted;
+        
+        /// <remarks/>
+        public event getNavigationUserReportCompletedEventHandler getNavigationUserReportCompleted;
+        
+        /// <remarks/>
+        public event getNavigationGroupReportCompletedEventHandler getNavigationGroupReportCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getSessionKey", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
@@ -142,6 +166,142 @@ namespace SalesDepot.Services.StatisticService {
             if ((this.getActivitiesCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getActivitiesCompleted(this, new getActivitiesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getMainUserReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public MainUserReportRecord[] getMainUserReport(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getMainUserReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((MainUserReportRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getMainUserReportAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getMainUserReportAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getMainUserReportAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getMainUserReportOperationCompleted == null)) {
+                this.getMainUserReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetMainUserReportOperationCompleted);
+            }
+            this.InvokeAsync("getMainUserReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getMainUserReportOperationCompleted, userState);
+        }
+        
+        private void OngetMainUserReportOperationCompleted(object arg) {
+            if ((this.getMainUserReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getMainUserReportCompleted(this, new getMainUserReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getMainGroupReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public MainGroupReportRecord[] getMainGroupReport(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getMainGroupReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((MainGroupReportRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getMainGroupReportAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getMainGroupReportAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getMainGroupReportAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getMainGroupReportOperationCompleted == null)) {
+                this.getMainGroupReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetMainGroupReportOperationCompleted);
+            }
+            this.InvokeAsync("getMainGroupReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getMainGroupReportOperationCompleted, userState);
+        }
+        
+        private void OngetMainGroupReportOperationCompleted(object arg) {
+            if ((this.getMainGroupReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getMainGroupReportCompleted(this, new getMainGroupReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getNavigationUserReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public NavigationUserReportRecord[] getNavigationUserReport(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getNavigationUserReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((NavigationUserReportRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getNavigationUserReportAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getNavigationUserReportAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getNavigationUserReportAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getNavigationUserReportOperationCompleted == null)) {
+                this.getNavigationUserReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetNavigationUserReportOperationCompleted);
+            }
+            this.InvokeAsync("getNavigationUserReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getNavigationUserReportOperationCompleted, userState);
+        }
+        
+        private void OngetNavigationUserReportOperationCompleted(object arg) {
+            if ((this.getNavigationUserReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getNavigationUserReportCompleted(this, new getNavigationUserReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getNavigationGroupReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public NavigationGroupReportRecord[] getNavigationGroupReport(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getNavigationGroupReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((NavigationGroupReportRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getNavigationGroupReportAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getNavigationGroupReportAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getNavigationGroupReportAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getNavigationGroupReportOperationCompleted == null)) {
+                this.getNavigationGroupReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetNavigationGroupReportOperationCompleted);
+            }
+            this.InvokeAsync("getNavigationGroupReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getNavigationGroupReportOperationCompleted, userState);
+        }
+        
+        private void OngetNavigationGroupReportOperationCompleted(object arg) {
+            if ((this.getNavigationGroupReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getNavigationGroupReportCompleted(this, new getNavigationGroupReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -375,6 +535,306 @@ namespace SalesDepot.Services.StatisticService {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class NavigationGroupReportRecord {
+        
+        private string nameField;
+        
+        private string pagesField;
+        
+        private string libsField;
+        
+        private string totalsField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pages {
+            get {
+                return this.pagesField;
+            }
+            set {
+                this.pagesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libs {
+            get {
+                return this.libsField;
+            }
+            set {
+                this.libsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string totals {
+            get {
+                return this.totalsField;
+            }
+            set {
+                this.totalsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class NavigationUserReportRecord {
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string groupsField;
+        
+        private string libsField;
+        
+        private string pagesField;
+        
+        private string totalsField;
+        
+        /// <remarks/>
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libs {
+            get {
+                return this.libsField;
+            }
+            set {
+                this.libsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pages {
+            get {
+                return this.pagesField;
+            }
+            set {
+                this.pagesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string totals {
+            get {
+                return this.totalsField;
+            }
+            set {
+                this.totalsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class MainGroupReportRecord {
+        
+        private string nameField;
+        
+        private string loginsField;
+        
+        private string filesField;
+        
+        private string videosField;
+        
+        private string totalsField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string logins {
+            get {
+                return this.loginsField;
+            }
+            set {
+                this.loginsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string files {
+            get {
+                return this.filesField;
+            }
+            set {
+                this.filesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string videos {
+            get {
+                return this.videosField;
+            }
+            set {
+                this.videosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string totals {
+            get {
+                return this.totalsField;
+            }
+            set {
+                this.totalsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class MainUserReportRecord {
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string groupsField;
+        
+        private string loginsField;
+        
+        private string filesField;
+        
+        private string videosField;
+        
+        private string totalsField;
+        
+        /// <remarks/>
+        public string firstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string lastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string groups {
+            get {
+                return this.groupsField;
+            }
+            set {
+                this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string logins {
+            get {
+                return this.loginsField;
+            }
+            set {
+                this.loginsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string files {
+            get {
+                return this.filesField;
+            }
+            set {
+                this.filesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string videos {
+            get {
+                return this.videosField;
+            }
+            set {
+                this.videosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string totals {
+            get {
+                return this.totalsField;
+            }
+            set {
+                this.totalsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
     
@@ -422,6 +882,110 @@ namespace SalesDepot.Services.StatisticService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((UserActivity[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getMainUserReportCompletedEventHandler(object sender, getMainUserReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getMainUserReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getMainUserReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public MainUserReportRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((MainUserReportRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getMainGroupReportCompletedEventHandler(object sender, getMainGroupReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getMainGroupReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getMainGroupReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public MainGroupReportRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((MainGroupReportRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getNavigationUserReportCompletedEventHandler(object sender, getNavigationUserReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getNavigationUserReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getNavigationUserReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public NavigationUserReportRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((NavigationUserReportRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getNavigationGroupReportCompletedEventHandler(object sender, getNavigationGroupReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getNavigationGroupReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getNavigationGroupReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public NavigationGroupReportRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((NavigationGroupReportRecord[])(this.results[0]));
             }
         }
     }

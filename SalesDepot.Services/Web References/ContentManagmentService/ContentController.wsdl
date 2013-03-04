@@ -32,7 +32,9 @@
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="users" type="tns:UserRecordArray" />
+          <xsd:element name="allUsers" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryFolderArray">
@@ -233,7 +235,9 @@
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="users" type="tns:UserRecordArray" />
+          <xsd:element name="allUsers" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
+          <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="UserRecordArray">
@@ -253,7 +257,9 @@
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
+          <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryArray">

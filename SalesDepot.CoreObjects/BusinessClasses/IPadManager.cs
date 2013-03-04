@@ -161,7 +161,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					column.banner.isEnabled = columnTitle.BannerProperties.Enable;
 					column.banner.image = Convert.ToBase64String((byte[])imageConverter.ConvertTo(columnTitle.BannerProperties.Image, typeof(byte[])));
 					column.banner.showText = columnTitle.BannerProperties.ShowText;
-					column.banner.imageAlignment = columnTitle.BannerProperties.ImageAlignement.ToString().ToLower();
+					column.banner.imageAlignment = columnTitle.HeaderAlignment.ToString().ToLower();
 					column.banner.text = columnTitle.BannerProperties.Text;
 					column.banner.foreColor = ColorTranslator.ToHtml(columnTitle.BannerProperties.ForeColor);
 					column.banner.font = new Font();
@@ -1010,6 +1010,142 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							if (nextDate > endDate)
 								nextDate = endDate;
 							activities.AddRange(client.getActivities(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new UserActivity[] { });
+							startDate = nextDate;
+						}
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
+
+		public MainUserReportRecord[] GetMainUserReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<MainUserReportRecord>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						while (startDate < endDate)
+						{
+							var nextDate = startDate.AddDays(10);
+							if (nextDate > endDate)
+								nextDate = endDate;
+							activities.AddRange(client.getMainUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainUserReportRecord[] { });
+							startDate = nextDate;
+						}
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
+
+		public MainGroupReportRecord[] GetMainGroupReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<MainGroupReportRecord>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						while (startDate < endDate)
+						{
+							var nextDate = startDate.AddDays(10);
+							if (nextDate > endDate)
+								nextDate = endDate;
+							activities.AddRange(client.getMainGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainGroupReportRecord[] { });
+							startDate = nextDate;
+						}
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
+
+		public NavigationUserReportRecord[] GetNavigationUserReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<NavigationUserReportRecord>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						while (startDate < endDate)
+						{
+							var nextDate = startDate.AddDays(10);
+							if (nextDate > endDate)
+								nextDate = endDate;
+							activities.AddRange(client.getNavigationUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationUserReportRecord[] { });
+							startDate = nextDate;
+						}
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
+
+		public NavigationGroupReportRecord[] GetNavigationGroupReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<NavigationGroupReportRecord>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						while (startDate < endDate)
+						{
+							var nextDate = startDate.AddDays(10);
+							if (nextDate > endDate)
+								nextDate = endDate;
+							activities.AddRange(client.getNavigationGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationGroupReportRecord[] { });
 							startDate = nextDate;
 						}
 					}

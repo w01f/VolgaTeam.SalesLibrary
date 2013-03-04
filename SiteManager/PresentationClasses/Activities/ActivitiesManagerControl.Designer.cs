@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.gridControlActivities = new DevExpress.XtraGrid.GridControl();
-			this.gridViewActivities = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.gridColumnActivitiesDate = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.repositoryItemDateEditActivitiesDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-			this.gridColumnActivitiesLogin = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnActivitiesType = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnActivitiesSubType = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.buttonXApplyFilter = new DevComponents.DotNetBar.ButtonX();
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
@@ -46,10 +39,6 @@
 			this.dateEditEnd = new DevExpress.XtraEditors.DateEdit();
 			this.labelControlDateStart = new DevExpress.XtraEditors.LabelControl();
 			this.dateEditStart = new DevExpress.XtraEditors.DateEdit();
-			((System.ComponentModel.ISupportInitialize)(this.gridControlActivities)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.gridViewActivities)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditActivitiesDate)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditActivitiesDate.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
 			this.gbDate.SuspendLayout();
@@ -59,115 +48,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// gridControlActivities
-			// 
-			this.gridControlActivities.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControlActivities.Location = new System.Drawing.Point(0, 0);
-			this.gridControlActivities.MainView = this.gridViewActivities;
-			this.gridControlActivities.Name = "gridControlActivities";
-			this.gridControlActivities.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemDateEditActivitiesDate});
-			this.gridControlActivities.Size = new System.Drawing.Size(640, 483);
-			this.gridControlActivities.TabIndex = 2;
-			this.gridControlActivities.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewActivities});
-			// 
-			// gridViewActivities
-			// 
-			this.gridViewActivities.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.EvenRow.Options.UseFont = true;
-			this.gridViewActivities.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.FocusedCell.Options.UseFont = true;
-			this.gridViewActivities.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.FocusedRow.Options.UseFont = true;
-			this.gridViewActivities.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.gridViewActivities.Appearance.HeaderPanel.Options.UseFont = true;
-			this.gridViewActivities.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.OddRow.Options.UseFont = true;
-			this.gridViewActivities.Appearance.Preview.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.Preview.Options.UseFont = true;
-			this.gridViewActivities.Appearance.Row.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.Row.Options.UseFont = true;
-			this.gridViewActivities.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
-			this.gridViewActivities.Appearance.SelectedRow.Options.UseFont = true;
-			this.gridViewActivities.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnActivitiesDate,
-            this.gridColumnActivitiesLogin,
-            this.gridColumnActivitiesType,
-            this.gridColumnActivitiesSubType});
-			this.gridViewActivities.GridControl = this.gridControlActivities;
-			this.gridViewActivities.Name = "gridViewActivities";
-			this.gridViewActivities.OptionsBehavior.Editable = false;
-			this.gridViewActivities.OptionsBehavior.ReadOnly = true;
-			this.gridViewActivities.OptionsCustomization.AllowColumnMoving = false;
-			this.gridViewActivities.OptionsCustomization.AllowFilter = false;
-			this.gridViewActivities.OptionsCustomization.AllowGroup = false;
-			this.gridViewActivities.OptionsCustomization.AllowQuickHideColumns = false;
-			this.gridViewActivities.OptionsSelection.EnableAppearanceFocusedCell = false;
-			this.gridViewActivities.OptionsSelection.EnableAppearanceHideSelection = false;
-			this.gridViewActivities.OptionsView.AutoCalcPreviewLineCount = true;
-			this.gridViewActivities.OptionsView.EnableAppearanceEvenRow = true;
-			this.gridViewActivities.OptionsView.EnableAppearanceOddRow = true;
-			this.gridViewActivities.OptionsView.ShowDetailButtons = false;
-			this.gridViewActivities.OptionsView.ShowGroupExpandCollapseButtons = false;
-			this.gridViewActivities.OptionsView.ShowGroupPanel = false;
-			this.gridViewActivities.OptionsView.ShowIndicator = false;
-			this.gridViewActivities.OptionsView.ShowPreview = true;
-			this.gridViewActivities.PreviewFieldName = "Details";
-			this.gridViewActivities.PreviewIndent = 5;
-			this.gridViewActivities.RowHeight = 35;
-			this.gridViewActivities.RowSeparatorHeight = 5;
-			// 
-			// gridColumnActivitiesDate
-			// 
-			this.gridColumnActivitiesDate.Caption = "Date\\Time";
-			this.gridColumnActivitiesDate.ColumnEdit = this.repositoryItemDateEditActivitiesDate;
-			this.gridColumnActivitiesDate.FieldName = "ActivityDate";
-			this.gridColumnActivitiesDate.Name = "gridColumnActivitiesDate";
-			this.gridColumnActivitiesDate.Visible = true;
-			this.gridColumnActivitiesDate.VisibleIndex = 0;
-			this.gridColumnActivitiesDate.Width = 99;
-			// 
-			// repositoryItemDateEditActivitiesDate
-			// 
-			this.repositoryItemDateEditActivitiesDate.AutoHeight = false;
-			this.repositoryItemDateEditActivitiesDate.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.repositoryItemDateEditActivitiesDate.DisplayFormat.FormatString = "MM/dd/yyyy hh:mm tt";
-			this.repositoryItemDateEditActivitiesDate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemDateEditActivitiesDate.EditFormat.FormatString = "MM/dd/yyyy hh:mm tt";
-			this.repositoryItemDateEditActivitiesDate.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemDateEditActivitiesDate.Name = "repositoryItemDateEditActivitiesDate";
-			this.repositoryItemDateEditActivitiesDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton()});
-			// 
-			// gridColumnActivitiesLogin
-			// 
-			this.gridColumnActivitiesLogin.Caption = "Login";
-			this.gridColumnActivitiesLogin.FieldName = "login";
-			this.gridColumnActivitiesLogin.Name = "gridColumnActivitiesLogin";
-			this.gridColumnActivitiesLogin.Visible = true;
-			this.gridColumnActivitiesLogin.VisibleIndex = 1;
-			this.gridColumnActivitiesLogin.Width = 94;
-			// 
-			// gridColumnActivitiesType
-			// 
-			this.gridColumnActivitiesType.Caption = "Action Group";
-			this.gridColumnActivitiesType.FieldName = "type";
-			this.gridColumnActivitiesType.Name = "gridColumnActivitiesType";
-			this.gridColumnActivitiesType.Visible = true;
-			this.gridColumnActivitiesType.VisibleIndex = 2;
-			this.gridColumnActivitiesType.Width = 146;
-			// 
-			// gridColumnActivitiesSubType
-			// 
-			this.gridColumnActivitiesSubType.Caption = "Action";
-			this.gridColumnActivitiesSubType.FieldName = "subType";
-			this.gridColumnActivitiesSubType.Name = "gridColumnActivitiesSubType";
-			this.gridColumnActivitiesSubType.Visible = true;
-			this.gridColumnActivitiesSubType.VisibleIndex = 3;
-			this.gridColumnActivitiesSubType.Width = 297;
 			// 
 			// defaultLookAndFeel
 			// 
@@ -203,7 +83,6 @@
 			this.splitContainerControl.Panel1.Controls.Add(this.buttonXApplyFilter);
 			this.splitContainerControl.Panel1.MinSize = 250;
 			this.splitContainerControl.Panel1.Text = "Panel1";
-			this.splitContainerControl.Panel2.Controls.Add(this.gridControlActivities);
 			this.splitContainerControl.Panel2.Text = "Panel2";
 			this.splitContainerControl.Size = new System.Drawing.Size(898, 483);
 			this.splitContainerControl.SplitterPosition = 250;
@@ -299,10 +178,6 @@
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "ActivitiesManagerControl";
 			this.Size = new System.Drawing.Size(898, 483);
-			((System.ComponentModel.ISupportInitialize)(this.gridControlActivities)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.gridViewActivities)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditActivitiesDate.VistaTimeProperties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditActivitiesDate)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
 			this.splitContainerControl.ResumeLayout(false);
 			this.gbDate.ResumeLayout(false);
@@ -319,10 +194,6 @@
         #endregion
 
 		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private DevExpress.XtraGrid.GridControl gridControlActivities;
-		private DevExpress.XtraGrid.Views.Grid.GridView gridViewActivities;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnActivitiesDate;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnActivitiesLogin;
 		private DevComponents.DotNetBar.ButtonX buttonXApplyFilter;
 		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
@@ -332,8 +203,5 @@
 		private DevExpress.XtraEditors.LabelControl labelControlDateEnd;
 		private DevExpress.XtraEditors.DateEdit dateEditEnd;
 		private DevExpress.XtraEditors.LabelControl labelControlDateStart;
-		private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditActivitiesDate;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnActivitiesType;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnActivitiesSubType;
     }
 }

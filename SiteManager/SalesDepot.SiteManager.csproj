@@ -101,6 +101,37 @@
     <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.Designer.cs">
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationGroupReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationGroupReportControl.Designer.cs">
+      <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationUserReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationUserReportControl.Designer.cs">
+      <DependentUpon>NavigationUserReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainGroupReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainGroupReportControl.Designer.cs">
+      <DependentUpon>MainGroupReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainUserReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainUserReportControl.Designer.cs">
+      <DependentUpon>MainUserReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\IActivitiesView.cs" />
+    <Compile Include="PresentationClasses\Activities\RawDataControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\RawDataControl.Designer.cs">
+      <DependentUpon>RawDataControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Users\PermissionsManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -151,6 +182,26 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\ActivitiesManagerControl.resx">
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationGroupReportControl.resx">
+      <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationUserReportControl.resx">
+      <DependentUpon>NavigationUserReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainGroupReportControl.resx">
+      <DependentUpon>MainGroupReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainUserReportControl.resx">
+      <DependentUpon>MainUserReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\RawDataControl.resx">
+      <DependentUpon>RawDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Users\PermissionsManagerControl.resx">

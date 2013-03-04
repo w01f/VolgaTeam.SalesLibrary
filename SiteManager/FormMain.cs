@@ -87,5 +87,15 @@ namespace SalesDepot.SiteManager
 			_enter = false;
 		}
 		#endregion
+
+		private void buttonItemActivitiesViewsReport2_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void buttonItemActivitiesViewsReport5_Click(object sender, EventArgs e)
+		{
+
+		}
 	}
 }
