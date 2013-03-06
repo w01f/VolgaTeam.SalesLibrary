@@ -117,11 +117,16 @@
 					$reportRecord = new MainUserReportRecord();
 					$reportRecord->firstName = $resultRecord['first_name'];
 					$reportRecord->lastName = $resultRecord['last_name'];
-					$reportRecord->groups = $resultRecord['groups'];
-					$reportRecord->totals = $resultRecord['totals'];
-					$reportRecord->logins = $resultRecord['logins'];
-					$reportRecord->files = $resultRecord['docs'];
-					$reportRecord->videos = $resultRecord['videos'];
+					$reportRecord->group = $resultRecord['group_name'];
+					$reportRecord->groupUserCount = $resultRecord['group_user_count'];
+					$reportRecord->userTotal = $resultRecord['user_activity_total'];
+					$reportRecord->groupTotal = $resultRecord['group_activity_total'];
+					$reportRecord->userLogins = $resultRecord['user_activity_login'];
+					$reportRecord->groupLogins = $resultRecord['group_activity_login'];
+					$reportRecord->userDocs = $resultRecord['user_activity_doc'];
+					$reportRecord->groupDocs = $resultRecord['group_activity_doc'];
+					$reportRecord->userVideos = $resultRecord['user_activity_video'];
+					$reportRecord->groupVideos = $resultRecord['group_activity_video'];
 					$reportRecords[] = $reportRecord;
 				}
 			}
@@ -152,7 +157,7 @@
 					$reportRecord->name = $resultRecord['name'];
 					$reportRecord->totals = $resultRecord['totals'];
 					$reportRecord->logins = $resultRecord['logins'];
-					$reportRecord->files = $resultRecord['docs'];
+					$reportRecord->docs = $resultRecord['docs'];
 					$reportRecord->videos = $resultRecord['videos'];
 					$reportRecords[] = $reportRecord;
 				}
@@ -183,10 +188,14 @@
 					$reportRecord = new NavigationUserReportRecord();
 					$reportRecord->firstName = $resultRecord['first_name'];
 					$reportRecord->lastName = $resultRecord['last_name'];
-					$reportRecord->groups = $resultRecord['groups'];
-					$reportRecord->totals = $resultRecord['totals'];
-					$reportRecord->libs = $resultRecord['libs'];
-					$reportRecord->pages = $resultRecord['pages'];
+					$reportRecord->group = $resultRecord['group_name'];
+					$reportRecord->groupUserCount = $resultRecord['group_user_count'];
+					$reportRecord->userTotal = $resultRecord['user_activity_total'];
+					$reportRecord->groupTotal = $resultRecord['group_activity_total'];
+					$reportRecord->userLibraries = $resultRecord['user_activity_libs'];
+					$reportRecord->groupLibraries = $resultRecord['group_activity_libs'];
+					$reportRecord->userPages = $resultRecord['user_activity_pages'];
+					$reportRecord->groupPages = $resultRecord['group_activity_pages'];
 					$reportRecords[] = $reportRecord;
 				}
 			}

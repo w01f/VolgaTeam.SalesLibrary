@@ -7,22 +7,22 @@
 		 */
 		public $name;
 		/**
-		 * @var string logins
+		 * @var int logins
 		 * @soap
 		 */
 		public $logins;
 		/**
-		 * @var string files
+		 * @var int docs
 		 * @soap
 		 */
-		public $files;
+		public $docs;
 		/**
-		 * @var string videos
+		 * @var int videos
 		 * @soap
 		 */
 		public $videos;
 		/**
-		 * @var string totals
+		 * @var int totals
 		 * @soap
 		 */
 		public $totals;

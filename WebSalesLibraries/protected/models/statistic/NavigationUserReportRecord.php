@@ -12,23 +12,43 @@
 		 */
 		public $lastName;
 		/**
-		 * @var string groups
+		 * @var string group
 		 * @soap
 		 */
-		public $groups;
+		public $group;
 		/**
-		 * @var string libs
+		 * @var int groupUserCount
 		 * @soap
 		 */
-		public $libs;
+		public $groupUserCount;
 		/**
-		 * @var string pages
+		 * @var int userTotal
 		 * @soap
 		 */
-		public $pages;
+		public $userTotal;
 		/**
-		 * @var string totals
+		 * @var int groupTotal
 		 * @soap
 		 */
-		public $totals;
+		public $groupTotal;
+		/**
+		 * @var int userLogins
+		 * @soap
+		 */
+		public $userLibraries;
+		/**
+		 * @var int groups
+		 * @soap
+		 */
+		public $groupLibraries;
+		/**
+		 * @var int groups
+		 * @soap
+		 */
+		public $userPages;
+		/**
+		 * @var int groups
+		 * @soap
+		 */
+		public $groupPages;
 	}

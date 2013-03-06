@@ -7,17 +7,17 @@
 		 */
 		public $name;
 		/**
-		 * @var string pages
+		 * @var int pages
 		 * @soap
 		 */
 		public $pages;
 		/**
-		 * @var string libs
+		 * @var int libs
 		 * @soap
 		 */
 		public $libs;
 		/**
-		 * @var string totals
+		 * @var int totals
 		 * @soap
 		 */
 		public $totals;

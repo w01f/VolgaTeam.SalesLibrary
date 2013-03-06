@@ -2,10 +2,14 @@ DROP PROCEDURE IF EXISTS `sp_get_navigation_user_report`;
 CREATE PROCEDURE `sp_get_navigation_user_report`(in start_date datetime,in end_date datetime)
 select su.first_name,
         su.last_name,
-        group_concat(distinct concat(g.name,' (',(select count(id) from tbl_user_group where id_group = g.id),' users)')) as groups,
-        concat(u_totals.total_count,' ', ifnull(group_concat(distinct concat('(',g_totals.name,'-',ROUND((u_totals.total_count/g_totals.total_count)*100),'%)')),'')) as totals,
-        concat(u_libs.libs_count,' ', ifnull(group_concat(distinct concat('(',g_libs.name,'-',ROUND((u_libs.libs_count/g_libs.libs_count)*100),'%)')),'')) as libs,
-        concat(u_pages.pages_count,' ', ifnull(group_concat(distinct concat('(',g_pages.name,'-',ROUND((u_pages.pages_count/g_pages.pages_count)*100),'%)')),'')) as pages
+        g.name as group_name,
+        (select count(id) from tbl_user_group where id_group = g.id) as group_user_count,
+        ifnull(u_totals.total_count,0) as user_activity_total,
+        ifnull(g_totals.total_count,0) as group_activity_total,
+        ifnull(u_libs.libs_count,0) as user_activity_libs,
+        ifnull(g_libs.libs_count,0) as group_activity_libs,
+        ifnull(u_pages.pages_count,0) as user_activity_pages,
+        ifnull(g_pages.pages_count,0) as group_activity_pages
   from tbl_statistic_activity as sact
           join tbl_statistic_user as su on su.id_activity = sact.id
           join tbl_user as u on u.login = su.login
@@ -42,4 +46,4 @@ select su.first_name,
     group by sg.name
           ) as g_pages on g_pages.name = g.name
   where sact.date_time >= start_date and sact.date_time <= end_date
-  group by su.first_name,su.last_name;
+  group by su.first_name,su.last_name,g.name;
