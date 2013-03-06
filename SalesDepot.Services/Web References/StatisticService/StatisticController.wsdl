@@ -51,11 +51,16 @@
         <xsd:all>
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
-          <xsd:element name="groups" type="xsd:string" />
-          <xsd:element name="logins" type="xsd:string" />
-          <xsd:element name="files" type="xsd:string" />
-          <xsd:element name="videos" type="xsd:string" />
-          <xsd:element name="totals" type="xsd:string" />
+          <xsd:element name="group" type="xsd:string" />
+          <xsd:element name="groupUserCount" type="xsd:int" />
+          <xsd:element name="userTotal" type="xsd:int" />
+          <xsd:element name="groupTotal" type="xsd:int" />
+          <xsd:element name="userLogins" type="xsd:int" />
+          <xsd:element name="groupLogins" type="xsd:int" />
+          <xsd:element name="userDocs" type="xsd:int" />
+          <xsd:element name="groupDocs" type="xsd:int" />
+          <xsd:element name="userVideos" type="xsd:int" />
+          <xsd:element name="groupVideos" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="MainGroupReportRecordArray">
@@ -68,10 +73,10 @@
       <xsd:complexType name="MainGroupReportRecord">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="logins" type="xsd:string" />
-          <xsd:element name="files" type="xsd:string" />
-          <xsd:element name="videos" type="xsd:string" />
-          <xsd:element name="totals" type="xsd:string" />
+          <xsd:element name="logins" type="xsd:int" />
+          <xsd:element name="docs" type="xsd:int" />
+          <xsd:element name="videos" type="xsd:int" />
+          <xsd:element name="totals" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="NavigationUserReportRecordArray">
@@ -85,10 +90,14 @@
         <xsd:all>
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
-          <xsd:element name="groups" type="xsd:string" />
-          <xsd:element name="libs" type="xsd:string" />
-          <xsd:element name="pages" type="xsd:string" />
-          <xsd:element name="totals" type="xsd:string" />
+          <xsd:element name="group" type="xsd:string" />
+          <xsd:element name="groupUserCount" type="xsd:int" />
+          <xsd:element name="userTotal" type="xsd:int" />
+          <xsd:element name="groupTotal" type="xsd:int" />
+          <xsd:element name="userLibraries" type="xsd:int" />
+          <xsd:element name="groupLibraries" type="xsd:int" />
+          <xsd:element name="userPages" type="xsd:int" />
+          <xsd:element name="groupPages" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="NavigationGroupReportRecordArray">
@@ -101,9 +110,9 @@
       <xsd:complexType name="NavigationGroupReportRecord">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
-          <xsd:element name="pages" type="xsd:string" />
-          <xsd:element name="libs" type="xsd:string" />
-          <xsd:element name="totals" type="xsd:string" />
+          <xsd:element name="pages" type="xsd:int" />
+          <xsd:element name="libs" type="xsd:int" />
+          <xsd:element name="totals" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
     </xsd:schema>

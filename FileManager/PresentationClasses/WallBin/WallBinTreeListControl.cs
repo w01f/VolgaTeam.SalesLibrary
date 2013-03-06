@@ -293,6 +293,8 @@ namespace FileManager.PresentationClasses.WallBin
 				case ".DOC":
 				case ".DOCX":
 					return 9;
+				case ".KEY":
+					return 10;
 				default:
 					return 2;
 			}

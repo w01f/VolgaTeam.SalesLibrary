@@ -1,6 +1,6 @@
-﻿namespace SalesDepot.SiteManager.PresentationClasses.Activities
+﻿namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 {
-	public partial class NavigationUserReportControl
+	public partial class RawDataControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,12 +31,11 @@
 			this.components = new System.ComponentModel.Container();
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.gridViewData = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.gridColumnName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnGroups = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnLibraries = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnPages = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.gridColumnTotal = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnDate = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
+			this.gridColumnLogin = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.gridColumnSubType = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
@@ -79,11 +78,10 @@
 			this.gridViewData.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewData.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnName,
-            this.gridColumnGroups,
-            this.gridColumnLibraries,
-            this.gridColumnPages,
-            this.gridColumnTotal});
+            this.gridColumnDate,
+            this.gridColumnLogin,
+            this.gridColumnType,
+            this.gridColumnSubType});
 			this.gridViewData.GridControl = this.gridControlData;
 			this.gridViewData.Name = "gridViewData";
 			this.gridViewData.OptionsBehavior.Editable = false;
@@ -101,58 +99,21 @@
 			this.gridViewData.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.gridViewData.OptionsView.ShowGroupPanel = false;
 			this.gridViewData.OptionsView.ShowIndicator = false;
+			this.gridViewData.OptionsView.ShowPreview = true;
+			this.gridViewData.PreviewFieldName = "Details";
 			this.gridViewData.PreviewIndent = 5;
 			this.gridViewData.RowHeight = 35;
 			this.gridViewData.RowSeparatorHeight = 5;
-			this.gridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
-			// gridColumnName
+			// gridColumnDate
 			// 
-			this.gridColumnName.Caption = "Name";
-			this.gridColumnName.FieldName = "FullName";
-			this.gridColumnName.Name = "gridColumnName";
-			this.gridColumnName.Visible = true;
-			this.gridColumnName.VisibleIndex = 0;
-			this.gridColumnName.Width = 230;
-			// 
-			// gridColumnGroups
-			// 
-			this.gridColumnGroups.Caption = "Groups";
-			this.gridColumnGroups.FieldName = "groups";
-			this.gridColumnGroups.Name = "gridColumnGroups";
-			this.gridColumnGroups.Visible = true;
-			this.gridColumnGroups.VisibleIndex = 1;
-			this.gridColumnGroups.Width = 282;
-			// 
-			// gridColumnLibraries
-			// 
-			this.gridColumnLibraries.Caption = "Library Activity";
-			this.gridColumnLibraries.FieldName = "libs";
-			this.gridColumnLibraries.Name = "gridColumnLibraries";
-			this.gridColumnLibraries.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
-			this.gridColumnLibraries.Visible = true;
-			this.gridColumnLibraries.VisibleIndex = 2;
-			this.gridColumnLibraries.Width = 302;
-			// 
-			// gridColumnPages
-			// 
-			this.gridColumnPages.Caption = "Page Activity";
-			this.gridColumnPages.FieldName = "pages";
-			this.gridColumnPages.Name = "gridColumnPages";
-			this.gridColumnPages.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
-			this.gridColumnPages.Visible = true;
-			this.gridColumnPages.VisibleIndex = 3;
-			this.gridColumnPages.Width = 349;
-			// 
-			// gridColumnTotal
-			// 
-			this.gridColumnTotal.Caption = "All Navigation Activity";
-			this.gridColumnTotal.FieldName = "totals";
-			this.gridColumnTotal.Name = "gridColumnTotal";
-			this.gridColumnTotal.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
-			this.gridColumnTotal.Visible = true;
-			this.gridColumnTotal.VisibleIndex = 4;
-			this.gridColumnTotal.Width = 302;
+			this.gridColumnDate.Caption = "Date\\Time";
+			this.gridColumnDate.ColumnEdit = this.repositoryItemDateEditDate;
+			this.gridColumnDate.FieldName = "ActivityDate";
+			this.gridColumnDate.Name = "gridColumnDate";
+			this.gridColumnDate.Visible = true;
+			this.gridColumnDate.VisibleIndex = 0;
+			this.gridColumnDate.Width = 99;
 			// 
 			// repositoryItemDateEditDate
 			// 
@@ -166,6 +127,33 @@
 			this.repositoryItemDateEditDate.Name = "repositoryItemDateEditDate";
 			this.repositoryItemDateEditDate.VistaTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
+			// 
+			// gridColumnLogin
+			// 
+			this.gridColumnLogin.Caption = "Login";
+			this.gridColumnLogin.FieldName = "login";
+			this.gridColumnLogin.Name = "gridColumnLogin";
+			this.gridColumnLogin.Visible = true;
+			this.gridColumnLogin.VisibleIndex = 1;
+			this.gridColumnLogin.Width = 94;
+			// 
+			// gridColumnType
+			// 
+			this.gridColumnType.Caption = "Action Group";
+			this.gridColumnType.FieldName = "type";
+			this.gridColumnType.Name = "gridColumnType";
+			this.gridColumnType.Visible = true;
+			this.gridColumnType.VisibleIndex = 2;
+			this.gridColumnType.Width = 146;
+			// 
+			// gridColumnSubType
+			// 
+			this.gridColumnSubType.Caption = "Action";
+			this.gridColumnSubType.FieldName = "subType";
+			this.gridColumnSubType.Name = "gridColumnSubType";
+			this.gridColumnSubType.Visible = true;
+			this.gridColumnSubType.VisibleIndex = 3;
+			this.gridColumnSubType.Width = 297;
 			// 
 			// defaultLookAndFeel
 			// 
@@ -191,14 +179,14 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
-			// NavigationUserReportControl
+			// RawDataControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
 			this.Controls.Add(this.gridControlData);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-			this.Name = "NavigationUserReportControl";
+			this.Name = "RawDataControl";
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).EndInit();
@@ -214,13 +202,12 @@
 		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         private DevExpress.XtraGrid.GridControl gridControlData;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewData;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnName;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnGroups;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDate;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLogin;
 		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditDate;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibraries;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPages;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnTotal;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnType;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSubType;
     }
 }

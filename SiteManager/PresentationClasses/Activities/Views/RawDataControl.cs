@@ -4,16 +4,15 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.SiteManager.ToolForms;
 
-namespace SalesDepot.SiteManager.PresentationClasses.Activities
+namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 {
 	[ToolboxItem(false)]
-	public partial class MainGroupReportControl : UserControl, IActivitiesView
+	public partial class RawDataControl : UserControl, IActivitiesView
 	{
-		private readonly List<MainGroupReportRecord> _records = new List<MainGroupReportRecord>();
+		private readonly List<UserActivity> _activities = new List<UserActivity>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -28,7 +27,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			}
 		}
 
-		public MainGroupReportControl()
+		public Control FilterControl
+		{
+			get { return null; }
+		}
+
+		public RawDataControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
@@ -53,7 +57,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetMainGroupReport(StartDate, EndDate, out message)));
+					var thread = new Thread(() => _activities.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetActivities(StartDate, EndDate, out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -70,7 +74,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetMainGroupReport(StartDate, EndDate, out message)));
+				var thread = new Thread(() => _activities.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetActivities(StartDate, EndDate, out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -79,20 +83,13 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 				}
 			}
 			updateMessage = message;
-			gridControlData.DataSource = _records;
+			gridControlData.DataSource = _activities;
 		}
 
 		public void ClearData()
 		{
 			gridControlData.DataSource = null;
-			_records.Clear();
-		}
-
-		private void gridViewData_CustomColumnSort(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnSortEventArgs e)
-		{
-			if (e.Column.SortMode != DevExpress.XtraGrid.ColumnSortMode.Custom || e.Value1 == null || e.Value2 == null) return;
-			e.Handled = true;
-			e.Result = WinAPIHelper.StrCmpLogicalW(e.Value1.ToString(), e.Value2.ToString());
+			_activities.Clear();
 		}
 	}
 }

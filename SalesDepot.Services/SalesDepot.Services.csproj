@@ -68,6 +68,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StatisticService\NavigationGroupReportRecord.cs" />
+    <Compile Include="StatisticService\MainGroupReportRecord.cs" />
     <Compile Include="StatisticService\NavigationUserReportRecord.cs" />
     <Compile Include="StatisticService\MainUserReportRecord.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />

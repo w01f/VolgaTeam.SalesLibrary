@@ -6,14 +6,15 @@ using System.Threading;
 using System.Windows.Forms;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Services.StatisticService;
+using SalesDepot.SiteManager.PresentationClasses.Activities.Filters;
 using SalesDepot.SiteManager.ToolForms;
 
-namespace SalesDepot.SiteManager.PresentationClasses.Activities
+namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 {
 	[ToolboxItem(false)]
-	public partial class NavigationUserReportControl : UserControl, IActivitiesView
+	public partial class NavigationGroupReportControl : UserControl, IActivitiesView
 	{
-		private readonly List<NavigationUserReportRecord> _records = new List<NavigationUserReportRecord>();
+		private readonly List<NavigationGroupReportRecord> _records = new List<NavigationGroupReportRecord>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -25,19 +26,29 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			{
 				_active = value;
 				Visible = _active;
+				_filterControl.Visible = _active;
 			}
 		}
 
-		public NavigationUserReportControl()
+		private NavigationGroupFilter _filterControl;
+		public Control FilterControl
+		{
+			get { return _filterControl; }
+		}
+
+		public NavigationGroupReportControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+			_filterControl = new NavigationGroupFilter();
+			_filterControl.FilterChanged += (o, e) => ApplyData();
 		}
 
 		public void ShowView()
 		{
 			Active = true;
 			BringToFront();
+			_filterControl.BringToFront();
 		}
 
 		public void UpdateData(bool showMessages, ref string updateMessage)
@@ -53,7 +64,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetNavigationUserReport(StartDate, EndDate, out message)));
+					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetNavigationGroupReport(StartDate, EndDate, out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -70,7 +81,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetNavigationUserReport(StartDate, EndDate, out message)));
+				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetNavigationGroupReport(StartDate, EndDate, out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -79,6 +90,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 				}
 			}
 			updateMessage = message;
+			_filterControl.UpdateDataSource(_records.Select(x => x.name).Where(x => !string.IsNullOrEmpty(x)).ToArray());
+			ApplyData();
 			gridControlData.DataSource = _records;
 		}
 
@@ -86,6 +99,22 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		{
 			gridControlData.DataSource = null;
 			_records.Clear();
+		}
+
+		private void ApplyData()
+		{
+			var filteredRecords = new List<NavigationGroupReportRecord>();
+			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(x => _filterControl.SelectedGroups.Contains(x.name)) : _records);
+			var allLibraries = filteredRecords.Sum(x => x.libs);
+			var allPages = filteredRecords.Sum(x => x.pages);
+			var allTotals = filteredRecords.Sum(x => x.totals);
+			foreach (var record in filteredRecords)
+			{
+				record.AllLibraries = allLibraries;
+				record.AllPages = allPages;
+				record.AllTotals = allTotals;
+			}
+			gridControlData.DataSource = filteredRecords;
 		}
 
 		private void gridViewData_CustomColumnSort(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnSortEventArgs e)

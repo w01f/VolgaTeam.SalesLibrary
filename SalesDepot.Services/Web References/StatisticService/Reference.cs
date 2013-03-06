@@ -544,11 +544,11 @@ namespace SalesDepot.Services.StatisticService {
         
         private string nameField;
         
-        private string pagesField;
+        private int pagesField;
         
-        private string libsField;
+        private int libsField;
         
-        private string totalsField;
+        private int totalsField;
         
         /// <remarks/>
         public string name {
@@ -561,7 +561,7 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string pages {
+        public int pages {
             get {
                 return this.pagesField;
             }
@@ -571,7 +571,7 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string libs {
+        public int libs {
             get {
                 return this.libsField;
             }
@@ -581,7 +581,7 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string totals {
+        public int totals {
             get {
                 return this.totalsField;
             }
@@ -603,13 +603,21 @@ namespace SalesDepot.Services.StatisticService {
         
         private string lastNameField;
         
-        private string groupsField;
+        private string groupField;
         
-        private string libsField;
+        private int groupUserCountField;
         
-        private string pagesField;
+        private int userTotalField;
         
-        private string totalsField;
+        private int groupTotalField;
+        
+        private int userLibrariesField;
+        
+        private int groupLibrariesField;
+        
+        private int userPagesField;
+        
+        private int groupPagesField;
         
         /// <remarks/>
         public string firstName {
@@ -632,42 +640,82 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string groups {
+        public string group {
             get {
-                return this.groupsField;
+                return this.groupField;
             }
             set {
-                this.groupsField = value;
+                this.groupField = value;
             }
         }
         
         /// <remarks/>
-        public string libs {
+        public int groupUserCount {
             get {
-                return this.libsField;
+                return this.groupUserCountField;
             }
             set {
-                this.libsField = value;
+                this.groupUserCountField = value;
             }
         }
         
         /// <remarks/>
-        public string pages {
+        public int userTotal {
             get {
-                return this.pagesField;
+                return this.userTotalField;
             }
             set {
-                this.pagesField = value;
+                this.userTotalField = value;
             }
         }
         
         /// <remarks/>
-        public string totals {
+        public int groupTotal {
             get {
-                return this.totalsField;
+                return this.groupTotalField;
             }
             set {
-                this.totalsField = value;
+                this.groupTotalField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int userLibraries {
+            get {
+                return this.userLibrariesField;
+            }
+            set {
+                this.userLibrariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int groupLibraries {
+            get {
+                return this.groupLibrariesField;
+            }
+            set {
+                this.groupLibrariesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int userPages {
+            get {
+                return this.userPagesField;
+            }
+            set {
+                this.userPagesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int groupPages {
+            get {
+                return this.groupPagesField;
+            }
+            set {
+                this.groupPagesField = value;
             }
         }
     }
@@ -682,13 +730,13 @@ namespace SalesDepot.Services.StatisticService {
         
         private string nameField;
         
-        private string loginsField;
+        private int loginsField;
         
-        private string filesField;
+        private int docsField;
         
-        private string videosField;
+        private int videosField;
         
-        private string totalsField;
+        private int totalsField;
         
         /// <remarks/>
         public string name {
@@ -701,7 +749,7 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string logins {
+        public int logins {
             get {
                 return this.loginsField;
             }
@@ -711,17 +759,17 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string files {
+        public int docs {
             get {
-                return this.filesField;
+                return this.docsField;
             }
             set {
-                this.filesField = value;
+                this.docsField = value;
             }
         }
         
         /// <remarks/>
-        public string videos {
+        public int videos {
             get {
                 return this.videosField;
             }
@@ -731,7 +779,7 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string totals {
+        public int totals {
             get {
                 return this.totalsField;
             }
@@ -753,15 +801,25 @@ namespace SalesDepot.Services.StatisticService {
         
         private string lastNameField;
         
-        private string groupsField;
+        private string groupField;
         
-        private string loginsField;
+        private int groupUserCountField;
         
-        private string filesField;
+        private int userTotalField;
         
-        private string videosField;
+        private int groupTotalField;
         
-        private string totalsField;
+        private int userLoginsField;
+        
+        private int groupLoginsField;
+        
+        private int userDocsField;
+        
+        private int groupDocsField;
+        
+        private int userVideosField;
+        
+        private int groupVideosField;
         
         /// <remarks/>
         public string firstName {
@@ -784,52 +842,102 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public string groups {
+        public string group {
             get {
-                return this.groupsField;
+                return this.groupField;
             }
             set {
-                this.groupsField = value;
+                this.groupField = value;
             }
         }
         
         /// <remarks/>
-        public string logins {
+        public int groupUserCount {
             get {
-                return this.loginsField;
+                return this.groupUserCountField;
             }
             set {
-                this.loginsField = value;
+                this.groupUserCountField = value;
             }
         }
         
         /// <remarks/>
-        public string files {
+        public int userTotal {
             get {
-                return this.filesField;
+                return this.userTotalField;
             }
             set {
-                this.filesField = value;
+                this.userTotalField = value;
             }
         }
         
         /// <remarks/>
-        public string videos {
+        public int groupTotal {
             get {
-                return this.videosField;
+                return this.groupTotalField;
             }
             set {
-                this.videosField = value;
+                this.groupTotalField = value;
             }
         }
         
         /// <remarks/>
-        public string totals {
+        public int userLogins {
             get {
-                return this.totalsField;
+                return this.userLoginsField;
             }
             set {
-                this.totalsField = value;
+                this.userLoginsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int groupLogins {
+            get {
+                return this.groupLoginsField;
+            }
+            set {
+                this.groupLoginsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int userDocs {
+            get {
+                return this.userDocsField;
+            }
+            set {
+                this.userDocsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int groupDocs {
+            get {
+                return this.groupDocsField;
+            }
+            set {
+                this.groupDocsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int userVideos {
+            get {
+                return this.userVideosField;
+            }
+            set {
+                this.userVideosField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int groupVideos {
+            get {
+                return this.groupVideosField;
+            }
+            set {
+                this.groupVideosField = value;
             }
         }
     }

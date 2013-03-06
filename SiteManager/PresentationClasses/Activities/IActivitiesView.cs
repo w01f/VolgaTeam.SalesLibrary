@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Windows.Forms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities
 {
@@ -8,6 +8,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		DateTime StartDate { get; set; }
 		DateTime EndDate { get; set; }
 		bool Active { get; set; }
+		Control FilterControl { get; }
 		void ShowView();
 		void UpdateData(bool showMessages, ref string updateMessage);
 		void ClearData();

@@ -101,35 +101,59 @@
     <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.Designer.cs">
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationGroupReportControl.cs">
+    <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationGroupReportControl.Designer.cs">
+    <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.Designer.cs">
+      <DependentUpon>NavigationGroupFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.Designer.cs">
+      <DependentUpon>MainGroupFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\NavigationUserFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\NavigationUserFilter.Designer.cs">
+      <DependentUpon>NavigationUserFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\MainUserFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\MainUserFilter.Designer.cs">
+      <DependentUpon>MainUserFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.Designer.cs">
       <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationUserReportControl.cs">
+    <Compile Include="PresentationClasses\Activities\Views\NavigationUserReportControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\NavigationUserReportControl.Designer.cs">
+    <Compile Include="PresentationClasses\Activities\Views\NavigationUserReportControl.Designer.cs">
       <DependentUpon>NavigationUserReportControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\MainGroupReportControl.cs">
+    <Compile Include="PresentationClasses\Activities\Views\MainGroupReportControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\MainGroupReportControl.Designer.cs">
+    <Compile Include="PresentationClasses\Activities\Views\MainGroupReportControl.Designer.cs">
       <DependentUpon>MainGroupReportControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\MainUserReportControl.cs">
+    <Compile Include="PresentationClasses\Activities\Views\MainUserReportControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\MainUserReportControl.Designer.cs">
+    <Compile Include="PresentationClasses\Activities\Views\MainUserReportControl.Designer.cs">
       <DependentUpon>MainUserReportControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\IActivitiesView.cs" />
-    <Compile Include="PresentationClasses\Activities\RawDataControl.cs">
+    <Compile Include="PresentationClasses\Activities\Views\RawDataControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\RawDataControl.Designer.cs">
+    <Compile Include="PresentationClasses\Activities\Views\RawDataControl.Designer.cs">
       <DependentUpon>RawDataControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Users\PermissionsManagerControl.cs">
@@ -184,23 +208,35 @@
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationGroupReportControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.resx">
+      <DependentUpon>NavigationGroupFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainGroupFilter.resx">
+      <DependentUpon>MainGroupFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationUserFilter.resx">
+      <DependentUpon>NavigationUserFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainUserFilter.resx">
+      <DependentUpon>MainUserFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.resx">
       <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\NavigationUserReportControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\NavigationUserReportControl.resx">
       <DependentUpon>NavigationUserReportControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\MainGroupReportControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\MainGroupReportControl.resx">
       <DependentUpon>MainGroupReportControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\MainUserReportControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\MainUserReportControl.resx">
       <DependentUpon>MainUserReportControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\RawDataControl.resx">
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\RawDataControl.resx">
       <DependentUpon>RawDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -300,6 +336,7 @@
       <Name>SalesDepot.Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

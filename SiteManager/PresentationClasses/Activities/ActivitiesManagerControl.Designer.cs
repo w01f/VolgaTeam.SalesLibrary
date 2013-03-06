@@ -39,6 +39,8 @@
 			this.dateEditEnd = new DevExpress.XtraEditors.DateEdit();
 			this.labelControlDateStart = new DevExpress.XtraEditors.LabelControl();
 			this.dateEditStart = new DevExpress.XtraEditors.DateEdit();
+			this.pnCustomFilter = new System.Windows.Forms.Panel();
+			this.pnFilterButtons = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
 			this.gbDate.SuspendLayout();
@@ -47,6 +49,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
+			this.pnFilterButtons.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// defaultLookAndFeel
@@ -56,13 +59,13 @@
 			// buttonXApplyFilter
 			// 
 			this.buttonXApplyFilter.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXApplyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXApplyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXApplyFilter.CausesValidation = false;
 			this.buttonXApplyFilter.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXApplyFilter.Location = new System.Drawing.Point(14, 438);
+			this.buttonXApplyFilter.Location = new System.Drawing.Point(7, 5);
 			this.buttonXApplyFilter.Name = "buttonXApplyFilter";
-			this.buttonXApplyFilter.Size = new System.Drawing.Size(222, 33);
+			this.buttonXApplyFilter.Size = new System.Drawing.Size(226, 33);
 			this.buttonXApplyFilter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXApplyFilter.TabIndex = 16;
 			this.buttonXApplyFilter.Text = "Apply Filter";
@@ -79,9 +82,11 @@
 			this.splitContainerControl.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainerControl.Location = new System.Drawing.Point(0, 0);
 			this.splitContainerControl.Name = "splitContainerControl";
+			this.splitContainerControl.Panel1.Controls.Add(this.pnCustomFilter);
+			this.splitContainerControl.Panel1.Controls.Add(this.pnFilterButtons);
 			this.splitContainerControl.Panel1.Controls.Add(this.gbDate);
-			this.splitContainerControl.Panel1.Controls.Add(this.buttonXApplyFilter);
 			this.splitContainerControl.Panel1.MinSize = 250;
+			this.splitContainerControl.Panel1.Padding = new System.Windows.Forms.Padding(5);
 			this.splitContainerControl.Panel1.Text = "Panel1";
 			this.splitContainerControl.Panel2.Text = "Panel2";
 			this.splitContainerControl.Size = new System.Drawing.Size(898, 483);
@@ -95,9 +100,10 @@
 			this.gbDate.Controls.Add(this.dateEditEnd);
 			this.gbDate.Controls.Add(this.labelControlDateStart);
 			this.gbDate.Controls.Add(this.dateEditStart);
-			this.gbDate.Location = new System.Drawing.Point(4, 8);
+			this.gbDate.Dock = System.Windows.Forms.DockStyle.Top;
+			this.gbDate.Location = new System.Drawing.Point(5, 5);
 			this.gbDate.Name = "gbDate";
-			this.gbDate.Size = new System.Drawing.Size(242, 98);
+			this.gbDate.Size = new System.Drawing.Size(240, 98);
 			this.gbDate.TabIndex = 17;
 			this.gbDate.TabStop = false;
 			this.gbDate.Text = "Date range";
@@ -169,6 +175,23 @@
 			this.dateEditStart.StyleController = this.styleController;
 			this.dateEditStart.TabIndex = 0;
 			// 
+			// pnCustomFilter
+			// 
+			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnCustomFilter.Location = new System.Drawing.Point(5, 103);
+			this.pnCustomFilter.Name = "pnCustomFilter";
+			this.pnCustomFilter.Size = new System.Drawing.Size(240, 330);
+			this.pnCustomFilter.TabIndex = 18;
+			// 
+			// pnFilterButtons
+			// 
+			this.pnFilterButtons.Controls.Add(this.buttonXApplyFilter);
+			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.pnFilterButtons.Location = new System.Drawing.Point(5, 433);
+			this.pnFilterButtons.Name = "pnFilterButtons";
+			this.pnFilterButtons.Size = new System.Drawing.Size(240, 45);
+			this.pnFilterButtons.TabIndex = 19;
+			// 
 			// ActivitiesManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -187,6 +210,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).EndInit();
+			this.pnFilterButtons.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -203,5 +227,7 @@
 		private DevExpress.XtraEditors.LabelControl labelControlDateEnd;
 		private DevExpress.XtraEditors.DateEdit dateEditEnd;
 		private DevExpress.XtraEditors.LabelControl labelControlDateStart;
+		private System.Windows.Forms.Panel pnFilterButtons;
+		private System.Windows.Forms.Panel pnCustomFilter;
     }
 }

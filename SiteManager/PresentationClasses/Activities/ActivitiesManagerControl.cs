@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using SalesDepot.SiteManager.PresentationClasses.Activities.Views;
 using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities
@@ -29,18 +30,28 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			var view1 = new RawDataControl();
 			_views.Add(ViewType.RawData, view1);
 			splitContainerControl.Panel2.Controls.Add(view1);
+			if (view1.FilterControl != null)
+				pnCustomFilter.Controls.Add(view1.FilterControl);
 			var view2 = new MainUserReportControl();
 			_views.Add(ViewType.MainUserReport, view2);
 			splitContainerControl.Panel2.Controls.Add(view2);
+			if (view2.FilterControl != null)
+				pnCustomFilter.Controls.Add(view2.FilterControl);
 			var view3 = new MainGroupReportControl();
 			_views.Add(ViewType.MainGroupReport, view3);
 			splitContainerControl.Panel2.Controls.Add(view3);
+			if (view3.FilterControl != null)
+				pnCustomFilter.Controls.Add(view3.FilterControl);
 			var view4 = new NavigationUserReportControl();
 			_views.Add(ViewType.NavigationUserReport, view4);
 			splitContainerControl.Panel2.Controls.Add(view4);
+			if (view4.FilterControl != null)
+				pnCustomFilter.Controls.Add(view4.FilterControl);
 			var view5 = new NavigationGroupReportControl();
 			_views.Add(ViewType.NavigationGroupReport, view5);
 			splitContainerControl.Panel2.Controls.Add(view5);
+			if (view5.FilterControl != null)
+				pnCustomFilter.Controls.Add(view5.FilterControl);
 		}
 
 		public void ChangeView(ViewType viewType)
