@@ -37,14 +37,19 @@
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXGroupsNone = new DevComponents.DotNetBar.ButtonX();
+			this.labelControlColumnsTitle = new DevExpress.XtraEditors.LabelControl();
+			this.checkEditShowNumber = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditShowPercent = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowNumber.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowPercent.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// checkEditEnableFilter
 			// 
-			this.checkEditEnableFilter.Location = new System.Drawing.Point(8, 12);
+			this.checkEditEnableFilter.Location = new System.Drawing.Point(8, 8);
 			this.checkEditEnableFilter.Name = "checkEditEnableFilter";
 			this.checkEditEnableFilter.Properties.Caption = "Enable Filter";
 			this.checkEditEnableFilter.Size = new System.Drawing.Size(222, 21);
@@ -84,17 +89,17 @@
 			this.checkedListBoxControlGroups.CheckOnClick = true;
 			this.checkedListBoxControlGroups.Enabled = false;
 			this.checkedListBoxControlGroups.ItemHeight = 35;
-			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 66);
+			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 316);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 264);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
 			// 
 			// labelControlGroupsTitle
 			// 
-			this.labelControlGroupsTitle.Location = new System.Drawing.Point(10, 44);
+			this.labelControlGroupsTitle.Location = new System.Drawing.Point(10, 34);
 			this.labelControlGroupsTitle.Name = "labelControlGroupsTitle";
 			this.labelControlGroupsTitle.Size = new System.Drawing.Size(46, 16);
 			this.labelControlGroupsTitle.StyleController = this.styleController;
@@ -104,12 +109,12 @@
 			// buttonXGroupsAll
 			// 
 			this.buttonXGroupsAll.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXGroupsAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonXGroupsAll.CausesValidation = false;
 			this.buttonXGroupsAll.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXGroupsAll.Location = new System.Drawing.Point(8, 388);
+			this.buttonXGroupsAll.Enabled = false;
+			this.buttonXGroupsAll.Location = new System.Drawing.Point(8, 59);
 			this.buttonXGroupsAll.Name = "buttonXGroupsAll";
-			this.buttonXGroupsAll.Size = new System.Drawing.Size(103, 29);
+			this.buttonXGroupsAll.Size = new System.Drawing.Size(103, 23);
 			this.buttonXGroupsAll.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXGroupsAll.TabIndex = 17;
 			this.buttonXGroupsAll.Text = "Select All";
@@ -119,33 +124,75 @@
 			// buttonXGroupsNone
 			// 
 			this.buttonXGroupsNone.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXGroupsNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXGroupsNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXGroupsNone.CausesValidation = false;
 			this.buttonXGroupsNone.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXGroupsNone.Location = new System.Drawing.Point(127, 388);
+			this.buttonXGroupsNone.Enabled = false;
+			this.buttonXGroupsNone.Location = new System.Drawing.Point(127, 59);
 			this.buttonXGroupsNone.Name = "buttonXGroupsNone";
-			this.buttonXGroupsNone.Size = new System.Drawing.Size(103, 29);
+			this.buttonXGroupsNone.Size = new System.Drawing.Size(103, 23);
 			this.buttonXGroupsNone.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXGroupsNone.TabIndex = 18;
 			this.buttonXGroupsNone.Text = "Clear All";
 			this.buttonXGroupsNone.TextColor = System.Drawing.Color.Black;
 			this.buttonXGroupsNone.Click += new System.EventHandler(this.buttonXGroupsNone_Click);
 			// 
-			// MainUserFilter
+			// labelControlColumnsTitle
+			// 
+			this.labelControlColumnsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.labelControlColumnsTitle.Location = new System.Drawing.Point(10, 377);
+			this.labelControlColumnsTitle.Name = "labelControlColumnsTitle";
+			this.labelControlColumnsTitle.Size = new System.Drawing.Size(55, 16);
+			this.labelControlColumnsTitle.StyleController = this.styleController;
+			this.labelControlColumnsTitle.TabIndex = 19;
+			this.labelControlColumnsTitle.Text = "Columns:";
+			// 
+			// checkEditShowNumber
+			// 
+			this.checkEditShowNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditShowNumber.EditValue = true;
+			this.checkEditShowNumber.Location = new System.Drawing.Point(8, 399);
+			this.checkEditShowNumber.Name = "checkEditShowNumber";
+			this.checkEditShowNumber.Properties.AutoWidth = true;
+			this.checkEditShowNumber.Properties.Caption = "Show #";
+			this.checkEditShowNumber.Size = new System.Drawing.Size(65, 21);
+			this.checkEditShowNumber.StyleController = this.styleController;
+			this.checkEditShowNumber.TabIndex = 20;
+			this.checkEditShowNumber.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
+			// 
+			// checkEditShowPercent
+			// 
+			this.checkEditShowPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditShowPercent.EditValue = true;
+			this.checkEditShowPercent.Location = new System.Drawing.Point(103, 399);
+			this.checkEditShowPercent.Name = "checkEditShowPercent";
+			this.checkEditShowPercent.Properties.AutoWidth = true;
+			this.checkEditShowPercent.Properties.Caption = "Show %";
+			this.checkEditShowPercent.Size = new System.Drawing.Size(70, 21);
+			this.checkEditShowPercent.StyleController = this.styleController;
+			this.checkEditShowPercent.TabIndex = 21;
+			this.checkEditShowPercent.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
+			// 
+			// MainGroupFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.Controls.Add(this.checkEditShowPercent);
+			this.Controls.Add(this.checkEditShowNumber);
+			this.Controls.Add(this.labelControlColumnsTitle);
 			this.Controls.Add(this.buttonXGroupsNone);
 			this.Controls.Add(this.buttonXGroupsAll);
 			this.Controls.Add(this.labelControlGroupsTitle);
 			this.Controls.Add(this.checkedListBoxControlGroups);
 			this.Controls.Add(this.checkEditEnableFilter);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "MainUserFilter";
+			this.Name = "MainGroupFilter";
 			this.Size = new System.Drawing.Size(238, 429);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowNumber.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowPercent.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -161,5 +208,8 @@
 		private DevExpress.XtraEditors.LabelControl labelControlGroupsTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsAll;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsNone;
+		private DevExpress.XtraEditors.LabelControl labelControlColumnsTitle;
+		private DevExpress.XtraEditors.CheckEdit checkEditShowNumber;
+		private DevExpress.XtraEditors.CheckEdit checkEditShowPercent;
 	}
 }

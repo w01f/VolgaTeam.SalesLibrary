@@ -68,6 +68,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StatisticService\AccessReportRecord.cs" />
     <Compile Include="StatisticService\NavigationGroupReportRecord.cs" />
     <Compile Include="StatisticService\MainGroupReportRecord.cs" />
     <Compile Include="StatisticService\NavigationUserReportRecord.cs" />
@@ -175,6 +176,9 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\IPadAdminService\UserRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\AccessReportRecord.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\MainGroupReportRecord.datasource">

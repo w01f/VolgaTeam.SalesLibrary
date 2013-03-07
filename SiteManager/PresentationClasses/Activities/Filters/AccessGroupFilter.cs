@@ -8,7 +8,7 @@ using DevExpress.XtraEditors.Controls;
 namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 {
 	[ToolboxItem(false)]
-	public partial class MainGroupFilter : UserControl
+	public partial class AccessGroupFilter : UserControl
 	{
 		private bool _init;
 
@@ -28,7 +28,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 		public List<string> AllGroups { get; private set; }
 		public List<string> SelectedGroups { get; private set; }
 
-		public MainGroupFilter()
+		public AccessGroupFilter()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;

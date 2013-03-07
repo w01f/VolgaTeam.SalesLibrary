@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 
@@ -13,6 +14,16 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 
 		public bool EnableFilter { get; private set; }
 		public event EventHandler<EventArgs> FilterChanged;
+
+		public bool ShowNumber
+		{
+			get { return checkEditShowNumber.Checked; }
+		}
+		public bool ShowPercent
+		{
+			get { return checkEditShowPercent.Checked; }
+		}
+		public event EventHandler<EventArgs> ColumnsChanged;
 
 		public List<string> AllGroups { get; private set; }
 		public List<string> SelectedGroups { get; private set; }
@@ -31,11 +42,15 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 
 			AllGroups.Clear();
 			AllGroups.AddRange(groups);
-			SelectedGroups.AddRange(AllGroups);
-
+			if (SelectedGroups.Count > 0)
+				SelectedGroups.RemoveAll(x => !AllGroups.Contains(x));
+			else
+				SelectedGroups.AddRange(AllGroups);
 			checkedListBoxControlGroups.Items.Clear();
 			foreach (var group in groups)
-				checkedListBoxControlGroups.Items.Add(group, true);
+				checkedListBoxControlGroups.Items.Add(group, SelectedGroups.Contains(group));
+
+			labelControlGroupsTitle.Text = string.Format("Groups: {0}", AllGroups.Count);
 
 			_init = false;
 		}
@@ -44,6 +59,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 		{
 			EnableFilter = checkEditEnableFilter.Checked;
 			checkedListBoxControlGroups.Enabled = EnableFilter;
+			buttonXGroupsAll.Enabled = EnableFilter;
+			buttonXGroupsNone.Enabled = EnableFilter;
 			if (FilterChanged != null)
 				FilterChanged(this, new EventArgs());
 		}
@@ -77,6 +94,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 			if (FilterChanged != null)
 				FilterChanged(this, new EventArgs());
 			_init = false;
+		}
+
+		private void checkEditShowColumns_CheckedChanged(object sender, EventArgs e)
+		{
+			if (ColumnsChanged != null)
+				ColumnsChanged(this, new EventArgs());
 		}
 	}
 }

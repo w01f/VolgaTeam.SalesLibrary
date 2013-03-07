@@ -139,6 +139,12 @@
 			this.advBandedGridViewData.OptionsCustomization.AllowGroup = false;
 			this.advBandedGridViewData.OptionsCustomization.AllowQuickHideColumns = false;
 			this.advBandedGridViewData.OptionsCustomization.ShowBandsInCustomizationForm = false;
+			this.advBandedGridViewData.OptionsMenu.EnableColumnMenu = false;
+			this.advBandedGridViewData.OptionsMenu.EnableFooterMenu = false;
+			this.advBandedGridViewData.OptionsMenu.EnableGroupPanelMenu = false;
+			this.advBandedGridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
+			this.advBandedGridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+			this.advBandedGridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
 			this.advBandedGridViewData.OptionsView.AutoCalcPreviewLineCount = true;
@@ -236,9 +242,9 @@
 			this.repositoryItemSpinEditPercent.AutoHeight = false;
 			this.repositoryItemSpinEditPercent.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
-			this.repositoryItemSpinEditPercent.DisplayFormat.FormatString = "#0%";
+			this.repositoryItemSpinEditPercent.DisplayFormat.FormatString = "#0.##%";
 			this.repositoryItemSpinEditPercent.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-			this.repositoryItemSpinEditPercent.EditFormat.FormatString = "#0%";
+			this.repositoryItemSpinEditPercent.EditFormat.FormatString = "#0.##%";
 			this.repositoryItemSpinEditPercent.EditFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.repositoryItemSpinEditPercent.Name = "repositoryItemSpinEditPercent";
 			this.repositoryItemSpinEditPercent.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;

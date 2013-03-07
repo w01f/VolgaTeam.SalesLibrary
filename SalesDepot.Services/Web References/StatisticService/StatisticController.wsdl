@@ -115,6 +115,23 @@
           <xsd:element name="totals" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="AccessReportRecordArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:AccessReportRecord[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="AccessReportRecord">
+        <xsd:all>
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="userCount" type="xsd:int" />
+          <xsd:element name="activeCount" type="xsd:int" />
+          <xsd:element name="activeNames" type="xsd:string" />
+          <xsd:element name="inactiveCount" type="xsd:int" />
+          <xsd:element name="inactiveNames" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="getSessionKeyRequest">
@@ -164,6 +181,14 @@
   <wsdl:message name="getNavigationGroupReportResponse">
     <wsdl:part name="return" type="tns:NavigationGroupReportRecordArray" />
   </wsdl:message>
+  <wsdl:message name="getAccessReportRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAccessReportResponse">
+    <wsdl:part name="return" type="tns:AccessReportRecordArray" />
+  </wsdl:message>
   <wsdl:portType name="StatisticControllerPortType">
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -200,6 +225,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:getNavigationGroupReportRequest" />
       <wsdl:output message="tns:getNavigationGroupReportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAccessReport">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getAccessReportRequest" />
+      <wsdl:output message="tns:getAccessReportResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StatisticControllerBinding" type="tns:StatisticControllerPortType">
@@ -251,6 +282,15 @@
     </wsdl:operation>
     <wsdl:operation name="getNavigationGroupReport">
       <soap:operation soapAction="urn:StatisticControllerwsdl#getNavigationGroupReport" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAccessReport">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getAccessReport" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

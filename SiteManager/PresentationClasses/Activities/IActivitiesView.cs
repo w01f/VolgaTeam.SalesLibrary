@@ -21,8 +21,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		MainGroupReport = 2,
 		NavigationUserReport = 3,
 		NavigationGroupReport = 4,
-		Report5 = 5,
-		Report6 = 6,
+		AccessGroupReport = 5,
+		AccessAllReport = 6,
 		None = 999
 	}
 }

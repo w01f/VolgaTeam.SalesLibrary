@@ -52,6 +52,16 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			splitContainerControl.Panel2.Controls.Add(view5);
 			if (view5.FilterControl != null)
 				pnCustomFilter.Controls.Add(view5.FilterControl);
+			var view6 = new AccessGroupReportControl();
+			_views.Add(ViewType.AccessGroupReport, view6);
+			splitContainerControl.Panel2.Controls.Add(view6);
+			if (view6.FilterControl != null)
+				pnCustomFilter.Controls.Add(view6.FilterControl);
+			var view7 = new AccessAllReportControl();
+			_views.Add(ViewType.AccessAllReport, view7);
+			splitContainerControl.Panel2.Controls.Add(view7);
+			if (view7.FilterControl != null)
+				pnCustomFilter.Controls.Add(view7.FilterControl);
 		}
 
 		public void ChangeView(ViewType viewType)
@@ -99,7 +109,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 				view.ClearData();
 		}
 
-		private void buttonXApplyFilter_Click(object sender, EventArgs e)
+		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData(true);
 		}

@@ -42,6 +42,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			Dock = DockStyle.Fill;
 			_filterControl = new MainGroupFilter();
 			_filterControl.FilterChanged += (o, e) => ApplyData();
+			_filterControl.ColumnsChanged += (o, e) => ApplyColumns();
 		}
 
 		public void ShowView()
@@ -90,9 +91,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.Select(x => x.name).Where(x => !string.IsNullOrEmpty(x)).ToArray());
+			_filterControl.UpdateDataSource(_records.Select(x => x.name).Where(x => !string.IsNullOrEmpty(x)).Distinct().ToArray());
 			ApplyData();
-			gridControlData.DataSource = _records;
 		}
 
 		public void ClearData()
@@ -117,6 +117,45 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				record.AllTotals = allTotals;
 			}
 			gridControlData.DataSource = filteredRecords;
+		}
+
+		private void ApplyColumns()
+		{
+			gridColumnGroupLoginNumber.Visible = _filterControl.ShowNumber;
+			gridColumnGroupLoginPercent.Visible = _filterControl.ShowPercent;
+			if (_filterControl.ShowNumber)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupLoginNumber, 0, 0);
+			if (_filterControl.ShowPercent)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupLoginPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
+			advBandedGridViewData.SetColumnPosition(gridColumnAllLoginNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
+			gridColumnAllLoginNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
+
+			gridColumnGroupDocsNumber.Visible = _filterControl.ShowNumber;
+			gridColumnGroupDocsPercent.Visible = _filterControl.ShowPercent;
+			if (_filterControl.ShowNumber)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupDocsNumber, 0, 0);
+			if (_filterControl.ShowPercent)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupDocsPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
+			advBandedGridViewData.SetColumnPosition(gridColumnAllDocsNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
+			gridColumnAllDocsNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
+
+			gridColumnGroupVideosNumber.Visible = _filterControl.ShowNumber;
+			gridColumnGroupVideosPercent.Visible = _filterControl.ShowPercent;
+			if (_filterControl.ShowNumber)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupVideosNumber, 0, 0);
+			if (_filterControl.ShowPercent)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupVideosPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
+			advBandedGridViewData.SetColumnPosition(gridColumnAllVideosNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
+			gridColumnAllVideosNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
+
+			gridColumnGroupTotalNumber.Visible = _filterControl.ShowNumber;
+			gridColumnGroupTotalPercent.Visible = _filterControl.ShowPercent;
+			if (_filterControl.ShowNumber)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupTotalNumber, 0, 0);
+			if (_filterControl.ShowPercent)
+				advBandedGridViewData.SetColumnPosition(gridColumnGroupTotalPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
+			advBandedGridViewData.SetColumnPosition(gridColumnAllTotalNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
+			gridColumnAllTotalNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
 		}
 
 		private void gridViewData_CustomColumnSort(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnSortEventArgs e)

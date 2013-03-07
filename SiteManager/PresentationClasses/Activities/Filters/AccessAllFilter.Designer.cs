@@ -1,6 +1,6 @@
 ﻿namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 {
-	partial class NavigationGroupFilter
+	partial class AccessAllFilter
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -173,7 +173,7 @@
 			this.checkEditShowPercent.TabIndex = 21;
 			this.checkEditShowPercent.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
 			// 
-			// NavigationGroupFilter
+			// AccessAllFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
@@ -186,7 +186,7 @@
 			this.Controls.Add(this.checkedListBoxControlGroups);
 			this.Controls.Add(this.checkEditEnableFilter);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "NavigationGroupFilter";
+			this.Name = "AccessAllFilter";
 			this.Size = new System.Drawing.Size(238, 429);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();

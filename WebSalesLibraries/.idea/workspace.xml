@@ -7,41 +7,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\MainGroupReportControl.Designer.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\MainGroupReportControl.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\MainGroupReportControl.resx" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\MainUserReportControl.Designer.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\MainUserReportControl.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\MainUserReportControl.resx" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\NavigationGroupReportControl.Designer.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\NavigationGroupReportControl.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\NavigationGroupReportControl.resx" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\NavigationUserReportControl.Designer.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\NavigationUserReportControl.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\NavigationUserReportControl.resx" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\RawDataControl.Designer.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\RawDataControl.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\PresentationClasses\Activities\RawDataControl.resx" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/data/procedures/sp_get_access_report.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/models/statistic/AccessReportRecord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/StatisticController.php" afterPath="$PROJECT_DIR$/protected/controllers/StatisticController.php" />
+    </list>
+    <list id="658692b4-5d98-40af-9426-7326b1b432d2" name="C#" comment="C#">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/SalesDepot.Services.csproj" afterPath="$PROJECT_DIR$/../SalesDepot.Services/SalesDepot.Services.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" afterPath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/MainUserReportRecord.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/MainUserReportRecord.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/NavigationUserReportRecord.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/NavigationUserReportRecord.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/Web References/StatisticService/Reference.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/StatisticService/Reference.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/Web References/StatisticService/StatisticController.wsdl" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/StatisticService/StatisticController.wsdl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.Designer.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainGroupFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainGroupFilter.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainGroupFilter.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainGroupFilter.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainGroupFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainGroupFilter.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationGroupFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationGroupFilter.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationGroupFilter.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationGroupFilter.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationGroupFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationGroupFilter.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationUserFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationUserFilter.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationUserFilter.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationUserFilter.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationUserFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/NavigationUserFilter.resx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/IActivitiesView.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/IActivitiesView.cs" />
-    </list>
-    <list id="658692b4-5d98-40af-9426-7326b1b432d2" name="C#" comment="C#">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainGroupReportControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainGroupReportControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainGroupReportControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainGroupReportControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainUserReportControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainUserReportControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainUserReportControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainUserReportControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationGroupReportControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationGroupReportControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationGroupReportControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationGroupReportControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationUserReportControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationUserReportControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationUserReportControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/NavigationUserReportControl.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/RawDataControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/RawDataControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" afterPath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1362593573209" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1362684139588" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,26 +66,7 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="MainUserReportRecord.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/statistic/MainUserReportRecord.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="27" selection-start="842" selection-end="853" vertical-scroll-proportion="-25.26923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SiteController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="38" selection-start="814" selection-end="814" vertical-scroll-proportion="0.41717792">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -97,12 +82,7 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/banner.php" />
-        <option value="$PROJECT_DIR$/css/regular/banner.css" />
-        <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_main_user_report.sql" />
         <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_main_group_report.sql" />
-        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
-        <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_group_report.sql" />
         <option value="$PROJECT_DIR$/protected/models/statistic/MainUserReportRecord.php" />
         <option value="$PROJECT_DIR$/protected/models/statistic/NavigationUserReportRecord.php" />
         <option value="dbprocedure:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/sales_library..sp_get_navigation_user_report" />
@@ -112,7 +92,12 @@
         <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_user_report.sql" />
         <option value="$PROJECT_DIR$/protected/models/statistic/MainGroupReportRecord.php" />
         <option value="$PROJECT_DIR$/protected/models/statistic/NavigationGroupReportRecord.php" />
+        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
+        <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_access_user_report.sql" />
+        <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_access_report.sql" />
+        <option value="$PROJECT_DIR$/protected/models/statistic/AccessReportRecord.php" />
         <option value="$PROJECT_DIR$/protected/controllers/StatisticController.php" />
+        <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_group_report.sql" />
       </list>
     </option>
   </component>
@@ -219,6 +204,92 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="procedures" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -228,15 +299,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="147" />
     <property name="options.splitter.main.proportions" value="0.3964698" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="143" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="D:/WorkingFiles/Websites/SalesLibraries" />
-    <property name="JdbcConsole.ResultInNewTab" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="147" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="460" />
+    <property name="JdbcConsole.ResultInNewTab" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="463" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="460" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="144" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="143" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -247,7 +318,7 @@
     <property name="JdbcConsole.Extract.IncludeRowNumbers" value="false" />
     <property name="options.splitter.details.proportions" value="0.10418695" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="Console.TableResult.DefaultCopyAction" value="Console.TableResult.Copy.Inserts" />
+    <property name="Console.TableResult.DefaultCopyAction" value="Console.TableResult.Copy.Html" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
@@ -256,14 +327,14 @@
     <property name="JdbcConsole.Extract.OpeningQuote" value="'" />
     <property name="JdbcConsole.Extract.ClosingQuote" value="'" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="JdbcConsole.EnableParameterPattern" value="false" />
     <property name="JdbcConsole.Extract.IncludeHeader" value="false" />
+    <property name="JdbcConsole.EnableParameterPattern" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="JdbcConsole.ParameterPattern" value="(\?\d*|\:\w+|\@\w+|\$\{[^$\{\}]*\}|\$\w+\$|\#\w+\#)" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="JdbcConsole.ParameterPattern" value="(\?\d*|\:\w+|\@\w+|\$\{[^$\{\}]*\}|\$\w+\$|\#\w+\#)" />
     <property name="JdbcConsole.ResultPageSize" value="1000" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="PublishConfig" promptOnRemoteOverwrite="CHECK_TIMESTAMP" serverName="Development" serverId="bbe3f121-55bc-430d-86e5-ad010ec25baf" uploadOnCheckin="bbe3f121-55bc-430d-86e5-ad010ec25baf" autoUpload="true" autoUploadExternalChanges="true" notifyRemoteChanges="true">
     <servers>
@@ -336,8 +407,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\procedures" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\statistic" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\procedures" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\controllers" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\favorites" />
@@ -362,10 +433,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -394,14 +465,14 @@
       </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="bbe3f121-55bc-430d-86e5-ad010ec25baf" server_name="Development">
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
       <JSDebuggerConfigurationSettings>
         <option name="engineId" value="firefox" />
         <option name="fileUrl" />
       </JSDebuggerConfigurationSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="bbe3f121-55bc-430d-86e5-ad010ec25baf" server_name="Development">
       <method />
     </configuration>
     <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
@@ -418,8 +489,8 @@
       <method />
     </configuration>
     <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="PHP Script.MainUserReportRecord.php" />
-      <item index="1" class="java.lang.String" itemvalue="PHP Web Application.SalesDepot" />
+      <item index="0" class="java.lang.String" itemvalue="PHP Web Application.SalesDepot" />
+      <item index="1" class="java.lang.String" itemvalue="PHP Script.MainUserReportRecord.php" />
     </list>
     <recent_temporary>
       <list size="1">
@@ -624,25 +695,25 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24834438" sideWeight="0.4754536" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19205298" sideWeight="0.45731056" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20971303" sideWeight="0.40661687" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21081677" sideWeight="0.47438633" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14834578" sideWeight="0.79028696" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24834438" sideWeight="0.4669157" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19205298" sideWeight="0.4530416" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.8620309" sideWeight="0.40021345" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14834578" sideWeight="0.13796909" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.75165564" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.8454746" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29690948" sideWeight="0.4850587" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20971303" sideWeight="0.5896478" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.8620309" sideWeight="0.5960512" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.4914621" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19743863" sideWeight="0.79028696" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.46371397" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1995731" sideWeight="0.13796909" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.45731056" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21081677" sideWeight="0.47438633" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.18653421" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
@@ -683,7 +754,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Activity Reports fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Activity Reports #5,6 ready" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -696,7 +767,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Web SalesDepot: Fix to add favorites links" />
     <MESSAGE value="Web SalesDepot: Favorites links fix (2 stage)" />
     <MESSAGE value="Web SalesDepot: IE8 Fancybox + Disclaimer fixes" />
     <MESSAGE value="Web SalesDepot: Hide duplicate fix" />
@@ -721,6 +791,7 @@
     <MESSAGE value="Web SalesDepot: .Key files fix" />
     <MESSAGE value="Web SalesDepot: Link Banners bug fix" />
     <MESSAGE value="Web SalesDepot: Activity Reports fix" />
+    <MESSAGE value="Web SalesDepot: Activity Reports #5,6 ready" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -740,95 +811,24 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="1176" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/Column.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="7" selection-start="261" selection-end="261" vertical-scroll-proportion="0.34638554">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbprocedure:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/sales_library..sp_get_main_user_report">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbprocedure:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/sales_library..sp_get_main_group_report">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="dbDummy://dbprocedure:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/sales_library..sp_get_navigation_group_report">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="dbDummy://dbprocedure:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/sales_library..sp_get_navigation_user_report">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_group_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="21" selection-start="0" selection-end="1400" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_group_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="30" selection-start="977" selection-end="977" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_user_report.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="55" selection-start="2987" selection-end="2987" vertical-scroll-proportion="1.1316932">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_user_report.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="33" selection-start="2624" selection-end="2624" vertical-scroll-proportion="0.7293777">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/MainGroupReportRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="11" selection-start="224" selection-end="224" vertical-scroll-proportion="0.46015036">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/StatisticController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="37" selection-start="5668" selection-end="5668" vertical-scroll-proportion="-1.431579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/NavigationGroupReportRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="19" selection-start="124" selection-end="124" vertical-scroll-proportion="0.23007518">
-          <folding />
-        </state>
+        <state line="44" column="33" selection-start="2624" selection-end="2624" vertical-scroll-proportion="0.7293777" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/statistic/NavigationUserReportRecord.php">
@@ -838,16 +838,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="49" selection-start="736" selection-end="736" vertical-scroll-proportion="0.33895704" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/statistic/MainUserReportRecord.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="27" selection-start="842" selection-end="853" vertical-scroll-proportion="-25.26923">
+        <state line="62" column="27" selection-start="842" selection-end="853" vertical-scroll-proportion="0.98796993">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/NavigationGroupReportRecord.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="38" selection-start="814" selection-end="814" vertical-scroll-proportion="0.41717792">
+        <state line="9" column="19" selection-start="124" selection-end="124" vertical-scroll-proportion="-5.8846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/StatisticController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="249" column="80" selection-start="8926" selection-end="8926" vertical-scroll-proportion="0.37774524">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/AccessReportRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="16" selection-start="451" selection-end="464" vertical-scroll-proportion="0.7964861">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/MainGroupReportRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="11" selection-start="224" selection-end="224" vertical-scroll-proportion="0.44802344">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="37" selection-start="1798" selection-end="1798" vertical-scroll-proportion="0.7">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_user_report.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="11" selection-start="63" selection-end="63" vertical-scroll-proportion="-0.48660085">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_navigation_group_report.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="1400" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_main_group_report.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="21" selection-start="1422" selection-end="1422" vertical-scroll-proportion="0.5754584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_access_report.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="49" selection-start="949" selection-end="949" vertical-scroll-proportion="0.4164265">
           <folding />
         </state>
       </provider>

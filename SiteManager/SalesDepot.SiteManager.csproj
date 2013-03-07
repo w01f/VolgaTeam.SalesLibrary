@@ -101,17 +101,23 @@
     <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.Designer.cs">
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\AccessGroupFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\AccessGroupFilter.Designer.cs">
+      <DependentUpon>AccessGroupFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.Designer.cs">
+      <DependentUpon>AccessAllFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.Designer.cs">
       <DependentUpon>NavigationGroupFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.Designer.cs">
-      <DependentUpon>MainGroupFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\NavigationUserFilter.cs">
       <SubType>UserControl</SubType>
@@ -119,11 +125,29 @@
     <Compile Include="PresentationClasses\Activities\Filters\NavigationUserFilter.Designer.cs">
       <DependentUpon>NavigationUserFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.Designer.cs">
+      <DependentUpon>MainGroupFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\MainUserFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\MainUserFilter.Designer.cs">
       <DependentUpon>MainUserFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\AccessGroupReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\AccessGroupReportControl.Designer.cs">
+      <DependentUpon>AccessGroupReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\AccessAllReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\AccessAllReportControl.Designer.cs">
+      <DependentUpon>AccessAllReportControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.cs">
       <SubType>UserControl</SubType>
@@ -208,17 +232,31 @@
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessGroupFilter.resx">
+      <DependentUpon>AccessGroupFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessAllFilter.resx">
+      <DependentUpon>AccessAllFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.resx">
       <DependentUpon>NavigationGroupFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainGroupFilter.resx">
-      <DependentUpon>MainGroupFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationUserFilter.resx">
       <DependentUpon>NavigationUserFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainGroupFilter.resx">
+      <DependentUpon>MainGroupFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainUserFilter.resx">
       <DependentUpon>MainUserFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\AccessGroupReportControl.resx">
+      <DependentUpon>AccessGroupReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\AccessAllReportControl.resx">
+      <DependentUpon>AccessAllReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.resx">
       <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>

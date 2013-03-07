@@ -90,6 +90,12 @@
 			this.gridViewData.OptionsCustomization.AllowFilter = false;
 			this.gridViewData.OptionsCustomization.AllowGroup = false;
 			this.gridViewData.OptionsCustomization.AllowQuickHideColumns = false;
+			this.gridViewData.OptionsMenu.EnableColumnMenu = false;
+			this.gridViewData.OptionsMenu.EnableFooterMenu = false;
+			this.gridViewData.OptionsMenu.EnableGroupPanelMenu = false;
+			this.gridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
+			this.gridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+			this.gridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
 			this.gridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.gridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
 			this.gridViewData.OptionsView.AutoCalcPreviewLineCount = true;

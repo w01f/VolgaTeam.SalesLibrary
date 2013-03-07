@@ -27,6 +27,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="StatisticControllerBinding", Namespace="urn:StatisticControllerwsdl")]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(AccessReportRecord))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationGroupReportRecord))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationUserReportRecord))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainGroupReportRecord))]
@@ -46,6 +47,8 @@ namespace SalesDepot.Services.StatisticService {
         private System.Threading.SendOrPostCallback getNavigationUserReportOperationCompleted;
         
         private System.Threading.SendOrPostCallback getNavigationGroupReportOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getAccessReportOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -102,6 +105,9 @@ namespace SalesDepot.Services.StatisticService {
         
         /// <remarks/>
         public event getNavigationGroupReportCompletedEventHandler getNavigationGroupReportCompleted;
+        
+        /// <remarks/>
+        public event getAccessReportCompletedEventHandler getAccessReportCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getSessionKey", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
@@ -302,6 +308,40 @@ namespace SalesDepot.Services.StatisticService {
             if ((this.getNavigationGroupReportCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getNavigationGroupReportCompleted(this, new getNavigationGroupReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getAccessReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public AccessReportRecord[] getAccessReport(string sessionKey, string dateStart, string dateEnd) {
+            object[] results = this.Invoke("getAccessReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd});
+            return ((AccessReportRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getAccessReportAsync(string sessionKey, string dateStart, string dateEnd) {
+            this.getAccessReportAsync(sessionKey, dateStart, dateEnd, null);
+        }
+        
+        /// <remarks/>
+        public void getAccessReportAsync(string sessionKey, string dateStart, string dateEnd, object userState) {
+            if ((this.getAccessReportOperationCompleted == null)) {
+                this.getAccessReportOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetAccessReportOperationCompleted);
+            }
+            this.InvokeAsync("getAccessReport", new object[] {
+                        sessionKey,
+                        dateStart,
+                        dateEnd}, this.getAccessReportOperationCompleted, userState);
+        }
+        
+        private void OngetAccessReportOperationCompleted(object arg) {
+            if ((this.getAccessReportCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getAccessReportCompleted(this, new getAccessReportCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -530,6 +570,87 @@ namespace SalesDepot.Services.StatisticService {
             }
             set {
                 this.valueField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
+    public partial class AccessReportRecord {
+        
+        private string nameField;
+        
+        private int userCountField;
+        
+        private int activeCountField;
+        
+        private string activeNamesField;
+        
+        private int inactiveCountField;
+        
+        private string inactiveNamesField;
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int userCount {
+            get {
+                return this.userCountField;
+            }
+            set {
+                this.userCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int activeCount {
+            get {
+                return this.activeCountField;
+            }
+            set {
+                this.activeCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string activeNames {
+            get {
+                return this.activeNamesField;
+            }
+            set {
+                this.activeNamesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int inactiveCount {
+            get {
+                return this.inactiveCountField;
+            }
+            set {
+                this.inactiveCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string inactiveNames {
+            get {
+                return this.inactiveNamesField;
+            }
+            set {
+                this.inactiveNamesField = value;
             }
         }
     }
@@ -1094,6 +1215,32 @@ namespace SalesDepot.Services.StatisticService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((NavigationGroupReportRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getAccessReportCompletedEventHandler(object sender, getAccessReportCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getAccessReportCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getAccessReportCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public AccessReportRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((AccessReportRecord[])(this.results[0]));
             }
         }
     }

@@ -30,47 +30,48 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-			this.buttonXApplyFilter = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXLoadData = new DevComponents.DotNetBar.ButtonX();
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
+			this.pnCustomFilter = new System.Windows.Forms.Panel();
+			this.pnFilterButtons = new System.Windows.Forms.Panel();
 			this.gbDate = new System.Windows.Forms.GroupBox();
 			this.labelControlDateEnd = new DevExpress.XtraEditors.LabelControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.dateEditEnd = new DevExpress.XtraEditors.DateEdit();
 			this.labelControlDateStart = new DevExpress.XtraEditors.LabelControl();
 			this.dateEditStart = new DevExpress.XtraEditors.DateEdit();
-			this.pnCustomFilter = new System.Windows.Forms.Panel();
-			this.pnFilterButtons = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
+			this.pnFilterButtons.SuspendLayout();
 			this.gbDate.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
-			this.pnFilterButtons.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// defaultLookAndFeel
 			// 
 			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
 			// 
-			// buttonXApplyFilter
+			// buttonXLoadData
 			// 
-			this.buttonXApplyFilter.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXApplyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.buttonXLoadData.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXLoadData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXApplyFilter.CausesValidation = false;
-			this.buttonXApplyFilter.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXApplyFilter.Location = new System.Drawing.Point(7, 5);
-			this.buttonXApplyFilter.Name = "buttonXApplyFilter";
-			this.buttonXApplyFilter.Size = new System.Drawing.Size(226, 33);
-			this.buttonXApplyFilter.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXApplyFilter.TabIndex = 16;
-			this.buttonXApplyFilter.Text = "Apply Filter";
-			this.buttonXApplyFilter.TextColor = System.Drawing.Color.Black;
-			this.buttonXApplyFilter.Click += new System.EventHandler(this.buttonXApplyFilter_Click);
+			this.buttonXLoadData.CausesValidation = false;
+			this.buttonXLoadData.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXLoadData.Location = new System.Drawing.Point(7, 5);
+			this.buttonXLoadData.Name = "buttonXLoadData";
+			this.buttonXLoadData.Size = new System.Drawing.Size(226, 27);
+			this.buttonXLoadData.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXLoadData.TabIndex = 16;
+			this.buttonXLoadData.Text = "Load Data";
+			this.buttonXLoadData.TextColor = System.Drawing.Color.Black;
+			this.buttonXLoadData.Click += new System.EventHandler(this.buttonXLoadData_Click);
 			// 
 			// styleManager
 			// 
@@ -93,6 +94,23 @@
 			this.splitContainerControl.SplitterPosition = 250;
 			this.splitContainerControl.TabIndex = 17;
 			this.splitContainerControl.Text = "splitContainerControl1";
+			// 
+			// pnCustomFilter
+			// 
+			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.pnCustomFilter.Location = new System.Drawing.Point(5, 142);
+			this.pnCustomFilter.Name = "pnCustomFilter";
+			this.pnCustomFilter.Size = new System.Drawing.Size(240, 336);
+			this.pnCustomFilter.TabIndex = 18;
+			// 
+			// pnFilterButtons
+			// 
+			this.pnFilterButtons.Controls.Add(this.buttonXLoadData);
+			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnFilterButtons.Location = new System.Drawing.Point(5, 103);
+			this.pnFilterButtons.Name = "pnFilterButtons";
+			this.pnFilterButtons.Size = new System.Drawing.Size(240, 39);
+			this.pnFilterButtons.TabIndex = 19;
 			// 
 			// gbDate
 			// 
@@ -175,23 +193,6 @@
 			this.dateEditStart.StyleController = this.styleController;
 			this.dateEditStart.TabIndex = 0;
 			// 
-			// pnCustomFilter
-			// 
-			this.pnCustomFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnCustomFilter.Location = new System.Drawing.Point(5, 103);
-			this.pnCustomFilter.Name = "pnCustomFilter";
-			this.pnCustomFilter.Size = new System.Drawing.Size(240, 330);
-			this.pnCustomFilter.TabIndex = 18;
-			// 
-			// pnFilterButtons
-			// 
-			this.pnFilterButtons.Controls.Add(this.buttonXApplyFilter);
-			this.pnFilterButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.pnFilterButtons.Location = new System.Drawing.Point(5, 433);
-			this.pnFilterButtons.Name = "pnFilterButtons";
-			this.pnFilterButtons.Size = new System.Drawing.Size(240, 45);
-			this.pnFilterButtons.TabIndex = 19;
-			// 
 			// ActivitiesManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -203,6 +204,7 @@
 			this.Size = new System.Drawing.Size(898, 483);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
 			this.splitContainerControl.ResumeLayout(false);
+			this.pnFilterButtons.ResumeLayout(false);
 			this.gbDate.ResumeLayout(false);
 			this.gbDate.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
@@ -210,7 +212,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditEnd.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).EndInit();
-			this.pnFilterButtons.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -218,7 +219,7 @@
         #endregion
 
 		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-		private DevComponents.DotNetBar.ButtonX buttonXApplyFilter;
+		private DevComponents.DotNetBar.ButtonX buttonXLoadData;
 		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
 		private System.Windows.Forms.GroupBox gbDate;
