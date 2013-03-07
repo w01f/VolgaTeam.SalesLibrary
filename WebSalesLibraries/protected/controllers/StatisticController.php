@@ -236,6 +236,39 @@
 				return null;
 		}
 
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return AccessReportRecord[]
+		 * @soap
+		 */
+		public function getAccessReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_access_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new AccessReportRecord();
+					$reportRecord->name = $resultRecord['name'];
+					$reportRecord->userCount = $resultRecord['user_count'];
+					$reportRecord->activeCount = $resultRecord['active_count'];
+					$reportRecord->activeNames = $resultRecord['active_names'];
+					$reportRecord->inactiveCount = $resultRecord['inactive_count'];
+					$reportRecord->inactiveNames = $resultRecord['inactive_names'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
+			else
+				return null;
+		}
+
 		public function getViewPath()
 		{
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'statistic');
