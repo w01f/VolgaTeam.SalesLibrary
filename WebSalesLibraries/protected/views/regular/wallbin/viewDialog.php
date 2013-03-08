@@ -16,7 +16,7 @@
 										value=""> Open PNG and JPEG images in a new Browser tab </label>
 		<br>
 		<?php endif; ?>
-	<?php if (($link->originalFormat == 'video' || $link->originalFormat == 'mp4') && !isset($link->universalPreview)): ?>
+	<?php if (($link->originalFormat == 'video' || $link->originalFormat == 'wmv' || $link->originalFormat == 'mp4') && !isset($link->universalPreview)): ?>
 		<div class="warning">
 			This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 		</div>

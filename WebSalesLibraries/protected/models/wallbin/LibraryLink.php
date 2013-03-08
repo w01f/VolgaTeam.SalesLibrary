@@ -316,6 +316,7 @@
 						case 'pdf':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'pdf.png'));
 						case 'video':
+						case 'wmv':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'wmv.png'));
 						case 'mp4':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'mp4.png'));
@@ -390,6 +391,7 @@
 						$this->availableFormats[] = 'email';
 						break;
 					case 'video':
+					case 'wmv':
 					case 'mp4':
 						if (isset($this->universalPreview))
 							switch ($this->browser)
@@ -771,11 +773,16 @@
 					switch ($format)
 					{
 						case 'video':
-							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
-							break;
-						case 'email':
-						case 'download':
-							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+							if (isset($this->universalPreview))
+							{
+								if (isset($this->universalPreview->wmvLinks))
+									foreach ($this->universalPreview->wmvLinks as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName);
+								else
+									$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
+							}
+							else
+								$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
 							break;
 						case 'mp4':
 							if (isset($this->universalPreview))
@@ -799,6 +806,45 @@
 								if (isset($this->universalPreview->ogvLinks))
 									foreach ($this->universalPreview->ogvLinks as $link)
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							break;
+						case 'email':
+						case 'download':
+							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
+							break;
+					}
+					break;
+				case 'wmv':
+					switch ($format)
+					{
+						case 'mp4':
+							if (isset($this->universalPreview))
+							{
+								if (isset($this->universalPreview->mp4Links))
+									foreach ($this->universalPreview->mp4Links as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+								if (isset($this->universalPreview->ogvLinks))
+									foreach ($this->universalPreview->ogvLinks as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							}
+							break;
+						case 'video':
+							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
+							break;
+						case 'tab':
+							if (isset($this->universalPreview))
+								if (isset($this->universalPreview->mp4Links))
+									foreach ($this->universalPreview->mp4Links as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							break;
+						case 'ogv':
+							if (isset($this->universalPreview))
+								if (isset($this->universalPreview->ogvLinks))
+									foreach ($this->universalPreview->ogvLinks as $link)
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							break;
+						case 'email':
+						case 'download':
+							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
 					break;

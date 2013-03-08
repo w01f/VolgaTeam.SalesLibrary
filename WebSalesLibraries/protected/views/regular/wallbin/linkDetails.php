@@ -74,6 +74,8 @@
                                     echo CHtml::tag('img', array('src' => 'images/search/search-pdf.png', 'alt' => ''));
                                     break;
                                 case 'video':
+								case 'wmv':
+								case 'mp4':
                                     echo CHtml::tag('img', array('src' => 'images/search/search-video.png', 'alt' => ''));
                                     break;
                                 case 'url':

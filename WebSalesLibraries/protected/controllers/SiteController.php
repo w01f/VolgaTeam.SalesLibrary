@@ -130,7 +130,7 @@
 				$linkRecord = LinkStorage::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
-					if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4')
+					if ($linkRecord->format == 'video' || $linkRecord->format == 'wmv' || $linkRecord->format == 'mp4')
 						$this->renderPartial('downloadVideoDialog', array('format' => $linkRecord->format), false, true);
 					else
 						$this->renderPartial('downloadDialog', array(), false, true);
@@ -140,7 +140,7 @@
 					$attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
 					if (isset($attachmentRecord))
 					{
-						if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'mp4')
+						if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'wmv' || $attachmentRecord->format == 'mp4')
 							$this->renderPartial('downloadVideoDialog', array('format' => $attachmentRecord->format), false, true);
 						else
 							$this->renderPartial('downloadDialog', array(), false, true);
@@ -170,12 +170,28 @@
 						if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4')
 						{
 							if ($format == 'wmv')
-								$path = $link->filePath;
+							{
+								if ($linkRecord->format == 'wmv')
+									$path = $link->filePath;
+								else
+								{
+									$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'wmv'));
+									if (isset($previewRecord))
+										$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+									else
+										$path = $link->filePath;
+								}
+							}
 							else if ($format == 'mp4')
 							{
-								$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'mp4'));
-								if (isset($previewRecord))
-									$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+								if ($linkRecord->format == 'mp4')
+									$path = $link->filePath;
+								else
+								{
+									$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'mp4'));
+									if (isset($previewRecord))
+										$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+								}
 							}
 						}
 					}
@@ -192,15 +208,34 @@
 						$library = $libraryManager->getLibraryById($attachmentRecord->id_library);
 						if (isset($library))
 						{
-							if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'mp4')
+							if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'wmv' || $attachmentRecord->format == 'mp4')
 							{
 								if ($format == 'wmv')
-									$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
+								{
+									if ($linkRecord->format == 'wmv')
+										$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
+									else
+									{
+										$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'wmv'));
+										if (isset($previewRecord))
+											$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+										else
+											$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
+									}
+								}
 								else if ($format == 'mp4')
 								{
-									$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, 'mp4'));
-									if (isset($previewRecord))
-										$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+									if ($format == 'mp4')
+									{
+										if ($linkRecord->format == 'mp4')
+											$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
+										else
+										{
+											$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'mp4'));
+											if (isset($previewRecord))
+												$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+										}
+									}
 								}
 							}
 						}

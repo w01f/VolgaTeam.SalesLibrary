@@ -27,8 +27,8 @@
 			<hr align="center" width="100%" size="2" color="#b0b0b0"/>
 			<div data-role="navbar" class="res-selector">
 				<ul>
-					<li><a href="#" class="low-res-button ui-btn-active" data-corners="true" data-shadow="true">LOW
-						Res</a></li>
+					<li><a href="#" class="low-res-button ui-btn-active" data-corners="true"
+						   data-shadow="true">LOW Res</a></li>
 					<li><a href="#" class="hi-res-button" data-corners="true" data-shadow="true">HIGH Res</a></li>
 				</ul>
 			</div>
@@ -36,12 +36,10 @@
 		</h4>
 	</li>
 	<?php $viewSource = $link->getViewSource($link->availableFormats[0]); ?>
-	<?php if ($link->originalFormat == 'video' && !isset($viewSource)): ?>
+	<?php if (($link->originalFormat == 'video' || $link->originalFormat == 'wmv' || $link->originalFormat == 'mp4') && !isset($viewSource)): ?>
 		<li>
 			<div class="warning">
-				This Video is unavailable…<br><br>
-				Ask your Site Administrator to convert this Video to MP4.<br><br>
-				Then the video can be accessed.<br><br>
+				This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 			</div>
 		</li>
 		<?php else: ?>

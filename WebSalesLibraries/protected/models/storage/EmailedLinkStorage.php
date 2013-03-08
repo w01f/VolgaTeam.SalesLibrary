@@ -54,7 +54,7 @@ class EmailedLinkStorage extends CActiveRecord
 
 		EmailedLinkStorage::saveEmailedLink($id, $link->id, $link->libraryId, $destinationPath, $destinationLink, $expiresIn, Yii::app()->user->login, $emailFrom, implode('; ', $recipientsWhole));
 
-		if ($link->originalFormat == 'mp4' || $link->originalFormat == 'video')
+		if ($link->originalFormat == 'mp4' || $link->originalFormat == 'wmv' || $link->originalFormat == 'video')
 			$destinationLink = Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('site/emailLinkGet', array('emailId' => $id));
 
 		if ($emailToMe == 'true')
@@ -97,7 +97,7 @@ class EmailedLinkStorage extends CActiveRecord
 
 		EmailedLinkStorage::saveEmailedLink($id, $attachment->id, $attachment->libraryId, $destinationPath, $destinationLink, $expiresIn, Yii::app()->user->login, $emailFrom, implode('; ', $recipientsWhole));
 
-		if ($attachment->originalFormat == 'mp4' || $attachment->originalFormat == 'video')
+		if ($attachment->originalFormat == 'mp4' || $attachment->originalFormat == 'wmv' || $attachment->originalFormat == 'video')
 			$destinationLink = Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('site/emailLinkGet', array('emailId' => $id));
 
 		if ($emailToMe == 'true')

@@ -663,6 +663,7 @@
 					}
 					break;
 				case 'mp4':
+				case 'wmv':
 				case 'video':
 					switch (selectedViewType)
 					{

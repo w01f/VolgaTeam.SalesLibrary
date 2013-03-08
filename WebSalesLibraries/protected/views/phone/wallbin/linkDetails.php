@@ -64,6 +64,8 @@
                                     $imagePath = 'images/search/search-pdf.png';
                                     break;
                                 case 'video':
+								case 'wmv':
+								case 'mp4':
                                     $imagePath = 'images/search/search-video.png';
                                     break;
                                 case 'url':

@@ -356,6 +356,8 @@
 							$link['file_type'] = 'images/search/search-pdf.png';
 							break;
 						case 'video':
+						case 'wmv':
+						case 'mp4':
 							$link['file_type'] = 'images/search/search-video.png';
 							break;
 						case 'key':
