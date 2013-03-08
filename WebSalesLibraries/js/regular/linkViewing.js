@@ -1,7 +1,8 @@
 (function ($)
 {
-	$.openViewDialogEmbedded = function ()
+	$.openViewDialogEmbedded = function (event)
 	{
+		event.stopPropagation();
 		var formatItems = $(this).find('li');
 		var warning = $(this).find('.warning');
 		var fullScreenSelector = $(this).find('.use-fullscreen');
