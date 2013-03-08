@@ -12,6 +12,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		void ShowView();
 		void UpdateData(bool showMessages, ref string updateMessage);
 		void ClearData();
+		void ExportData();
 	}
 
 	public enum ViewType

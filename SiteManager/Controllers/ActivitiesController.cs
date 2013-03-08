@@ -53,6 +53,8 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport6.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = true;
 
+			FormMain.Instance.buttonItemActivitiesExport.Click += buttonItemActivitiesExport_Click;
+
 			MainController.Instance.SiteChanged += (sender, args) =>
 													   {
 														   if (IsActive)
@@ -101,6 +103,11 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Checked = false;
 			button.Checked = true;
+		}
+
+		private void buttonItemActivitiesExport_Click(object sender, System.EventArgs e)
+		{
+			ActivitiesManagerControl.ExportData();
 		}
 	}
 }

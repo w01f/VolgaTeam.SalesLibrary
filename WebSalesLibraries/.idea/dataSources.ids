@@ -1524,6 +1524,12 @@
       <column name="pass" sqlType="CHAR" length="32" precision="0" nullable="false" jdbcType="1" def="Jyc=" />
       <primary-key name="PRIMARY" columns="name" />
     </table>
+    <procedure name="sp_get_access_report" schema="" catalog="sales_library" type="0">
+      <prototype>
+        <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+        <parameter name="end_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />
+      </prototype>
+    </procedure>
     <procedure name="sp_get_main_group_report" schema="" catalog="sales_library" type="0">
       <prototype>
         <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1" />

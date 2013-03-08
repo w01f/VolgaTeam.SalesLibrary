@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGroupReportControl));
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
 			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
@@ -55,6 +56,8 @@
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
+			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
@@ -62,6 +65,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
@@ -107,6 +111,8 @@
 			this.advBandedGridViewData.Appearance.Row.Options.UseFont = true;
 			this.advBandedGridViewData.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.advBandedGridViewData.Appearance.SelectedRow.Options.UseFont = true;
+			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
 			this.advBandedGridViewData.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
             this.gridBandMain,
             this.gridBandLogin,
@@ -143,6 +149,7 @@
 			this.advBandedGridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
 			this.advBandedGridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
 			this.advBandedGridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
+			this.advBandedGridViewData.OptionsPrint.PrintPreview = true;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
 			this.advBandedGridViewData.OptionsView.AutoCalcPreviewLineCount = true;
@@ -406,6 +413,24 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// printingSystem
+			// 
+			this.printingSystem.Links.AddRange(new object[] {
+            this.printableComponentLink});
+			// 
+			// printableComponentLink
+			// 
+			this.printableComponentLink.Component = this.gridControlData;
+			// 
+			// 
+			// 
+			this.printableComponentLink.ImageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("printableComponentLink.ImageCollection.ImageStream")));
+			this.printableComponentLink.Landscape = true;
+			this.printableComponentLink.PaperKind = System.Drawing.Printing.PaperKind.A4;
+			this.printableComponentLink.PrintingSystem = this.printingSystem;
+			this.printableComponentLink.PrintingSystemBase = this.printingSystem;
+			this.printableComponentLink.CreateReportHeaderArea += new DevExpress.XtraPrinting.CreateAreaEventHandler(this.printableComponentLink_CreateReportHeaderArea);
+			// 
 			// MainGroupReportControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -422,6 +447,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -454,5 +480,7 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandDocs;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandVideos;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandTotal;
+		private DevExpress.XtraPrinting.PrintingSystem printingSystem;
+		private DevExpress.XtraPrinting.PrintableComponentLink printableComponentLink;
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RawDataControl));
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.gridViewData = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnDate = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -39,11 +40,14 @@
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
+			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridControlData
@@ -77,6 +81,8 @@
 			this.gridViewData.Appearance.Row.Options.UseFont = true;
 			this.gridViewData.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewData.Appearance.SelectedRow.Options.UseFont = true;
+			this.gridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
 			this.gridViewData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnDate,
             this.gridColumnLogin,
@@ -96,6 +102,7 @@
 			this.gridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
 			this.gridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
 			this.gridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
+			this.gridViewData.OptionsPrint.PrintPreview = true;
 			this.gridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.gridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
 			this.gridViewData.OptionsView.AutoCalcPreviewLineCount = true;
@@ -185,6 +192,23 @@
 			this.styleController.AppearanceReadOnly.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.styleController.AppearanceReadOnly.Options.UseFont = true;
 			// 
+			// printingSystem
+			// 
+			this.printingSystem.Links.AddRange(new object[] {
+            this.printableComponentLink});
+			// 
+			// printableComponentLink
+			// 
+			this.printableComponentLink.Component = this.gridControlData;
+			// 
+			// 
+			// 
+			this.printableComponentLink.ImageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("printableComponentLink.ImageCollection.ImageStream")));
+			this.printableComponentLink.PaperKind = System.Drawing.Printing.PaperKind.A4;
+			this.printableComponentLink.PrintingSystem = this.printingSystem;
+			this.printableComponentLink.PrintingSystemBase = this.printingSystem;
+			this.printableComponentLink.CreateReportHeaderArea += new DevExpress.XtraPrinting.CreateAreaEventHandler(this.printableComponentLink_CreateReportHeaderArea);
+			// 
 			// RawDataControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -199,6 +223,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate.VistaTimeProperties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -215,5 +240,7 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditDate;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnType;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSubType;
+		private DevExpress.XtraPrinting.PrintingSystem printingSystem;
+		private DevExpress.XtraPrinting.PrintableComponentLink printableComponentLink;
     }
 }

@@ -10,6 +10,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 	[ToolboxItem(false)]
 	public sealed partial class ActivitiesManagerControl : UserControl
 	{
+		private ViewType _selectedViewType;
 		private Dictionary<ViewType, IActivitiesView> _views = new Dictionary<ViewType, IActivitiesView>();
 
 		public ActivitiesManagerControl()
@@ -66,6 +67,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 
 		public void ChangeView(ViewType viewType)
 		{
+			_selectedViewType = viewType;
 			foreach (var view in _views.Values)
 				view.Active = false;
 			if (_views.ContainsKey(viewType))
@@ -107,6 +109,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		{
 			foreach (var view in _views.Values)
 				view.ClearData();
+		}
+
+		public void ExportData()
+		{
+			if (_views.ContainsKey(_selectedViewType))
+				_views[_selectedViewType].ExportData();
 		}
 
 		private void buttonXLoadData_Click(object sender, EventArgs e)
