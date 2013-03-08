@@ -290,7 +290,6 @@ namespace SalesDepot.BusinessClasses
 						format = "pdf";
 						break;
 					case "mpeg":
-					case "wmv":
 					case "avi":
 					case "wmz":
 					case "mpg":
@@ -302,6 +301,9 @@ namespace SalesDepot.BusinessClasses
 					case "ogm":
 					case "ogx":
 						format = "video";
+						break;
+					case "wmv":
+						format = "wmv";
 						break;
 					case "mp4":
 						format = "mp4";

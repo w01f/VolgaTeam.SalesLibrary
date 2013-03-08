@@ -7,18 +7,18 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 {
 	public class VideoPreviewGenerator : IPreviewGenerator
 	{
-		#region IPreviewGenerator Members
-		public IPreviewContainer Parent { get; private set; }
-
 		public VideoPreviewGenerator(IPreviewContainer parent)
 		{
-			this.Parent = parent;
+			Parent = parent;
 		}
+
+		#region IPreviewGenerator Members
+		public IPreviewContainer Parent { get; private set; }
 
 		public void GeneratePreview(bool onlyText = false)
 		{
 			bool update = false;
-			if (Parent.Type != FileTypes.QuickTimeVideo)
+			if (!Parent.Extension.ToUpper().Equals(".MP4"))
 			{
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{
@@ -34,7 +34,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				}
 			}
 
-			if (Parent.Type != FileTypes.MediaPlayerVideo)
+			if (!Parent.Extension.ToUpper().Equals(".WMV"))
 			{
 				if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 				{

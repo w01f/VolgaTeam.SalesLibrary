@@ -192,7 +192,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				else if (format.Equals("new office")) { }
 				else
 				{
-					string previewFolder = Path.Combine(ContainerPath, format);
+					var previewFolder = Path.Combine(ContainerPath, format);
 					if (Directory.Exists(previewFolder))
 						result.AddRange(Directory.GetFiles(previewFolder).Select(x => x.Replace(Parent.StoragePath, string.Empty)));
 				}

@@ -122,7 +122,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			#region Pages
 			var pages = new List<Services.ContentManagmentService.LibraryPage>();
-			foreach (LibraryPage libraryPage in Parent.Pages)
+			foreach (var libraryPage in Parent.Pages)
 			{
 				var page = new Services.ContentManagmentService.LibraryPage();
 				page.id = libraryPage.Identifier.ToString();
@@ -134,7 +134,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 				#region Columns
 				var columns = new List<Column>();
-				foreach (ColumnTitle columnTitle in libraryPage.ColumnTitles)
+				foreach (var columnTitle in libraryPage.ColumnTitles)
 				{
 					var column = new Column();
 					column.pageId = libraryPage.Identifier.ToString();
@@ -179,7 +179,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 				#region Folders
 				var folders = new List<Services.ContentManagmentService.LibraryFolder>();
-				foreach (LibraryFolder libraryFolder in libraryPage.Folders)
+				foreach (var libraryFolder in libraryPage.Folders)
 				{
 					var folder = new Services.ContentManagmentService.LibraryFolder();
 					folder.id = libraryFolder.Identifier.ToString();
@@ -447,7 +447,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			#region Attachments
 			var fileAttachments = new List<Attachment>();
-			AttachmentProperties attachmentProperties = topLevelFile.AttachmentProperties;
+			var attachmentProperties = topLevelFile.AttachmentProperties;
 			if (attachmentProperties != null)
 			{
 				destinationLink.enableAttachments = attachmentProperties.Enable;
@@ -579,7 +579,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			get
 			{
 				var videoFiles = new List<VideoInfo>();
-				int i = 1;
+				var i = 1;
 				foreach (IPreviewContainer previewContainer in Parent.PreviewContainers.Where(x => !string.IsNullOrEmpty(x.OriginalPath) && x.Type == FileTypes.MediaPlayerVideo || x.Type == FileTypes.QuickTimeVideo))
 				{
 					var videoFile = new VideoInfo(previewContainer);
@@ -588,12 +588,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					videoFile.SourceFileName = Path.GetFileName(previewContainer.OriginalPath);
 					videoFile.SourceFilePath = previewContainer.OriginalPath;
 					videoFile.SourceFolderPath = Path.GetDirectoryName(previewContainer.OriginalPath);
-					if (Directory.Exists(previewContainer.ContainerPath))
-						videoFile.IPadFolderPath = previewContainer.ContainerPath;
-					else
-						videoFile.IPadFolderPath = null;
+					videoFile.IPadFolderPath = Directory.Exists(previewContainer.ContainerPath) ? previewContainer.ContainerPath : null;
 
-					string wmvPath = previewContainer.Type == FileTypes.MediaPlayerVideo
+					var wmvPath = previewContainer.Type == FileTypes.MediaPlayerVideo && previewContainer.Extension.ToUpper().Equals(".WMV")
 										 ? videoFile.SourceFilePath
 										 : Path.Combine(previewContainer.ContainerPath, "wmv", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".wmv")));
 					if (File.Exists(wmvPath))
@@ -606,7 +603,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						videoFile.WmvFileName = null;
 						videoFile.WmvFilePath = null;
 					}
-					string mp4Path = previewContainer.Type == FileTypes.QuickTimeVideo
+					var mp4Path = previewContainer.Type == FileTypes.QuickTimeVideo && previewContainer.Extension.ToUpper().Equals(".MP4")
 										 ? videoFile.SourceFilePath
 										 : Path.Combine(previewContainer.ContainerPath, "mp4", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".mp4")));
 					if (File.Exists(mp4Path))
