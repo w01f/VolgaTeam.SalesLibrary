@@ -610,13 +610,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						videoFile.Mp4FileName = Path.GetFileName(mp4Path);
 						videoFile.Mp4FilePath = mp4Path;
-						videoFile.IPadCompatible = "YES!";
 					}
 					else
 					{
 						videoFile.Mp4FileName = null;
 						videoFile.Mp4FilePath = null;
-						videoFile.IPadCompatible = "NO!";
 					}
 					string ogvPath = Path.Combine(previewContainer.ContainerPath, "ogv", Path.GetFileName(Path.ChangeExtension(previewContainer.OriginalPath, ".ogv")));
 					if (File.Exists(ogvPath))
@@ -657,7 +655,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string WmvFilePath { get; set; }
 		public string Mp4FileName { get; set; }
 		public string Mp4FilePath { get; set; }
-		public string IPadCompatible { get; set; }
 		public string OgvFileName { get; set; }
 		public string OgvFilePath { get; set; }
 	}
@@ -1034,16 +1031,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-					{
-						while (startDate < endDate)
-						{
-							var nextDate = startDate.AddDays(10);
-							if (nextDate > endDate)
-								nextDate = endDate;
-							activities.AddRange(client.getMainUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainUserReportRecord[] { });
-							startDate = nextDate;
-						}
-					}
+						activities.AddRange(client.getMainUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainUserReportRecord[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -1068,16 +1056,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-					{
-						while (startDate < endDate)
-						{
-							var nextDate = startDate.AddDays(10);
-							if (nextDate > endDate)
-								nextDate = endDate;
-							activities.AddRange(client.getMainGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainGroupReportRecord[] { });
-							startDate = nextDate;
-						}
-					}
+						activities.AddRange(client.getMainGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainGroupReportRecord[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -1103,14 +1082,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
-						while (startDate < endDate)
-						{
-							var nextDate = startDate.AddDays(10);
-							if (nextDate > endDate)
-								nextDate = endDate;
-							activities.AddRange(client.getNavigationUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationUserReportRecord[] { });
-							startDate = nextDate;
-						}
+						activities.AddRange(client.getNavigationUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationUserReportRecord[] { });
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
@@ -1136,16 +1108,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-					{
-						while (startDate < endDate)
-						{
-							var nextDate = startDate.AddDays(10);
-							if (nextDate > endDate)
-								nextDate = endDate;
-							activities.AddRange(client.getNavigationGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationGroupReportRecord[] { });
-							startDate = nextDate;
-						}
-					}
+						activities.AddRange(client.getNavigationGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationGroupReportRecord[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

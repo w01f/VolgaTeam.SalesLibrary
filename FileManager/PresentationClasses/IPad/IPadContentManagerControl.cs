@@ -115,13 +115,11 @@ namespace FileManager.PresentationClasses.IPad
 			if (videoIndex < 0 || videoIndex >= _videoFiles.Count) return;
 			var videoInfo = _videoFiles[videoIndex];
 			if (e.Column == gridColumnVideoWmvFileName)
-				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.WmvFilePath) ? Color.Red : Color.Black;
+				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.WmvFilePath) ? Color.Red : Color.Green;
 			if (e.Column == gridColumnVideoMp4FileName)
-				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Black;
-			else if (e.Column == gridColumnVideoOgvFileName)
-				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.OgvFilePath) ? Color.Red : Color.Black;
-			else if (e.Column == gridColumnVideoIPadCompatible)
 				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.Mp4FilePath) ? Color.Red : Color.Green;
+			else if (e.Column == gridColumnVideoOgvFileName)
+				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.OgvFilePath) ? Color.Red : Color.Green;
 
 			e.Appearance.BackColor = videoInfo.Selected ? Color.LightGreen : Color.White;
 		}
