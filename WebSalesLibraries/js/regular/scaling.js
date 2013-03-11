@@ -13,11 +13,22 @@
 		content.find('>div').css({
 			'height':height + 'px'
 		});
-		updateSearchAreaDimensions();
-		updateFavoritesDimensions();
+		updateWallbinTabs();
+		updateSearchArea();
+		updateFavoritesArea();
 	};
 
-	var updateSearchAreaDimensions = function ()
+	var updateWallbinTabs = function ()
+	{
+		var content = $('#content');
+		var height = content.height();
+		var tabPanelHeight = content.find('.ui-tabs-nav').height();
+		content.find('.wallbin-tab').css({
+			'height':(height  - tabPanelHeight - 5) + 'px'
+		});
+	}
+
+	var updateSearchArea = function ()
 	{
 		var height = $('#content').height();
 		$('#right-navbar').find('> div').css({
@@ -36,10 +47,10 @@
 		$('#file-types-container').css({
 			'height':(height - 47) + 'px'
 		});
-		updateSearchGridDimensions();
+		updateLinksGrid();
 	};
 
-	var updateSearchGridDimensions = function ()
+	var updateLinksGrid = function ()
 	{
 		var searchResult = $('#search-result');
 
@@ -62,7 +73,7 @@
 		});
 	};
 
-	var updateFavoritesDimensions = function ()
+	var updateFavoritesArea = function ()
 	{
 		var height = $('#content').height();
 		$('#favorites-panel-folders').find('> div').css({

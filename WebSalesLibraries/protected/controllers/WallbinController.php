@@ -21,6 +21,17 @@
 			$this->renderPartial('accordionView', array('libraryPage' => $selectedPage), false, true);
 		}
 
+		public function actionGetTabsView()
+		{
+			$wallbinView = Yii::app()->request->getPost('wallbinView');
+
+			$libraryManager = new LibraryManager();
+			$selectedLibrary = $libraryManager->getSelectedLibrary();
+			$selectedPage = $libraryManager->getSelectedPage();
+			$selectedPage->loadData(null);
+			$this->renderPartial('tabsView', array('library' => $selectedLibrary,'selectedPage' => $selectedPage,'wallbinView' => $wallbinView), false, true);
+		}
+
 		public function actionGetLibraryDropDownList()
 		{
 			$libraryManager = new LibraryManager();

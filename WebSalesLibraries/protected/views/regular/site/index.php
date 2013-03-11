@@ -1,5 +1,5 @@
 <?php
-	$version = '118.0';
+	$version = '123.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -13,6 +13,7 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/minibar.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/columns.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/accordion.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/wallbin-tabs.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/folder-links.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/banner.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search.css?' . $version);
@@ -386,6 +387,12 @@
 	<ul>
 		<li id="accordion-view" title="Accordion View">
 			<a href="#"><img src="<?php echo Yii::app()->baseUrl . '/images/minibar/accordion.png' ?>" alt=""/></a>
+		</li>
+	</ul>
+	<span class="jx-separator-left"></span>
+	<ul>
+		<li id="tabs-view" title="Tabs View">
+			<a href="#"><img src="<?php echo Yii::app()->baseUrl . '/images/minibar/tabs.png' ?>" alt=""/></a>
 		</li>
 	</ul>
 	<span class="jx-separator-left"></span>

@@ -2,7 +2,6 @@
 {
 	$.openViewDialogEmbedded = function (event)
 	{
-		event.stopPropagation();
 		var formatItems = $(this).find('li');
 		var warning = $(this).find('.warning');
 		var fullScreenSelector = $(this).find('.use-fullscreen');
@@ -46,6 +45,7 @@
 		{
 			$.viewSelectedFormat.call(formatItems[0], formatItems[0], false, false);
 		}
+		event.stopPropagation();
 	};
 
 	$.openViewDialogFromGrid = function (linkId)

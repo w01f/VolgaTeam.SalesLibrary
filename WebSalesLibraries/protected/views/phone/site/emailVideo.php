@@ -32,42 +32,14 @@
         <h2><?php echo $link->name; ?></h2>
         <br>
         <a class="video-link" href="#">
-            <h3>MP4 (for iPads and Google Chrome)</h3>
+            <h3>MP4</h3>
             <span class ="service-data" style="display: none;">
                 <div class ="link-id"><?php echo $link->id; ?></div>
 				<div class="link-name"><?php echo $link->name; ?></div>
 				<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
                 <div class ="file-type"><?php echo $link->originalFormat; ?></div>
-                <div class ="view-type"><?php echo 'mp4'; ?></div>
-                <?php $viewLinks = $link->getViewSource('mp4'); ?>
-                <?php if (isset($viewLinks)): ?>
-                    <div class ="links"><?php echo json_encode($viewLinks); ?></div>
-                <?php endif; ?>
-            </span>
-        </a>
-        <a class="video-link" href="#">
-            <h3>WMV (for Internet Explorer)</h3>
-            <span class ="service-data" style="display: none;">
-                <div class ="link-id"><?php echo $link->id; ?></div>
-				<div class="link-name"><?php echo $link->name; ?></div>
-				<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
-                <div class ="file-type"><?php echo $link->originalFormat; ?></div>
-                <div class ="view-type"><?php echo 'video'; ?></div>
-                <?php $viewLinks = $link->getViewSource('video'); ?>
-                <?php if (isset($viewLinks)): ?>
-                    <div class ="links"><?php echo json_encode($viewLinks); ?></div>
-                <?php endif; ?>
-            </span>
-        </a>
-        <a class="video-link" href="#">
-            <h3>OGV (for Firefox)</h3>
-            <span class ="service-data" style="display: none;">
-                <div class ="link-id"><?php echo $link->id; ?></div>
-				<div class="link-name"><?php echo $link->name; ?></div>
-				<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
-                <div class ="file-type"><?php echo $link->originalFormat; ?></div>
-                <div class ="view-type"><?php echo 'ogv'; ?></div>
-                <?php $viewLinks = $link->getViewSource('ogv'); ?>
+                <div class ="view-type"><?php echo 'tab'; ?></div>
+                <?php $viewLinks = $link->getViewSource('tab'); ?>
                 <?php if (isset($viewLinks)): ?>
                     <div class ="links"><?php echo json_encode($viewLinks); ?></div>
                 <?php endif; ?>
