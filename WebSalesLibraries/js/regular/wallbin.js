@@ -337,6 +337,19 @@
 							loadAccordion($(ui.panel));
 						else
 							loadColumns($(ui.panel));
+						$.ajax({
+							type:"POST",
+							url:"statistic/writeActivity",
+							data:{
+								type:'Wallbin',
+								subType:'Page Changed',
+								data:$.toJSON({
+									Page:selectedPageName
+								})
+							},
+							async:true,
+							dataType:'html'
+						});
 					}
 				});
 				if ($.cookie("wallbinView") == "accordion")
