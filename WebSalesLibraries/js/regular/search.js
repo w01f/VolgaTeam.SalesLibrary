@@ -43,6 +43,16 @@
 			categories.push(category);
 		});
 
+		var onlyByName = false;
+		var onlyByContent = false;
+		if ($.cookie("searchFields") != null)
+		{
+			if ($.cookie("searchFields") == "name")
+				onlyByName = true;
+			else if ($.cookie("searchFields") == "text")
+				onlyByContent = true;
+		}
+
 		//Save search state to recover while tabs are switching
 		$.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId"), true, {
 			expires:(60 * 60 * 24 * 7)
@@ -71,6 +81,8 @@
 				categories:categories.length > 0 ? $.toJSON(categories) : null,
 				categoriesExactMatch:$('#tags-compare-exact').hasClass('active'),
 				hideDuplicated:$('#hide-duplicated').hasClass('active'),
+				onlyByName:onlyByName,
+				onlyByContent:onlyByContent,
 				isSort:isSort
 			},
 			beforeSend:function ()
@@ -186,6 +198,8 @@
 
 	var initKeywordFiled = function ()
 	{
+		var rightPanel = $("#right-navbar");
+
 		if ($.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId")) == "true" && $.cookie("textCondition" + $.cookie("selectedRibbonTabId")) != null)
 			$('#condition-content-value').val($.cookie("textCondition" + $.cookie("selectedRibbonTabId")));
 
@@ -214,7 +228,7 @@
 				expires:(60 * 60 * 24 * 7)
 			});
 		});
-		$("#right-navbar").find("input").keypress(function (e)
+		rightPanel.find("input").keypress(function (e)
 		{
 			if (e.which == 13)
 			{
@@ -239,6 +253,44 @@
 			else
 				$(this).addClass('active');
 			$.cookie("hideDuplicated", hideDuplicated.hasClass('active'), {
+				expires:(60 * 60 * 24 * 7)
+			});
+		});
+
+		if ($.cookie("searchFields") != null)
+		{
+			if ($.cookie("searchFields") == "all")
+				$("#content-full").button('toggle');
+			else if ($.cookie("searchFields") == "name")
+				$("#content-only-file").button('toggle');
+			else if ($.cookie("searchFields") == "text")
+				$("#content-only-text").button('toggle');
+		}
+		else
+			$("#content-full").button('toggle');
+
+		rightPanel.find(".search-fields-option").off('click').on('click', function ()
+		{
+			if (!$(this).hasClass('active'))
+			{
+				rightPanel.find(".search-fields-option").removeClass('active');
+				$(this).addClass('active');
+				var id = $(this).attr('id');
+				var value = "all";
+				switch (id)
+				{
+					case "content-full":
+						value = "all";
+						break;
+					case "content-only-file":
+						value = "name";
+						break;
+					case "content-only-text":
+						value = "text";
+						break;
+				}
+			}
+			$.cookie("searchFields", value, {
 				expires:(60 * 60 * 24 * 7)
 			});
 		});

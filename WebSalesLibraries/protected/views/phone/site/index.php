@@ -1,5 +1,5 @@
 <?php
-	$version = '27.0';
+	$version = '28.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('cookie');

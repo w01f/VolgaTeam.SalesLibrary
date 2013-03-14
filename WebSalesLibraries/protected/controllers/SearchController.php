@@ -82,8 +82,20 @@
 				else
 					$hideDuplicated = false;
 
+				$onlyByName = Yii::app()->request->getPost('onlyByName');
+				if (isset($onlyByName) && $onlyByName == 'true')
+					$onlyByName = true;
+				else
+					$onlyByName = false;
+
+				$onlyByContent = Yii::app()->request->getPost('onlyByContent');
+				if (isset($onlyByContent) && $onlyByContent == 'true')
+					$onlyByContent = true;
+				else
+					$onlyByContent = false;
+
 				if (isset($fileTypes) && isset($condition) && isset($isSort))
-					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $hideDuplicated, $isSort);
+					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $hideDuplicated,$onlyByName,$onlyByContent, $isSort);
 
 				if (!isset($links))
 					$links = null;

@@ -24,14 +24,18 @@
 			<button type="button" class="btn" id="content-compare-exact">Exact Match</button>
 			<button type="button" class="btn" id="content-compare-partial">Partial Match</button>
 		</div>
-		<?if (Yii::app()->params['search_options']['hide_duplicate']): ?>
+
 		<br>
 		<br>
 		<div class="group-panel">
 			<div class="group-title">User Options:</div>
-			<button type="button" class="btn btn-block" id="hide-duplicated">Hide Duplicate Files</button>
+			<?if (Yii::app()->params['search_options']['hide_duplicate']): ?>
+				<button type="button" class="btn btn-block" id="hide-duplicated">Hide Duplicate Files</button>
+			<? endif;?>
+			<button type="button" class="btn btn-block search-fields-option" id="content-full">Total Keyword Database Search</button>
+			<button type="button" class="btn btn-block search-fields-option" id="content-only-file">Search File Names Only</button>
+			<button type="button" class="btn btn-block search-fields-option" id="content-only-text">Search Only the TEXT in each file</button>
 		</div>
-		<? endif;?>
 	</div>
 	<div id="search-options-tags">
 		<?php if (isset($categories->groups) && Yii::app()->params['tags']['visible']): ?>

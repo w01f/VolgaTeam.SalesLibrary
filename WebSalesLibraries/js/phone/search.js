@@ -169,6 +169,30 @@
 			});
 		});
 
+		$("#search-fields-options-container").find('input[type="radio"]').checkboxradio();
+		if ($.cookie("searchFields") != null)
+		{
+			if ($.cookie("searchFields") == "all")
+				$("#content-full").attr("checked", true).checkboxradio("refresh");
+			else if ($.cookie("searchFields") == "name")
+				$("#content-only-file").attr("checked", true).checkboxradio("refresh");
+			else if ($.cookie("searchFields") == "text")
+				$("#content-only-text").attr("checked", true).checkboxradio("refresh");
+		}
+		else
+			$("#content-full").attr("checked", true).checkboxradio("refresh");
+
+		$("#search-fields-options-container").find('input[type="radio"]').on('change', function ()
+		{
+			var value = "all";
+			if ($('#content-only-file').attr("checked") == "checked")
+				value = "name";
+			else if ($('#content-only-text').attr("checked") == "checked")
+				value = "text";
+			$.cookie("searchFields", value, {
+				expires:(60 * 60 * 24 * 7)
+			});
+		});
 	};
 
 	var initDateSelector = function ()
@@ -409,6 +433,16 @@
 			categories.push(category);
 		});
 
+		var onlyByName = false;
+		var onlyByContent = false;
+		if ($.cookie("searchFields") != null)
+		{
+			if ($.cookie("searchFields") == "name")
+				onlyByName = true;
+			else if ($.cookie("searchFields") == "text")
+				onlyByContent = true;
+		}
+
 		$.ajax({
 			type:"POST",
 			url:"search/searchByContent",
@@ -422,6 +456,8 @@
 				categories:categories.length > 0 ? $.toJSON(categories) : null,
 				categoriesExactMatch:$('#search-tags-exact-match').find(':selected').val(),
 				hideDuplicated:$('#hide-duplicated').attr("checked") == "checked",
+				onlyByName:onlyByName,
+				onlyByContent:onlyByContent,
 				isSort:isSort
 			},
 			beforeSend:function ()
