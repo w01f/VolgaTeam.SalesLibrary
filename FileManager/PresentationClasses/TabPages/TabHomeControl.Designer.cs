@@ -30,7 +30,6 @@
         {
 			this.components = new System.ComponentModel.Container();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
 			this.dockPanelTreeView = new DevExpress.XtraBars.Docking.DockPanel();
 			this.dockPanelTreeView_Container = new DevExpress.XtraBars.Docking.ControlContainer();
@@ -44,10 +43,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
 			// 
 			// dockManager
 			// 
@@ -162,8 +157,7 @@
 
         #endregion
 
-        private DevExpress.XtraEditors.StyleController styleController;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
+		private DevExpress.XtraEditors.StyleController styleController;
         private DevExpress.XtraBars.Docking.DockManager dockManager;
         public System.Windows.Forms.Panel pnEmpty;
         public System.Windows.Forms.Panel pnMain;

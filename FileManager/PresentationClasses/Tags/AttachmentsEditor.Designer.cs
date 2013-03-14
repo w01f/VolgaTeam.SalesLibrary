@@ -51,7 +51,6 @@
 			this.repositoryItemButtonEditAttachmentsWeb = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.buttonXAttachmentsWebAdd = new DevComponents.DotNetBar.ButtonX();
 			this.checkBoxEnableAttachmnets = new System.Windows.Forms.CheckBox();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
@@ -341,10 +340,6 @@
 			this.checkBoxEnableAttachmnets.UseVisualStyleBackColor = true;
 			this.checkBoxEnableAttachmnets.CheckedChanged += new System.EventHandler(this.checkBoxEnableAttachments_CheckedChanged);
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// styleController
 			// 
 			this.styleController.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -395,7 +390,6 @@
 		private DevExpress.XtraTab.XtraTabPage xtraTabPageFiles;
 		private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
 		private System.Windows.Forms.CheckBox checkBoxEnableAttachmnets;
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraGrid.GridControl gridControlAttachmentsFiles;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewAttachmentsFiles;
