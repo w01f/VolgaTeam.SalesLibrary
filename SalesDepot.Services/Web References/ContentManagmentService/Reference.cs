@@ -183,6 +183,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private bool selectedField;
         
+        private LibraryConfig configField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -240,6 +242,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.selectedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LibraryConfig config {
+            get {
+                return this.configField;
+            }
+            set {
+                this.configField = value;
             }
         }
     }
@@ -756,6 +768,87 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.tagField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:ContentControllerwsdl")]
+    public partial class LibraryConfig {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string deadLinkSenderField;
+        
+        private string deadLinkRecipientsField;
+        
+        private string deadLinkSubjectField;
+        
+        private string deadLinkBodyField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkSender {
+            get {
+                return this.deadLinkSenderField;
+            }
+            set {
+                this.deadLinkSenderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkRecipients {
+            get {
+                return this.deadLinkRecipientsField;
+            }
+            set {
+                this.deadLinkRecipientsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkSubject {
+            get {
+                return this.deadLinkSubjectField;
+            }
+            set {
+                this.deadLinkSubjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkBody {
+            get {
+                return this.deadLinkBodyField;
+            }
+            set {
+                this.deadLinkBodyField = value;
             }
         }
     }
@@ -1554,6 +1647,10 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string previewIdField;
         
+        private bool isDeadField;
+        
+        private bool isPreviewNotReadyField;
+        
         /// <remarks/>
         public string linkId {
             get {
@@ -1611,6 +1708,26 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.previewIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isDead {
+            get {
+                return this.isDeadField;
+            }
+            set {
+                this.isDeadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isPreviewNotReady {
+            get {
+                return this.isPreviewNotReadyField;
+            }
+            set {
+                this.isPreviewNotReadyField = value;
             }
         }
     }
@@ -1988,6 +2105,10 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string assignedUsersField;
         
+        private bool isDeadField;
+        
+        private bool isPreviewNotReadyField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -2295,6 +2416,26 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isDead {
+            get {
+                return this.isDeadField;
+            }
+            set {
+                this.isDeadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isPreviewNotReady {
+            get {
+                return this.isPreviewNotReadyField;
+            }
+            set {
+                this.isPreviewNotReadyField = value;
             }
         }
     }

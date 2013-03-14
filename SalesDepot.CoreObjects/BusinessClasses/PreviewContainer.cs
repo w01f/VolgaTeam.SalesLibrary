@@ -137,13 +137,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						var mp4Destination = Path.Combine(ContainerPath, "mp4");
 						var wmvDestination = Path.Combine(ContainerPath, "wmv");
 						var ogvDestination = Path.Combine(ContainerPath, "ogv");
-						if (Type == FileTypes.MediaPlayerVideo)
-							return (Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0)
-								&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-						if (Type == FileTypes.QuickTimeVideo)
+						if (Extension.ToUpper().Equals(".MP4"))
 							return (Directory.Exists(wmvDestination) && Directory.GetFiles(wmvDestination, "*.wmv").Length > 0)
 								&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
-						return true;
+						if (Extension.ToUpper().Equals(".WMV"))
+							return (Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0)
+								&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
+						return (Directory.Exists(mp4Destination) && Directory.GetFiles(mp4Destination, "*.mp4").Length > 0)
+							&& (Directory.Exists(wmvDestination) && Directory.GetFiles(wmvDestination, "*.wmv").Length > 0)
+							&& (Directory.Exists(ogvDestination) && Directory.GetFiles(ogvDestination, "*.ogv").Length > 0);
 					default:
 						return true;
 				}

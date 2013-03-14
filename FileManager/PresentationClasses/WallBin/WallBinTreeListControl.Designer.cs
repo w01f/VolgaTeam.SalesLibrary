@@ -62,7 +62,6 @@
 			this.xtraTabControlFiles = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageRegular = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageSearch = new DevExpress.XtraTab.XtraTabPage();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnLeft = new System.Windows.Forms.Panel();
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnRight = new System.Windows.Forms.Panel();
@@ -536,10 +535,6 @@
 			this.xtraTabPageSearch.Size = new System.Drawing.Size(589, 371);
 			this.xtraTabPageSearch.Text = "Search";
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// pnLeft
 			// 
 			this.pnLeft.Controls.Add(this.xtraTabControlFiles);
@@ -743,8 +738,7 @@
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn2;
         private DevExpress.XtraTab.XtraTabControl xtraTabControlFiles;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageRegular;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageSearch;
-        private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageSearch;
         private System.Windows.Forms.Panel pnLeft;
         private DevComponents.DotNetBar.PanelEx panelExProgressTreeView;
         private DevComponents.DotNetBar.Controls.CircularProgress circularProgressTreeView;

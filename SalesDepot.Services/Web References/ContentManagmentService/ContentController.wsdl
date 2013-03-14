@@ -10,6 +10,7 @@
           <xsd:element name="autoWidgets" type="tns:AutoWidgetArray" />
           <xsd:element name="previewContainers" type="tns:UniversalPreviewContainerArray" />
           <xsd:element name="selected" type="xsd:boolean" />
+          <xsd:element name="config" type="tns:LibraryConfig" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryPageArray">
@@ -130,6 +131,8 @@
           <xsd:element name="attachments" type="tns:AttachmentArray" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="isDead" type="xsd:boolean" />
+          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -196,6 +199,8 @@
           <xsd:element name="path" type="xsd:string" />
           <xsd:element name="originalFormat" type="xsd:string" />
           <xsd:element name="previewId" type="xsd:string" />
+          <xsd:element name="isDead" type="xsd:boolean" />
+          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="ColumnArray">
@@ -308,6 +313,16 @@
           <xsd:element name="thumbsPhoneLinks" type="tns:stringArray" />
           <xsd:element name="thumbsWidth" type="xsd:int" />
           <xsd:element name="thumbsHeight" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="LibraryConfig">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="deadLinkSender" type="xsd:string" />
+          <xsd:element name="deadLinkRecipients" type="xsd:string" />
+          <xsd:element name="deadLinkSubject" type="xsd:string" />
+          <xsd:element name="deadLinkBody" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="CategoryArray">

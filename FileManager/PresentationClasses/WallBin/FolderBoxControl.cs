@@ -25,9 +25,9 @@ namespace FileManager.PresentationClasses.WallBin
 		private const int DefaultImageHeight = 26;
 
 		private readonly Pen _boxDropHintPen = new Pen(Color.Black, 8);
-		private readonly FormLinkProperties _formLinkProperties = new FormLinkProperties();
 		private readonly RichTextBox _richTextControl = new RichTextBox();
 		private readonly Pen _rowDropHintPen = new Pen(Color.Black, 2);
+		private FormLinkProperties _formLinkProperties;
 		private bool _containFiles;
 		private bool _containsWidgets;
 		private int _currentDragOverRow = -1;
@@ -744,6 +744,7 @@ namespace FileManager.PresentationClasses.WallBin
 			if (grFiles.SelectedRows.Count <= 0) return;
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
+			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties();
 			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.IsBold = file.IsBold;
 			_formLinkProperties.EnableWidget = file.EnableWidget;
@@ -937,6 +938,13 @@ namespace FileManager.PresentationClasses.WallBin
 													  grFiles.SelectionChanged += grFiles_SelectionChanged;
 												  }
 											  };
+		}
+
+		public void Delete()
+		{
+			if (_formLinkProperties != null)
+				_formLinkProperties.Dispose();
+			Dispose();
 		}
 
 		private void FolderBoxControl_Resize(object sender, EventArgs e)

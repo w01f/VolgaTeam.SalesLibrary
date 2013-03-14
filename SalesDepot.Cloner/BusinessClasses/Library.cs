@@ -672,13 +672,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private void ProcessDeadLinks()
 		{
 			DeadLinks.Clear();
-			foreach (LibraryPage page in Pages)
-				foreach (LibraryFolder folder in page.Folders)
-				{
-					foreach (LibraryLink file in folder.Files)
-						file.CheckIfDead();
-					DeadLinks.AddRange(folder.Files.Where(x => x.IsDead));
-				}
+			foreach (var folder in Pages.SelectMany(page => page.Folders))
+			{
+				foreach (LibraryLink file in folder.Files)
+					file.CheckIfDead();
+				DeadLinks.AddRange(folder.Files.Where(x => x.IsDead));
+			}
 		}
 
 		private void ProcessExpiredLinks()

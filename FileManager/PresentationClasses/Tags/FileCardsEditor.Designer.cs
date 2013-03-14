@@ -64,7 +64,6 @@
 			this.checkBoxEnableFileCard = new System.Windows.Forms.CheckBox();
 			this.pnButtons = new System.Windows.Forms.Panel();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFileCardTitle.Properties)).BeginInit();
@@ -582,10 +581,6 @@
 			this.buttonXReset.TextColor = System.Drawing.Color.Black;
 			this.buttonXReset.Click += new System.EventHandler(this.buttonXReset_Click);
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// FileCardsEditor
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -628,7 +623,6 @@
 		private System.Windows.Forms.Panel pnData;
 		private System.Windows.Forms.Panel pnButtons;
 		private DevComponents.DotNetBar.ButtonX buttonXReset;
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.TextEdit textEditFileCardTitle;
 		private System.Windows.Forms.GroupBox groupBoxFileCard;

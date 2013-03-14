@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentManagment\LibraryConfig.cs" />
     <Compile Include="IPadAdminService\GroupRecord.cs" />
     <Compile Include="IPadAdminService\LibraryPage.cs" />
     <Compile Include="IPadAdminService\UserInfo.cs" />

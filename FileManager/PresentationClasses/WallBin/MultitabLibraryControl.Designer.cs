@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.SuspendLayout();
@@ -65,10 +63,6 @@
 			this.xtraTabControl.Size = new System.Drawing.Size(506, 386);
 			this.xtraTabControl.TabIndex = 0;
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
-			// 
 			// pnEmpty
 			// 
 			this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -94,8 +88,7 @@
 
         #endregion
 
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private System.Windows.Forms.Panel pnEmpty;
+		private System.Windows.Forms.Panel pnEmpty;
 		public DevExpress.XtraTab.XtraTabControl xtraTabControl;
     }
 }

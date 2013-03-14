@@ -56,7 +56,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			foreach (FolderBoxControl box in _boxes)
 			{
 				box.Parent = null;
-				box.Dispose();
+				box.Delete();
 				Application.DoEvents();
 			}
 			_boxes.Clear();
@@ -170,7 +170,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			_boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
 			foreach (Control control in _parentPanel.Controls)
 				control.Controls.Clear();
-			foreach (FolderBoxControl box in _boxes)
+			foreach (var box in _boxes)
 				_parentPanel.Controls[2 - box.Column].Controls.Add(box);
 		}
 
@@ -180,7 +180,7 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 			int currentColumn = -1;
 
 			_boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
-			foreach (FolderBoxControl t in _boxes)
+			foreach (var t in _boxes)
 			{
 				if (currentColumn != t.Column)
 				{
@@ -229,9 +229,8 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
 		private void FitObjectsToPage()
 		{
-			foreach (FolderBoxControl box in _boxes)
+			foreach (var box in _boxes)
 				box.SetGridFont(SettingsManager.Instance.FontSize);
-
 
 			RefreshPanelHeight();
 

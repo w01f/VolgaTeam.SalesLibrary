@@ -120,6 +120,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			library.id = Parent.Identifier.ToString();
 			library.name = Parent.Name;
 
+			var config = new LibraryConfig();
+			config.libraryId = Parent.Identifier.ToString();
+			config.LoadData(Path.Combine(Path.GetDirectoryName(typeof(IPadManager).Assembly.Location), "error_email.xml"));
+			library.config = config;
+
 			#region Pages
 			var pages = new List<Services.ContentManagmentService.LibraryPage>();
 			foreach (var libraryPage in Parent.Pages)
@@ -360,6 +365,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.isRestricted = topLevelFile.IsRestricted;
 			if (!string.IsNullOrEmpty(topLevelFile.AssignedUsers))
 				destinationLink.assignedUsers = topLevelFile.AssignedUsers;
+			destinationLink.isDead = libraryFile.IsDead;
 			destinationLink.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			destinationLink.dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 
@@ -369,6 +375,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (previewContainer != null)
 				{
 					destinationLink.previewId = !previewContainer.OnlyText || libraryFile.Type == FileTypes.MediaPlayerVideo || libraryFile.Type == FileTypes.QuickTimeVideo ? previewContainer.Identifier : null;
+					destinationLink.isPreviewNotReady = !previewContainer.Ready;
 					var txtLinks = previewContainer.GetPreviewLinks("txt");
 					if (txtLinks != null && txtLinks.Length > 0)
 						destinationLink.contentPath = txtLinks[0];
@@ -451,7 +458,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			if (attachmentProperties != null)
 			{
 				destinationLink.enableAttachments = attachmentProperties.Enable;
-				foreach (LinkAttachment linkAttachment in attachmentProperties.FilesAttachments)
+				foreach (var linkAttachment in attachmentProperties.FilesAttachments)
 				{
 					var attachment = new Attachment();
 					attachment.linkId = libraryFile.Identifier.ToString();
@@ -459,14 +466,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					attachment.name = linkAttachment.Name;
 					attachment.originalFormat = linkAttachment.Format;
 					attachment.path = linkAttachment.DestinationRelativePath;
+					attachment.isDead = !linkAttachment.IsDestinationAvailable;
 
-					IPreviewContainer previewContainer = library.GetPreviewContainer(linkAttachment.OriginalPath);
+					var previewContainer = library.GetPreviewContainer(linkAttachment.OriginalPath);
 					if (previewContainer != null)
+					{
 						attachment.previewId = previewContainer.Identifier;
-
+						attachment.isPreviewNotReady = !previewContainer.Ready;
+					}
 					fileAttachments.Add(attachment);
 				}
-				foreach (LinkAttachment linkAttachment in attachmentProperties.WebAttachments)
+				foreach (var linkAttachment in attachmentProperties.WebAttachments)
 				{
 					var attachment = new Attachment();
 					attachment.linkId = libraryFile.Identifier.ToString();
