@@ -16,16 +16,19 @@ select su.first_name,
           left join (
             select su.login,count(su.id) as total_count from tbl_statistic_user as su
           join tbl_statistic_activity as sact on sact.id = su.id_activity and (sact.sub_type = 'Library Changed' or sact.sub_type = 'Page Changed')
+    where sact.date_time >= start_date and sact.date_time <= end_date
     group by su.login
           ) as u_totals on u_totals.login = u.login
           left join (
             select su.login,count(su.id) as libs_count from tbl_statistic_user as su
           join tbl_statistic_activity as sact on sact.id = su.id_activity and sact.sub_type = 'Library Changed'
+    where sact.date_time >= start_date and sact.date_time <= end_date
     group by su.login
           ) as u_libs on u_libs.login = u.login
           left join (
             select su.login,count(su.id) as pages_count from tbl_statistic_user as su
           join tbl_statistic_activity as sact on sact.id = su.id_activity and sact.sub_type = 'Page Changed'
+    where sact.date_time >= start_date and sact.date_time <= end_date
     group by su.login
           ) as u_pages on u_pages.login = u.login
           left join tbl_user_group as ug on ug.id_user = u.id
@@ -33,16 +36,19 @@ select su.first_name,
           left join (
             select sg.name,count(sg.id) as total_count from tbl_statistic_group as sg
           join tbl_statistic_activity as sact on sact.id = sg.id_activity and (sact.sub_type = 'Library Changed' or sact.sub_type = 'Page Changed')
+    where sact.date_time >= start_date and sact.date_time <= end_date
     group by sg.name
           ) as g_totals on g_totals.name = g.name
           left join (
             select sg.name,count(sg.id) as libs_count from tbl_statistic_group as sg
           join tbl_statistic_activity as sact on sact.id = sg.id_activity and sact.sub_type = 'Library Changed'
+    where sact.date_time >= start_date and sact.date_time <= end_date
     group by sg.name
           ) as g_libs on g_libs.name = g.name
           left join (
             select sg.name,count(sg.id) as pages_count from tbl_statistic_group as sg
           join tbl_statistic_activity as sact on sact.id = sg.id_activity and sact.sub_type = 'Page Changed'
+    where sact.date_time >= start_date and sact.date_time <= end_date
     group by sg.name
           ) as g_pages on g_pages.name = g.name
   where sact.date_time >= start_date and sact.date_time <= end_date
