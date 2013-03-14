@@ -157,6 +157,16 @@
 		 * @soap
 		 */
 		public $assignedUsers;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $isDead;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $isPreviewNotReady;
 		public $fileLink;
 		public $filePath;
 		public $universalPreview;
@@ -191,6 +201,8 @@
 			$this->enableWidget = $linkRecord->enable_widget;
 			$this->widget = $linkRecord->widget;
 			$this->originalFormat = $linkRecord->format;
+			$this->isDead = $linkRecord->is_dead;
+			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
 
 			$lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)
@@ -285,7 +297,7 @@
 		public function loadFolderContent()
 		{
 			unset($this->folderContent);
-			foreach (LinkStorage::model()->findAll('id_parent_link=?', array($this->id)) as $contentRecord)
+			foreach (LinkStorage::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0', array($this->id)) as $contentRecord)
 			{
 				$link = new LibraryLink($this->parent);
 				$link->browser = $this->browser;

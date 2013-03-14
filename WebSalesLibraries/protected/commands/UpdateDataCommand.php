@@ -45,6 +45,7 @@ class UpdateDataCommand extends CConsoleCommand
                             $library->load();
                             $library->buildCache($this);
                             echo "HTML cache for " . $libraryName . " updated.\n";
+							unset($library);
                         }
                     }
                 }

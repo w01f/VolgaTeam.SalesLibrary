@@ -39,7 +39,7 @@
         <?php if (isset($folders)): ?>
             <div class="page-column" id="column<?php echo $i; ?>">
                 <?php foreach ($folders as $folder): ?>
-                    <div class="folder-body">
+                    <div class="folder-body" style="border-color: <?php echo $folder->borderColor; ?>;">
                         <div class="folder-header-container"
                              style="font-family: <?php echo $folder->headerFont->name; ?>,serif;
                              font-size: <?php echo $folder->headerFont->size; ?>pt;

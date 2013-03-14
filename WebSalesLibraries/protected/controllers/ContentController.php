@@ -21,6 +21,7 @@ class ContentController extends CController
                     'LinkCategory' => 'LinkCategory',
                     'UniversalPreviewContainer' => 'UniversalPreviewContainer',
                     'Category' => 'Category',
+					'LibraryConfig' => 'LibraryConfig',
                 ),
             ),
         );

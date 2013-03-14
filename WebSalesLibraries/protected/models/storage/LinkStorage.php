@@ -49,6 +49,8 @@
 				$linkRecord->enable_widget = $link['enableWidget'];
 				$linkRecord->widget = $link['widget'];
 				$linkRecord->tags = $link['tags'];
+				$linkRecord->is_dead = $link['isDead'];
+				$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
 				if (array_key_exists('isRestricted', $link))
 					$linkRecord->is_restricted = $link['isRestricted'];
 				else
@@ -233,7 +235,7 @@
 					$linkRecords = Yii::app()->db->createCommand()
 						->select('max(id) as id, max(id_library) as id_library, max(name) as name, file_name, ' . $dateField . ', max(enable_attachments) as enable_attachments, max(enable_file_card) as enable_file_card, max(format) as format')
 						->from('tbl_link')
-						->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
+						->where("(match(name,file_name,tags,content) against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ") and is_dead=0 and is_preview_not_ready=0")
 						->group('file_name')
 						->queryAll();
 				}
@@ -265,7 +267,7 @@
 		public static function getLinkById($linkId)
 		{
 			$linkRecord = self::model()->findByPk($linkId);
-			if (isset($linkRecord))
+			if (isset($linkRecord) && $linkRecord->is_dead == false && $linkRecord->is_preview_not_ready == false)
 				return $linkRecord;
 			return null;
 		}
@@ -273,10 +275,10 @@
 		public static function getLinksByFolder($folderId, $allLinks, $userId)
 		{
 			if ($allLinks)
-				$linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null', array($folderId));
+				$linkRecords = self::model()->findAll('id_folder=? and id_parent_link is null and is_dead=0 and is_preview_not_ready=0', array($folderId));
 			else
 			{
-				$linkRecords = self::model()->findAll('id_folder=? and is_restricted <> 1 and id_parent_link is null', array($folderId));
+				$linkRecords = self::model()->findAll('id_folder=? and is_restricted <> 1 and id_parent_link is null and is_dead=0 and is_preview_not_ready=0', array($folderId));
 				if (isset($userId))
 				{
 					$availableLinks = UserLinkStorage::getAvailableLinks($userId);
@@ -295,7 +297,7 @@
 
 		public static function getLinksByParent($linkId)
 		{
-			$linkRecords = self::model()->findAll('id_parent_link=?', array($linkId));
+			$linkRecords = self::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0', array($linkId));
 			if (isset($linkRecords))
 				return $linkRecords;
 			return null;

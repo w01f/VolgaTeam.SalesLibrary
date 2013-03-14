@@ -37,6 +37,11 @@
 		 * @soap
 		 */
 		public $selected;
+		/**
+		 * @var LibraryConfig
+		 * @soap
+		 */
+		public $config;
 
 		public function load()
 		{

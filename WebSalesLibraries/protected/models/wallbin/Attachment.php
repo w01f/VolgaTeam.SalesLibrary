@@ -33,6 +33,16 @@
 		 * @soap
 		 */
 		public $previewId;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $isDead;
+		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $isPreviewNotReady;
 		public $fullPath;
 		public $link;
 		public $availableFormats;
@@ -56,6 +66,8 @@
 			$this->name = $attachmentRecord->name;
 			$this->path = $attachmentRecord->path;
 			$this->originalFormat = $attachmentRecord->format;
+			$this->isDead = $attachmentRecord->is_dead;
+			$this->isPreviewNotReady = $attachmentRecord->is_preview_not_ready;
 			if ($this->originalFormat != 'url')
 			{
 				$this->link = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->parent->parent->parent->storageLink . '/' . $this->path)));

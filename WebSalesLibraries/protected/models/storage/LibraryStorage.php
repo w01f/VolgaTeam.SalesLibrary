@@ -52,6 +52,9 @@ class LibraryStorage extends CActiveRecord
             if (isset($pageIds))
                 LibraryPageStorage::clearByIds($library['id'], $pageIds);
 
+			if (array_key_exists('config', $library) && isset($library['config']))
+				LibraryConfigStorage::updateData($library['config']);
+
             echo 'Library ' . ($needToCreate ? 'created' : 'updated') . ': ' . $library['name'] . "\n";
             return true;
         }
@@ -73,6 +76,7 @@ class LibraryStorage extends CActiveRecord
         ColumnStorage::clearData($libraryId);
         UserLinkStorage::clearData($libraryId);
         UserPageCacheStorage::clearData($libraryId);
+		LibraryConfigStorage::clearData($libraryId);
     }
 
 }

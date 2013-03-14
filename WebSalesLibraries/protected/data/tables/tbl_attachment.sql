@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS `tbl_attachment` (
   `path` varchar(256) NOT NULL,
   `format` varchar(256) NOT NULL,
   `id_preview` varchar(36),
+  `is_dead` tinyint(1) NOT NULL DEFAULT 0,
+  `is_preview_not_ready` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `id_link` (`id_link`),
   KEY `id_library` (`id_library`)

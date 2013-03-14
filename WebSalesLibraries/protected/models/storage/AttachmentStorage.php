@@ -19,6 +19,8 @@
 			$attachmentRecord->name = $attachment['name'];
 			$attachmentRecord->path = $attachment['path'];
 			$attachmentRecord->format = $attachment['originalFormat'];
+			$attachmentRecord->is_dead = $attachment['isDead'];
+			$attachmentRecord->is_preview_not_ready = $attachment['isPreviewNotReady'];
 
 			if (array_key_exists('previewId', $attachment) && isset($attachment['previewId']))
 				$attachmentRecord->id_preview = $attachment['previewId'];
