@@ -22,32 +22,22 @@ namespace FileManager.Controllers
 {
 	public class WallbinController : IPageController
 	{
-		private readonly FormAutoSync _formAutoSync;
-		private readonly FormAutoWidgets _formAutoWidgets;
-		private readonly FormBranding _formBranding;
-		private readonly FormColumns _formColumns;
-		private readonly FormDeadLinks _formDeadLinks;
-		private readonly FormEmailList _formEmailList;
-		private readonly FormExtraRoots _formExtraRoots;
-		private readonly FormPages _formPages;
-		private readonly FormSync _formSync;
-		private readonly WallBinOptions _wallBinOptions = new WallBinOptions();
+		private FormAutoSync _formAutoSync;
+		private FormAutoWidgets _formAutoWidgets;
+		private FormBranding _formBranding;
+		private FormColumns _formColumns;
+		private FormDeadLinks _formDeadLinks;
+		private FormEmailList _formEmailList;
+		private FormExtraRoots _formExtraRoots;
+		private FormPages _formPages;
+		private FormSync _formSync;
+		private WallBinOptions _wallBinOptions = new WallBinOptions();
 
 		private bool _initialization;
 		private TabHomeControl _tabPage;
 
 		public WallbinController()
 		{
-			_formExtraRoots = new FormExtraRoots();
-			_formBranding = new FormBranding();
-			_formSync = new FormSync();
-			_formPages = new FormPages();
-			_formColumns = new FormColumns();
-			_formAutoWidgets = new FormAutoWidgets();
-			_formDeadLinks = new FormDeadLinks();
-			_formEmailList = new FormEmailList();
-			_formAutoSync = new FormAutoSync();
-
 			FormMain.Instance.buttonItemHomeFileTreeView.CheckedChanged += buttonItemHomeFileTreeView_CheckedChanged;
 			FormMain.Instance.buttonItemSettingsPaths.Click += btPathSettings_Click;
 			FormMain.Instance.buttonItemSettingsExtraRoots.Click += BtExtraRootClick;
@@ -582,6 +572,7 @@ namespace FileManager.Controllers
 			{
 				if (MainController.Instance.SaveLibraryWarning())
 				{
+					if (_formExtraRoots == null) _formExtraRoots = new FormExtraRoots();
 					_formExtraRoots.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
 					if (_formExtraRoots.ShowDialog() == DialogResult.OK)
 					{
@@ -596,12 +587,14 @@ namespace FileManager.Controllers
 
 		public void buttonItemSettingsBranding_Click(object sender, EventArgs e)
 		{
+			if (_formBranding == null) _formBranding = new FormBranding();
 			if (MainController.Instance.ActiveDecorator != null)
 				_formBranding.ShowDialog();
 		}
 
 		private void buttonItemSettingsSync_Click(object sender, EventArgs e)
 		{
+			if (_formSync == null) _formSync = new FormSync();
 			if (MainController.Instance.ActiveDecorator != null)
 				_formSync.ShowDialog();
 		}
@@ -612,6 +605,7 @@ namespace FileManager.Controllers
 			{
 				if (MainController.Instance.SaveLibraryWarning())
 				{
+					if (_formPages == null) _formPages = new FormPages();
 					_formPages.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
 					if (_formPages.ShowDialog() == DialogResult.OK)
 					{
@@ -630,6 +624,7 @@ namespace FileManager.Controllers
 			{
 				if (MainController.Instance.SaveLibraryWarning())
 				{
+					if (_formColumns == null) _formColumns = new FormColumns();
 					_formColumns.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
 					if (_formColumns.ShowDialog() == DialogResult.OK)
 					{
@@ -648,6 +643,7 @@ namespace FileManager.Controllers
 			{
 				if (MainController.Instance.SaveLibraryWarning())
 				{
+					if (_formAutoWidgets == null) _formAutoWidgets = new FormAutoWidgets();
 					_formAutoWidgets.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
 					if (_formAutoWidgets.ShowDialog() == DialogResult.OK)
 					{
@@ -664,6 +660,7 @@ namespace FileManager.Controllers
 		{
 			if (MainController.Instance.SaveLibraryWarning())
 			{
+				if (_formDeadLinks == null) _formDeadLinks = new FormDeadLinks();
 				_formDeadLinks.Library = new Library(MainController.Instance.ActiveDecorator.Library.Name, MainController.Instance.ActiveDecorator.Library.Folder, MainController.Instance.ActiveDecorator.Library.UseDirectAccess, SettingsManager.Instance.DirectAccessFileAgeLimit);
 				if (_formDeadLinks.ShowDialog() == DialogResult.OK)
 				{
@@ -677,12 +674,14 @@ namespace FileManager.Controllers
 
 		private void buttonItemSettingsEmailList_Click(object sender, EventArgs e)
 		{
+			if (_formEmailList == null) _formEmailList = new FormEmailList();
 			if (MainController.Instance.ActiveDecorator != null)
 				_formEmailList.ShowDialog();
 		}
 
 		private void buttonItemSettingsAutoSync_Click(object sender, EventArgs e)
 		{
+			if (_formAutoSync == null) _formAutoSync = new FormAutoSync();
 			if (MainController.Instance.ActiveDecorator != null)
 				_formAutoSync.ShowDialog();
 		}

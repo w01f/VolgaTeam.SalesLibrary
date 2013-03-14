@@ -632,7 +632,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 		public void AddNetworkFolder()
 		{
-			using (var form = new FormAddNetworkFolder())
+			using (var form = new FormAddNetworkLink())
 			{
 				if (form.ShowDialog() == DialogResult.OK)
 				{
@@ -777,7 +777,7 @@ namespace FileManager.PresentationClasses.WallBin
 			_formLinkProperties.rbSecurityRestricted.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers);
 			_formLinkProperties.memoEditSecurityUsers.EditValue = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers) ? file.AssignedUsers : (!string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null);
 
-			if (file.Type != FileTypes.LineBreak && file.Type != FileTypes.Network && file.Type != FileTypes.Url && file.Type != FileTypes.Excel && file.Type != FileTypes.MediaPlayerVideo && file.Type != FileTypes.QuickTimeVideo)
+			if (file.Type != FileTypes.LineBreak && file.Type != FileTypes.Network && file.Type != FileTypes.Url && file.Type != FileTypes.Excel && file.Type != FileTypes.MediaPlayerVideo && file.Type != FileTypes.QuickTimeVideo && file.Format != "key")
 			{
 				_formLinkProperties.ckDoNotGeneratePreview.Checked = file.DoNotGeneratePreview;
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = true;
@@ -787,6 +787,22 @@ namespace FileManager.PresentationClasses.WallBin
 				_formLinkProperties.ckDoNotGeneratePreview.Checked = false;
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = false;
 			}
+
+			if (file.Type == FileTypes.MediaPlayerVideo || file.Type == FileTypes.QuickTimeVideo)
+			{
+				_formLinkProperties.ckVideoForcePreview.Checked = file.ForcePreview;
+				_formLinkProperties.pnVideoForcePreview.Visible = true;
+			}
+			else
+			{
+				_formLinkProperties.ckVideoForcePreview.Checked = false;
+				_formLinkProperties.pnVideoForcePreview.Visible = false;
+			}
+
+			if (file.Format == "key")
+				_formLinkProperties.pnKeynotePreview.Visible = true;
+			else
+				_formLinkProperties.pnKeynotePreview.Visible = false;
 
 			_formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
 			if (_formLinkProperties.ShowDialog() != DialogResult.OK) return;
@@ -829,6 +845,7 @@ namespace FileManager.PresentationClasses.WallBin
 				file.LineBreakProperties = _formLinkProperties.LineBreakProperties;
 			}
 			file.DoNotGeneratePreview = _formLinkProperties.ckDoNotGeneratePreview.Checked;
+			file.ForcePreview = _formLinkProperties.ckVideoForcePreview.Checked;
 
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
 

@@ -30,14 +30,14 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLinkProperties));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject9 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject10 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject11 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject12 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject13 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject14 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject15 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gbNotes = new System.Windows.Forms.GroupBox();
 			this.edCustomNote = new System.Windows.Forms.TextBox();
 			this.rbCustomNote = new System.Windows.Forms.RadioButton();
@@ -52,6 +52,15 @@
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageNotes = new DevExpress.XtraTab.XtraTabPage();
+			this.pnVideoForcePreview = new System.Windows.Forms.Panel();
+			this.pnKeynotePreview = new System.Windows.Forms.Panel();
+			this.laKeynotePreviewDetail = new System.Windows.Forms.Label();
+			this.pbKeynotePreview = new System.Windows.Forms.PictureBox();
+			this.laKeynotePreview = new System.Windows.Forms.Label();
+			this.ckVideoForcePreview = new System.Windows.Forms.CheckBox();
+			this.pbVideoForcePreview = new System.Windows.Forms.PictureBox();
+			this.laVideoForcePreview = new System.Windows.Forms.Label();
+			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.xtraTabPageSearchTags = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabControlSearchTags = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageSearchTagsCategories = new DevExpress.XtraTab.XtraTabPage();
@@ -199,12 +208,15 @@
 			this.dlgFont = new System.Windows.Forms.FontDialog();
 			this.buttonXOK = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.gbNotes.SuspendLayout();
 			this.groupBoxNotes.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.xtraTabControl.SuspendLayout();
 			this.xtraTabPageNotes.SuspendLayout();
+			this.pnVideoForcePreview.SuspendLayout();
+			this.pnKeynotePreview.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbKeynotePreview)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbVideoForcePreview)).BeginInit();
 			this.xtraTabPageSearchTags.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).BeginInit();
 			this.xtraTabControlSearchTags.SuspendLayout();
@@ -480,12 +492,104 @@
 			// 
 			// xtraTabPageNotes
 			// 
-			this.xtraTabPageNotes.Controls.Add(this.ckDoNotGeneratePreview);
 			this.xtraTabPageNotes.Controls.Add(this.gbNotes);
 			this.xtraTabPageNotes.Controls.Add(this.groupBoxNotes);
+			this.xtraTabPageNotes.Controls.Add(this.ckDoNotGeneratePreview);
+			this.xtraTabPageNotes.Controls.Add(this.pnKeynotePreview);
+			this.xtraTabPageNotes.Controls.Add(this.pnVideoForcePreview);
 			this.xtraTabPageNotes.Name = "xtraTabPageNotes";
 			this.xtraTabPageNotes.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageNotes.Text = "Notes";
+			// 
+			// pnVideoForcePreview
+			// 
+			this.pnVideoForcePreview.Controls.Add(this.ckVideoForcePreview);
+			this.pnVideoForcePreview.Controls.Add(this.pbVideoForcePreview);
+			this.pnVideoForcePreview.Controls.Add(this.laVideoForcePreview);
+			this.pnVideoForcePreview.Location = new System.Drawing.Point(10, 326);
+			this.pnVideoForcePreview.Name = "pnVideoForcePreview";
+			this.pnVideoForcePreview.Size = new System.Drawing.Size(616, 145);
+			this.pnVideoForcePreview.TabIndex = 8;
+			// 
+			// pnKeynotePreview
+			// 
+			this.pnKeynotePreview.Controls.Add(this.laKeynotePreviewDetail);
+			this.pnKeynotePreview.Controls.Add(this.pbKeynotePreview);
+			this.pnKeynotePreview.Controls.Add(this.laKeynotePreview);
+			this.pnKeynotePreview.Location = new System.Drawing.Point(10, 326);
+			this.pnKeynotePreview.Name = "pnKeynotePreview";
+			this.pnKeynotePreview.Size = new System.Drawing.Size(616, 81);
+			this.pnKeynotePreview.TabIndex = 9;
+			// 
+			// laKeynotePreviewDetail
+			// 
+			this.laKeynotePreviewDetail.Location = new System.Drawing.Point(88, 32);
+			this.laKeynotePreviewDetail.Name = "laKeynotePreviewDetail";
+			this.laKeynotePreviewDetail.Size = new System.Drawing.Size(522, 49);
+			this.laKeynotePreviewDetail.TabIndex = 8;
+			this.laKeynotePreviewDetail.Text = "This file will ONLY OPEN on an iPad Or MAC that has Keynote installed on the devi" +
+    "ce…";
+			this.laKeynotePreviewDetail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// pbKeynotePreview
+			// 
+			this.pbKeynotePreview.Image = global::FileManager.Properties.Resources.KeynotePreview;
+			this.pbKeynotePreview.Location = new System.Drawing.Point(0, 0);
+			this.pbKeynotePreview.Name = "pbKeynotePreview";
+			this.pbKeynotePreview.Size = new System.Drawing.Size(82, 81);
+			this.pbKeynotePreview.TabIndex = 6;
+			this.pbKeynotePreview.TabStop = false;
+			// 
+			// laKeynotePreview
+			// 
+			this.laKeynotePreview.AutoSize = true;
+			this.laKeynotePreview.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laKeynotePreview.Location = new System.Drawing.Point(87, 0);
+			this.laKeynotePreview.Name = "laKeynotePreview";
+			this.laKeynotePreview.Size = new System.Drawing.Size(282, 22);
+			this.laKeynotePreview.TabIndex = 7;
+			this.laKeynotePreview.Text = "This is an Apple Keynote File!";
+			// 
+			// ckVideoForcePreview
+			// 
+			this.ckVideoForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckVideoForcePreview.Location = new System.Drawing.Point(1, 82);
+			this.ckVideoForcePreview.Name = "ckVideoForcePreview";
+			this.ckVideoForcePreview.Size = new System.Drawing.Size(609, 60);
+			this.ckVideoForcePreview.TabIndex = 8;
+			this.ckVideoForcePreview.Text = "On the HTML5 iPad website, if the MP4 is available for this video, THEN just imme" +
+    "diately launch the MP4 popup player/modal on user Click.";
+			this.ckVideoForcePreview.UseVisualStyleBackColor = true;
+			// 
+			// pbVideoForcePreview
+			// 
+			this.pbVideoForcePreview.Image = global::FileManager.Properties.Resources.VideoForcePreview;
+			this.pbVideoForcePreview.Location = new System.Drawing.Point(0, 0);
+			this.pbVideoForcePreview.Name = "pbVideoForcePreview";
+			this.pbVideoForcePreview.Size = new System.Drawing.Size(82, 81);
+			this.pbVideoForcePreview.TabIndex = 6;
+			this.pbVideoForcePreview.TabStop = false;
+			// 
+			// laVideoForcePreview
+			// 
+			this.laVideoForcePreview.AutoSize = true;
+			this.laVideoForcePreview.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laVideoForcePreview.Location = new System.Drawing.Point(88, 25);
+			this.laVideoForcePreview.Name = "laVideoForcePreview";
+			this.laVideoForcePreview.Size = new System.Drawing.Size(236, 22);
+			this.laVideoForcePreview.TabIndex = 7;
+			this.laVideoForcePreview.Text = "HTML5 Video Condition:";
+			// 
+			// ckDoNotGeneratePreview
+			// 
+			this.ckDoNotGeneratePreview.AutoSize = true;
+			this.ckDoNotGeneratePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(10, 333);
+			this.ckDoNotGeneratePreview.Name = "ckDoNotGeneratePreview";
+			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(448, 20);
+			this.ckDoNotGeneratePreview.TabIndex = 5;
+			this.ckDoNotGeneratePreview.Text = "Do not generate gallery preview (for Huge files like Nielsen Books)";
+			this.ckDoNotGeneratePreview.UseVisualStyleBackColor = true;
 			// 
 			// xtraTabPageSearchTags
 			// 
@@ -835,7 +939,7 @@
 			this.repositoryItemButtonEditKeyword.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditKeyword.AutoHeight = false;
 			this.repositoryItemButtonEditKeyword.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditKeyword.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject9, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditKeyword.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.repositoryItemButtonEditKeyword.Name = "repositoryItemButtonEditKeyword";
 			this.repositoryItemButtonEditKeyword.NullText = "Type Keyword...";
 			this.repositoryItemButtonEditKeyword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditKeyword_ButtonClick);
@@ -1023,7 +1127,7 @@
 			// 
 			this.repositoryItemButtonEditFileCardImportantInfo.AutoHeight = false;
 			this.repositoryItemButtonEditFileCardImportantInfo.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditFileCardImportantInfo.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject10, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditFileCardImportantInfo.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.repositoryItemButtonEditFileCardImportantInfo.Name = "repositoryItemButtonEditFileCardImportantInfo";
 			this.repositoryItemButtonEditFileCardImportantInfo.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditFileCardImportantInfo.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditFileCardImportantInfo_ButtonClick);
@@ -1214,7 +1318,7 @@
 			this.dateEditFileCardDateSold.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditFileCardDateSold.Properties.Appearance.Options.UseFont = true;
 			this.dateEditFileCardDateSold.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditFileCardDateSold.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject11, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditFileCardDateSold.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
 			this.dateEditFileCardDateSold.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditFileCardDateSold.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditFileCardDateSold.Properties.EditFormat.FormatString = "MM/dd/yyyy";
@@ -1370,8 +1474,8 @@
 			this.repositoryItemButtonEditAttachmentsWeb.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditAttachmentsWeb.AutoHeight = false;
 			this.repositoryItemButtonEditAttachmentsWeb.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsWeb.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsWeb.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject12, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsWeb.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsWeb.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
 			this.repositoryItemButtonEditAttachmentsWeb.Mask.AutoComplete = DevExpress.XtraEditors.Mask.AutoCompleteType.Optimistic;
 			this.repositoryItemButtonEditAttachmentsWeb.Mask.EditMask = "http://([a-zA-Z0-9.]|%[0-9A-Za-z]|/|:[0-9]?)*";
 			this.repositoryItemButtonEditAttachmentsWeb.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -1464,8 +1568,8 @@
 			this.repositoryItemButtonEditAttachmentsFiles.AppearanceReadOnly.Options.UseFont = true;
 			this.repositoryItemButtonEditAttachmentsFiles.AutoHeight = false;
 			this.repositoryItemButtonEditAttachmentsFiles.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsFiles.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject13, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsFiles.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject14, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsFiles.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditAttachmentsFiles.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "", null, null, true)});
 			this.repositoryItemButtonEditAttachmentsFiles.Name = "repositoryItemButtonEditAttachmentsFiles";
 			this.repositoryItemButtonEditAttachmentsFiles.NullText = "Select File...";
 			this.repositoryItemButtonEditAttachmentsFiles.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -1580,7 +1684,7 @@
 			this.dateEditExpirationDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.dateEditExpirationDate.Properties.Appearance.Options.UseFont = true;
 			this.dateEditExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditExpirationDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject15, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditExpirationDate.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "", null, null, true)});
 			this.dateEditExpirationDate.Properties.DisplayFormat.FormatString = "MM/dd/yyyy";
 			this.dateEditExpirationDate.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
 			this.dateEditExpirationDate.Properties.EditFormat.FormatString = "MM/dd/yyyy";
@@ -2637,17 +2741,6 @@
 			this.buttonXCancel.Text = "Cancel";
 			this.buttonXCancel.TextColor = System.Drawing.Color.Black;
 			// 
-			// ckDoNotGeneratePreview
-			// 
-			this.ckDoNotGeneratePreview.AutoSize = true;
-			this.ckDoNotGeneratePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(11, 335);
-			this.ckDoNotGeneratePreview.Name = "ckDoNotGeneratePreview";
-			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(448, 20);
-			this.ckDoNotGeneratePreview.TabIndex = 5;
-			this.ckDoNotGeneratePreview.Text = "Do not generate gallery preview (for Huge files like Nielsen Books)";
-			this.ckDoNotGeneratePreview.UseVisualStyleBackColor = true;
-			// 
 			// FormLinkProperties
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2672,6 +2765,12 @@
 			this.xtraTabControl.ResumeLayout(false);
 			this.xtraTabPageNotes.ResumeLayout(false);
 			this.xtraTabPageNotes.PerformLayout();
+			this.pnVideoForcePreview.ResumeLayout(false);
+			this.pnVideoForcePreview.PerformLayout();
+			this.pnKeynotePreview.ResumeLayout(false);
+			this.pnKeynotePreview.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbKeynotePreview)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pbVideoForcePreview)).EndInit();
 			this.xtraTabPageSearchTags.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).EndInit();
 			this.xtraTabControlSearchTags.ResumeLayout(false);
@@ -2940,5 +3039,13 @@
 		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup2;
 		private DevComponents.DotNetBar.ButtonX buttonXSearchTagsCategoriesGroup1;
 		public System.Windows.Forms.CheckBox ckDoNotGeneratePreview;
+		private System.Windows.Forms.PictureBox pbVideoForcePreview;
+		private System.Windows.Forms.Label laVideoForcePreview;
+		public System.Windows.Forms.Panel pnVideoForcePreview;
+		public System.Windows.Forms.CheckBox ckVideoForcePreview;
+		public System.Windows.Forms.Panel pnKeynotePreview;
+		private System.Windows.Forms.Label laKeynotePreviewDetail;
+		private System.Windows.Forms.PictureBox pbKeynotePreview;
+		private System.Windows.Forms.Label laKeynotePreview;
     }
 }

@@ -333,6 +333,13 @@ namespace FileManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap KeynotePreview {
+            get {
+                object obj = ResourceManager.GetObject("KeynotePreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap LineBreak {
             get {
                 object obj = ResourceManager.GetObject("LineBreak", resourceCulture);
@@ -616,6 +623,13 @@ namespace FileManager.Properties {
         internal static System.Drawing.Bitmap Url {
             get {
                 object obj = ResourceManager.GetObject("Url", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap VideoForcePreview {
+            get {
+                object obj = ResourceManager.GetObject("VideoForcePreview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

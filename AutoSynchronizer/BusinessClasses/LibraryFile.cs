@@ -24,6 +24,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private bool _isRestricted;
 		private string _assignedUsers;
 		private bool _doNotGeneratePreview;
+		private bool _forcePreview;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -412,6 +413,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool ForcePreview
+		{
+			get { return _forcePreview; }
+			set
+			{
+				if (_forcePreview != value)
+					LastChanged = DateTime.Now;
+				_forcePreview = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -429,6 +441,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.IsRestricted = IsRestricted;
 			file.AssignedUsers = AssignedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
+			file.ForcePreview = ForcePreview;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -462,6 +475,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
+			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.Append(SearchTags.Serialize());
 			result.Append(CustomKeywords.Serialize());
@@ -586,6 +600,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "DoNotGeneratePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_doNotGeneratePreview = tempBool;
+						break;
+					case "ForcePreview":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_forcePreview = tempBool;
 						break;
 
 					#region Compatibility with old version of Sales Depot

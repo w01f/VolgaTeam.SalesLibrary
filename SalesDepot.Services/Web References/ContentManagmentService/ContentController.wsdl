@@ -133,6 +133,7 @@
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="isDead" type="xsd:boolean" />
           <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
+          <xsd:element name="forcePreview" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">

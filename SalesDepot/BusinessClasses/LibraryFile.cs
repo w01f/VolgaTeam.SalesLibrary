@@ -25,6 +25,7 @@ namespace SalesDepot.BusinessClasses
 		private string _note = string.Empty;
 		private Image _widget;
 		private bool _doNotGeneratePreview;
+		private bool _forcePreview;
 
 		#region Compatibility with old versions
 		private Image _oldBanner;
@@ -359,6 +360,17 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
+		public bool ForcePreview
+		{
+			get { return _forcePreview; }
+			set
+			{
+				if (_forcePreview != value)
+					LastChanged = DateTime.Now;
+				_forcePreview = value;
+			}
+		}
+
 		public virtual ILibraryLink Clone(LibraryFolder parent)
 		{
 			var file = new LibraryLink(parent);
@@ -376,6 +388,7 @@ namespace SalesDepot.BusinessClasses
 			file.IsRestricted = IsRestricted;
 			file.AssignedUsers = AssignedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
+			file.ForcePreview = ForcePreview;
 			file.SearchTags = SearchTags;
 			file.CustomKeywords = CustomKeywords;
 			file.ExpirationDateOptions = ExpirationDateOptions;
@@ -403,6 +416,7 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
+			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(SearchTags.Serialize());
@@ -494,6 +508,10 @@ namespace SalesDepot.BusinessClasses
 					case "DoNotGeneratePreview":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_doNotGeneratePreview = tempBool;
+						break;
+					case "ForcePreview":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_forcePreview = tempBool;
 						break;
 					case "SearchTags":
 						SearchTags.Deserialize(childNode);

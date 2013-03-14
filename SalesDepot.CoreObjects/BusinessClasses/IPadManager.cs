@@ -234,7 +234,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (ILibraryLink libraryFile in libraryFolder.Files.Where(x => (!x.IsRestricted || (x.IsRestricted && !(string.IsNullOrEmpty(x.AssignedUsers))))))
+					foreach (var libraryFile in libraryFolder.Files.Where(x => x.Type != FileTypes.Network && (!x.IsRestricted || (x.IsRestricted && !(string.IsNullOrEmpty(x.AssignedUsers))))))
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
@@ -366,6 +366,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			if (!string.IsNullOrEmpty(topLevelFile.AssignedUsers))
 				destinationLink.assignedUsers = topLevelFile.AssignedUsers;
 			destinationLink.isDead = libraryFile.IsDead;
+			destinationLink.forcePreview = libraryFile.ForcePreview;
 			destinationLink.dateAdd = libraryFile.AddDate.ToString("MM/dd/yyyy hh:mm:ss tt");
 			destinationLink.dateModify = topLevelFile.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 

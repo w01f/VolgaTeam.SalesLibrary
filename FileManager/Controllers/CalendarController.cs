@@ -184,8 +184,11 @@ namespace FileManager.Controllers
 		private void buttonItemCalendarSettings_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator != null)
+			{
+				if (_formSettings == null) _formSettings = new FormCalendarSettings();
 				if (_formSettings.ShowDialog() == DialogResult.OK)
 					MainController.Instance.ActiveDecorator.OvernightsCalendar.RefreshColors();
+			}
 		}
 
 		private void buttonItemCalendarFontUp_Click(object sender, EventArgs e)
@@ -209,13 +212,19 @@ namespace FileManager.Controllers
 		private void buttonItemCalendarEmailGrabber_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator != null)
+			{
+				if (_formEmailGrabber == null) _formEmailGrabber = new FormEmailGrabber();
 				_formEmailGrabber.ShowDialog();
+			}
 		}
 
 		private void buttonItemCalendarFileGrabber_Click(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator != null)
+			{
+				if (_formFileGrabber == null) _formFileGrabber = new FormFileGrabber();
 				_formFileGrabber.ShowDialog();
+			}
 		}
 	}
 }

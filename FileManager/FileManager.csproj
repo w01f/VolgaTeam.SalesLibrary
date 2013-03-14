@@ -396,11 +396,11 @@
     <Compile Include="ToolForms\WallBin\FormIncorrectLinksNotification.Designer.cs">
       <DependentUpon>FormIncorrectLinksNotification.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\WallBin\FormAddNetworkFolder.cs">
+    <Compile Include="ToolForms\WallBin\FormAddNetworkLink.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ToolForms\WallBin\FormAddNetworkFolder.Designer.cs">
-      <DependentUpon>FormAddNetworkFolder.cs</DependentUpon>
+    <Compile Include="ToolForms\WallBin\FormAddNetworkLink.Designer.cs">
+      <DependentUpon>FormAddNetworkLink.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\ColumnPanel.cs">
       <SubType>Component</SubType>
@@ -590,8 +590,8 @@
     <EmbeddedResource Include="ToolForms\FormProgress.resx">
       <DependentUpon>FormProgress.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\WallBin\FormAddNetworkFolder.resx">
-      <DependentUpon>FormAddNetworkFolder.cs</DependentUpon>
+    <EmbeddedResource Include="ToolForms\WallBin\FormAddNetworkLink.resx">
+      <DependentUpon>FormAddNetworkLink.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormDeleteIncorrectLinks.resx">
       <DependentUpon>FormDeleteIncorrectLinks.cs</DependentUpon>
@@ -636,6 +636,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\KeynotePreview.png" />
+    <None Include="Resources\VideoForcePreview.png" />
     <None Include="Resources\ToolboxClose.png" />
     <None Include="Resources\Favorites.png" />
     <None Include="Resources\ExtraRoots.png" />

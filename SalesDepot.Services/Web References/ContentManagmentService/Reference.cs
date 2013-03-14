@@ -2109,6 +2109,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private bool isPreviewNotReadyField;
         
+        private bool forcePreviewField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -2436,6 +2438,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.isPreviewNotReadyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool forcePreview {
+            get {
+                return this.forcePreviewField;
+            }
+            set {
+                this.forcePreviewField = value;
             }
         }
     }
