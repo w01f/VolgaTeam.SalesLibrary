@@ -51,11 +51,13 @@
 		public $fileSize;
 		public $isAttachment;
 		public $tooltip;
+		public $forcePreview;
 
 		public function __construct($link)
 		{
 			$this->parent = $link;
 			$this->isAttachment = true;
+			$this->forcePreview = false;
 		}
 
 		public function load($attachmentRecord)
@@ -149,35 +151,48 @@
 									break;
 								case 'mobile':
 									$this->availableFormats[] = 'mp4';
-									$this->availableFormats[] = 'tab';
+									if (!$this->forcePreview)
+										$this->availableFormats[] = 'tab';
 									break;
 								case 'ie':
 									$this->availableFormats[] = 'mp4';
-									$this->availableFormats[] = 'video';
+									if (!$this->forcePreview)
+										$this->availableFormats[] = 'video';
 									break;
 								case 'webkit':
 									$this->availableFormats[] = 'mp4';
-									$this->availableFormats[] = 'tab';
+									if (!$this->forcePreview)
+										$this->availableFormats[] = 'tab';
 									break;
 								case 'firefox':
 									$this->availableFormats[] = 'mp4';
-									$this->availableFormats[] = 'ogv';
+									if (!$this->forcePreview)
+										$this->availableFormats[] = 'ogv';
 									break;
 								case 'opera':
 									$this->availableFormats[] = 'mp4';
-									$this->availableFormats[] = 'tab';
-									$this->availableFormats[] = 'ogv';
+									if (!$this->forcePreview)
+									{
+										$this->availableFormats[] = 'tab';
+										$this->availableFormats[] = 'ogv';
+									}
 									break;
 								default:
-									$this->availableFormats[] = 'video';
 									$this->availableFormats[] = 'mp4';
-									$this->availableFormats[] = 'ogv';
-									$this->availableFormats[] = 'tab';
+									if (!$this->forcePreview)
+									{
+										$this->availableFormats[] = 'video';
+										$this->availableFormats[] = 'ogv';
+										$this->availableFormats[] = 'tab';
+									}
 									break;
 							}
-						$this->availableFormats[] = 'email';
-						if ($this->browser != 'phone')
-							$this->availableFormats[] = 'download';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'email';
+							if ($this->browser != 'phone')
+								$this->availableFormats[] = 'download';
+						}
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';

@@ -49,8 +49,12 @@
 				$linkRecord->enable_widget = $link['enableWidget'];
 				$linkRecord->widget = $link['widget'];
 				$linkRecord->tags = $link['tags'];
-				$linkRecord->is_dead = $link['isDead'];
-				$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
+				if (array_key_exists('isDead', $link))
+					$linkRecord->is_dead = $link['isDead'];
+				if (array_key_exists('isPreviewNotReady', $link))
+					$linkRecord->is_preview_not_ready = $link['isPreviewNotReady'];
+				if (array_key_exists('forcePreview', $link))
+					$linkRecord->force_preview = $link['forcePreview'];
 				if (array_key_exists('isRestricted', $link))
 					$linkRecord->is_restricted = $link['isRestricted'];
 				else

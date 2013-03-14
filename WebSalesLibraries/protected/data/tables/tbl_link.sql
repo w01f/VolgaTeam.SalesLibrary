@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `tbl_link` (
   `is_restricted` tinyint(1) NOT NULL DEFAULT 0,
   `is_dead` tinyint(1) NOT NULL DEFAULT 0,
   `is_preview_not_ready` tinyint(1) NOT NULL DEFAULT 0,
+  `force_preview` tinyint(1) NOT NULL DEFAULT 0,
   `date_add` datetime NULL,
   `date_modify` datetime NULL,
   PRIMARY KEY (`id`),

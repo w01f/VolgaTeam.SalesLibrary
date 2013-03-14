@@ -96,7 +96,7 @@
 				</li>
 				<?php endif; ?>
 			<?php endforeach; ?>
-			<?php if (!isset($link->isAttachment)): ?>
+			<?php if (!isset($link->isAttachment) && !$link->forcePreview): ?>
 			<li <?if ($link->browser != 'mobile'): ?>rel="tooltip"
 					title="<?echo Yii::app()->params['tooltips']['preview_dialog']['favorites'];?>"<?php endif; ?>>
 				<img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/favorites.png'; ?>"/>
