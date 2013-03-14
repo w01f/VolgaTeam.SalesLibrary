@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.Utils;
 using DevExpress.XtraPrinting;
 using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.Services.StatisticService;
@@ -110,9 +111,9 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			using (var dialog = new SaveFileDialog())
 			{
 				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				dialog.FileName = string.Format("GroupNavigation({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.FileName = string.Format("GroupActivity({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
 				dialog.Filter = "Excel files|*.xls";
-				dialog.Title = "Export Group Navigation Analysis";
+				dialog.Title = "Export General Group Activity Report";
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
 					var options = new XlsExportOptions();
@@ -150,30 +151,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 		{
 			gridColumnGroupLibrariesNumber.Visible = _filterControl.ShowNumber;
 			gridColumnGroupLibrariesPercent.Visible = _filterControl.ShowPercent;
-			if (_filterControl.ShowNumber)
-				advBandedGridViewData.SetColumnPosition(gridColumnGroupLibrariesNumber, 0, 0);
-			if (_filterControl.ShowPercent)
-				advBandedGridViewData.SetColumnPosition(gridColumnGroupLibrariesPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
-			advBandedGridViewData.SetColumnPosition(gridColumnAllLibrariesNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
-			gridColumnAllLibrariesNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
 
 			gridColumnGroupPagesNumber.Visible = _filterControl.ShowNumber;
 			gridColumnGroupPagesPercent.Visible = _filterControl.ShowPercent;
-			if (_filterControl.ShowNumber)
-				advBandedGridViewData.SetColumnPosition(gridColumnGroupPagesNumber, 0, 0);
-			if (_filterControl.ShowPercent)
-				advBandedGridViewData.SetColumnPosition(gridColumnGroupPagesPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
-			advBandedGridViewData.SetColumnPosition(gridColumnAllPagesNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
-			gridColumnAllPagesNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
 
 			gridColumnGroupTotalNumber.Visible = _filterControl.ShowNumber;
 			gridColumnGroupTotalPercent.Visible = _filterControl.ShowPercent;
-			if (_filterControl.ShowNumber)
-				advBandedGridViewData.SetColumnPosition(gridColumnGroupTotalNumber, 0, 0);
-			if (_filterControl.ShowPercent)
-				advBandedGridViewData.SetColumnPosition(gridColumnGroupTotalPercent, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1, 0);
-			advBandedGridViewData.SetColumnPosition(gridColumnAllTotalNumber, 1, _filterControl.ShowPercent && !_filterControl.ShowNumber ? 0 : 1);
-			gridColumnAllTotalNumber.RowCount = !_filterControl.ShowNumber && !_filterControl.ShowPercent ? 2 : 1;
 		}
 
 		private void gridViewData_CustomColumnSort(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnSortEventArgs e)
@@ -185,11 +168,17 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)
 		{
-			var reportHeader = string.Format("Group Navigation Analysis: {0} - {1}", StartDate.ToString("MM/dd/yy"), EndDate.AddDays(-1).ToString("MM/dd/yy"));
+			var reportHeader = string.Format("Navigation Group Activity Report: {0} - {1}", StartDate.ToString("MM/dd/yy"), EndDate.AddDays(-1).ToString("MM/dd/yy"));
 			e.Graph.StringFormat = new BrickStringFormat(StringAlignment.Center);
 			e.Graph.Font = new Font("Arial", 12, FontStyle.Bold);
 			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
 			e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None);
+		}
+
+		private void advBandedGridViewData_CustomDrawRowFooterCell(object sender, DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventArgs e)
+		{
+			if (e.Column != gridColumnName)
+				e.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
 		}
 	}
 }
