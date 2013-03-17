@@ -158,7 +158,6 @@
 			this.advBandedGridViewData.PreviewIndent = 5;
 			this.advBandedGridViewData.RowHeight = 35;
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
-			this.advBandedGridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
 			// gridBandMain
 			// 
@@ -210,7 +209,6 @@
 			this.gridColumnUserLibrariesNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnUserLibrariesNumber.FieldName = "userLibraries";
 			this.gridColumnUserLibrariesNumber.Name = "gridColumnUserLibrariesNumber";
-			this.gridColumnUserLibrariesNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnUserLibrariesNumber.Visible = true;
 			this.gridColumnUserLibrariesNumber.Width = 143;
 			// 
@@ -233,7 +231,6 @@
 			this.gridColumnUserLibrariesPercent.FieldName = "LibrariesPercent";
 			this.gridColumnUserLibrariesPercent.Name = "gridColumnUserLibrariesPercent";
 			this.gridColumnUserLibrariesPercent.RowIndex = 1;
-			this.gridColumnUserLibrariesPercent.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnUserLibrariesPercent.Visible = true;
 			this.gridColumnUserLibrariesPercent.Width = 64;
 			// 
@@ -256,7 +253,6 @@
 			this.gridColumnGroupLibrariesNumber.FieldName = "groupLibraries";
 			this.gridColumnGroupLibrariesNumber.Name = "gridColumnGroupLibrariesNumber";
 			this.gridColumnGroupLibrariesNumber.RowIndex = 1;
-			this.gridColumnGroupLibrariesNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupLibrariesNumber.Visible = true;
 			this.gridColumnGroupLibrariesNumber.Width = 79;
 			// 
@@ -278,7 +274,6 @@
 			this.gridColumnUserPagesNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnUserPagesNumber.FieldName = "userPages";
 			this.gridColumnUserPagesNumber.Name = "gridColumnUserPagesNumber";
-			this.gridColumnUserPagesNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnUserPagesNumber.Visible = true;
 			this.gridColumnUserPagesNumber.Width = 136;
 			// 

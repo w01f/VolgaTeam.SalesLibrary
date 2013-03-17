@@ -28,28 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationGroupReportControl));
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridBandLibraries = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnGroupLibrariesNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
 			this.gridColumnGroupLibrariesPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemSpinEditPercent = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
+			this.gridBandPages = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnGroupPagesNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroupPagesPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridBandTotal = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnGroupTotalNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroupTotalPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
-			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem();
-			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.gridBandLibraries = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.gridBandPages = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-			this.gridBandTotal = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
+			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
@@ -153,7 +154,12 @@
 			this.advBandedGridViewData.RowHeight = 35;
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
 			this.advBandedGridViewData.CustomDrawRowFooterCell += new DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventHandler(this.advBandedGridViewData_CustomDrawRowFooterCell);
-			this.advBandedGridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
+			// 
+			// gridBandMain
+			// 
+			this.gridBandMain.Columns.Add(this.gridColumnName);
+			this.gridBandMain.Name = "gridBandMain";
+			this.gridBandMain.Width = 1305;
 			// 
 			// gridColumnName
 			// 
@@ -169,6 +175,15 @@
 			this.gridColumnName.Visible = true;
 			this.gridColumnName.Width = 1305;
 			// 
+			// gridBandLibraries
+			// 
+			this.gridBandLibraries.Caption = "Libraries";
+			this.gridBandLibraries.Columns.Add(this.gridColumnGroupLibrariesNumber);
+			this.gridBandLibraries.Columns.Add(this.gridColumnGroupLibrariesPercent);
+			this.gridBandLibraries.Name = "gridBandLibraries";
+			this.gridBandLibraries.OptionsBand.FixedWidth = true;
+			this.gridBandLibraries.Width = 151;
+			// 
 			// gridColumnGroupLibrariesNumber
 			// 
 			this.gridColumnGroupLibrariesNumber.AppearanceCell.Options.UseTextOptions = true;
@@ -177,7 +192,6 @@
 			this.gridColumnGroupLibrariesNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupLibrariesNumber.FieldName = "libs";
 			this.gridColumnGroupLibrariesNumber.Name = "gridColumnGroupLibrariesNumber";
-			this.gridColumnGroupLibrariesNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupLibrariesNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
 			this.gridColumnGroupLibrariesNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
 			this.gridColumnGroupLibrariesNumber.Visible = true;
@@ -201,7 +215,6 @@
 			this.gridColumnGroupLibrariesPercent.ColumnEdit = this.repositoryItemSpinEditPercent;
 			this.gridColumnGroupLibrariesPercent.FieldName = "LibrariesPercent";
 			this.gridColumnGroupLibrariesPercent.Name = "gridColumnGroupLibrariesPercent";
-			this.gridColumnGroupLibrariesPercent.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupLibrariesPercent.Visible = true;
 			this.gridColumnGroupLibrariesPercent.Width = 72;
 			// 
@@ -217,6 +230,15 @@
 			this.repositoryItemSpinEditPercent.Name = "repositoryItemSpinEditPercent";
 			this.repositoryItemSpinEditPercent.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			// 
+			// gridBandPages
+			// 
+			this.gridBandPages.Caption = "Pages";
+			this.gridBandPages.Columns.Add(this.gridColumnGroupPagesNumber);
+			this.gridBandPages.Columns.Add(this.gridColumnGroupPagesPercent);
+			this.gridBandPages.Name = "gridBandPages";
+			this.gridBandPages.OptionsBand.FixedWidth = true;
+			this.gridBandPages.Width = 145;
+			// 
 			// gridColumnGroupPagesNumber
 			// 
 			this.gridColumnGroupPagesNumber.AppearanceCell.Options.UseTextOptions = true;
@@ -225,7 +247,6 @@
 			this.gridColumnGroupPagesNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupPagesNumber.FieldName = "pages";
 			this.gridColumnGroupPagesNumber.Name = "gridColumnGroupPagesNumber";
-			this.gridColumnGroupPagesNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupPagesNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
 			this.gridColumnGroupPagesNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
 			this.gridColumnGroupPagesNumber.Visible = true;
@@ -239,6 +260,15 @@
 			this.gridColumnGroupPagesPercent.Name = "gridColumnGroupPagesPercent";
 			this.gridColumnGroupPagesPercent.Visible = true;
 			this.gridColumnGroupPagesPercent.Width = 73;
+			// 
+			// gridBandTotal
+			// 
+			this.gridBandTotal.Caption = "Total";
+			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalNumber);
+			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalPercent);
+			this.gridBandTotal.Name = "gridBandTotal";
+			this.gridBandTotal.OptionsBand.FixedWidth = true;
+			this.gridBandTotal.Width = 145;
 			// 
 			// gridColumnGroupTotalNumber
 			// 
@@ -316,39 +346,6 @@
 			this.printableComponentLink.PrintingSystem = this.printingSystem;
 			this.printableComponentLink.PrintingSystemBase = this.printingSystem;
 			this.printableComponentLink.CreateReportHeaderArea += new DevExpress.XtraPrinting.CreateAreaEventHandler(this.printableComponentLink_CreateReportHeaderArea);
-			// 
-			// gridBandMain
-			// 
-			this.gridBandMain.Columns.Add(this.gridColumnName);
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.Width = 1305;
-			// 
-			// gridBandLibraries
-			// 
-			this.gridBandLibraries.Caption = "Libraries";
-			this.gridBandLibraries.Columns.Add(this.gridColumnGroupLibrariesNumber);
-			this.gridBandLibraries.Columns.Add(this.gridColumnGroupLibrariesPercent);
-			this.gridBandLibraries.Name = "gridBandLibraries";
-			this.gridBandLibraries.OptionsBand.FixedWidth = true;
-			this.gridBandLibraries.Width = 151;
-			// 
-			// gridBandPages
-			// 
-			this.gridBandPages.Caption = "Pages";
-			this.gridBandPages.Columns.Add(this.gridColumnGroupPagesNumber);
-			this.gridBandPages.Columns.Add(this.gridColumnGroupPagesPercent);
-			this.gridBandPages.Name = "gridBandPages";
-			this.gridBandPages.OptionsBand.FixedWidth = true;
-			this.gridBandPages.Width = 145;
-			// 
-			// gridBandTotal
-			// 
-			this.gridBandTotal.Caption = "Total";
-			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalNumber);
-			this.gridBandTotal.Columns.Add(this.gridColumnGroupTotalPercent);
-			this.gridBandTotal.Name = "gridBandTotal";
-			this.gridBandTotal.OptionsBand.FixedWidth = true;
-			this.gridBandTotal.Width = 145;
 			// 
 			// NavigationGroupReportControl
 			// 

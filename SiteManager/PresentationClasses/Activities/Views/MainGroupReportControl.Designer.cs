@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGroupReportControl));
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
@@ -48,11 +49,11 @@
 			this.gridColumnGroupTotalNumber = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.gridColumnGroupTotalPercent = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
-			this.styleManager = new DevComponents.DotNetBar.StyleManager();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
-			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem();
-			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink();
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
+			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEditNumeric)).BeginInit();
@@ -159,7 +160,6 @@
 			this.advBandedGridViewData.RowHeight = 35;
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
 			this.advBandedGridViewData.CustomDrawRowFooterCell += new DevExpress.XtraGrid.Views.Grid.FooterCellCustomDrawEventHandler(this.advBandedGridViewData_CustomDrawRowFooterCell);
-			this.advBandedGridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
 			// gridBandMain
 			// 
@@ -198,7 +198,6 @@
 			this.gridColumnGroupLoginNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupLoginNumber.FieldName = "logins";
 			this.gridColumnGroupLoginNumber.Name = "gridColumnGroupLoginNumber";
-			this.gridColumnGroupLoginNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupLoginNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
 			this.gridColumnGroupLoginNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
 			this.gridColumnGroupLoginNumber.Visible = true;
@@ -222,7 +221,6 @@
 			this.gridColumnGroupLoginPercent.ColumnEdit = this.repositoryItemSpinEditPercent;
 			this.gridColumnGroupLoginPercent.FieldName = "LoginsPercent";
 			this.gridColumnGroupLoginPercent.Name = "gridColumnGroupLoginPercent";
-			this.gridColumnGroupLoginPercent.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupLoginPercent.Visible = true;
 			this.gridColumnGroupLoginPercent.Width = 77;
 			// 
@@ -255,7 +253,6 @@
 			this.gridColumnGroupDocsNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnGroupDocsNumber.FieldName = "docs";
 			this.gridColumnGroupDocsNumber.Name = "gridColumnGroupDocsNumber";
-			this.gridColumnGroupDocsNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnGroupDocsNumber.SummaryItem.DisplayFormat = "{0:#,##0}";
 			this.gridColumnGroupDocsNumber.SummaryItem.SummaryType = DevExpress.Data.SummaryItemType.Sum;
 			this.gridColumnGroupDocsNumber.Visible = true;

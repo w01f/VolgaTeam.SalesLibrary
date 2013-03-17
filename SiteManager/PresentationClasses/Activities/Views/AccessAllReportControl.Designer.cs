@@ -142,7 +142,6 @@
 			this.advBandedGridViewData.PreviewIndent = 5;
 			this.advBandedGridViewData.RowHeight = 35;
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
-			this.advBandedGridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
 			// 
 			// gridBandMain
 			// 
@@ -163,7 +162,6 @@
 			this.gridColumnUsersNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnUsersNumber.FieldName = "AllUsers";
 			this.gridColumnUsersNumber.Name = "gridColumnUsersNumber";
-			this.gridColumnUsersNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnUsersNumber.Visible = true;
 			this.gridColumnUsersNumber.Width = 151;
 			// 
@@ -185,7 +183,6 @@
 			this.gridColumnActiveNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnActiveNumber.FieldName = "AllActive";
 			this.gridColumnActiveNumber.Name = "gridColumnActiveNumber";
-			this.gridColumnActiveNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnActiveNumber.Visible = true;
 			this.gridColumnActiveNumber.Width = 130;
 			// 
@@ -195,7 +192,6 @@
 			this.gridColumnActivePercent.ColumnEdit = this.repositoryItemSpinEditPercent;
 			this.gridColumnActivePercent.FieldName = "AllActivePercent";
 			this.gridColumnActivePercent.Name = "gridColumnActivePercent";
-			this.gridColumnActivePercent.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnActivePercent.Visible = true;
 			this.gridColumnActivePercent.Width = 126;
 			// 
@@ -219,7 +215,6 @@
 			this.gridColumnInactiveNumber.ColumnEdit = this.repositoryItemSpinEditNumeric;
 			this.gridColumnInactiveNumber.FieldName = "AllInactive";
 			this.gridColumnInactiveNumber.Name = "gridColumnInactiveNumber";
-			this.gridColumnInactiveNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnInactiveNumber.Visible = true;
 			this.gridColumnInactiveNumber.Width = 118;
 			// 

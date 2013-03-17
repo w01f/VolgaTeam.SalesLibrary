@@ -164,13 +164,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				advBandedGridViewData.SetColumnPosition(gridColumnInactivePercent, 0, 1);
 		}
 
-		private void gridViewData_CustomColumnSort(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnSortEventArgs e)
-		{
-			if (e.Column.SortMode != DevExpress.XtraGrid.ColumnSortMode.Custom || e.Value1 == null || e.Value2 == null) return;
-			e.Handled = true;
-			e.Result = WinAPIHelper.StrCmpLogicalW(e.Value1.ToString(), e.Value2.ToString());
-		}
-
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)
 		{
 			var reportHeader = string.Format("Universal Site Access Report: {0} - {1}", StartDate.ToString("MM/dd/yy"), EndDate.AddDays(-1).ToString("MM/dd/yy"));

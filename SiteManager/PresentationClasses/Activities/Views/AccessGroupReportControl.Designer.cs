@@ -150,7 +150,7 @@
 			this.advBandedGridViewData.PreviewIndent = 5;
 			this.advBandedGridViewData.RowHeight = 35;
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
-			this.advBandedGridViewData.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridViewData_CustomColumnSort);
+			this.advBandedGridViewData.CalcPreviewText += new DevExpress.XtraGrid.Views.Grid.CalcPreviewTextEventHandler(this.advBandedGridViewData_CalcPreviewText);
 			// 
 			// gridBandMain
 			// 
@@ -181,7 +181,6 @@
 			this.gridColumnUsersNumber.FieldName = "userCount";
 			this.gridColumnUsersNumber.Name = "gridColumnUsersNumber";
 			this.gridColumnUsersNumber.OptionsColumn.FixedWidth = true;
-			this.gridColumnUsersNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnUsersNumber.Visible = true;
 			this.gridColumnUsersNumber.Width = 151;
 			// 
@@ -214,7 +213,6 @@
 			this.gridColumnActiveNumber.FieldName = "activeCount";
 			this.gridColumnActiveNumber.Name = "gridColumnActiveNumber";
 			this.gridColumnActiveNumber.OptionsColumn.FixedWidth = true;
-			this.gridColumnActiveNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnActiveNumber.Visible = true;
 			this.gridColumnActiveNumber.Width = 130;
 			// 
@@ -225,7 +223,6 @@
 			this.gridColumnActivePercent.FieldName = "ActivePercent";
 			this.gridColumnActivePercent.Name = "gridColumnActivePercent";
 			this.gridColumnActivePercent.OptionsColumn.FixedWidth = true;
-			this.gridColumnActivePercent.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnActivePercent.Visible = true;
 			this.gridColumnActivePercent.Width = 126;
 			// 
@@ -260,7 +257,6 @@
 			this.gridColumnInactiveNumber.FieldName = "inactiveCount";
 			this.gridColumnInactiveNumber.Name = "gridColumnInactiveNumber";
 			this.gridColumnInactiveNumber.OptionsColumn.FixedWidth = true;
-			this.gridColumnInactiveNumber.SortMode = DevExpress.XtraGrid.ColumnSortMode.Custom;
 			this.gridColumnInactiveNumber.Visible = true;
 			this.gridColumnInactiveNumber.Width = 118;
 			// 

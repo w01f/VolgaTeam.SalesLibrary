@@ -23,6 +23,14 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 		{
 			get { return checkEditShowPercent.Checked; }
 		}
+		public bool ShowActive
+		{
+			get { return checkEditShowActiveUsers.Checked; }
+		}
+		public bool ShowInactive
+		{
+			get { return checkEditShowInactiveUsers.Checked; }
+		}
 		public event EventHandler<EventArgs> ColumnsChanged;
 
 		public List<string> AllGroups { get; private set; }

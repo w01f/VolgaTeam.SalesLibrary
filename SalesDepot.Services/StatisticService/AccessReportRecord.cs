@@ -28,21 +28,5 @@ namespace SalesDepot.Services.StatisticService
 		{
 			get { return AllUsers > 0 ? (double)AllInactive / AllUsers : 0; }
 		}
-
-		public string Details
-		{
-			get
-			{
-				var result = new StringBuilder();
-				if (!string.IsNullOrEmpty(activeNames))
-					result.AppendLine("Active Users - " + activeNames);
-				if (!string.IsNullOrEmpty(inactiveNames))
-				{
-					result.AppendLine();
-					result.AppendLine("Inactive Users - " + inactiveNames);
-				}
-				return result.ToString();
-			}
-		}
 	}
 }
