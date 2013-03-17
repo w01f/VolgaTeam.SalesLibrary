@@ -101,6 +101,7 @@
 						'subject' => 'Raycom Results File Link',
 						'body' => 'View your file:',
 					),
+					'help_request_address' => 'billy@newlocaldirect.com',
 				),
 			),
 			'components' => array(

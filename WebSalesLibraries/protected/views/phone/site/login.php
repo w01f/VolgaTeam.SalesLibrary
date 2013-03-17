@@ -1,5 +1,5 @@
 <?php
-	$version = '8.0';
+	$version = '9.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCoreScript('jquery');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
@@ -100,7 +100,7 @@
 				<?php if (Yii::app()->params['login']['forgotPasswordField']): ?>
 				<td width="50%" style="padding: 2%;">
 					<a id="forgot-password" href="#recover-password" data-role="button" data-theme="b" data-mini="true"
-					   data-transition="slidefade">Forgot Passsord</a>
+					   data-transition="slidefade">Forgot Password</a>
 				</td>
 				<?php endif; ?>
 				<?php if (Yii::app()->browser->isMobile() && !($this->browser == Browser::BROWSER_IPHONE || $this->browser == Browser::BROWSER_ANDROID_MOBILE)): ?>
@@ -144,25 +144,20 @@
 	<div data-role='content' class="page-content">
 		<table class="form-login">
 			<tr>
-				<td class="title" colspan="2">Login:</td>
-			</tr>
-			<tr>
-				<td colspan="2">
+				<td colspan="2" class="title">
+					<span>Username:</span>
 					<input id="login" name="login" type="text" value=""/> <br>
 				</td>
 			</tr>
 			<tr>
-				<td class="title" colspan="2">Email:</td>
-			</tr>
-			<tr>
-				<td colspan="2">
+				<td colspan="2" class="title">
+					<span>Email Address:</span>
 					<input id="email" name="email" type="text" value=""/> <br>
 				</td>
 			</tr>
 			<tr>
 				<td class="error-message" colspan="2">
 					<div></div>
-					<br>
 				</td>
 			</tr>
 			<tr>
@@ -172,6 +167,11 @@
 				<td style="padding: 2%;">
 					<a href="#main" data-role="button" data-theme="b" data-transition="slidefade"
 					   data-direction="reverse">Cancel</a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding: 2%;">
+					<a data-role="button" data-theme="b" data-mini="true" href="mailto:<?php echo Yii::app()->params['email']['help_request_address']; ?>?subject=Site Help Request">Click here for Support</a>
 				</td>
 			</tr>
 		</table>

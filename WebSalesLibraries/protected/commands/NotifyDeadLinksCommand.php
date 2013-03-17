@@ -8,6 +8,11 @@
 			$libraryRecords = LibraryStorage::model()->findAll();
 			foreach ($libraryRecords as $libraryRecord)
 			{
+				if (isset($deadLinks))
+					unset($deadLinks);
+				if (isset($notConvertedVideos))
+					unset($notConvertedVideos);
+
 				$deadLinkRecords = LinkStorage::model()->findAll('is_dead=1 and id_library=?', array($libraryRecord->id));
 				foreach ($deadLinkRecords as $deadLinkRecord)
 					$deadLinks[] = ' - ' . $deadLinkRecord->name . ' (' . basename($deadLinkRecord->file_relative_path) . ')';
