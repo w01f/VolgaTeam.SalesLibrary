@@ -47,8 +47,8 @@
 			success:function (msg)
 			{
 				$('#select-page').html(msg);
-				pageChanged();
 				$("#page-logo").attr('src', $("#select-library").val());
+				pageChanged();
 			},
 			async:true,
 			dataType:'html'
@@ -116,7 +116,12 @@
 		container.find('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }})
 		container.find('.clickable')
 			.off('click')
-			.on('click', $.openViewDialogEmbedded);
+			.on('click', function (event)
+			{
+				event.stopPropagation();
+				var linkId = $(this).attr('id').replace('link', '');
+				$.openViewDialog(linkId, false);
+			});
 		container.find('.folder-link')
 			.off('click')
 			.on('click', function (event)
@@ -161,7 +166,12 @@
 						$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }})
 						$('.clickable')
 							.off('click')
-							.on('click', $.openViewDialogEmbedded);
+							.on('click', function (event)
+							{
+								event.stopPropagation();
+								var linkId = $(this).attr('id').replace('link', '');
+								$.openViewDialog(linkId, false);
+							});
 						$('.folder-link')
 							.off('click')
 							.on('click', function (event)
@@ -276,7 +286,12 @@
 					$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }})
 					$('.clickable')
 						.off('click')
-						.on('click', $.openViewDialogEmbedded);
+						.on('click', function (event)
+						{
+							event.stopPropagation();
+							var linkId = $(this).attr('id').replace('link', '');
+							$.openViewDialog(linkId, false);
+						});
 					$('.folder-link')
 						.off('click')
 						.on('click', function (event)
@@ -372,7 +387,7 @@
 		var container = $('#content');
 		var tabToggle = $('#tabs-view');
 
-		if ($.cookie("wallbinUseTabs")!= "true")
+		if ($.cookie("wallbinUseTabs") != "true")
 		{
 			pageselector.show();
 			tabToggle.removeClass('active');

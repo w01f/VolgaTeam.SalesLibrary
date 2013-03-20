@@ -1,0 +1,1 @@
+<div class="view-dialog-bar">View Dialog Bar</div>

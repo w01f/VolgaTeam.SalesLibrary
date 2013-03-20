@@ -12,7 +12,7 @@
 			$tooltip = $link->tooltip;
 	}
 ?>
-<div class="<?php echo $linkContainerClass; ?>">
+<div class="<?php echo $linkContainerClass; ?>" id="link<?php echo $link->id; ?>">
 	<?php if (isset($link->banner) && $link->banner->isEnabled): ?>
 	<?php echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
 	<?php else: ?>
@@ -53,7 +53,4 @@
 	<div class="folder-link-content" id="folder-link-content<?php echo $link->id; ?>">
 	</div>
 	<?php endif; ?>
-	<div class="view-dialog-content">
-		<?php echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/viewDialog.php', array('link' => $link), true); ?>
-	</div>
 </div>

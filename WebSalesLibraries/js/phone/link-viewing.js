@@ -214,7 +214,7 @@
 	{
 		$.ajax({
 			type:"POST",
-			url:"wallbin/getFileCard",
+			url:"preview/getFileCard",
 			data:{
 				linkId:linkId
 			},

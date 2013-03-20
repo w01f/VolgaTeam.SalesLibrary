@@ -196,7 +196,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					var previewFolder = Path.Combine(ContainerPath, format);
 					if (Directory.Exists(previewFolder))
-						result.AddRange(Directory.GetFiles(previewFolder).Select(x => x.Replace(Parent.StoragePath, string.Empty)));
+						result.AddRange(Directory.GetFiles(previewFolder).Where(x => x.ToLower().Contains("thumbs.db")).Select(x => x.Replace(Parent.StoragePath, string.Empty)));
 				}
 			}
 

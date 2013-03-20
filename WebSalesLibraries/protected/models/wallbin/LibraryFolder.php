@@ -103,7 +103,6 @@
 		 */
 		public $dateModify;
 		public $displayLinkWidgets;
-		public $browser;
 
 		public function __construct($page)
 		{
@@ -153,7 +152,6 @@
 				foreach ($linkRecords as $linkRecord)
 				{
 					$link = new LibraryLink($this);
-					$link->browser = $this->browser;
 					$link->load($linkRecord);
 					$this->files[] = $link;
 				}

@@ -197,7 +197,7 @@
     {
         $.ajax({
             type:"POST",
-            url:isAttachment ? "wallbin/getAttachmentPreviewList" : "wallbin/getLinkPreviewList",
+            url:isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList",
             data:{
                 linkId:linkId
             },
@@ -284,7 +284,7 @@
     {
         $.ajax({
             type:"POST",
-            url:"wallbin/getLinkDetails",
+            url:"preview/getLinkDetails",
             data:{
                 linkId:linkId
             },

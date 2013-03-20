@@ -30,7 +30,7 @@
             <table class="link-container">
                 <tr>
                     <td>
-                        <img src="images/search/search-file-card.png"/>
+                        <img src="../../../../images/search/search-file-card.png"/>
                     </td>
                     <td>
                         <span><?php echo $link->fileCard->title; ?></span>

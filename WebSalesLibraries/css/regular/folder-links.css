@@ -52,16 +52,13 @@
     background: no-repeat 0 0;
 }
 
-.view-dialog-content, .folder-link-content{
+.folder-link-content{
+	margin-left: 32px;
+	margin-right: 5px;
     display: none;
 }
 
 .clickable, .folder-link
 {
     cursor: pointer;
-}
-
-.folder-link-content{
-    margin-left: 32px;
-    margin-right: 5px;
 }

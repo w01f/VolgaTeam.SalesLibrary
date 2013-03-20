@@ -62,13 +62,13 @@ class FolderStorage extends CActiveRecord
 
         BannerStorage::updateData($folder['banner']);
 
+		$linkIds = null;
         foreach ($folder['files'] as $link)
         {
             LinkStorage::updateData($link, $libraryRootPath);
             $linkIds[] = $link['id'];
         }
-        if (isset($linkIds))
-            LinkStorage::clearByIds($folder['id'], $linkIds);
+        LinkStorage::clearByIds($folder['id'], $linkIds);
     }
 
     public static function clearByLibrary($libraryId)
@@ -78,7 +78,10 @@ class FolderStorage extends CActiveRecord
 
     public static function clearByIds($pageId, $folderIds)
     {
-        Yii::app()->db->createCommand()->delete('tbl_folder', "id_page = '" . $pageId . "' and id not in ('" . implode("','", $folderIds) . "')");
+		if(isset($folderIds))
+        	Yii::app()->db->createCommand()->delete('tbl_folder', "id_page = '" . $pageId . "' and id not in ('" . implode("','", $folderIds) . "')");
+		else
+			Yii::app()->db->createCommand()->delete('tbl_folder', "id_page = '" . $pageId . "'");
     }
 
 }

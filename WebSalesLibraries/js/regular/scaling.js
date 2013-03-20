@@ -16,6 +16,7 @@
 		updateWallbinTabs();
 		updateSearchArea();
 		updateFavoritesArea();
+		$.viewDialogBar.resize();
 	};
 
 	var updateWallbinTabs = function ()

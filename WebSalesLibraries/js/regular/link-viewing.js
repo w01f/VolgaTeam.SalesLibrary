@@ -1,58 +1,67 @@
 (function ($)
 {
-	$.openViewDialogEmbedded = function (event)
-	{
-		var formatItems = $(this).find('li');
-		var warning = $(this).find('.warning');
-		var fullScreenSelector = $(this).find('.use-fullscreen');
-		if (formatItems.length > 1 || warning.length)
-		{
-			var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
-			var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
-			$.ajax({
-				type:"POST",
-				url:"statistic/writeActivity",
-				data:{
-					type:'Link',
-					subType:'Preview Options',
-					data:$.toJSON({
-						Name:selectedLinkName,
-						File:selectedFileName
-					})
-				},
-				async:true,
-				dataType:'html'
-			});
-
-			formatItems.tooltip({animation:false, trigger:'hover', delay:{ show:500, hide:100 }});
-			formatItems.off('click').on('click', function ()
-			{
-				$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
-			});
-			var viewDialogContent = $(this).find('.view-dialog-content').html();
-			$.fancybox({
-				content:$(this).find('.view-dialog-body'),
-				title:'How Do you want to Open this File?',
-				width:490,
-				autoSize:false,
-				autoHeight:true,
-				openEffect:'none',
-				closeEffect:'none'
-			});
-			$(this).find('.view-dialog-content').html(viewDialogContent);
-		}
-		else
-		{
-			$.viewSelectedFormat.call(formatItems[0], formatItems[0], false, false);
-		}
-		event.stopPropagation();
-	};
-
-	$.openViewDialogFromGrid = function (linkId)
+	$.openViewDialog = function (linkId, isAttachment)
 	{
 		$.ajax({
 			type:"POST",
-			url:"search/viewLink",
+			url:"preview/getViewDialog",
+			data:{
+				linkId:linkId,
+				isAttachment:isAttachment
+			},
+			beforeSend:function ()
+			{
+				$.showOverlayLight();
+			},
+			complete:function ()
+			{
+				$.hideOverlayLight();
+			},
+			success:function (msg)
+			{
+				var content = $(msg);
+				var formatItems = content.find('li');
+				var warning = content.find('.warning');
+				var fullScreenSelector = content.find('.use-fullscreen');
+				if (formatItems.length > 1 || warning.length)
+				{
+					var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
+					var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
+					formatItems.tooltip({animation:false, trigger:'hover', delay:{ show:500, hide:100 }});
+					formatItems.off('click').on('click', function ()
+					{
+						$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
+					});
+					var viewDialogContent = content.find('.view-dialog-content').html();
+					$.fancybox({
+						content:content,
+						title:'How Do you want to Open this File?',
+						width:490,
+						autoSize:false,
+						autoHeight:true,
+						openEffect:'none',
+						closeEffect:'none'
+					});
+				}
+				else
+				{
+					$.viewSelectedFormat(formatItems[0], formatItems[0], false, false);
+				}
+			},
+			error:function ()
+			{
+				$('#search-result').html('');
+			},
+			async:true,
+			dataType:'html'
+		});
+	};
+
+	$.openFileCard = function (linkId)
+	{
+		$.ajax({
+			type:"POST",
+			url:"preview/getFileCard",
 			data:{
 				linkId:linkId
 			},
@@ -66,42 +75,18 @@
 			},
 			success:function (msg)
 			{
-				$.viewDilogContent = $('<div>' + msg + '<div>');
-				$.openViewDialogEmbedded.call($.viewDilogContent);
-			},
-			error:function ()
-			{
-				$('#search-result').html('');
-			},
-			async:true,
-			dataType:'html'
-		});
-	};
-
-	$.openFileCard = function ()
-	{
-		$.ajax({
-			type:"POST",
-			url:"statistic/writeActivity",
-			data:{
-				type:'Link',
-				subType:'File Card',
-				data:$.toJSON({
-					Name:$(this).find('.file-card-body').children('.title').html().replace('<br>', '')
-				})
+				var fileCardContent = $(msg);
+				$.fancybox({
+					content:fileCardContent,
+					title:'File Card',
+					minWidth:400,
+					openEffect:'none',
+					closeEffect:'none'
+				});
 			},
 			async:true,
 			dataType:'html'
 		});
-		var fileCardContent = $(this).find('.file-card-content').html();
-		$.fancybox({
-			content:$(this).find('.file-card-body'),
-			title:'File Card',
-			minWidth:400,
-			openEffect:'none',
-			closeEffect:'none'
-		});
-		$(this).find('.file-card-content').html(fileCardContent);
 	};
 
 	var openFile = function (url)
@@ -526,12 +511,16 @@
 								dataType:'html'
 							});
 							if (fullScreen)
-								window.open("wallbin/runFullscreenGallery?linkId=" + selectedFileId + "&format=" + selectedViewType);
+								window.open("preview/runFullscreenGallery?linkId=" + selectedFileId + "&format=" + selectedViewType);
 							else
 							{
 								$.fancybox(selectedLinks, {
 									openEffect:'none',
 									closeEffect:'none',
+									afterClose:function ()
+									{
+										//$.viewDialogBar.close();
+									},
 									helpers:{
 										thumbs:{
 											height:selectedThumbs[0].height,
@@ -540,6 +529,7 @@
 										}
 									}
 								});
+								//$.viewDialogBar.show($('.fancybox-skin'));
 							}
 							break;
 						case 'email':

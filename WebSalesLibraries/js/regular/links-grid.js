@@ -152,19 +152,19 @@
 	var previewLink = function ()
 	{
 		var linkId = $(this).parent().find('.link-id-column').html();
-		$.openViewDialogFromGrid(linkId);
+		$.openViewDialog(linkId, false);
 	};
 
 	var viewFileCard = function ()
 	{
-		var fileCardContainer = $(this).parent().find('td.hidden-content');
-		$.openFileCard.call(fileCardContainer);
+		var linkId = $(this).parent().find('.link-id-column').html();
+		$.openFileCard(linkId);
 	};
 
 	var viewAttachment = function ()
 	{
-		var viewDialogContainer = $(this).parent().find('td.hidden-content');
-		$.openViewDialogEmbedded.call(viewDialogContainer);
+		var linkId = $(this).parent().find('.link-id-column').html();
+		$.openViewDialog(linkId, true);
 	};
 
 	var viewLinkDetails = function ()
@@ -176,7 +176,7 @@
 			var linkId = currentRow.find('.link-id-column').html();
 			$.ajax({
 				type:"POST",
-				url:"wallbin/getLinkDetails",
+				url:"preview/getLinkDetails",
 				data:{
 					linkId:linkId
 				},

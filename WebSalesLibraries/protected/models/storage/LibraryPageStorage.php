@@ -41,13 +41,13 @@ class LibraryPageStorage extends CActiveRecord
             echo 'Page ' . ($needToCreate ? 'created' : 'updated') . ': ' . $page['name'] . "\n";
         }
 
+		$folderIds = null;
         foreach ($page['folders'] as $folder)
         {
             FolderStorage::updateData($folder, $libraryRootPath);
             $folderIds[] = $folder['id'];
         }
-        if (isset($folderIds))
-            FolderStorage::clearByIds($page['id'], $folderIds);
+        FolderStorage::clearByIds($page['id'], $folderIds);
 
         foreach ($page['columns'] as $column)
             ColumnStorage::updateData($column);
@@ -70,7 +70,10 @@ class LibraryPageStorage extends CActiveRecord
 
     public static function clearByIds($libraryId, $pageIds)
     {
-        Yii::app()->db->createCommand()->delete('tbl_page', "id_library = '" . $libraryId . "' and id not in ('" . implode("','", $pageIds) . "')");
+		if(isset($pageIds))
+        	Yii::app()->db->createCommand()->delete('tbl_page', "id_library = '" . $libraryId . "' and id not in ('" . implode("','", $pageIds) . "')");
+		else
+			Yii::app()->db->createCommand()->delete('tbl_page', "id_library = '" . $libraryId . "'");
     }
 
 }

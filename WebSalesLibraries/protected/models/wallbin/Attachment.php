@@ -629,6 +629,7 @@
 							}
 							break;
 						case 'tab':
+							$viewSources[] = array('src' => $this->link, 'href' => $this->link, 'title' => $this->name, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
