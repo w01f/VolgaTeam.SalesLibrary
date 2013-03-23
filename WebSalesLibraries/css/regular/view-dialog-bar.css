@@ -1,8 +1,13 @@
 .view-dialog-bar
 {
 	position: fixed;
-	height: 48px;
-	width: 100px;
 	z-index: 8030;
+}
+
+.view-dialog-bar div
+{
+	padding: 3px;
+	list-style: none;
+	cursor: pointer;
 }
 

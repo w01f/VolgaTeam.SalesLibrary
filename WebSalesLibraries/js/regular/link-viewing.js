@@ -1,6 +1,6 @@
 (function ($)
 {
-	$.openViewDialog = function (linkId, isAttachment)
+	$.requestViewDialog = function (linkId, isAttachment)
 	{
 		$.ajax({
 			type:"POST",
@@ -20,41 +20,47 @@
 			success:function (msg)
 			{
 				var content = $(msg);
-				var formatItems = content.find('li');
-				var warning = content.find('.warning');
-				var fullScreenSelector = content.find('.use-fullscreen');
-				if (formatItems.length > 1 || warning.length)
-				{
-					var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
-					var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
-					formatItems.tooltip({animation:false, trigger:'hover', delay:{ show:500, hide:100 }});
-					formatItems.off('click').on('click', function ()
-					{
-						$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
-					});
-					var viewDialogContent = content.find('.view-dialog-content').html();
-					$.fancybox({
-						content:content,
-						title:'How Do you want to Open this File?',
-						width:490,
-						autoSize:false,
-						autoHeight:true,
-						openEffect:'none',
-						closeEffect:'none'
-					});
-				}
-				else
-				{
-					$.viewSelectedFormat(formatItems[0], formatItems[0], false, false);
-				}
+				$.showViewDialog(content);
 			},
 			error:function ()
 			{
-				$('#search-result').html('');
 			},
 			async:true,
 			dataType:'html'
 		});
+	};
+
+	$.showViewDialog = function (content)
+	{
+		var formatItems = content.find('li');
+		var warning = content.find('.warning');
+		var fullScreenSelector = content.find('.use-fullscreen');
+		if (formatItems.length > 1 || warning.length)
+		{
+			var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
+			var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
+			formatItems.tooltip({animation:false, trigger:'hover', delay:{ show:500, hide:100 }});
+			formatItems.off('click').on('click', function ()
+			{
+				$(this).tooltip('hide');
+				$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
+			});
+			var viewDialogContent = content.find('.view-dialog-content').html();
+			$.fancybox({
+				content:content,
+				title:'How Do you want to Open this File?',
+				width:490,
+				autoSize:false,
+				autoHeight:true,
+				openEffect:'none',
+				closeEffect:'none'
+			});
+			$.viewDialogBar.backToConent = content;
+		}
+		else
+		{
+			$.viewSelectedFormat(formatItems[0], formatItems[0], false, false);
+		}
 	};
 
 	$.openFileCard = function (linkId)
@@ -98,7 +104,7 @@
 	{
 		$.ajax({
 			type:"POST",
-			url:"site/downloadDialog",
+			url:"site/videoDownloadDialog",
 			data:{
 				linkId:linkId
 			},
@@ -275,7 +281,7 @@
 	};
 
 	var emailDialogObject = [];
-	var emailFile = function (linkId, title)
+	$.emailFile = function (linkId, partId, partFormat, title)
 	{
 		$.ajax({
 			type:"POST",
@@ -396,6 +402,8 @@
 						url:"site/emailLinkSend",
 						data:{
 							linkId:linkId,
+							partId:partId,
+							partFormat:partFormat,
 							emailTo:emailDialogObject.content.find('#email-to').val(),
 							emailCopyTo:emailDialogObject.content.find('#email-to-copy').val(),
 							emailFrom:emailDialogObject.content.find('#email-from').val(),
@@ -519,7 +527,13 @@
 									closeEffect:'none',
 									afterClose:function ()
 									{
-										//$.viewDialogBar.close();
+										if (selectedFileType != 'pdf')
+											$.viewDialogBar.close();
+									},
+									onUpdate:function ()
+									{
+										if (selectedFileType != 'pdf')
+											$.viewDialogBar.resize();
 									},
 									helpers:{
 										thumbs:{
@@ -529,11 +543,16 @@
 										}
 									}
 								});
-								//$.viewDialogBar.show($('.fancybox-skin'));
+								if (selectedFileType != 'pdf')
+								{
+									$.viewDialogBar.linkId = selectedFileId;
+									$.viewDialogBar.linkName = selectedFileName;
+									$.viewDialogBar.show(selectedFileType);
+								}
 							}
 							break;
 						case 'email':
-							emailFile(selectedFileId, selectedLinks[0].title);
+							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinks[0].title);
@@ -563,7 +582,7 @@
 					switch (selectedViewType)
 					{
 						case 'email':
-							emailFile(selectedFileId, selectedLinks[0].title);
+							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinks[0].title);
@@ -595,7 +614,7 @@
 					switch (selectedViewType)
 					{
 						case 'email':
-							emailFile(selectedFileId, selectedLinks[0].title);
+							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinks[0].title);
@@ -625,7 +644,7 @@
 					switch (selectedViewType)
 					{
 						case 'email':
-							emailFile(selectedFileId, selectedLinks[0].title);
+							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinks[0].title);
@@ -680,7 +699,7 @@
 							openFile(selectedLinks[0].href);
 							break;
 						case 'email':
-							emailFile(selectedFileId, selectedLinks[0].title);
+							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'download':
 							downloadFile(selectedFileId, selectedLinks[0].title);

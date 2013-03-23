@@ -2,14 +2,12 @@
 	if ($link->isFolder)
 	{
 		$linkContainerClass = 'link-container folder-link';
-		if ($link->browser != 'mobile')
-			$tooltip = 'Folder';
+		$tooltip = 'Folder';
 	}
 	else
 	{
 		$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
-		if ($link->browser != 'mobile')
-			$tooltip = $link->tooltip;
+		$tooltip = $link->tooltip;
 	}
 ?>
 <div class="<?php echo $linkContainerClass; ?>" id="link<?php echo $link->id; ?>">
@@ -43,14 +41,14 @@
 	?>
 	<div class="<?php echo $linkClass; ?>"
 		 style="background-image: <?php echo isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <?php echo $linkFontProperties; ?>">
-		<span class="link-text" <?php if (isset($tooltip)): ?>rel="tooltip" title="<? echo $tooltip; ?>"<? endif;?>><?php echo $link->name; ?></span>
+		<span class="link-text" <?php if (isset($tooltip)): ?>rel="tooltip"
+			  title="<? echo $tooltip; ?>"<? endif;?>><?php echo $link->name; ?></span>
 		<?php if (isset($link->note) && $link->note != ""): ?>
 		<span class="link-note"><?php echo $link->note; ?></span>
 		<?php endif; ?>
 	</div>
 	<?php endif; ?>
 	<?php if ($link->isFolder): ?>
-	<div class="folder-link-content" id="folder-link-content<?php echo $link->id; ?>">
-	</div>
+	<div class="folder-link-content" id="folder-link-content<?php echo $link->id; ?>"></div>
 	<?php endif; ?>
 </div>

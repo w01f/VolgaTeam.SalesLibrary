@@ -122,7 +122,7 @@
 			}
 		}
 
-		public function actionDownloadDialog()
+		public function actionVideoDownloadDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
@@ -152,6 +152,8 @@
 		public function actionDownloadFile()
 		{
 			$linkId = Yii::app()->request->getQuery('linkId');
+			$partId = Yii::app()->request->getQuery('partId');
+			$partFormat = Yii::app()->request->getQuery('partFormat');
 			$format = Yii::app()->request->getQuery('format');
 			if (isset($linkId))
 			{
@@ -166,8 +168,9 @@
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->load($linkRecord);
 						$name = $link->name;
+						$fileName = $link->fileName;
 						$originalFormat = $linkRecord->format;
-						if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4')
+						if ($linkRecord->format == 'video' || $linkRecord->format == 'mp4' || $linkRecord->format == 'wmv')
 						{
 							if ($format == 'wmv')
 							{
@@ -193,7 +196,30 @@
 										$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
 								}
 							}
+							if (isset($path))
+								$fileName = basename($path);
 						}
+						else if (isset($partId) && $partId != "null" && isset($partFormat) && $partFormat != "null")
+						{
+							$index = intval($partId);
+							$previewRecords = PreviewStorage::model()->findAll('id_container =? and type=? order by length(relative_path), relative_path', array($linkRecord->id_preview, $partFormat));
+							if (count($previewRecords) > $index)
+							{
+								$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecords[$index]->relative_path);
+								$fileName = str_replace('.' . $link->fileExtension, '', $link->fileName) . "-" . basename($path);
+							}
+						}
+						else if ($format == 'pdf')
+						{
+							$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'pdf'));
+							if (isset($previewRecord))
+							{
+								$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+								$fileName = basename($path);
+							}
+						}
+						else
+							$path = $link->filePath;
 					}
 				}
 				else
@@ -202,6 +228,7 @@
 					if (isset($attachmentRecord))
 					{
 						$name = $attachmentRecord->name;
+						$fileName = $attachmentRecord->name;
 						$originalFormat = $attachmentRecord->format;
 						$libraryManager = new LibraryManager();
 						$libraryManager->getLibraries();
@@ -212,11 +239,11 @@
 							{
 								if ($format == 'wmv')
 								{
-									if ($linkRecord->format == 'wmv')
+									if ($attachmentRecord->format == 'wmv')
 										$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
 									else
 									{
-										$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'wmv'));
+										$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, 'wmv'));
 										if (isset($previewRecord))
 											$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
 										else
@@ -227,17 +254,40 @@
 								{
 									if ($format == 'mp4')
 									{
-										if ($linkRecord->format == 'mp4')
+										if ($attachmentRecord->format == 'mp4')
 											$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
 										else
 										{
-											$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($linkRecord->id_preview, 'mp4'));
+											$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, 'mp4'));
 											if (isset($previewRecord))
 												$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
 										}
 									}
 								}
+								if (isset($path))
+									$fileName = basename($path);
 							}
+							else if (isset($partId) && $partId != "null" && isset($partFormat) && $partFormat != "null")
+							{
+								$index = intval($partId);
+								$previewRecords = PreviewStorage::model()->findAll('id_container =? and type=? order by length(relative_path), relative_path', array($attachmentRecord->id_preview, $partFormat));
+								if (count($previewRecords) > $index)
+								{
+									$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecords[$index]->relative_path);
+									$fileName = $attachmentRecord->name . "-" . basename($path);
+								}
+							}
+							else if ($format == 'pdf')
+							{
+								$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, 'pdf'));
+								if (isset($previewRecord))
+								{
+									$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
+									$fileName = basename($path);
+								}
+							}
+							else
+								$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $attachmentRecord->path);
 						}
 					}
 				}
@@ -245,7 +295,7 @@
 			if (isset($path))
 			{
 				StatisticActivityStorage::WriteActivity('Link', 'Download', array('Name' => $name, 'File' => basename($path), 'Original Format' => $originalFormat, 'Format' => $format));
-				return Yii::app()->getRequest()->sendFile(basename($path), @file_get_contents($path));
+				return Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));
 			}
 			return null;
 		}
@@ -263,6 +313,8 @@
 		public function actionEmailLinkSend()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
+			$partId = Yii::app()->request->getPost('partId');
+			$partFormat = Yii::app()->request->getPost('partFormat');
 			$emailTo = Yii::app()->request->getPost('emailTo');
 			$emailCopyTo = Yii::app()->request->getPost('emailCopyTo');
 			$emailFrom = Yii::app()->request->getPost('emailFrom');
@@ -285,8 +337,8 @@
 					{
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->load($linkRecord);
-						StatisticActivityStorage::WriteActivity('Link', 'Email', array('Name' => $link->name, 'File' => $link->fileName, 'Format' => $link->format, 'To' => $emailTo, 'Copy' => $emailCopyTo, 'Subject' => $emailSubject));
-						EmailedLinkStorage::sendLink($link, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
+						StatisticActivityStorage::WriteActivity('Link', 'Email', array('Name' => $link->name, 'File' => $link->fileName, 'Format' => $link->originalFormat, 'To' => $emailTo, 'Copy' => $emailCopyTo, 'Subject' => $emailSubject));
+						EmailedLinkStorage::sendLink($link, $partId, $partFormat, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
 					}
 					else
 					{
@@ -311,8 +363,8 @@
 								$link->load($linkRecord);
 								$attachment = new Attachment($link);
 								$attachment->load($attachmentRecord);
-								StatisticActivityStorage::WriteActivity('Link', 'Email', array('Name' => $attachment->name, 'File' => $attachment->name, 'Format' => $attachment->format, 'To' => $emailTo, 'Copy' => $emailCopyTo, 'Subject' => $emailSubject));
-								EmailedLinkStorage::sendAttachment($attachment, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
+								StatisticActivityStorage::WriteActivity('Link', 'Email', array('Name' => $attachment->name, 'File' => $attachment->name, 'Format' => $attachment->originalFormat, 'To' => $emailTo, 'Copy' => $emailCopyTo, 'Subject' => $emailSubject));
+								EmailedLinkStorage::sendAttachment($attachment, $partId, $partFormat, $emailTo, $emailCopyTo, $emailFrom, $emailSubject, $emailBody, $expiresIn, $emailToMe);
 							}
 							else
 							{

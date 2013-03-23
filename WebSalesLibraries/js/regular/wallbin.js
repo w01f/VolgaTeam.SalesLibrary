@@ -113,14 +113,14 @@
 		$.updateContentAreaDimensions();
 		$.updateTextSize(storedTextSize);
 		$.updateTextSpace(storedTextSpace);
-		container.find('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }})
+		container.find('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }});
 		container.find('.clickable')
 			.off('click')
 			.on('click', function (event)
 			{
 				event.stopPropagation();
 				var linkId = $(this).attr('id').replace('link', '');
-				$.openViewDialog(linkId, false);
+				$.requestViewDialog(linkId, false);
 			});
 		container.find('.folder-link')
 			.off('click')
@@ -163,14 +163,14 @@
 						$.updateTextSize(storedTextSize);
 						$.updateTextSpace(storedTextSpace);
 						$.updateContentAreaDimensions();
-						$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }})
+						$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }});
 						$('.clickable')
 							.off('click')
 							.on('click', function (event)
 							{
 								event.stopPropagation();
 								var linkId = $(this).attr('id').replace('link', '');
-								$.openViewDialog(linkId, false);
+								$.requestViewDialog(linkId, false);
 							});
 						$('.folder-link')
 							.off('click')
@@ -283,14 +283,14 @@
 					$.updateTextSize(storedTextSize);
 					$.updateTextSpace(storedTextSpace);
 					$.updateContentAreaDimensions();
-					$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }})
+					$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }});
 					$('.clickable')
 						.off('click')
 						.on('click', function (event)
 						{
 							event.stopPropagation();
 							var linkId = $(this).attr('id').replace('link', '');
-							$.openViewDialog(linkId, false);
+							$.requestViewDialog(linkId, false);
 						});
 					$('.folder-link')
 						.off('click')

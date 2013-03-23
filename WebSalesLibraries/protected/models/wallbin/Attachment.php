@@ -84,6 +84,7 @@
 
 			if (isset($attachmentRecord->id_preview))
 			{
+				$this->previewId = $attachmentRecord->id_preview;
 				$previewRecords = PreviewStorage::model()->findAll('id_container=?', array($attachmentRecord->id_preview));
 				if (isset($previewRecords) && count($previewRecords) > 0)
 				{
@@ -242,11 +243,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->pngLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->pngLinks);
 									foreach ($this->universalPreview->pngLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Slide ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'PNG Viewer - ' . ($this->name . ' - Slide ' . ($i + 1) . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -255,11 +256,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->pngPhoneLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->pngPhoneLinks);
 									foreach ($this->universalPreview->pngPhoneLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Slide ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => ($this->name . ' - Slide ' . ($i + 1) . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -268,11 +269,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->jpegLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->jpegLinks);
 									foreach ($this->universalPreview->jpegLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'JPEG Viewer - ' . ($this->name . ' - Slide ' . ($i + 1) . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -281,11 +282,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->jpegPhoneLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->jpegPhoneLinks);
 									foreach ($this->universalPreview->jpegPhoneLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Slide ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => ($this->name . ' - Slide ' . ($i + 1) . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -293,14 +294,8 @@
 						case 'pdf':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->pdfLinks))
-								{
-									$i = 1;
 									foreach ($this->universalPreview->pdfLinks as $link)
-									{
 										$viewSources[] = array('href' => $link);
-										$i++;
-									}
-								}
 							break;
 						case 'thumbs':
 							if (isset($this->universalPreview))
@@ -334,11 +329,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->pngLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->pngLinks);
 									foreach ($this->universalPreview->pngLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'PNG Viewer - ' . ($this->name . ' - Page ' . ($i + 1) . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -347,11 +342,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->pngPhoneLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->pngPhoneLinks);
 									foreach ($this->universalPreview->pngPhoneLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => ($this->name . ' - Page ' . ($i + 1) . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -360,11 +355,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->jpegLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->jpegLinks);
 									foreach ($this->universalPreview->jpegLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'JPEG Viewer - ' . ($this->name . ' - Page ' . ($i + 1) . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -373,11 +368,11 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->jpegPhoneLinks))
 								{
-									$i = 1;
+									$i = 0;
 									$count = count($this->universalPreview->jpegPhoneLinks);
 									foreach ($this->universalPreview->jpegPhoneLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => ($this->name . ' - Page ' . ($i + 1) . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -385,14 +380,8 @@
 						case 'pdf':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->pdfLinks))
-								{
-									$i = 1;
 									foreach ($this->universalPreview->pdfLinks as $link)
-									{
 										$viewSources[] = array('href' => $link);
-										$i++;
-									}
-								}
 							break;
 						case 'thumbs':
 							if (isset($this->universalPreview))
@@ -441,7 +430,7 @@
 									$count = count($this->universalPreview->pngLinks);
 									foreach ($this->universalPreview->pngLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('title' => 'PNG Viewer - ' . ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -467,7 +456,7 @@
 									$count = count($this->universalPreview->jpegLinks);
 									foreach ($this->universalPreview->jpegLinks as $link)
 									{
-										$viewSources[] = array('title' => ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('title' => 'JPEG Viewer - ' . ($this->name . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}

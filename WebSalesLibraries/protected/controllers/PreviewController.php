@@ -196,7 +196,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->browser = 'phone';
 					$link->load($linkRecord);
-					//StatisticActivityStorage::WriteActivity('Link', 'File Card', array('Name' => $link->name, 'File' => $link->fileName));
+					StatisticActivityStorage::WriteActivity('Link', 'File Card', array('Name' => $link->name, 'File' => $link->fileName));
 					$this->renderPartial('fileCard', array('link' => $link), false, true);
 				}
 			}
@@ -263,6 +263,7 @@
 
 		public function actionGetViewDialogBar()
 		{
-			$this->renderPartial('viewDialogBar', array(), false, true);
+			$format = Yii::app()->request->getPost('format');
+			$this->renderPartial('viewDialogBar', array('format' => $format), false, true);
 		}
 	}

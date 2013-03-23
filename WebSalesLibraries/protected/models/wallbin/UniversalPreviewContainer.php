@@ -147,6 +147,12 @@ class UniversalPreviewContainer
                 case 'ogv':
                     $this->ogvLinks[] = $previewLink;
                     break;
+				case 'new office':
+					$this->newOfficeFormatLinks[] = $previewLink;
+					break;
+				case 'old office':
+					$this->oldOfficeFormatLinks[] = $previewLink;
+					break;
             }
             if ($record->thumb_width > 0)
                 $thumbsWidth = $record->thumb_width * 0.75;

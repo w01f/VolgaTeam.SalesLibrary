@@ -152,7 +152,7 @@
 	var previewLink = function ()
 	{
 		var linkId = $(this).parent().find('.link-id-column').html();
-		$.openViewDialog(linkId, false);
+		$.requestViewDialog(linkId, false);
 	};
 
 	var viewFileCard = function ()
@@ -164,7 +164,7 @@
 	var viewAttachment = function ()
 	{
 		var linkId = $(this).parent().find('.link-id-column').html();
-		$.openViewDialog(linkId, true);
+		$.requestViewDialog(linkId, true);
 	};
 
 	var viewLinkDetails = function ()

@@ -106,7 +106,7 @@ class PreviewStorage extends CActiveRecord
                 }
 
         if (array_key_exists('oldOfficeFormatLinks', $previewContainer))
-            if (isset($previewContainer['oldOfficeFormatLinksLinks']))
+            if (isset($previewContainer['oldOfficeFormatLinks']))
                 foreach ($previewContainer['oldOfficeFormatLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
@@ -118,7 +118,7 @@ class PreviewStorage extends CActiveRecord
                 }
 
         if (array_key_exists('newOfficeFormatLinks', $previewContainer))
-            if (isset($previewContainer['newOfficeFormatLinksLinks']))
+            if (isset($previewContainer['newOfficeFormatLinks']))
                 foreach ($previewContainer['newOfficeFormatLinks'] as $link)
                 {
                     $previewRecord = new PreviewStorage();
