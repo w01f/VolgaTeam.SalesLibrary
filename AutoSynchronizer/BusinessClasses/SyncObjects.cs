@@ -302,28 +302,22 @@ namespace AutoSynchronizer.BusinessClasses
 										DirectoryInfo extraFoldersDestinationRoot = new DirectoryInfo(extraFoldersDestinationRootPath);
 										destinationSubFolders.Add(extraFoldersDestinationRoot);
 										List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
-										foreach (RootFolder extraRootFolder in this.Manager.Library.ExtraFolders)
+										foreach (var extraRootFolder in this.Manager.Library.ExtraFolders)
 										{
-											if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+											if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+											sourceSubFolders.Clear();
+											sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+											var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+											if (!Directory.Exists(extraFolderDestinationPath))
 											{
-												sourceSubFolders.Clear();
-												sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-												if (sourceSubFolders.Count > 0)
-												{
-													string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-													if (!Directory.Exists(extraFolderDestinationPath))
-													{
-														Directory.CreateDirectory(extraFolderDestinationPath);
-														syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
-														foldersCreated++;
-													}
-													DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-													extraFolderDestinations.Add(extraFolderDestination);
-													syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-												}
+												Directory.CreateDirectory(extraFolderDestinationPath);
+												syncLog.AppendLine(string.Format("Folder created: {0}", new[] { extraFolderDestinationPath }));
+												foldersCreated++;
 											}
-											else
-												break;
+											var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+											syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+											if (extraFolderDestination.GetFiles().Length > 0)
+												extraFolderDestinations.Add(extraFolderDestination);
 										}
 										if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 										{
@@ -617,28 +611,22 @@ namespace AutoSynchronizer.BusinessClasses
 						List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
 						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 						{
-							foreach (RootFolder extraRootFolder in this.Manager.Library.ExtraFolders)
+							foreach (var extraRootFolder in this.Manager.Library.ExtraFolders)
 							{
-								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
+								if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+								sourceSubFolders.Clear();
+								sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+								var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+								if (!Directory.Exists(extraFolderDestinationPath))
 								{
-									sourceSubFolders.Clear();
-									sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-									if (sourceSubFolders.Count > 0)
-									{
-										string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-										if (!Directory.Exists(extraFolderDestinationPath))
-										{
-											Directory.CreateDirectory(extraFolderDestinationPath);
-											syncLog.AppendLine(string.Format("Folder created: {0}", new string[] { extraFolderDestinationPath }));
-											foldersCreated++;
-										}
-										DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-										extraFolderDestinations.Add(extraFolderDestination);
-										syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-									}
+									Directory.CreateDirectory(extraFolderDestinationPath);
+									syncLog.AppendLine(string.Format("Folder created: {0}", new[] { extraFolderDestinationPath }));
+									foldersCreated++;
 								}
-								else
-									break;
+								var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+								syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+								if (extraFolderDestination.GetFiles().Length > 0)
+									extraFolderDestinations.Add(extraFolderDestination);
 							}
 						}
 						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)

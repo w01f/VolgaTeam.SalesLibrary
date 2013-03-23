@@ -142,6 +142,11 @@ namespace SalesDepot.BusinessClasses
 			set { _linkRemotePath = value; }
 		}
 
+		public string WebPath
+		{
+			get { return string.Empty; }
+		}
+
 		public string DisplayName
 		{
 			get
@@ -731,7 +736,7 @@ namespace SalesDepot.BusinessClasses
 			foreach (var link in FolderContent)
 			{
 				link.EnableWidget = true;
-				switch(link.Type)
+				switch (link.Type)
 				{
 					case FileTypes.QuickTimeVideo:
 						link.Widget = Properties.Resources.FolderContentMp4;

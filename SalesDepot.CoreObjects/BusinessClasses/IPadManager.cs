@@ -340,7 +340,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			TypeConverter imageConverter = TypeDescriptor.GetConverter(typeof(Bitmap));
 			destinationLink.name = libraryFile.Name;
-			destinationLink.fileRelativePath = libraryFile.RelativePath;
+			destinationLink.fileRelativePath = libraryFile.WebPath;
 			if (File.Exists(libraryFile.OriginalPath))
 			{
 				destinationLink.fileName = Path.GetFileName(libraryFile.OriginalPath);

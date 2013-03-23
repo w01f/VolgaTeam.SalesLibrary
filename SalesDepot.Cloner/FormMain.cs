@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.CoreObjects.ToolClasses;
@@ -273,26 +272,18 @@ namespace SalesDepot.Cloner
 						List<DirectoryInfo> extraFolderDestinations = new List<DirectoryInfo>();
 						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 						{
-							foreach (RootFolder extraRootFolder in library.ExtraFolders)
+							foreach (var extraRootFolder in library.ExtraFolders)
 							{
-								if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
-								{
-									sourceSubFolders.Clear();
-									sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
-									if (sourceSubFolders.Count > 0)
-									{
-										string extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
-										if (!Directory.Exists(extraFolderDestinationPath))
-										{
-											Directory.CreateDirectory(extraFolderDestinationPath);
-										}
-										DirectoryInfo extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
-										extraFolderDestinations.Add(extraFolderDestination);
-										syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-									}
-								}
-								else
-									break;
+								if ((!Globals.ThreadActive || Globals.ThreadAborted) && Globals.ThreadActive) break;
+								sourceSubFolders.Clear();
+								sourceSubFolders.AddRange(extraRootFolder.Folder.GetDirectories().Where(x => filesWhiteList.Where(y => Path.GetDirectoryName(y).Contains(x.FullName)).Count() > 0));
+								var extraFolderDestinationPath = Path.Combine(extraFoldersDestinationRoot.FullName, extraRootFolder.RootId.ToString());
+								if (!Directory.Exists(extraFolderDestinationPath))
+									Directory.CreateDirectory(extraFolderDestinationPath);
+								var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
+								syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
+								if (extraFolderDestination.GetFiles().Length > 0)
+									extraFolderDestinations.Add(extraFolderDestination);
 							}
 						}
 						if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)

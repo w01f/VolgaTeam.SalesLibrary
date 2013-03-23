@@ -13,6 +13,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		Guid Identifier { get; set; }
 		string OriginalPath { get; set; }
 		string RelativePath { get; set; }
+		string WebPath { get; }
 		FileTypes Type { get; set; }
 		string Format { get; }
 		int Order { get; set; }

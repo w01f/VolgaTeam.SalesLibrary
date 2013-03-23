@@ -207,6 +207,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			set { _linkLocalPath = value; }
 		}
 
+		public string WebPath
+		{
+			get { return Parent.Parent.Parent.RootFolder.RootId == RootId ? RelativePath : (@"\" + (Path.Combine(Constants.ExtraFoldersRootFolderName, RootId.ToString()) + @"\" + RelativePath).Replace(@"\\", @"\").Replace(@"\\", @"\")); }
+		}
+
 		public string DisplayName
 		{
 			get

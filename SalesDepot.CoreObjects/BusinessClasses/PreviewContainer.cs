@@ -187,19 +187,42 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string[] GetPreviewLinks(string format)
 		{
 			var result = new List<string>();
-
 			if (!string.IsNullOrEmpty(ContainerPath))
 			{
-				if (format.Equals("old office")) { }
-				else if (format.Equals("new office")) { }
-				else
+				var previewFolder = string.Empty;
+				if (format.Equals("old office"))
 				{
-					var previewFolder = Path.Combine(ContainerPath, format);
-					if (Directory.Exists(previewFolder))
-						result.AddRange(Directory.GetFiles(previewFolder).Where(x => x.ToLower().Contains("thumbs.db")).Select(x => x.Replace(Parent.StoragePath, string.Empty)));
+					switch (Extension.ToUpper())
+					{
+						case ".PPT":
+						case ".PPTX":
+							previewFolder = Path.Combine(ContainerPath, "ppt");
+							break;
+						case ".DOC":
+						case ".DOCX":
+							previewFolder = Path.Combine(ContainerPath, "doc");
+							break;
+					}
 				}
+				else if (format.Equals("new office"))
+				{
+					switch (Extension.ToUpper())
+					{
+						case ".PPT":
+						case ".PPTX":
+							previewFolder = Path.Combine(ContainerPath, "pptx");
+							break;
+						case ".DOC":
+						case ".DOCX":
+							previewFolder = Path.Combine(ContainerPath, "docx");
+							break;
+					}
+				}
+				else
+					previewFolder = Path.Combine(ContainerPath, format);
+				if (Directory.Exists(previewFolder))
+					result.AddRange(Directory.GetFiles(previewFolder).Where(x => !x.ToLower().Contains("thumbs.db")).Select(x => x.Replace(Parent.StoragePath, string.Empty)));
 			}
-
 			return result.ToArray();
 		}
 
