@@ -67,6 +67,7 @@
 						'jpeg' => 'JPEG',
 						'pdf' => 'PDF',
 						'video' => 'WMV Video',
+						'wmv' => 'WMV Video',
 						'mp4' => 'MP4 Video',
 						'url' => 'Web URL',
 						'key' => 'Apple Keynote',
