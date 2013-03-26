@@ -255,7 +255,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ClassicViewControl";
             this.Size = new System.Drawing.Size(678, 434);
-            this.Load += new System.EventHandler(this.ClassicViewControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlFiles)).EndInit();

@@ -6,57 +6,18 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/back.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/doc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/docx.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/download-all.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/download-pdf.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/download.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/email-all.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/email-pdf.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/email.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/ppt.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/viewDialogBar/pptx.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/folder-links.css" afterPath="$PROJECT_DIR$/css/regular/folder-links.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/view-dialog-bar.css" afterPath="$PROJECT_DIR$/css/regular/view-dialog-bar.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/link-viewing.js" afterPath="$PROJECT_DIR$/js/regular/link-viewing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/links-grid.js" afterPath="$PROJECT_DIR$/js/regular/links-grid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/scaling.js" afterPath="$PROJECT_DIR$/js/regular/scaling.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/view-dialog-bar.js" afterPath="$PROJECT_DIR$/js/regular/view-dialog-bar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/wallbin.js" afterPath="$PROJECT_DIR$/js/regular/wallbin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/PreviewController.php" afterPath="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SiteController.php" afterPath="$PROJECT_DIR$/protected/controllers/SiteController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/storage/EmailedLinkStorage.php" afterPath="$PROJECT_DIR$/protected/models/storage/EmailedLinkStorage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/storage/PreviewStorage.php" afterPath="$PROJECT_DIR$/protected/models/storage/PreviewStorage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/Attachment.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/Attachment.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/UniversalPreviewContainer.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/UniversalPreviewContainer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php" afterPath="$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/downloadVideoDialog.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/downloadVideoDialog.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/columnsView.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/columnsView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/link.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/link.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/fancybox/source/jquery.fancybox.js" afterPath="$PROJECT_DIR$/vendor/fancybox/source/jquery.fancybox.js" />
-    </list>
+    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="" />
     <list id="658692b4-5d98-40af-9426-7326b1b432d2" name="C#" comment="C#">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/LibraryFile.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/SyncObjects.cs" afterPath="$PROJECT_DIR$/../AutoSynchronizer/BusinessClasses/SyncObjects.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/LibraryFile.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/BusinessClasses/LibraryManager.cs" afterPath="$PROJECT_DIR$/../FileManager/BusinessClasses/LibraryManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/BusinessClasses/LibraryFile.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/FormMain.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/FormMain.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/FolderLink.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/FolderLink.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/LibraryFile.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/PreviewContainer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/LibraryFile.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/LibraryFile.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/ClassicViewControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/ClassicViewControl.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/ClassicViewControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/ClassicViewControl.cs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1363973555790" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364302404597" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,93 +39,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="view-dialog-bar.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/regular/view-dialog-bar.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="19" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="viewDialogBar.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="179" selection-start="2083" selection-end="2083" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view-dialog-bar.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/view-dialog-bar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="19" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmailedLinkStorage.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/storage/EmailedLinkStorage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="68" selection-start="1644" selection-end="1644" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="19" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Attachment.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/Attachment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="458" column="79" selection-start="14394" selection-end="14394" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryManager.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryManager.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryLink.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="198" column="27" selection-start="2764" selection-end="2764" vertical-scroll-proportion="-0.5862069">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PreviewController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="52" selection-start="377" selection-end="415" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SiteController.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="281" column="0" selection-start="10269" selection-end="10269" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
+      <file leaf-file-name="apple-touch-icon-57x57-precomposed.png" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apple-touch-icon-57x57-precomposed.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -184,22 +62,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/models/storage/PreviewStorage.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/downloadVideoDialog.php" />
-        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/link.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/columnsView.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/banner.php" />
-        <option value="$PROJECT_DIR$/js/regular/link-viewing.js" />
-        <option value="$PROJECT_DIR$/css/regular/view-dialog-bar.css" />
-        <option value="$PROJECT_DIR$/protected/controllers/SiteController.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php" />
-        <option value="$PROJECT_DIR$/protected/models/storage/EmailedLinkStorage.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
-        <option value="$PROJECT_DIR$/js/regular/view-dialog-bar.js" />
+        <option value="$PROJECT_DIR$/protected/models/favorites/FavoritesFolderStorage.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/favorites/link.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/favorites/favoritesFoldersAndLinks.php" />
+        <option value="$PROJECT_DIR$/js/phone/search.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/favorites/favoritesLinksAndFolders.php" />
+        <option value="$PROJECT_DIR$/protected/components/core/IsdController.php" />
+        <option value="$PROJECT_DIR$/js/phone/libraries.js" />
+        <option value="$PROJECT_DIR$/protected/controllers/FavoritesController.php" />
         <option value="$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php" />
         <option value="$PROJECT_DIR$/protected/models/wallbin/Attachment.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" />
+        <option value="$PROJECT_DIR$/js/phone/favorites.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/favorites/successAddDialog.php" />
+        <option value="$PROJECT_DIR$/js/phone/link-viewing.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/favorites/foldersList.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/site/index.php" />
       </list>
     </option>
   </component>
@@ -272,6 +150,22 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Tests" />
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="WebSalesLibraries">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -290,20 +184,74 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Tests" />
-        <subPane subId="Changed Files">
           <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="WebSalesLibraries">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -315,15 +263,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="147" />
     <property name="options.splitter.main.proportions" value="0.3964698" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="143" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="D:/WorkingFiles/Websites/SalesLibraries" />
-    <property name="JdbcConsole.ResultInNewTab" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="147" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="460" />
+    <property name="JdbcConsole.ResultInNewTab" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="463" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="460" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="144" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="143" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -343,14 +291,14 @@
     <property name="JdbcConsole.Extract.OpeningQuote" value="'" />
     <property name="JdbcConsole.Extract.ClosingQuote" value="'" />
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
-    <property name="JdbcConsole.EnableParameterPattern" value="false" />
     <property name="JdbcConsole.Extract.IncludeHeader" value="false" />
+    <property name="JdbcConsole.EnableParameterPattern" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="JdbcConsole.ParameterPattern" value="(\?\d*|\:\w+|\@\w+|\$\{[^$\{\}]*\}|\$\w+\$|\#\w+\#)" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="JdbcConsole.ParameterPattern" value="(\?\d*|\:\w+|\@\w+|\$\{[^$\{\}]*\}|\$\w+\$|\#\w+\#)" />
     <property name="JdbcConsole.ResultPageSize" value="1000" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="PublishConfig" promptOnRemoteOverwrite="CHECK_TIMESTAMP" serverName="Development" serverId="bbe3f121-55bc-430d-86e5-ad010ec25baf" uploadOnCheckin="bbe3f121-55bc-430d-86e5-ad010ec25baf" autoUpload="true" autoUploadExternalChanges="true" notifyRemoteChanges="true">
     <servers>
@@ -430,11 +378,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\favorites" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\js\regular" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\commands" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\common" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\preview" />
@@ -453,10 +401,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -485,14 +433,14 @@
       </JSRemoteDebuggerConfigurationSettings>
       <method />
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="bbe3f121-55bc-430d-86e5-ad010ec25baf" server_name="Development">
+      <method />
+    </configuration>
     <configuration default="true" type="JavascriptDebugSession" factoryName="Local" singleton="true">
       <JSDebuggerConfigurationSettings>
         <option name="engineId" value="firefox" />
         <option name="fileUrl" />
       </JSDebuggerConfigurationSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="bbe3f121-55bc-430d-86e5-ad010ec25baf" server_name="Development">
       <method />
     </configuration>
     <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
@@ -722,7 +670,19 @@
       <created>1363774303867</created>
       <updated>1363774303867</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Web SalesDepot: Preview Bar fix + Extra Root fix">
+      <created>1364014406094</created>
+      <updated>1364014406094</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Web SalesDepot: Video Tooltip bugfix">
+      <created>1364037507749</created>
+      <updated>1364037507749</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Web SalesDepot: Mobile Favorites fix">
+      <created>1364302432632</created>
+      <updated>1364302432632</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -749,25 +709,25 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18763797" sideWeight="0.45677695" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.9757174" sideWeight="0.4551761" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18763797" sideWeight="0.452508" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24834438" sideWeight="0.44023478" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1696905" sideWeight="0.812362" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19094923" sideWeight="0.40341514" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.75165564" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.8454746" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29801324" sideWeight="0.7892209" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.9757174" sideWeight="0.5410886" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19094923" sideWeight="0.5928495" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.48932764" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.4850587" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16755603" sideWeight="0.024282562" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17609392" sideWeight="0.75165564" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23289183" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33112583" sideWeight="0.88900745" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19094923" sideWeight="0.41141942" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.7030905" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
@@ -777,7 +737,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="true" />
     <option name="myTodoPanelSettings">
@@ -808,7 +768,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Preview Bar fix + Extra Root fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Mobile Favorites fix" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -821,8 +781,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Web SalesDepot: Favorites  folders and files deleting fix" />
-    <MESSAGE value="Web SalesDepot: Small GUI fixes + Admin service bug fixes" />
     <MESSAGE value="Web SalesDepot: Reset password email fixes" />
     <MESSAGE value="Web SalesDepot: Small GUI fixes" />
     <MESSAGE value="Web SalesDepot: User Management service optimization" />
@@ -846,6 +804,8 @@
     <MESSAGE value="Web SalesDepot: Small GUI fixes and bug fixes" />
     <MESSAGE value="Web SalesDepot: Preview functionality refactoring" />
     <MESSAGE value="Web SalesDepot: Preview Bar fix + Extra Root fix" />
+    <MESSAGE value="Web SalesDepot: Video Tooltip bugfix" />
+    <MESSAGE value="Web SalesDepot: Mobile Favorites fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -856,7 +816,7 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="94" />
+      <option name="time" value="96" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -872,110 +832,532 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/link.php">
+    <entry file="file://$PROJECT_DIR$/js/phone/search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/columnsView.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="170" selection-end="170" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/linkFolderContent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/link-viewing.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="548" column="79" selection-start="14911" selection-end="14911" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/banner.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="30" selection-start="1116" selection-end="1116" vertical-scroll-proportion="-18.307692" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/view-dialog-bar.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="19" selection-start="129" selection-end="129" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="52" selection-start="377" selection-end="415" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="0" selection-start="10269" selection-end="10269" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/storage/EmailedLinkStorage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="68" selection-start="1644" selection-end="1644" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="19" selection-start="22" selection-end="22" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/preview/viewDialogBar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="179" selection-start="2083" selection-end="2083" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/view-dialog-bar.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="19" selection-start="972" selection-end="972" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/Attachment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="458" column="79" selection-start="14394" selection-end="14394" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="351" column="63" selection-start="9399" selection-end="9399" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="27" selection-start="2764" selection-end="2764" vertical-scroll-proportion="-0.5862069">
+        <state line="789" column="41" selection-start="24210" selection-end="24210" vertical-scroll-proportion="-11.115385">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/Attachment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="642" column="41" selection-start="22356" selection-end="22356" vertical-scroll-proportion="-6.5384617">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/preview/linkDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/link-viewing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="236" column="23" selection-start="4435" selection-end="5568" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1363887618706" expanded="false" signature="19837:19863" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/favorites.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="14" selection-start="398" selection-end="398" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#858#4824#0" expanded="false" />
+            <element signature="e#4874#5257#0" expanded="false" />
+            <element signature="e#5301#5667#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/successAddDialog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/FavoritesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="44" selection-start="2547" selection-end="2561" vertical-scroll-proportion="5.230769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="40" selection-start="4591" selection-end="4591" vertical-scroll-proportion="-77.80769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/favorites/favoritesLinksAndFolders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/favorites/successAddDialog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/favorites/foldersList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="46" selection-start="166" selection-end="166" vertical-scroll-proportion="-1.9615384">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="18" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.6181818">
+          <folding>
+            <element signature="e#2229#2327#0" expanded="false" />
+            <element signature="tag#div#0" expanded="false" />
+            <element signature="tag#div#0;tag#div#0" expanded="false" />
+            <element signature="tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#td#0;tag#tr#0;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#select#0;tag#td#0;tag#tr#0;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#tr#1;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#td#0;tag#tr#1;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#select#0;tag#td#0;tag#tr#1;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#tr#2;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#td#0;tag#tr#2;tag#table#0;tag#div#1;tag#div#0" expanded="false" />
+            <element signature="tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="e#3751#3943#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#0" expanded="false" />
+            <element signature="tag#div#1" expanded="false" />
+            <element signature="tag#div#0;tag#div#1" expanded="false" />
+            <element signature="tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="e#4850#5042#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#1" expanded="false" />
+            <element signature="tag#div#2" expanded="false" />
+            <element signature="tag#div#0;tag#div#2" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#2" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#2" expanded="false" />
+            <element signature="tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="e#6157#6349#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#2" expanded="false" />
+            <element signature="tag#div#3" expanded="false" />
+            <element signature="tag#div#0;tag#div#3" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#3" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#3" expanded="false" />
+            <element signature="tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="e#7469#7661#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#3" expanded="false" />
+            <element signature="tag#div#0;tag#div#4" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#4" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#4" expanded="false" />
+            <element signature="tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="e#8776#8968#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#4" expanded="false" />
+            <element signature="tag#div#5" expanded="false" />
+            <element signature="tag#div#0;tag#div#5" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#5" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#5" expanded="false" />
+            <element signature="tag#div#1;tag#div#5" expanded="false" />
+            <element signature="tag#ul#0;tag#div#1;tag#div#5" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#1;tag#div#5" expanded="false" />
+            <element signature="tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="e#10265#10457#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#5" expanded="false" />
+            <element signature="tag#div#6" expanded="false" />
+            <element signature="tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="e#11224#11386#0" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#a#0;tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#6" expanded="false" />
+            <element signature="tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="e#12356#12548#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#6" expanded="false" />
+            <element signature="tag#div#7" expanded="false" />
+            <element signature="tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="e#13266#13428#0" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#a#0;tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#a#0;tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#7" expanded="false" />
+            <element signature="tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="e#14444#14636#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#7" expanded="false" />
+            <element signature="tag#div#8" expanded="false" />
+            <element signature="tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#a#0;tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#8" expanded="false" />
+            <element signature="tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="e#16458#16650#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#8" expanded="false" />
+            <element signature="tag#div#9" expanded="false" />
+            <element signature="tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="e#17362#17524#0" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#a#0;tag#li#3;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#a#0;tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#9" expanded="false" />
+            <element signature="tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="e#18540#18732#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#9" expanded="false" />
+            <element signature="tag#div#10" expanded="false" />
+            <element signature="tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="e#19449#19611#0" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#a#0;tag#li#4;tag#ul#0;tag#div#0;tag#div#0;tag#div#10" expanded="false" />
+            <element signature="tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="e#20619#20811#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#10" expanded="false" />
+            <element signature="tag#div#11" expanded="false" />
+            <element signature="tag#div#0;tag#div#11" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#11" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#11" expanded="false" />
+            <element signature="tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#td#0;tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#td#1;tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#select#0;tag#td#1;tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#td#2;tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#select#0;tag#td#2;tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#1;tag#div#11" expanded="false" />
+            <element signature="tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="e#23116#23308#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#11" expanded="false" />
+            <element signature="tag#div#12" expanded="false" />
+            <element signature="tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#12" expanded="false" />
+            <element signature="tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#td#1;tag#tr#0;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#a#0;tag#td#1;tag#tr#0;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#tr#1;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#td#0;tag#tr#1;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#tr#2;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#td#1;tag#tr#2;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#a#0;tag#td#1;tag#tr#2;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#tr#3;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#td#0;tag#tr#3;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#tr#4;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#td#1;tag#tr#4;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#input#0;tag#td#1;tag#tr#4;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#tr#5;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#td#0;tag#tr#5;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#input#0;tag#td#0;tag#tr#5;tag#table#0;tag#div#1;tag#div#12" expanded="false" />
+            <element signature="tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="e#26727#26919#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#12" expanded="false" />
+            <element signature="tag#div#13" expanded="false" />
+            <element signature="tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#13" expanded="false" />
+            <element signature="tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#tr#1;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#td#0;tag#tr#1;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#input#0;tag#td#0;tag#tr#1;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#tr#2;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#tr#3;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#td#0;tag#tr#3;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#textarea#0;tag#td#0;tag#tr#3;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#tr#4;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#td#1;tag#tr#4;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#select#0;tag#td#1;tag#tr#4;tag#table#0;tag#div#1;tag#div#13" expanded="false" />
+            <element signature="tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="e#29610#29802#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#13" expanded="false" />
+            <element signature="tag#div#14" expanded="false" />
+            <element signature="tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#div#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#a#0;tag#li#2;tag#ul#0;tag#div#0;tag#div#0;tag#div#14" expanded="false" />
+            <element signature="tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#div#0;tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#div#1;tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#div#2;tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#div#3;tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#div#4;tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#a#0;tag#div#1;tag#div#14" expanded="false" />
+            <element signature="tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="e#32107#32299#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#14" expanded="false" />
+            <element signature="tag#div#15" expanded="false" />
+            <element signature="tag#div#0;tag#div#15" expanded="false" />
+            <element signature="tag#div#1;tag#div#15" expanded="false" />
+            <element signature="e#32677#33404#0" expanded="false" />
+            <element signature="tag#fieldset#0;tag#div#1;tag#div#15" expanded="false" />
+            <element signature="e#32814#33158#0" expanded="false" />
+            <element signature="tag#input#0;tag#fieldset#0;tag#div#1;tag#div#15" expanded="false" />
+            <element signature="tag#a#0;tag#div#1;tag#div#15" expanded="false" />
+            <element signature="tag#div#16" expanded="false" />
+            <element signature="tag#div#0;tag#div#16" expanded="false" />
+            <element signature="tag#div#1;tag#div#16" expanded="false" />
+            <element signature="e#33644#34395#0" expanded="false" />
+            <element signature="tag#fieldset#0;tag#div#1;tag#div#16" expanded="false" />
+            <element signature="e#33786#34157#0" expanded="false" />
+            <element signature="tag#input#0;tag#fieldset#0;tag#div#1;tag#div#16" expanded="false" />
+            <element signature="tag#a#0;tag#div#1;tag#div#16" expanded="false" />
+            <element signature="tag#div#0;tag#div#17" expanded="false" />
+            <element signature="tag#a#0;tag#div#1;tag#div#17" expanded="false" />
+            <element signature="tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#tr#0;tag#table#0;tag#h4#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#18" expanded="false" />
+            <element signature="tag#tr#4;tag#table#0;tag#div#1;tag#div#18" expanded="false" />
+            <element signature="tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#18" expanded="false" />
+            <element signature="tag#div#0;tag#div#19" expanded="false" />
+            <element signature="tag#div#20" expanded="false" />
+            <element signature="tag#div#0;tag#div#20" expanded="false" />
+            <element signature="tag#div#21" expanded="false" />
+            <element signature="tag#div#0;tag#div#21" expanded="false" />
+            <element signature="tag#div#22" expanded="false" />
+            <element signature="tag#div#0;tag#div#22" expanded="false" />
+            <element signature="tag#a#0;tag#div#0;tag#div#22" expanded="false" />
+            <element signature="tag#span#0;tag#div#0;tag#div#22" expanded="false" />
+            <element signature="tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#a#0;tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#a#0;tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="e#39506#39698#0" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#22" expanded="false" />
+            <element signature="tag#div#23" expanded="false" />
+            <element signature="tag#div#0;tag#div#23" expanded="false" />
+            <element signature="tag#div#1;tag#div#23" expanded="false" />
+            <element signature="tag#div#2;tag#div#23" expanded="false" />
+            <element signature="tag#div#0;tag#div#2;tag#div#23" expanded="false" />
+            <element signature="tag#ul#0;tag#div#0;tag#div#2;tag#div#23" expanded="false" />
+            <element signature="tag#li#0;tag#ul#0;tag#div#0;tag#div#2;tag#div#23" expanded="false" />
+            <element signature="tag#li#1;tag#ul#0;tag#div#0;tag#div#2;tag#div#23" expanded="false" />
+            <element signature="tag#li#2;tag#ul#0;tag#div#0;tag#div#2;tag#div#23" expanded="false" />
+            <element signature="tag#li#3;tag#ul#0;tag#div#0;tag#div#2;tag#div#23" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/email.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="14" selection-start="1573" selection-end="1573" vertical-scroll-proportion="-0.63503647">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/link-viewing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="40" selection-start="622" selection-end="622" vertical-scroll-proportion="-1.6131387">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apple-touch-icon-57x57-precomposed.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
   </component>

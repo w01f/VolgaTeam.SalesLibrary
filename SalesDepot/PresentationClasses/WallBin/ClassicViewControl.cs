@@ -90,16 +90,11 @@ namespace SalesDepot.PresentationClasses.WallBin
 					FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _accordionToolTip);
 				else
 					FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _classicToolTip);
+
+				InitEmailBin();
 			}
 		}
 		#endregion
-
-		private void ClassicViewControl_Load(object sender, EventArgs e)
-		{
-			LoadEmailBin();
-			gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
-			LoadOptions();
-		}
 
 		#region Wall Bin Methods and Event Handlers
 		public void UpdateFontButtonStatus()
@@ -136,6 +131,13 @@ namespace SalesDepot.PresentationClasses.WallBin
 		#endregion
 
 		#region Email Bin Methods and Event Handlers
+		private void InitEmailBin()
+		{
+			LoadEmailBin();
+			gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
+			LoadOptions();
+		}
+
 		private void LoadEmailBin()
 		{
 			_emailLinks.Clear();
@@ -143,7 +145,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			{
 				var document = new XmlDocument();
 				document.Load(_emailBinFileName);
-				XmlNode node = document.SelectSingleNode(@"/EmailBin");
+				var node = document.SelectSingleNode(@"/EmailBin");
 				if (node != null)
 				{
 					foreach (XmlNode childNode in node.ChildNodes)
