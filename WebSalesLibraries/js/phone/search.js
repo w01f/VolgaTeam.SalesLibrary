@@ -501,12 +501,12 @@
 				$(".file-link").on('click', function ()
 				{
 					var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-					$.loadLink(selectedLink, true, false, '#search-result');
+					$.loadLink(selectedLink, 'Search', false, '#search-result');
 				});
 				$(".file-link-detail").on('click', function (event)
 				{
 					var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-					$.loadLinkDeatils(selectedLink, true);
+					$.loadLinkDeatils(selectedLink, 'Search', '#search-result');
 					event.stopPropagation();
 				});
 			},

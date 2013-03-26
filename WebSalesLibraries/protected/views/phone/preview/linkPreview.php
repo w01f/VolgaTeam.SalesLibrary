@@ -156,6 +156,38 @@
 				</li>
 				<?php endif; ?>
 			<?php endforeach; ?>
+		<?php if (!isset($link->isAttachment) && !$link->forcePreview): ?>
+			<li>
+				<a class="preview-link" href="#">
+					<table class="link-container">
+						<tr>
+							<td><img
+									src="<?php echo Yii::app()->baseUrl . '/images/fileFormats_phone/favorites.png'; ?>"/>
+							</td>
+							<td>
+								<span>Add to Favorites</span>
+
+								<div class="item-content">
+									<div class="link-id"><?php echo $link->id; ?></div>
+									<div class="link-name"><?php echo $link->name; ?></div>
+									<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+									<div class="file-type"><?php echo $link->originalFormat; ?></div>
+									<div class="view-type">favorites</div>
+									<?php
+									$viewLinks = $link->getViewSource('favorites');
+									if (isset($viewLinks)):
+										echo CHtml::openTag('div', array('class' => 'links'));
+										echo json_encode($viewLinks);
+										echo CHtml::closeTag('div');
+									endif;
+									?>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</a>
+			</li>
+			<?php endif; ?>
 		<?php endif; ?>
 	<?php endif; ?>
 </ul>

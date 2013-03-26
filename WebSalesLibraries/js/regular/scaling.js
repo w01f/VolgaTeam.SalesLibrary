@@ -2,7 +2,7 @@
 {
 	$.updateContentAreaDimensions = function ()
 	{
-		var height = $(window).height() - $('#ribbon').height() - 10;
+		var height = $(window).height() - $('#ribbon').height() - $('#ribbon').offset().top - 10;
 		$('body').css({
 			'height':'auto'
 		});
@@ -24,7 +24,7 @@
 		var height = content.height();
 		var tabPanelHeight = content.find('.ui-tabs-nav').height();
 		content.find('.wallbin-tab').css({
-			'height':(height  - tabPanelHeight - 5) + 'px'
+			'height':(height - tabPanelHeight - 5) + 'px'
 		});
 	}
 

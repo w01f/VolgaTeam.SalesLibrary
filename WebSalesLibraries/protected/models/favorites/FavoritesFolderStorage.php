@@ -11,12 +11,28 @@
 			return '{{favorites_folder}}';
 		}
 
-		public static function getFolder($userId, $folderName)
+		public static function getFolderByName($userId, $folderName)
 		{
 			$existedFolder = self::model()->find('id_user=? and LOWER(name)=?', array($userId, strtolower($folderName)));
 			if (!isset($existedFolder))
 				$existedFolder = self::addFolder($userId, $folderName, null);
 			return $existedFolder;
+		}
+
+		public static function getFolderById($folderId)
+		{
+			if (isset($folderId))
+			{
+				$folderRecord = self::model()->findByPk($folderId);
+				if (isset($folderRecord))
+				{
+					$folder = new FavoritesFolder();
+					$folder->id = $folderRecord->id;
+					$folder->name = $folderRecord->name;
+					return $folder;
+				}
+			}
+			return null;
 		}
 
 		public static function addFolder($userId, $folderName, $parentFolderId)

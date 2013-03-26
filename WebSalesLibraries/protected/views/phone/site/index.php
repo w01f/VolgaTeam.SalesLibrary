@@ -1,5 +1,5 @@
 <?php
-	$version = '29.0';
+	$version = '31.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('cookie');
@@ -19,6 +19,7 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/link-viewing.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/libraries.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/search.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/favorites.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version, CClientScript::POS_HEAD);
 ?>
@@ -26,7 +27,9 @@
 <?php
 	$userId = Yii::app()->user->getId();
 	if (isset($userId))
+	{
 		$availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
+	}
 ?>
 
 <div data-role='page' id="libraries" data-cache="never" data-dom-cache="false" data-ajax="false">
@@ -63,9 +66,13 @@
 					   data-transition="slidefade" data-direction="reverse"> Libraries </a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search"
-					   data-transition="slidefade"> Search </a>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -89,6 +96,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -114,6 +126,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -139,6 +156,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -164,6 +186,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -194,8 +221,13 @@
 					   data-direction="reverse"> Libraries </a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -245,6 +277,11 @@
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -294,6 +331,11 @@
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -341,6 +383,11 @@
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -390,6 +437,11 @@
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -438,6 +490,11 @@
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -495,6 +552,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -590,6 +652,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -671,6 +738,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -747,6 +819,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -810,6 +887,93 @@
 				data-direction="reverse" data-theme="b">Close</a>
 	</div>
 </div>
+<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+<div data-role='page' class="favorites-tab" id="favorites-add" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true"
+		   data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a> <span
+			class="ui-title library-title"></span>
+		<ul data-role="listview" data-theme="c" data-divider-theme="c">
+			<li data-role="list-divider">
+				<h4>
+					<table class="link-container">
+						<tr>
+							<td>Add to Favorites: <span class="name"></span></td>
+						</tr>
+					</table>
+				</h4>
+			</li>
+		</ul>
+	</div>
+	<div data-role='content' class="page-content">
+		<table class="layout-group">
+			<tr>
+				<td colspan="2" class="on-left">Name:</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left"><input id="favorite-link-name" name="favorite-link-name" type="text" value="" data-mini="true"/><br></td>
+			</tr>
+			<tr>
+				<td class="on-left">Folder:</td>
+				<td class="on-right">
+					<a id="favorite-folder-select-button" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select</a>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
+					<input id="favorite-folder-name" name="favorite-folder-name" type="text" value="" data-mini="true"/> <br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><a id="favorite-add-button" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b">Add to Favorites</a></td>
+			</tr>
+		</table>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade"
+					   data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search"
+					   data-transition="slidefade"> Search </a>
+				</li>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role="page" id="favorites-success-popup" data-overlay-theme="c">
+	<div data-role="header" data-theme="b">
+		<span class="ui-title library-title">Add Favorites</span>
+	</div>
+	<div data-role="content">
+		<div>The link has been added to Favorites.</div>
+		<br> <a href="#preview" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction="reverse" data-theme="b">Close</a>
+	</div>
+</div>
+<div data-role="dialog" id="favorites-folder-list-dialog" data-overlay-theme="c">
+	<div data-role="header" data-theme="b">
+		<span class="ui-title library-title">Select Folder</span>
+	</div>
+	<div data-role="content" class="dialog-content"></div>
+</div>
+<? endif; ?>
+<div data-role="dialog" id="confirmation-dialog" data-overlay-theme="c" data-title="Are you sure?">
+	<div data-role="content">
+		<p class="dialog-description">???</p>
+		<h3 class="dialog-title">???</h3>
+		<a href="#" class="dialog-confirm" data-role="button" data-theme="b" data-rel="back">Yes</a>
+		<a href="#" class="dialog-cancel" data-role="button" data-theme="b" data-rel="back">No</a>
+	</div>
+</div>
 <!--Template for folder links content-->
 <div data-role="page" id="link-folder-content-template" data-overlay-theme="c">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
@@ -829,6 +993,11 @@
 					<a class="tab-search" href="#search-basic" data-icon="search"
 					   data-transition="slidefade"> Search </a>
 				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+				<li>
+					<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<? endif; ?>
 				<li>
 					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
 				</li>
@@ -837,3 +1006,31 @@
 	</div>
 </div>
 <!--Template for folder links content-->
+<!--Template for favorites content-->
+<div data-role='page' id="favorites-template" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title">Favorites</span>
+	</div>
+	<div data-role='content' class="page-content">
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+				</li>
+				<li>
+					<a class="tab-favorites ui-btn ui-btn-active ui-state-persist" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+				</li>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!--Template for favorites content-->

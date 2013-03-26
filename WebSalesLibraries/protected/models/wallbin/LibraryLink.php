@@ -506,6 +506,7 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 						case 'png':
@@ -592,6 +593,7 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 						case 'png':
@@ -678,6 +680,7 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
@@ -689,6 +692,7 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 						case 'png':
@@ -771,6 +775,7 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
@@ -782,6 +787,7 @@
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
@@ -830,6 +836,7 @@
 							break;
 						case 'email':
 						case 'download':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
@@ -865,6 +872,7 @@
 							break;
 						case 'email':
 						case 'download':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}
@@ -901,6 +909,7 @@
 							break;
 						case 'email':
 						case 'download':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
 					}

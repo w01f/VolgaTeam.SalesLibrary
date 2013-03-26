@@ -15,7 +15,7 @@
 		{
 			if (isset($folderName))
 			{
-				$folderRecord = FavoritesFolderStorage::getFolder($userId, $folderName);
+				$folderRecord = FavoritesFolderStorage::getFolderByName($userId, $folderName);
 				$linkRecord = self::model()->find('id_user=? and id_link=? and id_folder=? and LOWER(name)=?', array($userId, $linkId, $folderRecord->id, strtolower($linkName)));
 			}
 			else

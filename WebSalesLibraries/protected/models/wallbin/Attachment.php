@@ -237,6 +237,7 @@
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 						case 'png':
@@ -323,6 +324,7 @@
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 						case 'png':
@@ -409,6 +411,7 @@
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 					}
@@ -420,6 +423,7 @@
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 						case 'png':
@@ -502,6 +506,7 @@
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 					}
@@ -517,6 +522,7 @@
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 					}
@@ -538,6 +544,7 @@
 							break;
 						case 'email':
 						case 'download':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 						case 'mp4':
@@ -573,6 +580,7 @@
 							break;
 						case 'email':
 						case 'download':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 						case 'mp4':
@@ -632,6 +640,7 @@
 							break;
 						case 'email':
 						case 'download':
+						case 'favorites':
 							$viewSources[] = array('title' => $this->name, 'href' => $this->path);
 							break;
 						default:

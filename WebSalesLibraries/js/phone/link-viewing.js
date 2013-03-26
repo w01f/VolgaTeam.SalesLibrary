@@ -18,6 +18,58 @@
 		});
 	};
 
+	var runFavoritesPage = function (linkId, selectedLinks)
+	{
+		$('.favorites-tab .link-container .name').html(selectedLinks[0].title);
+		$('#favorite-link-name').val(selectedLinks[0].title);
+		$('#favorite-folder-name').val('');
+		$('#favorite-add-button').off('click').on('click', function ()
+		{
+			$.addFavoriteLink(linkId);
+		});
+		$.mobile.changePage("#favorites-add", {
+			transition:"slidefade"
+		});
+		$.ajax({
+			type:"POST",
+			url:"favorites/getFoldersList",
+			beforeSend:function ()
+			{
+				$.mobile.loading('show', {
+					textVisible:false,
+					html:""
+				});
+			},
+			complete:function ()
+			{
+				$.mobile.loading('hide', {
+					textVisible:false,
+					html:""
+				});
+			},
+			success:function (msg)
+			{
+				$('#favorites-folder-list-dialog').find('.dialog-content').html(msg);
+				$('#favorites-folders-list').find('input[type="radio"]').checkboxradio();
+				$('#favorites-folders-apply-button').button().off('click').on('click', function ()
+				{
+					var selectedFolders = [];
+					$.each($('#favorites-folders-list').find('.favorites-folder:checked'), function ()
+					{
+						selectedFolders.push($(this).val());
+					});
+					if (selectedFolders.length > 0)
+						$('#favorite-folder-name').val(selectedFolders.join('; '));
+					else
+						$('#favorite-folder-name').val('');
+					$("#favorites-folder-list-dialog").dialog("close");
+				});
+			},
+			async:true,
+			dataType:'html'
+		});
+	};
+
 	$.viewSelectedFormat = function (itemContent, resolution)
 	{
 		var selectedFileId = itemContent.find('.link-id').html();
@@ -73,6 +125,9 @@
 						case 'email':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
+						case 'favorites':
+							runFavoritesPage(selectedFileId, selectedLinks);
+							break;
 						default:
 							$.ajax({
 								type:"POST",
@@ -99,6 +154,9 @@
 					{
 						case 'email':
 							runEmailPage(selectedFileId, selectedLinks);
+							break;
+						case 'favorites':
+							runFavoritesPage(selectedFileId, selectedLinks);
 							break;
 						default:
 							$.ajax({
@@ -128,6 +186,9 @@
 						case 'email':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
+						case 'favorites':
+							runFavoritesPage(selectedFileId, selectedLinks);
+							break;
 						default:
 							$.ajax({
 								type:"POST",
@@ -154,6 +215,9 @@
 					{
 						case 'email':
 							runEmailPage(selectedFileId, selectedLinks);
+							break;
+						case 'favorites':
+							runFavoritesPage(selectedFileId, selectedLinks);
 							break;
 						default:
 							$.ajax({
@@ -203,6 +267,9 @@
 							break;
 						case 'email':
 							runEmailPage(selectedFileId, selectedLinks);
+							break;
+						case 'favorites':
+							runFavoritesPage(selectedFileId, selectedLinks);
 							break;
 					}
 					break;

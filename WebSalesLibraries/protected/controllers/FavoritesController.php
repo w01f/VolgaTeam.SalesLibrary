@@ -45,6 +45,31 @@
 			}
 		}
 
+		public function actionGetFoldersAndLinks()
+		{
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
+				$folderId = null;
+			$userId = Yii::app()->user->getId();
+			if (isset($userId))
+			{
+				$parentFolder = FavoritesFolderStorage::getFolderById($folderId);
+				$folders = FavoritesFolderStorage::getChildFolders($userId, $folderId);
+				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, false);
+				$this->renderPartial('favoritesLinksAndFolders', array('parentFolder' => $parentFolder, 'folders' => $folders, 'links' => $links), false, true);
+			}
+		}
+
+		public function actionGetFoldersList()
+		{
+			$userId = Yii::app()->user->getId();
+			if (isset($userId))
+			{
+				$userFolderRecords = FavoritesFolderStorage::getAllFolderNames($userId);
+				$this->renderPartial('foldersList', array('folders' => $userFolderRecords), false, true);
+			}
+		}
+
 		public function actionGetLinks()
 		{
 			$folderId = Yii::app()->request->getPost('folderId');

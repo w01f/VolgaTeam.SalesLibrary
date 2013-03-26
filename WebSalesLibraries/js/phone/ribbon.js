@@ -7,6 +7,7 @@
         
         $.initLibraries();
         $.initSearch();
+		$.initFavorites();
         
         $('.logout-button').off('click').on('click',function(){
             $.logout();
