@@ -316,7 +316,7 @@ namespace AutoSynchronizer.BusinessClasses
 											}
 											var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
 											syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-											if (extraFolderDestination.GetFiles().Length > 0)
+											if (extraFolderDestination.GetFiles().Length > 0 || extraFolderDestination.GetDirectories().Length > 0)
 												extraFolderDestinations.Add(extraFolderDestination);
 										}
 										if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
@@ -625,7 +625,7 @@ namespace AutoSynchronizer.BusinessClasses
 								}
 								var extraFolderDestination = new DirectoryInfo(extraFolderDestinationPath);
 								syncManager.SynchronizeFolders(extraRootFolder.Folder, extraFolderDestination, filesWhiteList);
-								if (extraFolderDestination.GetFiles().Length > 0)
+								if (extraFolderDestination.GetFiles().Length > 0 || extraFolderDestination.GetDirectories().Length > 0)
 									extraFolderDestinations.Add(extraFolderDestination);
 							}
 						}
