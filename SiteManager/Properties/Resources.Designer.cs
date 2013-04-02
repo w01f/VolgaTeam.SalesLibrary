@@ -95,9 +95,37 @@ namespace SalesDepot.SiteManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap ExportTicker {
+            get {
+                object obj = ResourceManager.GetObject("ExportTicker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ImportTicker {
+            get {
+                object obj = ResourceManager.GetObject("ImportTicker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap ImportUsers {
             get {
                 object obj = ResourceManager.GetObject("ImportUsers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap NudgeDown {
+            get {
+                object obj = ResourceManager.GetObject("NudgeDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap NudgeUp {
+            get {
+                object obj = ResourceManager.GetObject("NudgeUp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

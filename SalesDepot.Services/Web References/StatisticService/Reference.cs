@@ -388,6 +388,8 @@ namespace SalesDepot.Services.StatisticService {
         
         private string emailField;
         
+        private string phoneField;
+        
         private string groupsField;
         
         private string ipField;
@@ -477,6 +479,16 @@ namespace SalesDepot.Services.StatisticService {
             }
             set {
                 this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
             }
         }
         

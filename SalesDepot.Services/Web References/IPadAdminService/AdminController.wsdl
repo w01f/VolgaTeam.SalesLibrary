@@ -35,6 +35,7 @@
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="phone" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="groups" type="tns:GroupRecordArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
@@ -57,6 +58,7 @@
           <xsd:element name="autoWidgets" type="tns:AutoWidgetArray" />
           <xsd:element name="previewContainers" type="tns:UniversalPreviewContainerArray" />
           <xsd:element name="selected" type="xsd:boolean" />
+          <xsd:element name="config" type="tns:LibraryConfig" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LibraryPageArray">
@@ -177,6 +179,9 @@
           <xsd:element name="attachments" type="tns:AttachmentArray" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
+          <xsd:element name="isDead" type="xsd:boolean" />
+          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
+          <xsd:element name="forcePreview" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LineBreak">
@@ -243,6 +248,8 @@
           <xsd:element name="path" type="xsd:string" />
           <xsd:element name="originalFormat" type="xsd:string" />
           <xsd:element name="previewId" type="xsd:string" />
+          <xsd:element name="isDead" type="xsd:boolean" />
+          <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="ColumnArray">
@@ -310,6 +317,16 @@
           <xsd:element name="thumbsHeight" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="LibraryConfig">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="deadLinkSender" type="xsd:string" />
+          <xsd:element name="deadLinkRecipients" type="xsd:string" />
+          <xsd:element name="deadLinkSubject" type="xsd:string" />
+          <xsd:element name="deadLinkBody" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="getSessionKeyRequest">
@@ -326,6 +343,7 @@
     <wsdl:part name="firstName" type="xsd:string" />
     <wsdl:part name="lastName" type="xsd:string" />
     <wsdl:part name="email" type="xsd:string" />
+    <wsdl:part name="phone" type="xsd:string" />
     <wsdl:part name="assignedGroups" type="tns:GroupRecordArray" />
     <wsdl:part name="assignedPages" type="tns:LibraryPageArray" />
   </wsdl:message>

@@ -30,11 +30,11 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PermissionsManagerControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject16 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject17 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject18 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject19 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject20 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridControlUsers = new DevExpress.XtraGrid.GridControl();
 			this.gridViewUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnUsersFullName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -42,7 +42,7 @@
 			this.gridColumnUsersLogin = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnUsersActions = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditUsersActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.gridColumnUsersPhone = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageUsers = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
@@ -94,13 +94,13 @@
 			// 
 			// gridViewUsers
 			// 
-			this.gridViewUsers.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewUsers.Appearance.EvenRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewUsers.Appearance.EvenRow.Options.UseFont = true;
 			this.gridViewUsers.Appearance.FocusedCell.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewUsers.Appearance.FocusedCell.Options.UseFont = true;
 			this.gridViewUsers.Appearance.FocusedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewUsers.Appearance.FocusedRow.Options.UseFont = true;
-			this.gridViewUsers.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewUsers.Appearance.HeaderPanel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
 			this.gridViewUsers.Appearance.HeaderPanel.Options.UseFont = true;
 			this.gridViewUsers.Appearance.OddRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewUsers.Appearance.OddRow.Options.UseFont = true;
@@ -114,7 +114,8 @@
             this.gridColumnUsersFullName,
             this.gridColumnUsersEmail,
             this.gridColumnUsersLogin,
-            this.gridColumnUsersActions});
+            this.gridColumnUsersActions,
+            this.gridColumnUsersPhone});
 			this.gridViewUsers.GridControl = this.gridControlUsers;
 			this.gridViewUsers.Name = "gridViewUsers";
 			this.gridViewUsers.OptionsCustomization.AllowColumnMoving = false;
@@ -146,7 +147,7 @@
 			this.gridColumnUsersFullName.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersFullName.Visible = true;
 			this.gridColumnUsersFullName.VisibleIndex = 0;
-			this.gridColumnUsersFullName.Width = 271;
+			this.gridColumnUsersFullName.Width = 243;
 			// 
 			// gridColumnUsersEmail
 			// 
@@ -157,7 +158,7 @@
 			this.gridColumnUsersEmail.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersEmail.Visible = true;
 			this.gridColumnUsersEmail.VisibleIndex = 1;
-			this.gridColumnUsersEmail.Width = 271;
+			this.gridColumnUsersEmail.Width = 243;
 			// 
 			// gridColumnUsersLogin
 			// 
@@ -167,8 +168,8 @@
 			this.gridColumnUsersLogin.OptionsColumn.AllowEdit = false;
 			this.gridColumnUsersLogin.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersLogin.Visible = true;
-			this.gridColumnUsersLogin.VisibleIndex = 2;
-			this.gridColumnUsersLogin.Width = 280;
+			this.gridColumnUsersLogin.VisibleIndex = 3;
+			this.gridColumnUsersLogin.Width = 159;
 			// 
 			// gridColumnUsersActions
 			// 
@@ -179,22 +180,29 @@
 			this.gridColumnUsersActions.OptionsColumn.ShowCaption = false;
 			this.gridColumnUsersActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnUsersActions.Visible = true;
-			this.gridColumnUsersActions.VisibleIndex = 3;
+			this.gridColumnUsersActions.VisibleIndex = 4;
 			this.gridColumnUsersActions.Width = 80;
 			// 
 			// repositoryItemButtonEditUsersActions
 			// 
 			this.repositoryItemButtonEditUsersActions.AutoHeight = false;
 			this.repositoryItemButtonEditUsersActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditUsersActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject16, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditUsersActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject17, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditUsersActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditUsersActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.repositoryItemButtonEditUsersActions.Name = "repositoryItemButtonEditUsersActions";
 			this.repositoryItemButtonEditUsersActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditUsersActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditUsersActions_ButtonClick);
 			// 
-			// defaultLookAndFeel
+			// gridColumnUsersPhone
 			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
+			this.gridColumnUsersPhone.Caption = "Phone";
+			this.gridColumnUsersPhone.FieldName = "phone";
+			this.gridColumnUsersPhone.Name = "gridColumnUsersPhone";
+			this.gridColumnUsersPhone.OptionsColumn.AllowEdit = false;
+			this.gridColumnUsersPhone.OptionsColumn.ReadOnly = true;
+			this.gridColumnUsersPhone.Visible = true;
+			this.gridColumnUsersPhone.VisibleIndex = 2;
+			this.gridColumnUsersPhone.Width = 161;
 			// 
 			// xtraTabControl
 			// 
@@ -317,8 +325,8 @@
 			// 
 			this.repositoryItemButtonEditGroupActions.AutoHeight = false;
 			this.repositoryItemButtonEditGroupActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditGroupActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject18, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditGroupActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject19, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditGroupActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditGroupActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
 			this.repositoryItemButtonEditGroupActions.Name = "repositoryItemButtonEditGroupActions";
 			this.repositoryItemButtonEditGroupActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditGroupActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditGroupActions_ButtonClick);
@@ -417,7 +425,7 @@
 			// 
 			this.repositoryItemButtonEditPageActions.AutoHeight = false;
 			this.repositoryItemButtonEditPageActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditPageActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject20, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditPageActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true)});
 			this.repositoryItemButtonEditPageActions.Name = "repositoryItemButtonEditPageActions";
 			this.repositoryItemButtonEditPageActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditPageActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditPageActions_ButtonClick);
@@ -507,8 +515,7 @@
 
         #endregion
 
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private DevExpress.XtraGrid.GridControl gridControlUsers;
+		private DevExpress.XtraGrid.GridControl gridControlUsers;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewUsers;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnUsersFullName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnUsersEmail;
@@ -534,5 +541,6 @@
 		private DevComponents.DotNetBar.ButtonX buttonXCollapseLibraries;
 		private DevComponents.DotNetBar.ButtonX buttonXExpandLibraries;
 		private DevComponents.DotNetBar.StyleManager styleManager;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnUsersPhone;
     }
 }

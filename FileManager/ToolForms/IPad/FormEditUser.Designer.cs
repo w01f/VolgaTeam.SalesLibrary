@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
-			DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.gridViewPages = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.gridColumnPageId = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnPageSelected = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -41,8 +40,8 @@
 			this.gridColumnLibraryId = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnLibrarySelected = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnLibraryName = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.laLogin = new System.Windows.Forms.Label();
 			this.textEditLogin = new DevExpress.XtraEditors.TextEdit();
 			this.laFirstName = new System.Windows.Forms.Label();
@@ -55,11 +54,15 @@
 			this.checkEditPassword = new DevExpress.XtraEditors.CheckEdit();
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			this.dxValidationProvider = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+			this.dxValidationProvider = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider();
 			this.buttonEditPassword = new DevExpress.XtraEditors.ButtonEdit();
-			this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+			this.textEditEmailConfirm = new DevExpress.XtraEditors.TextEdit();
+			this.textEditPhone = new DevExpress.XtraEditors.TextEdit();
+			this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider();
 			this.xtraTabControl = new FileManager.ToolForms.IPad.ValidatableTabControl();
 			this.xtraTabPageUser = new DevExpress.XtraTab.XtraTabPage();
+			this.laPhone = new System.Windows.Forms.Label();
+			this.laEmailConfirm = new System.Windows.Forms.Label();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
 			this.pnAssignedGroups = new System.Windows.Forms.Panel();
 			this.buttonXGroupsClearAll = new DevComponents.DotNetBar.ButtonX();
@@ -74,8 +77,6 @@
 			this.pnAssignedLibraries = new System.Windows.Forms.Panel();
 			this.buttonXLibrariesClearAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXLibrariesSelectAll = new DevComponents.DotNetBar.ButtonX();
-			this.textEditEmailConfirm = new DevExpress.XtraEditors.TextEdit();
-			this.laEmailConfirm = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPages)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditLibrary)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlLibraries)).BeginInit();
@@ -88,6 +89,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditPassword.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditPassword.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditEmailConfirm.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPhone.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.xtraTabControl.SuspendLayout();
@@ -99,7 +102,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditGroup)).BeginInit();
 			this.xtraTabPageLibraries.SuspendLayout();
 			this.pnAssignedLibraries.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.textEditEmailConfirm.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// gridViewPages
@@ -177,10 +179,10 @@
 			// gridControlLibraries
 			// 
 			this.gridControlLibraries.Dock = System.Windows.Forms.DockStyle.Fill;
-			gridLevelNode2.LevelTemplate = this.gridViewPages;
-			gridLevelNode2.RelationName = "Pages";
+			gridLevelNode1.LevelTemplate = this.gridViewPages;
+			gridLevelNode1.RelationName = "Pages";
 			this.gridControlLibraries.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode2});
+            gridLevelNode1});
 			this.gridControlLibraries.Location = new System.Drawing.Point(0, 46);
 			this.gridControlLibraries.MainView = this.gridViewLibraries;
 			this.gridControlLibraries.Name = "gridControlLibraries";
@@ -355,7 +357,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.textEditEmail.Location = new System.Drawing.Point(102, 126);
+			this.textEditEmail.Location = new System.Drawing.Point(102, 163);
 			this.textEditEmail.Name = "textEditEmail";
 			this.textEditEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -368,7 +370,7 @@
 			// laEmail
 			// 
 			this.laEmail.AutoSize = true;
-			this.laEmail.Location = new System.Drawing.Point(3, 129);
+			this.laEmail.Location = new System.Drawing.Point(3, 166);
 			this.laEmail.Name = "laEmail";
 			this.laEmail.Size = new System.Drawing.Size(45, 16);
 			this.laEmail.TabIndex = 6;
@@ -377,7 +379,7 @@
 			// laPassword
 			// 
 			this.laPassword.AutoSize = true;
-			this.laPassword.Location = new System.Drawing.Point(3, 210);
+			this.laPassword.Location = new System.Drawing.Point(3, 247);
 			this.laPassword.Name = "laPassword";
 			this.laPassword.Size = new System.Drawing.Size(69, 16);
 			this.laPassword.TabIndex = 8;
@@ -386,7 +388,7 @@
 			// checkEditPassword
 			// 
 			this.checkEditPassword.EditValue = true;
-			this.checkEditPassword.Location = new System.Drawing.Point(3, 198);
+			this.checkEditPassword.Location = new System.Drawing.Point(3, 235);
 			this.checkEditPassword.Name = "checkEditPassword";
 			this.checkEditPassword.Properties.Appearance.Options.UseTextOptions = true;
 			this.checkEditPassword.Properties.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
@@ -433,16 +435,46 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.buttonEditPassword.Location = new System.Drawing.Point(102, 207);
+			this.buttonEditPassword.Location = new System.Drawing.Point(102, 244);
 			this.buttonEditPassword.Name = "buttonEditPassword";
 			this.buttonEditPassword.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.buttonEditPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Generate new password", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Generate new password", null, null, true)});
 			this.buttonEditPassword.Properties.NullText = "Type...";
 			this.buttonEditPassword.Size = new System.Drawing.Size(257, 22);
 			this.buttonEditPassword.StyleController = this.styleController;
 			this.buttonEditPassword.TabIndex = 13;
 			this.buttonEditPassword.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.buttonEditPassword_ButtonClick);
+			// 
+			// textEditEmailConfirm
+			// 
+			this.textEditEmailConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dxValidationProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxErrorProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.textEditEmailConfirm.Location = new System.Drawing.Point(102, 202);
+			this.textEditEmailConfirm.Name = "textEditEmailConfirm";
+			this.textEditEmailConfirm.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
+			this.textEditEmailConfirm.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+			this.textEditEmailConfirm.Properties.NullText = "Type...";
+			this.textEditEmailConfirm.Size = new System.Drawing.Size(257, 22);
+			this.textEditEmailConfirm.StyleController = this.styleController;
+			this.textEditEmailConfirm.TabIndex = 15;
+			this.textEditEmailConfirm.Validating += new System.ComponentModel.CancelEventHandler(this.textEditEmail_Validating);
+			// 
+			// textEditPhone
+			// 
+			this.textEditPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dxValidationProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxErrorProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.textEditPhone.Location = new System.Drawing.Point(102, 124);
+			this.textEditPhone.Name = "textEditPhone";
+			this.textEditPhone.Properties.NullText = "Type...";
+			this.textEditPhone.Size = new System.Drawing.Size(257, 22);
+			this.textEditPhone.StyleController = this.styleController;
+			this.textEditPhone.TabIndex = 17;
+			this.textEditPhone.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
 			// 
 			// dxErrorProvider
 			// 
@@ -475,6 +507,8 @@
 			// 
 			// xtraTabPageUser
 			// 
+			this.xtraTabPageUser.Controls.Add(this.laPhone);
+			this.xtraTabPageUser.Controls.Add(this.textEditPhone);
 			this.xtraTabPageUser.Controls.Add(this.textEditEmailConfirm);
 			this.xtraTabPageUser.Controls.Add(this.laEmailConfirm);
 			this.xtraTabPageUser.Controls.Add(this.laLogin);
@@ -491,6 +525,24 @@
 			this.xtraTabPageUser.Name = "xtraTabPageUser";
 			this.xtraTabPageUser.Size = new System.Drawing.Size(375, 543);
 			this.xtraTabPageUser.Text = "User";
+			// 
+			// laPhone
+			// 
+			this.laPhone.AutoSize = true;
+			this.laPhone.Location = new System.Drawing.Point(3, 127);
+			this.laPhone.Name = "laPhone";
+			this.laPhone.Size = new System.Drawing.Size(49, 16);
+			this.laPhone.TabIndex = 16;
+			this.laPhone.Text = "Phone:";
+			// 
+			// laEmailConfirm
+			// 
+			this.laEmailConfirm.AutoSize = true;
+			this.laEmailConfirm.Location = new System.Drawing.Point(3, 205);
+			this.laEmailConfirm.Name = "laEmailConfirm";
+			this.laEmailConfirm.Size = new System.Drawing.Size(93, 16);
+			this.laEmailConfirm.TabIndex = 14;
+			this.laEmailConfirm.Text = "Confirm Email:";
 			// 
 			// xtraTabPageGroups
 			// 
@@ -671,31 +723,6 @@
 			this.buttonXLibrariesSelectAll.TextColor = System.Drawing.Color.Black;
 			this.buttonXLibrariesSelectAll.Click += new System.EventHandler(this.buttonXLibrariesSelectAll_Click);
 			// 
-			// textEditEmailConfirm
-			// 
-			this.textEditEmailConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.dxValidationProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.dxErrorProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.textEditEmailConfirm.Location = new System.Drawing.Point(102, 165);
-			this.textEditEmailConfirm.Name = "textEditEmailConfirm";
-			this.textEditEmailConfirm.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
-			this.textEditEmailConfirm.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-			this.textEditEmailConfirm.Properties.NullText = "Type...";
-			this.textEditEmailConfirm.Size = new System.Drawing.Size(257, 22);
-			this.textEditEmailConfirm.StyleController = this.styleController;
-			this.textEditEmailConfirm.TabIndex = 15;
-			this.textEditEmailConfirm.Validating += new System.ComponentModel.CancelEventHandler(this.textEditEmail_Validating);
-			// 
-			// laEmailConfirm
-			// 
-			this.laEmailConfirm.AutoSize = true;
-			this.laEmailConfirm.Location = new System.Drawing.Point(3, 168);
-			this.laEmailConfirm.Name = "laEmailConfirm";
-			this.laEmailConfirm.Size = new System.Drawing.Size(93, 16);
-			this.laEmailConfirm.TabIndex = 14;
-			this.laEmailConfirm.Text = "Confirm Email:";
-			// 
 			// FormEditUser
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -726,6 +753,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditPassword.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditPassword.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditEmailConfirm.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPhone.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
 			this.xtraTabControl.ResumeLayout(false);
@@ -738,7 +767,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditGroup)).EndInit();
 			this.xtraTabPageLibraries.ResumeLayout(false);
 			this.pnAssignedLibraries.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.textEditEmailConfirm.Properties)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -790,5 +818,7 @@
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsSelectAll;
 		public DevExpress.XtraEditors.TextEdit textEditEmailConfirm;
 		private System.Windows.Forms.Label laEmailConfirm;
+		private System.Windows.Forms.Label laPhone;
+		public DevExpress.XtraEditors.TextEdit textEditPhone;
     }
 }

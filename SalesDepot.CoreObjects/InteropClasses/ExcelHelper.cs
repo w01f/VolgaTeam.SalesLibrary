@@ -117,5 +117,52 @@ namespace SalesDepot.CoreObjects.InteropClasses
 				Disconnect();
 			}
 		}
+
+		public void ExportTickerLinks(string filePath, object[,] dataSource)
+		{
+			try
+			{
+				if (!Connect()) return;
+				MessageFilter.Register();
+				var workbook = _excelObject.Workbooks.Add();
+				Worksheet sheet;
+				try
+				{
+					sheet = workbook.Worksheets[1];
+				}
+				catch
+				{
+					sheet = workbook.Worksheets.Add();
+				}
+
+				sheet.Name = "Ticker Links";
+				sheet.Range["A1"].Value = "Type";
+				sheet.Range["B1"].Value = "Text";
+				sheet.Range["C1"].Value = "URL";
+				sheet.Range["D1"].Value = "File";
+				sheet.Range["E1"].Value = "Video";
+				sheet.Range["F1"].Value = "Library";
+				sheet.Range["G1"].Value = "Page";
+				sheet.Range["H1"].Value = "Link";
+
+				var headerRow = sheet.Range["1:1"];
+				headerRow.Font.Bold = true;
+				headerRow.HorizontalAlignment = -4108;
+
+				var dataRange = sheet.Range["A2", "H" + (dataSource.GetLength(0) + 1).ToString()];
+				dataRange.Value = dataSource;
+				dataRange.EntireColumn.AutoFit();
+
+				workbook.SaveAs(filePath);
+				workbook.Close();
+				Utils.ReleaseComObject(workbook);
+			}
+			catch { }
+			finally
+			{
+				MessageFilter.Revoke();
+				Disconnect();
+			}
+		}
 	}
 }

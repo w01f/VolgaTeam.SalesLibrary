@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SalesDepot.Services.ContentManagmentService;
 using SalesDepot.Services.IPadAdminService;
 using SalesDepot.Services.StatisticService;
+using SalesDepot.Services.TickerService;
 using Attachment = SalesDepot.Services.ContentManagmentService.Attachment;
 using Banner = SalesDepot.Services.ContentManagmentService.Banner;
 using Column = SalesDepot.Services.ContentManagmentService.Column;
@@ -18,6 +19,7 @@ using Library = SalesDepot.Services.ContentManagmentService.Library;
 using LibraryLink = SalesDepot.Services.ContentManagmentService.LibraryLink;
 using LineBreak = SalesDepot.Services.ContentManagmentService.LineBreak;
 using LinkCategory = SalesDepot.Services.ContentManagmentService.LinkCategory;
+using LibraryConfig = SalesDepot.Services.ContentManagmentService.LibraryConfig;
 using UserRecord = SalesDepot.Services.IPadAdminService.UserRecord;
 using GroupRecord = SalesDepot.Services.IPadAdminService.GroupRecord;
 
@@ -537,9 +539,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return _siteClient.GetUsers(out message);
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
-			_siteClient.SetUser(login, password, firstName, lastName, email, groups, pages, out message);
+			_siteClient.SetUser(login, password, firstName, lastName, email, phone, groups, pages, out message);
 		}
 
 		public void DeleteUser(string login, out string message)
@@ -746,6 +748,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		private TickerControllerService GetTickerClient()
+		{
+			try
+			{
+				var client = new TickerControllerService();
+				client.Url = string.Format("{0}/ticker/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
@@ -772,7 +788,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
 			var client = GetAdminClient();
@@ -782,7 +798,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email, groups, pages);
+						client.setUser(sessionKey, login, password, firstName, lastName, email, phone, groups, pages);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -810,7 +826,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						foreach (var group in uniqueGroups)
 							client.setGroup(sessionKey, group.id, group.name, new UserRecord[] { }, new Services.IPadAdminService.LibraryPage[] { });
 						foreach (var user in users)
-							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Groups.ToArray(), user.Pages.ToArray());
+							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray());
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
@@ -1157,6 +1173,57 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				message = "Couldn't complete operation.\nServer is unavailable.";
 			return activities.ToArray();
 		}
+		#endregion
+
+		#region Ticker
+		public TickerLink[] GetTickerLinks(out string message)
+		{
+			message = string.Empty;
+			var records = new List<TickerLink>();
+			var client = GetTickerClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						records.AddRange(client.getTickerLinks(sessionKey) ?? new TickerLink[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return records.ToArray();
+		}
+
+		public void SetTickerLinks(TickerLink[] tickerLinks, out string message)
+		{
+			message = string.Empty;
+			var client = GetTickerClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setTickerLinks(sessionKey, tickerLinks);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
 		#endregion
 	}
 }

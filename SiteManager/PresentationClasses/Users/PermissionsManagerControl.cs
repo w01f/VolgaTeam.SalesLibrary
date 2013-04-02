@@ -252,6 +252,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -260,7 +261,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -322,6 +323,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -330,7 +332,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Updating user...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)

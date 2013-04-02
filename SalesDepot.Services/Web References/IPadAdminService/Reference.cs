@@ -162,7 +162,7 @@ namespace SalesDepot.Services.IPadAdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, GroupRecord[] assignedGroups, LibraryPage[] assignedPages) {
+        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages) {
             this.Invoke("setUser", new object[] {
                         sessionKey,
                         login,
@@ -170,17 +170,18 @@ namespace SalesDepot.Services.IPadAdminService {
                         firstName,
                         lastName,
                         email,
+                        phone,
                         assignedGroups,
                         assignedPages});
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, GroupRecord[] assignedGroups, LibraryPage[] assignedPages) {
-            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, assignedGroups, assignedPages, null);
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages) {
+            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, null);
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, GroupRecord[] assignedGroups, LibraryPage[] assignedPages, object userState) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages, object userState) {
             if ((this.setUserOperationCompleted == null)) {
                 this.setUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetUserOperationCompleted);
             }
@@ -191,6 +192,7 @@ namespace SalesDepot.Services.IPadAdminService {
                         firstName,
                         lastName,
                         email,
+                        phone,
                         assignedGroups,
                         assignedPages}, this.setUserOperationCompleted, userState);
         }
@@ -584,6 +586,8 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private string emailField;
         
+        private string phoneField;
+        
         private bool selectedField;
         
         private GroupRecord[] groupsField;
@@ -651,6 +655,16 @@ namespace SalesDepot.Services.IPadAdminService {
             }
             set {
                 this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
             }
         }
         
@@ -725,6 +739,8 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private bool selectedField;
         
+        private LibraryConfig configField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -782,6 +798,16 @@ namespace SalesDepot.Services.IPadAdminService {
             }
             set {
                 this.selectedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public LibraryConfig config {
+            get {
+                return this.configField;
+            }
+            set {
+                this.configField = value;
             }
         }
     }
@@ -1265,6 +1291,87 @@ namespace SalesDepot.Services.IPadAdminService {
             }
             set {
                 this.isItalicField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:AdminControllerwsdl")]
+    public partial class LibraryConfig {
+        
+        private string idField;
+        
+        private string libraryIdField;
+        
+        private string deadLinkSenderField;
+        
+        private string deadLinkRecipientsField;
+        
+        private string deadLinkSubjectField;
+        
+        private string deadLinkBodyField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkSender {
+            get {
+                return this.deadLinkSenderField;
+            }
+            set {
+                this.deadLinkSenderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkRecipients {
+            get {
+                return this.deadLinkRecipientsField;
+            }
+            set {
+                this.deadLinkRecipientsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkSubject {
+            get {
+                return this.deadLinkSubjectField;
+            }
+            set {
+                this.deadLinkSubjectField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string deadLinkBody {
+            get {
+                return this.deadLinkBodyField;
+            }
+            set {
+                this.deadLinkBodyField = value;
             }
         }
     }
@@ -1829,6 +1936,10 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private string previewIdField;
         
+        private bool isDeadField;
+        
+        private bool isPreviewNotReadyField;
+        
         /// <remarks/>
         public string linkId {
             get {
@@ -1886,6 +1997,26 @@ namespace SalesDepot.Services.IPadAdminService {
             }
             set {
                 this.previewIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isDead {
+            get {
+                return this.isDeadField;
+            }
+            set {
+                this.isDeadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isPreviewNotReady {
+            get {
+                return this.isPreviewNotReadyField;
+            }
+            set {
+                this.isPreviewNotReadyField = value;
             }
         }
     }
@@ -2263,6 +2394,12 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private string assignedUsersField;
         
+        private bool isDeadField;
+        
+        private bool isPreviewNotReadyField;
+        
+        private bool forcePreviewField;
+        
         /// <remarks/>
         public string id {
             get {
@@ -2570,6 +2707,36 @@ namespace SalesDepot.Services.IPadAdminService {
             }
             set {
                 this.assignedUsersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isDead {
+            get {
+                return this.isDeadField;
+            }
+            set {
+                this.isDeadField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isPreviewNotReady {
+            get {
+                return this.isPreviewNotReadyField;
+            }
+            set {
+                this.isPreviewNotReadyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool forcePreview {
+            get {
+                return this.forcePreviewField;
+            }
+            set {
+                this.forcePreviewField = value;
             }
         }
     }

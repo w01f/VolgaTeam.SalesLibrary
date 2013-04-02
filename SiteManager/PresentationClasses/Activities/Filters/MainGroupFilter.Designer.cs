@@ -32,7 +32,6 @@
 			this.checkEditEnableFilter = new DevExpress.XtraEditors.CheckEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.checkedListBoxControlGroups = new DevExpress.XtraEditors.CheckedListBoxControl();
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
@@ -76,10 +75,6 @@
 			// 
 			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
 			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
 			// 
 			// checkedListBoxControlGroups
 			// 
@@ -203,7 +198,6 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditEnableFilter;
 		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.StyleController styleController;
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlGroups;
 		private DevExpress.XtraEditors.LabelControl labelControlGroupsTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsAll;

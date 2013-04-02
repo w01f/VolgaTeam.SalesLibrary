@@ -58,9 +58,11 @@
 			this.dxValidationProvider = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
 			this.buttonEditPassword = new DevExpress.XtraEditors.ButtonEdit();
 			this.textEditEmailConfirm = new DevExpress.XtraEditors.TextEdit();
+			this.textEditPhone = new DevExpress.XtraEditors.TextEdit();
 			this.dxErrorProvider = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
 			this.xtraTabControl = new SalesDepot.SiteManager.ToolForms.ValidatableTabControl();
 			this.xtraTabPageUser = new DevExpress.XtraTab.XtraTabPage();
+			this.laPhone = new System.Windows.Forms.Label();
 			this.laEmailConfirm = new System.Windows.Forms.Label();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
 			this.pnAssignedGroups = new System.Windows.Forms.Panel();
@@ -90,6 +92,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditPassword.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailConfirm.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPhone.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.xtraTabControl.SuspendLayout();
@@ -356,7 +359,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditEmail, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.textEditEmail.Location = new System.Drawing.Point(102, 126);
+			this.textEditEmail.Location = new System.Drawing.Point(102, 166);
 			this.textEditEmail.Name = "textEditEmail";
 			this.textEditEmail.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmail.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -369,7 +372,7 @@
 			// laEmail
 			// 
 			this.laEmail.AutoSize = true;
-			this.laEmail.Location = new System.Drawing.Point(3, 129);
+			this.laEmail.Location = new System.Drawing.Point(3, 169);
 			this.laEmail.Name = "laEmail";
 			this.laEmail.Size = new System.Drawing.Size(45, 16);
 			this.laEmail.TabIndex = 6;
@@ -378,7 +381,7 @@
 			// laPassword
 			// 
 			this.laPassword.AutoSize = true;
-			this.laPassword.Location = new System.Drawing.Point(3, 210);
+			this.laPassword.Location = new System.Drawing.Point(3, 250);
 			this.laPassword.Name = "laPassword";
 			this.laPassword.Size = new System.Drawing.Size(69, 16);
 			this.laPassword.TabIndex = 8;
@@ -387,7 +390,7 @@
 			// checkEditPassword
 			// 
 			this.checkEditPassword.EditValue = true;
-			this.checkEditPassword.Location = new System.Drawing.Point(3, 198);
+			this.checkEditPassword.Location = new System.Drawing.Point(3, 238);
 			this.checkEditPassword.Name = "checkEditPassword";
 			this.checkEditPassword.Properties.Appearance.Options.UseTextOptions = true;
 			this.checkEditPassword.Properties.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
@@ -434,7 +437,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.buttonEditPassword, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.buttonEditPassword.Location = new System.Drawing.Point(102, 207);
+			this.buttonEditPassword.Location = new System.Drawing.Point(102, 247);
 			this.buttonEditPassword.Name = "buttonEditPassword";
 			this.buttonEditPassword.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.buttonEditPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -451,7 +454,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dxValidationProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
 			this.dxErrorProvider.SetIconAlignment(this.textEditEmailConfirm, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
-			this.textEditEmailConfirm.Location = new System.Drawing.Point(102, 165);
+			this.textEditEmailConfirm.Location = new System.Drawing.Point(102, 205);
 			this.textEditEmailConfirm.Name = "textEditEmailConfirm";
 			this.textEditEmailConfirm.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditEmailConfirm.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
@@ -460,6 +463,20 @@
 			this.textEditEmailConfirm.StyleController = this.styleController;
 			this.textEditEmailConfirm.TabIndex = 15;
 			this.textEditEmailConfirm.Validating += new System.ComponentModel.CancelEventHandler(this.textEditEmail_Validating);
+			// 
+			// textEditPhone
+			// 
+			this.textEditPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dxValidationProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.dxErrorProvider.SetIconAlignment(this.textEditPhone, System.Windows.Forms.ErrorIconAlignment.MiddleRight);
+			this.textEditPhone.Location = new System.Drawing.Point(102, 126);
+			this.textEditPhone.Name = "textEditPhone";
+			this.textEditPhone.Properties.NullText = "Type...";
+			this.textEditPhone.Size = new System.Drawing.Size(251, 22);
+			this.textEditPhone.StyleController = this.styleController;
+			this.textEditPhone.TabIndex = 17;
+			this.textEditPhone.Validating += new System.ComponentModel.CancelEventHandler(this.textEdit_Validating);
 			// 
 			// dxErrorProvider
 			// 
@@ -492,6 +509,8 @@
 			// 
 			// xtraTabPageUser
 			// 
+			this.xtraTabPageUser.Controls.Add(this.laPhone);
+			this.xtraTabPageUser.Controls.Add(this.textEditPhone);
 			this.xtraTabPageUser.Controls.Add(this.textEditEmailConfirm);
 			this.xtraTabPageUser.Controls.Add(this.laEmailConfirm);
 			this.xtraTabPageUser.Controls.Add(this.laLogin);
@@ -509,10 +528,19 @@
 			this.xtraTabPageUser.Size = new System.Drawing.Size(369, 537);
 			this.xtraTabPageUser.Text = "User";
 			// 
+			// laPhone
+			// 
+			this.laPhone.AutoSize = true;
+			this.laPhone.Location = new System.Drawing.Point(3, 129);
+			this.laPhone.Name = "laPhone";
+			this.laPhone.Size = new System.Drawing.Size(49, 16);
+			this.laPhone.TabIndex = 16;
+			this.laPhone.Text = "Phone:";
+			// 
 			// laEmailConfirm
 			// 
 			this.laEmailConfirm.AutoSize = true;
-			this.laEmailConfirm.Location = new System.Drawing.Point(3, 168);
+			this.laEmailConfirm.Location = new System.Drawing.Point(3, 208);
 			this.laEmailConfirm.Name = "laEmailConfirm";
 			this.laEmailConfirm.Size = new System.Drawing.Size(93, 16);
 			this.laEmailConfirm.TabIndex = 14;
@@ -735,6 +763,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.buttonEditPassword.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailConfirm.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPhone.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
 			this.xtraTabControl.ResumeLayout(false);
@@ -799,5 +828,7 @@
 		public DevExpress.XtraEditors.TextEdit textEditEmailConfirm;
 		private System.Windows.Forms.Label laEmailConfirm;
 		private DevComponents.DotNetBar.StyleManager styleManager;
+		private System.Windows.Forms.Label laPhone;
+		public DevExpress.XtraEditors.TextEdit textEditPhone;
     }
 }

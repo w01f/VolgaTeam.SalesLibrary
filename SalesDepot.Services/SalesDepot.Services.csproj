@@ -75,6 +75,7 @@
     <Compile Include="StatisticService\NavigationUserReportRecord.cs" />
     <Compile Include="StatisticService\MainUserReportRecord.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />
+    <Compile Include="TickerService\TickerLinkRecord.cs" />
     <Compile Include="Web References\ContentManagmentService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,6 +87,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\StatisticService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\TickerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -153,6 +159,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesDepot_Services_StatisticService_StatisticControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/ticker/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TickerService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/ticker/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesDepot_Services_TickerService_TickerControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -202,7 +219,16 @@
     <None Include="Web References\StatisticService\UserActivity.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\TickerService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\TickerService\TickerController.wsdl" />
+    <None Include="Web References\TickerService\TickerLink.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

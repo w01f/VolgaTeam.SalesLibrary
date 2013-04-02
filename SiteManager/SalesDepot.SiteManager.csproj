@@ -99,6 +99,7 @@
     <Compile Include="BusinessClasses\SiteManager.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\TickerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="FormMain.cs">
@@ -192,6 +193,25 @@
     <Compile Include="PresentationClasses\Activities\Views\RawDataControl.Designer.cs">
       <DependentUpon>RawDataControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Ticker\LinkEditors\ITickerEditor.cs" />
+    <Compile Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.Designer.cs">
+      <DependentUpon>LibraryLinkEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Ticker\LinkEditors\FileEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Ticker\LinkEditors\FileEditor.Designer.cs">
+      <DependentUpon>FileEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Ticker\TickerManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Ticker\TickerManagerControl.Designer.cs">
+      <DependentUpon>TickerManagerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Users\PermissionsManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -200,6 +220,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabPages\TabTickerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabTickerControl.Designer.cs">
+      <DependentUpon>TabTickerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\TabActivitiesControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -213,6 +239,12 @@
       <DependentUpon>TabUsersControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\PasswordHelper.cs" />
+    <Compile Include="ToolForms\FormEditTickerLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\FormEditTickerLink.Designer.cs">
+      <DependentUpon>FormEditTickerLink.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\FormEditGroup.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,6 +322,16 @@
       <DependentUpon>RawDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.resx">
+      <DependentUpon>LibraryLinkEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Ticker\LinkEditors\FileEditor.resx">
+      <DependentUpon>FileEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Ticker\TickerManagerControl.resx">
+      <DependentUpon>TickerManagerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Users\PermissionsManagerControl.resx">
       <DependentUpon>PermissionsManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -305,11 +347,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabPages\TabTickerControl.resx">
+      <DependentUpon>TabTickerControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabActivitiesControl.resx">
       <DependentUpon>TabActivitiesControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabUsersControl.resx">
       <DependentUpon>TabUsersControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\FormEditTickerLink.resx">
+      <DependentUpon>FormEditTickerLink.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormEditGroup.resx">
       <DependentUpon>FormEditGroup.cs</DependentUpon>
@@ -339,6 +387,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ExportTicker.png" />
+    <None Include="Resources\ImportTicker.png" />
+    <None Include="Resources\NudgeDown.png" />
+    <None Include="Resources\NudgeUp.png" />
     <None Include="Resources\ExportExcel.png" />
     <None Include="Resources\ExportGroup.png" />
     <None Include="Resources\ImportUsers.png" />

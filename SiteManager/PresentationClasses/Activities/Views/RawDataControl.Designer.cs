@@ -37,7 +37,6 @@
 			this.gridColumnLogin = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnType = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnSubType = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
@@ -168,10 +167,6 @@
 			this.gridColumnSubType.VisibleIndex = 3;
 			this.gridColumnSubType.Width = 297;
 			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
-			// 
 			// styleManager
 			// 
 			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
@@ -230,8 +225,7 @@
 
         #endregion
 
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
-        private DevExpress.XtraGrid.GridControl gridControlData;
+		private DevExpress.XtraGrid.GridControl gridControlData;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewData;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnDate;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLogin;

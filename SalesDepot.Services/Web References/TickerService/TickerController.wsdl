@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:TickerControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="TickerController" targetNamespace="urn:TickerControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:TickerControllerwsdl">
+      <xsd:complexType name="TickerLinkArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:TickerLink[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="TickerLink">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="type" type="xsd:string" />
+          <xsd:element name="order" type="xsd:int" />
+          <xsd:element name="text" type="xsd:string" />
+          <xsd:element name="details" type="tns:KeyValuePairArray" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="KeyValuePairArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:KeyValuePair[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="KeyValuePair">
+        <xsd:all>
+          <xsd:element name="tag" type="xsd:string" />
+          <xsd:element name="data" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getSessionKeyRequest">
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSessionKeyResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getTickerLinksRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getTickerLinksResponse">
+    <wsdl:part name="return" type="tns:TickerLinkArray" />
+  </wsdl:message>
+  <wsdl:message name="setTickerLinksRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="tickerLinks" type="tns:TickerLinkArray" />
+  </wsdl:message>
+  <wsdl:message name="setTickerLinksResponse" />
+  <wsdl:portType name="TickerControllerPortType">
+    <wsdl:operation name="getSessionKey">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getSessionKeyRequest" />
+      <wsdl:output message="tns:getSessionKeyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTickerLinks">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getTickerLinksRequest" />
+      <wsdl:output message="tns:getTickerLinksResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setTickerLinks">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:setTickerLinksRequest" />
+      <wsdl:output message="tns:setTickerLinksResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TickerControllerBinding" type="tns:TickerControllerPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getSessionKey">
+      <soap:operation soapAction="urn:TickerControllerwsdl#getSessionKey" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:TickerControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:TickerControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTickerLinks">
+      <soap:operation soapAction="urn:TickerControllerwsdl#getTickerLinks" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:TickerControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:TickerControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setTickerLinks">
+      <soap:operation soapAction="urn:TickerControllerwsdl#setTickerLinks" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:TickerControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:TickerControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TickerControllerService">
+    <wsdl:port name="TickerControllerPort" binding="tns:TickerControllerBinding">
+      <soap:address location="http://localhost/SalesLibraries/ticker/quote?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

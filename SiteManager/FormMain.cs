@@ -36,6 +36,7 @@ namespace SalesDepot.SiteManager
 				var image = new Bitmap(SettingsManager.Instance.LogoPath);
 				labelItemUsersLogo.Image = image;
 				labelItemActivitiesLogo.Image = image;
+				labelItemTickerLogo.Image = image;
 			}
 
 			MainController.Instance.InitializeControllers();
@@ -51,6 +52,8 @@ namespace SalesDepot.SiteManager
 				key = TabPageEnum.Users;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemActivities)
 				key = TabPageEnum.Activities;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemTicker)
+				key = TabPageEnum.Ticker;
 			MainController.Instance.ShowTab(key);
 		}
 
@@ -87,15 +90,5 @@ namespace SalesDepot.SiteManager
 			_enter = false;
 		}
 		#endregion
-
-		private void buttonItemActivitiesViewsReport2_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void buttonItemActivitiesViewsReport5_Click(object sender, EventArgs e)
-		{
-
-		}
 	}
 }

@@ -7,6 +7,7 @@ using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.SiteManager;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ConfigurationClasses;
+using SalesDepot.SiteManager.Controllers;
 using SalesDepot.SiteManager.ToolForms;
 
 namespace FileManager.Controllers
@@ -33,6 +34,7 @@ namespace FileManager.Controllers
 		#region Controllers
 		public UsersController UsersController { get; private set; }
 		public ActivitiesController ActivitiesController { get; private set; }
+		public TickerController TickerController { get; private set; }
 		#endregion
 
 		private MainController()
@@ -61,6 +63,8 @@ namespace FileManager.Controllers
 							Application.DoEvents();
 							ActivitiesController.InitController();
 							Application.DoEvents();
+							TickerController.InitController();
+							Application.DoEvents();
 						});
 					});
 				formProgress.Show();
@@ -82,6 +86,8 @@ namespace FileManager.Controllers
 			_controllers.Add(TabPageEnum.Users, UsersController);
 			ActivitiesController = new ActivitiesController();
 			_controllers.Add(TabPageEnum.Activities, ActivitiesController);
+			TickerController = new TickerController();
+			_controllers.Add(TabPageEnum.Ticker, TickerController);
 		}
 
 		public void LoadDataAndGUI()
@@ -101,6 +107,9 @@ namespace FileManager.Controllers
 					break;
 				case TabPageEnum.Activities:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemActivities;
+					break;
+				case TabPageEnum.Ticker:
+					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemTicker;
 					break;
 			}
 		}
@@ -125,7 +134,8 @@ namespace FileManager.Controllers
 	public enum TabPageEnum
 	{
 		Users,
-		Activities
+		Activities,
+		Ticker
 	}
 
 	public interface IPageController

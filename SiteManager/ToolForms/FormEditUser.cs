@@ -59,6 +59,9 @@ namespace SalesDepot.SiteManager.ToolForms
 			textEditLastName.Enter += FormMain.Instance.Editor_Enter;
 			textEditLastName.MouseUp += FormMain.Instance.Editor_MouseUp;
 			textEditLastName.MouseDown += FormMain.Instance.Editor_MouseDown;
+			textEditPhone.Enter += FormMain.Instance.Editor_Enter;
+			textEditPhone.MouseUp += FormMain.Instance.Editor_MouseUp;
+			textEditPhone.MouseDown += FormMain.Instance.Editor_MouseDown;
 			textEditEmail.Enter += FormMain.Instance.Editor_Enter;
 			textEditEmail.MouseUp += FormMain.Instance.Editor_MouseUp;
 			textEditEmail.MouseDown += FormMain.Instance.Editor_MouseDown;
@@ -97,6 +100,7 @@ namespace SalesDepot.SiteManager.ToolForms
 				textEditLogin.Focus();
 				textEditFirstName.Focus();
 				textEditLastName.Focus();
+				textEditPhone.Focus();
 				textEditEmail.Focus();
 				textEditEmailConfirm.Focus();
 				buttonEditPassword.Focus();

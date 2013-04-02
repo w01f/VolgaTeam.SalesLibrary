@@ -12,6 +12,7 @@ namespace SalesDepot.Services.IPadAdminService
 		public string FirstName { get; set; }
 		public string LastName { get; set; }
 		public string Email { get; set; }
+		public string Phone { get; set; }
 		public List<GroupRecord> Groups { get; private set; }
 		public List<LibraryPage> Pages { get; private set; }
 

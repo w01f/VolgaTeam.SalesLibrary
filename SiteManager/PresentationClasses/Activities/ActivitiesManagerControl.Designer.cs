@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.buttonXLoadData = new DevComponents.DotNetBar.ButtonX();
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
@@ -51,10 +50,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties.VistaTimeProperties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dateEditStart.Properties)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// defaultLookAndFeel
-			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
 			// 
 			// buttonXLoadData
 			// 
@@ -218,7 +213,6 @@
 
         #endregion
 
-		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
 		private DevComponents.DotNetBar.ButtonX buttonXLoadData;
 		private DevComponents.DotNetBar.StyleManager styleManager;
 		private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;

@@ -59,6 +59,9 @@ namespace FileManager.ToolForms.IPad
 			textEditLastName.Enter += FormMain.Instance.EditorEnter;
 			textEditLastName.MouseUp += FormMain.Instance.EditorMouseUp;
 			textEditLastName.MouseDown += FormMain.Instance.EditorMouseDown;
+			textEditPhone.Enter += FormMain.Instance.EditorEnter;
+			textEditPhone.MouseUp += FormMain.Instance.EditorMouseUp;
+			textEditPhone.MouseDown += FormMain.Instance.EditorMouseDown;
 			textEditEmail.Enter += FormMain.Instance.EditorEnter;
 			textEditEmail.MouseUp += FormMain.Instance.EditorMouseUp;
 			textEditEmail.MouseDown += FormMain.Instance.EditorMouseDown;
@@ -97,6 +100,7 @@ namespace FileManager.ToolForms.IPad
 				textEditLogin.Focus();
 				textEditFirstName.Focus();
 				textEditLastName.Focus();
+				textEditPhone.Focus();
 				textEditEmail.Focus();
 				textEditEmailConfirm.Focus();
 				buttonEditPassword.Focus();

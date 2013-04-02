@@ -210,6 +210,7 @@ namespace FileManager.PresentationClasses.IPad
 					string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -218,7 +219,7 @@ namespace FileManager.PresentationClasses.IPad
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -272,6 +273,7 @@ namespace FileManager.PresentationClasses.IPad
 					formEdit.textEditLogin.EditValue = userRecord.login;
 					formEdit.textEditFirstName.EditValue = userRecord.firstName;
 					formEdit.textEditLastName.EditValue = userRecord.lastName;
+					formEdit.textEditPhone.EditValue = userRecord.phone;
 					formEdit.textEditEmail.EditValue = userRecord.email;
 					formEdit.textEditEmailConfirm.EditValue = userRecord.email;
 					if (formEdit.ShowDialog() == DialogResult.OK)
@@ -281,6 +283,7 @@ namespace FileManager.PresentationClasses.IPad
 						string firstName = formEdit.textEditFirstName.EditValue != null ? formEdit.textEditFirstName.EditValue.ToString() : string.Empty;
 						string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 						string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
+						string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 						var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 						var pages = new List<LibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
@@ -289,7 +292,7 @@ namespace FileManager.PresentationClasses.IPad
 							Enabled = false;
 							form.laProgress.Text = "Updating user...";
 							form.TopMost = true;
-							var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, groups.ToArray(), pages.ToArray(), out message));
+							var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
 							form.Show();
 							thread.Start();
 							while (thread.IsAlive)
