@@ -70,6 +70,7 @@
 					$activity->firstName = $activityRecord->userActivity->first_name;
 					$activity->lastName = $activityRecord->userActivity->last_name;
 					$activity->email = $activityRecord->userActivity->email;
+					$activity->phone = $activityRecord->userActivity->phone;
 					$activity->ip = $activityRecord->userActivity->ip;
 					$activity->os = $activityRecord->userActivity->os;
 					$activity->device = $activityRecord->userActivity->device;

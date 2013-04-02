@@ -27,9 +27,7 @@ select g.name,
                       from tbl_group as g
                               join tbl_user_group as ug on ug.id_group = g.id
                               join tbl_user as u on u.id = ug.id_user
-                              left join tbl_statistic_user as su on su.login = u.login
-                              left join tbl_statistic_activity as sact on sact.id = su.id_activity and sact.date_time >= start_date and sact.date_time <= end_date
-                      where sact.id is null
+                      where u.login not in (select su.login from tbl_statistic_user as su join tbl_statistic_activity as sact on sact.id = su.id_activity and sact.date_time >= start_date and sact.date_time <= end_date)
                       group by g.name
                     ) as inactive on inactive.name = g.name
   group by g.name;

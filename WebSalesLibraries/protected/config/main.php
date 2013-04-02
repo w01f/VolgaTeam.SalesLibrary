@@ -12,6 +12,7 @@ return array(
         'application.models.wallbin.*',
         'application.models.favorites.*',
 		'application.models.statistic.*',
+		'application.models.ticker.*',
         'application.components.*',
         'application.components.widgets.*',
         'application.components.core.*',

@@ -42,6 +42,11 @@
 		 */
 		public $email;
 		/**
+		 * @var string email
+		 * @soap
+		 */
+		public $phone;
+		/**
 		 * @var string groups
 		 * @soap
 		 */

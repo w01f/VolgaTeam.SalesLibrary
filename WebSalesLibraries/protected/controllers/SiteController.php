@@ -11,8 +11,9 @@
 		public function actionIndex()
 		{
 			$libraryManager = new LibraryManager();
+			$tickerRecords = TickerLinkStorage::getLinks();
 			if (count($libraryManager->getLibraries()) > 0)
-				$this->render('index');
+				$this->render('index', array('tickerRecords' => $tickerRecords));
 			else
 				$this->render('unauthorized');
 		}

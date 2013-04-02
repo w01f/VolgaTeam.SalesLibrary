@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `tbl_user` (
   `first_name` varchar(200) DEFAULT NULL,
   `last_name` varchar(200) DEFAULT NULL,
   `email` varchar(200) NOT NULL,
+  `phone` varchar(200) NULL,
   `company` varchar(200) DEFAULT NULL,
   `role` int(11) NOT NULL DEFAULT '0' COMMENT '1-admin 2-super 0-user',
   PRIMARY KEY (`id`)

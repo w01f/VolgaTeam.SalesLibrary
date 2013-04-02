@@ -27,6 +27,7 @@
 						$detailRecord->first_name = $userRecord->first_name;
 						$detailRecord->last_name = $userRecord->last_name;
 						$detailRecord->email = $userRecord->email;
+						$detailRecord->phone = $userRecord->phone;
 
 						$userGroupIds = UserGroupStorage::getGroupIdsByUser($userRecord->id);
 						if (isset($userGroupIds))

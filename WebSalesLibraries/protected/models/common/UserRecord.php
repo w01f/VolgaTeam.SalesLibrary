@@ -32,6 +32,11 @@ class UserRecord
      * @soap
      */        
     public $email;
+	/**
+	 * @var string email
+	 * @soap
+	 */
+	public $phone;
     /**
      * @var boolean selected
      * @soap

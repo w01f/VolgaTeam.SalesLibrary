@@ -409,7 +409,11 @@
 		if ($('#search-file-type-pdf').is(':checked'))
 			selectedFileTypes.push("pdf");
 		if ($('#search-file-type-video').is(':checked'))
+		{
 			selectedFileTypes.push("video");
+			selectedFileTypes.push("mp4");
+			selectedFileTypes.push("wmv");
+		}
 
 
 		var startDateText = $('#search-date-start').val();

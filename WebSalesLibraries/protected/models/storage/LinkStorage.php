@@ -120,7 +120,7 @@
 
 		public static function clearByIds($folderId, $linkIds)
 		{
-			if(isset($linkIds))
+			if (isset($linkIds))
 				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "' and id not in ('" . implode("','", $linkIds) . "')");
 			else
 				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
@@ -283,6 +283,18 @@
 			if (isset($linkRecord) && $linkRecord->is_dead == false && $linkRecord->is_preview_not_ready == false)
 				return $linkRecord;
 			return null;
+		}
+
+		public static function getLinkByLibraryAndPageAndName($libraryName, $pageName, $linkName)
+		{
+			return Yii::app()->db->createCommand()
+				->select('link.id as link_id')
+				->from('tbl_link link')
+				->join('tbl_folder fol', 'fol.id = link.id_folder')
+				->join('tbl_page pg', 'pg.id = fol.id_page')
+				->join('tbl_library lib', 'lib.id = pg.id_library')
+				->where('link.name = :linkName and pg.name = :pageName and lib.name = :libraryName', array(':linkName' => $linkName, ':pageName' => $pageName, ':libraryName' => $libraryName))
+				->queryRow();
 		}
 
 		public static function getLinksByFolder($folderId, $allLinks, $userId)

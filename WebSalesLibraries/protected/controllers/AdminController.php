@@ -52,11 +52,12 @@
 		 * @param string First Name
 		 * @param string Last Name
 		 * @param string Email
+		 * @param string Phone
 		 * @param GroupRecord[] assigned groups
 		 * @param LibraryPage[] assigned pages
 		 * @soap
 		 */
-		public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $assignedGroups, $assignedPages)
+		public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $phone, $assignedGroups, $assignedPages)
 		{
 			$newUser = false;
 			$resetPassword = false;
@@ -72,6 +73,7 @@
 				$user->first_name = $firstName;
 				$user->last_name = $lastName;
 				$user->email = $email;
+				$user->phone = $phone;
 				if ($password !== '')
 				{
 					$user->password = md5($password);
@@ -129,6 +131,7 @@
 					$user->firstName = $userRecord->first_name;
 					$user->lastName = $userRecord->last_name;
 					$user->email = $userRecord->email;
+					$user->phone = $userRecord->phone;
 
 					$assignedLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userRecord->id);
 					$totalLibraries = LibraryStorage::model()->count();

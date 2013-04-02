@@ -291,7 +291,6 @@
 	{
 		$('#ribbon').ribbon();
 		$('a#view-dialog-link').fancybox();
-
 		$.cookie("recoverSearchState" + "search-full-tab", false, {
 			expires:(60 * 60 * 24 * 7)
 		});

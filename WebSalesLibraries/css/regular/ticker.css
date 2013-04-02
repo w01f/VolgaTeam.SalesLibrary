@@ -1,0 +1,21 @@
+body
+{
+    padding-top: 173px;
+}
+#ribbon
+{
+    top: 33px;
+}
+.modern-ticker
+{
+	z-index: 25;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+.mt-news li
+{
+	line-height: 30px;
+}

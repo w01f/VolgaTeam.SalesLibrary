@@ -16,7 +16,11 @@
 		if ($('#search-file-type-pdf').hasClass('active'))
 			selectedFileTypes.push("pdf");
 		if ($('#search-file-type-video').hasClass('active'))
+		{
 			selectedFileTypes.push("video");
+			selectedFileTypes.push("mp4");
+			selectedFileTypes.push("wmv");
+		}
 
 		var dateString = $('#condition-date-range').find('input').val().split(" - ");
 		if (dateString.length == 2)
