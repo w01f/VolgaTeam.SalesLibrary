@@ -104,6 +104,13 @@
 					),
 					'help_request_address' => 'billy@newlocaldirect.com',
 				),
+				'ticker' => array(
+					'visible' => true,
+					'show_label' => true,
+					'show_control' => true,
+					'effect' => 'slide',
+					'theme' => 6,
+				),
 			),
 			'components' => array(
 				'db' => array(
