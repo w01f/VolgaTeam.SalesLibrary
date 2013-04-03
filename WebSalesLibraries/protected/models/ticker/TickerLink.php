@@ -29,9 +29,10 @@
 
 		public function getDetailByKey($key)
 		{
-			foreach ($this->details as $detail)
-				if ($detail->tag == $key)
-					return $detail->data;
+			if (isset($this->details))
+				foreach ($this->details as $detail)
+					if ($detail->tag == $key)
+						return $detail->data;
 			return '';
 		}
 	}
