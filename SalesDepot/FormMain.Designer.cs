@@ -1438,7 +1438,7 @@
 			this.buttonItemSettingsMultitab.AutoCheckOnClick = true;
 			this.buttonItemSettingsMultitab.Name = "buttonItemSettingsMultitab";
 			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsMultitab, new DevComponents.DotNetBar.SuperTooltipInfo("Multi-Tabs", "", "Display Sales Library page names in tabs for more efficient browsing", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsMultitab.Text = " Multi-Tabs\r\n   Enabled";
+			this.buttonItemSettingsMultitab.Text = " Page Tabs\r\n   Enabled";
 			// 
 			// ribbonPanelProgramSearch
 			// 

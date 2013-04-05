@@ -22,8 +22,10 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		{
 			Page = page;
 			Parent = parent;
-			Container = new XtraScrollableControl();
+			Container = new Panel();
 			Container.Resize += WallBin_Resize;
+			ScrollBox = new XtraScrollableControl();
+			Container.Controls.Add(ScrollBox);
 			TabPage = new XtraTabPage();
 			TabPage.Tag = this;
 			TabPage.Text = page.Name.Replace("&", "&&");
@@ -34,7 +36,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		}
 
 		public LibraryPage Page { get; private set; }
-		public XtraScrollableControl Container { get; private set; }
+		public Panel Container { get; private set; }
+		public XtraScrollableControl ScrollBox { get; private set; }
 		public XtraTabPage TabPage { get; private set; }
 		public LibraryDecorator Parent { get; private set; }
 		public FolderBoxControl ActiveBox { get; set; }
@@ -54,27 +57,30 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		private void BuildDisplayBoxes()
 		{
-			foreach (var box in _boxes)
+			foreach (FolderBoxControl box in _boxes)
 				box.Dispose();
 			_boxes.Clear();
 
 			Page.Folders.Sort((x, y) => x.ColumnOrder.CompareTo(y.ColumnOrder) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.ColumnOrder.CompareTo(y.ColumnOrder));
-			foreach (var folder in Page.Folders)
+			foreach (LibraryFolder folder in Page.Folders)
 			{
 				var box = new FolderBoxControl { Folder = folder, Decorator = this };
 				box.ContentVisibilityChanged += (o, e) =>
 													{
-														foreach (var boxControl in _boxes.Where(boxControl => o != boxControl))
+														foreach (FolderBoxControl boxControl in _boxes.Where(boxControl => o != boxControl))
 															boxControl.ContentExpanded = false;
 														UpdatePageContent();
 													};
 				_boxes.Add(box);
 			}
 		}
+
 		private void BuildPage()
 		{
 			Container.Dock = DockStyle.Fill;
-			Container.AlwaysScrollActiveControlIntoView = false;
+			Container.BorderStyle = BorderStyle.None;
+			ScrollBox.Dock = DockStyle.Fill;
+			ScrollBox.AlwaysScrollActiveControlIntoView = false;
 			BuildColumnTitles();
 			BuildColumns();
 		}
@@ -88,7 +94,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 				_headerPanel.Height = 0;
 				_headerPanel.Dock = DockStyle.Top;
 				Container.Controls.Add(_headerPanel);
-				_headerPanel.BringToFront();
+				_headerPanel.SendToBack();
 
 				foreach (ColumnTitle columnTitle in Page.ColumnTitles)
 				{
@@ -103,10 +109,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		private void BuildColumns()
 		{
 			_parentPanel = new Panel();
-			_parentPanel.BorderStyle = BorderStyle.None;
-			_parentPanel.Height = Container.Height;
+			_parentPanel.Height = ScrollBox.Height;
 			_parentPanel.Dock = DockStyle.Top;
-			Container.Controls.Add(_parentPanel);
+			ScrollBox.Controls.Add(_parentPanel);
 			_parentPanel.BringToFront();
 
 			var panel = new ColumnPanel();
@@ -197,7 +202,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		public void UpdatePageContent()
 		{
-			foreach (var box in _boxes)
+			foreach (FolderBoxControl box in _boxes)
 				box.SetGridFont(SettingsManager.Instance.FontSize);
 
 			UpdateView();
