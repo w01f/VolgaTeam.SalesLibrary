@@ -15,13 +15,21 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 		public bool EnableFilter { get; private set; }
 		public event EventHandler<EventArgs> FilterChanged;
 
+		public bool ShowUsers
+		{
+			get { return checkEditShowUsers.Checked; }
+		}
+		public bool ShowGroups
+		{
+			get { return checkEditShowGroups.Checked; }
+		}
 		public bool ShowNumber
 		{
-			get { return checkEditShowNumber.Checked; }
+			get { return checkEditShowNumber.Checked & ShowUsers; }
 		}
 		public bool ShowPercent
 		{
-			get { return checkEditShowPercent.Checked; }
+			get { return checkEditShowPercent.Checked & ShowUsers; }
 		}
 		public event EventHandler<EventArgs> ColumnsChanged;
 

@@ -39,11 +39,15 @@
 			this.labelControlColumnsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.checkEditShowNumber = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditShowPercent = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditShowUsers = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditShowGroups = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowNumber.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowPercent.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowUsers.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowGroups.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// checkEditEnableFilter
@@ -87,7 +91,7 @@
 			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 264);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 219);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
@@ -135,7 +139,7 @@
 			// labelControlColumnsTitle
 			// 
 			this.labelControlColumnsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.labelControlColumnsTitle.Location = new System.Drawing.Point(10, 377);
+			this.labelControlColumnsTitle.Location = new System.Drawing.Point(10, 316);
 			this.labelControlColumnsTitle.Name = "labelControlColumnsTitle";
 			this.labelControlColumnsTitle.Size = new System.Drawing.Size(55, 16);
 			this.labelControlColumnsTitle.StyleController = this.styleController;
@@ -146,11 +150,11 @@
 			// 
 			this.checkEditShowNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowNumber.EditValue = true;
-			this.checkEditShowNumber.Location = new System.Drawing.Point(8, 399);
+			this.checkEditShowNumber.Location = new System.Drawing.Point(8, 338);
 			this.checkEditShowNumber.Name = "checkEditShowNumber";
 			this.checkEditShowNumber.Properties.AutoWidth = true;
 			this.checkEditShowNumber.Properties.Caption = "Show #";
-			this.checkEditShowNumber.Size = new System.Drawing.Size(65, 21);
+			this.checkEditShowNumber.Size = new System.Drawing.Size(66, 21);
 			this.checkEditShowNumber.StyleController = this.styleController;
 			this.checkEditShowNumber.TabIndex = 20;
 			this.checkEditShowNumber.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
@@ -159,19 +163,47 @@
 			// 
 			this.checkEditShowPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowPercent.EditValue = true;
-			this.checkEditShowPercent.Location = new System.Drawing.Point(103, 399);
+			this.checkEditShowPercent.Location = new System.Drawing.Point(103, 338);
 			this.checkEditShowPercent.Name = "checkEditShowPercent";
 			this.checkEditShowPercent.Properties.AutoWidth = true;
 			this.checkEditShowPercent.Properties.Caption = "Show %";
-			this.checkEditShowPercent.Size = new System.Drawing.Size(70, 21);
+			this.checkEditShowPercent.Size = new System.Drawing.Size(71, 21);
 			this.checkEditShowPercent.StyleController = this.styleController;
 			this.checkEditShowPercent.TabIndex = 21;
 			this.checkEditShowPercent.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
+			// 
+			// checkEditShowUsers
+			// 
+			this.checkEditShowUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditShowUsers.EditValue = true;
+			this.checkEditShowUsers.Location = new System.Drawing.Point(8, 370);
+			this.checkEditShowUsers.Name = "checkEditShowUsers";
+			this.checkEditShowUsers.Properties.AutoWidth = true;
+			this.checkEditShowUsers.Properties.Caption = "Show Users Row";
+			this.checkEditShowUsers.Size = new System.Drawing.Size(122, 21);
+			this.checkEditShowUsers.StyleController = this.styleController;
+			this.checkEditShowUsers.TabIndex = 22;
+			this.checkEditShowUsers.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
+			// 
+			// checkEditShowGroups
+			// 
+			this.checkEditShowGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditShowGroups.EditValue = true;
+			this.checkEditShowGroups.Location = new System.Drawing.Point(8, 402);
+			this.checkEditShowGroups.Name = "checkEditShowGroups";
+			this.checkEditShowGroups.Properties.AutoWidth = true;
+			this.checkEditShowGroups.Properties.Caption = "Show Libraries Row";
+			this.checkEditShowGroups.Size = new System.Drawing.Size(137, 21);
+			this.checkEditShowGroups.StyleController = this.styleController;
+			this.checkEditShowGroups.TabIndex = 23;
+			this.checkEditShowGroups.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
 			// 
 			// MainUserFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.Controls.Add(this.checkEditShowGroups);
+			this.Controls.Add(this.checkEditShowUsers);
 			this.Controls.Add(this.checkEditShowPercent);
 			this.Controls.Add(this.checkEditShowNumber);
 			this.Controls.Add(this.labelControlColumnsTitle);
@@ -188,6 +220,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowNumber.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowPercent.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowUsers.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowGroups.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -205,5 +239,7 @@
 		private DevExpress.XtraEditors.LabelControl labelControlColumnsTitle;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowNumber;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowPercent;
+		private DevExpress.XtraEditors.CheckEdit checkEditShowUsers;
+		private DevExpress.XtraEditors.CheckEdit checkEditShowGroups;
 	}
 }
