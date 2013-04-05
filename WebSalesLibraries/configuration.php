@@ -106,7 +106,8 @@
 				),
 				'ticker' => array(
 					'visible' => true,
-					'show_label' => true,
+					'show_label' => false,
+					'show_logo' => true,
 					'show_control' => true,
 					'effect' => 'slide',
 					'theme' => 6,

@@ -1,5 +1,5 @@
 <?php
-$version = '136.0';
+$version = '150.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -391,8 +391,15 @@ asort($tabParam);
 </div><!-------------------------><!---------Ticker--------->
 <?php if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords)): ?>
 	<div class="modern-ticker mt-round <?php echo Yii::app()->params['ticker']['effect']; ?>">
-		<?php if (Yii::app()->params['ticker']['show_label'] && isset($tickerRecords)): ?>
-			<div class="mt-label">NEWS:</div>
+		<?php if ((Yii::app()->params['ticker']['show_label'] || Yii::app()->params['ticker']['show_logo']) && isset($tickerRecords)): ?>
+			<div class="mt-label">
+				<?php if (Yii::app()->params['ticker']['show_logo']): ?>
+					<img src="<?php echo Yii::app()->baseUrl . '/images/tickerlogo.png?' . $version; ?>">
+				<?php endif; ?>
+				<?php if (Yii::app()->params['ticker']['show_label']): ?>
+					<span>NEWS:</span>
+				<?php endif; ?>
+			</div>
 		<?php endif; ?>
 		<div class="mt-news">
 			<ul>

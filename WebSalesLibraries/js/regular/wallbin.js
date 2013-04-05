@@ -12,46 +12,46 @@
 	{
 		var selectedLibraryName = $("#select-library").find(":selected").text();
 		$.cookie("selectedLibraryName", selectedLibraryName, {
-			expires:60 * 60 * 24 * 7
+			expires: 60 * 60 * 24 * 7
 		});
 		$.ajax({
-			type:"POST",
-			url:"statistic/writeActivity",
-			data:{
-				type:'Wallbin',
-				subType:'Library Changed',
-				data:$.toJSON({
-					Library:selectedLibraryName
+			type: "POST",
+			url: "statistic/writeActivity",
+			data: {
+				type: 'Wallbin',
+				subType: 'Library Changed',
+				data: $.toJSON({
+					Library: selectedLibraryName
 				})
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getPageDropDownList",
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getPageDropDownList",
+			beforeSend: function ()
 			{
 				$('#libraries-selector-container').css({
-					'visibility':'hidden'
+					'visibility': 'hidden'
 				});
 				$.showOverlay();
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlay();
 				$('#libraries-selector-container').css({
-					'visibility':'visible'
+					'visibility': 'visible'
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#select-page').html(msg);
 				$("#page-logo").attr('src', $("#select-library").val());
 				pageChanged();
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -59,21 +59,21 @@
 	{
 		var selectedPageName = $("#select-page").find(":selected").text();
 		$.cookie("selectedPageName", selectedPageName, {
-			expires:60 * 60 * 24 * 7
+			expires: 60 * 60 * 24 * 7
 		});
 		$("#page-logo").attr('src', $("#select-page").val());
 		$.ajax({
-			type:"POST",
-			url:"statistic/writeActivity",
-			data:{
-				type:'Wallbin',
-				subType:'Page Changed',
-				data:$.toJSON({
-					Page:selectedPageName
+			type: "POST",
+			url: "statistic/writeActivity",
+			data: {
+				type: 'Wallbin',
+				subType: 'Page Changed',
+				data: $.toJSON({
+					Page: selectedPageName
 				})
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		updateView();
 	};
@@ -81,39 +81,41 @@
 	var loadColumns = function (container)
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getColumnsView",
-			data:{},
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getColumnsView",
+			data: {},
+			beforeSend: function ()
 			{
 				$.showOverlay();
 				container.html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlay();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
-				container.html('<div>' + msg + '</div>');
+				container.html('<div class="wallbin-container">' + msg + '</div>').find('img').load(function ()
+				{
+					$.updateContentAreaDimensions();
+				});
 				assignColumnsEvents(container);
 			},
-			error:function ()
+			error: function ()
 			{
 				container.html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	var assignColumnsEvents = function (container)
 	{
-		$.updateContentAreaDimensions();
-		$.updateContentAreaDimensions();
 		$.updateTextSize(storedTextSize);
 		$.updateTextSpace(storedTextSpace);
-		container.find('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }});
+		$.updateContentAreaDimensions();
+		container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
 		container.find('.clickable')
 			.off('click')
 			.on('click', function (event)
@@ -129,7 +131,7 @@
 				loadFolderLinkContent($(this));
 				event.stopPropagation();
 			});
-	}
+	};
 
 	var loadFolderLinkContent = function (linkObject)
 	{
@@ -143,27 +145,27 @@
 			if (!folderLinkContent.find('.link-container').length && linkId != null)
 			{
 				$.ajax({
-					type:"POST",
-					url:"wallbin/getLinkFolderContent",
-					data:{
-						linkId:linkId
+					type: "POST",
+					url: "wallbin/getLinkFolderContent",
+					data: {
+						linkId: linkId
 					},
-					beforeSend:function ()
+					beforeSend: function ()
 					{
 						$.showOverlayLight();
 						folderLinkContent.html('');
 					},
-					complete:function ()
+					complete: function ()
 					{
 						$.hideOverlayLight();
 					},
-					success:function (msg)
+					success: function (msg)
 					{
 						folderLinkContent.html(msg);
 						$.updateTextSize(storedTextSize);
 						$.updateTextSpace(storedTextSpace);
 						$.updateContentAreaDimensions();
-						$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }});
+						$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
 						$('.clickable')
 							.off('click')
 							.on('click', function (event)
@@ -180,27 +182,27 @@
 								event.stopPropagation();
 							});
 						folderLinkContent.show("blind", {
-							direction:"vertical"
+							direction: "vertical"
 						}, 500);
 					},
-					error:function ()
+					error: function ()
 					{
 						folderLinkContent.html('');
 					},
-					async:true,
-					dataType:'html'
+					async: true,
+					dataType: 'html'
 				});
 			}
 			else
 				folderLinkContent.show("blind", {
-					direction:"vertical"
+					direction: "vertical"
 				}, 500);
 
 		}
 		else
 		{
 			linkObject.children('.folder-link-content').hide("blind", {
-				direction:"vertical"
+				direction: "vertical"
 			}, 500);
 			linkObject.removeClass('active');
 		}
@@ -209,29 +211,29 @@
 	var loadAccordion = function (container)
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getAccordionView",
-			data:{},
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getAccordionView",
+			data: {},
+			beforeSend: function ()
 			{
 				$.showOverlay();
 				container.html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlay();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				container.html('<div>' + msg + '</div>');
 				assignAccordionEvents(container);
 			},
-			error:function ()
+			error: function ()
 			{
 				container.html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -243,7 +245,7 @@
 			.on('click', function ()
 			{
 				container.find('.folder-header.active').parent().find('.folder-links').hide("blind", {
-					direction:"vertical"
+					direction: "vertical"
 				}, 500);
 				var justCollapse = $(this).hasClass('active');
 				container.find('.folder-header').removeClass('active');
@@ -255,7 +257,7 @@
 					showAccordionFolder(folderContainer, folderId);
 				}
 			});
-	}
+	};
 
 	var showAccordionFolder = function (folderContainer, folderId)
 	{
@@ -263,27 +265,27 @@
 		if (folderLinks.html() == '')
 		{
 			$.ajax({
-				type:"POST",
-				url:"wallbin/getFolderLinksList",
-				data:{
-					folderId:folderId
+				type: "POST",
+				url: "wallbin/getFolderLinksList",
+				data: {
+					folderId: folderId
 				},
-				beforeSend:function ()
+				beforeSend: function ()
 				{
 					$.showOverlayLight();
 					folderLinks.html('');
 				},
-				complete:function ()
+				complete: function ()
 				{
 					$.hideOverlayLight();
 				},
-				success:function (msg)
+				success: function (msg)
 				{
 					folderLinks.html(msg);
 					$.updateTextSize(storedTextSize);
 					$.updateTextSpace(storedTextSpace);
 					$.updateContentAreaDimensions();
-					$('.link-text, .banner-container').tooltip({animation:false, trigger:'hover', placement:'top', delay:{ show:500, hide:100 }});
+					$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
 					$('.clickable')
 						.off('click')
 						.on('click', function (event)
@@ -300,51 +302,51 @@
 							event.stopPropagation();
 						});
 					folderLinks.show("blind", {
-						direction:"vertical"
+						direction: "vertical"
 					}, 500);
 				},
-				error:function ()
+				error: function ()
 				{
 					folderLinks.html('');
 				},
-				async:true,
-				dataType:'html'
+				async: true,
+				dataType: 'html'
 			});
 		}
 		else
 			folderLinks.show("blind", {
-				direction:"vertical"
+				direction: "vertical"
 			}, 500);
 	};
 
 	var loadTabs = function (container)
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getTabsView",
-			data:{
-				wallbinView:$.cookie("wallbinView")
+			type: "POST",
+			url: "wallbin/getTabsView",
+			data: {
+				wallbinView: $.cookie("wallbinView")
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$.showOverlay();
 				container.html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlay();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				container.html('<div class="wallbin-tabs">' + msg + '</div>');
 				var tabPages = container.find('.wallbin-tabs')
 				tabPages.tabs({
-					selected:$("#select-page")[0].selectedIndex,
-					select:function (event, ui)
+					selected: $("#select-page")[0].selectedIndex,
+					select: function (event, ui)
 					{
 						var selectedPageName = $(ui.tab).text();
 						$.cookie("selectedPageName", selectedPageName, {
-							expires:60 * 60 * 24 * 7
+							expires: 60 * 60 * 24 * 7
 						});
 						$("#select-page")[0].selectedIndex = ui.index;
 						$("#page-logo").attr('src', $("#select-page").val());
@@ -353,17 +355,17 @@
 						else
 							loadColumns($(ui.panel));
 						$.ajax({
-							type:"POST",
-							url:"statistic/writeActivity",
-							data:{
-								type:'Wallbin',
-								subType:'Page Changed',
-								data:$.toJSON({
-									Page:selectedPageName
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Wallbin',
+								subType: 'Page Changed',
+								data: $.toJSON({
+									Page: selectedPageName
 								})
 							},
-							async:true,
-							dataType:'html'
+							async: true,
+							dataType: 'html'
 						});
 					}
 				});
@@ -372,14 +374,14 @@
 				else
 					assignColumnsEvents(container);
 			},
-			error:function ()
+			error: function ()
 			{
 				container.html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
-	}
+	};
 
 	var updateView = function ()
 	{
@@ -417,30 +419,30 @@
 	$.initWallbinView = function ()
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getLibraryDropDownList",
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getLibraryDropDownList",
+			beforeSend: function ()
 			{
 				$('#content').html('');
 				$.showOverlay();
 				$('#libraries-selector-container').css({
-					'visibility':'hidden'
+					'visibility': 'hidden'
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$('#libraries-selector-container').css({
-					'visibility':'visible'
+					'visibility': 'visible'
 				});
 				$.hideOverlay();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#select-library').html(msg);
 				libraryChanged();
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -492,7 +494,7 @@
 		{
 			$('#columns-view,#accordion-view').removeClass('active');
 			$.cookie("wallbinView", "columns", {
-				expires:60 * 60 * 24 * 7
+				expires: 60 * 60 * 24 * 7
 			});
 			updateView();
 		});
@@ -501,7 +503,7 @@
 		{
 			$('#columns-view,#accordion-view').removeClass('active');
 			$.cookie("wallbinView", "accordion", {
-				expires:60 * 60 * 24 * 7
+				expires: 60 * 60 * 24 * 7
 			});
 			updateView();
 		});
@@ -510,7 +512,7 @@
 		{
 			var tabToggle = $('#tabs-view');
 			$.cookie("wallbinUseTabs", !tabToggle.hasClass('active'), {
-				expires:60 * 60 * 24 * 7
+				expires: 60 * 60 * 24 * 7
 			});
 			updateView();
 		});

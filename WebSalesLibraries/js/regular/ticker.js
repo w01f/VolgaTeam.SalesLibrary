@@ -2,15 +2,15 @@
 {
 	$(document).ready(function ()
 	{
-		var ticker =$(".modern-ticker");
+		var ticker = $(".modern-ticker");
 		var effect = "scroll";
-		if(ticker.hasClass('scroll'))
+		if (ticker.hasClass('scroll'))
 			effect = "scroll";
-		else if(ticker.hasClass('fade'))
+		else if (ticker.hasClass('fade'))
 			effect = "fade";
-		else if(ticker.hasClass('type'))
+		else if (ticker.hasClass('type'))
 			effect = "type";
-		else if(ticker.hasClass('slide'))
+		else if (ticker.hasClass('slide'))
 			effect = "slide";
 		ticker.modernTicker({
 			effect: effect,
@@ -20,6 +20,9 @@
 			typeInterval: 10,
 			slideDistance: 100,
 			autoplay: true
+		});
+		$(".mt-label").css({
+			width: 'auto'
 		});
 		$('.modern-ticker .ticker-link.link').off('click').on('click', function ()
 		{
@@ -31,6 +34,7 @@
 			event.preventDefault();
 			event.stopPropagation();
 			$.viewSelectedFormat($(this), false, false);
-		} );
+		});
 	});
-})(jQuery);
+})
+	(jQuery);
