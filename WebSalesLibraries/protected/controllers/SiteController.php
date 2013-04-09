@@ -119,7 +119,7 @@
 			{
 				$password = UserStorage::generatePassword();
 				UserStorage::changePassword($login, $password);
-				ResetPasswordStorage::resetPasswordForUser($login, $password, false);
+				ResetPasswordStorage::resetPasswordForUser($login, $password, false,true);
 			}
 		}
 

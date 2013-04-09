@@ -48,6 +48,11 @@ class UserRecord
      */
     public $groups;
 	/**
+	 * @var string
+	 * @soap
+	 */
+	public $groupNames;
+	/**
 	 * @var boolean selected
 	 * @soap
 	 */

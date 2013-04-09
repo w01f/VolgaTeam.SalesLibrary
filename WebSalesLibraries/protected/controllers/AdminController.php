@@ -88,7 +88,7 @@
 					UserLibraryStorage::assignPagesForUser($login, $assignedPages);
 
 				if ($resetPassword)
-					ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser);
+					ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser,true);
 			}
 		}
 
@@ -100,18 +100,7 @@
 		public function deleteUser($sessionKey, $login)
 		{
 			if ($this->authenticateBySession($sessionKey))
-			{
-				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
-				if (isset($userRecord))
-				{
-					UserLibraryStorage::clearObjectsByUser($userRecord->id);
-					UserGroupStorage::clearObjectsByUser($userRecord->id);
-					UserStorage::model()->deleteByPk($userRecord->id);
-					FavoritesLinkStorage::clearByUser($userRecord->id);
-					FavoritesFolderStorage::clearByUser($userRecord->id);
-					ResetPasswordStorage::model()->deleteAll('LOWER(login)=?', array(strtolower($login)));
-				}
-			}
+				UserStorage::deleteUserByLogin($login);
 		}
 
 		/**

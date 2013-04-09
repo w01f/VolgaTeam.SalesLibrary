@@ -65,4 +65,18 @@ class UserStorage extends CActiveRecord
             $userIds[] = $user->id;
         return isset($userIds) ? $userIds : null;
     }
+
+	public static function deleteUserByLogin( $login)
+	{
+		$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+		if (isset($userRecord))
+		{
+			UserLibraryStorage::clearObjectsByUser($userRecord->id);
+			UserGroupStorage::clearObjectsByUser($userRecord->id);
+			UserStorage::model()->deleteByPk($userRecord->id);
+			FavoritesLinkStorage::clearByUser($userRecord->id);
+			FavoritesFolderStorage::clearByUser($userRecord->id);
+			ResetPasswordStorage::model()->deleteAll('LOWER(login)=?', array(strtolower($login)));
+		}
+	}
 }

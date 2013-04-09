@@ -21,6 +21,7 @@ class RequireLogin extends CBehavior
             !strstr(Yii::app()->request->getUrl(), 'admin/') &&
 			!strstr(Yii::app()->request->getUrl(), 'statistic/') &&
 			!strstr(Yii::app()->request->getUrl(), 'ticker/') &&
+			!strstr(Yii::app()->request->getUrl(), 'inactiveusers/') &&
             !strstr(Yii::app()->request->getUrl(), 'content/'))
         {
             Yii::app()->user->loginRequired();
