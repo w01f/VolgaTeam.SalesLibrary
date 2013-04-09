@@ -14,5 +14,8 @@
     <Setting Name="SalesDepot_Services_TickerService_TickerControllerService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost/SalesLibraries/ticker/quote?ws=1</Value>
     </Setting>
+    <Setting Name="SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost/SalesLibraries/inactiveusers/quote?ws=1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

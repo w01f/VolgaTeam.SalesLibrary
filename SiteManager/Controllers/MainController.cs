@@ -35,6 +35,7 @@ namespace FileManager.Controllers
 		public UsersController UsersController { get; private set; }
 		public ActivitiesController ActivitiesController { get; private set; }
 		public TickerController TickerController { get; private set; }
+		public InactiveUsersController InactiveUsersController { get; private set; }
 		#endregion
 
 		private MainController()
@@ -65,6 +66,8 @@ namespace FileManager.Controllers
 							Application.DoEvents();
 							TickerController.InitController();
 							Application.DoEvents();
+							InactiveUsersController.InitController();
+							Application.DoEvents();
 						});
 					});
 				formProgress.Show();
@@ -88,6 +91,8 @@ namespace FileManager.Controllers
 			_controllers.Add(TabPageEnum.Activities, ActivitiesController);
 			TickerController = new TickerController();
 			_controllers.Add(TabPageEnum.Ticker, TickerController);
+			InactiveUsersController = new InactiveUsersController();
+			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
 		}
 
 		public void LoadDataAndGUI()
@@ -110,6 +115,9 @@ namespace FileManager.Controllers
 					break;
 				case TabPageEnum.Ticker:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemTicker;
+					break;
+				case TabPageEnum.InactiveUsers:
+					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemInactiveUsers;
 					break;
 			}
 		}
@@ -135,7 +143,8 @@ namespace FileManager.Controllers
 	{
 		Users,
 		Activities,
-		Ticker
+		Ticker,
+		InactiveUsers
 	}
 
 	public interface IPageController

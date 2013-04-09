@@ -81,13 +81,6 @@ namespace SalesDepot.SiteManager.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap ExportExcel {
-            get {
-                object obj = ResourceManager.GetObject("ExportExcel", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap ExportGroup {
             get {
                 object obj = ResourceManager.GetObject("ExportGroup", resourceCulture);

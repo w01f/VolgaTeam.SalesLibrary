@@ -1,0 +1,223 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
+using SalesDepot.Services.InactiveUsersService;
+using SalesDepot.SiteManager.ConfigurationClasses;
+using SalesDepot.SiteManager.ToolForms;
+
+namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
+{
+	[ToolboxItem(false)]
+	public partial class InactiveUsersManagerControl : UserControl
+	{
+		private readonly List<UserRecord> _records = new List<UserRecord>();
+		private readonly InactiveUsersFilter _filterControl;
+
+		public InactiveUsersManagerControl()
+		{
+			InitializeComponent();
+			Dock = DockStyle.Fill;
+
+			var now = DateTime.Now;
+			dateEditStart.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+			now = now.AddDays(1);
+			dateEditEnd.DateTime = new DateTime(now.Year, now.Month, now.Day, 0, 0, 0);
+
+			_filterControl = new InactiveUsersFilter();
+			_filterControl.FilterChanged += (o, e) => ApplyData();
+			pnCustomFilter.Controls.Add(_filterControl);
+
+			LoadDefaultEmailSettings();
+		}
+
+		public void RefreshData(bool showMessages)
+		{
+			ClearData();
+			var startDate = dateEditStart.DateTime;
+			var endDate = dateEditEnd.DateTime.AddDays(1);
+			var message = string.Empty;
+			if (showMessages)
+			{
+				using (var form = new FormProgress())
+				{
+					FormMain.Instance.ribbonControl.Enabled = false;
+					Enabled = false;
+					form.laProgress.Text = "Loading data...";
+					form.TopMost = true;
+					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetInactiveUsers(startDate, endDate, out message)));
+					form.Show();
+					thread.Start();
+					while (thread.IsAlive)
+					{
+						Thread.Sleep(100);
+						Application.DoEvents();
+					}
+					form.Close();
+					Enabled = true;
+					FormMain.Instance.ribbonControl.Enabled = true;
+				}
+				if (!string.IsNullOrEmpty(message))
+					AppManager.Instance.ShowWarning(message);
+			}
+			else
+			{
+				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetInactiveUsers(startDate, endDate, out message)));
+				thread.Start();
+				while (thread.IsAlive)
+				{
+					Thread.Sleep(100);
+					Application.DoEvents();
+				}
+			}
+			_filterControl.UpdateDataSource(_records.SelectMany(x => x.GroupNameList).Distinct().ToArray());
+			ApplyData();
+		}
+
+		public void ClearData()
+		{
+			gridControlRecords.DataSource = null;
+			_records.Clear();
+		}
+
+		private void ApplyData()
+		{
+			var filteredRecords = new List<UserRecord>();
+			_records.ForEach(x => x.Selected = false);
+			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(x => x.GroupNameList.Any(y => _filterControl.SelectedGroups.Contains(y))) : _records);
+			gridControlRecords.DataSource = filteredRecords;
+			UpdateUsersCount();
+		}
+
+		private void ResetUsers()
+		{
+			var message = string.Empty;
+
+			var userIds = _records.Where(x => x.Selected).Select(x => x.id.ToString()).ToArray();
+			var onlyEmail = !_filterControl.EmailReset;
+			var sender = textEditEmailResetSender.EditValue != null ? textEditEmailResetSender.EditValue.ToString() : string.Empty;
+			var subject = textEditEmailResetSubject.EditValue != null ? textEditEmailResetSubject.EditValue.ToString() : string.Empty;
+			var body = memoEditEmailResetBody.EditValue != null ? memoEditEmailResetBody.EditValue.ToString() : string.Empty;
+
+			SettingsManager.Instance.InactiveUsersSettings.ResetEmailSender = sender;
+			SettingsManager.Instance.InactiveUsersSettings.ResetEmailSubject = subject;
+			SettingsManager.Instance.InactiveUsersSettings.ResetEmailBody = body;
+			SettingsManager.Instance.InactiveUsersSettings.Save();
+
+			if (userIds.Length == 0 || string.IsNullOrEmpty(sender)) return;
+
+			using (var form = new FormProgress())
+			{
+				FormMain.Instance.ribbonControl.Enabled = false;
+				Enabled = false;
+				form.laProgress.Text = "Sending Emails...";
+				form.TopMost = true;
+
+				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.ResetUsers(userIds, onlyEmail, sender, subject, body, out message));
+				form.Show();
+				thread.Start();
+				while (thread.IsAlive)
+				{
+					Thread.Sleep(100);
+					Application.DoEvents();
+				}
+				if (string.IsNullOrEmpty(message))
+					RefreshData(false);
+				form.Close();
+				Enabled = true;
+				FormMain.Instance.ribbonControl.Enabled = true;
+			}
+
+			if (!string.IsNullOrEmpty(message))
+				RefreshData(true);
+		}
+
+		private void DeleteUsers()
+		{
+			var message = string.Empty;
+
+			var userIds = _records.Where(x => x.Selected).Select(x => x.id.ToString()).ToArray();
+			var onlyEmail = !_filterControl.EmailDelete;
+			var sender = textEditEmailDeleteSender.EditValue != null ? textEditEmailDeleteSender.EditValue.ToString() : string.Empty;
+			var subject = textEditEmailDeleteSubject.EditValue != null ? textEditEmailDeleteSubject.EditValue.ToString() : string.Empty;
+			var body = memoEditEmailDeleteBody.EditValue != null ? memoEditEmailDeleteBody.EditValue.ToString() : string.Empty;
+
+			SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSender = sender;
+			SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSubject = subject;
+			SettingsManager.Instance.InactiveUsersSettings.DeleteEmailBody = body;
+			SettingsManager.Instance.InactiveUsersSettings.Save();
+
+			if (userIds.Length == 0 || string.IsNullOrEmpty(sender)) return;
+
+			using (var form = new FormProgress())
+			{
+				FormMain.Instance.ribbonControl.Enabled = false;
+				Enabled = false;
+				form.laProgress.Text = "Sending Emails...";
+				form.TopMost = true;
+
+				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeleteUsers(userIds, onlyEmail, sender, subject, body, out message));
+				form.Show();
+				thread.Start();
+				while (thread.IsAlive)
+				{
+					Thread.Sleep(100);
+					Application.DoEvents();
+				}
+				if (string.IsNullOrEmpty(message))
+					RefreshData(false);
+				form.Close();
+				Enabled = true;
+				FormMain.Instance.ribbonControl.Enabled = true;
+			}
+
+			if (!string.IsNullOrEmpty(message))
+				RefreshData(true);
+		}
+
+		private void LoadDefaultEmailSettings()
+		{
+			textEditEmailResetSender.EditValue = SettingsManager.Instance.InactiveUsersSettings.ResetEmailSender;
+			textEditEmailResetSubject.EditValue = SettingsManager.Instance.InactiveUsersSettings.ResetEmailSubject;
+			memoEditEmailResetBody.EditValue = SettingsManager.Instance.InactiveUsersSettings.ResetEmailBody;
+
+			textEditEmailDeleteSender.EditValue = SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSender;
+			textEditEmailDeleteSubject.EditValue = SettingsManager.Instance.InactiveUsersSettings.DeleteEmailSubject;
+			memoEditEmailDeleteBody.EditValue = SettingsManager.Instance.InactiveUsersSettings.DeleteEmailBody;
+		}
+
+		private void UpdateUsersCount()
+		{
+			var selecteUsersCount = _records.Count(x => x.Selected);
+			labelControlEmailResetUserCount.Text = labelControlEmailDeleteUserCount.Text = selecteUsersCount > 0 ? String.Format("The Email will be sent to: {0} {1}", selecteUsersCount, selecteUsersCount > 1 ? "Users" : "User") : "Email will not be sent. There are no selected users";
+		}
+
+		private void buttonXLoadData_Click(object sender, EventArgs e)
+		{
+			RefreshData(true);
+		}
+
+		private void gridViewRecords_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+		{
+			if (e.Column == gridColumnUsersSelected)
+				UpdateUsersCount();
+		}
+
+		private void repositoryItemCheckEditUsers_CheckedChanged(object sender, EventArgs e)
+		{
+			gridViewRecords.CloseEditor();
+		}
+
+		private void buttonXEmailResetSend_Click(object sender, EventArgs e)
+		{
+			ResetUsers();
+		}
+
+		private void buttonXEmailDeleteSend_Click(object sender, EventArgs e)
+		{
+			DeleteUsers();
+		}
+	}
+}

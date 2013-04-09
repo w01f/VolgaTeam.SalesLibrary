@@ -62,5 +62,15 @@ namespace SalesDepot.Services.Properties {
                 return ((string)(this["SalesDepot_Services_TickerService_TickerControllerService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost/SalesLibraries/inactiveusers/quote?ws=1")]
+        public string SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService {
+            get {
+                return ((string)(this["SalesDepot_Services_InactiveUsersService_InactiveUsersControllerService"]));
+            }
+        }
     }
 }

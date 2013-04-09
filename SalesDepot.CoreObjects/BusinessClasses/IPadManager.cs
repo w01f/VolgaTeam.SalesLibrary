@@ -9,6 +9,7 @@ using System.Xml;
 using Newtonsoft.Json;
 using SalesDepot.Services.ContentManagmentService;
 using SalesDepot.Services.IPadAdminService;
+using SalesDepot.Services.InactiveUsersService;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.Services.TickerService;
 using Attachment = SalesDepot.Services.ContentManagmentService.Attachment;
@@ -762,6 +763,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		private InactiveusersControllerService GetInactiveUsersClient()
+		{
+			try
+			{
+				var client = new InactiveusersControllerService();
+				client.Url = string.Format("{0}/inactiveusers/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
@@ -1224,6 +1239,79 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
+		#endregion
+
+		#region Inactive Users
+		public Services.InactiveUsersService.UserRecord[] GetInactiveUsers(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var userRecords = new List<Services.InactiveUsersService.UserRecord>();
+			var client = GetInactiveUsersClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						userRecords.AddRange(client.getInactiveUsers(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new Services.InactiveUsersService.UserRecord[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return userRecords.ToArray();
+		}
+
+		public void ResetUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
+		{
+			message = string.Empty;
+			var client = GetInactiveUsersClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.resetUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void DeleteUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
+		{
+			message = string.Empty;
+			var client = GetInactiveUsersClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.deleteUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
 		#endregion
 	}
 }

@@ -7,49 +7,72 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/images/tickerlogo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/columns.css" afterPath="$PROJECT_DIR$/css/regular/columns.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/columnsPage.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/columnsPage.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/configuration.php" afterPath="$PROJECT_DIR$/configuration.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/scaling.js" afterPath="$PROJECT_DIR$/js/regular/scaling.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/tabsView.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/tabsView.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/ticker.css" afterPath="$PROJECT_DIR$/css/regular/ticker.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/ticker.js" afterPath="$PROJECT_DIR$/js/regular/ticker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/wallbin-tabs.css" afterPath="$PROJECT_DIR$/css/regular/wallbin-tabs.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/wallbin.js" afterPath="$PROJECT_DIR$/js/regular/wallbin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/controllers/InactiveusersController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/views/email/resetUser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/protected/data/procedures/sp_get_inactive_users.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/AdminController.php" afterPath="$PROJECT_DIR$/protected/controllers/AdminController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/components/core/RequireLogin.php" afterPath="$PROJECT_DIR$/protected/components/core/RequireLogin.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/common/ResetPasswordStorage.php" afterPath="$PROJECT_DIR$/protected/models/common/ResetPasswordStorage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SiteController.php" afterPath="$PROJECT_DIR$/protected/controllers/SiteController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/common/UserRecord.php" afterPath="$PROJECT_DIR$/protected/models/common/UserRecord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/common/UserStorage.php" afterPath="$PROJECT_DIR$/protected/models/common/UserStorage.php" />
     </list>
     <list id="658692b4-5d98-40af-9426-7326b1b432d2" name="C#" comment="C#">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/FormMain.resx" afterPath="$PROJECT_DIR$/../SalesDepot/FormMain.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/FormMain.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/LibraryDecorator.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/LibraryDecorator.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Filters/MainUserFilter.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainUserReportControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/Views/MainUserReportControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/PageDecorator.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/PageDecorator.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/Controllers/InactiveUsersController.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/InactiveUsersService/InactiveUsersController.wsdl" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.Designer.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.resx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.Designer.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.resx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/ConfigurationClasses/InactiveUsersSettings.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/InactiveUsersService/Reference.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/InactiveUsersService/Reference.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.Designer.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.resx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot.Services/InactiveUsersService/UserRecord.cs" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Web References/InactiveUsersService/UserRecord.datasource" />
+      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\Resources\ExportExcel.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/FormMain.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/FormMain.cs" afterPath="$PROJECT_DIR$/../SiteManager/FormMain.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/IPadManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Controllers/MainController.cs" afterPath="$PROJECT_DIR$/../SiteManager/Controllers/MainController.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/Properties/Resources.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Properties/Resources.resx" afterPath="$PROJECT_DIR$/../SiteManager/Properties/Resources.resx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/SalesDepot.Services.csproj" afterPath="$PROJECT_DIR$/../SalesDepot.Services/SalesDepot.Services.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" afterPath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/Properties/Settings.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Properties/Settings.Designer.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/Properties/Settings.settings" afterPath="$PROJECT_DIR$/../SalesDepot.Services/Properties/Settings.settings" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../SiteManager/ConfigurationClasses/SettingsManager.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/UserActivity.cs" afterPath="$PROJECT_DIR$/../SalesDepot.Services/StatisticService/UserActivity.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Services/app.config" afterPath="$PROJECT_DIR$/../SalesDepot.Services/app.config" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365175708717" ignored="false" />
+    <file path="/Dummy.txt" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365527045972" ignored="false" />
     <file path="/a.html" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364466887905" ignored="false" />
     <file path="/a.feature" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364466890490" ignored="false" />
     <file path="/a.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364487542235" ignored="false" />
-    <file path="/LocalDBS" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364923050220" ignored="false" />
+    <file path="/LocalDBS" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365339820045" ignored="false" />
     <file path="/TickerController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364572372199" ignored="false" />
     <file path="/TickerLinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364572363912" ignored="false" />
-    <file path="/SiteController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364485532146" ignored="false" />
+    <file path="/SiteController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365523998690" ignored="false" />
     <file path="/tickerLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364491578565" ignored="false" />
     <file path="/TickerLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364922125697" ignored="false" />
     <file path="/LinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364488464327" ignored="false" />
     <file path="/a.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364488060803" ignored="false" />
     <file path="/ticker.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365173929479" ignored="false" />
-    <file path="/a.dummy" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365013026088" ignored="false" />
+    <file path="/a.dummy" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365526643910" ignored="false" />
     <file path="/link-viewing.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364492270739" ignored="false" />
     <file path="/index.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365173071059" ignored="false" />
     <file path="/tbl_user.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364563478793" ignored="false" />
-    <file path="/UserRecord.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364563533753" ignored="false" />
-    <file path="/AdminController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364563993714" ignored="false" />
+    <file path="/UserRecord.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365344054985" ignored="false" />
+    <file path="/AdminController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365523985727" ignored="false" />
     <file path="/StatisticUserStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364564491641" ignored="false" />
     <file path="/UserActivity.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364564516335" ignored="false" />
     <file path="/tbl_statistic_user.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364576519934" ignored="false" />
@@ -66,6 +89,13 @@
     <file path="/columns.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365094228730" ignored="false" />
     <file path="/configuration.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365173263562" ignored="false" />
     <file path="/ticker.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365173600285" ignored="false" />
+    <file path="/sp_get_inactive_users.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365344128153" ignored="false" />
+    <file path="/InactiveUsers.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365344288021" ignored="false" />
+    <file path="/InactiveUsersController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365420977343" ignored="false" />
+    <file path="/UserStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365420931248" ignored="false" />
+    <file path="/InactiveusersController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365524581310" ignored="false" />
+    <file path="/ResetPasswordStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365524247856" ignored="false" />
+    <file path="/resetUser.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365524321349" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,10 +120,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="wallbin.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/regular/wallbin.js">
+      <file leaf-file-name="sp_get_inactive_users.sql" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_inactive_users.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="437" column="14" selection-start="10100" selection-end="10100" vertical-scroll-proportion="0.027914613">
+            <state line="4" column="21" selection-start="0" selection-end="673" vertical-scroll-proportion="0.10429448">
               <folding />
             </state>
           </provider>
@@ -118,22 +148,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/models/ticker/TickerLink.php" />
-        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
-        <option value="$PROJECT_DIR$/js/phone/favorites.js" />
-        <option value="$PROJECT_DIR$/protected/views/phone/site/index.php" />
-        <option value="$PROJECT_DIR$/protected/components/core/IsdController.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/tabsView.php" />
-        <option value="$PROJECT_DIR$/css/regular/ribbon.css" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/columnsPage.php" />
-        <option value="$PROJECT_DIR$/css/regular/wallbin-tabs.css" />
-        <option value="$PROJECT_DIR$/js/regular/wallbin.js" />
-        <option value="$PROJECT_DIR$/css/regular/columns.css" />
-        <option value="$PROJECT_DIR$/js/regular/scaling.js" />
-        <option value="$PROJECT_DIR$/configuration.php" />
         <option value="$PROJECT_DIR$/css/regular/ticker.css" />
         <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
         <option value="$PROJECT_DIR$/js/regular/ticker.js" />
+        <option value="dbprocedure:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/sales_library..sp_get_inactive_users" />
+        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
+        <option value="$PROJECT_DIR$/protected/models/common/UserRecord.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/InactiveUsers.php" />
+        <option value="$PROJECT_DIR$/protected/models/common/UserStorage.php" />
+        <option value="$PROJECT_DIR$/protected/data/procedures/sp_get_inactive_users.sql" />
+        <option value="$PROJECT_DIR$/protected/controllers/InactiveUsersController.php" />
+        <option value="$PROJECT_DIR$/protected/components/core/RequireLogin.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/AdminController.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/SiteController.php" />
+        <option value="$PROJECT_DIR$/protected/views/email/resetUser.php" />
+        <option value="$PROJECT_DIR$/protected/models/common/ResetPasswordStorage.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/InactiveusersController.php" />
       </list>
     </option>
   </component>
@@ -222,152 +252,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modern-ticker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modern-ticker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="images" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -496,11 +380,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\ticker" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\controllers" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\procedures" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\ticker" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\common" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\preview" />
@@ -842,27 +726,27 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18591858" sideWeight="0.452508" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29988974" sideWeight="0.44023478" order="7" side_tool="false" content_ui="tabs" x="22" y="783" width="1874" height="218" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.100853786" sideWeight="0.70011026" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18481848" sideWeight="0.452508" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22222222" sideWeight="0.44023478" order="7" side_tool="false" content_ui="tabs" x="22" y="783" width="1874" height="218" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3509351" sideWeight="0.40341514" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1339381" sideWeight="0.7777778" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.8125689" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.8454746" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29801324" sideWeight="0.7892209" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296582" sideWeight="0.49626467" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22222222" sideWeight="0.55602986" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.4850587" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289183" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18783352" sideWeight="0.70011026" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19637139" sideWeight="0.7777778" order="0" side_tool="false" content_ui="combo" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21609703" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296582" sideWeight="0.88900745" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.88900745" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3520352" sideWeight="0.40341514" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16097023" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2497332" sideWeight="0.7030905" order="2" side_tool="false" content_ui="combo" />
@@ -911,7 +795,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Freeze column headers fix + Ticker logo fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web SalesDepot: Inactive users management" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -925,7 +809,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Web SalesDepot: &quot;Do not generate preview&quot; fix" />
     <MESSAGE value="Web SalesDepot: Allow to block preview for folders too" />
     <MESSAGE value="Web SalesDepot: Data Tracker - Raw data recording" />
     <MESSAGE value="Web SalesDepot: Statistic report#1 ready" />
@@ -950,6 +833,7 @@
     <MESSAGE value="Web SalesDepot: Ticker view and management fix" />
     <MESSAGE value="Web SalesDepot: Mobile Favorites New Folder Bug fix" />
     <MESSAGE value="Web SalesDepot: Freeze column headers fix + Ticker logo fix" />
+    <MESSAGE value="Web SalesDepot: Inactive users management" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -976,110 +860,110 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/css/regular/wallbin-tabs.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="31" selection-start="97" selection-end="105" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/columnsPage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="57" selection-start="115" selection-end="129" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/columns.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="20" selection-start="595" selection-end="595" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/tickerlogo.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/errorMessage.php">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/HelpController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="20.807692" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="95" selection-start="2379" selection-end="2379" vertical-scroll-proportion="-3.5882354">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/email/existedUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="2" selection-start="0" selection-end="418" vertical-scroll-proportion="-9.807693">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/email/resetUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="139" selection-end="145" vertical-scroll-proportion="-2.6153846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/common/ResetPasswordStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="21" selection-start="785" selection-end="785" vertical-scroll-proportion="-11.615385">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/components/core/RequireLogin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="53" selection-start="1202" selection-end="1202" vertical-scroll-proportion="-15.038462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/configuration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="12" selection-start="3262" selection-end="3262" vertical-scroll-proportion="-7.8461537">
+        <state line="83" column="35" selection-start="2521" selection-end="2521" vertical-scroll-proportion="0.46537843">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/ticker.css">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/InactiveusersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="9" selection-start="187" selection-end="187" vertical-scroll-proportion="0.0">
+        <state line="109" column="28" selection-start="3074" selection-end="3074" vertical-scroll-proportion="0.48091602">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="404" column="16" selection-start="22577" selection-end="22577" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/ticker/tickerLink.php">
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_library.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/scaling.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="58" selection-start="958" selection-end="958" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/ribbon.js">
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_group_template.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/modern-ticker/js/jquery.modern-ticker.min.js">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/PreviewController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4951" selection-start="5050" selection-end="5063" vertical-scroll-proportion="0.0">
+        <state line="80" column="21" selection-start="2551" selection-end="2551" vertical-scroll-proportion="2.5904763">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/ticker.js">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="562" selection-end="562" vertical-scroll-proportion="0.61904764">
+        <state line="107" column="43" selection-start="3304" selection-end="3304" vertical-scroll-proportion="3.638">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/view-dialog-bar.js">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="1" column="26" selection-start="28" selection-end="29" vertical-scroll-proportion="0.0331384">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/text-sizing.js">
+    <entry file="file://$PROJECT_DIR$/protected/data/procedures/sp_get_inactive_users.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/wallbin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="437" column="14" selection-start="10100" selection-end="10100" vertical-scroll-proportion="0.027914613">
+        <state line="4" column="21" selection-start="0" selection-end="673" vertical-scroll-proportion="0.10429448">
           <folding />
         </state>
       </provider>

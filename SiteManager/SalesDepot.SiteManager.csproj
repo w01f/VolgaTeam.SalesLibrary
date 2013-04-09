@@ -97,8 +97,10 @@
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\SiteManager.cs" />
+    <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\InactiveUsersController.cs" />
     <Compile Include="Controllers\TickerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\MainController.cs" />
@@ -193,6 +195,18 @@
     <Compile Include="PresentationClasses\Activities\Views\RawDataControl.Designer.cs">
       <DependentUpon>RawDataControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\InactiveUses\InactiveUsersManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\InactiveUses\InactiveUsersManagerControl.Designer.cs">
+      <DependentUpon>InactiveUsersManagerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\InactiveUses\InactiveUsersFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\InactiveUses\InactiveUsersFilter.Designer.cs">
+      <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Ticker\LinkEditors\ITickerEditor.cs" />
     <Compile Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.cs">
       <SubType>UserControl</SubType>
@@ -220,6 +234,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabPages\TabInactiveUsersControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabInactiveUsersControl.Designer.cs">
+      <DependentUpon>TabInactiveUsersControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\TabTickerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -322,6 +342,13 @@
       <DependentUpon>RawDataControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\InactiveUses\InactiveUsersManagerControl.resx">
+      <DependentUpon>InactiveUsersManagerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\InactiveUses\InactiveUsersFilter.resx">
+      <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.resx">
       <DependentUpon>LibraryLinkEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -347,6 +374,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabPages\TabInactiveUsersControl.resx">
+      <DependentUpon>TabInactiveUsersControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabTickerControl.resx">
       <DependentUpon>TabTickerControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -391,7 +421,6 @@
     <None Include="Resources\ImportTicker.png" />
     <None Include="Resources\NudgeDown.png" />
     <None Include="Resources\NudgeUp.png" />
-    <None Include="Resources\ExportExcel.png" />
     <None Include="Resources\ExportGroup.png" />
     <None Include="Resources\ImportUsers.png" />
   </ItemGroup>
