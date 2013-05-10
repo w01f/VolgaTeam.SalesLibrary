@@ -1,5 +1,5 @@
 <?php
-$version = '9.0';
+$version = '1.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
@@ -139,7 +139,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 <?php endif; ?>
 <div data-role='page' id="recover-password" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
-		<span class="ui-title library-title">Recover Password</span>
+		<span class="ui-title header-title">Recover Password</span>
 	</div>
 	<div data-role='content' class="page-content">
 		<table class="form-login">
@@ -178,7 +178,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 </div>
 <div data-role="page" id="recover-password-success" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
-		<span class="ui-title library-title">Recover Password</span>
+		<span class="ui-title header-title">Recover Password</span>
 	</div>
 	<div data-role="content">
 		<table class="form-login">

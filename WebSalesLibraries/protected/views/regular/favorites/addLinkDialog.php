@@ -10,7 +10,7 @@
 				<label class="control-label">Name:</label>
 			</td>
 			<td>
-				<input type="text" id="favorites-link-name" value="<?php echo $link->name; ?>">
+				<input type="text" id="favorites-link-name" class="input-block-level" value="<?php echo $link->name; ?>">
 			</td>
 		</tr>
 		<tr>
@@ -19,7 +19,7 @@
 			</td>
 			<td>
 			<span class="button-edit input-append">
-				<input type="text" id="favorites-folder-name" placeholder="Select or Type..." style="width: 220px;">
+				<input type="text" id="favorites-folder-name" class="input-block-level" placeholder="Select or Type..." style="width: 240px;">
 				<a class="btn" id="clear-folder" href="#"><i class="icon-remove-sign"/></a>
 				<a class="btn <?if (!(isset($folders) && count($folders) > 0)): ?>disabled<? endif;?>"
 				   id="show-folder-selector" href="#"><i class="icon-folder-open"/></a>

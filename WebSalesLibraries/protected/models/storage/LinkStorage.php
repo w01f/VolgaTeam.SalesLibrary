@@ -59,6 +59,10 @@
 					$linkRecord->is_restricted = $link['isRestricted'];
 				else
 					$linkRecord->is_restricted = false;
+				if (array_key_exists('noShare', $link))
+					$linkRecord->no_share = $link['noShare'];
+				else
+					$linkRecord->no_share = false;
 				$linkRecord->date_add = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd']));
 				$linkRecord->date_modify = $linkDate;
 
@@ -212,7 +216,7 @@
 				{
 					$userId = Yii::app()->user->getId();
 					if (isset(Yii::app()->user->role))
-						$isAdmin = Yii::app()->user->role != 0;
+						$isAdmin = Yii::app()->user->role == 2;
 					else
 						$isAdmin = true;
 					if (isset($userId) && !$isAdmin)
@@ -348,7 +352,6 @@
 			return $linksNumber;
 		}
 
-
 		public static function getLinksGrid($linkRecords)
 		{
 			if (isset($linkRecords) && count($linkRecords) > 0)
@@ -359,8 +362,10 @@
 					$link['id'] = $linkRecord['id'];
 					$link['name'] = $linkRecord['name'];
 					$link['file_name'] = $linkRecord['file_name'];
-					$link['date_modify'] = $linkRecord['link_date'];
-					$link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
+					if (array_key_exists('link_date', $linkRecord))
+						$link['date_modify'] = $linkRecord['link_date'];
+					if (array_key_exists('enable_attachments', $linkRecord) && array_key_exists('enable_file_card', $linkRecord))
+						$link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
 
 					$library = $libraryManager->getLibraryById($linkRecord['id_library']);
 					if (isset($library))
@@ -391,7 +396,10 @@
 							$link['file_type'] = 'images/search/search-keynote.png';
 							break;
 						default:
-							$link['file_type'] = 'undefined';
+							if (array_key_exists('type', $linkRecord) && $linkRecord['type'] == 5)
+								$link['file_type'] = 'images/search/search-folder.png';
+							else
+								$link['file_type'] = 'undefined';
 							break;
 					}
 					$links[] = $link;

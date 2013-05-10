@@ -37,6 +37,11 @@ class UserRecord
 	 * @soap
 	 */
 	public $phone;
+	/**
+	 * @var int role
+	 * @soap
+	 */
+	public $role;
     /**
      * @var boolean selected
      * @soap

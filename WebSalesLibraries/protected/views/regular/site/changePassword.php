@@ -1,18 +1,17 @@
 <?php
-$version = '3.0';
+$version = '1.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/login.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/tool-dialog.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/login.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/overlay.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/login.js', CClientScript::POS_HEAD);
-$this->pageTitle = Yii::app()->name . ' - Change Password';
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClientScript::POS_HEAD);
 ?>
 
 <?php $form = $this->beginWidget('CActiveForm', array('action' => Yii::app()->createUrl('site/changePassword'))); ?>

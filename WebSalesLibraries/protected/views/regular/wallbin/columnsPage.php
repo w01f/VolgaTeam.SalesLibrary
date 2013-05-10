@@ -40,7 +40,7 @@
 		<div class="page-column" id="column<?php echo $i; ?>">
 			<?php foreach ($folders as $folder): ?>
 				<div class="folder-body" style="border-color: <?php echo $folder->borderColor; ?>;">
-					<div class="folder-header-container"
+					<div class="folder-header-container" id = "folder<?php echo $folder->id; ?>"
 						 style="font-family: <?php echo $folder->headerFont->name; ?>,serif;
 							 font-size: <?php echo $folder->headerFont->size; ?>pt;
 							 font-weight: <?php echo $folder->headerFont->isBold ? ' bold' : ' normal'; ?>;

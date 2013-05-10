@@ -1,0 +1,92 @@
+.view-dialog-body
+{
+}
+
+.view-dialog-body .title
+{
+	border-bottom: 2px #999 solid;
+}
+
+.view-dialog-body .link-name
+{
+	text-align: left;
+	font-family: 'Arial', serif;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+.view-dialog-body .description
+{
+	text-align: left;
+	font-family: 'Arial', serif;
+	font-size: 12pt;
+	color: #C0C0C0;
+	font-weight: normal;
+}
+
+.view-dialog-body .item-text
+{
+	text-align: left;
+	font-family: 'Arial', serif;
+	font-size: 12pt;
+	color: #000000;
+	font-weight: normal;
+}
+
+.view-dialog-body .item-image
+{
+	padding-right: 5px;
+}
+
+.view-dialog-body .warning
+{
+	text-align: left;
+	font-family: 'Arial', serif;
+	font-size: 16pt;
+	color: red;
+	font-weight: bold;
+}
+
+.view-dialog-body .format-list
+{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	margin-left: 20px;
+	margin-right: 20px;
+	width: auto;
+	min-width: 450px;
+	height: auto;
+}
+
+.view-dialog-body .format-list li.multi-column
+{
+	float: left;
+	width: 28%;
+	padding: 2%;
+	text-align: center;
+}
+
+.view-dialog-body .format-list li.single-column
+{
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+.view-dialog-body .format-list img
+{
+	border: none;
+	cursor: pointer;
+}
+
+.view-dialog-body .service-data
+{
+	display: none;
+}
+
+.tooltip-inner
+{
+	font-size: 12pt;
+	max-width: 140px;
+}
+

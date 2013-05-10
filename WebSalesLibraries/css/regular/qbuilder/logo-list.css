@@ -1,0 +1,37 @@
+.logo-list
+{
+	width: 100%;
+	background: #ffffff;
+	border: 1px #aaaaaa solid;
+	margin-left: -2px;
+	overflow: auto;
+	height: 400px;
+}
+
+.logo-list ul
+{
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.logo-list li a
+{
+	color: #000000;
+	padding: 2px;
+}
+
+.logo-list li a.opened
+{
+	text-decoration: none;
+	background-color: hsl(36, 100%, 75%) !important;
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff4e5", endColorstr="#ffcc7f");
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#fff4e5), to(#ffcc7f));
+	background-image: -moz-linear-gradient(top, #fff4e5, #ffcc7f);
+	background-image: -ms-linear-gradient(top, #fff4e5, #ffcc7f);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff4e5), color-stop(100%, #ffcc7f));
+	background-image: -webkit-linear-gradient(top, #fff4e5, #ffcc7f);
+	background-image: -o-linear-gradient(top, #fff4e5, #ffcc7f);
+	background-image: linear-gradient(#fff4e5, #ffcc7f);
+}

@@ -283,7 +283,14 @@
 			if (isset($data))
 				$data = CJSON::decode($data);
 
-			if (isset($type) && isset($subType))
+			$autorized = false;
+			if (isset(Yii::app()->user))
+			{
+				$userId = Yii::app()->user->getId();
+				$autorized = isset($userId);
+			}
+
+			if (isset($type) && isset($subType) && $autorized)
 				StatisticActivityStorage::WriteActivity($type, $subType, $data);
 			Yii::app()->end();
 		}

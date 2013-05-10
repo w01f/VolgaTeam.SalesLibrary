@@ -153,6 +153,11 @@
 		 */
 		public $isRestricted;
 		/**
+		 * @var boolean
+		 * @soap
+		 */
+		public $noShare;
+		/**
 		 * @var string
 		 * @soap
 		 */
@@ -210,6 +215,7 @@
 			$this->isDead = $linkRecord->is_dead;
 			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
 			$this->forcePreview = $linkRecord->force_preview;
+			$this->noShare = $linkRecord->no_share;
 
 			$lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)
@@ -380,8 +386,8 @@
 							$this->availableFormats[] = 'png';
 							$this->availableFormats[] = 'jpeg';
 						}
-
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					case 'doc':
 						$this->availableFormats[] = 'doc';
@@ -392,12 +398,13 @@
 							$this->availableFormats[] = 'png';
 							$this->availableFormats[] = 'jpeg';
 						}
-
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					case 'xls':
 						$this->availableFormats[] = 'xls';
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					case 'pdf':
 						$this->availableFormats[] = 'pdf';
@@ -407,8 +414,8 @@
 							$this->availableFormats[] = 'png';
 							$this->availableFormats[] = 'jpeg';
 						}
-
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					case 'video':
 					case 'wmv':
@@ -459,25 +466,29 @@
 							}
 						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'email';
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
 							if ($this->browser != 'phone')
 								$this->availableFormats[] = 'download';
 						}
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					case 'jpeg':
 						$this->availableFormats[] = 'jpeg';
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					case 'url':
 						$this->availableFormats[] = 'url';
 						break;
 					case 'key':
 						$this->availableFormats[] = 'key';
-						$this->availableFormats[] = 'email';
+						if (!$this->noShare)
+							$this->availableFormats[] = 'outlook';
 						break;
 					default:
 						$this->originalFormat = 'other';
@@ -505,7 +516,7 @@
 						case 'ppt':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
-						case 'email':
+						case 'outlook':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -543,7 +554,7 @@
 									$count = count($this->universalPreview->jpegLinks);
 									foreach ($this->universalPreview->jpegLinks as $link)
 									{
-										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' =>'JPEG Viewer - '. ($this->fileName . ' - Slide ' . ($i + 1) . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'JPEG Viewer - ' . ($this->fileName . ' - Slide ' . ($i + 1) . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -592,7 +603,7 @@
 						case 'doc':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
-						case 'email':
+						case 'outlook':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -604,7 +615,7 @@
 									$count = count($this->universalPreview->pngLinks);
 									foreach ($this->universalPreview->pngLinks as $link)
 									{
-										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'PNG Viewer - '.($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'PNG Viewer - ' . ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -630,7 +641,7 @@
 									$count = count($this->universalPreview->jpegLinks);
 									foreach ($this->universalPreview->jpegLinks as $link)
 									{
-										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'JPEG Viewer - '.($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('id' => 'link' . $this->id . '---' . $i, 'title' => 'JPEG Viewer - ' . ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -679,7 +690,7 @@
 						case 'xls':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
-						case 'email':
+						case 'outlook':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -691,7 +702,7 @@
 						case 'pdf':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
-						case 'email':
+						case 'outlook':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -703,7 +714,7 @@
 									$count = count($this->universalPreview->pngLinks);
 									foreach ($this->universalPreview->pngLinks as $link)
 									{
-										$viewSources[] = array('title' => 'PNG Viewer - '.($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
+										$viewSources[] = array('title' => 'PNG Viewer - ' . ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link, 'href_mobile' => $link);
 										$i++;
 									}
 								}
@@ -729,7 +740,7 @@
 									$count = count($this->universalPreview->jpegLinks);
 									foreach ($this->universalPreview->jpegLinks as $link)
 									{
-										$viewSources[] = array('title' => 'JPEG Viewer - '.($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
+										$viewSources[] = array('title' => 'JPEG Viewer - ' . ($this->fileName . ' - Page ' . $i . ' of ' . $count), 'href' => $link);
 										$i++;
 									}
 								}
@@ -774,7 +785,7 @@
 						case 'png':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
-						case 'email':
+						case 'outlook':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -786,7 +797,7 @@
 						case 'key':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
-						case 'email':
+						case 'outlook':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
 							break;
@@ -834,7 +845,7 @@
 									foreach ($this->universalPreview->ogvLinks as $link)
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							break;
-						case 'email':
+						case 'outlook':
 						case 'download':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
@@ -870,7 +881,7 @@
 									foreach ($this->universalPreview->ogvLinks as $link)
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							break;
-						case 'email':
+						case 'outlook':
 						case 'download':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);
@@ -907,7 +918,7 @@
 									foreach ($this->universalPreview->ogvLinks as $link)
 										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							break;
-						case 'email':
+						case 'outlook':
 						case 'download':
 						case 'favorites':
 							$viewSources[] = array('title' => $this->fileName, 'href' => $this->filePath);

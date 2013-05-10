@@ -10,6 +10,7 @@
 
 		public function actionIndex()
 		{
+			$this->pageTitle = Yii::app()->name;
 			$libraryManager = new LibraryManager();
 			$tickerRecords = TickerLinkStorage::getLinks();
 			if (count($libraryManager->getLibraries()) > 0)
@@ -22,6 +23,7 @@
 		{
 			if ($error = Yii::app()->errorHandler->error)
 			{
+				$this->pageTitle=Yii::app()->name . ' - Error';
 				if (Yii::app()->request->isAjaxRequest)
 					echo $error['message'];
 				else
@@ -52,6 +54,7 @@
 						$this->redirect(Yii::app()->user->returnUrl);
 				}
 			}
+			$this->pageTitle = Yii::app()->name . ' - Login';
 			$this->render('login', array('formData' => $loginModel));
 		}
 
@@ -66,6 +69,7 @@
 		{
 			$changePasswordModel = new ChangePasswordForm();
 			$attributes = Yii::app()->request->getPost('ChangePasswordForm');
+			$this->pageTitle = Yii::app()->name . ' - Change Password';
 			if (isset($attributes))
 			{
 				$changePasswordModel->attributes = $attributes;
@@ -73,7 +77,10 @@
 				$changePasswordModel->oldPassword = $attributes['oldPassword'];
 				$changePasswordModel->rememberMe = $attributes['rememberMe'];
 				if ($changePasswordModel->validate() && $changePasswordModel->changePassword())
+				{
+					StatisticActivityStorage::WriteActivity('System', 'Login', null);
 					$this->redirect(Yii::app()->user->returnUrl);
+				}
 				else
 					$this->render('changePassword', array('formData' => $changePasswordModel));
 			}

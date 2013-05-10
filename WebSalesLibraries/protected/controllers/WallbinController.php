@@ -71,7 +71,7 @@
 						{
 							$userId = Yii::app()->user->getId();
 							if (isset(Yii::app()->user->role))
-								$isAdmin = Yii::app()->user->role != 0;
+								$isAdmin = Yii::app()->user->role == 2;
 							else
 								$isAdmin = true;
 						}

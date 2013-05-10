@@ -121,10 +121,10 @@
 				var foldersPage = $('#folders');
 				foldersPage.find('.page-content').html(msg);
 				var selctedLibraryName = $.cookie("selectedLibraryName");
-				foldersPage.find('.library-title').html(selctedLibraryName);
-				$('#links').find('.library-title').html(selctedLibraryName);
-				$('#link-details').find('.library-title').html(selctedLibraryName);
-				$('#gallery-page').find('.library-title').html(selctedLibraryName);
+				foldersPage.find('.header-title').html(selctedLibraryName);
+				$('#links').find('.header-title').html(selctedLibraryName);
+				$('#link-details').find('.header-title').html(selctedLibraryName);
+				$('#gallery-page').find('.header-title').html(selctedLibraryName);
 				$.mobile.changePage("#folders", {
 					transition:"slidefade"
 				});
@@ -220,9 +220,9 @@
 			{
 				var previewPage = $('#preview');
 				previewPage.find('.page-content').html(msg);
-				previewPage.find('.library-title').html(parentTitle);
-				$('.email-tab .library-title').html(parentTitle);
-				$('.favorites-tab .library-title').html(parentTitle);
+				previewPage.find('.header-title').html(parentTitle);
+				$('.email-tab .header-title').html(parentTitle);
+				$('.favorites-tab .header-title').html(parentTitle);
 				previewPage.find('.link.back').attr('href', backLink);
 				$.mobile.changePage("#preview", {
 					transition:"slidefade"
@@ -361,7 +361,7 @@
 						.insertAfter(linkFolderContentTemplate)
 						.attr('id', 'link-folder-content-' + linkId);
 					linkFolderContent.find('.link.back').attr('href', parentLinkId == null ? '#links' : ('#link-folder-content-' + parentLinkId));
-					linkFolderContent.find('.library-title').html($.cookie("selectedLibraryName"));
+					linkFolderContent.find('.header-title').html($.cookie("selectedLibraryName"));
 				}
 				linkFolderContent.find('.page-content').html(msg);
 				$.mobile.changePage('#link-folder-content-' + linkId, {

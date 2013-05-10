@@ -1,6 +1,5 @@
 (function ($)
 {
-
 	$.downloadFile = function (url)
 	{
 		window.open(url.replace(/&amp;/g, '%26'));
@@ -123,6 +122,7 @@
 							});
 							break;
 						case 'email':
+						case 'outlook':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'favorites':
@@ -153,6 +153,7 @@
 					switch (selectedViewType)
 					{
 						case 'email':
+						case 'outlook':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'favorites':
@@ -184,6 +185,7 @@
 					switch (selectedViewType)
 					{
 						case 'email':
+						case 'outlook':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'favorites':
@@ -214,6 +216,7 @@
 					switch (selectedViewType)
 					{
 						case 'email':
+						case 'outlook':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'favorites':
@@ -266,6 +269,7 @@
 							$.downloadFile(selectedLinks[0].href);
 							break;
 						case 'email':
+						case 'outlook':
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'favorites':
@@ -304,7 +308,7 @@
 			{
 				var previewPage = $('#preview');
 				previewPage.find('.page-content').html(msg);
-				previewPage.find('.library-title').html('Important Info');
+				previewPage.find('.header-title').html('Important Info');
 				previewPage.find('.link.back').attr('href', '#link-details');
 				$.mobile.changePage("#preview", {
 					transition:"slidefade"

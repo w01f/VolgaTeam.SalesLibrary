@@ -1,5 +1,5 @@
 <?php
-$version = '150.0';
+$version = '1.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -9,28 +9,29 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/daterangepicker.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/jixedbar/themes/default/jx.stylesheet.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fullcalendar/fullcalendar.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/ribbon.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/minibar.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/columns.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/accordion.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/wallbin-tabs.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/folder-links.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/banner.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/search.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/view-dialog.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/view-dialog-bar.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/tool-dialog.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/file-card.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/links-grid.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/help.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/calendar.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/favorites.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/ribbon.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/minibar.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/columns.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/accordion.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/wallbin-tabs.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/folder-links.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/banner.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/search.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/view-dialog.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/view-dialog-bar.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/file-card.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/links-grid.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/help.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/calendar.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/favorites.css?' . $version);
 if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 {
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/modern-ticker/css/modern-ticker.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/modern-ticker/themes/theme' . Yii::app()->params['ticker']['theme'] . '/theme.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/ticker.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/ticker.css?' . $version);
 }
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qbuilder/logo-list.css?' . $version);
 $cs->registerCoreScript('jquery.ui');
 $cs->registerCoreScript('cookie');
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
@@ -44,27 +45,28 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/daterangepi
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/jixedbar/js/jquery.jixedbar.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/fullcalendar.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/jquery.qtip-1.0.0-rc3.min.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/gesture-handler/jquery.hammer.min.js', CClientScript::POS_HEAD);
 if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 {
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/ticker.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/ticker.js?' . $version, CClientScript::POS_HEAD);
 }
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/login.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/overlay.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/text-sizing.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/scaling.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/link-viewing.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/wallbin.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/links-grid.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/search.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/help.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/calendar.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/favorites.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/minibar.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/ribbon.js?' . $version, CClientScript::POS_HEAD);
-$this->pageTitle = Yii::app()->name;
-
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/text-sizing.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/scaling.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/wallbin.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/links-grid.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/search.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/help.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/calendar.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/minibar.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/ribbon.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/link-cart.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/page-list.js?' . $version, CClientScript::POS_HEAD);
 foreach (Yii::app()->params as $key => $row)
 {
 	if (is_array($row))
@@ -78,6 +80,12 @@ if (isset($tabHelpRecords))
 		$tabParam['help-tab-' . $tabHelpRecord->id] = $tabHelpRecord->order;
 
 asort($tabParam);
+
+$newsCount = 0;
+if (Yii::app()->params['ribbon_news']['visible'])
+	foreach (Yii::app()->params['ribbon_news']['urls'] as $url)
+		if ($url['visible'])
+			$newsCount++;
 ?>
 <div id="ribbon">
 <div class="ribbon-window-title"></div>
@@ -109,10 +117,37 @@ asort($tabParam);
 					</tr>
 				</table>
 			</div>
+			<div class="ribbon-section">
+				<span class="section-title">quickSITES</span>
+				<div class="ribbon-button ribbon-button-large qbuilder-button">
+					<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/qbuilder.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/qbuilder.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/qbuilder.png' ?>"/>
+				</div>
+			</div>
+			<? if ($newsCount > 0): ?>
+				<div class="ribbon-section">
+					<span class="section-title"><? echo Yii::app()->params['ribbon_news']['title'];?></span>
+					<div class="ribbon-news-container">
+						<? $counter = 0; ?>
+						<? foreach (Yii::app()->params['ribbon_news']['urls'] as $url): ?>
+							<? if ($url['visible']): ?>
+								<? if ($newsCount > 2 && !($counter % 2)): ?>
+									<div class="news-block">
+								<? endif; ?>
+								<a class="news-item" target="_blank" href="<? echo $url['url']; ?>"><img src="<? echo Yii::app()->getBaseUrl(true) . '/images/ribbon/urls/' . $url['image'] . '?' . $version; ?>"></a>
+								<? if ($newsCount > 2 && (($counter % 2) || $counter == ($newsCount - 1))): ?>
+									</div>
+								<? endif; ?>
+								<? $counter++; ?>
+							<? endif; ?>
+						<? endforeach; ?>
+					</div>
+				</div>
+			<? endif; ?>
 			<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 				<div class="ribbon-section">
 					<span class="section-title">Logout</span>
-
 					<div class="ribbon-button ribbon-button-large logout-button">
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>"/>
@@ -338,15 +373,18 @@ asort($tabParam);
 	<?php endif; ?>
 <?php endforeach; ?>
 </div>
-<div id="content"></div>
-<div id="content-overlay"></div><!--  View dialog hidden part  -->
+<div id="content" oncontextmenu="return false;"></div>
+<div id="content-overlay"></div>
+<!--  View dialog hidden part  -->
 <div>
 	<a id="view-dialog-link" href="#view-dialog-container">View Options</a>
 
 	<div id="view-dialog-wrapper">
 		<div id="view-dialog-container"></div>
 	</div>
-</div><!-------------------------><!---------Minibar--------->
+</div>
+<!------------------------->
+<!---------Minibar--------->
 <div id="minibar">
 	<ul>
 		<li id="columns-view" title="Columns View">

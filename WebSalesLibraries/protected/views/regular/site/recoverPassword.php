@@ -7,13 +7,13 @@
     <tr>
         <td>
 			<label class="control-label" for="login">Enter your username:</label>
-            <input type="text" id="login" value="">
+            <input type="text" class="input-block-level" id="login" value="">
         </td>
     </tr>    
     <tr>
         <td>
 			<label class="control-label" for="email">Enter your email address:</label>
-            <input type="text" id="email" value="">
+            <input type="text" class="input-block-level" id="email" value="">
         </td>
     </tr>        
     <tr>

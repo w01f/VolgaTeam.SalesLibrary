@@ -1,0 +1,14 @@
+#link-cart
+{
+	width: 25%;
+	min-width: 300px;
+	padding: 0;
+	margin: 0;
+	vertical-align: top;
+	border-left: 2px #999 solid;
+}
+
+#link-cart-buttons
+{
+	background: #eee;
+}

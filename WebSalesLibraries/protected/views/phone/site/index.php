@@ -1,5 +1,5 @@
 <?php
-$version = '32.0';
+$version = '1.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -80,7 +80,7 @@ if (isset($userId))
 </div>
 <div data-role='page' id="folders" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 	</div>
 	<div data-role='content' class="page-content"></div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
@@ -107,7 +107,7 @@ if (isset($userId))
 <div data-role='page' id="links" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#folders" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 	</div>
 	<div data-role='content' class="page-content"></div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
@@ -134,7 +134,7 @@ if (isset($userId))
 <div data-role='page' id="link-details" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#links" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 	</div>
 	<div data-role='content' class="page-content"></div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
@@ -161,7 +161,7 @@ if (isset($userId))
 <div data-role='page' id="preview" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#links" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 	</div>
 	<div data-role='content' class="page-content"></div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
@@ -188,7 +188,7 @@ if (isset($userId))
 <div data-role='page' id="gallery-page" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 	</div>
 	<div data-role='content' class="page-content">
 		<ul data-role="listview" data-theme="c" data-divider-theme="c">
@@ -466,7 +466,7 @@ if (isset($userId))
 <div data-role='page' id="search-result" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#search-basic" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title">Search</span>
+		<span class="ui-title header-title">Search</span>
 	</div>
 	<div data-role='content' class="page-content">
 		<ul data-role="listview" data-theme="c" data-divider-theme="c">
@@ -523,7 +523,7 @@ if (isset($userId))
 <div data-role='page' class="email-tab" id="email-address" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 		<ul data-role="listview" data-theme="c" data-divider-theme="c">
 			<li data-role="list-divider">
 				<h4>
@@ -613,7 +613,7 @@ if (isset($userId))
 <div data-role='page' class="email-tab" id="email-text" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 		<ul data-role="listview" data-theme="c" data-divider-theme="c">
 			<li data-role="list-divider">
 				<h4>
@@ -696,7 +696,7 @@ if (isset($userId))
 <div data-role='page' class="email-tab" id="email-summary" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 		<ul data-role="listview" data-theme="c" data-divider-theme="c">
 			<li data-role="list-divider">
 				<h4>
@@ -772,7 +772,7 @@ if (isset($userId))
 </div>
 <div data-role="dialog" id="email-to-existed-list" data-overlay-theme="c">
 	<div data-role="header" data-theme="b">
-		<span class="ui-title library-title">Recipients</span>
+		<span class="ui-title header-title">Recipients</span>
 	</div>
 	<div data-role="content">
 		<?php if (isset($availableEmails)): ?>
@@ -791,7 +791,7 @@ if (isset($userId))
 </div>
 <div data-role="dialog" id="email-to-copy-existed-list" data-overlay-theme="c">
 	<div data-role="header" data-theme="b">
-		<span class="ui-title library-title">Recipients</span>
+		<span class="ui-title header-title">Recipients</span>
 	</div>
 	<div data-role="content">
 		<?php if (isset($availableEmails)): ?>
@@ -810,7 +810,7 @@ if (isset($userId))
 </div>
 <div data-role="page" id="email-success-popup" data-overlay-theme="c">
 	<div data-role="header" data-theme="b">
-		<span class="ui-title library-title">Email sent</span>
+		<span class="ui-title header-title">Email sent</span>
 	</div>
 	<div data-role="content">
 		<div>The email has been sent by the adSALESapps server.</div>
@@ -825,7 +825,7 @@ if (isset($userId))
 	<div data-role='page' class="favorites-tab" id="favorites-add" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 			<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-			<span class="ui-title library-title"></span>
+			<span class="ui-title header-title"></span>
 			<ul data-role="listview" data-theme="c" data-divider-theme="c">
 				<li data-role="list-divider">
 					<h4>
@@ -888,7 +888,7 @@ if (isset($userId))
 	</div>
 	<div data-role="page" id="favorites-success-popup" data-overlay-theme="c">
 		<div data-role="header" data-theme="b">
-			<span class="ui-title library-title">Add Favorites</span>
+			<span class="ui-title header-title">Add Favorites</span>
 		</div>
 		<div data-role="content">
 			<div>The link has been added to Favorites.</div>
@@ -898,7 +898,7 @@ if (isset($userId))
 	</div>
 	<div data-role="dialog" id="favorites-folder-list-dialog" data-overlay-theme="c">
 		<div data-role="header" data-theme="b">
-			<span class="ui-title library-title">Select Folder</span>
+			<span class="ui-title header-title">Select Folder</span>
 		</div>
 		<div data-role="content" class="dialog-content"></div>
 	</div>
@@ -915,7 +915,7 @@ if (isset($userId))
 <div data-role="page" id="link-folder-content-template" data-overlay-theme="c">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title library-title"></span>
+		<span class="ui-title header-title"></span>
 	</div>
 	<div data-role='content' class="page-content"></div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">

@@ -11,6 +11,12 @@
 			$rendered = false;
 			$linkId = Yii::app()->request->getPost('linkId');
 			$isAttachment = Yii::app()->request->getPost('isAttachment');
+			$autorized = false;
+			if (isset(Yii::app()->user))
+			{
+				$userId = Yii::app()->user->getId();
+				$autorized = isset($userId);
+			}
 			if (isset($linkId))
 			{
 				if (Yii::app()->browser->isMobile())
@@ -56,8 +62,9 @@
 							$attachment = new Attachment($link);
 							$attachment->browser = $browser;
 							$attachment->load($attachmentRecord);
-							StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $attachment->name, 'File' => basename($attachment->path)));
-							$this->renderPartial('viewDialog', array('link' => $attachment), false, true);
+							if ($autorized)
+								StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $attachment->name, 'File' => basename($attachment->path)));
+							$this->renderPartial('viewDialog', array('link' => $attachment, 'autorized' => $autorized), false, true);
 							$rendered = true;
 						}
 					}
@@ -72,10 +79,69 @@
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->browser = $browser;
 						$link->load($linkRecord);
-						StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $link->name, 'File' => $link->fileName));
-						$this->renderPartial('viewDialog', array('link' => $link), false, true);
+						if ($autorized)
+							StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $link->name, 'File' => $link->fileName));
+						$this->renderPartial('viewDialog', array('link' => $link, 'autorized' => $autorized), false, true);
 						$rendered = true;
 					}
+				}
+			}
+			if (!$rendered)
+				$this->renderPartial('empty', array(), false, true);
+		}
+
+		public function actionGetSpecialDialog()
+		{
+			$rendered = false;
+			$linkId = Yii::app()->request->getPost('linkId');
+			$folderId = Yii::app()->request->getPost('folderId');
+			if (isset($linkId))
+			{
+				if (Yii::app()->browser->isMobile())
+					$browser = 'mobile';
+				else
+				{
+					$browser = Yii::app()->browser->getBrowser();
+					switch ($browser)
+					{
+						case 'Internet Explorer':
+							$browser = 'ie';
+							break;
+						case 'Chrome':
+						case 'Safari':
+							$browser = 'webkit';
+							break;
+						case 'Firefox':
+							$browser = 'firefox';
+							break;
+						case 'Opera':
+							$browser = 'opera';
+							break;
+						default:
+							$browser = 'webkit';
+							break;
+					}
+				}
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				if (isset($linkRecord))
+				{
+					$libraryManager = new LibraryManager();
+					$library = $libraryManager->getLibraryById($linkRecord->id_library);
+					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+					$link->browser = $browser;
+					$link->load($linkRecord);
+					StatisticActivityStorage::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
+					$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true), false, true);
+					$rendered = true;
+				}
+			}
+			else if (isset($folderId))
+			{
+				$folderRecord = FolderStorage::model()->findByPk($folderId);
+				if (isset($folderRecord))
+				{
+					$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false), false, true);
+					$rendered = true;
 				}
 			}
 			if (!$rendered)
@@ -145,12 +211,18 @@
 				$linkRecord = LinkStorage::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
+					$autorized = false;
+					if (isset(Yii::app()->user))
+					{
+						$userId = Yii::app()->user->getId();
+						$autorized = isset($userId);
+					}
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->browser = 'phone';
 					$link->load($linkRecord);
-					$this->renderPartial('linkPreview', array('link' => $link), false, true);
+					$this->renderPartial('linkPreview', array('link' => $link, 'autorized' => $autorized), false, true);
 				}
 			}
 		}
@@ -166,6 +238,13 @@
 					$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
 					if (isset($linkRecord))
 					{
+						$autorized = false;
+						if (isset(Yii::app()->user))
+						{
+							$userId = Yii::app()->user->getId();
+							$autorized = isset($userId);
+						}
+
 						$libraryManager = new LibraryManager();
 						$library = $libraryManager->getLibraryById($linkRecord->id_library);
 
@@ -177,7 +256,7 @@
 						$attachment->browser = $link->browser;
 						$attachment->load($attachmentRecord);
 
-						$this->renderPartial('linkPreview', array('link' => $attachment), false, true);
+						$this->renderPartial('linkPreview', array('link' => $attachment, 'autorized' => $autorized), false, true);
 					}
 				}
 			}
@@ -257,7 +336,10 @@
 					$galleryLinks[] = $galleryLink;
 				}
 				if (isset($galleryLinks))
+				{
+					$this->pageTitle = Yii::app()->name . ' - Fullscreen Gallery';
 					$this->render('fullscreenGallery', array('selectedLinks' => $galleryLinks));
+				}
 			}
 		}
 

@@ -105,6 +105,7 @@
 						$message->cc = $sender;
 						$message->subject = $subject;
 						$message->from = $sender;
+						$body = str_replace(PHP_EOL, '<br>', $body);
 						if ($onlyEmail)
 							$message->message = $body;
 						else

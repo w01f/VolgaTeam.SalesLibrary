@@ -1,0 +1,86 @@
+.tool-dialog table, table.tool-dialog
+{
+	width: 100%;
+}
+
+.tool-dialog td
+{
+	height: 40px;
+	padding-bottom: 15px;
+}
+
+.tool-dialog td.title
+{
+	text-align: left;
+	vertical-align: middle;
+}
+
+.tool-dialog .aligned-top
+{
+	vertical-align: top;
+}
+
+.tool-dialog .dropdown-menu
+{
+	padding: 10px;
+	text-align: left;
+	width: 250px;
+}
+
+.tool-dialog .dropdown-menu ul
+{
+	margin: 0;
+}
+
+.tool-dialog .dropdown-menu li
+{
+	list-style: none;
+	padding-bottom: 5px;
+}
+
+.tool-dialog textarea
+{
+	margin: 0;
+	resize: none;
+}
+
+.tool-dialog td.error-message
+{
+	width: 100%;
+	color: #FF0000;
+	text-align: center;
+}
+
+.input-append .btn.dropdown-toggle
+{
+	float: none;
+}
+
+div.fancybox-inner
+{
+	overflow: hidden;
+}
+
+.tool-dialog .buttons-area
+{
+	padding-top: 10px !important;
+	text-align: center !important;
+}
+
+.tool-dialog .buttons-area .btn
+{
+	margin-right: 20px;
+	margin-left: 20px;
+	width: 80px;
+}
+
+.tool-dialog .nav-tabs>li>a
+{
+	color: #666666;
+}
+
+.tool-dialog .nav-tabs>li.active>a
+{
+	color: #000000;
+}
+

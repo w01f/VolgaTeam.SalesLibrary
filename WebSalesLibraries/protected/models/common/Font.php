@@ -21,5 +21,15 @@ class Font
      * @soap
      */                
     public $isItalic;
+
+	public static function getDefault()
+	{
+		$font = new Font();
+		$font->name = 'Arial';
+		$font->size = 12;
+		$font->isBold = false;
+		$font->isItalic = false;
+		return $font;
+	}
 }
 

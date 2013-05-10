@@ -86,6 +86,7 @@
 						'url' => 'URL Tooltip',
 						'key' => 'Open Apple Keynote',
 						'email' => 'Email Tooltip',
+						'outlook' => 'Email Tooltip',
 						'download' => 'Download Tooltip',
 						'favorites' => 'Favorites Tooltip',
 					)
@@ -111,6 +112,15 @@
 					'show_control' => true,
 					'effect' => 'slide',
 					'theme' => 6,
+				),
+				'ribbon_news' => array(
+					'visible' => true,
+					'title' => 'Industry News',
+					'urls' => array(
+						array('visible' => true, 'image' => '1.png', 'url' => 'http://www.tvb.org'),
+						array('visible' => false, 'image' => '2.png', 'url' => 'http://www.spotsndots.com'),
+						array('visible' => true, 'image' => '3.png', 'url' => 'http://www.nab.org'),
+						array('visible' => true, 'image' => '4.png', 'url' => 'http://www.tvnewscheck.com'),)
 				),
 			),
 			'components' => array(

@@ -12,7 +12,7 @@
 		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
         $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
-        $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/link-viewing.js?' . $version, CClientScript::POS_HEAD);
+        $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?' . $version, CClientScript::POS_HEAD);
         ?>
         <script type="text/javascript">
             (function($){

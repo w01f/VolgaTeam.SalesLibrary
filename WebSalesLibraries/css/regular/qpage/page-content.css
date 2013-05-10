@@ -1,0 +1,34 @@
+#content
+{
+	padding-left: 30px;
+}
+
+#content>div
+{
+	width: 100%;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+#page-title
+{
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+#page-header
+{
+	margin-bottom: 30px;
+}
+
+#page-footer
+{
+	margin-top: 30px;
+}
+
+#page-links-container
+{
+	overflow: auto;
+	margin-left: 10px;
+}
+

@@ -55,9 +55,10 @@
 		 * @param string Phone
 		 * @param GroupRecord[] assigned groups
 		 * @param LibraryPage[] assigned pages
+		 * @param int Role
 		 * @soap
 		 */
-		public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $phone, $assignedGroups, $assignedPages)
+		public function setUser($sessionKey, $login, $password, $firstName, $lastName, $email, $phone, $assignedGroups, $assignedPages, $role)
 		{
 			$newUser = false;
 			$resetPassword = false;
@@ -74,6 +75,7 @@
 				$user->last_name = $lastName;
 				$user->email = $email;
 				$user->phone = $phone;
+				$user->role = 0;
 				if ($password !== '')
 				{
 					$user->password = md5($password);
@@ -88,7 +90,7 @@
 					UserLibraryStorage::assignPagesForUser($login, $assignedPages);
 
 				if ($resetPassword)
-					ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser,true);
+					ResetPasswordStorage::resetPasswordForUser($login, $password, $newUser, true);
 			}
 		}
 
@@ -112,7 +114,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				foreach (UserStorage::model()->findAll('role=0') as $userRecord)
+				foreach (UserStorage::model()->findAll('role<>2') as $userRecord)
 				{
 					$user = new UserRecord();
 					$user->id = $userRecord->id;
@@ -121,6 +123,7 @@
 					$user->lastName = $userRecord->last_name;
 					$user->email = $userRecord->email;
 					$user->phone = $userRecord->phone;
+					$user->role = $userRecord->role;
 
 					$assignedLibraryIds = UserLibraryStorage::getLibraryIdsByUser($userRecord->id);
 					$totalLibraries = LibraryStorage::model()->count();
@@ -266,7 +269,7 @@
 						}
 
 					$assignedUsers = UserGroupStorage::getUserIdsByGroup($groupRecord->id);
-					$totalUsers = UserStorage::model()->count('role=0');
+					$totalUsers = UserStorage::model()->count('role<>2');
 					$group->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
 					if (isset($assignedUsers))
 						foreach ($assignedUsers as $userId)
@@ -348,7 +351,7 @@
 							$library->pages[] = $page;
 
 							$assignedUsers = UserLibraryStorage::getUserIdsByPage($pageRecord->id);
-							$totalUsers = UserStorage::model()->count('role=0');
+							$totalUsers = UserStorage::model()->count('role<>2');
 							$page->allUsers = isset($assignedUsers) && $totalUsers == count($assignedUsers);
 							if (isset($assignedUsers))
 								foreach ($assignedUsers as $userId)
