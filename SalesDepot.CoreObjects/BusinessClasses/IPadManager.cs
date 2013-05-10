@@ -366,6 +366,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			if (topLevelFile.CustomKeywords.Tags.Count > 0)
 				destinationLink.tags = string.Join(" ", topLevelFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
 			destinationLink.isRestricted = topLevelFile.IsRestricted;
+			destinationLink.noShare = topLevelFile.NoShare;
 			if (!string.IsNullOrEmpty(topLevelFile.AssignedUsers))
 				destinationLink.assignedUsers = topLevelFile.AssignedUsers;
 			destinationLink.isDead = libraryFile.IsDead;
@@ -540,9 +541,9 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return _siteClient.GetUsers(out message);
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
-			_siteClient.SetUser(login, password, firstName, lastName, email, phone, groups, pages, out message);
+			_siteClient.SetUser(login, password, firstName, lastName, email, phone, role, groups, pages, out message);
 		}
 
 		public void DeleteUser(string login, out string message)
@@ -803,7 +804,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
 			var client = GetAdminClient();
@@ -813,7 +814,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				{
 					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.setUser(sessionKey, login, password, firstName, lastName, email, phone, groups, pages);
+						client.setUser(sessionKey, login, password, firstName, lastName, email, phone, groups, pages, role);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -841,7 +842,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						foreach (var group in uniqueGroups)
 							client.setGroup(sessionKey, group.id, group.name, new UserRecord[] { }, new Services.IPadAdminService.LibraryPage[] { });
 						foreach (var user in users)
-							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray());
+							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray(), 0);
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";

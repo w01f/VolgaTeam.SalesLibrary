@@ -1119,9 +1119,15 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private string emailField;
         
+        private string phoneField;
+        
+        private int roleField;
+        
         private bool selectedField;
         
         private GroupRecord[] groupsField;
+        
+        private string groupNamesField;
         
         private bool allGroupsField;
         
@@ -1190,6 +1196,26 @@ namespace SalesDepot.Services.ContentManagmentService {
         }
         
         /// <remarks/>
+        public string phone {
+            get {
+                return this.phoneField;
+            }
+            set {
+                this.phoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public int role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool selected {
             get {
                 return this.selectedField;
@@ -1206,6 +1232,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string groupNames {
+            get {
+                return this.groupNamesField;
+            }
+            set {
+                this.groupNamesField = value;
             }
         }
         
@@ -2103,6 +2139,8 @@ namespace SalesDepot.Services.ContentManagmentService {
         
         private bool isRestrictedField;
         
+        private bool noShareField;
+        
         private string assignedUsersField;
         
         private bool isDeadField;
@@ -2408,6 +2446,16 @@ namespace SalesDepot.Services.ContentManagmentService {
             }
             set {
                 this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
             }
         }
         

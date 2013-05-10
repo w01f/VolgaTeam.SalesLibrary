@@ -162,7 +162,7 @@ namespace SalesDepot.Services.IPadAdminService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#setUser", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
-        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages) {
+        public void setUser(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages, int role) {
             this.Invoke("setUser", new object[] {
                         sessionKey,
                         login,
@@ -172,16 +172,17 @@ namespace SalesDepot.Services.IPadAdminService {
                         email,
                         phone,
                         assignedGroups,
-                        assignedPages});
+                        assignedPages,
+                        role});
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages) {
-            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, null);
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages, int role) {
+            this.setUserAsync(sessionKey, login, password, firstName, lastName, email, phone, assignedGroups, assignedPages, role, null);
         }
         
         /// <remarks/>
-        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages, object userState) {
+        public void setUserAsync(string sessionKey, string login, string password, string firstName, string lastName, string email, string phone, GroupRecord[] assignedGroups, LibraryPage[] assignedPages, int role, object userState) {
             if ((this.setUserOperationCompleted == null)) {
                 this.setUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsetUserOperationCompleted);
             }
@@ -194,7 +195,8 @@ namespace SalesDepot.Services.IPadAdminService {
                         email,
                         phone,
                         assignedGroups,
-                        assignedPages}, this.setUserOperationCompleted, userState);
+                        assignedPages,
+                        role}, this.setUserOperationCompleted, userState);
         }
         
         private void OnsetUserOperationCompleted(object arg) {
@@ -588,9 +590,13 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private string phoneField;
         
+        private int roleField;
+        
         private bool selectedField;
         
         private GroupRecord[] groupsField;
+        
+        private string groupNamesField;
         
         private bool allGroupsField;
         
@@ -669,6 +675,16 @@ namespace SalesDepot.Services.IPadAdminService {
         }
         
         /// <remarks/>
+        public int role {
+            get {
+                return this.roleField;
+            }
+            set {
+                this.roleField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool selected {
             get {
                 return this.selectedField;
@@ -685,6 +701,16 @@ namespace SalesDepot.Services.IPadAdminService {
             }
             set {
                 this.groupsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string groupNames {
+            get {
+                return this.groupNamesField;
+            }
+            set {
+                this.groupNamesField = value;
             }
         }
         

@@ -234,9 +234,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 				}
 			}
 			updateMessage = message;
-			gridControlUsers.DataSource = _users;
-			UpdateControlsState();
-
+			UpdateFilter(_users.SelectMany(x => x.groups).Select(g => g.name).Distinct().ToArray());
+			FilterUsers();
 			_userCollectionChanged = false;
 		}
 
@@ -253,6 +252,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
+					int role = 0;
 					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -261,7 +261,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -314,6 +314,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 				formEdit.textEditLogin.EditValue = userRecord.login;
 				formEdit.textEditFirstName.EditValue = userRecord.firstName;
 				formEdit.textEditLastName.EditValue = userRecord.lastName;
+				formEdit.textEditPhone.EditValue = userRecord.phone;
 				formEdit.textEditEmail.EditValue = userRecord.email;
 				formEdit.textEditEmailConfirm.EditValue = userRecord.email;
 				if (formEdit.ShowDialog() == DialogResult.OK)
@@ -324,6 +325,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
+					var role = 0;
 					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -332,7 +334,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Updating user...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -399,6 +401,72 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					DeleteUser();
 			}
 		}
+
+		#region Users Filter
+		private bool _userFilterInit;
+		private List<string> _userFilterAllGroups = new List<string>();
+		private List<string> _userFilterSelectedGroups = new List<string>();
+
+		private void FilterUsers()
+		{
+			var filteredRecords = new List<UserRecord>();
+			filteredRecords.AddRange(checkEditEnableUserFilter.Checked ? _users.Where(x => x.groups.Any(y => _userFilterSelectedGroups.Contains(y.name))) : _users);
+			gridControlUsers.DataSource = filteredRecords;
+			UpdateControlsState();
+		}
+
+		private void UpdateFilter(string[] groups)
+		{
+			_userFilterInit = true;
+			_userFilterAllGroups.Clear();
+			_userFilterAllGroups.AddRange(groups);
+			if (_userFilterSelectedGroups.Count > 0)
+				_userFilterSelectedGroups.RemoveAll(x => !_userFilterAllGroups.Contains(x));
+			else
+				_userFilterSelectedGroups.AddRange(_userFilterAllGroups);
+			checkedListBoxControlUserFilterGroups.Items.Clear();
+			foreach (var group in groups)
+				checkedListBoxControlUserFilterGroups.Items.Add(group, _userFilterSelectedGroups.Contains(group));
+			labelControlUserFilterGroupsTitle.Text = string.Format("Groups: {0}", _userFilterAllGroups.Count);
+			_userFilterInit = false;
+		}
+
+		private void checkEditEnableUserFilter_CheckedChanged(object sender, EventArgs e)
+		{
+			checkedListBoxControlUserFilterGroups.Enabled = checkEditEnableUserFilter.Checked;
+			buttonXUserFilterGroupsAll.Enabled = checkEditEnableUserFilter.Checked;
+			buttonXUserFilterGroupsNone.Enabled = checkEditEnableUserFilter.Checked;
+			FilterUsers();
+		}
+
+		private void checkedListBoxControlUserFilterGroups_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
+		{
+			if (_userFilterInit) return;
+			_userFilterSelectedGroups.Clear();
+			foreach (CheckedListBoxItem item in checkedListBoxControlUserFilterGroups.CheckedItems)
+				_userFilterSelectedGroups.Add(item.Value.ToString());
+			FilterUsers();
+		}
+
+		private void buttonXUserFilterGroupsAll_Click(object sender, EventArgs e)
+		{
+			_userFilterInit = true;
+			_userFilterSelectedGroups.Clear();
+			_userFilterSelectedGroups.AddRange(_userFilterAllGroups);
+			checkedListBoxControlUserFilterGroups.CheckAll();
+			FilterUsers();
+			_userFilterInit = false;
+		}
+
+		private void buttonXUserFilterGroupsNone_Click(object sender, EventArgs e)
+		{
+			_userFilterInit = true;
+			_userFilterSelectedGroups.Clear();
+			checkedListBoxControlUserFilterGroups.UnCheckAll();
+			FilterUsers();
+			_userFilterInit = false;
+		}
+		#endregion
 		#endregion
 
 		#region Groups

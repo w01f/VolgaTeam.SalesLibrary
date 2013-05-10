@@ -41,6 +41,7 @@
 			this.gridColumnUsersLogin = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnUsersActions = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.repositoryItemButtonEditUsersActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+			this.gridColumnUsersPhone = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageUsers = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabPageGroups = new DevExpress.XtraTab.XtraTabPage();
@@ -59,7 +60,6 @@
 			this.pnLibraraies = new System.Windows.Forms.Panel();
 			this.buttonXCollapseLibraries = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXExpandLibraries = new DevComponents.DotNetBar.ButtonX();
-			this.gridColumnUsersPhone = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlUsers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditUsersActions)).BeginInit();
@@ -85,7 +85,7 @@
 			this.gridControlUsers.Name = "gridControlUsers";
 			this.gridControlUsers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditUsersActions});
-			this.gridControlUsers.Size = new System.Drawing.Size(890, 451);
+			this.gridControlUsers.Size = new System.Drawing.Size(896, 457);
 			this.gridControlUsers.TabIndex = 2;
 			this.gridControlUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
@@ -145,7 +145,7 @@
 			this.gridColumnUsersFullName.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersFullName.Visible = true;
 			this.gridColumnUsersFullName.VisibleIndex = 0;
-			this.gridColumnUsersFullName.Width = 243;
+			this.gridColumnUsersFullName.Width = 204;
 			// 
 			// gridColumnUsersEmail
 			// 
@@ -156,7 +156,7 @@
 			this.gridColumnUsersEmail.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersEmail.Visible = true;
 			this.gridColumnUsersEmail.VisibleIndex = 1;
-			this.gridColumnUsersEmail.Width = 199;
+			this.gridColumnUsersEmail.Width = 159;
 			// 
 			// gridColumnUsersLogin
 			// 
@@ -167,7 +167,7 @@
 			this.gridColumnUsersLogin.OptionsColumn.ReadOnly = true;
 			this.gridColumnUsersLogin.Visible = true;
 			this.gridColumnUsersLogin.VisibleIndex = 3;
-			this.gridColumnUsersLogin.Width = 172;
+			this.gridColumnUsersLogin.Width = 152;
 			// 
 			// gridColumnUsersActions
 			// 
@@ -190,6 +190,17 @@
 			this.repositoryItemButtonEditUsersActions.Name = "repositoryItemButtonEditUsersActions";
 			this.repositoryItemButtonEditUsersActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditUsersActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditUsersActions_ButtonClick);
+			// 
+			// gridColumnUsersPhone
+			// 
+			this.gridColumnUsersPhone.Caption = "Phone";
+			this.gridColumnUsersPhone.FieldName = "phone";
+			this.gridColumnUsersPhone.Name = "gridColumnUsersPhone";
+			this.gridColumnUsersPhone.OptionsColumn.AllowEdit = false;
+			this.gridColumnUsersPhone.OptionsColumn.ReadOnly = true;
+			this.gridColumnUsersPhone.Visible = true;
+			this.gridColumnUsersPhone.VisibleIndex = 2;
+			this.gridColumnUsersPhone.Width = 151;
 			// 
 			// xtraTabControl
 			// 
@@ -219,14 +230,14 @@
 			// 
 			this.xtraTabPageUsers.Controls.Add(this.gridControlUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
-			this.xtraTabPageUsers.Size = new System.Drawing.Size(890, 451);
+			this.xtraTabPageUsers.Size = new System.Drawing.Size(896, 457);
 			this.xtraTabPageUsers.Text = "IPadUsers";
 			// 
 			// xtraTabPageGroups
 			// 
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(890, 451);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(896, 457);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// gridControlGroups
@@ -237,7 +248,7 @@
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditGroupActions});
-			this.gridControlGroups.Size = new System.Drawing.Size(890, 451);
+			this.gridControlGroups.Size = new System.Drawing.Size(896, 457);
 			this.gridControlGroups.TabIndex = 3;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -323,7 +334,7 @@
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlPages);
 			this.xtraTabPageLibraries.Controls.Add(this.pnLibraraies);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(890, 451);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(896, 457);
 			this.xtraTabPageLibraries.Text = "Libraries";
 			// 
 			// gridControlPages
@@ -334,7 +345,7 @@
 			this.gridControlPages.Name = "gridControlPages";
 			this.gridControlPages.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditPageActions});
-			this.gridControlPages.Size = new System.Drawing.Size(890, 404);
+			this.gridControlPages.Size = new System.Drawing.Size(896, 410);
 			this.gridControlPages.TabIndex = 4;
 			this.gridControlPages.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPages});
@@ -436,7 +447,7 @@
 			this.pnLibraraies.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnLibraraies.Location = new System.Drawing.Point(0, 0);
 			this.pnLibraraies.Name = "pnLibraraies";
-			this.pnLibraraies.Size = new System.Drawing.Size(890, 47);
+			this.pnLibraraies.Size = new System.Drawing.Size(896, 47);
 			this.pnLibraraies.TabIndex = 5;
 			// 
 			// buttonXCollapseLibraries
@@ -466,17 +477,6 @@
 			this.buttonXExpandLibraries.Text = "Expand Libraries";
 			this.buttonXExpandLibraries.TextColor = System.Drawing.Color.Black;
 			this.buttonXExpandLibraries.Click += new System.EventHandler(this.buttonXExpandLibraries_Click);
-			// 
-			// gridColumnUsersPhone
-			// 
-			this.gridColumnUsersPhone.Caption = "Phone";
-			this.gridColumnUsersPhone.FieldName = "phone";
-			this.gridColumnUsersPhone.Name = "gridColumnUsersPhone";
-			this.gridColumnUsersPhone.OptionsColumn.AllowEdit = false;
-			this.gridColumnUsersPhone.OptionsColumn.ReadOnly = true;
-			this.gridColumnUsersPhone.Visible = true;
-			this.gridColumnUsersPhone.VisibleIndex = 2;
-			this.gridColumnUsersPhone.Width = 192;
 			// 
 			// IPadPermissionsManagerControl
 			// 

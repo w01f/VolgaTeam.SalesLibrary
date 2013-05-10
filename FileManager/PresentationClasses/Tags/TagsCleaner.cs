@@ -17,6 +17,7 @@ namespace FileManager.PresentationClasses.Tags
 		private readonly Dictionary<Guid, FileCard> _fileCardsCopy = new Dictionary<Guid, FileCard>();
 		private readonly Dictionary<Guid, AttachmentProperties> _attachmentsCopy = new Dictionary<Guid, AttachmentProperties>();
 		private readonly Dictionary<Guid, bool> _securityRestrictedCopy = new Dictionary<Guid, bool>();
+		private readonly Dictionary<Guid, bool> _securityNoShareCopy = new Dictionary<Guid, bool>();
 		private readonly Dictionary<Guid, string> _securityAssignedUsersCopy = new Dictionary<Guid, string>();
 
 		private bool _categoriesChanged;
@@ -59,6 +60,7 @@ namespace FileManager.PresentationClasses.Tags
 			_fileCardsCopy.Clear();
 			_attachmentsCopy.Clear();
 			_securityRestrictedCopy.Clear();
+			_securityNoShareCopy.Clear();
 			_securityAssignedUsersCopy.Clear();
 			foreach (var link in activePage.Page.Folders.SelectMany(folder => folder.Files))
 			{
@@ -75,6 +77,7 @@ namespace FileManager.PresentationClasses.Tags
 				_attachmentsCopy.Add(link.Identifier, link.AttachmentProperties.Clone(link));
 
 				_securityRestrictedCopy.Add(link.Identifier, link.IsRestricted);
+				_securityNoShareCopy.Add(link.Identifier, link.NoShare);
 				_securityAssignedUsersCopy.Add(link.Identifier, link.AssignedUsers);
 			}
 		}
@@ -104,6 +107,7 @@ namespace FileManager.PresentationClasses.Tags
 				if (_securityChanged)
 				{
 					link.IsRestricted = _securityRestrictedCopy[link.Identifier];
+					link.NoShare = _securityNoShareCopy[link.Identifier];
 					link.AssignedUsers  = _securityAssignedUsersCopy[link.Identifier];
 				}
 			}
@@ -202,6 +206,8 @@ namespace FileManager.PresentationClasses.Tags
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
 			foreach (var restrictedPair in _securityRestrictedCopy)
 				_securityRestrictedCopy[restrictedPair.Key] = false;
+			foreach (var noSharePair in _securityNoShareCopy)
+				_securityNoShareCopy[noSharePair.Key] = false;
 			foreach (var assignedUsersPair in _securityAssignedUsersCopy)
 				_securityAssignedUsersCopy[assignedUsersPair.Key] = null;
 			_securityChanged = true;

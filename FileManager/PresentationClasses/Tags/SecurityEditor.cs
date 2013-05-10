@@ -31,6 +31,7 @@ namespace FileManager.PresentationClasses.Tags
 			rbSecurityAllowed.Font = new Font(rbSecurityAllowed.Font.FontFamily, rbSecurityAllowed.Font.Size - 2, rbSecurityAllowed.Font.Style);
 			rbSecurityDenied.Font = new Font(rbSecurityDenied.Font.FontFamily, rbSecurityDenied.Font.Size - 2, rbSecurityDenied.Font.Style);
 			rbSecurityRestricted.Font = new Font(rbSecurityRestricted.Font.FontFamily, rbSecurityRestricted.Font.Size - 2, rbSecurityRestricted.Font.Style);
+			ckSecurityShareLink.Font = new Font(ckSecurityShareLink.Font.FontFamily, ckSecurityShareLink.Font.Size - 2, ckSecurityShareLink.Font.Style);
 		}
 
 		#region ITagsEditor Members
@@ -41,6 +42,7 @@ namespace FileManager.PresentationClasses.Tags
 			pnButtons.Enabled = false;
 			pnData.Enabled = false;
 			rbSecurityAllowed.Checked = true;
+			ckSecurityShareLink.Checked = true;
 			memoEditSecurityUsers.EditValue = !string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null;
 			Enabled = false;
 
@@ -50,8 +52,8 @@ namespace FileManager.PresentationClasses.Tags
 			Enabled = defaultLink != null;
 			if (defaultLink == null) return;
 
-			var noData = activePage.SelectedLinks.All(x => !x.IsRestricted);
-			var sameData = defaultLink != null && activePage.SelectedLinks.All(x => x.IsRestricted = defaultLink.IsRestricted && x.AssignedUsers == defaultLink.AssignedUsers);
+			var noData = activePage.SelectedLinks.All(x => !x.IsRestricted && !x.NoShare);
+			var sameData = defaultLink != null && activePage.SelectedLinks.All(x => x.IsRestricted = defaultLink.IsRestricted && x.AssignedUsers == defaultLink.AssignedUsers && x.NoShare == defaultLink.NoShare);
 
 			pnButtons.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
@@ -61,6 +63,7 @@ namespace FileManager.PresentationClasses.Tags
 				rbSecurityAllowed.Checked = !defaultLink.IsRestricted;
 				rbSecurityDenied.Checked = defaultLink.IsRestricted && string.IsNullOrEmpty(defaultLink.AssignedUsers);
 				rbSecurityRestricted.Checked = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers);
+				ckSecurityShareLink.Checked = defaultLink.NoShare;
 				memoEditSecurityUsers.EditValue = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers) ? defaultLink.AssignedUsers : (!string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null);
 			}
 
@@ -74,6 +77,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var link in activePage.SelectedLinks)
 			{
 				link.IsRestricted = rbSecurityDenied.Checked || rbSecurityRestricted.Checked;
+				link.NoShare = !ckSecurityShareLink.Checked;
 				if (rbSecurityRestricted.Checked && memoEditSecurityUsers.EditValue != null && !string.IsNullOrEmpty(memoEditSecurityUsers.EditValue.ToString().Trim()))
 				{
 					link.AssignedUsers = memoEditSecurityUsers.EditValue.ToString().Trim();
@@ -98,6 +102,7 @@ namespace FileManager.PresentationClasses.Tags
 			if (AppManager.Instance.ShowWarningQuestion("Are you sure You want to DELETE ALL KEYWORD TAGS for the selected files?") != DialogResult.Yes) return;
 			foreach (var link in activePage.SelectedLinks)
 			{
+				link.NoShare = false;
 				link.IsRestricted = false;
 				link.AssignedUsers = null;
 			}

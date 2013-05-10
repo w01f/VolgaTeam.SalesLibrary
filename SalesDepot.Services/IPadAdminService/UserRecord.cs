@@ -10,6 +10,22 @@ namespace SalesDepot.Services.IPadAdminService
 			get { return (firstName + " " + lastName).Trim(); }
 		}
 
+		public string Role
+		{
+			get
+			{
+				switch (role)
+				{
+					case 1:
+						return "Admin";
+					case 3:
+						return "Advanced";
+					default:
+						return "User";
+				}
+			}
+		}
+
 		public string LoginWithName
 		{
 			get { return string.Format("{0} ({1})", login, FullName); }

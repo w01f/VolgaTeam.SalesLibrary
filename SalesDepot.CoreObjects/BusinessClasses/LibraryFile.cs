@@ -30,6 +30,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		bool DisplayAsBold { get; }
 		bool IsExpired { get; }
 		bool IsRestricted { get; set; }
+		bool NoShare { get; set; }
 		bool DoNotGeneratePreview { get; set; }
 		bool ForcePreview { get; set; }
 		string AssignedUsers { get; set; }

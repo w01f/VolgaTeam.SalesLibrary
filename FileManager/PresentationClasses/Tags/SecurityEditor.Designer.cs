@@ -32,6 +32,7 @@
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
+			this.ckSecurityShareLink = new System.Windows.Forms.CheckBox();
 			this.memoEditSecurityUsers = new DevExpress.XtraEditors.MemoEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.rbSecurityAllowed = new System.Windows.Forms.RadioButton();
@@ -71,6 +72,7 @@
 			// 
 			// pnData
 			// 
+			this.pnData.Controls.Add(this.ckSecurityShareLink);
 			this.pnData.Controls.Add(this.memoEditSecurityUsers);
 			this.pnData.Controls.Add(this.rbSecurityAllowed);
 			this.pnData.Controls.Add(this.rbSecurityRestricted);
@@ -81,6 +83,18 @@
 			this.pnData.Size = new System.Drawing.Size(346, 329);
 			this.pnData.TabIndex = 1;
 			// 
+			// ckSecurityShareLink
+			// 
+			this.ckSecurityShareLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ckSecurityShareLink.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckSecurityShareLink.Location = new System.Drawing.Point(5, 285);
+			this.ckSecurityShareLink.Name = "ckSecurityShareLink";
+			this.ckSecurityShareLink.Size = new System.Drawing.Size(336, 41);
+			this.ckSecurityShareLink.TabIndex = 39;
+			this.ckSecurityShareLink.Text = "Allow Users to Email this Link and post to quickSITES";
+			this.ckSecurityShareLink.UseVisualStyleBackColor = true;
+			// 
 			// memoEditSecurityUsers
 			// 
 			this.memoEditSecurityUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -90,7 +104,7 @@
 			this.memoEditSecurityUsers.Location = new System.Drawing.Point(23, 189);
 			this.memoEditSecurityUsers.Name = "memoEditSecurityUsers";
 			this.memoEditSecurityUsers.Properties.NullText = "Type Usernames, separated by  commas...";
-			this.memoEditSecurityUsers.Size = new System.Drawing.Size(318, 137);
+			this.memoEditSecurityUsers.Size = new System.Drawing.Size(318, 90);
 			this.memoEditSecurityUsers.StyleController = this.styleController;
 			this.memoEditSecurityUsers.TabIndex = 38;
 			// 
@@ -206,5 +220,6 @@
 		public System.Windows.Forms.RadioButton rbSecurityAllowed;
 		public System.Windows.Forms.RadioButton rbSecurityRestricted;
 		public System.Windows.Forms.RadioButton rbSecurityDenied;
+		public System.Windows.Forms.CheckBox ckSecurityShareLink;
 	}
 }

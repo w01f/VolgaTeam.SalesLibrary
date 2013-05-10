@@ -776,6 +776,7 @@ namespace FileManager.PresentationClasses.WallBin
 			_formLinkProperties.rbSecurityDenied.Checked = file.IsRestricted && string.IsNullOrEmpty(file.AssignedUsers);
 			_formLinkProperties.rbSecurityRestricted.Checked = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers);
 			_formLinkProperties.memoEditSecurityUsers.EditValue = file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers) ? file.AssignedUsers : (!string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null);
+			_formLinkProperties.ckSecurityShareLink.Checked = !file.NoShare;
 
 			if (file.Type != FileTypes.LineBreak && file.Type != FileTypes.Network && file.Type != FileTypes.Url && file.Type != FileTypes.Excel && file.Type != FileTypes.MediaPlayerVideo && file.Type != FileTypes.QuickTimeVideo && file.Format != "key")
 			{
@@ -812,6 +813,7 @@ namespace FileManager.PresentationClasses.WallBin
 			file.BannerProperties = _formLinkProperties.BannerProperties;
 
 			file.IsRestricted = _formLinkProperties.rbSecurityDenied.Checked || _formLinkProperties.rbSecurityRestricted.Checked;
+			file.NoShare = !_formLinkProperties.ckSecurityShareLink.Checked;
 			if (_formLinkProperties.rbSecurityRestricted.Checked && _formLinkProperties.memoEditSecurityUsers.EditValue != null && !string.IsNullOrEmpty(_formLinkProperties.memoEditSecurityUsers.EditValue.ToString().Trim()))
 			{
 				file.AssignedUsers = _formLinkProperties.memoEditSecurityUsers.EditValue.ToString().Trim();

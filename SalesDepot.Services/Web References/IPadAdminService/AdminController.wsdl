@@ -36,8 +36,10 @@
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="phone" type="xsd:string" />
+          <xsd:element name="role" type="xsd:int" />
           <xsd:element name="selected" type="xsd:boolean" />
           <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="groupNames" type="xsd:string" />
           <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
@@ -346,6 +348,7 @@
     <wsdl:part name="phone" type="xsd:string" />
     <wsdl:part name="assignedGroups" type="tns:GroupRecordArray" />
     <wsdl:part name="assignedPages" type="tns:LibraryPageArray" />
+    <wsdl:part name="role" type="xsd:int" />
   </wsdl:message>
   <wsdl:message name="setUserResponse" />
   <wsdl:message name="deleteUserRequest">

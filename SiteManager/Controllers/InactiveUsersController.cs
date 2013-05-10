@@ -1,4 +1,5 @@
-﻿using FileManager.Controllers;
+﻿using System;
+using FileManager.Controllers;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.SiteManager.PresentationClasses.InactiveUsers;
 using SalesDepot.SiteManager.TabPages;
@@ -28,6 +29,7 @@ namespace SalesDepot.SiteManager.Controllers
 				_tabPage.Controls.Add(InactiveUsersManagerControl);
 			InactiveUsersManagerControl.BringToFront();
 
+			FormMain.Instance.buttonItemInactiveUsersExport.Click += buttonItemInactiveUsersExport_Click;
 			FormMain.Instance.comboBoxEditInactiveUsersSite.Properties.Items.Clear();
 			FormMain.Instance.comboBoxEditInactiveUsersSite.Properties.Items.AddRange(BusinessClasses.SiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditInactiveUsersSite.EditValueChanged += (o, e) =>
@@ -61,5 +63,10 @@ namespace SalesDepot.SiteManager.Controllers
 			IsActive = true;
 		}
 		#endregion
+
+		private void buttonItemInactiveUsersExport_Click(object sender, EventArgs e)
+		{
+			InactiveUsersManagerControl.ExportUsers();
+		}
 	}
 }

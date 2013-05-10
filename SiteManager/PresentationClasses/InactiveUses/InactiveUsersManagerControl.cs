@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraPrinting;
 using SalesDepot.Services.InactiveUsersService;
 using SalesDepot.SiteManager.ConfigurationClasses;
 using SalesDepot.SiteManager.ToolForms;
+using Font = System.Drawing.Font;
 
 namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 {
@@ -194,6 +199,33 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 			labelControlEmailResetUserCount.Text = labelControlEmailDeleteUserCount.Text = selecteUsersCount > 0 ? String.Format("The Email will be sent to: {0} {1}", selecteUsersCount, selecteUsersCount > 1 ? "Users" : "User") : "Email will not be sent. There are no selected users";
 		}
 
+		public void ExportUsers()
+		{
+			using (var dialog = new SaveFileDialog())
+			{
+				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+				dialog.FileName = string.Format("InactiveUsers({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.Filter = "Excel files|*.xls";
+				dialog.Title = "Export Inactive Users";
+				if (dialog.ShowDialog() == DialogResult.OK)
+				{
+					gridColumnUsersSelected.Visible = false;
+					var options = new XlsExportOptions();
+					options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
+					options.TextExportMode = TextExportMode.Text;
+					options.ExportHyperlinks = true;
+					options.ShowGridLines = true;
+					options.ExportMode = XlsExportMode.SingleFile;
+					printableComponentLink.CreateDocument();
+					printableComponentLink.PrintingSystem.ExportToXls(dialog.FileName, options);
+					gridColumnUsersSelected.Visible = true;
+
+					if (File.Exists(dialog.FileName))
+						Process.Start(dialog.FileName);
+				}
+			}
+		}
+
 		private void buttonXLoadData_Click(object sender, EventArgs e)
 		{
 			RefreshData(true);
@@ -218,6 +250,17 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 		private void buttonXEmailDeleteSend_Click(object sender, EventArgs e)
 		{
 			DeleteUsers();
+		}
+
+		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)
+		{
+			var startDate = dateEditStart.DateTime;
+			var endDate = dateEditEnd.DateTime.AddDays(1);
+			var reportHeader = string.Format("{0} Users did not use the website during this period: {1} - {2}", gridViewRecords.RowCount, startDate.ToString("MMMM dd"), endDate.AddDays(-1).ToString("MMMM dd"));
+			e.Graph.StringFormat = new BrickStringFormat(StringAlignment.Center);
+			e.Graph.Font = new Font("Arial", 12, FontStyle.Bold);
+			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
+			e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None);
 		}
 	}
 }

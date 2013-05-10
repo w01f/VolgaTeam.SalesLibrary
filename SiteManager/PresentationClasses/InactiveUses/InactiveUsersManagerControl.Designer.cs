@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InactiveUsersManagerControl));
 			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.gridControlRecords = new DevExpress.XtraGrid.GridControl();
@@ -68,6 +69,8 @@
 			this.labelControlEmailDeleteSubject = new DevExpress.XtraEditors.LabelControl();
 			this.textEditEmailDeleteSender = new DevExpress.XtraEditors.TextEdit();
 			this.labelControlEmailDeleteSender = new DevExpress.XtraEditors.LabelControl();
+			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
+			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlRecords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecords)).BeginInit();
@@ -94,6 +97,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditEmailDeleteBody.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailDeleteSubject.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailDeleteSender.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// styleManager
@@ -124,7 +128,7 @@
 			this.gridControlRecords.Name = "gridControlRecords";
 			this.gridControlRecords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditUsers});
-			this.gridControlRecords.Size = new System.Drawing.Size(269, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(265, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -237,7 +241,7 @@
 			this.splitContainerControlData.Panel1.Text = "Panel1";
 			this.splitContainerControlData.Panel2.Controls.Add(this.gridControlRecords);
 			this.splitContainerControlData.Panel2.Text = "Panel2";
-			this.splitContainerControlData.Size = new System.Drawing.Size(525, 483);
+			this.splitContainerControlData.Size = new System.Drawing.Size(523, 483);
 			this.splitContainerControlData.TabIndex = 0;
 			this.splitContainerControlData.Text = "splitContainerControl1";
 			// 
@@ -367,7 +371,7 @@
 			// 
 			this.xtraTabPageEmailReset.Controls.Add(this.panelEmailReset);
 			this.xtraTabPageEmailReset.Name = "xtraTabPageEmailReset";
-			this.xtraTabPageEmailReset.Size = new System.Drawing.Size(378, 457);
+			this.xtraTabPageEmailReset.Size = new System.Drawing.Size(372, 451);
 			this.xtraTabPageEmailReset.Text = "Password Reset Email";
 			// 
 			// panelEmailReset
@@ -384,7 +388,7 @@
 			this.panelEmailReset.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEmailReset.Location = new System.Drawing.Point(0, 0);
 			this.panelEmailReset.Name = "panelEmailReset";
-			this.panelEmailReset.Size = new System.Drawing.Size(378, 457);
+			this.panelEmailReset.Size = new System.Drawing.Size(372, 451);
 			this.panelEmailReset.TabIndex = 0;
 			// 
 			// buttonXEmailResetSend
@@ -394,9 +398,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXEmailResetSend.CausesValidation = false;
 			this.buttonXEmailResetSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmailResetSend.Location = new System.Drawing.Point(8, 407);
+			this.buttonXEmailResetSend.Location = new System.Drawing.Point(8, 401);
 			this.buttonXEmailResetSend.Name = "buttonXEmailResetSend";
-			this.buttonXEmailResetSend.Size = new System.Drawing.Size(364, 38);
+			this.buttonXEmailResetSend.Size = new System.Drawing.Size(358, 38);
 			this.buttonXEmailResetSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmailResetSend.TabIndex = 17;
 			this.buttonXEmailResetSend.Text = "Send Email";
@@ -407,7 +411,7 @@
 			// 
 			this.labelControlEmailResetUserCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelControlEmailResetUserCount.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlEmailResetUserCount.Location = new System.Drawing.Point(8, 382);
+			this.labelControlEmailResetUserCount.Location = new System.Drawing.Point(8, 376);
 			this.labelControlEmailResetUserCount.Name = "labelControlEmailResetUserCount";
 			this.labelControlEmailResetUserCount.Size = new System.Drawing.Size(321, 16);
 			this.labelControlEmailResetUserCount.StyleController = this.styleController;
@@ -421,7 +425,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditEmailResetBody.Location = new System.Drawing.Point(8, 166);
 			this.memoEditEmailResetBody.Name = "memoEditEmailResetBody";
-			this.memoEditEmailResetBody.Size = new System.Drawing.Size(364, 199);
+			this.memoEditEmailResetBody.Size = new System.Drawing.Size(358, 193);
 			this.memoEditEmailResetBody.StyleController = this.styleController;
 			this.memoEditEmailResetBody.TabIndex = 7;
 			// 
@@ -440,7 +444,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailResetSubject.Location = new System.Drawing.Point(8, 94);
 			this.textEditEmailResetSubject.Name = "textEditEmailResetSubject";
-			this.textEditEmailResetSubject.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailResetSubject.Size = new System.Drawing.Size(358, 22);
 			this.textEditEmailResetSubject.StyleController = this.styleController;
 			this.textEditEmailResetSubject.TabIndex = 5;
 			// 
@@ -459,7 +463,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailResetSender.Location = new System.Drawing.Point(8, 28);
 			this.textEditEmailResetSender.Name = "textEditEmailResetSender";
-			this.textEditEmailResetSender.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailResetSender.Size = new System.Drawing.Size(358, 22);
 			this.textEditEmailResetSender.StyleController = this.styleController;
 			this.textEditEmailResetSender.TabIndex = 3;
 			// 
@@ -477,7 +481,7 @@
 			this.xtraTabPageEmailDelete.Controls.Add(this.panelEmailDelete);
 			this.xtraTabPageEmailDelete.Name = "xtraTabPageEmailDelete";
 			this.xtraTabPageEmailDelete.PageEnabled = false;
-			this.xtraTabPageEmailDelete.Size = new System.Drawing.Size(378, 457);
+			this.xtraTabPageEmailDelete.Size = new System.Drawing.Size(372, 451);
 			this.xtraTabPageEmailDelete.Text = "Account Termination Email";
 			// 
 			// panelEmailDelete
@@ -494,7 +498,7 @@
 			this.panelEmailDelete.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panelEmailDelete.Location = new System.Drawing.Point(0, 0);
 			this.panelEmailDelete.Name = "panelEmailDelete";
-			this.panelEmailDelete.Size = new System.Drawing.Size(378, 457);
+			this.panelEmailDelete.Size = new System.Drawing.Size(372, 451);
 			this.panelEmailDelete.TabIndex = 1;
 			// 
 			// buttonXEmailDeleteSend
@@ -504,9 +508,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXEmailDeleteSend.CausesValidation = false;
 			this.buttonXEmailDeleteSend.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXEmailDeleteSend.Location = new System.Drawing.Point(8, 407);
+			this.buttonXEmailDeleteSend.Location = new System.Drawing.Point(8, 401);
 			this.buttonXEmailDeleteSend.Name = "buttonXEmailDeleteSend";
-			this.buttonXEmailDeleteSend.Size = new System.Drawing.Size(364, 38);
+			this.buttonXEmailDeleteSend.Size = new System.Drawing.Size(358, 38);
 			this.buttonXEmailDeleteSend.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.buttonXEmailDeleteSend.TabIndex = 17;
 			this.buttonXEmailDeleteSend.Text = "Send Email";
@@ -517,7 +521,7 @@
 			// 
 			this.labelControlEmailDeleteUserCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.labelControlEmailDeleteUserCount.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlEmailDeleteUserCount.Location = new System.Drawing.Point(8, 382);
+			this.labelControlEmailDeleteUserCount.Location = new System.Drawing.Point(8, 376);
 			this.labelControlEmailDeleteUserCount.Name = "labelControlEmailDeleteUserCount";
 			this.labelControlEmailDeleteUserCount.Size = new System.Drawing.Size(321, 16);
 			this.labelControlEmailDeleteUserCount.StyleController = this.styleController;
@@ -531,7 +535,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditEmailDeleteBody.Location = new System.Drawing.Point(8, 166);
 			this.memoEditEmailDeleteBody.Name = "memoEditEmailDeleteBody";
-			this.memoEditEmailDeleteBody.Size = new System.Drawing.Size(364, 199);
+			this.memoEditEmailDeleteBody.Size = new System.Drawing.Size(358, 193);
 			this.memoEditEmailDeleteBody.StyleController = this.styleController;
 			this.memoEditEmailDeleteBody.TabIndex = 7;
 			// 
@@ -550,7 +554,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailDeleteSubject.Location = new System.Drawing.Point(8, 94);
 			this.textEditEmailDeleteSubject.Name = "textEditEmailDeleteSubject";
-			this.textEditEmailDeleteSubject.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailDeleteSubject.Size = new System.Drawing.Size(358, 22);
 			this.textEditEmailDeleteSubject.StyleController = this.styleController;
 			this.textEditEmailDeleteSubject.TabIndex = 5;
 			// 
@@ -569,7 +573,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textEditEmailDeleteSender.Location = new System.Drawing.Point(8, 28);
 			this.textEditEmailDeleteSender.Name = "textEditEmailDeleteSender";
-			this.textEditEmailDeleteSender.Size = new System.Drawing.Size(364, 22);
+			this.textEditEmailDeleteSender.Size = new System.Drawing.Size(358, 22);
 			this.textEditEmailDeleteSender.StyleController = this.styleController;
 			this.textEditEmailDeleteSender.TabIndex = 3;
 			// 
@@ -581,6 +585,23 @@
 			this.labelControlEmailDeleteSender.StyleController = this.styleController;
 			this.labelControlEmailDeleteSender.TabIndex = 2;
 			this.labelControlEmailDeleteSender.Text = "Email Sent From:";
+			// 
+			// printingSystem
+			// 
+			this.printingSystem.Links.AddRange(new object[] {
+            this.printableComponentLink});
+			// 
+			// printableComponentLink
+			// 
+			this.printableComponentLink.Component = this.gridControlRecords;
+			// 
+			// 
+			// 
+			this.printableComponentLink.ImageCollection.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("printableComponentLink1.ImageCollection.ImageStream")));
+			this.printableComponentLink.PaperKind = System.Drawing.Printing.PaperKind.A4;
+			this.printableComponentLink.PrintingSystem = this.printingSystem;
+			this.printableComponentLink.PrintingSystemBase = this.printingSystem;
+			this.printableComponentLink.CreateReportHeaderArea += new DevExpress.XtraPrinting.CreateAreaEventHandler(this.printableComponentLink_CreateReportHeaderArea);
 			// 
 			// InactiveUsersManagerControl
 			// 
@@ -620,6 +641,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.memoEditEmailDeleteBody.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailDeleteSubject.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailDeleteSender.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.printingSystem)).EndInit();
 			this.ResumeLayout(false);
 
         }
@@ -665,5 +687,7 @@
 		private DevExpress.XtraEditors.LabelControl labelControlEmailDeleteSubject;
 		private DevExpress.XtraEditors.TextEdit textEditEmailDeleteSender;
 		private DevExpress.XtraEditors.LabelControl labelControlEmailDeleteSender;
+		private DevExpress.XtraPrinting.PrintingSystem printingSystem;
+		private DevExpress.XtraPrinting.PrintableComponentLink printableComponentLink;
     }
 }

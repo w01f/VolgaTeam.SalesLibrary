@@ -211,6 +211,7 @@ namespace FileManager.PresentationClasses.IPad
 					string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
+					var role = 0;
 					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
@@ -219,7 +220,7 @@ namespace FileManager.PresentationClasses.IPad
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -284,6 +285,7 @@ namespace FileManager.PresentationClasses.IPad
 						string lastName = formEdit.textEditLastName.EditValue != null ? formEdit.textEditLastName.EditValue.ToString() : string.Empty;
 						string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 						string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
+						var role = 0;
 						var groups = new List<GroupRecord>(formEdit.AssignedGroups);
 						var pages = new List<LibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
@@ -292,7 +294,7 @@ namespace FileManager.PresentationClasses.IPad
 							Enabled = false;
 							form.laProgress.Text = "Updating user...";
 							form.TopMost = true;
-							var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, groups.ToArray(), pages.ToArray(), out message));
+							var thread = new Thread(() => ParentDecorator.Library.IPadManager.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 							form.Show();
 							thread.Start();
 							while (thread.IsAlive)

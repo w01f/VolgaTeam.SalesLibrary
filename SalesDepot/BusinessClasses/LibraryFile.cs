@@ -17,6 +17,7 @@ namespace SalesDepot.BusinessClasses
 	{
 		private string _assignedUsers;
 		private bool _isRestricted;
+		private bool _noShare;
 		private bool _linkAvailabel;
 		private bool _linkAvailabilityChecked;
 
@@ -343,6 +344,17 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
+		public bool NoShare
+		{
+			get { return _noShare; }
+			set
+			{
+				if (_noShare != value)
+					LastChanged = DateTime.Now;
+				_noShare = value;
+			}
+		}
+
 		public string AssignedUsers
 		{
 			get { return _assignedUsers; }
@@ -391,6 +403,7 @@ namespace SalesDepot.BusinessClasses
 			file.Type = Type;
 			file.AddDate = AddDate;
 			file.IsRestricted = IsRestricted;
+			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
@@ -420,6 +433,7 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<Order>" + Order + @"</Order>");
 			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
+			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
@@ -502,6 +516,10 @@ namespace SalesDepot.BusinessClasses
 					case "IsRestricted":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_isRestricted = tempBool;
+						break;
+					case "NoShare":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_noShare = tempBool;
 						break;
 					case "AssignedUsers":
 						_assignedUsers = childNode.InnerText;

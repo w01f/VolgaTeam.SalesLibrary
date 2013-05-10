@@ -52,15 +52,15 @@
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageNotes = new DevExpress.XtraTab.XtraTabPage();
-			this.pnVideoForcePreview = new System.Windows.Forms.Panel();
+			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.pnKeynotePreview = new System.Windows.Forms.Panel();
 			this.laKeynotePreviewDetail = new System.Windows.Forms.Label();
 			this.pbKeynotePreview = new System.Windows.Forms.PictureBox();
 			this.laKeynotePreview = new System.Windows.Forms.Label();
+			this.pnVideoForcePreview = new System.Windows.Forms.Panel();
 			this.ckVideoForcePreview = new System.Windows.Forms.CheckBox();
 			this.pbVideoForcePreview = new System.Windows.Forms.PictureBox();
 			this.laVideoForcePreview = new System.Windows.Forms.Label();
-			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.xtraTabPageSearchTags = new DevExpress.XtraTab.XtraTabPage();
 			this.xtraTabControlSearchTags = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageSearchTagsCategories = new DevExpress.XtraTab.XtraTabPage();
@@ -146,6 +146,7 @@
 			this.laFontColor = new System.Windows.Forms.Label();
 			this.xtraTabPageSecurity = new DevExpress.XtraTab.XtraTabPage();
 			this.groupBoxSecurity = new System.Windows.Forms.GroupBox();
+			this.ckSecurityShareLink = new System.Windows.Forms.CheckBox();
 			this.memoEditSecurityUsers = new DevExpress.XtraEditors.MemoEdit();
 			this.rbSecurityAllowed = new System.Windows.Forms.RadioButton();
 			this.rbSecurityRestricted = new System.Windows.Forms.RadioButton();
@@ -213,9 +214,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.xtraTabControl.SuspendLayout();
 			this.xtraTabPageNotes.SuspendLayout();
-			this.pnVideoForcePreview.SuspendLayout();
 			this.pnKeynotePreview.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbKeynotePreview)).BeginInit();
+			this.pnVideoForcePreview.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbVideoForcePreview)).BeginInit();
 			this.xtraTabPageSearchTags.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).BeginInit();
@@ -501,15 +502,16 @@
 			this.xtraTabPageNotes.Size = new System.Drawing.Size(637, 520);
 			this.xtraTabPageNotes.Text = "Notes";
 			// 
-			// pnVideoForcePreview
+			// ckDoNotGeneratePreview
 			// 
-			this.pnVideoForcePreview.Controls.Add(this.ckVideoForcePreview);
-			this.pnVideoForcePreview.Controls.Add(this.pbVideoForcePreview);
-			this.pnVideoForcePreview.Controls.Add(this.laVideoForcePreview);
-			this.pnVideoForcePreview.Location = new System.Drawing.Point(10, 326);
-			this.pnVideoForcePreview.Name = "pnVideoForcePreview";
-			this.pnVideoForcePreview.Size = new System.Drawing.Size(616, 145);
-			this.pnVideoForcePreview.TabIndex = 8;
+			this.ckDoNotGeneratePreview.AutoSize = true;
+			this.ckDoNotGeneratePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(10, 333);
+			this.ckDoNotGeneratePreview.Name = "ckDoNotGeneratePreview";
+			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(448, 20);
+			this.ckDoNotGeneratePreview.TabIndex = 5;
+			this.ckDoNotGeneratePreview.Text = "Do not generate gallery preview (for Huge files like Nielsen Books)";
+			this.ckDoNotGeneratePreview.UseVisualStyleBackColor = true;
 			// 
 			// pnKeynotePreview
 			// 
@@ -550,6 +552,16 @@
 			this.laKeynotePreview.TabIndex = 7;
 			this.laKeynotePreview.Text = "This is an Apple Keynote File!";
 			// 
+			// pnVideoForcePreview
+			// 
+			this.pnVideoForcePreview.Controls.Add(this.ckVideoForcePreview);
+			this.pnVideoForcePreview.Controls.Add(this.pbVideoForcePreview);
+			this.pnVideoForcePreview.Controls.Add(this.laVideoForcePreview);
+			this.pnVideoForcePreview.Location = new System.Drawing.Point(10, 326);
+			this.pnVideoForcePreview.Name = "pnVideoForcePreview";
+			this.pnVideoForcePreview.Size = new System.Drawing.Size(616, 145);
+			this.pnVideoForcePreview.TabIndex = 8;
+			// 
 			// ckVideoForcePreview
 			// 
 			this.ckVideoForcePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -579,17 +591,6 @@
 			this.laVideoForcePreview.Size = new System.Drawing.Size(236, 22);
 			this.laVideoForcePreview.TabIndex = 7;
 			this.laVideoForcePreview.Text = "HTML5 Video Condition:";
-			// 
-			// ckDoNotGeneratePreview
-			// 
-			this.ckDoNotGeneratePreview.AutoSize = true;
-			this.ckDoNotGeneratePreview.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckDoNotGeneratePreview.Location = new System.Drawing.Point(10, 333);
-			this.ckDoNotGeneratePreview.Name = "ckDoNotGeneratePreview";
-			this.ckDoNotGeneratePreview.Size = new System.Drawing.Size(448, 20);
-			this.ckDoNotGeneratePreview.TabIndex = 5;
-			this.ckDoNotGeneratePreview.Text = "Do not generate gallery preview (for Huge files like Nielsen Books)";
-			this.ckDoNotGeneratePreview.UseVisualStyleBackColor = true;
 			// 
 			// xtraTabPageSearchTags
 			// 
@@ -1834,6 +1835,7 @@
 			this.groupBoxSecurity.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.groupBoxSecurity.Controls.Add(this.ckSecurityShareLink);
 			this.groupBoxSecurity.Controls.Add(this.memoEditSecurityUsers);
 			this.groupBoxSecurity.Controls.Add(this.rbSecurityAllowed);
 			this.groupBoxSecurity.Controls.Add(this.rbSecurityRestricted);
@@ -1844,6 +1846,18 @@
 			this.groupBoxSecurity.TabIndex = 1;
 			this.groupBoxSecurity.TabStop = false;
 			// 
+			// ckSecurityShareLink
+			// 
+			this.ckSecurityShareLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.ckSecurityShareLink.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.ckSecurityShareLink.Location = new System.Drawing.Point(8, 472);
+			this.ckSecurityShareLink.Name = "ckSecurityShareLink";
+			this.ckSecurityShareLink.Size = new System.Drawing.Size(596, 29);
+			this.ckSecurityShareLink.TabIndex = 35;
+			this.ckSecurityShareLink.Text = "Allow Users to Email this Link and post to quickSITES";
+			this.ckSecurityShareLink.UseVisualStyleBackColor = true;
+			// 
 			// memoEditSecurityUsers
 			// 
 			this.memoEditSecurityUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1853,7 +1867,7 @@
 			this.memoEditSecurityUsers.Location = new System.Drawing.Point(24, 189);
 			this.memoEditSecurityUsers.Name = "memoEditSecurityUsers";
 			this.memoEditSecurityUsers.Properties.NullText = "Type Usernames, separated by  commas...";
-			this.memoEditSecurityUsers.Size = new System.Drawing.Size(580, 306);
+			this.memoEditSecurityUsers.Size = new System.Drawing.Size(580, 277);
 			this.memoEditSecurityUsers.StyleController = this.styleController;
 			this.memoEditSecurityUsers.TabIndex = 34;
 			// 
@@ -2765,11 +2779,11 @@
 			this.xtraTabControl.ResumeLayout(false);
 			this.xtraTabPageNotes.ResumeLayout(false);
 			this.xtraTabPageNotes.PerformLayout();
-			this.pnVideoForcePreview.ResumeLayout(false);
-			this.pnVideoForcePreview.PerformLayout();
 			this.pnKeynotePreview.ResumeLayout(false);
 			this.pnKeynotePreview.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbKeynotePreview)).EndInit();
+			this.pnVideoForcePreview.ResumeLayout(false);
+			this.pnVideoForcePreview.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbVideoForcePreview)).EndInit();
 			this.xtraTabPageSearchTags.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSearchTags)).EndInit();
@@ -3047,5 +3061,6 @@
 		private System.Windows.Forms.Label laKeynotePreviewDetail;
 		private System.Windows.Forms.PictureBox pbKeynotePreview;
 		private System.Windows.Forms.Label laKeynotePreview;
+		public System.Windows.Forms.CheckBox ckSecurityShareLink;
     }
 }

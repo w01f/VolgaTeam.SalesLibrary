@@ -22,6 +22,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private int _order;
 		private Image _widget;
 		private bool _isRestricted;
+		private bool _noShare;
 		private string _assignedUsers;
 		private bool _doNotGeneratePreview;
 		private bool _forcePreview;
@@ -396,6 +397,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool NoShare
+		{
+			get { return _noShare; }
+			set
+			{
+				if (_noShare != value)
+					LastChanged = DateTime.Now;
+				_noShare = value;
+			}
+		}
+
 		public string AssignedUsers
 		{
 			get { return _assignedUsers; }
@@ -444,6 +456,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.Type = Type;
 			file.AddDate = AddDate;
 			file.IsRestricted = IsRestricted;
+			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.ForcePreview = ForcePreview;
@@ -478,6 +491,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<AttachmentProperties>" + AttachmentProperties.Serialize() + @"</AttachmentProperties>");
 			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
+			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
 			result.AppendLine(@"<ForcePreview>" + _forcePreview + @"</ForcePreview>");
@@ -582,6 +596,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "IsRestricted":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							_isRestricted = tempBool;
+						break;
+					case "NoShare":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_noShare = tempBool;
 						break;
 					case "AssignedUsers":
 						_assignedUsers = childNode.InnerText;
@@ -785,6 +803,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.Type = Type;
 			file.AddDate = AddDate;
 			file.IsRestricted = IsRestricted;
+			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
 			file.DoNotGeneratePreview = DoNotGeneratePreview;
 			file.SearchTags = SearchTags;

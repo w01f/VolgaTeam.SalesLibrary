@@ -1435,6 +1435,20 @@
       <index name="id_library" unique="false" columns="id_library"/>
       <index name="type" unique="false" columns="type"/>
     </table>
+    <table name="tbl_qpage" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_owner" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="subtitle" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
+      <column name="logo" sqlType="MEDIUMBLOB" length="16777215" precision="0" nullable="true" jdbcType="-4"/>
+      <column name="header" sqlType="VARCHAR" length="2049" precision="0" nullable="true" jdbcType="12"/>
+      <column name="footer" sqlType="VARCHAR" length="2049" precision="0" nullable="true" jdbcType="12"/>
+      <column name="restricted" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MQ=="/>
+      <column name="show_ticker" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="show_site_link" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id_owner" unique="false" columns="id_owner"/>
+    </table>
     <table name="tbl_reset_password" schema="" catalog="sales_library" type="TABLE">
       <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
       <column name="initial_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
@@ -1536,6 +1550,14 @@
       <index name="user" unique="false" columns="id_user"/>
       <index name="link" unique="false" columns="id_link"/>
       <index name="library" unique="false" columns="id_library"/>
+    </table>
+    <table name="tbl_user_link_cart" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_link" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_user" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id_link" unique="false" columns="id_link"/>
+      <index name="id_user" unique="false" columns="id_user"/>
     </table>
     <table name="tbl_user_page_cache" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
