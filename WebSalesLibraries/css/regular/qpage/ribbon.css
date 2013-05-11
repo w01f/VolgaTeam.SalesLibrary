@@ -12,7 +12,6 @@ body
     -moz-box-shadow: #000000 0 0 10;
     box-shadow: #000000 0 0 10;
     background: #FFF;
-    behavior: url(PIE.htc);
 }
 
 #ribbon
@@ -32,7 +31,6 @@ body
     left: 0;
     right: 0;
     height: 130px;
-    behavior: url(PIE.htc);
     display: none;
 }
 
@@ -159,7 +157,6 @@ body
     z-index: 30;
     -pie-watch-ancestors: 2;
     position: relative;
-    behavior: url(PIE.htc);
 }
 
 #ribbon .ribbon-tab.file

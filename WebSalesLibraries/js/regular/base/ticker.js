@@ -15,8 +15,8 @@
 		ticker.modernTicker({
 			effect: effect,
 			scrollInterval: 20,
-			transitionTime: 300,
-			displayTime: 4000,
+			transitionTime: 500,
+			displayTime: 5500,
 			typeInterval: 10,
 			slideDistance: 100,
 			autoplay: true

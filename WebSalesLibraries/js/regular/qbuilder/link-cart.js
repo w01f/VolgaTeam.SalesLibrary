@@ -113,6 +113,11 @@
 						resizable: false,
 						modal: true,
 						buttons: {
+							"quickSITES": function ()
+							{
+								$('.qbuilder-button').trigger('click');
+								$(this).dialog("close");
+							},
 							"OK": function ()
 							{
 								$(this).dialog("close");
@@ -154,6 +159,11 @@
 						resizable: false,
 						modal: true,
 						buttons: {
+							"quickSITES": function ()
+							{
+								$('.qbuilder-button').trigger('click');
+								$(this).dialog("close");
+							},
 							"OK": function ()
 							{
 								$(this).dialog("close");

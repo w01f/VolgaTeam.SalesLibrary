@@ -147,7 +147,6 @@
 				QPageStorage::savePage($selectedPageId, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite);
 		}
 
-
 		public function actionGetLinkCart()
 		{
 			$userId = Yii::app()->user->getId();
@@ -290,4 +289,92 @@
 			}
 			Yii::app()->end();
 		}
+
+		/////////////////Service Part///////////////////////////
+		public function actions()
+		{
+			return array(
+				'quote' => array(
+					'class' => 'CWebServiceAction',
+					'classMap' => array(
+						'QPageRecord' => 'QPageRecord',
+					),
+				),
+			);
+		}
+
+		protected function authenticateBySession($sessionKey)
+		{
+			$data = Yii::app()->cacheDB->get($sessionKey);
+			if ($data !== FALSE)
+				return TRUE;
+			else
+				return FALSE;
+		}
+
+		/**
+		 * @param string $login
+		 * @param string $password
+		 * @return string session key
+		 * @soap
+		 */
+		public function getSessionKey($login, $password)
+		{
+			$identity = new UserIdentity($login, $password);
+			$identity->authenticate();
+			if ($identity->errorCode === UserIdentity::ERROR_NONE)
+			{
+				$sessionKey = strval(md5(mt_rand()));
+				Yii::app()->cacheDB->set($sessionKey, $login, (60 * 60 * 24 * 7));
+				return $sessionKey;
+			}
+			else
+				return '';
+		}
+
+		/**
+		 * @param string Session Key
+		 * @return QPageRecord[]
+		 * @soap
+		 */
+		public function getAllPages($sessionKey)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_all_qpages()");
+				$pageRecords = $command->queryAll();
+				foreach ($pageRecords as $pageRecord)
+				{
+					$page = new UserActivity();
+					$page->id = $pageRecord['id'];
+					$page->title = $pageRecord['title'];
+					$page->isEmail = $pageRecord['is_email'];
+					$page->url = Yii::app()->createAbsoluteUrl('qpage/show', array('id' => $pageRecord['id']));
+					$page->createDate = $pageRecord['create_date'];
+					$page->expirationDate = $pageRecord['expiration_date'];
+					$page->login = $pageRecord['login'];
+					$page->firstName = $pageRecord['first_name'];
+					$page->lastName = $pageRecord['last_name'];
+					$page->email = $pageRecord['email'];
+					$page->groups = $pageRecord['groups'];
+					$pages[] = $page;
+				}
+			}
+			if (isset($pages))
+				return $pages;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Page Id
+		 * @soap
+		 */
+		public function deletePageFromService($sessionKey, $pageId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				QPageStorage::deletePage($pageId);
+		}
+		/////////////////Service Part///////////////////////////
 	}

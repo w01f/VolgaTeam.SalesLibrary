@@ -1,5 +1,5 @@
 <div class="folder-links-scroll-area"
-	 style="background-color: <?php echo $folder->windowBackColor; ?>;color: <?php echo $folder->borderColor; ?>;">
+	 style="background-color: <?php echo $folder->windowBackColor; ?>;color: <?php echo $folder->windowForeColor; ?>;">
 	<?php if (isset($folder->files)): ?>
 		<div class="folder-links-container">
 			<?php foreach ($folder->files as $link): ?>

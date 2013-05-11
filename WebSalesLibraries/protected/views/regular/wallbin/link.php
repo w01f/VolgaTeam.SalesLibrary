@@ -36,7 +36,7 @@ else
 				. 'font-size: ' . $font->size . 'pt; '
 				. 'font-weight: ' . ($link->isBold ? 'bold' : ($font->isBold ? ' bold' : ' normal')) . '; '
 				. 'font-style: ' . ($font->isItalic ? ' italic' : ' normal') . '; '
-				. 'color: ' . isset($link->parent) && isset($link->parent->windowForeColor) ? $link->parent->windowForeColor : '#000000' . '; '
+				. 'color: ' . (isset($link->parent) && isset($link->parent->windowForeColor) ? $link->parent->windowForeColor : '#000000') . '; '
 				. 'white-space: nowrap;';
 		}
 		?>

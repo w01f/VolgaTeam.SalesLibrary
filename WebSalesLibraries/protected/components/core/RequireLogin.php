@@ -18,13 +18,14 @@ class RequireLogin extends CBehavior
             !strstr(Yii::app()->request->getUrl(), 'site/emailLinkGet') &&
             !strstr(Yii::app()->request->getUrl(), 'site/switchVersion') &&
 			!strstr(Yii::app()->request->getUrl(), 'site/disclaimerWarning') &&
+			!strstr(Yii::app()->request->getUrl(), 'qbuilder/quote') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/show') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/getPublic') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/preview') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/site') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/wallbin') &&
 			!strstr(Yii::app()->request->getUrl(), 'admin/') &&
-			!strstr(Yii::app()->request->getUrl(), 'statistic/') &&
+			!strstr(Yii::app()->request->getUrl(), 'statistic/quote') &&
 			!strstr(Yii::app()->request->getUrl(), 'ticker/') &&
 			!strstr(Yii::app()->request->getUrl(), 'inactiveusers/') &&
             !strstr(Yii::app()->request->getUrl(), 'content/'))
