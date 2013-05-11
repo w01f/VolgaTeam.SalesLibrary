@@ -100,6 +100,7 @@
     <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\QBuilderController.cs" />
     <Compile Include="Controllers\InactiveUsersController.cs" />
     <Compile Include="Controllers\TickerController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -207,6 +208,18 @@
     <Compile Include="PresentationClasses\InactiveUses\InactiveUsersFilter.Designer.cs">
       <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\QBuilder\QPagesFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilder\QPagesFilter.Designer.cs">
+      <DependentUpon>QPagesFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilder\QPagesManagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilder\QPagesManagerControl.Designer.cs">
+      <DependentUpon>QPagesManagerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Ticker\LinkEditors\ITickerEditor.cs" />
     <Compile Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.cs">
       <SubType>UserControl</SubType>
@@ -234,6 +247,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TabPages\TabQBuilderControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabQBuilderControl.Designer.cs">
+      <DependentUpon>TabQBuilderControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="TabPages\TabInactiveUsersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -349,6 +368,13 @@
     <EmbeddedResource Include="PresentationClasses\InactiveUses\InactiveUsersFilter.resx">
       <DependentUpon>InactiveUsersFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\QBuilder\QPagesFilter.resx">
+      <DependentUpon>QPagesFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\QBuilder\QPagesManagerControl.resx">
+      <DependentUpon>QPagesManagerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Ticker\LinkEditors\LibraryLinkEditor.resx">
       <DependentUpon>LibraryLinkEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -374,6 +400,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TabPages\TabQBuilderControl.resx">
+      <DependentUpon>TabQBuilderControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabInactiveUsersControl.resx">
       <DependentUpon>TabInactiveUsersControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -417,6 +446,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\CopySmall.png" />
+    <None Include="Resources\DeleteButton.png" />
     <None Include="Resources\ExportTicker.png" />
     <None Include="Resources\ImportTicker.png" />
     <None Include="Resources\NudgeDown.png" />

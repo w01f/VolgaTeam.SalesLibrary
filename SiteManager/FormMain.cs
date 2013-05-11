@@ -38,6 +38,7 @@ namespace SalesDepot.SiteManager
 				labelItemActivitiesLogo.Image = image;
 				labelItemTickerLogo.Image = image;
 				labelItemInactiveUsersLogo.Image = image;
+				labelItemQBuilderLogo.Image = image;
 			}
 
 			MainController.Instance.InitializeControllers();
@@ -57,6 +58,8 @@ namespace SalesDepot.SiteManager
 				key = TabPageEnum.Ticker;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemInactiveUsers)
 				key = TabPageEnum.InactiveUsers;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
+				key = TabPageEnum.QBuilder;
 			MainController.Instance.ShowTab(key);
 		}
 

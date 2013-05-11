@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:QbuilderControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="QbuilderController" targetNamespace="urn:QbuilderControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:QbuilderControllerwsdl">
+      <xsd:complexType name="QPageRecordArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:QPageRecord[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="QPageRecord">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="isEmail" type="xsd:boolean" />
+          <xsd:element name="url" type="xsd:string" />
+          <xsd:element name="createDate" type="xsd:string" />
+          <xsd:element name="expirationDate" type="xsd:string" />
+          <xsd:element name="login" type="xsd:string" />
+          <xsd:element name="firstName" type="xsd:string" />
+          <xsd:element name="lastName" type="xsd:string" />
+          <xsd:element name="email" type="xsd:string" />
+          <xsd:element name="groups" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="getSessionKeyRequest">
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="password" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getSessionKeyResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAllPagesRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getAllPagesResponse">
+    <wsdl:part name="return" type="tns:QPageRecordArray" />
+  </wsdl:message>
+  <wsdl:message name="deletePageFromServiceRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="pageId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deletePageFromServiceResponse" />
+  <wsdl:portType name="QbuilderControllerPortType">
+    <wsdl:operation name="getSessionKey">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getSessionKeyRequest" />
+      <wsdl:output message="tns:getSessionKeyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllPages">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getAllPagesRequest" />
+      <wsdl:output message="tns:getAllPagesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deletePageFromService">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:deletePageFromServiceRequest" />
+      <wsdl:output message="tns:deletePageFromServiceResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="QbuilderControllerBinding" type="tns:QbuilderControllerPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="getSessionKey">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#getSessionKey" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllPages">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#getAllPages" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePageFromService">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#deletePageFromService" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="QbuilderControllerService">
+    <wsdl:port name="QbuilderControllerPort" binding="tns:QbuilderControllerBinding">
+      <soap:address location="http://localhost/SalesLibraries/qbuilder/quote?ws=1" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

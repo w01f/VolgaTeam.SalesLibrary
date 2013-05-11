@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using SalesDepot.Services.ContentManagmentService;
 using SalesDepot.Services.IPadAdminService;
 using SalesDepot.Services.InactiveUsersService;
+using SalesDepot.Services.QBuilderService;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.Services.TickerService;
 using Attachment = SalesDepot.Services.ContentManagmentService.Attachment;
@@ -778,6 +779,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		private QbuilderControllerService GetQBuilderClient()
+		{
+			try
+			{
+				var client = new QbuilderControllerService();
+				client.Url = string.Format("{0}/qbuilder/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
 		#region Users
 		public UserRecord[] GetUsers(out string message)
 		{
@@ -1302,6 +1317,56 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						client.deleteUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+		#endregion
+
+		#region QBuilder
+		public QPageRecord[] GetAllPages(out string message)
+		{
+			message = string.Empty;
+			var pages = new List<QPageRecord>();
+			var client = GetQBuilderClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						pages.AddRange(client.getAllPages(sessionKey) ?? new QPageRecord[] { });
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return pages.ToArray();
+		}
+
+		public void DeletePage(string pageId, out string message)
+		{
+			message = string.Empty;
+			var client = GetQBuilderClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.deletePageFromService(sessionKey, pageId);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

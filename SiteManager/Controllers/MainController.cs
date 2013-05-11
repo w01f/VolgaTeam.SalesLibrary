@@ -36,6 +36,7 @@ namespace FileManager.Controllers
 		public ActivitiesController ActivitiesController { get; private set; }
 		public TickerController TickerController { get; private set; }
 		public InactiveUsersController InactiveUsersController { get; private set; }
+		public QBuilderController QBuilderController { get; private set; }
 		#endregion
 
 		private MainController()
@@ -68,6 +69,8 @@ namespace FileManager.Controllers
 							Application.DoEvents();
 							InactiveUsersController.InitController();
 							Application.DoEvents();
+							QBuilderController.InitController();
+							Application.DoEvents();
 						});
 					});
 				formProgress.Show();
@@ -93,6 +96,8 @@ namespace FileManager.Controllers
 			_controllers.Add(TabPageEnum.Ticker, TickerController);
 			InactiveUsersController = new InactiveUsersController();
 			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
+			QBuilderController = new QBuilderController();
+			_controllers.Add(TabPageEnum.QBuilder, QBuilderController);
 		}
 
 		public void LoadDataAndGUI()
@@ -119,6 +124,9 @@ namespace FileManager.Controllers
 				case TabPageEnum.InactiveUsers:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemInactiveUsers;
 					break;
+				case TabPageEnum.QBuilder:
+					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemQBuilder;
+					break;
 			}
 		}
 
@@ -144,7 +152,8 @@ namespace FileManager.Controllers
 		Users,
 		Activities,
 		Ticker,
-		InactiveUsers
+		InactiveUsers,
+		QBuilder
 	}
 
 	public interface IPageController

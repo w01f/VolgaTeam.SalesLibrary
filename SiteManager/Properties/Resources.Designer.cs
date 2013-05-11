@@ -67,6 +67,20 @@ namespace SalesDepot.SiteManager.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CopySmall {
+            get {
+                object obj = ResourceManager.GetObject("CopySmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap DeleteButton {
+            get {
+                object obj = ResourceManager.GetObject("DeleteButton", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap DeleteUser {
             get {
                 object obj = ResourceManager.GetObject("DeleteUser", resourceCulture);
