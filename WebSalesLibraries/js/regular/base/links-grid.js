@@ -41,6 +41,12 @@
 			$.linkGrid.refreshData();
 		});
 
+		searchGridHeader.find("td.link-rate-column").off('click').on('click', function ()
+		{
+			sortByColumn('link-rate');
+			$.linkGrid.refreshData();
+		});
+
 		var linkGridBody = $("#links-grid-body");
 		var clickableLinks = linkGridBody.find("td.click-no-mobile");
 		clickableLinks.off('click').on('click', function ()
@@ -117,6 +123,9 @@
 					break;
 				case "link-date":
 					selector = '#links-grid-header td.link-date-column span';
+					break;
+				case "link-rate":
+					selector = '#links-grid-header td.link-rate-column span';
 					break;
 			}
 		}

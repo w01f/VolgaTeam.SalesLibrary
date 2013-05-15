@@ -74,7 +74,6 @@
 							LinkStorage::clearByLibrary($libraryRecord->id);
 							FolderStorage::clearByLibrary($libraryRecord->id);
 							LibraryPageStorage::clearByLibrary($libraryRecord->id);
-							FavoritesLinkStorage::clearByLibrary($libraryRecord->id);
 							$libraryRecord->delete();
 							Yii::app()->cacheDB->flush();
 						}
@@ -99,6 +98,7 @@
 				FavoritesLinkStorage::clearByLinkIds($liveLinkIds);
 				UserLinkCartStorage::clearByLinkIds($liveLinkIds);
 				QPageLinkStorage::clearByLinkIds($liveLinkIds);
+				LinkRateStorage::clearByLinkIds($liveLinkIds);
 			}
 
 			echo "Job completed.\n";

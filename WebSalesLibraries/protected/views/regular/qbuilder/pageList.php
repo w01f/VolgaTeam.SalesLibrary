@@ -2,9 +2,9 @@
 	<? foreach ($pages as $page): ?>
 		<li id="page<? echo $page->id; ?>">
 			<?if (isset($selectedPage) && $selectedPage->id == $page->id): ?>
-				<a class="selected" href="#"><i class="icon-folder-open"></i><? echo $page->title;?></a>
+				<a class="selected" href="#"><i class="icon-folder-open"></i><span><? echo $page->title;?></span></a>
 			<? else: ?>
-				<a href="#"><i class="icon-folder-close"></i><? echo $page->title;?></a>
+				<a href="#"><i class="icon-folder-close"></i><span><? echo $page->title;?></span></a>
 			<?endif;?>
 		</li>
 	<?php endforeach;?>

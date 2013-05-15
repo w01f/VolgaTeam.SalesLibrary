@@ -129,6 +129,12 @@
     <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.Designer.cs">
       <DependentUpon>AccessAllFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\RawDataFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\RawDataFilter.Designer.cs">
+      <DependentUpon>RawDataFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessAllFilter.resx">
       <DependentUpon>AccessAllFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\RawDataFilter.resx">
+      <DependentUpon>RawDataFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.resx">
       <DependentUpon>NavigationGroupFilter.cs</DependentUpon>

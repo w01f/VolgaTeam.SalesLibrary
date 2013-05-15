@@ -43,6 +43,14 @@
 			}
 		}
 
+		public function getCreateDateFormatted()
+		{
+			if (isset($this->create_date))
+				return date(Yii::app()->params['outputDateFormat'], strtotime($this->create_date)).' '.date(Yii::app()->params['outputTimeFormat'], strtotime($this->create_date));
+			else
+				return '';
+		}
+
 		public function getExpirationDateFormatted()
 		{
 			if (isset($this->expiration_date) && $this->expiration_date != 0)
@@ -126,19 +134,19 @@
 			$linkInCartRecord->delete();
 		}
 
-		public static function addPage($ownerId, $pageTitle)
+		public static function addPage($ownerId, $pageTitle, $createDate)
 		{
 			$pageRecord = new QPageStorage();
 			$pageRecord->id = uniqid();
 			$pageRecord->id_owner = $ownerId;
 			$pageRecord->title = $pageTitle;
-			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime(date('y:m:d')));
+			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
 			$pageRecord->is_email = false;
 			$pageRecord->save();
 			return $pageRecord->id;
 		}
 
-		public static function addPageLite($ownerId, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)
+		public static function addPageLite($ownerId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)
 		{
 			$pageRecord = new QPageStorage();
 			$pageRecord->id = uniqid();
@@ -146,7 +154,7 @@
 			$pageRecord->title = 'Shared Link';
 			$pageRecord->subtitle = '<h1>' . $subtitle . '<h1>';
 			$pageRecord->logo = $logo;
-			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime(date('y:m:d')));
+			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
 			$pageRecord->expiration_date = $expirationDate;
 			$pageRecord->is_email = true;
 			$pageRecord->restricted = $restricted;
@@ -195,11 +203,12 @@
 			return null;
 		}
 
-		public static function savePage($pageId, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite)
+		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite)
 		{
 			$pageRecord = self::model()->findByPk($pageId);
 			if (isset($pageRecord))
 			{
+				$pageRecord->title = $title;
 				$pageRecord->subtitle = $description;
 				$pageRecord->expiration_date = $expirationDate;
 				$pageRecord->logo = $logo;

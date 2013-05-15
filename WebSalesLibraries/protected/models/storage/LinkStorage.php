@@ -151,7 +151,7 @@
 							$libraryCondition = '1 != 1';
 							break;
 						default:
-							$libraryCondition = "id_library in ('" . implode("','", $checkedLibraryIds) . "')";
+							$libraryCondition = "link.id_library in ('" . implode("','", $checkedLibraryIds) . "')";
 							break;
 					}
 				}
@@ -166,7 +166,7 @@
 							$fileTypeCondition = '1 = 1';
 							break;
 						default:
-							$fileTypeCondition = "format in ('" . implode("','", $fileTypes) . "')";
+							$fileTypeCondition = "link.format in ('" . implode("','", $fileTypes) . "')";
 							break;
 					}
 				}
@@ -176,9 +176,9 @@
 				if (isset($startDate) && isset($endDate))
 					if ($startDate != '' && $endDate != '')
 					{
-						$dateColumn = 'date_modify';
+						$dateColumn = 'link.date_modify';
 						if (isset($dateFile) && $dateFile == 'true')
-							$dateColumn = 'file_date';
+							$dateColumn = 'link.file_date';
 						$dateCondition = $dateColumn . " >= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($startDate)) . "' and " . $dateColumn . " <= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($endDate) + 86400) . "'";
 						if ($contentCondition == '""' || $contentCondition == '')
 							$additionalDateCondition = " or (" . $dateCondition . ")";
@@ -190,9 +190,9 @@
 				{
 					if ($onlyFileCards == 1)
 					{
-						$fileCardsCondition = 'enable_file_card = true or enable_attachments = true ';
+						$fileCardsCondition = 'link.enable_file_card = true or link.enable_attachments = true ';
 						if ($contentCondition == '""' || $contentCondition == '')
-							$additionalFileCardsCondition = ' or (enable_file_card = true or enable_attachments = true)';
+							$additionalFileCardsCondition = ' or (link.enable_file_card = true or link.enable_attachments = true)';
 					}
 				}
 
@@ -201,7 +201,7 @@
 				if (isset($categories))
 				{
 					foreach ($categories as $category)
-						$categoriesSelector[] = '(id in (select id_link from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
+						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
 					if (isset($categoriesSelector))
 					{
 						$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
@@ -223,7 +223,7 @@
 						$assignedPageIds = UserLibraryStorage::getPageIdsByUserAngHisGroups($userId);
 				}
 				if (isset($assignedPageIds))
-					$folderCondition = "id_folder in (select id from tbl_folder where id_page in ('" . implode("', '", $assignedPageIds) . "'))";
+					$folderCondition = "link.id_folder in (select id from tbl_folder where id_page in ('" . implode("', '", $assignedPageIds) . "'))";
 				else if (!isset($userId) || (isset($isAdmin) && $isAdmin))
 					$folderCondition = '1 = 1';
 
@@ -234,34 +234,34 @@
 				{
 					$linkIds = UserLinkStorage::getAvailableLinks($userId);
 					if (isset($linkIds))
-						$linkCondition = "is_restricted <> 1 or id in ('" . implode("', '", $linkIds) . "')";
+						$linkCondition = "link.is_restricted <> 1 or id in ('" . implode("', '", $linkIds) . "')";
 					else
-						$linkCondition = "is_restricted <> 1";
+						$linkCondition = "link.is_restricted <> 1";
 				}
 
-				$matchCondition = 'name,file_name,tags,content';
+				$matchCondition = 'link.name,link.file_name,link.tags,link.content';
 				if ($onlyByName)
-					$matchCondition = 'name,file_name';
+					$matchCondition = 'link.name,link.file_name';
 				else if ($onlyByContent)
-					$matchCondition = 'content';
+					$matchCondition = 'link.content';
 
 
 				if ($hideDuplicated)
 				{
-					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'file_date' : 'date_modify') . ') as link_date';
+					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ') as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('max(id) as id, max(id_library) as id_library, max(name) as name, file_name, ' . $dateField . ', max(enable_attachments) as enable_attachments, max(enable_file_card) as enable_file_card, max(format) as format')
-						->from('tbl_link')
-						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ") and is_dead=0 and is_preview_not_ready=0")
-						->group('file_name')
+						->select('max(link.id) as id, max(link.id_library) as id_library, max(link.name) as name, link.file_name, ' . $dateField . ', max(link.enable_attachments) as enable_attachments, max(link.enable_file_card) as enable_file_card, max(link.format) as format, (select count(id) from tbl_link_rate where id_link = link.id) as rate')
+						->from('tbl_link link')
+						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ") and link.is_dead=0 and link.is_preview_not_ready=0")
+						->group('link.file_name')
 						->queryAll();
 				}
 				else
 				{
-					$dateField = (isset($dateFile) && $dateFile == 'true' ? 'file_date' : 'date_modify') . ' as link_date';
+					$dateField = (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ' as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('id, id_library, name, file_name, ' . $dateField . ', enable_attachments, enable_file_card, format')
-						->from('tbl_link')
+						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate')
+						->from('tbl_link link')
 						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
 						->queryAll();
 				}
@@ -373,6 +373,9 @@
 					else
 						$link['library'] = '';
 
+					if (array_key_exists('rate', $linkRecord))
+						$link['rate'] = $linkRecord['rate'];
+
 					switch ($linkRecord['format'])
 					{
 						case 'ppt':
@@ -428,6 +431,9 @@
 						break;
 					case 'link-date':
 						$sortColumn = 'date_modify';
+						break;
+					case 'link-rate':
+						$sortColumn = 'rate';
 						break;
 				}
 			}

@@ -117,6 +117,16 @@
 	text-align: center;
 }
 
+#links-grid-header td.link-rate-column, #links-grid-body td.link-rate-column
+{
+	width: 60px;
+}
+
+#links-grid-body td.link-rate-column
+{
+	text-align: center;
+}
+
 #links-grid-header td.link-name-column, #links-grid-body td.link-name-column
 {
 }

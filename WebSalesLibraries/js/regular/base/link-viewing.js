@@ -37,6 +37,7 @@
 		var fullScreenSelector = content.find('.use-fullscreen');
 		if (formatItems.length > 1 || warning.length)
 		{
+			var selectedLinkId = $(formatItems[0]).find('.service-data .link-id').html();
 			var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
 			var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
 			formatItems.tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
@@ -53,7 +54,19 @@
 				autoSize: false,
 				autoHeight: true,
 				openEffect: 'none',
-				closeEffect: 'none'
+				closeEffect: 'none',
+				afterLoad: function ()
+				{
+					$.linkRate.show(selectedLinkId, $('.fancybox-wrap'));
+				},
+				afterClose: function ()
+				{
+					$.linkRate.close();
+				},
+				onUpdate: function ()
+				{
+					$.linkRate.resizeContainer();
+				}
 			});
 			$.viewDialogBar.backToConent = content;
 		}
@@ -124,7 +137,19 @@
 			autoSize: false,
 			autoHeight: true,
 			openEffect: 'none',
-			closeEffect: 'none'
+			closeEffect: 'none',
+			afterLoad: function ()
+			{
+				$.linkRate.show(linkId, $('.fancybox-wrap'));
+			},
+			afterClose: function ()
+			{
+				$.linkRate.close();
+			},
+			onUpdate: function ()
+			{
+				$.linkRate.resizeContainer();
+			}
 		});
 	};
 
@@ -152,7 +177,19 @@
 					title: 'File Card',
 					minWidth: 400,
 					openEffect: 'none',
-					closeEffect: 'none'
+					closeEffect: 'none',
+					afterLoad: function ()
+					{
+						$.linkRate.show(linkId, $('.fancybox-wrap'));
+					},
+					afterClose: function ()
+					{
+						$.linkRate.close();
+					},
+					onUpdate: function ()
+					{
+						$.linkRate.resizeContainer();
+					}
 				});
 			},
 			async: true,
@@ -205,7 +242,19 @@
 					content: content,
 					title: title,
 					openEffect: 'none',
-					closeEffect: 'none'
+					closeEffect: 'none',
+					afterLoad: function ()
+					{
+						$.linkRate.show(linkId, $('.fancybox-wrap'));
+					},
+					afterClose: function ()
+					{
+						$.linkRate.close();
+					},
+					onUpdate: function ()
+					{
+						$.linkRate.resizeContainer();
+					}
 				});
 			},
 			error: function ()
@@ -334,7 +383,19 @@
 					scrolling: 'no',
 					autoSize: false,
 					openEffect: 'none',
-					closeEffect: 'none'
+					closeEffect: 'none',
+					afterLoad: function ()
+					{
+						$.linkRate.show(linkId, $('.fancybox-wrap'));
+					},
+					afterClose: function ()
+					{
+						$.linkRate.close();
+					},
+					onUpdate: function ()
+					{
+						$.linkRate.resizeContainer();
+					}
 				});
 			},
 			error: function ()
@@ -591,15 +652,21 @@
 								$.fancybox(selectedLinks, {
 									openEffect: 'none',
 									closeEffect: 'none',
+									afterLoad: function ()
+									{
+										$.linkRate.resizeContainer($('.fancybox-wrap'));
+									},
 									afterClose: function ()
 									{
 										if (selectedFileType != 'pdf')
 											$.viewDialogBar.close();
+										$.linkRate.close();
 									},
 									onUpdate: function ()
 									{
 										if (selectedFileType != 'pdf')
 											$.viewDialogBar.resize();
+										$.linkRate.resizeContainer($('.fancybox-wrap'));
 									},
 									helpers: {
 										thumbs: {
@@ -609,6 +676,7 @@
 										}
 									}
 								});
+								$.linkRate.show(selectedFileId, $('.fancybox-wrap'));
 								if (selectedFileType != 'pdf')
 								{
 									$.viewDialogBar.linkId = selectedFileId;
@@ -745,7 +813,19 @@
 							});
 							$.fancybox(selectedLinks, {
 								openEffect: 'none',
-								closeEffect: 'none'
+								closeEffect: 'none',
+								afterLoad: function ()
+								{
+									$.linkRate.show(selectedFileId, $('.fancybox-wrap'));
+								},
+								afterClose: function ()
+								{
+									$.linkRate.close();
+								},
+								onUpdate: function ()
+								{
+									$.linkRate.resizeContainer();
+								}
 							});
 							break;
 					}
@@ -806,7 +886,7 @@
 								dataType: 'html'
 							});
 
-							playVideo(selectedLinks, isHelp);
+							playVideo(selectedLinks, selectedFileId, isHelp);
 							break;
 					}
 					break;
@@ -814,7 +894,7 @@
 		}
 	};
 
-	var playVideo = function (links, isHelp)
+	var playVideo = function (links, selectedFileId, isHelp)
 	{
 		VideoJS.players = {};
 		$.fancybox({
@@ -822,9 +902,18 @@
 			content: $('<div style="height:480px; width:640px;"><video id="video-player" class="video-js vjs-default-skin" height = "480" width="640"></video><div>'),
 			openEffect: 'none',
 			closeEffect: 'none',
+			afterLoad: function ()
+			{
+				$.linkRate.show(selectedFileId, $('.fancybox-wrap'));
+			},
 			afterClose: function ()
 			{
 				$('#video-player').remove();
+				$.linkRate.close();
+			},
+			onUpdate: function ()
+			{
+				$.linkRate.resizeContainer();
 			}
 		});
 		_V_.options.flash.swf = links[0].swf;

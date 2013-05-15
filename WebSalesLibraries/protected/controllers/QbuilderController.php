@@ -56,14 +56,15 @@
 		public function actionAddPage()
 		{
 			$title = Yii::app()->request->getPost('title');
+			$createDate = Yii::app()->request->getPost('createDate');
 			$clonePageId = Yii::app()->request->getPost('clonePageId');
 			$userId = Yii::app()->user->getId();
-			if (isset($title) && $title != '' && isset($userId))
+			if (isset($title) && $title != '' && isset($userId) && isset($createDate))
 			{
 				if (isset($clonePageId))
 					echo QPageStorage::clonePage($userId, $title, $clonePageId);
 				else
-					echo QPageStorage::addPage($userId, $title);
+					echo QPageStorage::addPage($userId, $title, $createDate);
 			}
 			Yii::app()->end();
 		}
@@ -73,6 +74,7 @@
 			$subtitle = Yii::app()->request->getPost('subtitle');
 			$logo = Yii::app()->request->getPost('logo');
 			$linkId = Yii::app()->request->getPost('linkId');
+			$createDate = Yii::app()->request->getPost('createDate');
 
 			$expiresInDays = Yii::app()->request->getPost('expiresInDays');
 			$expiresInDays = isset($expiresInDays) ? intval($expiresInDays) : null;
@@ -84,10 +86,10 @@
 			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == 'true';
 
 			$userId = Yii::app()->user->getId();
-			if (isset($subtitle) && $subtitle != '' && isset($logo) && isset($userId) && isset($linkId) && isset($expiresInDays) && isset($restricted))
+			if (isset($subtitle) && $subtitle != '' && isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
 				$expirationDate = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day'));
-				echo QPageStorage::addPageLite($userId, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
+				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
 			}
 			Yii::app()->end();
 		}
@@ -125,6 +127,7 @@
 		public function actionSavePage()
 		{
 			$selectedPageId = Yii::app()->request->getPost('selectedPageId');
+			$title = Yii::app()->request->getPost('title');
 			$description = Yii::app()->request->getPost('description');
 			$logo = Yii::app()->request->getPost('logo');
 			$header = Yii::app()->request->getPost('header');
@@ -144,7 +147,7 @@
 			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == "true";
 
 			if (isset($selectedPageId))
-				QPageStorage::savePage($selectedPageId, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite);
+				QPageStorage::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite);
 		}
 
 		public function actionGetLinkCart()

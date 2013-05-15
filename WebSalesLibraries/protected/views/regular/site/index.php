@@ -1,5 +1,5 @@
 <?php
-$version = '3.0';
+$version = '4.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -25,6 +25,7 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/links-grid.css?' .
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/help.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/calendar.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/favorites.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/link-rate.css?' . $version);
 if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 {
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/modern-ticker/css/modern-ticker.css?' . $version);
@@ -63,6 +64,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/search.js?' . $v
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/help.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/calendar.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/minibar.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/ribbon.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/link-cart.js?' . $version, CClientScript::POS_HEAD);

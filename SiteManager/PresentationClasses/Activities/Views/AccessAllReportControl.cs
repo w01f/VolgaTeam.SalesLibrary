@@ -95,7 +95,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.Select(x => x.name).Where(x => !string.IsNullOrEmpty(x)).Distinct().ToArray());
+			_filterControl.UpdateDataSource(_records.OrderBy(g => g.name).Select(x => x.name).Where(x => !string.IsNullOrEmpty(x)).Distinct().ToArray());
 			ApplyData();
 		}
 

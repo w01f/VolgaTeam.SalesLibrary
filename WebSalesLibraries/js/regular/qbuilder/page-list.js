@@ -119,11 +119,13 @@
 					var addPageContent = $(msg);
 					addPageContent.find('.btn.accept-button').on('click', function ()
 					{
+						var now = new Date();
 						$.ajax({
 							type: "POST",
 							url: "qbuilder/addPage",
 							data: {
 								title: $('#add-page-name').val(),
+								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
 								clonePageId: clonePageId
 							},
 							beforeSend: function ()
@@ -201,11 +203,13 @@
 					addPageContent.find('.btn.accept-button').on('click', function ()
 					{
 						var subtitle = $('#add-page-name').val();
+						var now = new Date();
 						$.ajax({
 							type: "POST",
 							url: "qbuilder/addPageLite",
 							data: {
 								linkId: libraryLinkId,
+								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
 								subtitle: subtitle,
 								logo: $('#add-page-tab-logo').find('a.opened').find('img').attr('src'),
 								expiresInDays: $('#add-page-expires-in').find('.active').val(),
@@ -383,12 +387,15 @@
 		savePage: function (onSuccessHandler)
 		{
 			var pageList = $('#page-list-container');
-			var selectedPageId = pageList.find('a.selected').parent().attr('id').replace('page', '');
+			var selectedPage = pageList.find('a.selected');
+			var selectedPageId = selectedPage.parent().attr('id').replace('page', '');
+			selectedPage.find('span').html($('#page-content-title').val());
 			$.ajax({
 				type: "POST",
 				url: "qbuilder/savePage",
 				data: {
 					selectedPageId: selectedPageId,
+					title: $('#page-content-title').val(),
 					description: $('#page-content-description').val(),
 					logo: $('#page-content-tab-logo').find('a.opened').find('img').attr('src'),
 					expirationDate: $('#page-content-expiration-date').val(),

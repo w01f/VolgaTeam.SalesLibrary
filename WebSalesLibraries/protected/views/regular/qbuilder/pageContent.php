@@ -1,6 +1,9 @@
 <div>
 	<? if (isset($page)): ?>
-		<h4 class="page-title"><?echo $page->title;?></h4>
+		<div class="form-inline page-title">
+			Title: <input type="text" id="page-content-title" class="input-xlarge" value="<? echo $page->title; ?>">
+			<div class="create-date">Created: <? echo $page->getCreateDateFormatted(); ?></div>
+		</div>
 		<legend class="page-url">URL:<a id="page-content-url" href="<? echo $page->getUrl(); ?>" target="_blank"><?echo $page->getUrl();?></a>
 		</legend>
 		<div id="page-content-tabs">
@@ -50,7 +53,7 @@
 				<label class="checkbox title"><input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>>A. Set Expiration Date</label>
 				<div id="page-content-expiration-date-container" class="control-group <? if ($page->isExpired()): ?>error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<?endif;?>>
 					<div class="input-append controls">
-						<input class="input-small" id="page-content-expiration-date" data-format="MM/dd/yyyy" type="text" value="<? echo $expDate; ?>" readonly>
+						<input class="input-small" id="page-content-expiration-date" data-format="MM/dd/yy" type="text" value="<? echo $expDate; ?>" readonly>
 						<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i></span>
 					</div>
 					<label class="control-label" for="page-content-expiration-date" <? if (!$page->isExpired()): ?>style="display: none"<?endif;?>>Page is Expired</label>

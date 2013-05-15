@@ -62,7 +62,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 					Application.DoEvents();
 				}
 			}
-			_filterControl.UpdateDataSource(_records.SelectMany(x => x.GroupNameList).Distinct().ToArray());
+			_filterControl.UpdateDataSource(_records.SelectMany(x => x.GroupNameList).OrderBy(g => g).Distinct().ToArray());
 			ApplyData();
 		}
 

@@ -46,5 +46,13 @@ namespace SalesDepot.Services.StatisticService
 				return result.ToString();
 			}
 		}
+
+		public string[] GroupList
+		{
+			get
+			{
+				return !string.IsNullOrEmpty(groups) ? groups.Split(',').Select(x => x.Trim()).ToArray() : new string[] { };
+			}
+		}
 	}
 }

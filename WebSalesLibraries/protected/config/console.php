@@ -11,6 +11,7 @@ return array(
         'application.models.help.*',
         'application.models.wallbin.*',
 		'application.models.favorites.*',
+		'application.models.rate.*',
 		'application.models.qpages.*',
 		'application.models.statistic.*',
 		'application.models.ticker.*',

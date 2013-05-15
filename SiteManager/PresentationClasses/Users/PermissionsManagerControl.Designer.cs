@@ -99,7 +99,7 @@
 			this.gridControlUsers.Name = "gridControlUsers";
 			this.gridControlUsers.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditUsersActions});
-			this.gridControlUsers.Size = new System.Drawing.Size(632, 451);
+			this.gridControlUsers.Size = new System.Drawing.Size(640, 457);
 			this.gridControlUsers.TabIndex = 2;
 			this.gridControlUsers.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
@@ -244,7 +244,7 @@
 			// 
 			this.xtraTabPageUsers.Controls.Add(this.splitContainerControlUsers);
 			this.xtraTabPageUsers.Name = "xtraTabPageUsers";
-			this.xtraTabPageUsers.Size = new System.Drawing.Size(890, 451);
+			this.xtraTabPageUsers.Size = new System.Drawing.Size(896, 457);
 			this.xtraTabPageUsers.Text = "Users";
 			// 
 			// splitContainerControlUsers
@@ -261,7 +261,7 @@
 			this.splitContainerControlUsers.Panel1.Text = "Panel1";
 			this.splitContainerControlUsers.Panel2.Controls.Add(this.gridControlUsers);
 			this.splitContainerControlUsers.Panel2.Text = "Panel2";
-			this.splitContainerControlUsers.Size = new System.Drawing.Size(890, 451);
+			this.splitContainerControlUsers.Size = new System.Drawing.Size(896, 457);
 			this.splitContainerControlUsers.TabIndex = 3;
 			this.splitContainerControlUsers.Text = "splitContainerControl1";
 			// 
@@ -331,7 +331,7 @@
 			this.checkedListBoxControlUserFilterGroups.Location = new System.Drawing.Point(8, 95);
 			this.checkedListBoxControlUserFilterGroups.Name = "checkedListBoxControlUserFilterGroups";
 			this.checkedListBoxControlUserFilterGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(234, 353);
+			this.checkedListBoxControlUserFilterGroups.Size = new System.Drawing.Size(234, 359);
 			this.checkedListBoxControlUserFilterGroups.StyleController = this.styleController;
 			this.checkedListBoxControlUserFilterGroups.TabIndex = 21;
 			this.checkedListBoxControlUserFilterGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlUserFilterGroups_ItemCheck);
@@ -350,7 +350,7 @@
 			// 
 			this.xtraTabPageGroups.Controls.Add(this.gridControlGroups);
 			this.xtraTabPageGroups.Name = "xtraTabPageGroups";
-			this.xtraTabPageGroups.Size = new System.Drawing.Size(890, 451);
+			this.xtraTabPageGroups.Size = new System.Drawing.Size(896, 457);
 			this.xtraTabPageGroups.Text = "Groups";
 			// 
 			// gridControlGroups
@@ -361,7 +361,7 @@
 			this.gridControlGroups.Name = "gridControlGroups";
 			this.gridControlGroups.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditGroupActions});
-			this.gridControlGroups.Size = new System.Drawing.Size(890, 451);
+			this.gridControlGroups.Size = new System.Drawing.Size(896, 457);
 			this.gridControlGroups.TabIndex = 3;
 			this.gridControlGroups.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups});
@@ -447,7 +447,7 @@
 			this.xtraTabPageLibraries.Controls.Add(this.gridControlPages);
 			this.xtraTabPageLibraries.Controls.Add(this.pnLibraraies);
 			this.xtraTabPageLibraries.Name = "xtraTabPageLibraries";
-			this.xtraTabPageLibraries.Size = new System.Drawing.Size(890, 451);
+			this.xtraTabPageLibraries.Size = new System.Drawing.Size(896, 457);
 			this.xtraTabPageLibraries.Text = "Libraries";
 			// 
 			// gridControlPages
@@ -458,7 +458,7 @@
 			this.gridControlPages.Name = "gridControlPages";
 			this.gridControlPages.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditPageActions});
-			this.gridControlPages.Size = new System.Drawing.Size(890, 404);
+			this.gridControlPages.Size = new System.Drawing.Size(896, 410);
 			this.gridControlPages.TabIndex = 4;
 			this.gridControlPages.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPages});
@@ -560,7 +560,7 @@
 			this.pnLibraraies.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnLibraraies.Location = new System.Drawing.Point(0, 0);
 			this.pnLibraraies.Name = "pnLibraraies";
-			this.pnLibraraies.Size = new System.Drawing.Size(890, 47);
+			this.pnLibraraies.Size = new System.Drawing.Size(896, 47);
 			this.pnLibraraies.TabIndex = 5;
 			// 
 			// buttonXCollapseLibraries

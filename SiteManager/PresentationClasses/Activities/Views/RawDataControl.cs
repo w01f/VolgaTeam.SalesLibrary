@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.XtraPrinting;
 using SalesDepot.Services.StatisticService;
+using SalesDepot.SiteManager.PresentationClasses.Activities.Filters;
 using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
@@ -31,15 +32,19 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			}
 		}
 
+		private RawDataFilter _filterControl;
 		public Control FilterControl
 		{
-			get { return null; }
+			get { return _filterControl; }
 		}
 
 		public RawDataControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
+			_filterControl = new RawDataFilter();
+			_filterControl.FilterChanged += (o, e) => ApplyData();
+			_filterControl.ColumnsChanged += (o, e) => ApplyColumns();
 		}
 
 		public void ShowView()
@@ -87,7 +92,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			gridControlData.DataSource = _activities;
+			_filterControl.UpdateDataSource(_activities.SelectMany(x => x.GroupList).Where(x => !string.IsNullOrEmpty(x)).OrderBy(x => x).Distinct().ToArray());
+			ApplyData();
 		}
 
 		public void ClearData()
@@ -119,6 +125,20 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 						Process.Start(dialog.FileName);
 				}
 			}
+		}
+
+		private void ApplyData()
+		{
+			var filteredRecords = new List<UserActivity>();
+			filteredRecords.AddRange(_filterControl.EnableFilter ? _activities.Where(x => _filterControl.SelectedGroups.Any(g => x.GroupList.Contains(g))) : _activities);
+			gridControlData.DataSource = filteredRecords;
+		}
+
+		private void ApplyColumns()
+		{
+			gridColumnType.Visible = _filterControl.ShowActionGroup;
+			gridColumnSubType.Visible = _filterControl.ShowAction;
+			gridViewData.OptionsView.ShowPreview = _filterControl.ShowDetails;
 		}
 
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)

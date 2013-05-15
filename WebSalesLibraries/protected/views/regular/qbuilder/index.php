@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '2.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
@@ -92,6 +92,38 @@ $showLinlCart = isset(Yii::app()->request->cookies['showLinkCart']->value) ? Yii
 				<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/page-email.png' ?>"/>
 				<span>Email</span>
 			</div>
+		</div>
+		<?
+		$popupLink = '';
+		if (Yii::app()->browser->isMobile())
+			$popupLink = 'ipad_popups.pdf';
+		else
+		{
+			$browser = Yii::app()->browser->getBrowser();
+			switch ($browser)
+			{
+				case 'Internet Explorer':
+					$popupLink = 'ie_popups.pdf';
+					break;
+				case 'Chrome':
+					$popupLink = 'chrome_popups.pdf';
+					break;
+				case 'Safari':
+					$popupLink = 'ipad_popups.pdf';
+					break;
+				case 'Firefox':
+					$popupLink = 'firefox_popups.pdf';
+					break;
+			}
+		}
+		?>
+		<div class="ribbon-section">
+			<span class="section-title">Enable Popups</span>
+			<a class="ribbon-button ribbon-button-large" href="<?php echo Yii::app()->getBaseUrl(true) . '/sd_cache/popups/' . $popupLink; ?>" target="_blanck">
+				<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/popup-help.png' ?>"/>
+				<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/popup-help.png' ?>"/>
+				<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/popup-help.png' ?>"/>
+			</a>
 		</div>
 	</div>
 </div>

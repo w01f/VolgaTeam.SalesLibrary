@@ -234,7 +234,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 				}
 			}
 			updateMessage = message;
-			UpdateFilter(_users.SelectMany(x => x.groups).Select(g => g.name).Distinct().ToArray());
+			UpdateFilter(_users.SelectMany(x => x.groups).OrderBy(g => g.name).Select(g => g.name).Distinct().ToArray());
 			FilterUsers();
 			_userCollectionChanged = false;
 		}

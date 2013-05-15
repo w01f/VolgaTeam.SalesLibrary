@@ -79,15 +79,15 @@
 			'height': (searchResult.find('> div').height() - ($('#search-grid-info').height() + 12) - gridHeader.height()) + 'px'
 		});
 
-		var linkDateWidth = 140;
+		var linkDateWidth = 100;
 
-		var linkNameHeaderWidth = searchResult.width() - gridHeader.find('td.details-button').width() - gridHeader.find('td.library-column').width() - gridHeader.find('td.link-type-column').width() - linkDateWidth;
+		var linkNameHeaderWidth = searchResult.width() - gridHeader.find('td.details-button').width() - gridHeader.find('td.library-column').width() - gridHeader.find('td.link-type-column').width() - gridHeader.find('td.link-rate-column').width() - linkDateWidth;
 		gridHeader.find('td.link-name-column').css({
 			'width': linkNameHeaderWidth + 'px'
 		});
 
 		var gridBody = $('#links-grid-body');
-		var linkNameBodyWidth = searchResult.width() - gridBody.find('td.details-button').width() - gridBody.find('td.library-column').width() - gridBody.find('td.link-type-column').width() - linkDateWidth;
+		var linkNameBodyWidth = searchResult.width() - gridBody.find('td.details-button').width() - gridBody.find('td.library-column').width() - gridBody.find('td.link-type-column').width() - gridBody.find('td.link-rate-column').width() - linkDateWidth;
 		gridBody.find('td.link-name-column').css({
 			'width': linkNameBodyWidth + 'px'
 		});

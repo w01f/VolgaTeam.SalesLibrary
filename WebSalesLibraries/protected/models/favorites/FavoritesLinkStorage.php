@@ -50,10 +50,10 @@
 				{
 					foreach ($favoriteLinkRecords as $favoriteLinkRecord)
 						$linkIds[] = $favoriteLinkRecord->id_link;
-					$dateField = 'file_date as link_date';
+					$dateField = 'link.file_date as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('id, id_library, name, file_name, ' . $dateField . ', enable_attachments, enable_file_card, format')
-						->from('tbl_link')
+						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate')
+						->from('tbl_link link')
 						->where("id in ('" . implode("', '", $linkIds) . "')")
 						->queryAll();
 					$preLinks = LinkStorage::getLinksGrid($linkRecords);
@@ -115,11 +115,6 @@
 		public static function clearByLinkIds($liveLinkIds)
 		{
 			Yii::app()->db->createCommand()->delete('tbl_favorites_link', "id_link not in ('" . implode("','", $liveLinkIds) . "')");
-		}
-
-		public static function clearByLibrary($libraryId)
-		{
-			self::model()->deleteAll('id_library=?', array($libraryId));
 		}
 
 		public static function clearByFolder($folderId)

@@ -293,21 +293,21 @@
 			var content = $('#content');
 			var containerHeight = content.height() - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height();
 
-			var descriptionHeight = containerHeight - $('#page-content-tab-title .checkbox').height() - 45;
+			var descriptionHeight = containerHeight - $('#page-content-tab-title .checkbox').height() - 50;
 			if ($.pageContent.editorDescription != undefined)
 			{
 				$.pageContent.editorDescription.$main.height(descriptionHeight + "px");
 				$.pageContent.editorDescription.refresh();
 			}
 
-			var headerHeight = containerHeight - $('#page-content-tab-header .checkbox').height() - 45;
+			var headerHeight = containerHeight - $('#page-content-tab-header .checkbox').height() - 50;
 			if ($.pageContent.editorHeader != undefined)
 			{
 				$.pageContent.editorHeader.$main.height(headerHeight + "px");
 				$.pageContent.editorHeader.refresh();
 			}
 
-			var footerHeight = containerHeight - $('#page-content-tab-footer .checkbox').height() - 45;
+			var footerHeight = containerHeight - $('#page-content-tab-footer .checkbox').height() - 50;
 			if ($.pageContent.editorFooter != undefined)
 			{
 				$.pageContent.editorFooter.$main.height(footerHeight + "px");

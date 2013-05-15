@@ -1,0 +1,21 @@
+#link-rate-bar
+{
+	position: fixed;
+	z-index: 8030;
+	height: auto;
+	width: 100px;
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+.rate-value
+{
+	color: #ffffff;
+	font-size: 11pt;
+	padding-right: 5px;
+}
+
+.rate-value >img
+{
+	padding-right: 5px;
+}
