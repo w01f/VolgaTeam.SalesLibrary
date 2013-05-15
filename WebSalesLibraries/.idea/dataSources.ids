@@ -1387,6 +1387,7 @@
       <column name="enable_attachments" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
       <column name="content" sqlType="LONGTEXT" length="2147483647" precision="0" nullable="true" jdbcType="-1"/>
       <column name="is_restricted" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="no_share" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
       <column name="is_dead" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
       <column name="is_preview_not_ready" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
       <column name="force_preview" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
@@ -1410,6 +1411,14 @@
       <index name="id_link" unique="false" columns="id_link"/>
       <index name="id_library" unique="false" columns="id_library"/>
       <index name="category" unique="false" columns="category,tag"/>
+    </table>
+    <table name="tbl_link_rate" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_link" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_user" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id_link" unique="false" columns="id_link"/>
+      <index name="id_user" unique="false" columns="id_user"/>
     </table>
     <table name="tbl_page" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
@@ -1438,16 +1447,27 @@
     <table name="tbl_qpage" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
       <column name="id_owner" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="title" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
-      <column name="subtitle" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" length="2048" precision="0" nullable="false" jdbcType="12"/>
+      <column name="subtitle" sqlType="VARCHAR" length="2048" precision="0" nullable="true" jdbcType="12"/>
+      <column name="create_date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
+      <column name="expiration_date" sqlType="DATETIME" length="19" precision="0" nullable="true" jdbcType="93"/>
       <column name="logo" sqlType="MEDIUMBLOB" length="16777215" precision="0" nullable="true" jdbcType="-4"/>
-      <column name="header" sqlType="VARCHAR" length="2049" precision="0" nullable="true" jdbcType="12"/>
-      <column name="footer" sqlType="VARCHAR" length="2049" precision="0" nullable="true" jdbcType="12"/>
+      <column name="header" sqlType="VARCHAR" length="2048" precision="0" nullable="true" jdbcType="12"/>
+      <column name="footer" sqlType="VARCHAR" length="2048" precision="0" nullable="true" jdbcType="12"/>
+      <column name="is_email" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
       <column name="restricted" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MQ=="/>
       <column name="show_ticker" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
       <column name="show_site_link" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="id_owner" unique="false" columns="id_owner"/>
+    </table>
+    <table name="tbl_qpage_link" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_page" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_link" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id_page" unique="false" columns="id_page"/>
+      <index name="id_link" unique="false" columns="id_link"/>
     </table>
     <table name="tbl_reset_password" schema="" catalog="sales_library" type="TABLE">
       <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
@@ -1588,6 +1608,7 @@
         <parameter name="end_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1"/>
       </prototype>
     </procedure>
+    <procedure name="sp_get_all_qpages" schema="" catalog="sales_library" type="0"/>
     <procedure name="sp_get_inactive_users" schema="" catalog="sales_library" type="0">
       <prototype>
         <parameter name="start_date" sqlType="DATETIME" length="19" precision="19" nullable="true" jdbcType="93" type="1" index="-1"/>
