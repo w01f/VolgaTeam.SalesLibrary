@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '2.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -30,6 +30,7 @@ if (isset($userId))
 {
 	$availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
 }
+$logos = QPageStorage::getPageLogoList();
 ?>
 
 <div data-role='page' id="libraries" data-cache="never" data-dom-cache="false" data-ajax="false">
@@ -498,6 +499,134 @@ if (isset($userId))
 		</ul>
 		<br>
 		<ul id="search-result-body" data-role="listview" data-theme="c" data-divider-theme="d"></ul>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role='page' class="email-tab" id="add-page-info" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title header-title"></span>
+		<ul data-role="listview" data-theme="c" data-divider-theme="c">
+			<li data-role="list-divider">
+				<h4 class="link-container">
+					Email Link: <span class="name"></span>
+				</h4>
+			</li>
+		</ul>
+		<div data-role="navbar">
+			<ul>
+				<li>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-info" data-transition="none">Link</a>
+				</li>
+				<li>
+					<a href="#add-page-logo" data-transition="none">Logo</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role='content' class="page-content">
+		<table class="layout-group">
+			<tr>
+				<td class="on-left">Name:</td>
+				<td class="on-right">
+					<input id="add-page-name" name="add-page-name" type="text" data-mini="true" value=""/>
+				</td>
+			</tr>
+			<tr>
+				<td class="on-left">Expires in:</td>
+				<td class="on-right">
+					<select id="add-page-expires-in" data-mini="true">
+						<option selected value="7">7 days</option>
+						<option value="14">14 days</option>
+						<option value="30">30 days</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
+					<input type="checkbox" name="add-page-restricted" id="add-page-restricted" class="custom" data-mini="true"/>
+					<label for="add-page-restricted">Require User Log-in</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
+					<input type="checkbox" name="add-page-show-link-to-main-site" id="add-page-show-link-to-main-site" class="custom" data-mini="true"/>
+					<label for="add-page-show-link-to-main-site">Show Link to Main Site</label>
+				</td>
+			</tr>
+		</table>
+		<a id="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role='page' class="email-tab" id="add-page-logo" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title header-title"></span>
+		<ul data-role="listview" data-theme="c" data-divider-theme="c">
+			<li data-role="list-divider">
+				<h4 class="link-container">
+					Email Link: <span class="name"></span>
+				</h4>
+			</li>
+		</ul>
+		<div data-role="navbar">
+			<ul>
+				<li>
+					<a href="#add-page-info" data-transition="none">Link</a>
+				</li>
+				<li>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-logo" data-transition="none">Logo</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role='content' class="page-content">
+		<ul data-role="listview" data-theme="c" data-divider-theme="d">
+			<?php if (isset($logos)): ?>
+				<?php foreach ($logos as $logo): ?>
+					<li><a class="qpage-logo" href="#"><img src="<? echo $logo; ?>"></a></li>
+				<?php endforeach; ?>
+			<?php endif; ?>
+		</ul>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-iconpos="top">

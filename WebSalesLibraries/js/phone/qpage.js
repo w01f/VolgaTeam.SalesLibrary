@@ -3,27 +3,27 @@
 	var loadLink = function (linkId, parentTitle, isAttachment, backLink)
 	{
 		$.ajax({
-			type:"POST",
-			url:isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList",
-			data:{
-				linkId:linkId
+			type: "POST",
+			url: isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList",
+			data: {
+				linkId: linkId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#preview').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var previewPage = $('#preview');
 				previewPage.find('.page-content').html(msg);
@@ -32,7 +32,7 @@
 				$('.favorites-tab .header-title').html(parentTitle);
 				previewPage.find('.link.back').attr('href', backLink);
 				$.mobile.changePage("#preview", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				previewPage.find('.page-content').children('ul').listview();
 				previewPage.find('.res-selector').navbar();
@@ -82,41 +82,41 @@
 					$.viewSelectedFormat(itemContent, resolution);
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	var loadLinkDeatils = function (linkId, parentTitle, backLink)
 	{
 		$.ajax({
-			type:"POST",
-			url:"preview/getLinkDetails",
-			data:{
-				linkId:linkId
+			type: "POST",
+			url: "preview/getLinkDetails",
+			data: {
+				linkId: linkId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#preview').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var linkDetailsPage = $('#link-details');
 				linkDetailsPage.find('.page-content').html(msg);
 				linkDetailsPage.find('.link.back').attr('href', backLink);
 				$.mobile.changePage("#link-details", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				linkDetailsPage.find('.page-content').children('ul').listview();
 				$(".file-card-link").on('click', function ()
@@ -130,35 +130,35 @@
 					loadLink(attachmentId, parentTitle, true, '#link-details');
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	var loadFolderContent = function (linkId, parentLinkId)
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getLinkFolderContent",
-			data:{
-				linkId:linkId
+			type: "POST",
+			url: "wallbin/getLinkFolderContent",
+			data: {
+				linkId: linkId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#link-folder-content-' + linkId).find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var mainPage = $('#main');
 				var linkFolderContent = $('#link-folder-content-' + linkId);
@@ -172,7 +172,7 @@
 				}
 				linkFolderContent.find('.page-content').html(msg);
 				$.mobile.changePage('#link-folder-content-' + linkId, {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				linkFolderContent.find('.page-content').children('ul').listview();
 				linkFolderContent.find(".file-link").on('click', function ()
@@ -192,8 +192,8 @@
 					event.stopPropagation();
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -218,7 +218,8 @@
 			event.stopPropagation();
 		});
 
-		$('#gallery-page').on('pageshow', function(e){
+		$('#gallery-page').on('pageshow',function (e)
+		{
 			var options = {
 				enableMouseWheel: false,
 				enableKeyboard: false,
@@ -227,10 +228,12 @@
 			};
 			$("#gallery").find("a").photoSwipe(options);
 			return true;
-		}).on('pagehide', function(e){
+		}).on('pagehide', function (e)
+			{
 				var currentPage = $(e.target),
 					photoSwipeInstance = window.Code.PhotoSwipe.getInstance(currentPage.attr('id'));
-				if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null) {
+				if (typeof photoSwipeInstance != "undefined" && photoSwipeInstance != null)
+				{
 					window.Code.PhotoSwipe.detatch(photoSwipeInstance);
 				}
 				return true;

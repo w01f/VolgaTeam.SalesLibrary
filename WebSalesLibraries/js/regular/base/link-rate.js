@@ -29,7 +29,6 @@
 				},
 				error: function ()
 				{
-					$('#search-result').html('');
 				},
 				async: true,
 				dataType: 'html'

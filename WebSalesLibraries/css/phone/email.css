@@ -1,5 +1,10 @@
 #email-body
 {
-    margin: 0;
-    resize: none;
+	margin: 0;
+	resize: none;
+}
+
+.qpage-logo
+{
+	text-align: center;
 }
