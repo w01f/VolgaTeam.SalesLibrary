@@ -6,10 +6,10 @@
 	$.viewDialogBar.show = function (format, back)
 	{
 		$.ajax({
-			type:"POST",
-			url:"preview/getViewDialogBar",
-			data:{format:format},
-			success:function (msg)
+			type: "POST",
+			url: "preview/getViewDialogBar",
+			data: {format: format},
+			success: function (msg)
 			{
 				$.viewDialogBar.active = true;
 
@@ -37,24 +37,14 @@
 				});
 				$.viewDialogBar.buttonsPanel.find('.email-all').off('click').on('click', function ()
 				{
-					$.emailFile($.viewDialogBar.linkId, null, null, $.viewDialogBar.linkName);
-				});
-				$.viewDialogBar.buttonsPanel.find('.email-pdf').off('click').on('click', function ()
-				{
-					$.emailFile($.viewDialogBar.linkId, null, 'pdf', $.viewDialogBar.linkName + ' as PDF ');
-				});
-				$.viewDialogBar.buttonsPanel.find('.email').off('click').on('click', function ()
-				{
-					var currentSlideIdValues = $('.fancybox-image').attr('id').split('---');
-					var partId = currentSlideIdValues[1];
-					$.emailFile($.viewDialogBar.linkId, partId, $.cookie("singleFileFormat"), $('.fancybox-title span').html());
+					$.pageList.addLitePage($.viewDialogBar.linkId, $.viewDialogBar.linkName);
 				});
 			},
-			error:function ()
+			error: function ()
 			{
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -85,9 +75,9 @@
 			if (barLeft > ($(window).width() - panelWidth))
 				barLeft = $(window).width() - panelWidth;
 
-			$.viewDialogBar.buttonsPanel.offset({top:barTop, left:barLeft}).css({
-				'height':panelHeight + 'px',
-				'width':panelWidth + 'px'
+			$.viewDialogBar.buttonsPanel.offset({top: barTop, left: barLeft}).css({
+				'height': panelHeight + 'px',
+				'width': panelWidth + 'px'
 			});
 		}
 	};
@@ -105,7 +95,7 @@
 		{
 			$.viewDialogBar.buttonsPanel.find('.format.new').show();
 			$.cookie("singleFileFormat", 'new office', {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		}
 
@@ -116,7 +106,7 @@
 				$.viewDialogBar.buttonsPanel.find('.format.new').hide();
 				$.viewDialogBar.buttonsPanel.find('.format.old').show();
 				$.cookie("singleFileFormat", 'old office', {
-					expires:(60 * 60 * 24 * 7)
+					expires: (60 * 60 * 24 * 7)
 				});
 			}
 			else
@@ -124,7 +114,7 @@
 				$.viewDialogBar.buttonsPanel.find('.format.new').show();
 				$.viewDialogBar.buttonsPanel.find('.format.old').hide();
 				$.cookie("singleFileFormat", 'new office', {
-					expires:(60 * 60 * 24 * 7)
+					expires: (60 * 60 * 24 * 7)
 				});
 			}
 		});

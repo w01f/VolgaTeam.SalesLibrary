@@ -16,12 +16,13 @@
 						$.linkRate.relatedObject = relatedObject;
 						$.linkRate.container.html(msg);
 						$.linkRate.container.find('.rate-value').tooltip({
+							animation: false,
 							delay: { show: 500, hide: 100 },
 							container: 'body'
 						})
 						$.linkRate.container.find('.rate-value').off('click').on('click', function ()
 						{
-							$.linkRate.addRate(linkId);
+							$.linkRate.processRate(linkId);
 						});
 						$.linkRate.container.appendTo('body');
 						$.linkRate.resizeContainer();
@@ -59,13 +60,43 @@
 				container.offset({top: containerTop, left: containerLeft});
 			}
 		},
-		addRate: function (linkId)
+		processRate: function (linkId)
 		{
+			$.linkRate.container.find('.rate-value').tooltip('hide');
 			if ($.linkRate.container.find('.rated').length == 0)
 			{
 				$.ajax({
 					type: "POST",
 					url: "rate/addRate",
+					data: {
+						linkId: linkId
+					},
+					beforeSend: function ()
+					{
+						$.showOverlayLight();
+					},
+					complete: function ()
+					{
+						$.hideOverlayLight();
+					},
+					success: function ()
+					{
+						var relatedObject = $.linkRate.relatedObject;
+						$.linkRate.close();
+						$.linkRate.show(linkId, relatedObject);
+					},
+					error: function ()
+					{
+					},
+					async: true,
+					dataType: 'html'
+				});
+			}
+			else
+			{
+				$.ajax({
+					type: "POST",
+					url: "rate/deleteRate",
 					data: {
 						linkId: linkId
 					},

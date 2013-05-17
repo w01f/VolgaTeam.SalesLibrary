@@ -10,6 +10,7 @@
 
 .rate-value
 {
+	z-index: 8040;
 	color: #ffffff;
 	font-size: 11pt;
 	padding-right: 5px;
@@ -19,3 +20,9 @@
 {
 	padding-right: 5px;
 }
+
+.tooltip
+{
+	z-index: 8040;
+}
+

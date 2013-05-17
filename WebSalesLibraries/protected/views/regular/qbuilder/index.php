@@ -1,11 +1,11 @@
 <?php
-$version = '2.0';
+$version = '3.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/bootstrap-datetimepicker.min.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/datepicker.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/cleditor/jquery.cleditor.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qbuilder/page-list.css?' . $version);
@@ -22,7 +22,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/bootstrap-datetimepicker.min.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/datepicker/js/bootstrap-datepicker.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/cleditor/jquery.cleditor.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/context-menu/bootstrap.contextmenu.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);

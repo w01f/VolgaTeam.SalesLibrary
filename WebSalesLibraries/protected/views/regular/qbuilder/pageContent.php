@@ -52,9 +52,9 @@
 				<br><br>
 				<label class="checkbox title"><input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>>A. Set Expiration Date</label>
 				<div id="page-content-expiration-date-container" class="control-group <? if ($page->isExpired()): ?>error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<?endif;?>>
-					<div class="input-append controls">
-						<input class="input-small" id="page-content-expiration-date" data-format="MM/dd/yy" type="text" value="<? echo $expDate; ?>" readonly>
-						<span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i></span>
+					<div class="input-append date controls" data-date-format="mm/dd/yy" data-date="<? echo $expDate; ?>">
+						<input class="input-small" id="page-content-expiration-date" type="text" value="<? echo $expDate; ?>" readonly>
+						<span class="add-on"><i class="icon-calendar"></i></span>
 					</div>
 					<label class="control-label" for="page-content-expiration-date" <? if (!$page->isExpired()): ?>style="display: none"<?endif;?>>Page is Expired</label>
 				</div>

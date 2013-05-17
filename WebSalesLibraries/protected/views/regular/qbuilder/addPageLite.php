@@ -26,6 +26,7 @@
 									<button class="btn active" type="button" value="7">7 Days</button>
 									<button class="btn" type="button" value="14">14 Days</button>
 									<button class="btn" type="button" value="30">30 Days</button>
+									<button class="btn" type="button" value="0">Never</button>
 								</div>
 							</div>
 						</td>

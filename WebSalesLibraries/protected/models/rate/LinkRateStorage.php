@@ -30,6 +30,11 @@
 			$record->save();
 		}
 
+		public static function deleteRate($linkId, $userId)
+		{
+			self::model()->deleteAll('id_user=? and id_link=?', array($userId, $linkId));
+		}
+
 		public static function clearByUser($userId)
 		{
 			self::model()->deleteAll('id_user=?', array($userId));

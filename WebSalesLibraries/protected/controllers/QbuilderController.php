@@ -88,7 +88,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($subtitle) && $subtitle != '' && isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
-				$expirationDate = date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day'));
+				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
 				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
 			}
 			Yii::app()->end();

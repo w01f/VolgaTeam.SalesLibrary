@@ -46,7 +46,7 @@
 		public function getCreateDateFormatted()
 		{
 			if (isset($this->create_date))
-				return date(Yii::app()->params['outputDateFormat'], strtotime($this->create_date)).' '.date(Yii::app()->params['outputTimeFormat'], strtotime($this->create_date));
+				return date(Yii::app()->params['outputDateFormat'], strtotime($this->create_date)) . ' ' . date(Yii::app()->params['outputTimeFormat'], strtotime($this->create_date));
 			else
 				return '';
 		}
@@ -155,7 +155,8 @@
 			$pageRecord->subtitle = '<h1>' . $subtitle . '<h1>';
 			$pageRecord->logo = $logo;
 			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
-			$pageRecord->expiration_date = $expirationDate;
+			if (isset($expirationDate))
+				$pageRecord->expiration_date = $expirationDate;
 			$pageRecord->is_email = true;
 			$pageRecord->restricted = $restricted;
 			$pageRecord->show_site_link = $showLinkToMainSite;

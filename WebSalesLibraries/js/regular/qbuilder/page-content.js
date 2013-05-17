@@ -108,12 +108,10 @@
 			});
 
 			$('#page-content-expiration-date-container').find('.input-append')
-				.datetimepicker({
-					pickTime: false
-				})
+				.datepicker()
 				.on('changeDate', function ()
 				{
-					$('.dropdown-menu').hide();
+					$(this).datepicker('hide');
 					markExpiredDate();
 				});
 			$('#page-content-use-expiration-date').off('change').on('change', function ()
@@ -327,7 +325,7 @@
 		var expiredDateContainer = $('#page-content-expiration-date-container');
 		var expiredDateString = $('#page-content-expiration-date').val();
 		var today = new Date();
-		var expiredDate = expiredDateString != '' ? Date.parse(expiredDateString) : today;
+		var expiredDate = expiredDateString != '' ? $.datepicker.parseDate('mm/dd/yy', expiredDateString) : today;
 		if (expiredDate < today)
 		{
 			expiredDateContainer.addClass('error');

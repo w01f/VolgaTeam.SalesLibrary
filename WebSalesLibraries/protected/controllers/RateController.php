@@ -26,4 +26,13 @@
 				LinkRateStorage::addRate($linkId, $userId);
 			Yii::app()->end();
 		}
+
+		public function actionDeleteRate()
+		{
+			$linkId = Yii::app()->request->getPost('linkId');
+			$userId = Yii::app()->user->getId();
+			if (isset($linkId) && isset($userId))
+				LinkRateStorage::deleteRate($linkId, $userId);
+			Yii::app()->end();
+		}
 	}
