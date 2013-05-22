@@ -29,8 +29,8 @@
 			transition: "slidefade"
 		});
 		$('#add-page-expires-in').val("7").selectmenu('refresh', true);
-		$('#add-page-restricted').attr('checked', 'checked').checkboxradio("refresh");
-		$('#add-page-show-link-to-main-site').attr('checked', 'checked').checkboxradio("refresh");
+		$('#add-page-restricted').removeAttr('checked').checkboxradio("refresh");
+		$('#add-page-show-link-to-main-site').removeAttr('checked').checkboxradio("refresh");
 		$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
 		$('#add-page-logo').find('.page-content').find('li').first().attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
 	};

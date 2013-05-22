@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `tbl_qpage` (
 	`header` varchar(2048) NULL,
 	`footer` varchar(2048) NULL,
 	`is_email` tinyint(1) NOT NULL,
-	`restricted` tinyint(1) NOT NULL DEFAULT 1,
+	`restricted` tinyint(1) NOT NULL DEFAULT 0,
 	`show_ticker` tinyint(1) NOT NULL DEFAULT 0,
 	`show_site_link` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),

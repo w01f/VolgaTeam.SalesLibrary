@@ -33,8 +33,8 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<label class="checkbox"><input id="add-page-restricted" type="checkbox" value="" checked>Require User Log-in</label>
-							<label class="checkbox"><input id="add-page-show-link-to-main-site" type="checkbox" value="" checked>Show Link to Main Site</label>
+							<label class="checkbox"><input id="add-page-restricted" type="checkbox" value="">Require User Log-in</label>
+							<label class="checkbox"><input id="add-page-show-link-to-main-site" type="checkbox" value="">Show Link to Main Site</label>
 						</td>
 					</tr>
 				</table>

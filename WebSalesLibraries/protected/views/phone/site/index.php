@@ -558,6 +558,7 @@ $logos = QPageStorage::getPageLogoList();
 						<option selected value="7">7 days</option>
 						<option value="14">14 days</option>
 						<option value="30">30 days</option>
+						<option value="0">Never</option>
 					</select>
 				</td>
 			</tr>
