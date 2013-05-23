@@ -17,8 +17,27 @@
 		});
 	};
 
-	var runAddPage = function (linkId, title)
+	var runAddPage = function (linkId, title, fileName, fileType)
 	{
+		//reset activity tracking
+		$('#add-page-info, #add-page-logo').off('pageshow.activity');
+		$('#add-page-show-link-to-main-site, #add-page-restricted,#add-page-expires-in').off('change.activity');
+		$.ajax({
+			type: "POST",
+			url: "statistic/writeActivity",
+			data: {
+				type: 'Email',
+				subType: 'Create Email',
+				data: $.toJSON({
+					Name: title,
+					File: fileName,
+					'Original Format': fileType
+				})
+			},
+			async: true,
+			dataType: 'html'
+		});
+
 		$('.email-tab .link-container .name').html(title);
 		$('#add-page-name').val(title);
 		$('#add-page-accept').off('click').on('click', function ()
@@ -33,16 +52,105 @@
 		$('#add-page-show-link-to-main-site').removeAttr('checked').checkboxradio("refresh");
 		$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
 		$('#add-page-logo').find('.page-content').find('li').first().attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
+
+		//set activity tracking
+		$('#add-page-info, #add-page-logo').on('pageshow.activity', function (e)
+		{
+			$.ajax({
+				type: "POST",
+				url: "statistic/writeActivity",
+				data: {
+					type: 'Email',
+					subType: 'Email Activity',
+					data: $.toJSON({
+						Name: title,
+						File: fileName,
+						'Original Format': fileType
+					})
+				},
+				async: true,
+				dataType: 'html'
+			});
+		});
+		$('#add-page-show-link-to-main-site, #add-page-restricted,#add-page-expires-in').on('change.activity', function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: "statistic/writeActivity",
+				data: {
+					type: 'Email',
+					subType: 'Email Activity',
+					data: $.toJSON({
+						Name: title,
+						File: fileName
+					})
+				},
+				async: true,
+				dataType: 'html'
+			});
+		});
+		$('#add-page-logo').find('.page-content').find('li').off('click.activity').on('click.activity', function (e)
+		{
+			$.ajax({
+				type: "POST",
+				url: "statistic/writeActivity",
+				data: {
+					type: 'Email',
+					subType: 'Email Activity',
+					data: $.toJSON({
+						Name: title,
+						File: fileName,
+						'Original Format': fileType
+					})
+				},
+				async: true,
+				dataType: 'html'
+			});
+		});
 	};
 
-	var runFavoritesPage = function (linkId, selectedLinks)
+	var runFavoritesPage = function (linkId, title, fileName, fileType)
 	{
-		$('.favorites-tab .link-container .name').html(selectedLinks[0].title);
-		$('#favorite-link-name').val(selectedLinks[0].title);
+		$.ajax({
+			type: "POST",
+			url: "statistic/writeActivity",
+			data: {
+				type: 'Link',
+				subType: 'Favorites',
+				data: $.toJSON({
+					Name: title,
+					File: fileName,
+					'Original Format': fileType
+				})
+			},
+			async: true,
+			dataType: 'html'
+		});
+
+		$('.favorites-tab .link-container .name').html(title);
+		$('#favorite-link-name').val(title);
 		$('#favorite-folder-name').val('');
 		$('#favorite-add-button').off('click').on('click', function ()
 		{
 			$.addFavoriteLink(linkId);
+		});
+		$('#favorite-folder-select-button').off('click.activity').on('click.activity', function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: "statistic/writeActivity",
+				data: {
+					type: 'Link',
+					subType: 'Favorites Activity',
+					data: $.toJSON({
+						Name: title,
+						File: fileName,
+						'Original Format': fileType
+					})
+				},
+				async: true,
+				dataType: 'html'
+			});
 		});
 		$.mobile.changePage("#favorites-add", {
 			transition: "slidefade"
@@ -80,6 +188,21 @@
 					else
 						$('#favorite-folder-name').val('');
 					$("#favorites-folder-list-dialog").dialog("close");
+					$.ajax({
+						type: "POST",
+						url: "statistic/writeActivity",
+						data: {
+							type: 'Link',
+							subType: 'Favorites Activity',
+							data: $.toJSON({
+								Name: title,
+								File: fileName,
+								'Original Format': fileType
+							})
+						},
+						async: true,
+						dataType: 'html'
+					});
 				});
 			},
 			async: true,
@@ -143,10 +266,10 @@
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'outlook':
-							runAddPage(selectedFileId, selectedLinkName);
+							runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							runFavoritesPage(selectedFileId, selectedLinks);
+							runFavoritesPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -176,10 +299,10 @@
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'outlook':
-							runAddPage(selectedFileId, selectedLinkName);
+							runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							runFavoritesPage(selectedFileId, selectedLinks);
+							runFavoritesPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -210,10 +333,10 @@
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'outlook':
-							runAddPage(selectedFileId, selectedLinkName);
+							runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							runFavoritesPage(selectedFileId, selectedLinks);
+							runFavoritesPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -243,10 +366,10 @@
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'outlook':
-							runAddPage(selectedFileId, selectedLinkName);
+							runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							runFavoritesPage(selectedFileId, selectedLinks);
+							runFavoritesPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -298,10 +421,10 @@
 							runEmailPage(selectedFileId, selectedLinks);
 							break;
 						case 'outlook':
-							runAddPage(selectedFileId, selectedLinkName);
+							runAddPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							runFavoritesPage(selectedFileId, selectedLinks);
+							runFavoritesPage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 					}
 					break;

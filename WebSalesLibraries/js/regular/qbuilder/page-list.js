@@ -169,7 +169,7 @@
 				dataType: 'html'
 			});
 		},
-		addLitePage: function (libraryLinkId, title)
+		addLitePage: function (libraryLinkId, title, fileName, fileType)
 		{
 			$.ajax({
 				type: "POST",
@@ -193,12 +193,60 @@
 					{
 						addPageContent.find('#add-page-expires-in').find('.btn').removeClass('active');
 						$(this).addClass('active');
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Email',
+								subType: 'Email Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
 					});
 					var logoSelector = addPageContent.find('#add-page-tab-logo');
 					logoSelector.find('ul a').on('click', function ()
 					{
 						logoSelector.find('ul a').removeClass('opened');
 						$(this).addClass('opened');
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Email',
+								subType: 'Email Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
+					});
+					addPageContent.find('#add-page-restricted, #add-page-show-link-to-main-site').on('change', function ()
+					{
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Email',
+								subType: 'Email Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
 					});
 					addPageContent.find('.btn.accept-button').on('click', function ()
 					{
@@ -239,6 +287,21 @@
 					addPageContent.find('.btn.cancel-button').on('click', function ()
 					{
 						$.fancybox.close();
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Email',
+								subType: 'Email Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
 					});
 					$.fancybox({
 						content: addPageContent,
@@ -251,6 +314,24 @@
 						closeEffect: 'none'
 					});
 					$('#add-page-tabs a:first').tab('show');
+					$('#add-page-tabs a[data-toggle="tab"]').on('shown', function (e)
+					{
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Email',
+								subType: 'Email Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
+					})
 				},
 				error: function ()
 				{

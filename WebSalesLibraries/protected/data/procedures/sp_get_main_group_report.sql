@@ -22,14 +22,14 @@ select distinct(sg.name),
           left join (
             select sg.name,count(sg.id) as doc_count from tbl_statistic_group as sg
           join tbl_statistic_activity as sact on sact.id = sg.id_activity
-          join tbl_statistic_detail as sdet on sdet.id_activity = sact.id and sdet.tag = 'Original Format' and sdet.data <> 'video' and sdet.data <> 'mp4'
+          join tbl_statistic_detail as sdet on sdet.id_activity = sact.id and sdet.tag = 'Original Format' and sdet.data <> 'video' and sdet.data <> 'mp4' and sdet.data <> 'wmv'
     where sact.date_time >= start_date and sact.date_time <= end_date
     group by sg.name
           ) as g_docs on g_docs.name = sg.name
           left join (
             select sg.name,count(sg.id) as video_count from tbl_statistic_group as sg
           join tbl_statistic_activity as sact on sact.id = sg.id_activity
-          join tbl_statistic_detail as sdet on sdet.id_activity = sact.id and sdet.tag = 'Original Format' and (sdet.data = 'video' or sdet.data = 'mp4')
+          join tbl_statistic_detail as sdet on sdet.id_activity = sact.id and sdet.tag = 'Original Format' and (sdet.data = 'video' or sdet.data = 'mp4' or sdet.data = 'wmv')
     where sact.date_time >= start_date and sact.date_time <= end_date
     group by sg.name
           ) as g_videos on g_videos.name = sg.name

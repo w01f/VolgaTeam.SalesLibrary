@@ -50,7 +50,10 @@
 			$linkRecord = LinkStorage::getLinkById($linkId);
 			$logos = QPageStorage::getPageLogoList();
 			if (isset($linkRecord))
+			{
 				$this->renderPartial('addPageLite', array('linkRecord' => $linkRecord, 'logos' => $logos), false, true);
+				StatisticActivityStorage::WriteActivity('Email', 'Create Email', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+			}
 		}
 
 		public function actionAddPage()
@@ -90,6 +93,10 @@
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
 				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
+
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				if (isset($linkRecord))
+					StatisticActivityStorage::WriteActivity('Email', 'Send Email', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
 			}
 			Yii::app()->end();
 		}

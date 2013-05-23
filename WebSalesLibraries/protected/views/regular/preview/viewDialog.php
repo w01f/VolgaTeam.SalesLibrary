@@ -108,6 +108,8 @@
 
 						<div class="service-data">
 							<div class="link-id"><?php echo $link->id; ?></div>
+							<div class="link-name"><?php echo $link->name; ?></div>
+							<div class="file-name"><?php echo $link->fileName; ?></div>
 							<div class="file-type"><?php echo $link->originalFormat; ?></div>
 							<div class="view-type">favorites</div>
 							<?php $viewLinks = $link->getViewSource('favorites'); ?>

@@ -37,7 +37,7 @@
 				});
 				$.viewDialogBar.buttonsPanel.find('.email-all').off('click').on('click', function ()
 				{
-					$.pageList.addLitePage($.viewDialogBar.linkId, $.viewDialogBar.linkName);
+					$.pageList.addLitePage($.viewDialogBar.linkId, $.viewDialogBar.linkName, $.viewDialogBar.fileName, $.viewDialogBar.fileType);
 				});
 			},
 			error: function ()
@@ -54,6 +54,8 @@
 		$.viewDialogBar.backToConent = null;
 		$.viewDialogBar.linkId = null;
 		$.viewDialogBar.linkName = null;
+		$.viewDialogBar.fileName = null;
+		$.viewDialogBar.fileType = null;
 		$.viewDialogBar.active = false;
 	};
 

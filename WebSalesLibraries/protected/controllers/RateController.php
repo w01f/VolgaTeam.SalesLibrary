@@ -23,7 +23,12 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			$userId = Yii::app()->user->getId();
 			if (isset($linkId) && isset($userId))
+			{
 				LinkRateStorage::addRate($linkId, $userId);
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				if (isset($linkRecord))
+					StatisticActivityStorage::WriteActivity('Link', 'Like', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+			}
 			Yii::app()->end();
 		}
 
@@ -32,7 +37,12 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			$userId = Yii::app()->user->getId();
 			if (isset($linkId) && isset($userId))
+			{
 				LinkRateStorage::deleteRate($linkId, $userId);
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				if (isset($linkRecord))
+					StatisticActivityStorage::WriteActivity('Link', 'Unlike', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+			}
 			Yii::app()->end();
 		}
 	}

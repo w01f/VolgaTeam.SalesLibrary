@@ -109,6 +109,8 @@
 	$.showSpecialDialog = function (content, linkId, folderId)
 	{
 		var linkName = content.find('.object-name').text();
+		var fileName = content.find('.object-file-name').text();
+		var fileType = content.find('.object-file-type').text();
 		content.find('#context-add').off('click').on('click', function ()
 		{
 			$.fancybox.close();
@@ -120,7 +122,7 @@
 		content.find('#context-email').off('click').on('click', function ()
 		{
 			$.fancybox.close();
-			$.pageList.addLitePage(linkId, linkName);
+			$.pageList.addLitePage(linkId, linkName, fileName, fileType);
 		});
 		content.find('#context-manager').off('click').on('click', function ()
 		{
@@ -266,7 +268,7 @@
 	};
 
 	var favoritesDialogObject = [];
-	var addToFavorites = function (linkId, title)
+	var addToFavorites = function (linkId, title, fileName, fileType)
 	{
 		$.ajax({
 			type: "POST",
@@ -293,11 +295,41 @@
 					{
 						favoritesDialogObject.mainView.hide();
 						favoritesDialogObject.folderSelector.show();
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Link',
+								subType: 'Favorites Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
 					}
 				});
 				favoritesDialogObject.mainView.find('#clear-folder').on('click', function ()
 				{
 					favoritesDialogObject.mainView.find('#favorites-folder-name').val('');
+					$.ajax({
+						type: "POST",
+						url: "statistic/writeActivity",
+						data: {
+							type: 'Link',
+							subType: 'Favorites Activity',
+							data: $.toJSON({
+								Name: title,
+								File: fileName,
+								'Original Format': fileType
+							})
+						},
+						async: true,
+						dataType: 'html'
+					});
 				});
 				favoritesDialogObject.mainView.find('.btn.cancel-button').on('click', function ()
 				{
@@ -356,6 +388,21 @@
 				{
 					favoritesDialogObject.folderSelector.hide();
 					favoritesDialogObject.mainView.show();
+					$.ajax({
+						type: "POST",
+						url: "statistic/writeActivity",
+						data: {
+							type: 'Link',
+							subType: 'Favorites Activity',
+							data: $.toJSON({
+								Name: title,
+								File: fileName,
+								'Original Format': fileType
+							})
+						},
+						async: true,
+						dataType: 'html'
+					});
 				});
 				favoritesDialogObject.folderSelector.find('.btn.accept-button').on('click', function ()
 				{
@@ -368,6 +415,21 @@
 					{
 						favoritesDialogObject.folderSelector.find('li').removeClass('active');
 						$(this).addClass('active');
+						$.ajax({
+							type: "POST",
+							url: "statistic/writeActivity",
+							data: {
+								type: 'Link',
+								subType: 'Favorites Activity',
+								data: $.toJSON({
+									Name: title,
+									File: fileName,
+									'Original Format': fileType
+								})
+							},
+							async: true,
+							dataType: 'html'
+						});
 					})
 					.on('dblclick', function ()
 					{
@@ -628,25 +690,27 @@
 					{
 						case 'png':
 						case 'jpeg':
-							$.ajax({
-								type: "POST",
-								url: "statistic/writeActivity",
-								data: {
-									type: 'Link',
-									subType: 'Preview',
-									data: $.toJSON({
-										Name: selectedLinkName,
-										File: selectedFileName,
-										'Original Format': selectedFileType,
-										Format: selectedViewType,
-										Mode: fullScreen ? 'Fullscreen' : 'Modal'
-									})
-								},
-								async: true,
-								dataType: 'html'
-							});
 							if (fullScreen)
+							{
+								$.ajax({
+									type: "POST",
+									url: "statistic/writeActivity",
+									data: {
+										type: 'Link',
+										subType: 'Preview',
+										data: $.toJSON({
+											Name: selectedLinkName,
+											File: selectedFileName,
+											'Original Format': selectedFileType,
+											Format: selectedViewType,
+											Mode: 'Fullscreen'
+										})
+									},
+									async: true,
+									dataType: 'html'
+								});
 								window.open("preview/runFullscreenGallery?linkId=" + selectedFileId + "&format=" + selectedViewType);
+							}
 							else
 							{
 								$.fancybox(selectedLinks, {
@@ -667,6 +731,23 @@
 										if (selectedFileType != 'pdf')
 											$.viewDialogBar.resize();
 										$.linkRate.resizeContainer($('.fancybox-wrap'));
+										$.ajax({
+											type: "POST",
+											url: "statistic/writeActivity",
+											data: {
+												type: 'Link',
+												subType: 'Preview Page',
+												data: $.toJSON({
+													Name: selectedLinkName,
+													File: selectedFileName,
+													'Original Format': selectedFileType,
+													Format: selectedViewType,
+													Mode: 'Modal'
+												})
+											},
+											async: true,
+											dataType: 'html'
+										});
 									},
 									helpers: {
 										thumbs: {
@@ -680,7 +761,9 @@
 								if (selectedFileType != 'pdf')
 								{
 									$.viewDialogBar.linkId = selectedFileId;
-									$.viewDialogBar.linkName = selectedFileName;
+									$.viewDialogBar.linkName = selectedLinkName;
+									$.viewDialogBar.fileName = selectedFileName;
+									$.viewDialogBar.fileType = selectedFileType;
 									$.viewDialogBar.show(selectedFileType);
 								}
 							}
@@ -689,10 +772,10 @@
 							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'outlook':
-							$.pageList.addLitePage(selectedFileId, selectedLinkName);
+							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							addToFavorites(selectedFileId, selectedLinks[0].title);
+							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -722,10 +805,10 @@
 							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'outlook':
-							$.pageList.addLitePage(selectedFileId, selectedLinkName);
+							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							addToFavorites(selectedFileId, selectedLinks[0].title);
+							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -757,10 +840,10 @@
 							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'outlook':
-							$.pageList.addLitePage(selectedFileId, selectedLinkName);
+							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							addToFavorites(selectedFileId, selectedLinks[0].title);
+							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -790,10 +873,10 @@
 							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'outlook':
-							$.pageList.addLitePage(selectedFileId, selectedLinkName);
+							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'favorites':
-							addToFavorites(selectedFileId, selectedLinks[0].title);
+							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
 							$.ajax({
@@ -860,13 +943,13 @@
 							$.emailFile(selectedFileId, null, null, selectedLinks[0].title);
 							break;
 						case 'outlook':
-							$.pageList.addLitePage(selectedFileId, selectedLinkName);
+							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'download':
 							downloadFile(selectedFileId, selectedLinks[0].title);
 							break;
 						case 'favorites':
-							addToFavorites(selectedFileId, selectedLinks[0].title);
+							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'mp4':
 							$.ajax({

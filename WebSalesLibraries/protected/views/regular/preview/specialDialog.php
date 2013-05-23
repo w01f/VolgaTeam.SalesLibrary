@@ -33,6 +33,8 @@
 					<div class="service-data">
 						<div class="object-id"><?php echo $object->id; ?></div>
 						<div class="object-name"><?php echo $object->name; ?></div>
+						<div class="object-file-name"><?php echo $object->fileName; ?></div>
+						<div class="object-file-type"><?php echo $object->originalFormat; ?></div>
 					</div>
 				</li>
 			<? endif;?>
