@@ -158,9 +158,23 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap CopySmall {
+            get {
+                object obj = ResourceManager.GetObject("CopySmall", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Delete {
             get {
                 object obj = ResourceManager.GetObject("Delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap DeleteButton {
+            get {
+                object obj = ResourceManager.GetObject("DeleteButton", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -245,6 +259,13 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap Format_Font_Smaller {
             get {
                 object obj = ResourceManager.GetObject("Format_Font_Smaller", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Green_Plus {
+            get {
+                object obj = ResourceManager.GetObject("Green_Plus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -378,6 +399,34 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap ProgramShowInfo {
             get {
                 object obj = ResourceManager.GetObject("ProgramShowInfo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QuickSiteAddLink {
+            get {
+                object obj = ResourceManager.GetObject("QuickSiteAddLink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QuickSiteAddLinkBig {
+            get {
+                object obj = ResourceManager.GetObject("QuickSiteAddLinkBig", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QuickSiteEmailLink {
+            get {
+                object obj = ResourceManager.GetObject("QuickSiteEmailLink", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QuickSiteEmailLinkBig {
+            get {
+                object obj = ResourceManager.GetObject("QuickSiteEmailLinkBig", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,5 +1,5 @@
 ﻿using System;
-using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.Services;
 using SalesDepot.SiteManager;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.PresentationClasses.Users;

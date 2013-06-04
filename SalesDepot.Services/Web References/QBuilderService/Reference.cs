@@ -27,14 +27,42 @@ namespace SalesDepot.Services.QBuilderService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="QbuilderControllerBinding", Namespace="urn:QbuilderControllerwsdl")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(QPageRecord))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(QPageLinkRecord))]
     public partial class QbuilderControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
+        private System.Threading.SendOrPostCallback getPageLogosOperationCompleted;
+        
         private System.Threading.SendOrPostCallback getAllPagesOperationCompleted;
         
-        private System.Threading.SendOrPostCallback deletePageFromServiceOperationCompleted;
+        private System.Threading.SendOrPostCallback getPagesByUserOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getPageContentOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback getLinkCartOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback isLinkAvailableOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback addLinkToCartOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback emailLinkOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteLinkFromCartOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteAllFromCartOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback addLinksToPageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deleteLinkFromPageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback addPageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback savePageContentOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback clonePageOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback deletePagesOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -78,10 +106,52 @@ namespace SalesDepot.Services.QBuilderService {
         public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
         
         /// <remarks/>
+        public event getPageLogosCompletedEventHandler getPageLogosCompleted;
+        
+        /// <remarks/>
         public event getAllPagesCompletedEventHandler getAllPagesCompleted;
         
         /// <remarks/>
-        public event deletePageFromServiceCompletedEventHandler deletePageFromServiceCompleted;
+        public event getPagesByUserCompletedEventHandler getPagesByUserCompleted;
+        
+        /// <remarks/>
+        public event getPageContentCompletedEventHandler getPageContentCompleted;
+        
+        /// <remarks/>
+        public event getLinkCartCompletedEventHandler getLinkCartCompleted;
+        
+        /// <remarks/>
+        public event isLinkAvailableCompletedEventHandler isLinkAvailableCompleted;
+        
+        /// <remarks/>
+        public event addLinkToCartCompletedEventHandler addLinkToCartCompleted;
+        
+        /// <remarks/>
+        public event emailLinkCompletedEventHandler emailLinkCompleted;
+        
+        /// <remarks/>
+        public event deleteLinkFromCartCompletedEventHandler deleteLinkFromCartCompleted;
+        
+        /// <remarks/>
+        public event deleteAllFromCartCompletedEventHandler deleteAllFromCartCompleted;
+        
+        /// <remarks/>
+        public event addLinksToPageCompletedEventHandler addLinksToPageCompleted;
+        
+        /// <remarks/>
+        public event deleteLinkFromPageCompletedEventHandler deleteLinkFromPageCompleted;
+        
+        /// <remarks/>
+        public event addPageCompletedEventHandler addPageCompleted;
+        
+        /// <remarks/>
+        public event savePageContentCompletedEventHandler savePageContentCompleted;
+        
+        /// <remarks/>
+        public event clonePageCompletedEventHandler clonePageCompleted;
+        
+        /// <remarks/>
+        public event deletePagesCompletedEventHandler deletePagesCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#getSessionKey", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
@@ -116,6 +186,36 @@ namespace SalesDepot.Services.QBuilderService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#getPageLogos", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string[] getPageLogos(string sessionKey) {
+            object[] results = this.Invoke("getPageLogos", new object[] {
+                        sessionKey});
+            return ((string[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPageLogosAsync(string sessionKey) {
+            this.getPageLogosAsync(sessionKey, null);
+        }
+        
+        /// <remarks/>
+        public void getPageLogosAsync(string sessionKey, object userState) {
+            if ((this.getPageLogosOperationCompleted == null)) {
+                this.getPageLogosOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPageLogosOperationCompleted);
+            }
+            this.InvokeAsync("getPageLogos", new object[] {
+                        sessionKey}, this.getPageLogosOperationCompleted, userState);
+        }
+        
+        private void OngetPageLogosOperationCompleted(object arg) {
+            if ((this.getPageLogosCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPageLogosCompleted(this, new getPageLogosCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#getAllPages", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public QPageRecord[] getAllPages(string sessionKey) {
@@ -146,32 +246,482 @@ namespace SalesDepot.Services.QBuilderService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#deletePageFromService", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
-        public void deletePageFromService(string sessionKey, string pageId) {
-            this.Invoke("deletePageFromService", new object[] {
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#getPagesByUser", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public QPageRecord[] getPagesByUser(string sessionKey, string login) {
+            object[] results = this.Invoke("getPagesByUser", new object[] {
                         sessionKey,
+                        login});
+            return ((QPageRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPagesByUserAsync(string sessionKey, string login) {
+            this.getPagesByUserAsync(sessionKey, login, null);
+        }
+        
+        /// <remarks/>
+        public void getPagesByUserAsync(string sessionKey, string login, object userState) {
+            if ((this.getPagesByUserOperationCompleted == null)) {
+                this.getPagesByUserOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPagesByUserOperationCompleted);
+            }
+            this.InvokeAsync("getPagesByUser", new object[] {
+                        sessionKey,
+                        login}, this.getPagesByUserOperationCompleted, userState);
+        }
+        
+        private void OngetPagesByUserOperationCompleted(object arg) {
+            if ((this.getPagesByUserCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPagesByUserCompleted(this, new getPagesByUserCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#getPageContent", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public QPageRecord getPageContent(string sessionKey, string pageId) {
+            object[] results = this.Invoke("getPageContent", new object[] {
+                        sessionKey,
+                        pageId});
+            return ((QPageRecord)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getPageContentAsync(string sessionKey, string pageId) {
+            this.getPageContentAsync(sessionKey, pageId, null);
+        }
+        
+        /// <remarks/>
+        public void getPageContentAsync(string sessionKey, string pageId, object userState) {
+            if ((this.getPageContentOperationCompleted == null)) {
+                this.getPageContentOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetPageContentOperationCompleted);
+            }
+            this.InvokeAsync("getPageContent", new object[] {
+                        sessionKey,
+                        pageId}, this.getPageContentOperationCompleted, userState);
+        }
+        
+        private void OngetPageContentOperationCompleted(object arg) {
+            if ((this.getPageContentCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getPageContentCompleted(this, new getPageContentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#getLinkCart", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public QPageLinkRecord[] getLinkCart(string sessionKey, string login) {
+            object[] results = this.Invoke("getLinkCart", new object[] {
+                        sessionKey,
+                        login});
+            return ((QPageLinkRecord[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void getLinkCartAsync(string sessionKey, string login) {
+            this.getLinkCartAsync(sessionKey, login, null);
+        }
+        
+        /// <remarks/>
+        public void getLinkCartAsync(string sessionKey, string login, object userState) {
+            if ((this.getLinkCartOperationCompleted == null)) {
+                this.getLinkCartOperationCompleted = new System.Threading.SendOrPostCallback(this.OngetLinkCartOperationCompleted);
+            }
+            this.InvokeAsync("getLinkCart", new object[] {
+                        sessionKey,
+                        login}, this.getLinkCartOperationCompleted, userState);
+        }
+        
+        private void OngetLinkCartOperationCompleted(object arg) {
+            if ((this.getLinkCartCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.getLinkCartCompleted(this, new getLinkCartCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#isLinkAvailable", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public bool isLinkAvailable(string sessionKey, string linkId) {
+            object[] results = this.Invoke("isLinkAvailable", new object[] {
+                        sessionKey,
+                        linkId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void isLinkAvailableAsync(string sessionKey, string linkId) {
+            this.isLinkAvailableAsync(sessionKey, linkId, null);
+        }
+        
+        /// <remarks/>
+        public void isLinkAvailableAsync(string sessionKey, string linkId, object userState) {
+            if ((this.isLinkAvailableOperationCompleted == null)) {
+                this.isLinkAvailableOperationCompleted = new System.Threading.SendOrPostCallback(this.OnisLinkAvailableOperationCompleted);
+            }
+            this.InvokeAsync("isLinkAvailable", new object[] {
+                        sessionKey,
+                        linkId}, this.isLinkAvailableOperationCompleted, userState);
+        }
+        
+        private void OnisLinkAvailableOperationCompleted(object arg) {
+            if ((this.isLinkAvailableCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.isLinkAvailableCompleted(this, new isLinkAvailableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#addLinkToCart", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void addLinkToCart(string sessionKey, string login, string linkId) {
+            this.Invoke("addLinkToCart", new object[] {
+                        sessionKey,
+                        login,
+                        linkId});
+        }
+        
+        /// <remarks/>
+        public void addLinkToCartAsync(string sessionKey, string login, string linkId) {
+            this.addLinkToCartAsync(sessionKey, login, linkId, null);
+        }
+        
+        /// <remarks/>
+        public void addLinkToCartAsync(string sessionKey, string login, string linkId, object userState) {
+            if ((this.addLinkToCartOperationCompleted == null)) {
+                this.addLinkToCartOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddLinkToCartOperationCompleted);
+            }
+            this.InvokeAsync("addLinkToCart", new object[] {
+                        sessionKey,
+                        login,
+                        linkId}, this.addLinkToCartOperationCompleted, userState);
+        }
+        
+        private void OnaddLinkToCartOperationCompleted(object arg) {
+            if ((this.addLinkToCartCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addLinkToCartCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#emailLink", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string emailLink(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo) {
+            object[] results = this.Invoke("emailLink", new object[] {
+                        sessionKey,
+                        login,
+                        linkId,
+                        subtitle,
+                        createDate,
+                        expiresInDays,
+                        restricted,
+                        showLinkToMainSite,
+                        logo});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo) {
+            this.emailLinkAsync(sessionKey, login, linkId, subtitle, createDate, expiresInDays, restricted, showLinkToMainSite, logo, null);
+        }
+        
+        /// <remarks/>
+        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, object userState) {
+            if ((this.emailLinkOperationCompleted == null)) {
+                this.emailLinkOperationCompleted = new System.Threading.SendOrPostCallback(this.OnemailLinkOperationCompleted);
+            }
+            this.InvokeAsync("emailLink", new object[] {
+                        sessionKey,
+                        login,
+                        linkId,
+                        subtitle,
+                        createDate,
+                        expiresInDays,
+                        restricted,
+                        showLinkToMainSite,
+                        logo}, this.emailLinkOperationCompleted, userState);
+        }
+        
+        private void OnemailLinkOperationCompleted(object arg) {
+            if ((this.emailLinkCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.emailLinkCompleted(this, new emailLinkCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#deleteLinkFromCart", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void deleteLinkFromCart(string sessionKey, string linkInCartId) {
+            this.Invoke("deleteLinkFromCart", new object[] {
+                        sessionKey,
+                        linkInCartId});
+        }
+        
+        /// <remarks/>
+        public void deleteLinkFromCartAsync(string sessionKey, string linkInCartId) {
+            this.deleteLinkFromCartAsync(sessionKey, linkInCartId, null);
+        }
+        
+        /// <remarks/>
+        public void deleteLinkFromCartAsync(string sessionKey, string linkInCartId, object userState) {
+            if ((this.deleteLinkFromCartOperationCompleted == null)) {
+                this.deleteLinkFromCartOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteLinkFromCartOperationCompleted);
+            }
+            this.InvokeAsync("deleteLinkFromCart", new object[] {
+                        sessionKey,
+                        linkInCartId}, this.deleteLinkFromCartOperationCompleted, userState);
+        }
+        
+        private void OndeleteLinkFromCartOperationCompleted(object arg) {
+            if ((this.deleteLinkFromCartCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteLinkFromCartCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#deleteAllFromCart", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void deleteAllFromCart(string sessionKey, string login) {
+            this.Invoke("deleteAllFromCart", new object[] {
+                        sessionKey,
+                        login});
+        }
+        
+        /// <remarks/>
+        public void deleteAllFromCartAsync(string sessionKey, string login) {
+            this.deleteAllFromCartAsync(sessionKey, login, null);
+        }
+        
+        /// <remarks/>
+        public void deleteAllFromCartAsync(string sessionKey, string login, object userState) {
+            if ((this.deleteAllFromCartOperationCompleted == null)) {
+                this.deleteAllFromCartOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteAllFromCartOperationCompleted);
+            }
+            this.InvokeAsync("deleteAllFromCart", new object[] {
+                        sessionKey,
+                        login}, this.deleteAllFromCartOperationCompleted, userState);
+        }
+        
+        private void OndeleteAllFromCartOperationCompleted(object arg) {
+            if ((this.deleteAllFromCartCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteAllFromCartCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#addLinksToPage", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void addLinksToPage(string sessionKey, string[] linkInCartIds, string pageId) {
+            this.Invoke("addLinksToPage", new object[] {
+                        sessionKey,
+                        linkInCartIds,
                         pageId});
         }
         
         /// <remarks/>
-        public void deletePageFromServiceAsync(string sessionKey, string pageId) {
-            this.deletePageFromServiceAsync(sessionKey, pageId, null);
+        public void addLinksToPageAsync(string sessionKey, string[] linkInCartIds, string pageId) {
+            this.addLinksToPageAsync(sessionKey, linkInCartIds, pageId, null);
         }
         
         /// <remarks/>
-        public void deletePageFromServiceAsync(string sessionKey, string pageId, object userState) {
-            if ((this.deletePageFromServiceOperationCompleted == null)) {
-                this.deletePageFromServiceOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeletePageFromServiceOperationCompleted);
+        public void addLinksToPageAsync(string sessionKey, string[] linkInCartIds, string pageId, object userState) {
+            if ((this.addLinksToPageOperationCompleted == null)) {
+                this.addLinksToPageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddLinksToPageOperationCompleted);
             }
-            this.InvokeAsync("deletePageFromService", new object[] {
+            this.InvokeAsync("addLinksToPage", new object[] {
                         sessionKey,
-                        pageId}, this.deletePageFromServiceOperationCompleted, userState);
+                        linkInCartIds,
+                        pageId}, this.addLinksToPageOperationCompleted, userState);
         }
         
-        private void OndeletePageFromServiceOperationCompleted(object arg) {
-            if ((this.deletePageFromServiceCompleted != null)) {
+        private void OnaddLinksToPageOperationCompleted(object arg) {
+            if ((this.addLinksToPageCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.deletePageFromServiceCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.addLinksToPageCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#deleteLinkFromPage", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void deleteLinkFromPage(string sessionKey, string linkInPageId) {
+            this.Invoke("deleteLinkFromPage", new object[] {
+                        sessionKey,
+                        linkInPageId});
+        }
+        
+        /// <remarks/>
+        public void deleteLinkFromPageAsync(string sessionKey, string linkInPageId) {
+            this.deleteLinkFromPageAsync(sessionKey, linkInPageId, null);
+        }
+        
+        /// <remarks/>
+        public void deleteLinkFromPageAsync(string sessionKey, string linkInPageId, object userState) {
+            if ((this.deleteLinkFromPageOperationCompleted == null)) {
+                this.deleteLinkFromPageOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeleteLinkFromPageOperationCompleted);
+            }
+            this.InvokeAsync("deleteLinkFromPage", new object[] {
+                        sessionKey,
+                        linkInPageId}, this.deleteLinkFromPageOperationCompleted, userState);
+        }
+        
+        private void OndeleteLinkFromPageOperationCompleted(object arg) {
+            if ((this.deleteLinkFromPageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deleteLinkFromPageCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#addPage", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string addPage(string sessionKey, string login, string title, string createDate) {
+            object[] results = this.Invoke("addPage", new object[] {
+                        sessionKey,
+                        login,
+                        title,
+                        createDate});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void addPageAsync(string sessionKey, string login, string title, string createDate) {
+            this.addPageAsync(sessionKey, login, title, createDate, null);
+        }
+        
+        /// <remarks/>
+        public void addPageAsync(string sessionKey, string login, string title, string createDate, object userState) {
+            if ((this.addPageOperationCompleted == null)) {
+                this.addPageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddPageOperationCompleted);
+            }
+            this.InvokeAsync("addPage", new object[] {
+                        sessionKey,
+                        login,
+                        title,
+                        createDate}, this.addPageOperationCompleted, userState);
+        }
+        
+        private void OnaddPageOperationCompleted(object arg) {
+            if ((this.addPageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.addPageCompleted(this, new addPageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#savePageContent", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void savePageContent(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, string logo) {
+            this.Invoke("savePageContent", new object[] {
+                        sessionKey,
+                        pageId,
+                        title,
+                        description,
+                        header,
+                        footer,
+                        expirationDate,
+                        requireLogin,
+                        showLinkToMainSite,
+                        showTicker,
+                        logo});
+        }
+        
+        /// <remarks/>
+        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, string logo) {
+            this.savePageContentAsync(sessionKey, pageId, title, description, header, footer, expirationDate, requireLogin, showLinkToMainSite, showTicker, logo, null);
+        }
+        
+        /// <remarks/>
+        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, string logo, object userState) {
+            if ((this.savePageContentOperationCompleted == null)) {
+                this.savePageContentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsavePageContentOperationCompleted);
+            }
+            this.InvokeAsync("savePageContent", new object[] {
+                        sessionKey,
+                        pageId,
+                        title,
+                        description,
+                        header,
+                        footer,
+                        expirationDate,
+                        requireLogin,
+                        showLinkToMainSite,
+                        showTicker,
+                        logo}, this.savePageContentOperationCompleted, userState);
+        }
+        
+        private void OnsavePageContentOperationCompleted(object arg) {
+            if ((this.savePageContentCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.savePageContentCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#clonePage", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public string clonePage(string sessionKey, string login, string clonedPageId, string title, string createDate) {
+            object[] results = this.Invoke("clonePage", new object[] {
+                        sessionKey,
+                        login,
+                        clonedPageId,
+                        title,
+                        createDate});
+            return ((string)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void clonePageAsync(string sessionKey, string login, string clonedPageId, string title, string createDate) {
+            this.clonePageAsync(sessionKey, login, clonedPageId, title, createDate, null);
+        }
+        
+        /// <remarks/>
+        public void clonePageAsync(string sessionKey, string login, string clonedPageId, string title, string createDate, object userState) {
+            if ((this.clonePageOperationCompleted == null)) {
+                this.clonePageOperationCompleted = new System.Threading.SendOrPostCallback(this.OnclonePageOperationCompleted);
+            }
+            this.InvokeAsync("clonePage", new object[] {
+                        sessionKey,
+                        login,
+                        clonedPageId,
+                        title,
+                        createDate}, this.clonePageOperationCompleted, userState);
+        }
+        
+        private void OnclonePageOperationCompleted(object arg) {
+            if ((this.clonePageCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.clonePageCompleted(this, new clonePageCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#deletePages", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        public void deletePages(string sessionKey, string[] pageIds) {
+            this.Invoke("deletePages", new object[] {
+                        sessionKey,
+                        pageIds});
+        }
+        
+        /// <remarks/>
+        public void deletePagesAsync(string sessionKey, string[] pageIds) {
+            this.deletePagesAsync(sessionKey, pageIds, null);
+        }
+        
+        /// <remarks/>
+        public void deletePagesAsync(string sessionKey, string[] pageIds, object userState) {
+            if ((this.deletePagesOperationCompleted == null)) {
+                this.deletePagesOperationCompleted = new System.Threading.SendOrPostCallback(this.OndeletePagesOperationCompleted);
+            }
+            this.InvokeAsync("deletePages", new object[] {
+                        sessionKey,
+                        pageIds}, this.deletePagesOperationCompleted, userState);
+        }
+        
+        private void OndeletePagesOperationCompleted(object arg) {
+            if ((this.deletePagesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.deletePagesCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -213,6 +763,22 @@ namespace SalesDepot.Services.QBuilderService {
         private string createDateField;
         
         private string expirationDateField;
+        
+        private string subtitleField;
+        
+        private string headerField;
+        
+        private string footerField;
+        
+        private bool isRestrictedField;
+        
+        private bool showLinkMainSiteField;
+        
+        private bool showTickerField;
+        
+        private string logoField;
+        
+        private QPageLinkRecord[] linksField;
         
         private string loginField;
         
@@ -285,6 +851,86 @@ namespace SalesDepot.Services.QBuilderService {
         }
         
         /// <remarks/>
+        public string subtitle {
+            get {
+                return this.subtitleField;
+            }
+            set {
+                this.subtitleField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string header {
+            get {
+                return this.headerField;
+            }
+            set {
+                this.headerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string footer {
+            get {
+                return this.footerField;
+            }
+            set {
+                this.footerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool isRestricted {
+            get {
+                return this.isRestrictedField;
+            }
+            set {
+                this.isRestrictedField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showLinkMainSite {
+            get {
+                return this.showLinkMainSiteField;
+            }
+            set {
+                this.showLinkMainSiteField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool showTicker {
+            get {
+                return this.showTickerField;
+            }
+            set {
+                this.showTickerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string logo {
+            get {
+                return this.logoField;
+            }
+            set {
+                this.logoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public QPageLinkRecord[] links {
+            get {
+                return this.linksField;
+            }
+            set {
+                this.linksField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string login {
             get {
                 return this.loginField;
@@ -336,6 +982,111 @@ namespace SalesDepot.Services.QBuilderService {
     }
     
     /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.233")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:QbuilderControllerwsdl")]
+    public partial class QPageLinkRecord {
+        
+        private string idField;
+        
+        private string parentIdField;
+        
+        private string linkIdField;
+        
+        private string libraryIdField;
+        
+        private string nameField;
+        
+        private string fileNameField;
+        
+        private string libraryNameField;
+        
+        private string logoField;
+        
+        /// <remarks/>
+        public string id {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string parentId {
+            get {
+                return this.parentIdField;
+            }
+            set {
+                this.parentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string linkId {
+            get {
+                return this.linkIdField;
+            }
+            set {
+                this.linkIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryId {
+            get {
+                return this.libraryIdField;
+            }
+            set {
+                this.libraryIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                this.nameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string fileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string libraryName {
+            get {
+                return this.libraryNameField;
+            }
+            set {
+                this.libraryNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string logo {
+            get {
+                return this.logoField;
+            }
+            set {
+                this.logoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     public delegate void getSessionKeyCompletedEventHandler(object sender, getSessionKeyCompletedEventArgs e);
     
@@ -357,6 +1108,32 @@ namespace SalesDepot.Services.QBuilderService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getPageLogosCompletedEventHandler(object sender, getPageLogosCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPageLogosCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPageLogosCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string[])(this.results[0]));
             }
         }
     }
@@ -389,7 +1166,213 @@ namespace SalesDepot.Services.QBuilderService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void deletePageFromServiceCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    public delegate void getPagesByUserCompletedEventHandler(object sender, getPagesByUserCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPagesByUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPagesByUserCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public QPageRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((QPageRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getPageContentCompletedEventHandler(object sender, getPageContentCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getPageContentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getPageContentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public QPageRecord Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((QPageRecord)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void getLinkCartCompletedEventHandler(object sender, getLinkCartCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class getLinkCartCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal getLinkCartCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public QPageLinkRecord[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((QPageLinkRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void isLinkAvailableCompletedEventHandler(object sender, isLinkAvailableCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class isLinkAvailableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal isLinkAvailableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void addLinkToCartCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void emailLinkCompletedEventHandler(object sender, emailLinkCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class emailLinkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal emailLinkCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void deleteLinkFromCartCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void deleteAllFromCartCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void addLinksToPageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void deleteLinkFromPageCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void addPageCompletedEventHandler(object sender, addPageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class addPageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal addPageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void savePageContentCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void clonePageCompletedEventHandler(object sender, clonePageCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class clonePageCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal clonePageCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public string Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void deletePagesCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs e);
 }
 
 #pragma warning restore 1591

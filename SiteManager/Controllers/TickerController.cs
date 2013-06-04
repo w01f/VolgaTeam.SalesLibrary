@@ -1,6 +1,6 @@
 ﻿using System;
 using FileManager.Controllers;
-using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.Services;
 using SalesDepot.SiteManager.PresentationClasses.Ticker;
 using SalesDepot.SiteManager.TabPages;
 

@@ -463,6 +463,10 @@ namespace SalesDepot.BusinessClasses
 			{
 				switch (childNode.Name)
 				{
+					case "Identifier":
+						if (Guid.TryParse(childNode.InnerText, out tempGuid))
+							Identifier = tempGuid;
+						break;
 					case "DisplayName":
 						Name = childNode.InnerText;
 						break;

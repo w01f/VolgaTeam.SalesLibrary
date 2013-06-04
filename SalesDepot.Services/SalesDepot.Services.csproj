@@ -49,6 +49,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
@@ -58,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QBuilderClient.cs" />
     <Compile Include="ContentManagment\LibraryConfig.cs" />
     <Compile Include="InactiveUsersService\UserRecord.cs" />
     <Compile Include="IPadAdminService\GroupRecord.cs" />
@@ -70,7 +72,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="QBuilderService\QPageLinkRecord.cs" />
     <Compile Include="QBuilderService\QPageRecord.cs" />
+    <Compile Include="SiteClient.cs" />
     <Compile Include="StatisticService\AccessReportRecord.cs" />
     <Compile Include="StatisticService\NavigationGroupReportRecord.cs" />
     <Compile Include="StatisticService\MainGroupReportRecord.cs" />
@@ -239,6 +243,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\QBuilderService\QbuilderController.wsdl" />
+    <None Include="Web References\QBuilderService\QPageLinkRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
     <None Include="Web References\QBuilderService\QPageRecord.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>

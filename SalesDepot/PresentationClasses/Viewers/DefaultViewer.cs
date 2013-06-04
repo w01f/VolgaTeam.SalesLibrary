@@ -51,7 +51,7 @@ namespace SalesDepot.PresentationClasses.Viewers
 		}
 
 		#region IFileViewer Methods
-		public void ReleaseResources() {}
+		public void ReleaseResources() { }
 
 		public void Open()
 		{
@@ -89,6 +89,16 @@ namespace SalesDepot.PresentationClasses.Viewers
 		public void Print()
 		{
 			LinkManager.Instance.PrintFile(File);
+		}
+
+		public void EmailLinkToQuickSite()
+		{
+			LinkManager.Instance.EmailLinkToQuickSite(File);
+		}
+
+		public void AddLinkToQuickSite()
+		{
+			LinkManager.Instance.AddLinkToQuickSite(File);
 		}
 		#endregion
 

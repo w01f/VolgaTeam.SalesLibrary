@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace SalesDepot.Services.QBuilderService
 {
 	public partial class QPageRecord
 	{
+		public bool FullyLoaded { get; set; }
+
 		public string FullName
 		{
 			get { return (firstName + " " + lastName).Trim(); }
@@ -12,7 +16,7 @@ namespace SalesDepot.Services.QBuilderService
 
 		public string Type
 		{
-			get { return isEmail ? "email" : "quickSITE"; }
+			get { return isEmail ? "Email" : "quickSITE"; }
 		}
 
 		public string[] GroupNameList
@@ -42,6 +46,28 @@ namespace SalesDepot.Services.QBuilderService
 				if (DateTime.TryParse(expirationDate, out temp))
 					return temp;
 				return null;
+			}
+		}
+
+		public string Details
+		{
+			get
+			{
+				var result = new StringBuilder();
+				if (CreateDate.HasValue)
+					result.AppendLine(String.Format("{0} - Created: {1}", Type, CreateDate.Value.ToString("MM/dd/yy hh:mm tt")));
+				return result.ToString();
+			}
+		}
+
+		public void RemoveLink(QPageLinkRecord link)
+		{
+			if (link != null)
+			{
+				var linkList = new List<QPageLinkRecord>();
+				linkList.AddRange(links);
+				linkList.Remove(link);
+				links = linkList.ToArray();
 			}
 		}
 	}

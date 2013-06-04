@@ -2,6 +2,13 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:QbuilderControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="QbuilderController" targetNamespace="urn:QbuilderControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="urn:QbuilderControllerwsdl">
+      <xsd:complexType name="stringArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
       <xsd:complexType name="QPageRecordArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
@@ -17,11 +24,38 @@
           <xsd:element name="url" type="xsd:string" />
           <xsd:element name="createDate" type="xsd:string" />
           <xsd:element name="expirationDate" type="xsd:string" />
+          <xsd:element name="subtitle" type="xsd:string" />
+          <xsd:element name="header" type="xsd:string" />
+          <xsd:element name="footer" type="xsd:string" />
+          <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="showLinkMainSite" type="xsd:boolean" />
+          <xsd:element name="showTicker" type="xsd:boolean" />
+          <xsd:element name="logo" type="xsd:string" />
+          <xsd:element name="links" type="tns:QPageLinkRecordArray" />
           <xsd:element name="login" type="xsd:string" />
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="groups" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="QPageLinkRecordArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:QPageLinkRecord[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="QPageLinkRecord">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:string" />
+          <xsd:element name="parentId" type="xsd:string" />
+          <xsd:element name="linkId" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="name" type="xsd:string" />
+          <xsd:element name="fileName" type="xsd:string" />
+          <xsd:element name="libraryName" type="xsd:string" />
+          <xsd:element name="logo" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
     </xsd:schema>
@@ -33,17 +67,125 @@
   <wsdl:message name="getSessionKeyResponse">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
+  <wsdl:message name="getPageLogosRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getPageLogosResponse">
+    <wsdl:part name="return" type="tns:stringArray" />
+  </wsdl:message>
   <wsdl:message name="getAllPagesRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getAllPagesResponse">
     <wsdl:part name="return" type="tns:QPageRecordArray" />
   </wsdl:message>
-  <wsdl:message name="deletePageFromServiceRequest">
+  <wsdl:message name="getPagesByUserRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getPagesByUserResponse">
+    <wsdl:part name="return" type="tns:QPageRecordArray" />
+  </wsdl:message>
+  <wsdl:message name="getPageContentRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="pageId" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="deletePageFromServiceResponse" />
+  <wsdl:message name="getPageContentResponse">
+    <wsdl:part name="return" type="tns:QPageRecord" />
+  </wsdl:message>
+  <wsdl:message name="getLinkCartRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getLinkCartResponse">
+    <wsdl:part name="return" type="tns:QPageLinkRecordArray" />
+  </wsdl:message>
+  <wsdl:message name="isLinkAvailableRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="linkId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="isLinkAvailableResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
+  <wsdl:message name="addLinkToCartRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="linkId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addLinkToCartResponse" />
+  <wsdl:message name="emailLinkRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="linkId" type="xsd:string" />
+    <wsdl:part name="subtitle" type="xsd:string" />
+    <wsdl:part name="createDate" type="xsd:string" />
+    <wsdl:part name="expiresInDays" type="xsd:int" />
+    <wsdl:part name="restricted" type="xsd:boolean" />
+    <wsdl:part name="showLinkToMainSite" type="xsd:boolean" />
+    <wsdl:part name="logo" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="emailLinkResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteLinkFromCartRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="linkInCartId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteLinkFromCartResponse" />
+  <wsdl:message name="deleteAllFromCartRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteAllFromCartResponse" />
+  <wsdl:message name="addLinksToPageRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="linkInCartIds" type="tns:stringArray" />
+    <wsdl:part name="pageId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addLinksToPageResponse" />
+  <wsdl:message name="deleteLinkFromPageRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="linkInPageId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deleteLinkFromPageResponse" />
+  <wsdl:message name="addPageRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="title" type="xsd:string" />
+    <wsdl:part name="createDate" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="addPageResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="savePageContentRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="pageId" type="xsd:string" />
+    <wsdl:part name="title" type="xsd:string" />
+    <wsdl:part name="description" type="xsd:string" />
+    <wsdl:part name="header" type="xsd:string" />
+    <wsdl:part name="footer" type="xsd:string" />
+    <wsdl:part name="expirationDate" type="xsd:string" />
+    <wsdl:part name="requireLogin" type="xsd:boolean" />
+    <wsdl:part name="showLinkToMainSite" type="xsd:boolean" />
+    <wsdl:part name="showTicker" type="xsd:boolean" />
+    <wsdl:part name="logo" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="savePageContentResponse" />
+  <wsdl:message name="clonePageRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="clonedPageId" type="xsd:string" />
+    <wsdl:part name="title" type="xsd:string" />
+    <wsdl:part name="createDate" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="clonePageResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="deletePagesRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="pageIds" type="tns:stringArray" />
+  </wsdl:message>
+  <wsdl:message name="deletePagesResponse" />
   <wsdl:portType name="QbuilderControllerPortType">
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -51,23 +193,116 @@
       <wsdl:input message="tns:getSessionKeyRequest" />
       <wsdl:output message="tns:getSessionKeyResponse" />
     </wsdl:operation>
+    <wsdl:operation name="getPageLogos">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getPageLogosRequest" />
+      <wsdl:output message="tns:getPageLogosResponse" />
+    </wsdl:operation>
     <wsdl:operation name="getAllPages">
       <wsdl:documentation>
       </wsdl:documentation>
       <wsdl:input message="tns:getAllPagesRequest" />
       <wsdl:output message="tns:getAllPagesResponse" />
     </wsdl:operation>
-    <wsdl:operation name="deletePageFromService">
+    <wsdl:operation name="getPagesByUser">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:deletePageFromServiceRequest" />
-      <wsdl:output message="tns:deletePageFromServiceResponse" />
+      <wsdl:input message="tns:getPagesByUserRequest" />
+      <wsdl:output message="tns:getPagesByUserResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPageContent">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getPageContentRequest" />
+      <wsdl:output message="tns:getPageContentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLinkCart">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getLinkCartRequest" />
+      <wsdl:output message="tns:getLinkCartResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isLinkAvailable">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:isLinkAvailableRequest" />
+      <wsdl:output message="tns:isLinkAvailableResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addLinkToCart">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:addLinkToCartRequest" />
+      <wsdl:output message="tns:addLinkToCartResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="emailLink">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:emailLinkRequest" />
+      <wsdl:output message="tns:emailLinkResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteLinkFromCart">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:deleteLinkFromCartRequest" />
+      <wsdl:output message="tns:deleteLinkFromCartResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllFromCart">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:deleteAllFromCartRequest" />
+      <wsdl:output message="tns:deleteAllFromCartResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addLinksToPage">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:addLinksToPageRequest" />
+      <wsdl:output message="tns:addLinksToPageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteLinkFromPage">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:deleteLinkFromPageRequest" />
+      <wsdl:output message="tns:deleteLinkFromPageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="addPage">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:addPageRequest" />
+      <wsdl:output message="tns:addPageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="savePageContent">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:savePageContentRequest" />
+      <wsdl:output message="tns:savePageContentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="clonePage">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:clonePageRequest" />
+      <wsdl:output message="tns:clonePageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deletePages">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:deletePagesRequest" />
+      <wsdl:output message="tns:deletePagesResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QbuilderControllerBinding" type="tns:QbuilderControllerPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="getSessionKey">
       <soap:operation soapAction="urn:QbuilderControllerwsdl#getSessionKey" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPageLogos">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#getPageLogos" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -84,8 +319,125 @@
         <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="deletePageFromService">
-      <soap:operation soapAction="urn:QbuilderControllerwsdl#deletePageFromService" style="rpc" />
+    <wsdl:operation name="getPagesByUser">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#getPagesByUser" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPageContent">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#getPageContent" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLinkCart">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#getLinkCart" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isLinkAvailable">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#isLinkAvailable" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addLinkToCart">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#addLinkToCart" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="emailLink">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#emailLink" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLinkFromCart">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#deleteLinkFromCart" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteAllFromCart">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#deleteAllFromCart" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addLinksToPage">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#addLinksToPage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteLinkFromPage">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#deleteLinkFromPage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPage">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#addPage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="savePageContent">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#savePageContent" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="clonePage">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#clonePage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deletePages">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#deletePages" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Xml;
-using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.Services;
 using SalesDepot.SiteManager.ConfigurationClasses;
 
 namespace SalesDepot.SiteManager.BusinessClasses

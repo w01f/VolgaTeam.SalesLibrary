@@ -1,44 +1,70 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using SalesDepot.BusinessClasses;
+using SalesDepot.ConfigurationClasses;
+using SalesDepot.PresentationClasses.WallBin.Decorators;
 
 namespace SalesDepot.TabPages
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class TabOvernightsCalendarControl : UserControl
-    {
-        public TabOvernightsCalendarControl()
-        {
-            InitializeComponent();
-            this.Dock = DockStyle.Fill;
-        }
+	[ToolboxItem(false)]
+	public partial class TabOvernightsCalendarControl : UserControl, IController
+	{
+		public TabOvernightsCalendarControl()
+		{
+			InitializeComponent();
+			Dock = DockStyle.Fill;
+		}
 
-        public void buttonItemCalendarDisclaimer_Click(object sender, EventArgs e)
-        {
-            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.DisclaimerPath))
-                Process.Start(ConfigurationClasses.SettingsManager.Instance.DisclaimerPath);
-        }
+		#region IController Methods
+		public bool IsActive { get; set; }
+		public bool NeedToUpdate { get; set; }
 
-        public void buttonItemCalendarFontLarger_Click(object sender, EventArgs e)
-        {
-            ConfigurationClasses.SettingsManager.Instance.CalendarFontSize++;
-            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.FormatCalendar();
-        }
+		public void InitController()
+		{
+			FormMain.Instance.labelItemCalendarDisclaimerLogo.Click += buttonItemCalendarDisclaimer_Click;
+			FormMain.Instance.buttonItemCalendarFontSizeLarger.Click += buttonItemCalendarFontLarger_Click;
+			FormMain.Instance.buttonItemCalendarFontSizeSmaler.Click += buttonItemCalendarFontSmaller_Click;
+			FormMain.Instance.buttonItemCalendarHelp.Click += buttonItemHelp_Click;
+		}
 
-        public void buttonItemCalendarFontSmaller_Click(object sender, EventArgs e)
-        {
-            ConfigurationClasses.SettingsManager.Instance.CalendarFontSize--;
-            ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-            if (PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer != null)
-                PresentationClasses.WallBin.Decorators.DecoratorManager.Instance.ActivePackageViewer.FormatCalendar();
-        }
+		public void ShowTab()
+		{
+			IsActive = true;
+			BringToFront();
+			AppManager.Instance.ActivityManager.AddUserActivity("Overnights Calendar selected");
+			SettingsManager.Instance.CalendarView = true;
+			SettingsManager.Instance.SaveSettings();
+		}
+		#endregion
 
-        public void buttonItemHelp_Click(object sender, EventArgs e)
-        {
-            BusinessClasses.HelpManager.Instance.OpenHelpLink("overnights");
-        }
-    }
+		public void buttonItemCalendarDisclaimer_Click(object sender, EventArgs e)
+		{
+			if (File.Exists(SettingsManager.Instance.DisclaimerPath))
+				Process.Start(SettingsManager.Instance.DisclaimerPath);
+		}
+
+		public void buttonItemCalendarFontLarger_Click(object sender, EventArgs e)
+		{
+			SettingsManager.Instance.CalendarFontSize++;
+			SettingsManager.Instance.SaveSettings();
+			if (DecoratorManager.Instance.ActivePackageViewer != null)
+				DecoratorManager.Instance.ActivePackageViewer.FormatCalendar();
+		}
+
+		public void buttonItemCalendarFontSmaller_Click(object sender, EventArgs e)
+		{
+			SettingsManager.Instance.CalendarFontSize--;
+			SettingsManager.Instance.SaveSettings();
+			if (DecoratorManager.Instance.ActivePackageViewer != null)
+				DecoratorManager.Instance.ActivePackageViewer.FormatCalendar();
+		}
+
+		public void buttonItemHelp_Click(object sender, EventArgs e)
+		{
+			HelpManager.Instance.OpenHelpLink("overnights");
+		}
+	}
 }

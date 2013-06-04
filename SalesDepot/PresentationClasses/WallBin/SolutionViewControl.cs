@@ -791,6 +791,18 @@ namespace SalesDepot.PresentationClasses.WallBin
 				_selectedFileViewer.Print();
 		}
 
+		private void barButtonItemQuickSiteEmail_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			if (_selectedFileViewer != null)
+				_selectedFileViewer.EmailLinkToQuickSite();
+		}
+
+		private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			if (_selectedFileViewer != null)
+				_selectedFileViewer.AddLinkToQuickSite();
+		}
+
 		private void barButtonItemAddSlide_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			InsertSlide();

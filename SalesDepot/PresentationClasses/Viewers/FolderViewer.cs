@@ -72,6 +72,16 @@ namespace SalesDepot.PresentationClasses.Viewers
 		public void Print()
 		{
 		}
+
+		public void EmailLinkToQuickSite()
+		{
+			LinkManager.Instance.EmailLinkToQuickSite(File);
+		}
+
+		public void AddLinkToQuickSite()
+		{
+			LinkManager.Instance.AddLinkToQuickSite(File);
+		}
 		#endregion
 
 		private void gridViewFiles_MouseMove(object sender, MouseEventArgs e)

@@ -62,6 +62,7 @@
     <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.RichEdit.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -78,6 +79,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraNavBar.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v10.2.Extensions, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
@@ -111,6 +118,7 @@
     <Compile Include="BusinessClasses\ProgramScheduleManager.cs" />
     <Compile Include="ConfigurationClasses\PermissionsManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
+    <Compile Include="ConfigurationClasses\QBuilderSettings.cs" />
     <Compile Include="FormFloater.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +167,30 @@
     <Compile Include="PresentationClasses\ProgramManager\ProgramSearchControl.Designer.cs">
       <DependentUpon>ProgramSearchControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\HtmlEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\HtmlEditorControl.Designer.cs">
+      <DependentUpon>HtmlEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\PageContentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\PageContentControl.Designer.cs">
+      <DependentUpon>PageContentControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\PageListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\PageListControl.Designer.cs">
+      <DependentUpon>PageListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\LinkCartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\QBuilderControls\LinkCartControl.Designer.cs">
+      <DependentUpon>LinkCartControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Viewers\FolderViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -178,6 +210,13 @@
     </Compile>
     <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.Designer.cs">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\IController.cs" />
+    <Compile Include="TabPages\TabQBuilder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabQBuilder.designer.cs">
+      <DependentUpon>TabQBuilder.cs</DependentUpon>
     </Compile>
     <Compile Include="TabPages\TabProgramSearch.cs">
       <SubType>UserControl</SubType>
@@ -209,6 +248,36 @@
     </Compile>
     <Compile Include="ToolForms\ProgramManager\FormOutputParameters.designer.cs">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormDeletePages.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormDeletePages.Designer.cs">
+      <DependentUpon>FormDeletePages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormAddPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormAddPage.Designer.cs">
+      <DependentUpon>FormAddPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormEmailWebLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormEmailWebLink.Designer.cs">
+      <DependentUpon>FormEmailWebLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormAddLink.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormAddLink.Designer.cs">
+      <DependentUpon>FormAddLink.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolForms\Settings\FormAuthorizeWarning.cs">
       <SubType>Form</SubType>
@@ -425,6 +494,18 @@
     <EmbeddedResource Include="PresentationClasses\ProgramManager\ProgramSearchControl.resx">
       <DependentUpon>ProgramSearchControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\QBuilderControls\HtmlEditorControl.resx">
+      <DependentUpon>HtmlEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\QBuilderControls\PageContentControl.resx">
+      <DependentUpon>PageContentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\QBuilderControls\PageListControl.resx">
+      <DependentUpon>PageListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\QBuilderControls\LinkCartControl.resx">
+      <DependentUpon>LinkCartControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Viewers\FolderViewer.resx">
       <DependentUpon>FolderViewer.cs</DependentUpon>
     </EmbeddedResource>
@@ -433,6 +514,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\TabQBuilder.resx">
+      <DependentUpon>TabQBuilder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabProgramSearch.resx">
       <DependentUpon>TabProgramSearch.cs</DependentUpon>
@@ -448,6 +532,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\ProgramManager\FormOutputParameters.resx">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormDeletePages.resx">
+      <DependentUpon>FormDeletePages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormAddPage.resx">
+      <DependentUpon>FormAddPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormEmailWebLink.resx">
+      <DependentUpon>FormEmailWebLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormAddLink.resx">
+      <DependentUpon>FormAddLink.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormAuthorizeWarning.resx">
       <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
@@ -689,6 +788,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\CopySmall.png" />
+    <None Include="Resources\QuickSiteEmailLink.png" />
+    <None Include="Resources\QuickSiteAddLink.png" />
+    <None Include="Resources\QuickSiteEmailLinkBig.png" />
+    <None Include="Resources\QuickSiteAddLinkBig.png" />
+    <None Include="Resources\Green_Plus.png" />
+    <None Include="Resources\DeleteButton.png" />
     <None Include="Resources\FolderContentXlsx.png" />
     <None Include="Resources\FolderContentWmv.png" />
     <None Include="Resources\FolderContentPptx.png" />
@@ -755,6 +861,10 @@
     <ProjectReference Include="..\SalesDepot.CoreObjects\SalesDepot.CoreObjects.csproj">
       <Project>{141D1B4B-2FE9-425D-9196-4439FC0CD57D}</Project>
       <Name>SalesDepot.CoreObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesDepot.Services\SalesDepot.Services.csproj">
+      <Project>{91A0BD97-7A8C-4475-B8E2-DA4D28251FE1}</Project>
+      <Name>SalesDepot.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

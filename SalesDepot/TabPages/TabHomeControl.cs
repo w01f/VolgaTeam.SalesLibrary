@@ -14,7 +14,7 @@ using SalesDepot.ToolForms.Settings;
 namespace SalesDepot.TabPages
 {
 	[ToolboxItem(false)]
-	public partial class TabHomeControl : UserControl
+	public partial class TabHomeControl : UserControl, IController
 	{
 		public IWallBinView SelectedView { get; private set; }
 		public ClassicViewControl ClassicViewControl { get; private set; }
@@ -29,7 +29,80 @@ namespace SalesDepot.TabPages
 			Dock = DockStyle.Fill;
 			ClassicViewControl = new ClassicViewControl();
 			SolutionViewControl = new SolutionViewControl();
+			NeedToUpdate = true;
 		}
+
+		#region IController Methods
+		public bool IsActive { get; set; }
+		public bool NeedToUpdate { get; set; }
+
+		public void InitController()
+		{
+			FormMain.Instance.comboBoxItemPackages.SelectedIndexChanged += comboBoxItemPackages_SelectedIndexChanged;
+			FormMain.Instance.comboBoxItemStations.SelectedIndexChanged += comboBoxItemStations_SelectedIndexChanged;
+			FormMain.Instance.comboBoxItemPages.SelectedIndexChanged += comboBoxItemPages_SelectedIndexChanged;
+			FormMain.Instance.buttonItemHomeClassicView.Click += ChangeView_Click;
+			FormMain.Instance.buttonItemHomeListView.Click += ChangeView_Click;
+			FormMain.Instance.buttonItemHomeAccordionView.Click += ChangeView_Click;
+			FormMain.Instance.buttonItemHomeSolutionView.Click += ChangeView_Click;
+			FormMain.Instance.buttonItemLargerText.Click += ClassicViewControl.buttonItemLargerText_Click;
+			FormMain.Instance.buttonItemSmallerText.Click += ClassicViewControl.buttonItemSmallerText_Click;
+			FormMain.Instance.buttonItemEmailBin.CheckedChanged += ClassicViewControl.buttonItemEmailBin_CheckedChanged;
+			FormMain.Instance.buttonItemHomeHelp.Click += buttonItemHomeHelp_Click;
+
+			FormMain.Instance.buttonItemSettingsLaunchPowerPoint.CheckedChanged += buttonItemSettingsLaunchPowerPoint_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsMultitab.CheckedChanged += buttonItemSettingsMultitab_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsPowerPointLaunch.Click += buttonItemSettingsPowerPointSettings_Click;
+			FormMain.Instance.buttonItemSettingsPowerPointMenu.Click += buttonItemSettingsPowerPointSettings_Click;
+			FormMain.Instance.buttonItemSettingsPowerPointViewer.Click += buttonItemSettingsPowerPointSettings_Click;
+			FormMain.Instance.buttonItemSettingsPowerPointLaunch.CheckedChanged += buttonItemSettingsPowerPointSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsPowerPointMenu.CheckedChanged += buttonItemSettingsPowerPointSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsPowerPointViewer.CheckedChanged += buttonItemSettingsPowerPointSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsPDFLaunch.Click += buttonItemSettingsPDFSettings_Click;
+			FormMain.Instance.buttonItemSettingsPDFMenu.Click += buttonItemSettingsPDFSettings_Click;
+			FormMain.Instance.buttonItemSettingsPDFViewer.Click += buttonItemSettingsPDFSettings_Click;
+			FormMain.Instance.buttonItemSettingsPDFLaunch.CheckedChanged += buttonItemSettingsPDFSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsPDFMenu.CheckedChanged += buttonItemSettingsPDFSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsPDFViewer.CheckedChanged += buttonItemSettingsPDFSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsWordLaunch.Click += buttonItemSettingsWordSettings_Click;
+			FormMain.Instance.buttonItemSettingsWordMenu.Click += buttonItemSettingsWordSettings_Click;
+			FormMain.Instance.buttonItemSettingsWordViewer.Click += buttonItemSettingsWordSettings_Click;
+			FormMain.Instance.buttonItemSettingsWordLaunch.CheckedChanged += buttonItemSettingsWordSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsWordMenu.CheckedChanged += buttonItemSettingsWordSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsWordViewer.CheckedChanged += buttonItemSettingsWordSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsExcelLaunch.Click += buttonItemSettingsExcelSettings_Click;
+			FormMain.Instance.buttonItemSettingsExcelMenu.Click += buttonItemSettingsExcelSettings_Click;
+			FormMain.Instance.buttonItemSettingsExcelViewer.Click += buttonItemSettingsExcelSettings_Click;
+			FormMain.Instance.buttonItemSettingsExcelLaunch.CheckedChanged += buttonItemSettingsExcelSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsExcelMenu.CheckedChanged += buttonItemSettingsExcelSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsExcelViewer.CheckedChanged += buttonItemSettingsExcelSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsVideoLaunch.Click += buttonItemSettingsVideoSettings_Click;
+			FormMain.Instance.buttonItemSettingsVideoMenu.Click += buttonItemSettingsVideoSettings_Click;
+			FormMain.Instance.buttonItemSettingsVideoViewer.Click += buttonItemSettingsVideoSettings_Click;
+			FormMain.Instance.buttonItemSettingsVideoLaunch.CheckedChanged += buttonItemSettingsVideoSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsVideoMenu.CheckedChanged += buttonItemSettingsVideoSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsVideoViewer.CheckedChanged += buttonItemSettingsVideoSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsFolderLaunch.Click += buttonItemSettingsFolderSettings_Click;
+			FormMain.Instance.buttonItemSettingsFolderMenu.Click += buttonItemSettingsFolderSettings_Click;
+			FormMain.Instance.buttonItemSettingsFolderViewer.Click += buttonItemSettingsFolderSettings_Click;
+			FormMain.Instance.buttonItemSettingsFolderLaunch.CheckedChanged += buttonItemSettingsFolderSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsFolderMenu.CheckedChanged += buttonItemSettingsFolderSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsFolderViewer.CheckedChanged += buttonItemSettingsFolderSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsQuickViewImages.Click += buttonItemSettingsQuickView_Click;
+			FormMain.Instance.buttonItemSettingsQuickViewSlides.Click += buttonItemSettingsQuickView_Click;
+			FormMain.Instance.buttonItemSettingsQuickViewImages.CheckedChanged += buttonItemSettingsQuickViewSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsQuickViewSlides.CheckedChanged += buttonItemSettingsQuickViewSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsEmail.Click += buttonItemSettingsEmail_Click;
+			FormMain.Instance.buttonItemSettingsHelp.Click += buttonItemSettingsHelp_Click;
+		}
+
+		public void ShowTab()
+		{
+			IsActive = true;
+			BringToFront();
+			AppManager.Instance.ActivityManager.AddUserActivity("Wall Bin selected");
+		}
+		#endregion
 
 		#region Methods
 		public void LoadPage()
@@ -208,7 +281,6 @@ namespace SalesDepot.TabPages
 		#endregion
 
 		#region Button's Click Event Handlers
-
 		#region Wall Bin Button's Click Event Handlers
 		public void ChangeView_Click(object sender, EventArgs e)
 		{
@@ -505,7 +577,6 @@ namespace SalesDepot.TabPages
 			HelpManager.Instance.OpenHelpLink("settings");
 		}
 		#endregion
-
 		#endregion
 
 		#region Comboboxes Event Handlers
@@ -525,15 +596,15 @@ namespace SalesDepot.TabPages
 						form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
 						form.TopMost = true;
 						var thread = new Thread(delegate()
-							                        {
-								                        FormMain.Instance.Invoke((MethodInvoker)delegate()
-									                                                                {
-										                                                                SolutionViewControl.ClearSolutionControl();
-										                                                                Application.DoEvents();
-										                                                                ApplySelectedDecorator();
-										                                                                Application.DoEvents();
-									                                                                });
-							                        });
+													{
+														FormMain.Instance.Invoke((MethodInvoker)delegate()
+																									{
+																										SolutionViewControl.ClearSolutionControl();
+																										Application.DoEvents();
+																										ApplySelectedDecorator();
+																										Application.DoEvents();
+																									});
+													});
 						form.Show();
 						Application.DoEvents();
 						thread.Start();
@@ -557,17 +628,17 @@ namespace SalesDepot.TabPages
 					form.laProgress.Text = string.Format("Loading {0}...", DecoratorManager.Instance.ActivePackageViewer != null ? DecoratorManager.Instance.ActivePackageViewer.Name : "Library");
 					form.TopMost = true;
 					var thread = new Thread(delegate()
-						                        {
-							                        FormMain.Instance.Invoke((MethodInvoker)delegate()
-								                                                                {
-									                                                                pnEmpty.BringToFront();
-									                                                                Application.DoEvents();
-									                                                                StationChanged(sender);
-									                                                                Application.DoEvents();
-									                                                                pnMain.BringToFront();
-									                                                                Application.DoEvents();
-								                                                                });
-						                        });
+												{
+													FormMain.Instance.Invoke((MethodInvoker)delegate()
+																								{
+																									pnEmpty.BringToFront();
+																									Application.DoEvents();
+																									StationChanged(sender);
+																									Application.DoEvents();
+																									pnMain.BringToFront();
+																									Application.DoEvents();
+																								});
+												});
 					form.Show();
 					Application.DoEvents();
 					thread.Start();
@@ -585,17 +656,17 @@ namespace SalesDepot.TabPages
 				form.laProgress.Text = "Loading Page...";
 				form.TopMost = true;
 				var thread = new Thread(delegate()
-					                        {
-						                        FormMain.Instance.Invoke((MethodInvoker)delegate()
-							                                                                {
-								                                                                pnEmpty.BringToFront();
-								                                                                Application.DoEvents();
-								                                                                PageChanged(sender);
-								                                                                Application.DoEvents();
-								                                                                pnMain.BringToFront();
-								                                                                Application.DoEvents();
-							                                                                });
-					                        });
+											{
+												FormMain.Instance.Invoke((MethodInvoker)delegate()
+																							{
+																								pnEmpty.BringToFront();
+																								Application.DoEvents();
+																								PageChanged(sender);
+																								Application.DoEvents();
+																								pnMain.BringToFront();
+																								Application.DoEvents();
+																							});
+											});
 				form.Show();
 				Application.DoEvents();
 				thread.Start();

@@ -5,17 +5,18 @@ using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-	public enum ViewOptions
-	{
-		Open = 0,
-		Save,
-		Email,
-		Print
-	}
-
-
 	public partial class FormViewOptions : Form
 	{
+		public enum ViewOptions
+		{
+			Open = 0,
+			Save,
+			Email,
+			Print,
+			QuickSiteEmail,
+			QuickSiteAdd
+		}
+
 		private ViewOptions _selectedOption;
 
 		public FormViewOptions()
@@ -68,6 +69,20 @@ namespace SalesDepot.ToolForms.WallBin
 		private void buttonXEmail_Click(object sender, EventArgs e)
 		{
 			_selectedOption = ViewOptions.Email;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void buttonXQuickSiteEmail_Click(object sender, EventArgs e)
+		{
+			_selectedOption = ViewOptions.QuickSiteEmail;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void buttonXQuickSiteAdd_Click(object sender, EventArgs e)
+		{
+			_selectedOption = ViewOptions.QuickSiteAdd;
 			DialogResult = DialogResult.OK;
 			Close();
 		}

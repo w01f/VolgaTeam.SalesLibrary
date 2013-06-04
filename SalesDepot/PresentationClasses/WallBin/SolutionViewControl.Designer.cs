@@ -142,6 +142,8 @@
 			this.pnPreviewArea = new System.Windows.Forms.Panel();
 			this.barLinkOperations = new DevExpress.XtraBars.Bar();
 			this.imageList = new System.Windows.Forms.ImageList(this.components);
+			this.barButtonItemQuickSiteEmail = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControlMain)).BeginInit();
 			this.splitContainerControlMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlSolutionModes)).BeginInit();
@@ -208,7 +210,7 @@
 			this.splitContainerControlMain.Panel1.Text = "Panel1";
 			this.splitContainerControlMain.Panel2.Controls.Add(this.splitContainerControlSerachResults);
 			this.splitContainerControlMain.Panel2.Text = "Panel2";
-			this.splitContainerControlMain.Size = new System.Drawing.Size(982, 652);
+			this.splitContainerControlMain.Size = new System.Drawing.Size(1085, 652);
 			this.splitContainerControlMain.SplitterPosition = 291;
 			this.splitContainerControlMain.TabIndex = 0;
 			this.splitContainerControlMain.Text = "splitContainerControl1";
@@ -305,8 +307,10 @@
             this.barButtonItemSearch,
             this.barButtonItemClear,
             this.barStaticItemFileNumber,
-            this.barButtonItemAddSlide});
-			this.barManager.MaxItemId = 13;
+            this.barButtonItemAddSlide,
+            this.barButtonItemQuickSiteEmail,
+            this.barButtonItem1});
+			this.barManager.MaxItemId = 15;
 			// 
 			// barLinksOperations
 			// 
@@ -320,6 +324,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSaveAsPDF),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemEmailLink),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPrintLink),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemQuickSiteEmail),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAddSlide),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemOpenQuickView),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSearch),
@@ -479,14 +485,14 @@
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(685, 58);
+			this.barDockControlTop.Size = new System.Drawing.Size(788, 58);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 321);
-			this.barDockControlBottom.Size = new System.Drawing.Size(685, 0);
+			this.barDockControlBottom.Size = new System.Drawing.Size(788, 0);
 			// 
 			// barDockControlLeft
 			// 
@@ -499,7 +505,7 @@
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.Location = new System.Drawing.Point(685, 58);
+			this.barDockControlRight.Location = new System.Drawing.Point(788, 58);
 			this.barDockControlRight.Size = new System.Drawing.Size(0, 263);
 			// 
 			// pnLins
@@ -512,7 +518,7 @@
 			this.pnLins.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnLins.Location = new System.Drawing.Point(0, 0);
 			this.pnLins.Name = "pnLins";
-			this.pnLins.Size = new System.Drawing.Size(685, 321);
+			this.pnLins.Size = new System.Drawing.Size(788, 321);
 			this.pnLins.TabIndex = 5;
 			// 
 			// gridControlFiles
@@ -523,7 +529,7 @@
 			this.gridControlFiles.Name = "gridControlFiles";
 			this.gridControlFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit});
-			this.gridControlFiles.Size = new System.Drawing.Size(685, 263);
+			this.gridControlFiles.Size = new System.Drawing.Size(788, 263);
 			this.gridControlFiles.TabIndex = 0;
 			this.gridControlFiles.ToolTipController = this.toolTipController;
 			this.gridControlFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -1238,7 +1244,7 @@
 			this.splitContainerControlSerachResults.Panel2.Controls.Add(this.pnEmptyPreview);
 			this.splitContainerControlSerachResults.Panel2.Controls.Add(this.pnPreviewArea);
 			this.splitContainerControlSerachResults.Panel2.Text = "Panel2";
-			this.splitContainerControlSerachResults.Size = new System.Drawing.Size(685, 652);
+			this.splitContainerControlSerachResults.Size = new System.Drawing.Size(788, 652);
 			this.splitContainerControlSerachResults.SplitterPosition = 325;
 			this.splitContainerControlSerachResults.TabIndex = 1;
 			this.splitContainerControlSerachResults.Text = "splitContainerControl1";
@@ -1248,7 +1254,7 @@
 			this.pnEmptyPreview.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnEmptyPreview.Location = new System.Drawing.Point(0, 0);
 			this.pnEmptyPreview.Name = "pnEmptyPreview";
-			this.pnEmptyPreview.Size = new System.Drawing.Size(685, 325);
+			this.pnEmptyPreview.Size = new System.Drawing.Size(788, 325);
 			this.pnEmptyPreview.TabIndex = 1;
 			// 
 			// pnPreviewArea
@@ -1256,7 +1262,7 @@
 			this.pnPreviewArea.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnPreviewArea.Location = new System.Drawing.Point(0, 0);
 			this.pnPreviewArea.Name = "pnPreviewArea";
-			this.pnPreviewArea.Size = new System.Drawing.Size(685, 325);
+			this.pnPreviewArea.Size = new System.Drawing.Size(788, 325);
 			this.pnPreviewArea.TabIndex = 0;
 			// 
 			// barLinkOperations
@@ -1278,6 +1284,22 @@
 			this.imageList.Images.SetKeyName(1, "SearchLinkName.png");
 			this.imageList.Images.SetKeyName(2, "SearchRecentFiles.png");
 			// 
+			// barButtonItemQuickSiteEmail
+			// 
+			this.barButtonItemQuickSiteEmail.Caption = "Email as Web Link";
+			this.barButtonItemQuickSiteEmail.Glyph = global::SalesDepot.Properties.Resources.QuickSiteEmailLink;
+			this.barButtonItemQuickSiteEmail.Id = 13;
+			this.barButtonItemQuickSiteEmail.Name = "barButtonItemQuickSiteEmail";
+			this.barButtonItemQuickSiteEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemQuickSiteEmail_ItemClick);
+			// 
+			// barButtonItem1
+			// 
+			this.barButtonItem1.Caption = "Add to quickSITE";
+			this.barButtonItem1.Glyph = global::SalesDepot.Properties.Resources.QuickSiteAddLink;
+			this.barButtonItem1.Id = 14;
+			this.barButtonItem1.Name = "barButtonItem1";
+			this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+			// 
 			// SolutionViewControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1286,7 +1308,7 @@
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.Name = "SolutionViewControl";
-			this.Size = new System.Drawing.Size(982, 652);
+			this.Size = new System.Drawing.Size(1085, 652);
 			this.Load += new System.EventHandler(this.SolutionViewControl_Load);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControlMain)).EndInit();
 			this.splitContainerControlMain.ResumeLayout(false);
@@ -1429,6 +1451,8 @@
         private DevExpress.XtraBars.BarStaticItem barStaticItemFileNumber;
         private DevExpress.XtraBars.BarLargeButtonItem barButtonItemAddSlide;
 		private System.Windows.Forms.ImageList imageList;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemQuickSiteEmail;
+		private DevExpress.XtraBars.BarButtonItem barButtonItem1;
 
 
     }

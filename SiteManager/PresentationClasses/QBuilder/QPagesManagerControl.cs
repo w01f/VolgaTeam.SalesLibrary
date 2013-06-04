@@ -90,7 +90,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 				Enabled = false;
 				form.laProgress.Text = string.Format("Deleting {0}...", pageRecord.Type);
 				form.TopMost = true;
-				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeletePage(pageRecord.id, out message));
+				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeletePages(new[] { pageRecord.id }, out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)

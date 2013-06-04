@@ -6,7 +6,7 @@ namespace SalesDepot.ToolForms.WallBin
 {
 	public partial class FormFolderViewOptions : Form
 	{
-		private ViewOptions _selectedOption;
+		private FormViewOptions.ViewOptions _selectedOption;
 
 		public FormFolderViewOptions()
 		{
@@ -18,14 +18,14 @@ namespace SalesDepot.ToolForms.WallBin
 			}
 		}
 
-		public ViewOptions SelectedOption
+		public FormViewOptions.ViewOptions SelectedOption
 		{
 			get { return _selectedOption; }
 		}
 
 		private void buttonXOpen_Click(object sender, EventArgs e)
 		{
-			_selectedOption = ViewOptions.Open;
+			_selectedOption = FormViewOptions.ViewOptions.Open;
 			DialogResult = DialogResult.OK;
 			Close();
 		}
@@ -33,6 +33,20 @@ namespace SalesDepot.ToolForms.WallBin
 		private void buttonXClose_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
+			Close();
+		}
+
+		private void buttonXQuickSiteEmail_Click(object sender, EventArgs e)
+		{
+			_selectedOption = FormViewOptions.ViewOptions.QuickSiteEmail;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void buttonXQuickSiteAdd_Click(object sender, EventArgs e)
+		{
+			_selectedOption = FormViewOptions.ViewOptions.QuickSiteAdd;
+			DialogResult = DialogResult.OK;
 			Close();
 		}
 	}

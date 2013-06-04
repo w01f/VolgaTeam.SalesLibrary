@@ -1,66 +1,73 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SalesDepot.ToolForms.WallBin
 {
-    public partial class FormVideoViewOptions : Form
-    {
-        private bool isAdd;
+	public partial class FormVideoViewOptions : Form
+	{
+		#region VideoViewOptions enum
+		public enum VideoViewOptions
+		{
+			Add = 0,
+			Open,
+			QuickSiteEmail,
+			QuickSiteAdd
+		}
+		#endregion
 
-        private bool doNotAdd = false;
+		public FormVideoViewOptions()
+		{
+			InitializeComponent();
+			if ((base.CreateGraphics()).DpiX > 96)
+			{
+				buttonXAddToPresentation.Font = new Font(buttonXAddToPresentation.Font.FontFamily, buttonXAddToPresentation.Font.Size - 3, buttonXAddToPresentation.Font.Style);
+				buttonXClose.Font = new Font(buttonXClose.Font.FontFamily, buttonXClose.Font.Size - 3, buttonXClose.Font.Style);
+				buttonXReview.Font = new Font(buttonXReview.Font.FontFamily, buttonXReview.Font.Size - 3, buttonXReview.Font.Style);
+			}
+		}
 
-        public FormVideoViewOptions()
-        {
-            InitializeComponent();
-            if ((base.CreateGraphics()).DpiX > 96)
-            {
-                buttonXAddToPresentation.Font = new System.Drawing.Font(buttonXAddToPresentation.Font.FontFamily, buttonXAddToPresentation.Font.Size - 3, buttonXAddToPresentation.Font.Style);
-                buttonXClose.Font = new System.Drawing.Font(buttonXClose.Font.FontFamily, buttonXClose.Font.Size - 3, buttonXClose.Font.Style);
-                buttonXReview.Font = new System.Drawing.Font(buttonXReview.Font.FontFamily, buttonXReview.Font.Size - 3, buttonXReview.Font.Style);
-            }
-        }
+		public bool DoNotAdd { get; set; }
+		public VideoViewOptions SelectedOption { get; private set; }
 
-        public bool IsAdd
-        {
-            get
-            {
-                return isAdd;
-            }
-        }
+		private void VideoViewOptionsForm_Load(object sender, EventArgs e)
+		{
+			if (DoNotAdd)
+				buttonXAddToPresentation.Enabled = false;
+		}
 
-        public bool DoNotAdd
-        {
-            set
-            {
-                doNotAdd = value;
-            }
-        }
+		private void buttonXAddToPresentation_Click(object sender, EventArgs e)
+		{
+			SelectedOption = VideoViewOptions.Add;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
 
-        private void VideoViewOptionsForm_Load(object sender, EventArgs e)
-        {
-            if (doNotAdd)
-                buttonXAddToPresentation.Enabled = false;
-        }
+		private void buttonXReview_Click(object sender, EventArgs e)
+		{
+			SelectedOption = VideoViewOptions.Open;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
 
-        private void buttonXAddToPresentation_Click(object sender, EventArgs e)
-        {
-            isAdd = true;
-            this.DialogResult = DialogResult.OK;
-            Close();
-        }
+		private void buttonXQuickSiteEmail_Click(object sender, EventArgs e)
+		{
+			SelectedOption = VideoViewOptions.QuickSiteEmail;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
 
-        private void buttonXReview_Click(object sender, EventArgs e)
-        {
-            isAdd = false;
-            this.DialogResult = DialogResult.OK;
-            Close();
-        }
+		private void buttonXQuickSiteAdd_Click(object sender, EventArgs e)
+		{
+			SelectedOption = VideoViewOptions.QuickSiteAdd;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
 
-        private void buttonXClose_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            Close();
-        }
-
-    }
+		private void buttonXClose_Click(object sender, EventArgs e)
+		{
+			DialogResult = DialogResult.Cancel;
+			Close();
+		}
+	}
 }

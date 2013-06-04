@@ -89,6 +89,7 @@
     <Compile Include="BusinessClasses\PresentationProperties.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
+    <Compile Include="BusinessClasses\QBuilder.cs" />
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\OutlookHelper.cs" />
     <Compile Include="InteropClasses\PowerPointHelper.cs" />

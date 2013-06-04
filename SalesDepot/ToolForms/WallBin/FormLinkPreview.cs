@@ -173,6 +173,18 @@ namespace SalesDepot.ToolForms.WallBin
 				_selectedFileViewer.Print();
 		}
 
+		private void barLargeButtonItemQuickSiteEmail_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			if (_selectedFileViewer != null)
+				_selectedFileViewer.EmailLinkToQuickSite();
+		}
+
+		private void barLargeButtonItemQuickSiteAdd_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			if (_selectedFileViewer != null)
+				_selectedFileViewer.AddLinkToQuickSite();
+		}
+
 		private void barLargeButtonItemHelp_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			HelpManager.Instance.OpenHelpLink("qv");

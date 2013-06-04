@@ -1,83 +1,88 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using SalesDepot.BusinessClasses;
+using SalesDepot.ConfigurationClasses;
+using SalesDepot.ToolForms.WallBin;
 
 namespace SalesDepot.PresentationClasses.Viewers
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class PDFViewer : UserControl, IFileViewer
-    {
-        #region Properties
-        public BusinessClasses.LibraryLink File { get; private set; }
+	[ToolboxItem(false)]
+	public partial class PDFViewer : UserControl, IFileViewer
+	{
+		#region Properties
+		public LibraryLink File { get; private set; }
 
-        public string DisplayName
-        {
-            get
-            {
-                return this.File.DisplayName;
-            }
-        }
+		public string DisplayName
+		{
+			get { return File.DisplayName; }
+		}
 
-        public string CriteriaOverlap
-        {
-            get
-            {
-                return this.File.CriteriaOverlap;
-            }
-        }
+		public string CriteriaOverlap
+		{
+			get { return File.CriteriaOverlap; }
+		}
 
-        public Image Widget
-        {
-            get
-            {
-                return this.File.Widget;
-            }
-        }
-        #endregion
+		public Image Widget
+		{
+			get { return File.Widget; }
+		}
+		#endregion
 
-        public PDFViewer(BusinessClasses.LibraryLink file)
-        {
-            InitializeComponent();
-            this.Dock = DockStyle.Fill;
-            this.Visible = false;
+		public PDFViewer(LibraryLink file)
+		{
+			InitializeComponent();
+			Dock = DockStyle.Fill;
+			Visible = false;
 
-            this.File = file;
+			File = file;
 
-            string tempName = Path.Combine(ConfigurationClasses.SettingsManager.Instance.TempPath, Path.GetFileName(this.File.LocalPath));
-            System.IO.File.Copy(this.File.LocalPath, tempName, true);
-            axAcroPDF.LoadFile(tempName);
-            axAcroPDF.setView("Fit");
-        }
+			string tempName = Path.Combine(SettingsManager.Instance.TempPath, Path.GetFileName(File.LocalPath));
+			System.IO.File.Copy(File.LocalPath, tempName, true);
+			axAcroPDF.LoadFile(tempName);
+			axAcroPDF.setView("Fit");
+		}
 
-        #region IFileViewer Methods
-        public void ReleaseResources()
-        {
-            axAcroPDF.Dispose();
-        }
+		#region IFileViewer Methods
+		public void ReleaseResources()
+		{
+			axAcroPDF.Dispose();
+		}
 
-        public void Open()
-        {
-            BusinessClasses.LinkManager.Instance.OpenCopyOfFile(this.File);
-        }
+		public void Open()
+		{
+			LinkManager.Instance.OpenCopyOfFile(File);
+		}
 
-        public void Save()
-        {
-            BusinessClasses.LinkManager.Instance.SaveFile("Save copy of the file as", this.File);
-        }
+		public void Save()
+		{
+			LinkManager.Instance.SaveFile("Save copy of the file as", File);
+		}
 
-        public void Email()
-        {
-            using (ToolForms.WallBin.FormEmailLink form = new ToolForms.WallBin.FormEmailLink())
-            {
-                form.link = this.File;
-                form.ShowDialog();
-            }
-        }
+		public void Email()
+		{
+			using (var form = new FormEmailLink())
+			{
+				form.link = File;
+				form.ShowDialog();
+			}
+		}
 
-        public void Print()
-        {
-            BusinessClasses.LinkManager.Instance.PrintFile(this.File);
-        }
-        #endregion
-    }
+		public void Print()
+		{
+			LinkManager.Instance.PrintFile(File);
+		}
+
+		public void EmailLinkToQuickSite()
+		{
+			LinkManager.Instance.EmailLinkToQuickSite(File);
+		}
+
+		public void AddLinkToQuickSite()
+		{
+			LinkManager.Instance.AddLinkToQuickSite(File);
+		}
+		#endregion
+	}
 }

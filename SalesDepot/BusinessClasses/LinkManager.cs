@@ -9,6 +9,7 @@ using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.InteropClasses;
 using SalesDepot.ToolForms;
+using SalesDepot.ToolForms.QBuilderForms;
 using SalesDepot.ToolForms.WallBin;
 
 namespace SalesDepot.BusinessClasses
@@ -19,6 +20,8 @@ namespace SalesDepot.BusinessClasses
 
 		private readonly FormPowerPointQuickView _formPowerPointQuickView;
 		private readonly FormPowerPointQuickViewOld _formPowerPointQuickViewOld;
+		private readonly FormAddLink _formQuickSiteAdd;
+		private readonly FormEmailWebLink _formQuickSiteEmail;
 
 		public List<int> PreviousPreviewHandles { get; private set; }
 
@@ -26,6 +29,8 @@ namespace SalesDepot.BusinessClasses
 		{
 			_formPowerPointQuickView = new FormPowerPointQuickView();
 			_formPowerPointQuickViewOld = new FormPowerPointQuickViewOld();
+			_formQuickSiteAdd = new FormAddLink();
+			_formQuickSiteEmail = new FormEmailWebLink();
 			PreviousPreviewHandles = new List<int>();
 		}
 
@@ -68,19 +73,19 @@ namespace SalesDepot.BusinessClasses
 								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
 								if (formViewOptions.ShowDialog() == DialogResult.OK)
 								{
-									if (formViewOptions.SelectedOption == ViewOptions.Open)
+									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 									{
 										OpenCopyOfFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Save)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
 									{
 										SaveFile("Save copy of the file as", link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Print)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
 									{
 										PrintFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Email)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
 									{
 										PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.LocalPath));
 										using (var form = new FormEmailPresentation())
@@ -90,6 +95,14 @@ namespace SalesDepot.BusinessClasses
 											form.rbActiveSlide.Visible = false;
 											form.ShowDialog();
 										}
+									}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+									{
+										EmailLinkToQuickSite(link);
+									}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+									{
+										AddLinkToQuickSite(link);
 									}
 								}
 							}
@@ -123,24 +136,32 @@ namespace SalesDepot.BusinessClasses
 								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
 								if (formViewOptions.ShowDialog() == DialogResult.OK)
 								{
-									if (formViewOptions.SelectedOption == ViewOptions.Open)
+									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 									{
 										OpenCopyOfFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Save)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
 									{
 										SaveFile("Save copy of the file as", link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Print)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
 									{
 										PrintFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Email)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
 										using (var form = new FormEmailLink())
 										{
 											form.link = link;
 											form.ShowDialog();
 										}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+									{
+										EmailLinkToQuickSite(link);
+									}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+									{
+										AddLinkToQuickSite(link);
+									}
 								}
 							}
 							break;
@@ -161,24 +182,32 @@ namespace SalesDepot.BusinessClasses
 								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
 								if (formViewOptions.ShowDialog() == DialogResult.OK)
 								{
-									if (formViewOptions.SelectedOption == ViewOptions.Open)
+									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 									{
 										OpenCopyOfFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Save)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
 									{
 										SaveFile("Save copy of the file as", link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Print)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
 									{
 										PrintFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Email)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
 										using (var form = new FormEmailLink())
 										{
 											form.link = link;
 											form.ShowDialog();
 										}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+									{
+										EmailLinkToQuickSite(link);
+									}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+									{
+										AddLinkToQuickSite(link);
+									}
 								}
 							}
 							break;
@@ -199,24 +228,32 @@ namespace SalesDepot.BusinessClasses
 								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
 								if (formViewOptions.ShowDialog() == DialogResult.OK)
 								{
-									if (formViewOptions.SelectedOption == ViewOptions.Open)
+									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 									{
 										OpenCopyOfFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Save)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
 									{
 										SaveFile("Save copy of the file as", link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Print)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
 									{
 										PrintFile(link);
 									}
-									if (formViewOptions.SelectedOption == ViewOptions.Email)
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
 										using (var form = new FormEmailLink())
 										{
 											form.link = link;
 											form.ShowDialog();
 										}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+									{
+										EmailLinkToQuickSite(link);
+									}
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+									{
+										AddLinkToQuickSite(link);
+									}
 								}
 							}
 							break;
@@ -237,13 +274,21 @@ namespace SalesDepot.BusinessClasses
 								formVideoOptions.Text = string.Format(formVideoOptions.Text, sourceFile.Name);
 								if (formVideoOptions.ShowDialog() == DialogResult.OK)
 								{
-									if (formVideoOptions.IsAdd)
+									if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.Add)
 									{
 										AddVideoIntoPresentation(link);
 									}
-									else
+									else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.Open)
 									{
 										OpenVideo(link);
+									}
+									else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.QuickSiteEmail)
+									{
+										EmailLinkToQuickSite(link);
+									}
+									else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.QuickSiteAdd)
+									{
+										AddLinkToQuickSite(link);
 									}
 								}
 							}
@@ -271,8 +316,12 @@ namespace SalesDepot.BusinessClasses
 								formViewOptions.Text = string.Format(formViewOptions.Text, link.Name);
 								if (formViewOptions.ShowDialog() == DialogResult.OK)
 								{
-									if (formViewOptions.SelectedOption == ViewOptions.Open)
+									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 										OpenFolder(link);
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+										EmailLinkToQuickSite(link);
+									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+										AddLinkToQuickSite(link);
 								}
 							}
 							break;
@@ -670,6 +719,27 @@ namespace SalesDepot.BusinessClasses
 			catch
 			{
 				AppManager.Instance.ShowWarning("Couldn’t find player associated with video file");
+			}
+		}
+
+		public void EmailLinkToQuickSite(LibraryLink link)
+		{
+			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Email as Web Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+			if (link.LinkAvailable)
+			{
+				_formQuickSiteEmail.Init(link);
+				_formQuickSiteEmail.ShowDialog();
+			}
+		}
+
+		public void AddLinkToQuickSite(LibraryLink link)
+		{
+			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Add to quickSITE", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
+			if (link.LinkAvailable)
+			{
+				_formQuickSiteAdd.Init(link);
+				if (_formQuickSiteAdd.ShowDialog() == DialogResult.OK)
+					AppManager.Instance.ShowInfo("Link successfully added to Site Link Cart");
 			}
 		}
 	}

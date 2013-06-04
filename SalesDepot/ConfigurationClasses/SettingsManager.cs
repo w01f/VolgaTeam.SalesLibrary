@@ -112,6 +112,8 @@ namespace SalesDepot.ConfigurationClasses
 
 		public List<string> HiddenObjects { get; private set; }
 
+		public QBuilderSettings QBuilderSettings { get; private set; }
+
 		public bool SolutionView
 		{
 			get { return !(ClassicView | ListView | AccordionView); }
@@ -171,6 +173,8 @@ namespace SalesDepot.ConfigurationClasses
 			OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
 			#endregion
 
+			QBuilderSettings = new QBuilderSettings();
+
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
 			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
@@ -195,7 +199,7 @@ namespace SalesDepot.ConfigurationClasses
 					document.Load(_defaultViewPath);
 					IsConfigured = true;
 				}
-				catch {}
+				catch { }
 
 				node = document.SelectSingleNode(@"/defaultview/SalesLibrary/Classic");
 				if (node != null)
@@ -246,7 +250,7 @@ namespace SalesDepot.ConfigurationClasses
 					document.Load(_viewButtonsPath);
 					IsConfigured = true;
 				}
-				catch {}
+				catch { }
 
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn1");
 				if (node != null)
@@ -289,7 +293,7 @@ namespace SalesDepot.ConfigurationClasses
 					{
 						document.Load(_configurationPath);
 					}
-					catch {}
+					catch { }
 					node = document.SelectSingleNode(@"/Config/Connection/Path");
 					if (node != null)
 						if (Directory.Exists(node.InnerText))
@@ -366,7 +370,7 @@ namespace SalesDepot.ConfigurationClasses
 					document.Load(settingsPath);
 					IsConfigured = true;
 				}
-				catch {}
+				catch { }
 
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedPackage");
 				if (node != null)
@@ -469,7 +473,7 @@ namespace SalesDepot.ConfigurationClasses
 						defaultDocument.Load(_defaultSettingsFilePath);
 						document = defaultDocument;
 					}
-					catch {}
+					catch { }
 				}
 
 				node = document.SelectSingleNode(@"/LocalSettings/OldStyleQuickView");
@@ -617,7 +621,7 @@ namespace SalesDepot.ConfigurationClasses
 				if (!Directory.Exists(Path.Combine(localSettingsFolder, "sales depot", "Settings")))
 					Directory.CreateDirectory(Path.Combine(localSettingsFolder, "sales depot", "Settings"));
 			}
-			catch {}
+			catch { }
 		}
 
 		private void LoadAppID()
