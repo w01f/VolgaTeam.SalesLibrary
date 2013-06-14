@@ -11,7 +11,7 @@
 			return '{{user_link_cart}}';
 		}
 
-		public static function getByLinksByUser($userId)
+		public static function getLinksByUser($userId)
 		{
 			$linkRecords = Yii::app()->db->createCommand()
 				->select("concat('cart',lk.id,'---link',l.id) as id, l.id_library, l.name, l.file_name, l.format, l.type")

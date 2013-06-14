@@ -32,7 +32,7 @@
 
 					<td class="library-column"><?php echo $link['library']; ?></td>
 
-					<td class="link-type-column<?php echo $clickClass; ?>"><?php echo CHtml::tag('img', array('src' => $link['file_type'], 'alt' => '')); ?></td>
+					<td class="link-type-column<?php echo $clickClass; ?>"><?php echo CHtml::tag('img', array('src' => 'data:image/png;base64,' . $link['file_type'], 'alt' => '')); ?></td>
 
 					<td class="link-name-column<?php echo $clickClass; ?>">
 						<table class="link-container<?php echo $clickClass; ?>">

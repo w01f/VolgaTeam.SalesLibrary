@@ -1,5 +1,5 @@
 <?php
-$version = '5.0';
+$version = '7.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -47,6 +47,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/jixedbar/js/jquery.jixedb
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/fullcalendar.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/jquery.qtip-1.0.0-rc3.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/gesture-handler/jquery.hammer.min.js', CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/touch-punch/jquery.ui.touch-punch.min.js?' . $version, CClientScript::POS_HEAD);
 if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 {
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);

@@ -15,6 +15,7 @@
 			<div id="link-cart-buttons">
 				<button type="button" class="btn btn-block" id="link-cart-refresh">Refresh Link Cart</button>
 				<button type="button" class="btn btn-block" id="link-cart-clear">Empty Link Cart</button>
+				<button type="button" class="btn btn-block" id="link-cart-add-all">Add All Links to quickSITE</button>
 			</div>
 			<div id="link-cart-grid" class="link-grid-container">
 				<?php $this->renderPartial('linkCart', array('links' => $links), false, true); ?>

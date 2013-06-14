@@ -6,7 +6,7 @@
 .tool-dialog td
 {
 	height: 40px;
-	padding-bottom: 15px;
+	padding-bottom: 10px;
 }
 
 .tool-dialog td.title
@@ -63,7 +63,7 @@ div.fancybox-inner
 
 .tool-dialog .buttons-area
 {
-	padding-top: 10px !important;
+	padding-top: 5px !important;
 	text-align: center !important;
 }
 
@@ -83,4 +83,3 @@ div.fancybox-inner
 {
 	color: #000000;
 }
-

@@ -12,7 +12,7 @@
 				<li><a href="#page-content-tab-title">Title</a></li>
 				<li><a href="#page-content-tab-header">Header</a></li>
 				<li><a href="#page-content-tab-footer">Footer</a></li>
-				<li><a href="#page-content-tab-security">Security</a></li>
+				<li><a href="#page-content-tab-security">Settings</a></li>
 				<li><a href="#page-content-tab-logo">Logo</a></li>
 			</ul>
 			<div id="page-content-tab-links">
@@ -49,22 +49,26 @@
 			</div>
 			<div id="page-content-tab-security">
 				<? $expDate = $page->getExpirationDateFormatted(); ?>
-				<br><br>
-				<label class="checkbox title"><input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>>A. Set Expiration Date</label>
-				<div id="page-content-expiration-date-container" class="control-group <? if ($page->isExpired()): ?>error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<?endif;?>>
-					<div class="input-append date controls" data-date-format="mm/dd/yy" data-date="<? echo $expDate; ?>">
-						<input class="input-small" id="page-content-expiration-date" type="text" value="<? echo $expDate; ?>" readonly>
-						<span class="add-on"><i class="icon-calendar"></i></span>
+				<br>
+				<form class="form-inline">
+					<label class="checkbox"><input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>>A. Set Expiration Date</label>
+					<div id="page-content-expiration-date-container" class="control-group <? if ($page->isExpired()): ?>error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<?endif;?>>
+						<div class="input-append date controls" data-date-format="mm/dd/yy" data-date="<? echo $expDate; ?>">
+							<input class="input-small" id="page-content-expiration-date" type="text" value="<? echo $expDate; ?>" readonly>
+							<span class="add-on"><i class="icon-calendar"></i></span>
+						</div>
 					</div>
-					<label class="control-label" for="page-content-expiration-date" <? if (!$page->isExpired()): ?>style="display: none"<?endif;?>>Page is Expired</label>
-				</div>
-				<br><br>
-				<label class="checkbox title"><input type="checkbox" id="page-content-require-login" value="" <?php echo $page->restricted ? 'checked' : '' ?>>B. Require User Log-in</label>
-				<span>If you only want to share this site within your company…</span><br><br><br>
-				<label class="checkbox title"><input type="checkbox" id="page-content-show-link-to-main-site" value="" <?php echo $page->show_site_link ? 'checked' : '' ?>>C. Show LINK to Main Site</label>
-				<span>Allow Users to JUMP from this site straight to your FULL Sales Library Website…</span><br><br><br>
-				<label class="checkbox title"><input type="checkbox" id="page-content-show-ticker" value="" <?php echo $page->show_ticker ? 'checked' : '' ?>>D. Show the Ticker</label>
-				<span>The TICKER on the Main Site will be Visible at the VERY TOP of this Custom Site…</span>
+				</form>
+				<label class="checkbox"><input type="checkbox" id="page-content-require-login" value="" <?php echo $page->restricted ? 'checked' : '' ?>>B. Require Authorized User login and password to view site</label>
+				<form class="form-inline">
+					<label class="checkbox"><input id="page-content-access-code-enabled" type="checkbox" value="" disabled>C. Create a SECURE ACCESS Pin</label>
+					<input type="text" class="input-small" id="page-content-access-code" style="display: none">
+				</form>
+				<label class="checkbox"><input type="checkbox" id="page-content-show-link-to-main-site" value="" <?php echo $page->show_site_link ? 'checked' : '' ?>>D. Show Link to MAIN SITE in top ribbon</label>
+				<label class="checkbox"><input type="checkbox" id="page-content-show-ticker" value="" <?php echo $page->show_ticker ? 'checked' : '' ?>>E. Show the TICKER at the top of this quickSITE</label>
+				<label class="checkbox"><input type="checkbox" value="" disabled>F. Disable all Link Widget Icons</label>
+				<label class="checkbox"><input type="checkbox" value="" disabled>G. Disable all Link Banner Images</label>
+				<label class="checkbox"><input type="checkbox" value="" disabled>H. Email me each time someone clicks a link on this quickSITE</label>
 			</div>
 			<div id="page-content-tab-logo">
 				<div class="logo-list">

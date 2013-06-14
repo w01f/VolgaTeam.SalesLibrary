@@ -59,6 +59,8 @@
 			linkCart.find('.draggable-link').draggable({
 					delay: 100,
 					revert: "invalid",
+					distance: 70,
+					delay: 500,
 					helper: function (event)
 					{
 						var ids = $(this).find('.link-id-column').html().split('---');
@@ -88,6 +90,10 @@
 			$('#link-cart-clear').off('click').on('click', function ()
 			{
 				$.linkCart.clear();
+			});
+			$('#link-cart-add-all').off('click').on('click', function ()
+			{
+				$.linkCart.addAllLinksToPage();
 			});
 		},
 		addLink: function (linkId)
@@ -226,6 +232,35 @@
 					}
 				});
 			}
+		},
+		addAllLinksToPage: function (linkId)
+		{
+			var selectedPageId = $('#page-list').find('a.selected').parent().attr('id').replace('page', '');
+			$.ajax({
+				type: "POST",
+				url: "qbuilder/addAllLinksToPage",
+				data: {
+					pageId: selectedPageId
+				},
+				beforeSend: function ()
+				{
+					$.showOverlayLight();
+				},
+				complete: function ()
+				{
+					$.hideOverlayLight();
+				},
+				success: function ()
+				{
+					$.linkCart.load();
+					$.pageContent.loadLinks();
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
 		}
 	};
 

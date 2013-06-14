@@ -357,6 +357,7 @@
 			if (isset($linkRecords) && count($linkRecords) > 0)
 			{
 				$libraryManager = new LibraryManager();
+				$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'search';
 				foreach ($linkRecords as $linkRecord)
 				{
 					$link['id'] = $linkRecord['id'];
@@ -368,6 +369,7 @@
 						$link['hasDetails'] = $linkRecord['enable_attachments'] | $linkRecord['enable_file_card'];
 
 					$library = $libraryManager->getLibraryById($linkRecord['id_library']);
+					$link['id_library'] = $linkRecord['id_library'];
 					if (isset($library))
 						$link['library'] = $library->name;
 					else
@@ -379,30 +381,30 @@
 					switch ($linkRecord['format'])
 					{
 						case 'ppt':
-							$link['file_type'] = 'images/search/search-powerpoint.png';
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-powerpoint.png'));
 							break;
 						case 'doc':
-							$link['file_type'] = 'images/search/search-word.png';
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-word.png'));
 							break;
 						case 'xls':
-							$link['file_type'] = 'images/search/search-excel.png';
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-excel.png'));
 							break;
 						case 'pdf':
-							$link['file_type'] = 'images/search/search-pdf.png';
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-pdf.png'));
 							break;
 						case 'video':
 						case 'wmv':
 						case 'mp4':
-							$link['file_type'] = 'images/search/search-video.png';
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-video.png'));
 							break;
 						case 'key':
-							$link['file_type'] = 'images/search/search-keynote.png';
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-keynote.png'));
 							break;
 						default:
 							if (array_key_exists('type', $linkRecord) && $linkRecord['type'] == 5)
-								$link['file_type'] = 'images/search/search-folder.png';
+								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-folder.png'));
 							else
-								$link['file_type'] = 'undefined';
+								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'undefined.png'));
 							break;
 					}
 					$links[] = $link;

@@ -126,6 +126,17 @@
 					dateField.val('');
 				}
 			});
+			$('#page-content-access-code-enabled').off('change').on('change', function ()
+			{
+				var accessCode = $('#page-content-access-code');
+				if ($(this).is(':checked'))
+					accessCode.show();
+				else
+				{
+					accessCode.hide();
+					accessCode.val('');
+				}
+			});
 
 			var logoSelector = $('#page-content-tab-logo');
 			logoSelector.find('ul a').on('click', function ()
@@ -327,14 +338,20 @@
 		var today = new Date();
 		var expiredDate = expiredDateString != '' ? $.datepicker.parseDate('mm/dd/yy', expiredDateString) : today;
 		if (expiredDate < today)
-		{
 			expiredDateContainer.addClass('error');
-			expiredDateContainer.find('.control-label').show();
-		}
 		else
-		{
 			expiredDateContainer.removeClass('error');
-			expiredDateContainer.find('.control-label').hide();
-		}
+	}
+
+	var processAccessCode = function ()
+	{
+		var expiredDateContainer = $('#page-content-expiration-date-container');
+		var expiredDateString = $('#page-content-expiration-date').val();
+		var today = new Date();
+		var expiredDate = expiredDateString != '' ? $.datepicker.parseDate('mm/dd/yy', expiredDateString) : today;
+		if (expiredDate < today)
+			expiredDateContainer.addClass('error');
+		else
+			expiredDateContainer.removeClass('error');
 	}
 })(jQuery);

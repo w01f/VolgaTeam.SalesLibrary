@@ -1,5 +1,8 @@
 <div class="tool-dialog">
-	<legend>Email this Link</legend>
+	<legend>
+		<div>Email this Link:</div>
+		<div><? echo $linkRecord->file_name != '' ? $linkRecord->file_name : $linkRecord->name; ?></div>
+	</legend>
 	<div class="tabbable">
 		<ul id="add-page-tabs" class="nav nav-tabs">
 			<li><a href="#add-page-tab-link" data-toggle="tab">Link</a></li>
@@ -11,7 +14,7 @@
 					<tr>
 						<td colspan="2">
 							<div class="control-group">
-								<label class="control-label" for="add-page-name">Link Name:</label>
+								<label class="checkbox control-label" for="add-page-name"><input id="add-page-name-enabled" type="checkbox" value="" checked><strong>Page Header Text (shown with the link on the page)</strong></label>
 								<div class="controls">
 									<input type="text" class="input-block-level" id="add-page-name" value="<? echo $linkRecord->name; ?>">
 								</div>
@@ -21,7 +24,7 @@
 					<tr>
 						<td colspan="2">
 							<div class="control-group">
-								<label class="control-label">This Link Expires in:</label>
+								<label class="control-label"><strong>This Link Expires in:</strong></label>
 								<div class="controls buttons-area" id="add-page-expires-in">
 									<button class="btn active" type="button" value="7">7 Days</button>
 									<button class="btn" type="button" value="14">14 Days</button>
@@ -33,20 +36,31 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<label class="checkbox"><input id="add-page-restricted" type="checkbox" value="">Require User Log-in</label>
-							<label class="checkbox"><input id="add-page-show-link-to-main-site" type="checkbox" value="">Show Link to Main Site</label>
+							<label class="control-label"><strong>Link Security:</strong></label>
+							<form class="form-inline">
+								<label class="checkbox" style="padding-right: 20px;"><input id="add-page-restricted" type="checkbox" value="">Require User Log-in</label>
+								<label class="checkbox"><input id="add-page-show-link-to-main-site" type="checkbox" value="">Show Link to Main Site</label>
+							</form>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="error-message">
+							<p class="text-left">
+								<strong>Important Info you should KNOW about EMAILING LINKS</strong><br>
+								<small>You are Sending a WEB LINK to this file over the internet. The Recipient will receive an email with the website Link. Tell your recipient to click this link to view or download this file…</small>
+							</p>
 						</td>
 					</tr>
 				</table>
 			</div>
 			<div id="add-page-tab-logo" class="tab-pane fade" style="padding-left: 2px">
-				<div class="logo-list" style="height: 246px;">
+				<div class="logo-list" style="height: 355px;">
 					<ul class="nav nav-pills">
 						<?if (isset($logos)): ?>
 							<? $selectedLogo = count($logos) > 0 ? $logos[0] : null; ?>
 							<? foreach ($logos as $logo): ?>
 								<li>
-									<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<?endif;?>><img src="<? echo $logo; ?>"></a>
+									<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<?endif;?> style="margin-right: 50px;"><img src="<? echo $logo; ?>"></a>
 								</li>
 							<?php endforeach; ?>
 						<?php endif;?>

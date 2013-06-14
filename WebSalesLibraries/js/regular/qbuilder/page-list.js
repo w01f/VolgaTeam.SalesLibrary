@@ -230,7 +230,15 @@
 							dataType: 'html'
 						});
 					});
-					addPageContent.find('#add-page-restricted, #add-page-show-link-to-main-site').on('change', function ()
+					addPageContent.find('#add-page-name-enabled').on('change', function ()
+					{
+						if (!addPageContent.find('#add-page-name-enabled').is(':checked'))
+							addPageContent.find('#add-page-name').val('').attr('disabled', 'disabled');
+						else
+							addPageContent.find('#add-page-name').removeAttr('disabled');
+
+					});
+					addPageContent.find('#add-page-name-enabled, #add-page-restricted, #add-page-show-link-to-main-site').on('change', function ()
 					{
 						$.ajax({
 							type: "POST",
@@ -274,7 +282,10 @@
 							},
 							success: function (msg)
 							{
-								window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg, "_self");
+								if (subtitle != '')
+									window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg, "_self");
+								else
+									window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg, "_self");
 							},
 							error: function ()
 							{
@@ -306,7 +317,7 @@
 					$.fancybox({
 						content: addPageContent,
 						title: title,
-						width: 430,
+						width: 530,
 						scrolling: 'no',
 						autoSize: false,
 						autoHeight: true,

@@ -171,7 +171,7 @@
 			return $pageRecord;
 		}
 
-		public static function clonePage($ownerId, $pageTitle, $clonePageId)
+		public static function clonePage($ownerId, $pageTitle, $createDate, $clonePageId)
 		{
 			$clonedPageRecord = self::model()->findByPk($clonePageId);
 			if (isset($clonedPageRecord))
@@ -181,6 +181,7 @@
 				$pageRecord->id_owner = $ownerId;
 				$pageRecord->title = $pageTitle;
 				$pageRecord->subtitle = $clonedPageRecord->subtitle;
+				$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
 				$pageRecord->expiration_date = $clonedPageRecord->expiration_date;
 				$pageRecord->logo = $clonedPageRecord->logo;
 				$pageRecord->header = $clonedPageRecord->header;

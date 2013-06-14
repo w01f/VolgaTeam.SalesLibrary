@@ -32,6 +32,47 @@
 		 */
 		public $expirationDate;
 		/**
+		 * @var string subtitle
+		 * @soap
+		 */
+		public $subtitle;
+		/**
+		 * @var string header
+		 * @soap
+		 */
+		public $header;
+		/**
+		 * @var string footer
+		 * @soap
+		 */
+		public $footer;
+		/**
+		 * @var boolean isRestricted
+		 * @soap
+		 */
+		public $isRestricted;
+		/**
+		 * @var boolean showLinkMainSite
+		 * @soap
+		 */
+		public $showLinkMainSite;
+		/**
+		 * @var boolean showTicker
+		 * @soap
+		 */
+		public $showTicker;
+		/**
+		 * @var string Logo
+		 * @soap
+		 */
+		public $logo;
+		/**
+		 * @var QPageLinkRecord[]
+		 * @soap
+		 */
+		public $links;
+
+		/**
 		 * @var string login
 		 * @soap
 		 */

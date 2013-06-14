@@ -17,7 +17,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$links = UserLinkCartStorage::getByLinksByUser($userId);
+				$links = UserLinkCartStorage::getLinksByUser($userId);
 				$pages = QPageStorage::model()->getByOwner($userId);
 				$selectedPage = count($pages) > 0 ? $pages[0] : null;
 				$logos = QPageStorage::getPageLogoList();
@@ -65,7 +65,7 @@
 			if (isset($title) && $title != '' && isset($userId) && isset($createDate))
 			{
 				if (isset($clonePageId))
-					echo QPageStorage::clonePage($userId, $title, $clonePageId);
+					echo QPageStorage::clonePage($userId, $title, $createDate, $clonePageId);
 				else
 					echo QPageStorage::addPage($userId, $title, $createDate);
 			}
@@ -89,7 +89,7 @@
 			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == 'true';
 
 			$userId = Yii::app()->user->getId();
-			if (isset($subtitle) && $subtitle != '' && isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
+			if (isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
 				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
@@ -162,7 +162,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$links = UserLinkCartStorage::getByLinksByUser($userId);
+				$links = UserLinkCartStorage::getLinksByUser($userId);
 				$this->renderPartial('linkCart', array('links' => $links), false, true);
 			}
 		}
@@ -200,6 +200,20 @@
 			{
 				$selectedPage = QPageStorage::model()->findByPk($pageId);
 				$selectedPage->addLink($linkInCartId);
+			}
+			Yii::app()->end();
+		}
+
+		public function actionAddAllLinksToPage()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$userId = Yii::app()->user->getId();
+			if (isset($pageId) && isset($userId))
+			{
+				$selectedPage = QPageStorage::model()->findByPk($pageId);
+				$linkRecords = UserLinkCartStorage::model()->findAll('id_user=?', array($userId));
+				foreach ($linkRecords as $linkRecord)
+					$selectedPage->addLink($linkRecord->id);
 			}
 			Yii::app()->end();
 		}
@@ -308,6 +322,7 @@
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
 						'QPageRecord' => 'QPageRecord',
+						'QPageLinkRecord' => 'QPageLinkRecord',
 					),
 				),
 			);
@@ -340,6 +355,26 @@
 			}
 			else
 				return '';
+		}
+
+		/**
+		 * @param string Session Key
+		 * @return string[]
+		 * @soap
+		 */
+		public function getPageLogos($sessionKey)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$logos = QPageStorage::getPageLogoList();
+				if (isset($logos))
+					foreach ($logos as $logo)
+						$pageLogos[] = str_replace('data:image/png;base64,', '', $logo);
+			}
+			if (isset($pageLogos))
+				return $pageLogos;
+			else
+				return null;
 		}
 
 		/**
@@ -378,13 +413,322 @@
 
 		/**
 		 * @param string Session Key
-		 * @param string Page Id
+		 * @param string Login
+		 * @return QPageRecord[]
 		 * @soap
 		 */
-		public function deletePageFromService($sessionKey, $pageId)
+		public function getPagesByUser($sessionKey, $login)
 		{
 			if ($this->authenticateBySession($sessionKey))
-				QPageStorage::deletePage($pageId);
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+				{
+					$pageRecords = QPageStorage::model()->getByOwner($userRecord->id);
+					foreach ($pageRecords as $pageRecord)
+					{
+						$page = new QPageRecord();
+						$page->id = $pageRecord['id'];
+						$page->title = $pageRecord['title'];
+						$page->isEmail = $pageRecord['is_email'];
+						$page->createDate = $pageRecord['create_date'];
+						$pages[] = $page;
+					}
+				}
+			}
+			if (isset($pages))
+				return $pages;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Page Id
+		 * @return QPageRecord
+		 * @soap
+		 */
+		public function getPageContent($sessionKey, $pageId)
+		{
+			$page = null;
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$pageRecord = QPageStorage::model()->findByPk($pageId);
+				if (isset($pageRecord))
+				{
+					$page = new QPageRecord();
+					$page->id = $pageRecord['id'];
+					$page->title = $pageRecord['title'];
+					$page->isEmail = $pageRecord['is_email'];
+					$page->url = Yii::app()->createAbsoluteUrl('qpage/show', array('id' => $pageRecord['id']));
+					$page->createDate = $pageRecord['create_date'];
+					$page->expirationDate = $pageRecord['expiration_date'];
+					$page->subtitle = $pageRecord['subtitle'];
+					$page->header = $pageRecord['header'];
+					$page->footer = $pageRecord['footer'];
+					$page->isRestricted = $pageRecord['restricted'];
+					$page->showLinkMainSite = $pageRecord['show_site_link'];
+					$page->showTicker = $pageRecord['show_ticker'];
+					$page->logo = isset($pageRecord['logo']) ? str_replace('data:image/png;base64,', '', $pageRecord['logo']) : null;
+
+					$linkRecords = $pageRecord->getPageLinks();
+					if (isset($linkRecords))
+					{
+						foreach ($linkRecords as $linkRecord)
+						{
+							$idArray = explode('---', $linkRecord['id']);
+							if (isset($idArray) && count($idArray) == 2)
+							{
+								$link = new QPageLinkRecord();
+								$link->id = str_replace('id', '', $idArray[0]);
+								$link->parentId = $pageRecord['id'];
+								$link->linkId = str_replace('link', '', $idArray[1]);
+								$link->libraryId = $linkRecord['id_library'];
+								$link->name = $linkRecord['name'];
+								$link->fileName = $linkRecord['file_name'];
+								$link->libraryName = $linkRecord['library'];
+								$link->logo = $linkRecord['file_type'];
+								$page->links[] = $link;
+							}
+						}
+					}
+				}
+			}
+			return $page;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Login
+		 * @return QPageLinkRecord[]
+		 * @soap
+		 */
+		public function getLinkCart($sessionKey, $login)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+				{
+					$linkRecords = UserLinkCartStorage::getLinksByUser($userRecord->id);
+					if (isset($linkRecords))
+					{
+						foreach ($linkRecords as $linkRecord)
+						{
+							$idArray = explode('---', $linkRecord['id']);
+							if (isset($idArray) && count($idArray) == 2)
+							{
+								$link = new QPageLinkRecord();
+								$link->id = str_replace('cart', '', $idArray[0]);
+								$link->parentId = null;
+								$link->linkId = str_replace('link', '', $idArray[1]);
+								$link->libraryId = $linkRecord['id_library'];
+								$link->name = isset($linkRecord['name']) && $linkRecord['name'] != '' ? $linkRecord['name'] : (isset($linkRecord['file_name']) ? $linkRecord['file_name'] : '');
+								$link->fileName = $linkRecord['file_name'];
+								$link->libraryName = $linkRecord['library'];
+								$link->logo = $linkRecord['file_type'];
+								$links[] = $link;
+							}
+						}
+					}
+				}
+			}
+			if (isset($links))
+				return $links;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string LinkId
+		 * @return bool
+		 * @soap
+		 */
+		public function isLinkAvailable($sessionKey, $linkId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				return isset($linkRecord);
+			}
+			return false;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @param string linkId
+		 * @soap
+		 */
+		public function addLinkToCart($sessionKey, $login, $linkId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+				{
+					UserLinkCartStorage::addLink($userRecord->id, $linkId);
+				}
+			}
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @param string linkId
+		 * @param string subtitle
+		 * @param string createData
+		 * @param int expiresInDays
+		 * @param bool restricted
+		 * @param bool showLinkToMainSite
+		 * @param string logo
+		 * @return string
+		 * @soap
+		 */
+		public function emailLink($sessionKey, $login, $linkId, $subtitle, $createDate, $expiresInDays, $restricted, $showLinkToMainSite, $logo)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+				{
+					$logo = 'data:image/png;base64,' . $logo;
+					$userId = $userRecord->id;
+					$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
+					return QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
+				}
+			}
+			return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string linkInCartId
+		 * @soap
+		 */
+		public function deleteLinkFromCart($sessionKey, $linkInCartId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				UserLinkCartStorage::deleteLink($linkInCartId);
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @soap
+		 */
+		public function deleteAllFromCart($sessionKey, $login)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+					UserLinkCartStorage::deleteLinksByUser($userRecord->id);
+			}
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string[] linkInCartIds
+		 * @param string pageId
+		 * @soap
+		 */
+		public function addLinksToPage($sessionKey, $linkInCartIds, $pageId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$selectedPage = QPageStorage::model()->findByPk($pageId);
+				foreach ($linkInCartIds as $linkInCartId)
+					$selectedPage->addLink($linkInCartId);
+			}
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string linkInPageId
+		 * @soap
+		 */
+		public function deleteLinkFromPage($sessionKey, $linkInPageId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				QPageLinkStorage::deleteLink($linkInPageId);
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @param string title
+		 * @param string createDate
+		 * @return string
+		 * @soap
+		 */
+		public function addPage($sessionKey, $login, $title, $createDate)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+					return QPageStorage::addPage($userRecord->id, $title, $createDate);
+			}
+			return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string pageId
+		 * @param string title
+		 * @param string description
+		 * @param string header
+		 * @param string footer
+		 * @param string expirationDate
+		 * @param bool requireLogin
+		 * @param bool showLinkToMainSite
+		 * @param bool showTicker
+		 * @param string logo
+		 * @soap
+		 */
+		public function savePageContent($sessionKey, $pageId, $title, $description, $header, $footer, $expirationDate, $requireLogin, $showLinkToMainSite, $showTicker, $logo)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				if (isset($expirationDate) && $expirationDate != '')
+					$expirationDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($expirationDate));
+				$logo = 'data:image/png;base64,' . $logo;
+				QPageStorage::savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite);
+			}
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @param string Cloned Page Id
+		 * @param string title
+		 * @param string createDate
+		 * @return string
+		 * @soap
+		 */
+		public function clonePage($sessionKey, $login, $clonedPageId, $title, $createDate)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				if (isset($userRecord))
+					return QPageStorage::clonePage($userRecord->id, $title, $createDate, $clonedPageId);
+			}
+			return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string[] Page Ids
+		 * @soap
+		 */
+		public function deletePages($sessionKey, $pageIds)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				foreach ($pageIds as $pageId)
+					QPageStorage::deletePage($pageId);
 		}
 		/////////////////Service Part///////////////////////////
 	}

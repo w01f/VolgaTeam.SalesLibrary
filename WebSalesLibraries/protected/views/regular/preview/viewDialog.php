@@ -21,58 +21,59 @@
 				This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 			</div>
 		<?php else: ?>
+			<? $logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats'; ?>
 			<ul class="format-list">
 				<?php foreach ($link->availableFormats as $format): ?>
 					<?php
-					if (!$autorized && $format == 'email')
+					if (!$autorized && ($format == 'email' || $format == 'outlook'))
 						continue;
 					$imageSource = '';
 					switch ($format)
 					{
 						case 'ppt':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/pptx.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'pptx.png'));
 							break;
 						case 'doc':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/docx.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'docx.png'));
 							break;
 						case 'xls':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/xlsx.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'xlsx.png'));
 							break;
 						case 'png':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/png.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'png.png'));
 							break;
 						case 'jpeg':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/jpeg.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'jpeg.png'));
 							break;
 						case 'pdf':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/pdf.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'pdf.png'));
 							break;
 						case 'video':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/wmv.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'wmv.png'));
 							break;
 						case 'mp4':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/mp4.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'mp4.png'));
 							break;
 						case 'ogv':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/ogv.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'ogv.png'));
 							break;
 						case 'tab':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/tab.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'tab.png'));
 							break;
 						case 'url':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/url.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'url.png'));
 							break;
 						case 'key':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/keynote.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'keynote.png'));
 							break;
 						case 'email':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/email.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email.png'));
 							break;
 						case 'outlook':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/email.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email.png'));
 							break;
 						case 'download':
-							$imageSource = Yii::app()->baseUrl . '/images/fileFormats/download.png';
+							$imageSource = 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'download.png'));
 							break;
 					}
 					?>
@@ -104,8 +105,7 @@
 				<?php if (!isset($link->isAttachment) && !$link->forcePreview && $autorized): ?>
 					<li class="multi-column" <? if ($link->browser != 'mobile'): ?>rel="tooltip"
 						title="<? echo Yii::app()->params['tooltips']['preview_dialog']['favorites']; ?>"<?php endif; ?>>
-						<img src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/favorites.png'; ?>"/>
-
+						<img src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'favorites.png')); ?>"/>
 						<div class="service-data">
 							<div class="link-id"><?php echo $link->id; ?></div>
 							<div class="link-name"><?php echo $link->name; ?></div>

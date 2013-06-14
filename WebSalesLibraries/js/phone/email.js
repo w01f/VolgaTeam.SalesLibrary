@@ -145,6 +145,23 @@
 			return true;
 		});
 
+
+		$('#add-page-name-enabled').on('change', function ()
+		{
+			if ($(this).is(':checked'))
+				$('#add-page-name').textinput('enable');
+			else
+				$('#add-page-name').val('').textinput('disable');
+		});
+
+		$('#add-page-disclaimer').on('click', function ()
+		{
+			var infoDialog = $('#info-dialog');
+			infoDialog.find('.dialog-description').text('You are Sending a WEB LINK to this file over the internet. The Recipient will receive an email with the website Link. Tell your recipient to click this link to view or download this file…');
+			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
+			$.mobile.changePage("#info-dialog");
+		});
+
 		$('#add-page-logo').find('.page-content').find('li').on('click', function (e)
 		{
 			$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');

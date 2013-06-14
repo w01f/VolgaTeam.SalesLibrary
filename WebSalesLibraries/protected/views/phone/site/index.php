@@ -540,42 +540,33 @@ $logos = QPageStorage::getPageLogoList();
 				<li>
 					<a href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
+				<li>
+					<a href="#add-page-security" data-transition="none">Options</a>
+				</li>
 			</ul>
 		</div>
 	</div>
 	<div data-role='content' class="page-content">
 		<table class="layout-group">
 			<tr>
-				<td class="on-left">Name:</td>
-				<td class="on-right">
+				<td colspan="2" class="on-left">
+					<input type="checkbox" name="add-page-name-enabled" id="add-page-name-enabled" class="custom" data-mini="true" checked/>
+					<label for="add-page-name-enabled">Do you want to show a Page Header?</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
 					<input id="add-page-name" name="add-page-name" type="text" data-mini="true" value=""/>
 				</td>
 			</tr>
 			<tr>
-				<td class="on-left">Expires in:</td>
-				<td class="on-right">
-					<select id="add-page-expires-in" data-mini="true">
-						<option selected value="7">7 days</option>
-						<option value="14">14 days</option>
-						<option value="30">30 days</option>
-						<option value="0">Never</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
 				<td colspan="2" class="on-left">
-					<input type="checkbox" name="add-page-restricted" id="add-page-restricted" class="custom" data-mini="true"/>
-					<label for="add-page-restricted">Require User Log-in</label>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" class="on-left">
-					<input type="checkbox" name="add-page-show-link-to-main-site" id="add-page-show-link-to-main-site" class="custom" data-mini="true"/>
-					<label for="add-page-show-link-to-main-site">Show Link to Main Site</label>
+					<a id="add-page-disclaimer" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Important Info You Should KNOW</a>
+					<br>
 				</td>
 			</tr>
 		</table>
-		<a id="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
+		<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-iconpos="top">
@@ -617,6 +608,9 @@ $logos = QPageStorage::getPageLogoList();
 				<li>
 					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
+				<li>
+					<a href="#add-page-security" data-transition="none">Options</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -628,6 +622,80 @@ $logos = QPageStorage::getPageLogoList();
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</ul>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role='page' class="email-tab" id="add-page-security" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title header-title"></span>
+		<ul data-role="listview" data-theme="c" data-divider-theme="c">
+			<li data-role="list-divider">
+				<h4 class="link-container">
+					Email Link: <span class="name"></span>
+				</h4>
+			</li>
+		</ul>
+		<div data-role="navbar">
+			<ul>
+				<li>
+					<a href="#add-page-info" data-transition="none">Link</a>
+				</li>
+				<li>
+					<a href="#add-page-logo" data-transition="none">Logo</a>
+				</li>
+				<li>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-security" data-transition="none">Options</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role='content' class="page-content">
+		<table class="layout-group">
+			<tr>
+				<td class="on-left">Expires in:</td>
+				<td class="on-right">
+					<select id="add-page-expires-in" data-mini="true">
+						<option selected value="7">7 days</option>
+						<option value="14">14 days</option>
+						<option value="30">30 days</option>
+						<option value="0">Never</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
+					<input type="checkbox" name="add-page-restricted" id="add-page-restricted" class="custom" data-mini="true"/>
+					<label for="add-page-restricted">Require User Log-in</label>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
+					<input type="checkbox" name="add-page-show-link-to-main-site" id="add-page-show-link-to-main-site" class="custom" data-mini="true"/>
+					<label for="add-page-show-link-to-main-site">Show Link to Main Site</label> <br>
+				</td>
+			</tr>
+		</table>
+		<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-iconpos="top">
@@ -1041,7 +1109,15 @@ $logos = QPageStorage::getPageLogoList();
 		<a href="#" class="dialog-confirm" data-role="button" data-theme="b" data-rel="back">Yes</a>
 		<a href="#" class="dialog-cancel" data-role="button" data-theme="b" data-rel="back">No</a>
 	</div>
-</div><!--Template for folder links content-->
+</div>
+<div data-role="dialog" id="info-dialog" data-overlay-theme="c" data-title="Are you sure?">
+	<div data-role="content">
+		<h3 class="dialog-title">???</h3>
+		<p class="dialog-description">???</p>
+		<a href="#" class="dialog-confirm" data-role="button" data-theme="b" data-rel="back">OK</a>
+	</div>
+</div>
+<!--Template for folder links content-->
 <div data-role="page" id="link-folder-content-template" data-overlay-theme="c">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>

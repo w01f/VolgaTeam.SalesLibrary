@@ -4,7 +4,7 @@
 		<tr class="<?php echo ($recordNumber % 2) ? 'odd' : 'even'; ?>">
 			<td class="link-id-column"><?php echo $link['id']; ?></td>
 			<td class="library-column"><?php echo $link['library']; ?></td>
-			<td class="link-type-column"><?php echo CHtml::tag('img', array('src' => $link['file_type'], 'alt' => '')); ?></td>
+			<td class="link-type-column"><?php echo CHtml::tag('img', array('src' => 'data:image/png;base64,' . $link['file_type'], 'alt' => '')); ?></td>
 			<td class="link-name-column">
 				<table class="link-container">
 					<tr>
