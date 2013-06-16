@@ -109,7 +109,7 @@ namespace FileManager
 		}
 
 		#region Nested type: NoParamsDelegate
-		private delegate void NoParamsDelegate();
+		public delegate void NoParamsDelegate();
 		#endregion
 	}
 }

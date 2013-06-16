@@ -32,15 +32,17 @@ namespace FileManager.PresentationClasses.IPad
 			Dock = DockStyle.Fill;
 		}
 
+		public LibraryDecorator ParentDecorator { get; private set; }
+
 		public void UpdateControlsState()
 		{
-			xtraTabControl.Enabled = this.ParentDecorator.Library.IPadManager.Enabled && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(this.ParentDecorator.Library.IPadManager.Password);
+			xtraTabControl.Enabled = ParentDecorator.Library.IPadManager.Enabled && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.SyncDestinationPath) && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Website.Replace("http://", string.Empty)) && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Login) && !string.IsNullOrEmpty(ParentDecorator.Library.IPadManager.Password);
 		}
 
 		#region Video Tab
 		public void UpdateVideoFiles()
 		{
-			var focussedRow = gridViewVideo.FocusedRowHandle;
+			int focussedRow = gridViewVideo.FocusedRowHandle;
 
 			gridControlVideo.DataSource = null;
 			_videoFiles.Clear();
@@ -55,7 +57,7 @@ namespace FileManager.PresentationClasses.IPad
 
 		public void ConvertSelectedVideoFiles()
 		{
-			var videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
+			VideoInfo[] videoFiles = _videoFiles.Where(x => x.Selected).ToArray();
 			if (videoFiles.Length > 0)
 				ConvertVideoFiles(videoFiles);
 			else
@@ -70,11 +72,11 @@ namespace FileManager.PresentationClasses.IPad
 				FormMain.Instance.ribbonControl.Enabled = false;
 				Enabled = false;
 				MainController.Instance.ActiveDecorator.Save();
-				var thread = new Thread(delegate()
+				var thread = new Thread(delegate
 											{
 												Globals.ThreadActive = true;
 												Globals.ThreadAborted = false;
-												foreach (var videoFile in videoFiles)
+												foreach (VideoInfo videoFile in videoFiles)
 												{
 													if ((Globals.ThreadActive && !Globals.ThreadAborted) || !Globals.ThreadActive)
 														videoFile.Parent.UpdateContent();
@@ -85,7 +87,7 @@ namespace FileManager.PresentationClasses.IPad
 													ParentDecorator.Library.Save();
 											});
 				form.Show();
-				var savedState = FormMain.Instance.WindowState;
+				FormWindowState savedState = FormMain.Instance.WindowState;
 				if (ParentDecorator.Library.MinimizeOnSync)
 					FormMain.Instance.WindowState = FormWindowState.Minimized;
 				thread.Start();
@@ -111,9 +113,9 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void gridViewVideo_RowCellStyle(object sender, RowCellStyleEventArgs e)
 		{
-			var videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
+			int videoIndex = gridViewVideo.GetDataSourceRowIndex(e.RowHandle);
 			if (videoIndex < 0 || videoIndex >= _videoFiles.Count) return;
-			var videoInfo = _videoFiles[videoIndex];
+			VideoInfo videoInfo = _videoFiles[videoIndex];
 			if (e.Column == gridColumnVideoWmvFileName)
 				e.Appearance.ForeColor = string.IsNullOrEmpty(videoInfo.WmvFilePath) ? Color.Red : Color.Green;
 			if (e.Column == gridColumnVideoMp4FileName)
@@ -127,7 +129,7 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoWmv_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 			if (File.Exists(videoInfo.WmvFilePath))
 				VideoHelper.Instance.OpenMediaPlayer(videoInfo.WmvFilePath);
 			else
@@ -137,7 +139,7 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoMp4_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 			if (File.Exists(videoInfo.Mp4FilePath))
 				VideoHelper.Instance.OpenQuickTime(videoInfo.Mp4FilePath);
 			else
@@ -147,7 +149,7 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoOgv_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 			if (File.Exists(videoInfo.OgvFilePath))
 				VideoHelper.Instance.OpenFirefox(videoInfo.OgvFilePath);
 			else
@@ -172,8 +174,8 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoFolder_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
-			var folderPath = gridViewVideo.FocusedColumn == gridColumnVideoSourceFolder ? videoInfo.SourceFolderPath : videoInfo.IPadFolderPath;
+			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			string folderPath = gridViewVideo.FocusedColumn == gridColumnVideoSourceFolder ? videoInfo.SourceFolderPath : videoInfo.IPadFolderPath;
 			if (Directory.Exists(folderPath))
 				Process.Start(folderPath);
 			else
@@ -183,14 +185,14 @@ namespace FileManager.PresentationClasses.IPad
 		private void repositoryItemButtonEditVideoConvert_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
 			if (gridViewVideo.FocusedRowHandle == GridControl.InvalidRowHandle) return;
-			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
+			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(gridViewVideo.FocusedRowHandle)];
 			ConvertVideoFiles(new[] { videoInfo });
 		}
 
 		private void gridViewVideo_CustomRowCellEdit(object sender, CustomRowCellEditEventArgs e)
 		{
-			var videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
-			var videoConverted = videoInfo.Converted;
+			VideoInfo videoInfo = _videoFiles[gridViewVideo.GetDataSourceRowIndex(e.RowHandle)];
+			bool videoConverted = videoInfo.Converted;
 			if (e.Column == gridColumnVideoIPadFolder)
 				e.RepositoryItem = videoConverted ? repositoryItemButtonEditVideoFolderEnabled : repositoryItemButtonEditVideoFolderDisabled;
 			else if (e.Column == gridColumnVideoConvert)
@@ -209,14 +211,14 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void buttonXSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (var videoInfo in _videoFiles)
+			foreach (VideoInfo videoInfo in _videoFiles)
 				videoInfo.Selected = true;
 			gridViewVideo.RefreshData();
 		}
 
 		private void buttonXClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (var videoInfo in _videoFiles)
+			foreach (VideoInfo videoInfo in _videoFiles)
 				videoInfo.Selected = false;
 			gridViewVideo.RefreshData();
 		}
@@ -347,7 +349,5 @@ namespace FileManager.PresentationClasses.IPad
 			pic.Top -= 1;
 		}
 		#endregion
-
-		public LibraryDecorator ParentDecorator { get; private set; }
 	}
 }

@@ -64,7 +64,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				IPreviewContainer previewContainer = Parent.Parent.Parent.GetPreviewContainer(OriginalPath);
+				IPreviewContainer previewContainer = UniversalPreviewContainer;
 				if (previewContainer != null)
 					return previewContainer.GetTextContent();
 				return string.Empty;
@@ -439,6 +439,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					LastChanged = DateTime.Now;
 				_forcePreview = value;
 			}
+		}
+
+		public IPreviewContainer UniversalPreviewContainer
+		{
+			get { return Parent.Parent.Parent.GetPreviewContainer(OriginalPath); }
 		}
 
 		public virtual ILibraryLink Clone(LibraryFolder parent)

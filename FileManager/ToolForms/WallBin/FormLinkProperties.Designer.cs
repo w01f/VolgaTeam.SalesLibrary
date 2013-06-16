@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLinkProperties));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
@@ -49,9 +48,14 @@
 			this.groupBoxNotes = new System.Windows.Forms.GroupBox();
 			this.rbBold = new System.Windows.Forms.RadioButton();
 			this.rbRegular = new System.Windows.Forms.RadioButton();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
 			this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageNotes = new DevExpress.XtraTab.XtraTabPage();
+			this.pnAdminTools = new System.Windows.Forms.Panel();
+			this.laAdminTools = new System.Windows.Forms.Label();
+			this.buttonXRefreshPreview = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXOpenQV = new DevComponents.DotNetBar.ButtonX();
+			this.buttonXOpenWV = new DevComponents.DotNetBar.ButtonX();
 			this.ckDoNotGeneratePreview = new System.Windows.Forms.CheckBox();
 			this.pnKeynotePreview = new System.Windows.Forms.Panel();
 			this.laKeynotePreviewDetail = new System.Windows.Forms.Label();
@@ -87,7 +91,7 @@
 			this.repositoryItemButtonEditKeyword = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.xtraTabPageFileCard = new DevExpress.XtraTab.XtraTabPage();
 			this.textEditFileCardTitle = new DevExpress.XtraEditors.TextEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.groupBoxFileCard = new System.Windows.Forms.GroupBox();
 			this.checkBoxFileCardImportantInfo = new System.Windows.Forms.CheckBox();
 			this.buttonXFileCardImportantInfoAdd = new DevComponents.DotNetBar.ButtonX();
@@ -156,15 +160,15 @@
 			this.xtraTabControlWidgets = new DevExpress.XtraTab.XtraTabControl();
 			this.xtraTabPageWidgetsGallery = new DevExpress.XtraTab.XtraTabPage();
 			this.gridControlWidgetsGallery = new DevExpress.XtraGrid.GridControl();
-			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
 			this.addToFavoritesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.persistentRepository = new DevExpress.XtraEditors.Repository.PersistentRepository(this.components);
+			this.persistentRepository = new DevExpress.XtraEditors.Repository.PersistentRepository();
 			this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
 			this.layoutViewWidgetsGallery = new DevExpress.XtraGrid.Views.Layout.LayoutView();
 			this.gridColumnWidgetsGalleryImage = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
 			this.layoutViewFieldWidgetsGalleryImage = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
 			this.layoutViewCardWidgetsGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
-			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
+			this.toolTipController = new DevExpress.Utils.ToolTipController();
 			this.laWidgetHint = new System.Windows.Forms.Label();
 			this.xtraTabPageWidgetsFavs = new DevExpress.XtraTab.XtraTabPage();
 			this.gridControlWidgetsFavs = new DevExpress.XtraGrid.GridControl();
@@ -214,6 +218,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
 			this.xtraTabControl.SuspendLayout();
 			this.xtraTabPageNotes.SuspendLayout();
+			this.pnAdminTools.SuspendLayout();
 			this.pnKeynotePreview.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbKeynotePreview)).BeginInit();
 			this.pnVideoForcePreview.SuspendLayout();
@@ -478,7 +483,7 @@
 			this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
 			this.xtraTabControl.Name = "xtraTabControl";
 			this.xtraTabControl.SelectedTabPage = this.xtraTabPageNotes;
-			this.xtraTabControl.Size = new System.Drawing.Size(639, 546);
+			this.xtraTabControl.Size = new System.Drawing.Size(639, 555);
 			this.xtraTabControl.TabIndex = 4;
 			this.xtraTabControl.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageNotes,
@@ -493,14 +498,77 @@
 			// 
 			// xtraTabPageNotes
 			// 
+			this.xtraTabPageNotes.Controls.Add(this.pnAdminTools);
 			this.xtraTabPageNotes.Controls.Add(this.gbNotes);
 			this.xtraTabPageNotes.Controls.Add(this.groupBoxNotes);
 			this.xtraTabPageNotes.Controls.Add(this.ckDoNotGeneratePreview);
 			this.xtraTabPageNotes.Controls.Add(this.pnKeynotePreview);
 			this.xtraTabPageNotes.Controls.Add(this.pnVideoForcePreview);
 			this.xtraTabPageNotes.Name = "xtraTabPageNotes";
-			this.xtraTabPageNotes.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageNotes.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageNotes.Text = "Notes";
+			// 
+			// pnAdminTools
+			// 
+			this.pnAdminTools.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.pnAdminTools.Controls.Add(this.laAdminTools);
+			this.pnAdminTools.Controls.Add(this.buttonXRefreshPreview);
+			this.pnAdminTools.Controls.Add(this.buttonXOpenQV);
+			this.pnAdminTools.Controls.Add(this.buttonXOpenWV);
+			this.pnAdminTools.Location = new System.Drawing.Point(10, 477);
+			this.pnAdminTools.Name = "pnAdminTools";
+			this.pnAdminTools.Size = new System.Drawing.Size(612, 49);
+			this.pnAdminTools.TabIndex = 14;
+			// 
+			// laAdminTools
+			// 
+			this.laAdminTools.AutoSize = true;
+			this.laAdminTools.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laAdminTools.Location = new System.Drawing.Point(-1, 0);
+			this.laAdminTools.Name = "laAdminTools";
+			this.laAdminTools.Size = new System.Drawing.Size(83, 16);
+			this.laAdminTools.TabIndex = 10;
+			this.laAdminTools.Text = "Admin Tools:";
+			// 
+			// buttonXRefreshPreview
+			// 
+			this.buttonXRefreshPreview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXRefreshPreview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXRefreshPreview.Location = new System.Drawing.Point(286, 19);
+			this.buttonXRefreshPreview.Name = "buttonXRefreshPreview";
+			this.buttonXRefreshPreview.Size = new System.Drawing.Size(118, 26);
+			this.buttonXRefreshPreview.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXRefreshPreview.TabIndex = 13;
+			this.buttonXRefreshPreview.Text = "Refresh QV && WV";
+			this.buttonXRefreshPreview.TextColor = System.Drawing.Color.Black;
+			this.buttonXRefreshPreview.Click += new System.EventHandler(this.buttonXRefreshPreview_Click);
+			// 
+			// buttonXOpenQV
+			// 
+			this.buttonXOpenQV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenQV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenQV.Location = new System.Drawing.Point(0, 19);
+			this.buttonXOpenQV.Name = "buttonXOpenQV";
+			this.buttonXOpenQV.Size = new System.Drawing.Size(118, 26);
+			this.buttonXOpenQV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXOpenQV.TabIndex = 11;
+			this.buttonXOpenQV.Text = "!QV Folder";
+			this.buttonXOpenQV.TextColor = System.Drawing.Color.Black;
+			this.buttonXOpenQV.Click += new System.EventHandler(this.buttonXOpenQV_Click);
+			// 
+			// buttonXOpenWV
+			// 
+			this.buttonXOpenWV.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXOpenWV.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXOpenWV.Location = new System.Drawing.Point(143, 19);
+			this.buttonXOpenWV.Name = "buttonXOpenWV";
+			this.buttonXOpenWV.Size = new System.Drawing.Size(118, 26);
+			this.buttonXOpenWV.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXOpenWV.TabIndex = 12;
+			this.buttonXOpenWV.Text = "!WV Folder";
+			this.buttonXOpenWV.TextColor = System.Drawing.Color.Black;
+			this.buttonXOpenWV.Click += new System.EventHandler(this.buttonXOpenWV_Click);
 			// 
 			// ckDoNotGeneratePreview
 			// 
@@ -597,7 +665,7 @@
 			this.xtraTabPageSearchTags.Controls.Add(this.xtraTabControlSearchTags);
 			this.xtraTabPageSearchTags.Name = "xtraTabPageSearchTags";
 			this.xtraTabPageSearchTags.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-			this.xtraTabPageSearchTags.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageSearchTags.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageSearchTags.Text = "Search Tags";
 			// 
 			// xtraTabControlSearchTags
@@ -618,7 +686,7 @@
 			this.xtraTabControlSearchTags.Location = new System.Drawing.Point(0, 10);
 			this.xtraTabControlSearchTags.Name = "xtraTabControlSearchTags";
 			this.xtraTabControlSearchTags.SelectedTabPage = this.xtraTabPageSearchTagsCategories;
-			this.xtraTabControlSearchTags.Size = new System.Drawing.Size(637, 510);
+			this.xtraTabControlSearchTags.Size = new System.Drawing.Size(637, 519);
 			this.xtraTabControlSearchTags.TabIndex = 1;
 			this.xtraTabControlSearchTags.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageSearchTagsCategories,
@@ -628,7 +696,7 @@
 			// 
 			this.xtraTabPageSearchTagsCategories.Controls.Add(this.splitContainerSearchTagsCategories);
 			this.xtraTabPageSearchTagsCategories.Name = "xtraTabPageSearchTagsCategories";
-			this.xtraTabPageSearchTagsCategories.Size = new System.Drawing.Size(635, 484);
+			this.xtraTabPageSearchTagsCategories.Size = new System.Drawing.Size(635, 493);
 			this.xtraTabPageSearchTagsCategories.Text = "Assign Categories";
 			// 
 			// splitContainerSearchTagsCategories
@@ -653,7 +721,7 @@
 			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup2);
 			this.splitContainerSearchTagsCategories.Panel2.Controls.Add(this.checkedListBoxControlGroup1);
 			this.splitContainerSearchTagsCategories.Panel2.Text = "Panel2";
-			this.splitContainerSearchTagsCategories.Size = new System.Drawing.Size(635, 484);
+			this.splitContainerSearchTagsCategories.Size = new System.Drawing.Size(635, 493);
 			this.splitContainerSearchTagsCategories.SplitterPosition = 250;
 			this.splitContainerSearchTagsCategories.TabIndex = 1;
 			this.splitContainerSearchTagsCategories.Text = "splitContainerControl1";
@@ -852,7 +920,7 @@
 			this.xtraTabPageSearchTagsKeywords.Controls.Add(this.buttonXAddKeyWord);
 			this.xtraTabPageSearchTagsKeywords.Controls.Add(this.gridControlSearchTagsKeywords);
 			this.xtraTabPageSearchTagsKeywords.Name = "xtraTabPageSearchTagsKeywords";
-			this.xtraTabPageSearchTagsKeywords.Size = new System.Drawing.Size(635, 484);
+			this.xtraTabPageSearchTagsKeywords.Size = new System.Drawing.Size(635, 493);
 			this.xtraTabPageSearchTagsKeywords.Text = "Assign Keywords";
 			// 
 			// buttonXAddKeyWord
@@ -880,7 +948,7 @@
 			this.gridControlSearchTagsKeywords.Name = "gridControlSearchTagsKeywords";
 			this.gridControlSearchTagsKeywords.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditKeyword});
-			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(615, 432);
+			this.gridControlSearchTagsKeywords.Size = new System.Drawing.Size(615, 441);
 			this.gridControlSearchTagsKeywords.TabIndex = 0;
 			this.gridControlSearchTagsKeywords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSearchTagsKeywords});
@@ -951,7 +1019,7 @@
 			this.xtraTabPageFileCard.Controls.Add(this.groupBoxFileCard);
 			this.xtraTabPageFileCard.Controls.Add(this.checkBoxEnableFileCard);
 			this.xtraTabPageFileCard.Name = "xtraTabPageFileCard";
-			this.xtraTabPageFileCard.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageFileCard.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageFileCard.Text = "File Card";
 			// 
 			// textEditFileCardTitle
@@ -1005,7 +1073,7 @@
 			this.groupBoxFileCard.Enabled = false;
 			this.groupBoxFileCard.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxFileCard.Name = "groupBoxFileCard";
-			this.groupBoxFileCard.Size = new System.Drawing.Size(615, 467);
+			this.groupBoxFileCard.Size = new System.Drawing.Size(615, 480);
 			this.groupBoxFileCard.TabIndex = 7;
 			this.groupBoxFileCard.TabStop = false;
 			// 
@@ -1049,7 +1117,7 @@
 			this.gridControlFileCardImportantInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemMemoEditFileCardImportantInfo,
             this.repositoryItemButtonEditFileCardImportantInfo});
-			this.gridControlFileCardImportantInfo.Size = new System.Drawing.Size(603, 156);
+			this.gridControlFileCardImportantInfo.Size = new System.Drawing.Size(603, 169);
 			this.gridControlFileCardImportantInfo.TabIndex = 28;
 			this.gridControlFileCardImportantInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFileCardImportantInfo});
@@ -1386,7 +1454,7 @@
 			this.xtraTabPageAttachments.Controls.Add(this.groupBoxAttachments);
 			this.xtraTabPageAttachments.Controls.Add(this.checkBoxEnableAttachmnets);
 			this.xtraTabPageAttachments.Name = "xtraTabPageAttachments";
-			this.xtraTabPageAttachments.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageAttachments.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageAttachments.Text = "Attachments";
 			// 
 			// groupBoxAttachments
@@ -1401,7 +1469,7 @@
 			this.groupBoxAttachments.Enabled = false;
 			this.groupBoxAttachments.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxAttachments.Name = "groupBoxAttachments";
-			this.groupBoxAttachments.Size = new System.Drawing.Size(615, 467);
+			this.groupBoxAttachments.Size = new System.Drawing.Size(615, 481);
 			this.groupBoxAttachments.TabIndex = 5;
 			this.groupBoxAttachments.TabStop = false;
 			// 
@@ -1415,7 +1483,7 @@
 			this.gridControlAttachmentsWeb.Name = "gridControlAttachmentsWeb";
 			this.gridControlAttachmentsWeb.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditAttachmentsWeb});
-			this.gridControlAttachmentsWeb.Size = new System.Drawing.Size(603, 176);
+			this.gridControlAttachmentsWeb.Size = new System.Drawing.Size(603, 190);
 			this.gridControlAttachmentsWeb.TabIndex = 10;
 			this.gridControlAttachmentsWeb.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewAttachmentsWeb});
@@ -1609,7 +1677,7 @@
 			this.xtraTabPageExpiredLinks.Controls.Add(this.checkBoxEnableExpiredLinks);
 			this.xtraTabPageExpiredLinks.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.xtraTabPageExpiredLinks.Name = "xtraTabPageExpiredLinks";
-			this.xtraTabPageExpiredLinks.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageExpiredLinks.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageExpiredLinks.Text = "Expiration Date";
 			// 
 			// gbExpiredLinks
@@ -1628,7 +1696,7 @@
 			this.gbExpiredLinks.Enabled = false;
 			this.gbExpiredLinks.Location = new System.Drawing.Point(11, 37);
 			this.gbExpiredLinks.Name = "gbExpiredLinks";
-			this.gbExpiredLinks.Size = new System.Drawing.Size(615, 471);
+			this.gbExpiredLinks.Size = new System.Drawing.Size(615, 480);
 			this.gbExpiredLinks.TabIndex = 1;
 			this.gbExpiredLinks.TabStop = false;
 			// 
@@ -1752,7 +1820,7 @@
 			this.xtraTabPageLineBrealProperties.Controls.Add(this.colorEditLineBreakFontColor);
 			this.xtraTabPageLineBrealProperties.Controls.Add(this.laFontColor);
 			this.xtraTabPageLineBrealProperties.Name = "xtraTabPageLineBrealProperties";
-			this.xtraTabPageLineBrealProperties.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageLineBrealProperties.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageLineBrealProperties.Text = "Info";
 			// 
 			// memoEditNote
@@ -1762,7 +1830,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditNote.Location = new System.Drawing.Point(98, 94);
 			this.memoEditNote.Name = "memoEditNote";
-			this.memoEditNote.Size = new System.Drawing.Size(528, 412);
+			this.memoEditNote.Size = new System.Drawing.Size(528, 421);
 			this.memoEditNote.StyleController = this.styleController;
 			this.memoEditNote.TabIndex = 33;
 			// 
@@ -1827,7 +1895,7 @@
 			// 
 			this.xtraTabPageSecurity.Controls.Add(this.groupBoxSecurity);
 			this.xtraTabPageSecurity.Name = "xtraTabPageSecurity";
-			this.xtraTabPageSecurity.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageSecurity.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageSecurity.Text = "Security";
 			// 
 			// groupBoxSecurity
@@ -1842,7 +1910,7 @@
 			this.groupBoxSecurity.Controls.Add(this.rbSecurityDenied);
 			this.groupBoxSecurity.Location = new System.Drawing.Point(10, 3);
 			this.groupBoxSecurity.Name = "groupBoxSecurity";
-			this.groupBoxSecurity.Size = new System.Drawing.Size(616, 507);
+			this.groupBoxSecurity.Size = new System.Drawing.Size(616, 516);
 			this.groupBoxSecurity.TabIndex = 1;
 			this.groupBoxSecurity.TabStop = false;
 			// 
@@ -1851,7 +1919,7 @@
 			this.ckSecurityShareLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.ckSecurityShareLink.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.ckSecurityShareLink.Location = new System.Drawing.Point(8, 472);
+			this.ckSecurityShareLink.Location = new System.Drawing.Point(8, 481);
 			this.ckSecurityShareLink.Name = "ckSecurityShareLink";
 			this.ckSecurityShareLink.Size = new System.Drawing.Size(596, 29);
 			this.ckSecurityShareLink.TabIndex = 35;
@@ -1867,7 +1935,7 @@
 			this.memoEditSecurityUsers.Location = new System.Drawing.Point(24, 189);
 			this.memoEditSecurityUsers.Name = "memoEditSecurityUsers";
 			this.memoEditSecurityUsers.Properties.NullText = "Type Usernames, separated by  commas...";
-			this.memoEditSecurityUsers.Size = new System.Drawing.Size(580, 277);
+			this.memoEditSecurityUsers.Size = new System.Drawing.Size(580, 286);
 			this.memoEditSecurityUsers.StyleController = this.styleController;
 			this.memoEditSecurityUsers.TabIndex = 34;
 			// 
@@ -1919,7 +1987,7 @@
 			this.xtraTabPageWidgets.Controls.Add(this.groupBoxWidgets);
 			this.xtraTabPageWidgets.Controls.Add(this.checkBoxEnableWidget);
 			this.xtraTabPageWidgets.Name = "xtraTabPageWidgets";
-			this.xtraTabPageWidgets.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageWidgets.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageWidgets.Text = "Widget";
 			// 
 			// groupBoxWidgets
@@ -1935,7 +2003,7 @@
 			this.groupBoxWidgets.Enabled = false;
 			this.groupBoxWidgets.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxWidgets.Name = "groupBoxWidgets";
-			this.groupBoxWidgets.Size = new System.Drawing.Size(615, 467);
+			this.groupBoxWidgets.Size = new System.Drawing.Size(615, 484);
 			this.groupBoxWidgets.TabIndex = 3;
 			this.groupBoxWidgets.TabStop = false;
 			// 
@@ -1957,7 +2025,7 @@
 			this.xtraTabControlWidgets.Location = new System.Drawing.Point(6, 79);
 			this.xtraTabControlWidgets.Name = "xtraTabControlWidgets";
 			this.xtraTabControlWidgets.SelectedTabPage = this.xtraTabPageWidgetsGallery;
-			this.xtraTabControlWidgets.Size = new System.Drawing.Size(603, 382);
+			this.xtraTabControlWidgets.Size = new System.Drawing.Size(603, 399);
 			this.xtraTabControlWidgets.TabIndex = 6;
 			this.xtraTabControlWidgets.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageWidgetsGallery,
@@ -1969,7 +2037,7 @@
 			this.xtraTabPageWidgetsGallery.Controls.Add(this.gridControlWidgetsGallery);
 			this.xtraTabPageWidgetsGallery.Controls.Add(this.laWidgetHint);
 			this.xtraTabPageWidgetsGallery.Name = "xtraTabPageWidgetsGallery";
-			this.xtraTabPageWidgetsGallery.Size = new System.Drawing.Size(601, 356);
+			this.xtraTabPageWidgetsGallery.Size = new System.Drawing.Size(601, 373);
 			this.xtraTabPageWidgetsGallery.Text = "Gallery";
 			// 
 			// gridControlWidgetsGallery
@@ -1980,7 +2048,7 @@
 			this.gridControlWidgetsGallery.Location = new System.Drawing.Point(0, 0);
 			this.gridControlWidgetsGallery.MainView = this.layoutViewWidgetsGallery;
 			this.gridControlWidgetsGallery.Name = "gridControlWidgetsGallery";
-			this.gridControlWidgetsGallery.Size = new System.Drawing.Size(601, 318);
+			this.gridControlWidgetsGallery.Size = new System.Drawing.Size(601, 335);
 			this.gridControlWidgetsGallery.TabIndex = 4;
 			this.gridControlWidgetsGallery.ToolTipController = this.toolTipController;
 			this.gridControlWidgetsGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -2113,7 +2181,7 @@
 			this.laWidgetHint.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.laWidgetHint.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laWidgetHint.ForeColor = System.Drawing.Color.Red;
-			this.laWidgetHint.Location = new System.Drawing.Point(0, 318);
+			this.laWidgetHint.Location = new System.Drawing.Point(0, 335);
 			this.laWidgetHint.Name = "laWidgetHint";
 			this.laWidgetHint.Size = new System.Drawing.Size(601, 38);
 			this.laWidgetHint.TabIndex = 5;
@@ -2124,7 +2192,7 @@
 			// 
 			this.xtraTabPageWidgetsFavs.Controls.Add(this.gridControlWidgetsFavs);
 			this.xtraTabPageWidgetsFavs.Name = "xtraTabPageWidgetsFavs";
-			this.xtraTabPageWidgetsFavs.Size = new System.Drawing.Size(601, 356);
+			this.xtraTabPageWidgetsFavs.Size = new System.Drawing.Size(601, 373);
 			this.xtraTabPageWidgetsFavs.Text = "My Favorites";
 			// 
 			// gridControlWidgetsFavs
@@ -2134,7 +2202,7 @@
 			this.gridControlWidgetsFavs.Location = new System.Drawing.Point(0, 0);
 			this.gridControlWidgetsFavs.MainView = this.layoutViewWidgetsFavs;
 			this.gridControlWidgetsFavs.Name = "gridControlWidgetsFavs";
-			this.gridControlWidgetsFavs.Size = new System.Drawing.Size(601, 356);
+			this.gridControlWidgetsFavs.Size = new System.Drawing.Size(601, 373);
 			this.gridControlWidgetsFavs.TabIndex = 5;
 			this.gridControlWidgetsFavs.ToolTipController = this.toolTipController;
 			this.gridControlWidgetsFavs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -2286,7 +2354,7 @@
 			this.xtraTabPageBanner.Controls.Add(this.groupBoxBanners);
 			this.xtraTabPageBanner.Controls.Add(this.checkBoxEnableBanner);
 			this.xtraTabPageBanner.Name = "xtraTabPageBanner";
-			this.xtraTabPageBanner.Size = new System.Drawing.Size(637, 520);
+			this.xtraTabPageBanner.Size = new System.Drawing.Size(637, 529);
 			this.xtraTabPageBanner.Text = "Banner";
 			// 
 			// groupBoxBanners
@@ -2310,7 +2378,7 @@
 			this.groupBoxBanners.Enabled = false;
 			this.groupBoxBanners.Location = new System.Drawing.Point(11, 37);
 			this.groupBoxBanners.Name = "groupBoxBanners";
-			this.groupBoxBanners.Size = new System.Drawing.Size(615, 468);
+			this.groupBoxBanners.Size = new System.Drawing.Size(615, 485);
 			this.groupBoxBanners.TabIndex = 5;
 			this.groupBoxBanners.TabStop = false;
 			// 
@@ -2332,7 +2400,7 @@
 			this.xtraTabControlBanners.Location = new System.Drawing.Point(9, 90);
 			this.xtraTabControlBanners.Name = "xtraTabControlBanners";
 			this.xtraTabControlBanners.SelectedTabPage = this.xtraTabPageBannersGallery;
-			this.xtraTabControlBanners.Size = new System.Drawing.Size(600, 204);
+			this.xtraTabControlBanners.Size = new System.Drawing.Size(600, 221);
 			this.xtraTabControlBanners.TabIndex = 36;
 			this.xtraTabControlBanners.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageBannersGallery,
@@ -2344,7 +2412,7 @@
 			this.xtraTabPageBannersGallery.Controls.Add(this.gridControlBannersGallery);
 			this.xtraTabPageBannersGallery.Controls.Add(this.laBannerHint);
 			this.xtraTabPageBannersGallery.Name = "xtraTabPageBannersGallery";
-			this.xtraTabPageBannersGallery.Size = new System.Drawing.Size(598, 178);
+			this.xtraTabPageBannersGallery.Size = new System.Drawing.Size(598, 195);
 			this.xtraTabPageBannersGallery.Text = "Gallery";
 			// 
 			// gridControlBannersGallery
@@ -2355,7 +2423,7 @@
 			this.gridControlBannersGallery.Location = new System.Drawing.Point(0, 0);
 			this.gridControlBannersGallery.MainView = this.layoutViewBannersGallery;
 			this.gridControlBannersGallery.Name = "gridControlBannersGallery";
-			this.gridControlBannersGallery.Size = new System.Drawing.Size(598, 140);
+			this.gridControlBannersGallery.Size = new System.Drawing.Size(598, 157);
 			this.gridControlBannersGallery.TabIndex = 34;
 			this.gridControlBannersGallery.ToolTipController = this.toolTipController;
 			this.gridControlBannersGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -2455,7 +2523,7 @@
 			this.laBannerHint.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.laBannerHint.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laBannerHint.ForeColor = System.Drawing.Color.Red;
-			this.laBannerHint.Location = new System.Drawing.Point(0, 140);
+			this.laBannerHint.Location = new System.Drawing.Point(0, 157);
 			this.laBannerHint.Name = "laBannerHint";
 			this.laBannerHint.Size = new System.Drawing.Size(598, 38);
 			this.laBannerHint.TabIndex = 35;
@@ -2466,7 +2534,7 @@
 			// 
 			this.xtraTabPageBannersFavs.Controls.Add(this.gridControlBannersFavs);
 			this.xtraTabPageBannersFavs.Name = "xtraTabPageBannersFavs";
-			this.xtraTabPageBannersFavs.Size = new System.Drawing.Size(598, 178);
+			this.xtraTabPageBannersFavs.Size = new System.Drawing.Size(598, 195);
 			this.xtraTabPageBannersFavs.Text = "My Favorites";
 			// 
 			// gridControlBannersFavs
@@ -2476,7 +2544,7 @@
 			this.gridControlBannersFavs.Location = new System.Drawing.Point(0, 0);
 			this.gridControlBannersFavs.MainView = this.layoutViewBannersFavs;
 			this.gridControlBannersFavs.Name = "gridControlBannersFavs";
-			this.gridControlBannersFavs.Size = new System.Drawing.Size(598, 178);
+			this.gridControlBannersFavs.Size = new System.Drawing.Size(598, 195);
 			this.gridControlBannersFavs.TabIndex = 35;
 			this.gridControlBannersFavs.ToolTipController = this.toolTipController;
 			this.gridControlBannersFavs.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -2599,7 +2667,7 @@
 			this.colorEditBannerTextColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.colorEditBannerTextColor.EditValue = System.Drawing.Color.Empty;
 			this.colorEditBannerTextColor.Enabled = false;
-			this.colorEditBannerTextColor.Location = new System.Drawing.Point(504, 432);
+			this.colorEditBannerTextColor.Location = new System.Drawing.Point(504, 449);
 			this.colorEditBannerTextColor.Name = "colorEditBannerTextColor";
 			this.colorEditBannerTextColor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -2614,7 +2682,7 @@
 			this.buttonEditBannerTextFont.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonEditBannerTextFont.Enabled = false;
-			this.buttonEditBannerTextFont.Location = new System.Drawing.Point(10, 432);
+			this.buttonEditBannerTextFont.Location = new System.Drawing.Point(10, 449);
 			this.buttonEditBannerTextFont.Name = "buttonEditBannerTextFont";
 			this.buttonEditBannerTextFont.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2631,7 +2699,7 @@
 			this.memoEditBannerText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditBannerText.Enabled = false;
-			this.memoEditBannerText.Location = new System.Drawing.Point(9, 377);
+			this.memoEditBannerText.Location = new System.Drawing.Point(9, 394);
 			this.memoEditBannerText.Name = "memoEditBannerText";
 			this.memoEditBannerText.Size = new System.Drawing.Size(600, 49);
 			this.memoEditBannerText.StyleController = this.styleController;
@@ -2642,7 +2710,7 @@
 			this.checkBoxBannerShowText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkBoxBannerShowText.AutoSize = true;
 			this.checkBoxBannerShowText.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold);
-			this.checkBoxBannerShowText.Location = new System.Drawing.Point(9, 351);
+			this.checkBoxBannerShowText.Location = new System.Drawing.Point(9, 368);
 			this.checkBoxBannerShowText.Name = "checkBoxBannerShowText";
 			this.checkBoxBannerShowText.Size = new System.Drawing.Size(134, 20);
 			this.checkBoxBannerShowText.TabIndex = 9;
@@ -2653,7 +2721,7 @@
 			// rbBannerAligmentRight
 			// 
 			this.rbBannerAligmentRight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.rbBannerAligmentRight.Location = new System.Drawing.Point(206, 316);
+			this.rbBannerAligmentRight.Location = new System.Drawing.Point(206, 333);
 			this.rbBannerAligmentRight.Name = "rbBannerAligmentRight";
 			this.rbBannerAligmentRight.Size = new System.Drawing.Size(86, 20);
 			this.rbBannerAligmentRight.TabIndex = 8;
@@ -2664,7 +2732,7 @@
 			// rbBannerAligmentCenter
 			// 
 			this.rbBannerAligmentCenter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.rbBannerAligmentCenter.Location = new System.Drawing.Point(107, 316);
+			this.rbBannerAligmentCenter.Location = new System.Drawing.Point(107, 333);
 			this.rbBannerAligmentCenter.Name = "rbBannerAligmentCenter";
 			this.rbBannerAligmentCenter.Size = new System.Drawing.Size(94, 20);
 			this.rbBannerAligmentCenter.TabIndex = 7;
@@ -2675,7 +2743,7 @@
 			// rbBannerAligmentLeft
 			// 
 			this.rbBannerAligmentLeft.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.rbBannerAligmentLeft.Location = new System.Drawing.Point(9, 316);
+			this.rbBannerAligmentLeft.Location = new System.Drawing.Point(9, 333);
 			this.rbBannerAligmentLeft.Name = "rbBannerAligmentLeft";
 			this.rbBannerAligmentLeft.Size = new System.Drawing.Size(77, 20);
 			this.rbBannerAligmentLeft.TabIndex = 6;
@@ -2688,7 +2756,7 @@
 			this.laBannerAligment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.laBannerAligment.AutoSize = true;
 			this.laBannerAligment.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laBannerAligment.Location = new System.Drawing.Point(6, 297);
+			this.laBannerAligment.Location = new System.Drawing.Point(6, 314);
 			this.laBannerAligment.Name = "laBannerAligment";
 			this.laBannerAligment.Size = new System.Drawing.Size(127, 16);
 			this.laBannerAligment.TabIndex = 5;
@@ -2732,7 +2800,7 @@
 			this.buttonXOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXOK.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-			this.buttonXOK.Location = new System.Drawing.Point(396, 550);
+			this.buttonXOK.Location = new System.Drawing.Point(396, 559);
 			this.buttonXOK.Name = "buttonXOK";
 			this.buttonXOK.Size = new System.Drawing.Size(111, 34);
 			this.buttonXOK.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2747,7 +2815,7 @@
 			this.buttonXCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonXCancel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.buttonXCancel.Location = new System.Drawing.Point(527, 550);
+			this.buttonXCancel.Location = new System.Drawing.Point(527, 559);
 			this.buttonXCancel.Name = "buttonXCancel";
 			this.buttonXCancel.Size = new System.Drawing.Size(111, 34);
 			this.buttonXCancel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -2759,7 +2827,7 @@
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(639, 587);
+			this.ClientSize = new System.Drawing.Size(639, 596);
 			this.Controls.Add(this.xtraTabControl);
 			this.Controls.Add(this.buttonXOK);
 			this.Controls.Add(this.buttonXCancel);
@@ -2779,6 +2847,8 @@
 			this.xtraTabControl.ResumeLayout(false);
 			this.xtraTabPageNotes.ResumeLayout(false);
 			this.xtraTabPageNotes.PerformLayout();
+			this.pnAdminTools.ResumeLayout(false);
+			this.pnAdminTools.PerformLayout();
 			this.pnKeynotePreview.ResumeLayout(false);
 			this.pnKeynotePreview.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbKeynotePreview)).EndInit();
@@ -3062,5 +3132,10 @@
 		private System.Windows.Forms.PictureBox pbKeynotePreview;
 		private System.Windows.Forms.Label laKeynotePreview;
 		public System.Windows.Forms.CheckBox ckSecurityShareLink;
+		public DevComponents.DotNetBar.ButtonX buttonXRefreshPreview;
+		public DevComponents.DotNetBar.ButtonX buttonXOpenWV;
+		public DevComponents.DotNetBar.ButtonX buttonXOpenQV;
+		public System.Windows.Forms.Label laAdminTools;
+		public System.Windows.Forms.Panel pnAdminTools;
     }
 }

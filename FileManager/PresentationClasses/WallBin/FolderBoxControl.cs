@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -804,6 +805,52 @@ namespace FileManager.PresentationClasses.WallBin
 				_formLinkProperties.pnKeynotePreview.Visible = true;
 			else
 				_formLinkProperties.pnKeynotePreview.Visible = false;
+
+			if ((file.PreviewContainer != null && Directory.Exists(file.PreviewContainer.ContainerPath)) || (file.UniversalPreviewContainer != null && Directory.Exists(file.UniversalPreviewContainer.ContainerPath)))
+			{
+				_formLinkProperties.pnAdminTools.Visible = true;
+				_formLinkProperties.RefreshPreview = () =>
+												 {
+													 if (file.PreviewContainer != null)
+														 file.PreviewContainer.ClearContent();
+													 if (file.UniversalPreviewContainer != null)
+														 file.UniversalPreviewContainer.ClearContent();
+													 return null;
+												 };
+				if (file.PreviewContainer != null && Directory.Exists(file.PreviewContainer.ContainerPath))
+				{
+					_formLinkProperties.buttonXOpenQV.Enabled = true;
+					_formLinkProperties.OpenQV = () =>
+													 {
+														 try
+														 {
+															 Process.Start(file.PreviewContainer.ContainerPath);
+														 }
+														 catch { }
+														 return null;
+													 };
+				}
+				else
+					_formLinkProperties.buttonXOpenQV.Enabled = false;
+				_formLinkProperties.buttonXOpenWV.Enabled = file.UniversalPreviewContainer != null;
+				if (file.UniversalPreviewContainer != null && Directory.Exists(file.UniversalPreviewContainer.ContainerPath))
+				{
+					_formLinkProperties.buttonXOpenWV.Enabled = true;
+					_formLinkProperties.OpenWV = () =>
+													 {
+														 try
+														 {
+															 Process.Start(file.UniversalPreviewContainer.ContainerPath);
+														 }
+														 catch { }
+														 return null;
+													 };
+				}
+				else
+					_formLinkProperties.buttonXOpenWV.Enabled = false;
+			}
+			else
+				_formLinkProperties.pnAdminTools.Visible = false;
 
 			_formLinkProperties.StartPosition = FormStartPosition.CenterScreen;
 			if (_formLinkProperties.ShowDialog() != DialogResult.OK) return;

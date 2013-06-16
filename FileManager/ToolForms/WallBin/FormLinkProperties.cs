@@ -252,7 +252,9 @@ namespace FileManager.ToolForms.WallBin
 		public Image Widget { get; set; }
 		public FileCard FileCard { get; set; }
 		public List<StringDataSourceWrapper> FileCardImportantInfo { get; private set; }
-
+		public Func<object> OpenQV { get; set; }
+		public Func<object> OpenWV { get; set; }
+		public Func<object> RefreshPreview { get; set; }
 
 		public string CaptionName
 		{
@@ -1260,6 +1262,27 @@ namespace FileManager.ToolForms.WallBin
 				layoutViewWidgetsFavs.FocusedRowChanged -= layoutViewWidgetsFavs_FocusedRowChanged;
 				gridControlWidgetsFavs.DataSource = new BindingList<Widget>(ListManager.Instance.WidgetsFavs);
 				layoutViewWidgetsFavs.FocusedRowChanged += layoutViewWidgetsFavs_FocusedRowChanged;
+			}
+		}
+		#endregion
+
+		#region Admin Tools
+		private void buttonXOpenQV_Click(object sender, EventArgs e)
+		{
+			OpenQV();
+		}
+
+		private void buttonXOpenWV_Click(object sender, EventArgs e)
+		{
+			OpenWV();
+		}
+
+		private void buttonXRefreshPreview_Click(object sender, EventArgs e)
+		{
+			if (AppManager.Instance.ShowWarningQuestion("Are you sure want to delete preview files for the link?") == DialogResult.Yes)
+			{
+				RefreshPreview();
+				AppManager.Instance.ShowInfo("Preview files for the link was deleted and will re-create during next Sync.");
 			}
 		}
 		#endregion
