@@ -90,9 +90,11 @@ namespace SalesDepot.ConfigurationClasses
 		public EmailButtonsDisplayOptions EmailButtons { get; set; }
 
 		public bool MultitabView { get; set; }
+		public bool HomeView { get; set; }
 		public bool ClassicView { get; set; }
 		public bool ListView { get; set; }
 		public bool AccordionView { get; set; }
+		public bool SearchView { get; set; }
 		public bool SolutionTitleView { get; set; }
 		public bool SolutionDateView { get; set; }
 		public bool SolutionTagsView { get; set; }
@@ -113,11 +115,6 @@ namespace SalesDepot.ConfigurationClasses
 		public List<string> HiddenObjects { get; private set; }
 
 		public QBuilderSettings QBuilderSettings { get; private set; }
-
-		public bool SolutionView
-		{
-			get { return !(ClassicView | ListView | AccordionView); }
-		}
 
 		public static SettingsManager Instance
 		{
@@ -233,6 +230,9 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EmailBinSendAsPdf = tempBool;
+
+				HomeView = ClassicView || ListView || AccordionView;
+				SearchView = SolutionTagsView || SolutionDateView || SolutionTitleView;
 			}
 			if (LastViewed)
 				ClassicView = true;
@@ -327,9 +327,11 @@ namespace SalesDepot.ConfigurationClasses
 			LinkLaunchOptions tempLaunchOptions;
 			EmailButtonsDisplayOptions tempEmailButtons;
 
+			HomeView = true;
 			ClassicView = true;
 			ListView = false;
 			AccordionView = false;
+			SearchView = false;
 			SolutionDateView = false;
 			SolutionTagsView = false;
 			SolutionTitleView = false;
@@ -401,6 +403,14 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EmailBinSendAsZip = tempBool;
+				node = document.SelectSingleNode(@"/LocalSettings/HomeView");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						HomeView = (LastViewed && tempBool) || (!LastViewed && HomeView);
+				node = document.SelectSingleNode(@"/LocalSettings/SearchView");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						SearchView = (LastViewed && tempBool) || (!LastViewed && SearchView);
 				node = document.SelectSingleNode(@"/LocalSettings/CalendarView");
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
@@ -544,6 +554,8 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<FolderLaunchOptions>" + FolderLaunchOptions.ToString() + @"</FolderLaunchOptions>");
 			xml.AppendLine(@"<EmailButtons>" + EmailButtons.ToString() + @"</EmailButtons>");
 			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
+			xml.AppendLine(@"<HomeView>" + HomeView.ToString() + @"</HomeView>");
+			xml.AppendLine(@"<SearchView>" + SearchView.ToString() + @"</SearchView>");
 			xml.AppendLine(@"<CalendarView>" + CalendarView.ToString() + @"</CalendarView>");
 			if (LastViewed || UseRemoteConnection)
 			{

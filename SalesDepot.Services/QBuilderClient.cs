@@ -176,7 +176,55 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.addLinkToCart(sessionKey, _login, linkId);
+						client.addLinkToCart(sessionKey, _login, linkId, null);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public bool IsFolderAvailableOnSite(string folderId, out string message)
+		{
+			message = string.Empty;
+			var client = GetQBuilderClient();
+			var result = false;
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						result = client.isFolderAvailable(sessionKey, folderId);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return result;
+		}
+
+		public void AddFolderToCart(string folderId, out string message)
+		{
+			message = string.Empty;
+			var client = GetQBuilderClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.addLinkToCart(sessionKey, _login, null, folderId);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

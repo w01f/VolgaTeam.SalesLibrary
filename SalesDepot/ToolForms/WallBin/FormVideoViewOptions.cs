@@ -24,6 +24,8 @@ namespace SalesDepot.ToolForms.WallBin
 				buttonXAddToPresentation.Font = new Font(buttonXAddToPresentation.Font.FontFamily, buttonXAddToPresentation.Font.Size - 3, buttonXAddToPresentation.Font.Style);
 				buttonXClose.Font = new Font(buttonXClose.Font.FontFamily, buttonXClose.Font.Size - 3, buttonXClose.Font.Style);
 				buttonXReview.Font = new Font(buttonXReview.Font.FontFamily, buttonXReview.Font.Size - 3, buttonXReview.Font.Style);
+				buttonXQuickSiteAdd.Font = new Font(buttonXQuickSiteAdd.Font.FontFamily, buttonXQuickSiteAdd.Font.Size - 3, buttonXQuickSiteAdd.Font.Style);
+				buttonXQuickSiteEmail.Font = new Font(buttonXQuickSiteEmail.Font.FontFamily, buttonXQuickSiteEmail.Font.Size - 3, buttonXQuickSiteEmail.Font.Style);
 			}
 		}
 

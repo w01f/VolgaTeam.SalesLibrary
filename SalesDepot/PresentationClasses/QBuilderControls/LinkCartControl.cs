@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.BandedGrid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
@@ -89,6 +90,21 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				form.Close();
 			}
 			gridControl.DataSource = _links;
+			Enabled = true;
+		}
+
+		private void simpleButtonAddAllLinks_Click(object sender, System.EventArgs e)
+		{
+			Enabled = false;
+			if (!QBuilder.Instance.Connected) return;
+			using (var form = new FormProgress())
+			{
+				form.laProgress.Text = "Adding Links to quickSITE...";
+				form.TopMost = true;
+				form.Show();
+				QBuilder.Instance.AddLinksToPage(_links.Select(l => l.id).ToArray());
+				form.Close();
+			}
 			Enabled = true;
 		}
 

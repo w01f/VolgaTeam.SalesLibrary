@@ -20,7 +20,8 @@ namespace SalesDepot.BusinessClasses
 
 		private readonly FormPowerPointQuickView _formPowerPointQuickView;
 		private readonly FormPowerPointQuickViewOld _formPowerPointQuickViewOld;
-		private readonly FormAddLink _formQuickSiteAdd;
+		private readonly FormAddLink _formQuickSiteAddLink;
+		private readonly FormAddFolder _formQuickSiteAddFolder;
 		private readonly FormEmailWebLink _formQuickSiteEmail;
 
 		public List<int> PreviousPreviewHandles { get; private set; }
@@ -29,7 +30,8 @@ namespace SalesDepot.BusinessClasses
 		{
 			_formPowerPointQuickView = new FormPowerPointQuickView();
 			_formPowerPointQuickViewOld = new FormPowerPointQuickViewOld();
-			_formQuickSiteAdd = new FormAddLink();
+			_formQuickSiteAddLink = new FormAddLink();
+			_formQuickSiteAddFolder = new FormAddFolder();
 			_formQuickSiteEmail = new FormEmailWebLink();
 			PreviousPreviewHandles = new List<int>();
 		}
@@ -44,7 +46,20 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
-		public void OpenLink(LibraryLink link)
+		public void OpenLibraryFolder(LibraryFolder folder)
+		{
+			using (var formViewOptions = new FormFolderSpecialOptions())
+			{
+				formViewOptions.Text = string.Format(formViewOptions.Text, folder.Name);
+				if (formViewOptions.ShowDialog() == DialogResult.OK)
+				{
+					if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+						AddFolderToQuickSite(folder);
+				}
+			}
+		}
+
+		public void OpenLink(LibraryLink link, bool specialOptions = false)
 		{
 			FileInfo sourceFile = null;
 			if (link.Type != FileTypes.LineBreak && link.Type != FileTypes.Folder && link.Type != FileTypes.Url && link.Type != FileTypes.Network)
@@ -59,287 +74,307 @@ namespace SalesDepot.BusinessClasses
 			}
 
 			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
-
-			switch (link.Type)
+			if (specialOptions)
 			{
-				case FileTypes.BuggyPresentation:
-				case FileTypes.FriendlyPresentation:
-				case FileTypes.Presentation:
-					switch (SettingsManager.Instance.PowerPointLaunchOptions)
+				using (var formViewOptions = new FormLinkSpecialOptions())
+				{
+					formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+					if (formViewOptions.ShowDialog() == DialogResult.OK)
 					{
-						case LinkLaunchOptions.Menu:
-							using (var formViewOptions = new FormViewOptions())
-							{
-								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
-								if (formViewOptions.ShowDialog() == DialogResult.OK)
+						if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+						{
+							EmailLinkToQuickSite(link);
+						}
+						else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+						{
+							AddLinkToQuickSite(link);
+						}
+					}
+				}
+			}
+			else
+			{
+				switch (link.Type)
+				{
+					case FileTypes.BuggyPresentation:
+					case FileTypes.FriendlyPresentation:
+					case FileTypes.Presentation:
+						switch (SettingsManager.Instance.PowerPointLaunchOptions)
+						{
+							case LinkLaunchOptions.Menu:
+								using (var formViewOptions = new FormViewOptions())
 								{
-									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
+									formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+									if (formViewOptions.ShowDialog() == DialogResult.OK)
 									{
-										OpenCopyOfFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
-									{
-										SaveFile("Save copy of the file as", link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
-									{
-										PrintFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
-									{
-										PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.LocalPath));
-										using (var form = new FormEmailPresentation())
+										if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 										{
-											form.SelectedFile = link;
-											form.ActiveSlide = 1;
-											form.rbActiveSlide.Visible = false;
-											form.ShowDialog();
+											OpenCopyOfFile(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
+										{
+											SaveFile("Save copy of the file as", link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
+										{
+											PrintFile(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
+										{
+											PowerPointHelper.Instance.OpenSlideSourcePresentation(new FileInfo(link.LocalPath));
+											using (var form = new FormEmailPresentation())
+											{
+												form.SelectedFile = link;
+												form.ActiveSlide = 1;
+												form.rbActiveSlide.Visible = false;
+												form.ShowDialog();
+											}
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+										{
+											EmailLinkToQuickSite(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+										{
+											AddLinkToQuickSite(link);
 										}
 									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
-									{
-										EmailLinkToQuickSite(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-									{
-										AddLinkToQuickSite(link);
-									}
 								}
-							}
-							break;
-						case LinkLaunchOptions.Launch:
-							OpenCopyOfFile(link);
-							return;
-						case LinkLaunchOptions.Viewer:
-							if (link.PreviewContainer != null && link.PreviewContainer.CheckPreviewImages() && !SettingsManager.Instance.OldStyleQuickView)
-							{
-								ViewPresentation(link);
-								link.PreviewContainer.ReleasePreviewImages();
-							}
-							else
-								ViewPresentationOld(link);
-							break;
-					}
-					break;
-				case FileTypes.PDF:
-					switch (SettingsManager.Instance.PDFLaunchOptions)
-					{
-						case LinkLaunchOptions.Viewer:
-							PreviewFile(link);
-							return;
-						case LinkLaunchOptions.Launch:
-							OpenCopyOfFile(link);
-							return;
-						case LinkLaunchOptions.Menu:
-							using (var formViewOptions = new FormViewOptions())
-							{
-								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
-								if (formViewOptions.ShowDialog() == DialogResult.OK)
+								break;
+							case LinkLaunchOptions.Launch:
+								OpenCopyOfFile(link);
+								return;
+							case LinkLaunchOptions.Viewer:
+								if (link.PreviewContainer != null && link.PreviewContainer.CheckPreviewImages() && !SettingsManager.Instance.OldStyleQuickView)
 								{
-									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
+									ViewPresentation(link);
+									link.PreviewContainer.ReleasePreviewImages();
+								}
+								else
+									ViewPresentationOld(link);
+								break;
+						}
+						break;
+					case FileTypes.PDF:
+						switch (SettingsManager.Instance.PDFLaunchOptions)
+						{
+							case LinkLaunchOptions.Viewer:
+								PreviewFile(link);
+								return;
+							case LinkLaunchOptions.Launch:
+								OpenCopyOfFile(link);
+								return;
+							case LinkLaunchOptions.Menu:
+								using (var formViewOptions = new FormViewOptions())
+								{
+									formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+									if (formViewOptions.ShowDialog() == DialogResult.OK)
 									{
-										OpenCopyOfFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
-									{
-										SaveFile("Save copy of the file as", link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
-									{
-										PrintFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
-										using (var form = new FormEmailLink())
+										if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
 										{
-											form.link = link;
-											form.ShowDialog();
+											OpenCopyOfFile(link);
 										}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
-									{
-										EmailLinkToQuickSite(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-									{
-										AddLinkToQuickSite(link);
-									}
-								}
-							}
-							break;
-					}
-					break;
-				case FileTypes.Word:
-					switch (SettingsManager.Instance.WordLaunchOptions)
-					{
-						case LinkLaunchOptions.Viewer:
-							PreviewFile(link);
-							return;
-						case LinkLaunchOptions.Launch:
-							OpenCopyOfFile(link);
-							return;
-						case LinkLaunchOptions.Menu:
-							using (var formViewOptions = new FormViewOptions())
-							{
-								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
-								if (formViewOptions.ShowDialog() == DialogResult.OK)
-								{
-									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
-									{
-										OpenCopyOfFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
-									{
-										SaveFile("Save copy of the file as", link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
-									{
-										PrintFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
-										using (var form = new FormEmailLink())
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
 										{
-											form.link = link;
-											form.ShowDialog();
+											SaveFile("Save copy of the file as", link);
 										}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
-									{
-										EmailLinkToQuickSite(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-									{
-										AddLinkToQuickSite(link);
-									}
-								}
-							}
-							break;
-					}
-					break;
-				case FileTypes.Excel:
-					switch (SettingsManager.Instance.ExcelLaunchOptions)
-					{
-						case LinkLaunchOptions.Viewer:
-							PreviewFile(link);
-							return;
-						case LinkLaunchOptions.Launch:
-							OpenCopyOfFile(link);
-							return;
-						case LinkLaunchOptions.Menu:
-							using (var formViewOptions = new FormViewOptions())
-							{
-								formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
-								if (formViewOptions.ShowDialog() == DialogResult.OK)
-								{
-									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
-									{
-										OpenCopyOfFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
-									{
-										SaveFile("Save copy of the file as", link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
-									{
-										PrintFile(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
-										using (var form = new FormEmailLink())
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
 										{
-											form.link = link;
-											form.ShowDialog();
+											PrintFile(link);
 										}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
-									{
-										EmailLinkToQuickSite(link);
-									}
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-									{
-										AddLinkToQuickSite(link);
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
+											using (var form = new FormEmailLink())
+											{
+												form.link = link;
+												form.ShowDialog();
+											}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+										{
+											EmailLinkToQuickSite(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+										{
+											AddLinkToQuickSite(link);
+										}
 									}
 								}
-							}
-							break;
-					}
-					break;
-				case FileTypes.MediaPlayerVideo:
-					switch (SettingsManager.Instance.VideoLaunchOptions)
-					{
-						case LinkLaunchOptions.Viewer:
-							PreviewFile(link);
-							return;
-						case LinkLaunchOptions.Launch:
-							OpenVideo(link);
-							break;
-						case LinkLaunchOptions.Menu:
-							using (var formVideoOptions = new FormVideoViewOptions())
-							{
-								formVideoOptions.Text = string.Format(formVideoOptions.Text, sourceFile.Name);
-								if (formVideoOptions.ShowDialog() == DialogResult.OK)
+								break;
+						}
+						break;
+					case FileTypes.Word:
+						switch (SettingsManager.Instance.WordLaunchOptions)
+						{
+							case LinkLaunchOptions.Viewer:
+								PreviewFile(link);
+								return;
+							case LinkLaunchOptions.Launch:
+								OpenCopyOfFile(link);
+								return;
+							case LinkLaunchOptions.Menu:
+								using (var formViewOptions = new FormViewOptions())
 								{
-									if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.Add)
+									formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+									if (formViewOptions.ShowDialog() == DialogResult.OK)
 									{
-										AddVideoIntoPresentation(link);
-									}
-									else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.Open)
-									{
-										OpenVideo(link);
-									}
-									else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.QuickSiteEmail)
-									{
-										EmailLinkToQuickSite(link);
-									}
-									else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.QuickSiteAdd)
-									{
-										AddLinkToQuickSite(link);
+										if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
+										{
+											OpenCopyOfFile(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
+										{
+											SaveFile("Save copy of the file as", link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
+										{
+											PrintFile(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
+											using (var form = new FormEmailLink())
+											{
+												form.link = link;
+												form.ShowDialog();
+											}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+										{
+											EmailLinkToQuickSite(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+										{
+											AddLinkToQuickSite(link);
+										}
 									}
 								}
-							}
-							break;
-					}
-					break;
-				case FileTypes.QuickTimeVideo:
-					OpenVideo(link);
-					break;
-				case FileTypes.Other:
-					OpenCopyOfFile(link);
-					break;
-				case FileTypes.Folder:
-					switch (SettingsManager.Instance.FolderLaunchOptions)
-					{
-						case LinkLaunchOptions.Viewer:
-							PreviewFile(link);
-							return;
-						case LinkLaunchOptions.Launch:
-							OpenFolder(link);
-							break;
-						case LinkLaunchOptions.Menu:
-							using (var formViewOptions = new FormFolderViewOptions())
-							{
-								formViewOptions.Text = string.Format(formViewOptions.Text, link.Name);
-								if (formViewOptions.ShowDialog() == DialogResult.OK)
+								break;
+						}
+						break;
+					case FileTypes.Excel:
+						switch (SettingsManager.Instance.ExcelLaunchOptions)
+						{
+							case LinkLaunchOptions.Viewer:
+								PreviewFile(link);
+								return;
+							case LinkLaunchOptions.Launch:
+								OpenCopyOfFile(link);
+								return;
+							case LinkLaunchOptions.Menu:
+								using (var formViewOptions = new FormViewOptions())
 								{
-									if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
-										OpenFolder(link);
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
-										EmailLinkToQuickSite(link);
-									else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-										AddLinkToQuickSite(link);
+									formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+									if (formViewOptions.ShowDialog() == DialogResult.OK)
+									{
+										if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
+										{
+											OpenCopyOfFile(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Save)
+										{
+											SaveFile("Save copy of the file as", link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Print)
+										{
+											PrintFile(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Email)
+											using (var form = new FormEmailLink())
+											{
+												form.link = link;
+												form.ShowDialog();
+											}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+										{
+											EmailLinkToQuickSite(link);
+										}
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+										{
+											AddLinkToQuickSite(link);
+										}
+									}
 								}
-							}
-							break;
-					}
-					break;
-				case FileTypes.Url:
-					StartProcess(link);
-					break;
-				case FileTypes.Network:
-					StartProcess(link);
-					break;
-				case FileTypes.OvernightsLink:
-					StartProcess(link);
-					break;
-				case FileTypes.LineBreak:
-					if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
-						AppManager.Instance.ShowInfo(link.LineBreakProperties.Note);
-					break;
+								break;
+						}
+						break;
+					case FileTypes.MediaPlayerVideo:
+						switch (SettingsManager.Instance.VideoLaunchOptions)
+						{
+							case LinkLaunchOptions.Viewer:
+								PreviewFile(link);
+								return;
+							case LinkLaunchOptions.Launch:
+								OpenVideo(link);
+								break;
+							case LinkLaunchOptions.Menu:
+								using (var formVideoOptions = new FormVideoViewOptions())
+								{
+									formVideoOptions.Text = string.Format(formVideoOptions.Text, sourceFile.Name);
+									if (formVideoOptions.ShowDialog() == DialogResult.OK)
+									{
+										if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.Add)
+										{
+											AddVideoIntoPresentation(link);
+										}
+										else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.Open)
+										{
+											OpenVideo(link);
+										}
+										else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.QuickSiteEmail)
+										{
+											EmailLinkToQuickSite(link);
+										}
+										else if (formVideoOptions.SelectedOption == FormVideoViewOptions.VideoViewOptions.QuickSiteAdd)
+										{
+											AddLinkToQuickSite(link);
+										}
+									}
+								}
+								break;
+						}
+						break;
+					case FileTypes.QuickTimeVideo:
+						OpenVideo(link);
+						break;
+					case FileTypes.Other:
+						OpenCopyOfFile(link);
+						break;
+					case FileTypes.Folder:
+						switch (SettingsManager.Instance.FolderLaunchOptions)
+						{
+							case LinkLaunchOptions.Viewer:
+								PreviewFile(link);
+								return;
+							case LinkLaunchOptions.Launch:
+								OpenFolder(link);
+								break;
+							case LinkLaunchOptions.Menu:
+								using (var formViewOptions = new FormFolderViewOptions())
+								{
+									formViewOptions.Text = string.Format(formViewOptions.Text, link.Name);
+									if (formViewOptions.ShowDialog() == DialogResult.OK)
+									{
+										if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.Open)
+											OpenFolder(link);
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+											EmailLinkToQuickSite(link);
+										else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+											AddLinkToQuickSite(link);
+									}
+								}
+								break;
+						}
+						break;
+					case FileTypes.Url:
+						StartProcess(link);
+						break;
+					case FileTypes.Network:
+						StartProcess(link);
+						break;
+					case FileTypes.OvernightsLink:
+						StartProcess(link);
+						break;
+					case FileTypes.LineBreak:
+						if (!string.IsNullOrEmpty(link.LineBreakProperties.Note))
+							AppManager.Instance.ShowInfo(link.LineBreakProperties.Note);
+						break;
+				}
 			}
 		}
 
@@ -737,10 +772,17 @@ namespace SalesDepot.BusinessClasses
 			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Add to quickSITE", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 			if (link.LinkAvailable)
 			{
-				_formQuickSiteAdd.Init(link);
-				if (_formQuickSiteAdd.ShowDialog() == DialogResult.OK)
+				_formQuickSiteAddLink.Init(link);
+				if (_formQuickSiteAddLink.ShowDialog() == DialogResult.OK)
 					AppManager.Instance.ShowInfo("Link successfully added to Site Link Cart");
 			}
+		}
+
+		public void AddFolderToQuickSite(LibraryFolder folder)
+		{
+			_formQuickSiteAddFolder.Init(folder);
+			if (_formQuickSiteAddFolder.ShowDialog() == DialogResult.OK)
+				AppManager.Instance.ShowInfo("Links successfully added to Site Link Cart");
 		}
 	}
 }

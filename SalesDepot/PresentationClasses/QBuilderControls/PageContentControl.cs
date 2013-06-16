@@ -17,7 +17,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			hyperLinkEditUrl.OpenLink += new DevExpress.XtraEditors.Controls.OpenLinkEventHandler(hyperLinkEditUrl_OpenLink);
+			hyperLinkEditUrl.OpenLink += hyperLinkEditUrl_OpenLink;
 		}
 
 		public void UpdateContent()

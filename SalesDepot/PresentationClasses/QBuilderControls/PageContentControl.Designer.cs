@@ -30,8 +30,8 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageContentControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
-			this.pnHeader = new System.Windows.Forms.Panel();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			this.pnPageHeader = new System.Windows.Forms.Panel();
 			this.hyperLinkEditUrl = new DevExpress.XtraEditors.HyperLinkEdit();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlUrlTitle = new DevExpress.XtraEditors.LabelControl();
@@ -50,19 +50,23 @@
 			this.gridBandActions = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.bandedGridColumnLinksActions = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemButtonEditLinksActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-			this.pnLinksHeader = new System.Windows.Forms.Panel();
 			this.labelControlLinksCount = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlLinksHeader = new DevExpress.XtraEditors.LabelControl();
 			this.xtraTabPageTitle = new DevExpress.XtraTab.XtraTabPage();
 			this.htmlEditorControlTitle = new SalesDepot.PresentationClasses.QBuilderControls.HtmlEditorControl();
+			this.pnTitle = new System.Windows.Forms.Panel();
+			this.checkEditTitleEnabled = new DevExpress.XtraEditors.CheckEdit();
 			this.xtraTabPageHeader = new DevExpress.XtraTab.XtraTabPage();
+			this.htmlEditorControlHeader = new SalesDepot.PresentationClasses.QBuilderControls.HtmlEditorControl();
+			this.pnHeaderHeader = new System.Windows.Forms.Panel();
+			this.checkEditHeaderEnabled = new DevExpress.XtraEditors.CheckEdit();
 			this.xtraTabPageFooter = new DevExpress.XtraTab.XtraTabPage();
+			this.htmlEditorControlFooter = new SalesDepot.PresentationClasses.QBuilderControls.HtmlEditorControl();
+			this.pnFooterHeader = new System.Windows.Forms.Panel();
+			this.checkEditFooterEnabled = new DevExpress.XtraEditors.CheckEdit();
 			this.xtraTabPageSecurity = new DevExpress.XtraTab.XtraTabPage();
 			this.pnSecurity = new System.Windows.Forms.Panel();
-			this.labelControlShowTicker = new DevExpress.XtraEditors.LabelControl();
 			this.checkEditShowTicker = new DevExpress.XtraEditors.CheckEdit();
-			this.labelControlRestricted = new DevExpress.XtraEditors.LabelControl();
-			this.labelControlShowLinkToMainSite = new DevExpress.XtraEditors.LabelControl();
 			this.checkEditShowLinkToMainSite = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditRestricted = new DevExpress.XtraEditors.CheckEdit();
 			this.dateEditExpirationDate = new DevExpress.XtraEditors.DateEdit();
@@ -74,15 +78,11 @@
 			this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
 			this.layoutViewFieldBannerGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
 			this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
-			this.pnTitle = new System.Windows.Forms.Panel();
-			this.checkEditTitleEnabled = new DevExpress.XtraEditors.CheckEdit();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.checkEditHeaderEnabled = new DevExpress.XtraEditors.CheckEdit();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.checkEditFooterEnabled = new DevExpress.XtraEditors.CheckEdit();
-			this.htmlEditorControlHeader = new SalesDepot.PresentationClasses.QBuilderControls.HtmlEditorControl();
-			this.htmlEditorControlFooter = new SalesDepot.PresentationClasses.QBuilderControls.HtmlEditorControl();
-			this.pnHeader.SuspendLayout();
+			this.checkEditDisableWidgets = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditDisablebanners = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditEnableEmailActivity = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditPinCode = new DevExpress.XtraEditors.CheckEdit();
+			this.pnPageHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditUrl.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditTitleValue.Properties)).BeginInit();
@@ -93,10 +93,15 @@
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewLinks)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditLinksType)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditLinksActions)).BeginInit();
-			this.pnLinksHeader.SuspendLayout();
 			this.xtraTabPageTitle.SuspendLayout();
+			this.pnTitle.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditTitleEnabled.Properties)).BeginInit();
 			this.xtraTabPageHeader.SuspendLayout();
+			this.pnHeaderHeader.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditHeaderEnabled.Properties)).BeginInit();
 			this.xtraTabPageFooter.SuspendLayout();
+			this.pnFooterHeader.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFooterEnabled.Properties)).BeginInit();
 			this.xtraTabPageSecurity.SuspendLayout();
 			this.pnSecurity.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowTicker.Properties)).BeginInit();
@@ -111,26 +116,24 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewFieldBannerGallery)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
-			this.pnTitle.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditTitleEnabled.Properties)).BeginInit();
-			this.panel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditHeaderEnabled.Properties)).BeginInit();
-			this.panel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditFooterEnabled.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableWidgets.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisablebanners.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableEmailActivity.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPinCode.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// pnHeader
+			// pnPageHeader
 			// 
-			this.pnHeader.Controls.Add(this.hyperLinkEditUrl);
-			this.pnHeader.Controls.Add(this.labelControlUrlTitle);
-			this.pnHeader.Controls.Add(this.labelControlCreateDate);
-			this.pnHeader.Controls.Add(this.textEditTitleValue);
-			this.pnHeader.Controls.Add(this.labelControlNameTitle);
-			this.pnHeader.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnHeader.Location = new System.Drawing.Point(0, 0);
-			this.pnHeader.Name = "pnHeader";
-			this.pnHeader.Size = new System.Drawing.Size(570, 67);
-			this.pnHeader.TabIndex = 0;
+			this.pnPageHeader.Controls.Add(this.hyperLinkEditUrl);
+			this.pnPageHeader.Controls.Add(this.labelControlUrlTitle);
+			this.pnPageHeader.Controls.Add(this.labelControlCreateDate);
+			this.pnPageHeader.Controls.Add(this.textEditTitleValue);
+			this.pnPageHeader.Controls.Add(this.labelControlNameTitle);
+			this.pnPageHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnPageHeader.Location = new System.Drawing.Point(0, 0);
+			this.pnPageHeader.Name = "pnPageHeader";
+			this.pnPageHeader.Size = new System.Drawing.Size(570, 67);
+			this.pnPageHeader.TabIndex = 0;
 			// 
 			// hyperLinkEditUrl
 			// 
@@ -231,7 +234,8 @@
 			// xtraTabPageLinks
 			// 
 			this.xtraTabPageLinks.Controls.Add(this.gridControlLinks);
-			this.xtraTabPageLinks.Controls.Add(this.pnLinksHeader);
+			this.xtraTabPageLinks.Controls.Add(this.labelControlLinksCount);
+			this.xtraTabPageLinks.Controls.Add(this.labelControlLinksHeader);
 			this.xtraTabPageLinks.Name = "xtraTabPageLinks";
 			this.xtraTabPageLinks.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageLinks.Text = "Links";
@@ -240,13 +244,13 @@
 			// 
 			this.gridControlLinks.AllowDrop = true;
 			this.gridControlLinks.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControlLinks.Location = new System.Drawing.Point(0, 47);
+			this.gridControlLinks.Location = new System.Drawing.Point(0, 53);
 			this.gridControlLinks.MainView = this.advBandedGridViewLinks;
 			this.gridControlLinks.Name = "gridControlLinks";
 			this.gridControlLinks.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditLinksActions,
             this.repositoryItemPictureEditLinksType});
-			this.gridControlLinks.Size = new System.Drawing.Size(568, 337);
+			this.gridControlLinks.Size = new System.Drawing.Size(568, 331);
 			this.gridControlLinks.TabIndex = 2;
 			this.gridControlLinks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridViewLinks});
@@ -364,36 +368,34 @@
 			// 
 			this.repositoryItemButtonEditLinksActions.AutoHeight = false;
 			this.repositoryItemButtonEditLinksActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.repositoryItemButtonEditLinksActions.Name = "repositoryItemButtonEditLinksActions";
 			this.repositoryItemButtonEditLinksActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditLinksActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditLinksActions_ButtonClick);
 			// 
-			// pnLinksHeader
-			// 
-			this.pnLinksHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.pnLinksHeader.Controls.Add(this.labelControlLinksCount);
-			this.pnLinksHeader.Controls.Add(this.labelControlLinksHeader);
-			this.pnLinksHeader.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnLinksHeader.Location = new System.Drawing.Point(0, 0);
-			this.pnLinksHeader.Name = "pnLinksHeader";
-			this.pnLinksHeader.Size = new System.Drawing.Size(568, 47);
-			this.pnLinksHeader.TabIndex = 3;
-			// 
 			// labelControlLinksCount
 			// 
-			this.labelControlLinksCount.Location = new System.Drawing.Point(3, 28);
+			this.labelControlLinksCount.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.labelControlLinksCount.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+			this.labelControlLinksCount.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlLinksCount.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlLinksCount.Location = new System.Drawing.Point(0, 24);
 			this.labelControlLinksCount.Name = "labelControlLinksCount";
-			this.labelControlLinksCount.Size = new System.Drawing.Size(0, 16);
+			this.labelControlLinksCount.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+			this.labelControlLinksCount.Size = new System.Drawing.Size(568, 29);
 			this.labelControlLinksCount.StyleController = this.styleController;
 			this.labelControlLinksCount.TabIndex = 5;
 			// 
 			// labelControlLinksHeader
 			// 
+			this.labelControlLinksHeader.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
 			this.labelControlLinksHeader.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.labelControlLinksHeader.Location = new System.Drawing.Point(3, 3);
+			this.labelControlLinksHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+			this.labelControlLinksHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlLinksHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlLinksHeader.Name = "labelControlLinksHeader";
-			this.labelControlLinksHeader.Size = new System.Drawing.Size(487, 19);
+			this.labelControlLinksHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+			this.labelControlLinksHeader.Size = new System.Drawing.Size(568, 24);
 			this.labelControlLinksHeader.StyleController = this.styleController;
 			this.labelControlLinksHeader.TabIndex = 2;
 			this.labelControlLinksHeader.Text = "DRAG your Links from the Cart & DROP them into the list below:";
@@ -417,36 +419,123 @@
 			this.htmlEditorControlTitle.Size = new System.Drawing.Size(568, 353);
 			this.htmlEditorControlTitle.TabIndex = 0;
 			// 
+			// pnTitle
+			// 
+			this.pnTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnTitle.Controls.Add(this.checkEditTitleEnabled);
+			this.pnTitle.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnTitle.Location = new System.Drawing.Point(0, 0);
+			this.pnTitle.Name = "pnTitle";
+			this.pnTitle.Size = new System.Drawing.Size(568, 31);
+			this.pnTitle.TabIndex = 1;
+			// 
+			// checkEditTitleEnabled
+			// 
+			this.checkEditTitleEnabled.Location = new System.Drawing.Point(0, 5);
+			this.checkEditTitleEnabled.Name = "checkEditTitleEnabled";
+			this.checkEditTitleEnabled.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditTitleEnabled.Properties.Appearance.Options.UseFont = true;
+			this.checkEditTitleEnabled.Properties.AutoWidth = true;
+			this.checkEditTitleEnabled.Properties.Caption = "This statement will be placed at the TOP of your quickSITE... ";
+			this.checkEditTitleEnabled.Size = new System.Drawing.Size(380, 21);
+			this.checkEditTitleEnabled.TabIndex = 3;
+			this.checkEditTitleEnabled.CheckedChanged += new System.EventHandler(this.checkEditTitleEnabled_CheckedChanged);
+			// 
 			// xtraTabPageHeader
 			// 
 			this.xtraTabPageHeader.Controls.Add(this.htmlEditorControlHeader);
-			this.xtraTabPageHeader.Controls.Add(this.panel1);
+			this.xtraTabPageHeader.Controls.Add(this.pnHeaderHeader);
 			this.xtraTabPageHeader.Name = "xtraTabPageHeader";
 			this.xtraTabPageHeader.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageHeader.Text = "Header";
 			// 
+			// htmlEditorControlHeader
+			// 
+			this.htmlEditorControlHeader.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.htmlEditorControlHeader.Enabled = false;
+			this.htmlEditorControlHeader.HtmlText = resources.GetString("htmlEditorControlHeader.HtmlText");
+			this.htmlEditorControlHeader.Location = new System.Drawing.Point(0, 31);
+			this.htmlEditorControlHeader.Name = "htmlEditorControlHeader";
+			this.htmlEditorControlHeader.Size = new System.Drawing.Size(568, 353);
+			this.htmlEditorControlHeader.TabIndex = 3;
+			// 
+			// pnHeaderHeader
+			// 
+			this.pnHeaderHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnHeaderHeader.Controls.Add(this.checkEditHeaderEnabled);
+			this.pnHeaderHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnHeaderHeader.Location = new System.Drawing.Point(0, 0);
+			this.pnHeaderHeader.Name = "pnHeaderHeader";
+			this.pnHeaderHeader.Size = new System.Drawing.Size(568, 31);
+			this.pnHeaderHeader.TabIndex = 2;
+			// 
+			// checkEditHeaderEnabled
+			// 
+			this.checkEditHeaderEnabled.Location = new System.Drawing.Point(0, 5);
+			this.checkEditHeaderEnabled.Name = "checkEditHeaderEnabled";
+			this.checkEditHeaderEnabled.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditHeaderEnabled.Properties.Appearance.Options.UseFont = true;
+			this.checkEditHeaderEnabled.Properties.AutoWidth = true;
+			this.checkEditHeaderEnabled.Properties.Caption = "The Header Text will be JUST ABOVE the links you are sharing… ";
+			this.checkEditHeaderEnabled.Size = new System.Drawing.Size(404, 21);
+			this.checkEditHeaderEnabled.TabIndex = 3;
+			this.checkEditHeaderEnabled.CheckedChanged += new System.EventHandler(this.checkEditHeaderEnabled_CheckedChanged);
+			// 
 			// xtraTabPageFooter
 			// 
 			this.xtraTabPageFooter.Controls.Add(this.htmlEditorControlFooter);
-			this.xtraTabPageFooter.Controls.Add(this.panel2);
+			this.xtraTabPageFooter.Controls.Add(this.pnFooterHeader);
 			this.xtraTabPageFooter.Name = "xtraTabPageFooter";
 			this.xtraTabPageFooter.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageFooter.Text = "Footer";
+			// 
+			// htmlEditorControlFooter
+			// 
+			this.htmlEditorControlFooter.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.htmlEditorControlFooter.Enabled = false;
+			this.htmlEditorControlFooter.HtmlText = resources.GetString("htmlEditorControlFooter.HtmlText");
+			this.htmlEditorControlFooter.Location = new System.Drawing.Point(0, 31);
+			this.htmlEditorControlFooter.Name = "htmlEditorControlFooter";
+			this.htmlEditorControlFooter.Size = new System.Drawing.Size(568, 353);
+			this.htmlEditorControlFooter.TabIndex = 3;
+			// 
+			// pnFooterHeader
+			// 
+			this.pnFooterHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnFooterHeader.Controls.Add(this.checkEditFooterEnabled);
+			this.pnFooterHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnFooterHeader.Location = new System.Drawing.Point(0, 0);
+			this.pnFooterHeader.Name = "pnFooterHeader";
+			this.pnFooterHeader.Size = new System.Drawing.Size(568, 31);
+			this.pnFooterHeader.TabIndex = 2;
+			// 
+			// checkEditFooterEnabled
+			// 
+			this.checkEditFooterEnabled.Location = new System.Drawing.Point(0, 5);
+			this.checkEditFooterEnabled.Name = "checkEditFooterEnabled";
+			this.checkEditFooterEnabled.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditFooterEnabled.Properties.Appearance.Options.UseFont = true;
+			this.checkEditFooterEnabled.Properties.AutoWidth = true;
+			this.checkEditFooterEnabled.Properties.Caption = "The Footer Text will be at the VERY BOTTOM of your quickSITE…";
+			this.checkEditFooterEnabled.Size = new System.Drawing.Size(407, 21);
+			this.checkEditFooterEnabled.TabIndex = 3;
+			this.checkEditFooterEnabled.CheckedChanged += new System.EventHandler(this.checkEditFooterEnabled_CheckedChanged);
 			// 
 			// xtraTabPageSecurity
 			// 
 			this.xtraTabPageSecurity.Controls.Add(this.pnSecurity);
 			this.xtraTabPageSecurity.Name = "xtraTabPageSecurity";
 			this.xtraTabPageSecurity.Size = new System.Drawing.Size(568, 384);
-			this.xtraTabPageSecurity.Text = "Security";
+			this.xtraTabPageSecurity.Text = "Settings";
 			// 
 			// pnSecurity
 			// 
 			this.pnSecurity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.pnSecurity.Controls.Add(this.labelControlShowTicker);
+			this.pnSecurity.Controls.Add(this.checkEditPinCode);
+			this.pnSecurity.Controls.Add(this.checkEditEnableEmailActivity);
+			this.pnSecurity.Controls.Add(this.checkEditDisablebanners);
+			this.pnSecurity.Controls.Add(this.checkEditDisableWidgets);
 			this.pnSecurity.Controls.Add(this.checkEditShowTicker);
-			this.pnSecurity.Controls.Add(this.labelControlRestricted);
-			this.pnSecurity.Controls.Add(this.labelControlShowLinkToMainSite);
 			this.pnSecurity.Controls.Add(this.checkEditShowLinkToMainSite);
 			this.pnSecurity.Controls.Add(this.checkEditRestricted);
 			this.pnSecurity.Controls.Add(this.dateEditExpirationDate);
@@ -457,83 +546,47 @@
 			this.pnSecurity.Size = new System.Drawing.Size(568, 384);
 			this.pnSecurity.TabIndex = 6;
 			// 
-			// labelControlShowTicker
-			// 
-			this.labelControlShowTicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlShowTicker.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.labelControlShowTicker.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlShowTicker.Location = new System.Drawing.Point(23, 250);
-			this.labelControlShowTicker.Name = "labelControlShowTicker";
-			this.labelControlShowTicker.Size = new System.Drawing.Size(525, 40);
-			this.labelControlShowTicker.StyleController = this.styleController;
-			this.labelControlShowTicker.TabIndex = 7;
-			this.labelControlShowTicker.Text = "The TICKER on the Main Site will be Visible at the VERY TOP of this Custom Site…";
-			// 
 			// checkEditShowTicker
 			// 
-			this.checkEditShowTicker.Location = new System.Drawing.Point(3, 225);
+			this.checkEditShowTicker.Location = new System.Drawing.Point(3, 154);
 			this.checkEditShowTicker.Name = "checkEditShowTicker";
-			this.checkEditShowTicker.Properties.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditShowTicker.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditShowTicker.Properties.Appearance.Options.UseFont = true;
 			this.checkEditShowTicker.Properties.AutoWidth = true;
-			this.checkEditShowTicker.Properties.Caption = "D. Show the Ticker";
-			this.checkEditShowTicker.Size = new System.Drawing.Size(166, 24);
+			this.checkEditShowTicker.Properties.Caption = "E. Show the TICKER at the top of this quickSITE";
+			this.checkEditShowTicker.Size = new System.Drawing.Size(305, 21);
+			this.checkEditShowTicker.StyleController = this.styleController;
 			this.checkEditShowTicker.TabIndex = 6;
-			// 
-			// labelControlRestricted
-			// 
-			this.labelControlRestricted.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlRestricted.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.labelControlRestricted.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlRestricted.Location = new System.Drawing.Point(23, 108);
-			this.labelControlRestricted.Name = "labelControlRestricted";
-			this.labelControlRestricted.Size = new System.Drawing.Size(525, 40);
-			this.labelControlRestricted.StyleController = this.styleController;
-			this.labelControlRestricted.TabIndex = 5;
-			this.labelControlRestricted.Text = "If you only want to share this site within your company…";
-			// 
-			// labelControlShowLinkToMainSite
-			// 
-			this.labelControlShowLinkToMainSite.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.labelControlShowLinkToMainSite.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-			this.labelControlShowLinkToMainSite.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-			this.labelControlShowLinkToMainSite.Location = new System.Drawing.Point(23, 179);
-			this.labelControlShowLinkToMainSite.Name = "labelControlShowLinkToMainSite";
-			this.labelControlShowLinkToMainSite.Size = new System.Drawing.Size(525, 40);
-			this.labelControlShowLinkToMainSite.StyleController = this.styleController;
-			this.labelControlShowLinkToMainSite.TabIndex = 4;
-			this.labelControlShowLinkToMainSite.Text = "Allow Users to JUMP from this site straight to your FULL Sales Library Website…";
 			// 
 			// checkEditShowLinkToMainSite
 			// 
-			this.checkEditShowLinkToMainSite.Location = new System.Drawing.Point(3, 154);
+			this.checkEditShowLinkToMainSite.Location = new System.Drawing.Point(3, 119);
 			this.checkEditShowLinkToMainSite.Name = "checkEditShowLinkToMainSite";
-			this.checkEditShowLinkToMainSite.Properties.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditShowLinkToMainSite.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditShowLinkToMainSite.Properties.Appearance.Options.UseFont = true;
 			this.checkEditShowLinkToMainSite.Properties.AutoWidth = true;
-			this.checkEditShowLinkToMainSite.Properties.Caption = "C. Show LINK to Main Site";
-			this.checkEditShowLinkToMainSite.Size = new System.Drawing.Size(221, 24);
+			this.checkEditShowLinkToMainSite.Properties.Caption = "D. Show Link to MAIN SITE in top ribbon";
+			this.checkEditShowLinkToMainSite.Size = new System.Drawing.Size(258, 21);
+			this.checkEditShowLinkToMainSite.StyleController = this.styleController;
 			this.checkEditShowLinkToMainSite.TabIndex = 3;
 			// 
 			// checkEditRestricted
 			// 
-			this.checkEditRestricted.Location = new System.Drawing.Point(3, 85);
+			this.checkEditRestricted.Location = new System.Drawing.Point(3, 49);
 			this.checkEditRestricted.Name = "checkEditRestricted";
-			this.checkEditRestricted.Properties.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditRestricted.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditRestricted.Properties.Appearance.Options.UseFont = true;
 			this.checkEditRestricted.Properties.AutoWidth = true;
-			this.checkEditRestricted.Properties.Caption = "B. Require User Log-in";
-			this.checkEditRestricted.Size = new System.Drawing.Size(196, 24);
+			this.checkEditRestricted.Properties.Caption = "B. Require Authorized User login and password to view site";
+			this.checkEditRestricted.Size = new System.Drawing.Size(364, 21);
+			this.checkEditRestricted.StyleController = this.styleController;
 			this.checkEditRestricted.TabIndex = 2;
 			// 
 			// dateEditExpirationDate
 			// 
 			this.dateEditExpirationDate.EditValue = null;
 			this.dateEditExpirationDate.Enabled = false;
-			this.dateEditExpirationDate.Location = new System.Drawing.Point(23, 44);
+			this.dateEditExpirationDate.Location = new System.Drawing.Point(162, 14);
 			this.dateEditExpirationDate.Name = "dateEditExpirationDate";
 			this.dateEditExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -553,11 +606,12 @@
 			// 
 			this.checkEditExpirationDate.Location = new System.Drawing.Point(3, 14);
 			this.checkEditExpirationDate.Name = "checkEditExpirationDate";
-			this.checkEditExpirationDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditExpirationDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditExpirationDate.Properties.Appearance.Options.UseFont = true;
 			this.checkEditExpirationDate.Properties.AutoWidth = true;
 			this.checkEditExpirationDate.Properties.Caption = "A. Set Expiration Date";
-			this.checkEditExpirationDate.Size = new System.Drawing.Size(188, 24);
+			this.checkEditExpirationDate.Size = new System.Drawing.Size(153, 21);
+			this.checkEditExpirationDate.StyleController = this.styleController;
 			this.checkEditExpirationDate.TabIndex = 0;
 			this.checkEditExpirationDate.CheckedChanged += new System.EventHandler(this.checkEditExpirationDate_CheckedChanged);
 			// 
@@ -679,104 +733,70 @@
 			this.layoutViewCard1.OptionsItemText.TextToControlDistance = 2;
 			this.layoutViewCard1.Text = "TemplateCard";
 			// 
-			// pnTitle
+			// checkEditDisableWidgets
 			// 
-			this.pnTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.pnTitle.Controls.Add(this.checkEditTitleEnabled);
-			this.pnTitle.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnTitle.Location = new System.Drawing.Point(0, 0);
-			this.pnTitle.Name = "pnTitle";
-			this.pnTitle.Size = new System.Drawing.Size(568, 31);
-			this.pnTitle.TabIndex = 1;
+			this.checkEditDisableWidgets.Enabled = false;
+			this.checkEditDisableWidgets.Location = new System.Drawing.Point(3, 189);
+			this.checkEditDisableWidgets.Name = "checkEditDisableWidgets";
+			this.checkEditDisableWidgets.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditDisableWidgets.Properties.Appearance.Options.UseFont = true;
+			this.checkEditDisableWidgets.Properties.AutoWidth = true;
+			this.checkEditDisableWidgets.Properties.Caption = "F. Disable all Link Widget Icons";
+			this.checkEditDisableWidgets.Size = new System.Drawing.Size(207, 21);
+			this.checkEditDisableWidgets.StyleController = this.styleController;
+			this.checkEditDisableWidgets.TabIndex = 7;
 			// 
-			// checkEditTitleEnabled
+			// checkEditDisablebanners
 			// 
-			this.checkEditTitleEnabled.Location = new System.Drawing.Point(0, 5);
-			this.checkEditTitleEnabled.Name = "checkEditTitleEnabled";
-			this.checkEditTitleEnabled.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkEditTitleEnabled.Properties.Appearance.Options.UseFont = true;
-			this.checkEditTitleEnabled.Properties.AutoWidth = true;
-			this.checkEditTitleEnabled.Properties.Caption = "This statement will be placed at the TOP of your quickSITE... ";
-			this.checkEditTitleEnabled.Size = new System.Drawing.Size(380, 21);
-			this.checkEditTitleEnabled.TabIndex = 3;
-			this.checkEditTitleEnabled.CheckedChanged += new System.EventHandler(this.checkEditTitleEnabled_CheckedChanged);
+			this.checkEditDisablebanners.Enabled = false;
+			this.checkEditDisablebanners.Location = new System.Drawing.Point(3, 224);
+			this.checkEditDisablebanners.Name = "checkEditDisablebanners";
+			this.checkEditDisablebanners.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditDisablebanners.Properties.Appearance.Options.UseFont = true;
+			this.checkEditDisablebanners.Properties.AutoWidth = true;
+			this.checkEditDisablebanners.Properties.Caption = "G. Disable all Link Banner Images";
+			this.checkEditDisablebanners.Size = new System.Drawing.Size(220, 21);
+			this.checkEditDisablebanners.StyleController = this.styleController;
+			this.checkEditDisablebanners.TabIndex = 8;
 			// 
-			// panel1
+			// checkEditEnableEmailActivity
 			// 
-			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.panel1.Controls.Add(this.checkEditHeaderEnabled);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel1.Location = new System.Drawing.Point(0, 0);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(568, 31);
-			this.panel1.TabIndex = 2;
+			this.checkEditEnableEmailActivity.Enabled = false;
+			this.checkEditEnableEmailActivity.Location = new System.Drawing.Point(3, 259);
+			this.checkEditEnableEmailActivity.Name = "checkEditEnableEmailActivity";
+			this.checkEditEnableEmailActivity.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditEnableEmailActivity.Properties.Appearance.Options.UseFont = true;
+			this.checkEditEnableEmailActivity.Properties.AutoWidth = true;
+			this.checkEditEnableEmailActivity.Properties.Caption = "H. Email me each time someone clicks a link on this quickSITE";
+			this.checkEditEnableEmailActivity.Size = new System.Drawing.Size(392, 21);
+			this.checkEditEnableEmailActivity.StyleController = this.styleController;
+			this.checkEditEnableEmailActivity.TabIndex = 9;
 			// 
-			// checkEditHeaderEnabled
+			// checkEditPinCode
 			// 
-			this.checkEditHeaderEnabled.Location = new System.Drawing.Point(0, 5);
-			this.checkEditHeaderEnabled.Name = "checkEditHeaderEnabled";
-			this.checkEditHeaderEnabled.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkEditHeaderEnabled.Properties.Appearance.Options.UseFont = true;
-			this.checkEditHeaderEnabled.Properties.AutoWidth = true;
-			this.checkEditHeaderEnabled.Properties.Caption = "The Header Text will be JUST ABOVE the links you are sharing… ";
-			this.checkEditHeaderEnabled.Size = new System.Drawing.Size(404, 21);
-			this.checkEditHeaderEnabled.TabIndex = 3;
-			this.checkEditHeaderEnabled.CheckedChanged += new System.EventHandler(this.checkEditHeaderEnabled_CheckedChanged);
-			// 
-			// panel2
-			// 
-			this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.panel2.Controls.Add(this.checkEditFooterEnabled);
-			this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-			this.panel2.Location = new System.Drawing.Point(0, 0);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(568, 31);
-			this.panel2.TabIndex = 2;
-			// 
-			// checkEditFooterEnabled
-			// 
-			this.checkEditFooterEnabled.Location = new System.Drawing.Point(0, 5);
-			this.checkEditFooterEnabled.Name = "checkEditFooterEnabled";
-			this.checkEditFooterEnabled.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.checkEditFooterEnabled.Properties.Appearance.Options.UseFont = true;
-			this.checkEditFooterEnabled.Properties.AutoWidth = true;
-			this.checkEditFooterEnabled.Properties.Caption = "The Footer Text will be at the VERY BOTTOM of your quickSITE…";
-			this.checkEditFooterEnabled.Size = new System.Drawing.Size(407, 21);
-			this.checkEditFooterEnabled.TabIndex = 3;
-			this.checkEditFooterEnabled.CheckedChanged += new System.EventHandler(this.checkEditFooterEnabled_CheckedChanged);
-			// 
-			// htmlEditorControlHeader
-			// 
-			this.htmlEditorControlHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.htmlEditorControlHeader.Enabled = false;
-			this.htmlEditorControlHeader.HtmlText = resources.GetString("htmlEditorControlHeader.HtmlText");
-			this.htmlEditorControlHeader.Location = new System.Drawing.Point(0, 31);
-			this.htmlEditorControlHeader.Name = "htmlEditorControlHeader";
-			this.htmlEditorControlHeader.Size = new System.Drawing.Size(568, 353);
-			this.htmlEditorControlHeader.TabIndex = 3;
-			// 
-			// htmlEditorControlFooter
-			// 
-			this.htmlEditorControlFooter.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.htmlEditorControlFooter.Enabled = false;
-			this.htmlEditorControlFooter.HtmlText = resources.GetString("htmlEditorControlFooter.HtmlText");
-			this.htmlEditorControlFooter.Location = new System.Drawing.Point(0, 31);
-			this.htmlEditorControlFooter.Name = "htmlEditorControlFooter";
-			this.htmlEditorControlFooter.Size = new System.Drawing.Size(568, 353);
-			this.htmlEditorControlFooter.TabIndex = 3;
+			this.checkEditPinCode.Enabled = false;
+			this.checkEditPinCode.Location = new System.Drawing.Point(3, 84);
+			this.checkEditPinCode.Name = "checkEditPinCode";
+			this.checkEditPinCode.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditPinCode.Properties.Appearance.Options.UseFont = true;
+			this.checkEditPinCode.Properties.AutoWidth = true;
+			this.checkEditPinCode.Properties.Caption = "C. Create a SECURE ACCESS Pin";
+			this.checkEditPinCode.Size = new System.Drawing.Size(228, 21);
+			this.checkEditPinCode.StyleController = this.styleController;
+			this.checkEditPinCode.TabIndex = 10;
 			// 
 			// PageContentControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
 			this.Controls.Add(this.xtraTabControl);
-			this.Controls.Add(this.pnHeader);
+			this.Controls.Add(this.pnPageHeader);
 			this.Enabled = false;
 			this.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Name = "PageContentControl";
 			this.Size = new System.Drawing.Size(570, 477);
-			this.pnHeader.ResumeLayout(false);
-			this.pnHeader.PerformLayout();
+			this.pnPageHeader.ResumeLayout(false);
+			this.pnPageHeader.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditUrl.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditTitleValue.Properties)).EndInit();
@@ -787,13 +807,18 @@
 			((System.ComponentModel.ISupportInitialize)(this.advBandedGridViewLinks)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEditLinksType)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditLinksActions)).EndInit();
-			this.pnLinksHeader.ResumeLayout(false);
-			this.pnLinksHeader.PerformLayout();
 			this.xtraTabPageTitle.ResumeLayout(false);
+			this.pnTitle.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditTitleEnabled.Properties)).EndInit();
 			this.xtraTabPageHeader.ResumeLayout(false);
+			this.pnHeaderHeader.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditHeaderEnabled.Properties)).EndInit();
 			this.xtraTabPageFooter.ResumeLayout(false);
+			this.pnFooterHeader.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.checkEditFooterEnabled.Properties)).EndInit();
 			this.xtraTabPageSecurity.ResumeLayout(false);
 			this.pnSecurity.ResumeLayout(false);
+			this.pnSecurity.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowTicker.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowLinkToMainSite.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditRestricted.Properties)).EndInit();
@@ -806,21 +831,17 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewFieldBannerGallery)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).EndInit();
-			this.pnTitle.ResumeLayout(false);
-			this.pnTitle.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditTitleEnabled.Properties)).EndInit();
-			this.panel1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.checkEditHeaderEnabled.Properties)).EndInit();
-			this.panel2.ResumeLayout(false);
-			this.panel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditFooterEnabled.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableWidgets.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisablebanners.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableEmailActivity.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPinCode.Properties)).EndInit();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.Panel pnHeader;
+		private System.Windows.Forms.Panel pnPageHeader;
 		private DevExpress.XtraEditors.LabelControl labelControlCreateDate;
 		private DevExpress.XtraEditors.StyleController styleController;
 		private DevExpress.XtraEditors.TextEdit textEditTitleValue;
@@ -850,7 +871,6 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandActions;
 		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn bandedGridColumnLinksActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditLinksActions;
-		private System.Windows.Forms.Panel pnLinksHeader;
 		private DevExpress.XtraEditors.LabelControl labelControlLinksCount;
 		private DevExpress.XtraEditors.LabelControl labelControlLinksHeader;
 		private System.Windows.Forms.Panel pnSecurity;
@@ -858,18 +878,19 @@
 		private DevExpress.XtraEditors.DateEdit dateEditExpirationDate;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowLinkToMainSite;
 		private DevExpress.XtraEditors.CheckEdit checkEditRestricted;
-		private DevExpress.XtraEditors.LabelControl labelControlShowTicker;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowTicker;
-		private DevExpress.XtraEditors.LabelControl labelControlRestricted;
-		private DevExpress.XtraEditors.LabelControl labelControlShowLinkToMainSite;
 		private HtmlEditorControl htmlEditorControlTitle;
 		private System.Windows.Forms.Panel pnTitle;
 		private DevExpress.XtraEditors.CheckEdit checkEditTitleEnabled;
-		private System.Windows.Forms.Panel panel1;
+		private System.Windows.Forms.Panel pnHeaderHeader;
 		private DevExpress.XtraEditors.CheckEdit checkEditHeaderEnabled;
-		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Panel pnFooterHeader;
 		private DevExpress.XtraEditors.CheckEdit checkEditFooterEnabled;
 		private HtmlEditorControl htmlEditorControlHeader;
 		private HtmlEditorControl htmlEditorControlFooter;
+		private DevExpress.XtraEditors.CheckEdit checkEditPinCode;
+		private DevExpress.XtraEditors.CheckEdit checkEditEnableEmailActivity;
+		private DevExpress.XtraEditors.CheckEdit checkEditDisablebanners;
+		private DevExpress.XtraEditors.CheckEdit checkEditDisableWidgets;
 	}
 }

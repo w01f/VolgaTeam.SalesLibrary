@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.grFiles = new System.Windows.Forms.DataGridView();
 			this.colDisplayName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.ttCellInfo = new System.Windows.Forms.ToolTip(this.components);
@@ -40,20 +40,20 @@
 			this.buttonXHeader = new DevComponents.DotNetBar.ButtonX();
 			this.pnHeader = new System.Windows.Forms.Panel();
 			this.labelControlText = new DevExpress.XtraEditors.LabelControl();
-			this.pbImage = new System.Windows.Forms.PictureBox();
 			this.pnRight = new System.Windows.Forms.Panel();
 			this.pnIndex = new System.Windows.Forms.Panel();
 			this.laIndex = new System.Windows.Forms.Label();
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.pnTop = new System.Windows.Forms.Panel();
+			this.pbImage = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.grFiles)).BeginInit();
 			this.pnMain.SuspendLayout();
 			this.pnHeaderBorder.SuspendLayout();
 			this.pnHeader.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
 			this.pnIndex.SuspendLayout();
 			this.pnBottom.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbImage)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// grFiles
@@ -69,14 +69,14 @@
 			this.grFiles.ColumnHeadersVisible = false;
 			this.grFiles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colDisplayName});
-			dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle23.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.White;
-			dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.grFiles.DefaultCellStyle = dataGridViewCellStyle23;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.grFiles.DefaultCellStyle = dataGridViewCellStyle2;
 			this.grFiles.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.grFiles.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
 			this.grFiles.GridColor = System.Drawing.Color.White;
@@ -85,14 +85,14 @@
 			this.grFiles.Name = "grFiles";
 			this.grFiles.ReadOnly = true;
 			this.grFiles.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-			dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle24.BackColor = System.Drawing.Color.White;
-			dataGridViewCellStyle24.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			dataGridViewCellStyle24.ForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.White;
-			dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.White;
-			dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.grFiles.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.grFiles.RowHeadersVisible = false;
 			this.grFiles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 			this.grFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -101,12 +101,13 @@
 			this.grFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grFiles_CellClick);
 			this.grFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grFiles_MouseDown);
 			this.grFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grFiles_MouseMove);
+			this.grFiles.MouseUp += new System.Windows.Forms.MouseEventHandler(this.grFiles_MouseUp);
 			// 
 			// colDisplayName
 			// 
 			this.colDisplayName.DataPropertyName = "DisplayName";
-			dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle22;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			this.colDisplayName.DefaultCellStyle = dataGridViewCellStyle1;
 			this.colDisplayName.HeaderText = "DisplayName";
 			this.colDisplayName.Name = "colDisplayName";
 			this.colDisplayName.ReadOnly = true;
@@ -131,8 +132,8 @@
 			// 
 			// pnHeaderBorder
 			// 
-			this.pnHeaderBorder.Controls.Add(this.buttonXHeader);
 			this.pnHeaderBorder.Controls.Add(this.pnHeader);
+			this.pnHeaderBorder.Controls.Add(this.buttonXHeader);
 			this.pnHeaderBorder.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnHeaderBorder.Location = new System.Drawing.Point(1, 1);
 			this.pnHeaderBorder.Name = "pnHeaderBorder";
@@ -165,6 +166,7 @@
 			this.pnHeader.Name = "pnHeader";
 			this.pnHeader.Size = new System.Drawing.Size(209, 37);
 			this.pnHeader.TabIndex = 5;
+			this.pnHeader.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnHeader_MouseUp);
 			// 
 			// labelControlText
 			// 
@@ -179,16 +181,7 @@
 			this.labelControlText.TabIndex = 4;
 			this.labelControlText.UseMnemonic = false;
 			this.labelControlText.Click += new System.EventHandler(this.laFolderName_Click);
-			// 
-			// pbImage
-			// 
-			this.pbImage.BackColor = System.Drawing.SystemColors.Control;
-			this.pbImage.Dock = System.Windows.Forms.DockStyle.Left;
-			this.pbImage.Location = new System.Drawing.Point(0, 0);
-			this.pbImage.Name = "pbImage";
-			this.pbImage.Size = new System.Drawing.Size(43, 37);
-			this.pbImage.TabIndex = 0;
-			this.pbImage.TabStop = false;
+			this.labelControlText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnHeader_MouseUp);
 			// 
 			// pnRight
 			// 
@@ -248,6 +241,17 @@
 			this.pnTop.TabIndex = 7;
 			this.pnTop.Visible = false;
 			// 
+			// pbImage
+			// 
+			this.pbImage.BackColor = System.Drawing.SystemColors.Control;
+			this.pbImage.Dock = System.Windows.Forms.DockStyle.Left;
+			this.pbImage.Location = new System.Drawing.Point(0, 0);
+			this.pbImage.Name = "pbImage";
+			this.pbImage.Size = new System.Drawing.Size(43, 37);
+			this.pbImage.TabIndex = 0;
+			this.pbImage.TabStop = false;
+			this.pbImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pnHeader_MouseUp);
+			// 
 			// FolderBoxControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -265,9 +269,9 @@
 			this.pnMain.ResumeLayout(false);
 			this.pnHeaderBorder.ResumeLayout(false);
 			this.pnHeader.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
 			this.pnIndex.ResumeLayout(false);
 			this.pnBottom.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
 			this.ResumeLayout(false);
 
         }

@@ -46,7 +46,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.20524, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86" />
+    <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.23184, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86" />
     <Reference Include="itextsharp">
       <HintPath>ToolClasses\PdfToText\itextsharp.dll</HintPath>
     </Reference>

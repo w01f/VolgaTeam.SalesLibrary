@@ -29,8 +29,9 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LinkCartControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnButtons = new System.Windows.Forms.Panel();
+			this.simpleButtonAddAllLinks = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonClear = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonRefresh = new DevExpress.XtraEditors.SimpleButton();
 			this.gridControl = new DevExpress.XtraGrid.GridControl();
@@ -52,13 +53,29 @@
 			// 
 			// pnButtons
 			// 
+			this.pnButtons.Controls.Add(this.simpleButtonAddAllLinks);
 			this.pnButtons.Controls.Add(this.simpleButtonClear);
 			this.pnButtons.Controls.Add(this.simpleButtonRefresh);
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(290, 82);
+			this.pnButtons.Size = new System.Drawing.Size(290, 121);
 			this.pnButtons.TabIndex = 0;
+			// 
+			// simpleButtonAddAllLinks
+			// 
+			this.simpleButtonAddAllLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.simpleButtonAddAllLinks.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.simpleButtonAddAllLinks.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.simpleButtonAddAllLinks.Appearance.Options.UseFont = true;
+			this.simpleButtonAddAllLinks.Appearance.Options.UseForeColor = true;
+			this.simpleButtonAddAllLinks.Location = new System.Drawing.Point(14, 81);
+			this.simpleButtonAddAllLinks.Name = "simpleButtonAddAllLinks";
+			this.simpleButtonAddAllLinks.Size = new System.Drawing.Size(263, 31);
+			this.simpleButtonAddAllLinks.TabIndex = 2;
+			this.simpleButtonAddAllLinks.Text = "Add All Links to quickSITE";
+			this.simpleButtonAddAllLinks.Click += new System.EventHandler(this.simpleButtonAddAllLinks_Click);
 			// 
 			// simpleButtonClear
 			// 
@@ -87,19 +104,19 @@
 			this.simpleButtonRefresh.Name = "simpleButtonRefresh";
 			this.simpleButtonRefresh.Size = new System.Drawing.Size(263, 31);
 			this.simpleButtonRefresh.TabIndex = 0;
-			this.simpleButtonRefresh.Text = "Refersh Link Cart";
+			this.simpleButtonRefresh.Text = "Refresh Link Cart";
 			this.simpleButtonRefresh.Click += new System.EventHandler(this.simpleButtonRefresh_Click);
 			// 
 			// gridControl
 			// 
 			this.gridControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControl.Location = new System.Drawing.Point(0, 82);
+			this.gridControl.Location = new System.Drawing.Point(0, 121);
 			this.gridControl.MainView = this.advBandedGridView;
 			this.gridControl.Name = "gridControl";
 			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditActions,
             this.repositoryItemPictureEditType});
-			this.gridControl.Size = new System.Drawing.Size(290, 351);
+			this.gridControl.Size = new System.Drawing.Size(290, 312);
 			this.gridControl.TabIndex = 1;
 			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridView});
@@ -215,7 +232,7 @@
 			// 
 			this.repositoryItemButtonEditActions.AutoHeight = false;
 			this.repositoryItemButtonEditActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.repositoryItemButtonEditActions.Name = "repositoryItemButtonEditActions";
 			this.repositoryItemButtonEditActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditActions_ButtonClick);
@@ -254,5 +271,6 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandType;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandLink;
 		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandActions;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonAddAllLinks;
 	}
 }

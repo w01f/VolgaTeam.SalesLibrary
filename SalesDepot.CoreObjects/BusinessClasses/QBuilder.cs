@@ -113,6 +113,28 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return result;
 		}
 
+		public bool AddFolderToCart(string folderId)
+		{
+			var message = String.Empty;
+			var result = true;
+			var thread = new Thread(delegate()
+			{
+				result = Connection.Client.IsFolderAvailableOnSite(folderId, out message);
+				if (result)
+					Connection.Client.AddFolderToCart(folderId, out message);
+				result &= String.IsNullOrEmpty(message);
+			});
+			thread.Start();
+			while (thread.IsAlive)
+				Application.DoEvents();
+			if (result)
+			{
+				if (LinkCartChanged != null)
+					LinkCartChanged(this, new EventArgs());
+			}
+			return result;
+		}
+
 		public bool DeleteLinkFromCart(string linkId)
 		{
 			var message = String.Empty;

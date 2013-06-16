@@ -169,19 +169,36 @@ namespace SalesDepot.PresentationClasses.WallBin
 			Init();
 		}
 
-		private void grFiles_MouseDown(object sender, MouseEventArgs e)
+		private void pnHeader_MouseUp(object sender, MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Right)
 			{
-				DataGridView.HitTestInfo ht = grFiles.HitTest(e.X, e.Y);
-				if (ht.Type == DataGridViewHitTestType.Cell)
-				{
-					_hitTest = ht;
-					_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
-											 SystemInformation.DragSize);
-				}
-				else
-					_hitTest = DataGridView.HitTestInfo.Nowhere;
+				LinkManager.Instance.OpenLibraryFolder(_folder);
+			}
+		}
+
+		private void grFiles_MouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Right) return;
+			var ht = grFiles.HitTest(e.X, e.Y);
+			if (ht.Type == DataGridViewHitTestType.Cell)
+			{
+				_hitTest = ht;
+				_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
+										 SystemInformation.DragSize);
+			}
+			else
+				_hitTest = DataGridView.HitTestInfo.Nowhere;
+		}
+
+		private void grFiles_MouseUp(object sender, MouseEventArgs e)
+		{
+			if (e.Button != MouseButtons.Right) return;
+			var ht = grFiles.HitTest(e.X, e.Y);
+			if (ht.Type == DataGridViewHitTestType.Cell)
+			{
+				var file = grFiles.Rows[ht.RowIndex].Tag as LibraryLink;
+				LinkManager.Instance.OpenLink(file, true);
 			}
 		}
 

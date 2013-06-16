@@ -120,22 +120,6 @@
   <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="htmlEditorControlFooter.HtmlText" xml:space="preserve">
-    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
-&lt;html&gt;
-	&lt;head&gt;
-		&lt;meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" /&gt;&lt;title&gt;
-		&lt;/title&gt;
-		&lt;style type="text/css"&gt;
-			.cs7CED571B{text-align:left;text-indent:0pt;padding:0pt 0pt 0pt 0pt;margin:0pt 0pt 0pt 0pt}
-			.cs5EFED22F{color:#000000;background-color:transparent;font-family:Times New Roman; font-size:12pt; font-weight:normal; font-style:normal; }
-		&lt;/style&gt;
-	&lt;/head&gt;
-	&lt;body&gt;
-		&lt;span&gt;&lt;p class="cs7CED571B"&gt;&lt;span class="cs5EFED22F"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;/span&gt;&lt;/body&gt;
-&lt;/html&gt;
-</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="repositoryItemButtonEditLinksActions.Buttons" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -242,6 +226,22 @@
 </value>
   </data>
   <data name="htmlEditorControlHeader.HtmlText" xml:space="preserve">
+    <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html&gt;
+	&lt;head&gt;
+		&lt;meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8" /&gt;&lt;title&gt;
+		&lt;/title&gt;
+		&lt;style type="text/css"&gt;
+			.cs7CED571B{text-align:left;text-indent:0pt;padding:0pt 0pt 0pt 0pt;margin:0pt 0pt 0pt 0pt}
+			.cs5EFED22F{color:#000000;background-color:transparent;font-family:Times New Roman; font-size:12pt; font-weight:normal; font-style:normal; }
+		&lt;/style&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;span&gt;&lt;p class="cs7CED571B"&gt;&lt;span class="cs5EFED22F"&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;&lt;/span&gt;&lt;/body&gt;
+&lt;/html&gt;
+</value>
+  </data>
+  <data name="htmlEditorControlFooter.HtmlText" xml:space="preserve">
     <value>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
 &lt;html&gt;
 	&lt;head&gt;

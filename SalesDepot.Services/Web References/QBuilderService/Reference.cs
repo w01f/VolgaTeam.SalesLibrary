@@ -44,6 +44,8 @@ namespace SalesDepot.Services.QBuilderService {
         
         private System.Threading.SendOrPostCallback isLinkAvailableOperationCompleted;
         
+        private System.Threading.SendOrPostCallback isFolderAvailableOperationCompleted;
+        
         private System.Threading.SendOrPostCallback addLinkToCartOperationCompleted;
         
         private System.Threading.SendOrPostCallback emailLinkOperationCompleted;
@@ -122,6 +124,9 @@ namespace SalesDepot.Services.QBuilderService {
         
         /// <remarks/>
         public event isLinkAvailableCompletedEventHandler isLinkAvailableCompleted;
+        
+        /// <remarks/>
+        public event isFolderAvailableCompletedEventHandler isFolderAvailableCompleted;
         
         /// <remarks/>
         public event addLinkToCartCompletedEventHandler addLinkToCartCompleted;
@@ -374,28 +379,62 @@ namespace SalesDepot.Services.QBuilderService {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#isFolderAvailable", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public bool isFolderAvailable(string sessionKey, string folderId) {
+            object[] results = this.Invoke("isFolderAvailable", new object[] {
+                        sessionKey,
+                        folderId});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void isFolderAvailableAsync(string sessionKey, string folderId) {
+            this.isFolderAvailableAsync(sessionKey, folderId, null);
+        }
+        
+        /// <remarks/>
+        public void isFolderAvailableAsync(string sessionKey, string folderId, object userState) {
+            if ((this.isFolderAvailableOperationCompleted == null)) {
+                this.isFolderAvailableOperationCompleted = new System.Threading.SendOrPostCallback(this.OnisFolderAvailableOperationCompleted);
+            }
+            this.InvokeAsync("isFolderAvailable", new object[] {
+                        sessionKey,
+                        folderId}, this.isFolderAvailableOperationCompleted, userState);
+        }
+        
+        private void OnisFolderAvailableOperationCompleted(object arg) {
+            if ((this.isFolderAvailableCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.isFolderAvailableCompleted(this, new isFolderAvailableCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#addLinkToCart", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
-        public void addLinkToCart(string sessionKey, string login, string linkId) {
+        public void addLinkToCart(string sessionKey, string login, string linkId, string folderId) {
             this.Invoke("addLinkToCart", new object[] {
                         sessionKey,
                         login,
-                        linkId});
+                        linkId,
+                        folderId});
         }
         
         /// <remarks/>
-        public void addLinkToCartAsync(string sessionKey, string login, string linkId) {
-            this.addLinkToCartAsync(sessionKey, login, linkId, null);
+        public void addLinkToCartAsync(string sessionKey, string login, string linkId, string folderId) {
+            this.addLinkToCartAsync(sessionKey, login, linkId, folderId, null);
         }
         
         /// <remarks/>
-        public void addLinkToCartAsync(string sessionKey, string login, string linkId, object userState) {
+        public void addLinkToCartAsync(string sessionKey, string login, string linkId, string folderId, object userState) {
             if ((this.addLinkToCartOperationCompleted == null)) {
                 this.addLinkToCartOperationCompleted = new System.Threading.SendOrPostCallback(this.OnaddLinkToCartOperationCompleted);
             }
             this.InvokeAsync("addLinkToCart", new object[] {
                         sessionKey,
                         login,
-                        linkId}, this.addLinkToCartOperationCompleted, userState);
+                        linkId,
+                        folderId}, this.addLinkToCartOperationCompleted, userState);
         }
         
         private void OnaddLinkToCartOperationCompleted(object arg) {
@@ -1255,6 +1294,32 @@ namespace SalesDepot.Services.QBuilderService {
         private object[] results;
         
         internal isLinkAvailableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void isFolderAvailableCompletedEventHandler(object sender, isFolderAvailableCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class isFolderAvailableCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal isFolderAvailableCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

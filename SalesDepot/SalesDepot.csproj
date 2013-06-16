@@ -62,7 +62,9 @@
     <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v10.2.Core, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
@@ -204,7 +206,6 @@
       <DependentUpon>EmptyViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\WallBin\Decorators\DecoratorManager.cs" />
-    <Compile Include="PresentationClasses\WallBin\IWallBinView.cs" />
     <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -249,6 +250,12 @@
     <Compile Include="ToolForms\ProgramManager\FormOutputParameters.designer.cs">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormAddFolder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormAddFolder.Designer.cs">
+      <DependentUpon>FormAddFolder.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\QBuilderForms\FormDeletePages.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,6 +292,18 @@
     <Compile Include="ToolForms\Settings\FormAuthorizeWarning.Designer.cs">
       <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\WallBin\FormFolderSpecialOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormFolderSpecialOptions.Designer.cs">
+      <DependentUpon>FormFolderSpecialOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormLinkSpecialOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\WallBin\FormLinkSpecialOptions.Designer.cs">
+      <DependentUpon>FormLinkSpecialOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\WallBin\FormFolderViewOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,12 +339,6 @@
     </Compile>
     <Compile Include="ConfigurationClasses\ListManager.cs" />
     <Compile Include="ConfigurationClasses\RegistryHelper.cs" />
-    <Compile Include="PresentationClasses\WallBin\ClassicViewControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\WallBin\ClassicViewControl.Designer.cs">
-      <DependentUpon>ClassicViewControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="PresentationClasses\WallBin\ColumnTitleControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -387,11 +400,11 @@
     <Compile Include="PresentationClasses\Viewers\PowerPointViewer.Designer.cs">
       <DependentUpon>PowerPointViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\WallBin\SolutionViewControl.cs">
+    <Compile Include="TabPages\TabSearchControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\WallBin\SolutionViewControl.Designer.cs">
-      <DependentUpon>SolutionViewControl.cs</DependentUpon>
+    <Compile Include="TabPages\TabSearchControl.Designer.cs">
+      <DependentUpon>TabSearchControl.cs</DependentUpon>
     </Compile>
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\WordHelper.cs" />
@@ -533,6 +546,9 @@
     <EmbeddedResource Include="ToolForms\ProgramManager\FormOutputParameters.resx">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormAddFolder.resx">
+      <DependentUpon>FormAddFolder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\QBuilderForms\FormDeletePages.resx">
       <DependentUpon>FormDeletePages.cs</DependentUpon>
     </EmbeddedResource>
@@ -551,6 +567,14 @@
     <EmbeddedResource Include="ToolForms\Settings\FormAuthorizeWarning.resx">
       <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WallBin\FormFolderSpecialOptions.resx">
+      <DependentUpon>FormFolderSpecialOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\WallBin\FormLinkSpecialOptions.resx">
+      <DependentUpon>FormLinkSpecialOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormFolderViewOptions.resx">
       <DependentUpon>FormFolderViewOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -566,9 +590,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormEmailSettings.resx">
       <DependentUpon>FormEmailSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\WallBin\ClassicViewControl.resx">
-      <DependentUpon>ClassicViewControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\WallBin\ColumnTitleControl.resx">
       <DependentUpon>ColumnTitleControl.cs</DependentUpon>
@@ -600,8 +621,8 @@
     <EmbeddedResource Include="PresentationClasses\Viewers\PowerPointViewer.resx">
       <DependentUpon>PowerPointViewer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\WallBin\SolutionViewControl.resx">
-      <DependentUpon>SolutionViewControl.cs</DependentUpon>
+    <EmbeddedResource Include="TabPages\TabSearchControl.resx">
+      <DependentUpon>TabSearchControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -788,6 +809,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\MinibarFontSmaller.png" />
+    <None Include="Resources\MinibarFontLarger.png" />
     <None Include="Resources\CopySmall.png" />
     <None Include="Resources\QuickSiteEmailLink.png" />
     <None Include="Resources\QuickSiteAddLink.png" />

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using DevComponents.DotNetBar;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.InteropClasses;
@@ -23,6 +22,7 @@ namespace SalesDepot
 		private int _floaterPositionY = int.MinValue;
 
 		public TabHomeControl TabHome { get; set; }
+		public TabSearchControl TabSearch { get; set; }
 		public TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
 		public TabProgramSchedule TabProgramSchedule { get; set; }
 		public TabProgramSearch TabProgramSearch { get; set; }
@@ -51,6 +51,9 @@ namespace SalesDepot
 			TabHome = new TabHomeControl();
 			TabHome.InitController();
 
+			TabSearch = new TabSearchControl();
+			TabSearch.InitController();
+
 			TabOvernightsCalendar = new TabOvernightsCalendarControl();
 			TabOvernightsCalendar.InitController();
 
@@ -71,21 +74,7 @@ namespace SalesDepot
 			if (File.Exists(SettingsManager.Instance.CalendarLogoPath))
 				labelItemCalendarLogo.Image = new Bitmap(SettingsManager.Instance.CalendarLogoPath);
 			Text = string.Format("{0} - User: {1}", SettingsManager.Instance.SalesDepotName, Environment.UserName);
-
-			buttonItemHomeClassicView.Text = !string.IsNullOrEmpty(SettingsManager.Instance.ClassicTitle) ? SettingsManager.Instance.ClassicTitle : Instance.buttonItemHomeClassicView.Text;
-			superTooltip.SetSuperTooltip(buttonItemHomeClassicView, new SuperTooltipInfo(SettingsManager.Instance.ClassicTitle, "", SettingsManager.Instance.ClassicDescription, null, null, eTooltipColor.Gray));
-
-			buttonItemHomeListView.Text = !string.IsNullOrEmpty(SettingsManager.Instance.ListTitle) ? SettingsManager.Instance.ListTitle : Instance.buttonItemHomeListView.Text;
-			superTooltip.SetSuperTooltip(buttonItemHomeListView, new SuperTooltipInfo(SettingsManager.Instance.ListTitle, "", SettingsManager.Instance.ListDescription, null, null, eTooltipColor.Gray));
-
-			buttonItemHomeAccordionView.Text = !string.IsNullOrEmpty(SettingsManager.Instance.AccordionTitle) ? SettingsManager.Instance.AccordionTitle : Instance.buttonItemHomeAccordionView.Text;
-			superTooltip.SetSuperTooltip(buttonItemHomeAccordionView, new SuperTooltipInfo(SettingsManager.Instance.AccordionTitle, "", SettingsManager.Instance.AccordionDescription, null, null, eTooltipColor.Gray));
-
-			buttonItemHomeSolutionView.Text = !string.IsNullOrEmpty(SettingsManager.Instance.SolutionTitle) ? SettingsManager.Instance.SolutionTitle : Instance.buttonItemHomeSolutionView.Text;
-			superTooltip.SetSuperTooltip(buttonItemHomeSolutionView, new SuperTooltipInfo(SettingsManager.Instance.SolutionTitle, "", SettingsManager.Instance.SolutionDescription, null, null, eTooltipColor.Gray));
-
-			ribbonBarHomeView.RecalcLayout();
-
+			ribbonTabItemSearch.Text = !string.IsNullOrEmpty(SettingsManager.Instance.SolutionTitle) ? SettingsManager.Instance.SolutionTitle : ribbonTabItemSearch.Text;
 			buttonItemProgramScheduleOutputPDF.Enabled = !PowerPointHelper.Instance.Is2003;
 			buttonItemProgramSearchOutputPDF.Enabled = !PowerPointHelper.Instance.Is2003;
 
@@ -98,8 +87,10 @@ namespace SalesDepot
 			RegistryHelper.MaximizeSalesDepot = false;
 
 			Image floaterLogo = null;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 				floaterLogo = labelItemPackageLogo.Image;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+				floaterLogo = labelItemSearchLogo.Image;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 				floaterLogo = labelItemCalendarLogo.Image;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
@@ -134,6 +125,11 @@ namespace SalesDepot
 			TabProgramSearch.IsActive = false;
 			TabQBuilder.IsActive = false;
 
+			SettingsManager.Instance.HomeView = false;
+			SettingsManager.Instance.SearchView = false;
+			SettingsManager.Instance.CalendarView = false;
+			SettingsManager.Instance.SaveSettings();
+
 			if (_alowToSave)
 			{
 				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
@@ -141,6 +137,12 @@ namespace SalesDepot
 					if (!pnContainer.Controls.Contains(TabHome))
 						pnContainer.Controls.Add(TabHome);
 					TabHome.ShowTab();
+				}
+				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+				{
+					if (!pnContainer.Controls.Contains(TabSearch))
+						pnContainer.Controls.Add(TabSearch);
+					TabSearch.ShowTab();
 				}
 				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
 				{
@@ -214,13 +216,9 @@ namespace SalesDepot
 											{
 												Invoke((MethodInvoker)delegate
 																		  {
-																			  TabHome.LoadPage();
+																			  TabHome.LoadTab();
 																			  Application.DoEvents();
 																			  _alowToSave = true;
-																			  if (SettingsManager.Instance.CalendarView)
-																				  ribbonTabItemCalendar.Select();
-																			  else
-																				  ribbonControl_SelectedRibbonTabChanged(null, null);
 																			  Application.DoEvents();
 																		  });
 											});
@@ -229,6 +227,13 @@ namespace SalesDepot
 						Application.DoEvents();
 				}
 
+				if (SettingsManager.Instance.SearchView)
+					ribbonTabItemSearch.Select();
+				else if (SettingsManager.Instance.CalendarView)
+					ribbonTabItemCalendar.Select();
+				else
+					ribbonControl_SelectedRibbonTabChanged(null, null);
+
 				ribbonControl.Visible = true;
 				pnContainer.BringToFront();
 			}
@@ -236,7 +241,6 @@ namespace SalesDepot
 			if (LibraryManager.Instance.LibraryPackageCollection.Count == 0)
 			{
 				ribbonBarStations.Enabled = false;
-				ribbonBarHomeView.Enabled = false;
 				ribbonTabItemSettings.Enabled = false;
 				AppManager.Instance.ShowWarning("Library is not available...\nCheck your network connections....");
 			}

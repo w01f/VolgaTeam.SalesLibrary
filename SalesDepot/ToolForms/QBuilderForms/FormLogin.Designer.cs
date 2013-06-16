@@ -42,6 +42,7 @@
 			this.simpleButtonLogin = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControlError = new DevExpress.XtraEditors.LabelControl();
+			this.labelControlDislaimer = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditHost.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditUser.Properties)).BeginInit();
@@ -75,7 +76,7 @@
 			// 
 			// labelControlHost
 			// 
-			this.labelControlHost.Location = new System.Drawing.Point(12, 12);
+			this.labelControlHost.Location = new System.Drawing.Point(12, 59);
 			this.labelControlHost.Name = "labelControlHost";
 			this.labelControlHost.Size = new System.Drawing.Size(27, 16);
 			this.labelControlHost.StyleController = this.styleController;
@@ -84,7 +85,7 @@
 			// 
 			// labelControlUser
 			// 
-			this.labelControlUser.Location = new System.Drawing.Point(12, 45);
+			this.labelControlUser.Location = new System.Drawing.Point(12, 92);
 			this.labelControlUser.Name = "labelControlUser";
 			this.labelControlUser.Size = new System.Drawing.Size(31, 16);
 			this.labelControlUser.StyleController = this.styleController;
@@ -93,7 +94,7 @@
 			// 
 			// labelControlPassword
 			// 
-			this.labelControlPassword.Location = new System.Drawing.Point(12, 77);
+			this.labelControlPassword.Location = new System.Drawing.Point(12, 124);
 			this.labelControlPassword.Name = "labelControlPassword";
 			this.labelControlPassword.Size = new System.Drawing.Size(61, 16);
 			this.labelControlPassword.StyleController = this.styleController;
@@ -102,7 +103,7 @@
 			// 
 			// comboBoxEditHost
 			// 
-			this.comboBoxEditHost.Location = new System.Drawing.Point(84, 9);
+			this.comboBoxEditHost.Location = new System.Drawing.Point(84, 56);
 			this.comboBoxEditHost.Name = "comboBoxEditHost";
 			this.comboBoxEditHost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -112,7 +113,7 @@
 			// 
 			// textEditUser
 			// 
-			this.textEditUser.Location = new System.Drawing.Point(84, 42);
+			this.textEditUser.Location = new System.Drawing.Point(84, 89);
 			this.textEditUser.Name = "textEditUser";
 			this.textEditUser.Size = new System.Drawing.Size(232, 22);
 			this.textEditUser.StyleController = this.styleController;
@@ -120,7 +121,7 @@
 			// 
 			// textEditPassword
 			// 
-			this.textEditPassword.Location = new System.Drawing.Point(84, 74);
+			this.textEditPassword.Location = new System.Drawing.Point(84, 121);
 			this.textEditPassword.Name = "textEditPassword";
 			this.textEditPassword.Properties.PasswordChar = '*';
 			this.textEditPassword.Size = new System.Drawing.Size(232, 22);
@@ -129,7 +130,7 @@
 			// 
 			// checkEditSave
 			// 
-			this.checkEditSave.Location = new System.Drawing.Point(10, 112);
+			this.checkEditSave.Location = new System.Drawing.Point(10, 159);
 			this.checkEditSave.Name = "checkEditSave";
 			this.checkEditSave.Properties.Caption = "Save Password";
 			this.checkEditSave.Size = new System.Drawing.Size(306, 21);
@@ -143,7 +144,7 @@
 			this.simpleButtonLogin.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.simpleButtonLogin.Appearance.Options.UseFont = true;
 			this.simpleButtonLogin.Appearance.Options.UseForeColor = true;
-			this.simpleButtonLogin.Location = new System.Drawing.Point(55, 169);
+			this.simpleButtonLogin.Location = new System.Drawing.Point(55, 213);
 			this.simpleButtonLogin.Name = "simpleButtonLogin";
 			this.simpleButtonLogin.Size = new System.Drawing.Size(93, 34);
 			this.simpleButtonLogin.StyleController = this.styleController;
@@ -159,7 +160,7 @@
 			this.simpleButtonCancel.Appearance.Options.UseFont = true;
 			this.simpleButtonCancel.Appearance.Options.UseForeColor = true;
 			this.simpleButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.simpleButtonCancel.Location = new System.Drawing.Point(180, 169);
+			this.simpleButtonCancel.Location = new System.Drawing.Point(180, 213);
 			this.simpleButtonCancel.Name = "simpleButtonCancel";
 			this.simpleButtonCancel.Size = new System.Drawing.Size(93, 34);
 			this.simpleButtonCancel.StyleController = this.styleController;
@@ -171,18 +172,34 @@
 			this.labelControlError.Appearance.ForeColor = System.Drawing.Color.Red;
 			this.labelControlError.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.labelControlError.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
-			this.labelControlError.Location = new System.Drawing.Point(12, 139);
+			this.labelControlError.Location = new System.Drawing.Point(12, 186);
 			this.labelControlError.Name = "labelControlError";
 			this.labelControlError.Size = new System.Drawing.Size(304, 13);
 			this.labelControlError.TabIndex = 9;
 			this.labelControlError.Text = "User or Password not correct for selected Site";
 			this.labelControlError.Visible = false;
 			// 
+			// labelControlDislaimer
+			// 
+			this.labelControlDislaimer.Appearance.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlDislaimer.Appearance.ForeColor = System.Drawing.Color.Red;
+			this.labelControlDislaimer.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.labelControlDislaimer.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+			this.labelControlDislaimer.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlDislaimer.Location = new System.Drawing.Point(0, 0);
+			this.labelControlDislaimer.Name = "labelControlDislaimer";
+			this.labelControlDislaimer.Padding = new System.Windows.Forms.Padding(3, 5, 3, 0);
+			this.labelControlDislaimer.Size = new System.Drawing.Size(328, 41);
+			this.labelControlDislaimer.StyleController = this.styleController;
+			this.labelControlDislaimer.TabIndex = 10;
+			this.labelControlDislaimer.Text = "You must Log into your Cloud Sales Library to create quickSITES on the internet…";
+			// 
 			// FormLogin
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(328, 217);
+			this.ClientSize = new System.Drawing.Size(328, 261);
+			this.Controls.Add(this.labelControlDislaimer);
 			this.Controls.Add(this.labelControlError);
 			this.Controls.Add(this.simpleButtonCancel);
 			this.Controls.Add(this.simpleButtonLogin);
@@ -226,5 +243,6 @@
 		private DevExpress.XtraEditors.SimpleButton simpleButtonLogin;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
 		private DevExpress.XtraEditors.LabelControl labelControlError;
+		private DevExpress.XtraEditors.LabelControl labelControlDislaimer;
 	}
 }

@@ -19,7 +19,7 @@ namespace SalesDepot.CoreObjects.ToolClasses
 
 		private PdfHelper()
 		{
-			PdfRasterizer.AddLicense("RST47N0DNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN");
+			PdfRasterizer.AddLicense("RST20NXDGKFKDLYMw0fsJRu1DsUT9rc8r8C+PEemp2t8HAswYEWFAkaX7h63jGM6Ip9hLi15A4aSVky01IXC9+Tga7jNykC8BW7g");
 		}
 
 		public void ExportPdf(string sourceFilePath, string destinationPngPath, string destinationJpgPath, string destinationThumbsPath)

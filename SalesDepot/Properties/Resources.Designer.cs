@@ -312,6 +312,20 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap MinibarFontLarger {
+            get {
+                object obj = ResourceManager.GetObject("MinibarFontLarger", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MinibarFontSmaller {
+            get {
+                object obj = ResourceManager.GetObject("MinibarFontSmaller", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap OpenFile {
             get {
                 object obj = ResourceManager.GetObject("OpenFile", resourceCulture);

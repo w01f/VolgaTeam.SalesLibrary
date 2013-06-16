@@ -107,10 +107,18 @@
   <wsdl:message name="isLinkAvailableResponse">
     <wsdl:part name="return" type="xsd:boolean" />
   </wsdl:message>
+  <wsdl:message name="isFolderAvailableRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="folderId" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="isFolderAvailableResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
   <wsdl:message name="addLinkToCartRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="login" type="xsd:string" />
     <wsdl:part name="linkId" type="xsd:string" />
+    <wsdl:part name="folderId" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="addLinkToCartResponse" />
   <wsdl:message name="emailLinkRequest">
@@ -228,6 +236,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:isLinkAvailableRequest" />
       <wsdl:output message="tns:isLinkAvailableResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isFolderAvailable">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:isFolderAvailableRequest" />
+      <wsdl:output message="tns:isFolderAvailableResponse" />
     </wsdl:operation>
     <wsdl:operation name="addLinkToCart">
       <wsdl:documentation>
@@ -348,6 +362,15 @@
     </wsdl:operation>
     <wsdl:operation name="isLinkAvailable">
       <soap:operation soapAction="urn:QbuilderControllerwsdl#isLinkAvailable" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isFolderAvailable">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#isFolderAvailable" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
