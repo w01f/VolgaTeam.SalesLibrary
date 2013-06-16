@@ -20,6 +20,7 @@ namespace SalesDepot.SiteManager.ConfigurationClasses
 		public string SelectedSiteName { get; set; }
 		public int SelectedTab { get; set; }
 		public InactiveUsersSettings InactiveUsersSettings { get; private set; }
+		public AppWindowSettings AppWindowSettings { get; private set; }
 		#endregion
 
 		private SettingsManager()
@@ -30,6 +31,7 @@ namespace SalesDepot.SiteManager.ConfigurationClasses
 			LogoPath = Path.Combine(ApplicationRootsPath, "logo.png");
 			IconPath = Path.Combine(ApplicationRootsPath, "icon.ico");
 			InactiveUsersSettings = new InactiveUsersSettings();
+			AppWindowSettings = new AppWindowSettings();
 			Load();
 		}
 
@@ -60,6 +62,7 @@ namespace SalesDepot.SiteManager.ConfigurationClasses
 			}
 
 			InactiveUsersSettings.Load();
+			AppWindowSettings.Load();
 		}
 
 		public void Save()

@@ -17,10 +17,16 @@ namespace SalesDepot.SiteManager
 		{
 			InitializeComponent();
 
-			TabUsers = new TabUsersControl();
+			if (SettingsManager.Instance.AppWindowSettings.Existed)
+			{
+				StartPosition = FormStartPosition.Manual;
+				WindowState = SettingsManager.Instance.AppWindowSettings.Maximized ? FormWindowState.Maximized : FormWindowState.Normal;
+				Top = SettingsManager.Instance.AppWindowSettings.Top;
+				Left = SettingsManager.Instance.AppWindowSettings.Left;
+				Height = SettingsManager.Instance.AppWindowSettings.Height;
+				Width = SettingsManager.Instance.AppWindowSettings.Width;
+			}
 		}
-
-		public TabUsersControl TabUsers { get; private set; }
 
 		public static FormMain Instance
 		{
@@ -66,6 +72,17 @@ namespace SalesDepot.SiteManager
 		private void buttonItemExit_Click(object sender, EventArgs e)
 		{
 			Close();
+		}
+
+		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			StartPosition = FormStartPosition.Manual;
+			SettingsManager.Instance.AppWindowSettings.Maximized = WindowState == FormWindowState.Maximized;
+			SettingsManager.Instance.AppWindowSettings.Top = Top;
+			SettingsManager.Instance.AppWindowSettings.Left = Left;
+			SettingsManager.Instance.AppWindowSettings.Height = Height;
+			SettingsManager.Instance.AppWindowSettings.Width = Width;
+			SettingsManager.Instance.AppWindowSettings.Save();
 		}
 
 		#region Select All in Editor Handlers

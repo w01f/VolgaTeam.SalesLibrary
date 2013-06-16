@@ -97,6 +97,7 @@
     <Compile Include="AppManager.cs" />
     <Compile Include="BusinessClasses\ImportManager.cs" />
     <Compile Include="BusinessClasses\SiteManager.cs" />
+    <Compile Include="ConfigurationClasses\AppWindowSettings.cs" />
     <Compile Include="ConfigurationClasses\InactiveUsersSettings.cs" />
     <Compile Include="ConfigurationClasses\SettingsManager.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
