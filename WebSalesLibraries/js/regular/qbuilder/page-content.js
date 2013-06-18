@@ -138,6 +138,18 @@
 				}
 			});
 
+			$("#page-content-access-code").keydown(function (event)
+			{
+				if (event.keyCode == 46 || event.keyCode == 8)
+				{
+				}
+				else
+				{
+					if (event.keyCode < 48 || event.keyCode > 57)
+						event.preventDefault();
+				}
+			});
+
 			var logoSelector = $('#page-content-tab-logo');
 			logoSelector.find('ul a').on('click', function ()
 			{

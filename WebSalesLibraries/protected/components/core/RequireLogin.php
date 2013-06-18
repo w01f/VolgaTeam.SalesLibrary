@@ -20,6 +20,7 @@ class RequireLogin extends CBehavior
 			!strstr(Yii::app()->request->getUrl(), 'site/disclaimerWarning') &&
 			!strstr(Yii::app()->request->getUrl(), 'qbuilder/quote') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/show') &&
+			!strstr(Yii::app()->request->getUrl(), 'qpage/recordActivity') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/getPublic') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/preview') &&
 			!strstr(Yii::app()->request->getUrl(), 'qpage/site') &&

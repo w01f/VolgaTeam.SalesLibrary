@@ -153,8 +153,21 @@
 			$showLinkToMainSite = Yii::app()->request->getPost('showLinkToMainSite');
 			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == "true";
 
+			$disableBanners = Yii::app()->request->getPost('disableBanners');
+			$disableBanners = isset($disableBanners) && $disableBanners == "true";
+
+			$disableWidgets = Yii::app()->request->getPost('disableWidgets');
+			$disableWidgets = isset($disableWidgets) && $disableWidgets == "true";
+
+			$recordActivity = Yii::app()->request->getPost('recordActivity');
+			$recordActivity = isset($recordActivity) && $recordActivity == "true";
+
+			$pinCode = Yii::app()->request->getPost('pinCode');
+			if (isset($pinCode) && $pinCode == '')
+				$pinCode = null;
+
 			if (isset($selectedPageId))
-				QPageStorage::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite);
+				QPageStorage::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite, $disableBanners, $disableWidgets, $recordActivity, $pinCode);
 		}
 
 		public function actionGetLinkCart()
@@ -457,19 +470,23 @@
 				if (isset($pageRecord))
 				{
 					$page = new QPageRecord();
-					$page->id = $pageRecord['id'];
-					$page->title = $pageRecord['title'];
-					$page->isEmail = $pageRecord['is_email'];
-					$page->url = Yii::app()->createAbsoluteUrl('qpage/show', array('id' => $pageRecord['id']));
-					$page->createDate = $pageRecord['create_date'];
-					$page->expirationDate = $pageRecord['expiration_date'];
-					$page->subtitle = $pageRecord['subtitle'];
-					$page->header = $pageRecord['header'];
-					$page->footer = $pageRecord['footer'];
-					$page->isRestricted = $pageRecord['restricted'];
-					$page->showLinkMainSite = $pageRecord['show_site_link'];
-					$page->showTicker = $pageRecord['show_ticker'];
-					$page->logo = isset($pageRecord['logo']) ? str_replace('data:image/png;base64,', '', $pageRecord['logo']) : null;
+					$page->id = $pageRecord->id;
+					$page->title = $pageRecord->title;
+					$page->isEmail = $pageRecord->is_email;
+					$page->url = Yii::app()->createAbsoluteUrl('qpage/show', array('id' => $pageRecord->id));
+					$page->createDate = $pageRecord->create_date;
+					$page->expirationDate = $pageRecord->expiration_date;
+					$page->subtitle = $pageRecord->subtitle;
+					$page->header = $pageRecord->header;
+					$page->footer = $pageRecord->footer;
+					$page->isRestricted = $pageRecord->restricted;
+					$page->showLinkMainSite = $pageRecord->show_site_link;
+					$page->showTicker = $pageRecord->show_ticker;
+					$page->disableBanners = $pageRecord->disable_banners;
+					$page->disableWidgets = $pageRecord->disable_widgets;
+					$page->recordActivity = $pageRecord->record_activity;
+					$page->pinCode = $pageRecord->pin_code;
+					$page->logo = isset($pageRecord->logo) ? str_replace('data:image/png;base64,', '', $pageRecord->logo) : null;
 
 					$linkRecords = $pageRecord->getPageLinks();
 					if (isset($linkRecords))
@@ -557,18 +574,43 @@
 
 		/**
 		 * @param string Session Key
-		 * @param string login
-		 * @param string linkId
+		 * @param string FolderId
+		 * @return bool
 		 * @soap
 		 */
-		public function addLinkToCart($sessionKey, $login, $linkId)
+		public function isFolderAvailable($sessionKey, $folderId)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$folderRecord = FolderStorage::model()->findByPk($folderId);
+				return isset($folderRecord);
+			}
+			return false;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @param string linkId
+		 * @param string folderId
+		 * @soap
+		 */
+		public function addLinkToCart($sessionKey, $login, $linkId, $folderId)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
 				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
 				if (isset($userRecord))
 				{
-					UserLinkCartStorage::addLink($userRecord->id, $linkId);
+					if (isset($linkId))
+						UserLinkCartStorage::addLink($userRecord->id, $linkId);
+					else if (isset($folderId))
+					{
+						$linkIds = FolderStorage::model()->getChildLinkIds($folderId);
+						if (isset($linkIds))
+							foreach ($linkIds as $linkId)
+								UserLinkCartStorage::addLink($userRecord->id, $linkId);
+					}
 				}
 			}
 		}
@@ -685,17 +727,21 @@
 		 * @param bool requireLogin
 		 * @param bool showLinkToMainSite
 		 * @param bool showTicker
+		 * @param bool disableBanners
+		 * @param bool disableWidgets
+		 * @param bool recordActivity
+		 * @param string pinCode
 		 * @param string logo
 		 * @soap
 		 */
-		public function savePageContent($sessionKey, $pageId, $title, $description, $header, $footer, $expirationDate, $requireLogin, $showLinkToMainSite, $showTicker, $logo)
+		public function savePageContent($sessionKey, $pageId, $title, $description, $header, $footer, $expirationDate, $requireLogin, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $logo)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
 				if (isset($expirationDate) && $expirationDate != '')
 					$expirationDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($expirationDate));
 				$logo = 'data:image/png;base64,' . $logo;
-				QPageStorage::savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite);
+				QPageStorage::savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite, $disableBanners, $disableWidgets, $recordActivity, $pinCode);
 			}
 		}
 

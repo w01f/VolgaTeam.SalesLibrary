@@ -8,21 +8,45 @@
 
 		public function actionShow()
 		{
-			$accessed = false;
-			$pageId = Yii::app()->request->getQuery('id');
-			if (isset($pageId))
+			$pinCodedModel = new PinCodeForm();
+			$attributes = Yii::app()->request->getPost('PinCodeForm');
+			if (isset($attributes))
 			{
-				$page = QPageStorage::model()->findByPk($pageId);
-				if (isset($page) && !$page->isExpired())
+				$pinCodedModel->attributes = $attributes;
+				$pinCodedModel->pageId = $attributes['pageId'];
+				$pinCodedModel->pinCode = $attributes['pinCode'];
+				if ($pinCodedModel->validate())
 				{
+					$page = QPageStorage::model()->findByPk($pinCodedModel->pageId);
 					$this->redirect($page->getUrlInternal());
-					$accessed = true;
 				}
+				else
+					$this->render('login', array('formData' => $pinCodedModel));
 			}
-			if (!$accessed)
+			else
 			{
-				$this->pageTitle = 'quickSITE';
-				$this->render('unauthorized');
+				$accessed = false;
+				$pageId = Yii::app()->request->getQuery('id');
+				if (isset($pageId))
+				{
+					$page = QPageStorage::model()->findByPk($pageId);
+					if (isset($page) && !$page->isExpired())
+					{
+						if (isset($page->pin_code))
+						{
+							$pinCodedModel->pageId = $pageId;
+							$this->render('login', array('formData' => $pinCodedModel));
+						}
+						else
+							$this->redirect($page->getUrlInternal());
+						$accessed = true;
+					}
+				}
+				if (!$accessed)
+				{
+					$this->pageTitle = 'quickSITE';
+					$this->render('unauthorized');
+				}
 			}
 		}
 
@@ -38,6 +62,31 @@
 			$pageId = Yii::app()->request->getQuery('id');
 			if (isset($pageId))
 				$this->renderPage($pageId, false);
+		}
+
+		public function actionRecordActivity()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (isset($linkId) && isset($pageId))
+			{
+				$pageRecord = QPageStorage::model()->findByPk($pageId);
+				if (isset($pageRecord))
+					$pageOwner = UserStorage::model()->findByPk($pageRecord->id_owner);
+				$linkRecord = LinkStorage::getLinkById($linkId);
+				if (isset($linkRecord) && isset($pageRecord) && isset($pageOwner) && $pageRecord->record_activity)
+				{
+					$ip = Yii::app()->request->getUserHostAddress();
+					$message = Yii::app()->email;
+					$message->to = $pageOwner->email;
+					$message->subject = 'quickSITE Notification';
+					$message->from = Yii::app()->params['email']['from'];
+					$message->message = 'Someone just viewed a file on this quickSITE: ' . $pageRecord->getUrl() .
+										'<br>Link Name clicked: ' . $linkRecord->name .
+										'<br>IP Address: ' . $ip;
+					$message->send();
+				}
+			}
 		}
 
 		private function renderPage($pageId, $protected)

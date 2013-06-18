@@ -13,6 +13,10 @@ CREATE TABLE IF NOT EXISTS `tbl_qpage` (
 	`restricted` tinyint(1) NOT NULL DEFAULT 0,
 	`show_ticker` tinyint(1) NOT NULL DEFAULT 0,
 	`show_site_link` tinyint(1) NOT NULL DEFAULT 0,
+  `disable_banners` tinyint(1) DEFAULT '0',
+  `disable_widgets` tinyint(1) DEFAULT '0',
+  `record_activity` tinyint(1) DEFAULT '0',
+  `pin_code` VARCHAR( 4 ) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `id_owner` (`id_owner`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

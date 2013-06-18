@@ -1,5 +1,5 @@
 <?php
-$version = '4.0';
+$version = '5.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -59,13 +59,14 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 </div>
 <div id="content">
 	<div>
+		<div id="page-id" style="display: none;"><?echo $page->id;?></div>
 		<div id="page-title"><?echo $page->subtitle;?></div>
 		<div id="page-header"><?echo nl2br($page->header);?></div>
 		<div id="page-links-container" class="folder-links-container">
 			<? $links = $page->getLibraryLinks()?>
 			<?if (isset($links)): ?>
 				<?php foreach ($links as $link): ?>
-					<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $link), true); ?>
+					<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $link, 'disableBanner' => $page->disable_banners, 'disableWidget' => $page->disable_widgets), true); ?>
 				<?php endforeach; ?>
 			<? endif;?>
 		</div>

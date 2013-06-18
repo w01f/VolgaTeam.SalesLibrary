@@ -2,6 +2,7 @@
 {
 	var loadLink = function (linkId, parentTitle, isAttachment, backLink)
 	{
+		recordActivity(linkId);
 		$.ajax({
 			type: "POST",
 			url: isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList",
@@ -137,6 +138,7 @@
 
 	var loadFolderContent = function (linkId, parentLinkId)
 	{
+		recordActivity(linkId);
 		$.ajax({
 			type: "POST",
 			url: "wallbin/getLinkFolderContent",
@@ -197,6 +199,21 @@
 		});
 	};
 
+	var recordActivity = function (linkId)
+	{
+		var pageId = $('#page-id').html();
+		$.ajax({
+			type: "POST",
+			url: "qpage/recordActivity",
+			data: {
+				pageId: pageId,
+				linkId: linkId
+			},
+			async: true,
+			dataType: 'html'
+		});
+	};
+
 	$(document).ready(function ()
 	{
 		var mainPage = $('#main');
@@ -209,6 +226,7 @@
 		mainPage.find(".folder-content-link").on('click', function ()
 		{
 			var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+			recordActivity(selectedLink);
 			loadFolderContent(selectedLink, null);
 		});
 		mainPage.find(".file-link-detail").on('click', function (event)

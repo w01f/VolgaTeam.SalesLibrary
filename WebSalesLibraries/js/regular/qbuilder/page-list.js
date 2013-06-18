@@ -492,8 +492,12 @@
 					logo: $('#page-content-tab-logo').find('a.opened').find('img').attr('src'),
 					expirationDate: $('#page-content-expiration-date').val(),
 					requireLogin: $('#page-content-require-login').is(':checked'),
+					pinCode: $('#page-content-access-code').val(),
 					showTicker: $('#page-content-show-ticker').is(':checked'),
 					showLinkToMainSite: $('#page-content-show-link-to-main-site').is(':checked'),
+					disableBanners: $('#page-content-disable-banners').is(':checked'),
+					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
+					recordActivity: $('#page-content-record-activity').is(':checked'),
 					header: $('#page-content-header-text').val(),
 					footer: $('#page-content-footer-text').val()
 				},
@@ -541,7 +545,11 @@
 		},
 		emailPageOutlook: function ()
 		{
-			window.open("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + $('#page-content-url').html(), "_self");
+			var pinCode = $('#page-content-access-code').val();
+			if (pinCode.length > 0)
+				window.open("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + $('#page-content-url').html() + "%0D%0APin-code: " + pinCode, "_self");
+			else
+				window.open("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + $('#page-content-url').html(), "_self");
 		}
 	};
 

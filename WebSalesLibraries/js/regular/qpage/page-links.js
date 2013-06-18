@@ -9,6 +9,7 @@
 			{
 				event.stopPropagation();
 				var linkId = $(this).attr('id').replace('link', '');
+				recordActivity(linkId);
 				$.requestViewDialog(linkId, false);
 			});
 		container.find('.folder-link')
@@ -31,6 +32,7 @@
 				var linkId = folderLinkContent.attr("id").replace('folder-link-content', '');
 			if (!folderLinkContent.find('.link-container').length && linkId != null)
 			{
+				recordActivity(linkId);
 				$.ajax({
 					type: "POST",
 					url: "wallbin/getLinkFolderContent",
@@ -57,6 +59,7 @@
 							{
 								event.stopPropagation();
 								var linkId = $(this).attr('id').replace('link', '');
+								recordActivity(linkId);
 								$.requestViewDialog(linkId, false);
 							});
 						$('.folder-link')
@@ -93,6 +96,20 @@
 		}
 	};
 
+	var recordActivity = function(linkId)
+	{
+		var pageId =$('#page-id').html();
+		$.ajax({
+			type: "POST",
+			url: "qpage/recordActivity",
+			data: {
+				pageId: pageId,
+				linkId: linkId
+			},
+			async: true,
+			dataType: 'html'
+		});
+	};
 
 	$(document).ready(function ()
 	{

@@ -62,6 +62,26 @@
 		 */
 		public $showTicker;
 		/**
+		 * @var boolean disableBanners
+		 * @soap
+		 */
+		public $disableBanners;
+		/**
+		 * @var boolean disableWidgets
+		 * @soap
+		 */
+		public $disableWidgets;
+		/**
+		 * @var boolean recordActivity
+		 * @soap
+		 */
+		public $recordActivity;
+		/**
+		 * @var string pinCode
+		 * @soap
+		 */
+		public $pinCode;
+		/**
 		 * @var string Logo
 		 * @soap
 		 */

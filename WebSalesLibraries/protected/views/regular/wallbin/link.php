@@ -11,14 +11,14 @@ else
 }
 ?>
 <div class="<?php echo $linkContainerClass; ?>" id="link<?php echo $link->id; ?>">
-	<?php if (isset($link->banner) && $link->banner->isEnabled): ?>
+	<?php if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
 		<?php echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
 	<?php else: ?>
 		<?php
 		$widget = $link->getWidget();
 		if ($link->getIsLineBreak())
 		{
-			$displayWidget = isset($widget) && $widget != '';
+			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '';
 			$linkClass = 'link-line-break' . ($displayWidget ? ' widget' : '');
 			$linkFontProperties = 'font-family: ' . $link->lineBreakProperties->font->name . '; '
 				. 'font-size: ' . $link->lineBreakProperties->font->size . 'pt; '
@@ -29,7 +29,7 @@ else
 		}
 		else
 		{
-			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : isset($widget) && $widget != '';
+			$displayWidget = isset($link->files) ? $link->parent->displayLinkWidgets : (!(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '');
 			$linkClass = $displayWidget ? ' widget' : '';
 			$font = isset($link->parent) && isset($link->parent->windowFont) ? $link->parent->windowFont : Font::getDefault();
 			$linkFontProperties = 'font-family: ' . $font->name . '; '
@@ -41,7 +41,7 @@ else
 		}
 		?>
 		<div class="<?php echo $linkClass; ?>"
-			 style="background-image: <?php echo isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <?php echo $linkFontProperties; ?>">
+			 style="background-image: <?php echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <?php echo $linkFontProperties; ?>">
 		<span class="link-text" <?php if (isset($tooltip)): ?>rel="tooltip"
 			  title="<? echo $tooltip; ?>"<? endif;?>><?php echo $link->name; ?></span>
 			<?php if (isset($link->note) && $link->note != ""): ?>

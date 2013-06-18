@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '2.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -31,9 +31,16 @@ if (isset($userId))
 		<span class="ui-title  header-title"><? echo $page->title; ?></span>
 	</div>
 	<div data-role='content' class="page-content">
+		<div id="page-id" style="display: none;"><?echo $page->id;?></div>
 		<div class="centered">
 			<img src="<? echo $page->logo; ?>"/>
-			<h2><? echo strip_tags($page->subtitle); ?></h2>
+			<h2>
+				<?
+				$string = $page->subtitle;
+				$string = preg_replace('/[\n\r ]*<style[^>]*>(([^<]|[<[^\/]|<\/[^s]|<\/s[^t])*)<\/style>[\n\r ]*/i', '', $string);
+				echo strip_tags($string);
+				?>
+			</h2>
 		</div>
 		<h4><? echo strip_tags($page->header); ?></h4>
 		<? $links = $page->getLibraryLinks()?>

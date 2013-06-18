@@ -189,6 +189,10 @@
 				$pageRecord->restricted = $clonedPageRecord->restricted;
 				$pageRecord->show_ticker = $clonedPageRecord->show_ticker;
 				$pageRecord->show_site_link = $clonedPageRecord->show_site_link;
+				$pageRecord->disable_banners = $clonedPageRecord->disable_banners;
+				$pageRecord->disable_widgets = $clonedPageRecord->disable_widgets;
+				$pageRecord->record_activity = $clonedPageRecord->record_activity;
+				$pageRecord->pin_code = $clonedPageRecord->pin_code;
 				$pageRecord->save();
 
 				$clonedPageLinks = QPageLinkStorage::model()->findAll('id_page=?', array($clonePageId));
@@ -205,7 +209,7 @@
 			return null;
 		}
 
-		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite)
+		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite, $disableBanners, $disableWidgets, $recordActivity, $pinCode)
 		{
 			$pageRecord = self::model()->findByPk($pageId);
 			if (isset($pageRecord))
@@ -219,6 +223,10 @@
 				$pageRecord->restricted = $requireLogin;
 				$pageRecord->show_ticker = $showTicker;
 				$pageRecord->show_site_link = $showLinkToMainSite;
+				$pageRecord->disable_banners = $disableBanners;
+				$pageRecord->disable_widgets = $disableWidgets;
+				$pageRecord->record_activity = $recordActivity;
+				$pageRecord->pin_code = $pinCode;
 				$pageRecord->save();
 			}
 		}
