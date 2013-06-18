@@ -334,6 +334,11 @@
 				$.pageContent.editorFooter.$main.height(footerHeight + "px");
 				$.pageContent.editorFooter.refresh();
 			}
+
+			var logoHeight = content.height() - 5 - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height() - $('#page-content-tab-logo .header').height() - 45;
+			$('#page-content-tab-logo').find('.logo-list').css({
+				'height': logoHeight + 'px'
+			});
 		},
 		destroyEditors: function ()
 		{

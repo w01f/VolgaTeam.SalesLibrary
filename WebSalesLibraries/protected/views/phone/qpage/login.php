@@ -20,6 +20,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 			<tr>
 				<td>
 					<img id="image-logo" src="<?php echo Yii::app()->baseUrl . '/images/logo_phone.png'; ?>"/>
+					<h5>Enter your 4 Digit Security PIN to access this site:<h5>
 					<?php
 					echo $form->textField($formData, 'pageId'
 						, array('input type' => 'hidden',
@@ -35,6 +36,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
 						, array(
 							'id' => 'field-pin-code',
 							'class' => 'edit-field',
+							'maxlength' => 4,
 							'placeholder' => 'Pin-code')
 					);
 					?>

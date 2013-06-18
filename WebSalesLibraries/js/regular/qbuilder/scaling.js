@@ -51,7 +51,7 @@
 	var updatePageLinks = function ()
 	{
 		var content = $('#content');
-		var height = content.height() - 5  - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height() - $('#page-content-tab-links .header').height() - 40;
+		var height = content.height() - 5  - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height() - $('#page-content-tab-links .header').height() - 45;
 		$('#page-content-links-container').css({
 			'height': height + 'px'
 		});
@@ -60,7 +60,7 @@
 	var updatePageLogos = function ()
 	{
 		var content = $('#content');
-		var height = content.height() - 5 - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height() - 25;
+		var height = content.height() - 5 - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height() - $('#page-content-tab-logo .header').height() - 40;
 		$('#page-content-tab-logo').find('.logo-list').css({
 			'height': height + 'px'
 		});

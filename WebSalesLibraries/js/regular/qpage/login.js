@@ -13,6 +13,17 @@
     
     $(document).ready(function()
     {
+		$("#pin-code").keydown(function (event)
+		{
+			if (event.keyCode == 46 || event.keyCode == 8)
+			{
+			}
+			else
+			{
+				if (event.keyCode < 48 || event.keyCode > 57)
+					event.preventDefault();
+			}
+		});
         updateLoginBodyPosition();
         $(window).on('resize',updateLoginBodyPosition); 
     });

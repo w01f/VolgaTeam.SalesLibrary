@@ -1,5 +1,5 @@
 <?php
-$version = '7.0';
+$version = '8.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
@@ -120,7 +120,7 @@ $showLinlCart = isset(Yii::app()->request->cookies['showLinkCart']->value) ? Yii
 		?>
 		<div class="ribbon-section">
 			<span class="section-title">Enable Popups</span>
-			<a class="ribbon-button ribbon-button-large" href="<?php echo Yii::app()->getBaseUrl(true) . '/sd_cache/popups/' . $popupLink; ?>" target="_blanck">
+			<a class="ribbon-button ribbon-button-large" href="<?php echo Yii::app()->getBaseUrl(true) . '/sd_cache/popups/' . $popupLink; ?>" target="_blanck" rel="tooltip" title="Popups MUST be Enabled for this site">
 				<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/popup-help.png' ?>"/>
 				<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/popup-help.png' ?>"/>
 				<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/popup-help.png' ?>"/>

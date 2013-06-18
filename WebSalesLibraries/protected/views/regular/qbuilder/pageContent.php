@@ -49,6 +49,7 @@
 			</div>
 			<div id="page-content-tab-security">
 				<? $expDate = $page->getExpirationDateFormatted(); ?>
+				<h5>Customize your quickSITE with the settings below:</h5>
 				<br>
 				<form class="form-inline">
 					<label class="checkbox"><input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>><span style="margin-left: 4px;">A. Set Expiration Date</span></label>
@@ -61,7 +62,7 @@
 				</form>
 				<label class="checkbox"><input type="checkbox" id="page-content-require-login" value="" <?php echo $page->restricted ? 'checked' : '' ?>>B. Require Authorized User login and password to view site</label>
 				<form class="form-inline">
-					<label class="checkbox"><input id="page-content-access-code-enabled" type="checkbox" value="" <?php echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>><span style="margin-left: 4px;">C. Create a SECURE ACCESS Pin</span></label>
+					<label class="checkbox"><input id="page-content-access-code-enabled" type="checkbox" value="" <?php echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>><span style="margin-left: 4px;">C. Create a SECURE ACCESS Pin (4 Digit Number)</span></label>
 					<input type="text" maxlength="4" class="input-small" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<?endif;?> value="<?php echo isset($page->pin_code) && $page->pin_code > 0 ? $page->pin_code : '' ?>">
 				</form>
 				<label class="checkbox"><input type="checkbox" id="page-content-show-link-to-main-site" value="" <?php echo $page->show_site_link ? 'checked' : '' ?>>D. Show Link to MAIN SITE in top ribbon</label>
@@ -71,6 +72,9 @@
 				<label class="checkbox"><input type="checkbox" id="page-content-record-activity" value="" <?php echo $page->record_activity ? 'checked' : '' ?>>H. Email me each time someone clicks a link on this quickSITE</label>
 			</div>
 			<div id="page-content-tab-logo">
+				<div class="header">
+					<h5>Select a Logo that will appear at the VERY top of this quickSITE:</h5>
+				</div>
 				<div class="logo-list">
 					<ul class="nav nav-pills">
 						<?if (isset($logos)): ?>
