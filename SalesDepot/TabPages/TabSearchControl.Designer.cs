@@ -73,7 +73,7 @@
 			this.barButtonItemEmailLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemPrintLink = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemQuickSiteEmail = new DevExpress.XtraBars.BarButtonItem();
-			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemQuickSiteAdd = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemAddSlide = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barButtonItemOpenQuickView = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemSearch = new DevExpress.XtraBars.BarButtonItem();
@@ -308,7 +308,7 @@
             this.barStaticItemFileNumber,
             this.barButtonItemAddSlide,
             this.barButtonItemQuickSiteEmail,
-            this.barButtonItem1});
+            this.barButtonItemQuickSiteAdd});
 			this.barManager.MaxItemId = 15;
 			// 
 			// barLinksOperations
@@ -324,7 +324,7 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemEmailLink),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemPrintLink),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemQuickSiteEmail),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemQuickSiteAdd),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemAddSlide),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemOpenQuickView),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSearch),
@@ -417,13 +417,13 @@
 			this.barButtonItemQuickSiteEmail.Name = "barButtonItemQuickSiteEmail";
 			this.barButtonItemQuickSiteEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemQuickSiteEmail_ItemClick);
 			// 
-			// barButtonItem1
+			// barButtonItemQuickSiteAdd
 			// 
-			this.barButtonItem1.Caption = "Add to quickSITE";
-			this.barButtonItem1.Glyph = global::SalesDepot.Properties.Resources.QuickSiteAddLink;
-			this.barButtonItem1.Id = 14;
-			this.barButtonItem1.Name = "barButtonItem1";
-			this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+			this.barButtonItemQuickSiteAdd.Caption = "Add to quickSITE";
+			this.barButtonItemQuickSiteAdd.Glyph = global::SalesDepot.Properties.Resources.QuickSiteAddLink;
+			this.barButtonItemQuickSiteAdd.Id = 14;
+			this.barButtonItemQuickSiteAdd.Name = "barButtonItemQuickSiteAdd";
+			this.barButtonItemQuickSiteAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemQuickSiteAdd_ItemClick);
 			// 
 			// barButtonItemAddSlide
 			// 
@@ -1450,7 +1450,7 @@
         private DevExpress.XtraBars.BarLargeButtonItem barButtonItemAddSlide;
 		private System.Windows.Forms.ImageList imageList;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemQuickSiteEmail;
-		private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemQuickSiteAdd;
 
 
     }

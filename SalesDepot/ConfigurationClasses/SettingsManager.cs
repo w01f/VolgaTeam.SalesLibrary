@@ -74,6 +74,7 @@ namespace SalesDepot.ConfigurationClasses
 		public string SelectedPage { get; set; }
 		public int SelectedCalendarYear { get; set; }
 		public int FontSize { get; set; }
+		public int RowSpace { get; set; }
 		public int CalendarFontSize { get; set; }
 		public bool ShowEmailBin { get; set; }
 		public bool EmailBinSendAsPdf { get; set; }
@@ -344,6 +345,7 @@ namespace SalesDepot.ConfigurationClasses
 			SelectedPage = string.Empty;
 			SelectedCalendarYear = 0;
 			FontSize = 12;
+			RowSpace = 1;
 			CalendarFontSize = 10;
 			EmailBinSendAsPdf = false;
 			EmailBinSendAsZip = false;
@@ -391,6 +393,10 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
 						FontSize = tempInt;
+				node = document.SelectSingleNode(@"/LocalSettings/RowSpace");
+				if (node != null)
+					if (int.TryParse(node.InnerText, out tempInt))
+						RowSpace = tempInt;
 				node = document.SelectSingleNode(@"/LocalSettings/CalendarFontSize");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
@@ -541,6 +547,7 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
 			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
 			xml.AppendLine(@"<FontSize>" + FontSize.ToString() + @"</FontSize>");
+			xml.AppendLine(@"<RowSpace>" + RowSpace.ToString() + @"</RowSpace>");
 			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize.ToString() + @"</CalendarFontSize>");
 			xml.AppendLine(@"<ShowEmailBin>" + ShowEmailBin.ToString() + @"</ShowEmailBin>");
 			xml.AppendLine(@"<EmailBinSendAsZip>" + EmailBinSendAsZip.ToString() + @"</EmailBinSendAsZip>");

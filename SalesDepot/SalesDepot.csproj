@@ -809,6 +809,20 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\EmailBin.png" />
+    <None Include="Resources\Exit.png" />
+    <None Include="Resources\QBuilderPageEmail.png" />
+    <None Include="Resources\QBuilderPagePreview.png" />
+    <None Include="Resources\QBuilderPageSave.png" />
+    <None Include="Resources\QBuilderPageDelete.png" />
+    <None Include="Resources\QBuilderPageAdd.png" />
+    <None Include="Resources\QBuilderLinkCart.png" />
+    <None Include="Resources\QBuilderPageList.png" />
+    <None Include="Resources\QBuilderLogout.png" />
+    <None Include="Resources\MinibarRowSpaceSmaller.png" />
+    <None Include="Resources\MinibarRowSpaceLarger.png" />
+    <None Include="Resources\TabsView.png" />
+    <None Include="Resources\AccordionView.png" />
     <None Include="Resources\MinibarFontSmaller.png" />
     <None Include="Resources\MinibarFontLarger.png" />
     <None Include="Resources\CopySmall.png" />
@@ -846,7 +860,6 @@
     <None Include="Resources\Help.png" />
     <None Include="Resources\Acrobat.png" />
     <None Include="Resources\ClassicView.png" />
-    <None Include="Resources\SolutionView.png" />
     <None Include="Resources\Search.png" />
     <None Include="Resources\Send.png" />
     <None Include="Resources\OpenQuickView.png" />

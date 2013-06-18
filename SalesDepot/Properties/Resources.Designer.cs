@@ -60,6 +60,13 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap AccordionView {
+            get {
+                object obj = ResourceManager.GetObject("AccordionView", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Acrobat {
             get {
                 object obj = ResourceManager.GetObject("Acrobat", resourceCulture);
@@ -186,9 +193,23 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap EmailBin {
+            get {
+                object obj = ResourceManager.GetObject("EmailBin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap EmptyImage {
             get {
                 object obj = ResourceManager.GetObject("EmptyImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap Exit {
+            get {
+                object obj = ResourceManager.GetObject("Exit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,6 +347,20 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap MinibarRowSpaceLarger {
+            get {
+                object obj = ResourceManager.GetObject("MinibarRowSpaceLarger", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap MinibarRowSpaceSmaller {
+            get {
+                object obj = ResourceManager.GetObject("MinibarRowSpaceSmaller", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap OpenFile {
             get {
                 object obj = ResourceManager.GetObject("OpenFile", resourceCulture);
@@ -413,6 +448,62 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap ProgramShowInfo {
             get {
                 object obj = ResourceManager.GetObject("ProgramShowInfo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderLinkCart {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderLinkCart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderLogout {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderLogout", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderPageAdd {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderPageAdd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderPageDelete {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderPageDelete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderPageEmail {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderPageEmail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderPageList {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderPageList", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderPagePreview {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderPagePreview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderPageSave {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderPageSave", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -515,9 +606,9 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap SolutionView {
+        internal static System.Drawing.Bitmap TabsView {
             get {
-                object obj = ResourceManager.GetObject("SolutionView", resourceCulture);
+                object obj = ResourceManager.GetObject("TabsView", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -653,6 +653,16 @@ namespace SalesDepot.PresentationClasses.WallBin
 									 , ref foreColor
 									 , ref font);
 
+					switch (SettingsManager.Instance.RowSpace)
+					{
+						case 2:
+							rowHeight += 5;
+							break;
+						case 3:
+							rowHeight += 10;
+							break;
+					}
+
 					row.Height = rowHeight;
 					if (maxColumnWidth < columnWidth)
 						maxColumnWidth = columnWidth;

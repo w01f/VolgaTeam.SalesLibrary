@@ -45,6 +45,7 @@ namespace SalesDepot.ToolForms.WallBin
 				buttonXEmail.Enabled = true;
 			else
 				buttonXEmail.Enabled = false;
+			buttonXQuickSiteAdd.Enabled = buttonXQuickSiteEmail.Enabled = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0;
 		}
 
 		private void buttonXOpen_Click(object sender, EventArgs e)

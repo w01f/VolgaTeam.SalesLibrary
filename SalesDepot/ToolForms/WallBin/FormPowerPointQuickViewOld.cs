@@ -126,6 +126,7 @@ namespace SalesDepot.ToolForms.WallBin
 
 					barLargeButtonItemPDF.Enabled = !PowerPointHelper.Instance.Is2003;
 					barLargeButtonItemEmail.Enabled = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayQuickView) == EmailButtonsDisplayOptions.DisplayQuickView;
+					barLargeButtonItemQuickSiteEmail.Visibility = barLargeButtonItemQuickSiteAdd.Visibility = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0 ? BarItemVisibility.Always : BarItemVisibility.Never;
 				}
 
 				Activate();

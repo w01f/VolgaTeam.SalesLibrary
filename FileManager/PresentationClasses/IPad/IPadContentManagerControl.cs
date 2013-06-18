@@ -49,7 +49,7 @@ namespace FileManager.PresentationClasses.IPad
 
 			_videoFiles.AddRange(ParentDecorator.Library.IPadManager.VideoFiles);
 			gridControlVideo.DataSource = new BindingList<VideoInfo>(_videoFiles.ToArray());
-			laVideoTitle.Text = string.Format("Your Library has {0} Video File{1}", _videoFiles.Count.ToString(), (_videoFiles.Count > 1 ? "s" : string.Empty));
+			laVideoTitle.Text = _videoFiles.Count > 0 ? String.Format("Your Library has {0} Video File{1}", _videoFiles.Count.ToString(), (_videoFiles.Count > 1 ? "s" : string.Empty)) : "Your Library does not have any Video Files";
 
 			if (focussedRow >= 0 && focussedRow < gridViewVideo.RowCount)
 				gridViewVideo.FocusedRowHandle = focussedRow;
@@ -72,7 +72,7 @@ namespace FileManager.PresentationClasses.IPad
 				FormMain.Instance.ribbonControl.Enabled = false;
 				Enabled = false;
 				MainController.Instance.ActiveDecorator.Save();
-				var thread = new Thread(delegate
+				var thread = new Thread(delegate()
 											{
 												Globals.ThreadActive = true;
 												Globals.ThreadAborted = false;

@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using DevComponents.DotNetBar;
+using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -67,6 +68,8 @@ namespace SalesDepot.TabPages
 			FormMain.Instance.comboBoxItemPages.SelectedIndexChanged += comboBoxItemPages_SelectedIndexChanged;
 			barButtonItemFontUp.ItemClick += buttonItemLargerText_Click;
 			barButtonItemFontDown.ItemClick += buttonItemSmallerText_Click;
+			barButtonItemRowSpaceUp.ItemClick += buttonItemLargerRowSpace_Click;
+			barButtonItemRowSpaceDown.ItemClick += buttonItemSmallerRowSpace_Click;
 			FormMain.Instance.buttonItemEmailBin.CheckedChanged += buttonItemEmailBin_CheckedChanged;
 			FormMain.Instance.buttonItemHomeHelp.Click += buttonItemHomeHelp_Click;
 
@@ -117,6 +120,7 @@ namespace SalesDepot.TabPages
 
 			LoadWallBinSettings();
 			UpdateFontButtonStatus();
+			UpdateRowSpaceButtonStatus();
 		}
 
 		public void ShowTab()
@@ -366,6 +370,12 @@ namespace SalesDepot.TabPages
 		{
 			FormMain.Instance.TabHome.barButtonItemFontUp.Enabled = SettingsManager.Instance.FontSize < 20;
 			FormMain.Instance.TabHome.barButtonItemFontDown.Enabled = SettingsManager.Instance.FontSize > 8;
+		}
+
+		public void UpdateRowSpaceButtonStatus()
+		{
+			FormMain.Instance.TabHome.barButtonItemRowSpaceUp.Enabled = SettingsManager.Instance.RowSpace < 3;
+			FormMain.Instance.TabHome.barButtonItemRowSpaceDown.Enabled = SettingsManager.Instance.RowSpace > 1;
 		}
 		#endregion
 
@@ -637,15 +647,32 @@ namespace SalesDepot.TabPages
 				DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
 		}
 
+		public void buttonItemLargerRowSpace_Click(object sender, EventArgs e)
+		{
+			SettingsManager.Instance.RowSpace++;
+			SettingsManager.Instance.SaveSettings();
+			UpdateRowSpaceButtonStatus();
+			if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < DecoratorManager.Instance.PackageViewers.Count)
+				DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
+		}
+
+		public void buttonItemSmallerRowSpace_Click(object sender, EventArgs e)
+		{
+			SettingsManager.Instance.RowSpace--;
+			SettingsManager.Instance.SaveSettings();
+			UpdateRowSpaceButtonStatus();
+			if (FormMain.Instance.comboBoxItemPackages.SelectedIndex >= 0 && FormMain.Instance.comboBoxItemPackages.SelectedIndex < DecoratorManager.Instance.PackageViewers.Count)
+				DecoratorManager.Instance.PackageViewers[FormMain.Instance.comboBoxItemPackages.SelectedIndex].FormatWallBin();
+		}
+
 
 		private void TabHomeControl_Resize(object sender, EventArgs e)
 		{
 			barMinibar.BeginUpdate();
-			barMinibar.Offset = (Width - 400) / 2;
+			barMinibar.Offset = (Width - 260) / 2;
 			barMinibar.ApplyDockRowCol();
 			barMinibar.EndUpdate();
 		}
-
 		#endregion
 
 		#region Email Bin Methods and Event Handlers

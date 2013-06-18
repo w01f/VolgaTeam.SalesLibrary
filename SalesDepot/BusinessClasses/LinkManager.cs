@@ -48,15 +48,16 @@ namespace SalesDepot.BusinessClasses
 
 		public void OpenLibraryFolder(LibraryFolder folder)
 		{
-			using (var formViewOptions = new FormFolderSpecialOptions())
-			{
-				formViewOptions.Text = string.Format(formViewOptions.Text, folder.Name);
-				if (formViewOptions.ShowDialog() == DialogResult.OK)
+			if (SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0)
+				using (var formViewOptions = new FormFolderSpecialOptions())
 				{
-					if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-						AddFolderToQuickSite(folder);
+					formViewOptions.Text = string.Format(formViewOptions.Text, folder.Name);
+					if (formViewOptions.ShowDialog() == DialogResult.OK)
+					{
+						if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+							AddFolderToQuickSite(folder);
+					}
 				}
-			}
 		}
 
 		public void OpenLink(LibraryLink link, bool specialOptions = false)
@@ -76,21 +77,22 @@ namespace SalesDepot.BusinessClasses
 			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 			if (specialOptions)
 			{
-				using (var formViewOptions = new FormLinkSpecialOptions())
-				{
-					formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
-					if (formViewOptions.ShowDialog() == DialogResult.OK)
+				if (SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0)
+					using (var formViewOptions = new FormLinkSpecialOptions())
 					{
-						if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+						formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+						if (formViewOptions.ShowDialog() == DialogResult.OK)
 						{
-							EmailLinkToQuickSite(link);
-						}
-						else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-						{
-							AddLinkToQuickSite(link);
+							if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
+							{
+								EmailLinkToQuickSite(link);
+							}
+							else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+							{
+								AddLinkToQuickSite(link);
+							}
 						}
 					}
-				}
 			}
 			else
 			{

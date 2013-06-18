@@ -45,8 +45,13 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				checkEditExpirationDate.Checked = page.ExpirationDate.HasValue;
 				dateEditExpirationDate.EditValue = page.ExpirationDate;
 				checkEditRestricted.Checked = page.isRestricted;
+				checkEditPinCode.Checked = !String.IsNullOrEmpty(page.pinCode);
+				textEditPinCode.EditValue = page.pinCode;
 				checkEditShowLinkToMainSite.Checked = page.showLinkMainSite;
 				checkEditShowTicker.Checked = page.showTicker;
+				checkEditDisableBanners.Checked = page.disableBanners;
+				checkEditDisableWidgets.Checked = page.disableWidgets;
+				checkEditRecordActivity.Checked = page.recordActivity;
 
 				gridControlLogoGallery.DataSource = QBuilder.Instance.Logos;
 				var selectedLogo = QBuilder.Instance.Logos.FirstOrDefault(l => l.EncodedImage.Equals(page.logo));
@@ -102,8 +107,12 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			page.footer = checkEditFooterEnabled.Checked && !String.IsNullOrEmpty(htmlEditorControlFooter.SimpleText) ? htmlEditorControlFooter.HtmlText : null;
 			page.expirationDate = checkEditExpirationDate.Checked && dateEditExpirationDate.EditValue != null ? dateEditExpirationDate.DateTime.ToString("MM/dd/yyyy") : null;
 			page.isRestricted = checkEditRestricted.Checked;
+			page.pinCode = checkEditPinCode.Checked && textEditPinCode.EditValue != null ? textEditPinCode.EditValue.ToString() : null;
 			page.showLinkMainSite = checkEditShowLinkToMainSite.Checked;
 			page.showTicker = checkEditShowTicker.Checked;
+			page.disableBanners = checkEditDisableBanners.Checked;
+			page.disableWidgets = checkEditDisableWidgets.Checked;
+			page.recordActivity = checkEditRecordActivity.Checked;
 
 			var selectedLogo = layoutViewLogoGallery.GetFocusedRow() as PageLogo;
 			page.logo = selectedLogo != null ? selectedLogo.EncodedImage : null;
@@ -189,6 +198,13 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				dateEditExpirationDate.EditValue = null;
 			else if (dateEditExpirationDate.EditValue == null)
 				dateEditExpirationDate.DateTime = DateTime.Now.AddDays(7);
+		}
+
+		private void checkEditPinCode_CheckedChanged(object sender, EventArgs e)
+		{
+			textEditPinCode.Enabled = checkEditPinCode.Checked;
+			if (!checkEditPinCode.Checked)
+				textEditPinCode.EditValue = null;
 		}
 
 		private void dateEditExpirationDate_EditValueChanged(object sender, EventArgs e)

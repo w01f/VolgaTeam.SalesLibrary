@@ -68,6 +68,8 @@
 			this.barLargeButtonItemPrint = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemAddAllSlides = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemAddSlide = new DevExpress.XtraBars.BarLargeButtonItem();
+			this.barLargeButtonItemQuickSiteEmail = new DevExpress.XtraBars.BarLargeButtonItem();
+			this.barLargeButtonItemQuickSiteAdd = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemHelp = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barLargeButtonItemExit = new DevExpress.XtraBars.BarLargeButtonItem();
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -87,8 +89,6 @@
 			this.checkEditChangeSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditKeepSlideTemplate = new DevExpress.XtraEditors.CheckEdit();
 			this.labelControlSlideTemplate = new DevExpress.XtraEditors.LabelControl();
-			this.barLargeButtonItemQuickSiteEmail = new DevExpress.XtraBars.BarLargeButtonItem();
-			this.barLargeButtonItemQuickSiteAdd = new DevExpress.XtraBars.BarLargeButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			this.pnNavigationArea.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlides.Properties)).BeginInit();
@@ -258,6 +258,24 @@
 			this.barLargeButtonItemAddSlide.SuperTip = superToolTip7;
 			this.barLargeButtonItemAddSlide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemAddSlide_ItemClick);
 			// 
+			// barLargeButtonItemQuickSiteEmail
+			// 
+			this.barLargeButtonItemQuickSiteEmail.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+			this.barLargeButtonItemQuickSiteEmail.Caption = "Email as Web Link";
+			this.barLargeButtonItemQuickSiteEmail.Glyph = global::SalesDepot.Properties.Resources.QuickSiteEmailLinkBig;
+			this.barLargeButtonItemQuickSiteEmail.Id = 10;
+			this.barLargeButtonItemQuickSiteEmail.Name = "barLargeButtonItemQuickSiteEmail";
+			this.barLargeButtonItemQuickSiteEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemQuickSiteEmail_ItemClick);
+			// 
+			// barLargeButtonItemQuickSiteAdd
+			// 
+			this.barLargeButtonItemQuickSiteAdd.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
+			this.barLargeButtonItemQuickSiteAdd.Caption = "Add to quickSITE";
+			this.barLargeButtonItemQuickSiteAdd.Glyph = global::SalesDepot.Properties.Resources.QuickSiteAddLinkBig;
+			this.barLargeButtonItemQuickSiteAdd.Id = 11;
+			this.barLargeButtonItemQuickSiteAdd.Name = "barLargeButtonItemQuickSiteAdd";
+			this.barLargeButtonItemQuickSiteAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemQuickSiteAdd_ItemClick);
+			// 
 			// barLargeButtonItemHelp
 			// 
 			this.barLargeButtonItemHelp.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
@@ -277,7 +295,7 @@
 			// 
 			this.barLargeButtonItemExit.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemExit.Caption = "Exit";
-			this.barLargeButtonItemExit.Glyph = global::SalesDepot.Properties.Resources.Cancel;
+			this.barLargeButtonItemExit.Glyph = global::SalesDepot.Properties.Resources.Exit;
 			this.barLargeButtonItemExit.Id = 7;
 			this.barLargeButtonItemExit.Name = "barLargeButtonItemExit";
 			toolTipTitleItem9.Text = "Exit";
@@ -293,28 +311,28 @@
 			this.barDockControlTop.CausesValidation = false;
 			this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlTop.Size = new System.Drawing.Size(934, 96);
+			this.barDockControlTop.Size = new System.Drawing.Size(938, 104);
 			// 
 			// barDockControlBottom
 			// 
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.barDockControlBottom.Location = new System.Drawing.Point(0, 562);
-			this.barDockControlBottom.Size = new System.Drawing.Size(934, 0);
+			this.barDockControlBottom.Size = new System.Drawing.Size(938, 0);
 			// 
 			// barDockControlLeft
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-			this.barDockControlLeft.Location = new System.Drawing.Point(0, 96);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 466);
+			this.barDockControlLeft.Location = new System.Drawing.Point(0, 104);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 458);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-			this.barDockControlRight.Location = new System.Drawing.Point(934, 96);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 466);
+			this.barDockControlRight.Location = new System.Drawing.Point(938, 104);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 458);
 			// 
 			// pnNavigationArea
 			// 
@@ -326,14 +344,14 @@
 			this.pnNavigationArea.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnNavigationArea.Location = new System.Drawing.Point(0, 495);
 			this.pnNavigationArea.Name = "pnNavigationArea";
-			this.pnNavigationArea.Size = new System.Drawing.Size(934, 67);
+			this.pnNavigationArea.Size = new System.Drawing.Size(938, 67);
 			this.pnNavigationArea.TabIndex = 4;
 			// 
 			// laSlideSize
 			// 
 			this.laSlideSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.laSlideSize.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSlideSize.Location = new System.Drawing.Point(668, 0);
+			this.laSlideSize.Location = new System.Drawing.Point(672, 0);
 			this.laSlideSize.Name = "laSlideSize";
 			this.laSlideSize.Size = new System.Drawing.Size(259, 32);
 			this.laSlideSize.TabIndex = 8;
@@ -354,7 +372,7 @@
 			// 
 			this.laSlideNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.laSlideNumber.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSlideNumber.Location = new System.Drawing.Point(671, 32);
+			this.laSlideNumber.Location = new System.Drawing.Point(675, 32);
 			this.laSlideNumber.Name = "laSlideNumber";
 			this.laSlideNumber.Size = new System.Drawing.Size(256, 31);
 			this.laSlideNumber.TabIndex = 6;
@@ -388,9 +406,9 @@
 			// 
 			this.pnPreview.BackColor = System.Drawing.Color.Black;
 			this.pnPreview.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnPreview.Location = new System.Drawing.Point(0, 135);
+			this.pnPreview.Location = new System.Drawing.Point(0, 143);
 			this.pnPreview.Name = "pnPreview";
-			this.pnPreview.Size = new System.Drawing.Size(934, 360);
+			this.pnPreview.Size = new System.Drawing.Size(938, 352);
 			this.pnPreview.TabIndex = 10;
 			// 
 			// styleController
@@ -420,16 +438,16 @@
 			this.pnSlideTemplate.Controls.Add(this.checkEditKeepSlideTemplate);
 			this.pnSlideTemplate.Controls.Add(this.labelControlSlideTemplate);
 			this.pnSlideTemplate.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnSlideTemplate.Location = new System.Drawing.Point(0, 96);
+			this.pnSlideTemplate.Location = new System.Drawing.Point(0, 104);
 			this.pnSlideTemplate.Name = "pnSlideTemplate";
-			this.pnSlideTemplate.Size = new System.Drawing.Size(934, 39);
+			this.pnSlideTemplate.Size = new System.Drawing.Size(938, 39);
 			this.pnSlideTemplate.TabIndex = 20;
 			// 
 			// comboBoxEditSlideTemplate
 			// 
 			this.comboBoxEditSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxEditSlideTemplate.Enabled = false;
-			this.comboBoxEditSlideTemplate.Location = new System.Drawing.Point(708, 6);
+			this.comboBoxEditSlideTemplate.Location = new System.Drawing.Point(712, 6);
 			this.comboBoxEditSlideTemplate.MenuManager = this.barManager;
 			this.comboBoxEditSlideTemplate.Name = "comboBoxEditSlideTemplate";
 			this.comboBoxEditSlideTemplate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -443,7 +461,7 @@
 			// checkEditChangeSlideTemplate
 			// 
 			this.checkEditChangeSlideTemplate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(421, 7);
+			this.checkEditChangeSlideTemplate.Location = new System.Drawing.Point(425, 7);
 			this.checkEditChangeSlideTemplate.MenuManager = this.barManager;
 			this.checkEditChangeSlideTemplate.Name = "checkEditChangeSlideTemplate";
 			this.checkEditChangeSlideTemplate.Properties.AllowHtmlString = true;
@@ -479,33 +497,15 @@
 			this.labelControlSlideTemplate.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
 			this.labelControlSlideTemplate.Location = new System.Drawing.Point(316, 3);
 			this.labelControlSlideTemplate.Name = "labelControlSlideTemplate";
-			this.labelControlSlideTemplate.Size = new System.Drawing.Size(81, 27);
+			this.labelControlSlideTemplate.Size = new System.Drawing.Size(85, 27);
 			this.labelControlSlideTemplate.TabIndex = 3;
 			this.labelControlSlideTemplate.Text = "-or-";
-			// 
-			// barLargeButtonItemQuickSiteEmail
-			// 
-			this.barLargeButtonItemQuickSiteEmail.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-			this.barLargeButtonItemQuickSiteEmail.Caption = "Email as Web Link";
-			this.barLargeButtonItemQuickSiteEmail.Glyph = global::SalesDepot.Properties.Resources.QuickSiteEmailLinkBig;
-			this.barLargeButtonItemQuickSiteEmail.Id = 10;
-			this.barLargeButtonItemQuickSiteEmail.Name = "barLargeButtonItemQuickSiteEmail";
-			this.barLargeButtonItemQuickSiteEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemQuickSiteEmail_ItemClick);
-			// 
-			// barLargeButtonItemQuickSiteAdd
-			// 
-			this.barLargeButtonItemQuickSiteAdd.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
-			this.barLargeButtonItemQuickSiteAdd.Caption = "Add to quickSITE";
-			this.barLargeButtonItemQuickSiteAdd.Glyph = global::SalesDepot.Properties.Resources.QuickSiteAddLinkBig;
-			this.barLargeButtonItemQuickSiteAdd.Id = 11;
-			this.barLargeButtonItemQuickSiteAdd.Name = "barLargeButtonItemQuickSiteAdd";
-			this.barLargeButtonItemQuickSiteAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemQuickSiteAdd_ItemClick);
 			// 
 			// FormPowerPointQuickViewOld
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(934, 562);
+			this.ClientSize = new System.Drawing.Size(938, 562);
 			this.Controls.Add(this.pnPreview);
 			this.Controls.Add(this.pnSlideTemplate);
 			this.Controls.Add(this.pnNavigationArea);

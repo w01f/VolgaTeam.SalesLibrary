@@ -650,7 +650,7 @@ namespace SalesDepot.Services.QBuilderService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#savePageContent", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
-        public void savePageContent(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, string logo) {
+        public void savePageContent(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, string logo) {
             this.Invoke("savePageContent", new object[] {
                         sessionKey,
                         pageId,
@@ -662,16 +662,36 @@ namespace SalesDepot.Services.QBuilderService {
                         requireLogin,
                         showLinkToMainSite,
                         showTicker,
+                        disableBanners,
+                        disableWidgets,
+                        recordActivity,
+                        pinCode,
                         logo});
         }
         
         /// <remarks/>
-        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, string logo) {
-            this.savePageContentAsync(sessionKey, pageId, title, description, header, footer, expirationDate, requireLogin, showLinkToMainSite, showTicker, logo, null);
+        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, string logo) {
+            this.savePageContentAsync(sessionKey, pageId, title, description, header, footer, expirationDate, requireLogin, showLinkToMainSite, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, logo, null);
         }
         
         /// <remarks/>
-        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, string logo, object userState) {
+        public void savePageContentAsync(
+                    string sessionKey, 
+                    string pageId, 
+                    string title, 
+                    string description, 
+                    string header, 
+                    string footer, 
+                    string expirationDate, 
+                    bool requireLogin, 
+                    bool showLinkToMainSite, 
+                    bool showTicker, 
+                    bool disableBanners, 
+                    bool disableWidgets, 
+                    bool recordActivity, 
+                    string pinCode, 
+                    string logo, 
+                    object userState) {
             if ((this.savePageContentOperationCompleted == null)) {
                 this.savePageContentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnsavePageContentOperationCompleted);
             }
@@ -686,6 +706,10 @@ namespace SalesDepot.Services.QBuilderService {
                         requireLogin,
                         showLinkToMainSite,
                         showTicker,
+                        disableBanners,
+                        disableWidgets,
+                        recordActivity,
+                        pinCode,
                         logo}, this.savePageContentOperationCompleted, userState);
         }
         
@@ -814,6 +838,14 @@ namespace SalesDepot.Services.QBuilderService {
         private bool showLinkMainSiteField;
         
         private bool showTickerField;
+        
+        private bool disableBannersField;
+        
+        private bool disableWidgetsField;
+        
+        private bool recordActivityField;
+        
+        private string pinCodeField;
         
         private string logoField;
         
@@ -946,6 +978,46 @@ namespace SalesDepot.Services.QBuilderService {
             }
             set {
                 this.showTickerField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool disableBanners {
+            get {
+                return this.disableBannersField;
+            }
+            set {
+                this.disableBannersField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool disableWidgets {
+            get {
+                return this.disableWidgetsField;
+            }
+            set {
+                this.disableWidgetsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public bool recordActivity {
+            get {
+                return this.recordActivityField;
+            }
+            set {
+                this.recordActivityField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string pinCode {
+            get {
+                return this.pinCodeField;
+            }
+            set {
+                this.pinCodeField = value;
             }
         }
         

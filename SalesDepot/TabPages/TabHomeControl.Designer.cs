@@ -31,6 +31,22 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabHomeControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
@@ -55,12 +71,15 @@
 			this.barCheckItemViewTabs = new DevExpress.XtraBars.BarCheckItem();
 			this.barButtonItemFontUp = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItemFontDown = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemRowSpaceUp = new DevExpress.XtraBars.BarButtonItem();
+			this.barButtonItemRowSpaceDown = new DevExpress.XtraBars.BarButtonItem();
 			this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
 			this.barAndDockingController = new DevExpress.XtraBars.BarAndDockingController(this.components);
 			this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
 			this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.pnMain.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -78,7 +97,7 @@
 			this.pnEmpty.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnEmpty.Location = new System.Drawing.Point(0, 0);
 			this.pnEmpty.Name = "pnEmpty";
-			this.pnEmpty.Size = new System.Drawing.Size(758, 452);
+			this.pnEmpty.Size = new System.Drawing.Size(758, 457);
 			this.pnEmpty.TabIndex = 3;
 			// 
 			// pnMain
@@ -87,7 +106,7 @@
 			this.pnMain.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnMain.Location = new System.Drawing.Point(0, 0);
 			this.pnMain.Name = "pnMain";
-			this.pnMain.Size = new System.Drawing.Size(758, 452);
+			this.pnMain.Size = new System.Drawing.Size(758, 457);
 			this.pnMain.TabIndex = 4;
 			// 
 			// splitContainerControl
@@ -108,7 +127,7 @@
 			this.splitContainerControl.Panel2.Controls.Add(this.pnRemoteLibraryContainer);
 			this.splitContainerControl.Panel2.Text = "Panel2";
 			this.splitContainerControl.PanelVisibility = DevExpress.XtraEditors.SplitPanelVisibility.Panel2;
-			this.splitContainerControl.Size = new System.Drawing.Size(758, 452);
+			this.splitContainerControl.Size = new System.Drawing.Size(758, 457);
 			this.splitContainerControl.SplitterPosition = 257;
 			this.splitContainerControl.TabIndex = 5;
 			this.splitContainerControl.Text = "splitContainerControl1";
@@ -282,7 +301,7 @@
 			this.pnRemoteLibraryContainer.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnRemoteLibraryContainer.Location = new System.Drawing.Point(0, 0);
 			this.pnRemoteLibraryContainer.Name = "pnRemoteLibraryContainer";
-			this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(758, 452);
+			this.pnRemoteLibraryContainer.Size = new System.Drawing.Size(758, 457);
 			this.pnRemoteLibraryContainer.TabIndex = 3;
 			// 
 			// barManager
@@ -306,8 +325,11 @@
             this.barCheckItemViewAccordion,
             this.barCheckItemViewTabs,
             this.barButtonItem1,
-            this.barButtonItem2});
-			this.barManager.MaxItemId = 15;
+            this.barButtonItem2,
+            this.barButtonItemRowSpaceUp,
+            this.barButtonItemRowSpaceDown});
+			this.barManager.MaxItemId = 17;
+			this.barManager.ToolTipController = this.toolTipController;
 			// 
 			// barMinibar
 			// 
@@ -320,12 +342,14 @@
 			this.barMinibar.DockStyle = DevExpress.XtraBars.BarDockStyle.Bottom;
 			this.barMinibar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem2, true),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewClassic, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewList, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewAccordion, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewTabs, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewClassic, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.Standard),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewList, DevExpress.XtraBars.BarItemPaintStyle.Standard),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewAccordion, DevExpress.XtraBars.BarItemPaintStyle.Standard),
+            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.barCheckItemViewTabs, "", true, true, true, 0, null, DevExpress.XtraBars.BarItemPaintStyle.Standard),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemFontUp, true),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.None, this.barButtonItemFontDown, "", false, false, true, 0),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemRowSpaceUp, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemRowSpaceDown),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1, true)});
 			this.barMinibar.OptionsBar.AllowQuickCustomization = false;
 			this.barMinibar.OptionsBar.DisableClose = true;
@@ -348,6 +372,9 @@
 			this.barCheckItemViewClassic.GroupIndex = 1;
 			this.barCheckItemViewClassic.Id = 8;
 			this.barCheckItemViewClassic.Name = "barCheckItemViewClassic";
+			toolTipItem1.Text = "Columns View";
+			superToolTip1.Items.Add(toolTipItem1);
+			this.barCheckItemViewClassic.SuperTip = superToolTip1;
 			// 
 			// barCheckItemViewList
 			// 
@@ -358,23 +385,32 @@
 			this.barCheckItemViewList.GroupIndex = 1;
 			this.barCheckItemViewList.Id = 9;
 			this.barCheckItemViewList.Name = "barCheckItemViewList";
+			toolTipItem2.Text = "List View";
+			superToolTip2.Items.Add(toolTipItem2);
+			this.barCheckItemViewList.SuperTip = superToolTip2;
 			// 
 			// barCheckItemViewAccordion
 			// 
 			this.barCheckItemViewAccordion.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.barCheckItemViewAccordion.Appearance.Options.UseForeColor = true;
 			this.barCheckItemViewAccordion.Caption = "Accordion";
-			this.barCheckItemViewAccordion.Glyph = global::SalesDepot.Properties.Resources.ListView;
+			this.barCheckItemViewAccordion.Glyph = global::SalesDepot.Properties.Resources.AccordionView;
 			this.barCheckItemViewAccordion.GroupIndex = 1;
 			this.barCheckItemViewAccordion.Id = 10;
 			this.barCheckItemViewAccordion.Name = "barCheckItemViewAccordion";
+			toolTipItem3.Text = "Accordion View";
+			superToolTip3.Items.Add(toolTipItem3);
+			this.barCheckItemViewAccordion.SuperTip = superToolTip3;
 			// 
 			// barCheckItemViewTabs
 			// 
 			this.barCheckItemViewTabs.Caption = "Tabs";
-			this.barCheckItemViewTabs.Glyph = global::SalesDepot.Properties.Resources.ListView;
+			this.barCheckItemViewTabs.Glyph = global::SalesDepot.Properties.Resources.TabsView;
 			this.barCheckItemViewTabs.Id = 11;
 			this.barCheckItemViewTabs.Name = "barCheckItemViewTabs";
+			toolTipItem4.Text = "Tabs View";
+			superToolTip4.Items.Add(toolTipItem4);
+			this.barCheckItemViewTabs.SuperTip = superToolTip4;
 			// 
 			// barButtonItemFontUp
 			// 
@@ -384,6 +420,9 @@
 			this.barButtonItemFontUp.Glyph = global::SalesDepot.Properties.Resources.MinibarFontLarger;
 			this.barButtonItemFontUp.Id = 4;
 			this.barButtonItemFontUp.Name = "barButtonItemFontUp";
+			toolTipItem5.Text = "Increase Text Size";
+			superToolTip5.Items.Add(toolTipItem5);
+			this.barButtonItemFontUp.SuperTip = superToolTip5;
 			// 
 			// barButtonItemFontDown
 			// 
@@ -393,6 +432,29 @@
 			this.barButtonItemFontDown.Glyph = global::SalesDepot.Properties.Resources.MinibarFontSmaller;
 			this.barButtonItemFontDown.Id = 5;
 			this.barButtonItemFontDown.Name = "barButtonItemFontDown";
+			toolTipItem6.Text = "Decrease Text Size";
+			superToolTip6.Items.Add(toolTipItem6);
+			this.barButtonItemFontDown.SuperTip = superToolTip6;
+			// 
+			// barButtonItemRowSpaceUp
+			// 
+			this.barButtonItemRowSpaceUp.Caption = "Row Space Up";
+			this.barButtonItemRowSpaceUp.Glyph = global::SalesDepot.Properties.Resources.MinibarRowSpaceLarger;
+			this.barButtonItemRowSpaceUp.Id = 15;
+			this.barButtonItemRowSpaceUp.Name = "barButtonItemRowSpaceUp";
+			toolTipItem7.Text = "Increase Line Spacing";
+			superToolTip7.Items.Add(toolTipItem7);
+			this.barButtonItemRowSpaceUp.SuperTip = superToolTip7;
+			// 
+			// barButtonItemRowSpaceDown
+			// 
+			this.barButtonItemRowSpaceDown.Caption = "Row Space Down";
+			this.barButtonItemRowSpaceDown.Glyph = global::SalesDepot.Properties.Resources.MinibarRowSpaceSmaller;
+			this.barButtonItemRowSpaceDown.Id = 16;
+			this.barButtonItemRowSpaceDown.Name = "barButtonItemRowSpaceDown";
+			toolTipItem8.Text = "Decrease Line Spacing";
+			superToolTip8.Items.Add(toolTipItem8);
+			this.barButtonItemRowSpaceDown.SuperTip = superToolTip8;
 			// 
 			// barButtonItem1
 			// 
@@ -418,22 +480,28 @@
 			this.barDockControlBottom.Appearance.Options.UseBackColor = true;
 			this.barDockControlBottom.CausesValidation = false;
 			this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.barDockControlBottom.Location = new System.Drawing.Point(0, 452);
-			this.barDockControlBottom.Size = new System.Drawing.Size(758, 32);
+			this.barDockControlBottom.Location = new System.Drawing.Point(0, 457);
+			this.barDockControlBottom.Size = new System.Drawing.Size(758, 27);
 			// 
 			// barDockControlLeft
 			// 
 			this.barDockControlLeft.CausesValidation = false;
 			this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
 			this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
-			this.barDockControlLeft.Size = new System.Drawing.Size(0, 452);
+			this.barDockControlLeft.Size = new System.Drawing.Size(0, 457);
 			// 
 			// barDockControlRight
 			// 
 			this.barDockControlRight.CausesValidation = false;
 			this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
 			this.barDockControlRight.Location = new System.Drawing.Point(758, 0);
-			this.barDockControlRight.Size = new System.Drawing.Size(0, 452);
+			this.barDockControlRight.Size = new System.Drawing.Size(0, 457);
+			// 
+			// toolTipController
+			// 
+			this.toolTipController.Rounded = true;
+			this.toolTipController.ToolTipLocation = DevExpress.Utils.ToolTipLocation.RightTop;
+			this.toolTipController.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
 			// 
 			// TabHomeControl
 			// 
@@ -495,5 +563,8 @@
 		private DevExpress.XtraBars.BarCheckItem barCheckItemViewClassic;
 		private DevExpress.XtraBars.BarButtonItem barButtonItem2;
 		private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceUp;
+		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceDown;
+		private DevExpress.Utils.ToolTipController toolTipController;
     }
 }

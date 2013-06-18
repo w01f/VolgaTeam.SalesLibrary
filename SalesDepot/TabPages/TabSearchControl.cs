@@ -80,6 +80,7 @@ namespace SalesDepot.TabPages
 			InitSearchTagsGroups();
 
 			xtraTabControlSolutionModes.SelectedPageChanged += xtraTabControlSolutionModes_SelectedPageChanged;
+			barButtonItemQuickSiteAdd.Visibility = barButtonItemQuickSiteEmail.Visibility = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0 ? BarItemVisibility.Always : BarItemVisibility.Never;
 		}
 
 		public void ShowTab()
@@ -816,7 +817,7 @@ namespace SalesDepot.TabPages
 				_selectedFileViewer.EmailLinkToQuickSite();
 		}
 
-		private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+		private void barButtonItemQuickSiteAdd_ItemClick(object sender, ItemClickEventArgs e)
 		{
 			if (_selectedFileViewer != null)
 				_selectedFileViewer.AddLinkToQuickSite();

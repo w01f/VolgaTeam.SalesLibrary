@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolForms.WallBin
 {
@@ -23,6 +24,11 @@ namespace SalesDepot.ToolForms.WallBin
 		public FormViewOptions.ViewOptions SelectedOption
 		{
 			get { return _selectedOption; }
+		}
+
+		private void FormFolderViewOptions_Load(object sender, EventArgs e)
+		{
+			buttonXQuickSiteAdd.Enabled = buttonXQuickSiteEmail.Enabled = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0;
 		}
 
 		private void buttonXOpen_Click(object sender, EventArgs e)

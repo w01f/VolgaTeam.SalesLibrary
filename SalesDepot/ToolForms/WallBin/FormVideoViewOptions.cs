@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolForms.WallBin
 {
@@ -36,6 +37,7 @@ namespace SalesDepot.ToolForms.WallBin
 		{
 			if (DoNotAdd)
 				buttonXAddToPresentation.Enabled = false;
+			buttonXQuickSiteAdd.Enabled = buttonXQuickSiteEmail.Enabled = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0;
 		}
 
 		private void buttonXAddToPresentation_Click(object sender, EventArgs e)

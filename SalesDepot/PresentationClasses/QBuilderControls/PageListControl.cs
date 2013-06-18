@@ -131,9 +131,9 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			try
 			{
 				if (String.IsNullOrEmpty(SelectedPage.title))
-					Process.Start("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url);
+					Process.Start("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url + (!String.IsNullOrEmpty(SelectedPage.pinCode) ? ("%0D%0APin-code: " + SelectedPage.pinCode) : String.Empty));
 				else
-					Process.Start("mailto: ?subject=" + SelectedPage.title + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url);
+					Process.Start("mailto: ?subject=" + SelectedPage.title + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url + (!String.IsNullOrEmpty(SelectedPage.pinCode) ? ("%0D%0APin-code: " + SelectedPage.pinCode) : String.Empty));
 			}
 			catch { }
 		}

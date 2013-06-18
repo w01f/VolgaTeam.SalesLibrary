@@ -285,7 +285,7 @@ namespace SalesDepot.Services
 			return result;
 		}
 
-		public void SavePageContent(string pageId, string title, string description, string header, string footer, string expirationDate, bool restricted, bool showLinkToMainSite, bool showTicker, string logo, out string message)
+		public void SavePageContent(string pageId, string title, string description, string header, string footer, string expirationDate, bool restricted, bool showLinkToMainSite, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, string logo, out string message)
 		{
 			message = String.Empty;
 			var client = GetQBuilderClient();
@@ -295,7 +295,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.savePageContent(sessionKey, pageId, title, description, header, footer, expirationDate, restricted, showLinkToMainSite, showTicker, logo);
+						client.savePageContent(sessionKey, pageId, title, description, header, footer, expirationDate, restricted, showLinkToMainSite, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, logo);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

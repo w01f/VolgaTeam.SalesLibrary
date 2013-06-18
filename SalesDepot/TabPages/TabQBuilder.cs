@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using SalesDepot.BusinessClasses;
+using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.PresentationClasses.QBuilderControls;
 using SalesDepot.ToolForms.QBuilderForms;
@@ -51,6 +52,8 @@ namespace SalesDepot.TabPages
 			FormMain.Instance.buttonItemQBuilderPagesPreview.Click += buttonItemQBuilderPagesPreview_Click;
 			FormMain.Instance.buttonItemQBuilderPagesEmail.Click += buttonItemQBuilderPagesEmail_Click;
 			FormMain.Instance.buttonItemQBuilderHelp.Click += buttonItemHelp_Click;
+
+			FormMain.Instance.ribbonTabItemQBuilder.Visible = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0;
 		}
 
 		public void ShowTab()

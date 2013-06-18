@@ -326,7 +326,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var message = String.Empty;
 			var thread = new Thread(delegate()
 			{
-				Connection.Client.SavePageContent(page.id, page.title, page.subtitle, page.header, page.footer, page.expirationDate, page.isRestricted, page.showLinkMainSite, page.showTicker, page.logo, out message);
+				Connection.Client.SavePageContent(page.id, page.title, page.subtitle, page.header, page.footer, page.expirationDate, page.isRestricted, page.showLinkMainSite, page.showTicker, page.disableBanners, page.disableWidgets, page.recordActivity, page.pinCode, page.logo, out message);
 			});
 			thread.Start();
 			while (thread.IsAlive)
