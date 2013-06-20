@@ -236,9 +236,30 @@
 							addPageContent.find('#add-page-name').val('').attr('disabled', 'disabled');
 						else
 							addPageContent.find('#add-page-name').removeAttr('disabled');
-
 					});
-					addPageContent.find('#add-page-name-enabled, #add-page-restricted, #add-page-show-link-to-main-site').on('change', function ()
+					addPageContent.find('#add-page-access-code-enabled').off('change').on('change', function ()
+					{
+						var accessCode = $('#add-page-access-code');
+						if ($(this).is(':checked'))
+							accessCode.show();
+						else
+						{
+							accessCode.hide();
+							accessCode.val('');
+						}
+					});
+					addPageContent.find("#add-page-access-code").keydown(function (event)
+					{
+						if (event.keyCode == 46 || event.keyCode == 8)
+						{
+						}
+						else
+						{
+							if (event.keyCode < 48 || event.keyCode > 57)
+								event.preventDefault();
+						}
+					});
+					addPageContent.find('#add-page-name-enabled, #add-page-restricted, #add-page-show-link-to-main-site,#add-page-access-code,#add-page-show-ticker,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity').on('change', function ()
 					{
 						$.ajax({
 							type: "POST",
@@ -270,7 +291,12 @@
 								logo: $('#add-page-tab-logo').find('a.opened').find('img').attr('src'),
 								expiresInDays: $('#add-page-expires-in').find('.active').val(),
 								restricted: $('#add-page-restricted').is(':checked'),
-								showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked')
+								pinCode: $('#add-page-access-code').val(),
+								showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked'),
+								showTicker: $('#add-page-show-ticker').is(':checked'),
+								disableWidgets: $('#add-page-disable-widgets').is(':checked'),
+								disableBanners: $('#add-page-disable-banners').is(':checked'),
+								recordActivity: $('#add-page-record-activity').is(':checked')
 							},
 							beforeSend: function ()
 							{

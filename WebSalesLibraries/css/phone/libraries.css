@@ -77,3 +77,8 @@ li div.warning
     width: 100%;
     height: auto;
 }
+
+.ui-li-divider
+{
+	padding: 1px 15px;
+}

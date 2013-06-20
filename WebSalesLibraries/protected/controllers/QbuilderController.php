@@ -88,11 +88,27 @@
 			$showLinkToMainSite = Yii::app()->request->getPost('showLinkToMainSite');
 			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == 'true';
 
+			$showTicker = Yii::app()->request->getPost('showTicker');
+			$showTicker = isset($showTicker) && $showTicker == "true";
+
+			$disableBanners = Yii::app()->request->getPost('disableBanners');
+			$disableBanners = isset($disableBanners) && $disableBanners == "true";
+
+			$disableWidgets = Yii::app()->request->getPost('disableWidgets');
+			$disableWidgets = isset($disableWidgets) && $disableWidgets == "true";
+
+			$recordActivity = Yii::app()->request->getPost('recordActivity');
+			$recordActivity = isset($recordActivity) && $recordActivity == "true";
+
+			$pinCode = Yii::app()->request->getPost('pinCode');
+			if (isset($pinCode) && $pinCode == '')
+				$pinCode = null;
+
 			$userId = Yii::app()->user->getId();
 			if (isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
-				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
+				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $linkId)->getUrl();
 
 				$linkRecord = LinkStorage::getLinkById($linkId);
 				if (isset($linkRecord))
@@ -626,10 +642,15 @@
 		 * @param bool restricted
 		 * @param bool showLinkToMainSite
 		 * @param string logo
+		 * @param bool showTicker
+		 * @param bool disableBanners
+		 * @param bool disableWidgets
+		 * @param bool recordActivity
+		 * @param string pinCode
 		 * @return string
 		 * @soap
 		 */
-		public function emailLink($sessionKey, $login, $linkId, $subtitle, $createDate, $expiresInDays, $restricted, $showLinkToMainSite, $logo)
+		public function emailLink($sessionKey, $login, $linkId, $subtitle, $createDate, $expiresInDays, $restricted, $showLinkToMainSite, $logo, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
@@ -639,7 +660,7 @@
 					$logo = 'data:image/png;base64,' . $logo;
 					$userId = $userRecord->id;
 					$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
-					return QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)->getUrl();
+					return QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $linkId)->getUrl();
 				}
 			}
 			return null;

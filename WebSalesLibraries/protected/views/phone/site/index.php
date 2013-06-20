@@ -1,5 +1,5 @@
 <?php
-$version = '3.0';
+$version = '4.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -541,7 +541,10 @@ $logos = QPageStorage::getPageLogoList();
 					<a href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
 				<li>
-					<a href="#add-page-security" data-transition="none">Options</a>
+					<a href="#add-page-security" data-transition="none">Security</a>
+				</li>
+				<li>
+					<a href="#add-page-options" data-transition="none">Options</a>
 				</li>
 			</ul>
 		</div>
@@ -609,7 +612,10 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
 				<li>
-					<a href="#add-page-security" data-transition="none">Options</a>
+					<a href="#add-page-security" data-transition="none">Security</a>
+				</li>
+				<li>
+					<a href="#add-page-options" data-transition="none">Options</a>
 				</li>
 			</ul>
 		</div>
@@ -664,7 +670,10 @@ $logos = QPageStorage::getPageLogoList();
 					<a href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
 				<li>
-					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-security" data-transition="none">Options</a>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-security" data-transition="none">Security</a>
+				</li>
+				<li>
+					<a href="#add-page-options" data-transition="none">Options</a>
 				</li>
 			</ul>
 		</div>
@@ -689,13 +698,81 @@ $logos = QPageStorage::getPageLogoList();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" class="on-left">
-					<input type="checkbox" name="add-page-show-link-to-main-site" id="add-page-show-link-to-main-site" class="custom" data-mini="true"/>
-					<label for="add-page-show-link-to-main-site">Show Link to Main Site</label> <br>
+				<td class="on-left" colspan="2">
+					<input type="checkbox" name="add-page-access-code-enabled" id="add-page-access-code-enabled" class="custom" data-mini="true"/>
+					<label for="add-page-access-code-enabled">Create a SECURE ACCESS Pin</label>
+					<input type="email" id="add-page-access-code" maxlength=4 data-mini="true" disabled>
 				</td>
 			</tr>
 		</table>
 		<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role='page' class="email-tab" id="add-page-options" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title header-title"></span>
+		<ul data-role="listview" data-theme="c" data-divider-theme="c">
+			<li data-role="list-divider">
+				<h4 class="link-container">
+					Email Link: <span class="name"></span>
+				</h4>
+			</li>
+		</ul>
+		<div data-role="navbar">
+			<ul>
+				<li>
+					<a href="#add-page-info" data-transition="none">Link</a>
+				</li>
+				<li>
+					<a href="#add-page-logo" data-transition="none">Logo</a>
+				</li>
+				<li>
+					<a href="#add-page-security" data-transition="none">Security</a>
+				</li>
+				<li>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-options" data-transition="none">Options</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role='content' class="page-content">
+		<table class="layout-group">
+			<tr>
+				<td colspan="2" class="on-left">
+					<input type="checkbox" name="add-page-show-link-to-main-site" id="add-page-show-link-to-main-site" class="custom" data-mini="true"/>
+					<label for="add-page-show-link-to-main-site">Show Link to Main Site</label>
+					<input type="checkbox" name="add-page-show-ticker" id="add-page-show-ticker" class="custom" data-mini="true"/>
+					<label for="add-page-show-ticker">Show the TICKER at the top of this quickSITE</label>
+					<input type="checkbox" name="add-page-disable-widgets" id="add-page-disable-widgets" class="custom" data-mini="true"/>
+					<label for="add-page-disable-widgets">Disable all Link Widget Icons</label>
+					<input type="checkbox" name="add-page-disable-banners" id="add-page-disable-banners" class="custom" data-mini="true"/>
+					<label for="add-page-disable-banners">Disable all Link Banner Images</label>
+					<input type="checkbox" name="add-page-record-activity" id="add-page-record-activity" class="custom" data-mini="true"/>
+					<label for="add-page-record-activity">Email me each time someone clicks a link on this quickSITE</label>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-iconpos="top">

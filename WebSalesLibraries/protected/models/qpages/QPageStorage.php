@@ -146,7 +146,7 @@
 			return $pageRecord->id;
 		}
 
-		public static function addPageLite($ownerId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $linkId)
+		public static function addPageLite($ownerId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $linkId)
 		{
 			$pageRecord = new QPageStorage();
 			$pageRecord->id = uniqid();
@@ -160,6 +160,11 @@
 			$pageRecord->is_email = true;
 			$pageRecord->restricted = $restricted;
 			$pageRecord->show_site_link = $showLinkToMainSite;
+			$pageRecord->show_ticker = $showTicker;
+			$pageRecord->disable_banners = $disableBanners;
+			$pageRecord->disable_widgets = $disableWidgets;
+			$pageRecord->record_activity = $recordActivity;
+			$pageRecord->pin_code = $pinCode;
 			$pageRecord->save();
 
 			$linkInPageRecord = new QPageLinkStorage();

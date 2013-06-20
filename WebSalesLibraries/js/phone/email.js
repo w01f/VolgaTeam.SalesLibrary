@@ -63,7 +63,12 @@
 				logo: $('#add-page-logo').find('.page-content').find('li.qpage-logo-selected').find('img').attr('src'),
 				expiresInDays: $('#add-page-expires-in').val(),
 				restricted: $('#add-page-restricted').is(':checked'),
-				showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked')
+				pinCode: $('#add-page-access-code').val(),
+				showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked'),
+				showTicker: $('#add-page-show-ticker').is(':checked'),
+				disableWidgets: $('#add-page-disable-widgets').is(':checked'),
+				disableBanners: $('#add-page-disable-banners').is(':checked'),
+				recordActivity: $('#add-page-record-activity').is(':checked')
 			},
 			beforeSend: function ()
 			{
@@ -166,6 +171,27 @@
 		{
 			$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
 			$(this).attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
+		});
+
+		$('#add-page-access-code-enabled').on('change', function ()
+		{
+			var accessCode = $('#add-page-access-code');
+			if ($(this).is(':checked'))
+				accessCode.textinput('enable');
+			else
+				accessCode.val('').textinput('disable');
+		});
+
+		$('#add-page-access-code').keydown(function (event)
+		{
+			if (event.keyCode == 46 || event.keyCode == 8)
+			{
+			}
+			else
+			{
+				if (event.keyCode < 48 || event.keyCode > 57)
+					event.preventDefault();
+			}
 		});
 	});
 })(jQuery);

@@ -7,6 +7,7 @@
 		<ul id="add-page-tabs" class="nav nav-tabs">
 			<li><a href="#add-page-tab-link" data-toggle="tab">Link</a></li>
 			<li><a href="#add-page-tab-logo" data-toggle="tab">Logo</a></li>
+			<li><a href="#add-page-tab-settings" data-toggle="tab">Settings</a></li>
 		</ul>
 		<div class="tab-content">
 			<div id="add-page-tab-link" class="tab-pane fade">
@@ -54,7 +55,7 @@
 				</table>
 			</div>
 			<div id="add-page-tab-logo" class="tab-pane fade" style="padding-left: 2px">
-				<div class="logo-list" style="height: 355px;">
+				<div class="logo-list" style="height: 313px;">
 					<ul class="nav nav-pills">
 						<?if (isset($logos)): ?>
 							<? $selectedLogo = count($logos) > 0 ? $logos[0] : null; ?>
@@ -65,6 +66,21 @@
 							<?php endforeach; ?>
 						<?php endif;?>
 					</ul>
+				</div>
+			</div>
+			<div id="add-page-tab-settings" class="tab-pane fade">
+				<div style="height: 315px;">
+					<form class="form-inline" style="margin-bottom:10px;">
+						<label class="checkbox" style="min-height: 30px;"><input id="add-page-access-code-enabled" type="checkbox"><span style="margin-left: 4px;">Create a SECURE ACCESS Pin (4 Digit Number)</span></label>
+						<input type="text" maxlength="4" class="input-small" id="add-page-access-code" style="display: none;" value="">
+					</form>
+					<label class="checkbox"><input type="checkbox" id="add-page-show-ticker" value="">Show the TICKER at the top of this quickSITE</label>
+					<br>
+					<label class="checkbox"><input type="checkbox" id="add-page-disable-widgets" "value="">Disable all Link Widget Icons</label>
+					<br>
+					<label class="checkbox"><input type="checkbox" id="add-page-disable-banners" value="">Disable all Link Banner Images</label>
+					<br>
+					<label class="checkbox"><input type="checkbox" id="add-page-record-activity" value="">Email me each time someone clicks a link on this quickSITE</label>
 				</div>
 			</div>
 		</div>

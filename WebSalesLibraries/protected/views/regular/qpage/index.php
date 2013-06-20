@@ -60,7 +60,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 				<div class="control-group">
 					<h4><p class="text-error">To view the links on this site, enter your email address:</p></h4>
 					<div class="controls">
-						<input type="email" id="user-email" class="input-block-level" placeholder="Email" required <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <?endif;?>>
+						<input type="email" id="user-email" class="input-block-level" placeholder="Email" required <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <? endif;?>>
 					</div>
 				</div>
 			</div>
