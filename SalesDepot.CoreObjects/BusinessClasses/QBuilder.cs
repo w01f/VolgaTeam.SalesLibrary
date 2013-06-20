@@ -213,7 +213,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public string AddPageLite(string linkId, string title, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo)
+		public string AddPageLite(string linkId, string title, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode)
 		{
 			var message = String.Empty;
 			var result = false;
@@ -222,7 +222,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 										{
 											result = Connection.Client.IsLinkAvailableOnSite(linkId, out message);
 											if (result)
-												url = Connection.Client.EmailWebLink(linkId, title, expiresInDays, restricted, showLinkToMainSite, logo, out message);
+												url = Connection.Client.EmailWebLink(linkId, title, expiresInDays, restricted, showLinkToMainSite, logo, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, out message);
 											result &= String.IsNullOrEmpty(message);
 										});
 			thread.Start();

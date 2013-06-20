@@ -44,7 +44,7 @@
 			this.buttonXClose.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXClose.Location = new System.Drawing.Point(12, 272);
 			this.buttonXClose.Name = "buttonXClose";
-			this.buttonXClose.Size = new System.Drawing.Size(317, 51);
+			this.buttonXClose.Size = new System.Drawing.Size(317, 55);
 			this.buttonXClose.TabIndex = 7;
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -56,11 +56,11 @@
 			this.buttonXAddToPresentation.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXAddToPresentation.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXAddToPresentation.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXAddToPresentation.Image = global::SalesDepot.Properties.Resources.InsertSlide;
+			this.buttonXAddToPresentation.Image = global::SalesDepot.Properties.Resources.SearchBarPowerPoint;
 			this.buttonXAddToPresentation.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXAddToPresentation.Location = new System.Drawing.Point(12, 12);
 			this.buttonXAddToPresentation.Name = "buttonXAddToPresentation";
-			this.buttonXAddToPresentation.Size = new System.Drawing.Size(317, 51);
+			this.buttonXAddToPresentation.Size = new System.Drawing.Size(317, 55);
 			this.buttonXAddToPresentation.TabIndex = 6;
 			this.buttonXAddToPresentation.Text = "   Add to presentation";
 			this.buttonXAddToPresentation.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -72,11 +72,11 @@
 			this.buttonXReview.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXReview.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXReview.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXReview.Image = global::SalesDepot.Properties.Resources.OpenFile;
+			this.buttonXReview.Image = global::SalesDepot.Properties.Resources.SearchBarOpen;
 			this.buttonXReview.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXReview.Location = new System.Drawing.Point(12, 77);
 			this.buttonXReview.Name = "buttonXReview";
-			this.buttonXReview.Size = new System.Drawing.Size(317, 51);
+			this.buttonXReview.Size = new System.Drawing.Size(317, 55);
 			this.buttonXReview.TabIndex = 5;
 			this.buttonXReview.Text = "   Review video clip";
 			this.buttonXReview.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -92,7 +92,7 @@
 			this.buttonXQuickSiteAdd.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXQuickSiteAdd.Location = new System.Drawing.Point(12, 207);
 			this.buttonXQuickSiteAdd.Name = "buttonXQuickSiteAdd";
-			this.buttonXQuickSiteAdd.Size = new System.Drawing.Size(317, 51);
+			this.buttonXQuickSiteAdd.Size = new System.Drawing.Size(317, 55);
 			this.buttonXQuickSiteAdd.TabIndex = 9;
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
@@ -108,7 +108,7 @@
 			this.buttonXQuickSiteEmail.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXQuickSiteEmail.Location = new System.Drawing.Point(12, 142);
 			this.buttonXQuickSiteEmail.Name = "buttonXQuickSiteEmail";
-			this.buttonXQuickSiteEmail.Size = new System.Drawing.Size(317, 51);
+			this.buttonXQuickSiteEmail.Size = new System.Drawing.Size(317, 55);
 			this.buttonXQuickSiteEmail.TabIndex = 8;
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;

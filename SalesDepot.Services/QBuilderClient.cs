@@ -358,7 +358,7 @@ namespace SalesDepot.Services
 			return pageId;
 		}
 
-		public string EmailWebLink(string linkId, string title, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, out string message)
+		public string EmailWebLink(string linkId, string title, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, out string message)
 		{
 			message = String.Empty;
 			var result = String.Empty;
@@ -369,7 +369,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						result = client.emailLink(sessionKey, _login, linkId, title, DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), expiresInDays, restricted, showLinkToMainSite, logo);
+						result = client.emailLink(sessionKey, _login, linkId, title, DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), expiresInDays, restricted, showLinkToMainSite, logo, showTicker, disableBanners, disableWidgets, recordActivity, pinCode);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

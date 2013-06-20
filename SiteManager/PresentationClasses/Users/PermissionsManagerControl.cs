@@ -410,7 +410,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		private void FilterUsers()
 		{
 			var filteredRecords = new List<UserRecord>();
-			filteredRecords.AddRange(checkEditEnableUserFilter.Checked ? _users.Where(x => x.groups.Any(y => _userFilterSelectedGroups.Contains(y.name))) : _users);
+			filteredRecords.AddRange(checkEditEnableUserFilter.Checked ? _users.Where(x => x.groups != null && x.groups.Any(y => _userFilterSelectedGroups.Contains(y.name))) : _users);
 			gridControlUsers.DataSource = filteredRecords;
 			UpdateControlsState();
 		}

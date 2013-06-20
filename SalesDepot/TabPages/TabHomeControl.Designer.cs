@@ -236,7 +236,7 @@
 			this.buttonXPDF.AutoCheckOnClick = true;
 			this.buttonXPDF.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXPDF.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXPDF.Image = global::SalesDepot.Properties.Resources.Acrobat;
+			this.buttonXPDF.Image = global::SalesDepot.Properties.Resources.EmailBinPdf;
 			this.buttonXPDF.ImageFixedSize = new System.Drawing.Size(40, 40);
 			this.buttonXPDF.Location = new System.Drawing.Point(10, 9);
 			this.buttonXPDF.Name = "buttonXPDF";
@@ -269,7 +269,7 @@
 			this.buttonXEmptyEmailBin.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXEmptyEmailBin.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXEmptyEmailBin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXEmptyEmailBin.Image = global::SalesDepot.Properties.Resources.ClearSolutionView;
+			this.buttonXEmptyEmailBin.Image = global::SalesDepot.Properties.Resources.EmailBinEmpty;
 			this.buttonXEmptyEmailBin.ImageFixedSize = new System.Drawing.Size(40, 40);
 			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(10, 115);
 			this.buttonXEmptyEmailBin.Name = "buttonXEmptyEmailBin";
@@ -285,7 +285,7 @@
 			this.buttonXCreateEmail.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
 			this.buttonXCreateEmail.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
 			this.buttonXCreateEmail.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.buttonXCreateEmail.Image = global::SalesDepot.Properties.Resources.Send;
+			this.buttonXCreateEmail.Image = global::SalesDepot.Properties.Resources.EmailBinSend;
 			this.buttonXCreateEmail.ImageFixedSize = new System.Drawing.Size(42, 40);
 			this.buttonXCreateEmail.Location = new System.Drawing.Point(10, 168);
 			this.buttonXCreateEmail.Name = "buttonXCreateEmail";

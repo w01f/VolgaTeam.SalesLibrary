@@ -66,6 +66,7 @@
 			this.checkEditFooterEnabled = new DevExpress.XtraEditors.CheckEdit();
 			this.xtraTabPageSecurity = new DevExpress.XtraTab.XtraTabPage();
 			this.pnSecurity = new System.Windows.Forms.Panel();
+			this.labelControlSettingsHeader = new DevExpress.XtraEditors.LabelControl();
 			this.textEditPinCode = new DevExpress.XtraEditors.TextEdit();
 			this.checkEditPinCode = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditRecordActivity = new DevExpress.XtraEditors.CheckEdit();
@@ -83,6 +84,7 @@
 			this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
 			this.layoutViewFieldBannerGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
 			this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
+			this.labelControlLogoHeader = new DevExpress.XtraEditors.LabelControl();
 			this.pnPageHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.hyperLinkEditUrl.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
@@ -370,7 +372,7 @@
 			// 
 			this.repositoryItemButtonEditLinksActions.AutoHeight = false;
 			this.repositoryItemButtonEditLinksActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete this file", null, null, true)});
 			this.repositoryItemButtonEditLinksActions.Name = "repositoryItemButtonEditLinksActions";
 			this.repositoryItemButtonEditLinksActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditLinksActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditLinksActions_ButtonClick);
@@ -533,6 +535,7 @@
 			// pnSecurity
 			// 
 			this.pnSecurity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.pnSecurity.Controls.Add(this.labelControlSettingsHeader);
 			this.pnSecurity.Controls.Add(this.textEditPinCode);
 			this.pnSecurity.Controls.Add(this.checkEditPinCode);
 			this.pnSecurity.Controls.Add(this.checkEditRecordActivity);
@@ -549,9 +552,24 @@
 			this.pnSecurity.Size = new System.Drawing.Size(568, 384);
 			this.pnSecurity.TabIndex = 6;
 			// 
+			// labelControlSettingsHeader
+			// 
+			this.labelControlSettingsHeader.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.labelControlSettingsHeader.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlSettingsHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+			this.labelControlSettingsHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlSettingsHeader.Location = new System.Drawing.Point(0, 0);
+			this.labelControlSettingsHeader.Name = "labelControlSettingsHeader";
+			this.labelControlSettingsHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
+			this.labelControlSettingsHeader.Size = new System.Drawing.Size(568, 24);
+			this.labelControlSettingsHeader.StyleController = this.styleController;
+			this.labelControlSettingsHeader.TabIndex = 12;
+			this.labelControlSettingsHeader.Text = "Customize your quickSITE with the settings below:";
+			this.labelControlSettingsHeader.UseMnemonic = false;
+			// 
 			// textEditPinCode
 			// 
-			this.textEditPinCode.Location = new System.Drawing.Point(237, 84);
+			this.textEditPinCode.Location = new System.Drawing.Point(237, 103);
 			this.textEditPinCode.Name = "textEditPinCode";
 			this.textEditPinCode.Properties.DisplayFormat.FormatString = "d4";
 			this.textEditPinCode.Properties.EditFormat.FormatString = "d4";
@@ -564,7 +582,7 @@
 			// 
 			// checkEditPinCode
 			// 
-			this.checkEditPinCode.Location = new System.Drawing.Point(3, 84);
+			this.checkEditPinCode.Location = new System.Drawing.Point(3, 103);
 			this.checkEditPinCode.Name = "checkEditPinCode";
 			this.checkEditPinCode.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditPinCode.Properties.Appearance.Options.UseFont = true;
@@ -577,7 +595,7 @@
 			// 
 			// checkEditRecordActivity
 			// 
-			this.checkEditRecordActivity.Location = new System.Drawing.Point(3, 259);
+			this.checkEditRecordActivity.Location = new System.Drawing.Point(3, 278);
 			this.checkEditRecordActivity.Name = "checkEditRecordActivity";
 			this.checkEditRecordActivity.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditRecordActivity.Properties.Appearance.Options.UseFont = true;
@@ -589,7 +607,7 @@
 			// 
 			// checkEditDisableBanners
 			// 
-			this.checkEditDisableBanners.Location = new System.Drawing.Point(3, 224);
+			this.checkEditDisableBanners.Location = new System.Drawing.Point(3, 243);
 			this.checkEditDisableBanners.Name = "checkEditDisableBanners";
 			this.checkEditDisableBanners.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditDisableBanners.Properties.Appearance.Options.UseFont = true;
@@ -601,7 +619,7 @@
 			// 
 			// checkEditDisableWidgets
 			// 
-			this.checkEditDisableWidgets.Location = new System.Drawing.Point(3, 189);
+			this.checkEditDisableWidgets.Location = new System.Drawing.Point(3, 208);
 			this.checkEditDisableWidgets.Name = "checkEditDisableWidgets";
 			this.checkEditDisableWidgets.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditDisableWidgets.Properties.Appearance.Options.UseFont = true;
@@ -613,7 +631,7 @@
 			// 
 			// checkEditShowTicker
 			// 
-			this.checkEditShowTicker.Location = new System.Drawing.Point(3, 154);
+			this.checkEditShowTicker.Location = new System.Drawing.Point(3, 173);
 			this.checkEditShowTicker.Name = "checkEditShowTicker";
 			this.checkEditShowTicker.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditShowTicker.Properties.Appearance.Options.UseFont = true;
@@ -625,7 +643,7 @@
 			// 
 			// checkEditShowLinkToMainSite
 			// 
-			this.checkEditShowLinkToMainSite.Location = new System.Drawing.Point(3, 119);
+			this.checkEditShowLinkToMainSite.Location = new System.Drawing.Point(3, 138);
 			this.checkEditShowLinkToMainSite.Name = "checkEditShowLinkToMainSite";
 			this.checkEditShowLinkToMainSite.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditShowLinkToMainSite.Properties.Appearance.Options.UseFont = true;
@@ -637,7 +655,7 @@
 			// 
 			// checkEditRestricted
 			// 
-			this.checkEditRestricted.Location = new System.Drawing.Point(3, 49);
+			this.checkEditRestricted.Location = new System.Drawing.Point(3, 68);
 			this.checkEditRestricted.Name = "checkEditRestricted";
 			this.checkEditRestricted.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditRestricted.Properties.Appearance.Options.UseFont = true;
@@ -651,7 +669,7 @@
 			// 
 			this.dateEditExpirationDate.EditValue = null;
 			this.dateEditExpirationDate.Enabled = false;
-			this.dateEditExpirationDate.Location = new System.Drawing.Point(162, 14);
+			this.dateEditExpirationDate.Location = new System.Drawing.Point(162, 33);
 			this.dateEditExpirationDate.Name = "dateEditExpirationDate";
 			this.dateEditExpirationDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -669,7 +687,7 @@
 			// 
 			// checkEditExpirationDate
 			// 
-			this.checkEditExpirationDate.Location = new System.Drawing.Point(3, 14);
+			this.checkEditExpirationDate.Location = new System.Drawing.Point(3, 33);
 			this.checkEditExpirationDate.Name = "checkEditExpirationDate";
 			this.checkEditExpirationDate.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.checkEditExpirationDate.Properties.Appearance.Options.UseFont = true;
@@ -683,6 +701,7 @@
 			// xtraTabPageLogo
 			// 
 			this.xtraTabPageLogo.Controls.Add(this.gridControlLogoGallery);
+			this.xtraTabPageLogo.Controls.Add(this.labelControlLogoHeader);
 			this.xtraTabPageLogo.Name = "xtraTabPageLogo";
 			this.xtraTabPageLogo.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageLogo.Text = "Logo";
@@ -690,12 +709,12 @@
 			// gridControlLogoGallery
 			// 
 			this.gridControlLogoGallery.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControlLogoGallery.Location = new System.Drawing.Point(0, 0);
+			this.gridControlLogoGallery.Location = new System.Drawing.Point(0, 29);
 			this.gridControlLogoGallery.MainView = this.layoutViewLogoGallery;
 			this.gridControlLogoGallery.Name = "gridControlLogoGallery";
 			this.gridControlLogoGallery.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit});
-			this.gridControlLogoGallery.Size = new System.Drawing.Size(568, 384);
+			this.gridControlLogoGallery.Size = new System.Drawing.Size(568, 355);
 			this.gridControlLogoGallery.TabIndex = 36;
 			this.gridControlLogoGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewLogoGallery});
@@ -797,6 +816,21 @@
 			this.layoutViewCard1.Name = "layoutViewCard1";
 			this.layoutViewCard1.OptionsItemText.TextToControlDistance = 2;
 			this.layoutViewCard1.Text = "TemplateCard";
+			// 
+			// labelControlLogoHeader
+			// 
+			this.labelControlLogoHeader.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.labelControlLogoHeader.Appearance.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlLogoHeader.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+			this.labelControlLogoHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.labelControlLogoHeader.Location = new System.Drawing.Point(0, 0);
+			this.labelControlLogoHeader.Name = "labelControlLogoHeader";
+			this.labelControlLogoHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 5);
+			this.labelControlLogoHeader.Size = new System.Drawing.Size(568, 29);
+			this.labelControlLogoHeader.StyleController = this.styleController;
+			this.labelControlLogoHeader.TabIndex = 37;
+			this.labelControlLogoHeader.Text = "Select a Logo that will appear at the VERY top of this quickSITE:";
+			this.labelControlLogoHeader.UseMnemonic = false;
 			// 
 			// PageContentControl
 			// 
@@ -907,5 +941,7 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditDisableBanners;
 		private DevExpress.XtraEditors.CheckEdit checkEditDisableWidgets;
 		private DevExpress.XtraEditors.TextEdit textEditPinCode;
+		private DevExpress.XtraEditors.LabelControl labelControlSettingsHeader;
+		private DevExpress.XtraEditors.LabelControl labelControlLogoHeader;
 	}
 }

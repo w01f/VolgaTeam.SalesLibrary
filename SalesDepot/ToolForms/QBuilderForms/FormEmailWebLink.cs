@@ -43,6 +43,13 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			buttonXExpiresIn_Click(buttonXExpiresIn7, new EventArgs());
 			checkEditRestricted.Checked = false;
 			checkEditShowLinkToMainSite.Checked = false;
+			checkEditPinCode.Checked = false;
+			textEditPinCode.Enabled = false;
+			textEditPinCode.EditValue = null;
+			checkEditShowTicker.Checked = false;
+			checkEditDisableBanners.Checked = false;
+			checkEditDisableWidgets.Checked = false;
+			checkEditRecordActivity.Checked = false;
 		}
 
 		private void UpdateControls()
@@ -99,6 +106,11 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			var restricted = checkEditRestricted.Checked;
 			var showLinkToMainSite = checkEditShowLinkToMainSite.Checked;
 			var selectedLogo = layoutViewLogoGallery.GetFocusedRow() as PageLogo;
+			var showTicker = checkEditShowTicker.Checked;
+			var disableBanners = checkEditDisableBanners.Checked;
+			var disableWidgets = checkEditDisableWidgets.Checked;
+			var recordActivity = checkEditRecordActivity.Checked;
+			var pinCode = checkEditPinCode.Checked && textEditPinCode.EditValue != null && !String.IsNullOrEmpty(textEditPinCode.EditValue.ToString()) ? textEditPinCode.EditValue.ToString() : null;
 
 			using (var form = new FormProgress())
 			{
@@ -111,7 +123,13 @@ namespace SalesDepot.ToolForms.QBuilderForms
 					expiresInDays,
 					restricted,
 					showLinkToMainSite,
-					selectedLogo != null ? selectedLogo.EncodedImage : null);
+					selectedLogo != null ? selectedLogo.EncodedImage : null,
+					showTicker,
+					disableBanners,
+					disableWidgets,
+					recordActivity,
+					pinCode
+					);
 				form.Close();
 			}
 			if (!String.IsNullOrEmpty(result))
@@ -169,6 +187,13 @@ namespace SalesDepot.ToolForms.QBuilderForms
 				e.Appearance.BackColor = Color.Orange;
 				e.Appearance.BackColor2 = Color.Orange;
 			}
+		}
+
+		private void checkEditPinCode_CheckedChanged(object sender, EventArgs e)
+		{
+			textEditPinCode.Enabled = checkEditPinCode.Checked;
+			if (!checkEditPinCode.Checked)
+				textEditPinCode.EditValue = null;
 		}
 	}
 }

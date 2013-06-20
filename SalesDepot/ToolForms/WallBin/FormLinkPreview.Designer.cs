@@ -127,7 +127,7 @@
 			// 
 			this.barLargeButtonItemOpen.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemOpen.Caption = "Open";
-			this.barLargeButtonItemOpen.Glyph = global::SalesDepot.Properties.Resources.OpenFileBig;
+			this.barLargeButtonItemOpen.Glyph = global::SalesDepot.Properties.Resources.QuickViewOpen;
 			this.barLargeButtonItemOpen.Id = 1;
 			this.barLargeButtonItemOpen.Name = "barLargeButtonItemOpen";
 			toolTipTitleItem1.Text = "Open";
@@ -142,7 +142,7 @@
 			// 
 			this.barLargeButtonItemSave.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemSave.Caption = "Save";
-			this.barLargeButtonItemSave.Glyph = global::SalesDepot.Properties.Resources.SaveCopyBig;
+			this.barLargeButtonItemSave.Glyph = global::SalesDepot.Properties.Resources.QuickViewSave;
 			this.barLargeButtonItemSave.Id = 2;
 			this.barLargeButtonItemSave.Name = "barLargeButtonItemSave";
 			toolTipTitleItem2.Text = "Save";
@@ -157,7 +157,7 @@
 			// 
 			this.barLargeButtonItemInsert.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemInsert.Caption = "Insert";
-			this.barLargeButtonItemInsert.Glyph = global::SalesDepot.Properties.Resources.InsertVideo;
+			this.barLargeButtonItemInsert.Glyph = global::SalesDepot.Properties.Resources.QuickViewAdd;
 			this.barLargeButtonItemInsert.Id = 11;
 			this.barLargeButtonItemInsert.Name = "barLargeButtonItemInsert";
 			toolTipTitleItem3.Text = "Insert this video";
@@ -172,7 +172,7 @@
 			// 
 			this.barLargeButtonItemEmail.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemEmail.Caption = "Email";
-			this.barLargeButtonItemEmail.Glyph = global::SalesDepot.Properties.Resources.MicrosoftOfficeOutlook;
+			this.barLargeButtonItemEmail.Glyph = global::SalesDepot.Properties.Resources.QuickViewEmail;
 			this.barLargeButtonItemEmail.Id = 4;
 			this.barLargeButtonItemEmail.Name = "barLargeButtonItemEmail";
 			toolTipTitleItem4.Text = "Email this file";
@@ -187,7 +187,7 @@
 			// 
 			this.barLargeButtonItemPrint.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemPrint.Caption = "Print";
-			this.barLargeButtonItemPrint.Glyph = global::SalesDepot.Properties.Resources.PrintBig;
+			this.barLargeButtonItemPrint.Glyph = global::SalesDepot.Properties.Resources.QuickViewPrint;
 			this.barLargeButtonItemPrint.Id = 5;
 			this.barLargeButtonItemPrint.Name = "barLargeButtonItemPrint";
 			toolTipTitleItem5.Text = "Print";

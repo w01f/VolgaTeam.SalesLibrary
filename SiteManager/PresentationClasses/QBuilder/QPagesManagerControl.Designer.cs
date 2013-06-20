@@ -48,6 +48,7 @@
 			this.repositoryItemButtonEditPagesActions = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.splitContainerControlData = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnCustomFilter = new System.Windows.Forms.Panel();
+			this.gridColumnPinCode = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlRecords)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecords)).BeginInit();
@@ -89,7 +90,7 @@
             this.repositoryItemDateEditPages,
             this.repositoryItemButtonEditPagesActions,
             this.repositoryItemHyperLinkEditPages});
-			this.gridControlRecords.Size = new System.Drawing.Size(673, 483);
+			this.gridControlRecords.Size = new System.Drawing.Size(675, 483);
 			this.gridControlRecords.TabIndex = 3;
 			this.gridControlRecords.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecords});
@@ -119,7 +120,8 @@
             this.gridColumnPagesType,
             this.gridColumnPagesDateCreate,
             this.gridColumnPagesDateExpiration,
-            this.gridColumnPagesActions});
+            this.gridColumnPagesActions,
+            this.gridColumnPinCode});
 			this.gridViewRecords.GridControl = this.gridControlRecords;
 			this.gridViewRecords.Name = "gridViewRecords";
 			this.gridViewRecords.OptionsCustomization.AllowColumnMoving = false;
@@ -150,7 +152,7 @@
 			this.gridColumnPagesName.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesName.Visible = true;
 			this.gridColumnPagesName.VisibleIndex = 2;
-			this.gridColumnPagesName.Width = 102;
+			this.gridColumnPagesName.Width = 110;
 			// 
 			// gridColumnPagesGroup
 			// 
@@ -161,7 +163,7 @@
 			this.gridColumnPagesGroup.OptionsColumn.ReadOnly = true;
 			this.gridColumnPagesGroup.Visible = true;
 			this.gridColumnPagesGroup.VisibleIndex = 3;
-			this.gridColumnPagesGroup.Width = 89;
+			this.gridColumnPagesGroup.Width = 76;
 			// 
 			// gridColumnPagesUrl
 			// 
@@ -172,7 +174,7 @@
 			this.gridColumnPagesUrl.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesUrl.Visible = true;
 			this.gridColumnPagesUrl.VisibleIndex = 0;
-			this.gridColumnPagesUrl.Width = 136;
+			this.gridColumnPagesUrl.Width = 128;
 			// 
 			// repositoryItemHyperLinkEditPages
 			// 
@@ -245,7 +247,7 @@
 			this.gridColumnPagesActions.OptionsColumn.ShowCaption = false;
 			this.gridColumnPagesActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.gridColumnPagesActions.Visible = true;
-			this.gridColumnPagesActions.VisibleIndex = 6;
+			this.gridColumnPagesActions.VisibleIndex = 7;
 			this.gridColumnPagesActions.Width = 45;
 			// 
 			// repositoryItemButtonEditPagesActions
@@ -278,6 +280,18 @@
 			this.pnCustomFilter.Name = "pnCustomFilter";
 			this.pnCustomFilter.Size = new System.Drawing.Size(230, 483);
 			this.pnCustomFilter.TabIndex = 21;
+			// 
+			// gridColumnPinCode
+			// 
+			this.gridColumnPinCode.Caption = "Pin";
+			this.gridColumnPinCode.FieldName = "pinCode";
+			this.gridColumnPinCode.Name = "gridColumnPinCode";
+			this.gridColumnPinCode.OptionsColumn.AllowEdit = false;
+			this.gridColumnPinCode.OptionsColumn.FixedWidth = true;
+			this.gridColumnPinCode.OptionsColumn.ReadOnly = true;
+			this.gridColumnPinCode.Visible = true;
+			this.gridColumnPinCode.VisibleIndex = 6;
+			this.gridColumnPinCode.Width = 60;
 			// 
 			// QPagesManagerControl
 			// 
@@ -319,5 +333,6 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditPagesActions;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPagesActions;
 		private DevExpress.XtraEditors.Repository.RepositoryItemHyperLinkEdit repositoryItemHyperLinkEditPages;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPinCode;
     }
 }

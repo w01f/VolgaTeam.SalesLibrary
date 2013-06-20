@@ -135,6 +135,11 @@
     <wsdl:part name="restricted" type="xsd:boolean" />
     <wsdl:part name="showLinkToMainSite" type="xsd:boolean" />
     <wsdl:part name="logo" type="xsd:string" />
+    <wsdl:part name="showTicker" type="xsd:boolean" />
+    <wsdl:part name="disableBanners" type="xsd:boolean" />
+    <wsdl:part name="disableWidgets" type="xsd:boolean" />
+    <wsdl:part name="recordActivity" type="xsd:boolean" />
+    <wsdl:part name="pinCode" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="emailLinkResponse">
     <wsdl:part name="return" type="xsd:string" />

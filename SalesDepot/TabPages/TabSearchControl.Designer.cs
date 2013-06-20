@@ -340,7 +340,7 @@
 			// 
 			this.barButtonItemOpenLink.Caption = "Open";
 			this.barButtonItemOpenLink.Enabled = false;
-			this.barButtonItemOpenLink.Glyph = global::SalesDepot.Properties.Resources.OpenFile;
+			this.barButtonItemOpenLink.Glyph = global::SalesDepot.Properties.Resources.SearchBarOpen;
 			this.barButtonItemOpenLink.Id = 0;
 			this.barButtonItemOpenLink.Name = "barButtonItemOpenLink";
 			toolTipTitleItem1.Text = "Open file";
@@ -354,7 +354,7 @@
 			// barButtonItemSave
 			// 
 			this.barButtonItemSave.Caption = "Save Copy";
-			this.barButtonItemSave.Glyph = global::SalesDepot.Properties.Resources.SaveCopy;
+			this.barButtonItemSave.Glyph = global::SalesDepot.Properties.Resources.SearchBarSave;
 			this.barButtonItemSave.Id = 6;
 			this.barButtonItemSave.Name = "barButtonItemSave";
 			toolTipTitleItem2.Text = "Save file";
@@ -368,7 +368,7 @@
 			// barButtonItemSaveAsPDF
 			// 
 			this.barButtonItemSaveAsPDF.Caption = "Save as PDF";
-			this.barButtonItemSaveAsPDF.Glyph = global::SalesDepot.Properties.Resources.SavePDF;
+			this.barButtonItemSaveAsPDF.Glyph = global::SalesDepot.Properties.Resources.SearchBarPdf;
 			this.barButtonItemSaveAsPDF.Id = 7;
 			this.barButtonItemSaveAsPDF.Name = "barButtonItemSaveAsPDF";
 			toolTipTitleItem3.Text = "Convert to PDF";
@@ -383,7 +383,7 @@
 			// 
 			this.barButtonItemEmailLink.Caption = "Email Link";
 			this.barButtonItemEmailLink.Enabled = false;
-			this.barButtonItemEmailLink.Glyph = global::SalesDepot.Properties.Resources.Send;
+			this.barButtonItemEmailLink.Glyph = global::SalesDepot.Properties.Resources.SearchBarEmail;
 			this.barButtonItemEmailLink.Id = 1;
 			this.barButtonItemEmailLink.Name = "barButtonItemEmailLink";
 			toolTipTitleItem4.Text = "Email ";
@@ -398,7 +398,7 @@
 			// 
 			this.barButtonItemPrintLink.Caption = "Print";
 			this.barButtonItemPrintLink.Enabled = false;
-			this.barButtonItemPrintLink.Glyph = global::SalesDepot.Properties.Resources.Print;
+			this.barButtonItemPrintLink.Glyph = global::SalesDepot.Properties.Resources.SearchBarPrint;
 			this.barButtonItemPrintLink.Id = 2;
 			this.barButtonItemPrintLink.Name = "barButtonItemPrintLink";
 			toolTipTitleItem5.Text = "Print";
@@ -429,7 +429,7 @@
 			// 
 			this.barButtonItemAddSlide.Caption = "Add Slide";
 			this.barButtonItemAddSlide.Enabled = false;
-			this.barButtonItemAddSlide.Glyph = global::SalesDepot.Properties.Resources.InsertSlide;
+			this.barButtonItemAddSlide.Glyph = global::SalesDepot.Properties.Resources.SearchBarPowerPoint;
 			this.barButtonItemAddSlide.Id = 12;
 			this.barButtonItemAddSlide.Name = "barButtonItemAddSlide";
 			toolTipTitleItem6.Text = "Add Slide";
@@ -444,7 +444,7 @@
 			// 
 			this.barButtonItemOpenQuickView.Caption = "Open in Quick View";
 			this.barButtonItemOpenQuickView.Enabled = false;
-			this.barButtonItemOpenQuickView.Glyph = global::SalesDepot.Properties.Resources.OpenQuickView;
+			this.barButtonItemOpenQuickView.Glyph = global::SalesDepot.Properties.Resources.SearchBarQuickView;
 			this.barButtonItemOpenQuickView.Id = 5;
 			this.barButtonItemOpenQuickView.Name = "barButtonItemOpenQuickView";
 			toolTipTitleItem7.Text = "QuickView";
@@ -458,7 +458,7 @@
 			// barButtonItemSearch
 			// 
 			this.barButtonItemSearch.Caption = "Search";
-			this.barButtonItemSearch.Glyph = global::SalesDepot.Properties.Resources.Search;
+			this.barButtonItemSearch.Glyph = global::SalesDepot.Properties.Resources.SearchBarSearch;
 			this.barButtonItemSearch.Id = 8;
 			this.barButtonItemSearch.Name = "barButtonItemSearch";
 			toolTipTitleItem8.Text = "File Search";
@@ -472,7 +472,7 @@
 			// barButtonItemClear
 			// 
 			this.barButtonItemClear.Caption = "Clear";
-			this.barButtonItemClear.Glyph = global::SalesDepot.Properties.Resources.ClearSolutionView;
+			this.barButtonItemClear.Glyph = global::SalesDepot.Properties.Resources.SearchBarReset;
 			this.barButtonItemClear.Id = 9;
 			this.barButtonItemClear.Name = "barButtonItemClear";
 			toolTipTitleItem9.Text = "Reset";

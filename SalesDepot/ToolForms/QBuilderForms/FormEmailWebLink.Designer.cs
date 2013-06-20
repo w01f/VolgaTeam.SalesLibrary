@@ -58,6 +58,13 @@
 			this.repositoryItemPictureEdit = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
 			this.layoutViewFieldBannerGallery = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
 			this.layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
+			this.xtraTabPageSettings = new DevExpress.XtraTab.XtraTabPage();
+			this.textEditPinCode = new DevExpress.XtraEditors.TextEdit();
+			this.checkEditPinCode = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditRecordActivity = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditDisableBanners = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditDisableWidgets = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditShowTicker = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.xtraTabControlOptions)).BeginInit();
 			this.xtraTabControlOptions.SuspendLayout();
@@ -72,6 +79,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewFieldBannerGallery)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).BeginInit();
+			this.xtraTabPageSettings.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPinCode.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPinCode.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditRecordActivity.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableBanners.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableWidgets.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowTicker.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// defaultLookAndFeel
@@ -194,7 +208,8 @@
 			this.xtraTabControlOptions.TabIndex = 7;
 			this.xtraTabControlOptions.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageOptionsInfo,
-            this.xtraTabPageOptionsLogo});
+            this.xtraTabPageOptionsLogo,
+            this.xtraTabPageSettings});
 			// 
 			// xtraTabPageOptionsInfo
 			// 
@@ -461,6 +476,93 @@
 			this.layoutViewCard1.OptionsItemText.TextToControlDistance = 2;
 			this.layoutViewCard1.Text = "TemplateCard";
 			// 
+			// xtraTabPageSettings
+			// 
+			this.xtraTabPageSettings.Controls.Add(this.textEditPinCode);
+			this.xtraTabPageSettings.Controls.Add(this.checkEditPinCode);
+			this.xtraTabPageSettings.Controls.Add(this.checkEditRecordActivity);
+			this.xtraTabPageSettings.Controls.Add(this.checkEditDisableBanners);
+			this.xtraTabPageSettings.Controls.Add(this.checkEditDisableWidgets);
+			this.xtraTabPageSettings.Controls.Add(this.checkEditShowTicker);
+			this.xtraTabPageSettings.Name = "xtraTabPageSettings";
+			this.xtraTabPageSettings.Size = new System.Drawing.Size(482, 295);
+			this.xtraTabPageSettings.Text = "Settings";
+			// 
+			// textEditPinCode
+			// 
+			this.textEditPinCode.Enabled = false;
+			this.textEditPinCode.Location = new System.Drawing.Point(239, 13);
+			this.textEditPinCode.Name = "textEditPinCode";
+			this.textEditPinCode.Properties.DisplayFormat.FormatString = "d4";
+			this.textEditPinCode.Properties.EditFormat.FormatString = "d4";
+			this.textEditPinCode.Properties.Mask.EditMask = "\\d{4}";
+			this.textEditPinCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+			this.textEditPinCode.Properties.MaxLength = 4;
+			this.textEditPinCode.Size = new System.Drawing.Size(100, 22);
+			this.textEditPinCode.StyleController = this.styleController;
+			this.textEditPinCode.TabIndex = 17;
+			// 
+			// checkEditPinCode
+			// 
+			this.checkEditPinCode.Location = new System.Drawing.Point(5, 13);
+			this.checkEditPinCode.Name = "checkEditPinCode";
+			this.checkEditPinCode.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditPinCode.Properties.Appearance.Options.UseFont = true;
+			this.checkEditPinCode.Properties.AutoWidth = true;
+			this.checkEditPinCode.Properties.Caption = "C. Create a SECURE ACCESS Pin";
+			this.checkEditPinCode.Size = new System.Drawing.Size(228, 21);
+			this.checkEditPinCode.StyleController = this.styleController;
+			this.checkEditPinCode.TabIndex = 16;
+			this.checkEditPinCode.CheckedChanged += new System.EventHandler(this.checkEditPinCode_CheckedChanged);
+			// 
+			// checkEditRecordActivity
+			// 
+			this.checkEditRecordActivity.Location = new System.Drawing.Point(5, 151);
+			this.checkEditRecordActivity.Name = "checkEditRecordActivity";
+			this.checkEditRecordActivity.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditRecordActivity.Properties.Appearance.Options.UseFont = true;
+			this.checkEditRecordActivity.Properties.AutoWidth = true;
+			this.checkEditRecordActivity.Properties.Caption = "H. Email me each time someone clicks a link on this quickSITE";
+			this.checkEditRecordActivity.Size = new System.Drawing.Size(392, 21);
+			this.checkEditRecordActivity.StyleController = this.styleController;
+			this.checkEditRecordActivity.TabIndex = 15;
+			// 
+			// checkEditDisableBanners
+			// 
+			this.checkEditDisableBanners.Location = new System.Drawing.Point(5, 116);
+			this.checkEditDisableBanners.Name = "checkEditDisableBanners";
+			this.checkEditDisableBanners.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditDisableBanners.Properties.Appearance.Options.UseFont = true;
+			this.checkEditDisableBanners.Properties.AutoWidth = true;
+			this.checkEditDisableBanners.Properties.Caption = "G. Disable all Link Banner Images";
+			this.checkEditDisableBanners.Size = new System.Drawing.Size(220, 21);
+			this.checkEditDisableBanners.StyleController = this.styleController;
+			this.checkEditDisableBanners.TabIndex = 14;
+			// 
+			// checkEditDisableWidgets
+			// 
+			this.checkEditDisableWidgets.Location = new System.Drawing.Point(5, 81);
+			this.checkEditDisableWidgets.Name = "checkEditDisableWidgets";
+			this.checkEditDisableWidgets.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditDisableWidgets.Properties.Appearance.Options.UseFont = true;
+			this.checkEditDisableWidgets.Properties.AutoWidth = true;
+			this.checkEditDisableWidgets.Properties.Caption = "F. Disable all Link Widget Icons";
+			this.checkEditDisableWidgets.Size = new System.Drawing.Size(207, 21);
+			this.checkEditDisableWidgets.StyleController = this.styleController;
+			this.checkEditDisableWidgets.TabIndex = 13;
+			// 
+			// checkEditShowTicker
+			// 
+			this.checkEditShowTicker.Location = new System.Drawing.Point(5, 46);
+			this.checkEditShowTicker.Name = "checkEditShowTicker";
+			this.checkEditShowTicker.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.checkEditShowTicker.Properties.Appearance.Options.UseFont = true;
+			this.checkEditShowTicker.Properties.AutoWidth = true;
+			this.checkEditShowTicker.Properties.Caption = "E. Show the TICKER at the top of this quickSITE";
+			this.checkEditShowTicker.Size = new System.Drawing.Size(305, 21);
+			this.checkEditShowTicker.StyleController = this.styleController;
+			this.checkEditShowTicker.TabIndex = 12;
+			// 
 			// FormEmailWebLink
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -496,6 +598,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewFieldBannerGallery)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.layoutViewCard1)).EndInit();
+			this.xtraTabPageSettings.ResumeLayout(false);
+			this.xtraTabPageSettings.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.textEditPinCode.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditPinCode.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditRecordActivity.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableBanners.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditDisableWidgets.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowTicker.Properties)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -530,5 +640,12 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit;
 		private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewFieldBannerGallery;
 		private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
+		private DevExpress.XtraTab.XtraTabPage xtraTabPageSettings;
+		private DevExpress.XtraEditors.TextEdit textEditPinCode;
+		private DevExpress.XtraEditors.CheckEdit checkEditPinCode;
+		private DevExpress.XtraEditors.CheckEdit checkEditRecordActivity;
+		private DevExpress.XtraEditors.CheckEdit checkEditDisableBanners;
+		private DevExpress.XtraEditors.CheckEdit checkEditDisableWidgets;
+		private DevExpress.XtraEditors.CheckEdit checkEditShowTicker;
 	}
 }

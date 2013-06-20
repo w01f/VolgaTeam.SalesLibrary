@@ -67,13 +67,6 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Acrobat {
-            get {
-                object obj = ResourceManager.GetObject("Acrobat", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap AddWeek {
             get {
                 object obj = ResourceManager.GetObject("AddWeek", resourceCulture);
@@ -88,23 +81,16 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap ArrowDownGreen {
+        internal static System.Drawing.Bitmap ArrowLeft {
             get {
-                object obj = ResourceManager.GetObject("ArrowDownGreen", resourceCulture);
+                object obj = ResourceManager.GetObject("ArrowLeft", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap ArrowLeftGreen {
+        internal static System.Drawing.Bitmap ArrowRight {
             get {
-                object obj = ResourceManager.GetObject("ArrowLeftGreen", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap ArrowRightGreen {
-            get {
-                object obj = ResourceManager.GetObject("ArrowRightGreen", resourceCulture);
+                object obj = ResourceManager.GetObject("ArrowRight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -158,23 +144,9 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap ClearSolutionView {
-            get {
-                object obj = ResourceManager.GetObject("ClearSolutionView", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap CopySmall {
             get {
                 object obj = ResourceManager.GetObject("CopySmall", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Delete {
-            get {
-                object obj = ResourceManager.GetObject("Delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -186,16 +158,30 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap Email {
+        internal static System.Drawing.Bitmap EmailBin {
             get {
-                object obj = ResourceManager.GetObject("Email", resourceCulture);
+                object obj = ResourceManager.GetObject("EmailBin", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap EmailBin {
+        internal static System.Drawing.Bitmap EmailBinEmpty {
             get {
-                object obj = ResourceManager.GetObject("EmailBin", resourceCulture);
+                object obj = ResourceManager.GetObject("EmailBinEmpty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap EmailBinPdf {
+            get {
+                object obj = ResourceManager.GetObject("EmailBinPdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap EmailBinSend {
+            get {
+                object obj = ResourceManager.GetObject("EmailBinSend", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -298,37 +284,9 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap InsertAllSlides {
-            get {
-                object obj = ResourceManager.GetObject("InsertAllSlides", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap InsertSlide {
-            get {
-                object obj = ResourceManager.GetObject("InsertSlide", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap InsertVideo {
-            get {
-                object obj = ResourceManager.GetObject("InsertVideo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap ListView {
             get {
                 object obj = ResourceManager.GetObject("ListView", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap MicrosoftOfficeOutlook {
-            get {
-                object obj = ResourceManager.GetObject("MicrosoftOfficeOutlook", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -361,51 +319,9 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap OpenFile {
-            get {
-                object obj = ResourceManager.GetObject("OpenFile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap OpenFileBig {
-            get {
-                object obj = ResourceManager.GetObject("OpenFileBig", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap OpenQuickView {
-            get {
-                object obj = ResourceManager.GetObject("OpenQuickView", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Output {
-            get {
-                object obj = ResourceManager.GetObject("Output", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap PackageLogo {
             get {
                 object obj = ResourceManager.GetObject("PackageLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Print {
-            get {
-                object obj = ResourceManager.GetObject("Print", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap PrintBig {
-            get {
-                object obj = ResourceManager.GetObject("PrintBig", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -536,37 +452,114 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap SaveCopy {
+        internal static System.Drawing.Bitmap QuickViewAdd {
             get {
-                object obj = ResourceManager.GetObject("SaveCopy", resourceCulture);
+                object obj = ResourceManager.GetObject("QuickViewAdd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap SaveCopyBig {
+        internal static System.Drawing.Bitmap QuickViewAddAll {
             get {
-                object obj = ResourceManager.GetObject("SaveCopyBig", resourceCulture);
+                object obj = ResourceManager.GetObject("QuickViewAddAll", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap SavePDF {
+        internal static System.Drawing.Bitmap QuickViewEmail {
             get {
-                object obj = ResourceManager.GetObject("SavePDF", resourceCulture);
+                object obj = ResourceManager.GetObject("QuickViewEmail", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap SavePDFBig {
+        internal static System.Drawing.Bitmap QuickViewOpen {
             get {
-                object obj = ResourceManager.GetObject("SavePDFBig", resourceCulture);
+                object obj = ResourceManager.GetObject("QuickViewOpen", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
         
-        internal static System.Drawing.Bitmap Search {
+        internal static System.Drawing.Bitmap QuickViewPdf {
             get {
-                object obj = ResourceManager.GetObject("Search", resourceCulture);
+                object obj = ResourceManager.GetObject("QuickViewPdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QuickViewPrint {
+            get {
+                object obj = ResourceManager.GetObject("QuickViewPrint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QuickViewSave {
+            get {
+                object obj = ResourceManager.GetObject("QuickViewSave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarEmail {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarEmail", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarOpen {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarPdf {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarPdf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarPowerPoint {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarPowerPoint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarPrint {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarPrint", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarQuickView {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarQuickView", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarReset {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarReset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarSave {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarSave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarSearch {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarSearch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -581,20 +574,6 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap SearchRecentFiles {
             get {
                 object obj = ResourceManager.GetObject("SearchRecentFiles", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap SearchTags {
-            get {
-                object obj = ResourceManager.GetObject("SearchTags", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Send {
-            get {
-                object obj = ResourceManager.GetObject("Send", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

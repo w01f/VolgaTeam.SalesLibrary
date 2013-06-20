@@ -29,36 +29,36 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
-			DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem10 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem11 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip12 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem12 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem12 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip13 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem13 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem13 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip14 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem14 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem14 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip17 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem17 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem17 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip18 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem18 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem18 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip15 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem15 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem15 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip16 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem16 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem16 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem3 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem4 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem5 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem6 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem7 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem8 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPowerPointQuickView));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.barManager = new DevExpress.XtraBars.BarManager(this.components);
 			this.barOperations = new DevExpress.XtraBars.Bar();
 			this.barLargeButtonItemOpen = new DevExpress.XtraBars.BarLargeButtonItem();
@@ -158,105 +158,105 @@
 			// 
 			this.barLargeButtonItemOpen.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemOpen.Caption = "Open";
-			this.barLargeButtonItemOpen.Glyph = global::SalesDepot.Properties.Resources.OpenFileBig;
+			this.barLargeButtonItemOpen.Glyph = global::SalesDepot.Properties.Resources.QuickViewOpen;
 			this.barLargeButtonItemOpen.Id = 1;
 			this.barLargeButtonItemOpen.Name = "barLargeButtonItemOpen";
-			toolTipTitleItem10.Text = "Open";
-			toolTipItem10.LeftIndent = 6;
-			toolTipItem10.Text = "Open a copy of this file";
-			superToolTip10.Items.Add(toolTipTitleItem10);
-			superToolTip10.Items.Add(toolTipItem10);
-			this.barLargeButtonItemOpen.SuperTip = superToolTip10;
+			toolTipTitleItem1.Text = "Open";
+			toolTipItem1.LeftIndent = 6;
+			toolTipItem1.Text = "Open a copy of this file";
+			superToolTip1.Items.Add(toolTipTitleItem1);
+			superToolTip1.Items.Add(toolTipItem1);
+			this.barLargeButtonItemOpen.SuperTip = superToolTip1;
 			this.barLargeButtonItemOpen.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemOpenLink_ItemClick);
 			// 
 			// barLargeButtonItemSave
 			// 
 			this.barLargeButtonItemSave.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemSave.Caption = "Save";
-			this.barLargeButtonItemSave.Glyph = global::SalesDepot.Properties.Resources.SaveCopyBig;
+			this.barLargeButtonItemSave.Glyph = global::SalesDepot.Properties.Resources.QuickViewSave;
 			this.barLargeButtonItemSave.Id = 2;
 			this.barLargeButtonItemSave.Name = "barLargeButtonItemSave";
-			toolTipTitleItem11.Text = "Save";
-			toolTipItem11.LeftIndent = 6;
-			toolTipItem11.Text = "Save a copy of this file";
-			superToolTip11.Items.Add(toolTipTitleItem11);
-			superToolTip11.Items.Add(toolTipItem11);
-			this.barLargeButtonItemSave.SuperTip = superToolTip11;
+			toolTipTitleItem2.Text = "Save";
+			toolTipItem2.LeftIndent = 6;
+			toolTipItem2.Text = "Save a copy of this file";
+			superToolTip2.Items.Add(toolTipTitleItem2);
+			superToolTip2.Items.Add(toolTipItem2);
+			this.barLargeButtonItemSave.SuperTip = superToolTip2;
 			this.barLargeButtonItemSave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSave_ItemClick);
 			// 
 			// barLargeButtonItemPDF
 			// 
 			this.barLargeButtonItemPDF.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemPDF.Caption = "PDF";
-			this.barLargeButtonItemPDF.Glyph = global::SalesDepot.Properties.Resources.SavePDFBig;
+			this.barLargeButtonItemPDF.Glyph = global::SalesDepot.Properties.Resources.QuickViewPdf;
 			this.barLargeButtonItemPDF.Id = 3;
 			this.barLargeButtonItemPDF.Name = "barLargeButtonItemPDF";
-			toolTipTitleItem12.Text = "PDF";
-			toolTipItem12.LeftIndent = 6;
-			toolTipItem12.Text = "Convert this PowerPoint file to PDF";
-			superToolTip12.Items.Add(toolTipTitleItem12);
-			superToolTip12.Items.Add(toolTipItem12);
-			this.barLargeButtonItemPDF.SuperTip = superToolTip12;
+			toolTipTitleItem3.Text = "PDF";
+			toolTipItem3.LeftIndent = 6;
+			toolTipItem3.Text = "Convert this PowerPoint file to PDF";
+			superToolTip3.Items.Add(toolTipTitleItem3);
+			superToolTip3.Items.Add(toolTipItem3);
+			this.barLargeButtonItemPDF.SuperTip = superToolTip3;
 			this.barLargeButtonItemPDF.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSaveAsPDF_ItemClick);
 			// 
 			// barLargeButtonItemEmail
 			// 
 			this.barLargeButtonItemEmail.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemEmail.Caption = "Email";
-			this.barLargeButtonItemEmail.Glyph = global::SalesDepot.Properties.Resources.MicrosoftOfficeOutlook;
+			this.barLargeButtonItemEmail.Glyph = global::SalesDepot.Properties.Resources.QuickViewEmail;
 			this.barLargeButtonItemEmail.Id = 4;
 			this.barLargeButtonItemEmail.Name = "barLargeButtonItemEmail";
-			toolTipTitleItem13.Text = "Email this file";
-			toolTipItem13.LeftIndent = 6;
-			toolTipItem13.Text = "Attach this file to an email and send it";
-			superToolTip13.Items.Add(toolTipTitleItem13);
-			superToolTip13.Items.Add(toolTipItem13);
-			this.barLargeButtonItemEmail.SuperTip = superToolTip13;
+			toolTipTitleItem4.Text = "Email this file";
+			toolTipItem4.LeftIndent = 6;
+			toolTipItem4.Text = "Attach this file to an email and send it";
+			superToolTip4.Items.Add(toolTipTitleItem4);
+			superToolTip4.Items.Add(toolTipItem4);
+			this.barLargeButtonItemEmail.SuperTip = superToolTip4;
 			this.barLargeButtonItemEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemEmailLink_ItemClick);
 			// 
 			// barLargeButtonItemPrint
 			// 
 			this.barLargeButtonItemPrint.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemPrint.Caption = "Print";
-			this.barLargeButtonItemPrint.Glyph = global::SalesDepot.Properties.Resources.PrintBig;
+			this.barLargeButtonItemPrint.Glyph = global::SalesDepot.Properties.Resources.QuickViewPrint;
 			this.barLargeButtonItemPrint.Id = 5;
 			this.barLargeButtonItemPrint.Name = "barLargeButtonItemPrint";
-			toolTipTitleItem14.Text = "Print";
-			toolTipItem14.LeftIndent = 6;
-			toolTipItem14.Text = "Print this PowerPoint file";
-			superToolTip14.Items.Add(toolTipTitleItem14);
-			superToolTip14.Items.Add(toolTipItem14);
-			this.barLargeButtonItemPrint.SuperTip = superToolTip14;
+			toolTipTitleItem5.Text = "Print";
+			toolTipItem5.LeftIndent = 6;
+			toolTipItem5.Text = "Print this PowerPoint file";
+			superToolTip5.Items.Add(toolTipTitleItem5);
+			superToolTip5.Items.Add(toolTipItem5);
+			this.barLargeButtonItemPrint.SuperTip = superToolTip5;
 			this.barLargeButtonItemPrint.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemPrintLink_ItemClick);
 			// 
 			// barLargeButtonItemAddAllSlides
 			// 
 			this.barLargeButtonItemAddAllSlides.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemAddAllSlides.Caption = "Add All";
-			this.barLargeButtonItemAddAllSlides.Glyph = global::SalesDepot.Properties.Resources.InsertAllSlides;
+			this.barLargeButtonItemAddAllSlides.Glyph = global::SalesDepot.Properties.Resources.QuickViewAddAll;
 			this.barLargeButtonItemAddAllSlides.Id = 8;
 			this.barLargeButtonItemAddAllSlides.Name = "barLargeButtonItemAddAllSlides";
-			toolTipTitleItem17.Text = "Add All Slides";
-			toolTipItem17.LeftIndent = 6;
-			toolTipItem17.Text = "Add all of the slides in this file to your presentation";
-			superToolTip17.Items.Add(toolTipTitleItem17);
-			superToolTip17.Items.Add(toolTipItem17);
-			this.barLargeButtonItemAddAllSlides.SuperTip = superToolTip17;
+			toolTipTitleItem6.Text = "Add All Slides";
+			toolTipItem6.LeftIndent = 6;
+			toolTipItem6.Text = "Add all of the slides in this file to your presentation";
+			superToolTip6.Items.Add(toolTipTitleItem6);
+			superToolTip6.Items.Add(toolTipItem6);
+			this.barLargeButtonItemAddAllSlides.SuperTip = superToolTip6;
 			this.barLargeButtonItemAddAllSlides.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemAddAllSlides_ItemClick);
 			// 
 			// barLargeButtonItemAddSlide
 			// 
 			this.barLargeButtonItemAddSlide.Border = DevExpress.XtraEditors.Controls.BorderStyles.HotFlat;
 			this.barLargeButtonItemAddSlide.Caption = "Add Slide";
-			this.barLargeButtonItemAddSlide.Glyph = global::SalesDepot.Properties.Resources.Output;
+			this.barLargeButtonItemAddSlide.Glyph = global::SalesDepot.Properties.Resources.QuickViewAdd;
 			this.barLargeButtonItemAddSlide.Id = 9;
 			this.barLargeButtonItemAddSlide.Name = "barLargeButtonItemAddSlide";
-			toolTipTitleItem18.Text = "Add Slide";
-			toolTipItem18.LeftIndent = 6;
-			toolTipItem18.Text = "Add this slide  to your active presentation";
-			superToolTip18.Items.Add(toolTipTitleItem18);
-			superToolTip18.Items.Add(toolTipItem18);
-			this.barLargeButtonItemAddSlide.SuperTip = superToolTip18;
+			toolTipTitleItem7.Text = "Add Slide";
+			toolTipItem7.LeftIndent = 6;
+			toolTipItem7.Text = "Add this slide  to your active presentation";
+			superToolTip7.Items.Add(toolTipTitleItem7);
+			superToolTip7.Items.Add(toolTipItem7);
+			this.barLargeButtonItemAddSlide.SuperTip = superToolTip7;
 			this.barLargeButtonItemAddSlide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemAddSlide_ItemClick);
 			// 
 			// barLargeButtonItemQuickSiteEmail
@@ -284,12 +284,12 @@
 			this.barLargeButtonItemHelp.Glyph = global::SalesDepot.Properties.Resources.Help;
 			this.barLargeButtonItemHelp.Id = 6;
 			this.barLargeButtonItemHelp.Name = "barLargeButtonItemHelp";
-			toolTipTitleItem15.Text = "Help";
-			toolTipItem15.LeftIndent = 6;
-			toolTipItem15.Text = "Learn more about how to use QuickView";
-			superToolTip15.Items.Add(toolTipTitleItem15);
-			superToolTip15.Items.Add(toolTipItem15);
-			this.barLargeButtonItemHelp.SuperTip = superToolTip15;
+			toolTipTitleItem8.Text = "Help";
+			toolTipItem8.LeftIndent = 6;
+			toolTipItem8.Text = "Learn more about how to use QuickView";
+			superToolTip8.Items.Add(toolTipTitleItem8);
+			superToolTip8.Items.Add(toolTipItem8);
+			this.barLargeButtonItemHelp.SuperTip = superToolTip8;
 			this.barLargeButtonItemHelp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemHelp_ItemClick);
 			// 
 			// barLargeButtonItemExit
@@ -299,12 +299,12 @@
 			this.barLargeButtonItemExit.Glyph = global::SalesDepot.Properties.Resources.Exit;
 			this.barLargeButtonItemExit.Id = 7;
 			this.barLargeButtonItemExit.Name = "barLargeButtonItemExit";
-			toolTipTitleItem16.Text = "Exit";
-			toolTipItem16.LeftIndent = 6;
-			toolTipItem16.Text = "Close QuickView and return to the Sales Library";
-			superToolTip16.Items.Add(toolTipTitleItem16);
-			superToolTip16.Items.Add(toolTipItem16);
-			this.barLargeButtonItemExit.SuperTip = superToolTip16;
+			toolTipTitleItem9.Text = "Exit";
+			toolTipItem9.LeftIndent = 6;
+			toolTipItem9.Text = "Close QuickView and return to the Sales Library";
+			superToolTip9.Items.Add(toolTipTitleItem9);
+			superToolTip9.Items.Add(toolTipItem9);
+			this.barLargeButtonItemExit.SuperTip = superToolTip9;
 			this.barLargeButtonItemExit.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barLargeButtonItemExit_ItemClick);
 			// 
 			// barDockControlTop
@@ -395,8 +395,8 @@
 			this.comboBoxEditSlides.Properties.AppearanceDropDown.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.comboBoxEditSlides.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("comboBoxEditSlides.Properties.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.comboBoxEditSlides.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.comboBoxEditSlides.Size = new System.Drawing.Size(184, 54);
 			this.comboBoxEditSlides.TabIndex = 5;

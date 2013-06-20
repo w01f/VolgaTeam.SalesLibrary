@@ -447,7 +447,7 @@ namespace SalesDepot.Services.QBuilderService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#emailLink", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string emailLink(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo) {
+        public string emailLink(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode) {
             object[] results = this.Invoke("emailLink", new object[] {
                         sessionKey,
                         login,
@@ -457,17 +457,22 @@ namespace SalesDepot.Services.QBuilderService {
                         expiresInDays,
                         restricted,
                         showLinkToMainSite,
-                        logo});
+                        logo,
+                        showTicker,
+                        disableBanners,
+                        disableWidgets,
+                        recordActivity,
+                        pinCode});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo) {
-            this.emailLinkAsync(sessionKey, login, linkId, subtitle, createDate, expiresInDays, restricted, showLinkToMainSite, logo, null);
+        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode) {
+            this.emailLinkAsync(sessionKey, login, linkId, subtitle, createDate, expiresInDays, restricted, showLinkToMainSite, logo, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, null);
         }
         
         /// <remarks/>
-        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, object userState) {
+        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, object userState) {
             if ((this.emailLinkOperationCompleted == null)) {
                 this.emailLinkOperationCompleted = new System.Threading.SendOrPostCallback(this.OnemailLinkOperationCompleted);
             }
@@ -480,7 +485,12 @@ namespace SalesDepot.Services.QBuilderService {
                         expiresInDays,
                         restricted,
                         showLinkToMainSite,
-                        logo}, this.emailLinkOperationCompleted, userState);
+                        logo,
+                        showTicker,
+                        disableBanners,
+                        disableWidgets,
+                        recordActivity,
+                        pinCode}, this.emailLinkOperationCompleted, userState);
         }
         
         private void OnemailLinkOperationCompleted(object arg) {
