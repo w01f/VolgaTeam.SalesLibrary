@@ -24,6 +24,8 @@
 		public function actionGetTabsView()
 		{
 			$wallbinView = Yii::app()->request->getPost('wallbinView');
+			if(!isset($wallbinView) || $wallbinView == 'null')
+				$wallbinView = 'columns';
 
 			$libraryManager = new LibraryManager();
 			$selectedLibrary = $libraryManager->getSelectedLibrary();

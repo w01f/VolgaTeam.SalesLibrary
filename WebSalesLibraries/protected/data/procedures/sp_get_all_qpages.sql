@@ -6,6 +6,7 @@ select
   q.is_email as is_email,
   q.create_date as create_date,
   q.expiration_date as expiration_date,
+  q.pin_code as pin_code,
   u.login as login,
   u.first_name as first_name,
   u.last_name as last_name,

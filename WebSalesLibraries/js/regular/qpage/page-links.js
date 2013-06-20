@@ -7,17 +7,23 @@
 			.off('click')
 			.on('click', function (event)
 			{
-				event.stopPropagation();
-				var linkId = $(this).attr('id').replace('link', '');
-				recordActivity(linkId);
-				$.requestViewDialog(linkId, false);
+				if (checkEmail())
+				{
+					event.stopPropagation();
+					var linkId = $(this).attr('id').replace('link', '');
+					recordActivity(linkId);
+					$.requestViewDialog(linkId, false);
+				}
 			});
 		container.find('.folder-link')
 			.off('click')
 			.on('click', function (event)
 			{
-				loadFolderLinkContent($(this));
-				event.stopPropagation();
+				if (checkEmail())
+				{
+					loadFolderLinkContent($(this));
+					event.stopPropagation();
+				}
 			});
 	};
 
@@ -96,20 +102,51 @@
 		}
 	};
 
-	var recordActivity = function(linkId)
+	var recordActivity = function (linkId)
 	{
-		var pageId =$('#page-id').html();
+		var pageId = $('#page-id').html();
 		$.ajax({
 			type: "POST",
 			url: "qpage/recordActivity",
 			data: {
 				pageId: pageId,
+				userEmail: $('#user-email').val(),
 				linkId: linkId
 			},
 			async: true,
 			dataType: 'html'
 		});
 	};
+
+	function checkEmail()
+	{
+		var emailControl = $('#user-email');
+		if (emailControl.length > 0)
+		{
+			var emailValue = emailControl.val();
+			var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (!regex.test(emailValue))
+			{
+				$('body').append('<div id="user-email-warning" title="Email">Enter your emai address to view this link...<br></div>');
+				$("#user-email-warning").dialog({
+					resizable: false,
+					modal: true,
+					buttons: {
+						"OK": function ()
+						{
+							$(this).dialog("close");
+						}
+					},
+					close: function (event, ui)
+					{
+						$("#user-email-warning").remove();
+					}
+				});
+				return false;
+			}
+		}
+		return true;
+	}
 
 	$(document).ready(function ()
 	{

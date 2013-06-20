@@ -76,19 +76,6 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 				<br>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2">
-				<?php
-				echo $form->error($formData, 'login'
-					, array('class' => 'error-message')
-				);
-				echo $form->error($formData, 'password'
-					, array('class' => 'error-message')
-				);
-				?>
-				<br>
-			</td>
-		</tr>
 		<?php if (Yii::app()->params['login']['disclaimer']): ?>
 			<tr>
 				<td colspan="2">

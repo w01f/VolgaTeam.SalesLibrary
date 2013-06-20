@@ -1,5 +1,5 @@
 <?php
-$version = '5.0';
+$version = '6.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -53,6 +53,16 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 			<div class="ribbon-section">
 				<span class="section-title">Go to Main Site</span>
 				<a href="<? echo Yii::app()->createAbsoluteUrl(''); ?>" target="_blank"><img src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/site-link.png' ?>"/></a>
+			</div>
+		<? endif;?>
+		<?if ($page->record_activity): ?>
+			<div class="ribbon-section">
+				<div class="control-group">
+					<h4><p class="text-error">To view the links on this site, enter your email address:</p></h4>
+					<div class="controls">
+						<input type="email" id="user-email" class="input-block-level" placeholder="Email" required <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <?endif;?>>
+					</div>
+				</div>
 			</div>
 		<? endif;?>
 	</div>

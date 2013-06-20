@@ -1,5 +1,5 @@
 <?php
-$version = '2.0';
+$version = '3.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -32,6 +32,12 @@ if (isset($userId))
 	</div>
 	<div data-role='content' class="page-content">
 		<div id="page-id" style="display: none;"><?echo $page->id;?></div>
+		<?if ($page->record_activity): ?>
+			<fieldset data-role="controlgroup" data-theme="d">
+				<h4>To view the links on this site, enter your email address:</h4>
+				<input type="email" id="user-email" name="user-email" placeholder="Email" required data-mini="true" <? if (isset(Yii::app()->user->email)): ?>value="<? echo Yii::app()->user->email; ?>" <?endif;?>>
+			</fieldset>
+		<? endif;?>
 		<div class="centered">
 			<img src="<? echo $page->logo; ?>"/>
 			<h2>
@@ -393,6 +399,13 @@ if (isset($userId))
 		<div data-role="content" class="dialog-content"></div>
 	</div>
 <? endif; ?>
+<div data-role="dialog" id="info-dialog" data-overlay-theme="c" data-title="Are you sure?">
+	<div data-role="content">
+		<h3 class="dialog-title">???</h3>
+		<p class="dialog-description">???</p>
+		<a href="#" class="dialog-confirm" data-role="button" data-theme="b" data-rel="back">OK</a>
+	</div>
+</div>
 <!--Template for folder links content-->
 <div data-role="page" id="link-folder-content-template" data-overlay-theme="c">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">

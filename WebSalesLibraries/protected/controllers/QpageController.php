@@ -67,6 +67,7 @@
 		public function actionRecordActivity()
 		{
 			$pageId = Yii::app()->request->getPost('pageId');
+			$userEmail = Yii::app()->request->getPost('userEmail');
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId) && isset($pageId))
 			{
@@ -82,8 +83,9 @@
 					$message->subject = 'quickSITE Notification';
 					$message->from = Yii::app()->params['email']['from'];
 					$message->message = 'Someone just viewed a file on this quickSITE: ' . $pageRecord->getUrl() .
-										'<br>Link Name clicked: ' . $linkRecord->name .
-										'<br>IP Address: ' . $ip;
+						'<br>Link Name clicked: ' . $linkRecord->name .
+						(isset($userEmail) && $userEmail != '' ? ('<br>' . $userEmail) : '') .
+						'<br>IP Address: ' . $ip;
 					$message->send();
 				}
 			}

@@ -90,6 +90,7 @@
 
 	var loadLinkDeatils = function (linkId, parentTitle, backLink)
 	{
+		recordActivity(linkId);
 		$.ajax({
 			type: "POST",
 			url: "preview/getLinkDetails",
@@ -207,6 +208,7 @@
 			url: "qpage/recordActivity",
 			data: {
 				pageId: pageId,
+				userEmail: $('#user-email').val(),
 				linkId: linkId
 			},
 			async: true,
@@ -214,26 +216,54 @@
 		});
 	};
 
+	function checkEmail()
+	{
+		var emailControl = $('#user-email');
+		if (emailControl.length > 0)
+		{
+			var emailValue = emailControl.val();
+			var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (!regex.test(emailValue))
+			{
+				var infoDialog = $('#info-dialog');
+				infoDialog.find('.dialog-description').text('Enter your emai address to view this link...');
+				infoDialog.find('.dialog-title').text('Email');
+				$.mobile.changePage("#info-dialog");
+				return false;
+			}
+		}
+		return true;
+	}
+
 	$(document).ready(function ()
 	{
 		var mainPage = $('#main');
 		mainPage.find('.page-content').children('ul').listview();
 		mainPage.find(".file-link").on('click', function ()
 		{
-			var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-			loadLink(selectedLink, mainPage.find('.header-title').html(), false, '#main');
+			if (checkEmail())
+			{
+				var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+				loadLink(selectedLink, mainPage.find('.header-title').html(), false, '#main');
+			}
 		});
 		mainPage.find(".folder-content-link").on('click', function ()
 		{
-			var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-			recordActivity(selectedLink);
-			loadFolderContent(selectedLink, null);
+			if (checkEmail())
+			{
+				var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+				recordActivity(selectedLink);
+				loadFolderContent(selectedLink, null);
+			}
 		});
 		mainPage.find(".file-link-detail").on('click', function (event)
 		{
-			var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
-			loadLinkDeatils(selectedLink, mainPage.find('.header-title').html(), '#main');
-			event.stopPropagation();
+			if (checkEmail())
+			{
+				var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+				loadLinkDeatils(selectedLink, mainPage.find('.header-title').html(), '#main');
+				event.stopPropagation();
+			}
 		});
 
 		$('#gallery-page').on('pageshow',function (e)

@@ -403,13 +403,14 @@
 				$pageRecords = $command->queryAll();
 				foreach ($pageRecords as $pageRecord)
 				{
-					$page = new UserActivity();
+					$page = new QPageRecord();
 					$page->id = $pageRecord['id'];
 					$page->title = $pageRecord['title'];
 					$page->isEmail = $pageRecord['is_email'];
 					$page->url = Yii::app()->createAbsoluteUrl('qpage/show', array('id' => $pageRecord['id']));
 					$page->createDate = $pageRecord['create_date'];
 					$page->expirationDate = $pageRecord['expiration_date'];
+					$page->pinCode = $pageRecord['pin_code'];
 					$page->login = $pageRecord['login'];
 					$page->firstName = $pageRecord['first_name'];
 					$page->lastName = $pageRecord['last_name'];
