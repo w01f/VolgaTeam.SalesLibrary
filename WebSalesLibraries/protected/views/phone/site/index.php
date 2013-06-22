@@ -1,5 +1,5 @@
 <?php
-$version = '4.0';
+$version = '5.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -541,10 +541,10 @@ $logos = QPageStorage::getPageLogoList();
 					<a href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
 				<li>
-					<a href="#add-page-security" data-transition="none">Security</a>
+					<a href="#add-page-options" data-transition="none">Options</a>
 				</li>
 				<li>
-					<a href="#add-page-options" data-transition="none">Options</a>
+					<a href="#add-page-security" data-transition="none">Security</a>
 				</li>
 			</ul>
 		</div>
@@ -563,13 +563,27 @@ $logos = QPageStorage::getPageLogoList();
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" class="on-left">
-					<a id="add-page-disclaimer" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Important Info You Should KNOW</a>
+				<td class="on-left">Expires in:</td>
+				<td class="on-right">
+					<select id="add-page-expires-in" data-mini="true">
+						<option selected value="7">7 days</option>
+						<option value="14">14 days</option>
+						<option value="30">30 days</option>
+						<option value="0">Never</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="on-left" width="50%">
 					<br>
+					<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send</a>
+				</td>
+				<td class="on-right" width="50%">
+					<br>
+					<a id="add-page-info-disclaimer" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Important</a>
 				</td>
 			</tr>
 		</table>
-		<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-iconpos="top">
@@ -612,10 +626,10 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
 				<li>
-					<a href="#add-page-security" data-transition="none">Security</a>
+					<a href="#add-page-options" data-transition="none">Options</a>
 				</li>
 				<li>
-					<a href="#add-page-options" data-transition="none">Options</a>
+					<a href="#add-page-security" data-transition="none">Security</a>
 				</li>
 			</ul>
 		</div>
@@ -628,84 +642,6 @@ $logos = QPageStorage::getPageLogoList();
 				<?php endforeach; ?>
 			<?php endif; ?>
 		</ul>
-	</div>
-	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
-		<div data-role="navbar" data-iconpos="top">
-			<ul>
-				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
-				</li>
-				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
-				</li>
-				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
-					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
-					</li>
-				<? endif; ?>
-				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</div>
-<div data-role='page' class="email-tab" id="add-page-security" data-cache="never" data-dom-cache="false" data-ajax="false">
-	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
-		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
-		<span class="ui-title header-title"></span>
-		<ul data-role="listview" data-theme="c" data-divider-theme="c">
-			<li data-role="list-divider">
-				<h4 class="link-container">
-					Email Link: <span class="name"></span>
-				</h4>
-			</li>
-		</ul>
-		<div data-role="navbar">
-			<ul>
-				<li>
-					<a href="#add-page-info" data-transition="none">Link</a>
-				</li>
-				<li>
-					<a href="#add-page-logo" data-transition="none">Logo</a>
-				</li>
-				<li>
-					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-security" data-transition="none">Security</a>
-				</li>
-				<li>
-					<a href="#add-page-options" data-transition="none">Options</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<div data-role='content' class="page-content">
-		<table class="layout-group">
-			<tr>
-				<td class="on-left">Expires in:</td>
-				<td class="on-right">
-					<select id="add-page-expires-in" data-mini="true">
-						<option selected value="7">7 days</option>
-						<option value="14">14 days</option>
-						<option value="30">30 days</option>
-						<option value="0">Never</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" class="on-left">
-					<input type="checkbox" name="add-page-restricted" id="add-page-restricted" class="custom" data-mini="true"/>
-					<label for="add-page-restricted">Require User Log-in</label>
-				</td>
-			</tr>
-			<tr>
-				<td class="on-left" colspan="2">
-					<input type="checkbox" name="add-page-access-code-enabled" id="add-page-access-code-enabled" class="custom" data-mini="true"/>
-					<label for="add-page-access-code-enabled">Create a SECURE ACCESS Pin</label>
-					<input type="email" id="add-page-access-code" maxlength=4 data-mini="true" disabled>
-				</td>
-			</tr>
-		</table>
-		<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send Email</a>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
 		<div data-role="navbar" data-iconpos="top">
@@ -748,10 +684,10 @@ $logos = QPageStorage::getPageLogoList();
 					<a href="#add-page-logo" data-transition="none">Logo</a>
 				</li>
 				<li>
-					<a href="#add-page-security" data-transition="none">Security</a>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-options" data-transition="none">Options</a>
 				</li>
 				<li>
-					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-options" data-transition="none">Options</a>
+					<a href="#add-page-security" data-transition="none">Security</a>
 				</li>
 			</ul>
 		</div>
@@ -763,13 +699,99 @@ $logos = QPageStorage::getPageLogoList();
 					<input type="checkbox" name="add-page-show-link-to-main-site" id="add-page-show-link-to-main-site" class="custom" data-mini="true"/>
 					<label for="add-page-show-link-to-main-site">Show Link to Main Site</label>
 					<input type="checkbox" name="add-page-show-ticker" id="add-page-show-ticker" class="custom" data-mini="true"/>
-					<label for="add-page-show-ticker">Show the TICKER at the top of this quickSITE</label>
+					<label for="add-page-show-ticker">Show the TICKER on the quickSITE</label>
 					<input type="checkbox" name="add-page-disable-widgets" id="add-page-disable-widgets" class="custom" data-mini="true"/>
 					<label for="add-page-disable-widgets">Disable all Link Widget Icons</label>
 					<input type="checkbox" name="add-page-disable-banners" id="add-page-disable-banners" class="custom" data-mini="true"/>
 					<label for="add-page-disable-banners">Disable all Link Banner Images</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="on-left" width="50%">
+					<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send</a>
+				</td>
+				<td class="on-right" width="50%">
+					<a id="add-page-options-disclaimer" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Important</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role='page' class="email-tab" id="add-page-security" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title header-title"></span>
+		<ul data-role="listview" data-theme="c" data-divider-theme="c">
+			<li data-role="list-divider">
+				<h4 class="link-container">
+					Email Link: <span class="name"></span>
+				</h4>
+			</li>
+		</ul>
+		<div data-role="navbar">
+			<ul>
+				<li>
+					<a href="#add-page-info" data-transition="none">Link</a>
+				</li>
+				<li>
+					<a href="#add-page-logo" data-transition="none">Logo</a>
+				</li>
+				<li>
+					<a href="#add-page-options" data-transition="none">Options</a>
+				</li>
+				<li>
+					<a class="ui-btn ui-btn-active ui-state-persist" href="#add-page-security" data-transition="none">Security</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div data-role='content' class="page-content">
+		<table class="layout-group">
+			<tr>
+				<td class="on-left">
+					<input type="checkbox" name="add-page-access-code-enabled" id="add-page-access-code-enabled" class="custom" data-mini="true"/>
+					<label for="add-page-access-code-enabled">ACCESS Pin</label>
+				</td>
+				<td class="on-right">
+					<input type="email" id="add-page-access-code" maxlength=4 data-mini="true" disabled>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="on-left">
 					<input type="checkbox" name="add-page-record-activity" id="add-page-record-activity" class="custom" data-mini="true"/>
-					<label for="add-page-record-activity">Email me each time someone clicks a link on this quickSITE</label>
+					<label for="add-page-record-activity">Send me link notifications</label>
+					<input type="checkbox" name="add-page-restricted" id="add-page-restricted" class="custom" data-mini="true"/>
+					<label for="add-page-restricted">Require User Login</label>
+				</td>
+			</tr>
+			<tr>
+				<td class="on-left" width="50%">
+					<br>
+					<a class="add-page-accept" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Send</a>
+				</td>
+				<td class="on-right" width="50%">
+					<br>
+					<a id="add-page-security-disclaimer" href="#" data-role="button" data-corners="true" data-shadow="true" data-theme="b" data-mini="true">Important</a>
 				</td>
 			</tr>
 		</table>

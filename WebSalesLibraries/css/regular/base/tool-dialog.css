@@ -44,10 +44,14 @@
 	resize: none;
 }
 
+.error-message
+{
+	color: #FF0000;
+}
+
 .tool-dialog td.error-message
 {
 	width: 100%;
-	color: #FF0000;
 	text-align: center;
 }
 

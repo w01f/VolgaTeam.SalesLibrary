@@ -280,6 +280,7 @@
 					addPageContent.find('.btn.accept-button').on('click', function ()
 					{
 						var subtitle = $('#add-page-name').val();
+						var pinCode = $('#add-page-access-code').val();
 						var now = new Date();
 						$.ajax({
 							type: "POST",
@@ -291,7 +292,7 @@
 								logo: $('#add-page-tab-logo').find('a.opened').find('img').attr('src'),
 								expiresInDays: $('#add-page-expires-in').find('.active').val(),
 								restricted: $('#add-page-restricted').is(':checked'),
-								pinCode: $('#add-page-access-code').val(),
+								pinCode: pinCode,
 								showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked'),
 								showTicker: $('#add-page-show-ticker').is(':checked'),
 								disableWidgets: $('#add-page-disable-widgets').is(':checked'),
@@ -309,9 +310,9 @@
 							success: function (msg)
 							{
 								if (subtitle != '')
-									window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg, "_self");
+									window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 								else
-									window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg, "_self");
+									window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 							},
 							error: function ()
 							{

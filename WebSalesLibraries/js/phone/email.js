@@ -159,10 +159,26 @@
 				$('#add-page-name').val('').textinput('disable');
 		});
 
-		$('#add-page-disclaimer').on('click', function ()
+		$('#add-page-info-disclaimer').on('click', function ()
 		{
 			var infoDialog = $('#info-dialog');
 			infoDialog.find('.dialog-description').text('You are Sending a WEB LINK to this file over the internet. The Recipient will receive an email with the website Link. Tell your recipient to click this link to view or download this file…');
+			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
+			$.mobile.changePage("#info-dialog");
+		});
+
+		$('#add-page-security-disclaimer').on('click', function ()
+		{
+			var infoDialog = $('#info-dialog');
+			infoDialog.find('.dialog-description').text('If you REQUIRE User Login, then only Users who already have an official username and password can access this site');
+			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
+			$.mobile.changePage("#info-dialog");
+		});
+
+		$('#add-page-options-disclaimer').on('click', function ()
+		{
+			var infoDialog = $('#info-dialog');
+			infoDialog.find('.dialog-description').text('Do not Show Link To Main Site or Ticker If you are sending this Link to someone OUTSIDE Your company');
 			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
 			$.mobile.changePage("#info-dialog");
 		});
