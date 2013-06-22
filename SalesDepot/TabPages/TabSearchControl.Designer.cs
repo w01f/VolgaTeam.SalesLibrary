@@ -58,6 +58,12 @@
 			DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
 			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem9 = new DevExpress.Utils.ToolTipTitleItem();
 			DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem10 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem10 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem11 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem11 = new DevExpress.Utils.ToolTipItem();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.splitContainerControlMain = new DevExpress.XtraEditors.SplitContainerControl();
@@ -415,6 +421,12 @@
 			this.barButtonItemQuickSiteEmail.Glyph = global::SalesDepot.Properties.Resources.QuickSiteEmailLink;
 			this.barButtonItemQuickSiteEmail.Id = 13;
 			this.barButtonItemQuickSiteEmail.Name = "barButtonItemQuickSiteEmail";
+			toolTipTitleItem6.Text = "Email Link";
+			toolTipItem6.LeftIndent = 6;
+			toolTipItem6.Text = "Email a link to this file on the internet";
+			superToolTip6.Items.Add(toolTipTitleItem6);
+			superToolTip6.Items.Add(toolTipItem6);
+			this.barButtonItemQuickSiteEmail.SuperTip = superToolTip6;
 			this.barButtonItemQuickSiteEmail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemQuickSiteEmail_ItemClick);
 			// 
 			// barButtonItemQuickSiteAdd
@@ -423,6 +435,12 @@
 			this.barButtonItemQuickSiteAdd.Glyph = global::SalesDepot.Properties.Resources.QuickSiteAddLink;
 			this.barButtonItemQuickSiteAdd.Id = 14;
 			this.barButtonItemQuickSiteAdd.Name = "barButtonItemQuickSiteAdd";
+			toolTipTitleItem7.Text = "Add to quickSITE";
+			toolTipItem7.LeftIndent = 6;
+			toolTipItem7.Text = "Add this link to your quickSITES cart";
+			superToolTip7.Items.Add(toolTipTitleItem7);
+			superToolTip7.Items.Add(toolTipItem7);
+			this.barButtonItemQuickSiteAdd.SuperTip = superToolTip7;
 			this.barButtonItemQuickSiteAdd.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemQuickSiteAdd_ItemClick);
 			// 
 			// barButtonItemAddSlide
@@ -432,12 +450,12 @@
 			this.barButtonItemAddSlide.Glyph = global::SalesDepot.Properties.Resources.SearchBarPowerPoint;
 			this.barButtonItemAddSlide.Id = 12;
 			this.barButtonItemAddSlide.Name = "barButtonItemAddSlide";
-			toolTipTitleItem6.Text = "Add Slide";
-			toolTipItem6.LeftIndent = 6;
-			toolTipItem6.Text = "Add the Visible Slide to your active presentation ";
-			superToolTip6.Items.Add(toolTipTitleItem6);
-			superToolTip6.Items.Add(toolTipItem6);
-			this.barButtonItemAddSlide.SuperTip = superToolTip6;
+			toolTipTitleItem8.Text = "Add Slide";
+			toolTipItem8.LeftIndent = 6;
+			toolTipItem8.Text = "Add the Visible Slide to your active presentation ";
+			superToolTip8.Items.Add(toolTipTitleItem8);
+			superToolTip8.Items.Add(toolTipItem8);
+			this.barButtonItemAddSlide.SuperTip = superToolTip8;
 			this.barButtonItemAddSlide.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemAddSlide_ItemClick);
 			// 
 			// barButtonItemOpenQuickView
@@ -447,12 +465,12 @@
 			this.barButtonItemOpenQuickView.Glyph = global::SalesDepot.Properties.Resources.SearchBarQuickView;
 			this.barButtonItemOpenQuickView.Id = 5;
 			this.barButtonItemOpenQuickView.Name = "barButtonItemOpenQuickView";
-			toolTipTitleItem7.Text = "QuickView";
-			toolTipItem7.LeftIndent = 6;
-			toolTipItem7.Text = "Open the selected PowerPoint file in QuickView";
-			superToolTip7.Items.Add(toolTipTitleItem7);
-			superToolTip7.Items.Add(toolTipItem7);
-			this.barButtonItemOpenQuickView.SuperTip = superToolTip7;
+			toolTipTitleItem9.Text = "QuickView";
+			toolTipItem9.LeftIndent = 6;
+			toolTipItem9.Text = "Open the selected PowerPoint file in QuickView";
+			superToolTip9.Items.Add(toolTipTitleItem9);
+			superToolTip9.Items.Add(toolTipItem9);
+			this.barButtonItemOpenQuickView.SuperTip = superToolTip9;
 			this.barButtonItemOpenQuickView.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemOpenQuickView_ItemClick);
 			// 
 			// barButtonItemSearch
@@ -461,12 +479,12 @@
 			this.barButtonItemSearch.Glyph = global::SalesDepot.Properties.Resources.SearchBarSearch;
 			this.barButtonItemSearch.Id = 8;
 			this.barButtonItemSearch.Name = "barButtonItemSearch";
-			toolTipTitleItem8.Text = "File Search";
-			toolTipItem8.LeftIndent = 6;
-			toolTipItem8.Text = "Search for Files Now";
-			superToolTip8.Items.Add(toolTipTitleItem8);
-			superToolTip8.Items.Add(toolTipItem8);
-			this.barButtonItemSearch.SuperTip = superToolTip8;
+			toolTipTitleItem10.Text = "File Search";
+			toolTipItem10.LeftIndent = 6;
+			toolTipItem10.Text = "Search for Files Now";
+			superToolTip10.Items.Add(toolTipTitleItem10);
+			superToolTip10.Items.Add(toolTipItem10);
+			this.barButtonItemSearch.SuperTip = superToolTip10;
 			this.barButtonItemSearch.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemSearch_ItemClick);
 			// 
 			// barButtonItemClear
@@ -475,12 +493,12 @@
 			this.barButtonItemClear.Glyph = global::SalesDepot.Properties.Resources.SearchBarReset;
 			this.barButtonItemClear.Id = 9;
 			this.barButtonItemClear.Name = "barButtonItemClear";
-			toolTipTitleItem9.Text = "Reset";
-			toolTipItem9.LeftIndent = 6;
-			toolTipItem9.Text = "Wipe all Search Categories and start a New Search";
-			superToolTip9.Items.Add(toolTipTitleItem9);
-			superToolTip9.Items.Add(toolTipItem9);
-			this.barButtonItemClear.SuperTip = superToolTip9;
+			toolTipTitleItem11.Text = "Reset";
+			toolTipItem11.LeftIndent = 6;
+			toolTipItem11.Text = "Wipe all Search Categories and start a New Search";
+			superToolTip11.Items.Add(toolTipTitleItem11);
+			superToolTip11.Items.Add(toolTipItem11);
+			this.barButtonItemClear.SuperTip = superToolTip11;
 			this.barButtonItemClear.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItemClear_ItemClick);
 			// 
 			// barStaticItemFileNumber

@@ -99,8 +99,6 @@
 			this.grFiles.Size = new System.Drawing.Size(209, 296);
 			this.grFiles.TabIndex = 1;
 			this.grFiles.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grFiles_CellClick);
-			this.grFiles.MouseDown += new System.Windows.Forms.MouseEventHandler(this.grFiles_MouseDown);
-			this.grFiles.MouseMove += new System.Windows.Forms.MouseEventHandler(this.grFiles_MouseMove);
 			this.grFiles.MouseUp += new System.Windows.Forms.MouseEventHandler(this.grFiles_MouseUp);
 			// 
 			// colDisplayName

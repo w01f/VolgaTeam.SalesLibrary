@@ -57,6 +57,7 @@
 			this.pnTop = new System.Windows.Forms.Panel();
 			this.laTitle = new System.Windows.Forms.Label();
 			this.pnBottom = new System.Windows.Forms.Panel();
+			this.laEmailBinDescription = new System.Windows.Forms.Label();
 			this.buttonXPDF = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXZip = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXEmptyEmailBin = new DevComponents.DotNetBar.ButtonX();
@@ -145,8 +146,6 @@
 			this.gridControlFiles.TabIndex = 3;
 			this.gridControlFiles.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewFiles});
-			this.gridControlFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.gridControlFiles_DragDrop);
-			this.gridControlFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.gridControlFiles_DragEnter);
 			// 
 			// gridViewFiles
 			// 
@@ -201,34 +200,49 @@
 			this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
-			this.pnTop.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+			this.pnTop.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
 			this.pnTop.Size = new System.Drawing.Size(0, 50);
 			this.pnTop.TabIndex = 2;
 			// 
 			// laTitle
 			// 
 			this.laTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.laTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laTitle.ForeColor = System.Drawing.Color.White;
 			this.laTitle.Location = new System.Drawing.Point(10, 0);
 			this.laTitle.Name = "laTitle";
 			this.laTitle.Size = new System.Drawing.Size(0, 50);
 			this.laTitle.TabIndex = 4;
-			this.laTitle.Text = "Right-Click on the file and drag and drop it here:";
-			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.laTitle.Text = "Email Attachments Panel";
+			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// pnBottom
 			// 
 			this.pnBottom.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.pnBottom.Controls.Add(this.laEmailBinDescription);
 			this.pnBottom.Controls.Add(this.buttonXPDF);
 			this.pnBottom.Controls.Add(this.buttonXZip);
 			this.pnBottom.Controls.Add(this.buttonXEmptyEmailBin);
 			this.pnBottom.Controls.Add(this.buttonXCreateEmail);
 			this.pnBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.pnBottom.ForeColor = System.Drawing.Color.Black;
-			this.pnBottom.Location = new System.Drawing.Point(0, -228);
+			this.pnBottom.Location = new System.Drawing.Point(0, -319);
 			this.pnBottom.Name = "pnBottom";
 			this.pnBottom.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
-			this.pnBottom.Size = new System.Drawing.Size(0, 228);
+			this.pnBottom.Size = new System.Drawing.Size(0, 319);
 			this.pnBottom.TabIndex = 1;
+			// 
+			// laEmailBinDescription
+			// 
+			this.laEmailBinDescription.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laEmailBinDescription.ForeColor = System.Drawing.Color.White;
+			this.laEmailBinDescription.Location = new System.Drawing.Point(1, 0);
+			this.laEmailBinDescription.Name = "laEmailBinDescription";
+			this.laEmailBinDescription.Size = new System.Drawing.Size(254, 101);
+			this.laEmailBinDescription.TabIndex = 6;
+			this.laEmailBinDescription.Text = "You can Email some files to clients  with Outlook.\r\n\r\nRight Click on the file  if" +
+    " you want to ATTACH IT to an  email.";
+			this.laEmailBinDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// buttonXPDF
 			// 
@@ -238,7 +252,7 @@
 			this.buttonXPDF.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXPDF.Image = global::SalesDepot.Properties.Resources.EmailBinPdf;
 			this.buttonXPDF.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXPDF.Location = new System.Drawing.Point(10, 9);
+			this.buttonXPDF.Location = new System.Drawing.Point(10, 104);
 			this.buttonXPDF.Name = "buttonXPDF";
 			this.buttonXPDF.Size = new System.Drawing.Size(233, 47);
 			this.buttonXPDF.TabIndex = 5;
@@ -255,7 +269,7 @@
 			this.buttonXZip.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXZip.Image = global::SalesDepot.Properties.Resources.zip;
 			this.buttonXZip.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXZip.Location = new System.Drawing.Point(10, 62);
+			this.buttonXZip.Location = new System.Drawing.Point(10, 157);
 			this.buttonXZip.Name = "buttonXZip";
 			this.buttonXZip.Size = new System.Drawing.Size(233, 47);
 			this.buttonXZip.TabIndex = 4;
@@ -271,7 +285,7 @@
 			this.buttonXEmptyEmailBin.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXEmptyEmailBin.Image = global::SalesDepot.Properties.Resources.EmailBinEmpty;
 			this.buttonXEmptyEmailBin.ImageFixedSize = new System.Drawing.Size(40, 40);
-			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(10, 115);
+			this.buttonXEmptyEmailBin.Location = new System.Drawing.Point(10, 210);
 			this.buttonXEmptyEmailBin.Name = "buttonXEmptyEmailBin";
 			this.buttonXEmptyEmailBin.Size = new System.Drawing.Size(233, 47);
 			this.buttonXEmptyEmailBin.TabIndex = 3;
@@ -287,7 +301,7 @@
 			this.buttonXCreateEmail.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.buttonXCreateEmail.Image = global::SalesDepot.Properties.Resources.EmailBinSend;
 			this.buttonXCreateEmail.ImageFixedSize = new System.Drawing.Size(42, 40);
-			this.buttonXCreateEmail.Location = new System.Drawing.Point(10, 168);
+			this.buttonXCreateEmail.Location = new System.Drawing.Point(10, 263);
 			this.buttonXCreateEmail.Name = "buttonXCreateEmail";
 			this.buttonXCreateEmail.Size = new System.Drawing.Size(233, 47);
 			this.buttonXCreateEmail.TabIndex = 0;
@@ -566,5 +580,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceUp;
 		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceDown;
 		private DevExpress.Utils.ToolTipController toolTipController;
+		private System.Windows.Forms.Label laEmailBinDescription;
     }
 }

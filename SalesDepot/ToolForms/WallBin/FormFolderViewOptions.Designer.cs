@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.buttonXOpen = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteEmail = new DevComponents.DotNetBar.ButtonX();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.SuspendLayout();
 			// 
 			// buttonXOpen
@@ -48,6 +50,8 @@
 			this.buttonXOpen.Text = "   Open this folder";
 			this.buttonXOpen.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXOpen.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXOpen, "Open this folder");
+			this.toolTipController.SetToolTip(this.buttonXOpen, "Open this folder");
 			this.buttonXOpen.Click += new System.EventHandler(this.buttonXOpen_Click);
 			// 
 			// buttonXClose
@@ -64,6 +68,8 @@
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXClose.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXClose, "Close");
+			this.toolTipController.SetToolTip(this.buttonXClose, "Close this window");
 			this.buttonXClose.Click += new System.EventHandler(this.buttonXClose_Click);
 			// 
 			// buttonXQuickSiteAdd
@@ -80,6 +86,8 @@
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteAdd.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteAdd, "Add to quickSITE");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteAdd, "Place this link in your quickSITES cart");
 			this.buttonXQuickSiteAdd.Click += new System.EventHandler(this.buttonXQuickSiteAdd_Click);
 			// 
 			// buttonXQuickSiteEmail
@@ -96,7 +104,14 @@
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteEmail.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteEmail, "Email as Web Link");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteEmail, "Email a LINK to this file on the internet");
 			this.buttonXQuickSiteEmail.Click += new System.EventHandler(this.buttonXQuickSiteEmail_Click);
+			// 
+			// toolTipController
+			// 
+			this.toolTipController.Rounded = true;
+			this.toolTipController.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
 			// 
 			// FormFolderViewOptions
 			// 
@@ -126,6 +141,7 @@
         private DevComponents.DotNetBar.ButtonX buttonXClose;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteAdd;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteEmail;
+		private DevExpress.Utils.ToolTipController toolTipController;
 
     }
 }

@@ -39,7 +39,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			var result = false;
 			if (!QBuilder.Instance.Connected)
 			{
-				AppManager.Instance.ShowWarning("You need to select site firts");
+				AppManager.Instance.ShowWarning("You need to select site first");
 				return;
 			}
 			using (var form = new FormProgress())

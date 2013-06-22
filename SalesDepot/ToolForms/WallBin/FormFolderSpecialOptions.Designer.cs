@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.SuspendLayout();
 			// 
 			// buttonXQuickSiteAdd
@@ -46,6 +48,8 @@
 			this.buttonXQuickSiteAdd.Text = "   Add All Links in this \r\n  window to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteAdd.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteAdd, "Add all Links");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteAdd, "Place all links from this window in your quickSITES cart");
 			this.buttonXQuickSiteAdd.Click += new System.EventHandler(this.buttonXQuickSiteAdd_Click);
 			// 
 			// buttonXClose
@@ -57,12 +61,19 @@
 			this.buttonXClose.ImageFixedSize = new System.Drawing.Size(48, 48);
 			this.buttonXClose.Location = new System.Drawing.Point(12, 104);
 			this.buttonXClose.Name = "buttonXClose";
-			this.buttonXClose.Size = new System.Drawing.Size(305, 51);
+			this.buttonXClose.Size = new System.Drawing.Size(305, 55);
 			this.buttonXClose.TabIndex = 4;
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXClose.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXClose, "Close");
+			this.toolTipController.SetToolTip(this.buttonXClose, "Close this window");
 			this.buttonXClose.Click += new System.EventHandler(this.buttonXClose_Click);
+			// 
+			// toolTipController
+			// 
+			this.toolTipController.Rounded = true;
+			this.toolTipController.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
 			// 
 			// FormFolderSpecialOptions
 			// 
@@ -87,6 +98,7 @@
 
 		private DevComponents.DotNetBar.ButtonX buttonXClose;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteAdd;
+		private DevExpress.Utils.ToolTipController toolTipController;
 
     }
 }

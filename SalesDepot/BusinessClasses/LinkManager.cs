@@ -80,7 +80,8 @@ namespace SalesDepot.BusinessClasses
 				if (SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0)
 					using (var formViewOptions = new FormLinkSpecialOptions())
 					{
-						formViewOptions.Text = string.Format(formViewOptions.Text, sourceFile.Name);
+						formViewOptions.Text = string.Format(formViewOptions.Text, link.Name);
+						formViewOptions.buttonXEmailBin.Enabled = link.Type != FileTypes.Folder;
 						if (formViewOptions.ShowDialog() == DialogResult.OK)
 						{
 							if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
@@ -90,6 +91,10 @@ namespace SalesDepot.BusinessClasses
 							else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
 							{
 								AddLinkToQuickSite(link);
+							}
+							else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.EmailBinAdd)
+							{
+								FormMain.Instance.TabHome.AddToEmailBin(link);
 							}
 						}
 					}

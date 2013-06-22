@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolForms.WallBin
 {
@@ -24,6 +25,11 @@ namespace SalesDepot.ToolForms.WallBin
 			get { return _selectedOption; }
 		}
 
+		private void FormLinkSpecialOptions_Load(object sender, EventArgs e)
+		{
+			buttonXEmailBin.Enabled &= (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayEmailBin) == EmailButtonsDisplayOptions.DisplayEmailBin;
+		}
+
 		private void buttonXQuickSiteEmail_Click(object sender, EventArgs e)
 		{
 			_selectedOption = FormViewOptions.ViewOptions.QuickSiteEmail;
@@ -34,6 +40,13 @@ namespace SalesDepot.ToolForms.WallBin
 		private void buttonXQuickSiteAdd_Click(object sender, EventArgs e)
 		{
 			_selectedOption = FormViewOptions.ViewOptions.QuickSiteAdd;
+			DialogResult = DialogResult.OK;
+			Close();
+		}
+
+		private void buttonXEmailBin_Click(object sender, EventArgs e)
+		{
+			_selectedOption = FormViewOptions.ViewOptions.EmailBinAdd;
 			DialogResult = DialogResult.OK;
 			Close();
 		}

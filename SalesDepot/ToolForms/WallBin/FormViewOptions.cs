@@ -14,7 +14,8 @@ namespace SalesDepot.ToolForms.WallBin
 			Email,
 			Print,
 			QuickSiteEmail,
-			QuickSiteAdd
+			QuickSiteAdd,
+			EmailBinAdd
 		}
 
 		private ViewOptions _selectedOption;

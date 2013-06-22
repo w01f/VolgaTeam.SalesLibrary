@@ -177,20 +177,6 @@ namespace SalesDepot.PresentationClasses.WallBin
 			}
 		}
 
-		private void grFiles_MouseDown(object sender, MouseEventArgs e)
-		{
-			if (e.Button != MouseButtons.Right) return;
-			var ht = grFiles.HitTest(e.X, e.Y);
-			if (ht.Type == DataGridViewHitTestType.Cell)
-			{
-				_hitTest = ht;
-				_dragBox = new Rectangle(new Point(e.X - (SystemInformation.DragSize.Width / 2), e.Y - (SystemInformation.DragSize.Height / 2)),
-										 SystemInformation.DragSize);
-			}
-			else
-				_hitTest = DataGridView.HitTestInfo.Nowhere;
-		}
-
 		private void grFiles_MouseUp(object sender, MouseEventArgs e)
 		{
 			if (e.Button != MouseButtons.Right) return;
@@ -200,31 +186,6 @@ namespace SalesDepot.PresentationClasses.WallBin
 				var file = grFiles.Rows[ht.RowIndex].Tag as LibraryLink;
 				LinkManager.Instance.OpenLink(file, true);
 			}
-		}
-
-		private void grFiles_MouseMove(object sender, MouseEventArgs e)
-		{
-			Parent.Parent.Parent.Focus();
-			if (((e.Button & MouseButtons.Right) != MouseButtons.Right)
-				|| _hitTest == DataGridView.HitTestInfo.Nowhere
-				|| _dragBox.Contains(e.X, e.Y))
-				return;
-			var file = grFiles.Rows[_hitTest.RowIndex].Tag as LibraryLink;
-			if (file != null)
-				switch (file.Type)
-				{
-					case FileTypes.BuggyPresentation:
-					case FileTypes.FriendlyPresentation:
-					case FileTypes.MediaPlayerVideo:
-					case FileTypes.Other:
-					case FileTypes.Excel:
-					case FileTypes.PDF:
-					case FileTypes.Word:
-					case FileTypes.Presentation:
-					case FileTypes.QuickTimeVideo:
-						grFiles.DoDragDrop(new DataObject(DataFormats.Serializable, file), DragDropEffects.Copy);
-						break;
-				}
 		}
 
 		private void grFiles_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -405,7 +366,6 @@ namespace SalesDepot.PresentationClasses.WallBin
 		#region Methods
 		private void Init()
 		{
-			grFiles.MouseMove += grFiles_MouseMove;
 			grFiles.CellMouseEnter += grFiles_CellMouseEnter;
 			grFiles.CellMouseLeave += grFiles_CellMouseLeave;
 			grFiles.CellPainting += grFiles_CellPainting;

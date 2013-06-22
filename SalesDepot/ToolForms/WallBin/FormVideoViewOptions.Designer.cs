@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXAddToPresentation = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXReview = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteEmail = new DevComponents.DotNetBar.ButtonX();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.SuspendLayout();
 			// 
 			// buttonXClose
@@ -49,6 +51,8 @@
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXClose.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXClose, "Close");
+			this.toolTipController.SetToolTip(this.buttonXClose, "Close this window");
 			this.buttonXClose.Click += new System.EventHandler(this.buttonXClose_Click);
 			// 
 			// buttonXAddToPresentation
@@ -65,6 +69,8 @@
 			this.buttonXAddToPresentation.Text = "   Add to presentation";
 			this.buttonXAddToPresentation.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXAddToPresentation.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXAddToPresentation, "Add to presentation");
+			this.toolTipController.SetToolTip(this.buttonXAddToPresentation, "Add this video to presentation");
 			this.buttonXAddToPresentation.Click += new System.EventHandler(this.buttonXAddToPresentation_Click);
 			// 
 			// buttonXReview
@@ -81,6 +87,8 @@
 			this.buttonXReview.Text = "   Review video clip";
 			this.buttonXReview.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXReview.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXReview, "Review video clip");
+			this.toolTipController.SetToolTip(this.buttonXReview, "Open this clip in Video Player");
 			this.buttonXReview.Click += new System.EventHandler(this.buttonXReview_Click);
 			// 
 			// buttonXQuickSiteAdd
@@ -97,6 +105,8 @@
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteAdd.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteAdd, "Add to quickSITE");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteAdd, "Place this link in your quickSITES cart");
 			this.buttonXQuickSiteAdd.Click += new System.EventHandler(this.buttonXQuickSiteAdd_Click);
 			// 
 			// buttonXQuickSiteEmail
@@ -113,7 +123,14 @@
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteEmail.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteEmail, "Email as Web Link");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteEmail, "Email a LINK to this file on the internet");
 			this.buttonXQuickSiteEmail.Click += new System.EventHandler(this.buttonXQuickSiteEmail_Click);
+			// 
+			// toolTipController
+			// 
+			this.toolTipController.Rounded = true;
+			this.toolTipController.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
 			// 
 			// FormVideoViewOptions
 			// 
@@ -146,6 +163,7 @@
         private DevComponents.DotNetBar.ButtonX buttonXReview;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteAdd;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteEmail;
+		private DevExpress.Utils.ToolTipController toolTipController;
 
     }
 }

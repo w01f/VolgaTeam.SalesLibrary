@@ -752,6 +752,25 @@ namespace SalesDepot.TabPages
 			}
 		}
 
+		public void AddToEmailBin(LibraryLink link)
+		{
+			if (link != null)
+			{
+				if (!_emailLinks.Keys.Contains(link))
+				{
+					if (link.LinkAvailable)
+					{
+						LinkManager.Instance.RequestFile(link);
+						_emailLinks.Add(link, link.LocalPath);
+						SaveEmailBin();
+						gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
+					}
+					else
+						AppManager.Instance.ShowWarning("File is not existed and cannot be added into Email Bin.\n Contact your system administrator");
+				}
+			}
+		}
+
 		private void ckConvertPDF_CheckedChanged(object sender, EventArgs e)
 		{
 			SettingsManager.Instance.EmailBinSendAsPdf = buttonXPDF.Checked;
@@ -771,43 +790,6 @@ namespace SalesDepot.TabPages
 				_emailLinks.Remove(_emailLinks.Keys.ElementAt(gridViewFiles.GetDataSourceRowIndex(gridViewFiles.FocusedRowHandle)));
 				gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 				SaveEmailBin();
-			}
-		}
-
-		private void gridControlFiles_DragDrop(object sender, DragEventArgs e)
-		{
-			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
-			{
-				object data = e.Data.GetData(DataFormats.Serializable, true);
-				if (data != null)
-				{
-					var link = data as LibraryLink;
-					if (link != null)
-					{
-						if (!_emailLinks.Keys.Contains(link))
-						{
-							if (link.LinkAvailable)
-							{
-								LinkManager.Instance.RequestFile(link);
-								_emailLinks.Add(link, link.LocalPath);
-								SaveEmailBin();
-								gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
-							}
-							else
-								AppManager.Instance.ShowWarning("File is not existed and cannot be added into Email Bin.\n Contact your system administrator");
-						}
-					}
-				}
-			}
-		}
-
-		private void gridControlFiles_DragEnter(object sender, DragEventArgs e)
-		{
-			if (e.Data.GetDataPresent(DataFormats.Serializable, true))
-			{
-				object data = e.Data.GetData(DataFormats.Serializable, true);
-				if (data.GetType() == typeof(LibraryLink))
-					e.Effect = DragDropEffects.Copy;
 			}
 		}
 

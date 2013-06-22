@@ -120,9 +120,6 @@
   <metadata name="barManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>748, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="comboBoxEditSlides.Properties.Buttons" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -171,7 +168,7 @@
         XTesb3QPLh88M+QwdP6m681Lt7xuXbu94vbgcOjwnZHokdE77DtTd1PuvriXeW/h/sYH6AdFD6UeVjxS
         fNTws+7PbaOWo6fHXMf6Hwc/vj/OGn/2S8Yv7ycKnpCfVEyqTDZPmU2dmnafvvF05dOJZ+nPFmYKf5X+
         tfa5zvMffnP8rX82YnbiBf/Fp99LXsq/PPRq2aueuYC5R69TXy/MF72Rf3P4LeNt37vwd5MLWe+x7ys/
-        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAAOwgAADsIBFShKgAAAAhRJREFUaEPVmK1OA1EQ
+        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAAOwQAADsEBuJFr7QAAAhRJREFUaEPVmK1OA1EQ
         het314AAj0RBAgQaHArBI2DRJCBJkBieA4kiAY0gUInAkSAgBMITIJZzyd7NdHq27d79HfGlzey9d87X
         TrbZDtI0NQ0tWoIWLUGLlqBFS9CiJWjRErRoifxNEseziaKybCZJcgZOFKdxHA/BIJQwAcAOm8Ia9ryB
         FPwqHnB9Wa2fm2ABDzu0gA2s/wROQjPC9SCJygIedjhhHWs/QJHEklo/k9oEPKyJwo3TO2AST7he6puo
@@ -230,7 +227,7 @@
         XTesb3QPLh88M+QwdP6m681Lt7xuXbu94vbgcOjwnZHokdE77DtTd1PuvriXeW/h/sYH6AdFD6UeVjxS
         fNTws+7PbaOWo6fHXMf6Hwc/vj/OGn/2S8Yv7ycKnpCfVEyqTDZPmU2dmnafvvF05dOJZ+nPFmYKf5X+
         tfa5zvMffnP8rX82YnbiBf/Fp99LXsq/PPRq2aueuYC5R69TXy/MF72Rf3P4LeNt37vwd5MLWe+x7ys/
-        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAAOwgAADsIBFShKgAAAAfRJREFUaEPV2KtOA1EQ
+        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAAOwQAADsEBuJFr7QAAAfRJREFUaEPV2KtOA1EQ
         BuD6dg0IeAYsIeEaUgIGwSNg0SRFEiyGRyFYQJEgSECiMQgEl0CwiOUfBNme/ufsue1uR3yhzJlOzt+d
         mvbKslSNFjWhRU1oURNa1IQWNaFFTWhRk/8Xg8EgxVpRFEcwMhzjbN3orVV4yBlgHgPv4MdQwgvOl41+
         J7zHS64AcvkHkMuaPnC+YfRboT9IjgBzGGS7/BvOV4x+Cr1RUgPIJ38P7PKvOK+9PPqSpARwrY1cftXo
@@ -242,6 +239,9 @@
         NaFFPcreL+nuwjFc4lLPAAAAAElFTkSuQmCC
 </value>
   </data>
+  <metadata name="styleController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>748, 17</value>
+  </metadata>
   <metadata name="defaultLookAndFeel.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>588, 17</value>
   </metadata>

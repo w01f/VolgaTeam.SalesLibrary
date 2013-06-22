@@ -809,6 +809,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\SearchBarEmailBin.png" />
     <None Include="Resources\QuickViewAdd.png" />
     <None Include="Resources\QuickViewAddAll.png" />
     <None Include="Resources\QuickViewPrint.png" />

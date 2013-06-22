@@ -508,6 +508,13 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap SearchBarEmailBin {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarEmailBin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap SearchBarOpen {
             get {
                 object obj = ResourceManager.GetObject("SearchBarOpen", resourceCulture);

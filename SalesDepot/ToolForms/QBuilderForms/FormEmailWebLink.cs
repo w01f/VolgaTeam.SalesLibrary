@@ -91,7 +91,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			var result = String.Empty;
 			if (!QBuilder.Instance.Connected)
 			{
-				AppManager.Instance.ShowWarning("You need to select site firts");
+				AppManager.Instance.ShowWarning("You need to select site first");
 				return;
 			}
 
@@ -139,9 +139,9 @@ namespace SalesDepot.ToolForms.QBuilderForms
 				try
 				{
 					if (String.IsNullOrEmpty(title))
-						Process.Start("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result);
+						Process.Start("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result + (!String.IsNullOrEmpty(pinCode) ? ("%0D%0APin-code: " + pinCode) : String.Empty));
 					else
-						Process.Start("mailto: ?subject=" + title + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result);
+						Process.Start("mailto: ?subject=" + title + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result + (!String.IsNullOrEmpty(pinCode) ? ("%0D%0APin-code: " + pinCode) : String.Empty));
 				}
 				catch { }
 			}

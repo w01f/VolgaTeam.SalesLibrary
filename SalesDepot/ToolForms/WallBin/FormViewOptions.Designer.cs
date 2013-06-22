@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			this.buttonXQuickSiteAdd = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXQuickSiteEmail = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXClose = new DevComponents.DotNetBar.ButtonX();
@@ -35,6 +36,7 @@
 			this.buttonXPrint = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXSave = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXOpen = new DevComponents.DotNetBar.ButtonX();
+			this.toolTipController = new DevExpress.Utils.ToolTipController(this.components);
 			this.SuspendLayout();
 			// 
 			// buttonXQuickSiteAdd
@@ -50,6 +52,8 @@
 			this.buttonXQuickSiteAdd.Text = "   Add to quickSITE";
 			this.buttonXQuickSiteAdd.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteAdd.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteAdd, "Add to quickSITE");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteAdd, "Place this link in your quickSITES cart");
 			this.buttonXQuickSiteAdd.Click += new System.EventHandler(this.buttonXQuickSiteAdd_Click);
 			// 
 			// buttonXQuickSiteEmail
@@ -65,6 +69,8 @@
 			this.buttonXQuickSiteEmail.Text = "   Email as Web Link";
 			this.buttonXQuickSiteEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXQuickSiteEmail.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXQuickSiteEmail, "Email as Web Link");
+			this.toolTipController.SetToolTip(this.buttonXQuickSiteEmail, "Email a LINK to this file on the internet");
 			this.buttonXQuickSiteEmail.Click += new System.EventHandler(this.buttonXQuickSiteEmail_Click);
 			// 
 			// buttonXClose
@@ -81,6 +87,8 @@
 			this.buttonXClose.Text = "   Close this Window";
 			this.buttonXClose.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXClose.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXClose, "Close");
+			this.toolTipController.SetToolTip(this.buttonXClose, "Close this window");
 			this.buttonXClose.Click += new System.EventHandler(this.buttonXClose_Click);
 			// 
 			// buttonXEmail
@@ -96,6 +104,8 @@
 			this.buttonXEmail.Text = "   Attach to email";
 			this.buttonXEmail.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXEmail.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXEmail, "Attach to email");
+			this.toolTipController.SetToolTip(this.buttonXEmail, "Attach this file to an email and send it");
 			this.buttonXEmail.Click += new System.EventHandler(this.buttonXEmail_Click);
 			// 
 			// buttonXPrint
@@ -111,6 +121,8 @@
 			this.buttonXPrint.Text = "   Send to Printer";
 			this.buttonXPrint.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXPrint.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXPrint, "Send to Printer");
+			this.toolTipController.SetToolTip(this.buttonXPrint, "Print this file");
 			this.buttonXPrint.Click += new System.EventHandler(this.buttonXPrint_Click);
 			// 
 			// buttonXSave
@@ -126,6 +138,8 @@
 			this.buttonXSave.Text = "   Save a copy";
 			this.buttonXSave.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXSave.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXSave, "Save a copy");
+			this.toolTipController.SetToolTip(this.buttonXSave, "Save a copy of this file");
 			this.buttonXSave.Click += new System.EventHandler(this.buttonXSave_Click);
 			// 
 			// buttonXOpen
@@ -141,7 +155,14 @@
 			this.buttonXOpen.Text = "   Open this file";
 			this.buttonXOpen.TextAlignment = DevComponents.DotNetBar.eButtonTextAlignment.Left;
 			this.buttonXOpen.TextColor = System.Drawing.Color.Black;
+			this.toolTipController.SetTitle(this.buttonXOpen, "Open this file");
+			this.toolTipController.SetToolTip(this.buttonXOpen, "Open a copy of this file");
 			this.buttonXOpen.Click += new System.EventHandler(this.buttonXOpen_Click);
+			// 
+			// toolTipController
+			// 
+			this.toolTipController.Rounded = true;
+			this.toolTipController.ToolTipType = DevExpress.Utils.ToolTipType.SuperTip;
 			// 
 			// FormViewOptions
 			// 
@@ -177,6 +198,7 @@
         private DevComponents.DotNetBar.ButtonX buttonXClose;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteEmail;
 		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteAdd;
+		private DevExpress.Utils.ToolTipController toolTipController;
 
     }
 }
