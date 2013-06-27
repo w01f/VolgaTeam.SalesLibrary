@@ -20,8 +20,8 @@
 	var runAddPage = function (linkId, title, fileName, fileType)
 	{
 		//reset activity tracking
-		$('#add-page-info, #add-page-logo, #add-page-security, #add-page-options').off('pageshow.activity');
-		$('#add-page-show-link-to-main-site, #add-page-restricted,#add-page-expires-in,#add-page-name-enabled,#add-page-access-code-enabled,#add-page-show-ticker,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity').off('change.activity');
+		$('#add-page-info, #add-page-logo, #add-page-tracking, #add-page-pin, #add-page-options').off('pageshow.activity');
+		$('#add-page-restricted,#add-page-expires-in,#add-page-name-enabled,#add-page-access-code-enabled,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').off('change.activity');
 		$.ajax({
 			type: "POST",
 			url: "statistic/writeActivity",
@@ -49,13 +49,13 @@
 		});
 		$('#add-page-expires-in').val("7").selectmenu('refresh', true);
 		$('#add-page-restricted').removeAttr('checked').checkboxradio("refresh");
-		$('#add-page-restricted,#add-page-access-code-enabled,#add-page-show-link-to-main-site,#add-page-access-code-enabled,#add-page-show-ticker,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity').removeAttr('checked').checkboxradio("refresh");
-		$('#add-page-access-code').val('').textinput('disable');
+		$('#add-page-restricted,#add-page-access-code-enabled,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').removeAttr('checked').checkboxradio("refresh");
+		$('#add-page-access-code,#add-page-activity-email-copy').val('').textinput('disable');
 		$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
 		$('#add-page-logo').find('.page-content').find('li').first().attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
 
 		//set activity tracking
-		$('#add-page-info, #add-page-logo, #add-page-security, #add-page-options').on('pageshow.activity', function (e)
+		$('#add-page-info, #add-page-logo, #add-page-tracking, #add-page-pin, #add-page-options').on('pageshow.activity', function (e)
 		{
 			$.ajax({
 				type: "POST",
@@ -73,7 +73,7 @@
 				dataType: 'html'
 			});
 		});
-		$('#add-page-show-link-to-main-site, #add-page-restricted,#add-page-expires-in,#add-page-name-enabled,#add-page-access-code-enabled,#add-page-show-ticker,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity').on('change.activity', function ()
+		$('#add-page-restricted,#add-page-expires-in,#add-page-name-enabled,#add-page-access-code-enabled,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').on('change.activity', function ()
 		{
 			$.ajax({
 				type: "POST",
@@ -108,7 +108,7 @@
 				dataType: 'html'
 			});
 		});
-		$('#add-page-disclaimer').off('click.activity').on('click.activity', function (e)
+		$('#add-page-info-disclaimer,#add-page-tracking-disclaimer,#add-page-options-disclaimer,#add-page-tracking-pin').off('click.activity').on('click.activity', function (e)
 		{
 			$.ajax({
 				type: "POST",

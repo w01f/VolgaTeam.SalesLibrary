@@ -80,6 +80,8 @@
 					$ip = Yii::app()->request->getUserHostAddress();
 					$message = Yii::app()->email;
 					$message->to = $pageOwner->email;
+					if (isset($pageRecord->activity_email_copy) && $pageRecord->activity_email_copy != '')
+						$message->cc = $pageRecord->activity_email_copy;
 					$message->subject = 'quickSITE Notification';
 					$message->from = Yii::app()->params['email']['from'];
 					$message->message = 'Someone just viewed a file on this quickSITE: ' . $pageRecord->getUrl() .
@@ -97,10 +99,7 @@
 			if (isset($page) && (($page->restricted && $protected) || !$page->restricted))
 			{
 				$this->pageTitle = $page->title;
-				$tickerRecords = null;
-				if ($page->show_ticker)
-					$tickerRecords = TickerLinkStorage::getLinks();
-				$this->render('index', array('page' => $page, 'tickerRecords' => $tickerRecords));
+				$this->render('index', array('page' => $page));
 			}
 			else
 			{

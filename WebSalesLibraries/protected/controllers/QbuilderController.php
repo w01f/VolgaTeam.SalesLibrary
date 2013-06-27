@@ -85,17 +85,14 @@
 			$restricted = Yii::app()->request->getPost('restricted');
 			$restricted = isset($restricted) && $restricted == 'true';
 
-			$showLinkToMainSite = Yii::app()->request->getPost('showLinkToMainSite');
-			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == 'true';
-
-			$showTicker = Yii::app()->request->getPost('showTicker');
-			$showTicker = isset($showTicker) && $showTicker == "true";
-
 			$disableBanners = Yii::app()->request->getPost('disableBanners');
 			$disableBanners = isset($disableBanners) && $disableBanners == "true";
 
 			$disableWidgets = Yii::app()->request->getPost('disableWidgets');
 			$disableWidgets = isset($disableWidgets) && $disableWidgets == "true";
+
+			$showLinksAsUrl = Yii::app()->request->getPost('showLinksAsUrl');
+			$showLinksAsUrl = isset($showLinksAsUrl) && $showLinksAsUrl == "true";
 
 			$recordActivity = Yii::app()->request->getPost('recordActivity');
 			$recordActivity = isset($recordActivity) && $recordActivity == "true";
@@ -104,11 +101,15 @@
 			if (isset($pinCode) && $pinCode == '')
 				$pinCode = null;
 
+			$activityEmailCopy = Yii::app()->request->getPost('activityEmailCopy');
+			if (isset($activityEmailCopy) && $activityEmailCopy == '')
+				$activityEmailCopy = null;
+
 			$userId = Yii::app()->user->getId();
 			if (isset($logo) && isset($userId) && isset($createDate) && isset($linkId) && isset($expiresInDays) && isset($restricted))
 			{
 				$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
-				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $linkId)->getUrl();
+				echo QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)->getUrl();
 
 				$linkRecord = LinkStorage::getLinkById($linkId);
 				if (isset($linkRecord))
@@ -163,17 +164,14 @@
 			$requireLogin = Yii::app()->request->getPost('requireLogin');
 			$requireLogin = isset($requireLogin) && $requireLogin == "true";
 
-			$showTicker = Yii::app()->request->getPost('showTicker');
-			$showTicker = isset($showTicker) && $showTicker == "true";
-
-			$showLinkToMainSite = Yii::app()->request->getPost('showLinkToMainSite');
-			$showLinkToMainSite = isset($showLinkToMainSite) && $showLinkToMainSite == "true";
-
 			$disableBanners = Yii::app()->request->getPost('disableBanners');
 			$disableBanners = isset($disableBanners) && $disableBanners == "true";
 
 			$disableWidgets = Yii::app()->request->getPost('disableWidgets');
 			$disableWidgets = isset($disableWidgets) && $disableWidgets == "true";
+
+			$showLinksAsUrl = Yii::app()->request->getPost('showLinksAsUrl');
+			$showLinksAsUrl = isset($showLinksAsUrl) && $showLinksAsUrl == "true";
 
 			$recordActivity = Yii::app()->request->getPost('recordActivity');
 			$recordActivity = isset($recordActivity) && $recordActivity == "true";
@@ -182,8 +180,12 @@
 			if (isset($pinCode) && $pinCode == '')
 				$pinCode = null;
 
+			$activityEmailCopy = Yii::app()->request->getPost('activityEmailCopy');
+			if (isset($activityEmailCopy) && $activityEmailCopy == '')
+				$activityEmailCopy = null;
+
 			if (isset($selectedPageId))
-				QPageStorage::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite, $disableBanners, $disableWidgets, $recordActivity, $pinCode);
+				QPageStorage::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy);
 		}
 
 		public function actionGetLinkCart()
@@ -300,47 +302,6 @@
 				if (isset($page))
 					$this->renderPartial('emailDialog', array('page' => $page, 'availableEmails' => $availableEmails), false, true);
 			}
-		}
-
-		public function actionEmailPageSend()
-		{
-			$selectedPageId = Yii::app()->request->getPost('selectedPageId');
-			$emailTo = Yii::app()->request->getPost('emailTo');
-			$emailCopyTo = Yii::app()->request->getPost('emailCopyTo');
-			$emailFrom = Yii::app()->request->getPost('emailFrom');
-			$emailToMe = Yii::app()->request->getPost('emailToMe');
-			$emailSubject = Yii::app()->request->getPost('emailSubject');
-			$emailBody = Yii::app()->request->getPost('emailBody');
-			if (isset($selectedPageId) && isset($emailTo) && isset($emailFrom) && isset($emailSubject) && isset($emailBody) && $emailTo != '' && $emailFrom != '')
-			{
-				$page = QPageStorage::model()->findByPk($selectedPageId);
-				if (isset($page))
-				{
-					$recipients = explode(";", $emailTo);
-					$recipientsCopy = isset($emailCopyTo) && $emailCopyTo != '' ? explode(";", $emailCopyTo) : null;
-					if (isset($recipientsCopy))
-						$recipientsWhole = array_merge($recipients, $recipientsCopy);
-					else
-						$recipientsWhole = $recipients;
-
-					$userId = Yii::app()->user->getId();
-					if (isset($userId))
-						UserRecipientStorage::setRecipientsForUser($userId, $recipientsWhole);
-
-					if ($emailToMe == 'true')
-						$recipientsCopy[] = $emailFrom;
-
-					$message = Yii::app()->email;
-					$message->to = $recipients;
-					$message->cc = $recipientsCopy;
-					$message->subject = $emailSubject;
-					$message->from = $emailFrom;
-					$message->view = 'sendQuickPage';
-					$message->viewVars = array('body' => $emailBody, 'page' => $page);
-					$message->send();
-				}
-			}
-			Yii::app()->end();
 		}
 
 		/////////////////Service Part///////////////////////////
@@ -497,12 +458,12 @@
 					$page->header = $pageRecord->header;
 					$page->footer = $pageRecord->footer;
 					$page->isRestricted = $pageRecord->restricted;
-					$page->showLinkMainSite = $pageRecord->show_site_link;
-					$page->showTicker = $pageRecord->show_ticker;
 					$page->disableBanners = $pageRecord->disable_banners;
 					$page->disableWidgets = $pageRecord->disable_widgets;
+					$page->showLinksAsUrl = $pageRecord->show_links_as_url;
 					$page->recordActivity = $pageRecord->record_activity;
 					$page->pinCode = $pageRecord->pin_code;
+					$page->activityEmailCopy = $pageRecord->activity_email_copy;
 					$page->logo = isset($pageRecord->logo) ? str_replace('data:image/png;base64,', '', $pageRecord->logo) : null;
 
 					$linkRecords = $pageRecord->getPageLinks();
@@ -640,17 +601,17 @@
 		 * @param string createData
 		 * @param int expiresInDays
 		 * @param bool restricted
-		 * @param bool showLinkToMainSite
 		 * @param string logo
-		 * @param bool showTicker
 		 * @param bool disableBanners
 		 * @param bool disableWidgets
+		 * @param bool showLinksAsUrl
 		 * @param bool recordActivity
 		 * @param string pinCode
+		 * @param string activityEmailCopy
 		 * @return string
 		 * @soap
 		 */
-		public function emailLink($sessionKey, $login, $linkId, $subtitle, $createDate, $expiresInDays, $restricted, $showLinkToMainSite, $logo, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode)
+		public function emailLink($sessionKey, $login, $linkId, $subtitle, $createDate, $expiresInDays, $restricted, $logo, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
@@ -660,7 +621,7 @@
 					$logo = 'data:image/png;base64,' . $logo;
 					$userId = $userRecord->id;
 					$expirationDate = $expiresInDays > 0 ? date(Yii::app()->params['mysqlDateFormat'], strtotime(date("Y-m-d") . ' + ' . $expiresInDays . ' day')) : null;
-					return QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $linkId)->getUrl();
+					return QPageStorage::addPageLite($userId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)->getUrl();
 				}
 			}
 			return null;
@@ -747,23 +708,23 @@
 		 * @param string footer
 		 * @param string expirationDate
 		 * @param bool requireLogin
-		 * @param bool showLinkToMainSite
-		 * @param bool showTicker
 		 * @param bool disableBanners
 		 * @param bool disableWidgets
+		 * @param bool showLinksAsUrl
 		 * @param bool recordActivity
 		 * @param string pinCode
+		 * @param string activityEmailCopy
 		 * @param string logo
 		 * @soap
 		 */
-		public function savePageContent($sessionKey, $pageId, $title, $description, $header, $footer, $expirationDate, $requireLogin, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $logo)
+		public function savePageContent($sessionKey, $pageId, $title, $description, $header, $footer, $expirationDate, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $logo)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
 				if (isset($expirationDate) && $expirationDate != '')
 					$expirationDate = date(Yii::app()->params['mysqlDateFormat'], strtotime($expirationDate));
 				$logo = 'data:image/png;base64,' . $logo;
-				QPageStorage::savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite, $disableBanners, $disableWidgets, $recordActivity, $pinCode);
+				QPageStorage::savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy);
 			}
 		}
 

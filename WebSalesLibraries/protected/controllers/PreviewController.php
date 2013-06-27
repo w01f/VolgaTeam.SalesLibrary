@@ -131,7 +131,7 @@
 					$link->browser = $browser;
 					$link->load($linkRecord);
 					StatisticActivityStorage::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
-					$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true), false, true);
+					$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true, 'isLineBreak' => $link->getIsLineBreak()), false, true);
 					$rendered = true;
 				}
 			}
@@ -140,7 +140,7 @@
 				$folderRecord = FolderStorage::model()->findByPk($folderId);
 				if (isset($folderRecord))
 				{
-					$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false), false, true);
+					$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false, 'isLineBreak' => false), false, true);
 					$rendered = true;
 				}
 			}

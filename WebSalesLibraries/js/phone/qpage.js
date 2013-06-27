@@ -226,7 +226,7 @@
 			if (!regex.test(emailValue))
 			{
 				var infoDialog = $('#info-dialog');
-				infoDialog.find('.dialog-description').text('Enter your emai address to view this link...');
+				infoDialog.find('.dialog-description').text('Enter your email address to view this link...');
 				infoDialog.find('.dialog-title').text('Email');
 				$.mobile.changePage("#info-dialog");
 				return false;

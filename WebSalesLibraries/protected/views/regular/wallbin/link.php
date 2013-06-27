@@ -1,12 +1,17 @@
 <?php
 if ($link->isFolder)
 {
+	$isLineBreak = false;
 	$linkContainerClass = 'link-container folder-link';
 	$tooltip = 'Folder';
 }
 else
 {
-	$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
+	$isLineBreak = $link->getIsLineBreak();
+	if($isLineBreak)
+		$linkContainerClass = 'link-container line-break';
+	else
+		$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
 	$tooltip = $link->tooltip;
 }
 ?>
@@ -16,7 +21,7 @@ else
 	<?php else: ?>
 		<?php
 		$widget = $link->getWidget();
-		if ($link->getIsLineBreak())
+		if ($isLineBreak)
 		{
 			$displayWidget = !(isset($disableWidget) && $disableWidget) && isset($widget) && $widget != '';
 			$linkClass = 'link-line-break' . ($displayWidget ? ' widget' : '');

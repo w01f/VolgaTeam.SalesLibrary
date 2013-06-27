@@ -146,7 +146,7 @@
 			return $pageRecord->id;
 		}
 
-		public static function addPageLite($ownerId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $showLinkToMainSite, $showTicker, $disableBanners, $disableWidgets, $recordActivity, $pinCode, $linkId)
+		public static function addPageLite($ownerId, $createDate, $subtitle, $logo, $expirationDate, $restricted, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy, $linkId)
 		{
 			$pageRecord = new QPageStorage();
 			$pageRecord->id = uniqid();
@@ -159,12 +159,12 @@
 				$pageRecord->expiration_date = $expirationDate;
 			$pageRecord->is_email = true;
 			$pageRecord->restricted = $restricted;
-			$pageRecord->show_site_link = $showLinkToMainSite;
-			$pageRecord->show_ticker = $showTicker;
 			$pageRecord->disable_banners = $disableBanners;
 			$pageRecord->disable_widgets = $disableWidgets;
+			$pageRecord->show_links_as_url = $showLinksAsUrl;
 			$pageRecord->record_activity = $recordActivity;
 			$pageRecord->pin_code = $pinCode;
+			$pageRecord->activity_email_copy = $activityEmailCopy;
 			$pageRecord->save();
 
 			$linkInPageRecord = new QPageLinkStorage();
@@ -192,12 +192,12 @@
 				$pageRecord->header = $clonedPageRecord->header;
 				$pageRecord->footer = $clonedPageRecord->footer;
 				$pageRecord->restricted = $clonedPageRecord->restricted;
-				$pageRecord->show_ticker = $clonedPageRecord->show_ticker;
-				$pageRecord->show_site_link = $clonedPageRecord->show_site_link;
 				$pageRecord->disable_banners = $clonedPageRecord->disable_banners;
 				$pageRecord->disable_widgets = $clonedPageRecord->disable_widgets;
+				$pageRecord->show_links_as_url = $clonedPageRecord->show_links_as_url;
 				$pageRecord->record_activity = $clonedPageRecord->record_activity;
 				$pageRecord->pin_code = $clonedPageRecord->pin_code;
+				$pageRecord->activity_email_copy = $clonedPageRecord->activity_email_copy;
 				$pageRecord->save();
 
 				$clonedPageLinks = QPageLinkStorage::model()->findAll('id_page=?', array($clonePageId));
@@ -214,7 +214,7 @@
 			return null;
 		}
 
-		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $showTicker, $showLinkToMainSite, $disableBanners, $disableWidgets, $recordActivity, $pinCode)
+		public static function savePage($pageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy)
 		{
 			$pageRecord = self::model()->findByPk($pageId);
 			if (isset($pageRecord))
@@ -226,12 +226,12 @@
 				$pageRecord->header = $header;
 				$pageRecord->footer = $footer;
 				$pageRecord->restricted = $requireLogin;
-				$pageRecord->show_ticker = $showTicker;
-				$pageRecord->show_site_link = $showLinkToMainSite;
 				$pageRecord->disable_banners = $disableBanners;
 				$pageRecord->disable_widgets = $disableWidgets;
+				$pageRecord->show_links_as_url = $showLinksAsUrl;
 				$pageRecord->record_activity = $recordActivity;
 				$pageRecord->pin_code = $pinCode;
+				$pageRecord->activity_email_copy = $activityEmailCopy;
 				$pageRecord->save();
 			}
 		}

@@ -63,7 +63,7 @@
     display: none;
 }
 
-.clickable, .folder-link
+.clickable, .folder-link, .link-container.line-break
 {
     cursor: pointer;
 }

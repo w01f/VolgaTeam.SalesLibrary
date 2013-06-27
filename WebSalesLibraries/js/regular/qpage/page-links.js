@@ -127,7 +127,7 @@
 			var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 			if (!regex.test(emailValue))
 			{
-				$('body').append('<div id="user-email-warning" title="Email">Enter your emai address to view this link...<br></div>');
+				$('body').append('<div id="user-email-warning" title="Email">Enter your email address to view this link...<br></div>');
 				$("#user-email-warning").dialog({
 					resizable: false,
 					modal: true,

@@ -1,5 +1,5 @@
 <?php
-$version = '6.0';
+$version = '7.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -14,12 +14,6 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/folder-links.css?'
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/banner.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qpage/page-content.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qpage/ribbon.css?' . $version);
-if ($page->show_ticker && isset($tickerRecords))
-{
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/modern-ticker/css/modern-ticker.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/modern-ticker/themes/theme' . Yii::app()->params['ticker']['theme'] . '/theme.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/ticker.css?' . $version);
-}
 $cs->registerCoreScript('jquery.ui');
 $cs->registerCoreScript('cookie');
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
@@ -28,11 +22,6 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mouse
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
-if ($page->show_ticker && isset($tickerRecords))
-{
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/ticker.js?' . $version, CClientScript::POS_HEAD);
-}
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
@@ -49,12 +38,6 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 		<div class="ribbon-section">
 			<span class="section-title"><? echo $page->title; ?></span> <img src="<? echo $page->logo; ?>"/>
 		</div>
-		<?if ($page->show_site_link): ?>
-			<div class="ribbon-section">
-				<span class="section-title">Go to Main Site</span>
-				<a href="<? echo Yii::app()->createAbsoluteUrl(''); ?>" target="_blank"><img src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/site-link.png' ?>"/></a>
-			</div>
-		<? endif;?>
 		<?if ($page->record_activity): ?>
 			<div class="ribbon-section">
 				<div class="control-group">
@@ -73,12 +56,22 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 		<div id="page-title"><?echo $page->subtitle;?></div>
 		<div id="page-header"><?echo nl2br($page->header);?></div>
 		<div id="page-links-container" class="folder-links-container">
-			<? $links = $page->getLibraryLinks()?>
-			<?if (isset($links)): ?>
-				<?php foreach ($links as $link): ?>
-					<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $link, 'disableBanner' => $page->disable_banners, 'disableWidget' => $page->disable_widgets), true); ?>
-				<?php endforeach; ?>
-			<? endif;?>
+			<? if ($page->show_links_as_url): ?><ul class="nav nav-tabs nav-stacked"><?endif;?>
+				<? $links = $page->getLibraryLinks()?>
+				<?if (isset($links)): ?>
+					<?php foreach ($links as $link): ?>
+						<? if ($page->show_links_as_url): ?>
+							<? if ($link->name != '' && !$link->isFolder): ?>
+								<li>
+									<a href="#" id="link<?php echo $link->id; ?>" class="clickable"><?echo $link->name;?></a>
+								</li>
+							<? endif; ?>
+						<? else: ?>
+							<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $link, 'disableBanner' => $page->disable_banners, 'disableWidget' => $page->disable_widgets), true); ?>
+						<? endif; ?>
+					<?php endforeach; ?>
+				<? endif;?>
+			<? if ($page->show_links_as_url): ?></ul><?endif;?>
 		</div>
 		<div id="page-footer"><?echo nl2br($page->footer);?></div>
 	</div>
@@ -92,34 +85,4 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 		<div id="view-dialog-container"></div>
 	</div>
 </div>
-<!------------------------->
-<!---------Ticker--------->
-<?php if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords)): ?>
-	<div class="modern-ticker mt-round <?php echo Yii::app()->params['ticker']['effect']; ?>">
-		<?php if ((Yii::app()->params['ticker']['show_label'] || Yii::app()->params['ticker']['show_logo']) && isset($tickerRecords)): ?>
-			<div class="mt-label">
-				<?php if (Yii::app()->params['ticker']['show_logo']): ?>
-					<img src="<?php echo Yii::app()->baseUrl . '/images/tickerlogo.png?' . $version; ?>">
-				<?php endif; ?>
-				<?php if (Yii::app()->params['ticker']['show_label']): ?>
-					<span>NEWS:</span>
-				<?php endif; ?>
-			</div>
-		<?php endif; ?>
-		<div class="mt-news">
-			<ul>
-				<?foreach ($tickerRecords as $tickerRecord): ?>
-					<?php echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.ticker') . '/tickerLink.php', array('tickerLink' => $tickerRecord), true); ?>
-				<? endforeach;?>
-			</ul>
-		</div>
-		<?php if (Yii::app()->params['ticker']['show_control']): ?>
-			<div class="mt-controls">
-				<div class="mt-prev"></div>
-				<div class="mt-play"></div>
-				<div class="mt-next"></div>
-			</div>
-		<?php endif; ?>
-	</div>
-<?php endif; ?>
 <!------------------------->

@@ -122,7 +122,7 @@
 			$.requestViewDialog(linkId, false);
 			event.stopPropagation();
 		});
-		container.find('.clickable').off('mousedown.context').on('mousedown.context', function (eventDown)
+		container.find('.clickable, .link-container.line-break').off('mousedown.context').on('mousedown.context', function (eventDown)
 		{
 			if (eventDown.which == 3)
 			{
@@ -141,7 +141,7 @@
 		});
 		if (( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ))
 		{
-			container.find('.clickable').hammer().on('doubletap', function (event)
+			container.find('.clickable, .link-container.line-break').hammer().on('doubletap', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
 				$.requestSpecialDialog(linkId, undefined);

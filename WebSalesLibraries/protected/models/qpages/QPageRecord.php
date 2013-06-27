@@ -52,16 +52,6 @@
 		 */
 		public $isRestricted;
 		/**
-		 * @var boolean showLinkMainSite
-		 * @soap
-		 */
-		public $showLinkMainSite;
-		/**
-		 * @var boolean showTicker
-		 * @soap
-		 */
-		public $showTicker;
-		/**
 		 * @var boolean disableBanners
 		 * @soap
 		 */
@@ -72,6 +62,11 @@
 		 */
 		public $disableWidgets;
 		/**
+		 * @var boolean showLinksAsUrl
+		 * @soap
+		 */
+		public $showLinksAsUrl;
+		/**
 		 * @var boolean recordActivity
 		 * @soap
 		 */
@@ -81,6 +76,11 @@
 		 * @soap
 		 */
 		public $pinCode;
+		/**
+		 * @var string activityEmailCopy
+		 * @soap
+		 */
+		public $activityEmailCopy;
 		/**
 		 * @var string Logo
 		 * @soap

@@ -83,7 +83,7 @@
 		{
 			if (isset($this->autoWidgets))
 				foreach ($this->autoWidgets as $autoWidget)
-					if (strpos($autoWidget->extension, $extension) !== false)
+					if (str_replace('.', '', $autoWidget->extension) == $extension)
 						return $autoWidget->widget;
 			return null;
 		}

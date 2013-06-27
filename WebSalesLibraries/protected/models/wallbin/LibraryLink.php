@@ -361,14 +361,14 @@
 				}
 			}
 			if (isset($this->enableWidget))
-				if (isset($this->widget))
+				if (isset($this->widget) && $this->widget != '')
 					return $this->widget;
 			return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
 		}
 
 		public function getIsLineBreak()
 		{
-			return $this->type === 6 && isset($this->lineBreakProperties);
+			return $this->type == 6 && isset($this->lineBreakProperties);
 		}
 
 		public function getFormats()

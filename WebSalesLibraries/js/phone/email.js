@@ -52,6 +52,7 @@
 	$.addLitePage = function (linkId)
 	{
 		var subtitle = $('#add-page-name').val();
+		var pinCode = $('#add-page-access-code').val();
 		var now = new Date();
 		$.ajax({
 			type: "POST",
@@ -63,12 +64,12 @@
 				logo: $('#add-page-logo').find('.page-content').find('li.qpage-logo-selected').find('img').attr('src'),
 				expiresInDays: $('#add-page-expires-in').val(),
 				restricted: $('#add-page-restricted').is(':checked'),
-				pinCode: $('#add-page-access-code').val(),
-				showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked'),
-				showTicker: $('#add-page-show-ticker').is(':checked'),
+				pinCode: pinCode,
 				disableWidgets: $('#add-page-disable-widgets').is(':checked'),
 				disableBanners: $('#add-page-disable-banners').is(':checked'),
-				recordActivity: $('#add-page-record-activity').is(':checked')
+				showLinksAsUrl: $('#add-page-show-links-as-url').is(':checked'),
+				recordActivity: $('#add-page-record-activity').is(':checked'),
+				activityEmailCopy: $('#add-page-activity-email-copy').val()
 			},
 			beforeSend: function ()
 			{
@@ -88,7 +89,10 @@
 				$.mobile.changePage("#preview", {
 					transition: "slidefade"
 				});
-				window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg, "_self");
+				if (subtitle != '')
+					window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+				else
+					window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 			},
 			error: function ()
 			{
@@ -108,14 +112,12 @@
 				transition: "pop"
 			});
 		});
-
 		$('#email-to-copy-select-button').off('click').on('click', function ()
 		{
 			$.mobile.changePage('#email-to-copy-existed-list', {
 				transition: "pop"
 			});
 		});
-
 		$('#email-to-apply-button').off('click').on('click', function ()
 		{
 			var selectedEmails = [];
@@ -129,7 +131,6 @@
 				$('#email-to').val('');
 			$("#email-to-existed-list").dialog("close");
 		});
-
 		$('#email-to-copy-apply-button').off('click').on('click', function ()
 		{
 			var selectedEmails = [];
@@ -149,8 +150,6 @@
 			updateSummary();
 			return true;
 		});
-
-
 		$('#add-page-name-enabled').on('change', function ()
 		{
 			if ($(this).is(':checked'))
@@ -158,7 +157,6 @@
 			else
 				$('#add-page-name').val('').textinput('disable');
 		});
-
 		$('#add-page-info-disclaimer').on('click', function ()
 		{
 			var infoDialog = $('#info-dialog');
@@ -166,29 +164,32 @@
 			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
 			$.mobile.changePage("#info-dialog");
 		});
-
-		$('#add-page-security-disclaimer').on('click', function ()
+		$('#add-page-tracking-disclaimer').on('click', function ()
 		{
 			var infoDialog = $('#info-dialog');
-			infoDialog.find('.dialog-description').text('If you REQUIRE User Login, then only Users who already have an official username and password can access this site');
+			infoDialog.find('.dialog-description').text('Enable Link Notifications if you want to know who clicks on your shared Links. DO NOT ENABLE User Login if you are sharing a Link OUTSIDE your company!');
 			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
 			$.mobile.changePage("#info-dialog");
 		});
-
 		$('#add-page-options-disclaimer').on('click', function ()
 		{
 			var infoDialog = $('#info-dialog');
-			infoDialog.find('.dialog-description').text('Do not Show Link To Main Site or Ticker If you are sending this Link to someone OUTSIDE Your company');
+			infoDialog.find('.dialog-description').text('If you disable Widgets & Banners AND If you enable Blue Hyperlinks, then your quickSITE will be clean and simple…');
 			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
 			$.mobile.changePage("#info-dialog");
 		});
-
+		$('#add-page-pin-disclaimer').on('click', function ()
+		{
+			var infoDialog = $('#info-dialog');
+			infoDialog.find('.dialog-description').text('Create a 4-Digit Access Pin if you want to control who is ALLOWED to view your shared Link...');
+			infoDialog.find('.dialog-title').text('Important Info you should KNOW about EMAILING LINKS');
+			$.mobile.changePage("#info-dialog");
+		});
 		$('#add-page-logo').find('.page-content').find('li').on('click', function (e)
 		{
 			$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
 			$(this).attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
 		});
-
 		$('#add-page-access-code-enabled').on('change', function ()
 		{
 			var accessCode = $('#add-page-access-code');
@@ -197,7 +198,6 @@
 			else
 				accessCode.val('').textinput('disable');
 		});
-
 		$('#add-page-access-code').keydown(function (event)
 		{
 			if (event.keyCode == 46 || event.keyCode == 8)
@@ -208,6 +208,14 @@
 				if (event.keyCode < 48 || event.keyCode > 57)
 					event.preventDefault();
 			}
+		});
+		$('#add-page-record-activity').on('change', function ()
+		{
+			var ccEmail = $('#add-page-activity-email-copy');
+			if ($(this).is(':checked'))
+				ccEmail.textinput('enable');
+			else
+				ccEmail.val('').textinput('disable');
 		});
 	});
 })(jQuery);

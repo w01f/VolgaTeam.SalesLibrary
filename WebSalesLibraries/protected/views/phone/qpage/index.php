@@ -58,9 +58,6 @@ if (isset($userId))
 			</ul>
 		<? endif;?>
 		<h4><? echo strip_tags($page->footer); ?></h4>
-		<?if ($page->show_site_link): ?>
-			<a data-role="button" data-theme="b" href="<? echo Yii::app()->createAbsoluteUrl(''); ?>" target="_blank" data-icon="home" data-iconpos="left" data-mini="true">Go to Main Site</a>
-		<? endif;?>
 	</div>
 </div>
 <div data-role='page' id="link-details" data-cache="never" data-dom-cache="false" data-ajax="false">

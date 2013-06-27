@@ -360,8 +360,13 @@
 				$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'search';
 				foreach ($linkRecords as $linkRecord)
 				{
+					if (array_key_exists('type', $linkRecord))
+						$type = $linkRecord['type'];
+					else
+						$type = 9999;
+
 					$link['id'] = $linkRecord['id'];
-					$link['name'] = $linkRecord['name'];
+					$link['name'] = $type == 6 ? "LineBreak" : $linkRecord['name'];
 					$link['file_name'] = $linkRecord['file_name'];
 					if (array_key_exists('link_date', $linkRecord))
 						$link['date_modify'] = $linkRecord['link_date'];
@@ -401,8 +406,10 @@
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-keynote.png'));
 							break;
 						default:
-							if (array_key_exists('type', $linkRecord) && $linkRecord['type'] == 5)
+							if ($type == 5)
 								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-folder.png'));
+							else if ($type == 6)
+								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-line-break.png'));
 							else
 								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'undefined.png'));
 							break;

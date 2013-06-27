@@ -150,6 +150,18 @@
 				}
 			});
 
+			$('#page-content-record-activity').off('change').on('change', function ()
+			{
+				var ccEmail = $('#page-content-activity-email-copy');
+				if ($(this).is(':checked'))
+					ccEmail.removeAttr('disabled');
+				else
+				{
+					ccEmail.attr('disabled','disabled');
+					ccEmail.val('');
+				}
+			});
+
 			var logoSelector = $('#page-content-tab-logo');
 			logoSelector.find('ul a').on('click', function ()
 			{

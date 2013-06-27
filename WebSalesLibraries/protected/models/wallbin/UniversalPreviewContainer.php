@@ -101,28 +101,31 @@
 				$this->libraryId = $record->id_library;
 				$previewLink = str_replace(' ', '%20', htmlspecialchars(str_replace('\\', '/', $this->parent->storageLink . '/' . $record->relative_path)));
 				$previewPath = str_replace('\\', '/', $this->parent->storagePath . DIRECTORY_SEPARATOR . $record->relative_path);
-				$previewLink .= '?version=' . filemtime($previewPath);
 				switch ($record->type)
 				{
 					case 'png':
+						$previewLink .= '?version=' . filemtime($previewPath);
 						$this->pngLinks[] = $previewLink;
 						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
 						if ($this->pngMaxFileSize < $fileSize)
 							$this->pngMaxFileSize = $fileSize;
 						break;
 					case 'png_phone':
+						$previewLink .= '?version=' . filemtime($previewPath);
 						$this->pngPhoneLinks[] = $previewLink;
 						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
 						if ($this->pngPhoneMaxFileSize < $fileSize)
 							$this->pngPhoneMaxFileSize = $fileSize;
 						break;
 					case 'jpeg':
+						$previewLink .= '?version=' . filemtime($previewPath);
 						$this->jpegLinks[] = $previewLink;
 						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
 						if ($this->jpegMaxFileSize < $fileSize)
 							$this->jpegMaxFileSize = $fileSize;
 						break;
 					case 'jpeg_phone':
+						$previewLink .= '?version=' . filemtime($previewPath);
 						$this->jpegPhoneLinks[] = $previewLink;
 						$fileSize = file_exists($previewPath) ? filesize($previewPath) : 0;
 						if ($this->jpegPhoneMaxFileSize < $fileSize)
@@ -135,9 +138,11 @@
 							$this->pdfMaxFileSize = $fileSize;
 						break;
 					case 'thumbs':
+						$previewLink .= '?version=' . filemtime($previewPath);
 						$this->thumbsLinks[] = $previewLink;
 						break;
 					case 'thumbs_phone':
+						$previewLink .= '?version=' . filemtime($previewPath);
 						$this->thumbsPhoneLinks[] = $previewLink;
 						break;
 					case 'wmv':

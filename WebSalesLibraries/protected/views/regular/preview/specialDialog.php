@@ -1,7 +1,7 @@
 <div class="view-dialog-body tool-dialog">
 	<div class="title">
 		<div class="link-name">
-			<?php echo $object->name; ?>
+			<?php echo $isLineBreak ? 'Line Break' : $object->name; ?>
 		</div>
 		<br>
 		<?php if (isset($object->fileName) && $isLink && !(isset($object->isFolder) && $object->isFolder)): ?>
@@ -21,13 +21,25 @@
 	<? else: ?>
 		<ul class="nav nav-pills nav-stacked format-list">
 			<li class="single-column">
-				<a id="context-add" class="item-text" href="#"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'add-link.png')); ?>"/><?if ($isLink): ?>Add <? if (isset($object->isFolder) && $object->isFolder): ?>Folder<? else: ?>Link<?endif; ?> to quickSITES cart<? else: ?>Add All Links in this window to quickSITES cart<?endif;?>
+				<a id="context-add" class="item-text" href="#"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'add-link.png')); ?>"/>
+					<?if ($isLink): ?>Add
+						<? if (isset($object->isFolder) && $object->isFolder): ?>
+							Folder
+						<?php elseif ($isLineBreak): ?>
+							this LineBreak
+						<?else:?>
+							Link
+						<?endif;?>
+						to quickSITES cart
+					<? else: ?>
+						Add All Links in this window to quickSITES cart
+					<?endif;?>
 				</a>
 				<div class="service-data">
 					<div class="object-id"><?php echo $object->id; ?></div>
 				</div>
 			</li>
-			<?if ($isLink): ?>
+			<?if ($isLink && !$isLineBreak): ?>
 				<li class="single-column">
 					<a id="context-email" class="item-text" href="#"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email-link.png')); ?>"/>Send this <? if (isset($object->isFolder) && $object->isFolder): ?>Folder Link<? else: ?>Link<?endif; ?>
 					</a>

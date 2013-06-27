@@ -259,7 +259,18 @@
 								event.preventDefault();
 						}
 					});
-					addPageContent.find('#add-page-name-enabled, #add-page-restricted, #add-page-show-link-to-main-site,#add-page-access-code,#add-page-show-ticker,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity').on('change', function ()
+					addPageContent.find('#add-page-record-activity').off('change').on('change', function ()
+					{
+						var ccEmail = $('#add-page-activity-email-copy');
+						if ($(this).is(':checked'))
+							ccEmail.removeAttr('disabled');
+						else
+						{
+							ccEmail.attr('disabled','disabled');
+							ccEmail.val('');
+						}
+					});
+					addPageContent.find('#add-page-name-enabled, #add-page-restricted,#add-page-access-code,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').on('change', function ()
 					{
 						$.ajax({
 							type: "POST",
@@ -293,11 +304,11 @@
 								expiresInDays: $('#add-page-expires-in').find('.active').val(),
 								restricted: $('#add-page-restricted').is(':checked'),
 								pinCode: pinCode,
-								showLinkToMainSite: $('#add-page-show-link-to-main-site').is(':checked'),
-								showTicker: $('#add-page-show-ticker').is(':checked'),
 								disableWidgets: $('#add-page-disable-widgets').is(':checked'),
 								disableBanners: $('#add-page-disable-banners').is(':checked'),
-								recordActivity: $('#add-page-record-activity').is(':checked')
+								showLinksAsUrl: $('#add-page-show-links-as-url').is(':checked'),
+								recordActivity: $('#add-page-record-activity').is(':checked'),
+								activityEmailCopy: $('#add-page-activity-email-copy').val()
 							},
 							beforeSend: function ()
 							{
@@ -520,11 +531,11 @@
 					expirationDate: $('#page-content-expiration-date').val(),
 					requireLogin: $('#page-content-require-login').is(':checked'),
 					pinCode: $('#page-content-access-code').val(),
-					showTicker: $('#page-content-show-ticker').is(':checked'),
-					showLinkToMainSite: $('#page-content-show-link-to-main-site').is(':checked'),
 					disableBanners: $('#page-content-disable-banners').is(':checked'),
 					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
+					showLinksAsUrl: $('#page-content-show-links-as-url').is(':checked'),
 					recordActivity: $('#page-content-record-activity').is(':checked'),
+					activityEmailCopy: $('#page-content-activity-email-copy').val(),
 					header: $('#page-content-header-text').val(),
 					footer: $('#page-content-footer-text').val()
 				},
