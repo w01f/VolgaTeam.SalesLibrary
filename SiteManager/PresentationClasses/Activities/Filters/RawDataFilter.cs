@@ -27,6 +27,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 		{
 			get { return checkEditShowAction.Checked; }
 		}
+		public bool ShowFile
+		{
+			get { return checkEditShowFile.Checked; }
+		}
 		public event EventHandler<EventArgs> ColumnsChanged;
 
 		public List<string> AllGroups { get; private set; }

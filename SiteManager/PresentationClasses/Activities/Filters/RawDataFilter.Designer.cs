@@ -40,12 +40,14 @@
 			this.checkEditShowDetails = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditShowActionGroup = new DevExpress.XtraEditors.CheckEdit();
 			this.checkEditShowAction = new DevExpress.XtraEditors.CheckEdit();
+			this.checkEditShowFile = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowDetails.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowActionGroup.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowAction.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowFile.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// checkEditEnableFilter
@@ -89,7 +91,7 @@
 			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 232);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 258);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
@@ -137,7 +139,7 @@
 			// labelControlColumnsTitle
 			// 
 			this.labelControlColumnsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.labelControlColumnsTitle.Location = new System.Drawing.Point(10, 329);
+			this.labelControlColumnsTitle.Location = new System.Drawing.Point(10, 355);
 			this.labelControlColumnsTitle.Name = "labelControlColumnsTitle";
 			this.labelControlColumnsTitle.Size = new System.Drawing.Size(55, 16);
 			this.labelControlColumnsTitle.StyleController = this.styleController;
@@ -148,7 +150,7 @@
 			// 
 			this.checkEditShowDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowDetails.EditValue = true;
-			this.checkEditShowDetails.Location = new System.Drawing.Point(8, 351);
+			this.checkEditShowDetails.Location = new System.Drawing.Point(125, 378);
 			this.checkEditShowDetails.Name = "checkEditShowDetails";
 			this.checkEditShowDetails.Properties.AutoWidth = true;
 			this.checkEditShowDetails.Properties.Caption = "User Detail";
@@ -161,7 +163,7 @@
 			// 
 			this.checkEditShowActionGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowActionGroup.EditValue = true;
-			this.checkEditShowActionGroup.Location = new System.Drawing.Point(8, 378);
+			this.checkEditShowActionGroup.Location = new System.Drawing.Point(6, 378);
 			this.checkEditShowActionGroup.Name = "checkEditShowActionGroup";
 			this.checkEditShowActionGroup.Properties.AutoWidth = true;
 			this.checkEditShowActionGroup.Properties.Caption = "Action Group";
@@ -174,7 +176,7 @@
 			// 
 			this.checkEditShowAction.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.checkEditShowAction.EditValue = true;
-			this.checkEditShowAction.Location = new System.Drawing.Point(8, 405);
+			this.checkEditShowAction.Location = new System.Drawing.Point(6, 405);
 			this.checkEditShowAction.Name = "checkEditShowAction";
 			this.checkEditShowAction.Properties.AutoWidth = true;
 			this.checkEditShowAction.Properties.Caption = "Action";
@@ -183,10 +185,24 @@
 			this.checkEditShowAction.TabIndex = 24;
 			this.checkEditShowAction.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
 			// 
+			// checkEditShowFile
+			// 
+			this.checkEditShowFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.checkEditShowFile.EditValue = true;
+			this.checkEditShowFile.Location = new System.Drawing.Point(125, 405);
+			this.checkEditShowFile.Name = "checkEditShowFile";
+			this.checkEditShowFile.Properties.AutoWidth = true;
+			this.checkEditShowFile.Properties.Caption = "File";
+			this.checkEditShowFile.Size = new System.Drawing.Size(44, 21);
+			this.checkEditShowFile.StyleController = this.styleController;
+			this.checkEditShowFile.TabIndex = 25;
+			this.checkEditShowFile.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
+			// 
 			// RawDataFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.Controls.Add(this.checkEditShowFile);
 			this.Controls.Add(this.checkEditShowAction);
 			this.Controls.Add(this.checkEditShowActionGroup);
 			this.Controls.Add(this.checkEditShowDetails);
@@ -205,6 +221,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowDetails.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowActionGroup.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditShowAction.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.checkEditShowFile.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -223,5 +240,6 @@
 		private DevExpress.XtraEditors.CheckEdit checkEditShowDetails;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowActionGroup;
 		private DevExpress.XtraEditors.CheckEdit checkEditShowAction;
+		private DevExpress.XtraEditors.CheckEdit checkEditShowFile;
 	}
 }

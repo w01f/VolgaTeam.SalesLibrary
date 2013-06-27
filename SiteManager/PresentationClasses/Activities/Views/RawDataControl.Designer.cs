@@ -41,6 +41,7 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.printingSystem = new DevExpress.XtraPrinting.PrintingSystem(this.components);
 			this.printableComponentLink = new DevExpress.XtraPrinting.PrintableComponentLink(this.components);
+			this.gridColumnFile = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewData)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditDate)).BeginInit();
@@ -80,13 +81,14 @@
 			this.gridViewData.Appearance.Row.Options.UseFont = true;
 			this.gridViewData.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewData.Appearance.SelectedRow.Options.UseFont = true;
-			this.gridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold);
 			this.gridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
 			this.gridViewData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnDate,
             this.gridColumnLogin,
             this.gridColumnType,
-            this.gridColumnSubType});
+            this.gridColumnSubType,
+            this.gridColumnFile});
 			this.gridViewData.GridControl = this.gridControlData;
 			this.gridViewData.Name = "gridViewData";
 			this.gridViewData.OptionsBehavior.Editable = false;
@@ -125,7 +127,7 @@
 			this.gridColumnDate.Name = "gridColumnDate";
 			this.gridColumnDate.Visible = true;
 			this.gridColumnDate.VisibleIndex = 0;
-			this.gridColumnDate.Width = 99;
+			this.gridColumnDate.Width = 243;
 			// 
 			// repositoryItemDateEditDate
 			// 
@@ -147,7 +149,7 @@
 			this.gridColumnLogin.Name = "gridColumnLogin";
 			this.gridColumnLogin.Visible = true;
 			this.gridColumnLogin.VisibleIndex = 1;
-			this.gridColumnLogin.Width = 94;
+			this.gridColumnLogin.Width = 231;
 			// 
 			// gridColumnType
 			// 
@@ -156,7 +158,7 @@
 			this.gridColumnType.Name = "gridColumnType";
 			this.gridColumnType.Visible = true;
 			this.gridColumnType.VisibleIndex = 2;
-			this.gridColumnType.Width = 146;
+			this.gridColumnType.Width = 258;
 			// 
 			// gridColumnSubType
 			// 
@@ -165,7 +167,7 @@
 			this.gridColumnSubType.Name = "gridColumnSubType";
 			this.gridColumnSubType.Visible = true;
 			this.gridColumnSubType.VisibleIndex = 3;
-			this.gridColumnSubType.Width = 297;
+			this.gridColumnSubType.Width = 258;
 			// 
 			// styleManager
 			// 
@@ -204,6 +206,15 @@
 			this.printableComponentLink.PrintingSystemBase = this.printingSystem;
 			this.printableComponentLink.CreateReportHeaderArea += new DevExpress.XtraPrinting.CreateAreaEventHandler(this.printableComponentLink_CreateReportHeaderArea);
 			// 
+			// gridColumnFile
+			// 
+			this.gridColumnFile.Caption = "File";
+			this.gridColumnFile.FieldName = "File";
+			this.gridColumnFile.Name = "gridColumnFile";
+			this.gridColumnFile.Visible = true;
+			this.gridColumnFile.VisibleIndex = 4;
+			this.gridColumnFile.Width = 758;
+			// 
 			// RawDataControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -236,5 +247,6 @@
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnSubType;
 		private DevExpress.XtraPrinting.PrintingSystem printingSystem;
 		private DevExpress.XtraPrinting.PrintableComponentLink printableComponentLink;
+		private DevExpress.XtraGrid.Columns.GridColumn gridColumnFile;
     }
 }

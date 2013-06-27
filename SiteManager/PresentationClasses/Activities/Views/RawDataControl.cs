@@ -138,6 +138,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 		{
 			gridColumnType.Visible = _filterControl.ShowActionGroup;
 			gridColumnSubType.Visible = _filterControl.ShowAction;
+			gridColumnFile.Visible = _filterControl.ShowFile;
 			gridViewData.OptionsView.ShowPreview = _filterControl.ShowDetails;
 		}
 
