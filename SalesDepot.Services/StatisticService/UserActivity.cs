@@ -18,6 +18,21 @@ namespace SalesDepot.Services.StatisticService
 			}
 		}
 
+		public string File
+		{
+			get
+			{
+				if ((subType.Equals("Open") || subType.Equals("Play Video")) && details != null)
+					return details.Where(d => d.tag.ToLower().Equals("file")).Select(d =>
+																						 {
+																							 if (d.value.Contains("?version="))
+																								 return d.value.Substring(0, d.value.IndexOf("?version="));
+																							 return d.value;
+																						 }).FirstOrDefault();
+				return String.Empty;
+			}
+		}
+
 		public string Details
 		{
 			get

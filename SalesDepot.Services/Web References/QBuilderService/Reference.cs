@@ -447,7 +447,7 @@ namespace SalesDepot.Services.QBuilderService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#emailLink", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string emailLink(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode) {
+        public string emailLink(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, string logo, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy) {
             object[] results = this.Invoke("emailLink", new object[] {
                         sessionKey,
                         login,
@@ -456,23 +456,23 @@ namespace SalesDepot.Services.QBuilderService {
                         createDate,
                         expiresInDays,
                         restricted,
-                        showLinkToMainSite,
                         logo,
-                        showTicker,
                         disableBanners,
                         disableWidgets,
+                        showLinksAsUrl,
                         recordActivity,
-                        pinCode});
+                        pinCode,
+                        activityEmailCopy});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode) {
-            this.emailLinkAsync(sessionKey, login, linkId, subtitle, createDate, expiresInDays, restricted, showLinkToMainSite, logo, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, null);
+        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, string logo, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy) {
+            this.emailLinkAsync(sessionKey, login, linkId, subtitle, createDate, expiresInDays, restricted, logo, disableBanners, disableWidgets, showLinksAsUrl, recordActivity, pinCode, activityEmailCopy, null);
         }
         
         /// <remarks/>
-        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, object userState) {
+        public void emailLinkAsync(string sessionKey, string login, string linkId, string subtitle, string createDate, int expiresInDays, bool restricted, string logo, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy, object userState) {
             if ((this.emailLinkOperationCompleted == null)) {
                 this.emailLinkOperationCompleted = new System.Threading.SendOrPostCallback(this.OnemailLinkOperationCompleted);
             }
@@ -484,13 +484,13 @@ namespace SalesDepot.Services.QBuilderService {
                         createDate,
                         expiresInDays,
                         restricted,
-                        showLinkToMainSite,
                         logo,
-                        showTicker,
                         disableBanners,
                         disableWidgets,
+                        showLinksAsUrl,
                         recordActivity,
-                        pinCode}, this.emailLinkOperationCompleted, userState);
+                        pinCode,
+                        activityEmailCopy}, this.emailLinkOperationCompleted, userState);
         }
         
         private void OnemailLinkOperationCompleted(object arg) {
@@ -660,7 +660,7 @@ namespace SalesDepot.Services.QBuilderService {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:QbuilderControllerwsdl#savePageContent", RequestNamespace="urn:QbuilderControllerwsdl", ResponseNamespace="urn:QbuilderControllerwsdl")]
-        public void savePageContent(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, string logo) {
+        public void savePageContent(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy, string logo) {
             this.Invoke("savePageContent", new object[] {
                         sessionKey,
                         pageId,
@@ -670,18 +670,18 @@ namespace SalesDepot.Services.QBuilderService {
                         footer,
                         expirationDate,
                         requireLogin,
-                        showLinkToMainSite,
-                        showTicker,
                         disableBanners,
                         disableWidgets,
+                        showLinksAsUrl,
                         recordActivity,
                         pinCode,
+                        activityEmailCopy,
                         logo});
         }
         
         /// <remarks/>
-        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool showLinkToMainSite, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, string logo) {
-            this.savePageContentAsync(sessionKey, pageId, title, description, header, footer, expirationDate, requireLogin, showLinkToMainSite, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, logo, null);
+        public void savePageContentAsync(string sessionKey, string pageId, string title, string description, string header, string footer, string expirationDate, bool requireLogin, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy, string logo) {
+            this.savePageContentAsync(sessionKey, pageId, title, description, header, footer, expirationDate, requireLogin, disableBanners, disableWidgets, showLinksAsUrl, recordActivity, pinCode, activityEmailCopy, logo, null);
         }
         
         /// <remarks/>
@@ -694,12 +694,12 @@ namespace SalesDepot.Services.QBuilderService {
                     string footer, 
                     string expirationDate, 
                     bool requireLogin, 
-                    bool showLinkToMainSite, 
-                    bool showTicker, 
                     bool disableBanners, 
                     bool disableWidgets, 
+                    bool showLinksAsUrl, 
                     bool recordActivity, 
                     string pinCode, 
+                    string activityEmailCopy, 
                     string logo, 
                     object userState) {
             if ((this.savePageContentOperationCompleted == null)) {
@@ -714,12 +714,12 @@ namespace SalesDepot.Services.QBuilderService {
                         footer,
                         expirationDate,
                         requireLogin,
-                        showLinkToMainSite,
-                        showTicker,
                         disableBanners,
                         disableWidgets,
+                        showLinksAsUrl,
                         recordActivity,
                         pinCode,
+                        activityEmailCopy,
                         logo}, this.savePageContentOperationCompleted, userState);
         }
         
@@ -845,17 +845,17 @@ namespace SalesDepot.Services.QBuilderService {
         
         private bool isRestrictedField;
         
-        private bool showLinkMainSiteField;
-        
-        private bool showTickerField;
-        
         private bool disableBannersField;
         
         private bool disableWidgetsField;
         
+        private bool showLinksAsUrlField;
+        
         private bool recordActivityField;
         
         private string pinCodeField;
+        
+        private string activityEmailCopyField;
         
         private string logoField;
         
@@ -972,26 +972,6 @@ namespace SalesDepot.Services.QBuilderService {
         }
         
         /// <remarks/>
-        public bool showLinkMainSite {
-            get {
-                return this.showLinkMainSiteField;
-            }
-            set {
-                this.showLinkMainSiteField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public bool showTicker {
-            get {
-                return this.showTickerField;
-            }
-            set {
-                this.showTickerField = value;
-            }
-        }
-        
-        /// <remarks/>
         public bool disableBanners {
             get {
                 return this.disableBannersField;
@@ -1012,6 +992,16 @@ namespace SalesDepot.Services.QBuilderService {
         }
         
         /// <remarks/>
+        public bool showLinksAsUrl {
+            get {
+                return this.showLinksAsUrlField;
+            }
+            set {
+                this.showLinksAsUrlField = value;
+            }
+        }
+        
+        /// <remarks/>
         public bool recordActivity {
             get {
                 return this.recordActivityField;
@@ -1028,6 +1018,16 @@ namespace SalesDepot.Services.QBuilderService {
             }
             set {
                 this.pinCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string activityEmailCopy {
+            get {
+                return this.activityEmailCopyField;
+            }
+            set {
+                this.activityEmailCopyField = value;
             }
         }
         

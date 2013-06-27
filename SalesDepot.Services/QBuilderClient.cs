@@ -285,7 +285,7 @@ namespace SalesDepot.Services
 			return result;
 		}
 
-		public void SavePageContent(string pageId, string title, string description, string header, string footer, string expirationDate, bool restricted, bool showLinkToMainSite, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, string logo, out string message)
+		public void SavePageContent(string pageId, string title, string description, string header, string footer, string expirationDate, bool restricted, bool disableBanners, bool disableWidgets, bool showLinsAsUrl, bool recordActivity, string pinCode, string activityEmailCopy, string logo, out string message)
 		{
 			message = String.Empty;
 			var client = GetQBuilderClient();
@@ -295,7 +295,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.savePageContent(sessionKey, pageId, title, description, header, footer, expirationDate, restricted, showLinkToMainSite, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, logo);
+						client.savePageContent(sessionKey, pageId, title, description, header, footer, expirationDate, restricted, disableBanners, disableWidgets, showLinsAsUrl, recordActivity, pinCode, activityEmailCopy, logo);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -358,7 +358,7 @@ namespace SalesDepot.Services
 			return pageId;
 		}
 
-		public string EmailWebLink(string linkId, string title, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode, out string message)
+		public string EmailWebLink(string linkId, string title, int expiresInDays, bool restricted, string logo, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy, out string message)
 		{
 			message = String.Empty;
 			var result = String.Empty;
@@ -369,7 +369,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						result = client.emailLink(sessionKey, _login, linkId, title, DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), expiresInDays, restricted, showLinkToMainSite, logo, showTicker, disableBanners, disableWidgets, recordActivity, pinCode);
+						result = client.emailLink(sessionKey, _login, linkId, title, DateTime.Now.ToString("MM/dd/yyyy hh:mm tt"), expiresInDays, restricted, logo, disableBanners, disableWidgets, showLinksAsUrl, recordActivity, pinCode, activityEmailCopy);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}

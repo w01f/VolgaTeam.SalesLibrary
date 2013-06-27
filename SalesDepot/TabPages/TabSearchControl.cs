@@ -119,7 +119,7 @@ namespace SalesDepot.TabPages
 					FormMain.Instance.ribbonControl.Enabled = false;
 				var thread = new Thread(delegate()
 											{
-												Invoke((MethodInvoker)delegate
+												FormMain.Instance.Invoke((MethodInvoker)delegate
 																							{
 																								foreach (IFileViewer file in _fileViewers)
 																									file.ReleaseResources();

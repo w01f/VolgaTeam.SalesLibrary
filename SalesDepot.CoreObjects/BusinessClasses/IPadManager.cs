@@ -359,7 +359,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.order = libraryFile.Order;
 			destinationLink.type = (int)libraryFile.Type;
 			destinationLink.enableWidget = libraryFile.EnableWidget;
-			destinationLink.widget = Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[])));
+			destinationLink.widget = libraryFile.EnableWidget ? Convert.ToBase64String((byte[])imageConverter.ConvertTo(libraryFile.Widget, typeof(byte[]))) : null;
 			if (topLevelFile.CustomKeywords.Tags.Count > 0)
 				destinationLink.tags = string.Join(" ", topLevelFile.CustomKeywords.Tags.Select(x => x.Name).ToArray());
 			destinationLink.isRestricted = topLevelFile.IsRestricted;

@@ -286,6 +286,12 @@
     <Compile Include="ToolForms\QBuilderForms\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormBrowserSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\QBuilderForms\FormBrowserSelector.Designer.cs">
+      <DependentUpon>FormBrowserSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\Settings\FormAuthorizeWarning.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -564,6 +570,10 @@
     <EmbeddedResource Include="ToolForms\QBuilderForms\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\QBuilderForms\FormBrowserSelector.resx">
+      <DependentUpon>FormBrowserSelector.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\Settings\FormAuthorizeWarning.resx">
       <DependentUpon>FormAuthorizeWarning.cs</DependentUpon>
     </EmbeddedResource>
@@ -809,6 +819,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\QBuilderBrowserOpera.png" />
+    <None Include="Resources\QBuilderBrowserInternetExplorer.png" />
+    <None Include="Resources\QBuilderBrowserFirefox.png" />
+    <None Include="Resources\QBuilderBrowserChrome.png" />
+    <None Include="Resources\SearchBarHelp.png" />
     <None Include="Resources\SearchBarEmailBin.png" />
     <None Include="Resources\QuickViewAdd.png" />
     <None Include="Resources\QuickViewAddAll.png" />
@@ -876,7 +891,6 @@
     <None Include="Resources\Help.png" />
     <None Include="Resources\ClassicView.png" />
     <None Include="Resources\EmptyImage.png" />
-    <None Include="Resources\ChangeEmailName.png" />
     <None Include="Resources\SearchRecentFiles.png" />
     <None Include="Resources\SearchLinkName.png" />
     <None Include="Resources\CalendarEditButton.png" />

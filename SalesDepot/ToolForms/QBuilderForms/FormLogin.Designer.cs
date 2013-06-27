@@ -43,11 +43,13 @@
 			this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControlError = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlDislaimer = new DevExpress.XtraEditors.LabelControl();
+			this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditHost.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditUser.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSave.Properties)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// defaultLookAndFeel
@@ -76,7 +78,7 @@
 			// 
 			// labelControlHost
 			// 
-			this.labelControlHost.Location = new System.Drawing.Point(12, 59);
+			this.labelControlHost.Location = new System.Drawing.Point(12, 68);
 			this.labelControlHost.Name = "labelControlHost";
 			this.labelControlHost.Size = new System.Drawing.Size(27, 16);
 			this.labelControlHost.StyleController = this.styleController;
@@ -85,7 +87,7 @@
 			// 
 			// labelControlUser
 			// 
-			this.labelControlUser.Location = new System.Drawing.Point(12, 92);
+			this.labelControlUser.Location = new System.Drawing.Point(12, 101);
 			this.labelControlUser.Name = "labelControlUser";
 			this.labelControlUser.Size = new System.Drawing.Size(31, 16);
 			this.labelControlUser.StyleController = this.styleController;
@@ -94,7 +96,7 @@
 			// 
 			// labelControlPassword
 			// 
-			this.labelControlPassword.Location = new System.Drawing.Point(12, 124);
+			this.labelControlPassword.Location = new System.Drawing.Point(12, 133);
 			this.labelControlPassword.Name = "labelControlPassword";
 			this.labelControlPassword.Size = new System.Drawing.Size(61, 16);
 			this.labelControlPassword.StyleController = this.styleController;
@@ -103,34 +105,34 @@
 			// 
 			// comboBoxEditHost
 			// 
-			this.comboBoxEditHost.Location = new System.Drawing.Point(84, 56);
+			this.comboBoxEditHost.Location = new System.Drawing.Point(84, 65);
 			this.comboBoxEditHost.Name = "comboBoxEditHost";
 			this.comboBoxEditHost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.comboBoxEditHost.Size = new System.Drawing.Size(232, 22);
+			this.comboBoxEditHost.Size = new System.Drawing.Size(265, 22);
 			this.comboBoxEditHost.StyleController = this.styleController;
 			this.comboBoxEditHost.TabIndex = 3;
 			// 
 			// textEditUser
 			// 
-			this.textEditUser.Location = new System.Drawing.Point(84, 89);
+			this.textEditUser.Location = new System.Drawing.Point(84, 98);
 			this.textEditUser.Name = "textEditUser";
-			this.textEditUser.Size = new System.Drawing.Size(232, 22);
+			this.textEditUser.Size = new System.Drawing.Size(265, 22);
 			this.textEditUser.StyleController = this.styleController;
 			this.textEditUser.TabIndex = 4;
 			// 
 			// textEditPassword
 			// 
-			this.textEditPassword.Location = new System.Drawing.Point(84, 121);
+			this.textEditPassword.Location = new System.Drawing.Point(84, 130);
 			this.textEditPassword.Name = "textEditPassword";
 			this.textEditPassword.Properties.PasswordChar = '*';
-			this.textEditPassword.Size = new System.Drawing.Size(232, 22);
+			this.textEditPassword.Size = new System.Drawing.Size(265, 22);
 			this.textEditPassword.StyleController = this.styleController;
 			this.textEditPassword.TabIndex = 5;
 			// 
 			// checkEditSave
 			// 
-			this.checkEditSave.Location = new System.Drawing.Point(10, 159);
+			this.checkEditSave.Location = new System.Drawing.Point(10, 168);
 			this.checkEditSave.Name = "checkEditSave";
 			this.checkEditSave.Properties.Caption = "Save Password";
 			this.checkEditSave.Size = new System.Drawing.Size(306, 21);
@@ -144,7 +146,7 @@
 			this.simpleButtonLogin.Appearance.ForeColor = System.Drawing.Color.Black;
 			this.simpleButtonLogin.Appearance.Options.UseFont = true;
 			this.simpleButtonLogin.Appearance.Options.UseForeColor = true;
-			this.simpleButtonLogin.Location = new System.Drawing.Point(55, 213);
+			this.simpleButtonLogin.Location = new System.Drawing.Point(55, 217);
 			this.simpleButtonLogin.Name = "simpleButtonLogin";
 			this.simpleButtonLogin.Size = new System.Drawing.Size(93, 34);
 			this.simpleButtonLogin.StyleController = this.styleController;
@@ -160,7 +162,7 @@
 			this.simpleButtonCancel.Appearance.Options.UseFont = true;
 			this.simpleButtonCancel.Appearance.Options.UseForeColor = true;
 			this.simpleButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-			this.simpleButtonCancel.Location = new System.Drawing.Point(180, 213);
+			this.simpleButtonCancel.Location = new System.Drawing.Point(204, 217);
 			this.simpleButtonCancel.Name = "simpleButtonCancel";
 			this.simpleButtonCancel.Size = new System.Drawing.Size(93, 34);
 			this.simpleButtonCancel.StyleController = this.styleController;
@@ -172,7 +174,7 @@
 			this.labelControlError.Appearance.ForeColor = System.Drawing.Color.Red;
 			this.labelControlError.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.labelControlError.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
-			this.labelControlError.Location = new System.Drawing.Point(12, 186);
+			this.labelControlError.Location = new System.Drawing.Point(24, 195);
 			this.labelControlError.Name = "labelControlError";
 			this.labelControlError.Size = new System.Drawing.Size(304, 13);
 			this.labelControlError.TabIndex = 9;
@@ -185,20 +187,32 @@
 			this.labelControlDislaimer.Appearance.ForeColor = System.Drawing.Color.Red;
 			this.labelControlDislaimer.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.labelControlDislaimer.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
-			this.labelControlDislaimer.Dock = System.Windows.Forms.DockStyle.Top;
-			this.labelControlDislaimer.Location = new System.Drawing.Point(0, 0);
+			this.labelControlDislaimer.Location = new System.Drawing.Point(55, 0);
 			this.labelControlDislaimer.Name = "labelControlDislaimer";
 			this.labelControlDislaimer.Padding = new System.Windows.Forms.Padding(3, 5, 3, 0);
-			this.labelControlDislaimer.Size = new System.Drawing.Size(328, 41);
+			this.labelControlDislaimer.Size = new System.Drawing.Size(294, 59);
 			this.labelControlDislaimer.StyleController = this.styleController;
 			this.labelControlDislaimer.TabIndex = 10;
 			this.labelControlDislaimer.Text = "You must Log into your Cloud Sales Library to create quickSITES on the internet…";
+			// 
+			// pictureBoxHelp
+			// 
+			this.pictureBoxHelp.Image = global::SalesDepot.Properties.Resources.SearchBarHelp;
+			this.pictureBoxHelp.Location = new System.Drawing.Point(3, 5);
+			this.pictureBoxHelp.Name = "pictureBoxHelp";
+			this.pictureBoxHelp.Size = new System.Drawing.Size(48, 48);
+			this.pictureBoxHelp.TabIndex = 11;
+			this.pictureBoxHelp.TabStop = false;
+			this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
+			this.pictureBoxHelp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+			this.pictureBoxHelp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
 			// 
 			// FormLogin
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-			this.ClientSize = new System.Drawing.Size(328, 261);
+			this.ClientSize = new System.Drawing.Size(352, 265);
+			this.Controls.Add(this.pictureBoxHelp);
 			this.Controls.Add(this.labelControlDislaimer);
 			this.Controls.Add(this.labelControlError);
 			this.Controls.Add(this.simpleButtonCancel);
@@ -223,6 +237,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditUser.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditSave.Properties)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -244,5 +259,6 @@
 		private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
 		private DevExpress.XtraEditors.LabelControl labelControlError;
 		private DevExpress.XtraEditors.LabelControl labelControlDislaimer;
+		private System.Windows.Forms.PictureBox pictureBoxHelp;
 	}
 }

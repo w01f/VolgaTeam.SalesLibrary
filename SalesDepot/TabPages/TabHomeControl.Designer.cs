@@ -32,6 +32,7 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabHomeControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
 			DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
 			DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
 			DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
@@ -47,6 +48,8 @@
 			DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
 			DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
 			DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
@@ -56,6 +59,7 @@
 			this.repositoryItemButtonEdit = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
 			this.pnTop = new System.Windows.Forms.Panel();
 			this.laTitle = new System.Windows.Forms.Label();
+			this.pictureBoxHelp = new System.Windows.Forms.PictureBox();
 			this.pnBottom = new System.Windows.Forms.Panel();
 			this.laEmailBinDescription = new System.Windows.Forms.Label();
 			this.buttonXPDF = new DevComponents.DotNetBar.ButtonX();
@@ -88,6 +92,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit)).BeginInit();
 			this.pnTop.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).BeginInit();
 			this.pnBottom.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.barAndDockingController)).BeginInit();
@@ -137,7 +142,7 @@
 			// 
 			this.gridControlFiles.AllowDrop = true;
 			this.gridControlFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.gridControlFiles.Location = new System.Drawing.Point(0, 50);
+			this.gridControlFiles.Location = new System.Drawing.Point(0, 56);
 			this.gridControlFiles.MainView = this.gridViewFiles;
 			this.gridControlFiles.Name = "gridControlFiles";
 			this.gridControlFiles.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -197,24 +202,45 @@
 			// pnTop
 			// 
 			this.pnTop.Controls.Add(this.laTitle);
+			this.pnTop.Controls.Add(this.pictureBoxHelp);
 			this.pnTop.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnTop.Location = new System.Drawing.Point(0, 0);
 			this.pnTop.Name = "pnTop";
 			this.pnTop.Padding = new System.Windows.Forms.Padding(10, 0, 10, 0);
-			this.pnTop.Size = new System.Drawing.Size(0, 50);
+			this.pnTop.Size = new System.Drawing.Size(0, 56);
 			this.pnTop.TabIndex = 2;
 			// 
 			// laTitle
 			// 
-			this.laTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.laTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
 			this.laTitle.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.laTitle.ForeColor = System.Drawing.Color.White;
-			this.laTitle.Location = new System.Drawing.Point(10, 0);
+			this.laTitle.Location = new System.Drawing.Point(63, 0);
 			this.laTitle.Name = "laTitle";
-			this.laTitle.Size = new System.Drawing.Size(0, 50);
+			this.laTitle.Size = new System.Drawing.Size(194, 56);
 			this.laTitle.TabIndex = 4;
 			this.laTitle.Text = "Email Attachments Panel";
 			this.laTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// pictureBoxHelp
+			// 
+			this.pictureBoxHelp.Image = global::SalesDepot.Properties.Resources.SearchBarHelp;
+			this.pictureBoxHelp.Location = new System.Drawing.Point(8, 3);
+			this.pictureBoxHelp.Name = "pictureBoxHelp";
+			this.pictureBoxHelp.Size = new System.Drawing.Size(48, 48);
+			toolTipTitleItem1.Text = "HELP";
+			toolTipItem1.LeftIndent = 6;
+			toolTipItem1.Text = "Learn more about how to EMAIL files from this Sales Library";
+			superToolTip1.Items.Add(toolTipTitleItem1);
+			superToolTip1.Items.Add(toolTipItem1);
+			this.toolTipController.SetSuperTip(this.pictureBoxHelp, superToolTip1);
+			this.pictureBoxHelp.TabIndex = 5;
+			this.pictureBoxHelp.TabStop = false;
+			this.toolTipController.SetTitle(this.pictureBoxHelp, "HELP");
+			this.pictureBoxHelp.Click += new System.EventHandler(this.pictureBoxHelp_Click);
+			this.pictureBoxHelp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
+			this.pictureBoxHelp.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
 			// 
 			// pnBottom
 			// 
@@ -386,9 +412,9 @@
 			this.barCheckItemViewClassic.GroupIndex = 1;
 			this.barCheckItemViewClassic.Id = 8;
 			this.barCheckItemViewClassic.Name = "barCheckItemViewClassic";
-			toolTipItem1.Text = "Columns View";
-			superToolTip1.Items.Add(toolTipItem1);
-			this.barCheckItemViewClassic.SuperTip = superToolTip1;
+			toolTipItem2.Text = "Columns View";
+			superToolTip2.Items.Add(toolTipItem2);
+			this.barCheckItemViewClassic.SuperTip = superToolTip2;
 			// 
 			// barCheckItemViewList
 			// 
@@ -399,9 +425,9 @@
 			this.barCheckItemViewList.GroupIndex = 1;
 			this.barCheckItemViewList.Id = 9;
 			this.barCheckItemViewList.Name = "barCheckItemViewList";
-			toolTipItem2.Text = "List View";
-			superToolTip2.Items.Add(toolTipItem2);
-			this.barCheckItemViewList.SuperTip = superToolTip2;
+			toolTipItem3.Text = "List View";
+			superToolTip3.Items.Add(toolTipItem3);
+			this.barCheckItemViewList.SuperTip = superToolTip3;
 			// 
 			// barCheckItemViewAccordion
 			// 
@@ -412,9 +438,9 @@
 			this.barCheckItemViewAccordion.GroupIndex = 1;
 			this.barCheckItemViewAccordion.Id = 10;
 			this.barCheckItemViewAccordion.Name = "barCheckItemViewAccordion";
-			toolTipItem3.Text = "Accordion View";
-			superToolTip3.Items.Add(toolTipItem3);
-			this.barCheckItemViewAccordion.SuperTip = superToolTip3;
+			toolTipItem4.Text = "Accordion View";
+			superToolTip4.Items.Add(toolTipItem4);
+			this.barCheckItemViewAccordion.SuperTip = superToolTip4;
 			// 
 			// barCheckItemViewTabs
 			// 
@@ -422,9 +448,9 @@
 			this.barCheckItemViewTabs.Glyph = global::SalesDepot.Properties.Resources.TabsView;
 			this.barCheckItemViewTabs.Id = 11;
 			this.barCheckItemViewTabs.Name = "barCheckItemViewTabs";
-			toolTipItem4.Text = "Tabs View";
-			superToolTip4.Items.Add(toolTipItem4);
-			this.barCheckItemViewTabs.SuperTip = superToolTip4;
+			toolTipItem5.Text = "Tabs View";
+			superToolTip5.Items.Add(toolTipItem5);
+			this.barCheckItemViewTabs.SuperTip = superToolTip5;
 			// 
 			// barButtonItemFontUp
 			// 
@@ -434,9 +460,9 @@
 			this.barButtonItemFontUp.Glyph = global::SalesDepot.Properties.Resources.MinibarFontLarger;
 			this.barButtonItemFontUp.Id = 4;
 			this.barButtonItemFontUp.Name = "barButtonItemFontUp";
-			toolTipItem5.Text = "Increase Text Size";
-			superToolTip5.Items.Add(toolTipItem5);
-			this.barButtonItemFontUp.SuperTip = superToolTip5;
+			toolTipItem6.Text = "Increase Text Size";
+			superToolTip6.Items.Add(toolTipItem6);
+			this.barButtonItemFontUp.SuperTip = superToolTip6;
 			// 
 			// barButtonItemFontDown
 			// 
@@ -446,9 +472,9 @@
 			this.barButtonItemFontDown.Glyph = global::SalesDepot.Properties.Resources.MinibarFontSmaller;
 			this.barButtonItemFontDown.Id = 5;
 			this.barButtonItemFontDown.Name = "barButtonItemFontDown";
-			toolTipItem6.Text = "Decrease Text Size";
-			superToolTip6.Items.Add(toolTipItem6);
-			this.barButtonItemFontDown.SuperTip = superToolTip6;
+			toolTipItem7.Text = "Decrease Text Size";
+			superToolTip7.Items.Add(toolTipItem7);
+			this.barButtonItemFontDown.SuperTip = superToolTip7;
 			// 
 			// barButtonItemRowSpaceUp
 			// 
@@ -456,9 +482,9 @@
 			this.barButtonItemRowSpaceUp.Glyph = global::SalesDepot.Properties.Resources.MinibarRowSpaceLarger;
 			this.barButtonItemRowSpaceUp.Id = 15;
 			this.barButtonItemRowSpaceUp.Name = "barButtonItemRowSpaceUp";
-			toolTipItem7.Text = "Increase Line Spacing";
-			superToolTip7.Items.Add(toolTipItem7);
-			this.barButtonItemRowSpaceUp.SuperTip = superToolTip7;
+			toolTipItem8.Text = "Increase Line Spacing";
+			superToolTip8.Items.Add(toolTipItem8);
+			this.barButtonItemRowSpaceUp.SuperTip = superToolTip8;
 			// 
 			// barButtonItemRowSpaceDown
 			// 
@@ -466,9 +492,9 @@
 			this.barButtonItemRowSpaceDown.Glyph = global::SalesDepot.Properties.Resources.MinibarRowSpaceSmaller;
 			this.barButtonItemRowSpaceDown.Id = 16;
 			this.barButtonItemRowSpaceDown.Name = "barButtonItemRowSpaceDown";
-			toolTipItem8.Text = "Decrease Line Spacing";
-			superToolTip8.Items.Add(toolTipItem8);
-			this.barButtonItemRowSpaceDown.SuperTip = superToolTip8;
+			toolTipItem9.Text = "Decrease Line Spacing";
+			superToolTip9.Items.Add(toolTipItem9);
+			this.barButtonItemRowSpaceDown.SuperTip = superToolTip9;
 			// 
 			// barButtonItem1
 			// 
@@ -538,6 +564,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewFiles)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit)).EndInit();
 			this.pnTop.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBoxHelp)).EndInit();
 			this.pnBottom.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.barAndDockingController)).EndInit();
@@ -581,5 +608,6 @@
 		private DevExpress.XtraBars.BarButtonItem barButtonItemRowSpaceDown;
 		private DevExpress.Utils.ToolTipController toolTipController;
 		private System.Windows.Forms.Label laEmailBinDescription;
+		private System.Windows.Forms.PictureBox pictureBoxHelp;
     }
 }

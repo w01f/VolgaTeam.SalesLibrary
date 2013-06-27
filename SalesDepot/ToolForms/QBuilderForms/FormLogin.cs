@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using SalesDepot.BusinessClasses;
 
 namespace SalesDepot.ToolForms.QBuilderForms
 {
@@ -68,5 +69,29 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			}
 			Close();
 		}
+
+		private void pictureBoxHelp_Click(object sender, EventArgs e)
+		{
+			HelpManager.Instance.OpenHelpLink("qslogin");
+		}
+
+		#region Picture Box Clicks Habdlers
+		/// <summary>
+		/// Buttonize the PictureBox 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+		{
+			var pic = (PictureBox)(sender);
+			pic.Top += 1;
+		}
+
+		private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+		{
+			var pic = (PictureBox)(sender);
+			pic.Top -= 1;
+		}
+		#endregion
 	}
 }

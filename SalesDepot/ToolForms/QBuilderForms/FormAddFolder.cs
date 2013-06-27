@@ -56,7 +56,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 				Close();
 			}
 			else
-				AppManager.Instance.ShowWarning("Folder is not available on Selected Site.\nYou may need to select another Site");
+				AppManager.Instance.ShowWarning("This Folder is not yet Available in the Sales Cloud…\nTry again later…");
 		}
 
 		private void simpleButtonLogin_Click(object sender, EventArgs e)

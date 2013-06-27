@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,6 +8,7 @@ using DevExpress.XtraGrid.Views.Layout;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
 using SalesDepot.ToolForms;
+using SalesDepot.ToolForms.QBuilderForms;
 
 namespace SalesDepot.PresentationClasses.QBuilderControls
 {
@@ -47,11 +49,11 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				checkEditRestricted.Checked = page.isRestricted;
 				checkEditPinCode.Checked = !String.IsNullOrEmpty(page.pinCode);
 				textEditPinCode.EditValue = page.pinCode;
-				checkEditShowLinkToMainSite.Checked = page.showLinkMainSite;
-				checkEditShowTicker.Checked = page.showTicker;
 				checkEditDisableBanners.Checked = page.disableBanners;
 				checkEditDisableWidgets.Checked = page.disableWidgets;
+				checkEditShowLinksAsUrl.Checked = page.showLinksAsUrl;
 				checkEditRecordActivity.Checked = page.recordActivity;
+				textEditActivityEmailCopy.EditValue = page.activityEmailCopy;
 
 				gridControlLogoGallery.DataSource = QBuilder.Instance.Logos;
 				var selectedLogo = QBuilder.Instance.Logos.FirstOrDefault(l => l.EncodedImage.Equals(page.logo));
@@ -83,8 +85,6 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				checkEditExpirationDate.Checked = false;
 				dateEditExpirationDate.EditValue = null;
 				checkEditRestricted.Checked = false;
-				checkEditShowLinkToMainSite.Checked = false;
-				checkEditShowTicker.Checked = false;
 
 				gridControlLogoGallery.DataSource = null;
 
@@ -108,11 +108,11 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			page.expirationDate = checkEditExpirationDate.Checked && dateEditExpirationDate.EditValue != null ? dateEditExpirationDate.DateTime.ToString("MM/dd/yyyy") : null;
 			page.isRestricted = checkEditRestricted.Checked;
 			page.pinCode = checkEditPinCode.Checked && textEditPinCode.EditValue != null ? textEditPinCode.EditValue.ToString() : null;
-			page.showLinkMainSite = checkEditShowLinkToMainSite.Checked;
-			page.showTicker = checkEditShowTicker.Checked;
 			page.disableBanners = checkEditDisableBanners.Checked;
 			page.disableWidgets = checkEditDisableWidgets.Checked;
+			page.showLinksAsUrl = checkEditShowLinksAsUrl.Checked;
 			page.recordActivity = checkEditRecordActivity.Checked;
+			page.activityEmailCopy = checkEditRecordActivity.Checked && textEditActivityEmailCopy.EditValue != null ? textEditActivityEmailCopy.EditValue.ToString() : null;
 
 			var selectedLogo = layoutViewLogoGallery.GetFocusedRow() as PageLogo;
 			page.logo = selectedLogo != null ? selectedLogo.EncodedImage : null;
@@ -131,7 +131,43 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 
 		private void hyperLinkEditUrl_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
 		{
-			SavePage();
+			e.Handled = true;
+			using (var form = new FormBrowserSelector())
+			{
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					SavePage();
+					var browser = String.Empty;
+					switch (form.SelectedBrowser)
+					{
+						case FormBrowserSelector.Browser.Chrome:
+							browser = "chrome.exe";
+							break;
+						case FormBrowserSelector.Browser.Firefox:
+							browser = "firefox.exe";
+							break;
+						case FormBrowserSelector.Browser.IE:
+							browser = "iexplore.exe";
+							break;
+						case FormBrowserSelector.Browser.Opera:
+							browser = "opera.exe";
+							break;
+					}
+					try
+					{
+						var process = new Process
+						{
+							StartInfo =
+							{
+								FileName = browser,
+								Arguments = e.EditValue.ToString()
+							}
+						};
+						process.Start();
+					}
+					catch { }
+				}
+			}
 		}
 
 		private void layoutViewLogoGallery_CustomFieldValueStyle(object sender, DevExpress.XtraGrid.Views.Layout.Events.LayoutViewFieldValueStyleEventArgs e)
@@ -205,6 +241,13 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			textEditPinCode.Enabled = checkEditPinCode.Checked;
 			if (!checkEditPinCode.Checked)
 				textEditPinCode.EditValue = null;
+		}
+
+		private void checkEditRecordActivity_CheckedChanged(object sender, EventArgs e)
+		{
+			textEditActivityEmailCopy.Enabled = checkEditRecordActivity.Checked;
+			if (!checkEditRecordActivity.Checked)
+				textEditActivityEmailCopy.EditValue = null;
 		}
 
 		private void dateEditExpirationDate_EditValueChanged(object sender, EventArgs e)

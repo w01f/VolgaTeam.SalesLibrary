@@ -130,13 +130,6 @@ namespace SalesDepot.Properties {
             }
         }
         
-        internal static System.Drawing.Bitmap ChangeEmailName {
-            get {
-                object obj = ResourceManager.GetObject("ChangeEmailName", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
         internal static System.Drawing.Bitmap ClassicView {
             get {
                 object obj = ResourceManager.GetObject("ClassicView", resourceCulture);
@@ -368,6 +361,34 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap QBuilderBrowserChrome {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderBrowserChrome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderBrowserFirefox {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderBrowserFirefox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderBrowserInternetExplorer {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderBrowserInternetExplorer", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap QBuilderBrowserOpera {
+            get {
+                object obj = ResourceManager.GetObject("QBuilderBrowserOpera", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap QBuilderLinkCart {
             get {
                 object obj = ResourceManager.GetObject("QBuilderLinkCart", resourceCulture);
@@ -511,6 +532,13 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap SearchBarEmailBin {
             get {
                 object obj = ResourceManager.GetObject("SearchBarEmailBin", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap SearchBarHelp {
+            get {
+                object obj = ResourceManager.GetObject("SearchBarHelp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

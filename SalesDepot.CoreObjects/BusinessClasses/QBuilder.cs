@@ -213,7 +213,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
-		public string AddPageLite(string linkId, string title, int expiresInDays, bool restricted, bool showLinkToMainSite, string logo, bool showTicker, bool disableBanners, bool disableWidgets, bool recordActivity, string pinCode)
+		public string AddPageLite(string linkId, string title, int expiresInDays, bool restricted, string logo, bool disableBanners, bool disableWidgets, bool showLinksAsUrl, bool recordActivity, string pinCode, string activityEmailCopy)
 		{
 			var message = String.Empty;
 			var result = false;
@@ -222,7 +222,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 										{
 											result = Connection.Client.IsLinkAvailableOnSite(linkId, out message);
 											if (result)
-												url = Connection.Client.EmailWebLink(linkId, title, expiresInDays, restricted, showLinkToMainSite, logo, showTicker, disableBanners, disableWidgets, recordActivity, pinCode, out message);
+												url = Connection.Client.EmailWebLink(linkId, title, expiresInDays, restricted, logo, disableBanners, disableWidgets, showLinksAsUrl, recordActivity, pinCode, activityEmailCopy, out message);
 											result &= String.IsNullOrEmpty(message);
 										});
 			thread.Start();
@@ -326,7 +326,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			var message = String.Empty;
 			var thread = new Thread(delegate()
 			{
-				Connection.Client.SavePageContent(page.id, page.title, page.subtitle, page.header, page.footer, page.expirationDate, page.isRestricted, page.showLinkMainSite, page.showTicker, page.disableBanners, page.disableWidgets, page.recordActivity, page.pinCode, page.logo, out message);
+				Connection.Client.SavePageContent(page.id, page.title, page.subtitle, page.header, page.footer, page.expirationDate, page.isRestricted, page.disableBanners, page.disableWidgets, page.showLinksAsUrl, page.recordActivity, page.pinCode, page.activityEmailCopy, page.logo, out message);
 			});
 			thread.Start();
 			while (thread.IsAlive)

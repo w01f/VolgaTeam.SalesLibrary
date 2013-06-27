@@ -138,10 +138,10 @@
         #endregion
 
 		private DevComponents.DotNetBar.ButtonX buttonXClose;
-		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteEmail;
-		private DevComponents.DotNetBar.ButtonX buttonXQuickSiteAdd;
 		private DevExpress.Utils.ToolTipController toolTipController;
 		public DevComponents.DotNetBar.ButtonX buttonXEmailBin;
+		public DevComponents.DotNetBar.ButtonX buttonXQuickSiteEmail;
+		public DevComponents.DotNetBar.ButtonX buttonXQuickSiteAdd;
 
     }
 }

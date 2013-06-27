@@ -42,14 +42,14 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			textEditTitle.EditValue = null;
 			buttonXExpiresIn_Click(buttonXExpiresIn7, new EventArgs());
 			checkEditRestricted.Checked = false;
-			checkEditShowLinkToMainSite.Checked = false;
 			checkEditPinCode.Checked = false;
 			textEditPinCode.Enabled = false;
 			textEditPinCode.EditValue = null;
-			checkEditShowTicker.Checked = false;
 			checkEditDisableBanners.Checked = false;
 			checkEditDisableWidgets.Checked = false;
+			checkEditShowLinksAsUrl.Checked = false;
 			checkEditRecordActivity.Checked = false;
+			textEditActivityEmailCopy.EditValue = null;
 		}
 
 		private void UpdateControls()
@@ -104,12 +104,12 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			else if (buttonXExpiresIn30.Checked)
 				expiresInDays = 30;
 			var restricted = checkEditRestricted.Checked;
-			var showLinkToMainSite = checkEditShowLinkToMainSite.Checked;
 			var selectedLogo = layoutViewLogoGallery.GetFocusedRow() as PageLogo;
-			var showTicker = checkEditShowTicker.Checked;
 			var disableBanners = checkEditDisableBanners.Checked;
 			var disableWidgets = checkEditDisableWidgets.Checked;
+			var showLinksAsUrl = checkEditShowLinksAsUrl.Checked;
 			var recordActivity = checkEditRecordActivity.Checked;
+			var activityEmailCopy = checkEditRecordActivity.Checked && textEditActivityEmailCopy.EditValue != null && !String.IsNullOrEmpty(textEditActivityEmailCopy.EditValue.ToString()) ? textEditActivityEmailCopy.EditValue.ToString() : null;
 			var pinCode = checkEditPinCode.Checked && textEditPinCode.EditValue != null && !String.IsNullOrEmpty(textEditPinCode.EditValue.ToString()) ? textEditPinCode.EditValue.ToString() : null;
 
 			using (var form = new FormProgress())
@@ -122,13 +122,13 @@ namespace SalesDepot.ToolForms.QBuilderForms
 					title,
 					expiresInDays,
 					restricted,
-					showLinkToMainSite,
 					selectedLogo != null ? selectedLogo.EncodedImage : null,
-					showTicker,
 					disableBanners,
 					disableWidgets,
+					showLinksAsUrl,
 					recordActivity,
-					pinCode
+					pinCode,
+					activityEmailCopy
 					);
 				form.Close();
 			}
@@ -146,7 +146,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 				catch { }
 			}
 			else
-				AppManager.Instance.ShowWarning("Link is not available on Selected Site.\nYou may need to select another Site");
+				AppManager.Instance.ShowWarning("This Link is not yet Available in the Sales Cloud…\nTry again later…");
 		}
 
 		private void simpleButtonLogin_Click(object sender, EventArgs e)
@@ -194,6 +194,13 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			textEditPinCode.Enabled = checkEditPinCode.Checked;
 			if (!checkEditPinCode.Checked)
 				textEditPinCode.EditValue = null;
+		}
+
+		private void checkEditRecordActivity_CheckedChanged(object sender, EventArgs e)
+		{
+			textEditActivityEmailCopy.Enabled = checkEditRecordActivity.Checked;
+			if (!checkEditRecordActivity.Checked)
+				textEditActivityEmailCopy.EditValue = null;
 		}
 	}
 }

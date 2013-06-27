@@ -9,7 +9,6 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using DevComponents.DotNetBar;
-using DevExpress.Utils;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -30,11 +29,10 @@ namespace SalesDepot.TabPages
 	{
 		private readonly SuperTooltipInfo _accordionToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Accordion View", null, null, eTooltipColor.Gray);
 		private readonly SuperTooltipInfo _classicToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Column View", null, null, eTooltipColor.Gray);
+		private readonly SuperTooltipInfo _listToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library List View", null, null, eTooltipColor.Gray);
+		private readonly SuperTooltipInfo _emailToolTip = new SuperTooltipInfo("HELP", "", "", null, null, eTooltipColor.Gray);
 		private readonly string _emailBinFileName = string.Empty;
 		private readonly Dictionary<LibraryLink, string> _emailLinks = new Dictionary<LibraryLink, string>();
-
-		private readonly SuperTooltipInfo _emailToolTip = new SuperTooltipInfo("HELP", "", "Learn more about how to EMAIL files from this Sales Library", null, null, eTooltipColor.Gray);
-		private readonly SuperTooltipInfo _listToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library List View", null, null, eTooltipColor.Gray);
 
 		public AppManager.SingleParamDelegate PageChanged;
 		public AppManager.SingleParamDelegate StationChanged;
@@ -278,11 +276,11 @@ namespace SalesDepot.TabPages
 		private void ChangeView()
 		{
 			if (SettingsManager.Instance.ClassicView)
-				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _classicToolTip);
+				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _classicToolTip);
 			else if (SettingsManager.Instance.ListView)
-				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _listToolTip);
+				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _listToolTip);
 			else if (SettingsManager.Instance.AccordionView)
-				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : _accordionToolTip);
+				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _accordionToolTip);
 			else
 				FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, _classicToolTip);
 			if (_allowToSave)
@@ -384,7 +382,6 @@ namespace SalesDepot.TabPages
 		public void buttonItemEmailBin_CheckedChanged(object sender, EventArgs e)
 		{
 			splitContainerControl.PanelVisibility = FormMain.Instance.buttonItemEmailBin.Checked ? SplitPanelVisibility.Both : SplitPanelVisibility.Panel2;
-			FormMain.Instance.superTooltip.SetSuperTooltip(FormMain.Instance.buttonItemHomeHelp, FormMain.Instance.buttonItemEmailBin.Checked ? _emailToolTip : (FormMain.Instance.TabHome.barCheckItemViewClassic.Checked ? _classicToolTip : _listToolTip));
 			SettingsManager.Instance.ShowEmailBin = FormMain.Instance.buttonItemEmailBin.Checked;
 			SettingsManager.Instance.SaveSettings();
 		}
@@ -394,15 +391,15 @@ namespace SalesDepot.TabPages
 		{
 			if (SettingsManager.Instance.ClassicView)
 			{
-				HelpManager.Instance.OpenHelpLink(FormMain.Instance.buttonItemEmailBin.Checked ? "email" : "classic");
+				HelpManager.Instance.OpenHelpLink("classic");
 			}
 			else if (SettingsManager.Instance.ListView)
 			{
-				HelpManager.Instance.OpenHelpLink(FormMain.Instance.buttonItemEmailBin.Checked ? "email" : "list");
+				HelpManager.Instance.OpenHelpLink("list");
 			}
 			else if (SettingsManager.Instance.AccordionView)
 			{
-				HelpManager.Instance.OpenHelpLink(FormMain.Instance.buttonItemEmailBin.Checked ? "email" : "accordion");
+				HelpManager.Instance.OpenHelpLink("accord");
 			}
 			else
 			{
@@ -681,6 +678,7 @@ namespace SalesDepot.TabPages
 			LoadEmailBin();
 			gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 			LoadEmailBinOptions();
+			UpdateEmailBinButtons();
 		}
 
 		private void LoadEmailBin()
@@ -763,12 +761,21 @@ namespace SalesDepot.TabPages
 						LinkManager.Instance.RequestFile(link);
 						_emailLinks.Add(link, link.LocalPath);
 						SaveEmailBin();
+						UpdateEmailBinButtons();
 						gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 					}
 					else
 						AppManager.Instance.ShowWarning("File is not existed and cannot be added into Email Bin.\n Contact your system administrator");
 				}
 			}
+		}
+
+		private void UpdateEmailBinButtons()
+		{
+			buttonXCreateEmail.Enabled = _emailLinks.Count > 0;
+			buttonXEmptyEmailBin.Enabled = _emailLinks.Count > 0;
+			buttonXPDF.Enabled = _emailLinks.Count > 0;
+			buttonXZip.Enabled = _emailLinks.Count > 0;
 		}
 
 		private void ckConvertPDF_CheckedChanged(object sender, EventArgs e)
@@ -790,6 +797,7 @@ namespace SalesDepot.TabPages
 				_emailLinks.Remove(_emailLinks.Keys.ElementAt(gridViewFiles.GetDataSourceRowIndex(gridViewFiles.FocusedRowHandle)));
 				gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 				SaveEmailBin();
+				UpdateEmailBinButtons();
 			}
 		}
 
@@ -801,6 +809,7 @@ namespace SalesDepot.TabPages
 				_emailLinks.Clear();
 				gridControlFiles.DataSource = new BindingList<LibraryLink>(_emailLinks.Keys.ToArray());
 				SaveEmailBin();
+				UpdateEmailBinButtons();
 			}
 		}
 
@@ -870,6 +879,11 @@ namespace SalesDepot.TabPages
 				LinkManager.Instance.EmailFile(emailFiles.ToArray());
 			if (closePowerPoint)
 				PowerPointHelper.Instance.Disconnect();
+		}
+
+		private void pictureBoxHelp_Click(object sender, EventArgs e)
+		{
+			HelpManager.Instance.OpenHelpLink("email");
 		}
 		#endregion
 
@@ -968,6 +982,25 @@ namespace SalesDepot.TabPages
 					Application.DoEvents();
 				form.Close();
 			}
+		}
+		#endregion
+
+		#region Picture Box Clicks Habdlers
+		/// <summary>
+		/// Buttonize the PictureBox 
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+		{
+			var pic = (PictureBox)(sender);
+			pic.Top += 1;
+		}
+
+		private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+		{
+			var pic = (PictureBox)(sender);
+			pic.Top -= 1;
 		}
 		#endregion
 	}

@@ -77,27 +77,28 @@ namespace SalesDepot.BusinessClasses
 			AppManager.Instance.ActivityManager.AddLinkAccessActivity("Link Access", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 			if (specialOptions)
 			{
-				if (SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0)
-					using (var formViewOptions = new FormLinkSpecialOptions())
+				using (var formViewOptions = new FormLinkSpecialOptions())
+				{
+					formViewOptions.Text = string.Format(formViewOptions.Text, link.Type != FileTypes.LineBreak ? link.Name : "LineBreak");
+					formViewOptions.buttonXQuickSiteAdd.Enabled = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0;
+					formViewOptions.buttonXQuickSiteEmail.Enabled = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0 && (link.Type != FileTypes.LineBreak);
+					formViewOptions.buttonXEmailBin.Enabled = (link.Type != FileTypes.Folder && link.Type != FileTypes.LineBreak);
+					if (formViewOptions.ShowDialog() == DialogResult.OK)
 					{
-						formViewOptions.Text = string.Format(formViewOptions.Text, link.Name);
-						formViewOptions.buttonXEmailBin.Enabled = link.Type != FileTypes.Folder;
-						if (formViewOptions.ShowDialog() == DialogResult.OK)
+						if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
 						{
-							if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteEmail)
-							{
-								EmailLinkToQuickSite(link);
-							}
-							else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
-							{
-								AddLinkToQuickSite(link);
-							}
-							else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.EmailBinAdd)
-							{
-								FormMain.Instance.TabHome.AddToEmailBin(link);
-							}
+							EmailLinkToQuickSite(link);
+						}
+						else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.QuickSiteAdd)
+						{
+							AddLinkToQuickSite(link);
+						}
+						else if (formViewOptions.SelectedOption == FormViewOptions.ViewOptions.EmailBinAdd)
+						{
+							FormMain.Instance.TabHome.AddToEmailBin(link);
 						}
 					}
+				}
 			}
 			else
 			{
@@ -781,7 +782,9 @@ namespace SalesDepot.BusinessClasses
 			{
 				_formQuickSiteAddLink.Init(link);
 				if (_formQuickSiteAddLink.ShowDialog() == DialogResult.OK)
-					AppManager.Instance.ShowInfo("Link successfully added to Site Link Cart");
+					AppManager.Instance.ShowInfo(link.Type!=FileTypes.LineBreak?
+						"Link successfully added to Site Link Cart":
+						"LineBreak successfully added to Site Link Cart");
 			}
 		}
 

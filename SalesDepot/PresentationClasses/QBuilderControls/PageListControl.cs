@@ -118,11 +118,41 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 		public void PreviewPage()
 		{
 			if (SelectedPage == null) return;
-			try
+			using (var form = new FormBrowserSelector())
 			{
-				Process.Start(SelectedPage.url);
+				if (form.ShowDialog() == DialogResult.OK)
+				{
+					var browser = String.Empty;
+					switch (form.SelectedBrowser)
+					{
+						case FormBrowserSelector.Browser.Chrome:
+							browser = "chrome.exe";
+							break;
+						case FormBrowserSelector.Browser.Firefox:
+							browser = "firefox.exe";
+							break;
+						case FormBrowserSelector.Browser.IE:
+							browser = "iexplore.exe";
+							break;
+						case FormBrowserSelector.Browser.Opera:
+							browser = "opera.exe";
+							break;
+					}
+					try
+					{
+						var process = new Process
+						{
+							StartInfo =
+							{
+								FileName = browser,
+								Arguments = SelectedPage.url
+							}
+						};
+						process.Start();
+					}
+					catch{}
+				}
 			}
-			catch { }
 		}
 
 		public void EmailPage()

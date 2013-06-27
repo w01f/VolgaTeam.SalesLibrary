@@ -165,7 +165,7 @@
         XTesb3QPLh88M+QwdP6m681Lt7xuXbu94vbgcOjwnZHokdE77DtTd1PuvriXeW/h/sYH6AdFD6UeVjxS
         fNTws+7PbaOWo6fHXMf6Hwc/vj/OGn/2S8Yv7ycKnpCfVEyqTDZPmU2dmnafvvF05dOJZ+nPFmYKf5X+
         tfa5zvMffnP8rX82YnbiBf/Fp99LXsq/PPRq2aueuYC5R69TXy/MF72Rf3P4LeNt37vwd5MLWe+x7ys/
-        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAAOwAAADsABataJCQAAAX5JREFUWEft17tKw2AY
+        6H7o/ujz8cGn1E+f/gUDmPP8usTo0wAAAAlwSFlzAAAOvAAADrwBlbxySQAAAX5JREFUWEft17tKw2AY
         xvFOSSt4FYI34OANOIhOOrrpVbgU7SS6CI5uHcRJnFw8DOqggt6GLh5w8TQY/0/5Uj6+vK01JhYkw48c
         3jff+zQEktaSJBmq7k4URbU4jjN03tW28YGHb7yj7V1nGjiAuNoukgHt91tPfhwAO+xbwzLo3csTYILC
         Ipbc1reAS5gDDTfQNeE6WlsmrQDrFKzFCsesLSvAGsXPsLkMzNq0AmxYzWXodQemKK6ghdWSaO0Ws6at
@@ -175,13 +175,13 @@
         xSzsAMOR1L4ANHBMP+gEyAYAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="toolTipController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>330, 14</value>
+  </metadata>
   <metadata name="barManager.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <metadata name="barAndDockingController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>135, 17</value>
-  </metadata>
-  <metadata name="toolTipController.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>330, 14</value>
   </metadata>
 </root>

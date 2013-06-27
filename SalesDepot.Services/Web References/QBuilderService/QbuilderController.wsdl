@@ -28,12 +28,12 @@
           <xsd:element name="header" type="xsd:string" />
           <xsd:element name="footer" type="xsd:string" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
-          <xsd:element name="showLinkMainSite" type="xsd:boolean" />
-          <xsd:element name="showTicker" type="xsd:boolean" />
           <xsd:element name="disableBanners" type="xsd:boolean" />
           <xsd:element name="disableWidgets" type="xsd:boolean" />
+          <xsd:element name="showLinksAsUrl" type="xsd:boolean" />
           <xsd:element name="recordActivity" type="xsd:boolean" />
           <xsd:element name="pinCode" type="xsd:string" />
+          <xsd:element name="activityEmailCopy" type="xsd:string" />
           <xsd:element name="logo" type="xsd:string" />
           <xsd:element name="links" type="tns:QPageLinkRecordArray" />
           <xsd:element name="login" type="xsd:string" />
@@ -133,13 +133,13 @@
     <wsdl:part name="createDate" type="xsd:string" />
     <wsdl:part name="expiresInDays" type="xsd:int" />
     <wsdl:part name="restricted" type="xsd:boolean" />
-    <wsdl:part name="showLinkToMainSite" type="xsd:boolean" />
     <wsdl:part name="logo" type="xsd:string" />
-    <wsdl:part name="showTicker" type="xsd:boolean" />
     <wsdl:part name="disableBanners" type="xsd:boolean" />
     <wsdl:part name="disableWidgets" type="xsd:boolean" />
+    <wsdl:part name="showLinksAsUrl" type="xsd:boolean" />
     <wsdl:part name="recordActivity" type="xsd:boolean" />
     <wsdl:part name="pinCode" type="xsd:string" />
+    <wsdl:part name="activityEmailCopy" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="emailLinkResponse">
     <wsdl:part name="return" type="xsd:string" />
@@ -183,12 +183,12 @@
     <wsdl:part name="footer" type="xsd:string" />
     <wsdl:part name="expirationDate" type="xsd:string" />
     <wsdl:part name="requireLogin" type="xsd:boolean" />
-    <wsdl:part name="showLinkToMainSite" type="xsd:boolean" />
-    <wsdl:part name="showTicker" type="xsd:boolean" />
     <wsdl:part name="disableBanners" type="xsd:boolean" />
     <wsdl:part name="disableWidgets" type="xsd:boolean" />
+    <wsdl:part name="showLinksAsUrl" type="xsd:boolean" />
     <wsdl:part name="recordActivity" type="xsd:boolean" />
     <wsdl:part name="pinCode" type="xsd:string" />
+    <wsdl:part name="activityEmailCopy" type="xsd:string" />
     <wsdl:part name="logo" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="savePageContentResponse" />

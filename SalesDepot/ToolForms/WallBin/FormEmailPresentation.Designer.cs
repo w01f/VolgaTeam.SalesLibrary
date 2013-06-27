@@ -31,13 +31,11 @@
 			this.rbAllSlides = new System.Windows.Forms.RadioButton();
 			this.rbActiveSlide = new System.Windows.Forms.RadioButton();
 			this.ckConvertToPDF = new System.Windows.Forms.CheckBox();
-			this.pbChangeName = new System.Windows.Forms.PictureBox();
 			this.pbEmail = new System.Windows.Forms.PictureBox();
 			this.ckChangeEmailName = new System.Windows.Forms.CheckBox();
 			this.textEditEmailName = new DevExpress.XtraEditors.TextEdit();
 			this.buttonXEmail = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXCancel = new DevComponents.DotNetBar.ButtonX();
-			((System.ComponentModel.ISupportInitialize)(this.pbChangeName)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbEmail)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailName.Properties)).BeginInit();
 			this.SuspendLayout();
@@ -74,16 +72,6 @@
 			this.ckConvertToPDF.TabIndex = 3;
 			this.ckConvertToPDF.Text = "Convert to PDF then Email it";
 			this.ckConvertToPDF.UseVisualStyleBackColor = true;
-			// 
-			// pbChangeName
-			// 
-			this.pbChangeName.Image = global::SalesDepot.Properties.Resources.ChangeEmailName;
-			this.pbChangeName.Location = new System.Drawing.Point(1, 125);
-			this.pbChangeName.Name = "pbChangeName";
-			this.pbChangeName.Size = new System.Drawing.Size(72, 67);
-			this.pbChangeName.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pbChangeName.TabIndex = 4;
-			this.pbChangeName.TabStop = false;
 			// 
 			// pbEmail
 			// 
@@ -156,7 +144,6 @@
 			this.Controls.Add(this.buttonXEmail);
 			this.Controls.Add(this.textEditEmailName);
 			this.Controls.Add(this.ckChangeEmailName);
-			this.Controls.Add(this.pbChangeName);
 			this.Controls.Add(this.ckConvertToPDF);
 			this.Controls.Add(this.rbActiveSlide);
 			this.Controls.Add(this.rbAllSlides);
@@ -171,7 +158,6 @@
 			this.Text = "Email Presentation - {0}";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormEmailPresentation_FormClosed);
 			this.Load += new System.EventHandler(this.FormEmailPresentation_Load);
-			((System.ComponentModel.ISupportInitialize)(this.pbChangeName)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pbEmail)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditEmailName.Properties)).EndInit();
 			this.ResumeLayout(false);
@@ -183,8 +169,7 @@
 
         private System.Windows.Forms.PictureBox pbEmail;
         private System.Windows.Forms.RadioButton rbAllSlides;
-        private System.Windows.Forms.CheckBox ckConvertToPDF;
-        private System.Windows.Forms.PictureBox pbChangeName;
+		private System.Windows.Forms.CheckBox ckConvertToPDF;
         private System.Windows.Forms.CheckBox ckChangeEmailName;
         private DevExpress.XtraEditors.TextEdit textEditEmailName;
         private DevComponents.DotNetBar.ButtonX buttonXEmail;

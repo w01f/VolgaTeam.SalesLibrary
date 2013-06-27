@@ -21,6 +21,13 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			QBuilder.Instance.ConnectionChanged -= QBuilderConnectionChanged;
 			QBuilder.Instance.ConnectionChanged += QBuilderConnectionChanged;
 			_sourceLink = link;
+			Text = _sourceLink.Type != FileTypes.LineBreak ?
+				"Add Link to quickSITE" :
+				"Add LinkBreak to quickSITE";
+			labelControlSiteTitle.Text = _sourceLink.Type != FileTypes.LineBreak ?
+				"You are about to add link to Link Cart on Selected site:" :
+				"You are about to add this LineBreak to Link Cart on Selected site:";
+			labelControlLinkName.Text = String.Format("Link: {0}", _sourceLink.Type != FileTypes.LineBreak ? _sourceLink.Name : String.Format("LineBreak{0}", !String.IsNullOrEmpty(_sourceLink.Name) ? String.Format(" ({0})", _sourceLink.Name) : String.Empty));
 			UpdateControls();
 		}
 
@@ -32,7 +39,6 @@ namespace SalesDepot.ToolForms.QBuilderForms
 		private void UpdateControls()
 		{
 			labelControlSiteValue.Text = QBuilder.Instance.Connected ? String.Format("Site: {0}", QBuilder.Instance.Connection.Client.Website) : "Not Selected";
-			labelControlLinkName.Text = String.Format("Link: {0}", _sourceLink.Name);
 		}
 
 		private void simpleButtonAddLink_Click(object sender, EventArgs e)
@@ -57,7 +63,9 @@ namespace SalesDepot.ToolForms.QBuilderForms
 				Close();
 			}
 			else
-				AppManager.Instance.ShowWarning("Link is not available on Selected Site.\nYou may need to select another Site");
+				AppManager.Instance.ShowWarning(_sourceLink.Type != FileTypes.LineBreak ?
+					"This Link is not yet Available in the Sales Cloud…\nTry again later…":
+					"This LineBreak is not yet Available in the Sales Cloud…\nTry again later…");
 		}
 
 		private void simpleButtonLogin_Click(object sender, EventArgs e)
