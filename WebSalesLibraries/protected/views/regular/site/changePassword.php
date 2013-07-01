@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '5.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -24,7 +24,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 	<tr>
 		<td colspan="2">
 			<br> You are logged as: <?php echo $formData->login ?>
-			<br> You need to change your temporary password
+			<br><b>Create your NEW Password for the site:</b>
 			<?php
 			echo $form->textField($formData, 'login'
 				, array(
@@ -55,6 +55,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 			echo $form->textField($formData, 'newInitialPassword'
 				, array(
 					'input type' => 'Password',
+					'id' => 'edit-field-password',
 					'class' => 'edit-field')
 			);
 			?>
@@ -71,6 +72,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 			echo $form->textField($formData, 'newRepeatPassword'
 				, array(
 					'input type' => 'Password',
+					'id' => 'edit-field-password-confirm',
 					'class' => 'edit-field')
 			);
 			?>
@@ -91,10 +93,14 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<? if (Yii::app()->params['login']['complex_password']): ?>
+			<td>
+				<a id="password-requirements" class="btn">Password Requirements</a>
+			</td>
+		<? endif;?>
+		<td <? if (!Yii::app()->params['login']['complex_password']): ?>colspan="2"<?endif;?>>
 			<?php
-			echo CHtml::submitButton('Save'
-				, array('class' => 'btn'));
+			echo CHtml::submitButton('Save', array('id' => 'button-change-password', 'class' => 'btn'));
 			?>
 		</td>
 	</tr>

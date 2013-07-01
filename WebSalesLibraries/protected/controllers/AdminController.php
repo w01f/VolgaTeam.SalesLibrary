@@ -183,6 +183,18 @@
 
 		/**
 		 * @param string Session Key
+		 * @return bool
+		 * @soap
+		 */
+		public function isUserPasswordComplex($sessionKey)
+		{
+			if ($this->authenticateBySession($sessionKey))
+				return Yii::app()->params['login']['complex_password'];
+			return true;
+		}
+
+		/**
+		 * @param string Session Key
 		 * @param string id
 		 * @param string name
 		 * @param UserRecord[] assigned users

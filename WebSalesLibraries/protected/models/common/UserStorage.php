@@ -33,13 +33,75 @@
 
 		public static function generatePassword()
 		{
-			$alphabet = "abcdefghijklmnopqrstuwxyz0123456789";
-			for ($i = 0; $i < 5; $i++)
+			$pass = '';
+			if (Yii::app()->params['login']['complex_password'])
+				$pass = self::generateStrongPassword();
+			else
 			{
-				$n = rand(0, strlen($alphabet) - 1);
-				$pass[$i] = $alphabet[$n];
+				$alphabet = "abcdefghijklmnopqrstuwxyz0123456789";
+				for ($i = 0; $i < 5; $i++)
+				{
+					$n = rand(0, strlen($alphabet) - 1);
+					$pass[$i] = $alphabet[$n];
+				}
+				$pass = implode($pass);
 			}
-			return implode($pass);
+			return $pass;
+		}
+
+		public static function generateStrongPassword()
+		{
+			$out = '';
+			$l = 10;
+			$c = 2;
+			$n = 2;
+			$s = 2;
+			// get count of all required minimum special chars
+			$count = $c + $n + $s;
+
+			// change these strings if you want to include or exclude possible password characters
+			$chars = "abcdefghijklmnopqrstuvwxyz";
+			$caps = strtoupper($chars);
+			$nums = "0123456789";
+			$syms = "!@#$%^&*()-+?";
+
+			// build the base password of all lower-case letters
+			for ($i = 0; $i < $l; $i++)
+			{
+				$out .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+			}
+
+			// create arrays if special character(s) required
+			if ($count)
+			{
+				// split base password to array; create special chars array
+				$tmp1 = str_split($out);
+				$tmp2 = array();
+
+				// add required special character(s) to second array
+				for ($i = 0; $i < $c; $i++)
+				{
+					array_push($tmp2, substr($caps, mt_rand(0, strlen($caps) - 1), 1));
+				}
+				for ($i = 0; $i < $n; $i++)
+				{
+					array_push($tmp2, substr($nums, mt_rand(0, strlen($nums) - 1), 1));
+				}
+				for ($i = 0; $i < $s; $i++)
+				{
+					array_push($tmp2, substr($syms, mt_rand(0, strlen($syms) - 1), 1));
+				}
+
+				// hack off a chunk of the base password array that's as big as the special chars array
+				$tmp1 = array_slice($tmp1, 0, $l - $count);
+				// merge special character(s) array with base password array
+				$tmp1 = array_merge($tmp1, $tmp2);
+				// mix the characters up
+				shuffle($tmp1);
+				// convert to string for output
+				$out = implode('', $tmp1);
+			}
+			return $out;
 		}
 
 		public static function validateUserByEmail($login, $email)

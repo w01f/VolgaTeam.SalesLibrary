@@ -514,6 +514,7 @@
 					switch ($format)
 					{
 						case 'ppt':
+						case 'lp':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
@@ -601,6 +602,7 @@
 					switch ($format)
 					{
 						case 'doc':
+						case 'lp':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
@@ -688,6 +690,7 @@
 					switch ($format)
 					{
 						case 'xls':
+						case 'lp':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
@@ -700,6 +703,7 @@
 					switch ($format)
 					{
 						case 'pdf':
+						case 'lp':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
@@ -783,6 +787,7 @@
 					{
 						case 'jpeg':
 						case 'png':
+						case 'lp':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
@@ -795,6 +800,7 @@
 					switch ($format)
 					{
 						case 'key':
+						case 'lp':
 							$viewSources[] = array('href' => $this->fileLink);
 							break;
 						case 'outlook':
@@ -834,6 +840,7 @@
 							}
 							break;
 						case 'tab':
+						case 'lp':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
@@ -870,6 +877,7 @@
 							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName);
 							break;
 						case 'tab':
+						case 'lp':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
@@ -892,6 +900,7 @@
 					switch ($format)
 					{
 						case 'mp4':
+						case 'lp':
 							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							if (isset($this->universalPreview->ogvLinks))
 								foreach ($this->universalPreview->ogvLinks as $link)

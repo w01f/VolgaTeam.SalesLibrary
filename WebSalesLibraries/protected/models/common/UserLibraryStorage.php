@@ -31,7 +31,7 @@ class UserLibraryStorage extends CActiveRecord
 
     public static function assignUsersForPage($page, $users)
     {
-        self::clearObjectsByUser($page->id);
+        self::clearObjectsByPage($page->id);
         foreach ($users as $user)
         {
             $userLibraryRecord = new UserLibraryStorage();

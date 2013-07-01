@@ -234,6 +234,7 @@
 					switch ($format)
 					{
 						case 'ppt':
+						case 'lp':
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
@@ -321,6 +322,7 @@
 					switch ($format)
 					{
 						case 'doc':
+						case 'lp':
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
@@ -408,6 +410,7 @@
 					switch ($format)
 					{
 						case 'xls':
+						case 'lp':
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
@@ -420,6 +423,7 @@
 					switch ($format)
 					{
 						case 'pdf':
+						case 'lp':
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
@@ -503,6 +507,7 @@
 					{
 						case 'jpeg':
 						case 'png':
+						case 'lp':
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
@@ -519,6 +524,7 @@
 					switch ($format)
 					{
 						case 'key':
+						case 'lp':
 							$viewSources[] = array('href' => $this->link);
 							break;
 						case 'email':
@@ -559,6 +565,7 @@
 							}
 							break;
 						case 'tab':
+						case 'lp':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
@@ -595,6 +602,7 @@
 							}
 							break;
 						case 'tab':
+						case 'lp':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
@@ -612,6 +620,7 @@
 					switch ($format)
 					{
 						case 'mp4':
+						case 'lp':
 							$viewSources[] = array('src' => $this->link, 'href' => $this->link, 'title' => $this->name, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
 							if (isset($this->universalPreview->ogvLinks))
 								foreach ($this->universalPreview->ogvLinks as $link)

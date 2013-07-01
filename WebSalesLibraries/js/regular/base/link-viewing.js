@@ -921,6 +921,7 @@
 						case 'video':
 						case 'tab':
 						case 'ogv':
+						case 'lp':
 							$.ajax({
 								type: "POST",
 								url: "statistic/writeActivity",

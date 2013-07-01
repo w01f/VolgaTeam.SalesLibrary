@@ -1,5 +1,5 @@
 <?php
-$version = '1.0';
+$version = '2.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -64,7 +64,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
+			<td colspan="2" style="height: auto;">
 				<?php
 				echo $form->error($formData, 'login'
 					, array('class' => 'error-message')
@@ -76,6 +76,11 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 				<br>
 			</td>
 		</tr>
+		<? if (Yii::app()->params['login']['complex_password']): ?>
+			<td colspan="2">
+				<a id="password-requirements" class="btn">Password Requirements</a><br><br>
+			</td>
+		<? endif;?>
 		<?php if (Yii::app()->params['login']['disclaimer']): ?>
 			<tr>
 				<td colspan="2">

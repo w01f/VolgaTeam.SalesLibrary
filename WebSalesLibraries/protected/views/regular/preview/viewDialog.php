@@ -119,6 +119,22 @@
 						</div>
 					</li>
 				<?php endif; ?>
+				<?php if ($link->browser == 'mobile'): ?>
+					<li class="multi-column">
+						<img src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'lp.png')); ?>"/>
+						<div class="service-data">
+							<div class="link-id"><?php echo $link->id; ?></div>
+							<div class="link-name"><?php echo $link->name; ?></div>
+							<div class="file-name"><?php echo $link->fileName; ?></div>
+							<div class="file-type"><?php echo $link->originalFormat; ?></div>
+							<div class="view-type">lp</div>
+							<?php $viewLinks = $link->getViewSource('lp'); ?>
+							<?php if (isset($viewLinks)): ?>
+								<div class="links"><?php echo json_encode($viewLinks); ?></div>
+							<?php endif; ?>
+						</div>
+					</li>
+				<?php endif; ?>
 			</ul>
 		<?php endif; ?>
 	<?php else: ?>
