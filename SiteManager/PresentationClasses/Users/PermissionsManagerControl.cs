@@ -22,6 +22,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		private readonly List<GroupRecord> _groups = new List<GroupRecord>();
 		private readonly List<Library> _libraries = new List<Library>();
 		private readonly List<UserRecord> _users = new List<UserRecord>();
+		private bool _complexPassword = true;
 		private bool _groupsCollectionChanged;
 		private bool _libraraiesCollectionChanged;
 		private bool _userCollectionChanged;
@@ -116,7 +117,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						form.TopMost = true;
 						var thread = new Thread(() =>
 													{
-														IEnumerable<UserInfo> users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), out message);
+														IEnumerable<UserInfo> users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message);
 														if (string.IsNullOrEmpty(message))
 															BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
 													});
@@ -208,7 +209,11 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					Enabled = false;
 					form.laProgress.Text = "Loading users...";
 					form.TopMost = true;
-					var thread = new Thread(() => _users.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetUsers(out message)));
+					var thread = new Thread(() =>
+												{
+													_complexPassword = BusinessClasses.SiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
+													_users.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetUsers(out message));
+												});
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -225,7 +230,11 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 			}
 			else
 			{
-				var thread = new Thread(() => _users.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetUsers(out message)));
+				var thread = new Thread(() =>
+				{
+					_complexPassword = BusinessClasses.SiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
+					_users.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetUsers(out message));
+				});
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -242,7 +251,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		public void AddUser()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditUser(true, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupRecord { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupRecord { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
@@ -290,7 +299,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 			string message = string.Empty;
 			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
 			if (userRecord == null) return;
-			using (var formEdit = new FormEditUser(false, _users.Select(x => x.login).ToArray(),
+			using (var formEdit = new FormEditUser(false, _complexPassword, _users.Select(x => x.login).ToArray(),
 												   _groups.Select(x => new GroupRecord
 																	   {
 																		   id = x.id,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Linq;
+using System.Web.Security;
 using SalesDepot.Services.IPadAdminService;
 using SalesDepot.Services.TickerService;
 using SalesDepot.SiteManager.ToolClasses;
@@ -11,7 +12,7 @@ namespace SalesDepot.SiteManager.BusinessClasses
 {
 	public class ImportManager
 	{
-		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserRecord[] existedUsers, GroupRecord[] existedGroups, out string message)
+		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserRecord[] existedUsers, GroupRecord[] existedGroups, bool complexPassword, out string message)
 		{
 			message = string.Empty;
 			var userInfo = new List<UserInfo>();
@@ -48,7 +49,7 @@ namespace SalesDepot.SiteManager.BusinessClasses
 
 						var user = new UserInfo();
 						user.Login = login.ToLower().Trim();
-						user.Password = newUser ? (new PasswordGenerator()).Generate() : String.Empty;
+						user.Password = newUser ? (complexPassword ? Membership.GeneratePassword(10, 3) : (new PasswordGenerator()).Generate()) : String.Empty;
 						user.FirstName = firtsName.Trim();
 						user.LastName = lastName.Trim();
 						user.Email = email.ToLower().Trim();

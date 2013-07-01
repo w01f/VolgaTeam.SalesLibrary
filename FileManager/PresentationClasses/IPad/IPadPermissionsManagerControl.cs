@@ -23,6 +23,7 @@ namespace FileManager.PresentationClasses.IPad
 		private readonly List<Library> _libraries = new List<Library>();
 		private readonly List<UserRecord> _users = new List<UserRecord>();
 		private readonly List<string> _groupTemplates = new List<string>();
+		private bool _complexPassword = true;
 		private bool _groupsCollectionChanged;
 		private bool _libraraiesCollectionChanged;
 		private bool _userCollectionChanged;
@@ -166,7 +167,11 @@ namespace FileManager.PresentationClasses.IPad
 					Enabled = false;
 					form.laProgress.Text = "Loading users...";
 					form.TopMost = true;
-					var thread = new Thread(() => _users.AddRange(ParentDecorator.Library.IPadManager.GetUsers(out message)));
+					var thread = new Thread(() =>
+					{
+						_complexPassword = ParentDecorator.Library.IPadManager.IsUserPasswordComplex(out message);
+						_users.AddRange(ParentDecorator.Library.IPadManager.GetUsers(out message));
+					});
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -183,7 +188,11 @@ namespace FileManager.PresentationClasses.IPad
 			}
 			else
 			{
-				var thread = new Thread(() => _users.AddRange(ParentDecorator.Library.IPadManager.GetUsers(out message)));
+				var thread = new Thread(() =>
+				{
+					_complexPassword = ParentDecorator.Library.IPadManager.IsUserPasswordComplex(out message);
+					_users.AddRange(ParentDecorator.Library.IPadManager.GetUsers(out message));
+				});
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -201,7 +210,7 @@ namespace FileManager.PresentationClasses.IPad
 		public void AddUser()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditUser(true, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupRecord { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupRecord { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
@@ -250,7 +259,7 @@ namespace FileManager.PresentationClasses.IPad
 			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
 			if (userRecord != null)
 			{
-				using (var formEdit = new FormEditUser(false, _users.Select(x => x.login).ToArray(),
+				using (var formEdit = new FormEditUser(false, _complexPassword, _users.Select(x => x.login).ToArray(),
 									   _groups.Select(x => new GroupRecord
 									   {
 										   id = x.id,

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Web.Security;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
@@ -13,6 +14,7 @@ namespace FileManager.ToolForms.IPad
 	public partial class FormEditUser : Form
 	{
 		private bool _newUser = false;
+		private bool _complexPassword = true;
 		private List<string> _existedUsers = new List<string>();
 
 		private List<GroupRecord> _groups = new List<GroupRecord>();
@@ -29,11 +31,12 @@ namespace FileManager.ToolForms.IPad
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditUser(bool newUser, string[] existedUsers, GroupRecord[] groups, Library[] libraries)
+		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, GroupRecord[] groups, Library[] libraries)
 		{
 			InitializeComponent();
 
 			_newUser = newUser;
+			_complexPassword = complexPassword;
 			_existedUsers.AddRange(existedUsers);
 
 			_groups.AddRange(groups);
@@ -145,7 +148,7 @@ namespace FileManager.ToolForms.IPad
 
 		private void buttonEditPassword_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
-			buttonEditPassword.EditValue = new ToolClasses.PasswordGenerator().Generate();
+			buttonEditPassword.EditValue = _complexPassword ? Membership.GeneratePassword(10, 3) : new ToolClasses.PasswordGenerator().Generate();
 		}
 		#endregion
 

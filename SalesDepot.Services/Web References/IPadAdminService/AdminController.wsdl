@@ -180,6 +180,7 @@
           <xsd:element name="enableAttachments" type="xsd:boolean" />
           <xsd:element name="attachments" type="tns:AttachmentArray" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="isDead" type="xsd:boolean" />
           <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
@@ -362,6 +363,12 @@
   <wsdl:message name="getUsersResponse">
     <wsdl:part name="return" type="tns:UserRecordArray" />
   </wsdl:message>
+  <wsdl:message name="isUserPasswordComplexRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="isUserPasswordComplexResponse">
+    <wsdl:part name="return" type="xsd:boolean" />
+  </wsdl:message>
   <wsdl:message name="setGroupRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="id" type="xsd:string" />
@@ -424,6 +431,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:getUsersRequest" />
       <wsdl:output message="tns:getUsersResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="isUserPasswordComplex">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:isUserPasswordComplexRequest" />
+      <wsdl:output message="tns:isUserPasswordComplexResponse" />
     </wsdl:operation>
     <wsdl:operation name="setGroup">
       <wsdl:documentation>
@@ -493,6 +506,15 @@
     </wsdl:operation>
     <wsdl:operation name="getUsers">
       <soap:operation soapAction="urn:AdminControllerwsdl#getUsers" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUserPasswordComplex">
+      <soap:operation soapAction="urn:AdminControllerwsdl#isUserPasswordComplex" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:AdminControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

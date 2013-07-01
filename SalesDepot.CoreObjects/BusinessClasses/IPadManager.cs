@@ -533,6 +533,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#region Permissions Manager
 
 		#region Users
+		public bool IsUserPasswordComplex(out string message)
+		{
+			return _siteClient.IsUserPasswordComplex(out message);
+		}
+
 		public UserRecord[] GetUsers(out string message)
 		{
 			return _siteClient.GetUsers(out message);

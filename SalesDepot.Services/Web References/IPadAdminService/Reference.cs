@@ -48,6 +48,8 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private System.Threading.SendOrPostCallback getUsersOperationCompleted;
         
+        private System.Threading.SendOrPostCallback isUserPasswordComplexOperationCompleted;
+        
         private System.Threading.SendOrPostCallback setGroupOperationCompleted;
         
         private System.Threading.SendOrPostCallback deleteGroupOperationCompleted;
@@ -109,6 +111,9 @@ namespace SalesDepot.Services.IPadAdminService {
         
         /// <remarks/>
         public event getUsersCompletedEventHandler getUsersCompleted;
+        
+        /// <remarks/>
+        public event isUserPasswordComplexCompletedEventHandler isUserPasswordComplexCompleted;
         
         /// <remarks/>
         public event setGroupCompletedEventHandler setGroupCompleted;
@@ -263,6 +268,36 @@ namespace SalesDepot.Services.IPadAdminService {
             if ((this.getUsersCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.getUsersCompleted(this, new getUsersCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:AdminControllerwsdl#isUserPasswordComplex", RequestNamespace="urn:AdminControllerwsdl", ResponseNamespace="urn:AdminControllerwsdl")]
+        [return: System.Xml.Serialization.SoapElementAttribute("return")]
+        public bool isUserPasswordComplex(string sessionKey) {
+            object[] results = this.Invoke("isUserPasswordComplex", new object[] {
+                        sessionKey});
+            return ((bool)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void isUserPasswordComplexAsync(string sessionKey) {
+            this.isUserPasswordComplexAsync(sessionKey, null);
+        }
+        
+        /// <remarks/>
+        public void isUserPasswordComplexAsync(string sessionKey, object userState) {
+            if ((this.isUserPasswordComplexOperationCompleted == null)) {
+                this.isUserPasswordComplexOperationCompleted = new System.Threading.SendOrPostCallback(this.OnisUserPasswordComplexOperationCompleted);
+            }
+            this.InvokeAsync("isUserPasswordComplex", new object[] {
+                        sessionKey}, this.isUserPasswordComplexOperationCompleted, userState);
+        }
+        
+        private void OnisUserPasswordComplexOperationCompleted(object arg) {
+            if ((this.isUserPasswordComplexCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.isUserPasswordComplexCompleted(this, new isUserPasswordComplexCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -2418,6 +2453,8 @@ namespace SalesDepot.Services.IPadAdminService {
         
         private bool isRestrictedField;
         
+        private bool noShareField;
+        
         private string assignedUsersField;
         
         private bool isDeadField;
@@ -2727,6 +2764,16 @@ namespace SalesDepot.Services.IPadAdminService {
         }
         
         /// <remarks/>
+        public bool noShare {
+            get {
+                return this.noShareField;
+            }
+            set {
+                this.noShareField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string assignedUsers {
             get {
                 return this.assignedUsersField;
@@ -2823,6 +2870,32 @@ namespace SalesDepot.Services.IPadAdminService {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((UserRecord[])(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    public delegate void isUserPasswordComplexCompletedEventHandler(object sender, isUserPasswordComplexCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class isUserPasswordComplexCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal isUserPasswordComplexCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public bool Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((bool)(this.results[0]));
             }
         }
     }

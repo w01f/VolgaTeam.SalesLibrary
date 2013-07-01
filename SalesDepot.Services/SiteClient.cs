@@ -127,6 +127,31 @@ namespace SalesDepot.Services
 		}
 
 		#region Users
+		public bool IsUserPasswordComplex(out string message)
+		{
+			message = string.Empty;
+			bool result = true;
+			var client = GetAdminClient();
+			if (client != null)
+			{
+				try
+				{
+					string sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						result = client.isUserPasswordComplex(sessionKey);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return result;
+		}
+
 		public UserRecord[] GetUsers(out string message)
 		{
 			message = string.Empty;
