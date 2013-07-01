@@ -522,6 +522,13 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap QuickViewUserSettings {
+            get {
+                object obj = ResourceManager.GetObject("QuickViewUserSettings", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap SearchBarEmail {
             get {
                 object obj = ResourceManager.GetObject("SearchBarEmail", resourceCulture);

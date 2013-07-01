@@ -10,8 +10,6 @@ namespace SalesDepot.PresentationClasses.Viewers
 	[ToolboxItem(false)]
 	public partial class VideoViewer : UserControl, IFileViewer
 	{
-		private FileInfo _tempCopy;
-
 		#region Properties
 		public LibraryLink File { get; private set; }
 
@@ -38,13 +36,6 @@ namespace SalesDepot.PresentationClasses.Viewers
 			Visible = false;
 
 			File = file;
-			if (System.IO.File.Exists(File.LocalPath))
-			{
-				string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileName(File.LocalPath));
-				System.IO.File.Copy(File.LocalPath, tempPath, true);
-				_tempCopy = new FileInfo(tempPath);
-			}
-
 			axWindowsMediaPlayer.URL = File.LocalPath;
 		}
 

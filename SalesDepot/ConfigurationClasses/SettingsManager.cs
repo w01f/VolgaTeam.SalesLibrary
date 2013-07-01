@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.ToolForms.Settings;
 
 namespace SalesDepot.ConfigurationClasses
 {
@@ -38,9 +39,14 @@ namespace SalesDepot.ConfigurationClasses
 		private static readonly SettingsManager _instance = new SettingsManager();
 		private readonly string _appIDFile = string.Empty;
 		private readonly string _configurationPath = string.Empty;
-
 		private readonly string _defaultSettingsFilePath = string.Empty;
 		private readonly string _defaultViewPath = string.Empty;
+
+		private readonly string _defaultOpenFilePath = string.Empty;
+		private readonly string _defaultSaveFilePath = string.Empty;
+		private string _openFilePath = string.Empty;
+		private string _saveFilePath = string.Empty;
+
 
 		private readonly string _localLibraryLogoFolder = string.Empty;
 		private readonly string _localLibraryRootFolder = string.Empty;
@@ -49,6 +55,62 @@ namespace SalesDepot.ConfigurationClasses
 		private readonly string _viewButtonsPath = string.Empty;
 		private string _remoteLibraryLogoFolder = string.Empty;
 		private string _remoteLibraryRootFolder = string.Empty;
+
+		private SettingsManager()
+		{
+			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\sales depot\Settings", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_localSettingsFilePath = Path.Combine(settingsFolderPath, "ApplicationSettings.xml");
+			_remoteSettingsFilePath = Path.Combine(settingsFolderPath, "RemoteApplicationSettings.xml");
+			_defaultSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ResetSettings.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_defaultViewPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\defaultview.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_appIDFile = string.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_configurationPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Config.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_defaultOpenFilePath = string.Format(@"{0}\newlocaldirect.com\Sync\Temp", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			_defaultSaveFilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+			LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			TempPath = _defaultOpenFilePath;
+			IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			LibraryLogoFolder = string.Empty;
+			CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+
+			DefaultWizard = string.Empty;
+			SalesDepotName = string.Empty;
+			KeyWordFilters = new KeyWordFileFilters();
+
+			LoadAppID();
+
+			ActivityFolder = string.Format(@"{0}\newlocaldirect.com\sync\outgoing\AppID-{1}\user_data\sales_library", new[] { Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), AppID.ToString() });
+			if (!Directory.Exists(ActivityFolder))
+				Directory.CreateDirectory(ActivityFolder);
+
+			#region Program Manager Settings
+			ProgramScheduleShowInfo = true;
+			ProgramScheduleOutputSettings = new ProgramOutputSettings();
+			OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
+			#endregion
+
+			QBuilderSettings = new QBuilderSettings();
+
+			HiddenObjects = new List<string>();
+			HiddenObjects.Add("!Old");
+			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
+			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
+			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
+			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
+			HiddenObjects.Add(Constants.AttachmentsRootFolderName);
+			HiddenObjects.Add("thumbs.db");
+			HiddenObjects.Add("SalesDepotCache.xml");
+		}
 
 		public bool IsConfigured { get; set; }
 		public bool UseRemoteConnection { get; set; }
@@ -117,6 +179,28 @@ namespace SalesDepot.ConfigurationClasses
 
 		public QBuilderSettings QBuilderSettings { get; private set; }
 
+		public string OpenFilePath
+		{
+			get
+			{
+				if (!String.IsNullOrEmpty(_openFilePath) && Directory.Exists(_openFilePath))
+					return _openFilePath;
+				return _defaultOpenFilePath;
+			}
+			set { _openFilePath = value; }
+		}
+		public string SaveFilePath
+		{
+			get
+			{
+				if (!String.IsNullOrEmpty(_saveFilePath) && Directory.Exists(_saveFilePath))
+					return _saveFilePath;
+				return _defaultSaveFilePath;
+			}
+			set { _saveFilePath = value; }
+		}
+
+
 		public static SettingsManager Instance
 		{
 			get { return _instance; }
@@ -129,60 +213,6 @@ namespace SalesDepot.ConfigurationClasses
 		public ProgramOutputSettings ProgramScheduleOutputSettings { get; private set; }
 		public string OutputCache { get; private set; }
 		#endregion
-
-		private SettingsManager()
-		{
-			string settingsFolderPath = string.Format(@"{0}\newlocaldirect.com\xml\sales depot\Settings", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_localSettingsFilePath = Path.Combine(settingsFolderPath, "ApplicationSettings.xml");
-			_remoteSettingsFilePath = Path.Combine(settingsFolderPath, "RemoteApplicationSettings.xml");
-			_defaultSettingsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ResetSettings.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_defaultViewPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\defaultview.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_viewButtonsPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\viewbuttons.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_appIDFile = string.Format(@"{0}\newlocaldirect.com\xml\app\AppID.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_configurationPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Config.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-
-			_localLibraryRootFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			_localLibraryLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\!SD-Graphics\libraries", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			LocalLibraryCacheFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Remote Libraries\Local Cache", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			DefaultWizardFileName = string.Format(@"{0}\newlocaldirect.com\New Biz Wizard\settings\DefaultWizard.ini", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			ContentsSlidePath = string.Format(@"{0}\newlocaldirect.com\01. file sync\Master Wizards\", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			TempPath = string.Format(@"{0}\newlocaldirect.com\Sync\Temp", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			IconPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\sdicon.ico", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			LibraryLogoFolder = string.Empty;
-			CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-
-			DefaultWizard = string.Empty;
-			SalesDepotName = string.Empty;
-			KeyWordFilters = new KeyWordFileFilters();
-
-			LoadAppID();
-
-			ActivityFolder = string.Format(@"{0}\newlocaldirect.com\sync\outgoing\AppID-{1}\user_data\sales_library", new[] { Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), AppID.ToString() });
-			if (!Directory.Exists(ActivityFolder))
-				Directory.CreateDirectory(ActivityFolder);
-
-			#region Program Manager Settings
-			ProgramScheduleShowInfo = true;
-			ProgramScheduleOutputSettings = new ProgramOutputSettings();
-			OutputCache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Program Schedules");
-			#endregion
-
-			QBuilderSettings = new QBuilderSettings();
-
-			HiddenObjects = new List<string>();
-			HiddenObjects.Add("!Old");
-			HiddenObjects.Add(Constants.RegularPreviewContainersRootFolderName);
-			HiddenObjects.Add(Constants.OvernightsCalendarRootFolderName);
-			HiddenObjects.Add(Constants.ProgramManagerRootFolderName);
-			HiddenObjects.Add(Constants.ExtraFoldersRootFolderName);
-			HiddenObjects.Add(Constants.AttachmentsRootFolderName);
-			HiddenObjects.Add("thumbs.db");
-			HiddenObjects.Add("SalesDepotCache.xml");
-		}
 
 		private void LoadDefaultViewSettings()
 		{
@@ -277,7 +307,6 @@ namespace SalesDepot.ConfigurationClasses
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn4tooltip");
 				if (node != null)
 					AccordionDescription = node.InnerText;
-
 			}
 		}
 
@@ -532,6 +561,12 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						MultitabView = tempBool;
+				node = document.SelectSingleNode(@"/LocalSettings/OpenFilePath");
+				if (node != null)
+					OpenFilePath = node.InnerText;
+				node = document.SelectSingleNode(@"/LocalSettings/SaveFilePath");
+				if (node != null)
+					SaveFilePath = node.InnerText;
 			}
 
 			UpdateSetingsAccordingConfiguration();
@@ -564,6 +599,10 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<HomeView>" + HomeView.ToString() + @"</HomeView>");
 			xml.AppendLine(@"<SearchView>" + SearchView.ToString() + @"</SearchView>");
 			xml.AppendLine(@"<CalendarView>" + CalendarView.ToString() + @"</CalendarView>");
+			if (!String.IsNullOrEmpty(_openFilePath))
+				xml.AppendLine(@"<OpenFilePath>" + _openFilePath + @"</OpenFilePath>");
+			if (!String.IsNullOrEmpty(_saveFilePath))
+				xml.AppendLine(@"<SaveFilePath>" + _saveFilePath + @"</SaveFilePath>");
 			if (LastViewed || UseRemoteConnection)
 			{
 				xml.AppendLine(@"<ClassicView>" + ClassicView.ToString() + @"</ClassicView>");
@@ -656,6 +695,14 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (!string.IsNullOrEmpty(node.InnerText))
 						AppID = new Guid(node.InnerText);
+			}
+		}
+
+		public void FileLocationSettings()
+		{
+			using (var form = new FormFileSettings())
+			{
+				form.ShowDialog();
 			}
 		}
 	}

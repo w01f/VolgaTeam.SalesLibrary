@@ -32,11 +32,10 @@
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnNavigationArea = new System.Windows.Forms.Panel();
-			this.laSlideSize = new System.Windows.Forms.Label();
-			this.laFileInfo = new System.Windows.Forms.Label();
-			this.laSlideNumber = new System.Windows.Forms.Label();
 			this.comboBoxEditSlides = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.pictureBoxPreview = new System.Windows.Forms.PictureBox();
+			this.laFileInfo = new System.Windows.Forms.Label();
+			this.laSlideNumber = new System.Windows.Forms.Label();
 			this.pnNavigationArea.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.comboBoxEditSlides.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxPreview)).BeginInit();
@@ -45,7 +44,6 @@
 			// pnNavigationArea
 			// 
 			this.pnNavigationArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.pnNavigationArea.Controls.Add(this.laSlideSize);
 			this.pnNavigationArea.Controls.Add(this.laFileInfo);
 			this.pnNavigationArea.Controls.Add(this.laSlideNumber);
 			this.pnNavigationArea.Controls.Add(this.comboBoxEditSlides);
@@ -54,42 +52,6 @@
 			this.pnNavigationArea.Name = "pnNavigationArea";
 			this.pnNavigationArea.Size = new System.Drawing.Size(705, 67);
 			this.pnNavigationArea.TabIndex = 1;
-			// 
-			// laSlideSize
-			// 
-			this.laSlideSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.laSlideSize.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSlideSize.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(73)))), ((int)(((byte)(125)))));
-			this.laSlideSize.Location = new System.Drawing.Point(456, 0);
-			this.laSlideSize.Name = "laSlideSize";
-			this.laSlideSize.Size = new System.Drawing.Size(242, 31);
-			this.laSlideSize.TabIndex = 8;
-			this.laSlideSize.Text = "label1";
-			this.laSlideSize.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
-			// laFileInfo
-			// 
-			this.laFileInfo.Dock = System.Windows.Forms.DockStyle.Left;
-			this.laFileInfo.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laFileInfo.ForeColor = System.Drawing.Color.White;
-			this.laFileInfo.Location = new System.Drawing.Point(0, 0);
-			this.laFileInfo.Name = "laFileInfo";
-			this.laFileInfo.Size = new System.Drawing.Size(244, 63);
-			this.laFileInfo.TabIndex = 7;
-			this.laFileInfo.Text = "label1";
-			this.laFileInfo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// laSlideNumber
-			// 
-			this.laSlideNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.laSlideNumber.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.laSlideNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(73)))), ((int)(((byte)(125)))));
-			this.laSlideNumber.Location = new System.Drawing.Point(456, 32);
-			this.laSlideNumber.Name = "laSlideNumber";
-			this.laSlideNumber.Size = new System.Drawing.Size(242, 31);
-			this.laSlideNumber.TabIndex = 6;
-			this.laSlideNumber.Text = "label1";
-			this.laSlideNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// comboBoxEditSlides
 			// 
@@ -126,6 +88,28 @@
 			this.pictureBoxPreview.TabStop = false;
 			this.pictureBoxPreview.DoubleClick += new System.EventHandler(this.pictureBoxPreview_DoubleClick);
 			// 
+			// laFileInfo
+			// 
+			this.laFileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.laFileInfo.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laFileInfo.Location = new System.Drawing.Point(470, 39);
+			this.laFileInfo.Name = "laFileInfo";
+			this.laFileInfo.Size = new System.Drawing.Size(230, 20);
+			this.laFileInfo.TabIndex = 10;
+			this.laFileInfo.Text = " ";
+			this.laFileInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// laSlideNumber
+			// 
+			this.laSlideNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.laSlideNumber.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.laSlideNumber.Location = new System.Drawing.Point(466, 4);
+			this.laSlideNumber.Name = "laSlideNumber";
+			this.laSlideNumber.Size = new System.Drawing.Size(234, 35);
+			this.laSlideNumber.TabIndex = 9;
+			this.laSlideNumber.Text = " ";
+			this.laSlideNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
 			// PowerPointViewer
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -146,11 +130,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel pnNavigationArea;
-        private System.Windows.Forms.Label laSlideSize;
-        private System.Windows.Forms.Label laFileInfo;
-        private System.Windows.Forms.Label laSlideNumber;
+		private System.Windows.Forms.Panel pnNavigationArea;
         private DevExpress.XtraEditors.ComboBoxEdit comboBoxEditSlides;
         private System.Windows.Forms.PictureBox pictureBoxPreview;
+		private System.Windows.Forms.Label laFileInfo;
+		private System.Windows.Forms.Label laSlideNumber;
     }
 }

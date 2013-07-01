@@ -139,6 +139,9 @@
   <data name="AuthorizeWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AuthorizeWarning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="QBuilderBrowserOpera" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QBuilderBrowserOpera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Floater" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Floater.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -181,8 +184,8 @@
   <data name="DeleteButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeleteButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MinibarRowSpaceLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MinibarRowSpaceLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EmailBin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmailBin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -220,12 +223,6 @@
   <data name="QBuilderBrowserFirefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderBrowserFirefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Slides" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Slides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SearchBarSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SearchBarSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SearchBarReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -253,6 +250,9 @@
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ProgramBrowseForward" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramBrowseForward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="QBuilderLogout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderLogout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -262,14 +262,20 @@
   <data name="SearchBarPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="QBuilderPagePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QBuilderPagePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="QBuilderPageDelete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderPageDelete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QBuilderBrowserChrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderBrowserChrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgramBrowseForward" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgramBrowseForward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="SearchBarSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SearchBarSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinibarRowSpaceLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinibarRowSpaceLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchBarEmailBin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarEmailBin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,8 +307,8 @@
   <data name="Format_Font_Smaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Format Font Smaller.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="QBuilderPagePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\QBuilderPagePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Slides" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Slides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PackageLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PackageLogo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -321,9 +327,6 @@
   </data>
   <data name="Format_Font_Larger" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Format Font Larger.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProgramOutputPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgramOutputPDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -355,6 +358,9 @@
   <data name="QuickViewAdd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickViewAdd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="QuickViewUserSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuickViewUserSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="EmailBinSend" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmailBinSend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -363,8 +369,5 @@
   </data>
   <data name="CopySmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CopySmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="QBuilderBrowserOpera" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\QBuilderBrowserOpera.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

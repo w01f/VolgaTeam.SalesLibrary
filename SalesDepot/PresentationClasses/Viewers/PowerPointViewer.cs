@@ -53,16 +53,12 @@ namespace SalesDepot.PresentationClasses.Viewers
 				_tempCopy = new FileInfo(tempPath);
 			}
 
-			laFileInfo.Text = string.Empty;
-			laSlideSize.Text = string.Empty;
 			pictureBoxPreview.Image = null;
 			laSlideNumber.Text = string.Empty;
 
 			if (File.PreviewContainer != null)
 			{
-				laFileInfo.Text = File.NameWithExtension + Environment.NewLine + "Added: " + File.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (File.ExpirationDateOptions.EnableExpirationDate && File.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + File.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
-				if (File.PresentationProperties != null)
-					laSlideSize.Text = string.Format("{0} {1} x {2}", new object[] { File.PresentationProperties.Orientation, File.PresentationProperties.Width.ToString("#.##"), File.PresentationProperties.Height.ToString("#.##") });
+				laFileInfo.Text = "File Added: " + File.AddDate.ToString("MM/dd/yy");
 				comboBoxEditSlides.SelectedIndexChanged -= comboBoxEditSlides_SelectedIndexChanged;
 				comboBoxEditSlides.Properties.Items.Clear();
 				comboBoxEditSlides.Properties.Items.AddRange(File.PreviewContainer.Slides.Select(x => x.Index + 1).ToArray());
@@ -257,7 +253,6 @@ namespace SalesDepot.PresentationClasses.Viewers
 		private void pnNavigationArea_Resize(object sender, EventArgs e)
 		{
 			comboBoxEditSlides.Left = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
-			laFileInfo.Width = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
 		}
 
 		private void pictureBoxPreview_DoubleClick(object sender, EventArgs e)

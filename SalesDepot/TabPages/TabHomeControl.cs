@@ -113,6 +113,7 @@ namespace SalesDepot.TabPages
 			FormMain.Instance.buttonItemSettingsQuickViewSlides.Click += buttonItemSettingsQuickView_Click;
 			FormMain.Instance.buttonItemSettingsQuickViewImages.CheckedChanged += buttonItemSettingsQuickViewSettings_CheckedChanged;
 			FormMain.Instance.buttonItemSettingsQuickViewSlides.CheckedChanged += buttonItemSettingsQuickViewSettings_CheckedChanged;
+			FormMain.Instance.buttonItemSettingsFile.Click += buttonItemSettingsFile_Click;
 			FormMain.Instance.buttonItemSettingsEmail.Click += buttonItemSettingsEmail_Click;
 			FormMain.Instance.buttonItemSettingsHelp.Click += buttonItemSettingsHelp_Click;
 
@@ -595,6 +596,11 @@ namespace SalesDepot.TabPages
 				SettingsManager.Instance.OldStyleQuickView = FormMain.Instance.buttonItemSettingsQuickViewSlides.Checked;
 				SettingsManager.Instance.SaveSettings();
 			}
+		}
+
+		public void buttonItemSettingsFile_Click(object sender, EventArgs e)
+		{
+			SettingsManager.Instance.FileLocationSettings();
 		}
 
 		public void buttonItemSettingsEmail_Click(object sender, EventArgs e)

@@ -1,227 +1,226 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Windows.Forms;
+using ProgramManager.CoreObjects;
+using SalesDepot.ConfigurationClasses;
+using SalesDepot.InteropClasses;
+using SalesDepot.ToolClasses;
 
 namespace SalesDepot
 {
-    public class AppManager
-    {
-        private static AppManager _instance = new AppManager();
-        public delegate void NoParamDelegate();
-        public delegate void SingleParamDelegate(object parameter);
-        public ProgramManager.CoreObjects.ApplicationLog Log { get; private set; }
-        public DirectoryInfo TempFolder { get; set; }
-        public ToolClasses.ActivityManager ActivityManager { get; private set; }
+	public class AppManager
+	{
+		#region Delegates
+		public delegate void NoParamDelegate();
 
-        private AppManager()
-        {
-            if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.TempPath))
-                Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.TempPath);
-            this.TempFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.TempPath);
-            this.Log = new ProgramManager.CoreObjects.ApplicationLog(ConfigurationClasses.SettingsManager.Instance.LogFilePath);
-            this.ActivityManager = new ToolClasses.ActivityManager();
-        }
+		public delegate void SingleParamDelegate(object parameter);
+		#endregion
 
-        ~AppManager()
-        {
-            DeleteFolder(this.TempFolder);
-            if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.TempPath))
-                Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.TempPath);
+		private static readonly AppManager _instance = new AppManager();
 
-            DeleteFolder(new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder));
-            if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder) && ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection)
-                Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.LocalLibraryCacheFolder);
-        }
+		private AppManager()
+		{
+			if (!Directory.Exists(SettingsManager.Instance.TempPath))
+				Directory.CreateDirectory(SettingsManager.Instance.TempPath);
+			TempFolder = new DirectoryInfo(SettingsManager.Instance.TempPath);
+			Log = new ApplicationLog(SettingsManager.Instance.LogFilePath);
+			ActivityManager = new ActivityManager();
+		}
 
-        public static AppManager Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+		public ApplicationLog Log { get; private set; }
+		public DirectoryInfo TempFolder { get; set; }
+		public ActivityManager ActivityManager { get; private set; }
 
-        private void ShowMainForm()
-        {
-            Application.Run(FormMain.Instance);
-        }
+		public static AppManager Instance
+		{
+			get { return _instance; }
+		}
 
-        public void RunForm()
-        {
-            AppManager.Instance.ActivityManager.AddUserActivity("Application run");
-            ConfigurationClasses.ListManager.Instance.Init();
-            ShowMainForm();
-        }
+		~AppManager()
+		{
+			DeleteFolder(TempFolder);
+			if (!Directory.Exists(SettingsManager.Instance.TempPath))
+				Directory.CreateDirectory(SettingsManager.Instance.TempPath);
 
-        public void ActivateForm(IntPtr handle, bool maximized, bool topMost)
-        {
-            InteropClasses.WinAPIHelper.ShowWindow(handle, maximized ? InteropClasses.WindowShowStyle.ShowMaximized : InteropClasses.WindowShowStyle.ShowNormal);
-            uint lpdwProcessId = 0;
-            InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-            InteropClasses.WinAPIHelper.SetForegroundWindow(handle);
-            InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-            if (topMost)
-                InteropClasses.WinAPIHelper.MakeTopMost(handle);
-            else
-                InteropClasses.WinAPIHelper.MakeNormal(handle);
-        }
+			DeleteFolder(new DirectoryInfo(SettingsManager.Instance.LocalLibraryCacheFolder));
+			if (!Directory.Exists(SettingsManager.Instance.LocalLibraryCacheFolder) && SettingsManager.Instance.UseRemoteConnection)
+				Directory.CreateDirectory(SettingsManager.Instance.LocalLibraryCacheFolder);
+		}
 
-        public void ActivateMainForm()
-        {
-            IntPtr handle = ConfigurationClasses.RegistryHelper.SalesDepotHandle;
-            if (handle.Equals(IntPtr.Zero))
-            {
-                handle = FormMain.Instance.Handle;
-                if (handle.Equals(IntPtr.Zero))
-                {
-                    Process[] proc = Process.GetProcessesByName("RemoteLibrary");
-                    if (proc.Length > 0)
-                        handle = proc[0].MainWindowHandle;
-                }
-            }
-            ActivateForm(handle, ConfigurationClasses.RegistryHelper.MaximizeSalesDepot, false);
-        }
+		private void ShowMainForm()
+		{
+			Application.Run(FormMain.Instance);
+		}
 
-        public void ActivatePowerPoint()
-        {
-            if (InteropClasses.PowerPointHelper.Instance.PowerPointObject != null)
-            {
-                IntPtr powerPointHandle = new IntPtr(InteropClasses.PowerPointHelper.Instance.PowerPointObject.HWND);
-                InteropClasses.WinAPIHelper.ShowWindow(powerPointHandle, InteropClasses.WindowShowStyle.ShowMaximized);
-                uint lpdwProcessId = 0;
-                InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-                InteropClasses.WinAPIHelper.SetForegroundWindow(powerPointHandle);
-                InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-            }
-            ActivateMiniBar();
-        }
+		public void RunForm()
+		{
+			Instance.ActivityManager.AddUserActivity("Application run");
+			ListManager.Instance.Init();
+			ShowMainForm();
+		}
 
-        public void ActivateMiniBar()
-        {
-            IntPtr minibarHandle = ConfigurationClasses.RegistryHelper.MinibarHandle;
-            if (minibarHandle.ToInt32() == 0)
-            {
-                Process[] processList = Process.GetProcesses();
-                foreach (Process process in processList.Where(x => x.ProcessName.ToLower().Contains("minibar")))
-                {
-                    if (process.MainWindowHandle.ToInt32() != 0)
-                    {
-                        minibarHandle = process.MainWindowHandle;
-                        break;
-                    }
-                }
-            }
-            if (minibarHandle.ToInt32() != 0)
-            {
-                uint lpdwProcessId = 0;
-                InteropClasses.WinAPIHelper.MakeTopMost(minibarHandle);
-                InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-                InteropClasses.WinAPIHelper.SetForegroundWindow(minibarHandle);
-                InteropClasses.WinAPIHelper.AttachThreadInput(InteropClasses.WinAPIHelper.GetCurrentThreadId(), InteropClasses.WinAPIHelper.GetWindowThreadProcessId(InteropClasses.WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-            }
-        }
+		public void ActivateForm(IntPtr handle, bool maximized, bool topMost)
+		{
+			WinAPIHelper.ShowWindow(handle, maximized ? WindowShowStyle.ShowMaximized : WindowShowStyle.ShowNormal);
+			uint lpdwProcessId = 0;
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.SetForegroundWindow(handle);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			if (topMost)
+				WinAPIHelper.MakeTopMost(handle);
+			else
+				WinAPIHelper.MakeNormal(handle);
+		}
 
-        public void RunPowerPointLoader()
-        {
-            if (File.Exists(ConfigurationClasses.SettingsManager.Instance.PowerPointLoaderPath))
-            {
-                Process process = new Process();
-                process.StartInfo.FileName = ConfigurationClasses.SettingsManager.Instance.PowerPointLoaderPath;
-                process.Start();
-            }
-            else
-                ShowWarning("Couldn't find PowerPointLoader app");
-        }
+		public void ActivateMainForm()
+		{
+			IntPtr handle = RegistryHelper.SalesDepotHandle;
+			if (handle.Equals(IntPtr.Zero))
+			{
+				handle = FormMain.Instance.Handle;
+				if (handle.Equals(IntPtr.Zero))
+				{
+					Process[] proc = Process.GetProcessesByName("RemoteLibrary");
+					if (proc.Length > 0)
+						handle = proc[0].MainWindowHandle;
+				}
+			}
+			ActivateForm(handle, RegistryHelper.MaximizeSalesDepot, false);
+		}
 
-        public void ShowInfo(string text)
-        {
-            MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+		public void ActivatePowerPoint()
+		{
+			if (PowerPointHelper.Instance.PowerPointObject != null)
+			{
+				var powerPointHandle = new IntPtr(PowerPointHelper.Instance.PowerPointObject.HWND);
+				WinAPIHelper.ShowWindow(powerPointHandle, WindowShowStyle.ShowMaximized);
+				uint lpdwProcessId = 0;
+				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+				WinAPIHelper.SetForegroundWindow(powerPointHandle);
+				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			}
+			ActivateMiniBar();
+		}
 
-        public void ShowWarning(string text)
-        {
-            MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
+		public void ActivateMiniBar()
+		{
+			IntPtr minibarHandle = RegistryHelper.MinibarHandle;
+			if (minibarHandle.ToInt32() == 0)
+			{
+				Process[] processList = Process.GetProcesses();
+				foreach (Process process in processList.Where(x => x.ProcessName.ToLower().Contains("minibar")))
+				{
+					if (process.MainWindowHandle.ToInt32() != 0)
+					{
+						minibarHandle = process.MainWindowHandle;
+						break;
+					}
+				}
+			}
+			if (minibarHandle.ToInt32() != 0)
+			{
+				uint lpdwProcessId = 0;
+				WinAPIHelper.MakeTopMost(minibarHandle);
+				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+				WinAPIHelper.SetForegroundWindow(minibarHandle);
+				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
+			}
+		}
 
-        public DialogResult ShowWarningQuestion(string text)
-        {
-            return MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-        }
+		public void RunPowerPointLoader()
+		{
+			if (File.Exists(SettingsManager.Instance.PowerPointLoaderPath))
+			{
+				var process = new Process();
+				process.StartInfo.FileName = SettingsManager.Instance.PowerPointLoaderPath;
+				process.Start();
+			}
+			else
+				ShowWarning("Couldn't find PowerPointLoader app");
+		}
 
-        public DialogResult ShowInfoQuestion(string text)
-        {
-            return MessageBox.Show(text, ConfigurationClasses.SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        }
+		public void ShowInfo(string text)
+		{
+			MessageBox.Show(text, SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
-        public void ReleaseComObject(object o)
-        {
-            try
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(o);
-            }
-            catch
-            {
-            }
-            finally
-            {
-                o = null;
-            }
-        }
+		public void ShowWarning(string text)
+		{
+			MessageBox.Show(text, SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+		}
 
-        private void DeleteFolder(DirectoryInfo folder)
-        {
-            try
-            {
-                foreach (DirectoryInfo subFolder in folder.GetDirectories())
-                    DeleteFolder(subFolder);
-                FileInfo[] files = folder.GetFiles();
-                foreach (FileInfo file in files)
-                {
-                    try
-                    {
-                        if (File.Exists(file.FullName))
-                        {
-                            File.SetAttributes(file.FullName, FileAttributes.Normal);
-                            File.Delete(file.FullName);
-                        }
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            System.Threading.Thread.Sleep(100);
-                            if (File.Exists(file.FullName))
-                                File.Delete(file.FullName);
-                        }
-                        catch
-                        {
-                        }
-                    }
-                }
-                try
-                {
-                    if (Directory.Exists(folder.FullName))
-                        Directory.Delete(folder.FullName, false);
-                }
-                catch
-                {
-                    try
-                    {
-                        System.Threading.Thread.Sleep(100);
-                        if (Directory.Exists(folder.FullName))
-                            Directory.Delete(folder.FullName, false);
-                    }
-                    catch
-                    {
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }
-    }
+		public DialogResult ShowWarningQuestion(string text)
+		{
+			return MessageBox.Show(text, SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+		}
+
+		public DialogResult ShowInfoQuestion(string text)
+		{
+			return MessageBox.Show(text, SettingsManager.Instance.UseRemoteConnection ? "Remote Sales Libraries" : "Sales Libraries", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+		}
+
+		public void ReleaseComObject(object o)
+		{
+			try
+			{
+				Marshal.ReleaseComObject(o);
+			}
+			catch { }
+			finally
+			{
+				o = null;
+			}
+		}
+
+		private void DeleteFolder(DirectoryInfo folder)
+		{
+			try
+			{
+				foreach (DirectoryInfo subFolder in folder.GetDirectories())
+					DeleteFolder(subFolder);
+				FileInfo[] files = folder.GetFiles();
+				foreach (FileInfo file in files)
+				{
+					try
+					{
+						if (File.Exists(file.FullName))
+						{
+							File.SetAttributes(file.FullName, FileAttributes.Normal);
+							File.Delete(file.FullName);
+						}
+					}
+					catch
+					{
+						try
+						{
+							Thread.Sleep(100);
+							if (File.Exists(file.FullName))
+								File.Delete(file.FullName);
+						}
+						catch { }
+					}
+				}
+				try
+				{
+					if (Directory.Exists(folder.FullName))
+						Directory.Delete(folder.FullName, false);
+				}
+				catch
+				{
+					try
+					{
+						Thread.Sleep(100);
+						if (Directory.Exists(folder.FullName))
+							Directory.Delete(folder.FullName, false);
+					}
+					catch { }
+				}
+			}
+			catch { }
+		}
+	}
 }

@@ -123,9 +123,9 @@ namespace SalesDepot.ToolForms.WallBin
 
 					form.Close();
 				}
-				barLargeButtonItemEmail.Visibility = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayQuickView) == EmailButtonsDisplayOptions.DisplayQuickView && (SelectedFile.Type == FileTypes.Word || SelectedFile.Type == FileTypes.Excel || SelectedFile.Type == FileTypes.PDF) ? BarItemVisibility.Always : BarItemVisibility.Never;
+				barLargeButtonItemEmail.Visibility = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayQuickView) == EmailButtonsDisplayOptions.DisplayQuickView && (SelectedFile.Type == FileTypes.Word || SelectedFile.Type == FileTypes.Excel || SelectedFile.Type == FileTypes.PDF || SelectedFile.Type == FileTypes.MediaPlayerVideo || SelectedFile.Type == FileTypes.QuickTimeVideo) ? BarItemVisibility.Always : BarItemVisibility.Never;
 				barLargeButtonItemPrint.Visibility = SelectedFile.Type == FileTypes.Word || SelectedFile.Type == FileTypes.Excel || SelectedFile.Type == FileTypes.PDF ? BarItemVisibility.Always : BarItemVisibility.Never;
-				barLargeButtonItemSave.Visibility = SelectedFile.Type == FileTypes.Word || SelectedFile.Type == FileTypes.Excel || SelectedFile.Type == FileTypes.PDF ? BarItemVisibility.Always : BarItemVisibility.Never;
+				barLargeButtonItemSave.Visibility = SelectedFile.Type == FileTypes.Word || SelectedFile.Type == FileTypes.Excel || SelectedFile.Type == FileTypes.PDF || SelectedFile.Type == FileTypes.MediaPlayerVideo || SelectedFile.Type == FileTypes.QuickTimeVideo ? BarItemVisibility.Always : BarItemVisibility.Never;
 				barLargeButtonItemOpen.Visibility = SelectedFile.Type == FileTypes.Word || SelectedFile.Type == FileTypes.Excel || SelectedFile.Type == FileTypes.PDF ? BarItemVisibility.Always : BarItemVisibility.Never;
 				barLargeButtonItemQuickSiteEmail.Visibility = barLargeButtonItemQuickSiteAdd.Visibility = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0 ? BarItemVisibility.Always : BarItemVisibility.Never;
 			}
@@ -184,6 +184,11 @@ namespace SalesDepot.ToolForms.WallBin
 		{
 			if (_selectedFileViewer != null)
 				_selectedFileViewer.AddLinkToQuickSite();
+		}
+
+		private void barLargeButtonItemSettings_ItemClick(object sender, ItemClickEventArgs e)
+		{
+			SettingsManager.Instance.FileLocationSettings();
 		}
 
 		private void barLargeButtonItemHelp_ItemClick(object sender, ItemClickEventArgs e)

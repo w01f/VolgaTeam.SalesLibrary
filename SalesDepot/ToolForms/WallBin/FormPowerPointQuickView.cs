@@ -41,9 +41,7 @@ namespace SalesDepot.ToolForms.WallBin
 				}
 
 				Text = "QuickView - " + SelectedFile.NameWithExtension;
-				laFileInfo.Text = "Added: " + SelectedFile.AddDate.ToString("MM/dd/yy h:mm:ss tt") + Environment.NewLine + (SelectedFile.ExpirationDateOptions.EnableExpirationDate && SelectedFile.ExpirationDateOptions.ExpirationDate != DateTime.MinValue ? ("Expires: " + SelectedFile.ExpirationDateOptions.ExpirationDate.ToString("M/dd/yy h:mm:ss tt")) : "No Expiration Date");
-				if (SelectedFile.PresentationProperties != null)
-					laSlideSize.Text = string.Format("{0} {1} x {2}", new object[] { SelectedFile.PresentationProperties.Orientation, SelectedFile.PresentationProperties.Width.ToString("#.##"), SelectedFile.PresentationProperties.Height.ToString("#.##") });
+				laFileInfo.Text = "File Added: " + SelectedFile.AddDate.ToString("MM/dd/yy");
 				if (SelectedFile.PresentationProperties.Width == 10 && SelectedFile.PresentationProperties.Height == 7.5 && SelectedFile.PresentationProperties.Orientation.Equals("Landscape") && MasterWizardManager.Instance.MasterWizards.Count > 1)
 				{
 					pnSlideTemplate.Visible = true;
@@ -96,7 +94,6 @@ namespace SalesDepot.ToolForms.WallBin
 		private void FormQuickView_Resize(object sender, EventArgs e)
 		{
 			comboBoxEditSlides.Left = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
-			laFileInfo.Width = (pnNavigationArea.Width - comboBoxEditSlides.Width) / 2;
 		}
 		#endregion
 
@@ -198,6 +195,11 @@ namespace SalesDepot.ToolForms.WallBin
 		{
 			if (SelectedFile != null)
 				LinkManager.Instance.AddLinkToQuickSite(SelectedFile);
+		}
+
+		private void simpleButtonSettings_Click(object sender, EventArgs e)
+		{
+			SettingsManager.Instance.FileLocationSettings();
 		}
 
 		private void barLargeButtonItemHelp_ItemClick(object sender, ItemClickEventArgs e)

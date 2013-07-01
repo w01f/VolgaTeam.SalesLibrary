@@ -407,9 +407,9 @@ namespace SalesDepot.BusinessClasses
 		{
 			try
 			{
-				string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
+				string newFile = Path.Combine(SettingsManager.Instance.OpenFilePath, @"Copy of " + Path.GetFileName(link.LocalPath));
 				File.Copy(link.LocalPath, newFile, true);
-				Process.Start(newFile);
+				OpenFile(newFile);
 
 				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Open Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 			}
@@ -421,14 +421,27 @@ namespace SalesDepot.BusinessClasses
 
 		public void OpenCopyOfFile(FileInfo file)
 		{
+
 			try
 			{
-				file = file.CopyTo(Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + file.Name), true);
-				Process.Start(file.FullName);
+				file = file.CopyTo(Path.Combine(SettingsManager.Instance.OpenFilePath, @"Copy of " + file.Name), true);
+				OpenFile(file.FullName);
 			}
 			catch
 			{
 				AppManager.Instance.ShowWarning(string.Format("Could not create copy of {0} in a temp folder.", file.Name));
+			}
+		}
+
+		private void OpenFile(string filePath)
+		{
+			try
+			{
+				Process.Start(filePath);
+			}
+			catch
+			{
+				AppManager.Instance.ShowWarning("Couldn't open the file");
 			}
 		}
 
@@ -460,7 +473,7 @@ namespace SalesDepot.BusinessClasses
 		{
 			var dialog = new SaveFileDialog();
 			dialog.Title = dialogTitle;
-			dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+			dialog.InitialDirectory = SettingsManager.Instance.SaveFilePath;
 			dialog.FileName = (isCopy ? "Copy of " : string.Empty) + Path.GetFileName(link.LocalPath);
 			dialog.OverwritePrompt = true;
 			dialog.Filter = (Path.GetExtension(link.LocalPath).Substring(1)).ToUpper() + " Files|*" + Path.GetExtension(link.LocalPath);
@@ -484,7 +497,7 @@ namespace SalesDepot.BusinessClasses
 		{
 			var dialog = new SaveFileDialog();
 			dialog.Title = dialogTitle;
-			dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+			dialog.InitialDirectory = SettingsManager.Instance.SaveFilePath;
 			dialog.FileName = (isCopy ? "Copy of " : string.Empty) + file.Name;
 			dialog.OverwritePrompt = true;
 			dialog.Filter = (file.Extension.Substring(1)).ToUpper() + " Files|*" + file.Extension;
@@ -504,7 +517,7 @@ namespace SalesDepot.BusinessClasses
 		public void PrintFile(LibraryLink link)
 		{
 			var printProcess = new Process();
-			string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, @"Copy of " + Path.GetFileName(link.LocalPath));
+			string newFile = Path.Combine(SettingsManager.Instance.OpenFilePath, @"Copy of " + Path.GetFileName(link.LocalPath));
 			File.Copy(link.LocalPath, newFile, true);
 			switch (Path.GetExtension(link.LocalPath).Substring(1).ToUpper())
 			{
@@ -747,7 +760,7 @@ namespace SalesDepot.BusinessClasses
 
 		public void OpenVideo(LibraryLink link)
 		{
-			string newFile = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileName(link.LocalPath));
+			string newFile = Path.Combine(SettingsManager.Instance.OpenFilePath, Path.GetFileName(link.LocalPath));
 			File.Copy(link.LocalPath, newFile, true);
 			var videoPlay = new ProcessStartInfo(newFile);
 			try

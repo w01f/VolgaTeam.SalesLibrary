@@ -9,8 +9,6 @@ namespace SalesDepot.PresentationClasses.Viewers
 	[ToolboxItem(false)]
 	public partial class QuickTimeViewer : UserControl, IFileViewer
 	{
-		private FileInfo _tempCopy;
-
 		#region Properties
 		public LibraryLink File { get; private set; }
 
@@ -37,29 +35,19 @@ namespace SalesDepot.PresentationClasses.Viewers
 			Visible = false;
 
 			File = file;
-			if (System.IO.File.Exists(File.LocalPath))
-			{
-				string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, Path.GetFileName(File.LocalPath));
-				System.IO.File.Copy(File.LocalPath, tempPath, true);
-				_tempCopy = new FileInfo(tempPath);
-			}
-			//axWindowsMediaPlayer.URL = this.File.FullPath;
 		}
 
 		#region VideoViewer Methods
 		public void Play()
 		{
-			//axWindowsMediaPlayer.Ctlcontrols.play();
 		}
 
 		public void Pause()
 		{
-			//axWindowsMediaPlayer.Ctlcontrols.pause();
 		}
 
 		public void Stop()
 		{
-			//axWindowsMediaPlayer.Ctlcontrols.stop();
 		}
 
 		public void InsertIntoPresentation() { }
