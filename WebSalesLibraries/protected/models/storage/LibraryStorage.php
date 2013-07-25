@@ -72,6 +72,7 @@
 			BannerStorage::clearData($libraryId);
 			FileCardStorage::clearData($libraryId);
 			AttachmentStorage::clearData($libraryId);
+			LinkSuperFilterStorage::clearData($libraryId);
 			LinkCategoryStorage::clearData($libraryId);
 			ColumnStorage::clearData($libraryId);
 			UserLinkStorage::clearData($libraryId);

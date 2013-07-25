@@ -3,102 +3,102 @@
 	$.initSearch = function ()
 	{
 		$.ajax({
-			type:"POST",
-			url:"search/getSearchView",
-			beforeSend:function ()
+			type: "POST",
+			url: "search/getSearchView",
+			beforeSend: function ()
 			{
 				$('#search-basic').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#search-basic').find('.page-content').html(msg);
 				loadSearchPanel();
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		$.ajax({
-			type:"POST",
-			url:"search/getFileTypesView",
-			beforeSend:function ()
+			type: "POST",
+			url: "search/getFileTypesView",
+			beforeSend: function ()
 			{
 				$('#search-file-types').find('.page-content').html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				loadFileTypesPanel();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#search-file-types').find('.page-content').html(msg);
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		$.ajax({
-			type:"POST",
-			url:"search/getTagsView",
-			beforeSend:function ()
+			type: "POST",
+			url: "search/getTagsView",
+			beforeSend: function ()
 			{
 				$('#search-tags').find('.page-content').html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				loadTagsPanel();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#search-tags').find('.page-content').html(msg);
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		$.ajax({
-			type:"POST",
-			url:"search/getDateView",
-			beforeSend:function ()
+			type: "POST",
+			url: "search/getDateView",
+			beforeSend: function ()
 			{
 				$('#search-date').find('.page-content').html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				loadDatePanel();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#search-date').find('.page-content').html(msg);
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		$.ajax({
-			type:"POST",
-			url:"search/getLibrariesView",
-			beforeSend:function ()
+			type: "POST",
+			url: "search/getLibrariesView",
+			beforeSend: function ()
 			{
 				$('#search-libraries').find('.page-content').html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#search-libraries').find('.page-content').html(msg);
 				loadLibrariesPanel();
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -142,20 +142,21 @@
 
 	var initMatchSelector = function ()
 	{
-		$('#search-match-selector').find('a').removeClass('ui-btn-active');
+		$("#search-match-selector").find('input[type="radio"]').checkboxradio();
 		if ($.cookie("exactMatch") != null)
 		{
 			if ($.cookie("exactMatch") == "true")
-				$("#search-match-exact").addClass('ui-btn-active');
+				$("#search-match-exact").attr("checked", true).checkboxradio("refresh");
 			else
-				$("#search-match-partial").addClass('ui-btn-active');
+				$("#search-match-partial").attr("checked", true).checkboxradio("refresh");
 		}
 		else
-			$("#search-match-exact").addClass('ui-btn-active');
-		$('#search-match-exact, #search-match-partial').off('click').on('click', function ()
+			$("#search-match-exact").attr("checked", true).checkboxradio("refresh");
+
+		$('#search-match-exact, #search-match-partial').off('click').on('change', function ()
 		{
-			$.cookie("exactMatch", $('#search-match-partial').hasClass('ui-btn-active'), {
-				expires:(60 * 60 * 24 * 7)
+			$.cookie("exactMatch", $('#search-match-exact').attr("checked") == "checked", {
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 
@@ -165,7 +166,7 @@
 		hideDuplicates.on('change', function ()
 		{
 			$.cookie("hideDuplicated", $('#hide-duplicated').attr("checked") == "checked", {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 
@@ -190,7 +191,7 @@
 			else if ($('#content-only-text').attr("checked") == "checked")
 				value = "text";
 			$.cookie("searchFields", value, {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 	};
@@ -200,13 +201,13 @@
 		var searchDateContainer = $('#search-date-container');
 		searchDateContainer.collapsible();
 		$('#search-date-start, #search-date-end').scroller({
-			preset:'date',
-			theme:'jqm',
-			display:'modal',
-			mode:'clickpick',
-			animate:'fade',
-			dateOrder:'mmD ddy',
-			dateFormat:'mm/dd/y'
+			preset: 'date',
+			theme: 'jqm',
+			display: 'modal',
+			mode: 'clickpick',
+			animate: 'fade',
+			dateOrder: 'mmD ddy',
+			dateFormat: 'mm/dd/y'
 		});
 		$('#search-clear-date-button').off('click').on('click', function ()
 		{
@@ -223,11 +224,11 @@
 				$("#search-date-link").attr("checked", true).checkboxradio("refresh");
 		}
 		else
-			$("#search-date-file").attr("checked", true).checkboxradio("refresh");
+			$("#search-date-link").attr("checked", true).checkboxradio("refresh");
 		$('#search-date-file, #search-date-link').on('change', function ()
 		{
 			$.cookie("conditionDateByFile", $('#search-date-file').attr("checked") == "checked", {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 	};
@@ -237,19 +238,19 @@
 		var updateFileTypes = function ()
 		{
 			$.cookie("fileTypePpt", $('#search-file-type-powerpoint').is(':checked'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeDoc", $('#search-file-type-word').is(':checked'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeXls", $('#search-file-type-excel').is(':checked'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypePdf", $('#search-file-type-pdf').is(':checked'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeVideo", $('#search-file-type-video').is(':checked'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		};
 
@@ -296,7 +297,7 @@
 			$("#search-file-type-video").attr("checked", true).checkboxradio("refresh");
 
 		$('#file-types').find('input[type="checkbox"]').button({
-			text:false
+			text: false
 		});
 
 		$('#search-file-types-select-button').off('click').on('click', function ()
@@ -327,7 +328,7 @@
 				selectedLibraryIds.push(this.id);
 			});
 			$.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		};
 		$('.search-libraries-group').collapsible();
@@ -357,22 +358,22 @@
 	var initSearchSortSelectors = function ()
 	{
 		$.cookie("sortColumn", 'link-name', {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 		$('#search-result-sort-column').on('change', function ()
 		{
 			$.cookie("sortColumn", $('#search-result-sort-column').find(':selected').val(), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			runSearch(1);
 		});
 		$.cookie("sortDirection", 'asc', {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 		$('#search-result-sort-order').on('change', function ()
 		{
 			$.cookie("sortDirection", $('#search-result-sort-order').find(':selected').val(), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			runSearch(1);
 		});
@@ -389,6 +390,7 @@
 
 		$('#search-tags-clear-button').on('click', function ()
 		{
+			$('.super-filter-item').attr('checked', false).checkboxradio("refresh");
 			$('.search-tags-item').attr('checked', false).checkboxradio("refresh");
 		});
 	};
@@ -396,7 +398,7 @@
 	var runSearch = function (isSort)
 	{
 		var selectedCondition = $('#search-keyword').val();
-		if ($('#search-match-exact').hasClass('ui-btn-active'))
+		if ($('#search-match-exact').attr("checked") == "checked")
 			selectedCondition = '"' + selectedCondition + '"';
 
 		var selectedFileTypes = [];
@@ -426,13 +428,19 @@
 
 		var onlyFileCards = $('#search-only-filecards').is(':checked') ? 1 : 0;
 
+		var superFilters = [];
+		$.each($(".super-filter-item:checked"), function ()
+		{
+			superFilters.push($(this).val());
+		});
+
 		var categories = [];
 		$.each($(".search-tags-item:checked"), function ()
 		{
 			var substr = $(this).attr('id').split('------');
 			var category = {
-				category:substr[0],
-				tag:substr[1]
+				category: substr[0],
+				tag: substr[1]
 			};
 			categories.push(category);
 		});
@@ -448,43 +456,44 @@
 		}
 
 		$.ajax({
-			type:"POST",
-			url:"search/searchByContent",
-			data:{
-				fileTypes:selectedFileTypes,
-				condition:selectedCondition,
-				startDate:startDate,
-				endDate:endDate,
-				dateFile:$('#search-date-file').attr("checked") == "checked",
-				onlyFileCards:onlyFileCards,
-				categories:categories.length > 0 ? $.toJSON(categories) : null,
-				categoriesExactMatch:$('#search-tags-exact-match').find(':selected').val(),
-				hideDuplicated:$('#hide-duplicated').attr("checked") == "checked",
-				onlyByName:onlyByName,
-				onlyByContent:onlyByContent,
-				isSort:isSort
+			type: "POST",
+			url: "search/searchByContent",
+			data: {
+				fileTypes: selectedFileTypes,
+				condition: selectedCondition,
+				startDate: startDate,
+				endDate: endDate,
+				dateFile: $('#search-date-file').attr("checked") == "checked",
+				onlyFileCards: onlyFileCards,
+				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
+				categories: categories.length > 0 ? $.toJSON(categories) : null,
+				categoriesExactMatch: false,
+				hideDuplicated: $('#hide-duplicated').attr("checked") == "checked",
+				onlyByName: onlyByName,
+				onlyByContent: onlyByContent,
+				isSort: isSort
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#search-result-body').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var searchResultBody = $('#search-result-body');
 				searchResultBody.html(msg);
 				$.mobile.changePage("#search-result", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				searchResultBody.listview('refresh');
 
@@ -514,12 +523,12 @@
 					event.stopPropagation();
 				});
 			},
-			error:function ()
+			error: function ()
 			{
 				$('#search-result-body').html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	}
 })(jQuery);

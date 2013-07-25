@@ -47,6 +47,12 @@
 			$.linkGrid.refreshData();
 		});
 
+		searchGridHeader.find("td.link-tag-column").off('click').on('click', function ()
+		{
+			sortByColumn('link-tag');
+			$.linkGrid.refreshData();
+		});
+
 		var linkGridBody = $("#links-grid-body");
 		var clickableLinks = linkGridBody.find("td.click-no-mobile");
 		clickableLinks.off('click').on('click', function ()
@@ -126,6 +132,9 @@
 					break;
 				case "link-rate":
 					selector = '#links-grid-header td.link-rate-column span';
+					break;
+				case "link-tag":
+					selector = '#links-grid-header td.link-tag-column span';
 					break;
 			}
 		}

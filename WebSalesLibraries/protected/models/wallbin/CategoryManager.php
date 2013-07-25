@@ -1,13 +1,16 @@
 <?php
 class CategoryManager
 {
+	public $superFilters;
     public $categories;
     public $groups;
     public function loadCategories()
     {
-        $cookieId = 'selectedCategories';
-        if (isset(Yii::app()->request->cookies['selectedRibbonTabId']->value))
-            $cookieId.=Yii::app()->request->cookies['selectedRibbonTabId']->value;
+		$selectedTab = '';
+		if (isset(Yii::app()->request->cookies['selectedRibbonTabId']->value))
+			$selectedTab = Yii::app()->request->cookies['selectedRibbonTabId']->value;
+
+		$cookieId = 'selectedCategories'.$selectedTab;
         if (isset(Yii::app()->request->cookies[$cookieId]->value))
             $selectedCategories = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
 
@@ -33,7 +36,19 @@ class CategoryManager
                     $this->groups[] = $category->category;
             }
         }
-    }
+		$cookieId = 'selectedSuperFilters'.$selectedTab;
+		if (isset(Yii::app()->request->cookies[$cookieId]->value))
+			$selectedSuperFilters = CJSON::decode(Yii::app()->request->cookies[$cookieId]->value);
+
+		$superFilterRecords = SuperFilterStorage::model()->findAll();
+		foreach ($superFilterRecords as $superFilterRecord)
+		{
+			$superFilter = new SuperFilter();
+			$superFilter->value = $superFilterRecord->value;
+			$superFilter->selected = isset($selectedSuperFilters) && in_array($superFilter->value, $selectedSuperFilters);
+			$this->superFilters[] = $superFilter;
+		}
+	}
 
     public function getTagsByGroup($group)
     {

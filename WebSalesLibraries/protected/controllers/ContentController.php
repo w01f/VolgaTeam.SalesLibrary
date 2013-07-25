@@ -19,8 +19,11 @@ class ContentController extends CController
                     'FileCard' => 'FileCard',
                     'Attachment' => 'Attachment',
                     'LinkCategory' => 'LinkCategory',
+					'LinkSuperFilter' => 'LinkSuperFilter',
                     'UniversalPreviewContainer' => 'UniversalPreviewContainer',
+					'References' => 'References',
                     'Category' => 'Category',
+					'SuperFilter' => 'SuperFilter',
 					'LibraryConfig' => 'LibraryConfig',
                 ),
             ),
@@ -36,11 +39,11 @@ class ContentController extends CController
         
     }
     
-        /**
-     * @param Category[] Categories
+    /**
+     * @param References References
      * @soap
      */
-    public function mockupCategories($categories)
+    public function mockupReferences($references)
     {
         
     }

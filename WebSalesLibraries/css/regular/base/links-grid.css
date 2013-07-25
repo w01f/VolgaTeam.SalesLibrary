@@ -122,9 +122,19 @@
 	width: 60px;
 }
 
+#links-grid-header td.link-tag-column, #links-grid-body td.link-tag-column
+{
+	width: 90px;
+}
+
 #links-grid-body td.link-rate-column
 {
 	text-align: center;
+}
+
+#links-grid-body td.link-tag-column
+{
+	text-align: left;
 }
 
 #links-grid-header td.link-name-column, #links-grid-body td.link-name-column

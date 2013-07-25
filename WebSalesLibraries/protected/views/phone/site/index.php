@@ -1,5 +1,5 @@
 <?php
-$version = '6.0';
+$version = '9.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -484,6 +484,7 @@ $logos = QPageStorage::getPageLogoList();
 									<option value="link-type">By Type</option>
 									<option value="link-date">By Date</option>
 									<option value="library">By Library</option>
+									<option value="link-tag">By Tag</option>
 								</select>
 							</td>
 							<td id="search-result-sort-order-container" class="on-right">

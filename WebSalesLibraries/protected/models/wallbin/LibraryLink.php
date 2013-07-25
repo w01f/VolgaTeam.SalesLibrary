@@ -113,6 +113,11 @@
 		 */
 		public $previewId;
 		/**
+		 * @var LinkSuperFilter[]
+		 * @soap
+		 */
+		public $superFilters;
+		/**
 		 * @var LinkCategory[]
 		 * @soap
 		 */
@@ -253,6 +258,15 @@
 			}
 			if (isset($this->attachments))
 				usort($this->attachments, "Attachment::attachmentComparer");
+
+			$linkSuperFiltersRecords = LinkSuperFilterStorage::model()->findAll('id_link=?', array($linkRecord->id));
+			if ($linkSuperFiltersRecords !== null)
+				foreach ($linkSuperFiltersRecords as $linkSuperFiltersRecord)
+				{
+					$linkSuperFilter = new LinkSuperFilter();
+					$linkSuperFilter->load($linkSuperFiltersRecord);
+					$this->superFilters[] = $linkSuperFilter;
+				}
 
 			$linkCategoryRecords = LinkCategoryStorage::model()->findAll('id_link=?', array($linkRecord->id));
 			if ($linkCategoryRecords !== null)

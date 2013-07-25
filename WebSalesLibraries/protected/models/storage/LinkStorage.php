@@ -106,6 +106,11 @@
 			else
 				$linkRecord->enable_attachments = false;
 
+			if (array_key_exists('superFilters', $link))
+				if (isset($link['superFilters']))
+					foreach ($link['superFilters'] as $superFilter)
+						LinkSuperFilterStorage::updateData($superFilter);
+
 			if (array_key_exists('categories', $link))
 				if (isset($link['categories']))
 					foreach ($link['categories'] as $category)
@@ -130,7 +135,7 @@
 				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
 		}
 
-		public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $hideDuplicated, $onlyByName, $onlyByContent, $isSort)
+		public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $hideDuplicated, $onlyByName, $onlyByContent, $isSort)
 		{
 			$sessionId = 'searchedLinks';
 			if (isset(Yii::app()->request->cookies['selectedRibbonTabId']->value))
@@ -196,15 +201,34 @@
 					}
 				}
 
+				$superFilterCondition = '1 = 1';
+				$additionalSuperFilterCondition = '';
+				if (isset($superFilters))
+				{
+					foreach ($superFilters as $superFilter)
+						$superFilterSelector[] = '(link.id in (select id_link from tbl_link_super_filter where value = "' . $superFilter . '"))';
+					if (isset($superFilterSelector))
+					{
+						$superFilterCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $superFilterSelector) . ')';
+						if ($contentCondition == '""' || $contentCondition == '')
+							$additionalSuperFilterCondition = ' or ' . $superFilterCondition;
+					}
+				}
+
 				$categoryCondition = '1 = 1';
+				$categoryJoinCondition = '1 = 1';
 				$additionalCategoryCondition = '';
 				if (isset($categories))
 				{
 					foreach ($categories as $category)
+					{
 						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
+						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
+					}
 					if (isset($categoriesSelector))
 					{
 						$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
+						$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
 						if ($contentCondition == '""' || $contentCondition == '')
 							$additionalCategoryCondition = ' or ' . $categoryCondition;
 					}
@@ -250,19 +274,21 @@
 				{
 					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ') as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('max(link.id) as id, max(link.id_library) as id_library, max(link.name) as name, link.file_name, ' . $dateField . ', max(link.enable_attachments) as enable_attachments, max(link.enable_file_card) as enable_file_card, max(link.format) as format, (select count(id) from tbl_link_rate where id_link = link.id) as rate')
+						->select('max(link.id) as id, max(link.id_library) as id_library, max(link.name) as name, link.file_name, ' . $dateField . ', max(link.enable_attachments) as enable_attachments, max(link.enable_file_card) as enable_file_card, max(link.format) as format, (select count(id) from tbl_link_rate where id_link = link.id) as rate, lcat.tag as tag')
 						->from('tbl_link link')
-						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ") and link.is_dead=0 and link.is_preview_not_ready=0")
-						->group('link.file_name')
+						->leftJoin("tbl_link_category lcat", "lcat.id_link=link.id and " . $categoryJoinCondition)
+						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalSuperFilterCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $superFilterCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ") and link.is_dead=0 and link.is_preview_not_ready=0")
+						->group('link.file_name, lcat.tag')
 						->queryAll();
 				}
 				else
 				{
 					$dateField = (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ' as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate')
+						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate, lcat.tag as tag')
 						->from('tbl_link link')
-						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
+						->leftJoin("tbl_link_category lcat", "lcat.id_link=link.id and " . $categoryJoinCondition)
+						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalSuperFilterCondition . $additionalCategoryCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $superFilterCondition . ") and (" . $categoryCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
 						->queryAll();
 				}
 				$links = self::getLinksGrid($linkRecords, $hideDuplicated);
@@ -383,6 +409,9 @@
 					if (array_key_exists('rate', $linkRecord))
 						$link['rate'] = $linkRecord['rate'];
 
+					if (array_key_exists('tag', $linkRecord))
+						$link['tag'] = $linkRecord['tag'];
+
 					switch ($linkRecord['format'])
 					{
 						case 'ppt':
@@ -444,6 +473,9 @@
 					case 'link-rate':
 						$sortColumn = 'rate';
 						break;
+					case 'link-tag':
+						$sortColumn = 'tag';
+						break;
 				}
 			}
 			else
@@ -454,7 +486,7 @@
 			else
 				$sortDirection = 'asc';
 
-			if (isset($sortColumn) && isset($sortDirection))
+			if (isset($sortColumn) && isset($sortDirection) && array_key_exists($sortColumn, $a) && array_key_exists($sortColumn, $b))
 			{
 				if ($sortDirection == 'asc')
 					return strnatcmp($a[$sortColumn], $b[$sortColumn]);

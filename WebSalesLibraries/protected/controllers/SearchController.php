@@ -69,6 +69,9 @@
 				else
 					$checkedLibraryIds = array();
 
+				$superFilters = Yii::app()->request->getPost('superFilters');
+				if (isset($superFilters))
+					$superFilters = CJSON::decode($superFilters);
 				$categories = Yii::app()->request->getPost('categories');
 				if (isset($categories))
 					$categories = CJSON::decode($categories);
@@ -95,13 +98,13 @@
 					$onlyByContent = false;
 
 				if (isset($fileTypes) && isset($condition) && isset($isSort))
-					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $categories, $categoriesExactMatch, $hideDuplicated,$onlyByName,$onlyByContent, $isSort);
+					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $hideDuplicated, $onlyByName, $onlyByContent, $isSort);
 
 				if (!isset($links))
 					$links = null;
 
 				if (isset($links))
-					$searchInfo['count'] = 'Files: ' . count($links);
+					$searchInfo['count'] = 'Records: ' . count($links);
 				else
 					$searchInfo['count'] = 'No Files Meet your Criteria';
 				if (isset($condition) && !($condition == '""' || $condition == ''))
@@ -114,6 +117,9 @@
 					$searchInfo['dates'] = '<b>Dates:</b> ' . $startDate . ' - ' . $endDate;
 				else
 					$searchInfo['dates'] = '<b>Dates:</b> ALL';
+				if (isset($superFilters))
+					foreach ($superFilters as $superFilter)
+						$categoryTags[] = '<b>' . $superFilter . '</b>';
 				if (isset($categories))
 				{
 					foreach ($categories as $category)
@@ -132,10 +138,10 @@
 								unset($tags);
 							}
 						}
-						if (isset($categoryTags))
-							$searchInfo['categories'] = implode('; ', $categoryTags);
 					}
 				}
+				if (isset($categoryTags))
+					$searchInfo['categories'] = implode('; ', $categoryTags);
 				if (isset($checkedLibraryIds))
 				{
 					$allLibraryRecords = LibraryStorage::model()->findAll();

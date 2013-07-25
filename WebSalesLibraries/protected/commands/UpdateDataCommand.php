@@ -55,8 +55,13 @@
 						$referencesContent = file_get_contents($referencesFile);
 						if ($referencesContent)
 						{
-							$categories = CJSON::decode($referencesContent);
-							CategoryStorage::updateData($categories);
+							$references = CJSON::decode($referencesContent);
+							if (array_key_exists('categories', $references))
+								if (isset($references['categories']))
+									CategoryStorage::updateData($references['categories']);
+							if (array_key_exists('superFilters', $references))
+								if (isset($references['superFilters']))
+									SuperFilterStorage::updateData($references['superFilters']);
 						}
 					}
 				}

@@ -36,13 +36,19 @@
 		else if ($.cookie("onlyFileCards") != null)
 			onlyFileCards = parseInt($.cookie("onlyFileCards"));
 
+		var superFilters = [];
+		$.each($("#super-filter-list").find('.btn.active'), function ()
+		{
+			superFilters.push($(this).html());
+		});
+
 		var categories = [];
 		$.each($("#categories").find(":checked"), function ()
 		{
 			var substr = $(this).val().split('------');
 			var category = {
-				category:substr[0],
-				tag:substr[1]
+				category: substr[0],
+				tag: substr[1]
 			};
 			categories.push(category);
 		});
@@ -59,42 +65,46 @@
 
 		//Save search state to recover while tabs are switching
 		$.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId"), true, {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 		$.cookie("textCondition" + $.cookie("selectedRibbonTabId"), $('#condition-content-value').val(), {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 		$.cookie("dateCondition" + $.cookie("selectedRibbonTabId"), $('#condition-date-range').find('input').val(), {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
+		});
+		$.cookie("selectedSuperFilters" + $.cookie("selectedRibbonTabId"), $.toJSON(superFilters), {
+			expires: (60 * 60 * 24 * 7)
 		});
 		$.cookie("selectedCategories" + $.cookie("selectedRibbonTabId"), $.toJSON(categories), {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 		//-----------------------------------------------------
 
 		$.ajax({
-			type:"POST",
-			url:"search/searchByContent",
-			data:{
-				fileTypes:selectedFileTypes,
-				condition:selectedCondition,
-				startDate:startDate,
-				endDate:endDate,
-				dateFile:$('#condition-date-file').hasClass('active'),
-				onlyFileCards:onlyFileCards,
-				categories:categories.length > 0 ? $.toJSON(categories) : null,
-				categoriesExactMatch:$('#tags-compare-exact').hasClass('active'),
-				hideDuplicated:$('#hide-duplicated').hasClass('active'),
-				onlyByName:onlyByName,
-				onlyByContent:onlyByContent,
-				isSort:isSort
+			type: "POST",
+			url: "search/searchByContent",
+			data: {
+				fileTypes: selectedFileTypes,
+				condition: selectedCondition,
+				startDate: startDate,
+				endDate: endDate,
+				dateFile: $('#condition-date-file').hasClass('active'),
+				onlyFileCards: onlyFileCards,
+				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
+				categories: categories.length > 0 ? $.toJSON(categories) : null,
+				categoriesExactMatch: false,
+				hideDuplicated: $('#hide-duplicated').hasClass('active'),
+				onlyByName: onlyByName,
+				onlyByContent: onlyByContent,
+				isSort: isSort
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$.showOverlayLight();
 				$('#search-links-number').find('>span').html('');
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlayLight();
 				$.updateContentAreaDimensions();
@@ -105,16 +115,16 @@
 				$.linkGrid.showDelete = false;
 				$.linkGrid.init();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#search-result').find('>div').html('').append(msg);
 			},
-			error:function ()
+			error: function ()
 			{
 				$('#search-result').find('>div').html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -155,12 +165,12 @@
 		}
 
 		$("#search-control-panel").tabs({
-			selected:conditionType,
-			disabled:disabled
+			selected: conditionType,
+			disabled: disabled
 		}).on('tabsselect', function (event, ui)
 			{
 				$.cookie("search-control-panel", ui.index, {
-					expires:(60 * 60 * 24 * 7)
+					expires: (60 * 60 * 24 * 7)
 				});
 			})
 	};
@@ -175,7 +185,7 @@
 				$('#search-file-card-button').removeClass('sel');
 
 			$.cookie("onlyFileCards", toggleState, {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		};
 
@@ -229,7 +239,7 @@
 				$(this).addClass('active');
 			}
 			$.cookie("exactMatch", $('#content-compare-exact').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 		rightPanel.find("input").keypress(function (e)
@@ -257,7 +267,7 @@
 			else
 				$(this).addClass('active');
 			$.cookie("hideDuplicated", hideDuplicated.hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 
@@ -295,7 +305,7 @@
 				}
 			}
 			$.cookie("searchFields", value, {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 
@@ -348,7 +358,7 @@
 			$("#search-file-type-video").button('toggle');
 
 		$('#file-types').find('input[type="checkbox"]').button({
-			text:false
+			text: false
 		});
 		$('#file-types').find('.search-file-type').off('click').on('click', function ()
 		{
@@ -357,19 +367,19 @@
 			else
 				$(this).addClass('active');
 			$.cookie("fileTypePpt", $('#search-file-type-powerpoint').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeDoc", $('#search-file-type-word').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeXls", $('#search-file-type-excel').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypePdf", $('#search-file-type-pdf').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeVideo", $('#search-file-type-video').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 	};
@@ -379,14 +389,14 @@
 		var dateFormat = 'MM/dd/yyyy';
 		$('#condition-date-range').daterangepicker(
 			{
-				format:dateFormat,
-				ranges:{
-					'Last day':['yesterday', 'today'],
-					'Last 15 days':[Date.today().add({
-						days:-14
+				format: dateFormat,
+				ranges: {
+					'Last day': ['yesterday', 'today'],
+					'Last 15 days': [Date.today().add({
+						days: -14
 					}), 'today'],
-					'Last 30 days':[Date.today().add({
-						days:-29
+					'Last 30 days': [Date.today().add({
+						days: -29
 					}), 'today']
 				}
 			},
@@ -412,7 +422,7 @@
 				$("#condition-date-link").button('toggle');
 		}
 		else
-			$("#condition-date-file").button('toggle');
+			$("#condition-date-link").button('toggle');
 		$('#condition-date-file, #condition-date-link').off('click').on('click', function ()
 		{
 			if (!$(this).hasClass('active'))
@@ -421,7 +431,7 @@
 				$(this).addClass('active');
 			}
 			$.cookie("conditionDateByFile", $('#condition-date-file').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		});
 
@@ -434,38 +444,23 @@
 	var initTags = function ()
 	{
 		$("#categories").accordion({
-			autoHeight:false,
-			active:false,
-			collapsible:true,
-			icons:{
-				header:"ui-icon-circle-arrow-e",
-				activeHeader:"ui-icon-circle-arrow-s"
+			autoHeight: false,
+			active: false,
+			collapsible: true,
+			icons: {
+				header: "ui-icon-circle-arrow-e",
+				activeHeader: "ui-icon-circle-arrow-s"
 			}
 		});
 		$('#tags-clear-all').off('click').on('click', function ()
 		{
+			$('#super-filter-list').find('.btn').removeClass('active');
 			$("#categories").find(":checked").attr('checked', false);
 		});
 
-		if ($.cookie("tagsExactMatch") != null)
+		$("#super-filter-list").find('.btn').off('click').on('click', function ()
 		{
-			if ($.cookie("tagsExactMatch") == "true")
-				$("#tags-compare-exact").button('toggle');
-			else
-				$("#tags-compare-partial").button('toggle');
-		}
-		else
-			$("#tags-compare-exact").button('toggle');
-		$("#tags-compare-exact,#tags-compare-partial").off('click').on('click', function ()
-		{
-			if (!$(this).hasClass('active'))
-			{
-				$('#tags-compare-type').find('.btn').removeClass('active');
-				$(this).addClass('active');
-			}
-			$.cookie("tagsExactMatch", $('#tags-compare-exact').hasClass('active'), {
-				expires:(60 * 60 * 24 * 7)
-			});
+			$(this).button('toggle');
 		});
 	};
 
@@ -479,19 +474,19 @@
 				selectedLibraryIds.push($(this).val());
 			});
 			$.cookie("selectedLibraryIds", $.toJSON(selectedLibraryIds), {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 		};
 
 		var groupsCount = $('#libraries').find('h3').length;
 
 		$("#libraries").accordion({
-			autoHeight:false,
-			active:groupsCount > 1 ? false : 0,
-			collapsible:!!(groupsCount > 1),
-			icons:{
-				header:"ui-icon-circle-arrow-e",
-				activeHeader:"ui-icon-circle-arrow-s"
+			autoHeight: false,
+			active: groupsCount > 1 ? false : 0,
+			collapsible: !!(groupsCount > 1),
+			icons: {
+				header: "ui-icon-circle-arrow-e",
+				activeHeader: "ui-icon-circle-arrow-s"
 			}
 		});
 
@@ -528,20 +523,20 @@
 		$('.clear-button').off('click').on('click', function ()
 		{
 			$.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId"), false, {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 			$.ajax({
-				type:"POST",
-				url:"search/searchByContent",
-				data:{
-					isClear:1
+				type: "POST",
+				url: "search/searchByContent",
+				data: {
+					isClear: 1
 				},
-				beforeSend:function ()
+				beforeSend: function ()
 				{
 					$.showOverlayLight();
 					$('#search-links-number').find('>span').html('');
 				},
-				complete:function ()
+				complete: function ()
 				{
 					$.hideOverlayLight();
 					$.updateContentAreaDimensions();
@@ -552,16 +547,16 @@
 					$.linkGrid.showDelete = false;
 					$.linkGrid.init();
 				},
-				success:function (msg)
+				success: function (msg)
 				{
 					$('#search-result').find('>div').html('').append(msg);
 				},
-				error:function ()
+				error: function ()
 				{
 					$('#search-result').find('>div').html('');
 				},
-				async:true,
-				dataType:'html'
+				async: true,
+				dataType: 'html'
 			});
 		});
 	};
@@ -569,14 +564,14 @@
 	$.initSearchView = function ()
 	{
 		$.ajax({
-			type:"POST",
-			url:"search/getSearchView",
-			beforeSend:function ()
+			type: "POST",
+			url: "search/getSearchView",
+			beforeSend: function ()
 			{
 				$('#content').html('');
 				$.showOverlay();
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlay();
 				initControlPanel();
@@ -590,16 +585,16 @@
 				if ($.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId")) == "true")
 					runSearch(1);
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#content').html(msg);
 			},
-			error:function ()
+			error: function ()
 			{
 				$('#content').html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 

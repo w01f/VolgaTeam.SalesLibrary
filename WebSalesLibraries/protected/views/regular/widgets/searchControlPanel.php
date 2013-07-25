@@ -20,52 +20,60 @@
 				</td>
 			</tr>
 		</table>
-		<div class="btn-group" id="content-compare-type">
-			<button type="button" class="btn" id="content-compare-exact">Exact Match</button>
-			<button type="button" class="btn" id="content-compare-partial">Partial Match</button>
-		</div>
-
-		<br>
-		<br>
+		<br> <br>
 		<div class="group-panel">
-			<div class="group-title">User Options:</div>
-			<?if (Yii::app()->params['search_options']['hide_duplicate']): ?>
-				<button type="button" class="btn btn-block" id="hide-duplicated">Hide Duplicate Files</button>
-			<? endif;?>
-			<button type="button" class="btn btn-block search-fields-option" id="content-full">Total Keyword Database Search</button>
-			<button type="button" class="btn btn-block search-fields-option" id="content-only-file">Search File Names Only</button>
-			<button type="button" class="btn btn-block search-fields-option" id="content-only-text">Search Only the TEXT in each file</button>
+			<div class="group-title">Search Options:</div>
+			<div class="btn-group centered" id="content-compare-type">
+				<button type="button" class="btn" id="content-compare-exact" style="width: 140px;">Exact Match</button>
+				<button type="button" class="btn" id="content-compare-partial" style="width: 140px;">Partial Match</button>
+			</div>
+			<div class="btn-group centered">
+				<?if (Yii::app()->params['search_options']['hide_duplicate']): ?>
+					<button type="button" class="btn" id="hide-duplicated" style="width: 140px;">Hide Duplicates</button>
+				<? endif;?>
+				<button type="button" class="btn search-fields-option" id="content-only-file" style="width: 140px;">File Names Only</button>
+			</div>
+			<div class="btn-group centered">
+				<button type="button" class="btn search-fields-option" id="content-only-text" style="width: 140px;">File Content Only</button>
+				<button type="button" class="btn search-fields-option" id="content-full" style="width: 140px;">Full database</button>
+			</div>
 		</div>
 	</div>
 	<div id="search-options-tags">
 		<?php if (isset($categories->groups) && Yii::app()->params['tags']['visible']): ?>
-		<div class="group-panel">
-			<button type="button" class="btn btn-block" id="tags-clear-all">Clear All Tags</button>
-			<div class="btn-group" id="tags-compare-type">
-				<button type="button" class="btn" id="tags-compare-exact">Exact Match</button>
-				<button type="button" class="btn" id="tags-compare-partial">Partial Match</button>
+			<div class="group-panel">
+				<button type="button" class="btn btn-block" id="tags-clear-all">Clear All Tags</button>
+				<br>
+				<div class="group-title">What Are You Looking For?</div>
+				<?php if (isset($categories->superFilters)): ?>
+					<div class="btn-group centered" id="super-filter-list">
+						<?php foreach ($categories->superFilters as $superFilter): ?>
+							<button type="button" class="btn<? if ($superFilter->selected): ?> active<? endif; ?>"><?echo $superFilter->value;?></button>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			</div>
-		</div>
-		<div id="categories-container">
-			<div class="accordion" id="categories">
-				<?php foreach ($categories->groups as $group): ?>
-				<h3><span><?php echo $group; ?></span></h3>
-				<div>
-					<?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
-					<label class="checkbox"> <input type="checkbox"
-													value="<?php echo $group . '------' . $tag['tag']; ?>" <?php echo $tag['selected'] ? 'checked="checked"' : '' ?>>
-						<?php echo $tag['tag']; ?>
-					</label>
+			<div id="categories-container">
+				<div class="accordion" id="categories">
+					<?php foreach ($categories->groups as $group): ?>
+						<h3><span><?php echo $group; ?></span></h3>
+						<div>
+							<?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
+								<label class="checkbox">
+									<input type="checkbox" value="<?php echo $group . '------' . $tag['tag']; ?>" <?php echo $tag['selected'] ? 'checked="checked"' : '' ?>>
+									<?php echo $tag['tag']; ?>
+								</label>
+							<?php endforeach; ?>
+						</div>
 					<?php endforeach; ?>
 				</div>
-				<?php endforeach; ?>
 			</div>
-		</div>
 		<?php endif; ?>
 	</div>
 	<div id="search-options-files">
 		<div id="file-types-container">
 			<div class="group-panel">
+				<div class="group-title">What Are You Looking For?</div>
 				<table id="file-types">
 					<tr>
 						<td>
@@ -74,7 +82,7 @@
 									<tr>
 										<td><img class="icon-search powerpoint"
 												 src="images/search/search-powerpoint.png"/></td>
-										<td><h3>PowerPoint</h3></td>
+										<td><h4>PowerPoint</h4></td>
 									</tr>
 								</table>
 							</button>
@@ -86,7 +94,7 @@
 								<table class="caption">
 									<tr>
 										<td><img class="icon-search video" src="images/search/search-video.png"/></td>
-										<td><h3>Video</h3></td>
+										<td><h4>Video</h4></td>
 									</tr>
 								</table>
 							</button>
@@ -98,7 +106,7 @@
 								<table class="caption">
 									<tr>
 										<td><img class="icon-search video" src="images/search/search-pdf.png"/></td>
-										<td><h3>PDF</h3></td>
+										<td><h4>PDF</h4></td>
 									</tr>
 								</table>
 							</button>
@@ -110,7 +118,7 @@
 								<table class="caption">
 									<tr>
 										<td><img class="icon-search word" src="images/search/search-word.png"/></td>
-										<td><h3>Word</h3></td>
+										<td><h4>Word</h4></td>
 									</tr>
 								</table>
 							</button>
@@ -122,7 +130,7 @@
 								<table class="caption">
 									<tr>
 										<td><img class="icon-search excel" src="images/search/search-excel.png"/></td>
-										<td><h3>Excel</h3></td>
+										<td><h4>Excel</h4></td>
 									</tr>
 								</table>
 							</button>
@@ -146,13 +154,18 @@
 						<a class="btn" id="select-date-range" href="#"><i class="icon-calendar"/></a> <a class="btn"
 																										 id="clear-date-range"
 																										 href="#"><i
-							class="icon-remove-sign"/></a>
+								class="icon-remove-sign"/></a>
 					</td>
 				</tr>
 			</table>
-			<br>
-			<button type="button" class="btn btn-block" id="condition-date-file">Date file was created</button>
-			<button type="button" class="btn btn-block" id="condition-date-link">Date file was uploaded</button>
+			<br><br>
+			<div class="group-panel">
+				<div class="group-title">Search Options:</div>
+				<div class="btn-group centered">
+					<button type="button" class="btn" id="condition-date-link">Date uploaded</button>
+					<button type="button" class="btn" id="condition-date-file">Date created</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div id="search-options-stations">
@@ -163,15 +176,15 @@
 		<div id="libraries-container">
 			<div class="accordion" id="libraries">
 				<?php foreach ($libraryGroups as $group): ?>
-				<h3><span><?php echo $group->name; ?></span></h3>
-				<div>
-					<?php foreach ($group->libraries as $library): ?>
-					<label class="checkbox"> <input type="checkbox"
-													value="<?php echo $library->id; ?>" <?php echo $library->selected ? 'checked="checked"' : '' ?>>
-						<?php echo $library->name; ?>
-					</label>
-					<?php endforeach; ?>
-				</div>
+					<h3><span><?php echo $group->name; ?></span></h3>
+					<div>
+						<?php foreach ($group->libraries as $library): ?>
+							<label class="checkbox"> <input type="checkbox"
+															value="<?php echo $library->id; ?>" <?php echo $library->selected ? 'checked="checked"' : '' ?>>
+								<?php echo $library->name; ?>
+							</label>
+						<?php endforeach; ?>
+					</div>
 				<?php endforeach; ?>
 			</div>
 		</div>
