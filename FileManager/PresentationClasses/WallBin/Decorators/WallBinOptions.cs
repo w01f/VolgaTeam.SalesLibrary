@@ -7,6 +7,7 @@
 		public bool ShowFiles { get; set; }
 		public bool ShowTagsEditor { get; set; }
 		public bool ShowCategoryTags { get; set; }
+		public bool ShowSuperFilterTags { get; set; }
 		public bool ShowKeywordTags { get; set; }
 		public bool ShowFileCardTags { get; set; }
 		public bool ShowAttachmentTags { get; set; }

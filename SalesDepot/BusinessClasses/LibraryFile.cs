@@ -48,6 +48,7 @@ namespace SalesDepot.BusinessClasses
 			SearchTags = new LibraryFileSearchTags();
 			ExpirationDateOptions = new ExpirationDateOptions();
 			FileCard = new FileCard(this);
+			SuperFilters = new List<SuperFilter>();
 			PreviewContainer = null;
 			SetProperties();
 		}
@@ -117,6 +118,7 @@ namespace SalesDepot.BusinessClasses
 
 		public LibraryFileSearchTags SearchTags { get; set; }
 		public SearchGroup CustomKeywords { get; protected set; }
+		public List<SuperFilter> SuperFilters { get; protected set; }
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
@@ -415,6 +417,7 @@ namespace SalesDepot.BusinessClasses
 			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
 			file.FileCard = FileCard.Clone(file);
+			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;
 		}
 
@@ -439,6 +442,10 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(SearchTags.Serialize());
+			result.AppendLine(@"<SuperFilters>");
+			foreach (var superFilter in SuperFilters)
+				result.AppendLine(@"<Filter>" + superFilter.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Filter>");
+			result.AppendLine(@"</SuperFilters>");
 			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
 			result.AppendLine(@"<FileCard>" + FileCard.Serialize() + @"</FileCard>");
 			if (PreviewContainer != null)
@@ -542,6 +549,10 @@ namespace SalesDepot.BusinessClasses
 						break;
 					case "SearchTags":
 						SearchTags.Deserialize(childNode);
+						break;
+					case "SuperFilters":
+						SuperFilters.Clear();
+						SuperFilters.AddRange(childNode.ChildNodes.OfType<XmlNode>().Select(n => new SuperFilter { Name = n.InnerText }));
 						break;
 					case "ExpirationDateOptions":
 						ExpirationDateOptions.Deserialize(childNode);

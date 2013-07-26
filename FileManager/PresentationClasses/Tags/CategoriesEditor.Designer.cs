@@ -41,6 +41,7 @@
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
 			this.pnButtons = new System.Windows.Forms.Panel();
+			this.labelControlCategoryInfo = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewTags)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditLibrary)).BeginInit();
@@ -105,6 +106,7 @@
 			this.repositoryItemCheckEditLibrary.AutoHeight = false;
 			this.repositoryItemCheckEditLibrary.Name = "repositoryItemCheckEditLibrary";
 			this.repositoryItemCheckEditLibrary.CheckedChanged += new System.EventHandler(this.RepositoryItemCheckEditCheckedChanged);
+			this.repositoryItemCheckEditLibrary.EditValueChanging += new DevExpress.XtraEditors.Controls.ChangingEventHandler(this.repositoryItemCheckEditLibrary_EditValueChanging);
 			// 
 			// gridColumnPageName
 			// 
@@ -128,7 +130,7 @@
 			this.gridControl.Name = "gridControl";
 			this.gridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEditLibrary});
-			this.gridControl.Size = new System.Drawing.Size(346, 581);
+			this.gridControl.Size = new System.Drawing.Size(346, 541);
 			this.gridControl.TabIndex = 1;
 			this.gridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewGroups,
@@ -221,19 +223,33 @@
 			// 
 			this.pnData.Controls.Add(this.gridControl);
 			this.pnData.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnData.Location = new System.Drawing.Point(0, 47);
+			this.pnData.Location = new System.Drawing.Point(0, 87);
 			this.pnData.Name = "pnData";
-			this.pnData.Size = new System.Drawing.Size(346, 581);
+			this.pnData.Size = new System.Drawing.Size(346, 541);
 			this.pnData.TabIndex = 1;
 			// 
 			// pnButtons
 			// 
+			this.pnButtons.Controls.Add(this.labelControlCategoryInfo);
 			this.pnButtons.Controls.Add(this.buttonXReset);
 			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnButtons.Location = new System.Drawing.Point(0, 0);
 			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(346, 47);
+			this.pnButtons.Size = new System.Drawing.Size(346, 87);
 			this.pnButtons.TabIndex = 0;
+			// 
+			// labelControlCategoryInfo
+			// 
+			this.labelControlCategoryInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.labelControlCategoryInfo.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.labelControlCategoryInfo.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+			this.labelControlCategoryInfo.Location = new System.Drawing.Point(5, 44);
+			this.labelControlCategoryInfo.Name = "labelControlCategoryInfo";
+			this.labelControlCategoryInfo.Size = new System.Drawing.Size(336, 35);
+			this.labelControlCategoryInfo.TabIndex = 1;
+			this.labelControlCategoryInfo.Text = "labelControl1";
 			// 
 			// buttonXReset
 			// 
@@ -285,5 +301,6 @@
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewGroups;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibrarySelected;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibraryName;
+		private DevExpress.XtraEditors.LabelControl labelControlCategoryInfo;
 	}
 }

@@ -7,7 +7,6 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using FileManager.ConfigurationClasses;
 using FileManager.Controllers;
-using FileManager.PresentationClasses.WallBin.Decorators;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.Tags
@@ -37,7 +36,7 @@ namespace FileManager.PresentationClasses.Tags
 
 		public void UpdateData()
 		{
-			pnButtons.Enabled = false;
+			buttonXReset.Enabled = false;
 			pnData.Enabled = false;
 			Enabled = false;
 			foreach (var group in _groupTemplates)
@@ -55,7 +54,7 @@ namespace FileManager.PresentationClasses.Tags
 			var noData = activePage.SelectedLinks.All(x => x.SearchTags.SearchGroups.Count == 0);
 			var sameData = defaultLink != null && activePage.SelectedLinks.All(x => x.SearchTags.Compare(defaultLink.SearchTags));
 
-			pnButtons.Enabled = !noData;
+			buttonXReset.Enabled = !noData;
 			pnData.Enabled = sameData || noData;
 
 			if (sameData)
@@ -72,6 +71,17 @@ namespace FileManager.PresentationClasses.Tags
 			gridViewGroups.RefreshData();
 			if (gridViewGroups.FocusedRowHandle != GridControl.InvalidRowHandle && gridViewGroups.GetDetailView(gridViewGroups.FocusedRowHandle, 0) != null)
 				gridViewGroups.GetDetailView(gridViewGroups.FocusedRowHandle, 0).RefreshData();
+
+			UpdateCategoryInfo(sameData || noData);
+		}
+
+		public void UpdateCategoryInfo(bool sameData)
+		{
+			var totalTags = _tagTemplates.Count(t => t.Selected);
+			labelControlCategoryInfo.Text = String.Format("{0}{1}",
+				ListManager.Instance.SearchTags.MaxTags > 0 ? String.Format("Only {0} Search Tags are ALLOWED{1}", ListManager.Instance.SearchTags.MaxTags, Environment.NewLine) : String.Empty,
+				totalTags > 0 ? String.Join(", ", _tagTemplates.Where(t => t.Selected).Select(t => t.Name)) : "No Tags Selected"
+				);
 		}
 
 		public void ApplyData()
@@ -93,7 +103,7 @@ namespace FileManager.PresentationClasses.Tags
 					link.SearchTags.SearchGroups.Add(group);
 				}
 			}
-
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
 			activePage.Parent.StateChanged = true;
 			activePage.RefreshSelectedLinks();
 			if (EditorChanged != null)
@@ -149,7 +159,7 @@ namespace FileManager.PresentationClasses.Tags
 					var searchGroup = focussedView.GetFocusedRow() as SearchGroup;
 					if (searchGroup != null)
 					{
-						foreach (SearchTag tag in _tagTemplates.Where(x => x.Parent == searchGroup.Name))
+						foreach (var tag in _tagTemplates.Where(x => x.Parent == searchGroup.Name))
 							tag.Selected = searchGroup.Selected;
 						var tagsView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
 						if (tagsView != null)
@@ -165,6 +175,21 @@ namespace FileManager.PresentationClasses.Tags
 				{
 					searchGroup.Selected = searchTag.Selected;
 					gridControl.MainView.RefreshData();
+				}
+			}
+			UpdateCategoryInfo(true);
+		}
+
+		private void repositoryItemCheckEditLibrary_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)
+		{
+			var newValue = e.NewValue is bool ? (bool)e.NewValue : false;
+			if (newValue && ListManager.Instance.SearchTags.MaxTags > 0)
+			{
+				var totalTags = _tagTemplates.Count(t => t.Selected);
+				if (totalTags >= ListManager.Instance.SearchTags.MaxTags)
+				{
+					AppManager.Instance.ShowWarning(String.Format("Only {0} Search Tags are ALLOWED", ListManager.Instance.SearchTags.MaxTags));
+					e.Cancel = true;
 				}
 			}
 		}

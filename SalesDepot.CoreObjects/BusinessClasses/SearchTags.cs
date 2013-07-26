@@ -19,9 +19,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		}
 
 		public List<SearchGroup> SearchGroups { get; set; }
+		public int MaxTags { get; set; }
+		public bool TagCount { get; set; }
 
 		private void Load()
 		{
+			int tempInt;
+			bool tempBool;
 			XmlNode node;
 			if (File.Exists(_listsFileName))
 			{
@@ -35,6 +39,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						switch (childNode.Name)
 						{
+							case "MaxTags":
+								if (int.TryParse(childNode.InnerText, out tempInt))
+									MaxTags = tempInt;
+								break;
+							case "TagCount":
+								if (bool.TryParse(childNode.InnerText, out tempBool))
+									TagCount = tempBool;
+								break;
 							case "Category":
 								var group = new SearchGroup();
 								foreach (XmlAttribute attribute in childNode.Attributes)
@@ -90,7 +102,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				return string.Join(", ", SearchGroups.Select(x => x.AllTags));
+				return string.Join(", ", SearchGroups.Where(g => g.Tags.Any()).Select(x => x.AllTags));
 			}
 		}
 
@@ -112,7 +124,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public void Deserialize(XmlNode node)
 		{
 			SearchGroups.Clear();
-
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
 				switch (childNode.Name)

@@ -122,6 +122,7 @@
           <xsd:element name="enableFileCard" type="xsd:boolean" />
           <xsd:element name="fileCard" type="tns:FileCard" />
           <xsd:element name="previewId" type="xsd:string" />
+          <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
           <xsd:element name="categories" type="tns:LinkCategoryArray" />
           <xsd:element name="tags" type="xsd:string" />
           <xsd:element name="dateAdd" type="xsd:string" />
@@ -170,6 +171,20 @@
             <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkSuperFilterArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LinkSuperFilter[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkSuperFilter">
+        <xsd:all>
+          <xsd:element name="linkId" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkCategoryArray">
         <xsd:complexContent mixed="false">
@@ -330,6 +345,12 @@
           <xsd:element name="deadLinkBody" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="References">
+        <xsd:all>
+          <xsd:element name="categories" type="tns:CategoryArray" />
+          <xsd:element name="superFilters" type="tns:SuperFilterArray" />
+        </xsd:all>
+      </xsd:complexType>
       <xsd:complexType name="CategoryArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
@@ -343,16 +364,28 @@
           <xsd:element name="tag" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="SuperFilterArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:SuperFilter[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="SuperFilter">
+        <xsd:all>
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="mockupLibraryRequest">
     <wsdl:part name="library" type="tns:Library" />
   </wsdl:message>
   <wsdl:message name="mockupLibraryResponse" />
-  <wsdl:message name="mockupCategoriesRequest">
-    <wsdl:part name="categories" type="tns:CategoryArray" />
+  <wsdl:message name="mockupReferencesRequest">
+    <wsdl:part name="references" type="tns:References" />
   </wsdl:message>
-  <wsdl:message name="mockupCategoriesResponse" />
+  <wsdl:message name="mockupReferencesResponse" />
   <wsdl:portType name="ContentControllerPortType">
     <wsdl:operation name="mockupLibrary">
       <wsdl:documentation>
@@ -360,11 +393,11 @@
       <wsdl:input message="tns:mockupLibraryRequest" />
       <wsdl:output message="tns:mockupLibraryResponse" />
     </wsdl:operation>
-    <wsdl:operation name="mockupCategories">
+    <wsdl:operation name="mockupReferences">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockupCategoriesRequest" />
-      <wsdl:output message="tns:mockupCategoriesResponse" />
+      <wsdl:input message="tns:mockupReferencesRequest" />
+      <wsdl:output message="tns:mockupReferencesResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ContentControllerBinding" type="tns:ContentControllerPortType">
@@ -378,8 +411,8 @@
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="mockupCategories">
-      <soap:operation soapAction="urn:ContentControllerwsdl#mockupCategories" style="rpc" />
+    <wsdl:operation name="mockupReferences">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockupReferences" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

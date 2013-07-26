@@ -103,8 +103,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				sw.Write(jsonString);
 				sw.Flush();
 			}
-
-			jsonString = JsonConvert.SerializeObject(PrepareCategories());
+			var references = new References();
+			references.categories = PrepareCategories();
+			references.superFilters = PrepareSuperFilters();
+			jsonString = JsonConvert.SerializeObject(references);
 			using (var sw = new StreamWriter(Path.Combine(Parent.Folder.FullName, Constants.ReferencesJsonFileName), false))
 			{
 				sw.Write(jsonString);
@@ -419,6 +421,20 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			destinationLink.banner.dateModify = libraryFile.BannerProperties.LastChanged.ToString("MM/dd/yyyy hh:mm:ss tt");
 			#endregion
 
+			#region Super Filters
+			var fileSuperFilters = new List<LinkSuperFilter>();
+			foreach (var superFilter in topLevelFile.SuperFilters)
+			{
+				var linkSuperFilter = new LinkSuperFilter();
+				linkSuperFilter.libraryId = library.Identifier.ToString();
+				linkSuperFilter.linkId = libraryFile.Identifier.ToString();
+				linkSuperFilter.value = superFilter.Name;
+				fileSuperFilters.Add(linkSuperFilter);
+			}
+			if (fileSuperFilters.Count > 0)
+				destinationLink.superFilters = fileSuperFilters.ToArray();
+			#endregion
+
 			#region Categories
 			var fileCategories = new List<LinkCategory>();
 			foreach (SearchGroup searchGroup in topLevelFile.SearchTags.SearchGroups)
@@ -525,6 +541,18 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					category.tag = tag.Name;
 					result.Add(category);
 				}
+			}
+			return result.ToArray();
+		}
+
+		private Services.ContentManagmentService.SuperFilter[] PrepareSuperFilters()
+		{
+			var result = new List<Services.ContentManagmentService.SuperFilter>();
+			foreach (var value in SuperFilter.LoadSuperFilters())
+			{
+				var superFilter = new Services.ContentManagmentService.SuperFilter();
+				superFilter.value = value.Name;
+				result.Add(superFilter);
 			}
 			return result.ToArray();
 		}

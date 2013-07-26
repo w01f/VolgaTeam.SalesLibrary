@@ -9,6 +9,7 @@ using System.Threading;
 using System.Windows.Forms;
 using DevExpress.Utils;
 using FileManager.ConfigurationClasses;
+using FileManager.Controllers;
 using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms;
 using FileManager.ToolForms.WallBin;
@@ -580,10 +581,13 @@ namespace FileManager.PresentationClasses.WallBin
 
 		private void grFiles_SelectionChanged(object sender, EventArgs e)
 		{
+			var selectedLinks = (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>();
 			if (WallBinOptions.AllowMultiSelect)
-				Decorator.SelectLink(_folder.Identifier, (from DataGridViewRow row in grFiles.SelectedRows select row.Tag).OfType<LibraryLink>().ToArray(), ModifierKeys);
+				Decorator.SelectLink(_folder.Identifier, selectedLinks.ToArray(), ModifierKeys);
 			if (WallBinOptions.AllowEdit)
 				UpdateButtonsStatus();
+			if (!WallBinOptions.AllowMultiSelect)
+				MainController.Instance.WallbinController.UpdateLinkInfo(selectedLinks.FirstOrDefault());
 		}
 
 		private void grFiles_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -874,10 +878,6 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				file.IsBold = _formLinkProperties.IsBold;
 				file.Note = _formLinkProperties.Note;
-				file.SearchTags = _formLinkProperties.SearchTags;
-
-				file.CustomKeywords.Tags.Clear();
-				file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
 
 				file.ExpirationDateOptions = _formLinkProperties.ExpirationDateOptions;
 
@@ -893,16 +893,24 @@ namespace FileManager.PresentationClasses.WallBin
 			{
 				file.LineBreakProperties = _formLinkProperties.LineBreakProperties;
 			}
+
+			file.SearchTags = _formLinkProperties.SearchTags;
+			file.CustomKeywords.Tags.Clear();
+			file.CustomKeywords.Tags.AddRange(_formLinkProperties.Keywords.Where(x => !string.IsNullOrEmpty(x.Value)).Select(x => new SearchTag(file.CustomKeywords.Name) { Name = x.Value }));
+
+
 			file.DoNotGeneratePreview = _formLinkProperties.ckDoNotGeneratePreview.Checked;
 			file.ForcePreview = _formLinkProperties.ckVideoForcePreview.Checked;
 
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
 
-			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
+			bool widgetColumnVisible = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
 			_containsWidgets = widgetColumnVisible;
 
 			SetGridSize();
 			grFiles.Refresh();
+			MainController.Instance.WallbinController.UpdateLinkInfo(file);
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
 			if (Parent != null)
 			{
 				((ColumnPanel)Parent).ResizePanel();
@@ -992,18 +1000,18 @@ namespace FileManager.PresentationClasses.WallBin
 			grFiles.CellFormatting += grFiles_CellFormatting;
 			grFiles.DragOver += (s, eParameter) => eParameter.Effect = DragDropEffects.All;
 			Decorator.SelectionChanged += (sender, e) =>
-											  {
-												  if (grFiles.SelectedRows.Count > 0 && !e.SourceFolderId.Equals(_folder.Identifier))
-												  {
-													  grFiles.SelectionChanged -= grFiles_SelectionChanged;
-													  foreach (DataGridViewRow row in grFiles.SelectedRows)
-													  {
-														  var file = row.Tag as LibraryLink;
-														  row.Selected = Decorator.IsLinkSelected(file);
-													  }
-													  grFiles.SelectionChanged += grFiles_SelectionChanged;
-												  }
-											  };
+			{
+				if (grFiles.SelectedRows.Count > 0 && !e.SourceFolderId.Equals(_folder.Identifier))
+				{
+					grFiles.SelectionChanged -= grFiles_SelectionChanged;
+					foreach (DataGridViewRow row in grFiles.SelectedRows)
+					{
+						var file = row.Tag as LibraryLink;
+						row.Selected = Decorator.IsLinkSelected(file);
+					}
+					grFiles.SelectionChanged += grFiles_SelectionChanged;
+				}
+			};
 		}
 
 		public void Delete()
@@ -1040,6 +1048,8 @@ namespace FileManager.PresentationClasses.WallBin
 				image = file.BannerProperties.Image;
 			else if (WallBinOptions.ShowCategoryTags && file.HasCategories)
 				image = Properties.Resources.TagsCategoriesWidget;
+			else if (WallBinOptions.ShowSuperFilterTags && file.HasSuperFilters)
+				image = Properties.Resources.TagsSuperFIltersWidget;
 			else if (WallBinOptions.ShowKeywordTags && file.HasKeywords)
 				image = Properties.Resources.TagsKeywordsWidget;
 			else if (WallBinOptions.ShowFileCardTags && file.HasFileCard)
@@ -1310,7 +1320,7 @@ namespace FileManager.PresentationClasses.WallBin
 					DataGridViewRow row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 					row.Tag = libraryFile;
 				}
-				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
+				_containsWidgets = _folder.Files.OfType<LibraryLink>().Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
 			}
 			else
 				_containFiles = false;
@@ -1354,14 +1364,15 @@ namespace FileManager.PresentationClasses.WallBin
 			WallBinOptions.ShowFiles = options.ShowFiles;
 			WallBinOptions.ShowTagsEditor = options.ShowTagsEditor;
 			WallBinOptions.ShowCategoryTags = options.ShowCategoryTags;
+			WallBinOptions.ShowSuperFilterTags = options.ShowSuperFilterTags;
 			WallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
 			WallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
 			WallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
 			WallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
-			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
+			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
 			grFiles.ClearSelection();
-			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
+			_containsWidgets = (from DataGridViewRow row in grFiles.Rows select row.Tag as LibraryLink).Any(x => x.Widget != null || (WallBinOptions.ShowCategoryTags && x.HasCategories) || (WallBinOptions.ShowSuperFilterTags && x.HasSuperFilters) || (WallBinOptions.ShowKeywordTags && x.HasKeywords) || (WallBinOptions.ShowFileCardTags && x.HasFileCard) || (WallBinOptions.ShowAttachmentTags && (x.HasFileAttachments || x.HasWebAttachments)) || (WallBinOptions.ShowSecurityTags && x.IsRestricted));
 		}
 
 		private void AddFile(FileLink file, int rowIndex)
@@ -1524,42 +1535,42 @@ namespace FileManager.PresentationClasses.WallBin
 				{
 					try
 					{
-						FormMain.Instance.DeleteLinkButton = true;
-						FormMain.Instance.OpenLinkButton = true;
-						FormMain.Instance.LinkPropertiesButton = true;
-						FormMain.Instance.LineBreakButton = true;
-						FormMain.Instance.UpLinkButton = grFiles.SelectedRows[0].Index > 0;
-						FormMain.Instance.DownLinkButton = grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1;
+						MainController.Instance.WallbinController.DeleteLinkButton = true;
+						MainController.Instance.WallbinController.OpenLinkButton = true;
+						MainController.Instance.WallbinController.LinkPropertiesButton = true;
+						MainController.Instance.WallbinController.LineBreakButton = true;
+						MainController.Instance.WallbinController.UpLinkButton = grFiles.SelectedRows[0].Index > 0;
+						MainController.Instance.WallbinController.DownLinkButton = grFiles.SelectedRows[0].Index < grFiles.Rows.Count - 1;
 					}
 					catch
 					{
-						FormMain.Instance.UpLinkButton = false;
-						FormMain.Instance.DownLinkButton = false;
-						FormMain.Instance.DeleteLinkButton = false;
-						FormMain.Instance.OpenLinkButton = false;
-						FormMain.Instance.LinkPropertiesButton = false;
+						MainController.Instance.WallbinController.UpLinkButton = false;
+						MainController.Instance.WallbinController.DownLinkButton = false;
+						MainController.Instance.WallbinController.DeleteLinkButton = false;
+						MainController.Instance.WallbinController.OpenLinkButton = false;
+						MainController.Instance.WallbinController.LinkPropertiesButton = false;
 					}
 				}
 				else
 				{
-					FormMain.Instance.UpLinkButton = false;
-					FormMain.Instance.DownLinkButton = false;
-					FormMain.Instance.DeleteLinkButton = false;
-					FormMain.Instance.OpenLinkButton = false;
-					FormMain.Instance.LinkPropertiesButton = false;
-					FormMain.Instance.LineBreakButton = false;
+					MainController.Instance.WallbinController.UpLinkButton = false;
+					MainController.Instance.WallbinController.DownLinkButton = false;
+					MainController.Instance.WallbinController.DeleteLinkButton = false;
+					MainController.Instance.WallbinController.OpenLinkButton = false;
+					MainController.Instance.WallbinController.LinkPropertiesButton = false;
+					MainController.Instance.WallbinController.LineBreakButton = false;
 				}
-				FormMain.Instance.AddLinkButton = true;
+				MainController.Instance.WallbinController.AddLinkButton = true;
 			}
 			else
 			{
-				FormMain.Instance.UpLinkButton = false;
-				FormMain.Instance.DownLinkButton = false;
-				FormMain.Instance.DeleteLinkButton = false;
-				FormMain.Instance.OpenLinkButton = false;
-				FormMain.Instance.LinkPropertiesButton = false;
-				FormMain.Instance.LineBreakButton = false;
-				FormMain.Instance.AddLinkButton = false;
+				MainController.Instance.WallbinController.UpLinkButton = false;
+				MainController.Instance.WallbinController.DownLinkButton = false;
+				MainController.Instance.WallbinController.DeleteLinkButton = false;
+				MainController.Instance.WallbinController.OpenLinkButton = false;
+				MainController.Instance.WallbinController.LinkPropertiesButton = false;
+				MainController.Instance.WallbinController.LineBreakButton = false;
+				MainController.Instance.WallbinController.AddLinkButton = false;
 			}
 		}
 		#endregion

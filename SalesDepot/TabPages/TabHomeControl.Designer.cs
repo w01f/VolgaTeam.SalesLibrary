@@ -30,26 +30,26 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TabHomeControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
-			DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip9 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem9 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SuperToolTip superToolTip10 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
+			DevExpress.Utils.ToolTipItem toolTipItem10 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip13 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem13 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip14 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem14 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip15 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem15 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip16 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem16 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip11 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem11 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip12 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem12 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip17 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem17 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip18 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem18 = new DevExpress.Utils.ToolTipItem();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
@@ -194,7 +194,7 @@
 			// repositoryItemButtonEdit
 			// 
 			this.repositoryItemButtonEdit.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, true, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEdit.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.repositoryItemButtonEdit.Name = "repositoryItemButtonEdit";
 			this.repositoryItemButtonEdit.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.repositoryItemButtonEdit.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEdit_ButtonClick);
@@ -229,12 +229,12 @@
 			this.pictureBoxHelp.Location = new System.Drawing.Point(8, 3);
 			this.pictureBoxHelp.Name = "pictureBoxHelp";
 			this.pictureBoxHelp.Size = new System.Drawing.Size(48, 48);
-			toolTipTitleItem1.Text = "HELP";
-			toolTipItem1.LeftIndent = 6;
-			toolTipItem1.Text = "Learn more about how to EMAIL files from this Sales Library";
-			superToolTip1.Items.Add(toolTipTitleItem1);
-			superToolTip1.Items.Add(toolTipItem1);
-			this.toolTipController.SetSuperTip(this.pictureBoxHelp, superToolTip1);
+			toolTipTitleItem2.Text = "HELP";
+			toolTipItem10.LeftIndent = 6;
+			toolTipItem10.Text = "Learn more about how to EMAIL files from this Sales Library";
+			superToolTip10.Items.Add(toolTipTitleItem2);
+			superToolTip10.Items.Add(toolTipItem10);
+			this.toolTipController.SetSuperTip(this.pictureBoxHelp, superToolTip10);
 			this.pictureBoxHelp.TabIndex = 5;
 			this.pictureBoxHelp.TabStop = false;
 			this.toolTipController.SetTitle(this.pictureBoxHelp, "HELP");
@@ -412,9 +412,9 @@
 			this.barCheckItemViewClassic.GroupIndex = 1;
 			this.barCheckItemViewClassic.Id = 8;
 			this.barCheckItemViewClassic.Name = "barCheckItemViewClassic";
-			toolTipItem2.Text = "Columns View";
-			superToolTip2.Items.Add(toolTipItem2);
-			this.barCheckItemViewClassic.SuperTip = superToolTip2;
+			toolTipItem13.Text = "Columns View";
+			superToolTip13.Items.Add(toolTipItem13);
+			this.barCheckItemViewClassic.SuperTip = superToolTip13;
 			// 
 			// barCheckItemViewList
 			// 
@@ -425,9 +425,9 @@
 			this.barCheckItemViewList.GroupIndex = 1;
 			this.barCheckItemViewList.Id = 9;
 			this.barCheckItemViewList.Name = "barCheckItemViewList";
-			toolTipItem3.Text = "List View";
-			superToolTip3.Items.Add(toolTipItem3);
-			this.barCheckItemViewList.SuperTip = superToolTip3;
+			toolTipItem14.Text = "List View";
+			superToolTip14.Items.Add(toolTipItem14);
+			this.barCheckItemViewList.SuperTip = superToolTip14;
 			// 
 			// barCheckItemViewAccordion
 			// 
@@ -438,9 +438,9 @@
 			this.barCheckItemViewAccordion.GroupIndex = 1;
 			this.barCheckItemViewAccordion.Id = 10;
 			this.barCheckItemViewAccordion.Name = "barCheckItemViewAccordion";
-			toolTipItem4.Text = "Accordion View";
-			superToolTip4.Items.Add(toolTipItem4);
-			this.barCheckItemViewAccordion.SuperTip = superToolTip4;
+			toolTipItem15.Text = "Accordion View";
+			superToolTip15.Items.Add(toolTipItem15);
+			this.barCheckItemViewAccordion.SuperTip = superToolTip15;
 			// 
 			// barCheckItemViewTabs
 			// 
@@ -448,9 +448,9 @@
 			this.barCheckItemViewTabs.Glyph = global::SalesDepot.Properties.Resources.TabsView;
 			this.barCheckItemViewTabs.Id = 11;
 			this.barCheckItemViewTabs.Name = "barCheckItemViewTabs";
-			toolTipItem5.Text = "Tabs View";
-			superToolTip5.Items.Add(toolTipItem5);
-			this.barCheckItemViewTabs.SuperTip = superToolTip5;
+			toolTipItem16.Text = "Tabs View";
+			superToolTip16.Items.Add(toolTipItem16);
+			this.barCheckItemViewTabs.SuperTip = superToolTip16;
 			// 
 			// barButtonItemFontUp
 			// 
@@ -460,9 +460,9 @@
 			this.barButtonItemFontUp.Glyph = global::SalesDepot.Properties.Resources.MinibarFontLarger;
 			this.barButtonItemFontUp.Id = 4;
 			this.barButtonItemFontUp.Name = "barButtonItemFontUp";
-			toolTipItem6.Text = "Increase Text Size";
-			superToolTip6.Items.Add(toolTipItem6);
-			this.barButtonItemFontUp.SuperTip = superToolTip6;
+			toolTipItem11.Text = "Increase Text Size";
+			superToolTip11.Items.Add(toolTipItem11);
+			this.barButtonItemFontUp.SuperTip = superToolTip11;
 			// 
 			// barButtonItemFontDown
 			// 
@@ -472,9 +472,9 @@
 			this.barButtonItemFontDown.Glyph = global::SalesDepot.Properties.Resources.MinibarFontSmaller;
 			this.barButtonItemFontDown.Id = 5;
 			this.barButtonItemFontDown.Name = "barButtonItemFontDown";
-			toolTipItem7.Text = "Decrease Text Size";
-			superToolTip7.Items.Add(toolTipItem7);
-			this.barButtonItemFontDown.SuperTip = superToolTip7;
+			toolTipItem12.Text = "Decrease Text Size";
+			superToolTip12.Items.Add(toolTipItem12);
+			this.barButtonItemFontDown.SuperTip = superToolTip12;
 			// 
 			// barButtonItemRowSpaceUp
 			// 
@@ -482,9 +482,9 @@
 			this.barButtonItemRowSpaceUp.Glyph = global::SalesDepot.Properties.Resources.MinibarRowSpaceLarger;
 			this.barButtonItemRowSpaceUp.Id = 15;
 			this.barButtonItemRowSpaceUp.Name = "barButtonItemRowSpaceUp";
-			toolTipItem8.Text = "Increase Line Spacing";
-			superToolTip8.Items.Add(toolTipItem8);
-			this.barButtonItemRowSpaceUp.SuperTip = superToolTip8;
+			toolTipItem17.Text = "Increase Line Spacing";
+			superToolTip17.Items.Add(toolTipItem17);
+			this.barButtonItemRowSpaceUp.SuperTip = superToolTip17;
 			// 
 			// barButtonItemRowSpaceDown
 			// 
@@ -492,9 +492,9 @@
 			this.barButtonItemRowSpaceDown.Glyph = global::SalesDepot.Properties.Resources.MinibarRowSpaceSmaller;
 			this.barButtonItemRowSpaceDown.Id = 16;
 			this.barButtonItemRowSpaceDown.Name = "barButtonItemRowSpaceDown";
-			toolTipItem9.Text = "Decrease Line Spacing";
-			superToolTip9.Items.Add(toolTipItem9);
-			this.barButtonItemRowSpaceDown.SuperTip = superToolTip9;
+			toolTipItem18.Text = "Decrease Line Spacing";
+			superToolTip18.Items.Add(toolTipItem18);
+			this.barButtonItemRowSpaceDown.SuperTip = superToolTip18;
 			// 
 			// barButtonItem1
 			// 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Xml;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.ConfigurationClasses
@@ -22,6 +23,7 @@ namespace FileManager.ConfigurationClasses
 		public List<Banner> Banners { get; private set; }
 		public List<Widget> WidgetsFavs { get; private set; }
 		public List<Banner> BannersFavs { get; private set; }
+		public List<SuperFilter> SuperFilters { get; private set; }
 
 		public static ListManager Instance
 		{
@@ -30,17 +32,19 @@ namespace FileManager.ConfigurationClasses
 
 		public void Init()
 		{
-			ListsFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			WidgetFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			BannerFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			WidgetFavsFolder = string.Format(@"{0}\newlocaldirect.com\xml\file_manager\Favorite_Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			BannerFavsFolder = string.Format(@"{0}\newlocaldirect.com\xml\file_manager\Favorite_Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			ListsFolder = String.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			WidgetFolder = String.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			BannerFolder = String.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			WidgetFavsFolder = String.Format(@"{0}\newlocaldirect.com\xml\file_manager\Favorite_Widgets", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			BannerFavsFolder = String.Format(@"{0}\newlocaldirect.com\xml\file_manager\Favorite_Banners", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			SearchTags = new SearchTags();
 			Widgets = new List<Widget>();
 			Banners = new List<Banner>();
 			WidgetsFavs = new List<Widget>();
 			BannersFavs = new List<Banner>();
+			SuperFilters = new List<SuperFilter>();
+			SuperFilters.AddRange(SuperFilter.LoadSuperFilters());
 			LoadWidgets();
 			LoadWidgetsFavs();
 			LoadBanners();
@@ -161,7 +165,7 @@ namespace FileManager.ConfigurationClasses
 			{
 				File.Copy(_filePath, Path.Combine(ListManager.Instance.BannerFavsFolder, Path.GetFileName(_filePath)), true);
 			}
-			catch {}
+			catch { }
 			ListManager.Instance.LoadBannersFavs();
 		}
 	}

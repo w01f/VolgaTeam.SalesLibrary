@@ -30,7 +30,6 @@ namespace SalesDepot.TabPages
 		private readonly SuperTooltipInfo _accordionToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Accordion View", null, null, eTooltipColor.Gray);
 		private readonly SuperTooltipInfo _classicToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library Column View", null, null, eTooltipColor.Gray);
 		private readonly SuperTooltipInfo _listToolTip = new SuperTooltipInfo("HELP", "", "Learn more about the Sales Library List View", null, null, eTooltipColor.Gray);
-		private readonly SuperTooltipInfo _emailToolTip = new SuperTooltipInfo("HELP", "", "", null, null, eTooltipColor.Gray);
 		private readonly string _emailBinFileName = string.Empty;
 		private readonly Dictionary<LibraryLink, string> _emailLinks = new Dictionary<LibraryLink, string>();
 

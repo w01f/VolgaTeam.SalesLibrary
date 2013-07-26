@@ -13,6 +13,7 @@ namespace FileManager.PresentationClasses.Tags
 	public partial class TagsCleaner : UserControl, ITagsEditor
 	{
 		private readonly Dictionary<Guid, SearchTags> _categoriesCopy = new Dictionary<Guid, SearchTags>();
+		private readonly Dictionary<Guid, List<string>> _superFiltersCopy = new Dictionary<Guid, List<string>>();
 		private readonly Dictionary<Guid, CustomKeywords> _keywordsCopy = new Dictionary<Guid, CustomKeywords>();
 		private readonly Dictionary<Guid, FileCard> _fileCardsCopy = new Dictionary<Guid, FileCard>();
 		private readonly Dictionary<Guid, AttachmentProperties> _attachmentsCopy = new Dictionary<Guid, AttachmentProperties>();
@@ -21,6 +22,7 @@ namespace FileManager.PresentationClasses.Tags
 		private readonly Dictionary<Guid, string> _securityAssignedUsersCopy = new Dictionary<Guid, string>();
 
 		private bool _categoriesChanged;
+		private bool _superFiltersChanged;
 		private bool _keywordsChanged;
 		private bool _fileCardsChanged;
 		private bool _attachmentsChanged;
@@ -30,16 +32,6 @@ namespace FileManager.PresentationClasses.Tags
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-
-			if (!((CreateGraphics()).DpiX > 96)) return;
-			buttonXCategories.Font = new Font(buttonXCategories.Font.FontFamily, buttonXCategories.Font.Size - 2, buttonXCategories.Font.Style);
-			buttonXKeywords.Font = new Font(buttonXKeywords.Font.FontFamily, buttonXKeywords.Font.Size - 2, buttonXKeywords.Font.Style);
-			buttonXFileCards.Font = new Font(buttonXFileCards.Font.FontFamily, buttonXFileCards.Font.Size - 2, buttonXFileCards.Font.Style);
-			buttonXFileAttachments.Font = new Font(buttonXFileAttachments.Font.FontFamily, buttonXFileAttachments.Font.Size - 2, buttonXFileAttachments.Font.Style);
-			buttonXWebAttachments.Font = new Font(buttonXWebAttachments.Font.FontFamily, buttonXWebAttachments.Font.Size - 2, buttonXWebAttachments.Font.Style);
-			buttonXSecurity.Font = new Font(buttonXSecurity.Font.FontFamily, buttonXSecurity.Font.Size - 2, buttonXSecurity.Font.Style);
-			laWarning.Font = new Font(laWarning.Font.FontFamily, laWarning.Font.Size - 3, laWarning.Font.Style);
-			laWarningDescription.Font = new Font(laWarningDescription.Font.FontFamily, laWarningDescription.Font.Size - 2, laWarningDescription.Font.Style);
 		}
 
 		#region ITagsEditor Members
@@ -50,12 +42,14 @@ namespace FileManager.PresentationClasses.Tags
 			if (activePage == null) return;
 
 			_categoriesChanged = false;
+			_superFiltersChanged = false;
 			_keywordsChanged = false;
 			_fileCardsChanged = false;
 			_attachmentsChanged = false;
 			_securityChanged = false;
 
 			_categoriesCopy.Clear();
+			_superFiltersCopy.Clear();
 			_keywordsCopy.Clear();
 			_fileCardsCopy.Clear();
 			_attachmentsCopy.Clear();
@@ -67,6 +61,8 @@ namespace FileManager.PresentationClasses.Tags
 				var categoryCopy = new SearchTags();
 				categoryCopy.SearchGroups.AddRange(link.SearchTags.SearchGroups);
 				_categoriesCopy.Add(link.Identifier, categoryCopy);
+
+				_superFiltersCopy.Add(link.Identifier, new List<string>(link.SuperFilters.Select(sf => sf.Name)));
 
 				var keywordsCopy = new CustomKeywords();
 				keywordsCopy.Tags.AddRange(link.CustomKeywords.Tags);
@@ -93,6 +89,12 @@ namespace FileManager.PresentationClasses.Tags
 					link.SearchTags.SearchGroups.AddRange(_categoriesCopy[link.Identifier].SearchGroups);
 				}
 
+				if (_superFiltersChanged)
+				{
+					link.SuperFilters.Clear();
+					link.SuperFilters.AddRange(_superFiltersCopy[link.Identifier].Select(it => new SuperFilter() { Name = it }));
+				}
+
 				if (_keywordsChanged)
 				{
 					link.CustomKeywords.Tags.Clear();
@@ -108,20 +110,20 @@ namespace FileManager.PresentationClasses.Tags
 				{
 					link.IsRestricted = _securityRestrictedCopy[link.Identifier];
 					link.NoShare = _securityNoShareCopy[link.Identifier];
-					link.AssignedUsers  = _securityAssignedUsersCopy[link.Identifier];
+					link.AssignedUsers = _securityAssignedUsersCopy[link.Identifier];
 				}
 			}
 			UpdateData();
 		}
 		#endregion
 
-		private void buttonXCategories_Click(object sender, EventArgs e)
+		private void ClearCategories(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var category in _categoriesCopy.Values)
+			foreach (var category in _categoriesCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				category.SearchGroups.Clear();
 			_categoriesChanged = true;
 			activePage.Parent.StateChanged = true;
@@ -129,13 +131,27 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 		}
 
-		private void buttonXKeywords_Click(object sender, EventArgs e)
+		private void ClearSuperFilters(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var keywords in _keywordsCopy.Values)
+			foreach (var superFilters in _superFiltersCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
+				superFilters.Clear();
+			_superFiltersChanged = true;
+			activePage.Parent.StateChanged = true;
+			if (EditorChanged != null)
+				EditorChanged(this, new EventArgs());
+		}
+
+		private void ClearKeywords(bool allPages)
+		{
+			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+			if (activePage == null) return;
+			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
+			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
+			foreach (var keywords in _keywordsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				keywords.Tags.Clear();
 			_keywordsChanged = true;
 			activePage.Parent.StateChanged = true;
@@ -143,13 +159,13 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 		}
 
-		private void buttonXFileCards_Click(object sender, EventArgs e)
+		private void ClearFileCards(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var fileCard in _fileCardsCopy.Values)
+			foreach (var fileCard in _fileCardsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 			{
 				fileCard.Enable = false;
 				fileCard.Title = string.Empty;
@@ -170,13 +186,13 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 		}
 
-		private void buttonXFileAttachments_Click(object sender, EventArgs e)
+		private void ClearFileAttachments(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var attatchment in _attachmentsCopy.Values)
+			foreach (var attatchment in _attachmentsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				attatchment.FilesAttachments.Clear();
 			_attachmentsChanged = true;
 			activePage.Parent.StateChanged = true;
@@ -184,13 +200,13 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 		}
 
-		private void buttonXWebAttachments_Click(object sender, EventArgs e)
+		private void ClearWebAttachments(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var attatchment in _attachmentsCopy.Values)
+			foreach (var attatchment in _attachmentsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				attatchment.WebAttachments.Clear();
 			_attachmentsChanged = true;
 			activePage.Parent.StateChanged = true;
@@ -198,22 +214,106 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 		}
 
-		private void buttonXSecurity_Click(object sender, EventArgs e)
+		private void ClearSecurity(bool allPages)
 		{
 			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
 			if (activePage == null) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are You Sure ?") != DialogResult.Yes) return;
 			if (AppManager.Instance.ShowWarningQuestion("Are you ABSOLUTELY 100% POSITIVE?") != DialogResult.Yes) return;
-			foreach (var restrictedPair in _securityRestrictedCopy)
+			foreach (var restrictedPair in _securityRestrictedCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
 				_securityRestrictedCopy[restrictedPair.Key] = false;
-			foreach (var noSharePair in _securityNoShareCopy)
+			foreach (var noSharePair in _securityNoShareCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
 				_securityNoShareCopy[noSharePair.Key] = false;
-			foreach (var assignedUsersPair in _securityAssignedUsersCopy)
+			foreach (var assignedUsersPair in _securityAssignedUsersCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
 				_securityAssignedUsersCopy[assignedUsersPair.Key] = null;
 			_securityChanged = true;
 			activePage.Parent.StateChanged = true;
 			if (EditorChanged != null)
 				EditorChanged(this, new EventArgs());
+		}
+
+		private void hyperLinkEditCategoriesActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearCategories(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditCategoriesAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearCategories(true);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditSuperFiltersActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearSuperFilters(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditSuperFiltersAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearSuperFilters(true);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditKeywordsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearKeywords(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditKeywordsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearKeywords(true);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditFileCardsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearFileCards(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditFileCardsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearFileCards(true);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditFileAttachmentsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearFileAttachments(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditFileAttachmentsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearFileAttachments(true);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditWebAttachmentsActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearWebAttachments(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditWebAttachmentsAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearWebAttachments(true);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditSecurityActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearSecurity(false);
+			e.Handled = true;
+		}
+
+		private void hyperLinkEditSecurityAllPages_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)
+		{
+			ClearSecurity(true);
+			e.Handled = true;
 		}
 	}
 }

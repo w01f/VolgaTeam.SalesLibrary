@@ -38,6 +38,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		LibraryFileSearchTags SearchTags { get; set; }
 		SearchGroup CustomKeywords { get; }
+		List<SuperFilter> SuperFilters { get; }
 		ExpirationDateOptions ExpirationDateOptions { get; }
 		PresentationProperties PresentationProperties { get; set; }
 		LineBreakProperties LineBreakProperties { get; set; }

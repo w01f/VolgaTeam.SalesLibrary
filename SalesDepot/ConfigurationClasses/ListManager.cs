@@ -43,7 +43,6 @@ namespace SalesDepot.ConfigurationClasses
 
 		public string ListsFolder { get; set; }
 		public string AccessRightsFolderFolder { get; set; }
-		public string SearchGroupsLogoFolder { get; set; }
 
 		public SearchTags SearchTags { get; set; }
 
@@ -59,7 +58,6 @@ namespace SalesDepot.ConfigurationClasses
 		public void Init()
 		{
 			ListsFolder = string.Format(@"{0}\newlocaldirect.com\sync\Incoming\Slides\Data\SDSearch XML", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			SearchGroupsLogoFolder = string.Format(@"{0}\newlocaldirect.com\Sales Depot\!Artwork\SDSearchButton", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			SearchTags = new SearchTags();
 		}
@@ -74,18 +72,10 @@ namespace SalesDepot.ConfigurationClasses
 		{
 			_listsFileName = Path.Combine(ListManager.Instance.ListsFolder, "SDSearch.xml");
 			SearchGroups = new List<SearchGroup>();
-			LoadLogoFiles();
 			Load();
 		}
 
 		public List<SearchGroup> SearchGroups { get; set; }
-
-		private void LoadLogoFiles()
-		{
-			if (Directory.Exists(ListManager.Instance.SearchGroupsLogoFolder))
-				_groupLogoFilePaths.AddRange(Directory.GetFiles(ListManager.Instance.SearchGroupsLogoFolder, "*.png"));
-			_groupLogoFilePaths.Sort((x, y) => x.CompareTo(y));
-		}
 
 		private void Load()
 		{
@@ -105,8 +95,6 @@ namespace SalesDepot.ConfigurationClasses
 						{
 							case "Category":
 								var group = new SearchGroup();
-								if (_groupLogoFilePaths.Count > i)
-									group.Logo = new Bitmap(_groupLogoFilePaths[i]);
 								foreach (XmlAttribute attribute in childNode.Attributes)
 								{
 									switch (attribute.Name)

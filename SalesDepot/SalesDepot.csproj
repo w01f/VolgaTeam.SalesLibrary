@@ -364,7 +364,6 @@
     <Compile Include="PresentationClasses\WallBin\MultitabLibraryControl.Designer.cs">
       <DependentUpon>MultitabLibraryControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\WallBin\NavigationPaneView.cs" />
     <Compile Include="PresentationClasses\Viewers\QuickTimeViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>

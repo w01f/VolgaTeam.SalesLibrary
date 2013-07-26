@@ -148,9 +148,6 @@
   <data name="WebArt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\WebArt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="OpenFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OpenFile.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -166,14 +163,14 @@
   <data name="Url" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Url.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="LineBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LineBreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="MinibarFontLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinibarFontLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinibarLinkUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinibarLinkUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsFileCardsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsFileCardsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UpLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\UpLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ColumnsSort" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ColumnsSort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,6 +208,9 @@
   <data name="paths" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\paths.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="TabsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TabsView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="TagsFileAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsFileAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -247,14 +247,11 @@
   <data name="FormatFontLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FormatFontLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\settings.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="KeynotePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KeynotePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Exit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Exit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="TagsCleanerWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\TagsCleanerWarning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SyncIPad" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SyncIPad.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -267,6 +264,9 @@
   </data>
   <data name="TagsKeywordsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsKeywordsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinibarFontSmaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinibarFontSmaller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MediaPlayerSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MediaPlayerSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -282,6 +282,9 @@
   </data>
   <data name="CancelSync" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CancelSync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LineBreak" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LineBreak.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TagsWebAttachmentsWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TagsWebAttachmentsWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -301,8 +304,8 @@
   <data name="InActiveLinksWarning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\InActiveLinksWarning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MultiTabs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MultiTabs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Sync" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sync.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QuickTimeSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickTimeSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -315,9 +318,6 @@
   </data>
   <data name="PackageLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PackageLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="text_tree" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\text_tree.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Chrome" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chrome.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -337,8 +337,8 @@
   <data name="ShowInfo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShowInfo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="DownLink" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\DownLink.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="TreeView" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TreeView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="VideoForcePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\VideoForcePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -364,7 +364,16 @@
   <data name="Columns" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Columns.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="KeynotePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\KeynotePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\settings.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinibarLinkDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinibarLinkDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagsSuperFIlters" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsSuperFIlters.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TagsSuperFIltersWidget" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TagsSuperFIltersWidget.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

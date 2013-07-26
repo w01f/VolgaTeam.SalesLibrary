@@ -43,22 +43,17 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemSettingsExtraRoots.Click += BtExtraRootClick;
 			FormMain.Instance.buttonItemSettingsBranding.Click += buttonItemSettingsBranding_Click;
 			FormMain.Instance.buttonItemSettingsSync.Click += buttonItemSettingsSync_Click;
-			FormMain.Instance.buttonItemSettingsPages.Click += buttonItemSettingsPages_Click;
-			FormMain.Instance.buttonItemSettingsColumns.Click += buttonItemSettingsColumns_Click;
-			FormMain.Instance.buttonItemSettingsAutoWidgets.Click += buttonItemSettingsAutoWidgets_Click;
-			FormMain.Instance.buttonItemSettingsDeadLinks.Click += buttonItemSettingsDeadLinks_Click;
-			FormMain.Instance.buttonItemSettingsEmailList.Click += buttonItemSettingsEmailList_Click;
+			FormMain.Instance.buttonItemPreferencesPages.Click += buttonItemSettingsPages_Click;
+			FormMain.Instance.buttonItemPreferencesColumns.Click += buttonItemSettingsColumns_Click;
+			FormMain.Instance.buttonItemPreferencesAutoWidgets.Click += buttonItemSettingsAutoWidgets_Click;
+			FormMain.Instance.buttonItemPreferencesDeadLinks.Click += buttonItemSettingsDeadLinks_Click;
+			FormMain.Instance.buttonItemPreferencesEmailList.Click += buttonItemSettingsEmailList_Click;
 			FormMain.Instance.buttonItemSettingsAutoSync.Click += buttonItemSettingsAutoSync_Click;
-			FormMain.Instance.buttonItemSettingsMultitab.CheckedChanged += buttonItemSettingsMultitab_CheckedChanged;
 
 			FormMain.Instance.buttonItemHomeFileTreeView.CheckedChanged += buttonItemHomeFileTreeView_CheckedChanged;
 			FormMain.Instance.buttonItemHomeAddLineBreak.Click += btLineBreak_Click;
 			FormMain.Instance.buttonItemHomeAddNetworkShare.Click += btAddNeworkShare_Click;
 			FormMain.Instance.buttonItemHomeAddUrl.Click += btAddUrl_Click;
-			FormMain.Instance.buttonItemHomeFontDown.Click += btFontDown_Click;
-			FormMain.Instance.buttonItemHomeFontUp.Click += btFontUp_Click;
-			FormMain.Instance.buttonItemHomeNudgeDown.Click += btDownLink_Click;
-			FormMain.Instance.buttonItemHomeNudgeUp.Click += btUpLink_Click;
 			FormMain.Instance.buttonItemHomeDelete.Click += btDeleteLink_Click;
 			FormMain.Instance.buttonItemHomeOpen.Click += btOpenLink_Click;
 			FormMain.Instance.buttonItemHomeProperties.Click += buttonItemHomeProperties_Click;
@@ -73,6 +68,8 @@ namespace FileManager.Controllers
 
 			FormMain.Instance.buttonItemTagsCategories.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsCategories.CheckedChanged += ButtonItemTagsCheckedChanged;
+			FormMain.Instance.buttonItemTagsSuperFilters.Click += ButtonItemTagsClick;
+			FormMain.Instance.buttonItemTagsSuperFilters.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsKeywords.Click += ButtonItemTagsClick;
 			FormMain.Instance.buttonItemTagsKeywords.CheckedChanged += ButtonItemTagsCheckedChanged;
 			FormMain.Instance.buttonItemTagsFileCards.Click += ButtonItemTagsClick;
@@ -96,7 +93,12 @@ namespace FileManager.Controllers
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
 			_tabPage.pnEmpty.BringToFront();
 			_tabPage.InitPage();
-			FormMain.Instance.buttonItemSettingsMultitab.CheckedChanged += _tabPage.LibraryChanged;
+			_tabPage.barCheckItemTabs.CheckedChanged += buttonItemSettingsMultitab_CheckedChanged;
+			_tabPage.barCheckItemTabs.CheckedChanged += _tabPage.LibraryChanged;
+			_tabPage.barButtonItemFontDown.ItemClick += btFontDown_Click;
+			_tabPage.barButtonItemFontUp.ItemClick += btFontUp_Click;
+			_tabPage.barButtonItemLinkDown.ItemClick += btDownLink_Click;
+			_tabPage.barButtonItemLinkUp.ItemClick += btUpLink_Click;
 
 			var activeDecorator = MainController.Instance.ActiveDecorator;
 			if (activeDecorator != null && activeDecorator.Library.IsConfigured)
@@ -128,6 +130,7 @@ namespace FileManager.Controllers
 		public void ShowTab()
 		{
 			ApplyActiveLibrary();
+
 			_tabPage.ApplyWallBinOptions(_wallBinOptions);
 			_tabPage.BringToFront();
 		}
@@ -143,6 +146,7 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowFiles = false;
 					_wallBinOptions.ShowTagsEditor = true;
 					_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
+					_wallBinOptions.ShowSuperFilterTags = SettingsManager.Instance.ShowTagsSuperFilters;
 					_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
 					_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
 					_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
@@ -154,6 +158,7 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowFiles = true;
 					_wallBinOptions.ShowTagsEditor = false;
 					_wallBinOptions.ShowCategoryTags = false;
+					_wallBinOptions.ShowSuperFilterTags = false;
 					_wallBinOptions.ShowKeywordTags = false;
 					_wallBinOptions.ShowFileCardTags = false;
 					_wallBinOptions.ShowAttachmentTags = false;
@@ -193,6 +198,7 @@ namespace FileManager.Controllers
 							_tabPage.pnMain.Controls.Add(activeDecorator.TabControl);
 						ResizeActivePage();
 						ApplyWallBinOptions();
+						UpdateLinkInfo(null);
 						activeDecorator.TabControl.BringToFront();
 					}
 					else
@@ -202,6 +208,7 @@ namespace FileManager.Controllers
 						activeDecorator.RegularControl.BringToFront();
 						ApplyActivePage();
 					}
+					UpdateTagCountInfo();
 				}
 			}
 		}
@@ -288,6 +295,7 @@ namespace FileManager.Controllers
 			if (pageDecorator == null) return;
 			ResizeActivePage();
 			ApplyWallBinOptions();
+			UpdateLinkInfo(null);
 			pageDecorator.RegularPage.BringToFront();
 		}
 
@@ -302,12 +310,45 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator != null && MainController.Instance.ActiveDecorator.ActivePage != null)
 				MainController.Instance.ActiveDecorator.ActivePage.ApplyWallBinOptions(_wallBinOptions);
 		}
+
+		public void UpdateLinkInfo(LibraryLink link)
+		{
+			_tabPage.UpdateLinkInfo(link);
+			_tabPage.SuperFilterControl.SelectedLink = link;
+			_tabPage.SuperFilterControl.UpdateLink();
+		}
+
+		public void UpdateTagCountInfo()
+		{
+			if (ListManager.Instance.SearchTags.TagCount)
+			{
+				var totalLinks = MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Count(l => l.Type != FileTypes.LineBreak);
+				var taggedLinks = MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Count(l => l.SearchTags != null && !String.IsNullOrEmpty(l.SearchTags.AllTags));
+				if (taggedLinks == 0)
+				{
+					_tabPage.UpdateTagCountInfo("You need to start TAGGING your Links!", Color.Red);
+				}
+				else if (totalLinks > taggedLinks)
+				{
+					_tabPage.UpdateTagCountInfo(String.Format("{0} Links Require Tags!", totalLinks - taggedLinks), Color.Red);
+				}
+				else if (totalLinks == taggedLinks)
+				{
+					_tabPage.UpdateTagCountInfo("Library 100% TAGGED!", Color.Green);
+				}
+			}
+			else
+			{
+				_tabPage.UpdateTagCountInfo(String.Empty);
+			}
+		}
 		#endregion
 
 		#region Tags Processing
 		private void UpdateTagsButtons()
 		{
 			FormMain.Instance.buttonItemTagsCategories.Checked = SettingsManager.Instance.ShowTagsCategories;
+			FormMain.Instance.buttonItemTagsSuperFilters.Checked = SettingsManager.Instance.ShowTagsSuperFilters;
 			FormMain.Instance.buttonItemTagsKeywords.Checked = SettingsManager.Instance.ShowTagsKeywords;
 			FormMain.Instance.buttonItemTagsFileCards.Checked = SettingsManager.Instance.ShowTagsFileCards;
 			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.ShowTagsAttachments;
@@ -690,7 +731,7 @@ namespace FileManager.Controllers
 		{
 			if (MainController.Instance.ActiveDecorator != null && !_initialization)
 			{
-				SettingsManager.Instance.MultitabView = FormMain.Instance.buttonItemSettingsMultitab.Checked;
+				SettingsManager.Instance.MultitabView = _tabPage.barCheckItemTabs.Checked;
 				SettingsManager.Instance.Save();
 				MainController.Instance.RequestChangeLibrary();
 			}
@@ -705,12 +746,14 @@ namespace FileManager.Controllers
 			if (button == null) return;
 			if (!button.Checked) return;
 			SettingsManager.Instance.ShowTagsCategories = FormMain.Instance.buttonItemTagsCategories.Checked;
+			SettingsManager.Instance.ShowTagsSuperFilters = FormMain.Instance.buttonItemTagsSuperFilters.Checked;
 			SettingsManager.Instance.ShowTagsKeywords = FormMain.Instance.buttonItemTagsKeywords.Checked;
 			SettingsManager.Instance.ShowTagsFileCards = FormMain.Instance.buttonItemTagsFileCards.Checked;
 			SettingsManager.Instance.ShowTagsAttachments = FormMain.Instance.buttonItemTagsAttachments.Checked;
 			SettingsManager.Instance.ShowTagsSecurity = FormMain.Instance.buttonItemTagsSecurity.Checked;
 			SettingsManager.Instance.ShowTagsCleaner = FormMain.Instance.buttonItemTagsClear.Checked;
 			_wallBinOptions.ShowCategoryTags = SettingsManager.Instance.ShowTagsCategories;
+			_wallBinOptions.ShowSuperFilterTags = SettingsManager.Instance.ShowTagsSuperFilters;
 			_wallBinOptions.ShowKeywordTags = SettingsManager.Instance.ShowTagsKeywords;
 			_wallBinOptions.ShowFileCardTags = SettingsManager.Instance.ShowTagsFileCards;
 			_wallBinOptions.ShowAttachmentTags = SettingsManager.Instance.ShowTagsAttachments;
@@ -735,6 +778,7 @@ namespace FileManager.Controllers
 			else
 				MainController.Instance.ActiveDecorator.StateChanged = false;
 			FormMain.Instance.buttonItemTagsCategories.Checked = false;
+			FormMain.Instance.buttonItemTagsSuperFilters.Checked = false;
 			FormMain.Instance.buttonItemTagsKeywords.Checked = false;
 			FormMain.Instance.buttonItemTagsFileCards.Checked = false;
 			FormMain.Instance.buttonItemTagsAttachments.Checked = false;
@@ -753,6 +797,65 @@ namespace FileManager.Controllers
 		}
 		#endregion
 
+		#endregion
+
+		#region Button's States
+		public bool AddLinkButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeAddUrl.Enabled = value;
+				FormMain.Instance.buttonItemHomeAddNetworkShare.Enabled = value;
+			}
+		}
+
+		public bool LineBreakButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeAddLineBreak.Enabled = value;
+			}
+		}
+
+		public bool UpLinkButton
+		{
+			set
+			{
+				_tabPage.barButtonItemLinkUp.Enabled = value;
+			}
+		}
+
+		public bool DownLinkButton
+		{
+			set
+			{
+				_tabPage.barButtonItemLinkDown.Enabled = value;
+			}
+		}
+
+		public bool LinkPropertiesButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeProperties.Enabled = value;
+			}
+		}
+
+		public bool OpenLinkButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeOpen.Enabled = value;
+			}
+		}
+
+		public bool DeleteLinkButton
+		{
+			set
+			{
+				FormMain.Instance.buttonItemHomeDelete.Enabled = value;
+			}
+		}
 		#endregion
 	}
 }

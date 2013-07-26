@@ -46,6 +46,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			FileCard = new FileCard(this);
 
 			CustomKeywords = new CustomKeywords();
+			SuperFilters = new List<SuperFilter>();
 
 			SetProperties();
 		}
@@ -87,6 +88,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public LibraryFileSearchTags SearchTags { get; set; }
 		public SearchGroup CustomKeywords { get; protected set; }
+		public List<SuperFilter> SuperFilters { get; protected set; }
 		public ExpirationDateOptions ExpirationDateOptions { get; set; }
 		public PresentationProperties PresentationProperties { get; set; }
 		public LineBreakProperties LineBreakProperties { get; set; }
@@ -304,6 +306,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			get { return !string.IsNullOrEmpty(SearchTags.AllTags); }
 		}
 
+		public bool HasSuperFilters
+		{
+			get { return SuperFilters.Any(); }
+		}
+
 		public bool HasKeywords
 		{
 			get { return CustomKeywords.Tags.Count > 0; }
@@ -474,6 +481,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.AttachmentProperties = AttachmentProperties.Clone(file);
 			file.BannerProperties = BannerProperties.Clone(file);
 			file.FileCard = FileCard.Clone(file);
+			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;
 		}
 
@@ -503,6 +511,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<LastChanged>" + (_lastChanged != DateTime.MinValue ? _lastChanged.ToString() : DateTime.Now.ToString()) + @"</LastChanged>");
 			result.Append(SearchTags.Serialize());
 			result.Append(CustomKeywords.Serialize());
+			result.AppendLine(@"<SuperFilters>");
+			foreach (var superFilter in SuperFilters)
+				result.AppendLine(@"<Filter>" + superFilter.Name.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</Filter>");
+			result.AppendLine(@"</SuperFilters>");
 			result.AppendLine(@"<ExpirationDateOptions>" + ExpirationDateOptions.Serialize() + @"</ExpirationDateOptions>");
 			result.AppendLine(@"<FileCard>" + FileCard.Serialize() + @"</FileCard>");
 
@@ -618,6 +630,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						break;
 					case BusinessClasses.CustomKeywords.TagName:
 						CustomKeywords.Deserialize(childNode);
+						break;
+					case "SuperFilters":
+						SuperFilters.Clear();
+						SuperFilters.AddRange(childNode.ChildNodes.OfType<XmlNode>().Select(n => new SuperFilter { Name = n.InnerText }));
 						break;
 					case "ExpirationDateOptions":
 						ExpirationDateOptions.Deserialize(childNode);
@@ -820,6 +836,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.BannerProperties = BannerProperties.Clone(file);
 			file.FileCard = FileCard.Clone(file);
 			file.FolderContent.AddRange(FolderContent.Select(x => x.Clone(parent)));
+			file.SuperFilters.AddRange(SuperFilters.Select(sf => new SuperFilter() { Name = sf.Name }));
 			return file;
 		}
 

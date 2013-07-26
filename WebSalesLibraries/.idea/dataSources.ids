@@ -1420,6 +1420,16 @@
       <index name="id_link" unique="false" columns="id_link"/>
       <index name="id_user" unique="false" columns="id_user"/>
     </table>
+    <table name="tbl_link_super_filter" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="id_link" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_library" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="value" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="id_link" unique="false" columns="id_link"/>
+      <index name="id_library" unique="false" columns="id_library"/>
+      <index name="value" unique="false" columns="value"/>
+    </table>
     <table name="tbl_page" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
       <column name="id_library" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
@@ -1455,9 +1465,13 @@
       <column name="header" sqlType="VARCHAR" length="2048" precision="0" nullable="true" jdbcType="12"/>
       <column name="footer" sqlType="VARCHAR" length="2048" precision="0" nullable="true" jdbcType="12"/>
       <column name="is_email" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
-      <column name="restricted" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MQ=="/>
-      <column name="show_ticker" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
-      <column name="show_site_link" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="restricted" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7" def="MA=="/>
+      <column name="disable_banners" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" def="MA=="/>
+      <column name="disable_widgets" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" def="MA=="/>
+      <column name="show_links_as_url" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" def="MA=="/>
+      <column name="record_activity" sqlType="BIT" length="0" precision="0" nullable="true" jdbcType="-7" def="MA=="/>
+      <column name="pin_code" sqlType="VARCHAR" length="4" precision="0" nullable="true" jdbcType="12"/>
+      <column name="activity_email_copy" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="id_owner" unique="false" columns="id_owner"/>
     </table>
@@ -1513,6 +1527,11 @@
       <column name="browser" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="id_statistic" unique="false" columns="id_activity"/>
+    </table>
+    <table name="tbl_super_filter" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="value" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="tbl_ticker_link" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>

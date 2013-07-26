@@ -233,6 +233,7 @@ namespace FileManager.Controllers
 			WallbinController = new WallbinController();
 			_controllers.Add(TabPageEnum.Home, WallbinController);
 			_controllers.Add(TabPageEnum.Tags, WallbinController);
+			_controllers.Add(TabPageEnum.Preferences, WallbinController);
 			_controllers.Add(TabPageEnum.Settings, WallbinController);
 			_controllers.Add(TabPageEnum.ProgramManager, WallbinController);
 
@@ -271,11 +272,11 @@ namespace FileManager.Controllers
 		#region Common Page Functionality
 		public void ShowTab(TabPageEnum tabPage)
 		{
-			if (!_controllers.ContainsKey(tabPage)) return;
 			SaveLibraryWarning();
 			_activeTab = tabPage;
-			_controllers[tabPage].PrepareTab(tabPage);
 			FormMain.Instance.pnEmpty.BringToFront();
+			if (!_controllers.ContainsKey(tabPage)) return;
+			_controllers[tabPage].PrepareTab(tabPage);
 			_controllers[tabPage].ShowTab();
 			FormMain.Instance.pnEmpty.SendToBack();
 		}
@@ -306,12 +307,14 @@ namespace FileManager.Controllers
 		None,
 		Home,
 		Tags,
+		Preferences,
 		Settings,
 		Clipart,
 		Calendar,
 		ProgramManager,
 		IPadContent,
-		IPadUsers
+		IPadUsers,
+		Help
 	}
 
 	public interface IPageController

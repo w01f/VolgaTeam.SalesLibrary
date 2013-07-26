@@ -42,65 +42,6 @@ namespace FileManager
 			}
 		}
 
-		#region Button's States
-		public bool AddLinkButton
-		{
-			set
-			{
-				buttonItemHomeAddUrl.Enabled = value;
-				buttonItemHomeAddNetworkShare.Enabled = value;
-			}
-		}
-
-		public bool LineBreakButton
-		{
-			set
-			{
-				buttonItemHomeAddLineBreak.Enabled = value;
-			}
-		}
-
-		public bool UpLinkButton
-		{
-			set
-			{
-				buttonItemHomeNudgeUp.Enabled = value;
-			}
-		}
-
-		public bool DownLinkButton
-		{
-			set
-			{
-				buttonItemHomeNudgeDown.Enabled = value;
-			}
-		}
-
-		public bool LinkPropertiesButton
-		{
-			set
-			{
-				buttonItemHomeProperties.Enabled = value;
-			}
-		}
-
-		public bool OpenLinkButton
-		{
-			set
-			{
-				buttonItemHomeOpen.Enabled = value;
-			}
-		}
-
-		public bool DeleteLinkButton
-		{
-			set
-			{
-				buttonItemHomeDelete.Enabled = value;
-			}
-		}
-		#endregion
-
 		#region GUI Event Handlers
 		private void Form_Load(object sender, EventArgs e)
 		{
@@ -134,6 +75,8 @@ namespace FileManager
 				key = TabPageEnum.Home;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemTags)
 				key = TabPageEnum.Tags;
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemPreferences)
+				key = TabPageEnum.Preferences;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
 				key = TabPageEnum.Settings;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemClipart)
@@ -146,6 +89,8 @@ namespace FileManager
 				key = TabPageEnum.IPadContent;
 			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemIPadUsers)
 				key = TabPageEnum.IPadUsers;
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHelp)
+				key = TabPageEnum.Help;
 			MainController.Instance.ShowTab(key);
 		}
 		#endregion

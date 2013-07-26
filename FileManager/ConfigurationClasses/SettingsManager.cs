@@ -15,6 +15,7 @@ namespace FileManager.ConfigurationClasses
 		private readonly string _ribbonSettingsFilePath = string.Empty;
 		private readonly string _settingsFilePath = string.Empty;
 		private readonly string _syncSettingsFilePath = string.Empty;
+		private readonly string _categoryRequestSettingsPath = string.Empty;
 
 		private SettingsManager()
 		{
@@ -27,6 +28,7 @@ namespace FileManager.ConfigurationClasses
 				Directory.CreateDirectory(settingsFolderPath);
 			_settingsFilePath = Path.Combine(settingsFolderPath, "LocalSettings.xml");
 			_autoSyncSettingsPath = Path.Combine(settingsFolderPath, "AutoSyncSchedule.xml");
+			_categoryRequestSettingsPath = Path.Combine(ApplicationRootsPath, "category_request.xml");
 
 			ArhivePath = Path.Combine(settingsFolderPath, "Archives");
 			if (Directory.Exists(ArhivePath))
@@ -70,6 +72,8 @@ namespace FileManager.ConfigurationClasses
 			ShowTagsCategories = true;
 			LoadRibbonSettings();
 			#endregion
+
+			LoadCategoryRequestSettings();
 
 			HiddenObjects = new List<string>();
 			HiddenObjects.Add("!Old");
@@ -130,11 +134,18 @@ namespace FileManager.ConfigurationClasses
 		public bool EnableIPadUsersTab { get; private set; }
 		public bool EnableTagsTab { get; private set; }
 		public bool ShowTagsCategories { get; set; }
+		public bool ShowTagsSuperFilters { get; set; }
 		public bool ShowTagsKeywords { get; set; }
 		public bool ShowTagsFileCards { get; set; }
 		public bool ShowTagsAttachments { get; set; }
 		public bool ShowTagsSecurity { get; set; }
 		public bool ShowTagsCleaner { get; set; }
+		#endregion
+
+		#region Category Request Settings
+		public string CategoryRequestRecipients { get; set; }
+		public string CategoryRequestSubject { get; set; }
+		public string CategoryRequestBody { get; set; }
 		#endregion
 
 		public void Load()
@@ -266,6 +277,27 @@ namespace FileManager.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						EnableTagsTab = tempBool;
+			}
+		}
+
+		private void LoadCategoryRequestSettings()
+		{
+			if (File.Exists(_categoryRequestSettingsPath))
+			{
+				var document = new XmlDocument();
+				document.Load(_categoryRequestSettingsPath);
+
+				XmlNode node = document.SelectSingleNode(@"/catrequest/recipients");
+				if (node != null)
+					CategoryRequestRecipients = node.InnerText;
+
+				node = document.SelectSingleNode(@"/catrequest/subject");
+				if (node != null)
+					CategoryRequestSubject = node.InnerText;
+
+				node = document.SelectSingleNode(@"/catrequest/body");
+				if (node != null)
+					CategoryRequestBody = node.InnerText;
 			}
 		}
 

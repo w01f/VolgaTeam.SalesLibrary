@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using System.Xml;
+using DevComponents.DotNetBar;
+using DevExpress.XtraEditors;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -14,7 +18,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			get
 			{
-				return string.Join(", ", Tags.Select(x => x.Name));
+				return string.Join(", ", Tags.Where(t => !String.IsNullOrEmpty(t.Name)).Select(x => x.Name));
 			}
 		}
 
@@ -31,12 +35,42 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string Name { get; set; }
 		public bool Selected { get; set; }
 		public string Description { get; set; }
-		public Image Logo { get; set; }
 		public List<SearchTag> Tags { get; private set; }
+
+		public CheckedListBoxControl ListBox { get; private set; }
+		public ButtonX ToggleButton { get; private set; }
 
 		public bool Compare(SearchGroup anotherGroup)
 		{
 			return Tags.All(tag => anotherGroup.Tags.Select(x => x.Name).Contains(tag.Name)) && Tags.Count == anotherGroup.Tags.Count;
+		}
+
+		public void InitGroupControls()
+		{
+			if (ListBox == null)
+			{
+				ListBox = new CheckedListBoxControl();
+				ListBox.Appearance.Font = new Font("Arial", 9.75F, FontStyle.Regular);
+				ListBox.Appearance.Options.UseFont = true;
+				ListBox.CheckOnClick = true;
+				ListBox.ItemHeight = 30;
+				ListBox.SelectionMode = SelectionMode.None;
+				ListBox.Dock = DockStyle.Fill;
+				ListBox.Items.AddRange(Tags.ToArray());
+			}
+
+			if (ToggleButton == null)
+			{
+				ToggleButton = new ButtonX();
+				ToggleButton.AccessibleRole = AccessibleRole.PushButton;
+				ToggleButton.ColorTable = eButtonColor.OrangeWithBackground;
+				ToggleButton.Size = new Size(250, 30);
+				ToggleButton.Style = eDotNetBarStyle.StyleManagerControlled;
+				ToggleButton.Text = Description.Replace("&", "&&");
+				ToggleButton.TextColor = Color.Black;
+				ToggleButton.TextAlignment = eButtonTextAlignment.Left;
+				ToggleButton.Tag = ListBox;
+			}
 		}
 
 		public string Serialize()

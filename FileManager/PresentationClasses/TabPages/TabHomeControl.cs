@@ -21,6 +21,7 @@ namespace FileManager.PresentationClasses.TabPages
 		private readonly WallBinOptions _wallBinOptions = new WallBinOptions();
 		private WallBinTreeListControl _treeList;
 		private readonly CategoriesEditor _categoriesEditor = new CategoriesEditor();
+		private readonly SuperFiltersEditor _superFiltersEditor = new SuperFiltersEditor();
 		private readonly KeywordsEditor _keywordsEditor = new KeywordsEditor();
 		private readonly FileCardsEditor _fileCardsEditor = new FileCardsEditor();
 		private readonly AttachmentsEditor _attachmentsEditor = new AttachmentsEditor();
@@ -46,6 +47,8 @@ namespace FileManager.PresentationClasses.TabPages
 			LoadTagsEditors();
 
 			UpdateControlsState();
+
+			SuperFilterControl.Init();
 
 			splitContainerControl.Panel2.Resize += (sender, args) => MainController.Instance.WallbinController.ResizeActivePage();
 		}
@@ -95,7 +98,7 @@ namespace FileManager.PresentationClasses.TabPages
 
 		private void UpdateControlsState()
 		{
-			FormMain.Instance.buttonItemSettingsMultitab.Checked = SettingsManager.Instance.MultitabView;
+			barCheckItemTabs.Checked = SettingsManager.Instance.MultitabView;
 			FormMain.Instance.buttonItemHomeFileTreeView.Checked = SettingsManager.Instance.TreeViewVisible;
 			var activeLibrary = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.Library : null;
 			if (activeLibrary != null)
@@ -107,22 +110,24 @@ namespace FileManager.PresentationClasses.TabPages
 
 					FormMain.Instance.buttonItemHomeFileTreeView.Enabled = true;
 					FormMain.Instance.ribbonBarHomeAddLink.Enabled = true;
-					FormMain.Instance.ribbonBarHomeDelete.Enabled = true;
+					FormMain.Instance.buttonItemHomeDelete.Enabled = true;
 					FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = true;
-					FormMain.Instance.ribbonBarHomeFontSize.Enabled = true;
 					FormMain.Instance.ribbonBarHomeLibraries.Enabled = true;
-					FormMain.Instance.ribbonBarHomeNudge.Enabled = true;
-					FormMain.Instance.ribbonBarHomeOpen.Enabled = true;
-					FormMain.Instance.ribbonBarHomeProperties.Enabled = true;
+					barButtonItemLinkUp.Enabled = true;
+					barButtonItemLinkDown.Enabled = true;
+					FormMain.Instance.buttonItemHomeOpen.Enabled = true;
+					FormMain.Instance.buttonItemHomeProperties.Enabled = true;
 					FormMain.Instance.ribbonBarHomeSave.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsAutoWidgets.Enabled = true;
+					FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = true;
 					FormMain.Instance.ribbonBarSettingsBranding.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsColumns.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsDeadLinks.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsEmailList.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsMultitab.Enabled = true;
-					FormMain.Instance.ribbonBarSettingsPages.Enabled = true;
-
+					FormMain.Instance.ribbonBarPreferencesColumns.Enabled = true;
+					FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = true;
+					FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = true;
+					FormMain.Instance.ribbonBarPreferencesPages.Enabled = true;
+					barButtonItemFontUp.Enabled = true;
+					barButtonItemFontDown.Enabled = true;
+					barCheckItemTabs.Enabled = true;
+					barMinibar.Visible = true;
 					ShowDockPanel(_wallBinOptions.ShowFiles && (SettingsManager.Instance.TreeViewVisible || activeLibrary.UseDirectAccess));
 
 					UpdateFontButtonStatus();
@@ -132,22 +137,25 @@ namespace FileManager.PresentationClasses.TabPages
 					btSetupWallBin.Visible = false;
 					FormMain.Instance.buttonItemHomeFileTreeView.Enabled = false;
 					FormMain.Instance.ribbonBarHomeAddLink.Enabled = false;
-					FormMain.Instance.ribbonBarHomeDelete.Enabled = false;
+					FormMain.Instance.buttonItemHomeDelete.Enabled = false;
 					FormMain.Instance.ribbonBarHomeFileTreeView.Enabled = false;
-					FormMain.Instance.ribbonBarHomeFontSize.Enabled = false;
 					FormMain.Instance.ribbonBarHomeLibraries.Enabled = false;
-					FormMain.Instance.ribbonBarHomeNudge.Enabled = false;
-					FormMain.Instance.ribbonBarHomeOpen.Enabled = false;
-					FormMain.Instance.ribbonBarHomeProperties.Enabled = false;
+					barButtonItemLinkUp.Enabled = false;
+					barButtonItemLinkDown.Enabled = false;
+					FormMain.Instance.buttonItemHomeOpen.Enabled = false;
+					FormMain.Instance.buttonItemHomeProperties.Enabled = false;
 					FormMain.Instance.ribbonBarHomeSave.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsAutoWidgets.Enabled = false;
+					FormMain.Instance.ribbonBarPreferencesAutoWidgets.Enabled = false;
 					FormMain.Instance.ribbonBarSettingsBranding.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsColumns.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsDeadLinks.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsEmailList.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsMultitab.Enabled = false;
-					FormMain.Instance.ribbonBarSettingsPages.Enabled = false;
+					FormMain.Instance.ribbonBarPreferencesColumns.Enabled = false;
+					FormMain.Instance.ribbonBarPreferencesDeadLinks.Enabled = false;
+					FormMain.Instance.ribbonBarPreferencesEmailList.Enabled = false;
+					FormMain.Instance.ribbonBarPreferencesPages.Enabled = false;
 					ShowDockPanel(false);
+					barButtonItemFontUp.Enabled = false;
+					barButtonItemFontDown.Enabled = false;
+					barCheckItemTabs.Enabled = false;
+					barMinibar.Visible = false;
 				}
 				MainController.Instance.WallbinController.ResizeActivePage();
 			}
@@ -155,8 +163,8 @@ namespace FileManager.PresentationClasses.TabPages
 
 		public void UpdateFontButtonStatus()
 		{
-			FormMain.Instance.buttonItemHomeFontUp.Enabled = SettingsManager.Instance.FontSize < 20;
-			FormMain.Instance.buttonItemHomeFontDown.Enabled = SettingsManager.Instance.FontSize > 8;
+			barButtonItemFontUp.Enabled = SettingsManager.Instance.FontSize < 20;
+			barButtonItemFontDown.Enabled = SettingsManager.Instance.FontSize > 8;
 		}
 
 		public void ApplyWallBinOptions(WallBinOptions options)
@@ -166,6 +174,7 @@ namespace FileManager.PresentationClasses.TabPages
 			_wallBinOptions.ShowFiles = options.ShowFiles;
 			_wallBinOptions.ShowTagsEditor = options.ShowTagsEditor;
 			_wallBinOptions.ShowCategoryTags = options.ShowCategoryTags;
+			_wallBinOptions.ShowSuperFilterTags = options.ShowSuperFilterTags;
 			_wallBinOptions.ShowKeywordTags = options.ShowKeywordTags;
 			_wallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
 			_wallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
@@ -243,8 +252,8 @@ namespace FileManager.PresentationClasses.TabPages
 		{
 			if (!splitContainerControl.Panel1.Controls.Contains(_categoriesEditor))
 				splitContainerControl.Panel1.Controls.Add(_categoriesEditor);
-			if (!splitContainerControl.Panel1.Controls.Contains(_keywordsEditor))
-				splitContainerControl.Panel1.Controls.Add(_keywordsEditor);
+			if (!splitContainerControl.Panel1.Controls.Contains(_superFiltersEditor))
+				splitContainerControl.Panel1.Controls.Add(_superFiltersEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_fileCardsEditor))
 				splitContainerControl.Panel1.Controls.Add(_fileCardsEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_attachmentsEditor))
@@ -271,6 +280,8 @@ namespace FileManager.PresentationClasses.TabPages
 		{
 			if (SettingsManager.Instance.ShowTagsCategories)
 				ActiveTagsEditor = _categoriesEditor;
+			else if (SettingsManager.Instance.ShowTagsSuperFilters)
+				ActiveTagsEditor = _superFiltersEditor;
 			else if (SettingsManager.Instance.ShowTagsKeywords)
 				ActiveTagsEditor = _keywordsEditor;
 			else if (SettingsManager.Instance.ShowTagsFileCards)
@@ -290,5 +301,35 @@ namespace FileManager.PresentationClasses.TabPages
 			}
 		}
 		#endregion
+
+		#region Header Processing
+		public void UpdateLinkInfo(LibraryLink link)
+		{
+			labelControlSelectedLink.Text = link != null ? String.Format("<b>{0}</b>{1}",
+				link.Name,
+				link.SearchTags != null && !String.IsNullOrEmpty(link.SearchTags.AllTags) ? String.Format("{0}({1})", Environment.NewLine, link.SearchTags.AllTags) : String.Empty) :
+				String.Empty;
+		}
+
+		public void UpdateTagCountInfo(string infoString, Color color = default(Color))
+		{
+			if(String.IsNullOrEmpty(infoString))
+				labelControlTagCountInfo.Visible = false;
+			else
+			{
+				labelControlTagCountInfo.Visible = true;
+				labelControlTagCountInfo.Text = infoString;
+				labelControlTagCountInfo.ForeColor = color;
+			}
+		}
+		#endregion
+
+		private void TabHomeControl_Resize(object sender, EventArgs e)
+		{
+			barMinibar.BeginUpdate();
+			barMinibar.Offset = (Width - 115) / 2;
+			barMinibar.ApplyDockRowCol();
+			barMinibar.EndUpdate();
+		}
 	}
 }

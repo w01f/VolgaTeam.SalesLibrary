@@ -130,6 +130,12 @@
     <Compile Include="PresentationClasses\Tags\AttachmentsEditor.Designer.cs">
       <DependentUpon>AttachmentsEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Tags\SuperFiltersEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Tags\SuperFiltersEditor.Designer.cs">
+      <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Tags\SecurityEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -173,6 +179,15 @@
     </Compile>
     <Compile Include="PresentationClasses\TabPages\TabIPadContentControl.Designer.cs">
       <DependentUpon>TabIPadContentControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\SuperFilterControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\SuperFilterControl.Designer.cs">
+      <DependentUpon>SuperFilterControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\WallBin\WallbinHeaderPanel.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ToolClasses\PasswordHelper.cs" />
     <Compile Include="ToolClasses\VideoHelper.cs" />
@@ -461,6 +476,9 @@
     <EmbeddedResource Include="PresentationClasses\Tags\AttachmentsEditor.resx">
       <DependentUpon>AttachmentsEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Tags\SuperFiltersEditor.resx">
+      <DependentUpon>SuperFiltersEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Tags\SecurityEditor.resx">
       <DependentUpon>SecurityEditor.cs</DependentUpon>
     </EmbeddedResource>
@@ -481,6 +499,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\TabPages\TabIPadContentControl.resx">
       <DependentUpon>TabIPadContentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\WallBin\SuperFilterControl.resx">
+      <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
@@ -637,6 +658,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\TagsSuperFIltersWidget.png" />
+    <None Include="Resources\TagsSuperFIlters.png" />
+    <None Include="Resources\MinibarLinkDown.png" />
+    <None Include="Resources\MinibarLinkUp.png" />
+    <None Include="Resources\Sync.png" />
+    <None Include="Resources\TreeView.png" />
+    <None Include="Resources\MinibarFontSmaller.png" />
+    <None Include="Resources\MinibarFontLarger.png" />
+    <None Include="Resources\TabsView.png" />
     <None Include="Resources\KeynotePreview.png" />
     <None Include="Resources\VideoForcePreview.png" />
     <None Include="Resources\ToolboxClose.png" />
@@ -645,7 +675,6 @@
     <None Include="Resources\ColumnsSort.png" />
     <None Include="Resources\TagsSecurityWidget.png" />
     <None Include="Resources\TagsSecurity.png" />
-    <None Include="Resources\TagsCleanerWarning.png" />
     <None Include="Resources\TagsWebAttachmentsWidget.png" />
     <None Include="Resources\TagsKeywordsWidget.png" />
     <None Include="Resources\TagsFileCardsWidget.png" />
@@ -679,7 +708,6 @@
     <None Include="Resources\FileGrabber.png" />
     <None Include="Resources\EmailGrabber.png" />
     <None Include="Resources\AutoSync.png" />
-    <None Include="Resources\MultiTabs.png" />
     <None Include="Resources\Colors.png" />
     <None Include="Resources\WebArt.png" />
     <None Include="Resources\SalesGallery.png" />
@@ -694,8 +722,6 @@
     <None Include="Resources\LineBreak.png" />
     <None Include="Resources\NetworkShare.png" />
     <None Include="Resources\Url.png" />
-    <None Include="Resources\DownLink.png" />
-    <None Include="Resources\UpLink.png" />
     <None Include="Resources\ExpiredLinks.png" />
     <None Include="Resources\EmailList.png" />
     <None Include="Resources\DeadLinks.png" />
@@ -713,9 +739,7 @@
     <None Include="Resources\DownArrow.png" />
     <None Include="Resources\GreenRightArrow.png" />
     <None Include="Resources\ArrowLeftGreen.png" />
-    <None Include="Resources\text_tree.png" />
     <None Include="Resources\settings.png" />
-    <None Include="Resources\Refresh.png" />
     <None Include="Resources\Save.png" />
     <None Include="Resources\OpenFile.png" />
     <None Include="Resources\InActiveLinksWarning.png" />

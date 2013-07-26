@@ -47,6 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ceTe.DynamicPDF.Rasterizer.40.x86, Version=2.0.0.23184, Culture=neutral, PublicKeyToken=09b5ce0d5c0a9d8b, processorArchitecture=x86" />
+    <Reference Include="DevComponents.DotNetBar2, Version=10.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="itextsharp">
       <HintPath>ToolClasses\PdfToText\itextsharp.dll</HintPath>
     </Reference>
@@ -90,6 +94,7 @@
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\PreviewGenerator.cs" />
     <Compile Include="BusinessClasses\QBuilder.cs" />
+    <Compile Include="BusinessClasses\SuperFilter.cs" />
     <Compile Include="InteropClasses\ExcelHelper.cs" />
     <Compile Include="InteropClasses\OutlookHelper.cs" />
     <Compile Include="InteropClasses\PowerPointHelper.cs" />
