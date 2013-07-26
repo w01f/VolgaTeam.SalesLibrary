@@ -1,8 +1,8 @@
 <fieldset data-role="controlgroup" data-mini="true">
-	<input type="radio" name="radio-choice" id="search-date-file" value="choice-1"/>
-	<label for="search-date-file">Search by Date File was Created</label>
 	<input type="radio" name="radio-choice" id="search-date-link" value="choice-2"/>
 	<label for="search-date-link">Search by Date File was Uploaded</label>
+	<input type="radio" name="radio-choice" id="search-date-file" value="choice-1"/>
+	<label for="search-date-file">Search by Date File was Created</label>
 </fieldset>
 <table class="layout-group">
 	<tr>

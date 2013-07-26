@@ -140,6 +140,35 @@
 		});
 	};
 
+	var initSideBarToggle = function ()
+	{
+		$(".side-bar-toggle").off('click').on('click', function ()
+		{
+			var button = $(this);
+			var sideBar = $('#right-navbar');
+			var sideBarVisible = true;
+			if (button.hasClass('sel'))
+			{
+				button.removeClass('sel');
+				sideBar.hide("slide", { direction: "left" });
+				sideBarVisible = false;
+			}
+			else
+			{
+				button.addClass('sel');
+				sideBar.show("slide", { direction: "right" });
+				sideBarVisible = true;
+			}
+			if ($("#links-grid-body").find('tr').length > 0)
+				$.linkGrid.refreshData();
+			else
+				$.updateContentAreaDimensions();
+			$.cookie("sideBarVisible", sideBarVisible, {
+				expires: (60 * 60 * 24 * 7)
+			});
+		});
+	};
+
 	var initTabControl = function ()
 	{
 		var conditionType = 0;
@@ -512,6 +541,7 @@
 	var initControlPanel = function ()
 	{
 		initSearchButtons();
+		initSideBarToggle();
 		initFileCard();
 		initKeywordFiled();
 		initFileTypes();

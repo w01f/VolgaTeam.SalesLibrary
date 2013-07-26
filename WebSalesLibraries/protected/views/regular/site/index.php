@@ -1,5 +1,5 @@
 <?php
-$version = '16.0';
+$version = '17.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -89,6 +89,10 @@ if (Yii::app()->params['ribbon_news']['visible'])
 	foreach (Yii::app()->params['ribbon_news']['urls'] as $url)
 		if ($url['visible'])
 			$newsCount++;
+
+$sideBarVisible = true;
+if (isset(Yii::app()->request->cookies['sideBarVisible']->value))
+	$sideBarVisible = Yii::app()->request->cookies['sideBarVisible']->value == "true";
 ?>
 <div id="ribbon">
 <div class="ribbon-window-title"></div>
@@ -172,8 +176,15 @@ if (Yii::app()->params['ribbon_news']['visible'])
                         </span> <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
 				</div>
 				<div class="ribbon-section">
+					<span class="section-title">SideBar</span>
+					<div class="ribbon-button ribbon-button-large side-bar-toggle<? echo $sideBarVisible ? ' sel' : ''; ?>">
+						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/search/side-bar.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/search/side-bar.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/search/side-bar.png' ?>"/>
+					</div>
+				</div>
+				<div class="ribbon-section">
 					<span class="section-title">Search</span>
-
 					<div class="ribbon-button ribbon-button-large" id="run-search-full">
 						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/search/search.png' ?>"/>
 						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/search/search.png' ?>"/>
@@ -225,6 +236,14 @@ if (Yii::app()->params['ribbon_news']['visible'])
 								<?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
 							<?php endif; ?>
                         </span> <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+				</div>
+				<div class="ribbon-section">
+					<span class="section-title">SideBar</span>
+					<div class="ribbon-button ribbon-button-large side-bar-toggle<? echo $sideBarVisible ? ' sel' : ''; ?>">
+						<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/search/side-bar.png' ?>"/>
+						<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/search/side-bar.png' ?>"/>
+						<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/search/side-bar.png' ?>"/>
+					</div>
 				</div>
 				<div class="ribbon-section">
 					<span class="section-title">Search</span>
