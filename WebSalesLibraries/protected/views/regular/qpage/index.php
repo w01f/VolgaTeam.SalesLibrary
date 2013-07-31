@@ -56,14 +56,15 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 		<div id="page-title"><?echo $page->subtitle;?></div>
 		<div id="page-header"><?echo nl2br($page->header);?></div>
 		<div id="page-links-container" class="folder-links-container">
-			<? if ($page->show_links_as_url): ?><ul class="nav nav-tabs nav-stacked"><?endif;?>
+			<? if ($page->show_links_as_url): ?>
+			<ul class="nav nav-tabs nav-stacked"><?endif;?>
 				<? $links = $page->getLibraryLinks()?>
 				<?if (isset($links)): ?>
 					<?php foreach ($links as $link): ?>
 						<? if ($page->show_links_as_url): ?>
 							<? if ($link->name != '' && !$link->isFolder): ?>
 								<li>
-									<a href="#" id="link<?php echo $link->id; ?>" class="clickable"><?echo $link->name;?></a>
+									<a href="#" id="link<?php echo $link->id; ?>" class="clickable" style="text-decoration: underline;"><?echo $link->name;?></a>
 								</li>
 							<? endif; ?>
 						<? else: ?>
@@ -71,7 +72,7 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 						<? endif; ?>
 					<?php endforeach; ?>
 				<? endif;?>
-			<? if ($page->show_links_as_url): ?></ul><?endif;?>
+				<? if ($page->show_links_as_url): ?></ul><?endif;?>
 		</div>
 		<div id="page-footer"><?echo nl2br($page->footer);?></div>
 	</div>
