@@ -104,42 +104,50 @@
 				{
 					case 'ppt':
 						$this->availableFormats[] = 'ppt';
-
-						if (isset($this->universalPreview))
+						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'pdf';
-							$this->availableFormats[] = 'png';
-							$this->availableFormats[] = 'jpeg';
+							if (isset($this->universalPreview))
+							{
+								$this->availableFormats[] = 'pdf';
+								$this->availableFormats[] = 'png';
+								$this->availableFormats[] = 'jpeg';
+							}
+							$this->availableFormats[] = 'email';
 						}
-
-						$this->availableFormats[] = 'email';
 						break;
 					case 'doc':
 						$this->availableFormats[] = 'doc';
-
-						if (isset($this->universalPreview))
+						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'pdf';
-							$this->availableFormats[] = 'png';
-							$this->availableFormats[] = 'jpeg';
-						}
+							if (isset($this->universalPreview))
+							{
+								$this->availableFormats[] = 'pdf';
+								$this->availableFormats[] = 'png';
+								$this->availableFormats[] = 'jpeg';
+							}
 
-						$this->availableFormats[] = 'email';
+							$this->availableFormats[] = 'email';
+						}
 						break;
 					case 'xls':
 						$this->availableFormats[] = 'xls';
-						$this->availableFormats[] = 'email';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'email';
+						}
 						break;
 					case 'pdf':
 						$this->availableFormats[] = 'pdf';
-
-						if (isset($this->universalPreview))
+						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'png';
-							$this->availableFormats[] = 'jpeg';
-						}
+							if (isset($this->universalPreview))
+							{
+								$this->availableFormats[] = 'png';
+								$this->availableFormats[] = 'jpeg';
+							}
 
-						$this->availableFormats[] = 'email';
+							$this->availableFormats[] = 'email';
+						}
 						break;
 					case 'video':
 					case 'wmv':
@@ -197,18 +205,27 @@
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';
-						$this->availableFormats[] = 'email';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'email';
+						}
 						break;
 					case 'jpeg':
 						$this->availableFormats[] = 'jpeg';
-						$this->availableFormats[] = 'email';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'email';
+						}
 						break;
 					case 'url':
 						$this->availableFormats[] = 'url';
 						break;
 					case 'key':
 						$this->availableFormats[] = 'key';
-						$this->availableFormats[] = 'email';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'email';
+						}
 						break;
 					default:
 						$this->originalFormat = 'other';

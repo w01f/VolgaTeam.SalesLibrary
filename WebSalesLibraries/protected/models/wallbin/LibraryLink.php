@@ -216,11 +216,11 @@
 			$this->type = $linkRecord->type;
 			$this->enableWidget = $linkRecord->enable_widget;
 			$this->widget = $linkRecord->widget;
-			$this->originalFormat = $linkRecord->format;
 			$this->isDead = $linkRecord->is_dead;
 			$this->isPreviewNotReady = $linkRecord->is_preview_not_ready;
 			$this->forcePreview = $linkRecord->force_preview;
 			$this->noShare = $linkRecord->no_share;
+			$this->originalFormat = $linkRecord->format;
 
 			$lineBreakRecord = LineBreakStorage::model()->findByPk($linkRecord->id_line_break);
 			if ($lineBreakRecord !== null)
@@ -301,6 +301,7 @@
 				$this->fileRelativePath = str_replace('\\', '', $this->fileRelativePath);
 				$this->fileName = $this->fileRelativePath;
 				$this->fileLink = $this->fileRelativePath;
+				$this->originalFormat = "url";
 			}
 			else
 			{
@@ -393,43 +394,52 @@
 				{
 					case 'ppt':
 						$this->availableFormats[] = 'ppt';
-
-						if (isset($this->universalPreview))
+						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'pdf';
-							$this->availableFormats[] = 'png';
-							$this->availableFormats[] = 'jpeg';
+							if (isset($this->universalPreview))
+							{
+								$this->availableFormats[] = 'pdf';
+								$this->availableFormats[] = 'png';
+								$this->availableFormats[] = 'jpeg';
+							}
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
 						}
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
 						break;
 					case 'doc':
 						$this->availableFormats[] = 'doc';
-
-						if (isset($this->universalPreview))
+						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'pdf';
-							$this->availableFormats[] = 'png';
-							$this->availableFormats[] = 'jpeg';
+							if (isset($this->universalPreview))
+							{
+								$this->availableFormats[] = 'pdf';
+								$this->availableFormats[] = 'png';
+								$this->availableFormats[] = 'jpeg';
+							}
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
 						}
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
 						break;
 					case 'xls':
 						$this->availableFormats[] = 'xls';
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
+						if (!$this->forcePreview)
+						{
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
+						}
 						break;
 					case 'pdf':
 						$this->availableFormats[] = 'pdf';
-
-						if (isset($this->universalPreview))
+						if (!$this->forcePreview)
 						{
-							$this->availableFormats[] = 'png';
-							$this->availableFormats[] = 'jpeg';
+							if (isset($this->universalPreview))
+							{
+								$this->availableFormats[] = 'png';
+								$this->availableFormats[] = 'jpeg';
+							}
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
 						}
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
 						break;
 					case 'video':
 					case 'wmv':
@@ -488,21 +498,34 @@
 						break;
 					case 'png':
 						$this->availableFormats[] = 'png';
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
+						if (!$this->forcePreview)
+						{
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
+						}
 						break;
 					case 'jpeg':
-						$this->availableFormats[] = 'jpeg';
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'jpeg';
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
+						}
 						break;
 					case 'url':
 						$this->availableFormats[] = 'url';
+						if (!$this->forcePreview)
+						{
+							$this->availableFormats[] = 'outlook';
+						}
 						break;
 					case 'key':
 						$this->availableFormats[] = 'key';
-						if (!$this->noShare)
-							$this->availableFormats[] = 'outlook';
+						if (!$this->forcePreview)
+						{
+							if (!$this->noShare)
+								$this->availableFormats[] = 'outlook';
+						}
 						break;
 					default:
 						$this->originalFormat = 'other';
@@ -1103,6 +1126,16 @@
 			if (isset($fileSize))
 				return $fileSize;
 			return null;
+		}
+
+		public function getSuperFiltersString()
+		{
+			if (isset($this->superFilters))
+				foreach ($this->superFilters as $superFilter)
+					$superFiltersString[] = $superFilter->value;
+			if (isset($superFiltersString))
+				return implode(', ', $superFiltersString);
+			return '';
 		}
 
 		public static function libraryLinkComparer($x, $y)
