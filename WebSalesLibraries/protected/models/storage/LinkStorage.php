@@ -440,7 +440,7 @@
 							else if ($type == 6)
 								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-line-break.png'));
 							else
-								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'undefined.png'));
+								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-undefined-type.png'));
 							break;
 					}
 					$links[] = $link;

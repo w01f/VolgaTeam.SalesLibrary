@@ -25,6 +25,6 @@ class LinkSuperFilter
     {
         $this->linkId = $linkSuperFilterRecord->id_link;
         $this->libraryId = $linkSuperFilterRecord->id_library;
-        $this->category = $linkSuperFilterRecord->value;
+        $this->value = $linkSuperFilterRecord->value;
     }
 }

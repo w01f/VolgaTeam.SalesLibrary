@@ -21,7 +21,7 @@
 		public function getChildLinkIds($folderId)
 		{
 			$criteria = new CDbCriteria;
-			$criteria->condition = 't.id=:id and links.id_parent_link is null and links.type<>6 and links.type<>9 and no_share=0 and is_restricted=0';
+			$criteria->condition = 't.id=:id and links.id_parent_link is null and links.type<>9 and no_share=0 and is_restricted=0';
 			$criteria->params = array(':id' => $folderId);
 			$result = $this->with('links')->find($criteria);
 			if (isset($result))

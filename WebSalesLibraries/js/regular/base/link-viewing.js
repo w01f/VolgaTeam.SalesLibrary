@@ -40,6 +40,8 @@
 			var selectedLinkId = $(formatItems[0]).find('.service-data .link-id').html();
 			var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
 			var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
+			var selectedFileFormat = $(formatItems[0]).find('.service-data .file-type').html();
+			var superFilters = $(formatItems[0]).find('.service-data .super-filter').html();
 			formatItems.tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
 			formatItems.off('click').on('click', function ()
 			{
@@ -47,9 +49,16 @@
 				$.viewSelectedFormat($(this), fullScreenSelector.is(':checked'), false);
 			});
 			var viewDialogContent = content.find('.view-dialog-content').html();
+
+			var modalTitle = 'How Do you want to Open this File?';
+			if (superFilters != '')
+				modalTitle = superFilters;
+			else if (selectedFileFormat == 'url')
+				modalTitle = 'Web Hyperlink Options';
+
 			$.fancybox({
 				content: content,
-				title: 'How Do you want to Open this File?',
+				title: modalTitle,
 				width: 490,
 				autoSize: false,
 				autoHeight: true,
