@@ -14,7 +14,18 @@ namespace FileManager.PresentationClasses.Tags
 	public partial class FileCardsEditor : UserControl, ITagsEditor
 	{
 		public List<StringDataSourceWrapper> FileCardImportantInfo { get; private set; }
-
+		private bool _loading;
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public FileCardsEditor()
 		{
 			InitializeComponent();
@@ -79,7 +90,7 @@ namespace FileManager.PresentationClasses.Tags
 		{
 			pnButtons.Enabled = false;
 			pnData.Enabled = false;
-
+			_loading = true;
 			//Clear Controls
 			{
 				checkBoxEnableFileCard.Checked = false;
@@ -144,6 +155,7 @@ namespace FileManager.PresentationClasses.Tags
 				gridViewFileCardImportantInfo.RefreshData();
 			}
 			gridControlFileCardImportantInfo.DataSource = FileCardImportantInfo;
+			_loading = false;
 		}
 
 		public void ApplyData()
@@ -293,6 +305,7 @@ namespace FileManager.PresentationClasses.Tags
 				gridViewFileCardImportantInfo.FocusedRowHandle = gridViewFileCardImportantInfo.RowCount - 1;
 				gridViewFileCardImportantInfo.MakeRowVisible(gridViewFileCardImportantInfo.FocusedRowHandle, true);
 			}
+			NeedToApply = true;
 		}
 
 		private void repositoryItemButtonEditFileCardImportantInfo_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -302,7 +315,14 @@ namespace FileManager.PresentationClasses.Tags
 			{
 				FileCardImportantInfo.RemoveAt(gridViewFileCardImportantInfo.GetDataSourceRowIndex(gridViewFileCardImportantInfo.FocusedRowHandle));
 				gridViewFileCardImportantInfo.RefreshData();
+				NeedToApply = true;
 			}
+		}
+
+		private void EditValueChanged(object sender, EventArgs e)
+		{
+			if (!_loading)
+				NeedToApply = true;
 		}
 	}
 }

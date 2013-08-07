@@ -607,6 +607,7 @@ namespace FileManager.PresentationClasses.WallBin
 					file.Name = form.LinkName;
 					file.RelativePath = form.LinkPath;
 					file.Type = FileTypes.Url;
+					file.ForcePreview = true;
 					file.InitBannerProperties();
 					if (grFiles.SelectedRows.Count > 0)
 					{
@@ -794,21 +795,7 @@ namespace FileManager.PresentationClasses.WallBin
 				_formLinkProperties.ckDoNotGeneratePreview.Visible = false;
 			}
 
-			if (file.Type == FileTypes.MediaPlayerVideo || file.Type == FileTypes.QuickTimeVideo)
-			{
-				_formLinkProperties.ckVideoForcePreview.Checked = file.ForcePreview;
-				_formLinkProperties.pnVideoForcePreview.Visible = true;
-			}
-			else
-			{
-				_formLinkProperties.ckVideoForcePreview.Checked = false;
-				_formLinkProperties.pnVideoForcePreview.Visible = false;
-			}
-
-			if (file.Format == "key")
-				_formLinkProperties.pnKeynotePreview.Visible = true;
-			else
-				_formLinkProperties.pnKeynotePreview.Visible = false;
+			_formLinkProperties.ckForcePreview.Checked = file.ForcePreview;
 
 			if ((file.PreviewContainer != null && Directory.Exists(file.PreviewContainer.ContainerPath)) || (file.UniversalPreviewContainer != null && Directory.Exists(file.UniversalPreviewContainer.ContainerPath)))
 			{
@@ -900,7 +887,7 @@ namespace FileManager.PresentationClasses.WallBin
 
 
 			file.DoNotGeneratePreview = _formLinkProperties.ckDoNotGeneratePreview.Checked;
-			file.ForcePreview = _formLinkProperties.ckVideoForcePreview.Checked;
+			file.ForcePreview = _formLinkProperties.ckForcePreview.Checked;
 
 			grFiles.SelectedRows[0].Cells[0].Value = file.DisplayName + file.Note;
 
@@ -1369,6 +1356,11 @@ namespace FileManager.PresentationClasses.WallBin
 			WallBinOptions.ShowFileCardTags = options.ShowFileCardTags;
 			WallBinOptions.ShowAttachmentTags = options.ShowAttachmentTags;
 			WallBinOptions.ShowSecurityTags = options.ShowSecurityTags;
+			ApplyWallBinOptions();
+		}
+
+		public void ApplyWallBinOptions()
+		{
 			grFiles.MultiSelect = WallBinOptions.AllowMultiSelect && (WallBinOptions.ShowCategoryTags || WallBinOptions.ShowSuperFilterTags || WallBinOptions.ShowFileCardTags || WallBinOptions.ShowKeywordTags || WallBinOptions.ShowSecurityTags);
 			grFiles.DefaultCellStyle.SelectionBackColor = WallBinOptions.AllowEdit ? grFiles.DefaultCellStyle.BackColor : Color.Wheat;
 			grFiles.ClearSelection();

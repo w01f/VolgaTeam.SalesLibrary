@@ -287,6 +287,7 @@ namespace FileManager.Controllers
 			{
 				if (AppManager.Instance.ShowQuestion("Before you leave, do you want to save the changes you made?") == DialogResult.Yes)
 				{
+					WallbinController.ApplyTagsEditor();
 					ActiveDecorator.Save();
 					return true;
 				}

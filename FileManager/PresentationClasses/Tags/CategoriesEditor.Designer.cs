@@ -35,7 +35,6 @@
 			this.gridColumnPageName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridControl = new DevExpress.XtraGrid.GridControl();
 			this.gridViewGroups = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.gridColumnLibrarySelected = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridColumnLibraryName = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
@@ -149,7 +148,6 @@
 			this.gridViewGroups.Appearance.SelectedRow.Font = new System.Drawing.Font("Arial", 9.75F);
 			this.gridViewGroups.Appearance.SelectedRow.Options.UseFont = true;
 			this.gridViewGroups.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnLibrarySelected,
             this.gridColumnLibraryName});
 			this.gridViewGroups.GridControl = this.gridControl;
 			this.gridViewGroups.Name = "gridViewGroups";
@@ -174,17 +172,6 @@
 			this.gridViewGroups.OptionsView.ShowIndicator = false;
 			this.gridViewGroups.RowHeight = 35;
 			// 
-			// gridColumnLibrarySelected
-			// 
-			this.gridColumnLibrarySelected.Caption = "Selected";
-			this.gridColumnLibrarySelected.ColumnEdit = this.repositoryItemCheckEditLibrary;
-			this.gridColumnLibrarySelected.FieldName = "Selected";
-			this.gridColumnLibrarySelected.Name = "gridColumnLibrarySelected";
-			this.gridColumnLibrarySelected.OptionsColumn.FixedWidth = true;
-			this.gridColumnLibrarySelected.Visible = true;
-			this.gridColumnLibrarySelected.VisibleIndex = 0;
-			this.gridColumnLibrarySelected.Width = 30;
-			// 
 			// gridColumnLibraryName
 			// 
 			this.gridColumnLibraryName.Caption = "Name";
@@ -193,7 +180,7 @@
 			this.gridColumnLibraryName.OptionsColumn.AllowEdit = false;
 			this.gridColumnLibraryName.OptionsColumn.ReadOnly = true;
 			this.gridColumnLibraryName.Visible = true;
-			this.gridColumnLibraryName.VisibleIndex = 1;
+			this.gridColumnLibraryName.VisibleIndex = 0;
 			this.gridColumnLibraryName.Width = 355;
 			// 
 			// laHeader
@@ -299,7 +286,6 @@
 		private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditLibrary;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnPageName;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewGroups;
-		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibrarySelected;
 		private DevExpress.XtraGrid.Columns.GridColumn gridColumnLibraryName;
 		private DevExpress.XtraEditors.LabelControl labelControlCategoryInfo;
 	}

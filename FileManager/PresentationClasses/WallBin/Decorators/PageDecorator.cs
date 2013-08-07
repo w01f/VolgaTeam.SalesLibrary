@@ -464,8 +464,12 @@ namespace FileManager.PresentationClasses.WallBin.Decorators
 
 		public void RefreshSelectedLinks()
 		{
-			foreach (var box in _boxes.Where(x => SelectedLinks.Select(link => link.Parent.Identifier.ToString()).Contains(x.Folder.Identifier.ToString())))
+			var selectedLinkIds = SelectedLinks.Select(link => link.Parent.Identifier.ToString()).ToList();
+			foreach (var box in _boxes.Where(x => selectedLinkIds.Contains(x.Folder.Identifier.ToString())))
+			{
+				box.ApplyWallBinOptions();
 				box.Refresh();
+			}
 		}
 		#endregion
 	}

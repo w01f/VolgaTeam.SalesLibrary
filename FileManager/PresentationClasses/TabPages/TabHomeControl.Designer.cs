@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
 			this.components = new System.ComponentModel.Container();
+			DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+			DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+			DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
 			DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
 			DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
 			DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
 			DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
-			DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
-			DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.dockManager = new DevExpress.XtraBars.Docking.DockManager(this.components);
 			this.dockPanelTreeView = new DevExpress.XtraBars.Docking.DockPanel();
@@ -232,9 +232,9 @@
 			this.barCheckItemTabs.Glyph = global::FileManager.Properties.Resources.TabsView;
 			this.barCheckItemTabs.Id = 0;
 			this.barCheckItemTabs.Name = "barCheckItemTabs";
-			toolTipItem4.Text = "Tabs View";
-			superToolTip4.Items.Add(toolTipItem4);
-			this.barCheckItemTabs.SuperTip = superToolTip4;
+			toolTipItem1.Text = "Tabs View";
+			superToolTip1.Items.Add(toolTipItem1);
+			this.barCheckItemTabs.SuperTip = superToolTip1;
 			// 
 			// barButtonItemFontUp
 			// 
@@ -242,9 +242,9 @@
 			this.barButtonItemFontUp.Glyph = global::FileManager.Properties.Resources.MinibarFontLarger;
 			this.barButtonItemFontUp.Id = 2;
 			this.barButtonItemFontUp.Name = "barButtonItemFontUp";
-			toolTipItem5.Text = "Increase Text Size";
-			superToolTip5.Items.Add(toolTipItem5);
-			this.barButtonItemFontUp.SuperTip = superToolTip5;
+			toolTipItem2.Text = "Increase Text Size";
+			superToolTip2.Items.Add(toolTipItem2);
+			this.barButtonItemFontUp.SuperTip = superToolTip2;
 			// 
 			// barButtonItemFontDown
 			// 
@@ -252,9 +252,9 @@
 			this.barButtonItemFontDown.Glyph = global::FileManager.Properties.Resources.MinibarFontSmaller;
 			this.barButtonItemFontDown.Id = 3;
 			this.barButtonItemFontDown.Name = "barButtonItemFontDown";
-			toolTipItem6.Text = "Decrease Text Size";
-			superToolTip6.Items.Add(toolTipItem6);
-			this.barButtonItemFontDown.SuperTip = superToolTip6;
+			toolTipItem3.Text = "Decrease Text Size";
+			superToolTip3.Items.Add(toolTipItem3);
+			this.barButtonItemFontDown.SuperTip = superToolTip3;
 			// 
 			// barButtonItemLinkUp
 			// 
@@ -263,9 +263,9 @@
 			this.barButtonItemLinkUp.Glyph = global::FileManager.Properties.Resources.MinibarLinkUp;
 			this.barButtonItemLinkUp.Id = 5;
 			this.barButtonItemLinkUp.Name = "barButtonItemLinkUp";
-			toolTipItem7.Text = "Move this Link Up";
-			superToolTip7.Items.Add(toolTipItem7);
-			this.barButtonItemLinkUp.SuperTip = superToolTip7;
+			toolTipItem4.Text = "Move this Link Up";
+			superToolTip4.Items.Add(toolTipItem4);
+			this.barButtonItemLinkUp.SuperTip = superToolTip4;
 			// 
 			// barButtonItemLinkDown
 			// 
@@ -274,9 +274,9 @@
 			this.barButtonItemLinkDown.Glyph = global::FileManager.Properties.Resources.MinibarLinkDown;
 			this.barButtonItemLinkDown.Id = 6;
 			this.barButtonItemLinkDown.Name = "barButtonItemLinkDown";
-			toolTipItem8.Text = "Move this Link Down";
-			superToolTip8.Items.Add(toolTipItem8);
-			this.barButtonItemLinkDown.SuperTip = superToolTip8;
+			toolTipItem5.Text = "Move this Link Down";
+			superToolTip5.Items.Add(toolTipItem5);
+			this.barButtonItemLinkDown.SuperTip = superToolTip5;
 			// 
 			// barButtonItemSeparator2
 			// 

@@ -7,7 +7,6 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
 using FileManager.Controllers;
-using FileManager.PresentationClasses.WallBin.Decorators;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace FileManager.PresentationClasses.Tags
@@ -37,6 +36,17 @@ namespace FileManager.PresentationClasses.Tags
 			buttonXReset.Font = new Font(buttonXReset.Font.FontFamily, buttonXReset.Font.Size - 2, buttonXReset.Font.Style);
 		}
 
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public List<StringDataSourceWrapper> Keywords { get; private set; }
 
 		#region ITagsEditor Members
@@ -111,6 +121,7 @@ namespace FileManager.PresentationClasses.Tags
 			{
 				Keywords.RemoveAt(gridView.GetDataSourceRowIndex(gridView.FocusedRowHandle));
 				gridView.RefreshData();
+				NeedToApply = true;
 			}
 		}
 
@@ -125,6 +136,7 @@ namespace FileManager.PresentationClasses.Tags
 				gridView.FocusedRowHandle = gridView.RowCount - 1;
 				gridView.MakeRowVisible(gridView.FocusedRowHandle, true);
 			}
+			NeedToApply = true;
 		}
 	}
 }

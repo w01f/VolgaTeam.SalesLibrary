@@ -131,6 +131,7 @@
 			this.textEditFileCardTitle.Size = new System.Drawing.Size(315, 22);
 			this.textEditFileCardTitle.StyleController = this.styleController;
 			this.textEditFileCardTitle.TabIndex = 16;
+			this.textEditFileCardTitle.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// styleController
 			// 
@@ -312,6 +313,7 @@
 			this.textEditFileCardSalesStation.Size = new System.Drawing.Size(323, 22);
 			this.textEditFileCardSalesStation.StyleController = this.styleController;
 			this.textEditFileCardSalesStation.TabIndex = 27;
+			this.textEditFileCardSalesStation.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// textEditFileCardSalesPhone
 			// 
@@ -324,6 +326,7 @@
 			this.textEditFileCardSalesPhone.Size = new System.Drawing.Size(323, 22);
 			this.textEditFileCardSalesPhone.StyleController = this.styleController;
 			this.textEditFileCardSalesPhone.TabIndex = 26;
+			this.textEditFileCardSalesPhone.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// textEditFileCardSalesEmail
 			// 
@@ -338,6 +341,7 @@
 			this.textEditFileCardSalesEmail.Size = new System.Drawing.Size(323, 22);
 			this.textEditFileCardSalesEmail.StyleController = this.styleController;
 			this.textEditFileCardSalesEmail.TabIndex = 25;
+			this.textEditFileCardSalesEmail.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// textEditFileCardSalesName
 			// 
@@ -350,6 +354,7 @@
 			this.textEditFileCardSalesName.Size = new System.Drawing.Size(323, 22);
 			this.textEditFileCardSalesName.StyleController = this.styleController;
 			this.textEditFileCardSalesName.TabIndex = 24;
+			this.textEditFileCardSalesName.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// checkBoxFileCardSalesInfo
 			// 
@@ -390,6 +395,7 @@
 			this.spinEditFileCardPublishingClosed.Size = new System.Drawing.Size(163, 22);
 			this.spinEditFileCardPublishingClosed.StyleController = this.styleController;
 			this.spinEditFileCardPublishingClosed.TabIndex = 22;
+			this.spinEditFileCardPublishingClosed.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// checkBoxFileCardPublishingClosed
 			// 
@@ -430,6 +436,7 @@
 			this.spinEditFileCardDigitalClosed.Size = new System.Drawing.Size(147, 22);
 			this.spinEditFileCardDigitalClosed.StyleController = this.styleController;
 			this.spinEditFileCardDigitalClosed.TabIndex = 20;
+			this.spinEditFileCardDigitalClosed.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// checkBoxFileCardDigitalClosed
 			// 
@@ -470,6 +477,7 @@
 			this.spinEditFileCardBroadcastClosed.Size = new System.Drawing.Size(163, 22);
 			this.spinEditFileCardBroadcastClosed.StyleController = this.styleController;
 			this.spinEditFileCardBroadcastClosed.TabIndex = 18;
+			this.spinEditFileCardBroadcastClosed.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// checkBoxFileCardBroadcastClosed
 			// 
@@ -509,6 +517,7 @@
             new DevExpress.XtraEditors.Controls.EditorButton()});
 			this.dateEditFileCardDateSold.Size = new System.Drawing.Size(147, 22);
 			this.dateEditFileCardDateSold.TabIndex = 16;
+			this.dateEditFileCardDateSold.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// checkBoxFileCardDateSold
 			// 
@@ -545,6 +554,7 @@
 			this.textEditFileCardAdvertiser.Size = new System.Drawing.Size(323, 22);
 			this.textEditFileCardAdvertiser.StyleController = this.styleController;
 			this.textEditFileCardAdvertiser.TabIndex = 12;
+			this.textEditFileCardAdvertiser.EditValueChanged += new System.EventHandler(this.EditValueChanged);
 			// 
 			// checkBoxEnableFileCard
 			// 

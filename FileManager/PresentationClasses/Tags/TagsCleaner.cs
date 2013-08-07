@@ -27,7 +27,17 @@ namespace FileManager.PresentationClasses.Tags
 		private bool _fileCardsChanged;
 		private bool _attachmentsChanged;
 		private bool _securityChanged;
-
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public TagsCleaner()
 		{
 			InitializeComponent();
@@ -38,8 +48,7 @@ namespace FileManager.PresentationClasses.Tags
 		public event EventHandler<EventArgs> EditorChanged;
 		public void UpdateData()
 		{
-			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
-			if (activePage == null) return;
+			if (MainController.Instance.ActiveDecorator == null) return;
 
 			_categoriesChanged = false;
 			_superFiltersChanged = false;
@@ -56,7 +65,7 @@ namespace FileManager.PresentationClasses.Tags
 			_securityRestrictedCopy.Clear();
 			_securityNoShareCopy.Clear();
 			_securityAssignedUsersCopy.Clear();
-			foreach (var link in activePage.Page.Folders.SelectMany(folder => folder.Files))
+			foreach (var link in MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(folder => folder.Files)))
 			{
 				var categoryCopy = new SearchTags();
 				categoryCopy.SearchGroups.AddRange(link.SearchTags.SearchGroups);
@@ -79,9 +88,8 @@ namespace FileManager.PresentationClasses.Tags
 		}
 		public void ApplyData()
 		{
-			var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
-			if (activePage == null) return;
-			foreach (var link in activePage.Page.Folders.SelectMany(folder => folder.Files))
+			if (MainController.Instance.ActiveDecorator == null) return;
+			foreach (var link in MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(folder => folder.Files)))
 			{
 				if (_categoriesChanged)
 				{
@@ -114,6 +122,10 @@ namespace FileManager.PresentationClasses.Tags
 				}
 			}
 			UpdateData();
+			MainController.Instance.ActiveDecorator.StateChanged = true;
+			if (EditorChanged != null)
+				EditorChanged(this, new EventArgs());
+			MainController.Instance.WallbinController.UpdateTagCountInfo();
 		}
 		#endregion
 
@@ -126,9 +138,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var category in _categoriesCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				category.SearchGroups.Clear();
 			_categoriesChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void ClearSuperFilters(bool allPages)
@@ -140,9 +150,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var superFilters in _superFiltersCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				superFilters.Clear();
 			_superFiltersChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void ClearKeywords(bool allPages)
@@ -154,9 +162,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var keywords in _keywordsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				keywords.Tags.Clear();
 			_keywordsChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void ClearFileCards(bool allPages)
@@ -181,9 +187,7 @@ namespace FileManager.PresentationClasses.Tags
 				fileCard.Notes.Clear();
 			}
 			_fileCardsChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void ClearFileAttachments(bool allPages)
@@ -195,9 +199,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var attatchment in _attachmentsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				attatchment.FilesAttachments.Clear();
 			_attachmentsChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void ClearWebAttachments(bool allPages)
@@ -209,9 +211,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var attatchment in _attachmentsCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)).Select(it => it.Value))
 				attatchment.WebAttachments.Clear();
 			_attachmentsChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void ClearSecurity(bool allPages)
@@ -227,9 +227,7 @@ namespace FileManager.PresentationClasses.Tags
 			foreach (var assignedUsersPair in _securityAssignedUsersCopy.Where(it => allPages || activePage.Page.Folders.SelectMany(f => f.Files.Select(l => l.Identifier)).Contains(it.Key)))
 				_securityAssignedUsersCopy[assignedUsersPair.Key] = null;
 			_securityChanged = true;
-			activePage.Parent.StateChanged = true;
-			if (EditorChanged != null)
-				EditorChanged(this, new EventArgs());
+			NeedToApply = true;
 		}
 
 		private void hyperLinkEditCategoriesActivePage_OpenLink(object sender, DevExpress.XtraEditors.Controls.OpenLinkEventArgs e)

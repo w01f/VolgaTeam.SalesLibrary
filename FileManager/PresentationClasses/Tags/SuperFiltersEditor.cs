@@ -13,6 +13,8 @@ namespace FileManager.PresentationClasses.Tags
 	[ToolboxItem(false)]
 	public partial class SuperFiltersEditor : UserControl, ITagsEditor
 	{
+		private bool _loading;
+
 		public SuperFiltersEditor()
 		{
 			InitializeComponent();
@@ -32,6 +34,17 @@ namespace FileManager.PresentationClasses.Tags
 		}
 
 		#region ITagsEditor Members
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public event EventHandler<EventArgs> EditorChanged;
 
 		public void UpdateData()
@@ -89,6 +102,12 @@ namespace FileManager.PresentationClasses.Tags
 				EditorChanged(this, new EventArgs());
 
 			UpdateData();
+		}
+
+		private void checkedListBoxControl_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
+		{
+			if (!_loading)
+				NeedToApply = true;
 		}
 	}
 }

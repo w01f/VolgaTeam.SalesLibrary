@@ -16,7 +16,17 @@ namespace FileManager.PresentationClasses.Tags
 	{
 		private readonly List<SearchGroup> _groupTemplates = new List<SearchGroup>();
 		private readonly List<SearchTag> _tagTemplates = new List<SearchTag>();
-
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public CategoriesEditor()
 		{
 			InitializeComponent();
@@ -152,32 +162,15 @@ namespace FileManager.PresentationClasses.Tags
 			var focussedView = gridControl.FocusedView as GridView;
 			if (focussedView == null) return;
 			focussedView.CloseEditor();
-			if (focussedView == gridViewGroups)
+			var searchGroup = focussedView.SourceRow as SearchGroup;
+			var searchTag = focussedView.GetFocusedRow() as SearchTag;
+			if (searchGroup != null && searchTag != null && searchTag.Selected)
 			{
-				if (focussedView.FocusedRowHandle != GridControl.InvalidRowHandle)
-				{
-					var searchGroup = focussedView.GetFocusedRow() as SearchGroup;
-					if (searchGroup != null)
-					{
-						foreach (var tag in _tagTemplates.Where(x => x.Parent == searchGroup.Name))
-							tag.Selected = searchGroup.Selected;
-						var tagsView = focussedView.GetDetailView(focussedView.FocusedRowHandle, 0) as GridView;
-						if (tagsView != null)
-							tagsView.RefreshData();
-					}
-				}
-			}
-			else
-			{
-				var searchGroup = focussedView.SourceRow as SearchGroup;
-				var searchTag = focussedView.GetFocusedRow() as SearchTag;
-				if (searchGroup != null && searchTag != null && searchTag.Selected)
-				{
-					searchGroup.Selected = searchTag.Selected;
-					gridControl.MainView.RefreshData();
-				}
+				searchGroup.Selected = searchTag.Selected;
+				gridControl.MainView.RefreshData();
 			}
 			UpdateCategoryInfo(true);
+			NeedToApply = true;
 		}
 
 		private void repositoryItemCheckEditLibrary_EditValueChanging(object sender, DevExpress.XtraEditors.Controls.ChangingEventArgs e)

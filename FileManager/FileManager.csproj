@@ -667,8 +667,6 @@
     <None Include="Resources\MinibarFontSmaller.png" />
     <None Include="Resources\MinibarFontLarger.png" />
     <None Include="Resources\TabsView.png" />
-    <None Include="Resources\KeynotePreview.png" />
-    <None Include="Resources\VideoForcePreview.png" />
     <None Include="Resources\ToolboxClose.png" />
     <None Include="Resources\Favorites.png" />
     <None Include="Resources\ExtraRoots.png" />

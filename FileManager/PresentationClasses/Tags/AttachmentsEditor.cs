@@ -16,7 +16,17 @@ namespace FileManager.PresentationClasses.Tags
 	public partial class AttachmentsEditor : UserControl, ITagsEditor
 	{
 		private AttachmentProperties _attachmentProperties;
-
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public AttachmentsEditor()
 		{
 			InitializeComponent();
@@ -111,6 +121,7 @@ namespace FileManager.PresentationClasses.Tags
 					if (gridViewAttachmentsFiles.RowCount <= 0) continue;
 					gridViewAttachmentsFiles.FocusedRowHandle = gridViewAttachmentsFiles.RowCount - 1;
 					gridViewAttachmentsFiles.MakeRowVisible(gridViewAttachmentsFiles.FocusedRowHandle, true);
+					NeedToApply = true;
 				}
 			}
 		}
@@ -142,6 +153,7 @@ namespace FileManager.PresentationClasses.Tags
 				case 1:
 					_attachmentProperties.FilesAttachments.RemoveAt(gridViewAttachmentsFiles.GetDataSourceRowIndex(gridViewAttachmentsFiles.FocusedRowHandle));
 					gridViewAttachmentsFiles.RefreshData();
+					NeedToApply = true;
 					break;
 			}
 		}
@@ -169,6 +181,7 @@ namespace FileManager.PresentationClasses.Tags
 				gridViewAttachmentsWeb.FocusedRowHandle = gridViewAttachmentsWeb.RowCount - 1;
 				gridViewAttachmentsWeb.MakeRowVisible(gridViewAttachmentsWeb.FocusedRowHandle, true);
 			}
+			NeedToApply = true;
 		}
 
 		private void repositoryItemButtonEditAttachmentsWeb_ButtonClick(object sender, ButtonPressedEventArgs e)
@@ -193,6 +206,7 @@ namespace FileManager.PresentationClasses.Tags
 				case 1:
 					_attachmentProperties.WebAttachments.RemoveAt(gridViewAttachmentsWeb.GetDataSourceRowIndex(gridViewAttachmentsWeb.FocusedRowHandle));
 					gridViewAttachmentsWeb.RefreshData();
+					NeedToApply = true;
 					break;
 			}
 		}

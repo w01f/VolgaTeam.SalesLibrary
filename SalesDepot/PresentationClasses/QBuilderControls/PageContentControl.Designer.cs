@@ -28,12 +28,11 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageContentControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnPageHeader = new System.Windows.Forms.Panel();
 			this.hyperLinkEditUrl = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.labelControlUrlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlCreateDate = new DevExpress.XtraEditors.LabelControl();
 			this.textEditTitleValue = new DevExpress.XtraEditors.TextEdit();
@@ -242,7 +241,7 @@
 			this.xtraTabPageLinks.Controls.Add(this.labelControlLinksCount);
 			this.xtraTabPageLinks.Controls.Add(this.labelControlLinksHeader);
 			this.xtraTabPageLinks.Name = "xtraTabPageLinks";
-			this.xtraTabPageLinks.Size = new System.Drawing.Size(564, 380);
+			this.xtraTabPageLinks.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageLinks.Text = "Links";
 			// 
 			// gridControlLinks
@@ -255,7 +254,7 @@
 			this.gridControlLinks.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemButtonEditLinksActions,
             this.repositoryItemPictureEditLinksType});
-			this.gridControlLinks.Size = new System.Drawing.Size(564, 327);
+			this.gridControlLinks.Size = new System.Drawing.Size(568, 331);
 			this.gridControlLinks.TabIndex = 2;
 			this.gridControlLinks.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.advBandedGridViewLinks});
@@ -387,7 +386,7 @@
 			this.labelControlLinksCount.Location = new System.Drawing.Point(0, 24);
 			this.labelControlLinksCount.Name = "labelControlLinksCount";
 			this.labelControlLinksCount.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
-			this.labelControlLinksCount.Size = new System.Drawing.Size(564, 29);
+			this.labelControlLinksCount.Size = new System.Drawing.Size(568, 29);
 			this.labelControlLinksCount.StyleController = this.styleController;
 			this.labelControlLinksCount.TabIndex = 5;
 			// 
@@ -400,7 +399,7 @@
 			this.labelControlLinksHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlLinksHeader.Name = "labelControlLinksHeader";
 			this.labelControlLinksHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-			this.labelControlLinksHeader.Size = new System.Drawing.Size(564, 24);
+			this.labelControlLinksHeader.Size = new System.Drawing.Size(568, 24);
 			this.labelControlLinksHeader.StyleController = this.styleController;
 			this.labelControlLinksHeader.TabIndex = 2;
 			this.labelControlLinksHeader.Text = "DRAG your Links from the Cart & DROP them into the list below:";
@@ -411,7 +410,7 @@
 			this.xtraTabPageTitle.Controls.Add(this.htmlEditorControlTitle);
 			this.xtraTabPageTitle.Controls.Add(this.pnTitle);
 			this.xtraTabPageTitle.Name = "xtraTabPageTitle";
-			this.xtraTabPageTitle.Size = new System.Drawing.Size(564, 380);
+			this.xtraTabPageTitle.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageTitle.Text = "Title";
 			// 
 			// htmlEditorControlTitle
@@ -421,7 +420,7 @@
 			this.htmlEditorControlTitle.HtmlText = resources.GetString("htmlEditorControlTitle.HtmlText");
 			this.htmlEditorControlTitle.Location = new System.Drawing.Point(0, 31);
 			this.htmlEditorControlTitle.Name = "htmlEditorControlTitle";
-			this.htmlEditorControlTitle.Size = new System.Drawing.Size(564, 349);
+			this.htmlEditorControlTitle.Size = new System.Drawing.Size(568, 353);
 			this.htmlEditorControlTitle.TabIndex = 0;
 			// 
 			// pnTitle
@@ -431,7 +430,7 @@
 			this.pnTitle.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnTitle.Location = new System.Drawing.Point(0, 0);
 			this.pnTitle.Name = "pnTitle";
-			this.pnTitle.Size = new System.Drawing.Size(564, 31);
+			this.pnTitle.Size = new System.Drawing.Size(568, 31);
 			this.pnTitle.TabIndex = 1;
 			// 
 			// checkEditTitleEnabled
@@ -451,7 +450,7 @@
 			this.xtraTabPageHeader.Controls.Add(this.htmlEditorControlHeader);
 			this.xtraTabPageHeader.Controls.Add(this.pnHeaderHeader);
 			this.xtraTabPageHeader.Name = "xtraTabPageHeader";
-			this.xtraTabPageHeader.Size = new System.Drawing.Size(564, 380);
+			this.xtraTabPageHeader.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageHeader.Text = "Header";
 			// 
 			// htmlEditorControlHeader
@@ -461,7 +460,7 @@
 			this.htmlEditorControlHeader.HtmlText = resources.GetString("htmlEditorControlHeader.HtmlText");
 			this.htmlEditorControlHeader.Location = new System.Drawing.Point(0, 31);
 			this.htmlEditorControlHeader.Name = "htmlEditorControlHeader";
-			this.htmlEditorControlHeader.Size = new System.Drawing.Size(564, 349);
+			this.htmlEditorControlHeader.Size = new System.Drawing.Size(568, 353);
 			this.htmlEditorControlHeader.TabIndex = 3;
 			// 
 			// pnHeaderHeader
@@ -471,7 +470,7 @@
 			this.pnHeaderHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnHeaderHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnHeaderHeader.Name = "pnHeaderHeader";
-			this.pnHeaderHeader.Size = new System.Drawing.Size(564, 31);
+			this.pnHeaderHeader.Size = new System.Drawing.Size(568, 31);
 			this.pnHeaderHeader.TabIndex = 2;
 			// 
 			// checkEditHeaderEnabled
@@ -491,7 +490,7 @@
 			this.xtraTabPageFooter.Controls.Add(this.htmlEditorControlFooter);
 			this.xtraTabPageFooter.Controls.Add(this.pnFooterHeader);
 			this.xtraTabPageFooter.Name = "xtraTabPageFooter";
-			this.xtraTabPageFooter.Size = new System.Drawing.Size(564, 380);
+			this.xtraTabPageFooter.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageFooter.Text = "Footer";
 			// 
 			// htmlEditorControlFooter
@@ -501,7 +500,7 @@
 			this.htmlEditorControlFooter.HtmlText = resources.GetString("htmlEditorControlFooter.HtmlText");
 			this.htmlEditorControlFooter.Location = new System.Drawing.Point(0, 31);
 			this.htmlEditorControlFooter.Name = "htmlEditorControlFooter";
-			this.htmlEditorControlFooter.Size = new System.Drawing.Size(564, 349);
+			this.htmlEditorControlFooter.Size = new System.Drawing.Size(568, 353);
 			this.htmlEditorControlFooter.TabIndex = 3;
 			// 
 			// pnFooterHeader
@@ -511,7 +510,7 @@
 			this.pnFooterHeader.Dock = System.Windows.Forms.DockStyle.Top;
 			this.pnFooterHeader.Location = new System.Drawing.Point(0, 0);
 			this.pnFooterHeader.Name = "pnFooterHeader";
-			this.pnFooterHeader.Size = new System.Drawing.Size(564, 31);
+			this.pnFooterHeader.Size = new System.Drawing.Size(568, 31);
 			this.pnFooterHeader.TabIndex = 2;
 			// 
 			// checkEditFooterEnabled
@@ -530,7 +529,7 @@
 			// 
 			this.xtraTabPageSecurity.Controls.Add(this.pnSecurity);
 			this.xtraTabPageSecurity.Name = "xtraTabPageSecurity";
-			this.xtraTabPageSecurity.Size = new System.Drawing.Size(564, 380);
+			this.xtraTabPageSecurity.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageSecurity.Text = "Settings";
 			// 
 			// pnSecurity
@@ -551,7 +550,7 @@
 			this.pnSecurity.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnSecurity.Location = new System.Drawing.Point(0, 0);
 			this.pnSecurity.Name = "pnSecurity";
-			this.pnSecurity.Size = new System.Drawing.Size(564, 380);
+			this.pnSecurity.Size = new System.Drawing.Size(568, 384);
 			this.pnSecurity.TabIndex = 6;
 			// 
 			// textEditActivityEmailCopy
@@ -563,7 +562,7 @@
 			this.textEditActivityEmailCopy.Name = "textEditActivityEmailCopy";
 			this.textEditActivityEmailCopy.Properties.Mask.EditMask = "(\\w|[\\.\\-])+@(\\w|[\\-]+\\.)*(\\w|[\\-]){2,63}\\.[a-zA-Z]{2,4}";
 			this.textEditActivityEmailCopy.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-			this.textEditActivityEmailCopy.Size = new System.Drawing.Size(446, 22);
+			this.textEditActivityEmailCopy.Size = new System.Drawing.Size(450, 22);
 			this.textEditActivityEmailCopy.StyleController = this.styleController;
 			this.textEditActivityEmailCopy.TabIndex = 15;
 			// 
@@ -597,7 +596,7 @@
 			this.labelControlSettingsHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlSettingsHeader.Name = "labelControlSettingsHeader";
 			this.labelControlSettingsHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 0);
-			this.labelControlSettingsHeader.Size = new System.Drawing.Size(564, 24);
+			this.labelControlSettingsHeader.Size = new System.Drawing.Size(568, 24);
 			this.labelControlSettingsHeader.StyleController = this.styleController;
 			this.labelControlSettingsHeader.TabIndex = 12;
 			this.labelControlSettingsHeader.Text = "Customize your quickSITE with the settings below:";
@@ -716,7 +715,7 @@
 			this.xtraTabPageLogo.Controls.Add(this.gridControlLogoGallery);
 			this.xtraTabPageLogo.Controls.Add(this.labelControlLogoHeader);
 			this.xtraTabPageLogo.Name = "xtraTabPageLogo";
-			this.xtraTabPageLogo.Size = new System.Drawing.Size(564, 380);
+			this.xtraTabPageLogo.Size = new System.Drawing.Size(568, 384);
 			this.xtraTabPageLogo.Text = "Logo";
 			// 
 			// gridControlLogoGallery
@@ -727,7 +726,7 @@
 			this.gridControlLogoGallery.Name = "gridControlLogoGallery";
 			this.gridControlLogoGallery.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemPictureEdit});
-			this.gridControlLogoGallery.Size = new System.Drawing.Size(564, 351);
+			this.gridControlLogoGallery.Size = new System.Drawing.Size(568, 355);
 			this.gridControlLogoGallery.TabIndex = 36;
 			this.gridControlLogoGallery.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.layoutViewLogoGallery});
@@ -839,7 +838,7 @@
 			this.labelControlLogoHeader.Location = new System.Drawing.Point(0, 0);
 			this.labelControlLogoHeader.Name = "labelControlLogoHeader";
 			this.labelControlLogoHeader.Padding = new System.Windows.Forms.Padding(5, 5, 0, 5);
-			this.labelControlLogoHeader.Size = new System.Drawing.Size(564, 29);
+			this.labelControlLogoHeader.Size = new System.Drawing.Size(568, 29);
 			this.labelControlLogoHeader.StyleController = this.styleController;
 			this.labelControlLogoHeader.TabIndex = 37;
 			this.labelControlLogoHeader.Text = "Select a Logo that will appear at the VERY top of this quickSITE:";
@@ -869,12 +868,15 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditLinksActions)).EndInit();
 			this.xtraTabPageTitle.ResumeLayout(false);
 			this.pnTitle.ResumeLayout(false);
+			this.pnTitle.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTitleEnabled.Properties)).EndInit();
 			this.xtraTabPageHeader.ResumeLayout(false);
 			this.pnHeaderHeader.ResumeLayout(false);
+			this.pnHeaderHeader.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHeaderEnabled.Properties)).EndInit();
 			this.xtraTabPageFooter.ResumeLayout(false);
 			this.pnFooterHeader.ResumeLayout(false);
+			this.pnFooterHeader.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditFooterEnabled.Properties)).EndInit();
 			this.xtraTabPageSecurity.ResumeLayout(false);
 			this.pnSecurity.ResumeLayout(false);

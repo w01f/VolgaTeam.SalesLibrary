@@ -806,6 +806,7 @@
 			// 
 			this.buttonItemTagsSave.Image = global::FileManager.Properties.Resources.TagsSave;
 			this.buttonItemTagsSave.Name = "buttonItemTagsSave";
+			this.buttonItemTagsSave.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlZ);
 			this.buttonItemTagsSave.SubItemsExpandWidth = 14;
 			this.buttonItemTagsSave.Text = "buttonItem1";
 			// 

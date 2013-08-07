@@ -32,16 +32,16 @@
 			this.laHeader = new System.Windows.Forms.Label();
 			this.pnMain = new System.Windows.Forms.Panel();
 			this.pnData = new System.Windows.Forms.Panel();
-			this.pnButtons = new System.Windows.Forms.Panel();
-			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
+			this.checkedListBoxControl = new DevExpress.XtraEditors.CheckedListBoxControl();
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlRestrictionInfo = new DevExpress.XtraEditors.LabelControl();
-			this.checkedListBoxControl = new DevExpress.XtraEditors.CheckedListBoxControl();
+			this.pnButtons = new System.Windows.Forms.Panel();
+			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
-			this.pnButtons.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
+			this.pnButtons.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// laHeader
@@ -77,29 +77,18 @@
 			this.pnData.Size = new System.Drawing.Size(346, 329);
 			this.pnData.TabIndex = 1;
 			// 
-			// pnButtons
+			// checkedListBoxControl
 			// 
-			this.pnButtons.Controls.Add(this.buttonXReset);
-			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
-			this.pnButtons.Location = new System.Drawing.Point(0, 0);
-			this.pnButtons.Name = "pnButtons";
-			this.pnButtons.Size = new System.Drawing.Size(346, 47);
-			this.pnButtons.TabIndex = 0;
-			// 
-			// buttonXReset
-			// 
-			this.buttonXReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-			this.buttonXReset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
-			this.buttonXReset.Name = "buttonXReset";
-			this.buttonXReset.Size = new System.Drawing.Size(336, 30);
-			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.buttonXReset.TabIndex = 0;
-			this.buttonXReset.Text = "RESET ALL Super Filters for the Selected Links";
-			this.buttonXReset.TextColor = System.Drawing.Color.Black;
-			this.buttonXReset.Click += new System.EventHandler(this.buttonXReset_Click);
+			this.checkedListBoxControl.CheckOnClick = true;
+			this.checkedListBoxControl.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.checkedListBoxControl.ItemHeight = 30;
+			this.checkedListBoxControl.Location = new System.Drawing.Point(0, 28);
+			this.checkedListBoxControl.Name = "checkedListBoxControl";
+			this.checkedListBoxControl.SelectionMode = System.Windows.Forms.SelectionMode.None;
+			this.checkedListBoxControl.Size = new System.Drawing.Size(346, 301);
+			this.checkedListBoxControl.StyleController = this.styleController;
+			this.checkedListBoxControl.TabIndex = 1;
+			this.checkedListBoxControl.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControl_ItemCheck);
 			// 
 			// styleController
 			// 
@@ -128,17 +117,29 @@
 			this.labelControlRestrictionInfo.TabIndex = 0;
 			this.labelControlRestrictionInfo.Text = "Max 4 Super Filters are allowed…";
 			// 
-			// checkedListBoxControl
+			// pnButtons
 			// 
-			this.checkedListBoxControl.CheckOnClick = true;
-			this.checkedListBoxControl.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.checkedListBoxControl.ItemHeight = 30;
-			this.checkedListBoxControl.Location = new System.Drawing.Point(0, 28);
-			this.checkedListBoxControl.Name = "checkedListBoxControl";
-			this.checkedListBoxControl.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControl.Size = new System.Drawing.Size(346, 301);
-			this.checkedListBoxControl.StyleController = this.styleController;
-			this.checkedListBoxControl.TabIndex = 1;
+			this.pnButtons.Controls.Add(this.buttonXReset);
+			this.pnButtons.Dock = System.Windows.Forms.DockStyle.Top;
+			this.pnButtons.Location = new System.Drawing.Point(0, 0);
+			this.pnButtons.Name = "pnButtons";
+			this.pnButtons.Size = new System.Drawing.Size(346, 47);
+			this.pnButtons.TabIndex = 0;
+			// 
+			// buttonXReset
+			// 
+			this.buttonXReset.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+			this.buttonXReset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonXReset.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+			this.buttonXReset.Location = new System.Drawing.Point(5, 8);
+			this.buttonXReset.Name = "buttonXReset";
+			this.buttonXReset.Size = new System.Drawing.Size(336, 30);
+			this.buttonXReset.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+			this.buttonXReset.TabIndex = 0;
+			this.buttonXReset.Text = "RESET ALL Super Filters for the Selected Links";
+			this.buttonXReset.TextColor = System.Drawing.Color.Black;
+			this.buttonXReset.Click += new System.EventHandler(this.buttonXReset_Click);
 			// 
 			// SuperFiltersEditor
 			// 
@@ -151,9 +152,9 @@
 			this.Size = new System.Drawing.Size(350, 404);
 			this.pnMain.ResumeLayout(false);
 			this.pnData.ResumeLayout(false);
-			this.pnButtons.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControl)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
+			this.pnButtons.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

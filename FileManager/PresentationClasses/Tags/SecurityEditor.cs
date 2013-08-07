@@ -11,6 +11,8 @@ namespace FileManager.PresentationClasses.Tags
 	[ToolboxItem(false)]
 	public partial class SecurityEditor : UserControl, ITagsEditor
 	{
+		private bool _loading;
+
 		public SecurityEditor()
 		{
 			InitializeComponent();
@@ -35,10 +37,22 @@ namespace FileManager.PresentationClasses.Tags
 		}
 
 		#region ITagsEditor Members
+		private bool _needToApply;
+		public bool NeedToApply
+		{
+			get { return _needToApply; }
+			set
+			{
+				_needToApply = value;
+				var activePage = MainController.Instance.ActiveDecorator != null ? MainController.Instance.ActiveDecorator.ActivePage : null;
+				if (activePage != null) activePage.Parent.StateChanged = true;
+			}
+		}
 		public event EventHandler<EventArgs> EditorChanged;
 
 		public void UpdateData()
 		{
+			_loading = true;
 			pnButtons.Enabled = false;
 			pnData.Enabled = false;
 			rbSecurityAllowed.Checked = true;
@@ -66,7 +80,7 @@ namespace FileManager.PresentationClasses.Tags
 				ckSecurityShareLink.Checked = defaultLink.NoShare;
 				memoEditSecurityUsers.EditValue = defaultLink.IsRestricted && !string.IsNullOrEmpty(defaultLink.AssignedUsers) ? defaultLink.AssignedUsers : (!string.IsNullOrEmpty(SettingsManager.Instance.DefaultLinkUsers) ? SettingsManager.Instance.DefaultLinkUsers : null);
 			}
-
+			_loading = false;
 		}
 
 		public void ApplyData()
@@ -117,6 +131,20 @@ namespace FileManager.PresentationClasses.Tags
 		private void rbSecurityRestricted_CheckedChanged(object sender, EventArgs e)
 		{
 			memoEditSecurityUsers.Enabled = rbSecurityRestricted.Checked;
+			if (!_loading)
+				NeedToApply = true;
+		}
+
+		private void ValueCheckedChanged(object sender, EventArgs e)
+		{
+			if (!_loading)
+				NeedToApply = true;
+		}
+
+		private void memoEditSecurityUsers_EditValueChanged(object sender, EventArgs e)
+		{
+			if (!_loading)
+				NeedToApply = true;
 		}
 	}
 }

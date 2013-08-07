@@ -246,7 +246,7 @@ namespace FileManager.PresentationClasses.TabPages
 		#endregion
 
 		#region Tags Manager Processing
-		public ITagsEditor ActiveTagsEditor { get; private set; }
+		public ITagsEditor ActiveTagsEditor { get; set; }
 
 		private void LoadTagsEditors()
 		{
@@ -254,6 +254,8 @@ namespace FileManager.PresentationClasses.TabPages
 				splitContainerControl.Panel1.Controls.Add(_categoriesEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_superFiltersEditor))
 				splitContainerControl.Panel1.Controls.Add(_superFiltersEditor);
+			if (!splitContainerControl.Panel1.Controls.Contains(_keywordsEditor))
+				splitContainerControl.Panel1.Controls.Add(_keywordsEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_fileCardsEditor))
 				splitContainerControl.Panel1.Controls.Add(_fileCardsEditor);
 			if (!splitContainerControl.Panel1.Controls.Contains(_attachmentsEditor))

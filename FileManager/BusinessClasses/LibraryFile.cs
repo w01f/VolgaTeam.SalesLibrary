@@ -386,7 +386,15 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						format = "key";
 						break;
 					default:
-						format = "other";
+						switch (Type)
+						{
+							case FileTypes.Url:
+								format = "url";
+								break;
+							default:
+								format = "other";
+								break;
+						}
 						break;
 				}
 				return format;

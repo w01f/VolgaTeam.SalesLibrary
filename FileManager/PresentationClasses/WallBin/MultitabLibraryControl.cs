@@ -27,7 +27,14 @@ namespace FileManager.PresentationClasses.WallBin
 			xtraTabControl.TabPages.AddRange(_pages.Select(x => x.TabPage).ToArray());
 			if (MainController.Instance.ActiveDecorator != null && MainController.Instance.ActiveDecorator.ActivePage != null)
 				xtraTabControl.SelectedTabPage = MainController.Instance.ActiveDecorator.ActivePage.TabPage;
+			xtraTabControl.SelectedPageChanging += xtraTabControl_SelectedPageChanging;
 			xtraTabControl.SelectedPageChanged += xtraTabControl_SelectedPageChanged;
+		}
+
+		void xtraTabControl_SelectedPageChanging(object sender, TabPageChangingEventArgs e)
+		{
+			if (!MainController.Instance.SaveLibraryWarning())
+				e.Cancel = true;
 		}
 
 		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)

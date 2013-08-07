@@ -153,6 +153,7 @@ namespace FileManager.Controllers
 					_wallBinOptions.ShowSecurityTags = SettingsManager.Instance.ShowTagsSecurity;
 					break;
 				default:
+					_tabPage.ActiveTagsEditor = null;
 					_wallBinOptions.AllowEdit = true;
 					_wallBinOptions.AllowMultiSelect = false;
 					_wallBinOptions.ShowFiles = true;
@@ -332,10 +333,8 @@ namespace FileManager.Controllers
 				{
 					_tabPage.UpdateTagCountInfo(String.Format("{0} Links Require Tags!", totalLinks - taggedLinks), Color.Red);
 				}
-				else if (totalLinks == taggedLinks)
-				{
+				else
 					_tabPage.UpdateTagCountInfo("Library 100% TAGGED!", Color.Green);
-				}
 			}
 			else
 			{
@@ -354,6 +353,13 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemTagsAttachments.Checked = SettingsManager.Instance.ShowTagsAttachments;
 			FormMain.Instance.buttonItemTagsSecurity.Checked = SettingsManager.Instance.ShowTagsSecurity;
 			FormMain.Instance.buttonItemTagsClear.Checked = SettingsManager.Instance.ShowTagsCleaner;
+		}
+
+		public void ApplyTagsEditor()
+		{
+			if (_tabPage.ActiveTagsEditor == null) return;
+			if (_tabPage.ActiveTagsEditor.NeedToApply)
+				_tabPage.ActiveTagsEditor.ApplyData();
 		}
 
 		public void UpdateTagsEditor()

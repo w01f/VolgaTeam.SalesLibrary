@@ -94,6 +94,7 @@
 			this.ckSecurityShareLink.TabIndex = 39;
 			this.ckSecurityShareLink.Text = "Allow Users to Email this Link and post to quickSITES";
 			this.ckSecurityShareLink.UseVisualStyleBackColor = true;
+			this.ckSecurityShareLink.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
 			// memoEditSecurityUsers
 			// 
@@ -107,6 +108,7 @@
 			this.memoEditSecurityUsers.Size = new System.Drawing.Size(318, 90);
 			this.memoEditSecurityUsers.StyleController = this.styleController;
 			this.memoEditSecurityUsers.TabIndex = 38;
+			this.memoEditSecurityUsers.EditValueChanged += new System.EventHandler(this.memoEditSecurityUsers_EditValueChanged);
 			// 
 			// styleController
 			// 
@@ -136,6 +138,7 @@
 			this.rbSecurityAllowed.Text = "This link is DISPLAYED in the Local Sales Library and also in the iPad Sales Libr" +
     "ary…";
 			this.rbSecurityAllowed.UseVisualStyleBackColor = true;
+			this.rbSecurityAllowed.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
 			// rbSecurityRestricted
 			// 
@@ -165,6 +168,7 @@
 			this.rbSecurityDenied.Text = "This link is ONLY DISPLAYED in the Local Sales Library (not visible at all in the" +
     " iPad Sales Library)";
 			this.rbSecurityDenied.UseVisualStyleBackColor = true;
+			this.rbSecurityDenied.CheckedChanged += new System.EventHandler(this.ValueCheckedChanged);
 			// 
 			// pnButtons
 			// 
