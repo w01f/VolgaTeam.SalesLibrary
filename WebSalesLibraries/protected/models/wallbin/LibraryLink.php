@@ -502,6 +502,7 @@
 						{
 							if (!$this->noShare)
 								$this->availableFormats[] = 'outlook';
+							$this->availableFormats[] = 'download';
 						}
 						break;
 					case 'jpeg':
@@ -510,6 +511,7 @@
 							$this->availableFormats[] = 'jpeg';
 							if (!$this->noShare)
 								$this->availableFormats[] = 'outlook';
+							$this->availableFormats[] = 'download';
 						}
 						break;
 					case 'url':
@@ -1128,11 +1130,14 @@
 			return null;
 		}
 
-		public function getSuperFiltersString()
+		public function getTagsString()
 		{
 			if (isset($this->superFilters))
 				foreach ($this->superFilters as $superFilter)
 					$superFiltersString[] = $superFilter->value;
+			if (isset($this->categories))
+				foreach ($this->categories as $category)
+					$superFiltersString[] = $category->tag;
 			if (isset($superFiltersString))
 				return implode(', ', $superFiltersString);
 			return '';

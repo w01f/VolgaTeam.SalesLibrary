@@ -23,7 +23,7 @@
 		{
 			if ($error = Yii::app()->errorHandler->error)
 			{
-				$this->pageTitle=Yii::app()->name . ' - Error';
+				$this->pageTitle = Yii::app()->name . ' - Error';
 				if (Yii::app()->request->isAjaxRequest)
 					echo $error['message'];
 				else
@@ -126,11 +126,11 @@
 			{
 				$password = UserStorage::generatePassword();
 				UserStorage::changePassword($login, $password);
-				ResetPasswordStorage::resetPasswordForUser($login, $password, false,true);
+				ResetPasswordStorage::resetPasswordForUser($login, $password, false, true);
 			}
 		}
 
-		public function actionVideoDownloadDialog()
+		public function actionDownloadDialog()
 		{
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
@@ -140,8 +140,6 @@
 				{
 					if ($linkRecord->format == 'video' || $linkRecord->format == 'wmv' || $linkRecord->format == 'mp4')
 						$this->renderPartial('downloadVideoDialog', array('format' => $linkRecord->format), false, true);
-					else
-						$this->renderPartial('downloadDialog', array(), false, true);
 				}
 				else
 				{
@@ -150,8 +148,6 @@
 					{
 						if ($attachmentRecord->format == 'video' || $attachmentRecord->format == 'wmv' || $attachmentRecord->format == 'mp4')
 							$this->renderPartial('downloadVideoDialog', array('format' => $attachmentRecord->format), false, true);
-						else
-							$this->renderPartial('downloadDialog', array(), false, true);
 					}
 				}
 			}
@@ -287,7 +283,7 @@
 							}
 							else if ($format == 'pdf')
 							{
-								$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, 'pdf'));
+								$previewRecord = PreviewStorage::model()->find('id_container =? and type=?', array($attachmentRecord->id_preview, $format));
 								if (isset($previewRecord))
 								{
 									$path = $library->storagePath . DIRECTORY_SEPARATOR . str_replace('\\', '/', $previewRecord->relative_path);
@@ -305,7 +301,7 @@
 				StatisticActivityStorage::WriteActivity('Link', 'Download', array('Name' => $name, 'File' => basename($path), 'Original Format' => $originalFormat, 'Format' => $format));
 				return Yii::app()->getRequest()->sendFile($fileName, @file_get_contents($path));
 			}
-			return null;
+			Yii::app()->end();
 		}
 
 		public function actionEmailLinkDialog()

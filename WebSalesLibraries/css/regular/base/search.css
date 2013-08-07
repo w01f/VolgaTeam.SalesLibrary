@@ -212,6 +212,12 @@
 	font-size: 11pt;
 }
 
+#categories .group-selector-title
+{
+	font-weight: bold;
+	padding-left: 5px;
+}
+
 #search-grid-info
 {
 	padding-top: 5px;

@@ -208,6 +208,7 @@
 						if (!$this->forcePreview)
 						{
 							$this->availableFormats[] = 'email';
+							$this->availableFormats[] = 'download';
 						}
 						break;
 					case 'jpeg':
@@ -215,6 +216,7 @@
 						if (!$this->forcePreview)
 						{
 							$this->availableFormats[] = 'email';
+							$this->availableFormats[] = 'download';
 						}
 						break;
 					case 'url':

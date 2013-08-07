@@ -41,7 +41,7 @@
 			var selectedLinkName = $(formatItems[0]).find('.service-data .link-name').html();
 			var selectedFileName = $(formatItems[0]).find('.service-data .file-name').html();
 			var selectedFileFormat = $(formatItems[0]).find('.service-data .file-type').html();
-			var superFilters = $(formatItems[0]).find('.service-data .super-filter').html();
+			var tags = $(formatItems[0]).find('.service-data .tags').html();
 			formatItems.tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
 			formatItems.off('click').on('click', function ()
 			{
@@ -51,8 +51,8 @@
 			var viewDialogContent = content.find('.view-dialog-content').html();
 
 			var modalTitle = 'How Do you want to Open this File?';
-			if (superFilters != '')
-				modalTitle = superFilters;
+			if (tags != '')
+				modalTitle = tags;
 			else if (selectedFileFormat == 'url')
 				modalTitle = 'Web Hyperlink Options';
 
@@ -213,67 +213,72 @@
 		window.open(url.replace(/&amp;/g, '%26'));
 	};
 
-	var downloadFile = function (linkId, title)
+	var downloadFile = function (linkId, title, format)
 	{
-		$.ajax({
-			type: "POST",
-			url: "site/videoDownloadDialog",
-			data: {
-				linkId: linkId
-			},
-			beforeSend: function ()
-			{
-				$.showOverlayLight();
-			},
-			complete: function ()
-			{
-				$.hideOverlayLight();
-			},
-			success: function (msg)
-			{
-				var content = $(msg);
-				content.find(".download-type button").on('click', function ()
+		if (format == 'mp4' || format == 'wmv' || format == 'video')
+		{
+			$.ajax({
+				type: "POST",
+				url: "site/downloadDialog",
+				data: {
+					linkId: linkId
+				},
+				beforeSend: function ()
 				{
-					if (!$(this).hasClass('active'))
-					{
-						$('.download-type button').removeClass('active');
-						$(this).addClass('active');
-					}
-				});
-				content.find('#cancel-button').on('click', function ()
+					$.showOverlayLight();
+				},
+				complete: function ()
 				{
-					$.fancybox.close();
-				});
-				content.find('#accept-button').on('click', function ()
+					$.hideOverlayLight();
+				},
+				success: function (msg)
 				{
-					window.open("site/downloadFile?linkId=" + linkId + "&format=" + $('.download-type button.active img').attr('alt'));
-					$.fancybox.close();
-				});
-				$.fancybox({
-					content: content,
-					title: title,
-					openEffect: 'none',
-					closeEffect: 'none',
-					afterLoad: function ()
+					var content = $(msg);
+					content.find(".download-type button").on('click', function ()
 					{
-						$.linkRate.show(linkId, $('.fancybox-wrap'));
-					},
-					afterClose: function ()
+						if (!$(this).hasClass('active'))
+						{
+							$('.download-type button').removeClass('active');
+							$(this).addClass('active');
+						}
+					});
+					content.find('#cancel-button').on('click', function ()
 					{
-						$.linkRate.close();
-					},
-					onUpdate: function ()
+						$.fancybox.close();
+					});
+					content.find('#accept-button').on('click', function ()
 					{
-						$.linkRate.resizeContainer();
-					}
-				});
-			},
-			error: function ()
-			{
-			},
-			async: true,
-			dataType: 'html'
-		});
+						window.open("site/downloadFile?linkId=" + linkId + "&format=" + $('.download-type button.active img').attr('alt'));
+						$.fancybox.close();
+					});
+					$.fancybox({
+						content: content,
+						title: title,
+						openEffect: 'none',
+						closeEffect: 'none',
+						afterLoad: function ()
+						{
+							$.linkRate.show(linkId, $('.fancybox-wrap'));
+						},
+						afterClose: function ()
+						{
+							$.linkRate.close();
+						},
+						onUpdate: function ()
+						{
+							$.linkRate.resizeContainer();
+						}
+					});
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		}
+		else
+			window.open("site/downloadFile?linkId=" + linkId + "&format=" + format);
 	};
 
 	var favoritesDialogObject = [];
@@ -884,15 +889,20 @@
 						case 'outlook':
 							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
+						case 'download':
+							downloadFile(selectedFileId, selectedLinkName, selectedFileType);
+							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						default:
+							selectedLinks[0].href = selectedLinks[0].href.replace(/&amp;/g, '%26');
 							$.ajax({
 								type: "POST",
 								url: "statistic/writeActivity",
 								data: {
 									type: 'Link',
+									title: selectedLinkName,
 									subType: 'Preview',
 									data: $.toJSON({
 										Name: selectedLinkName,
@@ -956,7 +966,7 @@
 							$.pageList.addLitePage(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);
 							break;
 						case 'download':
-							downloadFile(selectedFileId, selectedLinks[0].title);
+							downloadFile(selectedFileId, selectedLinks[0].title, selectedFileType);
 							break;
 						case 'favorites':
 							addToFavorites(selectedFileId, selectedLinkName, selectedFileName, selectedFileType);

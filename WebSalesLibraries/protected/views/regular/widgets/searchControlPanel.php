@@ -58,9 +58,10 @@
 					<?php foreach ($categories->groups as $group): ?>
 						<h3><span><?php echo $group; ?></span></h3>
 						<div>
+							<label class="checkbox group-selector-title"><input class="group-selector" type="checkbox" <?php echo $categories->isGroupSelected($group) ? 'checked="checked"' : '' ?>><?php echo $group; ?></label>
 							<?php foreach ($categories->getTagsByGroup($group) as $tag): ?>
 								<label class="checkbox">
-									<input type="checkbox" value="<?php echo $group . '------' . $tag['tag']; ?>" <?php echo $tag['selected'] ? 'checked="checked"' : '' ?>>
+									<input class="item-selector" type="checkbox" value="<?php echo $group . '------' . $tag['tag']; ?>" <?php echo $tag['selected'] ? 'checked="checked"' : '' ?>>
 									<?php echo $tag['tag']; ?>
 								</label>
 							<?php endforeach; ?>

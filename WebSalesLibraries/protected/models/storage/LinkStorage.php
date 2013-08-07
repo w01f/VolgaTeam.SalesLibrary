@@ -434,11 +434,22 @@
 						case 'key':
 							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-keynote.png'));
 							break;
+						case 'url':
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
+							break;
+						case 'png':
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-png.png'));
+							break;
+						case 'jpeg':
+							$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-jpeg.png'));
+							break;
 						default:
 							if ($type == 5)
 								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-folder.png'));
 							else if ($type == 6)
 								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-line-break.png'));
+							else if ($type == 8)
+								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-url.png'));
 							else
 								$link['file_type'] = base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'search-undefined-type.png'));
 							break;

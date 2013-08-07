@@ -43,7 +43,7 @@
 		});
 
 		var categories = [];
-		$.each($("#categories").find(":checked"), function ()
+		$.each($("#categories").find(".item-selector:checked"), function ()
 		{
 			var substr = $(this).val().split('------');
 			var category = {
@@ -472,7 +472,8 @@
 
 	var initTags = function ()
 	{
-		$("#categories").accordion({
+		var categories = $("#categories");
+		categories.accordion({
 			autoHeight: false,
 			active: false,
 			collapsible: true,
@@ -481,6 +482,13 @@
 				activeHeader: "ui-icon-circle-arrow-s"
 			}
 		});
+
+		categories.find('.group-selector').off('change').on('change', function ()
+		{
+			var categoryGroup = $(this).parent().parent();
+			categoryGroup.find('.item-selector').attr('checked', $(this).is(':checked'));
+		});
+
 		$('#tags-clear-all').off('click').on('click', function ()
 		{
 			$('#super-filter-list').find('.btn').removeClass('active');
