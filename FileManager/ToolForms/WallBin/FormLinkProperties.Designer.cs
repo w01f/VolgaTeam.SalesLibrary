@@ -2606,6 +2606,7 @@
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
 			this.Text = "Link Properties";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormLinkProperties_FormClosed);
 			this.Load += new System.EventHandler(this.FormProperties_Load);
 			this.gbNotes.ResumeLayout(false);
 			this.gbNotes.PerformLayout();

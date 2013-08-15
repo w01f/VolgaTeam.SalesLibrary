@@ -141,7 +141,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 					if (String.IsNullOrEmpty(title))
 						Process.Start("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result + (!String.IsNullOrEmpty(pinCode) ? ("%0D%0APin-code: " + pinCode) : String.Empty));
 					else
-						Process.Start("mailto: ?subject=" + title + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result + (!String.IsNullOrEmpty(pinCode) ? ("%0D%0APin-code: " + pinCode) : String.Empty));
+						Process.Start("mailto: ?subject=" + title.Replace("&","%26") + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + result + (!String.IsNullOrEmpty(pinCode) ? ("%0D%0APin-code: " + pinCode) : String.Empty));
 				}
 				catch { }
 			}

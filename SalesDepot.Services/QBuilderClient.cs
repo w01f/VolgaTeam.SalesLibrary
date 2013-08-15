@@ -237,7 +237,7 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public void AddLinksToPage(string[] linkIds, string pageId, out string message)
+		public void AddLinksToPage(string[] linkIds, string pageId, int firstLinkIndex, out string message)
 		{
 			message = string.Empty;
 			var client = GetQBuilderClient();
@@ -247,7 +247,30 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						client.addLinksToPage(sessionKey, linkIds, pageId);
+						client.addLinksToPage(sessionKey, linkIds, pageId, firstLinkIndex);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void SetPageLinkOrder(string linkId, string pageId, int linkIndex, out string message)
+		{
+			message = string.Empty;
+			var client = GetQBuilderClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setPageLinkOrder(sessionKey, pageId, linkId, linkIndex);
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -475,5 +498,27 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
+		public void SetPageOrder(string pageId, int pageIndex, out string message)
+		{
+			message = string.Empty;
+			var client = GetQBuilderClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+						client.setPageOrder(sessionKey, _login, pageId, pageIndex);
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
 	}
 }

@@ -29,8 +29,10 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageListControl));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnButtons = new System.Windows.Forms.Panel();
 			this.simpleButtonDelete = new DevExpress.XtraEditors.SimpleButton();
 			this.gridControl = new DevExpress.XtraGrid.GridControl();
@@ -120,6 +122,7 @@
 			this.advBandedGridView.OptionsView.ShowGroupPanel = false;
 			this.advBandedGridView.OptionsView.ShowIndicator = false;
 			this.advBandedGridView.OptionsView.ShowPreview = true;
+			this.advBandedGridView.OptionsView.ShowVertLines = false;
 			this.advBandedGridView.PreviewFieldName = "Details";
 			this.advBandedGridView.RowHeight = 40;
 			this.advBandedGridView.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.advBandedGridView_FocusedRowChanged);
@@ -129,7 +132,7 @@
 			this.gridBandName.Caption = "Name";
 			this.gridBandName.Columns.Add(this.bandedGridColumnPageName);
 			this.gridBandName.Name = "gridBandName";
-			this.gridBandName.Width = 216;
+			this.gridBandName.Width = 1591;
 			// 
 			// bandedGridColumnPageName
 			// 
@@ -139,34 +142,38 @@
 			this.bandedGridColumnPageName.OptionsColumn.AllowEdit = false;
 			this.bandedGridColumnPageName.OptionsColumn.ReadOnly = true;
 			this.bandedGridColumnPageName.Visible = true;
-			this.bandedGridColumnPageName.Width = 216;
+			this.bandedGridColumnPageName.Width = 1591;
 			// 
 			// gridBandActions
 			// 
-			this.gridBandActions.Caption = "gridBand2";
+			this.gridBandActions.Caption = "Actions";
 			this.gridBandActions.Columns.Add(this.bandedGridColumnActions);
 			this.gridBandActions.Name = "gridBandActions";
 			this.gridBandActions.OptionsBand.FixedWidth = true;
 			this.gridBandActions.OptionsBand.ShowCaption = false;
-			this.gridBandActions.Width = 84;
+			this.gridBandActions.Width = 165;
 			// 
 			// bandedGridColumnActions
 			// 
 			this.bandedGridColumnActions.Caption = "Actions";
 			this.bandedGridColumnActions.ColumnEdit = this.repositoryItemButtonEditActions;
+			this.bandedGridColumnActions.FieldName = "list_order";
 			this.bandedGridColumnActions.Name = "bandedGridColumnActions";
-			this.bandedGridColumnActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
+			this.bandedGridColumnActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowForFocusedRow;
 			this.bandedGridColumnActions.Visible = true;
-			this.bandedGridColumnActions.Width = 84;
+			this.bandedGridColumnActions.Width = 165;
 			// 
 			// repositoryItemButtonEditActions
 			// 
+			this.repositoryItemButtonEditActions.AllowFocused = false;
 			this.repositoryItemButtonEditActions.AutoHeight = false;
 			this.repositoryItemButtonEditActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Clone this quickSITE", null, null, true),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "Delete this quickSITE", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject6, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons2"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject7, "Clone this quickSITE", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditActions.Buttons3"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject8, "Delete this quickSITE", null, null, true)});
 			this.repositoryItemButtonEditActions.Name = "repositoryItemButtonEditActions";
-			this.repositoryItemButtonEditActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+			this.repositoryItemButtonEditActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 			this.repositoryItemButtonEditActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditActions_ButtonClick);
 			// 
 			// PageListControl

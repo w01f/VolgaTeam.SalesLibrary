@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Controls;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
 using SalesDepot.ToolForms;
@@ -150,7 +151,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 						};
 						process.Start();
 					}
-					catch{}
+					catch { }
 				}
 			}
 		}
@@ -163,7 +164,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				if (String.IsNullOrEmpty(SelectedPage.title))
 					Process.Start("mailto: ?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url + (!String.IsNullOrEmpty(SelectedPage.pinCode) ? ("%0D%0APin-code: " + SelectedPage.pinCode) : String.Empty));
 				else
-					Process.Start("mailto: ?subject=" + SelectedPage.title + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url + (!String.IsNullOrEmpty(SelectedPage.pinCode) ? ("%0D%0APin-code: " + SelectedPage.pinCode) : String.Empty));
+					Process.Start("mailto: ?subject=" + SelectedPage.title.Replace("&","%26") + "&body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + SelectedPage.url + (!String.IsNullOrEmpty(SelectedPage.pinCode) ? ("%0D%0APin-code: " + SelectedPage.pinCode) : String.Empty));
 			}
 			catch { }
 		}
@@ -179,9 +180,25 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			Enabled = false;
 			using (var form = new FormProgress())
 			{
+				form.laProgress.Text = "Cloning quickSITE...";
 				form.TopMost = true;
 				form.Show();
 				QBuilder.Instance.ClonePage(SelectedPage.id, pageTitle);
+				form.Close();
+			}
+			Enabled = true;
+		}
+
+		public void SetPageIndex(string pageId, int pageIndex)
+		{
+			if (!QBuilder.Instance.Connected) return;
+			Enabled = false;
+			using (var form = new FormProgress())
+			{
+				form.laProgress.Text = "Changing quickSITE order...";
+				form.TopMost = true;
+				form.Show();
+				QBuilder.Instance.SetPageIndex(pageId, pageIndex);
 				form.Close();
 			}
 			Enabled = true;
@@ -206,12 +223,30 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			Enabled = true;
 		}
 
-		private void repositoryItemButtonEditActions_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+		private void repositoryItemButtonEditActions_ButtonClick(object sender, ButtonPressedEventArgs e)
 		{
-			if (e.Button.Index == 0) { ClonePage(); }
-			else if (e.Button.Index == 1)
+			var currentPageIndex = advBandedGridView.FocusedRowHandle;
+			switch (e.Button.Index)
 			{
-				DeletePage();
+				case 0:
+					var currentPage = advBandedGridView.GetFocusedRow() as QPageRecord;
+					if (currentPage != null && currentPageIndex > 0)
+						SetPageIndex(currentPage.id, currentPageIndex - 1);
+					break;
+				case 1:
+					if (currentPageIndex < (advBandedGridView.RowCount - 1))
+					{
+						var nextPage = advBandedGridView.GetRow(currentPageIndex + 1) as QPageRecord;
+						if (nextPage != null)
+							SetPageIndex(nextPage.id, currentPageIndex);
+					}
+					break;
+				case 2:
+					ClonePage();
+					break;
+				case 3:
+					DeletePage();
+					break;
 			}
 		}
 

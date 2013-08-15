@@ -28,11 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PageContentControl));
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.pnPageHeader = new System.Windows.Forms.Panel();
 			this.hyperLinkEditUrl = new DevExpress.XtraEditors.HyperLinkEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController();
+			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.labelControlUrlTitle = new DevExpress.XtraEditors.LabelControl();
 			this.labelControlCreateDate = new DevExpress.XtraEditors.LabelControl();
 			this.textEditTitleValue = new DevExpress.XtraEditors.TextEdit();
@@ -260,6 +263,8 @@
             this.advBandedGridViewLinks});
 			this.gridControlLinks.DragDrop += new System.Windows.Forms.DragEventHandler(this.gridControlLinks_DragDrop);
 			this.gridControlLinks.DragOver += new System.Windows.Forms.DragEventHandler(this.gridControlLinks_DragOver);
+			this.gridControlLinks.Paint += new System.Windows.Forms.PaintEventHandler(this.gridControlLinks_Paint);
+			this.gridControlLinks.MouseLeave += new System.EventHandler(this.gridControlLinks_MouseLeave);
 			// 
 			// advBandedGridViewLinks
 			// 
@@ -336,7 +341,7 @@
 			this.gridBandLink.Caption = "Link";
 			this.gridBandLink.Columns.Add(this.bandedGridColumnLinksName);
 			this.gridBandLink.Name = "gridBandLink";
-			this.gridBandLink.Width = 197;
+			this.gridBandLink.Width = 422;
 			// 
 			// bandedGridColumnLinksName
 			// 
@@ -348,7 +353,7 @@
 			this.bandedGridColumnLinksName.OptionsColumn.AllowEdit = false;
 			this.bandedGridColumnLinksName.OptionsColumn.ReadOnly = true;
 			this.bandedGridColumnLinksName.Visible = true;
-			this.bandedGridColumnLinksName.Width = 197;
+			this.bandedGridColumnLinksName.Width = 422;
 			// 
 			// gridBandActions
 			// 
@@ -357,22 +362,25 @@
 			this.gridBandActions.Name = "gridBandActions";
 			this.gridBandActions.OptionsBand.FixedWidth = true;
 			this.gridBandActions.OptionsBand.ShowCaption = false;
-			this.gridBandActions.Width = 47;
+			this.gridBandActions.Width = 110;
 			// 
 			// bandedGridColumnLinksActions
 			// 
 			this.bandedGridColumnLinksActions.Caption = "Actions";
 			this.bandedGridColumnLinksActions.ColumnEdit = this.repositoryItemButtonEditLinksActions;
 			this.bandedGridColumnLinksActions.Name = "bandedGridColumnLinksActions";
+			this.bandedGridColumnLinksActions.OptionsColumn.FixedWidth = true;
 			this.bandedGridColumnLinksActions.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowAlways;
 			this.bandedGridColumnLinksActions.Visible = true;
-			this.bandedGridColumnLinksActions.Width = 47;
+			this.bandedGridColumnLinksActions.Width = 110;
 			// 
 			// repositoryItemButtonEditLinksActions
 			// 
 			this.repositoryItemButtonEditLinksActions.AutoHeight = false;
 			this.repositoryItemButtonEditLinksActions.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "Delete this file", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons1"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true),
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("repositoryItemButtonEditLinksActions.Buttons2"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "Delete this file", null, null, true)});
 			this.repositoryItemButtonEditLinksActions.Name = "repositoryItemButtonEditLinksActions";
 			this.repositoryItemButtonEditLinksActions.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
 			this.repositoryItemButtonEditLinksActions.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.repositoryItemButtonEditLinksActions_ButtonClick);
@@ -868,15 +876,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditLinksActions)).EndInit();
 			this.xtraTabPageTitle.ResumeLayout(false);
 			this.pnTitle.ResumeLayout(false);
-			this.pnTitle.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditTitleEnabled.Properties)).EndInit();
 			this.xtraTabPageHeader.ResumeLayout(false);
 			this.pnHeaderHeader.ResumeLayout(false);
-			this.pnHeaderHeader.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditHeaderEnabled.Properties)).EndInit();
 			this.xtraTabPageFooter.ResumeLayout(false);
 			this.pnFooterHeader.ResumeLayout(false);
-			this.pnFooterHeader.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditFooterEnabled.Properties)).EndInit();
 			this.xtraTabPageSecurity.ResumeLayout(false);
 			this.pnSecurity.ResumeLayout(false);

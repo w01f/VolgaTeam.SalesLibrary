@@ -828,6 +828,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\NudgeDown.png" />
+    <None Include="Resources\NudgeUp.png" />
     <None Include="Resources\QuickViewUserSettings.png" />
     <None Include="Resources\QBuilderBrowserOpera.png" />
     <None Include="Resources\QBuilderBrowserInternetExplorer.png" />

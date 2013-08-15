@@ -102,7 +102,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				form.laProgress.Text = "Adding Links to quickSITE...";
 				form.TopMost = true;
 				form.Show();
-				QBuilder.Instance.AddLinksToPage(_links.Select(l => l.id).ToArray());
+				QBuilder.Instance.AddLinksToPage(_links.Select(l => l.id).ToArray(), -1);
 				form.Close();
 			}
 			Enabled = true;

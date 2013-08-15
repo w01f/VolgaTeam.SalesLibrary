@@ -324,7 +324,7 @@ namespace FileManager.Controllers
 			if (ListManager.Instance.SearchTags.TagCount)
 			{
 				var totalLinks = MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Count(l => l.Type != FileTypes.LineBreak);
-				var taggedLinks = MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Count(l => l.SearchTags != null && !String.IsNullOrEmpty(l.SearchTags.AllTags));
+				var taggedLinks = MainController.Instance.ActiveDecorator.Library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files)).Count(l => l.Type != FileTypes.LineBreak && l.SearchTags != null && !String.IsNullOrEmpty(l.SearchTags.AllTags));
 				if (taggedLinks == 0)
 				{
 					_tabPage.UpdateTagCountInfo("You need to start TAGGING your Links!", Color.Red);

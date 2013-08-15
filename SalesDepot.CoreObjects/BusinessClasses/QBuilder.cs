@@ -277,6 +277,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					PageListChanged(this, new EventArgs());
 			}
 		}
+
+		public void SetPageIndex(string pageId, int pageIndex)
+		{
+			var message = String.Empty;
+			var result = true;
+			var thread = new Thread(delegate()
+			{
+				Connection.Client.SetPageOrder(pageId, pageIndex, out message);
+				result &= String.IsNullOrEmpty(message);
+			});
+			thread.Start();
+			while (thread.IsAlive)
+				Application.DoEvents();
+			if (result)
+			{
+				if (PageListChanged != null)
+					PageListChanged(this, new EventArgs());
+			}
+		}
 		#endregion
 
 		#region Page Content Processing
@@ -333,13 +352,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				Application.DoEvents();
 		}
 
-		public bool AddLinksToPage(string[] linkIds)
+		public bool AddLinksToPage(string[] linkIds, int firstLinkIndex)
 		{
 			var message = String.Empty;
 			var result = true;
 			var thread = new Thread(delegate()
 			{
-				Connection.Client.AddLinksToPage(linkIds, SelectedPageId, out message);
+				Connection.Client.AddLinksToPage(linkIds, SelectedPageId, firstLinkIndex, out message);
 				result &= String.IsNullOrEmpty(message);
 			});
 			thread.Start();
@@ -351,6 +370,26 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				LoadPage(SelectedPageId);
 				if (LinkCartChanged != null)
 					LinkCartChanged(this, new EventArgs());
+			}
+			return result;
+		}
+
+		public bool SetLinkIndex(string linkId, int linkIndex)
+		{
+			var message = String.Empty;
+			var result = true;
+			var thread = new Thread(delegate()
+			{
+				Connection.Client.SetPageLinkOrder(linkId, SelectedPageId, linkIndex, out message);
+				result &= String.IsNullOrEmpty(message);
+			});
+			thread.Start();
+			while (thread.IsAlive)
+				Application.DoEvents();
+			if (result)
+			{
+				SelectedPage.FullyLoaded = false;
+				LoadPage(SelectedPageId);
 			}
 			return result;
 		}

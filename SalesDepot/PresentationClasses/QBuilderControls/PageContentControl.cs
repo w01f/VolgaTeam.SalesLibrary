@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Layout;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
@@ -184,25 +187,65 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 		{
 			var link = advBandedGridViewLinks.GetFocusedRow() as QPageLinkRecord;
 			if (link == null) return;
-			if (AppManager.Instance.ShowWarningQuestion("Do you want to delete link from quickSITE?") == DialogResult.Yes)
+			var currentLinkIndex = advBandedGridViewLinks.FocusedRowHandle;
+			switch (e.Button.Index)
 			{
-				if (!QBuilder.Instance.Connected) return;
-				var result = false;
-				Enabled = false;
-				using (var form = new FormProgress())
-				{
-					form.laProgress.Text = "Deleting Link from quickSITE...";
-					form.TopMost = true;
-					form.Show();
-					result = QBuilder.Instance.DeleteLinkFromPage(link.id);
-					form.Close();
-				}
-				Enabled = true;
-				if (result)
-				{
-					QBuilder.Instance.SelectedPage.RemoveLink(link);
-					UpdateLinks(QBuilder.Instance.SelectedPage);
-				}
+				case 0:
+					if (currentLinkIndex > 0)
+					{
+						if (!QBuilder.Instance.Connected) return;
+						Enabled = false;
+						using (var form = new FormProgress())
+						{
+							form.laProgress.Text = "Changing Links Order...";
+							form.TopMost = true;
+							form.Show();
+							QBuilder.Instance.SetLinkIndex(link.id, currentLinkIndex - 1);
+							form.Close();
+						}
+						Enabled = true;
+					}
+					break;
+				case 1:
+					if (currentLinkIndex < (advBandedGridViewLinks.RowCount - 1))
+					{
+						var nextLink = advBandedGridViewLinks.GetRow(currentLinkIndex + 1) as QPageLinkRecord;
+						if (nextLink == null) return;
+						if (!QBuilder.Instance.Connected) return;
+						Enabled = false;
+						using (var form = new FormProgress())
+						{
+							form.laProgress.Text = "Changing Links Order...";
+							form.TopMost = true;
+							form.Show();
+							QBuilder.Instance.SetLinkIndex(nextLink.id, currentLinkIndex);
+							form.Close();
+						}
+						Enabled = true;
+					}
+					break;
+				case 2:
+					if (AppManager.Instance.ShowWarningQuestion("Do you want to delete link from quickSITE?") == DialogResult.Yes)
+					{
+						if (!QBuilder.Instance.Connected) return;
+						var result = false;
+						Enabled = false;
+						using (var form = new FormProgress())
+						{
+							form.laProgress.Text = "Deleting Link from quickSITE...";
+							form.TopMost = true;
+							form.Show();
+							result = QBuilder.Instance.DeleteLinkFromPage(link.id);
+							form.Close();
+						}
+						Enabled = true;
+						if (result)
+						{
+							QBuilder.Instance.SelectedPage.RemoveLink(link);
+							UpdateLinks(QBuilder.Instance.SelectedPage);
+						}
+					}
+					break;
 			}
 		}
 
@@ -261,9 +304,29 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 		}
 
 		#region DnD Processing
+		private int _dropTargetRowHandle = GridControl.InvalidRowHandle;
+		private int DropTargetRowHandle
+		{
+			get { return _dropTargetRowHandle; }
+			set
+			{
+				if (_dropTargetRowHandle != value)
+				{
+					_dropTargetRowHandle = value;
+					gridControlLinks.Refresh();
+				}
+			}
+		}
+
 		private void gridControlLinks_DragOver(object sender, DragEventArgs e)
 		{
 			e.Effect = e.Data.GetDataPresent(typeof(QPageLinkRecord)) ? DragDropEffects.Move : DragDropEffects.None;
+			var grid = sender as GridControl;
+			if (grid == null) return;
+			var view = grid.MainView as GridView;
+			if (view == null) return;
+			var hitInfo = view.CalcHitInfo(grid.PointToClient(new Point(e.X, e.Y)));
+			DropTargetRowHandle = hitInfo.RowHandle;
 		}
 
 		private void gridControlLinks_DragDrop(object sender, DragEventArgs e)
@@ -275,9 +338,40 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				form.laProgress.Text = "Adding Link to quickSITE...";
 				form.TopMost = true;
 				form.Show();
-				QBuilder.Instance.AddLinksToPage(new[] { link.id });
+				QBuilder.Instance.AddLinksToPage(new[] { link.id }, DropTargetRowHandle == GridControl.InvalidRowHandle ? -1 : DropTargetRowHandle);
 				form.Close();
+				DropTargetRowHandle = GridControl.InvalidRowHandle;
 			}
+		}
+
+		private void gridControlLinks_MouseLeave(object sender, EventArgs e)
+		{
+			DropTargetRowHandle = GridControl.InvalidRowHandle;
+		}
+
+		private void gridControlLinks_Paint(object sender, PaintEventArgs e)
+		{
+			if (DropTargetRowHandle == GridControl.InvalidRowHandle) return;
+			var grid = sender as GridControl;
+			if (grid == null) return;
+			var view = grid.MainView as GridView;
+			if (view == null) return;
+			bool isBottomLine = DropTargetRowHandle == view.DataRowCount;
+			var viewInfo = view.GetViewInfo() as GridViewInfo;
+			var rowInfo = viewInfo.GetGridRowInfo(isBottomLine ? DropTargetRowHandle - 1 : DropTargetRowHandle);
+			if (rowInfo == null) return;
+			Point p1, p2;
+			if (isBottomLine)
+			{
+				p1 = new Point(rowInfo.Bounds.Left, rowInfo.Bounds.Bottom - 2);
+				p2 = new Point(rowInfo.Bounds.Right, rowInfo.Bounds.Bottom - 2);
+			}
+			else
+			{
+				p1 = new Point(rowInfo.Bounds.Left, rowInfo.Bounds.Top - 2);
+				p2 = new Point(rowInfo.Bounds.Right, rowInfo.Bounds.Top - 2);
+			}
+			e.Graphics.DrawLine(Pens.Orange, p1, p2);
 		}
 		#endregion
 	}

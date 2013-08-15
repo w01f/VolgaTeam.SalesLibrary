@@ -22,11 +22,12 @@ namespace FileManager.ToolForms.WallBin
 {
 	public partial class FormLinkProperties : Form
 	{
-		private bool _loading = false;
 		private bool _closeEventAssigned;
 		private bool _isBold;
 		private string _note = string.Empty;
 		private LayoutViewHitInfo _hitInfo;
+
+		public bool IsLoading { get; set; }
 
 		public FormLinkProperties()
 		{
@@ -141,27 +142,6 @@ namespace FileManager.ToolForms.WallBin
 			dateEditExpirationDate.Properties.NullDate = DateTime.MinValue;
 
 			#region Search tags
-
-			#region Categories
-			xtraScrollableControlSearchTagsCategories.Controls.Clear();
-			splitContainerSearchTagsCategories.Panel2.Controls.Clear();
-			foreach (var searchGroup in ListManager.Instance.SearchTags.SearchGroups)
-			{
-				searchGroup.InitGroupControls();
-
-				searchGroup.ToggleButton.Dock = DockStyle.Top;
-				searchGroup.ToggleButton.Click += CategoriesGroup_Click;
-				searchGroup.ToggleButton.CheckedChanged += CategoriesGroup_CheckedChanged;
-				xtraScrollableControlSearchTagsCategories.Controls.Add(searchGroup.ToggleButton);
-				searchGroup.ToggleButton.BringToFront();
-
-				searchGroup.ListBox.ItemChecking += ListBox_ItemChecking;
-				searchGroup.ListBox.ItemCheck += (o, e) => UpdateCategoriesHeader();
-				splitContainerSearchTagsCategories.Panel2.Controls.Add(searchGroup.ListBox);
-				searchGroup.ListBox.BringToFront();
-			}
-			#endregion
-
 			Keywords = new List<StringDataSourceWrapper>();
 			#endregion
 
@@ -279,7 +259,6 @@ namespace FileManager.ToolForms.WallBin
 
 		private void FormProperties_Load(object sender, EventArgs e)
 		{
-			_loading = true;
 			xtraTabPageExpiredLinks.PageVisible = !IsLineBreak;
 			xtraTabPageNotes.PageVisible = !IsLineBreak;
 			xtraTabPageSearchTags.PageVisible = !IsLineBreak;
@@ -288,9 +267,27 @@ namespace FileManager.ToolForms.WallBin
 
 			#region Search tags
 			#region Categories
+			xtraScrollableControlSearchTagsCategories.Controls.Clear();
+			splitContainerSearchTagsCategories.Panel2.Controls.Clear();
 			foreach (var searchGroup in ListManager.Instance.SearchTags.SearchGroups)
 			{
-				searchGroup.ListBox.UnCheckAll();
+				searchGroup.InitGroupControls();
+
+				searchGroup.ToggleButton.Dock = DockStyle.Top;
+				searchGroup.ToggleButton.Click += CategoriesGroup_Click;
+				searchGroup.ToggleButton.CheckedChanged += CategoriesGroup_CheckedChanged;
+				xtraScrollableControlSearchTagsCategories.Controls.Add(searchGroup.ToggleButton);
+				searchGroup.ToggleButton.BringToFront();
+
+				searchGroup.ListBox.ItemChecking += ListBox_ItemChecking;
+				searchGroup.ListBox.ItemCheck += (o, ea) => UpdateCategoriesHeader();
+				splitContainerSearchTagsCategories.Panel2.Controls.Add(searchGroup.ListBox);
+				searchGroup.ListBox.BringToFront();
+			}
+
+			ListManager.Instance.SearchTags.SearchGroups.ForEach(g=>g.ListBox.UnCheckAll());
+			foreach (var searchGroup in ListManager.Instance.SearchTags.SearchGroups)
+			{
 				var group = SearchTags.SearchGroups.FirstOrDefault(x => x.Name.Equals(searchGroup.Name));
 				if (group != null)
 					foreach (var item in searchGroup.ListBox.Items.Cast<CheckedListBoxItem>().Where(item => group.Tags.Select(x => x.Name).Contains(item.Value.ToString())))
@@ -403,7 +400,12 @@ namespace FileManager.ToolForms.WallBin
 				AssignCloseActiveEditorsonOutSideClick(this);
 				_closeEventAssigned = true;
 			}
-			_loading = false;
+			IsLoading = false;
+		}
+
+		private void FormLinkProperties_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			IsLoading = true;
 		}
 
 		private void xtraTabControl_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
@@ -714,7 +716,7 @@ namespace FileManager.ToolForms.WallBin
 
 		private void ListBox_ItemChecking(object sender, ItemCheckingEventArgs e)
 		{
-			if (!_loading && ListManager.Instance.SearchTags.MaxTags > 0 && e.NewValue == CheckState.Checked)
+			if (!IsLoading && ListManager.Instance.SearchTags.MaxTags > 0 && e.NewValue == CheckState.Checked)
 			{
 				var totalTags = ListManager.Instance.SearchTags.SearchGroups.Sum(g => g.ListBox.CheckedItemsCount);
 				if (totalTags >= ListManager.Instance.SearchTags.MaxTags)

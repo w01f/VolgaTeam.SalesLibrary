@@ -158,8 +158,16 @@
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="linkInCartIds" type="tns:stringArray" />
     <wsdl:part name="pageId" type="xsd:string" />
+    <wsdl:part name="order" type="xsd:int" />
   </wsdl:message>
   <wsdl:message name="addLinksToPageResponse" />
+  <wsdl:message name="setPageLinkOrderRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="pageId" type="xsd:string" />
+    <wsdl:part name="linkInPageId" type="xsd:string" />
+    <wsdl:part name="firstLinkOrder" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="setPageLinkOrderResponse" />
   <wsdl:message name="deleteLinkFromPageRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="linkInPageId" type="xsd:string" />
@@ -207,6 +215,13 @@
     <wsdl:part name="pageIds" type="tns:stringArray" />
   </wsdl:message>
   <wsdl:message name="deletePagesResponse" />
+  <wsdl:message name="setPageOrderRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="login" type="xsd:string" />
+    <wsdl:part name="pageId" type="xsd:string" />
+    <wsdl:part name="order" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="setPageOrderResponse" />
   <wsdl:portType name="QbuilderControllerPortType">
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -286,6 +301,12 @@
       <wsdl:input message="tns:addLinksToPageRequest" />
       <wsdl:output message="tns:addLinksToPageResponse" />
     </wsdl:operation>
+    <wsdl:operation name="setPageLinkOrder">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:setPageLinkOrderRequest" />
+      <wsdl:output message="tns:setPageLinkOrderResponse" />
+    </wsdl:operation>
     <wsdl:operation name="deleteLinkFromPage">
       <wsdl:documentation>
       </wsdl:documentation>
@@ -315,6 +336,12 @@
       </wsdl:documentation>
       <wsdl:input message="tns:deletePagesRequest" />
       <wsdl:output message="tns:deletePagesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="setPageOrder">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:setPageOrderRequest" />
+      <wsdl:output message="tns:setPageOrderResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QbuilderControllerBinding" type="tns:QbuilderControllerPortType">
@@ -436,6 +463,15 @@
         <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="setPageLinkOrder">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#setPageLinkOrder" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="deleteLinkFromPage">
       <soap:operation soapAction="urn:QbuilderControllerwsdl#deleteLinkFromPage" style="rpc" />
       <wsdl:input>
@@ -474,6 +510,15 @@
     </wsdl:operation>
     <wsdl:operation name="deletePages">
       <soap:operation soapAction="urn:QbuilderControllerwsdl#deletePages" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setPageOrder">
+      <soap:operation soapAction="urn:QbuilderControllerwsdl#setPageOrder" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:QbuilderControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

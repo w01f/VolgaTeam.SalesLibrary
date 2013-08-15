@@ -751,6 +751,7 @@ namespace FileManager.PresentationClasses.WallBin
 			var file = grFiles.SelectedRows[0].Tag as LibraryLink;
 			if (file == null) return;
 			if (_formLinkProperties == null) _formLinkProperties = new FormLinkProperties();
+			_formLinkProperties.IsLoading = true;
 			_formLinkProperties.CaptionName = string.IsNullOrEmpty(file.PropertiesName) && file.Type == FileTypes.LineBreak ? "Line Break" : file.PropertiesName;
 			_formLinkProperties.IsBold = file.IsBold;
 			_formLinkProperties.EnableWidget = file.EnableWidget;
@@ -1338,6 +1339,8 @@ namespace FileManager.PresentationClasses.WallBin
 			IsActive = false;
 			grFiles.ReadOnly = true;
 			Padding = new Padding(0, 0, 0, 0);
+			grFiles.ClearSelection();
+			grFiles.CurrentCell = null;
 			grFiles.DefaultCellStyle.SelectionBackColor = grFiles.DefaultCellStyle.BackColor;
 			Decorator.ActiveBox.Refresh();
 			UpdateButtonsStatus();
