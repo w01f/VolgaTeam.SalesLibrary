@@ -235,7 +235,7 @@
 		},
 		addAllLinksToPage: function (linkId)
 		{
-			var selectedPageId = $('#page-list').find('a.selected').parent().attr('id').replace('page', '');
+			var selectedPageId = $.pageList.getSelectedPageId();
 			$.ajax({
 				type: "POST",
 				url: "qbuilder/addAllLinksToPage",

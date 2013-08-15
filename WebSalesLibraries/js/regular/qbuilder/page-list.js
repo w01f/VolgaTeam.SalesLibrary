@@ -5,7 +5,7 @@
 		{
 			var pageList = $('#page-list-container');
 			if (selectedPageId == undefined)
-				selectedPageId = pageList.find('li').first().attr('id').replace('page', '');
+				selectedPageId = $.pageList.getSelectedPageId();
 			$.ajax({
 				type: "POST",
 				url: "qbuilder/getPageList",
@@ -37,45 +37,38 @@
 		afterLoad: function ()
 		{
 			var pageList = $('#page-list-container');
-			if (pageList.find('a.selected').length > 0)
-				$.pageList.openPage(pageList.find('a.selected').parent().attr('id').replace('page', ''));
-			pageList.find('li')
-				.off('mousedown.page-list-item touchstart.page-list-item')
-				.on('mousedown.page-list-item touchstart.page-list-item', function (eventDown)
-				{
-					$(this).off('mouseup.page-list-item touchend.page-list-item').on('mouseup.page-list-item touchend.page-list-item', function (eventUp)
-					{
-						if (eventDown.which != 3)
-						{
-							pageList.find('li>a').removeClass('selected');
-							pageList.find('li .icon-folder-open').removeClass('icon-folder-open').addClass('icon-folder-close');
-							$(this).children('a').addClass('selected');
-							$(this).children('a').children('.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
-							var selectedPageId = $(this).attr('id').replace('page', '');
-							$.pageList.openPage(selectedPageId);
-							eventUp.stopPropagation();
-						}
-					});
-					eventDown.stopPropagation();
-				})
-				.off('touchmove.page-list-item')
-				.on('touchmove.page-list-item', function ()
-				{
-					$(this).off('touchend');
-				});
-			$.each(pageList.find('li'), function ()
+			if (pageList.find('tr').length > 0)
+				$.pageList.openPage($.pageList.getSelectedPageId());
+			pageList.find('tr').off('click').on('click', function (event)
 			{
-				var menu = {};
-				menu['clone'] = {icon: ' icon-plus', text: 'CLONE this quickSITE', click: function ()
+				if (!$(this).hasClass('selected'))
 				{
-					$.pageList.addPage(this.target.id.replace('page', ''));
-				}};
-				menu['separator1'] = '---';
-				menu['delete'] = {icon: 'icon-remove', text: 'DELETE this quickSITE', click: function ()
-				{
-					$.pageList.deletePage(this.target.id.replace('page', ''));
-				}};
-				$(this).contextMenu(menu);
+					pageList.find('tr').removeClass('selected');
+					$(this).addClass('selected');
+					var selectedPageId = $.pageList.getSelectedPageId();
+					$.pageList.openPage(selectedPageId);
+				}
+				event.stopPropagation();
+			});
+			pageList.find('.link-delete').off('click').on('click', function (event)
+			{
+				event.stopPropagation();
+				$.pageList.deletePage($(this).parent().find('.link-id-column').html());
+			});
+			pageList.find('.link-clone').off('click').on('click', function (event)
+			{
+				event.stopPropagation();
+				$.pageList.addPage($(this).parent().find('.link-id-column').html());
+			});
+			pageList.find('.link-up').off('click').on('click', function (event)
+			{
+				event.stopPropagation();
+				$.pageList.upPage($(this).parent());
+			});
+			pageList.find('.link-down').off('click').on('click', function (event)
+			{
+				event.stopPropagation();
+				$.pageList.downPage($(this).parent());
 			});
 		},
 		init: function ()
@@ -93,6 +86,11 @@
 			{
 				$.pageList.deletePages();
 			});
+		},
+		getSelectedPageId: function ()
+		{
+			var pageList = $('#page-list');
+			return pageList.find('tr.selected').find('.link-id-column').html();
 		},
 		openPage: function (selectedPageId)
 		{
@@ -266,7 +264,7 @@
 							ccEmail.removeAttr('disabled');
 						else
 						{
-							ccEmail.attr('disabled','disabled');
+							ccEmail.attr('disabled', 'disabled');
 							ccEmail.val('');
 						}
 					});
@@ -321,7 +319,7 @@
 							success: function (msg)
 							{
 								if (subtitle != '')
-									window.open('mailto: ?subject=' + subtitle + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+									window.open('mailto: ?subject=' + subtitle.replace(/&/g, '%26') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 								else
 									window.open('mailto: ?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 							},
@@ -391,8 +389,7 @@
 		},
 		deletePage: function (pageId)
 		{
-			var pageList = $('#page-list-container');
-			var selectedPageId = pageList.find('a.selected').parent().attr('id').replace('page', '');
+			var selectedPageId = $.pageList.getSelectedPageId();
 			if (pageId != undefined)
 				selectedPageId = pageId;
 			if (selectedPageId != null)
@@ -517,9 +514,9 @@
 		savePage: function (onSuccessHandler)
 		{
 			var pageList = $('#page-list-container');
-			var selectedPage = pageList.find('a.selected');
-			var selectedPageId = selectedPage.parent().attr('id').replace('page', '');
-			selectedPage.find('span').html($('#page-content-title').val());
+			var selectedPage = pageList.find('tr.selected');
+			var selectedPageId = $.pageList.getSelectedPageId();
+			selectedPage.find('td.link-name-column').html($('#page-content-title').val());
 			$.ajax({
 				type: "POST",
 				url: "qbuilder/savePage",
@@ -580,6 +577,61 @@
 		previewPage: function ()
 		{
 			window.open($('#page-content-url').html(), '_blank');
+		},
+		upPage: function (row)
+		{
+			var pageId = row.find('.link-id-column').html();
+			var rowIndex = $('#page-list tr.page-list-item').index(row);
+			if (rowIndex > 0)
+			{
+				$.ajax({
+					type: "POST",
+					url: "qbuilder/setPageOrder",
+					data: {
+						pageId: pageId,
+						order: (rowIndex - 1)
+					},
+					beforeSend: function ()
+					{
+						$.showOverlayLight();
+					},
+					complete: function ()
+					{
+						$.hideOverlayLight();
+						$.pageList.load();
+					},
+					async: true,
+					dataType: 'html'
+				});
+			}
+		},
+		downPage: function (row)
+		{
+			var nextRow = row.next();
+			if (nextRow.length > 0)
+			{
+				var pageId = nextRow.find('.link-id-column').html();
+				var rowIndex = $('#page-list tr.page-list-item').index(nextRow);
+				$.ajax({
+					type: "POST",
+					url: "qbuilder/setPageOrder",
+					data: {
+						pageId: pageId,
+						order: rowIndex > 0 ? (rowIndex - 1) : 0
+					},
+					beforeSend: function ()
+					{
+						$.showOverlayLight();
+					},
+					complete: function ()
+					{
+						$.hideOverlayLight();
+						$.pageList.load();
+					},
+					async: true,
+					dataType: 'html'
+				});
+			}
 		},
 		emailPageOutlook: function ()
 		{

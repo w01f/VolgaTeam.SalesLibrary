@@ -13,7 +13,7 @@
 
 		public function getByOwner($ownerId)
 		{
-			return $this->findAll('id_owner=?', array($ownerId));
+			return $this->findAll('id_owner=? order by list_order', array($ownerId));
 		}
 
 		public function getUrl()
@@ -71,6 +71,7 @@
 				->from('tbl_link l')
 				->join('tbl_qpage_link qpl', 'qpl.id_link = l.id')
 				->where("qpl.id_page='" . $this->id . "'")
+				->order('qpl.list_order, l.name')
 				->queryAll();
 			return LinkStorage::getLinksGrid($linkRecords);
 		}
@@ -104,7 +105,7 @@
 				}
 			}
 
-			$pageLinkRecords = QPageLinkStorage::model()->findAll('id_page=?', array($this->id));
+			$pageLinkRecords = QPageLinkStorage::model()->findAll('id_page=? order by list_order', array($this->id));
 			foreach ($pageLinkRecords as $pageLinkRecord)
 			{
 				$linkRecord = LinkStorage::getLinkById($pageLinkRecord->id_link);
@@ -121,17 +122,41 @@
 			return $links;
 		}
 
-		public function addLink($linkInCartId)
+		public function addLink($linkInCartId, $order)
 		{
+			if ($order >= 0)
+				$this->rebuildLinkList($order);
+			else
+				$order = QPageLinkStorage::getMaxLinkIndex($this->id) + 1;
 			$linkInCartRecord = UserLinkCartStorage::model()->findByPk($linkInCartId);
-
 			$linkInPageRecord = new QPageLinkStorage();
 			$linkInPageRecord->id = uniqid();
 			$linkInPageRecord->id_link = $linkInCartRecord->id_link;
 			$linkInPageRecord->id_page = $this->id;
+			$linkInPageRecord->list_order = $order;
 			$linkInPageRecord->save();
-
 			$linkInCartRecord->delete();
+		}
+
+		public function setLinkOrder($linkInPageId, $order)
+		{
+			$this->rebuildLinkList($order);
+			$linkInPageRecord = QPageLinkStorage::model()->findByPk($linkInPageId);
+			$linkInPageRecord->list_order = $order;
+			$linkInPageRecord->save();
+		}
+
+		public function rebuildLinkList($shiftIndex)
+		{
+			$i = 0;
+			foreach (QPageLinkStorage::model()->findAll('id_page=? order by list_order', array($this->id)) as $pageLink)
+			{
+				if ($i == $shiftIndex)
+					$i++;
+				$pageLink->list_order = $i;
+				$pageLink->save();
+				$i++;
+			}
 		}
 
 		public static function addPage($ownerId, $pageTitle, $createDate)
@@ -139,6 +164,7 @@
 			$pageRecord = new QPageStorage();
 			$pageRecord->id = uniqid();
 			$pageRecord->id_owner = $ownerId;
+			$pageRecord->list_order = self::getMaxPageIndex() + 1;
 			$pageRecord->title = $pageTitle;
 			$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
 			$pageRecord->is_email = false;
@@ -151,6 +177,7 @@
 			$pageRecord = new QPageStorage();
 			$pageRecord->id = uniqid();
 			$pageRecord->id_owner = $ownerId;
+			$pageRecord->list_order = self::getMaxPageIndex() + 1;
 			$pageRecord->title = 'Shared Link';
 			$pageRecord->subtitle = '<h1>' . $subtitle . '<h1>';
 			$pageRecord->logo = $logo;
@@ -184,6 +211,7 @@
 				$pageRecord = new QPageStorage();
 				$pageRecord->id = uniqid();
 				$pageRecord->id_owner = $ownerId;
+				$pageRecord->list_order = self::getMaxPageIndex() + 1;
 				$pageRecord->title = $pageTitle;
 				$pageRecord->subtitle = $clonedPageRecord->subtitle;
 				$pageRecord->create_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($createDate));
@@ -238,8 +266,11 @@
 
 		public static function deletePage($pageId)
 		{
-			QPageLinkStorage::model()->findAll('id_page=?', array($pageId));
-			self::model()->deleteByPk($pageId);
+			$pageRecord = self::model()->findByPk($pageId);
+			$ownerId = $pageRecord->id_owner;
+			QPageLinkStorage::model()->deleteAll('id_page=?', array($pageId));
+			$pageRecord->delete();
+			self::rebuildPageList($ownerId, -1);
 		}
 
 		public static function deletePagesByOwner($ownerId)
@@ -247,6 +278,43 @@
 			$pageRecords = self::model()->findAll('id_owner=?', array($ownerId));
 			foreach ($pageRecords as $pageRecord)
 				self::deletePage($pageRecord->id);
+			self::rebuildPageList($ownerId, -1);
+		}
+
+		public static function setPageOrder($userId, $pageId, $order)
+		{
+			self::rebuildPageList($userId, $order);
+			$pageRecord = QPageStorage::model()->findByPk($pageId);
+			$pageRecord->list_order = $order;
+			$pageRecord->save();
+		}
+
+		public static function rebuildPageList($userId, $shiftIndex)
+		{
+			$i = 0;
+			foreach (self::model()->findAll('id_owner=? order by list_order', array($userId)) as $page)
+			{
+				if ($i == $shiftIndex)
+					$i++;
+				$page->list_order = $i;
+				$page->save();
+				$i++;
+			}
+		}
+
+		public static function getMaxPageIndex()
+		{
+			$userId = Yii::app()->user->getId();
+			if (isset($userId))
+			{
+				return Yii::app()->db->createCommand()
+					->select('max(list_order)')
+					->from('tbl_qpage')
+					->where("id_owner='" . $userId . "'")
+					->queryScalar();
+			}
+			else
+				return -1;
 		}
 
 		public static function getPageLogoList()

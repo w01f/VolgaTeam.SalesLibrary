@@ -21,43 +21,33 @@
 	overflow-y: auto;
 }
 
-#page-list page-ul
+#page-list tr
 {
-	padding: 5px 0 0 0;
-	margin: 0;
-	overflow-y: scroll;
-}
-
-#page-list li
-{
-	margin: 0;
 	cursor: pointer;
-	line-height: 40px;
+	height: 40px;
 }
 
-#page-list li a
+#page-list td
 {
-	color: #000000;
+	cursor: pointer;
+	height: 40px;
+	border: none !important;
 }
 
-#page-list .page-data
+#page-list tr.selected td.link-delete img,
+#page-list tr.selected td.link-clone img,
+#page-list tr.selected td.link-up img,
+#page-list tr.selected td.link-down img
 {
-	display: none;
+	visibility: visible;
 }
 
-#page-list li a.selected
+#page-list tr td.link-delete img,
+#page-list tr td.link-clone img,
+#page-list tr td.link-up img,
+#page-list tr td.link-down img
 {
-	text-decoration: none;
-	background-color: hsl(36, 100%, 75%) !important;
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff4e5", endColorstr="#ffcc7f");
-	background-image: -khtml-gradient(linear, left top, left bottom, from(#fff4e5), to(#ffcc7f));
-	background-image: -moz-linear-gradient(top, #fff4e5, #ffcc7f);
-	background-image: -ms-linear-gradient(top, #fff4e5, #ffcc7f);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff4e5), color-stop(100%, #ffcc7f));
-	background-image: -webkit-linear-gradient(top, #fff4e5, #ffcc7f);
-	background-image: -o-linear-gradient(top, #fff4e5, #ffcc7f);
-	background-image: linear-gradient(#fff4e5, #ffcc7f);
+	visibility: hidden;
 }
 
 .delete-pages-list

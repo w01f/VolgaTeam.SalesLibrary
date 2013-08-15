@@ -34,6 +34,11 @@
 	background: #E5F1F4;
 }
 
+.link-grid tr.selected
+{
+	background: hsl(36, 100%, 75%) !important;
+}
+
 .link-grid tr:hover
 {
 	background: #ECFBD4;
@@ -79,7 +84,28 @@
 
 .link-grid td.link-delete
 {
-	width: 55px;
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.link-grid td.link-up
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.link-grid td.link-down
+{
+	width: 36px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.link-grid td.link-clone
+{
+	width: 36px;
 	cursor: pointer;
 	text-align: center;
 }

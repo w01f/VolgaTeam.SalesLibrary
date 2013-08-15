@@ -119,9 +119,9 @@ input[readonly]
 	margin-left: -2px;
 }
 
-.droppable-hover
+.page-link.droppable-hover
 {
-	border: 2px #df8505 solid !important;
+	border-top: 2px #df8505 solid !important;
 }
 
 #page-content-links-container li a
@@ -156,6 +156,6 @@ input[readonly]
 
 #page-content-tab-security .checkbox
 {
-	 min-height: 30px;
+	min-height: 30px;
 	vertical-align: middle;
 }

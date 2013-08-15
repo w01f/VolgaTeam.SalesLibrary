@@ -11,6 +11,15 @@
 			return '{{qpage_link}}';
 		}
 
+		public static function getMaxLinkIndex($pageId)
+		{
+			return Yii::app()->db->createCommand()
+				->select('max(list_order)')
+				->from('tbl_qpage_link')
+				->where("id_page='" . $pageId . "'")
+				->queryScalar();
+		}
+
 		public static function deleteLink($linkInPageId)
 		{
 			self::model()->deleteByPk($linkInPageId);

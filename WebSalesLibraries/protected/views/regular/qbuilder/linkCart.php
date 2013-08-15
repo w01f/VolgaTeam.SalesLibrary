@@ -17,7 +17,7 @@
 					</table>
 				</td>
 				<td class="link-delete">
-					<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png' ?>" alt="Delete Link">
+					<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png?1' ?>" alt="Delete Link">
 				</td>
 			</tr>
 			<?php $recordNumber++; ?>

@@ -1,7 +1,7 @@
 <table class="link-grid">
 	<?php $recordNumber = 1; ?>
 	<?php foreach ($links as $link): ?>
-		<tr class="<?php echo ($recordNumber % 2) ? 'odd' : 'even'; ?>">
+		<tr class="page-link <?php echo ($recordNumber % 2) ? 'odd' : 'even'; ?>">
 			<td class="link-id-column"><?php echo $link['id']; ?></td>
 			<td class="library-column"><?php echo $link['library']; ?></td>
 			<td class="link-type-column"><?php echo CHtml::tag('img', array('src' => 'data:image/png;base64,' . $link['file_type'], 'alt' => '')); ?></td>
@@ -15,8 +15,14 @@
 					</tr>
 				</table>
 			</td>
+			<td class="link-up">
+				<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-link-up.png' ?>" alt="Up Link">
+			</td>
+			<td class="link-down">
+				<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-link-down.png' ?>" alt="Down Link">
+			</td>
 			<td class="link-delete">
-				<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png' ?>" alt="Delete Link">
+				<img src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png?1' ?>" alt="Delete Link">
 			</td>
 		</tr>
 		<?php $recordNumber++; ?>

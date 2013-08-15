@@ -188,6 +188,16 @@
 				QPageStorage::savePage($selectedPageId, $title, $description, $expirationDate, $logo, $header, $footer, $requireLogin, $disableBanners, $disableWidgets, $showLinksAsUrl, $recordActivity, $pinCode, $activityEmailCopy);
 		}
 
+		public function actionSetPageOrder()
+		{
+			$userId = Yii::app()->user->getId();
+			$pageId = Yii::app()->request->getPost('pageId');
+			$order = intval(Yii::app()->request->getPost('order'));
+			if (isset($userId) && isset($pageId) && isset($order))
+				QPageStorage::setPageOrder($userId, $pageId, $order);
+			Yii::app()->end();
+		}
+
 		public function actionGetLinkCart()
 		{
 			$userId = Yii::app()->user->getId();
@@ -227,10 +237,11 @@
 		{
 			$pageId = Yii::app()->request->getPost('pageId');
 			$linkInCartId = Yii::app()->request->getPost('linkInCartId');
+			$order = intval(Yii::app()->request->getPost('order'));
 			if (isset($pageId) && isset($linkInCartId))
 			{
 				$selectedPage = QPageStorage::model()->findByPk($pageId);
-				$selectedPage->addLink($linkInCartId);
+				$selectedPage->addLink($linkInCartId, $order);
 			}
 			Yii::app()->end();
 		}
@@ -244,7 +255,7 @@
 				$selectedPage = QPageStorage::model()->findByPk($pageId);
 				$linkRecords = UserLinkCartStorage::model()->findAll('id_user=?', array($userId));
 				foreach ($linkRecords as $linkRecord)
-					$selectedPage->addLink($linkRecord->id);
+					$selectedPage->addLink($linkRecord->id, -1);
 			}
 			Yii::app()->end();
 		}
@@ -261,7 +272,26 @@
 		{
 			$linkInPageId = Yii::app()->request->getPost('linkInPageId');
 			if (isset($linkInPageId))
+			{
+				$linkRecord = QPageLinkStorage::model()->findByPk($linkInPageId);
+				$pageId = $linkRecord->id_page;
 				QPageLinkStorage::deleteLink($linkInPageId);
+				$pageRecord = QPageStorage::model()->findByPk($pageId);
+				$pageRecord->rebuildLinkList(-1);
+			}
+			Yii::app()->end();
+		}
+
+		public function actionSetPageLinkOrder()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$linkInPageId = Yii::app()->request->getPost('linkInPageId');
+			$order = intval(Yii::app()->request->getPost('order'));
+			if (isset($pageId) && isset($linkInPageId) && isset($order))
+			{
+				$selectedPage = QPageStorage::model()->findByPk($pageId);
+				$selectedPage->setLinkOrder($linkInPageId, $order);
+			}
 			Yii::app()->end();
 		}
 
@@ -657,15 +687,32 @@
 		 * @param string Session Key
 		 * @param string[] linkInCartIds
 		 * @param string pageId
+		 * @param int order
 		 * @soap
 		 */
-		public function addLinksToPage($sessionKey, $linkInCartIds, $pageId)
+		public function addLinksToPage($sessionKey, $linkInCartIds, $pageId, $order)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
 				$selectedPage = QPageStorage::model()->findByPk($pageId);
 				foreach ($linkInCartIds as $linkInCartId)
-					$selectedPage->addLink($linkInCartId);
+					$selectedPage->addLink($linkInCartId, $order);
+			}
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string pageId
+		 * @param string linkInPageId
+		 * @param int firstLinkOrder
+		 * @soap
+		 */
+		public function setPageLinkOrder($sessionKey, $pageId, $linkInPageId, $firstLinkOrder)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$selectedPage = QPageStorage::model()->findByPk($pageId);
+				$selectedPage->setLinkOrder($linkInPageId, $firstLinkOrder);
 			}
 		}
 
@@ -677,7 +724,13 @@
 		public function deleteLinkFromPage($sessionKey, $linkInPageId)
 		{
 			if ($this->authenticateBySession($sessionKey))
+			{
+				$linkRecord = QPageLinkStorage::model()->findByPk($linkInPageId);
+				$pageId = $linkRecord->id_page;
 				QPageLinkStorage::deleteLink($linkInPageId);
+				$pageRecord = QPageStorage::model()->findByPk($pageId);
+				$pageRecord->rebuildLinkList(-1);
+			}
 		}
 
 		/**
@@ -758,6 +811,23 @@
 			if ($this->authenticateBySession($sessionKey))
 				foreach ($pageIds as $pageId)
 					QPageStorage::deletePage($pageId);
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string login
+		 * @param string pageId
+		 * @param int order
+		 * @soap
+		 */
+		public function setPageOrder($sessionKey, $login, $pageId, $order)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$userRecord = UserStorage::model()->find('LOWER(login)=?', array(strtolower($login)));
+				$userId = $userRecord->id;
+				QPageStorage::setPageOrder($userId, $pageId, $order);
+			}
 		}
 		/////////////////Service Part///////////////////////////
 	}

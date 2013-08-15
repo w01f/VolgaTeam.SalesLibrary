@@ -340,8 +340,6 @@
 
 		public function getWidget()
 		{
-			if ($this->isFolder)
-				return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'folder.png'));
 			if (isset($this->parentLinkId))
 			{
 				if (isset($this->originalFormat))
@@ -370,6 +368,8 @@
 						case 'key':
 							return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'keynote.png'));
 						default:
+							if ($this->isFolder)
+								return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'folder.png'));
 							return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
 							break;
 					}
@@ -378,6 +378,8 @@
 			if (isset($this->enableWidget))
 				if (isset($this->widget) && $this->widget != '')
 					return $this->widget;
+			if ($this->isFolder)
+				return base64_encode(file_get_contents(realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'folderWidgets' . DIRECTORY_SEPARATOR . 'folder.png'));
 			return $this->parent->parent->parent->getAutoWidget($this->fileExtension);
 		}
 

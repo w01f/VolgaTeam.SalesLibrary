@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `tbl_qpage`;
 CREATE TABLE IF NOT EXISTS `tbl_qpage` (
 	`id` varchar(36) NOT NULL,
 	`id_owner` int(11) NOT NULL,
+	`list_order` int(11) NOT NULL DEFAULT '0',
 	`title` varchar(2048) NOT NULL,
 	`subtitle` varchar(2048) NULL,
 	`create_date` datetime NULL,
@@ -18,5 +19,6 @@ CREATE TABLE IF NOT EXISTS `tbl_qpage` (
   `pin_code` varchar(4) NULL DEFAULT NULL,
   `activity_email_copy` varchar(512) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `id_owner` (`id_owner`)
+  KEY `id_owner` (`id_owner`),
+  KEY `list_order` (`list_order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
