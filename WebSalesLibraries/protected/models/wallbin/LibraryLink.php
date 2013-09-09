@@ -335,7 +335,7 @@
 			}
 
 			if (isset($this->folderContent))
-				usort($this->folderContent, "LibraryLink::libraryLinkComparer");
+				usort($this->folderContent, "LibraryLink::libraryChildLinkComparer");
 		}
 
 		public function getWidget()
@@ -1148,8 +1148,15 @@
 		public static function libraryLinkComparer($x, $y)
 		{
 			if ($x->order == $y->order)
-				return 0;
+			{
+				return strcmp($x->name, $x->name);
+			}
 			else
 				return ($x->order < $y->order) ? -1 : 1;
+		}
+
+		public static function libraryChildLinkComparer($x, $y)
+		{
+			return  strcasecmp($x->name, $y->name);
 		}
 	}

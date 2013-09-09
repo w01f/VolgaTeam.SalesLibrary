@@ -1,5 +1,5 @@
 <?php
-$version = '8.0';
+$version = '11.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -27,9 +27,11 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/scaling.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/page-links.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $version, CClientScript::POS_HEAD);
+$userId = Yii::app()->user->getId();
 ?>
 <div id="ribbon">
 	<div class="ribbon-window-title"></div>
@@ -48,9 +50,19 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qpage/ribbon.js?' . $
 				</div>
 			</div>
 		<? endif;?>
+		<? if (!$page->restricted && !isset($userId)): ?>
+			<div class="ribbon-section">
+				<span class="section-title">User Login</span>
+				<div class="ribbon-button ribbon-button-large" id="login-button" rel="tooltip" title="To email links, Log into the site">
+					<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/login.png' ?>"/>
+					<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/login.png' ?>"/>
+					<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/qpages/ribbon/login.png' ?>"/>
+				</div>
+			</div>
+		<? endif; ?>
 	</div>
 </div>
-<div id="content">
+<div id="content" oncontextmenu="return false;">
 	<div>
 		<div id="page-id" style="display: none;"><?echo $page->id;?></div>
 		<div id="page-title"><?echo $page->subtitle;?></div>

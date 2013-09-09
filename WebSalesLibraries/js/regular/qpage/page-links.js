@@ -3,28 +3,100 @@
 	var assignLinkEvents = function (container)
 	{
 		$.updateContentAreaDimensions();
-		container.find('.clickable')
-			.off('click')
-			.on('click', function (event)
+		container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
+		container.find('.clickable').off('click').on('click', function (event)
+		{
+			if (checkEmail())
+			{
+				var linkId = $(this).attr('id').replace('link', '');
+				recordActivity(linkId);
+				$.requestViewDialog(linkId, false);
+			}
+			event.stopPropagation();
+		});
+		container.find('.clickable, .link-container.line-break').off('mousedown.context').on('mousedown.context', function (eventDown)
+		{
+			if (eventDown.which == 3)
+			{
+				$(this).off('mouseup.context').on('mouseup.context', function (eventUp)
+				{
+					if (eventUp.which == 3)
+					{
+						if (checkEmail())
+						{
+							var linkId = $(this).attr('id').replace('link', '');
+							recordActivity(linkId);
+							$.requestSpecialDialog(linkId, undefined);
+							$(this).off('mouseup.context');
+						}
+						eventUp.stopPropagation();
+						eventUp.preventDefault();
+					}
+				});
+			}
+		});
+		if (( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ))
+		{
+			container.find('.clickable, .link-container.line-break').hammer().on('doubletap', function (event)
 			{
 				if (checkEmail())
 				{
-					event.stopPropagation();
 					var linkId = $(this).attr('id').replace('link', '');
 					recordActivity(linkId);
-					$.requestViewDialog(linkId, false);
+					$.requestSpecialDialog(linkId, undefined);
 				}
+				event.gesture.stopPropagation();
+				event.gesture.preventDefault();
+				event.stopPropagation();
+				event.preventDefault();
 			});
-		container.find('.folder-link')
-			.off('click')
-			.on('click', function (event)
+		}
+		container.find('.folder-link').off('click').on('click', function (event)
+		{
+			if (checkEmail())
+			{
+				loadFolderLinkContent($(this));
+			}
+			event.stopPropagation();
+		});
+		container.find('.folder-link').off('mousedown.context').on('mousedown.context', function (eventDown)
+		{
+			if (eventDown.which == 3)
+			{
+				$(this).off('mouseup.context').on('mouseup.context', function (eventUp)
+				{
+					if (eventUp.which == 3)
+					{
+						if (checkEmail())
+						{
+							var linkId = $(this).attr('id').replace('link', '');
+							recordActivity(linkId);
+							$.requestSpecialDialog(linkId, undefined);
+							$(this).off('mouseup.context');
+						}
+						eventUp.stopPropagation();
+						eventUp.preventDefault();
+					}
+				});
+				eventDown.stopPropagation();
+			}
+		});
+		if (( /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ))
+		{
+			container.find('.folder-link').hammer().on('doubletap', function (event)
 			{
 				if (checkEmail())
 				{
-					loadFolderLinkContent($(this));
-					event.stopPropagation();
+					var linkId = $(this).attr('id').replace('link', '');
+					recordActivity(linkId);
+					$.requestSpecialDialog(linkId, undefined);
 				}
+				event.gesture.stopPropagation();
+				event.gesture.preventDefault();
+				event.stopPropagation();
+				event.preventDefault();
 			});
+		}
 	};
 
 	var loadFolderLinkContent = function (linkObject)
@@ -57,24 +129,8 @@
 					success: function (msg)
 					{
 						folderLinkContent.html(msg);
-						$.updateContentAreaDimensions();
 						$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
-						$('.clickable')
-							.off('click')
-							.on('click', function (event)
-							{
-								event.stopPropagation();
-								var linkId = $(this).attr('id').replace('link', '');
-								recordActivity(linkId);
-								$.requestViewDialog(linkId, false);
-							});
-						$('.folder-link')
-							.off('click')
-							.on('click', function (event)
-							{
-								loadFolderLinkContent($(this));
-								event.stopPropagation();
-							});
+						assignLinkEvents(folderLinkContent);
 						folderLinkContent.show("blind", {
 							direction: "vertical"
 						}, 500);

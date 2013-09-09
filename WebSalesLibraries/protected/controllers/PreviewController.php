@@ -93,59 +93,64 @@
 		public function actionGetSpecialDialog()
 		{
 			$rendered = false;
-			$linkId = Yii::app()->request->getPost('linkId');
-			$folderId = Yii::app()->request->getPost('folderId');
-			if (isset($linkId))
+			$userId = Yii::app()->user->getId();
+			if (isset($userId))
 			{
-				if (Yii::app()->browser->isMobile())
-					$browser = 'mobile';
-				else
+
+				$linkId = Yii::app()->request->getPost('linkId');
+				$folderId = Yii::app()->request->getPost('folderId');
+				if (isset($linkId))
 				{
-					$browser = Yii::app()->browser->getBrowser();
-					switch ($browser)
+					if (Yii::app()->browser->isMobile())
+						$browser = 'mobile';
+					else
 					{
-						case 'Internet Explorer':
-							$browser = 'ie';
-							break;
-						case 'Chrome':
-						case 'Safari':
-							$browser = 'webkit';
-							break;
-						case 'Firefox':
-							$browser = 'firefox';
-							break;
-						case 'Opera':
-							$browser = 'opera';
-							break;
-						default:
-							$browser = 'webkit';
-							break;
+						$browser = Yii::app()->browser->getBrowser();
+						switch ($browser)
+						{
+							case 'Internet Explorer':
+								$browser = 'ie';
+								break;
+							case 'Chrome':
+							case 'Safari':
+								$browser = 'webkit';
+								break;
+							case 'Firefox':
+								$browser = 'firefox';
+								break;
+							case 'Opera':
+								$browser = 'opera';
+								break;
+							default:
+								$browser = 'webkit';
+								break;
+						}
+					}
+					$linkRecord = LinkStorage::getLinkById($linkId);
+					if (isset($linkRecord))
+					{
+						$libraryManager = new LibraryManager();
+						$library = $libraryManager->getLibraryById($linkRecord->id_library);
+						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
+						$link->browser = $browser;
+						$link->load($linkRecord);
+						StatisticActivityStorage::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
+						$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true, 'isLineBreak' => $link->getIsLineBreak()), false, true);
+						$rendered = true;
 					}
 				}
-				$linkRecord = LinkStorage::getLinkById($linkId);
-				if (isset($linkRecord))
+				else if (isset($folderId))
 				{
-					$libraryManager = new LibraryManager();
-					$library = $libraryManager->getLibraryById($linkRecord->id_library);
-					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
-					$link->browser = $browser;
-					$link->load($linkRecord);
-					StatisticActivityStorage::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
-					$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true, 'isLineBreak' => $link->getIsLineBreak()), false, true);
-					$rendered = true;
+					$folderRecord = FolderStorage::model()->findByPk($folderId);
+					if (isset($folderRecord))
+					{
+						$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false, 'isLineBreak' => false), false, true);
+						$rendered = true;
+					}
 				}
+				if (!$rendered)
+					$this->renderPartial('empty', array(), false, true);
 			}
-			else if (isset($folderId))
-			{
-				$folderRecord = FolderStorage::model()->findByPk($folderId);
-				if (isset($folderRecord))
-				{
-					$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false, 'isLineBreak' => false), false, true);
-					$rendered = true;
-				}
-			}
-			if (!$rendered)
-				$this->renderPartial('empty', array(), false, true);
 		}
 
 		public function actionGetLinkDetails()

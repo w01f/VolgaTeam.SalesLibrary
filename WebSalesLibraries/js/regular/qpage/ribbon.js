@@ -199,5 +199,9 @@
 		$.hideOverlay();
 		$.updateContentAreaDimensions();
 		$(window).on('resize', $.updateContentAreaDimensions);
+		$('#login-button').off('click').on('click', function ()
+		{
+			window.location = "getProtected?id="+$('#page-id').html();
+		});
 	});
 })(jQuery);

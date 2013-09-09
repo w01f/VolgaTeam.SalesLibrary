@@ -104,8 +104,11 @@
 			},
 			success: function (msg)
 			{
-				var content = $(msg);
-				$.showSpecialDialog(content, linkId, folderId);
+				if (msg != '')
+				{
+					var content = $(msg);
+					$.showSpecialDialog(content, linkId, folderId);
+				}
 			},
 			error: function ()
 			{

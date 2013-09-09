@@ -352,7 +352,7 @@
 
 		public static function getLinksByParent($linkId)
 		{
-			$linkRecords = self::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0', array($linkId));
+			$linkRecords = self::model()->findAll('id_parent_link=? and is_dead=0 and is_preview_not_ready=0 order by name', array($linkId));
 			if (isset($linkRecords))
 				return $linkRecords;
 			return null;
