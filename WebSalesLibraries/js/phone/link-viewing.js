@@ -48,9 +48,9 @@
 			transition: "slidefade"
 		});
 		$('#add-page-expires-in').val("7").selectmenu('refresh', true);
-		$('#add-page-restricted').removeAttr('checked').checkboxradio("refresh");
-		$('#add-page-restricted,#add-page-access-code-enabled,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').removeAttr('checked').checkboxradio("refresh");
-		$('#add-page-access-code,#add-page-activity-email-copy').val('').textinput('disable');
+		$('#add-page-restricted').removeAttr('checked').checkboxradio();
+		$('#add-page-restricted,#add-page-access-code-enabled,#add-page-disable-widgets,#add-page-disable-banners,#add-page-record-activity,#add-page-show-links-as-url').removeAttr('checked').checkboxradio();
+		$('#add-page-access-code,#add-page-activity-email-copy').val('').textinput().textinput('disable');
 		$('#add-page-logo').find('.page-content').find('li').attr("data-theme", "c").removeClass("ui-btn-up-e").removeClass('ui-btn-hover-e').removeClass('qpage-logo-selected').addClass("ui-btn-up-c").addClass('ui-btn-hover-c');
 		$('#add-page-logo').find('.page-content').find('li').first().attr("data-theme", "e").removeClass("ui-btn-up-c").removeClass('ui-btn-hover-c').addClass("ui-btn-up-e").addClass('ui-btn-hover-e').addClass('qpage-logo-selected');
 
@@ -406,7 +406,15 @@
 								async: true,
 								dataType: 'html'
 							});
-							$.downloadFile(selectedLinks[0].href);
+							var imageItems = '';
+							selectedLinks.find('.hi-res').each(function ()
+							{
+								imageItems += '<li>' + $(this).html() + '</li>';
+							});
+							$('#gallery').html(imageItems);
+							$.mobile.changePage("#gallery-page", {
+								transition: "slidefade"
+							});
 							break;
 					}
 					break;

@@ -327,7 +327,15 @@ body
 	display: inline;
 }
 
-#ribbon .ribbon-button:hover, #ribbon .ribbon-button.sel
+#ribbon .ribbon-button.sel
+{
+	border: 1px solid #F1C43F;
+	background: #fdeeb3;
+	cursor: pointer;
+
+}
+
+#ribbon .ribbon-button.regular:hover
 {
 	border: 1px solid #F1C43F;
 	background: #fdeeb3;

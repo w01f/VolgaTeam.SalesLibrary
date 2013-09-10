@@ -381,9 +381,6 @@
 
 	var initTagsSelector = function ()
 	{
-		$('.search-tags-group').collapsible();
-		$('.search-tags-item').checkboxradio();
-
 		var tagsCount = $('.search-tags-item').length;
 		if (tagsCount < 1)
 			$('.tab-search-tags').addClass('ui-disabled').attr('href', "#");
@@ -393,6 +390,15 @@
 			$('.super-filter-item').attr('checked', false).checkboxradio("refresh");
 			$('.search-tags-item').attr('checked', false).checkboxradio("refresh");
 		});
+
+		$('.search-tags-item.group-selector').off('change').on('change', function ()
+		{
+			var categoryGroup = $(this).parent().parent();
+			categoryGroup.find('.search-tags-item.item-selector').attr('checked', $(this).is(':checked')).checkboxradio("refresh");
+		});
+
+		$('.search-tags-group').collapsible();
+		$('.search-tags-item').checkboxradio();
 	};
 
 	var runSearch = function (isSort)
@@ -435,7 +441,7 @@
 		});
 
 		var categories = [];
-		$.each($(".search-tags-item:checked"), function ()
+		$.each($(".search-tags-item.item-selector:checked"), function ()
 		{
 			var substr = $(this).attr('id').split('------');
 			var category = {

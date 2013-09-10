@@ -827,9 +827,12 @@
 					switch ($format)
 					{
 						case 'jpeg':
+						case 'jpeg_phone':
 						case 'png':
+						case 'png_phone':
 						case 'lp':
-							$viewSources[] = array('href' => $this->fileLink);
+						case 'thumbs':
+							$viewSources[] = array('id' => 'link' . $this->id, 'title' => strtoupper(str_replace('_phone', '', $format)) . ' Viewer - ' . $this->fileName, 'href' => $this->fileLink, 'href_mobile' => $this->fileLink);
 							break;
 						case 'outlook':
 						case 'favorites':
@@ -1157,6 +1160,6 @@
 
 		public static function libraryChildLinkComparer($x, $y)
 		{
-			return  strcasecmp($x->name, $y->name);
+			return strcasecmp($x->name, $y->name);
 		}
 	}

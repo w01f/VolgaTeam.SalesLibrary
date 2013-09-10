@@ -142,9 +142,10 @@
 
 	var initSideBarToggle = function ()
 	{
-		$(".side-bar-toggle").off('click').on('click', function ()
+		$(".side-bar-toggle").off('click').on('click', function (e)
 		{
 			var button = $(this);
+			button.removeClass('.ribbon-hot');
 			var sideBar = $('#right-navbar');
 			var sideBarVisible = true;
 			if (button.hasClass('sel'))

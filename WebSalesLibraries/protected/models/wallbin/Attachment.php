@@ -525,9 +525,12 @@
 					switch ($format)
 					{
 						case 'jpeg':
+						case 'jpeg_phone':
 						case 'png':
+						case 'png_phone':
 						case 'lp':
-							$viewSources[] = array('href' => $this->link);
+						case 'thumbs':
+							$viewSources[] = array('title' => strtoupper(str_replace('_phone', '', $format)) . ' Viewer - ' . $this->name, 'href' => $this->link, 'href_mobile' => $this->link);
 							break;
 						case 'email':
 						case 'favorites':
