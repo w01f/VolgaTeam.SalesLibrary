@@ -249,6 +249,33 @@
 			pageLinks.find('.link-down').off('click').on('click', $.pageContent.downLink);
 			$('#page-content-links-number').html(pageLinks.find('.link-delete').length);
 			$('#page-content-links-container tr.page-link').droppable($.pageContent.dropableOptions);
+
+			var clickableLinks = pageLinks.find("td.click-no-mobile");
+			clickableLinks.off('click').on('click', function ()
+			{
+				var ids = $(this).parent().find('.link-id-column').html().split('---');
+				var linkId = ids[1].replace('link', '');
+				$.requestViewDialog(linkId, false);
+			});
+
+			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
+			{
+				isScrolling = false;
+			}).on('touchmove',function ()
+				{
+					isScrolling = true;
+				}).on('touchend', function (e)
+				{
+					if (!isScrolling)
+					{
+						var ids = $(this).parent().find('.link-id-column').html().split('---');
+						var linkId = ids[1].replace('link', '');
+						$.requestViewDialog(linkId, false);
+					}
+					e.stopPropagation();
+					e.preventDefault();
+					return false;
+				});
 		},
 		addLink: function (linkInCartId)
 		{

@@ -114,3 +114,8 @@
 {
 	display: none;
 }
+
+.link-grid td.click-mobile, .link-grid td.click-no-mobile
+{
+	cursor: pointer;
+}

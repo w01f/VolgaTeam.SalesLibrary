@@ -1,12 +1,18 @@
 <table class="link-grid">
-	<?php $recordNumber = 1; ?>
+	<?php
+		if (Yii::app()->browser->isMobile())
+			$clickClass = ' click-mobile draggable-link';
+		else
+			$clickClass = ' click-no-mobile draggable-link';
+		$recordNumber = 1;
+	?>
 	<?php foreach ($links as $link): ?>
 		<tr class="page-link <?php echo ($recordNumber % 2) ? 'odd' : 'even'; ?>">
 			<td class="link-id-column"><?php echo $link['id']; ?></td>
 			<td class="library-column"><?php echo $link['library']; ?></td>
-			<td class="link-type-column"><?php echo CHtml::tag('img', array('src' => 'data:image/png;base64,' . $link['file_type'], 'alt' => '')); ?></td>
-			<td class="link-name-column">
-				<table class="link-container">
+			<td class="link-type-column<?php echo $clickClass; ?>"><?php echo CHtml::tag('img', array('src' => 'data:image/png;base64,' . $link['file_type'], 'alt' => '')); ?></td>
+			<td class="link-name-column<?php echo $clickClass; ?>">
+				<table class="link-container<?php echo $clickClass; ?>">
 					<tr>
 						<td class="link-name"><?php echo $link['name']; ?></td>
 					</tr>
