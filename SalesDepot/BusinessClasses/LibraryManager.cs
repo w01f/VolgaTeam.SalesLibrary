@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace SalesDepot.BusinessClasses
 {
@@ -32,6 +33,12 @@ namespace SalesDepot.BusinessClasses
 				if (package.LibraryCollection.Count > 0)
 					LibraryPackageCollection.Add(package);
 			}
+		}
+
+		public LibraryLink GetLibraryLink(string libraryId, string linkId)
+		{
+			var library = LibraryPackageCollection.SelectMany(p => p.LibraryCollection).FirstOrDefault(l => l.Identifier.ToString().ToLower().Equals(libraryId.ToLower()));
+			return library == null ? null : library.Pages.SelectMany(p => p.Folders.SelectMany(f => f.Files.OfType<LibraryLink>())).FirstOrDefault(l => l.Identifier.ToString().ToLower().Equals(linkId.ToLower()));
 		}
 	}
 }

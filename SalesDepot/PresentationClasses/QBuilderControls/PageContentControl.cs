@@ -8,6 +8,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using DevExpress.XtraGrid.Views.Layout;
+using SalesDepot.BusinessClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services.QBuilderService;
 using SalesDepot.ToolForms;
@@ -301,6 +302,26 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				dateEditExpirationDate.ForeColor = Color.Red;
 			else
 				dateEditExpirationDate.ForeColor = Color.Black;
+		}
+
+		private void advBandedGridViewLinks_MouseMove(object sender, MouseEventArgs e)
+		{
+			GridHitInfo hitInfo = advBandedGridViewLinks.CalcHitInfo(e.Location);
+			Cursor = hitInfo.InRowCell && (hitInfo.Column == bandedGridColumnLinksName || hitInfo.Column == bandedGridColumnLinksType) ? Cursors.Hand : Cursor = Cursors.Default;
+		}
+
+		private void advBandedGridViewLinks_RowCellClick(object sender, RowCellClickEventArgs e)
+		{
+			if (e.Column != bandedGridColumnLinksName && e.Column != bandedGridColumnLinksType) return;
+			var link = advBandedGridViewLinks.GetFocusedRow() as QPageLinkRecord;
+			if (link == null) return;
+			var libraryLink = LibraryManager.Instance.GetLibraryLink(link.libraryId, link.linkId);
+			if (libraryLink == null)
+			{
+				AppManager.Instance.ShowWarning("Link was not found in local libraries");
+				return;
+			}
+			LinkManager.Instance.OpenLink(libraryLink);
 		}
 
 		#region DnD Processing

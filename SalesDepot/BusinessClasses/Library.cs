@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
+using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects;
 using SalesDepot.CoreObjects.BusinessClasses;
 
@@ -11,9 +12,28 @@ namespace SalesDepot.BusinessClasses
 	public class Library : ILibrary
 	{
 		private string _name;
-		private RootFolder _rootFolder = null;
+		private RootFolder _rootFolder;
+
+		public Library(LibraryPackage parent, string name, DirectoryInfo folder)
+		{
+			Parent = parent;
+			Identifier = Guid.NewGuid();
+			Folder = folder;
+			_name = name;
+			IsConfigured = false;
+			ExtraFolders = new List<RootFolder>();
+			Pages = new List<LibraryPage>();
+			EmailList = new List<string>();
+			AutoWidgets = new List<AutoWidget>();
+			OvernightsCalendar = new OvernightsCalendar(this);
+			ProgramManager = new ProgramScheduleManager(this);
+			Load();
+		}
 
 		public LibraryPackage Parent { get; private set; }
+		public bool SyncLinkedFiles { get; set; }
+		public OvernightsCalendar OvernightsCalendar { get; set; }
+		public ProgramScheduleManager ProgramManager { get; set; }
 		public Guid Identifier { get; set; }
 		public DirectoryInfo Folder { get; set; }
 		public bool UseDirectAccess { get; set; }
@@ -24,7 +44,6 @@ namespace SalesDepot.BusinessClasses
 		public bool ApplyAppearanceForAllWindows { get; set; }
 		public bool ApplyWidgetForAllWindows { get; set; }
 		public bool ApplyBannerForAllWindows { get; set; }
-		public bool SyncLinkedFiles { get; set; }
 		public bool MinimizeOnSync { get; set; }
 		public bool CloseAfterSync { get; set; }
 		public bool ShowProgressDuringSync { get; set; }
@@ -41,17 +60,13 @@ namespace SalesDepot.BusinessClasses
 		public List<string> EmailList { get; set; }
 		public List<AutoWidget> AutoWidgets { get; set; }
 
-		public OvernightsCalendar OvernightsCalendar { get; set; }
-		public ProgramScheduleManager ProgramManager { get; set; }
-
 		public string Name
 		{
 			get
 			{
-				if (_name.Equals(CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage))
-					return this.Parent.Name;
-				else
-					return _name;
+				if (_name.Equals(Constants.WholeDriveFilesStorage))
+					return Parent.Name;
+				return _name;
 			}
 		}
 
@@ -63,183 +78,10 @@ namespace SalesDepot.BusinessClasses
 				{
 					_rootFolder = new RootFolder(this);
 					_rootFolder.RootId = Guid.Empty;
-					_rootFolder.Folder = this.Folder;
+					_rootFolder.Folder = Folder;
 				}
 				return _rootFolder;
 			}
-		}
-
-		public Library(LibraryPackage parent, string name, DirectoryInfo folder)
-		{
-			this.Parent = parent;
-			this.Identifier = Guid.NewGuid();
-			this.Folder = folder;
-			_name = name;
-			this.IsConfigured = false;
-			this.ExtraFolders = new List<RootFolder>();
-			this.Pages = new List<LibraryPage>();
-			this.EmailList = new List<string>();
-			this.AutoWidgets = new List<AutoWidget>();
-			this.OvernightsCalendar = new OvernightsCalendar(this);
-			this.ProgramManager = new BusinessClasses.ProgramScheduleManager(this);
-			Load();
-		}
-
-		private void Load()
-		{
-			DateTime tempDate = DateTime.Now;
-			bool tempBool = false;
-
-			this.BrandingText = string.Empty;
-			this.UseDirectAccess = false;
-			this.SyncDate = DateTime.Now;
-			this.SyncLinkedFiles = true;
-			this.MinimizeOnSync = true;
-			this.CloseAfterSync = true;
-			this.ShowProgressDuringSync = true;
-			this.EnableInactiveLinks = true;
-			this.InactiveLinksBoldWarning = true;
-			this.ReplaceInactiveLinksWithLineBreak = false;
-			this.InactiveLinksMessageAtStartup = true;
-			this.SendEmail = false;
-			this.Pages.Clear();
-			this.EmailList.Clear();
-			this.AutoWidgets.Clear();
-
-			string file = Path.Combine(this.Folder.FullName, CoreObjects.BusinessClasses.Constants.StorageFileName);
-			if (File.Exists(file))
-			{
-				XmlDocument document = new XmlDocument();
-				document.Load(file);
-				XmlNode node = document.SelectSingleNode(@"/Cache");
-				if (node != null)
-				{
-					OldFormatLibrary oldFormatLibrary = new OldFormatLibrary(_name, this.Folder);
-					document.LoadXml(oldFormatLibrary.SerializeInNewFormat());
-					LibraryManager.Instance.OldFormatDetected = true;
-				}
-				else
-					LibraryManager.Instance.OldFormatDetected = false;
-				node = document.SelectSingleNode(@"/Library/Name");
-				if (node != null)
-					_name = node.InnerText;
-				node = document.SelectSingleNode(@"/Library/UseDirectAccess");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.UseDirectAccess = tempBool;
-				if (this.UseDirectAccess)
-				{
-					node = document.SelectSingleNode(@"/Library/RootFolder");
-					if (node != null)
-						this.Folder = new DirectoryInfo(node.InnerText);
-					node = document.SelectSingleNode(@"/Library/DirectAccessFileBottomDate");
-					if (node != null)
-						if (DateTime.TryParse(node.InnerText, out tempDate))
-							this.DirectAccessFileBottomDate = tempDate;
-				}
-				node = document.SelectSingleNode(@"/Library/BrandingText");
-				if (node != null)
-					this.BrandingText = node.InnerText;
-				node = document.SelectSingleNode(@"/Library/SyncDate");
-				if (node != null)
-					if (DateTime.TryParse(node.InnerText, out tempDate))
-						this.SyncDate = tempDate;
-				node = document.SelectSingleNode(@"/Library/SyncLinkedFiles");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.SyncLinkedFiles = tempBool;
-				node = document.SelectSingleNode(@"/Library/ApplyAppearanceForAllWindows");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ApplyAppearanceForAllWindows = tempBool;
-				node = document.SelectSingleNode(@"/Library/ApplyWidgetForAllWindows");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ApplyWidgetForAllWindows = tempBool;
-				node = document.SelectSingleNode(@"/Library/ApplyBannerForAllWindows");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ApplyBannerForAllWindows = tempBool;
-				node = document.SelectSingleNode(@"/Library/MinimizeOnSync");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.MinimizeOnSync = tempBool;
-				node = document.SelectSingleNode(@"/Library/CloseAfterSync");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.CloseAfterSync = tempBool;
-				node = document.SelectSingleNode(@"/Library/ShowProgressDuringSync");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ShowProgressDuringSync = tempBool;
-				node = document.SelectSingleNode(@"/Library/EnableInactiveLinks");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.EnableInactiveLinks = tempBool;
-				node = document.SelectSingleNode(@"/Library/InactiveLinksBoldWarning");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.InactiveLinksBoldWarning = tempBool;
-				node = document.SelectSingleNode(@"/Library/ReplaceInactiveLinksWithLineBreak");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.ReplaceInactiveLinksWithLineBreak = tempBool;
-				node = document.SelectSingleNode(@"/Library/InactiveLinksMessageAtStartup");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.InactiveLinksMessageAtStartup = tempBool;
-				node = document.SelectSingleNode(@"/Library/SendEmail");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						this.SendEmail = tempBool;
-
-				node = document.SelectSingleNode(@"/Library/ExtraRoots");
-				if (node != null)
-					foreach (XmlNode childNode in node.ChildNodes)
-					{
-						RootFolder folder = new RootFolder(this);
-						folder.Deserialize(childNode);
-						this.ExtraFolders.Add(folder);
-					}
-				node = document.SelectSingleNode(@"/Library/Pages");
-				if (node != null)
-					foreach (XmlNode childNode in node.ChildNodes)
-					{
-						LibraryPage page = new LibraryPage(this);
-						page.Deserialize(childNode);
-						if (ConfigurationClasses.PermissionsManager.Instance.GetAvailablePages(this.Name).Contains(page.Name.Trim().ToLower()) || !ConfigurationClasses.PermissionsManager.Instance.Configured)
-							this.Pages.Add(page);
-					}
-				node = document.SelectSingleNode(@"/Library/EmailList");
-				if (node != null)
-					foreach (XmlNode childNode in node.ChildNodes)
-					{
-						if (childNode.Name.Equals("Email"))
-							this.EmailList.Add(childNode.InnerText);
-					}
-				node = document.SelectSingleNode(@"/Library/AutoWidgets");
-				if (node != null)
-					foreach (XmlNode childNode in node.ChildNodes)
-					{
-						AutoWidget autoWidget = new AutoWidget();
-						autoWidget.Deserialize(childNode);
-						this.AutoWidgets.Add(autoWidget);
-					}
-
-				node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
-				if (node != null)
-				{
-					this.OvernightsCalendar.Deserialize(node);
-					this.OvernightsCalendar.RootFolder = new DirectoryInfo(Path.Combine(this.Folder.FullName, CoreObjects.BusinessClasses.Constants.OvernightsCalendarRootFolderName));
-				}
-
-				if (this.UseDirectAccess && !this.Folder.Exists)
-					this.IsConfigured = false;
-				else
-					this.IsConfigured = true;
-			}
-			if (this.Pages.Count == 0)
-				this.IsConfigured = false;
 		}
 
 		public ILibraryLink GetLinkInstance(LibraryFolder parentFolder, XmlNode data)
@@ -249,7 +91,7 @@ namespace SalesDepot.BusinessClasses
 			int tempInt;
 			if (typeNode != null && int.TryParse(typeNode.InnerText, out tempInt))
 			{
-				var type = (FileTypes)tempInt;
+				var type = (FileTypes) tempInt;
 				if (type == FileTypes.Folder)
 					libraryFile = new LibraryFolderLink(parentFolder);
 			}
@@ -258,62 +100,222 @@ namespace SalesDepot.BusinessClasses
 
 		public RootFolder GetRootFolder(Guid folderId)
 		{
-			RootFolder folder = this.ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+			RootFolder folder = ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
 			if (folder != null)
 				return folder;
-			else
-				return this.RootFolder;
+			return RootFolder;
+		}
+
+		private void Load()
+		{
+			DateTime tempDate = DateTime.Now;
+			bool tempBool = false;
+			Guid tempGuid;
+
+			BrandingText = string.Empty;
+			UseDirectAccess = false;
+			SyncDate = DateTime.Now;
+			SyncLinkedFiles = true;
+			MinimizeOnSync = true;
+			CloseAfterSync = true;
+			ShowProgressDuringSync = true;
+			EnableInactiveLinks = true;
+			InactiveLinksBoldWarning = true;
+			ReplaceInactiveLinksWithLineBreak = false;
+			InactiveLinksMessageAtStartup = true;
+			SendEmail = false;
+			Pages.Clear();
+			EmailList.Clear();
+			AutoWidgets.Clear();
+
+			string file = Path.Combine(Folder.FullName, Constants.StorageFileName);
+			if (File.Exists(file))
+			{
+				var document = new XmlDocument();
+				document.Load(file);
+				XmlNode node = document.SelectSingleNode(@"/Cache");
+				if (node != null)
+				{
+					var oldFormatLibrary = new OldFormatLibrary(_name, Folder);
+					document.LoadXml(oldFormatLibrary.SerializeInNewFormat());
+					LibraryManager.Instance.OldFormatDetected = true;
+				}
+				else
+					LibraryManager.Instance.OldFormatDetected = false;
+				node = document.SelectSingleNode(@"/Library/Name");
+				if (node != null)
+					_name = node.InnerText;
+				node = document.SelectSingleNode(@"/Library/Identifier");
+				if (node != null)
+					if (Guid.TryParse(node.InnerText, out tempGuid))
+						Identifier = tempGuid;
+				node = document.SelectSingleNode(@"/Library/UseDirectAccess");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						UseDirectAccess = tempBool;
+				if (UseDirectAccess)
+				{
+					node = document.SelectSingleNode(@"/Library/RootFolder");
+					if (node != null)
+						Folder = new DirectoryInfo(node.InnerText);
+					node = document.SelectSingleNode(@"/Library/DirectAccessFileBottomDate");
+					if (node != null)
+						if (DateTime.TryParse(node.InnerText, out tempDate))
+							DirectAccessFileBottomDate = tempDate;
+				}
+				node = document.SelectSingleNode(@"/Library/BrandingText");
+				if (node != null)
+					BrandingText = node.InnerText;
+				node = document.SelectSingleNode(@"/Library/SyncDate");
+				if (node != null)
+					if (DateTime.TryParse(node.InnerText, out tempDate))
+						SyncDate = tempDate;
+				node = document.SelectSingleNode(@"/Library/SyncLinkedFiles");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						SyncLinkedFiles = tempBool;
+				node = document.SelectSingleNode(@"/Library/ApplyAppearanceForAllWindows");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						ApplyAppearanceForAllWindows = tempBool;
+				node = document.SelectSingleNode(@"/Library/ApplyWidgetForAllWindows");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						ApplyWidgetForAllWindows = tempBool;
+				node = document.SelectSingleNode(@"/Library/ApplyBannerForAllWindows");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						ApplyBannerForAllWindows = tempBool;
+				node = document.SelectSingleNode(@"/Library/MinimizeOnSync");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						MinimizeOnSync = tempBool;
+				node = document.SelectSingleNode(@"/Library/CloseAfterSync");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						CloseAfterSync = tempBool;
+				node = document.SelectSingleNode(@"/Library/ShowProgressDuringSync");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						ShowProgressDuringSync = tempBool;
+				node = document.SelectSingleNode(@"/Library/EnableInactiveLinks");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						EnableInactiveLinks = tempBool;
+				node = document.SelectSingleNode(@"/Library/InactiveLinksBoldWarning");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						InactiveLinksBoldWarning = tempBool;
+				node = document.SelectSingleNode(@"/Library/ReplaceInactiveLinksWithLineBreak");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						ReplaceInactiveLinksWithLineBreak = tempBool;
+				node = document.SelectSingleNode(@"/Library/InactiveLinksMessageAtStartup");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						InactiveLinksMessageAtStartup = tempBool;
+				node = document.SelectSingleNode(@"/Library/SendEmail");
+				if (node != null)
+					if (bool.TryParse(node.InnerText, out tempBool))
+						SendEmail = tempBool;
+
+				node = document.SelectSingleNode(@"/Library/ExtraRoots");
+				if (node != null)
+					foreach (XmlNode childNode in node.ChildNodes)
+					{
+						var folder = new RootFolder(this);
+						folder.Deserialize(childNode);
+						ExtraFolders.Add(folder);
+					}
+				node = document.SelectSingleNode(@"/Library/Pages");
+				if (node != null)
+					foreach (XmlNode childNode in node.ChildNodes)
+					{
+						var page = new LibraryPage(this);
+						page.Deserialize(childNode);
+						if (PermissionsManager.Instance.GetAvailablePages(Name).Contains(page.Name.Trim().ToLower()) || !PermissionsManager.Instance.Configured)
+							Pages.Add(page);
+					}
+				node = document.SelectSingleNode(@"/Library/EmailList");
+				if (node != null)
+					foreach (XmlNode childNode in node.ChildNodes)
+					{
+						if (childNode.Name.Equals("Email"))
+							EmailList.Add(childNode.InnerText);
+					}
+				node = document.SelectSingleNode(@"/Library/AutoWidgets");
+				if (node != null)
+					foreach (XmlNode childNode in node.ChildNodes)
+					{
+						var autoWidget = new AutoWidget();
+						autoWidget.Deserialize(childNode);
+						AutoWidgets.Add(autoWidget);
+					}
+
+				node = document.SelectSingleNode(@"/Library/OvernightsCalendar");
+				if (node != null)
+				{
+					OvernightsCalendar.Deserialize(node);
+					OvernightsCalendar.RootFolder = new DirectoryInfo(Path.Combine(Folder.FullName, Constants.OvernightsCalendarRootFolderName));
+				}
+
+				if (UseDirectAccess && !Folder.Exists)
+					IsConfigured = false;
+				else
+					IsConfigured = true;
+			}
+			if (Pages.Count == 0)
+				IsConfigured = false;
 		}
 
 		public ILibraryLink[] SearchByTags(LibraryFileSearchTags searchCriteria)
 		{
-			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
-			foreach (LibraryPage page in this.Pages)
+			var searchFiles = new List<ILibraryLink>();
+			foreach (LibraryPage page in Pages)
 				searchFiles.AddRange(page.SearchByTags(searchCriteria));
 			return searchFiles.ToArray();
 		}
 
 		public ILibraryLink[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
 		{
-			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
-			foreach (LibraryPage page in this.Pages)
+			var searchFiles = new List<ILibraryLink>();
+			foreach (LibraryPage page in Pages)
 				searchFiles.AddRange(page.SearchByName(template, fullMatchOnly, type));
 			return searchFiles.ToArray();
 		}
 
 		public ILibraryLink[] SearchByDate(DateTime startDate, DateTime endDate)
 		{
-			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
-			foreach (LibraryPage page in this.Pages)
+			var searchFiles = new List<ILibraryLink>();
+			foreach (LibraryPage page in Pages)
 				searchFiles.AddRange(page.SearchByDate(startDate, endDate));
 			return searchFiles.ToArray();
 		}
 
 		#region IPreviewStorage Members
+
 		public List<IPreviewContainer> PreviewContainers { get; private set; }
+
 		public string StoragePath
 		{
-			get
-			{
-				return this.Folder.FullName;
-			}
+			get { return Folder.FullName; }
 		}
 
 		public IPreviewContainer GetPreviewContainer(string originalPath)
 		{
-			IPreviewContainer previewContainer = this.PreviewContainers.Where(x => x.OriginalPath.Equals(originalPath)).FirstOrDefault();
+			IPreviewContainer previewContainer = PreviewContainers.Where(x => x.OriginalPath.Equals(originalPath)).FirstOrDefault();
 			if (previewContainer == null)
 			{
 				previewContainer = new UniversalPreviewContainer(this);
 				previewContainer.OriginalPath = originalPath;
-				this.PreviewContainers.Add(previewContainer);
+				PreviewContainers.Add(previewContainer);
 			}
 			return previewContainer;
 		}
 
 		public IPreviewGenerator GetPreviewGenerator(IPreviewContainer previewContainer)
 		{
-			SalesDepot.CoreObjects.BusinessClasses.IPreviewGenerator previewGenerator = null;
+			IPreviewGenerator previewGenerator = null;
 			return previewGenerator;
 		}
 
@@ -324,6 +326,7 @@ namespace SalesDepot.BusinessClasses
 		public void UpdatePreviewContainers()
 		{
 		}
+
 		#endregion
 	}
 }

@@ -309,6 +309,8 @@
 			this.advBandedGridViewLinks.OptionsView.ShowPreview = true;
 			this.advBandedGridViewLinks.PreviewFieldName = "Details";
 			this.advBandedGridViewLinks.RowHeight = 40;
+			this.advBandedGridViewLinks.RowCellClick += new DevExpress.XtraGrid.Views.Grid.RowCellClickEventHandler(this.advBandedGridViewLinks_RowCellClick);
+			this.advBandedGridViewLinks.MouseMove += new System.Windows.Forms.MouseEventHandler(this.advBandedGridViewLinks_MouseMove);
 			// 
 			// gridBandType
 			// 
