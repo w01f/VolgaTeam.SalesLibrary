@@ -1,5 +1,5 @@
 <?php
-$version = '11.0';
+$version = '12.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
@@ -8,6 +8,9 @@ $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jque
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/datepicker.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/vendor/cleditor/jquery.cleditor.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/link-rate.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/view-dialog.css?' . $version);
+$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/view-dialog-bar.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qbuilder/page-list.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qbuilder/link-cart.css?' . $version);
 $cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/qbuilder/links-grid.css?' . $version);
@@ -27,6 +30,9 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/cleditor/jquery.cleditor.
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/context-menu/bootstrap.contextmenu.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/touch-punch/jquery.ui.touch-punch.min.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?' . $version, CClientScript::POS_HEAD);
+$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/page-list.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/link-cart.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/page-content.js?' . $version, CClientScript::POS_HEAD);
