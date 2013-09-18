@@ -76,7 +76,7 @@
 
 		var gridHeader = $('#links-grid-header');
 		$('#links-grid-body-container').css({
-			'height': (searchResult.find('> div').height() - ($('#search-grid-info').height() + 12) - gridHeader.height()) + 'px'
+			'height': (searchResult.find('> div').height() - (searchResult.find('.search-grid-info').height() + 12) - gridHeader.height()) + 'px'
 		});
 
 		var linkDateWidth = 100;

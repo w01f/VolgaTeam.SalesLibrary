@@ -131,7 +131,7 @@
 				});
 				$(".favorite-file-link-detail").off('click').on('click', function (event)
 				{
-					var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+					var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
 					$.loadLinkDeatils(selectedLink, 'Favorites', '#' + $.mobile.activePage.data('url'));
 					event.stopPropagation();
 				});

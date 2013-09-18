@@ -6,6 +6,7 @@
 .banner-image{
     vertical-align: middle;
     display: table-cell;
+	max-width: none;
 }
 
 .banner-text,.banner-text-link{

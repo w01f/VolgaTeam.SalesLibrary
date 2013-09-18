@@ -26,7 +26,7 @@
 						{
 							var linkId = $(this).attr('id').replace('link', '');
 							recordActivity(linkId);
-							$.requestSpecialDialog(linkId, undefined);
+							$.requestSpecialDialog([linkId], undefined);
 							$(this).off('mouseup.context');
 						}
 						eventUp.stopPropagation();
@@ -43,7 +43,7 @@
 				{
 					var linkId = $(this).attr('id').replace('link', '');
 					recordActivity(linkId);
-					$.requestSpecialDialog(linkId, undefined);
+					$.requestSpecialDialog([linkId], undefined);
 				}
 				event.gesture.stopPropagation();
 				event.gesture.preventDefault();
@@ -71,7 +71,7 @@
 						{
 							var linkId = $(this).attr('id').replace('link', '');
 							recordActivity(linkId);
-							$.requestSpecialDialog(linkId, undefined);
+							$.requestSpecialDialog([linkId], undefined);
 							$(this).off('mouseup.context');
 						}
 						eventUp.stopPropagation();
@@ -89,7 +89,7 @@
 				{
 					var linkId = $(this).attr('id').replace('link', '');
 					recordActivity(linkId);
-					$.requestSpecialDialog(linkId, undefined);
+					$.requestSpecialDialog([linkId], undefined);
 				}
 				event.gesture.stopPropagation();
 				event.gesture.preventDefault();

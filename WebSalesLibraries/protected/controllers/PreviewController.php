@@ -96,10 +96,10 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-
-				$linkId = Yii::app()->request->getPost('linkId');
+				$linkIds = Yii::app()->request->getPost('linkIds');
 				$folderId = Yii::app()->request->getPost('folderId');
-				if (isset($linkId))
+				$isSearchResults = Yii::app()->request->getPost('isSearchResults');
+				if (isset($linkIds) && !isset($isSearchResults))
 				{
 					if (Yii::app()->browser->isMobile())
 						$browser = 'mobile';
@@ -126,7 +126,7 @@
 								break;
 						}
 					}
-					$linkRecord = LinkStorage::getLinkById($linkId);
+					$linkRecord = count($linkIds) > 0 ? LinkStorage::getLinkById($linkIds[0]) : null;
 					if (isset($linkRecord))
 					{
 						$libraryManager = new LibraryManager();
@@ -147,6 +147,14 @@
 						$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false, 'isLineBreak' => false), false, true);
 						$rendered = true;
 					}
+				}
+				else if (isset($isSearchResults) && isset($linkIds))
+				{
+					$searchResults = new stdClass();
+					$searchResults->id = implode(',', $linkIds);
+					$searchResults->name = 'Search Results: ' . count($linkIds);
+					$this->renderPartial('specialDialog', array('object' => $searchResults, 'isLink' => false, 'isLineBreak' => false, 'isSearchResult' => true), false, true);
+					$rendered = true;
 				}
 				if (!$rendered)
 					$this->renderPartial('empty', array(), false, true);

@@ -11,7 +11,7 @@
 		<?php endif; ?>
 	</div>
 	<? $logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'special-dialog'; ?>
-	<?if (isset($object->noShare) && $object->noShare): ?>
+	<? if (isset($object->noShare) && $object->noShare): ?>
 		<div class="warning">
 			<br>This Link is RESTRICTED, and you are Unable to share this link on the web.<br><br>
 		</div>
@@ -22,24 +22,26 @@
 		<ul class="nav nav-pills nav-stacked format-list">
 			<li class="single-column">
 				<a id="context-add" class="item-text" href="#"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'add-link.png')); ?>"/>
-					<?if ($isLink): ?>Add
+					<? if ($isLink): ?>Add
 						<? if (isset($object->isFolder) && $object->isFolder): ?>
 							Folder
-						<?php elseif ($isLineBreak): ?>
+						<? elseif ($isLineBreak): ?>
 							this LineBreak
-						<?else:?>
+						<? else: ?>
 							Link
-						<?endif;?>
+						<?endif; ?>
 						to quickSITES cart
+					<? elseif (isset($isSearchResult)): ?>
+						Add ALL Links on this page to quickSites cart
 					<? else: ?>
 						Add All Links in this window to quickSITES cart
-					<?endif;?>
+					<?endif; ?>
 				</a>
 				<div class="service-data">
 					<div class="object-id"><?php echo $object->id; ?></div>
 				</div>
 			</li>
-			<?if ($isLink && !$isLineBreak): ?>
+			<? if ($isLink && !$isLineBreak): ?>
 				<li class="single-column">
 					<a id="context-email" class="item-text" href="#"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'email-link.png')); ?>"/>Send this <? if (isset($object->isFolder) && $object->isFolder): ?>Folder Link<? else: ?>Link<?endif; ?>
 					</a>
@@ -50,10 +52,10 @@
 						<div class="object-file-type"><?php echo $object->originalFormat; ?></div>
 					</div>
 				</li>
-			<? endif;?>
+			<? endif; ?>
 			<li class="single-column">
 				<a id="context-manager" class="item-text" href="<?php echo Yii::app()->createUrl('qbuilder'); ?>" target="_blank"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'manage-sites.png')); ?>"/>Manage my quickSITES</a>
 			</li>
 		</ul>
-	<?endif;?>
+	<?endif; ?>
 </div>

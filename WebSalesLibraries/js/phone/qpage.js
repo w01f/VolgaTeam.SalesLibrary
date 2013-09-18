@@ -190,7 +190,7 @@
 				});
 				linkFolderContent.find(".file-link-detail").on('click', function (event)
 				{
-					var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+					var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
 					loadLinkDeatils(selectedLink, mainPage.find('.header-title').html(), ('#link-folder-content-' + linkId));
 					event.stopPropagation();
 				});
@@ -260,7 +260,7 @@
 		{
 			if (checkEmail())
 			{
-				var selectedLink = $.trim($(this).attr("href").replace('#link', ''));
+				var selectedLink = $.trim($(this).parent().attr("href").replace('#link', ''));
 				loadLinkDeatils(selectedLink, mainPage.find('.header-title').html(), '#main');
 				event.stopPropagation();
 			}

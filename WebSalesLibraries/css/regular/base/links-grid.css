@@ -124,7 +124,7 @@
 
 #links-grid-header td.link-tag-column, #links-grid-body td.link-tag-column
 {
-	width: 90px;
+	width: 100px;
 }
 
 #links-grid-body td.link-rate-column
@@ -181,7 +181,7 @@
 
 #links-grid-body tr.link-details-container .link-details td.link-type-column
 {
-	padding-left: 50px;
+	padding-left: 130px;
 	padding-bottom: 2px;
 }
 

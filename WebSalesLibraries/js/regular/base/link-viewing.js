@@ -85,13 +85,13 @@
 		}
 	};
 
-	$.requestSpecialDialog = function (linkId, folderId)
+	$.requestSpecialDialog = function (linkIds, folderId)
 	{
 		$.ajax({
 			type: "POST",
 			url: "preview/getSpecialDialog",
 			data: {
-				linkId: linkId,
+				linkIds: linkIds,
 				folderId: folderId
 			},
 			beforeSend: function ()
@@ -107,7 +107,7 @@
 				if (msg != '')
 				{
 					var content = $(msg);
-					$.showSpecialDialog(content, linkId, folderId);
+					$.showSpecialDialog(content, linkIds, folderId);
 				}
 			},
 			error: function ()
@@ -118,23 +118,24 @@
 		});
 	};
 
-	$.showSpecialDialog = function (content, linkId, folderId)
+	$.showSpecialDialog = function (content, linkIds, folderId)
 	{
+		var singleLinkId = linkIds != undefined && linkIds.length > 0 ? linkIds[0] : undefined;
 		var linkName = content.find('.object-name').text();
 		var fileName = content.find('.object-file-name').text();
 		var fileType = content.find('.object-file-type').text();
 		content.find('#context-add').off('click').on('click', function ()
 		{
 			$.fancybox.close();
-			if (linkId != undefined)
-				$.linkCart.addLink(linkId);
+			if (linkIds != undefined)
+				$.linkCart.addLinks(linkIds);
 			else if (folderId != undefined)
 				$.linkCart.addFolder(folderId);
 		});
 		content.find('#context-email').off('click').on('click', function ()
 		{
 			$.fancybox.close();
-			$.pageList.addLitePage(linkId, linkName, fileName, fileType);
+			$.pageList.addLitePage(singleLinkId, linkName, fileName, fileType);
 		});
 		content.find('#context-manager').off('click').on('click', function ()
 		{
@@ -154,7 +155,8 @@
 			closeEffect: 'none',
 			afterLoad: function ()
 			{
-				$.linkRate.show(linkId, $('.fancybox-wrap'));
+				if (linkIds != undefined && linkIds.length == 1)
+					$.linkRate.show(singleLinkId, $('.fancybox-wrap'));
 			},
 			afterClose: function ()
 			{

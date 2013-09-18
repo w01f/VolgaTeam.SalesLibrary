@@ -1,51 +1,51 @@
 #selectors-container
 {
-    width: 100%;
+	width: 100%;
 }
 
 #selectors-container td
 {
-    text-align: left;
-    padding-right: 3%;
-    padding-left: 3%;
+	text-align: left;
+	padding-right: 3%;
+	padding-left: 3%;
 }
 
 .ui-select .ui-btn
 {
-    text-align: left;
+	text-align: left;
 }
 
 .library-item-container .header-title
 {
-    vertical-align: middle;
-    line-height: 40px;
+	vertical-align: middle;
+	line-height: 40px;
 }
 
 .item-content
 {
-    display: none;
+	display: none;
 }
 
 .link-container td
 {
-    text-align: left;
-    vertical-align: middle;
+	text-align: left;
+	vertical-align: middle;
 }
 
 .link-container span.name, .link-container span.file
 {
-    white-space:normal;
-    word-wrap: break-word;
+	white-space: normal;
+	word-wrap: break-word;
 }
 
 .link-container .link-details-container
 {
-    padding-right: 16px;
+	padding-right: 16px;
 }
 
 .link-container span.file, .file-size
 {
-    color: #b0b0b0;
+	color: #b0b0b0;
 }
 
 li div.warning
@@ -57,28 +57,38 @@ li div.warning
 	font-weight: bold;
 }
 
-#gallery 
+#gallery
 {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 #gallery li
 {
-    float:left;
-    width:46%;
-    padding: 2%;
+	float: left;
+	width: 46%;
+	padding: 2%;
 }
 
 #gallery img
 {
-    display: block;
-    width: 100%;
-    height: auto;
+	display: block;
+	width: 100%;
+	height: auto;
 }
 
 .ui-li-divider
 {
 	padding: 1px 15px;
+}
+
+li.ui-li-has-thumb a.ui-link-inherit
+{
+	padding-left: 68px !important;
+}
+
+.ui-li-thumb
+{
+	max-width: 48px;
 }

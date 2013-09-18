@@ -1,35 +1,14 @@
 <?php if (isset($link)): ?>
-<li>
-    <a class="<?php echo $link->isFolder ? 'folder-content-link' : 'file-link'; ?>"
-       href="#link<?php echo $link->id; ?>">
-        <table class="link-container">
-            <tr>
-                <?php if ($link->enableFileCard || $link->enableAttachments): ?>
-                <td rowspan="2" class="link-details-container">
-                    <a class="file-link-detail" href="#link<?php echo $link->id; ?>">
-                        <img src="<?php echo Yii::app()->baseUrl . '/images/search/expand.png'; ?>"/>
-                    </a>
-                </td>
-                <?php endif; ?>
-                <td>
-                                    <span class="name">
-                                        <?php
-                                        if (isset($link->name) && $link->name != '')
-                                            echo $link->name;
-                                        else if (isset($link->fileName) && $link->fileName != '')
-                                            echo $link->fileName;
-                                        ?>
-                                    </span>
-                </td>
-            </tr>
-            <?php if (isset($link->name) && $link->name != '' && !$link->isFolder): ?>
-            <tr>
-                <td>
-                    <span class="file"><?php echo $link->fileName; ?></span>
-                </td>
-            </tr>
-            <?php endif; ?>
-        </table>
-    </a>
-</li>
+	<li>
+		<a class="<?php echo $link->isFolder ? 'folder-content-link' : 'file-link'; ?>" href="#link<?php echo $link->id; ?>">
+			<? if ($link->enableFileCard || $link->enableAttachments): ?>
+				<img class="ui-li-has-thumb file-link-detail" src="<? echo Yii::app()->baseUrl . '/images/search/expand-phone.png'; ?>"/>
+			<? endif; ?>
+			<h3 class="name"><? if (isset($link->name) && $link->name != '') echo $link->name;
+				else if (isset($link->fileName) && $link->fileName != '') echo $link->fileName; ?></h3>
+			<? if (isset($link->name) && $link->name != '' && !$link->isFolder): ?>
+				<p class="file"><?php echo $link->fileName; ?></p>
+			<? endif; ?>
+		</a>
+	</li>
 <?php endif; ?>

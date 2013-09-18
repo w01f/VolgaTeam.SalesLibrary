@@ -1,5 +1,5 @@
 <?php if (isset($searchInfo)): ?>
-	<div id="search-grid-info">
+	<div class="search-grid-info<? if (isset($links)): ?> has-result<? endif; ?>">
 		<table>
 			<tr>
 				<td id="search-links-info-count">

@@ -216,9 +216,9 @@
 			Yii::app()->end();
 		}
 
-		public function actionAddLinkToCart()
+		public function actionAddLinksToCart()
 		{
-			$singleLinkId = Yii::app()->request->getPost('linkId');
+			$linkIds = Yii::app()->request->getPost('linkIds');
 			$folderId = Yii::app()->request->getPost('folderId');
 			$userId = Yii::app()->user->getId();
 			if (isset($folderId) && isset($userId))
@@ -228,8 +228,9 @@
 					foreach ($linkIds as $linkId)
 						UserLinkCartStorage::addLink($userId, $linkId);
 			}
-			else if (isset($singleLinkId) && isset($singleLinkId))
-				UserLinkCartStorage::addLink($userId, $singleLinkId);
+			else if (isset($linkIds) && isset($userId))
+				foreach ($linkIds as $linkId)
+					UserLinkCartStorage::addLink($userId, $linkId);
 			Yii::app()->end();
 		}
 

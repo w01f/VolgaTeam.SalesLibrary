@@ -88,7 +88,7 @@
 								<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
 								<div class="file-type"><?php echo $link->originalFormat; ?></div>
 								<div class="view-type"><?php echo $format; ?></div>
-								<div class="tags"><?php echo $link->getTagsString(); ?></div>
+								<div class="tags"><?php echo isset($link->isAttachment) ? '' : $link->getTagsString(); ?></div>
 								<?php $viewLinks = $link->getViewSource($format); ?>
 								<?php if (isset($viewLinks)): ?>
 									<div class="links"><?php echo json_encode($viewLinks); ?></div>

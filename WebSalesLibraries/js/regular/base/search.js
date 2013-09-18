@@ -117,11 +117,55 @@
 			},
 			success: function (msg)
 			{
-				$('#search-result').find('>div').html('').append(msg);
+				var searchResult = $('#search-result');
+				searchResult.find('>div').html('').append(msg);
+				searchResult.find('.search-grid-info.has-result').off('click').on('click', function ()
+				{
+					var linkIds = [];
+					$.each($("#links-grid-body").find('.link-id-column'), function ()
+					{
+						linkIds.push($(this).html());
+					});
+					if (linkIds.length > 0)
+						$.requestSearchResultDialog(linkIds);
+				});
 			},
 			error: function ()
 			{
 				$('#search-result').find('>div').html('');
+			},
+			async: true,
+			dataType: 'html'
+		});
+	};
+
+	$.requestSearchResultDialog = function (linkIds)
+	{
+		$.ajax({
+			type: "POST",
+			url: "preview/getSpecialDialog",
+			data: {
+				linkIds: linkIds,
+				isSearchResults: true
+			},
+			beforeSend: function ()
+			{
+				$.showOverlayLight();
+			},
+			complete: function ()
+			{
+				$.hideOverlayLight();
+			},
+			success: function (msg)
+			{
+				if (msg != '')
+				{
+					var content = $(msg);
+					$.showSpecialDialog(content, linkIds, undefined);
+				}
+			},
+			error: function ()
+			{
 			},
 			async: true,
 			dataType: 'html'

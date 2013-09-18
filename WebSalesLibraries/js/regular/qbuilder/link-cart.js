@@ -96,13 +96,13 @@
 				$.linkCart.addAllLinksToPage();
 			});
 		},
-		addLink: function (linkId)
+		addLinks: function (linkIds)
 		{
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/addLinkToCart",
+				url: "qbuilder/addLinksToCart",
 				data: {
-					linkId: linkId
+					linkIds: linkIds
 				},
 				beforeSend: function ()
 				{
@@ -114,7 +114,10 @@
 				},
 				success: function ()
 				{
-					$('body').append('<div id="add-link-info" title="Link Cart">Link was added to Link Cart</div>');
+					if(linkIds.length>1)
+						$('body').append('<div id="add-link-info" title="Link Cart">Links was added to Link Cart</div>');
+					else
+						$('body').append('<div id="add-link-info" title="Link Cart">Link was added to Link Cart</div>');
 					$("#add-link-info").dialog({
 						resizable: false,
 						modal: true,
@@ -146,7 +149,7 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/addLinkToCart",
+				url: "qbuilder/addLinksToCart",
 				data: {
 					folderId: folderId
 				},
@@ -233,7 +236,7 @@
 				});
 			}
 		},
-		addAllLinksToPage: function (linkId)
+		addAllLinksToPage: function ()
 		{
 			var selectedPageId = $.pageList.getSelectedPageId();
 			$.ajax({

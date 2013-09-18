@@ -13,7 +13,7 @@
 		}
 		else
 			$.cookie("linksGridScrollPosition", 0, {
-				expires:(60 * 60 * 24 * 7)
+				expires: (60 * 60 * 24 * 7)
 			});
 
 		var searchGridHeader = $("#links-grid-header");
@@ -54,38 +54,68 @@
 		});
 
 		var linkGridBody = $("#links-grid-body");
-		var clickableLinks = linkGridBody.find("td.click-no-mobile");
-		clickableLinks.off('click').on('click', function ()
+		var regularClickableLinks = linkGridBody.find("td.click-no-mobile");
+		if (regularClickableLinks.length > 0)
 		{
-			previewLink.call($(this));
-		});
-		clickableLinks.draggable({
-				delay:100,
-				revert:"invalid",
-				helper:function (event)
-				{
-					var linkId = $(this).parent().find('.link-id-column').html();
-					return  $('<i id="' + linkId + '" class="icon-file"></i>');
-				},
-				appendTo:"body",
-				cursorAt:{ left:-10, top:0 }
-			}
-		);
-
-		linkGridBody.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
-		{
-			isScrolling = false;
-		}).on('touchmove',function ()
+			regularClickableLinks.off('click').on('click', function ()
 			{
-				isScrolling = true;
-			}).on('touchend', function (e)
-			{
-				if (!isScrolling)
-					previewLink.call($(this));
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
+				previewLink.call($(this));
 			});
+			regularClickableLinks.off('mousedown.context').on('mousedown.context', function (eventDown)
+			{
+				if (eventDown.which == 3)
+				{
+					$(this).off('mouseup.context').on('mouseup.context', function (eventUp)
+					{
+						if (eventUp.which == 3)
+						{
+							specialPreviewLink.call($(this));
+							$(this).off('mouseup.context');
+							eventUp.stopPropagation();
+							eventUp.preventDefault();
+						}
+					});
+				}
+			});
+			regularClickableLinks.draggable({
+					delay: 100,
+					revert: "invalid",
+					helper: function (event)
+					{
+						var linkId = $(this).parent().find('.link-id-column').html();
+						return  $('<i id="' + linkId + '" class="icon-file"></i>');
+					},
+					appendTo: "body",
+					cursorAt: { left: -10, top: 0 }
+				}
+			);
+		}
+
+		var mobileClickableLinks = linkGridBody.find("td.click-mobile");
+		if (mobileClickableLinks.length > 0)
+		{
+			mobileClickableLinks.off('click').on('click', previewLink);
+			mobileClickableLinks.hammer().on('doubletap', specialPreviewLink);
+//			mobileClickableLinks.off('touchstart').off('touchmove').off('touchend')
+//				.on('touchstart', function ()
+//				{
+//					isScrolling = false;
+//				})
+//				.on('touchmove', function ()
+//				{
+//					isScrolling = true;
+//				})
+//				.on('touchend', function (e)
+//				{
+//					if (isScrolling)
+//					{
+//						//previewLink.call($(this));
+//						e.stopPropagation();
+//						e.preventDefault();
+//					}
+//					return false;
+//				});
+		}
 
 		linkGridBody.find("td.details-button").off('click');
 		linkGridBody.find("td.details-button.click-no-mobile").on('click', function ()
@@ -155,15 +185,15 @@
 		}
 
 		$.cookie("sortColumn", columnName, {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 		$.cookie("sortDirection", sortDirection, {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 
 		var scrollPosition = $('#links-grid-body-container').scrollTop();
 		$.cookie("linksGridScrollPosition", scrollPosition, {
-			expires:(60 * 60 * 24 * 7)
+			expires: (60 * 60 * 24 * 7)
 		});
 	};
 
@@ -171,6 +201,12 @@
 	{
 		var linkId = $(this).parent().find('.link-id-column').html();
 		$.requestViewDialog(linkId, false);
+	};
+
+	var specialPreviewLink = function ()
+	{
+		var linkId = $(this).parent().find('.link-id-column').html();
+		$.requestSpecialDialog([linkId], undefined);
 	};
 
 	var viewFileCard = function ()
@@ -193,20 +229,20 @@
 			var currentRow = $(this).parent();
 			var linkId = currentRow.find('.link-id-column').html();
 			$.ajax({
-				type:"POST",
-				url:"preview/getLinkDetails",
-				data:{
-					linkId:linkId
+				type: "POST",
+				url: "preview/getLinkDetails",
+				data: {
+					linkId: linkId
 				},
-				beforeSend:function ()
+				beforeSend: function ()
 				{
 					$.showOverlayLight();
 				},
-				complete:function ()
+				complete: function ()
 				{
 					$.hideOverlayLight();
 				},
-				success:function (msg)
+				success: function (msg)
 				{
 					if (msg != '')
 					{
@@ -231,8 +267,8 @@
 						currentCell.addClass('expanded');
 					}
 				},
-				async:true,
-				dataType:'html'
+				async: true,
+				dataType: 'html'
 			});
 		}
 		else if ($(this).hasClass('expanded'))

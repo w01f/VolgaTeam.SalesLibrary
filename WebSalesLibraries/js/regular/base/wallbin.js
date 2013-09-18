@@ -131,7 +131,7 @@
 					if (eventUp.which == 3)
 					{
 						var linkId = $(this).attr('id').replace('link', '');
-						$.requestSpecialDialog(linkId, undefined);
+						$.requestSpecialDialog([linkId], undefined);
 						$(this).off('mouseup.context');
 						eventUp.stopPropagation();
 						eventUp.preventDefault();
@@ -144,7 +144,7 @@
 			container.find('.clickable, .link-container.line-break').hammer().on('doubletap', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
-				$.requestSpecialDialog(linkId, undefined);
+				$.requestSpecialDialog([linkId], undefined);
 				event.gesture.stopPropagation();
 				event.gesture.preventDefault();
 				event.stopPropagation();
@@ -165,7 +165,7 @@
 					if (eventUp.which == 3)
 					{
 						var linkId = $(this).attr('id').replace('link', '');
-						$.requestSpecialDialog(linkId, undefined);
+						$.requestSpecialDialog([linkId], undefined);
 						$(this).off('mouseup.context');
 						eventUp.stopPropagation();
 						eventUp.preventDefault();
@@ -179,7 +179,7 @@
 			container.find('.folder-link').hammer().on('doubletap', function (event)
 			{
 				var linkId = $(this).attr('id').replace('link', '');
-				$.requestSpecialDialog(linkId, undefined);
+				$.requestSpecialDialog([linkId], undefined);
 				event.gesture.stopPropagation();
 				event.gesture.preventDefault();
 				event.stopPropagation();
