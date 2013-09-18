@@ -9,6 +9,7 @@ using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 
 namespace SalesDepot.ToolForms.WallBin
@@ -30,30 +31,34 @@ namespace SalesDepot.ToolForms.WallBin
 			}
 		}
 
+		protected override void OnHandleCreated(EventArgs e)
+		{
+			base.OnHandleCreated(e);
+			if (Environment.OSVersion.Version.Major < 6) return;
+			int attrValue = 1;
+			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			if (res < 0)
+				throw new Exception("Can't disable aero animation");
+		}
+
 		#region Form GUI Event Habdlers
-		private void FormQuickView_Load(object sender, EventArgs e)
+		private void FormQuickView_Shown(object sender, EventArgs e)
 		{
 			if (SelectedFile != null)
 			{
 				_originalFile = new FileInfo(SelectedFile.LocalPath);
 				_viewedFile = _originalFile.CopyTo(Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt.PPT")), true);
-
-
 				Text = "QuickView - " + SelectedFile.NameWithExtension;
 				laFileInfo.Text = "File Added: " + SelectedFile.AddDate.ToString("MM/dd/yy");
-
 				FormMain.Instance.TopMost = true;
 				PowerPointHelper.Instance.PowerPointVisible = true;
-
 				if (IsLargeFont())
 					_scaleK = 1.67;
 				else
 					_scaleK = 1.35;
-
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Loading the presentation...";
-					form.TopMost = true;
 
 					IntPtr containerHandle = pnPreview.Handle;
 					int containerHeight = pnPreview.Height;
@@ -109,26 +114,13 @@ namespace SalesDepot.ToolForms.WallBin
 					barLargeButtonItemAddAllSlides.Enabled = comboBoxEditSlides.Properties.Items.Count > 1;
 					comboBoxEditSlides_SelectedIndexChanged(null, null);
 					comboBoxEditSlides.SelectedIndexChanged += comboBoxEditSlides_SelectedIndexChanged;
-
-					bool differentOrientations = false;
-					try
-					{
-						differentOrientations = PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation !=
-												PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideOrientation;
-					}
-					catch
-					{
-						differentOrientations = PowerPointHelper.Instance.ActivePresentation.PageSetup.SlideOrientation !=
-												PowerPointHelper.Instance.SlideSourcePresentation.PageSetup.SlideOrientation;
-					}
-
 					barLargeButtonItemPDF.Enabled = !PowerPointHelper.Instance.Is2003;
 					barLargeButtonItemEmail.Enabled = (SettingsManager.Instance.EmailButtons & EmailButtonsDisplayOptions.DisplayQuickView) == EmailButtonsDisplayOptions.DisplayQuickView;
 					barLargeButtonItemQuickSiteEmail.Visibility = barLargeButtonItemQuickSiteAdd.Visibility = SettingsManager.Instance.QBuilderSettings.AvailableHosts.Count > 0 ? BarItemVisibility.Always : BarItemVisibility.Never;
 				}
-
-				Activate();
 				FormMain.Instance.TopMost = false;
+				TopMost = true;
+				TopMost = false;
 				AppManager.Instance.ActivateMiniBar();
 			}
 			RegistryHelper.SalesDepotHandle = Handle;
@@ -164,7 +156,7 @@ namespace SalesDepot.ToolForms.WallBin
 			{
 				form.laProgress.Text = "Resizing the presentation...";
 				form.TopMost = true;
-				IntPtr containerHandle = pnPreview.Handle;
+				var containerHandle = pnPreview.Handle;
 				int containerHeight = pnPreview.Height;
 				int containerWidth = pnPreview.Width;
 				var thread = new Thread(delegate() { PowerPointHelper.Instance.ResizeSlideShow(containerHandle, (int)(containerHeight / _scaleK), (int)(containerWidth / _scaleK)); });
@@ -175,6 +167,8 @@ namespace SalesDepot.ToolForms.WallBin
 				form.Close();
 			}
 			FormMain.Instance.TopMost = false;
+			TopMost = true;
+			TopMost = false;
 			AppManager.Instance.ActivateMiniBar();
 		}
 		#endregion
@@ -328,36 +322,24 @@ namespace SalesDepot.ToolForms.WallBin
 							if (AppManager.Instance.ShowWarningQuestion("This slide is not the same size as your presentation.\nDo you still want to add it?") != DialogResult.Yes)
 								return;
 					}
+					int selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
 					using (var form = new FormProgress())
 					{
 						form.laProgress.Text = "Inserting slides...";
-						form.TopMost = true;
-						int selectedIndex = comboBoxEditSlides.SelectedIndex + 1;
-						var thread = new Thread(delegate()
-													{
-														AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
-														PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : selectedIndex, checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
-													});
-						thread.Start();
-						form.Show();
-						while (thread.IsAlive)
-							Application.DoEvents();
-						form.Close();
-					}
-					using (var form = new FormSlideOutput())
-					{
-						DialogResult result = form.ShowDialog();
-						switch (result)
+						FloaterManager.Instance.ShowFloater(this, () =>
 						{
-							case DialogResult.Cancel:
-								AppManager.Instance.ActivateMainForm();
-								Activate();
-								Focus();
-								break;
-							case DialogResult.Abort:
-								Application.Exit();
-								break;
-						}
+							form.TopMost = true;
+							var thread = new Thread(delegate()
+							{
+								AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
+								PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : selectedIndex, checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
+							});
+							thread.Start();
+							form.Show();
+							while (thread.IsAlive)
+								Application.DoEvents();
+							form.Close();
+						});
 					}
 				}
 				else

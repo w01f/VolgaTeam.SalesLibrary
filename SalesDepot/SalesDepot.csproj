@@ -122,10 +122,11 @@
     <Compile Include="ConfigurationClasses\PermissionsManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
     <Compile Include="ConfigurationClasses\QBuilderSettings.cs" />
-    <Compile Include="FormFloater.cs">
+    <Compile Include="Floater\FloaterManager.cs" />
+    <Compile Include="Floater\FormFloater.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFloater.designer.cs">
+    <Compile Include="Floater\FormFloater.designer.cs">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.cs">
@@ -435,12 +436,6 @@
     <Compile Include="ToolForms\WallBin\FormEmailLink.Designer.cs">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\WallBin\FormVideoOutput.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\WallBin\FormVideoOutput.designer.cs">
-      <DependentUpon>FormVideoOutput.cs</DependentUpon>
-    </Compile>
     <Compile Include="ToolForms\WallBin\FormZipFileName.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -471,12 +466,6 @@
     <Compile Include="ToolForms\WallBin\FormSaveAsPDF.Designer.cs">
       <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToolForms\WallBin\FormSlideOutput.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ToolForms\WallBin\FormSlideOutput.designer.cs">
-      <DependentUpon>FormSlideOutput.cs</DependentUpon>
-    </Compile>
     <Compile Include="ToolForms\WallBin\FormViewOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -495,7 +484,7 @@
     <Compile Include="ToolForms\WallBin\FormVideoViewOptions.Designer.cs">
       <DependentUpon>FormVideoViewOptions.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FormFloater.resx">
+    <EmbeddedResource Include="Floater\FormFloater.resx">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\DayControl.resx">
@@ -650,9 +639,6 @@
     <EmbeddedResource Include="ToolForms\WallBin\FormEmailLink.resx">
       <DependentUpon>FormEmailLink.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\WallBin\FormVideoOutput.resx">
-      <DependentUpon>FormVideoOutput.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormZipFileName.resx">
       <DependentUpon>FormZipFileName.cs</DependentUpon>
     </EmbeddedResource>
@@ -677,9 +663,6 @@
     </Compile>
     <EmbeddedResource Include="ToolForms\WallBin\FormSaveAsPDF.resx">
       <DependentUpon>FormSaveAsPDF.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ToolForms\WallBin\FormSlideOutput.resx">
-      <DependentUpon>FormSlideOutput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\WallBin\FormViewOptions.resx">
       <DependentUpon>FormViewOptions.cs</DependentUpon>
@@ -828,6 +811,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\FloaterHide.png" />
     <None Include="Resources\NudgeDown.png" />
     <None Include="Resources\NudgeUp.png" />
     <None Include="Resources\QuickViewUserSettings.png" />
@@ -907,7 +891,6 @@
     <None Include="Resources\SearchLinkName.png" />
     <None Include="Resources\CalendarEditButton.png" />
     <None Include="Resources\ListView.png" />
-    <None Include="Resources\Video.png" />
     <None Include="Resources\zip.png" />
     <None Include="Resources\CalendarDisclaimerLogo.png" />
     <None Include="Resources\CalendarLogo.png" />

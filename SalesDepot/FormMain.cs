@@ -5,6 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
 using SalesDepot.TabPages;
@@ -41,9 +42,41 @@ namespace SalesDepot
 			}
 		}
 
+		public Image FloaterLogo
+		{
+			get
+			{
+				Image floaterLogo = null;
+				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+					floaterLogo = labelItemPackageLogo.Image;
+				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+					floaterLogo = labelItemSearchLogo.Image;
+				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
+					floaterLogo = labelItemCalendarLogo.Image;
+				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
+					floaterLogo = labelItemProgramScheduleStationLogo.Image;
+				return floaterLogo;
+			}
+		}
+
+		public string FloaterText
+		{
+			get { return ribbonBarStations.Text; }
+		}
+
 		private FormMain()
 		{
 			InitializeComponent();
+		}
+
+		protected override void OnHandleCreated(EventArgs e)
+		{
+			base.OnHandleCreated(e);
+			if (Environment.OSVersion.Version.Major < 6) return;
+			int attrValue = 1;
+			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			if (res < 0)
+				throw new Exception("Can't disable aero animation");
 		}
 
 		private void InitControllers()
@@ -83,33 +116,7 @@ namespace SalesDepot
 
 		private void buttonItemFloater_Click(object sender, EventArgs e)
 		{
-			Instance.Opacity = 0;
-			RegistryHelper.MaximizeSalesDepot = false;
-
-			Image floaterLogo = null;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings || ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
-				floaterLogo = labelItemPackageLogo.Image;
-			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
-				floaterLogo = labelItemSearchLogo.Image;
-			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
-				floaterLogo = labelItemCalendarLogo.Image;
-			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
-				floaterLogo = labelItemProgramScheduleStationLogo.Image;
-
-			using (var form = new FormFloater(Left + Width - 50, Top + 50, _floaterPositionX, _floaterPositionY, floaterLogo, ribbonBarStations.Text))
-			{
-				if (form.ShowDialog() != DialogResult.No)
-				{
-					_floaterPositionY = form.Top;
-					_floaterPositionX = form.Left;
-					Instance.Opacity = 1;
-					RegistryHelper.SalesDepotHandle = Handle;
-					RegistryHelper.MaximizeSalesDepot = true;
-					AppManager.Instance.ActivateMainForm();
-				}
-				else
-					Close();
-			}
+			FloaterManager.Instance.ShowFloater(this, null);
 		}
 
 		private void buttonItemExit_Click(object sender, EventArgs e)

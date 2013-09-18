@@ -9,6 +9,7 @@ using DevExpress.XtraEditors.Controls;
 using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.WallBin;
@@ -132,33 +133,23 @@ namespace SalesDepot.PresentationClasses.Viewers
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Inserting selected slide...";
-					form.TopMost = true;
-					var thread = new Thread(delegate()
-												{
-													AppManager.Instance.ActivatePowerPoint();
-													AppManager.Instance.ActivateMiniBar();
-													AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", File.Name, File.Type.ToString(), File.OriginalPath, File.Parent.Parent.Parent.Name, File.Parent.Parent.Name);
-													PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-													PowerPointHelper.Instance.AppendSlide(File.PreviewContainer.SelectedIndex + 1);
-												});
-					thread.Start();
-					form.Show();
-					while (thread.IsAlive)
-						Application.DoEvents();
-					form.Close();
-				}
-				using (var form = new FormSlideOutput())
-				{
-					DialogResult result = form.ShowDialog();
-					switch (result)
+					FloaterManager.Instance.ShowFloater(FormMain.Instance, () =>
 					{
-						case DialogResult.Cancel:
-							AppManager.Instance.ActivateMainForm();
-							break;
-						case DialogResult.Abort:
-							Application.Exit();
-							break;
-					}
+						form.TopMost = true;
+						var thread = new Thread(delegate()
+						{
+							AppManager.Instance.ActivatePowerPoint();
+							AppManager.Instance.ActivateMiniBar();
+							AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", File.Name, File.Type.ToString(), File.OriginalPath, File.Parent.Parent.Parent.Name, File.Parent.Parent.Name);
+							PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+							PowerPointHelper.Instance.AppendSlide(File.PreviewContainer.SelectedIndex + 1);
+						});
+						thread.Start();
+						form.Show();
+						while (thread.IsAlive)
+							Application.DoEvents();
+						form.Close();
+					});
 				}
 			}
 			else

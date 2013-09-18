@@ -548,7 +548,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "QuickView";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormQuickView_FormClosed);
-			this.Shown += new System.EventHandler(this.FormQuickView_Load);
+			this.Shown += new System.EventHandler(this.FormQuickView_Shown);
 			this.Resize += new System.EventHandler(this.FormQuickView_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
 			this.pnNavigationArea.ResumeLayout(false);

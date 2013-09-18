@@ -200,6 +200,13 @@ namespace SalesDepot.Properties {
             }
         }
         
+        internal static System.Drawing.Bitmap FloaterHide {
+            get {
+                object obj = ResourceManager.GetObject("FloaterHide", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap FolderContentDocx {
             get {
                 object obj = ResourceManager.GetObject("FolderContentDocx", resourceCulture);
@@ -644,13 +651,6 @@ namespace SalesDepot.Properties {
         internal static System.Drawing.Bitmap TabsView {
             get {
                 object obj = ResourceManager.GetObject("TabsView", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        internal static System.Drawing.Bitmap Video {
-            get {
-                object obj = ResourceManager.GetObject("Video", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

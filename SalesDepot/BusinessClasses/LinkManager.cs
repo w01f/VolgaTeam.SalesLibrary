@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.ToolForms;
 using SalesDepot.ToolForms.QBuilderForms;
@@ -645,12 +646,13 @@ namespace SalesDepot.BusinessClasses
 		public void ViewPresentation(LibraryLink link)
 		{
 			string presentationFile = link.LocalPath;
-			FormMain.Instance.TopMost = true;
 			if (!PowerPointHelper.Instance.IsLinkedWithApplication)
+			{
 				AppManager.Instance.RunPowerPointLoader();
-			AppManager.Instance.ActivatePowerPoint();
-			AppManager.Instance.ActivateMiniBar();
-			FormMain.Instance.TopMost = false;
+				AppManager.Instance.ActivatePowerPoint();
+				AppManager.Instance.ActivateMiniBar();
+				AppManager.Instance.ActivateMainForm();
+			}
 			var file = new FileInfo(presentationFile);
 			if (file.Extension.ToLower().Equals(".pptx") && PowerPointHelper.Instance.Is2003)
 			{
@@ -659,7 +661,7 @@ namespace SalesDepot.BusinessClasses
 					AppManager.Instance.ShowWarning("This File was created in a Newer Version of Microsoft Office." + Environment.NewLine + Environment.NewLine + "In the FUTURE, if you want to open this file, ASK your I.T. Manager to INSTALL the Office 2007 Compatibility Pack.");
 					return;
 				}
-				else if (SettingsManager.Instance.PowerPointLaunchOptions == LinkLaunchOptions.Viewer)
+				if (SettingsManager.Instance.PowerPointLaunchOptions == LinkLaunchOptions.Viewer)
 				{
 					if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
 						OpenCopyOfFile(link);
@@ -673,7 +675,7 @@ namespace SalesDepot.BusinessClasses
 
 				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
-				_formPowerPointQuickView.ShowDialog();
+				_formPowerPointQuickView.ShowDialog(FormMain.Instance);
 				link.PreviewContainer.SelectedIndex = temp;
 			}
 			RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
@@ -682,12 +684,13 @@ namespace SalesDepot.BusinessClasses
 
 		public void ViewPresentationOld(LibraryLink link)
 		{
-			FormMain.Instance.TopMost = true;
 			if (!PowerPointHelper.Instance.IsLinkedWithApplication)
+			{
 				AppManager.Instance.RunPowerPointLoader();
-			AppManager.Instance.ActivatePowerPoint();
-			AppManager.Instance.ActivateMiniBar();
-			FormMain.Instance.TopMost = false;
+				AppManager.Instance.ActivatePowerPoint();
+				AppManager.Instance.ActivateMiniBar();
+				AppManager.Instance.ActivateMainForm();
+			}
 			var file = new FileInfo(link.LocalPath);
 			if (file.Extension.ToLower().Equals(".pptx") && PowerPointHelper.Instance.Is2003)
 			{
@@ -696,7 +699,7 @@ namespace SalesDepot.BusinessClasses
 					AppManager.Instance.ShowWarning("This File was created in a Newer Version of Microsoft Office." + Environment.NewLine + Environment.NewLine + "In the FUTURE, if you want to open this file, ASK your I.T. Manager to INSTALL the Office 2007 Compatibility Pack.");
 					return;
 				}
-				else if (SettingsManager.Instance.PowerPointLaunchOptions == LinkLaunchOptions.Viewer)
+				if (SettingsManager.Instance.PowerPointLaunchOptions == LinkLaunchOptions.Viewer)
 				{
 					if (AppManager.Instance.ShowWarningQuestion("This file is built in a newer version of PowerPoint." + Environment.NewLine + "Do you still want to open the file?") == DialogResult.Yes)
 						OpenCopyOfFile(link);
@@ -709,7 +712,7 @@ namespace SalesDepot.BusinessClasses
 
 				AppManager.Instance.ActivityManager.AddLinkAccessActivity("Preview Link", link.Name, link.Type.ToString(), link.OriginalPath, link.Parent.Parent.Parent.Name, link.Parent.Parent.Name);
 
-				_formPowerPointQuickViewOld.ShowDialog();
+				_formPowerPointQuickViewOld.ShowDialog(FormMain.Instance);
 			}
 			RegistryHelper.SalesDepotHandle = FormMain.Instance.Handle;
 			RegistryHelper.MaximizeSalesDepot = true;
@@ -726,30 +729,17 @@ namespace SalesDepot.BusinessClasses
 				using (var form = new FormProgress())
 				{
 					form.laProgress.Text = "Inserting the video...";
-					form.TopMost = true;
-					bool result = false;
-					var thread = new Thread(delegate() { result = PowerPointHelper.Instance.InsertVideoIntoActivePresentation(link.LocalPath, 100, 100, 400, 400); });
-					thread.Start();
-					form.Show();
-					while (thread.IsAlive)
-						Application.DoEvents();
-					form.Close();
-					if (result)
-						using (var formOutput = new FormVideoOutput())
-						{
-							DialogResult formResult = formOutput.ShowDialog();
-							switch (formResult)
-							{
-								case DialogResult.Cancel:
-									AppManager.Instance.ActivateMainForm();
-									break;
-								case DialogResult.Abort:
-									Application.Exit();
-									break;
-							}
-						}
-					else
-						AppManager.Instance.ShowWarning("The video is not inserted. Couldn't copy video into the presentation folder");
+					FloaterManager.Instance.ShowFloater(FormMain.Instance, () =>
+					{
+						form.TopMost = true;
+						bool result = false;
+						var thread = new Thread(delegate() { result = PowerPointHelper.Instance.InsertVideoIntoActivePresentation(link.LocalPath, 100, 100, 400, 400); });
+						thread.Start();
+						form.Show();
+						while (thread.IsAlive)
+							Application.DoEvents();
+						form.Close();
+					});
 				}
 			}
 			else
@@ -795,8 +785,8 @@ namespace SalesDepot.BusinessClasses
 			{
 				_formQuickSiteAddLink.Init(link);
 				if (_formQuickSiteAddLink.ShowDialog() == DialogResult.OK)
-					AppManager.Instance.ShowInfo(link.Type!=FileTypes.LineBreak?
-						"Link successfully added to Site Link Cart":
+					AppManager.Instance.ShowInfo(link.Type != FileTypes.LineBreak ?
+						"Link successfully added to Site Link Cart" :
 						"LineBreak successfully added to Site Link Cart");
 			}
 		}

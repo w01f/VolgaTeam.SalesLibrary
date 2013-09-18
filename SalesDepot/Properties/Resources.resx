@@ -124,9 +124,6 @@
   <data name="CalendarEditButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarEditButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProgramOutputPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgramOutputPDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="CalendarLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CalendarLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -160,17 +157,17 @@
   <data name="SearchBarSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarSearch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="QBuilderPageEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\QBuilderPageEmail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Video" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Video.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NudgeDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NudgeDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FolderContentFolder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderContentFolder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="FolderContentPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FolderContentPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FolderContentDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderContentDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProgramSearch" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgramSearch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -187,8 +184,8 @@
   <data name="DeleteButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeleteButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MinibarRowSpaceLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MinibarRowSpaceLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EmailBin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmailBin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,8 +214,8 @@
   <data name="TabsView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TabsView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderContentXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderContentXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Format_Font_Smaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Format Font Smaller.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QBuilderLinkCart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderLinkCart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -226,17 +223,17 @@
   <data name="QBuilderBrowserFirefox" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderBrowserFirefox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Slides" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Slides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Arrow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Arrow.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddWeek" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddWeek.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchBarReset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarReset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderContentPptx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderContentPptx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="QuickViewOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuickViewOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="FolderContentXlsx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderContentXlsx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EmptyImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmptyImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,6 +256,12 @@
   <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="EmailBinSend" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EmailBinSend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProgramBrowseForward" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramBrowseForward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="QBuilderLogout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderLogout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -276,6 +279,9 @@
   </data>
   <data name="SearchBarSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinibarRowSpaceLarger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\MinibarRowSpaceLarger.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchBarEmailBin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarEmailBin.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -304,8 +310,8 @@
   <data name="QBuilderPageSave" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderPageSave.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Format_Font_Smaller" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Format Font Smaller.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="QuickViewAddAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QuickViewAddAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QBuilderPagePreview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderPagePreview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -319,41 +325,35 @@
   <data name="AccordionView" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AccordionView.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NudgeUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NudgeUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="SearchRecentFiles" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchRecentFiles.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QuickViewEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickViewEmail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Format_Font_Larger" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Format Font Larger.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ProgramBrowseForward" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProgramBrowseForward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ProgramOutputPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProgramOutputPDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SearchBarHelp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\SearchBarHelp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="AddWeek" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddWeek.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FolderContentPptx" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FolderContentPptx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QuickSiteAddLinkBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickSiteAddLinkBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="QuickViewAddAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\QuickViewAddAll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Slides" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Slides.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="QuickViewOpen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\QuickViewOpen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Format_Font_Larger" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Format Font Larger.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProgramBrowseBackward" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ProgramBrowseBackward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="FolderContentDocx" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\FolderContentDocx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NudgeUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NudgeUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="QBuilderBrowserInternetExplorer" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QBuilderBrowserInternetExplorer.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -364,8 +364,8 @@
   <data name="QuickViewUserSettings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QuickViewUserSettings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmailBinSend" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailBinSend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="QBuilderPageEmail" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\QBuilderPageEmail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EmailBinPdf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\EmailBinPdf.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -373,7 +373,7 @@
   <data name="CopySmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CopySmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NudgeDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NudgeDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="FloaterHide" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\FloaterHide.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -76,6 +76,11 @@ namespace SalesDepot
 				WinAPIHelper.MakeNormal(handle);
 		}
 
+		public void MinimizeForm(IntPtr handle)
+		{
+			WinAPIHelper.ShowWindow(handle, WindowShowStyle.Minimize);
+		}
+
 		public void ActivateMainForm()
 		{
 			IntPtr handle = RegistryHelper.SalesDepotHandle;

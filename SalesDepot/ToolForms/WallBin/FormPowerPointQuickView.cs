@@ -9,6 +9,7 @@ using DevExpress.XtraEditors.Controls;
 using Microsoft.Office.Core;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 
 namespace SalesDepot.ToolForms.WallBin
@@ -26,6 +27,16 @@ namespace SalesDepot.ToolForms.WallBin
 				checkEditKeepSlideTemplate.Font = new Font(checkEditKeepSlideTemplate.Font.FontFamily, checkEditKeepSlideTemplate.Font.Size - 1, checkEditKeepSlideTemplate.Font.Style);
 				labelControlSlideTemplate.Font = new Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
 			}
+		}
+
+		protected override void OnHandleCreated(EventArgs e)
+		{
+			base.OnHandleCreated(e);
+			if (Environment.OSVersion.Version.Major < 6) return;
+			int attrValue = 1;
+			var res = WinAPIHelper.DwmSetWindowAttribute(Handle, WinAPIHelper.DWMWA_TRANSITIONS_FORCEDISABLED, ref attrValue, sizeof(int));
+			if (res < 0)
+				throw new Exception("Can't disable aero animation");
 		}
 
 		#region Form GUI Event Habdlers
@@ -276,33 +287,21 @@ namespace SalesDepot.ToolForms.WallBin
 					using (var form = new FormProgress())
 					{
 						form.laProgress.Text = "Inserting slides...";
-						form.TopMost = true;
-						var thread = new Thread(delegate()
-													{
-														AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
-														PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-														PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
-													});
-						thread.Start();
-						form.Show();
-						while (thread.IsAlive)
-							Application.DoEvents();
-						form.Close();
-					}
-					using (var form = new FormSlideOutput())
-					{
-						DialogResult result = form.ShowDialog();
-						switch (result)
+						FloaterManager.Instance.ShowFloater(this, () =>
 						{
-							case DialogResult.Cancel:
-								AppManager.Instance.ActivateMainForm();
-								Activate();
-								Focus();
-								break;
-							case DialogResult.Abort:
-								Application.Exit();
-								break;
-						}
+							form.TopMost = true;
+							var thread = new Thread(delegate()
+							{
+								AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
+								PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+								PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
+							});
+							thread.Start();
+							form.Show();
+							while (thread.IsAlive)
+								Application.DoEvents();
+							form.Close();
+						});
 					}
 				}
 				else
