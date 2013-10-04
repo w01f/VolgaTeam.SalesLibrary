@@ -52,7 +52,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetInactiveUsers(startDate, endDate, out message)));
+					var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetInactiveUsers(startDate, endDate, out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -69,7 +69,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetInactiveUsers(startDate, endDate, out message)));
+				var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetInactiveUsers(startDate, endDate, out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -120,7 +120,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 				form.laProgress.Text = "Sending Emails...";
 				form.TopMost = true;
 
-				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.ResetUsers(userIds, onlyEmail, sender, subject, body, out message));
+				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.ResetUsers(userIds, onlyEmail, sender, subject, body, out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)
@@ -163,7 +163,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 				form.laProgress.Text = "Sending Emails...";
 				form.TopMost = true;
 
-				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeleteUsers(userIds, onlyEmail, sender, subject, body, out message));
+				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.DeleteUsers(userIds, onlyEmail, sender, subject, body, out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)

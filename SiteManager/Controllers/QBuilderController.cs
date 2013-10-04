@@ -1,5 +1,4 @@
 ﻿using System;
-using FileManager.Controllers;
 using SalesDepot.Services;
 using SalesDepot.SiteManager.PresentationClasses.QBuilder;
 using SalesDepot.SiteManager.TabPages;
@@ -30,7 +29,7 @@ namespace SalesDepot.SiteManager.Controllers
 			QPagesManagerControl.BringToFront();
 
 			FormMain.Instance.comboBoxEditQBuilderSite.Properties.Items.Clear();
-			FormMain.Instance.comboBoxEditQBuilderSite.Properties.Items.AddRange(BusinessClasses.SiteManager.Instance.Sites);
+			FormMain.Instance.comboBoxEditQBuilderSite.Properties.Items.AddRange(BusinessClasses.WebSiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditQBuilderSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
@@ -57,7 +56,7 @@ namespace SalesDepot.SiteManager.Controllers
 			if (NeedToUpdate)
 			{
 				QPagesManagerControl.RefreshData(true);
-				FormMain.Instance.comboBoxEditQBuilderSite.EditValue = BusinessClasses.SiteManager.Instance.SelectedSite;
+				FormMain.Instance.comboBoxEditQBuilderSite.EditValue = BusinessClasses.WebSiteManager.Instance.SelectedSite;
 			}
 			NeedToUpdate = false;
 			IsActive = true;

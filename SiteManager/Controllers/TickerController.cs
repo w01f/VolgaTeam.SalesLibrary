@@ -1,5 +1,4 @@
 ﻿using System;
-using FileManager.Controllers;
 using SalesDepot.Services;
 using SalesDepot.SiteManager.PresentationClasses.Ticker;
 using SalesDepot.SiteManager.TabPages;
@@ -30,7 +29,7 @@ namespace SalesDepot.SiteManager.Controllers
 			TickerManagerControl.BringToFront();
 
 			FormMain.Instance.comboBoxEditTickerSite.Properties.Items.Clear();
-			FormMain.Instance.comboBoxEditTickerSite.Properties.Items.AddRange(BusinessClasses.SiteManager.Instance.Sites);
+			FormMain.Instance.comboBoxEditTickerSite.Properties.Items.AddRange(BusinessClasses.WebSiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditTickerSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
@@ -62,7 +61,7 @@ namespace SalesDepot.SiteManager.Controllers
 			if (NeedToUpdate)
 			{
 				TickerManagerControl.RefreshData(true);
-				FormMain.Instance.comboBoxEditTickerSite.EditValue = BusinessClasses.SiteManager.Instance.SelectedSite;
+				FormMain.Instance.comboBoxEditTickerSite.EditValue = BusinessClasses.WebSiteManager.Instance.SelectedSite;
 			}
 			NeedToUpdate = false;
 			IsActive = true;

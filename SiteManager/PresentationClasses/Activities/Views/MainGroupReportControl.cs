@@ -70,7 +70,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetMainGroupReport(StartDate, EndDate, out message)));
+					var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetMainGroupReport(StartDate, EndDate, out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -87,7 +87,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetMainGroupReport(StartDate, EndDate, out message)));
+				var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetMainGroupReport(StartDate, EndDate, out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{

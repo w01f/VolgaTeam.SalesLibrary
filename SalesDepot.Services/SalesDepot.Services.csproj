@@ -82,6 +82,7 @@
     <Compile Include="StatisticService\MainUserReportRecord.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />
     <Compile Include="TickerService\TickerLinkRecord.cs" />
+    <Compile Include="UtilityClient.cs" />
     <Compile Include="Web References\ContentManagmentService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,6 +109,11 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\TickerService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\UtilityService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -208,6 +214,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SalesDepot_Services_TickerService_TickerControllerService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost/SalesLibraries/utility/quote">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\UtilityService\</RelPath>
+      <UpdateFromURL>http://localhost/SalesLibraries/utility/quote</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SalesDepot_Services_UtilityService_UtilityControllerService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -284,6 +301,11 @@
     <None Include="Web References\TickerService\TickerLink.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\UtilityService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\UtilityService\UtilityController.wsdl" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

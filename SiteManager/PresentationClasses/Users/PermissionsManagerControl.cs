@@ -119,7 +119,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 													{
 														IEnumerable<UserInfo> users = ImportManager.ImportUsers(dialog.FileName, _users.ToArray(), _groups.ToArray(), _complexPassword, out message);
 														if (string.IsNullOrEmpty(message))
-															BusinessClasses.SiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
+															BusinessClasses.WebSiteManager.Instance.SelectedSite.SetUsers(users.ToArray(), out message);
 													});
 						form.Show();
 						thread.Start();
@@ -211,8 +211,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					form.TopMost = true;
 					var thread = new Thread(() =>
 												{
-													_complexPassword = BusinessClasses.SiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
-													_users.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetUsers(out message));
+													_complexPassword = BusinessClasses.WebSiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
+													_users.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetUsers(out message));
 												});
 					form.Show();
 					thread.Start();
@@ -232,8 +232,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 			{
 				var thread = new Thread(() =>
 				{
-					_complexPassword = BusinessClasses.SiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
-					_users.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetUsers(out message));
+					_complexPassword = BusinessClasses.WebSiteManager.Instance.SelectedSite.IsUserPasswordComplex(out message);
+					_users.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetUsers(out message));
 				});
 				thread.Start();
 				while (thread.IsAlive)
@@ -270,7 +270,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Adding user...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -343,7 +343,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Updating user...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.SetUser(login, password, firstName, lastName, email, phone, role, groups.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -378,7 +378,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 				Enabled = false;
 				form.laProgress.Text = "Deleting user...";
 				form.TopMost = true;
-				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeleteUser(userRecord.login, out message));
+				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.DeleteUser(userRecord.login, out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)
@@ -495,8 +495,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					form.TopMost = true;
 					var thread = new Thread(() =>
 												{
-													_groups.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroups(out message));
-													_groupTemplates.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
+													_groups.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetGroups(out message));
+													_groupTemplates.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
 												});
 					form.Show();
 					thread.Start();
@@ -516,8 +516,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 			{
 				var thread = new Thread(() =>
 											{
-												_groups.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroups(out message));
-												_groupTemplates.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
+												_groups.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetGroups(out message));
+												_groupTemplates.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetGroupTemplates(out message));
 											});
 				thread.Start();
 				while (thread.IsAlive)
@@ -550,7 +550,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 						Enabled = false;
 						form.laProgress.Text = "Adding group...";
 						form.TopMost = true;
-						var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
+						var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
 						form.Show();
 						thread.Start();
 						while (thread.IsAlive)
@@ -619,7 +619,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 							Enabled = false;
 							form.laProgress.Text = "Updating group...";
 							form.TopMost = true;
-							var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
+							var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.SetGroup(id, name, users.ToArray(), pages.ToArray(), out message));
 							form.Show();
 							thread.Start();
 							while (thread.IsAlive)
@@ -656,7 +656,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					Enabled = false;
 					form.laProgress.Text = "Deleting group...";
 					form.TopMost = true;
-					var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeleteGroup(groupRecord.id, out message));
+					var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.DeleteGroup(groupRecord.id, out message));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -706,7 +706,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					Enabled = false;
 					form.laProgress.Text = "Loading libraries...";
 					form.TopMost = true;
-					var thread = new Thread(() => _libraries.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetLibraries(out message)));
+					var thread = new Thread(() => _libraries.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetLibraries(out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -723,7 +723,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 			}
 			else
 			{
-				var thread = new Thread(() => _libraries.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetLibraries(out message)));
+				var thread = new Thread(() => _libraries.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetLibraries(out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -782,10 +782,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 																Library libraray = _libraries.FirstOrDefault(x => x.id.Equals(pageRecord.libraryId));
 																if (libraray != null)
 																	foreach (LibraryPage page in libraray.pages)
-																		BusinessClasses.SiteManager.Instance.SelectedSite.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
+																		BusinessClasses.WebSiteManager.Instance.SelectedSite.SetPage(page.id, users.ToArray(), groups.ToArray(), out message);
 															}
 															else
-																BusinessClasses.SiteManager.Instance.SelectedSite.SetPage(pageRecord.id, users.ToArray(), groups.ToArray(), out message);
+																BusinessClasses.WebSiteManager.Instance.SelectedSite.SetPage(pageRecord.id, users.ToArray(), groups.ToArray(), out message);
 														});
 							form.Show();
 							thread.Start();

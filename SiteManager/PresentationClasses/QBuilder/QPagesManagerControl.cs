@@ -37,7 +37,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetAllPages(out message)));
+					var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetAllPages(out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -54,7 +54,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(BusinessClasses.SiteManager.Instance.SelectedSite.GetAllPages(out message)));
+				var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetAllPages(out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{
@@ -90,7 +90,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 				Enabled = false;
 				form.laProgress.Text = string.Format("Deleting {0}...", pageRecord.Type);
 				form.TopMost = true;
-				var thread = new Thread(() => BusinessClasses.SiteManager.Instance.SelectedSite.DeletePages(new[] { pageRecord.id }, out message));
+				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.DeletePages(new[] { pageRecord.id }, out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)

@@ -3,9 +3,8 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
-using FileManager.Controllers;
 using SalesDepot.SiteManager.ConfigurationClasses;
-using SalesDepot.SiteManager.TabPages;
+using SalesDepot.SiteManager.Controllers;
 
 namespace SalesDepot.SiteManager
 {
@@ -45,6 +44,7 @@ namespace SalesDepot.SiteManager
 				labelItemTickerLogo.Image = image;
 				labelItemInactiveUsersLogo.Image = image;
 				labelItemQBuilderLogo.Image = image;
+				labelItemUtilitiesLogo.Image = image;
 			}
 
 			MainController.Instance.InitializeControllers();
@@ -66,6 +66,8 @@ namespace SalesDepot.SiteManager
 				key = TabPageEnum.InactiveUsers;
 			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
 				key = TabPageEnum.QBuilder;
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemUtilities)
+				key = TabPageEnum.Utilities;
 			MainController.Instance.ShowTab(key);
 		}
 

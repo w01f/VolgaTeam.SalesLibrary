@@ -1,0 +1,98 @@
+﻿using System;
+using SalesDepot.Services.UtilityService;
+
+namespace SalesDepot.Services
+{
+	public partial class SiteClient
+	{
+		private UtilityControllerService GetUtilityClient()
+		{
+			try
+			{
+				var client = new UtilityControllerService();
+				client.Url = String.Format("{0}/utility/quote?ws=1", _website);
+				return client;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		public void UpdateContent(out string message)
+		{
+			var client = GetUtilityClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					message = !string.IsNullOrEmpty(sessionKey) ? client.updateContent(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void UpdateHelp(out string message)
+		{
+			var client = GetUtilityClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					message = !string.IsNullOrEmpty(sessionKey) ? client.updateHelp(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void CleanExpiredEmails(out string message)
+		{
+			var client = GetUtilityClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					message = !string.IsNullOrEmpty(sessionKey) ? client.cleanExpiredEmails(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+
+		public void NotifyDeadLinks(out string message)
+		{
+			var client = GetUtilityClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					message = !string.IsNullOrEmpty(sessionKey) ? client.notifyDeadLinks(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
+	}
+}

@@ -7,13 +7,13 @@ using SalesDepot.SiteManager.ConfigurationClasses;
 
 namespace SalesDepot.SiteManager.BusinessClasses
 {
-	public class SiteManager
+	public class WebSiteManager
 	{
-		private static readonly SiteManager _instance = new SiteManager();
+		private static readonly WebSiteManager _instance = new WebSiteManager();
 
 		private SiteClient _selectedSite;
 
-		private SiteManager()
+		private WebSiteManager()
 		{
 			Sites = new List<SiteClient>();
 			Load();
@@ -26,7 +26,7 @@ namespace SalesDepot.SiteManager.BusinessClasses
 			get { return _selectedSite ?? (_selectedSite = !string.IsNullOrEmpty(SettingsManager.Instance.SelectedSiteName) ? Sites.FirstOrDefault(x => x.Website == SettingsManager.Instance.SelectedSiteName) ?? Sites.FirstOrDefault() : Sites.FirstOrDefault()); }
 		}
 
-		public static SiteManager Instance
+		public static WebSiteManager Instance
 		{
 			get { return _instance; }
 		}

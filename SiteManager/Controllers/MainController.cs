@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.Services;
-using SalesDepot.SiteManager;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.ConfigurationClasses;
-using SalesDepot.SiteManager.Controllers;
 using SalesDepot.SiteManager.ToolForms;
 
-namespace FileManager.Controllers
+namespace SalesDepot.SiteManager.Controllers
 {
 	public class MainController
 	{
@@ -22,7 +19,7 @@ namespace FileManager.Controllers
 		public event EventHandler<SiteChangedEventArgs> SiteChanged;
 		public void ChangeSite(SiteClient site)
 		{
-			SiteManager.Instance.SelectSite(site);
+			WebSiteManager.Instance.SelectSite(site);
 			if (SiteChanged != null)
 			{
 				var siteChangedEventArgs = new SiteChangedEventArgs();
@@ -38,6 +35,7 @@ namespace FileManager.Controllers
 		public TickerController TickerController { get; private set; }
 		public InactiveUsersController InactiveUsersController { get; private set; }
 		public QBuilderController QBuilderController { get; private set; }
+		public UtilitiesController UtilitiesController { get; private set; }
 		#endregion
 
 		private MainController()
@@ -72,6 +70,8 @@ namespace FileManager.Controllers
 							Application.DoEvents();
 							QBuilderController.InitController();
 							Application.DoEvents();
+							UtilitiesController.InitController();
+							Application.DoEvents();
 						});
 					});
 				formProgress.Show();
@@ -99,6 +99,8 @@ namespace FileManager.Controllers
 			_controllers.Add(TabPageEnum.InactiveUsers, InactiveUsersController);
 			QBuilderController = new QBuilderController();
 			_controllers.Add(TabPageEnum.QBuilder, QBuilderController);
+			UtilitiesController = new UtilitiesController();
+			_controllers.Add(TabPageEnum.Utilities, UtilitiesController);
 		}
 
 		public void LoadDataAndGUI()
@@ -106,7 +108,7 @@ namespace FileManager.Controllers
 			SiteChanged = null;
 			InitializePresentationLayer();
 
-			ChangeSite(SiteManager.Instance.SelectedSite);
+			ChangeSite(WebSiteManager.Instance.SelectedSite);
 
 			_activeTab = (TabPageEnum)SettingsManager.Instance.SelectedTab;
 			ShowTab(_activeTab);
@@ -127,6 +129,9 @@ namespace FileManager.Controllers
 					break;
 				case TabPageEnum.QBuilder:
 					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemQBuilder;
+					break;
+				case TabPageEnum.Utilities:
+					FormMain.Instance.ribbonControl.SelectedRibbonTabItem = FormMain.Instance.ribbonTabItemUtilities;
 					break;
 			}
 		}
@@ -154,7 +159,8 @@ namespace FileManager.Controllers
 		Activities,
 		Ticker,
 		InactiveUsers,
-		QBuilder
+		QBuilder,
+		Utilities
 	}
 
 	public interface IPageController

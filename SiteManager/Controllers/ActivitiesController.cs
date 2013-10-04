@@ -1,10 +1,9 @@
 ﻿using SalesDepot.Services;
-using SalesDepot.SiteManager;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.PresentationClasses.Activities;
 using SalesDepot.SiteManager.TabPages;
 
-namespace FileManager.Controllers
+namespace SalesDepot.SiteManager.Controllers
 {
 	public class ActivitiesController : IPageController
 	{
@@ -30,7 +29,7 @@ namespace FileManager.Controllers
 			ActivitiesManagerControl.BringToFront();
 
 			FormMain.Instance.comboBoxEditActivitiesSite.Properties.Items.Clear();
-			FormMain.Instance.comboBoxEditActivitiesSite.Properties.Items.AddRange(SiteManager.Instance.Sites);
+			FormMain.Instance.comboBoxEditActivitiesSite.Properties.Items.AddRange(WebSiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditActivitiesSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
@@ -75,7 +74,7 @@ namespace FileManager.Controllers
 			if (NeedToUpdate)
 			{
 				ActivitiesManagerControl.ClearData();
-				FormMain.Instance.comboBoxEditActivitiesSite.EditValue = SiteManager.Instance.SelectedSite;
+				FormMain.Instance.comboBoxEditActivitiesSite.EditValue = WebSiteManager.Instance.SelectedSite;
 			}
 			NeedToUpdate = false;
 			IsActive = true;

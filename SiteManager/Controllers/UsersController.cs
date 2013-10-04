@@ -1,11 +1,10 @@
 ﻿using System;
 using SalesDepot.Services;
-using SalesDepot.SiteManager;
-using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.PresentationClasses.Users;
 using SalesDepot.SiteManager.TabPages;
+using SalesDepot.SiteManager.BusinessClasses;
 
-namespace FileManager.Controllers
+namespace SalesDepot.SiteManager.Controllers
 {
 	public class UsersController : IPageController
 	{
@@ -31,7 +30,7 @@ namespace FileManager.Controllers
 			PermissionsManagerControl.BringToFront();
 
 			FormMain.Instance.comboBoxEditUsersSite.Properties.Items.Clear();
-			FormMain.Instance.comboBoxEditUsersSite.Properties.Items.AddRange(SiteManager.Instance.Sites);
+			FormMain.Instance.comboBoxEditUsersSite.Properties.Items.AddRange(WebSiteManager.Instance.Sites);
 			FormMain.Instance.comboBoxEditUsersSite.EditValueChanged += (o, e) =>
 			{
 				if (!NeedToUpdate)
@@ -61,7 +60,7 @@ namespace FileManager.Controllers
 			_tabPage.BringToFront();
 			if (NeedToUpdate)
 			{
-				FormMain.Instance.comboBoxEditUsersSite.EditValue = SiteManager.Instance.SelectedSite;
+				FormMain.Instance.comboBoxEditUsersSite.EditValue = WebSiteManager.Instance.SelectedSite;
 				PermissionsManagerControl.RefreshData(true);
 			}
 			NeedToUpdate = false;
