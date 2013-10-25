@@ -25,6 +25,13 @@ window.salesDepot = window.salesDepot || { };
 				selectedFileTypes.push("mp4");
 				selectedFileTypes.push("wmv");
 			}
+			if ($('#search-file-type-url').hasClass('active'))
+				selectedFileTypes.push("url");
+			if ($('#search-file-type-image').hasClass('active'))
+			{
+				selectedFileTypes.push("png");
+				selectedFileTypes.push("jpeg");
+			}
 
 			var dateString = $('#condition-date-range').find('input').val().split(" - ");
 			if (dateString.length == 2)
@@ -404,6 +411,22 @@ window.salesDepot = window.salesDepot || { };
 		else
 			$("#search-file-type-video").button('toggle');
 
+		if ($.cookie("fileTypeUrl") != null)
+		{
+			if ($.cookie("fileTypeUrl") == "true")
+				$("#search-file-type-url").button('toggle');
+		}
+		else
+			$("#search-file-type-url").button('toggle');
+
+		if ($.cookie("fileTypeImage") != null)
+		{
+			if ($.cookie("fileTypeImage") == "true")
+				$("#search-file-type-image").button('toggle');
+		}
+		else
+			$("#search-file-type-image").button('toggle');
+
 		$('#file-types').find('input[type="checkbox"]').button({
 			text: false
 		});
@@ -426,6 +449,12 @@ window.salesDepot = window.salesDepot || { };
 				expires: (60 * 60 * 24 * 7)
 			});
 			$.cookie("fileTypeVideo", $('#search-file-type-video').hasClass('active'), {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$.cookie("fileTypeUrl", $('#search-file-type-url').hasClass('active'), {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$.cookie("fileTypeImage", $('#search-file-type-image').hasClass('active'), {
 				expires: (60 * 60 * 24 * 7)
 			});
 		});

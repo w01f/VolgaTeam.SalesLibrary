@@ -137,6 +137,30 @@
 							</button>
 						</td>
 					</tr>
+					<tr>
+						<td>
+							<button class="search-file-type btn btn-block" id="search-file-type-url">
+								<table class="caption">
+									<tr>
+										<td><img class="icon-search url" src="images/search/search-url.png"/></td>
+										<td><h4>Web Links</h4></td>
+									</tr>
+								</table>
+							</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button class="search-file-type btn btn-block" id="search-file-type-image">
+								<table class="caption">
+									<tr>
+										<td><img class="icon-search image" src="images/search/search-image.png"/></td>
+										<td><h4>Images</h4></td>
+									</tr>
+								</table>
+							</button>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>

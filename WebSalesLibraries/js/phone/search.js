@@ -252,6 +252,12 @@
 			$.cookie("fileTypeVideo", $('#search-file-type-video').is(':checked'), {
 				expires: (60 * 60 * 24 * 7)
 			});
+			$.cookie("fileTypeUrl", $('#search-file-type-url').is(':checked'), {
+				expires: (60 * 60 * 24 * 7)
+			});
+			$.cookie("fileTypeImage", $('#search-file-type-image').is(':checked'), {
+				expires: (60 * 60 * 24 * 7)
+			});
 		};
 
 		$('#search-file-type-container').find('input[type="checkbox"]').checkboxradio();
@@ -295,6 +301,22 @@
 		}
 		else
 			$("#search-file-type-video").attr("checked", true).checkboxradio("refresh");
+
+		if ($.cookie("fileTypeUrl") != null)
+		{
+			if ($.cookie("fileTypeUrl") == "true")
+				$("#search-file-type-url").attr("checked", true).checkboxradio("refresh");
+		}
+		else
+			$("#search-file-type-url").attr("checked", true).checkboxradio("refresh");
+
+		if ($.cookie("fileTypeImage") != null)
+		{
+			if ($.cookie("fileTypeImage") == "true")
+				$("#search-file-type-image").attr("checked", true).checkboxradio("refresh");
+		}
+		else
+			$("#search-file-type-image").attr("checked", true).checkboxradio("refresh");
 
 		$('#file-types').find('input[type="checkbox"]').button({
 			text: false
@@ -422,7 +444,13 @@
 			selectedFileTypes.push("mp4");
 			selectedFileTypes.push("wmv");
 		}
-
+		if ($('#search-file-type-url').is(':checked'))
+			selectedFileTypes.push("url");
+		if ($('#search-file-type-image').is(':checked'))
+		{
+			selectedFileTypes.push("png");
+			selectedFileTypes.push("jpeg");
+		}
 
 		var startDateText = $('#search-date-start').val();
 		var endDateText = $('#search-date-end').val();

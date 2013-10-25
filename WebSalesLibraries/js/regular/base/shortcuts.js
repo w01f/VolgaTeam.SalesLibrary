@@ -128,6 +128,11 @@ window.salesDepot = window.salesDepot || { };
 						selectedFileTypes.push("mp4");
 						selectedFileTypes.push("wmv");
 					}
+					else if (fileType == 'image')
+					{
+						selectedFileTypes.push("png");
+						selectedFileTypes.push("jpeg");
+					}
 				});
 
 				var startDateTag = searchConditions.find('.start-date');

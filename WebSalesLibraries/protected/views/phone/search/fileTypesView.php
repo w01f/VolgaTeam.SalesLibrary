@@ -18,5 +18,9 @@
 	<input type="checkbox" name="search-file-type-word" id="search-file-type-word" class="custom" />
     <label for="search-file-type-word">Word</label>    
     <input type="checkbox" name="search-file-type-excel" id="search-file-type-excel" class="custom" />
-    <label for="search-file-type-excel">Excel</label>        
+    <label for="search-file-type-excel">Excel</label>
+	<input type="checkbox" name="search-file-type-url" id="search-file-type-url" class="custom" />
+	<label for="search-file-type-url">Web Links</label>
+	<input type="checkbox" name="search-file-type-image" id="search-file-type-image" class="custom" />
+	<label for="search-file-type-image">Images</label>
 </fieldset>
