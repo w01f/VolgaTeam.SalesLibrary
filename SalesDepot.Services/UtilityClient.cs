@@ -27,7 +27,7 @@ namespace SalesDepot.Services
 				try
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
-					message = !string.IsNullOrEmpty(sessionKey) ? client.updateContent(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+					message = !string.IsNullOrEmpty(sessionKey) ? client.updateWallbin(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
 				}
 				catch (Exception ex)
 				{
@@ -38,7 +38,7 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public void UpdateHelp(out string message)
+		public void UpdateShortcuts(out string message)
 		{
 			var client = GetUtilityClient();
 			if (client != null)
@@ -46,7 +46,7 @@ namespace SalesDepot.Services
 				try
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
-					message = !string.IsNullOrEmpty(sessionKey) ? client.updateHelp(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+					message = !string.IsNullOrEmpty(sessionKey) ? client.updateShortcuts(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
 				}
 				catch (Exception ex)
 				{

@@ -31,9 +31,9 @@ namespace SalesDepot.Services.UtilityService {
         
         private System.Threading.SendOrPostCallback getSessionKeyOperationCompleted;
         
-        private System.Threading.SendOrPostCallback updateContentOperationCompleted;
+        private System.Threading.SendOrPostCallback updateWallbinOperationCompleted;
         
-        private System.Threading.SendOrPostCallback updateHelpOperationCompleted;
+        private System.Threading.SendOrPostCallback updateShortcutsOperationCompleted;
         
         private System.Threading.SendOrPostCallback cleanExpiredEmailsOperationCompleted;
         
@@ -81,10 +81,10 @@ namespace SalesDepot.Services.UtilityService {
         public event getSessionKeyCompletedEventHandler getSessionKeyCompleted;
         
         /// <remarks/>
-        public event updateContentCompletedEventHandler updateContentCompleted;
+        public event updateWallbinCompletedEventHandler updateWallbinCompleted;
         
         /// <remarks/>
-        public event updateHelpCompletedEventHandler updateHelpCompleted;
+        public event updateShortcutsCompletedEventHandler updateShortcutsCompleted;
         
         /// <remarks/>
         public event cleanExpiredEmailsCompletedEventHandler cleanExpiredEmailsCompleted;
@@ -125,62 +125,62 @@ namespace SalesDepot.Services.UtilityService {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#updateContent", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#updateWallbin", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string updateContent(string sessionKey) {
-            object[] results = this.Invoke("updateContent", new object[] {
+        public string updateWallbin(string sessionKey) {
+            object[] results = this.Invoke("updateWallbin", new object[] {
                         sessionKey});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void updateContentAsync(string sessionKey) {
-            this.updateContentAsync(sessionKey, null);
+        public void updateWallbinAsync(string sessionKey) {
+            this.updateWallbinAsync(sessionKey, null);
         }
         
         /// <remarks/>
-        public void updateContentAsync(string sessionKey, object userState) {
-            if ((this.updateContentOperationCompleted == null)) {
-                this.updateContentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateContentOperationCompleted);
+        public void updateWallbinAsync(string sessionKey, object userState) {
+            if ((this.updateWallbinOperationCompleted == null)) {
+                this.updateWallbinOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateWallbinOperationCompleted);
             }
-            this.InvokeAsync("updateContent", new object[] {
-                        sessionKey}, this.updateContentOperationCompleted, userState);
+            this.InvokeAsync("updateWallbin", new object[] {
+                        sessionKey}, this.updateWallbinOperationCompleted, userState);
         }
         
-        private void OnupdateContentOperationCompleted(object arg) {
-            if ((this.updateContentCompleted != null)) {
+        private void OnupdateWallbinOperationCompleted(object arg) {
+            if ((this.updateWallbinCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateContentCompleted(this, new updateContentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.updateWallbinCompleted(this, new updateWallbinCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#updateHelp", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:UtilityControllerwsdl#updateShortcuts", RequestNamespace="urn:UtilityControllerwsdl", ResponseNamespace="urn:UtilityControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string updateHelp(string sessionKey) {
-            object[] results = this.Invoke("updateHelp", new object[] {
+        public string updateShortcuts(string sessionKey) {
+            object[] results = this.Invoke("updateShortcuts", new object[] {
                         sessionKey});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void updateHelpAsync(string sessionKey) {
-            this.updateHelpAsync(sessionKey, null);
+        public void updateShortcutsAsync(string sessionKey) {
+            this.updateShortcutsAsync(sessionKey, null);
         }
         
         /// <remarks/>
-        public void updateHelpAsync(string sessionKey, object userState) {
-            if ((this.updateHelpOperationCompleted == null)) {
-                this.updateHelpOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateHelpOperationCompleted);
+        public void updateShortcutsAsync(string sessionKey, object userState) {
+            if ((this.updateShortcutsOperationCompleted == null)) {
+                this.updateShortcutsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnupdateShortcutsOperationCompleted);
             }
-            this.InvokeAsync("updateHelp", new object[] {
-                        sessionKey}, this.updateHelpOperationCompleted, userState);
+            this.InvokeAsync("updateShortcuts", new object[] {
+                        sessionKey}, this.updateShortcutsOperationCompleted, userState);
         }
         
-        private void OnupdateHelpOperationCompleted(object arg) {
-            if ((this.updateHelpCompleted != null)) {
+        private void OnupdateShortcutsOperationCompleted(object arg) {
+            if ((this.updateShortcutsCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.updateHelpCompleted(this, new updateHelpCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.updateShortcutsCompleted(this, new updateShortcutsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -291,17 +291,17 @@ namespace SalesDepot.Services.UtilityService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void updateContentCompletedEventHandler(object sender, updateContentCompletedEventArgs e);
+    public delegate void updateWallbinCompletedEventHandler(object sender, updateWallbinCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateContentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class updateWallbinCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal updateContentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal updateWallbinCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -317,17 +317,17 @@ namespace SalesDepot.Services.UtilityService {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
-    public delegate void updateHelpCompletedEventHandler(object sender, updateHelpCompletedEventArgs e);
+    public delegate void updateShortcutsCompletedEventHandler(object sender, updateShortcutsCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class updateHelpCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class updateShortcutsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal updateHelpCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal updateShortcutsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

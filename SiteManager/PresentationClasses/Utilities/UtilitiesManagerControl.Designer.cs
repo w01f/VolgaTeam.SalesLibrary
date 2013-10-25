@@ -33,11 +33,11 @@
 			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
 			this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
 			this.pnUtilityOperations = new System.Windows.Forms.Panel();
-			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
-			this.simpleButtonUpdateContent = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonUpdateHelp = new DevExpress.XtraEditors.SimpleButton();
-			this.simpleButtonCleanExpiredEmails = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonProcessDeadLinks = new DevExpress.XtraEditors.SimpleButton();
+			this.simpleButtonCleanExpiredEmails = new DevExpress.XtraEditors.SimpleButton();
+			this.simpleButtonUpdateShorcuts = new DevExpress.XtraEditors.SimpleButton();
+			this.simpleButtonUpdateContent = new DevExpress.XtraEditors.SimpleButton();
+			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -84,7 +84,7 @@
 			// 
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonProcessDeadLinks);
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonCleanExpiredEmails);
-			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateHelp);
+			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateShorcuts);
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateContent);
 			this.pnUtilityOperations.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.pnUtilityOperations.Location = new System.Drawing.Point(0, 0);
@@ -92,45 +92,18 @@
 			this.pnUtilityOperations.Size = new System.Drawing.Size(230, 483);
 			this.pnUtilityOperations.TabIndex = 21;
 			// 
-			// memoEditResult
+			// simpleButtonProcessDeadLinks
 			// 
-			this.memoEditResult.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.memoEditResult.Location = new System.Drawing.Point(0, 0);
-			this.memoEditResult.Name = "memoEditResult";
-			this.memoEditResult.Properties.AllowFocused = false;
-			this.memoEditResult.Properties.Appearance.BackColor = System.Drawing.Color.White;
-			this.memoEditResult.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.memoEditResult.Properties.Appearance.Options.UseBackColor = true;
-			this.memoEditResult.Properties.Appearance.Options.UseFont = true;
-			this.memoEditResult.Properties.ReadOnly = true;
-			this.memoEditResult.Size = new System.Drawing.Size(673, 483);
-			this.memoEditResult.TabIndex = 0;
-			// 
-			// simpleButtonUpdateContent
-			// 
-			this.simpleButtonUpdateContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.simpleButtonProcessDeadLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonUpdateContent.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonUpdateContent.Appearance.Options.UseFont = true;
-			this.simpleButtonUpdateContent.Location = new System.Drawing.Point(12, 13);
-			this.simpleButtonUpdateContent.Name = "simpleButtonUpdateContent";
-			this.simpleButtonUpdateContent.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonUpdateContent.TabIndex = 0;
-			this.simpleButtonUpdateContent.Text = "Update Data";
-			this.simpleButtonUpdateContent.Click += new System.EventHandler(this.simpleButtonUpdateContent_Click);
-			// 
-			// simpleButtonUpdateHelp
-			// 
-			this.simpleButtonUpdateHelp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonUpdateHelp.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonUpdateHelp.Appearance.Options.UseFont = true;
-			this.simpleButtonUpdateHelp.Location = new System.Drawing.Point(12, 88);
-			this.simpleButtonUpdateHelp.Name = "simpleButtonUpdateHelp";
-			this.simpleButtonUpdateHelp.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonUpdateHelp.TabIndex = 1;
-			this.simpleButtonUpdateHelp.Text = "Update Help";
-			this.simpleButtonUpdateHelp.Click += new System.EventHandler(this.simpleButtonUpdateHelp_Click);
+			this.simpleButtonProcessDeadLinks.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.simpleButtonProcessDeadLinks.Appearance.Options.UseFont = true;
+			this.simpleButtonProcessDeadLinks.Location = new System.Drawing.Point(12, 238);
+			this.simpleButtonProcessDeadLinks.Name = "simpleButtonProcessDeadLinks";
+			this.simpleButtonProcessDeadLinks.Size = new System.Drawing.Size(205, 41);
+			this.simpleButtonProcessDeadLinks.TabIndex = 3;
+			this.simpleButtonProcessDeadLinks.Text = "Dead Links Notifiers";
+			this.simpleButtonProcessDeadLinks.Click += new System.EventHandler(this.simpleButtonProcessDeadLinks_Click);
 			// 
 			// simpleButtonCleanExpiredEmails
 			// 
@@ -145,18 +118,45 @@
 			this.simpleButtonCleanExpiredEmails.Text = "Clean Expired Emails";
 			this.simpleButtonCleanExpiredEmails.Click += new System.EventHandler(this.simpleButtonCleanExpiredEmails_Click);
 			// 
-			// simpleButtonProcessDeadLinks
+			// simpleButtonUpdateShorcuts
 			// 
-			this.simpleButtonProcessDeadLinks.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+			this.simpleButtonUpdateShorcuts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.simpleButtonProcessDeadLinks.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.simpleButtonProcessDeadLinks.Appearance.Options.UseFont = true;
-			this.simpleButtonProcessDeadLinks.Location = new System.Drawing.Point(12, 238);
-			this.simpleButtonProcessDeadLinks.Name = "simpleButtonProcessDeadLinks";
-			this.simpleButtonProcessDeadLinks.Size = new System.Drawing.Size(205, 41);
-			this.simpleButtonProcessDeadLinks.TabIndex = 3;
-			this.simpleButtonProcessDeadLinks.Text = "Dead Links Notifiers";
-			this.simpleButtonProcessDeadLinks.Click += new System.EventHandler(this.simpleButtonProcessDeadLinks_Click);
+			this.simpleButtonUpdateShorcuts.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.simpleButtonUpdateShorcuts.Appearance.Options.UseFont = true;
+			this.simpleButtonUpdateShorcuts.Location = new System.Drawing.Point(12, 88);
+			this.simpleButtonUpdateShorcuts.Name = "simpleButtonUpdateShorcuts";
+			this.simpleButtonUpdateShorcuts.Size = new System.Drawing.Size(205, 41);
+			this.simpleButtonUpdateShorcuts.TabIndex = 1;
+			this.simpleButtonUpdateShorcuts.Text = "Update Shortcuts";
+			this.simpleButtonUpdateShorcuts.Click += new System.EventHandler(this.simpleButtonUpdateShorcuts_Click);
+			// 
+			// simpleButtonUpdateContent
+			// 
+			this.simpleButtonUpdateContent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.simpleButtonUpdateContent.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.simpleButtonUpdateContent.Appearance.Options.UseFont = true;
+			this.simpleButtonUpdateContent.Location = new System.Drawing.Point(12, 13);
+			this.simpleButtonUpdateContent.Name = "simpleButtonUpdateContent";
+			this.simpleButtonUpdateContent.Size = new System.Drawing.Size(205, 41);
+			this.simpleButtonUpdateContent.TabIndex = 0;
+			this.simpleButtonUpdateContent.Text = "Update Data";
+			this.simpleButtonUpdateContent.Click += new System.EventHandler(this.simpleButtonUpdateContent_Click);
+			// 
+			// memoEditResult
+			// 
+			this.memoEditResult.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.memoEditResult.Location = new System.Drawing.Point(0, 0);
+			this.memoEditResult.Name = "memoEditResult";
+			this.memoEditResult.Properties.AllowFocused = false;
+			this.memoEditResult.Properties.Appearance.BackColor = System.Drawing.Color.White;
+			this.memoEditResult.Properties.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.memoEditResult.Properties.Appearance.Options.UseBackColor = true;
+			this.memoEditResult.Properties.Appearance.Options.UseFont = true;
+			this.memoEditResult.Properties.ReadOnly = true;
+			this.memoEditResult.Size = new System.Drawing.Size(675, 483);
+			this.memoEditResult.TabIndex = 0;
 			// 
 			// UtilitiesManagerControl
 			// 
@@ -186,6 +186,6 @@
 		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateContent;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonProcessDeadLinks;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonCleanExpiredEmails;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateHelp;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateShorcuts;
     }
 }

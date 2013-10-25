@@ -46,7 +46,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Utilities
 				memoEditResult.EditValue = message.Replace("\n", "\r\n");
 		}
 
-		private void simpleButtonUpdateHelp_Click(object sender, EventArgs e)
+		private void simpleButtonUpdateShorcuts_Click(object sender, EventArgs e)
 		{
 			string message = string.Empty;
 			memoEditResult.EditValue = null;
@@ -54,9 +54,9 @@ namespace SalesDepot.SiteManager.PresentationClasses.Utilities
 			{
 				FormMain.Instance.ribbonControl.Enabled = false;
 				Enabled = false;
-				form.laProgress.Text = "Updating Help...";
+				form.laProgress.Text = "Updating Shortcuts...";
 				form.TopMost = true;
-				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.UpdateHelp(out message));
+				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.UpdateShortcuts(out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)

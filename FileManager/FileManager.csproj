@@ -584,7 +584,6 @@
     <EmbeddedResource Include="ToolForms\Settings\FormPaths.resx">
       <DependentUpon>FormPaths.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ToolForms\Settings\FormPages.resx">
       <DependentUpon>FormPages.cs</DependentUpon>
     </EmbeddedResource>
