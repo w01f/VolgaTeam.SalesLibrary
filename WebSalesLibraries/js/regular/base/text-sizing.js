@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function( $ ) {
     $.updateTextSpace = function(textSpace){
         if(textSpace==1){

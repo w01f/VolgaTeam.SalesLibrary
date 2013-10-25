@@ -264,10 +264,13 @@
 				}
 
 				$matchCondition = 'link.name,link.file_name,link.tags,link.content';
-				if ($onlyByName)
-					$matchCondition = 'link.name,link.file_name';
-				else if ($onlyByContent)
-					$matchCondition = 'link.content';
+				if (!($onlyByName && $onlyByContent))
+				{
+					if ($onlyByName)
+						$matchCondition = 'link.name,link.file_name';
+					else if ($onlyByContent)
+						$matchCondition = 'link.content';
+				}
 
 
 				if ($hideDuplicated)

@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function ($)
 {
     $.initCalendarView = function ()
@@ -18,7 +20,7 @@
             },
             success:function (msg)
             {
-                $('#content').html('<div>' + msg + '</div>');
+                $('#content').html(msg);
                 var content = $('#content');
                 $.buildCalendar(content);
             },

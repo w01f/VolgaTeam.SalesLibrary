@@ -1,5 +1,5 @@
 <?php
-	$version = '27.0';
+	$version = '36.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -22,7 +22,7 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/file-card.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/links-grid.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/help.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/shortcuts.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/calendar.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/favorites.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/link-rate.css?' . $version);
@@ -61,8 +61,9 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/wallbin.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/links-grid.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/search.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/help.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/search-processor.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/search-view.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/shortcuts.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/calendar.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
@@ -77,10 +78,10 @@
 				$tabParam[$key] = $row['position'];
 	}
 
-	$tabHelpRecords = HelpTabStorage::model()->findAll(array('order' => '`order`', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
-	if (isset($tabHelpRecords))
-		foreach ($tabHelpRecords as $tabHelpRecord)
-			$tabParam['help-tab-' . $tabHelpRecord->id] = $tabHelpRecord->order;
+	$tabShortcuts = ShortcutsTabStorage::model()->findAll(array('order' => '`order`', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
+	if (isset($tabShortcuts))
+		foreach ($tabShortcuts as $tabShortcutsRecord)
+			$tabParam['shortcuts-tab-' . $tabShortcutsRecord->id] = $tabShortcutsRecord->order;
 
 	asort($tabParam);
 
@@ -175,7 +176,8 @@
                             <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 								<?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
 							<?php endif; ?>
-                        </span> <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+                        </span>
+					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
 				</div>
 				<div class="ribbon-section">
 					<span class="section-title">SideBar</span>
@@ -237,7 +239,8 @@
                             <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 								<?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
 							<?php endif; ?>
-                        </span> <img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+                        </span>
+					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
 				</div>
 				<div class="ribbon-section">
 					<span class="section-title">SideBar</span>
@@ -286,7 +289,7 @@
 
 				<div class="ribbon-section">
 					<span class="section-title">Training</span>
-					<img src="<?php echo Yii::app()->baseUrl . '/images/calendar/ribbon_logo.png' ?>"/>
+					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . '/images/calendar/ribbon_logo.png' ?>"/>
 				</div>
 				<div class="ribbon-section">
 					<span class="section-title">Courses for Sales Reps</span>
@@ -334,7 +337,7 @@
 
 				<div class="ribbon-section">
 					<span class="section-title">Favorites</span>
-					<img src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
 				</div>
 				<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 					<div class="ribbon-section">
@@ -350,37 +353,36 @@
 			</div>
 		<?php endif; ?>
 	<?php
-	elseif (strpos($tabName, 'help-tab-') !== false): ?>
-		<?php $tabHelpRecord = HelpTabStorage::model()->findByPk(str_replace('help-tab-', '', $tabName)); ?>
-		<?php if (isset($tabHelpRecord)): ?>
-			<div class="ribbon-tab help-tab" id="help-tab-<?php echo $tabHelpRecord->id; ?>">
-				<span class="ribbon-title"><?php echo $tabHelpRecord->name; ?></span>
+	elseif (strpos($tabName, 'shortcuts-tab-') !== false): ?>
+		<?php $tabShortcutsRecord = ShortcutsTabStorage::model()->findByPk(str_replace('shortcuts-tab-', '', $tabName)); ?>
+		<?php if (isset($tabShortcutsRecord)): ?>
+			<div class="ribbon-tab shortcuts-tab" id="shortcuts-tab-<?php echo $tabShortcutsRecord->id; ?>">
+				<span class="ribbon-title"><?php echo $tabShortcutsRecord->name; ?></span>
 
 				<div class="ribbon-section">
-                        <span class="section-title">
-                            <?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
-								<?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
-							<?php endif; ?>
-                        </span> <img src="<?php echo Yii::app()->baseUrl . $tabHelpRecord->image_path; ?>"/>
+					<span class="section-title">
+						<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
+							<?php echo Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName; ?>
+						<?php endif; ?>
+					</span>
+					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>"/>
 				</div>
 				<?php
-					$pageHelpRecords = HelpPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabHelpRecord->id)));
+					$pageShortcuts = ShortcutsPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabShortcutsRecord->id)));
 					$selected = true;
 				?>
-				<?php if (isset($pageHelpRecords)): ?>
-					<?php foreach ($pageHelpRecords as $pageHelpRecord): ?>
-						<div class="ribbon-section <?php echo !$pageHelpRecord->enabled ? 'disabled' : ''; ?>">
-							<span class="section-title"><?php echo $pageHelpRecord->name; ?></span>
+				<?php foreach ($pageShortcuts as $pageShortcutsRecord): ?>
+					<div class="ribbon-section <?php echo !$pageShortcutsRecord->enabled ? 'disabled' : ''; ?>">
+						<span class="section-title"><?php echo $pageShortcutsRecord->name; ?></span>
 
-							<div class="ribbon-button ribbon-button-large <?php echo $pageHelpRecord->enabled && $selected ? 'sel' : ''; ?> <?php echo !$pageHelpRecord->enabled ? 'disabled' : 'enabled'; ?> help-page <? if (!$isMobile): ?>regular<? endif; ?>" id="<?php echo $pageHelpRecord->id; ?>">
-								<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>"/>
-								<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>"/>
-								<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . $pageHelpRecord->image_path; ?>"/>
-							</div>
+						<div class="ribbon-button ribbon-button-large <?php echo $pageShortcutsRecord->enabled && $selected ? 'sel' : ''; ?> <?php echo !$pageShortcutsRecord->enabled ? 'disabled' : 'enabled'; ?> shortcuts-page <? if (!$isMobile): ?>regular<? endif; ?>" id="<?php echo $pageShortcutsRecord->id; ?>">
+							<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . $pageShortcutsRecord->image_path . '?' . $pageShortcutsRecord->id; ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . $pageShortcutsRecord->image_path . '?' . $pageShortcutsRecord->id; ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . $pageShortcutsRecord->image_path . '?' . $pageShortcutsRecord->id; ?>"/>
 						</div>
-						<?php $selected = $pageHelpRecord->enabled ? false : $selected; ?>
-					<?php endforeach; ?>
-				<?php endif; ?>
+					</div>
+					<?php $selected = $pageShortcutsRecord->enabled ? false : $selected; ?>
+				<?php endforeach; ?>
 				<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 					<div class="ribbon-section">
 						<span class="section-title">Logout</span>

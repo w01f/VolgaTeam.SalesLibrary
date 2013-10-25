@@ -64,14 +64,17 @@
 				$dateFile = Yii::app()->request->getPost('dateFile');
 				$onlyFileCards = intval(Yii::app()->request->getPost('onlyFileCards'));
 				$isSort = intval(Yii::app()->request->getPost('isSort'));
-				if (isset(Yii::app()->request->cookies['selectedLibraryIds']->value))
-					$checkedLibraryIds = CJSON::decode(Yii::app()->request->cookies['selectedLibraryIds']->value);
+
+				$checkedLibraryIds = Yii::app()->request->getPost('libraries');
+				if (isset($checkedLibraryIds))
+					$checkedLibraryIds = CJSON::decode($checkedLibraryIds);
 				else
 					$checkedLibraryIds = array();
 
 				$superFilters = Yii::app()->request->getPost('superFilters');
 				if (isset($superFilters))
 					$superFilters = CJSON::decode($superFilters);
+
 				$categories = Yii::app()->request->getPost('categories');
 				if (isset($categories))
 					$categories = CJSON::decode($categories);

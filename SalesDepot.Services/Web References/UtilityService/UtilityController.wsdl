@@ -8,16 +8,16 @@
   <wsdl:message name="getSessionKeyResponse">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateContentRequest">
+  <wsdl:message name="updateWallbinRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateContentResponse">
+  <wsdl:message name="updateWallbinResponse">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateHelpRequest">
+  <wsdl:message name="updateShortcutsRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
-  <wsdl:message name="updateHelpResponse">
+  <wsdl:message name="updateShortcutsResponse">
     <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="cleanExpiredEmailsRequest">
@@ -39,17 +39,17 @@
       <wsdl:input message="tns:getSessionKeyRequest" />
       <wsdl:output message="tns:getSessionKeyResponse" />
     </wsdl:operation>
-    <wsdl:operation name="updateContent">
+    <wsdl:operation name="updateWallbin">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:updateContentRequest" />
-      <wsdl:output message="tns:updateContentResponse" />
+      <wsdl:input message="tns:updateWallbinRequest" />
+      <wsdl:output message="tns:updateWallbinResponse" />
     </wsdl:operation>
-    <wsdl:operation name="updateHelp">
+    <wsdl:operation name="updateShortcuts">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:updateHelpRequest" />
-      <wsdl:output message="tns:updateHelpResponse" />
+      <wsdl:input message="tns:updateShortcutsRequest" />
+      <wsdl:output message="tns:updateShortcutsResponse" />
     </wsdl:operation>
     <wsdl:operation name="cleanExpiredEmails">
       <wsdl:documentation>
@@ -75,8 +75,8 @@
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="updateContent">
-      <soap:operation soapAction="urn:UtilityControllerwsdl#updateContent" style="rpc" />
+    <wsdl:operation name="updateWallbin">
+      <soap:operation soapAction="urn:UtilityControllerwsdl#updateWallbin" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -84,8 +84,8 @@
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="updateHelp">
-      <soap:operation soapAction="urn:UtilityControllerwsdl#updateHelp" style="rpc" />
+    <wsdl:operation name="updateShortcuts">
+      <soap:operation soapAction="urn:UtilityControllerwsdl#updateShortcuts" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:UtilityControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

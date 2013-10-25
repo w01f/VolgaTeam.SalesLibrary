@@ -1,5 +1,5 @@
 <?php
-class HelpPageStorage extends CActiveRecord
+class ShortcutsTabStorage extends CActiveRecord
 {
     public static function model($className = __CLASS__)
     {
@@ -8,11 +8,13 @@ class HelpPageStorage extends CActiveRecord
 
     public function tableName()
     {
-        return '{{help_page}}';
+        return '{{shortcut_tab}}';
     }
 
     public static function clearData()
     {
+		ShortcutsLinkStorage::clearData();
+		ShortcutsPageStorage::clearData();
         self::model()->deleteAll();
     }
 

@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function ($)
 {
 	$.linkGrid = [];
@@ -96,25 +98,6 @@
 		{
 			mobileClickableLinks.off('click').on('click', previewLink);
 			mobileClickableLinks.hammer().on('doubletap', specialPreviewLink);
-//			mobileClickableLinks.off('touchstart').off('touchmove').off('touchend')
-//				.on('touchstart', function ()
-//				{
-//					isScrolling = false;
-//				})
-//				.on('touchmove', function ()
-//				{
-//					isScrolling = true;
-//				})
-//				.on('touchend', function (e)
-//				{
-//					if (isScrolling)
-//					{
-//						//previewLink.call($(this));
-//						e.stopPropagation();
-//						e.preventDefault();
-//					}
-//					return false;
-//				});
 		}
 
 		linkGridBody.find("td.details-button").off('click');

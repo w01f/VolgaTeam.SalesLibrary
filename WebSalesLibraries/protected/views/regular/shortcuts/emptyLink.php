@@ -1,0 +1,1 @@
+<div class="shortcuts-link empty"><img src="<? echo $link->imagePath ?>"></div>

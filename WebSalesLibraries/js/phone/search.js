@@ -434,6 +434,12 @@
 
 		var onlyFileCards = $('#search-only-filecards').is(':checked') ? 1 : 0;
 
+		var selectedLibraryIds = [];
+		$('.search-libraries-item:checked').each(function ()
+		{
+			selectedLibraryIds.push(this.id);
+		});
+
 		var superFilters = [];
 		$.each($(".super-filter-item:checked"), function ()
 		{
@@ -471,6 +477,7 @@
 				endDate: endDate,
 				dateFile: $('#search-date-file').attr("checked") == "checked",
 				onlyFileCards: onlyFileCards,
+				libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 				categories: categories.length > 0 ? $.toJSON(categories) : null,
 				categoriesExactMatch: false,

@@ -1,5 +1,5 @@
 <?php
-	class ContentUpdateAction extends CAction
+	class WallbinUpdateAction extends CAction
 	{
 		public function run()
 		{
@@ -43,7 +43,7 @@
 								$library->storageLink = $storageLink;
 								$library->logoPath = Yii::app()->params['librariesRoot'] . "/Graphics/" . $libraryFolder->getBasename() . "/no_logo.png";
 								$library->load();
-								$library->buildCache($this);
+								$library->buildCache($this->controller);
 								echo "HTML cache for " . $libraryName . " updated.\n";
 								unset($library);
 							}

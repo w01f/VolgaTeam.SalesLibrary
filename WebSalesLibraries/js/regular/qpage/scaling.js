@@ -10,8 +10,5 @@
 		content.css({
 			'height': height + 'px'
 		});
-		content.find('>div').css({
-			'height': height + 'px'
-		});
 	};
 })(jQuery);

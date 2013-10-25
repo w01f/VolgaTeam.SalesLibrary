@@ -8,7 +8,7 @@ return array(
         'application.models.*',
         'application.models.storage.*',
         'application.models.common.*',
-        'application.models.help.*',
+        'application.models.shortcuts.*',
         'application.models.wallbin.*',
 		'application.models.favorites.*',
 		'application.models.rate.*',

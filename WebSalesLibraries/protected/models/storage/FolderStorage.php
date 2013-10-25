@@ -100,9 +100,13 @@
 		public static function clearByIds($pageId, $folderIds)
 		{
 			if (isset($folderIds))
-				Yii::app()->db->createCommand()->delete('tbl_folder', "id_page = '" . $pageId . "' and id not in ('" . implode("','", $folderIds) . "')");
+				$folderRecords = self::model()->findAll("id_page = '" . $pageId . "' and id not in ('" . implode("','", $folderIds) . "')");
 			else
-				Yii::app()->db->createCommand()->delete('tbl_folder', "id_page = '" . $pageId . "'");
+				$folderRecords = self::model()->findAll("id_page = '" . $pageId . "'");
+			foreach ($folderRecords as $folderRecord)
+			{
+				LinkStorage::clearByIds($folderRecord->id, null);
+				$folderRecord->delete();
+			}
 		}
-
 	}

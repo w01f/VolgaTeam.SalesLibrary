@@ -1,13 +1,13 @@
 #content
 {
-	padding-left: 30px;
+	width: 100%;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 }
 
 #content>div
 {
-	width: 100%;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
+	padding-left: 30px;
 }
 
 #page-title

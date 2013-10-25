@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function ($)
 {
 	var storedTextSize = $.cookie("textSize");
@@ -95,11 +97,11 @@
 			},
 			success: function (msg)
 			{
-				container.html('<div class="wallbin-container">' + msg + '</div>').find('img').load(function ()
+				container.html('<div class="wallbin-content wallbin-container">' + msg + '</div>').find('img').load(function ()
 				{
 					$.updateContentAreaDimensions();
 				});
-				assignLinkEvents(container);
+				$.assignLinkEvents(container);
 			},
 			error: function ()
 			{
@@ -110,7 +112,7 @@
 		});
 	};
 
-	var assignLinkEvents = function (container)
+	$.assignLinkEvents = function (container)
 	{
 		$.updateTextSize(storedTextSize);
 		$.updateTextSpace(storedTextSpace);
@@ -248,7 +250,7 @@
 					{
 						folderLinkContent.html(msg);
 						$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
-						assignLinkEvents(folderLinkContent);
+						$.assignLinkEvents(folderLinkContent);
 						folderLinkContent.show("blind", {
 							direction: "vertical"
 						}, 500);
@@ -293,7 +295,7 @@
 			},
 			success: function (msg)
 			{
-				container.html('<div>' + msg + '</div>');
+				container.html('<div class="wallbin-content">' + msg + '</div>');
 				assignAccordionEvents(container);
 			},
 			error: function ()
@@ -351,7 +353,7 @@
 				{
 					folderLinks.html(msg);
 					$('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
-					assignLinkEvents(folderLinks);
+					$.assignLinkEvents(folderLinks);
 					folderLinks.show("blind", {
 						direction: "vertical"
 					}, 500);
@@ -389,7 +391,7 @@
 			},
 			success: function (msg)
 			{
-				container.html('<div class="wallbin-tabs">' + msg + '</div>');
+				container.html('<div class="wallbin-content wallbin-tabs">' + msg + '</div>');
 				var tabPages = container.find('.wallbin-tabs')
 				tabPages.tabs({
 					selected: $("#select-page")[0].selectedIndex,
@@ -423,7 +425,7 @@
 				if ($.cookie("wallbinView") == "accordion")
 					assignAccordionEvents(container);
 				else
-					assignLinkEvents(container);
+					$.assignLinkEvents(container);
 			},
 			error: function ()
 			{

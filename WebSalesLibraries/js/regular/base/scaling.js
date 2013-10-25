@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function ($)
 {
 	$.updateContentAreaDimensions = function ()
@@ -10,19 +12,20 @@
 		content.css({
 			'height': height + 'px'
 		});
-		content.find('>div').css({
-			'height': height + 'px'
-		});
 		updateWallbinTabs();
 		updateSearchArea();
 		updateFavoritesArea();
 		updateTicker();
+		updateShorcutsPage();
 	};
 
 	var updateWallbinTabs = function ()
 	{
 		var content = $('#content');
 		var height = content.height();
+		content.find('>div.wallbin-content').css({
+			'height': height + 'px'
+		});
 		var tabPanelHeight = 0;
 		var tabPanel = content.find('.ui-tabs-nav');
 		if (tabPanel.length > 0)
@@ -54,9 +57,6 @@
 		$('#right-navbar').find('> div').css({
 			'height': height + 'px'
 		});
-		$('#search-result').find('> div').css({
-			'height': height + 'px'
-		});
 		$('#categories-container').css({
 			'height': (height - 198) + 'px'
 		});
@@ -73,10 +73,14 @@
 	var updateLinksGrid = function ()
 	{
 		var searchResult = $('#search-result');
-
+		var height = $('#search-container').parent().height();
+		searchResult.find('> div').css({
+			'height': height + 'px'
+		});
 		var gridHeader = $('#links-grid-header');
+		var serchResultBar = searchResult.find('.search-grid-info');
 		$('#links-grid-body-container').css({
-			'height': (searchResult.find('> div').height() - (searchResult.find('.search-grid-info').height() + 12) - gridHeader.height()) + 'px'
+			'height': (searchResult.find('> div').height() - (serchResultBar.length > 0 ? (serchResultBar.height() + 12) : 0) - gridHeader.height()) + 'px'
 		});
 
 		var linkDateWidth = 100;
@@ -132,6 +136,15 @@
 		});
 		$('.mt-news').css({
 			'width': newsWidth + 'px'
+		});
+	};
+
+	var updateShorcutsPage = function ()
+	{
+		var content = $('#content');
+		var height = content.height();
+		content.find('.shortcuts-page-content').css({
+			'height': (height - content.find('.shortcuts-home-bar img').height() - 20) + 'px'
 		});
 	}
 })(jQuery);

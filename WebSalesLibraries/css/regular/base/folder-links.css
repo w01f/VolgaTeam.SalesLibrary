@@ -51,6 +51,7 @@
 .widget {
     padding-left: 32px;
     background: no-repeat 0 0;
+	line-height: 20px;
 }
 
 .view-dilog-content{

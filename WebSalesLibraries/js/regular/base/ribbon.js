@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function ($)
 {
 	$.fn.ribbon = function (id)
@@ -83,19 +85,22 @@
 				tabNames[index] = id;
 
 				var title = $(this).find('.ribbon-title');
+				var logo = $(this).find('.ribbon-tab-logo');
 				var isBackstage = $(this).hasClass('file');
 				header.append('<div id="ribbon-tab-header-' + index + '" class="ribbon-tab-header"></div>');
 				var thisTabHeader = header.find('#ribbon-tab-header-' + index);
 				thisTabHeader.append(title);
+				var tabClickHandler = undefined;
 				if (isBackstage)
 				{
 					thisTabHeader.addClass('file');
-
-					thisTabHeader.click(function ()
+					tabClickHandler = function ()
 					{
 						that.switchToTabByIndex(index, id);
 						that.goToBackstage();
-					});
+					};
+					thisTabHeader.click(tabClickHandler);
+					logo.click(tabClickHandler);
 				}
 				else
 				{
@@ -105,12 +110,13 @@
 						that.selectedTabId = id;
 						thisTabHeader.addClass('sel');
 					}
-
-					thisTabHeader.click(function ()
+					tabClickHandler = function ()
 					{
 						that.returnFromBackstage();
 						that.switchToTabByIndex(index, id);
-					});
+					};
+					thisTabHeader.click(tabClickHandler);
+					logo.click(tabClickHandler);
 				}
 
 				$(this).hide();
@@ -226,8 +232,8 @@
 					minibar.css({
 						'height': '0px'
 					});
-					if (id != null && id.indexOf("help-tab-") >= 0)
-						$.initHelpView(id);
+					if (id != null && id.indexOf("shortcuts-tab-") >= 0)
+						$.initShortcutsView(id);
 					else
 						$.initWallbinView();
 					break;

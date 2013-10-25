@@ -45,14 +45,14 @@
 		 * @return string Command result
 		 * @soap
 		 */
-		public function updateContent($sessionKey)
+		public function updateWallbin($sessionKey)
 		{
 			$result = 'Error';
 			if ($this->authenticateBySession($sessionKey))
 			{
 				ob_start();
 
-				$action = Yii::createComponent('application.components.actions.ContentUpdateAction', $this, 'updateContent');
+				$action = Yii::createComponent('application.components.actions.WallbinUpdateAction', $this, 'updateWallbin');
 				$action->run();
 
 				$result = ob_get_contents();
@@ -66,14 +66,14 @@
 		 * @return string Command result
 		 * @soap
 		 */
-		public function updateHelp($sessionKey)
+		public function updateShortcuts($sessionKey)
 		{
 			$result = 'Error';
 			if ($this->authenticateBySession($sessionKey))
 			{
 				ob_start();
 
-				$action = Yii::createComponent('application.components.actions.HelpUpdateAction', $this, 'updateHelp');
+				$action = Yii::createComponent('application.components.actions.ShortcutsUpdateAction', $this, 'updateHelp');
 				$action->run();
 
 				$result = ob_get_contents();

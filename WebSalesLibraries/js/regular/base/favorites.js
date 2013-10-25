@@ -1,3 +1,5 @@
+window.salesDepot = window.salesDepot || { };
+
 (function ($)
 {
 	$.initFavoritesView = function ()
@@ -16,7 +18,7 @@
 			},
 			success:function (msg)
 			{
-				$('#content').html('<div>' + msg + '</div>');
+				$('#content').html(msg);
 				loadFolders(null);
 			},
 			async:true,
@@ -173,7 +175,7 @@
 						},
 						success:function (msg)
 						{
-							$('#content').html('<div>' + msg + '</div>');
+							$('#content').html(msg);
 							loadFolders(folderId);
 						},
 						error:function ()

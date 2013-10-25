@@ -1,3 +1,4 @@
+window.salesDepot = window.salesDepot || { };
 (function( $ ) {
     $.showOverlay = function(){
         $('#content-overlay').css({

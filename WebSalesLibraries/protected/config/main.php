@@ -7,7 +7,7 @@
 		'import' => array(
 			'application.models.*',
 			'application.models.storage.*',
-			'application.models.help.*',
+			'application.models.shortcuts.*',
 			'application.models.common.*',
 			'application.models.wallbin.*',
 			'application.models.favorites.*',
@@ -38,6 +38,8 @@
 					'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 					'qpage/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
 					'site/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+					'shortcuts/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+					'shortcuts/site/<action:\w+>' => 'site/<action>',
 				)
 			),
 			'log' => array(

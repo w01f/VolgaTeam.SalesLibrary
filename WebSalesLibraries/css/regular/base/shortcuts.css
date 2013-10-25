@@ -1,0 +1,51 @@
+.shortcuts-home-bar
+{
+	width: 100%;
+}
+
+.shortcuts-home-bar td.logo-container
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.shortcuts-home-bar td.title-container
+{
+	width: 1px;
+	white-space: nowrap;
+}
+
+.shortcuts-page-content
+{
+	width: 100%;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.shortcuts-links.grid
+{
+	display: inline-block;
+}
+
+.shortcuts-links li
+{
+	list-style: none;
+	float: left;
+	padding: 12px;
+	list-style: none;
+}
+
+.shortcuts-links img
+{
+	cursor: pointer;
+}
+
+.shortcuts-links .empty img
+{
+	cursor: default;
+}
+
+.shortcuts-links .service-data, .shortcut-title
+{
+	display: none;
+}

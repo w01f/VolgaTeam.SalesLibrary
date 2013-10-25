@@ -68,12 +68,17 @@ class LibraryPageStorage extends CActiveRecord
         LibraryPageStorage::model()->deleteAll('id_library=?', array($libraryId));
     }
 
-    public static function clearByIds($libraryId, $pageIds)
-    {
-		if(isset($pageIds))
-        	Yii::app()->db->createCommand()->delete('tbl_page', "id_library = '" . $libraryId . "' and id not in ('" . implode("','", $pageIds) . "')");
+	public static function clearByIds($libraryId, $pageIds)
+	{
+		if (isset($pageIds))
+			$pageRecords = self::model()->findAll("id_library = '" . $libraryId . "' and id not in ('" . implode("','", $pageIds) . "')");
 		else
-			Yii::app()->db->createCommand()->delete('tbl_page', "id_library = '" . $libraryId . "'");
-    }
+			$pageRecords = self::model()->findAll("id_library = '" . $libraryId . "'");
+		foreach ($pageRecords as $pageRecord)
+		{
+			FolderStorage::clearByIds($pageRecord->id, null);
+			$pageRecord->delete();
+		}
+	}
 
 }
