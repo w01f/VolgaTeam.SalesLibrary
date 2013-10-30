@@ -36,4 +36,4 @@
 		</table>
 	</div>
 <?php endif; ?>
-<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/linksGrid.php', array('links' => isset($links) ? $links : null, 'showSuperFilter' => SuperFilterStorage::model()->count() > 0), true); ?>
+<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/linksGrid.php', array('links' => isset($links) ? $links : null, 'datasetKey' => isset($searchInfo) ? $searchInfo['datasetKey'] : null), true); ?>

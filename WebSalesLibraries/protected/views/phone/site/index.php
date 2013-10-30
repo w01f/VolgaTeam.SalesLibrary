@@ -1,5 +1,5 @@
 <?php
-$version = '12.0';
+$version = '13.0';
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('cookie');
@@ -480,11 +480,11 @@ $logos = QPageStorage::getPageLogoList();
 							</td>
 							<td id="search-result-sort-column-container" class="on-center">
 								<select name="search-result-sort-column" id="search-result-sort-column" data-mini="true">
-									<option value="link-name" selected>By Name</option>
-									<option value="link-type">By Type</option>
-									<option value="link-date">By Date</option>
+									<option value="name" selected>By Name</option>
+									<option value="file_type">By Type</option>
+									<option value="date_modify">By Date</option>
 									<option value="library">By Library</option>
-									<option value="link-tag">By Tag</option>
+									<option value="tag">By Tag</option>
 								</select>
 							</td>
 							<td id="search-result-sort-order-container" class="on-right">
@@ -493,6 +493,7 @@ $logos = QPageStorage::getPageLogoList();
 									<option value="desc">Desc</option>
 								</select>
 							</td>
+							<td class="dataset-key"></td>
 						</tr>
 					</table>
 				</h4>

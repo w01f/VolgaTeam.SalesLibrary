@@ -1,33 +1,42 @@
-table.layout-group { 
-    width: 100%;
+table.layout-group
+{
+	width: 100%;
 }
 
 #search-match-selector td
 {
-    padding-right: 10%;
-    padding-left: 10%;
+	padding-right: 10%;
+	padding-left: 10%;
 }
 
-table.layout-group td{ 
-    vertical-align: middle;
-    height: 25px;
+table.layout-group td
+{
+	vertical-align: middle;
+	height: 25px;
 }
 
-table.layout-group td.on-left{ 
-    text-align: left;
+table.layout-group td.on-left
+{
+	text-align: left;
 }
 
-table.layout-group td.on-right{ 
-    text-align: right;
+table.layout-group td.on-right
+{
+	text-align: right;
 }
 
-table.layout-group td.on-center{ 
-    text-align: center;
+table.layout-group td.on-center
+{
+	text-align: center;
 }
 
 .layout-group-title
 {
-    white-space:normal;
-    word-wrap: break-word;
+	white-space: normal;
+	word-wrap: break-word;
 }
 
+.dataset-key
+{
+	display: none;
+}

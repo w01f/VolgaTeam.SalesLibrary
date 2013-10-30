@@ -2,33 +2,34 @@ window.salesDepot = window.salesDepot || { };
 
 (function ($)
 {
+	var favoritesGrid = null;
 	$.initFavoritesView = function ()
 	{
 		$.ajax({
-			type:"POST",
-			url:"favorites/getFavoritesView",
-			beforeSend:function ()
+			type: "POST",
+			url: "favorites/getFavoritesView",
+			beforeSend: function ()
 			{
 				$('#content').html('');
 				$.showOverlay();
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.hideOverlay();
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#content').html(msg);
 				loadFolders(null);
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	var loadFolders = function (selectedFolderId)
 	{
-		getFolderLinks(selectedFolderId, 0);
+		getFolderLinks(selectedFolderId, 0, favoritesGrid.sortColumn, favoritesGrid.sortDirection);
 		var foldersPanel = $('#favorites-panel-folders');
 		foldersPanel.find('li')
 			.on('click', function (event)
@@ -70,37 +71,37 @@ window.salesDepot = window.salesDepot || { };
 			var folderId = $(this).parent().parent().children('.service-data').children('.folder-id').html();
 			$('body').append('<div id="delete-folder-warning" title="Delete Folder">Are you SURE you want to delete this folder and its contents?</div>');
 			$("#delete-folder-warning").dialog({
-				resizable:false,
-				modal:true,
-				buttons:{
-					"Yes":function ()
+				resizable: false,
+				modal: true,
+				buttons: {
+					"Yes": function ()
 					{
 						$(this).dialog("close");
 						$.ajax({
-							type:"POST",
-							url:"favorites/deleteFolder",
-							data:{
-								folderId:folderId
+							type: "POST",
+							url: "favorites/deleteFolder",
+							data: {
+								folderId: folderId
 							},
-							beforeSend:function ()
+							beforeSend: function ()
 							{
 								$.showOverlayLight();
 							},
-							complete:function ()
+							complete: function ()
 							{
 								$.hideOverlayLight();
 								$.initFavoritesView();
 							},
-							async:true,
-							dataType:'html'
+							async: true,
+							dataType: 'html'
 						});
 					},
-					"No":function ()
+					"No": function ()
 					{
 						$(this).dialog("close");
 					}
 				},
-				close:function (event, ui)
+				close: function (event, ui)
 				{
 					$("#delete-folder-warning").remove();
 				}
@@ -111,21 +112,21 @@ window.salesDepot = window.salesDepot || { };
 
 
 		foldersPanel.find('.draggable-folder').draggable({
-				delay:300,
-				revert:"invalid",
-				helper:function (event)
+				delay: 300,
+				revert: "invalid",
+				helper: function (event)
 				{
 					var folderId = $(this).parent().children('.service-data').children('.folder-id').html();
 					return  $('<i id="' + folderId + '" class="icon-folder-close"></i>');
 				},
-				cursorAt:{ left:1, top:1 }
+				cursorAt: { left: 1, top: 1 }
 			}
 		);
 		foldersPanel.find('.droppable').droppable({
-			greedy:true,
-			accept:".draggable-folder, .draggable-link",
-			hoverClass:"droppable-hover",
-			drop:function (event, ui)
+			greedy: true,
+			accept: ".draggable-folder, .draggable-link",
+			hoverClass: "droppable-hover",
+			drop: function (event, ui)
 			{
 				var parentFolder = $(this).parent();
 				var parentId = parentFolder.children('.service-data').children('.folder-id').html();
@@ -134,55 +135,55 @@ window.salesDepot = window.salesDepot || { };
 					var linkId = ui.helper.attr('id');
 					var oldParentId = $('#favorites-panel-folders').find('li a.opened').parent().children('.service-data').children('.folder-id').html();
 					$.ajax({
-						type:"POST",
-						url:"favorites/putLinkToFolder",
-						data:{
-							newfolderId:parentId,
-							oldfolderId:oldParentId,
-							linkId:linkId
+						type: "POST",
+						url: "favorites/putLinkToFolder",
+						data: {
+							newfolderId: parentId,
+							oldfolderId: oldParentId,
+							linkId: linkId
 						},
-						beforeSend:function ()
+						beforeSend: function ()
 						{
 							$.showOverlayLight();
 						},
-						complete:function ()
+						complete: function ()
 						{
 							$.hideOverlayLight();
 							openFolder(parentFolder);
 						},
-						async:true,
-						dataType:'html'
+						async: true,
+						dataType: 'html'
 					});
 				}
 				else if (ui.helper.hasClass('icon-folder-close'))
 				{
 					var folderId = ui.helper.attr('id');
 					$.ajax({
-						type:"POST",
-						url:"favorites/putFolderToFolder",
-						data:{
-							folderId:folderId,
-							parentId:parentId
+						type: "POST",
+						url: "favorites/putFolderToFolder",
+						data: {
+							folderId: folderId,
+							parentId: parentId
 						},
-						beforeSend:function ()
+						beforeSend: function ()
 						{
 							$.showOverlayLight();
 							$('#content').html('');
 						},
-						complete:function ()
+						complete: function ()
 						{
 							$.hideOverlayLight();
 						},
-						success:function (msg)
+						success: function (msg)
 						{
 							$('#content').html(msg);
 							loadFolders(folderId);
 						},
-						error:function ()
+						error: function ()
 						{
 						},
-						async:true,
-						dataType:'html'
+						async: true,
+						dataType: 'html'
 					});
 				}
 			}
@@ -198,34 +199,39 @@ window.salesDepot = window.salesDepot || { };
 		listItem.children('a').addClass('opened');
 		listItem.children('a').children('.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
 		var folderId = listItem.children('.service-data').children('.folder-id').html();
-		getFolderLinks(folderId, 0);
+		getFolderLinks(folderId, 0, favoritesGrid.sortColumn, favoritesGrid.sortDirection);
 	};
 
-	var getFolderLinks = function (folderId, isSort)
+	var getFolderLinks = function (folderId, isSort, sortColumn, sortDirection)
 	{
 		$.ajax({
-			type:"POST",
-			url:"favorites/getLinks",
-			data:{
-				folderId:folderId,
-				isSort:isSort
+			type: "POST",
+			url: "favorites/getLinks",
+			data: {
+				folderId: folderId,
+				isSort: isSort,
+				sortColumn: sortColumn,
+				sortDirection: sortDirection
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$.showOverlayLight();
 			},
-			complete:function ()
+			complete: function ()
 			{
+				var favoriteLinksPanel = $('#favorites-panel-links');
 				$.hideOverlayLight();
-				$.linkGrid.refreshData = function ()
-				{
-					getFolderLinks(folderId, 1);
-				};
-				$.linkGrid.showDelete = true;
-				$.linkGrid.init();
+				favoritesGrid.init({
+					content: favoriteLinksPanel,
+					refreshCallback: function ()
+					{
+						getFolderLinks(folderId, 1, favoritesGrid.sortColumn, favoritesGrid.sortDirection);
+					},
+					showDelete: true
+				});
 				$.updateContentAreaDimensions();
 
-				var linkGridBody = $("#links-grid-body");
+				var linkGridBody = favoriteLinksPanel.find(".links-grid-body");
 				linkGridBody.find(".delete-link").off('click').on('click', function (e)
 				{
 					e.stopPropagation();
@@ -253,16 +259,16 @@ window.salesDepot = window.salesDepot || { };
 						return false;
 					});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				$('#favorites-panel-links').find('>div').html('').append(msg);
 			},
-			error:function ()
+			error: function ()
 			{
 				$('#favorites-panel-links').find('>div').html('');
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -270,38 +276,38 @@ window.salesDepot = window.salesDepot || { };
 	{
 		$('body').append('<div id="delete-link-warning" title="Delete Link">Are you sure want to delete this link?</div>');
 		$("#delete-link-warning").dialog({
-			resizable:false,
-			modal:true,
-			buttons:{
-				"Yes":function ()
+			resizable: false,
+			modal: true,
+			buttons: {
+				"Yes": function ()
 				{
 					$(this).dialog("close");
 					$.ajax({
-						type:"POST",
-						url:"favorites/deleteLink",
-						data:{
-							linkId:linkId,
-							folderId:folderId
+						type: "POST",
+						url: "favorites/deleteLink",
+						data: {
+							linkId: linkId,
+							folderId: folderId
 						},
-						beforeSend:function ()
+						beforeSend: function ()
 						{
 							$.showOverlayLight();
 						},
-						complete:function ()
+						complete: function ()
 						{
 							$.hideOverlayLight();
-							getFolderLinks(folderId, 0);
+							getFolderLinks(folderId, 0, favoritesGrid.sortColumn, favoritesGrid.sortDirection);
 						},
-						async:true,
-						dataType:'html'
+						async: true,
+						dataType: 'html'
 					});
 				},
-				"No":function ()
+				"No": function ()
 				{
 					$(this).dialog("close");
 				}
 			},
-			close:function (event, ui)
+			close: function (event, ui)
 			{
 				$('body').remove("#delete-link-warning");
 			}
@@ -310,5 +316,6 @@ window.salesDepot = window.salesDepot || { };
 
 	$(document).ready(function ()
 	{
+		favoritesGrid = new $.LinkGrid();
 	});
 })(jQuery);

@@ -1,3 +1,6 @@
+<? if (isset($searchInfo)): ?>
+	<div class="dataset-key"><? echo $searchInfo['datasetKey']; ?></div>
+<?php endif; ?>
 <?php if (isset($links)): ?>
 	<?php foreach ($links as $link): ?>
 		<li>

@@ -109,6 +109,9 @@ window.salesDepot = window.salesDepot || { };
 		var searchConditions = content.find('#search-conditions');
 		var hideResults = searchConditions.find('.hide-results').length > 0;
 		var shortcutTitle = content.find('.shortcut-title').html();
+		var sortColumn = content.find('.sort-column').html();
+		var sortDirection = content.find('.sort-direction').html();
+		var searchGrid = new $.LinkGrid();
 		var getSearchResult = function (isSort)
 		{
 			var searchCondition = (function ()
@@ -169,8 +172,11 @@ window.salesDepot = window.salesDepot || { };
 					categories.push(category);
 				});
 
+				var onlyWithCategories = searchConditions.find('.only-with-categories').html();
 				var onlyByName = searchConditions.find('.search-by-name').html();
 				var onlyByContent = searchConditions.find('.search-by-content').html();
+
+				var datasetKey = isSort == 0 || searchGrid.datasetKey == null ? undefined : searchGrid.datasetKey;
 
 				return {
 					fileTypes: selectedFileTypes,
@@ -183,10 +189,13 @@ window.salesDepot = window.salesDepot || { };
 					superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 					categories: categories.length > 0 ? $.toJSON(categories) : null,
 					categoriesExactMatch: false,
+					onlyWithCategories: onlyWithCategories,
 					hideDuplicated: searchConditions.find('.hide-duplicated').html(),
 					onlyByName: onlyByName,
 					onlyByContent: onlyByContent,
-					isSort: isSort
+					sortColumn: searchGrid.sortColumn != undefined && searchGrid.sortColumn != null ? searchGrid.sortColumn : sortColumn,
+					sortDirection: searchGrid.sortDirection != undefined && searchGrid.sortDirection != null ? searchGrid.sortDirection : sortDirection,
+					datasetKey: datasetKey
 				};
 			}());
 
@@ -198,12 +207,16 @@ window.salesDepot = window.salesDepot || { };
 			var completeCallback = function ()
 			{
 				$.updateContentAreaDimensions();
-				$.linkGrid.refreshData = function ()
-				{
-					getSearchResult(1);
-				};
-				$.linkGrid.showDelete = false;
-				$.linkGrid.init();
+				searchGrid.init({
+					content: content,
+					refreshCallback: function ()
+					{
+						getSearchResult(1);
+					},
+					sortColumn: isSort == 1 ? null : sortColumn,
+					sortDirection: isSort == 1 ? null : sortDirection,
+					showDelete: false
+				});
 				$.hideOverlayLight();
 			};
 
@@ -227,7 +240,7 @@ window.salesDepot = window.salesDepot || { };
 					resultsBar.off('click').on('click', function ()
 					{
 						var linkIds = [];
-						$.each($("#links-grid-body").find('.link-id-column'), function ()
+						$.each(content.find(".links-grid-body").find('.link-id-column'), function ()
 						{
 							linkIds.push($(this).html());
 						});

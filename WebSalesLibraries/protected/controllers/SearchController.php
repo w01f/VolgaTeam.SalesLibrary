@@ -63,7 +63,10 @@
 				$endDate = Yii::app()->request->getPost('endDate');
 				$dateFile = Yii::app()->request->getPost('dateFile');
 				$onlyFileCards = intval(Yii::app()->request->getPost('onlyFileCards'));
-				$isSort = intval(Yii::app()->request->getPost('isSort'));
+				$onlyWithCategories = filter_var(trim(Yii::app()->request->getPost('onlyWithCategories')), FILTER_VALIDATE_BOOLEAN);
+				$sortColumn = Yii::app()->request->getPost('sortColumn');
+				$sortDirection = Yii::app()->request->getPost('sortDirection');
+				$datasetKey = Yii::app()->request->getPost('datasetKey');
 
 				$checkedLibraryIds = Yii::app()->request->getPost('libraries');
 				if (isset($checkedLibraryIds))
@@ -100,12 +103,16 @@
 				else
 					$onlyByContent = false;
 
-				if (isset($fileTypes) && isset($condition) && isset($isSort))
-					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $hideDuplicated, $onlyByName, $onlyByContent, $isSort);
+				if (!isset($datasetKey))
+					$datasetKey = uniqid();
+
+				if (isset($fileTypes) && isset($condition) && isset($datasetKey))
+					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection);
 
 				if (!isset($links))
 					$links = null;
 
+				$searchInfo['datasetKey'] = $datasetKey;
 				if (isset($links))
 					$searchInfo['count'] = 'Records: ' . count($links);
 				else

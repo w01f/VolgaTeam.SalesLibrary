@@ -58,6 +58,7 @@
 				),
 				'search_options' => array(
 					'hide_duplicate' => true,
+					'hide_date_options' => false,
 				),
 				'tooltips' => array(
 					'wallbin' => array(

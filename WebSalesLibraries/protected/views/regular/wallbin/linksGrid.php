@@ -1,11 +1,11 @@
-<? if (!isset($showSuperFilter)) $showSuperFilter = false; ?>
-<table id="links-grid-header">
+<? if (isset($datasetKey)): ?>
+	<div class="dataset-key"><? echo $datasetKey; ?></div>
+<? endif; ?>
+<table class="links-grid-header">
 	<tr>
 		<td class="link-id-column"><span>Id</span></td>
 		<td class="details-button"><span></span></td>
-		<?if ($showSuperFilter): ?>
-			<td class="link-tag-column"><span>Tag</span></td>
-		<? endif;?>
+		<td class="link-tag-column"><span>Tag</span></td>
 		<td class="library-column"><span><?php echo Yii::app()->params['stations']['column_name']; ?></span></td>
 		<td class="link-type-column"><span>Type</span></td>
 		<td class="link-name-column"><span>Link</span></td>
@@ -13,8 +13,8 @@
 		<td class="link-date-column"><span>Date</span></td>
 	</tr>
 </table>
-<div id="links-grid-body-container">
-	<table id="links-grid-body">
+<div class="links-grid-body-container">
+	<table class="links-grid-body">
 		<?php if (isset($links)): ?>
 			<?php
 			if (Yii::app()->browser->isMobile())
@@ -28,15 +28,13 @@
 					<td class="link-id-column"><?php echo $link['id']; ?></td>
 
 					<?php
-					$detailsButtonClass = 'details-button';
-					if (isset($link['hasDetails']) && $link['hasDetails'])
-						$detailsButtonClass .= $clickClass . ' collapsed';
+						$detailsButtonClass = 'details-button';
+						if (isset($link['hasDetails']) && $link['hasDetails'])
+							$detailsButtonClass .= $clickClass . ' collapsed';
 					?>
 					<td class="<?php echo $detailsButtonClass; ?>"></td>
 
-					<?if ($showSuperFilter): ?>
-						<td class="link-tag-column"><?php echo $link['tag']; ?></td>
-					<? endif;?>
+					<td class="link-tag-column"><?php echo $link['tag']; ?></td>
 
 					<td class="library-column"><?php echo $link['library']; ?></td>
 

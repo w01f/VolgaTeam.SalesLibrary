@@ -2,6 +2,7 @@ window.salesDepot = window.salesDepot || { };
 
 (function ($)
 {
+	var searchGrid = null;
 	var getSearchResult = function (isSort)
 	{
 		var searchCondition = (function ()
@@ -80,6 +81,8 @@ window.salesDepot = window.salesDepot || { };
 					onlyByContent = true;
 			}
 
+			var datasetKey = isSort == 0 || searchGrid.datasetKey == null ? undefined : searchGrid.datasetKey;
+
 			//Save search state to recover while tabs are switching
 			$.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId"), true, {
 				expires: (60 * 60 * 24 * 7)
@@ -109,10 +112,13 @@ window.salesDepot = window.salesDepot || { };
 				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 				categories: categories.length > 0 ? $.toJSON(categories) : null,
 				categoriesExactMatch: false,
+				onlyWithCategories: false,
 				hideDuplicated: $('#hide-duplicated').hasClass('active'),
 				onlyByName: onlyByName,
 				onlyByContent: onlyByContent,
-				isSort: isSort
+				sortColumn: searchGrid.sortColumn,
+				sortDirection: searchGrid.sortDirection,
+				datasetKey: datasetKey
 			};
 		}());
 
@@ -124,12 +130,14 @@ window.salesDepot = window.salesDepot || { };
 		var completeCallback = function ()
 		{
 			$.updateContentAreaDimensions();
-			$.linkGrid.refreshData = function ()
-			{
-				getSearchResult(1);
-			};
-			$.linkGrid.showDelete = false;
-			$.linkGrid.init();
+			searchGrid.init({
+				content: $('#search-result'),
+				refreshCallback: function ()
+				{
+					getSearchResult(1);
+				},
+				showDelete: false
+			});
 			$.hideOverlayLight();
 		};
 
@@ -140,7 +148,7 @@ window.salesDepot = window.salesDepot || { };
 			searchResult.find('.search-grid-info.has-result').off('click').on('click', function ()
 			{
 				var linkIds = [];
-				$.each($("#links-grid-body").find('.link-id-column'), function ()
+				$.each(searchResult.find('.links-grid-body').find('.link-id-column'), function ()
 				{
 					linkIds.push($(this).html());
 				});
@@ -184,8 +192,8 @@ window.salesDepot = window.salesDepot || { };
 				sideBar.show("slide", { direction: "right" });
 				sideBarVisible = true;
 			}
-			if ($("#links-grid-body").find('tr').length > 0)
-				$.linkGrid.refreshData();
+			if (searchGrid.hasData)
+				searchGrid.refreshData();
 			else
 				$.updateContentAreaDimensions();
 			$.cookie("sideBarVisible", sideBarVisible, {
@@ -625,12 +633,14 @@ window.salesDepot = window.salesDepot || { };
 
 				$.hideOverlayLight();
 				$.updateContentAreaDimensions();
-				$.linkGrid.refreshData = function ()
-				{
-					getSearchResult(1);
-				};
-				$.linkGrid.showDelete = false;
-				$.linkGrid.init();
+				searchGrid.init({
+					content: $('#search-result'),
+					refreshCallback: function ()
+					{
+						getSearchResult(1);
+					},
+					showDelete: false
+				});
 			};
 
 			var successCallback = function (msg)
@@ -656,12 +666,14 @@ window.salesDepot = window.salesDepot || { };
 				$.hideOverlay();
 				initControlPanel();
 				$.updateContentAreaDimensions();
-				$.linkGrid.refreshData = function ()
-				{
-					getSearchResult(1);
-				};
-				$.linkGrid.showDelete = false;
-				$.linkGrid.init();
+				searchGrid.init({
+					content: $('#search-result'),
+					refreshCallback: function ()
+					{
+						getSearchResult(1);
+					},
+					showDelete: false
+				});
 				if ($.cookie("recoverSearchState" + $.cookie("selectedRibbonTabId")) == "true")
 					getSearchResult(1);
 			},
@@ -677,4 +689,8 @@ window.salesDepot = window.salesDepot || { };
 			dataType: 'html'
 		});
 	};
+	$(document).ready(function ()
+	{
+		searchGrid = new $.LinkGrid();
+	});
 })(jQuery);

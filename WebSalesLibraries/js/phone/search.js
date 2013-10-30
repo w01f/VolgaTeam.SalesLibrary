@@ -215,7 +215,8 @@
 			updateDateRange();
 		});
 
-		searchDateContainer.find('input[type="radio"]').checkboxradio();
+		$("#search-date-file").checkboxradio();
+		$("#search-date-link").checkboxradio();
 		if ($.cookie("conditionDateByFile") != null)
 		{
 			if ($.cookie("conditionDateByFile") == "true")
@@ -379,22 +380,22 @@
 
 	var initSearchSortSelectors = function ()
 	{
-		$.cookie("sortColumn", 'link-name', {
+		$.cookie("sortColumnMobile", 'link-name', {
 			expires: (60 * 60 * 24 * 7)
 		});
 		$('#search-result-sort-column').on('change', function ()
 		{
-			$.cookie("sortColumn", $('#search-result-sort-column').find(':selected').val(), {
+			$.cookie("sortColumnMobile", $('#search-result-sort-column').find(':selected').val(), {
 				expires: (60 * 60 * 24 * 7)
 			});
 			runSearch(1);
 		});
-		$.cookie("sortDirection", 'asc', {
+		$.cookie("sortDirectionMobile", 'asc', {
 			expires: (60 * 60 * 24 * 7)
 		});
 		$('#search-result-sort-order').on('change', function ()
 		{
-			$.cookie("sortDirection", $('#search-result-sort-order').find(':selected').val(), {
+			$.cookie("sortDirectionMobile", $('#search-result-sort-order').find(':selected').val(), {
 				expires: (60 * 60 * 24 * 7)
 			});
 			runSearch(1);
@@ -495,6 +496,9 @@
 				onlyByContent = true;
 		}
 
+		var datasetKey = $('#search-result').find('td.dataset-key').html();
+		datasetKey = isSort == 0 || datasetKey == '' ? undefined : datasetKey;
+
 		$.ajax({
 			type: "POST",
 			url: "search/searchByContent",
@@ -509,10 +513,13 @@
 				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 				categories: categories.length > 0 ? $.toJSON(categories) : null,
 				categoriesExactMatch: false,
+				onlyWithCategories: false,
 				hideDuplicated: $('#hide-duplicated').attr("checked") == "checked",
 				onlyByName: onlyByName,
 				onlyByContent: onlyByContent,
-				isSort: isSort
+				sortColumn: $.cookie("sortColumnMobile"),
+				sortDirection: $.cookie("sortDirectionMobile"),
+				datasetKey: datasetKey
 			},
 			beforeSend: function ()
 			{
@@ -533,6 +540,12 @@
 			{
 				var searchResultBody = $('#search-result-body');
 				searchResultBody.html(msg);
+				var datasetKeyTag = searchResultBody.find('div.dataset-key');
+				if (datasetKeyTag.length > 0)
+				{
+					$('#search-result').find('td.dataset-key').html(datasetKeyTag.html());
+					datasetKeyTag.remove();
+				}
 				$.mobile.changePage("#search-result", {
 					transition: "slidefade"
 				});

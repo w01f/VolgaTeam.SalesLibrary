@@ -43,6 +43,9 @@
 			<div class="category"><? echo $category->category; ?>------<? echo $category->tag; ?></div>
 		<? endforeach; ?>
 	<? endif; ?>
+	<? if ($searchShortcut->onlyWithCategories): ?>
+		<div class="only-with-categories">true</div>
+	<? endif; ?>
 	<? if ($searchShortcut->hideDuplicated): ?>
 		<div class="hide-duplicated">true</div>
 	<? endif; ?>
@@ -54,5 +57,11 @@
 	<? endif; ?>
 	<? if (!$searchShortcut->showResultsBar && $searchShortcut->samePage): ?>
 		<div class="hide-results">true</div>
+	<? endif; ?>
+	<? if (isset($searchShortcut->sortColumn)): ?>
+		<div class="sort-column"><? echo $searchShortcut->sortColumn; ?></div>
+	<? endif; ?>
+	<? if (isset($searchShortcut->sortDirection)): ?>
+		<div class="sort-direction"><? echo $searchShortcut->sortDirection; ?></div>
 	<? endif; ?>
 </div>

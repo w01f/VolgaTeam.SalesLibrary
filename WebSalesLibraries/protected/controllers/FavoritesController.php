@@ -77,10 +77,12 @@
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
 			$isSort = intval(Yii::app()->request->getPost('isSort'));
+			$sortColumn = Yii::app()->request->getPost('sortColumn');
+			$sortDirection = Yii::app()->request->getPost('sortDirection');
 			$userId = Yii::app()->user->getId();
 			if (isset($userId) && isset($isSort))
 			{
-				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, $isSort);
+				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, $isSort, $sortColumn, $sortDirection);
 				$this->renderPartial('favoritesLinks', array('links' => $links), false, true);
 			}
 		}

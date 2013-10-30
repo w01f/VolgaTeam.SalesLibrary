@@ -33,14 +33,12 @@
 			$linkRecord->save();
 		}
 
-		public static function getLinksByFolder($userId, $folderId, $isSort)
+		public static function getLinksByFolder($userId, $folderId, $isSort, $sortColumn, $sortDirection)
 		{
 			$sessionId = 'favoriteLinks';
 			if ($isSort == 1)
-			{
 				$links = Yii::app()->session[$sessionId];
-			}
-			else
+			if (!isset($links))
 			{
 				if (isset($folderId))
 					$favoriteLinkRecords = self::model()->findAll('id_user=? and id_folder=?', array($userId, $folderId));
@@ -75,7 +73,8 @@
 			if (isset($links))
 				if (count($links) > 0)
 				{
-					usort($links, 'LinkStorage::sortLinks');
+					$sortHelper = new SortHelper($sortColumn, $sortDirection);
+					usort($links, array($sortHelper, 'sort'));
 					return $links;
 				}
 			return null;

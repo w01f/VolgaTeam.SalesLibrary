@@ -17,9 +17,12 @@
 		public $libraries;
 		public $superFilters;
 		public $categories;
+		public $onlyWithCategories;
 		public $hideDuplicated;
 		public $searchByName;
 		public $searchByContent;
+		public $sortColumn;
+		public $sortDirection;
 
 		public $showResultsBar;
 
@@ -109,6 +112,13 @@
 				}
 			}
 
+			$queryResult = $xpath->query('//Config/SearchCondition/HideIfNoTag');
+			foreach ($queryResult as $node)
+			{
+				$this->onlyWithCategories = filter_var(trim($node->nodeValue), FILTER_VALIDATE_BOOLEAN);
+				break;
+			}
+
 			$queryResult = $xpath->query('//Config/SearchCondition/HideDuplicated');
 			foreach ($queryResult as $node)
 			{
@@ -129,7 +139,47 @@
 				$this->searchByContent = filter_var(trim($node->nodeValue), FILTER_VALIDATE_BOOLEAN);
 				break;
 			}
+
 			$showResultsBarTags = $linkConfig->getElementsByTagName("ShowResultsBar");
 			$this->showResultsBar = $showResultsBarTags->length > 0 ? filter_var(trim($showResultsBarTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+
+			$queryResult = $xpath->query('//Config/SearchCondition/SortBy');
+			foreach ($queryResult as $node)
+			{
+				switch (strtolower(trim($node->nodeValue)))
+				{
+					case "tag":
+						$this->sortColumn = "tag";
+						break;
+					case "station":
+						$this->sortColumn = "library";
+						break;
+					case "type":
+						$this->sortColumn = "file_type";
+						break;
+					case "link":
+						$this->sortColumn = "name";
+						break;
+					case "date":
+						$this->sortColumn = "date_modify";
+						break;
+				}
+				break;
+			}
+
+			$queryResult = $xpath->query('//Config/SearchCondition/Sortorder');
+			foreach ($queryResult as $node)
+			{
+				switch (strtolower(trim($node->nodeValue)))
+				{
+					case "ascending":
+						$this->sortDirection = "asc";
+						break;
+					case "descending":
+						$this->sortDirection = "desc";
+						break;
+				}
+				break;
+			}
 		}
 	}
