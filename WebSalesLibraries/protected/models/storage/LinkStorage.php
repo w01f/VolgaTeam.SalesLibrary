@@ -39,7 +39,7 @@
 				$linkRecord->file_relative_path = $link['fileRelativePath'];
 				$linkRecord->file_name = $link['fileName'];
 				$linkRecord->file_extension = $link['fileExtension'];
-				$linkRecord->file_date = date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
+				$linkRecord->file_date = $link['originalFormat'] == 'url' ? date(Yii::app()->params['mysqlDateFormat'], strtotime($link['dateAdd'])) : date(Yii::app()->params['mysqlDateFormat'], strtotime($link['fileDate']));
 				$linkRecord->file_size = $link['fileSize'];
 				$linkRecord->note = $link['note'];
 				$linkRecord->format = $link['originalFormat'];

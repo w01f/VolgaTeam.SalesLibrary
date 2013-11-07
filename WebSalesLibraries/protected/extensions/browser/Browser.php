@@ -449,6 +449,13 @@ class Browser
     protected function checkBrowsers()
     {
         return (
+			// common mobile
+			$this->checkBrowseriPad() ||
+			$this->checkBrowseriPod() ||
+			$this->checkBrowseriPhone() ||
+			$this->checkBrowserAndroid() ||
+			$this->checkBrowserBlackBerry() ||
+			$this->checkBrowserNokia() ||
             // well-known, well-used
             // Special Notes:
             // (1) Opera must be checked before FireFox due to the odd
@@ -469,13 +476,6 @@ class Browser
             $this->checkBrowserFirefox() ||
             $this->checkBrowserChrome() ||
             $this->checkBrowserOmniWeb() ||
-            // common mobile
-            $this->checkBrowserAndroid() ||
-            $this->checkBrowseriPad() ||
-            $this->checkBrowseriPod() ||
-            $this->checkBrowseriPhone() ||
-            $this->checkBrowserBlackBerry() ||
-            $this->checkBrowserNokia() ||
             // common bots
             $this->checkBrowserGoogleBot() ||
             $this->checkBrowserMSNBot() ||
@@ -1157,7 +1157,8 @@ class Browser
     {
         if (stripos($this->_agent, 'Android') !== false)
         {
-            if (stripos($this->_agent, 'mobile') !== false)
+            if (stripos($this->_agent, 'mobile') !== false &&
+				!in_array($this->_agent,Yii::app()->params['android_tablets']))
                 $this->setBrowser(self::BROWSER_ANDROID_MOBILE);
             else
                 $this->setBrowser(self::BROWSER_ANDROID);

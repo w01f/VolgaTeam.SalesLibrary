@@ -124,6 +124,9 @@
 						array('visible' => true, 'image' => '3.png', 'url' => 'http://www.nab.org'),
 						array('visible' => true, 'image' => '4.png', 'url' => 'http://www.tvnewscheck.com'),)
 				),
+				'android_tablets' => array(
+					'Mozilla/5.0 (Linux; U; Android 4.2.2; es-us; GT-P5210 Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30/1.05v.3406.d7',
+				),
 			),
 			'components' => array(
 				'db' => array(

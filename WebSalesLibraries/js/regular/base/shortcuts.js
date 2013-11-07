@@ -230,10 +230,9 @@ window.salesDepot = window.salesDepot || { };
 				var resultsBar = content.find('.search-grid-info.has-result');
 				if (hideResults)
 				{
-					$('.shortcuts-home-bar .title').html(shortcutTitle != '' ?
-						shortcutTitle + ' (' + resultsBar.find('#search-links-info-count span').html() + ')' :
-						resultsBar.find('#search-links-info-count span').html()
-					);
+					var linksFoundTag = resultsBar.find('#search-links-info-count span');
+					var linksFound = linksFoundTag.length > 0 ? linksFoundTag.html() : 'No Tagged Files Exist';
+					$('.shortcuts-home-bar .title').html(shortcutTitle != '' ? shortcutTitle + ' (' + linksFound + ')' : linksFound);
 					resultsBar.remove();
 				}
 				else
