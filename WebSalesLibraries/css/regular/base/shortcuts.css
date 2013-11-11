@@ -15,6 +15,17 @@
 	white-space: nowrap;
 }
 
+.shortcuts-search-bar
+{
+	width: 100%;
+}
+
+.shortcuts-search-bar td
+{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .shortcuts-page-content
 {
 	width: 100%;

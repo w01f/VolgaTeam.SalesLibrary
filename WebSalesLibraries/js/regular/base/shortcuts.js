@@ -34,6 +34,83 @@ window.salesDepot = window.salesDepot || { };
 					pageLogo.trigger("click");
 				});
 
+				$('.file-filter-panel-switcher').off('click').on('click', function (e)
+				{
+					e.preventDefault();
+					var fileFilterPanel = $('.file-filter-panel');
+					if (fileFilterPanel.hasClass('open'))
+					{
+						fileFilterPanel.removeClass('open');
+						fileFilterPanel.hide(200, function ()
+						{
+							$.updateContentAreaDimensions();
+						});
+					}
+					else
+					{
+						fileFilterPanel.addClass('open');
+						fileFilterPanel.show(1000, 'swing', function ()
+						{
+							$.updateContentAreaDimensions();
+						});
+					}
+					$.updateContentAreaDimensions();
+				});
+				$('.file-filter-panel .btn').on('click', function ()
+				{
+					$(this).button('toggle');
+				});
+
+
+				var search = function ()
+				{
+					var searchConditions = $('.shortcuts-search-bar .search-conditions');
+					var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
+					var selectedFileTypes = [];
+					if ($('#search-file-type-powerpoint').hasClass('active'))
+						selectedFileTypes.push("ppt");
+					if ($('#search-file-type-word').hasClass('active'))
+						selectedFileTypes.push("doc");
+					if ($('#search-file-type-excel').hasClass('active'))
+						selectedFileTypes.push("xls");
+					if ($('#search-file-type-pdf').hasClass('active'))
+						selectedFileTypes.push("pdf");
+					if ($('#search-file-type-video').hasClass('active'))
+					{
+						selectedFileTypes.push("video");
+						selectedFileTypes.push("mp4");
+						selectedFileTypes.push("wmv");
+					}
+					if ($('#search-file-type-url').hasClass('active'))
+						selectedFileTypes.push("url");
+					if ($('#search-file-type-image').hasClass('active'))
+					{
+						selectedFileTypes.push("png");
+						selectedFileTypes.push("jpeg");
+					}
+
+					if (searchConditions.find('.same-page').html() === 'true')
+					{
+						$('.shortcuts-search-bar').removeClass('open').hide();
+						searchConditions.append('<div class="search-text">' + textCondition + '</div>');
+						$.each(selectedFileTypes, function (index, value)
+						{
+							searchConditions.append('<div class="file-type">' + value + '</div>');
+						});
+						var content = $('#content .shortcuts-page-content');
+						content.html('<div class="search-conditions" style="display: none;">' + searchConditions.html() + '</div>');
+						$.processSearchLink(content);
+					}
+					else
+						window.open("shortcuts/GetQuickSearchResult?pageId=" + pageId + "&text=" + textCondition + "&fileTypes=" + $.toJSON(selectedFileTypes));
+				};
+				$('.shortcuts-search-bar .search-bar-text').keypress(function (e)
+				{
+					if (e.which == 13)
+						search();
+				});
+				$('.shortcuts-search-bar .search-bar-run').on('click', search);
+
 				$('.shortcuts-link.preview').off('click').on('click', function ()
 				{
 					$.viewSelectedFormat($(this), false, true);
@@ -73,6 +150,7 @@ window.salesDepot = window.salesDepot || { };
 						},
 						success: function (msg)
 						{
+							$('.shortcuts-search-bar').removeClass('open').hide();
 							var content = $('#content .shortcuts-page-content');
 
 							if (link.hasClass('search'))
@@ -106,7 +184,7 @@ window.salesDepot = window.salesDepot || { };
 
 	$.processSearchLink = function (content)
 	{
-		var searchConditions = content.find('#search-conditions');
+		var searchConditions = content.find('.search-conditions');
 		var hideResults = searchConditions.find('.hide-results').length > 0;
 		var shortcutTitle = content.find('.shortcut-title').html();
 		var sortColumn = content.find('.sort-column').html();
@@ -227,7 +305,7 @@ window.salesDepot = window.salesDepot || { };
 				content.append($('<div id="search-container"><div id="search-result" style="width: 100% !important; padding: 0;"><div></div></div></div>'));
 				content.find('#search-result > div').append(msg);
 
-				var resultsBar = content.find('.search-grid-info.has-result');
+				var resultsBar = content.find('.search-grid-info');
 				if (hideResults)
 				{
 					var linksFoundTag = resultsBar.find('#search-links-info-count span');

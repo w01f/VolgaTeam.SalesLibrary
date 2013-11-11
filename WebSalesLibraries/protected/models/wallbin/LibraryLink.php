@@ -877,10 +877,10 @@
 							{
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 								if (isset($this->universalPreview->ogvLinks))
 									foreach ($this->universalPreview->ogvLinks as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							}
 							break;
 						case 'tab':
@@ -888,13 +888,13 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'ogv':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->ogvLinks))
 									foreach ($this->universalPreview->ogvLinks as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'outlook':
 						case 'download':
@@ -911,10 +911,10 @@
 							{
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 								if (isset($this->universalPreview->ogvLinks))
 									foreach ($this->universalPreview->ogvLinks as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							}
 							break;
 						case 'video':
@@ -925,13 +925,13 @@
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'ogv':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->ogvLinks))
 									foreach ($this->universalPreview->ogvLinks as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'outlook':
 						case 'download':
@@ -945,10 +945,10 @@
 					{
 						case 'mp4':
 						case 'lp':
-							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							if (isset($this->universalPreview->ogvLinks))
 								foreach ($this->universalPreview->ogvLinks as $link)
-									$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+									$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'video':
 							if (isset($this->universalPreview))
@@ -959,17 +959,17 @@
 							}
 							break;
 						case 'tab':
-							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+							$viewSources[] = array('src' => $this->fileLink, 'href' => $this->fileLink, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->mp4Links))
 									foreach ($this->universalPreview->mp4Links as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/mp4', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'ogv':
 							if (isset($this->universalPreview))
 								if (isset($this->universalPreview->ogvLinks))
 									foreach ($this->universalPreview->ogvLinks as $link)
-										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->baseUrl . '/vendor/video-js/video-js.swf');
+										$viewSources[] = array('src' => $link, 'href' => $link, 'title' => $this->fileName, 'type' => 'video/ogg', 'swf' => Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.swf');
 							break;
 						case 'outlook':
 						case 'download':

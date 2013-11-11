@@ -9,59 +9,59 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/shortcuts.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/shortcuts/search-loader.js?' . $version, CClientScript::POS_HEAD);
 ?>
-<div id="search-conditions" style="display: none;">
-	<div class="shortcut-title"><? echo $searchShortcut->title; ?></div>
-	<? if (isset($searchShortcut->text)): ?>
-		<div class="search-text"><? echo $searchShortcut->text; ?></div>
+<div class="search-conditions" style="display: none;">
+	<div class="shortcut-title"><? echo $searchContainer->title; ?></div>
+	<? if (isset($searchContainer->conditions->text)): ?>
+		<div class="search-text"><? echo $searchContainer->conditions->text; ?></div>
 	<? endif; ?>
-	<? if (isset($searchShortcut->startDate)): ?>
-		<div class="start-date"><? echo $searchShortcut->startDate; ?></div>
+	<? if (isset($searchContainer->conditions->startDate)): ?>
+		<div class="start-date"><? echo $searchContainer->conditions->startDate; ?></div>
 	<? endif; ?>
-	<? if (isset($searchShortcut->endDate)): ?>
-		<div class="end-date"><? echo $searchShortcut->endDate; ?></div>
+	<? if (isset($searchContainer->conditions->endDate)): ?>
+		<div class="end-date"><? echo $searchContainer->conditions->endDate; ?></div>
 	<? endif; ?>
-	<? if ($searchShortcut->dateModified): ?>
+	<? if ($searchContainer->conditions->dateModified): ?>
 		<div class="use-file-date">true</div>
 	<? endif; ?>
-	<? if (isset($searchShortcut->fileTypes)): ?>
-		<? foreach ($searchShortcut->fileTypes as $fileType): ?>
+	<? if (isset($searchContainer->conditions->fileTypes)): ?>
+		<? foreach ($searchContainer->conditions->fileTypes as $fileType): ?>
 			<div class="file-type"><? echo $fileType; ?></div>
 		<? endforeach; ?>
 	<? endif; ?>
-	<? if (isset($searchShortcut->libraries)): ?>
-		<? foreach ($searchShortcut->libraries as $library): ?>
+	<? if (isset($searchContainer->conditions->libraries)): ?>
+		<? foreach ($searchContainer->conditions->libraries as $library): ?>
 			<div class="library"><? echo $library; ?></div>
 		<? endforeach; ?>
 	<? endif; ?>
-	<? if (isset($searchShortcut->superFilters)): ?>
-		<? foreach ($searchShortcut->superFilters as $superFilter): ?>
+	<? if (isset($searchContainer->conditions->superFilters)): ?>
+		<? foreach ($searchContainer->conditions->superFilters as $superFilter): ?>
 			<div class="super-filter"><? echo $superFilter; ?></div>
 		<? endforeach; ?>
 	<? endif; ?>
-	<? if (isset($searchShortcut->categories)): ?>
-		<? foreach ($searchShortcut->categories as $category): ?>
+	<? if (isset($searchContainer->conditions->categories)): ?>
+		<? foreach ($searchContainer->conditions->categories as $category): ?>
 			<div class="category"><? echo $category->category; ?>------<? echo $category->tag; ?></div>
 		<? endforeach; ?>
 	<? endif; ?>
-	<? if ($searchShortcut->onlyWithCategories): ?>
+	<? if ($searchContainer->conditions->onlyWithCategories): ?>
 		<div class="only-with-categories">true</div>
 	<? endif; ?>
-	<? if ($searchShortcut->hideDuplicated): ?>
+	<? if ($searchContainer->conditions->hideDuplicated): ?>
 		<div class="hide-duplicated">true</div>
 	<? endif; ?>
-	<? if ($searchShortcut->searchByName): ?>
+	<? if ($searchContainer->conditions->searchByName): ?>
 		<div class="search-by-name">true</div>
 	<? endif; ?>
-	<? if ($searchShortcut->searchByContent): ?>
+	<? if ($searchContainer->conditions->searchByContent): ?>
 		<div class="search-by-content">true</div>
 	<? endif; ?>
-	<? if (!$searchShortcut->showResultsBar && $searchShortcut->samePage): ?>
+	<? if (!$searchContainer->showResultsBar && $searchContainer->samePage): ?>
 		<div class="hide-results">true</div>
 	<? endif; ?>
-	<? if (isset($searchShortcut->sortColumn)): ?>
-		<div class="sort-column"><? echo $searchShortcut->sortColumn; ?></div>
+	<? if (isset($searchContainer->conditions->sortColumn)): ?>
+		<div class="sort-column"><? echo $searchContainer->conditions->sortColumn; ?></div>
 	<? endif; ?>
-	<? if (isset($searchShortcut->sortDirection)): ?>
-		<div class="sort-direction"><? echo $searchShortcut->sortDirection; ?></div>
+	<? if (isset($searchContainer->conditions->sortDirection)): ?>
+		<div class="sort-direction"><? echo $searchContainer->conditions->sortDirection; ?></div>
 	<? endif; ?>
 </div>

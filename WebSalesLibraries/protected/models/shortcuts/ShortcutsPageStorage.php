@@ -16,6 +16,11 @@
 			return new HomeBar($this);
 		}
 
+		public function getSearchBar()
+		{
+			return new SearchBar($this->config);
+		}
+
 		public function getGrid()
 		{
 			return new PageGrid($this);

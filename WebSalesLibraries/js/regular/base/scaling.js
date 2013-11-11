@@ -13,10 +13,10 @@ window.salesDepot = window.salesDepot || { };
 			'height': height + 'px'
 		});
 		updateWallbinTabs();
+		updateShorcutsPage();
 		updateSearchArea();
 		updateFavoritesArea();
 		updateTicker();
-		updateShorcutsPage();
 	};
 
 	var updateWallbinTabs = function ()
@@ -144,7 +144,7 @@ window.salesDepot = window.salesDepot || { };
 		var content = $('#content');
 		var height = content.height();
 		content.find('.shortcuts-page-content').css({
-			'height': (height - content.find('.shortcuts-home-bar img').height() - 20) + 'px'
+			'height': (height - content.find('.shortcuts-home-bar img').height() - content.find('.shortcuts-search-bar.open').height() - 20) + 'px'
 		});
 	}
 })(jQuery);

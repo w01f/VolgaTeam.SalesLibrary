@@ -70,11 +70,32 @@
 				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$searchShortcut->loadSearchConditions();
-				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/searchResult.php', array('searchShortcut' => $searchShortcut), true, true);
+				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/searchResult.php', array('searchContainer' => $searchShortcut), true, true);
 				if ($samePage)
 					echo $content;
 				else
 					$this->render('linkWrapper', array('objectName' => 'Search', 'content' => $content));
+			}
+		}
+
+		public function actionGetQuickSearchResult()
+		{
+			$pageId = Yii::app()->request->getQuery('pageId');
+			$text = Yii::app()->request->getQuery('text');
+			$fileTypes = Yii::app()->request->getQuery('fileTypes');
+			if (isset($fileTypes))
+				$fileTypes = CJSON::decode($fileTypes);
+			else
+				$fileTypes = array();
+			if (isset($pageId))
+			{
+				$pageRecord = ShortcutsPageStorage::model()->findByPk($pageId);
+				$searchBar = $pageRecord->getSearchBar();
+				$this->pageTitle = $searchBar->title;
+				$searchBar->conditions->text = $text;
+				$searchBar->conditions->fileTypes = $fileTypes;
+				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/searchResult.php', array('searchContainer' => $searchBar), true, true);
+				$this->render('linkWrapper', array('objectName' => $searchBar->title, 'content' => $content));
 			}
 		}
 	}
