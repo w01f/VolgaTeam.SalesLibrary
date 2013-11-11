@@ -1,5 +1,5 @@
 <?php
-	$version = '45.0';
+	$version = '47.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -366,6 +366,7 @@
 						<?php endif; ?>
 					</span>
 					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>"/>
+					<img class="ribbon-link-logo" src="<?php echo Yii::app()->baseUrl . $tabShortcutsRecord->image_path . '?' . $tabShortcutsRecord->id; ?>" style="display: none"/>
 				</div>
 				<?php
 					$pageShortcuts = ShortcutsPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabShortcutsRecord->id)));

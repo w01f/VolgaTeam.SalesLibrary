@@ -2,7 +2,9 @@
 	<table class="shortcuts-search-bar open" style="text-align: <? echo $searchBar->alignment; ?>">
 		<tr>
 			<td>
-				<h5>What are you looking for?</h5>
+				<? if (!Yii::app()->browser->isMobile()): ?>
+					<h5>What are you looking for?</h5>
+				<? endif; ?>
 				<div class="search-conditions" style="display: none;">
 					<div class="shortcut-title"><? echo $searchBar->title; ?></div>
 					<? if (isset($searchBar->conditions->startDate)): ?>
@@ -64,11 +66,9 @@
 					<button class="btn search-bar-run" type="submit">
 						<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
 					</button>
+					<button class="btn file-filter-panel-switcher" type="submit">File Filter</button>
 				</div>
 			</td>
-		</tr>
-		<tr>
-			<td><a class="file-filter-panel-switcher" href="#">File Filter</a></td>
 		</tr>
 		<tr class="file-filter-panel" style="display: none">
 			<td>

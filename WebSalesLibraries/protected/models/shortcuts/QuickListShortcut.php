@@ -3,7 +3,9 @@
 	{
 		public $type;
 		public $title;
+		public $tooltip;
 		public $imagePath;
+		public $ribbonLogoPath;
 		public $sourceLink;
 		public $samePage;
 
@@ -17,11 +19,15 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
+			$tooltipTags = $linkConfig->getElementsByTagName("ToolTip");
+			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$titleTags = $linkConfig->getElementsByTagName("Title");
 			$this->title = $titleTags->length > 0 ? trim($titleTags->item(0)->nodeValue) : '';
-			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id;
+			$baseUrl = Yii::app()->getBaseUrl(true);
+			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getQuickList', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 		}
 

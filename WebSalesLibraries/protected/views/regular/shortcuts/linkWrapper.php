@@ -24,6 +24,7 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/links-grid.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js?' . $version, CClientScript::POS_HEAD);
@@ -37,7 +38,7 @@
 		<span class="ribbon-title">Shortcut</span>
 		<div class="ribbon-section">
 			<span class="section-title"><? echo $objectName; ?></span>
-			<img src="<?php echo Yii::app()->getBaseUrl(true) . '/images/rbntab2logo.png' ?>"/>
+			<img src="<?php echo isset($objectLogo) && @getimagesize($objectLogo) ? $objectLogo : Yii::app()->getBaseUrl(true) . '/images/rbntab2logo.png' ?>"/>
 		</div>
 	</div>
 </div>

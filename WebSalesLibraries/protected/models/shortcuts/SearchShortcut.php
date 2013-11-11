@@ -3,7 +3,9 @@
 	{
 		public $type;
 		public $title;
+		public $tooltip;
 		public $imagePath;
+		public $ribbonLogoPath;
 		public $sourceLink;
 		public $samePage;
 		public $showResultsBar;
@@ -22,8 +24,11 @@
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
 			$titleTags = $linkConfig->getElementsByTagName("Title");
 			$this->title = $titleTags->length > 0 ? trim($titleTags->item(0)->nodeValue) : '';
+			$tooltipTags = $linkConfig->getElementsByTagName("ToolTip");
+			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$baseUrl = Yii::app()->getBaseUrl(true);
 			$this->imagePath = $baseUrl . $linkRecord->image_path . '?' . $linkRecord->id;
+			$this->ribbonLogoPath = $baseUrl . $linkRecord->source_path . '/link_logo.png' . '?' . $linkRecord->id;
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getSearchShortcut', array('linkId' => $linkRecord->id, 'samePage' => $this->samePage));
 			$showResultsBarTags = $linkConfig->getElementsByTagName("ShowResultsBar");
 			$this->showResultsBar = $showResultsBarTags->length > 0 ? filter_var(trim($showResultsBarTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;

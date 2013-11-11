@@ -62,18 +62,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -88,18 +91,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -115,18 +121,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -142,18 +151,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -169,18 +181,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -204,18 +219,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -253,18 +271,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -302,18 +323,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -349,18 +373,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -398,18 +425,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -447,18 +477,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -506,18 +539,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -594,18 +630,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -655,18 +694,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -730,18 +772,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -812,18 +857,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -890,18 +938,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -980,18 +1031,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -1063,18 +1117,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -1140,18 +1197,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -1258,16 +1318,19 @@ $logos = QPageStorage::getPageLogoList();
 			<div data-role="navbar" data-iconpos="top">
 				<ul>
 					<li>
-						<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+						<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 					</li>
 					<li>
-						<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+						<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
 					</li>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 					</li>
 					<li>
-						<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
+					</li>
+					<li>
+						<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 					</li>
 				</ul>
 			</div>
@@ -1317,18 +1380,21 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
 					<li>
-						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
 					</li>
 				<? endif; ?>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>
@@ -1344,16 +1410,19 @@ $logos = QPageStorage::getPageLogoList();
 		<div data-role="navbar" data-iconpos="top">
 			<ul>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse"> Libraries </a>
+					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade"> Search </a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
 				</li>
 				<li>
-					<a class="tab-favorites ui-btn ui-btn-active ui-state-persist" href="#favorites" data-icon="star" data-transition="slidefade"> Favs </a>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
 				</li>
 				<li>
-					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade"> Log Out </a>
+					<a class="tab-favorites ui-btn ui-btn-active ui-state-persist" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
+				</li>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
 				</li>
 			</ul>
 		</div>

@@ -78,8 +78,11 @@
 					}
 					?>
 					<?php if ($imageSource != ''): ?>
-						<li class="multi-column" <? if ($link->browser != 'mobile'): ?>rel="tooltip"
-							title="<? echo Yii::app()->params['tooltips']['preview_dialog'][$format]; ?>"<?php endif; ?>>
+						<li class="multi-column"
+							<? if ($link->browser != 'mobile'): ?>rel="tooltip"
+							title="<? echo Yii::app()->params['tooltips']['preview_dialog'][$format]; ?>"
+							<?php endif; ?>
+							>
 							<img src="<?php echo $imageSource; ?>"/>
 
 							<div class="service-data">

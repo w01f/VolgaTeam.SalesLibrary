@@ -29,10 +29,13 @@ window.salesDepot = window.salesDepot || { };
 
 				var tabId = content.find('.shortcuts-page-content').attr('id').replace("shortcuts-page-content-", "");
 				var pageLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-tab-logo');
+				pageLogo.show();
 				content.find('.shortcuts-home-bar img').on('click', function ()
 				{
 					pageLogo.trigger("click");
 				});
+				var linkLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-link-logo');
+				linkLogo.hide();
 
 				$('.file-filter-panel-switcher').off('click').on('click', function (e)
 				{
@@ -111,6 +114,8 @@ window.salesDepot = window.salesDepot || { };
 				});
 				$('.shortcuts-search-bar .search-bar-run').on('click', search);
 
+				$('.shortcuts-link img').tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
+
 				$('.shortcuts-link.preview').off('click').on('click', function ()
 				{
 					$.viewSelectedFormat($(this), false, true);
@@ -165,6 +170,14 @@ window.salesDepot = window.salesDepot || { };
 							}
 							else
 								content.html("<div class='padding'>" + msg + "</div>");
+
+							var ribbonLogoPath = link.find('.ribbon-logo-path');
+							if (ribbonLogoPath.length > 0)
+							{
+								linkLogo.attr('src', ribbonLogoPath.html());
+								pageLogo.hide();
+								linkLogo.show();
+							}
 
 							var shortcutTitle = content.find('.shortcut-title').html();
 							$('.shortcuts-home-bar .title').html(shortcutTitle);

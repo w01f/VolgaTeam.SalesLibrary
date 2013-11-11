@@ -85,7 +85,8 @@ window.salesDepot = window.salesDepot || { };
 				tabNames[index] = id;
 
 				var title = $(this).find('.ribbon-title');
-				var logo = $(this).find('.ribbon-tab-logo');
+				var tabLogo = $(this).find('.ribbon-tab-logo');
+				var linkLogo = $(this).find('.ribbon-link-logo');
 				var isBackstage = $(this).hasClass('file');
 				header.append('<div id="ribbon-tab-header-' + index + '" class="ribbon-tab-header"></div>');
 				var thisTabHeader = header.find('#ribbon-tab-header-' + index);
@@ -100,7 +101,8 @@ window.salesDepot = window.salesDepot || { };
 						that.goToBackstage();
 					};
 					thisTabHeader.click(tabClickHandler);
-					logo.click(tabClickHandler);
+					tabLogo.click(tabClickHandler);
+					linkLogo.click(tabClickHandler);
 				}
 				else
 				{
@@ -116,7 +118,8 @@ window.salesDepot = window.salesDepot || { };
 						that.switchToTabByIndex(index, id);
 					};
 					thisTabHeader.click(tabClickHandler);
-					logo.click(tabClickHandler);
+					tabLogo.click(tabClickHandler);
+					linkLogo.click(tabClickHandler);
 				}
 
 				$(this).hide();

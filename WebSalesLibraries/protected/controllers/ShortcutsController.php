@@ -38,7 +38,7 @@
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Window', 'content' => $content));
+					$this->render('linkWrapper', array('objectName' => 'Window', 'objectLogo' => $windowShortcut->ribbonLogoPath, 'content' => $content));
 			}
 		}
 
@@ -56,7 +56,7 @@
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Quick List', 'content' => $content));
+					$this->render('linkWrapper', array('objectName' => 'Quick List', 'objectLogo' => $quickListShortcut->ribbonLogoPath, 'content' => $content));
 			}
 		}
 
@@ -74,7 +74,7 @@
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Search', 'content' => $content));
+					$this->render('linkWrapper', array('objectName' => 'Search', 'objectLogo' => $searchShortcut->ribbonLogoPath,  'content' => $content));
 			}
 		}
 

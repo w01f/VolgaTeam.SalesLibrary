@@ -56,7 +56,7 @@
 			{
 				$parentFolder = FavoritesFolderStorage::getFolderById($folderId);
 				$folders = FavoritesFolderStorage::getChildFolders($userId, $folderId);
-				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, false);
+				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
 				$this->renderPartial('favoritesLinksAndFolders', array('parentFolder' => $parentFolder, 'folders' => $folders, 'links' => $links), false, true);
 			}
 		}
