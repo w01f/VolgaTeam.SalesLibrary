@@ -5,6 +5,7 @@
             direction: "reverse"
         });
 
+		$.initShortcuts();
         $.initLibraries();
         $.initSearch();
 		$.initFavorites();

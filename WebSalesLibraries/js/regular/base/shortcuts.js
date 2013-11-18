@@ -28,13 +28,14 @@ window.salesDepot = window.salesDepot || { };
 				content.html(msg);
 
 				var tabId = content.find('.shortcuts-page-content').attr('id').replace("shortcuts-page-content-", "");
-				var pageLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-tab-logo');
+				var shortcutsTab = $('#shortcuts-tab-' + tabId);
+				var pageLogo = shortcutsTab.find('.ribbon-tab-logo');
 				pageLogo.show();
 				content.find('.shortcuts-home-bar img').on('click', function ()
 				{
 					pageLogo.trigger("click");
 				});
-				var linkLogo = $('#shortcuts-tab-' + tabId).find('.ribbon-link-logo');
+				var linkLogo = shortcutsTab.find('.ribbon-link-logo');
 				linkLogo.hide();
 
 				$('.file-filter-panel-switcher').off('click').on('click', function (e)
@@ -309,6 +310,7 @@ window.salesDepot = window.salesDepot || { };
 					showDelete: false
 				});
 				$.hideOverlayLight();
+				$.hideOverlay();
 			};
 
 			var successCallback = function (msg)

@@ -6,6 +6,24 @@
 			return YiiBase::getPathOfAlias($this->pathPrefix . 'shortcuts');
 		}
 
+		public function actionGetTabs()
+		{
+			$tabShortcuts = ShortcutsTabStorage::model()->findAll(array('order' => '`order', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
+			$this->renderPartial('tabs', array('tabShortcuts' => $tabShortcuts));
+		}
+
+		public function actionGetPages()
+		{
+			$tabId = Yii::app()->request->getPost('tabId');
+			if (isset($tabId))
+			{
+				$tabRecord = ShortcutsTabStorage::model()->findByPk($tabId);
+				$pageShortcuts = ShortcutsPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabId)));
+				StatisticActivityStorage::WriteActivity('Shortcuts', 'Tab Changed', array('Tab' => $tabRecord->name));
+				$this->renderPartial('pages', array('pageShortcuts' => $pageShortcuts));
+			}
+		}
+
 		public function actionGetPage()
 		{
 			$pageId = Yii::app()->request->getPost('pageId');
@@ -22,7 +40,6 @@
 			}
 		}
 
-
 		public function actionGetWindowShortcut()
 		{
 			$this->pageTitle = 'Shortcuts - Window';
@@ -33,8 +50,8 @@
 				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
 				$windowShortcut = new WindowShortcut($linkRecord);
 				$folder = $windowShortcut->getWindow();
-				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/folderContainerHeader.php', array('windowShortcut' => $windowShortcut), true);;
-				$content .= $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/folderContainer.php', array('folder' => $folder), true);
+				$content = $this->renderPartial('folderContainerHeader', array('windowShortcut' => $windowShortcut), true);;
+				$content .= $this->renderFile(Yii::getPathOfAlias($this->pathPrefix . 'wallbin') . '/folderContainer.php', array('folder' => $folder), true);
 				if ($samePage)
 					echo $content;
 				else
@@ -52,7 +69,7 @@
 				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
 				$quickListShortcut = new QuickListShortcut($linkRecord);
 				$quickListShortcut->loadQuickLinks();
-				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/quickList.php', array('quickListShortcut' => $quickListShortcut), true);
+				$content = $this->renderPartial('quickList', array('quickListShortcut' => $quickListShortcut), true);
 				if ($samePage)
 					echo $content;
 				else
@@ -70,11 +87,11 @@
 				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$searchShortcut->loadSearchConditions();
-				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/searchResult.php', array('searchContainer' => $searchShortcut), true, true);
+				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchShortcut), true);
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Search', 'objectLogo' => $searchShortcut->ribbonLogoPath,  'content' => $content));
+					$this->render('linkWrapper', array('objectName' => 'Search', 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
 			}
 		}
 
@@ -94,7 +111,7 @@
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
 				$searchBar->conditions->fileTypes = $fileTypes;
-				$content = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/searchResult.php', array('searchContainer' => $searchBar), true, true);
+				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchBar), true);
 				$this->render('linkWrapper', array('objectName' => $searchBar->title, 'content' => $content));
 			}
 		}

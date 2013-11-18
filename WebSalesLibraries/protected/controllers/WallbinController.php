@@ -24,14 +24,14 @@
 		public function actionGetTabsView()
 		{
 			$wallbinView = Yii::app()->request->getPost('wallbinView');
-			if(!isset($wallbinView) || $wallbinView == 'null')
+			if (!isset($wallbinView) || $wallbinView == 'null')
 				$wallbinView = 'columns';
 
 			$libraryManager = new LibraryManager();
 			$selectedLibrary = $libraryManager->getSelectedLibrary();
 			$selectedPage = $libraryManager->getSelectedPage();
 			$selectedPage->loadData();
-			$this->renderPartial('tabsView', array('library' => $selectedLibrary,'selectedPage' => $selectedPage,'wallbinView' => $wallbinView), false, true);
+			$this->renderPartial('tabsView', array('library' => $selectedLibrary, 'selectedPage' => $selectedPage, 'wallbinView' => $wallbinView), false, true);
 		}
 
 		public function actionGetLibraryDropDownList()
@@ -58,29 +58,26 @@
 		public function actionGetFolderLinksList()
 		{
 			$folderId = Yii::app()->request->getPost('folderId');
-
-			$libraryManager = new LibraryManager();
-			$selectedPage = $libraryManager->getSelectedPage();
-			if (isset($selectedPage->folders))
+			if (isset($folderId))
 			{
-				foreach ($selectedPage->folders as $folder)
-					if ($folder->id == $folderId)
-					{
-						$selectedFolder = $folder;
-						$isAdmin = false;
-						$userId = null;
-						if (isset(Yii::app()->user))
-						{
-							$userId = Yii::app()->user->getId();
-							if (isset(Yii::app()->user->role))
-								$isAdmin = Yii::app()->user->role == 2;
-							else
-								$isAdmin = true;
-						}
-						$selectedFolder->loadFiles($isAdmin, $userId);
-						break;
-					}
-				$this->renderPartial('folderLinks', array('folder' => $selectedFolder), false, true);
+				$folderRecord = FolderStorage::model()->findByPk($folderId);
+				$libraryManager = new LibraryManager();
+				$library = $libraryManager->getLibraryById($folderRecord->id_library);
+				$folder = new LibraryFolder(new LibraryPage($library));
+				$folder->load($folderRecord);
+				$folder->displayLinkWidgets = true;
+				$isAdmin = false;
+				$userId = null;
+				if (isset(Yii::app()->user))
+				{
+					$userId = Yii::app()->user->getId();
+					if (isset(Yii::app()->user->role))
+						$isAdmin = Yii::app()->user->role == 2;
+					else
+						$isAdmin = true;
+				}
+				$folder->loadFiles($isAdmin, $userId);
+				$this->renderPartial('folderLinks', array('folder' => $folder), false, true);
 			}
 		}
 

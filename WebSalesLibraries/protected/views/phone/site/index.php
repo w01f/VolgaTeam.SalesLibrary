@@ -1,38 +1,102 @@
 <?php
-$version = '13.0';
-$cs = Yii::app()->clientScript;
-$cs->registerCoreScript('jquery');
-$cs->registerCoreScript('cookie');
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/photoswipe/photoswipe.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobiscroll/css/mobiscroll-2.1.custom.min.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/libraries.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/search.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/file-card.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/email.css?' . $version);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobiscroll/js/mobiscroll-2.1.custom.min.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/link-viewing.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/libraries.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/search.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/favorites.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version, CClientScript::POS_HEAD);
-?>
+	$version = '15.0';
+	$cs = Yii::app()->clientScript;
+	$cs->registerCoreScript('jquery');
+	$cs->registerCoreScript('cookie');
+	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/photoswipe/photoswipe.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobiscroll/css/mobiscroll-2.1.custom.min.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/libraries.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/search.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/file-card.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/email.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/shortcuts.css?' . $version);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobiscroll/js/mobiscroll-2.1.custom.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/link-viewing.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/libraries.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/search.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/favorites.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/shortcuts.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version, CClientScript::POS_HEAD);
 
-<?php
-$userId = Yii::app()->user->getId();
-if (isset($userId))
-{
-	$availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
-}
-$logos = QPageStorage::getPageLogoList();
-?>
+	$userId = Yii::app()->user->getId();
+	if (isset($userId))
+	{
+		$availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
+	}
+	$logos = QPageStorage::getPageLogoList();
 
+?>
+<div data-role='page' id="shortcuts" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<span class="ui-title">Links</span>
+	</div>
+	<div data-role='content' class="page-content">
+		<select name="shortcuts-tab" id="shortcuts-tab" data-mini="true"></select>
+		<select name="shortcuts-page" id="shortcuts-page" data-mini="true"></select>
+		<div class="ui-grid-solo" id="shortcuts-links"></div>
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-shortcuts ui-btn ui-btn-active ui-state-persist" href="#shortcuts" data-icon="plus" data-transition="slidefade" data-direction="reverse">Links</a>
+				</li>
+				<li>
+					<a href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div data-role='page' id="shortcut-quick-list" data-cache="never" data-dom-cache="false" data-ajax="false">
+	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
+		<a class="link back ui-btn-right" href="#shortcuts" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
+		<span class="ui-title header-title">Links</span>
+	</div>
+	<div data-role='content' class="page-content">
+	</div>
+	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
+		<div data-role="navbar" data-iconpos="top">
+			<ul>
+				<li>
+					<a class="tab-shortcuts ui-btn ui-btn-active ui-state-persist" href="#shortcuts" data-icon="plus" data-transition="slidefade" data-direction="reverse">Links</a>
+				</li>
+				<li>
+					<a href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
+				</li>
+				<li>
+					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
+				</li>
+				<? if (Yii::app()->params['favorites_tab']['visible']): ?>
+					<li>
+						<a class="tab-favorites" href="#favorites" data-icon="star" data-transition="slidefade">Favs</a>
+					</li>
+				<? endif; ?>
+				<li>
+					<a class="logout-button" href="#logout" data-icon="delete" data-transition="slidefade">Exit</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
 <div data-role='page' id="libraries" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<span class="ui-title">Sales Libraries</span>
@@ -65,7 +129,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries ui-btn ui-btn-active ui-state-persist" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -94,7 +158,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -124,7 +188,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -154,7 +218,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -184,7 +248,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -222,7 +286,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -249,11 +313,11 @@ $logos = QPageStorage::getPageLogoList();
 				<li>
 					<a class="ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-transition="none">Keyword</a>
 				</li>
-				<?if (Yii::app()->params['tags']['visible']): ?>
+				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
 						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
 					</li>
-				<? endif;?>
+				<? endif; ?>
 				<li>
 					<a class="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
 				</li>
@@ -274,7 +338,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -301,11 +365,11 @@ $logos = QPageStorage::getPageLogoList();
 				<li>
 					<a href="#search-basic" data-transition="none">Keyword</a>
 				</li>
-				<?if (Yii::app()->params['tags']['visible']): ?>
+				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
 						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
 					</li>
-				<? endif;?>
+				<? endif; ?>
 				<li>
 					<a class="tab-search-file-types ui-btn ui-btn-active ui-state-persist" href="#search-file-types" data-transition="none">File</a>
 				</li>
@@ -326,7 +390,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -376,7 +440,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -403,11 +467,11 @@ $logos = QPageStorage::getPageLogoList();
 				<li>
 					<a href="#search-basic" data-transition="none">Keyword</a>
 				</li>
-				<?if (Yii::app()->params['tags']['visible']): ?>
+				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
 						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
 					</li>
-				<? endif;?>
+				<? endif; ?>
 				<li>
 					<a class="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
 				</li>
@@ -428,7 +492,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -455,11 +519,11 @@ $logos = QPageStorage::getPageLogoList();
 				<li>
 					<a href="#search-basic" data-transition="none">Keyword</a>
 				</li>
-				<?if (Yii::app()->params['tags']['visible']): ?>
+				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
 						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
 					</li>
-				<? endif;?>
+				<? endif; ?>
 				<li>
 					<a class="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
 				</li>
@@ -480,7 +544,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search ui-btn ui-btn-active ui-state-persist" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -513,7 +577,7 @@ $logos = QPageStorage::getPageLogoList();
 							</td>
 							<td id="search-result-sort-column-container" class="on-center">
 								<select name="search-result-sort-column" id="search-result-sort-column" data-mini="true">
-									<option value="name" selected>By Name</option>
+									<option value="name">By Name</option>
 									<option value="file_type">By Type</option>
 									<option value="date_modify">By Date</option>
 									<option value="library">By Library</option>
@@ -542,7 +606,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -633,7 +697,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -697,7 +761,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -754,8 +818,7 @@ $logos = QPageStorage::getPageLogoList();
 					<input type="checkbox" name="add-page-disable-banners" id="add-page-disable-banners" class="custom" data-mini="true"/>
 					<label for="add-page-disable-banners">Disable all Link Banner Images</label>
 					<input type="checkbox" name="add-page-show-links-as-url" id="add-page-show-links-as-url" class="custom" data-mini="true"/>
-					<label for="add-page-show-links-as-url">Display all Links as Blue Hyperlinks</label>
-					<br><br>
+					<label for="add-page-show-links-as-url">Display all Links as Blue Hyperlinks</label> <br><br>
 				</td>
 			</tr>
 			<tr>
@@ -775,7 +838,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -860,7 +923,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -918,8 +981,7 @@ $logos = QPageStorage::getPageLogoList();
 			</tr>
 			<tr>
 				<td class="on-left" colspan="2">
-					<input type="email" id="add-page-access-code" maxlength=4 data-mini="true" disabled>
-					<br><br>
+					<input type="email" id="add-page-access-code" maxlength=4 data-mini="true" disabled> <br><br>
 				</td>
 			</tr>
 			<tr>
@@ -941,7 +1003,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -1034,7 +1096,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -1120,7 +1182,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -1200,7 +1262,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -1321,7 +1383,7 @@ $logos = QPageStorage::getPageLogoList();
 						<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 					</li>
 					<li>
-						<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+						<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 					</li>
 					<li>
 						<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -1383,7 +1445,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>
@@ -1413,7 +1475,7 @@ $logos = QPageStorage::getPageLogoList();
 					<a class="tab-shortcuts" href="#shortcuts" data-icon="plus" data-transition="slidefade">Links</a>
 				</li>
 				<li>
-					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Libr.</a>
+					<a class="tab-libraries" href="#libraries" data-icon="grid" data-transition="slidefade" data-direction="reverse">Pages</a>
 				</li>
 				<li>
 					<a class="tab-search" href="#search-basic" data-icon="search" data-transition="slidefade">Search</a>

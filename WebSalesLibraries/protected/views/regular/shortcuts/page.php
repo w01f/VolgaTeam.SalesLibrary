@@ -20,23 +20,23 @@
 			switch ($linkRecord->type)
 			{
 				case 'mp4':
-					$linkContent = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/videoLink.php', array('link' => $linkRecord->GetModel()), true);
+					$linkContent = $this->renderPartial('videoLink', array('link' => $linkRecord->GetModel()), true);
 					break;
 				case 'url':
 				case 'file':
 				case 'window':
 				case 'quicklist':
 				case 'search':
-					$linkContent = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/directLink.php', array('link' => $linkRecord->GetModel()), true);
+					$linkContent = $this->renderPartial('directLink', array('link' => $linkRecord->GetModel()), true);
 					break;
 				case 'page':
-					$linkContent = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/pageLink.php', array('link' => $linkRecord->GetModel()), true);
+					$linkContent = $this->renderPartial('pageLink', array('link' => $linkRecord->GetModel()), true);
 					break;
 				case 'libraryfile':
-					$linkContent = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/libraryFileLink.php', array('link' => $linkRecord->GetModel()), true);
+					$linkContent = $this->renderPartial('libraryFileLink', array('link' => $linkRecord->GetModel()), true);
 					break;
 				case 'none':
-					$linkContent = $this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/emptyLink.php', array('link' => $linkRecord->GetModel()), true);
+					$linkContent = $this->renderPartial('emptyLink', array('link' => $linkRecord->GetModel()), true);
 					break;
 			}
 			?>

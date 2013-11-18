@@ -3,29 +3,29 @@
 	$.initLibraries = function ()
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getLibraryDropDownList",
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getLibraryDropDownList",
+			beforeSend: function ()
 			{
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
-				$('#libraries-selector').html(msg).selectmenu('refresh', true);
+				$('#libraries-selector').html(msg).selectmenu().selectmenu('refresh', true);
 				$.libraryChanged();
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -33,44 +33,44 @@
 	{
 		var selectedLibraryName = $("#libraries-selector").find(":selected").text();
 		$.cookie("selectedLibraryName", selectedLibraryName, {
-			expires:60 * 60 * 24 * 7
+			expires: 60 * 60 * 24 * 7
 		});
 		$.ajax({
-			type:"POST",
-			url:"statistic/writeActivity",
-			data:{
-				type:'Wallbin',
-				subType:'Library Changed',
-				data:$.toJSON({
-					Library:selectedLibraryName
+			type: "POST",
+			url: "statistic/writeActivity",
+			data: {
+				type: 'Wallbin',
+				subType: 'Library Changed',
+				data: $.toJSON({
+					Library: selectedLibraryName
 				})
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getPageDropDownList",
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getPageDropDownList",
+			beforeSend: function ()
 			{
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
-				$('#page-selector').html(msg).selectmenu('refresh', true);
+				$('#page-selector').html(msg).selectmenu().selectmenu('refresh', true);
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -78,45 +78,45 @@
 	{
 		var selectedPageName = $("#page-selector").find(":selected").text();
 		$.cookie("selectedPageName", selectedPageName, {
-			expires:60 * 60 * 24 * 7
+			expires: 60 * 60 * 24 * 7
 		});
 		$.ajax({
-			type:"POST",
-			url:"statistic/writeActivity",
-			data:{
-				type:'Wallbin',
-				subType:'Page Changed',
-				data:$.toJSON({
-					Page:selectedPageName
+			type: "POST",
+			url: "statistic/writeActivity",
+			data: {
+				type: 'Wallbin',
+				subType: 'Page Changed',
+				data: $.toJSON({
+					Page: selectedPageName
 				})
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	$.loadPage = function ()
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getFoldersList",
-			data:{},
-			beforeSend:function ()
+			type: "POST",
+			url: "wallbin/getFoldersList",
+			data: {},
+			beforeSend: function ()
 			{
 				$('#folders').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var foldersPage = $('#folders');
 				foldersPage.find('.page-content').html(msg);
@@ -126,49 +126,50 @@
 				$('#link-details').find('.header-title').html(selctedLibraryName);
 				$('#gallery-page').find('.header-title').html(selctedLibraryName);
 				$.mobile.changePage("#folders", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				foldersPage.find('.page-content').children('ul').listview();
 				$(".folder-link").on('click', function ()
 				{
 					var folderId = $.trim($(this).attr("href").replace('#folder', ''));
-					$.loadFolder(folderId);
+					$.loadFolder(folderId, '#folders');
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
-	$.loadFolder = function (folderId)
+	$.loadFolder = function (folderId, backLink)
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getFolderLinksList",
-			data:{
-				folderId:folderId
+			type: "POST",
+			url: "wallbin/getFolderLinksList",
+			data: {
+				folderId: folderId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#links').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var linksPage = $('#links');
 				linksPage.find('.page-content').html(msg);
+				linksPage.find('.link.back').attr('href', backLink);
 				$.mobile.changePage("#links", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				linksPage.find('.page-content').children('ul').listview();
 				linksPage.find(".file-link").on('click', function ()
@@ -188,35 +189,35 @@
 					event.stopPropagation();
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	$.loadLink = function (linkId, parentTitle, isAttachment, backLink)
 	{
 		$.ajax({
-			type:"POST",
-			url:isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList",
-			data:{
-				linkId:linkId
+			type: "POST",
+			url: isAttachment ? "preview/getAttachmentPreviewList" : "preview/getLinkPreviewList",
+			data: {
+				linkId: linkId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#preview').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var previewPage = $('#preview');
 				previewPage.find('.page-content').html(msg);
@@ -225,7 +226,7 @@
 				$('.favorites-tab .header-title').html(parentTitle);
 				previewPage.find('.link.back').attr('href', backLink);
 				$.mobile.changePage("#preview", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				previewPage.find('.page-content').children('ul').listview();
 				previewPage.find('.res-selector').navbar();
@@ -275,41 +276,41 @@
 					$.viewSelectedFormat(itemContent, resolution);
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	$.loadLinkDeatils = function (linkId, parentTitle, backLink)
 	{
 		$.ajax({
-			type:"POST",
-			url:"preview/getLinkDetails",
-			data:{
-				linkId:linkId
+			type: "POST",
+			url: "preview/getLinkDetails",
+			data: {
+				linkId: linkId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#preview').find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var linkDetailsPage = $('#link-details');
 				linkDetailsPage.find('.page-content').html(msg);
 				linkDetailsPage.find('.link.back').attr('href', backLink);
 				$.mobile.changePage("#link-details", {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				linkDetailsPage.find('.page-content').children('ul').listview();
 				$(".file-card-link").on('click', function ()
@@ -323,35 +324,35 @@
 					$.loadLink(attachmentId, parentTitle, true, '#link-details');
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
 	$.loadFolderContent = function (linkId, parentLinkId)
 	{
 		$.ajax({
-			type:"POST",
-			url:"wallbin/getLinkFolderContent",
-			data:{
-				linkId:linkId
+			type: "POST",
+			url: "wallbin/getLinkFolderContent",
+			data: {
+				linkId: linkId
 			},
-			beforeSend:function ()
+			beforeSend: function ()
 			{
 				$('#link-folder-content-' + linkId).find('.page-content').html('');
 				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			complete:function ()
+			complete: function ()
 			{
 				$.mobile.loading('hide', {
-					textVisible:false,
-					html:""
+					textVisible: false,
+					html: ""
 				});
 			},
-			success:function (msg)
+			success: function (msg)
 			{
 				var linkFolderContent = $('#link-folder-content-' + linkId);
 				if (!linkFolderContent[0])
@@ -361,11 +362,11 @@
 						.insertAfter(linkFolderContentTemplate)
 						.attr('id', 'link-folder-content-' + linkId);
 					linkFolderContent.find('.link.back').attr('href', parentLinkId == null ? '#links' : ('#link-folder-content-' + parentLinkId));
-					linkFolderContent.find('.header-title').html($.cookie("selectedLibraryName"));
 				}
+				linkFolderContent.find('.header-title').html($('#links').find('.header-title').html());
 				linkFolderContent.find('.page-content').html(msg);
 				$.mobile.changePage('#link-folder-content-' + linkId, {
-					transition:"slidefade"
+					transition: "slidefade"
 				});
 				linkFolderContent.find('.page-content').children('ul').listview();
 				linkFolderContent.find(".file-link").on('click', function ()
@@ -385,8 +386,8 @@
 					event.stopPropagation();
 				});
 			},
-			async:true,
-			dataType:'html'
+			async: true,
+			dataType: 'html'
 		});
 	};
 
@@ -402,6 +403,14 @@
 		});
 		$('#load-page-button').off('click').on('click', function ()
 		{
+			var selectedLibraryName = $("#libraries-selector").find(":selected").text();
+			$.cookie("selectedLibraryName", selectedLibraryName, {
+				expires: 60 * 60 * 24 * 7
+			});
+			var selectedPageName = $("#page-selector").find(":selected").text();
+			$.cookie("selectedPageName", selectedPageName, {
+				expires: 60 * 60 * 24 * 7
+			});
 			$.loadPage();
 		});
 	});

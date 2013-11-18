@@ -424,6 +424,8 @@
 					switch (selectedViewType)
 					{
 						case 'video':
+						case 'mp4':
+						case 'wmv':
 						case 'tab':
 						case 'ogv':
 							$.ajax({

@@ -116,7 +116,7 @@
 
 		$('.search-button').on('click', function ()
 		{
-			runSearch(0);
+			$.runSearch(getSearchCondition(0));
 		});
 	};
 
@@ -380,25 +380,25 @@
 
 	var initSearchSortSelectors = function ()
 	{
-		$.cookie("sortColumnMobile", 'link-name', {
+		$.cookie("sortColumnMobile", 'name', {
 			expires: (60 * 60 * 24 * 7)
 		});
-		$('#search-result-sort-column').on('change', function ()
+		$('#search-result-sort-column').off('change.custom').on('change.custom', function ()
 		{
 			$.cookie("sortColumnMobile", $('#search-result-sort-column').find(':selected').val(), {
 				expires: (60 * 60 * 24 * 7)
 			});
-			runSearch(1);
+			$.runSearch(getSearchCondition(1));
 		});
 		$.cookie("sortDirectionMobile", 'asc', {
 			expires: (60 * 60 * 24 * 7)
 		});
-		$('#search-result-sort-order').on('change', function ()
+		$('#search-result-sort-order').off('change.custom').on('change.custom', function ()
 		{
 			$.cookie("sortDirectionMobile", $('#search-result-sort-order').find(':selected').val(), {
 				expires: (60 * 60 * 24 * 7)
 			});
-			runSearch(1);
+			$.runSearch(getSearchCondition(1));
 		});
 	};
 
@@ -424,7 +424,7 @@
 		$('.search-tags-item').checkboxradio();
 	};
 
-	var runSearch = function (isSort)
+	var getSearchCondition = function (isSort)
 	{
 		var selectedCondition = $('#search-keyword').val();
 		if ($('#search-match-exact').attr("checked") == "checked")
@@ -499,27 +499,51 @@
 		var datasetKey = $('#search-result').find('td.dataset-key').html();
 		datasetKey = isSort == 0 || datasetKey == '' ? undefined : datasetKey;
 
+		return {
+			fileTypes: selectedFileTypes,
+			condition: selectedCondition,
+			startDate: startDate,
+			endDate: endDate,
+			dateFile: $('#search-date-file').attr("checked") == "checked",
+			onlyFileCards: onlyFileCards,
+			libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
+			superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
+			categories: categories.length > 0 ? $.toJSON(categories) : null,
+			categoriesExactMatch: false,
+			onlyWithCategories: false,
+			hideDuplicated: $('#hide-duplicated').attr("checked") == "checked",
+			onlyByName: onlyByName,
+			onlyByContent: onlyByContent,
+			sortColumn: $.cookie("sortColumnMobile"),
+			sortDirection: $.cookie("sortDirectionMobile"),
+			datasetKey: datasetKey,
+			backLink: '#search-basic'
+		};
+	};
+
+	$.runSearch = function (conditions)
+	{
 		$.ajax({
 			type: "POST",
 			url: "search/searchByContent",
 			data: {
-				fileTypes: selectedFileTypes,
-				condition: selectedCondition,
-				startDate: startDate,
-				endDate: endDate,
-				dateFile: $('#search-date-file').attr("checked") == "checked",
-				onlyFileCards: onlyFileCards,
-				libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
-				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
-				categories: categories.length > 0 ? $.toJSON(categories) : null,
-				categoriesExactMatch: false,
-				onlyWithCategories: false,
-				hideDuplicated: $('#hide-duplicated').attr("checked") == "checked",
-				onlyByName: onlyByName,
-				onlyByContent: onlyByContent,
-				sortColumn: $.cookie("sortColumnMobile"),
-				sortDirection: $.cookie("sortDirectionMobile"),
-				datasetKey: datasetKey
+				fileTypes: conditions.fileTypes,
+				condition: conditions.condition,
+				startDate: conditions.startDate,
+				endDate: conditions.endDate,
+				dateFile: conditions.dateFile,
+				onlyFileCards: conditions.onlyFileCards,
+				libraries: conditions.libraries,
+				superFilters: conditions.superFilters,
+				categories: conditions.categories,
+				categoriesExactMatch: conditions.categoriesExactMatch,
+				onlyWithCategories: conditions.onlyWithCategories,
+				hideDuplicated: conditions.hideDuplicated,
+				onlyByName: conditions.onlyByName,
+				onlyByContent: conditions.onlyByContent,
+				sortColumn: conditions.sortColumn,
+				sortDirection: conditions.sortDirection,
+				datasetKey: conditions.datasetKey
 			},
 			beforeSend: function ()
 			{
@@ -538,12 +562,15 @@
 			},
 			success: function (msg)
 			{
+				var searchResultPage = $('#search-result');
+				searchResultPage.find('.link.back').attr('href', conditions.backLink);
+
 				var searchResultBody = $('#search-result-body');
 				searchResultBody.html(msg);
 				var datasetKeyTag = searchResultBody.find('div.dataset-key');
 				if (datasetKeyTag.length > 0)
 				{
-					$('#search-result').find('td.dataset-key').html(datasetKeyTag.html());
+					searchResultPage.find('td.dataset-key').html(datasetKeyTag.html());
 					datasetKeyTag.remove();
 				}
 				$.mobile.changePage("#search-result", {
@@ -552,17 +579,25 @@
 				searchResultBody.listview('refresh');
 
 				var itemsNumber = searchResultBody.find('li').length;
+				var sortColumnSelectorContainer = $('#search-result-sort-column-container');
+				var sortColumnSelector = $('#search-result-sort-column');
+				var sortDirectionSelectorContainer = $('#search-result-sort-order-container');
+				var sortDirectionSelector = $('#search-result-sort-order');
 				if (itemsNumber > 0)
 				{
 					$('#search-result-links-number').html('Results: ' + itemsNumber);
-					$('#search-result-sort-column-container').show();
-					$('#search-result-sort-order-container').show();
+					sortColumnSelectorContainer.show();
+					sortColumnSelector.val(conditions.sortColumn).attr('selected', true).siblings('option').removeAttr('selected');
+					sortColumnSelector.selectmenu().selectmenu("refresh", true);
+					sortDirectionSelectorContainer.show();
+					sortDirectionSelector.val(conditions.sortDirection).attr('selected', true).siblings('option').removeAttr('selected');
+					sortDirectionSelector.slider().slider("refresh");
 				}
 				else
 				{
 					$('#search-result-links-number').html('Files was not found');
-					$('#search-result-sort-column-container').hide();
-					$('#search-result-sort-order-container').hide();
+					sortColumnSelectorContainer.hide();
+					sortDirectionSelectorContainer.hide();
 				}
 
 				$(".file-link").on('click', function ()
@@ -584,5 +619,13 @@
 			async: true,
 			dataType: 'html'
 		});
-	}
+	};
+	$(document).ready(function ()
+	{
+		$('#search-basic').on('pageshow', function (e)
+		{
+			initSearchSortSelectors();
+			return false;
+		});
+	});
 })(jQuery);
