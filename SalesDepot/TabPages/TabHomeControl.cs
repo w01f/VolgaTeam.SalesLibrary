@@ -70,7 +70,6 @@ namespace SalesDepot.TabPages
 			FormMain.Instance.buttonItemEmailBin.CheckedChanged += buttonItemEmailBin_CheckedChanged;
 			FormMain.Instance.buttonItemHomeHelp.Click += buttonItemHomeHelp_Click;
 
-			FormMain.Instance.buttonItemSettingsLaunchPowerPoint.CheckedChanged += buttonItemSettingsLaunchPowerPoint_CheckedChanged;
 			barCheckItemViewTabs.CheckedChanged += buttonItemSettingsMultitab_CheckedChanged;
 			FormMain.Instance.buttonItemSettingsPowerPointLaunch.Click += buttonItemSettingsPowerPointSettings_Click;
 			FormMain.Instance.buttonItemSettingsPowerPointMenu.Click += buttonItemSettingsPowerPointSettings_Click;
@@ -159,7 +158,6 @@ namespace SalesDepot.TabPages
 			#endregion
 
 			#region Wall Bin Configuration
-			FormMain.Instance.buttonItemSettingsLaunchPowerPoint.Checked = SettingsManager.Instance.LaunchPPT;
 			barCheckItemViewTabs.Checked = SettingsManager.Instance.MultitabView;
 			switch (SettingsManager.Instance.PowerPointLaunchOptions)
 			{
@@ -414,15 +412,6 @@ namespace SalesDepot.TabPages
 		#endregion
 
 		#region Settings Button's Click Event Handlers
-		public void buttonItemSettingsLaunchPowerPoint_CheckedChanged(object sender, EventArgs e)
-		{
-			if (_allowToSave)
-			{
-				SettingsManager.Instance.LaunchPPT = FormMain.Instance.buttonItemSettingsLaunchPowerPoint.Checked;
-				SettingsManager.Instance.SaveSettings();
-			}
-		}
-
 		public void buttonItemSettingsMultitab_CheckedChanged(object sender, EventArgs e)
 		{
 			if (_allowToSave)

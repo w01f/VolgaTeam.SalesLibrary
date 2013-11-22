@@ -142,7 +142,6 @@ namespace SalesDepot.ConfigurationClasses
 		public bool EmailBinSendAsPdf { get; set; }
 		public bool EmailBinSendAsZip { get; set; }
 		public bool EnablePdfConverting { get; set; }
-		public bool LaunchPPT { get; set; }
 		public bool OldStyleQuickView { get; set; }
 		public LinkLaunchOptions PowerPointLaunchOptions { get; set; }
 		public LinkLaunchOptions PDFLaunchOptions { get; set; }
@@ -380,7 +379,6 @@ namespace SalesDepot.ConfigurationClasses
 			EmailBinSendAsZip = false;
 			EnablePdfConverting = true;
 			OldStyleQuickView = false;
-			LaunchPPT = true;
 			PowerPointLaunchOptions = LinkLaunchOptions.Viewer;
 			PDFLaunchOptions = LinkLaunchOptions.Viewer;
 			WordLaunchOptions = LinkLaunchOptions.Menu;
@@ -525,10 +523,6 @@ namespace SalesDepot.ConfigurationClasses
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						OldStyleQuickView = tempBool;
-				node = document.SelectSingleNode(@"/LocalSettings/LaunchPPT");
-				if (node != null)
-					if (bool.TryParse(node.InnerText, out tempBool))
-						LaunchPPT = tempBool;
 				node = document.SelectSingleNode(@"/LocalSettings/PowerPointLaunchOptions");
 				if (node != null)
 					if (Enum.TryParse(node.InnerText, out tempLaunchOptions))
@@ -587,7 +581,6 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<ShowEmailBin>" + ShowEmailBin.ToString() + @"</ShowEmailBin>");
 			xml.AppendLine(@"<EmailBinSendAsZip>" + EmailBinSendAsZip.ToString() + @"</EmailBinSendAsZip>");
 			xml.AppendLine(@"<OldStyleQuickView>" + OldStyleQuickView.ToString() + @"</OldStyleQuickView>");
-			xml.AppendLine(@"<LaunchPPT>" + LaunchPPT.ToString() + @"</LaunchPPT>");
 			xml.AppendLine(@"<PowerPointLaunchOptions>" + PowerPointLaunchOptions.ToString() + @"</PowerPointLaunchOptions>");
 			xml.AppendLine(@"<PDFLaunchOptions>" + PDFLaunchOptions.ToString() + @"</PDFLaunchOptions>");
 			xml.AppendLine(@"<WordLaunchOptions>" + WordLaunchOptions.ToString() + @"</WordLaunchOptions>");

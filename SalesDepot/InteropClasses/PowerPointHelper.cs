@@ -159,6 +159,7 @@ namespace SalesDepot.InteropClasses
 
 		public void Disconnect()
 		{
+			CloseSlideSourcePresentation();
 			AppManager.Instance.ReleaseComObject(_powerPointObject);
 			GC.Collect();
 			_powerPointObject = null;
@@ -214,7 +215,11 @@ namespace SalesDepot.InteropClasses
 			try
 			{
 				MessageFilter.Register();
-				_slideSourcePresentationObject.Close();
+				if (_slideSourcePresentationObject != null)
+				{
+					_slideSourcePresentationObject.Close();
+					AppManager.Instance.ReleaseComObject(_slideSourcePresentationObject);
+				}
 			}
 			catch { }
 			finally

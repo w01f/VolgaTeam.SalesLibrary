@@ -188,62 +188,55 @@ namespace SalesDepot
 		{
 			RegistryHelper.SalesDepotHandle = Handle;
 			RegistryHelper.MaximizeSalesDepot = true;
-			using (var form = new FormProgress())
-			{
-				form.laProgress.Text = SettingsManager.Instance.UseRemoteConnection ? "Loading Remote Sales Libraries..." : "Loading Sales Libraries...";
-				form.TopMost = true;
-				ribbonControl.Visible = false;
-				pnEmpty.BringToFront();
-				var thread = new Thread(delegate()
-											{
-												LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(SettingsManager.Instance.LibraryRootFolder));
-												if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
-												{
-													Invoke((MethodInvoker)delegate
-																			  {
-																				  DecoratorManager.Instance.BuildPackageViewers();
-																				  Application.DoEvents();
-																				  DecoratorManager.Instance.BuildOvernightsCalendars();
-																				  Application.DoEvents();
-																				  DecoratorManager.Instance.BuildProgramManagers();
-																				  Application.DoEvents();
-																			  });
-												}
-											});
-				form.Show();
-				Application.DoEvents();
-				thread.Start();
-				while (thread.IsAlive)
-					Application.DoEvents();
-				form.Close();
-
-				if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
-				{
-					thread = new Thread(delegate()
+			ribbonControl.Visible = false;
+			pnEmpty.BringToFront();
+			var thread = new Thread(delegate()
+										{
+											LibraryManager.Instance.LoadLibraryPackages(new DirectoryInfo(SettingsManager.Instance.LibraryRootFolder));
+											if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
 											{
 												Invoke((MethodInvoker)delegate
 																		  {
-																			  TabHome.LoadTab();
+																			  DecoratorManager.Instance.BuildPackageViewers();
 																			  Application.DoEvents();
-																			  _alowToSave = true;
+																			  DecoratorManager.Instance.BuildOvernightsCalendars();
+																			  Application.DoEvents();
+																			  DecoratorManager.Instance.BuildProgramManagers();
 																			  Application.DoEvents();
 																		  });
-											});
-					thread.Start();
-					while (thread.IsAlive)
-						Application.DoEvents();
-				}
+											}
+										});
+			Application.DoEvents();
+			thread.Start();
+			while (thread.IsAlive)
+				Application.DoEvents();
 
-				if (SettingsManager.Instance.SearchView)
-					ribbonTabItemSearch.Select();
-				else if (SettingsManager.Instance.CalendarView)
-					ribbonTabItemCalendar.Select();
-				else
-					ribbonControl_SelectedRibbonTabChanged(null, null);
-
-				ribbonControl.Visible = true;
-				pnContainer.BringToFront();
+			if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
+			{
+				thread = new Thread(delegate()
+										{
+											Invoke((MethodInvoker)delegate
+																	  {
+																		  TabHome.LoadTab();
+																		  Application.DoEvents();
+																		  _alowToSave = true;
+																		  Application.DoEvents();
+																	  });
+										});
+				thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
 			}
+
+			if (SettingsManager.Instance.SearchView)
+				ribbonTabItemSearch.Select();
+			else if (SettingsManager.Instance.CalendarView)
+				ribbonTabItemCalendar.Select();
+			else
+				ribbonControl_SelectedRibbonTabChanged(null, null);
+
+			ribbonControl.Visible = true;
+			pnContainer.BringToFront();
 			AppManager.Instance.ActivateMainForm();
 			if (LibraryManager.Instance.LibraryPackageCollection.Count == 0)
 			{

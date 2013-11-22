@@ -30,9 +30,9 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarExit = new DevComponents.DotNetBar.RibbonBar();
@@ -95,8 +95,6 @@
 			this.buttonItemSettingsPowerPointViewer = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemSettingsPowerPointMenu = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemSettingsPowerPointLaunch = new DevComponents.DotNetBar.ButtonItem();
-			this.ribbonBarSettingsStartup = new DevComponents.DotNetBar.RibbonBar();
-			this.buttonItemSettingsLaunchPowerPoint = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonPanelQBuilder = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarQBuilderExit = new DevComponents.DotNetBar.RibbonBar();
 			this.buttonItemQBuilderExit = new DevComponents.DotNetBar.ButtonItem();
@@ -216,6 +214,7 @@
 			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
 			this.pnContainer = new System.Windows.Forms.Panel();
 			this.pnEmpty = new System.Windows.Forms.Panel();
+			this.styleManager = new DevComponents.DotNetBar.StyleManager(this.components);
 			this.ribbonControl.SuspendLayout();
 			this.ribbonPanelHome.SuspendLayout();
 			this.ribbonPanelSettings.SuspendLayout();
@@ -247,11 +246,11 @@
 			this.ribbonControl.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.ribbonControl.Controls.Add(this.ribbonPanelHome);
 			this.ribbonControl.Controls.Add(this.ribbonPanelSettings);
-			this.ribbonControl.Controls.Add(this.ribbonPanelQBuilder);
-			this.ribbonControl.Controls.Add(this.ribbonPanelSearch);
 			this.ribbonControl.Controls.Add(this.ribbonPanelProgramSearch);
 			this.ribbonControl.Controls.Add(this.ribbonPanelProgramSchedule);
 			this.ribbonControl.Controls.Add(this.ribbonPanelCalendar);
+			this.ribbonControl.Controls.Add(this.ribbonPanelQBuilder);
+			this.ribbonControl.Controls.Add(this.ribbonPanelSearch);
 			this.ribbonControl.Dock = System.Windows.Forms.DockStyle.Top;
 			this.ribbonControl.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.ribbonTabItemHome,
@@ -265,7 +264,7 @@
 			this.ribbonControl.Location = new System.Drawing.Point(0, 0);
 			this.ribbonControl.MdiSystemItemVisible = false;
 			this.ribbonControl.Name = "ribbonControl";
-			this.ribbonControl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+			this.ribbonControl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
 			this.ribbonControl.Size = new System.Drawing.Size(1008, 144);
 			this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonControl.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
@@ -298,7 +297,7 @@
 			this.ribbonPanelHome.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelHome.Name = "ribbonPanelHome";
 			this.ribbonPanelHome.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelHome.Size = new System.Drawing.Size(1008, 116);
+			this.ribbonPanelHome.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -334,7 +333,7 @@
 			this.ribbonBarExit.Location = new System.Drawing.Point(645, 0);
 			this.ribbonBarExit.Name = "ribbonBarExit";
 			this.ribbonBarExit.ResizeItemsToFit = false;
-			this.ribbonBarExit.Size = new System.Drawing.Size(92, 113);
+			this.ribbonBarExit.Size = new System.Drawing.Size(92, 112);
 			this.ribbonBarExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarExit.TabIndex = 8;
 			this.ribbonBarExit.Text = "EXIT";
@@ -373,7 +372,7 @@
 			this.ribbonBarHomeHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeHelp.Location = new System.Drawing.Point(559, 0);
 			this.ribbonBarHomeHelp.Name = "ribbonBarHomeHelp";
-			this.ribbonBarHomeHelp.Size = new System.Drawing.Size(86, 113);
+			this.ribbonBarHomeHelp.Size = new System.Drawing.Size(86, 112);
 			this.ribbonBarHomeHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeHelp.TabIndex = 6;
 			this.ribbonBarHomeHelp.Text = "HELP";
@@ -411,7 +410,7 @@
 			this.ribbonBarHomeFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeFloater.Location = new System.Drawing.Point(476, 0);
 			this.ribbonBarHomeFloater.Name = "ribbonBarHomeFloater";
-			this.ribbonBarHomeFloater.Size = new System.Drawing.Size(83, 113);
+			this.ribbonBarHomeFloater.Size = new System.Drawing.Size(83, 112);
 			this.ribbonBarHomeFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeFloater.TabIndex = 7;
 			this.ribbonBarHomeFloater.Text = "Floater";
@@ -453,7 +452,7 @@
 			this.ribbonBarEmailBin.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarEmailBin.Location = new System.Drawing.Point(379, 0);
 			this.ribbonBarEmailBin.Name = "ribbonBarEmailBin";
-			this.ribbonBarEmailBin.Size = new System.Drawing.Size(97, 113);
+			this.ribbonBarEmailBin.Size = new System.Drawing.Size(97, 112);
 			this.ribbonBarEmailBin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarEmailBin.TabIndex = 5;
 			this.ribbonBarEmailBin.Text = "Email Panel";
@@ -492,7 +491,7 @@
 			this.ribbonBarStations.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarStations.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarStations.Name = "ribbonBarStations";
-			this.ribbonBarStations.Size = new System.Drawing.Size(376, 113);
+			this.ribbonBarStations.Size = new System.Drawing.Size(376, 112);
 			this.ribbonBarStations.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarStations.TabIndex = 0;
 			this.ribbonBarStations.Text = "Sales Depot";
@@ -518,6 +517,10 @@
 			this.itemContainerHomeBrandLogo.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemPackageLogo});
 			// 
+			// 
+			// 
+			this.itemContainerHomeBrandLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// labelItemPackageLogo
 			// 
 			this.labelItemPackageLogo.Image = global::SalesDepot.Properties.Resources.PackageLogo;
@@ -535,6 +538,10 @@
             this.comboBoxItemPackages,
             this.comboBoxItemStations,
             this.comboBoxItemPages});
+			// 
+			// 
+			// 
+			this.itemContainerStations.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerStations.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// comboBoxItemPackages
@@ -574,12 +581,11 @@
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsWordLaunchOptions);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsPDFLaunchOptions);
 			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsPowerPointLaunchOptions);
-			this.ribbonPanelSettings.Controls.Add(this.ribbonBarSettingsStartup);
 			this.ribbonPanelSettings.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.ribbonPanelSettings.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelSettings.Name = "ribbonPanelSettings";
 			this.ribbonPanelSettings.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelSettings.Size = new System.Drawing.Size(1008, 116);
+			this.ribbonPanelSettings.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -613,10 +619,10 @@
 			this.ribbonBarSettingsExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsExit});
 			this.ribbonBarSettingsExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsExit.Location = new System.Drawing.Point(877, 0);
+			this.ribbonBarSettingsExit.Location = new System.Drawing.Point(806, 0);
 			this.ribbonBarSettingsExit.Name = "ribbonBarSettingsExit";
 			this.ribbonBarSettingsExit.ResizeItemsToFit = false;
-			this.ribbonBarSettingsExit.Size = new System.Drawing.Size(80, 113);
+			this.ribbonBarSettingsExit.Size = new System.Drawing.Size(80, 112);
 			this.ribbonBarSettingsExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsExit.TabIndex = 13;
 			this.ribbonBarSettingsExit.Text = "EXIT";
@@ -655,10 +661,10 @@
 			this.ribbonBarSettingsHelp.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsHelp});
 			this.ribbonBarSettingsHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsHelp.Location = new System.Drawing.Point(798, 0);
+			this.ribbonBarSettingsHelp.Location = new System.Drawing.Point(727, 0);
 			this.ribbonBarSettingsHelp.Name = "ribbonBarSettingsHelp";
 			this.ribbonBarSettingsHelp.ResizeItemsToFit = false;
-			this.ribbonBarSettingsHelp.Size = new System.Drawing.Size(79, 113);
+			this.ribbonBarSettingsHelp.Size = new System.Drawing.Size(79, 112);
 			this.ribbonBarSettingsHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsHelp.TabIndex = 11;
 			this.ribbonBarSettingsHelp.Text = "HELP";
@@ -694,9 +700,9 @@
 			this.ribbonBarSettingsFloater.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsFloater});
 			this.ribbonBarSettingsFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsFloater.Location = new System.Drawing.Point(709, 0);
+			this.ribbonBarSettingsFloater.Location = new System.Drawing.Point(638, 0);
 			this.ribbonBarSettingsFloater.Name = "ribbonBarSettingsFloater";
-			this.ribbonBarSettingsFloater.Size = new System.Drawing.Size(89, 113);
+			this.ribbonBarSettingsFloater.Size = new System.Drawing.Size(89, 112);
 			this.ribbonBarSettingsFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsFloater.TabIndex = 20;
 			this.ribbonBarSettingsFloater.Text = "Floater";
@@ -734,9 +740,9 @@
 			this.ribbonBarSettingsFile.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsFile});
 			this.ribbonBarSettingsFile.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsFile.Location = new System.Drawing.Point(624, 0);
+			this.ribbonBarSettingsFile.Location = new System.Drawing.Point(553, 0);
 			this.ribbonBarSettingsFile.Name = "ribbonBarSettingsFile";
-			this.ribbonBarSettingsFile.Size = new System.Drawing.Size(85, 113);
+			this.ribbonBarSettingsFile.Size = new System.Drawing.Size(85, 112);
 			this.ribbonBarSettingsFile.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsFile.TabIndex = 22;
 			this.ribbonBarSettingsFile.Text = "File";
@@ -775,10 +781,10 @@
 			this.ribbonBarSettingsEmail.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsEmail});
 			this.ribbonBarSettingsEmail.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsEmail.Location = new System.Drawing.Point(545, 0);
+			this.ribbonBarSettingsEmail.Location = new System.Drawing.Point(474, 0);
 			this.ribbonBarSettingsEmail.Name = "ribbonBarSettingsEmail";
 			this.ribbonBarSettingsEmail.ResizeItemsToFit = false;
-			this.ribbonBarSettingsEmail.Size = new System.Drawing.Size(79, 113);
+			this.ribbonBarSettingsEmail.Size = new System.Drawing.Size(79, 112);
 			this.ribbonBarSettingsEmail.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsEmail.TabIndex = 9;
 			this.ribbonBarSettingsEmail.Text = "Email";
@@ -814,9 +820,9 @@
 			this.ribbonBarSettingsQuickView.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsQuickView});
 			this.ribbonBarSettingsQuickView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsQuickView.Location = new System.Drawing.Point(476, 0);
+			this.ribbonBarSettingsQuickView.Location = new System.Drawing.Point(405, 0);
 			this.ribbonBarSettingsQuickView.Name = "ribbonBarSettingsQuickView";
-			this.ribbonBarSettingsQuickView.Size = new System.Drawing.Size(69, 113);
+			this.ribbonBarSettingsQuickView.Size = new System.Drawing.Size(69, 112);
 			this.ribbonBarSettingsQuickView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsQuickView.TabIndex = 19;
 			this.ribbonBarSettingsQuickView.Text = "Quick View";
@@ -841,6 +847,10 @@
 			this.itemContainerSettingsQuickView.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemSettingsQuickViewImages,
             this.buttonItemSettingsQuickViewSlides});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsQuickView.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsQuickView.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsQuickViewImages
@@ -877,10 +887,10 @@
 			this.ribbonBarSettingsFolderLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsFolderLaunchOptions});
 			this.ribbonBarSettingsFolderLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsFolderLaunchOptions.Location = new System.Drawing.Point(408, 0);
+			this.ribbonBarSettingsFolderLaunchOptions.Location = new System.Drawing.Point(337, 0);
 			this.ribbonBarSettingsFolderLaunchOptions.Name = "ribbonBarSettingsFolderLaunchOptions";
 			this.ribbonBarSettingsFolderLaunchOptions.ResizeItemsToFit = false;
-			this.ribbonBarSettingsFolderLaunchOptions.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarSettingsFolderLaunchOptions.Size = new System.Drawing.Size(68, 112);
 			this.ribbonBarSettingsFolderLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsFolderLaunchOptions.TabIndex = 21;
 			this.ribbonBarSettingsFolderLaunchOptions.Text = "Folder";
@@ -907,6 +917,10 @@
             this.buttonItemSettingsFolderViewer,
             this.buttonItemSettingsFolderMenu,
             this.buttonItemSettingsFolderLaunch});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsFolderLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsFolderLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsFolderViewer
@@ -948,10 +962,10 @@
 			this.ribbonBarSettingsVideoLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsVideoLaunchOptions});
 			this.ribbonBarSettingsVideoLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsVideoLaunchOptions.Location = new System.Drawing.Point(340, 0);
+			this.ribbonBarSettingsVideoLaunchOptions.Location = new System.Drawing.Point(269, 0);
 			this.ribbonBarSettingsVideoLaunchOptions.Name = "ribbonBarSettingsVideoLaunchOptions";
 			this.ribbonBarSettingsVideoLaunchOptions.ResizeItemsToFit = false;
-			this.ribbonBarSettingsVideoLaunchOptions.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarSettingsVideoLaunchOptions.Size = new System.Drawing.Size(68, 112);
 			this.ribbonBarSettingsVideoLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsVideoLaunchOptions.TabIndex = 18;
 			this.ribbonBarSettingsVideoLaunchOptions.Text = "Video";
@@ -978,6 +992,10 @@
             this.buttonItemSettingsVideoViewer,
             this.buttonItemSettingsVideoMenu,
             this.buttonItemSettingsVideoLaunch});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsVideoLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsVideoLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsVideoViewer
@@ -1019,10 +1037,10 @@
 			this.ribbonBarSettingsExcelLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsExcelLaunchOptions});
 			this.ribbonBarSettingsExcelLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsExcelLaunchOptions.Location = new System.Drawing.Point(272, 0);
+			this.ribbonBarSettingsExcelLaunchOptions.Location = new System.Drawing.Point(201, 0);
 			this.ribbonBarSettingsExcelLaunchOptions.Name = "ribbonBarSettingsExcelLaunchOptions";
 			this.ribbonBarSettingsExcelLaunchOptions.ResizeItemsToFit = false;
-			this.ribbonBarSettingsExcelLaunchOptions.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarSettingsExcelLaunchOptions.Size = new System.Drawing.Size(68, 112);
 			this.ribbonBarSettingsExcelLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsExcelLaunchOptions.TabIndex = 17;
 			this.ribbonBarSettingsExcelLaunchOptions.Text = "Excel";
@@ -1049,6 +1067,10 @@
             this.buttonItemSettingsExcelViewer,
             this.buttonItemSettingsExcelMenu,
             this.buttonItemSettingsExcelLaunch});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsExcelLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsExcelLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsExcelViewer
@@ -1090,10 +1112,10 @@
 			this.ribbonBarSettingsWordLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsWordLaunchOptions});
 			this.ribbonBarSettingsWordLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsWordLaunchOptions.Location = new System.Drawing.Point(204, 0);
+			this.ribbonBarSettingsWordLaunchOptions.Location = new System.Drawing.Point(133, 0);
 			this.ribbonBarSettingsWordLaunchOptions.Name = "ribbonBarSettingsWordLaunchOptions";
 			this.ribbonBarSettingsWordLaunchOptions.ResizeItemsToFit = false;
-			this.ribbonBarSettingsWordLaunchOptions.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarSettingsWordLaunchOptions.Size = new System.Drawing.Size(68, 112);
 			this.ribbonBarSettingsWordLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsWordLaunchOptions.TabIndex = 16;
 			this.ribbonBarSettingsWordLaunchOptions.Text = "Word";
@@ -1120,6 +1142,10 @@
             this.buttonItemSettingsWordViewer,
             this.buttonItemSettingsWordMenu,
             this.buttonItemSettingsWordLaunch});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsWordLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsWordLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsWordViewer
@@ -1161,10 +1187,10 @@
 			this.ribbonBarSettingsPDFLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsPDFLaunchOptions});
 			this.ribbonBarSettingsPDFLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsPDFLaunchOptions.Location = new System.Drawing.Point(136, 0);
+			this.ribbonBarSettingsPDFLaunchOptions.Location = new System.Drawing.Point(65, 0);
 			this.ribbonBarSettingsPDFLaunchOptions.Name = "ribbonBarSettingsPDFLaunchOptions";
 			this.ribbonBarSettingsPDFLaunchOptions.ResizeItemsToFit = false;
-			this.ribbonBarSettingsPDFLaunchOptions.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarSettingsPDFLaunchOptions.Size = new System.Drawing.Size(68, 112);
 			this.ribbonBarSettingsPDFLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsPDFLaunchOptions.TabIndex = 15;
 			this.ribbonBarSettingsPDFLaunchOptions.Text = "PDF";
@@ -1191,6 +1217,10 @@
             this.buttonItemSettingsPDFViewer,
             this.buttonItemSettingsPDFMenu,
             this.buttonItemSettingsPDFLaunch});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsPDFLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsPDFLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsPDFViewer
@@ -1232,10 +1262,10 @@
 			this.ribbonBarSettingsPowerPointLaunchOptions.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerSettingsPowerPointLaunchOptions});
 			this.ribbonBarSettingsPowerPointLaunchOptions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsPowerPointLaunchOptions.Location = new System.Drawing.Point(74, 0);
+			this.ribbonBarSettingsPowerPointLaunchOptions.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarSettingsPowerPointLaunchOptions.Name = "ribbonBarSettingsPowerPointLaunchOptions";
 			this.ribbonBarSettingsPowerPointLaunchOptions.ResizeItemsToFit = false;
-			this.ribbonBarSettingsPowerPointLaunchOptions.Size = new System.Drawing.Size(62, 113);
+			this.ribbonBarSettingsPowerPointLaunchOptions.Size = new System.Drawing.Size(62, 112);
 			this.ribbonBarSettingsPowerPointLaunchOptions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSettingsPowerPointLaunchOptions.TabIndex = 7;
 			this.ribbonBarSettingsPowerPointLaunchOptions.Text = "PowerPoint";
@@ -1262,6 +1292,10 @@
             this.buttonItemSettingsPowerPointViewer,
             this.buttonItemSettingsPowerPointMenu,
             this.buttonItemSettingsPowerPointLaunch});
+			// 
+			// 
+			// 
+			this.itemContainerSettingsPowerPointLaunchOptions.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerSettingsPowerPointLaunchOptions.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemSettingsPowerPointViewer
@@ -1285,44 +1319,6 @@
 			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsPowerPointLaunch, new DevComponents.DotNetBar.SuperTooltipInfo("PowerPoint Launch", "", "PowerPoint links will immediately open the PowerPoint file", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
 			this.buttonItemSettingsPowerPointLaunch.Text = "   Launch";
 			// 
-			// ribbonBarSettingsStartup
-			// 
-			this.ribbonBarSettingsStartup.AutoOverflowEnabled = true;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsStartup.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsStartup.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.ribbonBarSettingsStartup.ContainerControlProcessDialogKey = true;
-			this.ribbonBarSettingsStartup.Dock = System.Windows.Forms.DockStyle.Left;
-			this.ribbonBarSettingsStartup.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemSettingsLaunchPowerPoint});
-			this.ribbonBarSettingsStartup.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarSettingsStartup.Location = new System.Drawing.Point(3, 0);
-			this.ribbonBarSettingsStartup.Name = "ribbonBarSettingsStartup";
-			this.ribbonBarSettingsStartup.Size = new System.Drawing.Size(71, 113);
-			this.ribbonBarSettingsStartup.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-			this.ribbonBarSettingsStartup.TabIndex = 14;
-			this.ribbonBarSettingsStartup.Text = "Startup";
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsStartup.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// 
-			// 
-			this.ribbonBarSettingsStartup.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemSettingsLaunchPowerPoint
-			// 
-			this.buttonItemSettingsLaunchPowerPoint.AutoCheckOnClick = true;
-			this.buttonItemSettingsLaunchPowerPoint.Name = "buttonItemSettingsLaunchPowerPoint";
-			this.superTooltip.SetSuperTooltip(this.buttonItemSettingsLaunchPowerPoint, new DevComponents.DotNetBar.SuperTooltipInfo("Launch PowerPoint", "", "PowerPoint will startup when your Sales Library Opens", null, null, DevComponents.DotNetBar.eTooltipColor.Gray));
-			this.buttonItemSettingsLaunchPowerPoint.Text = "   Launch\r\nPowerPoint";
-			// 
 			// ribbonPanelQBuilder
 			// 
 			this.ribbonPanelQBuilder.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1337,7 +1333,7 @@
 			this.ribbonPanelQBuilder.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelQBuilder.Name = "ribbonPanelQBuilder";
 			this.ribbonPanelQBuilder.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelQBuilder.Size = new System.Drawing.Size(1008, 116);
+			this.ribbonPanelQBuilder.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -1374,7 +1370,7 @@
 			this.ribbonBarQBuilderExit.Location = new System.Drawing.Point(924, 0);
 			this.ribbonBarQBuilderExit.Name = "ribbonBarQBuilderExit";
 			this.ribbonBarQBuilderExit.ResizeItemsToFit = false;
-			this.ribbonBarQBuilderExit.Size = new System.Drawing.Size(73, 113);
+			this.ribbonBarQBuilderExit.Size = new System.Drawing.Size(73, 112);
 			this.ribbonBarQBuilderExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderExit.TabIndex = 10;
 			this.ribbonBarQBuilderExit.Text = "EXIT";
@@ -1413,7 +1409,7 @@
 			this.ribbonBarQBuilderHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarQBuilderHelp.Location = new System.Drawing.Point(856, 0);
 			this.ribbonBarQBuilderHelp.Name = "ribbonBarQBuilderHelp";
-			this.ribbonBarQBuilderHelp.Size = new System.Drawing.Size(68, 113);
+			this.ribbonBarQBuilderHelp.Size = new System.Drawing.Size(68, 112);
 			this.ribbonBarQBuilderHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderHelp.TabIndex = 9;
 			this.ribbonBarQBuilderHelp.Text = "HELP";
@@ -1452,7 +1448,7 @@
 			this.ribbonBarQBuilderFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarQBuilderFloater.Location = new System.Drawing.Point(767, 0);
 			this.ribbonBarQBuilderFloater.Name = "ribbonBarQBuilderFloater";
-			this.ribbonBarQBuilderFloater.Size = new System.Drawing.Size(89, 113);
+			this.ribbonBarQBuilderFloater.Size = new System.Drawing.Size(89, 112);
 			this.ribbonBarQBuilderFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderFloater.TabIndex = 20;
 			this.ribbonBarQBuilderFloater.Text = "Floater";
@@ -1496,7 +1492,7 @@
 			this.ribbonBarQBuilderPages.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarQBuilderPages.Location = new System.Drawing.Point(356, 0);
 			this.ribbonBarQBuilderPages.Name = "ribbonBarQBuilderPages";
-			this.ribbonBarQBuilderPages.Size = new System.Drawing.Size(411, 113);
+			this.ribbonBarQBuilderPages.Size = new System.Drawing.Size(411, 112);
 			this.ribbonBarQBuilderPages.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderPages.TabIndex = 24;
 			this.ribbonBarQBuilderPages.Text = "quickSITE";
@@ -1567,7 +1563,7 @@
 			this.ribbonBarQBuilderLinkCart.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarQBuilderLinkCart.Location = new System.Drawing.Point(262, 0);
 			this.ribbonBarQBuilderLinkCart.Name = "ribbonBarQBuilderLinkCart";
-			this.ribbonBarQBuilderLinkCart.Size = new System.Drawing.Size(94, 113);
+			this.ribbonBarQBuilderLinkCart.Size = new System.Drawing.Size(94, 112);
 			this.ribbonBarQBuilderLinkCart.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderLinkCart.TabIndex = 23;
 			this.ribbonBarQBuilderLinkCart.Text = "Link Cart";
@@ -1608,7 +1604,7 @@
 			this.ribbonBarQBuilderPageList.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarQBuilderPageList.Location = new System.Drawing.Point(173, 0);
 			this.ribbonBarQBuilderPageList.Name = "ribbonBarQBuilderPageList";
-			this.ribbonBarQBuilderPageList.Size = new System.Drawing.Size(89, 113);
+			this.ribbonBarQBuilderPageList.Size = new System.Drawing.Size(89, 112);
 			this.ribbonBarQBuilderPageList.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderPageList.TabIndex = 22;
 			this.ribbonBarQBuilderPageList.Text = "Site List";
@@ -1650,7 +1646,7 @@
 			this.ribbonBarQBuilderLogin.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarQBuilderLogin.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarQBuilderLogin.Name = "ribbonBarQBuilderLogin";
-			this.ribbonBarQBuilderLogin.Size = new System.Drawing.Size(170, 113);
+			this.ribbonBarQBuilderLogin.Size = new System.Drawing.Size(170, 112);
 			this.ribbonBarQBuilderLogin.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarQBuilderLogin.TabIndex = 21;
 			this.ribbonBarQBuilderLogin.Text = "Login\\Logout";
@@ -1691,7 +1687,7 @@
 			this.ribbonPanelSearch.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelSearch.Name = "ribbonPanelSearch";
 			this.ribbonPanelSearch.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelSearch.Size = new System.Drawing.Size(1008, 116);
+			this.ribbonPanelSearch.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -1728,7 +1724,7 @@
 			this.ribbonBarSearchExit.Location = new System.Drawing.Point(407, 0);
 			this.ribbonBarSearchExit.Name = "ribbonBarSearchExit";
 			this.ribbonBarSearchExit.ResizeItemsToFit = false;
-			this.ribbonBarSearchExit.Size = new System.Drawing.Size(103, 113);
+			this.ribbonBarSearchExit.Size = new System.Drawing.Size(103, 112);
 			this.ribbonBarSearchExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSearchExit.TabIndex = 11;
 			this.ribbonBarSearchExit.Text = "EXIT";
@@ -1767,7 +1763,7 @@
 			this.ribbonBarSearchHelp.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSearchHelp.Location = new System.Drawing.Point(312, 0);
 			this.ribbonBarSearchHelp.Name = "ribbonBarSearchHelp";
-			this.ribbonBarSearchHelp.Size = new System.Drawing.Size(95, 113);
+			this.ribbonBarSearchHelp.Size = new System.Drawing.Size(95, 112);
 			this.ribbonBarSearchHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSearchHelp.TabIndex = 9;
 			this.ribbonBarSearchHelp.Text = "HELP";
@@ -1806,7 +1802,7 @@
 			this.ribbonBarSearchFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSearchFloater.Location = new System.Drawing.Point(216, 0);
 			this.ribbonBarSearchFloater.Name = "ribbonBarSearchFloater";
-			this.ribbonBarSearchFloater.Size = new System.Drawing.Size(96, 113);
+			this.ribbonBarSearchFloater.Size = new System.Drawing.Size(96, 112);
 			this.ribbonBarSearchFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSearchFloater.TabIndex = 10;
 			this.ribbonBarSearchFloater.Text = "Floater";
@@ -1846,7 +1842,7 @@
 			this.ribbonBarSearchLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarSearchLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarSearchLogo.Name = "ribbonBarSearchLogo";
-			this.ribbonBarSearchLogo.Size = new System.Drawing.Size(213, 113);
+			this.ribbonBarSearchLogo.Size = new System.Drawing.Size(213, 112);
 			this.ribbonBarSearchLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarSearchLogo.TabIndex = 18;
 			this.ribbonBarSearchLogo.Text = "Overnights Calendar";
@@ -1872,6 +1868,10 @@
 			this.itemContainerSearchLogo.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemSearchLogo});
 			// 
+			// 
+			// 
+			this.itemContainerSearchLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// labelItemSearchLogo
 			// 
 			this.labelItemSearchLogo.Image = global::SalesDepot.Properties.Resources.PackageLogo;
@@ -1888,10 +1888,10 @@
 			this.ribbonPanelProgramSearch.Controls.Add(this.ribbonBarProgramSearchDateRange);
 			this.ribbonPanelProgramSearch.Controls.Add(this.ribbonBarProgramSearchStation);
 			this.ribbonPanelProgramSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelProgramSearch.Location = new System.Drawing.Point(0, 0);
+			this.ribbonPanelProgramSearch.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelProgramSearch.Name = "ribbonPanelProgramSearch";
 			this.ribbonPanelProgramSearch.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelProgramSearch.Size = new System.Drawing.Size(1008, 142);
+			this.ribbonPanelProgramSearch.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -1928,7 +1928,7 @@
 			this.ribbonBarProgramSearchExit.Location = new System.Drawing.Point(736, 0);
 			this.ribbonBarProgramSearchExit.Name = "ribbonBarProgramSearchExit";
 			this.ribbonBarProgramSearchExit.ResizeItemsToFit = false;
-			this.ribbonBarProgramSearchExit.Size = new System.Drawing.Size(80, 139);
+			this.ribbonBarProgramSearchExit.Size = new System.Drawing.Size(80, 112);
 			this.ribbonBarProgramSearchExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchExit.TabIndex = 38;
 			this.ribbonBarProgramSearchExit.Text = "EXIT";
@@ -1970,7 +1970,7 @@
 			this.ribbonBarProgramSearchHelp.Location = new System.Drawing.Point(651, 0);
 			this.ribbonBarProgramSearchHelp.Name = "ribbonBarProgramSearchHelp";
 			this.ribbonBarProgramSearchHelp.ResizeItemsToFit = false;
-			this.ribbonBarProgramSearchHelp.Size = new System.Drawing.Size(85, 139);
+			this.ribbonBarProgramSearchHelp.Size = new System.Drawing.Size(85, 112);
 			this.ribbonBarProgramSearchHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchHelp.TabIndex = 40;
 			this.ribbonBarProgramSearchHelp.Text = "HELP";
@@ -2008,7 +2008,7 @@
 			this.ribbonBarProgramSearchFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramSearchFloater.Location = new System.Drawing.Point(562, 0);
 			this.ribbonBarProgramSearchFloater.Name = "ribbonBarProgramSearchFloater";
-			this.ribbonBarProgramSearchFloater.Size = new System.Drawing.Size(89, 139);
+			this.ribbonBarProgramSearchFloater.Size = new System.Drawing.Size(89, 112);
 			this.ribbonBarProgramSearchFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchFloater.TabIndex = 39;
 			this.ribbonBarProgramSearchFloater.Text = "Floater";
@@ -2048,7 +2048,7 @@
 			this.ribbonBarProgramSearchOutput.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramSearchOutput.Location = new System.Drawing.Point(474, 0);
 			this.ribbonBarProgramSearchOutput.Name = "ribbonBarProgramSearchOutput";
-			this.ribbonBarProgramSearchOutput.Size = new System.Drawing.Size(88, 139);
+			this.ribbonBarProgramSearchOutput.Size = new System.Drawing.Size(88, 112);
 			this.ribbonBarProgramSearchOutput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchOutput.TabIndex = 34;
 			this.ribbonBarProgramSearchOutput.Text = "Output";
@@ -2072,6 +2072,10 @@
 			this.itemContainerProgramSearchOutput.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemProgramSearchOutputExcel,
             this.buttonItemProgramSearchOutputPDF});
+			// 
+			// 
+			// 
+			this.itemContainerProgramSearchOutput.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemProgramSearchOutputExcel
 			// 
@@ -2109,7 +2113,7 @@
 			this.ribbonBarProgramSearchPrograms.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramSearchPrograms.Location = new System.Drawing.Point(212, 0);
 			this.ribbonBarProgramSearchPrograms.Name = "ribbonBarProgramSearchPrograms";
-			this.ribbonBarProgramSearchPrograms.Size = new System.Drawing.Size(262, 139);
+			this.ribbonBarProgramSearchPrograms.Size = new System.Drawing.Size(262, 112);
 			this.ribbonBarProgramSearchPrograms.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchPrograms.TabIndex = 32;
 			this.ribbonBarProgramSearchPrograms.Text = "Program Search";
@@ -2124,7 +2128,7 @@
 			// 
 			// comboBoxEditProgramSearchPrograms
 			// 
-			this.comboBoxEditProgramSearchPrograms.Location = new System.Drawing.Point(6, 41);
+			this.comboBoxEditProgramSearchPrograms.Location = new System.Drawing.Point(6, 40);
 			this.comboBoxEditProgramSearchPrograms.Name = "comboBoxEditProgramSearchPrograms";
 			this.comboBoxEditProgramSearchPrograms.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -2144,6 +2148,10 @@
 			this.itemContainerProgramSearchPrograms.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemProgramSearchPrograms,
             this.controlContainerItemProgramSearchPrograms});
+			// 
+			// 
+			// 
+			this.itemContainerProgramSearchPrograms.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemProgramSearchPrograms
 			// 
@@ -2186,7 +2194,7 @@
 			this.ribbonBarProgramSearchDateRange.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramSearchDateRange.Location = new System.Drawing.Point(112, 0);
 			this.ribbonBarProgramSearchDateRange.Name = "ribbonBarProgramSearchDateRange";
-			this.ribbonBarProgramSearchDateRange.Size = new System.Drawing.Size(100, 139);
+			this.ribbonBarProgramSearchDateRange.Size = new System.Drawing.Size(100, 112);
 			this.ribbonBarProgramSearchDateRange.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchDateRange.TabIndex = 31;
 			this.ribbonBarProgramSearchDateRange.Text = "Date Range";
@@ -2202,11 +2210,11 @@
 			// dateEditProgramSearchDateStart
 			// 
 			this.dateEditProgramSearchDateStart.EditValue = null;
-			this.dateEditProgramSearchDateStart.Location = new System.Drawing.Point(6, 34);
+			this.dateEditProgramSearchDateStart.Location = new System.Drawing.Point(6, 19);
 			this.dateEditProgramSearchDateStart.Name = "dateEditProgramSearchDateStart";
 			this.dateEditProgramSearchDateStart.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditProgramSearchDateStart.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject4, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateStart.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
 			this.dateEditProgramSearchDateStart.Properties.DisplayFormat.FormatString = "MM/dd/yy";
 			this.dateEditProgramSearchDateStart.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 			this.dateEditProgramSearchDateStart.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -2221,11 +2229,11 @@
 			// dateEditProgramSearchDateEnd
 			// 
 			this.dateEditProgramSearchDateEnd.EditValue = null;
-			this.dateEditProgramSearchDateEnd.Location = new System.Drawing.Point(6, 86);
+			this.dateEditProgramSearchDateEnd.Location = new System.Drawing.Point(6, 71);
 			this.dateEditProgramSearchDateEnd.Name = "dateEditProgramSearchDateEnd";
 			this.dateEditProgramSearchDateEnd.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditProgramSearchDateEnd.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramSearchDateEnd.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
 			this.dateEditProgramSearchDateEnd.Properties.DisplayFormat.FormatString = "MM/dd/yy";
 			this.dateEditProgramSearchDateEnd.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 			this.dateEditProgramSearchDateEnd.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -2249,6 +2257,10 @@
 			this.itemContainerProgramSearchDateRange.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerProgramSearchDateStart,
             this.itemContainerProgramSearchDateEnd});
+			// 
+			// 
+			// 
+			this.itemContainerProgramSearchDateRange.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerProgramSearchDateRange.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// itemContainerProgramSearchDateStart
@@ -2263,6 +2275,10 @@
 			this.itemContainerProgramSearchDateStart.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemProgramSearchDateStart,
             this.controlContainerItemSearchDateStart});
+			// 
+			// 
+			// 
+			this.itemContainerProgramSearchDateStart.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemProgramSearchDateStart
 			// 
@@ -2289,6 +2305,10 @@
 			this.itemContainerProgramSearchDateEnd.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemProgramSearchDateEnd,
             this.controlContainerItemSearchDateEnd});
+			// 
+			// 
+			// 
+			this.itemContainerProgramSearchDateEnd.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemProgramSearchDateEnd
 			// 
@@ -2323,7 +2343,7 @@
 			this.ribbonBarProgramSearchStation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramSearchStation.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarProgramSearchStation.Name = "ribbonBarProgramSearchStation";
-			this.ribbonBarProgramSearchStation.Size = new System.Drawing.Size(109, 139);
+			this.ribbonBarProgramSearchStation.Size = new System.Drawing.Size(109, 112);
 			this.ribbonBarProgramSearchStation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramSearchStation.TabIndex = 30;
 			this.ribbonBarProgramSearchStation.Text = "Station";
@@ -2338,7 +2358,7 @@
 			// 
 			// comboBoxEditProgramSearchStation
 			// 
-			this.comboBoxEditProgramSearchStation.Location = new System.Drawing.Point(9, 52);
+			this.comboBoxEditProgramSearchStation.Location = new System.Drawing.Point(9, 38);
 			this.comboBoxEditProgramSearchStation.Name = "comboBoxEditProgramSearchStation";
 			this.comboBoxEditProgramSearchStation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -2361,6 +2381,10 @@
 			this.itemContainerProgramSearchStation.Name = "itemContainerProgramSearchStation";
 			this.itemContainerProgramSearchStation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItemSearchStation});
+			// 
+			// 
+			// 
+			this.itemContainerProgramSearchStation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerProgramSearchStation.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// controlContainerItemSearchStation
@@ -2381,10 +2405,10 @@
 			this.ribbonPanelProgramSchedule.Controls.Add(this.ribbonBarProgramScheduleInfo);
 			this.ribbonPanelProgramSchedule.Controls.Add(this.ribbonBarProgramScheduleStation);
 			this.ribbonPanelProgramSchedule.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelProgramSchedule.Location = new System.Drawing.Point(0, 0);
+			this.ribbonPanelProgramSchedule.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelProgramSchedule.Name = "ribbonPanelProgramSchedule";
 			this.ribbonPanelProgramSchedule.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelProgramSchedule.Size = new System.Drawing.Size(1008, 142);
+			this.ribbonPanelProgramSchedule.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -2421,7 +2445,7 @@
 			this.ribbonBarProgramScheduleExit.Location = new System.Drawing.Point(550, 0);
 			this.ribbonBarProgramScheduleExit.Name = "ribbonBarProgramScheduleExit";
 			this.ribbonBarProgramScheduleExit.ResizeItemsToFit = false;
-			this.ribbonBarProgramScheduleExit.Size = new System.Drawing.Size(80, 139);
+			this.ribbonBarProgramScheduleExit.Size = new System.Drawing.Size(80, 112);
 			this.ribbonBarProgramScheduleExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleExit.TabIndex = 36;
 			this.ribbonBarProgramScheduleExit.Text = "EXIT";
@@ -2463,7 +2487,7 @@
 			this.ribbonBarProgramScheduleHelp.Location = new System.Drawing.Point(485, 0);
 			this.ribbonBarProgramScheduleHelp.Name = "ribbonBarProgramScheduleHelp";
 			this.ribbonBarProgramScheduleHelp.ResizeItemsToFit = false;
-			this.ribbonBarProgramScheduleHelp.Size = new System.Drawing.Size(65, 139);
+			this.ribbonBarProgramScheduleHelp.Size = new System.Drawing.Size(65, 112);
 			this.ribbonBarProgramScheduleHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleHelp.TabIndex = 38;
 			this.ribbonBarProgramScheduleHelp.Text = "HELP";
@@ -2501,7 +2525,7 @@
 			this.ribbonBarProgramScheduleFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramScheduleFloater.Location = new System.Drawing.Point(396, 0);
 			this.ribbonBarProgramScheduleFloater.Name = "ribbonBarProgramScheduleFloater";
-			this.ribbonBarProgramScheduleFloater.Size = new System.Drawing.Size(89, 139);
+			this.ribbonBarProgramScheduleFloater.Size = new System.Drawing.Size(89, 112);
 			this.ribbonBarProgramScheduleFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleFloater.TabIndex = 37;
 			this.ribbonBarProgramScheduleFloater.Text = "Floater";
@@ -2541,7 +2565,7 @@
 			this.ribbonBarProgramScheduleOutput.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramScheduleOutput.Location = new System.Drawing.Point(311, 0);
 			this.ribbonBarProgramScheduleOutput.Name = "ribbonBarProgramScheduleOutput";
-			this.ribbonBarProgramScheduleOutput.Size = new System.Drawing.Size(85, 139);
+			this.ribbonBarProgramScheduleOutput.Size = new System.Drawing.Size(85, 112);
 			this.ribbonBarProgramScheduleOutput.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleOutput.TabIndex = 35;
 			this.ribbonBarProgramScheduleOutput.Text = "Output";
@@ -2565,6 +2589,10 @@
 			this.itemContainerProgramScheduleOutput.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemProgramScheduleOutputExcel,
             this.buttonItemProgramScheduleOutputPDF});
+			// 
+			// 
+			// 
+			this.itemContainerProgramScheduleOutput.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemProgramScheduleOutputExcel
 			// 
@@ -2601,7 +2629,7 @@
 			this.ribbonBarProgramScheduleBrowse.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramScheduleBrowse.Location = new System.Drawing.Point(212, 0);
 			this.ribbonBarProgramScheduleBrowse.Name = "ribbonBarProgramScheduleBrowse";
-			this.ribbonBarProgramScheduleBrowse.Size = new System.Drawing.Size(99, 139);
+			this.ribbonBarProgramScheduleBrowse.Size = new System.Drawing.Size(99, 112);
 			this.ribbonBarProgramScheduleBrowse.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleBrowse.TabIndex = 28;
 			this.ribbonBarProgramScheduleBrowse.Text = "Browse";
@@ -2627,6 +2655,10 @@
             this.buttonItemProgramScheduleBrowseDay,
             this.buttonItemProgramScheduleBrowseWeek,
             this.buttonItemProgramScheduleBrowseMonth});
+			// 
+			// 
+			// 
+			this.itemContainerProgramScheduleBrowseType.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerProgramScheduleBrowseType.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemProgramScheduleBrowseDay
@@ -2659,6 +2691,10 @@
             this.buttonItemProgramScheduleBrowseForward,
             this.buttonItemProgramScheduleBrowseBackward});
 			// 
+			// 
+			// 
+			this.itemContainerProgramScheduleBrowseButtons.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// buttonItemProgramScheduleBrowseForward
 			// 
 			this.buttonItemProgramScheduleBrowseForward.Image = global::SalesDepot.Properties.Resources.ProgramBrowseForward;
@@ -2689,7 +2725,7 @@
 			this.ribbonBarProgramScheduleInfo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramScheduleInfo.Location = new System.Drawing.Point(124, 0);
 			this.ribbonBarProgramScheduleInfo.Name = "ribbonBarProgramScheduleInfo";
-			this.ribbonBarProgramScheduleInfo.Size = new System.Drawing.Size(88, 139);
+			this.ribbonBarProgramScheduleInfo.Size = new System.Drawing.Size(88, 112);
 			this.ribbonBarProgramScheduleInfo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleInfo.TabIndex = 29;
 			this.ribbonBarProgramScheduleInfo.Text = "Info";
@@ -2733,7 +2769,7 @@
 			this.ribbonBarProgramScheduleStation.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarProgramScheduleStation.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarProgramScheduleStation.Name = "ribbonBarProgramScheduleStation";
-			this.ribbonBarProgramScheduleStation.Size = new System.Drawing.Size(121, 139);
+			this.ribbonBarProgramScheduleStation.Size = new System.Drawing.Size(121, 112);
 			this.ribbonBarProgramScheduleStation.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarProgramScheduleStation.TabIndex = 27;
 			this.ribbonBarProgramScheduleStation.Text = "Station";
@@ -2748,7 +2784,7 @@
 			// 
 			// comboBoxEditProgramScheduleStation
 			// 
-			this.comboBoxEditProgramScheduleStation.Location = new System.Drawing.Point(9, 26);
+			this.comboBoxEditProgramScheduleStation.Location = new System.Drawing.Point(9, 12);
 			this.comboBoxEditProgramScheduleStation.Name = "comboBoxEditProgramScheduleStation";
 			this.comboBoxEditProgramScheduleStation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -2759,11 +2795,11 @@
 			// dateEditProgramScheduleDay
 			// 
 			this.dateEditProgramScheduleDay.EditValue = null;
-			this.dateEditProgramScheduleDay.Location = new System.Drawing.Point(9, 78);
+			this.dateEditProgramScheduleDay.Location = new System.Drawing.Point(9, 64);
 			this.dateEditProgramScheduleDay.Name = "dateEditProgramScheduleDay";
 			this.dateEditProgramScheduleDay.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
 			this.dateEditProgramScheduleDay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, ((System.Drawing.Image)(resources.GetObject("dateEditProgramScheduleDay.Properties.Buttons"))), new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
 			this.dateEditProgramScheduleDay.Properties.DisplayFormat.FormatString = "MM/dd/yy";
 			this.dateEditProgramScheduleDay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
 			this.dateEditProgramScheduleDay.Properties.EditFormat.FormatString = "MM/dd/yy";
@@ -2791,6 +2827,10 @@
 			this.itemContainerProgramScheduleStation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItemScheduleStation,
             this.controlContainerItemScheduleDay});
+			// 
+			// 
+			// 
+			this.itemContainerProgramScheduleStation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerProgramScheduleStation.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// controlContainerItemScheduleStation
@@ -2817,10 +2857,10 @@
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarDisclaimer);
 			this.ribbonPanelCalendar.Controls.Add(this.ribbonBarCalendarLogo);
 			this.ribbonPanelCalendar.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelCalendar.Location = new System.Drawing.Point(0, 0);
+			this.ribbonPanelCalendar.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelCalendar.Name = "ribbonPanelCalendar";
 			this.ribbonPanelCalendar.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelCalendar.Size = new System.Drawing.Size(1008, 142);
+			this.ribbonPanelCalendar.Size = new System.Drawing.Size(1008, 115);
 			// 
 			// 
 			// 
@@ -2857,7 +2897,7 @@
 			this.ribbonBarCalendarExit.Location = new System.Drawing.Point(597, 0);
 			this.ribbonBarCalendarExit.Name = "ribbonBarCalendarExit";
 			this.ribbonBarCalendarExit.ResizeItemsToFit = false;
-			this.ribbonBarCalendarExit.Size = new System.Drawing.Size(80, 139);
+			this.ribbonBarCalendarExit.Size = new System.Drawing.Size(80, 112);
 			this.ribbonBarCalendarExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarExit.TabIndex = 15;
 			this.ribbonBarCalendarExit.Text = "EXIT";
@@ -2899,7 +2939,7 @@
 			this.ribbonBarCalendarHelp.Location = new System.Drawing.Point(512, 0);
 			this.ribbonBarCalendarHelp.Name = "ribbonBarCalendarHelp";
 			this.ribbonBarCalendarHelp.ResizeItemsToFit = false;
-			this.ribbonBarCalendarHelp.Size = new System.Drawing.Size(85, 139);
+			this.ribbonBarCalendarHelp.Size = new System.Drawing.Size(85, 112);
 			this.ribbonBarCalendarHelp.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarHelp.TabIndex = 14;
 			this.ribbonBarCalendarHelp.Text = "HELP";
@@ -2937,7 +2977,7 @@
 			this.ribbonBarCalendarFloater.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarFloater.Location = new System.Drawing.Point(423, 0);
 			this.ribbonBarCalendarFloater.Name = "ribbonBarCalendarFloater";
-			this.ribbonBarCalendarFloater.Size = new System.Drawing.Size(89, 139);
+			this.ribbonBarCalendarFloater.Size = new System.Drawing.Size(89, 112);
 			this.ribbonBarCalendarFloater.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarFloater.TabIndex = 19;
 			this.ribbonBarCalendarFloater.Text = "Floater";
@@ -2978,7 +3018,7 @@
 			this.ribbonBarCalendarFontSize.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarFontSize.Location = new System.Drawing.Point(369, 0);
 			this.ribbonBarCalendarFontSize.Name = "ribbonBarCalendarFontSize";
-			this.ribbonBarCalendarFontSize.Size = new System.Drawing.Size(54, 139);
+			this.ribbonBarCalendarFontSize.Size = new System.Drawing.Size(54, 112);
 			this.ribbonBarCalendarFontSize.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarFontSize.TabIndex = 16;
 			this.ribbonBarCalendarFontSize.Text = "Text";
@@ -3002,6 +3042,10 @@
 			this.itemContainerCalendarFontSize.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemCalendarFontSizeLarger,
             this.buttonItemCalendarFontSizeSmaler});
+			// 
+			// 
+			// 
+			this.itemContainerCalendarFontSize.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerCalendarFontSize.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemCalendarFontSizeLarger
@@ -3036,7 +3080,7 @@
 			this.ribbonBarCalendarDisclaimer.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarDisclaimer.Location = new System.Drawing.Point(216, 0);
 			this.ribbonBarCalendarDisclaimer.Name = "ribbonBarCalendarDisclaimer";
-			this.ribbonBarCalendarDisclaimer.Size = new System.Drawing.Size(153, 139);
+			this.ribbonBarCalendarDisclaimer.Size = new System.Drawing.Size(153, 112);
 			this.ribbonBarCalendarDisclaimer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarDisclaimer.TabIndex = 18;
 			this.ribbonBarCalendarDisclaimer.Text = "Disclaimer";
@@ -3062,6 +3106,10 @@
 			this.itemContainerCalendarDisclaimer.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemCalendarDisclaimerLogo});
 			// 
+			// 
+			// 
+			this.itemContainerCalendarDisclaimer.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// labelItemCalendarDisclaimerLogo
 			// 
 			this.labelItemCalendarDisclaimerLogo.Image = global::SalesDepot.Properties.Resources.CalendarDisclaimerLogo;
@@ -3085,7 +3133,7 @@
 			this.ribbonBarCalendarLogo.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarCalendarLogo.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarCalendarLogo.Name = "ribbonBarCalendarLogo";
-			this.ribbonBarCalendarLogo.Size = new System.Drawing.Size(213, 139);
+			this.ribbonBarCalendarLogo.Size = new System.Drawing.Size(213, 112);
 			this.ribbonBarCalendarLogo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarCalendarLogo.TabIndex = 17;
 			this.ribbonBarCalendarLogo.Text = "Overnights Calendar";
@@ -3110,6 +3158,10 @@
 			this.itemContainerCalendarLogo.Name = "itemContainerCalendarLogo";
 			this.itemContainerCalendarLogo.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemCalendarLogo});
+			// 
+			// 
+			// 
+			this.itemContainerCalendarLogo.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemCalendarLogo
 			// 
@@ -3190,6 +3242,11 @@
 			this.pnEmpty.Size = new System.Drawing.Size(1008, 712);
 			this.pnEmpty.TabIndex = 2;
 			// 
+			// styleManager
+			// 
+			this.styleManager.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Blue;
+			this.styleManager.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(163)))), ((int)(((byte)(26))))));
+			// 
 			// FormMain
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -3258,8 +3315,6 @@
 		private DevExpress.LookAndFeel.DefaultLookAndFeel defaultLookAndFeel;
         public DevComponents.DotNetBar.RibbonBar ribbonBarSettingsExit;
 		private DevComponents.DotNetBar.ButtonItem buttonItemSettingsExit;
-		private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsStartup;
-        public DevComponents.DotNetBar.ButtonItem buttonItemSettingsLaunchPowerPoint;
         private DevComponents.DotNetBar.ItemContainer itemContainerSettingsPowerPointLaunchOptions;
         private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsVideoLaunchOptions;
         private DevComponents.DotNetBar.ItemContainer itemContainerSettingsVideoLaunchOptions;
@@ -3418,5 +3473,6 @@
 		public DevComponents.DotNetBar.RibbonTabItem ribbonTabItemQBuilder;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarSettingsFile;
 		public DevComponents.DotNetBar.ButtonItem buttonItemSettingsFile;
+		private DevComponents.DotNetBar.StyleManager styleManager;
     }
 }

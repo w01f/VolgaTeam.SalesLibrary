@@ -6,28 +6,28 @@
     <option name="ANALYSIS_IN_BACKGROUND" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
+    <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="" />
+    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="" />
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383109017174" ignored="false" />
+    <file path="/Dummy.txt" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384785142720" ignored="false" />
     <file path="/a.html" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381585624511" ignored="false" />
     <file path="/a.feature" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364466890490" ignored="false" />
     <file path="/a.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364487542235" ignored="false" />
-    <file path="/LocalDBS" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382712377276" ignored="false" />
+    <file path="/LocalDBS" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384185204915" ignored="false" />
     <file path="/TickerController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364572372199" ignored="false" />
     <file path="/TickerLinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364572363912" ignored="false" />
     <file path="/SiteController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365523998690" ignored="false" />
     <file path="/tickerLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364491578565" ignored="false" />
     <file path="/TickerLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364922125697" ignored="false" />
-    <file path="/LinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382897689311" ignored="false" />
+    <file path="/LinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383729471403" ignored="false" />
     <file path="/a.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365857297889" ignored="false" />
     <file path="/ticker.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1367064355649" ignored="false" />
-    <file path="/a.dummy" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382901841227" ignored="false" />
+    <file path="/a.dummy" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384435427395" ignored="false" />
     <file path="/link-viewing.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1379178672325" ignored="false" />
-    <file path="/index.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382701530175" ignored="false" />
+    <file path="/index.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384361226544" ignored="false" />
     <file path="/tbl_user.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1364563478793" ignored="false" />
     <file path="/UserRecord.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366974345593" ignored="false" />
     <file path="/AdminController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1372520587953" ignored="false" />
@@ -57,14 +57,14 @@
     <file path="/link-context-menu.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1367150550704" ignored="false" />
     <file path="/QpagesController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365697737321" ignored="false" />
     <file path="/QbuilderController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1379166912003" ignored="false" />
-    <file path="/ribbon.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382610384217" ignored="false" />
+    <file path="/ribbon.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384192906517" ignored="false" />
     <file path="/tbl_user_link.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365844842115" ignored="false" />
     <file path="/tbl_qpage.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1372265948676" ignored="false" />
     <file path="/QPageStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1375980795702" ignored="false" />
     <file path="/main-page.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366186852489" ignored="false" />
     <file path="/qbuilder.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1365870566602" ignored="false" />
     <file path="/addPage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1367167076452" ignored="false" />
-    <file path="/page-list.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1375967654207" ignored="false" />
+    <file path="/page-list.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383830188044" ignored="false" />
     <file path="/page-list.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1376026060046" ignored="false" />
     <file path="/pageList.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1376025733738" ignored="false" />
     <file path="/favorites.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366037825073" ignored="false" />
@@ -96,7 +96,7 @@
     <file path="/viewDialog.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1375782757056" ignored="false" />
     <file path="/PreviewController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1379176266192" ignored="false" />
     <file path="/tbl_link.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366983484089" ignored="false" />
-    <file path="/LibraryLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1376586165129" ignored="false" />
+    <file path="/LibraryLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383921180947" ignored="false" />
     <file path="/emailDialog.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366997095189" ignored="false" />
     <file path="/addLinkDialog.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366997141599" ignored="false" />
     <file path="/sendQuickPage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1366999045381" ignored="false" />
@@ -123,7 +123,7 @@
     <file path="/RateController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1368721043787" ignored="false" />
     <file path="/linkRate.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1368797245765" ignored="false" />
     <file path="/linksGrid.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382870917973" ignored="false" />
-    <file path="/email.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1368631893479" ignored="false" />
+    <file path="/email.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384263418630" ignored="false" />
     <file path="/email.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1371743794859" ignored="false" />
     <file path="/recoverPassword.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1369145489608" ignored="false" />
     <file path="/view-dialog-bar.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1369308269433" ignored="false" />
@@ -135,7 +135,7 @@
     <file path="/login.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1372670820030" ignored="false" />
     <file path="/PinCodeForm.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1371468171346" ignored="false" />
     <file path="/record-link-activity.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1371475220698" ignored="false" />
-    <file path="/WallbinController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1371723318331" ignored="false" />
+    <file path="/WallbinController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384356414338" ignored="false" />
     <file path="/libraries.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1379257746011" ignored="false" />
     <file path="/Library.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1372349334560" ignored="false" />
     <file path="/UserLibraryStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1372407368166" ignored="false" />
@@ -157,10 +157,10 @@
     <file path="/SearchControlPanel.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1374668585219" ignored="false" />
     <file path="/searchControlPanel.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382894665806" ignored="false" />
     <file path="/search.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382880187549" ignored="false" />
-    <file path="/search.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382892346082" ignored="false" />
+    <file path="/search.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384436472303" ignored="false" />
     <file path="/CategoryManager.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1375811479444" ignored="false" />
     <file path="/SearchController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382880684323" ignored="false" />
-    <file path="/searchResult.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382901671563" ignored="false" />
+    <file path="/searchResult.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383931183095" ignored="false" />
     <file path="/tagsView.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1378747250491" ignored="false" />
     <file path="/searchView.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1374814700750" ignored="false" />
     <file path="/links-grid.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382898360402" ignored="false" />
@@ -181,37 +181,36 @@
     <file path="/UpdateWallbinCommand.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381589771208" ignored="false" />
     <file path="/UpdateShortcutsCommand.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381590370612" ignored="false" />
     <file path="/HelpLinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381591094969" ignored="false" />
-    <file path="/page.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382710497112" ignored="false" />
-    <file path="/shortcuts.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382710300249" ignored="false" />
+    <file path="/page.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384353456405" ignored="false" />
+    <file path="/shortcuts.css" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384353569043" ignored="false" />
     <file path="/tbl_shorcut_link.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381594467447" ignored="false" />
     <file path="/tbl_shorcut_page.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381592723154" ignored="false" />
     <file path="/tbl_shorcut_tab.sql" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381592737389" ignored="false" />
     <file path="/ShortcutsUpdateAction.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381650508517" ignored="false" />
-    <file path="/shortcuts.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382959888957" ignored="false" />
-    <file path="/videoLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381661012464" ignored="false" />
+    <file path="/shortcuts.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384436482974" ignored="false" />
+    <file path="/videoLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384353812437" ignored="false" />
     <file path="/VideoShorcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381659592712" ignored="false" />
     <file path="/VideoShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381662123492" ignored="false" />
     <file path="/ShortcutsLinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382712676835" ignored="false" />
     <file path="/FileShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382618928642" ignored="false" />
     <file path="/UrlShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381661801804" ignored="false" />
-    <file path="/directLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382619081262" ignored="false" />
-    <file path="/emptyLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381668895545" ignored="false" />
-    <file path="/EmptyShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382701613406" ignored="false" />
-    <file path="/linkWrapper.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382533567160" ignored="false" />
-    <file path="/ShortcutsController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382633718882" ignored="false" />
+    <file path="/directLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384349201095" ignored="false" />
+    <file path="/emptyLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384349060500" ignored="false" />
+    <file path="/EmptyShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384186279453" ignored="false" />
+    <file path="/linkWrapper.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384360703454" ignored="false" />
+    <file path="/ShortcutsController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384349679575" ignored="false" />
     <file path="/WindowShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382624481099" ignored="false" />
     <file path="/PageShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381769455304" ignored="false" />
     <file path="/pageLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381769598545" ignored="false" />
     <file path="/ListShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381845850360" ignored="false" />
-    <file path="/quickList.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382632424481" ignored="false" />
-    <file path="/QuickListShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381845542265" ignored="false" />
+    <file path="/quickList.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384361669121" ignored="false" />
+    <file path="/QuickListShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384361457211" ignored="false" />
     <file path="/QuickListFile.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1381845630754" ignored="false" />
-    <file path="/SearchShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382893691732" ignored="false" />
+    <file path="/SearchShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383919364546" ignored="false" />
     <file path="/searchLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382008648183" ignored="false" />
     <file path="/searchConditions.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021846861" ignored="false" />
     <file path="$PROJECT_DIR$/protected/views/phone/favorites/favoritesLinksAndFolders.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021516038" ignored="false" />
     <file path="$PROJECT_DIR$/protected/views/regular/favorites/addLinkDialog.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021516038" ignored="false" />
-    <file path="$PROJECT_DIR$/protected/views/phone/preview/linkDetails.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021516040" ignored="false" />
     <file path="$PROJECT_DIR$/protected/views/phone/preview/fileCard.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021516040" ignored="false" />
     <file path="$PROJECT_DIR$/protected/views/email/sendLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021516038" ignored="false" />
     <file path="$PROJECT_DIR$/protected/views/phone/preview/linkPreview.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382021516040" ignored="false" />
@@ -221,16 +220,22 @@
     <file path="/search-loader.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382886126237" ignored="false" />
     <file path="/window-loader.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382620580953" ignored="false" />
     <file path="/HomeBar.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382705450491" ignored="false" />
-    <file path="/ShortcutsPageStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382701786861" ignored="false" />
+    <file path="/ShortcutsPageStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383920219111" ignored="false" />
     <file path="/folderContainerHeader.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382632410842" ignored="false" />
-    <file path="/PageGrid.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382710438543" ignored="false" />
+    <file path="/PageGrid.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384188374921" ignored="false" />
     <file path="/LibraryLinkShortcut.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382712623530" ignored="false" />
-    <file path="/libraryFileLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382713147198" ignored="false" />
+    <file path="/libraryFileLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384354636040" ignored="false" />
     <file path="/fileTypesView.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382719577017" ignored="false" />
     <file path="/search-view.js" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382892556204" ignored="false" />
-    <file path="/FavoritesController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382859548861" ignored="false" />
+    <file path="/FavoritesController.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384172475517" ignored="false" />
     <file path="/FavoritesLinkStorage.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382889359570" ignored="false" />
     <file path="/SortHelper.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1382884270507" ignored="false" />
+    <file path="/Browser.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383824326018" ignored="false" />
+    <file path="/SearchBar.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384169334809" ignored="false" />
+    <file path="/SearchConditions.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1383918850649" ignored="false" />
+    <file path="/searchBar.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384188904227" ignored="false" />
+    <file path="/windowLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384355637080" ignored="false" />
+    <file path="/quickListLink.php" changelist="311ca633-43c5-41dd-82ab-ba01ea556142" time="1384360342581" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +259,35 @@
     <favorites_list name="WebSalesLibraries" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/phone/site/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="18" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shortcuts.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="188" column="0" selection-start="4573" selection-end="4573" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/js/phone/search.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="540" column="58" selection-start="15487" selection-end="15487" vertical-scroll-proportion="0.21458626">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -274,22 +307,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php" />
-        <option value="$PROJECT_DIR$/protected/views/phone/search/dateView.php" />
-        <option value="$PROJECT_DIR$/protected/components/core/IsdController.php" />
-        <option value="$PROJECT_DIR$/configuration.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/pageLink.php" />
+        <option value="$PROJECT_DIR$/js/phone/libraries.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/quickListLink.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/linkWrapper.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/quickList.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/QuickListShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/quickList.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
+        <option value="$PROJECT_DIR$/protected/models/shortcuts/SearchShortcut.php" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/page.php" />
+        <option value="$PROJECT_DIR$/js/phone/search.js" />
+        <option value="$PROJECT_DIR$/protected/views/phone/shortcuts/searchResult.php" />
         <option value="$PROJECT_DIR$/protected/views/phone/site/index.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/search-view.js" />
-        <option value="$PROJECT_DIR$/protected/models/storage/LinkStorage.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SearchController.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/links-grid.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/search/searchResult.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php" />
-        <option value="$PROJECT_DIR$/css/regular/base/links-grid.css" />
-        <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/qpage/index.php" />
-        <option value="$PROJECT_DIR$/protected/config/main.php" />
+        <option value="$PROJECT_DIR$/protected/components/core/IsdController.php" />
+        <option value="$PROJECT_DIR$/js/phone/ribbon.js" />
+        <option value="$PROJECT_DIR$/js/phone/shortcuts.js" />
       </list>
     </option>
   </component>
@@ -395,523 +428,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wallbin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qpage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wallbin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="site" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="search" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wallbin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="storage" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phone" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -920,8 +437,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="46" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="131" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="42" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="116" />
     <property name="options.splitter.main.proportions" value="0.3964698" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="143" />
@@ -929,9 +446,9 @@
     <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/plugins" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="62" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="63" />
     <property name="JdbcConsole.ResultInNewTab" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="639" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="657" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="446" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="146" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="143" />
@@ -1054,11 +571,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\shortcuts" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\phone\shortcuts" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\js\phone" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\phone" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\shortcuts" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\js\regular\shortcuts" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular\shortcuts" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\components\actions" />
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\views\regular\shortcuts" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\components\actions" />
@@ -1068,7 +585,7 @@
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\css\regular\base" />
     </key>
   </component>
-  <component name="RunManager" selected="PHP Web Application.QBuilder">
+  <component name="RunManager" selected="PHP Web Application.SalesDepot">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner />
       <method />
@@ -1515,7 +1032,23 @@
       <created>1383109021299</created>
       <updated>1383109021299</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="Web Sales Libraries: Additional search options fix">
+      <created>1383109066494</created>
+      <updated>1383109066494</updated>
+    </task>
+    <task id="LOCAL-00090" summary="Web Sales Libraries: User agent fix + Chrome MacOS fix + Gui Bug fixes">
+      <created>1383841908529</created>
+      <updated>1383841908529</updated>
+    </task>
+    <task id="LOCAL-00091" summary="Web Sales Libraries: Shortcuts Search bar fix">
+      <created>1384170836921</created>
+      <updated>1384170836921</updated>
+    </task>
+    <task id="LOCAL-00092" summary="Web Sales Libraries: JQM Shortcuts fix">
+      <created>1384785157463</created>
+      <updated>1384785157463</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1542,30 +1075,30 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21782178" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25962597" sideWeight="0.44823906" order="14" side_tool="false" content_ui="tabs" x="22" y="783" width="1874" height="218" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12646745" sideWeight="0.740374" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21734358" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1870187" sideWeight="0.44823906" order="14" side_tool="false" content_ui="tabs" x="22" y="783" width="1874" height="218" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16221985" sideWeight="0.8129813" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29592958" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25962597" sideWeight="0.5517609" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22442244" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1870187" sideWeight="0.5517609" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2327113" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32711306" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17982924" sideWeight="0.740374" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19263607" sideWeight="0.8129813" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24972497" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3150384" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="true" weight="0.3080308" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24422443" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24919957" sideWeight="0.66776675" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3751375" sideWeight="0.8879402" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.3080308" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1611,7 +1144,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Libraries: Additional search options fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Libraries: JQM Shortcuts fix" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1625,10 +1158,6 @@
     <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Web SalesDepot: Likes fix" />
-    <MESSAGE value="Site Manager: GUI fixes" />
-    <MESSAGE value="Web Sales Libraries: Add quickSITE for mobile platform fix" />
-    <MESSAGE value="Web Sales Libraries: Unlike fixe" />
     <MESSAGE value="Web Sales Libraries: Activity fixes" />
     <MESSAGE value="Web Sales Libraries: QBuilder Service fixes + Small GUI fixes" />
     <MESSAGE value="Web Sales Libraries: Additional quickSITE options processing" />
@@ -1650,6 +1179,10 @@
     <MESSAGE value="Web Sales Libraries: Shorcut fix + Update data fixes" />
     <MESSAGE value="Web Sales Libraries: Search additional file types fix" />
     <MESSAGE value="Web Sales Libraries: Additional search options fix" />
+    <MESSAGE value="Web Sales Libraries: User agent fix + Chrome MacOS fix + Gui Bug fixes" />
+    <MESSAGE value="Web Sales Libraries: Shortcuts Search bar fix" />
+    <MESSAGE value="Web Sales Libraries: Search bar fixes" />
+    <MESSAGE value="Web Sales Libraries: JQM Shortcuts fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1660,7 +1193,7 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="203" />
+      <option name="time" value="222" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -1676,652 +1209,106 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/components/actions/WallbinUpdateAction.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="40" selection-start="2258" selection-end="2258" vertical-scroll-proportion="0.0">
+        <state line="21" column="0" selection-start="688" selection-end="688" vertical-scroll-proportion="0.6274165">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/search/searchResult.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/linkWrapper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/search/searchResult.php">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/ShortcutsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="100" selection-start="1190" selection-end="1203" vertical-scroll-proportion="-16.73077" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/favoritesLinks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="148" selection-start="151" selection-end="161" vertical-scroll-proportion="-0.65384614" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="57" selection-start="2321" selection-end="2321" vertical-scroll-proportion="0.0">
+        <state line="105" column="37" selection-start="4336" selection-end="4336" vertical-scroll-proportion="-17.615385">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/configuration.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/QuickListShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="49" selection-start="1907" selection-end="1941" vertical-scroll-proportion="0.0">
+        <state line="30" column="137" selection-start="1342" selection-end="1398" vertical-scroll-proportion="-13.730769">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/links-grid.css">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="30" selection-start="1922" selection-end="1925" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="3.9230769">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/site/index.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/common/SortHelper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="14" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382895349404" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="23" column="9" selection-start="613" selection-end="613" vertical-scroll-proportion="-15.038462" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/errorMessage.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/storage/LinkStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="18" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1382960334182" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
+        <state line="452" column="26" selection-start="18836" selection-end="18836" vertical-scroll-proportion="-104.42308" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/components/core/IsdController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="9" column="10" selection-start="216" selection-end="216" vertical-scroll-proportion="-1.3076923" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/ribbon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+    <entry file="file://$PROJECT_DIR$/js/phone/libraries.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="69" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.23981191">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/core/RequireLogin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="5.3846154">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/qpage/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="69" selection-start="2538" selection-end="2538" vertical-scroll-proportion="0.7105263">
+        <state line="415" column="7" selection-start="10330" selection-end="10955" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="19" selection-start="281" selection-end="281" vertical-scroll-proportion="0.024817519">
-          <folding>
-            <marker date="1382960254092" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
+        <state line="196" column="6" selection-start="5926" selection-end="5926" vertical-scroll-proportion="1.057187">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/links-grid.js">
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/site/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="149" column="10" selection-start="3942" selection-end="3942" vertical-scroll-proportion="0.024817519">
+        <state line="1" column="18" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="188" column="0" selection-start="4573" selection-end="4573" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/searchResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="38" selection-start="1954" selection-end="1954" vertical-scroll-proportion="0.48091602">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="540" column="58" selection-start="15487" selection-end="15487" vertical-scroll-proportion="0.21458626">
           <folding />
         </state>
       </provider>

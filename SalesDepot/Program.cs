@@ -49,8 +49,6 @@ namespace SalesDepot
 				Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern = @"MM/dd/yyyy";
 				Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
 
-				if (ConfigurationClasses.SettingsManager.Instance.LaunchPPT)
-					AppManager.Instance.RunPowerPointLoader();
 				AppManager.Instance.RunForm();
 			}
 			else

@@ -172,7 +172,7 @@ namespace SalesDepot
 		{
 			try
 			{
-				Marshal.ReleaseComObject(o);
+				Marshal.FinalReleaseComObject(o);
 			}
 			catch { }
 			finally
