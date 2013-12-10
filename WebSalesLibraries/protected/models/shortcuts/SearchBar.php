@@ -4,6 +4,7 @@
 		public $configured;
 		public $alignment;
 		public $title;
+		public $defaultLabel;
 		public $conditions;
 		public $showResultsBar;
 		public $samePage;
@@ -19,6 +20,8 @@
 			$this->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
 			$queryResult = $xpath->query('//SearchBar/Title');
 			$this->title = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$queryResult = $xpath->query('//SearchBar/Defaultlabel');
+			$this->defaultLabel = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 			$queryResult = $xpath->query('//SearchBar/ShowResultsBar');
 			$this->showResultsBar = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 			$queryResult = $xpath->query('//SearchBar/OpenOnSamePage');

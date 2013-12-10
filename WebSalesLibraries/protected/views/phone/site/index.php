@@ -315,7 +315,7 @@
 				</li>
 				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
-						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+						<a class="tab-search-tags" href="#search-tags" data-transition="none"><? echo Yii::app()->params['tags']['tab_name']; ?></a>
 					</li>
 				<? endif; ?>
 				<li>
@@ -325,7 +325,7 @@
 					<a class="tab-search-date" href="#search-date" data-transition="none">Date</a>
 				</li>
 				<li>
-					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><? echo Yii::app()->params['stations']['tab_name']; ?></a>
 				</li>
 			</ul>
 		</div>
@@ -367,7 +367,7 @@
 				</li>
 				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
-						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+						<a class="tab-search-tags" href="#search-tags" data-transition="none"><? echo Yii::app()->params['tags']['tab_name']; ?></a>
 					</li>
 				<? endif; ?>
 				<li>
@@ -418,7 +418,7 @@
 					<a href="#search-basic" data-transition="none">Keyword</a>
 				</li>
 				<li>
-					<a class="tab-search-tags  ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none">Tag</a>
+					<a class="tab-search-tags  ui-btn ui-btn-active ui-state-persist" href="#search-tags" data-transition="none"><? echo Yii::app()->params['tags']['tab_name']; ?></a>
 				</li>
 				<li>
 					<a class="tab-search-file-types" href="#search-file-types" data-transition="none">File</a>
@@ -469,7 +469,7 @@
 				</li>
 				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
-						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+						<a class="tab-search-tags" href="#search-tags" data-transition="none"><? echo Yii::app()->params['tags']['tab_name']; ?></a>
 					</li>
 				<? endif; ?>
 				<li>
@@ -521,7 +521,7 @@
 				</li>
 				<? if (Yii::app()->params['tags']['visible']): ?>
 					<li>
-						<a class="tab-search-tags" href="#search-tags" data-transition="none">Tag</a>
+						<a class="tab-search-tags" href="#search-tags" data-transition="none"><? echo Yii::app()->params['tags']['tab_name']; ?></a>
 					</li>
 				<? endif; ?>
 				<li>

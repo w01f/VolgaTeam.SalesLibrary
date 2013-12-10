@@ -1,10 +1,10 @@
 <div id="search-control-panel">
 <ul>
 	<li><a href="#search-options-basic">Keyword</a></li>
-	<li><a href="#search-options-tags">Tag</a></li>
+	<li><a href="#search-options-tags"><? echo Yii::app()->params['tags']['tab_name']; ?></a></li>
 	<li><a href="#search-options-files">File</a></li>
 	<li><a href="#search-options-date">Date</a></li>
-	<li><a href="#search-options-stations"><?php echo Yii::app()->params['stations']['tab_name']; ?></a></li>
+	<li><a href="#search-options-stations"><? echo Yii::app()->params['stations']['tab_name']; ?></a></li>
 </ul>
 <div id="search-options-basic">
 	<div class="group-panel">
@@ -42,7 +42,11 @@
 <div id="search-options-tags">
 	<?php if (isset($categories->groups) && Yii::app()->params['tags']['visible']): ?>
 		<div class="group-panel">
-			<button type="button" class="btn btn-block" id="tags-clear-all">Clear All Tags</button>
+			<?
+				$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
+				$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
+			?>
+			<button type="button" class="btn btn-block" id="tags-clear-all">Clear All <? echo $tagsName; ?></button>
 			<br>
 			<div class="group-title">What Are You Looking For?</div>
 			<?php if (isset($categories->superFilters)): ?>

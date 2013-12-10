@@ -1,5 +1,9 @@
 <?php if (isset($categories) && Yii::app()->params['tags']['visible']): ?>
-	<a id="search-tags-clear-button" href="#" data-role="button" data-mini="true" data-icon="delete" data-theme="b">Clear Tags</a>
+	<?
+	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
+	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
+	?>
+	<a id="search-tags-clear-button" href="#" data-role="button" data-mini="true" data-icon="delete" data-theme="b">Clear <? echo $tagsName; ?></a>
 	<?php if (isset($categories->superFilters)): ?>
 		<fieldset id="super-filter-list" data-role="controlgroup">
 			<? $i = 0; ?>

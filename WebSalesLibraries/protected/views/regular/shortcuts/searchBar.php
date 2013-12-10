@@ -62,7 +62,7 @@
 			<td>
 				<div class="input-prepend input-append">
 					<span class="add-on" style="font-style: italic">BETA</span>
-					<input class="input-xxlarge search-bar-text" type="text" placeholder="Type Here...">
+					<input class="input-xxlarge search-bar-text" type="text" placeholder="<? echo $searchBar->defaultLabel; ?>">
 					<button class="btn search-bar-run" type="submit">
 						<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
 					</button>

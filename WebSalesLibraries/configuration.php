@@ -55,6 +55,8 @@
 				),
 				'tags' => array(
 					'visible' => true,
+					'tab_name' => 'Tag',
+					'column_name' => 'Tag',
 				),
 				'search_options' => array(
 					'hide_duplicate' => true,
