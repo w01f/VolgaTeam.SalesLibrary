@@ -223,7 +223,7 @@
 			// 
 			// comboBoxEditPages
 			// 
-			this.comboBoxEditPages.Location = new System.Drawing.Point(6, 73);
+			this.comboBoxEditPages.Location = new System.Drawing.Point(6, 74);
 			this.comboBoxEditPages.Name = "comboBoxEditPages";
 			this.comboBoxEditPages.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -267,7 +267,7 @@
 			this.ribbonControl.KeyTipsFont = new System.Drawing.Font("Tahoma", 7F);
 			this.ribbonControl.Location = new System.Drawing.Point(0, 0);
 			this.ribbonControl.Name = "ribbonControl";
-			this.ribbonControl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 2);
+			this.ribbonControl.Padding = new System.Windows.Forms.Padding(0, 0, 0, 3);
 			this.ribbonControl.Size = new System.Drawing.Size(1008, 154);
 			this.ribbonControl.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonControl.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
@@ -304,7 +304,7 @@
 			this.ribbonPanelHome.Location = new System.Drawing.Point(0, 26);
 			this.ribbonPanelHome.Name = "ribbonPanelHome";
 			this.ribbonPanelHome.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelHome.Size = new System.Drawing.Size(1008, 126);
+			this.ribbonPanelHome.Size = new System.Drawing.Size(1008, 125);
 			// 
 			// 
 			// 
@@ -337,7 +337,7 @@
 			this.ribbonBarHomeExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeExit.Location = new System.Drawing.Point(604, 0);
 			this.ribbonBarHomeExit.Name = "ribbonBarHomeExit";
-			this.ribbonBarHomeExit.Size = new System.Drawing.Size(92, 123);
+			this.ribbonBarHomeExit.Size = new System.Drawing.Size(92, 122);
 			this.ribbonBarHomeExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeExit.TabIndex = 1;
 			this.ribbonBarHomeExit.Text = "EXIT";
@@ -377,7 +377,7 @@
 			this.ribbonBarHomeSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeSync.Location = new System.Drawing.Point(517, 0);
 			this.ribbonBarHomeSync.Name = "ribbonBarHomeSync";
-			this.ribbonBarHomeSync.Size = new System.Drawing.Size(87, 123);
+			this.ribbonBarHomeSync.Size = new System.Drawing.Size(87, 122);
 			this.ribbonBarHomeSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeSync.TabIndex = 2;
 			this.ribbonBarHomeSync.Text = "Sync";
@@ -416,7 +416,7 @@
 			this.ribbonBarHomeSave.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeSave.Location = new System.Drawing.Point(422, 0);
 			this.ribbonBarHomeSave.Name = "ribbonBarHomeSave";
-			this.ribbonBarHomeSave.Size = new System.Drawing.Size(95, 123);
+			this.ribbonBarHomeSave.Size = new System.Drawing.Size(95, 122);
 			this.ribbonBarHomeSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeSave.TabIndex = 3;
 			this.ribbonBarHomeSave.Text = "Save";
@@ -455,7 +455,7 @@
 			this.ribbonBarHomeLinkActions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLinkActions.Location = new System.Drawing.Point(321, 0);
 			this.ribbonBarHomeLinkActions.Name = "ribbonBarHomeLinkActions";
-			this.ribbonBarHomeLinkActions.Size = new System.Drawing.Size(101, 123);
+			this.ribbonBarHomeLinkActions.Size = new System.Drawing.Size(101, 122);
 			this.ribbonBarHomeLinkActions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLinkActions.TabIndex = 13;
 			this.ribbonBarHomeLinkActions.Text = "Link Actions";
@@ -481,6 +481,10 @@
             this.buttonItemHomeProperties,
             this.buttonItemHomeOpen,
             this.buttonItemHomeDelete});
+			// 
+			// 
+			// 
+			this.itemContainer1.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemHomeProperties
 			// 
@@ -533,7 +537,7 @@
 			this.ribbonBarHomeAddLink.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeAddLink.Location = new System.Drawing.Point(227, 0);
 			this.ribbonBarHomeAddLink.Name = "ribbonBarHomeAddLink";
-			this.ribbonBarHomeAddLink.Size = new System.Drawing.Size(94, 123);
+			this.ribbonBarHomeAddLink.Size = new System.Drawing.Size(94, 122);
 			this.ribbonBarHomeAddLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeAddLink.TabIndex = 9;
 			this.ribbonBarHomeAddLink.Text = "Add Link";
@@ -559,6 +563,10 @@
             this.buttonItemHomeAddUrl,
             this.buttonItemHomeAddNetworkShare,
             this.buttonItemHomeAddLineBreak});
+			// 
+			// 
+			// 
+			this.itemContainerHomeAddLink.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerHomeAddLink.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemHomeAddUrl
@@ -609,7 +617,7 @@
 			this.ribbonBarHomeFileTreeView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeFileTreeView.Location = new System.Drawing.Point(146, 0);
 			this.ribbonBarHomeFileTreeView.Name = "ribbonBarHomeFileTreeView";
-			this.ribbonBarHomeFileTreeView.Size = new System.Drawing.Size(81, 123);
+			this.ribbonBarHomeFileTreeView.Size = new System.Drawing.Size(81, 122);
 			this.ribbonBarHomeFileTreeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeFileTreeView.TabIndex = 7;
 			this.ribbonBarHomeFileTreeView.Text = "Drag&&Drop";
@@ -652,7 +660,7 @@
 			this.ribbonBarHomeLibraries.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLibraries.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarHomeLibraries.Name = "ribbonBarHomeLibraries";
-			this.ribbonBarHomeLibraries.Size = new System.Drawing.Size(143, 123);
+			this.ribbonBarHomeLibraries.Size = new System.Drawing.Size(143, 122);
 			this.ribbonBarHomeLibraries.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLibraries.TabIndex = 0;
 			this.ribbonBarHomeLibraries.Text = "Digital Wall Bin";
@@ -667,7 +675,7 @@
 			// 
 			// comboBoxEditLibraries
 			// 
-			this.comboBoxEditLibraries.Location = new System.Drawing.Point(6, 27);
+			this.comboBoxEditLibraries.Location = new System.Drawing.Point(6, 28);
 			this.comboBoxEditLibraries.Name = "comboBoxEditLibraries";
 			this.comboBoxEditLibraries.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -688,6 +696,10 @@
 			this.itemContainerHomeLibraries.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerHomeLibrary,
             this.itemContainerHomePage});
+			// 
+			// 
+			// 
+			this.itemContainerHomeLibraries.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerHomeLibraries.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// itemContainerHomeLibrary
@@ -701,6 +713,10 @@
 			this.itemContainerHomeLibrary.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemHomeLibraries,
             this.controlContainerItemLibraries});
+			// 
+			// 
+			// 
+			this.itemContainerHomeLibrary.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemHomeLibraries
 			// 
@@ -726,6 +742,10 @@
 			this.itemContainerHomePage.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemHomePages,
             this.controlContainerItemHomePages});
+			// 
+			// 
+			// 
+			this.itemContainerHomePage.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemHomePages
 			// 
@@ -1269,6 +1289,10 @@
             this.labelItemIPadSiteTitle,
             this.itemContainerIPadSiteValue});
 			// 
+			// 
+			// 
+			this.itemContainerIPadSite.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// labelItemIPadSiteTitle
 			// 
 			this.labelItemIPadSiteTitle.ForeColor = System.Drawing.Color.Black;
@@ -1284,6 +1308,10 @@
 			this.itemContainerIPadSiteValue.Name = "itemContainerIPadSiteValue";
 			this.itemContainerIPadSiteValue.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItemIPadSite});
+			// 
+			// 
+			// 
+			this.itemContainerIPadSiteValue.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// controlContainerItemIPadSite
 			// 
@@ -1304,6 +1332,10 @@
             this.itemContainerIPadLogin,
             this.itemContainerIPadPassword});
 			// 
+			// 
+			// 
+			this.itemContainerIPadCredentials.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// itemContainerIPadLogin
 			// 
 			// 
@@ -1315,6 +1347,10 @@
 			this.itemContainerIPadLogin.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemIPadLogin,
             this.controlContainerItem2});
+			// 
+			// 
+			// 
+			this.itemContainerIPadLogin.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemIPadLogin
 			// 
@@ -1340,6 +1376,10 @@
 			this.itemContainerIPadPassword.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.labelItemIPadPassword,
             this.controlContainerItem3});
+			// 
+			// 
+			// 
+			this.itemContainerIPadPassword.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// labelItemIPadPassword
 			// 
@@ -1417,6 +1457,10 @@
 			this.itemContainerIPadLocation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItemIPadLocation});
 			// 
+			// 
+			// 
+			this.itemContainerIPadLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// controlContainerItemIPadLocation
 			// 
 			this.controlContainerItemIPadLocation.AllowItemResize = false;
@@ -1467,6 +1511,10 @@
 			this.itemContainerIPadSync.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemIPadSyncEnabled,
             this.buttonItemIPadSyncDisabled});
+			// 
+			// 
+			// 
+			this.itemContainerIPadSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemIPadSyncEnabled
 			// 
@@ -1994,6 +2042,10 @@
 			this.itemContainerProgramManagerLocation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItem1});
 			// 
+			// 
+			// 
+			this.itemContainerProgramManagerLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// controlContainerItem1
 			// 
 			this.controlContainerItem1.AllowItemResize = false;
@@ -2044,6 +2096,10 @@
 			this.itemContainerProgramManagerSync.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemProgramManagerSyncEnabled,
             this.buttonItemProgramManagerSyncDisabled});
+			// 
+			// 
+			// 
+			this.itemContainerProgramManagerSync.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemProgramManagerSyncEnabled
 			// 
@@ -2209,6 +2265,10 @@
 			this.itemContainerCalendarFont.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemCalendarFontUp,
             this.buttonItemCalendarFontDown});
+			// 
+			// 
+			// 
+			this.itemContainerCalendarFont.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			this.itemContainerCalendarFont.VerticalItemAlignment = DevComponents.DotNetBar.eVerticalItemsAlignment.Middle;
 			// 
 			// buttonItemCalendarFontUp
@@ -2326,6 +2386,10 @@
 			this.itemContainerCalendarLocation.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.controlContainerItemCalendarLocation});
 			// 
+			// 
+			// 
+			this.itemContainerCalendarLocation.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+			// 
 			// controlContainerItemCalendarLocation
 			// 
 			this.controlContainerItemCalendarLocation.AllowItemResize = false;
@@ -2376,6 +2440,10 @@
 			this.itemContainerSyncStatus.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemCalendarSyncStatusEnabled,
             this.buttonItemCalendarSyncStatusDisabled});
+			// 
+			// 
+			// 
+			this.itemContainerSyncStatus.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
 			// 
 			// buttonItemCalendarSyncStatusEnabled
 			// 

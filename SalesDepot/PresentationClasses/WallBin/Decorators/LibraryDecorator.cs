@@ -52,7 +52,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		private void BuildPages()
 		{
 			Pages.Clear();
-			foreach (LibraryPage page in Library.Pages)
+			foreach (var page in Library.Pages)
 			{
 				Pages.Add(new PageDecorator(this, page));
 				Application.DoEvents();
@@ -81,15 +81,13 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		private void ApplyPage()
 		{
-			if (_selectedPageIndex < Pages.Count)
-			{
-				CurrentPage = Pages[_selectedPageIndex];
-				CurrentPage.Container.Parent = null;
-				if (!Container.Controls.Contains(CurrentPage.Container))
-					Container.Controls.Add(CurrentPage.Container);
-				CurrentPage.Container.BringToFront();
-				CurrentPage.Apply();
-			}
+			if (_selectedPageIndex >= Pages.Count) return;
+			CurrentPage = Pages[_selectedPageIndex];
+			CurrentPage.Container.Parent = null;
+			if (!Container.Controls.Contains(CurrentPage.Container))
+				Container.Controls.Add(CurrentPage.Container);
+			CurrentPage.Container.BringToFront();
+			CurrentPage.Apply();
 		}
 
 		public void ApplyDecorator(bool firstRun = false)
@@ -130,7 +128,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 			FormMain.Instance.TabHome.PageChanged = null;
 			FormMain.Instance.comboBoxItemPages.Items.Clear();
 			FormMain.Instance.comboBoxItemPages.Enabled = false;
-			foreach (PageDecorator page in Pages)
+			foreach (var page in Pages)
 			{
 				page.Container.Parent = null;
 				page.TabPage.Controls.Add(page.Container);
@@ -151,20 +149,18 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 			if (FormMain.Instance.comboBoxItemPages.Items.Count > 1)
 				FormMain.Instance.comboBoxItemPages.Enabled = true;
-			if (FormMain.Instance.comboBoxItemPages.Items.Count > 0)
-			{
-				_selectedPageIndex = FormMain.Instance.comboBoxItemPages.Items.IndexOf(SettingsManager.Instance.SelectedPage);
-				if (_selectedPageIndex >= 0)
-					FormMain.Instance.comboBoxItemPages.SelectedIndex = _selectedPageIndex;
-				else
-					FormMain.Instance.comboBoxItemPages.SelectedIndex = 0;
-			}
+			if (FormMain.Instance.comboBoxItemPages.Items.Count <= 0) return;
+			_selectedPageIndex = FormMain.Instance.comboBoxItemPages.Items.IndexOf(SettingsManager.Instance.SelectedPage);
+			if (_selectedPageIndex >= 0)
+				FormMain.Instance.comboBoxItemPages.SelectedIndex = _selectedPageIndex;
+			else
+				FormMain.Instance.comboBoxItemPages.SelectedIndex = 0;
 		}
 
 		public void UpdateView()
 		{
-			foreach (PageDecorator page in Pages)
-				page.FitPage();
+			foreach (var page in Pages.Where(p=>p.ReadyToShow))
+				page.UpdatePage();
 		}
 
 		#region Overnights Calendar Stuff
@@ -172,11 +168,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		{
 			Library.OvernightsCalendar.LoadYears();
 			Application.DoEvents();
-			if (Library.OvernightsCalendar.Enabled)
-			{
-				OvernightsCalendar.Build();
-				Application.DoEvents();
-			}
+			if (!Library.OvernightsCalendar.Enabled) return;
+			OvernightsCalendar.Build();
+			Application.DoEvents();
 		}
 
 		private void ApplyOvernightsCalebdar()

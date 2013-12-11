@@ -139,7 +139,6 @@ namespace SalesDepot.PresentationClasses.Viewers
 						var thread = new Thread(delegate()
 						{
 							AppManager.Instance.ActivatePowerPoint();
-							AppManager.Instance.ActivateMiniBar();
 							AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", File.Name, File.Type.ToString(), File.OriginalPath, File.Parent.Parent.Parent.Name, File.Parent.Parent.Name);
 							PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
 							PowerPointHelper.Instance.AppendSlide(File.PreviewContainer.SelectedIndex + 1);

@@ -108,32 +108,16 @@ namespace SalesDepot
 				WinAPIHelper.SetForegroundWindow(powerPointHandle);
 				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 			}
-			ActivateMiniBar();
 		}
 
-		public void ActivateMiniBar()
+		public void ActivateTaskbar()
 		{
-			IntPtr minibarHandle = RegistryHelper.MinibarHandle;
-			if (minibarHandle.ToInt32() == 0)
-			{
-				Process[] processList = Process.GetProcesses();
-				foreach (Process process in processList.Where(x => x.ProcessName.ToLower().Contains("minibar")))
-				{
-					if (process.MainWindowHandle.ToInt32() != 0)
-					{
-						minibarHandle = process.MainWindowHandle;
-						break;
-					}
-				}
-			}
-			if (minibarHandle.ToInt32() != 0)
-			{
-				uint lpdwProcessId = 0;
-				WinAPIHelper.MakeTopMost(minibarHandle);
-				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
-				WinAPIHelper.SetForegroundWindow(minibarHandle);
-				WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
-			}
+			var taskBarHandle = WinAPIHelper.FindWindow("Shell_traywnd", "");
+			WinAPIHelper.ShowWindow(taskBarHandle, WindowShowStyle.Show);
+			uint lpdwProcessId;
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), true);
+			WinAPIHelper.SetForegroundWindow(taskBarHandle);
+			WinAPIHelper.AttachThreadInput(WinAPIHelper.GetCurrentThreadId(), WinAPIHelper.GetWindowThreadProcessId(WinAPIHelper.GetForegroundWindow(), out lpdwProcessId), false);
 		}
 
 		public void RunPowerPointLoader()

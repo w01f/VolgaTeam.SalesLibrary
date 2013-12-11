@@ -121,7 +121,6 @@ namespace SalesDepot.ToolForms.WallBin
 				FormMain.Instance.TopMost = false;
 				TopMost = true;
 				TopMost = false;
-				AppManager.Instance.ActivateMiniBar();
 			}
 			RegistryHelper.SalesDepotHandle = Handle;
 			RegistryHelper.MaximizeSalesDepot = false;
@@ -169,7 +168,6 @@ namespace SalesDepot.ToolForms.WallBin
 			FormMain.Instance.TopMost = false;
 			TopMost = true;
 			TopMost = false;
-			AppManager.Instance.ActivateMiniBar();
 		}
 		#endregion
 

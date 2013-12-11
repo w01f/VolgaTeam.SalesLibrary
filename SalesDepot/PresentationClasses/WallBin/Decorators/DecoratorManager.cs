@@ -1,58 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using SalesDepot.BusinessClasses;
 
 namespace SalesDepot.PresentationClasses.WallBin.Decorators
 {
-    public class DecoratorManager
-    {
-        private static DecoratorManager _instance = null;
-        public List<Decorators.PackageDecorator> PackageViewers { get; private set; }
-        public Decorators.PackageDecorator ActivePackageViewer { get; set; }
+	public class DecoratorManager
+	{
+		private static DecoratorManager _instance;
 
-        public static DecoratorManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new DecoratorManager();
-                return _instance;
-            }
-        }
+		private DecoratorManager()
+		{
+			PackageViewers = new List<PackageDecorator>();
+		}
 
-        private DecoratorManager()
-        {
-            this.PackageViewers = new List<Decorators.PackageDecorator>();
-        }
+		public List<PackageDecorator> PackageViewers { get; private set; }
+		public PackageDecorator ActivePackageViewer { get; set; }
 
-        public void BuildPackageViewers()
-        {
-            this.PackageViewers.Clear();
-            foreach (BusinessClasses.LibraryPackage package in BusinessClasses.LibraryManager.Instance.LibraryPackageCollection)
-            {
-                this.PackageViewers.Add(new Decorators.PackageDecorator(package));
-                Application.DoEvents();
-            }
-        }
+		public static DecoratorManager Instance
+		{
+			get
+			{
+				if (_instance == null)
+					_instance = new DecoratorManager();
+				return _instance;
+			}
+		}
 
-        public void BuildOvernightsCalendars()
-        {
-            foreach (PackageDecorator packageViwer in this.PackageViewers)
-            {
-                packageViwer.BuildOvernightsCalendar();
-                Application.DoEvents();
-            }
-        }
+		public void BuildPackageViewers()
+		{
+			PackageViewers.Clear();
+			foreach (var package in LibraryManager.Instance.LibraryPackageCollection)
+			{
+				PackageViewers.Add(new PackageDecorator(package));
+				Application.DoEvents();
+			}
+		}
 
-        public void BuildProgramManagers()
-        {
-            foreach (PackageDecorator packageViwer in this.PackageViewers)
-            {
-                packageViwer.BuildProgramManager();
-                Application.DoEvents();
-            }
-        }
-    }
+		public void BuildOvernightsCalendars()
+		{
+			foreach (PackageDecorator packageViwer in PackageViewers)
+			{
+				packageViwer.BuildOvernightsCalendar();
+				Application.DoEvents();
+			}
+		}
+
+		public void BuildProgramManagers()
+		{
+			foreach (PackageDecorator packageViwer in PackageViewers)
+			{
+				packageViwer.BuildProgramManager();
+				Application.DoEvents();
+			}
+		}
+	}
 }

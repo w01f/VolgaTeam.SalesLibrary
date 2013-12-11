@@ -2,73 +2,70 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.BusinessClasses
 {
 	public class LibraryPackage
 	{
-		private string _name;
+		private readonly List<Library> _libraryCollection = new List<Library>();
+		private readonly string _name;
+
+		public LibraryPackage(string name, DirectoryInfo folder)
+		{
+			Folder = folder;
+			_name = name;
+			LoadSalesDepots();
+		}
+
 		public DirectoryInfo Folder { get; set; }
-		private List<Library> _libraryCollection = new List<Library>();
 
 		public List<Library> LibraryCollection
 		{
-			get
-			{
-				return _libraryCollection;
-			}
+			get { return _libraryCollection; }
 		}
 
 		public string Name
 		{
 			get
 			{
-				if (_name.Equals(CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage))
+				if (_name.Equals(Constants.WholeDriveFilesStorage))
 				{
 					if (_libraryCollection.Count > 0 && !string.IsNullOrEmpty(_libraryCollection[0].BrandingText))
 						return _libraryCollection[0].BrandingText;
-					else
-						return ConfigurationClasses.SettingsManager.Instance.SalesDepotName;
+					return SettingsManager.Instance.SalesDepotName;
 				}
-				else
-					return _name;
+				return _name;
 			}
-		}
-
-		public LibraryPackage(string name, DirectoryInfo folder)
-		{
-			this.Folder = folder;
-			_name = name;
-			LoadSalesDepots();
 		}
 
 		private void LoadSalesDepots()
 		{
 			Library library = null;
-			if (this.Folder.GetFiles("*.xml").Length > 0 && !this.Folder.Name.ToLower().Equals("_gsdata_"))
+			if (Folder.GetFiles("*.xml").Length > 0 && !Folder.Name.ToLower().Equals("_gsdata_"))
 			{
-				library = new Library(this, this.Folder.Name.Equals(CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage) ? this.Folder.Parent.Name : this.Folder.Name, this.Folder);
-				if (library != null && library.IsConfigured && (ConfigurationClasses.PermissionsManager.Instance.GetAvailableLibraries().Contains(library.Name.ToLower()) || !ConfigurationClasses.PermissionsManager.Instance.Configured))
+				library = new Library(this, Folder.Name.Equals(Constants.WholeDriveFilesStorage) ? Folder.Parent.Name : Folder.Name, Folder);
+				if (library != null && library.IsConfigured && (PermissionsManager.Instance.GetAvailableLibraries().Contains(library.Name.ToLower()) || !PermissionsManager.Instance.Configured))
 					_libraryCollection.Add(library);
 			}
 			else
-				foreach (DirectoryInfo subFolder in this.Folder.GetDirectories())
+				foreach (var subFolder in Folder.GetDirectories())
 					if (!subFolder.Name.StartsWith("!") && !subFolder.Name.ToLower().Equals("_gsdata_"))
 					{
-						DirectoryInfo primaryRootFolder = new DirectoryInfo(Path.Combine(subFolder.FullName, CoreObjects.BusinessClasses.Constants.WholeDriveFilesStorage));
+						var primaryRootFolder = new DirectoryInfo(Path.Combine(subFolder.FullName, Constants.WholeDriveFilesStorage));
 						if (primaryRootFolder.Exists)
 							library = new Library(this, primaryRootFolder.Parent.Name, primaryRootFolder);
 						else
 							library = new Library(this, subFolder.Name, subFolder);
-						if (library != null && library.IsConfigured && (ConfigurationClasses.PermissionsManager.Instance.GetAvailableLibraries().Contains(library.Name.ToLower()) || !ConfigurationClasses.PermissionsManager.Instance.Configured))
+						if (library != null && library.IsConfigured && (PermissionsManager.Instance.GetAvailableLibraries().Contains(library.Name.ToLower()) || !PermissionsManager.Instance.Configured))
 							_libraryCollection.Add(library);
 					}
 		}
 
 		public ILibraryLink[] SearchByTags(LibraryFileSearchTags searchCriteria)
 		{
-			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
+			var searchFiles = new List<ILibraryLink>();
 			foreach (Library library in _libraryCollection)
 				searchFiles.AddRange(library.SearchByTags(searchCriteria));
 			return searchFiles.ToArray();
@@ -76,7 +73,7 @@ namespace SalesDepot.BusinessClasses
 
 		public ILibraryLink[] SearchByName(string template, bool fullMatchOnly, FileTypes type)
 		{
-			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
+			var searchFiles = new List<ILibraryLink>();
 			foreach (Library library in _libraryCollection)
 				searchFiles.AddRange(library.SearchByName(template, fullMatchOnly, type));
 			return searchFiles.ToArray();
@@ -84,7 +81,7 @@ namespace SalesDepot.BusinessClasses
 
 		public ILibraryLink[] SearchByDate(DateTime startDate, DateTime endDate)
 		{
-			List<ILibraryLink> searchFiles = new List<ILibraryLink>();
+			var searchFiles = new List<ILibraryLink>();
 			foreach (Library library in _libraryCollection)
 				searchFiles.AddRange(library.SearchByDate(startDate, endDate));
 			return searchFiles.ToArray();

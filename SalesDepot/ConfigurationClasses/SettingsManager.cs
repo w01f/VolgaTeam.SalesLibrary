@@ -79,7 +79,7 @@ namespace SalesDepot.ConfigurationClasses
 			LibraryLogoFolder = string.Empty;
 			CalendarLogoPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\oc_logo.png", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			DisclaimerPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Nielsen Permissible Use.pdf", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
@@ -110,6 +110,8 @@ namespace SalesDepot.ConfigurationClasses
 			HiddenObjects.Add(Constants.AttachmentsRootFolderName);
 			HiddenObjects.Add("thumbs.db");
 			HiddenObjects.Add("SalesDepotCache.xml");
+
+			SalesDepotName = "Sales Libraries";
 		}
 
 		public bool IsConfigured { get; set; }
@@ -634,22 +636,6 @@ namespace SalesDepot.ConfigurationClasses
 				using (var sr = new StreamReader(defaultWizardFile.FullName))
 					if ((DefaultWizard = sr.ReadLine()) == null)
 						DefaultWizard = string.Empty;
-		}
-
-		public void GetSalesDepotName()
-		{
-			SalesDepotName = "Sales Libraries";
-			XmlNode node;
-			string filePath = string.Format(@"{0}\newlocaldirect.com\app\Minibar\SDSettings.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
-			if (File.Exists(filePath))
-			{
-				var document = new XmlDocument();
-				document.Load(filePath);
-
-				node = document.SelectSingleNode(@"/Root/LocalName");
-				if (node != null)
-					SalesDepotName = node.InnerText;
-			}
 		}
 
 		public bool CheckLibraries()

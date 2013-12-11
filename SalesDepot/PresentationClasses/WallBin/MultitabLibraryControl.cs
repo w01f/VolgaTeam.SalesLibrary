@@ -1,68 +1,69 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using DevExpress.XtraTab;
+using SalesDepot.ConfigurationClasses;
+using SalesDepot.PresentationClasses.WallBin.Decorators;
 
 namespace SalesDepot.PresentationClasses.WallBin
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class MultitabLibraryControl : UserControl
-    {
-        private List<Decorators.PageDecorator> _pages = new List<Decorators.PageDecorator>();
+	[ToolboxItem(false)]
+	public partial class MultitabLibraryControl : UserControl
+	{
+		private readonly List<PageDecorator> _pages = new List<PageDecorator>();
 
-        public MultitabLibraryControl()
-        {
-            InitializeComponent();
-            this.Dock = DockStyle.Fill;
-            this.Resize += new System.EventHandler(MultitabLibraryControl_Resize);
-        }
+		public MultitabLibraryControl()
+		{
+			InitializeComponent();
+			Dock = DockStyle.Fill;
+			Resize += MultitabLibraryControl_Resize;
+		}
 
-        private void FillPages()
-        {
-            pnEmpty.BringToFront();
-            xtraTabControl.SelectedPageChanged -= new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
-            xtraTabControl.TabPages.Clear();
-            xtraTabControl.TabPages.AddRange(_pages.Select(x => x.TabPage).ToArray());
-            foreach (Decorators.PageDecorator page in _pages)
-                page.FitPage();
-            DevExpress.XtraTab.XtraTabPage selectedPage = xtraTabControl.TabPages.Where(x => x.Text.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedPage.Replace("&", "&&"))).FirstOrDefault();
-            if (selectedPage != null)
-                xtraTabControl.SelectedTabPage = selectedPage;
-            xtraTabControl_SelectedPageChanged(null, new DevExpress.XtraTab.TabPageChangedEventArgs(null, xtraTabControl.SelectedTabPage));
-            xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
-            pnEmpty.SendToBack();
-        }
+		private void FillPages()
+		{
+			pnEmpty.BringToFront();
+			xtraTabControl.SelectedPageChanged -= xtraTabControl_SelectedPageChanged;
+			xtraTabControl.TabPages.Clear();
+			xtraTabControl.TabPages.AddRange(_pages.Select(x => x.TabPage).ToArray());
+			var selectedPage = xtraTabControl.TabPages.FirstOrDefault(x => x.Text.Equals(SettingsManager.Instance.SelectedPage.Replace("&", "&&")));
+			if (selectedPage != null)
+				xtraTabControl.SelectedTabPage = selectedPage;
+			xtraTabControl_SelectedPageChanged(null, new TabPageChangedEventArgs(null, xtraTabControl.SelectedTabPage));
+			xtraTabControl.SelectedPageChanged += xtraTabControl_SelectedPageChanged;
+			pnEmpty.SendToBack();
+			new Thread(delegate()
+			{
+				foreach (var page in _pages.Where(p => !p.ReadyToShow))
+					FormMain.Instance.Invoke((MethodInvoker)(() => page.Apply(true)));
+			}).Start();
+		}
 
-        private void MultitabLibraryControl_Resize(object sender, System.EventArgs e)
-        {
-            if (xtraTabControl.SelectedTabPage != null)
-            {
-                Decorators.PageDecorator pageDecorator = xtraTabControl.SelectedTabPage.Tag as Decorators.PageDecorator;
-                if (pageDecorator != null)
-                    pageDecorator.FitPage();
-            }
-        }
+		private void MultitabLibraryControl_Resize(object sender, EventArgs e)
+		{
+			if (xtraTabControl.SelectedTabPage == null) return;
+			var pageDecorator = xtraTabControl.SelectedTabPage.Tag as PageDecorator;
+			if (pageDecorator == null) return;
+			pageDecorator.UpdatePage();
+		}
 
-        void xtraTabControl_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
-        {
-            if (e.Page != null)
-            {
-                Decorators.PageDecorator pageDecorator = e.Page.Tag as Decorators.PageDecorator;
-                if (pageDecorator != null)
-                {
-                    pageDecorator.ApplyPageLogo();
-                    pageDecorator.FitColumnsToPage();
-                    pageDecorator.UpdatePageContent();
-                    ConfigurationClasses.SettingsManager.Instance.SelectedPage = pageDecorator.Page.Name;
-                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-                }
-            }
-        }
+		private void xtraTabControl_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
+		{
+			if (e.Page == null) return;
+			var pageDecorator = e.Page.Tag as PageDecorator;
+			if (pageDecorator == null) return;
+			pageDecorator.Apply();
+			SettingsManager.Instance.SelectedPage = pageDecorator.Page.Name;
+			SettingsManager.Instance.SaveSettings();
+		}
 
-        public void AddPages(Decorators.PageDecorator[] pages)
-        {
-            _pages.Clear();
-            _pages.AddRange(pages);
-            FillPages();
-        }
-    }
+		public void AddPages(PageDecorator[] pages)
+		{
+			_pages.Clear();
+			_pages.AddRange(pages);
+			FillPages();
+		}
+	}
 }

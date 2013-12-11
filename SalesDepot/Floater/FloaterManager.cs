@@ -41,7 +41,7 @@ namespace SalesDepot.Floater
 				else
 				{
 					sender.WindowState = FormWindowState.Minimized;
-					AppManager.Instance.ActivateMiniBar();
+					AppManager.Instance.ActivateTaskbar();
 				}
 			}
 			foreach (Form openForm in Application.OpenForms)

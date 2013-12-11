@@ -213,16 +213,13 @@ namespace SalesDepot
 
 			if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
 			{
-				thread = new Thread(delegate()
-										{
-											Invoke((MethodInvoker)delegate
-																	  {
-																		  TabHome.LoadTab();
-																		  Application.DoEvents();
-																		  _alowToSave = true;
-																		  Application.DoEvents();
-																	  });
-										});
+				thread = new Thread(() => Invoke((MethodInvoker) delegate
+				{
+					TabHome.LoadTab();
+					Application.DoEvents();
+					_alowToSave = true;
+					Application.DoEvents();
+				}));
 				thread.Start();
 				while (thread.IsAlive)
 					Application.DoEvents();

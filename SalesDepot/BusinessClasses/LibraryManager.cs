@@ -26,7 +26,7 @@ namespace SalesDepot.BusinessClasses
 		{
 			LibraryPackageCollection.Clear();
 			if (!rootFolder.Exists) return;
-			foreach (DirectoryInfo subFolder in rootFolder.GetDirectories())
+			foreach (var subFolder in rootFolder.GetDirectories())
 			{
 				if (subFolder.Name.StartsWith("!") || subFolder.Name.ToLower().Equals("_gsdata_")) continue;
 				var package = new LibraryPackage(subFolder.Name, subFolder);

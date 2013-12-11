@@ -147,13 +147,13 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 		public int Column
 		{
-			get { return _folder.ColumnOrder >= 0 ? (SettingsManager.Instance.ClassicView || SettingsManager.Instance.AccordionView ? _folder.ColumnOrder : 2) : 0; }
+			get { return _folder.ColumnOrder >= 0 ? (Decorator.State.ClassicView || Decorator.State.AccordionView ? _folder.ColumnOrder : 2) : 0; }
 			set { _folder.ColumnOrder = value; }
 		}
 
 		public double RowOrder
 		{
-			get { return SettingsManager.Instance.ClassicView ? _folder.RowOrder : _folder.AbsoluteRowOrder; }
+			get { return Decorator.State.ClassicView ? _folder.RowOrder : _folder.AbsoluteRowOrder; }
 			set { _folder.RowOrder = value; }
 		}
 		#endregion
@@ -504,7 +504,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 				textHeight = (int)textSize.Height;
 			}
 
-			if (SettingsManager.Instance.AccordionView)
+			if (Decorator.State.AccordionView)
 				textWidth += 20;
 
 			columnWidth = textLeft + textWidth + 10;
@@ -594,7 +594,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 					int textHeight = 0;
 					int columnWidth = 0;
 					int rowHeight = 0;
-					Color foreColor = Color.Black;
+					var foreColor = Color.Black;
 					Font font = null;
 
 					GetLinkGUIValues(file
@@ -613,7 +613,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 									 , ref foreColor
 									 , ref font);
 
-					switch (SettingsManager.Instance.RowSpace)
+					switch (Decorator.State.RowSpace)
 					{
 						case 2:
 							rowHeight += 5;
@@ -635,44 +635,10 @@ namespace SalesDepot.PresentationClasses.WallBin
 
 			colDisplayName.Width = maxColumnWidth > (grFiles.Width - 10) ? maxColumnWidth : (grFiles.Width - 10);
 
-			Height = (_contentExpanded || !SettingsManager.Instance.AccordionView ? _contantHeight : 0) + pnHeaderBorder.Height + (SettingsManager.Instance.ListView || SettingsManager.Instance.AccordionView ? (pnBottom.Height + pnTop.Height) : 0);
+			Height = (_contentExpanded || !Decorator.State.AccordionView ? _contantHeight : 0) + pnHeaderBorder.Height + (Decorator.State.ListView || Decorator.State.AccordionView ? (pnBottom.Height + pnTop.Height) : 0);
 		}
 
-		public void SetGridFont(int size)
-		{
-			_textFont = new Font(_folder.WindowFont.FontFamily, size, _folder.WindowFont.Style);
-			_noteFont = new Font(_folder.WindowFont.FontFamily, size, FontStyle.Bold | _folder.WindowFont.Style);
-			grFiles.DefaultCellStyle.Font = _noteFont;
-			colDisplayName.DefaultCellStyle.Font = _noteFont;
-			_containsWidgets = _folder.Files.Any(x => x.Widget != null);
-			SetHeaderSize();
-			SetGridSize();
-		}
-
-		public void UpdateView()
-		{
-			pnMain.Padding = SettingsManager.Instance.ListView || SettingsManager.Instance.AccordionView ? new Padding(1, 1, 1, 0) : new Padding(1, 1, 1, 1);
-			pnTop.Visible = SettingsManager.Instance.ListView || SettingsManager.Instance.AccordionView;
-			pnBottom.Visible = SettingsManager.Instance.ListView || SettingsManager.Instance.AccordionView;
-			pnRight.Visible = SettingsManager.Instance.ListView || SettingsManager.Instance.AccordionView;
-			pnIndex.Visible = SettingsManager.Instance.ListView || SettingsManager.Instance.AccordionView;
-			laIndex.Visible = SettingsManager.Instance.ListView;
-			if (SettingsManager.Instance.AccordionView)
-			{
-				pnRight.Width = pnIndex.Width = 25;
-				buttonXHeader.BringToFront();
-			}
-			else
-			{
-				ContentExpanded = false;
-				pnRight.Width = pnIndex.Width = 50;
-				pnHeader.BringToFront();
-			}
-			SetHeaderSize();
-			SetGridSize();
-		}
-
-		public void UpdateContent()
+		private void UpdateContent()
 		{
 			if (ContentVisibilityChanged != null)
 				ContentVisibilityChanged(this, new EventArgs());
@@ -689,6 +655,36 @@ namespace SalesDepot.PresentationClasses.WallBin
 			_containsWidgets = _folder.Files.Any(x => x.Widget != null);
 			if (Parent != null)
 				((ColumnPanel)Parent).ResizePanel();
+		}
+
+		public void UpdateView()
+		{
+			pnMain.Padding = Decorator.State.ListView || Decorator.State.AccordionView ? new Padding(1, 1, 1, 0) : new Padding(1, 1, 1, 1);
+			pnTop.Visible = Decorator.State.ListView || Decorator.State.AccordionView;
+			pnBottom.Visible = Decorator.State.ListView || Decorator.State.AccordionView;
+			pnRight.Visible = Decorator.State.ListView || Decorator.State.AccordionView;
+			pnIndex.Visible = Decorator.State.ListView || Decorator.State.AccordionView;
+			laIndex.Visible = Decorator.State.ListView;
+			if (Decorator.State.AccordionView)
+			{
+				pnRight.Width = pnIndex.Width = 25;
+				buttonXHeader.BringToFront();
+			}
+			else
+			{
+				ContentExpanded = false;
+				pnRight.Width = pnIndex.Width = 50;
+				pnHeader.BringToFront();
+			}
+
+			_textFont = new Font(_folder.WindowFont.FontFamily, Decorator.State.FontSize, _folder.WindowFont.Style);
+			_noteFont = new Font(_folder.WindowFont.FontFamily, Decorator.State.FontSize, FontStyle.Bold | _folder.WindowFont.Style);
+			grFiles.DefaultCellStyle.Font = _noteFont;
+			colDisplayName.DefaultCellStyle.Font = _noteFont;
+			_containsWidgets = _folder.Files.Any(x => x.Widget != null);
+
+			SetHeaderSize();
+			SetGridSize();
 		}
 		#endregion
 	}

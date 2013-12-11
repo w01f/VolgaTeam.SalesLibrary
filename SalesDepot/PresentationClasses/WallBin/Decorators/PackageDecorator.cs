@@ -61,7 +61,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		private void BuildDecorators()
 		{
-			foreach (Library salesDepot in Package.LibraryCollection)
+			foreach (var salesDepot in Package.LibraryCollection)
 			{
 				_decorators.Add(new LibraryDecorator(this, salesDepot));
 				Application.DoEvents();
@@ -70,7 +70,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		public void BuildOvernightsCalendar()
 		{
-			foreach (LibraryDecorator decorator in _decorators)
+			foreach (var decorator in _decorators)
 			{
 				decorator.BuildOvernightsCalendar();
 				Application.DoEvents();
@@ -79,7 +79,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		public void BuildProgramManager()
 		{
-			foreach (LibraryDecorator decorator in _decorators)
+			foreach (var decorator in _decorators)
 			{
 				decorator.BuildProgramManager();
 				Application.DoEvents();
@@ -134,8 +134,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		public void FormatWallBin()
 		{
 			if (SelectedLibrary != null)
-				foreach (PageDecorator page in SelectedLibrary.Pages)
-					page.UpdatePageContent();
+				foreach (var page in SelectedLibrary.Pages)
+					page.UpdatePage();
 		}
 
 		public void FormatCalendar()

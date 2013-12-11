@@ -1,109 +1,112 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using DevExpress.Utils;
+using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.PresentationClasses.WallBin
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class ColumnTitleControl : UserControl
-    {
-        public CoreObjects.BusinessClasses.ColumnTitle Data { get; private set; }
+	[ToolboxItem(false)]
+	public partial class ColumnTitleControl : UserControl
+	{
+		public ColumnTitleControl(ColumnTitle data)
+		{
+			InitializeComponent();
+			Data = data;
 
-        public ColumnTitleControl(CoreObjects.BusinessClasses.ColumnTitle data)
-        {
-            InitializeComponent();
-            this.Data = data;
+			BackColor = Data.BackgroundColor;
+			pbLogo.BackColor = Data.BackgroundColor;
+			labelControlText.BackColor = Data.BackgroundColor;
+			if (Data.EnableText && !string.IsNullOrEmpty(Data.Name.Trim()))
+			{
+				labelControlText.Visible = true;
+				labelControlText.Text = Data.Name;
+				labelControlText.Font = Data.HeaderFont;
+				labelControlText.ForeColor = Data.ForeColor;
+				switch (Data.HeaderAlignment)
+				{
+					case Alignment.Left:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Near;
+						break;
+					case Alignment.Center:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+						break;
+					case Alignment.Right:
+						labelControlText.Appearance.TextOptions.HAlignment = HorzAlignment.Far;
+						break;
+				}
+				pbLogo.Dock = DockStyle.Left;
+				if (Data.BannerProperties.Enable && Data.BannerProperties.Image != null)
+				{
+					pbLogo.Visible = true;
+					pbLogo.Image = Data.BannerProperties.Image;
+					pbLogo.Width = Data.BannerProperties.Image.Width;
+				}
+				else if (Data.EnableWidget && Data.Widget != null)
+				{
+					pbLogo.Visible = false;
+					labelControlText.Appearance.Image = Data.Widget;
+				}
+				else
+					pbLogo.Visible = false;
+			}
+			else if (Data.BannerProperties.Enable && Data.BannerProperties.Image != null)
+			{
+				labelControlText.Visible = false;
+				pbLogo.Visible = true;
+				switch (Data.HeaderAlignment)
+				{
+					case Alignment.Left:
+						pbLogo.Dock = DockStyle.Left;
+						break;
+					case Alignment.Center:
+						pbLogo.Dock = DockStyle.Fill;
+						break;
+					case Alignment.Right:
+						pbLogo.Dock = DockStyle.Right;
+						break;
+				}
+				pbLogo.Image = Data.BannerProperties.Image;
+				pbLogo.Width = Data.BannerProperties.Image.Width;
+			}
+			else if (Data.EnableWidget && Data.Widget != null)
+			{
+				labelControlText.Visible = false;
+				pbLogo.Visible = true;
+				switch (Data.HeaderAlignment)
+				{
+					case Alignment.Left:
+						pbLogo.Dock = DockStyle.Left;
+						break;
+					case Alignment.Center:
+						pbLogo.Dock = DockStyle.Fill;
+						break;
+					case Alignment.Right:
+						pbLogo.Dock = DockStyle.Right;
+						break;
+				}
+				pbLogo.Image = Data.Widget;
+				pbLogo.Width = Data.Widget.Width;
+			}
+		}
 
-            this.BackColor = this.Data.BackgroundColor;
-            pbLogo.BackColor = this.Data.BackgroundColor;
-            labelControlText.BackColor = this.Data.BackgroundColor;
-            if (this.Data.EnableText && !string.IsNullOrEmpty(this.Data.Name.Trim()))
-            {
-                labelControlText.Visible = true;
-                labelControlText.Text = this.Data.Name;
-                labelControlText.Font = this.Data.HeaderFont;
-                labelControlText.ForeColor = this.Data.ForeColor;
-                switch (this.Data.HeaderAlignment)
-                {
-                    case CoreObjects.BusinessClasses.Alignment.Left:
-                        labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-                        break;
-                    case CoreObjects.BusinessClasses.Alignment.Center:
-                        labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                        break;
-                    case CoreObjects.BusinessClasses.Alignment.Right:
-                        labelControlText.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-                        break;
-                }
-                pbLogo.Dock = DockStyle.Left;
-                if (this.Data.BannerProperties.Enable && this.Data.BannerProperties.Image != null)
-                {
-                    pbLogo.Visible = true;
-                    pbLogo.Image = this.Data.BannerProperties.Image;
-                    pbLogo.Width = this.Data.BannerProperties.Image.Width;
-                }
-                else if (this.Data.EnableWidget && this.Data.Widget != null)
-                {
-                    pbLogo.Visible = false;
-                    labelControlText.Appearance.Image = this.Data.Widget;
-                }
-                else
-                    pbLogo.Visible = false;
-            }
-            else if (this.Data.BannerProperties.Enable && this.Data.BannerProperties.Image != null)
-            {
-                labelControlText.Visible = false;
-                pbLogo.Visible = true;
-                switch (this.Data.HeaderAlignment)
-                {
-                    case CoreObjects.BusinessClasses.Alignment.Left:
-                        pbLogo.Dock = DockStyle.Left;
-                        break;
-                    case CoreObjects.BusinessClasses.Alignment.Center:
-                        pbLogo.Dock = DockStyle.Fill;
-                        break;
-                    case CoreObjects.BusinessClasses.Alignment.Right:
-                        pbLogo.Dock = DockStyle.Right;
-                        break;
-                }
-                pbLogo.Image = this.Data.BannerProperties.Image;
-                pbLogo.Width = this.Data.BannerProperties.Image.Width;
-            }
-            else if (this.Data.EnableWidget && this.Data.Widget != null)
-            {
-                labelControlText.Visible = false;
-                pbLogo.Visible = true;
-                switch (this.Data.HeaderAlignment)
-                {
-                    case CoreObjects.BusinessClasses.Alignment.Left:
-                        pbLogo.Dock = DockStyle.Left;
-                        break;
-                    case CoreObjects.BusinessClasses.Alignment.Center:
-                        pbLogo.Dock = DockStyle.Fill;
-                        break;
-                    case CoreObjects.BusinessClasses.Alignment.Right:
-                        pbLogo.Dock = DockStyle.Right;
-                        break;
-                }
-                pbLogo.Image = this.Data.Widget;
-                pbLogo.Width = this.Data.Widget.Width;
-            }
-        }
+		public ColumnTitle Data { get; private set; }
 
-        public int GetHeight()
-        {
-            int textHeight = 0;
-            int imageHeight = 0;
-            if (this.Data.EnableText && !string.IsNullOrEmpty(this.Data.Name.Trim()))
-                using (Graphics g = labelControlText.CreateGraphics())
-                    textHeight = (int)g.MeasureString(this.Data.Name, this.Data.HeaderFont, new Size(labelControlText.Width - (this.Data.EnableWidget && this.Data.Widget != null ? this.Data.Widget.Width : 0), Int32.MaxValue)).Height;
+		public int GetHeight()
+		{
+			var textHeight = 0;
+			var imageHeight = 0;
+			if (Data.EnableText && !string.IsNullOrEmpty(Data.Name.Trim()))
+				using (var g = labelControlText.CreateGraphics())
+					textHeight = (int)g.MeasureString(Data.Name, Data.HeaderFont, new Size(labelControlText.Width - (Data.EnableWidget && Data.Widget != null ? Data.Widget.Width : 0), Int32.MaxValue)).Height;
 
-            if (this.Data.BannerProperties.Enable && this.Data.BannerProperties.Image != null)
-                imageHeight = this.Data.BannerProperties.Image.Height;
-            else if (this.Data.EnableWidget && this.Data.Widget != null)
-                imageHeight = this.Data.Widget.Height;
+			if (Data.BannerProperties.Enable && Data.BannerProperties.Image != null)
+				imageHeight = Data.BannerProperties.Image.Height;
+			else if (Data.EnableWidget && Data.Widget != null)
+				imageHeight = Data.Widget.Height;
 
-            return textHeight > imageHeight ? textHeight : imageHeight;
-        }
-    }
+			return textHeight > imageHeight ? textHeight : imageHeight;
+		}
+	}
 }

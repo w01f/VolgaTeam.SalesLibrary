@@ -650,7 +650,6 @@ namespace SalesDepot.BusinessClasses
 			{
 				AppManager.Instance.RunPowerPointLoader();
 				AppManager.Instance.ActivatePowerPoint();
-				AppManager.Instance.ActivateMiniBar();
 				AppManager.Instance.ActivateMainForm();
 			}
 			var file = new FileInfo(presentationFile);
@@ -688,7 +687,6 @@ namespace SalesDepot.BusinessClasses
 			{
 				AppManager.Instance.RunPowerPointLoader();
 				AppManager.Instance.ActivatePowerPoint();
-				AppManager.Instance.ActivateMiniBar();
 				AppManager.Instance.ActivateMainForm();
 			}
 			var file = new FileInfo(link.LocalPath);

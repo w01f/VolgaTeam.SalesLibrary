@@ -29,10 +29,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 			TabPage = new XtraTabPage();
 			TabPage.Tag = this;
 			TabPage.Text = page.Name.Replace("&", "&&");
-
-			GetPageLogo();
-			BuildPage();
-			BuildDisplayBoxes();
+			State = new PageState();
 		}
 
 		public LibraryPage Page { get; private set; }
@@ -41,6 +38,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		public XtraTabPage TabPage { get; private set; }
 		public LibraryDecorator Parent { get; private set; }
 		public FolderBoxControl ActiveBox { get; set; }
+
+		public bool ReadyToShow { get; private set; }
+		public PageState State { get; private set; }
 
 		private void GetPageLogo()
 		{
@@ -57,19 +57,18 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		private void BuildDisplayBoxes()
 		{
-			foreach (FolderBoxControl box in _boxes)
+			foreach (var box in _boxes)
 				box.Dispose();
 			_boxes.Clear();
 
 			Page.Folders.Sort((x, y) => x.ColumnOrder.CompareTo(y.ColumnOrder) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.ColumnOrder.CompareTo(y.ColumnOrder));
-			foreach (LibraryFolder folder in Page.Folders)
+			foreach (var box in Page.Folders.Select(folder => new FolderBoxControl { Folder = folder, Decorator = this }))
 			{
-				var box = new FolderBoxControl { Folder = folder, Decorator = this };
 				box.ContentVisibilityChanged += (o, e) =>
 													{
-														foreach (FolderBoxControl boxControl in _boxes.Where(boxControl => o != boxControl))
+														foreach (var boxControl in _boxes.Where(boxControl => o != boxControl))
 															boxControl.ContentExpanded = false;
-														UpdatePageContent();
+														UpdatePage(true);
 													};
 				_boxes.Add(box);
 			}
@@ -87,22 +86,20 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 
 		private void BuildColumnTitles()
 		{
-			if (Page.EnableColumnTitles)
-			{
-				_headerPanel = new Panel();
-				_headerPanel.BorderStyle = BorderStyle.None;
-				_headerPanel.Height = 0;
-				_headerPanel.Dock = DockStyle.Top;
-				Container.Controls.Add(_headerPanel);
-				_headerPanel.SendToBack();
+			if (!Page.EnableColumnTitles) return;
+			_headerPanel = new Panel();
+			_headerPanel.BorderStyle = BorderStyle.None;
+			_headerPanel.Height = 0;
+			_headerPanel.Dock = DockStyle.Top;
+			Container.Controls.Add(_headerPanel);
+			_headerPanel.SendToBack();
 
-				foreach (ColumnTitle columnTitle in Page.ColumnTitles)
-				{
-					var columnTitleControl = new ColumnTitleControl(columnTitle);
-					columnTitleControl.Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left;
-					_headerPanel.Controls.Add(columnTitleControl);
-					columnTitleControl.BringToFront();
-				}
+			foreach (var columnTitle in Page.ColumnTitles)
+			{
+				var columnTitleControl = new ColumnTitleControl(columnTitle);
+				columnTitleControl.Dock = columnTitle.ColumnOrder == 2 ? DockStyle.Fill : DockStyle.Left;
+				_headerPanel.Controls.Add(columnTitleControl);
+				columnTitleControl.BringToFront();
 			}
 		}
 
@@ -136,76 +133,39 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 			panel.BringToFront();
 		}
 
-		public void LinkBoxesToColumns()
+		private void LinkBoxesToColumns()
 		{
 			_boxes.Sort((x, y) => x.Column.CompareTo(y.Column) == 0 ? x.RowOrder.CompareTo(y.RowOrder) : x.Column.CompareTo(y.Column));
 			foreach (Control control in _parentPanel.Controls)
 				control.Controls.Clear();
-			foreach (FolderBoxControl box in _boxes)
-			{
+			foreach (var box in _boxes)
 				_parentPanel.Controls[2 - box.Column].Controls.Add(box);
-			}
 		}
 
-		private void WallBin_Resize(object sender, EventArgs e)
+		private void UpdateHeaderSize()
 		{
-			Parent.EmptyPanel.BringToFront();
-			FitColumnsToPage();
-			UpdatePageContent();
-			Parent.EmptyPanel.SendToBack();
-		}
-
-		private void RefreshPanelHeight()
-		{
-			int realHeight = 0;
-			for (int i = 0; i < 3; i++)
+			if (_headerPanel != null)
+				_headerPanel.Visible = SettingsManager.Instance.ClassicView;
+			if (_headerPanel == null) return;
+			var panelWidth = _headerPanel.Width / 3;
+			var panelHeight = 0;
+			foreach (Control panel in _headerPanel.Controls)
 			{
-				int columnHeight = 0;
-				foreach (FolderBoxControl box in _boxes)
-					if (box.Column == i)
-						columnHeight += box.Height;
-				if (realHeight < columnHeight)
-					realHeight = columnHeight;
+				panel.Width = panelWidth;
+				var controlHeight = (panel as ColumnTitleControl).GetHeight();
+				if (panelHeight < controlHeight)
+					panelHeight = controlHeight;
 			}
-			_parentPanel.Height = realHeight;
+			_headerPanel.Height = panelHeight;
 		}
 
-		private void UpdateView()
+		private void UpdateContentSize()
 		{
 			foreach (Control control in _parentPanel.Controls)
 			{
 				var panel = control as ColumnPanel;
 				panel.Visible = panel.Order == 2 || SettingsManager.Instance.ClassicView || SettingsManager.Instance.AccordionView;
 			}
-			foreach (FolderBoxControl box in _boxes)
-				box.UpdateView();
-			if (_headerPanel != null)
-				_headerPanel.Visible = SettingsManager.Instance.ClassicView;
-		}
-
-		public void FitColumnsToPage()
-		{
-			if (_headerPanel != null)
-			{
-				int panelWidth = _headerPanel.Width / 3;
-				int panelHeight = 0;
-				foreach (Control panel in _headerPanel.Controls)
-				{
-					panel.Width = panelWidth;
-					int controlHeight = (panel as ColumnTitleControl).GetHeight();
-					if (panelHeight < controlHeight)
-						panelHeight = controlHeight;
-				}
-				_headerPanel.Height = panelHeight;
-			}
-		}
-
-		public void UpdatePageContent()
-		{
-			foreach (FolderBoxControl box in _boxes)
-				box.SetGridFont(SettingsManager.Instance.FontSize);
-
-			UpdateView();
 
 			foreach (Control panel in _parentPanel.Controls)
 			{
@@ -221,27 +181,95 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 				}
 			}
 
-			RefreshPanelHeight();
+			var realHeight = 0;
+			for (var i = 0; i < 3; i++)
+			{
+				var columnHeight = _boxes.Where(box => box.Column == i).Sum(box => box.Height);
+				if (realHeight < columnHeight)
+					realHeight = columnHeight;
+			}
+			_parentPanel.Height = realHeight;
 		}
 
-		public void FitPage()
-		{
-			LinkBoxesToColumns();
-			FitColumnsToPage();
-			UpdatePageContent();
-		}
-
-		public void ApplyPageLogo()
+		private void ApplyPageLogo()
 		{
 			FormMain.Instance.labelItemPackageLogo.Image = _logo;
 			FormMain.Instance.ribbonBarStations.RecalcLayout();
 			FormMain.Instance.ribbonPanelHome.PerformLayout();
 		}
 
-		public void Apply()
+		private void WallBin_Resize(object sender, EventArgs e)
 		{
-			FitPage();
-			ApplyPageLogo();
+			Parent.EmptyPanel.BringToFront();
+			UpdatePage();
+			Parent.EmptyPanel.SendToBack();
+		}
+
+		public void UpdatePage(bool forse = false)
+		{
+			if (!ReadyToShow) return;
+
+			if (State.ClassicView != SettingsManager.Instance.ClassicView ||
+				State.ListView != SettingsManager.Instance.ListView ||
+				State.AccordionView != SettingsManager.Instance.AccordionView ||
+				forse)
+			{
+				State.ClassicView = SettingsManager.Instance.ClassicView;
+				State.ListView = SettingsManager.Instance.ListView;
+				State.AccordionView = SettingsManager.Instance.AccordionView;
+
+				LinkBoxesToColumns();
+
+				foreach (var box in _boxes)
+					box.UpdateView();
+			}
+			else if (State.FontSize != SettingsManager.Instance.FontSize ||
+					 State.RowSpace != SettingsManager.Instance.RowSpace)
+			{
+				State.FontSize = SettingsManager.Instance.FontSize;
+				State.RowSpace = SettingsManager.Instance.RowSpace;
+
+				foreach (var box in _boxes)
+					box.UpdateView();
+			}
+
+			UpdateHeaderSize();
+
+			UpdateContentSize();
+		}
+
+		public void Apply(bool silent = false)
+		{
+			if (!ReadyToShow)
+			{
+				GetPageLogo();
+				BuildPage();
+				BuildDisplayBoxes();
+				ReadyToShow = true;
+			}
+			UpdatePage(true);
+			if (!silent)
+				ApplyPageLogo();
+		}
+	}
+
+	public class PageState
+	{
+		public int FontSize { get; set; }
+		public int RowSpace { get; set; }
+		public bool MultiTab { get; set; }
+		public bool ClassicView { get; set; }
+		public bool ListView { get; set; }
+		public bool AccordionView { get; set; }
+
+		public PageState()
+		{
+			FontSize = SettingsManager.Instance.FontSize;
+			RowSpace = SettingsManager.Instance.RowSpace;
+			MultiTab = SettingsManager.Instance.MultitabView;
+			ClassicView = SettingsManager.Instance.ClassicView;
+			ListView = SettingsManager.Instance.ListView;
+			AccordionView = SettingsManager.Instance.AccordionView;
 		}
 	}
 }
