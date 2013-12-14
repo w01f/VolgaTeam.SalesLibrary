@@ -46,19 +46,19 @@
 				$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 				$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
 			?>
-			<button type="button" class="btn btn-block" id="tags-clear-all">Clear All <? echo $tagsName; ?></button>
+			<button type="button" class="btn btn-block tags-clear-all">Clear All <? echo $tagsName; ?></button>
 			<br>
 			<div class="group-title">What Are You Looking For?</div>
 			<?php if (isset($categories->superFilters)): ?>
-				<div class="btn-group centered" id="super-filter-list">
+				<div class="btn-group centered super-filter-list">
 					<?php foreach ($categories->superFilters as $superFilter): ?>
 						<button type="button" class="btn<? if ($superFilter->selected): ?> active<? endif; ?>"><? echo $superFilter->value; ?></button>
 					<?php endforeach; ?>
 				</div>
 			<?php endif; ?>
 		</div>
-		<div id="categories-container">
-			<div class="accordion" id="categories">
+		<div class="tag-list-container">
+			<div class="accordion tag-list">
 				<?php foreach ($categories->groups as $group): ?>
 					<h3><span><?php echo $group; ?></span></h3>
 					<div>

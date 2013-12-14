@@ -104,6 +104,19 @@
 				$fileTypes = CJSON::decode($fileTypes);
 			else
 				$fileTypes = array();
+
+			$superFilters = Yii::app()->request->getQuery('superFilters');
+			if (isset($superFilters))
+				$superFilters = CJSON::decode($superFilters);
+			else
+				$superFilters = array();
+
+			$categories = Yii::app()->request->getQuery('categories');
+			if (isset($categories))
+				$categories = CJSON::decode($categories);
+			else
+				$categories = array();
+
 			if (isset($pageId))
 			{
 				$pageRecord = ShortcutsPageStorage::model()->findByPk($pageId);
@@ -111,6 +124,14 @@
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
 				$searchBar->conditions->fileTypes = $fileTypes;
+				$searchBar->conditions->superFilters = $superFilters;
+
+				unset($searchBar->conditions->categories);
+				foreach ($categories as $arrayItem)
+				{
+					$category = (object)$arrayItem;
+					$searchBar->conditions->categories[] = $category;
+				}
 				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchBar), true);
 				$this->render('linkWrapper', array('objectName' => $searchBar->title, 'content' => $content));
 			}

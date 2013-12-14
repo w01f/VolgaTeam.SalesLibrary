@@ -54,14 +54,15 @@ window.salesDepot = window.salesDepot || { };
 				selectedLibraryIds.push($(this).val());
 			});
 
+			var tagsOptions = $('#search-options-tags');
 			var superFilters = [];
-			$.each($("#super-filter-list").find('.btn.active'), function ()
+			$.each(tagsOptions.find('.super-filter-list .btn.active'), function ()
 			{
 				superFilters.push($(this).html());
 			});
 
 			var categories = [];
-			$.each($("#categories").find(".item-selector:checked"), function ()
+			$.each(tagsOptions.find(".tag-list .item-selector:checked"), function ()
 			{
 				var substr = $(this).val().split('------');
 				var category = {
@@ -210,7 +211,7 @@ window.salesDepot = window.salesDepot || { };
 
 		var disabled = [];
 
-		var tagsCount = $('#categories').find('input[type="checkbox"]').length;
+		var tagsCount = $('#search-options-tags').find('.tag-list').find('input[type="checkbox"]').length;
 		if (tagsCount < 1)
 		{
 			if (conditionType == 1)
@@ -527,7 +528,10 @@ window.salesDepot = window.salesDepot || { };
 
 	var initTags = function ()
 	{
-		var categories = $("#categories");
+		var tagsOptions = $('#search-options-tags');
+		var categories = tagsOptions.find(".tag-list");
+		var superFilters = tagsOptions.find(".super-filter-list");
+
 		categories.accordion({
 			autoHeight: false,
 			active: false,
@@ -544,13 +548,13 @@ window.salesDepot = window.salesDepot || { };
 			categoryGroup.find('.item-selector').attr('checked', $(this).is(':checked'));
 		});
 
-		$('#tags-clear-all').off('click').on('click', function ()
+		tagsOptions.find('.tags-clear-all').off('click').on('click', function ()
 		{
-			$('#super-filter-list').find('.btn').removeClass('active');
-			$("#categories").find(":checked").attr('checked', false);
+			superFilters.find('.btn').removeClass('active');
+			categories.find(":checked").attr('checked', false);
 		});
 
-		$("#super-filter-list").find('.btn').off('click').on('click', function ()
+		superFilters.find('.btn').off('click').on('click', function ()
 		{
 			$(this).button('toggle');
 		});

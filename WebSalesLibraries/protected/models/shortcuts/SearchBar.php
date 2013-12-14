@@ -9,6 +9,8 @@
 		public $showResultsBar;
 		public $samePage;
 
+		public $categoryManager;
+
 		public function __construct($configContext)
 		{
 			$config = new DOMDocument();
@@ -27,5 +29,8 @@
 			$queryResult = $xpath->query('//SearchBar/OpenOnSamePage');
 			$this->samePage = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
 			$this->conditions = new SearchConditions($configContext);
+
+			$this->categoryManager = new CategoryManager();
+			$this->categoryManager->loadCategories();
 		}
 	}

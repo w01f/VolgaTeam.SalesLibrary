@@ -57,7 +57,7 @@ window.salesDepot = window.salesDepot || { };
 		$('#right-navbar').find('> div').css({
 			'height': height + 'px'
 		});
-		$('#categories-container').css({
+		$('#search-options-tags').find('.tag-list-container').css({
 			'height': (height - 198) + 'px'
 		});
 		$('#libraries-container').css({
