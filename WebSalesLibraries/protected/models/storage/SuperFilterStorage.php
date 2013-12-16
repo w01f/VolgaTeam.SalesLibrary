@@ -11,15 +11,14 @@ class SuperFilterStorage extends CActiveRecord
         return '{{super_filter}}';
     }
 
-    public static function updateData($superFilters)
+    public static function loadData($superFilters)
     {
-        self::clearData();
         $i = 1;
         foreach ($superFilters as $superFilter)
         {
             $superFilterStorage = new SuperFilterStorage();
             $superFilterStorage->id = $i;
-            $superFilterStorage->value = $superFilter['value'];
+            $superFilterStorage->value = $superFilter;
             $superFilterStorage->save();
             $i++;
         }

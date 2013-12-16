@@ -13,14 +13,12 @@
 					$libraryName = $libraryFolder->getBasename();
 					$storagePath = $libraryFolder->getPathname();
 					$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
-					$referencesFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotReferences.json');
 					$storageLink = Yii::app()->baseUrl . '/' . Yii::app()->params['librariesRoot'] . '/Libraries/' . $libraryFolder->getBasename();
 					if (!file_exists($storageFile))
 					{
 						$storagePath .= DIRECTORY_SEPARATOR . 'Primary Root';
 						$storageLink .= '/Primary Root';
 						$storageFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotCache.json');
-						$referencesFile = realpath($storagePath . DIRECTORY_SEPARATOR . 'SalesDepotReferences.json');
 					}
 					if (file_exists($storageFile))
 					{
@@ -49,21 +47,6 @@
 							}
 						}
 					}
-
-					if (file_exists($referencesFile))
-					{
-						$referencesContent = file_get_contents($referencesFile);
-						if ($referencesContent)
-						{
-							$references = CJSON::decode($referencesContent);
-							if (array_key_exists('categories', $references))
-								if (isset($references['categories']))
-									CategoryStorage::updateData($references['categories']);
-							if (array_key_exists('superFilters', $references))
-								if (isset($references['superFilters']))
-									SuperFilterStorage::updateData($references['superFilters']);
-						}
-					}
 				}
 			}
 
@@ -83,6 +66,54 @@
 							Yii::app()->cacheDB->flush();
 						}
 			}
+
+			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
+			if (file_exists($categoriesPath))
+			{
+				$categoriesContent = file_get_contents($categoriesPath);
+				if ($categoriesContent)
+				{
+					$categories = new DOMDocument();
+					$categories->loadXML($categoriesContent);
+					$xpath = new DomXPath($categories);
+
+					$queryResult = $xpath->query('//SDSearch/Category');
+					foreach ($queryResult as $node)
+					{
+						$groupName = $node->getAttribute('Name');
+						$tagNodes = $node->getElementsByTagName('Tag');
+						foreach ($tagNodes as $tagNode)
+						{
+							$categoryRecord = new Category();
+							$categoryRecord->category = $groupName;
+							$categoryRecord->tag = trim($tagNode->getAttribute('Value'));
+							$categoryRecords[] = $categoryRecord;
+						}
+					}
+				}
+			}
+			CategoryStorage::clearData();
+			if (isset($categoryRecords))
+				CategoryStorage::loadData($categoryRecords);
+
+			$superFiltersPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'superfilter.xml';
+			if (file_exists($superFiltersPath))
+			{
+				$superFiltersContent = file_get_contents($superFiltersPath);
+				if ($superFiltersContent)
+				{
+					$superFilters = new DOMDocument();
+					$superFilters->loadXML($superFiltersContent);
+					$xpath = new DomXPath($superFilters);
+
+					$queryResult = $xpath->query('//superfilters/filter');
+					foreach ($queryResult as $node)
+						$superFilterRecords[] = trim($node->nodeValue);
+				}
+			}
+			SuperFilterStorage::clearData();
+			if (isset($superFilterRecords))
+				SuperFilterStorage::loadData($superFilterRecords);
 
 			LibraryGroupStorage::clearData();
 			$libraryGroupFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'groups.txt';
