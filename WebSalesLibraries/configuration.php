@@ -49,6 +49,11 @@
 					'name' => 'Favorites',
 					'position' => 5,
 				),
+				'quiz_tab' => array(
+					'visible' => true,
+					'name' => 'Tests',
+					'position' => 99,
+				),
 				'stations' => array(
 					'tab_name' => 'Libraries',
 					'column_name' => 'Libraries',
