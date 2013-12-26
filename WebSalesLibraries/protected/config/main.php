@@ -8,6 +8,7 @@
 			'application.models.*',
 			'application.models.storage.*',
 			'application.models.shortcuts.*',
+			'application.models.quizzes.*',
 			'application.models.common.*',
 			'application.models.wallbin.*',
 			'application.models.favorites.*',

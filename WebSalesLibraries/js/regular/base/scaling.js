@@ -16,6 +16,7 @@ window.salesDepot = window.salesDepot || { };
 		updateShorcutsPage();
 		updateSearchArea();
 		updateFavoritesArea();
+		updateQuizzesArea();
 		updateTicker();
 	};
 
@@ -124,6 +125,14 @@ window.salesDepot = window.salesDepot || { };
 		var linkNameBodyWidth = favoriteLinks.width() - gridBody.find('td.details-button').width() - gridBody.find('td.library-column').width() - gridBody.find('td.link-type-column').width() - linkDateWidth;
 		gridBody.find('td.link-name-column').css({
 			'width': linkNameBodyWidth + 'px'
+		});
+	};
+
+	var updateQuizzesArea = function ()
+	{
+		var height = $('#content').height();
+		$('#quizzes-navigator').find('> div').css({
+			'height': (height - 3) + 'px'
 		});
 	};
 

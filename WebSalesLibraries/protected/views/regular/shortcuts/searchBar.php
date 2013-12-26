@@ -74,23 +74,25 @@
 									</div>
 								<?php endif; ?>
 							</div>
-							<div class="tag-list-container" style="height: 400px">
-								<div class="accordion tag-list">
-									<?php foreach ($searchBar->categoryManager->groups as $group): ?>
-										<h3><span><?php echo $group; ?></span></h3>
-										<div>
-											<label class="checkbox group-selector-title"><input class="group-selector" type="checkbox"><?php echo $group; ?>
-											</label>
-											<?php foreach ($searchBar->categoryManager->getTagsByGroup($group) as $tag): ?>
-												<label class="checkbox">
-													<input class="item-selector" type="checkbox" value="<?php echo $group . '------' . $tag['tag']; ?>">
-													<?php echo $tag['tag']; ?>
+							<? if (isset($searchBar->categoryManager->groups)): ?>
+								<div class="tag-list-container" style="height: 400px">
+									<div class="accordion tag-list">
+										<?php foreach ($searchBar->categoryManager->groups as $group): ?>
+											<h3><span><?php echo $group; ?></span></h3>
+											<div>
+												<label class="checkbox group-selector-title"><input class="group-selector" type="checkbox"><?php echo $group; ?>
 												</label>
-											<?php endforeach; ?>
-										</div>
-									<?php endforeach; ?>
+												<?php foreach ($searchBar->categoryManager->getTagsByGroup($group) as $tag): ?>
+													<label class="checkbox">
+														<input class="item-selector" type="checkbox" value="<?php echo $group . '------' . $tag['tag']; ?>">
+														<?php echo $tag['tag']; ?>
+													</label>
+												<?php endforeach; ?>
+											</div>
+										<?php endforeach; ?>
+									</div>
 								</div>
-							</div>
+							<? endif ?>
 							<div class="buttons-area">
 								<button class="btn accept-button" type="button">OK</button>
 								<button class="btn cancel-button" type="button">Cancel</button>

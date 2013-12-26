@@ -113,6 +113,11 @@
 						'body' => 'View your file:',
 					),
 					'help_request_address' => 'billy@newlocaldirect.com',
+					'quiz' => array(
+						'from' => 'help@adsalesapps.com',
+						'copy_enabled' => true,
+						'copy' => 'help@adsalesapps.com'
+					),
 				),
 				'ticker' => array(
 					'visible' => true,

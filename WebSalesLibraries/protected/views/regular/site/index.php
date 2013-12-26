@@ -1,5 +1,5 @@
 <?php
-	$version = '48.0';
+	$version = '50.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -26,6 +26,7 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/calendar.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/favorites.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/link-rate.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/quizzes.css?' . $version);
 	if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 	{
 		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/modern-ticker/css/modern-ticker.css?' . $version);
@@ -68,6 +69,7 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/minibar.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/quizzes.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/ribbon.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/link-cart.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/qbuilder/page-list.js?' . $version, CClientScript::POS_HEAD);
@@ -329,7 +331,7 @@
 				</div>
 			</div>
 		<?php endif; ?>
-	<?php
+	<?
 	elseif ($tabName == 'favorites_tab'): ?>
 		<?php if (Yii::app()->params['favorites_tab']['visible']): ?>
 			<div class="ribbon-tab" id="favorites-tab">
@@ -337,6 +339,28 @@
 
 				<div class="ribbon-section">
 					<span class="section-title">Favorites</span>
+					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
+				</div>
+				<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
+					<div class="ribbon-section">
+						<span class="section-title">Logout</span>
+
+						<div class="ribbon-button ribbon-button-large logout-button <? if (!$isMobile): ?>regular<? endif; ?>">
+							<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>"/>
+							<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . '/images/ribbon/normal/logout.png' ?>"/>
+						</div>
+					</div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+	<?
+	elseif ($tabName == 'quiz_tab'): ?>
+		<?php if (Yii::app()->params['quiz_tab']['visible']): ?>
+			<div class="ribbon-tab" id="quiz-tab">
+				<span class="ribbon-title"><?php echo Yii::app()->params['quiz_tab']['name'] ?></span>
+				<div class="ribbon-section">
+					<span class="section-title"><?php echo Yii::app()->params['quiz_tab']['name'] ?></span>
 					<img class="ribbon-tab-logo" src="<?php echo Yii::app()->baseUrl . '/images/rbntab2logo.png' ?>"/>
 				</div>
 				<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>

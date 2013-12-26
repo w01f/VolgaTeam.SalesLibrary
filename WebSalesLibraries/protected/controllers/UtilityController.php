@@ -123,4 +123,25 @@
 			}
 			return $result;
 		}
+
+		/**
+		 * @param string Session Key
+		 * @return string Command result
+		 * @soap
+		 */
+		public function updateQuizzes($sessionKey)
+		{
+			$result = 'Error';
+			if ($this->authenticateBySession($sessionKey))
+			{
+				ob_start();
+
+				$action = Yii::createComponent('application.components.actions.QuizzesUpdateAction', $this, 'updateQuizzes');
+				$action->run();
+
+				$result = ob_get_contents();
+				ob_end_clean();
+			}
+			return $result;
+		}
 	}

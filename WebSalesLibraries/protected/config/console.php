@@ -9,6 +9,7 @@ return array(
         'application.models.storage.*',
         'application.models.common.*',
         'application.models.shortcuts.*',
+		'application.models.quizzes.*',
         'application.models.wallbin.*',
 		'application.models.favorites.*',
 		'application.models.rate.*',

@@ -143,4 +143,22 @@
 				ResetPasswordStorage::model()->deleteAll('LOWER(login)=?', array(strtolower($login)));
 			}
 		}
+
+		public static function getGroupNames($userId)
+		{
+			$groups = null;
+			$userGroupIds = UserGroupStorage::getGroupIdsByUser($userId);
+			if (isset($userGroupIds))
+				foreach ($userGroupIds as $groupId)
+				{
+					$groupRecord = GroupStorage::model()->findByPk($groupId);
+					if (isset($groupRecord))
+						$groups[] = $groupRecord->name;
+				}
+			if (isset($groups))
+				return implode(', ', $groups);
+			else
+				return null;
+		}
+
 	}

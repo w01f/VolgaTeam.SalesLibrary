@@ -231,6 +231,12 @@ window.salesDepot = window.salesDepot || { };
 					});
 					$.initFavoritesView();
 					break;
+				case 'quiz-tab':
+					minibar.css({
+						'height': '0px'
+					});
+					$.QuizManager.init();
+					break;
 				default:
 					minibar.css({
 						'height': '0px'

@@ -307,7 +307,7 @@
 			if (isset($links))
 				if (count($links) > 0)
 				{
-					$sortHelper = new SortHelper($sortColumn, $sortDirection);
+					$sortHelper = new ArraySortHelper($sortColumn, $sortDirection);
 					usort($links, array($sortHelper, 'sort'));
 					return $links;
 				}

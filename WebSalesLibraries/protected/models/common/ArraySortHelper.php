@@ -1,5 +1,5 @@
 <?php
-	class SortHelper
+	class ArraySortHelper
 	{
 		public $column;
 		public $direction;
