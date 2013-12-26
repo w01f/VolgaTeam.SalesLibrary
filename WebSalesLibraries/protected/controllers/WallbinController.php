@@ -63,7 +63,10 @@
 				$folderRecord = FolderStorage::model()->findByPk($folderId);
 				$libraryManager = new LibraryManager();
 				$library = $libraryManager->getLibraryById($folderRecord->id_library);
-				$folder = new LibraryFolder(new LibraryPage($library));
+				$pageRecord = LibraryPageStorage::model()->findByPk($folderRecord->id_page);
+				$page = new LibraryPage($library);
+				$page->load($pageRecord);
+				$folder = new LibraryFolder($page);
 				$folder->load($folderRecord);
 				$folder->displayLinkWidgets = true;
 				$isAdmin = false;
