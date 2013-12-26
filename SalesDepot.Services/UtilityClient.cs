@@ -94,5 +94,24 @@ namespace SalesDepot.Services
 			else
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
+
+		public void UpdateQuizzes(out string message)
+		{
+			var client = GetUtilityClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					message = !string.IsNullOrEmpty(sessionKey) ? client.updateQuizzes(sessionKey) : "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+		}
 	}
 }

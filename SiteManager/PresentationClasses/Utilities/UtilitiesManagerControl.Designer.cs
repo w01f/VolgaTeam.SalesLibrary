@@ -38,6 +38,7 @@
 			this.simpleButtonUpdateShorcuts = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonUpdateContent = new DevExpress.XtraEditors.SimpleButton();
 			this.memoEditResult = new DevExpress.XtraEditors.MemoEdit();
+			this.simpleButtonUpdateQuizzes = new DevExpress.XtraEditors.SimpleButton();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
 			this.splitContainerControl.SuspendLayout();
@@ -82,6 +83,7 @@
 			// 
 			// pnUtilityOperations
 			// 
+			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateQuizzes);
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonProcessDeadLinks);
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonCleanExpiredEmails);
 			this.pnUtilityOperations.Controls.Add(this.simpleButtonUpdateShorcuts);
@@ -158,6 +160,19 @@
 			this.memoEditResult.Size = new System.Drawing.Size(675, 483);
 			this.memoEditResult.TabIndex = 0;
 			// 
+			// simpleButtonUpdateQuizzes
+			// 
+			this.simpleButtonUpdateQuizzes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.simpleButtonUpdateQuizzes.Appearance.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.simpleButtonUpdateQuizzes.Appearance.Options.UseFont = true;
+			this.simpleButtonUpdateQuizzes.Location = new System.Drawing.Point(12, 313);
+			this.simpleButtonUpdateQuizzes.Name = "simpleButtonUpdateQuizzes";
+			this.simpleButtonUpdateQuizzes.Size = new System.Drawing.Size(205, 41);
+			this.simpleButtonUpdateQuizzes.TabIndex = 4;
+			this.simpleButtonUpdateQuizzes.Text = "Update Quizzes";
+			this.simpleButtonUpdateQuizzes.Click += new System.EventHandler(this.simpleButtonUpdateQuizzes_Click);
+			// 
 			// UtilitiesManagerControl
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -187,5 +202,6 @@
 		private DevExpress.XtraEditors.SimpleButton simpleButtonProcessDeadLinks;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonCleanExpiredEmails;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateShorcuts;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonUpdateQuizzes;
     }
 }
