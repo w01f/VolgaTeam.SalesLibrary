@@ -1,8 +1,8 @@
 <div class="folder-links-scroll-area"
-	 style="background-color: <?php echo $quizItem->windowBackColor; ?>;color: <?php echo $quizItem->windowForeColor; ?>;">
-	<?php if (isset($quizItem->files)): ?>
+	 style="background-color: <?php echo $folder->windowBackColor; ?>;color: <?php echo $folder->windowForeColor; ?>;">
+	<?php if (isset($folder->files)): ?>
 		<div class="folder-links-container">
-			<?php foreach ($quizItem->files as $link): ?>
+			<?php foreach ($folder->files as $link): ?>
 				<?php
 				$link = $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/link.php', array('link' => $link), true);
 				if (isset(Yii::app()->browser) && Yii::app()->browser->isMobile())

@@ -68,6 +68,16 @@
 	background-image: linear-gradient(#fff4e5, #ffcc7f);
 }
 
+.quiz-item.passed > a > span
+{
+	color: darkgreen;
+}
+
+.quiz-item.not-passed > a > span
+{
+	color: darkred;
+}
+
 #quiz-panel
 {
 	width: 100%;
@@ -77,6 +87,16 @@
 #quiz-panel table
 {
 	width: 100%;
+}
+
+#quiz-panel tr.header.passed
+{
+	background-color: rgb(223, 240, 216)
+}
+
+#quiz-panel tr.header.not-passed
+{
+	background-color: rgb(242, 222, 222)
 }
 
 #quiz-panel td.title

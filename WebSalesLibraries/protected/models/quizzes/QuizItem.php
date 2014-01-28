@@ -4,6 +4,7 @@
 		public $id;
 		public $name;
 		public $isGroup;
+		public $isPassed;
 		public $childItems;
 
 		public function getSelectedItemBreadcrumbs($itemName)

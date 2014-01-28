@@ -1,7 +1,8 @@
 <table>
-	<tr class="header">
+	<tr class="header <? echo $passed ? 'passed' : 'not-passed'; ?>">
 		<td class="title">
 			<h3><? echo $quiz->title; ?></h3>
+			<p class="muted"><? echo $quiz->footer; ?></p>
 		</td>
 		<? if ($quiz->isActive && (!$quiz->hasResults || $quiz->allowRetake)): ?>
 			<td class="buttons">

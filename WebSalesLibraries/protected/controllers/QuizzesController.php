@@ -1,4 +1,5 @@
 <?php
+
 	class QuizzesController extends IsdController
 	{
 		public function getViewPath()
@@ -49,8 +50,16 @@
 				$quiz = $quizRecord->getEntity();
 
 				$quizResults = QuizResultStorage::getUserResults($userId, $quiz);
+				$passed = false;
+				if (isset($quizResults))
+					foreach ($quizResults as $quizResult)
+						if ($quizResult->successful)
+						{
+							$passed = true;
+							break;
+						}
 
-				$this->renderPartial('quizPanel', array('quiz' => $quiz, 'quizResults' => $quizResults), false, true);
+				$this->renderPartial('quizPanel', array('quiz' => $quiz, 'quizResults' => $quizResults, 'passed' => $passed), false, true);
 			}
 		}
 
@@ -98,7 +107,7 @@
 						$message->cc = Yii::app()->params['email']['quiz']['copy'];
 					$message->view = 'sendQuizResult';
 					$message->viewVars = array('quizResults' => $quizResults);
-					$message->send();
+					//$message->send();
 				}
 				$this->renderPartial('quizEnd', array('quiz' => $quiz, 'quizResults' => $quizResults), false, true);
 			}

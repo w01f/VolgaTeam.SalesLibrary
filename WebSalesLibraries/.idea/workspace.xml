@@ -7,12 +7,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/WallbinController.php" afterPath="$PROJECT_DIR$/protected/controllers/WallbinController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/quizzes/QuizItem.php" afterPath="$PROJECT_DIR$/protected/models/quizzes/QuizItem.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/quizzes/QuizStorage.php" afterPath="$PROJECT_DIR$/protected/models/quizzes/QuizStorage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/QuizzesController.php" afterPath="$PROJECT_DIR$/protected/controllers/QuizzesController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php" afterPath="$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/quizzes/quizPanel.php" afterPath="$PROJECT_DIR$/protected/views/regular/quizzes/quizPanel.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/regular/base/quizzes.css" afterPath="$PROJECT_DIR$/css/regular/base/quizzes.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/quizzes.js" afterPath="$PROJECT_DIR$/js/regular/base/quizzes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/quizzes/quizzesList.php" afterPath="$PROJECT_DIR$/protected/views/regular/quizzes/quizzesList.php" />
+    </list>
+    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../FileManager/Properties/licenses.licx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/phone/wallbin/folderLinks.php" afterPath="$PROJECT_DIR$/protected/views/phone/wallbin/folderLinks.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
-    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="" />
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,98 +45,7 @@
     <favorites_list name="WebSalesLibraries" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="folderLinks.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/folderLinks.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="26" selection-start="197" selection-end="197" vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="289">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryFolder.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryFolder.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="30" selection-start="1371" selection-end="1371" vertical-scroll-proportion="-7.8461537" vertical-offset="1632" max-vertical-offset="3791">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WallbinController.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="26" selection-start="2220" selection-end="2220" vertical-scroll-proportion="0.5908257" vertical-offset="766" max-vertical-offset="1955">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryPage.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryPage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="24" selection-start="1144" selection-end="1144" vertical-scroll-proportion="12.153846" vertical-offset="1744" max-vertical-offset="3995">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tbl_file_card.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_file_card.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wallbin.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/wallbin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="338" column="30" selection-start="8722" selection-end="8722" vertical-scroll-proportion="0.0" vertical-offset="5556" max-vertical-offset="9843">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="libraries.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/phone/libraries.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="16" selection-start="3065" selection-end="3077" vertical-scroll-proportion="0.0" vertical-offset="2288" max-vertical-offset="7174">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shortcuts.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="20" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="1812" max-vertical-offset="5661">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LibraryManager.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryManager.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="37" selection-start="9649" selection-end="9666" vertical-scroll-proportion="2.1923077" vertical-offset="3797" max-vertical-offset="4420">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pageDropDownList.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/pageDropDownList.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="272">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -147,22 +68,27 @@
         <option value="$PROJECT_DIR$/protected/models/quizzes/QuizResult.php" />
         <option value="$PROJECT_DIR$/protected/views/email/sendQuizResult.php" />
         <option value="$PROJECT_DIR$/protected/models/common/UserRecord.php" />
-        <option value="$PROJECT_DIR$/protected/models/common/UserStorage.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizQuestion.php" />
         <option value="$PROJECT_DIR$/protected/models/quizzes/Answer.php" />
-        <option value="$PROJECT_DIR$/css/regular/base/quizzes.css" />
         <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizzesView.php" />
-        <option value="$PROJECT_DIR$/protected/models/quizzes/QuizItem.php" />
-        <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizzesList.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/quizzes.js" />
-        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
         <option value="$PROJECT_DIR$/protected/models/quizzes/Quiz.php" />
         <option value="$PROJECT_DIR$/configuration.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/QuizzesController.php" />
         <option value="$PROJECT_DIR$/protected/components/core/IsdController.php" />
         <option value="$PROJECT_DIR$/protected/views/phone/wallbin/folderLinks.php" />
         <option value="$PROJECT_DIR$/protected/controllers/WallbinController.php" />
+        <option value="$PROJECT_DIR$/protected/models/common/UserStorage.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php" />
+        <option value="$PROJECT_DIR$/protected/config/main.php" />
+        <option value="$PROJECT_DIR$/protected/models/quizzes/QuizItem.php" />
+        <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizzesList.php" />
+        <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
+        <option value="$PROJECT_DIR$/protected/models/quizzes/QuizStorage.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/quizzes.js" />
+        <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizPanel.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/QuizzesController.php" />
+        <option value="$PROJECT_DIR$/css/regular/base/quizzes.css" />
+        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
       </list>
     </option>
   </component>
@@ -270,6 +196,138 @@
               <option name="myItemId" value="protected" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quizzes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quizzes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -325,7 +383,101 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -349,21 +501,21 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="272" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="290" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="275" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="293" />
     <property name="options.splitter.main.proportions" value="0.3964698" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="382" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="385" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="297" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="301" />
     <property name="JdbcConsole.ResultInNewTab" value="false" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="976" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="685" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="386" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="382" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="979" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="688" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="390" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="385" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
     <property name="Database.TableEditor.Splitter" value="0.9" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -418,10 +570,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -875,7 +1027,11 @@
       <created>1388078797847</created>
       <updated>1388078797847</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <task id="LOCAL-00097" summary="Site Manager: Quizzes update service added&#10;">
+      <created>1389937851950</created>
+      <updated>1389937851950</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -902,30 +1058,30 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.123126335" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.00110011" sideWeight="0.5117396" order="14" side_tool="false" content_ui="tabs" x="-35" y="829" width="1874" height="211" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30735457" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16613418" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31325302" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.122672506" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.171459" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30625686" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17305644" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22173436" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22124863" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23819979" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32711306" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4162103" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32601535" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20926517" sideWeight="0.87596047" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24862486" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16932908" sideWeight="0.87596047" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2475356" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24422443" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919957" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31463146" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -944,7 +1100,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Libraries: quickSITES Require Email fix + Small GUI fixes" />
     <MESSAGE value="Web Sales Libraries: quickSITES Email Adiitional options fix" />
     <MESSAGE value="Web Sales Libraries: quickSITES Email small fixes" />
     <MESSAGE value="Web Sales Libraries: quickSITES options fix" />
@@ -969,7 +1124,8 @@
     <MESSAGE value="Web Sales Libraries: Categories and Super Filters loading fix" />
     <MESSAGE value="Web Sales Libraries: Quiz configuration change" />
     <MESSAGE value="Web Sales Libraries: Quizzes functionality added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Libraries: Quizzes functionality added" />
+    <MESSAGE value="Site Manager: Quizzes update service added&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Site Manager: Quizzes update service added&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -980,7 +1136,7 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="242" />
+      <option name="time" value="255" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -996,254 +1152,309 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/models/statistic/StatisticActivityStorage.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/email/sendLink.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="37" selection-start="1039" selection-end="1039" vertical-scroll-proportion="-11.538462" vertical-offset="0" max-vertical-offset="0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/FavoritesController.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/common/LoginForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="262" selection-start="1514" selection-end="1760" vertical-scroll-proportion="-7.5384617" vertical-offset="0" max-vertical-offset="0" />
+        <state line="12" column="43" selection-start="293" selection-end="293" vertical-scroll-proportion="0.3642857" vertical-offset="0" max-vertical-offset="1105" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/quizzes.js">
+    <entry file="file://$PROJECT_DIR$/protected/views/email/sendQuickPage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="165" column="35" selection-start="3912" selection-end="3917" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/Question.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/common/UserStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
+        <state line="118" column="78" selection-start="2965" selection-end="3027" vertical-scroll-proportion="6.576923" vertical-offset="2177" max-vertical-offset="2873" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuestionResult.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/folderLinks.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
+        <state line="8" column="47" selection-start="525" selection-end="525" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="340" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuizGroupStorage.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/folderContainer.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
+        <state line="14" column="20" selection-start="1015" selection-end="1015" vertical-scroll-proportion="0.33568406" vertical-offset="0" max-vertical-offset="709" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuizResult.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/common/UserRecord.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="26" selection-start="156" selection-end="166" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.8433735" vertical-offset="630" max-vertical-offset="1377" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/actions/NotifyDeadLinksAction.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/email/resetUser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="36" selection-start="2367" selection-end="2367" vertical-scroll-proportion="0.4964029" vertical-offset="0" max-vertical-offset="0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apple-touch-icon-144x144-precomposed.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/protected/views/email/newUser.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="607" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/common/ResetPasswordStorage.php">
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/changePassword.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="20" selection-start="872" selection-end="872" vertical-scroll-proportion="-11.423077" vertical-offset="0" max-vertical-offset="0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1955" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/QuizzesController.php">
+    <entry file="file://$PROJECT_DIR$/css/regular/base/links-grid.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="34" selection-start="2566" selection-end="2566" vertical-scroll-proportion="0.20971563" vertical-offset="0" max-vertical-offset="0" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3417" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/view-dialog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1666" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/tool-dialog.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1598" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/QpageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="35" selection-start="1288" selection-end="1288" vertical-scroll-proportion="-22.846153" vertical-offset="205" max-vertical-offset="1972">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/unauthorized.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="8" selection-start="576" selection-end="576" vertical-scroll-proportion="-11.115385" vertical-offset="0" max-vertical-offset="391" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2295" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/recoverPassword.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="8" selection-start="494" selection-end="494" vertical-scroll-proportion="0.46031746" vertical-offset="113" max-vertical-offset="680" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1530" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="24" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5185" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="465" column="9" selection-start="17333" selection-end="17515" vertical-scroll-proportion="0.0" vertical-offset="7905" max-vertical-offset="8041">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/configuration.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="47" selection-start="3557" selection-end="3557" vertical-scroll-proportion="-3.72549" vertical-offset="0" max-vertical-offset="0" />
+        <state line="102" column="16" selection-start="3026" selection-end="3043" vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="2669" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz_group.sql">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="310" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="432" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz_result.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="535" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/components/core/IsdController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="28" selection-start="236" selection-end="236" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="782">
+        <state line="349" column="41" selection-start="10074" selection-end="10074" vertical-scroll-proportion="0.15839243" vertical-offset="5799" max-vertical-offset="7361">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php">
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="381" column="16" selection-start="10579" selection-end="10579" vertical-scroll-proportion="-26.653847" vertical-offset="5784" max-vertical-offset="19890">
+        <state line="37" column="21" selection-start="1053" selection-end="1078" vertical-scroll-proportion="0.24796274" vertical-offset="416" max-vertical-offset="1275" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_qpage.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
+      </provider>
+    </entry>
+    <entry file="file://D:/WorkingFiles/Websites/SalesLibraries/yii/framework/db/ar/CActiveRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="27" selection-start="2420" selection-end="2420" vertical-scroll-proportion="0.0" vertical-offset="867" max-vertical-offset="40664">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizzesView.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/AccessReportRecord.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="657">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizResults.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/StatisticUserStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1462" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizQuestion.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/StatisticGroupStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="657">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizPanel.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/StatisticDetailStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizEnd.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/statistic/StatisticActivityStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizCover.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizzesList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="678">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/folders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/libraryDropDownList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="691">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/link.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/linkFolderContent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/pageDropDownList.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="670">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/wallbin/folderLinks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="26" selection-start="197" selection-end="197" vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="289">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryFolder.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="30" selection-start="1371" selection-end="1371" vertical-scroll-proportion="-7.8461537" vertical-offset="1632" max-vertical-offset="3791">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="37" selection-start="9649" selection-end="9666" vertical-scroll-proportion="2.1923077" vertical-offset="3797" max-vertical-offset="4420">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/wallbin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="338" column="30" selection-start="8722" selection-end="8722" vertical-scroll-proportion="0.0" vertical-offset="5556" max-vertical-offset="9843">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/phone/libraries.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="16" selection-start="3065" selection-end="3077" vertical-scroll-proportion="0.0" vertical-offset="2288" max-vertical-offset="7174">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="20" selection-start="2625" selection-end="2625" vertical-scroll-proportion="0.0" vertical-offset="1812" max-vertical-offset="5661">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_folder.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_file_card.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="584">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryPage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="24" selection-start="1144" selection-end="1144" vertical-scroll-proportion="12.153846" vertical-offset="1744" max-vertical-offset="3995">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="872">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/WallbinController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="26" selection-start="2220" selection-end="2220" vertical-scroll-proportion="0.5908257" vertical-offset="766" max-vertical-offset="1955">
+        <state line="75" column="55" selection-start="2631" selection-end="2666" vertical-scroll-proportion="0.0" vertical-offset="1275" max-vertical-offset="1955">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/storage/FolderStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="14" selection-start="338" selection-end="338" vertical-scroll-proportion="-0.15930389" vertical-offset="408" max-vertical-offset="2006" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuizItem.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="18" selection-start="13" selection-end="21" vertical-scroll-proportion="0.025796661" vertical-offset="0" max-vertical-offset="659">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="29" selection-start="29" selection-end="29" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
+          <folding>
+            <marker date="0" expanded="true" signature="-1:-1" placeholder="select * fro..tbl_quiz_result..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="12" selection-start="140" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="306">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/WorkingFiles/Websites/SalesLibraries/yii/framework/base/CApplication.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="689" column="0" selection-start="23203" selection-end="23203" vertical-scroll-proportion="0.3328" vertical-offset="11386" max-vertical-offset="16490">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz_group.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="580">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuizStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="57" selection-start="856" selection-end="856" vertical-scroll-proportion="-11.038462" vertical-offset="325" max-vertical-offset="1343">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizzesList.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="125" selection-start="304" selection-end="314" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="408">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz_result.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="3" selection-start="149" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizEnd.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="40" selection-start="303" selection-end="339" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="867">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizResults.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuestionResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="640">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/Quiz.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="29" selection-start="2904" selection-end="2904" vertical-scroll-proportion="-5.8846154" vertical-offset="1139" max-vertical-offset="1700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuizResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="16" selection-start="156" selection-end="166" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="1122">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/quizzes/QuizResultStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="31" selection-start="522" selection-end="522" vertical-scroll-proportion="-7.1923075" vertical-offset="153" max-vertical-offset="782">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/QuizzesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="1653" selection-end="1653" vertical-scroll-proportion="-10.692307" vertical-offset="606" max-vertical-offset="2414">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="18" selection-start="21" selection-end="21" vertical-scroll-proportion="0.029982364" vertical-offset="0" max-vertical-offset="8738">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/quizzes.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="98" column="40" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.848537" vertical-offset="1173" max-vertical-offset="3587">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/quizzes/quizPanel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="37" selection-start="42" selection-end="42" vertical-scroll-proportion="0.029310346" vertical-offset="0" max-vertical-offset="580">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/quizzes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="441" column="67" selection-start="10046" selection-end="10046" vertical-scroll-proportion="0.5049505" vertical-offset="7191" max-vertical-offset="8942">
           <folding />
         </state>
       </provider>

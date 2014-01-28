@@ -2,7 +2,9 @@
 {
 	var QuizManager = function ()
 	{
-		var currentItem = null;
+		var that = this;
+		var loadInProgress = false;
+		this.currentItem = null;
 		var loadItems = function ()
 		{
 			var navigator = $('#quizzes-navigator');
@@ -69,7 +71,7 @@
 
 		var openGroup = function (groupItem)
 		{
-			var otherGroupItems = groupItem.siblings();
+			if (loadInProgress) return;
 			groupItem.siblings().find('.quizzes-list').hide();
 			groupItem.siblings('.quiz-group').find('.icon-folder-open').removeClass('icon-folder-open').addClass('icon-folder-close');
 			groupItem.find('>a>i.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
@@ -91,10 +93,12 @@
 					},
 					beforeSend: function ()
 					{
+						loadInProgress = true;
 						$.showOverlayLight();
 					},
 					complete: function ()
 					{
+						loadInProgress = false;
 						$.hideOverlayLight();
 					},
 					success: function (msg)
@@ -117,20 +121,21 @@
 
 		var openQuiz = function (listItem, runQuiz)
 		{
-			currentItem = listItem;
+			if (loadInProgress) return;
+			that.currentItem = listItem;
 			var navigator = $('#quizzes-navigator');
 			navigator.find('li a').removeClass('opened');
 			var quizPanel = $('#quiz-panel');
 			quizPanel.html('');
-			if (currentItem == null) return;
-			currentItem.children('a').addClass('opened');
+			if (that.currentItem == null) return;
+			that.currentItem.children('a').addClass('opened');
 
-			var itemName = currentItem.find('>a>span').html();
+			var itemName = that.currentItem.find('>a>span').html();
 			$.cookie("selectedQuizItemName", itemName, {
 				expires: (60 * 60 * 24 * 7)
 			});
 
-			var itemId = currentItem.children('.service-data').find('.item-id').html();
+			var itemId = that.currentItem.children('.service-data').find('.item-id').html();
 			$.ajax({
 				type: "POST",
 				url: "quizzes/getQuizPanel",
@@ -139,10 +144,12 @@
 				},
 				beforeSend: function ()
 				{
+					loadInProgress = true;
 					$.showOverlay();
 				},
 				complete: function ()
 				{
+					loadInProgress = false;
 					$.hideOverlay();
 				},
 				success: function (msg)
@@ -176,14 +183,14 @@
 		var runCurrentQuiz = function ()
 		{
 			var quizPanel = $('#quiz-panel');
-			var itemId = currentItem.children('.service-data').find('.item-id').html();
+			var itemId = that.currentItem.children('.service-data').find('.item-id').html();
 			var quiz = new Quiz(itemId, quizPanel.find('.quiz-data'));
 			quiz.run();
 		};
 
 		this.refreshQuizPanel = function (reTake)
 		{
-			openQuiz(currentItem, reTake);
+			openQuiz(that.currentItem, reTake);
 		};
 
 		this.init = function ()
@@ -430,6 +437,9 @@
 					afterShow: function ()
 					{
 						var innerContent = $('.fancybox-inner');
+						var successful = innerContent.find('.success').length > 0;
+						if (successful)
+							$.QuizManager.currentItem.removeClass('not-passed').addClass('passed');
 						innerContent.find('.btn.quiz-start').off('click').on('click', function ()
 						{
 							$.fancybox.close();

@@ -1,7 +1,7 @@
 <ul class="quizzes-list nav nav-list">
 	<? foreach ($quizItems as $quizItem): ?>
 		<? $selected = isset($selectedQuizItemBreadcrumbs) && in_array($quizItem->id, $selectedQuizItemBreadcrumbs); ?>
-		<li class="<? echo $quizItem->isGroup ? 'quiz-group' : 'quiz-item' ?>">
+		<li class="<? echo $quizItem->isGroup ? 'quiz-group' : ('quiz-item' . ($quizItem->isPassed ? ' passed' : ' not-passed')) ?>">
 			<? if ($quizItem->isGroup): ?>
 				<a href="#"><i class="<? echo $selected ? 'icon-folder-open' : 'icon-folder-close'; ?>"></i><span><? echo $quizItem->name; ?></span></a>
 			<? else: ?>

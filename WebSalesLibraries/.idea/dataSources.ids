@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source source="LOCAL" name="LocalDBS" product="MySQL" version="5.5.16" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="5f689e70-8d5b-41e3-aaa1-c8c47e976102">
-    <extra-name-characters>#@</extra-name-characters>
-    <identifier-quote-string>`</identifier-quote-string>
-    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-    <jdbc-url>jdbc:mysql://localhost:3306/sales_library?zeroDateTimeBehavior=convertToNull</jdbc-url>
-    <user-name>root</user-name>
-    <user-password>dfd8dfc5dfc5dfde</user-password>
-    <libraries>
-      <library>
-        <url>jar://$APPLICATION_HOME_DIR$/plugins/mysql-connector-java-5.1.26-bin.jar!/</url>
-      </library>
-      <library>
-        <url>file://$APPLICATION_HOME_DIR$/plugins/mysql-connector-license.txt</url>
-      </library>
-    </libraries>
+  <data-source source="LOCAL" name="LocalDBS" uuid="5f689e70-8d5b-41e3-aaa1-c8c47e976102">
+    <database-info product="MySQL" version="5.5.16" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="calendars"/>
     <schema name="" catalog="cdcol"/>
     <schema name="" catalog="information_schema"/>
     <schema name="" catalog="isalesde_db"/>
@@ -24,6 +16,51 @@
     <schema name="" catalog="sales_library"/>
     <schema name="" catalog="test"/>
     <schema name="" catalog="webauth"/>
+    <table name="tbl_cache" schema="" catalog="calendars" type="TABLE">
+      <column name="id" sqlType="CHAR" length="128" precision="0" nullable="false" jdbcType="1"/>
+      <column name="expire" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4"/>
+      <column name="value" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="tbl_calendar" schema="" catalog="calendars" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="date_start" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
+      <column name="date_end" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
+      <column name="last_change_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="tbl_day" schema="" catalog="calendars" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_calendar" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
+      <column name="comment" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="date" unique="false" columns="date"/>
+      <index name="id_calendar" unique="false" columns="id_calendar"/>
+    </table>
+    <table name="tbl_reset_password" schema="" catalog="calendars" type="TABLE">
+      <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="initial_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="login"/>
+    </table>
+    <table name="tbl_service_account" schema="" catalog="calendars" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="tbl_user" schema="" catalog="calendars" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" length="100" precision="0" nullable="false" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" length="200" precision="0" nullable="false" jdbcType="12"/>
+      <column name="phone" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
+      <column name="role" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" def="MA==" remarks="MS1hZG1pbiAyLXN1cGVyIDAtdXNlcg=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="cds" schema="" catalog="cdcol" type="TABLE">
       <column name="titel" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
       <column name="interpret" sqlType="VARCHAR" length="200" precision="0" nullable="true" jdbcType="12"/>
@@ -1288,38 +1325,6 @@
       <column name="name" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
-    <table name="tbl_help_link" schema="" catalog="sales_library" type="TABLE">
-      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
-      <column name="id_tab" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
-      <column name="id_page" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
-      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
-      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="type" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12"/>
-      <column name="source_path" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12"/>
-      <column name="enabled" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
-      <column name="image_path" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="page" unique="false" columns="id_page"/>
-      <index name="tab" unique="false" columns="id_tab"/>
-    </table>
-    <table name="tbl_help_page" schema="" catalog="sales_library" type="TABLE">
-      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
-      <column name="id_tab" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
-      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
-      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="enabled" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
-      <column name="image_path" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-      <index name="tab" unique="false" columns="id_tab"/>
-    </table>
-    <table name="tbl_help_tab" schema="" catalog="sales_library" type="TABLE">
-      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
-      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
-      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
-      <column name="enabled" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
-      <column name="image_path" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="id"/>
-    </table>
     <table name="tbl_library" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
       <column name="id_group" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12"/>
@@ -1487,6 +1492,41 @@
       <index name="id_page" unique="false" columns="id_page"/>
       <index name="list_order" unique="false" columns="list_order"/>
     </table>
+    <table name="tbl_quiz" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_group" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="unique_id" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="source_path" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12"/>
+      <column name="config" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="group" unique="false" columns="id_group"/>
+      <index name="unique_id" unique="false" columns="unique_id"/>
+    </table>
+    <table name="tbl_quiz_group" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_parent" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12"/>
+      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="tab" unique="false" columns="id_parent"/>
+    </table>
+    <table name="tbl_quiz_result" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_user" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="id_quiz" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <column name="quiz_set" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_question" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="question_result" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="successful" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
+      <column name="date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="date" unique="false" columns="date"/>
+      <index name="quiz" unique="false" columns="id_quiz"/>
+      <index name="quiz_set" unique="false" columns="quiz_set"/>
+      <index name="user" unique="false" columns="id_user"/>
+    </table>
     <table name="tbl_reset_password" schema="" catalog="sales_library" type="TABLE">
       <column name="login" sqlType="VARCHAR" length="50" precision="0" nullable="false" jdbcType="12"/>
       <column name="initial_date" sqlType="DATETIME" length="19" precision="0" nullable="false" jdbcType="93"/>
@@ -1514,6 +1554,8 @@
       <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="enabled" sqlType="BIT" length="0" precision="0" nullable="false" jdbcType="-7"/>
       <column name="image_path" sqlType="VARCHAR" length="512" precision="0" nullable="true" jdbcType="12"/>
+      <column name="source_path" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12"/>
+      <column name="config" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="tab" unique="false" columns="id_tab"/>
     </table>
@@ -1557,13 +1599,13 @@
       <column name="last_name" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12"/>
       <column name="email" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12"/>
       <column name="phone" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12"/>
-      <column name="group_name" sqlType="VARCHAR" length="128" precision="0" nullable="true" jdbcType="12"/>
       <column name="ip" sqlType="VARCHAR" length="64" precision="0" nullable="true" jdbcType="12"/>
       <column name="os" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12"/>
       <column name="device" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12"/>
       <column name="browser" sqlType="VARCHAR" length="256" precision="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="id_statistic" unique="false" columns="id_activity"/>
+      <index name="login" unique="false" columns="login"/>
     </table>
     <table name="tbl_super_filter" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
