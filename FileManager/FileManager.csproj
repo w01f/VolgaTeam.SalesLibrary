@@ -503,6 +503,7 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\SuperFilterControl.resx">
       <DependentUpon>SuperFilterControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="ToolForms\FormProgressSync.resx">
       <DependentUpon>FormProgressSync.cs</DependentUpon>
     </EmbeddedResource>

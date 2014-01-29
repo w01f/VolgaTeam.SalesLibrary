@@ -133,6 +133,12 @@
     <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.Designer.cs">
       <DependentUpon>AccessAllFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\QuizPassFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\QuizPassFilter.Designer.cs">
+      <DependentUpon>QuizPassFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\RawDataFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -174,6 +180,24 @@
     </Compile>
     <Compile Include="PresentationClasses\Activities\Views\AccessAllReportControl.Designer.cs">
       <DependentUpon>AccessAllReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.Designer.cs">
+      <DependentUpon>QuizStatusUserReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizPassGroupReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizPassGroupReportControl.Designer.cs">
+      <DependentUpon>QuizPassGroupReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizPassUserReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizPassUserReportControl.Designer.cs">
+      <DependentUpon>QuizPassUserReportControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.cs">
       <SubType>UserControl</SubType>
@@ -343,6 +367,9 @@
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessAllFilter.resx">
       <DependentUpon>AccessAllFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\QuizPassFilter.resx">
+      <DependentUpon>QuizPassFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\RawDataFilter.resx">
       <DependentUpon>RawDataFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -364,6 +391,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Views\AccessAllReportControl.resx">
       <DependentUpon>AccessAllReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.resx">
+      <DependentUpon>QuizStatusUserReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizPassGroupReportControl.resx">
+      <DependentUpon>QuizPassGroupReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizPassUserReportControl.resx">
+      <DependentUpon>QuizPassUserReportControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.resx">
@@ -418,6 +457,7 @@
       <DependentUpon>UtilitiesManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

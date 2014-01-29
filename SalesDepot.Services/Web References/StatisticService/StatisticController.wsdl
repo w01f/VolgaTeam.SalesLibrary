@@ -133,6 +133,37 @@
           <xsd:element name="inactiveNames" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
+      <xsd:complexType name="QuizPassUserReportRecordArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:QuizPassUserReportRecord[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="QuizPassUserReportRecord">
+        <xsd:all>
+          <xsd:element name="firstName" type="xsd:string" />
+          <xsd:element name="lastName" type="xsd:string" />
+          <xsd:element name="group" type="xsd:string" />
+          <xsd:element name="quizName" type="xsd:string" />
+          <xsd:element name="quizPassDate" type="xsd:string" />
+          <xsd:element name="quizTryCount" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="QuizPassGroupReportRecordArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:QuizPassGroupReportRecord[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="QuizPassGroupReportRecord">
+        <xsd:all>
+          <xsd:element name="group" type="xsd:string" />
+          <xsd:element name="quizName" type="xsd:string" />
+          <xsd:element name="userCount" type="xsd:int" />
+        </xsd:all>
+      </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="getSessionKeyRequest">
@@ -190,6 +221,22 @@
   <wsdl:message name="getAccessReportResponse">
     <wsdl:part name="return" type="tns:AccessReportRecordArray" />
   </wsdl:message>
+  <wsdl:message name="getQuizPassUserReportRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getQuizPassUserReportResponse">
+    <wsdl:part name="return" type="tns:QuizPassUserReportRecordArray" />
+  </wsdl:message>
+  <wsdl:message name="getQuizPassGroupReportRequest">
+    <wsdl:part name="sessionKey" type="xsd:string" />
+    <wsdl:part name="dateStart" type="xsd:string" />
+    <wsdl:part name="dateEnd" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="getQuizPassGroupReportResponse">
+    <wsdl:part name="return" type="tns:QuizPassGroupReportRecordArray" />
+  </wsdl:message>
   <wsdl:portType name="StatisticControllerPortType">
     <wsdl:operation name="getSessionKey">
       <wsdl:documentation>
@@ -232,6 +279,18 @@
       </wsdl:documentation>
       <wsdl:input message="tns:getAccessReportRequest" />
       <wsdl:output message="tns:getAccessReportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getQuizPassUserReport">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getQuizPassUserReportRequest" />
+      <wsdl:output message="tns:getQuizPassUserReportResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getQuizPassGroupReport">
+      <wsdl:documentation>
+      </wsdl:documentation>
+      <wsdl:input message="tns:getQuizPassGroupReportRequest" />
+      <wsdl:output message="tns:getQuizPassGroupReportResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="StatisticControllerBinding" type="tns:StatisticControllerPortType">
@@ -292,6 +351,24 @@
     </wsdl:operation>
     <wsdl:operation name="getAccessReport">
       <soap:operation soapAction="urn:StatisticControllerwsdl#getAccessReport" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuizPassUserReport">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getQuizPassUserReport" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuizPassGroupReport">
+      <soap:operation soapAction="urn:StatisticControllerwsdl#getQuizPassGroupReport" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:StatisticControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

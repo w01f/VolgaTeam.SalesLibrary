@@ -562,6 +562,60 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 			return activities.ToArray();
 		}
+
+		public QuizPassUserReportRecord[] GetQuizPassUserReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<QuizPassUserReportRecord>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						activities.AddRange(client.getQuizPassUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QuizPassUserReportRecord[] { });
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
+
+		public QuizPassGroupReportRecord[] GetQuizPassGroupReport(DateTime startDate, DateTime endDate, out string message)
+		{
+			message = string.Empty;
+			var activities = new List<QuizPassGroupReportRecord>();
+			var client = GetStatisticClient();
+			if (client != null)
+			{
+				try
+				{
+					var sessionKey = client.getSessionKey(_login, _password);
+					if (!string.IsNullOrEmpty(sessionKey))
+					{
+						activities.AddRange(client.getQuizPassGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QuizPassGroupReportRecord[] { });
+					}
+					else
+						message = "Couldn't complete operation.\nLogin or password are not correct.";
+				}
+				catch (Exception ex)
+				{
+					message = string.Format("Couldn't complete operation.\n{0}.", ex.Message);
+				}
+			}
+			else
+				message = "Couldn't complete operation.\nServer is unavailable.";
+			return activities.ToArray();
+		}
 		#endregion
 
 		#region Ticker

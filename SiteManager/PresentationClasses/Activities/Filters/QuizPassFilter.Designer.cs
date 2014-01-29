@@ -1,6 +1,6 @@
 ﻿namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 {
-	partial class AccessAllFilter
+	partial class QuizPassFilter
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -36,14 +36,9 @@
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXGroupsNone = new DevComponents.DotNetBar.ButtonX();
-			this.labelControlColumnsTitle = new DevExpress.XtraEditors.LabelControl();
-			this.checkEditShowNumber = new DevExpress.XtraEditors.CheckEdit();
-			this.checkEditShowPercent = new DevExpress.XtraEditors.CheckEdit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowNumber.Properties)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowPercent.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// checkEditEnableFilter
@@ -87,7 +82,7 @@
 			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 264);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 331);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
@@ -132,62 +127,21 @@
 			this.buttonXGroupsNone.TextColor = System.Drawing.Color.Black;
 			this.buttonXGroupsNone.Click += new System.EventHandler(this.buttonXGroupsNone_Click);
 			// 
-			// labelControlColumnsTitle
-			// 
-			this.labelControlColumnsTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.labelControlColumnsTitle.Location = new System.Drawing.Point(10, 377);
-			this.labelControlColumnsTitle.Name = "labelControlColumnsTitle";
-			this.labelControlColumnsTitle.Size = new System.Drawing.Size(55, 16);
-			this.labelControlColumnsTitle.StyleController = this.styleController;
-			this.labelControlColumnsTitle.TabIndex = 19;
-			this.labelControlColumnsTitle.Text = "Columns:";
-			// 
-			// checkEditShowNumber
-			// 
-			this.checkEditShowNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditShowNumber.EditValue = true;
-			this.checkEditShowNumber.Location = new System.Drawing.Point(8, 399);
-			this.checkEditShowNumber.Name = "checkEditShowNumber";
-			this.checkEditShowNumber.Properties.AutoWidth = true;
-			this.checkEditShowNumber.Properties.Caption = "Show #";
-			this.checkEditShowNumber.Size = new System.Drawing.Size(66, 21);
-			this.checkEditShowNumber.StyleController = this.styleController;
-			this.checkEditShowNumber.TabIndex = 20;
-			this.checkEditShowNumber.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
-			// 
-			// checkEditShowPercent
-			// 
-			this.checkEditShowPercent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.checkEditShowPercent.EditValue = true;
-			this.checkEditShowPercent.Location = new System.Drawing.Point(103, 399);
-			this.checkEditShowPercent.Name = "checkEditShowPercent";
-			this.checkEditShowPercent.Properties.AutoWidth = true;
-			this.checkEditShowPercent.Properties.Caption = "Show %";
-			this.checkEditShowPercent.Size = new System.Drawing.Size(71, 21);
-			this.checkEditShowPercent.StyleController = this.styleController;
-			this.checkEditShowPercent.TabIndex = 21;
-			this.checkEditShowPercent.CheckedChanged += new System.EventHandler(this.checkEditShowColumns_CheckedChanged);
-			// 
-			// AccessAllFilter
+			// QuizPassFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-			this.Controls.Add(this.checkEditShowPercent);
-			this.Controls.Add(this.checkEditShowNumber);
-			this.Controls.Add(this.labelControlColumnsTitle);
 			this.Controls.Add(this.buttonXGroupsNone);
 			this.Controls.Add(this.buttonXGroupsAll);
 			this.Controls.Add(this.labelControlGroupsTitle);
 			this.Controls.Add(this.checkedListBoxControlGroups);
 			this.Controls.Add(this.checkEditEnableFilter);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.Name = "AccessAllFilter";
+			this.Name = "QuizPassFilter";
 			this.Size = new System.Drawing.Size(238, 429);
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowNumber.Properties)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.checkEditShowPercent.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -202,8 +156,5 @@
 		private DevExpress.XtraEditors.LabelControl labelControlGroupsTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsAll;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsNone;
-		private DevExpress.XtraEditors.LabelControl labelControlColumnsTitle;
-		private DevExpress.XtraEditors.CheckEdit checkEditShowNumber;
-		private DevExpress.XtraEditors.CheckEdit checkEditShowPercent;
 	}
 }

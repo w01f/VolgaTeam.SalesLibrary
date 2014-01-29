@@ -13,6 +13,8 @@
 						'MainGroupReportRecord' => 'MainGroupReportRecord',
 						'NavigationUserReportRecord' => 'NavigationUserReportRecord',
 						'NavigationGroupReportRecord' => 'NavigationGroupReportRecord',
+						'QuizPassUserReportRecord' => 'QuizPassUserReportRecord',
+						'QuizPassGroupReportRecord' => 'QuizPassGroupReportRecord',
 					),
 				),
 			);
@@ -261,6 +263,69 @@
 					$reportRecord->activeNames = $resultRecord['active_names'];
 					$reportRecord->inactiveCount = $resultRecord['inactive_count'];
 					$reportRecord->inactiveNames = $resultRecord['inactive_names'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return QuizPassUserReportRecord[]
+		 * @soap
+		 */
+		public function getQuizPassUserReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_quiz_pass_user_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new QuizPassUserReportRecord();
+					$reportRecord->firstName = $resultRecord['first_name'];
+					$reportRecord->lastName = $resultRecord['last_name'];
+					$reportRecord->group = $resultRecord['group_name'];
+					$reportRecord->quizName = $resultRecord['quiz_name'];
+					$reportRecord->quizPassDate = $resultRecord['quiz_pass_date'];
+					$reportRecord->quizTryCount = $resultRecord['quiz_try_count'];
+					$reportRecords[] = $reportRecord;
+				}
+			}
+			if (isset($reportRecords))
+				return $reportRecords;
+			else
+				return null;
+		}
+
+		/**
+		 * @param string Session Key
+		 * @param string Date Start
+		 * @param string Date End
+		 * @return QuizPassGroupReportRecord[]
+		 * @soap
+		 */
+		public function getQuizPassGroupReport($sessionKey, $dateStart, $dateEnd)
+		{
+			if ($this->authenticateBySession($sessionKey))
+			{
+				$command = Yii::app()->db->createCommand("call sp_get_quiz_pass_group_report(:start_date,:end_date)");
+				$command->bindValue(":start_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateStart)), PDO::PARAM_STR);
+				$command->bindValue(":end_date", date(Yii::app()->params['mysqlDateFormat'], strtotime($dateEnd)), PDO::PARAM_STR);
+				$resultRecords = $command->queryAll();
+				foreach ($resultRecords as $resultRecord)
+				{
+					$reportRecord = new QuizPassGroupReportRecord();
+					$reportRecord->group = $resultRecord['group_name'];
+					$reportRecord->quizName = $resultRecord['quiz_name'];
+					$reportRecord->userCount = $resultRecord['user_count'];
 					$reportRecords[] = $reportRecord;
 				}
 			}

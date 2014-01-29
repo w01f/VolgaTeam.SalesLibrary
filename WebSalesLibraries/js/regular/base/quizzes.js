@@ -221,6 +221,7 @@
 	var Quiz = function (id, config)
 	{
 		var title = config.find('.config Title').html();
+		var uniqueId = config.find('.config ID').html();
 
 		var cover = {
 			content: null
@@ -486,7 +487,8 @@
 					type: 'Quizzes',
 					subType: 'Quiz Finished',
 					data: $.toJSON({
-						Name: title
+						Name: title,
+						ID: uniqueId
 					})
 				},
 				async: true,
@@ -504,7 +506,8 @@
 					type: 'Quizzes',
 					subType: 'Quiz Started',
 					data: $.toJSON({
-						Name: title
+						Name: title,
+						ID: uniqueId
 					})
 				},
 				async: true,

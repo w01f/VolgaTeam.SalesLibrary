@@ -76,6 +76,7 @@
     <Compile Include="QBuilderService\QPageRecord.cs" />
     <Compile Include="SiteClient.cs" />
     <Compile Include="StatisticService\AccessReportRecord.cs" />
+    <Compile Include="StatisticService\QuizPassUserReportRecord.cs" />
     <Compile Include="StatisticService\NavigationGroupReportRecord.cs" />
     <Compile Include="StatisticService\MainGroupReportRecord.cs" />
     <Compile Include="StatisticService\NavigationUserReportRecord.cs" />
@@ -283,6 +284,12 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\NavigationUserReportRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\QuizPassGroupReportRecord.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\StatisticService\QuizPassUserReportRecord.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\Reference.map">

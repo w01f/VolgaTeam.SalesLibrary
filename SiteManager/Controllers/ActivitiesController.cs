@@ -1,4 +1,5 @@
-﻿using SalesDepot.Services;
+﻿using System;
+using SalesDepot.Services;
 using SalesDepot.SiteManager.BusinessClasses;
 using SalesDepot.SiteManager.PresentationClasses.Activities;
 using SalesDepot.SiteManager.TabPages;
@@ -43,6 +44,9 @@ namespace SalesDepot.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport4.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport7.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport8.Click += buttonItemActivitiesViews_Click;
+			FormMain.Instance.buttonItemActivitiesViewsReport9.Click += buttonItemActivitiesViews_Click;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport1.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport2.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
@@ -50,6 +54,9 @@ namespace SalesDepot.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport4.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport7.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport8.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
+			FormMain.Instance.buttonItemActivitiesViewsReport9.CheckedChanged += buttonItemActivitiesViews_CheckedChanged;
 			FormMain.Instance.buttonItemActivitiesViewsRawData.Checked = true;
 
 			FormMain.Instance.buttonItemActivitiesExport.Click += buttonItemActivitiesExport_Click;
@@ -85,8 +92,8 @@ namespace SalesDepot.SiteManager.Controllers
 		{
 			var button = sender as DevComponents.DotNetBar.ButtonItem;
 			if (button == null || !button.Checked || button.Tag == null) return;
-			ViewType viewType = ViewType.None;
-			ViewType.TryParse(button.Tag.ToString(), out viewType);
+			ViewType viewType;
+			Enum.TryParse(button.Tag.ToString(), out viewType);
 			ActivitiesManagerControl.ChangeView(viewType);
 		}
 
@@ -101,6 +108,9 @@ namespace SalesDepot.SiteManager.Controllers
 			FormMain.Instance.buttonItemActivitiesViewsReport4.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport5.Checked = false;
 			FormMain.Instance.buttonItemActivitiesViewsReport6.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport7.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport8.Checked = false;
+			FormMain.Instance.buttonItemActivitiesViewsReport9.Checked = false;
 			button.Checked = true;
 		}
 

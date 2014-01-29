@@ -91,9 +91,9 @@
 				$quizSet = $quiz->saveResults($userId, $results);
 				$quizResults = QuizResultStorage::getQuizResult($userId, $quiz, $quizSet);
 				if ($quizResults->successful)
-					StatisticActivityStorage::WriteActivity('Quizzes', 'Quiz Passed', array('Name' => $quiz->title, 'Score' => $quizResults->score . '%'));
+					StatisticActivityStorage::WriteActivity('Quizzes', 'Quiz Passed', array('Name' => $quiz->title, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
 				else
-					StatisticActivityStorage::WriteActivity('Quizzes', 'Quiz Failed', array('Name' => $quiz->title, 'Score' => $quizResults->score . '%'));
+					StatisticActivityStorage::WriteActivity('Quizzes', 'Quiz Failed', array('Name' => $quiz->title, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
 				if ($quiz->sendScoreToAdmin && isset($quiz->adminEmails) && isset(Yii::app()->user->email))
 				{
 					$message = Yii::app()->email;

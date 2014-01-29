@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-			this.components = new System.ComponentModel.Container();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
 			DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
 			this.comboBoxEditPages = new DevExpress.XtraEditors.ComboBoxEdit();
-			this.styleController = new DevExpress.XtraEditors.StyleController(this.components);
+			this.styleController = new DevExpress.XtraEditors.StyleController();
 			this.ribbonControl = new DevComponents.DotNetBar.RibbonControl();
 			this.ribbonPanelHome = new DevComponents.DotNetBar.RibbonPanel();
 			this.ribbonBarHomeExit = new DevComponents.DotNetBar.RibbonBar();
@@ -189,7 +188,7 @@
 			this.ribbonTabItemTags = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemSettings = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemHelp = new DevComponents.DotNetBar.RibbonTabItem();
-			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel(this.components);
+			this.defaultLookAndFeel = new DevExpress.LookAndFeel.DefaultLookAndFeel();
 			this.superTooltip = new DevComponents.DotNetBar.SuperTooltip();
 			this.pnEmpty = new System.Windows.Forms.Panel();
 			this.pnMain = new System.Windows.Forms.Panel();
@@ -223,7 +222,7 @@
 			// 
 			// comboBoxEditPages
 			// 
-			this.comboBoxEditPages.Location = new System.Drawing.Point(6, 74);
+			this.comboBoxEditPages.Location = new System.Drawing.Point(4, 75);
 			this.comboBoxEditPages.Name = "comboBoxEditPages";
 			this.comboBoxEditPages.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -301,10 +300,10 @@
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeFileTreeView);
 			this.ribbonPanelHome.Controls.Add(this.ribbonBarHomeLibraries);
 			this.ribbonPanelHome.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.ribbonPanelHome.Location = new System.Drawing.Point(0, 26);
+			this.ribbonPanelHome.Location = new System.Drawing.Point(0, 25);
 			this.ribbonPanelHome.Name = "ribbonPanelHome";
 			this.ribbonPanelHome.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
-			this.ribbonPanelHome.Size = new System.Drawing.Size(1008, 125);
+			this.ribbonPanelHome.Size = new System.Drawing.Size(1008, 126);
 			// 
 			// 
 			// 
@@ -337,7 +336,7 @@
 			this.ribbonBarHomeExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeExit.Location = new System.Drawing.Point(604, 0);
 			this.ribbonBarHomeExit.Name = "ribbonBarHomeExit";
-			this.ribbonBarHomeExit.Size = new System.Drawing.Size(92, 122);
+			this.ribbonBarHomeExit.Size = new System.Drawing.Size(92, 123);
 			this.ribbonBarHomeExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeExit.TabIndex = 1;
 			this.ribbonBarHomeExit.Text = "EXIT";
@@ -377,7 +376,7 @@
 			this.ribbonBarHomeSync.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeSync.Location = new System.Drawing.Point(517, 0);
 			this.ribbonBarHomeSync.Name = "ribbonBarHomeSync";
-			this.ribbonBarHomeSync.Size = new System.Drawing.Size(87, 122);
+			this.ribbonBarHomeSync.Size = new System.Drawing.Size(87, 123);
 			this.ribbonBarHomeSync.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeSync.TabIndex = 2;
 			this.ribbonBarHomeSync.Text = "Sync";
@@ -416,7 +415,7 @@
 			this.ribbonBarHomeSave.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeSave.Location = new System.Drawing.Point(422, 0);
 			this.ribbonBarHomeSave.Name = "ribbonBarHomeSave";
-			this.ribbonBarHomeSave.Size = new System.Drawing.Size(95, 122);
+			this.ribbonBarHomeSave.Size = new System.Drawing.Size(95, 123);
 			this.ribbonBarHomeSave.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeSave.TabIndex = 3;
 			this.ribbonBarHomeSave.Text = "Save";
@@ -455,7 +454,7 @@
 			this.ribbonBarHomeLinkActions.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLinkActions.Location = new System.Drawing.Point(321, 0);
 			this.ribbonBarHomeLinkActions.Name = "ribbonBarHomeLinkActions";
-			this.ribbonBarHomeLinkActions.Size = new System.Drawing.Size(101, 122);
+			this.ribbonBarHomeLinkActions.Size = new System.Drawing.Size(101, 123);
 			this.ribbonBarHomeLinkActions.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLinkActions.TabIndex = 13;
 			this.ribbonBarHomeLinkActions.Text = "Link Actions";
@@ -537,7 +536,7 @@
 			this.ribbonBarHomeAddLink.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeAddLink.Location = new System.Drawing.Point(227, 0);
 			this.ribbonBarHomeAddLink.Name = "ribbonBarHomeAddLink";
-			this.ribbonBarHomeAddLink.Size = new System.Drawing.Size(94, 122);
+			this.ribbonBarHomeAddLink.Size = new System.Drawing.Size(94, 123);
 			this.ribbonBarHomeAddLink.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeAddLink.TabIndex = 9;
 			this.ribbonBarHomeAddLink.Text = "Add Link";
@@ -617,7 +616,7 @@
 			this.ribbonBarHomeFileTreeView.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeFileTreeView.Location = new System.Drawing.Point(146, 0);
 			this.ribbonBarHomeFileTreeView.Name = "ribbonBarHomeFileTreeView";
-			this.ribbonBarHomeFileTreeView.Size = new System.Drawing.Size(81, 122);
+			this.ribbonBarHomeFileTreeView.Size = new System.Drawing.Size(81, 123);
 			this.ribbonBarHomeFileTreeView.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeFileTreeView.TabIndex = 7;
 			this.ribbonBarHomeFileTreeView.Text = "Drag&&Drop";
@@ -660,7 +659,7 @@
 			this.ribbonBarHomeLibraries.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarHomeLibraries.Location = new System.Drawing.Point(3, 0);
 			this.ribbonBarHomeLibraries.Name = "ribbonBarHomeLibraries";
-			this.ribbonBarHomeLibraries.Size = new System.Drawing.Size(143, 122);
+			this.ribbonBarHomeLibraries.Size = new System.Drawing.Size(143, 123);
 			this.ribbonBarHomeLibraries.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarHomeLibraries.TabIndex = 0;
 			this.ribbonBarHomeLibraries.Text = "Digital Wall Bin";
@@ -675,7 +674,7 @@
 			// 
 			// comboBoxEditLibraries
 			// 
-			this.comboBoxEditLibraries.Location = new System.Drawing.Point(6, 28);
+			this.comboBoxEditLibraries.Location = new System.Drawing.Point(4, 29);
 			this.comboBoxEditLibraries.Name = "comboBoxEditLibraries";
 			this.comboBoxEditLibraries.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -1242,7 +1241,7 @@
 			// 
 			// buttonEditIPadSite
 			// 
-			this.buttonEditIPadSite.Location = new System.Drawing.Point(6, 31);
+			this.buttonEditIPadSite.Location = new System.Drawing.Point(4, 32);
 			this.buttonEditIPadSite.Name = "buttonEditIPadSite";
 			this.buttonEditIPadSite.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
@@ -1256,7 +1255,7 @@
 			// 
 			// buttonEditIPadLogin
 			// 
-			this.buttonEditIPadLogin.Location = new System.Drawing.Point(44, 73);
+			this.buttonEditIPadLogin.Location = new System.Drawing.Point(42, 74);
 			this.buttonEditIPadLogin.Name = "buttonEditIPadLogin";
 			this.buttonEditIPadLogin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
@@ -1267,7 +1266,7 @@
 			// 
 			// buttonEditIPadPassword
 			// 
-			this.buttonEditIPadPassword.Location = new System.Drawing.Point(209, 73);
+			this.buttonEditIPadPassword.Location = new System.Drawing.Point(207, 74);
 			this.buttonEditIPadPassword.Name = "buttonEditIPadPassword";
 			this.buttonEditIPadPassword.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "", -1, true, false, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject3, "", null, null, true)});
@@ -1432,7 +1431,7 @@
 			// 
 			// buttonEditIPadLocation
 			// 
-			this.buttonEditIPadLocation.Location = new System.Drawing.Point(6, 61);
+			this.buttonEditIPadLocation.Location = new System.Drawing.Point(4, 62);
 			this.buttonEditIPadLocation.Name = "buttonEditIPadLocation";
 			this.buttonEditIPadLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2016,7 +2015,7 @@
 			// 
 			// buttonEditProgramManagerLocation
 			// 
-			this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(6, 74);
+			this.buttonEditProgramManagerLocation.Location = new System.Drawing.Point(4, 75);
 			this.buttonEditProgramManagerLocation.Name = "buttonEditProgramManagerLocation";
 			this.buttonEditProgramManagerLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2361,7 +2360,7 @@
 			// 
 			// buttonEditCalendarLocation
 			// 
-			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(6, 74);
+			this.buttonEditCalendarLocation.Location = new System.Drawing.Point(4, 75);
 			this.buttonEditCalendarLocation.Name = "buttonEditCalendarLocation";
 			this.buttonEditCalendarLocation.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton()});
@@ -2889,7 +2888,7 @@
 			// 
 			// defaultLookAndFeel
 			// 
-			this.defaultLookAndFeel.LookAndFeel.SkinName = "Money Twins";
+			this.defaultLookAndFeel.LookAndFeel.SkinName = "Lilian";
 			// 
 			// superTooltip
 			// 

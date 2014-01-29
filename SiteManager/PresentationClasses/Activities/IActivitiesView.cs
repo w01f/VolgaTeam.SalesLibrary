@@ -24,6 +24,9 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		NavigationGroupReport = 4,
 		AccessGroupReport = 5,
 		AccessAllReport = 6,
+		QuizPassUserReport = 7,
+		QuizPassGroupReport = 8,
+		QuizStatusUserReport = 9,
 		None = 999
 	}
 }
