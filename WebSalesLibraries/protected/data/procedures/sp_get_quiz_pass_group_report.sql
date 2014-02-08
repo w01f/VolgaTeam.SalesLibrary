@@ -15,5 +15,4 @@ where sact.type = 'Quizzes'
       and sact.date_time >= start_date and sact.date_time <= end_date
 group by
   g.name,
-  sdet.data,
-  su.login;
+  sdet.data;
