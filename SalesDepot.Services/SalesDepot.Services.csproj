@@ -76,6 +76,7 @@
     <Compile Include="QBuilderService\QPageRecord.cs" />
     <Compile Include="SiteClient.cs" />
     <Compile Include="StatisticService\AccessReportRecord.cs" />
+    <Compile Include="StatisticService\QuizPassGroupReportRecord.cs" />
     <Compile Include="StatisticService\QuizPassUserReportRecord.cs" />
     <Compile Include="StatisticService\NavigationGroupReportRecord.cs" />
     <Compile Include="StatisticService\MainGroupReportRecord.cs" />

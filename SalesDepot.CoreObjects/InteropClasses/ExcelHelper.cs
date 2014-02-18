@@ -10,6 +10,10 @@ namespace SalesDepot.CoreObjects.InteropClasses
 		private static readonly ExcelHelper _instance = new ExcelHelper();
 
 		private Application _excelObject;
+		public Application ExcelObject
+		{
+			get { return _excelObject; }
+		}
 
 		private ExcelHelper() { }
 
@@ -150,6 +154,49 @@ namespace SalesDepot.CoreObjects.InteropClasses
 				headerRow.HorizontalAlignment = -4108;
 
 				var dataRange = sheet.Range["A2", "H" + (dataSource.GetLength(0) + 1).ToString()];
+				dataRange.Value = dataSource;
+				dataRange.EntireColumn.AutoFit();
+
+				workbook.SaveAs(filePath);
+				workbook.Close();
+				Utils.ReleaseComObject(workbook);
+			}
+			catch { }
+			finally
+			{
+				MessageFilter.Revoke();
+				Disconnect();
+			}
+		}
+
+		public void ExportQuizStatistic(string filePath, string groupName, object[,] dataSource)
+		{
+			try
+			{
+				if (!Connect()) return;
+				MessageFilter.Register();
+				var workbook = _excelObject.Workbooks.Add();
+				Worksheet sheet;
+				try
+				{
+					sheet = workbook.Worksheets[1];
+				}
+				catch
+				{
+					sheet = workbook.Worksheets.Add();
+				}
+
+				sheet.Name = "Authorized Users";
+				sheet.Range["A1"].Value = "First Name";
+				sheet.Range["B1"].Value = "Last Name";
+				sheet.Range["C1"].Value = "Email Address";
+				sheet.Range["D1"].Value = "UserName";
+
+				var headerRow = sheet.Range["1:1"];
+				headerRow.Font.Bold = true;
+				headerRow.HorizontalAlignment = -4108;
+
+				var dataRange = sheet.Range["A2", "D" + (dataSource.GetLength(0) + 1).ToString()];
 				dataRange.Value = dataSource;
 				dataRange.EntireColumn.AutoFit();
 

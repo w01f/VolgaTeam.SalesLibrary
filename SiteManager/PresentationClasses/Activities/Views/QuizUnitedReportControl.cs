@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using DevExpress.XtraPrinting;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.SiteManager.PresentationClasses.Activities.Filters;
+using SalesDepot.SiteManager.ToolClasses;
 using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 {
 	[ToolboxItem(false)]
-	public partial class QuizStatusUserReportControl : UserControl, IActivitiesView
+	public partial class QuizUnitedReportControl : UserControl, IActivitiesView
 	{
 		private readonly List<QuizPassUserReportRecord> _records = new List<QuizPassUserReportRecord>();
 		public DateTime StartDate { get; set; }
@@ -33,19 +34,18 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			}
 		}
 
-		private readonly QuizPassFilter _filterControl;
+		private readonly QuizUnitedFilter _filterControl;
 		public Control FilterControl
 		{
 			get { return _filterControl; }
 		}
 
-		public QuizStatusUserReportControl()
+		public QuizUnitedReportControl()
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			_filterControl = new QuizPassFilter();
+			_filterControl = new QuizUnitedFilter();
 			_filterControl.FilterChanged += (o, e) => ApplyData();
-			_filterControl.ColumnsChanged += (o, e) => ApplyColumns();
 		}
 
 		public void ShowView()
@@ -100,28 +100,47 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 
 		public void ClearData()
 		{
-			gridControlData.DataSource = null;
+			xtraTabControlGroups.TabPages.Clear();
 			_records.Clear();
 		}
 
 		public void ExportData()
 		{
+			if (!xtraTabControlGroups.TabPages.Any()) return;
 			using (var dialog = new SaveFileDialog())
 			{
 				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				dialog.FileName = string.Format("UserSalesCertificationStatus({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
-				dialog.Filter = "Excel files|*.xls";
+				dialog.FileName = string.Format("UserSalesCertificationStatus({0}).xlsx", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.Filter = "Excel files|*.xlsx";
 				dialog.Title = "User Sales Certification Status";
 				if (dialog.ShowDialog() != DialogResult.OK) return;
-				var options = new XlsExportOptions();
-				options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
-				options.TextExportMode = TextExportMode.Text;
-				options.ExportHyperlinks = true;
-				options.ShowGridLines = true;
-				options.ExportMode = XlsExportMode.SingleFile;
-				printableComponentLink.CreateDocument();
-				printableComponentLink.PrintingSystem.ExportToXls(dialog.FileName, options);
 
+				var header = String.Format("Date Range: {0} - {1}{2}Active Quizzes in the System: {3}",
+					StartDate.ToString("M/d/yy"),
+					EndDate.ToString("M/d/yy"),
+					Environment.NewLine,
+					_records.Select(r => r.quizName).Distinct().Count());
+				using (var form = new FormProgress())
+				{
+					FormMain.Instance.ribbonControl.Enabled = false;
+					Enabled = false;
+					form.laProgress.Text = "Exporting data...";
+					form.TopMost = true;
+					var thread = new Thread(() => QuizStatisticExportHelper.ExportQuizStatistic(dialog.FileName,
+						header,
+						xtraTabControlGroups.TabPages.OfType<QuizUnitedReportTotalControl>().First().Records,
+						xtraTabControlGroups.TabPages.OfType<QuizUnitedReportGroupControl>().Select(tp => tp.Records)));
+					form.Show();
+					thread.Start();
+					while (thread.IsAlive)
+					{
+						Thread.Sleep(100);
+						Application.DoEvents();
+					}
+					form.Close();
+					Enabled = true;
+					FormMain.Instance.ribbonControl.Enabled = true;
+				}
 				if (File.Exists(dialog.FileName))
 					Process.Start(dialog.FileName);
 			}
@@ -129,28 +148,33 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 
 		private void ApplyData()
 		{
+			xtraTabControlGroups.TabPages.Clear();
 			var filteredRecords = new List<QuizPassUserReportRecord>();
-			var groupedRecords = _records.GroupBy(r => new { r.FullName, r.GroupName }).Select(g => new QuizPassUserReportRecord
+			filteredRecords.AddRange(_records.Where(record => record.GroupName != null && (!_filterControl.EnableFilter || _filterControl.SelectedGroups.Contains(record.GroupName))));
+			var quizCount = _records.Select(r => r.quizName).Distinct().Count();
+			var totalPage = new QuizUnitedReportTotalControl(
+				filteredRecords.GroupBy(r => new { r.GroupName, r.quizName }).Select(g => new QuizPassGroupReportRecord
 			{
-				FullName = g.Key.FullName,
-				GroupName = g.Key.GroupName,
-				QuizzesPassed = String.Join(Environment.NewLine, g.OrderBy(x => x.Date).Select(x => x.quizName))
-			});
-			filteredRecords.AddRange(_filterControl.EnableFilter ? groupedRecords.Where(g => _filterControl.SelectedGroups.Contains(g.GroupName)) : groupedRecords);
-			gridControlData.DataSource = filteredRecords;
+				group = g.Key.GroupName,
+				quizName = g.Key.quizName,
+				Taken = g.Sum(r => r.quizTryCount),
+				Passed = g.Count()
+			}), quizCount) { Text = "Total Summary" };
+			_filterControl.CollapsedAll += (o, e) => totalPage.CollapseAll();
+			_filterControl.ExpandedAll += (o, e) => totalPage.ExpandAll();
+			xtraTabControlGroups.TabPages.Add(totalPage);
+
+			foreach (var group in filteredRecords.OrderBy(r => r.GroupName).Select(r => r.GroupName).Distinct())
+			{
+				var groupPage = new QuizUnitedReportGroupControl(filteredRecords.Where(r => r.GroupName.Equals(group)), quizCount) { Text = @group };
+				_filterControl.CollapsedAll += (o, e) => groupPage.CollapseAll();
+				_filterControl.ExpandedAll += (o, e) => groupPage.ExpandAll();
+				xtraTabControlGroups.TabPages.Add(groupPage);
+			}
 		}
 
 		private void ApplyColumns()
 		{
-		}
-
-		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)
-		{
-			var reportHeader = string.Format("User Sales Certification Status: {0} - {1}", StartDate.ToString("MM/dd/yy"), EndDate.AddDays(-1).ToString("MM/dd/yy"));
-			e.Graph.StringFormat = new BrickStringFormat(StringAlignment.Center);
-			e.Graph.Font = new Font("Arial", 12, FontStyle.Bold);
-			var rec = new RectangleF(0, 0, e.Graph.ClientPageSize.Width, 50);
-			e.Graph.DrawString(reportHeader, Color.Black, rec, BorderSide.None);
 		}
 	}
 }

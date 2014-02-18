@@ -78,6 +78,11 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 			splitContainerControl.Panel2.Controls.Add(view10);
 			if (view10.FilterControl != null)
 				pnCustomFilter.Controls.Add(view10.FilterControl);
+			var view11 = new QuizUnitedReportControl();
+			_views.Add(ViewType.QuizUnitedReport, view11);
+			splitContainerControl.Panel2.Controls.Add(view11);
+			if (view11.FilterControl != null)
+				pnCustomFilter.Controls.Add(view11.FilterControl);
 		}
 
 		public void ChangeView(ViewType viewType)

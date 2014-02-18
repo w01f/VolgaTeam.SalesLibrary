@@ -133,6 +133,12 @@
     <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.Designer.cs">
       <DependentUpon>AccessAllFilter.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\QuizUnitedFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Filters\QuizUnitedFilter.Designer.cs">
+      <DependentUpon>QuizUnitedFilter.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\Filters\QuizPassFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -180,6 +186,25 @@
     </Compile>
     <Compile Include="PresentationClasses\Activities\Views\AccessAllReportControl.Designer.cs">
       <DependentUpon>AccessAllReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportTotalControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportTotalControl.Designer.cs">
+      <DependentUpon>QuizUnitedReportTotalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolClasses\GroupSummaryHelper.cs" />
+    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportGroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportGroupControl.Designer.cs">
+      <DependentUpon>QuizUnitedReportGroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportControl.Designer.cs">
+      <DependentUpon>QuizUnitedReportControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.cs">
       <SubType>UserControl</SubType>
@@ -324,6 +349,7 @@
       <DependentUpon>TabUsersControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\PasswordHelper.cs" />
+    <Compile Include="ToolClasses\QuizStatisticExportHelper.cs" />
     <Compile Include="ToolForms\FormEditTickerLink.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -367,6 +393,9 @@
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessAllFilter.resx">
       <DependentUpon>AccessAllFilter.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Filters\QuizUnitedFilter.resx">
+      <DependentUpon>QuizUnitedFilter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Filters\QuizPassFilter.resx">
       <DependentUpon>QuizPassFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -391,6 +420,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Views\AccessAllReportControl.resx">
       <DependentUpon>AccessAllReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizUnitedReportTotalControl.resx">
+      <DependentUpon>QuizUnitedReportTotalControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizUnitedReportGroupControl.resx">
+      <DependentUpon>QuizUnitedReportGroupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizUnitedReportControl.resx">
+      <DependentUpon>QuizUnitedReportControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.resx">
@@ -570,7 +611,35 @@
       <Name>SalesDepot.Services</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

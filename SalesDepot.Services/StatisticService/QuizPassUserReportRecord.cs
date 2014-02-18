@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SalesDepot.Services.StatisticService
 {
@@ -44,6 +45,19 @@ namespace SalesDepot.Services.StatisticService
 				if (DateTime.TryParse(quizPassDate, out temp))
 					return temp;
 				return null;
+			}
+		}
+
+		public DateTime? Date
+		{
+			get
+			{
+				if (String.IsNullOrEmpty(quizName)) return null;
+				var quizNameParts = quizName.Split('-');
+				if (!quizNameParts.Any()) return null;
+				DateTime temp;
+				if (!DateTime.TryParse(quizNameParts.Last().Trim(), out temp)) return null;
+				return temp;
 			}
 		}
 	}
