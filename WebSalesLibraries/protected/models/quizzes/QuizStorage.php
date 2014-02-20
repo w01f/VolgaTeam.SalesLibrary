@@ -51,8 +51,8 @@
 			$quizItems = null;
 			$userId = Yii::app()->user->getId();
 			$quizRecords = isset($groupId) ?
-				self::model()->findAll("id_group=? order by 'order'", array($groupId)) :
-				self::model()->findAll("id_group is null order by 'order'");
+				self::model()->findAll(array('order'=>"'order'", 'condition'=>'id_group=:x', 'params'=>array(':x'=>$groupId))):
+				self::model()->findAll(array('order'=>"'order'", 'condition'=>'id_group is null'));
 			foreach ($quizRecords as $quizRecord)
 			{
 				$quizItem = new QuizItem();

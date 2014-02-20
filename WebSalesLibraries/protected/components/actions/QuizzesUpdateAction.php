@@ -1,4 +1,5 @@
 <?php
+
 	class QuizzesUpdateAction extends CAction
 	{
 		public function run()
@@ -8,23 +9,28 @@
 			QuizGroupStorage::clearData();
 
 			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'quizzes';
-			$subFolderOrder = 0;
 			if (file_exists($rootFolderPath))
 			{
 				$rootFolder = new DirectoryIterator($rootFolderPath);
+				$subFolders = array();
 				foreach ($rootFolder as $subFolder)
 				{
 					if ($subFolder->isDir() && !$subFolder->isDot())
-						$this->loadGroup(null, $subFolder, $subFolderOrder);
+						$subFolders[$subFolder->getBasename()] = $subFolder->getPathname();
+				}
+				ksort($subFolders);
+				$subFolderOrder = 0;
+				foreach ($subFolders as $name => $path)
+				{
+					$this->loadGroup(null, $name, $path, $subFolderOrder);
 					$subFolderOrder++;
 				}
 			}
 			echo "Job completed...\n";
 		}
 
-		private function loadGroup($parentGroupId, $folder, $order)
+		private function loadGroup($parentGroupId, $name, $path, $order)
 		{
-			$path = $folder->getPathname();
 			$quizConfigPath = realpath($path . DIRECTORY_SEPARATOR . 'quiz.xml');
 			if (file_exists($quizConfigPath))
 				$this->loadQuiz($parentGroupId, $quizConfigPath);
@@ -33,17 +39,23 @@
 				$quizGroup = new QuizGroupStorage();
 				$groupId = uniqid();
 				$quizGroup->id = $groupId;
-				$quizGroup->name = $folder->getBasename();
+				$quizGroup->name = $name;
 				$quizGroup->order = $order;
 				$quizGroup->id_parent = $parentGroupId;
 				$quizGroup->save();
 
-				$subFolderOrder = 0;
-				$folderIterator = new DirectoryIterator($path);
+				$folderIterator = new DirectoryIterator(realpath($path));
+				$subFolders = array();
 				foreach ($folderIterator as $subFolder)
 				{
 					if ($subFolder->isDir() && !$subFolder->isDot())
-						$this->loadGroup($groupId, $subFolder, $subFolderOrder);
+						$subFolders[$subFolder->getBasename()] = $subFolder->getPathname();
+				}
+				ksort($subFolders);
+				$subFolderOrder = 0;
+				foreach ($subFolders as $name => $path)
+				{
+					$this->loadGroup($groupId, $name, $path, $subFolderOrder);
 					$subFolderOrder++;
 				}
 			}

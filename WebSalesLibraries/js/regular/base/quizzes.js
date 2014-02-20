@@ -221,6 +221,10 @@
 	var Quiz = function (id, config)
 	{
 		var title = config.find('.config Title').html();
+		var extendedTitle = config.find('.config Subtitle').html() + ' - ' +
+			title + ' - ' +
+			config.find('.config Date').html();
+
 		var uniqueId = config.find('.config ID').html();
 
 		var cover = {
@@ -291,7 +295,7 @@
 				$.fancybox({
 					content: content,
 					title: 'Question ' + question.order + ' of ' + questionsCount,
-					width: 550,
+					width: 750,
 					autoSize: false,
 					autoHeight: true,
 					openEffect: 'none',
@@ -340,6 +344,11 @@
 							});
 						else
 							buttonPrev.hide();
+					},
+					helpers: {
+						overlay : {
+							closeClick : false
+						}
 					}
 				});
 			};
@@ -379,11 +388,16 @@
 				$.fancybox({
 					content: content,
 					title: title,
-					width: 550,
+					width: 750,
 					autoSize: false,
 					autoHeight: true,
 					openEffect: 'none',
 					closeEffect: 'none',
+					helpers: {
+						overlay : {
+							closeClick : false
+						}
+					},
 					afterShow: function ()
 					{
 						var innerContent = $('.fancybox-inner');
@@ -430,11 +444,16 @@
 				$.fancybox({
 					content: content,
 					title: 'EXAM COMPLETE',
-					width: 550,
+					width: 750,
 					autoSize: false,
 					autoHeight: true,
 					openEffect: 'none',
 					closeEffect: 'none',
+					helpers: {
+						overlay : {
+							closeClick : false
+						}
+					},
 					afterShow: function ()
 					{
 						var innerContent = $('.fancybox-inner');
@@ -487,7 +506,7 @@
 					type: 'Quizzes',
 					subType: 'Quiz Finished',
 					data: $.toJSON({
-						Name: title,
+						Name: extendedTitle,
 						ID: uniqueId
 					})
 				},
@@ -506,7 +525,7 @@
 					type: 'Quizzes',
 					subType: 'Quiz Started',
 					data: $.toJSON({
-						Name: title,
+						Name: extendedTitle,
 						ID: uniqueId
 					})
 				},

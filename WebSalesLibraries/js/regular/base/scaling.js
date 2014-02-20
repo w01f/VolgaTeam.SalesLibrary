@@ -13,7 +13,7 @@ window.salesDepot = window.salesDepot || { };
 			'height': height + 'px'
 		});
 		updateWallbinTabs();
-		updateShorcutsPage();
+		updateShortcutsPage();
 		updateSearchArea();
 		updateFavoritesArea();
 		updateQuizzesArea();
@@ -148,7 +148,7 @@ window.salesDepot = window.salesDepot || { };
 		});
 	};
 
-	var updateShorcutsPage = function ()
+	var updateShortcutsPage = function ()
 	{
 		var content = $('#content');
 		var height = content.height();

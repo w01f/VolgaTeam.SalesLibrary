@@ -200,6 +200,11 @@
 	vertical-align: middle;
 }
 
+.quiz-question .answer-text .lead
+{
+	font-size: 19px;
+}
+
 .quiz-results
 {
 	width: 100%;

@@ -2,11 +2,12 @@ DROP PROCEDURE IF EXISTS `sp_get_quiz_pass_group_report`;
 CREATE PROCEDURE `sp_get_quiz_pass_group_report` (in start_date datetime,in end_date datetime)
 select
   g.name as group_name,
-  sdet.data as quiz_name,
+  concat(ExtractValue(q.config,'/Quiz/Subtitle'),' - ',q.name,' - ',ExtractValue(q.config,'/Quiz/Date')) as quiz_name,
   count(distinct su.login) as user_count
 from tbl_statistic_activity sact
   join tbl_statistic_user su on su.id_activity = sact.id
-  join tbl_statistic_detail sdet on sdet.id_activity = sact.id and sdet.tag = 'Name'
+  left join tbl_statistic_detail sdet_i on sdet_i.id_activity = sact.id and sdet_i.tag = 'ID'
+  left join tbl_quiz q on q.unique_id = sdet_i.data
   join tbl_user u on u.login = su.login
   left join tbl_user_group ug on ug.id_user = u.id
   left join tbl_group g on g.id = ug.id_group
@@ -15,4 +16,4 @@ where sact.type = 'Quizzes'
       and sact.date_time >= start_date and sact.date_time <= end_date
 group by
   g.name,
-  sdet.data;
+  q.name;

@@ -4,6 +4,7 @@
 		public $id;
 		public $uniqId;
 		public $title;
+		public $date;
 		public $subtitle;
 		public $header;
 		public $footer;
@@ -33,6 +34,8 @@
 			$this->title = $quizRecord->name;
 			$queryResult = $xpath->query('//Quiz/ID');
 			$this->uniqId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$queryResult = $xpath->query('//Quiz/Date');
+			$this->date = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 			$queryResult = $xpath->query('//Quiz/Subtitle');
 			$this->subtitle = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 			$queryResult = $xpath->query('//Quiz/Header');

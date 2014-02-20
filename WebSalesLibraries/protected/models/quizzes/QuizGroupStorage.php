@@ -21,8 +21,8 @@
 		{
 			$quizItems = null;
 			$groupRecords = isset($parentId) ?
-				self::model()->findAll("id_parent=? order by 'order'", array($parentId)) :
-				self::model()->findAll("id_parent is null order by 'order'");
+				self::model()->findAll(array('order'=>"'order'", 'condition'=>'id_parent=:x', 'params'=>array(':x'=>$parentId))):
+				self::model()->findAll(array('order'=>"'order'", 'condition'=>'id_parent is null'));
 			foreach ($groupRecords as $groupRecord)
 			{
 				$groupItem = new QuizItem();
