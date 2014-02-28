@@ -10,7 +10,12 @@ namespace SalesDepot.SiteManager.ToolClasses
 {
 	public class QuizStatisticExportHelper
 	{
-		public static void ExportQuizStatistic(string filePath, string header, IEnumerable<QuizPassGroupReportRecord> totalStatistic, IEnumerable<IEnumerable<QuizPassUserReportRecord>> groupStatistic)
+		public static void ExportQuizStatistic(string filePath,
+			string header,
+			int totalUsers,
+			int totalGroups,
+			IEnumerable<QuizPassGroupReportRecord> totalStatistic,
+			IEnumerable<IEnumerable<QuizPassUserReportRecord>> groupStatistic)
 		{
 			try
 			{
@@ -18,6 +23,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 				MessageFilter.Register();
 				var workbook = ExcelHelper.Instance.ExcelObject.Workbooks.Add();
 				Worksheet sheet = null;
+				var updated = String.Format("Updated: {0}", DateTime.Now.ToString("MM/dd/yy - hmmtt"));
 				var currentSheetIndex = 2;
 				foreach (var groupRecords in groupStatistic)
 				{
@@ -29,11 +35,11 @@ namespace SalesDepot.SiteManager.ToolClasses
 					{
 						sheet = workbook.Worksheets.Add(After: sheet);
 					}
-					FillGroupPage(sheet, header, groupRecords);
+					FillGroupPage(sheet, header, updated, groupRecords);
 					currentSheetIndex++;
 				}
 				sheet = workbook.Worksheets[1];
-				FillSummaryPage(sheet, header, totalStatistic);
+				FillSummaryPage(sheet, header, totalUsers, totalGroups, updated, totalStatistic);
 				sheet.Select();
 				workbook.SaveAs(filePath);
 				workbook.Close();
@@ -48,7 +54,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 		}
 
 
-		private static void FillSummaryPage(Worksheet sheet, string header, IEnumerable<QuizPassGroupReportRecord> totalRecords)
+		private static void FillSummaryPage(Worksheet sheet, string header, int totalUsers, int totalGroups, string updated, IEnumerable<QuizPassGroupReportRecord> totalRecords)
 		{
 			const string takenHeader = "TAKEN:";
 			const string passedHeader = "PASSED:";
@@ -77,6 +83,18 @@ namespace SalesDepot.SiteManager.ToolClasses
 
 			sheet.Range[String.Format("B{0}", rowPosition)].Value = header;
 			sheet.Range[String.Format("B{0}", rowPosition)].Font.Bold = true;
+			sheet.Range[String.Format("C{0}", rowPosition)].Value = updated;
+			sheet.Range[String.Format("C{0}", rowPosition)].VerticalAlignment = XlVAlign.xlVAlignBottom;
+			sheet.Range[String.Format("C{0}", rowPosition)].HorizontalAlignment = XlHAlign.xlHAlignGeneral;
+			rowPosition++;
+
+			sheet.Range[String.Format("B{0}", rowPosition)].Value = String.Format("# of Stations Participating: {0}", totalGroups);
+			rowPosition++;
+
+			sheet.Range[String.Format("B{0}", rowPosition)].Value = String.Format("# of Sales Reps Participating: {0}", totalUsers);
+			rowPosition++;
+
+			sheet.Range[String.Format("B{0}", rowPosition)].Value = String.Format("# of Sales Reps Certified: {0}", 0);
 			rowPosition += 2;
 
 			sheet.Range[String.Format("B{0}", rowPosition)].Value = "Total Quizzes in RAYCOM Sales Certification Program:";
@@ -114,12 +132,16 @@ namespace SalesDepot.SiteManager.ToolClasses
 			sheet.Range[String.Format("B{0}", rowPosition), String.Format("D{0}", rowPosition)].Borders[XlBordersIndex.xlInsideVertical].Weight = XlBorderWeight.xlThin;
 			rowPosition++;
 
-			var groupNames = totalRecords.OrderBy(gr => gr.group).Select(gr => gr.group).Distinct();
+			var groupNames = totalRecords.GroupBy(gr => gr.group).Select(group => new
+			{
+				Name = group.Key,
+				TotalPassed = group.Sum(g => g.Passed)
+			}).OrderByDescending(item => item.TotalPassed).Select(item => item.Name);
 			var groupBegin = rowPosition;
 			var groupEnd = rowPosition;
 			foreach (var name in groupNames)
 			{
-				var groupResults = totalRecords.Where(gr => gr.group.Equals(name)).OrderBy(gr => gr.group);
+				var groupResults = totalRecords.Where(gr => gr.group.Equals(name));
 				var groupTaken = groupResults.Sum(gr => gr.Taken);
 				var groupPassed = groupResults.Sum(gr => gr.Passed);
 
@@ -234,7 +256,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 			sheet.Outline.ShowLevels(1);
 		}
 
-		private static void FillGroupPage(Worksheet sheet, string header, IEnumerable<QuizPassUserReportRecord> groupRecords)
+		private static void FillGroupPage(Worksheet sheet, string header, string updated, IEnumerable<QuizPassUserReportRecord> groupRecords)
 		{
 			const string takenHeader = "TAKEN:";
 			const string passedHeader = "PASSED:";
@@ -263,6 +285,9 @@ namespace SalesDepot.SiteManager.ToolClasses
 
 			sheet.Range[String.Format("B{0}", rowPosition)].Value = header;
 			sheet.Range[String.Format("B{0}", rowPosition)].Font.Bold = true;
+			sheet.Range[String.Format("C{0}", rowPosition)].Value = updated;
+			sheet.Range[String.Format("C{0}", rowPosition)].VerticalAlignment = XlVAlign.xlVAlignBottom;
+			sheet.Range[String.Format("C{0}", rowPosition)].HorizontalAlignment = XlHAlign.xlHAlignGeneral;
 			rowPosition += 2;
 
 			sheet.Range[String.Format("B{0}", rowPosition)].Value = "Total Quizzes in RAYCOM Sales Certification Program:";
