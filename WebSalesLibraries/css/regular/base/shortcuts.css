@@ -35,7 +35,7 @@
 
 .shortcuts-links.grid
 {
-	display: inline-block;
+	width: 100%;
 }
 
 .shortcuts-links li
@@ -43,7 +43,6 @@
 	list-style: none;
 	float: left;
 	padding: 12px;
-	list-style: none;
 }
 
 .shortcuts-links img

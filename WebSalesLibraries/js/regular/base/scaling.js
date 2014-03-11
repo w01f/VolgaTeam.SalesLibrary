@@ -152,8 +152,17 @@ window.salesDepot = window.salesDepot || { };
 	{
 		var content = $('#content');
 		var height = content.height();
+		var width = content.width();
 		content.find('.shortcuts-page-content').css({
 			'height': (height - content.find('.shortcuts-home-bar img').height() - content.find('.shortcuts-search-bar.open').height() - 20) + 'px'
+		});
+
+		var searchBarContainer = $('.shortcuts-search-bar');
+		var searchBarInput = searchBarContainer.find('.search-bar-text');
+		var searchBarGroup = searchBarInput.parent();
+		var searchBarButtonsWidth = searchBarGroup.width() - searchBarInput.width();
+		searchBarInput.css({
+			'width': (searchBarContainer.width() - searchBarButtonsWidth - 80) + 'px'
 		});
 	}
 })(jQuery);

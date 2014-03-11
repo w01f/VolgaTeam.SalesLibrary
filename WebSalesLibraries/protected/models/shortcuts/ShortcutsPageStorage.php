@@ -1,4 +1,5 @@
 <?php
+
 	class ShortcutsPageStorage extends CActiveRecord
 	{
 		public static function model($className = __CLASS__)
@@ -9,6 +10,18 @@
 		public function tableName()
 		{
 			return '{{shortcut_page}}';
+		}
+
+		public function isEnabled($login)
+		{
+			$approvedUsers = array();
+			$pageConfig = new DOMDocument();
+			$pageConfig->loadXML($this->config);
+			$xpath = new DomXPath($pageConfig);
+			$queryResult = $xpath->query('//Config/ApprovedUsers/User');
+			foreach ($queryResult as $userNode)
+				$approvedUsers[] = trim($userNode->nodeValue);
+			return $this->enabled && (count($approvedUsers) == 0 || in_array($login, $approvedUsers));
 		}
 
 		public function getHomeBar()
@@ -30,5 +43,4 @@
 		{
 			self::model()->deleteAll();
 		}
-
 	}

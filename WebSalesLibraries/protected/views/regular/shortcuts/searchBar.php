@@ -3,11 +3,11 @@
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);
 	$tagsName = $lastCharFromTagsName == "y" ? substr_replace(Yii::app()->params['tags']['column_name'], "ies", -1) : (Yii::app()->params['tags']['column_name'] . "s");
 	?>
-	<table class="shortcuts-search-bar open" style="text-align: <? echo $searchBar->alignment; ?>">
+	<table class="shortcuts-search-bar open" style="text-align: <? echo $searchBar->alignment; ?>;">
 		<tr>
 			<td>
 				<? if (!Yii::app()->browser->isMobile()): ?>
-					<h5>What are you looking for?</h5>
+					<img style="margin-top: 20px; margin-bottom: 20px;" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/search-bar-logo.png' ?>" alt=""/>
 				<? endif; ?>
 				<div class="search-conditions" style="display: none;">
 					<div class="shortcut-title"><? echo $searchBar->title; ?></div>
@@ -104,7 +104,8 @@
 		</tr>
 		<tr>
 			<td>
-				<div class="input-append">
+				<div class="input-append input-prepend">
+					<span class="add-on">Search:</span>
 					<input class="input-xxlarge search-bar-text" type="text" placeholder="<? echo $searchBar->defaultLabel; ?>">
 					<button class="btn search-bar-run" type="submit">
 						<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">

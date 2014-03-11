@@ -1,5 +1,7 @@
 <? if (isset($pageShortcuts)): ?>
 	<? foreach ($pageShortcuts as $pageShortcut): ?>
-		<option value="<? echo $pageShortcut->id; ?>"><? echo $pageShortcut->name; ?></option>
+		<? if ($pageShortcut->isEnabled(Yii::app()->user->login)): ?>
+			<option value="<? echo $pageShortcut->id; ?>"><? echo $pageShortcut->name; ?></option>
+		<? endif; ?>
 	<? endforeach; ?>
 <? endif; ?>

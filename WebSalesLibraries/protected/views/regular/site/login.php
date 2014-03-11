@@ -1,25 +1,20 @@
 <?php
-$version = '2.0';
-$cs = Yii::app()->clientScript;
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/login.css?' . $version);
-$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
-$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClientScript::POS_HEAD);
+	$version = '2.0';
+	$cs = Yii::app()->clientScript;
+	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/bootstrap/css/bootstrap.min.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/login.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClientScript::POS_HEAD);
 ?>
 
 <div id="content">
-	<?php if (Yii::app()->params['login']['forgotPasswordField']): ?>
-		<a id="recover-password-link" href="#view-dialog-container">
-			<img src="<?php echo Yii::app()->baseUrl . '/images/login/forgot-password.png'; ?>" alt="Forgot Password?">
-		</a>
-	<?php endif; ?>
 	<?php if (Yii::app()->browser->isMobile()): ?>
 		<a id="button-switch-version" href="#">
 			<img src="<?php echo Yii::app()->baseUrl . '/images/login/mobile-version.png'; ?>" alt="Switch to Mobile version">
@@ -39,11 +34,11 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 					<div>Username:</div>
 				<?php endif; ?>
 				<?php
-				echo $form->textField($formData, 'login'
-					, array(
-						'placeholder' => 'Username',
-						'class' => 'edit-field')
-				);
+					echo $form->textField($formData, 'login'
+						, array(
+							'placeholder' => 'Username',
+							'class' => 'edit-field')
+					);
 				?>
 			</td>
 		</tr>
@@ -53,12 +48,12 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 					<div>Password:</div>
 				<?php endif; ?>
 				<?php
-				echo $form->textField($formData, 'password'
-					, array(
-						'placeholder' => 'Password',
-						'input type' => 'Password',
-						'class' => 'edit-field')
-				);
+					echo $form->textField($formData, 'password'
+						, array(
+							'placeholder' => 'Password',
+							'input type' => 'Password',
+							'class' => 'edit-field')
+					);
 				?>
 				<br>
 			</td>
@@ -66,21 +61,31 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 		<tr>
 			<td colspan="2" style="height: auto;">
 				<?php
-				echo $form->error($formData, 'login'
-					, array('class' => 'error-message')
-				);
-				echo $form->error($formData, 'password'
-					, array('class' => 'error-message')
-				);
+					echo $form->error($formData, 'login'
+						, array('class' => 'error-message')
+					);
+					echo $form->error($formData, 'password'
+						, array('class' => 'error-message')
+					);
 				?>
-				<br>
 			</td>
 		</tr>
+		<?php if (Yii::app()->params['login']['forgotPasswordField']): ?>
+			<tr>
+				<td colspan="2">
+					<a id="recover-password-link" href="#view-dialog-container">
+						<img src="<?php echo Yii::app()->baseUrl . '/images/login/forgot-password.png'; ?>" alt="Forgot Password?">
+					</a>
+				</td>
+			</tr>
+		<?php endif; ?>
 		<? if (Yii::app()->params['login']['complex_password']): ?>
-			<td colspan="2">
-				<a id="password-requirements" class="btn">Password Requirements</a><br><br>
-			</td>
-		<? endif;?>
+			<tr>
+				<td colspan="2">
+					<a id="password-requirements" class="btn">Password Requirements</a><br><br>
+				</td>
+			</tr>
+		<? endif; ?>
 		<?php if (Yii::app()->params['login']['disclaimer']): ?>
 			<tr>
 				<td colspan="2">
@@ -97,23 +102,28 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js', CClie
 			<?php if (Yii::app()->params['login']['rememberMeField']): ?>
 				<td id="remember-me-container">
 					<?php
-					echo $form->checkBox($formData, 'rememberMe'
-						, array(
-							'id' => 'field-remember')
-					);
-					echo $form->labelEx($formData, 'rememberMe'
-						, array('id' => 'lable-remember')
-					);
+						echo $form->checkBox($formData, 'rememberMe'
+							, array(
+								'id' => 'field-remember')
+						);
+						echo $form->labelEx($formData, 'rememberMe'
+							, array('id' => 'lable-remember')
+						);
 					?>
 				</td>
 			<?php endif; ?>
 			<td id="button-login-container">
 				<?php
-				echo CHtml::submitButton('Log In'
-					, array('id' => 'button-login',
-						'class' => 'btn'
-					));
+					echo CHtml::submitButton('Log In'
+						, array('id' => 'button-login',
+							'class' => 'btn'
+						));
 				?>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br><a href="mailto:<?php echo Yii::app()->params['email']['from']; ?>"><u><b>Need an Account?</b></u></a>
 			</td>
 		</tr>
 	</table>

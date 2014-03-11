@@ -5,6 +5,7 @@
 		public $alignment;
 		public $columnsCount;
 		public $paddingTop;
+		public $dividerWidth;
 
 		public function __construct($pageRecord)
 		{
@@ -19,8 +20,10 @@
 				$this->alignment = $queryResult->length > 0 ? strtolower(trim($queryResult->item(0)->nodeValue)) : 'left';
 				$queryResult = $xpath->query('//Config/Grid/Columns');
 				$this->columnsCount = $queryResult->length > 0 ? (int)trim($queryResult->item(0)->nodeValue) : 3;
-				$queryResult = $xpath->query('//Config/Grid/TopPad');
+				$queryResult = $xpath->query('//Config/Grid/TopMargin');
 				$this->paddingTop = $queryResult->length > 0 ? (int)trim($queryResult->item(0)->nodeValue) : 0;
+				$queryResult = $xpath->query('//Config/Grid/DividerLines');
+				$this->dividerWidth = $queryResult->length > 0 ? (int)trim($queryResult->item(0)->nodeValue) : 0;
 			}
 			else
 			{

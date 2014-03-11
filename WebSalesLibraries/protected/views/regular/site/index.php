@@ -1,5 +1,5 @@
 <?php
-	$version = '55.0';
+	$version = '57.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -397,16 +397,16 @@
 					$selected = true;
 				?>
 				<?php foreach ($pageShortcuts as $pageShortcutsRecord): ?>
-					<div class="ribbon-section <?php echo !$pageShortcutsRecord->enabled ? 'disabled' : ''; ?>">
+					<div class="ribbon-section <?php echo !$pageShortcutsRecord->isEnabled(Yii::app()->user->login) ? 'disabled' : ''; ?>">
 						<span class="section-title"><?php echo $pageShortcutsRecord->name; ?></span>
 
-						<div class="ribbon-button ribbon-button-large <?php echo $pageShortcutsRecord->enabled && $selected ? 'sel' : ''; ?> <?php echo !$pageShortcutsRecord->enabled ? 'disabled' : 'enabled'; ?> shortcuts-page <? if (!$isMobile): ?>regular<? endif; ?>" id="<?php echo $pageShortcutsRecord->id; ?>">
+						<div class="ribbon-button ribbon-button-large <?php echo $pageShortcutsRecord->isEnabled(Yii::app()->user->login) && $selected ? 'sel' : ''; ?> <?php echo !$pageShortcutsRecord->isEnabled(Yii::app()->user->login) ? 'disabled' : 'enabled'; ?> shortcuts-page <? if (!$isMobile): ?>regular<? endif; ?>" id="<?php echo $pageShortcutsRecord->id; ?>">
 							<img class="ribbon-icon ribbon-normal" src="<?php echo Yii::app()->baseUrl . $pageShortcutsRecord->image_path . '?' . $pageShortcutsRecord->id; ?>"/>
 							<img class="ribbon-icon ribbon-hot" src="<?php echo Yii::app()->baseUrl . $pageShortcutsRecord->image_path . '?' . $pageShortcutsRecord->id; ?>"/>
 							<img class="ribbon-icon ribbon-disabled" src="<?php echo Yii::app()->baseUrl . $pageShortcutsRecord->image_path . '?' . $pageShortcutsRecord->id; ?>"/>
 						</div>
 					</div>
-					<?php $selected = $pageShortcutsRecord->enabled ? false : $selected; ?>
+					<?php $selected = $pageShortcutsRecord->isEnabled(Yii::app()->user->login) ? false : $selected; ?>
 				<?php endforeach; ?>
 				<?php if (isset(Yii::app()->user->firstName) && isset(Yii::app()->user->lastName)): ?>
 					<div class="ribbon-section">
