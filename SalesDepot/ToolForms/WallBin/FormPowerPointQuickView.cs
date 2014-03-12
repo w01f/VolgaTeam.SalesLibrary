@@ -18,15 +18,15 @@ namespace SalesDepot.ToolForms.WallBin
 	{
 		private FileInfo _tempCopy;
 
+		public LibraryLink SelectedFile { get; set; }
+
 		public FormPowerPointQuickView()
 		{
 			InitializeComponent();
-			if ((base.CreateGraphics()).DpiX > 96)
-			{
-				checkEditChangeSlideTemplate.Font = new Font(checkEditChangeSlideTemplate.Font.FontFamily, checkEditChangeSlideTemplate.Font.Size - 1, checkEditChangeSlideTemplate.Font.Style);
-				checkEditKeepSlideTemplate.Font = new Font(checkEditKeepSlideTemplate.Font.FontFamily, checkEditKeepSlideTemplate.Font.Size - 1, checkEditKeepSlideTemplate.Font.Style);
-				labelControlSlideTemplate.Font = new Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
-			}
+			if (!((base.CreateGraphics()).DpiX > 96)) return;
+			checkEditChangeSlideTemplate.Font = new Font(checkEditChangeSlideTemplate.Font.FontFamily, checkEditChangeSlideTemplate.Font.Size - 1, checkEditChangeSlideTemplate.Font.Style);
+			checkEditKeepSlideTemplate.Font = new Font(checkEditKeepSlideTemplate.Font.FontFamily, checkEditKeepSlideTemplate.Font.Size - 1, checkEditKeepSlideTemplate.Font.Style);
+			labelControlSlideTemplate.Font = new Font(labelControlSlideTemplate.Font.FontFamily, labelControlSlideTemplate.Font.Size - 2, labelControlSlideTemplate.Font.Style);
 		}
 
 		protected override void OnHandleCreated(EventArgs e)
@@ -46,17 +46,19 @@ namespace SalesDepot.ToolForms.WallBin
 			{
 				if (File.Exists(SelectedFile.LocalPath))
 				{
-					string tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(SelectedFile.LocalPath));
+					var tempPath = Path.Combine(AppManager.Instance.TempFolder.FullName, DateTime.Now.ToString("yyyyMMdd-hmmsstt") + Path.GetExtension(SelectedFile.LocalPath));
 					File.Copy(SelectedFile.LocalPath, tempPath, true);
 					_tempCopy = new FileInfo(tempPath);
 				}
 
 				Text = "QuickView - " + SelectedFile.NameWithExtension;
 				laFileInfo.Text = "File Added: " + SelectedFile.AddDate.ToString("MM/dd/yy");
-				if (SelectedFile.PresentationProperties.Width == 10 && SelectedFile.PresentationProperties.Height == 7.5 && SelectedFile.PresentationProperties.Orientation.Equals("Landscape") && MasterWizardManager.Instance.MasterWizards.Count > 1)
+
+				var themeManager = new ThemeManager(String.Format(ThemeManager.RootTemplate, Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), SelectedFile.PresentationProperties.Size));
+				if (themeManager.Themes.Any())
 				{
 					pnSlideTemplate.Visible = true;
-					comboBoxEditSlideTemplate.Properties.Items.AddRange(MasterWizardManager.Instance.MasterWizards.Keys);
+					comboBoxEditSlideTemplate.Properties.Items.AddRange(themeManager.Themes);
 					comboBoxEditSlideTemplate.SelectedIndex = 0;
 				}
 				else
@@ -66,10 +68,10 @@ namespace SalesDepot.ToolForms.WallBin
 				{
 					form.laProgress.Text = "Loading Presentation...";
 					var thread = new Thread(delegate()
-												{
-													if (SelectedFile.PreviewContainer != null)
-														SelectedFile.PreviewContainer.GetPreviewImages();
-												});
+					{
+						if (SelectedFile.PreviewContainer != null)
+							SelectedFile.PreviewContainer.GetPreviewImages();
+					});
 					thread.Start();
 
 					form.Show();
@@ -126,38 +128,34 @@ namespace SalesDepot.ToolForms.WallBin
 
 		private void barButtonItemSaveAsPDF_ItemClick(object sender, ItemClickEventArgs e)
 		{
-			if (SelectedFile != null)
+			if (SelectedFile == null) return;
+			using (var form = new FormSaveAsPDF())
 			{
-				using (var form = new FormSaveAsPDF())
+				var result = form.ShowDialog();
+				var wholeFile = form.WholeFile;
+
+				if (result == DialogResult.Cancel) return;
+				var destinationFileName = Path.Combine(Path.GetTempPath(), SelectedFile.NameWithoutExtesion + ".pdf");
+
+				using (var progressForm = new FormProgress())
 				{
-					DialogResult result = form.ShowDialog();
-					bool wholeFile = form.WholeFile;
-
-					if (result != DialogResult.Cancel)
+					progressForm.laProgress.Text = "Saving as PDF...";
+					progressForm.TopMost = true;
+					var thread = new Thread(delegate()
 					{
-						string destinationFileName = Path.Combine(Path.GetTempPath(), SelectedFile.NameWithoutExtesion + ".pdf");
+						PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
+						PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), destinationFileName);
+					});
+					thread.Start();
+					progressForm.Show();
 
-						using (var progressForm = new FormProgress())
-						{
-							progressForm.laProgress.Text = "Saving as PDF...";
-							progressForm.TopMost = true;
-							var thread = new Thread(delegate()
-														{
-															PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-															PowerPointHelper.Instance.ExportPresentationAsPDF(wholeFile ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), destinationFileName);
-														});
-							thread.Start();
-							progressForm.Show();
+					while (thread.IsAlive)
+						Application.DoEvents();
 
-							while (thread.IsAlive)
-								Application.DoEvents();
+					progressForm.Close();
 
-							progressForm.Close();
-
-							AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
-							LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
-						}
-					}
+					AppManager.Instance.ActivityManager.AddLinkAccessActivity("Save Link as PDF", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
+					LinkManager.Instance.SaveFile("Save PDF as", new FileInfo(destinationFileName), false);
 				}
 			}
 		}
@@ -294,7 +292,8 @@ namespace SalesDepot.ToolForms.WallBin
 							{
 								AppManager.Instance.ActivityManager.AddLinkAccessActivity("Insert Slide", SelectedFile.Name, SelectedFile.Type.ToString(), SelectedFile.OriginalPath, SelectedFile.Parent.Parent.Parent.Name, SelectedFile.Parent.Parent.Name);
 								PowerPointHelper.Instance.OpenSlideSourcePresentation(_tempCopy);
-								PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && comboBoxEditSlideTemplate.EditValue != null ? MasterWizardManager.Instance.MasterWizards[comboBoxEditSlideTemplate.EditValue.ToString()].TemplatePath : string.Empty);
+								var selectedTheme = comboBoxEditSlideTemplate.EditValue as Theme;
+								PowerPointHelper.Instance.AppendSlide(allSlides ? -1 : (SelectedFile.PreviewContainer.SelectedIndex + 1), checkEditChangeSlideTemplate.Checked && selectedTheme != null ? selectedTheme.ThemeFilePath : String.Empty);
 							});
 							thread.Start();
 							form.Show();
@@ -312,7 +311,5 @@ namespace SalesDepot.ToolForms.WallBin
 			}
 		}
 		#endregion
-
-		public LibraryLink SelectedFile { get; set; }
 	}
 }

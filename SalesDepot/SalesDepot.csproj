@@ -119,6 +119,7 @@
     <Compile Include="BusinessClasses\LibraryPackage.cs" />
     <Compile Include="BusinessClasses\PreviewContainer.cs" />
     <Compile Include="BusinessClasses\ProgramScheduleManager.cs" />
+    <Compile Include="BusinessClasses\ThemeManager.cs" />
     <Compile Include="ConfigurationClasses\PermissionsManager.cs" />
     <Compile Include="ConfigurationClasses\ProgramOutputSettings.cs" />
     <Compile Include="ConfigurationClasses\QBuilderSettings.cs" />
@@ -344,7 +345,6 @@
       <DependentUpon>FormPowerPointQuickView.cs</DependentUpon>
     </Compile>
     <Compile Include="BusinessClasses\HelpManager.cs" />
-    <Compile Include="BusinessClasses\MasterWizardManager.cs" />
     <Compile Include="ToolForms\Settings\FormEmailSettings.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -529,7 +529,6 @@
     <EmbeddedResource Include="PresentationClasses\WallBin\WallBinTreeListControl.resx">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="TabPages\TabQBuilder.resx">
       <DependentUpon>TabQBuilder.cs</DependentUpon>
     </EmbeddedResource>
