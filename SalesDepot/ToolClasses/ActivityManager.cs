@@ -1,220 +1,112 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Xml;
+using System.Xml.Linq;
+using SalesDepot.ConfigurationClasses;
 
 namespace SalesDepot.ToolClasses
 {
-    public class ActivityManager
-    {
-        private List<UserActivity> _activities = new List<UserActivity>();
+	public class ActivityManager
+	{
+		private XDocument _activityStorage;
 
-        private string _activityFilePath
-        {
-            get
-            {
-                return Path.Combine(ConfigurationClasses.SettingsManager.Instance.ActivityFolder, DateTime.Now.ToString("MMyyyy") + ".xml");
-            }
-        }
+		protected string ActivityFilePath
+		{
+			get { return Path.Combine(SettingsManager.Instance.ActivityFolder, String.Format("{0}.xml", DateTime.Now.ToString("MM-dd-yyyy"))); }
+		}
 
-        private string _userName
-        {
-            get
-            {
-                return Environment.UserName;
-            }
-        }
+		public ActivityManager()
+		{
+			OpenStorage();
+		}
 
+		private void OpenStorage()
+		{
+			if (File.Exists(ActivityFilePath))
+				_activityStorage = XDocument.Load(ActivityFilePath);
+			else
+			{
+				_activityStorage = new XDocument();
+				var root = new XElement("UserActivities");
+				_activityStorage.Add(root);
+			}
+		}
 
-        public ActivityManager()
-        {
-            LoadActivities();
-        }
+		private void SaveStorage()
+		{
+			_activityStorage.Save(ActivityFilePath);
+		}
 
-        private void LoadActivities()
-        {
-            _activities.Clear();
-            if (File.Exists(_activityFilePath))
-            {
-                XmlDocument document = new XmlDocument();
-                document.Load(_activityFilePath);
+		public void AddActivity(UserActivity activity)
+		{
+			_activityStorage.Add(activity.Serialize());
+			SaveStorage();
+		}
 
-                XmlNode node = document.SelectSingleNode(@"/UserActivities");
-                if (node != null)
-                {
-                    foreach (XmlNode childNode in node.ChildNodes)
-                    {
-                        if (childNode.Attributes.GetNamedItem("AccessedLink") != null)
-                        {
-                            LinkAccessActivity activity = new LinkAccessActivity();
-                            activity.Deserialize(childNode);
-                            _activities.Add(activity);
-                        }
-                        else
-                        {
-                            UserActivity activity = new UserActivity();
-                            activity.Deserialize(childNode);
-                            _activities.Add(activity);
-                        }
-                    }
-                }
-            }
-        }
+		public void AddUserActivity(string activityType)
+		{
+			var activity = new UserActivity(activityType);
+			_activityStorage.Root.Add(activity.Serialize());
+			SaveStorage();
+		}
 
-        private void SaveActivities()
-        {
-            StringBuilder xml = new StringBuilder();
+		public void AddLinkAccessActivity(string activityType, string accessedLink, string linkType, string linkedFile, string libraryName, string pageName)
+		{
+			var activity = new LinkAccessActivity(activityType, accessedLink, linkType, linkedFile, libraryName, pageName);
+			_activityStorage.Root.Add(activity.Serialize());
+			SaveStorage();
+		}
+	}
 
-            xml.AppendLine(@"<UserActivities>");
-            foreach (UserActivity userActivity in _activities)
-                if (!string.IsNullOrEmpty(userActivity.UserName))
-                    xml.AppendLine(userActivity.Serialize());
-            xml.AppendLine(@"</UserActivities>");
+	public class UserActivity
+	{
+		public string UserName { get; private set; }
+		public string ActivityType { get; private set; }
+		public DateTime ActivityTime { get; private set; }
 
-            using (StreamWriter sw = new StreamWriter(_activityFilePath, false))
-            {
-                sw.Write(xml);
-                sw.Flush();
-                sw.Close();
-            }
-        }
+		public UserActivity(string activityType)
+		{
+			ActivityTime = DateTime.Now;
+			UserName = Environment.UserName;
+			ActivityType = activityType;
+		}
 
-        public void AddUserActivity(string activityType)
-        {
-            UserActivity activity = new UserActivity();
-            activity.UserName = _userName;
-            activity.ActivityType = activityType;
-            activity.ActivityTime = DateTime.Now;
-            _activities.Add(activity);
+		public virtual XElement Serialize()
+		{
+			var activityElement = new XElement("UserActivity");
+			activityElement.Add(new XAttribute("UserName", UserName));
+			activityElement.Add(new XAttribute("ActivityType", ActivityType));
+			activityElement.Add(new XAttribute("ActivityTime", ActivityTime));
+			return activityElement;
+		}
+	}
 
-            SaveActivities();
-        }
+	public class LinkAccessActivity : UserActivity
+	{
+		public LinkAccessActivity(string activityType, string accessedLink, string linkType, string linkedFile, string libraryName, string pageName)
+			: base(activityType)
+		{
+			AccessedLink = accessedLink;
+			LinkType = linkType;
+			LinkedFile = linkedFile;
+			LibraryName = libraryName;
+			PageName = pageName;
+		}
 
-        public void AddLinkAccessActivity(string activityType, string accessedLink, string linkType, string linkedFile, string libraryName, string pageName)
-        {
-            LinkAccessActivity activity = new LinkAccessActivity();
-            activity.UserName = _userName;
-            activity.ActivityType = activityType;
-            activity.ActivityTime = DateTime.Now;
-            activity.AccessedLink = accessedLink;
-            activity.LinkType = linkType;
-            activity.LinkedFile = linkedFile;
-            activity.LibraryName = libraryName;
-            activity.PageName = pageName;
-            _activities.Add(activity);
+		public string AccessedLink { get; set; }
+		public string LinkType { get; set; }
+		public string LinkedFile { get; set; }
+		public string LibraryName { get; set; }
+		public string PageName { get; set; }
 
-            SaveActivities();
-        }
-    }
-
-    public class UserActivity
-    {
-        public string UserName { get; set; }
-        public string ActivityType { get; set; }
-        public DateTime ActivityTime { get; set; }
-
-        public virtual string Serialize()
-        {
-            StringBuilder result = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(this.UserName))
-            {
-                result.Append(@"<UserActivity ");
-                result.Append("UserName = \"" + this.UserName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.Append("ActivityType = \"" + this.ActivityType.ToString() + "\" ");
-                result.Append("ActivityTime = \"" + this.ActivityTime.ToString() + "\" ");
-                result.AppendLine(@"/>");
-            }
-            return result.ToString();
-        }
-
-        public virtual void Deserialize(XmlNode node)
-        {
-            DateTime tempDateTime;
-
-            foreach (XmlAttribute attribute in node.Attributes)
-            {
-                switch (attribute.Name)
-                {
-                    case "UserName":
-                        this.UserName = attribute.InnerText;
-                        break;
-                    case "ActivityType":
-                        this.ActivityType = attribute.InnerText;
-                        break;
-                    case "ActivityTime":
-                        if (DateTime.TryParse(attribute.Value, out tempDateTime))
-                            this.ActivityTime = tempDateTime;
-                        break;
-                }
-            }
-        }
-    }
-
-    public class LinkAccessActivity : UserActivity
-    {
-        public string AccessedLink { get; set; }
-        public string LinkType { get; set; }
-        public string LinkedFile { get; set; }
-        public string LibraryName { get; set; }
-        public string PageName { get; set; }
-
-        public override string Serialize()
-        {
-            StringBuilder result = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(this.UserName))
-            {
-                result.Append(@"<UserActivity ");
-                result.Append("UserName = \"" + this.UserName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.Append("ActivityType = \"" + this.ActivityType.ToString() + "\" ");
-                result.Append("ActivityTime = \"" + this.ActivityTime.ToString() + "\" ");
-                result.Append("AccessedLink = \"" + this.AccessedLink.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.Append("LinkType = \"" + this.LinkType.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.Append("LinkedFile = \"" + this.LinkedFile.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.Append("LibraryName = \"" + this.LibraryName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.Append("PageName = \"" + this.PageName.Replace(@"&", "&#38;").Replace("\"", "&quot;") + "\" ");
-                result.AppendLine(@"/>");
-            }
-            return result.ToString();
-        }
-
-        public override void Deserialize(XmlNode node)
-        {
-            DateTime tempDateTime;
-
-            foreach (XmlAttribute attribute in node.Attributes)
-            {
-                switch (attribute.Name)
-                {
-                    case "UserName":
-                        this.UserName = attribute.InnerText;
-                        break;
-                    case "ActivityType":
-                        this.ActivityType = attribute.InnerText;
-                        break;
-                    case "ActivityTime":
-                        if (DateTime.TryParse(attribute.Value, out tempDateTime))
-                            this.ActivityTime = tempDateTime;
-                        break;
-                    case "AccessedLink":
-                        this.AccessedLink = attribute.InnerText;
-                        break;
-                    case "LinkType":
-                        this.LinkType = attribute.InnerText;
-                        break;
-                    case "LinkedFile":
-                        this.LinkedFile = attribute.InnerText;
-                        break;
-                    case "LibraryName":
-                        this.LibraryName = attribute.InnerText;
-                        break;
-                    case "PageName":
-                        this.PageName = attribute.InnerText;
-                        break;
-                }
-            }
-        }
-    }
+		public override XElement Serialize()
+		{
+			var activityElement = base.Serialize();
+			activityElement.Add(new XAttribute("AccessedLink", AccessedLink));
+			activityElement.Add(new XAttribute("LinkType", LinkType));
+			activityElement.Add(new XAttribute("LinkedFile", LinkedFile));
+			activityElement.Add(new XAttribute("LibraryName", LinkedFile));
+			activityElement.Add(new XAttribute("PageName", PageName));
+			return activityElement;
+		}
+	}
 }
