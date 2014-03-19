@@ -7,7 +7,8 @@
 		>
 	<div class="service-data">
 		<? if (isset($link->ribbonLogoPath) && @getimagesize($link->ribbonLogoPath)): ?>
-			<div class="ribbon-logo-path"><?php echo $link->ribbonLogoPath ?></div>
+			<div class="ribbon-logo-path"><? echo $link->ribbonLogoPath; ?></div>
 		<? endif; ?>
+		<div class="link-name"><? echo $link->tooltip; ?></div>
 	</div>
 </a>

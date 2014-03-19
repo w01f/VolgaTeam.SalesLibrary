@@ -9,6 +9,11 @@
 	padding-bottom: 10px;
 }
 
+.shortcuts-home-bar td.buttons-container
+{
+	width: 56px;
+}
+
 .shortcuts-home-bar td.title-container
 {
 	width: 1px;
@@ -24,6 +29,11 @@
 {
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.file-filter-panel .file-selector
+{
+	padding-left: 50px;
 }
 
 .shortcuts-page-content

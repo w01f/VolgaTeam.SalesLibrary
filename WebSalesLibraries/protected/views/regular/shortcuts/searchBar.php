@@ -7,7 +7,7 @@
 		<tr>
 			<td>
 				<? if (!Yii::app()->browser->isMobile()): ?>
-					<img style="margin-top: 20px; margin-bottom: 20px;" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/search-bar-logo.png' ?>" alt=""/>
+					<img style="margin-top: 20px; margin-bottom: 20px;" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar-logo.png' ?>" alt=""/>
 				<? endif; ?>
 				<div class="search-conditions" style="display: none;">
 					<div class="shortcut-title"><? echo $searchBar->title; ?></div>
@@ -110,34 +110,18 @@
 					<button class="btn search-bar-run" type="submit">
 						<img src="<? echo Yii::app()->getBaseUrl(true) . '/images/search/search-shortcuts.png'; ?>">
 					</button>
-					<button class="btn file-filter-panel-switcher" type="submit">File Filter</button>
 					<button class="btn tags-filter-panel-switcher" type="submit"><? echo $tagsName; ?></button>
 				</div>
+				<p class="muted"><small class="tag-condition-selected">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</small></p>
 			</td>
 		</tr>
-		<tr class="file-filter-panel" style="display: none">
+		<tr class="file-filter-panel">
 			<td>
-				<button class="btn<? echo in_array('ppt', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-powerpoint">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-powerpoint.png"/>
-				</button>
-				<button class="btn<? echo in_array('video', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-video">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-video.png"/>
-				</button>
-				<button class="btn<? echo in_array('pdf', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-pdf">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-pdf.png"/>
-				</button>
-				<button class="btn<? echo in_array('doc', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-word">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-word.png"/>
-				</button>
-				<button class="btn<? echo in_array('xls', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-excel">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-excel.png"/>
-				</button>
-				<button class="btn<? echo in_array('url', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-url">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-url.png"/>
-				</button>
-				<button class="btn<? echo in_array('image', $searchBar->conditions->fileTypes) ? ' active' : ''; ?>" id="search-file-type-image">
-					<img src="<? echo Yii::app()->getBaseUrl(true); ?>/images/search/search-image.png"/>
-				</button>
+				<form class="form-inline">
+					<label class="checkbox file-selector"><input id="search-file-type-video" type="checkbox" checked>video</label>
+					<label class="checkbox file-selector"><input id="search-file-type-powerpoint" type="checkbox" checked>presentations</label>
+					<label class="checkbox file-selector"><input id="search-file-type-other" type="checkbox">all other files</label>
+				</form>
 			</td>
 		</tr>
 	</table>

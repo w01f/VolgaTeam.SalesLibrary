@@ -38,6 +38,9 @@
 					</span>
 				</td>
 			<? endif; ?>
+			<td class="buttons-container">
+				<img class="expanded" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/collapse.png' ?>" alt=""/>
+			</td>
 		</tr>
 	</table>
 <?php endif; ?>

@@ -31,38 +31,34 @@ window.salesDepot = window.salesDepot || { };
 				var shortcutsTab = $('#shortcuts-tab-' + tabId);
 				var pageLogo = shortcutsTab.find('.ribbon-tab-logo');
 				pageLogo.show();
-				content.find('.shortcuts-home-bar img').on('click', function ()
+				content.find('.shortcuts-home-bar .logo-container img').on('click', function ()
 				{
 					pageLogo.trigger("click");
+				});
+				content.find('.shortcuts-home-bar .buttons-container img').on('click', function (e)
+				{
+					var isExpanded = $(this).hasClass('expanded');
+					if (isExpanded)
+					{
+						$(this).removeClass('expanded');
+						$(this).attr('src', $(this).attr('src').replace('collapse', 'expand'));
+						changeSearchBarVisibility(false);
+					}
+					else
+					{
+						$(this).addClass('expanded');
+						$(this).attr('src', $(this).attr('src').replace('expand', 'collapse'));
+						changeSearchBarVisibility(true);
+					}
+					$.updateContentAreaDimensions();
+					e.stopPropagation();
 				});
 				var linkLogo = shortcutsTab.find('.ribbon-link-logo');
 				linkLogo.hide();
 
-				$('.file-filter-panel-switcher').off('click').on('click', function (e)
+				$('.file-filter-panel .file-selector input').off('change').on('change', function ()
 				{
-					e.preventDefault();
-					var fileFilterPanel = $('.file-filter-panel');
-					if (fileFilterPanel.hasClass('open'))
-					{
-						fileFilterPanel.removeClass('open');
-						fileFilterPanel.hide(200, function ()
-						{
-							$.updateContentAreaDimensions();
-						});
-					}
-					else
-					{
-						fileFilterPanel.addClass('open');
-						fileFilterPanel.show(1000, 'swing', function ()
-						{
-							$.updateContentAreaDimensions();
-						});
-					}
-					$.updateContentAreaDimensions();
-				});
-				$('.file-filter-panel .btn').on('click', function ()
-				{
-					$(this).button('toggle');
+					updateSearchButtonState();
 				});
 
 				$('.tags-filter-panel-switcher').off('click').on('click', function (e)
@@ -72,34 +68,32 @@ window.salesDepot = window.salesDepot || { };
 
 				var search = function ()
 				{
-					var searchConditions = $('.shortcuts-search-bar .search-conditions');
+					if ($('.btn.search-bar-run').hasClass('disabled')) return;
 					var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
+					selectTagsByKeyword(textCondition);
+					var searchConditions = $('.shortcuts-search-bar .search-conditions');
 					var selectedFileTypes = [];
-					if ($('#search-file-type-powerpoint').hasClass('active'))
+					if ($('#search-file-type-powerpoint').is(':checked'))
 						selectedFileTypes.push("ppt");
-					if ($('#search-file-type-word').hasClass('active'))
-						selectedFileTypes.push("doc");
-					if ($('#search-file-type-excel').hasClass('active'))
-						selectedFileTypes.push("xls");
-					if ($('#search-file-type-pdf').hasClass('active'))
-						selectedFileTypes.push("pdf");
-					if ($('#search-file-type-video').hasClass('active'))
+					if ($('#search-file-type-video').is(':checked'))
 					{
 						selectedFileTypes.push("video");
 						selectedFileTypes.push("mp4");
 						selectedFileTypes.push("wmv");
 					}
-					if ($('#search-file-type-url').hasClass('active'))
-						selectedFileTypes.push("url");
-					if ($('#search-file-type-image').hasClass('active'))
+					if ($('#search-file-type-other').is(':checked'))
 					{
+						selectedFileTypes.push("doc");
+						selectedFileTypes.push("xls");
+						selectedFileTypes.push("pdf");
+						selectedFileTypes.push("url");
 						selectedFileTypes.push("png");
 						selectedFileTypes.push("jpeg");
 					}
-
 					if (searchConditions.find('.same-page').html() === 'true')
 					{
-						$('.shortcuts-search-bar').removeClass('open').hide();
+						changeSearchBarVisibility(false);
+						$('.shortcuts-home-bar .buttons-container').hide();
 						searchConditions.append('<div class="search-text">' + textCondition + '</div>');
 						$.each(selectedFileTypes, function (index, value)
 						{
@@ -132,13 +126,32 @@ window.salesDepot = window.salesDepot || { };
 				};
 				$('.shortcuts-search-bar .search-bar-text').keypress(function (e)
 				{
+					updateSearchButtonState();
 					if (e.which == 13)
 						search();
 				});
 				$('.shortcuts-search-bar .search-bar-run').on('click', search);
 
 				$('.shortcuts-link img').tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
-
+				$('.shortcuts-link.direct').off('click').on('click', function ()
+				{
+					var linkTooltip = $(this).find('.link-name').html();
+					var linkUrl = $(this).attr('href');
+					$.ajax({
+						type: "POST",
+						url: "statistic/writeActivity",
+						data: {
+							type: 'Shortcuts',
+							subType: 'Open',
+							data: $.toJSON({
+								File: linkTooltip,
+								'Original Format': 'url'
+							})
+						},
+						async: true,
+						dataType: 'html'
+					});
+				});
 				$('.shortcuts-link.preview').off('click').on('click', function ()
 				{
 					$.viewSelectedFormat($(this), false, true);
@@ -178,7 +191,8 @@ window.salesDepot = window.salesDepot || { };
 						},
 						success: function (msg)
 						{
-							$('.shortcuts-search-bar').removeClass('open').hide();
+							changeSearchBarVisibility(false);
+							$('.shortcuts-home-bar .buttons-container').hide();
 							var content = $('#content .shortcuts-page-content');
 
 							if (link.hasClass('search'))
@@ -212,9 +226,71 @@ window.salesDepot = window.salesDepot || { };
 						dataType: 'html'
 					});
 				});
+
+				updateSearchButtonState();
+
+				updateSelectedCategories();
 			},
 			async: true,
 			dataType: 'html'
+		});
+	};
+
+	var changeSearchBarVisibility = function (show)
+	{
+		var searchBar = $('.shortcuts-search-bar');
+		if (show)
+			searchBar.addClass('open').show();
+		else
+			searchBar.removeClass('open').hide();
+	};
+
+	var updateSearchButtonState = function ()
+	{
+		var hasKeyword = $('.shortcuts-search-bar .search-bar-text').val() != "";
+		var searchConditions = $('.shortcuts-search-bar .search-conditions');
+		var hasSuperFilters = searchConditions.find('.super-filter').length > 0;
+		var hasCategories = searchConditions.find('.category').length > 0;
+		var searchButton = $('.btn.search-bar-run');
+		searchButton.removeClass('disabled');
+		if (!(hasKeyword || hasSuperFilters || hasCategories) || !($('#search-file-type-powerpoint').is(':checked') || $('#search-file-type-video').is(':checked') || $('#search-file-type-other').is(':checked')))
+			searchButton.addClass('disabled');
+	};
+
+	var updateSelectedCategories = function ()
+	{
+		var searchConditions = $('.shortcuts-search-bar .search-conditions');
+		var existedSuperFilters = searchConditions.find('.super-filter').map(function ()
+		{
+			return $(this).html();
+		}).get();
+		var existedCategories = searchConditions.find('.category').map(function ()
+		{
+			return $(this).html().split('------')[1];
+		}).get();
+		var categoryStr = $.merge(existedSuperFilters, existedCategories).join(', ');
+		var selectedCategoryLabel = $('.tag-condition-selected');
+		if (categoryStr != "")
+			selectedCategoryLabel.html($('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
+		else
+			selectedCategoryLabel.html('');
+	};
+
+	var selectTagsByKeyword = function (textCondition)
+	{
+		if (textCondition == "") return;
+		textCondition = textCondition.toLowerCase();
+		var searchConditions = $('.shortcuts-search-bar .search-conditions');
+		var categories = searchConditions.find('.tag-condition-selector .item-selector');
+		var existedSelected = searchConditions.find('.category').map(function ()
+		{
+			return $(this).html();
+		}).get();
+		$.each(categories, function ()
+		{
+			var categoryValue = $(this).val();
+			if (categoryValue.toLowerCase().indexOf(textCondition) != -1 && $.inArray(categoryValue, existedSelected) == -1)
+				searchConditions.append($('<div class="category">' + categoryValue + '</div>'));
 		});
 	};
 
@@ -294,6 +370,10 @@ window.salesDepot = window.salesDepot || { };
 					});
 
 					$.fancybox.close();
+
+					updateSearchButtonState();
+
+					updateSelectedCategories();
 				});
 			},
 			afterClose: function ()

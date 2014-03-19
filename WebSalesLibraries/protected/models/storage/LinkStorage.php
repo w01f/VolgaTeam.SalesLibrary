@@ -223,8 +223,7 @@
 					{
 						$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
 						$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
-						if ($contentCondition == '""' || $contentCondition == '')
-							$additionalCategoryCondition = ' or ' . $categoryCondition;
+						$additionalCategoryCondition = ' or ' . $categoryCondition;
 					}
 				}
 
