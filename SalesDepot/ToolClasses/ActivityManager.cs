@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 using SalesDepot.ConfigurationClasses;
 
@@ -8,6 +10,8 @@ namespace SalesDepot.ToolClasses
 	public class ActivityManager
 	{
 		private XDocument _activityStorage;
+		private bool _queueMode;
+		private readonly List<UserActivity> _activitiesInQueue = new List<UserActivity>();
 
 		protected string ActivityFilePath
 		{
@@ -38,21 +42,36 @@ namespace SalesDepot.ToolClasses
 
 		public void AddActivity(UserActivity activity)
 		{
-			_activityStorage.Add(activity.Serialize());
-			SaveStorage();
+			if (_queueMode)
+				_activitiesInQueue.Add(activity);
+			else
+			{
+				_activityStorage.Root.Add(activity.Serialize());
+				SaveStorage();
+			}
 		}
 
 		public void AddUserActivity(string activityType)
 		{
-			var activity = new UserActivity(activityType);
-			_activityStorage.Root.Add(activity.Serialize());
-			SaveStorage();
+			AddActivity(new UserActivity(activityType) { Order = 0 });
 		}
 
 		public void AddLinkAccessActivity(string activityType, string accessedLink, string linkType, string linkedFile, string libraryName, string pageName)
 		{
-			var activity = new LinkAccessActivity(activityType, accessedLink, linkType, linkedFile, libraryName, pageName);
-			_activityStorage.Root.Add(activity.Serialize());
+			AddActivity(new LinkAccessActivity(activityType, accessedLink, linkType, linkedFile, libraryName, pageName));
+		}
+
+		public void StartQueue()
+		{
+			_queueMode = true;
+		}
+
+		public void CloseQueue()
+		{
+			_queueMode = false;
+			foreach (var activity in _activitiesInQueue.OrderBy(a => a.Order))
+				_activityStorage.Root.Add(activity.Serialize());
+			_activitiesInQueue.Clear();
 			SaveStorage();
 		}
 	}
@@ -62,12 +81,14 @@ namespace SalesDepot.ToolClasses
 		public string UserName { get; private set; }
 		public string ActivityType { get; private set; }
 		public DateTime ActivityTime { get; private set; }
+		public int Order { get; set; }
 
 		public UserActivity(string activityType)
 		{
 			ActivityTime = DateTime.Now;
 			UserName = Environment.UserName;
 			ActivityType = activityType;
+			Order = 999;
 		}
 
 		public virtual XElement Serialize()
@@ -76,6 +97,27 @@ namespace SalesDepot.ToolClasses
 			activityElement.Add(new XAttribute("UserName", UserName));
 			activityElement.Add(new XAttribute("ActivityType", ActivityType));
 			activityElement.Add(new XAttribute("ActivityTime", ActivityTime));
+			return activityElement;
+		}
+	}
+
+	public class PageSelectActivity : UserActivity
+	{
+		public string LibraryName { get; private set; }
+		public string PageName { get; private set; }
+
+		public PageSelectActivity(string libraryName, string pageName)
+			: base("Page Selected")
+		{
+			PageName = pageName;
+			LibraryName = libraryName;
+		}
+
+		public override XElement Serialize()
+		{
+			var activityElement = base.Serialize();
+			activityElement.Add(new XAttribute("Library", LibraryName));
+			activityElement.Add(new XAttribute("Page", PageName));
 			return activityElement;
 		}
 	}

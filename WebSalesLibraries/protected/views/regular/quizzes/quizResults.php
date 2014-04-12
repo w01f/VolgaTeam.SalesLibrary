@@ -2,7 +2,7 @@
 	<thead>
 	<tr>
 		<th>Date</th>
-		<th>Score</th>
+		<th>Score <em class="muted">(<? echo $passScore; ?>% Required)</em></th>
 	</tr>
 	</thead>
 	<tbody>

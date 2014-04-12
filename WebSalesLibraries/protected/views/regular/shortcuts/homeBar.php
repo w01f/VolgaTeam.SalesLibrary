@@ -38,9 +38,11 @@
 					</span>
 				</td>
 			<? endif; ?>
-			<td class="buttons-container">
-				<img class="expanded" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/collapse.png' ?>" alt=""/>
-			</td>
+			<? if ($enableSearchBar): ?>
+				<td class="buttons-container">
+					<img class="expanded" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/collapse.png' ?>" alt=""/>
+				</td>
+			<? endif; ?>
 		</tr>
 	</table>
 <?php endif; ?>

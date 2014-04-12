@@ -294,6 +294,7 @@
 					$reportRecord->lastName = $resultRecord['last_name'];
 					$reportRecord->group = $resultRecord['group_name'];
 					$reportRecord->quizName = $resultRecord['quiz_name'];
+					$reportRecord->topLevelName = $resultRecord['top_level_name'];
 					$reportRecord->quizPassDate = $resultRecord['quiz_pass_date'];
 					$reportRecord->quizTryCount = $resultRecord['quiz_try_count'];
 					$reportRecords[] = $reportRecord;
@@ -325,6 +326,7 @@
 					$reportRecord = new QuizPassGroupReportRecord();
 					$reportRecord->group = $resultRecord['group_name'];
 					$reportRecord->quizName = $resultRecord['quiz_name'];
+					$reportRecord->topLevelName = $resultRecord['top_level_name'];
 					$reportRecord->userCount = $resultRecord['user_count'];
 					$reportRecords[] = $reportRecord;
 				}

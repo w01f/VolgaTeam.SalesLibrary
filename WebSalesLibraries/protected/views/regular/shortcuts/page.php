@@ -1,9 +1,9 @@
 <?
 	$grid = $pageRecord->getGrid();
-	$homeBar = $pageRecord->getHomeBar();
-	$this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/homeBar.php', array('homeBar' => $homeBar));
 	$searchBar = $pageRecord->getSearchBar();
-	$this->renderFile(Yii::getPathOfAlias('application.views.regular.shortcuts') . '/searchBar.php', array('searchBar' => $searchBar));
+	$homeBar = $pageRecord->getHomeBar();
+	echo $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => $searchBar->configured), true);
+	echo $this->renderPartial('searchBar', array('searchBar' => $searchBar), true);
 ?>
 <div class="shortcuts-page-content<? echo $grid->configured ? ' grid' : ' wrap'; ?>" id="shortcuts-page-content-<? echo $pageRecord->id_tab; ?>">
 	<? if (isset($linkRecords) && count($linkRecords) > 0): ?>

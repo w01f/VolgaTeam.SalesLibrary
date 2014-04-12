@@ -11,7 +11,7 @@
 		<? endif; ?>
 	</tr>
 	<tr>
-		<td colspan="2"><? echo $this->renderPartial('quizResults', array('quizResults' => $quizResults), true); ?></td>
+		<td colspan="2"><? echo $this->renderPartial('quizResults', array('quizResults' => $quizResults, 'passScore' => $quiz->passScore), true); ?></td>
 	</tr>
 </table>
 <div class="quiz-data">

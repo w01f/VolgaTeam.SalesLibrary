@@ -22,14 +22,14 @@
 				$subFolderOrder = 0;
 				foreach ($subFolders as $name => $path)
 				{
-					$this->loadGroup(null, $name, $path, $subFolderOrder);
+					$this->loadGroup(null, null, $name, $path, $subFolderOrder);
 					$subFolderOrder++;
 				}
 			}
 			echo "Job completed...\n";
 		}
 
-		private function loadGroup($parentGroupId, $name, $path, $order)
+		private function loadGroup($parentGroupId, $topLevelGroupId, $name, $path, $order)
 		{
 			$quizConfigPath = realpath($path . DIRECTORY_SEPARATOR . 'quiz.xml');
 			if (file_exists($quizConfigPath))
@@ -38,10 +38,13 @@
 			{
 				$quizGroup = new QuizGroupStorage();
 				$groupId = uniqid();
+				if (!isset($topLevelGroupId))
+					$topLevelGroupId = $groupId;
 				$quizGroup->id = $groupId;
 				$quizGroup->name = $name;
 				$quizGroup->order = $order;
 				$quizGroup->id_parent = $parentGroupId;
+				$quizGroup->id_top_level = $topLevelGroupId;
 				$quizGroup->save();
 
 				$folderIterator = new DirectoryIterator(realpath($path));
@@ -55,7 +58,7 @@
 				$subFolderOrder = 0;
 				foreach ($subFolders as $name => $path)
 				{
-					$this->loadGroup($groupId, $name, $path, $subFolderOrder);
+					$this->loadGroup($groupId, $topLevelGroupId, $name, $path, $subFolderOrder);
 					$subFolderOrder++;
 				}
 			}

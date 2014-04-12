@@ -8,6 +8,7 @@
 		<td>
 			<label class="control-label" for="login">Enter your username:</label>
 			<input type="text" class="input-block-level" id="login" value="">
+			<p class="text-error"><small>*User Name is <strong style="text-decoration: underline;">NOT</strong> an email address</small></p>
 		</td>
 	</tr>
 	<tr>

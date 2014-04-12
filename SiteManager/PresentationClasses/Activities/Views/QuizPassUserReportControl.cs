@@ -45,7 +45,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			Dock = DockStyle.Fill;
 			_filterControl = new QuizPassFilter();
 			_filterControl.FilterChanged += (o, e) => ApplyData();
-			_filterControl.ColumnsChanged += (o, e) => ApplyColumns();
 		}
 
 		public void ShowView()
@@ -94,7 +93,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.OrderBy(g => g.GroupName).Select(x => x.GroupName).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray());
+			_filterControl.UpdateDataSource(_records.OrderBy(g => g.GroupName).Select(x => x.GroupName).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray(), _records.Select(r => r.topLevelName).Distinct());
 			ApplyData();
 		}
 
@@ -109,19 +108,19 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			using (var dialog = new SaveFileDialog())
 			{
 				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				dialog.FileName = string.Format("UserQuizPerformanceReport({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
-				dialog.Filter = "Excel files|*.xls";
+				dialog.FileName = string.Format("UserQuizPerformanceReport({0}).xlsx", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.Filter = "Excel files|*.xlsx";
 				dialog.Title = "User Quiz Performance Report";
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					var options = new XlsExportOptions();
+					var options = new XlsxExportOptions();
 					options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
 					options.TextExportMode = TextExportMode.Text;
 					options.ExportHyperlinks = true;
 					options.ShowGridLines = true;
-					options.ExportMode = XlsExportMode.SingleFile;
+					options.ExportMode = XlsxExportMode.SingleFile;
 					printableComponentLink.CreateDocument();
-					printableComponentLink.PrintingSystem.ExportToXls(dialog.FileName, options);
+					printableComponentLink.PrintingSystem.ExportToXlsx(dialog.FileName, options);
 
 					if (File.Exists(dialog.FileName))
 						Process.Start(dialog.FileName);
@@ -132,12 +131,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 		private void ApplyData()
 		{
 			var filteredRecords = new List<QuizPassUserReportRecord>();
-			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(g => _filterControl.SelectedGroups.Contains(g.GroupName)) : _records);
+			filteredRecords.AddRange(_filterControl.EnableFilter ?
+				_records.Where(g => _filterControl.SelectedGroups.Contains(g.group) && (g.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))) :
+				_records);
 			gridControlData.DataSource = filteredRecords;
-		}
-
-		private void ApplyColumns()
-		{
 		}
 
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)

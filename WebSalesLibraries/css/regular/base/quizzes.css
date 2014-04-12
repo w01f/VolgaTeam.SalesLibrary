@@ -23,7 +23,8 @@
 
 #quizzes-navigator>div
 {
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 #quizzes-navigator .service-data

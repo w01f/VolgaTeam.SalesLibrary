@@ -107,19 +107,19 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			using (var dialog = new SaveFileDialog())
 			{
 				dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-				dialog.FileName = string.Format("RawData({0}).xls", DateTime.Now.ToString("MMddyy-hmmtt"));
-				dialog.Filter = "Excel files|*.xls";
+				dialog.FileName = string.Format("RawData({0}).xlsx", DateTime.Now.ToString("MMddyy-hmmtt"));
+				dialog.Filter = "Excel files|*.xlsx";
 				dialog.Title = "Export Activities Data";
 				if (dialog.ShowDialog() == DialogResult.OK)
 				{
-					var options = new XlsExportOptions();
+					var options = new XlsxExportOptions();
 					options.SheetName = Path.GetFileNameWithoutExtension(dialog.FileName);
 					options.TextExportMode = TextExportMode.Text;
 					options.ExportHyperlinks = true;
 					options.ShowGridLines = true;
-					options.ExportMode = XlsExportMode.SingleFile;
+					options.ExportMode = XlsxExportMode.SingleFile;
 					printableComponentLink.CreateDocument();
-					printableComponentLink.PrintingSystem.ExportToXls(dialog.FileName, options);
+					printableComponentLink.PrintingSystem.ExportToXlsx(dialog.FileName, options);
 
 					if (File.Exists(dialog.FileName))
 						Process.Start(dialog.FileName);

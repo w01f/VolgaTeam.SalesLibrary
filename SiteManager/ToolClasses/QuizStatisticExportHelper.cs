@@ -6,12 +6,12 @@ using SalesDepot.CoreObjects.InteropClasses;
 using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.Services.StatisticService;
 
-namespace SalesDepot.SiteManager.ToolClasses
-{
+namespace SalesDepot.SiteManager.ToolClasses{
 	public class QuizStatisticExportHelper
 	{
 		public static void ExportQuizStatistic(string filePath,
 			string header,
+			string group,
 			int totalUsers,
 			int totalGroups,
 			IEnumerable<QuizPassGroupReportRecord> totalStatistic,
@@ -35,11 +35,11 @@ namespace SalesDepot.SiteManager.ToolClasses
 					{
 						sheet = workbook.Worksheets.Add(After: sheet);
 					}
-					FillGroupPage(sheet, header, updated, groupRecords);
+					FillGroupPage(sheet, header, group, updated, groupRecords);
 					currentSheetIndex++;
 				}
 				sheet = workbook.Worksheets[1];
-				FillSummaryPage(sheet, header, totalUsers, totalGroups, updated, totalStatistic);
+				FillSummaryPage(sheet, header, group, totalUsers, totalGroups, updated, totalStatistic);
 				sheet.Select();
 				workbook.SaveAs(filePath);
 				workbook.Close();
@@ -54,7 +54,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 		}
 
 
-		private static void FillSummaryPage(Worksheet sheet, string header, int totalUsers, int totalGroups, string updated, IEnumerable<QuizPassGroupReportRecord> totalRecords)
+		private static void FillSummaryPage(Worksheet sheet, string header, string topLevelGroup, int totalUsers, int totalGroups, string updated, IEnumerable<QuizPassGroupReportRecord> totalRecords)
 		{
 			const string takenHeader = "TAKEN:";
 			const string passedHeader = "PASSED:";
@@ -97,7 +97,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 			sheet.Range[String.Format("B{0}", rowPosition)].Value = String.Format("# of Sales Reps Certified: {0}", 0);
 			rowPosition += 2;
 
-			sheet.Range[String.Format("B{0}", rowPosition)].Value = "Total Quizzes in RAYCOM Sales Certification Program:";
+			sheet.Range[String.Format("B{0}", rowPosition)].Value = String.IsNullOrEmpty(topLevelGroup) ? "Total Quizzes in RAYCOM Sales Certification Program:" : String.Format("Total Quizzes in {0}", topLevelGroup);
 			sheet.Range[String.Format("B{0}", rowPosition)].Interior.Color = 12632256;
 			sheet.Range[String.Format("C{0}", rowPosition)].Value = takenHeader;
 			sheet.Range[String.Format("C{0}", rowPosition)].Interior.Color = 12632256;
@@ -256,7 +256,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 			sheet.Outline.ShowLevels(1);
 		}
 
-		private static void FillGroupPage(Worksheet sheet, string header, string updated, IEnumerable<QuizPassUserReportRecord> groupRecords)
+		private static void FillGroupPage(Worksheet sheet, string header, string topLevelGroup, string updated, IEnumerable<QuizPassUserReportRecord> groupRecords)
 		{
 			const string takenHeader = "TAKEN:";
 			const string passedHeader = "PASSED:";
@@ -290,8 +290,7 @@ namespace SalesDepot.SiteManager.ToolClasses
 			sheet.Range[String.Format("C{0}", rowPosition)].HorizontalAlignment = XlHAlign.xlHAlignGeneral;
 			rowPosition += 2;
 
-			sheet.Range[String.Format("B{0}", rowPosition)].Value = "Total Quizzes in RAYCOM Sales Certification Program:";
-			sheet.Range[String.Format("B{0}", rowPosition)].Interior.Color = 12632256;
+			sheet.Range[String.Format("B{0}", rowPosition)].Value = String.IsNullOrEmpty(topLevelGroup) ? "Total Quizzes in RAYCOM Sales Certification Program:" : String.Format("Total Quizzes in {0}", topLevelGroup); sheet.Range[String.Format("B{0}", rowPosition)].Interior.Color = 12632256;
 			sheet.Range[String.Format("C{0}", rowPosition)].Value = takenHeader;
 			sheet.Range[String.Format("C{0}", rowPosition)].Interior.Color = 12632256;
 			sheet.Range[String.Format("D{0}", rowPosition)].Value = passedHeader;

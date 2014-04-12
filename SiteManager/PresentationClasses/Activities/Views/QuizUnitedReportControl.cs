@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
-using DevExpress.XtraPrinting;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.SiteManager.PresentationClasses.Activities.Filters;
 using SalesDepot.SiteManager.ToolClasses;
@@ -95,7 +93,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.OrderBy(g => g.GroupName).Select(x => x.GroupName).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray());
+			_filterControl.UpdateDataSource(_records.OrderBy(g => g.GroupName).Select(x => x.GroupName).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray(), _records.Select(r => r.topLevelName).Distinct());
 			ApplyData();
 		}
 
@@ -121,6 +119,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 					EndDate.ToString("M/d/yy"),
 					Environment.NewLine,
 					_filteredRecords.Select(r => r.quizName).Distinct().Count());
+				var topLevelGroup = _filterControl.Enabled ? _filterControl.TopLevelQuizGroup : String.Empty;
 				var totalUsers = _filteredRecords.Select(r => r.FullName).Distinct().Count();
 				var totalGroups = _filteredRecords.Select(r => r.group).Distinct().Count();
 				using (var form = new FormProgress())
@@ -131,6 +130,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 					form.TopMost = true;
 					var thread = new Thread(() => QuizStatisticExportHelper.ExportQuizStatistic(dialog.FileName,
 						header,
+						topLevelGroup,
 						totalUsers,
 						totalGroups,
 						xtraTabControlGroups.TabPages.OfType<QuizUnitedReportTotalControl>().First().Records,
@@ -155,8 +155,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 		{
 			xtraTabControlGroups.TabPages.Clear();
 			_filteredRecords.Clear();
-			_filteredRecords.AddRange(_records.Where(record => record.GroupName != null && (!_filterControl.EnableFilter || _filterControl.SelectedGroups.Contains(record.GroupName))));
-			var quizCount = _records.Select(r => r.quizName).Distinct().Count();
+			_filteredRecords.AddRange(_records.Where(record => record.GroupName != null && (!_filterControl.EnableFilter || (_filterControl.SelectedGroups.Contains(record.GroupName) && (record.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))))));
+			var quizCount = _records.Where(r => r.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup)).Select(r => r.quizName).Distinct().Count();
 			var totalPage = new QuizUnitedReportTotalControl(
 				_filteredRecords.GroupBy(r => new { r.GroupName, r.quizName }).Select(g => new QuizPassGroupReportRecord
 			{
@@ -165,8 +165,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				Taken = g.Sum(r => r.quizTryCount),
 				Passed = g.Count()
 			}), quizCount) { Text = "Total Summary" };
-			_filterControl.CollapsedAll += (o, e) => totalPage.CollapseAll();
-			_filterControl.ExpandedAll += (o, e) => totalPage.ExpandAll();
+			_filterControl.CollapsedAll -= totalPage.CollapseAll;
+			_filterControl.ExpandedAll -= totalPage.ExpandAll;
+			_filterControl.CollapsedAll += totalPage.CollapseAll;
+			_filterControl.ExpandedAll += totalPage.ExpandAll;
 			xtraTabControlGroups.TabPages.Add(totalPage);
 
 			foreach (var group in _filteredRecords.OrderBy(r => r.GroupName).Select(r => r.GroupName).Distinct())
@@ -176,10 +178,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				_filterControl.ExpandedAll += (o, e) => groupPage.ExpandAll();
 				xtraTabControlGroups.TabPages.Add(groupPage);
 			}
-		}
-
-		private void ApplyColumns()
-		{
 		}
 	}
 }

@@ -13,7 +13,10 @@
 	</tr>
 	<? if ($quizResults->successful): ?>
 		<tr>
-			<td colspan="2"><h2 class="success">Congratulations! You PASSED!</h2></td>
+			<td colspan="2">
+				<h2 class="success">Congratulations! You PASSED!</h2>
+				<h4>(<? echo $quizResults->score; ?>%)</h4>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
