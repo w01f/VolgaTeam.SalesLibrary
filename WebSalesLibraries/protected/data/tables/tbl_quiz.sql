@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz` (
   `order` int(11) NOT NULL,
   `name` varchar(256) NOT NULL,
   `source_path` varchar(512) NOT NULL,
+  `pass_score` int(11) NOT NULL,
   `config` longblob,
   PRIMARY KEY (`id`),
   KEY `group` (`id_group`),

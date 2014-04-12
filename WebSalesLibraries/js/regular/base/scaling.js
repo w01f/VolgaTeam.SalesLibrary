@@ -157,9 +157,9 @@ window.salesDepot = window.salesDepot || { };
 			'height': (height - content.find('.shortcuts-home-bar img').height() - content.find('.shortcuts-search-bar.open').height() - 20) + 'px'
 		});
 
+		var searchBarContainer = $('.shortcuts-search-bar');
 		if (searchBarContainer.css('display') != 'none')
 		{
-			var searchBarContainer = $('.shortcuts-search-bar');
 			var searchBarInput = searchBarContainer.find('.search-bar-text');
 			var searchBarGroup = searchBarInput.parent();
 			var searchBarButtonsWidth = searchBarGroup.width() - searchBarInput.width();

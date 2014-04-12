@@ -80,6 +80,8 @@
 			$quiz->order = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 0;
 			$queryResult = $xpath->query('//Quiz/ID');
 			$quiz->unique_id = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
+			$queryResult = $xpath->query('//Quiz/Pass');
+			$quiz->pass_score = $queryResult->length > 0 ? intval(trim($queryResult->item(0)->nodeValue)) : 100;
 			$quiz->config = $configContent;
 			$quiz->save();
 		}

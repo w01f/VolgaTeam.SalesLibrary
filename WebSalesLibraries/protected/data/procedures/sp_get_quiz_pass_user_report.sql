@@ -14,12 +14,13 @@ from tbl_quiz q
           qr.quiz_set as quiz_set,
           max(qr.date) as pass_date
         from tbl_quiz_result qr
+          join tbl_quiz sub_q on sub_q.unique_id = qr.id_quiz
         where qr.date >= start_date and qr.date <= end_date
         group by
           qr.id_quiz,
           qr.id_user,
           qr.quiz_set
-        having min(qr.successful) = 1
+        having (sum(qr.successful)/count(qr.successful)*100) >= max(sub_q.pass_score)
         ) quiz_results_passed on quiz_results_passed.id_quiz = q.unique_id
   join (select
           qr.id_quiz as id_quiz,

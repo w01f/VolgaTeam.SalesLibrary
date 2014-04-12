@@ -3,6 +3,7 @@
 	{
 		public $title;
 		public $questionResults;
+		public $passScore;
 
 		public $correctAnswers;
 		public $wrongAnswers;
@@ -14,6 +15,7 @@
 		public function __construct($resultRecords, $quiz)
 		{
 			$this->title = $quiz->title;
+			$this->passScore = $quiz->passScore;
 			foreach ($resultRecords as $resultRecord)
 			{
 				$this->date = $resultRecord->date;
@@ -56,6 +58,6 @@
 			}
 			$this->totalAnswers = $this->correctAnswers + $this->wrongAnswers;
 			$this->score = $this->totalAnswers > 0 ? round(($this->correctAnswers / $this->totalAnswers) * 100) : 0;
-			$this->successful = $this->totalAnswers == $this->correctAnswers;
+			$this->successful = $this->score >= $this->passScore;
 		}
 	}

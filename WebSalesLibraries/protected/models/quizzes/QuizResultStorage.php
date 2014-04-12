@@ -1,6 +1,8 @@
 <?php
 	class QuizResultStorage extends CActiveRecord
 	{
+		public $quiz_score;
+		
 		public static function model($className = __CLASS__)
 		{
 			return parent::model($className);

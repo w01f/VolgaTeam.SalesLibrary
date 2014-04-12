@@ -107,7 +107,7 @@
 						$message->cc = Yii::app()->params['email']['quiz']['copy'];
 					$message->view = 'sendQuizResult';
 					$message->viewVars = array('quizResults' => $quizResults);
-					$message->send();
+					//$message->send();
 				}
 				$this->renderPartial('quizEnd', array('quiz' => $quiz, 'quizResults' => $quizResults), false, true);
 			}

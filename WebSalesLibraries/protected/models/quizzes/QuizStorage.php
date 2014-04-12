@@ -21,23 +21,16 @@
 
 		public function isPassed($userId)
 		{
-			$all = self::model()->with(array(
-				'results' => array(
-					'select' => false,
-					'joinType' => 'INNER JOIN',
-					'condition' => 'results.id_user=' . $userId . " and t.id='" . $this->id."'",
-				),
-			))->count();
-			if ($all == 0)
-				return false;
-			$successful = self::model()->with(array(
-				'results' => array(
-					'select' => false,
-					'joinType' => 'INNER JOIN',
-					'condition' => 'results.successful=1 and results.id_user=' . $userId . " and t.id='" . $this->id."'",
-				),
-			))->count();
-			return $all == $successful;
+			$criteria = new CDbCriteria;
+			$criteria->select = '(sum(t.successful)/count(t.successful))*100 as quiz_score'; // select fields which you want in output
+			$criteria->condition = 't.id_user=:userId and t.id_quiz=:quizId';
+			$criteria->params = array(':userId' => $userId, ':quizId' => $this->unique_id);
+			$criteria->group = 't.quiz_set';
+			$quizResults = QuizResultStorage::model()->findAll($criteria);
+			foreach ($quizResults as $quizResult)
+				if ($quizResult->quiz_score >= $this->pass_score)
+					return true;
+			return false;
 		}
 
 		public function getEntity()
@@ -51,8 +44,8 @@
 			$quizItems = null;
 			$userId = Yii::app()->user->getId();
 			$quizRecords = isset($groupId) ?
-				self::model()->findAll(array('order'=>"'order'", 'condition'=>'id_group=:x', 'params'=>array(':x'=>$groupId))):
-				self::model()->findAll(array('order'=>"'order'", 'condition'=>'id_group is null'));
+				self::model()->findAll(array('order' => "'order'", 'condition' => 'id_group=:x', 'params' => array(':x' => $groupId))) :
+				self::model()->findAll(array('order' => "'order'", 'condition' => 'id_group is null'));
 			foreach ($quizRecords as $quizRecord)
 			{
 				$quizItem = new QuizItem();

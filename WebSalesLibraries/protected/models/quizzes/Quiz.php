@@ -1,4 +1,5 @@
 <?php
+
 	class Quiz
 	{
 		public $id;
@@ -10,6 +11,7 @@
 		public $footer;
 		public $isActive;
 		public $allowRetake;
+		public $passScore;
 		public $sendScoreToAdmin;
 		public $adminEmails;
 		public $coverLogoPath;
@@ -32,6 +34,7 @@
 			$this->id = $quizRecord->id;
 			$this->config = $quizRecord->config;
 			$this->title = $quizRecord->name;
+			$this->passScore = $quizRecord->pass_score;
 			$queryResult = $xpath->query('//Quiz/ID');
 			$this->uniqId = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : '';
 			$queryResult = $xpath->query('//Quiz/Date');
