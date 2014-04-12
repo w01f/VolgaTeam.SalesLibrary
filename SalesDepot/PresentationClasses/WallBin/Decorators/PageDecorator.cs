@@ -8,6 +8,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
 using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.ToolClasses;
 
 namespace SalesDepot.PresentationClasses.WallBin.Decorators
 {
@@ -248,8 +249,9 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 				ReadyToShow = true;
 			}
 			UpdatePage(true);
-			if (!silent)
-				ApplyPageLogo();
+			if (silent) return;
+			ApplyPageLogo();
+			AppManager.Instance.ActivityManager.AddActivity(new PageSelectActivity(Page.Parent.Name, Page.Name));
 		}
 	}
 

@@ -146,6 +146,7 @@
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="group" type="xsd:string" />
           <xsd:element name="quizName" type="xsd:string" />
+          <xsd:element name="topLevelName" type="xsd:string" />
           <xsd:element name="quizPassDate" type="xsd:string" />
           <xsd:element name="quizTryCount" type="xsd:int" />
         </xsd:all>
@@ -161,6 +162,7 @@
         <xsd:all>
           <xsd:element name="group" type="xsd:string" />
           <xsd:element name="quizName" type="xsd:string" />
+          <xsd:element name="topLevelName" type="xsd:string" />
           <xsd:element name="userCount" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>

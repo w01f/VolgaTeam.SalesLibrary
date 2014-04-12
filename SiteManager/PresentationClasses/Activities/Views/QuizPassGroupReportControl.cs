@@ -45,7 +45,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			Dock = DockStyle.Fill;
 			_filterControl = new QuizPassFilter();
 			_filterControl.FilterChanged += (o, e) => ApplyData();
-			_filterControl.ColumnsChanged += (o, e) => ApplyColumns();
 		}
 
 		public void ShowView()
@@ -94,7 +93,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.OrderBy(g => g.group).Select(x => x.group).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray());
+			_filterControl.UpdateDataSource(_records.OrderBy(g => g.group).Select(x => x.group).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray(), _records.Select(r => r.topLevelName).Distinct());
 			ApplyData();
 		}
 
@@ -132,12 +131,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 		private void ApplyData()
 		{
 			var filteredRecords = new List<QuizPassGroupReportRecord>();
-			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(g => _filterControl.SelectedGroups.Contains(g.group)) : _records);
+			filteredRecords.AddRange(_filterControl.EnableFilter ?
+				_records.Where(g => _filterControl.SelectedGroups.Contains(g.group) && (g.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))) : 
+				_records);
 			gridControlData.DataSource = filteredRecords;
-		}
-
-		private void ApplyColumns()
-		{
 		}
 
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)

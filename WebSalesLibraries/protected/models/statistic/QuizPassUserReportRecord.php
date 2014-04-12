@@ -26,6 +26,11 @@
 		 * @var string group
 		 * @soap
 		 */
+		public $topLevelName;
+		/**
+		 * @var string group
+		 * @soap
+		 */
 		public $quizPassDate;
 		/**
 		 * @var int groupUserCount

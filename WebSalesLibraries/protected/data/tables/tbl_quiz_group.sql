@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `tbl_quiz_group` (
   `id` varchar(36) NOT NULL,
   `name` varchar(256) NOT NULL,
   `id_parent` varchar(36) NULL,
+  `id_top_level` varchar(36) NULL,
   `order` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `tab` (`id_parent`)

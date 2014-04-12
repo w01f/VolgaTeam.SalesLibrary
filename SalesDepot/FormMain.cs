@@ -137,44 +137,43 @@ namespace SalesDepot
 			SettingsManager.Instance.CalendarView = false;
 			SettingsManager.Instance.SaveSettings();
 
-			if (_alowToSave)
+			if (!_alowToSave) return;
+
+			if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
 			{
-				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemHome || ribbonControl.SelectedRibbonTabItem == ribbonTabItemSettings)
-				{
-					if (!pnContainer.Controls.Contains(TabHome))
-						pnContainer.Controls.Add(TabHome);
-					TabHome.ShowTab();
-				}
-				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
-				{
-					if (!pnContainer.Controls.Contains(TabSearch))
-						pnContainer.Controls.Add(TabSearch);
-					TabSearch.ShowTab();
-				}
-				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
-				{
-					if (!pnContainer.Controls.Contains(TabOvernightsCalendar))
-						pnContainer.Controls.Add(TabOvernightsCalendar);
-					TabOvernightsCalendar.ShowTab();
-				}
-				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule)
-				{
-					if (!pnContainer.Controls.Contains(TabProgramSchedule))
-						pnContainer.Controls.Add(TabProgramSchedule);
-					TabProgramSchedule.ShowTab();
-				}
-				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
-				{
-					if (!pnContainer.Controls.Contains(TabProgramSearch))
-						pnContainer.Controls.Add(TabProgramSearch);
-					TabProgramSearch.ShowTab();
-				}
-				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
-				{
-					if (!pnContainer.Controls.Contains(TabQBuilder))
-						pnContainer.Controls.Add(TabQBuilder);
-					TabQBuilder.ShowTab();
-				}
+				if (!pnContainer.Controls.Contains(TabHome))
+					pnContainer.Controls.Add(TabHome);
+				TabHome.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
+			{
+				if (!pnContainer.Controls.Contains(TabSearch))
+					pnContainer.Controls.Add(TabSearch);
+				TabSearch.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
+			{
+				if (!pnContainer.Controls.Contains(TabOvernightsCalendar))
+					pnContainer.Controls.Add(TabOvernightsCalendar);
+				TabOvernightsCalendar.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule)
+			{
+				if (!pnContainer.Controls.Contains(TabProgramSchedule))
+					pnContainer.Controls.Add(TabProgramSchedule);
+				TabProgramSchedule.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
+			{
+				if (!pnContainer.Controls.Contains(TabProgramSearch))
+					pnContainer.Controls.Add(TabProgramSearch);
+				TabProgramSearch.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemQBuilder)
+			{
+				if (!pnContainer.Controls.Contains(TabQBuilder))
+					pnContainer.Controls.Add(TabQBuilder);
+				TabQBuilder.ShowTab();
 			}
 		}
 
@@ -188,6 +187,7 @@ namespace SalesDepot
 		{
 			RegistryHelper.SalesDepotHandle = Handle;
 			RegistryHelper.MaximizeSalesDepot = true;
+			AppManager.Instance.ActivityManager.StartQueue();
 			ribbonControl.Visible = false;
 			pnEmpty.BringToFront();
 			var thread = new Thread(delegate()
@@ -235,6 +235,7 @@ namespace SalesDepot
 			ribbonControl.Visible = true;
 			pnContainer.BringToFront();
 			AppManager.Instance.ActivateMainForm();
+			AppManager.Instance.ActivityManager.CloseQueue();
 			if (LibraryManager.Instance.LibraryPackageCollection.Count == 0)
 			{
 				ribbonBarStations.Enabled = false;

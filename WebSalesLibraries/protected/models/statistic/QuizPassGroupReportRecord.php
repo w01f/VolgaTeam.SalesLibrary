@@ -13,6 +13,11 @@
 		 */
 		public $quizName;
 		/**
+		 * @var string group
+		 * @soap
+		 */
+		public $topLevelName;
+		/**
 		 * @var int groupUserCount
 		 * @soap
 		 */

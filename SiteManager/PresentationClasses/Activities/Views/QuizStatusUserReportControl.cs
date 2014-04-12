@@ -45,7 +45,6 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			Dock = DockStyle.Fill;
 			_filterControl = new QuizPassFilter();
 			_filterControl.FilterChanged += (o, e) => ApplyData();
-			_filterControl.ColumnsChanged += (o, e) => ApplyColumns();
 		}
 
 		public void ShowView()
@@ -94,7 +93,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 				}
 			}
 			updateMessage = message;
-			_filterControl.UpdateDataSource(_records.OrderBy(g => g.GroupName).Select(x => x.GroupName).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray());
+			_filterControl.UpdateDataSource(_records.OrderBy(g => g.GroupName).Select(x => x.GroupName).Where(x => !String.IsNullOrEmpty(x)).Distinct().ToArray(), _records.Select(r => r.topLevelName).Distinct());
 			ApplyData();
 		}
 
@@ -130,18 +129,17 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 		private void ApplyData()
 		{
 			var filteredRecords = new List<QuizPassUserReportRecord>();
-			var groupedRecords = _records.GroupBy(r => new { r.FullName, r.GroupName }).Select(g => new QuizPassUserReportRecord
+			var groupedRecords = _records.GroupBy(r => new { r.FullName, r.GroupName, r.topLevelName }).Select(g => new QuizPassUserReportRecord
 			{
 				FullName = g.Key.FullName,
 				GroupName = g.Key.GroupName,
+				topLevelName = g.Key.topLevelName,
 				QuizzesPassed = String.Join(Environment.NewLine, g.OrderBy(x => x.Date).Select(x => x.quizName))
 			});
-			filteredRecords.AddRange(_filterControl.EnableFilter ? groupedRecords.Where(g => _filterControl.SelectedGroups.Contains(g.GroupName)) : groupedRecords);
+			filteredRecords.AddRange(_filterControl.EnableFilter ?
+				groupedRecords.Where(g => _filterControl.SelectedGroups.Contains(g.GroupName) && (g.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))) :
+				groupedRecords);
 			gridControlData.DataSource = filteredRecords;
-		}
-
-		private void ApplyColumns()
-		{
 		}
 
 		private void printableComponentLink_CreateReportHeaderArea(object sender, CreateAreaEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using DevExpress.XtraEditors.Controls;
 
@@ -9,15 +10,15 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 	[ToolboxItem(false)]
 	public partial class QuizPassFilter : UserControl
 	{
+		private const string AllTopLevelGroups = "All Courses";
 		private bool _init;
 
 		public bool EnableFilter { get; private set; }
 		public event EventHandler<EventArgs> FilterChanged;
 
-		public event EventHandler<EventArgs> ColumnsChanged;
-
 		public List<string> AllGroups { get; private set; }
 		public List<string> SelectedGroups { get; private set; }
+		public string TopLevelQuizGroup { get; private set; }
 
 		public QuizPassFilter()
 		{
@@ -27,7 +28,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 			SelectedGroups = new List<string>();
 		}
 
-		public void UpdateDataSource(string[] groups)
+		public void UpdateDataSource(IEnumerable<string> groups, IEnumerable<string> topLevelQuizGroups)
 		{
 			_init = true;
 
@@ -43,6 +44,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 
 			labelControlGroupsTitle.Text = string.Format("Groups: {0}", AllGroups.Count);
 
+			TopLevelQuizGroup = String.Empty;
+			comboBoxTopLevel.Properties.Items.Clear();
+			comboBoxTopLevel.Properties.Items.Add(AllTopLevelGroups);
+			comboBoxTopLevel.Properties.Items.AddRange(topLevelQuizGroups.ToArray());
+			comboBoxTopLevel.SelectedIndex = 0;
+
 			_init = false;
 		}
 
@@ -52,6 +59,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 			checkedListBoxControlGroups.Enabled = EnableFilter;
 			buttonXGroupsAll.Enabled = EnableFilter;
 			buttonXGroupsNone.Enabled = EnableFilter;
+			comboBoxTopLevel.Enabled = EnableFilter;
 			if (FilterChanged != null)
 				FilterChanged(this, new EventArgs());
 		}
@@ -87,10 +95,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Filters
 			_init = false;
 		}
 
-		private void checkEditShowColumns_CheckedChanged(object sender, EventArgs e)
+		private void comboBoxTopLevel_EditValueChanged(object sender, EventArgs e)
 		{
-			if (ColumnsChanged != null)
-				ColumnsChanged(this, new EventArgs());
+			if (_init) return;
+			TopLevelQuizGroup = comboBoxTopLevel.SelectedIndex != 0 ? comboBoxTopLevel.EditValue as String : String.Empty;
+			if (FilterChanged != null)
+				FilterChanged(this, new EventArgs());
 		}
 	}
 }

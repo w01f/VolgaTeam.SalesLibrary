@@ -89,6 +89,7 @@ namespace SalesDepot.Services
 			try
 			{
 				var client = new StatisticControllerService();
+				client.Timeout = 600000;
 				client.Url = string.Format("{0}/statistic/quote?ws=1", _website);
 				return client;
 			}
@@ -103,6 +104,7 @@ namespace SalesDepot.Services
 			try
 			{
 				var client = new TickerControllerService();
+				client.Timeout = 600000;
 				client.Url = string.Format("{0}/ticker/quote?ws=1", _website);
 				return client;
 			}
@@ -117,6 +119,7 @@ namespace SalesDepot.Services
 			try
 			{
 				var client = new InactiveusersControllerService();
+				client.Timeout = 600000;
 				client.Url = string.Format("{0}/inactiveusers/quote?ws=1", _website);
 				return client;
 			}

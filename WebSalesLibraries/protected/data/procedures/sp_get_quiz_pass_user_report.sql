@@ -5,9 +5,12 @@ select
   u.first_name,
   u.last_name,
   concat(ExtractValue(q.config,'/Quiz/Subtitle'),' - ',q.name,' - ',ExtractValue(q.config,'/Quiz/Date')) as quiz_name,
+  tlg.name as top_level_name,
   group_concat(distinct g.name separator ',') as group_name,
   quiz_results_all.try_count as quiz_try_count
 from tbl_quiz q
+  left join tbl_quiz_group qg on qg.id = q.id_group
+  left join tbl_quiz_group tlg on tlg.id = qg.id_top_level
   join (select
           qr.id_quiz as id_quiz,
           qr.id_user as id_user,

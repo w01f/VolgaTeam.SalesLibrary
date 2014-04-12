@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using DevExpress.Data;
@@ -27,12 +28,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.Views
 			gridControlData.DataSource = Records;
 		}
 
-		public void CollapseAll()
+		public void CollapseAll(object sender, EventArgs e)
 		{
 			gridViewData.CollapseAllGroups();
 		}
 
-		public void ExpandAll()
+		public void ExpandAll(object sender, EventArgs e)
 		{
 			gridViewData.ExpandAllGroups();
 		}

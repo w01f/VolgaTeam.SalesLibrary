@@ -36,9 +36,11 @@
 			this.labelControlGroupsTitle = new DevExpress.XtraEditors.LabelControl();
 			this.buttonXGroupsAll = new DevComponents.DotNetBar.ButtonX();
 			this.buttonXGroupsNone = new DevComponents.DotNetBar.ButtonX();
+			this.comboBoxTopLevel = new DevExpress.XtraEditors.ComboBoxEdit();
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxTopLevel.Properties)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// checkEditEnableFilter
@@ -82,7 +84,7 @@
 			this.checkedListBoxControlGroups.Location = new System.Drawing.Point(8, 91);
 			this.checkedListBoxControlGroups.Name = "checkedListBoxControlGroups";
 			this.checkedListBoxControlGroups.SelectionMode = System.Windows.Forms.SelectionMode.None;
-			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 331);
+			this.checkedListBoxControlGroups.Size = new System.Drawing.Size(222, 299);
 			this.checkedListBoxControlGroups.StyleController = this.styleController;
 			this.checkedListBoxControlGroups.TabIndex = 1;
 			this.checkedListBoxControlGroups.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkedListBoxControlGroups_ItemCheck);
@@ -127,10 +129,26 @@
 			this.buttonXGroupsNone.TextColor = System.Drawing.Color.Black;
 			this.buttonXGroupsNone.Click += new System.EventHandler(this.buttonXGroupsNone_Click);
 			// 
+			// comboBoxTopLevel
+			// 
+			this.comboBoxTopLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxTopLevel.Enabled = false;
+			this.comboBoxTopLevel.Location = new System.Drawing.Point(8, 399);
+			this.comboBoxTopLevel.Name = "comboBoxTopLevel";
+			this.comboBoxTopLevel.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.comboBoxTopLevel.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+			this.comboBoxTopLevel.Size = new System.Drawing.Size(222, 22);
+			this.comboBoxTopLevel.StyleController = this.styleController;
+			this.comboBoxTopLevel.TabIndex = 22;
+			this.comboBoxTopLevel.EditValueChanged += new System.EventHandler(this.comboBoxTopLevel_EditValueChanged);
+			// 
 			// QuizPassFilter
 			// 
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
+			this.Controls.Add(this.comboBoxTopLevel);
 			this.Controls.Add(this.buttonXGroupsNone);
 			this.Controls.Add(this.buttonXGroupsAll);
 			this.Controls.Add(this.labelControlGroupsTitle);
@@ -142,6 +160,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.checkEditEnableFilter.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlGroups)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.comboBoxTopLevel.Properties)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -156,5 +175,6 @@
 		private DevExpress.XtraEditors.LabelControl labelControlGroupsTitle;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsAll;
 		private DevComponents.DotNetBar.ButtonX buttonXGroupsNone;
+		private DevExpress.XtraEditors.ComboBoxEdit comboBoxTopLevel;
 	}
 }

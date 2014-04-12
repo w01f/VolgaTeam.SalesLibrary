@@ -78,6 +78,7 @@
 			this.itemContainerActivitiesViews3 = new DevComponents.DotNetBar.ItemContainer();
 			this.buttonItemActivitiesViewsReport8 = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemActivitiesViewsReport9 = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemActivitiesViewsReport10 = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarActivitiesSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditActivitiesSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerActivitiesSite = new DevComponents.DotNetBar.ItemContainer();
@@ -149,7 +150,6 @@
 			this.ribbonTabItemQBuilder = new DevComponents.DotNetBar.RibbonTabItem();
 			this.ribbonTabItemUtilities = new DevComponents.DotNetBar.RibbonTabItem();
 			this.pnMain = new System.Windows.Forms.Panel();
-			this.buttonItemActivitiesViewsReport10 = new DevComponents.DotNetBar.ButtonItem();
 			((System.ComponentModel.ISupportInitialize)(this.styleController)).BeginInit();
 			this.ribbonControl.SuspendLayout();
 			this.ribbonPanelUsers.SuspendLayout();
@@ -854,8 +854,8 @@
 			this.itemContainerActivitiesViews2.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
 			this.itemContainerActivitiesViews2.Name = "itemContainerActivitiesViews2";
 			this.itemContainerActivitiesViews2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemActivitiesViewsReport5,
             this.buttonItemActivitiesViewsReport4,
+            this.buttonItemActivitiesViewsReport5,
             this.buttonItemActivitiesViewsReport6,
             this.buttonItemActivitiesViewsReport7});
 			// 
@@ -922,6 +922,13 @@
 			this.buttonItemActivitiesViewsReport9.SubItemsExpandWidth = 14;
 			this.buttonItemActivitiesViewsReport9.Tag = "9";
 			this.buttonItemActivitiesViewsReport9.Text = "Report #9";
+			// 
+			// buttonItemActivitiesViewsReport10
+			// 
+			this.buttonItemActivitiesViewsReport10.Name = "buttonItemActivitiesViewsReport10";
+			this.buttonItemActivitiesViewsReport10.SubItemsExpandWidth = 14;
+			this.buttonItemActivitiesViewsReport10.Tag = "10";
+			this.buttonItemActivitiesViewsReport10.Text = "Report #10";
 			// 
 			// ribbonBarActivitiesSite
 			// 
@@ -2124,13 +2131,6 @@
 			this.pnMain.Name = "pnMain";
 			this.pnMain.Size = new System.Drawing.Size(993, 387);
 			this.pnMain.TabIndex = 3;
-			// 
-			// buttonItemActivitiesViewsReport10
-			// 
-			this.buttonItemActivitiesViewsReport10.Name = "buttonItemActivitiesViewsReport10";
-			this.buttonItemActivitiesViewsReport10.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesViewsReport10.Tag = "10";
-			this.buttonItemActivitiesViewsReport10.Text = "Report #10";
 			// 
 			// FormMain
 			// 
