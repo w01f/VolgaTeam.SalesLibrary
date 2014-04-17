@@ -27,3 +27,4 @@
 		</td>
 	</tr>
 </table>
+<p class="text-center"><em><small class="muted"><? echo $quiz->subtitle; ?></small></em></p>

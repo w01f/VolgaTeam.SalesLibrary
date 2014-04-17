@@ -3,14 +3,14 @@
 	$searchBar = $pageRecord->getSearchBar();
 	$homeBar = $pageRecord->getHomeBar();
 	echo $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => $searchBar->configured), true);
-	echo $this->renderPartial('searchBar', array('searchBar' => $searchBar), true);
+	echo $this->renderPartial('searchBar', array('searchBar' => $searchBar, 'pageId' => $pageRecord->id), true);
 ?>
 <div class="shortcuts-page-content<? echo $grid->configured ? ' grid' : ' wrap'; ?>" id="shortcuts-page-content-<? echo $pageRecord->id_tab; ?>">
 	<? if (isset($linkRecords) && count($linkRecords) > 0): ?>
 		<? if ($grid->configured): ?>
 			<?
 			$columnNumber = 1;
-			$columnsCount = Yii::app()->browser->isMobile() && $grid->columnsCount > 3 ? 3 : $grid->columnsCount;
+			$columnsCount = $grid->columnsCount;
 			?>
 			<div style="text-align: <? echo $grid->alignment; ?>;
 				padding-top: <? echo $grid->paddingTop; ?>px;">

@@ -45,6 +45,9 @@
 				$quizGroup->order = $order;
 				$quizGroup->id_parent = $parentGroupId;
 				$quizGroup->id_top_level = $topLevelGroupId;
+				$groupConfigPath = realpath($path . DIRECTORY_SEPARATOR . 'config.xml');
+				if (file_exists($groupConfigPath))
+					$quizGroup->config = file_get_contents($groupConfigPath);
 				$quizGroup->save();
 
 				$folderIterator = new DirectoryIterator(realpath($path));

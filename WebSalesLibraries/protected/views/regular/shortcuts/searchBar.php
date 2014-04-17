@@ -7,7 +7,7 @@
 		<tr>
 			<td>
 				<? if (!Yii::app()->browser->isMobile()): ?>
-					<img style="margin-top: 20px; margin-bottom: 20px;" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar-logo.png' ?>" alt=""/>
+					<img style="margin-top: 20px; margin-bottom: 20px;" src="<?php echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar-logo.png?' . $pageId ?>" alt=""/>
 				<? endif; ?>
 				<div class="search-conditions" style="display: none;">
 					<div class="shortcut-title"><? echo $searchBar->title; ?></div>
@@ -112,7 +112,9 @@
 					</button>
 					<button class="btn tags-filter-panel-switcher" type="submit"><? echo $tagsName; ?></button>
 				</div>
-				<p class="muted"><small class="tag-condition-selected">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</small></p>
+				<p class="muted">
+					<small class="tag-condition-selected">Fusce dapibus, tellus ac cursus commodo, tortor mauris nibh.</small>
+				</p>
 			</td>
 		</tr>
 		<tr class="file-filter-panel">
