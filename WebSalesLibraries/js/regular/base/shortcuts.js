@@ -388,6 +388,7 @@ window.salesDepot = window.salesDepot || { };
 	$.processSearchLink = function (content)
 	{
 		var searchConditions = content.find('.search-conditions');
+		var homeBar = content.find('.shortcuts-home-bar');
 		var hideResults = searchConditions.find('.hide-results').length > 0;
 		var shortcutTitle = content.find('.shortcut-title').html();
 		var sortColumn = content.find('.sort-column').html();
@@ -506,6 +507,7 @@ window.salesDepot = window.salesDepot || { };
 			{
 				content.html('');
 				content.append(searchConditions);
+				content.append(homeBar);
 				content.append($('<div id="search-container"><div id="search-result" style="width: 100% !important; padding: 0;"><div></div></div></div>'));
 				content.find('#search-result > div').append(msg);
 

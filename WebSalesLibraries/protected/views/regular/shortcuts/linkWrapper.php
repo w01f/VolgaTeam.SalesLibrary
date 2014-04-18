@@ -1,5 +1,5 @@
 <?php
-	$version = '2.0';
+	$version = '5.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -13,6 +13,7 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/folder-links.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/banner.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/ribbon.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/shortcuts.css?' . $version);
 	$cs->registerCoreScript('jquery.ui');
 	$cs->registerCoreScript('cookie');
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
@@ -35,7 +36,7 @@
 <div id="ribbon">
 	<div class="ribbon-window-title"></div>
 	<div class="ribbon-tab">
-		<span class="ribbon-title">Shortcut</span>
+		<span class="ribbon-title"><? echo $objectName; ?></span>
 		<div class="ribbon-section">
 			<span class="section-title"><? echo $objectName; ?></span>
 			<img src="<?php echo isset($objectLogo) && @getimagesize($objectLogo) ? $objectLogo : Yii::app()->getBaseUrl(true) . '/images/rbntab2logo.png' ?>"/>

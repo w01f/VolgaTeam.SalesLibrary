@@ -1,4 +1,5 @@
 <?php
+
 	class ShortcutsController extends IsdController
 	{
 		public function getViewPath()
@@ -85,13 +86,22 @@
 			if (isset($linkId))
 			{
 				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
+				$pageRecord = ShortcutsPageStorage::model()->findByPk($linkRecord->id_page);
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$searchShortcut->loadSearchConditions();
+				$this->pageTitle = $searchShortcut->tooltip;
 				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchShortcut), true);
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Search', 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
+				{
+					if (!$searchShortcut->showResultsBar)
+					{
+						$homeBar = $pageRecord->getHomeBar();
+						$content = $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => false), true) . $content;
+					}
+					$this->render('linkWrapper', array('objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
+				}
 			}
 		}
 

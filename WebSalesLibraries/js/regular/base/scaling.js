@@ -74,7 +74,10 @@ window.salesDepot = window.salesDepot || { };
 	var updateLinksGrid = function ()
 	{
 		var searchResult = $('#search-result');
-		var height = $('#search-container').parent().height();
+
+		var isShorcutSinglePage = $('.shortcuts-page-content').length == 0;
+
+		var height = $('#search-container').parent().height() - (isShorcutSinglePage ? $('.shortcuts-home-bar').height() : 0);
 		searchResult.find('> div').css({
 			'height': height + 'px'
 		});

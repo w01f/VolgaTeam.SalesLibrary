@@ -260,7 +260,7 @@
 				{
 					$linkIds = UserLinkStorage::getAvailableLinks($userId);
 					if (isset($linkIds))
-						$linkCondition = "link.is_restricted <> 1 or id in ('" . implode("', '", $linkIds) . "')";
+						$linkCondition = "link.is_restricted <> 1 or link.id in ('" . implode("', '", $linkIds) . "')";
 					else
 						$linkCondition = "link.is_restricted <> 1";
 				}

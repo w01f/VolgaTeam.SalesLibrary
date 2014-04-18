@@ -55,7 +55,7 @@
 	<? if ($searchContainer->conditions->searchByContent): ?>
 		<div class="search-by-content">true</div>
 	<? endif; ?>
-	<? if (!$searchContainer->showResultsBar && $searchContainer->samePage): ?>
+	<? if (!$searchContainer->showResultsBar): ?>
 		<div class="hide-results">true</div>
 	<? endif; ?>
 	<? if (isset($searchContainer->conditions->sortColumn)): ?>

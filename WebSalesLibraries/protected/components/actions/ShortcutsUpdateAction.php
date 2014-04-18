@@ -1,4 +1,5 @@
 <?php
+
 	class ShortcutsUpdateAction extends CAction
 	{
 		public function run()
@@ -77,7 +78,10 @@
 														$linkConfig->loadXML($linkConfigContent);
 
 														$linkShortcutsRecord = new ShortcutsLinkStorage();
-														$linkShortcutsId = uniqid();
+														$shortcutsIdTags = $linkConfig->getElementsByTagName("StaticID");
+														$linkShortcutsId = $shortcutsIdTags->length > 0 ? trim($shortcutsIdTags->item(0)->nodeValue) : null;
+														if (!isset($linkShortcutsId))
+															$linkShortcutsId = uniqid();
 														$linkShortcutsRecord->id = $linkShortcutsId;
 														$linkShortcutsRecord->id_tab = $tabShortcutsId;
 														$linkShortcutsRecord->id_page = $pageShortcutsId;
