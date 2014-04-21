@@ -1,4 +1,5 @@
 <?php
+
 	class LinkStorage extends CActiveRecord
 	{
 		public static function model($className = __CLASS__)
@@ -135,7 +136,7 @@
 				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
 		}
 
-		public static function searchByContent($contentCondition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection)
+		public static function searchByContent($contentConditions, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection)
 		{
 			$links = Yii::app()->session[$datasetKey];
 			if (!isset($links))
@@ -179,7 +180,7 @@
 						if (isset($dateFile) && $dateFile == 'true')
 							$dateColumn = 'link.file_date';
 						$dateCondition = $dateColumn . " >= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($startDate)) . "' and " . $dateColumn . " <= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($endDate) + 86400) . "'";
-						if ($contentCondition == '""' || $contentCondition == '')
+						if (count($contentConditions) == 0)
 							$additionalDateCondition = " or (" . $dateCondition . ")";
 					}
 
@@ -190,7 +191,7 @@
 					if ($onlyFileCards == 1)
 					{
 						$fileCardsCondition = 'link.enable_file_card = true or link.enable_attachments = true ';
-						if ($contentCondition == '""' || $contentCondition == '')
+						if (count($contentConditions) == 0)
 							$additionalFileCardsCondition = ' or (link.enable_file_card = true or link.enable_attachments = true)';
 					}
 				}
@@ -204,27 +205,25 @@
 					if (isset($superFilterSelector))
 					{
 						$superFilterCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $superFilterSelector) . ')';
-						if ($contentCondition == '""' || $contentCondition == '')
+						if (count($contentConditions) == 0)
 							$additionalSuperFilterCondition = ' or ' . $superFilterCondition;
 					}
 				}
 
-				$categoryCondition = '1 = 1';
 				$categoryJoinCondition = '1 = 1';
 				$additionalCategoryCondition = '';
-				if (isset($categories))
+				if (isset($categories) && count($categories) > 0)
 				{
+					$categoriesSelector = array();
+					$categoriesJoinSelector = array();
 					foreach ($categories as $category)
 					{
 						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
 						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where category = "' . $category['category'] . '" and tag = "' . $category['tag'] . '"))';
 					}
-					if (isset($categoriesSelector))
-					{
-						$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
-						$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
-						$additionalCategoryCondition = ' or ' . $categoryCondition;
-					}
+					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
+					$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
+					$additionalCategoryCondition = ' or ' . $categoryCondition;
 				}
 
 				$onlyWithCategoriesCondition = '1 = 1';
@@ -232,7 +231,7 @@
 				if ($onlyWithCategories)
 				{
 					$onlyWithCategoriesCondition = 'exists (select id_link from tbl_link_category where id_link = link.id)';
-					if ($contentCondition == '""' || $contentCondition == '')
+					if (count($contentConditions) == 0)
 						$additionalOnlyWithCategoriesCondition = ' or (exists (select id_link from tbl_link_category where id_link = link.id))';
 				}
 
@@ -274,6 +273,20 @@
 						$matchCondition = 'link.content';
 				}
 
+				$contentCondition = "1=1";
+				if (count($contentConditions) > 0)
+				{
+					$conditionParts = array();
+					foreach ($contentConditions as $contentConditionPart)
+						$conditionParts[] = "(match(" . $matchCondition . ") against('" . $contentConditionPart . "' in boolean mode))";
+					$contentCondition = implode(" or ", $conditionParts);
+				}
+				$contentCondition = "(" . $contentCondition .
+					$additionalFileCardsCondition .
+					$additionalDateCondition .
+					$additionalSuperFilterCondition .
+					$additionalCategoryCondition .
+					$additionalOnlyWithCategoriesCondition . ")";
 
 				if ($hideDuplicated)
 				{
@@ -282,7 +295,16 @@
 						->select('max(link.id) as id, max(link.id_library) as id_library, max(link.name) as name, link.file_name, ' . $dateField . ', max(link.enable_attachments) as enable_attachments, max(link.enable_file_card) as enable_file_card, max(link.format) as format, (select count(id) from tbl_link_rate where id_link = link.id) as rate, lcat.tag as tag')
 						->from('tbl_link link')
 						->leftJoin("tbl_link_category lcat", "lcat.id_link=link.id and " . $categoryJoinCondition)
-						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalSuperFilterCondition . $additionalCategoryCondition . $additionalOnlyWithCategoriesCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $superFilterCondition . ") and (" . $categoryCondition . ") and (" . $onlyWithCategoriesCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ") and link.is_dead=0 and link.is_preview_not_ready=0")
+						->where($contentCondition .
+							" and (" . $libraryCondition .
+							") and (" . $fileTypeCondition .
+							") and (" . $fileCardsCondition .
+							") and (" . $dateCondition .
+							") and (" . $superFilterCondition .
+							") and (" . $onlyWithCategoriesCondition .
+							") and (" . $folderCondition .
+							") and (" . $linkCondition .
+							") and link.is_dead=0 and link.is_preview_not_ready=0")
 						->group('link.file_name, lcat.tag')
 						->queryAll();
 				}
@@ -293,7 +315,16 @@
 						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate, lcat.tag as tag')
 						->from('tbl_link link')
 						->leftJoin("tbl_link_category lcat", "lcat.id_link=link.id and " . $categoryJoinCondition)
-						->where("(match(" . $matchCondition . ") against('" . $contentCondition . "' in boolean mode)" . $additionalFileCardsCondition . $additionalDateCondition . $additionalSuperFilterCondition . $additionalCategoryCondition . $additionalOnlyWithCategoriesCondition . ") and (" . $libraryCondition . ") and (" . $fileTypeCondition . ") and (" . $fileCardsCondition . ") and (" . $dateCondition . ") and (" . $superFilterCondition . ") and (" . $categoryCondition . ") and (" . $onlyWithCategoriesCondition . ") and (" . $folderCondition . ") and (" . $linkCondition . ")")
+						->where($contentCondition .
+							" and (" . $libraryCondition .
+							") and (" . $fileTypeCondition .
+							") and (" . $fileCardsCondition .
+							") and (" . $dateCondition .
+							") and (" . $superFilterCondition .
+							") and (" . $onlyWithCategoriesCondition .
+							") and (" . $folderCondition .
+							") and (" . $linkCondition .
+							") and link.is_dead=0 and link.is_preview_not_ready=0")
 						->queryAll();
 				}
 				$links = self::getLinksGrid($linkRecords, $hideDuplicated);

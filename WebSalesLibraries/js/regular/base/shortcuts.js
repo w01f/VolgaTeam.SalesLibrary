@@ -71,7 +71,10 @@ window.salesDepot = window.salesDepot || { };
 					if ($('.btn.search-bar-run').hasClass('disabled')) return;
 					var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
 					selectTagsByKeyword(textCondition);
+					if ($('#search-exact-match').is(':checked'))
+						textCondition = '"' + textCondition + '"';
 					var searchConditions = $('.shortcuts-search-bar .search-conditions');
+					var onlyFiles = $('#search-file-names-only').is(':checked') ? 1 : 0;
 					var selectedFileTypes = [];
 					if ($('#search-file-type-powerpoint').is(':checked'))
 						selectedFileTypes.push("ppt");
@@ -94,7 +97,14 @@ window.salesDepot = window.salesDepot || { };
 					{
 						changeSearchBarVisibility(false);
 						$('.shortcuts-home-bar .buttons-container').hide();
+						searchConditions.remove('.search-text');
 						searchConditions.append('<div class="search-text">' + textCondition + '</div>');
+						var searchByContent = searchConditions.find('.search-by-content');
+						if (searchByContent.length > 0)
+							searchByContent.html(onlyFiles != 1 ? 'true' : false);
+						else
+							searchConditions.append('<div class="search-by-content">' + (onlyFiles != 1) + '</div>');
+						searchConditions.remove('.file-type');
 						$.each(selectedFileTypes, function (index, value)
 						{
 							searchConditions.append('<div class="file-type">' + value + '</div>');
@@ -121,7 +131,7 @@ window.salesDepot = window.salesDepot || { };
 							};
 							categories.push(category);
 						});
-						window.open("shortcuts/GetQuickSearchResult?pageId=" + pageId + "&text=" + textCondition + "&fileTypes=" + $.toJSON(selectedFileTypes) + "&superFilters=" + $.toJSON(superFilters) + "&categories=" + $.toJSON(categories));
+						window.open("shortcuts/GetQuickSearchResult?pageId=" + pageId + "&text=" + textCondition + "&onlyFiles=" + onlyFiles + "&fileTypes=" + $.toJSON(selectedFileTypes) + "&superFilters=" + $.toJSON(superFilters) + "&categories=" + $.toJSON(categories));
 					}
 				};
 				$('.shortcuts-search-bar .search-bar-text').keypress(function (e)

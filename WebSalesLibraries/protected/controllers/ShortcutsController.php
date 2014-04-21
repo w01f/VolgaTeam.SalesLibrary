@@ -109,6 +109,7 @@
 		{
 			$pageId = Yii::app()->request->getQuery('pageId');
 			$text = Yii::app()->request->getQuery('text');
+			$onlyFiles = intval(Yii::app()->request->getQuery('onlyFiles'));
 			$fileTypes = Yii::app()->request->getQuery('fileTypes');
 			if (isset($fileTypes))
 				$fileTypes = CJSON::decode($fileTypes);
@@ -133,6 +134,7 @@
 				$searchBar = $pageRecord->getSearchBar();
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;
+				$searchBar->conditions->searchByContent = $onlyFiles == 0;
 				$searchBar->conditions->fileTypes = $fileTypes;
 				$searchBar->conditions->superFilters = $superFilters;
 

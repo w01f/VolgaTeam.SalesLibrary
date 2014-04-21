@@ -120,9 +120,11 @@
 		<tr class="file-filter-panel">
 			<td>
 				<form class="form-inline">
-					<label class="checkbox file-selector"><input id="search-file-type-video" type="checkbox" checked>video</label>
-					<label class="checkbox file-selector"><input id="search-file-type-powerpoint" type="checkbox" checked>presentations</label>
-					<label class="checkbox file-selector"><input id="search-file-type-other" type="checkbox">all other files</label>
+					<label class="checkbox search-option file-selector"><input id="search-file-type-video" type="checkbox" checked>video</label>
+					<label class="checkbox search-option file-selector"><input id="search-file-type-powerpoint" type="checkbox" checked>presentations</label>
+					<label class="checkbox search-option file-selector"><input id="search-file-type-other" type="checkbox">all other files</label>
+					<label class="checkbox search-option"><input id="search-file-names-only" type="checkbox">file names only</label>
+					<label class="checkbox search-option"><input id="search-exact-match" type="checkbox" checked>exact search</label>
 				</form>
 			</td>
 		</tr>

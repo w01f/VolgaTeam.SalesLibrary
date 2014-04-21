@@ -1,4 +1,5 @@
 <?php
+
 	class SearchController extends IsdController
 	{
 		public function getViewPath()
@@ -107,7 +108,26 @@
 					$datasetKey = uniqid();
 
 				if (isset($fileTypes) && isset($condition) && isset($datasetKey))
-					$links = LinkStorage::searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection);
+				{
+					$links = LinkStorage::searchByContent(
+						SearchHelper::prepareTextCondition($condition),
+						$fileTypes,
+						$startDate,
+						$endDate,
+						$dateFile,
+						$checkedLibraryIds,
+						$onlyFileCards,
+						$superFilters,
+						$categories,
+						$categoriesExactMatch,
+						$onlyWithCategories,
+						$hideDuplicated,
+						$onlyByName,
+						$onlyByContent,
+						$datasetKey,
+						$sortColumn,
+						$sortDirection);
+				}
 
 				if (!isset($links))
 					$links = null;
