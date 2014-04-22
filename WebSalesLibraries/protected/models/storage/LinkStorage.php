@@ -296,7 +296,15 @@
 				{
 					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ') as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('max(link.id) as id, max(link.id_library) as id_library, max(link.name) as name, link.file_name, ' . $dateField . ', max(link.enable_attachments) as enable_attachments, max(link.enable_file_card) as enable_file_card, max(link.format) as format, (select count(id) from tbl_link_rate where id_link = link.id) as rate, lcat.tag as tag')
+						->select('max(link.id) as id,
+							max(link.id_library) as id_library,
+							max(link.name) as name,
+							link.file_name,
+							' . $dateField . ',
+							max(link.enable_attachments) as enable_attachments,
+							max(link.enable_file_card) as enable_file_card,
+							max(link.format) as format,
+							lcat.tag as tag')
 						->from('tbl_link link')
 						->leftJoin("tbl_link_category lcat", "lcat.id_link=link.id and " . $categoryJoinCondition)
 						->where($contentCondition .
@@ -317,7 +325,15 @@
 				{
 					$dateField = (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ' as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate, lcat.tag as tag')
+						->select('link.id,
+							link.id_library,
+							link.name,
+							link.file_name,
+							' . $dateField . ',
+							link.enable_attachments,
+							link.enable_file_card,
+							link.format,
+							lcat.tag as tag')
 						->from('tbl_link link')
 						->leftJoin("tbl_link_category lcat", "lcat.id_link=link.id and " . $categoryJoinCondition)
 						->where($contentCondition .
@@ -449,11 +465,10 @@
 					else
 						$link['library'] = '';
 
-					if (array_key_exists('rate', $linkRecord))
-						$link['rate'] = $linkRecord['rate'];
-
 					if (array_key_exists('tag', $linkRecord))
 						$link['tag'] = $linkRecord['tag'];
+					else
+						$link['tag'] = '';
 
 					switch ($linkRecord['format'])
 					{

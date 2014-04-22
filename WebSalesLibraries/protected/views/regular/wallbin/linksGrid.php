@@ -9,7 +9,6 @@
 		<td class="library-column"><span><? echo Yii::app()->params['stations']['column_name']; ?></span></td>
 		<td class="link-type-column"><span>Type</span></td>
 		<td class="link-name-column"><span>Link</span></td>
-		<td class="link-rate-column"><span>Likes</span></td>
 		<td class="link-date-column"><span>Date</span></td>
 	</tr>
 </table>
@@ -51,7 +50,6 @@
 						</table>
 						<img class="delete-link" src="<?php echo Yii::app()->baseUrl . '/images/search/search-delete.png' ?>" alt="Delete Link">
 					</td>
-					<td class="link-rate-column"><?php echo $link['rate'] > 0 ? $link['rate'] : ''; ?></td>
 					<td class="link-date-column">
 						<table class="link-container">
 							<tr>

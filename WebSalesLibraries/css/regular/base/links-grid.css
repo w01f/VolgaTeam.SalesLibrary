@@ -122,19 +122,9 @@
 	text-align: center;
 }
 
-.links-grid-header td.link-rate-column, .links-grid-body td.link-rate-column
-{
-	width: 60px;
-}
-
 .links-grid-header td.link-tag-column, .links-grid-body td.link-tag-column
 {
 	width: 150px;
-}
-
-.links-grid-body td.link-rate-column
-{
-	text-align: center;
 }
 
 .links-grid-body td.link-tag-column

@@ -54,9 +54,6 @@ window.salesDepot = window.salesDepot || { };
 					case "date_modify":
 						selector = '.links-grid-header td.link-date-column span';
 						break;
-					case "rate":
-						selector = '.links-grid-header td.link-rate-column span';
-						break;
 					case "tag":
 						selector = '.links-grid-header td.link-tag-column span';
 						break;
@@ -190,12 +187,6 @@ window.salesDepot = window.salesDepot || { };
 			searchGridHeader.find("td.link-date-column").off('click').on('click', function ()
 			{
 				sortByColumn('date_modify');
-				that.refreshData();
-			});
-
-			searchGridHeader.find("td.link-rate-column").off('click').on('click', function ()
-			{
-				sortByColumn('rate');
 				that.refreshData();
 			});
 

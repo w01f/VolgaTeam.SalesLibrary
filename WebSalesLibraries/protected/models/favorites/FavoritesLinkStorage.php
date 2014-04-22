@@ -50,7 +50,12 @@
 						$linkIds[] = $favoriteLinkRecord->id_link;
 					$dateField = 'link.file_date as link_date';
 					$linkRecords = Yii::app()->db->createCommand()
-						->select('link.id, link.id_library, link.name, link.file_name, ' . $dateField . ', link.enable_attachments, link.enable_file_card, link.format, (select count(id) from tbl_link_rate where id_link = link.id) as rate')
+						->select('link.id, link.id_library,
+							link.name, link.file_name,
+							' . $dateField . ',
+							link.enable_attachments,
+							link.enable_file_card,
+							link.format')
 						->from('tbl_link link')
 						->where("id in ('" . implode("', '", $linkIds) . "')")
 						->queryAll();
