@@ -2,6 +2,7 @@
 	class QuickListShortcut
 	{
 		public $type;
+		public $name;
 		public $title;
 		public $tooltip;
 		public $imagePath;
@@ -19,7 +20,9 @@
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
-			$tooltipTags = $linkConfig->getElementsByTagName("ToolTip");
+			$nameTags = $linkConfig->getElementsByTagName("line1");
+			$this->name = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';
+			$tooltipTags = $linkConfig->getElementsByTagName("line2");
 			$this->tooltip = $tooltipTags->length > 0 ? trim($tooltipTags->item(0)->nodeValue) : '';
 			$samePageTags = $linkConfig->getElementsByTagName("OpenOnSamePage");
 			$this->samePage = $samePageTags->length > 0 ? filter_var(trim($samePageTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;

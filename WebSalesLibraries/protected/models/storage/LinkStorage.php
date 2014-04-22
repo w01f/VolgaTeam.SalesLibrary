@@ -210,6 +210,7 @@
 					}
 				}
 
+				$categoryCondition = '1=1';
 				$categoryJoinCondition = '1 = 1';
 				$additionalCategoryCondition = '';
 				if (isset($categories) && count($categories) > 0)
@@ -224,6 +225,9 @@
 					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
 					$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
 					$additionalCategoryCondition = ' or ' . $categoryCondition;
+					if (count($contentConditions) > 0)
+						$categoryCondition = '1=1';
+
 				}
 
 				$onlyWithCategoriesCondition = '1 = 1';
@@ -300,6 +304,7 @@
 							") and (" . $fileTypeCondition .
 							") and (" . $fileCardsCondition .
 							") and (" . $dateCondition .
+							") and (" . $categoryCondition .
 							") and (" . $superFilterCondition .
 							") and (" . $onlyWithCategoriesCondition .
 							") and (" . $folderCondition .
@@ -320,6 +325,7 @@
 							") and (" . $fileTypeCondition .
 							") and (" . $fileCardsCondition .
 							") and (" . $dateCondition .
+							") and (" . $categoryCondition .
 							") and (" . $superFilterCondition .
 							") and (" . $onlyWithCategoriesCondition .
 							") and (" . $folderCondition .

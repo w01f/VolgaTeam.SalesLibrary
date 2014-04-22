@@ -1,5 +1,5 @@
 <?php
-	$version = '66.0';
+	$version = '71.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
@@ -9,6 +9,7 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/datepicker/css/daterangepicker.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/jixedbar/themes/default/jx.stylesheet.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fullcalendar/fullcalendar.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/cubeportfolio/css/cubeportfolio.min.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/ribbon.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/minibar.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/columns.css?' . $version);
@@ -49,6 +50,7 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fullcalendar/jquery.qtip-1.0.0-rc3.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/gesture-handler/jquery.hammer.min.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/touch-punch/jquery.ui.touch-punch.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js?' . $version, CClientScript::POS_HEAD);
 	if (Yii::app()->params['ticker']['visible'] && isset($tickerRecords))
 	{
 		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/modern-ticker/js/jquery.modern-ticker.min.js', CClientScript::POS_HEAD);

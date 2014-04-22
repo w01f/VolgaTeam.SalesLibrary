@@ -26,8 +26,8 @@ window.salesDepot = window.salesDepot || { };
 			{
 				var content = $('#content');
 				content.html(msg);
-
-				var tabId = content.find('.shortcuts-page-content').attr('id').replace("shortcuts-page-content-", "");
+				var pageContent = content.find('.shortcuts-page-content');
+				var tabId = pageContent.attr('id').replace("shortcuts-page-content-", "");
 				var shortcutsTab = $('#shortcuts-tab-' + tabId);
 				var pageLogo = shortcutsTab.find('.ribbon-tab-logo');
 				pageLogo.show();
@@ -141,11 +141,19 @@ window.salesDepot = window.salesDepot || { };
 						search();
 				});
 				$('.shortcuts-search-bar .search-bar-run').on('click', search);
-
-				$('.shortcuts-link img').tooltip({animation: false, trigger: 'hover', delay: { show: 500, hide: 100 }});
+				pageContent.find('.shortcuts-links-container').cubeportfolio({
+					defaultFilter: '*',
+					animationType: 'slideDelay',
+					gapHorizontal: 20,
+					gapVertical: 20,
+					gridAdjustment: 'responsive',
+					caption: 'overlayBottomAlong',
+					displayType: 'bottomToTop',
+					displayTypeSpeed: 100
+				});
 				$('.shortcuts-link.direct').off('click').on('click', function ()
 				{
-					var linkTooltip = $(this).find('.link-name').html();
+					var linkName = $(this).find('.link-name').html();
 					var linkUrl = $(this).attr('href');
 					$.ajax({
 						type: "POST",
@@ -154,7 +162,7 @@ window.salesDepot = window.salesDepot || { };
 							type: 'Shortcuts',
 							subType: 'Open',
 							data: $.toJSON({
-								File: linkTooltip,
+								File: linkName,
 								'Original Format': 'url'
 							})
 						},

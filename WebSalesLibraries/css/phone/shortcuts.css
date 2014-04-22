@@ -3,6 +3,11 @@
 	text-align: center;
 }
 
+.shortcuts-link img
+{
+	width: 250px;
+}
+
 .service-data
 {
 	display: none;

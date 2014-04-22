@@ -5,7 +5,8 @@
 		public static function prepareTextCondition($condition)
 		{
 			$result = array();
-			$result[] = $condition;
+			if ($condition != "" && $condition != '""')
+				$result[] = $condition;
 
 			$configPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'search_config.xml';
 			if (!file_exists($configPath)) return $result;

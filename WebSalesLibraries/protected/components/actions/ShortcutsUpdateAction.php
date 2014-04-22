@@ -70,7 +70,6 @@
 												{
 													$linkPath = $linkFolder->getPathname();
 													$linkConfigFile = realpath($linkPath . DIRECTORY_SEPARATOR . 'config.xml');
-													$linkImageFile = realpath($linkPath . DIRECTORY_SEPARATOR . 'image.png');
 													if (file_exists($linkConfigFile))
 													{
 														$linkConfigContent = file_get_contents($linkConfigFile);
@@ -88,7 +87,7 @@
 														$linkShortcutsRecord->order = intval(trim($linkConfig->getElementsByTagName("Order")->item(0)->nodeValue));
 														$linkShortcutsRecord->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
 														$linkShortcutsRecord->source_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', $linkPath));
-														$linkShortcutsRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', $linkImageFile));
+														$linkShortcutsRecord->image_path = '/' . str_replace('\\', '/', str_replace($rootFolderPath, Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts', realpath($linkPath . DIRECTORY_SEPARATOR . $linkShortcutsRecord->order . '.png')));
 														$linkShortcutsRecord->config = $linkConfigContent;
 														$linkShortcutsRecord->save();
 													}

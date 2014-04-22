@@ -39,30 +39,15 @@
 .shortcuts-page-content
 {
 	width: 100%;
-	overflow-y: auto;
-	-webkit-overflow-scrolling: touch;
 }
 
-.shortcuts-links.grid
+.shortcuts-page-content .shortcuts-links-container
 {
-	width: 100%;
-}
-
-.shortcuts-links li
-{
-	list-style: none;
-	float: left;
-	padding: 12px;
-}
-
-.shortcuts-links img
-{
-	cursor: pointer;
-}
-
-.shortcuts-links .empty img
-{
-	cursor: default;
+	width: 94%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .shortcuts-links .service-data, .shortcut-title
