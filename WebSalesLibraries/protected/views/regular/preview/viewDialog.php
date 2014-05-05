@@ -25,7 +25,7 @@
 			<ul class="format-list">
 				<?php foreach ($link->availableFormats as $format): ?>
 					<?php
-					if (!$autorized && ($format == 'email' || $format == 'outlook'))
+					if (!$authorized && ($format == 'email' || $format == 'outlook'))
 						continue;
 					$imageSource = '';
 					switch ($format)
@@ -106,7 +106,7 @@
 						</li>
 					<?php endif; ?>
 				<?php endforeach; ?>
-				<?php if (!isset($link->isAttachment) && !$link->forcePreview && $autorized): ?>
+				<?php if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
 					<li class="multi-column" <? if ($link->browser != 'mobile'): ?>rel="tooltip"
 						title="<? echo Yii::app()->params['tooltips']['preview_dialog']['favorites']; ?>"<?php endif; ?>>
 						<img src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'favorites.png')); ?>"/>
@@ -123,7 +123,7 @@
 						</div>
 					</li>
 				<?php endif; ?>
-				<?php if ($link->browser == 'mobile'): ?>
+				<?php if ($link->browser == 'mobile' && !$link->forcePreview): ?>
 					<li class="multi-column">
 						<img src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'lp.png')); ?>"/>
 						<div class="service-data">

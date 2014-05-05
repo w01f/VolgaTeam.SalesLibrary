@@ -16,7 +16,11 @@
 				foreach ($rootFolder as $subFolder)
 				{
 					if ($subFolder->isDir() && !$subFolder->isDot())
-						$subFolders[$subFolder->getBasename()] = $subFolder->getPathname();
+					{
+						$name = $subFolder->getBasename();
+						if ($name != '_gsdata_')
+							$subFolders[$name] = $subFolder->getPathname();
+					}
 				}
 				ksort($subFolders);
 				$subFolderOrder = 0;

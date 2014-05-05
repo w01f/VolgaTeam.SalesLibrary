@@ -11,11 +11,11 @@
 			$rendered = false;
 			$linkId = Yii::app()->request->getPost('linkId');
 			$isAttachment = Yii::app()->request->getPost('isAttachment');
-			$autorized = false;
+			$authorized = false;
 			if (isset(Yii::app()->user))
 			{
 				$userId = Yii::app()->user->getId();
-				$autorized = isset($userId);
+				$authorized = isset($userId);
 			}
 			if (isset($linkId))
 			{
@@ -62,9 +62,9 @@
 							$attachment = new Attachment($link);
 							$attachment->browser = $browser;
 							$attachment->load($attachmentRecord);
-							if ($autorized)
+							if ($authorized)
 								StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $attachment->name, 'File' => basename($attachment->path)));
-							$this->renderPartial('viewDialog', array('link' => $attachment, 'autorized' => $autorized), false, true);
+							$this->renderPartial('viewDialog', array('link' => $attachment, 'authorized' => $authorized), false, true);
 							$rendered = true;
 						}
 					}
@@ -79,9 +79,9 @@
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->browser = $browser;
 						$link->load($linkRecord);
-						if ($autorized)
+						if ($authorized)
 							StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $link->name, 'File' => $link->fileName));
-						$this->renderPartial('viewDialog', array('link' => $link, 'autorized' => $autorized), false, true);
+						$this->renderPartial('viewDialog', array('link' => $link, 'authorized' => $authorized), false, true);
 						$rendered = true;
 					}
 				}
@@ -224,18 +224,18 @@
 				$linkRecord = LinkStorage::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
-					$autorized = false;
+					$authorized = false;
 					if (isset(Yii::app()->user))
 					{
 						$userId = Yii::app()->user->getId();
-						$autorized = isset($userId);
+						$authorized = isset($userId);
 					}
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->browser = 'phone';
 					$link->load($linkRecord);
-					$this->renderPartial('linkPreview', array('link' => $link, 'autorized' => $autorized), false, true);
+					$this->renderPartial('linkPreview', array('link' => $link, 'authorized' => $authorized), false, true);
 				}
 			}
 		}
@@ -251,11 +251,11 @@
 					$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
 					if (isset($linkRecord))
 					{
-						$autorized = false;
+						$authorized = false;
 						if (isset(Yii::app()->user))
 						{
 							$userId = Yii::app()->user->getId();
-							$autorized = isset($userId);
+							$authorized = isset($userId);
 						}
 
 						$libraryManager = new LibraryManager();
@@ -269,7 +269,7 @@
 						$attachment->browser = $link->browser;
 						$attachment->load($attachmentRecord);
 
-						$this->renderPartial('linkPreview', array('link' => $attachment, 'autorized' => $autorized), false, true);
+						$this->renderPartial('linkPreview', array('link' => $attachment, 'authorized' => $authorized), false, true);
 					}
 				}
 			}

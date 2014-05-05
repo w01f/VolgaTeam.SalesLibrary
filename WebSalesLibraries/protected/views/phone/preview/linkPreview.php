@@ -46,7 +46,7 @@
 		<?php else: ?>
 			<?php
 			foreach ($link->availableFormats as $format):
-				if (!$autorized && $format == 'email')
+				if (!$authorized && $format == 'email')
 					continue;
 				$imageSource = '';
 				$imageTitle = '';
@@ -160,7 +160,7 @@
 					</li>
 				<?php endif; ?>
 			<?php endforeach; ?>
-			<?php if (!isset($link->isAttachment) && !$link->forcePreview && $autorized): ?>
+			<?php if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
 				<li>
 					<a class="preview-link" href="#">
 						<table class="link-container">

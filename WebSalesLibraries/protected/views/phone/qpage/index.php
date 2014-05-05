@@ -18,11 +18,11 @@ $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/favorites.js?' . $versi
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
 $cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/qpage.js?' . $version, CClientScript::POS_HEAD);
 
-$autorized = false;
+$authorized = false;
 $userId = Yii::app()->user->getId();
 if (isset($userId))
 {
-	$autorized = true;
+	$authorized = true;
 	$availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
 }
 ?>
@@ -89,7 +89,7 @@ if (isset($userId))
 		<ul id="gallery"></ul>
 	</div>
 </div>
-<? if ($autorized): ?>
+<? if ($authorized): ?>
 	<div data-role='page' class="email-tab" id="email-address" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 			<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
@@ -332,7 +332,7 @@ if (isset($userId))
 		</div>
 	</div>
 <? endif; ?>
-<? if (Yii::app()->params['favorites_tab']['visible'] && $autorized): ?>
+<? if (Yii::app()->params['favorites_tab']['visible'] && $authorized): ?>
 	<div data-role='page' class="favorites-tab" id="favorites-add" data-cache="never" data-dom-cache="false" data-ajax="false">
 		<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 			<a class="link back ui-btn-right" href="#preview" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
