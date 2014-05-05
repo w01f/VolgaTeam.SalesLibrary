@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
-using SalesDepot.SiteManager.PresentationClasses.Activities.Views;
 using SalesDepot.SiteManager.ToolForms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities
@@ -11,7 +11,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 	public sealed partial class ActivitiesManagerControl : UserControl
 	{
 		private ViewType _selectedViewType;
-		private Dictionary<ViewType, IActivitiesView> _views = new Dictionary<ViewType, IActivitiesView>();
+		private readonly Dictionary<ViewType, IActivitiesView> _views = new Dictionary<ViewType, IActivitiesView>();
 
 		public ActivitiesManagerControl()
 		{
@@ -28,61 +28,34 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 
 		private void InitViews()
 		{
-			var view1 = new RawDataControl();
+			var view1 = new RawData.ContainerControl();
 			_views.Add(ViewType.RawData, view1);
 			splitContainerControl.Panel2.Controls.Add(view1);
-			if (view1.FilterControl != null)
-				pnCustomFilter.Controls.Add(view1.FilterControl);
-			var view2 = new MainUserReportControl();
+			pnCustomFilter.Controls.AddRange(view1.FilterControls.ToArray());
+			var view2 = new MainData.ContainerControl();
 			_views.Add(ViewType.MainUserReport, view2);
 			splitContainerControl.Panel2.Controls.Add(view2);
-			if (view2.FilterControl != null)
-				pnCustomFilter.Controls.Add(view2.FilterControl);
-			var view3 = new MainGroupReportControl();
-			_views.Add(ViewType.MainGroupReport, view3);
+			pnCustomFilter.Controls.AddRange(view2.FilterControls.ToArray());
+			var view3 = new NavigationData.ContainerControl();
+			_views.Add(ViewType.NavigationUserReport, view3);
 			splitContainerControl.Panel2.Controls.Add(view3);
-			if (view3.FilterControl != null)
-				pnCustomFilter.Controls.Add(view3.FilterControl);
-			var view4 = new NavigationUserReportControl();
-			_views.Add(ViewType.NavigationUserReport, view4);
+			pnCustomFilter.Controls.AddRange(view3.FilterControls.ToArray());
+			var view4 = new AccessData.ContainerControl();
+			_views.Add(ViewType.AccessGroupReport, view4);
 			splitContainerControl.Panel2.Controls.Add(view4);
-			if (view4.FilterControl != null)
-				pnCustomFilter.Controls.Add(view4.FilterControl);
-			var view5 = new NavigationGroupReportControl();
-			_views.Add(ViewType.NavigationGroupReport, view5);
+			pnCustomFilter.Controls.AddRange(view4.FilterControls.ToArray());
+			var view5 = new QuizPassData.ContainerControl();
+			_views.Add(ViewType.QuizPassUserReport, view5);
 			splitContainerControl.Panel2.Controls.Add(view5);
-			if (view5.FilterControl != null)
-				pnCustomFilter.Controls.Add(view5.FilterControl);
-			var view6 = new AccessGroupReportControl();
-			_views.Add(ViewType.AccessGroupReport, view6);
+			pnCustomFilter.Controls.AddRange(view5.FilterControls.ToArray());
+			var view6 = new QuizStatusData.ContainerControl();
+			_views.Add(ViewType.QuizStatusUserReport, view6);
 			splitContainerControl.Panel2.Controls.Add(view6);
-			if (view6.FilterControl != null)
-				pnCustomFilter.Controls.Add(view6.FilterControl);
-			var view7 = new AccessAllReportControl();
-			_views.Add(ViewType.AccessAllReport, view7);
+			pnCustomFilter.Controls.AddRange(view6.FilterControls.ToArray());
+			var view7 = new QuizUnitedData.ContainerControl();
+			_views.Add(ViewType.QuizUnitedReport, view7);
 			splitContainerControl.Panel2.Controls.Add(view7);
-			if (view7.FilterControl != null)
-				pnCustomFilter.Controls.Add(view7.FilterControl);
-			var view8 = new QuizPassUserReportControl();
-			_views.Add(ViewType.QuizPassUserReport, view8);
-			splitContainerControl.Panel2.Controls.Add(view8);
-			if (view8.FilterControl != null)
-				pnCustomFilter.Controls.Add(view8.FilterControl);
-			var view9 = new QuizPassGroupReportControl();
-			_views.Add(ViewType.QuizPassGroupReport, view9);
-			splitContainerControl.Panel2.Controls.Add(view9);
-			if (view9.FilterControl != null)
-				pnCustomFilter.Controls.Add(view9.FilterControl);
-			var view10 = new QuizStatusUserReportControl();
-			_views.Add(ViewType.QuizStatusUserReport, view10);
-			splitContainerControl.Panel2.Controls.Add(view10);
-			if (view10.FilterControl != null)
-				pnCustomFilter.Controls.Add(view10.FilterControl);
-			var view11 = new QuizUnitedReportControl();
-			_views.Add(ViewType.QuizUnitedReport, view11);
-			splitContainerControl.Panel2.Controls.Add(view11);
-			if (view11.FilterControl != null)
-				pnCustomFilter.Controls.Add(view11.FilterControl);
+			pnCustomFilter.Controls.AddRange(view7.FilterControls.ToArray());
 		}
 
 		public void ChangeView(ViewType viewType)

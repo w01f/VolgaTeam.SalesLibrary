@@ -115,145 +115,189 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\AccessData\ContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\AccessData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\AccessData\TotalControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\AccessData\TotalControl.Designer.cs">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\AccessData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\AccessData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="PresentationClasses\Activities\ActivitiesManagerControl.Designer.cs">
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\AccessGroupFilter.cs">
+    <Compile Include="PresentationClasses\Activities\AccessData\GroupFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\AccessGroupFilter.Designer.cs">
-      <DependentUpon>AccessGroupFilter.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\AccessData\GroupFilter.Designer.cs">
+      <DependentUpon>GroupFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.cs">
+    <Compile Include="PresentationClasses\Activities\AccessData\TotalFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\AccessAllFilter.Designer.cs">
-      <DependentUpon>AccessAllFilter.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\AccessData\TotalFilter.Designer.cs">
+      <DependentUpon>TotalFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\QuizUnitedFilter.cs">
+    <Compile Include="PresentationClasses\Activities\QuizPassData\ContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\QuizUnitedFilter.Designer.cs">
-      <DependentUpon>QuizUnitedFilter.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\QuizPassData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\QuizPassFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\QuizPassFilter.Designer.cs">
-      <DependentUpon>QuizPassFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\RawDataFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\RawDataFilter.Designer.cs">
-      <DependentUpon>RawDataFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.Designer.cs">
-      <DependentUpon>NavigationGroupFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\NavigationUserFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\NavigationUserFilter.Designer.cs">
-      <DependentUpon>NavigationUserFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\MainGroupFilter.Designer.cs">
-      <DependentUpon>MainGroupFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\MainUserFilter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Filters\MainUserFilter.Designer.cs">
-      <DependentUpon>MainUserFilter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\AccessGroupReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\AccessGroupReportControl.Designer.cs">
-      <DependentUpon>AccessGroupReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\AccessAllReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\AccessAllReportControl.Designer.cs">
-      <DependentUpon>AccessAllReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportTotalControl.cs">
+    <Compile Include="PresentationClasses\Activities\QuizPassData\TotalControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportTotalControl.Designer.cs">
-      <DependentUpon>QuizUnitedReportTotalControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\QuizPassData\TotalControl.Designer.cs">
+      <DependentUpon>TotalControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizPassData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizPassData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizPassData\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizPassData\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizStatusData\ContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizStatusData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizStatusData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizStatusData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizStatusData\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizStatusData\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\ContainerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\TotalControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\TotalControl.Designer.cs">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\RawData\Filter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\RawData\Filter.Designer.cs">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\GroupFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\GroupFilter.Designer.cs">
+      <DependentUpon>GroupFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\UserFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\NavigationData\UserFilter.Designer.cs">
+      <DependentUpon>UserFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\GroupFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\GroupFilter.Designer.cs">
+      <DependentUpon>GroupFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\UserFilter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\UserFilter.Designer.cs">
+      <DependentUpon>UserFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\IGroupControl.cs" />
+    <Compile Include="PresentationClasses\Activities\MainData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\TotalControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\TotalControl.Designer.cs">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\RawData\GroupControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\RawData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ToolClasses\ActivityExportHelper.cs" />
     <Compile Include="ToolClasses\GroupSummaryHelper.cs" />
-    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportGroupControl.cs">
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\GroupControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportGroupControl.Designer.cs">
-      <DependentUpon>QuizUnitedReportGroupControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\GroupControl.Designer.cs">
+      <DependentUpon>GroupControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportControl.cs">
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\ContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizUnitedReportControl.Designer.cs">
-      <DependentUpon>QuizUnitedReportControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\QuizUnitedData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.cs">
+    <Compile Include="PresentationClasses\Activities\MainData\TotalControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\TotalControl.Designer.cs">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Activities\MainData\ContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.Designer.cs">
-      <DependentUpon>QuizStatusUserReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizPassGroupReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizPassGroupReportControl.Designer.cs">
-      <DependentUpon>QuizPassGroupReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizPassUserReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\QuizPassUserReportControl.Designer.cs">
-      <DependentUpon>QuizPassUserReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.Designer.cs">
-      <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\NavigationUserReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\NavigationUserReportControl.Designer.cs">
-      <DependentUpon>NavigationUserReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\MainGroupReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\MainGroupReportControl.Designer.cs">
-      <DependentUpon>MainGroupReportControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\MainUserReportControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\MainUserReportControl.Designer.cs">
-      <DependentUpon>MainUserReportControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\MainData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\Activities\IActivitiesView.cs" />
-    <Compile Include="PresentationClasses\Activities\Views\RawDataControl.cs">
+    <Compile Include="PresentationClasses\Activities\RawData\ContainerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PresentationClasses\Activities\Views\RawDataControl.Designer.cs">
-      <DependentUpon>RawDataControl.cs</DependentUpon>
+    <Compile Include="PresentationClasses\Activities\RawData\ContainerControl.Designer.cs">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\InactiveUses\InactiveUsersManagerControl.cs">
       <SubType>UserControl</SubType>
@@ -383,87 +427,114 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\AccessData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\AccessData\TotalControl.resx">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\AccessData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\Activities\ActivitiesManagerControl.resx">
       <DependentUpon>ActivitiesManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessGroupFilter.resx">
-      <DependentUpon>AccessGroupFilter.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\AccessData\GroupFilter.resx">
+      <DependentUpon>GroupFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\AccessAllFilter.resx">
-      <DependentUpon>AccessAllFilter.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\AccessData\TotalFilter.resx">
+      <DependentUpon>TotalFilter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\QuizUnitedFilter.resx">
-      <DependentUpon>QuizUnitedFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\QuizPassFilter.resx">
-      <DependentUpon>QuizPassFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\RawDataFilter.resx">
-      <DependentUpon>RawDataFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationGroupFilter.resx">
-      <DependentUpon>NavigationGroupFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\NavigationUserFilter.resx">
-      <DependentUpon>NavigationUserFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainGroupFilter.resx">
-      <DependentUpon>MainGroupFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Filters\MainUserFilter.resx">
-      <DependentUpon>MainUserFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\AccessGroupReportControl.resx">
-      <DependentUpon>AccessGroupReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizPassData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\AccessAllReportControl.resx">
-      <DependentUpon>AccessAllReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizPassData\TotalControl.resx">
+      <DependentUpon>TotalControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizUnitedReportTotalControl.resx">
-      <DependentUpon>QuizUnitedReportTotalControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizPassData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizUnitedReportGroupControl.resx">
-      <DependentUpon>QuizUnitedReportGroupControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizPassData\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizStatusData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizUnitedReportControl.resx">
-      <DependentUpon>QuizUnitedReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizStatusData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizStatusUserReportControl.resx">
-      <DependentUpon>QuizStatusUserReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizStatusData\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizUnitedData\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizPassGroupReportControl.resx">
-      <DependentUpon>QuizPassGroupReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\TotalControl.resx">
+      <DependentUpon>TotalControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\QuizPassUserReportControl.resx">
-      <DependentUpon>QuizPassUserReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\NavigationGroupReportControl.resx">
-      <DependentUpon>NavigationGroupReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\RawData\Filter.resx">
+      <DependentUpon>Filter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\GroupFilter.resx">
+      <DependentUpon>GroupFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\NavigationData\UserFilter.resx">
+      <DependentUpon>UserFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainData\GroupFilter.resx">
+      <DependentUpon>GroupFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainData\UserFilter.resx">
+      <DependentUpon>UserFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\NavigationUserReportControl.resx">
-      <DependentUpon>NavigationUserReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizUnitedData\TotalControl.resx">
+      <DependentUpon>TotalControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\MainGroupReportControl.resx">
-      <DependentUpon>MainGroupReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizUnitedData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\MainUserReportControl.resx">
-      <DependentUpon>MainUserReportControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\QuizUnitedData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationClasses\Activities\Views\RawDataControl.resx">
-      <DependentUpon>RawDataControl.cs</DependentUpon>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainData\TotalControl.resx">
+      <DependentUpon>TotalControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\MainData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\RawData\ContainerControl.resx">
+      <DependentUpon>ContainerControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Activities\RawData\GroupControl.resx">
+      <DependentUpon>GroupControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\InactiveUses\InactiveUsersManagerControl.resx">
@@ -498,6 +569,7 @@
       <DependentUpon>UtilitiesManagerControl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -639,6 +711,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

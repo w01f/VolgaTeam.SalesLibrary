@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SalesDepot.SiteManager.PresentationClasses.Activities
@@ -8,7 +9,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 		DateTime StartDate { get; set; }
 		DateTime EndDate { get; set; }
 		bool Active { get; set; }
-		Control FilterControl { get; }
+		IEnumerable<Control> FilterControls { get; }
 		void ShowView();
 		void UpdateData(bool showMessages, ref string updateMessage);
 		void ClearData();
@@ -19,15 +20,11 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities
 	{
 		RawData = 0,
 		MainUserReport = 1,
-		MainGroupReport = 2,
-		NavigationUserReport = 3,
-		NavigationGroupReport = 4,
-		AccessGroupReport = 5,
-		AccessAllReport = 6,
-		QuizPassUserReport = 7,
-		QuizPassGroupReport = 8,
-		QuizStatusUserReport = 9,
-		QuizUnitedReport = 10,
+		NavigationUserReport = 2,
+		AccessGroupReport = 3,
+		QuizPassUserReport = 4,
+		QuizStatusUserReport = 5,
+		QuizUnitedReport = 6,
 		None = 999
 	}
 }

@@ -71,14 +71,9 @@
 			this.buttonItemActivitiesViewsReport2 = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemActivitiesViewsReport3 = new DevComponents.DotNetBar.ButtonItem();
 			this.itemContainerActivitiesViews2 = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemActivitiesViewsReport5 = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemActivitiesViewsReport4 = new DevComponents.DotNetBar.ButtonItem();
+			this.buttonItemActivitiesViewsReport5 = new DevComponents.DotNetBar.ButtonItem();
 			this.buttonItemActivitiesViewsReport6 = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemActivitiesViewsReport7 = new DevComponents.DotNetBar.ButtonItem();
-			this.itemContainerActivitiesViews3 = new DevComponents.DotNetBar.ItemContainer();
-			this.buttonItemActivitiesViewsReport8 = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemActivitiesViewsReport9 = new DevComponents.DotNetBar.ButtonItem();
-			this.buttonItemActivitiesViewsReport10 = new DevComponents.DotNetBar.ButtonItem();
 			this.ribbonBarActivitiesSite = new DevComponents.DotNetBar.RibbonBar();
 			this.comboBoxEditActivitiesSite = new DevExpress.XtraEditors.ComboBoxEdit();
 			this.itemContainerActivitiesSite = new DevComponents.DotNetBar.ItemContainer();
@@ -710,7 +705,7 @@
 			this.ribbonBarActivitiesExit.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemActivitiesExit});
 			this.ribbonBarActivitiesExit.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarActivitiesExit.Location = new System.Drawing.Point(720, 0);
+			this.ribbonBarActivitiesExit.Location = new System.Drawing.Point(660, 0);
 			this.ribbonBarActivitiesExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.ribbonBarActivitiesExit.Name = "ribbonBarActivitiesExit";
 			this.ribbonBarActivitiesExit.Size = new System.Drawing.Size(77, 115);
@@ -742,7 +737,7 @@
 			this.ribbonBarActivitiesExport.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemActivitiesExport});
 			this.ribbonBarActivitiesExport.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-			this.ribbonBarActivitiesExport.Location = new System.Drawing.Point(632, 0);
+			this.ribbonBarActivitiesExport.Location = new System.Drawing.Point(572, 0);
 			this.ribbonBarActivitiesExport.Name = "ribbonBarActivitiesExport";
 			this.ribbonBarActivitiesExport.Size = new System.Drawing.Size(88, 115);
 			this.ribbonBarActivitiesExport.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -779,12 +774,11 @@
 			this.ribbonBarActivitiesViews.Dock = System.Windows.Forms.DockStyle.Left;
 			this.ribbonBarActivitiesViews.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.itemContainerActivitiesViews1,
-            this.itemContainerActivitiesViews2,
-            this.itemContainerActivitiesViews3});
+            this.itemContainerActivitiesViews2});
 			this.ribbonBarActivitiesViews.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
 			this.ribbonBarActivitiesViews.Location = new System.Drawing.Point(451, 0);
 			this.ribbonBarActivitiesViews.Name = "ribbonBarActivitiesViews";
-			this.ribbonBarActivitiesViews.Size = new System.Drawing.Size(181, 115);
+			this.ribbonBarActivitiesViews.Size = new System.Drawing.Size(121, 115);
 			this.ribbonBarActivitiesViews.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
 			this.ribbonBarActivitiesViews.TabIndex = 30;
 			this.ribbonBarActivitiesViews.Text = "Views";
@@ -856,19 +850,11 @@
 			this.itemContainerActivitiesViews2.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItemActivitiesViewsReport4,
             this.buttonItemActivitiesViewsReport5,
-            this.buttonItemActivitiesViewsReport6,
-            this.buttonItemActivitiesViewsReport7});
+            this.buttonItemActivitiesViewsReport6});
 			// 
 			// 
 			// 
 			this.itemContainerActivitiesViews2.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemActivitiesViewsReport5
-			// 
-			this.buttonItemActivitiesViewsReport5.Name = "buttonItemActivitiesViewsReport5";
-			this.buttonItemActivitiesViewsReport5.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesViewsReport5.Tag = "5";
-			this.buttonItemActivitiesViewsReport5.Text = "Report #5";
 			// 
 			// buttonItemActivitiesViewsReport4
 			// 
@@ -877,58 +863,19 @@
 			this.buttonItemActivitiesViewsReport4.Tag = "4";
 			this.buttonItemActivitiesViewsReport4.Text = "Report #4";
 			// 
+			// buttonItemActivitiesViewsReport5
+			// 
+			this.buttonItemActivitiesViewsReport5.Name = "buttonItemActivitiesViewsReport5";
+			this.buttonItemActivitiesViewsReport5.SubItemsExpandWidth = 14;
+			this.buttonItemActivitiesViewsReport5.Tag = "5";
+			this.buttonItemActivitiesViewsReport5.Text = "Report #5";
+			// 
 			// buttonItemActivitiesViewsReport6
 			// 
 			this.buttonItemActivitiesViewsReport6.Name = "buttonItemActivitiesViewsReport6";
 			this.buttonItemActivitiesViewsReport6.SubItemsExpandWidth = 14;
 			this.buttonItemActivitiesViewsReport6.Tag = "6";
 			this.buttonItemActivitiesViewsReport6.Text = "Report #6";
-			// 
-			// buttonItemActivitiesViewsReport7
-			// 
-			this.buttonItemActivitiesViewsReport7.Name = "buttonItemActivitiesViewsReport7";
-			this.buttonItemActivitiesViewsReport7.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesViewsReport7.Tag = "7";
-			this.buttonItemActivitiesViewsReport7.Text = "Report #7";
-			// 
-			// itemContainerActivitiesViews3
-			// 
-			// 
-			// 
-			// 
-			this.itemContainerActivitiesViews3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			this.itemContainerActivitiesViews3.ItemSpacing = 3;
-			this.itemContainerActivitiesViews3.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
-			this.itemContainerActivitiesViews3.Name = "itemContainerActivitiesViews3";
-			this.itemContainerActivitiesViews3.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItemActivitiesViewsReport8,
-            this.buttonItemActivitiesViewsReport9,
-            this.buttonItemActivitiesViewsReport10});
-			// 
-			// 
-			// 
-			this.itemContainerActivitiesViews3.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-			// 
-			// buttonItemActivitiesViewsReport8
-			// 
-			this.buttonItemActivitiesViewsReport8.Name = "buttonItemActivitiesViewsReport8";
-			this.buttonItemActivitiesViewsReport8.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesViewsReport8.Tag = "8";
-			this.buttonItemActivitiesViewsReport8.Text = "Report #8";
-			// 
-			// buttonItemActivitiesViewsReport9
-			// 
-			this.buttonItemActivitiesViewsReport9.Name = "buttonItemActivitiesViewsReport9";
-			this.buttonItemActivitiesViewsReport9.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesViewsReport9.Tag = "9";
-			this.buttonItemActivitiesViewsReport9.Text = "Report #9";
-			// 
-			// buttonItemActivitiesViewsReport10
-			// 
-			this.buttonItemActivitiesViewsReport10.Name = "buttonItemActivitiesViewsReport10";
-			this.buttonItemActivitiesViewsReport10.SubItemsExpandWidth = 14;
-			this.buttonItemActivitiesViewsReport10.Tag = "10";
-			this.buttonItemActivitiesViewsReport10.Text = "Report #10";
 			// 
 			// ribbonBarActivitiesSite
 			// 
@@ -2219,11 +2166,9 @@
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsRawData;
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport1;
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport2;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport3;
 		private DevComponents.DotNetBar.ItemContainer itemContainerActivitiesViews2;
+		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport3;
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport4;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport5;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport6;
 		private DevComponents.DotNetBar.RibbonBar ribbonBarActivitiesExport;
 		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesExport;
 		private DevComponents.DotNetBar.RibbonPanel ribbonPanelTicker;
@@ -2290,11 +2235,8 @@
 		private DevComponents.DotNetBar.ItemContainer itemContainerUtilitiesLogo;
 		public DevComponents.DotNetBar.LabelItem labelItemUtilitiesLogo;
 		public DevComponents.DotNetBar.RibbonTabItem ribbonTabItemUtilities;
-		private DevComponents.DotNetBar.ItemContainer itemContainerActivitiesViews3;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport7;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport8;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport9;
-		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport10;
+		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport5;
+		public DevComponents.DotNetBar.ButtonItem buttonItemActivitiesViewsReport6;
 	}
 }
 
