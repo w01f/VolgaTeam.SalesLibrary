@@ -21,6 +21,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private string _note = string.Empty;
 		private int _order;
 		private Image _widget;
+		private bool _isForbidden;
 		private bool _isRestricted;
 		private bool _noShare;
 		private string _assignedUsers;
@@ -401,6 +402,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			}
 		}
 
+		public bool IsForbidden
+		{
+			get { return _isForbidden; }
+			set
+			{
+				if (_isForbidden != value)
+					LastChanged = DateTime.Now;
+				_isForbidden = value;
+			}
+		}
+
 		public bool IsRestricted
 		{
 			get { return _isRestricted; }
@@ -475,6 +487,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsForbidden = IsForbidden;
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
@@ -511,6 +524,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.Append(@"<Widget>" + Convert.ToBase64String((byte[])converter.ConvertTo(_widget, typeof(byte[]))).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</Widget>");
 			result.AppendLine(@"<AttachmentProperties>" + AttachmentProperties.Serialize() + @"</AttachmentProperties>");
 			result.AppendLine(@"<AddDate>" + AddDate + @"</AddDate>");
+			result.AppendLine(@"<IsForbidden>" + IsForbidden + @"</IsForbidden>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<AssignedUsers>" + (AssignedUsers ?? string.Empty).Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</AssignedUsers>");
@@ -617,6 +631,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
+						break;
+					case "IsForbidden":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isForbidden = tempBool;
 						break;
 					case "IsRestricted":
 						if (bool.TryParse(childNode.InnerText, out tempBool))
@@ -831,6 +849,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsForbidden = IsForbidden;
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;

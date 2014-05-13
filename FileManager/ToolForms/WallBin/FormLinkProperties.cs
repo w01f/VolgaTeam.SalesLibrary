@@ -87,6 +87,7 @@ namespace FileManager.ToolForms.WallBin
 				buttonXFileCardImportantInfoAdd.Font = new Font(buttonXFileCardImportantInfoAdd.Font.FontFamily, buttonXFileCardImportantInfoAdd.Font.Size - 2, buttonXFileCardImportantInfoAdd.Font.Style);
 
 				rbSecurityAllowed.Font = new Font(rbSecurityAllowed.Font.FontFamily, rbSecurityAllowed.Font.Size - 2, rbSecurityAllowed.Font.Style);
+				rbSecurityForbidden.Font = new Font(rbSecurityForbidden.Font.FontFamily, rbSecurityForbidden.Font.Size - 2, rbSecurityForbidden.Font.Style);
 				rbSecurityDenied.Font = new Font(rbSecurityDenied.Font.FontFamily, rbSecurityDenied.Font.Size - 2, rbSecurityDenied.Font.Style);
 				rbSecurityRestricted.Font = new Font(rbSecurityRestricted.Font.FontFamily, rbSecurityRestricted.Font.Size - 2, rbSecurityRestricted.Font.Style);
 				ckSecurityShareLink.Font = new Font(ckSecurityShareLink.Font.FontFamily, ckSecurityShareLink.Font.Size - 2, ckSecurityShareLink.Font.Style);

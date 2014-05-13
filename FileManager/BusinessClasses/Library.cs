@@ -110,11 +110,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public RootFolder GetRootFolder(Guid folderId)
 		{
-			RootFolder folder = ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+			var folder = ExtraFolders.FirstOrDefault(x => x.RootId.Equals(folderId));
 			if (folder != null)
 				return folder;
-			else
-				return RootFolder;
+			return RootFolder;
 		}
 
 		public List<IPreviewContainer> PreviewContainers { get; private set; }
@@ -125,13 +124,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public IPreviewContainer GetPreviewContainer(string originalPath)
 		{
-			IPreviewContainer previewContainer = PreviewContainers.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault();
-			if (previewContainer == null)
-			{
-				previewContainer = new UniversalPreviewContainer(this);
-				previewContainer.OriginalPath = originalPath;
-				PreviewContainers.Add(previewContainer);
-			}
+			var previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
+			if (previewContainer != null) return previewContainer;
+			previewContainer = new UniversalPreviewContainer(this);
+			previewContainer.OriginalPath = originalPath;
+			PreviewContainers.Add(previewContainer);
 			return previewContainer;
 		}
 
@@ -198,7 +195,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (!(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
+							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
 								continue;
 							if (file is LibraryFolderLink)
 								alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);

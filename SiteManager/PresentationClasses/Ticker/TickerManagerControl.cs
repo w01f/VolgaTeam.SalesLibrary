@@ -48,7 +48,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Ticker
 				Enabled = false;
 				form.laProgress.Text = "Updating data...";
 				form.TopMost = true;
-				var thread = new Thread(() => BusinessClasses.WebSiteManager.Instance.SelectedSite.SetTickerLinks(_records.ToArray(), out message));
+				var thread = new Thread(() => WebSiteManager.Instance.SelectedSite.SetTickerLinks(_records.ToArray(), out message));
 				form.Show();
 				thread.Start();
 				while (thread.IsAlive)
@@ -78,7 +78,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Ticker
 					Enabled = false;
 					form.laProgress.Text = "Loading data...";
 					form.TopMost = true;
-					var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetTickerLinks(out message)));
+					var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetTickerLinks(out message)));
 					form.Show();
 					thread.Start();
 					while (thread.IsAlive)
@@ -95,7 +95,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Ticker
 			}
 			else
 			{
-				var thread = new Thread(() => _records.AddRange(BusinessClasses.WebSiteManager.Instance.SelectedSite.GetTickerLinks(out message)));
+				var thread = new Thread(() => _records.AddRange(WebSiteManager.Instance.SelectedSite.GetTickerLinks(out message)));
 				thread.Start();
 				while (thread.IsAlive)
 				{

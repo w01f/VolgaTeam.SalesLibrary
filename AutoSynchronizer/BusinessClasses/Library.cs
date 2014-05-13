@@ -196,7 +196,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 					{
 						foreach (LibraryLink file in folder.Files)
 						{
-							if (!(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
+							if (file.IsForbidden || !(!file.IsRestricted || (file.IsRestricted && !string.IsNullOrEmpty(file.AssignedUsers))))
 								continue;
 							if (file is LibraryFolderLink)
 								alive = (file as LibraryFolderLink).IsPreviewContainerAlive(previewContainer);

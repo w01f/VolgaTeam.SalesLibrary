@@ -40,6 +40,7 @@
 			this.rbSecurityDenied = new System.Windows.Forms.RadioButton();
 			this.pnButtons = new System.Windows.Forms.Panel();
 			this.buttonXReset = new DevComponents.DotNetBar.ButtonX();
+			this.rbSecurityForbidden = new System.Windows.Forms.RadioButton();
 			this.pnMain.SuspendLayout();
 			this.pnData.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.memoEditSecurityUsers.Properties)).BeginInit();
@@ -72,6 +73,7 @@
 			// 
 			// pnData
 			// 
+			this.pnData.Controls.Add(this.rbSecurityForbidden);
 			this.pnData.Controls.Add(this.ckSecurityShareLink);
 			this.pnData.Controls.Add(this.memoEditSecurityUsers);
 			this.pnData.Controls.Add(this.rbSecurityAllowed);
@@ -102,10 +104,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.memoEditSecurityUsers.Enabled = false;
-			this.memoEditSecurityUsers.Location = new System.Drawing.Point(23, 189);
+			this.memoEditSecurityUsers.Location = new System.Drawing.Point(23, 203);
 			this.memoEditSecurityUsers.Name = "memoEditSecurityUsers";
 			this.memoEditSecurityUsers.Properties.NullText = "Type Usernames, separated by  commas...";
-			this.memoEditSecurityUsers.Size = new System.Drawing.Size(318, 90);
+			this.memoEditSecurityUsers.Size = new System.Drawing.Size(318, 76);
 			this.memoEditSecurityUsers.StyleController = this.styleController;
 			this.memoEditSecurityUsers.TabIndex = 38;
 			this.memoEditSecurityUsers.EditValueChanged += new System.EventHandler(this.memoEditSecurityUsers_EditValueChanged);
@@ -130,9 +132,9 @@
 			this.rbSecurityAllowed.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityAllowed.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.rbSecurityAllowed.Location = new System.Drawing.Point(5, 8);
+			this.rbSecurityAllowed.Location = new System.Drawing.Point(5, 6);
 			this.rbSecurityAllowed.Name = "rbSecurityAllowed";
-			this.rbSecurityAllowed.Size = new System.Drawing.Size(336, 45);
+			this.rbSecurityAllowed.Size = new System.Drawing.Size(336, 38);
 			this.rbSecurityAllowed.TabIndex = 37;
 			this.rbSecurityAllowed.TabStop = true;
 			this.rbSecurityAllowed.Text = "This link is DISPLAYED in the Local Sales Library and also in the iPad Sales Libr" +
@@ -145,7 +147,7 @@
 			this.rbSecurityRestricted.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityRestricted.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.rbSecurityRestricted.Location = new System.Drawing.Point(5, 130);
+			this.rbSecurityRestricted.Location = new System.Drawing.Point(5, 144);
 			this.rbSecurityRestricted.Name = "rbSecurityRestricted";
 			this.rbSecurityRestricted.Size = new System.Drawing.Size(336, 53);
 			this.rbSecurityRestricted.TabIndex = 36;
@@ -160,9 +162,9 @@
 			this.rbSecurityDenied.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.rbSecurityDenied.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			this.rbSecurityDenied.Location = new System.Drawing.Point(5, 67);
+			this.rbSecurityDenied.Location = new System.Drawing.Point(5, 94);
 			this.rbSecurityDenied.Name = "rbSecurityDenied";
-			this.rbSecurityDenied.Size = new System.Drawing.Size(336, 51);
+			this.rbSecurityDenied.Size = new System.Drawing.Size(336, 44);
 			this.rbSecurityDenied.TabIndex = 35;
 			this.rbSecurityDenied.TabStop = true;
 			this.rbSecurityDenied.Text = "This link is ONLY DISPLAYED in the Local Sales Library (not visible at all in the" +
@@ -193,6 +195,20 @@
 			this.buttonXReset.Text = "RESET ALL SECURITY for the Selected Links";
 			this.buttonXReset.TextColor = System.Drawing.Color.Black;
 			this.buttonXReset.Click += new System.EventHandler(this.buttonXReset_Click);
+			// 
+			// rbSecurityForbidden
+			// 
+			this.rbSecurityForbidden.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.rbSecurityForbidden.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.rbSecurityForbidden.Location = new System.Drawing.Point(5, 47);
+			this.rbSecurityForbidden.Name = "rbSecurityForbidden";
+			this.rbSecurityForbidden.Size = new System.Drawing.Size(336, 44);
+			this.rbSecurityForbidden.TabIndex = 40;
+			this.rbSecurityForbidden.TabStop = true;
+			this.rbSecurityForbidden.Text = "This link is HIDDEN in the Local Sales Library and also in the iPad Sales Library" +
+    "…";
+			this.rbSecurityForbidden.UseVisualStyleBackColor = true;
 			// 
 			// SecurityEditor
 			// 
@@ -225,5 +241,6 @@
 		public System.Windows.Forms.RadioButton rbSecurityRestricted;
 		public System.Windows.Forms.RadioButton rbSecurityDenied;
 		public System.Windows.Forms.CheckBox ckSecurityShareLink;
+		public System.Windows.Forms.RadioButton rbSecurityForbidden;
 	}
 }

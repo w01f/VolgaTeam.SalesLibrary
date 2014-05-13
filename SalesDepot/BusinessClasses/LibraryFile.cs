@@ -16,6 +16,7 @@ namespace SalesDepot.BusinessClasses
 	public class LibraryLink : ILibraryLink
 	{
 		private string _assignedUsers;
+		private bool _isForbidden;
 		private bool _isRestricted;
 		private bool _noShare;
 		private bool _linkAvailabel;
@@ -335,6 +336,17 @@ namespace SalesDepot.BusinessClasses
 			}
 		}
 
+		public bool IsForbidden
+		{
+			get { return _isForbidden; }
+			set
+			{
+				if (_isForbidden != value)
+					LastChanged = DateTime.Now;
+				_isForbidden = value;
+			}
+		}
+
 		public bool IsRestricted
 		{
 			get { return _isRestricted; }
@@ -404,6 +416,7 @@ namespace SalesDepot.BusinessClasses
 			file.RelativePath = RelativePath;
 			file.Type = Type;
 			file.AddDate = AddDate;
+			file.IsForbidden = IsForbidden;
 			file.IsRestricted = IsRestricted;
 			file.NoShare = NoShare;
 			file.AssignedUsers = AssignedUsers;
@@ -435,6 +448,7 @@ namespace SalesDepot.BusinessClasses
 			result.AppendLine(@"<Type>" + (int)Type + @"</Type>");
 			result.AppendLine(@"<Order>" + Order + @"</Order>");
 			result.AppendLine(@"<EnableWidget>" + EnableWidget + @"</EnableWidget>");
+			result.AppendLine(@"<IsForbidden>" + IsForbidden + @"</IsForbidden>");
 			result.AppendLine(@"<IsRestricted>" + IsRestricted + @"</IsRestricted>");
 			result.AppendLine(@"<NoShare>" + NoShare + @"</NoShare>");
 			result.AppendLine(@"<DoNotGeneratePreview>" + _doNotGeneratePreview + @"</DoNotGeneratePreview>");
@@ -523,6 +537,10 @@ namespace SalesDepot.BusinessClasses
 					case "AddDate":
 						if (DateTime.TryParse(childNode.InnerText, out tempDate))
 							AddDate = tempDate;
+						break;
+					case "IsForbidden":
+						if (bool.TryParse(childNode.InnerText, out tempBool))
+							_isForbidden = tempBool;
 						break;
 					case "IsRestricted":
 						if (bool.TryParse(childNode.InnerText, out tempBool))

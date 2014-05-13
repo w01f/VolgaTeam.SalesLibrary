@@ -29,6 +29,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		string Note { get; set; }
 		bool DisplayAsBold { get; }
 		bool IsExpired { get; }
+		bool IsForbidden { get; set; }
 		bool IsRestricted { get; set; }
 		bool NoShare { get; set; }
 		bool DoNotGeneratePreview { get; set; }

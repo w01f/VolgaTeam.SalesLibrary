@@ -236,7 +236,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 					#region Files
 					var links = new List<LibraryLink>();
-					foreach (var libraryFile in libraryFolder.Files.Where(x => x.Type != FileTypes.Network && (!x.IsRestricted || (x.IsRestricted && !(string.IsNullOrEmpty(x.AssignedUsers))))))
+					foreach (var libraryFile in libraryFolder.Files.Where(x => x.Type != FileTypes.Network && !x.IsForbidden && (!x.IsRestricted || (x.IsRestricted && !(string.IsNullOrEmpty(x.AssignedUsers))))))
 					{
 						var link = new LibraryLink();
 						link.id = libraryFile.Identifier.ToString();
@@ -513,7 +513,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			#endregion
 
 			if (libraryFile is ILibraryFolderLink)
-				foreach (ILibraryLink childFile in (libraryFile as ILibraryFolderLink).FolderContent)
+				foreach (var childFile in (libraryFile as ILibraryFolderLink).FolderContent)
 				{
 					var childLink = new LibraryLink();
 					childLink.id = childFile.Identifier.ToString();

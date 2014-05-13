@@ -50,7 +50,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			set
 			{
 				_folder = value;
-				var linksCount = _folder.Files.Count(x => x.Type != FileTypes.LineBreak);
+				var linksCount = _folder.Files.Count(x => !x.IsForbidden && x.Type != FileTypes.LineBreak);
 				var linksText = linksCount > 0 ? string.Format(" <font color=\"#727272\">({0})</font>", linksCount > 1 ? string.Format("{0} links", linksCount.ToString()) : "1 link") : string.Empty;
 				laIndex.Text = (_folder.AbsoluteRowOrder + 1).ToString();
 
@@ -647,12 +647,12 @@ namespace SalesDepot.PresentationClasses.WallBin
 		private void UpdateDataSource()
 		{
 			grFiles.Rows.Clear();
-			foreach (LibraryLink libraryFile in _folder.Files)
+			foreach (LibraryLink libraryFile in _folder.Files.Where(f => !f.IsForbidden))
 			{
 				var row = grFiles.Rows[grFiles.Rows.Add(libraryFile.DisplayName + libraryFile.Note)];
 				row.Tag = libraryFile;
 			}
-			_containsWidgets = _folder.Files.Any(x => x.Widget != null);
+			_containsWidgets = _folder.Files.Any(x => !x.IsForbidden && x.Widget != null);
 			if (Parent != null)
 				((ColumnPanel)Parent).ResizePanel();
 		}
@@ -681,7 +681,7 @@ namespace SalesDepot.PresentationClasses.WallBin
 			_noteFont = new Font(_folder.WindowFont.FontFamily, Decorator.State.FontSize, FontStyle.Bold | _folder.WindowFont.Style);
 			grFiles.DefaultCellStyle.Font = _noteFont;
 			colDisplayName.DefaultCellStyle.Font = _noteFont;
-			_containsWidgets = _folder.Files.Any(x => x.Widget != null);
+			_containsWidgets = _folder.Files.Any(x => !x.IsForbidden && x.Widget != null);
 
 			SetHeaderSize();
 			SetGridSize();
