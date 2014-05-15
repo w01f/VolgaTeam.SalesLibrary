@@ -247,6 +247,7 @@
       <DependentUpon>TabProgramSchedule.cs</DependentUpon>
     </Compile>
     <Compile Include="ToolClasses\ActivityManager.cs" />
+    <Compile Include="ToolClasses\FormStateHelper.cs" />
     <Compile Include="ToolForms\ProgramManager\FormOutputParameters.cs">
       <SubType>Form</SubType>
     </Compile>

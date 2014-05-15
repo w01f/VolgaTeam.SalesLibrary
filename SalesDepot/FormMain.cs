@@ -9,6 +9,7 @@ using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
 using SalesDepot.TabPages;
+using SalesDepot.ToolClasses;
 using SalesDepot.ToolForms;
 
 namespace SalesDepot
@@ -67,6 +68,7 @@ namespace SalesDepot
 		private FormMain()
 		{
 			InitializeComponent();
+			FormStateHelper.Init(this, Path.GetDirectoryName(typeof(FormMain).Assembly.Location), true);
 		}
 
 		protected override void OnHandleCreated(EventArgs e)
