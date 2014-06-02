@@ -71,6 +71,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="wlkysales.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="wuddupdog.com">
         <serverdata>
           <mappings>

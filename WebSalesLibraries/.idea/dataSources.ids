@@ -1435,6 +1435,16 @@
       <index name="id_link" unique="false" columns="id_link"/>
       <index name="value" unique="false" columns="value"/>
     </table>
+    <table name="tbl_main_menu_link" schema="" catalog="sales_library" type="TABLE">
+      <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
+      <column name="id_object" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12"/>
+      <column name="type" sqlType="VARCHAR" length="64" precision="0" nullable="false" jdbcType="12"/>
+      <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <index name="object" unique="false" columns="id_object"/>
+      <index name="order" unique="false" columns="order"/>
+    </table>
     <table name="tbl_page" schema="" catalog="sales_library" type="TABLE">
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
       <column name="id_library" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
@@ -1499,6 +1509,7 @@
       <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="source_path" sqlType="VARCHAR" length="512" precision="0" nullable="false" jdbcType="12"/>
+      <column name="pass_score" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
       <column name="config" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="group" unique="false" columns="id_group"/>
@@ -1508,7 +1519,9 @@
       <column name="id" sqlType="VARCHAR" length="36" precision="0" nullable="false" jdbcType="12"/>
       <column name="name" sqlType="VARCHAR" length="256" precision="0" nullable="false" jdbcType="12"/>
       <column name="id_parent" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12"/>
+      <column name="id_top_level" sqlType="VARCHAR" length="36" precision="0" nullable="true" jdbcType="12"/>
       <column name="order" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4"/>
+      <column name="config" sqlType="LONGBLOB" length="2147483647" precision="0" nullable="true" jdbcType="-4"/>
       <primary-key name="PRIMARY" columns="id"/>
       <index name="tab" unique="false" columns="id_parent"/>
     </table>

@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/storage/LinkStorage.php" afterPath="$PROJECT_DIR$/protected/models/storage/LinkStorage.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SearchController.php" afterPath="$PROJECT_DIR$/protected/controllers/SearchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/views/regular/site/index.php" afterPath="$PROJECT_DIR$/protected/views/regular/site/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
     </list>
     <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesPortal/protected/components/core/UserIdentity.php" />
@@ -16,6 +19,12 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesPortal/protected/views/regular/auth/login.php" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesPortal/protected/views/regular/auth/recoverPassword.php" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesPortal/protected/views/regular/auth/unauthorized.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/OvernightsCalendarObjects.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/BusinessClasses/OvernightsCalendarObjects.cs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.NET.sln" afterPath="$PROJECT_DIR$/../SalesDepot.NET.sln" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,184 +47,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="58" selection-start="943" selection-end="943" vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="3315">
-              <folding>
-                <element signature="e#8568#27075#0" expanded="false" />
-                <marker date="1398174630801" expanded="true" signature="8520:27084" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="8695:11685" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="8818:9530" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="8897:9155" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9201:9520" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9211:9507" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9266:9496" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9305:9484" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9318:9388" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9401:9468" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9562:10117" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="9722:10107" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="10180:10967" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="10316:10956" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="11106:11657" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="11263:11646" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="11850:15593" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="11982:12406" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="12035:12291" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="12439:13018" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="12639:13007" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="13051:13587" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="13214:13576" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="13699:14281" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="13885:14269" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="14334:14880" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="14489:14869" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="15005:15563" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="15164:15551" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="15792:18832" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="15929:16353" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="15982:16238" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="16386:16965" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="16586:16954" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="16998:17540" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="17167:17529" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="17573:18119" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="17728:18108" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="18244:18802" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="18403:18790" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="19007:21425" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="19136:19309" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="19342:19834" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="19524:19823" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="19867:20366" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="20056:20355" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="20399:20889" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="20579:20878" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="20922:21415" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="21105:21404" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="21600:22608" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="21730:21895" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="22020:22578" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="22179:22566" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="22768:23813" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="22892:23100" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="23225:23783" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="23384:23771" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="24159:27021" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="24272:24839" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="24306:24519" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="24813:24826" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="25248:26179" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="25684:26167" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="26433:26991" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="26592:26979" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27213:27375" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27319:27368" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27452:28959" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27458:27624" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27504:27617" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27671:27843" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27721:27836" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27890:28047" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="27930:28040" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28094:28281" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28152:28274" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28287:28474" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28345:28467" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28521:28713" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28583:28706" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28719:28911" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="28781:28904" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="29186:30157" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="29344:29632" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="29674:29934" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="29682:29925" placeholder="..." />
-                <marker date="1398174630801" expanded="true" signature="30025:30131" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ticker.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/ticker.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="27" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="799">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ticker.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/regular/base/ticker.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="1" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LocalDBS" pinned="false" current="false" current-in-tab="false">
         <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
+            <state line="0" column="32" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="102">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LinkStorage.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/models/storage/LinkStorage.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="236" column="0" selection-start="9385" selection-end="9385" vertical-scroll-proportion="0.0" vertical-offset="4012" max-vertical-offset="9129">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="18" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="8772">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchController.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="112" column="34" selection-start="3795" selection-end="3795" vertical-scroll-proportion="0.0" vertical-offset="2105" max-vertical-offset="3723">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchHelper.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/common/SearchHelper.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="76" selection-start="1036" selection-end="1096" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="884">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shortcuts.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="295" column="4" selection-start="9459" selection-end="9459" vertical-scroll-proportion="0.0" vertical-offset="4868" max-vertical-offset="9503">
               <folding>
-                <marker date="0" expanded="true" signature="0:25" placeholder="select * fro..tbl_library..." />
+                <marker date="1401642096447" expanded="false" signature="3820:3834" placeholder="..." />
+                <marker date="1401642096447" expanded="false" signature="16049:16084" placeholder="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ribbon.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/css/regular/base/ribbon.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="37" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="8619">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShortcutsPageStorage.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsPageStorage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="867">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShortcutsLinkStorage.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsLinkStorage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShortcutsTabStorage.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsTabStorage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="5" selection-start="205" selection-end="205" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="459">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="scaling.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/scaling.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="11" selection-start="4754" selection-end="5000" vertical-scroll-proportion="0.0" vertical-offset="2436" max-vertical-offset="3383">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ribbon.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/regular/base/ribbon.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="307" column="43" selection-start="6559" selection-end="6596" vertical-scroll-proportion="0.0" vertical-offset="5219" max-vertical-offset="5610">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -240,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/controllers/StatisticController.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizEnd.php" />
         <option value="$PROJECT_DIR$/protected/controllers/QuizzesController.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/quizzes/quizPanel.php" />
@@ -255,7 +138,6 @@
         <option value="$PROJECT_DIR$/protected/models/quizzes/QuizItem.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/homeBar.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SearchController.php" />
         <option value="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/EmptyShortcut.php" />
@@ -275,21 +157,23 @@
         <option value="$PROJECT_DIR$/protected/models/common/SearchHelper.php" />
         <option value="$PROJECT_DIR$/css/phone/shortcuts.css" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/page.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
         <option value="$PROJECT_DIR$/css/regular/base/shortcuts.css" />
         <option value="$PROJECT_DIR$/js/regular/base/links-grid.js" />
         <option value="$PROJECT_DIR$/js/regular/shortcuts/search-loader.js" />
         <option value="$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php" />
-        <option value="$PROJECT_DIR$/protected/models/storage/LinkStorage.php" />
         <option value="$PROJECT_DIR$/protected/models/favorites/FavoritesLinkStorage.php" />
         <option value="$PROJECT_DIR$/css/regular/base/links-grid.css" />
         <option value="$PROJECT_DIR$/js/regular/base/scaling.js" />
-        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/linkWrapper.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/SearchShortcut.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
         <option value="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
         <option value="$PROJECT_DIR$/protected/components/actions/QuizzesUpdateAction.php" />
+        <option value="$PROJECT_DIR$/protected/data/tables/tbl_main_menu_link.sql" />
+        <option value="$PROJECT_DIR$/protected/controllers/SearchController.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
+        <option value="$PROJECT_DIR$/protected/views/regular/site/index.php" />
+        <option value="$PROJECT_DIR$/protected/models/storage/LinkStorage.php" />
         <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
       </list>
     </option>
@@ -363,7 +247,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -375,14 +258,6 @@
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedExternalLibrariesNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PHP" />
-              <option name="myItemType" value="com.jetbrains.php.config.PhpExternalLibrariesNodePatcher$PatchedLibraryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="yii" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -391,34 +266,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -436,57 +283,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -504,7 +301,101 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="protected" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="regular" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebSalesLibraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -526,12 +417,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -580,11 +472,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\common" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\statistic" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\procedures" />
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\models\quizzes" />
-      <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\protected\data\tables" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Visual Studio 2005\SalesDepot.NET\WebSalesLibraries\images\shortcuts" />
@@ -1118,7 +1010,11 @@
       <created>1399302976079</created>
       <updated>1399302976079</updated>
     </task>
-    <option name="localTasksCounter" value="111" />
+    <task id="LOCAL-00111" summary="Web Sales Depot: Keyword and Category Search fix&#10;">
+      <created>1401724579627</created>
+      <updated>1401724579627</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TodoView" selected-index="3">
@@ -1143,34 +1039,34 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31215772" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2571885" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16400427" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2475356" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30625686" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27820373" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23375931" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2428115" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30625686" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24698134" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2777168" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31174535" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13611417" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24698134" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24422443" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919957" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13611417" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24919957" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1187,7 +1083,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="Web Sales Libraries: Search additional file types fix" />
     <MESSAGE value="Web Sales Libraries: Additional search options fix" />
     <MESSAGE value="Web Sales Libraries: User agent fix + Chrome MacOS fix + Gui Bug fixes" />
     <MESSAGE value="Web Sales Libraries: Shortcuts Search bar fix" />
@@ -1212,7 +1107,8 @@
     <MESSAGE value="Web Sales Depot: Small Tablets Shortcuts fixes" />
     <MESSAGE value="Web Sales Depot: iPad Force Preview fix" />
     <MESSAGE value="Web Sales Depot: iPad Force Preview fix&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: iPad Force Preview fix&#10;" />
+    <MESSAGE value="Web Sales Depot: Keyword and Category Search fix&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Web Sales Depot: Keyword and Category Search fix&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1223,17 +1119,12 @@
           <option name="timeStamp" value="74" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/protected/controllers/SearchController.php</url>
-          <line>57</line>
-          <option name="timeStamp" value="282" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/protected/models/common/SearchHelper.php</url>
-          <line>44</line>
-          <option name="timeStamp" value="283" />
+          <line>6</line>
+          <option name="timeStamp" value="288" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="286" />
+      <option name="time" value="289" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -1249,68 +1140,6 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/css/phone/shortcuts.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="1" selection-start="40" selection-end="40" vertical-scroll-proportion="0.08717949" vertical-offset="0" max-vertical-offset="585" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/shortcuts.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="0" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0" vertical-offset="418" max-vertical-offset="1037" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="0" selection-start="3735" selection-end="3735" vertical-scroll-proportion="0.29402262" vertical-offset="1705" max-vertical-offset="3723">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="33" selection-start="624" selection-end="624" vertical-scroll-proportion="0.26740506" vertical-offset="35" max-vertical-offset="850" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/QuickListShortcut.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="9" selection-start="1561" selection-end="1561" vertical-scroll-proportion="-16.961538" vertical-offset="137" max-vertical-offset="986" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/SearchConditions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="50" selection-start="2129" selection-end="2134" vertical-scroll-proportion="-10.461538" vertical-offset="782" max-vertical-offset="2210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/shortcuts/search-loader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.70266664" vertical-offset="0" max-vertical-offset="833" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/RateController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="55" selection-start="505" selection-end="505" vertical-scroll-proportion="-8.269231" vertical-offset="57" max-vertical-offset="918" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/favorites/favoritesLinks.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="647" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/wallbin/linksGrid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="31" selection-start="2119" selection-end="2119" vertical-scroll-proportion="-9.346154" vertical-offset="641" max-vertical-offset="1241" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/links-grid.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="38" selection-start="1976" selection-end="1992" vertical-scroll-proportion="0.0" vertical-offset="1980" max-vertical-offset="3247" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/favorites.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="31" selection-start="5757" selection-end="5757" vertical-scroll-proportion="0.0" vertical-offset="722" max-vertical-offset="2805" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/links-grid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="186" column="38" selection-start="5197" selection-end="5197" vertical-scroll-proportion="0.3237082" vertical-offset="2949" max-vertical-offset="4607" />
@@ -1366,11 +1195,6 @@
         <state line="53" column="47" selection-start="2613" selection-end="2623" vertical-scroll-proportion="0.3478261" vertical-offset="693" max-vertical-offset="2329" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="48" selection-start="5029" selection-end="5029" vertical-scroll-proportion="0.7612903" vertical-offset="1993" max-vertical-offset="9826" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/controllers/ShortcutsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="84" column="17" selection-start="3465" selection-end="3465" vertical-scroll-proportion="-0.16478191" vertical-offset="1530" max-vertical-offset="2669" />
@@ -1394,16 +1218,6 @@
     <entry file="file://$PROJECT_DIR$/protected/models/wallbin/LibraryLink.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="946" column="29" selection-start="30659" selection-end="30659" vertical-scroll-proportion="0.33225808" vertical-offset="15876" max-vertical-offset="19890" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/storage/LinkStorage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="33" selection-start="2108" selection-end="2108" vertical-scroll-proportion="0.3467742" vertical-offset="754" max-vertical-offset="8993" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_link.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="16" selection-start="1078" selection-end="1091" vertical-scroll-proportion="0.7996965" vertical-offset="0" max-vertical-offset="816" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_line_break.sql">
@@ -1453,169 +1267,145 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/ribbon.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="307" column="43" selection-start="6559" selection-end="6596" vertical-scroll-proportion="0.0" vertical-offset="4849" max-vertical-offset="5610">
-          <folding />
-        </state>
+        <state line="307" column="43" selection-start="6559" selection-end="6596" vertical-scroll-proportion="0.0" vertical-offset="4849" max-vertical-offset="5610" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/overlay.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="661">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="661" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/scaling.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="11" selection-start="4754" selection-end="5000" vertical-scroll-proportion="0.0" vertical-offset="2436" max-vertical-offset="3383">
-          <folding />
-        </state>
+        <state line="170" column="11" selection-start="4754" selection-end="5000" vertical-scroll-proportion="0.0" vertical-offset="2436" max-vertical-offset="3383" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/ticker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="27" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="799">
+        <state line="28" column="27" selection-start="630" selection-end="630" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="799" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/ticker.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="1" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsTabStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="5" selection-start="205" selection-end="205" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="459" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsLinkStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsPageStorage.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/regular/base/ribbon.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="37" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="8619" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz_result.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_reset_password.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="885" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_link.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="16" selection-start="1078" selection-end="1091" vertical-scroll-proportion="0.69250983" vertical-offset="0" max-vertical-offset="816" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_shortcut_page.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="31" selection-start="153" selection-end="184" vertical-scroll-proportion="0.09189189" vertical-offset="0" max-vertical-offset="740" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_file_card.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="23" selection-start="172" selection-end="172" vertical-scroll-proportion="0.08935611" vertical-offset="0" max-vertical-offset="761" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_quiz.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="761" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_qpage_link.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="39" selection-start="338" selection-end="377" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.3197782" vertical-offset="714" max-vertical-offset="7361" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_shortcut_link.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="20" selection-start="319" selection-end="339" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_ticker_link.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="580" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/data/tables/tbl_qpage.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="606" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="32" selection-start="32" selection-end="32" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/common/SearchHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="76" selection-start="1036" selection-end="1096" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="295" column="4" selection-start="9459" selection-end="9459" vertical-scroll-proportion="0.0" vertical-offset="4868" max-vertical-offset="9503">
+          <folding>
+            <marker date="1401642096447" expanded="false" signature="3820:3834" placeholder="..." />
+            <marker date="1401642096447" expanded="false" signature="16049:16084" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/site/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="58" selection-start="943" selection-end="943" vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="3315">
-          <folding>
-            <element signature="e#8568#27075#0" expanded="false" />
-            <marker date="1398174630801" expanded="true" signature="8520:27084" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="8695:11685" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="8818:9530" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="8897:9155" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9201:9520" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9211:9507" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9266:9496" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9305:9484" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9318:9388" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9401:9468" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9562:10117" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="9722:10107" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="10180:10967" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="10316:10956" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="11106:11657" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="11263:11646" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="11850:15593" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="11982:12406" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="12035:12291" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="12439:13018" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="12639:13007" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="13051:13587" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="13214:13576" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="13699:14281" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="13885:14269" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="14334:14880" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="14489:14869" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="15005:15563" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="15164:15551" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="15792:18832" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="15929:16353" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="15982:16238" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="16386:16965" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="16586:16954" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="16998:17540" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="17167:17529" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="17573:18119" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="17728:18108" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="18244:18802" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="18403:18790" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="19007:21425" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="19136:19309" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="19342:19834" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="19524:19823" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="19867:20366" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="20056:20355" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="20399:20889" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="20579:20878" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="20922:21415" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="21105:21404" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="21600:22608" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="21730:21895" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="22020:22578" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="22179:22566" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="22768:23813" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="22892:23100" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="23225:23783" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="23384:23771" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="24159:27021" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="24272:24839" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="24306:24519" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="24813:24826" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="25248:26179" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="25684:26167" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="26433:26991" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="26592:26979" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27213:27375" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27319:27368" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27452:28959" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27458:27624" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27504:27617" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27671:27843" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27721:27836" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27890:28047" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="27930:28040" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28094:28281" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28152:28274" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28287:28474" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28345:28467" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28521:28713" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28583:28706" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28719:28911" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="28781:28904" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="29186:30157" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="29344:29632" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="29674:29934" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="29682:29925" placeholder="..." />
-            <marker date="1398174630801" expanded="true" signature="30025:30131" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/ticker.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="1" selection-start="54" selection-end="54" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+        <state line="1" column="18" selection-start="21" selection-end="21" vertical-scroll-proportion="0.0" vertical-offset="612" max-vertical-offset="8772">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="25" selection-start="25" selection-end="25" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
-          <folding>
-            <marker date="0" expanded="true" signature="0:25" placeholder="select * fro..tbl_library..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/regular/base/ribbon.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="37" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="8619">
+        <state line="112" column="34" selection-start="3795" selection-end="3795" vertical-scroll-proportion="0.0" vertical-offset="2105" max-vertical-offset="3723">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsPageStorage.php">
+    <entry file="file://$PROJECT_DIR$/protected/models/storage/LinkStorage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsTabStorage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="5" selection-start="205" selection-end="205" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/ShortcutsLinkStorage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
+        <state line="236" column="0" selection-start="9385" selection-end="9385" vertical-scroll-proportion="0.0" vertical-offset="4012" max-vertical-offset="9129">
           <folding />
         </state>
       </provider>

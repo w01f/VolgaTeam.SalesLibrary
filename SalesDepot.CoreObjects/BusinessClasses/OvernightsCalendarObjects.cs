@@ -104,7 +104,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public string Serialize()
 		{
 			var result = new StringBuilder();
-			result.AppendLine(@"<Enabled>" + Enabled.ToString() + @"</Enabled>");
+			result.AppendLine(@"<Enabled>" + Enabled + @"</Enabled>");
 			result.AppendLine(@"<RootFolder>" + RootFolder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
 
 			#region Color Settings
@@ -235,27 +235,25 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		{
 			Years.Clear();
 			Files.Clear();
-			if (RootFolder.Exists && Enabled)
+			if (!RootFolder.Exists || !Enabled) return;
+			foreach (var yearFolder in RootFolder.GetDirectories())
 			{
-				foreach (DirectoryInfo yearFolder in RootFolder.GetDirectories())
+				int temp;
+				if (int.TryParse(yearFolder.Name, out temp))
 				{
-					int temp;
-					if (int.TryParse(yearFolder.Name, out temp))
-					{
-						var year = new CalendarYear(this);
-						year.RootFolder = yearFolder;
-						year.Year = temp;
-						Files.AddRange(year.RootFolder.GetFiles());
-						Years.Add(year);
-						Application.DoEvents();
-					}
-				}
-				foreach (CalendarYear year in Years)
-				{
-					year.LoadSweepPeriods();
-					year.LoadMonths();
+					var year = new CalendarYear(this);
+					year.RootFolder = yearFolder;
+					year.Year = temp;
+					Files.AddRange(year.RootFolder.GetFiles());
+					Years.Add(year);
 					Application.DoEvents();
 				}
+			}
+			foreach (CalendarYear year in Years)
+			{
+				year.LoadSweepPeriods();
+				year.LoadMonths();
+				Application.DoEvents();
 			}
 		}
 
