@@ -70,7 +70,6 @@ window.salesDepot = window.salesDepot || { };
 				{
 					if ($('.btn.search-bar-run').hasClass('disabled')) return;
 					var textCondition = $('.shortcuts-search-bar .search-bar-text').val();
-					selectTagsByKeyword(textCondition);
 					if ($('#search-exact-match').is(':checked'))
 						textCondition = '"' + textCondition + '"';
 					var searchConditions = $('.shortcuts-search-bar .search-conditions');
@@ -292,24 +291,6 @@ window.salesDepot = window.salesDepot || { };
 			selectedCategoryLabel.html($('.tags-filter-panel-switcher').html() + ': ' + categoryStr);
 		else
 			selectedCategoryLabel.html('');
-	};
-
-	var selectTagsByKeyword = function (textCondition)
-	{
-		if (textCondition == "") return;
-		textCondition = textCondition.toLowerCase();
-		var searchConditions = $('.shortcuts-search-bar .search-conditions');
-		var categories = searchConditions.find('.tag-condition-selector .item-selector');
-		var existedSelected = searchConditions.find('.category').map(function ()
-		{
-			return $(this).html();
-		}).get();
-		$.each(categories, function ()
-		{
-			var categoryValue = $(this).val();
-			if (categoryValue.toLowerCase().indexOf(textCondition) != -1 && $.inArray(categoryValue, existedSelected) == -1)
-				searchConditions.append($('<div class="category">' + categoryValue + '</div>'));
-		});
 	};
 
 	var setTagsCondition = function ()

@@ -110,7 +110,7 @@
 				if (isset($fileTypes) && isset($condition) && isset($datasetKey))
 				{
 					$links = LinkStorage::searchByContent(
-						SearchHelper::prepareTextCondition($condition),
+						$condition,
 						$fileTypes,
 						$startDate,
 						$endDate,

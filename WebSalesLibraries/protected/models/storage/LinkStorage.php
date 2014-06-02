@@ -136,11 +136,12 @@
 				Yii::app()->db->createCommand()->delete('tbl_link', "id_folder = '" . $folderId . "'");
 		}
 
-		public static function searchByContent($contentConditions, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection)
+		public static function searchByContent($condition, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection)
 		{
 			$links = Yii::app()->session[$datasetKey];
 			if (!isset($links))
 			{
+				$contentConditions = SearchHelper::prepareTextCondition($condition);
 				$libraryCondition = '1 != 1';
 				if (isset($checkedLibraryIds))
 				{
@@ -224,10 +225,17 @@
 					}
 					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
 					$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
+					if (count($contentConditions) == 0)
+						$additionalCategoryCondition = ' or ' . $categoryCondition;
+				}
+				else if ($condition != '' && $condition != '""')
+				{
+					$conditionToCompare = strtolower(trim(str_replace('"', '', $condition)));
+					$categoriesSelector = array();
+					$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
 					$additionalCategoryCondition = ' or ' . $categoryCondition;
-					if (count($contentConditions) > 0)
-						$categoryCondition = '1=1';
-
+					$categoryCondition = '1=1';
 				}
 
 				$onlyWithCategoriesCondition = '1 = 1';
