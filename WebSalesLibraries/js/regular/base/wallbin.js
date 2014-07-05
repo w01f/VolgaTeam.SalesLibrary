@@ -42,7 +42,7 @@
 				async: true,
 				dataType: 'html'
 			});
-			$(window).off('resize.wallbin').on('resize.wallbin', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 			$('#select-library').off('change').on('change', function ()
 			{
 				libraryChanged();

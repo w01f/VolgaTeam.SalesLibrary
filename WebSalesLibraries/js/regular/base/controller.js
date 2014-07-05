@@ -92,6 +92,7 @@
 			content.css({
 				'height': height + 'px'
 			});
+			$.SalesPortal.Ticker.updateContentSize();
 		};
 	};
 	$.SalesPortal.Layout = new LayoutManager();

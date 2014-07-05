@@ -226,7 +226,7 @@
 				async: true,
 				dataType: 'html'
 			});
-			$(window).off('resize.quizzes').on('resize.quizzes', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 		};
 	};
 
@@ -471,16 +471,16 @@
 						var innerContent = $('.fancybox-inner');
 						var successful = innerContent.find('.success').length > 0;
 						if (successful)
-							$.QuizManager.currentItem.removeClass('not-passed').addClass('passed');
+							$.SalesPortal.QuizManager.currentItem.removeClass('not-passed').addClass('passed');
 						innerContent.find('.btn.quiz-start').off('click').on('click', function ()
 						{
 							$.fancybox.close();
-							$.QuizManager.refreshQuizPanel(true);
+							$.SalesPortal.QuizManager.refreshQuizPanel(true);
 						});
 						innerContent.find('.btn.quiz-exit').off('click').on('click', function ()
 						{
 							$.fancybox.close();
-							$.QuizManager.refreshQuizPanel(false);
+							$.SalesPortal.QuizManager.refreshQuizPanel(false);
 						});
 					}
 				});

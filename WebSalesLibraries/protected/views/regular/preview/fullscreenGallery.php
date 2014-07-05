@@ -4,10 +4,9 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<?
-		$version = '5.0';
 		$cs = Yii::app()->clientScript;
-		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/css/supersized.css?' . $version);
-		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.css?' . $version);
+		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/css/supersized.css?' . Yii::app()->params['version']);
+		$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/supersized/theme/supersized.shutter.css?' . Yii::app()->params['version']);
 		$cs->registerCoreScript('jquery');
 		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/jquery.easing.min.js', CClientScript::POS_HEAD);
 		$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/supersized/js/supersized.3.2.7.min.js', CClientScript::POS_HEAD);

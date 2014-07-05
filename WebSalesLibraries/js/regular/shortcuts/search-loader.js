@@ -37,7 +37,7 @@
 
 	$(document).ready(function ()
 	{
-		$.SalesPortal.Overlay.show(true);
 		$.SalesPortal.Shortcuts.processSearchLink($('#content'));
+		$.SalesPortal.Overlay.hide();
 	});
 })(jQuery);

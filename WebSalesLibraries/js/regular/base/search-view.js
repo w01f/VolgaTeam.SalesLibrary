@@ -43,7 +43,7 @@
 				async: true,
 				dataType: 'html'
 			});
-			$(window).off('resize.search').on('resize.search', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 		};
 
 		var getSearchResult = function (isSort)

@@ -16,6 +16,11 @@
 			$this->render('index', array('tickerRecords' => $tickerRecords));
 		}
 
+		public function actionLogin()
+		{
+			$this->redirect($this->createUrl('auth/login'));
+		}
+
 		public function actionError()
 		{
 			if ($error = Yii::app()->errorHandler->error)

@@ -4,6 +4,7 @@
 	$.SalesPortal = $.SalesPortal || { };
 	var TickerManager = function ()
 	{
+		var that = this;
 		this.init = function ()
 		{
 			var ticker = $(".modern-ticker");
@@ -28,11 +29,22 @@
 			$(".mt-label").css({
 				width: 'auto'
 			});
-			updateContentSize();
-			$(window).off('resize.ticker').on('resize.ticker', updateContentSize);
+			$('.modern-ticker .ticker-link.link').off('click').on('click', function ()
+			{
+				var linkId = $(this).attr('href').replace('#', '');
+				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+			});
+			$('.modern-ticker .ticker-link.video').off('click').on('click', function (event)
+			{
+				event.preventDefault();
+				event.stopPropagation();
+				$.SalesPortal.LinkManager.viewSelectedFormat($(this), false, false);
+			});
+
+			that.updateContentSize();
 		};
 
-		var updateContentSize = function ()
+		this.updateContentSize = function ()
 		{
 			var tickerWidth = $(window).width()-4;
 			var newsWidth = tickerWidth - $('.mt-label').width() - $('.mt-controls').width();

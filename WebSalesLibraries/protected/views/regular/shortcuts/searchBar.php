@@ -1,3 +1,9 @@
+<?
+	/**
+	 * @var $searchBar SearchBar
+	 * @var $pageId string
+	 */
+?>
 <? if ($searchBar->configured): ?>
 	<?
 	$lastCharFromTagsName = substr(Yii::app()->params['tags']['column_name'], -1);

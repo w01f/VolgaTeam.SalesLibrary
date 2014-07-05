@@ -1,12 +1,11 @@
 <?
 	/** @var $form CActiveForm */
 	/** @var $formData PinCodeForm */
-	$version = '1.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCoreScript('jquery');
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/jquery.mobile.css?' . $version);
-	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/jquery.mobile.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/login.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/jquery.mobile.css?' . Yii::app()->params['version']);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/jquery.mobile.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/login.css?' . Yii::app()->params['version']);
 	$this->pageTitle = Yii::app()->name . ' - Login';
 ?>
 <script type="text/javascript">

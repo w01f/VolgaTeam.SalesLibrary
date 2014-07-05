@@ -29,7 +29,7 @@
 				async: true,
 				dataType: 'html'
 			});
-			$(window).off('resize.favorites').on('resize.favorites', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 		};
 
 		var loadFolders;

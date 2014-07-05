@@ -5,35 +5,35 @@
 	 */
 ?>
 <div class="view-dialog-body">
-	<?php
+	<?
 		if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
 			<div class="title">
 				<div class="link-name">
-					<?php echo $link->name; ?>
+					<? echo $link->name; ?>
 				</div>
 				<br>
-				<?php if (isset($link->fileName)): ?>
+				<? if (isset($link->fileName)): ?>
 					<div class="description">
-						<?php echo $link->fileName; ?>
+						<? echo $link->fileName; ?>
 					</div><br>
-				<?php endif; ?>
+				<? endif; ?>
 			</div>
-			<?php if ((($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && isset($link->universalPreview)) || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
+			<? if ((($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && isset($link->universalPreview)) || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
 				<div class="checkbox">
 					<label>
 						<input class="use-fullscreen" type="checkbox" value=""> Open PNG and JPEG images in a new Browser tab
 					</label>
 				</div>
-			<?php endif; ?>
-			<?php if (($link->originalFormat == 'video' || $link->originalFormat == 'wmv' || $link->originalFormat == 'mp4') && !isset($link->universalPreview)): ?>
+			<? endif; ?>
+			<? if (($link->originalFormat == 'video' || $link->originalFormat == 'wmv' || $link->originalFormat == 'mp4') && !isset($link->universalPreview)): ?>
 				<div class="warning">
 					This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 				</div>
-			<?php else: ?>
+			<? else: ?>
 				<? $logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats'; ?>
 				<ul class="format-list">
-					<?php foreach ($link->availableFormats as $format): ?>
-						<?php
+					<? foreach ($link->availableFormats as $format): ?>
+						<?
 						if (!$authorized && ($format == 'email' || $format == 'outlook'))
 							continue;
 						$imageSource = '';
@@ -86,75 +86,75 @@
 								break;
 						}
 						?>
-						<?php if ($imageSource != ''): ?>
+						<? if ($imageSource != ''): ?>
 							<li class="multi-column"
 								<? if ($link->browser != 'mobile'): ?>rel="tooltip"
 								title="<? echo Yii::app()->params['tooltips']['preview_dialog'][$format]; ?>"
-								<?php endif; ?>
+								<? endif; ?>
 								>
-								<img src="<?php echo $imageSource; ?>"/>
+								<img src="<? echo $imageSource; ?>"/>
 
 								<div class="service-data">
-									<div class="link-id"><?php echo $link->id; ?></div>
-									<div class="link-name"><?php echo $link->name; ?></div>
-									<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
-									<div class="file-type"><?php echo $link->originalFormat; ?></div>
-									<div class="view-type"><?php echo $format; ?></div>
-									<div class="tags"><?php echo isset($link->isAttachment) ? '' : $link->getTagsString(); ?></div>
-									<?php $viewLinks = $link->getViewSource($format); ?>
-									<?php if (isset($viewLinks)): ?>
-										<div class="links"><?php echo json_encode($viewLinks); ?></div>
-									<?php endif; ?>
-									<?php if ($format == 'png' || $format == 'jpeg'): ?>
-										<?php $thumbsLinks = $link->getViewSource('thumbs'); ?>
-										<?php if (isset($thumbsLinks)): ?>
-											<div class="thumbs"><?php echo json_encode($thumbsLinks); ?></div>
-										<?php endif; ?>
-									<?php endif; ?>
+									<div class="link-id"><? echo $link->id; ?></div>
+									<div class="link-name"><? echo $link->name; ?></div>
+									<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+									<div class="file-type"><? echo $link->originalFormat; ?></div>
+									<div class="view-type"><? echo $format; ?></div>
+									<div class="tags"><? echo isset($link->isAttachment) ? '' : $link->getTagsString(); ?></div>
+									<? $viewLinks = $link->getViewSource($format); ?>
+									<? if (isset($viewLinks)): ?>
+										<div class="links"><? echo json_encode($viewLinks); ?></div>
+									<? endif; ?>
+									<? if ($format == 'png' || $format == 'jpeg'): ?>
+										<? $thumbsLinks = $link->getViewSource('thumbs'); ?>
+										<? if (isset($thumbsLinks)): ?>
+											<div class="thumbs"><? echo json_encode($thumbsLinks); ?></div>
+										<? endif; ?>
+									<? endif; ?>
 								</div>
 							</li>
-						<?php endif; ?>
-					<?php endforeach; ?>
-					<?php if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
+						<? endif; ?>
+					<? endforeach; ?>
+					<? if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
 						<li class="multi-column" <? if ($link->browser != 'mobile'): ?>rel="tooltip"
-							title="<? echo Yii::app()->params['tooltips']['preview_dialog']['favorites']; ?>"<?php endif; ?>>
-							<img src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'favorites.png')); ?>"/>
+							title="<? echo Yii::app()->params['tooltips']['preview_dialog']['favorites']; ?>"<? endif; ?>>
+							<img src="<? echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'favorites.png')); ?>"/>
 							<div class="service-data">
-								<div class="link-id"><?php echo $link->id; ?></div>
-								<div class="link-name"><?php echo $link->name; ?></div>
-								<div class="file-name"><?php echo $link->fileName; ?></div>
-								<div class="file-type"><?php echo $link->originalFormat; ?></div>
+								<div class="link-id"><? echo $link->id; ?></div>
+								<div class="link-name"><? echo $link->name; ?></div>
+								<div class="file-name"><? echo $link->fileName; ?></div>
+								<div class="file-type"><? echo $link->originalFormat; ?></div>
 								<div class="view-type">favorites</div>
-								<?php $viewLinks = $link->getViewSource('favorites'); ?>
-								<?php if (isset($viewLinks)): ?>
-									<div class="links"><?php echo json_encode($viewLinks); ?></div>
-								<?php endif; ?>
+								<? $viewLinks = $link->getViewSource('favorites'); ?>
+								<? if (isset($viewLinks)): ?>
+									<div class="links"><? echo json_encode($viewLinks); ?></div>
+								<? endif; ?>
 							</div>
 						</li>
-					<?php endif; ?>
-					<?php if ($link->browser == 'mobile' && !$link->forcePreview): ?>
+					<? endif; ?>
+					<? if ($link->browser == 'mobile' && !$link->forcePreview): ?>
 						<li class="multi-column">
-							<img src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'lp.png')); ?>"/>
+							<img src="<? echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'lp.png')); ?>"/>
 							<div class="service-data">
-								<div class="link-id"><?php echo $link->id; ?></div>
-								<div class="link-name"><?php echo $link->name; ?></div>
-								<div class="file-name"><?php echo $link->fileName; ?></div>
-								<div class="file-type"><?php echo $link->originalFormat; ?></div>
+								<div class="link-id"><? echo $link->id; ?></div>
+								<div class="link-name"><? echo $link->name; ?></div>
+								<div class="file-name"><? echo $link->fileName; ?></div>
+								<div class="file-type"><? echo $link->originalFormat; ?></div>
 								<div class="view-type">lp</div>
-								<?php $viewLinks = $link->getViewSource('lp'); ?>
-								<?php if (isset($viewLinks)): ?>
-									<div class="links"><?php echo json_encode($viewLinks); ?></div>
-								<?php endif; ?>
+								<? $viewLinks = $link->getViewSource('lp'); ?>
+								<? if (isset($viewLinks)): ?>
+									<div class="links"><? echo json_encode($viewLinks); ?></div>
+								<? endif; ?>
 							</div>
 						</li>
-					<?php endif; ?>
+					<? endif; ?>
 				</ul>
-			<?php endif; ?>
-		<?php else: ?>
+			<? endif; ?>
+		<? else: ?>
 			<div class="title">
 				<div class="description">
 					This link is not available for preview
 				</div>
 			</div>
-		<?php endif; ?>
+		<? endif; ?>
 </div>

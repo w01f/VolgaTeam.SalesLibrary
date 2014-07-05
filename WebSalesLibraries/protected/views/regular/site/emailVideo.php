@@ -9,16 +9,15 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<?
-		$version = '1.0';
 		$cs = Yii::app()->clientScript;
-		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
-		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?' . $version);
-		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . $version);
+		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.css?' . Yii::app()->params['version']);
+		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?' . Yii::app()->params['version']);
+		$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video-js.min.css?' . Yii::app()->params['version']);
 		$cs->registerCoreScript('jquery');
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
-		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.pack.js', CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/fancybox/source/jquery.fancybox.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
-		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewing.js?' . $version, CClientScript::POS_HEAD);
+		$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/link-viewing.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	?>
 	<script type="text/javascript">
 		(function ($)

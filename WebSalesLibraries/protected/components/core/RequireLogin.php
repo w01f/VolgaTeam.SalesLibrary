@@ -17,6 +17,7 @@
 		{
 			if (Yii::app()->user->isGuest &&
 				!strstr(Yii::app()->request->getUrl(), 'auth/') &&
+				!strstr(Yii::app()->request->getUrl(), 'site/login') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/emailLinkGet') &&
 				!strstr(Yii::app()->request->getUrl(), 'site/switchVersion') &&
 				!strstr(Yii::app()->request->getUrl(), 'qbuilder/quote') &&

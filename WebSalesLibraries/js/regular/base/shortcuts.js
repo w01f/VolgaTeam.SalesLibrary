@@ -16,7 +16,7 @@
 				loadShortcutsPage(tabId);
 			});
 			loadShortcutsPage(tabId);
-			$(window).off('resize.shortcuts').on('resize.shortcuts', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 		};
 
 		this.processSearchLink = function (content)
@@ -555,12 +555,12 @@
 			$.SalesPortal.Layout.updateContentSize();
 			var content = $('#content');
 			var shortcutsPage = content.find('.shortcuts-page-content');
+			var height = content.height() - content.find('.shortcuts-home-bar img').height() - content.find('.shortcuts-search-bar.open').height() - 20;
 			shortcutsPage.css({
-				'height': (content.height() - content.find('.shortcuts-home-bar img').height() - content.find('.shortcuts-search-bar.open').height() - 20) + 'px'
+				'height': height + 'px'
 			});
 
 			var searchResult = $('#search-result');
-			var height = shortcutsPage.height();
 			searchResult.find('> div').css({
 				'height': height + 'px'
 			});

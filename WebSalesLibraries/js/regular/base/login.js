@@ -103,7 +103,7 @@
 				}
 			});
 			updateContentSize();
-			$(window).off('resize.login').on('resize.login', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 		};
 
 		this.logout = function ()

@@ -35,7 +35,7 @@
 				async: true,
 				dataType: 'html'
 			});
-			$(window).off('resize.qbuilder').on('resize.qbuilder', updateContentSize);
+			$(window).off('resize').on('resize', updateContentSize);
 		};
 
 		var updateContentSize = function ()
