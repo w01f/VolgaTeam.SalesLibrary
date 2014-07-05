@@ -1,3 +1,6 @@
+<?
+	/** @var $link EmptyShortcut*/
+?>
 <a class="cbp-caption shortcuts-link empty" href="#">
 	<div class="cbp-caption-defaultWrap">
 		<img src="<? echo $link->imagePath ?>" alt="" width="100%">

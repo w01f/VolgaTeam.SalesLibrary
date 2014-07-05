@@ -1,36 +1,36 @@
-<?php
-	$version = '15.0';
+<?
+	$version = '1.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('cookie');
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/photoswipe/photoswipe.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/mobiscroll/css/mobiscroll-2.1.custom.min.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/libraries.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/search.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/file-card.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/email.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/phone/shortcuts.css?' . $version);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobile/jquery.mobile.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/mobiscroll/js/mobiscroll-2.1.custom.min.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/login.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/link-viewing.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/libraries.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/search.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/favorites.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/shortcuts.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/phone/ribbon.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/jquery.mobile-1.2.0.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/photoswipe.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/vendor/mobiscroll/css/mobiscroll-2.1.custom.min.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/libraries.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/search.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/file-card.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/email.css?' . $version);
+	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/phone/shortcuts.css?' . $version);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/json/jquery.json-2.3.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobile/jquery.mobile-1.2.0.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/lib/klass.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/photoswipe/code.photoswipe.jquery-3.0.5.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/vendor/mobiscroll/js/mobiscroll-2.1.custom.min.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/login.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/link-viewing.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/wallbin.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/search.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/favorites.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/email.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/shortcuts.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/phone/controller.js?' . $version, CClientScript::POS_HEAD);
 
 	$userId = Yii::app()->user->getId();
 	if (isset($userId))
 	{
-		$availableEmails = UserRecipientStorage::getRecipientsByUser($userId);
+		$availableEmails = UserRecipientRecord::getRecipientsByUser($userId);
 	}
-	$logos = QPageStorage::getPageLogoList();
+	$logos = QPageRecord::getPageLogoList();
 
 ?>
 <div data-role='page' id="shortcuts" data-cache="never" data-dom-cache="false" data-ajax="false">
@@ -38,8 +38,8 @@
 		<span class="ui-title">Links</span>
 	</div>
 	<div data-role='content' class="page-content">
-		<select name="shortcuts-tab" id="shortcuts-tab" data-mini="true"></select>
-		<select name="shortcuts-page" id="shortcuts-page" data-mini="true"></select>
+		<label for="shortcuts-tab" class="ui-hide-label"></label><select name="shortcuts-tab" id="shortcuts-tab" data-mini="true"></select>
+		<label for="shortcuts-page" class="ui-hide-label"></label><select name="shortcuts-page" id="shortcuts-page" data-mini="true"></select>
 		<div class="ui-grid-solo" id="shortcuts-links"></div>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
@@ -377,7 +377,7 @@
 					<a class="tab-search-date" href="#search-date" data-transition="none">Date</a>
 				</li>
 				<li>
-					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><? echo Yii::app()->params['stations']['tab_name']; ?></a>
 				</li>
 			</ul>
 		</div>
@@ -427,7 +427,7 @@
 					<a class="tab-search-date" href="#search-date" data-transition="none">Date</a>
 				</li>
 				<li>
-					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><? echo Yii::app()->params['stations']['tab_name']; ?></a>
 				</li>
 			</ul>
 		</div>
@@ -479,7 +479,7 @@
 					<a class="tab-search-date ui-btn ui-btn-active ui-state-persist" href="#search-date" data-transition="none">Date</a>
 				</li>
 				<li>
-					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+					<a class="tab-search-libraries" href="#search-libraries" data-transition="none"><? echo Yii::app()->params['stations']['tab_name']; ?></a>
 				</li>
 			</ul>
 		</div>
@@ -531,7 +531,7 @@
 					<a class="tab-search-date" href="#search-date" data-transition="none">Date</a>
 				</li>
 				<li>
-					<a class="tab-search-libraries ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none"><?php echo Yii::app()->params['stations']['tab_name']; ?></a>
+					<a class="tab-search-libraries ui-btn ui-btn-active ui-state-persist" href="#search-libraries" data-transition="none"><? echo Yii::app()->params['stations']['tab_name']; ?></a>
 				</li>
 			</ul>
 		</div>
@@ -576,6 +576,7 @@
 								Files was not found
 							</td>
 							<td id="search-result-sort-column-container" class="on-center">
+								<label for="search-result-sort-column" class="ui-hide-label"></label>
 								<select name="search-result-sort-column" id="search-result-sort-column" data-mini="true">
 									<option value="name">By Name</option>
 									<option value="file_type">By Type</option>
@@ -585,6 +586,7 @@
 								</select>
 							</td>
 							<td id="search-result-sort-order-container" class="on-right">
+								<label for="search-result-sort-order" class="ui-hide-label"></label>
 								<select name="search-result-sort-order" id="search-result-sort-order" data-role="slider" data-mini="true" data-track-theme="b">
 									<option value="asc">Asc</option>
 									<option value="desc">Desc</option>
@@ -664,12 +666,14 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="on-left">
+					<label for="add-page-name" class="ui-hide-label"></label>
 					<input id="add-page-name" name="add-page-name" type="text" data-mini="true" value=""/>
 				</td>
 			</tr>
 			<tr>
 				<td class="on-left">Expires in:</td>
 				<td class="on-right">
+					<label for="add-page-expires-in" class="ui-hide-label"></label>
 					<select id="add-page-expires-in" data-mini="true">
 						<option selected value="7">7 days</option>
 						<option value="14">14 days</option>
@@ -747,11 +751,11 @@
 	</div>
 	<div data-role='content' class="page-content">
 		<ul data-role="listview" data-theme="c" data-divider-theme="d">
-			<?php if (isset($logos)): ?>
-				<?php foreach ($logos as $logo): ?>
+			<? if (isset($logos)): ?>
+				<? foreach ($logos as $logo): ?>
 					<li><a class="qpage-logo" href="#"><img src="<? echo $logo; ?>"></a></li>
-				<?php endforeach; ?>
-			<?php endif; ?>
+				<? endforeach; ?>
+			<? endif; ?>
 		</ul>
 	</div>
 	<div class="page-footer" data-role='footer' data-id="ribbon" data-position="fixed" data-theme="b">
@@ -981,6 +985,7 @@
 			</tr>
 			<tr>
 				<td class="on-left" colspan="2">
+					<label for="add-page-access-code" class="ui-hide-label"></label>
 					<input type="email" id="add-page-access-code" maxlength=4 data-mini="true" disabled> <br><br>
 				</td>
 			</tr>
@@ -1054,24 +1059,26 @@
 			<tr>
 				<td class="on-left">To:</td>
 				<td class="on-right">
-					<a <?php if (isset($availableEmails)): ?> id="email-to-select-button"<?php endif; ?>
-						class="<?php if (!isset($availableEmails)) echo 'ui-disabled'; ?>" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select Recipients</a>
+					<a <? if (isset($availableEmails)): ?> id="email-to-select-button"<? endif; ?>
+						class="<? if (!isset($availableEmails)) echo 'ui-disabled'; ?>" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select Recipients</a>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="on-left">
+					<label for="email-to" class="ui-hide-label"></label>
 					<input id="email-to" name="email-to" type="text" value="" data-mini="true"/> <br>
 				</td>
 			</tr>
 			<tr>
 				<td class="on-left">Cc:</td>
 				<td class="on-right">
-					<a <?php if (isset($availableEmails)): ?>id="email-to-copy-select-button"<?php endif; ?>
-					   class="<?php if (!isset($availableEmails)) echo 'ui-disabled'; ?>" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select Recipients</a>
+					<a <? if (isset($availableEmails)): ?>id="email-to-copy-select-button"<? endif; ?>
+					   class="<? if (!isset($availableEmails)) echo 'ui-disabled'; ?>" href="#" data-role="button" data-mini="true" data-icon="arrow-d" data-inline="true" data-iconpos="right">Select Recipients</a>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" class="on-left">
+					<label for="email-to-copy" class="ui-hide-label"></label>
 					<input id="email-to-copy" name="email-to-copy" type="text" value="" data-mini="true"/> <br>
 				</td>
 			</tr>
@@ -1084,7 +1091,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="on-left">
-					<input id="email-from" name="email-to-copy" type="text" data-mini="true" value="<?php echo Yii::app()->user->email; ?>"/>
+					<label for="email-from" class="ui-hide-label"></label>
+					<input id="email-from" name="email-to-copy" type="text" data-mini="true" value="<? echo Yii::app()->user->email; ?>"/>
 				</td>
 			</tr>
 		</table>
@@ -1149,7 +1157,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="on-left">
-					<input id="email-subject" name="email-subject" type="text" data-mini="true" value="<?php echo Yii::app()->params['email']['send_link']['subject']; ?>"/>
+					<label for="email-subject" class="ui-hide-label"></label>
+					<input id="email-subject" name="email-subject" type="text" data-mini="true" value="<? echo Yii::app()->params['email']['send_link']['subject']; ?>"/>
 					<br>
 				</td>
 			</tr>
@@ -1158,14 +1167,15 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="on-left">
-					<textarea id="email-body" rows="4"><?php echo Yii::app()->params['email']['send_link']['body']; ?></textarea>
+					<label for="email-body" class="ui-hide-label"></label>
+					<textarea id="email-body" rows="4"><? echo Yii::app()->params['email']['send_link']['body']; ?></textarea>
 					<br>
 				</td>
 			</tr>
 			<tr>
 				<td class="on-left">Expires After:</td>
 				<td class="on-right">
-					<select id="expires-in" data-mini="true">
+					<label for="expires-in" class="ui-hide-label"></label> <select id="expires-in" data-mini="true">
 						<option selected value="7">7 days</option>
 						<option value="30">30 days</option>
 						<option value="90">90 days</option>
@@ -1284,18 +1294,18 @@
 		<span class="ui-title header-title">Recipients</span>
 	</div>
 	<div data-role="content">
-		<?php if (isset($availableEmails)): ?>
+		<? if (isset($availableEmails)): ?>
 			<fieldset id="email-to-existed-list-container" data-role="controlgroup">
-				<?php $i = 0; ?>
-				<?php foreach ($availableEmails as $email): ?>
-					<input type="checkbox" name="existed-email-to<?php echo $i; ?>" id="existed-email-to<?php echo $i; ?>" class="existed-email-to" class="custom" value="<?php echo $email; ?>"/>
-					<label for="existed-email-to<?php echo $i; ?>"><?php echo $email; ?></label>
-					<?php $i++; ?>
-				<?php endforeach; ?>
+				<? $i = 0; ?>
+				<? foreach ($availableEmails as $email): ?>
+					<input type="checkbox" name="existed-email-to<? echo $i; ?>" id="existed-email-to<? echo $i; ?>" class="custom existed-email-to" value="<? echo $email; ?>"/>
+					<label for="existed-email-to<? echo $i; ?>"><? echo $email; ?></label>
+					<? $i++; ?>
+				<? endforeach; ?>
 			</fieldset>
 			<br>
 			<a id="email-to-apply-button" href="#email-address" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction="reverse" data-theme="b" data-icon="check">Apply</a>
-		<?php endif; ?>
+		<? endif; ?>
 	</div>
 </div>
 <div data-role="dialog" id="email-to-copy-existed-list" data-overlay-theme="c">
@@ -1303,18 +1313,18 @@
 		<span class="ui-title header-title">Recipients</span>
 	</div>
 	<div data-role="content">
-		<?php if (isset($availableEmails)): ?>
+		<? if (isset($availableEmails)): ?>
 			<fieldset id="email-to-copy-existed-list-container" data-role="controlgroup">
-				<?php $i = 0; ?>
-				<?php foreach ($availableEmails as $email): ?>
-					<input type="checkbox" name="existed-email-to-copy<?php echo $i; ?>" id="existed-email-to-copy<?php echo $i; ?>" class="existed-email-to-copy" class="custom" value="<?php echo $email; ?>"/>
-					<label for="existed-email-to-copy<?php echo $i; ?>"><?php echo $email; ?></label>
-					<?php $i++; ?>
-				<?php endforeach; ?>
+				<? $i = 0; ?>
+				<? foreach ($availableEmails as $email): ?>
+					<input type="checkbox" name="existed-email-to-copy<? echo $i; ?>" id="existed-email-to-copy<? echo $i; ?>" class="custom existed-email-to-copy" value="<? echo $email; ?>"/>
+					<label for="existed-email-to-copy<? echo $i; ?>"><? echo $email; ?></label>
+					<? $i++; ?>
+				<? endforeach; ?>
 			</fieldset>
 			<br>
 			<a id="email-to-copy-apply-button" href="#" data-role="button" data-corners="true" data-shadow="true" data-transition="pop" data-direction="reverse" data-theme="b" data-icon="check">Apply</a>
-		<?php endif; ?>
+		<? endif; ?>
 	</div>
 </div>
 <div data-role="page" id="email-success-popup" data-overlay-theme="c">
@@ -1354,6 +1364,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="on-left">
+						<label for="favorite-link-name" class="ui-hide-label"></label>
 						<input id="favorite-link-name" name="favorite-link-name" type="text" value="" data-mini="true"/><br>
 					</td>
 				</tr>
@@ -1365,6 +1376,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="on-left">
+						<label for="favorite-folder-name" class="ui-hide-label"></label>
 						<input id="favorite-folder-name" name="favorite-folder-name" type="text" value="" data-mini="true"/>
 						<br>
 					</td>
@@ -1461,7 +1473,8 @@
 			</ul>
 		</div>
 	</div>
-</div><!--Template for folder links content--><!--Template for favorites content-->
+</div>
+<!--Template for folder links content--><!--Template for favorites content-->
 <div data-role='page' id="favorites-template" data-cache="never" data-dom-cache="false" data-ajax="false">
 	<div data-role='header' class="page-header" data-position="fixed" data-theme="b">
 		<a class="link back ui-btn-right" href="#" data-role="button" data-mini="true" data-corners="true" data-shadow="true" data-transition="slidefade" data-direction="reverse" data-theme="b">Back</a>
@@ -1489,4 +1502,5 @@
 			</ul>
 		</div>
 	</div>
-</div><!--Template for favorites content-->
+</div>
+<!--Template for favorites content-->

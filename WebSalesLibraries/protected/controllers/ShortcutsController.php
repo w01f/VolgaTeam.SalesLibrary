@@ -1,5 +1,8 @@
 <?php
 
+	/**
+	 * Class ShortcutsController
+	 */
 	class ShortcutsController extends IsdController
 	{
 		public function getViewPath()
@@ -9,7 +12,7 @@
 
 		public function actionGetTabs()
 		{
-			$tabShortcuts = ShortcutsTabStorage::model()->findAll(array('order' => '`order', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
+			$tabShortcuts = ShortcutsTabRecord::model()->findAll(array('order' => '`order', 'condition' => 'enabled=:enabled', 'params' => array(':enabled' => true)));
 			$this->renderPartial('tabs', array('tabShortcuts' => $tabShortcuts));
 		}
 
@@ -18,9 +21,10 @@
 			$tabId = Yii::app()->request->getPost('tabId');
 			if (isset($tabId))
 			{
-				$tabRecord = ShortcutsTabStorage::model()->findByPk($tabId);
-				$pageShortcuts = ShortcutsPageStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabId)));
-				StatisticActivityStorage::WriteActivity('Shortcuts', 'Tab Changed', array('Tab' => $tabRecord->name));
+				/** @var $tabRecord ShortcutsTabRecord */
+				$tabRecord = ShortcutsTabRecord::model()->findByPk($tabId);
+				$pageShortcuts = ShortcutsPageRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_tab=:id_tab', 'params' => array(':id_tab' => $tabId)));
+				StatisticActivityRecord::WriteActivity('Shortcuts', 'Tab Changed', array('Tab' => $tabRecord->name));
 				$this->renderPartial('pages', array('pageShortcuts' => $pageShortcuts));
 			}
 		}
@@ -30,12 +34,14 @@
 			$pageId = Yii::app()->request->getPost('pageId');
 			if (isset($pageId))
 			{
-				$linkRecords = ShortcutsLinkStorage::model()->findAll(array('order' => '`order`', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $pageId)));
-				$pageRecord = ShortcutsPageStorage::model()->findByPk($pageId);
+				$linkRecords = ShortcutsLinkRecord::model()->findAll(array('order' => '`order`', 'condition' => 'id_page=:id_page', 'params' => array(':id_page' => $pageId)));
+				/** @var $pageRecord ShortcutsPageRecord */
+				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
 				if (isset($linkRecords) && isset($pageRecord))
 				{
-					$tabRecord = ShortcutsTabStorage::model()->findByPk($pageRecord->id_tab);
-					StatisticActivityStorage::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
+					/** @var $tabRecord ShortcutsTabRecord */
+					$tabRecord = ShortcutsTabRecord::model()->findByPk($pageRecord->id_tab);
+					StatisticActivityRecord::WriteActivity('Shortcuts', 'Page Changed', array('Tab' => $tabRecord->name, 'Button' => $pageRecord->name));
 					$this->renderPartial('page', array('pageRecord' => $pageRecord, 'linkRecords' => $linkRecords,));
 				}
 			}
@@ -48,7 +54,7 @@
 			$samePage = (bool)Yii::app()->request->getQuery('samePage');
 			if (isset($linkId))
 			{
-				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				$windowShortcut = new WindowShortcut($linkRecord);
 				$folder = $windowShortcut->getWindow();
 				$content = $this->renderPartial('folderContainerHeader', array('windowShortcut' => $windowShortcut), true);;
@@ -67,7 +73,7 @@
 			$samePage = (bool)Yii::app()->request->getQuery('samePage');
 			if (isset($linkId))
 			{
-				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
 				$quickListShortcut = new QuickListShortcut($linkRecord);
 				$quickListShortcut->loadQuickLinks();
 				$content = $this->renderPartial('quickList', array('quickListShortcut' => $quickListShortcut), true);
@@ -85,8 +91,10 @@
 			$samePage = (bool)Yii::app()->request->getQuery('samePage');
 			if (isset($linkId))
 			{
-				$linkRecord = ShortcutsLinkStorage::model()->findByPk($linkId);
-				$pageRecord = ShortcutsPageStorage::model()->findByPk($linkRecord->id_page);
+				/** @var $linkRecord ShortcutsLinkRecord */
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				/** @var $pageRecord ShortcutsPageRecord */
+				$pageRecord = ShortcutsPageRecord::model()->findByPk($linkRecord->id_page);
 				$searchShortcut = new SearchShortcut($linkRecord);
 				$searchShortcut->loadSearchConditions();
 				$this->pageTitle = $searchShortcut->tooltip;
@@ -130,7 +138,8 @@
 
 			if (isset($pageId))
 			{
-				$pageRecord = ShortcutsPageStorage::model()->findByPk($pageId);
+				/** @var $pageRecord ShortcutsPageRecord */
+				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
 				$searchBar = $pageRecord->getSearchBar();
 				$this->pageTitle = $searchBar->title;
 				$searchBar->conditions->text = $text;

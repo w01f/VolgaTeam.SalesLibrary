@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class FavoritesController
+	 */
 	class FavoritesController extends IsdController
 	{
 		public function getViewPath()
@@ -11,7 +15,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$rootFolder = FavoritesFolderStorage::getRootFolder($userId);
+				$rootFolder = FavoritesFolderRecord::getRootFolder($userId);
 				$this->renderPartial('favoritesView', array('rootFolder' => $rootFolder), false, true);
 			}
 		}
@@ -22,10 +26,10 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId) && isset($linkId))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
-				$userFolderRecords = FavoritesFolderStorage::getAllFolderNames($userId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				$userFolderRecords = FavoritesFolderRecord::getAllFolderNames($userId);
 				$this->renderPartial('addLinkDialog', array('link' => $linkRecord, 'folders' => $userFolderRecords), false, true);
-				StatisticActivityStorage::WriteActivity('Link', 'Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+				StatisticActivityRecord::WriteActivity('Link', 'Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
 			}
 		}
 
@@ -39,9 +43,9 @@
 				$folderName = null;
 			if (isset($userId) && isset($linkId) && isset($linkName))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
-				StatisticActivityStorage::WriteActivity('Link', 'Add to Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format, 'Favorites Folder' => $folderName, 'Favorites Name' => $linkName));
-				FavoritesLinkStorage::addLink($userId, $linkId, $linkName, $folderName, $linkRecord->id_library);
+				$linkRecord = LinkRecord::getLinkById($linkId);
+				StatisticActivityRecord::WriteActivity('Link', 'Add to Favorites', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format, 'Favorites Folder' => $folderName, 'Favorites Name' => $linkName));
+				FavoritesLinkRecord::addLink($userId, $linkId, $linkName, $folderName, $linkRecord->id_library);
 				$this->renderPartial('successAddDialog', array('header' => 'SUCCESS!', 'content' => $linkRecord->file_name . ' was  saved to your favorites...'), false, true);
 			}
 		}
@@ -54,9 +58,9 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$parentFolder = FavoritesFolderStorage::getFolderById($folderId);
-				$folders = FavoritesFolderStorage::getChildFolders($userId, $folderId);
-				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
+				$parentFolder = FavoritesFolderRecord::getFolderById($folderId);
+				$folders = FavoritesFolderRecord::getChildFolders($userId, $folderId);
+				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, false, 'name', 'asc');
 				$this->renderPartial('favoritesLinksAndFolders', array('parentFolder' => $parentFolder, 'folders' => $folders, 'links' => $links), false, true);
 			}
 		}
@@ -66,7 +70,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$userFolderRecords = FavoritesFolderStorage::getAllFolderNames($userId);
+				$userFolderRecords = FavoritesFolderRecord::getAllFolderNames($userId);
 				$this->renderPartial('foldersList', array('folders' => $userFolderRecords), false, true);
 			}
 		}
@@ -82,7 +86,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId) && isset($isSort))
 			{
-				$links = FavoritesLinkStorage::getLinksByFolder($userId, $folderId, $isSort, $sortColumn, $sortDirection);
+				$links = FavoritesLinkRecord::getLinksByFolder($userId, $folderId, $isSort, $sortColumn, $sortDirection);
 				$this->renderPartial('favoritesLinks', array('links' => $links), false, true);
 			}
 		}
@@ -96,8 +100,8 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($folderId) && isset($userId))
 			{
-				FavoritesFolderStorage::putFolderToFolder($folderId, $parentId);
-				$rootFolder = FavoritesFolderStorage::getRootFolder($userId);
+				FavoritesFolderRecord::putFolderToFolder($folderId, $parentId);
+				$rootFolder = FavoritesFolderRecord::getRootFolder($userId);
 				$this->renderPartial('favoritesView', array('rootFolder' => $rootFolder, 'selectedFolderId' => $folderId), false, true);
 			}
 		}
@@ -112,7 +116,7 @@
 			if (!isset($oldParentId) || (isset($oldParentId) && ($oldParentId == "" || $oldParentId == "null")))
 				$oldParentId = null;
 			if (isset($linkId))
-				FavoritesLinkStorage::putLinkToFolder($linkId, $parentId, $oldParentId);
+				FavoritesLinkRecord::putLinkToFolder($linkId, $parentId, $oldParentId);
 		}
 
 		public function actionDeleteLink()
@@ -122,7 +126,7 @@
 			if (!isset($folderId) || (isset($folderId) && ($folderId == "" || $folderId == "null")))
 				$folderId = null;
 			if (isset($linkId))
-				FavoritesLinkStorage::deleteLink($linkId, $folderId);
+				FavoritesLinkRecord::deleteLink($linkId, $folderId);
 			Yii::app()->end();
 		}
 
@@ -130,7 +134,7 @@
 		{
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (isset($folderId))
-				FavoritesFolderStorage::deleteFolder($folderId);
+				FavoritesFolderRecord::deleteFolder($folderId);
 			Yii::app()->end();
 		}
 	}

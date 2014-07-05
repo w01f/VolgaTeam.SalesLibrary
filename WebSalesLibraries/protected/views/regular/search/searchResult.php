@@ -1,39 +1,45 @@
-<?php if (isset($searchInfo)): ?>
+<?
+	/**
+	 * @var $searchInfo array
+	 * @var $links array
+	 */
+?>
+<? if (isset($searchInfo)): ?>
 	<div class="search-grid-info<? if (isset($links)): ?> has-result<? endif; ?>">
 		<table>
 			<tr>
 				<td id="search-links-info-count">
-					<span><?php echo $searchInfo['count']; ?></span>
+					<span><? echo $searchInfo['count']; ?></span>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<?php if (array_key_exists('condition', $searchInfo)): ?>
-						<span><?php echo $searchInfo['condition']; ?>; </span>
-					<?php endif; ?>
-					<?php if (array_key_exists('file_types', $searchInfo)): ?>
-						<span><?php echo $searchInfo['file_types']; ?>; </span>
-					<?php endif; ?>
-					<?php if (array_key_exists('dates', $searchInfo)): ?>
-						<span><?php echo $searchInfo['dates']; ?>; </span>
-					<?php endif; ?>
+					<? if (array_key_exists('condition', $searchInfo)): ?>
+						<span><? echo $searchInfo['condition']; ?>; </span>
+					<? endif; ?>
+					<? if (array_key_exists('file_types', $searchInfo)): ?>
+						<span><? echo $searchInfo['file_types']; ?>; </span>
+					<? endif; ?>
+					<? if (array_key_exists('dates', $searchInfo)): ?>
+						<span><? echo $searchInfo['dates']; ?>; </span>
+					<? endif; ?>
 				</td>
 			</tr>
-			<?php if (array_key_exists('categories', $searchInfo)): ?>
+			<? if (array_key_exists('categories', $searchInfo)): ?>
 				<tr>
 					<td>
-						<span><?php echo $searchInfo['categories']; ?></span>
+						<span><? echo $searchInfo['categories']; ?></span>
 					</td>
 				</tr>
-			<?php endif; ?>
-			<?php if (array_key_exists('libraries', $searchInfo)): ?>
+			<? endif; ?>
+			<? if (array_key_exists('libraries', $searchInfo)): ?>
 				<tr>
 					<td>
-						<span><?php echo $searchInfo['libraries']; ?></span>
+						<span><? echo $searchInfo['libraries']; ?></span>
 					</td>
 				</tr>
-			<?php endif; ?>
+			<? endif; ?>
 		</table>
 	</div>
-<?php endif; ?>
+<? endif; ?>
 <? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/linksGrid.php', array('links' => isset($links) ? $links : null, 'datasetKey' => isset($searchInfo) ? $searchInfo['datasetKey'] : null), true); ?>

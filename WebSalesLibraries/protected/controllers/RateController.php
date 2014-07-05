@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class RateController
+	 */
 	class RateController extends IsdController
 	{
 		public function getViewPath()
@@ -12,8 +16,8 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($linkId) && isset($userId))
 			{
-				$rate = LinkRateStorage::model()->getLinkRate($linkId);
-				$isRated = LinkRateStorage::model()->isRated($linkId, $userId);
+				$rate = LinkRateRecord::model()->getLinkRate($linkId);
+				$isRated = LinkRateRecord::model()->isRated($linkId, $userId);
 				$this->renderPartial('linkRate', array('rate' => $rate, 'isRated' => $isRated), false, true);
 			}
 		}
@@ -24,10 +28,10 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($linkId) && isset($userId))
 			{
-				LinkRateStorage::addRate($linkId, $userId);
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				LinkRateRecord::addRate($linkId, $userId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
-					StatisticActivityStorage::WriteActivity('Link', 'Like', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+					StatisticActivityRecord::WriteActivity('Link', 'Like', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
 			}
 			Yii::app()->end();
 		}
@@ -38,10 +42,10 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($linkId) && isset($userId))
 			{
-				LinkRateStorage::deleteRate($linkId, $userId);
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				LinkRateRecord::deleteRate($linkId, $userId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
-					StatisticActivityStorage::WriteActivity('Link', 'Unlike', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
+					StatisticActivityRecord::WriteActivity('Link', 'Unlike', array('Name' => $linkRecord->name, 'File' => $linkRecord->file_name, 'Original Format' => $linkRecord->format));
 			}
 			Yii::app()->end();
 		}

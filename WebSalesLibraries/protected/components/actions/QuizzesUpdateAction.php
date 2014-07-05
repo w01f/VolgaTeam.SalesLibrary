@@ -1,18 +1,22 @@
 <?php
 
+	/**
+	 * Class QuizzesUpdateAction
+	 */
 	class QuizzesUpdateAction extends CAction
 	{
 		public function run()
 		{
 			echo "Job started...\n";
 
-			QuizGroupStorage::clearData();
+			QuizGroupRecord::clearData();
 
 			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'quizzes';
 			if (file_exists($rootFolderPath))
 			{
 				$rootFolder = new DirectoryIterator($rootFolderPath);
 				$subFolders = array();
+				/** @var $subFolder DirectoryIterator */
 				foreach ($rootFolder as $subFolder)
 				{
 					if ($subFolder->isDir() && !$subFolder->isDot())
@@ -33,6 +37,13 @@
 			echo "Job completed...\n";
 		}
 
+		/**
+		 * @param $parentGroupId string
+		 * @param $topLevelGroupId string
+		 * @param $name string
+		 * @param $path string
+		 * @param $order int
+		 */
 		private function loadGroup($parentGroupId, $topLevelGroupId, $name, $path, $order)
 		{
 			$quizConfigPath = realpath($path . DIRECTORY_SEPARATOR . 'quiz.xml');
@@ -40,7 +51,7 @@
 				$this->loadQuiz($parentGroupId, $quizConfigPath);
 			else
 			{
-				$quizGroup = new QuizGroupStorage();
+				$quizGroup = new QuizGroupRecord();
 				$groupId = uniqid();
 				if (!isset($topLevelGroupId))
 					$topLevelGroupId = $groupId;
@@ -58,6 +69,7 @@
 				$subFolders = array();
 				foreach ($folderIterator as $subFolder)
 				{
+					/** @var $subFolder DirectoryIterator */
 					if ($subFolder->isDir() && !$subFolder->isDot())
 						$subFolders[$subFolder->getBasename()] = $subFolder->getPathname();
 				}
@@ -71,9 +83,13 @@
 			}
 		}
 
+		/**
+		 * @param $parentGroupId string
+		 * @param $configPath string
+		 */
 		private function loadQuiz($parentGroupId, $configPath)
 		{
-			$quiz = new QuizStorage();
+			$quiz = new QuizRecord();
 			$quiz->id = uniqid();
 			$quiz->id_group = $parentGroupId;
 			$quiz->source_path = '/' . str_replace('\\', '/', str_replace(Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR, '', dirname($configPath)));

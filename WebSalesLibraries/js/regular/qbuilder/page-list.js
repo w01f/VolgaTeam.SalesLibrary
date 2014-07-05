@@ -1,77 +1,88 @@
 (function ($)
 {
-	$.pageList = {
-		load: function (selectedPageId)
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	var PageListManager = function ()
+	{
+		var that = this;
+		this.selectedPage = undefined;
+
+		this.init = function ()
 		{
-			var pageList = $('#page-list-container');
-			if (selectedPageId == undefined)
-				selectedPageId = $.pageList.getSelectedPageId();
-			$.ajax({
-				type: "POST",
-				url: "qbuilder/getPageList",
-				data: {
-					selectedPageId: selectedPageId
-				},
-				beforeSend: function ()
-				{
-					pageList.html('');
-					$.pageContent.clear();
-					$.showOverlayLight();
-				},
-				complete: function ()
-				{
-					$.hideOverlayLight();
-				},
-				success: function (msg)
-				{
-					pageList.html(msg);
-					$.pageList.afterLoad();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
+			$('#page-list-button').off('click').on('click', function ()
+			{
+				if ($(this).hasClass('sel'))
+					$(this).removeClass('sel');
+				else
+					$(this).addClass('sel');
+				$.cookie("showQPageList", $(this).hasClass('sel'), {
+					expires: (60 * 60 * 24 * 7)
+				});
+				that.show();
+				that.updateContentSize();
 			});
-		},
-		afterLoad: function ()
-		{
+			$('#page-add-button').off('click').on('click', function ()
+			{
+				addPage();
+			});
+			$('#page-delete-button').off('click').on('click', function ()
+			{
+				deletePage();
+			});
+			$('#page-save-button').off('click').on('click', function ()
+			{
+				that.savePage(null);
+			});
+			$('#page-preview-button').off('click').on('click', function ()
+			{
+				that.savePage(that.previewPage);
+			});
+			$('#page-email-outlook-button').off('click').on('click', function ()
+			{
+				that.savePage(emailPageOutlook);
+			});
 			var pageList = $('#page-list-container');
 			if (pageList.find('tr').length > 0)
-				$.pageList.openPage($.pageList.getSelectedPageId());
+				openPage(pageList.find('tr.selected').find('.link-id-column').html());
 			pageList.find('tr').off('click').on('click', function (event)
 			{
 				if (!$(this).hasClass('selected'))
 				{
 					pageList.find('tr').removeClass('selected');
 					$(this).addClass('selected');
-					var selectedPageId = $.pageList.getSelectedPageId();
-					$.pageList.openPage(selectedPageId);
+					var selectedPageId = $(this).find('.link-id-column').html();
+					openPage(selectedPageId);
 				}
 				event.stopPropagation();
 			});
 			pageList.find('.link-delete').off('click').on('click', function (event)
 			{
 				event.stopPropagation();
-				$.pageList.deletePage($(this).parent().find('.link-id-column').html());
+				deletePage($(this).parent().find('.link-id-column').html());
 			});
 			pageList.find('.link-clone').off('click').on('click', function (event)
 			{
 				event.stopPropagation();
-				$.pageList.addPage($(this).parent().find('.link-id-column').html());
+				addPage($(this).parent().find('.link-id-column').html());
 			});
 			pageList.find('.link-up').off('click').on('click', function (event)
 			{
 				event.stopPropagation();
-				$.pageList.upPage($(this).parent());
+				upPage($(this).parent());
 			});
 			pageList.find('.link-down').off('click').on('click', function (event)
 			{
 				event.stopPropagation();
-				$.pageList.downPage($(this).parent());
+				downPage($(this).parent());
 			});
-		},
-		init: function ()
+			$('#page-list-clear').off('click').on('click', function ()
+			{
+				deletePages();
+			});
+		};
+
+		this.show = function ()
 		{
 			var pageList = $('#page-list');
 			var showPageList = $.cookie("showQPageList") != undefined ?
@@ -81,119 +92,34 @@
 				pageList.show();
 			else
 				pageList.hide();
+		};
 
-			$('#page-list-clear').off('click').on('click', function ()
-			{
-				$.pageList.deletePages();
-			});
-		},
-		getSelectedPageId: function ()
-		{
-			var pageList = $('#page-list');
-			return pageList.find('tr.selected').find('.link-id-column').html();
-		},
-		openPage: function (selectedPageId)
-		{
-			$.pageContent.load(selectedPageId);
-		},
-		addPage: function (clonePageId)
+		this.addLitePage = function (libraryLinkId, title, fileName, fileType)
 		{
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/addPageDialog",
-				data: {
-					clone: clonePageId != undefined
-				},
-				beforeSend: function ()
-				{
-					$.showOverlayLight();
-				},
-				complete: function ()
-				{
-					$.hideOverlayLight();
-				},
-				success: function (msg)
-				{
-					var addPageContent = $(msg);
-					addPageContent.find('.btn.accept-button').on('click', function ()
-					{
-						var now = new Date();
-						$.ajax({
-							type: "POST",
-							url: "qbuilder/addPage",
-							data: {
-								title: $('#add-page-name').val(),
-								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
-								clonePageId: clonePageId
-							},
-							beforeSend: function ()
-							{
-								$.showOverlayLight();
-							},
-							complete: function ()
-							{
-								$.hideOverlayLight();
-							},
-							success: function (msg)
-							{
-								$.pageList.load(msg);
-							},
-							error: function ()
-							{
-							},
-							async: true,
-							dataType: 'html'
-						});
-						$.fancybox.close();
-					});
-					addPageContent.find('.btn.cancel-button').on('click', function ()
-					{
-						$.fancybox.close();
-					});
-
-					$.fancybox({
-						content: addPageContent,
-						title: clonePageId == undefined ? "Add quickSITE" : "Clone quickSITE",
-						scrolling: 'no',
-						autoSize: true,
-						openEffect: 'none',
-						closeEffect: 'none'
-					});
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		},
-		addLitePage: function (libraryLinkId, title, fileName, fileType)
-		{
-			$.ajax({
-				type: "POST",
-				url: "qbuilder/addPageLiteDialog",
+				url: window.BaseUrl + "qbuilder/addPageLiteDialog",
 				data: {
 					linkId: libraryLinkId
 				},
 				beforeSend: function ()
 				{
-					$.showOverlayLight();
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function (msg)
 				{
 					var addPageContent = $(msg);
-					var linkName = addPageContent.find('#add-page-name').val();
 					addPageContent.find('#add-page-expires-in').find('.btn').on('click', function ()
 					{
-						addPageContent.find('#add-page-expires-in').find('.btn').removeClass('active');
+						addPageContent.find('#add-page-expires-in').find('.btn').removeClass('active').blur();
 						$(this).addClass('active');
 						$.ajax({
 							type: "POST",
-							url: "statistic/writeActivity",
+							url: window.BaseUrl + "statistic/writeActivity",
 							data: {
 								type: 'Email',
 								subType: 'Email Activity',
@@ -214,7 +140,7 @@
 						$(this).addClass('opened');
 						$.ajax({
 							type: "POST",
-							url: "statistic/writeActivity",
+							url: window.BaseUrl + "statistic/writeActivity",
 							data: {
 								type: 'Email',
 								subType: 'Email Activity',
@@ -272,7 +198,7 @@
 					{
 						$.ajax({
 							type: "POST",
-							url: "statistic/writeActivity",
+							url: window.BaseUrl + "statistic/writeActivity",
 							data: {
 								type: 'Email',
 								subType: 'Email Activity',
@@ -293,7 +219,7 @@
 						var now = new Date();
 						$.ajax({
 							type: "POST",
-							url: "qbuilder/addPageLite",
+							url: window.BaseUrl + "qbuilder/addPageLite",
 							data: {
 								linkId: libraryLinkId,
 								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
@@ -310,16 +236,16 @@
 							},
 							beforeSend: function ()
 							{
-								$.showOverlayLight();
+								$.SalesPortal.Overlay.show(false);
 							},
 							complete: function ()
 							{
-								$.hideOverlayLight();
+								$.SalesPortal.Overlay.hide();
 							},
 							success: function (msg)
 							{
 								if (subtitle != '')
-									window.open('mailto:?subject=' + subtitle.replace(/&/g, '%26').replace(' ','%20') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
+									window.open('mailto:?subject=' + subtitle.replace(/&/g, '%26').replace(' ', '%20') + '&body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 								else
 									window.open('mailto:?body=' + '%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A' + msg + (pinCode.length > 0 ? ("%0D%0APin-code: " + pinCode) : ''), "_self");
 							},
@@ -336,7 +262,7 @@
 						$.fancybox.close();
 						$.ajax({
 							type: "POST",
-							url: "statistic/writeActivity",
+							url: window.BaseUrl + "statistic/writeActivity",
 							data: {
 								type: 'Email',
 								subType: 'Email Activity',
@@ -360,12 +286,13 @@
 						openEffect: 'none',
 						closeEffect: 'none'
 					});
-					$('#add-page-tabs a:first').tab('show');
-					$('#add-page-tabs a[data-toggle="tab"]').on('shown', function (e)
+					var addPageTabs = $('#add-page-tabs');
+					addPageTabs.find('a:first').tab('show');
+					addPageTabs.find('a[data-toggle="tab"]').on('shown', function ()
 					{
 						$.ajax({
 							type: "POST",
-							url: "statistic/writeActivity",
+							url: window.BaseUrl + "statistic/writeActivity",
 							data: {
 								type: 'Email',
 								subType: 'Email Activity',
@@ -386,10 +313,210 @@
 				async: true,
 				dataType: 'html'
 			});
-		},
-		deletePage: function (pageId)
+		};
+
+		this.savePage = function (onSuccessHandler)
 		{
-			var selectedPageId = $.pageList.getSelectedPageId();
+			var pageList = $('#page-list-container');
+			var selectedPageRow = pageList.find('tr.selected');
+			var selectedPageId = that.selectedPage.pageId;
+			var title = $('#page-content-title').val();
+			selectedPageRow.find('td.link-name-column').html(title);
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/savePage",
+				data: {
+					selectedPageId: selectedPageId,
+					title: title,
+					description: $('#page-content-description').val(),
+					logo: $('#page-content-tab-logo').find('a.opened').find('img').attr('src'),
+					expirationDate: $('#page-content-expiration-date').val(),
+					requireLogin: $('#page-content-require-login').is(':checked'),
+					pinCode: $('#page-content-access-code').val(),
+					disableBanners: $('#page-content-disable-banners').is(':checked'),
+					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
+					showLinksAsUrl: $('#page-content-show-links-as-url').is(':checked'),
+					recordActivity: $('#page-content-record-activity').is(':checked'),
+					activityEmailCopy: $('#page-content-activity-email-copy').val(),
+					header: $('#page-content-header-text').val(),
+					footer: $('#page-content-footer-text').val()
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function ()
+				{
+					if (onSuccessHandler != null)
+						onSuccessHandler();
+					else
+					{
+						$('body').append('<div id="page-content-save-confirm" title="adSALESapps.com">quickSITE is SAVED!</div>');
+						$("#page-content-save-confirm").dialog({
+							resizable: false,
+							modal: true,
+							buttons: {
+								"OK": function ()
+								{
+									$(this).dialog("close");
+								}
+							},
+							open: function ()
+							{
+								$(this).closest(".ui-dialog")
+									.find(".ui-dialog-titlebar-close")
+									.html("<span class='ui-icon ui-icon-closethick'></span>");
+							},
+							close: function ()
+							{
+								$("#page-content-save-confirm").remove();
+							}
+						});
+					}
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		this.previewPage = function ()
+		{
+			window.open($('#page-content-url').html(), '_blank');
+		};
+
+		this.updateContentSize = function ()
+		{
+			var height = $('#content').height() - $('#page-list-buttons').height() - 6;
+			$('#page-list-container').css({
+				'height': height + 'px'
+			});
+			if (that.selectedPage != undefined)
+				that.selectedPage.updateContentSize();
+		};
+
+		var load = function (pageToSelectId)
+		{
+			var pageList = $('#page-list-container');
+			if (pageToSelectId == undefined && that.selectedPage != undefined)
+				pageToSelectId = that.selectedPage.pageId;
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/getPageList",
+				data: {
+					selectedPageId: pageToSelectId
+				},
+				beforeSend: function ()
+				{
+					pageList.html('');
+					if (that.selectedPage != undefined)
+						that.selectedPage.clear();
+					that.selectedPage = undefined;
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					pageList.html(msg);
+					that.init();
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var openPage = function (selectedPageId)
+		{
+			that.selectedPage = new $.SalesPortal.QBuilder.PageContent(selectedPageId);
+		};
+
+		var addPage = function (clonePageId)
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/addPageDialog",
+				data: {
+					clone: clonePageId != undefined
+				},
+				beforeSend: function ()
+				{
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					var addPageContent = $(msg);
+					addPageContent.find('.btn.accept-button').on('click', function ()
+					{
+						var now = new Date();
+						$.ajax({
+							type: "POST",
+							url: window.BaseUrl + "qbuilder/addPage",
+							data: {
+								title: $('#add-page-name').val(),
+								createDate: now.toLocaleDateString() + ' ' + now.toLocaleTimeString(),
+								clonePageId: clonePageId
+							},
+							beforeSend: function ()
+							{
+								$.SalesPortal.Overlay.show(false);
+							},
+							complete: function ()
+							{
+								$.SalesPortal.Overlay.hide();
+							},
+							success: function (msg)
+							{
+								load(msg);
+							},
+							error: function ()
+							{
+							},
+							async: true,
+							dataType: 'html'
+						});
+						$.fancybox.close();
+					});
+					addPageContent.find('.btn.cancel-button').on('click', function ()
+					{
+						$.fancybox.close();
+					});
+
+					$.fancybox({
+						content: addPageContent,
+						title: clonePageId == undefined ? "Add quickSITE" : "Clone quickSITE",
+						scrolling: 'no',
+						autoSize: true,
+						openEffect: 'none',
+						closeEffect: 'none'
+					});
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var deletePage = function (pageId)
+		{
+			var selectedPageId = that.selectedPage.pageId;
 			if (pageId != undefined)
 				selectedPageId = pageId;
 			if (selectedPageId != null)
@@ -404,18 +531,18 @@
 							$(this).dialog("close");
 							$.ajax({
 								type: "POST",
-								url: "qbuilder/deletePage",
+								url: window.BaseUrl + "qbuilder/deletePage",
 								data: {
 									selectedPageId: selectedPageId
 								},
 								beforeSend: function ()
 								{
-									$.showOverlayLight();
+									$.SalesPortal.Overlay.show(false);
 								},
 								complete: function ()
 								{
-									$.hideOverlayLight();
-									$.pageList.load();
+									$.SalesPortal.Overlay.hide();
+									load();
 								},
 								async: true,
 								dataType: 'html'
@@ -426,37 +553,44 @@
 							$(this).dialog("close");
 						}
 					},
-					close: function (event, ui)
+					open: function ()
+					{
+						$(this).closest(".ui-dialog")
+							.find(".ui-dialog-titlebar-close")
+							.html("<span class='ui-icon ui-icon-closethick'></span>");
+					},
+					close: function ()
 					{
 						$("#delete-page-warning").remove();
 					}
 				});
 			}
-		},
-		deletePages: function ()
+		};
+
+		var deletePages = function ()
 		{
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/deletePagesDialog",
+				url: window.BaseUrl + "qbuilder/deletePagesDialog",
 				data: {    },
 				beforeSend: function ()
 				{
-					$.showOverlayLight();
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function (msg)
 				{
 					var deletePagesContent = $(msg);
 					deletePagesContent.find('#delete-pages-select-all').on('click', function ()
 					{
-						deletePagesContent.find('.delete-pages-item').attr('checked', true);
+						deletePagesContent.find('.delete-pages-item').prop('checked', true);
 					});
 					deletePagesContent.find('#delete-pages-clear-all').on('click', function ()
 					{
-						deletePagesContent.find('.delete-pages-item').attr('checked', false);
+						deletePagesContent.find('.delete-pages-item').prop('checked', false);
 					});
 					deletePagesContent.find('.btn.accept-button').on('click', function ()
 					{
@@ -468,18 +602,18 @@
 
 						$.ajax({
 							type: "POST",
-							url: "qbuilder/deletePages",
+							url: window.BaseUrl + "qbuilder/deletePages",
 							data: {
 								pageIds: $.toJSON(selectedPageIds)
 							},
 							beforeSend: function ()
 							{
-								$.showOverlayLight();
+								$.SalesPortal.Overlay.show(false);
 							},
 							complete: function ()
 							{
-								$.hideOverlayLight();
-								$.pageList.load();
+								$.SalesPortal.Overlay.hide();
+								load();
 							},
 							error: function ()
 							{
@@ -510,130 +644,66 @@
 				async: true,
 				dataType: 'html'
 			});
-		},
-		savePage: function (onSuccessHandler)
-		{
-			var pageList = $('#page-list-container');
-			var selectedPage = pageList.find('tr.selected');
-			var selectedPageId = $.pageList.getSelectedPageId();
-			selectedPage.find('td.link-name-column').html($('#page-content-title').val());
-			$.ajax({
-				type: "POST",
-				url: "qbuilder/savePage",
-				data: {
-					selectedPageId: selectedPageId,
-					title: $('#page-content-title').val(),
-					description: $('#page-content-description').val(),
-					logo: $('#page-content-tab-logo').find('a.opened').find('img').attr('src'),
-					expirationDate: $('#page-content-expiration-date').val(),
-					requireLogin: $('#page-content-require-login').is(':checked'),
-					pinCode: $('#page-content-access-code').val(),
-					disableBanners: $('#page-content-disable-banners').is(':checked'),
-					disableWidgets: $('#page-content-disable-widgets').is(':checked'),
-					showLinksAsUrl: $('#page-content-show-links-as-url').is(':checked'),
-					recordActivity: $('#page-content-record-activity').is(':checked'),
-					activityEmailCopy: $('#page-content-activity-email-copy').val(),
-					header: $('#page-content-header-text').val(),
-					footer: $('#page-content-footer-text').val()
-				},
-				beforeSend: function ()
-				{
-					$.showOverlayLight();
-				},
-				complete: function ()
-				{
-					$.hideOverlayLight();
-				},
-				success: function ()
-				{
-					if (onSuccessHandler != null)
-						onSuccessHandler();
-					else
-					{
-						$('body').append('<div id="page-content-save-confirm" title="adSALESapps.com">quickSITE is SAVED!</div>');
-						$("#page-content-save-confirm").dialog({
-							resizable: false,
-							modal: true,
-							buttons: {
-								"OK": function ()
-								{
-									$(this).dialog("close");
-								}
-							},
-							close: function ()
-							{
-								$("#page-content-save-confirm").remove();
-							}
-						});
-					}
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		},
-		previewPage: function ()
-		{
-			window.open($('#page-content-url').html(), '_blank');
-		},
-		upPage: function (row)
+		};
+
+		var upPage = function (row)
 		{
 			var pageId = row.find('.link-id-column').html();
-			var rowIndex = $('#page-list tr.page-list-item').index(row);
+			var rowIndex = $('#page-list').find('tr.page-list-item').index(row);
 			if (rowIndex > 0)
 			{
 				$.ajax({
 					type: "POST",
-					url: "qbuilder/setPageOrder",
+					url: window.BaseUrl + "qbuilder/setPageOrder",
 					data: {
 						pageId: pageId,
 						order: (rowIndex - 1)
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
-						$.pageList.load();
+						$.SalesPortal.Overlay.hide();
+						load();
 					},
 					async: true,
 					dataType: 'html'
 				});
 			}
-		},
-		downPage: function (row)
+		};
+
+		var downPage = function (row)
 		{
 			var nextRow = row.next();
 			if (nextRow.length > 0)
 			{
 				var pageId = nextRow.find('.link-id-column').html();
-				var rowIndex = $('#page-list tr.page-list-item').index(nextRow);
+				var rowIndex = $('#page-list').find('tr.page-list-item').index(nextRow);
 				$.ajax({
 					type: "POST",
-					url: "qbuilder/setPageOrder",
+					url: window.BaseUrl + "qbuilder/setPageOrder",
 					data: {
 						pageId: pageId,
 						order: rowIndex > 0 ? (rowIndex - 1) : 0
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
-						$.pageList.load();
+						$.SalesPortal.Overlay.hide();
+						load();
 					},
 					async: true,
 					dataType: 'html'
 				});
 			}
-		},
-		emailPageOutlook: function ()
+		};
+
+		var emailPageOutlook = function ()
 		{
 			var pinCode = $('#page-content-access-code').val();
 			if (pinCode.length > 0)
@@ -642,40 +712,5 @@
 				window.open("mailto:?body=" + "%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" + $('#page-content-url').html(), "_self");
 		}
 	};
-
-	$(document).ready(function ()
-	{
-		$('#page-list-button').off('click').on('click', function ()
-		{
-			if ($(this).hasClass('sel'))
-				$(this).removeClass('sel');
-			else
-				$(this).addClass('sel');
-			$.cookie("showQPageList", $(this).hasClass('sel'), {
-				expires: (60 * 60 * 24 * 7)
-			});
-			$.pageList.init();
-			$.updateContentAreaDimensions();
-		});
-		$('#page-add-button').off('click').on('click', function ()
-		{
-			$.pageList.addPage();
-		});
-		$('#page-delete-button').off('click').on('click', function ()
-		{
-			$.pageList.deletePage();
-		});
-		$('#page-save-button').off('click').on('click', function ()
-		{
-			$.pageList.savePage(null);
-		});
-		$('#page-preview-button').off('click').on('click', function ()
-		{
-			$.pageList.savePage($.pageList.previewPage);
-		});
-		$('#page-email-outlook-button').off('click').on('click', function ()
-		{
-			$.pageList.savePage($.pageList.emailPageOutlook);
-		});
-	});
+	$.SalesPortal.QBuilder.PageList = new PageListManager();
 })(jQuery);

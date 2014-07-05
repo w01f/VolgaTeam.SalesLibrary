@@ -1,18 +1,29 @@
 <?php
+
+	/**
+	 * Class InactiveusersController
+	 */
 	class InactiveusersController extends CController
 	{
+		/**
+		 * @return array
+		 */
 		public function actions()
 		{
 			return array(
 				'quote' => array(
 					'class' => 'CWebServiceAction',
 					'classMap' => array(
-						'UserRecord' => 'UserRecord',
+						'UserModel' => 'UserModel',
 					),
 				),
 			);
 		}
 
+		/**
+		 * @param string $sessionKey
+		 * @return bool
+		 */
 		protected function authenticateBySession($sessionKey)
 		{
 			$data = Yii::app()->cacheDB->get($sessionKey);
@@ -43,10 +54,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return UserRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return UserModel[]
 		 * @soap
 		 */
 		public function getInactiveUsers($sessionKey, $dateStart, $dateEnd)
@@ -59,7 +70,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$userRecord = new UserRecord();
+					$userRecord = new UserModel();
 					$userRecord->id = $resultRecord['id'];
 					$userRecord->login = $resultRecord['login'];
 					$userRecord->firstName = $resultRecord['first_name'];
@@ -75,12 +86,12 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string[] userIds
-		 * @param boolean onlyEmail
-		 * @param string sender
-		 * @param string subject
-		 * @param string body
+		 * @param string $sessionKey
+		 * @param string[] $userIds
+		 * @param boolean $onlyEmail
+		 * @param string $sender
+		 * @param string $subject
+		 * @param string $body
 		 * @soap
 		 */
 		public function resetUsers($sessionKey, $userIds, $onlyEmail, $sender, $subject, $body)
@@ -89,15 +100,16 @@
 			{
 				foreach ($userIds as $userId)
 				{
-					$userRecord = UserStorage::model()->findByPk($userId);
+					/** @var $userRecord UserRecord */
+					$userRecord = UserRecord::model()->findByPk($userId);
 					if (isset($userRecord->email))
 					{
 						$password = '';
 						if (!$onlyEmail)
 						{
-							$password = UserStorage::generatePassword();
-							UserStorage::changePassword($userRecord->login, $password);
-							ResetPasswordStorage::resetPasswordForUser($userRecord->login, $password, false, false);
+							$password = UserRecord::generatePassword();
+							UserRecord::changePassword($userRecord->login, $password);
+							ResetPasswordRecord::resetPasswordForUser($userRecord->login, $password, false, false);
 						}
 
 						$message = Yii::app()->email;
@@ -120,12 +132,12 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string[] userIds
-		 * @param boolean onlyEmail
-		 * @param string sender
-		 * @param string subject
-		 * @param string body
+		 * @param string $sessionKey
+		 * @param string[] $userIds
+		 * @param boolean $onlyEmail
+		 * @param string $sender
+		 * @param string $subject
+		 * @param string $body
 		 * @soap
 		 */
 		public function deleteUsers($sessionKey, $userIds, $onlyEmail, $sender, $subject, $body)
@@ -134,7 +146,7 @@
 			{
 				foreach ($userIds as $userId)
 				{
-					$userRecord = UserStorage::model()->findByPk($userId);
+					$userRecord = UserRecord::model()->findByPk($userId);
 					if (isset($userRecord->email))
 					{
 						$message = Yii::app()->email;
@@ -145,7 +157,7 @@
 						$message->message = $body;
 						$message->send();
 						if (!$onlyEmail)
-							UserStorage::deleteUserByLogin($userRecord->login);
+							UserRecord::deleteUserByLogin($userRecord->login);
 					}
 				}
 			}

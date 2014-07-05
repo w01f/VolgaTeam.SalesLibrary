@@ -1,11 +1,15 @@
 <?php
+
+	/**
+	 * Class NotifyDeadLinksAction
+	 */
 	class NotifyDeadLinksAction extends CAction
 	{
 		public function run()
 		{
 			echo "Job started...\n";
 
-			$libraryRecords = LibraryStorage::model()->findAll();
+			$libraryRecords = LibraryRecord::model()->findAll();
 			foreach ($libraryRecords as $libraryRecord)
 			{
 				if (isset($deadLinks))
@@ -13,25 +17,26 @@
 				if (isset($notConvertedVideos))
 					unset($notConvertedVideos);
 
-				$deadLinkRecords = LinkStorage::model()->findAll('is_dead=1 and id_library=?', array($libraryRecord->id));
+				$deadLinkRecords = LinkRecord::model()->findAll('is_dead=1 and id_library=?', array($libraryRecord->id));
 				foreach ($deadLinkRecords as $deadLinkRecord)
 					$deadLinks[] = ' - ' . $deadLinkRecord->name . ' (' . basename($deadLinkRecord->file_relative_path) . ')';
 
-				$deadAttachmentRecords = AttachmentStorage::model()->findAll('is_dead=1 and id_library=?', array($libraryRecord->id));
+				$deadAttachmentRecords = AttachmentRecord::model()->findAll('is_dead=1 and id_library=?', array($libraryRecord->id));
 				foreach ($deadAttachmentRecords as $deadAttachmentRecord)
 					$deadLinks[] = ' - ' . $deadAttachmentRecord->name . ' (' . basename($deadAttachmentRecord->path) . ')';
 
-				$videoLinkRecords = LinkStorage::model()->findAll('is_preview_not_ready=1 and id_library=?', array($libraryRecord->id));
+				$videoLinkRecords = LinkRecord::model()->findAll('is_preview_not_ready=1 and id_library=?', array($libraryRecord->id));
 				foreach ($videoLinkRecords as $videoLinkRecord)
 					$notConvertedVideos[] = ' - ' . $videoLinkRecord->name . ' (' . $videoLinkRecord->file_name . ')';
 
-				$videoAttachmentRecords = AttachmentStorage::model()->findAll('is_preview_not_ready=1 and id_library=?', array($libraryRecord->id));
+				$videoAttachmentRecords = AttachmentRecord::model()->findAll('is_preview_not_ready=1 and id_library=?', array($libraryRecord->id));
 				foreach ($videoAttachmentRecords as $videoAttachmentRecord)
 					$notConvertedVideos[] = ' - ' . $videoAttachmentRecord->name . ' (' . basename($videoAttachmentRecord->path) . ')';
 
 				if (isset($deadLinks) || isset($notConvertedVideos))
 				{
-					$libraryConfigRecord = LibraryConfigStorage::model()->find('id_library=?', array($libraryRecord->id));
+					/** @var $libraryConfigRecord LibraryConfigRecord */
+					$libraryConfigRecord = LibraryConfigRecord::model()->find('id_library=?', array($libraryRecord->id));
 					if (isset($libraryConfigRecord))
 					{
 						$sender = $libraryConfigRecord->dead_link_sender;

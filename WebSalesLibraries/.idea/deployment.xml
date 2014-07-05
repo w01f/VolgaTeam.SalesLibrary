@@ -85,6 +85,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="wwbsales.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ALWAYS" />
   </component>

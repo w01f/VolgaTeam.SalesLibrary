@@ -1,3 +1,9 @@
+<?
+	/**
+	 * @var $quizItems QuizItem[]
+	 * @var $selectedQuizItemBreadcrumbs array
+	 */
+?>
 <table id="quizzes-container">
 	<tr>
 		<td id="quizzes-navigator">

@@ -1,5 +1,6 @@
-<?php
-	$version = '3.0';
+<?
+	/** @var $searchContainer SearchShortcut */
+	$version = '1.0';
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/search.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/file-card.css?' . $version);

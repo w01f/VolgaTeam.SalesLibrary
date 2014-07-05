@@ -12,6 +12,7 @@
 	</tr>
 	<tr>
 		<td class="on-left">
+			<label for="search-date-start" class="ui-hide-label"></label>
 			<input id="search-date-start" name="search-date-start" type="text" value="" data-mini="true"/>
 		</td>
 	</tr>
@@ -20,6 +21,7 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="on-left">
+			<label for="search-date-end" class="ui-hide-label"></label>
 			<input id="search-date-end" name="search-date-end" type="text" value="" data-mini="true"/>
 		</td>
 	</tr>

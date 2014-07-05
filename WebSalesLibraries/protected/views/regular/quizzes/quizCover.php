@@ -1,3 +1,4 @@
+<? /** @var $quiz Quiz */ ?>
 <table class="quiz-spash">
 	<tr>
 		<td><label><? echo $quiz->header; ?></label></td>
@@ -13,7 +14,7 @@
 	</tr>
 	<tr>
 		<td class="next-question">
-			<button class="btn btn-large btn-block">START</button>
+			<button class="btn btn-default btn-lg btn-block">START</button>
 		</td>
 	</tr>
 	<tr>

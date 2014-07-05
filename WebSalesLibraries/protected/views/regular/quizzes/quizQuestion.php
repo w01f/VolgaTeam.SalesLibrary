@@ -1,3 +1,9 @@
+<?
+	/**
+	 * @var $quiz Quiz
+	 * @var $question Question
+	 */
+?>
 <table class="quiz-question">
 	<tr>
 		<td class="title"><label><? echo $quiz->title; ?></label></td>
@@ -11,7 +17,7 @@
 	<? foreach ($question->answers as $answer): ?>
 		<tr>
 			<td class="answer-selector">
-				<button id="<? echo 'quiz' . $quiz->id . 'question' . $question->order . 'answer' . $answer->order; ?>" class="btn"><? echo $answer->letter; ?></button>
+				<button id="<? echo 'quiz' . $quiz->id . 'question' . $question->order . 'answer' . $answer->order; ?>" class="btn btn-default"><? echo $answer->letter; ?></button>
 			</td>
 			<td class="answer-text"><p class="lead"><? echo $answer->value; ?></p></td>
 		</tr>
@@ -20,11 +26,11 @@
 <table class="quiz-question">
 	<tr>
 		<td class="prev-question">
-			<button class="btn btn-large">Previous</button>
+			<button class="btn btn-default btn-lg">Previous</button>
 		</td>
 		<td class="next-question">
-			<button class="btn btn-large">Next</button>
+			<button class="btn btn-default btn-lg">Next</button>
 		</td>
 	</tr>
 </table>
-<p class="text-center"><em><small class="muted"><? echo $quiz->subtitle; ?></small></em></p>
+<p class="text-center"><em><small class="text-muted"><? echo $quiz->subtitle; ?></small></em></p>

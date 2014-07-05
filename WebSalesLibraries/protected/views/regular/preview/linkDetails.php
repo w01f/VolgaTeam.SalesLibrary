@@ -4,23 +4,22 @@
 	<td class="library-column"></span></td>
 	<td colspan="3">
 		<table class="link-details">
-			<?php if (isset($link)): ?>
-				<?php $clickClass = ' click-no-mobile'; ?>
-				<?php if ($link->enableFileCard && isset($link->fileCard)): ?>
-					<tr class="file-card">
-						<td class="link-id-column"><?echo $link->id;?></td>
+			<? $clickClass = ' click-no-mobile'; ?>
+			<? if ($link->enableFileCard && isset($link->fileCard)): ?>
+				<tr class="file-card">
+					<td class="link-id-column"><? echo $link->id; ?></td>
+					<td class="link-type-column<? echo $clickClass; ?>">
+						<img src="<? echo Yii::app()->request->getBaseUrl(true) . '/images/search/search-file-card.png'; ?>" alt="">
+					</td>
+					<td class="link-name-column<? echo $clickClass; ?>"><? echo $link->fileCard->title; ?></td>
+				</tr>
+			<? endif; ?>
+			<? if ($link->enableAttachments && isset($link->attachments)): ?>
+				<? foreach ($link->attachments as $attachment): ?>
+					<tr class="attachment">
+						<td class="link-id-column"><? echo $attachment->id; ?></td>
 						<td class="link-type-column<? echo $clickClass; ?>">
-							<img src="<? echo Yii::app()->request->getBaseUrl(true) . '/images/search/search-file-card.png'; ?>" alt="">
-						</td>
-						<td class="link-name-column<? echo $clickClass; ?>"><?echo $link->fileCard->title;?></td>
-					</tr>
-				<? endif; ?>
-				<?php if ($link->enableAttachments && isset($link->attachments)): ?>
-					<?php foreach ($link->attachments as $attachment): ?>
-						<tr class="attachment">
-							<td class="link-id-column"><?echo $attachment->id;?></td>
-							<td class="link-type-column<? echo $clickClass; ?>">
-								<?
+							<?
 								switch ($attachment->originalFormat)
 								{
 									case 'ppt':
@@ -75,13 +74,12 @@
 										echo CHtml::tag('img', array('src' => Yii::app()->request->getBaseUrl(true) . '/images/search/search-undefined-type.png', 'alt' => ''));
 										break;
 								}
-								?>
-							</td>
-							<td class="link-name-column<? echo $clickClass; ?>"><?echo $attachment->name;?></td>
-						</tr>
-					<? endforeach; ?>
-				<? endif; ?>
-			<? endif;?>
+							?>
+						</td>
+						<td class="link-name-column<? echo $clickClass; ?>"><? echo $attachment->name; ?></td>
+					</tr>
+				<? endforeach; ?>
+			<? endif; ?>
 		</table>
 	</td>
 </tr>

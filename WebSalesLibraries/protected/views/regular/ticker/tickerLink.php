@@ -1,10 +1,10 @@
 <? if (isset($tickerLink)): ?>
 	<? if ($tickerLink->type == 'text'): ?>
-		<li><a class="ticker-link text" href="#" target="_self"><?echo $tickerLink->text;?></a></li>
+		<li><a class="ticker-link text" href="#" target="_self"><? echo $tickerLink->text; ?></a></li>
 	<? endif; ?>
 	<? if ($tickerLink->type == 'url'): ?>
 		<li>
-			<a class="ticker-link url" href="<? echo $tickerLink->getDetailByKey('path'); ?>" target="_blank"><?echo $tickerLink->text;?></a>
+			<a class="ticker-link url" href="<? echo $tickerLink->getDetailByKey('path'); ?>" target="_blank"><? echo $tickerLink->text; ?></a>
 		</li>
 	<? endif; ?>
 	<? if ($tickerLink->type == 'link'): ?>
@@ -12,15 +12,16 @@
 		$libraryName = $tickerLink->getDetailByKey('library');
 		$pageName = $tickerLink->getDetailByKey('page');
 		$linkName = $tickerLink->getDetailByKey('link');
-		$link = LinkStorage::getLinkByLibraryAndPageAndName($libraryName, $pageName, $linkName);
+		$link = LinkRecord::getLinkByLibraryAndPageAndName($libraryName, $pageName, $linkName);
 		if (isset($link))
 			$id = $link['link_id'];
 		?>
 		<? if (isset($id)): ?>
-			<li><a class="ticker-link link" href="#<? echo $id; ?>" target="_self"><?echo $tickerLink->text;?></a></li>
+			<li><a class="ticker-link link" href="#<? echo $id; ?>" target="_self"><? echo $tickerLink->text; ?></a>
+			</li>
 		<? else: ?>
 			<li>
-				<a class="ticker-link text" href="#" target="_self"><?echo $tickerLink->text;?> (Associated library link was not found)</a>
+				<a class="ticker-link text" href="#" target="_self"><? echo $tickerLink->text; ?> (Associated library link was not found)</a>
 			</li>
 		<? endif; ?>
 	<? endif; ?>
@@ -36,7 +37,7 @@
 		?>
 		<? if (isset($fileLink)): ?>
 			<li>
-				<a class="ticker-link video" href="<? echo $fileLink; ?>" target="_self"><?echo $tickerLink->text;?>
+				<a class="ticker-link video" href="<? echo $fileLink; ?>" target="_self"><? echo $tickerLink->text; ?>
 					<div class="service-data" style="display: none;">
 						<div class="link-name"><?php echo $relativePath; ?></div>
 						<div class="file-name"><?php echo $relativePath; ?></div>
@@ -51,7 +52,7 @@
 			</li>
 		<? else: ?>
 			<li>
-				<a class="ticker-link text" href="#" target="_self"><?echo $tickerLink->text;?> (Associated video link was not found)</a>
+				<a class="ticker-link text" href="#" target="_self"><? echo $tickerLink->text; ?> (Associated video link was not found)</a>
 			</li>
 		<? endif; ?>
 	<? endif; ?>
@@ -66,11 +67,12 @@
 		}
 		?>
 		<? if (isset($fileLink)): ?>
-			<li><a class="ticker-link file" href="<? echo $fileLink; ?>" target="_blank"><?echo $tickerLink->text;?></a>
+			<li>
+				<a class="ticker-link file" href="<? echo $fileLink; ?>" target="_blank"><? echo $tickerLink->text; ?></a>
 			</li>
 		<? else: ?>
 			<li>
-				<a class="ticker-link text" href="#" target="_self"><?echo $tickerLink->text;?> (Associated file link was not found)</a>
+				<a class="ticker-link text" href="#" target="_self"><? echo $tickerLink->text; ?> (Associated file link was not found)</a>
 			</li>
 		<? endif; ?>
 	<? endif; ?>

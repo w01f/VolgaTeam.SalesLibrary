@@ -1,29 +1,40 @@
 (function ($)
 {
-	$.pageContent = {
-		load: function (selectedPageId)
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	$.SalesPortal.QBuilder.PageContent = function (selectedPageId)
+	{
+		var that = this;
+		var editorDescription;
+		var editorHeader;
+		var editorFooter;
+		var dateFormat = 'MM/DD/YY';
+
+		this.pageId = selectedPageId;
+
+		this.loadLinks = function ()
 		{
-			var pageContent = $('#page-content');
+			var pageLinksContainer = $('#page-content-links-container');
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/getPageContent",
+				url: window.BaseUrl + "qbuilder/getPageLinks",
 				data: {
-					selectedPageId: selectedPageId
+					selectedPageId: that.pageId
 				},
 				beforeSend: function ()
 				{
-					$.pageContent.destroyEditors();
-					pageContent.html('');
-					$.showOverlayLight();
+					pageLinksContainer.html('');
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function (msg)
 				{
-					pageContent.html(msg);
-					$.pageContent.afterLoad();
+					pageLinksContainer.html(msg);
+					afterLinksLoad();
 				},
 				error: function ()
 				{
@@ -31,124 +42,228 @@
 				async: true,
 				dataType: 'html'
 			});
-		},
-		editorDescription: null,
-		editorHeader: null,
-		editorFooter: null,
-		dropableOptions: {
+		};
+
+		this.clear = function ()
+		{
+			$('#page-content').html('');
+			destroyEditors();
+		};
+
+		this.updateContentSize = function ()
+		{
+			var content = $('#content');
+			var pageContent = $('#page-content').children('div');
+			var height = content.height() - 5;
+			pageContent.css({
+				'height': height + 'px'
+			});
+
+			updatePageLinks();
+			updatePageLogos();
+			updateEditors();
+		};
+
+		var load = function ()
+		{
+			var pageContent = $('#page-content');
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/getPageContent",
+				data: {
+					selectedPageId: that.pageId
+				},
+				beforeSend: function ()
+				{
+					that.clear();
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					pageContent.html(msg);
+					afterLoad();
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var updatePageLinks = function ()
+		{
+			var content = $('#content');
+			var pageContent = $('#page-content');
+			var tabLinks = $('#page-content-tab-links');
+			var height = content.height() - 5 -
+				pageContent.find('.page-title').height() -
+				pageContent.find('.ui-tabs-nav').height() -
+				tabLinks.find('.header').height() - 30;
+			$('#page-content-links-container').css({
+				'height': height + 'px'
+			});
+		};
+
+		var updatePageLogos = function ()
+		{
+			var content = $('#content');
+			var pageContent = $('#page-content');
+			var tabLogo = $('#page-content-tab-logo');
+			var height = content.height() - 5 -
+				pageContent.find('.page-title').height() -
+				pageContent.find('.ui-tabs-nav').height() -
+				tabLogo.find('.header').height() - 40;
+			tabLogo.find('.logo-list').css({
+				'height': height + 'px'
+			});
+		};
+
+		var updateEditors = function ()
+		{
+			var content = $('#content');
+			var pageContent = $('#page-content');
+			var containerHeight = content.height() -
+				pageContent.find('.page-title').height() -
+				pageContent.find('.ui-tabs-nav').height();
+
+			var descriptionHeight = containerHeight - $('#page-content-tab-title').find('.checkbox').height() - 50;
+			if (editorDescription != undefined)
+			{
+				editorDescription.$main.height(descriptionHeight + "px");
+				editorDescription.refresh();
+			}
+
+			var headerHeight = containerHeight - $('#page-content-tab-header').find('.checkbox').height() - 50;
+			if (editorHeader != undefined)
+			{
+				editorHeader.$main.height(headerHeight + "px");
+				editorHeader.refresh();
+			}
+
+			var footerHeight = containerHeight - $('#page-content-tab-footer').find('.checkbox').height() - 50;
+			if (editorFooter != undefined)
+			{
+				editorFooter.$main.height(footerHeight + "px");
+				editorFooter.refresh();
+			}
+		};
+
+		var dropableOptions = {
 			greedy: true,
 			accept: ".draggable-link",
 			hoverClass: "droppable-hover",
 			drop: function (event, ui)
 			{
-				var selectedPageId = $.pageList.getSelectedPageId();
-				var order = $('#page-content-links-container tr.page-link').index($(this));
+				var order = $('#page-content-links-container').find('tr.page-link').index($(this));
 				var linkInCartId = ui.helper.attr('id');
 				$.ajax({
 					type: "POST",
-					url: "qbuilder/addLinkToPage",
+					url: window.BaseUrl + "qbuilder/addLinkToPage",
 					data: {
-						pageId: selectedPageId,
+						pageId: that.pageId,
 						linkInCartId: linkInCartId,
 						order: order
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function ()
 					{
-						$.linkCart.load();
-						$.pageContent.loadLinks();
+						$.SalesPortal.QBuilder.LinkCart.load();
+						that.loadLinks();
 					},
 					async: true,
 					dataType: 'html'
 				});
 			}
-		},
-		afterLoad: function ()
+		};
+		var afterLoad = function ()
 		{
 			$('#page-content-url').off('click').on('click', function (even)
 			{
 				even.stopPropagation();
 				even.preventDefault();
-				$.pageList.savePage($.pageList.previewPage);
+				$.SalesPortal.QBuilder.PageList.savePage($.SalesPortal.QBuilder.PageList.previewPage);
 			});
 			$("#page-content-tabs").tabs({
-				show: function ()
-				{
-					$.pageContent.updateEditors();
-				}
+				activate: that.updateContentSize
 			});
-
 			var pageDescription = $('#page-content-description');
-			$.pageContent.editorDescription = pageDescription.cleditor({
-				width: '99%',
+			editorDescription = pageDescription.cleditor({
+				width: '96%',
 				controls: "bold italic underline subscript superscript size color font | undo redo"
 			})[0];
 			if (pageDescription.val() == '')
-				$.pageContent.editorDescription.disable(true);
+				editorDescription.disable(true);
 			$('#page-content-show-description').off('change').on('change', function ()
 			{
 				if ($(this).is(':checked'))
-					$.pageContent.editorDescription.disable(false);
+					editorDescription.disable(false);
 				else
 				{
-					$.pageContent.editorDescription.clear();
-					$.pageContent.editorDescription.disable(true);
+					editorDescription.clear();
+					editorDescription.disable(true);
 				}
-				$.pageContent.editorDescription.refresh();
+				editorDescription.refresh();
 			});
 
 			var pageHeader = $('#page-content-header-text');
-			$.pageContent.editorHeader = pageHeader.cleditor({
-				width: '99%',
+			editorHeader = pageHeader.cleditor({
+				width: '96%',
 				controls: "bold italic underline subscript superscript size color font | undo redo"
 			})[0];
 			if (pageHeader.val() == '')
-				$.pageContent.editorHeader.disable(true);
+				editorHeader.disable(true);
 			$('#page-content-show-header').off('change').on('change', function ()
 			{
 				if ($(this).is(':checked'))
-					$.pageContent.editorHeader.disable(false);
+					editorHeader.disable(false);
 				else
 				{
-					$.pageContent.editorHeader.clear();
-					$.pageContent.editorHeader.disable(true);
+					editorHeader.clear();
+					editorHeader.disable(true);
 				}
-				$.pageContent.editorHeader.refresh();
+				editorHeader.refresh();
 			});
 
 			var pageFooter = $('#page-content-footer-text');
-			$.pageContent.editorFooter = pageFooter.cleditor({
-				width: '99%',
+			editorFooter = pageFooter.cleditor({
+				width: '96%',
 				controls: "bold italic underline subscript superscript size color font | undo redo"
 			})[0];
 			if (pageFooter.val() == '')
-				$.pageContent.editorFooter.disable(true);
+				editorFooter.disable(true);
 			$('#page-content-show-footer').off('change').on('change', function ()
 			{
 				if ($(this).is(':checked'))
-					$.pageContent.editorFooter.disable(false);
+					editorFooter.disable(false);
 				else
 				{
-					$.pageContent.editorFooter.clear();
-					$.pageContent.editorFooter.disable(true);
+					editorFooter.clear();
+					editorFooter.disable(true);
 				}
-				$.pageContent.editorFooter.refresh();
+				editorFooter.refresh();
 			});
 
-			$('#page-content-expiration-date-container').find('.input-append')
-				.datepicker()
-				.on('changeDate', function ()
+			var expirationDatePicker = $('#page-content-expiration-date');
+			expirationDatePicker.daterangepicker(
 				{
-					$(this).datepicker('hide');
-					markExpiredDate();
-				});
+					format: dateFormat,
+					singleDatePicker: true,
+					startDate: expirationDatePicker.val(),
+					endDate: expirationDatePicker.val()
+				}, markExpiredDate);
+
 			$('#page-content-use-expiration-date').off('change').on('change', function ()
 			{
 				var dateContainer = $('#page-content-expiration-date-container');
@@ -161,6 +276,7 @@
 					dateField.val('');
 				}
 			});
+
 			$('#page-content-access-code-enabled').off('change').on('change', function ()
 			{
 				var accessCode = $('#page-content-access-code');
@@ -204,109 +320,49 @@
 				$(this).addClass('opened');
 			});
 
-			$('#page-content-links-container, #page-content-links-container tr.page-link').droppable($.pageContent.dropableOptions);
+			$('#page-content-links-container, #page-content-links-container tr.page-link').droppable(dropableOptions);
 
-			$.pageContent.afterLinksLoad();
+			afterLinksLoad();
 
-			$.updateContentAreaDimensions();
-		},
-		loadLinks: function ()
-		{
-			var pageLinksContainer = $('#page-content-links-container');
-			var selectedPageId = $.pageList.getSelectedPageId();
-			$.ajax({
-				type: "POST",
-				url: "qbuilder/getPageLinks",
-				data: {
-					selectedPageId: selectedPageId
-				},
-				beforeSend: function ()
-				{
-					pageLinksContainer.html('');
-					$.showOverlayLight();
-				},
-				complete: function ()
-				{
-					$.hideOverlayLight();
-				},
-				success: function (msg)
-				{
-					pageLinksContainer.html(msg);
-					$.pageContent.afterLinksLoad();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
-			});
-		},
-		afterLinksLoad: function ()
+			that.updateContentSize();
+		};
+		var afterLinksLoad = function ()
 		{
 			var pageLinks = $('#page-content-links-container');
-			pageLinks.find('.link-delete').off('click').on('click', $.pageContent.deleteLink);
-			pageLinks.find('.link-up').off('click').on('click', $.pageContent.upLink);
-			pageLinks.find('.link-down').off('click').on('click', $.pageContent.downLink);
+			pageLinks.find('.link-delete').off('click').on('click', deleteLink);
+			pageLinks.find('.link-up').off('click').on('click', upLink);
+			pageLinks.find('.link-down').off('click').on('click', downLink);
 			$('#page-content-links-number').html(pageLinks.find('.link-delete').length);
-			$('#page-content-links-container tr.page-link').droppable($.pageContent.dropableOptions);
+			pageLinks.find('tr.page-link').droppable(dropableOptions);
 
 			var clickableLinks = pageLinks.find("td.click-no-mobile");
 			clickableLinks.off('click').on('click', function ()
 			{
 				var ids = $(this).parent().find('.link-id-column').html().split('---');
 				var linkId = ids[1].replace('link', '');
-				$.requestViewDialog(linkId, false);
+				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 			});
 
 			pageLinks.find("td.click-mobile").off('touchstart').off('touchmove').off('touchend').on('touchstart',function ()
 			{
 				isScrolling = false;
 			}).on('touchmove',function ()
+			{
+				isScrolling = true;
+			}).on('touchend', function (e)
+			{
+				if (!isScrolling)
 				{
-					isScrolling = true;
-				}).on('touchend', function (e)
-				{
-					if (!isScrolling)
-					{
-						var ids = $(this).parent().find('.link-id-column').html().split('---');
-						var linkId = ids[1].replace('link', '');
-						$.requestViewDialog(linkId, false);
-					}
-					e.stopPropagation();
-					e.preventDefault();
-					return false;
-				});
-		},
-		addLink: function (linkInCartId)
-		{
-			var selectedPageId = $.pageList.getSelectedPageId();
-
-			$.ajax({
-				type: "POST",
-				url: "qbuilder/addLinkToPage",
-				data: {
-					pageId: selectedPageId,
-					linkInCartId: linkInCartId,
-					order: -1
-				},
-				beforeSend: function ()
-				{
-					$.showOverlayLight();
-				},
-				complete: function ()
-				{
-					$.hideOverlayLight();
-				},
-				success: function ()
-				{
-					$.linkCart.load();
-					$.pageContent.loadLinks();
-				},
-				async: true,
-				dataType: 'html'
+					var ids = $(this).parent().find('.link-id-column').html().split('---');
+					var linkId = ids[1].replace('link', '');
+					$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
+				}
+				e.stopPropagation();
+				e.preventDefault();
+				return false;
 			});
-		},
-		deleteLink: function ()
+		};
+		var deleteLink = function ()
 		{
 			var ids = $(this).parent().find('.link-id-column').html().split('---');
 			var linkInPageId = ids[0].replace('id', '');
@@ -322,18 +378,18 @@
 							$(this).dialog("close");
 							$.ajax({
 								type: "POST",
-								url: "qbuilder/deleteLinkFromPage",
+								url: window.BaseUrl + "qbuilder/deleteLinkFromPage",
 								data: {
 									linkInPageId: linkInPageId
 								},
 								beforeSend: function ()
 								{
-									$.showOverlayLight();
+									$.SalesPortal.Overlay.show(false);
 								},
 								complete: function ()
 								{
-									$.hideOverlayLight();
-									$.pageContent.loadLinks();
+									$.SalesPortal.Overlay.hide();
+									that.loadLinks();
 								},
 								async: true,
 								dataType: 'html'
@@ -344,141 +400,101 @@
 							$(this).dialog("close");
 						}
 					},
+					open: function ()
+					{
+						$(this).closest(".ui-dialog")
+							.find(".ui-dialog-titlebar-close")
+							.html("<span class='ui-icon ui-icon-closethick'></span>");
+					},
 					close: function ()
 					{
 						$("#delete-link-warning").remove();
 					}
 				});
 			}
-		},
-		upLink: function ()
+		};
+		var upLink = function ()
 		{
-			var selectedPageId = $.pageList.getSelectedPageId();
 			var ids = $(this).parent().find('.link-id-column').html().split('---');
 			var linkInPageId = ids[0].replace('id', '');
-			var rowIndex = $('#page-content-links-container tr.page-link').index($(this).parent());
+			var rowIndex = $('#page-content-links-container').find('tr.page-link').index($(this).parent());
 			if (linkInPageId != null && rowIndex > 0)
 			{
 				$.ajax({
 					type: "POST",
-					url: "qbuilder/setPageLinkOrder",
+					url: window.BaseUrl + "qbuilder/setPageLinkOrder",
 					data: {
-						pageId: selectedPageId,
+						pageId: that.pageId,
 						linkInPageId: linkInPageId,
 						order: (rowIndex - 1)
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
-						$.pageContent.loadLinks();
+						$.SalesPortal.Overlay.hide();
+						that.loadLinks();
 					},
 					async: true,
 					dataType: 'html'
 				});
 			}
-		},
-		downLink: function ()
+		};
+		var downLink = function ()
 		{
-			var selectedPageId = $.pageList.getSelectedPageId();
 			var nextRow = $(this).parent().next();
 			if (nextRow.length > 0)
 			{
 				var ids = nextRow.find('.link-id-column').html().split('---');
 				var linkInPageId = ids[0].replace('id', '');
-				var rowIndex = $('#page-content-links-container tr.page-link').index(nextRow);
+				var rowIndex = $('#page-content-links-container').find('tr.page-link').index(nextRow);
 				if (linkInPageId != null)
 				{
 					$.ajax({
 						type: "POST",
-						url: "qbuilder/setPageLinkOrder",
+						url: window.BaseUrl + "qbuilder/setPageLinkOrder",
 						data: {
-							pageId: selectedPageId,
+							pageId: that.pageId,
 							linkInPageId: linkInPageId,
 							order: rowIndex > 0 ? (rowIndex - 1) : 0
 						},
 						beforeSend: function ()
 						{
-							$.showOverlayLight();
+							$.SalesPortal.Overlay.show(false);
 						},
 						complete: function ()
 						{
-							$.hideOverlayLight();
-							$.pageContent.loadLinks();
+							$.SalesPortal.Overlay.hide();
+							that.loadLinks();
 						},
 						async: true,
 						dataType: 'html'
 					});
 				}
 			}
-		},
-		clear: function ()
+		};
+
+		var destroyEditors = function ()
 		{
-			$('#page-content').html('');
-		},
-		updateEditors: function ()
+			editorDescription = undefined;
+			editorHeader = undefined;
+			editorFooter = undefined;
+		};
+
+		var markExpiredDate = function ()
 		{
-			var content = $('#content');
-			var containerHeight = content.height() - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height();
+			var expiredDateContainer = $('#page-content-expiration-date-container');
+			var expiredDateString = $('#page-content-expiration-date').val();
+			var today = moment().endOf('day');
+			var expiredDate = expiredDateString != '' ? moment(expiredDateString, dateFormat).endOf('day') : today;
+			if (expiredDate < today)
+				expiredDateContainer.addClass('has-error');
+			else
+				expiredDateContainer.removeClass('has-error');
+		};
 
-			var descriptionHeight = containerHeight - $('#page-content-tab-title .checkbox').height() - 50;
-			if ($.pageContent.editorDescription != undefined)
-			{
-				$.pageContent.editorDescription.$main.height(descriptionHeight + "px");
-				$.pageContent.editorDescription.refresh();
-			}
-
-			var headerHeight = containerHeight - $('#page-content-tab-header .checkbox').height() - 50;
-			if ($.pageContent.editorHeader != undefined)
-			{
-				$.pageContent.editorHeader.$main.height(headerHeight + "px");
-				$.pageContent.editorHeader.refresh();
-			}
-
-			var footerHeight = containerHeight - $('#page-content-tab-footer .checkbox').height() - 50;
-			if ($.pageContent.editorFooter != undefined)
-			{
-				$.pageContent.editorFooter.$main.height(footerHeight + "px");
-				$.pageContent.editorFooter.refresh();
-			}
-
-			var logoHeight = content.height() - 5 - $('#page-content .page-title').height() - $('#page-content .page-url').height() - $('#page-content .ui-tabs-nav').height() - $('#page-content-tab-logo .header').height() - 45;
-			$('#page-content-tab-logo').find('.logo-list').css({
-				'height': logoHeight + 'px'
-			});
-		},
-		destroyEditors: function ()
-		{
-			$.pageContent.editorDescription = null;
-			$.pageContent.editorHeader = null;
-			$.pageContent.editorFooter = null;
-		}
+		load();
 	};
-
-	var markExpiredDate = function ()
-	{
-		var expiredDateContainer = $('#page-content-expiration-date-container');
-		var expiredDateString = $('#page-content-expiration-date').val();
-		var today = new Date();
-		var expiredDate = expiredDateString != '' ? $.datepicker.parseDate('mm/dd/yy', expiredDateString) : today;
-		if (expiredDate < today)
-			expiredDateContainer.addClass('error');
-		else
-			expiredDateContainer.removeClass('error');
-	}
-
-	var processAccessCode = function ()
-	{
-		var expiredDateContainer = $('#page-content-expiration-date-container');
-		var expiredDateString = $('#page-content-expiration-date').val();
-		var today = new Date();
-		var expiredDate = expiredDateString != '' ? $.datepicker.parseDate('mm/dd/yy', expiredDateString) : today;
-		if (expiredDate < today)
-			expiredDateContainer.addClass('error');
-		else
-			expiredDateContainer.removeClass('error');
-	}
 })(jQuery);

@@ -2,9 +2,9 @@
 	<? foreach ($folders as $folder): ?>
 	<li>
 		<?if (isset($selectedFolderId) && $selectedFolderId == $folder->id): ?>
-			<a class="draggable-folder droppable opened" href="#"><i class="icon-folder-open"></i><? echo $folder->name;?><i class="delete-folder icon-remove"></i></a>
+			<a class="draggable-folder droppable opened" href="#"><span class="glyphicon glyphicon-folder-open"></span><? echo $folder->name;?><span class="delete-folder glyphicon glyphicon-remove"></span></a>
 		<? else: ?>
-			<a class="draggable-folder droppable" href="#"><i class="icon-folder-close"></i><? echo $folder->name;?><i class="delete-folder icon-remove"></i></a>
+			<a class="draggable-folder droppable" href="#"><span class="glyphicon glyphicon-folder-close"></span><? echo $folder->name;?><span class="delete-folder glyphicon glyphicon-remove"></span></a>
 		<?endif;?>
 		<div class="service-data">
 			<? if (isset($folder->id)): ?>

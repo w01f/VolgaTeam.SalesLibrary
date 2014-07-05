@@ -1,12 +1,18 @@
+<?
+	/**
+	 * @var $quizItems QuizItem[]
+	 * @var $selectedQuizItemBreadcrumbs array
+	 */
+?>
 <ul class="quizzes-list nav nav-list">
 	<? if (isset($quizItems)): ?>
 		<? foreach ($quizItems as $quizItem): ?>
 			<? $selected = isset($selectedQuizItemBreadcrumbs) && in_array($quizItem->id, $selectedQuizItemBreadcrumbs); ?>
 			<li class="<? echo $quizItem->isGroup ? 'quiz-group' : ('quiz-item' . ($quizItem->isPassed ? ' passed' : ' not-passed')) ?>">
 				<? if ($quizItem->isGroup): ?>
-					<a href="#"><i class="<? echo $selected ? 'icon-folder-open' : 'icon-folder-close'; ?>"></i><span><? echo $quizItem->name; ?></span></a>
+					<a href="#"><span class="<? echo $selected ? 'glyphicon glyphicon-folder-open' : 'glyphicon glyphicon-folder-close'; ?>"></span><span><? echo $quizItem->name; ?></span></a>
 				<? else: ?>
-					<a href="#" <? if ($selected): ?>class="opened" <? endif; ?>><i class="icon-file"></i><span><? echo $quizItem->name; ?></span></a>
+					<a href="#" <? if ($selected): ?>class="opened" <? endif; ?>><span class="glyphicon glyphicon-file"></span><span><? echo $quizItem->name; ?></span></a>
 				<?endif; ?>
 				<div class="service-data">
 					<div class="item-id"><? echo $quizItem->id; ?></div>

@@ -1,11 +1,16 @@
 <?php
+
+	/**
+	 * Class CleanExpiredEmailsAction
+	 */
 	class CleanExpiredEmailsAction extends CAction
 	{
 		public function run()
 		{
 			echo "Job started...\n";
 
-			$emailRecords = EmailedLinkStorage::model()->findAll('expires_in is not null');
+			/** @var $emailRecords EmailedLinkRecord[] */
+			$emailRecords = EmailedLinkRecord::model()->findAll('expires_in is not null');
 			if (isset($emailRecords))
 			{
 				foreach ($emailRecords as $emailRecord)
@@ -14,7 +19,7 @@
 					$expiredDate = strtotime($emailRecord->initial_date . ' + ' . $emailRecord->expires_in . ' day');
 					if ($expiredDate < $today)
 					{
-						$link = LinkStorage::getLinkById($emailRecord->id_link);
+						$link = LinkRecord::getLinkById($emailRecord->id_link);
 						if (isset($link))
 							$linkName = $link->name;
 						else

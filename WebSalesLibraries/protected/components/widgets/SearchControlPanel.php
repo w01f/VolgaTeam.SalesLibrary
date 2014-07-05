@@ -1,4 +1,4 @@
-<?php
+<?
 	class SearchControlPanel extends CWidget
 	{
 		public function run()

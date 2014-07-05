@@ -1,3 +1,9 @@
+<?
+	/**
+	 * @var $object FolderRecord|LinkRecord|StdClass
+	 * @var $isLink boolean
+	 */
+?>
 <div class="view-dialog-body tool-dialog">
 	<div class="title">
 		<div class="link-name">
@@ -16,7 +22,7 @@
 			<br>This Link is RESTRICTED, and you are Unable to share this link on the web.<br><br>
 		</div>
 		<div class="buttons-area">
-			<button class="btn accept-button" type="button" style="width: 120px;">OK</button>
+			<button class="btn btn-default accept-button" type="button" style="width: 120px;">OK</button>
 		</div>
 	<? else: ?>
 		<ul class="nav nav-pills nav-stacked format-list">
@@ -27,13 +33,15 @@
 							Folder
 						<? elseif ($isLineBreak): ?>
 							this LineBreak
-						<? else: ?>
+						<?
+						else: ?>
 							Link
 						<?endif; ?>
 						to quickSITES cart
 					<? elseif (isset($isSearchResult)): ?>
 						Add ALL Links on this page to quickSites cart
-					<? else: ?>
+					<?
+					else: ?>
 						Add All Links in this window to quickSITES cart
 					<?endif; ?>
 				</a>
@@ -53,9 +61,6 @@
 					</div>
 				</li>
 			<? endif; ?>
-			<li class="single-column">
-				<a id="context-manager" class="item-text" href="<?php echo Yii::app()->createUrl('qbuilder'); ?>" target="_blank"><img class="item-image" src="<?php echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'manage-sites.png')); ?>"/>Manage my quickSITES</a>
-			</li>
 		</ul>
 	<?endif; ?>
 </div>

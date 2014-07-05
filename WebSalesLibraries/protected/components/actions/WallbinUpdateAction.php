@@ -1,10 +1,15 @@
 <?php
+
+	/**
+	 * Class WallbinUpdateAction
+	 */
 	class WallbinUpdateAction extends CAction
 	{
 		public function run()
 		{
 			echo "Job started...\n";
 			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Libraries';
+			/** @var $rootFolder DirectoryIterator[] */
 			$rootFolder = new DirectoryIterator($rootFolderPath);
 			foreach ($rootFolder as $libraryFolder)
 			{
@@ -30,7 +35,7 @@
 							$library['name'] = $libraryName;
 							$libraryId = $library['id'];
 							$libraryIds[] = $libraryId;
-							$updated = LibraryStorage::updateData($library, $sourceDate, $storagePath);
+							$updated = LibraryRecord::updateData($library, $sourceDate, $storagePath);
 							if ($updated)
 							{
 								echo "Updating HTML cache for " . $libraryName . "...\n";
@@ -52,19 +57,19 @@
 
 			if (isset($libraryIds))
 			{
-				$libraryRecords = LibraryStorage::model()->findAll();
-				if (isset($libraryRecords))
-					foreach ($libraryRecords as $libraryRecord)
-						if (!in_array($libraryRecord->id, $libraryIds))
-						{
-							UserLibraryStorage::model()->deleteAll('id_library = ?', array($libraryRecord->id));
-							LibraryStorage::clearData($libraryRecord->id);
-							LinkStorage::clearByLibrary($libraryRecord->id);
-							FolderStorage::clearByLibrary($libraryRecord->id);
-							LibraryPageStorage::clearByLibrary($libraryRecord->id);
-							$libraryRecord->delete();
-							Yii::app()->cacheDB->flush();
-						}
+				/** @var $libraryRecords LinkRecord[] */
+				$libraryRecords = LibraryRecord::model()->findAll();
+				foreach ($libraryRecords as $libraryRecord)
+					if (!in_array($libraryRecord->id, $libraryIds))
+					{
+						UserLibraryRecord::model()->deleteAll('id_library = ?', array($libraryRecord->id));
+						LibraryRecord::clearData($libraryRecord->id);
+						LinkRecord::clearByLibrary($libraryRecord->id);
+						FolderRecord::clearByLibrary($libraryRecord->id);
+						LibraryPageRecord::clearByLibrary($libraryRecord->id);
+						$libraryRecord->delete();
+						Yii::app()->cacheDB->flush();
+					}
 			}
 
 			$categoriesPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'SDSearch.xml';
@@ -77,10 +82,12 @@
 					$categories->loadXML($categoriesContent);
 					$xpath = new DomXPath($categories);
 
+					/** @var $queryResult DOMElement[] */
 					$queryResult = $xpath->query('//SDSearch/Category');
 					foreach ($queryResult as $node)
 					{
 						$groupName = $node->getAttribute('Name');
+						/** @var $tagNodes DOMElement[] */
 						$tagNodes = $node->getElementsByTagName('Tag');
 						foreach ($tagNodes as $tagNode)
 						{
@@ -92,9 +99,9 @@
 					}
 				}
 			}
-			CategoryStorage::clearData();
+			CategoryRecord::clearData();
 			if (isset($categoryRecords))
-				CategoryStorage::loadData($categoryRecords);
+				CategoryRecord::loadData($categoryRecords);
 
 			$superFiltersPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'superfilter.xml';
 			if (file_exists($superFiltersPath))
@@ -111,30 +118,30 @@
 						$superFilterRecords[] = trim($node->nodeValue);
 				}
 			}
-			SuperFilterStorage::clearData();
+			SuperFilterRecord::clearData();
 			if (isset($superFilterRecords))
-				SuperFilterStorage::loadData($superFilterRecords);
+				SuperFilterRecord::loadData($superFilterRecords);
 
-			LibraryGroupStorage::clearData();
+			LibraryGroupRecord::clearData();
 			$libraryGroupFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'groups.txt';
 			if (file_exists($libraryGroupFilePath))
-				LibraryGroupStorage::updateData(file($libraryGroupFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+				LibraryGroupRecord::updateData(file($libraryGroupFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
-			GroupTemplateStorage::clearData();
+			GroupTemplateRecord::clearData();
 			$groupTemplateFilePath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . 'properties.txt';
 			if (file_exists($groupTemplateFilePath))
-				GroupTemplateStorage::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
+				GroupTemplateRecord::updateData(file($groupTemplateFilePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES));
 
-			$liveLinkRecords = LinkStorage::model()->findAll();
+			$liveLinkRecords = LinkRecord::model()->findAll();
 			if (isset($liveLinkRecords))
 				foreach ($liveLinkRecords as $linkRecord)
 					$liveLinkIds[] = $linkRecord->id;
 			if (isset($liveLinkIds))
 			{
-				FavoritesLinkStorage::clearByLinkIds($liveLinkIds);
-				UserLinkCartStorage::clearByLinkIds($liveLinkIds);
-				QPageLinkStorage::clearByLinkIds($liveLinkIds);
-				LinkRateStorage::clearByLinkIds($liveLinkIds);
+				FavoritesLinkRecord::clearByLinkIds($liveLinkIds);
+				UserLinkCartRecord::clearByLinkIds($liveLinkIds);
+				QPageLinkRecord::clearByLinkIds($liveLinkIds);
+				LinkRateRecord::clearByLinkIds($liveLinkIds);
 			}
 
 			echo "Job completed.\n";

@@ -1,22 +1,27 @@
+<? /** @var $clone boolean */ ?>
 <table class="tool-dialog">
 	<tr class="title-row">
 		<td colspan="2">
-			<legend><? echo $clone ? 'Clone quickSITE' : 'Add quickSITE'?></legend>
+			<legend><? echo $clone ? 'Clone quickSITE' : 'Add quickSITE' ?></legend>
 		</td>
 	</tr>
 	<tr>
-		<td class="title">
-			<label class="control-label">Name:</label>
-		</td>
-		<td>
-			<input type="text" class="input-block-level" id="add-page-name" value="">
+		<td colspan="2">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="add-page-name" class="col-xs-2 control-label">Name:</label>
+					<div class="col-xs-10">
+						<input type="text" id="add-page-name" class="form-control" value="">
+					</div>
+				</div>
+			</form>
 		</td>
 	</tr>
 	<tr class="buttons-row">
 		<td colspan="2" class="buttons-area">
 			<br>
-			<button class="btn accept-button" type="button">OK</button>
-			<button class="btn cancel-button" type="button">Cancel</button>
+			<button class="btn btn-default accept-button" type="button">OK</button>
+			<button class="btn btn-default cancel-button" type="button">Cancel</button>
 		</td>
 	</tr>
 </table>

@@ -15,10 +15,10 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="buttons-area download-type">
-			<button class="btn active" type="button"><img
+			<button class="btn btn-default active" type="button"><img
 					src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/wmv-download.png'; ?>" alt="wmv"/>
 			</button>
-			<button class="btn" type="button"><img
+			<button class="btn btn-default" type="button"><img
 					src="<?php echo Yii::app()->baseUrl . '/images/fileFormats/mp4-download.png'; ?>" alt="mp4"/>
 			</button>
 		</td>
@@ -30,8 +30,8 @@
 	</tr>
 	<tr>
 		<td colspan="2" class="buttons-area">
-			<button class="btn" id="accept-button" type="button">Download</button>
-			<button class="btn" id="cancel-button" type="button">Cancel</button>
+			<button class="btn btn-default" id="accept-button" type="button">Download</button>
+			<button class="btn btn-default" id="cancel-button" type="button">Cancel</button>
 		</td>
 	</tr>
 </table>

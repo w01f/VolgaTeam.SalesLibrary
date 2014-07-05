@@ -1,5 +1,9 @@
-.view-dialog-body
+.fancybox-wrap, .fancybox-wrap *
 {
+	-moz-box-sizing: content-box !important;
+	-webkit-box-sizing: content-box !important;
+	-safari-box-sizing: content-box !important;
+	box-sizing: content-box !important;
 }
 
 .view-dialog-body .title
@@ -89,4 +93,3 @@
 	font-size: 12pt;
 	max-width: 140px;
 }
-

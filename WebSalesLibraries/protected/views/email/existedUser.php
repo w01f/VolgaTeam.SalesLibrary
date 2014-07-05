@@ -1,13 +1,20 @@
-Hello <?php echo $fullName ?>:
+<?
+	/**
+	 * @var $fullName string
+	 * @var $login string
+	 * @var $password string
+	 */
+?>
+Hello <? echo $fullName ?>:
 <br><br>
 Your Account Password has been reset.
 <br><br>
-Account Username: <?php echo $login ?><br><br>
+Account Username: <? echo $login ?><br><br>
 Click the link below to create your NEW Password:<br><br>
-<?php
-echo Yii::app()->getBaseUrl(true) .Yii::app()->createUrl('site/changePassword', array(
-    'login' => $login,
-    'password' => $password,
-    'rememberMe' => false
-))
+<?
+	echo Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('auth/changePassword', array(
+			'login' => $login,
+			'password' => $password,
+			'rememberMe' => false
+		))
 ?>

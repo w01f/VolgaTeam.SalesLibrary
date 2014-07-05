@@ -18,8 +18,8 @@
     width: 90%;
     margin: 20px;
     border: 1px solid lightgray;
-    -webkit-box-shadow: #000000 0 0 3;
-    -moz-box-shadow: #000000 0 0 3;
+    -webkit-box-shadow: #000000 0 0 3px;
+    -moz-box-shadow: #000000 0 0 3px;
     box-shadow: #000000 0 0 3;
 }
 
@@ -27,9 +27,9 @@
 {
     display: none;
     border-top: 1px solid lightgray;
-    -webkit-box-shadow: #000000 0 0 3;
-    -moz-box-shadow: #000000 0 0 3;
-    box-shadow: #000000 0 0 3;
+    -webkit-box-shadow: #000000 0 0 3px;
+    -moz-box-shadow: #000000 0 0 3px;
+    box-shadow: #000000 0 0 3px;
 }
 
 .folder-header .links-number

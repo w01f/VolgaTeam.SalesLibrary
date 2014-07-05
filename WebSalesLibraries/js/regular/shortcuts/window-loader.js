@@ -2,6 +2,6 @@
 {
 	$(document).ready(function ()
 	{
-		$.assignLinkEvents($('#content'));
+		$.SalesPortal.Wallbin.assignLinkEvents($('#content'));
 	});
 })(jQuery);

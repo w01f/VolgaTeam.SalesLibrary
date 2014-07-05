@@ -1,26 +1,32 @@
 (function ($)
 {
-	$.linkCart = {
-		load: function ()
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	var LinkCartManager = function ()
+	{
+		var that = this;
+
+		this.load = function ()
 		{
 			var linkCartGrid = $('#link-cart-grid');
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/getLinkCart",
+				url: window.BaseUrl + "qbuilder/getLinkCart",
 				data: {    },
 				beforeSend: function ()
 				{
 					linkCartGrid.html('');
-					$.showOverlayLight();
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function (msg)
 				{
 					linkCartGrid.html(msg);
-					$.linkCart.afterLoad();
+					that.init();
 				},
 				error: function ()
 				{
@@ -28,51 +34,54 @@
 				async: true,
 				dataType: 'html'
 			});
-		},
-		clear: function ()
+		};
+
+		this.init = function ()
 		{
-			var linkCartGrid = $('#link-cart-grid');
-			$.ajax({
-				type: "POST",
-				url: "qbuilder/clearLinkCart",
-				data: {    },
-				beforeSend: function ()
-				{
-					linkCartGrid.html('');
-					$.showOverlayLight();
-				},
-				complete: function ()
-				{
-					$.hideOverlayLight();
-				},
-				error: function ()
-				{
-				},
-				async: true,
-				dataType: 'html'
+			$('#link-cart-refresh').off('click').on('click', function ()
+			{
+				that.load();
 			});
-		},
-		afterLoad: function ()
-		{
+			$('#link-cart-clear').off('click').on('click', function ()
+			{
+				clear();
+			});
+			$('#link-cart-add-all').off('click').on('click', function ()
+			{
+				addAllLinksToPage();
+			});
+			$('#link-cart-button').off('click').on('click', function ()
+			{
+				if ($(this).hasClass('sel'))
+					$(this).removeClass('sel');
+				else
+					$(this).addClass('sel');
+				$.cookie("showLinkCart", $(this).hasClass('sel'), {
+					expires: (60 * 60 * 24 * 7)
+				});
+				that.show();
+				that.updateContentSize();
+			});
+
 			var linkCart = $('#link-cart');
-			linkCart.find('.link-delete').off('click').on('click', $.linkCart.deleteLink);
+			linkCart.find('.link-delete').off('click').on('click', deleteLink);
 			linkCart.find('.draggable-link').draggable({
-					delay: 100,
 					revert: "invalid",
 					distance: 70,
 					delay: 500,
-					helper: function (event)
+					helper: function ()
 					{
 						var ids = $(this).find('.link-id-column').html().split('---');
 						var linkInCartId = ids[0].replace('cart', '');
-						return  $('<i id="' + linkInCartId + '" class="icon-file"></i>');
+						return  $('<span id="' + linkInCartId + '" class="glyphicon glyphicon-file"></span>');
 					},
 					appendTo: "body",
 					cursorAt: { left: -10, top: 0 }
 				}
 			);
-		},
-		init: function ()
+		};
+
+		this.show = function ()
 		{
 			var linkCart = $('#link-cart');
 			var showLinkCart = $.cookie("showLinkCart") != undefined ?
@@ -82,39 +91,27 @@
 				linkCart.show();
 			else
 				linkCart.hide();
+		};
 
-			$('#link-cart-refresh').off('click').on('click', function ()
-			{
-				$.linkCart.load();
-			});
-			$('#link-cart-clear').off('click').on('click', function ()
-			{
-				$.linkCart.clear();
-			});
-			$('#link-cart-add-all').off('click').on('click', function ()
-			{
-				$.linkCart.addAllLinksToPage();
-			});
-		},
-		addLinks: function (linkIds)
+		this.addLinks = function (linkIds)
 		{
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/addLinksToCart",
+				url: window.BaseUrl + "qbuilder/addLinksToCart",
 				data: {
 					linkIds: linkIds
 				},
 				beforeSend: function ()
 				{
-					$.showOverlayLight();
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function ()
 				{
-					if(linkIds.length>1)
+					if (linkIds.length > 1)
 						$('body').append('<div id="add-link-info" title="Link Cart">Links was added to Link Cart</div>');
 					else
 						$('body').append('<div id="add-link-info" title="Link Cart">Link was added to Link Cart</div>');
@@ -122,15 +119,16 @@
 						resizable: false,
 						modal: true,
 						buttons: {
-							"quickSITES": function ()
-							{
-								$('.qbuilder-button').trigger('click');
-								$(this).dialog("close");
-							},
 							"OK": function ()
 							{
 								$(this).dialog("close");
 							}
+						},
+						open: function ()
+						{
+							$(this).closest(".ui-dialog")
+								.find(".ui-dialog-titlebar-close")
+								.html("<span class='ui-icon ui-icon-closethick'></span>");
 						},
 						close: function ()
 						{
@@ -144,22 +142,23 @@
 				async: true,
 				dataType: 'html'
 			});
-		},
-		addFolder: function (folderId)
+		};
+
+		this.addFolder = function (folderId)
 		{
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/addLinksToCart",
+				url: window.BaseUrl + "qbuilder/addLinksToCart",
 				data: {
 					folderId: folderId
 				},
 				beforeSend: function ()
 				{
-					$.showOverlayLight();
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function ()
 				{
@@ -168,17 +167,18 @@
 						resizable: false,
 						modal: true,
 						buttons: {
-							"quickSITES": function ()
-							{
-								$('.qbuilder-button').trigger('click');
-								$(this).dialog("close");
-							},
 							"OK": function ()
 							{
 								$(this).dialog("close");
 							}
 						},
-						close: function (event, ui)
+						open: function ()
+						{
+							$(this).closest(".ui-dialog")
+								.find(".ui-dialog-titlebar-close")
+								.html("<span class='ui-icon ui-icon-closethick'></span>");
+						},
+						close: function ()
 						{
 							$("#add-link-info").remove();
 						}
@@ -190,8 +190,41 @@
 				async: true,
 				dataType: 'html'
 			});
-		},
-		deleteLink: function ()
+		};
+
+		this.updateContentSize = function ()
+		{
+			var height = $('#content').height() - $('#link-cart-buttons').height();
+			$('#link-cart-grid').css({
+				'height': height + 'px'
+			});
+		};
+
+		var clear = function ()
+		{
+			var linkCartGrid = $('#link-cart-grid');
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/clearLinkCart",
+				data: {    },
+				beforeSend: function ()
+				{
+					linkCartGrid.html('');
+					$.SalesPortal.Overlay.show(false);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var deleteLink = function ()
 		{
 			var ids = $(this).parent().find('.link-id-column').html().split('---');
 			var linkInCartId = ids[0].replace('cart', '');
@@ -207,18 +240,18 @@
 							$(this).dialog("close");
 							$.ajax({
 								type: "POST",
-								url: "qbuilder/deleteLinkFromCart",
+								url: window.BaseUrl + "qbuilder/deleteLinkFromCart",
 								data: {
 									linkInCartId: linkInCartId
 								},
 								beforeSend: function ()
 								{
-									$.showOverlayLight();
+									$.SalesPortal.Overlay.show(false);
 								},
 								complete: function ()
 								{
-									$.hideOverlayLight();
-									$.linkCart.load();
+									$.SalesPortal.Overlay.hide();
+									that.load();
 								},
 								async: true,
 								dataType: 'html'
@@ -229,34 +262,41 @@
 							$(this).dialog("close");
 						}
 					},
+					open: function ()
+					{
+						$(this).closest(".ui-dialog")
+							.find(".ui-dialog-titlebar-close")
+							.html("<span class='ui-icon ui-icon-closethick'></span>");
+					},
 					close: function ()
 					{
 						$("#delete-link-warning").remove();
 					}
 				});
 			}
-		},
-		addAllLinksToPage: function ()
+		};
+
+		var addAllLinksToPage = function ()
 		{
-			var selectedPageId = $.pageList.getSelectedPageId();
+			var selectedPageId = $.SalesPortal.QBuilder.PageList.selectedPage.pageId;
 			$.ajax({
 				type: "POST",
-				url: "qbuilder/addAllLinksToPage",
+				url: window.BaseUrl + "qbuilder/addAllLinksToPage",
 				data: {
 					pageId: selectedPageId
 				},
 				beforeSend: function ()
 				{
-					$.showOverlayLight();
+					$.SalesPortal.Overlay.show(false);
 				},
 				complete: function ()
 				{
-					$.hideOverlayLight();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function ()
 				{
-					$.linkCart.load();
-					$.pageContent.loadLinks();
+					that.load();
+					$.SalesPortal.QBuilder.PageList.selectedPage.loadLinks();
 				},
 				error: function ()
 				{
@@ -266,20 +306,5 @@
 			});
 		}
 	};
-
-	$(document).ready(function ()
-	{
-		$('#link-cart-button').off('click').on('click', function ()
-		{
-			if ($(this).hasClass('sel'))
-				$(this).removeClass('sel');
-			else
-				$(this).addClass('sel');
-			$.cookie("showLinkCart", $(this).hasClass('sel'), {
-				expires: (60 * 60 * 24 * 7)
-			});
-			$.linkCart.init();
-			$.updateContentAreaDimensions();
-		});
-	});
+	$.SalesPortal.QBuilder.LinkCart = new LinkCartManager();
 })(jQuery);

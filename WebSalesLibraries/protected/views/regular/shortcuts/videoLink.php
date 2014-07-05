@@ -1,3 +1,6 @@
+<?
+	/** @var $link VideoShortcut */
+?>
 <a class="cbp-caption shortcuts-link preview" href="#">
 	<div class="cbp-caption-defaultWrap">
 		<img src="<? echo $link->imagePath ?>" alt="" width="100%">

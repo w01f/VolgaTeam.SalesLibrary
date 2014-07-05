@@ -1,8 +1,14 @@
+<?
+	/**
+	 * @var $header string
+	 * @var $content string
+	 */
+?>
 <table class ="tool-dialog">
     <tr>
         <td colspan="2">
-            <legend><?php echo $header; ?></legend>
-            <div><?php echo $content; ?></div>
+			<legend><? echo $header; ?></legend>
+            <div><? echo $content; ?></div>
         </td>
     </tr>
     <tr>

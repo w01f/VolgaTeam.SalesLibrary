@@ -1,7 +1,14 @@
-<?php echo $body; ?>
+<?
+	/**
+	 * @var $body string
+	 * @var $login string
+	 * @var $password string
+	 */
+?>
+<? echo $body; ?>
 	<br><br>
-<?php
-	echo Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('site/changePassword', array(
+<?
+	echo Yii::app()->getBaseUrl(true) . Yii::app()->createUrl('auth/changePassword', array(
 		'login' => $login,
 		'password' => $password,
 		'rememberMe' => false

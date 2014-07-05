@@ -1,6 +1,13 @@
 <?php
+
+	/**
+	 * Class StatisticController
+	 */
 	class StatisticController extends IsdController
 	{
+		/**
+		 * @return array
+		 */
 		public function actions()
 		{
 			return array(
@@ -9,17 +16,21 @@
 					'classMap' => array(
 						'UserActivity' => 'UserActivity',
 						'ActivityDetail' => 'ActivityDetail',
-						'MainUserReportRecord' => 'MainUserReportRecord',
-						'MainGroupReportRecord' => 'MainGroupReportRecord',
-						'NavigationUserReportRecord' => 'NavigationUserReportRecord',
-						'NavigationGroupReportRecord' => 'NavigationGroupReportRecord',
-						'QuizPassUserReportRecord' => 'QuizPassUserReportRecord',
-						'QuizPassGroupReportRecord' => 'QuizPassGroupReportRecord',
+						'MainUserReportModel' => 'MainUserReportModel',
+						'MainGroupReportModel' => 'MainGroupReportModel',
+						'NavigationUserReportModel' => 'NavigationUserReportModel',
+						'NavigationGroupReportModel' => 'NavigationGroupReportModel',
+						'QuizPassUserReportModel' => 'QuizPassUserReportModel',
+						'QuizPassGroupReportModel' => 'QuizPassGroupReportModel',
 					),
 				),
 			);
 		}
 
+		/**
+		 * @param string $sessionKey
+		 * @return bool
+		 */
 		protected function authenticateBySession($sessionKey)
 		{
 			$data = Yii::app()->cacheDB->get($sessionKey);
@@ -50,9 +61,9 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
 		 * @return UserActivity[]
 		 * @soap
 		 */
@@ -60,7 +71,7 @@
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				$activityRecords = StatisticActivityStorage::model()->findByDateRange($dateStart, $dateEnd);
+				$activityRecords = StatisticActivityRecord::model()->findByDateRange($dateStart, $dateEnd);
 				foreach ($activityRecords as $activityRecord)
 				{
 					$activity = new UserActivity();
@@ -101,10 +112,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return MainUserReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return MainUserReportModel[]
 		 * @soap
 		 */
 		public function getMainUserReport($sessionKey, $dateStart, $dateEnd)
@@ -117,7 +128,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new MainUserReportRecord();
+					$reportRecord = new MainUserReportModel();
 					$reportRecord->firstName = $resultRecord['first_name'];
 					$reportRecord->lastName = $resultRecord['last_name'];
 					$reportRecord->group = $resultRecord['group_name'];
@@ -140,10 +151,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return MainGroupReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return MainGroupReportModel[]
 		 * @soap
 		 */
 		public function getMainGroupReport($sessionKey, $dateStart, $dateEnd)
@@ -156,7 +167,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new MainGroupReportRecord();
+					$reportRecord = new MainGroupReportModel();
 					$reportRecord->name = $resultRecord['name'];
 					$reportRecord->totals = $resultRecord['totals'];
 					$reportRecord->logins = $resultRecord['logins'];
@@ -172,10 +183,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return NavigationUserReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return NavigationUserReportModel[]
 		 * @soap
 		 */
 		public function getNavigationUserReport($sessionKey, $dateStart, $dateEnd)
@@ -188,7 +199,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new NavigationUserReportRecord();
+					$reportRecord = new NavigationUserReportModel();
 					$reportRecord->firstName = $resultRecord['first_name'];
 					$reportRecord->lastName = $resultRecord['last_name'];
 					$reportRecord->group = $resultRecord['group_name'];
@@ -209,10 +220,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return NavigationGroupReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return NavigationGroupReportModel[]
 		 * @soap
 		 */
 		public function getNavigationGroupReport($sessionKey, $dateStart, $dateEnd)
@@ -225,7 +236,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new NavigationGroupReportRecord();
+					$reportRecord = new NavigationGroupReportModel();
 					$reportRecord->name = $resultRecord['name'];
 					$reportRecord->totals = $resultRecord['totals'];
 					$reportRecord->libs = $resultRecord['libs'];
@@ -240,10 +251,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return AccessReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return AccessReportModel[]
 		 * @soap
 		 */
 		public function getAccessReport($sessionKey, $dateStart, $dateEnd)
@@ -256,7 +267,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new AccessReportRecord();
+					$reportRecord = new AccessReportModel();
 					$reportRecord->name = $resultRecord['name'];
 					$reportRecord->userCount = $resultRecord['user_count'];
 					$reportRecord->activeCount = $resultRecord['active_count'];
@@ -273,10 +284,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return QuizPassUserReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return QuizPassUserReportModel[]
 		 * @soap
 		 */
 		public function getQuizPassUserReport($sessionKey, $dateStart, $dateEnd)
@@ -289,7 +300,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new QuizPassUserReportRecord();
+					$reportRecord = new QuizPassUserReportModel();
 					$reportRecord->firstName = $resultRecord['first_name'];
 					$reportRecord->lastName = $resultRecord['last_name'];
 					$reportRecord->group = $resultRecord['group_name'];
@@ -307,10 +318,10 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param string Date Start
-		 * @param string Date End
-		 * @return QuizPassGroupReportRecord[]
+		 * @param string $sessionKey
+		 * @param string $dateStart
+		 * @param string $dateEnd
+		 * @return QuizPassGroupReportModel[]
 		 * @soap
 		 */
 		public function getQuizPassGroupReport($sessionKey, $dateStart, $dateEnd)
@@ -323,7 +334,7 @@
 				$resultRecords = $command->queryAll();
 				foreach ($resultRecords as $resultRecord)
 				{
-					$reportRecord = new QuizPassGroupReportRecord();
+					$reportRecord = new QuizPassGroupReportModel();
 					$reportRecord->group = $resultRecord['group_name'];
 					$reportRecord->quizName = $resultRecord['quiz_name'];
 					$reportRecord->topLevelName = $resultRecord['top_level_name'];
@@ -350,15 +361,15 @@
 			if (isset($data))
 				$data = CJSON::decode($data);
 
-			$autorized = false;
+			$authorized = false;
 			if (isset(Yii::app()->user))
 			{
 				$userId = Yii::app()->user->getId();
-				$autorized = isset($userId);
+				$authorized = isset($userId);
 			}
 
-			if (isset($type) && isset($subType) && $autorized)
-				StatisticActivityStorage::WriteActivity($type, $subType, $data);
+			if (isset($type) && isset($subType) && $authorized)
+				StatisticActivityRecord::WriteActivity($type, $subType, $data);
 			Yii::app()->end();
 		}
 	}

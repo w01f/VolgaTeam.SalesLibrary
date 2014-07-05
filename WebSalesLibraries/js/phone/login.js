@@ -1,152 +1,162 @@
 (function ($)
 {
-	$.logout = function ()
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
+	var AuthManager = function ()
 	{
-		$.ajax({
-			type:"POST",
-			url:"site/logout",
-			data:{
-			},
-			beforeSend:function ()
+		this.init = function ()
+		{
+			$('#button-login').off('click').on('click', function (event)
 			{
-			},
-			complete:function ()
+				if ($('#disclaimer').length)
+				{
+					$.mobile.changePage("#disclaimer", {
+						transition: "slidefade"
+					});
+					$('#button-login').off('click');
+					event.preventDefault();
+					event.stopPropagation();
+				}
+			});
+			$('#button-accept-dislaimer').off('click').on('click', function ()
 			{
-			},
-			success:function ()
-			{
-				location.reload();
-			},
-			error:function ()
-			{
-			},
-			async:true,
-			dataType:'html'
-		});
-	};
+				$('#button-login').click();
+			});
 
-	var switchVersion = function ()
-	{
-		$.ajax({
-			type:"POST",
-			url:"switchVersion",
-			data:{
-				siteVersion:'full'
-			},
-			beforeSend:function ()
+			$('#button-switch-version').off('click').on('click', function ()
 			{
-				$.mobile.loading('show', {
-					textVisible:false,
-					html:""
+				switchVersion();
+			});
+
+			$('#button-recover-password').off('click').on('click', function ()
+			{
+				$.ajax({
+					type: "POST",
+					url: window.BaseUrl + "auth/validateUserByEmail",
+					data: {
+						login: $('#login').val(),
+						email: $('#email').val()
+					},
+					beforeSend: function ()
+					{
+						$.mobile.loading('show', {
+							textVisible: false,
+							html: ""
+						});
+					},
+					complete: function ()
+					{
+						$.mobile.loading('hide', {
+							textVisible: false,
+							html: ""
+						});
+					},
+					success: function (msg)
+					{
+						if (msg != '')
+							$('#recover-password').find('.error-message div').html(msg);
+						else
+						{
+							$('#recover-password').find('.error-message div').html('');
+							$.ajax({
+								type: "POST",
+								url: window.BaseUrl + "auth/recoverPassword",
+								data: {
+									login: $('#login').val()
+								},
+								beforeSend: function ()
+								{
+									$.mobile.loading('show', {
+										textVisible: false,
+										html: ""
+									});
+								},
+								complete: function ()
+								{
+									$.mobile.loading('hide', {
+										textVisible: false,
+										html: ""
+									});
+								},
+								success: function ()
+								{
+									$.mobile.changePage("#recover-password-success", {
+										transition: "slidefade"
+									});
+								},
+								async: true,
+								dataType: 'html'
+							});
+						}
+					},
+					error: function ()
+					{
+						$('#recover-password').find('.error-message div').html('Error while validating user. Try again or contact to technical support');
+					},
+					async: true,
+					dataType: 'html'
 				});
-			},
-			complete:function ()
-			{
-			},
-			success:function ()
-			{
-				location.reload();
-			},
-			error:function ()
-			{
-			},
-			async:true,
-			dataType:'html'
-		});
-	};
+			});
+		};
 
-	$(document).ready(function ()
-	{
-		$('#button-login').off('click').on('click', function (event)
-		{
-			if ($('#disclaimer').length)
-			{
-				$.mobile.changePage("#disclaimer", {
-					transition:"slidefade"
-				});
-				$('#button-login').off('click');
-				event.preventDefault();
-				event.stopPropagation();
-			}
-		});
-		$('#button-accept-dislaimer').off('click').on('click', function (event)
-		{
-			$('#button-login').click();
-		});
-
-		$('#button-switch-version').off('click').on('click', function (e)
-		{
-			switchVersion();
-		});
-
-		$('#button-recover-password').off('click').on('click', function (event)
+		this.logout = function ()
 		{
 			$.ajax({
-				type:"POST",
-				url:"validateUserByEmail",
-				data:{
-					login:$('#login').val(),
-					email:$('#email').val()
+				type: "POST",
+				url: window.BaseUrl + "auth/logout",
+				data: {
 				},
-				beforeSend:function ()
+				beforeSend: function ()
+				{
+				},
+				complete: function ()
+				{
+				},
+				success: function ()
+				{
+					location.reload();
+				},
+				error: function ()
+				{
+				},
+				async: true,
+				dataType: 'html'
+			});
+		};
+
+		var switchVersion = function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "site/switchVersion",
+				data: {
+					siteVersion: 'full'
+				},
+				beforeSend: function ()
 				{
 					$.mobile.loading('show', {
-						textVisible:false,
-						html:""
+						textVisible: false,
+						html: ""
 					});
 				},
-				complete:function ()
+				complete: function ()
 				{
-					$.mobile.loading('hide', {
-						textVisible:false,
-						html:""
-					});
 				},
-				success:function (msg)
+				success: function ()
 				{
-					if (msg != '')
-						$('#recover-password').find('.error-message div').html(msg);
-					else
-					{
-						$('#recover-password').find('.error-message div').html('');
-						$.ajax({
-							type:"POST",
-							url:"recoverPassword",
-							data:{
-								login:$('#login').val()
-							},
-							beforeSend:function ()
-							{
-								$.mobile.loading('show', {
-									textVisible:false,
-									html:""
-								});
-							},
-							complete:function ()
-							{
-								$.mobile.loading('hide', {
-									textVisible:false,
-									html:""
-								});
-							},
-							success:function ()
-							{
-								$.mobile.changePage("#recover-password-success", {
-									transition:"slidefade"
-								});
-							},
-							async:true,
-							dataType:'html'
-						});
-					}
+					location.reload();
 				},
-				error:function ()
+				error: function ()
 				{
-					$('#recover-password').find('.error-message div').html('Error while validating user. Try again or contact to technical support');
 				},
-				async:true,
-				dataType:'html'
+				async: true,
+				dataType: 'html'
 			});
-		});
+		};
+	};
+	$.SalesPortal.Auth = new AuthManager();
+	$(document).ready(function ()
+	{
+		$.SalesPortal.Auth.init();
 	});
 })(jQuery);

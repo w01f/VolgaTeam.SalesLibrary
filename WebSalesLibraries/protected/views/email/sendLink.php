@@ -1,7 +1,14 @@
-<?php echo $body; ?>
+<?
+	/**
+	 * @var $body string
+	 * @var $link string
+	 * @var $expiresIn string
+	 */
+?>
+<? echo $body; ?>
 <br>
-<?php echo $link; ?>
+<? echo $link; ?>
 <br>
-<?php if (isset($expiresIn) && $expiresIn != ''): ?>
-    This link will expire in <?php echo $expiresIn; ?> days.
-<?php endif; ?>
+<? if (isset($expiresIn) && $expiresIn != ''): ?>
+	This link will expire in <? echo $expiresIn; ?> days.
+<? endif; ?>

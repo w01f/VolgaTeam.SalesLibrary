@@ -1,29 +1,30 @@
+<? /** @var $link LibraryLink|Attachment */ ?>
 <ul data-role="listview" data-theme="c" data-divider-theme="c">
-	<?php if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
+	<? if (isset($link->originalFormat) && isset($link->availableFormats)): ?>
 		<li data-role="list-divider">
 			<h4>
 				<table class="link-container">
 					<tr>
 						<td>
                             <span class="name">
-                                <?php
-								if (isset($link->name) && $link->name != '')
-									echo $link->name;
-								else if (isset($link->fileName) && $link->fileName != '')
-									echo $link->fileName;
+                                <?
+									if (isset($link->name) && $link->name != '')
+										echo $link->name;
+									else if (isset($link->fileName) && $link->fileName != '')
+										echo $link->fileName;
 								?>
                             </span>
 						</td>
 					</tr>
-					<?php if (isset($link->name) && $link->name != '' && isset($link->fileName) && $link->fileName != ''): ?>
+					<? if (isset($link->name) && $link->name != '' && isset($link->fileName) && $link->fileName != ''): ?>
 						<tr>
 							<td>
-								<span class="file"><?php echo $link->fileName; ?></span>
+								<span class="file"><? echo $link->fileName; ?></span>
 							</td>
 						</tr>
-					<?php endif; ?>
+					<? endif; ?>
 				</table>
-				<?php if (($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && !$this->isTabletMobileView): ?>
+				<? if (($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && !$this->isTabletMobileView): ?>
 					<hr align="center" width="100%" size="2" color="#b0b0b0"/>
 					<div data-role="navbar" class="res-selector">
 						<ul>
@@ -33,18 +34,18 @@
 							</li>
 						</ul>
 					</div>
-				<?php endif; ?>
+				<? endif; ?>
 			</h4>
 		</li>
-		<?php $viewSource = $link->getViewSource($link->availableFormats[0]); ?>
-		<?php if (($link->originalFormat == 'video' || $link->originalFormat == 'wmv' || $link->originalFormat == 'mp4') && !isset($viewSource)): ?>
+		<? $viewSource = $link->getViewSource($link->availableFormats[0]); ?>
+		<? if (($link->originalFormat == 'video' || $link->originalFormat == 'wmv' || $link->originalFormat == 'mp4') && !isset($viewSource)): ?>
 			<li>
 				<div class="warning">
 					This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 				</div>
 			</li>
-		<?php else: ?>
-			<?php
+		<? else: ?>
+			<?
 			foreach ($link->availableFormats as $format):
 				if (!$authorized && $format == 'email')
 					continue;
@@ -102,55 +103,55 @@
 						<a class="preview-link" href="#">
 							<table class="link-container">
 								<tr>
-									<td><img src="<?php echo $imageSource; ?>"/></td>
+									<td><img src="<? echo $imageSource; ?>"/></td>
 									<td>
-										<span><?php echo $imageTitle; ?></span>
-										<?php if (isset($fileSize)): ?>
-											<span class="file-size <?php echo isset($fileSizePhone) ? 'regular' : ''; ?>"> (<?php echo $fileSize; ?>
+										<span><? echo $imageTitle; ?></span>
+										<? if (isset($fileSize)): ?>
+											<span class="file-size <? echo isset($fileSizePhone) ? 'regular' : ''; ?>"> (<? echo $fileSize; ?>
 												)</span>
-										<?php endif; ?>
-										<?php if (isset($fileSizePhone)): ?>
-											<span class="file-size phone"> (<?php echo $fileSizePhone; ?>)</span>
-										<?php endif; ?>
+										<? endif; ?>
+										<? if (isset($fileSizePhone)): ?>
+											<span class="file-size phone"> (<? echo $fileSizePhone; ?>)</span>
+										<? endif; ?>
 										<div class="item-content">
-											<div class="link-id"><?php echo $link->id; ?></div>
-											<div class="link-name"><?php echo $link->name; ?></div>
-											<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
-											<div class="file-type"><?php echo $link->originalFormat; ?></div>
-											<div class="view-type"><?php echo $format; ?></div>
-											<div class="file-size"><?php echo $link->originalFormat; ?></div>
-											<?php
-											$viewLinks = $link->getViewSource($format);
-											if (isset($viewLinks)):
-												echo CHtml::openTag('div', array('class' => 'links'));
-												if ($format == 'png' || $format == 'jpeg'):
-													$thumbsLinks = $link->getViewSource('thumbs');
-													$viewPhoneLinks = $format == 'png' ? $link->getViewSource('png_phone') : $link->getViewSource('jpeg_phone');
-													if (isset($thumbsLinks)):
-														$i = 0;
-														foreach ($viewLinks as $viewLink):
-															?>
-															<li class="hi-res">
-																<a href="<?php echo $viewLink['href']; ?>"
-																   rel="external"><img
-																		src="<?php echo!$this->isTabletMobileView ? $thumbsLinks[$i]['href'] : $viewPhoneLinks[$i]['href']; ?>"
-																		alt="<?php echo $viewLink['title']; ?>"/></a>
-															</li>
-															<li class="low-res">
-																<a href="<?php echo $viewPhoneLinks[$i]['href']; ?>"
-																   rel="external"><img
-																		src="<?php echo $thumbsLinks[$i]['href']; ?>"
-																		alt="<?php echo $viewLink['title']; ?>"/></a>
-															</li>
-															<?php
-															$i++;
-														endforeach;
+											<div class="link-id"><? echo $link->id; ?></div>
+											<div class="link-name"><? echo $link->name; ?></div>
+											<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+											<div class="file-type"><? echo $link->originalFormat; ?></div>
+											<div class="view-type"><? echo $format; ?></div>
+											<div class="file-size"><? echo $link->originalFormat; ?></div>
+											<?
+												$viewLinks = $link->getViewSource($format);
+												if (isset($viewLinks)):
+													echo CHtml::openTag('div', array('class' => 'links'));
+													if ($format == 'png' || $format == 'jpeg'):
+														$thumbsLinks = $link->getViewSource('thumbs');
+														$viewPhoneLinks = $format == 'png' ? $link->getViewSource('png_phone') : $link->getViewSource('jpeg_phone');
+														if (isset($thumbsLinks)):
+															$i = 0;
+															foreach ($viewLinks as $viewLink):
+																?>
+																<li class="hi-res">
+																	<a href="<? echo $viewLink['href']; ?>"
+																	   rel="external"><img
+																			src="<? echo !$this->isTabletMobileView ? $thumbsLinks[$i]['href'] : $viewPhoneLinks[$i]['href']; ?>"
+																			alt="<? echo $viewLink['title']; ?>"/></a>
+																</li>
+																<li class="low-res">
+																	<a href="<? echo $viewPhoneLinks[$i]['href']; ?>"
+																	   rel="external"><img
+																			src="<? echo $thumbsLinks[$i]['href']; ?>"
+																			alt="<? echo $viewLink['title']; ?>"/></a>
+																</li>
+																<?
+																$i++;
+															endforeach;
+														endif;
+													else:
+														echo json_encode($viewLinks);
 													endif;
-												else:
-													echo json_encode($viewLinks);
+													echo CHtml::closeTag('div');
 												endif;
-												echo CHtml::closeTag('div');
-											endif;
 											?>
 										</div>
 									</td>
@@ -158,32 +159,32 @@
 							</table>
 						</a>
 					</li>
-				<?php endif; ?>
-			<?php endforeach; ?>
-			<?php if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
+				<? endif; ?>
+			<? endforeach; ?>
+			<? if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
 				<li>
 					<a class="preview-link" href="#">
 						<table class="link-container">
 							<tr>
 								<td><img
-										src="<?php echo Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/favorites.png'; ?>"/>
+										src="<? echo Yii::app()->request->getBaseUrl(true) . '/images/fileFormats_phone/favorites.png'; ?>"/>
 								</td>
 								<td>
 									<span>Add to Favorites</span>
 
 									<div class="item-content">
-										<div class="link-id"><?php echo $link->id; ?></div>
-										<div class="link-name"><?php echo $link->name; ?></div>
-										<div class="file-name"><?php echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
-										<div class="file-type"><?php echo $link->originalFormat; ?></div>
+										<div class="link-id"><? echo $link->id; ?></div>
+										<div class="link-name"><? echo $link->name; ?></div>
+										<div class="file-name"><? echo isset($link->isAttachment) ? $link->name : $link->fileName; ?></div>
+										<div class="file-type"><? echo $link->originalFormat; ?></div>
 										<div class="view-type">favorites</div>
-										<?php
-										$viewLinks = $link->getViewSource('favorites');
-										if (isset($viewLinks)):
-											echo CHtml::openTag('div', array('class' => 'links'));
-											echo json_encode($viewLinks);
-											echo CHtml::closeTag('div');
-										endif;
+										<?
+											$viewLinks = $link->getViewSource('favorites');
+											if (isset($viewLinks)):
+												echo CHtml::openTag('div', array('class' => 'links'));
+												echo json_encode($viewLinks);
+												echo CHtml::closeTag('div');
+											endif;
 										?>
 									</div>
 								</td>
@@ -191,7 +192,7 @@
 						</table>
 					</a>
 				</li>
-			<?php endif; ?>
-		<?php endif; ?>
-	<?php endif; ?>
+			<? endif; ?>
+		<? endif; ?>
+	<? endif; ?>
 </ul>

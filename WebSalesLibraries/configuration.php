@@ -32,17 +32,6 @@
 					'visible' => true,
 					'name' => 'SEARCH',
 					'position' => 2,
-					'show_money_button' => true,
-				),
-				'search_file_card_tab' => array(
-					'visible' => true,
-					'name' => 'Sales Success Models',
-					'position' => 3,
-				),
-				'calendar_tab' => array(
-					'visible' => true,
-					'name' => 'WEBCAST',
-					'position' => 4,
 				),
 				'favorites_tab' => array(
 					'visible' => true,
@@ -52,6 +41,11 @@
 				'quiz_tab' => array(
 					'visible' => true,
 					'name' => 'Tests',
+					'position' => 98,
+				),
+				'qbuilder_tab' => array(
+					'visible' => true,
+					'name' => 'QBuilder',
 					'position' => 99,
 				),
 				'stations' => array(

@@ -1,3 +1,10 @@
+<?
+	/**
+	 * @var $quizResults QuizResult[]
+	 * @var $quiz Quiz
+	 * @var $passed boolean
+	 */
+?>
 <table>
 	<tr class="header <? echo $passed ? 'passed' : 'not-passed'; ?>">
 		<td class="title">
@@ -6,7 +13,7 @@
 		</td>
 		<? if ($quiz->isActive && (!$quiz->hasResults || $quiz->allowRetake)): ?>
 			<td class="buttons">
-				<button type="button" class="btn btn-large quiz-run">Take Quiz</button>
+				<button type="button" class="btn btn-default btn-lg quiz-run">Take Quiz</button>
 			</td>
 		<? endif; ?>
 	</tr>

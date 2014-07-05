@@ -1,3 +1,6 @@
+<?
+	/** @var $link LibraryLinkShortcut */
+?>
 <a class="cbp-caption shortcuts-link library-file" href="#">
 	<div class="cbp-caption-defaultWrap">
 		<img src="<? echo $link->imagePath ?>" alt="" width="100%">

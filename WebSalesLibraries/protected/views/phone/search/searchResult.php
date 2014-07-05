@@ -1,11 +1,17 @@
+<?
+	/**
+	 * @var $searchInfo array
+	 * @var $links array
+	 */
+?>
 <? if (isset($searchInfo)): ?>
 	<div class="dataset-key"><? echo $searchInfo['datasetKey']; ?></div>
-<?php endif; ?>
-<?php if (isset($links)): ?>
-	<?php foreach ($links as $link): ?>
+<? endif; ?>
+<? if (isset($links)): ?>
+	<? foreach ($links as $link): ?>
 		<li>
-			<a class="file-link" href="#link<?php echo $link['id']; ?>">
-				<?php if ($link['hasDetails']): ?>
+			<a class="file-link" href="#link<? echo $link['id']; ?>">
+				<? if ($link['hasDetails']): ?>
 					<img class="ui-li-has-thumb file-link-detail" src="<? echo Yii::app()->baseUrl . '/images/search/expand-phone.png'; ?>"/>
 				<? endif; ?>
 				<h3 class="name"><? if (isset($link['name']) && $link['name'] != '') echo $link['name'];
@@ -22,5 +28,5 @@
 				</p>
 			</a>
 		</li>
-	<?php endforeach; ?>
-<?php endif; ?>                    
+	<? endforeach; ?>
+<? endif; ?>                    

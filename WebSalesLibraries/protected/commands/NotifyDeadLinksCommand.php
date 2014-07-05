@@ -1,6 +1,14 @@
 <?php
+
+	/**
+	 * Class NotifyDeadLinksCommand
+	 */
 	class NotifyDeadLinksCommand extends CConsoleCommand
 	{
+		/**
+		 * @param array $args
+		 * @return int|void
+		 */
 		public function run($args)
 		{
 			ob_start();

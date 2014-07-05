@@ -31,6 +31,12 @@
 	padding-right: 10px;
 }
 
+.shortcuts-search-bar .search-input-container
+{
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
 .file-filter-panel .search-option
 {
 	padding-left: 50px;
@@ -53,4 +59,9 @@
 .shortcuts-links .service-data, .shortcut-title
 {
 	display: none;
+}
+
+.super-filter-list *
+{
+	box-sizing: border-box !important;
 }

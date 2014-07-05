@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class QpageController
+	 */
 	class QpageController extends IsdController
 	{
 		public function getViewPath()
@@ -17,7 +21,8 @@
 				$pinCodedModel->pinCode = $attributes['pinCode'];
 				if ($pinCodedModel->validate())
 				{
-					$page = QPageStorage::model()->findByPk($pinCodedModel->pageId);
+					/** @var $page QPageRecord */
+					$page = QPageRecord::model()->findByPk($pinCodedModel->pageId);
 					$this->redirect($page->getUrlInternal());
 				}
 				else
@@ -29,7 +34,8 @@
 				$pageId = Yii::app()->request->getQuery('id');
 				if (isset($pageId))
 				{
-					$page = QPageStorage::model()->findByPk($pageId);
+					/** @var $page QPageRecord */
+					$page = QPageRecord::model()->findByPk($pageId);
 					if (isset($page) && !$page->isExpired())
 					{
 						if (isset($page->pin_code))
@@ -71,10 +77,12 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId) && isset($pageId))
 			{
-				$pageRecord = QPageStorage::model()->findByPk($pageId);
+				/** @var $pageRecord QPageRecord */
+				$pageRecord = QPageRecord::model()->findByPk($pageId);
+				/** @var $pageOwner UserRecord */
 				if (isset($pageRecord))
-					$pageOwner = UserStorage::model()->findByPk($pageRecord->id_owner);
-				$linkRecord = LinkStorage::getLinkById($linkId);
+					$pageOwner = UserRecord::model()->findByPk($pageRecord->id_owner);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord) && isset($pageRecord) && isset($pageOwner) && $pageRecord->record_activity)
 				{
 					$ip = Yii::app()->request->getUserHostAddress();
@@ -93,9 +101,14 @@
 			}
 		}
 
+		/**
+		 * @param $pageId
+		 * @param $protected
+		 */
 		private function renderPage($pageId, $protected)
 		{
-			$page = QPageStorage::model()->findByPk($pageId);
+			/** @var $page QPageRecord */
+			$page = QPageRecord::model()->findByPk($pageId);
 			if (isset($page) && (($page->restricted && $protected) || !$page->restricted))
 			{
 				$this->pageTitle = $page->title;

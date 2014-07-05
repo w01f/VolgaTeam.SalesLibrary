@@ -1,8 +1,8 @@
-window.salesDepot = window.salesDepot || { };
-
 (function ($)
 {
-	$.LinkGrid = function ()
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal.LinkGrid = function ()
 	{
 		var that = this;
 
@@ -63,29 +63,28 @@ window.salesDepot = window.salesDepot || { };
 				gridContent.find(selector).addClass(that.sortDirection);
 		};
 
-
 		var previewLink = function ()
 		{
 			var linkId = $(this).parent().find('.link-id-column').html();
-			$.requestViewDialog(linkId, false);
+			$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 		};
 
 		var specialPreviewLink = function ()
 		{
 			var linkId = $(this).parent().find('.link-id-column').html();
-			$.requestSpecialDialog([linkId], undefined);
+			$.SalesPortal.LinkManager.requestSpecialDialog([linkId], undefined);
 		};
 
 		var viewFileCard = function ()
 		{
 			var linkId = $(this).parent().find('.link-id-column').html();
-			$.openFileCard(linkId);
+			$.SalesPortal.LinkManager.openFileCard(linkId);
 		};
 
 		var viewAttachment = function ()
 		{
 			var linkId = $(this).parent().find('.link-id-column').html();
-			$.requestViewDialog(linkId, true);
+			$.SalesPortal.LinkManager.requestViewDialog(linkId, true);
 		};
 
 		var viewLinkDetails = function ()
@@ -97,23 +96,23 @@ window.salesDepot = window.salesDepot || { };
 				var linkId = currentRow.find('.link-id-column').html();
 				$.ajax({
 					type: "POST",
-					url: "preview/getLinkDetails",
+					url: window.BaseUrl + "preview/getLinkDetails",
 					data: {
 						linkId: linkId
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function (msg)
 					{
 						if (msg != '')
 						{
-							$(msg).insertAfter(currentRow);
+							$(msg).after(currentRow);
 
 							var searchGridBody = gridContent.find(".links-grid-body");
 							searchGridBody.find("tr.link-details-container tr.file-card td").off('click');
@@ -223,10 +222,10 @@ window.salesDepot = window.salesDepot || { };
 				regularClickableLinks.draggable({
 						delay: 100,
 						revert: "invalid",
-						helper: function (event)
+						helper: function ()
 						{
 							var linkId = $(this).parent().find('.link-id-column').html();
-							return  $('<i id="' + linkId + '" class="icon-file"></i>');
+							return  $('<span id="' + linkId + '" class="glyphicon glyphicon-file"></span>');
 						},
 						appendTo: "body",
 						cursorAt: { left: -10, top: 0 }
@@ -246,6 +245,7 @@ window.salesDepot = window.salesDepot || { };
 			{
 				viewLinkDetails.call($(this));
 			});
+			var isScrolling = false;
 			linkGridBody.find("td.details-button").off('touchstart').off('touchmove').off('touchend');
 			linkGridBody.find("td.details-button.click-mobile").on('touchstart',function ()
 			{

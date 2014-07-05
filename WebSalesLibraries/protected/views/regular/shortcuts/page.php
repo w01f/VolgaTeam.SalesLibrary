@@ -1,4 +1,6 @@
 <?
+	/** @var $pageRecord ShortcutsPageRecord */
+	/** @var $linkRecords ShortcutsLinkRecord[] */
 	$searchBar = $pageRecord->getSearchBar();
 	$homeBar = $pageRecord->getHomeBar();
 	echo $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => $searchBar->configured), true);

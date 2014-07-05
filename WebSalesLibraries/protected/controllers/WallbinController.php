@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class WallbinController
+	 */
 	class WallbinController extends IsdController
 	{
 		public function getViewPath()
@@ -60,10 +64,11 @@
 			$folderId = Yii::app()->request->getPost('folderId');
 			if (isset($folderId))
 			{
-				$folderRecord = FolderStorage::model()->findByPk($folderId);
+				/** @var $folderRecord FolderRecord */
+				$folderRecord = FolderRecord::model()->findByPk($folderId);
 				$libraryManager = new LibraryManager();
 				$library = $libraryManager->getLibraryById($folderRecord->id_library);
-				$pageRecord = LibraryPageStorage::model()->findByPk($folderRecord->id_page);
+				$pageRecord = LibraryPageRecord::model()->findByPk($folderRecord->id_page);
 				$page = new LibraryPage($library);
 				$page->load($pageRecord);
 				$folder = new LibraryFolder($page);
@@ -89,13 +94,13 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
 					$library = $libraryManager->getLibraryById($linkRecord->id_library);
 
-					$folderRecord = FolderStorage::model()->findByPk($linkRecord->id_folder);
+					$folderRecord = FolderRecord::model()->findByPk($linkRecord->id_folder);
 					$folder = new LibraryFolder(new LibraryPage($library));
 					$folder->load($folderRecord);
 					$folder->displayLinkWidgets = true;

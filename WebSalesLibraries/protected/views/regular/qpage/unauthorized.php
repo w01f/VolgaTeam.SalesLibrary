@@ -14,5 +14,5 @@
     })( jQuery );    
 </script>        
 <table id="container" style="width: 100%; height: 100%; text-align: center;">
-    <tr><td><img src="<?php echo Yii::app()->baseUrl . '/images/unauthorized.png'; ?>"></td></tr>
+    <tr><td><img src="<? echo Yii::app()->baseUrl . '/images/unauthorized.png'; ?>"></td></tr>
 </table>

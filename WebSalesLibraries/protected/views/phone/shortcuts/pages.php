@@ -1,3 +1,4 @@
+<? /** @var $pageShortcuts ShortcutsPageRecord[] */ ?>
 <? if (isset($pageShortcuts)): ?>
 	<? foreach ($pageShortcuts as $pageShortcut): ?>
 		<? if ($pageShortcut->isEnabled(Yii::app()->user->login)): ?>

@@ -1,3 +1,9 @@
+<?
+	/**
+	 * @var $quiz Quiz
+	 * @var $quizResults QuizResult
+	 */
+?>
 <table class="quiz-spash">
 	<tr>
 		<td colspan="2"><label><? echo $quiz->header; ?></label></td>
@@ -20,7 +26,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button class="btn btn-large quiz-exit">EXIT</button>
+				<button class="btn btn-default btn-lg quiz-exit">EXIT</button>
 			</td>
 		</tr>
 	<? else: ?>
@@ -34,14 +40,14 @@
 		<tr>
 			<? if ($quiz->allowRetake): ?>
 				<td>
-					<button class="btn btn-large quiz-start">RE-TAKE</button>
+					<button class="btn btn-default btn-lg quiz-start">RE-TAKE</button>
 				</td>
 				<td>
-					<button class="btn btn-large quiz-exit">EXIT</button>
+					<button class="btn btn-default btn-lg quiz-exit">EXIT</button>
 				</td>
 			<? else: ?>
 				<td colspan="2">
-					<button class="btn btn-large quiz-start">EXIT</button>
+					<button class="btn btn-default btn-lg quiz-start">EXIT</button>
 				</td>
 			<? endif ?>
 		</tr>

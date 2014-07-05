@@ -67,35 +67,17 @@
                         $(this).createCookie("JXID", $(this).genRandID()); // set random ID and create cookie
                         $(this).createCookie("JXHID", false); // set bar hide to false then create cookie
                     }
-					
-                    // set html and body style for jixedbar to work
-                    if (($.browser.msie && ie6) || ($.browser.msie && ie7)) { // check if we have an IE client browser
-                        $("html").css({
-                            "overflow" : "hidden", 
-                            "height" : "100%"
-                        });
-                        $("body").css({
-                            "margin": "0px", 
-                            "overflow": "auto", 
-                            "height": "100%"
-                        });
-                    } else { // else for FF, Chrome, Opera, Safari and other browser
-                        $("html").css({
-                            "height" : "100%"
-                        });
-                        $("body").css({
-                            "margin": "0px", 
-                            "height": "100%"
-                        });
-                    }
 
-                    /* check what position method to use */
-                    if (($.browser.msie && ie6) || ($.browser.msie && ie7)) { // for IE browsers
-                        pos = "absolute";
-                    } else { // else for other browsers
-                        pos = "fixed";
-                    }
-					
+					$("html").css({
+						"height" : "100%"
+					});
+					$("body").css({
+						"margin": "0px",
+						"height": "100%"
+					});
+
+                    pos = "fixed";
+
                     // create hide container and button
                     if ($(".jx-bar-button-right", this).exists()) { // check if there are currently an item on the right side portion of the bar
                         $("<ul />").attr("id", "jx-hid-con-id").insertBefore($(this).find(".jx-bar-button-right:first")); // insert hide/show button "before" the existing item and let the "float right" do its magic
@@ -103,18 +85,6 @@
                         $("<ul />").attr("id", "jx-hid-con-id").appendTo(this);
                     }
 					
-                    if ($.browser.msie && ie6) {
-                        $("#jx-hid-con-id").css({
-                            "width": "1px", 
-                            "float": "right"
-                        }); // fix hide container width to prevent float drop issue on IE6 (any width other than "auto" or none specified)
-                    } else if ($.browser.msie && ie7) {
-                        $("#jx-hid-con-id").css({
-                            "width": "40px", 
-                            "float": "right"
-                        }); // fix hide container width to prevent float drop issue on IE7
-                    }
-						
                     /* check what position should be the arrow indicator will be */
                     if (defaults.showOnTop) {
                         hideIndicator = "jx-hide-top"; // on the top
@@ -363,16 +333,11 @@
                                         "float": "left"
                                     });
 								
-                                    // theme for tooltip (theme)
-                                    if ((defaults.showOnTop) && !($.browser.msie && ie6)) { // IE6 workaround; Don't add tooltip pointer if IE6
-                                        $("<div />").addClass("jx-tool-point-dir-up").appendTo("#" + barTooltipID);
-                                    }
+                                    $("<div />").addClass("jx-tool-point-dir-up").appendTo("#" + barTooltipID);
                                     $("<div />").html(tooltipTitle).addClass("jx-bar-button-tooltip").appendTo("#" + barTooltipID);
 									
-                                    if ((!defaults.showOnTop) && !($.browser.msie && ie6)) { // IE6 workaround; Don't add tooltip pointer if IE6							
-                                        $("<div />").addClass("jx-tool-point-dir-down").appendTo("#" + barTooltipID);
-                                    }
-								
+                                    $("<div />").addClass("jx-tool-point-dir-down").appendTo("#" + barTooltipID);
+
                                     // fix tooltip wrapper relative to the associated button
                                     lft_pad = parseInt($(this).css("padding-left"));
                                     $("#" + barTooltipWrapperID).css({
@@ -424,17 +389,12 @@
                                         "float": "left"
                                     });
 								
-                                    // theme for show/unhide tooltip
-                                    if ((defaults.showOnTop) && !($.browser.msie && ie6)) {
-                                        $("<div />").addClass("jx-tool-point-dir-up").appendTo("#" + barTooltipID);
-                                    }
+                                    $("<div />").addClass("jx-tool-point-dir-up").appendTo("#" + barTooltipID);
 
                                     $("<div />").html(tooltipTitle).addClass("jx-bar-button-tooltip").appendTo("#" + barTooltipID);
 								
-                                    if ((!defaults.showOnTop) && !($.browser.msie && ie6)) { 
-                                        $("<div />").addClass("jx-tool-point-dir-down").appendTo("#" + barTooltipID);
-                                    }
-								
+                                    $("<div />").addClass("jx-tool-point-dir-down").appendTo("#" + barTooltipID);
+
                                     // fix tooltip wrapper relative to the associated button
                                     ulft_pad = parseInt($(this).css("padding-left"));
                                     $("#" + barTooltipWrapperID).css({
@@ -464,26 +424,6 @@
                             );
                     }
 
-                    // fix PNG transparency problem on IE6
-                    if ($.browser.msie && ie6) {
-                        $(this).find("li").each(function() {
-                            $(this).find("img").each(function() {
-                                imgPath = $(this).attr("src");
-                                altName = $(this).attr("alt");
-                                if (altName == "") { // workaround for IE6 bug: Menu item text does not show up on the popup menu
-                                    altName = "&nbsp;&nbsp;" + $(this).attr("title");
-                                }
-                                srcText = $(this).parent().html();
-                                $(this).parent().html( // wrap with span element
-                                    '<span style="cursor:pointer;display:inline-block;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + imgPath + '\');">' + srcText + '</span>&nbsp;' + altName
-                                    );
-                            });
-                            $(this).find("img").each(function() {
-                                $(this).attr("style", "filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);"); // show image
-                            });
-                        });
-                    }
-					
                     // adjust bar on window resize event
                     $(window).resize(
                         function(){
@@ -533,15 +473,8 @@
                             buttonIndicator = "jx-arrow-up"; // bottom
                         }
 
-                        /* IE6/IE7 arrow indicator float drop fix: user replaced insertAfter with insertBefore */
-                        if (($.browser.msie && ie6) || ($.browser.msie && ie7)) {
-                            $("<div />").attr("class", buttonIndicator).insertBefore($(this).parent().find("a")).css({
-                                "background-position": "top"
-                            }); // IE6 and IE7 fix background position
-                        } else { // else any other browser
-                            $("<div />").attr("class", buttonIndicator).insertAfter($(this).parent().find("a")); // prevent Chrome from wrapping button text
-                        }
-						
+                        $("<div />").attr("class", buttonIndicator).insertAfter($(this).parent().find("a")); // prevent Chrome from wrapping button text
+
                         // add click event (button)
                         $(this).parent().find("a:first").click(function() {
                             var elemID = $(this).attr("id"); // get ID (whether there is an ID or none)					
@@ -603,12 +536,6 @@
                                 }
 								
                                 $("#jx-menu-con-id").addClass("jx-nav-menu");
-
-                                if ($.browser.msie && ie6) {	
-                                    $("#jx-menu-con-id ul li a").css({
-                                        "width": "100%"
-                                    }); // IE6 and IE7 right padding/margin fix
-                                }
 
                                 if (defaults.roundedButtons) { // additional CSS style for rounded corner button
                                     $("#jx-menu-con-id").addClass("jx-nav-menu-rounded");

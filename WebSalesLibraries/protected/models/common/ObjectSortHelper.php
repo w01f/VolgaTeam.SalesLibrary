@@ -1,15 +1,28 @@
 <?php
+
+	/**
+	 * Class ObjectSortHelper
+	 */
 	class ObjectSortHelper
 	{
 		public $column;
 		public $direction;
 
+		/**
+		 * @param $column
+		 * @param $direction
+		 */
 		public function __construct($column, $direction)
 		{
 			$this->column = isset($column) ? $column : 'name';
 			$this->direction = isset($direction) ? $direction : 'asc';
 		}
 
+		/**
+		 * @param $a
+		 * @param $b
+		 * @return int
+		 */
 		public function sort($a, $b)
 		{
 			$a_arr = (array)$a;

@@ -1,5 +1,7 @@
 (function ($)
 {
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
 	var QuizManager = function ()
 	{
 		var that = this;
@@ -17,7 +19,7 @@
 			}
 			else
 				openGroup(topLevelList);
-			$.updateContentAreaDimensions();
+			updateContentSize();
 		};
 
 		var initList = function (itemList)
@@ -73,8 +75,8 @@
 		{
 			if (loadInProgress) return;
 			groupItem.siblings().find('.quizzes-list').hide();
-			groupItem.siblings('.quiz-group').find('.icon-folder-open').removeClass('icon-folder-open').addClass('icon-folder-close');
-			groupItem.find('>a>i.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
+			groupItem.siblings('.quiz-group').find('.glyphicon-folder-open').removeClass('glyphicon-folder-open').addClass('glyphicon-folder-close');
+			groupItem.find('>a>span.glyphicon-folder-close').removeClass('glyphicon-folder-close').addClass('glyphicon-folder-open');
 
 			var itemName = groupItem.find('>a>span').html();
 			$.cookie("selectedQuizItemName", itemName, {
@@ -87,19 +89,19 @@
 				var itemId = groupItem.find('>div.service-data').find('.item-id').html();
 				$.ajax({
 					type: "POST",
-					url: "quizzes/getQuizList",
+					url: window.BaseUrl + "quizzes/getQuizList",
 					data: {
 						parentId: itemId
 					},
 					beforeSend: function ()
 					{
 						loadInProgress = true;
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
 						loadInProgress = false;
-						$.hideOverlayLight();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function (msg)
 					{
@@ -138,19 +140,19 @@
 			var itemId = that.currentItem.children('.service-data').find('.item-id').html();
 			$.ajax({
 				type: "POST",
-				url: "quizzes/getQuizPanel",
+				url: window.BaseUrl + "quizzes/getQuizPanel",
 				data: {
 					quizId: itemId
 				},
 				beforeSend: function ()
 				{
 					loadInProgress = true;
-					$.showOverlay();
+					$.SalesPortal.Overlay.show(true);
 				},
 				complete: function ()
 				{
 					loadInProgress = false;
-					$.hideOverlay();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function (msg)
 				{
@@ -167,7 +169,7 @@
 			});
 			$.ajax({
 				type: "POST",
-				url: "statistic/writeActivity",
+				url: window.BaseUrl + "statistic/writeActivity",
 				data: {
 					type: 'Quizzes',
 					subType: 'Quiz Selected',
@@ -188,6 +190,15 @@
 			quiz.run();
 		};
 
+		var updateContentSize = function ()
+		{
+			$.SalesPortal.Layout.updateContentSize();
+			var height = $('#content').height();
+			$('#quizzes-navigator').find('> div').css({
+				'height': (height - 3) + 'px'
+			});
+		};
+
 		this.refreshQuizPanel = function (reTake)
 		{
 			openQuiz(that.currentItem, reTake);
@@ -197,15 +208,15 @@
 		{
 			$.ajax({
 				type: "POST",
-				url: "quizzes/getQuizzesView",
+				url: window.BaseUrl + "quizzes/getQuizzesView",
 				beforeSend: function ()
 				{
 					$('#content').html('');
-					$.showOverlay();
+					$.SalesPortal.Overlay.show(true);
 				},
 				complete: function ()
 				{
-					$.hideOverlay();
+					$.SalesPortal.Overlay.hide();
 				},
 				success: function (msg)
 				{
@@ -215,6 +226,7 @@
 				async: true,
 				dataType: 'html'
 			});
+			$(window).off('resize.quizzes').on('resize.quizzes', updateContentSize);
 		};
 	};
 
@@ -272,15 +284,15 @@
 		var getResult = function ()
 		{
 			var results = [];
-			$(questions).each(function ()
+			$(questions).each(function (index, value)
 			{
 				var result = {
 					question: this.order,
-					answer: this.selectedAnswer
+					answer: value.selectedAnswer
 				};
 				results.push(result);
-				this.selectedAnswer = -1;
-				this.content = null;
+				value.selectedAnswer = -1;
+				value.content = null;
 			});
 			cover.content = null;
 			cover.end = null;
@@ -312,7 +324,7 @@
 
 						innerContent.find('.answer-selector .btn').on('click', function ()
 						{
-							innerContent.find('.answer-selector .btn').removeClass('active');
+							innerContent.find('.answer-selector .btn').removeClass('active').blur();
 							$(this).addClass('active');
 							innerContent.find('.next-question .btn').removeClass('disabled');
 
@@ -346,8 +358,8 @@
 							buttonPrev.hide();
 					},
 					helpers: {
-						overlay : {
-							closeClick : false
+						overlay: {
+							closeClick: false
 						}
 					}
 				});
@@ -355,18 +367,18 @@
 			if (question.content == null)
 				$.ajax({
 					type: "POST",
-					url: "quizzes/getQuizQuestion",
+					url: window.BaseUrl + "quizzes/getQuizQuestion",
 					data: {
 						quizId: id,
 						quizQuestion: question.order
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function (msg)
 					{
@@ -394,8 +406,8 @@
 					openEffect: 'none',
 					closeEffect: 'none',
 					helpers: {
-						overlay : {
-							closeClick : false
+						overlay: {
+							closeClick: false
 						}
 					},
 					afterShow: function ()
@@ -412,17 +424,17 @@
 			if (cover.content == null)
 				$.ajax({
 					type: "POST",
-					url: "quizzes/getQuizCover",
+					url: window.BaseUrl + "quizzes/getQuizCover",
 					data: {
 						quizId: id
 					},
 					beforeSend: function ()
 					{
-						$.showOverlay();
+						$.SalesPortal.Overlay.show(true);
 					},
 					complete: function ()
 					{
-						$.hideOverlay();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function (msg)
 					{
@@ -450,8 +462,8 @@
 					openEffect: 'none',
 					closeEffect: 'none',
 					helpers: {
-						overlay : {
-							closeClick : false
+						overlay: {
+							closeClick: false
 						}
 					},
 					afterShow: function ()
@@ -476,18 +488,18 @@
 			if (end.content == null)
 				$.ajax({
 					type: "POST",
-					url: "quizzes/getQuizEnd",
+					url: window.BaseUrl + "quizzes/getQuizEnd",
 					data: {
 						quizId: id,
 						results: $.toJSON(getResult())
 					},
 					beforeSend: function ()
 					{
-						$.showOverlay();
+						$.SalesPortal.Overlay.show(true);
 					},
 					complete: function ()
 					{
-						$.hideOverlay();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function (msg)
 					{
@@ -501,7 +513,7 @@
 				openForm(end.content);
 			$.ajax({
 				type: "POST",
-				url: "statistic/writeActivity",
+				url: window.BaseUrl + "statistic/writeActivity",
 				data: {
 					type: 'Quizzes',
 					subType: 'Quiz Finished',
@@ -520,7 +532,7 @@
 			showCover();
 			$.ajax({
 				type: "POST",
-				url: "statistic/writeActivity",
+				url: window.BaseUrl + "statistic/writeActivity",
 				data: {
 					type: 'Quizzes',
 					subType: 'Quiz Started',
@@ -534,10 +546,5 @@
 			});
 		};
 	};
-
-	$(document).ready(function ()
-	{
-		$.QuizManager = new QuizManager();
-	});
-})
-	(jQuery);
+	$.SalesPortal.QuizManager = new QuizManager();
+})(jQuery);

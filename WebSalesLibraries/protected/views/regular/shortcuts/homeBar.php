@@ -1,4 +1,7 @@
-<? if ($homeBar->configured): ?>
+<?
+	/** @var $homeBar HomeBar */
+	/** @var $enableSearchBar boolean */
+	if ($homeBar->configured): ?>
 	<?php
 	$useText = false;
 	$homeBarImageMarginLeft = '0px';

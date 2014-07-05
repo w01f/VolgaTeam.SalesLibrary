@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class PreviewController
+	 */
 	class PreviewController extends IsdController
 	{
 		public function getViewPath()
@@ -47,10 +51,10 @@
 
 				if (isset($isAttachment) && $isAttachment == 'true')
 				{
-					$attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
+					$attachmentRecord = AttachmentRecord::getAttachmentById($linkId);
 					if (isset($attachmentRecord))
 					{
-						$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
+						$linkRecord = LinkRecord::getLinkById($attachmentRecord->id_link);
 						$libraryManager = new LibraryManager();
 						$libraryManager->getLibraries();
 						$library = $libraryManager->getLibraryById($attachmentRecord->id_library);
@@ -63,7 +67,7 @@
 							$attachment->browser = $browser;
 							$attachment->load($attachmentRecord);
 							if ($authorized)
-								StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $attachment->name, 'File' => basename($attachment->path)));
+								StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $attachment->name, 'File' => basename($attachment->path)));
 							$this->renderPartial('viewDialog', array('link' => $attachment, 'authorized' => $authorized), false, true);
 							$rendered = true;
 						}
@@ -71,7 +75,7 @@
 				}
 				else
 				{
-					$linkRecord = LinkStorage::getLinkById($linkId);
+					$linkRecord = LinkRecord::getLinkById($linkId);
 					if (isset($linkRecord))
 					{
 						$libraryManager = new LibraryManager();
@@ -80,7 +84,7 @@
 						$link->browser = $browser;
 						$link->load($linkRecord);
 						if ($authorized)
-							StatisticActivityStorage::WriteActivity('Link', 'Preview Options', array('Name' => $link->name, 'File' => $link->fileName));
+							StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $link->name, 'File' => $link->fileName));
 						$this->renderPartial('viewDialog', array('link' => $link, 'authorized' => $authorized), false, true);
 						$rendered = true;
 					}
@@ -126,7 +130,7 @@
 								break;
 						}
 					}
-					$linkRecord = count($linkIds) > 0 ? LinkStorage::getLinkById($linkIds[0]) : null;
+					$linkRecord = count($linkIds) > 0 ? LinkRecord::getLinkById($linkIds[0]) : null;
 					if (isset($linkRecord))
 					{
 						$libraryManager = new LibraryManager();
@@ -134,14 +138,14 @@
 						$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 						$link->browser = $browser;
 						$link->load($linkRecord);
-						StatisticActivityStorage::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
+						StatisticActivityRecord::WriteActivity('Link', 'Special Options', array('Name' => $link->name, 'File' => $link->fileName));
 						$this->renderPartial('specialDialog', array('object' => $link, 'isLink' => true, 'isLineBreak' => $link->getIsLineBreak()), false, true);
 						$rendered = true;
 					}
 				}
 				else if (isset($folderId))
 				{
-					$folderRecord = FolderStorage::model()->findByPk($folderId);
+					$folderRecord = FolderRecord::model()->findByPk($folderId);
 					if (isset($folderRecord))
 					{
 						$this->renderPartial('specialDialog', array('object' => $folderRecord, 'isLink' => false, 'isLineBreak' => false), false, true);
@@ -166,7 +170,7 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
@@ -221,7 +225,7 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
 					$authorized = false;
@@ -242,13 +246,13 @@
 
 		public function actionGetAttachmentPreviewList()
 		{
-			$attachmnetId = Yii::app()->request->getPost('linkId');
-			if (isset($attachmnetId))
+			$attachmentId = Yii::app()->request->getPost('linkId');
+			if (isset($attachmentId))
 			{
-				$attachmentRecord = AttachmentStorage::getAttachmentById($attachmnetId);
+				$attachmentRecord = AttachmentRecord::getAttachmentById($attachmentId);
 				if (isset($attachmentRecord))
 				{
-					$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
+					$linkRecord = LinkRecord::getLinkById($attachmentRecord->id_link);
 					if (isset($linkRecord))
 					{
 						$authorized = false;
@@ -280,7 +284,7 @@
 			$linkId = Yii::app()->request->getPost('linkId');
 			if (isset($linkId))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
@@ -288,7 +292,7 @@
 					$link = new LibraryLink(new LibraryFolder(new LibraryPage($library)));
 					$link->browser = 'phone';
 					$link->load($linkRecord);
-					StatisticActivityStorage::WriteActivity('Link', 'File Card', array('Name' => $link->name, 'File' => $link->fileName));
+					StatisticActivityRecord::WriteActivity('Link', 'File Card', array('Name' => $link->name, 'File' => $link->fileName));
 					$this->renderPartial('fileCard', array('link' => $link), false, true);
 				}
 			}
@@ -300,7 +304,7 @@
 			$format = Yii::app()->request->getQuery('format');
 			if (isset($linkId) && isset($format))
 			{
-				$linkRecord = LinkStorage::getLinkById($linkId);
+				$linkRecord = LinkRecord::getLinkById($linkId);
 				if (isset($linkRecord))
 				{
 					$libraryManager = new LibraryManager();
@@ -317,10 +321,10 @@
 				}
 				else
 				{
-					$attachmentRecord = AttachmentStorage::getAttachmentById($linkId);
+					$attachmentRecord = AttachmentRecord::getAttachmentById($linkId);
 					if (isset($attachmentRecord))
 					{
-						$linkRecord = LinkStorage::getLinkById($attachmentRecord->id_link);
+						$linkRecord = LinkRecord::getLinkById($attachmentRecord->id_link);
 						$libraryManager = new LibraryManager();
 						$libraryManager->getLibraries();
 						$library = $libraryManager->getLibraryById($attachmentRecord->id_library);

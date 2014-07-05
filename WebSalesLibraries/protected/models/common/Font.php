@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class Font
+	 */
 	class Font
 	{
 		/**
@@ -22,6 +26,9 @@
 		 */
 		public $isItalic;
 
+		/**
+		 * @return Font
+		 */
 		public static function getDefault()
 		{
 			$font = new Font();

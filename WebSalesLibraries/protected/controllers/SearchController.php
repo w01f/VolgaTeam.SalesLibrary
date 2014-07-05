@@ -1,5 +1,8 @@
 <?php
 
+	/**
+	 * Class SearchController
+	 */
 	class SearchController extends IsdController
 	{
 		public function getViewPath()
@@ -107,27 +110,24 @@
 				if (!isset($datasetKey))
 					$datasetKey = uniqid();
 
-				if (isset($fileTypes) && isset($condition) && isset($datasetKey))
-				{
-					$links = LinkStorage::searchByContent(
-						$condition,
-						$fileTypes,
-						$startDate,
-						$endDate,
-						$dateFile,
-						$checkedLibraryIds,
-						$onlyFileCards,
-						$superFilters,
-						$categories,
-						$categoriesExactMatch,
-						$onlyWithCategories,
-						$hideDuplicated,
-						$onlyByName,
-						$onlyByContent,
-						$datasetKey,
-						$sortColumn,
-						$sortDirection);
-				}
+				$links = LinkRecord::searchByContent(
+					SearchHelper::prepareTextCondition($condition),
+					$fileTypes,
+					$startDate,
+					$endDate,
+					$dateFile,
+					$checkedLibraryIds,
+					$onlyFileCards,
+					$superFilters,
+					$categories,
+					$categoriesExactMatch,
+					$onlyWithCategories,
+					$hideDuplicated,
+					$onlyByName,
+					$onlyByContent,
+					$datasetKey,
+					$sortColumn,
+					$sortDirection);
 
 				if (!isset($links))
 					$links = null;
@@ -174,10 +174,11 @@
 					$searchInfo['categories'] = implode('; ', $categoryTags);
 				if (isset($checkedLibraryIds))
 				{
-					$allLibraryRecords = LibraryStorage::model()->findAll();
+					$allLibraryRecords = LibraryRecord::model()->findAll();
 					foreach ($checkedLibraryIds as $libraryId)
 					{
-						$libraryRecord = LibraryStorage::model()->findByPk($libraryId);
+						/** @var $libraryRecord LibraryRecord */
+						$libraryRecord = LibraryRecord::model()->findByPk($libraryId);
 						if (isset($libraryRecord))
 							$libraries[] = $libraryRecord->name;
 					}
@@ -197,7 +198,7 @@
 
 				if (!isset($searchInfo))
 					$searchInfo = null;
-				StatisticActivityStorage::WriteActivity('Search', 'Run', array(
+				StatisticActivityRecord::WriteActivity('Search', 'Run', array(
 					'Condition' => array_key_exists('condition', $searchInfo) ? $searchInfo['condition'] : null,
 					'Types' => str_replace('File Types:', '', $searchInfo['file_types']),
 					'Dates' => str_replace('Dates:', '', $searchInfo['dates']),

@@ -1,16 +1,20 @@
 <?php
 
+	/**
+	 * Class ShortcutsUpdateAction
+	 */
 	class ShortcutsUpdateAction extends CAction
 	{
 		public function run()
 		{
 			echo "Job started...\n";
 
-			ShortcutsTabStorage::clearData();
+			ShortcutsTabRecord::clearData();
 
 			$rootFolderPath = Yii::app()->params['appRoot'] . DIRECTORY_SEPARATOR . Yii::app()->params['librariesRoot'] . DIRECTORY_SEPARATOR . 'Shortcuts';
 			if (file_exists($rootFolderPath))
 			{
+				/** @var $rootFolder DirectoryIterator[] */
 				$rootFolder = new DirectoryIterator($rootFolderPath);
 				foreach ($rootFolder as $tabFolder)
 				{
@@ -24,7 +28,7 @@
 							$tabConfig = new DOMDocument();
 							$tabConfig->load($tabConfigFile);
 
-							$tabShortcutsRecord = new ShortcutsTabStorage();
+							$tabShortcutsRecord = new ShortcutsTabRecord();
 							$tabShortcutsId = uniqid();
 							$tabShortcutsRecord->id = $tabShortcutsId;
 							$tabShortcutsRecord->name = trim($tabConfig->getElementsByTagName("Name")->item(0)->nodeValue);
@@ -34,6 +38,7 @@
 							$tabShortcutsRecord->save();
 
 							$pagesRootPath = realpath($tabPath . DIRECTORY_SEPARATOR . 'pages');
+							/** @var $pagesRoot DirectoryIterator[] */
 							$pagesRoot = new DirectoryIterator($pagesRootPath);
 							foreach ($pagesRoot as $pageFolder)
 							{
@@ -48,7 +53,7 @@
 										$pageConfig = new DOMDocument();
 										$pageConfig->loadXML($pageConfigContent);
 
-										$pageShortcutsRecord = new ShortcutsPageStorage();
+										$pageShortcutsRecord = new ShortcutsPageRecord();
 										$pageShortcutsId = uniqid();
 										$pageShortcutsRecord->id = $pageShortcutsId;
 										$pageShortcutsRecord->id_tab = $tabShortcutsId;
@@ -63,6 +68,7 @@
 										$linksRootPath = realpath($pagePath . DIRECTORY_SEPARATOR . 'links');
 										if (file_exists($linksRootPath))
 										{
+											/** @var $linksRoot DirectoryIterator[] */
 											$linksRoot = new DirectoryIterator($linksRootPath);
 											foreach ($linksRoot as $linkFolder)
 											{
@@ -76,7 +82,7 @@
 														$linkConfig = new DOMDocument();
 														$linkConfig->loadXML($linkConfigContent);
 
-														$linkShortcutsRecord = new ShortcutsLinkStorage();
+														$linkShortcutsRecord = new ShortcutsLinkRecord();
 														$shortcutsIdTags = $linkConfig->getElementsByTagName("StaticID");
 														$linkShortcutsId = $shortcutsIdTags->length > 0 ? trim($shortcutsIdTags->item(0)->nodeValue) : null;
 														if (!isset($linkShortcutsId))

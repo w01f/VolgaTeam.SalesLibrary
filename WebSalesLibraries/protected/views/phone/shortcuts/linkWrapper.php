@@ -1,1 +1,4 @@
-<? echo $content; ?>
+<?
+	/** @var $content string */
+	echo $content;
+?>

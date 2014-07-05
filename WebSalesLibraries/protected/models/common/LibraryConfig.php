@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class LibraryConfig
+	 */
 	class LibraryConfig
 	{
 		/**

@@ -1,4 +1,10 @@
-<?php echo nl2br($body); ?>
+<?
+	/**
+	 * @var $body string
+	 * @var $page QPageRecord
+	 */
+?>
+<? echo nl2br($body); ?>
 <br>
 <br>
-<?php echo $page->getUrl(); ?>
+<? echo $page->getUrl(); ?>

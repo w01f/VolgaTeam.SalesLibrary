@@ -63,23 +63,9 @@
 	width: 25%;
 }
 
-#page-content .page-title
+#page-content .page-title .form-group
 {
-	margin-top: 2px;
-	margin-bottom: 2px;
-}
-
-#page-content .create-date
-{
-	float: right;
-	line-height: 30px;
-}
-
-#page-content .page-url
-{
-	margin-top: 2px;
-	margin-bottom: 4px;
-	font-size: 10pt;
+	margin-bottom: 5px;
 }
 
 #page-content-tabs
@@ -91,18 +77,6 @@
 #page-content-tabs .ui-tabs, #page-content-tabs .ui-tabs-panel
 {
 	padding: 0;
-}
-
-#page-content .edit-field
-{
-	margin: 0;
-}
-
-#page-content .edit-field .editor
-{
-	padding-left: 0;
-	padding-right: 0;
-	resize: none;
 }
 
 input[readonly]
@@ -134,28 +108,8 @@ input[readonly]
 	border: 0;
 }
 
-#page-content-tab-security .title
-{
-	font-size: 18pt;
-}
-
-#page-content-expiration-date-container
-{
-	display: inline;
-}
-
-#page-content-expiration-date-container .controls
-{
-	display: inline;
-}
-
-#page-content-tab-security .form-inline
+#page-content-tab-security .form-horizontal>div
 {
 	margin-bottom: 5px;
-}
-
-#page-content-tab-security .checkbox
-{
 	min-height: 30px;
-	vertical-align: middle;
 }

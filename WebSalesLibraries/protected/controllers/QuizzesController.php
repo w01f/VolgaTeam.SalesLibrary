@@ -1,5 +1,8 @@
 <?php
 
+	/**
+	 * Class QuizzesController
+	 */
 	class QuizzesController extends IsdController
 	{
 		public function getViewPath()
@@ -12,7 +15,7 @@
 			$userId = Yii::app()->user->getId();
 			if (isset($userId))
 			{
-				$quizItems = QuizGroupStorage::getChildItems(null);
+				$quizItems = QuizGroupRecord::getChildItems(null);
 
 				$selectedQuizItemName = isset(Yii::app()->request->cookies['selectedQuizItemName']) ? Yii::app()->request->cookies['selectedQuizItemName']->value : null;
 				$selectedQuizItemBreadcrumbs = null;
@@ -35,7 +38,7 @@
 			$parentId = Yii::app()->request->getPost('parentId');
 			if (isset($userId) && isset($parentId))
 			{
-				$quizItems = QuizGroupStorage::getChildItems($parentId);
+				$quizItems = QuizGroupRecord::getChildItems($parentId);
 				$this->renderPartial('quizzesList', array('quizItems' => $quizItems), false, true);
 			}
 		}
@@ -46,10 +49,10 @@
 			$quizId = Yii::app()->request->getPost('quizId');
 			if (isset($userId) && isset($quizId))
 			{
-				$quizRecord = QuizStorage::model()->findByPk($quizId);
+				/** @var $quizRecord QuizRecord */
+				$quizRecord = QuizRecord::model()->findByPk($quizId);
 				$quiz = $quizRecord->getEntity();
-
-				$quizResults = QuizResultStorage::getUserResults($userId, $quiz);
+				$quizResults = QuizResultRecord::getUserResults($userId, $quiz);
 				$passed = false;
 				if (isset($quizResults))
 					foreach ($quizResults as $quizResult)
@@ -58,7 +61,6 @@
 							$passed = true;
 							break;
 						}
-
 				$this->renderPartial('quizPanel', array('quiz' => $quiz, 'quizResults' => $quizResults, 'passed' => $passed), false, true);
 			}
 		}
@@ -69,7 +71,8 @@
 			$quizId = Yii::app()->request->getPost('quizId');
 			if (isset($userId) && isset($quizId))
 			{
-				$quizRecord = QuizStorage::model()->findByPk($quizId);
+				/** @var $quizRecord QuizRecord */
+				$quizRecord = QuizRecord::model()->findByPk($quizId);
 				$quiz = $quizRecord->getEntity();
 				$this->renderPartial('quizCover', array('quiz' => $quiz), false, true);
 			}
@@ -86,21 +89,22 @@
 				$results = array();
 			if (isset($userId) && isset($quizId) && isset($results))
 			{
-				$quizRecord = QuizStorage::model()->findByPk($quizId);
+				/** @var $quizRecord QuizRecord */
+				$quizRecord = QuizRecord::model()->findByPk($quizId);
 				$quiz = $quizRecord->getEntity();
 				$quizSet = $quiz->saveResults($userId, $results);
-				$quizResults = QuizResultStorage::getQuizResult($userId, $quiz, $quizSet);
+				$quizResults = QuizResultRecord::getQuizResult($userId, $quiz, $quizSet);
 				if ($quizResults->successful)
-					StatisticActivityStorage::WriteActivity('Quizzes', 'Quiz Passed', array('Name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
+					StatisticActivityRecord::WriteActivity('Quizzes', 'Quiz Passed', array('Name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
 				else
-					StatisticActivityStorage::WriteActivity('Quizzes', 'Quiz Failed', array('Name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
+					StatisticActivityRecord::WriteActivity('Quizzes', 'Quiz Failed', array('Name' => $quiz->subtitle . ' - ' . $quiz->title . ' - ' . $quiz->date, 'ID' => $quiz->uniqId, 'Score' => $quizResults->score . '%'));
 				if ($quiz->sendScoreToAdmin && isset($quiz->adminEmails) && isset(Yii::app()->user->email))
 				{
 					$message = Yii::app()->email;
 					$to = $quiz->adminEmails;
 					$to[] = Yii::app()->user->email;
 					$message->to = $to;
-					$groups = UserStorage::getGroupNames(Yii::app()->user->id);
+					$groups = UserRecord::getGroupNames(Yii::app()->user->id);
 					$message->subject = $quiz->title . ' - ' . Yii::app()->user->firstName . ' ' . Yii::app()->user->lastName . (isset($groups) ? (' - ' . $groups) : '');
 					$message->from = Yii::app()->params['email']['quiz']['from'];
 					if (Yii::app()->params['email']['quiz']['copy_enabled'])
@@ -120,9 +124,11 @@
 			$quizQuestion = Yii::app()->request->getPost('quizQuestion');
 			if (isset($userId) && isset($quizId) && isset($quizQuestion))
 			{
-				$quizRecord = QuizStorage::model()->findByPk($quizId);
+				/** @var $quizRecord QuizRecord */
+				$quizRecord = QuizRecord::model()->findByPk($quizId);
 				$quiz = $quizRecord->getEntity();
 				$questionOrder = intval($quizQuestion);
+				/** @var $selectedQuestion Question */
 				foreach ($quiz->questions as $question)
 				{
 					if ($question->order == $questionOrder)

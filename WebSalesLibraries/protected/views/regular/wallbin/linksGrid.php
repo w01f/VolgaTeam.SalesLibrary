@@ -4,7 +4,6 @@
 <table class="links-grid-header">
 	<tr>
 		<td class="link-id-column"><span>Id</span></td>
-		<td class="details-button"><span></span></td>
 		<td class="link-tag-column"><span><? echo Yii::app()->params['tags']['column_name']; ?></span></td>
 		<td class="library-column"><span><? echo Yii::app()->params['stations']['column_name']; ?></span></td>
 		<td class="link-type-column"><span>Type</span></td>
@@ -25,13 +24,6 @@
 			<?php foreach ($links as $link): ?>
 				<tr class="<?php echo ($recordNumber % 2) ? 'odd' : 'even'; ?>">
 					<td class="link-id-column"><?php echo $link['id']; ?></td>
-
-					<?php
-						$detailsButtonClass = 'details-button';
-						if (isset($link['hasDetails']) && $link['hasDetails'])
-							$detailsButtonClass .= $clickClass . ' collapsed';
-					?>
-					<td class="<?php echo $detailsButtonClass; ?>"></td>
 
 					<td class="link-tag-column"><?php echo $link['tag']; ?></td>
 

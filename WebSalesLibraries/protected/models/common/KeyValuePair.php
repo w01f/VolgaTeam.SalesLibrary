@@ -1,4 +1,8 @@
 <?php
+
+	/**
+	 * Class KeyValuePair
+	 */
 	class KeyValuePair
 	{
 		/**

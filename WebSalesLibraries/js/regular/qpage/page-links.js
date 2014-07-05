@@ -1,8 +1,9 @@
 (function ($)
 {
+	window.BaseUrl = window.BaseUrl || '';
 	var assignLinkEvents = function (container)
 	{
-		$.updateContentAreaDimensions();
+		$.SalesPortal.Layout.updateContentSize();
 		container.find('.link-text, .banner-container').tooltip({animation: false, trigger: 'hover', placement: 'top', delay: { show: 500, hide: 100 }});
 		container.find('.clickable').off('click').on('click', function (event)
 		{
@@ -10,7 +11,7 @@
 			{
 				var linkId = $(this).attr('id').replace('link', '');
 				recordActivity(linkId);
-				$.requestViewDialog(linkId, false);
+				$.SalesPortal.LinkManager.requestViewDialog(linkId, false);
 			}
 			event.stopPropagation();
 		});
@@ -107,24 +108,24 @@
 			var folderLinkContent = linkObject.children('.folder-link-content');
 			var linkId = null;
 			if (folderLinkContent.attr("id") != null)
-				var linkId = folderLinkContent.attr("id").replace('folder-link-content', '');
+				linkId = folderLinkContent.attr("id").replace('folder-link-content', '');
 			if (!folderLinkContent.find('.link-container').length && linkId != null)
 			{
 				recordActivity(linkId);
 				$.ajax({
 					type: "POST",
-					url: "wallbin/getLinkFolderContent",
+					url: window.BaseUrl + "wallbin/getLinkFolderContent",
 					data: {
 						linkId: linkId
 					},
 					beforeSend: function ()
 					{
-						$.showOverlayLight();
+						$.SalesPortal.Overlay.show(false);
 						folderLinkContent.html('');
 					},
 					complete: function ()
 					{
-						$.hideOverlayLight();
+						$.SalesPortal.Overlay.hide();
 					},
 					success: function (msg)
 					{
@@ -154,7 +155,7 @@
 			linkObject.children('.folder-link-content').hide("blind", {
 				direction: "vertical"
 			}, 500);
-			linkObject.removeClass('active');
+			linkObject.removeClass('active').blur();
 		}
 	};
 
@@ -163,7 +164,7 @@
 		var pageId = $('#page-id').html();
 		$.ajax({
 			type: "POST",
-			url: "qpage/recordActivity",
+			url: window.BaseUrl + "qpage/recordActivity",
 			data: {
 				pageId: pageId,
 				userEmail: $('#user-email').val(),
@@ -193,7 +194,13 @@
 							$(this).dialog("close");
 						}
 					},
-					close: function (event, ui)
+					open: function ()
+					{
+						$(this).closest(".ui-dialog")
+							.find(".ui-dialog-titlebar-close")
+							.html("<span class='ui-icon ui-icon-closethick'></span>");
+					},
+					close: function ()
 					{
 						$("#user-email-warning").remove();
 					}
@@ -208,5 +215,4 @@
 	{
 		assignLinkEvents($('#page-links-container'));
 	});
-})
-	(jQuery);
+})(jQuery);

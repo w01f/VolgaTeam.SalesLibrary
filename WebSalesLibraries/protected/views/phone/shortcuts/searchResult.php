@@ -1,3 +1,4 @@
+<? /** @var $searchContainer SearchShortcut */ ?>
 <div class="search-conditions" style="display: none;">
 	<div class="shortcut-title"><? echo $searchContainer->title; ?></div>
 	<? if (isset($searchContainer->conditions->text)): ?>

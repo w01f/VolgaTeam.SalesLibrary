@@ -1,3 +1,8 @@
+<?
+	/**
+	 * @var $links array
+	 */
+?>
 <table class="link-grid">
 	<?php if (isset($links)): ?>
 		<?php $recordNumber = 1; ?>

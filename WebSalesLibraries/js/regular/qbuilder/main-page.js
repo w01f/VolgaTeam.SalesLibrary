@@ -1,40 +1,49 @@
 (function ($)
 {
-	var loadMainPage = function ()
+	window.BaseUrl = window.BaseUrl || '';
+	$.SalesPortal = $.SalesPortal || { };
+	$.SalesPortal.QBuilder = $.SalesPortal.QBuilder || { };
+	var QBuilderManager = function ()
 	{
-		$.ajax({
-			type: "POST",
-			url: "qbuilder/getMainPage",
-			beforeSend: function ()
-			{
-				$('#content').html('');
-				$.showOverlay();
-			},
-			complete: function ()
-			{
-				$.hideOverlay();
-			},
-			success: function (msg)
-			{
-				$('#content').html(msg);
+		var that = this;
+		this.init = function ()
+		{
+			$.ajax({
+				type: "POST",
+				url: window.BaseUrl + "qbuilder/getMainPage",
+				beforeSend: function ()
+				{
+					$('#content').html('');
+					$.SalesPortal.Overlay.show(true);
+				},
+				complete: function ()
+				{
+					$.SalesPortal.Overlay.hide();
+				},
+				success: function (msg)
+				{
+					$('#content').html(msg);
 
-				$.pageList.afterLoad();
-				$.pageList.init();
+					$.SalesPortal.QBuilder.PageList.init();
+					$.SalesPortal.QBuilder.PageList.show();
 
-				$.linkCart.afterLoad();
-				$.linkCart.init();
+					$.SalesPortal.QBuilder.LinkCart.init();
+					$.SalesPortal.QBuilder.LinkCart.show();
 
-				$.updateContentAreaDimensions();
-			},
-			async: true,
-			dataType: 'html'
-		});
+					updateContentSize();
+				},
+				async: true,
+				dataType: 'html'
+			});
+			$(window).off('resize.qbuilder').on('resize.qbuilder', updateContentSize);
+		};
+
+		var updateContentSize = function ()
+		{
+			$.SalesPortal.Layout.updateContentSize();
+			$.SalesPortal.QBuilder.PageList.updateContentSize();
+			$.SalesPortal.QBuilder.LinkCart.updateContentSize();
+		}
 	};
-
-	$(document).ready(function ()
-	{
-		loadMainPage();
-
-		$(window).on('resize', $.updateContentAreaDimensions);
-	});
+	$.SalesPortal.QBuilder.Manager = new QBuilderManager();
 })(jQuery);

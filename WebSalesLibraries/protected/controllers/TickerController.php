@@ -1,6 +1,13 @@
 <?php
+
+	/**
+	 * Class TickerController
+	 */
 	class TickerController extends IsdController
 	{
+		/**
+		 * @return array
+		 */
 		public function actions()
 		{
 			return array(
@@ -14,6 +21,10 @@
 			);
 		}
 
+		/**
+		 * @param string $sessionKey
+		 * @return bool
+		 */
 		protected function authenticateBySession($sessionKey)
 		{
 			$data = Yii::app()->cacheDB->get($sessionKey);
@@ -26,7 +37,7 @@
 		/**
 		 * @param string $login
 		 * @param string $password
-		 * @return string session key
+		 * @return string
 		 * @soap
 		 */
 		public function getSessionKey($login, $password)
@@ -44,14 +55,14 @@
 		}
 
 		/**
-		 * @param string Session Key
+		 * @param string $sessionKey
 		 * @return TickerLink[]
 		 * @soap
 		 */
 		public function getTickerLinks($sessionKey)
 		{
 			if ($this->authenticateBySession($sessionKey))
-				$tickerLinks = TickerLinkStorage::getLinks();
+				$tickerLinks = TickerLinkRecord::getLinks();
 			if (isset($tickerLinks))
 				return $tickerLinks;
 			else
@@ -59,19 +70,19 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @param TickerLink[] Ticker Links
+		 * @param string $sessionKey
+		 * @param TickerLink[] $tickerLinks
 		 * @soap
 		 */
 		public function setTickerLinks($sessionKey, $tickerLinks)
 		{
 			if ($this->authenticateBySession($sessionKey))
 			{
-				TickerLinkStorage::clearData();
-				TickerLinkDetailStorage::clearData();
+				TickerLinkRecord::clearData();
+				TickerLinkDetailRecord::clearData();
 				foreach ($tickerLinks as $tickerLink)
 				{
-					$tickerLinkRecord = new TickerLinkStorage();
+					$tickerLinkRecord = new TickerLinkRecord();
 					$tickerLinkId = uniqid();
 					$tickerLinkRecord->id = $tickerLinkId;
 					$tickerLinkRecord->type = $tickerLink->type;
@@ -82,7 +93,7 @@
 					if (isset($tickerLink->details))
 						foreach ($tickerLink->details as $tickerLinkDetail)
 						{
-							$tickerLinkDetailRecord = new TickerLinkDetailStorage();
+							$tickerLinkDetailRecord = new TickerLinkDetailRecord();
 							$tickerLinkDetailRecord->id = uniqid();
 							$tickerLinkDetailRecord->id_ticker = $tickerLinkId;
 							$tickerLinkDetailRecord->tag = $tickerLinkDetail->tag;

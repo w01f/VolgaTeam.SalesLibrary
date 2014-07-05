@@ -1,3 +1,4 @@
+<? /** @var $link LibraryLink */ ?>
 <ul data-role="listview" data-theme="c" data-divider-theme="c">
 	<li data-role="list-divider">
 		<h4>
@@ -5,7 +6,7 @@
 				<tr>
 					<td>
                         <span class="name">
-                            <?php
+                            <?
 								if (isset($link->name) && $link->name != '')
 									echo $link->name;
 								else if (isset($link->fileName) && $link->fileName != '')
@@ -14,31 +15,31 @@
                         </span>
 					</td>
 				</tr>
-				<?php if (isset($link->name) && $link->name != ''): ?>
+				<? if (isset($link->name) && $link->name != ''): ?>
 					<tr>
 						<td>
-							<span class="file"><?php echo $link->fileName; ?></span>
+							<span class="file"><? echo $link->fileName; ?></span>
 						</td>
 					</tr>
-				<?php endif; ?>
+				<? endif; ?>
 			</table>
 		</h4>
 	</li>
-	<?php if ($link->enableFileCard && isset($link->fileCard)): ?>
+	<? if ($link->enableFileCard && isset($link->fileCard)): ?>
 		<li>
-			<a class="file-card-link" href="#file-card<?php echo $link->id; ?>">
+			<a class="file-card-link" href="#file-card<? echo $link->id; ?>">
 				<h3>
 					<img src="<? echo Yii::app()->request->getBaseUrl(true) . '/images/search/search-file-card.png'; ?>" align="middle"/>
-					<?php echo $link->fileCard->title; ?>
+					<? echo $link->fileCard->title; ?>
 				</h3>
 			</a>
 		</li>
-	<?php endif; ?>
-	<?php if ($link->enableAttachments && isset($link->attachments)): ?>
-		<?php foreach ($link->attachments as $attachment): ?>
+	<? endif; ?>
+	<? if ($link->enableAttachments && isset($link->attachments)): ?>
+		<? foreach ($link->attachments as $attachment): ?>
 			<li>
-				<a class="attachment-link" href="#attachment<?php echo $attachment->id; ?>">
-					<?php
+				<a class="attachment-link" href="#attachment<? echo $attachment->id; ?>">
+					<?
 						$imagePath = '';
 						switch ($attachment->originalFormat)
 						{
@@ -71,11 +72,11 @@
 						}
 					?>
 					<h3>
-						<img src="<?php echo $imagePath; ?>" align="middle"/>
-						<?php echo $attachment->name; ?>
+						<img src="<? echo $imagePath; ?>" align="middle"/>
+						<? echo $attachment->name; ?>
 					</h3>
 				</a>
 			</li>
-		<?php endforeach; ?>
-	<?php endif; ?>
+		<? endforeach; ?>
+	<? endif; ?>
 </ul>

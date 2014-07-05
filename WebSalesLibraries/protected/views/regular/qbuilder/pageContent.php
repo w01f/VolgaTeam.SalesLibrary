@@ -1,11 +1,28 @@
 <div>
 	<? if (isset($page)): ?>
-		<div class="form-inline page-title">
-			Title: <input type="text" id="page-content-title" class="input-xlarge" value="<? echo $page->title; ?>">
-			<div class="create-date">Created: <? echo $page->getCreateDateFormatted(); ?></div>
-		</div>
-		<legend class="page-url">URL:<a id="page-content-url" href="<? echo $page->getUrl(); ?>" target="_blank"><?echo $page->getUrl();?></a>
-		</legend>
+		<form class="form-horizontal page-title">
+			<div class="form-group">
+				<div class="col-xs-1">
+					<p class="form-control-static text-left">Title:</p>
+				</div>
+				<div class="col-xs-6">
+					<label for="page-content-title" class="sr-only"></label><input type="text" id="page-content-title" class="form-control" value="<? echo $page->title; ?>">
+				</div>
+				<div class="col-xs-5">
+					<p class="form-control-static text-right">Created: <? echo $page->getCreateDateFormatted(); ?></p>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-1">
+					<p class="form-control-static text-left">URL:</p>
+				</div>
+				<div class="col-xs-11">
+					<p class="form-control-static text-left">
+						<a id="page-content-url" href="<? echo $page->getUrl(); ?>" target="_blank"><? echo $page->getUrl(); ?></a>
+					</p>
+				</div>
+			</div>
+		</form>
 		<div id="page-content-tabs">
 			<ul>
 				<li><a href="#page-content-tab-links">Links</a></li>
@@ -17,9 +34,9 @@
 			</ul>
 			<div id="page-content-tab-links">
 				<div class="header">
-					<h5>DRAG your Links from the Cart & DROP them into the list below:</h5>
+					<h4>DRAG your Links from the Cart & DROP them into the list below:</h4>
 					<div id="page-content-links-title">
-						<label>Shared links:<span id="page-content-links-number">#</span></label>
+						Shared links:<span id="page-content-links-number">#</span>
 					</div>
 				</div>
 				<div id="page-content-links-container" class="link-grid-container">
@@ -30,64 +47,108 @@
 				</div>
 			</div>
 			<div id="page-content-tab-title">
-				<h5 class="checkbox">
-					<input type="checkbox" id="page-content-show-description" value="" <?php echo isset($page->subtitle) && $page->subtitle != '' ? 'checked' : '' ?>>This statement will be placed at the TOP of your quickSITE...
-				</h5>
-				<textarea id="page-content-description"><? echo $page->subtitle; ?></textarea>
+				<h4 class="checkbox">
+					<label class="sr-only" for="page-content-show-description"></label><input type="checkbox" id="page-content-show-description" value="" <?php echo isset($page->subtitle) && $page->subtitle != '' ? 'checked' : '' ?>>This statement will be placed at the TOP of your quickSITE...
+				</h4>
+				<label class="sr-only" for="page-content-description"></label><textarea id="page-content-description"><? echo $page->subtitle; ?></textarea>
 			</div>
 			<div id="page-content-tab-header">
-				<h5 class="checkbox">
-					<input type="checkbox" id="page-content-show-header" value="" <?php echo isset($page->header) && $page->header != '' ? 'checked' : '' ?>>The Header Text will be JUST ABOVE the links you are sharing…
-				</h5>
-				<textarea id="page-content-header-text"><? echo $page->header; ?></textarea>
+				<h4 class="checkbox">
+					<label class="sr-only" for="page-content-show-header"></label><input type="checkbox" id="page-content-show-header" value="" <?php echo isset($page->header) && $page->header != '' ? 'checked' : '' ?>>The Header Text will be JUST ABOVE the links you are sharing…
+				</h4>
+				<label class="sr-only" for="page-content-header-text"></label><textarea id="page-content-header-text"><? echo $page->header; ?></textarea>
 			</div>
 			<div id="page-content-tab-footer">
-				<h5 class="checkbox">
-					<input type="checkbox" id="page-content-show-footer" value="" <?php echo isset($page->footer) && $page->footer != '' ? 'checked' : '' ?>>The Footer Text will be at the VERY BOTTOM of your quickSITE…
-				</h5>
-				<textarea id="page-content-footer-text"><? echo $page->footer; ?></textarea>
+				<h4 class="checkbox">
+					<label class="sr-only" for="page-content-show-footer"></label><input type="checkbox" id="page-content-show-footer" value="" <?php echo isset($page->footer) && $page->footer != '' ? 'checked' : '' ?>>The Footer Text will be at the VERY BOTTOM of your quickSITE…
+				</h4>
+				<label class="sr-only" for="page-content-footer-text"></label><textarea id="page-content-footer-text"><? echo $page->footer; ?></textarea>
 			</div>
 			<div id="page-content-tab-security">
 				<? $expDate = $page->getExpirationDateFormatted(); ?>
-				<h5>Customize your quickSITE with the settings below:</h5>
-				<br>
-				<form class="form-inline">
-					<label class="checkbox"><input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>><span style="margin-left: 4px;">A. Set Expiration Date</span></label>
-					<div id="page-content-expiration-date-container" class="control-group <? if ($page->isExpired()): ?>error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<?endif;?>>
-						<div class="input-append date controls" data-date-format="mm/dd/yy" data-date="<? echo $expDate; ?>">
-							<input class="input-small" id="page-content-expiration-date" type="text" value="<? echo $expDate; ?>" readonly>
-							<span class="add-on"><i class="icon-calendar"></i></span>
+				<h4>Customize your quickSITE with the settings below:</h4>
+				<div class="form-horizontal">
+					<div class="form-group">
+						<div class="col-xs-3">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" id="page-content-use-expiration-date" value="" <?php echo isset($expDate) && $expDate != '' ? 'checked' : '' ?>> A. Set Expiration Date
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-3">
+							<div id="page-content-expiration-date-container" class="input-group input-group-sm <? if ($page->isExpired()): ?>has-error<? endif; ?>" <? if (!(isset($expDate) && $expDate != '')): ?>style="display: none"<? endif; ?>>
+								<input id="page-content-expiration-date" class="form-control" type="text" readonly placeholder="Select Date..." value="<? echo $expDate; ?>">
+								<div class="input-group-btn">
+									<button id="select-date-range" class="btn btn-default" type="button">
+										<span class="glyphicon glyphicon-calendar"></span></button>
+								</div>
+							</div>
 						</div>
 					</div>
-				</form>
-				<label class="checkbox"><input type="checkbox" id="page-content-require-login" value="" <?php echo $page->restricted ? 'checked' : '' ?>>B. Require Authorized User login and password to view site</label>
-				<form class="form-inline">
-					<label class="checkbox"><input id="page-content-access-code-enabled" type="checkbox" value="" <?php echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>><span style="margin-left: 4px;">C. Create a SECURE ACCESS Pin (4 Digit Number)</span></label>
-					<input type="text" maxlength="4" class="input-small" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<?endif;?> value="<?php echo isset($page->pin_code) ? $page->pin_code : '' ?>">
-				</form>
-				<label class="checkbox"><input type="checkbox" id="page-content-disable-widgets" "value="" <?php echo $page->disable_widgets ? 'checked' : '' ?>>D. Disable all Link Widget Icons</label>
-				<label class="checkbox"><input type="checkbox" id="page-content-disable-banners" value="" <?php echo $page->disable_banners ? 'checked' : '' ?>>E. Disable all Link Banner Images</label>
-				<label class="checkbox"><input type="checkbox" id="page-content-show-links-as-url" value="" <?php echo $page->show_links_as_url ? 'checked' : '' ?>>F. Display all Links as Blue Hyperlinks</label>
-				<label class="checkbox"><input type="checkbox" id="page-content-record-activity" value="" <?php echo $page->record_activity ? 'checked' : '' ?>>G. Email me each time someone clicks a link on this quickSITE</label>
-				<div class="form-inline" style="padding-left: 40px;">
-					Cc Email:
-					<input type="email" id="page-content-activity-email-copy" class="input-xlarge" <?php echo !$page->record_activity ? 'disabled' : '' ?> value="<?php echo isset($page->activity_email_copy) ? $page->activity_email_copy : '' ?>">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="page-content-require-login" value="" <?php echo $page->restricted ? 'checked' : '' ?>> B. Require Authorized User login and password to view site
+						</label>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-4">
+							<div class="checkbox">
+								<label>
+									<input id="page-content-access-code-enabled" type="checkbox" value="" <?php echo isset($page->pin_code) && $page->pin_code > 0 ? 'checked' : '' ?>> C. Create a SECURE ACCESS Pin (4 Digits)
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-1">
+							<label class="sr-only" for="page-content-access-code"></label>
+							<input type="text" maxlength="4" class="form-control input-sm" id="page-content-access-code" <? if (!(isset($page->pin_code) && $page->pin_code > 0)): ?>style="display: none;"<? endif; ?> value="<?php echo isset($page->pin_code) ? $page->pin_code : '' ?>">
+						</div>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="page-content-disable-widgets" "value="" <?php echo $page->disable_widgets ? 'checked' : '' ?>> D. Disable all Link Widget Icons
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="page-content-disable-banners" value="" <?php echo $page->disable_banners ? 'checked' : '' ?>> E. Disable all Link Banner Images
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="page-content-show-links-as-url" value="" <?php echo $page->show_links_as_url ? 'checked' : '' ?>> F. Display all Links as Blue Hyperlinks
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="page-content-record-activity" value="" <?php echo $page->record_activity ? 'checked' : '' ?>> G. Email me each time someone clicks a link on this quickSITE
+						</label>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-2">
+							<p class="form-control-static text-right">Cc Email:</p>
+						</div>
+						<div class="col-xs-4">
+							<label for="page-content-activity-email-copy" class="sr-only"></label>
+							<input type="email" id="page-content-activity-email-copy" class="form-control" <?php echo !$page->record_activity ? 'disabled' : '' ?> value="<?php echo isset($page->activity_email_copy) ? $page->activity_email_copy : '' ?>">
+						</div>
+					</div>
 				</div>
 			</div>
 			<div id="page-content-tab-logo">
 				<div class="header">
-					<h5>Select a Logo that will appear at the VERY top of this quickSITE:</h5>
+					<h4>Select a Logo that will appear at the VERY top of this quickSITE:</h4>
 				</div>
 				<div class="logo-list">
 					<ul class="nav nav-pills">
-						<?if (isset($logos)): ?>
+						<? if (isset($logos)): ?>
 							<? $selectedLogo = isset($page) ? $page->getLogo() : null; ?>
 							<? foreach ($logos as $logo): ?>
 								<li>
-									<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<?endif;?>><img src="<? echo $logo; ?>"></a>
+									<a href="#" <? if ($selectedLogo == $logo): ?>class="opened"<? endif; ?>><img src="<? echo $logo; ?>"></a>
 								</li>
 							<?php endforeach; ?>
-						<?php endif;?>
+						<?php endif; ?>
 					</ul>
 				</div>
 			</div>

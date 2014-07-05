@@ -1,6 +1,13 @@
 <?php
+
+	/**
+	 * Class UtilityController
+	 */
 	class UtilityController extends CController
 	{
+		/**
+		 * @return array
+		 */
 		public function actions()
 		{
 			return array(
@@ -11,6 +18,10 @@
 			);
 		}
 
+		/**
+		 * @param string $sessionKey
+		 * @return bool
+		 */
 		protected function authenticateBySession($sessionKey)
 		{
 			$data = Yii::app()->cacheDB->get($sessionKey);
@@ -23,7 +34,7 @@
 		/**
 		 * @param string $login
 		 * @param string $password
-		 * @return string session key
+		 * @return string
 		 * @soap
 		 */
 		public function getSessionKey($login, $password)
@@ -41,8 +52,8 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @return string Command result
+		 * @param string $sessionKey
+		 * @return string
 		 * @soap
 		 */
 		public function updateWallbin($sessionKey)
@@ -62,8 +73,8 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @return string Command result
+		 * @param string $sessionKey
+		 * @return string
 		 * @soap
 		 */
 		public function updateShortcuts($sessionKey)
@@ -83,8 +94,8 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @return string Command result
+		 * @param string $sessionKey
+		 * @return string
 		 * @soap
 		 */
 		public function cleanExpiredEmails($sessionKey)
@@ -104,8 +115,8 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @return string Command result
+		 * @param string $sessionKey
+		 * @return string
 		 * @soap
 		 */
 		public function notifyDeadLinks($sessionKey)
@@ -125,8 +136,8 @@
 		}
 
 		/**
-		 * @param string Session Key
-		 * @return string Command result
+		 * @param string $sessionKey
+		 * @return string
 		 * @soap
 		 */
 		public function updateQuizzes($sessionKey)

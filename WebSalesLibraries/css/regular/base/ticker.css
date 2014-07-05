@@ -11,10 +11,12 @@ body
 .modern-ticker
 {
 	z-index: 25;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
+	box-sizing: content-box !important;
+	-moz-box-sizing: content-box !important;
+	-weblit-box-sizing: content-box !important;
 }
 
 .mt-news li

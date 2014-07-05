@@ -1,6 +1,14 @@
 <?php
+
+	/**
+	 * Class UpdateWallbinCommand
+	 */
 	class UpdateWallbinCommand extends CConsoleCommand
 	{
+		/**
+		 * @param array $args
+		 * @return int|void
+		 */
 		public function run($args)
 		{
 			ob_start();

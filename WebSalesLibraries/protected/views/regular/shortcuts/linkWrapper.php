@@ -1,7 +1,12 @@
-<?php
-	$version = '6.0';
+<?
+	/**
+	 * @var $objectName string
+	 * @var $objectLogo string
+	 * @var $content string
+	 */
+	$version = '2.0';
 	$cs = Yii::app()->clientScript;
-	$cs->registerCssFile(Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
+	$cs->registerCssFile($cs->getCoreScriptUrl() . '/jui/css/base/jquery-ui.min.css');
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/jquery.fancybox.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/vendor/video-js/video-js.min.css?' . $version);
@@ -9,9 +14,9 @@
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/view-dialog.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/view-dialog-bar.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/tool-dialog.css?' . $version);
-	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/link-rate.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/folder-links.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/banner.css?' . $version);
+	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/layout.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/ribbon.css?' . $version);
 	$cs->registerCssFile(Yii::app()->baseUrl . '/css/regular/base/shortcuts.css?' . $version);
 	$cs->registerCoreScript('jquery.ui');
@@ -21,8 +26,9 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/lib/jquery.mousewheel-3.0.6.pack.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/fancybox/source/helpers/jquery.fancybox-thumbs.js', CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/video-js/video.min.js', CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/bootstrap/js/bootstrap.min.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/vendor/gesture-handler/jquery.hammer.min.js', CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/ribbon.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/overlay.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-viewing.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/view-dialog-bar.js?' . $version, CClientScript::POS_HEAD);
@@ -30,8 +36,7 @@
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/favorites.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/link-rate.js?' . $version, CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/login.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/base/scaling.js?' . $version, CClientScript::POS_HEAD);
-	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/shortcuts/ribbon.js?' . $version, CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->baseUrl . '/js/regular/shortcuts/controller.js?' . $version, CClientScript::POS_HEAD);
 	$userId = Yii::app()->user->getId();
 ?>
 <div id="ribbon">

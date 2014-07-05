@@ -1,23 +1,26 @@
-window.salesDepot = window.salesDepot || { };
-
 (function ($)
 {
-	$.fn.ribbon = function (id)
+	$.fn.ribbon = function (options)
 	{
-		if (!id)
-		{
-			if (this.attr('id'))
-			{
-				id = this.attr('id');
-			}
-		}
-
 		var that = function ()
 		{
 			return thatRet;
 		};
-
 		var thatRet = that;
+
+		var id = undefined;
+		var onTabChange = undefined;
+		if (options != undefined)
+		{
+			if (options.id != undefined)
+			{
+				if (this.attr('id'))
+				{
+					id = this.attr('id');
+				}
+			}
+			onTabChange = options.onTabChange;
+		}
 
 		if ($.cookie("selectedRibbonTabId") != null)
 			that.selectedTabId = $.cookie("selectedRibbonTabId");
@@ -125,7 +128,7 @@ window.salesDepot = window.salesDepot || { };
 				$(this).hide();
 			});
 
-			ribObj.find('.ribbon-button').each(function ()
+			ribObj.find('.ribbon-button').each(function (index, value)
 			{
 				var title = $(this).find('.button-title');
 				title.detach();
@@ -133,15 +136,15 @@ window.salesDepot = window.salesDepot || { };
 
 				var el = $(this);
 
-				this.enable = function ()
+				value.enable = function ()
 				{
 					el.removeClass('disabled');
 				};
-				this.disable = function ()
+				value.disable = function ()
 				{
 					el.addClass('disabled');
 				};
-				this.isEnabled = function ()
+				value.isEnabled = function ()
 				{
 					return !el.hasClass('disabled');
 				};
@@ -179,74 +182,8 @@ window.salesDepot = window.salesDepot || { };
 			$('#ribbon #' + tabNames[index]).show();
 
 			var name = headerStrip.find('#ribbon-tab-header-' + index).find('.ribbon-title').html();
-			that.switchToPageByIndex(index, id, name);
-		};
-
-		that.switchToPageByIndex = function (index, id, name)
-		{
-			$.cookie("selectedRibbonTabIndex", index, {
-				expires: (60 * 60 * 24 * 7)
-			});
-			$.cookie("selectedRibbonTabId", id, {
-				expires: (60 * 60 * 24 * 7)
-			});
-			$.ajax({
-				type: "POST",
-				url: "statistic/writeActivity",
-				data: {
-					type: 'System',
-					subType: 'Tab Changed',
-					data: $.toJSON({
-						Name: name
-					})
-				},
-				async: true,
-				dataType: 'html'
-			});
-			var minibar = $('.jx-bar, .jx-show');
-			switch (id)
-			{
-				case 'home-tab':
-					minibar.css({
-						'height': '30px'
-					});
-					$.initWallbinView();
-					break;
-				case 'search-full-tab':
-				case 'search-file-card-tab':
-					minibar.css({
-						'height': '0px'
-					});
-					$.initSearchView();
-					break;
-				case 'calendar-tab':
-					minibar.css({
-						'height': '0px'
-					});
-					$.initCalendarView();
-					break;
-				case 'favorites-tab':
-					minibar.css({
-						'height': '0px'
-					});
-					$.initFavoritesView();
-					break;
-				case 'quiz-tab':
-					minibar.css({
-						'height': '0px'
-					});
-					$.QuizManager.init();
-					break;
-				default:
-					minibar.css({
-						'height': '0px'
-					});
-					if (id != null && id.indexOf("shortcuts-tab-") >= 0)
-						$.initShortcutsView(id);
-					else
-						$.initWallbinView();
-					break;
-			}
+			if (onTabChange != undefined)
+				onTabChange(index, id, name);
 		};
 
 		$.fn.enable = function ()
@@ -301,25 +238,4 @@ window.salesDepot = window.salesDepot || { };
 
 		$.fn.ribbon = that;
 	};
-
-	$(document).ready(function ()
-	{
-		$('#ribbon').ribbon();
-		$('a#view-dialog-link').fancybox();
-		$.cookie("recoverSearchState" + "search-full-tab", false, {
-			expires: (60 * 60 * 24 * 7)
-		});
-		$.cookie("recoverSearchState" + "search-file-card-tab", false, {
-			expires: (60 * 60 * 24 * 7)
-		});
-
-		$('.logout-button').off('click').on('click', function ()
-		{
-			$.logout();
-		});
-		$('.qbuilder-button').off('click').on('click', function ()
-		{
-			window.open("qbuilder");
-		});
-	});
 })(jQuery);

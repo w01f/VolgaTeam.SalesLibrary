@@ -1,18 +1,19 @@
-(function( $ )    {
-    var updateLoginBodyPosition = function(){
-		var formLogin = $('#form-login');
-        var top = ($(window).height() - formLogin.height())/2;
-        var left = ($(window).width() - formLogin.width())/2;
-		formLogin.css({
-            'left':left+'px'
-        });
-		formLogin.css({
-            'top':top+'px'
-        });
-    };
-    
-    $(document).ready(function()
-    {
+(function ($)
+{
+	$(document).ready(function ()
+	{
+		var updateLoginBodyPosition = function ()
+		{
+			var formLogin = $('#form-login');
+			var top = ($(window).height() - formLogin.height()) / 2;
+			var left = ($(window).width() - formLogin.width()) / 2;
+			formLogin.css({
+				'left': left + 'px'
+			});
+			formLogin.css({
+				'top': top + 'px'
+			});
+		};
 		$("#pin-code").keydown(function (event)
 		{
 			if (event.keyCode == 46 || event.keyCode == 8)
@@ -24,7 +25,7 @@
 					event.preventDefault();
 			}
 		});
-        updateLoginBodyPosition();
-        $(window).on('resize',updateLoginBodyPosition); 
-    });
-})( jQuery );
+		updateLoginBodyPosition();
+		$(window).on('resize', updateLoginBodyPosition);
+	});
+})(jQuery);

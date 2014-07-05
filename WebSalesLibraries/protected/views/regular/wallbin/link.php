@@ -1,25 +1,26 @@
-<?php
-if ($link->isFolder)
-{
-	$isLineBreak = false;
-	$linkContainerClass = 'link-container folder-link';
-	$tooltip = 'Folder';
-}
-else
-{
-	$isLineBreak = $link->getIsLineBreak();
-	if($isLineBreak)
-		$linkContainerClass = 'link-container line-break';
+<?
+	/** @var $link LibraryLink */
+	if ($link->isFolder)
+	{
+		$isLineBreak = false;
+		$linkContainerClass = 'link-container folder-link';
+		$tooltip = 'Folder';
+	}
 	else
-		$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
-	$tooltip = $link->tooltip;
-}
+	{
+		$isLineBreak = $link->getIsLineBreak();
+		if ($isLineBreak)
+			$linkContainerClass = 'link-container line-break';
+		else
+			$linkContainerClass = isset($link->originalFormat) && isset($link->availableFormats) ? 'link-container clickable' : 'link-container';
+		$tooltip = $link->tooltip;
+	}
 ?>
-<div class="<?php echo $linkContainerClass; ?>" id="link<?php echo $link->id; ?>">
-	<?php if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
-		<?php echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
-	<?php else: ?>
-		<?php
+<div class="<? echo $linkContainerClass; ?>" id="link<? echo $link->id; ?>">
+	<? if (!(isset($disableBanner) && $disableBanner) && isset($link->banner) && $link->banner->isEnabled): ?>
+		<? echo $this->renderFile(Yii::getPathOfAlias('application.views.regular.wallbin') . '/banner.php', array('banner' => $link->banner, 'isLinkBanner' => true, 'tooltip' => (isset($tooltip) ? $tooltip : null)), true); ?>
+	<? else: ?>
+		<?
 		$widget = $link->getWidget();
 		if ($isLineBreak)
 		{
@@ -45,16 +46,16 @@ else
 				. 'white-space: nowrap;';
 		}
 		?>
-		<div class="<?php echo $linkClass; ?>"
-			 style="background-image: <?php echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <?php echo $linkFontProperties; ?>">
-		<span class="link-text" <?php if (isset($tooltip)): ?>rel="tooltip"
-			  title="<? echo $tooltip; ?>"<? endif;?>><?php echo $link->name; ?></span>
-			<?php if (isset($link->note) && $link->note != ""): ?>
-				<span class="link-note"><?php echo $link->note; ?></span>
-			<?php endif; ?>
+		<div class="<? echo $linkClass; ?>"
+			 style="background-image: <? echo !(isset($disableWidget) && $disableWidget) && isset($widget) ? "url('data:image/png;base64," . $widget . "')" : ""; ?>; <? echo $linkFontProperties; ?>">
+		<span class="link-text" <? if (isset($tooltip)): ?>rel="tooltip"
+			  title="<? echo $tooltip; ?>"<? endif; ?>><? echo $link->name; ?></span>
+			<? if (isset($link->note) && $link->note != ""): ?>
+				<span class="link-note"><? echo $link->note; ?></span>
+			<? endif; ?>
 		</div>
-	<?php endif; ?>
-	<?php if ($link->isFolder): ?>
-		<div class="folder-link-content" id="folder-link-content<?php echo $link->id; ?>"></div>
-	<?php endif; ?>
+	<? endif; ?>
+	<? if ($link->isFolder): ?>
+		<div class="folder-link-content" id="folder-link-content<? echo $link->id; ?>"></div>
+	<? endif; ?>
 </div>
