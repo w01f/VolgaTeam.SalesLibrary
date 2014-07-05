@@ -61,27 +61,27 @@
   <ItemGroup>
     <Compile Include="QBuilderClient.cs" />
     <Compile Include="ContentManagment\LibraryConfig.cs" />
-    <Compile Include="InactiveUsersService\UserRecord.cs" />
-    <Compile Include="IPadAdminService\GroupRecord.cs" />
+    <Compile Include="InactiveUsersService\UserModel.cs" />
+    <Compile Include="IPadAdminService\GroupModel.cs" />
     <Compile Include="IPadAdminService\LibraryPage.cs" />
     <Compile Include="IPadAdminService\UserInfo.cs" />
-    <Compile Include="IPadAdminService\UserRecord.cs" />
+    <Compile Include="IPadAdminService\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="QBuilderService\QPageLinkRecord.cs" />
-    <Compile Include="QBuilderService\QPageRecord.cs" />
+    <Compile Include="QBuilderService\QPageLinkModel.cs" />
+    <Compile Include="QBuilderService\QPageModel.cs" />
     <Compile Include="SiteClient.cs" />
-    <Compile Include="StatisticService\AccessReportRecord.cs" />
-    <Compile Include="StatisticService\QuizPassGroupReportRecord.cs" />
-    <Compile Include="StatisticService\QuizPassUserReportRecord.cs" />
-    <Compile Include="StatisticService\NavigationGroupReportRecord.cs" />
-    <Compile Include="StatisticService\MainGroupReportRecord.cs" />
-    <Compile Include="StatisticService\NavigationUserReportRecord.cs" />
-    <Compile Include="StatisticService\MainUserReportRecord.cs" />
+    <Compile Include="StatisticService\AccessReportModel.cs" />
+    <Compile Include="StatisticService\QuizPassGroupReportModel.cs" />
+    <Compile Include="StatisticService\QuizPassUserReportModel.cs" />
+    <Compile Include="StatisticService\NavigationGroupReportModel.cs" />
+    <Compile Include="StatisticService\MainGroupReportModel.cs" />
+    <Compile Include="StatisticService\NavigationUserReportModel.cs" />
+    <Compile Include="StatisticService\MainUserReportModel.cs" />
     <Compile Include="StatisticService\UserActivity.cs" />
     <Compile Include="TickerService\TickerLinkRecord.cs" />
     <Compile Include="UtilityClient.cs" />
@@ -244,11 +244,11 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\InactiveUsersService\UserRecord.datasource">
+    <None Include="Web References\InactiveUsersService\UserModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\IPadAdminService\AdminController.wsdl" />
-    <None Include="Web References\IPadAdminService\GroupRecord.datasource">
+    <None Include="Web References\IPadAdminService\GroupModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\IPadAdminService\Library.datasource">
@@ -258,39 +258,39 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\IPadAdminService\UserRecord.datasource">
+    <None Include="Web References\IPadAdminService\UserModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\QBuilderService\QbuilderController.wsdl" />
-    <None Include="Web References\QBuilderService\QPageLinkRecord.datasource">
+    <None Include="Web References\QBuilderService\QPageLinkModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\QBuilderService\QPageRecord.datasource">
+    <None Include="Web References\QBuilderService\QPageModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\QBuilderService\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\StatisticService\AccessReportRecord.datasource">
+    <None Include="Web References\StatisticService\AccessReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\StatisticService\MainGroupReportRecord.datasource">
+    <None Include="Web References\StatisticService\MainGroupReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\StatisticService\MainUserReportRecord.datasource">
+    <None Include="Web References\StatisticService\MainUserReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\StatisticService\NavigationGroupReportRecord.datasource">
+    <None Include="Web References\StatisticService\NavigationGroupReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\StatisticService\NavigationUserReportRecord.datasource">
+    <None Include="Web References\StatisticService\NavigationUserReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\StatisticService\QuizPassGroupReportRecord.datasource">
+    <None Include="Web References\StatisticService\QuizPassGroupReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\StatisticService\QuizPassUserReportRecord.datasource">
+    <None Include="Web References\StatisticService\QuizPassUserReportModel.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\StatisticService\Reference.map">

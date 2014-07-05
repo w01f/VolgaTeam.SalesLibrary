@@ -17,7 +17,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.AccessData
 	[ToolboxItem(false)]
 	public partial class ContainerControl : UserControl, IActivitiesView
 	{
-		private readonly List<AccessReportRecord> _records = new List<AccessReportRecord>();
+		private readonly List<AccessReportModel> _records = new List<AccessReportModel>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -173,7 +173,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.AccessData
 		{
 			xtraTabControlGroups.TabPages.Clear();
 
-			var filteredRecords = new List<AccessReportRecord>();
+			var filteredRecords = new List<AccessReportModel>();
 			filteredRecords.AddRange(_groupFilterControl.EnableFilter ? _records.Where(x => _groupFilterControl.SelectedGroups.Contains(x.name)) : _records);
 			var allActive = filteredRecords.Sum(x => x.activeCount);
 			var allInactive = filteredRecords.Sum(x => x.inactiveCount);

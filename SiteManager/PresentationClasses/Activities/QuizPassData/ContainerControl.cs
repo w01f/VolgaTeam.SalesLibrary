@@ -16,8 +16,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizPassData
 	[ToolboxItem(false)]
 	public partial class ContainerControl : UserControl, IActivitiesView
 	{
-		private readonly List<QuizPassUserReportRecord> _userRecords = new List<QuizPassUserReportRecord>();
-		private readonly List<QuizPassGroupReportRecord> _groupRecords = new List<QuizPassGroupReportRecord>();
+		private readonly List<QuizPassUserReportModel> _userRecords = new List<QuizPassUserReportModel>();
+		private readonly List<QuizPassGroupReportModel> _groupRecords = new List<QuizPassGroupReportModel>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -152,20 +152,20 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizPassData
 		{
 			xtraTabControlGroups.TabPages.Clear();
 
-			var filteredGroupRecords = new List<QuizPassGroupReportRecord>();
-			filteredGroupRecords.AddRange(_filterControl.EnableFilter ?
+			var filteredGroupModels = new List<QuizPassGroupReportModel>();
+			filteredGroupModels.AddRange(_filterControl.EnableFilter ?
 				_groupRecords.Where(g => _filterControl.SelectedGroups.Contains(g.group) && (g.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))) :
 				_groupRecords);
-			var totalPage = new TotalControl(filteredGroupRecords, StartDate, EndDate);
+			var totalPage = new TotalControl(filteredGroupModels, StartDate, EndDate);
 			xtraTabControlGroups.TabPages.Add(totalPage);
 
-			var filteredUserRecords = new List<QuizPassUserReportRecord>();
-			filteredUserRecords.AddRange(_filterControl.EnableFilter ?
+			var filteredUserModels = new List<QuizPassUserReportModel>();
+			filteredUserModels.AddRange(_filterControl.EnableFilter ?
 				_userRecords.Where(g => _filterControl.SelectedGroups.Contains(g.group) && (g.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))) :
 				_userRecords);
-			foreach (var group in filteredUserRecords.OrderBy(r => r.group).Select(r => r.group).Distinct())
+			foreach (var group in filteredUserModels.OrderBy(r => r.group).Select(r => r.group).Distinct())
 			{
-				var groupPage = new GroupControl(filteredUserRecords.Where(r => r.group == group), StartDate, EndDate) { GroupName = group };
+				var groupPage = new GroupControl(filteredUserModels.Where(r => r.group == group), StartDate, EndDate) { GroupName = group };
 				xtraTabControlGroups.TabPages.Add(groupPage);
 			}
 		}

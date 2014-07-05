@@ -30,8 +30,10 @@
         {
 			this.gridControlData = new DevExpress.XtraGrid.GridControl();
 			this.advBandedGridViewData = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
-			this.gridBandMain = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+			this.gridBandUser = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnUser = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridColumnTestPassed = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+			this.gridBandGroup = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
 			this.gridColumnGroup = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
 			this.repositoryItemDateEditDate = new DevExpress.XtraEditors.Repository.RepositoryItemDateEdit();
 			this.repositoryItemSpinEditNumeric = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
@@ -90,10 +92,12 @@
 			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.advBandedGridViewData.AppearancePrint.HeaderPanel.Options.UseFont = true;
 			this.advBandedGridViewData.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.gridBandMain});
+            this.gridBandUser,
+            this.gridBandGroup});
 			this.advBandedGridViewData.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
             this.gridColumnUser,
-            this.gridColumnGroup});
+            this.gridColumnGroup,
+            this.gridColumnTestPassed});
 			this.advBandedGridViewData.GridControl = this.gridControlData;
 			this.advBandedGridViewData.Name = "advBandedGridViewData";
 			this.advBandedGridViewData.OptionsBehavior.Editable = false;
@@ -109,7 +113,7 @@
 			this.advBandedGridViewData.OptionsMenu.ShowAutoFilterRowItem = false;
 			this.advBandedGridViewData.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
 			this.advBandedGridViewData.OptionsMenu.ShowGroupSortSummaryItems = false;
-			this.advBandedGridViewData.OptionsPrint.PrintBandHeader = false;
+			this.advBandedGridViewData.OptionsPrint.PrintHeader = false;
 			this.advBandedGridViewData.OptionsPrint.PrintPreview = true;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceFocusedCell = false;
 			this.advBandedGridViewData.OptionsSelection.EnableAppearanceHideSelection = false;
@@ -117,7 +121,7 @@
 			this.advBandedGridViewData.OptionsView.ColumnAutoWidth = true;
 			this.advBandedGridViewData.OptionsView.EnableAppearanceEvenRow = true;
 			this.advBandedGridViewData.OptionsView.EnableAppearanceOddRow = true;
-			this.advBandedGridViewData.OptionsView.ShowBands = false;
+			this.advBandedGridViewData.OptionsView.ShowColumnHeaders = false;
 			this.advBandedGridViewData.OptionsView.ShowDetailButtons = false;
 			this.advBandedGridViewData.OptionsView.ShowGroupExpandCollapseButtons = false;
 			this.advBandedGridViewData.OptionsView.ShowGroupPanel = false;
@@ -127,13 +131,14 @@
 			this.advBandedGridViewData.PreviewIndent = 20;
 			this.advBandedGridViewData.RowSeparatorHeight = 10;
 			// 
-			// gridBandMain
+			// gridBandUser
 			// 
-			this.gridBandMain.Columns.Add(this.gridColumnUser);
-			this.gridBandMain.Columns.Add(this.gridColumnGroup);
-			this.gridBandMain.MinWidth = 20;
-			this.gridBandMain.Name = "gridBandMain";
-			this.gridBandMain.Width = 352;
+			this.gridBandUser.Caption = "User:";
+			this.gridBandUser.Columns.Add(this.gridColumnUser);
+			this.gridBandUser.Columns.Add(this.gridColumnTestPassed);
+			this.gridBandUser.MinWidth = 20;
+			this.gridBandUser.Name = "gridBandUser";
+			this.gridBandUser.Width = 255;
 			// 
 			// gridColumnUser
 			// 
@@ -143,7 +148,28 @@
 			this.gridColumnUser.FieldName = "FullName";
 			this.gridColumnUser.Name = "gridColumnUser";
 			this.gridColumnUser.Visible = true;
-			this.gridColumnUser.Width = 180;
+			this.gridColumnUser.Width = 141;
+			// 
+			// gridColumnTestPassed
+			// 
+			this.gridColumnTestPassed.AppearanceCell.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.gridColumnTestPassed.AppearanceCell.ForeColor = System.Drawing.Color.Red;
+			this.gridColumnTestPassed.AppearanceCell.Options.UseFont = true;
+			this.gridColumnTestPassed.AppearanceCell.Options.UseForeColor = true;
+			this.gridColumnTestPassed.AppearanceCell.Options.UseTextOptions = true;
+			this.gridColumnTestPassed.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+			this.gridColumnTestPassed.Caption = "Test Passed:";
+			this.gridColumnTestPassed.FieldName = "TotalPassed";
+			this.gridColumnTestPassed.Name = "gridColumnTestPassed";
+			this.gridColumnTestPassed.Visible = true;
+			this.gridColumnTestPassed.Width = 114;
+			// 
+			// gridBandGroup
+			// 
+			this.gridBandGroup.Caption = "Group:";
+			this.gridBandGroup.Columns.Add(this.gridColumnGroup);
+			this.gridBandGroup.Name = "gridBandGroup";
+			this.gridBandGroup.Width = 172;
 			// 
 			// gridColumnGroup
 			// 
@@ -192,8 +218,6 @@
 			// 
 			// GroupControl
 			// 
-			this.Appearance.PageClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(216)))), ((int)(((byte)(228)))), ((int)(((byte)(242)))));
-			this.Appearance.PageClient.Options.UseBackColor = true;
 			this.Controls.Add(this.gridControlData);
 			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -215,8 +239,10 @@
 		private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView advBandedGridViewData;
 		private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEditNumeric;
 		private DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit repositoryItemSpinEditPercent;
-		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandMain;
 		public DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnUser;
 		public DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnGroup;
+		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandUser;
+		private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn gridColumnTestPassed;
+		private DevExpress.XtraGrid.Views.BandedGrid.GridBand gridBandGroup;
     }
 }

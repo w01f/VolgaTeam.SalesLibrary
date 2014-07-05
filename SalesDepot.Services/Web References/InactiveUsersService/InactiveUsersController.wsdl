@@ -2,14 +2,14 @@
 <wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:InactiveusersControllerwsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns="http://schemas.xmlsoap.org/wsdl/" name="InactiveusersController" targetNamespace="urn:InactiveusersControllerwsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="urn:InactiveusersControllerwsdl">
-      <xsd:complexType name="UserRecordArray">
+      <xsd:complexType name="UserModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:UserRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:UserModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="UserRecord">
+      <xsd:complexType name="UserModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:int" />
           <xsd:element name="login" type="xsd:string" />
@@ -18,27 +18,28 @@
           <xsd:element name="lastName" type="xsd:string" />
           <xsd:element name="email" type="xsd:string" />
           <xsd:element name="phone" type="xsd:string" />
+          <xsd:element name="role" type="xsd:int" />
           <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="groupNames" type="xsd:string" />
           <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="GroupRecordArray">
+      <xsd:complexType name="GroupModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:GroupRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:GroupModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="GroupRecord">
+      <xsd:complexType name="GroupModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserRecordArray" />
+          <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
@@ -81,9 +82,9 @@
           <xsd:element name="columns" type="tns:ColumnArray" />
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserRecordArray" />
+          <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
@@ -171,6 +172,7 @@
           <xsd:element name="enableFileCard" type="xsd:boolean" />
           <xsd:element name="fileCard" type="tns:FileCard" />
           <xsd:element name="previewId" type="xsd:string" />
+          <xsd:element name="superFilters" type="tns:LinkSuperFilterArray" />
           <xsd:element name="categories" type="tns:LinkCategoryArray" />
           <xsd:element name="tags" type="xsd:string" />
           <xsd:element name="dateAdd" type="xsd:string" />
@@ -179,6 +181,7 @@
           <xsd:element name="enableAttachments" type="xsd:boolean" />
           <xsd:element name="attachments" type="tns:AttachmentArray" />
           <xsd:element name="isRestricted" type="xsd:boolean" />
+          <xsd:element name="noShare" type="xsd:boolean" />
           <xsd:element name="assignedUsers" type="xsd:string" />
           <xsd:element name="isDead" type="xsd:boolean" />
           <xsd:element name="isPreviewNotReady" type="xsd:boolean" />
@@ -218,6 +221,20 @@
             <xsd:attribute wsdl:arrayType="xsd:string[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkSuperFilterArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="soap-enc:Array">
+            <xsd:attribute wsdl:arrayType="tns:LinkSuperFilter[]" ref="soap-enc:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="LinkSuperFilter">
+        <xsd:all>
+          <xsd:element name="linkId" type="xsd:string" />
+          <xsd:element name="libraryId" type="xsd:string" />
+          <xsd:element name="value" type="xsd:string" />
+        </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="LinkCategoryArray">
         <xsd:complexContent mixed="false">
@@ -343,7 +360,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getInactiveUsersResponse">
-    <wsdl:part name="return" type="tns:UserRecordArray" />
+    <wsdl:part name="return" type="tns:UserModelArray" />
   </wsdl:message>
   <wsdl:message name="resetUsersRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />

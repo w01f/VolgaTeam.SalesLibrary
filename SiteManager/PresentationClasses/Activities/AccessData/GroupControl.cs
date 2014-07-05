@@ -19,7 +19,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.AccessData
 		private readonly DateTime _endDate;
 		private bool _showActive;
 		private bool _showInactive;
-		public List<AccessReportRecord> Records { get; private set; }
+		public List<AccessReportModel> Records { get; private set; }
 		public PrintableComponentLink PrintLink { get; private set; }
 
 		private string _groupName;
@@ -33,11 +33,11 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.AccessData
 			}
 		}
 
-		public GroupControl(IEnumerable<AccessReportRecord> records, DateTime startDate, DateTime endDate)
+		public GroupControl(IEnumerable<AccessReportModel> records, DateTime startDate, DateTime endDate)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
-			Records = new List<AccessReportRecord>();
+			Records = new List<AccessReportModel>();
 			Records.AddRange(records);
 
 			_startDate = startDate;
@@ -84,7 +84,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.AccessData
 
 		private void advBandedGridViewData_CalcPreviewText(object sender, DevExpress.XtraGrid.Views.Grid.CalcPreviewTextEventArgs e)
 		{
-			var record = advBandedGridViewData.GetRow(e.RowHandle) as AccessReportRecord;
+			var record = advBandedGridViewData.GetRow(e.RowHandle) as AccessReportModel;
 			if (record == null) return;
 			var result = new StringBuilder();
 			if (!string.IsNullOrEmpty(record.activeNames) && _showActive)

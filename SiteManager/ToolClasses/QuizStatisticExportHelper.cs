@@ -14,8 +14,8 @@ namespace SalesDepot.SiteManager.ToolClasses{
 			string group,
 			int totalUsers,
 			int totalGroups,
-			IEnumerable<QuizPassGroupReportRecord> totalStatistic,
-			IEnumerable<IEnumerable<QuizPassUserReportRecord>> groupStatistic)
+			IEnumerable<QuizPassGroupReportModel> totalStatistic,
+			IEnumerable<IEnumerable<QuizPassUserReportModel>> groupStatistic)
 		{
 			try
 			{
@@ -54,7 +54,7 @@ namespace SalesDepot.SiteManager.ToolClasses{
 		}
 
 
-		private static void FillSummaryPage(Worksheet sheet, string header, string topLevelGroup, int totalUsers, int totalGroups, string updated, IEnumerable<QuizPassGroupReportRecord> totalRecords)
+		private static void FillSummaryPage(Worksheet sheet, string header, string topLevelGroup, int totalUsers, int totalGroups, string updated, IEnumerable<QuizPassGroupReportModel> totalRecords)
 		{
 			const string takenHeader = "TAKEN:";
 			const string passedHeader = "PASSED:";
@@ -256,7 +256,7 @@ namespace SalesDepot.SiteManager.ToolClasses{
 			sheet.Outline.ShowLevels(1);
 		}
 
-		private static void FillGroupPage(Worksheet sheet, string header, string topLevelGroup, string updated, IEnumerable<QuizPassUserReportRecord> groupRecords)
+		private static void FillGroupPage(Worksheet sheet, string header, string topLevelGroup, string updated, IEnumerable<QuizPassUserReportModel> groupRecords)
 		{
 			const string takenHeader = "TAKEN:";
 			const string passedHeader = "PASSED:";

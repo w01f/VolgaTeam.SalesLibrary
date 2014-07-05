@@ -66,10 +66,10 @@ namespace SalesDepot.Services
 			return pageLogos.ToArray();
 		}
 
-		public QPageRecord[] GetAllPages(out string message)
+		public QPageModel[] GetAllPages(out string message)
 		{
 			message = string.Empty;
-			var pages = new List<QPageRecord>();
+			var pages = new List<QPageModel>();
 			var client = GetQBuilderClient();
 			if (client != null)
 			{
@@ -77,7 +77,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						pages.AddRange(client.getAllPages(sessionKey) ?? new QPageRecord[] { });
+						pages.AddRange(client.getAllPages(sessionKey) ?? new QPageModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -91,10 +91,10 @@ namespace SalesDepot.Services
 			return pages.ToArray();
 		}
 
-		public QPageRecord[] GetPagesByUser(out string message)
+		public QPageModel[] GetPagesByUser(out string message)
 		{
 			message = string.Empty;
-			var pages = new List<QPageRecord>();
+			var pages = new List<QPageModel>();
 			var client = GetQBuilderClient();
 			if (client != null)
 			{
@@ -102,7 +102,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						pages.AddRange(client.getPagesByUser(sessionKey, _login) ?? new QPageRecord[] { });
+						pages.AddRange(client.getPagesByUser(sessionKey, _login) ?? new QPageModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -116,10 +116,10 @@ namespace SalesDepot.Services
 			return pages.ToArray();
 		}
 
-		public QPageLinkRecord[] GetLinkCart(out string message)
+		public QPageLinkModel[] GetLinkCart(out string message)
 		{
 			message = string.Empty;
-			var links = new List<QPageLinkRecord>();
+			var links = new List<QPageLinkModel>();
 			var client = GetQBuilderClient();
 			if (client != null)
 			{
@@ -127,7 +127,7 @@ namespace SalesDepot.Services
 				{
 					var sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						links.AddRange(client.getLinkCart(sessionKey, _login) ?? new QPageLinkRecord[] { });
+						links.AddRange(client.getLinkCart(sessionKey, _login) ?? new QPageLinkModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -283,11 +283,11 @@ namespace SalesDepot.Services
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
 
-		public QPageRecord GetPageContent(string pageId, out string message)
+		public QPageModel GetPageContent(string pageId, out string message)
 		{
 			message = string.Empty;
 			var client = GetQBuilderClient();
-			QPageRecord result = null;
+			QPageModel result = null;
 			if (client != null)
 			{
 				try

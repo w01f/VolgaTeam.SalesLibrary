@@ -8,20 +8,20 @@ namespace SalesDepot.SiteManager.ToolForms
 {
 	public partial class FormEditPage : Form
 	{
-		private List<UserRecord> _users = new List<UserRecord>();
-		private List<GroupRecord> _groups = new List<GroupRecord>();
+		private List<UserModel> _users = new List<UserModel>();
+		private List<GroupModel> _groups = new List<GroupModel>();
 		
-		public UserRecord[] AssignedUsers
+		public UserModel[] AssignedUsers
 		{
 			get { return _users.Where(x => x.selected).ToArray(); }
 		}
 
-		public GroupRecord[] AssignedGroups
+		public GroupModel[] AssignedGroups
 		{
 			get { return _groups.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditPage(UserRecord[] users, GroupRecord[] groups)
+		public FormEditPage(UserModel[] users, GroupModel[] groups)
 		{
 			InitializeComponent();
 			_users.AddRange(users);

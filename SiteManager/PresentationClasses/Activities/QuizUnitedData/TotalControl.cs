@@ -16,13 +16,13 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizUnitedData
 	//public partial class TotalControl : UserControl
 	public partial class TotalControl : XtraTabPage
 	{
-		public List<QuizPassGroupReportRecord> Records { get; private set; }
+		public List<QuizPassGroupReportModel> Records { get; private set; }
 		private readonly int _quizCount;
 
-		public TotalControl(IEnumerable<QuizPassGroupReportRecord> records, int quizCount)
+		public TotalControl(IEnumerable<QuizPassGroupReportModel> records, int quizCount)
 		{
 			InitializeComponent();
-			Records = new List<QuizPassGroupReportRecord>();
+			Records = new List<QuizPassGroupReportModel>();
 			Records.AddRange(records.OrderBy(r => r.group));
 			_quizCount = quizCount;
 			gridControlData.DataSource = Records;
@@ -56,8 +56,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizUnitedData
 		private void gridViewData_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
 		{
 			if (e.Column != gridColumnQuiz) return;
-			var record1 = e.RowObject1 as QuizPassGroupReportRecord;
-			var record2 = e.RowObject1 as QuizPassGroupReportRecord;
+			var record1 = e.RowObject1 as QuizPassGroupReportModel;
+			var record2 = e.RowObject1 as QuizPassGroupReportModel;
 			if (record1 == null || !record1.Date.HasValue || record2 == null || !record2.Date.HasValue) return;
 			e.Handled = true;
 			e.Result = record1.Date.Value.CompareTo(record2.Date.Value);

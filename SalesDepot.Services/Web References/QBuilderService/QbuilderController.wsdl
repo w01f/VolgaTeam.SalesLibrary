@@ -9,14 +9,14 @@
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="QPageRecordArray">
+      <xsd:complexType name="QPageModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:QPageRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:QPageModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="QPageRecord">
+      <xsd:complexType name="QPageModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="title" type="xsd:string" />
@@ -35,7 +35,7 @@
           <xsd:element name="pinCode" type="xsd:string" />
           <xsd:element name="activityEmailCopy" type="xsd:string" />
           <xsd:element name="logo" type="xsd:string" />
-          <xsd:element name="links" type="tns:QPageLinkRecordArray" />
+          <xsd:element name="links" type="tns:QPageLinkModelArray" />
           <xsd:element name="login" type="xsd:string" />
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
@@ -43,14 +43,14 @@
           <xsd:element name="groups" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="QPageLinkRecordArray">
+      <xsd:complexType name="QPageLinkModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:QPageLinkRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:QPageLinkModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="QPageLinkRecord">
+      <xsd:complexType name="QPageLinkModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="parentId" type="xsd:string" />
@@ -81,28 +81,28 @@
     <wsdl:part name="sessionKey" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getAllPagesResponse">
-    <wsdl:part name="return" type="tns:QPageRecordArray" />
+    <wsdl:part name="return" type="tns:QPageModelArray" />
   </wsdl:message>
   <wsdl:message name="getPagesByUserRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="login" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getPagesByUserResponse">
-    <wsdl:part name="return" type="tns:QPageRecordArray" />
+    <wsdl:part name="return" type="tns:QPageModelArray" />
   </wsdl:message>
   <wsdl:message name="getPageContentRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="pageId" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getPageContentResponse">
-    <wsdl:part name="return" type="tns:QPageRecord" />
+    <wsdl:part name="return" type="tns:QPageModel" />
   </wsdl:message>
   <wsdl:message name="getLinkCartRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
     <wsdl:part name="login" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getLinkCartResponse">
-    <wsdl:part name="return" type="tns:QPageLinkRecordArray" />
+    <wsdl:part name="return" type="tns:QPageLinkModelArray" />
   </wsdl:message>
   <wsdl:message name="isLinkAvailableRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />

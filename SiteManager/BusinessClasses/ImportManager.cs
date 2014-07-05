@@ -12,11 +12,11 @@ namespace SalesDepot.SiteManager.BusinessClasses
 {
 	public class ImportManager
 	{
-		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserRecord[] existedUsers, GroupRecord[] existedGroups, bool complexPassword, out string message)
+		public static IEnumerable<UserInfo> ImportUsers(string filePath, UserModel[] existedUsers, GroupModel[] existedGroups, bool complexPassword, out string message)
 		{
 			message = string.Empty;
 			var userInfo = new List<UserInfo>();
-			var existedGroupList = new List<GroupRecord>(existedGroups);
+			var existedGroupList = new List<GroupModel>(existedGroups);
 			var existedUserLogins = new List<string>(existedUsers.Select(x => x.login));
 
 			var connnectionString = string.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=""Excel 12.0;HDR=Yes;IMEX=1"";", filePath);
@@ -58,7 +58,7 @@ namespace SalesDepot.SiteManager.BusinessClasses
 						var group = existedGroupList.FirstOrDefault(x => x.name.ToLower().Equals(groupName.Trim().ToLower()));
 						if (group == null)
 						{
-							group = new GroupRecord();
+							group = new GroupModel();
 							group.IsNew = true;
 							group.id = Guid.NewGuid().ToString();
 							group.name = groupName.Trim();

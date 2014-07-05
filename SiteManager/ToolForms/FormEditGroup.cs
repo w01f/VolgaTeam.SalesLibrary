@@ -18,9 +18,9 @@ namespace SalesDepot.SiteManager.ToolForms
 		private readonly List<Library> _libraries = new List<Library>();
 		private readonly bool _newGroup;
 		private readonly List<LibraryPage> _pages = new List<LibraryPage>();
-		private readonly List<UserRecord> _users = new List<UserRecord>();
+		private readonly List<UserModel> _users = new List<UserModel>();
 
-		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserRecord[] users, Library[] libraries)
+		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserModel[] users, Library[] libraries)
 		{
 			InitializeComponent();
 
@@ -52,7 +52,7 @@ namespace SalesDepot.SiteManager.ToolForms
 				Text = "Edit Group";
 		}
 
-		public UserRecord[] AssignedUsers
+		public UserModel[] AssignedUsers
 		{
 			get { return _users.Where(x => x.selected).ToArray(); }
 		}
@@ -172,14 +172,14 @@ namespace SalesDepot.SiteManager.ToolForms
 		#region Users
 		private void buttonXUsersSelectAll_Click(object sender, EventArgs e)
 		{
-			foreach (UserRecord user in _users)
+			foreach (UserModel user in _users)
 				user.selected = true;
 			gridViewUsers.RefreshData();
 		}
 
 		private void buttonXUsersClearAll_Click(object sender, EventArgs e)
 		{
-			foreach (UserRecord user in _users)
+			foreach (UserModel user in _users)
 				user.selected = false;
 			gridViewUsers.RefreshData();
 		}

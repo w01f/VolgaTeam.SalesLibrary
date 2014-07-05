@@ -16,7 +16,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizPassData
 	{
 		private readonly DateTime _startDate;
 		private readonly DateTime _endDate;
-		public List<QuizPassGroupReportRecord> Records { get; private set; }
+		public List<QuizPassGroupReportModel> Records { get; private set; }
 		public PrintableComponentLink PrintLink { get; private set; }
 
 		public string GroupName
@@ -24,12 +24,12 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizPassData
 			get { return Text; }
 		}
 
-		public TotalControl(IEnumerable<QuizPassGroupReportRecord> records, DateTime startDate, DateTime endDate)
+		public TotalControl(IEnumerable<QuizPassGroupReportModel> records, DateTime startDate, DateTime endDate)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 			Text = "Total Summary";
-			Records = new List<QuizPassGroupReportRecord>();
+			Records = new List<QuizPassGroupReportModel>();
 			Records.AddRange(records);
 
 			_startDate = startDate;

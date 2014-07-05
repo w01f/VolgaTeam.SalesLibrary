@@ -17,11 +17,11 @@ namespace SalesDepot.SiteManager.ToolForms
 		private bool _complexPassword = true;
 		private List<string> _existedUsers = new List<string>();
 
-		private List<GroupRecord> _groups = new List<GroupRecord>();
+		private List<GroupModel> _groups = new List<GroupModel>();
 		private List<Library> _libraries = new List<Library>();
 		private List<LibraryPage> _pages = new List<LibraryPage>();
 
-		public GroupRecord[] AssignedGroups
+		public GroupModel[] AssignedGroups
 		{
 			get { return _groups.Where(x => x.selected).ToArray(); }
 		}
@@ -31,7 +31,7 @@ namespace SalesDepot.SiteManager.ToolForms
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, GroupRecord[] groups, Library[] libraries)
+		public FormEditUser(bool newUser, bool complexPassword, string[] existedUsers, GroupModel[] groups, Library[] libraries)
 		{
 			InitializeComponent();
 

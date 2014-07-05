@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace SalesDepot.Services.IPadAdminService
 {
@@ -13,12 +10,12 @@ namespace SalesDepot.Services.IPadAdminService
 		public string LastName { get; set; }
 		public string Email { get; set; }
 		public string Phone { get; set; }
-		public List<GroupRecord> Groups { get; private set; }
+		public List<GroupModel> Groups { get; private set; }
 		public List<LibraryPage> Pages { get; private set; }
 
 		public UserInfo()
 		{
-			Groups = new List<GroupRecord>();
+			Groups = new List<GroupModel>();
 			Pages = new List<LibraryPage>();
 		}
 	}

@@ -27,13 +27,13 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="StatisticControllerBinding", Namespace="urn:StatisticControllerwsdl")]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassGroupReportRecord))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassUserReportRecord))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(AccessReportRecord))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationGroupReportRecord))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationUserReportRecord))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainGroupReportRecord))]
-    [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainUserReportRecord))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassGroupReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(QuizPassUserReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(AccessReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationGroupReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(NavigationUserReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainGroupReportModel))]
+    [System.Xml.Serialization.SoapIncludeAttribute(typeof(MainUserReportModel))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(ActivityDetail))]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(UserActivity))]
     public partial class StatisticControllerService : System.Web.Services.Protocols.SoapHttpClientProtocol {
@@ -190,12 +190,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getMainUserReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public MainUserReportRecord[] getMainUserReport(string sessionKey, string dateStart, string dateEnd) {
+        public MainUserReportModel[] getMainUserReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getMainUserReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((MainUserReportRecord[])(results[0]));
+            return ((MainUserReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -224,12 +224,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getMainGroupReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public MainGroupReportRecord[] getMainGroupReport(string sessionKey, string dateStart, string dateEnd) {
+        public MainGroupReportModel[] getMainGroupReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getMainGroupReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((MainGroupReportRecord[])(results[0]));
+            return ((MainGroupReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -258,12 +258,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getNavigationUserReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public NavigationUserReportRecord[] getNavigationUserReport(string sessionKey, string dateStart, string dateEnd) {
+        public NavigationUserReportModel[] getNavigationUserReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getNavigationUserReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((NavigationUserReportRecord[])(results[0]));
+            return ((NavigationUserReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -292,12 +292,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getNavigationGroupReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public NavigationGroupReportRecord[] getNavigationGroupReport(string sessionKey, string dateStart, string dateEnd) {
+        public NavigationGroupReportModel[] getNavigationGroupReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getNavigationGroupReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((NavigationGroupReportRecord[])(results[0]));
+            return ((NavigationGroupReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -326,12 +326,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getAccessReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public AccessReportRecord[] getAccessReport(string sessionKey, string dateStart, string dateEnd) {
+        public AccessReportModel[] getAccessReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getAccessReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((AccessReportRecord[])(results[0]));
+            return ((AccessReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -360,12 +360,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getQuizPassUserReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public QuizPassUserReportRecord[] getQuizPassUserReport(string sessionKey, string dateStart, string dateEnd) {
+        public QuizPassUserReportModel[] getQuizPassUserReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getQuizPassUserReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((QuizPassUserReportRecord[])(results[0]));
+            return ((QuizPassUserReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -394,12 +394,12 @@ namespace SalesDepot.Services.StatisticService {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("urn:StatisticControllerwsdl#getQuizPassGroupReport", RequestNamespace="urn:StatisticControllerwsdl", ResponseNamespace="urn:StatisticControllerwsdl")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public QuizPassGroupReportRecord[] getQuizPassGroupReport(string sessionKey, string dateStart, string dateEnd) {
+        public QuizPassGroupReportModel[] getQuizPassGroupReport(string sessionKey, string dateStart, string dateEnd) {
             object[] results = this.Invoke("getQuizPassGroupReport", new object[] {
                         sessionKey,
                         dateStart,
                         dateEnd});
-            return ((QuizPassGroupReportRecord[])(results[0]));
+            return ((QuizPassGroupReportModel[])(results[0]));
         }
         
         /// <remarks/>
@@ -672,7 +672,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class QuizPassGroupReportRecord {
+    public partial class QuizPassGroupReportModel {
         
         private string groupField;
         
@@ -729,7 +729,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class QuizPassUserReportRecord {
+    public partial class QuizPassUserReportModel {
         
         private string firstNameField;
         
@@ -822,7 +822,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class AccessReportRecord {
+    public partial class AccessReportModel {
         
         private string nameField;
         
@@ -903,7 +903,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class NavigationGroupReportRecord {
+    public partial class NavigationGroupReportModel {
         
         private string nameField;
         
@@ -960,7 +960,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class NavigationUserReportRecord {
+    public partial class NavigationUserReportModel {
         
         private string firstNameField;
         
@@ -1089,7 +1089,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class MainGroupReportRecord {
+    public partial class MainGroupReportModel {
         
         private string nameField;
         
@@ -1158,7 +1158,7 @@ namespace SalesDepot.Services.StatisticService {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:StatisticControllerwsdl")]
-    public partial class MainUserReportRecord {
+    public partial class MainUserReportModel {
         
         private string firstNameField;
         
@@ -1375,10 +1375,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public MainUserReportRecord[] Result {
+        public MainUserReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((MainUserReportRecord[])(this.results[0]));
+                return ((MainUserReportModel[])(this.results[0]));
             }
         }
     }
@@ -1401,10 +1401,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public MainGroupReportRecord[] Result {
+        public MainGroupReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((MainGroupReportRecord[])(this.results[0]));
+                return ((MainGroupReportModel[])(this.results[0]));
             }
         }
     }
@@ -1427,10 +1427,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public NavigationUserReportRecord[] Result {
+        public NavigationUserReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((NavigationUserReportRecord[])(this.results[0]));
+                return ((NavigationUserReportModel[])(this.results[0]));
             }
         }
     }
@@ -1453,10 +1453,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public NavigationGroupReportRecord[] Result {
+        public NavigationGroupReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((NavigationGroupReportRecord[])(this.results[0]));
+                return ((NavigationGroupReportModel[])(this.results[0]));
             }
         }
     }
@@ -1479,10 +1479,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public AccessReportRecord[] Result {
+        public AccessReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((AccessReportRecord[])(this.results[0]));
+                return ((AccessReportModel[])(this.results[0]));
             }
         }
     }
@@ -1505,10 +1505,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public QuizPassUserReportRecord[] Result {
+        public QuizPassUserReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((QuizPassUserReportRecord[])(this.results[0]));
+                return ((QuizPassUserReportModel[])(this.results[0]));
             }
         }
     }
@@ -1531,10 +1531,10 @@ namespace SalesDepot.Services.StatisticService {
         }
         
         /// <remarks/>
-        public QuizPassGroupReportRecord[] Result {
+        public QuizPassGroupReportModel[] Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((QuizPassGroupReportRecord[])(this.results[0]));
+                return ((QuizPassGroupReportModel[])(this.results[0]));
             }
         }
     }

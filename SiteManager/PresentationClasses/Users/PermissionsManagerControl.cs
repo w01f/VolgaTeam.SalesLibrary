@@ -19,9 +19,9 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 	public sealed partial class PermissionsManagerControl : UserControl
 	{
 		private readonly List<string> _groupTemplates = new List<string>();
-		private readonly List<GroupRecord> _groups = new List<GroupRecord>();
+		private readonly List<GroupModel> _groups = new List<GroupModel>();
 		private readonly List<Library> _libraries = new List<Library>();
-		private readonly List<UserRecord> _users = new List<UserRecord>();
+		private readonly List<UserModel> _users = new List<UserModel>();
 		private bool _complexPassword = true;
 		private bool _groupsCollectionChanged;
 		private bool _libraraiesCollectionChanged;
@@ -243,7 +243,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 				}
 			}
 			updateMessage = message;
-			UpdateFilter(_users.SelectMany(x => x.groups != null ? x.groups : new GroupRecord[] { }).OrderBy(g => g.name).Select(g => g.name).Distinct().ToArray());
+			UpdateFilter(_users.SelectMany(x => x.groups != null ? x.groups : new GroupModel[] { }).OrderBy(g => g.name).Select(g => g.name).Distinct().ToArray());
 			FilterUsers();
 			_userCollectionChanged = false;
 		}
@@ -251,7 +251,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		public void AddUser()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupRecord { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupModel { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
@@ -262,7 +262,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					int role = 0;
-					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+					var groups = new List<GroupModel>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
@@ -297,10 +297,10 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		public void EditUser()
 		{
 			string message = string.Empty;
-			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
+			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
 			if (userRecord == null) return;
 			using (var formEdit = new FormEditUser(false, _complexPassword, _users.Select(x => x.login).ToArray(),
-												   _groups.Select(x => new GroupRecord
+												   _groups.Select(x => new GroupModel
 																	   {
 																		   id = x.id,
 																		   name = x.name,
@@ -335,7 +335,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var role = 0;
-					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+					var groups = new List<GroupModel>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
@@ -369,7 +369,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 
 		public void DeleteUser()
 		{
-			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
+			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
 			if (userRecord == null || AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) != DialogResult.Yes) return;
 			string message = string.Empty;
 			using (var form = new FormProgress())
@@ -418,7 +418,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 
 		private void FilterUsers()
 		{
-			var filteredRecords = new List<UserRecord>();
+			var filteredRecords = new List<UserModel>();
 			filteredRecords.AddRange(checkEditEnableUserFilter.Checked ? _users.Where(x => x.groups != null && x.groups.Any(y => _userFilterSelectedGroups.Contains(y.name))) : _users);
 			gridControlUsers.DataSource = filteredRecords;
 			UpdateControlsState();
@@ -536,13 +536,13 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		private void AddGroup()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserRecord { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserModel { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
 					string id = Guid.NewGuid().ToString();
 					string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
-					var users = new List<UserRecord>(formEdit.AssignedUsers);
+					var users = new List<UserModel>(formEdit.AssignedUsers);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
@@ -577,13 +577,13 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 		private void EditGroup()
 		{
 			string message = string.Empty;
-			var groupRecord = gridViewGroups.GetFocusedRow() as GroupRecord;
+			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
 			if (groupRecord != null)
 			{
 				using (var formEdit = new FormEditGroup(false,
 														_groupTemplates.ToArray(),
 														_groups.Where(x => !x.name.Equals(groupRecord.name)).Select(x => x.name).ToArray(),
-														_users.Select(x => new UserRecord
+														_users.Select(x => new UserModel
 																		   {
 																			   id = x.id,
 																			   login = x.login,
@@ -611,7 +611,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					{
 						string id = groupRecord.id;
 						string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
-						var users = new List<UserRecord>(formEdit.AssignedUsers);
+						var users = new List<UserModel>(formEdit.AssignedUsers);
 						var pages = new List<LibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
 						{
@@ -646,7 +646,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 
 		private void DeleteGroup()
 		{
-			var groupRecord = gridViewGroups.GetFocusedRow() as GroupRecord;
+			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
 			if (groupRecord != null && AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete group {0}?", groupRecord.name)) == DialogResult.Yes)
 			{
 				string message = string.Empty;
@@ -745,7 +745,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 			var pageRecord = gridViewPages.GetFocusedRow() as LibraryPage;
 			if (pageRecord != null)
 			{
-				using (var formEdit = new FormEditPage(_users.Select(x => new UserRecord
+				using (var formEdit = new FormEditPage(_users.Select(x => new UserModel
 																		  {
 																			  id = x.id,
 																			  login = x.login,
@@ -754,7 +754,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 																			  email = x.email,
 																			  selected = (pageRecord.users != null && pageRecord.users.Any(y => y.id == x.id))
 																		  }).ToArray(),
-													   _groups.Select(x => new GroupRecord
+													   _groups.Select(x => new GroupModel
 																		   {
 																			   id = x.id,
 																			   name = x.name,
@@ -766,8 +766,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Users
 					formEdit.checkEditapplyForLibrary.Text = string.Format(formEdit.checkEditapplyForLibrary.Text, pageRecord.libraryName);
 					if (formEdit.ShowDialog() == DialogResult.OK)
 					{
-						var users = new List<UserRecord>(formEdit.AssignedUsers);
-						var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+						var users = new List<UserModel>(formEdit.AssignedUsers);
+						var groups = new List<GroupModel>(formEdit.AssignedGroups);
 						bool allLibrary = formEdit.checkEditapplyForLibrary.Checked;
 						using (var form = new FormProgress())
 						{

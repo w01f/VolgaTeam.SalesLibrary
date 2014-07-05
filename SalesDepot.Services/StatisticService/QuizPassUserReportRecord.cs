@@ -36,6 +36,7 @@ namespace SalesDepot.Services.StatisticService
 		}
 
 		public string QuizzesPassed { get; set; }
+		public string TotalPassed { get; set; }
 
 		public DateTime? QuizPassDate
 		{

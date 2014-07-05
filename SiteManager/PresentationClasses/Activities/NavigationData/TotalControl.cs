@@ -17,7 +17,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.NavigationData
 	{
 		private readonly DateTime _startDate;
 		private readonly DateTime _endDate;
-		public List<NavigationGroupReportRecord> Records { get; private set; }
+		public List<NavigationGroupReportModel> Records { get; private set; }
 		public PrintableComponentLink PrintLink { get; private set; }
 
 		public string GroupName
@@ -25,14 +25,14 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.NavigationData
 			get { return Text; }
 		}
 
-		public TotalControl(IEnumerable<NavigationGroupReportRecord> records, DateTime startDate, DateTime endDate)
+		public TotalControl(IEnumerable<NavigationGroupReportModel> records, DateTime startDate, DateTime endDate)
 		{
 			InitializeComponent();
 			Dock = DockStyle.Fill;
 
 			Text = "Total Summary";
 
-			Records = new List<NavigationGroupReportRecord>();
+			Records = new List<NavigationGroupReportModel>();
 			Records.AddRange(records);
 
 			_startDate = startDate;

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using SalesDepot.Services.IPadAdminService;
 using SalesDepot.Services.InactiveUsersService;
-using SalesDepot.Services.QBuilderService;
+using SalesDepot.Services.IPadAdminService;
 using SalesDepot.Services.StatisticService;
 using SalesDepot.Services.TickerService;
-using GroupRecord = SalesDepot.Services.IPadAdminService.GroupRecord;
-using UserRecord = SalesDepot.Services.IPadAdminService.UserRecord;
+using GroupModel = SalesDepot.Services.IPadAdminService.GroupModel;
+using Library = SalesDepot.Services.IPadAdminService.Library;
+using LibraryPage = SalesDepot.Services.IPadAdminService.LibraryPage;
+using UserModel = SalesDepot.Services.IPadAdminService.UserModel;
 
 namespace SalesDepot.Services
 {
@@ -134,7 +135,7 @@ namespace SalesDepot.Services
 		{
 			message = string.Empty;
 			bool result = true;
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
@@ -155,18 +156,18 @@ namespace SalesDepot.Services
 			return result;
 		}
 
-		public UserRecord[] GetUsers(out string message)
+		public UserModel[] GetUsers(out string message)
 		{
 			message = string.Empty;
-			var users = new List<UserRecord>();
+			var users = new List<UserModel>();
 			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						users.AddRange(client.getUsers(sessionKey) ?? new UserRecord[] { });
+						users.AddRange(client.getUsers(sessionKey) ?? new UserModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -180,10 +181,10 @@ namespace SalesDepot.Services
 			return users.ToArray();
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupModel[] groups, LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
@@ -206,18 +207,18 @@ namespace SalesDepot.Services
 		public void SetUsers(UserInfo[] users, out string message)
 		{
 			message = string.Empty;
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
-						var uniqueGroups = users.SelectMany(user => user.Groups).Where(group => group.IsNew).Distinct();
-						foreach (var group in uniqueGroups)
-							client.setGroup(sessionKey, group.id, group.name, new UserRecord[] { }, new Services.IPadAdminService.LibraryPage[] { });
-						foreach (var user in users)
+						IEnumerable<GroupModel> uniqueGroups = users.SelectMany(user => user.Groups).Where(group => group.IsNew).Distinct();
+						foreach (GroupModel group in uniqueGroups)
+							client.setGroup(sessionKey, group.id, group.name, new UserModel[] { }, new LibraryPage[] { });
+						foreach (UserInfo user in users)
 							client.setUser(sessionKey, user.Login, user.Password, user.FirstName, user.LastName, user.Email, user.Phone, user.Groups.ToArray(), user.Pages.ToArray(), 0);
 					}
 					else
@@ -235,7 +236,7 @@ namespace SalesDepot.Services
 		public void DeleteUser(string login, out string message)
 		{
 			message = string.Empty;
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
@@ -257,18 +258,18 @@ namespace SalesDepot.Services
 		#endregion
 
 		#region Groups
-		public GroupRecord[] GetGroups(out string message)
+		public GroupModel[] GetGroups(out string message)
 		{
 			message = string.Empty;
-			var groups = new List<GroupRecord>();
-			var client = GetAdminClient();
+			var groups = new List<GroupModel>();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
 				{
 					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						groups.AddRange(client.getGroups(sessionKey) ?? new GroupRecord[] { });
+						groups.AddRange(client.getGroups(sessionKey) ?? new GroupModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -282,10 +283,10 @@ namespace SalesDepot.Services
 			return groups.ToArray();
 		}
 
-		public void SetGroup(string id, string name, UserRecord[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetGroup(string id, string name, UserModel[] users, LibraryPage[] pages, out string message)
 		{
 			message = string.Empty;
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
@@ -308,7 +309,7 @@ namespace SalesDepot.Services
 		public void DeleteGroup(string id, out string message)
 		{
 			message = string.Empty;
-			var client = GetAdminClient();
+			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
 				try
@@ -355,10 +356,10 @@ namespace SalesDepot.Services
 		#endregion
 
 		#region Libraraies
-		public IPadAdminService.Library[] GetLibraries(out string message)
+		public Library[] GetLibraries(out string message)
 		{
 			message = string.Empty;
-			var libraries = new List<Services.IPadAdminService.Library>();
+			var libraries = new List<Library>();
 			AdminControllerService client = GetAdminClient();
 			if (client != null)
 			{
@@ -366,7 +367,7 @@ namespace SalesDepot.Services
 				{
 					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						libraries.AddRange(client.getLibraries(sessionKey) ?? new Services.IPadAdminService.Library[] { });
+						libraries.AddRange(client.getLibraries(sessionKey) ?? new Library[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -380,7 +381,7 @@ namespace SalesDepot.Services
 			return libraries.ToArray();
 		}
 
-		public void SetPage(string id, UserRecord[] users, GroupRecord[] groups, out string message)
+		public void SetPage(string id, UserModel[] users, GroupModel[] groups, out string message)
 		{
 			message = string.Empty;
 			AdminControllerService client = GetAdminClient();
@@ -409,17 +410,17 @@ namespace SalesDepot.Services
 		{
 			message = string.Empty;
 			var activities = new List<UserActivity>();
-			var client = GetStatisticClient();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
 						while (startDate < endDate)
 						{
-							var nextDate = startDate.AddDays(10);
+							DateTime nextDate = startDate.AddDays(10);
 							if (nextDate > endDate)
 								nextDate = endDate;
 							activities.AddRange(client.getActivities(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), nextDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new UserActivity[] { });
@@ -439,18 +440,18 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public MainUserReportRecord[] GetMainUserReport(DateTime startDate, DateTime endDate, out string message)
+		public MainUserReportModel[] GetMainUserReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<MainUserReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<MainUserReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						activities.AddRange(client.getMainUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainUserReportRecord[] { });
+						activities.AddRange(client.getMainUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainUserReportModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -464,18 +465,18 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public MainGroupReportRecord[] GetMainGroupReport(DateTime startDate, DateTime endDate, out string message)
+		public MainGroupReportModel[] GetMainGroupReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<MainGroupReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<MainGroupReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						activities.AddRange(client.getMainGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainGroupReportRecord[] { });
+						activities.AddRange(client.getMainGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new MainGroupReportModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -489,19 +490,19 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public NavigationUserReportRecord[] GetNavigationUserReport(DateTime startDate, DateTime endDate, out string message)
+		public NavigationUserReportModel[] GetNavigationUserReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<NavigationUserReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<NavigationUserReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
-						activities.AddRange(client.getNavigationUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationUserReportRecord[] { });
+						activities.AddRange(client.getNavigationUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationUserReportModel[] { });
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
@@ -516,18 +517,18 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public NavigationGroupReportRecord[] GetNavigationGroupReport(DateTime startDate, DateTime endDate, out string message)
+		public NavigationGroupReportModel[] GetNavigationGroupReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<NavigationGroupReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<NavigationGroupReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						activities.AddRange(client.getNavigationGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationGroupReportRecord[] { });
+						activities.AddRange(client.getNavigationGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new NavigationGroupReportModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -541,18 +542,18 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public AccessReportRecord[] GetAccessReport(DateTime startDate, DateTime endDate, out string message)
+		public AccessReportModel[] GetAccessReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<AccessReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<AccessReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						activities.AddRange(client.getAccessReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new AccessReportRecord[] { });
+						activities.AddRange(client.getAccessReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new AccessReportModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -566,19 +567,19 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public QuizPassUserReportRecord[] GetQuizPassUserReport(DateTime startDate, DateTime endDate, out string message)
+		public QuizPassUserReportModel[] GetQuizPassUserReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<QuizPassUserReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<QuizPassUserReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
-						activities.AddRange(client.getQuizPassUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QuizPassUserReportRecord[] { });
+						activities.AddRange(client.getQuizPassUserReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QuizPassUserReportModel[] { });
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
@@ -593,19 +594,19 @@ namespace SalesDepot.Services
 			return activities.ToArray();
 		}
 
-		public QuizPassGroupReportRecord[] GetQuizPassGroupReport(DateTime startDate, DateTime endDate, out string message)
+		public QuizPassGroupReportModel[] GetQuizPassGroupReport(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var activities = new List<QuizPassGroupReportRecord>();
-			var client = GetStatisticClient();
+			var activities = new List<QuizPassGroupReportModel>();
+			StatisticControllerService client = GetStatisticClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 					{
-						activities.AddRange(client.getQuizPassGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QuizPassGroupReportRecord[] { });
+						activities.AddRange(client.getQuizPassGroupReport(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new QuizPassGroupReportModel[] { });
 					}
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
@@ -626,12 +627,12 @@ namespace SalesDepot.Services
 		{
 			message = string.Empty;
 			var records = new List<TickerLink>();
-			var client = GetTickerClient();
+			TickerControllerService client = GetTickerClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						records.AddRange(client.getTickerLinks(sessionKey) ?? new TickerLink[] { });
 					else
@@ -650,12 +651,12 @@ namespace SalesDepot.Services
 		public void SetTickerLinks(TickerLink[] tickerLinks, out string message)
 		{
 			message = string.Empty;
-			var client = GetTickerClient();
+			TickerControllerService client = GetTickerClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						client.setTickerLinks(sessionKey, tickerLinks);
 					else
@@ -669,22 +670,21 @@ namespace SalesDepot.Services
 			else
 				message = "Couldn't complete operation.\nServer is unavailable.";
 		}
-
 		#endregion
 
 		#region Inactive Users
-		public InactiveUsersService.UserRecord[] GetInactiveUsers(DateTime startDate, DateTime endDate, out string message)
+		public InactiveUsersService.UserModel[] GetInactiveUsers(DateTime startDate, DateTime endDate, out string message)
 		{
 			message = string.Empty;
-			var userRecords = new List<Services.InactiveUsersService.UserRecord>();
-			var client = GetInactiveUsersClient();
+			var userRecords = new List<InactiveUsersService.UserModel>();
+			InactiveusersControllerService client = GetInactiveUsersClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
-						userRecords.AddRange(client.getInactiveUsers(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new Services.InactiveUsersService.UserRecord[] { });
+						userRecords.AddRange(client.getInactiveUsers(sessionKey, startDate.ToString("MM/dd/yyyy hh:mm tt"), endDate.ToString("MM/dd/yyyy hh:mm tt")) ?? new InactiveUsersService.UserModel[] { });
 					else
 						message = "Couldn't complete operation.\nLogin or password are not correct.";
 				}
@@ -701,12 +701,12 @@ namespace SalesDepot.Services
 		public void ResetUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
 		{
 			message = string.Empty;
-			var client = GetInactiveUsersClient();
+			InactiveusersControllerService client = GetInactiveUsersClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						client.resetUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
 					else
@@ -724,12 +724,12 @@ namespace SalesDepot.Services
 		public void DeleteUsers(string[] userIds, bool onlyEmail, string sender, string subject, string body, out string message)
 		{
 			message = string.Empty;
-			var client = GetInactiveUsersClient();
+			InactiveusersControllerService client = GetInactiveUsersClient();
 			if (client != null)
 			{
 				try
 				{
-					var sessionKey = client.getSessionKey(_login, _password);
+					string sessionKey = client.getSessionKey(_login, _password);
 					if (!string.IsNullOrEmpty(sessionKey))
 						client.deleteUsers(sessionKey, userIds, onlyEmail, sender, subject, body);
 					else

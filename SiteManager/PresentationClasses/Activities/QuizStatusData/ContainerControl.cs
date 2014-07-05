@@ -17,7 +17,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizStatusData
 	[ToolboxItem(false)]
 	public sealed partial class ContainerControl : UserControl, IActivitiesView
 	{
-		private readonly List<QuizPassUserReportRecord> _records = new List<QuizPassUserReportRecord>();
+		private readonly List<QuizPassUserReportModel> _records = new List<QuizPassUserReportModel>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -140,13 +140,14 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizStatusData
 		private void ApplyData()
 		{
 			xtraTabControlGroups.TabPages.Clear();
-			var filteredRecords = new List<QuizPassUserReportRecord>();
-			var groupedRecords = _records.GroupBy(r => new { r.FullName, r.GroupName, r.topLevelName }).Select(g => new QuizPassUserReportRecord
+			var filteredRecords = new List<QuizPassUserReportModel>();
+			var groupedRecords = _records.GroupBy(r => new { r.FullName, r.GroupName, r.topLevelName }).Select(g => new QuizPassUserReportModel
 			{
 				FullName = g.Key.FullName,
 				GroupName = g.Key.GroupName,
 				topLevelName = g.Key.topLevelName,
-				QuizzesPassed = String.Join(Environment.NewLine, g.OrderBy(x => x.Date).Select(x => x.quizName))
+				QuizzesPassed = String.Join(Environment.NewLine, g.OrderBy(x => x.Date).Select(x => x.quizName)),
+				TotalPassed = String.Format("(Tests Passed: {0})", g.Count())
 			});
 			filteredRecords.AddRange(_filterControl.EnableFilter ?
 				groupedRecords.Where(g => _filterControl.SelectedGroups.Contains(g.GroupName) && (g.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))) :

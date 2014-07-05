@@ -15,8 +15,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizUnitedData
 	[ToolboxItem(false)]
 	public partial class ContainerControl : UserControl, IActivitiesView
 	{
-		private readonly List<QuizPassUserReportRecord> _records = new List<QuizPassUserReportRecord>();
-		private readonly List<QuizPassUserReportRecord> _filteredRecords = new List<QuizPassUserReportRecord>();
+		private readonly List<QuizPassUserReportModel> _records = new List<QuizPassUserReportModel>();
+		private readonly List<QuizPassUserReportModel> _filteredRecords = new List<QuizPassUserReportModel>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -157,7 +157,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.QuizUnitedData
 			_filteredRecords.AddRange(_records.Where(record => record.GroupName != null && (!_filterControl.EnableFilter || (_filterControl.SelectedGroups.Contains(record.GroupName) && (record.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup))))));
 			var quizCount = _records.Where(r => r.topLevelName == _filterControl.TopLevelQuizGroup || String.IsNullOrEmpty(_filterControl.TopLevelQuizGroup)).Select(r => r.quizName).Distinct().Count();
 			var totalPage = new TotalControl(
-				_filteredRecords.GroupBy(r => new { r.GroupName, r.quizName }).Select(g => new QuizPassGroupReportRecord
+				_filteredRecords.GroupBy(r => new { r.GroupName, r.quizName }).Select(g => new QuizPassGroupReportModel
 			{
 				group = g.Key.GroupName,
 				quizName = g.Key.quizName,

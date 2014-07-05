@@ -32,9 +32,9 @@
           <xsd:element name="columns" type="tns:ColumnArray" />
           <xsd:element name="dateModify" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="allGroups" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserRecordArray" />
+          <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
@@ -244,32 +244,32 @@
           <xsd:element name="dateModify" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="GroupRecordArray">
+      <xsd:complexType name="GroupModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:GroupRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:GroupModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="GroupRecord">
+      <xsd:complexType name="GroupModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:string" />
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="users" type="tns:UserRecordArray" />
+          <xsd:element name="users" type="tns:UserModelArray" />
           <xsd:element name="allUsers" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
           <xsd:element name="allLibraries" type="xsd:boolean" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="UserRecordArray">
+      <xsd:complexType name="UserModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:UserRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:UserModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="UserRecord">
+      <xsd:complexType name="UserModel">
         <xsd:all>
           <xsd:element name="id" type="xsd:int" />
           <xsd:element name="login" type="xsd:string" />
@@ -280,7 +280,7 @@
           <xsd:element name="phone" type="xsd:string" />
           <xsd:element name="role" type="xsd:int" />
           <xsd:element name="selected" type="xsd:boolean" />
-          <xsd:element name="groups" type="tns:GroupRecordArray" />
+          <xsd:element name="groups" type="tns:GroupModelArray" />
           <xsd:element name="groupNames" type="xsd:string" />
           <xsd:element name="allGroups" type="xsd:boolean" />
           <xsd:element name="libraries" type="tns:LibraryArray" />
@@ -378,32 +378,32 @@
       </xsd:complexType>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="mockupLibraryRequest">
+  <wsdl:message name="mockLibraryRequest">
     <wsdl:part name="library" type="tns:Library" />
   </wsdl:message>
-  <wsdl:message name="mockupLibraryResponse" />
-  <wsdl:message name="mockupReferencesRequest">
+  <wsdl:message name="mockLibraryResponse" />
+  <wsdl:message name="mockReferencesRequest">
     <wsdl:part name="references" type="tns:References" />
   </wsdl:message>
-  <wsdl:message name="mockupReferencesResponse" />
+  <wsdl:message name="mockReferencesResponse" />
   <wsdl:portType name="ContentControllerPortType">
-    <wsdl:operation name="mockupLibrary">
+    <wsdl:operation name="mockLibrary">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockupLibraryRequest" />
-      <wsdl:output message="tns:mockupLibraryResponse" />
+      <wsdl:input message="tns:mockLibraryRequest" />
+      <wsdl:output message="tns:mockLibraryResponse" />
     </wsdl:operation>
-    <wsdl:operation name="mockupReferences">
+    <wsdl:operation name="mockReferences">
       <wsdl:documentation>
       </wsdl:documentation>
-      <wsdl:input message="tns:mockupReferencesRequest" />
-      <wsdl:output message="tns:mockupReferencesResponse" />
+      <wsdl:input message="tns:mockReferencesRequest" />
+      <wsdl:output message="tns:mockReferencesResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ContentControllerBinding" type="tns:ContentControllerPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
-    <wsdl:operation name="mockupLibrary">
-      <soap:operation soapAction="urn:ContentControllerwsdl#mockupLibrary" style="rpc" />
+    <wsdl:operation name="mockLibrary">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockLibrary" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -411,8 +411,8 @@
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="mockupReferences">
-      <soap:operation soapAction="urn:ContentControllerwsdl#mockupReferences" style="rpc" />
+    <wsdl:operation name="mockReferences">
+      <soap:operation soapAction="urn:ContentControllerwsdl#mockReferences" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" namespace="urn:ContentControllerwsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>

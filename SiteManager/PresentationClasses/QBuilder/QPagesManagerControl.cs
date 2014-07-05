@@ -12,7 +12,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 	[ToolboxItem(false)]
 	public partial class QPagesManagerControl : UserControl
 	{
-		private readonly List<QPageRecord> _records = new List<QPageRecord>();
+		private readonly List<QPageModel> _records = new List<QPageModel>();
 		private readonly QPagesFilter _filterControl;
 
 		public QPagesManagerControl()
@@ -74,14 +74,14 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 
 		private void ApplyData()
 		{
-			var filteredRecords = new List<QPageRecord>();
+			var filteredRecords = new List<QPageModel>();
 			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(x => x.GroupNameList.Any(y => _filterControl.SelectedGroups.Contains(y))) : _records);
 			gridControlRecords.DataSource = filteredRecords;
 		}
 
 		public void DeletePage()
 		{
-			var pageRecord = gridViewRecords.GetFocusedRow() as QPageRecord;
+			var pageRecord = gridViewRecords.GetFocusedRow() as QPageModel;
 			if (pageRecord == null || AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete this {0}?", pageRecord.Type)) != DialogResult.Yes) return;
 			string message = string.Empty;
 			using (var form = new FormProgress())
@@ -116,7 +116,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.QBuilder
 			{
 				if (e.Button.Index == 0)
 				{
-					var pageRecord = gridViewRecords.GetFocusedRow() as QPageRecord;
+					var pageRecord = gridViewRecords.GetFocusedRow() as QPageModel;
 					if (pageRecord == null) return;
 					Clipboard.SetText(pageRecord.url);
 				}

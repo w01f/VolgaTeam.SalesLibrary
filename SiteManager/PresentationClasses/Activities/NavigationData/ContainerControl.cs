@@ -17,8 +17,8 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.NavigationData
 	[ToolboxItem(false)]
 	public partial class ContainerControl : UserControl, IActivitiesView
 	{
-		private readonly List<NavigationUserReportRecord> _userRecords = new List<NavigationUserReportRecord>();
-		private readonly List<NavigationGroupReportRecord> _groupRecords = new List<NavigationGroupReportRecord>();
+		private readonly List<NavigationUserReportModel> _userRecords = new List<NavigationUserReportModel>();
+		private readonly List<NavigationGroupReportModel> _groupRecords = new List<NavigationGroupReportModel>();
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 
@@ -185,26 +185,26 @@ namespace SalesDepot.SiteManager.PresentationClasses.Activities.NavigationData
 		{
 			xtraTabControlGroups.TabPages.Clear();
 
-			var filteredGroupRecords = new List<NavigationGroupReportRecord>();
-			filteredGroupRecords.AddRange(_groupFilterControl.EnableFilter ? _groupRecords.Where(x => _groupFilterControl.SelectedGroups.Contains(x.name)) : _groupRecords);
-			var allLibraries = filteredGroupRecords.Sum(x => x.libs);
-			var allPages = filteredGroupRecords.Sum(x => x.pages);
-			var allTotals = filteredGroupRecords.Sum(x => x.totals);
-			foreach (var record in filteredGroupRecords)
+			var filteredGroupModels = new List<NavigationGroupReportModel>();
+			filteredGroupModels.AddRange(_groupFilterControl.EnableFilter ? _groupRecords.Where(x => _groupFilterControl.SelectedGroups.Contains(x.name)) : _groupRecords);
+			var allLibraries = filteredGroupModels.Sum(x => x.libs);
+			var allPages = filteredGroupModels.Sum(x => x.pages);
+			var allTotals = filteredGroupModels.Sum(x => x.totals);
+			foreach (var record in filteredGroupModels)
 			{
 				record.AllLibraries = allLibraries;
 				record.AllPages = allPages;
 				record.AllTotals = allTotals;
 			}
-			var totalPage = new TotalControl(filteredGroupRecords, StartDate, EndDate);
+			var totalPage = new TotalControl(filteredGroupModels, StartDate, EndDate);
 			_groupFilterControl.ColumnsChanged += (o, e) => totalPage.ApplyColumns(_groupFilterControl);
 			xtraTabControlGroups.TabPages.Add(totalPage);
 
-			var filteredUserRecords = new List<NavigationUserReportRecord>();
-			filteredUserRecords.AddRange(_userFilterControl.EnableFilter ? _userRecords.Where(x => _userFilterControl.SelectedGroups.Contains(x.group)) : _userRecords);
-			foreach (var group in filteredUserRecords.OrderBy(r => r.group).Select(r => r.group).Distinct())
+			var filteredUserModels = new List<NavigationUserReportModel>();
+			filteredUserModels.AddRange(_userFilterControl.EnableFilter ? _userRecords.Where(x => _userFilterControl.SelectedGroups.Contains(x.group)) : _userRecords);
+			foreach (var group in filteredUserModels.OrderBy(r => r.group).Select(r => r.group).Distinct())
 			{
-				var groupPage = new GroupControl(filteredUserRecords.Where(r => r.group == group), StartDate, EndDate) { GroupName = group };
+				var groupPage = new GroupControl(filteredUserModels.Where(r => r.group == group), StartDate, EndDate) { GroupName = group };
 				_userFilterControl.ColumnsChanged += (o, e) => groupPage.ApplyColumns(_userFilterControl);
 				xtraTabControlGroups.TabPages.Add(groupPage);
 			}

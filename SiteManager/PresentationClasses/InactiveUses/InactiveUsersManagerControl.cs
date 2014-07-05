@@ -18,7 +18,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 	[ToolboxItem(false)]
 	public partial class InactiveUsersManagerControl : UserControl
 	{
-		private readonly List<UserRecord> _records = new List<UserRecord>();
+		private readonly List<UserModel> _records = new List<UserModel>();
 		private readonly InactiveUsersFilter _filterControl;
 
 		public InactiveUsersManagerControl()
@@ -89,7 +89,7 @@ namespace SalesDepot.SiteManager.PresentationClasses.InactiveUsers
 
 		private void ApplyData()
 		{
-			var filteredRecords = new List<UserRecord>();
+			var filteredRecords = new List<UserModel>();
 			_records.ForEach(x => x.Selected = false);
 			filteredRecords.AddRange(_filterControl.EnableFilter ? _records.Where(x => x.GroupNameList.Any(y => _filterControl.SelectedGroups.Contains(y))) : _records);
 			gridControlRecords.DataSource = filteredRecords;

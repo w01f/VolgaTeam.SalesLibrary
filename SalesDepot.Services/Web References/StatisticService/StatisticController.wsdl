@@ -41,14 +41,14 @@
           <xsd:element name="value" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="MainUserReportRecordArray">
+      <xsd:complexType name="MainUserReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:MainUserReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:MainUserReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="MainUserReportRecord">
+      <xsd:complexType name="MainUserReportModel">
         <xsd:all>
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
@@ -64,14 +64,14 @@
           <xsd:element name="groupVideos" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="MainGroupReportRecordArray">
+      <xsd:complexType name="MainGroupReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:MainGroupReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:MainGroupReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="MainGroupReportRecord">
+      <xsd:complexType name="MainGroupReportModel">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="logins" type="xsd:int" />
@@ -80,14 +80,14 @@
           <xsd:element name="totals" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="NavigationUserReportRecordArray">
+      <xsd:complexType name="NavigationUserReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:NavigationUserReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:NavigationUserReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="NavigationUserReportRecord">
+      <xsd:complexType name="NavigationUserReportModel">
         <xsd:all>
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
@@ -101,14 +101,14 @@
           <xsd:element name="groupPages" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="NavigationGroupReportRecordArray">
+      <xsd:complexType name="NavigationGroupReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:NavigationGroupReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:NavigationGroupReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="NavigationGroupReportRecord">
+      <xsd:complexType name="NavigationGroupReportModel">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="pages" type="xsd:int" />
@@ -116,14 +116,14 @@
           <xsd:element name="totals" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="AccessReportRecordArray">
+      <xsd:complexType name="AccessReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:AccessReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:AccessReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="AccessReportRecord">
+      <xsd:complexType name="AccessReportModel">
         <xsd:all>
           <xsd:element name="name" type="xsd:string" />
           <xsd:element name="userCount" type="xsd:int" />
@@ -133,14 +133,14 @@
           <xsd:element name="inactiveNames" type="xsd:string" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="QuizPassUserReportRecordArray">
+      <xsd:complexType name="QuizPassUserReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:QuizPassUserReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:QuizPassUserReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="QuizPassUserReportRecord">
+      <xsd:complexType name="QuizPassUserReportModel">
         <xsd:all>
           <xsd:element name="firstName" type="xsd:string" />
           <xsd:element name="lastName" type="xsd:string" />
@@ -151,14 +151,14 @@
           <xsd:element name="quizTryCount" type="xsd:int" />
         </xsd:all>
       </xsd:complexType>
-      <xsd:complexType name="QuizPassGroupReportRecordArray">
+      <xsd:complexType name="QuizPassGroupReportModelArray">
         <xsd:complexContent mixed="false">
           <xsd:restriction base="soap-enc:Array">
-            <xsd:attribute wsdl:arrayType="tns:QuizPassGroupReportRecord[]" ref="soap-enc:arrayType" />
+            <xsd:attribute wsdl:arrayType="tns:QuizPassGroupReportModel[]" ref="soap-enc:arrayType" />
           </xsd:restriction>
         </xsd:complexContent>
       </xsd:complexType>
-      <xsd:complexType name="QuizPassGroupReportRecord">
+      <xsd:complexType name="QuizPassGroupReportModel">
         <xsd:all>
           <xsd:element name="group" type="xsd:string" />
           <xsd:element name="quizName" type="xsd:string" />
@@ -189,7 +189,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getMainUserReportResponse">
-    <wsdl:part name="return" type="tns:MainUserReportRecordArray" />
+    <wsdl:part name="return" type="tns:MainUserReportModelArray" />
   </wsdl:message>
   <wsdl:message name="getMainGroupReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -197,7 +197,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getMainGroupReportResponse">
-    <wsdl:part name="return" type="tns:MainGroupReportRecordArray" />
+    <wsdl:part name="return" type="tns:MainGroupReportModelArray" />
   </wsdl:message>
   <wsdl:message name="getNavigationUserReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -205,7 +205,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getNavigationUserReportResponse">
-    <wsdl:part name="return" type="tns:NavigationUserReportRecordArray" />
+    <wsdl:part name="return" type="tns:NavigationUserReportModelArray" />
   </wsdl:message>
   <wsdl:message name="getNavigationGroupReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -213,7 +213,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getNavigationGroupReportResponse">
-    <wsdl:part name="return" type="tns:NavigationGroupReportRecordArray" />
+    <wsdl:part name="return" type="tns:NavigationGroupReportModelArray" />
   </wsdl:message>
   <wsdl:message name="getAccessReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -221,7 +221,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getAccessReportResponse">
-    <wsdl:part name="return" type="tns:AccessReportRecordArray" />
+    <wsdl:part name="return" type="tns:AccessReportModelArray" />
   </wsdl:message>
   <wsdl:message name="getQuizPassUserReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -229,7 +229,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getQuizPassUserReportResponse">
-    <wsdl:part name="return" type="tns:QuizPassUserReportRecordArray" />
+    <wsdl:part name="return" type="tns:QuizPassUserReportModelArray" />
   </wsdl:message>
   <wsdl:message name="getQuizPassGroupReportRequest">
     <wsdl:part name="sessionKey" type="xsd:string" />
@@ -237,7 +237,7 @@
     <wsdl:part name="dateEnd" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="getQuizPassGroupReportResponse">
-    <wsdl:part name="return" type="tns:QuizPassGroupReportRecordArray" />
+    <wsdl:part name="return" type="tns:QuizPassGroupReportModelArray" />
   </wsdl:message>
   <wsdl:portType name="StatisticControllerPortType">
     <wsdl:operation name="getSessionKey">
