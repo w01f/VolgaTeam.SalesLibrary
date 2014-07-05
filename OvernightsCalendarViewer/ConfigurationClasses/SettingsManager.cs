@@ -32,6 +32,7 @@ namespace OvernightsCalendarViewer.ConfigurationClasses
 
 		public string SelectedPackage { get; set; }
 		public string SelectedLibrary { get; set; }
+		public string SelectedCalendar { get; set; }
 		public int SelectedCalendarYear { get; set; }
 		public int FontSize { get; set; }
 		public int RowSpace { get; set; }
@@ -55,6 +56,7 @@ namespace OvernightsCalendarViewer.ConfigurationClasses
 		{
 			SelectedPackage = string.Empty;
 			SelectedLibrary = string.Empty;
+			SelectedCalendar = string.Empty;
 			SelectedCalendarYear = 0;
 			FontSize = 12;
 			RowSpace = 1;
@@ -74,6 +76,9 @@ namespace OvernightsCalendarViewer.ConfigurationClasses
 				if (node != null)
 					SelectedPackage = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedLibrary");
+				if (node != null)
+					SelectedLibrary = node.InnerText;
+				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendar");
 				if (node != null)
 					SelectedLibrary = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
@@ -105,6 +110,7 @@ namespace OvernightsCalendarViewer.ConfigurationClasses
 			xml.AppendLine(@"<LocalSettings>");
 			xml.AppendLine(@"<SelectedPackage>" + SelectedPackage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPackage>");
 			xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
+			xml.AppendLine(@"<SelectedCalendar>" + SelectedCalendar.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedCalendar>");
 			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear + @"</SelectedCalendarYear>");
 			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
 			xml.AppendLine(@"<RowSpace>" + RowSpace + @"</RowSpace>");

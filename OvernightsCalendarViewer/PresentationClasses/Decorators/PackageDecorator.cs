@@ -114,11 +114,9 @@ namespace OvernightsCalendarViewer.PresentationClasses.Decorators
 
 		public void FormatCalendar()
 		{
-			if (SelectedLibrary != null)
-			{
-				SelectedLibrary.UpdateCalendarFontButtonsStatus();
-				SelectedLibrary.OvernightsCalendar.RefreshFont();
-			}
+			if (SelectedLibrary == null) return;
+			SelectedLibrary.UpdateCalendarFontButtonsStatus();
+			SelectedLibrary.OvernightsCalendar.RefreshFont();
 		}
 
 		public void Apply()

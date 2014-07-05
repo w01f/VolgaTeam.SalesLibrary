@@ -11,7 +11,7 @@ namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 {
 	[ToolboxItem(false)]
 	public partial class YearControl : XtraTabPage
-		//public partial class YearControl : UserControl
+	//public partial class YearControl : UserControl
 	{
 		private const int MonthsPadding = 10;
 		private const int ColumnsCount = 4;
@@ -139,20 +139,20 @@ namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 				pnEmpty.BringToFront();
 			foreach (Panel weekDayPanel in WeekDaysPanels)
 			{
-				weekDayPanel.BackColor = Data.Parent.CalendarHeaderBackColor;
+				weekDayPanel.BackColor = Data.Parent.Parent.CalendarHeaderBackColor;
 				foreach (Control weekDayHeader in weekDayPanel.Controls)
 				{
-					weekDayHeader.BackColor = Data.Parent.CalendarHeaderBackColor;
-					weekDayHeader.ForeColor = Data.Parent.CalendarHeaderForeColor;
+					weekDayHeader.BackColor = Data.Parent.Parent.CalendarHeaderBackColor;
+					weekDayHeader.ForeColor = Data.Parent.Parent.CalendarHeaderForeColor;
 					weekDayHeader.Refresh();
 					Application.DoEvents();
 				}
 				weekDayPanel.Refresh();
 			}
-			pnWeekDays.BackColor = Data.Parent.CalendarHeaderBackColor;
+			pnWeekDays.BackColor = Data.Parent.Parent.CalendarHeaderBackColor;
 			pnWeekDays.Refresh();
 
-			pnMonths.BackColor = Data.Parent.CalendarBackColor;
+			pnMonths.BackColor = Data.Parent.Parent.CalendarBackColor;
 			foreach (MonthControl month in Months)
 			{
 				month.RefreshColors();

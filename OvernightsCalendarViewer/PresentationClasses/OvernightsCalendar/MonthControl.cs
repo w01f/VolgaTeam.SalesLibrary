@@ -67,11 +67,11 @@ namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 
 		public void RefreshColors()
 		{
-			laMonthName.BackColor = Data.Parent.Parent.MonthHeaderBackColor;
-			laMonthName.ForeColor = Data.Parent.Parent.MonthHeaderForeColor;
+			laMonthName.BackColor = Data.Parent.Parent.Parent.MonthHeaderBackColor;
+			laMonthName.ForeColor = Data.Parent.Parent.Parent.MonthHeaderForeColor;
 			laMonthName.Refresh();
 
-			pnDaysInternalContainer.BackColor = Data.Parent.Parent.MonthBodyBackColor;
+			pnDaysInternalContainer.BackColor = Data.Parent.Parent.Parent.MonthBodyBackColor;
 			foreach (DayControl day in Days)
 				day.RefreshColors();
 			pnDaysInternalContainer.Refresh();
@@ -94,7 +94,7 @@ namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 				rect = new Rectangle(e.ClipRectangle.Left, 0, e.ClipRectangle.Width, e.ClipRectangle.Bottom);
 			for (int i = 0; i < 1; i++)
 			{
-				ControlPaint.DrawBorder(e.Graphics, rect, Data.Parent.Parent.CalendarBorderColor, ButtonBorderStyle.Solid);
+				ControlPaint.DrawBorder(e.Graphics, rect, Data.Parent.Parent.Parent.CalendarBorderColor, ButtonBorderStyle.Solid);
 				rect.X = rect.X + 1;
 				rect.Y = rect.Y + 1;
 				rect.Width = rect.Width - 2;

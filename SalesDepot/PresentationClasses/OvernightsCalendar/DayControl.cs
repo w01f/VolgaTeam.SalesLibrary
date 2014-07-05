@@ -1,82 +1,86 @@
-﻿using System.Drawing;
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
+using SalesDepot.BusinessClasses;
+using SalesDepot.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace SalesDepot.PresentationClasses.OvernightsCalendar
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class DayControl : Label
-    {
-        private Cursor _storedCursor;
+	[ToolboxItem(false)]
+	public partial class DayControl : Label
+	{
+		private Cursor _storedCursor;
 
-        public CalendarDay Data { get; private set; }
+		public DayControl(CalendarDay data)
+		{
+			InitializeComponent();
+			Data = data;
+			Text = data.Date.ToString("dd");
+			RefreshColors();
+			RefreshFont();
+		}
 
-        public DayControl(CalendarDay data)
-        {
-            InitializeComponent();
-            this.Data = data;
-            this.Text = data.Date.ToString("dd");
-            RefreshColors();
-            RefreshFont();
-        }
+		public CalendarDay Data { get; private set; }
 
-        public void RefreshColors()
-        {
-            if (this.Data.IsSweepDay)
-            {
-                this.BackColor = this.Data.Parent.Parent.Parent.SweepBackColor;
-                if (this.Data.LinkedFile == null)
-                    this.ForeColor = this.Data.Parent.Parent.Parent.DeadLinksForeColor;
-                else
-                    this.ForeColor = this.Data.Parent.Parent.Parent.SweepForeColor;
-            }
-            else
-            {
-                this.BackColor = this.Data.Parent.Parent.Parent.MonthBodyBackColor;
-                if (this.Data.LinkedFile == null)
-                    this.ForeColor = this.Data.Parent.Parent.Parent.DeadLinksForeColor;
-                else
-                    this.ForeColor = this.Data.Parent.Parent.Parent.MonthBodyForeColor;
-            }
-            this.Refresh();
-        }
+		public void RefreshColors()
+		{
+			if (Data.IsSweepDay)
+			{
+				BackColor = Data.Parent.Parent.Parent.Parent.SweepBackColor;
+				if (Data.LinkedFile == null)
+					ForeColor = Data.Parent.Parent.Parent.Parent.DeadLinksForeColor;
+				else
+					ForeColor = Data.Parent.Parent.Parent.Parent.SweepForeColor;
+			}
+			else
+			{
+				BackColor = Data.Parent.Parent.Parent.Parent.MonthBodyBackColor;
+				if (Data.LinkedFile == null)
+					ForeColor = Data.Parent.Parent.Parent.Parent.DeadLinksForeColor;
+				else
+					ForeColor = Data.Parent.Parent.Parent.Parent.MonthBodyForeColor;
+			}
+			Refresh();
+		}
 
-        public void RefreshFont()
-        {
-            this.Font = new System.Drawing.Font(this.Font.Name, ConfigurationClasses.SettingsManager.Instance.CalendarFontSize, this.Font.Style);
-        }
+		public void RefreshFont()
+		{
+			Font = new Font(Font.Name, SettingsManager.Instance.CalendarFontSize, Font.Style);
+		}
 
-        private void DayControl_Click(object sender, System.EventArgs e)
-        {
-            if (this.Data.LinkedFile != null)
-            {
-                BusinessClasses.LibraryLink libraryFile = new BusinessClasses.LibraryLink(new LibraryFolder(new LibraryPage(this.Data.Parent.Parent.Parent.Parent)));
-                libraryFile.OriginalPath = this.Data.LinkedFile.FullName;
-                libraryFile.Type = FileTypes.OvernightsLink;
-                BusinessClasses.LinkManager.Instance.OpenLink(libraryFile);
-            }
-        }
+		private void DayControl_Click(object sender, EventArgs e)
+		{
+			if (Data.LinkedFile != null)
+			{
+				var libraryFile = new LibraryLink(new LibraryFolder(new LibraryPage(Data.Parent.Parent.Parent.Parent.Parent)));
+				libraryFile.OriginalPath = Data.LinkedFile.FullName;
+				libraryFile.Type = FileTypes.OvernightsLink;
+				LinkManager.Instance.OpenLink(libraryFile);
+			}
+		}
 
-        private void DayControl_MouseEnter(object sender, System.EventArgs e)
-        {
-            _storedCursor = this.Cursor;
-            this.Cursor = Cursors.Hand;
-        }
+		private void DayControl_MouseEnter(object sender, EventArgs e)
+		{
+			_storedCursor = Cursor;
+			Cursor = Cursors.Hand;
+		}
 
-        private void DayControl_MouseLeave(object sender, System.EventArgs e)
-        {
-            this.Cursor = _storedCursor;
-        }
+		private void DayControl_MouseLeave(object sender, EventArgs e)
+		{
+			Cursor = _storedCursor;
+		}
 
-        private void DayControl_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.BackColor = Color.Blue;
-            this.ForeColor = Color.White;
-        }
+		private void DayControl_MouseDown(object sender, MouseEventArgs e)
+		{
+			BackColor = Color.Blue;
+			ForeColor = Color.White;
+		}
 
-        private void DayControl_MouseUp(object sender, MouseEventArgs e)
-        {
-            RefreshColors();
-        }
-    }
+		private void DayControl_MouseUp(object sender, MouseEventArgs e)
+		{
+			RefreshColors();
+		}
+	}
 }

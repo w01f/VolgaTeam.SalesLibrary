@@ -16,7 +16,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private QBuilder()
 		{
 			Logos = new List<PageLogo>();
-			Pages = new List<QPageRecord>();
+			Pages = new List<QPageModel>();
 		}
 		public static QBuilder Instance
 		{
@@ -74,10 +74,10 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		#region Link Cart Processing
 		public event EventHandler<EventArgs> LinkCartChanged;
-		public IEnumerable<QPageLinkRecord> GetLinkCart()
+		public IEnumerable<QPageLinkModel> GetLinkCart()
 		{
 			var message = String.Empty;
-			var result = new List<QPageLinkRecord>();
+			var result = new List<QPageLinkModel>();
 			if (Connected)
 			{
 				var thread = new Thread(delegate()
@@ -167,11 +167,11 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#endregion
 
 		#region Page List Processing
-		public List<QPageRecord> Pages { get; private set; }
+		public List<QPageModel> Pages { get; private set; }
 		public string SelectedPageId { get; private set; }
 		public event EventHandler<EventArgs> PageListChanged;
 
-		public QPageRecord SelectedPage
+		public QPageModel SelectedPage
 		{
 			get { return Pages.FirstOrDefault(p => p.id.Equals(SelectedPageId)); }
 		}
@@ -317,7 +317,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			{
 				var message = String.Empty;
 				var result = true;
-				QPageRecord page = null;
+				QPageModel page = null;
 				var thread = new Thread(delegate()
 				{
 					page = Connection.Client.GetPageContent(pageId, out message);

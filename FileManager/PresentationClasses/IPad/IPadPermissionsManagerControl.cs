@@ -19,9 +19,9 @@ namespace FileManager.PresentationClasses.IPad
 	[ToolboxItem(false)]
 	public sealed partial class IPadPermissionsManagerControl : UserControl
 	{
-		private readonly List<GroupRecord> _groups = new List<GroupRecord>();
+		private readonly List<GroupModel> _groups = new List<GroupModel>();
 		private readonly List<Library> _libraries = new List<Library>();
-		private readonly List<UserRecord> _users = new List<UserRecord>();
+		private readonly List<UserModel> _users = new List<UserModel>();
 		private readonly List<string> _groupTemplates = new List<string>();
 		private bool _complexPassword = true;
 		private bool _groupsCollectionChanged;
@@ -210,7 +210,7 @@ namespace FileManager.PresentationClasses.IPad
 		public void AddUser()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupRecord { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditUser(true, _complexPassword, _users.Select(x => x.login).ToArray(), _groups.Select(x => new GroupModel { id = x.id, name = x.name }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
@@ -221,7 +221,7 @@ namespace FileManager.PresentationClasses.IPad
 					string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 					string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 					var role = 0;
-					var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+					var groups = new List<GroupModel>(formEdit.AssignedGroups);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
@@ -256,11 +256,11 @@ namespace FileManager.PresentationClasses.IPad
 		public void EditUser()
 		{
 			string message = string.Empty;
-			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
+			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
 			if (userRecord != null)
 			{
 				using (var formEdit = new FormEditUser(false, _complexPassword, _users.Select(x => x.login).ToArray(),
-									   _groups.Select(x => new GroupRecord
+									   _groups.Select(x => new GroupModel
 									   {
 										   id = x.id,
 										   name = x.name,
@@ -295,7 +295,7 @@ namespace FileManager.PresentationClasses.IPad
 						string email = formEdit.textEditEmail.EditValue != null ? formEdit.textEditEmail.EditValue.ToString() : string.Empty;
 						string phone = formEdit.textEditPhone.EditValue != null ? formEdit.textEditPhone.EditValue.ToString() : string.Empty;
 						var role = 0;
-						var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+						var groups = new List<GroupModel>(formEdit.AssignedGroups);
 						var pages = new List<LibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
 						{
@@ -330,7 +330,7 @@ namespace FileManager.PresentationClasses.IPad
 
 		public void DeleteUser()
 		{
-			var userRecord = gridViewUsers.GetFocusedRow() as UserRecord;
+			var userRecord = gridViewUsers.GetFocusedRow() as UserModel;
 			if (userRecord != null && AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete user {0}?", userRecord.FullName)) == DialogResult.Yes)
 			{
 				string message = string.Empty;
@@ -433,13 +433,13 @@ namespace FileManager.PresentationClasses.IPad
 		private void AddGroup()
 		{
 			string message = string.Empty;
-			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserRecord { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
+			using (var formEdit = new FormEditGroup(true, _groupTemplates.ToArray(), _groups.Select(x => x.name).ToArray(), _users.Select(x => new UserModel { id = x.id, login = x.login, firstName = x.firstName, lastName = x.lastName, email = x.email }).ToArray(), _libraries.Select(x => new Library { id = x.id, name = x.name, pages = x.pages.Select(y => new LibraryPage { id = y.id, name = y.name, libraryId = y.libraryId }).ToArray() }).ToArray()))
 			{
 				if (formEdit.ShowDialog() == DialogResult.OK)
 				{
 					string id = Guid.NewGuid().ToString();
 					string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
-					var users = new List<UserRecord>(formEdit.AssignedUsers);
+					var users = new List<UserModel>(formEdit.AssignedUsers);
 					var pages = new List<LibraryPage>(formEdit.AssignedPages);
 					using (var form = new FormProgress())
 					{
@@ -474,13 +474,13 @@ namespace FileManager.PresentationClasses.IPad
 		private void EditGroup()
 		{
 			string message = string.Empty;
-			var groupRecord = gridViewGroups.GetFocusedRow() as GroupRecord;
+			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
 			if (groupRecord != null)
 			{
 				using (var formEdit = new FormEditGroup(false,
 														_groupTemplates.ToArray(),
 														_groups.Where(x => !x.name.Equals(groupRecord.name)).Select(x => x.name).ToArray(),
-														_users.Select(x => new UserRecord
+														_users.Select(x => new UserModel
 														{
 															id = x.id,
 															login = x.login,
@@ -508,7 +508,7 @@ namespace FileManager.PresentationClasses.IPad
 					{
 						string id = groupRecord.id;
 						string name = formEdit.comboBoxEditName.EditValue != null ? formEdit.comboBoxEditName.EditValue.ToString() : string.Empty;
-						var users = new List<UserRecord>(formEdit.AssignedUsers);
+						var users = new List<UserModel>(formEdit.AssignedUsers);
 						var pages = new List<LibraryPage>(formEdit.AssignedPages);
 						using (var form = new FormProgress())
 						{
@@ -543,7 +543,7 @@ namespace FileManager.PresentationClasses.IPad
 
 		private void DeleteGroup()
 		{
-			var groupRecord = gridViewGroups.GetFocusedRow() as GroupRecord;
+			var groupRecord = gridViewGroups.GetFocusedRow() as GroupModel;
 			if (groupRecord != null && AppManager.Instance.ShowWarningQuestion(string.Format("Are you sure want to delete group {0}?", groupRecord.name)) == DialogResult.Yes)
 			{
 				string message = string.Empty;
@@ -642,7 +642,7 @@ namespace FileManager.PresentationClasses.IPad
 			var pageRecord = gridViewPages.GetFocusedRow() as LibraryPage;
 			if (pageRecord != null)
 			{
-				using (var formEdit = new FormEditPage(_users.Select(x => new UserRecord
+				using (var formEdit = new FormEditPage(_users.Select(x => new UserModel
 				{
 					id = x.id,
 					login = x.login,
@@ -651,7 +651,7 @@ namespace FileManager.PresentationClasses.IPad
 					email = x.email,
 					selected = (pageRecord.users != null && pageRecord.users.Any(y => y.id == x.id))
 				}).ToArray(),
-													   _groups.Select(x => new GroupRecord
+													   _groups.Select(x => new GroupModel
 													   {
 														   id = x.id,
 														   name = x.name,
@@ -663,8 +663,8 @@ namespace FileManager.PresentationClasses.IPad
 					formEdit.checkEditapplyForLibrary.Text = string.Format(formEdit.checkEditapplyForLibrary.Text, pageRecord.libraryName);
 					if (formEdit.ShowDialog() == DialogResult.OK)
 					{
-						var users = new List<UserRecord>(formEdit.AssignedUsers);
-						var groups = new List<GroupRecord>(formEdit.AssignedGroups);
+						var users = new List<UserModel>(formEdit.AssignedUsers);
+						var groups = new List<GroupModel>(formEdit.AssignedGroups);
 						bool allLibrary = formEdit.checkEditapplyForLibrary.Checked;
 						using (var form = new FormProgress())
 						{

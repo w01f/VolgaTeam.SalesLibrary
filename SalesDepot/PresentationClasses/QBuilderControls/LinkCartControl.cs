@@ -14,11 +14,11 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 	[ToolboxItem(false)]
 	public partial class LinkCartControl : UserControl
 	{
-		private readonly List<QPageLinkRecord> _links = new List<QPageLinkRecord>();
+		private readonly List<QPageLinkModel> _links = new List<QPageLinkModel>();
 
-		public QPageLinkRecord SelectedLink
+		public QPageLinkModel SelectedLink
 		{
-			get { return advBandedGridView.GetFocusedRow() as QPageLinkRecord; }
+			get { return advBandedGridView.GetFocusedRow() as QPageLinkModel; }
 		}
 
 		public LinkCartControl()

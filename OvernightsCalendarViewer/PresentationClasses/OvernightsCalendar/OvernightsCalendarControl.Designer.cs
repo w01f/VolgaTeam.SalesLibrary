@@ -28,56 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.xtraTabControl = new DevExpress.XtraTab.XtraTabControl();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // xtraTabControl
-            // 
-            this.xtraTabControl.Appearance.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.xtraTabControl.Appearance.Options.UseFont = true;
-            this.xtraTabControl.AppearancePage.Header.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.xtraTabControl.AppearancePage.Header.Options.UseFont = true;
-            this.xtraTabControl.AppearancePage.Header.Options.UseTextOptions = true;
-            this.xtraTabControl.AppearancePage.Header.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-            this.xtraTabControl.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.xtraTabControl.AppearancePage.HeaderActive.Options.UseFont = true;
-            this.xtraTabControl.AppearancePage.HeaderActive.Options.UseTextOptions = true;
-            this.xtraTabControl.AppearancePage.HeaderActive.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-            this.xtraTabControl.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseFont = true;
-            this.xtraTabControl.AppearancePage.HeaderDisabled.Options.UseTextOptions = true;
-            this.xtraTabControl.AppearancePage.HeaderDisabled.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-            this.xtraTabControl.AppearancePage.HeaderHotTracked.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseFont = true;
-            this.xtraTabControl.AppearancePage.HeaderHotTracked.Options.UseTextOptions = true;
-            this.xtraTabControl.AppearancePage.HeaderHotTracked.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-            this.xtraTabControl.AppearancePage.PageClient.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.xtraTabControl.AppearancePage.PageClient.Options.UseFont = true;
-            this.xtraTabControl.AppearancePage.PageClient.Options.UseTextOptions = true;
-            this.xtraTabControl.AppearancePage.PageClient.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.Hide;
-            this.xtraTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl.Location = new System.Drawing.Point(0, 0);
-            this.xtraTabControl.Name = "xtraTabControl";
-            this.xtraTabControl.Size = new System.Drawing.Size(613, 483);
-            this.xtraTabControl.TabIndex = 1;
-            // 
-            // OvernightsCalendarControl
-            // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.Controls.Add(this.xtraTabControl);
-            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "OvernightsCalendarControl";
-            this.Size = new System.Drawing.Size(613, 483);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl)).EndInit();
-            this.ResumeLayout(false);
+			this.SuspendLayout();
+			// 
+			// OvernightsCalendarControl
+			// 
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(175)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+			this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+			this.Name = "OvernightsCalendarControl";
+			this.Size = new System.Drawing.Size(613, 483);
+			this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl;
-    }
+	}
 }

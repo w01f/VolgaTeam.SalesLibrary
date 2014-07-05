@@ -25,7 +25,7 @@ namespace SalesDepot.ToolForms.QBuilderForms
 			InitializeComponent();
 		}
 
-		public void Init(IEnumerable<QPageRecord> _pages)
+		public void Init(IEnumerable<QPageModel> _pages)
 		{
 			checkedListBoxControl.Items.Clear();
 			foreach (var page in _pages)

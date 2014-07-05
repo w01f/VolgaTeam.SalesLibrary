@@ -12,10 +12,10 @@ namespace FileManager.ConfigurationClasses
 		private static readonly SettingsManager _instance = new SettingsManager();
 
 		private readonly string _autoSyncSettingsPath = string.Empty;
+		private readonly string _categoryRequestSettingsPath = string.Empty;
 		private readonly string _ribbonSettingsFilePath = string.Empty;
 		private readonly string _settingsFilePath = string.Empty;
 		private readonly string _syncSettingsFilePath = string.Empty;
-		private readonly string _categoryRequestSettingsPath = string.Empty;
 
 		private SettingsManager()
 		{
@@ -54,6 +54,7 @@ namespace FileManager.ConfigurationClasses
 			UseDirectAccessToFiles = false;
 			SelectedLibrary = string.Empty;
 			SelectedPage = string.Empty;
+			SelectedCalendar = string.Empty;
 			FontSize = 12;
 			CalendarFontSize = 10;
 			TreeViewVisible = false;
@@ -117,6 +118,7 @@ namespace FileManager.ConfigurationClasses
 		public int DirectAccessFileAgeLimit { get; set; }
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
+		public string SelectedCalendar { get; set; }
 		public int SelectedCalendarYear { get; set; }
 		public int FontSize { get; set; }
 		public int CalendarFontSize { get; set; }
@@ -156,14 +158,14 @@ namespace FileManager.ConfigurationClasses
 				document.Load(_settingsFilePath);
 
 				#region FM Settings
-				var node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
+				XmlNode node = document.SelectSingleNode(@"/LocalSettings/BackupPath");
 				if (node != null)
 					BackupPath = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/NetworkPath");
 				if (node != null)
 					NetworkPath = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/UseDirectAccessToFiles");
-				var tempBool = false;
+				bool tempBool = false;
 				if (node != null)
 					if (bool.TryParse(node.InnerText, out tempBool))
 						UseDirectAccessToFiles = tempBool;
@@ -178,6 +180,9 @@ namespace FileManager.ConfigurationClasses
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
 				if (node != null)
 					SelectedPage = node.InnerText;
+				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendar");
+				if (node != null)
+					SelectedCalendar = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
@@ -219,16 +224,17 @@ namespace FileManager.ConfigurationClasses
 			#region FM Settings
 			xml.AppendLine(@"<BackupPath>" + BackupPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</BackupPath>");
 			xml.AppendLine(@"<NetworkPath>" + NetworkPath.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</NetworkPath>");
-			xml.AppendLine(@"<UseDirectAccessToFiles>" + UseDirectAccessToFiles.ToString() + @"</UseDirectAccessToFiles>");
-			xml.AppendLine(@"<DirectAccessFileAgeLimit>" + DirectAccessFileAgeLimit.ToString() + @"</DirectAccessFileAgeLimit>");
+			xml.AppendLine(@"<UseDirectAccessToFiles>" + UseDirectAccessToFiles + @"</UseDirectAccessToFiles>");
+			xml.AppendLine(@"<DirectAccessFileAgeLimit>" + DirectAccessFileAgeLimit + @"</DirectAccessFileAgeLimit>");
 			xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
 			xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
-			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
-			xml.AppendLine(@"<FontSize>" + FontSize.ToString() + @"</FontSize>");
-			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize.ToString() + @"</CalendarFontSize>");
-			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible.ToString() + @"</TreeViewVisible>");
-			xml.AppendLine(@"<TreeViewDocked>" + TreeViewDocked.ToString() + @"</TreeViewDocked>");
-			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
+			xml.AppendLine(@"<SelectedCalendar>" + SelectedCalendar.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedCalendar>");
+			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear + @"</SelectedCalendarYear>");
+			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
+			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
+			xml.AppendLine(@"<TreeViewVisible>" + TreeViewVisible + @"</TreeViewVisible>");
+			xml.AppendLine(@"<TreeViewDocked>" + TreeViewDocked + @"</TreeViewDocked>");
+			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
 			xml.AppendLine(@"<DefaultLinkUsers>" + (DefaultLinkUsers ?? string.Empty).Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</DefaultLinkUsers>");
 			#endregion
 

@@ -108,7 +108,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public RootFolder GetRootFolder(Guid folderId)
 		{
-			RootFolder folder = ExtraFolders.Where(x => x.RootId.Equals(folderId)).FirstOrDefault();
+			RootFolder folder = ExtraFolders.FirstOrDefault(x => x.RootId.Equals(folderId));
 			if (folder != null)
 				return folder;
 			else
@@ -123,7 +123,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public IPreviewContainer GetPreviewContainer(string originalPath)
 		{
-			IPreviewContainer previewContainer = PreviewContainers.Where(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower())).FirstOrDefault();
+			IPreviewContainer previewContainer = PreviewContainers.FirstOrDefault(x => x.OriginalPath.ToLower().Equals(originalPath.ToLower()));
 			if (previewContainer == null)
 			{
 				previewContainer = new UniversalPreviewContainer(this);
@@ -650,8 +650,8 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		private void ProcessExpiredLinks()
 		{
 			ExpiredLinks.Clear();
-			foreach (LibraryPage page in Pages)
-				foreach (LibraryFolder folder in page.Folders)
+			foreach (var page in Pages)
+				foreach (var folder in page.Folders)
 					ExpiredLinks.AddRange(folder.Files.Where(x => x.IsExpired));
 		}
 

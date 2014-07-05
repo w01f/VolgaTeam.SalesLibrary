@@ -1,97 +1,133 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
-using SalesDepot.CoreObjects.BusinessClasses;
+using DevComponents.DotNetBar;
+using SalesDepot.ConfigurationClasses;
+using SalesDepot.PresentationClasses.WallBin.Decorators;
+using SalesDepot.ToolForms;
 
 namespace SalesDepot.PresentationClasses.OvernightsCalendar
 {
-    [System.ComponentModel.ToolboxItem(false)]
-    public partial class OvernightsCalendarControl : UserControl
-    {
-        private bool _buildInProgress = false;
-        public WallBin.Decorators.LibraryDecorator ParentDecorator { get; private set; }
-        public List<YearControl> Years { get; private set; }
-        public bool ViewBuilded { get; set; }
+	[ToolboxItem(false)]
+	public partial class OvernightsCalendarControl : UserControl
+	{
+		private bool _buildInProgress;
 
-        public OvernightsCalendarControl(WallBin.Decorators.LibraryDecorator parent)
-        {
-            InitializeComponent();
-            this.ParentDecorator = parent;
-            this.Dock = DockStyle.Fill;
-            this.Years = new List<YearControl>();
+		public OvernightsCalendarControl(LibraryDecorator parent)
+		{
+			InitializeComponent();
+			ParentDecorator = parent;
+			Dock = DockStyle.Fill;
+			Parts = new List<CalendarPartControl>();
+			PartToggles = new List<ButtonItem>();
+		}
 
-            xtraTabControl.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(xtraTabControl_SelectedPageChanged);
-        }
+		public void DisposeCalendar()
+		{
+			foreach (var calendarPartControl in Parts)
+			{
+				calendarPartControl.Parent = null;
+				calendarPartControl.Dispose();
+				Application.DoEvents();
+			}
+		}
 
-        public void Build()
-        {
-            if (!this.ViewBuilded)
-            {
-                _buildInProgress = true;
-                xtraTabControl.TabPages.Clear();
-                this.Years.Clear();
-                foreach (CalendarYear year in this.ParentDecorator.Library.OvernightsCalendar.Years)
-                {
-                    this.Years.Add(new YearControl(year));
-                    Application.DoEvents();
-                }
-                xtraTabControl.TabPages.AddRange(this.Years.ToArray());
+		public LibraryDecorator ParentDecorator { get; private set; }
+		public List<CalendarPartControl> Parts { get; private set; }
+		public List<ButtonItem> PartToggles { get; private set; }
+		public bool ViewBuilded { get; set; }
 
-                YearControl selectedTab = this.Years.Where(x=>x.Data.Year.Equals(ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear)).FirstOrDefault();
-                if (selectedTab == null)
-                    selectedTab = this.Years.FirstOrDefault();
-                if (selectedTab != null)
-                    selectedTab.BuildControls();
-                xtraTabControl.SelectedTabPage = selectedTab;
+		public void Build()
+		{
+			if (!ViewBuilded)
+			{
+				_buildInProgress = true;
+				Controls.Clear();
+				Parts.Clear();
+				PartToggles.Clear();
+				foreach (var calendarPart in ParentDecorator.Library.OvernightsCalendar.Parts)
+				{
+					var partControl = new CalendarPartControl(calendarPart);
+					Parts.Add(partControl);
+					Application.DoEvents();
+				}
+				Controls.AddRange(Parts.ToArray());
 
-                _buildInProgress = false;
-            }
-            this.ViewBuilded = true;
-        }
+				var selectedPart = Parts.FirstOrDefault(p => p.PartData.Name == SettingsManager.Instance.SelectedCalendar && p.PartData.Enabled);
+				if (selectedPart == null)
+					selectedPart = Parts.FirstOrDefault(p => p.PartData.Enabled);
+				if (selectedPart != null)
+				{
+					selectedPart.Build();
+					selectedPart.BringToFront();
+				}
 
-        public void RefreshColors()
-        {
-            foreach (YearControl year in this.Years)
-                year.RefreshColors();
-        }
+				foreach (var partControl in Parts)
+				{
+					var button = new ButtonItem();
+					button.Text = partControl.PartData.Name;
+					button.Tag = partControl;
+					button.Enabled = partControl.PartData.Enabled;
+					button.Checked = partControl == selectedPart;
+					button.Click += SelectedPartClick;
+					button.CheckedChanged += SelectedPartChanged;
+					PartToggles.Add(button);
+				}
+				_buildInProgress = false;
+			}
+			ViewBuilded = true;
+		}
 
-        public void RefreshFont()
-        {
-            foreach (YearControl year in this.Years)
-                year.RefreshFont();
-        }
+		public void RefreshColors()
+		{
+			foreach (var partControl in Parts)
+				partControl.RefreshColors();
+		}
 
-        private void xtraTabControl_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
-        {
-            if (!_buildInProgress)
-            {
-                YearControl selectedYear = e.Page as YearControl;
-                if (selectedYear != null && !selectedYear.ViewBuilded)
-                {
-                    ConfigurationClasses.SettingsManager.Instance.SelectedCalendarYear = selectedYear.Data.Year;
-                    ConfigurationClasses.SettingsManager.Instance.SaveSettings();
-                    using (ToolForms.FormProgress formProgress = new ToolForms.FormProgress())
-                    {
-                        FormMain.Instance.ribbonControl.Enabled = false;
-                        formProgress.TopMost = true;
-                        formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
-                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                        {
-                            this.Invoke((MethodInvoker)delegate()
-                            {
-                                selectedYear.BuildControls();
-                            });
-                        }));
-                        formProgress.Show();
-                        System.Windows.Forms.Application.DoEvents();
-                        thread.Start();
-                        while (thread.IsAlive)
-                            System.Windows.Forms.Application.DoEvents();
-                        formProgress.Close();
-                        FormMain.Instance.ribbonControl.Enabled = true;
-                    }
-                }
-            }
-        }
-    }
+		public void RefreshFont()
+		{
+			foreach (var partControl in Parts)
+				partControl.RefreshFont();
+		}
+
+		private void SelectedPartClick(object sender, EventArgs e)
+		{
+			var selectedPartButton = sender as ButtonItem;
+			if (selectedPartButton == null || selectedPartButton.Checked) return;
+			PartToggles.ForEach(b => b.Checked = false);
+			selectedPartButton.Checked = true;
+		}
+
+		private void SelectedPartChanged(object sender, EventArgs e)
+		{
+			if (_buildInProgress) return;
+			var selectedPartButton = sender as ButtonItem;
+			if (selectedPartButton == null || !selectedPartButton.Checked) return;
+			var selectedPart = selectedPartButton.Tag as CalendarPartControl;
+			if (selectedPart == null) return;
+			SettingsManager.Instance.SelectedCalendar = selectedPart.PartData.Name;
+			SettingsManager.Instance.SaveSettings();
+			if (!selectedPart.ViewBuilded)
+			{
+				using (var formProgress = new FormProgress())
+				{
+					FormMain.Instance.ribbonControl.Enabled = false;
+					formProgress.TopMost = true;
+					formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
+					var thread = new Thread(() => Invoke((MethodInvoker)(selectedPart.Build)));
+					formProgress.Show();
+					Application.DoEvents();
+					thread.Start();
+					while (thread.IsAlive)
+						Application.DoEvents();
+					formProgress.Close();
+					FormMain.Instance.ribbonControl.Enabled = true;
+				}
+			}
+			selectedPart.BringToFront();
+		}
+	}
 }

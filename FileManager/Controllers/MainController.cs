@@ -118,7 +118,7 @@ namespace FileManager.Controllers
 		#endregion
 
 		#region Tool Forms
-		private FormPaths _formPath;
+		private readonly FormPaths _formPath;
 		#endregion
 
 		private MainController()
@@ -149,7 +149,7 @@ namespace FileManager.Controllers
 
 		private void BuildOvernightsCalendars()
 		{
-			foreach (LibraryDecorator libraryDecorator in Decorators.Values)
+			foreach (var libraryDecorator in Decorators.Values)
 			{
 				libraryDecorator.BuildOvernightsCalendar();
 				Application.DoEvents();

@@ -61,7 +61,7 @@ namespace OvernightsCalendarViewer.TabPages
 		private void LoadPackages()
 		{
 			FormMain.Instance.comboBoxItemPackages.Items.Clear();
-			foreach (LibraryPackage salesDepot in LibraryManager.Instance.LibraryPackageCollection)
+			foreach (var salesDepot in LibraryManager.Instance.LibraryPackageCollection)
 			{
 				FormMain.Instance.comboBoxItemPackages.Items.Add(salesDepot.Name);
 				var packageLable = new LabelItem();

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using DevExpress.XtraEditors.Controls;
 using FileManager.ConfigurationClasses;
 using FileManager.PresentationClasses.TabPages;
-using FileManager.PresentationClasses.WallBin.Decorators;
 using FileManager.ToolForms;
 using FileManager.ToolForms.Settings;
 
@@ -14,8 +14,6 @@ namespace FileManager.Controllers
 {
 	public class CalendarController : IPageController
 	{
-		private FormEmailGrabber _formEmailGrabber;
-		private FormFileGrabber _formFileGrabber;
 		private FormCalendarSettings _formSettings;
 
 		private bool _initialization;
@@ -32,8 +30,6 @@ namespace FileManager.Controllers
 			FormMain.Instance.buttonItemCalendarSettings.Click += buttonItemCalendarSettings_Click;
 			FormMain.Instance.buttonItemCalendarFontUp.Click += buttonItemCalendarFontUp_Click;
 			FormMain.Instance.buttonItemCalendarFontDown.Click += buttonItemCalendarFontDown_Click;
-			FormMain.Instance.buttonItemCalendarEmailGrabber.Click += buttonItemCalendarEmailGrabber_Click;
-			FormMain.Instance.buttonItemCalendarFileGrabber.Click += buttonItemCalendarFileGrabber_Click;
 		}
 
 		#region IPageController Members
@@ -47,8 +43,6 @@ namespace FileManager.Controllers
 				FormMain.Instance.pnMain.Controls.Add(_tabPage);
 
 			_formSettings = new FormCalendarSettings();
-			_formEmailGrabber = new FormEmailGrabber();
-			_formFileGrabber = new FormFileGrabber();
 
 			MainController.Instance.LibraryChanged += (sender, args) =>
 														  {
@@ -73,21 +67,22 @@ namespace FileManager.Controllers
 
 		private void ApplyOvernightsCalendar()
 		{
-
-			LibraryDecorator activeDecorator = MainController.Instance.ActiveDecorator;
+			var activeDecorator = MainController.Instance.ActiveDecorator;
 			if (activeDecorator == null || !activeDecorator.Library.IsConfigured || !SettingsManager.Instance.EnableOvernightsCalendarTab) return;
 			FormMain.Instance.buttonItemCalendarSyncStatusDisabled.Checked = !activeDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.buttonItemCalendarSyncStatusEnabled.Checked = activeDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.buttonEditCalendarLocation.EditValue = activeDecorator.Library.OvernightsCalendar.RootFolder.FullName;
 			FormMain.Instance.ribbonBarCalendarLocation.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
+			FormMain.Instance.ribbonBarCalendarParts.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.ribbonBarCalendarSettings.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.ribbonBarCalendarFont.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarFileGrabber.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
 			_tabPage.Enabled = activeDecorator.Library.OvernightsCalendar.Enabled;
 
 			UpdateCalendarFontButtonsStatus();
 
+			FormMain.Instance.ribbonBarCalendarParts.Items.Clear();
+			FormMain.Instance.ribbonBarCalendarParts.Items.AddRange(activeDecorator.OvernightsCalendar.PartToggles.ToArray());
+		
 			if (!_tabPage.Controls.Contains(activeDecorator.OvernightsCalendar))
 				_tabPage.Controls.Add(activeDecorator.OvernightsCalendar);
 			activeDecorator.OvernightsCalendar.BringToFront();
@@ -110,12 +105,10 @@ namespace FileManager.Controllers
 		{
 			if (MainController.Instance.ActiveDecorator == null || _initialization) return;
 			MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled = FormMain.Instance.buttonItemCalendarSyncStatusEnabled.Checked;
-			MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.EnableEmailGrabber &= MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.ribbonBarCalendarLocation.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
+			FormMain.Instance.ribbonBarCalendarParts.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.ribbonBarCalendarSettings.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			FormMain.Instance.ribbonBarCalendarFont.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarEmailGrabber.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
-			FormMain.Instance.ribbonBarCalendarFileGrabber.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			_tabPage.Enabled = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled;
 			if (MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.Enabled && SettingsManager.Instance.EnableOvernightsCalendarTab)
 				using (var formProgress = new FormProgress())
@@ -124,10 +117,10 @@ namespace FileManager.Controllers
 					formProgress.TopMost = true;
 					formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
 					var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate
-																							  {
-																								  MainController.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
-																								  ApplyOvernightsCalendar();
-																							  }));
+					{
+						MainController.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
+						ApplyOvernightsCalendar();
+					}));
 					formProgress.Show();
 					Application.DoEvents();
 					thread.Start();
@@ -142,7 +135,7 @@ namespace FileManager.Controllers
 		private void buttonEditCalendarLocation_EditValueChanged(object sender, EventArgs e)
 		{
 			if (MainController.Instance.ActiveDecorator == null || _initialization) return;
-			string path = FormMain.Instance.buttonEditCalendarLocation.EditValue != null ? FormMain.Instance.buttonEditCalendarLocation.EditValue.ToString() : string.Empty;
+			var path = FormMain.Instance.buttonEditCalendarLocation.EditValue != null ? FormMain.Instance.buttonEditCalendarLocation.EditValue.ToString() : string.Empty;
 			if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
 			{
 				MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.RootFolder = new DirectoryInfo(path);
@@ -152,10 +145,10 @@ namespace FileManager.Controllers
 					formProgress.TopMost = true;
 					formProgress.laProgress.Text = "Chill-Out for a few seconds....\nLoading Your Overnights Calendar";
 					var thread = new Thread(() => FormMain.Instance.Invoke((MethodInvoker)delegate
-																							  {
-																								  MainController.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
-																								  ApplyOvernightsCalendar();
-																							  }));
+					{
+						MainController.Instance.ActiveDecorator.BuildOvernightsCalendar(true);
+						ApplyOvernightsCalendar();
+					}));
 					formProgress.Show();
 					Application.DoEvents();
 					thread.Start();
@@ -173,11 +166,9 @@ namespace FileManager.Controllers
 			using (var dialog = new FolderBrowserDialog())
 			{
 				dialog.SelectedPath = MainController.Instance.ActiveDecorator.Library.OvernightsCalendar.RootFolder.FullName;
-				if (dialog.ShowDialog() == DialogResult.OK)
-				{
-					if (Directory.Exists(dialog.SelectedPath))
-						FormMain.Instance.buttonEditCalendarLocation.EditValue = dialog.SelectedPath;
-				}
+				if (dialog.ShowDialog() != DialogResult.OK) return;
+				if (Directory.Exists(dialog.SelectedPath))
+					FormMain.Instance.buttonEditCalendarLocation.EditValue = dialog.SelectedPath;
 			}
 		}
 
@@ -207,24 +198,6 @@ namespace FileManager.Controllers
 			if (MainController.Instance.ActiveDecorator != null)
 				MainController.Instance.ActiveDecorator.OvernightsCalendar.RefreshFont();
 			UpdateCalendarFontButtonsStatus();
-		}
-
-		private void buttonItemCalendarEmailGrabber_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ActiveDecorator != null)
-			{
-				if (_formEmailGrabber == null) _formEmailGrabber = new FormEmailGrabber();
-				_formEmailGrabber.ShowDialog();
-			}
-		}
-
-		private void buttonItemCalendarFileGrabber_Click(object sender, EventArgs e)
-		{
-			if (MainController.Instance.ActiveDecorator != null)
-			{
-				if (_formFileGrabber == null) _formFileGrabber = new FormFileGrabber();
-				_formFileGrabber.ShowDialog();
-			}
 		}
 	}
 }

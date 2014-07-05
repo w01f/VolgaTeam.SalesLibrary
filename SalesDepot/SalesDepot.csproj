@@ -130,6 +130,12 @@
     <Compile Include="Floater\FormFloater.designer.cs">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.Designer.cs">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -488,6 +494,9 @@
     <EmbeddedResource Include="Floater\FormFloater.resx">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.resx">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\DayControl.resx">
       <DependentUpon>DayControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -811,6 +820,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\CalendarLogo.png" />
     <None Include="Resources\FloaterHide.png" />
     <None Include="Resources\NudgeDown.png" />
     <None Include="Resources\NudgeUp.png" />
@@ -893,7 +903,6 @@
     <None Include="Resources\ListView.png" />
     <None Include="Resources\zip.png" />
     <None Include="Resources\CalendarDisclaimerLogo.png" />
-    <None Include="Resources\CalendarLogo.png" />
     <Content Include="icon.ico" />
   </ItemGroup>
   <ItemGroup>

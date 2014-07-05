@@ -19,9 +19,9 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 		private readonly FormAddPage _formAddPage;
 		private readonly FormDeletePages _formDeletePages;
 
-		public QPageRecord SelectedPage
+		public QPageModel SelectedPage
 		{
-			get { return advBandedGridView.GetFocusedRow() as QPageRecord; }
+			get { return advBandedGridView.GetFocusedRow() as QPageModel; }
 		}
 
 		public PageListControl()
@@ -229,14 +229,14 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			switch (e.Button.Index)
 			{
 				case 0:
-					var currentPage = advBandedGridView.GetFocusedRow() as QPageRecord;
+					var currentPage = advBandedGridView.GetFocusedRow() as QPageModel;
 					if (currentPage != null && currentPageIndex > 0)
 						SetPageIndex(currentPage.id, currentPageIndex - 1);
 					break;
 				case 1:
 					if (currentPageIndex < (advBandedGridView.RowCount - 1))
 					{
-						var nextPage = advBandedGridView.GetRow(currentPageIndex + 1) as QPageRecord;
+						var nextPage = advBandedGridView.GetRow(currentPageIndex + 1) as QPageModel;
 						if (nextPage != null)
 							SetPageIndex(nextPage.id, currentPageIndex);
 					}

@@ -8,6 +8,7 @@ using SalesDepot.ConfigurationClasses;
 using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
+using SalesDepot.Properties;
 using SalesDepot.TabPages;
 using SalesDepot.ToolClasses;
 using SalesDepot.ToolForms;
@@ -53,7 +54,12 @@ namespace SalesDepot
 				if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemSearch)
 					floaterLogo = labelItemSearchLogo.Image;
 				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemCalendar)
-					floaterLogo = labelItemCalendarLogo.Image;
+				{
+					if (File.Exists(SettingsManager.Instance.CalendarLogoPath))
+						floaterLogo = new Bitmap(SettingsManager.Instance.CalendarLogoPath);
+					else
+						floaterLogo = Resources.CalendarLogo;
+				}
 				else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSchedule || ribbonControl.SelectedRibbonTabItem == ribbonTabItemProgramSearch)
 					floaterLogo = labelItemProgramScheduleStationLogo.Image;
 				return floaterLogo;
@@ -106,8 +112,6 @@ namespace SalesDepot
 		{
 			if (File.Exists(SettingsManager.Instance.IconPath))
 				Icon = new Icon(SettingsManager.Instance.IconPath);
-			if (File.Exists(SettingsManager.Instance.CalendarLogoPath))
-				labelItemCalendarLogo.Image = new Bitmap(SettingsManager.Instance.CalendarLogoPath);
 			Text = string.Format("{0} - User: {1}", SettingsManager.Instance.SalesDepotName, Environment.UserName);
 			ribbonTabItemSearch.Text = !string.IsNullOrEmpty(SettingsManager.Instance.SolutionTitle) ? SettingsManager.Instance.SolutionTitle : ribbonTabItemSearch.Text;
 			buttonItemProgramScheduleOutputPDF.Enabled = !PowerPointHelper.Instance.Is2003;
@@ -215,7 +219,7 @@ namespace SalesDepot
 
 			if (LibraryManager.Instance.LibraryPackageCollection.Count > 0)
 			{
-				thread = new Thread(() => Invoke((MethodInvoker) delegate
+				thread = new Thread(() => Invoke((MethodInvoker)delegate
 				{
 					TabHome.LoadTab();
 					Application.DoEvents();

@@ -14,31 +14,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public OvernightsCalendar(ILibrary parent)
 		{
 			Parent = parent;
-
 			RootFolder = new DirectoryInfo(Application.StartupPath);
-			Years = new List<CalendarYear>();
-			Files = new List<FileInfo>();
-
-			#region Email Grabber Settings
-			EnableEmailGrabber = false;
-			EmailGrabInterval = 10;
-			InboxSubFolder = "Inbox";
-			#endregion
-
-			#region File Grabber Settings
-			EnableFileGrabber = false;
-			FileGrabInterval = 10;
-			FileGrabSourceFolder = @"c:\Overnights Source";
-			#endregion
-
+			Parts = new List<CalendarPart>();
 			ResetColors();
 		}
-
 		public ILibrary Parent { get; set; }
 		public bool Enabled { get; set; }
 		public DirectoryInfo RootFolder { get; set; }
-		public List<CalendarYear> Years { get; private set; }
-		public List<FileInfo> Files { get; private set; }
+		public List<CalendarPart> Parts { get; private set; }
 
 		#region Color Settings
 		public Color CalendarBackColor { get; set; }
@@ -54,23 +37,14 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		public Color DeadLinksForeColor { get; set; }
 		#endregion
 
-		#region Email Grabber Settings
-		public bool EnableEmailGrabber { get; set; }
-		public int EmailGrabInterval { get; set; }
-		public string InboxSubFolder { get; set; }
-		#endregion
-
-		#region File Grabber Settings
-		public bool EnableFileGrabber { get; set; }
-		public int FileGrabInterval { get; set; }
-		public string FileGrabSourceFolder { get; set; }
-		#endregion
-
 		public OvernightsCalendar Clone(ILibrary parent)
 		{
 			var calendar = new OvernightsCalendar(parent);
 			calendar.Enabled = Enabled;
 			calendar.RootFolder = RootFolder;
+
+			foreach (var calendarPart in Parts)
+				calendar.Parts.Add(calendarPart.Clone(calendar));
 
 			#region Color Settings
 			calendar.CalendarBackColor = CalendarBackColor;
@@ -86,18 +60,6 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			calendar.DeadLinksForeColor = DeadLinksForeColor;
 			#endregion
 
-			#region Email Grabber Settings
-			calendar.EnableEmailGrabber = EnableEmailGrabber;
-			calendar.EmailGrabInterval = EmailGrabInterval;
-			calendar.InboxSubFolder = InboxSubFolder;
-			#endregion
-
-			#region File Grabber Settings
-			calendar.EnableFileGrabber = EnableFileGrabber;
-			calendar.FileGrabInterval = FileGrabInterval;
-			calendar.FileGrabSourceFolder = FileGrabSourceFolder;
-			#endregion
-
 			return calendar;
 		}
 
@@ -108,29 +70,17 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			result.AppendLine(@"<RootFolder>" + RootFolder.FullName.Replace(@"&", "&#38;").Replace(@"<", "&#60;").Replace("\"", "&quot;") + @"</RootFolder>");
 
 			#region Color Settings
-			result.AppendLine(@"<CalendarBackColor>" + CalendarBackColor.ToArgb().ToString() + @"</CalendarBackColor>");
-			result.AppendLine(@"<CalendarBorderColor>" + CalendarBorderColor.ToArgb().ToString() + @"</CalendarBorderColor>");
-			result.AppendLine(@"<CalendarHeaderBackColor>" + CalendarHeaderBackColor.ToArgb().ToString() + @"</CalendarHeaderBackColor>");
-			result.AppendLine(@"<CalendarHeaderForeColor>" + CalendarHeaderForeColor.ToArgb().ToString() + @"</CalendarHeaderForeColor>");
-			result.AppendLine(@"<MonthHeaderBackColor>" + MonthHeaderBackColor.ToArgb().ToString() + @"</MonthHeaderBackColor>");
-			result.AppendLine(@"<MonthHeaderForeColor>" + MonthHeaderForeColor.ToArgb().ToString() + @"</MonthHeaderForeColor>");
-			result.AppendLine(@"<MonthBodyBackColor>" + MonthBodyBackColor.ToArgb().ToString() + @"</MonthBodyBackColor>");
-			result.AppendLine(@"<MonthBodyForeColor>" + MonthBodyForeColor.ToArgb().ToString() + @"</MonthBodyForeColor>");
-			result.AppendLine(@"<SweepBackColor>" + SweepBackColor.ToArgb().ToString() + @"</SweepBackColor>");
-			result.AppendLine(@"<SweepForeColor>" + SweepForeColor.ToArgb().ToString() + @"</SweepForeColor>");
-			result.AppendLine(@"<DeadLinksForeColor>" + DeadLinksForeColor.ToArgb().ToString() + @"</DeadLinksForeColor>");
-			#endregion
-
-			#region Email Grabber Settings
-			result.AppendLine(@"<EnableEmailGrabber>" + EnableEmailGrabber.ToString() + @"</EnableEmailGrabber>");
-			result.AppendLine(@"<EmailGrabInterval>" + EmailGrabInterval.ToString() + @"</EmailGrabInterval>");
-			result.AppendLine(@"<InboxSubFolder>" + InboxSubFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</InboxSubFolder>");
-			#endregion
-
-			#region File Grabber Settings
-			result.AppendLine(@"<EnableFileGrabber>" + EnableFileGrabber.ToString() + @"</EnableFileGrabber>");
-			result.AppendLine(@"<FileGrabInterval>" + FileGrabInterval.ToString() + @"</FileGrabInterval>");
-			result.AppendLine(@"<FileGrabSourceFolder>" + FileGrabSourceFolder.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</FileGrabSourceFolder>");
+			result.AppendLine(@"<CalendarBackColor>" + CalendarBackColor.ToArgb() + @"</CalendarBackColor>");
+			result.AppendLine(@"<CalendarBorderColor>" + CalendarBorderColor.ToArgb() + @"</CalendarBorderColor>");
+			result.AppendLine(@"<CalendarHeaderBackColor>" + CalendarHeaderBackColor.ToArgb() + @"</CalendarHeaderBackColor>");
+			result.AppendLine(@"<CalendarHeaderForeColor>" + CalendarHeaderForeColor.ToArgb() + @"</CalendarHeaderForeColor>");
+			result.AppendLine(@"<MonthHeaderBackColor>" + MonthHeaderBackColor.ToArgb() + @"</MonthHeaderBackColor>");
+			result.AppendLine(@"<MonthHeaderForeColor>" + MonthHeaderForeColor.ToArgb() + @"</MonthHeaderForeColor>");
+			result.AppendLine(@"<MonthBodyBackColor>" + MonthBodyBackColor.ToArgb() + @"</MonthBodyBackColor>");
+			result.AppendLine(@"<MonthBodyForeColor>" + MonthBodyForeColor.ToArgb() + @"</MonthBodyForeColor>");
+			result.AppendLine(@"<SweepBackColor>" + SweepBackColor.ToArgb() + @"</SweepBackColor>");
+			result.AppendLine(@"<SweepForeColor>" + SweepForeColor.ToArgb() + @"</SweepForeColor>");
+			result.AppendLine(@"<DeadLinksForeColor>" + DeadLinksForeColor.ToArgb() + @"</DeadLinksForeColor>");
 			#endregion
 
 			return result.ToString();
@@ -138,13 +88,13 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 		public void Deserialize(XmlNode node)
 		{
-			bool tempBool = false;
-			int tempInt;
 			foreach (XmlNode childNode in node.ChildNodes)
 			{
+				int tempInt;
 				switch (childNode.Name)
 				{
 					case "Enabled":
+						bool tempBool;
 						if (bool.TryParse(childNode.InnerText, out tempBool))
 							Enabled = tempBool;
 						break;
@@ -153,7 +103,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 							RootFolder = new DirectoryInfo(childNode.InnerText);
 						break;
 
-						#region Color Settings
+					#region Color Settings
 					case "CalendarBackColor":
 						if (int.TryParse(childNode.InnerText, out tempInt))
 							CalendarBackColor = Color.FromArgb(tempInt);
@@ -198,62 +148,21 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 						if (int.TryParse(childNode.InnerText, out tempInt))
 							DeadLinksForeColor = Color.FromArgb(tempInt);
 						break;
-						#endregion
-
-						#region Email Grabber Settings
-					case "EnableEmailGrabber":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							EnableEmailGrabber = tempBool;
-						break;
-					case "EmailGrabInterval":
-						if (int.TryParse(childNode.InnerText, out tempInt))
-							EmailGrabInterval = tempInt;
-						break;
-					case "InboxSubFolder":
-						InboxSubFolder = childNode.InnerText;
-						break;
-						#endregion
-
-						#region File Grabber Settings
-					case "EnableFileGrabber":
-						if (bool.TryParse(childNode.InnerText, out tempBool))
-							EnableFileGrabber = tempBool;
-						break;
-					case "FileGrabInterval":
-						if (int.TryParse(childNode.InnerText, out tempInt))
-							FileGrabInterval = tempInt;
-						break;
-					case "FileGrabSourceFolder":
-						FileGrabSourceFolder = childNode.InnerText;
-						break;
-						#endregion
+					#endregion
 				}
 			}
 		}
 
-		public void LoadYears()
+		public void LoadParts()
 		{
-			Years.Clear();
-			Files.Clear();
 			if (!RootFolder.Exists || !Enabled) return;
-			foreach (var yearFolder in RootFolder.GetDirectories())
+			Parts.Clear();
+			foreach (var directory in RootFolder.GetDirectories())
 			{
-				int temp;
-				if (int.TryParse(yearFolder.Name, out temp))
-				{
-					var year = new CalendarYear(this);
-					year.RootFolder = yearFolder;
-					year.Year = temp;
-					Files.AddRange(year.RootFolder.GetFiles());
-					Years.Add(year);
-					Application.DoEvents();
-				}
-			}
-			foreach (CalendarYear year in Years)
-			{
-				year.LoadSweepPeriods();
-				year.LoadMonths();
-				Application.DoEvents();
+				var calendarPart = new CalendarPart(this, directory);
+				calendarPart.Load();
+				if (calendarPart.Configured)
+					Parts.Add(calendarPart);
 			}
 		}
 
@@ -273,18 +182,97 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		}
 	}
 
+	public class CalendarPart
+	{
+		public OvernightsCalendar Parent { get; private set; }
+		public bool Configured { get; private set; }
+		public string Name { get; set; }
+		public bool Enabled { get; set; }
+		public DirectoryInfo PartFolder { get; private set; }
+		public List<CalendarYear> Years { get; private set; }
+		public List<FileInfo> Files { get; private set; }
+
+		public CalendarPart(OvernightsCalendar parent, DirectoryInfo partFolder)
+		{
+			Parent = parent;
+			PartFolder = partFolder;
+			Years = new List<CalendarYear>();
+			Files = new List<FileInfo>();
+		}
+
+		public void Load()
+		{
+			Configured = false;
+			Years.Clear();
+			Files.Clear();
+
+			if (!PartFolder.Exists) return;
+
+			var configFile = Path.Combine(PartFolder.FullName, Constants.CalendarPartConfigFileName);
+			if (!File.Exists(configFile)) return;
+
+			try
+			{
+				var document = new XmlDocument();
+				document.Load(configFile);
+				var node = document.SelectSingleNode(@"/Config/Name");
+				if (node != null)
+				{
+					Name = node.InnerText;
+					Configured = true;
+				}
+				node = document.SelectSingleNode(@"/Config/Enabled");
+				if (node != null)
+				{
+					bool temp;
+					if (Boolean.TryParse(node.InnerText, out temp))
+						Enabled = temp;
+				}
+			}
+			catch { }
+
+			if (!Configured || !Enabled) return;
+
+			foreach (var yearFolder in PartFolder.GetDirectories())
+			{
+				int temp;
+				if (!int.TryParse(yearFolder.Name, out temp)) continue;
+				var year = new CalendarYear(this);
+				year.RootFolder = yearFolder;
+				year.Year = temp;
+				Files.AddRange(year.RootFolder.GetFiles());
+				Years.Add(year);
+				Application.DoEvents();
+			}
+			foreach (var year in Years)
+			{
+				year.LoadSweepPeriods();
+				year.LoadMonths();
+				Application.DoEvents();
+			}
+		}
+
+		public CalendarPart Clone(OvernightsCalendar parent)
+		{
+			var calendarPart = new CalendarPart(parent, PartFolder);
+			calendarPart.Name = Name;
+			calendarPart.Enabled = Enabled;
+			return calendarPart;
+		}
+	}
+
 	public class CalendarYear
 	{
 		private readonly FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
 
-		public CalendarYear(OvernightsCalendar parent)
+		public CalendarYear(CalendarPart parent)
 		{
 			Parent = parent;
 			Months = new List<CalendarMonth>();
 			SweepDays = new List<DateTime>();
 		}
 
-		public OvernightsCalendar Parent { get; private set; }
+		public CalendarPart Parent { get; private set; }
 		public DirectoryInfo RootFolder { get; set; }
 		public int Year { get; set; }
 		public List<CalendarMonth> Months { get; private set; }
@@ -304,61 +292,51 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 
 			_libraryStorageWatcher.Path = RootFolder.FullName;
 			_libraryStorageWatcher.Created += (sender, e) =>
-				                                  {
-					                                  if (!Parent.Files.Select(x => x.FullName).Contains(e.FullPath))
-						                                  Parent.Files.Add(new FileInfo(e.FullPath));
-				                                  };
+			{
+				if (!Parent.Files.Select(x => x.FullName).Contains(e.FullPath))
+					Parent.Files.Add(new FileInfo(e.FullPath));
+			};
 			_libraryStorageWatcher.EnableRaisingEvents = true;
 		}
 
 		public void LoadSweepPeriods()
 		{
 			SweepDays.Clear();
-			if (RootFolder.Exists)
+			if (!RootFolder.Exists) return;
+			var sweepPeriodsConnfigFile = Path.Combine(RootFolder.FullName, Constants.SweepPeriodsFileName);
+			if (!File.Exists(sweepPeriodsConnfigFile)) return;
+			try
 			{
-				string sweepPeriodsConnfigFile = Path.Combine(RootFolder.FullName, Constants.SweepPeriodsFileName);
-				if (File.Exists(sweepPeriodsConnfigFile))
+				var document = new XmlDocument();
+				document.Load(sweepPeriodsConnfigFile);
+				var node = document.SelectSingleNode(@"/SweepPeriods");
+				if (node == null) return;
+				foreach (XmlNode childNode in node.ChildNodes)
 				{
-					try
+					if (!childNode.Name.Equals("SweepPeriod")) continue;
+					var dateBegin = DateTime.MinValue;
+					var dateEnd = DateTime.MinValue;
+					foreach (XmlAttribute attribute in childNode.Attributes)
 					{
-						var document = new XmlDocument();
-						document.Load(sweepPeriodsConnfigFile);
-						XmlNode node = document.SelectSingleNode(@"/SweepPeriods");
-						if (node != null)
+						switch (attribute.Name)
 						{
-							foreach (XmlNode childNode in node.ChildNodes)
-							{
-								if (childNode.Name.Equals("SweepPeriod"))
-								{
-									DateTime dateBegin = DateTime.MinValue;
-									DateTime dateEnd = DateTime.MinValue;
-									foreach (XmlAttribute attribute in childNode.Attributes)
-									{
-										switch (attribute.Name)
-										{
-											case "DateBegin":
-												DateTime.TryParse(attribute.Value, out dateBegin);
-												break;
-											case "DateEnd":
-												DateTime.TryParse(attribute.Value, out dateEnd);
-												break;
-										}
-									}
-									if (!dateBegin.Equals(DateTime.MinValue) && !dateEnd.Equals(DateTime.MinValue) && dateBegin < dateEnd)
-									{
-										while (dateBegin <= dateEnd)
-										{
-											SweepDays.Add(dateBegin);
-											dateBegin = dateBegin.AddDays(1);
-										}
-									}
-								}
-							}
+							case "DateBegin":
+								DateTime.TryParse(attribute.Value, out dateBegin);
+								break;
+							case "DateEnd":
+								DateTime.TryParse(attribute.Value, out dateEnd);
+								break;
 						}
 					}
-					catch {}
+					if (dateBegin.Equals(DateTime.MinValue) || dateEnd.Equals(DateTime.MinValue) || dateBegin >= dateEnd) continue;
+					while (dateBegin <= dateEnd)
+					{
+						SweepDays.Add(dateBegin);
+						dateBegin = dateBegin.AddDays(1);
+					}
 				}
 			}
+			catch { }
 		}
 	}
 
@@ -426,7 +404,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 				if (!_linkedFileReady)
 				{
 					_linkedFileReady = true;
-					_linkedFile = Parent.Parent.Parent.Files.Where(x => x.Name.Contains(Date.ToString("MMddyy"))).FirstOrDefault();
+					_linkedFile = Parent.Parent.Parent.Files.FirstOrDefault(x => x.Name.Contains(Date.ToString("MMddyy")));
 				}
 				return _linkedFile;
 			}

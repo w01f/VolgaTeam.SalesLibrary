@@ -18,8 +18,8 @@ using LibraryLink = SalesDepot.Services.ContentManagmentService.LibraryLink;
 using LineBreak = SalesDepot.Services.ContentManagmentService.LineBreak;
 using LinkCategory = SalesDepot.Services.ContentManagmentService.LinkCategory;
 using LibraryConfig = SalesDepot.Services.ContentManagmentService.LibraryConfig;
-using UserRecord = SalesDepot.Services.IPadAdminService.UserRecord;
-using GroupRecord = SalesDepot.Services.IPadAdminService.GroupRecord;
+using UserModel = SalesDepot.Services.IPadAdminService.UserModel;
+using GroupModel = SalesDepot.Services.IPadAdminService.GroupModel;
 
 namespace SalesDepot.CoreObjects.BusinessClasses
 {
@@ -566,12 +566,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return _siteClient.IsUserPasswordComplex(out message);
 		}
 
-		public UserRecord[] GetUsers(out string message)
+		public UserModel[] GetUsers(out string message)
 		{
 			return _siteClient.GetUsers(out message);
 		}
 
-		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupRecord[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetUser(string login, string password, string firstName, string lastName, string email, string phone, int role, GroupModel[] groups, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
 			_siteClient.SetUser(login, password, firstName, lastName, email, phone, role, groups, pages, out message);
 		}
@@ -583,12 +583,12 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 		#endregion
 
 		#region Groups
-		public GroupRecord[] GetGroups(out string message)
+		public GroupModel[] GetGroups(out string message)
 		{
 			return _siteClient.GetGroups(out message);
 		}
 
-		public void SetGroup(string id, string name, UserRecord[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)
+		public void SetGroup(string id, string name, UserModel[] users, Services.IPadAdminService.LibraryPage[] pages, out string message)
 		{
 			_siteClient.SetGroup(id, name, users, pages, out message);
 		}
@@ -610,7 +610,7 @@ namespace SalesDepot.CoreObjects.BusinessClasses
 			return _siteClient.GetLibraries(out message);
 		}
 
-		public void SetPage(string id, UserRecord[] users, GroupRecord[] groups, out string message)
+		public void SetPage(string id, UserModel[] users, GroupModel[] groups, out string message)
 		{
 			_siteClient.SetPage(id, users, groups, out message);
 		}

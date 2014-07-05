@@ -1,103 +1,87 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using AutoSynchronizer.ConfigurationClasses;
 using SalesDepot.CoreObjects.BusinessClasses;
 
 namespace AutoSynchronizer.BusinessClasses
 {
-    class LibraryManager
-    {
-        private static LibraryManager _instance = new LibraryManager();
+	internal class LibraryManager
+	{
+		private static readonly LibraryManager _instance = new LibraryManager();
 
-        public List<LibraryWrapper> LibraryCollection { get; private set; }
+		private LibraryManager()
+		{
+			LibraryCollection = new List<LibraryWrapper>();
+		}
 
-        public static LibraryManager Instance
-        {
-            get
-            {
-                return _instance;
-            }
-        }
+		public List<LibraryWrapper> LibraryCollection { get; private set; }
 
-        private LibraryManager()
-        {
-            this.LibraryCollection = new List<LibraryWrapper>();
-        }
+		public static LibraryManager Instance
+		{
+			get { return _instance; }
+		}
 
-        public void LoadLibraries()
-        {
-            DirectoryInfo rootFolder = new DirectoryInfo(ConfigurationClasses.SettingsManager.Instance.BackupPath);
-            if (rootFolder.Exists)
-            {
-                this.LibraryCollection.Clear();
-                if (rootFolder.Root.FullName.Equals(rootFolder.FullName) || ConfigurationClasses.SettingsManager.Instance.UseDirectAccessToFiles)
-                    this.LibraryCollection.Add(new LibraryWrapper(new Library(Constants.WholeDriveFilesStorage, rootFolder)));
-                else
-                    foreach (DirectoryInfo subFolder in rootFolder.GetDirectories())
-                        this.LibraryCollection.Add(new LibraryWrapper(new Library(subFolder.Name, subFolder)));
-            }
-        }
-    }
+		public void LoadLibraries()
+		{
+			var rootFolder = new DirectoryInfo(SettingsManager.Instance.BackupPath);
+			if (rootFolder.Exists)
+			{
+				LibraryCollection.Clear();
+				if (rootFolder.Root.FullName.Equals(rootFolder.FullName) || SettingsManager.Instance.UseDirectAccessToFiles)
+					LibraryCollection.Add(new LibraryWrapper(new Library(Constants.WholeDriveFilesStorage, rootFolder)));
+				else
+					foreach (var subFolder in rootFolder.GetDirectories())
+						LibraryCollection.Add(new LibraryWrapper(new Library(subFolder.Name, subFolder)));
+			}
+		}
+	}
 
-    public class LibraryWrapper
-    {
-        private FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
+	public class LibraryWrapper
+	{
+		private readonly FileSystemWatcher _libraryStorageWatcher = new FileSystemWatcher();
 
-        public Library Library { get; private set; }
-        public LibrarySynchronizer Syncer { get; private set; }
-        public OvernightsEmailGrabber EmailGrabber { get; private set; }
-        public OvernightsFileGrabber FileGrabber { get; private set; }
+		public LibraryWrapper(Library library)
+		{
+			Library = library;
+			Library.OvernightsCalendar.LoadParts();
+			InitServiceObjects();
 
-        public LibraryWrapper(Library library)
-        {
-            this.Library = library;
-            this.Library.OvernightsCalendar.LoadYears();
-            InitServiceObjects();
+			_libraryStorageWatcher.Path = Library.Folder.FullName;
+			_libraryStorageWatcher.Filter = Constants.StorageFileName;
+			_libraryStorageWatcher.Changed += (sender, e) =>
+			{
+				if (e.ChangeType == WatcherChangeTypes.Changed)
+				{
+					try
+					{
+						if (!Syncer.SyncInProgress)
+						{
+							_libraryStorageWatcher.EnableRaisingEvents = false;
+							lock (AppManager.Locker)
+							{
+								Library.Init();
+								Library.OvernightsCalendar.LoadParts();
+								InitServiceObjects();
+							}
+						}
+					}
+					finally
+					{
+						_libraryStorageWatcher.EnableRaisingEvents = true;
+					}
+				}
+			};
+			_libraryStorageWatcher.EnableRaisingEvents = true;
+		}
 
-            _libraryStorageWatcher.Path = this.Library.Folder.FullName;
-            _libraryStorageWatcher.Filter = Constants.StorageFileName;
-            _libraryStorageWatcher.Changed += new FileSystemEventHandler((sender, e) =>
-            {
-                if (e.ChangeType == WatcherChangeTypes.Changed)
-                {
-                    try
-                    {
-                        if (!this.Syncer.SyncInProgress)
-                        {
-                            _libraryStorageWatcher.EnableRaisingEvents = false;
-                            lock (AppManager.Locker)
-                            {
-                                this.Library.Init();
-                                this.Library.OvernightsCalendar.LoadYears();
-                                InitServiceObjects();
-                            }
-                        }
-                    }
-                    finally
-                    {
-                        _libraryStorageWatcher.EnableRaisingEvents = true;
-                    }
-                }
-            });
-            _libraryStorageWatcher.EnableRaisingEvents = true;
-        }
+		public Library Library { get; private set; }
+		public LibrarySynchronizer Syncer { get; private set; }
 
-        public void InitServiceObjects()
-        {
-            if (this.Syncer != null)
-                this.Syncer.StopBackgroundSync();
-            this.Syncer = new LibrarySynchronizer(this);
-
-            if (this.EmailGrabber != null)
-                this.EmailGrabber.StopBackgroundGrab();
-            else
-                this.EmailGrabber = new OvernightsEmailGrabber(this);
-            this.EmailGrabber.ScheduleNextGrab();
-
-            if (this.FileGrabber != null)
-                this.FileGrabber.StopBackgroundGrab();
-            else
-                this.FileGrabber = new OvernightsFileGrabber(this);
-            this.FileGrabber.ScheduleNextGrab();
-        }
-    }
+		public void InitServiceObjects()
+		{
+			if (Syncer != null)
+				Syncer.StopBackgroundSync();
+			Syncer = new LibrarySynchronizer(this);
+		}
+	}
 }

@@ -96,7 +96,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 			}
 		}
 
-		private void UpdateLinks(QPageRecord page)
+		private void UpdateLinks(QPageModel page)
 		{
 			labelControlLinksCount.Text = String.Format("Shared Links: {0}", page.links != null ? page.links.Count() : 0);
 			gridControlLinks.DataSource = page.links;
@@ -186,7 +186,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 
 		private void repositoryItemButtonEditLinksActions_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
 		{
-			var link = advBandedGridViewLinks.GetFocusedRow() as QPageLinkRecord;
+			var link = advBandedGridViewLinks.GetFocusedRow() as QPageLinkModel;
 			if (link == null) return;
 			var currentLinkIndex = advBandedGridViewLinks.FocusedRowHandle;
 			switch (e.Button.Index)
@@ -210,7 +210,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 				case 1:
 					if (currentLinkIndex < (advBandedGridViewLinks.RowCount - 1))
 					{
-						var nextLink = advBandedGridViewLinks.GetRow(currentLinkIndex + 1) as QPageLinkRecord;
+						var nextLink = advBandedGridViewLinks.GetRow(currentLinkIndex + 1) as QPageLinkModel;
 						if (nextLink == null) return;
 						if (!QBuilder.Instance.Connected) return;
 						Enabled = false;
@@ -313,7 +313,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 		private void advBandedGridViewLinks_RowCellClick(object sender, RowCellClickEventArgs e)
 		{
 			if (e.Column != bandedGridColumnLinksName && e.Column != bandedGridColumnLinksType) return;
-			var link = advBandedGridViewLinks.GetFocusedRow() as QPageLinkRecord;
+			var link = advBandedGridViewLinks.GetFocusedRow() as QPageLinkModel;
 			if (link == null) return;
 			var libraryLink = LibraryManager.Instance.GetLibraryLink(link.libraryId, link.linkId);
 			if (libraryLink == null)
@@ -341,7 +341,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 
 		private void gridControlLinks_DragOver(object sender, DragEventArgs e)
 		{
-			e.Effect = e.Data.GetDataPresent(typeof(QPageLinkRecord)) ? DragDropEffects.Move : DragDropEffects.None;
+			e.Effect = e.Data.GetDataPresent(typeof(QPageLinkModel)) ? DragDropEffects.Move : DragDropEffects.None;
 			var grid = sender as GridControl;
 			if (grid == null) return;
 			var view = grid.MainView as GridView;
@@ -352,7 +352,7 @@ namespace SalesDepot.PresentationClasses.QBuilderControls
 
 		private void gridControlLinks_DragDrop(object sender, DragEventArgs e)
 		{
-			var link = e.Data.GetData(typeof(QPageLinkRecord)) as QPageLinkRecord;
+			var link = e.Data.GetData(typeof(QPageLinkModel)) as QPageLinkModel;
 			if (link == null) return;
 			using (var form = new FormProgress())
 			{

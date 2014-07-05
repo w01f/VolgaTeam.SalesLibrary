@@ -166,7 +166,7 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 		#region Overnights Calendar Stuff
 		public void BuildOvernightsCalendar()
 		{
-			Library.OvernightsCalendar.LoadYears();
+			Library.OvernightsCalendar.LoadParts();
 			Application.DoEvents();
 			if (!Library.OvernightsCalendar.Enabled) return;
 			OvernightsCalendar.Build();
@@ -181,6 +181,8 @@ namespace SalesDepot.PresentationClasses.WallBin.Decorators
 				UpdateCalendarFontButtonsStatus();
 				if (!FormMain.Instance.TabOvernightsCalendar.Controls.Contains(OvernightsCalendar))
 					FormMain.Instance.TabOvernightsCalendar.Controls.Add(OvernightsCalendar);
+				FormMain.Instance.ribbonBarCalendarParts.Items.Clear();
+				FormMain.Instance.ribbonBarCalendarParts.Items.AddRange(OvernightsCalendar.PartToggles.ToArray());
 				OvernightsCalendar.BringToFront();
 			}
 			else

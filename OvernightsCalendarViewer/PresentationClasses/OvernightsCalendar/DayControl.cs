@@ -28,19 +28,19 @@ namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 		{
 			if (Data.IsSweepDay)
 			{
-				BackColor = Data.Parent.Parent.Parent.SweepBackColor;
+				BackColor = Data.Parent.Parent.Parent.Parent.SweepBackColor;
 				if (Data.LinkedFile == null)
-					ForeColor = Data.Parent.Parent.Parent.DeadLinksForeColor;
+					ForeColor = Data.Parent.Parent.Parent.Parent.DeadLinksForeColor;
 				else
-					ForeColor = Data.Parent.Parent.Parent.SweepForeColor;
+					ForeColor = Data.Parent.Parent.Parent.Parent.SweepForeColor;
 			}
 			else
 			{
-				BackColor = Data.Parent.Parent.Parent.MonthBodyBackColor;
+				BackColor = Data.Parent.Parent.Parent.Parent.MonthBodyBackColor;
 				if (Data.LinkedFile == null)
-					ForeColor = Data.Parent.Parent.Parent.DeadLinksForeColor;
+					ForeColor = Data.Parent.Parent.Parent.Parent.DeadLinksForeColor;
 				else
-					ForeColor = Data.Parent.Parent.Parent.MonthBodyForeColor;
+					ForeColor = Data.Parent.Parent.Parent.Parent.MonthBodyForeColor;
 			}
 			Refresh();
 		}
@@ -54,7 +54,7 @@ namespace OvernightsCalendarViewer.PresentationClasses.OvernightsCalendar
 		{
 			if (Data.LinkedFile != null)
 			{
-				var libraryFile = new LibraryLink(new LibraryFolder(new LibraryPage(Data.Parent.Parent.Parent.Parent)));
+				var libraryFile = new LibraryLink(new LibraryFolder(new LibraryPage(Data.Parent.Parent.Parent.Parent.Parent)));
 				libraryFile.OriginalPath = Data.LinkedFile.FullName;
 				libraryFile.Type = FileTypes.OvernightsLink;
 				LinkManager.Instance.OpenLink(libraryFile);

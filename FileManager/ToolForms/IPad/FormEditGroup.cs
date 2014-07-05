@@ -14,11 +14,11 @@ namespace FileManager.ToolForms.IPad
 		private bool _newGroup = false;
 		private List<string> _existedGroups = new List<string>();
 
-		private List<UserRecord> _users = new List<UserRecord>();
+		private List<UserModel> _users = new List<UserModel>();
 		private List<Library> _libraries = new List<Library>();
 		private List<LibraryPage> _pages = new List<LibraryPage>();
 
-		public UserRecord[] AssignedUsers
+		public UserModel[] AssignedUsers
 		{
 			get { return _users.Where(x => x.selected).ToArray(); }
 		}
@@ -28,7 +28,7 @@ namespace FileManager.ToolForms.IPad
 			get { return _pages.Where(x => x.selected).ToArray(); }
 		}
 
-		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserRecord[] users, Library[] libraries)
+		public FormEditGroup(bool newGroup, string[] groupTemplates, string[] existedGroups, UserModel[] users, Library[] libraries)
 		{
 			InitializeComponent();
 

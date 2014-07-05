@@ -39,13 +39,11 @@ namespace SalesDepot.ConfigurationClasses
 		private static readonly SettingsManager _instance = new SettingsManager();
 		private readonly string _appIDFile = string.Empty;
 		private readonly string _configurationPath = string.Empty;
-		private readonly string _defaultSettingsFilePath = string.Empty;
-		private readonly string _defaultViewPath = string.Empty;
 
 		private readonly string _defaultOpenFilePath = string.Empty;
 		private readonly string _defaultSaveFilePath = string.Empty;
-		private string _openFilePath = string.Empty;
-		private string _saveFilePath = string.Empty;
+		private readonly string _defaultSettingsFilePath = string.Empty;
+		private readonly string _defaultViewPath = string.Empty;
 
 
 		private readonly string _localLibraryLogoFolder = string.Empty;
@@ -53,8 +51,10 @@ namespace SalesDepot.ConfigurationClasses
 		private readonly string _localSettingsFilePath = string.Empty;
 		private readonly string _remoteSettingsFilePath = string.Empty;
 		private readonly string _viewButtonsPath = string.Empty;
+		private string _openFilePath = string.Empty;
 		private string _remoteLibraryLogoFolder = string.Empty;
 		private string _remoteLibraryRootFolder = string.Empty;
+		private string _saveFilePath = string.Empty;
 
 		private SettingsManager()
 		{
@@ -136,6 +136,7 @@ namespace SalesDepot.ConfigurationClasses
 		public string SelectedPackage { get; set; }
 		public string SelectedLibrary { get; set; }
 		public string SelectedPage { get; set; }
+		public string SelectedCalendar { get; set; }
 		public int SelectedCalendarYear { get; set; }
 		public int FontSize { get; set; }
 		public int RowSpace { get; set; }
@@ -190,6 +191,7 @@ namespace SalesDepot.ConfigurationClasses
 			}
 			set { _openFilePath = value; }
 		}
+
 		public string SaveFilePath
 		{
 			get
@@ -373,6 +375,7 @@ namespace SalesDepot.ConfigurationClasses
 			SelectedPackage = string.Empty;
 			SelectedLibrary = string.Empty;
 			SelectedPage = string.Empty;
+			SelectedCalendar = string.Empty;
 			SelectedCalendarYear = 0;
 			FontSize = 12;
 			RowSpace = 1;
@@ -414,6 +417,9 @@ namespace SalesDepot.ConfigurationClasses
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedPage");
 				if (node != null)
 					SelectedPage = node.InnerText;
+				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendar");
+				if (node != null)
+					SelectedLibrary = node.InnerText;
 				node = document.SelectSingleNode(@"/LocalSettings/SelectedCalendarYear");
 				if (node != null)
 					if (int.TryParse(node.InnerText, out tempInt))
@@ -576,31 +582,32 @@ namespace SalesDepot.ConfigurationClasses
 			xml.AppendLine(@"<SelectedPackage>" + SelectedPackage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPackage>");
 			xml.AppendLine(@"<SelectedLibrary>" + SelectedLibrary.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedLibrary>");
 			xml.AppendLine(@"<SelectedPage>" + SelectedPage.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedPage>");
-			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear.ToString() + @"</SelectedCalendarYear>");
-			xml.AppendLine(@"<FontSize>" + FontSize.ToString() + @"</FontSize>");
-			xml.AppendLine(@"<RowSpace>" + RowSpace.ToString() + @"</RowSpace>");
-			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize.ToString() + @"</CalendarFontSize>");
-			xml.AppendLine(@"<ShowEmailBin>" + ShowEmailBin.ToString() + @"</ShowEmailBin>");
-			xml.AppendLine(@"<EmailBinSendAsZip>" + EmailBinSendAsZip.ToString() + @"</EmailBinSendAsZip>");
-			xml.AppendLine(@"<OldStyleQuickView>" + OldStyleQuickView.ToString() + @"</OldStyleQuickView>");
-			xml.AppendLine(@"<PowerPointLaunchOptions>" + PowerPointLaunchOptions.ToString() + @"</PowerPointLaunchOptions>");
-			xml.AppendLine(@"<PDFLaunchOptions>" + PDFLaunchOptions.ToString() + @"</PDFLaunchOptions>");
-			xml.AppendLine(@"<WordLaunchOptions>" + WordLaunchOptions.ToString() + @"</WordLaunchOptions>");
-			xml.AppendLine(@"<ExcelLaunchOptions>" + ExcelLaunchOptions.ToString() + @"</ExcelLaunchOptions>");
-			xml.AppendLine(@"<VideoLaunchOptions>" + VideoLaunchOptions.ToString() + @"</VideoLaunchOptions>");
-			xml.AppendLine(@"<FolderLaunchOptions>" + FolderLaunchOptions.ToString() + @"</FolderLaunchOptions>");
-			xml.AppendLine(@"<EmailButtons>" + EmailButtons.ToString() + @"</EmailButtons>");
-			xml.AppendLine(@"<MultitabView>" + MultitabView.ToString() + @"</MultitabView>");
-			xml.AppendLine(@"<HomeView>" + HomeView.ToString() + @"</HomeView>");
-			xml.AppendLine(@"<SearchView>" + SearchView.ToString() + @"</SearchView>");
-			xml.AppendLine(@"<CalendarView>" + CalendarView.ToString() + @"</CalendarView>");
+			xml.AppendLine(@"<SelectedCalendar>" + SelectedCalendar.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</SelectedCalendar>");
+			xml.AppendLine(@"<SelectedCalendarYear>" + SelectedCalendarYear + @"</SelectedCalendarYear>");
+			xml.AppendLine(@"<FontSize>" + FontSize + @"</FontSize>");
+			xml.AppendLine(@"<RowSpace>" + RowSpace + @"</RowSpace>");
+			xml.AppendLine(@"<CalendarFontSize>" + CalendarFontSize + @"</CalendarFontSize>");
+			xml.AppendLine(@"<ShowEmailBin>" + ShowEmailBin + @"</ShowEmailBin>");
+			xml.AppendLine(@"<EmailBinSendAsZip>" + EmailBinSendAsZip + @"</EmailBinSendAsZip>");
+			xml.AppendLine(@"<OldStyleQuickView>" + OldStyleQuickView + @"</OldStyleQuickView>");
+			xml.AppendLine(@"<PowerPointLaunchOptions>" + PowerPointLaunchOptions + @"</PowerPointLaunchOptions>");
+			xml.AppendLine(@"<PDFLaunchOptions>" + PDFLaunchOptions + @"</PDFLaunchOptions>");
+			xml.AppendLine(@"<WordLaunchOptions>" + WordLaunchOptions + @"</WordLaunchOptions>");
+			xml.AppendLine(@"<ExcelLaunchOptions>" + ExcelLaunchOptions + @"</ExcelLaunchOptions>");
+			xml.AppendLine(@"<VideoLaunchOptions>" + VideoLaunchOptions + @"</VideoLaunchOptions>");
+			xml.AppendLine(@"<FolderLaunchOptions>" + FolderLaunchOptions + @"</FolderLaunchOptions>");
+			xml.AppendLine(@"<EmailButtons>" + EmailButtons + @"</EmailButtons>");
+			xml.AppendLine(@"<MultitabView>" + MultitabView + @"</MultitabView>");
+			xml.AppendLine(@"<HomeView>" + HomeView + @"</HomeView>");
+			xml.AppendLine(@"<SearchView>" + SearchView + @"</SearchView>");
+			xml.AppendLine(@"<CalendarView>" + CalendarView + @"</CalendarView>");
 			if (!String.IsNullOrEmpty(_openFilePath))
 				xml.AppendLine(@"<OpenFilePath>" + _openFilePath + @"</OpenFilePath>");
 			if (!String.IsNullOrEmpty(_saveFilePath))
 				xml.AppendLine(@"<SaveFilePath>" + _saveFilePath + @"</SaveFilePath>");
 			if (LastViewed || UseRemoteConnection)
 			{
-				xml.AppendLine(@"<ClassicView>" + ClassicView.ToString() + @"</ClassicView>");
+				xml.AppendLine(@"<ClassicView>" + ClassicView + @"</ClassicView>");
 				xml.AppendLine(@"<ListView>" + ListView + @"</ListView>");
 				xml.AppendLine(@"<AccordionView>" + AccordionView + @"</AccordionView>");
 				xml.AppendLine(@"<SolutionDateView>" + SolutionDateView + @"</SolutionDateView>");
@@ -612,8 +619,8 @@ namespace SalesDepot.ConfigurationClasses
 			#region Program Schedule Settings
 			if (!string.IsNullOrEmpty(ProgramScheduleSelectedStation))
 				xml.AppendLine(@"<ProgramScheduleSelectedStation>" + ProgramScheduleSelectedStation.Replace(@"&", "&#38;").Replace("\"", "&quot;") + @"</ProgramScheduleSelectedStation>");
-			xml.AppendLine(@"<ProgramScheduleShowInfo>" + ProgramScheduleShowInfo.ToString() + @"</ProgramScheduleShowInfo>");
-			xml.AppendLine(@"<ProgramScheduleBrowseType>" + ((int)ProgramScheduleBrowseType).ToString() + @"</ProgramScheduleBrowseType>");
+			xml.AppendLine(@"<ProgramScheduleShowInfo>" + ProgramScheduleShowInfo + @"</ProgramScheduleShowInfo>");
+			xml.AppendLine(@"<ProgramScheduleBrowseType>" + ((int)ProgramScheduleBrowseType) + @"</ProgramScheduleBrowseType>");
 			xml.AppendLine(@"<ProgramScheduleOutputSettings>" + ProgramScheduleOutputSettings.Serialize() + @"</ProgramScheduleOutputSettings>");
 			#endregion
 
@@ -714,15 +721,15 @@ namespace SalesDepot.ConfigurationClasses
 		public string Serialize()
 		{
 			var result = new StringBuilder();
-			result.AppendLine(@"<AllFiles>" + AllFiles.ToString() + @"</AllFiles>");
-			result.AppendLine(@"<PowerPoint>" + PowerPoint.ToString() + @"</PowerPoint>");
-			result.AppendLine(@"<PDF>" + PDF.ToString() + @"</PDF>");
-			result.AppendLine(@"<Excel>" + Excel.ToString() + @"</Excel>");
-			result.AppendLine(@"<Word>" + Word.ToString() + @"</Word>");
-			result.AppendLine(@"<Video>" + Video.ToString() + @"</Video>");
-			result.AppendLine(@"<Url>" + Url.ToString() + @"</Url>");
-			result.AppendLine(@"<Network>" + Network.ToString() + @"</Network>");
-			result.AppendLine(@"<Folder>" + Folder.ToString() + @"</Folder>");
+			result.AppendLine(@"<AllFiles>" + AllFiles + @"</AllFiles>");
+			result.AppendLine(@"<PowerPoint>" + PowerPoint + @"</PowerPoint>");
+			result.AppendLine(@"<PDF>" + PDF + @"</PDF>");
+			result.AppendLine(@"<Excel>" + Excel + @"</Excel>");
+			result.AppendLine(@"<Word>" + Word + @"</Word>");
+			result.AppendLine(@"<Video>" + Video + @"</Video>");
+			result.AppendLine(@"<Url>" + Url + @"</Url>");
+			result.AppendLine(@"<Network>" + Network + @"</Network>");
+			result.AppendLine(@"<Folder>" + Folder + @"</Folder>");
 			return result.ToString();
 		}
 

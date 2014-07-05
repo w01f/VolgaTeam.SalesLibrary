@@ -107,6 +107,12 @@
     <Compile Include="Floater\FormFloater.designer.cs">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.Designer.cs">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\DayControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Floater\FormFloater.resx">
       <DependentUpon>FormFloater.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.resx">
+      <DependentUpon>CalendarPartControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\DayControl.resx">
       <DependentUpon>DayControl.cs</DependentUpon>
