@@ -378,6 +378,7 @@
 							max(link.enable_attachments) as enable_attachments,
 							max(link.enable_file_card) as enable_file_card,
 							max(link.format) as format,
+							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							lcat.tag as tag';
 					$joinText = "lcat.id_link=link.id and " . $categoryJoinCondition;
 					$whereText = $contentCondition .
@@ -413,6 +414,7 @@
 							link.enable_attachments,
 							link.enable_file_card,
 							link.format,
+							(select (round(avg(lr.value)*2)/2) as value from tbl_link_rate lr where lr.id_link=link.id) as rate,
 							lcat.tag as tag';
 					$joinText = "lcat.id_link=link.id and " . $categoryJoinCondition;
 					$whereText = $contentCondition .
@@ -585,6 +587,17 @@
 						$link['tag'] = $linkRecord['tag'];
 					else
 						$link['tag'] = '';
+
+					if (array_key_exists('rate', $linkRecord))
+					{
+						$link['rate'] = $linkRecord['rate'];
+						$link['rate_image'] = LinkRateRecord::getStarImage(floatval($linkRecord['rate']));
+					}
+					else
+					{
+						$link['rate'] = '';
+						$link['rate_image'] = '';
+					}
 
 					switch ($linkRecord['format'])
 					{

@@ -57,6 +57,9 @@
 					case "tag":
 						selector = '.links-grid-header td.link-tag-column span';
 						break;
+					case "rate":
+						selector = '.links-grid-header td.link-rate-column span';
+						break;
 				}
 			}
 			if (selector != null && typeof that.sortDirection !== 'undefined')
@@ -192,6 +195,12 @@
 			searchGridHeader.find("td.link-tag-column").off('click').on('click', function ()
 			{
 				sortByColumn('tag');
+				that.refreshData();
+			});
+
+			searchGridHeader.find("td.link-rate-column").off('click').on('click', function ()
+			{
+				sortByColumn('rate');
 				that.refreshData();
 			});
 

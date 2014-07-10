@@ -357,6 +357,7 @@
 				gridHeader.find('td.library-column').width() -
 				gridHeader.find('td.link-type-column').width() -
 				gridHeader.find('td.link-tag-column').width() -
+				gridHeader.find('td.link-rate-column').width() -
 				linkDateWidth;
 			gridHeader.find('td.link-name-column').css({
 				'width': linkNameHeaderWidth + 'px'
@@ -368,6 +369,7 @@
 				gridBody.find('td.library-column').width() -
 				gridBody.find('td.link-type-column').width() -
 				gridBody.find('td.link-tag-column').width() -
+				gridBody.find('td.link-rate-column').width() -
 				linkDateWidth;
 			gridBody.find('td.link-name-column').css({
 				'width': linkNameBodyWidth + 'px'

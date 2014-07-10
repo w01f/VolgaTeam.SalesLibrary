@@ -1,4 +1,4 @@
-.fancybox-wrap, .fancybox-wrap *
+.fancybox-wrap.content-boxed, .fancybox-wrap.content-boxed *
 {
 	-moz-box-sizing: content-box !important;
 	-webkit-box-sizing: content-box !important;
@@ -17,6 +17,7 @@
 	font-family: 'Arial', serif;
 	font-size: 16pt;
 	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .view-dialog-body .description
@@ -26,6 +27,7 @@
 	font-size: 12pt;
 	color: #C0C0C0;
 	font-weight: normal;
+	margin-bottom: 5px;
 }
 
 .view-dialog-body .item-text
@@ -51,7 +53,7 @@
 	font-weight: bold;
 }
 
-.view-dialog-body .format-list
+.view-dialog-body ul.format-list
 {
 	list-style: none;
 	padding: 0;
@@ -63,24 +65,35 @@
 	height: auto;
 }
 
-.view-dialog-body .format-list li.multi-column
-{
-	float: left;
-	width: 28%;
-	padding: 2%;
-	text-align: center;
-}
-
-.view-dialog-body .format-list li.single-column
+.view-dialog-body ul.format-list li.single-column
 {
 	margin-bottom: 5px;
 	text-align: left;
+}
+
+.view-dialog-body div.format-list
+{
+	margin-left: 20px;
+	margin-right: 20px;
+	width: auto;
+}
+
+.view-dialog-body div.format-list .format-item
+{
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .view-dialog-body .format-list img
 {
 	border: none;
 	cursor: pointer;
+}
+
+.view-dialog-body div.format-list .format-item img
+{
+	height: 84px;
 }
 
 .view-dialog-body .service-data
@@ -92,4 +105,14 @@
 {
 	font-size: 12pt;
 	max-width: 140px;
+}
+
+#user-link-rate-container
+{
+	margin-top: 15px;
+}
+
+img.total-rate
+{
+	margin-bottom: 10px;
 }

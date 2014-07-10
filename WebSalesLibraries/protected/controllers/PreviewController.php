@@ -12,10 +12,11 @@
 
 		public function actionGetViewDialog()
 		{
-			$rendered = false;
 			$linkId = Yii::app()->request->getPost('linkId');
 			$isAttachment = Yii::app()->request->getPost('isAttachment');
 			$authorized = false;
+			$dialogData = array();
+			$userId = -1;
 			if (isset(Yii::app()->user))
 			{
 				$userId = Yii::app()->user->getId();
@@ -68,8 +69,7 @@
 							$attachment->load($attachmentRecord);
 							if ($authorized)
 								StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $attachment->name, 'File' => basename($attachment->path)));
-							$this->renderPartial('viewDialog', array('link' => $attachment, 'authorized' => $authorized), false, true);
-							$rendered = true;
+							$dialogData = array('html' => $this->renderPartial('viewDialog', array('link' => $attachment, 'authorized' => $authorized), true),);
 						}
 					}
 				}
@@ -85,13 +85,15 @@
 						$link->load($linkRecord);
 						if ($authorized)
 							StatisticActivityRecord::WriteActivity('Link', 'Preview Options', array('Name' => $link->name, 'File' => $link->fileName));
-						$this->renderPartial('viewDialog', array('link' => $link, 'authorized' => $authorized), false, true);
-						$rendered = true;
+						$dialogData = array(
+							'html' => $this->renderPartial('viewDialog', array('link' => $link, 'authorized' => $authorized), true),
+							'rateData' => LinkRateRecord::getRateData($linkId, $userId)
+						);
 					}
 				}
 			}
-			if (!$rendered)
-				$this->renderPartial('empty', array(), false, true);
+			echo json_encode($dialogData);
+			Yii::app()->end();
 		}
 
 		public function actionGetSpecialDialog()

@@ -141,6 +141,21 @@
 	display: none;
 }
 
+.links-grid-header td.link-rate-column, .links-grid-body td.link-rate-column
+{
+	width: 90px;
+}
+
+.links-grid-body td.link-rate-column
+{
+	text-align: center;
+}
+
+.links-grid-body td.link-rate-column img
+{
+	height: 16px;
+}
+
 .links-grid-header td span
 {
 	padding-left: 5px;

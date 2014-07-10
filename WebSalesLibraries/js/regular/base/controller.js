@@ -92,7 +92,8 @@
 			content.css({
 				'height': height + 'px'
 			});
-			$.SalesPortal.Ticker.updateContentSize();
+			if ($.SalesPortal.Ticker != undefined)
+				$.SalesPortal.Ticker.updateContentSize();
 		};
 	};
 	$.SalesPortal.Layout = new LayoutManager();

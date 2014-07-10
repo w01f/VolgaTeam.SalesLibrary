@@ -11,11 +11,13 @@
 				<div class="link-name">
 					<? echo $link->name; ?>
 				</div>
-				<br>
 				<? if (isset($link->fileName)): ?>
 					<div class="description">
 						<? echo $link->fileName; ?>
-					</div><br>
+					</div>
+				<? endif; ?>
+				<? if (!isset($link->isAttachment)): ?>
+					<img class="total-rate" src=""/>
 				<? endif; ?>
 			</div>
 			<? if ((($link->originalFormat == 'ppt' || $link->originalFormat == 'doc' || $link->originalFormat == 'pdf') && isset($link->universalPreview)) || $link->originalFormat == 'jpeg' || $link->originalFormat == 'png'): ?>
@@ -30,8 +32,12 @@
 					This Video is unavailable…<br><br> Ask your Site Administrator to convert this Video to MP4.<br><br> Then the video can be accessed.<br><br>
 				</div>
 			<? else: ?>
-				<? $logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats'; ?>
-				<ul class="format-list">
+				<?
+				$logoFolderPath = realpath(Yii::app()->basePath . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'fileFormats';
+				$itemNum = 0;
+				$rowClosed = true;
+				?>
+				<div class="container format-list">
 					<? foreach ($link->availableFormats as $format): ?>
 						<?
 						if (!$authorized && ($format == 'email' || $format == 'outlook'))
@@ -87,9 +93,10 @@
 						}
 						?>
 						<? if ($imageSource != ''): ?>
-							<li class="multi-column"
-								<? if ($link->browser != 'mobile'): ?>rel="tooltip"
-								title="<? echo Yii::app()->params['tooltips']['preview_dialog'][$format]; ?>"
+							<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
+							<div class="col-xs-4 format-item"
+								 <? if ($link->browser != 'mobile'): ?>rel="tooltip"
+								 title="<? echo Yii::app()->params['tooltips']['preview_dialog'][$format]; ?>"
 								<? endif; ?>
 								>
 								<img src="<? echo $imageSource; ?>"/>
@@ -112,12 +119,15 @@
 										<? endif; ?>
 									<? endif; ?>
 								</div>
-							</li>
+							</div>
+							<? if ($itemNum == 2 || $itemNum % 3 == 2): ?></div><? $rowClosed = true; ?><? endif; ?>
+							<? $itemNum++; ?>
 						<? endif; ?>
 					<? endforeach; ?>
 					<? if (!isset($link->isAttachment) && !$link->forcePreview && $authorized): ?>
-						<li class="multi-column" <? if ($link->browser != 'mobile'): ?>rel="tooltip"
-							title="<? echo Yii::app()->params['tooltips']['preview_dialog']['favorites']; ?>"<? endif; ?>>
+						<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
+						<div class="col-xs-4 format-item" <? if ($link->browser != 'mobile'): ?>rel="tooltip"
+							 title="<? echo Yii::app()->params['tooltips']['preview_dialog']['favorites']; ?>"<? endif; ?>>
 							<img src="<? echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'favorites.png')); ?>"/>
 							<div class="service-data">
 								<div class="link-id"><? echo $link->id; ?></div>
@@ -130,10 +140,13 @@
 									<div class="links"><? echo json_encode($viewLinks); ?></div>
 								<? endif; ?>
 							</div>
-						</li>
+						</div>
+						<? if ($itemNum == 2 || $itemNum % 3 == 2): ?></div><? $rowClosed = true; ?><? endif; ?>
+						<? $itemNum++; ?>
 					<? endif; ?>
 					<? if ($link->browser == 'mobile' && !$link->forcePreview): ?>
-						<li class="multi-column">
+						<? if ($itemNum == 0 || $itemNum % 3 == 0): ?><div class="row"><? $rowClosed = false; ?><? endif; ?>
+						<div class="col-xs-4 format-item">
 							<img src="<? echo 'data:image/png;base64,' . base64_encode(file_get_contents($logoFolderPath . DIRECTORY_SEPARATOR . 'lp.png')); ?>"/>
 							<div class="service-data">
 								<div class="link-id"><? echo $link->id; ?></div>
@@ -146,9 +159,25 @@
 									<div class="links"><? echo json_encode($viewLinks); ?></div>
 								<? endif; ?>
 							</div>
-						</li>
+						</div>
+						<? if ($itemNum == 2 || $itemNum % 3 == 2): ?></div><? $rowClosed = true; ?><? endif; ?>
+						<? $itemNum++; ?>
 					<? endif; ?>
-				</ul>
+					<? if (!$rowClosed) echo '</div>'; ?>
+					<? if (!isset($link->isAttachment)): ?>
+						<div class="row text-center" id="user-link-rate-container">
+							<div class="col-xs-12">
+								<label for="user-link-rate">Do you LIKE this file? </label>
+							</div>
+							<div class="col-xs-12">
+								<input id="user-link-rate" class="rating">
+							</div>
+							<div class="col-xs-12">
+								<label id="user-link-rate-description"></label>
+							</div>
+						</div>
+					<? endif; ?>
+				</div>
 			<? endif; ?>
 		<? else: ?>
 			<div class="title">
@@ -156,5 +185,6 @@
 					This link is not available for preview
 				</div>
 			</div>
-		<? endif; ?>
+		<?
+		endif; ?>
 </div>
