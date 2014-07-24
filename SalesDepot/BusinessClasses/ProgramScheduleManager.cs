@@ -3,202 +3,194 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
+using ProgramManager.CoreObjects;
+using SalesDepot.ConfigurationClasses;
+using SalesDepot.CoreObjects.BusinessClasses;
+using SalesDepot.InteropClasses;
+using SalesDepot.ToolForms;
+using Day = ProgramManager.CoreObjects.Day;
 
 namespace SalesDepot.BusinessClasses
 {
-    public class ProgramScheduleManager
-    {
-        private const string StationsRoot = "Stations";
-        private const string OutputRoot = "Output Templates";
+	public class ProgramScheduleManager
+	{
+		private const string StationsRoot = "Stations";
+		private const string OutputRoot = "Output Templates";
 
-        private List<ProgramManager.CoreObjects.Station> _stations = new List<ProgramManager.CoreObjects.Station>();
+		private readonly List<Station> _stations = new List<Station>();
 
-        public Library Parent { get; set; }
-        public ProgramManager.CoreObjects.Station SelectedStation { get; private set; }
-        public ProgramManager.CoreObjects.Day SelectedDay { get; private set; }
+		public ProgramScheduleManager(Library parent)
+		{
+			Parent = parent;
+		}
 
-        public event EventHandler<EventArgs> StationChanged;
+		public Library Parent { get; set; }
+		public Station SelectedStation { get; private set; }
+		public Day SelectedDay { get; private set; }
 
-        private string ProgramManagerRoot
-        {
-            get
-            {
-                return Path.Combine(this.Parent.Folder.FullName, CoreObjects.BusinessClasses.Constants.ProgramManagerRootFolderName);
-            }
-        }
+		private string ProgramManagerRoot
+		{
+			get { return Path.Combine(Parent.Folder.FullName, Constants.ProgramManagerRootFolderName); }
+		}
 
-        public bool Enabled
-        {
-            get
-            {
-                return _stations.Count > 0;
-            }
-        }
+		public bool Enabled
+		{
+			get { return _stations.Count > 0; }
+		}
 
-        public string StationsFolderPath
-        {
-            get
-            {
-                return Path.Combine(this.ProgramManagerRoot, StationsRoot);
-            }
-        }
+		public string StationsFolderPath
+		{
+			get { return Path.Combine(ProgramManagerRoot, StationsRoot); }
+		}
 
-        public string ReporActivityListTemplatePath
-        {
-            get
-            {
-                return Path.Combine(this.ProgramManagerRoot, OutputRoot, "ActivityList.xls");
-            }
-        }
+		public string ReporActivityListTemplatePath
+		{
+			get { return Path.Combine(ProgramManagerRoot, OutputRoot, "ActivityList.xls"); }
+		}
 
-        public ProgramScheduleManager(Library parent)
-        {
-            this.Parent = parent;
-        }
+		public event EventHandler<EventArgs> StationChanged;
 
-        public string GetReportWeekScheduleTemplatePath(bool landscape)
-        {
-            return Path.Combine(this.ProgramManagerRoot, OutputRoot, string.Format("WeekSchedule{0}.xls", landscape ? "Landscape" : "Portrait"));
-        }
+		public string GetReportWeekScheduleTemplatePath(bool landscape)
+		{
+			return Path.Combine(ProgramManagerRoot, OutputRoot, string.Format("WeekSchedule{0}.xls", landscape ? "Landscape" : "Portrait"));
+		}
 
-        public void LoadData()
-        {
-            foreach (ProgramManager.CoreObjects.Station station in _stations)
-                station.ReleaseResources();
-            _stations.Clear();
-            if (Directory.Exists(this.StationsFolderPath))
-            {
-                DirectoryInfo rootFolder = new DirectoryInfo(this.StationsFolderPath);
-                foreach (DirectoryInfo stationFolder in rootFolder.GetDirectories())
-                {
-                    ProgramManager.CoreObjects.Station station = new ProgramManager.CoreObjects.Station(stationFolder);
-                    _stations.Add(station);
-                }
-            }
-        }
+		public void LoadData()
+		{
+			foreach (Station station in _stations)
+				station.ReleaseResources();
+			_stations.Clear();
+			if (Directory.Exists(StationsFolderPath))
+			{
+				var rootFolder = new DirectoryInfo(StationsFolderPath);
+				foreach (DirectoryInfo stationFolder in rootFolder.GetDirectories())
+				{
+					var station = new Station(stationFolder);
+					_stations.Add(station);
+				}
+			}
+		}
 
-        public string[] GetStationList()
-        {
-            return _stations.Select(x => x.Name).ToArray();
-        }
+		public string[] GetStationList()
+		{
+			return _stations.Select(x => x.Name).ToArray();
+		}
 
-        public string[] GetProgramList()
-        {
-            if (this.SelectedStation != null)
-                return this.SelectedStation.ProgramNames.ToArray();
-            else
-                return new string[] { };
-        }
+		public string[] GetProgramList()
+		{
+			if (SelectedStation != null)
+				return SelectedStation.ProgramNames.ToArray();
+			return new string[] { };
+		}
 
-        public void LoadStation(object sender, string selectedStationName)
-        {
-            this.SelectedStation = _stations.Where(x => x.Name.Equals(selectedStationName)).FirstOrDefault();
-            if (this.SelectedStation != null)
-            {
-                if (this.StationChanged != null)
-                    this.StationChanged(sender, new EventArgs());
-            }
-        }
+		public void LoadStation(object sender, string selectedStationName)
+		{
+			SelectedStation = _stations.FirstOrDefault(x => x.Name.Equals(selectedStationName));
+			if (SelectedStation != null)
+			{
+				if (StationChanged != null)
+					StationChanged(sender, new EventArgs());
+			}
+		}
 
-        public void LoadDay(DateTime day)
-        {
-            if (this.SelectedStation != null)
-                this.SelectedDay = this.SelectedStation.GetDay(day);
-        }
+		public void LoadDay(DateTime day)
+		{
+			if (SelectedStation != null)
+				SelectedDay = SelectedStation.GetDay(day);
+		}
 
-        public void SaveDay()
-        {
-            if (this.SelectedDay != null)
-                this.SelectedDay.Save();
-        }
+		public void SaveDay()
+		{
+			if (SelectedDay != null)
+				SelectedDay.Save();
+		}
 
-        public void ReportWeekSchedule(string stationName, ProgramManager.CoreObjects.Week[] weeks, bool convertToPDF, bool landscape)
-        {
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-            {
-                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                {
-                    FormMain.Instance.Invoke((MethodInvoker)delegate()
-                    {
-                        form.laProgress.Text = "Generating Program Schedule...";
-                        form.TopMost = true;
-                        form.Show();
-                        Application.DoEvents();
-                    });
+		public void ReportWeekSchedule(string stationName, Week[] weeks, bool convertToPDF, bool landscape)
+		{
+			using (var form = new FormProgress())
+			{
+				var thread = new Thread(delegate()
+				{
+					FormMain.Instance.Invoke((MethodInvoker)delegate
+					{
+						form.laProgress.Text = "Generating Program Schedule...";
+						form.TopMost = true;
+						form.Show();
+						Application.DoEvents();
+					});
 
-                    ProgramManager.CoreObjects.Station station = _stations.Where(x => x.Name.Equals(stationName)).FirstOrDefault();
-                    if (station != null)
-                    {
-                        if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.OutputCache))
-                            Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.OutputCache);
+					var station = _stations.FirstOrDefault(x => x.Name.Equals(stationName));
+					if (station != null)
+					{
+						if (!Directory.Exists(SettingsManager.Instance.OutputCache))
+							Directory.CreateDirectory(SettingsManager.Instance.OutputCache);
 
-                        string destinationPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.OutputCache, string.Format("{0}.{1}", new string[] { DateTime.Now.ToString("MMddyy-hhmmtt"), convertToPDF ? "pdf" : "xls" }));
+						string destinationPath = Path.Combine(SettingsManager.Instance.OutputCache, string.Format("{0}.{1}", new[] { DateTime.Now.ToString("MMddyy-hhmmtt"), convertToPDF ? "pdf" : "xls" }));
 
-                        List<ProgramManager.CoreObjects.Day[]> daysByWeeks = new List<ProgramManager.CoreObjects.Day[]>();
-                        foreach (ProgramManager.CoreObjects.Week week in weeks)
-                            daysByWeeks.Add(station.GetDays(week.DateStart, week.DateEnd));
+						var daysByWeeks = new List<Day[]>();
+						foreach (Week week in weeks)
+							daysByWeeks.Add(station.GetDays(week.DateStart, week.DateEnd));
 
-                        InteropClasses.ExcelHelper.Instance.ReportWeekSchedule(this.GetReportWeekScheduleTemplatePath(landscape), daysByWeeks.ToArray(), destinationPath, convertToPDF, landscape);
+						ExcelHelper.Instance.ReportWeekSchedule(GetReportWeekScheduleTemplatePath(landscape), daysByWeeks.ToArray(), destinationPath, convertToPDF, landscape);
 
-                        if (File.Exists(destinationPath))
-                            Process.Start(destinationPath);
-                    }
+						if (File.Exists(destinationPath))
+							Process.Start(destinationPath);
+					}
 
-                    FormMain.Instance.Invoke((MethodInvoker)delegate()
-                    {
-                        form.Hide();
-                        Application.DoEvents();
-                    });
+					FormMain.Instance.Invoke((MethodInvoker)delegate
+					{
+						form.Hide();
+						Application.DoEvents();
+					});
+				});
+				thread.Start();
 
-                }));
-                thread.Start();
+				while (thread.IsAlive)
+					Application.DoEvents();
 
-                while (thread.IsAlive)
-                    Application.DoEvents();
+				form.Close();
+			}
+		}
 
-                form.Close();
-            }
-        }
+		public void ReportActivityList(ProgramActivity[] activities, bool convertToPDF)
+		{
+			using (var form = new FormProgress())
+			{
+				var thread = new Thread(delegate()
+				{
+					FormMain.Instance.Invoke((MethodInvoker)delegate
+					{
+						form.laProgress.Text = "Generating Program List...";
+						form.TopMost = true;
+						form.Show();
+						Application.DoEvents();
+					});
 
-        public void ReportActivityList(ProgramManager.CoreObjects.ProgramActivity[] activities, bool convertToPDF)
-        {
-            using (ToolForms.FormProgress form = new ToolForms.FormProgress())
-            {
-                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(delegate()
-                {
-                    FormMain.Instance.Invoke((MethodInvoker)delegate()
-                    {
-                        form.laProgress.Text = "Generating Program List...";
-                        form.TopMost = true;
-                        form.Show();
-                        Application.DoEvents();
-                    });
+					if (!Directory.Exists(SettingsManager.Instance.OutputCache))
+						Directory.CreateDirectory(SettingsManager.Instance.OutputCache);
 
-                    if (!Directory.Exists(ConfigurationClasses.SettingsManager.Instance.OutputCache))
-                        Directory.CreateDirectory(ConfigurationClasses.SettingsManager.Instance.OutputCache);
+					string destinationPath = Path.Combine(SettingsManager.Instance.OutputCache, string.Format("{0}.{1}", new[] { DateTime.Now.ToString("MMddyy-hhmmtt"), convertToPDF ? "pdf" : "xls" }));
 
-                    string destinationPath = Path.Combine(ConfigurationClasses.SettingsManager.Instance.OutputCache, string.Format("{0}.{1}", new string[] { DateTime.Now.ToString("MMddyy-hhmmtt"), convertToPDF ? "pdf" : "xls" }));
+					ExcelHelper.Instance.ReportActivityList(ReporActivityListTemplatePath, activities, destinationPath, convertToPDF);
 
-                    InteropClasses.ExcelHelper.Instance.ReportActivityList(this.ReporActivityListTemplatePath, activities, destinationPath, convertToPDF);
+					if (File.Exists(destinationPath))
+						Process.Start(destinationPath);
 
-                    if (File.Exists(destinationPath))
-                        Process.Start(destinationPath);
+					FormMain.Instance.Invoke((MethodInvoker)delegate
+					{
+						form.Hide();
+						Application.DoEvents();
+					});
+				});
+				thread.Start();
 
-                    FormMain.Instance.Invoke((MethodInvoker)delegate()
-                    {
-                        form.Hide();
-                        Application.DoEvents();
-                    });
+				while (thread.IsAlive)
+					Application.DoEvents();
 
-                }));
-                thread.Start();
-
-                while (thread.IsAlive)
-                    Application.DoEvents();
-
-                form.Close();
-            }
-        }
-    }
+				form.Close();
+			}
+		}
+	}
 }

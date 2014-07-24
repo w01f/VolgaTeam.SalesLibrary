@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
+using EO.WebBrowser;
 using SalesDepot.CoreObjects.BusinessClasses;
 using SalesDepot.ToolForms.Settings;
+using Vintasoft.Imaging;
 
 namespace SalesDepot.ConfigurationClasses
 {
@@ -82,6 +84,9 @@ namespace SalesDepot.ConfigurationClasses
 			PowerPointLoaderPath = string.Format(@"{0}\newlocaldirect.com\app\PowerPointLoader.exe", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			LogFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\ApplicationLog.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 			PermissionsFilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Library_Security.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			Gallery1FilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Gallery1.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			Gallery2FilePath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\Gallery2.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
+			TabPageConfigPath = string.Format(@"{0}\newlocaldirect.com\Sales Depot\SDTabNames.xml", Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles));
 
 			DefaultWizard = string.Empty;
 			SalesDepotName = string.Empty;
@@ -112,6 +117,17 @@ namespace SalesDepot.ConfigurationClasses
 			HiddenObjects.Add("SalesDepotCache.xml");
 
 			SalesDepotName = "Sales Libraries";
+
+			ImagingGlobalSettings.RegisterImaging("William Byrd",
+				"billy@newlocaldirect.com",
+				"IhdrSwyenp4CiNJnDzdnhXPg2TUsJa0Rykz4Gpmc11FMGFz5vEt0bFKIrMR6VziCH7YfvX8Ofnznh9z7WuhhZCFCp4mtvRBq1OJhX2M/1PS2GifwTp2aQlioVFHW7VhIgKdFerrBs6YDG6M15DKyiWqFJo4Ks6wyqEH5ANvmj5EI");
+			Runtime.AddLicense("6qfv6MQV2ZututoQ9oPi7vL3wo3n+vjovHWm9/oS7Zrr+QMQvUaBwMAX6Jzc" +
+							   "8gQQvUaBdePt9BDtrNzCnrWfWZekzRfonNzyBBDInbW9x9+yb6+2yPa1a6q1" +
+							   "yd2xerOz/RTinuX39vTjd4SOscufWbPw+g7kp+rp9unWouPw+gzsWbn9Aw+7" +
+							   "aOPt9BDtrNzpz7iJWZeksefgpePzCOmMQ5ekscufWZekzQzjnZf4ChvkdpnJ" +
+							   "4NnCoenz/hChWe3pAx7oqOXBs92taZmkwOmMQ5ekscu7aNjw/Rr2d4SOscuf" +
+							   "WbPzAw/kq8Dy9xqfndj49uihbKa2wdqxaai4s8v1nun3+hrtdpm2s8uud4SO" +
+							   "scufWbP3+hLtmuv5AxC9");
 		}
 
 		public bool IsConfigured { get; set; }
@@ -132,6 +148,9 @@ namespace SalesDepot.ConfigurationClasses
 		public string LogFilePath { get; private set; }
 		public string ActivityFolder { get; private set; }
 		public string PermissionsFilePath { get; private set; }
+		public string Gallery1FilePath { get; private set; }
+		public string Gallery2FilePath { get; private set; }
+		public string TabPageConfigPath { get; private set; }
 
 		public string SelectedPackage { get; set; }
 		public string SelectedLibrary { get; set; }
@@ -171,8 +190,6 @@ namespace SalesDepot.ConfigurationClasses
 		public string ListDescription { get; set; }
 		public string AccordionTitle { get; set; }
 		public string AccordionDescription { get; set; }
-		public string SolutionTitle { get; set; }
-		public string SolutionDescription { get; set; }
 		public KeyWordFileFilters KeyWordFilters { get; private set; }
 
 		public Guid AppID { get; set; }
@@ -298,12 +315,6 @@ namespace SalesDepot.ConfigurationClasses
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn2tooltip");
 				if (node != null)
 					ListDescription = node.InnerText;
-				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn3");
-				if (node != null)
-					SolutionTitle = node.InnerText;
-				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn3tooltip");
-				if (node != null)
-					SolutionDescription = node.InnerText;
 				node = document.SelectSingleNode(@"/ViewButtons/ribbonlabel/btn4");
 				if (node != null)
 					AccordionTitle = node.InnerText;
@@ -370,7 +381,6 @@ namespace SalesDepot.ConfigurationClasses
 			SolutionTitleView = false;
 			LastViewed = false;
 			ClassicTitle = string.Empty;
-			SolutionTitle = string.Empty;
 			ListTitle = string.Empty;
 			SelectedPackage = string.Empty;
 			SelectedLibrary = string.Empty;

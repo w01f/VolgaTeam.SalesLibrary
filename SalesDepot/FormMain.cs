@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using DevComponents.DotNetBar;
 using SalesDepot.BusinessClasses;
 using SalesDepot.ConfigurationClasses;
+using SalesDepot.CoreObjects.ToolClasses;
 using SalesDepot.Floater;
 using SalesDepot.InteropClasses;
 using SalesDepot.PresentationClasses.WallBin.Decorators;
 using SalesDepot.Properties;
 using SalesDepot.TabPages;
 using SalesDepot.ToolClasses;
-using SalesDepot.ToolForms;
 
 namespace SalesDepot
 {
@@ -24,12 +26,17 @@ namespace SalesDepot
 		private int _floaterPositionX = int.MinValue;
 		private int _floaterPositionY = int.MinValue;
 
+		private readonly TabPageManager _tabPageManager = new TabPageManager(SettingsManager.Instance.TabPageConfigPath);
+
 		public TabHomeControl TabHome { get; set; }
 		public TabSearchControl TabSearch { get; set; }
 		public TabOvernightsCalendarControl TabOvernightsCalendar { get; set; }
 		public TabProgramSchedule TabProgramSchedule { get; set; }
 		public TabProgramSearch TabProgramSearch { get; set; }
 		public TabQBuilder TabQBuilder { get; set; }
+		public TabGallery1 TabGallery1 { get; set; }
+		public TabGallery2 TabGallery2 { get; set; }
+		public TabFavorites TabFavorites{ get; set; }
 
 		public static FormMain Instance
 		{
@@ -106,6 +113,15 @@ namespace SalesDepot
 
 			TabQBuilder = new TabQBuilder();
 			TabQBuilder.InitController();
+
+			TabGallery1 = new TabGallery1();
+			TabGallery1.InitController();
+
+			TabGallery2 = new TabGallery2();
+			TabGallery2.InitController();
+
+			TabFavorites = new TabFavorites();
+			TabFavorites.InitController();
 		}
 
 		private void LoadApplicationSettings()
@@ -113,11 +129,66 @@ namespace SalesDepot
 			if (File.Exists(SettingsManager.Instance.IconPath))
 				Icon = new Icon(SettingsManager.Instance.IconPath);
 			Text = string.Format("{0} - User: {1}", SettingsManager.Instance.SalesDepotName, Environment.UserName);
-			ribbonTabItemSearch.Text = !string.IsNullOrEmpty(SettingsManager.Instance.SolutionTitle) ? SettingsManager.Instance.SolutionTitle : ribbonTabItemSearch.Text;
+
+			ConfigureTabPages();
+			ribbonControl.SelectedRibbonTabItem = ribbonTabItemHome;
+
 			buttonItemProgramScheduleOutputPDF.Enabled = !PowerPointHelper.Instance.Is2003;
 			buttonItemProgramSearchOutputPDF.Enabled = !PowerPointHelper.Instance.Is2003;
-
 			ribbonControl.SelectedRibbonTabChanged += ribbonControl_SelectedRibbonTabChanged;
+		}
+
+		private void ConfigureTabPages()
+		{
+			ribbonControl.Items.Clear();
+			var tabPages = new List<BaseItem>();
+			foreach (var tabPageConfig in _tabPageManager.TabPageSettings)
+			{
+				switch (tabPageConfig.Id)
+				{
+					case "Home":
+						ribbonTabItemHome.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemHome);
+						break;
+					case "Search":
+						ribbonTabItemSearch.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemSearch);
+						break;
+					case "QuickSites":
+						ribbonTabItemQBuilder.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemQBuilder);
+						break;
+					case "Calendar":
+						ribbonTabItemCalendar.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemCalendar);
+						break;
+					case "ProgramSchedule":
+						ribbonTabItemProgramSchedule.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemProgramSchedule);
+						break;
+					case "ProgramSearch":
+						ribbonTabItemProgramSearch.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemProgramSearch);
+						break;
+					case "Gallery1":
+						ribbonTabItemGallery1.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemGallery1);
+						break;
+					case "Gallery2":
+						ribbonTabItemGallery2.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemGallery2);
+						break;
+					case "Favorites":
+						ribbonTabItemFavorites.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemFavorites);
+						break;
+					case "Settings":
+						ribbonTabItemSettings.Text = tabPageConfig.Name;
+						tabPages.Add(ribbonTabItemSettings);
+						break;
+				}
+			}
+			ribbonControl.Items.AddRange(tabPages.ToArray());
 		}
 
 		private void buttonItemFloater_Click(object sender, EventArgs e)
@@ -137,6 +208,9 @@ namespace SalesDepot
 			TabProgramSchedule.IsActive = false;
 			TabProgramSearch.IsActive = false;
 			TabQBuilder.IsActive = false;
+			TabGallery1.IsActive = false;
+			TabGallery2.IsActive = false;
+			TabFavorites.IsActive = false;
 
 			SettingsManager.Instance.HomeView = false;
 			SettingsManager.Instance.SearchView = false;
@@ -180,6 +254,33 @@ namespace SalesDepot
 				if (!pnContainer.Controls.Contains(TabQBuilder))
 					pnContainer.Controls.Add(TabQBuilder);
 				TabQBuilder.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemGallery1)
+			{
+				if (!pnContainer.Controls.Contains(TabGallery1))
+				{
+					TabGallery1.InitControl();
+					pnContainer.Controls.Add(TabGallery1);
+				}
+				TabGallery1.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemGallery2)
+			{
+				if (!pnContainer.Controls.Contains(TabGallery2))
+				{
+					TabGallery2.InitControl();
+					pnContainer.Controls.Add(TabGallery2);
+				}
+				TabGallery2.ShowTab();
+			}
+			else if (ribbonControl.SelectedRibbonTabItem == ribbonTabItemFavorites)
+			{
+				if (!pnContainer.Controls.Contains(TabFavorites))
+				{
+					TabFavorites.Init();
+					pnContainer.Controls.Add(TabFavorites);
+				}
+				TabFavorites.ShowTab();
 			}
 		}
 

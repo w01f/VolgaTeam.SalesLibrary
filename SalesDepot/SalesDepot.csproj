@@ -92,6 +92,12 @@
     <Reference Include="DevExpress.XtraTreeList.v10.2, Version=10.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="EO.WebBrowser">
+      <HintPath>..\Assemblies\EO.Web\EO.WebBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="EO.WebBrowser.WinForm">
+      <HintPath>..\Assemblies\EO.Web\EO.WebBrowser.WinForm.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ProgramManager.CoreObjects">
       <HintPath>..\..\ProgramManager\ProgramManager.CoreObjects\bin\Release\ProgramManager.CoreObjects.dll</HintPath>
@@ -110,6 +116,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Vintasoft.Imaging">
+      <HintPath>..\Assemblies\Vintasoft.Imaging\Vintasoft.Imaging.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +138,18 @@
     </Compile>
     <Compile Include="Floater\FormFloater.designer.cs">
       <DependentUpon>FormFloater.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Gallery\FavoriteImagesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Gallery\FavoriteImagesControl.designer.cs">
+      <DependentUpon>FavoriteImagesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationClasses\Gallery\GalleryControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PresentationClasses\Gallery\GalleryControl.designer.cs">
+      <DependentUpon>GalleryControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.cs">
       <SubType>UserControl</SubType>
@@ -221,7 +242,16 @@
     <Compile Include="PresentationClasses\WallBin\WallBinTreeListControl.Designer.cs">
       <DependentUpon>WallBinTreeListControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabPages\TabFavorites.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TabPages\TabGallery2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="TabPages\IController.cs" />
+    <Compile Include="TabPages\TabGallery1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="TabPages\TabQBuilder.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -254,6 +284,12 @@
     </Compile>
     <Compile Include="ToolClasses\ActivityManager.cs" />
     <Compile Include="ToolClasses\FormStateHelper.cs" />
+    <Compile Include="ToolForms\Gallery\FormAddFavoriteImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ToolForms\Gallery\FormAddFavoriteImage.designer.cs">
+      <DependentUpon>FormAddFavoriteImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToolForms\ProgramManager\FormOutputParameters.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -494,6 +530,12 @@
     <EmbeddedResource Include="Floater\FormFloater.resx">
       <DependentUpon>FormFloater.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Gallery\FavoriteImagesControl.resx">
+      <DependentUpon>FavoriteImagesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationClasses\Gallery\GalleryControl.resx">
+      <DependentUpon>GalleryControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationClasses\OvernightsCalendar\CalendarPartControl.resx">
       <DependentUpon>CalendarPartControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -553,6 +595,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TabPages\TabProgramSchedule.resx">
       <DependentUpon>TabProgramSchedule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ToolForms\Gallery\FormAddFavoriteImage.resx">
+      <DependentUpon>FormAddFavoriteImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ToolForms\ProgramManager\FormOutputParameters.resx">
       <DependentUpon>FormOutputParameters.cs</DependentUpon>
@@ -820,6 +865,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\GalleryCopy.png" />
+    <None Include="Resources\GalleryZoomOut.png" />
+    <None Include="Resources\GalleryZoomIn.png" />
+    <None Include="Resources\GalleryCrop.png" />
+    <None Include="Resources\GallerySelect.png" />
+    <None Include="Resources\GalleryEdit.png" />
+    <None Include="Resources\GalleryView.png" />
     <None Include="Resources\CalendarLogo.png" />
     <None Include="Resources\FloaterHide.png" />
     <None Include="Resources\NudgeDown.png" />
