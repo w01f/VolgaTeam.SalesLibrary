@@ -205,25 +205,36 @@
 		 * @param $onlyByName
 		 * @param $onlyByContent
 		 * @param $datasetKey
+		 * @param $baseDatasetKey
 		 * @param $sortColumn
 		 * @param $sortDirection
 		 * @return array|null
 		 */
-		public static function searchByContent($contentConditions, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $sortColumn, $sortDirection)
+		public static function searchByContent($contentConditions, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $baseDatasetKey, $sortColumn, $sortDirection)
 		{
+			$baseLinks = Yii::app()->session[$baseDatasetKey];
+			$baseLinksCondition = '1=1';
+			if (isset($baseLinks))
+			{
+				$linkIds = array();
+				foreach ($baseLinks as $baseLink)
+					$linkIds[] = $baseLink['id'];
+				if (count($linkIds) > 0)
+					$baseLinksCondition = "link.id in ('" . implode("','", $linkIds) . "')";
+			}
 			$links = Yii::app()->session[$datasetKey];
 			if (!isset($links))
 			{
-				if (!(isset($fileTypes) && (count($contentConditions) > 0 || (isset($categories) && count($categories) > 0) || (isset($startDate) && isset($endDate)) || isset($superFilters))))
+				if (!((isset($fileTypes) && (count($contentConditions) > 0 || (isset($categories) && count($categories) > 0) || isset($superFilters) || (isset($startDate) && isset($endDate))) || isset($baseLinks))))
 					return null;
-				$libraryCondition = '1 != 1';
+				$libraryCondition = '1 = 1';
 				if (isset($checkedLibraryIds))
 				{
 					$count = count($checkedLibraryIds);
 					switch ($count)
 					{
 						case 0:
-							$libraryCondition = '1 != 1';
+							$libraryCondition = '1 = 1';
 							break;
 						default:
 							$libraryCondition = "link.id_library in ('" . implode("','", $checkedLibraryIds) . "')";
@@ -299,10 +310,24 @@
 					}
 					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
 					$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
-					$additionalCategoryCondition = ' or ' . $categoryCondition;
-					if (count($contentConditions) > 0)
-						$categoryCondition = '1=1';
+					if (count($contentConditions) == 0)
+						$additionalCategoryCondition = ' or ' . $categoryCondition;
 
+				}
+				else if (count($contentConditions) > 0)
+				{
+					$categoriesSelector = array();
+					$categoriesJoinSelector = array();
+					foreach ($contentConditions as $contentConditionPart)
+					{
+						$conditionToCompare = strtolower(trim(str_replace('"', '', $contentConditionPart)));
+						$categoriesSelector[] = '(link.id in (select id_link from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+						$categoriesJoinSelector[] = '(lcat.id in (select id from tbl_link_category where lower(category) like "%' . $conditionToCompare . '%" or lower(tag) like "%' . $conditionToCompare . '%"))';
+					}
+					$categoryCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesSelector) . ')';
+					$categoryJoinCondition = '(' . implode(($categoriesExactMatch == 'true' ? ' and ' : ' or '), $categoriesJoinSelector) . ')';
+					$additionalCategoryCondition = ' or ' . $categoryCondition;
+					$categoryCondition = '1=1';
 				}
 
 				$onlyWithCategoriesCondition = '1 = 1';
@@ -314,7 +339,7 @@
 						$additionalOnlyWithCategoriesCondition = ' or (exists (select id_link from tbl_link_category where id_link = link.id))';
 				}
 
-				$folderCondition = '1 != 1';
+				$folderCondition = '1 <> 1';
 				$isAdmin = true;
 				if (isset(Yii::app()->user))
 				{
@@ -331,7 +356,7 @@
 				else if (!isset($userId) || (isset($isAdmin) && $isAdmin))
 					$folderCondition = '1 = 1';
 
-				$linkCondition = '1 != 1';
+				$linkCondition = '1 <> 1';
 				if ($isAdmin)
 					$linkCondition = '1 = 1';
 				else if (isset($userId))
@@ -382,7 +407,8 @@
 							lcat.tag as tag';
 					$joinText = "lcat.id_link=link.id and " . $categoryJoinCondition;
 					$whereText = $contentCondition .
-						" and (" . $libraryCondition .
+						" and (" . $baseLinksCondition .
+						") and (" . $libraryCondition .
 						") and (" . $fileTypeCondition .
 						") and (" . $fileCardsCondition .
 						") and (" . $dateCondition .
@@ -418,7 +444,8 @@
 							lcat.tag as tag';
 					$joinText = "lcat.id_link=link.id and " . $categoryJoinCondition;
 					$whereText = $contentCondition .
-						" and (" . $libraryCondition .
+						" and (" . $baseLinksCondition .
+						") and (" . $libraryCondition .
 						") and (" . $fileTypeCondition .
 						") and (" . $fileCardsCondition .
 						") and (" . $dateCondition .

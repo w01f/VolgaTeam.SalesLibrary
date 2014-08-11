@@ -21,32 +21,29 @@
 		public $sortDirection;
 
 		/**
-		 * @param $configContext
+		 * @param $xpath DOMXPath
+		 * @param $contextNode DOMNode
 		 */
-		public function __construct($configContext)
+		public function __construct($xpath, $contextNode)
 		{
-			$config = new DOMDocument();
-			$config->loadXML($configContext);
-			$xpath = new DomXPath($config);
-
 			/** @var $queryResult DOMNodeList */
-			$queryResult = $xpath->query('//SearchCondition/Text');
+			$queryResult = $xpath->query('Text', $contextNode);
 			$this->text = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/StartDate');
+			$queryResult = $xpath->query('StartDate', $contextNode);
 			$this->startDate = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/EndDate');
+			$queryResult = $xpath->query('EndDate', $contextNode);
 			$this->endDate = $queryResult->length > 0 ? trim($queryResult->item(0)->nodeValue) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/DateFileModified');
+			$queryResult = $xpath->query('DateFileModified', $contextNode);
 			$this->dateModified = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/FileType');
+			$queryResult = $xpath->query('FileType', $contextNode);
 			foreach ($queryResult as $node)
 				$this->fileTypes[] = trim($node->nodeValue);
 
-			$queryResult = $xpath->query('//SearchCondition/Library');
+			$queryResult = $xpath->query('Library', $contextNode);
 			if ($queryResult->length > 0)
 				foreach ($queryResult as $node)
 				{
@@ -62,11 +59,11 @@
 					$this->libraries[] = $libraryRecord->id;
 			}
 
-			$queryResult = $xpath->query('//SearchCondition/SuperFilter');
+			$queryResult = $xpath->query('SuperFilter', $contextNode);
 			foreach ($queryResult as $node)
 				$this->superFilters[] = trim($node->nodeValue);
 
-			$queryResult = $xpath->query('//SearchCondition/Categories/Category');
+			$queryResult = $xpath->query('Categories/Category', $contextNode);
 			/** @var $node DOMElement */
 			foreach ($queryResult as $node)
 			{
@@ -81,19 +78,19 @@
 				}
 			}
 
-			$queryResult = $xpath->query('//SearchCondition/HideIfNoTag');
+			$queryResult = $xpath->query('HideIfNoTag', $contextNode);
 			$this->onlyWithCategories = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/HideDuplicated');
+			$queryResult = $xpath->query('HideDuplicated', $contextNode);
 			$this->hideDuplicated = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/SearchByName');
+			$queryResult = $xpath->query('SearchByName', $contextNode);
 			$this->searchByName = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/SearchByContent');
+			$queryResult = $xpath->query('SearchByContent', $contextNode);
 			$this->searchByContent = $queryResult->length > 0 ? filter_var(trim($queryResult->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : null;
 
-			$queryResult = $xpath->query('//SearchCondition/SortBy');
+			$queryResult = $xpath->query('SortBy', $contextNode);
 			foreach ($queryResult as $node)
 			{
 				switch (strtolower(trim($node->nodeValue)))
@@ -117,7 +114,7 @@
 				break;
 			}
 
-			$queryResult = $xpath->query('//SearchCondition/Sortorder');
+			$queryResult = $xpath->query('Sortorder', $contextNode);
 			foreach ($queryResult as $node)
 			{
 				switch (strtolower(trim($node->nodeValue)))

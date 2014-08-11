@@ -1,0 +1,21 @@
+.sub-search-conditions-pane
+{
+	padding: 10px;
+}
+
+.sub-search-conditions-pane .file-filter-panel
+{
+	margin-top: 30px;
+}
+
+.sub-search-conditions-pane .file-filter-panel .search-option
+{
+	padding-bottom: 10px;
+}
+
+#right-navbar .logo-list li
+{
+	margin-top: 10px;
+	float: none;
+	text-align: center;
+}

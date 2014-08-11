@@ -5,6 +5,7 @@
 	 */
 	class SearchShortcut
 	{
+		public $id;
 		public $type;
 		public $name;
 		public $title;
@@ -17,6 +18,13 @@
 
 		public $conditions;
 
+		public $enableSubSearch;
+		public $showSubSearchAll;
+		public $showSubSearchSearch;
+		public $showSubSearchTemplates;
+		public $subSearchDefaultView;
+		public $subConditions;
+
 		private $linkRecord;
 
 		/**
@@ -24,6 +32,7 @@
 		 */
 		public function __construct($linkRecord)
 		{
+			$this->id = $linkRecord->id;
 			$this->linkRecord = $linkRecord;
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
@@ -42,10 +51,26 @@
 			$this->sourceLink = Yii::app()->createAbsoluteUrl('shortcuts/getSearchShortcut', array('linkId' => $linkRecord->id, 'samePage' => Yii::app()->browser->isMobile() ? true : $this->samePage));
 			$showResultsBarTags = $linkConfig->getElementsByTagName("ShowResultsBar");
 			$this->showResultsBar = $showResultsBarTags->length > 0 ? filter_var(trim($showResultsBarTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
-		}
 
-		public function loadSearchConditions()
-		{
-			$this->conditions = new SearchConditions($this->linkRecord->config);
+			$xpath = new DomXPath($linkConfig);
+			$this->conditions = new SearchConditions($xpath, $xpath->query('//Config/SearchCondition')->item(0));
+
+			$enableSubSearchTags = $linkConfig->getElementsByTagName("EnableSubSearch");
+			$this->enableSubSearch = $enableSubSearchTags->length > 0 ? filter_var(trim($enableSubSearchTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : false;
+			$showSubSearchAllTags = $linkConfig->getElementsByTagName("AllButtonVisible");
+			$this->showSubSearchAll = $showSubSearchAllTags->length > 0 ? filter_var(trim($showSubSearchAllTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$showSubSearchSearchTags = $linkConfig->getElementsByTagName("SearchButtonVisible");
+			$this->showSubSearchSearch = $showSubSearchSearchTags->length > 0 ? filter_var(trim($showSubSearchSearchTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$showSubSearchLinksTags = $linkConfig->getElementsByTagName("LinksButtonVisible");
+			$this->showSubSearchTemplates = $showSubSearchLinksTags->length > 0 ? filter_var(trim($showSubSearchLinksTags->item(0)->nodeValue), FILTER_VALIDATE_BOOLEAN) : true;
+			$subSearchDefaultViewTags = $linkConfig->getElementsByTagName("SubSearchDefault");
+			$this->subSearchDefaultView = $subSearchDefaultViewTags->length > 0 ? strtolower(trim($subSearchDefaultViewTags->item(0)->nodeValue)) : 'all';
+
+			$this->subConditions = array();
+			$subSearchConditions = $xpath->query('//Config/SubSearchCondition/Item');
+			foreach ($subSearchConditions as $conditionNode)
+				$this->subConditions[] = new SubSearchTemplate($xpath, $conditionNode, $baseUrl . $linkRecord->source_path);
+			foreach ($this->subConditions as $subSearchCondition)
+				$subSearchCondition->image_path .= '?' . $linkRecord->id;
 		}
 	}

@@ -5,6 +5,7 @@
 	 */
 	class EmptyShortcut
 	{
+		public $id;
 		public $type;
 		public $name;
 		public $tooltip;
@@ -15,6 +16,7 @@
 		 */
 		public function __construct($linkRecord)
 		{
+			$this->id = $linkRecord->id;
 			$this->type = 'none';
 			$this->imagePath = Yii::app()->getBaseUrl(true) . $linkRecord->image_path . '?' . $linkRecord->id;
 			$linkConfig = new DOMDocument();

@@ -5,6 +5,7 @@
 	 */
 	class QuickListShortcut
 	{
+		public $id;
 		public $type;
 		public $name;
 		public $title;
@@ -23,6 +24,7 @@
 		 */
 		public function __construct($linkRecord)
 		{
+			$this->id = $linkRecord->id;
 			$this->linkRecord = $linkRecord;
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);

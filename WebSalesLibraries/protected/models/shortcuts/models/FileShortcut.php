@@ -5,6 +5,7 @@
 	 */
 	class FileShortcut
 	{
+		public $id;
 		public $type;
 		public $name;
 		public $tooltip;
@@ -18,6 +19,7 @@
 		{
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
+			$this->id = $linkRecord->id;
 			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);
 			$nameTags = $linkConfig->getElementsByTagName("line1");
 			$this->name = $nameTags->length > 0 ? trim($nameTags->item(0)->nodeValue) : '';

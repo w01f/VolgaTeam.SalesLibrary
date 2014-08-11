@@ -5,6 +5,8 @@
 	var ShortcutsManager = function ()
 	{
 		var that = this;
+		var searchShortcutManager = undefined;
+
 		this.init = function (tabId)
 		{
 			var pageSelector = '#' + tabId + ' .enabled.shortcuts-page';
@@ -16,157 +18,12 @@
 				loadShortcutsPage(tabId);
 			});
 			loadShortcutsPage(tabId);
-			$(window).off('resize').on('resize', updateContentSize);
+			$(window).off('resize').on('resize', that.updateContentSize);
 		};
 
-		this.processSearchLink = function (content)
+		this.processSearchLink = function (content, objectId, isPageSearch)
 		{
-			var searchConditions = content.find('.search-conditions');
-			var homeBar = content.find('.shortcuts-home-bar');
-			var hideResults = searchConditions.find('.hide-results').length > 0;
-			var shortcutTitle = content.find('.shortcut-title').html();
-			var sortColumn = content.find('.sort-column').html();
-			var sortDirection = content.find('.sort-direction').html();
-			var searchGrid = new $.SalesPortal.LinkGrid();
-			var getSearchResult = function (isSort)
-			{
-				var searchCondition = (function ()
-				{
-					var selectedCondition = '';
-					var selectedConditionTag = searchConditions.find('.search-text');
-					if (selectedConditionTag.length > 0)
-						selectedCondition = selectedConditionTag.html();
-
-					var selectedFileTypes = [];
-					$.each(searchConditions.find('.file-type'), function ()
-					{
-						var fileType = $(this).html();
-						selectedFileTypes.push(fileType);
-						if (fileType == 'video')
-						{
-							selectedFileTypes.push("mp4");
-							selectedFileTypes.push("wmv");
-						}
-						else if (fileType == 'image')
-						{
-							selectedFileTypes.push("png");
-							selectedFileTypes.push("jpeg");
-						}
-					});
-
-					var startDateTag = searchConditions.find('.start-date');
-					if (startDateTag.length > 0)
-						var startDate = startDateTag.html();
-					var endDateTag = searchConditions.find('.end-date');
-					if (endDateTag.length > 0)
-						var endDate = endDateTag.html();
-
-					var onlyFileCards = 0;
-
-					var selectedLibraryIds = [];
-					var libraryIds = searchConditions.find('.library');
-					if (libraryIds.length > 0)
-						$.each(libraryIds, function ()
-						{
-							selectedLibraryIds.push($(this).html());
-						});
-
-					var superFilters = [];
-					$.each(searchConditions.find('.super-filter'), function ()
-					{
-						superFilters.push($(this).html());
-					});
-
-					var categories = [];
-					$.each(searchConditions.find('.category'), function ()
-					{
-						var substr = $(this).html().split('------');
-						var category = {
-							category: substr[0],
-							tag: substr[1]
-						};
-						categories.push(category);
-					});
-
-					var onlyWithCategories = searchConditions.find('.only-with-categories').html();
-					var onlyByName = searchConditions.find('.search-by-name').html();
-					var onlyByContent = searchConditions.find('.search-by-content').html();
-
-					var datasetKey = isSort == 0 || searchGrid.datasetKey == null ? undefined : searchGrid.datasetKey;
-
-					return {
-						fileTypes: selectedFileTypes,
-						condition: selectedCondition,
-						startDate: startDate,
-						endDate: endDate,
-						dateFile: searchConditions.find('.use-file-date').html(),
-						onlyFileCards: onlyFileCards,
-						libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
-						superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
-						categories: categories.length > 0 ? $.toJSON(categories) : null,
-						categoriesExactMatch: false,
-						onlyWithCategories: onlyWithCategories,
-						hideDuplicated: searchConditions.find('.hide-duplicated').html(),
-						onlyByName: onlyByName,
-						onlyByContent: onlyByContent,
-						sortColumn: searchGrid.sortColumn != undefined && searchGrid.sortColumn != null ? searchGrid.sortColumn : sortColumn,
-						sortDirection: searchGrid.sortDirection != undefined && searchGrid.sortDirection != null ? searchGrid.sortDirection : sortDirection,
-						datasetKey: datasetKey
-					};
-				}());
-
-				var beforeSearch = function ()
-				{
-					$.SalesPortal.Overlay.show(false);
-				};
-
-				var completeCallback = function ()
-				{
-					updateContentSize();
-					searchGrid.init({
-						content: content,
-						refreshCallback: function ()
-						{
-							getSearchResult(1);
-						},
-						sortColumn: isSort == 1 ? null : sortColumn,
-						sortDirection: isSort == 1 ? null : sortDirection,
-						showDelete: false
-					});
-					$.SalesPortal.Overlay.hide();
-				};
-
-				var successCallback = function (msg)
-				{
-					content.html('');
-					content.append(searchConditions);
-					content.append(homeBar);
-					content.append($('<div id="search-container"><div id="search-result" style="width: 100% !important; padding: 0;"><div></div></div></div>'));
-					content.find('#search-result > div').append(msg);
-
-					var resultsBar = content.find('.search-grid-info');
-					if (hideResults)
-					{
-						var linksFoundTag = resultsBar.find('#search-links-info-count span');
-						var linksFound = linksFoundTag.length > 0 ? linksFoundTag.html() : 'No Tagged Files Exist';
-						$('.shortcuts-home-bar .title').html(shortcutTitle != '' ? shortcutTitle + ' (' + linksFound + ')' : linksFound);
-						resultsBar.remove();
-					}
-					else
-						resultsBar.off('click').on('click', function ()
-						{
-							var linkIds = [];
-							$.each(content.find(".links-grid-body").find('.link-id-column'), function ()
-							{
-								linkIds.push($(this).html());
-							});
-							if (linkIds.length > 0)
-								$.SalesPortal.SearchHelper.requestSearchResultDialog(linkIds);
-						});
-				};
-				$.SalesPortal.SearchHelper.runSearch(searchCondition, beforeSearch, completeCallback, successCallback);
-			};
-			getSearchResult(0);
+			searchShortcutManager = $.SalesPortal.ShortcutsSearchManager(content, objectId, isPageSearch);
 		};
 
 		var loadShortcutsPage = function (tabId)
@@ -187,7 +44,7 @@
 				complete: function ()
 				{
 					$.SalesPortal.Overlay.hide();
-					updateContentSize();
+					that.updateContentSize();
 				},
 				success: function (msg)
 				{
@@ -217,7 +74,7 @@
 							$(this).attr('src', $(this).attr('src').replace('expand', 'collapse'));
 							changeSearchBarVisibility(true);
 						}
-						updateContentSize();
+						that.updateContentSize();
 						e.stopPropagation();
 					});
 					var linkLogo = shortcutsTab.find('.ribbon-link-logo');
@@ -262,7 +119,7 @@
 						if (searchConditions.find('.same-page').html() === 'true')
 						{
 							changeSearchBarVisibility(false);
-							$('.shortcuts-home-bar .buttons-container').hide();
+							$('.shortcuts-home-bar .buttons-container').remove();
 							searchConditions.remove('.search-text');
 							searchConditions.append('<div class="search-text">' + textCondition + '</div>');
 							var searchByContent = searchConditions.find('.search-by-content');
@@ -277,7 +134,7 @@
 							});
 							var content = $('#content').find('.shortcuts-page-content');
 							content.html('<div class="search-conditions" style="display: none;">' + searchConditions.html() + '</div>');
-							that.processSearchLink(content);
+							that.processSearchLink(content, pageId, true);
 						}
 						else
 						{
@@ -359,28 +216,29 @@
 					$('.shortcuts-link.embedded').off('click').on('click', function (e)
 					{
 						var link = $(this);
+						var linkId = link.find('.link-id').html();
 						e.preventDefault();
 						$.ajax({
 							type: "POST",
-							url: $(this).attr('href'),
+							url: link.attr('href'),
 							beforeSend: function ()
 							{
 								$.SalesPortal.Overlay.show(false);
 							},
 							complete: function ()
 							{
-								updateContentSize();
+								that.updateContentSize();
 								$.SalesPortal.Overlay.hide();
 							},
 							success: function (msg)
 							{
 								changeSearchBarVisibility(false);
-								$('.shortcuts-home-bar .buttons-container').hide();
+								$('.shortcuts-home-bar .buttons-container').remove();
 								var pageContent = content.find('.shortcuts-page-content');
 								if (link.hasClass('search'))
 								{
 									pageContent.html(msg);
-									that.processSearchLink(pageContent)
+									that.processSearchLink(pageContent, linkId, false);
 								}
 								else if (link.hasClass('window'))
 								{
@@ -550,12 +408,12 @@
 			});
 		};
 
-		var updateContentSize = function ()
+		this.updateContentSize = function ()
 		{
 			$.SalesPortal.Layout.updateContentSize();
 			var content = $('#content');
 			var shortcutsPage = content.find('.shortcuts-page-content');
-			var height = content.height() - content.find('.shortcuts-home-bar img').height() - content.find('.shortcuts-search-bar.open').height() - 20;
+			var height = content.height() - content.find('.shortcuts-home-bar').height() - content.find('.shortcuts-search-bar.open').height();
 			shortcutsPage.css({
 				'height': height + 'px'
 			});
@@ -593,6 +451,11 @@
 				linkDateWidth;
 			gridBody.find('td.link-name-column').css({
 				'width': linkNameBodyWidth + 'px'
+			});
+
+			var sideBar = $('#right-navbar');
+			sideBar.find('.logo-list').css({
+				'height': height + 'px'
 			});
 		};
 	};

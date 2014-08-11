@@ -13,7 +13,7 @@
 		<tr>
 			<td>
 				<? if (!Yii::app()->browser->isMobile()): ?>
-					<img style="margin-top: 20px; margin-bottom: 20px;" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar-logo.png?' . $pageId ?>" alt=""/>
+					<img style="margin-top: 20px; margin-bottom: 20px;" src="<? echo Yii::app()->getBaseUrl(true) . '/images/shortcuts/search-bar/search-bar-logo.png?' . $pageId ?>" alt=""/>
 				<? endif; ?>
 				<div class="search-conditions" style="display: none;">
 					<div class="shortcut-title"><? echo $searchBar->title; ?></div>
@@ -66,51 +66,7 @@
 					<? if (isset($searchBar->conditions->sortDirection)): ?>
 						<div class="sort-direction"><? echo $searchBar->conditions->sortDirection; ?></div>
 					<? endif; ?>
-					<div class="tag-condition-selector">
-						<div class="tool-dialog">
-							<div class="group-panel">
-								<button type="button" class="btn btn-default btn-block tags-clear-all">Clear All <? echo $tagsName; ?></button>
-								<br>
-								<div class="group-title">What Are You Looking For?</div>
-								<? if (isset($searchBar->categoryManager->superFilters)): ?>
-									<div class="btn-group btn-group-justified super-filter-list">
-										<? foreach ($searchBar->categoryManager->superFilters as $superFilter): ?>
-											<div class="btn-group">
-												<button type="button" class="btn btn-default"><? echo $superFilter->value; ?></button>
-											</div>
-										<? endforeach; ?>
-									</div>
-								<? endif; ?>
-							</div>
-							<? if (isset($searchBar->categoryManager->groups)): ?>
-								<div class="tag-list-container" style="height: 400px">
-									<div class="accordion tag-list">
-										<? foreach ($searchBar->categoryManager->groups as $group): ?>
-											<h3><span><? echo $group; ?></span></h3>
-											<div class="checkbox">
-												<label class="group-selector-title">
-													<input class="group-selector" type="checkbox">
-													<? echo $group; ?>
-												</label>
-												<? foreach ($searchBar->categoryManager->getTagsByGroup($group) as $tag): ?>
-													<div class="checkbox">
-														<label>
-															<input class="item-selector" type="checkbox" value="<? echo $group . '------' . $tag['tag']; ?>">
-															<? echo $tag['tag']; ?>
-														</label>
-													</div>
-												<? endforeach; ?>
-											</div>
-										<? endforeach; ?>
-									</div>
-								</div>
-							<? endif ?>
-							<div class="buttons-area">
-								<button class="btn btn-default accept-button" type="button">OK</button>
-								<button class="btn btn-default cancel-button" type="button">Cancel</button>
-							</div>
-						</div>
-					</div>
+					<? $this->renderPartial('categorySelector', array('categoryManager' => $searchBar->categoryManager), false, true); ?>
 				</div>
 			</td>
 		</tr>

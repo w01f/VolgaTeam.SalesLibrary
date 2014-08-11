@@ -71,6 +71,7 @@
 				$sortColumn = Yii::app()->request->getPost('sortColumn');
 				$sortDirection = Yii::app()->request->getPost('sortDirection');
 				$datasetKey = Yii::app()->request->getPost('datasetKey');
+				$baseDatasetKey = Yii::app()->request->getPost('baseDatasetKey');
 
 				$checkedLibraryIds = Yii::app()->request->getPost('libraries');
 				if (isset($checkedLibraryIds))
@@ -126,6 +127,7 @@
 					$onlyByName,
 					$onlyByContent,
 					$datasetKey,
+					$baseDatasetKey,
 					$sortColumn,
 					$sortDirection);
 

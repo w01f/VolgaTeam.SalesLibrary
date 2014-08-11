@@ -50,7 +50,8 @@
 					foreach ($aliasNodes as $aliasNode)
 						$result[] = str_replace($conditionToCompare, trim($aliasNode->nodeValue), $condition);
 				}
-			} catch (Exception $e)
+			}
+			catch (Exception $e)
 			{
 			}
 			return $result;

@@ -59,7 +59,7 @@
 		 */
 		public function getSearchBar()
 		{
-			return new SearchBar($this->config);
+			return new SearchBar($this);
 		}
 
 		public static function clearData()

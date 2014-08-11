@@ -5,6 +5,7 @@
 	 */
 	class LibraryLinkShortcut
 	{
+		public $id;
 		public $type;
 		public $name;
 		public $tooltip;
@@ -16,7 +17,7 @@
 		 */
 		public function __construct($linkRecord)
 		{
-			$this->linkRecord = $linkRecord;
+			$this->id = $linkRecord->id;
 			$linkConfig = new DOMDocument();
 			$linkConfig->loadXML($linkRecord->config);
 			$this->type = trim($linkConfig->getElementsByTagName("Type")->item(0)->nodeValue);

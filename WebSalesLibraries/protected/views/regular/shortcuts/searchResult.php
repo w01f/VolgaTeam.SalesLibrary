@@ -1,5 +1,5 @@
 <?
-	/** @var $searchContainer SearchShortcut */
+	/** @var $searchContainer SearchShortcut|SearchBar */
 	$cs = Yii::app()->clientScript;
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/search.css?' . Yii::app()->params['version']);
 	$cs->registerCssFile(Yii::app()->getBaseUrl(true) . '/css/regular/base/file-card.css?' . Yii::app()->params['version']);
@@ -7,10 +7,14 @@
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/overlay.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/links-grid.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/search-processor.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
+	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts-search.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 	$cs->registerScriptFile(Yii::app()->getBaseUrl(true) . '/js/regular/base/shortcuts.js?' . Yii::app()->params['version'], CClientScript::POS_HEAD);
 ?>
 <div class="search-conditions" style="display: none;">
 	<div class="shortcut-title"><? echo $searchContainer->title; ?></div>
+	<? if (!isset($searchContainer->sourceLink)): ?>
+		<div class="is-page">true</div>
+	<? endif; ?>
 	<? if (isset($searchContainer->conditions->text)): ?>
 		<div class="search-text"><? echo $searchContainer->conditions->text; ?></div>
 	<? endif; ?>
@@ -57,6 +61,21 @@
 	<? endif; ?>
 	<? if (!$searchContainer->showResultsBar): ?>
 		<div class="hide-results">true</div>
+	<? endif; ?>
+	<? if ($searchContainer->enableSubSearch): ?>
+		<div class="enable-sub-search">true</div>
+	<? endif; ?>
+	<? if ($searchContainer->showSubSearchAll): ?>
+		<div class="show-sub-search-all">true</div>
+	<? endif; ?>
+	<? if ($searchContainer->showSubSearchSearch): ?>
+		<div class="show-sub-search-search">true</div>
+	<? endif; ?>
+	<? if ($searchContainer->showSubSearchTemplates): ?>
+		<div class="show-sub-search-templates">true</div>
+	<? endif; ?>
+	<? if ($searchContainer->subSearchDefaultView): ?>
+		<div class="sub-search-default-view"><? echo $searchContainer->subSearchDefaultView; ?></div>
 	<? endif; ?>
 	<? if (isset($searchContainer->conditions->sortColumn)): ?>
 		<div class="sort-column"><? echo $searchContainer->conditions->sortColumn; ?></div>

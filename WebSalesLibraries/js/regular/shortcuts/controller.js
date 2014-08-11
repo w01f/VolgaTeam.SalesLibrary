@@ -7,10 +7,13 @@
 		var that = this;
 		this.init = function ()
 		{
+			var content = $('#content');
+			var objectId = content.find('.object-id').html();
+			var isPage = content.find('.is-page').length > 0;
 			$('#ribbon').ribbon();
 			$('a#view-dialog-link').fancybox();
 			$.SalesPortal.Overlay.show(true);
-			$.SalesPortal.Shortcuts.processSearchLink($('#content'));
+			$.SalesPortal.Shortcuts.processSearchLink(content, objectId, isPage);
 			$.SalesPortal.Overlay.hide();
 			that.updateContentSize();
 			$(window).on('resize', that.updateContentSize);
@@ -27,6 +30,7 @@
 			content.css({
 				'height': height + 'px'
 			});
+			height = height - content.find('.shortcuts-home-bar').height();
 			var searchResult = $('#search-result');
 			searchResult.find('> div').css({
 				'height': height + 'px'

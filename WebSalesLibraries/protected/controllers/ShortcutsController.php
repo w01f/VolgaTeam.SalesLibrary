@@ -62,7 +62,7 @@
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Window', 'objectLogo' => $windowShortcut->ribbonLogoPath, 'content' => $content));
+					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => 'Window', 'objectLogo' => $windowShortcut->ribbonLogoPath, 'content' => $content));
 			}
 		}
 
@@ -80,7 +80,7 @@
 				if ($samePage)
 					echo $content;
 				else
-					$this->render('linkWrapper', array('objectName' => 'Quick List', 'objectLogo' => $quickListShortcut->ribbonLogoPath, 'content' => $content));
+					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => 'Quick List', 'objectLogo' => $quickListShortcut->ribbonLogoPath, 'content' => $content));
 			}
 		}
 
@@ -96,7 +96,6 @@
 				/** @var $pageRecord ShortcutsPageRecord */
 				$pageRecord = ShortcutsPageRecord::model()->findByPk($linkRecord->id_page);
 				$searchShortcut = new SearchShortcut($linkRecord);
-				$searchShortcut->loadSearchConditions();
 				$this->pageTitle = $searchShortcut->tooltip;
 				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchShortcut), true);
 				if ($samePage)
@@ -108,7 +107,7 @@
 						$homeBar = $pageRecord->getHomeBar();
 						$content = $this->renderPartial('homeBar', array('homeBar' => $homeBar, 'enableSearchBar' => false), true) . $content;
 					}
-					$this->render('linkWrapper', array('objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
+					$this->render('linkWrapper', array('objectId' => $linkId, 'objectName' => $searchShortcut->tooltip, 'objectLogo' => $searchShortcut->ribbonLogoPath, 'content' => $content));
 				}
 			}
 		}
@@ -154,7 +153,70 @@
 					$searchBar->conditions->categories[] = $category;
 				}
 				$content = $this->renderPartial('searchResult', array('searchContainer' => $searchBar), true);
-				$this->render('linkWrapper', array('objectName' => $searchBar->title, 'content' => $content));
+				$this->render('linkWrapper', array('objectId' => $pageId, 'objectName' => $searchBar->title, 'content' => $content));
 			}
 		}
+
+		public function actionGetSubSearchBar()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$linkId = Yii::app()->request->getPost('linkId');
+			/** @var $optionsContainer SearchShortcut|SearchBar */
+			$optionsContainer = null;
+			if (isset($pageId))
+			{
+				/** @var $pageRecord ShortcutsPageRecord */
+				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
+				$optionsContainer = $pageRecord->getSearchBar();
+			}
+			else if (isset($linkId))
+			{
+				/** @var $linkRecord ShortcutsLinkRecord */
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				$optionsContainer = new SearchShortcut($linkRecord);
+			}
+			$this->renderPartial('subSearchBar', array('optionsContainer' => $optionsContainer));
+		}
+
+		public function actionGetSubSearchCustomPanel()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$linkId = Yii::app()->request->getPost('linkId');
+			if (!isset($pageId) && isset($linkId))
+			{
+				/** @var $linkRecord ShortcutsLinkRecord */
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				$pageId = $linkRecord->id_page;
+			}
+			/** @var $pageRecord ShortcutsPageRecord */
+			$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
+			$searchBar = $pageRecord->getSearchBar();
+			$this->renderPartial('subSearchCustomPanel', array('searchBar' => $searchBar));
+		}
+
+		public function actionGetSubSearchTemplatesPanel()
+		{
+			$pageId = Yii::app()->request->getPost('pageId');
+			$linkId = Yii::app()->request->getPost('linkId');
+			$templates = array();
+			$id = '';
+			if (isset($pageId))
+			{
+				/** @var $pageRecord ShortcutsPageRecord */
+				$pageRecord = ShortcutsPageRecord::model()->findByPk($pageId);
+				$searchBar = $pageRecord->getSearchBar();
+				$templates = $searchBar->subConditions;
+				$id = $pageId;
+			}
+			else if (isset($linkId))
+			{
+				/** @var $linkRecord ShortcutsLinkRecord */
+				$linkRecord = ShortcutsLinkRecord::model()->findByPk($linkId);
+				$link = new SearchShortcut($linkRecord);
+				$templates = $link->subConditions;
+				$id = $linkId;
+			}
+			$this->renderPartial('subSearchTemplatesPanel', array('templates' => $templates, 'id' => $id));
+		}
 	}
+
