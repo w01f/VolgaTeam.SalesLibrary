@@ -190,24 +190,24 @@
 		}
 
 		/**
-		 * @param $contentConditions
-		 * @param $fileTypes
-		 * @param $startDate
-		 * @param $endDate
-		 * @param $dateFile
-		 * @param $checkedLibraryIds
-		 * @param $onlyFileCards
-		 * @param $superFilters
-		 * @param $categories
-		 * @param $categoriesExactMatch
-		 * @param $onlyWithCategories
-		 * @param $hideDuplicated
-		 * @param $onlyByName
-		 * @param $onlyByContent
-		 * @param $datasetKey
-		 * @param $baseDatasetKey
-		 * @param $sortColumn
-		 * @param $sortDirection
+		 * @param $contentConditions string[]
+		 * @param $fileTypes string[]
+		 * @param $startDate string
+		 * @param $endDate string
+		 * @param $dateFile boolean
+		 * @param $checkedLibraryIds string[]
+		 * @param $onlyFileCards int
+		 * @param $superFilters string[]
+		 * @param $categories Category[]
+		 * @param $categoriesExactMatch string
+		 * @param $onlyWithCategories boolean
+		 * @param $hideDuplicated boolean
+		 * @param $onlyByName boolean
+		 * @param $onlyByContent boolean
+		 * @param $datasetKey string
+		 * @param $baseDatasetKey string
+		 * @param $sortColumn string
+		 * @param $sortDirection string
 		 * @return array|null
 		 */
 		public static function searchByContent($contentConditions, $fileTypes, $startDate, $endDate, $dateFile, $checkedLibraryIds, $onlyFileCards, $superFilters, $categories, $categoriesExactMatch, $onlyWithCategories, $hideDuplicated, $onlyByName, $onlyByContent, $datasetKey, $baseDatasetKey, $sortColumn, $sortDirection)
@@ -263,7 +263,7 @@
 					if ($startDate != '' && $endDate != '')
 					{
 						$dateColumn = 'link.date_modify';
-						if (isset($dateFile) && $dateFile == 'true')
+						if ($dateFile)
 							$dateColumn = 'link.file_date';
 						$dateCondition = $dateColumn . " >= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($startDate)) . "' and " . $dateColumn . " <= '" . date(Yii::app()->params['mysqlDateFormat'], strtotime($endDate) + 86400) . "'";
 						if (count($contentConditions) == 0)
@@ -394,7 +394,7 @@
 
 				if ($hideDuplicated)
 				{
-					$dateField = 'max(' . (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ') as link_date';
+					$dateField = 'max(' . ($dateFile ? 'link.file_date' : 'link.date_modify') . ') as link_date';
 					$selectText = 'max(link.id) as id,
 							max(link.id_library) as id_library,
 							max(link.name) as name,
@@ -431,7 +431,7 @@
 				}
 				else
 				{
-					$dateField = (isset($dateFile) && $dateFile == 'true' ? 'link.file_date' : 'link.date_modify') . ' as link_date';
+					$dateField = ($dateFile ? 'link.file_date' : 'link.date_modify') . ' as link_date';
 					$selectText = 'link.id,
 							link.id_library,
 							link.name,

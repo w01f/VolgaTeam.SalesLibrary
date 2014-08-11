@@ -7,434 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="311ca633-43c5-41dd-82ab-ba01ea556142" name="Default" comment="Web Sales Depot: Test version increase&#10;&#10;">
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\ArrowLeftGreen.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\GreenRightArrow.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\Green_Plus.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\FileManager\Resources\Red_Minus.png" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SalesDepot\InteropClasses\WinAPIHelper.cs" afterPath="" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\SiteManager\Resources\CopySmall.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/AddUser.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/AddUser.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/AddWeek.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/AddWeek.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/DeleteButton.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/DeleteButton.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/DeleteUser.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/DeleteUser.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Resources/DownArrow.png" afterPath="$PROJECT_DIR$/../FileManager/Resources/DownArrow.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/Exit.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/Exit.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/ExportGroup.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/ExportGroup.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/Resources/FloaterHide.png" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/Resources/FloaterHide.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/FloaterHide.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/FloaterHide.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/ImportUsers.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/ImportUsers.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/NudgeDown.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/NudgeDown.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/NudgeUp.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/NudgeUp.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramBrowseBackward.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramBrowseBackward.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramBrowseForward.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramBrowseForward.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramOutputExcel.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramOutputExcel.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramOutputPDF.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramOutputPDF.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramSearch.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramSearch.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramShowInfo.png" afterPath="$PROJECT_DIR$/../SalesDepot/Resources/ProgramShowInfo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/RefreshUsers.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/RefreshUsers.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Resources/ShowInfo.png" afterPath="$PROJECT_DIR$/../SiteManager/Resources/ShowInfo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Resources/UpArrow.png" afterPath="$PROJECT_DIR$/../FileManager/Resources/UpArrow.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/icon.ico" afterPath="$PROJECT_DIR$/../FileManager/icon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/icon.ico" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/icon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/icon.ico" afterPath="$PROJECT_DIR$/../SalesDepot/icon.ico" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/AppManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/AppManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/AttachmentsEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/CalendarPartControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/CalendarPartControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/CalendarPartControl.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/CalendarPartControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/CategoriesEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/CategoriesEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClientLogosControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClipartTreeListControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClipartTreeListControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClipartTreeListControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClipartTreeListControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClipartTreeListControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/ClipartTreeListControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/ColumnTitleControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/ColumnTitleControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/ContainerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/ContainerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/ContainerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/ContainerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/DecoratorManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/DecoratorManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/ExcelHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/ExcelHelper.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/FileCardsEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FloaterManager.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FloaterManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Floater/FloaterManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Floater/FloaterManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddNetworkLink.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddNetworkLink.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddNetworkLink.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddNetworkLink.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddNetworkLink.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddNetworkLink.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddUrl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddUrl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddUrl.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddUrl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddUrl.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormAddUrl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormAuthorizeWarning.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormAuthorizeWarning.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSync.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSync.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSync.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSync.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSync.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSync.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSyncEdit.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSyncEdit.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSyncEdit.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSyncEdit.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSyncEdit.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoSyncEdit.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoWidgets.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoWidgets.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoWidgets.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoWidgets.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoWidgets.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormAutoWidgets.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormBranding.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormBranding.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormBranding.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormBranding.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormBranding.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormBranding.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormBrowserSelector.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormBrowserSelector.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormBrowserSelector.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormBrowserSelector.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormCalendarSettings.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormCalendarSettings.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormCalendarSettings.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormCalendarSettings.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormCalendarSettings.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormCalendarSettings.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormColumns.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormColumns.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormColumns.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormColumns.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormColumns.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormColumns.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormDeadLinks.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormDeadLinks.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormDeadLinks.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormDeadLinks.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormDeadLinks.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormDeadLinks.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormDeleteIncorrectLinks.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormDeleteIncorrectLinks.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormDeleteIncorrectLinks.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormDeleteIncorrectLinks.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditGroup.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditGroup.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditGroup.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditGroup.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditGroup.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditGroup.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditPage.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditPage.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditPage.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditPage.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditPage.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditPage.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditUser.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditUser.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditUser.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditUser.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditUser.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/IPad/FormEditUser.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailLink.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailLink.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormEmailList.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormEmailList.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormEmailList.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormEmailList.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormEmailList.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormEmailList.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailPresentation.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailPresentation.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormExtraRoots.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormExtraRoots.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormExtraRoots.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormExtraRoots.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormExtraRoots.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormExtraRoots.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FormFloater.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FormFloater.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FormFloater.designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FormFloater.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FormFloater.resx" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/Floater/FormFloater.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderSpecialOptions.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderSpecialOptions.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderSpecialOptions.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderSpecialOptions.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderViewOptions.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderViewOptions.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormIncorrectLinksNotification.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormIncorrectLinksNotification.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormIncorrectLinksNotification.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormIncorrectLinksNotification.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormLinkProperties.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkSpecialOptions.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkSpecialOptions.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkSpecialOptions.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkSpecialOptions.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/FormMain.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.cs" afterPath="$PROJECT_DIR$/../FileManager/FormMain.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FormMain.resx" afterPath="$PROJECT_DIR$/../FileManager/FormMain.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.resx" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/FormMain.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPages.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPages.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPages.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPages.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPages.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPages.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPaths.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPaths.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPaths.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPaths.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPaths.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormPaths.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgress.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgress.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/ToolForms/FormProgress.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/ToolForms/FormProgress.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgress.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgress.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/ToolForms/FormProgress.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/ToolForms/FormProgress.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormProgress.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormProgress.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgressSync.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgressSync.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgressSync.designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgressSync.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgressSync.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/FormProgressSync.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormSelectWidget.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormSelectWidget.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormSelectWidget.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormSelectWidget.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormSelectWidget.resx" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/WallBin/FormSelectWidget.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.cs" afterPath="$PROJECT_DIR$/../FileManager/ToolForms/Settings/FormSync.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormVideoViewOptions.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormVideoViewOptions.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormViewOptions.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormViewOptions.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormZipFileName.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormZipFileName.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/GroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/GroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/GroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/GroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/GroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/GroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/IGroupControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/IGroupControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadContentManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadContentManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadContentManagerControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadContentManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/IPad/IPadPermissionsManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/KeywordsEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/LibraryDecorator.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/LibraryDecorator.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/MultitabLibraryControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/MultitabLibraryControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/OutlookHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/OutlookHelper.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/PackageDecorator.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/Decorators/PackageDecorator.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/InteropClasses/PowerPointHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot/InteropClasses/PowerPointHelper.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/PreviewContainer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/PreviewContainer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/ProgramScheduleManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/BusinessClasses/ProgramScheduleManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/RegularLibraryControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/RegularLibraryControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/Properties/Resources.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Properties/Resources.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/Properties/Resources.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/Resources.resx" afterPath="$PROJECT_DIR$/../FileManager/Properties/Resources.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.resx" afterPath="$PROJECT_DIR$/../SalesDepot/Properties/Resources.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Properties/Resources.resx" afterPath="$PROJECT_DIR$/../SiteManager/Properties/Resources.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/SalesGalleryControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SecurityEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/ConfigurationClasses/SettingsManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ConfigurationClasses/SettingsManager.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ConfigurationClasses/SettingsManager.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/SuperFilterControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SuperFiltersEditor.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SuperFiltersEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SuperFiltersEditor.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/SuperFiltersEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabClipartControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabClipartControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabClipartControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabClipartControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabHomeControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabHomeControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabHomeControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabIPadContentControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabIPadContentControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabIPadUsersControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabIPadUsersControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabOvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/TabPages/TabOvernightsCalendarControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/TabPages/TabOvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/TabPages/TabOvernightsCalendarControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/TagsCleaner.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Tags/TagsCleaner.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/TotalControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/TotalControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/TotalControl.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/TotalControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/WallBin/WallBinTreeListControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/Cliparts/WebArtControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.resx" afterPath="$PROJECT_DIR$/../FileManager/PresentationClasses/OvernightsCalendar/YearControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.resx" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/PresentationClasses/OvernightsCalendar/YearControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/YearControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/Properties/licenses.licx" afterPath="$PROJECT_DIR$/../FileManager/Properties/licenses.licx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/Properties/licenses.licx" afterPath="$PROJECT_DIR$/../SiteManager/Properties/licenses.licx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" afterPath="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/controllers/SearchController.php" afterPath="$PROJECT_DIR$/protected/controllers/SearchController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/config/params.php" afterPath="$PROJECT_DIR$/protected/config/params.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/search-view.js" afterPath="$PROJECT_DIR$/js/regular/base/search-view.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/search.js" afterPath="$PROJECT_DIR$/js/phone/search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" afterPath="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/phone/shortcuts.js" afterPath="$PROJECT_DIR$/js/phone/shortcuts.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Gallery/FormAddFavoriteImage.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Gallery/FormAddFavoriteImage.designer.cs" />
     </list>
-    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../SalesDepot/Properties/licenses.licx" />
-      <change type="DELETED" beforePath="D:\Projects\Visual Studio 2005\SalesDepot.NET\OvernightsCalendarViewer\Properties\licenses.licx" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/ActivitiesManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/CalendarPartControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/CalendarPartControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/ColumnTitleControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/ColumnTitleControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/ContainerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/DefaultViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/DefaultViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/EmptyViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/EmptyViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/ExcelViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/ExcelViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/FileEditor.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/FileEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/FileEditor.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/FileEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../FileManager/FileManager.csproj" afterPath="$PROJECT_DIR$/../FileManager/FileManager.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/Filter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/Filter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/Filter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/Filter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/Filter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/Filter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/Filter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/Filter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/Filter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/Filter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/Filter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/Filter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/Filter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/Filter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/Filter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/Filter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/FolderBoxControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/FolderViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/FolderViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/FolderViewer.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/FolderViewer.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Gallery/FormAddFavoriteImage.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Gallery/FormAddFavoriteImage.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddFolder.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddLink.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddPage.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddPage.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddPage.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddPage.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddPage.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormAddPage.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormAuthorizeWarning.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormAuthorizeWarning.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormBrowserSelector.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormBrowserSelector.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormDeletePages.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormDeletePages.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormDeletePages.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormDeletePages.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormDeletePages.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormDeletePages.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditGroup.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditGroup.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditGroup.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditGroup.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditGroup.resx" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditGroup.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditPage.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditPage.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditPage.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditPage.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditPage.resx" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditPage.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditTickerLink.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditTickerLink.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditTickerLink.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditTickerLink.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditTickerLink.resx" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditTickerLink.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditUser.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditUser.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditUser.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditUser.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditUser.resx" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormEditUser.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailLink.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailLink.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailPresentation.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormEmailPresentation.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormEmailSettings.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormEmailSettings.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormEmailWebLink.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormFileSettings.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormFileSettings.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormFileSettings.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormFileSettings.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormFileSettings.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/Settings/FormFileSettings.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Floater/FormFloater.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Floater/FormFloater.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Floater/FormFloater.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/Floater/FormFloater.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/Floater/FormFloater.resx" afterPath="$PROJECT_DIR$/../SalesDepot/Floater/FormFloater.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderSpecialOptions.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderSpecialOptions.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderViewOptions.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormFolderViewOptions.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkPreview.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkPreview.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkPreview.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkPreview.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkSpecialOptions.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormLinkSpecialOptions.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/QBuilderForms/FormLogin.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/FormMain.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/FormMain.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/FormMain.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/FormMain.cs" afterPath="$PROJECT_DIR$/../SalesDepot/FormMain.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/FormMain.cs" afterPath="$PROJECT_DIR$/../SiteManager/FormMain.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/FormMain.resx" afterPath="$PROJECT_DIR$/../SalesDepot/FormMain.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/FormMain.resx" afterPath="$PROJECT_DIR$/../SiteManager/FormMain.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/ProgramManager/FormOutputParameters.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/ProgramManager/FormOutputParameters.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/ProgramManager/FormOutputParameters.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/ProgramManager/FormOutputParameters.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/ProgramManager/FormOutputParameters.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/ProgramManager/FormOutputParameters.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickView.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormPowerPointQuickViewOld.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarConverter/FormProgress.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarConverter/FormProgress.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarSplitter/FormProgress.Designer.cs" afterPath="$PROJECT_DIR$/../OvernightsCalendarSplitter/FormProgress.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/FormProgress.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/FormProgress.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormProgress.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormProgress.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/FormProgress.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/FormProgress.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/ToolForms/FormProgress.resx" afterPath="$PROJECT_DIR$/../SiteManager/ToolForms/FormProgress.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSaveAsPDF.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSaveAsPDF.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSaveAsPDF.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSaveAsPDF.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSelectSlideWarning.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSelectSlideWarning.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSelectSlideWarning.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSelectSlideWarning.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSelectSlideWarning.resx" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormSelectSlideWarning.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormVideoViewOptions.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormVideoViewOptions.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormViewOptions.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormViewOptions.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormZipFileName.cs" afterPath="$PROJECT_DIR$/../SalesDepot/ToolForms/WallBin/FormZipFileName.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizStatusData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/GroupControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/GroupControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/GroupControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/RawData/GroupControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/GroupFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/GroupFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/GroupFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/InactiveUses/InactiveUsersManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/LibraryLinkEditor.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/LibraryLinkEditor.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/LibraryLinkEditor.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/LinkEditors/LibraryLinkEditor.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/LinkCartControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/LinkCartControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/LinkCartControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/LinkCartControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/MultitabLibraryControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/MultitabLibraryControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/MultitabLibraryControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/MultitabLibraryControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/OvernightsCalendar/OvernightsCalendarControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarConverter/OvernightsCalendarConverter.csproj" afterPath="$PROJECT_DIR$/../OvernightsCalendarConverter/OvernightsCalendarConverter.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarSplitter/OvernightsCalendarSplitter.csproj" afterPath="$PROJECT_DIR$/../OvernightsCalendarSplitter/OvernightsCalendarSplitter.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OvernightsCalendarViewer/OvernightsCalendarViewer.csproj" afterPath="$PROJECT_DIR$/../OvernightsCalendarViewer/OvernightsCalendarViewer.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PDFViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageContentControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageContentControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageContentControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageContentControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageListControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageListControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageListControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/QBuilderControls/PageListControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Users/PermissionsManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PowerPointViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PowerPointViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PowerPointViewer.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/PowerPointViewer.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramScheduleControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/ProgramManager/ProgramSearchControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/QBuilder/QPagesManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/QuickTimeViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/QuickTimeViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/RichTextBoxPrinter.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/RichTextBoxPrinter.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.Cloner/SalesDepot.Cloner.csproj" afterPath="$PROJECT_DIR$/../SalesDepot.Cloner/SalesDepot.Cloner.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/SalesDepot.CoreObjects.csproj" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/SalesDepot.CoreObjects.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" afterPath="$PROJECT_DIR$/../SiteManager/SalesDepot.SiteManager.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/SalesDepot.csproj" afterPath="$PROJECT_DIR$/../SalesDepot/SalesDepot.csproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabActivitiesControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabActivitiesControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabHomeControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabHomeControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabInactiveUsersControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabOvernightsCalendarControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabOvernightsCalendarControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.resx" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSchedule.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.resx" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabProgramSearch.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabQBuilder.designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabQBuilder.designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabQBuilder.resx" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabQBuilder.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabQBuilderControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabQBuilderControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabQBuilderControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabQBuilderControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabSearchControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabSearchControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/TabPages/TabSearchControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/TabPages/TabSearchControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabTickerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabTickerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabTickerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabTickerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabUsersControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabUsersControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/TabPages/TabUtilitiesControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/TabPages/TabUtilitiesControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/TickerManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/TickerManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/TickerManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Ticker/TickerManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/TotalControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/TotalControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/TotalControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/TotalControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/TotalControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizPassData/TotalControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/TotalControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/QuizUnitedData/TotalControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/AccessData/TotalFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/UserFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/UserFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/UserFilter.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/UserFilter.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/UserFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/MainData/UserFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/UserFilter.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Activities/NavigationData/UserFilter.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Utilities/UtilitiesManagerControl.Designer.cs" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Utilities/UtilitiesManagerControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Utilities/UtilitiesManagerControl.resx" afterPath="$PROJECT_DIR$/../SiteManager/PresentationClasses/Utilities/UtilitiesManagerControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/VideoViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/VideoViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.resx" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/WallBin/WallBinTreeListControl.resx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/WebViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/WebViewer.Designer.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/WinAPIHelper.cs" afterPath="$PROJECT_DIR$/../SalesDepot.CoreObjects/InteropClasses/WinAPIHelper.cs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/WordViewer.Designer.cs" afterPath="$PROJECT_DIR$/../SalesDepot/PresentationClasses/Viewers/WordViewer.Designer.cs" />
-    </list>
+    <list id="6cb86652-0ea2-464a-b0b1-9bbef25a8567" name="C#" comment="" />
     <ignored path="WebSalesLibraries.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -455,7 +37,100 @@
     <favorites_list name="WebSalesLibraries" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="SearchConditions.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchConditions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="43" selection-start="1317" selection-end="1317" vertical-scroll-proportion="-19.5" vertical-offset="207" max-vertical-offset="2329">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LinkRecord.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="433" column="39" selection-start="16251" selection-end="16251" vertical-scroll-proportion="26.115385" vertical-offset="8040" max-vertical-offset="11645">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchControlPanel.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="184" column="73" selection-start="7275" selection-end="7332" vertical-scroll-proportion="-8.076923" vertical-offset="2867" max-vertical-offset="3876">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="146" column="20" selection-start="4743" selection-end="4743" vertical-scroll-proportion="1.3976436" vertical-offset="1533" max-vertical-offset="3791">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="params.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/config/params.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="289">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchResult.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="33" selection-start="1964" selection-end="1977" vertical-scroll-proportion="-8.230769" vertical-offset="245" max-vertical-offset="1547">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shortcuts-search.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="570" column="53" selection-start="18836" selection-end="18836" vertical-scroll-proportion="0.0" vertical-offset="9560" max-vertical-offset="12376">
+              <folding>
+                <marker date="1407778483654" expanded="false" signature="754:798" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchResult.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/searchResult.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="20" selection-start="705" selection-end="705" vertical-scroll-proportion="-4.3076925" vertical-offset="109" max-vertical-offset="1054">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search-view.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/regular/base/search-view.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="154" column="20" selection-start="4505" selection-end="4505" vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="12223">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="shortcuts.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="287" column="97" selection-start="8456" selection-end="8467" vertical-scroll-proportion="0.0" vertical-offset="4342" max-vertical-offset="5695">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -475,9 +150,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/protected/models/favorites/records/FavoritesLinkRecord.php" />
-        <option value="$PROJECT_DIR$/css/regular/base/view-dialog.css" />
-        <option value="$PROJECT_DIR$/protected/views/regular/preview/viewDialog.php" />
         <option value="$PROJECT_DIR$/js/regular/base/link-rate.js" />
         <option value="$PROJECT_DIR$/js/regular/base/link-viewing.js" />
         <option value="$PROJECT_DIR$/protected/controllers/PreviewController.php" />
@@ -486,7 +158,6 @@
         <option value="$PROJECT_DIR$/css/regular/base/search.css" />
         <option value="$PROJECT_DIR$/protected/views/regular/sub-search/subSearchBar.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/homeBar.php" />
-        <option value="$PROJECT_DIR$/protected/controllers/SearchController.php" />
         <option value="$PROJECT_DIR$/protected/controllers/SubsearchController.php" />
         <option value="$PROJECT_DIR$/protected/models/common/SearchHelper.php" />
         <option value="$PROJECT_DIR$/js/regular/base/sub-search-bar.js" />
@@ -505,7 +176,6 @@
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/linkWrapper.php" />
         <option value="db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchCustomPanel.php" />
-        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/VideoShortcut.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SubSearchTemplate.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/records/ShortcutsPageRecord.php" />
@@ -522,10 +192,15 @@
         <option value="$PROJECT_DIR$/protected/controllers/ShortcutsController.php" />
         <option value="$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php" />
         <option value="$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchBar.php" />
-        <option value="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
-        <option value="$PROJECT_DIR$/protected/config/params.php" />
         <option value="$PROJECT_DIR$/js/regular/shortcuts/controller.js" />
         <option value="$PROJECT_DIR$/js/regular/base/shortcuts.js" />
+        <option value="$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php" />
+        <option value="$PROJECT_DIR$/js/regular/base/search-view.js" />
+        <option value="$PROJECT_DIR$/js/phone/search.js" />
+        <option value="$PROJECT_DIR$/js/phone/shortcuts.js" />
+        <option value="$PROJECT_DIR$/js/regular/base/shortcuts-search.js" />
+        <option value="$PROJECT_DIR$/protected/config/params.php" />
+        <option value="$PROJECT_DIR$/protected/controllers/SearchController.php" />
       </list>
     </option>
   </component>
@@ -610,6 +285,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -653,10 +329,6 @@
               <option name="myItemId" value="regular" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -673,124 +345,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="records" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -836,103 +390,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="protected" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shortcuts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="regular" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="WebSalesLibraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1006,10 +469,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" server_name="Localhost" session_id="netbeans-xdebug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -1574,37 +1037,37 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.135816" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16026345" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22364217" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32968238" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24259056" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24149287" sideWeight="0.40288153" order="1" side_tool="false" content_ui="tabs" x="-1278" y="1" width="1271" height="1022" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17518637" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30076838" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34248078" sideWeight="0.85272145" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15848452" sideWeight="0.13024282" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28540066" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21033014" sideWeight="0.12957746" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20234291" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20447284" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30954996" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24368826" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30954996" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32855567" sideWeight="0.49359658" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21523179" sideWeight="0.5741729" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Changes" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22364217" sideWeight="0.5117396" order="5" side_tool="false" content_ui="tabs" x="20" y="824" width="1874" height="217" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17412141" sideWeight="0.87596047" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15314835" sideWeight="0.76237625" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="1.0" sideWeight="0.48772678" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2777168" sideWeight="0.4850587" order="9" side_tool="false" content_ui="tabs" />
@@ -1612,8 +1075,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32491767" sideWeight="0.49573106" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18530351" sideWeight="0.87042254" order="0" side_tool="false" content_ui="combo" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.59625965" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24588364" sideWeight="0.44236925" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24866879" sideWeight="0.8228823" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30996713" sideWeight="0.923159" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.135816" sideWeight="0.6552828" order="10" side_tool="false" content_ui="tabs" />
@@ -1686,7 +1149,7 @@
           <option name="timeStamp" value="307" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="348" />
+      <option name="time" value="355" />
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
@@ -1702,49 +1165,9 @@
     </PATH>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/directLink.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="23" selection-start="393" selection-end="393" vertical-scroll-proportion="-7.1923075" vertical-offset="0" max-vertical-offset="595" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/page.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="103" selection-start="398" selection-end="398" vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="884" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/phone/search/tagsView.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="17" selection-start="136" selection-end="136" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/linkWrapper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="91" selection-start="1976" selection-end="1976" vertical-scroll-proportion="-8.692307" vertical-offset="148" max-vertical-offset="1224" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/b3b4574f/5f689e70-8d5b-41e3-aaa1-c8c47e976102/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="38" selection-start="138" selection-end="138" vertical-scroll-proportion="-1.7586207" vertical-offset="0" max-vertical-offset="153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/common/SearchHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="31" selection-start="142" selection-end="142" vertical-scroll-proportion="0.21350078" vertical-offset="51" max-vertical-offset="1088" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/images/shortcuts/sub-search-bar/search-off.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/shortcuts/sub-search-bar/link-off.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="268" column="85" selection-start="7438" selection-end="7438" vertical-scroll-proportion="-0.2992" vertical-offset="4743" max-vertical-offset="5695" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/mobile/jquery.mobile-1.2.0.js">
@@ -1838,37 +1261,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchCustomPanel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="14" selection-start="1989" selection-end="1989" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="986">
-          <folding />
-        </state>
+        <state line="40" column="14" selection-start="1989" selection-end="1989" vertical-scroll-proportion="0.0" vertical-offset="680" max-vertical-offset="986" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="131" selection-start="1750" selection-end="1850" vertical-scroll-proportion="0.367531" vertical-offset="966" max-vertical-offset="1853">
-          <folding />
-        </state>
+        <state line="76" column="131" selection-start="1750" selection-end="1850" vertical-scroll-proportion="0.367531" vertical-offset="966" max-vertical-offset="1853" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/shortcuts/window-loader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="665">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="665" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/regular/base/shortcuts.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="37" selection-start="323" selection-end="338" vertical-scroll-proportion="0.48421052" vertical-offset="86" max-vertical-offset="1564">
-          <folding />
-        </state>
+        <state line="24" column="37" selection-start="323" selection-end="338" vertical-scroll-proportion="0.48421052" vertical-offset="86" max-vertical-offset="1564" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/css/regular/base/shortcuts-search.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="27" selection-start="237" selection-end="237" vertical-scroll-proportion="0.38345864" vertical-offset="0" max-vertical-offset="665">
-          <folding />
-        </state>
+        <state line="15" column="27" selection-start="237" selection-end="237" vertical-scroll-proportion="0.38345864" vertical-offset="0" max-vertical-offset="665" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchBar.php">
@@ -1887,13 +1300,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="0" selection-start="7265" selection-end="7265" vertical-scroll-proportion="-7.076923" vertical-offset="3454" max-vertical-offset="11645">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/QuickListShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1190">
@@ -1908,13 +1314,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchConditions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="393" selection-end="393" vertical-scroll-proportion="-7.0" vertical-offset="0" max-vertical-offset="2329">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchShortcut.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="66" column="123" selection-start="3445" selection-end="3445" vertical-scroll-proportion="-20.038462" vertical-offset="601" max-vertical-offset="1377">
@@ -1922,18 +1321,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="43" selection-start="4016" selection-end="4039" vertical-scroll-proportion="-14.115385" vertical-offset="942" max-vertical-offset="1547">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/production.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="592" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/base/link-viewing.js">
@@ -1960,27 +1350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="53" selection-start="2009" selection-end="2009" vertical-scroll-proportion="25.692308" vertical-offset="1807" max-vertical-offset="3774">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/search-view.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="491" column="0" selection-start="14117" selection-end="14117" vertical-scroll-proportion="0.7772657" vertical-offset="7841" max-vertical-offset="12155">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="103" selection-start="7546" selection-end="7565" vertical-scroll-proportion="-39.884617" vertical-offset="2142" max-vertical-offset="3876">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/subSearchBar.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="805" selection-end="805" vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="323">
@@ -1995,24 +1364,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="639" column="147" selection-start="20848" selection-end="20850" vertical-scroll-proportion="0.0" vertical-offset="9489" max-vertical-offset="11169">
-          <folding>
-            <element signature="e#4816#7098#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="415" column="142" selection-start="13628" selection-end="13628" vertical-scroll-proportion="0.0" vertical-offset="6714" max-vertical-offset="7956">
-          <folding>
-            <marker date="1407768671605" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/regular/shortcuts/controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="32" column="74" selection-start="962" selection-end="962" vertical-scroll-proportion="0.43524095" vertical-offset="255" max-vertical-offset="1326">
@@ -2020,9 +1371,125 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="415" column="142" selection-start="13628" selection-end="13628" vertical-scroll-proportion="0.0" vertical-offset="6714" max-vertical-offset="7956">
+          <folding>
+            <marker date="1407769357243" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/Category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="10" selection-start="43" selection-end="43" vertical-scroll-proportion="0.1328125" vertical-offset="0" max-vertical-offset="640">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/models/LibraryLink.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="51.0" vertical-offset="1326" max-vertical-offset="20655">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/config/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1513">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configuration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="38" selection-start="1910" selection-end="1927" vertical-scroll-proportion="-3.7843137" vertical-offset="844" max-vertical-offset="2567">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/search/dateView.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="46" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="628" column="43" selection-start="18901" selection-end="18901" vertical-scroll-proportion="0.0" vertical-offset="10336" max-vertical-offset="11084">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/search-view.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="154" column="20" selection-start="4505" selection-end="4505" vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="12223">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/shortcuts/searchResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="33" selection-start="1964" selection-end="1977" vertical-scroll-proportion="-8.230769" vertical-offset="245" max-vertical-offset="1547">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/regular/widgets/searchControlPanel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="184" column="73" selection-start="7275" selection-end="7332" vertical-scroll-proportion="-8.076923" vertical-offset="2867" max-vertical-offset="3876">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/shortcuts/models/SearchConditions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="43" selection-start="1317" selection-end="1317" vertical-scroll-proportion="-19.5" vertical-offset="207" max-vertical-offset="2329">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/phone/shortcuts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="287" column="97" selection-start="8456" selection-end="8467" vertical-scroll-proportion="0.0" vertical-offset="4342" max-vertical-offset="5695">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/views/phone/shortcuts/searchResult.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="20" selection-start="705" selection-end="705" vertical-scroll-proportion="-4.3076925" vertical-offset="109" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/regular/base/shortcuts-search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="570" column="53" selection-start="18836" selection-end="18836" vertical-scroll-proportion="0.0" vertical-offset="9560" max-vertical-offset="12376">
+          <folding>
+            <marker date="1407778483654" expanded="false" signature="754:798" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/protected/config/params.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="0.23981191" vertical-offset="0" max-vertical-offset="638">
+        <state line="9" column="22" selection-start="273" selection-end="273" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="289">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/models/wallbin/records/LinkRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="433" column="39" selection-start="16251" selection-end="16251" vertical-scroll-proportion="26.115385" vertical-offset="8040" max-vertical-offset="11645">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/protected/controllers/SearchController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="146" column="20" selection-start="4743" selection-end="4743" vertical-scroll-proportion="1.3976436" vertical-offset="1533" max-vertical-offset="3791">
           <folding />
         </state>
       </provider>

@@ -114,14 +114,14 @@
 					condition: selectedCondition,
 					startDate: startDate,
 					endDate: endDate,
-					dateFile: baseSearchConditions.find('.use-file-date').html(),
+					dateFile: baseSearchConditions.find('.use-file-date').length > 0,
 					onlyFileCards: onlyFileCards,
 					libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 					superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
 					categories: categories.length > 0 ? $.toJSON(categories) : null,
 					categoriesExactMatch: false,
 					onlyWithCategories: onlyWithCategories,
-					hideDuplicated: baseSearchConditions.find('.hide-duplicated').html(),
+					hideDuplicated: baseSearchConditions.find('.hide-duplicated').length > 0,
 					onlyByName: onlyByName,
 					onlyByContent: onlyByContent,
 					sortColumn: sortColumn,
@@ -162,6 +162,8 @@
 					sortColumn = searchGrid.sortColumn != undefined && searchGrid.sortColumn != null ? searchGrid.sortColumn : sortColumn;
 					sortDirection = searchGrid.sortDirection != undefined && searchGrid.sortDirection != null ? searchGrid.sortDirection : sortDirection;
 					return {
+						dateFile: baseSearchConditions.find('.use-file-date').length > 0,
+						hideDuplicated: baseSearchConditions.find('.hide-duplicated').length > 0,
 						sortColumn: sortColumn,
 						sortDirection: sortDirection,
 						datasetKey: datasetKey,
@@ -276,8 +278,8 @@
 					return {
 						condition: textCondition,
 						fileTypes: selectedFileTypes,
-						dateFile: baseSearchConditions.find('.use-file-date').html(),
-						hideDuplicated: baseSearchConditions.find('.hide-duplicated').html(),
+						dateFile: baseSearchConditions.find('.use-file-date').length > 0,
+						hideDuplicated: baseSearchConditions.find('.hide-duplicated').length > 0,
 						onlyByName: true,
 						onlyByContent: onlyFiles == 0,
 						superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
@@ -559,23 +561,23 @@
 						templateCategories.push(category);
 					});
 
-					var templateOnlyWithCategories = selectedTemplateConditions.find('.only-with-categories').html();
-					var templateOnlyByName = selectedTemplateConditions.find('.search-by-name').html();
-					var templateOnlyByContent = selectedTemplateConditions.find('.search-by-content').html();
+					var templateOnlyWithCategories = selectedTemplateConditions.find('.only-with-categories').length > 0 ? selectedTemplateConditions.find('.only-with-categories').html() : baseSearchConditions.find('.only-with-categories').html();
+					var templateOnlyByName = selectedTemplateConditions.find('.search-by-name').length > 0 ? selectedTemplateConditions.find('.search-by-name').html() : baseSearchConditions.find('.search-by-name').html();
+					var templateOnlyByContent = selectedTemplateConditions.find('.search-by-content').length > 0 ? selectedTemplateConditions.find('.search-by-content').html() : baseSearchConditions.find('.search-by-content').html();
 
 					return {
 						fileTypes: templateFileTypes,
 						condition: templateCondition,
 						startDate: templateStartDate,
 						endDate: templateEndDate,
-						dateFile: selectedTemplateConditions.find('.use-file-date').html(),
+						dateFile: selectedTemplateConditions.find('.use-file-date').length > 0 || baseSearchConditions.find('.use-file-date').length > 0,
 						onlyFileCards: templateOnlyFileCards,
 						libraries: templateLibraryIds.length > 0 ? $.toJSON(templateLibraryIds) : null,
 						superFilters: templateSuperFilters.length > 0 ? $.toJSON(templateSuperFilters) : null,
 						categories: templateCategories.length > 0 ? $.toJSON(templateCategories) : null,
 						categoriesExactMatch: false,
 						onlyWithCategories: templateOnlyWithCategories,
-						hideDuplicated: selectedTemplateConditions.find('.hide-duplicated').html(),
+						hideDuplicated: selectedTemplateConditions.find('.hide-duplicated').length > 0 || baseSearchConditions.find('.hide-duplicated').length > 0,
 						onlyByName: templateOnlyByName,
 						onlyByContent: templateOnlyByContent,
 						sortColumn: sortColumn,

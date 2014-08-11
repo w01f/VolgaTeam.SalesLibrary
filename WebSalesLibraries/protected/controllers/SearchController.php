@@ -65,7 +65,6 @@
 				$condition = Yii::app()->request->getPost('condition');
 				$startDate = Yii::app()->request->getPost('startDate');
 				$endDate = Yii::app()->request->getPost('endDate');
-				$dateFile = Yii::app()->request->getPost('dateFile');
 				$onlyFileCards = intval(Yii::app()->request->getPost('onlyFileCards'));
 				$onlyWithCategories = filter_var(trim(Yii::app()->request->getPost('onlyWithCategories')), FILTER_VALIDATE_BOOLEAN);
 				$sortColumn = Yii::app()->request->getPost('sortColumn');
@@ -90,20 +89,22 @@
 				if (!isset($categoriesExactMatch))
 					$categoriesExactMatch = true;
 
-				$hideDuplicated = Yii::app()->request->getPost('hideDuplicated');
-				if (isset($hideDuplicated) && $hideDuplicated == 'true')
+				if (strtolower(trim(Yii::app()->request->getPost('dateFile'))) == 'true')
+					$dateFile = true;
+				else
+					$dateFile = false;
+
+				if (strtolower(trim(Yii::app()->request->getPost('hideDuplicated'))) == 'true')
 					$hideDuplicated = true;
 				else
 					$hideDuplicated = false;
 
-				$onlyByName = Yii::app()->request->getPost('onlyByName');
-				if (isset($onlyByName) && $onlyByName == 'true')
+				if (strtolower(trim(Yii::app()->request->getPost('onlyByName'))) == 'true')
 					$onlyByName = true;
 				else
 					$onlyByName = false;
 
-				$onlyByContent = Yii::app()->request->getPost('onlyByContent');
-				if (isset($onlyByContent) && $onlyByContent == 'true')
+				if (strtolower(trim(Yii::app()->request->getPost('onlyByContent'))) == 'true')
 					$onlyByContent = true;
 				else
 					$onlyByContent = false;

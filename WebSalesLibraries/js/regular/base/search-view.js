@@ -87,6 +87,9 @@
 					var endDate = dateString[1];
 				}
 
+				var dateFileButton = $('#condition-date-file');
+				var showDateFile = dateFileButton.length > 0 ? dateFileButton.hasClass('active') : true;
+
 				var onlyFileCards = 0;
 
 				var selectedLibraryIds = [];
@@ -143,12 +146,13 @@
 				});
 				//-----------------------------------------------------
 
+
 				return {
 					fileTypes: selectedFileTypes,
 					condition: selectedCondition,
 					startDate: startDate,
 					endDate: endDate,
-					dateFile: $('#condition-date-file').hasClass('active'),
+					dateFile: showDateFile,
 					onlyFileCards: onlyFileCards,
 					libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 					superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,

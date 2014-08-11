@@ -5,7 +5,7 @@
 	var SearchManager = function ()
 	{
 		var that = this;
-		
+
 		this.init = function ()
 		{
 			$('#search-basic').on('pageshow', function ()
@@ -580,6 +580,9 @@
 				endDate = endDateText;
 			}
 
+			var dateFileSelector = $('#search-date-file');
+			var dateFileCondition = dateFileSelector.length > 0 ? dateFileSelector.prop("checked") == "checked" : true;
+
 			var onlyFileCards = $('#search-only-filecards').is(':checked') ? 1 : 0;
 
 			var selectedLibraryIds = [];
@@ -623,7 +626,7 @@
 				condition: selectedCondition,
 				startDate: startDate,
 				endDate: endDate,
-				dateFile: $('#search-date-file').prop("checked") == "checked",
+				dateFile: dateFileCondition,
 				onlyFileCards: onlyFileCards,
 				libraries: selectedLibraryIds.length > 0 ? $.toJSON(selectedLibraryIds) : null,
 				superFilters: superFilters.length > 0 ? $.toJSON(superFilters) : null,
